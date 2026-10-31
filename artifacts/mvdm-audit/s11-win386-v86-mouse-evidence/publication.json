@@ -1,0 +1,10 @@
+{
+  "utc": "2026-10-31T00:31:16.7625407Z",
+  "result": "pass",
+  "targets": [
+    "O:\\repos.hobby\\ntvdm64/assets/release",
+    "O:\\winnt\\system32"
+  ],
+  "package": "O:\\repos.hobby\\ntvdm64/build/t473-s11/v86guard-package/package",
+  "count": 20
+}

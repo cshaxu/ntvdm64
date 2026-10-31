@@ -426,7 +426,7 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
     /* DIVERGENCE(MVDM-HOST-DIV-473): provisional CPU40 host monitor dispatch. Further instruction, paging and lifecycle coverage is required before release. */
     /* CPU40 carries the external-event bit in bit 0. Selector/index bits
      * must be zero; either value of the external bit may reach this path. */
-    if (exp_no == 13 && (error_code & ~1) == 0 && getCPL() != 0) {
+    if (exp_no == 13 && (error_code & ~1) == 0 && getCPL() != 0 && !getVM()) {
         extern unsigned long c_getEIP(void);
         extern unsigned char *c_GetPhyAdd(unsigned long);
         extern void host_ica_lock(void), host_ica_unlock(void);

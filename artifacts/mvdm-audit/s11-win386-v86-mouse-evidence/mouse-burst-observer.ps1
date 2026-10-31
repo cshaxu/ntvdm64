@@ -1,0 +1,264 @@
+param([Parameter(Mandatory)][string]$Observer,
+      [Parameter(Mandatory)][string]$PackageRoot,
+      [Parameter(Mandatory)][string]$Pif,
+      [Parameter(Mandatory)][string]$BuildRoot,[switch]$IgnoreDeniedDiskWarning,
+      [switch]$IgnoreIllegalOpcodeWarning,
+      [string]$SurfaceObserver='', [string]$GuestObserver='', [string]$GuestMap='',
+      [string]$Python='', [switch]$QuiescedGuestSnapshot,
+      [switch]$EarlyGuestSnapshot,
+      [string]$RequiredTempDirectory='',
+      [string]$RunNotepadProbe='', [string]$DesktopReadyHash='',
+      [string]$DesktopReadyRegion='',
+      [string]$NotepadReadyHashes='',
+      [string]$MouseProbeRoot='',
+      [switch]$MouseExitSequence,
+      [string]$ExitConfirmProbe='', [string]$ExitDialogRegion='', [string]$ExitDialogHash='',
+      [string[]]$ObserverArguments=@(),
+      # Diagnostic-only: Setup can hand off from its short-lived run16 launcher
+      # to a resident WOW worker.  Preserve the observer-owned private session
+      # briefly after that launcher exits so an external probe can capture the
+      # handoff; cleanup below still owns and terminates only pinned descendants.
+      [ValidateRange(0,600000)][int]$RetainAfterControllerExitMs=0,
+      [ValidateRange(10000,600000)][int]$ObservationTimeoutMs=30000)
+$ErrorActionPreference='Stop'
+$repo='O:\repos.hobby\ntvdm64'
+$root=[IO.Path]::GetFullPath($BuildRoot)
+if(!$root.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh build-owned evidence required'}
+$observerPath=(Resolve-Path $Observer).Path
+function DesktopHash([string]$path,[string]$region=$DesktopReadyRegion) {
+    if(!$region){return (Get-FileHash $path).Hash}
+    $rect=@($region.Split(',')|ForEach-Object {[int]$_})
+    if($rect.Count -ne 4){throw 'Desktop rectangle requires left,top,right,bottom'}
+    $bytes=[IO.File]::ReadAllBytes($path)
+    if($bytes.Length -lt 54 -or $bytes[0] -ne 0x42 -or $bytes[1] -ne 0x4d -or
+       [BitConverter]::ToUInt16($bytes,28) -ne 32 -or [BitConverter]::ToInt32($bytes,30) -ne 0) {
+        throw 'Readiness requires uncompressed32-bit BMP'
+    }
+    $offset=[BitConverter]::ToInt32($bytes,10);$width=[BitConverter]::ToInt32($bytes,18)
+    $height=-[BitConverter]::ToInt32($bytes,22)
+    if($width -lt 1 -or $height -lt 1 -or $rect[0] -lt 0 -or $rect[1] -lt 0 -or
+       $rect[2] -le $rect[0] -or $rect[3] -le $rect[1] -or $rect[2] -gt $width -or
+       $rect[3] -gt $height -or [int64]$offset+[int64]$width*$height*4 -gt $bytes.Length) {
+        throw 'Invalid top-down BMP/crop extent'
+    }
+    $row=($rect[2]-$rect[0])*4;$crop=[byte[]]::new($row*($rect[3]-$rect[1]))
+    for($y=$rect[1];$y -lt $rect[3];$y++) {
+        [Buffer]::BlockCopy($bytes,$offset+($y*$width+$rect[0])*4,$crop,($y-$rect[1])*$row,$row)
+    }
+    $sha=[Security.Cryptography.SHA256]::Create()
+    try{return ([BitConverter]::ToString($sha.ComputeHash($crop))).Replace('-','')}
+    finally{$sha.Dispose()}
+}
+
+# Start-Process joins an ArgumentList array into one native command line but
+# does not preserve embedded spaces for us.  The setup observer deliberately
+# accepts visible-text markers and escaped input containing spaces, so encode
+# every argument with the documented Windows backslash/quote rule before that
+# join.  This is test-container transport only; it never alters product or
+# guest command parsing.
+function ConvertTo-Win32CommandLineArgument([string]$value) {
+    if ($value.Length -eq 0) { return '""' }
+    if ($value -notmatch '[\s"]') { return $value }
+    $out = [Text.StringBuilder]::new()
+    [void]$out.Append('"')
+    $slashes = 0
+    foreach ($character in $value.ToCharArray()) {
+        if ($character -eq [char]0x5c) {
+            $slashes++
+            continue
+        }
+        if ($character -eq [char]0x22) {
+            [void]$out.Append([string]::new([char]0x5c, ($slashes * 2) + 1))
+            [void]$out.Append($character)
+            $slashes = 0
+            continue
+        }
+        if ($slashes) {
+            [void]$out.Append([string]::new([char]0x5c, $slashes))
+            $slashes = 0
+        }
+        [void]$out.Append($character)
+    }
+    if ($slashes) {
+        [void]$out.Append([string]::new([char]0x5c, $slashes * 2))
+    }
+    [void]$out.Append('"')
+    return $out.ToString()
+}
+if($MouseProbeRoot -and ($RunNotepadProbe -or !$SurfaceObserver -or !$DesktopReadyHash)) {
+    throw 'Mouse observation requires surface/desktop readiness and no concurrent keyboard sequence'
+}
+if($MouseExitSequence -and !$MouseProbeRoot){throw 'Exit mouse sequence requires mouse probe'}
+if($ExitConfirmProbe -and (!$MouseExitSequence -or !$ExitDialogRegion -or !$ExitDialogHash)) {
+    throw 'Exit confirmation requires an observed specific dialog rectangle/hash'
+}
+if($RequiredTempDirectory -and !(Test-Path -LiteralPath $RequiredTempDirectory -PathType Container)) {
+    throw 'Missing launcher TEMP prerequisite; direct PIF observation does not run WIN386.CMD mkdir'
+}
+$binary=Join-Path (Resolve-Path $PackageRoot).Path 'system32'
+if(@(Get-CimInstance Win32_Process|Where-Object {$_.ExecutablePath -eq "$binary\ntsrv.exe"}).Count){throw 'Preserve existing broker/session; trial requires idle endpoint'}
+New-Item -ItemType Directory -Path $root|Out-Null
+if($RequiredTempDirectory){
+    [IO.File]::WriteAllText("$root/launch-precondition.txt",'existing-temp='+
+        (Resolve-Path -LiteralPath $RequiredTempDirectory).Path+"`r`n")
+}
+# Load the bounded dialog inspector before the observation timer starts.
+$allowDeniedDisk=[bool]$IgnoreDeniedDiskWarning
+$allowIllegalOpcode=[bool]$IgnoreIllegalOpcodeWarning
+. "$repo/tests/observation/inspect-session-windows.ps1" -ProcessIds @(0) -BuildRoot $root
+$savedDesktop=$env:MVDM_OBSERVER_PRIVATE_DESKTOP
+$env:MVDM_OBSERVER_PRIVATE_DESKTOP='1'
+$pins=@();$pinImages=@{};$recordedExits=@{};$controller=$null
+function RecordPinnedExits {
+    foreach($item in $pins) {
+        if($recordedExits.ContainsKey($item.Id)){continue}
+        try {
+            if(!$item.HasExited){continue}
+            $code=[BitConverter]::ToUInt32([BitConverter]::GetBytes([int]$item.ExitCode),0)
+            [IO.File]::AppendAllText("$root/process-exits.txt",
+                ("pid={0} image={1} exit=0x{2:X8}`r`n" -f $item.Id,$pinImages[$item.Id],$code))
+            $recordedExits[$item.Id]=$true
+        } catch [InvalidOperationException] {
+            [IO.File]::AppendAllText("$root/probe-errors.txt", "process exit unavailable pid=$($item.Id)`r`n")
+            $recordedExits[$item.Id]=$true
+        }
+    }
+}
+try {
+    $report=Join-Path $root 'observation.txt'
+    $observerArguments = @("$binary\run16.exe", $PackageRoot, $report, $Pif,
+        '--observation-timeout-ms', "$ObservationTimeoutMs") + $ObserverArguments
+    $controller=Start-Process $observerPath -ArgumentList (($observerArguments |
+        ForEach-Object { ConvertTo-Win32CommandLineArgument ([string]$_) }) -join ' ') `
+        -WindowStyle Hidden -PassThru
+    $desktop='NTVDMConsoleTest-'+$controller.Id
+    $known=@($controller.Id);$last='';$nextDiscovery=[DateTime]::UtcNow
+    $nextSnapshot=[DateTime]::UtcNow.AddSeconds(5);$sample=0;$inputPosted=$false;$textPosted=$false;$mousePosted=$false;$exitConfirmed=$false
+    while(!$controller.WaitForExit(100)) {
+        if([DateTime]::UtcNow -ge $nextDiscovery) {
+            $rows=@(Get-CimInstance Win32_Process|Where-Object {$_.ExecutablePath -eq $observerPath -or $_.ExecutablePath -like "$binary\*"})
+            for($round=0;$round -lt 5;$round++) {
+                foreach($row in $rows) {
+                    if($row.ParentProcessId -in $known -and $row.ProcessId -notin $known) {
+                        $known+=$row.ProcessId
+                        try {
+                            $p=[Diagnostics.Process]::GetProcessById($row.ProcessId);$null=$p.Handle
+                            if(!$p.HasExited -and $p.MainModule.FileName -eq $row.ExecutablePath){
+                                $pins+=$p
+                                $pinImages[$p.Id]=$row.ExecutablePath
+                                [IO.File]::AppendAllText("$root/process-pins.txt",
+                                    ("pid={0} image={1} base=0x{2:X} size=0x{3:X}`r`n" -f $p.Id,$row.ExecutablePath,$p.MainModule.BaseAddress.ToInt64(),$p.MainModule.ModuleMemorySize))
+                                if($EarlyGuestSnapshot -and $p.MainModule.FileName -eq "$binary\ntvdm.exe"){$nextSnapshot=[DateTime]::UtcNow}
+                            }else{$p.Dispose()}
+                        } catch [ArgumentException] {}
+                    }
+                }
+            }
+            $nextDiscovery=[DateTime]::UtcNow.AddMilliseconds($(if($EarlyGuestSnapshot){100}else{1000}))
+        }
+        RecordPinnedExits
+        try {$text=[WindowInspector]::Read([int[]]$known,$desktop,$true,$allowDeniedDisk,$allowIllegalOpcode)}catch {
+            [IO.File]::AppendAllText("$root/probe-errors.txt",[DateTime]::UtcNow.ToString('o')+' '+$_.Exception.Message+"`r`n")
+            continue
+        }
+        if($text -ne $last) {
+            [IO.File]::AppendAllText("$root/transitions.txt",[DateTime]::UtcNow.ToString('o')+"`r`n"+$text)
+            Write-Output $text;$last=$text
+        }
+        if([DateTime]::UtcNow -ge $nextSnapshot) {
+            foreach($p in $pins) {
+                if($p.HasExited){continue}
+                if($SurfaceObserver -and $p.MainModule.FileName -eq "$binary\ntcon.exe") {
+                    & $SurfaceObserver $p.Id $desktop "$root/surface-$sample.bmp" |
+                        Set-Content "$root/surface-$sample.txt"
+                    if($mousePosted -and !$exitConfirmed -and $ExitConfirmProbe -and
+                       (Test-Path "$root/surface-$sample.bmp") -and
+                       (DesktopHash "$root/surface-$sample.bmp" $ExitDialogRegion) -eq $ExitDialogHash) {
+                        & $ExitConfirmProbe $p.Id $desktop '--enter' |Set-Content "$root/exit-confirmation.txt"
+                        if($LASTEXITCODE){throw 'Unable to post confirmed guest exit-dialog key'}
+                        $exitConfirmed=$true
+                    }
+                    if(!$mousePosted -and $MouseProbeRoot -and (Test-Path "$root/surface-$sample.bmp") -and
+                       (DesktopHash "$root/surface-$sample.bmp") -eq $DesktopReadyHash) {
+                        $previousHash=(Get-FileHash "$root/surface-$sample.bmp").Hash
+                        $actions=@(@{name='burst';dx=0;dy=0;buttons=0}) + @(for($i=0;$i -lt 8;$i++) { @{name=('after-{0:d2}' -f $i);dx=$(if($i % 2){-12}else{12});dy=$(if($i % 4 -lt 2){6}else{-6});buttons=0} })
+                        if($MouseExitSequence){$actions+=@(
+                            @{name='exit-move';dx=25;dy=159;buttons=0},
+                            @{name='exit-down';dx=0;dy=0;buttons=1},
+                            @{name='exit-up';dx=0;dy=0;buttons=0})}
+                        foreach($action in $actions) {
+                            $probe=if($action.name -eq 'burst'){"$repo/build/t473-s11/win386-mouse-burst.exe"}else{"$MouseProbeRoot/probe.exe"}
+                            & $probe $p.Id $desktop "$MouseProbeRoot/mouse-hook.dll" `
+                                $action.dx $action.dy $action.buttons "$root/mouse-$($action.name).txt"
+                            if($LASTEXITCODE){throw 'Private input sink did not acknowledge'}
+                            $deadline=[DateTime]::UtcNow.AddMilliseconds(400);$attempt=0;$changed=$false
+                            do {
+                                $capture="$root/mouse-$($action.name)-$attempt.bmp"
+                                & $SurfaceObserver $p.Id $desktop $capture | Set-Content "$capture.txt"
+                                if(!$LASTEXITCODE -and (Test-Path $capture)) {
+                                    $hash=(Get-FileHash $capture).Hash
+                                    if($hash -ne $previousHash){$previousHash=$hash;$changed=$true;break}
+                                }
+                                $attempt++;Start-Sleep -Milliseconds 50
+                            }while([DateTime]::UtcNow -lt $deadline)
+                            [IO.File]::AppendAllText("$root/mouse-observations.txt",
+                                "$($action.name) fresh-pixels=$changed capture=$capture`r`n")
+                            Start-Sleep -Milliseconds 200
+                            # A changed surface is only transport evidence.  The
+                            # authoritative guest-consumption assertion is below:
+                            # after the complete move/down/up sequence it must
+                            # expose the exact Exit Windows confirmation dialog.
+                            # Program Manager does not reliably repaint its menu
+                            # hover selection for this synthetic relative route.
+                        }
+                        $mousePosted=$true
+                        if($MouseExitSequence){Write-Output "Exit sequence posted; inspect fresh guest confirmation before confirming: frontend=$($p.Id) desktop=$desktop"}
+                    }
+                    if(!$inputPosted -and $RunNotepadProbe -and $DesktopReadyHash -and
+                       (Test-Path "$root/surface-$sample.bmp") -and
+                       (DesktopHash "$root/surface-$sample.bmp") -eq $DesktopReadyHash) {
+                        & $RunNotepadProbe $p.Id $desktop | Set-Content "$root/notepad-input.txt"
+                        if($LASTEXITCODE){throw 'Failed to post owned private-desktop input'}
+                        $inputPosted=$true
+                    }
+                    elseif($inputPosted -and !$textPosted -and $NotepadReadyHashes -and
+                           (Test-Path "$root/surface-$sample.bmp") -and
+                           (Get-FileHash "$root/surface-$sample.bmp").Hash -in $NotepadReadyHashes.Split(',')){
+                        & $RunNotepadProbe $p.Id $desktop 'enhanced-ok' | Set-Content "$root/notepad-text-input.txt"
+                        if($LASTEXITCODE){throw 'Failed to post owned Notepad text'}
+                        $textPosted=$true
+                    }
+                }
+                if($GuestObserver -and $GuestMap -and $p.MainModule.FileName -eq "$binary\ntvdm.exe") {
+                    [IO.File]::AppendAllText("$root/cpu-times.txt",[DateTime]::UtcNow.ToString('o')+" sample=$sample pid=$($p.Id) cpu=$($p.TotalProcessorTime.TotalSeconds)`r`n")
+                    & $GuestObserver $p.Id $GuestMap 2>&1 |
+                        Set-Content "$root/guest-$sample.txt"
+                    if($Python){
+                        $snapshotOptions=@()
+                        if($QuiescedGuestSnapshot){$snapshotOptions+='--freeze'}
+                        & $Python "$PSScriptRoot/read-ccpu-paged.py" --pid $p.Id --image "$binary\ntvdm.exe" --map $GuestMap --output "$root/paged-$sample.json" @snapshotOptions |
+                            Set-Content "$root/paged-$sample.txt"
+                    }
+                }
+            }
+            $sample++;$nextSnapshot=[DateTime]::UtcNow.AddSeconds(5)
+        }
+    }
+    RecordPinnedExits
+    $controller.WaitForExit()
+    if($RetainAfterControllerExitMs -gt 0) {
+        [IO.File]::WriteAllText("$root/controller-retention.txt",
+            "controller-exited=true`r`nretain-ms=$RetainAfterControllerExitMs`r`n")
+        Start-Sleep -Milliseconds $RetainAfterControllerExitMs
+    }
+    [IO.File]::WriteAllText("$root/controller-exit.txt",[string]$controller.ExitCode)
+    Get-Content $report
+    if(Test-Path "$report.console.txt"){Get-Content "$report.console.txt"}
+} finally {
+    $env:MVDM_OBSERVER_PRIVATE_DESKTOP=$savedDesktop
+    # Only pinned descendants of this observer; no name-based or tree kill.
+    foreach($p in @($pins|Sort-Object Id -Descending)) {
+        try{if(!$p.HasExited){$p.Kill();$null=$p.WaitForExit(5000)}}finally{$p.Dispose()}
+    }
+    if($controller){try{if(!$controller.HasExited){$controller.Kill();$null=$controller.WaitForExit(5000)}}finally{$controller.Dispose()}}
+}

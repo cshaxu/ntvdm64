@@ -5,9 +5,9 @@
 **Active: M0 T473 S11**
 
 The CPU40 protected-instruction monitor and cached-TLB boundary are now in a
-tested partial ten-component baseline. Full (16 gates), 91 CCPU cases,
+tested partial ten-component baseline. Full (16 gates), 93 CCPU cases,
 Winmine/SOL/WRITE, four SOL Options cycles and four Win3.1 modes passed; both
-release destinations matched all ten image hashes. DPMI mapped-code, operand-fault,
+release destinations matched all ten image hashes. V86 dispatch corrected; DPMI mapped-code, operand-fault,
 reentry and NPX/debug behavior remain S11 work; publication is
 not S11 closure. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/code32-prebuilt-search/review.md).
 

@@ -616,6 +616,24 @@ static int dpmi_remapped_code_page(void) {
     {char line[120];wsprintfA(line,"DPMI_REMAPPED_CODE handled=%d eip=%08lx\n",handled,c_getEIP());report(line);}
     return handled && c_getEIP()==(mode==95 ? 0x1001 : 0x1002);
 }
+/* The NT4 protected dispatcher is not the V86 #GP dispatcher. */
+static int monitor_v86_mode_boundary(void) {
+    unsigned char ldt[40]={0}; ULONG before_flags; int handled; extern void c_setVM(int);
+    c_cpu_init(); InitializeIcaLock(); ica0_init(); ica1_init();
+    *(uint32_t *)(ldt+0x18)=0x0000ffffu; *(uint32_t *)(ldt+0x1c)=0x0000fa01u;
+    CopyMemory(c_GetPhyAdd(0x3000),ldt,sizeof(ldt));
+    c_setLDT_SELECTOR(0x28); c_setLDT_BASE_LIMIT(0x3000,sizeof(ldt)-1);
+    c_setPE(1); c_setVM(1); c_setCPL(3);
+    c_setCS(0x1f); c_setIP(0x0100); c_setIOPL(0); c_setIF(1);
+    *c_GetPhyAdd(0x2f0)=test_case==102 ? 0xfa : 0xfb;
+    *c_GetPhyAdd(0x10100)=test_case==102 ? 0xfa : 0xfb;
+    *(ULONG *)c_GetPhyAdd(0x714)=0x200; before_flags=c_getEFLAGS(); test_fault=0;
+    VdmInstallFaultHandler((void *)test_sti_fault); handled=host_exint_hook(13,0);
+    VdmInstallFaultHandler(NULL);
+    {char line[150];wsprintfA(line,"MONITOR_V86 case=%d handled=%d fault=%lu ip=%lx flags=%lx state=%lx\n",test_case,handled,test_fault,c_getEIP(),c_getEFLAGS(),*(ULONG *)c_GetPhyAdd(0x714));report(line);}
+    return !handled && test_fault==1 && c_getEIP()==0x100 &&
+        c_getEFLAGS()==before_flags && *(ULONG *)c_GetPhyAdd(0x714)==0x200;
+}
 extern void BlockWOWIdle(BOOL);
 static DWORD WINAPI probe_wow_state_writer(void *unused) {
     unsigned i;(void)unused;
@@ -725,7 +743,8 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
-    if(test_case>=93 && test_case<=101) ok=dpmi_remapped_code_page();
+    if(test_case==102 || test_case==103) ok=monitor_v86_mode_boundary();
+    else if(test_case>=93 && test_case<=101) ok=dpmi_remapped_code_page();
     else if(test_case>=90 && test_case<=92) ok=monitor_prefix_length();
     else if(test_case==89) ok=monitor_wrapped_instruction_offset();
     else if(test_case==87 || test_case==88) ok=monitor_fetch_page_access();

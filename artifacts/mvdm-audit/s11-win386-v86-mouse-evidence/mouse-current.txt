@@ -1,0 +1,9 @@
+burst fresh-pixels=True capture=O:\repos.hobby\ntvdm64\build\t473-s11\win386-mouse-burst-current/mouse-burst-0.bmp
+after-00 fresh-pixels=False capture=O:\repos.hobby\ntvdm64\build\t473-s11\win386-mouse-burst-current/mouse-after-00-2.bmp
+after-01 fresh-pixels=False capture=O:\repos.hobby\ntvdm64\build\t473-s11\win386-mouse-burst-current/mouse-after-01-2.bmp
+after-02 fresh-pixels=False capture=O:\repos.hobby\ntvdm64\build\t473-s11\win386-mouse-burst-current/mouse-after-02-2.bmp
+after-03 fresh-pixels=False capture=O:\repos.hobby\ntvdm64\build\t473-s11\win386-mouse-burst-current/mouse-after-03-3.bmp
+after-04 fresh-pixels=False capture=O:\repos.hobby\ntvdm64\build\t473-s11\win386-mouse-burst-current/mouse-after-04-3.bmp
+after-05 fresh-pixels=False capture=O:\repos.hobby\ntvdm64\build\t473-s11\win386-mouse-burst-current/mouse-after-05-3.bmp
+after-06 fresh-pixels=False capture=O:\repos.hobby\ntvdm64\build\t473-s11\win386-mouse-burst-current/mouse-after-06-3.bmp
+after-07 fresh-pixels=False capture=O:\repos.hobby\ntvdm64\build\t473-s11\win386-mouse-burst-current/mouse-after-07-3.bmp

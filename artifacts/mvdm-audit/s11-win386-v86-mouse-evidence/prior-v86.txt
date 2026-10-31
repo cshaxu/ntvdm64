@@ -1,0 +1,1 @@
+Prior real CCPU fixture: case 102 handled=1 fault=0 ip=101 flags=20002 state=0 exit=1; case 103 handled=1 fault=0 ip=101 flags=20202 state=200 exit=1. Candidate cases both handled=0 fault=1 ip=100 flags=20202 state=200 exit=0.
