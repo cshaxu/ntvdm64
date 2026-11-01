@@ -1297,7 +1297,7 @@ GLOBAL VOID DoFullScreenResume(VOID)
 #ifndef X86GFX
 			     &pDummy,
 #else
-			     (PVOID *) &videoState,
+/* DIVERGENCE MVDM-HOST-DIV-511: X86GFX alternative is not selected for this source; see mirror register. */
 #endif
                              NULL,            // sectionname no longer used
                              0,               // sectionname no longer used
@@ -1503,26 +1503,9 @@ VOID copyConsoleToRegen(SHORT startCol, SHORT startLine, SHORT width,
     }
     host_mark_screen_refresh();
 #else
-
-    /*
-     * In V86 mode PC memory area is mapped to the bottom 1M of virtual memory,
-     * so the following is legal.
-     */
-    vga_misc_inb(0x3cc, &misc);
-    if (misc & 1)			// may be mono mode
-	to = (half_word *) CGA_REGEN_START;
-    else
-	to = (half_word *) MDA_REGEN_START;
-
-    vc = (half_word *) video_copy;
-
-    while (nChars--)
-    {
-	*to++ = *vc++ = from->Char.AsciiChar;
-	*to++ = *vc++ = (half_word) from->Attributes;
-	from++;
-    }
+/* DIVERGENCE MVDM-HOST-DIV-511: X86GFX alternative is not selected for this source; see mirror register. */
 #endif
+#line 1921 /* MVDM-HOST-DIV-511: preserve original diagnostic line numbers. */
 }
 
 /***************************************************************************

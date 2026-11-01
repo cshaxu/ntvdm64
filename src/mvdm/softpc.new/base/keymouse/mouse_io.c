@@ -2129,7 +2129,7 @@ the application OUTBs the necessary data.
                                 setIP(saved_int10_offset);
                         }
 #else
-			break;
+/* DIVERGENCE MVDM-HOST-DIV-511: X86GFX alternative is not selected for this source; see mirror register. */
 #endif	/* !X86GFX */
         }
 #ifdef GISP_SVGA
