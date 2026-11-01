@@ -91,7 +91,7 @@ GLOBAL WCHAR_STRING textSection; // Tim Oct 92
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 96 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 96
 
 /* Flag to stop host_simulates on this thread executing timer tick code. */
 GLOBAL BOOL NoTicks;
@@ -145,7 +145,7 @@ LOCAL VOID freezeWindow(VOID);
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
-#line 150 /* MVDM-HOST-DIV-500: preserve original diagnostic line numbers. */
+#line 150
 
 /*
  * ==========================================================================
@@ -205,7 +205,7 @@ GLOBAL VOID initTextSection(VOID)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #else
-#line 223 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 223
     sc.ScreenState = WINDOWED;
 #endif
 
@@ -214,7 +214,7 @@ GLOBAL VOID initTextSection(VOID)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #else
-#line 232 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 232
 			     NULL,
 			     NULL,
 #endif
@@ -233,7 +233,7 @@ GLOBAL VOID initTextSection(VOID)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 253 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 253
 
 } /* end initTextSection() */
 

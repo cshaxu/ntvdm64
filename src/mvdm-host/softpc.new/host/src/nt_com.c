@@ -57,7 +57,7 @@ GLOBAL int host_com_open(int);
 #if 0
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
-#line 61 /* MVDM-HOST-DIV-497: preserve original diagnostic line numbers. */
+#line 61
 
 /* autoflush stub */
 GLOBAL void host_setup_aflush (int);
@@ -936,7 +936,7 @@ void SendDataToDriver(int adapter, char data)
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 972 /* MVDM-HOST-DIV-501: preserve original diagnostic line numbers. */
+#line 972
     /* tell base that the tx shift register is empty */
     tx_shift_register_empty(adapter);
 

@@ -1,0 +1,56 @@
+[
+  {
+    "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\ccpu\\c_reg.obj",
+    "before": "b59e89a7c3d75358ce9567986040d7ecb808a058a17b99ea323c5e33b6271de7",
+    "after": "b59e89a7c3d75358ce9567986040d7ecb808a058a17b99ea323c5e33b6271de7",
+    "equal": true
+  },
+  {
+    "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_timer.obj",
+    "before": "34b5f023b3d7d3eddfbba381577caf1ac547157a899df233d9b59b2bdbb0c2b6",
+    "after": "34b5f023b3d7d3eddfbba381577caf1ac547157a899df233d9b59b2bdbb0c2b6",
+    "equal": true
+  },
+  {
+    "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_graph.obj",
+    "before": "5b123d6093f67111c582c7617e6f240dbc087c27f0392e1166dde046365642c9",
+    "after": "5b123d6093f67111c582c7617e6f240dbc087c27f0392e1166dde046365642c9",
+    "equal": true
+  },
+  {
+    "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_com.obj",
+    "before": "d052eb31073403a190689124d846dda09a72122751c013deec448d9425549523",
+    "after": "d052eb31073403a190689124d846dda09a72122751c013deec448d9425549523",
+    "equal": true
+  },
+  {
+    "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_event.obj",
+    "before": "e0905e3be78b6b9dda0384407e072dc1c98ddfbad67251f16b6a1e77fee4da65",
+    "after": "e0905e3be78b6b9dda0384407e072dc1c98ddfbad67251f16b6a1e77fee4da65",
+    "equal": true
+  },
+  {
+    "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_fulsc.obj",
+    "before": "6f03cfad3dc06c361dc1a6612a5e7db46d4e2d42e4784ff2bf2788a54021f23a",
+    "after": "6f03cfad3dc06c361dc1a6612a5e7db46d4e2d42e4784ff2bf2788a54021f23a",
+    "equal": true
+  },
+  {
+    "path": "build\\.ninja\\msvc-x86-release\\worker\\obj\\host\\nt_det.obj",
+    "before": "18f0c2528be2642e16cb8a616d6b6082ffcfbf531b597638fbff3129ccbb24a1",
+    "after": "18f0c2528be2642e16cb8a616d6b6082ffcfbf531b597638fbff3129ccbb24a1",
+    "equal": true
+  },
+  {
+    "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\opennt-user\\clres.obj",
+    "before": "b91b11d2294b60aa60a3ba44e73334cdedb86d9d38b05c819c76acd3c94bc3af",
+    "after": "b91b11d2294b60aa60a3ba44e73334cdedb86d9d38b05c819c76acd3c94bc3af",
+    "equal": true
+  },
+  {
+    "path": "build\\.ninja\\msvc-x86-release\\wow32\\obj\\opennt-user\\dialog-template.obj",
+    "before": "608d26acd8bdceb97ef1e600c0afe7cd447340887874d1e3d8682a66c0192432",
+    "after": "608d26acd8bdceb97ef1e600c0afe7cd447340887874d1e3d8682a66c0192432",
+    "equal": true
+  }
+]

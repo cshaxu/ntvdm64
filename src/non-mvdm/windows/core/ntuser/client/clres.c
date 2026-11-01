@@ -671,7 +671,7 @@ HBITMAP CreateScreenBitmap(
 #if 0 // We use to do the dib-section create, but this breaks icons
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #else
-#line 689 /* OPENNT-HOST-128: retain original diagnostic line numbers. */
+#line 689
 
                 dib1Vga.bi.biWidth  = cx;
                 dib1Vga.bi.biHeight = cy;

@@ -1383,7 +1383,7 @@ BOOL CntrlHandler(ULONG CtrlType)
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1389 /* MVDM-HOST-DIV-501: preserve original diagnostic line numbers. */
+#line 1389
             if (CntrlHandlerState & CNTRL_PUSHEXIT) {
                 /* DIVERGENCE(MVDM-HOST-DIV-355): defer the original
                  * cmdPushExit cleanup until the service's Console-close
@@ -1407,7 +1407,7 @@ BOOL CntrlHandler(ULONG CtrlType)
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 1413 /* MVDM-HOST-DIV-501: preserve original diagnostic line numbers. */
+#line 1413
        }
     return TRUE;
 }

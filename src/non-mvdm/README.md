@@ -1,4 +1,8 @@
 # non-mvdm original OpenNT sources
+
+OPENNT-HOST-138: remove the divergence comment attached to the retained
+`clres.c` line directive; preserve its number and excluded-branch guards.
+Evidence: `../../artifacts/mvdm-audit/excluded-branch-annotation-cleanup.md`.
 OPENNT-HOST-137: replace the previously registered excluded-branch
 placeholders with `#error` directives under their existing conditions. Their
 original divergence identifiers and reasons remain in the diagnostics; the

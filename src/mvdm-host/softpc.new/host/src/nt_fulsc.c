@@ -72,7 +72,7 @@ GLOBAL BOOL	ConsoleNoUpdates = FALSE;
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 77 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 77
 GLOBAL BOOL blocked_in_gfx_mode = FALSE;  /* need to force text mode? */
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
@@ -547,7 +547,7 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 559 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 559
 
     /*
      * Set the display to the nearest VGA text mode size, which is one of
@@ -622,7 +622,7 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 656 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 656
     sas_storew_no_check(VID_COLS, 80);   // fixup from 40 char shutdown
     *pCharHeight = charHeight;
     *pVgaHeight  = vgaHeight;
@@ -678,7 +678,7 @@ GLOBAL VOID ConsoleInit(VOID)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 714 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 714
 
     /*
      * We don't want to call paint routines until config.sys processed or if
@@ -695,7 +695,7 @@ GLOBAL VOID ConsoleInit(VOID)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
-#line 760 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 760
 
     /*
      * Work out the top line to be displayed in the VGA window, which is line
@@ -737,7 +737,7 @@ GLOBAL VOID GfxReset(VOID)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 825 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 825
 }
 
 /***************************************************************************
@@ -761,14 +761,14 @@ GLOBAL VOID ResetConsoleState(VOID)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 884 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 884
     SMALL_RECT	newWin;
     BOOL itfailed = FALSE;
 
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 891 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 891
 
 	closeGraphicsBuffer();
 
@@ -792,12 +792,12 @@ GLOBAL VOID ResetConsoleState(VOID)
 #if 0                                                                           
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif	//Zero
-#line 934 /* MVDM-HOST-DIV-497: preserve original diagnostic line numbers. */
+#line 934
 
 #if 0
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
-#line 973 /* MVDM-HOST-DIV-497: preserve original diagnostic line numbers. */
+#line 973
 	/*
 	** Tim, September 92. Put the Console cursor to the same place as the
 	** SoftPC cursor. We already do this in full-screen text mode below.
@@ -929,7 +929,7 @@ GLOBAL VOID ResetConsoleState(VOID)
 #if 0  //STF removed with new mouse stuff??
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif //STF
-#line 1112 /* MVDM-HOST-DIV-497: preserve original diagnostic line numbers. */
+#line 1112
 
 	    /*
 	     * Get the cursor position from the BIOS RAM and tell the
@@ -955,7 +955,7 @@ GLOBAL VOID ResetConsoleState(VOID)
 #if 0  //STF removed with new mouse stuff??
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif //STF
-#line 1142 /* MVDM-HOST-DIV-497: preserve original diagnostic line numbers. */
+#line 1142
 
 	    /* Get the current screen buffer info. */
 	    if (!GetConsoleScreenBufferInfo(sc.OutputHandle, &bufferInfo))
@@ -1164,7 +1164,7 @@ GLOBAL VOID CheckForFullscreenSwitch(VOID)
 #if 0  //STF removed with new mouse stuff??
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif //STF
-#line 1352 /* MVDM-HOST-DIV-497: preserve original diagnostic line numbers. */
+#line 1352
 
 		/* Get Window to correct shape */
 		textResize();
@@ -1197,7 +1197,7 @@ GLOBAL VOID CheckForFullscreenSwitch(VOID)
 #if 0 //STF removed with new mouse stuff
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
-#line 1385 /* MVDM-HOST-DIV-497: preserve original diagnostic line numbers. */
+#line 1385
 
 	    /* Do mouse scaling */
 	     mode = sas_hw_at_no_check(vd_video_mode);
@@ -1227,7 +1227,7 @@ GLOBAL VOID CheckForFullscreenSwitch(VOID)
 }
 
 #endif /* X86GFX */
-#line 1414 /* MVDM-HOST-DIV-497: preserve line numbers when X86GFX is excluded. */
+#line 1414
 
 /*
 ***************************************************************************
@@ -1249,7 +1249,7 @@ GLOBAL UTINY getNtScreenState IFN0()
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 1484 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 1484
 
 /***************************************************************************
  * Function:								   *
@@ -1278,7 +1278,7 @@ GLOBAL VOID DoFullScreenResume(VOID)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 1573 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 1573
 
     // re-register with console for fullscreen switching.
     if( !RegisterConsoleVDM( VDMForWOW ?
@@ -1286,7 +1286,7 @@ GLOBAL VOID DoFullScreenResume(VOID)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #else
-#line 1581 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 1581
 			     NULL,
 			     NULL,
 #endif
@@ -1310,7 +1310,7 @@ GLOBAL VOID DoFullScreenResume(VOID)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #else
-#line 1607 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 1607
 	/*
 	** Create graphics buffer if we need one. Tim Oct 92.
 	*/
@@ -1385,7 +1385,7 @@ GLOBAL VOID GfxCloseDown(VOID)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 1784 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 1784
 
 
 /*
@@ -1466,7 +1466,7 @@ VOID copyConsoleToRegen(SHORT startCol, SHORT startLine, SHORT width,
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 1865 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 1865
 
 
     /* Allocate the buffer to get the console data into */
@@ -1505,7 +1505,7 @@ VOID copyConsoleToRegen(SHORT startCol, SHORT startLine, SHORT width,
 #else
 #error DIVERGENCE MVDM-HOST-DIV-511: X86GFX alternative is not selected for this source; see mirror register.
 #endif
-#line 1921 /* MVDM-HOST-DIV-511: preserve original diagnostic line numbers. */
+#line 1921
 }
 
 /***************************************************************************
@@ -1699,7 +1699,7 @@ int getModeType(VOID)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 2379 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
+#line 2379
 
 void host_enable_stream_io(void)
 {

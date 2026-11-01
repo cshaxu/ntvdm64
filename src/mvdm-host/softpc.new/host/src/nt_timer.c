@@ -162,7 +162,7 @@ ERROR RECOVERY    :     errors are ignored
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 166 /* MVDM-HOST-DIV-501: preserve original diagnostic line numbers. */
+#line 166
 
 #include "ica.h"
 #include "nt_uis.h"
@@ -687,7 +687,7 @@ HBresume:
 #ifdef PIG
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
-#line 708 /* MVDM-HOST-DIV-498: preserve original diagnostic line numbers. */
+#line 708
        time_tick();
 #endif /* PIG */
 

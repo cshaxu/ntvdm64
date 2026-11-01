@@ -229,7 +229,7 @@ static PAINTFUNCS huge_colour_paint_funcs =
 #ifdef MONITOR
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
-#line 281 /* MVDM-HOST-DIV-507: preserve original diagnostic line numbers. */
+#line 281
 
 static INITFUNCS mono_init_funcs =
 {
@@ -258,7 +258,7 @@ static INITFUNCS colour_init_funcs =
 #ifdef MONITOR
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
-#line 319 /* MVDM-HOST-DIV-507: preserve original diagnostic line numbers. */
+#line 319
 
 /*::::::::::::::::::::::::::::::::::::::::::::::: Adaptor function protocol */
 
@@ -612,7 +612,7 @@ void nt_init_screen(void)
 #ifdef MONITOR
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
-#line 702 /* MVDM-HOST-DIV-507: preserve original diagnostic line numbers. */
+#line 702
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::::::: Initialise adaptor ::::::::::::::::::::::::::::*/
@@ -713,7 +713,7 @@ void nt_clear_screen(void)
 #ifdef MONITOR
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
-#line 807 /* MVDM-HOST-DIV-507: preserve original diagnostic line numbers. */
+#line 807
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -1327,7 +1327,7 @@ void nt_set_paint_routine(DISPLAY_MODE mode, int height)
 #ifdef MONITOR
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
-#line 1425 /* MVDM-HOST-DIV-507: preserve original diagnostic line numbers. */
+#line 1425
                             paint_screen = nt_paint_funcs->vga_graph;
                     }
                     else
@@ -1490,7 +1490,7 @@ static void select_paint_routines(void)
 #ifdef MONITOR
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
-#line 1622 /* MVDM-HOST-DIV-507: preserve original diagnostic line numbers. */
+#line 1622
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::::::::: Prepare surface :::::::::::::::::::::::::::::*/

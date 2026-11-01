@@ -43,7 +43,7 @@ Provide External Interface to CPU Registers.
 #ifdef PIG
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else /* PIG */
-#line 56 /* MVDM-HOST-DIV-498: preserve original diagnostic line numbers. */
+#line 56
 #define	AR_FIXUP
 #endif /* PIG */
 

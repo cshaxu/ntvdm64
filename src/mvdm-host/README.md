@@ -1,5 +1,9 @@
 # mvdm
 
+MVDM-HOST-DIV-546: remove divergence comments attached to retained `#line`
+directives; preserve their numbers and all excluded-branch `#error` guards.
+Evidence: `../../artifacts/mvdm-audit/excluded-branch-annotation-cleanup.md`.
+
 MVDM-HOST-DIV-545: select the current V86 VM's standard text aperture from
 its BIOS video mode for text reads, writes and scrolling. The physical VGA
 may remain in a graphics mode while a Win3.1 DOS VM uses virtual text pages;
