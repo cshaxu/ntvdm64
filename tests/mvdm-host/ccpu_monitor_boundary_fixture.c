@@ -941,6 +941,60 @@ extern void INTx(ULONG);
 extern void ZFRSRVD(ULONG);
 static BOOL swint_origin_probe(ULONG vector) {test_irq=vector; return TRUE;}
 
+/* The CPU40 protected monitor belongs to the installed NT DPMI fault
+ * handler. A guest VMM may instead own the protected-mode IDT and its I/O
+ * bitmap; its #GP must not be consumed by an uninstalled host monitor. */
+static int protected_monitor_ownership(void) {
+    unsigned char gdt[40]={0};
+    const unsigned char gate[8]={0x00,0x11,0x1b,0x00,0x00,0x86,0x00,0x00};
+    unsigned char faulting[]={0xe4,0x80,0xb8,0xad,0xde,0xd6,0xfe};
+    const unsigned char target[]={0xbb,0xef,0xbe,0xd6,0xfe};
+    const int adapter=23;
+    BOOL handled,ok; char line[160];
+    c_cpu_init();io_init();io_define_inb(adapter,probe_read);
+    io_connect_port((io_addr)(test_case>=171 ? 0x60 : 0x80),adapter,IO_READ_WRITE);
+    if(test_case>=171)faulting[1]=0x60;
+    *(ULONG *)(gdt+0x18)=0x0000ffffu;*(ULONG *)(gdt+0x1c)=0x0000fa0fu;
+    *(ULONG *)(gdt+0x20)=0x0000ffffu;*(ULONG *)(gdt+0x24)=0x0000f300u;
+    CopyMemory(c_GetPhyAdd(0x1000),gdt,sizeof(gdt));
+    CopyMemory(c_GetPhyAdd(0xf1000),faulting,sizeof(faulting));
+    CopyMemory(c_GetPhyAdd(0xf1100),target,sizeof(target));
+    CopyMemory(c_GetPhyAdd(0x9000+13*8),gate,sizeof(gate));
+    c_setGDT_BASE_LIMIT(0x1000,sizeof(gdt)-1);c_setIDT_BASE_LIMIT(0x9000,13*8+7);
+    c_setPE(1);c_setCPL(3);c_setCS(0x1b);c_setSS(0x23);c_setSP(0x800);
+    c_setIOPL(0);c_setIF(1);c_setIP(0x1000);c_setBX(0);c_setTR_SELECTOR(0);
+    if(test_case>=171) {
+        /* Match the observed Win3.1 boundary: an actual 386 TSS contains
+         * the I/O bitmap and bit zero of its port-60 byte denies access. */
+        ZeroMemory(c_GetPhyAdd(0xa000),0x200);
+        *(USHORT *)c_GetPhyAdd(0xa066)=0x68;
+        *c_GetPhyAdd(0xa074)=(test_case==171 ? 1 : 0);
+        c_setTR_SELECTOR(0x28);c_setTR_BASE_LIMIT_AR(0xa000,0x1ff,0x8b);
+    }
+    io_reads=0;test_fault=0;VdmInstallFaultHandler(NULL);
+    if(test_case==169) {
+        /* The same handler registration boundary used by DPMI must enable
+         * interception, and its removal must immediately disable it. */
+        VdmInstallFaultHandler((void *)test_sti_fault);
+        handled=host_exint_hook(13,0);
+        ok=handled && io_reads==1 && c_getEIP()==0x1002;
+        VdmInstallFaultHandler(NULL);c_setIP(0x1000);io_reads=0;
+        handled=host_exint_hook(13,0);
+        ok=ok && !handled && io_reads==0 && c_getEIP()==0x1000;
+    } else if(test_case==168) {
+        handled=host_exint_hook(13,0);
+        ok=!handled && io_reads==0 && c_getEIP()==0x1000;
+    } else {
+        /* Run the real CCPU fault path and require the guest IDT handler,
+         * rather than the port device, to receive the denied instruction. */
+        c_cpu_simulate();
+        if(test_case==172)ok=c_getBX()==0 && io_reads==1 && c_getSP()==0x800;
+        else ok=c_getBX()==0xbeef && io_reads==0 && c_getSP()==0x7f8;
+    }
+    wsprintfA(line,"PROTECTED_MONITOR_OWNERSHIP case=%d pass=%d reads=%u bx=%x sp=%x\n",
+        test_case,ok,io_reads,c_getBX(),c_getSP());report(line);return ok;
+}
+
 static int protected_fault_decline_cpu(void) {
     unsigned char gdt[40]={0};
     const unsigned char gate[8]={0x00,0x11,0x1b,0x00,0x00,0x86,0x00,0x00};
@@ -1042,7 +1096,8 @@ int main(int argc, char **argv) {
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
     setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
-    if(test_case==148 || test_case==149) ok=protected_fault_decline_cpu();
+    if(test_case>=168 && test_case<=172) ok=protected_monitor_ownership();
+    else if(test_case==148 || test_case==149) ok=protected_fault_decline_cpu();
     else if(test_case>=160 && test_case<=167) ok=v86_explicit_software_int();
     else if(test_case==154) ok=dpmi_remapped_decode_fallback();
     else if(test_case==155 || test_case==156) ok=dpmi_remapped_code_page();

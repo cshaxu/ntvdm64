@@ -412,7 +412,10 @@ GLOBAL BOOL host_exint_hook IFN2(IS32, exp_no, IS32, error_code)
     /* DIVERGENCE(MVDM-HOST-DIV-480): NT4's protected-VDM Kt0d110 attempts
      * opcode dispatch for #GP without filtering its error code; unhandled
      * operations retain the original handler and its complete code below. */
-    if (exp_no == 13 && getCPL() != 0 && !getVM()) {
+    /* DIVERGENCE(MVDM-HOST-DIV-544): only the installed NT DPMI fault
+     * owner admits the protected-VDM monitor. Without that owner a guest
+     * VMM owns its IDT and I/O bitmap, including its protected-mode #GPs. */
+    if (handlerInstalled && exp_no == 13 && getCPL() != 0 && !getVM()) {
         extern unsigned long c_getEIP(void);
         extern void IN8(unsigned long *,unsigned long), IN16(unsigned long *,unsigned long);
         extern void OUT8(unsigned long,unsigned long), OUT16(unsigned long,unsigned long);

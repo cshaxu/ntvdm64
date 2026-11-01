@@ -1,5 +1,13 @@
 # mvdm
 
+MVDM-HOST-DIV-544: admit the CPU40 protected-instruction monitor only while
+the existing NT DPMI fault handler is installed. `DpmiDpmiInUse` and
+`DpmiDpmiNoLongerInUse` already own that registration; without it, a guest
+VMM owns its protected-mode IDT and I/O permission faults. This avoids
+consuming Win3.1's denied port access before its own #GP handler. The
+selected monitor and its registered-handler behavior are otherwise unchanged;
+see `../../docs/etc/evidence/m0-t473-s13-input-handoff.md`.
+
 MVDM-HOST-DIV-543: turn the previously registered excluded-branch
 placeholders into `#error` directives while preserving their conditions and
 numbered explanations. Actual selected `timeval.h` declarations incorrectly

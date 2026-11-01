@@ -87,7 +87,7 @@ runtime: the owner clarified boundary-recovery scope.
 | Identifier Mode | M0 T473 S13, Ordinary Mode. |
 | Admission And Approval | Owner accepted and closed S12 and admitted S13. [S12 evidence](../../artifacts/mvdm-audit/s12-excluded-branch-errors.md). |
 | Objective | Trace and repair Console/Window keyboard source transitions; independently investigate Win3.1 MS-DOS Prompt Alt+Enter. |
-| Delivery State | Active: handoff baseline published after 14 source cases, Full 16 gates and Win3.1 four-mode startup; Alt+Enter remains under investigation. [Evidence](../etc/evidence/m0-t473-s13-input-handoff.md). |
+| Delivery State | Active: corrected protected-fault ownership published; Full 16 gates, DOS4GW and Win3.1 four modes passed. Alt+Enter round-trip observed; post-return echo remains unproved. [Evidence](../etc/evidence/m0-t473-s13-input-handoff.md). |
 | Non-goals | Guest modification or rebuilding; DOS-specific shortcut workarounds; unrelated performance work. |
 | Reference Baseline | Published ten-image package at 1d2ddfb18; [handoff scope and prior observations](../etc/operations/m0-t473-s12-ntcon-input-source-handoff.md). |
 | Files And ABI Surface | NTCON frontend session, keyboard and channel; worker input client and original DOS scan-code handling; tests and evidence. |
