@@ -1514,25 +1514,7 @@ GLOBAL VOID fdisk_inb IFN2(io_addr, port, UTINY *,value)
 GLOBAL VOID fdisk_inw IFN2(io_addr, port, USHORT *, value)
 {
 #ifdef	JOKER
-	/* This is the only way JOKER talks to disks, since
-	** Ade's fast disk bios is currently infeasible.
-	** Hence, speed is of interest here!
-	*/
-	if (port == TFBASE)
-	{
-		/* For speed, JOKER doesn't bother with calling rmac(IOREAD). */
-
-		*value = HostWordToIntelWord(sectbuffer[sectindx]);
-
-		if (!++sectindx)	/* sectindx is a byte value -- wraparound? */
-		{
-			if (activecmd)
-			{
-				(*activecmd) (BRDY);
-			}
-		}
-	}
-
+/* DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register. */
 #else	/* JOKER */
 
 #ifdef BIGEND

@@ -245,9 +245,7 @@ ega_write_init IFN0()
 #endif
 
 #ifdef	JOKER
-
-	Glue_set_vid_wrt_ptrs(handler);
-
+/* DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register. */
 #else	/* not JOKER */
 
 #if defined(EGA_DUMP) || defined(EGA_STAT)

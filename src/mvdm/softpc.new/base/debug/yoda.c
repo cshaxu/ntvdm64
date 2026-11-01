@@ -4299,20 +4299,7 @@ LOCAL YODA_COMMAND(do_chewy)
 #endif	/* SYNCH_TIMERS */
 
 #ifdef PROFILE
-LOCAL YODA_COMMAND(doDumpProfiling)
-{
-	extern void GenerateAllProfileInfo();
-
-	UNUSED(str);
-	UNUSED(com);
-	UNUSED(cs);
-	UNUSED(ip);
-	UNUSED(len);
-	UNUSED(stop);
-
-	GenerateAllProfileInfo(trace_file);
-	return(YODA_LOOP);
-}
+/* DIVERGENCE MVDM-HOST-DIV-531: PROFILE branch is not selected; see mirror register. */
 #endif	/* PROFILE */
 
 #ifdef CPU_40_STYLE
@@ -4769,7 +4756,7 @@ static struct
 /* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif		/* GISP_SVGA */
 #ifdef PROFILE
-{ "pinfo",	doDumpProfiling,FALSE, NULL, "Dump all profiling info collected" },
+/* DIVERGENCE MVDM-HOST-DIV-531: PROFILE branch is not selected; see mirror register. */
 #endif	/* PROFILE */
 { "pmt",	do_pmt,		FALSE, NULL, "Print map of SAS memory types"}
 };

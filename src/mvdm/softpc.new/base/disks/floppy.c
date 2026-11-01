@@ -2963,21 +2963,7 @@ LOCAL wait_int IFN0()
 
 
 #else	/* JOKER */
-
-
-	/* Since we can't have a recursive CPU call, we'd be
-	** well stuffed but for the fact that the default diskette
-	** interrupt on SoftPC is actually a BOP which calls the "C"
-	** function diskette_int() in "floppy_io.c". So most, if not
-	** all, of the action takes place on the host side anyway.
-	**
-	** FieldFloppyInterrupts() simply checks if an interrupt
-	** was generated, and does what the diskette_int() does,
-	** but without the recursive CPU call.
-	*/
-
-	FieldFloppyInterrupts();
-
+/* DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register. */
 #endif	/* JOKER */
 
 

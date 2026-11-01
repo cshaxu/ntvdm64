@@ -179,7 +179,7 @@ void gvi_init IFN1(half_word, v_adapter)
 #endif /* DUMB_TERMINAL */
         case CGA:
 #ifdef CGAMONO 
-	case CGA_MONO: 
+/* DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register. */
 #endif 
             cga_term();
             break;
@@ -211,7 +211,7 @@ void gvi_init IFN1(half_word, v_adapter)
     case MDA:
     case CGA:
 #ifdef CGAMONO  
-    case CGA_MONO:  
+/* DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register. */
 #endif
 	screen_height = CGA_HEIGHT;
         video_adapter = v_adapter;
@@ -247,7 +247,7 @@ void gvi_init IFN1(half_word, v_adapter)
 #endif /* DUMB_TERMINAL */
     case CGA:
 #ifdef CGAMONO  
-    case CGA_MONO:  
+/* DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register. */
 #endif
         cga_init();
         break;
@@ -287,7 +287,7 @@ void gvi_term IFN0()
 #endif /* DUMB_TERMINAL */
     case CGA:
 #ifdef CGAMONO  
-    case CGA_MONO:  
+/* DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register. */
 #endif
         cga_term();
         break;

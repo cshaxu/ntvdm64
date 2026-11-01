@@ -1349,11 +1349,7 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 /* GISP CPU physically cannot perform read and/or write checks */
 
 #ifdef	JOKER
-
-	/* gmi_define_mem(SAS_VIDEO, &Glue_writes); */
-	Glue_set_vid_wrt_ptrs(&simple_writes);
-	Glue_set_vid_rd_ptrs(&simple_reads);
-
+/* DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register. */
 #else	/* not JOKER */
 
 

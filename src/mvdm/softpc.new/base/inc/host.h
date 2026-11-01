@@ -20,7 +20,7 @@
  */
 
 #ifdef PC_CONFIG
-extern void pc_config();	
+/* DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register. */
 #endif
 
 IMPORT	VOID	host_flip_real_floppy_ind IPT2(int, drive, BOOL, active);

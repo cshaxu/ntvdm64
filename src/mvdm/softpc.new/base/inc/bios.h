@@ -381,7 +381,7 @@ extern void test_for_us IPT0();
 #endif /* HFX */
 
 #ifdef DOS_APP_LIC
-extern void DOS_AppLicense IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-531: DOS_APP_LIC branch is not selected; see mirror register. */
 #endif
 
 IMPORT int soft_reset;

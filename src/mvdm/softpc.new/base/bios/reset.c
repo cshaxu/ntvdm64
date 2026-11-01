@@ -84,7 +84,7 @@
 #endif		/* GISP_SVGA */
 #include "hunter.h"
 #ifdef LICENSING
-#include "host_lic.h"
+/* DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register. */
 #endif /* LICENSING */
 
 /* Exports */
@@ -327,7 +327,7 @@ half_word *low, *high;
     {
     case CGA:
 #ifdef CGAMONO
-    case CGA_MONO:
+/* DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register. */
 #endif
 	high_switches |= (PPI_CGA_80_COLUMN);
 	break;
@@ -932,25 +932,7 @@ void reset()
 	}
 
 #ifdef LICENSING
-	if (host_lic_tick)
-	host_lic_tick();
-
-	cp = host_lic_string();
-	if (*cp)
-	{
-		while(*cp != '\0')
-		{
-			setAH(14);
-			setAL(*cp++);
-			bop(BIOS_VIDEO_IO);
-		}
-		setAH(14);
-		setAL(0xd);	/* carriage return feed */
-		bop(BIOS_VIDEO_IO);
-		setAH(14);
-		setAL(0xa);	/* line feed */
-		bop(BIOS_VIDEO_IO);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register. */
 #endif /* LICENSING */
 
 	/* skip another 1 line */

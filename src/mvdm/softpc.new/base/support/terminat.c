@@ -36,7 +36,7 @@
 /* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif /* GISP_SVGA */
 #ifdef LICENSING
-#include "host_lic.h"
+/* DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register. */
 #endif
 #include "emm.h"
 
@@ -84,9 +84,7 @@ void terminate()
 
 	/* terminate COM and LPT devices */
 #ifdef  PC_CONFIG
-	/* PC_CONFIG style host_lpt_close() and
-	host_com_close() calls should be added
-	in here */
+/* DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register. */
 #else
 	for (i = 0 ; i < NUM_PARALLEL_PORTS; i++)
 		config_activate(C_LPT1_NAME + i, FALSE);
@@ -127,7 +125,7 @@ void terminate()
 #endif
 
 #ifdef LICENSING
-	(*license_exit)(); /* Shutdown licensing system */
+/* DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register. */
 #endif
 	/*
 	 * Do any host-specific termination bits.

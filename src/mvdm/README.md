@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-531: replace unselected JOKER, PC_CONFIG, CGAMONO, PROFILE,
+LICENSING and DOS_APP_LIC branches with markers while retaining conditionals.
+The source ranges and hashes are in
+`../../artifacts/mvdm-audit/s12-legacy-misc.jsonl`.
+
 MVDM-HOST-DIV-530: replace unselected SECURE and PS_FLUSHING branch bodies
 with markers, retaining the original conditionals. Their ranges and hashes
 are in `../../artifacts/mvdm-audit/s12-print-secure.jsonl`.

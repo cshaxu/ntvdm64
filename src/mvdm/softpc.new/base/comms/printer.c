@@ -403,12 +403,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 	int	adapter, i;
 	half_word old_control;
 #ifdef PC_CONFIG
-	char	variable_text[MAXPATHLEN];
-	int softpcerr;
-	int severity;
-
-	softpcerr = 0;
-	severity = 0;
+/* DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register. */
 #endif
 
 
@@ -488,10 +483,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 			set_control(adapter, value);
 			if (low_high(old_control, value, INIT_P))
 #ifdef PC_CONFIG
-				/* this was a call to host_print_doc - <chrisP 28Aug91> */
-				host_reset_print(&softpcerr, &severity);
-			if (softpcerr != 0)
-				host_error(softpcerr, severity, variable_text);
+/* DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register. */
 #else
 				/* this was a call to host_print_doc - <chrisP 28Aug91> */
 				host_reset_print(adapter);

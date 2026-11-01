@@ -88,8 +88,7 @@ LOCAL void v_redirector		IFN0() { SWAP_INSTANCE; redirector(); }
 LOCAL void v_mouse_EM_callback	IFN0() { SWAP_INSTANCE; mouse_EM_callback(); }
 
 #ifdef PROFILE
-extern void dump_profile IPT0();
-extern void reset_profile IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-531: PROFILE branch is not selected; see mirror register. */
 #endif
 
 #ifdef SIGNAL_PROFILING
@@ -119,7 +118,7 @@ void (*BIOS[])() = {
 			dummy_int,   	/* BOP 01 */
 			unexpected_int,	/* BOP 02 */
 #ifdef DOS_APP_LIC
-			DOS_AppLicense, /* BOP 03 */
+/* DIVERGENCE MVDM-HOST-DIV-531: DOS_APP_LIC branch is not selected; see mirror register. */
 #else
 			illegal_bop,   	/* BOP 03 */
 #endif	/* DOS_APP_LIC */
@@ -325,7 +324,7 @@ void (*BIOS[])() = {
 #endif
 			illegal_bop,	/* BOP 64 */
 #ifdef PC_CONFIG
-			pc_config,	/* BOP 65 */
+/* DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register. */
 #else
 			illegal_bop,	/* BOP 65 */
 #endif
@@ -552,8 +551,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP CE */
 			illegal_bop,	/* BOP CF */
 #ifdef PROFILE
-			reset_profile,	/* BOP D0 */
-			dump_profile,	/* BOP D1 */
+/* DIVERGENCE MVDM-HOST-DIV-531: PROFILE branch is not selected; see mirror register. */
 #else
 			illegal_bop,	/* BOP D0 */
 			illegal_bop,	/* BOP D1 */

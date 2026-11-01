@@ -1939,7 +1939,7 @@ if (waiting_for_next_code)
 	default :
 		/* unrecognised code */
 #ifdef	JOKER
-		AddTo6805BuffImm(ACK_CODE);
+/* DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register. */
 #else	/* JOKER */
 		AddTo6805BuffImm(RESEND_CODE);
 #endif	/* JOKER */
@@ -2165,9 +2165,7 @@ GLOBAL VOID do_key_repeats IFN0()
 #ifndef REAL_KBD
 
 #ifdef JOKER
-	/* If there are characters available, tell Joker... */
-	if (kbd_status & 1)
-		do_int((long)output_contents);
+/* DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register. */
 #endif
 
 if (typematic_key_valid)
@@ -2707,7 +2705,7 @@ GLOBAL VOID kbd_inb IFN2(io_addr,port,half_word *,val)
 		/* Other ports should really clear this IRQ as well, but... */
 
 #ifdef JOKER
-		ica_clear_int(KEYBOARD_INT_ADAPTER, KEYBOARD_INT_LINE);
+/* DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register. */
 #endif	/* JOKER */
 
 		/* <tur 06-Jul-93> BCN 2040 Replace previous horrible hack with a better one!
