@@ -411,33 +411,7 @@ typedef struct _extioentry {
 #endif		/* GISP_SVGA */
 #endif	/* NTVDM */
 #else	/* SFELLOW */
-
-/*
- * StringFellow doesn't need most of the emulated hardware, as
- * it has the real thing.
- */
-
-#define EMPTY_ADAPTOR					0
-#define HW_ADAPTOR_DW					1
-#define HW_ADAPTOR_W					2
-#define HW_ADAPTOR_B					3
-#define KEY64_ADAPTOR					4
-#define KEY60_ADAPTOR					5
-#define DMA_ADAPTOR					6
-#define PPI_ADAPTOR					7
-#define CMOS_ADAPTOR					8
-#define MFG_ADAPTOR					9
-#define PCI_CONFIG_ADDRESS_ADAPTOR                      10
-#define PCI_CONFIG_PORT_ADAPTOR				11
-#define PCI_CONFIG_DATA_ADAPTOR0                        12
-#define PCI_CONFIG_DATA_ADAPTOR13                       13
-#define PCI_CONFIG_DATA_ADAPTOR2			14
-#define PIC_SLAVE_ADAPTOR				15
-#define PIC_MASTER_ADAPTOR				16
-#define SF_EGA_GC_ADAP_INDEX				17
-#define SF_EGA_GC_ADAP_DATA				18
-#define IO_MAX_NUMBER_ADAPTORS	19	/* make this equal to the highest used plus one please! */
-
+/* DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register. */
 #endif /*SFELLOW */
 
 /*

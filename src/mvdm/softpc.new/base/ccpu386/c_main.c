@@ -537,29 +537,7 @@ GLOBAL void SynchTick IFN0()
 
 #endif /* SYNCH_TIMERS */
 #else	/* SFELLOW */
-
-extern IBOOL qEventsToDo;
-extern IBOOL checkForQEvent IPT0();
-
-#define SYNCH_TICK()
-
-#define QUICK_EVENT_TICK() 				\
-	{						\
-		if (qEventsToDo)			\
-		{					\
-			if (checkForQEvent())		\
-			{				\
-				dispatch_q_event();	\
-				quick_mode = FALSE;	\
-			}				\
-		}					\
-	}
-
-#ifdef host_timer_event
-#undef host_timer_event
-#endif
-
-#define host_timer_event()
+/* DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register. */
 #endif	/* SFELLOW */
 
 #ifdef SFELLOW
@@ -4421,27 +4399,7 @@ CPU_RESTORED_RESET:
 	 }
       }
 #else	/* SFELLOW */
-   if (GET_IF() && (cpu_interrupt_map & (CPU_HW_INT_MASK | CPU_HW_NPX_INT_MASK)))
-      {
-	/* service any pending real H/W interrupt first */
-      	if (cpu_interrupt_map & CPU_HW_INT_MASK)
-      	{
-		 cpu_hw_interrupt_number = ica_intack();
-		 cpu_interrupt_map &= ~CPU_HW_INT_MASK;
-		 EXT = EXTERNAL;
-		 do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);
-		 CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
-	}
-	else
-      	if (cpu_interrupt_map & CPU_HW_NPX_INT_MASK)
-      	{
-		 cpu_hw_interrupt_number = IRQ5_SLAVE_PIC + VectorBase8259Slave();
-		 cpu_interrupt_map &= ~CPU_HW_NPX_INT_MASK;
-		 EXT = EXTERNAL;
-		 do_intrupt(cpu_hw_interrupt_number, FALSE, FALSE, (IU16)0);
-		 CCPU_save_EIP = GET_EIP();   /* to reflect IP change */
-	}
-      }
+/* DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register. */
 #endif	/* SFELLOW */
 
 #ifdef PIG

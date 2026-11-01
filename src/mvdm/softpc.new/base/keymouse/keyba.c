@@ -270,7 +270,7 @@ GLOBAL VOID ( *do_key_repeats_fn_ptr )();
 #ifndef macintosh
 static half_word buff_6805[BUFF_6805_PMAX];
 #else
-static half_word *buff_6805=NULL;
+/* DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register. */
 #endif /* macintosh */
 static int buff_6805_in_ptr,buff_6805_out_ptr;
 
@@ -325,19 +325,7 @@ static half_word set_3_key_state [127];
 static int key_down_count [127];
 
 #else	/* macintosh */
-/* make arrays */
-static int *make_sizes;
-static half_word **make_arrays;
-
-/* break arrays */
-static int *break_sizes;
-static half_word **break_arrays;
-
-/* set 3 key states (eg. typematic, make/break, make only, typematic make/break) */
-
-static half_word *set_3_key_state;
-static int *key_down_count;
-
+/* DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register. */
 #endif	/* macintosh */
 
 /* anomalous state handling variables */

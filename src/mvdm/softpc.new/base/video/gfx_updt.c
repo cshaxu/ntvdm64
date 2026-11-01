@@ -268,7 +268,7 @@ static	DIRTY_PARTS	dirty[480];
 static	DIRTY_PARTS	dirty[350];
 #endif
 #else
-DIRTY_PARTS	*dirty;	/* NB. Allocated as 350*4*sizeof(int) in applInit(). */
+/* DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register. */
 #endif
 
 IMPORT half_word bg_col_mask;

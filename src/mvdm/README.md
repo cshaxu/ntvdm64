@@ -1,5 +1,9 @@
 # mvdm
 
+MVDM-HOST-DIV-521: replace unselected SFELLOW and macintosh alternatives
+with markers while retaining their conditionals. The removed bodies are
+inventoried in `../../artifacts/mvdm-audit/s12-platforms-else.jsonl`.
+
 MVDM-HOST-DIV-520: replace unselected SFELLOW, A2CPU and macintosh
 platform branches with markers while retaining the conditional shells. Their
 original body hashes and locations are recorded in

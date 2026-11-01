@@ -107,12 +107,7 @@ LOCAL struct tms process_t_start, process_t_resettable;
 #define host_times(x)	times(x)
 
 #else  /* macintosh */
-
-/* Macintosh doesn't have processes or process times, but we do have
- * clock() which provides a value of type clock_t.
- */
-#define host_times(x)	clock()
-
+/* DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register. */
 #endif /* !macintosh */
 
 /***** LOCAL FN ****/

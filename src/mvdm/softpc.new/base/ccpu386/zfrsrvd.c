@@ -4853,7 +4853,7 @@ void TakeNpxExceptionInt()
 #ifndef SFELLOW
 		ica_hw_interrupt (ICA_SLAVE, CPU_AT_NPX_INT, 1);
 #else	/* SFELLOW */
-		c_cpu_interrupt(CPU_NPX_INT, 0);
+/* DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register. */
 #endif	/* SFELLOW */
 	}
 	else

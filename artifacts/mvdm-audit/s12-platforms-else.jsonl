@@ -1,0 +1,10 @@
+{"path":"src/mvdm/softpc.new/base/ccpu386/c_main.c","start":4423,"end":4445,"removed_lines":21,"sha256":"2524a92041b07fca1d3362b12eb9d15e2221d88c4b10198eddcff33a98787e37","tag":"SFELLOW","baseline":"590d11b1d"}
+{"path":"src/mvdm/softpc.new/base/ccpu386/c_main.c","start":539,"end":563,"removed_lines":23,"sha256":"62f4e9300a8b17cc377dba0fa1fc7929a623f9e179237b41d574a8a6a4890331","tag":"SFELLOW","baseline":"590d11b1d"}
+{"path":"src/mvdm/softpc.new/base/ccpu386/fpu.c","start":1308,"end":1310,"removed_lines":1,"sha256":"5f12d5d7949434a2c75d95ade8d49b52bd8e272956f99417fa53f547fd749a8f","tag":"SFELLOW","baseline":"590d11b1d"}
+{"path":"src/mvdm/softpc.new/base/ccpu386/zfrsrvd.c","start":4855,"end":4857,"removed_lines":1,"sha256":"297fc120e7196a53fe81ee68e03f431c1bd59cbb94f4fe46eed68202a490f30c","tag":"SFELLOW","baseline":"590d11b1d"}
+{"path":"src/mvdm/softpc.new/base/inc/ios.h","start":413,"end":441,"removed_lines":27,"sha256":"4fff36a7ff152a4bb3e044ddb4150e353bd5fa471d453276cd232855c1a6794f","tag":"SFELLOW","baseline":"590d11b1d"}
+{"path":"src/mvdm/softpc.new/base/debug/profile.c","start":109,"end":116,"removed_lines":6,"sha256":"324c5f4f207ab7c7017765d7a2a8abfb0563b3f2e1bacc4162ad6396a5514c70","tag":"macintosh","baseline":"590d11b1d"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":498,"end":526,"removed_lines":27,"sha256":"1444cc364acb93aa56c68d687d59cb44e17c6fecbcddf7f971f6d494ea359644","tag":"macintosh","baseline":"590d11b1d"}
+{"path":"src/mvdm/softpc.new/base/keymouse/keyba.c","start":327,"end":341,"removed_lines":13,"sha256":"748a3ff3ef0f683fdb8f91f5d3db22887a431bf5f526605cf8200a88e2c7a708","tag":"macintosh","baseline":"590d11b1d"}
+{"path":"src/mvdm/softpc.new/base/keymouse/keyba.c","start":272,"end":274,"removed_lines":1,"sha256":"6c36984d1c68535d0ca90d0e2f6acc3b5e50f125542ea230d4b4e2dcd3b68389","tag":"macintosh","baseline":"590d11b1d"}
+{"path":"src/mvdm/softpc.new/base/video/gfx_updt.c","start":270,"end":272,"removed_lines":1,"sha256":"0380ec946c63ff017c9481bc5a98b1801b9f6a06698c22a71eba46c6ffeb7e98","tag":"macintosh","baseline":"590d11b1d"}

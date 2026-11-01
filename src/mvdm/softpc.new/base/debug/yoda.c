@@ -496,33 +496,7 @@ enum pla_type 	last_type[PLA_SIZE];
 #endif	/* CPU_40_STYLE */
 
 #else /* !macintosh */
-
-#include	<Memory.h>	/* for _NewPtrClear */
-
-unsigned long 	*inst_mix;
-word 		*last_cs;
-LIN_ADDR 	*last_ip;
-
-#ifdef	CPU_40_STYLE
-enum pla_type 	*last_type;
-#endif
-
-GLOBAL void mac_yoda_init IFN0()
-{
-	/* These values should be initialised to zero */
-		
-#define ALLOCATE_ARRAY(type, name, size) \
-	name = (type *)NewPtrClear((size)*sizeof(*name));
-	
-	ALLOCATE_ARRAY(  unsigned long, inst_mix, INST_MIX_LENGTH);
-	ALLOCATE_ARRAY(  word,		last_cs,  PLA_SIZE);
-	ALLOCATE_ARRAY(  LIN_ADDR, 	last_ip,  PLA_SIZE);
-
-#ifdef	CPU_40_STYLE
-	ALLOCATE_ARRAY(  enum pla_type, last_type,PLA_SIZE);
-#endif	/* CPU_40_STYLE */
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register. */
 #endif	/* macintosh */
 
 int	pla_ptr=0;

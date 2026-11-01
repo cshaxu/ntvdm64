@@ -1306,7 +1306,7 @@ GLOBAL VOID InitNpx IFN1(IBOOL, disabled)
 #ifndef SFELLOW
 		check_malloc(FPUStackBase, 8, FPSTACKENTRY);
 #else
-		FPUStackBase = (FPSTACKENTRY *)SFMalloc(8*sizeof(FPSTACKENTRY), FALSE);
+/* DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register. */
 #endif	/* SFELLOW */
 		first = FALSE;
 	}
