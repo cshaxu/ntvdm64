@@ -659,78 +659,7 @@ typedef struct _LLC_IOCTL_BUFFERS {
 //  together and this table must be defined only once.  
 //
 #ifdef INCLUDE_IO_BUFFER_SIZE_TABLE
-
-LLC_IOCTL_BUFFERS aDlcIoBuffers[IOCTL_DLC_LAST_COMMAND] = 
-{
-    {sizeof(NT_DLC_READ_PARMS) + sizeof( NT_DLC_CCB ),
-     sizeof( NT_DLC_CCB_OUTPUT )},
-    {sizeof(LLC_RECEIVE_PARMS) + sizeof( NT_DLC_CCB ),
-     sizeof( NT_DLC_CCB_OUTPUT )},
-    {sizeof(NT_DLC_TRANSMIT_PARMS) + sizeof( NT_DLC_CCB ),
-     sizeof( NT_DLC_CCB_OUTPUT )},
-    {sizeof(NT_DLC_BUFFER_FREE_PARMS), 
-     sizeof(NT_DLC_BUFFER_FREE_OUTPUT)},
-    {sizeof(LLC_BUFFER_GET_PARMS), 
-     sizeof(LLC_BUFFER_GET_PARMS)},
-    {sizeof(LLC_BUFFER_CREATE_PARMS), 
-     sizeof(PVOID)},
-// DirInitialize included in DirClose
-//    {sizeof( NT_DLC_CCB_INPUT ),
-//     sizeof( NT_DLC_CCB_OUTPUT )},              // DIR.INITIALIZE
-    {sizeof(LLC_DIR_SET_EFLAG_PARMS), 
-     0},
-    {sizeof( NT_DLC_CCB_INPUT ),
-     sizeof( NT_DLC_CCB_OUTPUT )},              // DLC.CLOSE.STATION
-    {sizeof(NT_DLC_CONNECT_STATION_PARMS) + sizeof( NT_DLC_CCB ),
-     sizeof( NT_DLC_CCB_OUTPUT )},
-    {sizeof(NT_DLC_FLOW_CONTROL_PARMS), 
-     0},
-    {sizeof(NT_DLC_OPEN_STATION_PARMS), 
-     sizeof( USHORT )},
-    {sizeof( NT_DLC_CCB_INPUT ), 
-     sizeof( NT_DLC_CCB_OUTPUT )},              // DLC.RESET
-    {sizeof(NT_DLC_COMMAND_CANCEL_PARMS), 
-     0},                                        // READ.CANCEL
-    {sizeof(NT_DLC_RECEIVE_CANCEL_PARMS), 
-     0},
-    {sizeof(NT_DLC_QUERY_INFORMATION_INPUT), 
-     0},
-    {sizeof( struct _DlcSetInfoHeader ), 
-     0},
-    {sizeof(NT_DLC_COMMAND_CANCEL_PARMS),       // TIMER.CANCEL
-     0},
-    {sizeof( NT_DLC_CCB_INPUT ),                // TIMER.CANCEL.GROUP
-     sizeof( NT_DLC_CCB_OUTPUT )},              
-    {sizeof( NT_DLC_CCB_INPUT ),                // DIR.TIMER.SET
-     sizeof( NT_DLC_CCB_OUTPUT )},
-    {sizeof(NT_DLC_OPEN_SAP_PARMS), 
-     sizeof(NT_DLC_OPEN_SAP_PARMS)},
-    {sizeof( NT_DLC_CCB_INPUT ),
-     sizeof( NT_DLC_CCB_OUTPUT )},              // DLC.CLOSE.SAP
-    {sizeof(LLC_DIR_OPEN_DIRECT_PARMS), 
-     0},
-    {sizeof( NT_DLC_CCB_INPUT ),               // DIR.CLOSE.DIRECT
-     sizeof( NT_DLC_CCB_OUTPUT )},             
-    {sizeof(NT_DIR_OPEN_ADAPTER_PARMS),         // DIR.OPEN.ADAPTER
-     sizeof( LLC_ADAPTER_OPEN_PARMS )},
-    {sizeof( NT_DLC_CCB_INPUT ),               // DIR.CLOSE.ADAPTER
-     sizeof( NT_DLC_CCB_OUTPUT )},
-    {sizeof( LLC_DLC_REALLOCATE_PARMS ),        // DLC.REALLOCATE
-     sizeof( LLC_DLC_REALLOCATE_PARMS )},
-    {sizeof( NT_DLC_READ_INPUT) + sizeof( LLC_CCB ),    // READ2
-     sizeof( NT_DLC_READ_PARMS) + sizeof( LLC_CCB )},
-    {sizeof( LLC_RECEIVE_PARMS) + sizeof( LLC_CCB ),    // RECEIVE2 
-     sizeof( NT_DLC_CCB_OUTPUT )},
-    {sizeof( NT_DLC_TRANSMIT_PARMS ) + sizeof( LLC_CCB ), // TRANSMIT2
-     sizeof( NT_DLC_CCB_OUTPUT )}, 
-    {sizeof( NT_DLC_COMPLETE_COMMAND_PARMS ),   // DLC.COMPLETE.COMMAND
-     0},
-//    {sizeof( LLC_TRACE_INITIALIZE_PARMS ) + sizeof( LLC_CCB ),
-//     0},
-//    {0, 0}
-//    {sizeof( NT_NDIS_REQUEST_PARMS ),
-//     sizeof( NT_NDIS_REQUEST_PARMS )}
-};
+/* DIVERGENCE OPENNT-HOST-134: INCLUDE_IO_BUFFER_SIZE_TABLE branch is not selected; see mirror register. */
 #else
 
 extern LLC_IOCTL_BUFFERS aDlcIoBuffers[];

@@ -1,4 +1,9 @@
 # non-mvdm original OpenNT sources
+OPENNT-HOST-134: replace the unselected INCLUDE_IO_BUFFER_SIZE_TABLE body
+from the OpenNT 4.5 `private/inc/dlcio.h` with a marker, retaining its
+conditional and the selected external declaration. Source range and body
+hash are in `../../artifacts/mvdm-audit/s12-dlcio.jsonl`.
+
 OPENNT-HOST-133: replace unselected CDEBUG, SYSMODALWINDOWS,
 MEMPHIS_MENU_WATERMARKS, PIF_PROPERTY_SHEETS and UNDO_CLEANUP branches with
 markers, retaining conditionals. Their source ranges and hashes are in
