@@ -297,6 +297,11 @@ static int repeat_window_caf(void)
     const LPARAM params[]={1|(0x1dL<<16),1|(0x38L<<16)|(1L<<29),
         1|(0x21L<<16)|(1L<<29),1|(0x21L<<16)|(1L<<29)|(1L<<30)|(1L<<31),
         1|(0x38L<<16)|(1L<<29)|(1L<<30)|(1L<<31),1|(0x1dL<<16)|(1L<<30)|(1L<<31)};
+    if(GetEnvironmentVariableW(L"MVDM_TEST_WINDOW_CLOSE_CONTROL",NULL,0)) {
+        if(!window)return 0;
+        s36_note("window-caf","using-window-close-control");
+        return SendMessageTimeoutW(window,WM_CLOSE,0,0,SMTO_ABORTIFHUNG,3000,&result)!=0;
+    }
     if(!window || !GetEnvironmentVariableA("MVDM_CAF_HOOK_DLL",path,sizeof(path)))return 0;
     module=LoadLibraryA(path);if(!module){fprintf(stderr,"window input: LoadLibrary error %lu\n",GetLastError());return 0;}
     tid=GetWindowThreadProcessId(window,NULL);
@@ -315,18 +320,22 @@ static int repeat_window_physical(const char *text)
 {
     HWND window=FindWindowW(L"LibKvmWindow",NULL);HMODULE module;HHOOK hook;
     char path[MAX_PATH];DWORD tid,pid=0;DWORD_PTR result;int ok=1;FARPROC callback;
-    if(!window || !GetEnvironmentVariableA("MVDM_CAF_HOOK_DLL",path,sizeof(path)))return 0;
-    module=LoadLibraryA(path);if(!module){fprintf(stderr,"window key: LoadLibrary error %lu\n",GetLastError());return 0;}
-    tid=GetWindowThreadProcessId(window,&pid);
-    callback=GetProcAddress(module,"caf_probe_hook");
-    if(!callback){fprintf(stderr,"window key: GetProcAddress error %lu module %s\n",GetLastError(),path);FreeLibrary(module);return 0;}
-    hook=SetWindowsHookExA(WH_CALLWNDPROC,(HOOKPROC)callback,module,tid);
-    if(!hook){
-        DWORD failure=GetLastError(),length=MAX_PATH;char target[MAX_PATH]={0};
-        HANDLE process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,FALSE,pid);
-        if(process){QueryFullProcessImageNameA(process,0,target,&length);CloseHandle(process);}
-        fprintf(stderr,"window key: SetWindowsHookEx error %lu process %lu thread %lu target %s module %s\n",failure,pid,tid,target,path);
-        FreeLibrary(module);return 0;
+    BOOL plain=GetEnvironmentVariableW(L"MVDM_TEST_WINDOW_CLOSE_CONTROL",NULL,0)!=0;
+    if(!window || (!plain && !GetEnvironmentVariableA("MVDM_CAF_HOOK_DLL",path,sizeof(path))))return 0;
+    module=NULL;hook=NULL;
+    if(!plain) {
+        module=LoadLibraryA(path);if(!module){fprintf(stderr,"window key: LoadLibrary error %lu\n",GetLastError());return 0;}
+        tid=GetWindowThreadProcessId(window,&pid);
+        callback=GetProcAddress(module,"caf_probe_hook");
+        if(!callback){fprintf(stderr,"window key: GetProcAddress error %lu module %s\n",GetLastError(),path);FreeLibrary(module);return 0;}
+        hook=SetWindowsHookExA(WH_CALLWNDPROC,(HOOKPROC)callback,module,tid);
+        if(!hook){
+            DWORD failure=GetLastError(),length=MAX_PATH;char target[MAX_PATH]={0};
+            HANDLE process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,FALSE,pid);
+            if(process){QueryFullProcessImageNameA(process,0,target,&length);CloseHandle(process);}
+            fprintf(stderr,"window key: SetWindowsHookEx error %lu process %lu thread %lu target %s module %s\n",failure,pid,tid,target,path);
+            FreeLibrary(module);return 0;
+        }
     }
     while(*text && ok) {
         SHORT mapping=VkKeyScanA(*text++);UINT key=(BYTE)mapping;
@@ -336,7 +345,7 @@ static int repeat_window_physical(const char *text)
         if(ok)ok=SendMessageTimeoutW(window,WM_KEYUP,key,1|((LPARAM)scan<<16)|(1L<<30)|(1L<<31),SMTO_ABORTIFHUNG,3000,&result)!=0;
         if(!ok)fprintf(stderr,"window key: SendMessageTimeout error %lu key %u\n",GetLastError(),key);
     }
-    UnhookWindowsHookEx(hook);FreeLibrary(module);return ok;
+    if(hook)UnhookWindowsHookEx(hook);if(module)FreeLibrary(module);return ok;
 }
 
 static int repeat_window_modifiers(void)
