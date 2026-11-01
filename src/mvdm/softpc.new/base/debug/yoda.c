@@ -937,41 +937,7 @@ static char *segment_names[] =
    "CONFORM_READABLE_CODE"
    };
 #else
-static char *segment_names[] =
-   {
-   "INVALID",
-   "AVAILABLE_TSS",
-   "LDT_SEGMENT",
-   "BUSY_TSS",
-   "CALL_GATE",
-   "TASK_GATE",
-   "INTERRUPT_GATE",
-   "TRAP_GATE",
-   "INVALID",
-   "INVALID",
-   "INVALID",
-   "INVALID",
-   "INVALID",
-   "INVALID",
-   "INVALID",
-   "INVALID",
-   "EXPANDUP_READONLY_DATA",
-   "EXPANDUP_READONLY_DATA",
-   "EXPANDUP_WRITEABLE_DATA",
-   "EXPANDUP_WRITEABLE_DATA",
-   "EXPANDDOWN_READONLY_DATA",
-   "EXPANDDOWN_READONLY_DATA",
-   "EXPANDDOWN_WRITEABLE_DATA",
-   "EXPANDDOWN_WRITEABLE_DATA",
-   "NONCONFORM_NOREAD_CODE",
-   "NONCONFORM_NOREAD_CODE",
-   "NONCONFORM_READABLE_CODE",
-   "NONCONFORM_READABLE_CODE",
-   "CONFORM_NOREAD_CODE",
-   "CONFORM_NOREAD_CODE",
-   "CONFORM_READABLE_CODE",
-   "CONFORM_READABLE_CODE"
-   };
+/* DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register. */
 #endif /* SPC386 */
 
 static int descr_trace = 0x3f;
@@ -989,7 +955,7 @@ static int high_trace_limit = 0x400000;
 #define DASM_INTERNAL
 #include <dasm.h>
 #else /* SPC386 */
-IMPORT word dasm IPT5(char *, i_output_stream, word, i_atomicsegover, word, i_segreg, word, i_segoff, int, i_nInstr);
+/* DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register. */
 #endif /* SPC386 */
 
 /*
@@ -1534,8 +1500,7 @@ LOCAL YODA_COMMAND(do_par)
 	    fprintf(trace_file, "GS: BASE:%08x LIMIT:%08x AR:%04x\n",
 	       getGS_BASE(), getGS_LIMIT(), getGS_AR());
 #else /* SPC386 */
-        fprintf(trace_file, "CS: %d DS: %d ES: %d SS: %d\n",
-                             ALC_CS, ALC_DS, ALC_ES, ALC_SS);
+/* DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register. */
 #endif /* SPC386 */							 
 	return(YODA_LOOP);
 }
@@ -1904,7 +1869,7 @@ LOCAL YODA_COMMAND(do_u)
 		}
 	}
 #else /* SPC386 */
-	last_dasm_ip = dasm((char *)0,(word)0,(word)cs, (word)ip, (word)len);
+/* DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register. */
 #endif /* SPC386 */
 	disable_bkpt = 0;
 	return(YODA_LOOP_AND_REPEAT);
@@ -1945,7 +1910,7 @@ LOCAL YODA_COMMAND(do_j)
 		nextip += dasm((char *)-1, (word)getCS(), getEIP(), 0);
 	}
 #else /* SPC386 */
-	nextip = dasm((char *)-1,(word)1,(word)getCS(), (word)getIP(), (word)len);
+/* DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register. */
 #endif /* SPC386 */
 	disable_bkpt = 0;
 	set_inst_break(getCS(), nextip, 1, 1, 1);
@@ -4970,7 +4935,7 @@ LOCAL IBOOL decode_offset IFN3(char *, coffset, IU32 *, offset, IS32 *, seg)
 #ifdef SPC386
 		*offset = iaddr16b;
 #else
-		*offset = iaddr16b & 0xffff;
+/* DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register. */
 #endif
 		*seg  = getDS();
 		retVal = TRUE;
@@ -5007,7 +4972,7 @@ LOCAL IBOOL decode_offset IFN3(char *, coffset, IU32 *, offset, IS32 *, seg)
 #ifdef SPC386
 		*offset = (*offset + ireg_offset + const_offset);
 #else
-		*offset = (*offset + ireg_offset + const_offset) & 0xffff;
+/* DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register. */
 #endif
 
 	return(retVal);
@@ -5097,7 +5062,7 @@ LOCAL IBOOL decode_iaddr_ok IFN3 (char *, iaddr, IS32 *, seg, LIN_ADDR *, offset
 #ifdef SPC386
 			*seg = iaddr16b;
 #else
-			*seg = iaddr16b & 0xffff;
+/* DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register. */
 #endif
 		} else {
 			ISM8 n;
@@ -5516,7 +5481,7 @@ LOCAL dump_descr IFN2(LIN_ADDR, address, IUM32, num)
 #ifdef SPC386
       high_limit = sas_w_at(address+6);	/* 4th word of descr */
 #else /* SPC386 */
-      high_limit = 0;
+/* DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register. */
 #endif /* SPC386 */
 
       output_name = segment_names[AR];
@@ -5544,13 +5509,7 @@ LOCAL dump_descr IFN2(LIN_ADDR, address, IUM32, num)
 	 output_type = 9;
 	 break;
 #else /* SPC386 */
-      case 0x09:
-      case 0x0b:
-      case 0x0c:
-      case 0x0e:
-      case 0x0f:
-	 output_type = 2;
-	 break;
+/* DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register. */
 #endif /* SPC386 */
 
       case 0x01:   /* SPECIAL */
@@ -5611,11 +5570,7 @@ LOCAL dump_descr IFN2(LIN_ADDR, address, IUM32, num)
 	       i, p, dpl, output_name, base, tlimit);
 	    }
 #else /* SPC386 */
-	    {
-	    base = ((sys_addr)high_base << 16 ) | low_base;
-	    fprintf(trace_file, "(%04x)P:%1d DPL:%1d TYPE:%25s BASE:%6x LIMIT:%4x\n",
-	       i, p, dpl, output_name, base, limit);
-	    }
+/* DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register. */
 #endif /* SPC386 */
 	 break;
 
@@ -7398,7 +7353,7 @@ IU32 current_opcode;
 			    nextip = GetInstructionPointer();
 				    nextip += dasm((char *)-1, (word)getCS(), getEIP(), 0);
 #else /* SPC386 */
-			    nextip = dasm((char *)-1, (word)1, (word)getCS(), (word)getIP(), (word)1);
+/* DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register. */
 #endif /* SPC386 */
 			    set_inst_break(getCS(), nextip, 1, 0, 1);
 			    disable_timer = 0;
@@ -7796,7 +7751,7 @@ LOCAL	void	do_compress_npx IFN1(FILE *, fp)
 #ifdef SPC386
 	dasm(buff, (word)getCS(), (IU32)GetInstructionPointer(), SIXTEEN_BIT);
 #else
-	dasm((char *)0,(word)0,(word)getCS(), (word)GetInstructionPointer(), (word)1);
+/* DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register. */
 #endif /* SPC386 */
 	fprintf(fp,"%sc%04x s%04x t%04x", buff, cw287, sw287, tw287);
 	for (i=0;i<8;i++)

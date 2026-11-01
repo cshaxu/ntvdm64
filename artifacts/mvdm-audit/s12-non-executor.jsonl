@@ -1,0 +1,16 @@
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":7798,"end":7800,"removed_lines":1,"sha256":"987c93ff44f91dcaa766830ae07fb8759222dcf0fe304285a62709aef60f9ce8","tag":"SPC386","baseline":"8d4d7d56d"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":7400,"end":7402,"removed_lines":1,"sha256":"df74cb16eb9ca6bb42821cee0620f1c24a4e53f40b87bdd3e0a6a0c88abe84aa","tag":"SPC386","baseline":"8d4d7d56d"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":5613,"end":5619,"removed_lines":5,"sha256":"65a52af509e1ba03a83f6b6251e530b44d6935b0c9912f37beb8df1b2677b840","tag":"SPC386","baseline":"8d4d7d56d"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":5546,"end":5554,"removed_lines":7,"sha256":"56f8e7857d33819310f62d067a79249f440dc27a239e56d680bf3c05df485d14","tag":"SPC386","baseline":"8d4d7d56d"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":5518,"end":5520,"removed_lines":1,"sha256":"d4a3bb5b64c73458ab8edbb6baa4ffda8df0797be8d8775876e1bda17ed12255","tag":"SPC386","baseline":"8d4d7d56d"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":5099,"end":5101,"removed_lines":1,"sha256":"b3c78d26c3fe6ac0bd08655be3d13ca64c576d237f4bb322f1e3231407495b0f","tag":"SPC386","baseline":"8d4d7d56d"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":5009,"end":5011,"removed_lines":1,"sha256":"1659b77aae589f8054a8ff4154ebb141db6c8a0b918e50fbc1199a81f6c8bc7c","tag":"SPC386","baseline":"8d4d7d56d"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":4972,"end":4974,"removed_lines":1,"sha256":"bbdbf3804843a7f85dcd56323042526b54ee09a15b4aa7289eb192c3a4467a68","tag":"SPC386","baseline":"8d4d7d56d"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":1947,"end":1949,"removed_lines":1,"sha256":"7bd45538345f3c7140e87fb5a6145fb2d777e374521dfe316601acdda9ca1683","tag":"SPC386","baseline":"8d4d7d56d"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":1906,"end":1908,"removed_lines":1,"sha256":"b586100910ac5af27a2f5a5ef8c0df0759cec7abdc743193aea607425eb5991e","tag":"SPC386","baseline":"8d4d7d56d"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":1536,"end":1539,"removed_lines":2,"sha256":"e81052abf1c87b3b5f2394d79b0730f77a021460ab9f1e3d724ca37d775ffab4","tag":"SPC386","baseline":"8d4d7d56d"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":991,"end":993,"removed_lines":1,"sha256":"969312f3e04033fa5b272b2c5d4b8883ba80e8e4d83c4cb783188be9bd995f30","tag":"SPC386","baseline":"8d4d7d56d"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":939,"end":975,"removed_lines":35,"sha256":"f210338710bacb85a91af60034bf27b20d6daae224ababab41c4c81454f0659d","tag":"SPC386","baseline":"8d4d7d56d"}
+{"path":"src/mvdm/softpc.new/base/support/xt.c","start":412,"end":414,"removed_lines":1,"sha256":"0a72c382799ae3639e1c250123358de794bd48faa395f3dbed24ee99e1acab7e","tag":"SPC386","baseline":"8d4d7d56d"}
+{"path":"src/mvdm/softpc.new/base/video/ega_read.c","start":214,"end":216,"removed_lines":1,"sha256":"0f5d4a88a7191ea9222447d1ab966fc08fb7747e6814ea18b9bc4954ec1969e3","tag":"C_VID","baseline":"8d4d7d56d"}
+{"path":"src/mvdm/softpc.new/base/video/ega_writ.c","start":116,"end":119,"removed_lines":2,"sha256":"b4dd9e312d9b521f44b8ce1e2a142ee3857c3a0891b87f2be6fd907ff81724e6","tag":"C_VID","baseline":"8d4d7d56d"}

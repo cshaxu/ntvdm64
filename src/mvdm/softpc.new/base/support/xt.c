@@ -410,6 +410,6 @@ CsIsBig IFN1(IU16, csVal)
 		return(sas_hw_at(base + offset + 6) & 0x40);
 	}
 #else /* SPC386 */
-	return (FALSE);
+/* DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register. */
 #endif /* SPC386 */
 }

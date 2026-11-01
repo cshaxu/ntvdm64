@@ -212,7 +212,7 @@ READ_POINTERS Glue_reads =
 	read_str_fwd_ev_glue
 };
 #else
-READ_POINTERS Glue_reads = { 0, 0, 0 };
+/* DIVERGENCE MVDM-HOST-DIV-539: non-C_VID branch is not selected; see mirror register. */
 #endif /* C_VID */
 READ_POINTERS	simple_reads;
 READ_POINTERS	pointers_mode0_nch;

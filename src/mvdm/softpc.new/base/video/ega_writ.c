@@ -114,8 +114,7 @@ MEM_HANDLERS Glue_writes =
 	move_word_fwd_ev_glue,
 };
 #else	/* C_VID */
-/* no glue required */
-MEM_HANDLERS Glue_writes = { 0, 0, 0, 0, 0, 0 };
+/* DIVERGENCE MVDM-HOST-DIV-539: non-C_VID branch is not selected; see mirror register. */
 #endif	/* CVID */
 WRT_POINTERS dth_md0_writes;
 WRT_POINTERS dth_md2_writes;

@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-539: replace unselected non-SPC386 and non-C_VID branch
+bodies with markers only where all observed consumers explicitly select the
+corresponding flag. Mixed contexts remain untouched. Source ranges and
+hashes are in `../../artifacts/mvdm-audit/s12-non-executor.jsonl`.
+
 MVDM-HOST-DIV-538: replace unselected non-V7VGA original branch bodies with
 markers only for observed C units and headers whose observed consumers all
 explicitly select V7VGA. Mixed header contexts and the project-added DAC
