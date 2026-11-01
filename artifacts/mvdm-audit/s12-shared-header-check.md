@@ -22,6 +22,16 @@ profiles and non-default targets as described in its
 does not by itself establish which individual removed bodies were shared or
 whether restoring them is correct.
 
+A subsequent cross-check joined each recorded graph/object pair from
+`build/t473-s12-flat/compound-header-full-contexts.json` to the matching
+current `ninja -t commands` `/Fo` object and C source, normalizing the later
+`mvdm-host`/`mvdm-guest` path rename. All edges of the 87 covered headers
+resolved, with no conflicting object mappings. Counting distinct source paths
+still yields 83 headers with multiple sources and four with one; none of the
+multi-edge headers becomes single-source after deduplication. This joins a
+historical dependency snapshot to current commands and therefore does not
+extend coverage to the 15 missing headers or other configurations.
+
 No previously committed source was restored or changed by this check. The
 existing [bounded cleanup checkpoint](s12-cleanup-freeze.md) retains the open
 disposition of prior shared-header changes; this observation prevents calling
