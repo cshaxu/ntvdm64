@@ -815,7 +815,7 @@ IMPORT HOSTMOUSEFUNCS	*working_mouse_funcs;
 VOID host_enable_delta_motion IPT0();
 VOID host_disable_delta_motion IPT0();
 #ifdef X86GFX
-extern  void host_mouse_conditional_off_enabled(void);
+/* DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register. */
 #else
 extern  void mouse_video_mode_changed(int new_mode);
 #endif

@@ -117,9 +117,7 @@ typedef struct
 IMPORT HANDLE MainThread;
 IMPORT DWORD stateLength;
 #ifdef X86GFX
-IMPORT HANDLE hStartHardwareEvent;
-IMPORT HANDLE hEndHardwareEvent;
-IMPORT PVIDEO_HARDWARE_STATE_HEADER videoState;
+/* DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register. */
 #endif
 IMPORT PVOID textState; //Tim Nov 92.
 IMPORT WCHAR_STRING videoSection;
@@ -136,8 +134,7 @@ extern DWORD savedScreenState;
 extern BOOL  ConsoleInitialised;
 extern BOOL  ConsoleNoUpdates;
 #ifdef X86GFX
-extern DWORD mouse_buffer_width;
-extern DWORD mouse_buffer_height;
+/* DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register. */
 #endif /* X86GFX */
 extern BOOL blocked_in_gfx_mode;
 
@@ -177,53 +174,7 @@ IMPORT VOID ResetConsoleState IPT0();
 IMPORT int  getModeType(VOID);
 
 #ifdef X86GFX
-#define CPI_FILENAME_LENGTH	9
-#define CPI_FILENAME		"\\ega.cpi"
-#define CPI_SIGNATURE_LENGTH	8
-#define CPI_SIGNATURE_NT	"\xFF""FONT.NT"
-#define CPI_SIGNATURE_DOS	"\xFF""FONT   "
-
-#pragma pack(1)
-typedef struct _CPIFILEHEADER {
-
-    CHAR    Signature[8];		// "\xFF""FONT.NT" for nt ega.cpi
-					// "\xFF""FONT   " for dos ega.cpi
-    BYTE    Reserved[8];
-    WORD    NumberOfPointers;
-    BYTE    TypeOfPointer;
-    DWORD   OffsetToCodePageHeader;
-} CPIFILEHEADER, * PCPIFILEHEADER;
-
-typedef struct _CPICODEPAGEHEADER{
-    WORD    NumberOfCodePages;
-} CPICODEPAGEHEADER, *PCPICODEPAGEHEADER;
-
-typedef struct _CPICODEPAGEENTRY {
-    WORD    HeaderSize;
-    DWORD   OffsetToNextCodePageEntry;
-    WORD    DeviceType;
-    CHAR    DevieSubTypeID[8];
-    WORD    CodePageID;
-    BYTE    Reserved[6];
-    DWORD   OffsetToFontHeader; 	// absolute for DOS CPI
-					// relative for NT CPI
-}  CPICODEPAGEENTRY, *PCPICODEPAGEENTRY;
-
-typedef struct _CPIFONTHEADER {
-    WORD    Reserved;
-    WORD    NumberOfFonts;
-    WORD    LengthOfFontData;
-} CPIFONTHEADER, *PCPIFONTHEADER;
-
-typedef struct _CPIFONTDATA{
-    BYTE    FontHeight;
-    BYTE    FontWidth;
-    WORD    AspectRatio;
-    WORD    NumberOfCharacters;
-} CPIFONTDATA, *PCPIFONTDATA;
-#pragma pack()
-
-IMPORT BOOL LoadCPIFont(UINT, WORD, WORD);
+/* DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register. */
 #endif
 
 
