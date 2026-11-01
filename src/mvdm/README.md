@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-533: reduce the original `mouse16b.h` to its retained include
+guard and an exclusion marker after its last unselected implementation
+references were removed. Its original file and body hashes are recorded in
+`../../artifacts/mvdm-audit/s12-mouse16-header.json`.
+
 MVDM-HOST-DIV-532: replace the unselected historical MOUSE_16_BIT branch
 bodies with markers, preserving conditionals. The selected INT 33 mouse path
 and the separately built mouse31 driver remain. Source ranges and hashes:
