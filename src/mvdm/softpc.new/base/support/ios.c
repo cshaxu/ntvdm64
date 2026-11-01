@@ -859,16 +859,7 @@ GLOBAL BOOL	io_connect_port IFN3(io_addr, io_address, half_word, adapter,
 	return TRUE;
 }
 #else
-GLOBAL void	io_connect_port IFN3(io_addr, io_address, half_word, adapter,
-	half_word, mode)
-{
-	if (mode & IO_READ){
-		Ios_in_adapter_table[io_address & (PC_IO_MEM_SIZE-1)] = adapter;
-	}
-	if (mode & IO_WRITE){
-		Ios_out_adapter_table[io_address & (PC_IO_MEM_SIZE-1)] = adapter;
-	}
-}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 
@@ -893,12 +884,7 @@ GLOBAL void     io_disconnect_port IFN2(io_addr, io_address, half_word, adapter)
         Ios_out_adapter_table[io_address & (PC_IO_MEM_SIZE-1)] = EMPTY_ADAPTOR;
 }
 #else
-GLOBAL void	io_disconnect_port IFN2(io_addr, io_address, half_word, adapter)
-{
-	UNUSED(adapter);
-	Ios_in_adapter_table[io_address] = EMPTY_ADAPTOR;
-	Ios_out_adapter_table[io_address] = EMPTY_ADAPTOR;
-}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 
 

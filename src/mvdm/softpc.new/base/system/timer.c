@@ -111,8 +111,7 @@ ULONG EoiIntsPending=0;
 ULONG EoiDelayInUse=0;
 int ticks_blocked = 0;
 #else /* NTVDM */
-static unsigned long ticksPerIdealInterval;
-static  int     ticks_blocked = 0;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 
 #ifndef PROD
@@ -244,12 +243,7 @@ typedef struct {
 	int		freezeCounter;
 
 #ifndef NTVDM
-	unsigned long lastTicks;
-	long		microtick;
-	long 		timeFrig;
-	word		saveCount;
-	int		guessesPerHostTick;	/* How often per host tick are we forced to guess? */
-	int		guessesSoFar;		/* How many times have we guessed so far? */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 	unsigned int	delay;
@@ -367,8 +361,7 @@ LOCAL void startCounting IPT0();
 #ifdef NTVDM
 unsigned long updateCount(void);
 #else
-LOCAL void updateCount IPT3(unsigned long, ticks, unsigned long *, wrap,
-	struct host_timeval *, now);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 LOCAL unsigned  short bin_to_bcd IPT1(unsigned long, val);
 LOCAL word bcd_to_bin IPT1(word, val);
@@ -377,8 +370,7 @@ LOCAL void Timer_init IPT0();
 LOCAL unsigned long timer_conv IPT1(word, count);
 LOCAL void issueIREQ0 IPT1(unsigned int, n);
 #ifndef NTVDM
-LOCAL unsigned long guess IPT0();
-LOCAL void throwaway IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 #ifdef SYNCH_TIMERS
 /* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
@@ -388,22 +380,13 @@ LOCAL void IdealTimeInit IPT0();
 LOCAL void updateIdealTime IPT0();
 LOCAL void getIdealTime IPT1(struct host_timeval *, t);
 #ifndef NTVDM
-LOCAL void getHostSysTime IPT1(struct host_timeval *, t);
-LOCAL void checktimelock IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 LOCAL void setTriggerCond IPT0();
 LOCAL void WtComplete IPT0();
 LOCAL void counter_init IPT1(COUNTER_UNIT *, p);
 #ifndef NTVDM
-LOCAL void setLastWrap IPT2(unsigned int, nclocks, struct host_timeval *, now);
-LOCAL void timer_generate_int IPT1(long, n);
-LOCAL void timer_multiple_ints IPT1(long, n);
-
-#define MAX_BACK_SECS 15
-LOCAL IU32 max_backlog = 0;     /* max # of ints allowed to queue up */
-IBOOL active_int_event = FALSE; /* current quick_event for timer queue */
-IU32 more_timer_mult = 0;	/* additions to timer int queue */
-IU32 timer_multiple_delay = 0;  /* us delay to next timer queue elem */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 #if defined(NTVDM)
@@ -476,12 +459,7 @@ LOCAL ULONG	adj_n_real_mode_ticks_before_full_speed = 0;/* The value which real_
 #endif
 
 #if !defined(NTVDM)
-#if defined(IRET_HOOKS) && defined(GISP_CPU)
-extern IBOOL HostDelayTimerInt IPT1(int, numberInts);
-extern IBOOL HostPendingTimerInt IPT0();
-extern void HostResetTimerInts IPT0();
-
-#endif /* IRET_HOOKS && GISP_CPU */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -518,15 +496,7 @@ SWTMR_init_funcptrs IFN0()
 	timer_tick_func			= SWTMR_time_tick;
 
 #ifndef NTVDM
-	/*
-	 * initialise stuff for PM timer hack
-	 */
-	too_soon_after_previous		= FALSE;
-	if (adj_n_real_mode_ticks_before_full_speed == 0){
-		HOST_TIMER_DELAY_SIZE=25000;
-		adj_instrs_per_tick = host_speed (instrs_per_tick);
-		adj_n_real_mode_ticks_before_full_speed = n_rm_instrs_before_full_speed / adj_instrs_per_tick;
-	}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 }
 
@@ -538,8 +508,7 @@ SWTMR_time_tick IFN0()
      * Give the idle detector a chance to see if we are really idle.
      */
 #ifndef NTVDM
-    /* this is done in Nt's host heartbeat */
-    IDLE_tick();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
     /*
@@ -548,15 +517,7 @@ SWTMR_time_tick IFN0()
      */
 
 #ifndef NTVDM
-    /* protect ourselves from shafting a timer-channel in midst-program
-     * ... the lock is controlled by timer_inb(),_outb() and _gate()
-     */
-
-    if (timelock == LOCKED)
-    {
-	needtick = ~0;
-	return;
-    }
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
     /* ideal time goes up by the number of timer clocks
@@ -603,7 +564,7 @@ void SWTMR_gate IFN2(io_addr, port, half_word, value)
 #ifdef  NTVDM
     host_ica_lock();
 #else
-    timelock = LOCKED;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
     emu_8253 (port, GATE_SIGNAL, value);
@@ -614,7 +575,7 @@ void SWTMR_gate IFN2(io_addr, port, half_word, value)
 #ifdef NTVDM
     host_ica_unlock();
 #else
-    checktimelock();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 }
 
@@ -624,7 +585,7 @@ void SWTMR_inb IFN2(io_addr, port, half_word *, value)
 #ifdef NTVDM
     host_ica_lock();
 #else
-    timelock = LOCKED;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 
@@ -666,7 +627,7 @@ void SWTMR_inb IFN2(io_addr, port, half_word *, value)
 #ifdef NTVDM
     host_ica_unlock();
 #else
-    checktimelock();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 }
@@ -696,7 +657,7 @@ void SWTMR_outb IFN2(io_addr, port, half_word, value)
 #ifdef NTVDM
     host_ica_unlock();
 #else
-    checktimelock();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 }
@@ -709,10 +670,7 @@ void SWTMR_outb IFN2(io_addr, port, half_word, value)
 /* --------------------------------------------------------------------------- */
 
 #ifndef NTVDM
-GLOBAL ULONG get_DOS_ticks IFN0()
-{
-	return( timers[0].Count );
-}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 
 #ifdef NTVDM
@@ -751,21 +709,7 @@ void ReinitIdealTime IFN1(struct host_timeval *, t)
 /* **************************************************************************** */
 
 #ifndef NTVDM
-/* check whether a time lock (set while application io is being serviced)
- * has blocked out an alarm signal ... call time_tick() to catch up if so
- * ... (time_tick() sets timelock = ~0, and just returns, if it sees the time
- * lock set
- */
-
-LOCAL void checktimelock IFN0()
-{
-	timelock = UNLOCKED;
-	if (needtick)
-	{
-		needtick = 0;
-		time_tick();
-	}
-}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -906,8 +850,7 @@ LOCAL void controlWordReg IFN1(half_word, cwd)
 			pcu->tc = 0;
 			pcu->tickadjust = 0;
 #ifndef NTVDM
-			pcu->microtick = 0;
-			pcu->saveCount = 0;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 			m  = (cwd & 0xe)  >> 1;
@@ -972,7 +915,7 @@ LOCAL void loadCounter IFN0()
 {
         unsigned long modulo;
 #ifndef NTVDM
-        IU32 maxback;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 	/* set counter */
@@ -1049,10 +992,7 @@ LOCAL void readCounter IFN0()
 	    countread = bin_to_bcd(countread);
 
 #else
-	if(pcu->bcd == BCD)
-		countread = bin_to_bcd(pcu->Count);
-	else
-		countread = pcu->Count;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 	pcu->latchvaluemsb = countread >> 8;
@@ -1297,9 +1237,7 @@ LOCAL void timestamp IFN0()
 	   host_GetSysTime(&LastTimeCounterZero);
 	   }
 #else
-	/* Initialise lastTicks before referencing it in updateCount() */
-	/* Makes Norton SYSINFO version 5.0 work on fast (HP) machines */
-	pcu->lastTicks = 0 ;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 	/* Go and get the time since it was activated */
 	(*pcu->getTime)(&pcu->activationTime);
@@ -1748,8 +1686,7 @@ LOCAL unsigned long clocksSinceCounterActivated IFN1(struct host_timeval *, now)
 LOCAL void updateCounter IFN0()
 {
 #ifndef NTVDM
-    unsigned long nticks;
-    struct host_timeval now;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
     unsigned long wrap;
 
@@ -1763,8 +1700,7 @@ LOCAL void updateCounter IFN0()
 #ifdef NTVDM
 		wrap = updateCount();
 #else
-		nticks = clocksSinceCounterActivated(&now);
-		updateCount(nticks, &wrap,&now);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 		if (wrap)
 			pcu->tickadjust = pcu->Count;
@@ -1789,8 +1725,7 @@ LOCAL void updateCounter IFN0()
 #ifdef NTVDM
 		wrap = updateCount();
 #else
-		nticks = clocksSinceCounterActivated(&now);
-		updateCount(nticks, &wrap,&now);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 		if (wrap)
 		{
@@ -2027,45 +1962,7 @@ void TimerEoiHook(int IrqLine, int CallCount)
 
 
 #ifndef NTVDM
-/*
- * Handle a cranked up timer where multiple interrupts are
- * required per tick. Schedule 'n' ints over a tick. Period
- * stored in quick event argument rather than in global.
- */
-LOCAL void timer_multiple_ints IFN1(long, num_ints)
-{
-	/* generate timer int */
-	timer_generate_int(1);
-
-	/* one less to do */
-	num_ints --;
-
-	/* any more arrived whilst we were q_ expiring? */
-	num_ints += more_timer_mult;
-	more_timer_mult = 0;
-
-	/* throw away ints that are going to take more than MAX_BACK_SECS
-	 * to clear up. (!!!!)
-	 */
-	if (num_ints > max_backlog)
-	{
-		num_ints = max_backlog;
-	}
-
-	/* schedule next int (if required) */
-	if (num_ints == 0)
-	{
-		active_int_event = FALSE;
-		 /* 1.193180 usecs per clock */
-		max_backlog = (1193180 * MAX_BACK_SECS) / timers[0].initialCount;
-	}
-	else	/* more work to do */
-	{
-		/* set new quick_ev off - delay determined by timer wrap rate */
-		add_q_event_t(timer_multiple_ints, timer_multiple_delay, num_ints);
-	}
-	
-}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 
@@ -2125,35 +2022,7 @@ LOCAL void issueIREQ0 IFN1(unsigned int, n)
                             TimerGenerateMultipleInterrupts(n);
                             }
 #else /* !NTVDM */
-
-
-			/* if we've got a quick event running, add to its workload */
-			if (active_int_event)
-			{
-				/* spread interrupts through system tick */
-				int_delay = SYSTEM_TICK_INTV / (n + 1);
-				if (int_delay < timer_multiple_delay)
-					timer_multiple_delay = int_delay;
-				more_timer_mult += n;
-			}
-			else
-			{
-				/* ensure multiple delay restarts at sensible speed */
-				timer_multiple_delay = SYSTEM_TICK_INTV >> 1;
-				if (n == 1)
-				{
-					timer_generate_int(1);
-				}
-				else
-				{
-					/* spread interrupts through system tick */
-					timer_generate_int(1);
-					timer_multiple_delay = SYSTEM_TICK_INTV / n;
-					active_int_event = TRUE;
-					add_q_event_t(timer_multiple_ints, timer_multiple_delay, n-1);
-				}
-			}
-
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* !NTVDM */
 #endif /* !DELAYED_INTS */
 		}
@@ -2590,8 +2459,7 @@ LOCAL void IdealTimeInit IFN0()
 #endif
 
 #ifndef NTVDM
-    getHostSysTime(&idealtime);
-	ticksPerIdealInterval = (idealInterval * TIMER_CLOCK_DENOM) / TIMER_CLOCK_NUMER;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 }
 
@@ -2605,9 +2473,7 @@ LOCAL void Timer_init IFN0()
 	timers[1].getTime = host_GetSysTime;    /* We don't really expect anyone to use timer 1 */
 	timers[2].getTime = host_GetSysTime;    /* Use real host time for timer 2 */
 #else
-	timers[0].getTime = getIdealTime;       /* Use the 'ideal' time for timer 0, ie. calls to time_tick */
-	timers[1].getTime = getHostSysTime;     /* We don't really expect anyone to use timer 1 */
-	timers[2].getTime = getHostSysTime;     /* Use real host time for timer 2 */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 }
 
@@ -2616,51 +2482,12 @@ LOCAL void counter_init IFN1(COUNTER_UNIT *, p)
 	p->state = uninit;
 	p->initialCount = 0x10000L;	/* Avoid dividing by zero in updateCount()! */
 #ifndef NTVDM
-	p->guessesPerHostTick = p->guessesSoFar = 2;		/* Handy to count from 2! */
-	p->timeFrig = ticksPerIdealInterval / p->guessesPerHostTick;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 }
 
 #if !defined (NTVDM)
-#if defined(IRET_HOOKS) && defined(GISP_CPU)
-/*(
- *======================= TimerHookAgain() ============================
- * TimerHookAgain
- *
- * Purpose
- *	This is the function that we tell the ica to call when a timer
- *	interrupt service routine IRETs.
- *
- * Input
- *	adapter_id	The adapter id for the line. (Note the caller doesn't
- *			know what this is, he's just returning something
- *			we gave him earlier).
- *
- * Outputs
- *	return	TRUE if there are more interrupts to service, FALSE otherwise.
- *
- * Description
- * 	Check if we have a delayed interrupt, if so then generate the timer int
- *	and return TRUE, else return FALSE
-)*/
-
-GLOBAL IBOOL		
-TimerHookAgain IFN1(IUM32, adapter)
-{	char scancode;
-
-	if (HostPendingTimerInt())
-	{	/* We have a host delayed interrupt, so generate a timer int. */
-		sure_note_trace0(TIMER_VERBOSE,"callback with delayed timer int.");
-		ica_hw_interrupt(ICA_MASTER,CPU_TIMER_INT, 1);
-		return(TRUE);	/* more to do */
-	}
-	else
-	{
-		return(FALSE);
-	}
-}
-
-#endif /* IRET_HOOKS && GISP_CPU */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* !NTVDM */
 
 void timer_init IFN0()
@@ -2687,8 +2514,7 @@ void timer_init IFN0()
     Timer_init();
 
 #ifndef NTVDM
-    timelock = UNLOCKED;
-    needtick = 0;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else
     RegisterEOIHook(CPU_TIMER_INT, TimerEoiHook);
 #endif
@@ -2700,27 +2526,7 @@ void timer_init IFN0()
 	host_timer_init();
 
 #if !defined(NTVDM)
-#if defined(IRET_HOOKS) && defined(GISP_CPU)
-	/*
-	 * Remove any existing hook call-back, and re-instate it afresh.
-	 * TimerHookAgain is what gets called on a timer int iret.
-	 */
-
-	Ica_enable_hooking(CPU_TIMER_INT, NULL, ICA_MASTER);
-	Ica_enable_hooking(CPU_TIMER_INT, TimerHookAgain, ICA_MASTER);
-
-	/* Host routine to reset any internal data for IRET_HOOK delayed ints. */
-	HostResetTimerInts();
-
-#endif /* IRET_HOOKS && GISP_CPU */
-
-
-	active_int_event = FALSE; /* clear any cranked timer state */
-	more_timer_mult = 0;
-
-#if defined(CPU_40_STYLE)
-        ica_iret_hook_control(ICA_MASTER, CPU_TIMER_INT, TRUE);
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* !NTVDM */
 }
 

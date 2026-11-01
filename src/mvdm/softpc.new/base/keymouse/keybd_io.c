@@ -225,7 +225,7 @@ extern word stream_io_buffer_size;
 extern sys_addr stream_io_bios_busy_sysaddr;
 
 #else
-#define FREEKBDHDW()	/* Nothing for conventional SoftPC */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 
 /*
@@ -613,23 +613,7 @@ LOCAL VOID K26 IFN0()
 
 
 #ifndef NTVDM
-
-LOCAL VOID INT15 IFN0()
-{
-	word	saveCS, saveIP;
-
-	saveCS = getCS();
-	saveIP = getIP();
-
-	setCS(int15_seg);
-	setIP(int15_off);
-
-	host_simulate();
-
-	setCS(saveCS);
-	setIP(saveIP);
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else	/* NTVDM */
 
 void INT15(void);
@@ -639,9 +623,7 @@ word sp_int15_handler_off = 0;
 #endif	/* NTVDM */
 
 #ifndef NTVDM
-#define BEEP(message)           always_trace0(message);         \
-				host_alarm(250000L);		\
-				K26A()
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else   /* NTVDM */
 /* NTVDM code size is too large, change this often used macro
  * to a function, as the call overhead is not justified
@@ -675,36 +657,7 @@ void BEEP(char *message)
 ** highly speed sensitive!
 */
 #ifndef NTVDM
-
-LOCAL VOID PutInBufferFunc IFN2(half_word, s, half_word, v)
-{
-	word	buffer_head, buffer_tail, buffer_ptr;
-
-	buffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);
-	buffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);
-	buffer_ptr = inc_buffer_ptr(/* from: */buffer_tail);
-
-	if (buffer_ptr == buffer_head) {
-		BEEP("BIOS keyboard buffer overflow");
-	}
-	else {
-		sas_store_no_check(BIOS_VAR_START + buffer_tail, v);
-		sas_store_no_check(BIOS_VAR_START + buffer_tail+1, s);
-		sas_storew_no_check(BIOS_KB_BUFFER_TAIL, buffer_ptr);
-
-		outb(0x20, 0x20);
-		setAX(0x9102);
-		INT15();
-
-		outb(KEYBA_STATUS_CMD, ENA_KBD);
-		sas_store (kb_flag_3, sas_hw_at(kb_flag_3) & ~(LC_E0 + LC_E1));
-		setIF(0);
-	}
-
-	exit_from_kbd_int();
-}
-
-
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else   /* NTVDM */
 
 
@@ -751,7 +704,7 @@ void NtPutInBuffer(half_word s, half_word v)
 /* <tur 17-Jun-93> Eurrgh; macros with embedded "return"s! */
 
 #ifndef NTVDM
-#define PUT_IN_BUFFER(s, v)		PutInBufferFunc(s,v); return
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* !NTVDM */
 
 LOCAL VOID CheckAndPutInBufferFunc IFN2(half_word, s,half_word, v)
@@ -762,7 +715,7 @@ LOCAL VOID CheckAndPutInBufferFunc IFN2(half_word, s,half_word, v)
 	}
 	else {
 #ifndef NTVDM
-		PutInBufferFunc(s, v);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else /* NTVDM */
 		NtPutInBuffer(s, v);
 #endif /* !NTVDM */
@@ -809,7 +762,7 @@ LOCAL VOID PAUSE IFN0()
 }
 
 #ifndef NTVDM
-static int re_entry_level=0;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -818,9 +771,7 @@ static int re_entry_level=0;
 LOCAL void exit_from_kbd_int IFN0()
 {
 #ifndef NTVDM
-	--re_entry_level;
-	if( re_entry_level >= 4 )
-		always_trace1("ERROR: KBD INT bad exit level %d", re_entry_level);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 	note_trace0( BIOS_KB_VERBOSE, "KBD BIOS - END" );
 	setIF( 0 );
@@ -855,10 +806,7 @@ void keyboard_int IFN0()
             }
 #endif
 #ifndef NTVDM
-	++re_entry_level;
-	if( re_entry_level > 4 ){
-		always_trace1("ERROR: KBD BIOS re-entered at level %d\n", re_entry_level-1);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 	setIF(0);
         note_trace0(BIOS_KB_VERBOSE,"KBD BIOS start");
@@ -1158,7 +1106,7 @@ label2:	/* NOT IN HOLD STATE	*/
 		if( (sas_hw_at_no_check(kb_flag) & CTL_SHIFT ) && (code == DEL_KEY) )
                 {
 #ifndef NTVDM
-                        reboot();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else
                         K26();
 #endif
@@ -1486,10 +1434,7 @@ void keyboard_io()
      case 0:
        WaitIfIdle();
 #ifndef NTVDM
-       if (!WaitKbdHdw(0)) {
-           TryKbdInt();
-           HostReleaseKbd();
-	   }
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
        break;
 
@@ -1521,312 +1466,7 @@ void keyboard_io()
 }
 
 #else
-void keyboard_io()
-{
-    /*
-     * Request to keyboard.  The AH register holds the type of request:
-     *
-     * AH == 0          Read an character from the queue - wait if no
-     *                  character available.  Return character in AL
-     *                  and the scan code in AH.
-     *
-     * AH == 1          Determine if there is a character in the queue.
-     *                  Set ZF = 0 if there is a character and return
-     *                  it in AX (but leave it in the queue).
-     *
-     * AH == 2          Return shift state in AL.
-     *
-     * For AH = 0 to 2, the value returned in AH is zero. This correction
-     * made in r2.69.
-     *
-     * NB : The order of reference/increment of buffer_head is critical to
-     *      ensure we do not upset put_in_buffer().
-     *
-     *
-     * XT-SFD BIOS Extended functions:
-     *
-     * AH == 5          Place ASCII char/scan code pair (CL / CH)
-     *                  into tail of keyboard buffer. Return 0 in
-     *                  AL if successful, 1 if buffer already full.
-     *
-     * AH == 0x10       Extended read for enhanced keyboard.
-     *
-     * AH == 0x11       Extended function 1 for enhanced keyboard.
-     *
-     * AH == 0x12       Extended shift status. AL contains kb_flag,
-     *                  AH has bits for left/right Alt and Ctrl keys
-     *                  from kb_flag_1 and kb_flag_3.
-     */
-    word 	buffer_head,	/* local copy of BIOS data area variable*/
-    		buffer_tail,	/* local copy of BIOS data area variable*/
-		buffer_ptr;	/* pointer into BIOS keyboard buffer    */
-
-#define INT16H_DEC  0x12    /* AH decremented by this if invalid command */
-
-    word 	CS_save,	/* CS before recursive CPU call		*/
-    		IP_save;	/* IP before recursive CPU call		*/
-    half_word	data,		/* byte conyaining typamatic data	*/
-		status1,	/* temp variables used for storing	*/
-		status2;	/* status in funtion 0x12		*/
-
-    INT		func_index;     /* func_index == AH */
-
-
-    setZF(0);
-    func_index = (INT)getAH();
-
-    note_trace1( BIOS_KB_VERBOSE, "Keyboard BIOS func 0x%x", func_index);
-
-
-    switch (func_index) {
-
-    case  0x00:			/* Read next char in Kbd buffer */
-
-	/*
-	 * The AT emulation of the BIOS uses a recursive CPU to handle
-	 * the HW interrrupts, so there is no need to set the Zero Flag
-	 * and return to our CPU (see original xt version )
-	 */
-        buffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);
-        buffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);
-
-	if (buffer_tail == buffer_head)
-	{
-		IDLE_waitio();
-
-		setAX(0x9002);
-		INT15();	/* call int 15h  - wait function	*/
-	}
-
-	do
-	{
-		check_indicators(0);	/* see if LED's need updating	*/
-
-		buffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);
-		buffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);
-
-		if (buffer_tail == buffer_head)
-		{
-			CS_save = getCS();
-			IP_save = getIP();
-
-			/* wait for character in buffer		*/
-
-        		do {
-				IDLE_poll();
-
-	       			setCS(rcpu_poll_segment);
-	       			setIP(rcpu_poll_offset);
-                                host_simulate();
-				buffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);
-				buffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);
-
-		       	} while (buffer_tail == buffer_head);
-
-
-		       	setCS(CS_save);
-		       	setIP(IP_save);
-		}
-
-	       	setAX(sas_w_at_no_check(BIOS_VAR_START + buffer_head));
-
-        	buffer_head = inc_buffer_ptr(/* from: */buffer_head);
-	        sas_storew_no_check(BIOS_KB_BUFFER_HEAD, buffer_head);
-
-		translate_std();	/*translate scan_code pairs			*/
-	}
-	while (getCF());		/* if CF set throw code away and start again	*/
-
-	setIF(1);
-
-	IDLE_init();
-
-	break;
-
-
-    case 0x01:				/* Set ZF to reflect char availability in Kbd buffer */
-
-	do
-	{
-		check_indicators(1);		/* see if LED's need updating		*/
-						/* and issue an   out 20h,20h		*/
-
-		buffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);
-		buffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);
-
-	       	setAX(sas_w_at_no_check(BIOS_VAR_START + buffer_head));
-
-		if (buffer_tail == buffer_head)
-		{
-			/* buffer empty - set flag and return */
-			IDLE_poll();
-
-			setZF(1);
-			break;
-		}
-		else
-			IDLE_init();
-
-		translate_std();	/* translate scan_code pairs, returns CF if throwaway */
-		if(getCF())
-		{
-			/* throw code away by incrementing pointer	*/
-	        	buffer_head = inc_buffer_ptr(/* from: */buffer_head);
-		        sas_storew_no_check(BIOS_KB_BUFFER_HEAD, buffer_head);
-		}
-	}
-	while (getCF());		/* if CF set -  start again	*/
-	setIF(1);
-
-	break;
-
-
-    case 0x02:				/* AL := Current Shift Status (really "kb_flag") */
-
-        setAH(0);
-        setAL(sas_hw_at_no_check(kb_flag));
-
-	break;
-
-
-    case 0x03:				/* Alter typematic rate */
-
-    	/* check for correct values in registers		*/
-    	if( (getAL() == 5) && !(getBX() & 0xfce0) )
-    	{
-		note_trace1(BIOS_KB_VERBOSE, "\talter typematic rate (BX %#x)\n", getBX());
-
-    		send_data(KB_TYPA_RD);
-    		data = (getBH() << 5) | getBL();
-    		send_data(data);
-    	}
-
-	break;
-
-
-    case 0x05:				/* Place ASCII + ScanCode in Kbd Buffer */
-
-	buffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);
-	buffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);
-
-        /*
-         * check for sufficient space - if no set AL
-         */
-
-        buffer_ptr = inc_buffer_ptr(/*from:*/buffer_tail);
-
-        if( buffer_head == buffer_ptr )
-             setAL( 1 );
-        else {
-            /*
-    	     * load CX into buffer and update buffer_tail
-    	     */
-    	    sas_storew_no_check(BIOS_VAR_START + buffer_tail, getCX() );
-    	    sas_storew_no_check(BIOS_KB_BUFFER_TAIL, buffer_ptr);
-            setAL( 0 );
-        }
-        setAH( 0 );
-	setIF(1);
-
-	break;
-
-
-    case 0x10:				/* Extended ASCII Read */
-
-	buffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);
-	buffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);
-
-	if (buffer_tail == buffer_head)
-	{
-		IDLE_waitio();
-
-		setAX(0x9002);
-		INT15();	/* call int 15h  - wait function */
-	}
-	check_indicators(0);	/* see if LED's need updating */
-
-	buffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);
-	buffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);
-
-	if (buffer_tail == buffer_head)
-	{
-		CS_save = getCS();
-		IP_save = getIP();
-
-		/* wait for character in buffer		*/
-        	while (buffer_tail == buffer_head)
-       		{
-			IDLE_poll();
-
-       			setCS(rcpu_poll_segment);
-       			setIP(rcpu_poll_offset);
-                        host_simulate();
-			buffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);
-			buffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);
-	       	}
-
-		IDLE_init();
-
-	       	setCS(CS_save);
-	       	setIP(IP_save);
-	}
-
-	setAX(sas_w_at_no_check(BIOS_VAR_START + buffer_head));	/* Pickup the "current" scancode/char pair */
-
-       	buffer_head = inc_buffer_ptr(/* from: */buffer_head);
-        sas_storew_no_check(BIOS_KB_BUFFER_HEAD, buffer_head);
-
-	translate_ext();		/* translate scan_code pairs	*/
-
-	setIF(1);
-	break;
-
-
-    case 0x11:				/* Extended ASCII Status	*/
-
-	check_indicators(1);		/* see if LED's need updating	*/
-					/* and issue an   out 20h,20h	*/
-
-	buffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);
-	buffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);
-
-	setAX(sas_w_at_no_check(BIOS_VAR_START + buffer_head));
-
-	if (buffer_tail == buffer_head)	/* No keys pressed */
-	{
-		setZF(1);
-		IDLE_poll();
-	}
-	else 				/* Keystrokes available! */
-	{
-		translate_ext();	/* translate scan_code pairs	*/
-		IDLE_init();
-	}
-
-	setIF(1);
-	break;
-
-
-    case 0x12:				/* Extended Shift Status */
-
-        status1 = sas_hw_at_no_check(kb_flag_1) & SYS_SHIFT;	/* only leave SYS KEY	*/
-        status1 <<= 5;						/* move to bit 7	*/
-        status2 = sas_hw_at_no_check(kb_flag_1) & 0x73;		/* remove SYS_SHIFT, HOLD,
-    			 					   STATE and INS_SHIFT  */
-        status1 |= status2;					/* merge		*/
-        status2 = sas_hw_at_no_check(kb_flag_3) & 0x0C;		/* remove LC_E0 & LC_E1 */
-        status1 |= status2;					/* merge		*/
-        setAH( status1 );
-        setAL( sas_hw_at_no_check(kb_flag) );
-
-	break;
-
-
-    default:
-        setAH((func_index - INT16H_DEC));
-	break;
-    }
-}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 #ifdef SEGMENTATION

@@ -28,7 +28,7 @@ extern q_ev_handle add_q_event_i IPT3(Q_CALLBACK_FN, func, unsigned long, time, 
 extern q_ev_handle add_q_event_t IPT3(Q_CALLBACK_FN, func, unsigned long, time, long, param);
 
 #ifndef NTVDM
-extern q_ev_handle add_q_ev_int_action IPT5(unsigned long, time, Q_CALLBACK_FN, func, IU32, adapter, IU32, line, IU32, param);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 #ifndef CPU_40_STYLE
@@ -41,20 +41,5 @@ extern IU32 calc_q_time_for_inst IPT1(IU32, inst);
 #endif	/* CPU_40_STYLE */
 
 #ifndef NTVDM
-#ifdef CPU_40_STYLE
-
-/* data structure used to control add_q_ev_int_action requests */
-typedef struct aqeia_req {
-	IS32 ident;		/* queue identifier, 0 - unused */
-	Q_CALLBACK_FN func;
-	IU32 adapter;
-	IU32 line;
-	IU32 param;
-	struct aqeia_req *next;
-} Q_INT_ACT_REQ, *Q_INT_ACT_REQ_PTR;
-
-#define Q_INT_ACT_NULL	((Q_INT_ACT_REQ_PTR)0)
-
-#endif  /* CPU_40_STYLE */
-
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif  /* !NTVDM */

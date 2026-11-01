@@ -93,9 +93,7 @@ GLOBAL char **pargv;	/* Pointer to argv		*/
 GLOBAL int *pargc;	/* Pointer to argc		*/
 
 #ifndef NTVDM
-#ifndef ProcCommonCommLineArgs
-extern VOID ProcCommonCommLineArgs IPT2(LONG, argc, CHAR, *argv[]);
-#endif /* ProcCommonCommLineArgs */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 
 /* Does this host need to have a different entry point ? */
@@ -151,7 +149,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 #endif
 
 #ifndef NTVDM
-  ProcCommonCommLineArgs(argc,argv);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
   host_applInit(argc,argv);	/* recommended home is host/xxxx_reset.c */
 

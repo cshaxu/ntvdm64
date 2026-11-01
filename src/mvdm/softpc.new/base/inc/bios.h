@@ -338,14 +338,14 @@ extern void SoftWindowsTerm IPT0();
 #ifdef ANSI
 extern void host_reset(void);
 #ifndef NTVDM
-extern void reboot(void);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* ! NTVDM */
 extern void display_string(char *);
 extern void clear_string(void);
 #else
 extern void host_reset();
 #ifndef NTVDM
-extern void reboot();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* ! NTVDM */
 extern void display_string();
 extern void clear_string();

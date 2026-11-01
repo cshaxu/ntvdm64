@@ -669,8 +669,7 @@ void fl_disk_parms IFN1(int, drive)
 	if (    (equip_flag.bits.diskette_present == 1)
 	     && (drive < number_of_floppy))
 #else
-	if (    (equip_flag.bits.diskette_present == 1)
-	     && (drive < MAX_FLOPPY))
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 	{
 
@@ -1046,8 +1045,7 @@ void fl_set_media IFN1(int, drive)
 	sys_addr dt_start = dr_type_addr;
 	sys_addr dt_end = dr_type_addr + DR_CNT * DR_SIZE_OF_ENTRY;
 #else
-	sys_addr dt_start = DR_TYPE_ADDR;
-	sys_addr dt_end = DR_TYPE_ADDR + DR_CNT * DR_SIZE_OF_ENTRY;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 	sys_addr md_table;
 
@@ -1194,10 +1192,7 @@ LOCAL dr_type_check IFN3(half_word, drive_type, word *, seg_ptr, word *, off_ptr
 	dt_start = dr_type_addr;
 	dt_end = dr_type_addr + DR_CNT * DR_SIZE_OF_ENTRY;
 #else
-	*seg_ptr = DISKETTE_IO_1_SEGMENT;
-
-	dt_start = DR_TYPE_ADDR;
-	dt_end = DR_TYPE_ADDR + DR_CNT * DR_SIZE_OF_ENTRY;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif  /* NTVDM */
 
 	while (dt_start < dt_end)
@@ -1254,7 +1249,7 @@ LOCAL void translate_new IFN1(int, drive)
 #ifdef NTVDM
 	if (high_density(drive) && (drive < number_of_floppy))
 #else
-	if (high_density(drive) && (drive < MAX_FLOPPY))
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 	{
 		sas_load(FDD_STATUS+drive, &disk_state);
@@ -1294,7 +1289,7 @@ void translate_old IFN1(int, drive)
 #ifdef NTVDM
 	if (high_density(drive) && (drive < number_of_floppy) && (disk_state != 0))
 #else
-	if (high_density(drive) && (drive < MAX_FLOPPY) && (disk_state != 0))
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif  /* NTVDM */
 
 	{
@@ -1461,8 +1456,7 @@ LOCAL void rd_wr_vf IFN3(int, drive, FDC_CMD_BLOCK *, fcbp, half_word, dma_type)
 				dt_start = dr_type_addr;
 				dt_end = dr_type_addr + DR_CNT * DR_SIZE_OF_ENTRY;
 #else
-				dt_start = DR_TYPE_ADDR;
-				dt_end = DR_TYPE_ADDR + DR_CNT * DR_SIZE_OF_ENTRY;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 				while (dt_start < dt_end)
 				{
@@ -1502,11 +1496,7 @@ LOCAL void rd_wr_vf IFN3(int, drive, FDC_CMD_BLOCK *, fcbp, half_word, dma_type)
 					else
 						md_offset += MD_TBL3_OFFSET;
 #else
-					md_segment = DISKETTE_IO_1_SEGMENT;
-					if ((disk_state & DC_80_TRACK) == 0)
-						md_offset = MD_TBL1_OFFSET;
-					else
-						md_offset = MD_TBL3_OFFSET;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif  /* NTVDM */
 						
 				}
@@ -1524,11 +1514,7 @@ LOCAL void rd_wr_vf IFN3(int, drive, FDC_CMD_BLOCK *, fcbp, half_word, dma_type)
 				else
 					md_offset += MD_TBL3_OFFSET;
 #else
-				md_segment = DISKETTE_IO_1_SEGMENT;
-				if ((disk_state & DC_80_TRACK) == 0)
-					md_offset = MD_TBL1_OFFSET;
-				else
-					md_offset = MD_TBL3_OFFSET;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 			}
 		}
@@ -1545,11 +1531,7 @@ LOCAL void rd_wr_vf IFN3(int, drive, FDC_CMD_BLOCK *, fcbp, half_word, dma_type)
 			else
 				md_offset += MD_TBL3_OFFSET;
 #else
-			md_segment = DISKETTE_IO_1_SEGMENT;
-			if ((disk_state & DC_80_TRACK) == 0)
-				md_offset = MD_TBL1_OFFSET;
-			else
-				md_offset = MD_TBL3_OFFSET;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 		}
 
@@ -1615,64 +1597,7 @@ LOCAL void setup_state IFN1(int, drive)
 	{
 		sas_load(FDD_STATUS+drive, &disk_state);
 #ifndef NTVDM
-		if ((disk_state & FS_MEDIA_DET) == 0)
-		{
-
-			/*
-			 *	Set up first and last data rates to
-			 *	try
-			 */
-			if (    ((disk_state & DC_DETERMINED) != 0)
-			     && ((disk_state & DC_MULTI_RATE) == 0) )
-			{
-				/* not a multi-rate drive */
-				start_rate = end_rate = RS_250;
-			}
-			else
-			{
-				/* multi-rate drive */
-/*
- * The real BIOS always sets up start_rate=500 and end_rate=300
- * If we attempt this then some bug (not yet found) will cause the following
- * sequence to fail (5.25") low density read followed by high density read.
- * This gives rate transitions 500 -> 250 -> 300 -> 500 ...
- * Read the drive type from CMOS and adjust the start and end rates to match.
- * The CMOS drive type is set up during cmos_post() by calling config_inquire().
-*/
-if( cmos_type( drive, &drive_type ) != FAILURE ){
-	switch( drive_type ){
-		case GFI_DRIVE_TYPE_360:
-		case GFI_DRIVE_TYPE_12:
-			start_rate = RS_300;	/* different to Real BIOS */
-			end_rate   = RS_500;
-			break;
-		case GFI_DRIVE_TYPE_720:
-		case GFI_DRIVE_TYPE_144:
-			start_rate = RS_500;	/* same as Real BIOS */
-			end_rate   = RS_300;
-			break;
-/*
- * We don't know what the real BIOS does here.  These values work
- * fine.  Any code in rd_wr_vf that gets confused will drop out to
- * default high density values if neither of the following two
- * rates work.
- */
-
-		case GFI_DRIVE_TYPE_288:
-			start_rate = RS_1000;
-			end_rate   = RS_300;
-			break;
-		default:
-			always_trace1( "setup_state(): Bad Drive from CMOS:%x",
-			                drive_type );
-			break;
-	}
-}else{
-	always_trace0( "setup_state(): CMOS read failure: Drive Type" );
-}
-
-                        }
-
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else /* NTVDM */
 
 		if ((disk_state & FS_MEDIA_DET) == 0)
@@ -2007,13 +1932,7 @@ LOCAL fmtdma_set IFN0()
 	 */
 
 #ifndef NTVDM
-	/* we don't have to worry about this on NT */
-	outb(DMA_WRITE_ONE_MASK_BIT, DMA_DISKETTE_CHANNEL);
-	if (((long)dma_address.words.low + (long)byte_count.X) > 0xffff)
-	{
-		sas_store(FLOPPY_STATUS, FS_DMA_BOUNDARY);
-		return(FAILURE);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 	return(SUCCESS);
@@ -2474,8 +2393,7 @@ LOCAL void motor_on IFN1(int, drive)
 		setCS(int15_seg);
 		setIP(int15_off);
 #else
-		setCS(RCPU_INT15_SEGMENT);
-		setIP(RCPU_INT15_OFFSET);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 
 		host_simulate();
@@ -2530,8 +2448,7 @@ LOCAL void motor_on IFN1(int, drive)
 		setCS(int15_seg);
 		setIP(int15_off);
 #else
-		setCS(RCPU_INT15_SEGMENT);
-		setIP(RCPU_INT15_OFFSET);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 
 		host_simulate();
@@ -2686,8 +2603,7 @@ LOCAL void hd_wait IFN1(int, drive)
 	setCS(int15_seg);
 	setIP(int15_off);
 #else
-	setCS(RCPU_INT15_SEGMENT);
-	setIP(RCPU_INT15_OFFSET);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 
 	host_simulate();
@@ -2930,8 +2846,7 @@ LOCAL wait_int IFN0()
 	setCS(int15_seg);
 	setIP(int15_off);
 #else
-	setCS(RCPU_INT15_SEGMENT);
-	setIP(RCPU_INT15_OFFSET);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif  /* NTVDM */
 
 	host_simulate();
@@ -2952,8 +2867,7 @@ LOCAL wait_int IFN0()
 	setCS(wait_int_seg);
 	setIP(wait_int_off);
 #else
-	setCS(RCPU_WAIT_INT_SEGMENT);
-	setIP(RCPU_WAIT_INT_OFFSET);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 
 	host_simulate();

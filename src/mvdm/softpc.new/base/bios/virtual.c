@@ -802,7 +802,7 @@ virtual_device_trap IFN0()
       ClearInstanceDataMarking();
 
 #ifndef NTVDM
-      host_mswin_disable();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* ! NTVDM */
 
       /* Clear our version number in case we are changing disks */

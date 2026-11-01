@@ -189,8 +189,7 @@ IMPORT VOID PrioWaitIfIdle(half_word);
 void idle_kybd_poll();
 void idle_tick();
 #else
-        LOCAL void idle_kybd_poll();
-        LOCAL void idle_tick();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 
@@ -200,17 +199,7 @@ void idle_tick();
    [5.2.1 INTERNAL DATA DEFINITIONS                                     */
 
 #ifndef NTVDM
-int idle_no_video;
-int idle_no_comlpt;
-int idle_no_disk;
-
-static int i_counter = 0;
-static int nCharPollsPerTick = 0;
-static int ienabled = 0;
-static int minConsecutiveTicks = 12;
-static int minFailedPolls = 10;
-
-
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else
 #include <vdm.h>
   
@@ -247,39 +236,7 @@ PURPOSE         :       called from keyboard BIOS as result of
 
 
 #ifndef NTVDM
-#ifdef SMEG
-#include "smeg_head.h"
-
-GLOBAL LONG dummy_long_1, dummy_long_2;
-GLOBAL BOOL system_has_idled = FALSE;
-#endif
-
-
-LOCAL void my_host_release_timeslice()
-{
-#ifdef SMEG
-    /*
-     * Set marker and waste time (SIGPROF screws up
-     * host_release_timeslice)
-     */
-
-    LONG i;
-
-    smeg_set(SMEG_IN_IDLE);
-
-    system_has_idled = TRUE;
-
-    for (i = 0; i < 100000; i++)
-		dummy_long_1 += dummy_long_2;
-
-    smeg_clear(SMEG_IN_IDLE);
-#else
-    host_release_timeslice();
-#endif
-
-    /* re-count polls in next tick */
-    nCharPollsPerTick = 0;
-}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif  /* NTVDM */
 
 #ifdef NTVDM
@@ -316,20 +273,7 @@ void idle_kybd_poll(void)
 	nCharPollsPerTick++;
 }
 #else
-LOCAL void idle_kybd_poll()
-{
-	/* go idle if enough consecutive PC timer interrupts
-	 * have elapsed during which time unsuccessful polling has
-	 * occurred at a large enough rate for each tick.
-	 */
-	if (i_counter >= minConsecutiveTicks)
-	{
-		my_host_release_timeslice();
-	}
-
-	/* another unsuccessful poll ! */
-	nCharPollsPerTick++;
-}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -388,30 +332,7 @@ void idle_tick(void)
 }
 
 #else  /* NTVDM */
-LOCAL void idle_tick()
-{
-	if (idle_no_video && idle_no_disk && idle_no_comlpt)
-	{
-		/* no graphics or comms/lpt activity has occurred...
-		 * see whether enough polling of kybd has occurred
-		 * to kick off the idling counter.
-		 */
-		if (nCharPollsPerTick >= minFailedPolls)
-			i_counter++;
-	}
-	else
-	{
-		i_counter = 0;
-	}
-
-	/* set flags and zero poll counter for next time period
-	 */
-	idle_no_video = 1;
-	idle_no_disk = 1;
-	idle_no_comlpt = 1;
-
-	nCharPollsPerTick = 0;
-}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -428,8 +349,7 @@ void idetect (event)
 int event;
 {
 #ifndef NTVDM
-	if (!ienabled)
-            return;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 	switch (event)
@@ -444,7 +364,7 @@ int event;
                 PrioWaitIfIdle(10);
 		break;
 #else
-		my_host_release_timeslice();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 		/* fall thru to idle init */
 
@@ -455,9 +375,7 @@ int event;
 #ifdef NTVDM
                 IdleNoActivity = 1;
 #else
-		idle_no_video = 1;
-		idle_no_disk = 1;
-		idle_no_comlpt = 1;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 		break;
 
@@ -496,6 +414,6 @@ int flag;
 	ienabled = flag;
 #endif /* PIG */
 #else
-	ienabled = flag;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif  /* NTVDM */
 }

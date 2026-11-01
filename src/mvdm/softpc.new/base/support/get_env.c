@@ -36,7 +36,7 @@
 #endif
 
 #else
-LOCAL IBOOL verboseGetenv;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 #ifndef NTVDM
@@ -85,8 +85,7 @@ GLOBAL IBOOL IBOOLgetenv IFN2(char *, name, IBOOL, default_value)
         IBOOL value;
 
 #ifndef NTVDM
-        char *how = "Defaulting";
-        setupVerboseGetenv();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 	value = default_value;
@@ -96,25 +95,13 @@ GLOBAL IBOOL IBOOLgetenv IFN2(char *, name, IBOOL, default_value)
 #ifdef NTVDM
             value = _stricmp(env, "TRUE") == 0;
 #else
-                if (strcmp(env, "FALSE") == 0)
-			value = FALSE;
-		else if (strcmp(env, "TRUE") == 0)
-                        value = TRUE;
-
-		else
-                        badGetenv(name, "IBOOL", env);
-
-                how = "Setting";
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
         }
 
 #ifndef NTVDM
-	if (verboseGetenv)
-	{
-		printf("%10s %25s IBOOL value \"%s\"\n",
-		       how, name, value ? "TRUE": "FALSE");
-        }
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 	return (value);
@@ -127,8 +114,7 @@ GLOBAL ISM32 ISM32getenv IFN2(char *, name, ISM32, default_value)
         ISM32 value;
 
 #ifndef NTVDM
-        char *how = "Defaulting";
-        setupVerboseGetenv();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 	value = default_value;
@@ -139,15 +125,12 @@ GLOBAL ISM32 ISM32getenv IFN2(char *, name, ISM32, default_value)
 		if (ptr == env)	/* cannot do conversion */
                         value = default_value;
 #ifndef NTVDM
-                how = "Setting";
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
         }
 
 #ifndef NTVDM
-	if (verboseGetenv)
-	{
-		printf("%10s %25s ISM32 value \"%d\"\n", how, name, value);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 	return (value);
 }
@@ -159,8 +142,7 @@ GLOBAL char *STRINGgetenv IFN2(char *, name, char *, default_value)
         char *value;
 
 #ifndef NTVDM
-        char *how = "Defaulting";
-        setupVerboseGetenv();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 	value = default_value;
@@ -169,18 +151,12 @@ GLOBAL char *STRINGgetenv IFN2(char *, name, char *, default_value)
 	{
                 value = env;
 #ifndef NTVDM
-                how = "Setting";
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
         }
 
 #ifndef NTVDM
-	if (verboseGetenv)
-	{
-		if (value)
-			printf("%10s %25s char* value \"%s\"\n", how, name, value);
-		else
-			printf("%10s %25s char* with no value\n", how, name, value);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 	return (value);
 }

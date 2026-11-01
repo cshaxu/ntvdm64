@@ -101,7 +101,7 @@ void terminate()
 	gvi_term();	/* close down the video adaptor */
 
 #ifndef NTVDM
-	host_timer_shutdown(); /* Stop the timer */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 #ifdef LIM

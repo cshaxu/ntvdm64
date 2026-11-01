@@ -170,9 +170,7 @@ half_word target_AR;
 			sas_move_words_forward ( source_base, target_base, byte_count >> 1);
 			xmsEnableA20Wrapping();
 #else
-			sas_disable_20_bit_wrapping();
-			sas_move_words_forward ( source_base, target_base, byte_count >> 1);
-			sas_enable_20_bit_wrapping();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 		}
 		else

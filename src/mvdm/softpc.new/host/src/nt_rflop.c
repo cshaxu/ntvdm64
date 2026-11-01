@@ -362,36 +362,7 @@ GLOBAL SHORT
 host_gfi_rdiskette_valid IFN3(UTINY,hostID,ConfigValues *,vals,CHAR *,err)
 {
 #ifndef NTVDM
-	UTINY           cmos_byte;
-	UTINY drive 	= hostID - C_FLOPPY_A_DEVICE;
-	FLP flp 	= &floppy_data[drive];
-
-	if(!strcmp(vals->string,""))
-		return(C_CONFIG_OP_OK);
-
-	strcpy(flp->device_name, host_expand_environment_vars(vals->string));
-
-	if(!host_validate_pathname(flp->device_name))
-	{
-		strcpy(err, host_strerror(errno));
-		flp->device_name[0] = '\0';
-		return( EG_MISSING_FILE );
-	}
-	if(!host_file_is_char_dev(flp->device_name))
-	{
-		flp->device_name[0] = '\0';
-		return( EG_NOT_CHAR_DEV );
-	}
-
-	/* Check the CMOS RAM values */
-	cmos_read_byte(CMOS_DISKETTE, &cmos_byte);
-	if (drive == 0)
-		cmos_byte >>= 4;
-
-	cmos_byte &= 0xf;       /* compare nibble value only */
-	flp->drive_type = host_rflop_drive_type(drive);
-	if (cmos_byte != flp->drive_type)
-		vals->rebootReqd = TRUE;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 	return(C_CONFIG_OP_OK);
 }
@@ -402,12 +373,7 @@ GLOBAL VOID
 host_gfi_rdiskette_change IFN2(UTINY, hostID, BOOL, apply)
 {
 #ifndef NTVDM
-	FLP flp = &floppy_data[hostID - C_FLOPPY_A_DEVICE];
-
-	if (apply) 
-	{
-		nt_gfi_rdiskette_term(flp);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 }
 

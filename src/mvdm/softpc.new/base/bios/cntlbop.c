@@ -79,7 +79,7 @@ static control_bop_array base_bop_table[] =
      2, D_kyhot2,            /* Rock the screen         */
 #endif /* DUMB_TERMINAL && !NO_SERIAL_UIF */
 #ifndef NTVDM
-     1,	exitswin,
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
      0,	NULL
 };

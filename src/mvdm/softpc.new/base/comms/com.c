@@ -124,7 +124,7 @@ static struct ADAPTER_STATE
 #ifdef NTVDM
 #define MODEM_STATE_CHANGE()	asp->modem_status_changed = TRUE;
 #else
-#define MODEM_STATE_CHANGE()
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 
@@ -259,7 +259,7 @@ static void clear_interrupt IPT1(struct ADAPTER_STATE *, asp);
 static void com_flush_input IPT1(int, adapter);
 static void com_send_not_finished IPT1(int, adapter);
 #ifndef NTVDM
-static void do_wait_on_send IPT1(long, adapter);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 void   com_inb IPT2(io_addr, port, half_word *, value);
 void   com_outb IPT2(io_addr, port, half_word, value);
@@ -526,15 +526,7 @@ static void com_send_not_finished IFN1(int, adapter)
 
 
 #ifndef NTVDM
-static void do_wait_on_send IFN1(long, adapter)
-{
-	extern	void	host_com_send_delay_done IPT2(long, p1, int, p2);
-	struct ADAPTER_STATE *asp;
-
-	asp= &adapter_state[adapter];
-	set_xmit_char_status(asp);
-	host_com_send_delay_done(adapter, TX_delay[asp->com_baud_ind]);
-}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 
@@ -559,11 +551,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 			 * Read of rx buffer
 			 */
 #ifndef NTVDM
-			if (!(asp->had_first_read))
-			{
-				com_flush_input(adapter);
-				asp->had_first_read=TRUE;
-			}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else /* NTVDM is defined */
             //Flushing on first read removes characters from
             //the communications system that are needed !!!!
@@ -749,26 +737,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 	case RS232_MSR:
 
 #ifndef NTVDM
-		if (asp->loopback_state == OFF)
-		{
-                com_modem_change(adapter);
-		}
-		else
-		{
-			asp->modem_status_reg.bits.CTS = asp->modem_control_reg.bits.RTS;
-			asp->modem_status_reg.bits.DSR = asp->modem_control_reg.bits.DTR;
-			asp->modem_status_reg.bits.RI = asp->modem_control_reg.bits.OUT1;
-			asp->modem_status_reg.bits.RLSD = asp->modem_control_reg.bits.OUT2;
-		}
-		*value = asp->modem_status_reg.all;
-		asp->modem_status_reg.bits.delta_CTS = 0;
-		asp->modem_status_reg.bits.delta_DSR = 0;
-		asp->modem_status_reg.bits.delta_RLSD = 0;
-		asp->modem_status_reg.bits.TERI = 0;
-		asp->modem_status_interrupt_state = OFF;
-
-		host_com_msr_callback (adapter, asp->modem_status_reg.all);
-		clear_interrupt(asp);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else
 		if(!asp->modem_status_changed && asp->loopback_state == OFF)
 		{
@@ -901,7 +870,7 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		{
 			asp->divisor_latch.byte.LSByte = value;
 #ifndef NTVDM
-			set_baud_rate(adapter);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 		}
 #ifdef SHORT_TRACE
@@ -961,7 +930,7 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		{
 			asp->divisor_latch.byte.MSByte = value;
 #ifndef NTVDM
-			set_baud_rate(adapter);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 		}
 #ifdef SHORT_TRACE
@@ -1278,21 +1247,7 @@ void com_recv_char(int adapter)
 #endif
 
 #else /* NTVDM */
-
-void com_recv_char IFN1(int, adapter)
-{
-	/*
-	 * Character available on input device; process character if adapter
-	 * is ready to receive it
-	 */
-
-	/* Check adapter not already in critical region */
-	if (!is_com_critical(adapter))
-	{
-		com_critical_start(adapter);
-		recv_char((long)adapter);
-	}
-}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 
 /*
@@ -1739,7 +1694,7 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 	if (newLCR.bits.parity_enabled == PARITYENABLE_OFF)
 #else
-	if (newLCR.bits.parity_enabled == PARITY_OFF)
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 	{
 		newParity = HOST_COM_PARITY_NONE;
@@ -1749,7 +1704,7 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 		newParity = newLCR.bits.even_parity == EVENPARITY_ODD ?
 #else
-		newParity = newLCR.bits.even_parity == PARITY_ODD ?
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 			HOST_COM_PARITY_MARK : HOST_COM_PARITY_SPACE;
 	}
@@ -1758,7 +1713,7 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 		newParity = newLCR.bits.even_parity == EVENPARITY_ODD ?
 #else
-		newParity = newLCR.bits.even_parity == PARITY_ODD ?
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 			HOST_COM_PARITY_ODD : HOST_COM_PARITY_EVEN;
 	}
@@ -1769,7 +1724,7 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 	if (asp->line_control_reg.bits.parity_enabled == PARITYENABLE_OFF)
 #else
-	if (asp->line_control_reg.bits.parity_enabled == PARITY_OFF)
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 	{
 		parity = HOST_COM_PARITY_NONE;
@@ -1779,7 +1734,7 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 		parity = asp->line_control_reg.bits.even_parity == EVENPARITY_ODD ?
 #else
-		parity = asp->line_control_reg.bits.even_parity == PARITY_ODD ?
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 			HOST_COM_PARITY_MARK : HOST_COM_PARITY_SPACE;
 	}
@@ -1788,7 +1743,7 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 		parity = asp->line_control_reg.bits.even_parity == EVENPARITY_ODD ?
 #else
-		parity = asp->line_control_reg.bits.even_parity == PARITY_ODD ?
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 			HOST_COM_PARITY_ODD : HOST_COM_PARITY_EVEN;
 	}
@@ -2275,8 +2230,7 @@ GLOBAL VOID com_init IFN1(int, adapter)
             io_define_outb(com_adaptor[adapter],VDMForWOW ? wow_com_outb: com_outb);
         }
 #else
-	io_define_inb(com_adaptor[adapter], com_inb);
-	io_define_outb(com_adaptor[adapter], com_outb);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
  
 	for(i = port_start[adapter]; i <= port_end[adapter]; i++)
@@ -2292,8 +2246,7 @@ GLOBAL VOID com_init IFN1(int, adapter)
 	com_reset(adapter);
 
 #ifndef NTVDM
-	/* Should we enable TX pacing ? */
-	tx_pacing_enabled = host_getenv("TX_PACING_ENABLED") ? TRUE : FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else /* not NTVDM */
 	host_com_disable_open(adapter,FALSE);
 	host_com_unlock(adapter);

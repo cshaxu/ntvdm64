@@ -53,75 +53,7 @@ AMENDMENTS	:
 #include "rtc_bios.h"
 
 #ifndef NTVDM
-/*
-=========================================================================
-
-FUNCTION	: set_tod
-
-PURPOSE		: Reads the time from the CMOS and sets the timer
-		data area in the BIOS
-
-RETURNED STATUS	: None
-
-DESCRIPTION	:
-
-
-=======================================================================
-*/
-#define BCD_TO_BIN( n )		((n & 0x0f) + (((n >> 4) & 0x0f) * 10))
-
-void set_tod()
-{
-	half_word	value;		/* time value read from CMOS	*/
-	DOUBLE_TIME	timer_tics;	/* time converted to ticks	*/
-	double_word	tics_temp;	/* prevent floating point code  */
-	
-	/* set data area to 0 in case of error return	*/
-	sas_storew(TIMER_LOW, 0);
-	sas_storew(TIMER_HIGH, 0);
-	sas_store(TIMER_OVFL, 0);
-	
-	/* read seconds	*/
-	value = cmos_read( CMOS_SECONDS + NMI_DISABLE );
-	if( value > 0x59)
-	{
-		value = cmos_read( CMOS_DIAG + NMI_DISABLE );
-		cmos_write( CMOS_DIAG + NMI_DISABLE, (value | CMOS_CLK_FAIL) );
-		return;
-	}
-	tics_temp = BCD_TO_BIN( value ) * 73;	/* was 18.25 */
-	tics_temp /= 4;
-	timer_tics.total = tics_temp;
-	
-	/* read minutes	*/
-	value = cmos_read( CMOS_MINUTES + NMI_DISABLE );
-	if( value > 0x59)
-	{
-		value = cmos_read( CMOS_DIAG + NMI_DISABLE );
-		cmos_write( CMOS_DIAG + NMI_DISABLE, (value | CMOS_CLK_FAIL) );
-		return;
-	}
-	tics_temp = BCD_TO_BIN( value ) * 2185;	/* was 1092.5 */
-	tics_temp /= 2;
-	timer_tics.total += tics_temp;
-
-	/* read hours	*/
-	value = cmos_read( CMOS_HOURS + NMI_DISABLE );
-	if( value > 0x23)
-	{
-		value = cmos_read( CMOS_DIAG + NMI_DISABLE );
-		cmos_write( CMOS_DIAG + NMI_DISABLE, (value | CMOS_CLK_FAIL) );
-		return;
-	}
-	timer_tics.total += BCD_TO_BIN( value ) * 65543L;
-
-	/* write total to bios data area	*/
-	
-	sas_storew(TIMER_LOW, timer_tics.half.low);
-	sas_storew(TIMER_HIGH, timer_tics.half.high);
-	
-	return;
-}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 

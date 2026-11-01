@@ -96,7 +96,7 @@
 VIDEOFUNCS	*working_video_funcs;
 KEYBDFUNCS	*working_keybd_funcs;
 #ifndef NTVDM
-ERRORFUNCS	*working_error_funcs;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 HOSTMOUSEFUNCS	*working_mouse_funcs;
 
@@ -496,11 +496,7 @@ LOCAL void announce_variant IFN0()
 void reset()
 {
 #ifndef	NTVDM
-	char *cp;
-	char temp_str[256];
-#ifdef LIM
-	SHORT limSize, backFill;
-#endif /* LIM */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 	EQUIPMENT_WORD equip_flag;
 	half_word low_switches, high_switches;
@@ -711,48 +707,7 @@ void reset()
 	 * NTVDM: if soft reset We will never get here...
 	 */
 #ifndef NTVDM
-	/*
-	 * If this isn't the first (re)set, then allow hosts to close down
-	 * timer and keyboard systems. Most ports will need to disable ALRM and
-	 * IO signals during this call, so that the respective signal handlers
-	 * will not be executed at undefined points during the adapter
-	 * initialisation
-	 */
-	if (soft_reset)
-	{
-		/* Allow Windows 3.x compliant DOS Drivers to correctly handle
-		   any data instances. To do this we:-
-		   1) Close down (terminate) the driver, thus freeing any data
-		      instances.
-		   2) Restart (initialise) the driver, ensuring one data instance
-		      is available [for config or whoever else thinks they know
-		      that DOS Driver data must always exist]. */
-
-		/* FIRST Inform NIDDB that reboot is happening.. */
-		NIDDB_System_Reboot();
-
-#ifdef HFX
-		hfx_driver_termination();	/* ..then each driver */
-		hfx_driver_initialisation();
-#endif
-		mouse_driver_termination();	/* ..then each driver */
-		mouse_driver_initialisation();
-
-		q_event_init();
-		tic_event_init();
-
-		host_timer_shutdown();
-		host_kb_shutdown();
-		host_disable_timer2_sound();
-#ifdef NTVDM
-/*
- * MS NT VDM cannot reboot in SoftPC conventional terms so exits in preparation
- * for new VDM startup.
- */
-                cmdRebootVDM();
-                host_terminate();
-#endif /* NTVDM */
-	}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 
 	/*
@@ -779,14 +734,7 @@ void reset()
 #endif /* !defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX)) */
 
 #ifndef NTVDM
-
-        /* Initialise the physical devices */
-	SWPIC_init_funcptrs ();
-
-	/* IO initialisation moved earlier to allow support for 3rd party
-	 * VDDs. (see host\src\nt_msscs.c).
-	 */
-	io_init();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 
 	ica0_init();
@@ -832,13 +780,7 @@ void reset()
                 equip_flag.bits.max_diskette++;
 	}
 #else
-
-	/* 20/10/93 PaulC - set the diskette_present bit regardless of */
-	/* whether or not any floppies are configured. Not having the  */
-	/* bit set confuses DOS and Windows. See BCN 2262.             */
-
-	equip_flag.bits.diskette_present = TRUE;
-
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 
 	sas_storew(EQUIP_FLAG, equip_flag.all);
@@ -1033,7 +975,7 @@ void reset()
 #endif
 
 #ifndef	NTVDM
-	host_reset();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 	/* Do diskette BIOS POST */

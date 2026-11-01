@@ -289,8 +289,7 @@ GLOBAL int init_expanded_memory IFN2(int, size, 	/* size of area in megabytes */
 	/* Initialise EMM variables	*/
 
 #ifndef NTVDM
-	EM_start = 0xd000;
-	EM_end   = 0xe000;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else
 	EM_start = physical_page[0];
 	EM_end =  physical_page[0] + EMM_PAGE_SIZE * 4;
@@ -320,46 +319,7 @@ GLOBAL int init_expanded_memory IFN2(int, size, 	/* size of area in megabytes */
 	    return FAILURE;
 	set_no_pages(0, 0);
 #else
-
-	pages_above_640 = (effective_addr(EM_end,0) - effective_addr(EM_start,0)) / EMM_PAGE_SIZE;
-	pages_below_640 = ((640 - mem_limit) * 1024) / EMM_PAGE_SIZE;
-	no_phys_pages = pages_above_640 + pages_below_640;
-
-	map_size = no_phys_pages * NSIZE;
-	page_offset = MAP_OFFSET + map_size;	
-
-	/*
-	 * set up addresses and mapping status of physical pages
-	 */
-	for( i = 0; i < pages_above_640; i++ )
-	{
-		physical_page[i] = EM_start + (i * EMM_PAGE_SIZE >> 4);
-		EM_page_mapped[i] = EMPTY;
-	}
-	base = mem_limit * 64;
-
-	for(i = pages_above_640, j = 0; i < no_phys_pages; i++)
-	{
-		physical_page[i] = base + (j++ * EMM_PAGE_SIZE >> 4);
-		EM_page_mapped[i] = EMPTY;
-	}
-	/*
-	 * Allocate handle 0 with any pages required for back filling
-	 */
-	if(get_new_handle(pages_below_640) != 0)
-		return(FAILURE);
-
-	for(i = 0, physical_page_no = pages_above_640; i < pages_below_640; i++)
-	{
-		if((EM_page_no = alloc_page()) == FAILURE)
-			return (FAILURE);
-
-		set_EMpage_no(0, i, EM_page_no);
-
-		if(map_page(EM_page_no, physical_page_no++) == FAILURE)
-			return(FAILURE);
-	}
-	set_no_pages(0, pages_below_640);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 
 	/*
@@ -383,8 +343,7 @@ GLOBAL int init_expanded_memory IFN2(int, size, 	/* size of area in megabytes */
 			       SAS_RAM
 			       );
 #else
-
-	sas_connect_memory(effective_addr(EM_start,0) , effective_addr(EM_end,0) -1 , SAS_RAM );
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 	sure_note_trace3(LIM_VERBOSE,"initialised EMM, total pages= %#x, pages above 640= %#x, pages below 640 = %#x",no_phys_pages, pages_above_640, pages_below_640);
@@ -596,7 +555,7 @@ GLOBAL boolean handle_ok IFN1(short, handle_no)
 
     if ((unsigned short)handle_no >= (unsigned short)total_handles) {
 #else
-	if(handle_no >= total_handles   ||   handle_no < 0) {
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 		sure_note_trace1(LIM_VERBOSE,"invalid handle %d",handle_no);
@@ -969,107 +928,7 @@ GLOBAL int free_page IFN1(short, EM_page_no)
 }
 
 #ifndef NTVDM
-/*
-========================================================================
-
-FUNCTION	: page_already_mapped
-
-PURPOSE		: function to determine whether a EMM page is already
-		  mapped to a different physical page within intel
-		  memory 
-				
-RETURNED 	: count of number of pages in addition to the page
-		  passed which are mapped to the same logical page.
-		  The page number of one of these mirror pages is
-		  also returned via the pointer passed as an argument.
-
-DESCRIPTION	: 
-			
-========================================================================
-*/
-
-GLOBAL ULONG
-page_already_mapped IFN2(short, EM_page_no, 
-			unsigned char *, physical_page_no)
-
-{
-	unsigned char	page, orig_page;
-	ULONG	map_count;
-
-	map_count = 0;
-	orig_page = *physical_page_no;
-
-	for( page = 0; page < (unsigned char) no_phys_pages; page++ )
-	{
-		if ((EM_page_mapped[page] == EM_page_no) &&
-						(page != orig_page ))
-		{
-			sure_note_trace2( LIM_VERBOSE,
-				"log page %x mapped to phys page %x",
-						EM_page_no, page);
-
-			*physical_page_no = page;
-			map_count++;
-		}
-	}
-
-	return( map_count );
-}
-
-
-LOCAL VOID
-connect_MM_LIM_page IFN2( USHORT, segment, SHORT, EM_page_no )
-{
-	ULONG eff_addr;
-
-#ifdef PROD
-	UNUSED(EM_page_no);
-#endif
-	
-	assert2( NO, "Connecting multi-mapped page, %d, at %x",
-								EM_page_no, segment );
-
-	eff_addr = effective_addr( segment, 0 );
-	sas_connect_memory( eff_addr, eff_addr + EMM_PAGE_SIZE - 1,
-									SAS_MM_LIM );
-}
-
-LOCAL VOID
-disconnect_MM_LIM_page IFN4( USHORT, segment, SHORT, EM_page_no,
-		ULONG, map_count, unsigned char, physical_page_no )
-{
-	ULONG eff_addr;
-
-#ifdef PROD
-	UNUSED(EM_page_no);
-#endif
-	
-	sure_note_trace2(LIM_VERBOSE,
-		"Unmapping multi-mapped page, %d, at %x",
-						EM_page_no, segment );
-
-	eff_addr = effective_addr( segment, 0 );
-	sas_connect_memory( eff_addr, eff_addr + EMM_PAGE_SIZE - 1, SAS_RAM );
-
-	if( map_count == 1 )
-	{
-		/*
-		 * We have to disconnect the last page of this group,
-		 * by connecting it as SAS_RAM.
-		 */ 
-
-		segment = physical_page[physical_page_no];
-		eff_addr = effective_addr( segment, 0 );
-
-		sure_note_trace2(LIM_VERBOSE,
-			"Unmapping last multi-mapped page, %d, at %x",
-								EM_page_no, segment );
-
-		sas_connect_memory( eff_addr, eff_addr + EMM_PAGE_SIZE - 1,
-										SAS_RAM );
-	}
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* !NTVDM */
 
 /*
@@ -1121,73 +980,12 @@ GLOBAL int map_page IFN2(short, EM_page_no,
 		}
 
 #ifndef NTVDM
-		/*
-		 * We want to return the current contents of this physical
-		 * page to the logical page ( to sync up the logical page ).
-		 * We have to check first that this physical page is not a
-		 * mirror of some other page - if it is we have to disconnect
-		 * it from the group of pages it is mirroring.
-		 */
-
-		phys_page = physical_page_no;
-
-		if( map_count = page_already_mapped(
-				EM_page_mapped[physical_page_no], &phys_page))
-		{
-			disconnect_MM_LIM_page( segment, EM_page_no,
-								map_count, phys_page );
-		}
-
-		/*
-		 * We can now unmap the physical page and indicate
-		 * that it is really unmapped.
-		 */
-		if(host_unmap_page(segment,
-				EM_page_mapped[physical_page_no]) != SUCCESS)
-		{
-			return(FAILURE);
-		}
-		EM_page_mapped [physical_page_no] = EMPTY;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 	}
 #ifndef NTVDM
-
-	/* 
-	 * If this logical page is already mapped, make sure the
-	 * new mapping has an up to date copy 
-	 */
-	   
-	phys_page = physical_page_no;
-
-	if (page_already_mapped(EM_page_no, &phys_page)) 
-	{
-		/*
-		 * We now want to get the LIM logical page up to date with
-		 * the physical pages that are currently mapped to it. We
-		 * don't want to set EM_page_mapped [phys_page] to EMPTY
-		 * after the host_unmap_page().  If we did we wouldn't notice
-		 * that we had a multiply-mapped page and the patch up code
-		 * wouldn't get called.
-		 */
-
-		host_update_logical_page( physical_page[phys_page],
-									EM_page_no );
-
-		/*
-		 * Connect new page and "mirror" page as MM_LIM.  This may
-		 * mean some pages get connected as MM_LIM multiple times
-		 * - inefficient but not wrong otherwise.  This connection
-		 * has to be made for all hosts - even those that can do
-		 * mapping themselves.  This is to make sure that the CPU
-		 * data structures associated with all pages get updated
-		 * when a multi-mapped write occurs.
-		 */
-
-		connect_MM_LIM_page( segment, EM_page_no );
-
-		connect_MM_LIM_page( physical_page[phys_page], EM_page_no );
-	}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 	if(host_map_page(EM_page_no, segment) != SUCCESS)
 		return(FAILURE);
@@ -1241,11 +1039,7 @@ GLOBAL int unmap_page IFN1(unsigned char, physical_page_no)
 	phys_page = physical_page_no;
 
 #ifndef NTVDM
-	if( map_count = page_already_mapped( EM_page_no, (unsigned char *)&phys_page ))
-	{
-		disconnect_MM_LIM_page( segment, EM_page_no,
-								map_count, phys_page );
-	}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 	if(host_unmap_page(segment, EM_page_no) != SUCCESS)
@@ -1350,7 +1144,7 @@ GLOBAL int save_map IFN5(short, handle_no,
 #ifdef NTVDM
 			write_intel_word(dst_segment, offset, LEAVE);
 #else
-			write_intel_word(dst_segment, offset, EMPTY);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 			offset += 2;
 		}
@@ -1435,7 +1229,7 @@ short pages_in[];
 #ifdef NTVDM
 			if(new_page < LEAVE || new_page >= total_pages)
 #else
-			if(new_page < EMPTY || new_page >= total_pages)
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 				return(FAILURE);
 		}
@@ -1449,7 +1243,7 @@ short pages_in[];
 #ifdef NTVDM
 		if(old_page != EMPTY && old_page != new_page && new_page != LEAVE)
 #else
-		if(old_page != EMPTY && old_page != new_page )
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 			pages_out[i] = old_page;
 		else
@@ -1458,7 +1252,7 @@ short pages_in[];
 #ifdef NTVDM
 		if(new_page != EMPTY && new_page != old_page && new_page != LEAVE)
 #else
-		if(new_page != EMPTY && new_page != old_page)
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 			pages_in[i] = new_page;
 		else
@@ -1700,7 +1494,7 @@ GLOBAL unsigned short get_base_address IFN0()
 #ifdef NTVDM
 	return(physical_page[0]);
 #else
-	return(EM_start);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 }
 

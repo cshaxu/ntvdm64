@@ -566,7 +566,7 @@ LOCAL VOID	do_chain_majority_decision IFN0()
  */
 GLOBAL VOID	do_new_cursor IFN0()
 #else
-LOCAL VOID	do_new_cursor IFN0()
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 {
 
@@ -877,7 +877,7 @@ GLOBAL VOID	vga_init IFN0()
 #ifdef NTVDM
 	set_screen_split(0x3FF);	/* 10 bits for VGA line compare register */
 #else
-	set_screen_split(511);	/* make sure there is no split screen to start with ! */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 	set_prim_font_index(0);
@@ -1353,7 +1353,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef NTVDM
 						crt_controller.crtc_overflow.as.abyte = new.value;
 #else
-						crt_controller.crtc_overflow.as.abyte = value;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 #ifdef V7VGA
 					}
@@ -2336,11 +2336,7 @@ GLOBAL VOID	v_ret_intr_status IFN0()
 #define IPSTAT1_STATE_3     	(IPSTAT1_STATE_2 + 10)
 #define IPSTAT1_CYCLE_TIME  	IPSTAT1_STATE_3
 #else	/* NTVDM */
-#define IPSTAT1_STATE_0		(4)			/* End of state 0, ms */
-#define IPSTAT1_STATE_1		(IPSTAT1_STATE_0 + 9)	/* End of state 1, ms */
-#define IPSTAT1_STATE_2		(IPSTAT1_STATE_1 + 4)	/* End of state 2, ms */
-#define IPSTAT1_STATE_3		(IPSTAT1_STATE_2 + 3)	/* End of state 3, ms */
-#define IPSTAT1_CYCLE_TIME	IPSTAT1_STATE_3		/* Cycle time, ms */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 
 GLOBAL VOID  vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
@@ -2376,7 +2372,7 @@ GLOBAL VOID  vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 #ifdef NTVDM
    CurrTime = GetPerfCounter();
 #else
-   CurrTime = host_get_count_ms();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
    cycles = CurrTime >= RefreshStartTime

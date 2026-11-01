@@ -126,10 +126,7 @@ static unsigned short alt_map_segment,	/* segment address of map array	*/
 		      			/* in function 28		*/
 
 #ifndef NTVDM
-static boolean set_called;		/* flag to indicate if the 'set'*/
-					/* sub-function has been called */
-					/* in function 28		*/
-
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 #ifndef PROD
@@ -2220,7 +2217,7 @@ LOCAL void Get_Hardware_Configuration_Array IFN0()
 
 			write_intel_word(segment, offset, get_no_altreg_sets());
 #else
-			write_intel_word(segment, offset, ALT_REGISTER_SETS);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 			offset += 2;
@@ -2454,103 +2451,7 @@ LOCAL void Alternate_Map_Register_Support IFN0()
     return;
 
 #else
-	unsigned char	sub_func,	/* sub-function code		*/
-			map_register;	/* No. of alternate register	*/
-
-	short	pages_out[MAX_NO_PAGES],/* pages to map out		*/
-		pages_in[MAX_NO_PAGES],	/* pages to map in		*/
-		no_phys_pages,		/* no. of phys. pages available	*/
-		i;			/* loop counter			*/
-
-	if(disabled)
-	{
-		setAH(ACCESS_DENIED);
-		return;
-	}
-	sub_func = getAL();
-	switch(sub_func)
-	{
-		case 0:
-			if(set_called)
-				save_map(-1, alt_map_segment, alt_map_offset, 0, 0);
-			setES(alt_map_segment);
-			setDI(alt_map_offset);
-			break;
-		case 1:	
-			set_called = TRUE;
-			map_register = getBL();
-			if(map_register != 0)
-			{
-				setAH(NO_ALT_REGS);
-				return;
-			}
-			alt_map_segment = getES();
-			alt_map_offset = getDI();
-
-			/*
-			 * Undocumented feature (???) to restore the
-			 * alternative mappings back to their original
-			 * state a NULL ptr is passed into here (ES:DI == 0)
-			 * We must therefore set things as if set_alt had
-			 * never been called
-			 */
-			if ((alt_map_segment == 0) && (alt_map_offset == 0))
-			{
-				set_called = FALSE;
-				break;
-			}
-			if(restore_map(-1 , alt_map_segment, alt_map_offset, pages_out, pages_in) != SUCCESS)
-			{
-				setAH(BAD_MAP);
-				return;
-			}
-
-			no_phys_pages = get_no_phys_pages();
-			for(i = 0; i < no_phys_pages; i++)
-			{
-				if(pages_out[i] != EMPTY)
-					if(unmap_page(i) != SUCCESS)
-					{
-						setAH(EMM_HW_ERROR);
-						return;
-					}
-				if(pages_in[i] != EMPTY)
-					if(map_page(pages_in[i], i) != SUCCESS)
-					{
-						setAH(EMM_HW_ERROR);
-						return;
-					}
-			}
-
-			break;
-
-
-		case 2: setDX(get_map_size());
-			break;
-
-		case 3:
-		case 5:
-			setBL(0);
-			break;
-
-		case 4: 
-		case 6:
-		case 7:
-		case 8:
-			map_register = getBL();
-			if(map_register != 0)
-			{
-				setAH(NO_ALT_REGS);
-				return;
-			}
-			break;
-
-		default: setAH(BAD_SUB_FUNC);
-			return;
-	}
-
-	setAH(SUCCESS);
-	return;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 }
@@ -2673,7 +2574,7 @@ GLOBAL void reset_emm_funcs IFN0()
 	alt_map_segment = 0;
 	alt_map_offset  = 0;
 #ifndef NTVDM
-	set_called      = FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 	return;

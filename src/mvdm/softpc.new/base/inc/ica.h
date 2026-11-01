@@ -200,38 +200,7 @@ typedef struct {
 
 
 #if !defined(NTVDM)
-#ifdef  REAL_ICA
-
-extern void host_ica_hw_interrupt IPT3(IU32, adap, IU32, line, IS32, cnt);
-extern void host_ica_hw_interrupt_delay IPT4(IU32, adap, IU32, line, IS32, cnt, IS32, delay);
-extern void host_ica_clear_int IPT2(IU32, adap, IU32, line);
-
-#define ica_hw_interrupt(ms,line,cnt)				host_ica_hw_interrupt(ms, line, cnt)
-#define	ica_hw_interrupt_delay(ms,line,cnt,delay)	host_ica_hw_interrupt(ms, line, cnt)
-#define ica_clear_int(ms, line)						host_ica_clear_int(ms, line)
-
-#else   /* REAL_ICA */
-
-/*
- *  Change these. They come last.
- */
-
-#define ica_inb(port,val)                       ((*ica_inb_func) (port,val))
-#define ica_outb(port,val)                      ((*ica_outb_func) (port,val))
-#define ica_hw_interrupt(ms,line,cnt)           ((*ica_hw_interrupt_func) (ms,line,cnt))
-#define ica_clear_int(ms,line)                  ((*ica_clear_int_func) (ms,line))
-
- 
-/*
- *  PIC access functions needed for HW & SW
- */
-extern void (*ica_inb_func) IPT2(io_addr, port, IU8 *, value);
-extern void (*ica_outb_func) IPT2(io_addr, port, IU8, value);
-extern void (*ica_hw_interrupt_func) IPT3(IU32, adapter, IU32, line_no,
-	IS32, call_count);
-extern void (*ica_clear_int_func) IPT2(IU32, adapter, IU32, line_no);
-
-#endif  /* REAL_ICA */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif  /* !NTVDM */
 
 #ifdef GISP_CPU

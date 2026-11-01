@@ -143,51 +143,7 @@ void illegal_op_int()
 void illegal_dvr_bop IFN0()
 {
 #ifndef NTVDM
-	sys_addr bop_addr;
-	CHAR buf[256];
-
-	/* This is called when an Insignia Intel driver decides that
-	 * this (old) SoftWindows is not compatible.
-	 *
-	 * We should:
-	 * a) Put up a localised panel complaining that
-	 *    the named driver CS:[eIP] with decimal
-	 *    version AX is incompatible with the SoftWindows.
-	 *    N.B. The most compatible way to pass the
-	 *    name of the driver is by embedded bytes just
-	 *    after the BOP. The problem is caused by the
-	 *    fact that the driver may be either 16-bit RM
-	 *    or a 32-bit flat VxD so the address of the
-	 *    string can be either 16/32 bits, and we
-	 *    need to be able to execute (and do nothing)
-	 *    on the shipping SoftPC 1.xx which prevents
-	 *    us doing anything with 32-bit registers!
-	 *
-	 *	BOP	driver_incompat
-	 *	jmp	SHORT over_name
-	 *	db	'somename.drv', 0
-	 * over_name:
-	 *
-	 * b) setCF(0)
-	 */
-
-	buf[0] = '\0';
-	bop_addr = effective_addr(getCS(), GetInstructionPointer());
-	if (sas_hw_at(bop_addr) == 0xEB)
-	{
-		IU8 data;
-		char *p;
-
-		p = buf;
-		bop_addr += 2;	/* Skip the xEB xXX */
-		do {
-			data = sas_hw_at(bop_addr++);
-			*p++ = data;
-		} while (data != 0);
-		sprintf(p-1, " v%d.%02d", getAX() / 100, getAX() % 100);
-	}
-	host_error(EG_DRIVER_MISMATCH, ERR_CONT, buf);
-	setCF(0);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* ! NTVDM */
 }
 

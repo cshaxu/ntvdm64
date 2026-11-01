@@ -198,8 +198,7 @@ IMPORT int	reallocate_handle IPT3(short, handle_no,
 				       short, old_page_count,
 				       short, new_page_count);
 #ifndef NTVDM
-IMPORT ULONG	page_already_mapped IPT2(short, EM_page_no,
-					 unsigned char *, physical_page_no);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 

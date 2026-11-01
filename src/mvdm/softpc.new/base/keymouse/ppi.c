@@ -67,7 +67,7 @@ static half_word ppi_register;
 
 static boolean gate_2_was_low = TRUE;	/* state of timer 2 gate */
 #ifndef NTVDM
-static boolean SPKRDATA_was_low = TRUE;	/* speaker data for sound */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -134,17 +134,7 @@ void ppi_outb IFN2(io_addr, port, half_word, value)
 	 */
 
 #ifndef NTVDM
-		if ( (value & 0x02) && SPKRDATA_was_low)
-		{
-			host_enable_timer2_sound();
-			SPKRDATA_was_low = FALSE;
-		}
-		else
-		if ( !(value & 0x02) && !SPKRDATA_was_low)
-		{
-			host_disable_timer2_sound();
-			SPKRDATA_was_low = TRUE;
-		}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 		/*

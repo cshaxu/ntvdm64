@@ -811,7 +811,7 @@ IFN1(
     * modern setjmp requires the referred-to jmp_buf array object. */
    setjmp(*ccpu386ThrdExptnPtr());
 #else
-   setjmp(next_inst[simulate_level-1]);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 #ifdef SYNCH_TIMERS
@@ -4733,7 +4733,7 @@ LOCAL VOID
       __try {
       if ( setjmp(*frame) == 0)
 #else
-      if ( setjmp(longjmp_env_stack[simulate_level++]) == 0 )
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 	 {
 	 in_C = 0;
@@ -4758,7 +4758,7 @@ LOCAL VOID
 #ifdef NTVDM
       ccpu386GotoThrdExptnPt();
 #else
-      longjmp(next_inst[simulate_level-1], 1);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
       }
 

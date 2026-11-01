@@ -109,7 +109,7 @@ void diskette_io()
 #ifdef NTVDM
 		if (drive >= number_of_floppy)
 #else
-		if (drive >= MAX_FLOPPY)
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 			op = FL_FNC_ERR;
 
@@ -174,8 +174,7 @@ void diskette_int()
 	setCS(int15_seg);
 	setIP(int15_off);
 #else
-	setCS(RCPU_INT15_SEGMENT);
-	setIP(RCPU_INT15_OFFSET);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 
 	host_simulate();
@@ -205,7 +204,7 @@ void diskette_post()
 	 */
 	half_word diskette_id_reg, hf_cntrl, interrupt_mask;
 #ifndef NTVDM
-	half_word disk_state;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 	EQUIPMENT_WORD equip_flag;
 
@@ -247,24 +246,7 @@ void diskette_post()
 		sas_store(DRIVE_CAPABILITY, hf_cntrl);
 
 #ifndef NTVDM	/* prevent floppies showing up in bios data area */
-		/*
-		 *	Setup the diskette BIOS state according to the
-		 *	types of drives installed
-		 */
-		fl_diskette_setup();
-
-		/*
-		 *	If a second drive was discovered, update the
-		 *	equipment flag accordingly
-		 */
-
-		sas_load(FDD_STATUS+1, &disk_state);
-		if (disk_state != 0)
-		{
-			sas_loadw(EQUIP_FLAG, &equip_flag.all);
-			equip_flag.bits.max_diskette = 1;
-			sas_storew(EQUIP_FLAG, equip_flag.all);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif  /* NTVDM */
 	}
 }

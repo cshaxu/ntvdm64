@@ -213,7 +213,7 @@ GLOBAL VOID ( *host_key_down_fn_ptr )();
 GLOBAL VOID ( *host_key_up_fn_ptr )();
 
 #ifndef NTVDM
-GLOBAL VOID ( *do_key_repeats_fn_ptr )();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 
 /*
@@ -261,9 +261,7 @@ GLOBAL VOID ( *do_key_repeats_fn_ptr )();
 #define	BUFF_6805_PMAX	512
 #define	BUFF_6805_PMASK	(BUFF_6805_PMAX - 1)
 #else
-#define	BUFF_6805_VMAX	48
-#define	BUFF_6805_PMAX	64
-#define	BUFF_6805_PMASK	(BUFF_6805_PMAX - 1)
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 
 #ifndef macintosh
@@ -343,9 +341,7 @@ int scan_code_6805_size,key_set;
 int input_port_val;
 int waiting_for_next_code, waiting_for_next_8042_code, num_lock_on;
 #else
-int scan_code_6805_size,key_set,repeat_delay_target,repeat_target,repeat_delay_count,repeat_count;
-int typematic_key, input_port_val;
-int typematic_key_valid,waiting_for_next_code, waiting_for_next_8042_code, num_lock_on;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 int shift_on, l_shift_on, r_shift_on;
 int ctrl_on, l_ctrl_on, r_ctrl_on;
@@ -361,12 +357,12 @@ half_word *scan_code_6805_array;
 #ifdef PM
 int gate_a20_status;
 #ifndef NTVDM
-long reset_was_by_kbd = FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 #endif
 
 #ifndef NTVDM
-LOCAL q_ev_handle       refillDelayedHandle = 0;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 half_word current_light_pattern;
@@ -1195,10 +1191,7 @@ else if (!keyboard_disabled) {
            }
     }
 #else
-else
-	{
-	do_host_key_down(key);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 }
 
@@ -1225,8 +1218,7 @@ if (scanning_discontinued)
 #ifdef NTVDM
 else if (!keyboard_disabled && key_down_count[key]) {
 #else
-else
-	{
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 #ifdef NTVDM
        LastKeyDown = -1;
@@ -1268,13 +1260,7 @@ if (!keyboard_disabled)
 #ifdef NTVDM
 		mark_key_codes_6805_buff(TRUE);
 #else
-	key_down_count[key]++;
-        if (key_down_count[key]==1)
-                {       /* first press */
-                repeat_delay_count=0;
-		repeat_count=0;
-                typematic_key_valid=FALSE;
-
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 		keytype=keytypes[key];
 		overrun=FALSE;
@@ -1464,15 +1450,7 @@ if (!keyboard_disabled)
 		    }
 
 #ifndef NTVDM	/* JonLe NTVDM Mod */
-
-		if (key!=126)
-		    {
-		    if ((key_set != 3) || (set_3_key_state[key] == 1) || (set_3_key_state[key] == 4))
-			    {
-			    typematic_key = key;
-			    typematic_key_valid = TRUE;
-			    }
-		    }
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else
 		mark_key_codes_6805_buff(FALSE);
 #endif	/* NTVDM */
@@ -1483,7 +1461,7 @@ if (!keyboard_disabled)
 		    }
 
 #ifndef NTVDM
-		} /* end of if first press */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 
 	} /* end of if not disabled */
@@ -1516,10 +1494,7 @@ if (!keyboard_disabled)
 		key_down_count[key] =  0;
 
 #ifndef NTVDM 	/* JonLe NTVDM Mod */
-		if ((key==typematic_key) && typematic_key_valid)
-			{
-			typematic_key_valid=FALSE;
-			}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 
 		keytype=keytypes[key];
@@ -1703,7 +1678,7 @@ LOCAL VOID AddTo6805BuffImm IFN1(half_word,code)
   KbdData = -1;
 }
 #else
-#define  AddTo6805BuffImm(code) add_to_6805_buff(code, IMMEDIATE_OUTPUT);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 LOCAL VOID cmd_to_6805 IFN1(half_word,cmd_code)
@@ -1755,27 +1730,13 @@ if (waiting_for_next_code)
 #ifdef NTVDM
 			host_kb_light_on ((cmd_code & 0x07) | 0xf0);
 #else
-			cmd_code &= 0x7;
-			host_kb_light_on (cmd_code);
-			host_kb_light_off ((~cmd_code)&0x7);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 			}
 			break;
 		case SET_RATE_DELAY_SEQUENCE:
 #ifndef NTVDM	/* JonLe Mod */
-			if ((cmd_code & 0x80)==0)
-			{
-			repeat_delay_target = (1+((cmd_code>>5)&3))*BASE_DELAY_UNIT;
-			cmd_code &= 0x1f;
-			if (cmd_code<0xb) { repeat_target =0; }
-			else { if (cmd_code<0x11) { repeat_target =1; }
-			else { if (cmd_code<0x19) { repeat_target=(cmd_code-0x12)/3 +3;}
-			else { if (cmd_code<0x1e) { repeat_target=(cmd_code-0x1a)/2+6;}
-			else { repeat_target=(cmd_code-0x1e)+8;}}}}
-                        AddTo6805BuffImm(ACK_CODE);
-			}
-			sure_note_trace2(AT_KBD_VERBOSE,"Changing kbd rate/delay: rate = %d, dealy=%d ",repeat_target,repeat_delay_target);
-
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else	/* NTVDM */
 
 			if ((cmd_code & 0x80)==0)
@@ -1812,9 +1773,7 @@ if (waiting_for_next_code)
 			}
 
 #ifndef NTVDM 	/* JonLe NTVDM Mod */
-		repeat_delay_target=2*BASE_DELAY_UNIT;
-		repeat_target=DEFAULT_REPEAT_TARGET;
-		typematic_key_valid=FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 
 		keyboard_disabled=TRUE;
@@ -1830,7 +1789,7 @@ if (waiting_for_next_code)
                 AddTo6805BuffImm(ACK_CODE);
 
 #ifndef NTVDM 	/* JonLe NTVDM Mod */
-		typematic_key_valid=FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 
 		keyboard_disabled=FALSE;
@@ -1868,7 +1827,7 @@ if (waiting_for_next_code)
                 AddTo6805BuffImm(ACK_CODE);
 
 #ifndef NTVDM 	/* JonLe NTVDM Mod */
-		typematic_key_valid=FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 
 		next_code_sequence_number=SCAN_CODE_CHANGE_SEQUENCE;
@@ -1898,9 +1857,7 @@ if (waiting_for_next_code)
 			}
 
 #ifndef NTVDM 	/* JonLe NTVDM Mod */
-		repeat_delay_target=2*BASE_DELAY_UNIT;
-		repeat_target=DEFAULT_REPEAT_TARGET;
-		typematic_key_valid=FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 		keyboard_disabled=FALSE;
 		sure_note_trace0(AT_KBD_VERBOSE,"Keyboard set to default (and enabled)");
@@ -1913,7 +1870,7 @@ if (waiting_for_next_code)
                 AddTo6805BuffImm(ACK_CODE);
 
 #ifndef NTVDM 	/* JonLe NTVDM Mod */
-		typematic_key_valid=FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif	/* NTVDM */
 
 		next_code_sequence_number=SET_3_KEY_TYPE_SET_SEQUENCE;
@@ -1983,10 +1940,7 @@ if (scanning_discontinued && !waiting_for_next_code)
 #endif
 
 #ifndef NTVDM
-if (free_6805_buff_size < BUFF_6805_VMAX) 
-	{
-	codes_to_translate();
-        }
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 } /* end of cmd_to_6805 */
@@ -2258,7 +2212,7 @@ if (waiting_for_next_8042_code)
 				      /* call xms function to deal with A20 */
 				      xmsDisableA20Wrapping();
 #else
-				      sas_disable_20_bit_wrapping();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 				      gate_a20_status = 1;
 					}
@@ -2270,7 +2224,7 @@ if (waiting_for_next_8042_code)
 #ifdef NTVDM
 				      xmsEnableA20Wrapping();
 #else
-				      sas_enable_20_bit_wrapping();
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 				      gate_a20_status = 0;
 				      }
@@ -2396,7 +2350,7 @@ if (!waiting_for_next_8042_code)
 				/* pulse the reset line */
 #ifdef PM
 #ifndef NTVDM
-				reset_was_by_kbd = TRUE;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 				/*
 				 * DIVERGENCE(MVDM-HOST-DIV-146): the original CPU40
@@ -2447,13 +2401,7 @@ if (code_to_send_valid)
         output_contents = (char)code_to_send;
         kbd_status |= 1;
 #else /* NTVDM else */
-
-	/* Transfer 8042 command output to output buffer, overwriting value
-	   already in the buffer. */
-
-		output_contents = (char)code_to_send;
-		kbd_status |= 1;			/* Character now available! */
-
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* end of NTVDM else */
 	}
 
@@ -2616,23 +2564,7 @@ GLOBAL VOID KbdResume(VOID)
 
 
 #ifndef NTVDM
-/* allowRefill -- used in conjunction with the Delayed Quick Event
-** below (kbd_inb from port 0x60 while the keyboard interface is
-** enabled.) This is called 10ms after a dubious read from port 0x60
-** and allows the port to be overwritten with the next scancode.
-*/
-
-LOCAL VOID allowRefill IFN1(long, unusedParam)
-{
-	UNUSED(unusedParam);
-
-	/* Clear "refillDelayedHandle" so we know we're all clear... */
-
-	refillDelayedHandle = 0;
-
-	/* continue with filling the buffer... */
-	continue_output();
-}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 GLOBAL VOID kbd_inb IFN2(io_addr,port,half_word *,val)
@@ -2795,10 +2727,7 @@ GLOBAL VOID kbd_outb IFN2(io_addr,port,half_word,val)
 	}
 
 #ifndef NTVDM	/* JonLe NTVDM Mod */
-
-	if (free_6805_buff_size < BUFF_6805_VMAX)
-		codes_to_translate();
-
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else   /* NTVDM */
 
     bForceDelayInts = TRUE;
@@ -2813,52 +2742,7 @@ GLOBAL VOID kbd_outb IFN2(io_addr,port,half_word,val)
 } /*end of kbd_outb */
 
 #ifndef NTVDM
-/* Nothing seems to call this. I've no idea why it's here ... Simion */
-/* I have been assured that these functions are used by sun - gvdl */
-
-GLOBAL int status_6805_buffer IFN0()
-{
-	int	free_space;
-
-	free_space = BUFF_6805_VMAX-
-		((buff_6805_in_ptr - buff_6805_out_ptr) & BUFF_6805_PMASK);
-	if (free_space<0) 
-	{
-		free_space=0;
-		sure_note_trace0(AT_KBD_VERBOSE,"Keyboard buffer full");
-	}
-	return(free_space);
-}
-
-/*
- * Name: read_6805_buffer_variables
- *
- * Purpose:	To allow the host to access the state of the 6805 buffer
- *		This means eg. on Sun that cut/paste can be optimised.
- *
- * Output:	*in_ptr - value of the 6805 start pointer.
- * Output:	*out_ptr - value of the 6805 end pointer.
- * Output:	*buf_size - value of the 6805 buffer size.
- */
-GLOBAL void read_6805_buffer_variables IFN3(
-int	*, in_ptr,
-int	*, out_ptr,
-int	*, buf_size)
-{
-	*in_ptr = buff_6805_in_ptr;
-	*out_ptr = buff_6805_out_ptr;
-	*buf_size = BUFF_6805_PMASK;
-}
-
-GLOBAL VOID insert_code_into_6805_buf IFN1(half_word,code)
-{
-	sure_note_trace1(AT_KBD_VERBOSE,"got real keyboard scan code : %#x",code);
-	add_codes_to_6805_buff(1,&code);
-	sure_note_trace1(AT_KBD_VERBOSE,"new free buf size = %#x",free_6805_buff_size);
-	if (code != 0xf0) {
-		codes_to_translate();
-	}
-}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* ! NTVDM */
 
 #ifdef SEGMENTATION
@@ -2875,8 +2759,7 @@ GLOBAL VOID AT_kbd_post IFN0()
 	kbd_status = 0x14;
 
 #ifndef NTVDM
-	/* Clear out any pending keyboard buffer (port 0x60) refill delays */
-        refillDelayedHandle = 0;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 }
 

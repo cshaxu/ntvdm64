@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-537: replace unselected non-NTVDM branch bodies with markers
+only in observed C compile units explicitly defining NTVDM and headers whose
+observed consumers all explicitly define it. Mixed or uncertain header
+contexts remain untouched. Original ranges and hashes are in
+`../../artifacts/mvdm-audit/s12-non-ntvdm.jsonl`.
+
 MVDM-HOST-DIV-536: replace unselected small historical diagnostic, tool and
 host-platform branches with markers, preserving conditionals. Exact labels,
 source ranges and hashes are in

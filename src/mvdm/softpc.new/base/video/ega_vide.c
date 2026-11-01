@@ -752,7 +752,7 @@ void recalc_text IFN1(int, height)
     else
         do_outb(EGA_CRTC_INDEX,9,height-1); /* Character height */
 #else
-    do_outb(EGA_CRTC_INDEX,9,height-1); /* Character height */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 	do_outb(EGA_CRTC_INDEX,0xA,height-1);	/* Cursor start */
 	do_outb(EGA_CRTC_INDEX,0xB,0);		/* Cursor end */

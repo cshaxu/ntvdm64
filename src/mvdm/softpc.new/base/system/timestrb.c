@@ -83,16 +83,7 @@ void time_strobe()
 
 
 #ifndef NTVDM
-#ifndef	REAL_TIMER
-	/* Update the real time clock */
-	rtc_tick();
-#endif	/* REAL_TIMER */
-
-        dispatch_tic_event();
-
-#if defined(CPU_40_STYLE)
-	ica_check_stale_iret_hook();
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
         /*

@@ -146,9 +146,7 @@
  * define hooked_irets as parts of their configuration
  */
 #if !defined(NTVDM)
-#if defined(CPU_40_STYLE) || defined(GISP_CPU)
-#define HOOKED_IRETS    /* switch on IRET hooks */
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -174,14 +172,7 @@
  */
 
 #if !defined(NTVDM)
-/*
- *  Table of function pointers to access PIC routines
- */
-void (*ica_inb_func) IPT2(io_addr, port, IU8 *, value);
-void (*ica_outb_func) IPT2(io_addr, port, IU8, value);
-void (*ica_hw_interrupt_func) IPT3(IU32, adapter, IU32, line_no,
-	IS32, call_count);
-void (*ica_clear_int_func) IPT2(IU32, adapter, IU32, line_no);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 #if defined (CPU_40_STYLE) || defined (NTVDM)
@@ -365,17 +356,7 @@ extern IU32 ica_iret_hook_needed IPT1(IU32, line);
 #endif
 
 #if !defined (NTVDM)
-void
-SWPIC_init_funcptrs IFN0()
-{
-	/*
-	 *  initialize PIC access functions for SW [emulated] PIC
-	 */
-	ica_inb_func			= SWPIC_inb;
-	ica_outb_func			= SWPIC_outb;
-	ica_hw_interrupt_func		= SWPIC_hw_interrupt;
-	ica_clear_int_func		= SWPIC_clear_int;
-}
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -477,8 +458,7 @@ ica_scan_irr IFN1(IU32, adapter)
     iret_hook_mask = (IU8)(DelayIrqLine >> (adapter << 3));
 
 #else  /* !NTVDM */
-    /* if iret hooks are not being used, iretHookActive will always be 0 */
-    iret_hook_mask = (IU8)(iretHookActive >> (adapter << 3));
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
     /*
@@ -1366,28 +1346,7 @@ ica_intack IFN0()
 
 
 #else
-#ifdef HOOKED_IRETS
-    /* check whether IRET Hook required for interrupt on this line.
-     * If IRET trapping mechanism is via bops on stack then this may
-     * also be conditional on the current state of the emulated hardware.
-     * This is checked via a host call (or define).
-     */
-    if (host_valid_iret_hook())
-    {
-	*hook_address = ica_iret_hook_needed(line);
-
-#ifdef CPU_40_STYLE
-	if (*hook_address != 0)
-	{
-			IU32 al = line >= 8 ? line - 8 : line; /* line no. within adapter */
-
-	    /* about to do iret hooked interrupt so increase depth */
-	    asp->isr_depth[al]++;
-	    asp->isr_progress[al][asp->isr_depth[al]] = asp->isr_progress[al][asp->isr_depth[al]-1];
-	}
-#endif	/* CPU_40_STYLE */
-    }
-#endif  /* HOOKED_IRETS */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif  /* !NTVDM */
 
     host_ica_unlock();		/* real lock if supported */
@@ -1826,14 +1785,7 @@ ica_check_stale_iret_hook IFN0()
 #define INIT0_OCW1      (IU8)0x0
 
 #else
-
-/* POST leaves some int lines masked out (including comms and lpt lines) */
-/* The setting of the bits is spread out throughout the real POST code
- * but is collected into one place here. I think that this will not cause
- * any problems but it is conceivable that it will harm other OS's than
- * DOS (eg OS/2 or coherent etc.)
- */
-#define INIT0_OCW1      (IU8)0xb8
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* NTVDM */
 
 void ica0_post IFN0()
@@ -1857,8 +1809,7 @@ void ica0_init IFN0()
     io_define_inb(ICA0_ADAPTOR, ica_inb);
     io_define_outb(ICA0_ADAPTOR, ica_outb);
 #else
-    io_define_inb(ICA0_ADAPTOR, ica_inb_func);
-    io_define_outb(ICA0_ADAPTOR, ica_outb_func);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
     for(i = ICA0_PORT_START; i <= ICA0_PORT_END; i++)
@@ -1868,24 +1819,7 @@ void ica0_init IFN0()
 
 
 #ifndef NTVDM
-
-#ifdef CPU_40_STYLE
-    for (i = 0; i < 8; i++)
-    {
-	adapter_state[ICA_MASTER].callback_fn[i] = NO_ICA_CALLBACK;
-	adapter_state[ICA_MASTER].isr_depth[i] = 0;
-    }
-
-    ica_sigio_init();
-
-#endif  /* CPU_40_STYLE */
-
-
-#ifdef HOOKED_IRETS
-    /* on iret-hooked, non NT ports, enable iret hooks */
-    iretHooksEnabled = TRUE;
-#endif
-
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif  /* !NTVDM */
 
 }
@@ -1903,9 +1837,9 @@ void ica0_init IFN0()
 /* POST leaves some int lines masked out (reserved lines and RTC) */
 /* see the comment on POST setting mask bits for master ica */
 #elif ASPI
-#define INIT1_OCW1	(IU8)0x8d
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else /* ASPI */	
-#define INIT1_OCW1	(IU8)0x9d	
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif /* ASPI */
 
 
@@ -1932,8 +1866,7 @@ void ica1_init IFN0()
     io_define_inb(ICA1_ADAPTOR, ica_inb);
     io_define_outb(ICA1_ADAPTOR, ica_outb);
 #else
-    io_define_inb(ICA1_ADAPTOR, ica_inb_func);
-    io_define_outb(ICA1_ADAPTOR, ica_outb_func);
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
     for(i = ICA1_PORT_START; i <= ICA1_PORT_END; i++)

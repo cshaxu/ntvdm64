@@ -163,7 +163,7 @@ void (*BIOS[])() = {
 /* NT port, kill vdm instance, instead of warmbooting */
 			terminate,
 #else
-			bootstrap,	/* BOP 19 */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 			time_of_day,	/* BOP 1A */
 			illegal_bop,	/* BOP 1B */
@@ -195,8 +195,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 29 */
 			illegal_bop,	/* BOP 2A */
 #ifndef NTVDM
-                        cmd_install,    /* BOP 2B */
-                        cmd_load,       /* BOP 2C */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else /* NTVDM */
                         illegal_bop,    /* BOP 2B */
                         illegal_bop,    /* BOP 2C */
@@ -365,7 +364,7 @@ void (*BIOS[])() = {
 #ifdef NTVDM
                         rtc_int,        /* BOP 70 */
 #else
-                        illegal_bop,    /* BOP 70 */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
                         re_direct,      /* BOP 71 */
 			D11_int,	/* BOP 72 */
@@ -375,8 +374,7 @@ void (*BIOS[])() = {
 			D11_int,	/* BOP 76 */
 			D11_int,	/* BOP 77 */
 #ifndef NTVDM
-			worm_init,	/* BOP 78 */
-			worm_io,	/* BOP 79 */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #else /* NTVDM */
 			illegal_bop,	/* BOP 78 */
 			illegal_bop,	/* BOP 79 */
@@ -410,9 +408,7 @@ void (*BIOS[])() = {
 			illegal_bop,	 /* BOP 91 */
 			illegal_bop,	 /* BOP 92 */
 #else
-			bootstrap1,	/* BOP 90 */
-			bootstrap2,	/* BOP 91 */
-			bootstrap3,	/* BOP 92 */
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 #ifdef SWINAPI

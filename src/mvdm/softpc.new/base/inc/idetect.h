@@ -9,9 +9,7 @@
  */
 
 #ifndef NTVDM
-extern int idle_no_video;
-extern int idle_no_comlpt;
-extern int idle_no_disk;
+/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
 #endif
 
 void    idetect();
