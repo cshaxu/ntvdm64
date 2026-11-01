@@ -33,7 +33,7 @@ The actual x86 map selects35 translation units. Original bodies are only
 base/win32/server/srvvdm.c and base/ntos/rtl/error.c. The former owns DOS/WOW
 records, queues, completion, block/reentry and cleanup. The latter remains
 the already native-compatible original error table/algorithm. No environ.c,
-time.c, largeint-selected.asm or movemem-selected.asm member is pulled from
+time.c, largeint.asm or movemem.asm member is pulled from
 the linked RTL archive. Their presence in an archive is not an NTSRV dependency.
 No MVDM/CCPU unit enters the service image.
 

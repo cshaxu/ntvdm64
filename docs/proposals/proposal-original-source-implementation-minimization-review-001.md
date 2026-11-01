@@ -1,11 +1,11 @@
-# Proposal — Original-source implementation minimization review
+# Proposal — independent project-wide implementation minimization review
 
 ## Objective and admission
 
 Owner-requested candidate: **implementation minimization review**
 (实现最小化复审). Audit ALL project-owned implementations for duplication of
-behavior already provided by original OpenNT, including the existing mvdm
-and opennt-host mirrors, then consolidate those implementations back to their
+behavior already provided by original OpenNT, including the existing mvdm-host
+and non-mvdm mirrors, then consolidate those implementations back to their
 original owners wherever composable. This is audit AND implementation, not
 an inventory-only task and not a review limited to one historical delivery.
 Preserve all demonstrated working capabilities. Original OpenNT remains authoritative: correct local bindings
@@ -18,21 +18,26 @@ only at admission through CURRENT.md. It does not interrupt or replace the
 active package. The owner's queue request authorizes this proposal, not its
 implementation before admission.
 
-This is the final queued review, after
-[whole-closure recovery](proposal-mvdm-whole-closure-recovery-001.md). Consume its
-shared inventory, stable finding/source-owner IDs, source/build identities and
-tests rather than commissioning another fresh global discovery pass. S1
-reconciles full coverage but researches changed, unclassified or contradicted
-rows; S5 independently checks dispositions and post-change selections, reusing
-valid unchanged evidence. No owner is exempt from coverage.
+This third queued candidate is an independent audit after
+[implementation of the existing DOS16 and WOW32 inventories](proposal-mvdm-whole-closure-recovery-001.md)
+and [mirror-diff review](proposal-unconnected-mirror-diff-cleanup-001.md).
+All three serve the same goals: maximize justified original integration while
+excluding ineligible original parts, and minimize mirror differences and
+autonomous implementation without losing verified capabilities. This task
+enters from all project-owned implementations and their actual owners.
 
-The distinction is missing capability versus unnecessary implementation:
-whole-closure recovery owns missing/cropped/unconnected originals and the
-duplicates displaced by recovery; this review owns remaining duplication and
-unnecessary local code across working capabilities. Newly discovered capability
-gaps receive an explicit original-owner repair disposition through governance,
-not a silent expansion or an unowned deferral. Earlier packages must already
-minimize their own changes; this final review does not license temporary copies.
+Consume the shared inventory, stable finding/source-owner IDs, source/build
+identities and tests, but independently inspect the actual implementation,
+original alternative and earlier reasoning for every in-scope owner. Record
+the prior conclusion, independent judgment, evidence and implemented or
+retained disposition. Reuse unchanged evidence only after verifying input
+identity and relevance; prior sign-off alone is not second-review evidence.
+An independent reviewer may overturn earlier inclusion, exclusion, mirror or
+local-provider decisions and implement corrections within this scope. Newly
+discovered original-owner gaps are explicitly resolved through applicable
+admission and architecture governance, not silently deferred. Earlier tasks
+must complete cleanup necessary to their own repairs; this review is not a
+license for temporary duplication.
 
 ## Project-wide scope and baseline
 
@@ -45,12 +50,15 @@ directory name or previous task closure. Include:
   ABI/package components;
 - adapters, compatibility shims, generated providers and any retained overlay,
   including bodies moved out of historical overlay directories;
-- autonomous logic hidden inside mirror diffs in mvdm and opennt-host;
+- autonomous logic hidden inside mirror diffs in mvdm-host and non-mvdm;
 - selected and unselected implementations, separating live providers from
   dead duplicates, reference-only source and genuinely test-only doubles.
 
 Compare both text and behavior with pinned original OpenNT and with both
-existing mirrors. Match original owners, interfaces, state transitions,
+existing mirrors. Independently challenge original parts excluded or included
+by earlier reviews when their roles affect an implementation decision; original
+existence alone does not make an owner eligible, and a missing runtime trace
+alone does not justify exclusion. Match original owners, interfaces, state transitions,
 failure behavior and lifetime, not merely matching names or lines. Existing
 but unselected or conditionally excluded original functions are first-class
 recovery candidates. Original code not yet mirrored must receive a source-
@@ -76,8 +84,10 @@ implementation consolidation, not speculative CPU or product redesign.
 
 The T448 preclosure selected-build mirror sweep also identified three
 historical standalone declaration headers without an original file at their
-current mirror paths: `opennt-host/base/ntos/rtl/environapi.h`, `zwapi.h`,
-and `opennt-host/netapi/xactsrv/xactsrv_wksta_minimal.h`. The first two have
+historical mirror paths: `opennt-host/base/ntos/rtl/environapi.h`, `zwapi.h`,
+and `opennt-host/netapi/xactsrv/xactsrv_wksta_minimal.h`. These declarations
+now reside in `src/compat/include`; `zwapi.h` also exists under the original
+`src/non-mvdm/public/internal/base/inc` path. The first two have
 existing OPENNT-HOST-015/067 records; the third is present since `639c55e8f`.
 Review their provenance, ownership and placement against the mirror rules as
 part of this proposal. This observation alone does not establish a runtime
@@ -96,11 +106,11 @@ defect or authorize deletion of declarations needed by selected code.
 
 | S | Complete scope | Exit requirement |
 | --- | --- | --- |
-| S1 | Freeze the project-wide implementation/mirror/build inventory; map every local semantic body to original OpenNT owners or a proved modern-product-only requirement. Audit functional duplicates, copied fragments, constants and unselected originals. | Coverage accounts for every owned production source and all mirror deltas; each candidate has a caller, original alternative, necessity evidence and concrete disposition. Group the complete implementation worklist by original owner, not historical task. |
-| S2 | Consolidate CPU/SAS/C-VID, mode transitions, addresses and memory families. Resolve the known register/FLAGS examples and every additional duplicate in these owner families, retaining proven original bug fixes. | Original declarations/provider bodies own the behavior wherever composable; each remaining boundary is evidenced. No register/FLAGS-only partial closure substitutes for the full family ledger. |
-| S3 | Consolidate process/command/BaseClient/BaseSrv, protocol/resource and worker-lifetime families, including shared component logic and mirror-embedded policy copies. | Original task/service policy has one owner; genuinely standalone transport, authentication and process-local resources retain only necessary mechanics. All identified duplicates are implemented away or have a proved retention boundary. |
-| S4 | Consolidate all remaining families found by the complete inventory: DEM/files/OEM conversion, Console/input/video/host services, redirector/network, WOW/debugger/VDD and other selected packages. | No family is omitted because of directory placement or earlier closure. All candidates receive implemented dispositions; unsupported host services are not replaced with fake-success providers. |
-| S5 | Independent whole-project re-audit, formal x86 deployment, complete regression and footprint report; search again for remaining copies after consolidation. | Every inventory item is reconciled, every retained local implementation has a proven reason, and all acceptance requirements below pass; reviewed changes are committed/pushed at delivery. |
+| S1 | Freeze the project-wide implementation/mirror/build inventory, existing audits and prior implementation and mirror-review results; independently map each local semantic body to original owners or a proved product-only requirement. | Every owned production source is covered; each finding records prior and independent decisions, caller, original alternative, necessity evidence and disposition. Group work by original owner. |
+| S2 | Independently review and consolidate CPU/SAS/C-VID, mode transitions, addresses and memory families, including the known register/FLAGS cases. | Original declarations/provider bodies own behavior wherever justified and composable; retained fixes and every boundary are evidenced. |
+| S3 | Independently review and consolidate process/command/BaseClient/BaseSrv, protocol/resource and worker-lifetime families, including shared logic and mirror-embedded policy copies. | One justified owner for original task/service policy; necessary standalone transport, authentication and process-local mechanics remain; each candidate is resolved or evidenced. |
+| S4 | Independently review and consolidate all remaining families: DEM/files/OEM conversion, Console/input/video/host services, redirector/network, WOW/debugger/VDD and other selected packages. | No owner is omitted because of earlier closure; correct erroneous original admission/exclusion and local-provider decisions within applicable governance, and avoid fake-success providers. |
+| S5 | Independently reconcile the full project inventory with existing audits and prior implementation and mirror-review decisions; re-search after consolidation, run formal deployment/regression and report footprint. | Every candidate and reversed decision has evidence, retained local bodies have a concrete rationale, and acceptance and delivery gates pass. |
 
 S1 may split the implementation rows into additional sequential S packets by
 complete original-owner package for manageable execution. Such splitting
@@ -134,7 +144,7 @@ Additional mandatory checks are:
   deployed artifact hashes, documentation governance and diff checks.
 
 Report mirror changes relative both to pinned OpenNT and the task admission
-baseline, separately for mvdm and opennt-host. Report removed/added overlay
+baseline, separately for mvdm-host and non-mvdm. Report removed/added overlay
 and worker/adapter implementation lines separately from declarations, build
 scripts, tests and documentation. List each remaining local semantic body
 with its exact unavailable original alternative and reason for retention.

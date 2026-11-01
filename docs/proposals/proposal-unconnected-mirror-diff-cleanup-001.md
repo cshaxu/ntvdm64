@@ -1,22 +1,44 @@
-# Proposal — unconnected mirror-diff audit and cleanup
+# Proposal — independent mirror-diff review and minimization
 
 ## Admission and objective
 
-Owner request, 2026-10-29: place this candidate first in Queue, to execute
-after the current T completes. This proposal allocates no numeric T and does
-not replace the active packet. Existing audit progress is recorded here rather
-than in a separate `artifacts/exclude-audit.md`.
+This candidate is the second queued package, after the original-source first
+review. It allocates no numeric T and does not replace the active packet.
+The historical 2026-10-29 request and checkpoint below are retained as
+evidence, not the current queue order or a completed review.
 
-Audit and remove changes to original-source mirrors which are not connected
-to the current product compilation/linking. **Runtime execution coverage is
-not a criterion.** An enabled, compiled product path does not need a runtime
-trace hit to justify retaining its necessary compatibility changes.
+Independently review and minimize **all** original-source mirror differences,
+including connected changes and the prior audits' admission, exclusion and
+retention decisions. The shared goals are maximum justified original reuse
+with ineligible originals excluded, and minimum necessary mirror differences
+and autonomous implementations. Enter this review from each mirror diff;
+correct prior audit or implementation mistakes rather than treating those conclusions as final.
+For deciding whether a difference is connected, **runtime execution coverage
+is not a criterion**: lack of a trace hit does not justify deleting a compiled
+and linked path or its required compatibility change.
 
-For an uncompiled file, unused header, disabled conditional branch or
+For a proven uncompiled file, unused header, disabled conditional branch or
 unselected object/provider, restore the corresponding original bytes or
-original changed block. Do not delete original functionality, enable an
-unsupported profile to justify a diff, or retain a change merely because a
-historical fixture uses it. Preserve connected changes in the same file.
+changed block where safe, subject to all consumers and applicable source
+policy. For connected differences, determine whether original code can be
+restored directly or with a smaller source-shaped boundary; retain only
+evidenced necessary compatibility and proven original-bug fixes. Do not
+delete original functionality, enable an unsupported profile to justify a
+diff, or retain a change merely because a historical fixture uses it.
+Preserve necessary connected changes in the same file.
+
+## Independent second-review contract
+
+Inherit the existing audits' and implementation task's stable finding/owner IDs, inventory, identities and
+evidence, but independently inspect the actual source, build selection and
+reasoning for every in-scope difference. Record the prior conclusion,
+second-review decision, supporting evidence and implemented correction or
+retention rationale. Previously valid measurements may be reused after identity
+checks; changed inputs or counterevidence require renewed checks. Neither a
+prior sign-off nor lack of a trace is a substantive independent decision.
+This review may correct unjustified original inclusion or exclusion when
+encountered; broader autonomous-implementation questions are recorded for
+the third review, without deferring cleanup necessary to this task's repairs.
 
 ## Scope and method
 
@@ -36,12 +58,28 @@ historical fixture uses it. Preserve connected changes in the same file.
    confuse COMMON symbols, generated providers, included source fragments or
    a missing MAP file with exclusion. Do not count an unexpanded macro as
    proof of exclusion merely because ordinary `/E` omits its definition.
-5. Restore proven unconnected differences to the pinned original; adjust
+5. Restore proven unconnected differences to the pinned original; assess each
+   connected difference against its original owner and contract, restoring or
+   minimizing it where justified and retaining proven necessary fixes. Adjust
    historical test dependencies and divergence registrations as necessary.
    Keep historical audit snapshots as historical evidence, with a successor
    disposition rather than silently rewriting their meaning.
 6. Report exact file/hunk counts, original/current hashes, compile/link
-   evidence, restored line counts and any unresolved items separately.
+   evidence, restored line counts, independently confirmed/overturned prior
+   decisions, retained rationale and any unresolved items separately.
+
+## Planned S decomposition
+
+| S | Scope | Exit requirement |
+| --- | --- | --- |
+| S1 | Freeze source editions, actual product graphs and prior audit/implementation records; independently inventory all mirror roots and differences. | Every hunk has a stable identity, consumer/connection classification or explicit unresolved investigation, and prior decision where applicable. |
+| S2 | Independently review and restore proven unconnected file, header, branch and provider differences. | All consumers and conditional selections are checked; original restoration is verified without harming connected changes or supported configurations. |
+| S3 | Independently review connected mirror differences by original owner and minimize each safely. | Original contract and smallest feasible binding assessed; necessary fixes and retained differences have evidence; relevant normal, negative and teardown tests cover changes. Split by complete owner as needed. |
+| S4 | Reconcile reversed admission/exclusion decisions, affected tests, registrations and handoff to the project-wide review. | No prior decision is accepted solely on prior authority; related corrections are implemented and residual broader implementation findings have stable IDs. |
+| S5 | Independently reconcile the complete hunk ledger and run applicable build, regression and delivery gates. | Every difference is restored, minimized or justified; source/build identities, limitations and evidence are recorded for the third review. |
+
+These are proposed stages; admission may split them into sequential bounded S
+packets without dropping review coverage or altering the active T.
 
 Follow [source policy](../etc/operations/policy/source-policy.md), preserve
 unrelated work and never modify or rebuild guest images. Do not introduce

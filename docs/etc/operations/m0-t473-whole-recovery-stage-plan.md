@@ -1,5 +1,13 @@
 # T473 whole recovery stage plan
 
+**2026-10-31 owner revision:** T473 S11 is limited to authored non-MVDM
+compilation-condition cleanup; S12 remains in T473. Unfinished original S11
+and former S13–S21 transfer to the first queued MVDM recovery proposal. The
+table and detailed S13 description below are retained as the historical scope
+and handoff inventory, not as remaining T473 stages. Reconcile completed work
+and preserve each outstanding obligation at future admission; do not duplicate
+S12 or claim transferred items completed.
+
 Owner approved this dependency-ordered plan. CURRENT alone admits the active
 S; later entries are planned scopes, subject to subdivision or empty-scope
 closure after the complete cross-audit. No source or capability may disappear

@@ -1,14 +1,29 @@
-# Proposal — MVDM whole-closure completeness audit and recovery
+# Proposal — implement the existing DOS16 and WOW32 audit inventories
+
+## 2026-10-31 owner-directed handoff
+
+This first queued candidate inherits unfinished T473 original S11 execution,
+scheduling, callback, identity and lifetime recovery, and its former S13–S21
+scopes, including the separately described Winmine geometry/background issue,
+DOS, devices, WOW, USER, GDI, minimization and final capability verification.
+The [T473 stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md),
+[recovery worklist](../../artifacts/mvdm-audit/recovery-worklist.md) and
+linked evidence are the handoff inventory. At admission reconcile each item
+against completed delivery and current behavior, and establish bounded stages
+without dropping or duplicating work. T473 S12 remains with T473 and is not
+transferred. Preserve selected CCPU and its V86 emulation; do not restore the
+retired hardware V86 monitor. Reuse original code only where its role and
+selected architecture are established; preserve guest immutability and the
+owner's boundary-only scope. This transfer does not admit the candidate.
 
 ## Objective and admission
 
-Owner-requested candidate, ordered before implementation minimization: audit
-and repair original OpenNT MVDM
-code missing from this repository, and original code already imported but
-not actually used. Recover MVDM as a coherent whole closure, rather than a
-collection of individually selected working fragments. Reduce mirror diffs
-and autonomous implementation footprint by restoring the original owners.
-This is an audit-and-repair package, not an inventory-only delivery.
+Owner-requested candidate, ordered before the two independent reviews:
+implement and validate the actionable findings and handoffs in the existing
+DOS16 and WOW32 audit inventories, together with inherited T473 work. Recover
+the original owners those inventories call for, preserve their exclusion
+decisions, minimize related mirror diffs and remove displaced autonomous
+implementations. This is an implementation task, not a repeat source audit.
 
 This proposal does not allocate a numeric T, admit implementation, or change
 the current active packet. Assign its T number through CURRENT.md when the
@@ -17,10 +32,14 @@ work may already have repaired some gaps.
 
 ## Governing principle
 
-Whole-package inclusion and original-owner reuse are the default. Excluding
-an original part requires evidence of a serious integration problem or an
-unavoidable constraint, not convenience, lack of a current trace hit,
-unresolved symbols, or the fact that COMMAND and EDIT already work.
+Maximize justified original-owner reuse while excluding original parts that
+do not belong in the selected product. Inclusion and exclusion both require
+an explicit source role, selected architecture and dependency-boundary
+decision. Original existence alone does not establish product eligibility;
+convenience, lack of a current trace hit, unresolved symbols, or a few
+working applications alone do not establish a valid exclusion. Apply existing
+source-first and package-closure rules, including their zero-degree and
+transitive-closure requirements, and record any required owner decision.
 
 Distinguish source completeness from executable composition. Guest source,
 immutable guest media, firmware, historical tools and architecture-specific
@@ -37,60 +56,91 @@ selected x86 CCPU40 product. A demonstrated conflict with a hard product
 boundary requires an explicit disposition or owner decision, not a silent
 omission or an unauthorized revival of a retired backend.
 
-## Complete audit scope
+## Execution objectives, boundaries and method
 
-Start with the pinned canonical OpenNT/OpenNT-4.5 MVDM source union, not only
-the current build manifest or a list of previously accepted packages. Retain
-edition conflict decisions and source identities; do not silently combine
-incompatible alternatives. Reuse existing provenance and package ledgers,
-then independently reconcile them with actual files and build artifacts.
+### Owner correction: execute the existing audit inventories
 
-Owner clarification: reconcile this entire T against both read-only
-`ntvdm64-dos16-audit` and `ntvdm64-wow32-audit` inventories and their seam
-contracts. Static audit closure is not product or runtime acceptance. For
-every source file, record one of fully restored, partially restored, or wholly
-excluded, alongside role, selected edition, source and build identities,
-actual link/dispatch evidence, behavioral evidence, and the specific missing
-or excluded capability. A retained mirror diff always means the file is
-partially restored under this reporting rule, even if the affected behavior
-has passed its tests. Keep source-difference evidence separate from verified
-runtime capability; identical source alone does not prove execution.
+The primary execution inputs are the owner's two existing, read-only audits,
+not a newly commissioned original-source census:
 
-Estimate the restored-code proportion for each partial file using a stated,
-reproducible source-line denominator and comparison method, recording the
-edition and unknown or unmeasurable cases explicitly. This is a source-coverage
-estimate, not a behavioral completion percentage. Do not assign a numerical
-percentage when mapping or the original denominator is not established.
-Completely restored and excluded classifications also require evidence of
-actual connection and disposition, respectively, not merely file presence.
-All recoverable original logic remains in this T, with integrated tests and
-the full delivery gates required before T closure. Guest immutability and
-previously approved host-semantic boundaries remain in force.
+- DOS16/non-WOW host: `O:/repos.hobby/ntvdm64-dos16-audit/management/README.md`,
+  its `seam-scope.json`, `seam-work.json`, `seam-records.json`, source evidence,
+  module reports and handoffs.
+- WOW32: `O:/repos.hobby/ntvdm64-wow32-audit/management/README.md`,
+  `management/SEAM-SCOPE.md`, `management/seams.csv`,
+  `management/seam-sites.csv`, `management/seam-gaps.csv` and
+  `management/IMPLEMENTATION-SEAMS.md`, with their linked evidence.
 
-For every original package and path, establish:
+At admission query each audit's current authoritative management entrypoint,
+pin the revisions and input identities, and map its actual entries and
+handoffs to the current product, prior delivered T473 work and executable
+verification. Preserve every applicable row and existing scope boundary;
+make actionable, already-delivered, excluded, pending-audit and unresolved
+states explicit. Implement the existing actionable inventory in dependency
+order; inspect additional source only to resolve a specific missing, stale,
+contradicted or out-of-scope decision, not as a replacement global audit.
+If an audit is still open or its static evidence is incomplete, preserve that
+qualification and record its affected rows rather than inventing completed
+conclusions. Static audit closure is not proof of product integration or
+runtime behavior. These audit repositories are read-only comparison material,
+never product source, build, link, runtime or acceptance dependencies.
 
-- upstream identity and role; whether the file is absent, complete, cropped,
-  or modified locally;
-- declared build selection versus actual compilation, archive extraction,
-  final link, DLL export/loading, registration and dispatch;
-- conditional exclusions, disabled entrypoints, empty providers, unreachable
-  implementations and incomplete initialization/teardown;
-- original callers, transitive package-internal dependencies and necessary
-  external boundaries, including callbacks and dynamically resolved calls;
-- competing local implementations in mirror diffs, executable bindings,
-  adapters, generated carriers and any retained overlay-derived code;
-- intended repair, or a specific evidence-backed reason for retention or
-  exclusion, with the affected capability and future retest condition.
+**Hard exclusion:** never restore the retired hardware V86/CPU30 monitor into
+the product's source selection, build, link or runtime. The selected CCPU40
+and its software V86 emulation remain required: those are distinct from the
+retired hardware monitor. Before each source/build selection, check the audit
+disposition, product architecture and transitive dependencies; a proposal to
+cross an established exclusion stops for explicit owner-directed governance,
+not an inference from original-code presence or a build failure. Verify the
+actual build graph, linked artifacts and selection manifest at each affected
+delivery. Record any contrary evidence without claiming the current product
+contains the retired monitor until that is separately verified.
 
-Use separate fields for source presence, build/link selection, runtime
-reachability and behavior verification. A green compile, an exported symbol
-or a missing trace does not establish functional inclusion or exclusion.
-No item may close as simply unknown, unused, optional or not needed.
+The shared owner goals for this candidate and the next two candidates are:
+(1) maximize justified original integration while definitively excluding
+ineligible parts; and (2) minimize mirror differences and autonomous
+implementation without losing verified capabilities. This candidate executes
+the existing audited dispositions and inherited T473 handoffs, including
+recovery of justified missing/cropped/unconnected owners and removal of
+local code displaced by that recovery. It is not an
+authorization to link all historical code, guest material, alternate CPU
+profiles, private host subsystems or incompatible editions.
 
-Classify packages as fully connected, partially connected or disconnected,
-while identifying legitimate load-only/tool/reference roles separately.
-Quantify every category. Review previous exclusions on their evidence;
-do not assume that prior task closure proves whole-package completeness.
+Use each applicable audit row's established source role, consumers,
+architecture and dependency decision as the implementation starting point;
+check its applicability to the current build and handle a concrete conflict
+through the applicable governance rather than re-auditing every source unit.
+For an admitted owner, attempt original composition, then
+the smallest same-shaped binding, and only then a registered exception under
+the source-first rules. Verify actual compilation/link/dispatch and behavior
+separately. Restore and test the complete affected owner, including failure
+and teardown, and remove displaced duplicate providers in the same stage.
+
+Maintain one shared inventory with stable finding and original-owner IDs,
+pinned source/build identities, admission or exclusion rationale, mirror diff,
+local implementation, disposition, and evidence links. Hand it to both
+subsequent independent reviews. Those reviews may challenge and correct any
+decision; reusing evidence never substitutes for independent assessment.
+
+## Implementation scope and tracking
+
+Start with the two existing audit inventories and their pinned canonical
+OpenNT/OpenNT-4.5 source identities, not a fresh global discovery pass or only
+the current build manifest. Retain edition conflict decisions and source
+identities; do not silently combine incompatible alternatives. Reconcile the
+audited rows and prior T473 delivery against actual files and build artifacts.
+
+For each applicable audit entry and inherited handoff, track its stable ID,
+audited disposition, current implementation status, responsible owner,
+required change, applicable dependency/exclusion, delivery and verification
+evidence. Preserve pending or unresolved audit entries as such. Distinguish
+source presence, actual build/link selection and runtime behavior where needed
+to establish implementation; neither a file's presence nor static audit
+closure establishes execution. Do not repeat a package-wide or file-by-file
+source audit, create a new restored-code percentage census, or re-decide every
+established exclusion as a prerequisite to implementation. All applicable
+actionable rows require implementation and the prescribed delivery gates;
+guest immutability and approved host-semantic boundaries remain in force.
 
 ## Repair approach
 
@@ -98,7 +148,7 @@ Recover missing original files and wrongly cropped bodies, then restore
 complete owner-package composition: entry, initialization, service paths,
 callbacks, failures and teardown. Resolve dependencies by original owner
 first, through the smallest same-shaped modern binding where necessary.
-An external original OpenNT dependency belongs in opennt-host only after its
+An external original OpenNT dependency belongs in non-mvdm only after its
 required slice and finite outgoing boundary are established; do not import
 an entire private Windows subsystem merely to satisfy a symbol.
 
@@ -110,7 +160,7 @@ bug fixes and essential modern integration with explicit justification.
 
 Work by complete owner package in dependency order, not one trace failure at
 a time. Existing functioning capabilities are mandatory regression baselines,
-not exemptions from this audit. Missing external hardware/services need
+not exemptions from implementation verification. Missing external hardware/services need
 bounded mock coverage where feasible and explicit real-host limitations;
 they must not be replaced with fake-success behavior.
 
@@ -118,11 +168,11 @@ they must not be replaced with fake-success behavior.
 
 | S | Scope | Required outcome |
 | --- | --- | --- |
-| S1 | Freeze upstream/repository/build baselines and perform full source-to-runtime reconciliation. | Complete package/path ledger, three connection categories, missing/unused/cropped worklist, duplication map and dependency-ordered repair design; every exclusion has evidence. |
-| S2 | Restore missing or unjustifiably cropped original source and required source/build carriers. | Provenance-correct imports at original paths, resolved edition choices and role-correct manifests; importing files alone does not close runtime gaps. |
-| S3 | Reconnect all unjustifiably unused or partially selected runtime owners, including lifecycle and dependent original slices. | Complete package-level behavior verification and removal of temporary bindings displaced by original code. At admission split this phase into sequential S packets, one complete owner package per packet, as the S1 findings require. |
-| S4 | Consolidate mirror diffs, autonomous bodies and obsolete build/overlay selections displaced by this package's recovery. | Each displaced duplicate removed; retained recovered boundaries explained and tested; unrelated working-code minimization findings handed to the subsequent review with stable IDs. |
-| S5 | Independently re-audit the entire source/build/runtime closure and run final integrated acceptance. | No unclassified source or unjustified runtime omission; reproducible artifact identities, footprint report and reviewed delivery. |
+| S1 | Pin and reconcile both existing audit inventories and inherited T473 work against the actual product and delivered evidence; check established exclusions before selecting code. | Stable source-row mapping and dependency-ordered implementation worklist distinguish delivered, actionable, excluded, pending-audit and unresolved items; no inherited item silently dropped or fresh global audit substituted. |
+| S2 | Implement evidenced source and build admission/exclusion decisions, including missing or cropped original owners. | Correct original paths, edition and provenance; correct product selection and explicit exclusions; source presence alone is not runtime proof. |
+| S3 | Recover admitted runtime owners and their lifecycle/dependency boundaries, and remove the local providers each recovery displaces. | Per-owner normal, negative and teardown proof through real callers; split into sequential complete-owner S packets as needed. |
+| S4 | Finish mirror boundaries and local implementations affected by the listed recovery; preserve working capabilities and register necessary exceptions. | Every recovery-related diff and duplicate is resolved or evidenced; broader audit candidates retain stable IDs for later tasks. |
+| S5 | Reconcile implementation status for all applicable existing audit rows and inherited work, run integrated acceptance, and prepare handoff. | Actionable rows are implemented and verified, exclusions preserved, and pending audit work and limitations explicit; identities and evidence are available for later independent audits. |
 
 These are planned phases, not an allocation of active S identifiers. Any
 renumbering after package-level decomposition must retain all obligations.
@@ -145,16 +195,18 @@ limitations remain recorded rather than repaired through guest mutation.
 
 Final acceptance requires:
 
-- every upstream package/path reconciled with actual source and composition;
-- all recoverable omissions repaired, not merely proposed;
-- serious/unavoidable exclusions explicitly justified with affected behavior,
+- every applicable audited package/path and inherited handoff reconciled with
+  actual source and composition, with audit gaps and limitations explicit;
+- all justified and recoverable omissions repaired, not merely proposed;
+- every exclusion explicitly justified by its role, selected architecture and
+  applicable rules, with affected behavior,
   evidence, owner decision where required and a retest condition;
 - no remaining duplicate local provider for a restored original owner;
 - complete established regression, focused capability tests, documentation
   governance, diff checks and reviewed commit/push at delivery.
 
-Report before/after file counts and added/deleted lines for mvdm and
-opennt-host separately, both against pinned upstream and the task admission
+Report before/after file counts and added/deleted lines for mvdm-host and
+non-mvdm separately, both against pinned upstream and the task admission
 revision. Separate new original imports from modifications to existing mirror
 files. Report autonomous production bodies in adapters/executable bindings
 and overlays separately, including both removed and added lines and net
@@ -165,22 +217,12 @@ footprint, never a lower line count obtained by losing working capability.
 
 ## Relationship to other queued work
 
-The subsequent [implementation minimization review](proposal-original-source-implementation-minimization-review-001.md)
-starts from local implementations and seeks their original replacements.
-This candidate starts from the complete original MVDM universe and checks
-for omissions and unused originals, including gaps with no local substitute.
-Reuse and verify prior recovery results; repair residual gaps rather than
-duplicate completed work. This candidate precedes implementation minimization
-so that the latter can consolidate against the recovered original closure.
-It does not divert the active runtime-completion task.
-
-The queue places this package after contract auditing, WOW completion,
-error-response recovery and product experience repair. Its repair ownership
-is missing/cropped/unconnected original capability, including removal of local
-providers displaced by that restoration; unrelated working-code minimization
-belongs to the subsequent review. Maintain shared stable finding/source-owner
-IDs, source/build hashes, dispositions and executable evidence. Pass that
-reconciled inventory forward, including changed and unresolved rows; unchanged
-accepted evidence is reopened only for changed inputs or counterevidence.
-Full coverage reconciliation is required, but repeating all prior source
-research is not. Neither package defers cleanup necessary for its own repairs.
+The subsequent [mirror-diff review](proposal-unconnected-mirror-diff-cleanup-001.md)
+independently evaluates every mirror difference, including connected and
+unconnected changes. The [project-wide implementation review](proposal-original-source-implementation-minimization-review-001.md)
+independently evaluates autonomous implementations and original-owner choices.
+Both may challenge the existing audit and this task's inclusion, exclusion or retention
+decisions and implement corrections within their scopes. They reuse pinned
+evidence when still valid but independently examine the actual conclusion and
+code; changed inputs or counterevidence require renewed verification. Neither
+later review excuses leaving recovery-related cleanup unfinished here.

@@ -129,11 +129,30 @@ against their defect contract, not presented as performance optimizations.
   and every intentionally retained non-format difference.
 - For a deleted original conditional branch body, retain the original
   conditional boundary and replace its body solely with `#error`, never a
-  comment placeholder. Conditions nested inside that removed body need not be
-  retained. Preserve selected alternatives and add `#line` where needed to
+  comment placeholder. The directive identifies the unsupported configuration.
+  Process from the outside inward: remove conditions nested inside a wholly
+  excluded body. Preserve selected alternatives and add `#line` where needed to
   retain original diagnostic line numbers. Do not add a divergence comment to
   the deleted body; record its provenance and exception in the external mirror
   ledger. Do not modify or rebuild guest to apply this rule.
+- Classify an exclusion against the pinned original, its full effective
+  condition, all supported production and test configurations, and the local
+  patch ledger. A false single condition, or a false required conjunct, proves
+  exclusion only where established in every applicable supported configuration;
+  an unknown operand or one false operand of an OR does not. Unreached nested
+  conditions are unknown, not automatically false. Deliberate negative tests
+  of unsupported configurations are not supported configurations themselves.
+  Exclude an established unreachable body even if it contains a local patch,
+  subject to immutable-guest and other applicable source boundaries. Remove
+  registrations only for patches actually removed; preserve selected
+  bodies, shared declarations and their remaining registrations.
+- Verify affected supported x86/x64 build and test selections and behavior;
+  deliberately selecting an excluded configuration must fail at its `#error`.
+  Verify diagnostic file/line mappings where `#line` changes, including
+  sibling and enclosing alternatives. Record original, subset and local-diff
+  identities separately. Do not generate transformed mirror source as a build
+  input to implement this conditional cleanup. Ordinary comments, include
+  guards and wholly excluded files are not excluded branch bodies.
 - Each changed expression still has a local `DIVERGENCE:` explanation and
   README row identifying original purpose, reason and implementation. Deletions
   outside a conditional are not replaced by an unconditional `#error`.

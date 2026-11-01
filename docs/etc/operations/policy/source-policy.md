@@ -125,6 +125,8 @@ divergence comment. Do not retain nested conditions inside that removed body;
 preserve selected alternatives and retain or add `#line` when needed for
 diagnostic line numbers. Record the deletion and provenance externally; other
 actual code adaptations retain their applicable local divergence explanations.
+Classification and verification follow the [mirror conditional rules](../../../rules/CODING.md#original-mirrors),
+including supported test configurations and deliberate rejection controls.
 This does not authorize modifying or rebuilding guest.
 
 Owner clarification dated 2026-10-04 distinguishes defect cause, not location:
