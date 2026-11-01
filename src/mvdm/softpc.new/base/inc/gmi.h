@@ -57,11 +57,7 @@ IMPORT	boolean	gmi_disconnect_mem IPT3(sys_addr, laddr,
 	sys_addr, haddr, mem_type, type);
 IMPORT	void	gmi_define_mem IPT2(mem_type, type, MEM_HANDLERS *, handlers);
 #else	/* CCPU */
-IMPORT	boolean	gmi_connect_mem	IPT3(host_addr, laddr, host_addr, haddr,
-	mem_type, type);
-IMPORT 	boolean	gmi_disconnect_mem IPT3(host_addr, laddr, host_addr, haddr,
-	mem_type, type);
-IMPORT	void	gmi_define_mem IPT2(mem_type, type, MEM_HANDLERS *, handlers);
+/* DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register. */
 #endif	/* CCPU */
 
 #endif /* UNIVERSAL */

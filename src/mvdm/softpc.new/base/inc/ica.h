@@ -78,19 +78,9 @@
 /* DIVERGENCE(MVDM-HOST-DIV-146): the historical combined CCPU build defined
  * CPU_30_STYLE even when it selected CPU_40_STYLE, solely to keep this ICA
  * bit-number macro from replacing the CCPU interrupt enum.  CPU30 is retired
- * in this product, so keep the original macro out of every CCPU build instead. */
+ * in this product; the unselected non-CCPU body is now marked by DIV-506. */
 #if !defined(CCPU)
-
-/* def of bits in the CPU_INTERRUPT_MAP ?? */
-#define CPU_HW_INT		0
-#define CPU_HW_INT_MASK		(1 << CPU_HW_INT)
-
-/*
- * CPU software interrupt definitions
- */
- 
-#define CPU_SW_INT              8
-#define CPU_SW_INT_MASK         (1 << CPU_SW_INT)
+/* DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register. */
 #endif /* 3.0 CPU or CCPU */
 
 #define DIVIDE_OVERFLOW_INT     0
