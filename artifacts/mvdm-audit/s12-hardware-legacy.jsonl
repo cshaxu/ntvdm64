@@ -1,0 +1,13 @@
+{"path":"src/mvdm/softpc.new/base/keymouse/keyba.c","start":2961,"end":2964,"removed_lines":2,"sha256":"d8ea3114a01be457c3db4b0b71adaeab20f5d82f60dd9d8face4692b113a782f","tag":"REAL_KBD","baseline":"3ea7b4ef3"}
+{"path":"src/mvdm/softpc.new/base/keymouse/keyba.c","start":1956,"end":1958,"removed_lines":1,"sha256":"392d33ad714153193f57543e8e9e4a7b84f6ce167693a0da19589fb89a769205","tag":"REAL_KBD","baseline":"3ea7b4ef3"}
+{"path":"src/mvdm/softpc.new/base/keymouse/keyba.c","start":1948,"end":1952,"removed_lines":3,"sha256":"100c6a21ccacb011837a743022d24205d62d1df4081332a735b1bf32c355ea04","tag":"REAL_KBD","baseline":"3ea7b4ef3"}
+{"path":"src/mvdm/softpc.new/base/keymouse/keyba.c","start":205,"end":208,"removed_lines":2,"sha256":"24d6c326c53f4a256b4289ae616ef6baf15662776492e09bd2362fb274b08545","tag":"REAL_KBD","baseline":"3ea7b4ef3"}
+{"path":"src/mvdm/softpc.new/base/disks/fdisk.c","start":1782,"end":1784,"removed_lines":1,"sha256":"3f0d179d06c244194166c57d93a9521468ba5d7a0f05c10f4744f096fe7fe8d8","tag":"REAL_ROM","baseline":"3ea7b4ef3"}
+{"path":"src/mvdm/softpc.new/base/disks/fdisk.c","start":1775,"end":1777,"removed_lines":1,"sha256":"783fe105c5cef370ca54488a9a58a0f1f7e646541e234c3b66736c7ec4ad56d8","tag":"REAL_ROM","baseline":"3ea7b4ef3"}
+{"path":"src/mvdm/softpc.new/base/disks/fdisk.c","start":1762,"end":1764,"removed_lines":1,"sha256":"5728acbec6c81daefe8c1ea3d6b34aaac0ee8d6c87fcac1cb4320f49839bc499","tag":"REAL_ROM","baseline":"3ea7b4ef3"}
+{"path":"src/mvdm/softpc.new/base/disks/fdisk.c","start":1755,"end":1757,"removed_lines":1,"sha256":"ed9f3ce0843c45d055b7068598a0fee61b06588a503f2cbe9c6255cbb0a2f197","tag":"REAL_ROM","baseline":"3ea7b4ef3"}
+{"path":"src/mvdm/softpc.new/base/disks/fdisk.c","start":1727,"end":1729,"removed_lines":1,"sha256":"3f0d179d06c244194166c57d93a9521468ba5d7a0f05c10f4744f096fe7fe8d8","tag":"REAL_ROM","baseline":"3ea7b4ef3"}
+{"path":"src/mvdm/softpc.new/base/disks/fdisk.c","start":1720,"end":1722,"removed_lines":1,"sha256":"783fe105c5cef370ca54488a9a58a0f1f7e646541e234c3b66736c7ec4ad56d8","tag":"REAL_ROM","baseline":"3ea7b4ef3"}
+{"path":"src/mvdm/softpc.new/base/disks/fdisk.c","start":1699,"end":1701,"removed_lines":1,"sha256":"5728acbec6c81daefe8c1ea3d6b34aaac0ee8d6c87fcac1cb4320f49839bc499","tag":"REAL_ROM","baseline":"3ea7b4ef3"}
+{"path":"src/mvdm/softpc.new/base/disks/fdisk.c","start":1692,"end":1694,"removed_lines":1,"sha256":"ed9f3ce0843c45d055b7068598a0fee61b06588a503f2cbe9c6255cbb0a2f197","tag":"REAL_ROM","baseline":"3ea7b4ef3"}
+{"path":"src/mvdm/softpc.new/base/bios/reset.c","start":415,"end":417,"removed_lines":1,"sha256":"49839ca6609de72fc3dd0e2ccbf14249ffb7339cf2ec6c56cdf3326f13851140","tag":"A_VID","baseline":"3ea7b4ef3"}

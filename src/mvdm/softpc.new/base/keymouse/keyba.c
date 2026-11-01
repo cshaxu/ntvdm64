@@ -203,8 +203,7 @@ ULONG LastKbdInt=0;
 #define DEFAULT_SCAN_CODE_SET 2
 
 #ifdef REAL_KBD
-extern void send_to_real_kbd();
-extern void wait_for_ack_from_kb();
+/* DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -1946,15 +1945,13 @@ if (waiting_for_next_code)
 		break;
 
 #else
-	default :
-		/* cmd to be sent on to real kbd */
-		send_to_real_kbd(cmd_code);
+/* DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register. */
 #endif
 	} /* end of switch */
 #ifndef REAL_KBD
 }
 #else
-	waiting_for_next_code=FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register. */
 #endif
 
 #ifndef REAL_KBD
@@ -2959,8 +2956,7 @@ GLOBAL VOID AT_kbd_init IFN0()
 	key_set=DEFAULT_SCAN_CODE_SET;
 	current_light_pattern=0;
 #ifdef REAL_KBD
-	send_to_real_kbd(0xf6); /* set default */
-	wait_for_ack_from_kb();
+/* DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register. */
 #endif
 	host_kb_light_on (7);
 

@@ -1,5 +1,9 @@
 # mvdm
 
+MVDM-HOST-DIV-535: replace unselected REAL_KBD, REAL_ROM and A_VID branch
+bodies with markers, retaining their original conditionals. Original ranges
+and body hashes are in `../../artifacts/mvdm-audit/s12-hardware-legacy.jsonl`.
+
 MVDM-HOST-DIV-534: replace the unreferenced GISP hardware VGA interface body
 in `hwvga.h` with a marker, retaining the outer conditional and provenance.
 The original file and body hashes are in

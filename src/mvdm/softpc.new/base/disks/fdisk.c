@@ -1690,14 +1690,14 @@ GLOBAL VOID fdisk_ioattach IFN0()
 		nheads = drives[0].maxhead + 1;
 		nsects = drives[0].maxsect + 1;
 #ifdef REAL_ROM
-		host_write_enable((DPB0 & (~0xfff)), (DPB0 & (~0xfff)) + 0x1000);
+/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
 #endif
 		patch_rom(DPB0, (unsigned char) (ncyls & 0xff));
 		patch_rom(DPB0+1, (unsigned char) (ncyls >> 8));
 		patch_rom(DPB0+2, nheads);
 		patch_rom(DPB0+0xe, nsects);
 #ifdef REAL_ROM
-		host_write_protect((DPB0 & (~0xfff)), (DPB0 & (~0xfff)) + 0x1000);
+/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
 #endif
 		dt1(DHW | IOAD, 0, "drive 0 wiredup, total cyls %d\n",
 		    (unsigned) ncyls)
@@ -1718,14 +1718,14 @@ GLOBAL VOID fdisk_ioattach IFN0()
 		nheads = drives[1].maxhead + 1;
 		nsects = drives[1].maxsect + 1;
 #ifdef REAL_ROM
-		host_write_enable((DPB1 & (~0xfff)), (DPB1 & (~0xfff)) + 0x1000);
+/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
 #endif
 		patch_rom(DPB1, ncyls & 0xff);
 		patch_rom(DPB1 + 1, (ncyls >> 8));
 		patch_rom(DPB1+2, nheads);
 		patch_rom(DPB1+0xe, nsects);
 #ifdef REAL_ROM
-		host_write_protect((DPB1 & (~0xfff)), (DPB1 & (~0xfff)) + 0x1000);
+/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
 #endif
 		dt1(DHW | IOAD, 0, "drive 1 wiredup, total cyls %d\n",
 		    (unsigned) ncyls)
@@ -1753,14 +1753,14 @@ GLOBAL VOID fdisk_iodetach IFN0()
 		 */
 		drives[0].wiredup = 0;
 #ifdef REAL_ROM
-		host_write_enable((DPB0 & (~0xfff)), (DPB0 & (~0xfff)) + 0x1000);
+/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
 #endif
 		patch_rom(DPB0, 0);
 		patch_rom(DPB0 + 1, 0);
 		patch_rom(DPB0 + 2, 0);
 		patch_rom(DPB0 + 0xe, 0);
 #ifdef REAL_ROM
-		host_write_protect((DPB0 & (~0xfff)), (DPB0 & (~0xfff)) + 0x1000);
+/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
 #endif
 		dt0(DHW | IOAD, 0, "drive 0 unplugged\n")
 	}
@@ -1773,14 +1773,14 @@ GLOBAL VOID fdisk_iodetach IFN0()
 		 */
 		drives[1].wiredup = 0;
 #ifdef REAL_ROM
-		host_write_enable((DPB1 & (~0xfff)), (DPB1 & (~0xfff)) + 0x1000);
+/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
 #endif
 		patch_rom(DPB1, 0);
 		patch_rom(DPB1 + 1, 0);
 		patch_rom(DPB1 + 2, 0);
 		patch_rom(DPB1 + 0xe, 0);
 #ifdef REAL_ROM
-		host_write_protect((DPB1 & (~0xfff)), (DPB1 & (~0xfff)) + 0x1000);
+/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
 #endif
 		dt0(DHW | IOAD, 0, "drive 1 unplugged\n")
 	}

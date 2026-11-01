@@ -413,7 +413,7 @@ LOCAL void announce_variant IFN0()
 #endif /* PIG */
 
 #ifdef A_VID
-	strcat (buff, " A_VID");
+/* DIVERGENCE MVDM-HOST-DIV-535: A_VID branch is not selected; see mirror register. */
 #endif /* A_VID */
 
 #ifdef C_VID
