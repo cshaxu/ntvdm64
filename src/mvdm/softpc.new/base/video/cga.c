@@ -122,8 +122,7 @@ static int current_mode = -1;	/* Value of Mode Select at last call    */
  */
 
 #ifdef HUNTER
-half_word MC6845[MC6845_REGS];  /* The current values of the MC6845 registers */
-half_word mode_reg;             /* The value of the mode control register */
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif
 
 static half_word index_reg = 00 ;	/* Index register	 */
@@ -428,7 +427,7 @@ switch (address) {
     case 0x3D5:
     case 0x3D7:
 #ifdef HUNTER
-        MC6845[index_reg] = value;
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -742,7 +741,7 @@ switch (address) {
          */
 
 #ifdef HUNTER
-        mode_reg = value;
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif
         timer_video_enabled = (boolean) (value & VIDEO_ENABLE);
 
@@ -1344,8 +1343,7 @@ IMPORT void Glue_set_vid_wrt_ptrs IPT1(WRT_POINTERS *, handler );
 io_addr i;
 
 #ifdef HUNTER
-for (i = 0; i < MC6845_REGS; i++)
-    MC6845[i] = 0;
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif
 
 

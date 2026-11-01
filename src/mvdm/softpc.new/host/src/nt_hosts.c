@@ -26,7 +26,7 @@
 #include "nt_reset.h"
 
 #ifdef HUNTER
-#include "nt_hunt.h"
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /*HUNTER*/
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::: Global variables */
@@ -60,7 +60,7 @@ PSTR String(WORD StrResID);
 void InitScreenDesc(void);
 
 #ifdef HUNTER
-void HunterMenuMake(void);
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /* HUNTER */
 
 HANDLE   SCS_hStdIn=0;
@@ -246,7 +246,7 @@ HANDLE inherited_error;
     SetupConsoleMode();
 
 #ifdef HUNTER
-    HunterMenuMake();
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /*HUNTER*/
 
     /*::::::::::::::::::::::::::: Tell console to post us a closedown event */
@@ -319,52 +319,5 @@ the control of Trapper.
 ============================================================================*/
 
 #ifdef HUNTER
-void HunterMenuMake(void)
-{
-HMENU hTest,hTrapperPopup,hMainPopup,hErrorPopup;
-static BOOL  bTrapperMenuFlag=FALSE;
-
-if(!bTrapperMenuFlag)
-   {
-   /*========================================================================
-   The Menus have been drawn once already. Need to delete these and reappend
-   them to the Console menu for the new output buffer. Isn't Console just such
-   a bore?
-   ========================================================================*/
-
-   DestroyMenu(hTrapperPopup);
-   DestroyMenu(hMainPopup);
-   DestroyMenu(hErrorPopup);
-   }
-
-hTrapperPopup = CreateMenu();
-hMainPopup    = CreateMenu();
-hErrorPopup   = CreateMenu();
-
-AppendMenu(hMainPopup,MF_STRING,IDM_MFAST,"&Fast forward");
-AppendMenu(hMainPopup,MF_STRING,IDM_MNEXT,"&Next screen");
-AppendMenu(hMainPopup,MF_STRING,IDM_MPREV,"&Prev screen");
-AppendMenu(hMainPopup,MF_STRING,IDM_MSHOW,"&Show screen");
-AppendMenu(hMainPopup,MF_STRING,IDM_MCONT,"&Continue");
-AppendMenu(hMainPopup,MF_STRING,IDM_MABOR,"&Abort");
-
-AppendMenu(hErrorPopup,MF_STRING,IDM_EFLIP,"&Flip screen");
-AppendMenu(hErrorPopup,MF_STRING,IDM_ENEXT,"&Next error");
-AppendMenu(hErrorPopup,MF_STRING,IDM_EPREV,"&Prev error");
-AppendMenu(hErrorPopup,MF_STRING,IDM_EALL,"&All errors");
-AppendMenu(hErrorPopup,MF_STRING,IDM_ECLEA,"&Clear errors");
-
-AppendMenu(hTrapperPopup,MF_POPUP,hMainPopup,"&Main");
-AppendMenu(hTrapperPopup,MF_POPUP,hErrorPopup,"&Error");
-
-/* if graphics mode, then use sc.ScreenBuffer */ 
-
-/* hTest = ConsoleMenuControl(sc.ScreenBuffer,IDM_TRAPPER,IDM_ECLEA); */
-
-/* else text mode, then use sc.OutputHandle */
-hTest = ConsoleMenuControl(sc.OutputHandle,IDM_TRAPPER,IDM_ECLEA);
-
-AppendMenu(hTest,MF_POPUP,hTrapperPopup,"&Trapper");
-bTrapperMenuFlag=TRUE; /* draw the trapper menu just once */
-}
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /* HUNTER */

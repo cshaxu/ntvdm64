@@ -54,9 +54,7 @@
 #include "pmvdm.h"
 
 #ifdef HUNTER
-
-#include "ckmalloc.h"
-#include "debug.h"
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif  //HUNTER
 
 
@@ -67,48 +65,7 @@ IMPORT SHORT gfi_floppy_active (UTINY hostID, BOOL active, CHAR *err);
 IMPORT ULONG xmsMemorySize;
 
 #ifdef HUNTER
-/*
- * ===========================================================================
- * LOCAL DATA STRUCTURES
- * ===========================================================================
- */
-
-typedef struct {
-    ConfigValues *data;
-    OptionDescription *def;
-} ConfTabEntry;
-
-/*
- * ===========================================================================
- * LOCAL FUNCTIONS
- * ===========================================================================
- */
-VOID build_data_table(VOID);
-VOID read_trapper_variables(VOID);
-VOID convert_arg(CHAR *, OptionDescription *, ConfigValues *);
-SHORT check_value(OptionDescription *, ConfigValues *);
-
-/*
- * ===========================================================================
- * IMPORTED DATA STRUCTURES
- * ===========================================================================
- */
-
-IMPORT OptionDescription host_defs[];   /* From hunt_conf.c */
-
-/*
- * ===========================================================================
- * LOCAL DATA
- * ===========================================================================
- */
-
-/* Dummy `common_defs' to pass to `host_config_init' */
-LOCAL OptionDescription common_defs[] =
-{
-    { NULL, NULL, NULL, NULL, NULL, -1, C_RECORD_DELETE }
-};
-LOCAL ConfTabEntry *conf_tab = NULL;
-
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /* HUNTER */
 
 
@@ -317,16 +274,7 @@ GLOBAL VOID config( VOID )
     ULONG dpmiMemorySize, vdmMemorySize;
 
 #ifdef HUNTER
-
-        /* Build table in which to store config data. */
-        build_data_table();
-
-        /* Initialise optionName fields of host_defs table. */
-        host_config_init(common_defs);
-
-        /* Read in trapper variables from environment. */
-        read_trapper_variables();
-
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /* HUNTER */
 
          /*
@@ -704,35 +652,7 @@ config_inquire(UTINY hostID, ConfigValues *values)
 
 
 #ifdef HUNTER
-
-                case C_HU_FILENAME:
-                case C_HU_MODE:
-                case C_HU_BIOS:
-                case C_HU_REPORT:
-                case C_HU_SDTYPE:
-                case C_HU_CHKMODE:
-                case C_HU_CHATTR:
-                case C_HU_SETTLNO:
-                case C_HU_FUDGENO:
-                case C_HU_DELAY:
-                case C_HU_GFXERR:
-                case C_HU_TS:
-                case C_HU_NUM:
-                    switch (conf_tab[hostID].def->flags & C_TYPE_MASK)
-                    {
-                    case C_STRING_RECORD:
-                        strcpy(values->string,
-                               conf_tab[hostID].data->string);
-                        return ((VOID *) values->string);
-                    case C_NAME_RECORD:
-                    case C_NUMBER_RECORD:
-                        values->index = conf_tab[hostID].data->index;
-                        return ((VOID *) values->index);
-                    default:
-                        break;
-                    }
-                    break;
-
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /* HUNTER */
 
 		case C_COM_SYNCWRITE:
@@ -860,86 +780,7 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
 
 
 #ifdef HUNTER
-
-/*
- * ==========================================================================
- * Function: translate_to_string.
- *
- *  Taken from `conf_util.c' which we don't use. Takes a SHORT and returns
- * the corresponding string in the `NameTable'.
- * ==========================================================================
- */
-GLOBAL CHAR *
-translate_to_string(SHORT value, NameTable table[])
-{
-        FAST NameTable *nameTabP;
-
-        for (nameTabP = table; nameTabP->string; nameTabP++)
-                if (nameTabP->value == value)
-                        break;
-
-        return nameTabP->string;
-}
-
-/*
- * ==========================================================================
- * Function: translate_to_value.
- *
- *  Taken from `conf_util.c' which we don't use. Takes a string and returns
- * the corresponding SHORT in the `NameTable'.
- * ==========================================================================
- */
-GLOBAL SHORT
-translate_to_value(CHAR *string, NameTable table[])
-{
-        FAST NameTable *nameTabP;
-
-        for (nameTabP = table; nameTabP->string; nameTabP++)
-                if(!strcmp(string, nameTabP->string))
-                        break;
-
-        return (!nameTabP->string)? C_CONFIG_NOT_VALID : nameTabP->value;
-}
-
-/*
- * ==========================================================================
- * Function: validate_item.
- *
- *  Taken from `conf_def.c' which we don't use. Needed because `hunt_conf.c'
- * uses it as the validation routine for several `config' variables (see
- * `host_defs' table in `hunt_conf.c').
- * ==========================================================================
- */
-GLOBAL SHORT
-validate_item(UTINY hostID, ConfigValues *value,
-              NameTable *table, CHAR *err)
-{
-        char *what;
-
-        if (!(what = translate_to_string(value->index, table)))
-        {
-                *err = '\0';
-                return EG_BAD_VALUE;
-        }
-        return C_CONFIG_OP_OK;
-}
-
-/*
- * ==========================================================================
- * Function: add_resource_node.
- *
- *  Stubbed add_resource_node added to satisfy reference in unused
- * `host_read_resource_file' in `hunt_cnf.c'. Needed in order to make trapper
- * SoftPC link when using Microsoft `config'.
- * ==========================================================================
- */
-GLOBAL LineNode *
-add_resource_node(CHAR *str)
-{
-    always_trace0("Stubbed add_resource_node called");
-    return((LineNode *) NULL);
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /* HUNTER */
 
 /*
@@ -949,129 +790,7 @@ add_resource_node(CHAR *str)
  */
 
 #ifdef HUNTER
-
-VOID
-build_data_table(VOID)
-{
-    SHORT   maxHostID = 0;
-    OptionDescription *defP;
-
-    /* Don't do it more than once. */
-    if (conf_tab != NULL)
-        return;
-
-    /* Find out how big the table needs to be. */
-    for (defP = host_defs; defP->optionName; defP++)
-        if (defP->hostID > maxHostID)
-            maxHostID = defP->hostID;
-    maxHostID++;
-
-    /* Create the table. */
-    check_malloc(conf_tab, maxHostID, ConfTabEntry);
-}
-
-VOID
-read_trapper_variables(VOID)
-{
-    CHAR  arg[MAXPATHLEN],
-         *vp;
-    OptionDescription *defP;
-    ConfigValues  data,
-                 *cvp;
-    ErrData errData;
-
-    /* Read all the variables required by trapper from the environment. */
-    for (defP = host_defs; defP->optionName; defP++)
-    {
-
-        /*
-         * Ignore `host_defs' entries designed to override `common_defs'
-         * entries as we have an empty common_defs table.
-         */
-        if ((defP->flags & C_TYPE_MASK) == C_RECORD_DELETE)
-            continue;
-
-        /* Get the variable. */
-        vp = host_getenv(defP->optionName);
-        if (vp != NULL)
-            strcpy(arg, vp);
-        else
-            arg[0] = '\0';
-
-        /*
-         * Convert variable and store in ConfigValues structure for use by
-         * validation routine.
-         */
-        convert_arg(arg, defP, &data);
-        errData.string_1 = arg;
-        errData.string_2 = defP->optionName;
-        while (check_value(defP, &data))
-        {
-            if (host_error_ext(EG_BAD_CONF, ERR_QU_CO, &errData) == ERR_CONT)
-                convert_arg(arg, defP, &data);
-        }
-
-        /* Store the value in the data table. */
-        check_malloc(cvp, 1, ConfigValues);
-        conf_tab[defP->hostID].data = cvp;
-        conf_tab[defP->hostID].def = defP;
-        switch (defP->flags & C_TYPE_MASK)
-        {
-        case C_STRING_RECORD:
-            always_trace2("read_trapper_variables: %s set to %s",
-                          defP->optionName, data.string);
-            strcpy(cvp->string, data.string);
-            break;
-
-        case C_NAME_RECORD:
-        case C_NUMBER_RECORD:
-            always_trace2("read_trapper_variables: %s set to %d",
-                          defP->optionName, data.index);
-            cvp->index = data.index;
-            break;
-
-        default:
-            break;
-        }
-    }
-}
-
-VOID
-convert_arg(CHAR *arg, OptionDescription *defP, ConfigValues *dataP)
-{
-    switch (defP->flags & C_TYPE_MASK)
-    {
-    case C_STRING_RECORD:
-        strcpy(dataP->string, arg);
-        break;
-
-    case C_NAME_RECORD:
-        dataP->index = translate_to_value(arg, defP->table);
-        break;
-
-    case C_NUMBER_RECORD:
-        dataP->index = atoi(arg);
-        break;
-
-    default:
-        (VOID) host_error(EG_OWNUP, ERR_QUIT, "Invalid TYPE");
-        break;
-    }
-}
-
-SHORT
-check_value(OptionDescription *defP, ConfigValues *dataP)
-{
-    SHORT status;
-    CHAR errbuf[MAXPATHLEN];
-
-    if (defP->valid)
-        status = (*defP->valid)(defP->hostID, dataP, defP->table, errbuf);
-    else
-        status = C_CONFIG_OP_OK;
-    return(status);
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /* HUNTER */
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/

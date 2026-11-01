@@ -99,7 +99,7 @@ extern void host_timer_event IPT0();
 extern void generic_timer_event IPT0();
 
 #ifdef HUNTER
-extern word timer_batch_count;
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /* HUNTER */
 
 extern int timer_int_enabled;

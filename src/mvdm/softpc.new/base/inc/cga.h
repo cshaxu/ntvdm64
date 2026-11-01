@@ -20,7 +20,7 @@
  */
 
 #ifdef HUNTER
-#    define MC6845_REGS   18        /* No. of registers in a MC6845 chip     */
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif
 
 
@@ -69,8 +69,7 @@ typedef union                       /* Template for character attributes     */
  */
 
 #ifdef HUNTER
-    extern half_word MC6845[];        /* The MC6845 data register values */
-    extern half_word mode_reg;        /* MC6845 mode control register value */
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif
 
 extern void cga_init	IPT0();

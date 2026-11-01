@@ -3410,46 +3410,7 @@ LOCAL	void	vote_ega_mode IFN0()
 }
 
 #ifdef HUNTER
-
-/* Get line compare value */
-
-int ega_get_line_compare IFN0()
-
-    {
-    int		return_value;
-
-    return_value = crt_controller.line_compare;
-    if (crt_controller.crtc_overflow.as_bfld.line_compare_bit_8 != 0)
-	return_value += 0x100;
-    return (return_value);
-    }			/* ega_get_line_compare */
-
-/* Get maximum scan lines value */
-
-int ega_get_max_scan_lines IFN0()
-
-    {
-    return (crt_controller.maximum_scan_line.as_bfld.maximum_scan_line);
-    }			/* ega_get_max_scan_lines */
-
-/* Set line compare value */
-
-void ega_set_line_compare IFN1(int, lcomp_val)
-    {
-    CRTC_OVERFLOW	new_overflow;
-
-    new_overflow.as.abyte = crt_controller.crtc_overflow.as.abyte;
-    if (lcomp_val >= 0x100)
-	new_overflow.as_bfld.line_compare_bit_8 = 1;
-    else
-	new_overflow.as_bfld.line_compare_bit_8 = 0;
-
-    outb(EGA_CRTC_INDEX, 7);
-    outb(EGA_CRTC_DATA, new_overflow.as.abyte);
-    outb(EGA_CRTC_INDEX, 24);
-    outb(EGA_CRTC_DATA, lcomp_val & 0xff);
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /* HUNTER */
 #endif /* EGG */
 #endif /* REAL_VGA */

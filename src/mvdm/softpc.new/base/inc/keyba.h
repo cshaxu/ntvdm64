@@ -33,19 +33,5 @@ extern void AT_kbd_init IPT0();
 extern void AT_kbd_post IPT0();
 
 #ifdef HUNTER
-/*
-** AT Hunter uses these two functions.
-** AT keyboard is different so slight mods for AT Hunter.
-**
-*/
-/*
-** Puts a scan code (type is half_word) into Keyboard Buffer.
-** Returns success; either TRUE or FALSE.
-*/
-extern int hunter_codes_to_translate IPT1(half_word, scan_code);
-/*
-** Returns number of chars in the keyboard buffer that the BIOS
-** reads. Will only be 1 or 0.
-*/
-extern int buffer_status_8024();
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif

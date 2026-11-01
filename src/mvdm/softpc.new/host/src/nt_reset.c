@@ -128,7 +128,7 @@ host_reset()
     host_ica_unlock();
 
 #ifdef	HUNTER
-    IDLE_ctl(FALSE);	/* makes Trapper too slow */
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #else	/* ! ( HUNTER ) */
 #ifdef X86GFX
     /* DIVERGENCE(MVDM-HOST-DIV-322): software VGA changes remain observable. */
@@ -324,8 +324,7 @@ void host_terminate(void)
     mvdm_softpc_report_termination("host-terminate", _ReturnAddress());
 
 #ifdef HUNTER
-    if (TrapperDump != (HANDLE) -1)
-	CloseHandle(TrapperDump);
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /* HUNTER */
 
     if(VDMForWOW)

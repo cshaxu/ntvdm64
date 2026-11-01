@@ -2764,44 +2764,7 @@ return (code);
 } /* end of translate_6805_8042 */
 
 #ifdef HUNTER
-/*
-** Put a scan code into the 8042 single char buffer.
-** Called from do_hunter() in hunter.c
-*/
-
-#define HUNTER_REJECTED_CODES_LIMIT 100
-
-int hunter_codes_to_translate IFN1( half_word, scan_code )
-{
-	LOCAL ULONG rejected_scan_codes = 0;
-
-	sure_note_trace1(HUNTER_VERBOSE,"Requesting scan=%d",scan_code);
-
-	if (!pending_8042 && !keyboard_interface_disabled && !output_full)
-	{
-		do_q_int(scan_code);
-		sure_note_trace1( HUNTER_VERBOSE, "Accepted scan=%d", scan_code );
-
-		rejected_scan_codes = 0;
-
-		return( TRUE );
-	}
-	else
-	{
-		sure_note_trace0( HUNTER_VERBOSE, "Rejected scan" );
-
-		if( rejected_scan_codes++ > HUNTER_REJECTED_CODES_LIMIT )
-		{
-			printf( "Application hung up - not reading scan codes\n" );
-			printf( "Trapper terminating\n" );
-
-			terminate();
-		}
-
-		return( FALSE );
-	}
-} /* end of hunter_codes_to_translate() */
-
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /* HUNTER */
 
 /*
@@ -2810,7 +2773,7 @@ int hunter_codes_to_translate IFN1( half_word, scan_code )
 *  This needs to be global for HUNTER, but only needs be local otherwise.
 */
 #ifdef HUNTER
-GLOBAL INT
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #else
 LOCAL INT
 #endif

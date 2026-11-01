@@ -4,7 +4,7 @@
 #include "stdio.h"
 #include "stdarg.h"
 #ifdef HUNTER
-#include "nt_hunt.h"
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /* HUNTER */
 
 void OutputString(char *);
@@ -27,8 +27,7 @@ void OutputString(char *str)
 /* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
 #endif
 #ifdef HUNTER
-    if (TrapperDump != (HANDLE) -1)
-        WriteFile(TrapperDump, str, strlen(str), &BytesWritten, NULL);
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /* HUNTER */
 }
 

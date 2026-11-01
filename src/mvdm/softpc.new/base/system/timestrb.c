@@ -54,8 +54,7 @@
 #include "host_qev.h"
 
 #ifdef HUNTER
-#include <stdio.h>
-#include "hunter.h"
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif
 
 #include "host_gfx.h"
@@ -79,7 +78,7 @@ void time_strobe()
 #endif
 
 #ifdef HUNTER
-        do_hunter();
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif    
 
 

@@ -75,7 +75,7 @@
 #endif
 
 #ifdef HUNTER
-#include "hunter.h"
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef NTVDM
@@ -120,7 +120,7 @@ static  int     ticks_blocked = 0;
 #endif
 
 #ifdef HUNTER			/* Only needed for HUNTER */
-word timer_batch_count;		/* Batch update when PC tick occurs */
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif
 int timer_int_enabled;		/* Whether Bios timer ints are required */
 
@@ -1793,7 +1793,7 @@ LOCAL void updateCounter IFN0()
 			else
 				issueIREQ0(1);
 #ifdef HUNTER
-			timer_batch_count = wrap;
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif
 
 		}
@@ -1819,9 +1819,7 @@ LOCAL void updateCounter IFN0()
 
 		}
 #ifdef HUNTER
-		if (pcu == &timers[0]){
-			timer_batch_count = wrap;
-		}
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif
 		return;
 	}

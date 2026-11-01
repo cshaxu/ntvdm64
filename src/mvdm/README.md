@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-519: replace unselected HUNTER platform branches with
+markers, retaining the conditional shells. The observed product build does
+not select HUNTER; per-branch source hashes are recorded in
+`../../artifacts/mvdm-audit/s12-hunter.jsonl`.
+
 MVDM-HOST-DIV-518: replace 29 unselected SCCSID identification-string
 branches and one unselected MONITOR/non-PROD declaration branch with
 markers. Original strings and per-branch hashes remain in

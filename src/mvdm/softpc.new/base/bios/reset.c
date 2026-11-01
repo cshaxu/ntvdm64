@@ -1025,8 +1025,7 @@ void reset()
 #endif
 
 #ifdef HUNTER
-	/* Initialise the Hunter program -- the bug finder */
-	hunter_init();
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef LIM

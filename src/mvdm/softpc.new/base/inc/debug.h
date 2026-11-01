@@ -29,8 +29,7 @@
 #else /* PROD */
 
 #ifdef HUNTER
-#include <stdio.h>
-#include "trace.h"
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif /* HUNTER */
 
 #define	init_debugging()

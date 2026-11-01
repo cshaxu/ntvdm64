@@ -28,9 +28,7 @@
 	extern void ega_term IPT0();
 	extern void ega_gc_outb_index IPT2(io_addr,ia,half_word,hw);
 #ifdef	HUNTER
-	extern int ega_get_line_compare IPT0();
-	extern int ega_get_max_scan_lines IPT0();
-	extern void ega_set_line_compare IPT1(int,i);
+/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
 #endif
 	IMPORT VOID update_banking IPT0();
 	IMPORT VOID set_banking IPT2(IU8, rd_bank, IU8, wrt_bank);
