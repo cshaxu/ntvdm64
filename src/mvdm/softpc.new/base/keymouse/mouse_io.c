@@ -109,55 +109,7 @@
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h" /* DIVERGENCE(MVDM-HOST-DIV-318) */
 
 #ifdef MONITOR
-/*
- * We're running with real ROMs on the monitor and so all the hard coded ROM
- * addresses defined below don't work. Pick up the real addresses of this stuff
- * which is now resident in the driver and put it into the MOUSE_ tokens which
- * have been magically changed into variables.
- */
-#undef MOUSE_INT1_SEGMENT
-#undef MOUSE_INT1_OFFSET
-#undef MOUSE_INT2_SEGMENT
-#undef MOUSE_INT2_OFFSET
-#undef MOUSE_IO_INTERRUPT_OFFSET
-#undef MOUSE_IO_INTERRUPT_SEGMENT
-#undef MOUSE_VIDEO_IO_OFFSET
-#undef MOUSE_VIDEO_IO_SEGMENT
-#undef MOUSE_COPYRIGHT_SEGMENT
-#undef MOUSE_COPYRIGHT_OFFSET
-#undef MOUSE_VERSION_SEGMENT
-#undef MOUSE_VERSION_OFFSET
-#undef VIDEO_IO_SEGMENT
-#undef VIDEO_IO_RE_ENTRY
-
-LOCAL word   MOUSE_INT1_SEGMENT, MOUSE_INT1_OFFSET,
-             MOUSE_IO_INTERRUPT_OFFSET, MOUSE_IO_INTERRUPT_SEGMENT,
-             MOUSE_VIDEO_IO_SEGMENT, MOUSE_VIDEO_IO_OFFSET,
-             MOUSE_COPYRIGHT_SEGMENT, MOUSE_COPYRIGHT_OFFSET,
-             MOUSE_VERSION_SEGMENT, MOUSE_VERSION_OFFSET,
-             MOUSE_INT2_SEGMENT, MOUSE_INT2_OFFSET,
-             VIDEO_IO_SEGMENT,  VIDEO_IO_RE_ENTRY;
-
-/* @ACW */
-word DRAW_FS_POINTER_OFFSET; /* holds segment:offset for the Intel code which */
-word DRAW_FS_POINTER_SEGMENT;/* draws the fullscreen mouse cursor */
-word POINTER_ON_OFFSET;
-word POINTER_ON_SEGMENT;
-word POINTER_OFF_OFFSET;
-word POINTER_OFF_SEGMENT;
-WORD F0_OFFSET,F0_SEGMENT;
-word F9_OFFSET,F9_SEGMENT;
-word CP_X_O,CP_Y_O;
-word CP_X_S,CP_Y_S;
-word savedtextsegment,savedtextoffset;
-word button_off,button_seg;
-
-static word mouseINBsegment, mouseINBoffset;
-static word mouseOUTBsegment, mouseOUTBoffset;
-static word mouseOUTWsegment, mouseOUTWoffset;
-sys_addr mouseCFsysaddr;
-sys_addr conditional_off_sysaddr;
-
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif  /* MONITOR */
 
 IMPORT void host_m2p_ratio(word *,word *,word *,word *);
@@ -986,60 +938,7 @@ void mouse_install1()
 	note_trace0(MOUSE_VERBOSE, "mouse_install1:");
 
 #ifdef MONITOR
-        /*
-         * Get addresses of stuff usually in ROM from driver
-         * To minimise changes, MOUSE... tokens are now variables and
-         * not defines.
-         */
-
-        block_offset = effective_addr(getCS(), getBX());
-
-        sas_loadw(block_offset, &MOUSE_IO_INTERRUPT_OFFSET);
-        sas_loadw(block_offset+2, &MOUSE_IO_INTERRUPT_SEGMENT);
-        sas_loadw(block_offset+4, &MOUSE_VIDEO_IO_OFFSET);
-        sas_loadw(block_offset+6, &MOUSE_VIDEO_IO_SEGMENT);
-        sas_loadw(block_offset+8, &MOUSE_INT1_OFFSET);
-        sas_loadw(block_offset+10, &MOUSE_INT1_SEGMENT);
-        sas_loadw(block_offset+12, &MOUSE_VERSION_OFFSET);
-        sas_loadw(block_offset+14, &MOUSE_VERSION_SEGMENT);
-        sas_loadw(block_offset+16, &MOUSE_COPYRIGHT_OFFSET);
-        sas_loadw(block_offset+18, &MOUSE_COPYRIGHT_SEGMENT);
-        sas_loadw(block_offset+20, &VIDEO_IO_RE_ENTRY);
-        sas_loadw(block_offset+22, &VIDEO_IO_SEGMENT);
-        sas_loadw(block_offset+24, &MOUSE_INT2_OFFSET);
-        sas_loadw(block_offset+26, &MOUSE_INT2_SEGMENT);
-        sas_loadw(block_offset+28, &DRAW_FS_POINTER_OFFSET);
-        sas_loadw(block_offset+30, &DRAW_FS_POINTER_SEGMENT);
-        sas_loadw(block_offset+32, &F0_OFFSET);
-        sas_loadw(block_offset+34, &F0_SEGMENT);
-        sas_loadw(block_offset+36, &POINTER_ON_OFFSET);
-        sas_loadw(block_offset+38, &POINTER_ON_SEGMENT);
-        sas_loadw(block_offset+40, &POINTER_OFF_OFFSET);
-        sas_loadw(block_offset+42, &POINTER_OFF_SEGMENT);
-        sas_loadw(block_offset+44, &F9_OFFSET);
-        sas_loadw(block_offset+46, &F9_SEGMENT);
-        sas_loadw(block_offset+48, &CP_X_O);
-        sas_loadw(block_offset+50, &CP_X_S);
-        sas_loadw(block_offset+52, &CP_Y_O);
-        sas_loadw(block_offset+54, &CP_Y_S);
-        sas_loadw(block_offset+56, &mouseINBoffset);
-        sas_loadw(block_offset+58, &mouseINBsegment);
-        sas_loadw(block_offset+60, &mouseOUTBoffset);
-        sas_loadw(block_offset+62, &mouseOUTBsegment);
-        sas_loadw(block_offset+64, &mouseOUTWoffset);
-        sas_loadw(block_offset+66, &mouseOUTWsegment);
-        sas_loadw(block_offset+68, &savedtextoffset);
-        sas_loadw(block_offset+70, &savedtextsegment);
-        sas_loadw(block_offset+72, &o);
-        sas_loadw(block_offset+74, &s);
-        sas_loadw(block_offset+76, &button_off);
-        sas_loadw(block_offset+78, &button_seg);
-
-        mouseCFsysaddr = effective_addr(s,o);
-	sas_loadw(block_offset+80, &o);
-	sas_loadw(block_offset+82, &s);
-	conditional_off_sysaddr = effective_addr(s, o);
-
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif /* MONITOR */
 	/*
 	 *	Make sure that old save area does not get re-painted!

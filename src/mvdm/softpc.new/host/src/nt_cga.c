@@ -40,8 +40,7 @@
 #include "nt_det.h"
 
 #ifdef MONITOR
-#include <ntddvdeo.h>
-#include "nt_fulsc.h"
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif /* MONITOR */
 
 /* Externs */
@@ -75,7 +74,7 @@ static unsigned int cga_med_graph_lut1_huge[256];
 // for risc we have 4 bytes per character because of vga interleaving
 //
 #ifdef MONITOR
-#define TEXT_INCVAL 2
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #else
 #define TEXT_INCVAL 4
 #endif
@@ -103,11 +102,7 @@ if (sc.ScreenState == WINDOWED) //fullscreen valid - mouse buffer
     closeGraphicsBuffer(); /* Tim Oct 92 */
 
 #ifdef MONITOR
-    vga_misc_inb(0x3cc, &misc);
-    if (misc & 1)
-	set_screen_ptr((UTINY *)CGA_REGEN_BUFF);	//point screen to regen not planes
-    else
-	set_screen_ptr((UTINY *)MDA_REGEN_BUFF);     //0xb0000 not 0xb8000
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif  //MONITOR
 }
 
@@ -969,225 +964,5 @@ void nt_cga_colour_hi_graph_huge(int offset, int screen_x, int screen_y,
 }
 
 #ifdef MONITOR
-/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-/* Paints CGA medium res graphics frozen window.                            */
-/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-
-void nt_cga_med_frozen_std(int offset, int screen_x, int screen_y, int len,
-			   int height)
-{
-    UTINY	*plane1_ptr,
-		*plane2_ptr,
-		 data;
-    ULONG	*graph_ptr,
-                 longs_per_scanline,
-		 local_len,
-		 mem_x = screen_x >> 3,
-		 mem_y = screen_y >> 1,
-		 max_width = sc.PC_W_Width >> 3,
-		 max_height = sc.PC_W_Height >> 1;
-    SMALL_RECT   rect;
-
-    sub_note_trace5(CGA_HOST_VERBOSE,
-		    "nt_cga_med_frozen_std off=%d x=%d y=%d len=%d height=%d\n",
-		    offset, screen_x, screen_y, len, height );
-
-    /*
-    ** Tim September 92, bounce call if handle to screen buffer is null.
-    ** This can happen when VDM session is about to suspend, buffer has
-    ** been closed, but still get a paint request.
-    */
-    if( sc.ScreenBufHandle == (HANDLE)NULL ){
-        assert0( NO, "VDM: rejected paint request due to NULL handle" );
-        return;
-    }
-
-    /* If the image is completely outside the display area do nothing. */
-    if ((mem_x >= max_width) || (mem_y >= max_height))
-    {
-        sub_note_trace2(EGA_HOST_VERBOSE,
-                        "VDM: nt_cga_med_frozen_std() x=%d y=%d",
-                        screen_x, screen_y);
-        return;
-    }
-
-    /*
-     * If image partially overlaps display area clip it so we don't start
-     * overwriting invalid pieces of memory.
-     */
-    if (mem_x + len > max_width)
-        len = max_width - mem_x;
-    if (mem_y + height > max_height)
-        height = max_height - mem_y;
-
-    /* Work out the width of a line (ie 640 pixels) in ints. */
-    longs_per_scanline = LONGS_PER_SCANLINE(sc.ConsoleBufInfo.lpBitMapInfo);
-
-    /* memory in this routine liable to be removed by fullscreen switch */
-    try
-    {
-        /* Grab the mutex. */
-        GrabMutex(sc.ConsoleBufInfo.hMutex);
-
-        /* Set up data pointers. */
-        graph_ptr = (ULONG *) sc.ConsoleBufInfo.lpBitMap +
-		    screen_y * longs_per_scanline + (screen_x >> 2);
-        plane1_ptr = GET_OFFSET(Plane1Offset);
-        plane2_ptr = GET_OFFSET(Plane2Offset);
-
-        /* Each iteration of the loop processes 2 host bytes. */
-        local_len = len >> 1;
-
-        /* 'offset' is designed for interleaved planes. */
-        offset >>= 1;
-
-        /* 'height' is always 1 so copy a line to the bitmap. */
-        do
-        {
-	    data = *(plane1_ptr + offset);
-	    *(graph_ptr + longs_per_scanline) = *graph_ptr =
-	        cga_med_graph_hi_nyb[data];
-	    graph_ptr++;
-	    *(graph_ptr + longs_per_scanline) = *graph_ptr =
-	        cga_med_graph_lo_nyb[data];
-	    graph_ptr++;
-	    data = *(plane2_ptr + offset);
-	    *(graph_ptr + longs_per_scanline) = *graph_ptr =
-	        cga_med_graph_hi_nyb[data];
-	    graph_ptr++;
-	    *(graph_ptr + longs_per_scanline) = *graph_ptr =
-	        cga_med_graph_lo_nyb[data];
-	    graph_ptr++;
-	    offset += 2;
-        }
-        while (--local_len);
-
-        /* Release the mutex. */
-        RelMutex(sc.ConsoleBufInfo.hMutex);
-
-        /* Display the new image. */
-        rect.Left = screen_x;
-        rect.Top = screen_y;
-        rect.Right = rect.Left + (len << 3) - 1;
-        rect.Bottom = rect.Top + (height << 1) - 1;
-
-        if( sc.ScreenBufHandle )
-        {
-	    if (!InvalidateConsoleDIBits(sc.ScreenBufHandle, &rect))
-		    assert1( NO, "VDM: InvalidateConsoleDIBits() error:%#x",
-			     GetLastError() );
-        }
-    } except(EXCEPTION_EXECUTE_HANDLER)
-      {
-          assert0(NO, "Handled fault in nt_cga_med_frozen_std. fs switch?");
-          return;
-      }
-}
-
-/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-/* Paints CGA high res graphics frozen window.                            */
-/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-
-void nt_cga_hi_frozen_std(int offset, int screen_x, int screen_y, int len,
-			  int height)
-{
-    UTINY       *plane1_ptr,
-		*graph_ptr;
-    ULONG        bytes_per_scanline,
-		 local_len,
-		 mem_x = screen_x >> 3,
-		 mem_y = screen_y >> 1,
-		 max_width = sc.PC_W_Width >> 3,
-		 max_height = sc.PC_W_Height >> 1;
-    SMALL_RECT   rect;
-
-    sub_note_trace5(CGA_HOST_VERBOSE,
-		    "nt_cga_hi_frozen_std off=%d x=%d y=%d len=%d height=%d\n",
-		    offset, screen_x, screen_y, len, height );
-
-    /*
-    ** Tim September 92, bounce call if handle to screen buffer is null.
-    ** This can happen when VDM session is about to suspend, buffer has
-    ** been closed, but still get a paint request.
-    */
-    if( sc.ScreenBufHandle == (HANDLE)NULL ){
-        assert0( NO, "VDM: rejected paint request due to NULL handle" );
-        return;
-    }
-
-    /* If the image is completely outside the display area do nothing. */
-    if ((mem_x >= max_width) || (mem_y >= max_height))
-    {
-        sub_note_trace2(EGA_HOST_VERBOSE,
-                        "VDM: nt_cga_hi_frozen_std() x=%d y=%d",
-                        screen_x, screen_y);
-        return;
-    }
-
-    /*
-     * If image partially overlaps display area clip it so we don't start
-     * overwriting invalid pieces of memory.
-     */
-    if (mem_x + len > max_width)
-        len = max_width - mem_x;
-    if (mem_y + height > max_height)
-        height = max_height - mem_y;
-
-    /* memory here liable to be removed by fullscreen switch */
-    try
-    {
-        /* Work out the width of a line (ie 640 pixels) in ints. */
-        bytes_per_scanline = BYTES_PER_SCANLINE(sc.ConsoleBufInfo.lpBitMapInfo);
-
-        /* 'offset' is designed for interleaved planes. */
-        offset >>= 2;
-
-        /* Grab the mutex. */
-        GrabMutex(sc.ConsoleBufInfo.hMutex);
-
-        /* Set up data pointers. */
-        graph_ptr = (UTINY *) sc.ConsoleBufInfo.lpBitMap +
-		    screen_y * bytes_per_scanline + screen_x;
-        plane1_ptr = GET_OFFSET(Plane1Offset) + offset;
-
-        /* 'height' is always 1 so copy a line to the bitmap. */
-        local_len = len;
-        do
-        {
-	    *(graph_ptr + bytes_per_scanline) = *graph_ptr = *plane1_ptr++;
-	    graph_ptr++;
-        }
-        while (--local_len);
-
-        /* Release the mutex. */
-        RelMutex(sc.ConsoleBufInfo.hMutex);
-
-        /* Display the new image. */
-        rect.Left = screen_x;
-        rect.Top = screen_y;
-        rect.Right = rect.Left + (len << 3) - 1;
-        rect.Bottom = rect.Top + (height << 1) - 1;
-
-        if( sc.ScreenBufHandle )
-        {
-	    if (!InvalidateConsoleDIBits(sc.ScreenBufHandle, &rect))
-		    assert1( NO, "VDM: InvalidateConsoleDIBits() error:%#x",
-			     GetLastError() );
-        }
-    } except(EXCEPTION_EXECUTE_HANDLER)
-      {
-          assert0(NO, "Handled fault in nt_ega_hi_frozen_std. fs switch?");
-          return;
-      }
-}
-
-/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-/*::: Dummy paint routine for frozen screens.                             ::*/
-/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-
-void nt_dummy_frozen(int offset, int screen_x, int screen_y, int len,
-		     int height)
-{
-    assert0(NO, "Frozen screen error - dummy paint routine called.");
-}
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif /* MONITOR */

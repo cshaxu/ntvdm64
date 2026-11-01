@@ -354,11 +354,7 @@ void idle_tick(void)
 	    ExternalWaitRequest = FALSE;
 	}
 #ifdef MONITOR
-    if(*pNtVDMState & VDM_IDLEACTIVITY)
-       {
-       *pNtVDMState &= ~ VDM_IDLEACTIVITY;
-       IdleNoActivity = 0;
-       }
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
         if (IdleNoActivity)
         {
@@ -442,7 +438,7 @@ int event;
 	case IDLE_WAITIO:
 #ifdef NTVDM
 #ifdef MONITOR
-		*pNtVDMState &= ~VDM_IDLEACTIVITY;
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
 		IdleNoActivity = 1;
                 PrioWaitIfIdle(10);

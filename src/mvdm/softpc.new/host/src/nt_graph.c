@@ -227,57 +227,9 @@ static PAINTFUNCS huge_colour_paint_funcs =
 };
 
 #ifdef MONITOR
-static PAINTFUNCS std_frozen_paint_funcs =
-{
-        nt_dummy_frozen,
-        nt_cga_med_frozen_std,
-        nt_cga_hi_frozen_std,
-        nt_dummy_frozen,
-        nt_ega_lo_frozen_std,
-        nt_ega_med_frozen_std,
-        nt_ega_hi_frozen_std,
-        nt_vga_frozen_std,
-        nt_vga_med_frozen_std,
-        nt_vga_hi_frozen_std,
-#ifdef V7VGA
-        nt_dummy_frozen,
-#endif /* V7VGA */
-};
-
-static PAINTFUNCS big_frozen_paint_funcs =
-{
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-#ifdef V7VGA
-        nt_dummy_frozen,
-#endif /* V7VGA */
-};
-
-static PAINTFUNCS huge_frozen_paint_funcs =
-{
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-        nt_dummy_frozen,
-#ifdef V7VGA
-        nt_dummy_frozen,
-#endif /* V7VGA */
-};
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif /* MONITOR */
+#line 281 /* MVDM-HOST-DIV-507: preserve original diagnostic line numbers. */
 
 static INITFUNCS mono_init_funcs =
 {
@@ -304,18 +256,9 @@ static INITFUNCS colour_init_funcs =
 };
 
 #ifdef MONITOR
-static INITFUNCS frozen_init_funcs =
-{
-        nt_init_text,
-        nt_init_cga_colour_med_graph,
-        nt_init_cga_colour_hi_graph,
-        nt_init_text,
-        nt_init_ega_lo_graph,
-        nt_init_ega_med_graph,
-        nt_init_ega_hi_graph,
-        nt_init_vga_hi_graph,
-};
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif /* MONITOR */
+#line 319 /* MVDM-HOST-DIV-507: preserve original diagnostic line numbers. */
 
 /*::::::::::::::::::::::::::::::::::::::::::::::: Adaptor function protocol */
 
@@ -630,7 +573,7 @@ void nt_init_screen(void)
     /*:::::::::::::::::::::::::::::::::::::::::: Allocate video copy buffer */
 
 #ifdef MONITOR
-    if(!video_copy) video_copy = (byte *) host_malloc(0x8000);
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #else
     if(!video_copy) video_copy = (byte *) host_malloc(0x20000);
 #endif
@@ -673,32 +616,9 @@ void nt_init_screen(void)
 }
 
 #ifdef MONITOR
-/* The mouse calls this func when it sees a mode change. If we're windowed
- * we pass it off to the softpc bios (who may want to switch to fullscreen).
- * If we're fullscreen we do nothing as the native bios will take care of
- * everything.
- */
-void host_call_bios_mode_change(void)
-{
-    extern void ega_video_io();
-    half_word mode;
-
-    if (sc.ScreenState == WINDOWED)
-    {
-	ega_video_io();
-    }
-    else
-    {
-
-	/*
-	 * We have a fullscreen mode change so we need to change the mouse
-	 * buffer so that we get mouse coordinates of the correct resolution.
-	 */
-	mode = getAL();
-	SelectMouseBuffer(mode, 0);
-    }
-}
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif /* MONITOR */
+#line 702 /* MVDM-HOST-DIV-507: preserve original diagnostic line numbers. */
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::::::: Initialise adaptor ::::::::::::::::::::::::::::*/
@@ -797,13 +717,9 @@ void nt_clear_screen(void)
                               ScreenInfo.dwSize.X * ScreenInfo.dwSize.Y,
                               coord,&nCharWritten);
 #ifdef MONITOR
-    /*
-    ** Called during a mode change...
-    ** Trash video copy so future updates will know what has changed.
-    ** Alternatively mon_text_update() could listen to dirty_flag.
-    */
-    memfill( 0xff, &video_copy[ 0 ], &video_copy[ 0x7fff ] ); /* Tim Oct 92 */
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
+#line 807 /* MVDM-HOST-DIV-507: preserve original diagnostic line numbers. */
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -1415,13 +1331,9 @@ void nt_set_paint_routine(DISPLAY_MODE mode, int height)
                     if (get_chain4_mode())
                     {
 #ifdef MONITOR
-                        if (nt_paint_funcs == &std_frozen_paint_funcs)
-                            if (Frozen256Packed)     //2 possible frozen formats
-                                paint_screen = nt_vga_frozen_pack_std;
-                            else
-                                paint_screen = nt_paint_funcs->vga_graph;
-                        else
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif /* MONITOR */
+#line 1425 /* MVDM-HOST-DIV-507: preserve original diagnostic line numbers. */
                             paint_screen = nt_paint_funcs->vga_graph;
                     }
                     else
@@ -1607,18 +1519,9 @@ static void select_paint_routines(void)
 }
 
 #ifdef MONITOR
-GLOBAL void select_frozen_routines(void)
-{
-    if (get_screen_scale() == 2)
-	nt_paint_funcs = &std_frozen_paint_funcs;
-    else if (get_screen_scale() == 3)
-	nt_paint_funcs = &big_frozen_paint_funcs;
-    else
-	nt_paint_funcs = &huge_frozen_paint_funcs;
-
-    nt_init_funcs = &frozen_init_funcs;
-}
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif /* MONITOR */
+#line 1622 /* MVDM-HOST-DIV-507: preserve original diagnostic line numbers. */
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::::::::: Prepare surface :::::::::::::::::::::::::::::*/

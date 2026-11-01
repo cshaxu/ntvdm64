@@ -1988,7 +1988,7 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
 #endif
     {
 #ifdef MONITOR
-        resetNowCur();        /* reset static vars holding cursor pos. */
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
         do_new_cursor();      /* make sure the emulation knows about it */
     }

@@ -41,25 +41,7 @@ DESCRIPTION	:
 =======================================================================
 */
 #ifdef MONITOR
-
-  /*
-  ** Tim, June 92, for Microsoft pseudo-ROM.
-  ** Call the NTIO.SYS int 4a routine, not
-  ** the one in real ROM.
-  */
-extern word rcpu_int4A_seg; /* in keybd_io.c */
-extern word rcpu_int4A_off; /* in keybd_io.c */
-
-#ifdef RCPU_INT4A_SEGMENT
-#undef RCPU_INT4A_SEGMENT
-#endif
-#ifdef RCPU_INT4A_OFFSET
-#undef RCPU_INT4A_OFFSET
-#endif
-
-#define RCPU_INT4A_SEGMENT rcpu_int4A_seg
-#define RCPU_INT4A_OFFSET  rcpu_int4A_off
-
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
 
 

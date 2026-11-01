@@ -4692,7 +4692,7 @@ void add_to_rect(int screen_start, register int x, register int y, int len)
 void paint_text_rect(int screen_start)
 {
 #ifdef MONITOR
-    int offset = RectTop * get_offset_per_line() + (RectLeft<<1);
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #else
     int offset = (RectTop * (get_offset_per_line()<<1)) + (RectLeft<<2);
 #endif
@@ -4706,7 +4706,7 @@ void paint_text_rect(int screen_start)
 
     (*paint_screen)(offset + screen_start,			/* Start Offset */
 #ifdef MONITOR
-		   RectLeft, RectTop,				/* Screen X,Y */
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #else
 		   RectLeft*get_pix_char_width(),RectTop*get_host_char_height(),
 #endif
@@ -4832,10 +4832,7 @@ void stream_io_update(void)
 {
 
 #ifdef MONITOR
-    if (sas_w_at_no_check(stream_io_bios_busy_sysaddr)) {
-        return;
-
-    }
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
 
     if (*stream_io_dirty_count_ptr) {

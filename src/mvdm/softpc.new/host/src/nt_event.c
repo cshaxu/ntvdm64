@@ -1500,7 +1500,7 @@ BOOL CntrlHandler(ULONG CtrlType)
 	       ;
 
 #ifdef MONITOR
-	    if(sc.ScreenState == FULLSCREEN) RegainRegenMemory();
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
 
 	    /* If keeping window open when exiting and fullscreen, return to desktop */

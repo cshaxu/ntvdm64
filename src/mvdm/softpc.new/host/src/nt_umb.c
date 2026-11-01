@@ -96,7 +96,7 @@ DWORD	*Size
 {
 
 #ifdef MONITOR
-    NTSTATUS    Status;
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
 
     PUMBNODE	UMB;
@@ -165,23 +165,7 @@ DWORD	*Size
 		return FALSE;
 	    }
 #ifdef MONITOR
-	    SectionOffset.HighPart = 0;
-	    SectionOffset.LowPart = UMB->Base - UMB_BASE_ADDRESS;
-	    Status = NtMapViewOfSection(UMBSectionHandle,
-					NtCurrentProcess(),
-					(PVOID *) &UMB->Base,
-					0,
-					0,
-					&SectionOffset,
-					&UMB->Size,
-					ViewUnmap,
-					MEM_DOS_LIM,
-					UMB_PAGE_PROTECTION
-					);
-	    if (!NT_SUCCESS(Status)) {
-		SetLastError(ERROR_ACCESS_DENIED);
-		return FALSE;
-	    }
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
 	    // return the block address
 	    *Address = (PVOID)UMB->Base;
@@ -269,24 +253,7 @@ DWORD	*Size
 		return FALSE;
 	    }
 #ifdef	MONITOR
-
-	    // reserve and commit the block
-	    SectionOffset.LowPart = UMB->Base - UMB_BASE_ADDRESS;
-	    Status = NtMapViewOfSection(UMBSectionHandle,
-					NtCurrentProcess(),
-					(PVOID *)&UMB->Base,
-					0,
-					UMB->Size,
-					&SectionOffset,
-					&UMB->Size,
-					ViewUnmap,
-					MEM_DOS_LIM,
-					UMB_PAGE_PROTECTION
-					);
-	    if (!NT_SUCCESS(Status)) {
-		SetLastError(ERROR_ACCESS_DENIED);
-		return FALSE;
-	    }
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
 	    UMB->Owner = UMB_OWNER_ROM;
 	    break;
@@ -317,8 +284,7 @@ DWORD	Size
 {
 
 #ifdef MONITOR
-    USHORT      Count;
-    NTSTATUS    Status;
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
 
     PUMBNODE    UMB;
@@ -423,10 +389,7 @@ DWORD	Size
 {
 
 #ifdef MONITOR
-    NTSTATUS    Status;
-    DWORD   Mask, SizeView;
-    USHORT  Count;
-    LARGE_INTEGER   SectionOffset;
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
 
     PUMBNODE    UMB;
@@ -514,11 +477,7 @@ DWORD	Size
 )
 {
 #ifdef MONITOR
-    NTSTATUS Status;
-    DWORD    PageSize, PageMask;
-    USHORT   PageCount;
-    LARGE_INTEGER SectionOffset;
-
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
 
     PUMBNODE UMB;
@@ -596,22 +555,7 @@ BOOL
 GetUMBForEMM(VOID)
 {
 #ifdef MONITOR
-    PUMBNODE	UMB;
-    NTSTATUS	Status;
-    UMB = UMBList;
-
-    while (UMB!= NULL) {
-	if (UMB->Owner == UMB_OWNER_EMM) {
-	    Status = NtUnmapViewOfSection(NtCurrentProcess(),
-					  (PVOID)UMB->Base
-					  );
-	    if (!NT_SUCCESS(Status)) {
-		SetLastError(ERROR_ACCESS_DENIED);
-		return FALSE;
-	    }
-	}
-	UMB = UMB->Next;
-    }
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
     return TRUE;
 }
@@ -628,10 +572,7 @@ PUMBNODE  UMB
 {
 
 #ifdef MONITOR
-    USHORT	Count;
-    LARGE_INTEGER   SectionOffset;
-    DWORD	SizeView;
-    NTSTATUS    Status;
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
 
     while (UMB != NULL) {
@@ -694,9 +635,7 @@ WORD	    Owner
 )
 {
 #ifdef MONITOR
-    DWORD    SizeView;
-    NTSTATUS Status;
-    LARGE_INTEGER SectionOffset;
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
 
     DWORD SizeBefore, SizeAfter;
@@ -742,56 +681,7 @@ WORD	    Owner
     }
 
 #ifdef MONITOR
-    // unmap the entire block because we gona map a view for each subblock
-    Status = NtUnmapViewOfSection(NtCurrentProcess(),
-				  (PVOID)UMB->Base
-				  );
-    if (!NT_SUCCESS(Status)) {
-	SetLastError(ERROR_ACCESS_DENIED);
-	return NULL;
-    }
-    SectionOffset.HighPart = 0;
-
-    if (SizeBefore > 0) {
-	SizeView = UMB->Size;
-	dwBase = UMB->Base;
-	SectionOffset.LowPart = dwBase - UMB_BASE_ADDRESS;
-	Status = NtMapViewOfSection(UMBSectionHandle,
-				    NtCurrentProcess(),
-				    (PVOID *) &dwBase,
-				    0,
-				    0,
-				    &SectionOffset,
-				    &SizeView,
-				    ViewUnmap,
-				    MEM_DOS_LIM,
-				    UMB_PAGE_PROTECTION
-				    );
-	if (!NT_SUCCESS(Status)) {
-	    SetLastError(ERROR_ACCESS_DENIED);
-	    return NULL;
-	}
-    }
-    if (SizeAfter > 0){
-	dwBase = UMBAfter->Base;
-	SectionOffset.LowPart = dwBase - UMB_BASE_ADDRESS;
-	SizeView = UMBAfter->Size;
-	Status = NtMapViewOfSection(UMBSectionHandle,
-				    NtCurrentProcess(),
-				    (PVOID *)&dwBase,
-				    0,
-				    0,
-				    &SectionOffset,
-				    &SizeView,
-				    ViewUnmap,
-				    MEM_DOS_LIM,
-				    UMB_PAGE_PROTECTION
-				    );
-	if (!NT_SUCCESS(Status)) {
-	    SetLastError(ERROR_ACCESS_DENIED);
-	    return NULL;
-	}
-    }
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif
     return UMBBefore;
 }

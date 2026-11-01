@@ -2253,25 +2253,7 @@ if (tR.top != WarpClientRect.top ||
    CToS(&tR);
 
 #ifdef MONITOR
-   //
-   // Is the warp region an Icon in fullscreen graphics?
-   // Note: An icon has a client rect of 36 x 36 pixels.
-   //
-
-   if((tR.right - tR.left) == 36 && (tR.bottom - tR.top) == 36)
-      {
-      //
-      // Make the warp region the same size as the selected buffer.
-      // The warp rectangle is thus originated about the top, left
-      // hand corner of the screen.
-      //
-
-      tR.top = 0;
-      tR.bottom = mouse_buffer_height;
-      tR.left = 0;
-      tR.right = mouse_buffer_width;
-      CToS(&tR);
-      }
+/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
 #endif    //MONITOR
 
    //
