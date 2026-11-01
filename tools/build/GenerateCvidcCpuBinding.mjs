@@ -64,7 +64,10 @@ const writeChanged = (file, content) => {
 };
 writeChanged(output, text);
 const providersOutput = path.join(path.dirname(output), 'cvidc_selected_providers.inc');
-const providersText = '/* Original selected CPU/SAS declarations; generated, do not edit. */\n' + sasEnum + '\n#include "sas4gen.h"\n' + cpuDeclarations.join('\n') + '\n';
+const sasVectorSource = fs.readFileSync(path.join(sourceRoot, '..', '..', '..', 'ntvdm-exe', 'softpc', 'include', 'generated', 'x86', 'prod', 'sas4gen.h'), 'utf8');
+const sasVector = sasVectorSource.match(/^[\s\S]*?extern\s+struct\s+SasVector\s+Sas\s*;/)?.[0];
+if (!sasVector || /^\s*#\s*(if|ifdef|ifndef|elif)\b/m.test(sasVector)) throw new Error('Original SAS vector prefix changed');
+const providersText = '/* Original selected CPU/SAS declarations; generated, do not edit. */\n' + sasEnum + '\n' + sasVector + '\n' + cpuDeclarations.join('\n') + '\n';
 writeChanged(providersOutput, providersText);
 // Text presentation consumes the original selected V7 declarations. Emit
 // source-derived subsets so the authored adapter needs no device profile.

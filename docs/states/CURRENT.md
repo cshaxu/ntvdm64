@@ -86,13 +86,13 @@ runtime: the owner clarified boundary-recovery scope.
 | --- | --- |
 | Identifier Mode | M0 T473 S12, Ordinary Mode. |
 | Admission And Approval | Owner inserted the source-layout rename after S11; input handoff is deferred to S13. |
-| Objective | Audit original-header and build-macro propagation into authored components. |
-| Delivery State | Owner accepted [role split](../../artifacts/mvdm-audit/s12-mvdm-role-split.md); [macro audit](../../artifacts/mvdm-audit/s12-macro-propagation/README.md) completed without product changes. |
+| Objective | Minimize four audited macro-boundary groups and add a focused regression gate. |
+| Delivery State | Macro-boundary remediation passed Full and was published; awaiting owner acceptance. [Evidence](../../artifacts/mvdm-audit/s12-macro-propagation/remediation.md). |
 | Non-goals | Guest modification or rebuilding, semantic rewrites, new compatibility behavior. |
 | Reference Baseline | S11 closure and source policy; original host and ABI trees have three nonidentical colliding paths. |
 | Files And ABI Surface | Source roots, builds, tests, provenance and current authority references; preserve source cohorts. |
 | Applicable Rules | Source policy, immutable guest, original owner boundaries, minimal mirror diff. |
-| Verification | Prove source-role paths and bytes, update build/test references, cached-build and compare ten images; run appropriate gates without rebuilding guest. |
+| Verification | x86/x64 cached builds, WOW boundary and PIF checks, Full and coherent ten-image release passed; DOS4GW fixture skipped; guest unchanged. |
 | Expected Markers | No conflicting overwrite, no stale active path, correct source provenance and matching deployed package. |
 | Held Selections | Preserve unselected [x86 CallProc32](../../artifacts/mvdm-audit/s12-i386-held.md) and [CPU/mouse paths](../../artifacts/mvdm-audit/s12-cpu-mouse-held.md) pending behavioral ownership review. |
 | Asset Needs | Existing sources and build caches; no new guest. |

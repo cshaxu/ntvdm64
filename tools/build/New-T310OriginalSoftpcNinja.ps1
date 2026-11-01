@@ -1349,7 +1349,12 @@ if ($Architecture -eq 'x86') {
             $object = 'obj/' + $group + '/' + $member[0] + '.obj'
             $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $root $member[1])))
             $memberFlags = if ($member[1].StartsWith('src/ntsrv-exe/')) {
-                $member[2].Replace($baseOwnerFlags, $baseAdapterFlags)
+                $flags = $member[2].Replace($baseOwnerFlags, $baseAdapterFlags)
+                # Only the local CSR provider defines these original exports.
+                if ($member[1] -ne 'src/ntsrv-exe/opennt/source/base_process.c') {
+                    $flags = $flags.Replace(' /D_CSRSRV_', '')
+                }
+                $flags
             } else { $member[2] }
             $graph.Add('  cflags = ' + $memberFlags)
             $baseOwnerManifest += [ordered]@{

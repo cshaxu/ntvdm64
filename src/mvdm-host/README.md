@@ -1074,6 +1074,12 @@ boundary, after DOSX/XMS has disabled SAS A20 wrapping.  No USER shared object, 
 pointer publication, handle, callback or task policy is claimed by the retired
 experiment.
 
+MVDM-HOST-DIV-542: the existing private USER and menu redirects in
+`wow32/precomp.h` are selected for original WOW thunk compilation only.
+Project-owned clients may include the common declarations without inheriting
+the thunk-specific function aliases. The original thunk bindings remain as
+described by DIV-297 and DIV-298.
+
 MVDM-HOST-DIV-298: the provider precompiled-header binding redirects original
 WU32LoadMenuIndirect's call to ADAPTER-WOW-037, which invokes the recovered
 OpenNT menu parser with explicit Win16 template semantics. ConvertMenu16

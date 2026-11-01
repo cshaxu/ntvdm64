@@ -139,6 +139,9 @@
 #include "wole2.h"
 #include "wparam.h"
 #include <limits.h>
+/* DIVERGENCE(MVDM-HOST-DIV-542): project-owned clients do not inherit
+ * the original WOW thunk redirects. */
+#ifdef WOW_ORIGINAL_THUNK_BUILD
 /* DIVERGENCE(MVDM-HOST-DIV-297): private WW/WC indices use scoped native
  * storage; ordinary USER indices retain their public API calls. */
 #define WOW_USER_PRIVATE_REDIRECT
@@ -148,4 +151,5 @@
 #include "wow_menu_parser_bindings.h"
 #undef LoadMenuIndirect
 #define LoadMenuIndirect wow_user_load_menu_indirect
+#endif
 

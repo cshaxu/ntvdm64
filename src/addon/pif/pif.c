@@ -1,10 +1,9 @@
 /* PIF.EXE: bounded reader/editor for the OpenNT PIF ABI. */
 #define WINNT 1
-/* pif.h otherwise declares old property-sheet APIs whose UI typedefs are not
- * part of this format-only tool.  The ABI structs remain available. */
-#define NTVDM 1
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+/* The original PIF declarations also reference property-sheet types. */
+#include <prsht.h>
 #include <pif.h>
 #include <errno.h>
 #include <stdio.h>

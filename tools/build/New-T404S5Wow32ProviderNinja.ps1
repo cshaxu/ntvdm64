@@ -404,6 +404,7 @@ $ninja.Add('root = ' + (ConvertTo-NinjaPath $root))
 $ninja.Add('environment = ' + (ConvertTo-NinjaPath $environment))
 $ninja.Add('release_cflags = /O2')
 $ninja.Add('cflags = ' + $cflags.Replace('\', '/'))
+$ninja.Add('wow_cflags = $cflags /DWOW_ORIGINAL_THUNK_BUILD')
 $ninja.Add('adapter_cflags = ' + $adapterCflags.Replace('\', '/'))
 # OpenNT ntuser/client/sources.inc and rtl/client/sources.inc select UNICODE.
 # Keep the recovered USER island distinct from original WOW32's ANSI graph.
@@ -429,27 +430,35 @@ foreach ($source in $sources) {
     $objects.Add($object)
     $ninja.Add('build ' + $object + ': cc ' + (ConvertTo-NinjaPath (Join-Path $wow $source)))
     if ($source -eq 'wow32.c') {
-        $ninja.Add('  cflags = $cflags /DWOWSysErrorBox=wow_user_sys_error_box')
+        $ninja.Add('  cflags = $wow_cflags /DWOWSysErrorBox=wow_user_sys_error_box')
     } elseif ($source -eq 'wkman.c') {
-        $ninja.Add('  cflags = $cflags /DWOW_NATIVE_PROCESS_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_native_process.h')) + '"')
+        $ninja.Add('  cflags = $wow_cflags /DWOW_NATIVE_PROCESS_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_native_process.h')) + '"')
     } elseif ($source -eq 'wudlg.c') {
-        $ninja.Add('  cflags = $cflags /DWOWSysErrorBox=wow_user_sys_error_box')
+        $ninja.Add('  cflags = $wow_cflags /DWOWSysErrorBox=wow_user_sys_error_box')
     } elseif ($source -eq 'wcommdlg.c') {
-        $ninja.Add('  cflags = $cflags /DWOW_COMMON_DIALOG_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_common_dialog_calls.h')) + '"')
+        $ninja.Add('  cflags = $wow_cflags /DWOW_COMMON_DIALOG_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_common_dialog_calls.h')) + '"')
     } elseif ($source -in @('wuser.c','wuser31.c','wuwind.c')) {
         $hardErrorBinding = if ($source -eq 'wuser.c') {' /DWOWSysErrorBox=wow_user_sys_error_box'} else {''}
-        $ninja.Add('  cflags = $cflags' + $hardErrorBinding)
+        $ninja.Add('  cflags = $wow_cflags' + $hardErrorBinding)
     } elseif ($source -eq 'wkgthunk.c') {
-        $ninja.Add('  cflags = $cflags /DWK32ICallProc32=wow_original_WK32ICallProc32 /DWOWYield16=wow_original_WOWYield16 /DWOWDirectedYield16=wow_original_WOWDirectedYield16 /DWOW_NATIVE_EXTENSION_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_user_native_extension.h')) + '"')
+        $ninja.Add('  cflags = $wow_cflags /DWK32ICallProc32=wow_original_WK32ICallProc32 /DWOWYield16=wow_original_WOWYield16 /DWOWDirectedYield16=wow_original_WOWDirectedYield16 /DWOW_NATIVE_EXTENSION_BINDING /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_user_native_extension.h')) + '"')
     } elseif ($source -eq 'wmmedia.c') {
-        $ninja.Add('  cflags = $cflags /DWMM32CallProc32=wow_original_WMM32CallProc32')
+        $ninja.Add('  cflags = $wow_cflags /DWMM32CallProc32=wow_original_WMM32CallProc32')
     } elseif ($source -eq 'wshell.c') {
-        $ninja.Add('  cflags = $cflags /DWOWShellExecute=wow_shell_execute /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_registry_binding.h')) + '"')
+        $ninja.Add('  cflags = $wow_cflags /DWOWShellExecute=wow_shell_execute /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_registry_binding.h')) + '"')
     } elseif ($source -in @('wkernel.c','mapembed.c','wdde.c','wow32fax.c')) {
-        $ninja.Add('  cflags = $cflags /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_registry_binding.h')) + '"')
+        $ninja.Add('  cflags = $wow_cflags /FI "' + (ConvertTo-NinjaPath (Join-Path $root 'src/wow32-dll/include/wow_registry_binding.h')) + '"')
+    } else {
+        $ninja.Add('  cflags = $wow_cflags')
     }
 }
 $supportObjects = [System.Collections.Generic.List[string]]::new()
+$boundaryTest = ConvertTo-NinjaPath (Join-Path $root 'tests/build/wow_thunk_macro_boundary.c')
+$ninja.Add('build obj/tests/wow-boundary-adapter.obj: cc ' + $boundaryTest)
+$ninja.Add('  cflags = $adapter_cflags')
+$ninja.Add('build obj/tests/wow-boundary-thunk.obj: cc ' + $boundaryTest)
+$ninja.Add('  cflags = $wow_cflags')
+$ninja.Add('build wow-macro-boundary-test: phony obj/tests/wow-boundary-adapter.obj obj/tests/wow-boundary-thunk.obj')
 # T447 S3: compose the recovered collaboration cohort, not just its adapters.
 # These bodies already share the audited control-client facade in the whole
 # cohort verification graph. Distinct path-qualified object names prevent
@@ -688,7 +697,7 @@ $ninja.Add('build ' + $editMenuResource + ': rc ' + (ConvertTo-NinjaPath (Join-P
 $ninja.Add('build legacy-wow-user32.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyUser32Definition))
 $ninja.Add('build legacy-wow-kernel32.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyKernel32Definition))
 $ninja.Add('build legacy-wow-ntdll.lib: legacy_import_lib ' + (ConvertTo-NinjaPath $legacyNtdllDefinition))
-$ninja.Add('build wow32.dll | wow32.lib: wow_dll_link ' + (($objects + $supportObjects + @($systemImportAliasObject, $parentImportAliasObject, $dllEntryBridgeObject, 'obj/wow32.res', 'legacy-wow-user32.lib', 'legacy-wow-kernel32.lib', 'legacy-wow-ntdll.lib')) -join ' ') + ' | ' + (ConvertTo-NinjaPath $parentImportLibraryPath))
+$ninja.Add('build wow32.dll | wow32.lib: wow_dll_link ' + (($objects + $supportObjects + @($systemImportAliasObject, $parentImportAliasObject, $dllEntryBridgeObject, 'obj/wow32.res', 'legacy-wow-user32.lib', 'legacy-wow-kernel32.lib', 'legacy-wow-ntdll.lib')) -join ' ') + ' | ' + (ConvertTo-NinjaPath $parentImportLibraryPath) + ' obj/tests/wow-boundary-adapter.obj obj/tests/wow-boundary-thunk.obj')
 $ninja.Add('default wow32.dll')
 
 [IO.File]::WriteAllLines((Join-Path $build 'build.ninja'), $ninja, [Text.UTF8Encoding]::new($false))

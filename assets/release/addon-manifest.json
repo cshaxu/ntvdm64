@@ -44,14 +44,6 @@
   ],
   "utilities": [
     {
-      "id": "pif",
-      "file": "PIF.EXE",
-      "architecture": "amd64",
-      "sha256": "20548C490BB02406A6CA0EC16C000CD9DF8B2DACBF6004B7C1F31BA7E060824C",
-      "source": "src/addon/pif/pif.c",
-      "sourceSha256": "FCF25EF5B1F543137F8BE9599C12D9B802D1D593B921EEDE267C452D9605ED87"
-    },
-    {
       "id": "hash",
       "file": "HASH.EXE",
       "architecture": "amd64",
@@ -114,6 +106,14 @@
       "sha256": "61BE537F3669736E67E51C3D9046A8B600933E37CD5B7173A17AFE74DD683914",
       "source": "src/addon/patch95/patch95.c",
       "sourceSha256": "2BDC5737A20E4BDD90C9C7CF6E8D5F288BC07125A6BE03E69562B896DF294704"
+    },
+    {
+      "id": "pif",
+      "file": "PIF.EXE",
+      "architecture": "amd64",
+      "sha256": "366BBE4066446EDB680EFB093F1036E16007437C3AC9ADB87C8F5BDEB9E26670",
+      "source": "src/addon/pif/pif.c",
+      "sourceSha256": "42785A3F48E03DF8504AEBA6FE493270FF92C443FC9E31D50CE108FCBF1D09BA"
     }
   ]
 }
