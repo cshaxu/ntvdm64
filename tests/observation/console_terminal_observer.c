@@ -298,10 +298,10 @@ static int repeat_window_caf(void)
         1|(0x21L<<16)|(1L<<29),1|(0x21L<<16)|(1L<<29)|(1L<<30)|(1L<<31),
         1|(0x38L<<16)|(1L<<29)|(1L<<30)|(1L<<31),1|(0x1dL<<16)|(1L<<30)|(1L<<31)};
     if(!window || !GetEnvironmentVariableA("MVDM_CAF_HOOK_DLL",path,sizeof(path)))return 0;
-    module=LoadLibraryA(path);if(!module)return 0;
+    module=LoadLibraryA(path);if(!module){fprintf(stderr,"window input: LoadLibrary error %lu\n",GetLastError());return 0;}
     tid=GetWindowThreadProcessId(window,NULL);
     hook=SetWindowsHookExA(WH_CALLWNDPROC,(HOOKPROC)GetProcAddress(module,"caf_probe_hook"),module,tid);
-    if(!hook){FreeLibrary(module);return 0;}
+    if(!hook){fprintf(stderr,"window input: SetWindowsHookEx error %lu thread %lu\n",GetLastError(),tid);FreeLibrary(module);return 0;}
     for(i=0;i<6;i++) {
         if(!IsWindow(window))break;
         if(!SendMessageTimeoutW(window,messages[i],keys[i],params[i],SMTO_ABORTIFHUNG,3000,&result))break;
@@ -314,18 +314,27 @@ static int repeat_window_caf(void)
 static int repeat_window_physical(const char *text)
 {
     HWND window=FindWindowW(L"LibKvmWindow",NULL);HMODULE module;HHOOK hook;
-    char path[MAX_PATH];DWORD tid;DWORD_PTR result;int ok=1;
+    char path[MAX_PATH];DWORD tid,pid=0;DWORD_PTR result;int ok=1;FARPROC callback;
     if(!window || !GetEnvironmentVariableA("MVDM_CAF_HOOK_DLL",path,sizeof(path)))return 0;
-    module=LoadLibraryA(path);if(!module)return 0;
-    tid=GetWindowThreadProcessId(window,NULL);
-    hook=SetWindowsHookExA(WH_CALLWNDPROC,(HOOKPROC)GetProcAddress(module,"caf_probe_hook"),module,tid);
-    if(!hook){FreeLibrary(module);return 0;}
+    module=LoadLibraryA(path);if(!module){fprintf(stderr,"window key: LoadLibrary error %lu\n",GetLastError());return 0;}
+    tid=GetWindowThreadProcessId(window,&pid);
+    callback=GetProcAddress(module,"caf_probe_hook");
+    if(!callback){fprintf(stderr,"window key: GetProcAddress error %lu module %s\n",GetLastError(),path);FreeLibrary(module);return 0;}
+    hook=SetWindowsHookExA(WH_CALLWNDPROC,(HOOKPROC)callback,module,tid);
+    if(!hook){
+        DWORD failure=GetLastError(),length=MAX_PATH;char target[MAX_PATH]={0};
+        HANDLE process=OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION,FALSE,pid);
+        if(process){QueryFullProcessImageNameA(process,0,target,&length);CloseHandle(process);}
+        fprintf(stderr,"window key: SetWindowsHookEx error %lu process %lu thread %lu target %s module %s\n",failure,pid,tid,target,path);
+        FreeLibrary(module);return 0;
+    }
     while(*text && ok) {
         SHORT mapping=VkKeyScanA(*text++);UINT key=(BYTE)mapping;
         UINT scan=MapVirtualKeyW(key,MAPVK_VK_TO_VSC);
-        if(mapping==-1 || (mapping&0xff00) || !scan){ok=0;break;}
+        if(mapping==-1 || (mapping&0xff00) || !scan){fprintf(stderr,"window key: cannot map key %u\n",key);ok=0;break;}
         ok=SendMessageTimeoutW(window,WM_KEYDOWN,key,1|((LPARAM)scan<<16),SMTO_ABORTIFHUNG,3000,&result)!=0;
         if(ok)ok=SendMessageTimeoutW(window,WM_KEYUP,key,1|((LPARAM)scan<<16)|(1L<<30)|(1L<<31),SMTO_ABORTIFHUNG,3000,&result)!=0;
+        if(!ok)fprintf(stderr,"window key: SendMessageTimeout error %lu key %u\n",GetLastError(),key);
     }
     UnhookWindowsHookEx(hook);FreeLibrary(module);return ok;
 }

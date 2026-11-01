@@ -1,8 +1,14 @@
 # Supporting Material
 
-[T473 planned S12 NTCON input-source handoff](operations/m0-t473-s12-ntcon-input-source-handoff.md)
+[T473 S12 closure](evidence/m0-t473-s12-source-layout-closure.md) records
+the accepted source-layout and macro-boundary delivery.
+
+[T473 S13 input-source investigation](evidence/m0-t473-s13-input-handoff.md)
+records the admitted handoff scope, baseline observations and limitations.
+
+[T473 NTCON input-source handoff](operations/m0-t473-s12-ntcon-input-source-handoff.md)
 records the owner's requested Console / Window keyboard lifecycle repair and
-acceptance matrix; it follows the active S11 and does not admit it early.
+acceptance matrix, admitted as S13.
 
 [T472 S1 error-dialog owner ledger](evidence/m0-t472-s1-error-dialog-owner-ledger.md)
 records the selected original response/termination routes, the narrow modern

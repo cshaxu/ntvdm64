@@ -1,0 +1,3 @@
+# Proposal — NTCON input-source handoff
+
+Owner-approved and admitted as T473 S13 after S12 acceptance. The binding objective, source boundaries, existing observations and acceptance matrix are in the [S13 handoff](../etc/operations/m0-t473-s12-ntcon-input-source-handoff.md). Repair Console/Window input lifecycle for DOS and native CUI and independently investigate the Win3.1 MS-DOS Prompt Alt+Enter observation; retain immutable guest media and do not equate simulated input with physical-keyboard acceptance. The [active packet](../states/CURRENT.md) records current execution and [investigation evidence](../etc/evidence/m0-t473-s13-input-handoff.md).

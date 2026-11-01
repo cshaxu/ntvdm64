@@ -250,6 +250,27 @@ static void run_case(unsigned mode,unsigned round)
     if(mode==0 && round<4) {
         console_video_description description={4,2,4,8,8,{0}};
         HWND window=NULL;DWORD window_pid;ULONGLONG deadline;
+        BOOL source_handoff=round==0 && GetEnvironmentVariableW(L"MVDM_TEST_SOURCE_HANDOFF",NULL,0);
+        BOOL source_unread=source_handoff && GetEnvironmentVariableW(L"MVDM_TEST_SOURCE_UNREAD",NULL,0);
+        if(source_handoff) {
+            INPUT_RECORD keys[2]={0},received[16];DWORD written,count,i,downs=0;
+            keys[0].EventType=KEY_EVENT;keys[0].Event.KeyEvent.bKeyDown=TRUE;
+            keys[0].Event.KeyEvent.wRepeatCount=1;keys[0].Event.KeyEvent.wVirtualKeyCode=VK_CONTROL;
+            keys[0].Event.KeyEvent.wVirtualScanCode=0x1d;keys[0].Event.KeyEvent.dwControlKeyState=LEFT_CTRL_PRESSED;
+            keys[1]=keys[0];keys[1].Event.KeyEvent.wVirtualKeyCode=VK_MENU;
+            keys[1].Event.KeyEvent.wVirtualScanCode=0x38;
+            keys[1].Event.KeyEvent.dwControlKeyState|=LEFT_ALT_PRESSED;
+            CHECK(WriteConsoleInputW(channel->console.input,keys,2,&written) && written==2);
+            deadline=GetTickCount64()+5000;
+            do {
+                CHECK(!frontend_session_enter(test_frontend,channel));
+                CHECK(!frontend_session_read(test_frontend,source_unread,received,16,&count));
+                frontend_session_leave(test_frontend);
+                for(i=0;i<count;++i)if(received[i].EventType==KEY_EVENT && received[i].Event.KeyEvent.bKeyDown)++downs;
+                if(downs<2)Sleep(10);
+            } while(downs<2 && GetTickCount64()<deadline);
+            CHECK(downs==2);
+        }
         description.palette[1]=0xffffff;
         request.sequence=2;request.operation=CONSOLE_IO_VIDEO_BEGIN;
         request.state.mode=1;request.bytes=sizeof(description);
@@ -276,6 +297,24 @@ static void run_case(unsigned mode,unsigned round)
         peer_io(FALSE,&reply,(DWORD)offsetof(console_io_reply,data));CHECK(reply.result);
         window=FindWindowW(L"LibKvmWindow",NULL);
         CHECK(window && GetWindowThreadProcessId(window,&window_pid) && window_pid==GetCurrentProcessId());
+        if(source_handoff) {
+            INPUT_RECORD received[16];DWORD count,i,ctrl=0,alt=0,downs=0;
+            CHECK(!frontend_session_enter(test_frontend,channel));
+            CHECK(!frontend_session_read(test_frontend,FALSE,received,16,&count));
+            frontend_session_leave(test_frontend);
+            for(i=0;i<count;++i)if(received[i].EventType==KEY_EVENT) {
+                if(received[i].Event.KeyEvent.bKeyDown) {++downs;CHECK(!ctrl && !alt);}
+                else {
+                    if(received[i].Event.KeyEvent.wVirtualScanCode==0x1d)++ctrl;
+                    if(received[i].Event.KeyEvent.wVirtualScanCode==0x38)++alt;
+                }
+            }
+            if(downs!=(source_unread ? 2u : 0u) || ctrl!=1 || alt!=1)
+                fprintf(private_report ? private_report : stderr,
+                    "source handoff unread=%d downs=%lu ctrl-up=%lu alt-up=%lu\n",
+                    source_unread,downs,ctrl,alt);
+            CHECK(downs==(source_unread ? 2u : 0u) && ctrl==1 && alt==1);
+        }
         deadline=GetTickCount64()+5000;
         do {
             window=FindWindowW(L"LibKvmWindow",NULL);

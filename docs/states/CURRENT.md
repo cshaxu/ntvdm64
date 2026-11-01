@@ -2,7 +2,7 @@
 
 ## Current Work
 
-**Active: M0 T473 S12**
+**Active: M0 T473 S13**
 
 Prior owner-approved delivery: restore the four MVDM ANSI-profile files changed
 by MVDM-HOST-DIV-479, preserving authored build boundaries; verify actual
@@ -80,31 +80,32 @@ runtime: the owner clarified boundary-recovery scope.
 
 ## Active Packet
 
-### M0 T473 S12 — original and compatibility source layout
+### M0 T473 S13 — NTCON input-source handoff
 
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T473 S12, Ordinary Mode. |
-| Admission And Approval | Owner inserted the source-layout rename after S11; input handoff is deferred to S13. |
-| Objective | Replace previously removed, excluded branch markers with compile-time errors, preserving conditions and line counts. |
-| Delivery State | Excluded-branch guards and original `timeval.h` restoration built and verified against the published Full-tested package; awaiting owner acceptance. [Evidence](../../artifacts/mvdm-audit/s12-excluded-branch-errors.md). |
-| Non-goals | Guest modification or rebuilding, semantic rewrites, new compatibility behavior. |
-| Reference Baseline | S11 closure and source policy; original host and ABI trees have three nonidentical colliding paths. |
-| Files And ABI Surface | Source roots, builds, tests, provenance and current authority references; preserve source cohorts. |
-| Applicable Rules | Source policy, immutable guest, original owner boundaries, minimal mirror diff. |
-| Verification | x86/x64 cached builds and positive/negative guard controls passed; ten images match the Full-tested release after package ID and PE metadata normalization. DOS4GW fixture skipped; guest unchanged. |
-| Expected Markers | No conflicting overwrite, no stale active path, correct source provenance and matching deployed package. |
-| Held Selections | Preserve unselected [x86 CallProc32](../../artifacts/mvdm-audit/s12-i386-held.md) and [CPU/mouse paths](../../artifacts/mvdm-audit/s12-cpu-mouse-held.md) pending behavioral ownership review. |
-| Asset Needs | Existing sources and build caches; no new guest. |
-| Reporting Requirements | Paths, collisions, tests, publication, commit and remaining limits. |
-| Stop Conditions | Loss of source identity, guest changes or unapproved behavior change. |
-| Exit Criteria | Audited builds and tests, coherent publication, commit and push; wait for owner acceptance. |
-| Original Owner Request | Split guest-executed sources and firmware from MVDM host, preserve original paths and guest images; retain `non-mvdm` and `compat` owners. |
-| Similar-Issue Sweep | Check all active build, test, governance and provenance references. |
-| Candidate Proposal | [Source-layout rename](../proposals/proposal-original-source-layout-rename-001.md). |
-| Temporary Evidence | `build/t473-s12-flat`, 60-minute phase, 3-GiB size, 10-minute no-progress budget. |
+| Identifier Mode | M0 T473 S13, Ordinary Mode. |
+| Admission And Approval | Owner accepted and closed S12 and admitted S13. [S12 evidence](../../artifacts/mvdm-audit/s12-excluded-branch-errors.md). |
+| Objective | Trace and repair Console/Window keyboard source transitions; independently investigate Win3.1 MS-DOS Prompt Alt+Enter. |
+| Delivery State | Active: frontend missing releases reproduced; product probe needs diagnosis. [Evidence](../etc/evidence/m0-t473-s13-input-handoff.md). |
+| Non-goals | Guest modification or rebuilding; DOS-specific shortcut workarounds; unrelated performance work. |
+| Reference Baseline | Published ten-image package at 1d2ddfb18; [handoff scope and prior observations](../etc/operations/m0-t473-s12-ntcon-input-source-handoff.md). |
+| Files And ABI Surface | NTCON frontend session, keyboard and channel; worker input client and original DOS scan-code handling; tests and evidence. |
+| Applicable Rules | Source policy, immutable guest, original input semantics and centrally coordinated lifecycle. |
+| Verification | Baseline and post-fix product probes for DOS and native CUI, source-switch and input ordering controls, Win3.1 Alt+Enter, cached build, Full and coherent publication. |
+| Expected Markers | No stranded delivered keys or duplicate releases across source transitions; faithful input and preserved ordering. |
+| Asset Needs | Existing build caches, isolated test-owned process/desktop and unchanged Win3.1 copy. |
+| Reporting Requirements | Root cause, observed behavior, negative and lifecycle evidence, image hashes and unverified physical-input boundaries. |
+| Stop Conditions | Guest modification or unapproved observable semantic change. |
+| Exit Criteria | Scoped review, regression evidence, coherent publication, commit and push; await owner acceptance. |
+| Original Owner Request | Close S12 and execute the approved S13 input-source handoff scope. |
+| Similar-Issue Sweep | Console-to-Window and Window-to-Console, DOS and native CUI, modifiers, focus and lifecycle. |
+| Candidate Proposal | [NTCON input handoff](../proposals/proposal-ntcon-input-source-handoff-001.md). |
+| Temporary Evidence | `build/t473-s13`, owner S13, 60-minute phase, 3-GiB size and 10-minute no-progress budget; stable caches retained. |
 
-The original input-source handoff remains planned as S13: [scope](../etc/operations/m0-t473-s12-ntcon-input-source-handoff.md). Its partial probes do not constitute a fix.
+## S12 Closure Record
+
+The owner accepted [S12 source layout and compile-time boundaries](../etc/evidence/m0-t473-s12-source-layout-closure.md).
 
 ## S11 Closure Record
 
