@@ -285,9 +285,7 @@ IFN4(UTINY, hostID, ConfigValues *,vals, NameTable *,table, CHAR *,err)
 {
 	UNUSED(table);
 #ifdef SLAVEPC
-	if (hostID == C_SLAVEPC_DEVICE)
-		return host_slave_port_validate(host_expand_environment_vars(
-			vals->string), err);
+/* DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register. */
 #endif /* SLAVEPC */
 
 	return host_gfi_rdiskette_valid(hostID, vals, err);
@@ -297,11 +295,7 @@ GLOBAL VOID
 gfi_floppy_change IFN2(UTINY, hostID, BOOL, apply)
 {
 #ifdef SLAVEPC
-	if (hostID == C_SLAVEPC_DEVICE)
-	{
-		gfi_slave_change(hostID, apply);
-		return;
-	}
+/* DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register. */
 #endif /* SLAVEPC */
 
 	host_gfi_rdiskette_change(hostID, apply);
@@ -311,8 +305,7 @@ GLOBAL SHORT
 gfi_floppy_active IFN3(UTINY, hostID, BOOL, active, CHAR *,err)
 {
 #ifdef SLAVEPC
-	if (hostID == C_SLAVEPC_DEVICE)
-		return gfi_slave_active(hostID, active, err);
+/* DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register. */
 #endif /* SLAVEPC */
 
 	return host_gfi_rdiskette_active(hostID, active, err);
@@ -322,26 +315,7 @@ GLOBAL VOID
 gfi_attach_adapter IFN2(UTINY, adapter, BOOL, attach)
 {
 #ifdef SLAVEPC
-	if (host_runtime_inquire(C_FLOPPY_SERVER) == GFI_SLAVE_SERVER)
-	{
-		if (adapter == 1)
-			return;	/* No B adapter for slave PC */
-
-		/* First cleaup the other possible adapters */
-		if (config_get_active(C_FLOPPY_A_DEVICE))
-			config_activate(C_FLOPPY_A_DEVICE, FALSE);
-#ifdef FLOPPY_B
-		if (config_get_active(C_FLOPPY_B_DEVICE))
-			config_activate(C_FLOPPY_B_DEVICE, FALSE);
-#endif /* FLOPPY_B */
-
-		/* Activate the SLAVEPC device handler */
-		config_activate(C_SLAVEPC_DEVICE, attach);
-		return;
-	}
-	/* Must be a GFI_REAL_DISKETTE_SERVER */
-	if (config_get_active(C_SLAVEPC_DEVICE))
-		config_activate(C_SLAVEPC_DEVICE, FALSE);
+/* DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register. */
 #endif /* SLAVEPC */
 
 	config_activate(C_FLOPPY_A_DEVICE + adapter, attach);

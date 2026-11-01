@@ -705,21 +705,6 @@ IMPORT void		set_hfx_drive_state	IPT2(IU8, drive, drv_stat, state);
 
 
 #ifdef SWIN_HFX
-/*
- *	Function called by Softwindows to check for network files, and
- *	function called by it to open a file.
- */
-
-extern IBOOL Hfx_is_net_file IPT1(sys_addr, fname);
-extern IU32 Hfx_open_file IPT7(IU8, function, IU8, flags, sys_addr, fname, IU16 *,fd_p, IU16 *, date, IU16 *, time, IBOOL *, rdonly);
-extern IU32 Hfx_file_exists IPT1(sys_addr, fname);
-
-/*
- *	An additional "unix like" file function, to duplicate a file handle.
- *	Returns -1 on failure.
- */
-
-extern IS16 host_duph IPT1(IS16, oldHandle);
-
+/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_HFX platform branch is not selected; see mirror register. */
 #endif /* SWIN_HFX */
 #endif /* HFX */

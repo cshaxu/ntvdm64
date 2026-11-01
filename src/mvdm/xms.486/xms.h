@@ -24,13 +24,11 @@
 #endif
 
 #ifdef OS2_16
-#define OS2
-#define SIGNALS
+/* DIVERGENCE MVDM-HOST-DIV-528: OS2_16 platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef OS2_32
-#define OS2
-#define FLAT_32
+/* DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register. */
 #endif
 
 #include <stdarg.h>
@@ -75,8 +73,7 @@
 #endif
 
 #ifdef OS2_32
-#include <excpt.h>
-#define XCPT_SIGNAL	0xC0010003
+/* DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register. */
 #endif
 #include <xmsexp.h>
 #include <suballoc.h>

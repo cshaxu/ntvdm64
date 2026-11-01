@@ -30,7 +30,7 @@
 #include "gvi.h"
 #include CpuH
 #ifdef NOVELL
-#include "novell.h"
+/* DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register. */
 #endif
 #ifdef GISP_SVGA
 /* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
@@ -75,7 +75,7 @@ void terminate()
 #endif
 
 #ifdef SWIN_SNDBLST_NULL
-	sb_term();
+/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register. */
 #endif /* SWIN_SNDBLST_NULL */
 
 #ifdef GISP_SVGA
@@ -115,7 +115,7 @@ void terminate()
 	config_activate(C_FLOPPY_B_DEVICE, FALSE);
 #endif /* FLOPPY_B */
 #ifdef SLAVEPC
-	config_activate(C_SLAVEPC_DEVICE, FALSE);
+/* DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register. */
 #endif /* SLAVEPC */
 
 	/*
@@ -123,7 +123,7 @@ void terminate()
 	 */
 
 #ifdef NOVELL
-	net_term();	/* Shutdown network */
+/* DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef LICENSING

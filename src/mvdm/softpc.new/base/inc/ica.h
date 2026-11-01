@@ -64,7 +64,7 @@
 #endif
 
 #if defined (SWIN_HAW) 
-#define SWIN_HAW_INT		3
+/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register. */
 #endif
 
 #if defined (ASPI)

@@ -304,7 +304,7 @@ typedef enum
 	EG_FAILED_RCLOCAL,
 
 #ifdef SOFTWIN_API
-	EG_API_MISMATCH,
+/* DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register. */
 #endif /* SOFTWIN_API */
 
 	EG_OVERWRITE_DRIVE_C,

@@ -72,7 +72,7 @@ static control_bop_array base_bop_table[] =
      6, flbtog,
 #endif /* FLOPPY_B */
 #ifdef SLAVEPC
-     5, slvtog,
+/* DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register. */
 #endif /* SLAVEPC */
      4, comtog,
      3, D_kyhot,             /* Flush the COM/LPT ports */

@@ -292,23 +292,7 @@ extern void bootstrap2();
 extern void bootstrap3();
 
 #ifdef NOVELL
-extern void DriverInitialize();
-extern void DriverReadPacket();
-extern void DriverSendPacket();
-extern void DriverMulticastChange();
-extern void DriverCloseSocket();
-extern void DriverReset();
-extern void DriverShutdown();
-extern void DriverAddProtocol();
-extern void DriverChangePromiscuous() ;
-extern void DriverOpenSocket() ;
-extern void DriverCloseSocket() ;
-#ifdef NOVELL_CFM
-extern void DriverCheckForMore() ;
-#endif
-#ifdef V4CLIENT
-extern void DriverChangeIntStatus() ;
-#endif	/* V4CLIENT */
+/* DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef	MSWDVR
@@ -346,11 +330,11 @@ extern void SoftWindowsTerm IPT0();
 #endif	/* SOFTWIN_API or SWIN_HFX */
 
 #if	defined(SOFTWIN_API)
-extern void SoftWindowsApi IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register. */
 #endif	/* SOFTWIN_API */
 
 #ifdef SWIN_HAW
-extern void msw_sound IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register. */
 #endif	/* SWIN_HAW */
 
 #ifdef ANSI

@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-528: replace unselected BSD4_2, OS2_32, OS2_16,
+SOFTWIN_API, SWIN_HAW, SWIN_HFX, SWIN_SNDBLST_NULL, SLAVEPC and NOVELL
+branches with markers while preserving conditionals. The inventory is
+`../../artifacts/mvdm-audit/s12-host-platforms.jsonl`.
+
 MVDM-HOST-DIV-527: replace unselected SHORT_TRACE, EGA_DUMP, SUN_VA,
 EMM_DEBUG, VR_DIAGNOSE and DUMB_TERMINAL branches with markers while
 preserving conditionals. Body hashes and locations are in

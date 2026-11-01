@@ -50,7 +50,7 @@
 #include "virtual.h"
 #include "gispsvga.h"
 #ifdef SWIN_HFX
-#include "winfiles.h"
+/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_HFX platform branch is not selected; see mirror register. */
 #endif
 
 
@@ -68,7 +68,7 @@ extern void get_lar();
    Traps for BOP's requiring virtualisation.
  */
 #ifdef SWIN_HFX
-LOCAL void v_SwinRedirector	IFN0() { SWAP_INSTANCE; SwinRedirector(); }
+/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_HFX platform branch is not selected; see mirror register. */
 #endif
 LOCAL void v_mouse_install1	IFN0() { SWAP_INSTANCE; mouse_install1(); }
 LOCAL void v_mouse_install2	IFN0() { SWAP_INSTANCE; mouse_install2(); }
@@ -224,26 +224,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 33 */
 #endif /* DPMI */
 #ifdef NOVELL
-			DriverInitialize,		/* BOP 34 */
-			DriverReadPacket,		/* BOP 35 */
-			DriverSendPacket,		/* BOP 36 */
-			DriverMulticastChange,		/* BOP 37 */
-			DriverReset,			/* BOP 38 */
-			DriverShutdown,			/* BOP 39 */
-			DriverAddProtocol,		/* BOP 3A */
-			DriverChangePromiscuous, 	/* BOP 3B */
-			DriverOpenSocket, 		/* BOP 3C */
-			DriverCloseSocket,	 	/* BOP 3D */
-#ifdef NOVELL_CFM
-			DriverCheckForMore,		/* BOP 3E */
-#else
-			illegal_bop,	 /* Spare	   BOP 3E */
-#endif
-#ifdef V4CLIENT
-			DriverChangeIntStatus,	/* BOP 3F */
-#else
-			illegal_bop,	 		/* Spare  BOP 3F */
-#endif	/* V4CLIENT */
+/* DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register. */
 #else	/* NOVELL */
 			illegal_bop,	/* BOP 34 */
 			illegal_bop,	/* BOP 35 */
@@ -469,12 +450,12 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 9D */
 #endif	/* SOFTWIN_API or SWIN_HFX */
 #if	defined(SOFTWIN_API)
-			SoftWindowsApi,	/* BOP 9E */
+/* DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register. */
 #else
 			illegal_bop,	/* BOP 9E */
 #endif	/* SOFTWIN_API */
 #ifdef SWIN_HAW
-			msw_sound,	/* BOP 9F */
+/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register. */
 #else
 			illegal_bop,	/* BOP 9F */
 #endif /* SWIN_HAW */
@@ -511,9 +492,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP A8 */ 
 			illegal_bop,	/* BOP A9 */
 #ifdef SWIN_HFX
-			v_SwinRedirector,   /* BOP AA */ /* SwinRedirector */
-			SwinFileOpened,	/* BOP AB */
-			SwinHfxTaskTerm,	/* BOP AC */
+/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_HFX platform branch is not selected; see mirror register. */
 #else
 			illegal_bop,	/* BOP AA */
 			illegal_bop,	/* BOP AB */

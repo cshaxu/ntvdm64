@@ -73,7 +73,7 @@
 #include "debug.h"
 #include "video.h"
 #ifdef NOVELL
-#include "novell.h"
+/* DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register. */
 #endif
 #include "emm.h"
 #include "quick_ev.h"
@@ -759,7 +759,7 @@ void reset()
 	 * Shutdown ODI network driver in case it was running
 	 */
 #ifdef NOVELL
-	net_term();
+/* DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register. */
 #endif
 
         /* Shutdown SmartCopy */
@@ -869,7 +869,7 @@ void reset()
 	video_init();
 
 #ifdef SWIN_SNDBLST_NULL
-	sb_init();
+/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register. */
 #endif /* SWIN_SNDBLST_NULL */
 
 #ifndef NTVDM	/* No signon for NTVDM - transparent integration */
@@ -1004,8 +1004,7 @@ void reset()
 #endif /* DELTA && A2CPU */
 
 #ifdef SOFTWIN_API
-	ApiReset() ;
-	ApiDisable() ;
+/* DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef HUNTER

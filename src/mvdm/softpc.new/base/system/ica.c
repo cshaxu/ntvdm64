@@ -164,7 +164,7 @@
 #include "debug.h"
 
 #ifdef NOVELL
-extern void host_sigio_event IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register. */
 #endif /* NOVELL */
 
 /*
@@ -1425,11 +1425,11 @@ typedef struct {
 GLOBAL ICA_ASYNC_HANDLER async_handlers[] = {
 
 #ifdef NOVELL
-	{ ICA_SLAVE, 	NETWORK_INT,	host_sigio_event },
+/* DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register. */
 #endif /* NOVELL */
 
 #ifdef SWIN_HAW
-	{ ICA_SLAVE,	SWIN_HAW_INT,	0 },
+/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register. */
 #endif /* SWIN_HAW */
 
 #ifdef ASPI

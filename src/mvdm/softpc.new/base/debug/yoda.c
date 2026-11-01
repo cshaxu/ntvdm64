@@ -1660,36 +1660,7 @@ LOCAL YODA_COMMAND(do_ubt)
 #endif /* MUST_BLOCK_TIMERS */
 
 #ifdef BSD4_2
-LOCAL YODA_COMMAND(do_bs)
-{
-	int oldmask;
-
-	if ( cs > 0 && cs < 32 )
-		oldmask = sigblock( 1 << ( cs - 1 ) );
-	else
-		printf("\nInvalid signal no. ( <= 0x0 or >= 0x20 )\n");
-	return(YODA_LOOP);
-}
-
-LOCAL YODA_COMMAND(do_us)
-{
-	int oldmask;
-
-	if ( cs > 0 && cs < 32 )
-		{
-			oldmask = sigblock(0);
-			if ( (oldmask & (1 << (cs -1))) != 0 )
-			{
-				oldmask ^= (1 << ( cs - 1));
-				oldmask = sigsetmask(oldmask);
-			}
-			else
-				printf("signal not currently blocked\n");
-		}
-	else
-		printf("Invalid signal no. ( <= 0x0 or >= 0x20 )\n");
-	return(YODA_LOOP);
-}
+/* DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register. */
 #endif /* BSD4_2 */
 
 #if defined(CPU_40_STYLE) && !defined (SFELLOW) && !defined (NTVDM)
@@ -4551,8 +4522,7 @@ static struct
 #endif /* MUST_BLOCK_TIMERS */
 
 #ifdef BSD4_2
-{ "bs", 	do_bs, 		FALSE, "<signo>", "Block signal <signo>" },
-{ "us", 	do_us, 		FALSE, "<signo>", "Unblock signal <signo>" },
+/* DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register. */
 #endif /* BSD4_2 */
 
 { "tf", 	do_tf, 		FALSE, "<filename>", "Re-direct trace output" },

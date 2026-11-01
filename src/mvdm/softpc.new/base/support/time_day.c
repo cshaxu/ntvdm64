@@ -143,7 +143,7 @@ void time_of_day()
      */
 
 #ifdef BSD4_2
-    host_block_timer();
+/* DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register. */
 #endif
 
     switch (getAH()) {
@@ -301,7 +301,7 @@ void time_of_day()
 		{
 			setCF(1);
 #ifdef BSD4_2
-			host_release_timer();
+/* DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register. */
 #endif
 			return;
 		}
@@ -354,7 +354,7 @@ void time_of_day()
     setAH( 0 );
 
 #ifdef BSD4_2
-    host_release_timer();
+/* DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register. */
 #endif
 }
 

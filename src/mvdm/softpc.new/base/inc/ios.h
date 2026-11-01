@@ -309,10 +309,7 @@ typedef struct _extioentry {
 /* SoundBlaster I/O Ports */
 
 #ifdef SWIN_SNDBLST_NULL
-#define SNDBLST1_PORT_START		0x0220
-#define SNDBLST1_PORT_END		0x022F
-#define SNDBLST2_PORT_START		0x0240
-#define SNDBLST2_PORT_END		0x026F
+/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -399,7 +396,7 @@ typedef struct _extioentry {
 /* Adapter for SoundBlaster Null Driver */
 
 #ifdef SWIN_SNDBLST_NULL
-#define SNDBLST_ADAPTER		36	
+/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register. */
 #endif
 
 #ifndef IO_MAX_NUMBER_ADAPTORS

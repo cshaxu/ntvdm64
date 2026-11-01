@@ -453,13 +453,7 @@ int verify_equip_byte IFN1(half_word *, equip)
 		*equip |= CO_PROCESSOR_PRESENT;
 
 #ifdef SLAVEPC
-	if (host_runtime_inquire(C_FLOPPY_SERVER) == GFI_SLAVE_SERVER)
-	{
-		num_flops =
-			(*(CHAR *) config_inquire(C_SLAVEPC_DEVICE, NULL))
-			? 1:0;
-	}
-	else
+/* DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register. */
 #endif /* SLAVEPC */
 	{
 		num_flops  =
