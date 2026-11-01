@@ -302,6 +302,35 @@ static int repeat_window_caf(void)
         s36_note("window-caf","using-window-close-control");
         return SendMessageTimeoutW(window,WM_CLOSE,0,0,SMTO_ABORTIFHUNG,3000,&result)!=0;
     }
+    if(GetEnvironmentVariableW(L"MVDM_TEST_WINDOW_ATTACHED_KEYS",NULL,0)) {
+        BYTE saved[256],state[256];MSG message;BOOL attached=FALSE,ok=TRUE;
+        if(!window)return 0;
+        tid=GetWindowThreadProcessId(window,NULL);
+        /* Both threads belong to this private, test-owned desktop. Ensure
+         * the observer has a queue before temporarily sharing its key state. */
+        PeekMessageW(&message,NULL,WM_USER,WM_USER,PM_NOREMOVE);
+        if(!AttachThreadInput(GetCurrentThreadId(),tid,TRUE))return 0;
+        attached=TRUE;
+        if(!GetKeyboardState(saved))ok=FALSE;
+        if(ok)memcpy(state,saved,sizeof(state));
+        for(i=0;ok && i<6;i++) {
+            BOOL down=i<3;
+            if(keys[i]==VK_CONTROL) {
+                state[VK_CONTROL]=(BYTE)((state[VK_CONTROL]&1)|(down ? 0x80 : 0));
+                state[VK_LCONTROL]=(BYTE)((state[VK_LCONTROL]&1)|(down ? 0x80 : 0));
+            } else if(keys[i]==VK_MENU) {
+                state[VK_MENU]=(BYTE)((state[VK_MENU]&1)|(down ? 0x80 : 0));
+                state[VK_LMENU]=(BYTE)((state[VK_LMENU]&1)|(down ? 0x80 : 0));
+            }
+            if(!SetKeyboardState(state)) {ok=FALSE;break;}
+            if(!IsWindow(window))break;
+            if(!SendMessageTimeoutW(window,messages[i],keys[i],params[i],SMTO_ABORTIFHUNG,3000,&result))break;
+        }
+        if(ok && !SetKeyboardState(saved))ok=FALSE;
+        if(attached && !AttachThreadInput(GetCurrentThreadId(),tid,FALSE))ok=FALSE;
+        s36_note("window-caf",ok && i>=3 ? "attached-input" : "attached-input-failed");
+        return ok && i>=3;
+    }
     if(!window || !GetEnvironmentVariableA("MVDM_CAF_HOOK_DLL",path,sizeof(path)))return 0;
     module=LoadLibraryA(path);if(!module){fprintf(stderr,"window input: LoadLibrary error %lu\n",GetLastError());return 0;}
     tid=GetWindowThreadProcessId(window,NULL);
@@ -320,7 +349,8 @@ static int repeat_window_physical(const char *text)
 {
     HWND window=FindWindowW(L"LibKvmWindow",NULL);HMODULE module;HHOOK hook;
     char path[MAX_PATH];DWORD tid,pid=0;DWORD_PTR result;int ok=1;FARPROC callback;
-    BOOL plain=GetEnvironmentVariableW(L"MVDM_TEST_WINDOW_CLOSE_CONTROL",NULL,0)!=0;
+    BOOL plain=GetEnvironmentVariableW(L"MVDM_TEST_WINDOW_CLOSE_CONTROL",NULL,0)!=0 ||
+        GetEnvironmentVariableW(L"MVDM_TEST_WINDOW_ATTACHED_KEYS",NULL,0)!=0;
     if(!window || (!plain && !GetEnvironmentVariableA("MVDM_CAF_HOOK_DLL",path,sizeof(path))))return 0;
     module=NULL;hook=NULL;
     if(!plain) {

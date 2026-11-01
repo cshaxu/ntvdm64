@@ -2,7 +2,8 @@
 param(
     [Parameter(Mandatory)][string]$PackageRoot,
     [Parameter(Mandatory)][string]$Observer,
-    [Parameter(Mandatory)][string]$LogRoot
+    [Parameter(Mandatory)][string]$LogRoot,
+    [switch]$WindowCloseControl
 )
 $ErrorActionPreference='Stop'
 $repo=(Resolve-Path "$PSScriptRoot/../..").Path
@@ -22,7 +23,13 @@ $results=@();$passed=$false
 try {
     $env:TEST_RUNTIME_ROOT=$stage
     $env:MVDM_CAF_THREE_PROBE='1'
-    $env:MVDM_TEST_WINDOW_CLOSE_CONTROL='1'
+    if($WindowCloseControl) {
+        $env:MVDM_TEST_WINDOW_CLOSE_CONTROL='1'
+        Remove-Item Env:MVDM_TEST_WINDOW_ATTACHED_KEYS -ErrorAction SilentlyContinue
+    } else {
+        $env:MVDM_TEST_WINDOW_ATTACHED_KEYS='1'
+        Remove-Item Env:MVDM_TEST_WINDOW_CLOSE_CONTROL -ErrorAction SilentlyContinue
+    }
     $env:MVDM_TEST_BOOT_WAIT_MS='6000'
     $env:MVDM_CAF_REAL_RECORDS='1'
     $env:MVDM_CAF_RELEASE_DELAY='20'
@@ -39,15 +46,20 @@ try {
             $process.Kill();$process.WaitForExit()
             throw "Observer diagnostic deadline exceeded: $name"
         }
-        $results+=@{name=$name;pid=$process.Id;exit=$process.ExitCode;raw=$raw;stdout=$stdout;stderr=$stderr}
+        $marker=if($WindowCloseControl) {'S36-PROBE window-caf <using-window-close-control>'}
+            else {'S36-PROBE window-caf <attached-input>'}
+        $observed=(Test-Path -LiteralPath $raw) -and ((Get-Content -LiteralPath $raw -Raw) -like "*$marker*")
+        $results+=@{name=$name;pid=$process.Id;exit=$process.ExitCode;marker=$observed;raw=$raw;stdout=$stdout;stderr=$stderr}
         $process.Dispose()
     }
-    $passed=@($results|Where-Object exit -ne 0).Count -eq 0
+    $passed=($results.Count -eq 2) -and @($results|Where-Object { $_.exit -ne 0 -or !$_.marker }).Count -eq 0
 } finally {
+    $control=if($WindowCloseControl) {'Window close between two Console CAF requests; not a Window CAF test'}
+        else {'Three CAF requests; Window chord uses attached private input queues'}
     [ordered]@{stage=$stage;observer=$observerPath;observerSha256=(Get-FileHash $observerPath).Hash;
-        control='Window close between two Console CAF requests; not a Window CAF test';cases=$results} |
+        control=$control;cases=$results} |
         ConvertTo-Json -Depth 5 | Set-Content -Encoding utf8 (Join-Path $log 'result.json')
     if($passed){Remove-PhysicalRuntimeStage $stage}
 }
 if(!$passed){throw 'Console-to-Window source handoff control failed; stage retained'}
-'PASS real DOS and native CUI input after repeated source entry (Window-close control)'
+'PASS real DOS and native CUI input after repeated source entry'
