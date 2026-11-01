@@ -390,26 +390,7 @@ extern void nt_v7vga_mono_hi_graph_huge(int offset, int screen_x, int screen_y,
 #endif /* V7VGA */
 
 #ifdef MONITOR
-void nt_cga_med_frozen_std(int offset, int screen_x, int screen_y, int len,
-			   int height);
-void nt_cga_hi_frozen_std(int offset, int screen_x, int screen_y, int len,
-			  int height);
-void nt_ega_lo_frozen_std(int offset, int screen_x, int screen_y,
-                          int width, int height);
-void nt_ega_med_frozen_std(int offset, int screen_x, int screen_y,
-                           int width, int height);
-void nt_ega_hi_frozen_std(int offset, int screen_x, int screen_y,
-                          int width, int height);
-void nt_vga_frozen_std(int offset, int screen_x, int screen_y,
-                       int width, int height);
-void nt_vga_frozen_pack_std(int offset, int screen_x, int screen_y,
-                       int width, int height);
-void nt_vga_med_frozen_std(int offset, int screen_x, int screen_y,
-                           int width, int height);
-void nt_vga_hi_frozen_std(int offset, int screen_x, int screen_y,
-                          int width, int height);
-void nt_dummy_frozen(int offset, int screen_x, int screen_y, int len,
-		     int height);
+/* DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register. */
 #endif /* MONITOR */
 
 void high_stretch3(unsigned char *buffer, int length);
@@ -440,9 +421,7 @@ int get_screen_scale IFN0();
 void SetupConsoleMode(void);
 
 #ifdef MONITOR
-IMPORT void select_frozen_routines IFN0();
-half_word get_vga_DAC_rd_addr(void);
-void resetNowCur(void);
+/* DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register. */
 #endif /* MONITOR */
 
 void do_new_cursor(void);
