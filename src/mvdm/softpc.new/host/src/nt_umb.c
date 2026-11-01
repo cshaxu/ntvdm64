@@ -121,17 +121,7 @@ DWORD	*Size
 		    sas_connect_memory(UMB->Base, UMB->Base + UMB->Size - 1, SAS_RAM);
 
 #else
-		    Status = NtAllocateVirtualMemory(NtCurrentProcess(),
-						     (PVOID *)&UMB->Base,
-						     0,
-						     &UMB->Size,
-						     MEM_COMMIT,
-						     UMB_PAGE_PROTECTION
-						     );
-		    if (!NT_SUCCESS(Status)) {
-			SetLastError(ERROR_OUTOFMEMORY);
-			return FALSE;
-		    }
+/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
 #endif
 		    UMB->Owner = UMB_OWNER_RAM;
 		}
@@ -199,42 +189,7 @@ DWORD	*Size
 	    // on MIPS, rom blocks are BIOS and VIDEO. No reason to change it
 	    return FALSE;
 #else
-	    while(UMB != NULL && (UMB->Owner != UMB_OWNER_ROM ||
-				  UMB->Base !=	dwBase ||
-				  UMB->Size != *Size)) {
-		UMB = UMB->Next;
-	    }
-	    if (UMB == NULL) {
-		SetLastError(ERROR_ACCESS_DENIED);
-		return FALSE;
-	    }
-	    // unmap the rom first. Kernel map it into a unknown section
-	    Status = NtUnmapViewOfSection(NtCurrentProcess(),
-					  (PVOID)UMB->Base
-					  );
-	    if (NT_SUCCESS(Status)) {
-		*Address = (PVOID)UMB->Base;
-		SectionOffset.LowPart = UMB->Base - UMB_BASE_ADDRESS;
-		*Size = UMB->Size;
-		// map the address into our section(reserved)
-		Status = NtMapViewOfSection(UMBSectionHandle,
-					    NtCurrentProcess(),
-					    Address,
-					    0,
-					    0,
-					    &SectionOffset,
-					    Size,
-					    ViewUnmap,
-					    MEM_DOS_LIM,
-					    UMB_PAGE_PROTECTION
-					    );
-		if (!NT_SUCCESS(Status)) {
-		    SetLastError(ERROR_ACCESS_DENIED);
-		    return FALSE;
-		}
-		UMB->Owner = UMB_OWNER_NONE;
-	    }
-	    break;
+/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
 #endif
 
 	case UMB_OWNER_ROM:
@@ -315,18 +270,7 @@ DWORD	Size
 #ifndef	MONITOR
 	    sas_connect_memory(UMB->Base, UMB->Base + UMB->Size - 1, SAS_RAM);
 #else
-	    //commit the meory block
-	    Status = NtAllocateVirtualMemory(NtCurrentProcess(),
-					     (PVOID *) &dwBase,
-					     0,
-					     &SizeView,
-					     MEM_COMMIT,
-					     UMB_PAGE_PROTECTION
-					     );
-	    if (!NT_SUCCESS(Status)) {
-		SetLastError(ERROR_OUTOFMEMORY);
-		return FALSE;
-	    }
+/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
 #endif
 	    UMB->Owner = UMB_OWNER_RAM;
 	    xmsReleaseUMBNotify((PVOID)UMB->Base, UMB->Size);
@@ -336,37 +280,7 @@ DWORD	Size
 #ifndef	MONITOR
 	    sas_connect_memory(dwBase, dwBase + Size - 1, SAS_RAM);
 #else
-            Count = (USHORT)(SizeView / HOST_PAGE_SIZE);
-	    SizeView = HOST_PAGE_SIZE;
-	    // unmap every page
-	    for (; Count > 0; Count--, dwBase += HOST_PAGE_SIZE) {
-		Status = NtUnmapViewOfSection(NtCurrentProcess(),
-					      (PVOID)dwBase
-					      );
-		if (!NT_SUCCESS(Status)) {
-		    SetLastError(ERROR_ACCESS_DENIED);
-		    return FALSE;
-		}
-	    }
-	    SectionOffset.LowPart = UMB->Base - UMB_BASE_ADDRESS;
-	    dwBase = UMB->Base;
-	    SizeView = UMB->Size;
-	    // reserve and commit the meory(the entire block)
-	    Status = NtMapViewOfSection(UMBSectionHandle,
-					NtCurrentProcess(),
-					(PVOID *) &dwBase,
-					0,
-					SizeView,
-					&SectionOffset,
-					&SizeView,
-					ViewUnmap,
-					MEM_DOS_LIM,
-					UMB_PAGE_PROTECTION
-					);
-	    if (!NT_SUCCESS(Status)) {
-		SetLastError(ERROR_ACCESS_DENIED);
-		return FALSE;
-	    }
+/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
 #endif
 	    UMB->Owner = UMB_OWNER_RAM;
 	    xmsReleaseUMBNotify((PVOID)UMB->Base, UMB->Size);
@@ -411,57 +325,7 @@ DWORD	Size
 #ifndef	MONITOR
     sas_connect_memory(dwBase, dwBase + Size - 1, SAS_RAM);
 #else
-    Mask = 1 << ((dwBase - UMB->Base) / HOST_PAGE_SIZE);
-    SizeView =	HOST_PAGE_SIZE;
-    Count = (USHORT)(Size / HOST_PAGE_SIZE);
-    SectionOffset.HighPart = 0;
-    SectionOffset.LowPart = dwBase - UMB_BASE_ADDRESS;
-
-    for (; Count > 0; Count--, Mask <<= 1) {
-	// Commit memory if didn't do this before
-	if ((UMB->Mask & Mask) == 0) {
-	    Status = NtAllocateVirtualMemory(NtCurrentProcess(),
-					     (PVOID *)&dwBase,
-					     0,
-					     &SizeView,
-					     MEM_COMMIT,
-					     UMB_PAGE_PROTECTION
-					     );
-	    if (!NT_SUCCESS(Status)) {
-		SetLastError(ERROR_OUTOFMEMORY);
-		return FALSE;
-	    }
-	    UMB->Mask |= Mask;
-	}
-	else {
-	    // the section has memory for it,
-	    // first unmap it and then map it with correct commit size
-	    Status = NtUnmapViewOfSection(NtCurrentProcess(),
-					   (PVOID)dwBase
-					   );
-	    if (!NT_SUCCESS(Status)) {
-		SetLastError(ERROR_ACCESS_DENIED);
-		return FALSE;
-	    }
-	    Status = NtMapViewOfSection(UMBSectionHandle,
-					NtCurrentProcess(),
-					(PVOID *)&dwBase,
-					0,
-					HOST_PAGE_SIZE,
-					&SectionOffset,
-					&SizeView,
-					ViewUnmap,
-					MEM_DOS_LIM,
-					UMB_PAGE_PROTECTION
-					);
-	    if (!NT_SUCCESS(Status)) {
-		SetLastError(ERROR_OUTOFMEMORY);
-		return FALSE;
-	    }
-	}
-	SectionOffset.LowPart += HOST_PAGE_SIZE;
-	dwBase += HOST_PAGE_SIZE;
-    }
+/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
 #endif
 
     return TRUE;
@@ -500,41 +364,7 @@ DWORD	Size
 #ifndef	MONITOR
     sas_connect_memory(dwBase, dwBase + Size - 1, SAS_VDD);
 #else
-    PageSize = HOST_PAGE_SIZE;
-    PageCount = (USHORT)(Size / HOST_PAGE_SIZE);
-    PageMask = 1 <<  ((dwBase - UMB->Base) / HOST_PAGE_SIZE);
-    SectionOffset.HighPart = 0;
-    SectionOffset.LowPart = dwBase - UMB->Base;
-    for (; PageCount > 0; PageCount--, PageMask <<= 1) {
-	if ((UMB->Mask & PageMask) != 0) {
-	    // this page has memory committed, unmap it first
-	    Status = NtUnmapViewOfSection(NtCurrentProcess(),
-					  (PVOID)dwBase
-					  );
-	    if (!NT_SUCCESS(Status)) {
-		SetLastError(ERROR_ACCESS_DENIED);
-		return FALSE;
-	    }
-	    // finally make a view for the page without commitment
-	    Status= NtMapViewOfSection(UMBSectionHandle,
-				   NtCurrentProcess(),
-				   (PVOID *) &dwBase,
-				   0,
-				   0,
-				   &SectionOffset,
-				   &PageSize,
-				   ViewUnmap,
-				   MEM_DOS_LIM,
-				   PAGE_EXECUTE_READWRITE
-				   );
-	    if (!NT_SUCCESS(Status)) {
-		SetLastError(ERROR_ACCESS_DENIED);
-		return FALSE;
-	    }
-	}
-	SectionOffset.LowPart += HOST_PAGE_SIZE;
-	dwBase += HOST_PAGE_SIZE;
-    }
+/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
 #endif
 
      return TRUE;
@@ -595,30 +425,7 @@ PUMBNODE  UMB
 #ifndef	MONITOR
     sas_connect_memory(dwBase, dwBase + Size - 1, SAS_VDD);
 #else
-    Count = (USHORT)(Size / HOST_PAGE_SIZE);
-    SizeView = HOST_PAGE_SIZE;
-    SectionOffset.HighPart = 0;
-    SectionOffset.LowPart = dwBase - UMB_BASE_ADDRESS;
-    // map a view for each page. This is done becuase VDDs may commit
-    // and decommit memory for/from their memory hook and the system
-    // has 64KB alignment restriction for virtual memory APIs.
-    for (; Count > 0; Count--, dwBase += HOST_PAGE_SIZE,
-		      SectionOffset.LowPart += HOST_PAGE_SIZE) {
-	Status = NtMapViewOfSection(UMBSectionHandle,
-				    NtCurrentProcess(),
-				    (PVOID *)&dwBase,
-				    0,
-				    0,
-				    &SectionOffset,
-				    &SizeView,
-				    ViewUnmap,
-				    MEM_DOS_LIM,
-				    UMB_PAGE_PROTECTION
-				    );
-	if (!NT_SUCCESS(Status)) {
-	    return FALSE;
-	}
-    }
+/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
 #endif
     return TRUE;
 }
@@ -734,276 +541,5 @@ InitUMBList(VOID)
 }
 
 #else
-// this is for X86 environment
-BOOL
-InitUMBList(VOID)
-
-{
-    OBJECT_ATTRIBUTES	UMBObjAttr;
-    LARGE_INTEGER	UMBSecSize;
-    NTSTATUS		Status;
-    DWORD		CurAddress, RomAddress, RomSize;
-    PUMBNODE		UMB, UMBNew;
-    USHORT		Index;
-
-    UNICODE_STRING WorkString;
-    UCHAR KeyValueBuffer[KEY_VALUE_BUFFER_SIZE];
-    HANDLE RegistryHandle;
-    ULONG ResultLength;
-    OBJECT_ATTRIBUTES ObjectAttributes;
-    PCM_FULL_RESOURCE_DESCRIPTOR        ResourceDescriptor;
-    PCM_PARTIAL_RESOURCE_DESCRIPTOR     PartialResourceDescriptor;
-    PCM_ROM_BLOCK   BiosBlock;
-
-    RtlInitUnicodeString(
-        &WorkString,
-        L"\\REGISTRY\\MACHINE\\HARDWARE\\DESCRIPTION\\SYSTEM"
-        );
-
-    //
-    // Set up and open KeyPath
-    //
-
-    InitializeObjectAttributes(
-        &ObjectAttributes,
-        &WorkString,
-        OBJ_CASE_INSENSITIVE,
-        (HANDLE)NULL,
-        NULL
-        );
-
-    Status = NtOpenKey(
-                &RegistryHandle,
-                KEY_READ,
-                &ObjectAttributes
-                );
-
-    if (!NT_SUCCESS(Status)) {
-#if DBG
-       DbgPrint("InitUMBList: can't open \\Registry\\Machine\\Hardware\\Description\\System\n");
-#endif
-	return FALSE;
-    }
-
-    //
-    // Get the data for the rom information
-    //
-
-    RtlInitUnicodeString(
-        &WorkString,
-        CONFIG_DATA_STRING
-        );
-
-    Status = NtQueryValueKey(
-        RegistryHandle,
-        &WorkString,
-        KeyValueFullInformation,
-        (PKEY_VALUE_FULL_INFORMATION)KeyValueBuffer,
-        KEY_VALUE_BUFFER_SIZE,
-        &ResultLength
-        );
-
-    if (!NT_SUCCESS(Status)) {
-#if DBG
-        DbgPrint("InitUMBList: Got nothing from Configuration Data\n");
-#endif
-        NtClose(RegistryHandle);
-	return FALSE;
-    }
-
-    // Locate registry data for this key
-    ResourceDescriptor = (PCM_FULL_RESOURCE_DESCRIPTOR)((PUCHAR)KeyValueBuffer
-                   + ((PKEY_VALUE_FULL_INFORMATION)KeyValueBuffer)->DataOffset);
-
-    // Verify data returned is large enough to contaim partial resource
-    // descriptor.
-    if ((((PKEY_VALUE_FULL_INFORMATION)KeyValueBuffer)->DataLength <
-                                        sizeof(CM_FULL_RESOURCE_DESCRIPTOR)) ||
-                            (ResourceDescriptor->PartialResourceList.Count < 2))
-    {
-        Index = 0;
-    } else {
-        PartialResourceDescriptor = (PCM_PARTIAL_RESOURCE_DESCRIPTOR) (
-                    (PUCHAR)ResourceDescriptor + sizeof(CM_FULL_RESOURCE_DESCRIPTOR)
-                    + ResourceDescriptor->PartialResourceList.PartialDescriptors[0].u.DeviceSpecificData.DataSize);
-
-
-        //Verify that there is a 2nd partial resource descriptor, and that it is
-        //large enough to contain a ROM block description
-        if (((PKEY_VALUE_FULL_INFORMATION)KeyValueBuffer)->DataLength <
-                            ((PUCHAR)PartialResourceDescriptor -
-                            (PUCHAR)ResourceDescriptor +
-                            sizeof(CM_PARTIAL_RESOURCE_DESCRIPTOR) +
-                            sizeof(CM_ROM_BLOCK)))
-        {
-            NtClose(RegistryHandle);
-	    return FALSE;
-        }
-
-        //get pointer to the first rom desciption
-        BiosBlock = (PCM_ROM_BLOCK)((PUCHAR)PartialResourceDescriptor +
-                                            sizeof(CM_PARTIAL_RESOURCE_DESCRIPTOR));
-        // how many rom blocks we have
-        Index = (USHORT) (PartialResourceDescriptor->u.DeviceSpecificData.DataSize /
-                          sizeof(CM_ROM_BLOCK));
-
-    }
-
-    InitializeObjectAttributes(&UMBObjAttr,
-			       NULL,
-			       OBJ_CASE_INSENSITIVE,
-			       NULL,
-			       NULL
-			      );
-
-
-    UMBSecSize.LowPart = UMB_MAX_OFFSET;
-    UMBSecSize.HighPart = 0;
-
-    // create a section for the UMB area. Note that the section
-    // includes ROM blocks. This was done because we will allow
-    // VDDs to put ROM blocks into UMB free list for other users.
-    Status = NtCreateSection(&UMBSectionHandle,
-			     SECTION_MAP_WRITE|SECTION_MAP_EXECUTE,
-			     &UMBObjAttr,
-			     &UMBSecSize,
-			     UMB_PAGE_PROTECTION,
-			     SEC_RESERVE,
-			     NULL
-			    );
-
-    if (!NT_SUCCESS(Status)) {
-#if DBG
-	DbgPrint("UMB:Unable to create UMB section, Status = %lx\n",
-                 Status);
-#endif
-	return(FALSE);
-    }
-
-    // Now we go through the whole 256KB area to create a list for
-    // each UMB(including ROM blocks)
-
-    // This global variable points to the first node in the list
-    UMBList = NULL;
-    CurAddress = UMB_BASE_ADDRESS;
-
-    while (Index > 0) {
-	// round down address to the previous page boundary
-	RomAddress = BiosBlock->Address & ~(HOST_PAGE_SIZE - 1);
-	// round up the size to next page boundary
-	RomSize = (BiosBlock->Size +
-		   BiosBlock->Address - RomAddress +
-		   HOST_PAGE_SIZE - 1
-		   ) & ~(HOST_PAGE_SIZE - 1);
-	// combine two blocks together if they overlap in page
-	if (Index > 1 && (RomAddress + RomSize) > BiosBlock[1].Address) {
-	    BiosBlock[1].Size += BiosBlock[1].Address - BiosBlock->Address;
-	    BiosBlock[1].Address = BiosBlock->Address;
-	    BiosBlock++;
-	    Index--;
-	    continue;
-	}
-
-
-	if (CurAddress == RomAddress) {
-	    UMBNew = CreateNewUMBNode(CurAddress, RomSize, UMB_OWNER_ROM);
-	    if (UMBNew == NULL)
-		return FALSE;
-	    CurAddress += RomSize;
-	    BiosBlock++;
-	    Index--;
-	}
-	else {
-	    // make sure the block is in UMB area
-	    if (RomAddress > CurAddress &&
-		RomAddress <= UMB_BASE_ADDRESS + UMB_MAX_OFFSET){
-
-		UMBNew = CreateNewUMBNode(CurAddress,
-					  RomAddress - CurAddress,
-					  UMB_OWNER_NONE
-					  );
-		if (UMBNew == NULL)
-		    return FALSE;
-		CurAddress = RomAddress;
-	    }
-	    // this block is not in UMB area, discard it
-	    else {
-		BiosBlock++;
-		Index--;
-		continue;
-	    }
-	}
-	if (UMBList == NULL)
-	    UMBList = UMBNew;
-	else
-	    UMB->Next = UMBNew;
-
-	UMB = UMBNew;
-    }
-    if (CurAddress < UMB_BASE_ADDRESS + UMB_MAX_OFFSET) {
-
-	UMBNew = CreateNewUMBNode(CurAddress,
-				  UMB_BASE_ADDRESS + UMB_MAX_OFFSET - CurAddress,
-				  UMB_OWNER_NONE
-				  );
-	if (UMBNew == NULL)
-	    return FALSE;
-	if (UMBList == NULL)
-	    UMBList = UMBNew;
-	else
-	    UMB->Next = UMBNew;
-    }
-}
-
-// create a new node for the new UMB block
-// map the given address space to the UMB section if
-// the umb is a RAM(owner = NONE)
-
-PUMBNODE CreateNewUMBNode
-(
-DWORD	BaseAddress,
-DWORD	Size,
-WORD	Owner
-)
-{
-    PUMBNODE	UMBNew;
-    LARGE_INTEGER SectionOffset;
-    NTSTATUS	Status;
-
-    if ((UMBNew = (PUMBNODE) malloc(sizeof(UMBNODE))) != NULL) {
-	UMBNew->Base = BaseAddress;
-	UMBNew->Size = Size;
-	UMBNew->Mask = 0;
-	UMBNew->Owner = Owner;
-	UMBNew->Next = NULL;
-
-	if (Owner == UMB_OWNER_NONE) {
-	    SectionOffset.HighPart = 0;
-	    SectionOffset.LowPart = BaseAddress - UMB_BASE_ADDRESS;
-	    Status = NtMapViewOfSection(UMBSectionHandle,
-					NtCurrentProcess(),
-					(PVOID *)&BaseAddress,
-					0,		      //zero bits
-					0,		      // commit size
-					&SectionOffset,       // section offset
-					&Size,		      // view size
-					ViewUnmap,
-					MEM_DOS_LIM,	      //
-					UMB_PAGE_PROTECTION
-					);
-
-            if (!NT_SUCCESS(Status)) {
-#if DBG
-		DbgPrint("InitUMBList failed to map, Status = %lx\n",
-                         Status);
-#endif
-		free(UMBNew);
-		UMBNew = NULL;
-	    }
-	}
-
-    }
-    return UMBNew;
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
 #endif

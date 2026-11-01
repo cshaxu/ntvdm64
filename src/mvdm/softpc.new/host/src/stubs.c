@@ -345,18 +345,7 @@ void DispatchInterrupts()
 }
 
 #else //MONITOR
-
-#ifndef YODA
-void check_I()
-{
-}
-
-void force_yoda()
-{
-    printf("Yoda disabled on x86\n");
-}
-#endif  //YODA
-
+/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
 #endif  //MONITOR
 
 
