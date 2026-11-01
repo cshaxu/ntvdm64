@@ -6,6 +6,8 @@ headers was therefore discarded before the final build. Previously committed
 header changes predate that clarification; this checkpoint does not assert
 that all 102 changed headers are single-consumer, and does not silently undo
 committed work. Their disposition against the clarified boundary remains open.
+The subsequent [consumer join](s12-shared-header-check.md) found 83 headers
+with multiple observed consumers; it does not determine branch-level status.
 
 ## Scope and evidence
 
