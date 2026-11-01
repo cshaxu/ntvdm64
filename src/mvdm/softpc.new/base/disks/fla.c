@@ -166,7 +166,7 @@ static half_word fdc_result_count;
 /* The following sector buffer is used for non_dma transfers */
 
 #ifdef macintosh
-char *fla_ndma_buffer; /* so that host_init can 'see' it to malloc() it. */
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #else
 static char fla_ndma_buffer[8192];
 #endif

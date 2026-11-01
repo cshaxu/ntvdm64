@@ -1375,9 +1375,7 @@ GLOBAL void vd_read_attrib_char IFN0()
    if (alpha_num_mode()) {		/* alpha */
 	cpos = video_pc_low_regen + vd_cursor_offset(getBH());
 #ifdef A2CPU
-	(*read_pointers.w_read)( (ULONG)get_byte_addr(cpos) );
-	chattr = (*get_byte_addr (cpos));
-	chattr |= (*get_byte_addr (cpos+1)) << 8;
+/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
 #else
 	sas_loadw(cpos,&chattr);
 #endif /* A2CPU */
@@ -2195,9 +2193,7 @@ GLOBAL void vd_write_teletype IFN0()
 	 */
 	if (alpha_num_mode()) {
 #ifdef A2CPU
-		ch_addr = video_pc_low_regen + sas_w_at_no_check(VID_ADDR)+vd_page_offset(vd_cursor_col,vd_cursor_row) + 1;
-		(*read_pointers.b_read)( (ULONG)get_byte_addr(ch_addr) );
-		attrib = (*get_byte_addr (ch_addr));
+/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
 #else
 		sas_load( video_pc_low_regen + sas_w_at_no_check(VID_ADDR)+vd_page_offset(vd_cursor_col,vd_cursor_row) + 1, &attrib);
 #endif /* A2CPU */

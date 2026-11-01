@@ -386,20 +386,7 @@ IMPORT SYSTEM_TABLE_ADDRESS_REGISTER	CCPU_STAR[];
 #define SET_SF(x)	CCPU_FLAGS[7] = (x)
 #define SET_TF(x)	CCPU_FLAGS[8] = (x)
 #ifdef SFELLOW
-extern IU32 DisableEE IPT0();
-extern void EnableEE IPT0();
-#define SET_IF(x)	\
-{ \
-	if (x) \
-	{ \
-		EnableEE(); \
-	} \
-	else \
-	{ \
-		DisableEE(); \
-	} \
-	CCPU_FLAGS[9] = (x); \
-}
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else
 #define SET_IF(x)	CCPU_FLAGS[9] = (x)
 #endif /* SFELLOW */

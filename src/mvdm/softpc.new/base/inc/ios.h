@@ -480,21 +480,7 @@ IMPORT void	io_define_inb
 );
 
 #ifdef SFELLOW
-IMPORT void	io_define_inw
-(
-#ifdef	ANSI
-	half_word adapter,
-	void (*func) IPT2(io_addr, io_address, word *, value)
-#endif	/* ANSI */
-);
-
-IMPORT void	io_define_ind
-(
-#ifdef	ANSI
-	half_word adapter,
-	void (*func) IPT2(io_addr, io_address, IU32 *, value)
-#endif	/* ANSI */
-);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #endif	/* SFELLOW */
 
 IMPORT void	io_define_in_routines
@@ -519,21 +505,7 @@ IMPORT void	io_define_outb
 );
 
 #ifdef SFELLOW
-IMPORT void	io_define_outw
-(
-#ifdef	ANSI
-	half_word adapter,
-	void (*func) IPT2(io_addr, io_address, word, value)
-#endif	/* ANSI */
-);
-
-extern void	io_define_outd
-(
-#ifdef	ANSI
-	half_word adapter,
-	void (*func) IPT2(io_addr, io_address, IU32, value)
-#endif	/* ANSI */
-);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #endif	/* SFELLOW */
 
 IMPORT void	io_define_out_routines

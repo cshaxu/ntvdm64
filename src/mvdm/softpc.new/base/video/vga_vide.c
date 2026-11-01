@@ -143,14 +143,7 @@ int table;	/* Which table to use */
     rgb_struct rgb;
 
 #ifdef	macintosh
-
-	/* load the required DAC in */
-	dac = host_load_vga_dac (table);
-
-	/* check it worked */
-	if (!dac)
-		return;
-
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #else	/* macintosh */
 
     switch (table)
@@ -178,10 +171,7 @@ int table;	/* Which table to use */
     }
 
 #ifdef	macintosh
-
-	/* and dump the DAC back into the heap */
-	host_dump_vga_dac ();
-
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #endif	/* macintosh */
 }
 

@@ -479,19 +479,7 @@ GLOBAL VOID patch_rom IFN2(sys_addr, addr, half_word, val)
 	 */
 
 #ifdef macintosh
-
-	/* The Mac config system wants to call this routine before the
-	 * CPU exists, so we'd better invent a Mac-specific IBOOL to
-	 * make the symptom non-fatal - finding and fixing the cause
-	 * is too hard.
-	 */
-	{
-		extern IBOOL SafeToCallSas;
-
-		if (!SafeToCallSas)
-			return;	
-	}
-
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #endif /* macintosh */
  
 	/* The page might not be present (Arrggghhhh!!!!!)

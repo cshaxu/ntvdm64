@@ -1842,20 +1842,7 @@ GLOBAL VOID fdisk_physattach IFN1(int,driveno)
 }
 
 #ifdef macintosh
-
-GLOBAL VOID fdisk_physdetach IFN1(int,driveno)
-{
-	if (drives[driveno].physattached)
-	{
-		host_fdisk_close(driveno);
-
-		drives[driveno].physattached = 0;
-
-		fast_disk_bios_detach (driveno);
-
-		dt0(DHW|PAD, 0, "drive %d closed\n")
-	}
-}
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #endif /* macintosh */
 
 GLOBAL VOID fdisk_reset IFN0()

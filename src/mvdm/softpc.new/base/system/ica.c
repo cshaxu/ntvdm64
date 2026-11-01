@@ -672,7 +672,7 @@ ica_interrupt_cpu IFN2(IU32, adapter, IU32, line)
         host_set_hw_int();
 
 #ifdef A2CPU
-        host_cpu_interrupt();
+/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef NTVDM

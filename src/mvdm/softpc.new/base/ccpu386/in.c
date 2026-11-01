@@ -87,10 +87,7 @@ IN32 IFN2(
 	IU32 temp;
 
 #ifdef SFELLOW
-	(*Ios_ind_function[Ios_in_adapter_table[(IO_ADDR)op2 & 
-		(PC_IO_MEM_SIZE-1)]])
-			((IO_ADDR)op2, &temp);
-	*pop1 = temp;
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else
 	IN16(&temp, op2);
 	*pop1 = temp;

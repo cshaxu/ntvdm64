@@ -73,13 +73,7 @@ typedef enum {EIGHT_BIT, SIXTEEN_BIT, THIRTY_TWO_BIT} SIZE_SPECIFIER;
 /* ========================================================== */
 
 #ifdef A2CPU
-
-/*
- * Effective address macro
- */
-
-#define effective_addr(seg, offset) (((double_word) seg * 0x10) + offset)
-
+/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
 #endif /* A2CPU */
 
 #ifdef CCPU

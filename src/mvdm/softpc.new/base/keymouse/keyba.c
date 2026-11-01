@@ -81,7 +81,7 @@
 #include "keyba.h"
 #include "quick_ev.h"
 #ifdef macintosh
-#include "ckmalloc.h"
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #endif /* macintosh */
 
 #include "debug.h"
@@ -385,19 +385,7 @@ LOCAL q_ev_handle       refillDelayedHandle = 0;
 half_word current_light_pattern;
 
 #ifdef macintosh
-/*
-** The Mac cannot cope with loads of global data. So declare these
-** as pointers and load the tables up from a Mac resource.
-*/
-half_word *scan_codes_temp_area;
-half_word *keytypes;
-int       *set_1_make_sizes, *set_2_make_sizes, *set_3_make_sizes;
-int       *set_1_break_sizes, *set_2_break_sizes, *set_3_break_sizes;
-half_word *trans_8042, *set_3_reverse_lookup, *set_3_default_key_state, *most_set_2_make_codes;
-half_word *most_set_3_make_codes, *set_1_extra_codes, *set_2_extra_codes, *set_3_extra_codes;
-half_word *set_1_extra_bk_codes, *set_2_extra_bk_codes, *set_3_extra_bk_codes, *buff_overrun_6805;
-half_word *most_set_1_make_codes;
-
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #else
 
 half_word scan_codes_temp_area[300];
@@ -1020,9 +1008,7 @@ LOCAL VOID clear_buff_6805 IFN0()
 	   not grabbing it from the global allocation. */
 
 #ifdef macintosh
-	if (buff_6805==NULL) {
-		check_malloc(buff_6805,BUFF_6805_PMAX,half_word);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #endif /* macintosh */
 
 	buff_6805_in_ptr=buff_6805_out_ptr;
@@ -3194,18 +3180,7 @@ GLOBAL VOID AT_kbd_init IFN0()
 #endif /* IRET_HOOKS && GISP_CPU */
 
 #ifdef	macintosh
-	if (!make_arrays)
-	{
-		/* Allocate the world and its mother. Why does something as "simple"
-		** as the keyboard require more global data than the video emulation?
-		** Just wondering.
-		*/
-		make_arrays = (half_word **)host_malloc(134*sizeof(half_word *));
-		break_arrays = (half_word **)host_malloc(134*sizeof(half_word *));
-		set_3_key_state = (half_word *)host_malloc(127*sizeof(half_word));
-		key_down_count = (int *)host_malloc(127*sizeof(int));
-		scan_codes_temp_area = (half_word *)host_malloc(300*sizeof(half_word));
-	}
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #endif	/* macintosh */
 
 	videoAdapt = (ULONG) config_inquire(C_GFX_ADAPTER, NULL);

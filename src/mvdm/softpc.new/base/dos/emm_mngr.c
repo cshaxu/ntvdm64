@@ -202,7 +202,7 @@ boolean lim_page_frame_init(PLIM_CONFIG_DATA lim_config_data)
 /*	Local Variables			*/
 static long
 #ifdef	macintosh
-	*handle;
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #else
 	handle[MAX_NO_HANDLES];		/* Array containing unique ID's	*/
 					/* for each handle, these are	*/
@@ -283,10 +283,7 @@ GLOBAL int init_expanded_memory IFN2(int, size, 	/* size of area in megabytes */
 	}
 
 #ifdef	macintosh
-	if (!handle)
-	{
-		handle = (long *)host_malloc(MAX_NO_HANDLES*sizeof(long));
-	}
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #endif	/* macintosh */
 
 	/* Initialise EMM variables	*/

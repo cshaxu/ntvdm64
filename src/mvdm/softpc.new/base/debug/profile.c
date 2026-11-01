@@ -2509,13 +2509,7 @@ GLOBAL void GenerateAllProfileInfo IFN1(FILE *, stream)
     fprintf( stream, "SoftPC start time %24.24s, current time %8.8s\n\n",
 				start_time, ctime(&now)+11 );
 #ifdef macintosh
-
-    elapsed_now = clock();
-    fprintf( stream, "Total   Elapsed = %8.2fs\n",
-		(elapsed_now - elapsed_t_start) / TicksPerSec );
-    fprintf( stream, "Section Elapsed = %8.2fs\n\n",
-		(elapsed_now - elapsed_t_resettable) / TicksPerSec );
-
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #else  /* macintosh */
     {
     	struct tms c_t;
@@ -3301,9 +3295,7 @@ ProfileInit IFN0 ()
     elapsed_t_start = elapsed_t_resettable = host_times( &process_t_start );
 
 #ifdef macintosh
-
-    TicksPerSec = (DOUBLE)CLOCKS_PER_SEC;
-
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #else  /* macintosh */
 
     process_t_resettable.tms_utime  =  process_t_start.tms_utime;

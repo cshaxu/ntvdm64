@@ -324,7 +324,7 @@ int disable_timer = 0;
 #define MAX_TABLE_BREAK_WORDS 10
 
 #ifdef macintosh
-#define MAX_BREAK_WORD_RANGE 0x100
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #else
 #define MAX_BREAK_WORD_RANGE 0xFFF
 #endif
@@ -1019,7 +1019,7 @@ static int low_trace_limit = 0x0;
 static int high_trace_limit = 0x400000;
 
 #ifdef SFELLOW
-LOCAL char SfNotImp[] = "This function is not implemented on Stringfellows.\n";
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #endif /* SFELLOW */
 
 #ifdef SPC386
@@ -1358,7 +1358,7 @@ LOCAL YODA_COMMAND(do_rtc)
 	UNUSED(stop);
 
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
         /* Re-initialise rtc */
 	printf("Re-initialising rtc\n");
@@ -1378,7 +1378,7 @@ LOCAL YODA_COMMAND(do_ica)
 	UNUSED(stop);
 
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	ica_dump(0);
 	ica_dump(1);
@@ -1788,7 +1788,7 @@ LOCAL YODA_COMMAND(do_tf)
 	UNUSED(stop);
 
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	newtrace[0] = '\0';
 	sscanf(str, "%s %s", com, newtrace);
@@ -1816,7 +1816,7 @@ LOCAL YODA_COMMAND(do_read)
 	UNUSED(stop);
 
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	newfile [0] = '\0';
 
@@ -1854,10 +1854,7 @@ LOCAL YODA_COMMAND(do_read)
 LOCAL YODA_COMMAND(do_toff)
 {
 #ifdef SFELLOW
-        IU8 value;
-
-        inb(0x21, &value);
-        outb(0x21, value | 0x1);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	UNUSED(str);
 	UNUSED(com);
@@ -1874,10 +1871,7 @@ LOCAL YODA_COMMAND(do_toff)
 LOCAL YODA_COMMAND(do_ton)
 {
 #ifdef SFELLOW
-        IU8 value;
-
-        inb(0x21, &value);
-        outb(0x21, value & 0xfe);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	UNUSED(str);
 	UNUSED(com);
@@ -1901,7 +1895,7 @@ LOCAL YODA_COMMAND(do_toff2)
 	UNUSED(stop);
 
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	if (chewy) {
 		printf("Take care!\nThe power of the force is strong, and it can do evil as well as good.\n");
@@ -1921,7 +1915,7 @@ LOCAL YODA_COMMAND(do_ton2)
 	UNUSED(stop);
 
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	axe_ticks( 0 );
 #endif /* SFELLOW */
@@ -2160,7 +2154,7 @@ LOCAL YODA_COMMAND(do_ctnpx)
 	UNUSED(stop);
 
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	compress_npx = fopen("comp_npx","w");
 	printf("compress_npx is %x\n",compress_npx);
@@ -2187,7 +2181,7 @@ LOCAL YODA_COMMAND(do_r)
 LOCAL YODA_COMMAND(do_287r)
 {	
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	extern ULONG get_287_status_word IPT0();
 	extern ULONG get_287_control_word IPT0();
@@ -2406,10 +2400,10 @@ LOCAL YODA_COMMAND(do_fff)
   UNUSED(ip);
   UNUSED(stop);
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 #ifdef macintosh
-	printf("Sorry, the Macintosh doesn't have faults.\n");
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #else
 	if (chewy)
 		printf("%s\n", fff_strings[(rand()/3) % (sizeof(fff_strings) / sizeof(char *))]);
@@ -2609,14 +2603,14 @@ LOCAL YODA_COMMAND(do_it)
 	    io_verbose = cs;
 	    if (io_verbose & HFX_VERBOSE)
 #ifdef SFELLOW
-		printf("HFX_VERBOSE is not implemented on Stringfellows.\n");
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 		set_hfx_severity();
 #endif /* SFELLOW */
 
 	    if (io_verbose & HDA_VERBOSE)
 #ifdef SFELLOW
-		printf("HDA_VERBOSE is not implemented on Stringfellows.\n");
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 		setdisktrace();
 #endif /* SFELLOW */
@@ -2656,7 +2650,7 @@ LOCAL YODA_COMMAND(do_dt)
 	UNUSED(stop);
 
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	disk_trace = 1;
 #endif /* SFELLOW */
@@ -2815,7 +2809,7 @@ LOCAL YODA_COMMAND(do_trace)
 
 			if (mask != 1)		/* YUK ! */
 #ifdef SFELLOW
-				io_verbose    = sub_io_verbose
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 #ifdef HFX
 				io_verbose    = sub_io_verbose =
@@ -2895,7 +2889,7 @@ LOCAL YODA_COMMAND(do_ct)
 	UNUSED(stop);
 
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	if (!check_trace_environment("ct"))
 		return(YODA_LOOP);
@@ -2947,7 +2941,7 @@ LOCAL YODA_COMMAND(do_tt)
 	UNUSED(ip);
 
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	if (!check_trace_environment("tt"))
 		return(YODA_LOOP);
@@ -3653,7 +3647,7 @@ LOCAL YODA_COMMAND(do_eric)
 	UNUSED(stop);
 
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	inst_mix_count = 1;
 	if (cs == 1)
@@ -3675,7 +3669,7 @@ LOCAL YODA_COMMAND(do_nic)
 	UNUSED(stop);
 
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	inst_mix_count = 0;
 	if (disk_inst == 1)
@@ -4351,8 +4345,7 @@ LOCAL YODA_COMMAND(do_q)
 	UNUSED(len);
   
 #ifdef SFELLOW
-	printf("Welcome to the Hotel California.\n");
-	printf("You can check out any time you like, but you can never leave...\n");
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	if (*com == 'Q') {
 		terminate();	/* no saving throw - requested by Wayne */
@@ -4390,7 +4383,7 @@ LOCAL YODA_COMMAND(do_bt)
 LOCAL YODA_COMMAND(do_idle)
 {
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	char tempstr1[10],tempstr2[10];
 
@@ -4429,7 +4422,7 @@ LOCAL YODA_COMMAND(do_cdebug)
 	UNUSED(stop);
 
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	com_debug();
 #endif /* SFELLOW */
@@ -4439,7 +4432,7 @@ LOCAL YODA_COMMAND(do_cdebug)
 LOCAL void do_screen_refresh IFN0()
 {
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	extern host_timer_event();
 
@@ -5528,7 +5521,7 @@ void force_yoda IFN0()
 	SAVED IBOOL firstTime = TRUE;
 	SAVED char repeat_command [sizeof(str)];/* copy of previous input string buffer */
 #ifdef SFELLOW
-	IU32 oldEE;
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #endif /* SFELLOW */
 
 	entry_pending = FALSE;
@@ -5559,7 +5552,7 @@ void force_yoda IFN0()
 #endif	/* CPU_40_STYLE && !CCPU  */
 
 #ifdef SFELLOW
-        oldEE = DisableEE();
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #endif /* SFELLOW */
 
 	if (firstTime) {
@@ -5620,12 +5613,7 @@ void force_yoda IFN0()
 			do_screen_refresh();
 
 #ifdef SFELLOW
-		if (! GetCpuCmdLine(str, 80, stdin, prompt))
-		{
-                        /* if read fails on stdin */
-                        perror("failed to read from stdin");
-                        continue;
-		}
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 		if (! GetCpuCmdLine(str, 80, in_stream, prompt))
 		{
@@ -5731,7 +5719,7 @@ void force_yoda IFN0()
 			AlreadyInYoda = FALSE;
 
 #ifdef SFELLOW
-			RestoreEE(oldEE);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #endif /* SFELLOW */
 
 #if defined(CPU_40_STYLE) && !defined(CCPU)
@@ -7925,7 +7913,7 @@ LOCAL	void	add_inst_mix IFN0()
 LOCAL	void	cga_test IFN0()
 {
 #ifdef SFELLOW
-	printf(SfNotImp);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
     /*
      * Write test pattern to cga
@@ -8044,7 +8032,7 @@ char	file[80];
 		case 'Z': back_trace_flags = 0; break;
 		case 'F':
 #ifdef SFELLOW
-			printf("F option is not supported on Stringfellows.\n");
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else /* SFELLOW */
 	        	printf("file to be written to ? ");
 		        gets(file);

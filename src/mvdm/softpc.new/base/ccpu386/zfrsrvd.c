@@ -29,7 +29,7 @@ Reserved Floating Point CPU Functions.
 #include <c_xcptn.h>	/* Definition of Int16() */
 #include <fault.h>
 #ifdef SFELLOW
-#include <CpuInt_c.h>
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #endif	/* SFELLOW */
 
 typedef union

@@ -71,20 +71,7 @@ typedef union
     } reg;
 
 #ifdef A2CPU
-
-/*
- * The Fast CPU status register structure ....
- */
-
-typedef struct
-{
-    word pad:5;
-    word DF:1;
-    word IF:1;
-    word TF:1;
-    word pad1:8;
-} sreg;
-
+/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
 #endif A2CPU
 
 /*
@@ -96,10 +83,7 @@ extern word m_s_w;
 
 #ifndef EGATEST
 #ifdef A2CPU
-extern  int     compile_everything;
-extern  short   host_event;
-extern char *CPU_00[];          /* CPU main jump table            */
-extern char *int_table[];       /* CPU interrupt jump table       */
+/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
 #endif A2CPU
 
 
@@ -156,12 +140,7 @@ extern char *int_table[];       /* CPU interrupt jump table       */
 #endif CCPU
 
 #ifdef A2CPU
-/*  Assembler CPU specific READ functions */
-#define getOPA()                ((*getOPA_func) ())
-#define getOPB()                ((*getOPB_func) ())
-#define getOPR()                ((*getOPR_func) ())
-#define getSSD()                ((*getSSD_func) ())
-#define getDSD()                ((*getDSD_func) ())
+/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
 #endif A2CPU
 
 /*  common WRITE functions  */
@@ -216,11 +195,7 @@ extern char *int_table[];       /* CPU interrupt jump table       */
 #endif CCPU
 
 #ifdef A2CPU
-/*  Assembler CPU specific WRITE functions */
-#define setOPLEN                ((*setOPLEN_func) (val))
-#define setOPA()                ((*setOPA_func) (val))
-#define setOPB()                ((*setOPB_func) (val))
-#define setOPR()                ((*setOPR_func) (val))
+/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
 #endif A2CPU
 #endif EGATEST
 
@@ -304,12 +279,7 @@ extern ISM32            (*getIOPL_func) (void);
 #endif CCPU
 
 #ifdef A2CPU
-/*  Assembler CPU specific READ functions */
-extern double_word      (*getOPA_func) ();
-extern double_word      (*getOPB_func) ();
-extern double_word      (*getOPR_func) ();
-extern sys_addr (*getSSD_func) ();
-extern sys_addr (*getDSD_func) ();
+/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
 #endif A2CPU
 
 
@@ -359,11 +329,7 @@ extern void             (*setIOPL_func) ();
 #endif CCPU
 
 #ifdef A2CPU
-/*  Assembler CPU specific WRITE functions */
-extern void             (*setOPLEN_func) ();
-extern void             (*setOPA_func) ();
-extern void             (*setOPB_func) ();
-extern void             (*setOPR_func) ();
+/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
 #endif A2CPU
 
 
@@ -378,52 +344,6 @@ extern void             (*host_simulate_func) (void);
  *
  */
 #ifdef A2CPU
-extern sreg INTEL_STATUS;
-extern void     (*R_ROUTE)();
-extern int      R_INTR;
-extern reg R_AX;                /* Accumulator          */
-extern reg R_BX;                /* Base                 */
-extern reg R_CX;                /* Count                */
-extern reg R_DX;                /* Data                 */
-extern reg R_SP;                /* Stack Pointer        */
-extern reg R_BP;                /* Base pointer         */
-extern reg R_SI;                /* Source Index         */
-extern reg R_DI;                /* Destination Index    */
-
-extern double_word R_OPA;
-extern double_word R_OPB;
-extern double_word R_OPR;
-extern int      R_MISC_FLAGS;
-
-extern sys_addr R_IP;           /* Instruction Pointer  */
-
-extern sys_addr R_ACT_CS;               /* Code Segment */
-extern sys_addr R_ACT_DS;               /* Data Segment */
-extern sys_addr R_ACT_SS;               /* Stack Segment */
-extern sys_addr R_ACT_ES;               /* Extra Segment */
-
-extern sys_addr R_DEF_SS;               /* Default SS register  */
-extern sys_addr R_DEF_DS;               /* Default DS register  */
-
-extern void do_setSF();
-extern void do_setOF();
-extern void do_setPF();
-extern void do_setZF();
-extern void do_setCF();
-
-#define BYTE_OPERATION  0x80000000
-#define WORD_OPERATION  0
-#define IS_BYTE_OP      (R_MISC_FLAGS < 0)
-#define REALLY_ZERO     (R_MISC_FLAGS & 1)
-
-/*
-        NB. retl does jmp %o7+8
-*/
-#define setROUTE(val)   R_ROUTE = (void *)((int)(val) - 8)
-#define setINTR(val)    R_INTR = ( val )
-#define setbitINTR(val) R_INTR |= ( val )
-#define clrbitINTR(val) R_INTR &= ~( val )
-#define getROUTE()      (R_ROUTE)
-#define getINTR()       (R_INTR)
+/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
 #endif A2CPU
 

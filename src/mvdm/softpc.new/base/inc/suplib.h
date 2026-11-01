@@ -26,7 +26,7 @@
 #ifndef PATHSEP_CHAR
 
 #ifdef macintosh
-#define	PATHSEP_CHAR 	':'
+/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef NTVDM

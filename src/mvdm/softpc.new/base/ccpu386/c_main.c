@@ -217,8 +217,7 @@ typedef union
 #define CPU_HW_INT_MASK         (1 << 0)
 
 #ifdef SFELLOW
-	/* for raising NPX interrupt */
-#define IRQ5_SLAVE_PIC	5
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #endif	/* SFELLOW */
 
 /* CPU hardware interrupt definitions */
@@ -230,7 +229,7 @@ typedef union
 #define CPU_RESET_EXCEPTION_MASK        (1 << 14)
 #define CPU_SIGALRM_EXCEPTION_MASK      (1 << 15)
 #ifdef SFELLOW
-#define CPU_HW_NPX_INT_MASK         	(1 << 16)
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #endif	/* SFELLOW */
 
 LOCAL IU16 cpu_hw_interrupt_number;
@@ -240,7 +239,7 @@ LOCAL IU16 cpu_hw_interrupt_number;
  * per-instruction attribution is selected only by the diagnostic build. */
 #endif
 #if defined(SFELLOW)
-extern IU32	cpu_interrupt_map ;
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else
 LOCAL volatile IUM32	cpu_interrupt_map = 0;
 #endif	/* SFELLOW */
@@ -3361,15 +3360,7 @@ TYPEC4:
 		  switch(immed)
 		  {
 #if defined(SFELLOW)
-		  case 0x03fe:
-			    SfdelayUSecs();
-			    break;
-		  case 0x05fe:
-			    SfsasTouchBop();
-			    break;
-		  case 0x06fe:
-			    SfscatterGatherSasTouch();
-			    break;
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #endif /* SFELLOW */
 	  case 0xfe:
 		  c_cpu_unsimulate();

@@ -80,9 +80,7 @@ OUT32 IFN2(
 {
 #ifndef PIG
 #ifdef SFELLOW
-	(*Ios_outd_function[Ios_out_adapter_table[op1 & 
-			(PC_IO_MEM_SIZE-1)]])
-				(op1, op2);
+/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
 #else
 	OUT16(op1, op2 & 0xffff);
 	OUT16(op1 + 2, op2 >> 16);

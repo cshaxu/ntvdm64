@@ -399,7 +399,7 @@ LOCAL void announce_variant IFN0()
 #endif /* CCPU */
 
 #ifdef A2CPU
-	strcat (buff, " A2CPU");
+/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
 #endif /* A2CPU */
 
 #ifdef A3CPU

@@ -54,9 +54,7 @@ GLOBAL	quick_event_delays	host_delays;
 /* DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register. */
 #endif
 #ifdef A2CPU
-extern	void	route_on();
-extern	void	route_on_fragment_no_interrupt_check();
-extern	void	service_int();
+/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef I286

@@ -182,28 +182,7 @@ IMPORT READ_POINTERS read_glue_ptrs;
 IMPORT READ_POINTERS simple_reads;
 
 #ifdef	A2CPU
-LOCAL ULONG dummy_read IFN1(ULONG, offset)
-{
-	UNUSED(offset);
-	return 0;
-}
-
-LOCAL void dummy_str_read IFN3(UTINY *, dest, ULONG, offset, ULONG, count)
-{
-	UNUSED(dest);
-	UNUSED(offset);
-	UNUSED(count);
-}
-
-LOCAL READ_POINTERS	dummy_reads =
-{
-	dummy_read,
-	dummy_read
-#ifndef	NO_STRING_OPERATIONS
-	,
-	dummy_str_read
-#endif	/* NO_STRING_OPERATIONS */
-};
+/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
 #endif	/* A2CPU */
 
 /*
@@ -1393,8 +1372,7 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 #endif	/* C_VID */
 #else	/* not A3CPU */
 #ifdef A2CPU
-   	gmi_define_mem(SAS_VIDEO, &vid_handlers);
-	read_pointers = dummy_reads;
+/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
 #else
 #if !defined(EGG) && !defined(C_VID) && !defined(A_VID)
    	gmi_define_mem(SAS_VIDEO, &cga_only_handlers);

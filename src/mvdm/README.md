@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-520: replace unselected SFELLOW, A2CPU and macintosh
+platform branches with markers while retaining the conditional shells. Their
+original body hashes and locations are recorded in
+`../../artifacts/mvdm-audit/s12-platforms.jsonl`.
+
 MVDM-HOST-DIV-519: replace unselected HUNTER platform branches with
 markers, retaining the conditional shells. The observed product build does
 not select HUNTER; per-branch source hashes are recorded in
