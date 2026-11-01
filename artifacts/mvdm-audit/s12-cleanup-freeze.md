@@ -20,6 +20,13 @@ with multiple observed consumers; it does not determine branch-level status.
   three deletions. Per-batch condition evidence and retained declarations are
   in this directory; source markers and the mirror registers identify the
   exceptions. Conditional shells remain around removed branch bodies.
+- A follow-up file-level check of the zero-context diff for that interval
+  found 331 `.c`/`.h` files with deleted lines; each has at least one added
+  `MVDM-HOST-DIV-*` or `OPENNT-HOST-*` identifier. All 56 distinct added
+  identifiers occur in the current mirror README registers. At this check the
+  MVDM and non-MVDM source trees had no changes after the role-split commit.
+  This proves identifier presence by file, not that every removed
+  branch has the correct marker or that its build exclusion is proved.
 - Decisions used observed build entries and, where relevant, their actual
   include contexts; macro names alone are not proof of a global selection.
   `MONITOR` is selected for some units and not others. CCPU software V86 and
