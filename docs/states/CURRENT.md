@@ -94,6 +94,7 @@ runtime: the owner clarified boundary-recovery scope.
 | Applicable Rules | Source policy, immutable guest, original owner boundaries, minimal mirror diff. |
 | Verification | Trace actual build contexts and original sources; preserve active alternatives and guest; compare rebuilt ten-image outputs and run warranted regressions and documentation checks. |
 | Expected Markers | No conflicting overwrite, no stale active path, correct source provenance and matching deployed package. |
+| Held Source Boundary | `i386` includes an unselected original x86 CallProc32 helper path whose intended recovery has not been decided; retain these branches pending the queued WOW32/foundation work. [Evidence](../../artifacts/mvdm-audit/s12-i386-held.md). |
 | Asset Needs | Existing sources and build caches; no new guest. |
 | Reporting Requirements | Paths, collisions, tests, publication, commit and remaining limits. |
 | Stop Conditions | Loss of source identity, guest changes or unapproved behavior change. |
