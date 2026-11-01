@@ -119,6 +119,10 @@ void terminate()
 	/*
 	 * Do any cpu-specific termination bits.
 	 */
+#ifdef CPU_30_STYLE
+#error Excluded original CPU_30_STYLE branch
+#endif
+#line 122
 
 #ifdef NOVELL
 #error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.

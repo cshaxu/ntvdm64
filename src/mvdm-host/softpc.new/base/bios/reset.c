@@ -379,6 +379,10 @@ LOCAL void announce_variant IFN0()
 
 	strcpy (buff, "Non-PROD build variant:");
 
+#if defined(CPU_30_STYLE) && !defined(CPU_40_STYLE)
+#error Excluded original CPU_30_STYLE branch
+#endif /* CPU_30_STYLE && ! CPU_40_STYLE*/
+#line 382
 
 #ifdef CPU_40_STYLE
 	strcat (buff, " CPU_40_STYLE");

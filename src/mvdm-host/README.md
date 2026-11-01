@@ -1,5 +1,9 @@
 # mvdm
 
+MVDM-HOST-DIV-547: restore original CPU30 and nested FLOPPY_B conditional
+structure for removed host branches, with errors and line-number restoration.
+Evidence: `../../artifacts/mvdm-audit/conditional-skeleton-first-slice.md`.
+
 MVDM-HOST-DIV-546: remove divergence comments attached to retained `#line`
 directives; preserve their numbers and all excluded-branch `#error` guards.
 Evidence: `../../artifacts/mvdm-audit/excluded-branch-annotation-cleanup.md`.
