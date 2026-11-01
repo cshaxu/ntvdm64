@@ -23,7 +23,7 @@
  * ==========================================================================
  */
 #ifdef X86GFX
-#include <ntddvdeo.h>
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
 #include <vdm.h>
 #include <stdlib.h>
@@ -70,10 +70,9 @@
 GLOBAL BOOL	ConsoleInitialised = FALSE;
 GLOBAL BOOL	ConsoleNoUpdates = FALSE;
 #ifdef X86GFX
-GLOBAL BOOL	BiosModeChange = FALSE;
-GLOBAL DWORD mouse_buffer_width = 0,
-	     mouse_buffer_height = 0;
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif /* X86GFX */
+#line 77 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 GLOBAL BOOL blocked_in_gfx_mode = FALSE;  /* need to force text mode? */
 #ifndef PROD
 /* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
@@ -141,7 +140,7 @@ IMPORT VOID recalc_text(int);
 IMPORT VOID enable_gfx_update_routines(VOID);
 IMPORT VOID disable_gfx_update_routines(VOID);
 #ifdef X86GFX
-IMPORT void vga_misc_inb(io_addr, half_word *);
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif /* X86GFX */
 
 
@@ -158,7 +157,7 @@ VOID setVDMCursorPosition(UTINY, PCOORD);
 VOID waitForInputFocus(VOID);
 GLOBAL int getModeType(VOID);
 #ifdef X86GFX
-VOID GfxReset(VOID);
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif /* X86GFX */
 
 /*
@@ -546,16 +545,9 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 			ConsBufferInfo.srWindow.Top + 1;
     }
 #ifdef X86GFX
-    else	/* FULLSCREEN */
-    {
-	if (!GetConsoleHardwareState(sc.OutputHandle,
-				     &startUpResolution,
-				     &startUpFontSize))
-	    ErrorExit();
-	consoleWidth = startUpResolution.X / startUpFontSize.X;
-	consoleHeight = startUpResolution.Y / startUpFontSize.Y;
-    }
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
+#line 559 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 
     /*
      * Set the display to the nearest VGA text mode size, which is one of
@@ -623,36 +615,14 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
         if (vgaHeight == 25)
             sas_storew_no_check(VID_LEN, 0x1000);
 #ifdef X86GFX
-	loadNativeBIOSfont( vgaHeight );
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif	/* X86GFX */
 
     }
 #ifdef X86GFX
-    else	/* FULLSCREEN */
-    {
-	// Can't see why we wouldn't want this for resume too.
-	// set_char_height( startUpFontSize.Y ); /* Tim Oct 92 */
-
-        /* clear this condition on fullscreen resume */
-        blocked_in_gfx_mode = FALSE;
-
-	/*
-    	** Adjust height appropriately, Tim September 92.
-	** In full-screen lines is 21 cos 22x16=352, slightly too big.
-	*/
-    	if( vgaHeight==22 )
-		vgaHeight = 21;
-	charHeight = startUpFontSize.Y;
-	sas_store_no_check(ega_char_height, (half_word) charHeight);
-	sas_store_no_check(vd_rows_on_screen, (half_word) (vgaHeight - 1));
-        /* compatibility with bios 80x25 startup */
-        if (vgaHeight == 25)
-            sas_storew_no_check(VID_LEN, 0x1000);
-        else
-	    sas_storew_no_check(VID_LEN, (word) ((vgaHeight + 1) *
-					     sas_w_at_no_check(VID_COLS) * 2));
-    }
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif /* X86GFX */
+#line 656 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
     sas_storew_no_check(VID_COLS, 80);   // fixup from 40 char shutdown
     *pCharHeight = charHeight;
     *pVgaHeight  = vgaHeight;
@@ -706,11 +676,9 @@ GLOBAL VOID ConsoleInit(VOID)
 				NULL);
 
 #ifdef X86GFX
-#ifdef SEPARATE_DETECT_THREAD
-    /* Create screen state transition detection thread. */
-    CreateDetectThread();
-#endif /* SEPARATE_DETECT_THREAD */
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif /* X86GFX */
+#line 714 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 
     /*
      * We don't want to call paint routines until config.sys processed or if
@@ -725,38 +693,9 @@ GLOBAL VOID ConsoleInit(VOID)
 
     StartupCharHeight = charHeight;
 #ifdef X86GFX
-    if( sc.ScreenState != WINDOWED )
-    {
-        /*
-         * Do we need to update the emulation? If we don't do this here then
-         * a later state dump of the VGA registers to the VGA emulation may
-         * ignore an equal value of the char height and get_chr_height() will
-         * be out of step.
-         */
-        if (get_char_height() != startUpFontSize.Y)
-        {
-            half_word newht;
-
-            outb(EGA_CRTC_INDEX, 9);           /* select char ht reg */
-            inb(EGA_CRTC_DATA, &newht);	       /* preserve current top 3 bits */
-            newht = (newht & 0xe0) | (startUpFontSize.Y & 0x1f);
-            outb(EGA_CRTC_DATA, newht);
-        }
-	set_char_height( startUpFontSize.Y ); /* Tim Oct 92 */
-
-	/*
-	 * Select a graphics screen buffer so we get mouse coordinates in
-	 * pixels.
-	 */
-	//SelectMouseBuffer(); //Tim. moved to nt_std_handle_notification().
-
-	/*
-	 * Prevent mode change happening to ensure dummy paint funcs
-	 * are kept. (mode change set from bios mode set up).
-	 */
-	set_mode_change_required(FALSE);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif //X86GFX
+#line 760 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 
     /*
      * Work out the top line to be displayed in the VGA window, which is line
@@ -796,32 +735,9 @@ GLOBAL VOID ConsoleInit(VOID)
 GLOBAL VOID GfxReset(VOID)
 {
 #ifdef X86GFX
-    half_word temp;
-    DWORD    flags;
-
-    /* Check to see if we are currently running windowed or full-screen. */
-    if (!GetConsoleDisplayMode(&flags))
-	ErrorExit();
-    savedScreenState = sc.ScreenState = (flags & CONSOLE_FULLSCREEN_HARDWARE) ?
-					FULLSCREEN : WINDOWED;
-
-    /* Do windowed specific stuff. */
-    if(sc.ScreenState == WINDOWED)
-    {
-	/* Don't need this now cos we use our video BIOS in windowed */
-	/* Tim August 92: low_set_mode(3); */
-        /* sas_fillsw(0xb8000, 0x0720, 16000); */
-	inb(EGA_IPSTAT1_REG,&temp);
-
-	outb(EGA_AC_INDEX_DATA, EGA_PALETTE_ENABLE);	/* re-enable video */
-
-	/* Turn off the VTRACE interrupt, enabled by low_set_mode(3)
-	   this is a dirty hack and must be fixed properly */
-
-	ega_int_enable = 0;
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
+#line 825 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 }
 
 /***************************************************************************
@@ -843,51 +759,16 @@ GLOBAL VOID GfxReset(VOID)
 GLOBAL VOID ResetConsoleState(VOID)
 {
 #ifdef X86GFX
-    /*
-     * Table of valid hardware states to be passed to
-     * SetConsoleHardwareState. NOTE: this table is a copy of a static table
-     * in SrvSetConsoleHardwareState, and so must be updated if that table
-     * changes.
-     */
-    SAVED HARDWARE_STATE validStates[] =
-    {
-	///Now 21{ 22, { 640, 350 }, { 8, 16 } },	/* 80 x 22 mode. */
-	{ 21, { 640, 350 }, { 8, 16 } },	/* 80 x 21 mode. */
-	{ 25, { 720, 400 }, { 8, 16 } },	/* 80 x 25 mode. */
-	{ 28, { 720, 400 }, { 8, 14 } },	/* 80 x 28 mode. */
-	{ 43, { 640, 350 }, { 8,  8 } },	/* 80 x 43 mode. */
-#define MODE_50_INDEX	4
-	{ 50, { 720, 400 }, { 8,  8 } }		/* 80 x 50 mode. */
-    };
-    COORD	cursorPos;
-    CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
-    ULONG i,
-	  j,
-	  videoWidth,
-	  mode,
-	  tableLen;
-    half_word *from,
-	      *videoLine,
-	       currentPage,
-	       misc;
-    static COORD screenRes; /* value provided by GetConsHwState() */
-    static COORD fontSize;  /* value provided by GetConsHwState() */
-
-    PCHAR_INFO to;
-    ULONG videoHeight,
-	  nChars;
-    COORD	bufferCoord,
-		bufferSize;
-    SMALL_RECT writeRegion;
-
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif /* X86GFX */
+#line 884 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
     SMALL_RECT	newWin;
     BOOL itfailed = FALSE;
 
 #ifdef X86GFX
-    if (sc.ScreenState == WINDOWED)
-    {
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif /* X86GFX */
+#line 891 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 
 	closeGraphicsBuffer();
 
@@ -1366,57 +1247,9 @@ GLOBAL UTINY getNtScreenState IFN0()
 }
 
 #ifdef X86GFX
-
-/*
-***************************************************************************
-** hostModeChange() - called from video bios, ega_vide.c:ega_set_mode()
-***************************************************************************
-**
-** When changing to a graphics mode action the transition to full-screen if
-** we are currently windowed.
-**
-** On entry AX should still contain the value when the video BIOS set mode
-** function was called.
-** Call to TextToGraphics() with parameter indicating whether we want a
-** clear screen with the impending host video BIOS mode change.
-**
-** Return a boolean indicating to the real BIOS whether the mode change
-** has occured.
-**
-** Tim August 92.
-*/
-GLOBAL BOOL hostModeChange IFN0()
-{
-	half_word vid_mode;
-
-	vid_mode = getAL() & 0x7f;
-
-	if(getNtScreenState() == WINDOWED)
-	{
-	    if (vid_mode > 3 && vid_mode != 7)
-	    {
-		/*
-		 * We have to tell the hand-shaking code the BIOS is causing
-		 * the mode change so that it can do a BIOS mode change when
-		 * the switch has been done. This has to be implemented as a
-		 * global variable because the hand-shaking is on a different
-		 * thread.
-		 */
-		TextToGraphics();
-                // rapid Window to full screen and back cause this to fail,
-                // remove call since it will get done on the next timer
-                // event. 28-Feb-1993 Jonle
-                // SelectMouseBuffer();
-                return( TRUE );
-	    }
-	    else
-		return(FALSE);
-	}
-	else
-	    return( FALSE );
-
-} /* end hostModeChange() */
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif /* X86GFX */
+#line 1484 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 
 /***************************************************************************
  * Function:								   *
@@ -1443,77 +1276,17 @@ GLOBAL VOID DoFullScreenResume(VOID)
 #endif
 
 #ifdef X86GFX
-    DWORD flags;
-
-    /*
-    ** Tim July 92.
-    ** Set sc.ScreenState, a windowed/full-screen transition might
-    ** have happenened when SoftPC was inactive.
-    ** Copied from GfxReset().
-    */
-    if( !GetConsoleDisplayMode(&flags) )
-	ErrorExit();
-    sc.ScreenState = (flags & CONSOLE_FULLSCREEN_HARDWARE) ? FULLSCREEN : WINDOWED;
-
-    /* Put the regen memory in the correct state. */
-    if (sc.ScreenState != savedScreenState)
-    {
-	if (sc.ScreenState == WINDOWED)
-	{
-	    enableUpdates(); /* Tim September 92, allow graphics ticks */
-	    /*
-	    ** Tim Jan 93. Get the next nt_graphics_tick() to decide
-	    ** what the current display mode is, set the update and
-	    ** paint funx appropriately and redraw the screen.
-	    */
-	    set_mode_change_required( TRUE );
-
-	    /* Ensure idling system enabled & reset */
-	    IDLE_ctl(TRUE);
-	    IDLE_init();
-	}
-	else
-	{
-	    disableUpdates(); /* Tim September 92, stop graphics ticks */
-
-	    /* Ensure idling system disabled as can't detect fullscreen idling*/
-	    IDLE_ctl(FALSE);
-	}
-	savedScreenState = sc.ScreenState;
-    }
-
-    /* Select a graphics buffer for the mouse if we are running fullscreen. */
-    if (sc.ScreenState == FULLSCREEN)
-    {
-	//SelectMouseBuffer(); //Tim. moved to nt_std_handle_notification().
-
-	/* Lose the regen memory. */
-	LoseRegenMemory();
-    }
-
-    /*
-    ** Tim July 92:
-    ** set the KEYBOARD.SYS internal variable to 0 for windowed and
-    ** 1 for full-screen. 
-    ** If a transition has happened when SoftPC was inactive we
-    ** need to get into the appropriate state.
-    */
-    {
-	if( sc.ScreenState==WINDOWED ){
-	    sas_store_no_check( (int10_seg<<4)+useHostInt10, WINDOWED );
-	}else{
-	    sas_store_no_check( (int10_seg<<4)+useHostInt10, FULLSCREEN );
-	}
-    }
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif /* X86GFX */
+#line 1573 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 
     // re-register with console for fullscreen switching.
     if( !RegisterConsoleVDM( VDMForWOW ?
                                 CONSOLE_REGISTER_WOW : CONSOLE_REGISTER_VDM,
 #ifdef X86GFX
-                             hStartHardwareEvent,
-			     hEndHardwareEvent,
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #else
+#line 1581 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 			     NULL,
 			     NULL,
 #endif
@@ -1535,11 +1308,9 @@ GLOBAL VOID DoFullScreenResume(VOID)
 	ErrorExit();
 
 #ifdef X86GFX
-	sc.Registered = TRUE;
-	/* stateLength can be 0 if fullscreen is disabled in the console */
-	if(stateLength)
-	    RtlZeroMemory(videoState, sizeof(VIDEO_HARDWARE_STATE_HEADER));
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #else
+#line 1607 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 	/*
 	** Create graphics buffer if we need one. Tim Oct 92.
 	*/
@@ -1612,111 +1383,9 @@ GLOBAL VOID GfxCloseDown(VOID)
 }
 
 #ifdef X86GFX
-/***************************************************************************
- * Function:								   *
- *	FreezeWinTitle  						   *
- *									   *
- * Description: 							   *
- *	Adds -FROZEN to the relevant console window title                  *
- *									   *
- * Parameters:								   *
- *	None.								   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
- ***************************************************************************/
-GLOBAL VOID FreezeWinTitle(VOID)
-{
-    CHAR     title[MAX_TITLE_LEN],*ptr;
-    SHORT    max;
-    ULONG    len;
-
-    if (WinFrozen)
-	return;
-
-    //
-    // The buffer contains the string plus the terminating null.
-    // So keep the string length less the null in len.
-    // Console can fail this call with silly error codes in low memory cases
-    // or if original title contains dubious chars.
-    //
-
-    len = strlen(szFrozenString);
-
-    max = (SHORT) (MAX_TITLE_LEN - len);
-    if (!GetConsoleTitle(title, max))
-	title[0] = '\0';
-
-    //
-    // Remove any trailing spaces or tabs from the title string
-    //
-
-    if(len = strlen(title))
-        {
-        ptr = title + len - 1;
-        while(*ptr == ' ' || *ptr == '\t')
-           *ptr-- = '\0';
-        }
-
-    //
-    // Add " - FROZEN" or the international equivalent to
-    // the end of the title string.
-    //
-
-    strcat(title, szFrozenString);
-    if (!SetConsoleTitle(title))
-	ErrorExit();
-    WinFrozen = TRUE;
-
-}
-
-/***************************************************************************
- * Function:								   *
- *	UnFreezeWinTitle  						   *
- *									   *
- * Description: 							   *
- *	Removes -FROZEN from the relevant console window title               *
- *									   *
- * Parameters:								   *
- *	None.								   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
- ***************************************************************************/
-GLOBAL VOID UnFreezeWinTitle(VOID)
-{
-    CHAR     title[MAX_TITLE_LEN];
-    ULONG    len,orglen;
-
-    if (! WinFrozen)
-	return;
-
-    if (!GetConsoleTitle(title, MAX_TITLE_LEN))
-	ErrorExit();
-
-
-    //
-    // The buffer contains the string plus the terminating null.
-    // So keep the string length less the null in len.
-    //
-
-    len = strlen(szFrozenString);
-    orglen = strlen(title);
-    title[orglen - len] = '\0';
-    if (!SetConsoleTitle(title))
-	ErrorExit();
-    WinFrozen = FALSE;
-    
-    //
-    // Now that we're thawing, put the mouse menu item
-    // back into the system menu.
-    // Andy!
-
-    MouseAttachMenuItem(sc.ActiveOutputBufferHandle);
-}
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
+#line 1784 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 
 
 /*
@@ -1795,9 +1464,9 @@ VOID copyConsoleToRegen(SHORT startCol, SHORT startLine, SHORT width,
 
     register half_word	*to;
 #ifdef X86GFX
-    half_word	 misc;
-    register half_word	*vc;
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
+#line 1865 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 
 
     /* Allocate the buffer to get the console data into */
@@ -2045,273 +1714,9 @@ int getModeType(VOID)
 }
 
 #ifdef X86GFX
-/***************************************************************************
- * Function:								   *
- *	host_check_mouse_buffer						   *
- *									   *
- * Description: 							   *
- *	Called when an INT 10h, AH = 11h is being executed, this function  *
- *	checks to see if the number of lines on the screen for a text mode *
- *	has changed and if so selects a new mouse buffer.		   *
- *									   *
- * Parameters:								   *
- *	None.								   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
- ***************************************************************************/
-GLOBAL VOID host_check_mouse_buffer(VOID)
-{
-    half_word mode,
-	      sub_func,
-	      font_height,
-	      text_lines;
-    IU16 scan_lines;
-
-    /* Get the current video mode. */
-    mode = sas_hw_at_no_check(vd_video_mode);
-#ifdef V7VGA
-    if (mode > 0x13)
-	mode += 0x4c;
-    else if ((mode == 1) && (extensions_controller.foreground_latch_1))
-	mode = extensions_controller.foreground_latch_1;
-#endif /* V7VGA */
-
-    /*
-     * Check to see if we are in a text mode whose mouse virtual coordinates
-     * are affected by the number of lines on the screen.
-     */
-    if ((mode == 0x2) || (mode == 0x3) || (mode == 0x7))
-    {
-
-	/* Work out the font height being set. */
-	sub_func = getAL();
-	switch (sub_func)
-	{
-	case 0x10:
-	    font_height = getBH();
-	    break;
-	case 0x11:
-	    font_height = 14;
-	    break;
-	case 0x12:
-	    font_height = 8;
-	    break;
-	case 0x14:
-	    font_height = 16;
-	    break;
-	default:
-
-	    /*
-	     * The above are the only functions that re-program the no. of lines
-	     * on the screen, so do nothing if we have something else.
-	     */
-	    return;
-	}
-
-	/* Get the number of scan lines for this mode. */
-	if(!(get_EGA_switches() & 1) && (mode < 4))
-	{
-	    scan_lines = 200; /* Low res text mode */
-	}
-	else
-	{
-	    switch (get_VGA_lines())
-	    {
-	    case S200:
-		scan_lines = 200;
-		break;
-	    case S350:
-		scan_lines = 350;
-		break;
-	    case S400:
-		scan_lines = 400;
-		break;
-	    default:
-
-		/* Dodgy value in BIOS data area - don't do anything. */
-		assert0(NO, "invalid VGA lines in BIOS data");
-		return;
-	    }
-	}
-
-	/* Now work out the number of text lines on the screen. */
-	text_lines = scan_lines / font_height;
-
-	/* If the number of lines has changed, select a new mouse buffer. */
-	if (text_lines != saved_text_lines)
-	    SelectMouseBuffer(mode, text_lines);
-
-    } /* if ((mode == 0x2) || (mode == 0x3) || (mode == 0x7)) */
-}
-
-/***************************************************************************
- * Function:								   *
- *	SelectMouseBuffer						   *
- *									   *
- * Description: 							   *
- *	Selects the correct screen ratio for the video mode.at the	   *
- *									   *
- * Parameters:								   *
- *	mode	- the video mode for which we are setting a screen buffer. *
- *	lines	- for text modes: the number of character lines on the	   *
- *		  screen, 0 denotes the default for this mode.		   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
- ***************************************************************************/
-GLOBAL VOID SelectMouseBuffer(half_word mode, half_word lines)
-{
-    DWORD	 width,
-		 height;
-
-
-    /*
-    ** When stdout is being redirected we must not set up the graphics
-    ** buffer for the mouse. Otherwise 32-bit progs like MORE crash
-    ** cos they ask console for the active console handle and get
-    ** confused. We get told by DOS Em. when stdout is being
-    ** redirected and do not set up the buffer.
-    ** Tim Jan 93.
-    */
-    if( stdoutRedirected )
-	return;
-
-    /* Work out the screen resolution. */
-    switch (mode & 0x7f)
-    {
-    case 0x0:
-    case 0x1:
-	width = 640;
-	height = 200;
-	break;
-    case 0x2:
-    case 0x3:
-    case 0x7:
-	switch (lines)
-	{
-	case 0:
-	case 25:
-	    saved_text_lines = 25;
-	    width = 640;
-	    height = 200;
-	    break;
-	case 43:
-	    saved_text_lines = 43;
-	    width = 640;
-	    height = 344;
-	    break;
-	case 50:
-	    saved_text_lines = 50;
-	    width = 640;
-	    height = 400;
-	    break;
-	default:
-	    assert1(NO, "strange number of lines for text mode - %d", lines);
-	    return;
-	}
-	break;
-    case 0x4:
-    case 0x5:
-    case 0x6:
-    case 0xd:
-    case 0xe:
-	width = 640;
-	height = 200;
-	break;
-    case 0xf:
-    case 0x10:
-	width = 640;
-	height = 350;
-	break;
-    case 0x11:
-    case 0x12:
-	width = 640;
-	height = 480;
-	break;
-    case 0x13:
-	width = 640;
-	height = 200;
-	break;
-    case 0x40:
-	width = 640;
-	height = 400;
-	break;
-    case 0x41:
-    case 0x42:
-	width = 1056;
-	height = 344;
-	break;
-    case 0x43:
-	width = 640;
-	height = 480;
-	break;
-    case 0x44:
-	width = 800;
-	height = 480;
-	break;
-    case 0x45:
-	width = 1056;
-	height = 392;
-	break;
-    case 0x60:
-	width = 752;
-	height = 408;
-	break;
-    case 0x61:
-	width = 720;
-	height = 536;
-	break;
-    case 0x62:
-	width = 800;
-	height = 600;
-	break;
-    case 0x63:
-    case 0x64:
-    case 0x65:
-	width = 1024;
-	height = 768;
-	break;
-    case 0x66:
-	width = 640;
-	height = 400;
-	break;
-    case 0x67:
-	width = 640;
-	height = 480;
-	break;
-    case 0x68:
-	width = 720;
-	height = 540;
-	break;
-    case 0x69:
-	width = 800;
-	height = 600;
-	break;
-    default:
-
-	/* No change if we get an unknown mode. */
-	assert1(NO, "unknown mode - %d", mode);
-	return;
-    }
-
-    //
-    // Set the variables to let apps like Word and Works which call
-    // INT 33h AX = 26h to find out the size of the current virtual
-    // screen.
-    // Andy!
-
-    VirtualX = (word)width;
-    VirtualY = (word)height;
-
-    /* Save current dimensions. */
-    mouse_buffer_width = width;
-    mouse_buffer_height = height;
-
-}
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif /* X86GFX */
+#line 2379 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 
 void host_enable_stream_io(void)
 {

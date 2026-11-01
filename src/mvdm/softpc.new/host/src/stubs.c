@@ -14,8 +14,7 @@
 #include "chkmallc.h"
 
 #ifdef X86GFX
-#include "egacpu.h"
-#include "egaread.h"
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
 
 #ifdef MONITOR

@@ -97,7 +97,7 @@ void nt_init_text()
     sub_note_trace0(HERC_HOST_VERBOSE, "nt_init_text");
 
 #ifdef X86GFX
-if (sc.ScreenState == WINDOWED) //fullscreen valid - mouse buffer
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif	//X86GFX
     closeGraphicsBuffer(); /* Tim Oct 92 */
 

@@ -1097,39 +1097,7 @@ void nt_std_handle_notification (BOOL fIsRedirection)
     stdoutRedirected = fIsRedirection;
 
 #ifdef X86GFX
-
-    if( !fIsRedirection && sc.ScreenState==FULLSCREEN )
-    {
-	half_word mode = 3,
-		  lines = 0;
-
-        //
-        // WORD 6 and other apps cause this code path to be followed
-        // on application startup. now if line==0, SelectMouseBuffer
-        // causes a 640 x 200 buffer to be selected. This is not
-        // correct if the app is in a 43 or 50 text line mode.
-        // Therefore, since the BIOS data area location 40:84 holds
-        // the number of rows - 1 at this point (if the app uses int 10h
-        // function 11 to change mode) then pick up the correct value
-        // from here. Andy!
-
-        if(sc.ModeType == TEXT)
-        { 
-           sas_load(0x484,&lines);
-
-           //
-           // The value is pulled from the BIOS data area.
-           // This is one less than the number of rows. So 
-           // increment to give SelectMouseBuffer what it 
-           // expects. Let this function do the necessary
-           // handling of non 25, 43 and 50 values.
-           //
-           
-           lines++;
-        }
-
-        SelectMouseBuffer(mode, lines);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif //X86GFX
 }
 

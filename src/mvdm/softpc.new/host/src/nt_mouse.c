@@ -66,16 +66,7 @@ IMPORT word         F9_SEGMENT,F9_OFFSET;
 IMPORT word         savedtextoffset,savedtextsegment;
 
 #ifdef X86GFX
-IMPORT sys_addr     mouseCFsysaddr;   // sas address of internal cursor flag
-IMPORT word         button_off,button_seg;
-IMPORT boolean mouse_io_interrupt_busy;
-
-#define cursor_in_black_hole(cpx, cpy)	\
-    (cpx >= black_hole.top_left.x && \
-     cpx <= black_hole.bottom_right.x && \
-     cpy >= black_hole.top_left.y && \
-     cpy <= black_hole.bottom_right.y)
-
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif //X86GFX
 
 
@@ -137,9 +128,7 @@ FORWARD void   WindowedGraphicsScale(half_word,IS16,IS16,IS16 *,IS16 *);
 FORWARD void   dummy(short *,short *,unsigned short *);
 FORWARD void   LimitCoordinates(half_word,IS16 *,IS16 *);
 #ifdef X86GFX
-FORWARD void   CleanUpMousePointer();
-FORWARD void   FullscreenWarpSystemPointer(POINT *);
-FORWARD void   ScaleToFullscreenVirtualCoordinates(IS16 *,IS16 *,MOUSE_VECTOR *);
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif //X86GFX
 FORWARD void   TextScale(IS16 *,IS16 *,IS16 *, IS16 *);
 
@@ -344,51 +333,7 @@ if(mvdm_softpc_mouse_route_active())
    bFunctionZeroReset = TRUE;
    }
 #ifdef X86GFX
-
-half_word vm;
-word xx,yy;
-
-//
-// Set the internal cursor flag to "just off"
-// the real driver sets the internal cursor flag to -1
-// so do I.
-//
-
-sas_store(mouseCFsysaddr,0xff);	// cursor hidden
-
-//
-// Set the fast track position words in the 16 bit driver.
-// First igure out the video mode, and from this, the virtual
-// screen centre.
-//
-
-sas_load(0x449,&vm);
-xx = (word)VirtualScrCtrLUTx[vm];
-yy = (word)VirtualScrCtrLUTy[vm];
-
-//
-// The values for the confining virtual pixel coordinate rectangle
-// as set up by int 33h functions 7 and 8 are now released and the
-// default virtual bounds are used.
-//
-
-confine.bF7 = FALSE;   // reset the flag indicating a int 33h function 7
-confine.bF8 = FALSE;   // reset the flag indicating a int 33h function 8
-
-bFunctionZeroReset = TRUE;
-
-//
-// write the centre position data back to the 16 bit driver.
-//
-
-if(sc.ScreenState == FULLSCREEN)
-   {
-   //
-   // Force a host_os_mouse_pointer call to do the
-   // write back into the 16 bit driver.
-   //
-   LazyMouseInterrupt();
-   }
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif /*X86GFX */
 
 //
@@ -406,18 +351,7 @@ m2pY = 16;
 GLOBAL void mouse_set_position IFN2(USHORT, newx, USHORT, newy)
 {
 #ifdef X86GFX
-word	  currentCS, currentIP, currentCX, currentDX;
-boolean   currentIF;
-half_word internalCF;
-
-   //
-   // write the new position to the 16 bit driver for the fast
-   // int33hf3 calls on X86.
-   //
-
-   sas_storew(effective_addr(button_seg,((word)(button_off+2))),(word)newx);
-   sas_storew(effective_addr(button_seg,((word)(button_off+4))),(word)newy);
-
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif //X86GFX
 
 
@@ -442,77 +376,7 @@ if((sc.ScreenState == WINDOWED && bPointerOff) || mvdm_softpc_mouse_route_active
    return;
    }
 #ifdef X86GFX
-else if(sc.ScreenState == FULLSCREEN)
-   {
-   //
-   // The values that are passed in are hot and fresh from the app.
-   // Since they have not been tainted by the base, they are still
-   // in virtual coordinates which is cool.
-   //
-
-   //
-   // Get the internal cursor flag from the 16 bit driver
-   //
-
-   sas_load(mouseCFsysaddr,&internalCF);
-
-   //
-   // Only draw the pointer if the internal cursor flag
-   // is zero. Note: less than zero == don't draw.
-   //
-
-   if(!internalCF)
-      {
-      /* if conditional off is diabled or the cursor is outside the
-       *	 conditional off rectangle, move the cursor
-       */
-
-      if (sas_hw_at_no_check(conditional_off_sysaddr) == 0 ||
-	  !cursor_in_black_hole(newx, newy))
-	  {
-	  currentCS=getCS();
-	  currentIP=getIP();
-	  currentCX=getCX();
-	  currentDX=getDX();
-	  currentIF=getIF();
-	  setCS(DRAW_FS_POINTER_SEGMENT); // sacrificial data
-	  setIP(DRAW_FS_POINTER_OFFSET);
-	  setCX((word)newx);
-	  setDX((word)newy);
-	  setIF(FALSE);
-	  //
-	  // call back to 16bits move cursor code.
-	  //
-
-	  host_simulate();
-
-	  //
-	  // Tidy up
-	  //
-
-	  setCX(currentCX);
-	  setDX(currentDX);
-	  setCS(currentCS);
-	  setIP(currentIP);
-	  setIF(currentIF);
-      }
-      else {
-	  /* the cursor was moved into the conditional rectangle, hide it */
-	  sas_store(mouseCFsysaddr, 0xff);
-	  host_hide_pointer();
-      }
-   }
-   newF4x = (IS16)newx;
-   newF4y = (IS16)newy;
-   bFunctionFour = TRUE;
-
-   //
-   // update the last mouse position global locators
-   //
-
-   old_x = newx;
-   old_y = newy;
-   }
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif //X86GFX
 }
 
@@ -532,22 +396,7 @@ GLOBAL void mouse_cursor_mode_change()
 GLOBAL	void host_mouse_conditional_off_enabled(void)
 {
 #ifdef X86GFX
-    word x, y;
-
-    /*	hide the cursor if
-     *	(1). we are in full screen  and
-     *	(2). the cursor is on and is in the conditional area
-     */
-    if (sc.ScreenState == FULLSCREEN &&
-	!sas_hw_at_no_check(mouseCFsysaddr)) {
-
-	x = sas_w_at_no_check(effective_addr(CP_X_S, CP_X_O));
-	y = sas_w_at_no_check(effective_addr(CP_Y_S, CP_Y_O));
-	if (cursor_in_black_hole(x, y)) {
-	    sas_store(mouseCFsysaddr, 0xff);
-	    host_hide_pointer();
-	}
-    }
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
 
 
@@ -563,7 +412,7 @@ VOID host_os_mouse_pointer(MOUSE_CURSOR_STATUS *mcs,MOUSE_CALL_MASK *call_mask,
                            MOUSE_VECTOR *counter)
 {
 #ifdef X86GFX
-sys_addr int33f3addr;
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif // X86GFX
 
 host_ica_lock(); // synch with the event thread
@@ -575,12 +424,7 @@ if(!mvdm_softpc_mouse_apply(mcs,counter,&old_x,&old_y,&bPointerInSamePlace,
 GetNextMouseEvent();
 
 #ifdef X86GFX
-
-if(sc.ScreenState == FULLSCREEN)
-   {
-   ScaleToFullscreenVirtualCoordinates(&mcs->position.x,&mcs->position.y,counter);
-   }
-else
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif // X86GFX
    {
    ScaleToWindowedVirtualCoordinates(&mcs->position.x,&mcs->position.y,counter);
@@ -624,7 +468,7 @@ if(bPointerInSamePlace)
 else
    {
 #ifdef X86GFX
-   half_word internalCF;
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif // X86GFX
 
    //
@@ -634,101 +478,7 @@ else
    *call_mask |= 1;
 
 #ifdef X86GFX
-
-   //
-   // Inquire from the 16 bit driver whether or not the
-   // pointer can be drawn.
-   // internalCF < 0 -> cannot draw
-   // internalCF == 0 okay to draw.
-   //
-
-   sas_load(mouseCFsysaddr,&internalCF);
-
-   //
-   // If the system has fullscreen capabilities and is in fullscreen
-   // mode, then if the pointer has been switched on, draw it on the
-   // fullscreen display.
-   //
-
-   if(sc.ScreenState == FULLSCREEN && !internalCF)
-      {
-      half_word v;
-      static half_word hwLastModeType;
-
-      if (sas_hw_at_no_check(conditional_off_sysaddr) == 0 ||
-	  !cursor_in_black_hole(mcs->position.x, mcs->position.y))
-      {
-	  //
-	  // Get the current BIOS video mode a la B.D.A.
-	  //
-
-	  sas_load(0x449,&v);
-
-	  if((hwLastModeType = TextOrGraphicsModeLUT[v]) == GRAPHICS_MODE)
-	     {
-	     word currentCS,currentIP;	   // save those interesting Intel registers
-	     word currentCX,currentDX;
-	     boolean   currentIF;
-
-	     //
-	     // Do the host simulate here to draw the cursor image
-	     // for the full screen graphics
-	     //
-
-	     currentCS=getCS();
-	     currentIP=getIP();
-	     currentCX=getCX();
-	     currentDX=getDX();
-	     currentIF=getIF();
-	     setCS(DRAW_FS_POINTER_SEGMENT);
-	     setIP(DRAW_FS_POINTER_OFFSET);
-	     setCX(mcs->position.x);
-	     setDX(mcs->position.y);
-	     setIF(FALSE);
-	     //
-	     // call to 16bits move cursor code
-	     //
-
-	     host_simulate();
-
-	     //
-	     // Restore the 16 bit context.
-	     //
-
-	     setCX(currentCX);
-	     setDX(currentDX);
-	     setCS(currentCS);
-	     setIP(currentIP);
-	     setIF(currentIF);
-	     }
-	  else // TEXT_MODE
-	     {
-	     //
-	     // if there has been a switch from graphics mode to text mode
-	     // then there cannot have been a backround saved.
-	     //
-
-	     if(hwLastModeType == GRAPHICS_MODE)
-		{
-		bFullscTextBkgrndSaved = FALSE;
-		hwLastModeType = TEXT_MODE;
-		}
-
-	     //
-	     // Use some 32 bit code to draw the text pointer because
-	     // no hardware i/o is involved and we need only to write to
-	     // the display buffer (16 bit code is needed to do video
-	     // i/os in fullscreen mode).
-	     //
-
-	     FullscTextPtr(mcs->position.x,mcs->position.y);
-	     }
-	}
-	else {
-	    sas_store(mouseCFsysaddr, 0xff);
-	    host_hide_pointer();
-	}
-    }
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif	   // X86GFX
    }
 
@@ -743,10 +493,7 @@ else
 //
 
 #ifdef X86GFX
-int33f3addr = effective_addr(button_seg,button_off);
-sas_storew(int33f3addr,mcs->button_status);
-sas_storew(int33f3addr+=2, (word)(mcs->position.x));
-sas_storew(int33f3addr+=2, (word)(mcs->position.y));
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif //X86GFX
 }
 
@@ -879,195 +626,7 @@ old_r_button = os_pointer_data.button_r;
 }
 
 #ifdef X86GFX
-//=========================================================================
-// Function to scale mouse coordinates as retrieved from USER
-// to virtual coordinates as defined by the Microsoft Mouse
-// Programmer's Reference.
-//=========================================================================
-
-void ScaleToFullscreenVirtualCoordinates(IS16 *outx,IS16 *outy,
-                                         MOUSE_VECTOR *counter)
-{
-half_word video_mode,textorgraphics;
-IS16 internalX = 0, internalY = 0;
-static IS16 lastinternalX=0, lastinternalY=0;
-POINT  vector;                 // Magnitude and direction since last call
-
-
-//
-// Manage the system pointer so that it never sticks to a system
-// imposed boundary. Also get a relative displacement of the mouse.
-//
-
-FullscreenWarpSystemPointer(&vector);
-
-//
-// return the internal counter values back to the base
-// code for it to use to generate the counters there.
-//
-
-counter->x = (MOUSE_SCALAR)vector.x;
-counter->y = (MOUSE_SCALAR)vector.y;
-
-//
-// Get the current BIOS video mode from the B.D.A. This comes
-// in handy in a couple of places later.
-//
-
-sas_load(0x449,&video_mode);
-
-//
-// checkout some global flags with indicate if one of the int 33h
-// functions which are capable of changing the position of the
-// DOS mouse driver pointer have been called since the last mouse
-// hardware interrupt.
-//
-
-if(bFunctionZeroReset)
-   {
-   //
-   // Calculate the centre of the default virtual screen
-   // and set the current generated coordinates to it.
-   //
-
-   internalX = (IS16)VirtualScrCtrLUTx[video_mode];
-   internalY = (IS16)VirtualScrCtrLUTy[video_mode];
-
-   bFunctionZeroReset = FALSE;
-   }
-else if(bFunctionFour)
-   {
-   //
-   // The application has set the pointer to a new location.
-   // Tell the internal cartesian coordinate system about this.
-   //
-
-   internalX = newF4x;	// This is where the pointer was set to
-   internalY = newF4y;	// by the app on the last pending call to f4
-
-   //
-   // Don't come in here again until the next function 4.
-   //
-
-   bFunctionFour = FALSE;
-   }
-else
-   {
-   //
-   // The most frequent case. Determine the new, raw pointer position
-   // by adding the system pointer movement vector to the last position
-   // of the emulated pointer.
-   //
-
-   internalX = lastinternalX + (IS16)vector.x;
-   internalY = lastinternalY + (IS16)vector.y;
-   }
-
-//
-// use the video mode to determine if we're running text or graphics
-//
-
-textorgraphics=TextOrGraphicsModeLUT[video_mode];
-
-//
-// Scale the coordinates appropriately for the current video mode
-// and the type (text or graphics) that it is.
-//
-
-if(textorgraphics == TEXT_MODE)
-   {
-   //
-   // The virtual cell block is 8 by 8 virtual pixels for any text mode.
-   // This means that the cell coordinates in virtual pixels increments
-   // by 8 in the positive x and y directions and the top left hand corner
-   // of the cell starts at 0,0 and has the virtual pixel value for the
-   // whole text cell.
-   //
-
-   TextScale(&internalX,&internalY,outx,outy);
-   }
-
-else // GRAPHICS_MODE
-   {
-   LimitCoordinates(video_mode,&internalX,&internalY);
-   *outx = internalX;
-   *outy = internalY;
-   }
-
-//
-// Set up the current emulated position for next time through
-// this function.
-//
-
-lastinternalX = internalX;
-lastinternalY = internalY;
-
-//
-// Signal that the pointer hasn't moved, if it hasn't
-//
-
-bPointerInSamePlace = (!vector.x && !vector.y) ? TRUE : FALSE;
-
-//
-// save the current position for next time.
-//
-
-old_x = *outx;
-old_y = *outy;
-}
-
-//==============================================================================
-// Function to make sure that the system pointer can be made to move in a
-// given cartesian direction without hitting and finite boundaries as specified
-// by the operating system.
-//==============================================================================
-void FullscreenWarpSystemPointer(POINT *vector)
-{
-static POINT pLast;	    // System pointer position data from last time through
-POINT  pCurrent;
-
-//
-// Get a system mouse pointer absolute position value back from USER.
-//
-
-GetCursorPos(&pCurrent);
-
-//
-// Calculate the vector displacement of the system pointer since
-// the last call to this function.
-//
-
-vector->x = pCurrent.x - pLast.x;
-vector->y = pCurrent.y - pLast.y;
-
-//
-// Has the system pointer hit a border? If so, warp the system pointer
-// back to the convienient location of 0,0.
-//
-
-
-if(pCurrent.x >= (LONG)1000 || pCurrent.x <= (LONG)-1000 ||
-   pCurrent.y >= (LONG)1000 || pCurrent.y <= (LONG)-1000)
-   {
-   //
-   // If the counters have warped, set the system pointer
-   // to the relavent position.
-   //
-
-   SetCursorPos(0,0);
-   pLast.x = 0L;	// prevent a crazy warp
-   pLast.y = 0L;
-   }
-else
-   {
-   //
-   // update the last position data of the
-   // system pointer for next time through.
-   //
-   pLast = pCurrent;
-   }
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif // X86GFX
 
 //=========================================================================
@@ -1770,38 +1329,7 @@ switch(vm)
 void host_show_pointer()
 {
 #ifdef X86GFX
-
-if(sc.ScreenState == FULLSCREEN)
-   {
-   half_word v;
-   sas_load(0x449,&v);
-
-   if(TextOrGraphicsModeLUT[v] == GRAPHICS_MODE)
-   {
-	  word currentCS,currentIP; // save those interesting Intel registers
-	  boolean currentIF;
-
-	  sas_storew(effective_addr(CP_X_S,CP_X_O),(word)old_x);
-	  sas_storew(effective_addr(CP_Y_S,CP_Y_O),(word)old_y);
-	  currentCS=getCS();
-	  currentIP=getIP();
-	  currentIF=getIF();
-	  setCS(POINTER_ON_SEGMENT);
-	  setIP(POINTER_ON_OFFSET);
-	  setIF(FALSE);
-	  host_simulate();
-
-	  setCS(currentCS);
-	  setIP(currentIP);
-	  setIF(currentIF);
-    }
-    else //TEXT_MODE
-    {
-	  FullscTextPtr(old_x,old_y);
-    }
-
-   LazyMouseInterrupt();
-   }
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif // X86GFX
 }
 
@@ -1816,40 +1344,7 @@ if(sc.ScreenState == FULLSCREEN)
 void host_hide_pointer()
 {
 #ifdef X86GFX
-
-if(sc.ScreenState == FULLSCREEN)
-   {
-   half_word v;
-
-   sas_load(0x449,&v);
-
-   if(TextOrGraphicsModeLUT[v] == GRAPHICS_MODE)
-      {
-      word currentCS,currentIP; // save those interesting Intel registers
-      boolean currentIF;
-
-      currentCS=getCS();
-      currentIP=getIP();
-      currentIF=getIF();
-      setCS(POINTER_OFF_SEGMENT);
-      setIP(POINTER_OFF_OFFSET);
-      setIF(FALSE);
-      host_simulate();
-
-      setCS(currentCS);
-      setIP(currentIP);
-      setIF(currentIF);
-      }
-   else //TEXT_MODE
-      {
-      if(bFullscTextBkgrndSaved)
-         {
-         sas_storew(old_text_addr,text_ptr_bkgrnd);
-         bFullscTextBkgrndSaved = FALSE;
-         }
-      }
-   LazyMouseInterrupt();
-   }
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif // X86GFX
 }
 
@@ -2358,57 +1853,7 @@ os_pointer_data.y=0;
 host_ica_unlock();
 }
 #ifdef X86GFX
-
-//============================================================================
-// Function which is called from the 32 bit side (x86 only) when there is
-// a transition from fullscreen text to windowed text. The function restores
-// the background to the last mouse pointer position. This stops a pointer
-// block from remaining in the image, corrupting the display when the system
-// pointer is being used.
-//
-// This function looks into the 16 bit driver's space and points to 4, 16 bit
-// words of data from it, viz:
-//
-//   dw   offset of pointer into video buffer.
-//   dw   unused.
-//   dw   image data to be restored.
-//   dw      flag = 0 if the background is stored
-//
-// Note: that during a fullscreen switch, 16 bit code cannot be executed,
-// thus the patching of the buffer is done here.
-//============================================================================
-
-void CleanUpMousePointer()
-{
-half_word vm;
-
-//
-// Only execute this routine fully if in TEXT mode
-//
-
-sas_load(0x449,&vm); // Get the current video mode according to the B.D.A.
-
-if(TextOrGraphicsModeLUT[(int)vm] != TEXT_MODE)
-   return;
-
-//
-// If there is a backround stored for the text pointer when it was
-// in fullscreen land, then restore it to the place it came from
-// when windowed.
-//
-
-if(bFullscTextBkgrndSaved)
-   {
-   sas_storew(old_text_addr,text_ptr_bkgrnd);
-
-   //
-   // No background saved now.
-   //
-
-   bFullscTextBkgrndSaved = FALSE;
-   }
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif //X86GFX
 
 //===========================================================================
@@ -2422,73 +1867,7 @@ if(bFullscTextBkgrndSaved)
 void FullscTextPtr(int x,int y)
 {
 #ifdef X86GFX
-sys_addr text_addr;
-word	 current_display_page;
-
-//
-// Work out the offset to the current video display page.
-// Grovel around the B.D.A. to find out where the page starts.
-//
-
-sas_loadw(effective_addr(0x40,0x4e),&current_display_page);
-x = (int)((DWORD)x & 0xFFFFFFF8);
-y = (int)((DWORD)y & 0xFFFFFFF8);
-
-//
-// save the character cell behind the next pointer
-// Note: The text cell offset calculated below is based on
-// the following concepts:
-//    The virtual character cell size is 8 x 8 virtual pixels.
-//    The input data to this function is in virtual pixels.
-//    There are 80 text cells in a row = 80 (CHAR:ATTR) words.
-//    The >>3<<1 on the x value ensures that the location
-//    in the buffer to be modified occurs on a word boundary to
-//    get the masking correct!
-//
-
-x &= 0xfffc; // remove the top to prevent funny shifts.
-x >>= 2;     // get the word address for the current row
-y &= 0xffff; // work out the total number of locations for all the y rows
-y *= 20;     //
-
-//
-// Generate the address in the display buffer at which the pointer
-// should be drawn.
-//
-
-text_addr = effective_addr(0xb800,(word)(current_display_page + x + y)); // assemble the cell address
-
-//
-// only restore the background if there is a background to restore!
-//
-
-if(bFullscTextBkgrndSaved)
-   {
-   sas_storew(old_text_addr,text_ptr_bkgrnd);
-   }
-
-//
-// Load up the background from the new address
-//
-
-sas_loadw(text_addr,&text_ptr_bkgrnd);      // read from that place
-bFullscTextBkgrndSaved=TRUE;
-
-//
-// Write the pointer to the video buffer.
-// Use some standard masks and forget what the app wants to
-// do cos that really isn't important and it's slow plus not
-// very many apps want to change the text pointer shape anyway.
-//
-
-sas_storew(text_addr,(word)((text_ptr_bkgrnd & 0x77ff) ^ 0x7700));
-
-//
-// save the static variables to be used next time through the routine
-//
-
-old_text_addr=text_addr;
-
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif // X86GFX
 }
 

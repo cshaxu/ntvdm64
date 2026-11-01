@@ -20,7 +20,7 @@
 #include "host_def.h"
 
 #ifdef X86GFX
-#include <ntddvdeo.h>
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
 
 #include <sys\types.h>
@@ -102,7 +102,7 @@ host_reset()
 {
 
 #ifdef X86GFX
-    InitDetect();
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
 
     if (host_stream_io_enabled) {
@@ -289,8 +289,7 @@ host_applClose(void)
 
   GfxCloseDown();             // ensure video section destroyed
 #ifdef X86GFX
-  if (sc.ScreenBufHandle)
-      CloseHandle(sc.ScreenBufHandle);
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif // X86GFX
 
 

@@ -89,10 +89,9 @@ GLOBAL WCHAR_STRING videoSection;
 GLOBAL WCHAR_STRING textSection; // Tim Oct 92
 
 #ifdef X86GFX
-/* Hand-shaking events. */
-GLOBAL HANDLE hStartHardwareEvent;
-GLOBAL HANDLE hEndHardwareEvent;
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
+#line 96 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 
 /* Flag to stop host_simulates on this thread executing timer tick code. */
 GLOBAL BOOL NoTicks;
@@ -180,7 +179,7 @@ GLOBAL VOID doNullRegister()
 	  )
 		ErrorExit();
 #ifdef X86GFX
-	sc.Registered = FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
 
 }
@@ -204,31 +203,18 @@ GLOBAL VOID initTextSection(VOID)
     textBufferSize.Y = 50;
 
 #ifdef X86GFX
-    /*
-     * Deallocate the regen area if we start up fullscreen. We have to do this
-     * before we call RegisterConsoleVDM. Note that's right before the register
-     * call to make sure no one tries to allocate any memory (eg create a 
-     * section) that could nick bits of the video hole, causing bye-byes.
-     */
-    if (!GetConsoleDisplayMode(&flags))
-	ErrorExit();
-    savedScreenState = sc.ScreenState = (flags & CONSOLE_FULLSCREEN_HARDWARE) ?
-					FULLSCREEN : WINDOWED;
-    sas_store_no_check((int10_seg << 4) + useHostInt10, (half_word)sc.ScreenState);
-
-    if (sc.ScreenState == FULLSCREEN)
-        LoseRegenMemory();
-
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #else
+#line 223 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
     sc.ScreenState = WINDOWED;
 #endif
 
     if( !RegisterConsoleVDM( VDMForWOW ?
                                 CONSOLE_REGISTER_WOW : CONSOLE_REGISTER_VDM,
 #ifdef X86GFX
-                             hStartHardwareEvent,
-			     hEndHardwareEvent,
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #else
+#line 232 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 			     NULL,
 			     NULL,
 #endif
@@ -245,11 +231,9 @@ GLOBAL VOID initTextSection(VOID)
 	ErrorExit();
 
 #ifdef X86GFX
-    /* stateLength can be 0 if fullscreen is disabled in the console */
-    if(stateLength)
-	RtlZeroMemory((BYTE *)videoState, sizeof(VIDEO_HARDWARE_STATE_HEADER));
-    sc.Registered = TRUE;
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
+#line 253 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 
 } /* end initTextSection() */
 

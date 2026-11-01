@@ -28,7 +28,7 @@
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: Include files */
 
 #ifdef X86GFX
-#include <ntddvdeo.h>
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
 #include <sys\types.h>
 
@@ -519,13 +519,7 @@ GLOBAL VOID closeGraphicsBuffer IFN0()
                 CloseHandle(sc.ConsoleBufInfo.hMutex);
                 sc.ConsoleBufInfo.hMutex = 0;
 #ifdef X86GFX
-
-		/*
-		 * Make sure a buffer is selected next time SelectMouseBuffer
-		 * is called.
-		 */
-		mouse_buffer_width = 0;
-		mouse_buffer_height = 0;
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif /* X86GFX */
 	}
 } /* end of closeGraphicsBuffer() */
@@ -552,7 +546,7 @@ void nt_init_screen(void)
     static boolean  already_called = FALSE;
 
 #ifdef X86GFX
-    sc.Registered = FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
     sub_note_trace0(ALL_ADAPT_VERBOSE, "nt_init_screen\n");
 
@@ -780,7 +774,7 @@ void nt_flush_screen(void)
     if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE &&
 	!get_mode_change_required())
 #ifdef X86GFX
-        if (sc.ScreenState == WINDOWED)
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
         {
             (void)(*update_alg.calc_update)();
@@ -884,7 +878,7 @@ void nt_graphics_tick(void)
 
                 if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE)
 #ifdef X86GFX
-                    if (sc.ScreenState == WINDOWED)
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
                     {
                         (void)(*update_alg.calc_update)();
@@ -914,7 +908,7 @@ void nt_graphics_tick(void)
 
             if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE)
 #ifdef X86GFX
-                if (sc.ScreenState == WINDOWED)
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
                 {
                     (void)(*update_alg.calc_update)();
@@ -1384,32 +1378,7 @@ void nt_set_paint_routine(DISPLAY_MODE mode, int height)
     }
 
 #ifdef X86GFX
-    /*
-     * Display a message for the user if changing from a text mode to a
-     * graphics mode while windowed. This is because graphics modes must be
-     * run full-screen.
-     */
-     {
-        /*
-        ** Tim August 92. Do not want to do a TextToGraphics() during a
-        ** full-screen to windowed transition. Otherwise the display gets
-        ** set back to full-screen!
-        */
-        extern int BlockModeChange; /* Tim August 92, in nt_fulsc.c */
-        if ((BlockModeChange == 0) &&
-            (sc.ScreenState == WINDOWED) &&
-            (oldModeType == TEXT) &&
-            (sc.ModeType == GRAPHICS))
-        {
-            TextToGraphics();
-        }
-        else
-        {
-
-            /* No call to TextToGraphics() */
-            check_win_size(height);
-        }
-     }
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #else
 
     /*................................................... Apply mode change */

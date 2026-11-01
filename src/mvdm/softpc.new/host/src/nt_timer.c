@@ -387,13 +387,7 @@ void host_timer_event()
         unsigned char FgBgPriority;
 
 #ifdef X86GFX
-        /*  Don't do timer tick while in fullscreen switch code. */
-        if (NoTicks)
-            return;
-
-        /* Do console calls related to fullscreen switching. */
-        CheckForFullscreenSwitch();
-
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif /* X86GFX */
 
         host_graphics_tick();               // video graphics stuff
@@ -586,15 +580,7 @@ DWORD HeartBeatThread(PVOID pv)
                         );
 
 #ifdef X86GFX
-      SuspendEventObjects[0] = hHBSuspendEvent;
-
-      /* Get the switching event handle. */
-      if (!VDMForWOW)  {
-          SuspendEventObjects[1] = GetDetectEvent();
-          }
-      else {
-          SuspendEventObjects[1] = INVALID_HANDLE_VALUE;
-          }
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
 
 

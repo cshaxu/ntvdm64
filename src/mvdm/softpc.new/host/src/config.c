@@ -189,8 +189,7 @@ VOID host_fdisk_valid
 VOID process_pif_exe (char *PifName)
 {
 #ifdef X86GFX
-    COORD scrSize;
-    DWORD flags;
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
 
     GetPIFData(&pfdata, PifName);
@@ -544,8 +543,7 @@ GLOBAL VOID config( VOID )
 
 
 #ifdef X86GFX
-
-	locateNativeBIOSfonts();	/* get fonts from page 0 */
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
 
            //  Now see if we can get the console window handle

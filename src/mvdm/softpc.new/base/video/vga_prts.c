@@ -2362,19 +2362,7 @@ GLOBAL VOID  vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 
 
 #if defined(X86GFX)
-/* Silly programs (especially editors) that are concerned that they might 
- * be running on CGA's will read this port like crazy before each screen
- * access. This frig catches the common case:
- *     in
- *     test al,80
- *     j{e,ne} back to the in
- * and moves IP to beyond the test. So far this hasn't broken anything(!!)
- * but has made good speedups in a variety of apps.
- */
-   sys_addr off;
-   word cs, ip;
-   ULONG dwat;
-   IMPORT word getCS(), getIP();
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
 
 #ifdef PROD
@@ -2382,17 +2370,7 @@ GLOBAL VOID  vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 #endif
 
 #ifdef X86GFX
-    cs = getCS();
-    ip = getIP();
-    off = (cs << 4) + ip;
-    dwat = sas_dw_at(off);
-    if (dwat == 0xfb7401a8 || dwat == 0xfb7501a8)
-    {
-	ip += 4;
-	setIP(ip);
-	*value = 5;	/* anything really */
-    	return;
-    }
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
 
     note_entrance2("vga_ipstat1_inb(%x,%x)", port, value);

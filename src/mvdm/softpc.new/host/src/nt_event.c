@@ -202,7 +202,7 @@ ULONG event_thread_blocked_reason = 0xFFFFFFFF;
 
 HCURSOR cur_cursor = NULL;     /* Current cursor handle */
 #ifdef X86GFX
-half_word saved_text_lines; /* No of lines for last SelectMouseBuffer. */
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif /* X86GFX */
 
 
@@ -1064,7 +1064,7 @@ void nt_process_mouse(PMOUSE_EVENT_RECORD MouseEvent)
      * mouse interrupt handler code.
      */
 #ifdef X86GFX
-    if (sc.ScreenState == WINDOWED)
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif /* X86GFX */
     {
     ULONG maxWidth = sc.PC_W_Width,
@@ -1615,8 +1615,7 @@ void nt_resume_event_thread(void)
 
 	enable_stream_io();
 #ifdef X86GFX
-	/* tell video bios we are back to stream io */
-	sas_store_no_check( (int10_seg<<4)+useHostInt10, STREAM_IO);
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
 
     }

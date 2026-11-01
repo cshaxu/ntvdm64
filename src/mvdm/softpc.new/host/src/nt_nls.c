@@ -38,7 +38,7 @@ The following tables and routines are defined:
 char szDoomMsg[MAX_PATH]="";
 char szSysErrMsg[MAX_PATH]="";
 #ifdef X86GFX
-char szFrozenString[32];
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
 char szHideMouseMenuStr[64];
 char szDisplayMouseMenuStr[64];
@@ -97,12 +97,7 @@ void nls_init(void)
                        NULL
 		       )
 #ifdef X86GFX
-	 ||
-	!LoadString(GetModuleHandle(NULL),
-		    IDS_BURRRR,
-		    szFrozenString,
-		    sizeof(szFrozenString)/sizeof(CHAR)
-		    )
+/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
 #endif
 	 ||
 	!LoadString(GetModuleHandle(NULL),
