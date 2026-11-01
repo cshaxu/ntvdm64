@@ -53,7 +53,7 @@
 #ifdef	CPU_40_STYLE
 #define	BIOS2ROM_FILENAME	"bios4.rom"
 #else	/* CPU_40_STYLE */
-#define	BIOS2ROM_FILENAME	"bios2.rom"
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif	/* CPU_40_STYLE */
 #endif /* BIOS2ROM_FILENAME */
 
@@ -537,43 +537,7 @@ GLOBAL VOID patch_rom IFN2(sys_addr, addr, half_word, val)
 #endif /* GISP_SVGA */
 
 #else	/* CPU_40_STYLE */
-
-	/*
-	 * 4.0 style CPUs don't export this variable, and if sas hasn't been
-	 * inited, then the sas_connect will drop out to yoda.
-	 */
-
-	if (Length_of_M_area == 0) 
-		return;
- 
-	old_val = sas_hw_at( addr );
-
-	/* Optimisation - don't upset the world if the value is unchanged.
-	 */
-	if (old_val == val)
-		return;
-
-	sas_connect_memory (addr, addr, SAS_RAM);
-	sas_store (addr,val);
-	sas_connect_memory (addr, addr, SAS_ROM);
-/*
- *	Adjust the checksum value by new - old.
- *	val is now difference between new and old value.
- *	We don't do this for GISP_SVGA because the checksums are already
- *	screwed, and attempting to write to the real host system ROM would
- *	only make things worse!
- */
-
-#ifndef GISP_SVGA
-	val -= old_val;
-	old_val = sas_hw_at( 0xFFFFFL );
-
-	old_val -= val;
-	sas_connect_memory (0xFFFFFL, 0xFFFFFL, SAS_RAM);
-	sas_store (0xFFFFFL, old_val);
-	sas_connect_memory (0xFFFFFL, 0xFFFFFL, SAS_ROM);
-#endif /* GISP_SVGA */
-
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif	/* CPU_40_STYLE */
 
 #endif	/* !NTVDM | (NTVDM & !X86GFX) */
@@ -684,15 +648,7 @@ GLOBAL void display_string IFN1(char *, string_ptr)
 	*IncCpuPtrLS8(hostPtr) = '$';
 	*IncCpuPtrLS8(hostPtr) = '\0';
 #else /* CPU_40_STYLE */
-	sas_connect_memory(DOS_SCRATCH_PAD, DOS_SCRATCH_PAD_END, SAS_RAM);
-	sas_stores(cur_loc, (host_addr)string_ptr, strlen(string_ptr));
-	cur_loc += strlen(string_ptr);
-
-	/* Terminate the string */
-	sas_store(cur_loc, '$');
-	sas_store(cur_loc + 1, '\0');
-	sas_disconnect_memory(DOS_SCRATCH_PAD, DOS_SCRATCH_PAD_END);
-	cur_loc -= strlen(string_ptr);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif /* CPU_40_STYLE */
 #endif	/* !NTVDM | !MONITOR */
 	cur_loc+=strlen(string_ptr);

@@ -195,189 +195,7 @@ GLOBAL READ_POINTERS read_pointers;
 
 
 #ifndef CPU_40_STYLE	/* i.e. EVID without introducing an EVID define */
-#ifndef EGATEST
-#ifndef A3CPU
-#ifndef JOKER
-READ_POINTERS Glue_reads =
-{
-	glue_b_read,
-	glue_w_read
-
-#ifndef	NO_STRING_OPERATIONS
-	,
-	glue_str_read
-#endif	/* NO_STRING_OPERATIONS */
-};
-#endif /* JOKER */
-#endif /* A3CPU */
-#endif /* EGATEST */
-
-READ_POINTERS	simple_reads =
-{
-	_simple_b_read,
-	_simple_w_read
-
-#ifndef	NO_STRING_OPERATIONS
-	,
-	_simple_str_read
-#endif	/* NO_STRING_OPERATIONS */
-};
-
-READ_POINTERS	pointers_RAM_off =
-{
-	_rd_ram_dsbld_byte,
-	_rd_ram_dsbld_word
-
-#ifndef	NO_STRING_OPERATIONS
-	,
-	_rd_ram_dsbld_string
-#endif	/* NO_STRING_OPERATIONS */
-};
-
-READ_POINTERS	pointers_mode0_nch =
-{
-	_rdm0_byte_nch,
-	_rdm0_word_nch
-
-#ifndef	NO_STRING_OPERATIONS
-	,
-	_rdm0_string_nch
-#endif	/* NO_STRING_OPERATIONS */
-};
-
-#ifdef VGG
-READ_POINTERS	pointers_mode0_ch4 =
-{
-	_rdm0_byte_ch4,
-	_rdm0_word_ch4
-
-#ifndef	NO_STRING_OPERATIONS
-	,
-	_rdm0_string_ch4
-#endif	/* NO_STRING_OPERATIONS */
-};
-#endif
-
-READ_POINTERS	pointers_mode1_nch =
-{
-	_rdm1_byte_nch,
-	_rdm1_word_nch
-
-#ifndef	NO_STRING_OPERATIONS
-	,
-	_rdm1_string_nch
-#endif	/* NO_STRING_OPERATIONS */
-};
-
-#ifdef VGG
-READ_POINTERS	pointers_mode1_ch4 =
-{
-	_rdm1_byte_ch4,
-	_rdm1_word_ch4
-
-#ifndef	NO_STRING_OPERATIONS
-	,
-	_rdm1_string_ch4
-#endif	/* NO_STRING_OPERATIONS */
-};
-#endif
-
-#ifdef A_VID
-extern IU32 _ch2_md0_byte_read_glue();
-extern IU32 _ch2_md0_word_read_glue();
-extern void _ch2_md0_str_read_glue();
-
-extern IU32 _ch2_md1_byte_read_glue();
-extern IU32 _ch2_md1_word_read_glue();
-extern void _ch2_md1_str_read_glue();
-
-READ_POINTERS	pointers_mode0_ch2 =
-{
-	_ch2_md0_byte_read_glue,
-	_ch2_md0_word_read_glue
-
-#ifndef	NO_STRING_OPERATIONS
-	,
-	_ch2_md0_str_read_glue
-#endif	/* NO_STRING_OPERATIONS */
-};
-
-READ_POINTERS	pointers_mode1_ch2 =
-{
-	_ch2_md1_byte_read_glue,
-	_ch2_md1_word_read_glue
-
-#ifndef	NO_STRING_OPERATIONS
-	,
-	_ch2_md1_str_read_glue
-#endif	/* NO_STRING_OPERATIONS */
-};
-#else			/* AVID */
-
-extern void rdm0_string_ch2 IPT3(UTINY *, dest, ULONG, offset, ULONG, count );
-extern void rdm1_string_ch2 IPT3(UTINY *, dest, ULONG, offset, ULONG, count );
-extern IU32 rdm0_byte_ch2 IPT1(ULONG, offset );
-extern IU32 rdm1_byte_ch2 IPT1(ULONG, offset );
-extern IU32 rdm0_word_ch2 IPT1(ULONG, offset );
-extern IU32 rdm1_word_ch2 IPT1(ULONG, offset );
-
-READ_POINTERS	pointers_mode0_ch2 =
-{
-	rdm0_byte_ch2,
-	rdm0_word_ch2
-
-#ifndef	NO_STRING_OPERATIONS
-	,
-	rdm0_string_ch2
-#endif	/* NO_STRING_OPERATIONS */
-};
-
-READ_POINTERS	pointers_mode1_ch2 =
-{
-	rdm1_byte_ch2,
-	rdm1_word_ch2
-
-#ifndef	NO_STRING_OPERATIONS
-	,
-	rdm1_string_ch2
-#endif	/* NO_STRING_OPERATIONS */
-};
-
-#endif /* A_VID */
-
-
-#ifdef A3CPU
-#ifdef C_VID
-GLOBAL READ_POINTERS C_vid_reads;
-#endif /* C_VID */
-#else
-#ifdef C_VID
-GLOBAL READ_POINTERS C_vid_reads;
-#else
-GLOBAL READ_POINTERS A_vid_reads;
-#endif /* A_VID */
-#endif /* A3CPU */
-
-#ifndef GISP_CPU
-#if (defined(A_VID) && defined(A2CPU) && !defined(A3CPU)) || (defined(A3CPU) && defined(C_VID))
-extern IU32 _glue_b_read();
-extern IU32 _glue_w_read();
-extern void _glue_str_read();
-
-READ_POINTERS Glue_reads =
-{
-	_glue_b_read,
-	_glue_w_read
-
-#ifndef	NO_STRING_OPERATIONS
-	,
-	_glue_str_read
-#endif	/* NO_STRING_OPERATIONS */
-
-};
-#endif
-#endif /* GISP_CPU */
-
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #else	/* CPU_40_STYLE - evid */
 
 #ifdef C_VID
@@ -764,24 +582,7 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 		SetReadPointers(2);
 #else  /* CPU_40_STYLE */
-
-#ifndef GISP_CPU	
-#ifdef A3CPU
-#ifdef C_VID
-		Glue_set_vid_rd_ptrs( &pointers_RAM_off );
-#else
-		Cpu_set_vid_rd_ptrs( &pointers_RAM_off );
-#endif /* C_VID */
-#else
-		Glue_set_vid_rd_ptrs( &pointers_RAM_off );
-#endif /* A3CPU */
-#endif /* GISP_CPU */
-
-#ifndef	NO_STRING_OPERATIONS 
-		setVideofwd_str_read_addr(_rd_ram_dsbld_fwd_string_lge);
-		setVideofwd_str_read_addr(_rd_ram_dsbld_bwd_string_lge);
-#endif	/* NO_STRING_OPERATIONS */
-
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif  /* CPU_40_STYLE */
 
 		ram_off = TRUE;	/* prevent recalcs until ram enabled again */
@@ -801,12 +602,7 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(0);
 #else  /* CPU_40_STYLE */
-
-				read_ptrs = &pointers_mode0_nch;
-#ifndef	NO_STRING_OPERATIONS 
-				setVideofwd_str_read_addr(_rdm0_fwd_string_nch_lge);
-				setVideobwd_str_read_addr(_rdm0_bwd_string_nch_lge);
-#endif	/* NO_STRING_OPERATIONS */
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif	/* CPU_40_STYLE */
 				break;
 				
@@ -814,11 +610,7 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(0);
 #else  /* CPU_40_STYLE */
-
-				read_ptrs = &pointers_mode0_ch2;
-#ifndef	NO_STRING_OPERATIONS 
-				string_read_ptr = rdm0_string_ch2;
-#endif	/* NO_STRING_OPERATIONS */
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif	/* CPU_40_STYLE */
 				EGA_CPU.read_mapped_plane_ch2 = EGA_planes +
 							(getVideoread_mapped_plane() & 2)*EGA_PLANE_SIZE;
@@ -829,13 +621,7 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(0);
 #else  /* CPU_40_STYLE */
-
-				read_ptrs = &pointers_mode0_ch4;
-#ifndef	NO_STRING_OPERATIONS 
-				setVideofwd_str_read_addr(_rdm0_fwd_string_ch4_lge);
-				setVideobwd_str_read_addr(_rdm0_bwd_string_ch4_lge);
-#endif
-
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif	/* CPU_40_STYLE */
 				break;
 #endif	/* VGG */
@@ -854,12 +640,7 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(1);
 #else  /* CPU_40_STYLE */
-
-				read_ptrs = &pointers_mode1_nch;
-#ifndef	NO_STRING_OPERATIONS 
-				setVideofwd_str_read_addr(_rdm1_fwd_string_nch_lge);
-				setVideobwd_str_read_addr(_rdm1_bwd_string_nch_lge);
-#endif	/* NO_STRING_OPERATIONS */
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif	/* CPU_40_STYLE */
 				break;
 
@@ -877,12 +658,7 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(1);
 #else  /* CPU_40_STYLE */
-
-				read_ptrs = &pointers_mode1_ch2;
-#ifndef	NO_STRING_OPERATIONS 
-				string_read_ptr = rdm1_string_ch2;
-#endif	/* NO_STRING_OPERATIONS */
-
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif	/* CPU_40_STYLE */
 
 				break;
@@ -895,12 +671,7 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(1);
 #else  /* CPU_40_STYLE */
-
-				read_ptrs = &pointers_mode1_ch4;
-#ifndef	NO_STRING_OPERATIONS 
-				setVideofwd_str_read_addr(_rdm1_fwd_string_ch4_lge);
-				setVideobwd_str_read_addr(_rdm1_bwd_string_ch4_lge);
-#endif	/* NO_STRING_OPERATIONS */
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif	/* CPU_40_STYLE */
 				break;
 #endif	/* VGG */
@@ -911,17 +682,7 @@ ega_read_routines_update IFN0()
 	update_banking();
 
 #ifndef CPU_40_STYLE
-#ifndef GISP_CPU
-#ifdef A3CPU
-#ifdef C_VID
-	Glue_set_vid_rd_ptrs( read_ptrs );
-#else
-	Cpu_set_vid_rd_ptrs( read_ptrs );
-#endif /* C_VID */
-#else
-	Glue_set_vid_rd_ptrs( read_ptrs );
-#endif /* A3CPU */
-#endif /* GISP_CPU */
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif	/* CPU_40_STYLE */
 }
 
@@ -936,11 +697,7 @@ ega_read_init IFN0()
 #ifdef CPU_40_STYLE
 	SetReadPointers(2);
 #else  /* CPU_40_STYLE */
-
-#ifndef	NO_STRING_OPERATIONS 
-	setVideofwd_str_read_addr(_rd_ram_dsbld_fwd_string_lge);
-	setVideobwd_str_read_addr(_rd_ram_dsbld_bwd_string_lge);
-#endif	/* NO_STRING_OPERATIONS */
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif	/* CPU_40_STYLE */
 
 	setVideoread_mapped_plane(0);
@@ -956,18 +713,7 @@ ega_read_init IFN0()
 #endif /* EGATEST */
 
 #ifndef CPU_40_STYLE
-#ifndef GISP_CPU
-#ifdef A3CPU
-#ifdef C_VID
-	Cpu_set_vid_rd_ptrs( &Glue_reads );
-	Glue_set_vid_rd_ptrs( &pointers_mode0_nch );
-#else
-	Cpu_set_vid_rd_ptrs( &pointers_mode0_nch );
-#endif	/* C_VID */
-#else	/* A3CPU */
-	Glue_set_vid_rd_ptrs( &pointers_mode0_nch );
-#endif	/* A3CPU */
-#endif /* GISP_CPU */
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif	/* CPU_40_STYLE */
 }
 
@@ -982,18 +728,7 @@ ega_read_term IFN0()
 #ifdef CPU_40_STYLE
 		SetReadPointers(3);
 #else  /* CPU_40_STYLE */
-
-#ifndef GISP_CPU
-#ifdef A3CPU
-#ifdef C_VID
-	Glue_set_vid_rd_ptrs( &simple_reads );
-#else
-	Cpu_set_vid_rd_ptrs( &simple_reads );
-#endif /* C_VID */
-#else
-	Glue_set_vid_rd_ptrs( &simple_reads );
-#endif /* A3CPU */
-#endif /* GISP_CPU */
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif	/* CPU_40_STYLE */
 }
 

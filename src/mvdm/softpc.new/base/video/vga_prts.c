@@ -709,7 +709,7 @@ GLOBAL VOID	vga_init IFN0()
 	io_define_out_routines(EGA_GC_ADAP_INDEX, vga_gc_outb_index, vga_gc_outw, NULL, NULL);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-	Cpu_define_outb(EGA_GC_ADAP_INDEX,_vga_gc_outb_index);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 
 	io_define_outb(EGA_GC_ADAP_DATA,ega_gc_set_reset);
@@ -2207,16 +2207,13 @@ GLOBAL VOID	vga_gc_mask IFN2(USHORT,port,FAST UTINY,value)
 		ega_gc_regs[8] = FAST_FUNC_ADDR(vga_gc_mask_ff);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-#ifndef A2CPU
-		/* Alter the function table used by assembler ega_gc_index */
-		ega_gc_regs_cpu[8] = FAST_FUNC_ADDR(_ega_gc_outb_mask_ff);
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 
 		io_redefine_outb(EGA_GC_ADAP_DATA,vga_gc_mask_ff);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-		Cpu_define_outb(EGA_GC_ADAP_DATA,_ega_gc_outb_mask_ff);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 	}
 }
@@ -2257,16 +2254,13 @@ GLOBAL VOID	vga_gc_mask_ff IFN2(USHORT,port,FAST UTINY,value)
 		ega_gc_regs[8] = FAST_FUNC_ADDR(vga_gc_mask);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-#ifndef A2CPU
-		/* Alter the function table used by assembler ega_gc_index */
-		ega_gc_regs_cpu[8] = FAST_FUNC_ADDR(_ega_gc_outb_mask);
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 
 		io_redefine_outb(EGA_GC_ADAP_DATA,vga_gc_mask);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-		Cpu_define_outb(EGA_GC_ADAP_DATA,_ega_gc_outb_mask);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 	}
 }

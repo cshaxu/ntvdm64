@@ -4208,13 +4208,7 @@ print_pla IFN3(IU16, cs, LIN_ADDR, ip, enum pla_type, what)
 		fprintf (trace_file, "%s", buff);
 		break;
 #else	/* CPU_40_STYLE */
-	case pla_type_code:
-		(void)dasm(buff,
-			   (word)cs,
-			   ip,
-			   CsIsBig(cs) ? THIRTY_TWO_BIT: SIXTEEN_BIT);
-		fprintf (trace_file, "%s", buff);
-		break;
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif	/* CPU_40_STYLE */
 	case pla_type_bop_done:
 		fprintf(trace_file, "---- %16s ---- BOP %02x completed\n", "", ip);
@@ -4245,11 +4239,7 @@ print_pla IFN3(IU16, cs, LIN_ADDR, ip, enum pla_type, what)
 	}
 }
 #else /* CPU_40_STYLE */
-LOCAL void
-print_pla IFN2(IU16, cs, LIN_ADDR, ip)
-{
-	fprintf(trace_file, "Last address = %04x:%04x\n", cs, ip);
-}
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif /* CPU_40_STYLE */
 
 LOCAL YODA_COMMAND(do_pla)
@@ -4276,7 +4266,7 @@ LOCAL YODA_COMMAND(do_pla)
 #ifdef	CPU_40_STYLE
 		print_pla(last_cs[i], last_ip[i], last_type[i]);
 #else
-		print_pla(last_cs[i], last_ip[i]);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 
 	/* Print the start of the buffer. */
@@ -4289,7 +4279,7 @@ LOCAL YODA_COMMAND(do_pla)
 #ifdef	CPU_40_STYLE
 		print_pla(last_cs[i], last_ip[i], last_type[i]);
 #else
-		print_pla(last_cs[i], last_ip[i]);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 
 	return(YODA_LOOP);

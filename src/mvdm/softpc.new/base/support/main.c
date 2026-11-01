@@ -110,7 +110,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
   IMPORT ULONG setup_global_data_ptr();
 
 #ifndef	CPU_40_STYLE
-  IMPORT ULONG Gdp;
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif	/* CPU_40_STYLE */
 
 #ifdef SECURE

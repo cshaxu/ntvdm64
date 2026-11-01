@@ -590,7 +590,7 @@ Return Value:
     //BUGBUG turn off task bits
     SaveEFLAGS &= ~0x4000;
 #if !defined(CPU_40_STYLE)
-    setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 
     if (!(getMSW() & MSW_PE)) {
@@ -631,7 +631,7 @@ Return Value:
             /* PushInt changes DX after loading the return EIP into EDX. */
             *(PDWORD16)(VdmStackPointer-8) = (getEIP() & 0xffff0000UL) | getCS();
 #else
-            *(PDWORD16)(VdmStackPointer-8) =  getCS();
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
             *(PDWORD16)(VdmStackPointer-12) = getEIP();
         } else {
@@ -1211,9 +1211,7 @@ BuildStackFrameWithWidth(
     BOOL WideFrame,
     BOOL NativePushInt,
 #else
-BOOL
-BuildStackFrame(
-    ULONG StackUnits,
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
     PUCHAR *pVdmStackPointer,
     ULONG *pNewSP
@@ -1282,7 +1280,7 @@ Notes:
     #if defined(CPU_40_STYLE)
     if (WideFrame) {
     #else
-    if (CurrentAppFlags) {
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
     #endif
         StackOffset = StackUnits*sizeof(DWORD);
     } else {

@@ -145,10 +145,7 @@ LOCAL word              saved_int71_offset;
 #define OUTB(port, val) outb(port, val)
 
 #else
-
-IMPORT VOID (**get_outb_ptr())();
-#define	OUTB(port, val) (**get_outb_ptr(port))(port, val)
-
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif /* CPU_40_STYLE */
 
 /*
@@ -6557,7 +6554,7 @@ LOCAL void jump_to_user_subroutine IFN3(MOUSE_CALL_MASK,condition_mask,word,segm
 	 * that entry.  Keep HOST_BOP_IP_FUDGE for its other, actual BOP callers. */
 	setIP(offset);
 #else
-	setIP(offset + HOST_BOP_IP_FUDGE);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 
 	/*

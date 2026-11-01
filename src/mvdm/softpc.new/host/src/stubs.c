@@ -161,26 +161,7 @@ GLOBAL void host_sigio_event IPT0()
 
 #ifndef GENERIC_NPX
 #ifndef CPU_40_STYLE
-int get_287_sp()
-{
-	 extern char *GDP;
-	 return((int) (*(ULONG *)(GDP + 0x70))/8);
-}
-word get_287_tag_word()
-{
-	 extern char *GDP;
-	 return((int) *(ULONG *)(GDP + 0x74));
-}
-word get_287_control_word()
-{
-	 extern char *GDP;
-	 return((int) *(ULONG *)(GDP + 0x68));
-}
-word get_287_status_word()
-{
-	 extern char *GDP;
-        return((int) *(ULONG *)(GDP + 0x6c));
-}
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif /* CPU_40_STYLE */
 #endif /* GENERIC_NPX */
 #endif

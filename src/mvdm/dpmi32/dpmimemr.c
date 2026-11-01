@@ -263,13 +263,7 @@ Return Value:
     /* See MVDM-HOST-DIV-224: report the actual shared XMS pool. */
     SAQueryFree(ExtMemSA, &TotalFree, &LargestFree);
 #else
-    if (Status == STATUS_NOT_IMPLEMENTED) {
-        SAQueryFree(
-            ExtMemSA,
-            &TotalFree,
-            &LargestFree
-            );
-    }
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
     
     //

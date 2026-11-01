@@ -666,7 +666,7 @@ ica_interrupt_cpu IFN2(IU32, adapter, IU32, line)
          */
 
 #ifndef CPU_40_STYLE	/* No globals in the 4.0 I/F! */
-	cpu_int_delay = 0;
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 
         host_set_hw_int();
@@ -1703,8 +1703,7 @@ ica_iret_hook_called IFN1(IU32, abs_line)
 	if (asp->isr_depth[line] < MAX_ISR_DEPTH)
 		iretHookActive &= ~(1 << abs_line);
 #else
-	UNUSED(asp);	/* anti warning */
-	iretHookActive &= ~(1 << abs_line);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif	/* CPU_40_STYLE */
 
 

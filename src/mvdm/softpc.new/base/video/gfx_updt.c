@@ -3584,13 +3584,7 @@ GLOBAL VOID screen_refresh_required IFN0()
 #endif /* GORE */
 
 #ifndef CPU_40_STYLE
-	/*
-         * This is to stop the VGA globals pointer being
-         * dereferenced before it is set up in main.c.
-         */
-
-        if (VGLOBS)
-                VGLOBS->dirty_flag = 1000000L;
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #else
 	setVideodirty_total(1000000L);
 #endif	/* CPU_40_STYLE */
@@ -3619,10 +3613,7 @@ set_mark_funcs IFN0()
 			update_alg.mark_string = simple_update;
 
 #ifndef CPU_40_STYLE	/* EVID */
-			setVideomark_byte(FAST_FUNC_ADDR(_simple_mark_sml));
-			setVideomark_word(FAST_FUNC_ADDR(_simple_mark_sml));
-
-			SET_VGLOBS_MARK_STRING(_simple_mark_lge);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #else	/* CPU_40_STYLE - EVID */
 			SetMarkPointers(0);
 #endif	/* CPU_40_STYLE - EVID */
@@ -3636,10 +3627,7 @@ set_mark_funcs IFN0()
 			update_alg.mark_string = cga_mark_string;
 
 #ifndef CPU_40_STYLE	/* EVID */
-			setVideomark_byte(FAST_FUNC_ADDR(_cga_mark_byte));
-			setVideomark_word(FAST_FUNC_ADDR(_cga_mark_word));
-
-			SET_VGLOBS_MARK_STRING(_cga_mark_string);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #else	/* CPU_40_STYLE - EVID */
 			SetMarkPointers(1);
 #endif	/* CPU_40_STYLE - EVID */
@@ -3674,10 +3662,7 @@ set_mark_funcs IFN0()
 					SET_VGLOBS_MARK_STRING(gore_mark_string_nch);
 #else
 #ifndef CPU_40_STYLE	/* EVID */
-					setVideomark_byte(FAST_FUNC_ADDR(_mark_byte_nch));
-					setVideomark_word(FAST_FUNC_ADDR(_mark_word_nch));
-
-					SET_VGLOBS_MARK_STRING(_mark_string_nch);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #else	/* CPU_40_STYLE - EVID */
 					SetMarkPointers(2);
 #endif	/* CPU_40_STYLE - EVID */
@@ -3698,10 +3683,7 @@ set_mark_funcs IFN0()
 					SET_VGLOBS_MARK_STRING(gore_mark_string_ch4);
 #else
 #ifndef CPU_40_STYLE	/* EVID */
-					setVideomark_byte(FAST_FUNC_ADDR(_mark_byte_ch4));
-					setVideomark_word(FAST_FUNC_ADDR(_mark_word_ch4));
-
-					SET_VGLOBS_MARK_STRING(_mark_string_ch4);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #else	/* CPU_40_STYLE - EVID */
 					SetMarkPointers(3);
 #endif	/* CPU_40_STYLE - EVID */
@@ -4196,12 +4178,7 @@ void mon_text_update()
     /*::::::::::::::::::::::::::::::::::::::::::::::: Has the screen changed */
 
 #ifndef CPU_40_STYLE
-#if defined(NTVDM)
-    if( VGLOBS && VGLOBS->dirty_flag >= 1000000L ){
-#else
-    if( VGLOBS && VGLOBS->dirtyTotal >= 1000000L ){
-#endif
-
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #else
     if(getVideodirty_total() >= 1000000L ){
 #endif

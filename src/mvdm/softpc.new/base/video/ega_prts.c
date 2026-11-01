@@ -1878,9 +1878,7 @@ init_vga_globals IFN0()
 	setVideorotate(0);
 #if !defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX))
 #ifndef CPU_40_STYLE	/* EVID */
-	setVideomark_byte(_simple_mark_sml);
-	setVideomark_word(_simple_mark_sml);
-	setVideomark_string(_simple_mark_lge);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #else
 	SetMarkPointers(0);
 #endif	/* CPU_40_STYLE - EVID */
@@ -1921,7 +1919,7 @@ void	ega_init IFN0()
 	io_define_out_routines(EGA_GC_ADAP_INDEX, ega_gc_outb_index, ega_gc_outw, NULL, NULL);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-	Cpu_define_outb(EGA_GC_ADAP_INDEX,_ega_gc_outb_index);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 
 	io_define_outb(EGA_GC_ADAP_DATA,ega_gc_set_reset);
@@ -2995,16 +2993,13 @@ LOCAL void	ega_gc_mask IFN2(io_addr, port, half_word, value)
 		ega_gc_regs[8] = ega_gc_mask_ff;
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-#ifndef A2CPU
-		/* Alter the function table used by assembler ega_gc_index */
-		ega_gc_regs_cpu[8] = _ega_gc_outb_mask_ff;
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 
 		io_redefine_outb(EGA_GC_ADAP_DATA,ega_gc_mask_ff);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-		Cpu_define_outb(EGA_GC_ADAP_DATA,_ega_gc_outb_mask_ff);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 	}
 }
@@ -3043,16 +3038,13 @@ void	ega_gc_mask_ff IFN2(io_addr, port, half_word, value)
 		ega_gc_regs[8] = ega_gc_mask;
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-#ifndef A2CPU
-		/* Alter the function table used by assembler ega_gc_index */
-		ega_gc_regs_cpu[8] = _ega_gc_outb_mask;
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 
 		io_redefine_outb(EGA_GC_ADAP_DATA,ega_gc_mask);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-		Cpu_define_outb(EGA_GC_ADAP_DATA,_ega_gc_outb_mask);
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 	}
 }

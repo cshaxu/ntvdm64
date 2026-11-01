@@ -1487,7 +1487,7 @@ OUTPUT:		None.
 GLOBAL void setup_vga_globals IFN0()
 {
 #ifndef CPU_40_STYLE	/* Evid interface */
-	VGLOBS = &CgaOnlyGlobs;
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 }
 #endif	/* not EGG or C_VID or A_VID */

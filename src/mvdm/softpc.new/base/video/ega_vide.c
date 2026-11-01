@@ -1134,7 +1134,7 @@ GLOBAL void ega_set_mode IFN0()
 			host_mswin_disable();
 		}
 #else
-		host_mswin_disable();
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif /* CPU_40_STYLE */
 	}
 #endif /* MSWDVR */

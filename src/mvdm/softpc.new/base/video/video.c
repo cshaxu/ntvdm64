@@ -1887,14 +1887,7 @@ GLOBAL void vd_read_dot IFN0()
 #define OUTB(port, val) outb(port, val)
 
 #else
-
-#ifdef NTVDM
-#define OUTB( port, val ) {  hack=get_outb_ptr(port); \
-                             (**hack)(port,val); }
-#else
-#define OUTB( port, val )	(**get_outb_ptr( port ))( port, val )
-#endif /* NTVDM */
-
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif /* CPU_40_STYLE */
 
 GLOBAL void vd_write_teletype IFN0()

@@ -239,8 +239,7 @@ GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
 {
     word seg, off;
 #ifndef CPU_40_STYLE
-    double_word descr_addr;
-    DESCR entry;
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 
     seg = (word)(addr>>16);

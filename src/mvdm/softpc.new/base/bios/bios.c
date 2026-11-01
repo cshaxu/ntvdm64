@@ -61,7 +61,7 @@ extern void get_lar();
 #ifdef CPU_40_STYLE
 #define SWAP_INSTANCE virtual_swap_instance()
 #else
-#define SWAP_INSTANCE
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -535,7 +535,7 @@ void (*BIOS[])() = {
 #ifdef CPU_40_STYLE
 			virtual_device_trap,	/* BOP B1 */
 #else
-			illegal_bop,	/* BOP B1 */
+/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
 #endif
 			illegal_bop,	/* BOP B2 */
 			illegal_bop,	/* BOP B3 */
