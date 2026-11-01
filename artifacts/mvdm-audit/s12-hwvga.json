@@ -1,0 +1,9 @@
+{
+  "path": "src/mvdm/softpc.new/base/inc/hwvga.h",
+  "baseline": "88ad10bda",
+  "start": 25,
+  "end": 97,
+  "removed_lines": 71,
+  "removed_sha256": "26e80211282ef4cb6b255f7ca89f919f3c2f18ee4eea0e832e013e341b4225b7",
+  "original_sha256": "6b05bcb5cbe9ce8a344a9ac39dbc50c3b302d28481a063e4579b299edb39865b"
+}

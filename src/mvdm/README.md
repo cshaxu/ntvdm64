@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-534: replace the unreferenced GISP hardware VGA interface body
+in `hwvga.h` with a marker, retaining the outer conditional and provenance.
+The original file and body hashes are in
+`../../artifacts/mvdm-audit/s12-hwvga.json`; software VGA is unchanged.
+
 MVDM-HOST-DIV-533: reduce the original `mouse16b.h` to its retained include
 guard and an exclusion marker after its last unselected implementation
 references were removed. Its original file and body hashes are recorded in
