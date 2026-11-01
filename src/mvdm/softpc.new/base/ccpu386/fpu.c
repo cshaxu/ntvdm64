@@ -259,7 +259,7 @@ GLOBAL BOOL NpxException;
 */
 
 #ifdef SUN4
-LOCAL IU8 *FPout; /* HostGet*Exception() macros need this for Sparc ports. */
+/* DIVERGENCE MVDM-HOST-DIV-536: SUN4 branch is not selected; see mirror register. */
 #endif /* SUN4 */
 
 LOCAL IU32 NpxControl;

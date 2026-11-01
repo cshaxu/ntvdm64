@@ -53,16 +53,7 @@ void force_yoda()
 {
 }
 #ifdef NONPROD_CPU
-
-/* this allows a non-prod CPU to be linked into a PROD build
- * handy for pre-release demo versions if you don't fancy doing a
- * full PROD cpu+vid just to keep management happy....
- */
-int  do_condition_checks = 0;
-#undef check_I
-void check_I IFN0()
-{
-}
+/* DIVERGENCE MVDM-HOST-DIV-536: NONPROD_CPU branch is not selected; see mirror register. */
 #endif /* NONPROD_CPU */
 #ifdef DELTA
 void delta_check_I()
@@ -109,9 +100,7 @@ void delta_check_I()
 #ifndef SFELLOW
 #include "host_gfx.h"
 #ifdef NEXT /* until someone sorts out the host_timeval interface */
-#include "timeval.h"
-#include "host_hfx.h"
-#include "hfx.h"
+/* DIVERGENCE MVDM-HOST-DIV-536: NEXT branch is not selected; see mirror register. */
 #else /* ifdef NEXT */
 #include "host_hfx.h"
 #include "hfx.h"
@@ -2207,7 +2196,7 @@ LOCAL char * fff_strings[] = {
 "It's not a bug, it's a feature",
 "Why are you always finding fault? Can't you appreciate me for what I am?",
 #ifdef SUNOS50
-"You're running Solaris, and you don't KNOW what the problem is?????",
+/* DIVERGENCE MVDM-HOST-DIV-536: SUNOS50 branch is not selected; see mirror register. */
 #endif /* SUNOS50 */
 "Sorry, there is no faul                             "
 };
@@ -4749,7 +4738,7 @@ static struct
 #endif	/* GENERIC_NPX && !CPU_40_STYLE */
 
 #ifdef MSWDVR_DEBUG
-{ "mswdvr_debug", do_mswdvr_debug, FALSE, "<0|1|2|3>", "Set MSWDVR debug verbosity"},
+/* DIVERGENCE MVDM-HOST-DIV-536: MSWDVR_DEBUG branch is not selected; see mirror register. */
 #endif /* MSWDVR_DEBUG */
 
 #ifdef GISP_SVGA

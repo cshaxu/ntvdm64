@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-536: replace unselected small historical diagnostic, tool and
+host-platform branches with markers, preserving conditionals. Exact labels,
+source ranges and hashes are in
+`../../artifacts/mvdm-audit/s12-small-legacy.jsonl`.
+
 MVDM-HOST-DIV-535: replace unselected REAL_KBD, REAL_ROM and A_VID branch
 bodies with markers, retaining their original conditionals. Original ranges
 and body hashes are in `../../artifacts/mvdm-audit/s12-hardware-legacy.jsonl`.

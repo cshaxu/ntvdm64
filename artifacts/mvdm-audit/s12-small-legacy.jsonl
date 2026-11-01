@@ -1,0 +1,11 @@
+{"path":"src/mvdm/softpc.new/base/ccpu386/c_stack.c","start":291,"end":293,"removed_lines":1,"sha256":"52bd48c55a59bd8600b5efba27b8660f760a2a108d63ebc4af4bd3fde12552d9","tag":"PIG_DONT_CHECK_OTHER_WORD_ON_STACK","baseline":"4dad5f52c"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":4751,"end":4753,"removed_lines":1,"sha256":"350b5606c2136f635159a985e13a05f9412edc4616ba485f131e63c05fe168c9","tag":"MSWDVR_DEBUG","baseline":"4dad5f52c"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":2209,"end":2211,"removed_lines":1,"sha256":"d16e9bf3e84014002c23cca30a1ecb1176ea5b975bba5d2dece1297766939ac3","tag":"SUNOS50","baseline":"4dad5f52c"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":111,"end":115,"removed_lines":3,"sha256":"601e70d4069422f8d3e3b9b597fc1e83f0fb67b1f272a989a73bc02c6814a8f8","tag":"NEXT","baseline":"4dad5f52c"}
+{"path":"src/mvdm/softpc.new/base/debug/yoda.c","start":55,"end":66,"removed_lines":10,"sha256":"06cd02711c1ff1ccb21f59355712356c4a58742eaac1c273538b9b322e2f7d6e","tag":"NONPROD_CPU","baseline":"4dad5f52c"}
+{"path":"src/mvdm/softpc.new/base/debug/profile.c","start":2623,"end":2636,"removed_lines":12,"sha256":"8170ecc9da5dbf5f2cc4e3f9dd92c596827ae5349517827590155b23bbc9e303","tag":"DEBUGGING_PROF","baseline":"4dad5f52c"}
+{"path":"src/mvdm/softpc.new/base/inc/base_def.h","start":23,"end":25,"removed_lines":1,"sha256":"3b03f02cad980e8a9ac9cc28a827498288c6f5acbf70d25d9aaae3e644e72635","tag":"lint","baseline":"4dad5f52c"}
+{"path":"src/mvdm/inc/mvdm.h","start":22,"end":35,"removed_lines":12,"sha256":"518de765cc9fb36d8031dc05bf9238dd74d93bba15dbbc6aa5a26f4614b210dd","tag":"H2INC","baseline":"4dad5f52c"}
+{"path":"src/mvdm/softpc.new/base/ccpu386/fpu.c","start":261,"end":263,"removed_lines":1,"sha256":"965b4fe9630d4207bf530715e6fa970c680c7e78656f2c000bff65e9f2dd8ca9","tag":"SUN4","baseline":"4dad5f52c"}
+{"path":"src/mvdm/softpc.new/base/inc/rs232.h","start":349,"end":353,"removed_lines":3,"sha256":"121e2f11d9bf11ca75a4e0921a7da7d602d0f2bcb43d14d50371117f4e9c7b3e","tag":"SVID3_TCGET","baseline":"4dad5f52c"}
+{"path":"src/mvdm/inc/wow.h","start":58,"end":61,"removed_lines":2,"sha256":"8a421b9641b61a93d69ebbf46fd3d8fdf532ee1a1beaee946c9c54be599ae218","tag":"NOLOG","baseline":"4dad5f52c"}

@@ -20,18 +20,7 @@
 /* Common types, not defined in NT/WIN32
  */
 #ifdef H2INC
-typedef unsigned char BYTE;
-typedef unsigned short WORD;
-typedef unsigned long DWORD;
-typedef long LONG;
-typedef char CHAR;
-typedef short SHORT;
-typedef unsigned short USHORT;
-typedef unsigned long ULONG;
-typedef char *PSZ;
-typedef void *PVOID;
-typedef ULONG *PULONG;
-typedef WORD ATOM;
+/* DIVERGENCE MVDM-HOST-DIV-536: H2INC branch is not selected; see mirror register. */
 #endif
 
 // typedef int INT;

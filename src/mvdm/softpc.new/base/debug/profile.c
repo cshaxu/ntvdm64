@@ -2621,18 +2621,7 @@ CollateSequenceGraph IFN1 (FILE *, stream)
     IU8 walked;				/* masked state per node */
 
 #ifdef DEBUGGING_PROF 	/* for seq graph */
-graphn = EventGraph;
-while (graphn)
-{
-    printf("Node %s @ %x arg %x succ1 %x succ2 %x xtra %x\n",graphn->graphEOI->tag, graphn, graphn->graphArg, graphn->succ1, graphn->succ2, graphn->extra);
-	gr = graphn->extra;
-	while (gr != GRAPHPTRNULL)
-	{
-		printf("    succ1 %x succ2 %x ext %x\n", gr->succ1, gr->succ2, gr->extra);
-		gr = gr->extra;
-	}
-    graphn = graphn->next;
-}
+/* DIVERGENCE MVDM-HOST-DIV-536: DEBUGGING_PROF branch is not selected; see mirror register. */
 #endif /* DEBUGGING_PROF for seq graph */
 
     if (EventGraph == GRAPHPTRNULL)

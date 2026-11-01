@@ -289,7 +289,7 @@ IFN1(
       addr = GET_SS_BASE() + GetStackPointer();
       vir_write_word(addr, NO_PHYSICAL_MAPPING, (IU16)data);
 #ifdef	PIG_DONT_CHECK_OTHER_WORD_ON_STACK
-      cannot_vir_write_word(addr+2, NO_PHYSICAL_MAPPING, 0x0000);
+/* DIVERGENCE MVDM-HOST-DIV-536: PIG_DONT_CHECK_OTHER_WORD_ON_STACK branch is not selected; see mirror register. */
 #endif	/* PIG_DONT_CHECK_OTHER_WORD_ON_STACK */
       }
    }

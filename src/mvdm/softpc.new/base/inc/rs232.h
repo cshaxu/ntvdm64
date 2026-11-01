@@ -347,9 +347,7 @@ extern void tx_holding_register_empty(int adapter);
  */
 
 #ifdef SVID3_TCGET
-#define	TCGET TCGETS
-#define	TCSET TCSETS
-#define	TCSETF TCSETSF
+/* DIVERGENCE MVDM-HOST-DIV-536: SVID3_TCGET branch is not selected; see mirror register. */
 #else
 #define	TCGET TCGETA
 #define	TCSET TCSETA
