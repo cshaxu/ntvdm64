@@ -1,5 +1,9 @@
 # mvdm
 
+MVDM-HOST-DIV-549: restore original CPU30/CCPU/A2CPU conditional shells in
+`nt_cprgs.c` without changing the selected CPU40 branch. Evidence:
+`../../artifacts/mvdm-audit/conditional-skeleton-cprgs.md`.
+
 MVDM-HOST-DIV-548: restore original nested excluded conditional structures
 and anchored historical MONITOR/CPU30 shells; deleted bodies use `#error`.
 Evidence: `../../artifacts/mvdm-audit/conditional-skeleton-nested-batch.md`.

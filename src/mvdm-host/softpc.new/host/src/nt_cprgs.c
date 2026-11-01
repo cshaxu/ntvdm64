@@ -152,6 +152,16 @@ GLOBAL VOID		(*host_simulate_func) ();
  * soft_ccpu register-state implementation when the supported CPU_40_STYLE
  * profile is built without CPU_30_STYLE.  Select the same CCPU vector
  * branch explicitly for CPU40; CPU30 is neither defined nor linked. */
+#ifdef CPU_30_STYLE
+#error Excluded original CPU_30_STYLE branch
+#ifdef CCPU
+#error Excluded original conditional branch
+#endif
+#ifdef A3CPU
+#error Excluded original conditional branch
+#endif
+#else
+#line 155
 #if defined(CPU_40_STYLE)
 
 #ifdef CCPU
@@ -241,7 +251,234 @@ GLOBAL VOID load_sw_cpu_access_functions()
 
 #else /* CPU_40_STYLE */
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
+#ifdef CCPU
+#error Excluded original conditional branch
+#endif CCPU
+#ifdef A2CPU
+#error Excluded original conditional branch
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#ifdef MIKE_DEBUG
+#error Excluded original conditional branch
+#endif MIKE_DEBUG
+#endif A2CPU
 #endif /* CPU_40_STYLE */
+#endif
+#line 244
 
 
 

@@ -1,0 +1,7 @@
+# T473 conditional restoration — nt_cprgs
+
+Restored the original outer CPU_30_STYLE conditional and 154 inner directives from the pinned OpenNT `nt_cprgs.c` while retaining the previously selected CPU40 CCPU initialization branch. Deleted CPU30/alternate bodies fail with `#error`; CPU30 execution is not enabled. The existing CPU40 selection and CCPU providers are unchanged. `#line` preserves selected diagnostics. Registration: MVDM-HOST-DIV-549.
+
+Original ownership distinction: original `base/support/main.c` calls `cpu_init`, and original CPU40 CCPU maps that to `c_cpu_init`. The original `host_cpu.h` vector macros are guarded by CPU_30_STYLE; original `nt_cpu.c` `host_simulate` calls `cpu_simulate` directly. The project's existing DIV-151 and DIV-182 select and install the separate access-vector initializer for its current composition. This observation does not establish that original CPU40 needs that access vector or that the project adaptations are minimal; removing them requires a separate complete consumer and call-chain proof and is not part of this structural change.
+
+The x86 cached NTVDM target built successfully. Compared with the published text-aperture package, `.text` and `.data` match byte-for-byte; `.rdata` differs only in two bytes within the PE debug-directory timestamp. This does not claim whole-image identity. Guest was not modified or rebuilt. Other unmatched conditional candidates remain open.
