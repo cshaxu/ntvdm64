@@ -86,8 +86,8 @@ runtime: the owner clarified boundary-recovery scope.
 | --- | --- |
 | Identifier Mode | M0 T473 S12, Ordinary Mode. |
 | Admission And Approval | Owner inserted the source-layout rename after S11; input handoff is deferred to S13. |
-| Objective | Audit and remove proven excluded mirror branch bodies while retaining conditional structure and registering each divergence; original-path correction is published. |
-| Delivery State | Original-path correction published; owner extended S12 to audit and mark excluded mirror branches. DOS4GW external fixture skipped. |
+| Objective | Clean proven excluded mirror branches with registered markers; exclude shared code from further removal. |
+| Delivery State | Owner-bounded [cleanup checkpoint](../../artifacts/mvdm-audit/s12-cleanup-freeze.md); prior shared-header changes and remaining selections need disposition. |
 | Non-goals | Guest modification or rebuilding, semantic rewrites, new compatibility behavior. |
 | Reference Baseline | S11 closure and source policy; original host and ABI trees have three nonidentical colliding paths. |
 | Files And ABI Surface | Source roots, builds, tests, provenance and current authority references; preserve source cohorts. |
