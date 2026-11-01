@@ -1,5 +1,13 @@
 # mvdm
 
+MVDM-HOST-DIV-545: select the current V86 VM's standard text aperture from
+its BIOS video mode for text reads, writes and scrolling. The physical VGA
+may remain in a graphics mode while a Win3.1 DOS VM uses virtual text pages;
+using the physical graphics aperture there sends BIOS output to the wrong
+guest address. Virtual text scrolling must use SAS rather than a physical
+screen optimization. Non-V86 and graphics paths keep their original base.
+See `../../docs/etc/evidence/m0-t473-s13-input-handoff.md`.
+
 MVDM-HOST-DIV-544: admit the CPU40 protected-instruction monitor only while
 the existing NT DPMI fault handler is installed. `DpmiDpmiInUse` and
 `DpmiDpmiNoLongerInUse` already own that registration; without it, a guest
