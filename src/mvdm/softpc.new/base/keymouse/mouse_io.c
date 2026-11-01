@@ -1591,7 +1591,7 @@ extern void host_call_bios_mode_change();
 #ifdef V7VGA
 	if (mouse_video_function == MOUSE_VIDEO_SET_MODE || getAX() == MOUSE_V7_VIDEO_SET_MODE)
 #else
-	if (mouse_video_function == MOUSE_VIDEO_SET_MODE)
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 	{
 		note_trace1(MOUSE_VERBOSE, "mouse_video_io:set_mode(%d)", 
@@ -1607,7 +1607,7 @@ extern void host_call_bios_mode_change();
 
 		if (is_bad_vid_mode(current_video_mode) && !is_v7vga_mode(current_video_mode))
 #else
-		if (is_bad_vid_mode(current_video_mode))
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 		{
 	                always_trace1("Bad video mode - %d.\n", current_video_mode);

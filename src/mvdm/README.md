@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-538: replace unselected non-V7VGA original branch bodies with
+markers only for observed C units and headers whose observed consumers all
+explicitly select V7VGA. Mixed header contexts and the project-added DAC
+fallback are retained. Ranges and hashes:
+`../../artifacts/mvdm-audit/s12-non-v7vga.jsonl`.
+
 MVDM-HOST-DIV-537: replace unselected non-NTVDM branch bodies with markers
 only in observed C compile units explicitly defining NTVDM and headers whose
 observed consumers all explicitly define it. Mixed or uncertain header

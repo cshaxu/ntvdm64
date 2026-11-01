@@ -216,7 +216,7 @@ GLOBAL void read_video_rom IFN0()
 #ifdef V7VGA
 		romLength = read_rom (V7VGAROM_FILENAME, EGA_ROM_START);
 #else	/* V7VGA */
-		romLength = read_rom (VGAROM_FILENAME, EGA_ROM_START);
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif  /* V7VGA */
 		break;
 #endif	/* VGG */

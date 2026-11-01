@@ -1301,10 +1301,7 @@ set_banking IFN2(UTINY, rd_bank, UTINY, wrt_bank)
 		woffs = (ULONG)wrt_bank << 18;
 	}
 #else
-		UNUSED(rd_bank);
-		UNUSED(wrt_bank);
-		roffs = 0;
-		woffs = 0;
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif
 
 #ifdef PIG
@@ -1333,7 +1330,7 @@ update_banking IFN0()
 #ifdef V7VGA
 	v7_get_banks( &rd_bank, &wrt_bank );
 #else
-	rd_bank = wrt_bank = 0;
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif
 
 	set_banking( rd_bank, wrt_bank );

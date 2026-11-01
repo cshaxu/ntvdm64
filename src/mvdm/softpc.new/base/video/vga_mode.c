@@ -531,7 +531,7 @@ boolean	choose_vga_display_mode()
 		/* For the 2 & 4 colour modes 63h & 64h */
 		mode = EGA_HI;
 #else
-		mode = DUMMY_FUN;
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 	else
 		mode = choose_mode[get_munged_index()];

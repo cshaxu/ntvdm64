@@ -867,7 +867,7 @@ GLOBAL VOID	vga_init IFN0()
 #ifdef V7VGA
 	set_screen_limit(0x20000);
 #else
-	set_screen_limit(0x8000);
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 	set_screen_start(0);
 	set_word_addressing(YES);
@@ -1023,12 +1023,7 @@ GLOBAL VOID	vga_seq_outb_index IFN2(io_addr,port,half_word,value)
 	sequencer.address.as.abyte = ( value & 0x07 );
 
 #ifndef V7VGA
-	if (value > 4)
-	{
-		/* a bad port index value, so ignore any data sent to it */
-		io_redefine_outb(EGA_SEQ_ADAP_DATA,vga_seq_dummy_outb);
-		return;
-	}
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* !V7VGA */
 	io_redefine_outb(EGA_SEQ_ADAP_DATA,ega_seq_regs[value & 0x07]);
 }
@@ -1233,7 +1228,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 					if (crtc_0_8_protect == FALSE && crtc_0_7_protect == FALSE)
 #else
-					if (crtc_0_7_protect == FALSE)
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 						crt_controller.horizontal_total = value;
 					break;
@@ -1242,7 +1237,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 					if (crtc_0_8_protect == FALSE && crtc_0_7_protect == FALSE)
 #else
-					if (crtc_0_7_protect == FALSE)
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 					{
 						crt_controller.horizontal_display_end = value+1;
@@ -1261,7 +1256,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 					if (crtc_0_8_protect == FALSE && crtc_0_7_protect == FALSE)
 #else
-					if (crtc_0_7_protect == FALSE)
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 						crt_controller.start_horizontal_blanking = value;
 					break;
@@ -1270,7 +1265,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 					if (crtc_0_8_protect == FALSE && crtc_0_7_protect == FALSE)
 #else
-					if (crtc_0_7_protect == FALSE)
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 						crt_controller.end_horizontal_blanking.as.abyte = value;
 					break;
@@ -1279,7 +1274,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 					if (crtc_0_8_protect == FALSE && crtc_0_7_protect == FALSE)
 #else
-					if (crtc_0_7_protect == FALSE)
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 						crt_controller.start_horizontal_retrace = value;
 					break;
@@ -1288,7 +1283,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 					if (crtc_0_8_protect == FALSE && crtc_0_7_protect == FALSE)
 #else
-					if (crtc_0_7_protect == FALSE)
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 						crt_controller.end_horizontal_retrace.as.abyte = value;
 					break;
@@ -1297,7 +1292,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 					if (crtc_0_8_protect == FALSE && crtc_0_7_protect == FALSE)
 #else
-					if (crtc_0_7_protect == FALSE)
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 						crt_controller.vertical_total = value;
 					break;
@@ -2364,7 +2359,7 @@ GLOBAL VOID  vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 #ifdef V7VGA
 	attribute_controller.address.as_bfld.index_state = 0;
 #else
-    set_index_state();	/* Initialize the Attribute register flip-flop (EGA tech ref, p 56) */
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 
 #if defined(NTVDM) || defined(host_get_count_ms)
@@ -2451,7 +2446,7 @@ GLOBAL VOID	vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 #ifdef V7VGA
 	attribute_controller.address.as_bfld.index_state = 0;
 #else
-    set_index_state();	/* Initialize the Attribute register flip-flop (EGA tech ref, p 56) */
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 
     vga_ip0_state_count --;	/* attempt relative 'timings' */
@@ -2587,7 +2582,7 @@ GLOBAL VOID	vga_ac_outb IFN2(io_addr,port,half_word,value)
 	attribute_controller.address.as_bfld.index_state = !attribute_controller.address.as_bfld.index_state;
 	if (attribute_controller.address.as_bfld.index_state) {
 #else
-	if ( in_index_state() ) {
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 		note_entrance1("Setting index to %d", value);
 		if (((value & 0x20) >> 5) != attribute_controller.address.as_bfld.palette_address_source)
@@ -2614,7 +2609,7 @@ GLOBAL VOID	vga_ac_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 		attribute_controller.address.as.abyte = (attribute_controller.address.as_bfld.index_state << 7) | (value & 0x3f);
 #else
-		attribute_controller.address.as.abyte = value;
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 	} else {
 		NON_PROD(if(io_verbose & EGA_PORTS_VERBOSE)fprintf(trace_file,"attr(%#x,%#x)\n",attribute_controller.address.as_bfld.index,value);)

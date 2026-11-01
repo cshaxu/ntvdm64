@@ -262,7 +262,7 @@ byte *video_copy;		/* video_copy is now allocated in host_init_screen()'s */
 #ifdef V7VGA
 static	DIRTY_PARTS	dirty[768];
 #else
-static	DIRTY_PARTS	dirty[480];
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 #else
 static	DIRTY_PARTS	dirty[350];

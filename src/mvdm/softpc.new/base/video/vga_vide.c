@@ -709,8 +709,7 @@ void vga_disp_func()
 		sas_store(buf+0x29, vd_mode_table[video_mode].npages);
 	}
 #else
-	sas_storew(buf+0x27,vd_mode_table[video_mode].ncols);
-	sas_store(buf+0x29, vd_mode_table[video_mode].npages);
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 	sas_store(buf+0x2A, get_scanlines());
 

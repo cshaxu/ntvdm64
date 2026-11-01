@@ -617,8 +617,7 @@ void low_set_mode IFN1(int, mode)
     	video_pc_high_regen = vd_mode_table[video_mode].end_addr;
 	}
 #else
-    video_pc_low_regen = vd_mode_table[video_mode].start_addr;
-    video_pc_high_regen = vd_mode_table[video_mode].end_addr;
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 
 #ifdef VGG
@@ -1820,7 +1819,7 @@ void ega_video_init IFN0()
 	else
 		sas_store_no_check(ega_info, 0x60);   /* Clear on mode change, 256K, EGA active, emulate cursor */
 #else	/* V7VGA  -- Macs don't have V7 */
-	sas_store_no_check(ega_info, 0x60);   /* Clear on mode change, 256K, EGA active, emulate cursor */
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 
 #endif /* NTVDM & X86GFX */
@@ -1859,7 +1858,7 @@ void ega_video_io IFN0()
 #ifdef V7VGA
 #define check_video_func(AH)	((AH >= 0 && AH < EGA_FUNC_SIZE) || (AH == 0x6f && video_adapter == VGA))
 #else
-#define check_video_func(AH)	(AH >= 0 && AH < EGA_FUNC_SIZE)
+/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif
 
     if (getAH() != 0xff)
