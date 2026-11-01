@@ -1963,10 +1963,7 @@ void   ECResetTextInfo(PED ped)
             ECNotifyParent(ped, EN_UPDATE);
     } else {
 #ifdef BOGUS
-        // B#14640
-        // We don't want to strip soft breaks or anything else from text
-        // that was passed in by the caller. - karlst.
-        MLStripCrCrLf(ped);
+/* DIVERGENCE OPENNT-HOST-131: BOGUS branch is not selected; see mirror register. */
 #endif
         MLBuildchLines(ped, 0, 0, FALSE, NULL, NULL);
     }
@@ -2030,14 +2027,7 @@ BOOL ECSetText(
         cchLength = StringLength(lpstr, ped->fAnsi);
 
 #ifdef NEVER
-// win3.1 does limit single line edit controls to 32K (minus 3) but NT doesn't
-
-        if (ped->fSingle) {
-            /*
-             * Limit single line edit controls to 32K
-             */
-            cchLength = min(cchLength, (ICH)(0x7FFD/ped->cbChar));
-        }
+/* DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register. */
 #endif
 
         /*

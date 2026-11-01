@@ -304,32 +304,7 @@ BOOL IsDialogMessageW(
     CheckLock(pwndDlg);
 
 #ifdef LATER // JerrySh - we shouldn't need this on the client-side
-    /*
-     * If this is a synchronous-only message (takes a pointer in wParam or
-     * lParam), then don't allow this message to go through since those
-     * parameters have not been thunked, and are pointing into outer-space
-     * (which would case exceptions to occur).
-     *
-     * (This api is only called in the context of a message loop, and you
-     * don't get synchronous-only messages in a message loop).
-     */
-    if (TESTSYNCONLYMESSAGE(lpMsg->message)) {
-        /*
-         * Fail if 32 bit app is calling.
-         */
-        if (!(pti->flags & TIF_16BIT)) {
-            RIPERR0(ERROR_INVALID_MESSAGE, RIP_VERBOSE, "");
-            return FALSE;
-        }
-
-        /*
-         * For wow apps, allow it to go through (for compatibility). Change
-         * the message id so our code doesn't understand the message - wow
-         * will get the message and strip out this bit before dispatching
-         * the message to the application.
-         */
-        lpMsg->message |= MSGFLAG_WOW_RESERVED;
-    }
+/* DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register. */
 #endif
 
     if (CallMsgFilter(lpMsg, MSGF_DIALOGBOX))

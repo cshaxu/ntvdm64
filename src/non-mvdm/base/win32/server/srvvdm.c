@@ -2470,31 +2470,7 @@ BaseSrvGetWOWTaskId(
 
 
 #ifdef NOT_NEEDED
-
-ULONG
-BaseSrvGetWOWRecordByHandle(
-    HANDLE hParent,
-    OUT PWOWRECORD *pRecord
-    )
-{
-    PWOWRECORD pWOWRecord;
-
-    if(WOWHead == NULL)
-        return STATUS_INVALID_PARAMETER;
-
-    pWOWRecord = WOWHead->WOWRecord;
-
-    while (pWOWRecord){
-        if (pWOWRecord->hWaitForParentServer == hParent){
-            *pRecord = pWOWRecord;
-            return STATUS_SUCCESS;
-            }
-        else
-            pWOWRecord = pWOWRecord->WOWRecordNext;
-    }
-    return STATUS_INVALID_PARAMETER;
-}
-
+/* DIVERGENCE OPENNT-HOST-131: NOT_NEEDED branch is not selected; see mirror register. */
 #endif
 
 VOID

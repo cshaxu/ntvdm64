@@ -1746,20 +1746,7 @@ void xxxCBShowListBoxWindow(
     NtUserShowWindow(hwndList, SW_SHOWNA);
 
 #ifdef LATER
-//
-// we don't have sys modal windows.
-//
-    if (pwndSysModal) {
-
-        /*
-         * If this combo is in a system modal dialog box, we need to explicitly
-         * call update window otherwise we won't automatically send paint
-         * messages to the toplevel listbox window.  This is especially
-         * noticeable in the File Open/Save sys modal dlgs which are put up at
-         * ExitWindows time.
-         */
-        UpdateWindow(hwndList);
-    }
+/* DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register. */
 #endif
 
     /*

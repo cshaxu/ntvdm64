@@ -61,10 +61,7 @@ _UserTestTokenForInteractive(
          */
         Status = NtUserTestForInteractiveUser(&pStats->AuthenticationId);
 #ifdef LATER
-        if (pStats->AuthenticationId.QuadPart == pwinsta->luidUser.QuadPart)
-            Status = STATUS_SUCCESS;
-        else
-            Status = STATUS_ACCESS_DENIED;
+/* DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register. */
 #endif
     }
 

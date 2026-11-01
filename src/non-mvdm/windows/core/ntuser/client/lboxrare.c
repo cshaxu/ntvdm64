@@ -131,7 +131,7 @@ LONG xxxLBCreate(
     plb->iLastMouseMove = -1;
 
 #ifdef NEVER
-    plb->fWin2App = (LOWORD(pwnd->ExpWinVer) < VER30);
+/* DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register. */
 #endif
 
     /*

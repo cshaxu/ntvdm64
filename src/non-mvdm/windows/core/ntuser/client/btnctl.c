@@ -245,8 +245,7 @@ HBRUSH xxxBNInitDC(
     }
 
 #ifdef LATER
-    if (TestWF(pwnd,WEFRTLREADING))
-        SetTextAlign(hdc, TA_RTLREADING | GetTextAlign(hdc));
+/* DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register. */
 #endif
 
     return(hbr);
@@ -301,9 +300,7 @@ void BNReleaseDC(
     HWND hwnd) /* DIVERGENCE(OPENNT-HOST-117): captured before any callout. */
 {
 #ifdef LATER
-    PWND pwnd = pbutn->spwnd;
-    if (TestWF(pwnd,WEFRTLREADING))
-        SetTextAlign(hdc, GetTextAlign(hdc) & ~TA_RTLREADING);
+/* DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register. */
 #endif
 
     if (pbutn->hFont) {

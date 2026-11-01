@@ -317,10 +317,7 @@ PWND xxxGotoNextMnem(
                      * Delay
                      */
 #ifdef LATER
-// JimA - 2/19/92
-// There oughta be a better way of doing this...
-                    for (i = 0; i < 10000; i++)
-                        ;
+/* DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register. */
 #else
                     Sleep(1);
 #endif

@@ -120,12 +120,7 @@ BOOL SLUndo(
         ped->ichInsStart = ped->ichInsEnd = (ICH)-1;
 
 #ifdef NEVER
-
-        /*
-         * Now send a backspace to deleted and save it in the undo buffer...
-         */
-        SLCharHandler(pped, VK_BACK);
-        fUpdate = TRUE;
+/* DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register. */
 #else
 
         /*

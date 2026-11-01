@@ -1,4 +1,9 @@
 # non-mvdm original OpenNT sources
+OPENNT-HOST-131: replace unselected LATER, NEVER, NOT_NEEDED and BOGUS
+branches with markers while retaining conditionals. Original locations,
+body hashes and the separately reviewed adapted branch are in
+`../../artifacts/mvdm-audit/s12-nonmvdm-placeholders.jsonl`.
+
 OPENNT-HOST-130: retain original `#if DBG` conditions and selected
 alternatives while replacing current-product-disabled debug bodies with
 numbered markers. Original body hashes and locations:

@@ -1146,16 +1146,7 @@ void xxxNotifyOwner(
     CheckLock(plb->spwnd);
 
 #ifdef NEVER
-    if (sEvt >= LBN_SETFOCUS && plb->fWin2App) {
-
-        /*
-         * Don't send new 3.0 notification codes to the 2.x apps.  Excel is a
-         * hose bag and can't take these because they only expect LBN_SELCHANGE
-         * and LBN_DOUBLECLK msgs in their Fonts dialog box and they die if they
-         * get other LBN_msgs.
-         */
-        return;
-    }
+/* DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register. */
 #endif
 
     ThreadLock(plb->spwndParent, &tlpwndParent);
