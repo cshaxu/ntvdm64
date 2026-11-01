@@ -63,7 +63,7 @@
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 #if defined(NTVDM) && defined(MONITOR)
-void    printer_bop_flush (void);
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 #if defined(NTVDM)
@@ -85,7 +85,7 @@ static sys_addr timeout_address[] = {
 #endif /* PRINTER */
 
 #if defined(NTVDM) && defined(MONITOR)
-void    printer_bop_flush (void);
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 /*
  * The printer bios consists of three functions:
@@ -205,28 +205,7 @@ void printer_io()
 }
 
 #if defined(NTVDM) && defined(MONITOR)
-/* for printing performance on x86 */
-
-extern  sys_addr lp16BitPrtId;
-extern  boolean  host_print_buffer(int);
-extern  void  host_lpt_dos_open(int);
-extern  void  host_lpt_dos_close(int);
-
-void printer_bop_flush(void)
-{
-#ifdef PRINTER
-    int  adapter;
-
-    adapter = sas_hw_at_no_check(lp16BitPrtId);
-
-    if (host_print_buffer (adapter) == FALSE)
-        setAH(0x08);        /* IO error */
-    else
-        setAH(0x90);        /* Success */
-    return;
-
-#endif
-}
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 #if defined(NTVDM)

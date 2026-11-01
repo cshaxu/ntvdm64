@@ -17,7 +17,7 @@
 
 #include <stdio.h>
 #if defined(NTVDM) && defined(MONITOR)
-#include <malloc.h>
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 #include TypesH
@@ -351,7 +351,7 @@ LOCAL LONG read_rom IFN2(char *, name, sys_addr, address)
 
     return( size );
 #else
-    return ( 0L );
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* !(NTVDM && MONITOR) */
 }
 

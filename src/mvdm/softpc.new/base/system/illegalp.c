@@ -65,7 +65,7 @@ LOCAL VOID where IFN3(CHAR *, string, word, cs, LIN_ADDR, ip)
 }
 
 #if defined(NTVDM) && defined(MONITOR)
-#define GetInstructionPointer()     getEIP()
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 

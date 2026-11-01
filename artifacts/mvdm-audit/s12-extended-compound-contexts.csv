@@ -1,0 +1,71 @@
+path,start,expression,result,graph,used_values
+src/mvdm/softpc.new/base/bios/bios.c,616,defined(NTVDM) && defined(MONITOR),1,msvc-x86-release/worker,MONITOR=1 NTVDM=1
+src/mvdm/softpc.new/base/bios/bios.c,608,defined(NTVDM) && defined(MONITOR),1,msvc-x86-release/worker,MONITOR=1 NTVDM=1
+src/mvdm/softpc.new/base/bios/bios.c,187,defined(CPU_40_STYLE) && !defined(NTVDM),0,msvc-x86-release/worker,CPU_40_STYLE=1 NTVDM=1
+src/mvdm/softpc.new/base/bios/bios.c,139,defined(NTVDM) || defined(CPU_40_STYLE),1,msvc-x86-release/worker,CPU_40_STYLE=1 NTVDM=1
+src/mvdm/softpc.new/base/bios/bios.c,102,defined(CPU_40_STYLE) && !defined(NTVDM),0,msvc-x86-release/worker,CPU_40_STYLE=1 NTVDM=1
+src/mvdm/softpc.new/base/bios/ill_bop.c,52,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/bios/tape_io.c,258,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/bios/tape_io.c,97,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/bios/virtual.c,21,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/comms/com.c,33,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/comms/printer.c,630,defined(NTVDM) && !defined(MONITOR),0,msvc-x86-release/worker,MONITOR=1 NTVDM=1
+src/mvdm/softpc.new/base/comms/printer.c,528,defined(NTVDM) && !defined(MONITOR),0,msvc-x86-release/worker,MONITOR=1 NTVDM=1
+src/mvdm/softpc.new/base/comms/printer.c,296,defined(NTVDM) && defined(MONITOR),1,msvc-x86-release/worker,MONITOR=1 NTVDM=1
+src/mvdm/softpc.new/base/comms/printer.c,249,defined(NTVDM) && defined(MONITOR),1,msvc-x86-release/worker,MONITOR=1 NTVDM=1
+src/mvdm/softpc.new/base/comms/printer_.c,207,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/comms/printer_.c,87,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/comms/printer_.c,65,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/dos/emm_mngr.c,1557,defined (NTVDM) && defined(MONITOR) && !defined(PROD),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1 PROD=1
+src/mvdm/softpc.new/base/dos/emm_mngr.c,84,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/keybd_io.c,1518,defined(CPU_40_STYLE) && !defined (NTVDM),0,msvc-x86-release/worker,CPU_40_STYLE=1 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,3468,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,3408,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,3383,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,3371,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,3328,defined (NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,2687,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,2652,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,2572,defined(MONITOR) && defined(NTVDM),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,2489,defined(MONITOR) && defined(NTVDM),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,2060,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,1683,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,1641,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,1633,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,1587,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,1569,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,1358,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/keymouse/mouse_io.c,1018,!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX)),1,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/support/ios.c,293,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/system/ica.c,1877,defined(CPU_40_STYLE) && !defined(NTVDM),0,msvc-x86-release/worker,CPU_40_STYLE=1 NTVDM=1
+src/mvdm/softpc.new/base/system/ica.c,1326,defined(CPU_40_STYLE) &&  !defined(NTVDM),0,msvc-x86-release/worker,CPU_40_STYLE=1 NTVDM=1
+src/mvdm/softpc.new/base/system/ica.c,1305,defined(CPU_40_STYLE) && !defined(NTVDM),0,msvc-x86-release/worker,CPU_40_STYLE=1 NTVDM=1
+src/mvdm/softpc.new/base/system/ica.c,1163,defined (CPU_40_STYLE) && !defined(NTVDM),0,msvc-x86-release/worker,CPU_40_STYLE=1 NTVDM=1
+src/mvdm/softpc.new/base/system/ica.c,568,defined(CPU_40_STYLE) && !defined (NTVDM),0,msvc-x86-release/worker,CPU_40_STYLE=1 NTVDM=1
+src/mvdm/softpc.new/base/system/illegalp.c,67,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/system/rom.c,353,!(defined(NTVDM) && defined(MONITOR)),1,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/system/rom.c,19,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/system/timer.c,967,defined(NTVDM) && !defined(PROD),0,msvc-x86-release/worker,NTVDM=1 PROD=1
+src/mvdm/softpc.new/base/video/ega_vide.c,1812,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/video/ega_vide.c,1672,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/video/ega_vide.c,1648,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/video/ega_vide.c,1637,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/video/ega_vide.c,1627,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/video/ega_vide.c,1612,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/video/ega_vide.c,1601,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/video/ega_vide.c,1591,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/video/ega_vide.c,1576,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/video/ega_vide.c,1111,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/video/ega_vide.c,670,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/video/ega_vide.c,129,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/video/gfx_updt.c,3588,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/video/gfx_updt.c,203,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/video/gfx_updt.c,148,defined(PROD) || (!defined(EGG)),1,msvc-x86-release/worker,EGG=1 PROD=1
+src/mvdm/softpc.new/base/video/gfx_updt.c,133,defined(PROD) || (!defined(EGG)),1,msvc-x86-release/worker,EGG=1 PROD=1
+src/mvdm/softpc.new/base/video/vga_mode.c,207,defined(NTVDM) && defined(MONITOR),0,msvc-x86-release/worker,MONITOR=0 NTVDM=1
+src/mvdm/softpc.new/base/video/vga_prts.c,2961,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/video/vga_vide.c,673,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/video/vga_vide.c,642,defined(NTVDM) && defined(X86GFX),0,msvc-x86-release/worker,NTVDM=1 X86GFX=0
+src/mvdm/softpc.new/base/video/video.c,2111,defined(NTVDM) && defined(X86GFX),1,msvc-x86-release/worker,NTVDM=1 X86GFX=1
+src/mvdm/softpc.new/base/video/video.c,1997,defined(NTVDM) && defined(X86GFX),1,msvc-x86-release/worker,NTVDM=1 X86GFX=1
+src/mvdm/softpc.new/base/video/video.c,1931,defined(NTVDM) && defined(MONITOR),1,msvc-x86-release/worker,MONITOR=1 NTVDM=1

@@ -50,7 +50,7 @@
 #endif	/* PROD */
 
 #if defined(NTVDM) && defined(MONITOR)
-#define GetInstructionPointer()     getEIP()
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 void illegal_bop()

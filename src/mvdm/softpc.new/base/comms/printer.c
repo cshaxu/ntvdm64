@@ -247,16 +247,7 @@ static sys_addr state_addr;
 #define set_state(adap,val)	(sas_store_no_check(state_addr+(adap),(val)))
 
 #else /* NTVDM && MONITOR */
-
-#define get_status(adap)	(status_reg[adapter])
-#define set_status(adap,val)	(status_reg[adapter] = (val))
-
-#define get_control(adap)	(control_reg[adapter])
-#define set_control(adap,val)	(control_reg[adapter] = (val))
-
-#define get_state(adap)		(state[adapter])
-#define set_state(adap,val)	(state[adapter] = (val))
-
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif /* NTVDM && MONITOR */
 
 static void printer_inb IPT2(io_addr, port, half_word *, value);
@@ -294,19 +285,7 @@ static void lpr_state_out_event IFN1(long,adapter)
 } 
 
 #else	/* NTVDM && MONITOR */
-
-static void lpr_state_outa_event IFN1(long,adapter) 
-{ 
-	set_high(status_reg[adapter],ACK);
-	state[adapter]=STATE_READY;
-}
-
-static void lpr_state_out_event IFN1(long,adapter)
-{
-	set_low(status_reg[adapter], ACK);
-	state[adapter]=STATE_OUTA; 
-	handle_for_outa_event[adapter]=add_q_event_t(lpr_state_outa_event,HOST_PRINTER_DELAY,adapter); 
-} 
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* NTVDM && MONITOR */
 
 static void printer_inb IFN2(io_addr,port, half_word *,value)
@@ -526,7 +505,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
                                     		/* clear ERROR condition */
                                     		set_status(adapter, get_status(adapter) | ERROR);
 #if defined(NTVDM) && !defined(MONITOR)
-				    		set_low(status_reg[adapter], NOTBUSY);
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #else /* NTVDM && !MONITOR */
 				    		set_status(adapter,
 					       	get_status(adapter) & ~NOTBUSY);
@@ -628,7 +607,7 @@ static void notbusy_check IFN1(int,adapter)
 	     &&	!(host_lpt_status(adapter) & HOST_LPT_BUSY))
 	{
 #if defined(NTVDM) && !defined(MONITOR)
-		set_high(status_reg[adapter], NOTBUSY);
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #else /* NTVDM && !MONITOR */
 		set_status(adapter, get_status(adapter) | NOTBUSY);
 #endif /* NTVDM && !MONITOR */

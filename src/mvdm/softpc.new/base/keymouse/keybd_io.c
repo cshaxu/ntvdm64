@@ -1516,7 +1516,7 @@ void keyboard_init()
         host_kb_init();
 
 #if defined(CPU_40_STYLE) && !defined (NTVDM)
-	ica_iret_hook_control(ICA_MASTER, CPU_KB_INT, TRUE);
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 }
 

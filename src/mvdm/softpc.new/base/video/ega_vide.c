@@ -127,8 +127,7 @@ GLOBAL IU8 Currently_emulated_video_mode = 0;	/* Holds last video mode
 						 * set through bios */
 
 #if defined(NTVDM) && defined(X86GFX)
-/* Loads font from PC's BIOS into video memory */
-IMPORT void loadNativeBIOSfont IPT1( int, lines );
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 #ifdef NTVDM
@@ -668,8 +667,7 @@ void load_font IFN5
 
 
 #if defined(NTVDM) && defined(X86GFX)
-	loadNativeBIOSfont( 25 );
-
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #else
 #ifdef GISP_SVGA
 /* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
@@ -1109,21 +1107,7 @@ GLOBAL void ega_set_mode IFN0()
 	Currently_emulated_video_mode = video_mode;
 
 #if defined(NTVDM) && defined(X86GFX)
-	/*
-	** Tim August 92. MicroSoft.
-	** Give host a chance to do a zany non-standard mode change.
-	** For Microsoft NT this is a transition to full-screen ie. the
-	** real PC's video BIOS and graphics board.
-	**
-	** Return value of TRUE means host has done the mode change for
-	** us, so no need to continue.
-	*/
-	{
-		extern BOOL hostModeChange IPT0();
-
-		if( hostModeChange() )
-			return;
-	}
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif  /* NTVDM & X86GFX */
 
 	save_addr = follow_ptr(EGA_SAVEPTR);
@@ -1574,12 +1558,7 @@ GLOBAL void ega_char_gen IFN0()
 				recalc_text(getBH());
 
 #if defined(NTVDM) && defined(X86GFX)
-			if( getBH()==0x16 )
-				loadNativeBIOSfont( 25 );
-			else if( getBH()==0x14 )
-				loadNativeBIOSfont( 28 );
-			else
-				loadNativeBIOSfont( 50 );
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif /* NTVDM && X86GFX */
 			break;
 		case 1:
@@ -1589,7 +1568,7 @@ GLOBAL void ega_char_gen IFN0()
 				recalc_text(14);
 
 #if defined(NTVDM) && defined(X86GFX)
-			loadNativeBIOSfont( 28 );
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* NTVDM & X86GFX */
 			break;
 		case 2:
@@ -1599,7 +1578,7 @@ GLOBAL void ega_char_gen IFN0()
 				recalc_text(8);
 
 #if defined(NTVDM) && defined(X86GFX)
-			loadNativeBIOSfont( 50 );
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* NTVDM & X86GFX */
 			break;
 #ifdef VGG
@@ -1610,7 +1589,7 @@ GLOBAL void ega_char_gen IFN0()
 				recalc_text(16);
 
 #if defined(NTVDM) && defined(X86GFX)
-			loadNativeBIOSfont( 25 );
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* NTVDM & X86GFX */
 			break;
 #endif	/* VGG */
@@ -1625,8 +1604,7 @@ GLOBAL void ega_char_gen IFN0()
 			break;
 		case 0x22:
 #if defined(NTVDM) && defined(X86GFX)
-			sas_storew_no_check(EGA_FONT_INT*4,nativeFontAddresses[F8x14].off);
-			sas_storew_no_check(EGA_FONT_INT*4+2,nativeFontAddresses[F8x14].seg);
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #else
 			sas_storew_no_check(EGA_FONT_INT*4,EGA_CGMN_OFF);
 			sas_storew_no_check(EGA_FONT_INT*4+2,EGA_SEG);
@@ -1635,8 +1613,7 @@ GLOBAL void ega_char_gen IFN0()
 			break;
 		case 0x23:
 #if defined(NTVDM) && defined(X86GFX)
-			sas_storew_no_check(EGA_FONT_INT*4,nativeFontAddresses[F8x8pt1].off);
-			sas_storew_no_check(EGA_FONT_INT*4+2,nativeFontAddresses[F8x8pt1].seg);
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #else
 			sas_storew_no_check(EGA_FONT_INT*4,EGA_CGDDOT_OFF);
 			sas_storew_no_check(EGA_FONT_INT*4+2,EGA_SEG);
@@ -1646,8 +1623,7 @@ GLOBAL void ega_char_gen IFN0()
 #ifdef VGG
 		case 0x24:
 #if defined(NTVDM) && defined(X86GFX)
-			sas_storew_no_check(EGA_FONT_INT*4,nativeFontAddresses[F8x16].off);
-			sas_storew_no_check(EGA_FONT_INT*4+2,nativeFontAddresses[F8x16].seg);
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #else
 			sas_storew_no_check(EGA_FONT_INT*4,EGA_HIFONT_OFF);
 			sas_storew_no_check(EGA_FONT_INT*4+2,EGA_SEG);
@@ -1670,35 +1646,7 @@ GLOBAL void ega_char_gen IFN0()
 					break;
 
 #if defined(NTVDM) && defined(X86GFX)
-
-/* ntdetect.com gets the font info from real card on NT boot. VDM reads it into
- * array 'nativeFontAddresses'. Return these fonts as Insignia ROM not loaded.
- */
-				case 2:
-					setBP(nativeFontAddresses[F8x14].off);
-					setES(nativeFontAddresses[F8x14].seg);
-					break;
-				case 3:
-					setBP(nativeFontAddresses[F8x8pt1].off);
-					setES(nativeFontAddresses[F8x8pt1].seg);
-					break;
-				case 4:
-					setBP(nativeFontAddresses[F8x8pt2].off);
-					setES(nativeFontAddresses[F8x8pt2].seg);
-					break;
-				case 5:
-					setBP(nativeFontAddresses[F9x14].off);
-					setES(nativeFontAddresses[F9x14].seg);
-					break;
-				case 6:
-					setBP(nativeFontAddresses[F8x16].off);
-					setES(nativeFontAddresses[F8x16].seg);
-					break;
-				case 7:
-					setBP(nativeFontAddresses[F9x16].off);
-					setES(nativeFontAddresses[F9x16].seg);
-					break;
-
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #else	/* NTVDM & X86GFX */
 
 				case 2:
@@ -1810,7 +1758,7 @@ void ega_video_init IFN0()
 	sas_storew_no_check(EGA_SAVEPTR+2,EGA_SEG);
 #endif	/* !NTVDM | (NTVDM & !X86GFX) */
 #if defined(NTVDM) && defined(X86GFX)
-    sas_store_no_check(ega_info,0x60); /* Clear on mode change, 256K, EGA active, emulate cursor */
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #else
 #ifdef V7VGA
 	if ( video_adapter == VGA )

@@ -640,7 +640,7 @@ void vga_disp_func()
 	byte temp,mode_reg, video_mode;
 
 #if defined(NTVDM) && defined(X86GFX)
-	IMPORT word vga1b_seg, vga1b_off;
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* NTVDM & X86GFX */
 
 	/* check that we really are a VGA */
@@ -671,8 +671,7 @@ void vga_disp_func()
  * x86 it has to live in ntio.sys.
  */
 #if defined(NTVDM) && defined(X86GFX)
-	sas_storew(buf, vga1b_off);
-	sas_storew(buf+2, vga1b_seg);
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #else
 	sas_storew(buf,INT10_1B_DATA);
 	sas_storew(buf+2,EGA_SEG);

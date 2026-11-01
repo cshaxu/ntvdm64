@@ -291,8 +291,7 @@ LOCAL void generic_outd IFN2(io_addr, io_address, double_word, value)
 
 /* MS NT monitor uses these string routines {in,out}s{b,w} string io support */
 #if defined(NTVDM) && defined(MONITOR)
-#undef LOCAL
-#define LOCAL
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* NTVDM & MONITOR */
 
 LOCAL void generic_insb IFN3(io_addr, io_address, half_word *, valarray,

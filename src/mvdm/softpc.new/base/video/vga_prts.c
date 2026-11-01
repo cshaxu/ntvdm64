@@ -2959,14 +2959,7 @@ GLOBAL VOID	vga_dac_data_inb IFN2(io_addr,port,half_word *,value)
 }
 
 #if defined(NTVDM) && defined(X86GFX)
-/*
- * There is no way of obtaining the DAC read address via a port access
- * (that we know of). Thus save/restore stuff etc needs this interface.
- */
-half_word get_vga_DAC_rd_addr()
-{
-    return DAC_rd_addr;
-}
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* NTVDM & X86GFX */
 
 VOID    vote_vga_mode IFN0()

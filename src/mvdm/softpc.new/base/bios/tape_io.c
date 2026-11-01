@@ -95,7 +95,7 @@ half_word target_AR;
 			alarm;		/* value read from alarm register	*/	
 
 #if defined(NTVDM) && defined(MONITOR)
-        IMPORT word conf_15_seg, conf_15_off;
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif /* NTVDM & MONITOR */
         /*
          *	Determine function
@@ -256,8 +256,7 @@ half_word target_AR;
 		break;
 	case INT15_CONFIGURATION:
 #if defined(NTVDM) && defined(MONITOR)
-		setES( conf_15_seg );
-		setBX( conf_15_off );
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #else
 		setES( getCS() );
 		setBX( CONF_TABLE_OFFSET );

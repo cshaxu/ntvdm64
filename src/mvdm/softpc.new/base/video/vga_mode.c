@@ -205,38 +205,7 @@ DISPLAY_MODE	mode;
 	note_display_state1("VGA set_update_routine(%s)", get_mode_string(mode) );
 
 #if defined(NTVDM) && defined(MONITOR)
-	{
-	    extern void mon_text_update(void);
-
-	    switch (mode)
-	    {
-	    case EGA_TEXT_40_SP_WR:
-	    case EGA_TEXT_80_SP_WR:
-	    case CGA_TEXT_40_SP_WR:
-	    case CGA_TEXT_80_SP_WR:
-	    case EGA_TEXT_40_SP:
-	    case EGA_TEXT_80_SP:
-	    case CGA_TEXT_40_SP:
-	    case CGA_TEXT_80_SP:
-	    case EGA_TEXT_40_WR:
-	    case EGA_TEXT_80_WR:
-	    case EGA_TEXT_40:
-	    case EGA_TEXT_80:
-	    case CGA_TEXT_40_WR:
-	    case CGA_TEXT_80_WR:
-	    case CGA_TEXT_40:
-	    case CGA_TEXT_80:
-	    case TEXT_40_FUN:
-	    case TEXT_80_FUN:
-		set_gfx_update_routines(mon_text_update, SIMPLE_MARKING,
-					TEXT_SCROLL);
-		return;
-	    default:
-		break;
-	}
-
-	}
-
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* MONITOR */
 /* NTVDM monitor: All text monitor cases dealt with. For frozen graphics */
 /* now fall through to do decode to correct paint routines per mode */

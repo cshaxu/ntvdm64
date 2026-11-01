@@ -965,10 +965,7 @@ LOCAL void loadCounter IFN0()
         }
 
 #if defined(NTVDM) && !defined(PROD)
-	if (NtTicTesting)  {
-	    printf("Timer %d modulo=%lu %dHz\n",
-		    pcu-timers, modulo, 1193180/modulo);
-	    }
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif /*NTVDM & !PROD*/
 }
 

@@ -82,7 +82,7 @@ AMMENDMENTS	:
 #include <stdlib.h>
 
 #if defined(NTVDM) && defined(MONITOR)
-#include <malloc.h>
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 #include TypesH
@@ -1555,19 +1555,7 @@ GLOBAL boolean altreg_set_ok(unsigned short set)
 }
 
 #if defined (NTVDM) && defined(MONITOR) && !defined(PROD)
-/* these functions are provided for monitor to verify that
- * it has the same definitions of EMM_PAGE_SIZE and INTEL_PAGE_SIZE as
- * ours.
- */
-
-GLOBAL unsigned short get_emm_page_size(void)
-{
-    return ((unsigned short)EMM_PAGE_SIZE);
-}
-GLOBAL unsigned short get_intel_page_size(void)
-{
-    return ((unsigned short) INTEL_PAGE_SIZE);
-}
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 /* allocate a free alt mapping register set */

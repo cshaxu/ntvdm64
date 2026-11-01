@@ -566,15 +566,7 @@ IS32 ica_accept IFN1(IU32, adapter)
         line1 &= 0x07;
 
 #if defined(CPU_40_STYLE) && !defined (NTVDM)
-	/* allow some recursion within hooked ISRs */
-	if (asp->isr_depth[line1] >= MAX_ISR_DEPTH)
-	{
-		/* disable further interrupts on this line */
-		iretHookActive |= 1 << ((adapter << 3) + line1);
-
-		/* reached maximum ISR recursion - don't do interrupt */
-		return((IS32)-1);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif /* CPU_40_STYLE */
 
         bit = (1 << line1);
@@ -1161,23 +1153,7 @@ void SWPIC_hw_interrupt IFN3(IU32, adapter, IU32, line_no, IS32, call_count)
 #endif
 
 #if defined (CPU_40_STYLE) && !defined(NTVDM)
-    depth = asp->isr_depth[line_no];
-    if (depth > 0)
-    {
-	progress = &asp->isr_progress[line_no][depth];
-	*progress += 1;		/* move progress along */
-	if ((*progress - *(progress - 1)) > MAX_INTR_DELTA_FOR_LOST_HOOK)
-	{
-		asp->isr_time_decay[line_no][asp->isr_depth[line_no]] = 0;
-		--asp->isr_depth[line_no];	/* reduce depth */
-
-		/* clear CPU side stack */
-		if (!host_bop_style_iret_hooks())
-			PurgeLostIretHookLine(((adapter << 3) + line_no) + 1, depth - 1);
-		/* permit intrs on this line */
-		iretHookActive &= ~(1 << ((adapter << 3) + line_no));
-	}
-    }
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* CPU_40_STYLE */
 
     /*
@@ -1303,17 +1279,7 @@ ica_intack IFN0()
 #endif	/* CPU_40_STYLE */
 
 #if defined(CPU_40_STYLE) && !defined(NTVDM)
-	/* do callback processing for action interrupt */
-	asp = &adapter_state[ICA_SLAVE];
-	if (asp->callback_fn[line] != NO_ICA_CALLBACK)
-	{
-	    /* invoke callback function */
-	    (*asp->callback_fn[line])(asp->callback_parm[line]);
-	    /* clear callback state reject intack call */
-	    asp->callback_fn[line] = NO_ICA_CALLBACK;
-	    host_ica_unlock();
-	    return ICA_INTACK_REJECT;
-	}
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif  /* CPU_40_STYLE */
 
         line += 8;      /* make in range 8 - 15 for iret hook */
@@ -1324,16 +1290,7 @@ ica_intack IFN0()
 	asp = &adapter_state[ICA_MASTER];	/* also excuse to use asp */
 
 #if defined(CPU_40_STYLE) &&  !defined(NTVDM)
-	/* do callback processing for action interrupt */
-	if (asp->callback_fn[line] != NO_ICA_CALLBACK)
-	{
-	    /* invoke callback function */
-	    (*asp->callback_fn[line])(asp->callback_parm[line]);
-	    /* clear callback state & return reject */
-	    asp->callback_fn[line] = NO_ICA_CALLBACK;
-	    host_ica_unlock();
-	    return ICA_INTACK_REJECT;
-	}
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* CPU_40_STYLE */
 
 	int_no = line + asp->ica_base;
@@ -1875,11 +1832,7 @@ void ica1_init IFN0()
     adapter_state[ICA_SLAVE].ica_master = FALSE;
 
 #if defined(CPU_40_STYLE) && !defined(NTVDM)
-    for (i = 0; i < 8; i++)
-    {
-	adapter_state[ICA_SLAVE].callback_fn[i] = NO_ICA_CALLBACK;
-	adapter_state[ICA_SLAVE].isr_depth[i] = 0;
-    }
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* CPU_40_STYLE */
 
 }

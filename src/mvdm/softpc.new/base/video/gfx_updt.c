@@ -131,8 +131,7 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 #if	defined(PROD) || (!defined(EGG))
 #define	init_dirty_recs()		dirty_next = 0
 #else
-#define	init_dirty_recs()		{ dirty_next = 0 ; if (io_verbose & EGA_DISPLAY_VERBOSE) \
-						trace("--- start collecting update records ---\n",0); }
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 #define	get_dirty_rec_total()		(dirty_next)
@@ -146,19 +145,7 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 						dirty_next++; \
 					}
 #else
-#define	add_dirty_rec(line,st,len,off,fr)	{	if (io_verbose & EGA_DISPLAY_VERBOSE) {\
-							char	trace_string[80]; \
-							sprintf(trace_string,"dirty[%d]line_no %d, start %d end %d", \
-											dirty_next,(line),(st),(st)+(len));\
-							trace(trace_string,0); \
-						} \
-						dirty[dirty_next].line_no = (line); \
-						dirty[dirty_next].start = (st); \
-						dirty[dirty_next].end = (st) + (len); \
-						dirty[dirty_next].video_copy_offset = (off); \
-						dirty[dirty_next].v7frig = (fr); \
-						dirty_next++; \
-					}
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 #else /* VGG */
 /* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
@@ -201,8 +188,7 @@ GLOBAL LONG dirty_curs_y;
 	boolean	dummy_scroll IPT6(int,dummy1,int,dummy2,int,dummy3,
 			int,dummy4,int,dummy5,int,dummy6);
 #if defined(NTVDM) && defined(MONITOR)
-	boolean mon_text_scroll_up IPT6(sys_addr, start, int, width, int, height, int, attr, int, lines, int, colour);
-	boolean mon_text_scroll_down IPT6(sys_addr, start, int, width, int, height, int, attr, int, lines, int, colour);
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif /* NTVDM & MONITOR */
 
 	LOCAL VOID save_gfx_update_routines IPT0();
@@ -3586,8 +3572,7 @@ GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 			break;
 		case	TEXT_SCROLL:
 #if defined(NTVDM) && defined(MONITOR)
-			update_alg.scroll_up = mon_text_scroll_up;
-			update_alg.scroll_down = mon_text_scroll_down;
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #else
 			update_alg.scroll_up = text_scroll_up;
 			update_alg.scroll_down = text_scroll_down;

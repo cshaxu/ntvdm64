@@ -1929,7 +1929,7 @@ GLOBAL void vd_write_teletype IFN0()
                 re_entrant = (sas_w_at_no_check(0x42) != int10_seg);
         }
 #else
-    re_entrant = (sas_w_at_no_check(0x42) < 0xa000);
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
     vd_cursor_col = sas_hw_at_no_check(current_cursor_col);
@@ -1995,10 +1995,7 @@ GLOBAL void vd_write_teletype IFN0()
                         exec_sw_interrupt( int10_seg, int10_caller );
                 }
 #else
-                 setCS(VIDEO_IO_SEGMENT);
-                 setIP(VIDEO_IO_RE_ENTRY);
-                 host_simulate();
-
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* NTVDM & MONITOR */
 
 		/*
@@ -2109,10 +2106,7 @@ GLOBAL void vd_write_teletype IFN0()
                         exec_sw_interrupt( int10_seg, int10_caller );
                 }
 #else
-             setCS(VIDEO_IO_SEGMENT);
-             setIP(VIDEO_IO_RE_ENTRY);   
-             host_simulate();
-
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* NTVDM & MONITOR */
 
 		/*

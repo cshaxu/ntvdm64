@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-541: replace unselected original compound host-condition
+bodies with markers only where each observed C compile context proves the
+outcome. Existing divergences and a body containing a held CPU label remain.
+Expressions, original ranges and hashes are in
+`../../artifacts/mvdm-audit/s12-extended-compound.jsonl`.
+
 MVDM-HOST-DIV-540: replace unselected non-EGG, non-VGG and non-LIM source
 alternatives only in observed C units that unconditionally include the
 defining `host_def.h` first. Mixed header contexts remain untouched. Ranges

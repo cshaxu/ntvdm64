@@ -19,7 +19,7 @@
  */
 #include <stdio.h>
 #if defined(NTVDM) && defined(MONITOR)
-#include <malloc.h>
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 #include TypesH

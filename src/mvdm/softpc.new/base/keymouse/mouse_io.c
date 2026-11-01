@@ -1016,7 +1016,7 @@ void mouse_install1()
 #endif		/* MOUSE_16_BIT */
 
 #else
-        int10_chained = FALSE;          // make it initialized
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	    /* if NTVDM && !X86GFX */
 
 	/*
@@ -1356,60 +1356,7 @@ LOCAL void dirty_all_regs()
 }
 
 #if defined(NTVDM) && defined(MONITOR)
-
-#define inb(a,b) doINB(a,b)
-#undef  OUTB
-#define OUTB(a,b) doOUTB(a,b)
-#define outw(a,b) doOUTW(a,b)
-
-static void doINB IFN2(word, port, byte, *value)
-{
-word savedIP=getIP(), savedCS=getCS();
-word savedAX=getAX(), savedDX=getDX();
-
-setDX(port);
-setCS(mouseINBsegment);
-setIP(mouseINBoffset);
-host_simulate();
-setCS(savedCS);
-setIP(savedIP);
-*value=getAL();
-setAX(savedAX);
-setDX(savedDX);
-}
-
-static void doOUTB IFN2(word, port, byte, value)
-{
-word savedIP=getIP(), savedCS=getCS();
-word savedAX=getAX(), savedDX=getDX();
-
-setDX(port);
-setAL(value);
-setCS(mouseOUTBsegment);
-setIP(mouseOUTBoffset);
-host_simulate();
-setCS(savedCS);
-setIP(savedIP);
-setAX(savedAX);
-setDX(savedDX);
-}
-
-static void doOUTW IFN2(word, port, word, value)
-{
-word savedIP=getIP(), savedCS=getCS();
-word savedAX=getAX(), savedDX=getDX();
-
-setDX(port);
-setAX(value);
-setCS(mouseOUTWsegment);
-setIP(mouseOUTWoffset);
-host_simulate();
-setCS(savedCS);
-setIP(savedIP);
-setAX(savedAX);
-setDX(savedDX);
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif /* NTVDM && MONITOR */
 
 LOCAL void restore_ega_defaults(to_hw)
@@ -1567,7 +1514,7 @@ int curr_video_mode;
 		restore_ega_defaults(FALSE);	/* Load up current tables, but don't write to EGA!! */
 	}
 #if defined(NTVDM) && defined(MONITOR)
-    sas_store(conditional_off_sysaddr, 0);
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 }
@@ -1585,7 +1532,7 @@ void mouse_video_io()
 	IS32 mouse_video_function = getAH();
 
 #if defined(NTVDM) && defined(MONITOR)
-extern void host_call_bios_mode_change();
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 #ifdef V7VGA
@@ -1631,7 +1578,7 @@ extern void host_call_bios_mode_change();
 		cursor_flag = MOUSE_CURSOR_DEFAULT;
 
 #if defined(NTVDM) && defined(MONITOR)
-        sas_store(mouseCFsysaddr,(half_word)MOUSE_CURSOR_DEFAULT);
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 		/*
 		 *	Deal with the mode change
@@ -1639,7 +1586,7 @@ extern void host_call_bios_mode_change();
 		cursor_mode_change(current_video_mode);
 
 #if defined(NTVDM) && defined(MONITOR)
-        host_call_bios_mode_change();
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 #ifdef	MOUSE_16_BIT
@@ -1681,16 +1628,7 @@ extern void host_call_bios_mode_change();
 		return;
 	}
 #if defined(NTVDM) && defined(MONITOR)
-    else if (mouse_video_function == MOUSE_VIDEO_LOAD_FONT)
-    {
-                note_trace0(MOUSE_VERBOSE, "mouse_video_io:load_font()");
-
-        /*
-         * Call the host to tell it to adjust the mouse buffer selected
-         * if the number of lines on the screen have changed.
-         */
-        host_check_mouse_buffer();
-    }
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif /* NTVDM && MONITOR */
 
 	/*
@@ -2058,9 +1996,7 @@ the application OUTBs the necessary data.
 }
 
 #if defined(NTVDM) && defined(MONITOR)
-#undef inb
-#undef OUTB
-#undef outw
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif /* NTVDM && MONITOR */
 
 void mouse_EM_callback()
@@ -2487,7 +2423,7 @@ LOCAL void mouse_reset IFN4(word *,installed_ptr,word *,nbuttons_ptr,word *,junk
 	cursor_flag = MOUSE_CURSOR_DEFAULT;
 
 #if defined(MONITOR) && defined(NTVDM)
-    sas_store(mouseCFsysaddr, MOUSE_CURSOR_DEFAULT);
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 	/*
@@ -2570,7 +2506,7 @@ LOCAL void mouse_reset IFN4(word *,installed_ptr,word *,nbuttons_ptr,word *,junk
 	area_copy(&black_hole_default, &black_hole);
 
 #if defined(MONITOR) && defined(NTVDM)
-    sas_store(conditional_off_sysaddr, 0);
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 	/*
@@ -2650,7 +2586,7 @@ LOCAL void mouse_show_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 #endif /* NTVDM */
 
 #if defined(NTVDM) && defined(X86GFX)
-    host_show_pointer();
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 	note_trace0(MOUSE_VERBOSE, "mouse_io:return()");
@@ -2685,7 +2621,7 @@ LOCAL void mouse_hide_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 		}
 #endif
 #if defined(NTVDM) && defined(X86GFX)
-    host_hide_pointer();
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 	note_trace0(MOUSE_VERBOSE, "mouse_io:return()");
@@ -3326,9 +3262,7 @@ LOCAL void mouse_conditional_off IFN4(word *,junk1,word *,junk2,MOUSE_SCALAR *,u
 		cursor_display();
 	}
 #if defined (NTVDM) && defined(MONITOR)
-
-    sas_store(conditional_off_sysaddr, 1);
-    host_mouse_conditional_off_enabled();
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 	note_trace0(MOUSE_VERBOSE, "mouse_io:return()");
@@ -3369,11 +3303,7 @@ LOCAL void mouse_save_state IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 	IS32			cs = 0;
 	IS32			i;
 #if defined(NTVDM) && defined(MONITOR)
-
-    /* real CF resides in 16 bit code */
-    int             saved_cursor_flag = cursor_flag;
-    IS8             copyCF;
-
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 	UNUSED(m1);
@@ -3381,8 +3311,7 @@ LOCAL void mouse_save_state IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 	UNUSED(m3);
 	
 #if defined(NTVDM) && defined(MONITOR)
-    sas_load(mouseCFsysaddr, &copyCF);
-    cursor_flag = (int)copyCF;
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 	note_trace0(MOUSE_VERBOSE, "mouse_io: mouse_save_state()");
 
@@ -3406,7 +3335,7 @@ LOCAL void mouse_save_state IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 	sas_store (dest, (byte)(cs & 0xFF));
 
 #if defined(NTVDM) && defined(MONITOR)
-    cursor_flag = saved_cursor_flag;
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 }
 
@@ -3466,10 +3395,7 @@ LOCAL void mouse_restore_state IFN4(word *,m1,word *,m2,word *,m3,word *,m4)
 		mouse_ega_mode (sas_hw_at(vd_video_mode));
 #endif
 #if defined(NTVDM) && defined(MONITOR)
-        /* real CF resides in 16 Bit code:  */
-        sas_store(mouseCFsysaddr, (half_word)cursor_flag);
-        if (cursor_flag )
-            cursor_flag = MOUSE_CURSOR_DEFAULT;
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 		if (cursor_flag == MOUSE_CURSOR_DISPLAYED){
 			cursor_display();

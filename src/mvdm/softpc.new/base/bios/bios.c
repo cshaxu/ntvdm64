@@ -100,7 +100,7 @@ LOCAL void v_mouse_EM_callback	IFN0() { SWAP_INSTANCE; mouse_EM_callback(); }
 #endif
 
 #if defined(CPU_40_STYLE) && !defined(NTVDM)
-extern void VDD_Func IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif
 
 #ifndef PROD
@@ -137,7 +137,7 @@ void (*BIOS[])() = {
 #if defined(NTVDM) || defined(CPU_40_STYLE)
 			illegal_bop,   	/* BOP 08 */
 #else /* !(NTVDM || CPU_40_STYLE) */
-			time_int,   	/* BOP 08 */
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif /* !(NTVDM || CPU_40_STYLE) */
 			keyboard_int,  	/* BOP 09 */
 			illegal_bop,   	/* BOP 0A */
@@ -185,7 +185,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 23 */
 			illegal_bop,	/* BOP 24 */
 #if defined(CPU_40_STYLE) && !defined(NTVDM)
-			VDD_Func,	/* BOP 25 */
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #else
 			illegal_bop,	/* BOP 25 */
 #endif /* CPU_40_STYLE */
@@ -606,7 +606,7 @@ void (*BIOS[])() = {
 #if defined(NTVDM) && defined(MONITOR)
                         switch_to_real_mode,	/* BOP FD */
 #else
-                        illegal_bop,    /* BOP FD */
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* NTVDM && MONITOR */
 #if !defined(LDBIOS)
                         host_unsimulate,/* BOP FE */
@@ -614,7 +614,7 @@ void (*BIOS[])() = {
 #if defined(NTVDM) && defined(MONITOR)
                         host_unsimulate,	/* BOP FE */
 #else
-                        illegal_bop,    /* BOP FE */
+/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
 #endif	/* NTVDM && MONITOR */
 #endif	/* !LDBIOS */
 
