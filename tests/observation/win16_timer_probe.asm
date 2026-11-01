@@ -1,5 +1,5 @@
 ; Independent NE witness, not replacement guest media. USER ordinals are
-; retained in src/mvdm/wow16/user/user.def; KERNEL ABI follows the CBT probe.
+; retained in src/mvdm-guest/wow16/user/user.def; KERNEL ABI follows the CBT probe.
 bits 16
 org 0
 db 'MZ'

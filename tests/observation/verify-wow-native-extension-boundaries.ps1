@@ -26,7 +26,7 @@ function Run-Owned($name,$exe,$line,$seconds){
  $p.WaitForExit();$code=$p.ExitCode;$code|Set-Content "$root/$name.exit.txt";if($code){throw "$name failed $code"}
 }
 try{
- $inputs=@($PSCommandPath,"$provider/build.ninja","$repo/src/mvdm/wow32/wcall16.c",
+ $inputs=@($PSCommandPath,"$provider/build.ninja","$repo/src/mvdm-host/wow32/wcall16.c",
   "$repo/src/wow32-dll/source/wow_user_native_extension.c","$repo/src/wow32-dll/include/wow_user_native_extension.h",
   "$repo/tests/adapter-mvdm-host-out/wow/wow_native_extension_boundary_fixture.c",
   "$repo/tests/adapter-mvdm-host-out/wow/wow_public_callback_rejection_fixture.c",
@@ -34,12 +34,12 @@ try{
   "$repo/tests/adapter-mvdm-host-out/wow/wow_callback_abort_fixture.c",
   "$repo/src/wow32-dll/source/wow_callback_frame_lease.c",
   "$repo/src/wow32-dll/include/wow_callback_frame_lease.h",
-  "$repo/tests/observation/verify-wow-original-callback-frame.ps1","$repo/src/mvdm/wow32/wmmedia.c")
+  "$repo/tests/observation/verify-wow-original-callback-frame.ps1","$repo/src/mvdm-host/wow32/wmmedia.c")
  Get-FileHash $inputs|Export-Csv -NoTypeInformation "$root/source-sha256.csv"
  $cases=if($Phase -eq 'all'){@('extension','mm-body','rejection')}elseif($Phase -eq 'original-frame'){@()}else{@($Phase)}
  foreach($case in $cases){
-  $sources=if($case -ne 'rejection'){@('src/wow32-dll/source/wow_user_native_extension.c','tests/adapter-mvdm-host-out/wow/wow_native_extension_boundary_fixture.c')}else{@('src/mvdm/wow32/wcall16.c','tests/adapter-mvdm-host-out/wow/wow_public_callback_rejection_fixture.c')}
-  if($case -eq 'mm-body'){$sources+='src/mvdm/wow32/wmmedia.c'}
+  $sources=if($case -ne 'rejection'){@('src/wow32-dll/source/wow_user_native_extension.c','tests/adapter-mvdm-host-out/wow/wow_native_extension_boundary_fixture.c')}else{@('src/mvdm-host/wow32/wcall16.c','tests/adapter-mvdm-host-out/wow/wow_public_callback_rejection_fixture.c')}
+  if($case -eq 'mm-body'){$sources+='src/mvdm-host/wow32/wmmedia.c'}
   $objects=@();$i=0
   foreach($source in $sources){
    $extra=if($case -eq 'rejection'){' /DCallBack16=wow_test_reject_callback'}elseif($case -eq 'mm-body' -and $source -like '*wmmedia.c'){' /DWMM32CallProc32=wow_original_WMM32CallProc32'}elseif($case -eq 'mm-body' -and $source -like '*fixture.c'){' /DWOW_EXTENSION_ORIGINAL_MM'}else{''}

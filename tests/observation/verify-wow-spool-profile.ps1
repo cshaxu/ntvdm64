@@ -10,7 +10,7 @@ function Get-SpoolSha256([string]$Path) {
     finally { $algorithm.Dispose(); $stream.Dispose() }
 }
 # Original, load-only guest companion. No compilation or guest-byte changes.
-$relative = 'src/mvdm/wow16/winspool/WINSPOOL.EXE'
+$relative = 'src/mvdm-guest/wow16/winspool/WINSPOOL.EXE'
 $source = Join-Path $RepositoryRoot $relative
 $expected = 'E4E787340F124476090ED0F22837D7D7ACAB37FD7BBE49DB46CAE9AC4944D535'
 if ((Get-SpoolSha256 $source) -ne $expected) {

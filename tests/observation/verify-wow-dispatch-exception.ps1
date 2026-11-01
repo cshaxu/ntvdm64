@@ -25,7 +25,7 @@ function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds,
 try {
     Run-Owned 'extract-wndproc' 'powershell.exe' ('-NoProfile -ExecutionPolicy Bypass -File "'+$repo+'/tests/observation/extract-wow-wndproc-fixture.ps1" -BuildRoot "'+$root+'"') 30
     if((Get-Content "$root/extract-wndproc.out" -Raw) -notmatch '^WOW_WNDPROC_MIRROR_BYTE_EXACT_SELECTED_BODY'){throw 'Original WndProc body extraction failed'}
-    $sources=@('src/mvdm/wow32/wow32.c','src/mvdm/wow32/wmdisp32.c','src/wow32-dll/source/wow_user_thunk_scope.c','tests/adapter-mvdm-host-out/wow/wow_dispatch_exception_fixture.c')
+    $sources=@('src/mvdm-host/wow32/wow32.c','src/mvdm-host/wow32/wmdisp32.c','src/wow32-dll/source/wow_user_thunk_scope.c','tests/adapter-mvdm-host-out/wow/wow_dispatch_exception_fixture.c')
     $objects=@()
     foreach($source in $sources){
         $name=[IO.Path]::GetFileNameWithoutExtension($source)
@@ -89,7 +89,7 @@ try {
         $output -notmatch 'DISPATCH_SEARCH debugger-first-chance=1 child-exit=0' -or
         ([regex]::Matches($output,'DISPATCH_EXCEPTION phase=')).Count -ne 8 -or
         ([regex]::Matches($output,'HARD_ERROR_SCOPE mode=')).Count -ne 5){throw 'Missing boundary assertions'}
-    @($sources|ForEach-Object {"$repo/$_"}) + @("$repo/src/mvdm/wow32/wmdisp32.c","$root/original-wndproc.inc","$ProviderBuildRoot/build.ninja") |
+    @($sources|ForEach-Object {"$repo/$_"}) + @("$repo/src/mvdm-host/wow32/wmdisp32.c","$root/original-wndproc.inc","$ProviderBuildRoot/build.ninja") |
         Get-FileHash | Select-Object Path,Hash | ConvertTo-Json | Set-Content "$root/inputs.json"
     '0'|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/error.txt";'1'|Set-Content "$root/exit.txt";throw}

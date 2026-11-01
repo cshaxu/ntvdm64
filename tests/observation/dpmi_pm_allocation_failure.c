@@ -1,7 +1,7 @@
 /* Test-only replacement of the sole allocation call in this owner. */
 #define DpmiAllocateVirtualMemory s38_fail_pm_allocation
 #define DpmiPassPmStackInfo s38_original_pm_publication
-#include "../../src/mvdm/dpmi32/dpmiint.c"
+#include "../../src/mvdm-host/dpmi32/dpmiint.c"
 #undef DpmiPassPmStackInfo
 #undef DpmiAllocateVirtualMemory
 

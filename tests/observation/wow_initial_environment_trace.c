@@ -1,7 +1,7 @@
 /* Diagnostic-only composition of the unchanged original owner. Never linked
  * into release; records sizes and arena tags, not environment contents. */
 #define cmdGetNextCmd observed_cmdGetNextCmd
-#include "../../src/mvdm/dos/command/cmdmisc.c"
+#include "../../src/mvdm-host/dos/command/cmdmisc.c"
 #undef cmdGetNextCmd
 
 VOID cmdGetNextCmd(VOID)

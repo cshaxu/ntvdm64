@@ -9,7 +9,7 @@ if (outputIndex < 0 || !process.argv[outputIndex + 1]) throw new Error('usage: n
 const output = path.resolve(repo, process.argv[outputIndex + 1]);
 const build = `${path.resolve(repo, 'build')}${path.sep}`;
 if (!output.startsWith(build)) throw new Error('output must be below build');
-const roots = { opennt: 'O:/repos.external/OpenNT/base/mvdm', opennt45: 'O:/repos.external/OpenNT-4.5/nt/private/mvdm', current: path.join(repo, 'src/mvdm') };
+const roots = { opennt: 'O:/repos.external/OpenNT/base/mvdm', opennt45: 'O:/repos.external/OpenNT-4.5/nt/private/mvdm', current: path.join(repo, 'src/mvdm-host') };
 const hash = (bytes) => createHash('sha256').update(bytes).digest('hex').toUpperCase();
 async function fingerprint(file) {
   const bytes = await readFile(file);
@@ -52,12 +52,12 @@ async function index(root) {
 async function selectedBy(graph, label) {
   const text = await readFile(graph, 'utf8');
   const selected = new Set();
-  const pattern = /(?:O\$?:\/repos\.hobby\/ntvdm64\/|O:\\repos\.hobby\\ntvdm64\\)src(?:\/|\\)mvdm(?:\/|\\)([^\s]+)/gi;
+  const pattern = /(?:O\$?:\/repos\.hobby\/ntvdm64\/|O:\\repos\.hobby\\ntvdm64\\)src(?:\/|\\)mvdm(?:-host|-guest)?(?:\/|\\)([^\s]+)/gi;
   for (const match of text.matchAll(pattern)) selected.add(match[1].replaceAll('\\', '/').toLowerCase());
   return [label, selected];
 }
 function sourceFromNinjaLine(line) {
-  const match = /(?:O\$?:\/repos\.hobby\/ntvdm64\/|O:\\repos\.hobby\\ntvdm64\\)src(?:\/|\\)mvdm(?:\/|\\)([^\s]+)/i.exec(line);
+  const match = /(?:O\$?:\/repos\.hobby\/ntvdm64\/|O:\\repos\.hobby\\ntvdm64\\)src(?:\/|\\)mvdm(?:-host|-guest)?(?:\/|\\)([^\s]+)/i.exec(line);
   return match ? match[1].replaceAll('\\', '/').toLowerCase() : '';
 }
 async function productSelection(graph, product, label, requireWholeArchive) {
@@ -101,14 +101,20 @@ async function productSelection(graph, product, label, requireWholeArchive) {
 const csv = (value) => { const text = String(value ?? ''); return /[",\r\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text; };
 const workerGraph = path.join(repo, 'build/.ninja/msvc-x86-release/worker/build.ninja');
 const wow32Graph = path.join(repo, 'build/.ninja/msvc-x86-release/wow32/build.ninja');
-const [opennt, opennt45, current, workerSelection, wow32Selection, ntvdmProductSelection, vdmredirProductSelection, wow32ProductSelection] = await Promise.all([
+const [opennt, opennt45, host, guest, workerSelection, wow32Selection, ntvdmProductSelection, vdmredirProductSelection, wow32ProductSelection] = await Promise.all([
   ...Object.values(roots).map(index),
+  index(path.join(repo, 'src/mvdm-guest')),
   selectedBy(workerGraph, 'worker-graph'),
   selectedBy(wow32Graph, 'wow32-graph'),
   productSelection(workerGraph, 'ntvdm.exe | ntvdm.lib', 'ntvdm-product', true),
   productSelection(workerGraph, 'VDMREDIR.dll | VDMREDIR.dll.lib', 'vdmredir-product', false),
   productSelection(wow32Graph, 'wow32.dll | wow32.lib', 'wow32-product', false),
 ]);
+const current = new Map(host);
+for (const [relative, value] of guest) {
+  if (current.has(relative)) throw new Error(`duplicate split MVDM path: ${relative}`);
+  current.set(relative, value);
+}
 const selections = new Map([workerSelection, wow32Selection]);
 const productSelections = new Map([ntvdmProductSelection, vdmredirProductSelection, wow32ProductSelection]);
 function disposition(relativePath, currentFile, productLinkSelection) {

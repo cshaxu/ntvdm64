@@ -2,7 +2,7 @@
 #define DpmiAllocateVirtualMemory s38_allocate
 #define DpmiReallocateVirtualMemory s38_reallocate
 #define DpmiReallocateXmem s38_original_reallocate_xmem
-#include "../../src/mvdm/dpmi32/xmem.c"
+#include "../../src/mvdm-host/dpmi32/xmem.c"
 #undef DpmiAllocateVirtualMemory
 #undef DpmiReallocateVirtualMemory
 #undef DpmiReallocateXmem

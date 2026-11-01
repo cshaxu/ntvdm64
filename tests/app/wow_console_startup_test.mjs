@@ -20,7 +20,7 @@ assert.doesNotMatch(beforeCreate.slice(0, match.index), /SW_HIDE/);
 assert.doesNotMatch(match[1], /(?:^|\n)\s*startup\./,
     'do not hide the guest command startup record');
 assert.match(source.slice(create, create + 320), /worker_creation_flags,/);
-const wow = readFileSync(new URL('src/mvdm/wow32/wkman.c', root), 'utf8');
+const wow = readFileSync(new URL('src/mvdm-host/wow32/wkman.c', root), 'utf8');
 assert.match(wow, /VDMInfo\.StartupInfo\.dwFlags & STARTF_USESHOWWINDOW/);
 assert.match(wow, /VDMInfo\.StartupInfo\.wShowWindow/);
 console.log('PASS: WOW Console isolation flags; separate guest show state; DOS policy retained (source guard only)');

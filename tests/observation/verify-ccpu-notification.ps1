@@ -6,7 +6,7 @@ if (!$out.StartsWith((Join-Path $repo 'build')+'\',[StringComparison]::OrdinalIg
     throw 'Require fresh build evidence directory'
 }
 New-Item -ItemType Directory $out | Out-Null
-$source=Join-Path $repo 'src/mvdm/softpc.new/base/ccpu386/c_main.c'
+$source=Join-Path $repo 'src/mvdm-host/softpc.new/base/ccpu386/c_main.c'
 $body=[IO.File]::ReadAllText($source)
 $parts=@()
 foreach($name in @('CPU_HW_INT_MASK','CPU_SIGIO_EXCEPTION_MASK','CPU_SAD_EXCEPTION_MASK','CPU_RESET_EXCEPTION_MASK','CPU_SIGALRM_EXCEPTION_MASK')) {

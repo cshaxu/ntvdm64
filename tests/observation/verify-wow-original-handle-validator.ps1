@@ -4,7 +4,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
-$media = Join-Path $root 'src/mvdm/wow16/user/k/daytona/USER.EXE'
+$media = Join-Path $root 'src/mvdm-guest/wow16/user/k/daytona/USER.EXE'
 $hash = '6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C'
 if ((Get-FileHash $media).Hash -ne $hash) { throw 'Unrecognized original USER.EXE' }
 $saved = $env:NTVDM_TEST_USER_IMAGE

@@ -6,7 +6,7 @@
 
 #include "ntvdm-exe/softpc/include/mvdm_guest_location.h"
 #include "ntvdm-exe/session/session.h"
-#include "mvdm/inc/vrnmpipe.h"
+#include "mvdm-host/inc/vrnmpipe.h"
 
 /* Default-off proof for the one standalone ownership seam in this file.
  * It records no guest bytes, addresses, handles or command data. */

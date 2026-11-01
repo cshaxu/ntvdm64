@@ -11,7 +11,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
 $RepositoryRoot = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $openNt = 'O:\repos.external\OpenNT'
 $fontRoot = Join-Path $RepositoryRoot 'src/non-mvdm/base/win32/winnls/fontsup/system'
-$utilRoot = Join-Path $RepositoryRoot 'src/mvdm/v86/util'
+$utilRoot = Join-Path $RepositoryRoot 'src/mvdm-guest/v86/util'
 $carrier = 'src/ntvdm/monitor/source/monitor_printer.c'
 $formerCarrier = 'src/mvdm-host/kernel-vdm/v86/monitor/i386/monitor_printer.c'
 
@@ -21,7 +21,7 @@ function Get-Blob([string]$Path) {
     return $blob[0].Trim()
 }
 
-foreach ($retired in @('src/mvdm-host', 'src/mvdm-guest', 'src/mvdm-tools')) {
+foreach ($retired in @('src/mvdm', 'src/mvdm-tools')) {
     if (Test-Path -LiteralPath (Join-Path $RepositoryRoot $retired)) {
         throw "Retired root remains: $retired"
     }

@@ -7,7 +7,7 @@ $ErrorActionPreference = 'Stop'
 
 # Read-only provenance/profile check. This is not WOW runtime acceptance.
 $expectedHash = '6746088F2A87CD366E4FF5DA424B39B5BD91586D5F7570AFBF3C05BCA94E935C'
-$mirror = Join-Path $RepositoryRoot 'src/mvdm/wow16/user/k/daytona/USER.EXE'
+$mirror = Join-Path $RepositoryRoot 'src/mvdm-guest/wow16/user/k/daytona/USER.EXE'
 foreach ($path in @($GuestUser, $mirror)) {
     if ((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash -ne $expectedHash) {
         throw "Unrecognized USER.EXE; profile offsets cannot be applied: $path"
@@ -19,7 +19,7 @@ if ($bytes[$ne] -ne 0x4e -or $bytes[$ne + 1] -ne 0x45) { throw 'Not an NE image'
 $table = $ne + [BitConverter]::ToUInt16($bytes, $ne + 0x22)
 $shift = [BitConverter]::ToUInt16($bytes, $ne + 0x32)
 $code = [BitConverter]::ToUInt16($bytes, $table) -shl $shift
-$map = Get-Content -Raw (Join-Path $RepositoryRoot 'src/mvdm/wow16/user/k/daytona/user.map')
+$map = Get-Content -Raw (Join-Path $RepositoryRoot 'src/mvdm-guest/wow16/user/k/daytona/user.map')
 function Get-CodeOffset([string]$symbol) {
     $match = [regex]::Match($map, '(?m)^\s*0001:([0-9A-Fa-f]+)\s+' + [regex]::Escape($symbol) + '\s*$')
     if (!$match.Success) { throw "Missing source map symbol: $symbol" }
@@ -136,9 +136,9 @@ $sharedAbi = [ordered]@{
     desktopInfo = @{ heapBase = 0; heapLimit = 4; desktopWindow = 8 }
     clock = @{ linearAddress = '7FFE0000'; low = 0; multiplier = 4; shift = 24 }
 }
-$header = Get-Content -Raw (Join-Path $RepositoryRoot 'src/mvdm/wow32/wusercli.h')
-$body = Get-Content -Raw (Join-Path $RepositoryRoot 'src/mvdm/wow32/wusercli.c')
-$dispatch = Get-Content -Raw (Join-Path $RepositoryRoot 'src/mvdm/wow32/wutbl2.h')
+$header = Get-Content -Raw (Join-Path $RepositoryRoot 'src/mvdm-host/wow32/wusercli.h')
+$body = Get-Content -Raw (Join-Path $RepositoryRoot 'src/mvdm-host/wow32/wusercli.c')
+$dispatch = Get-Content -Raw (Join-Path $RepositoryRoot 'src/mvdm-host/wow32/wutbl2.h')
 $local = [regex]::Matches($header, '(?m)^#define\s+(WU32\w+)\s+LOCALAPI\s*$')
 if ($local.Count -ne 26) { throw "Expected 26 mappings, found $($local.Count)" }
 $rows = foreach ($entry in $local) {

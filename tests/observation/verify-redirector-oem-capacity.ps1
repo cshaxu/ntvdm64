@@ -39,7 +39,7 @@ if ($OriginalProviders) {
     }
     $object = Join-Path $out 'vrnetapi.obj'
     $response = Join-Path $out 'original-provider.rsp'
-    ($flags + ' /Gy /FI"' + $root + '/tests/mvdm-host/vdmredir/redirector_netapi_fixture_binding.h" /Fo"' + $object + '" "' + $root + '/src/mvdm/vdmredir/vrnetapi.c"') |
+    ($flags + ' /Gy /FI"' + $root + '/tests/mvdm-host/vdmredir/redirector_netapi_fixture_binding.h" /Fo"' + $object + '" "' + $root + '/src/mvdm-host/vdmredir/vrnetapi.c"') |
         Set-Content -LiteralPath $response -Encoding ASCII
     & $wrapper cl "@$response" 2>&1 |
         Tee-Object -FilePath (Join-Path $out 'build.txt') -Append
@@ -49,7 +49,7 @@ if ($OriginalProviders) {
     # rather than importing an executable. No completion algorithm is copied.
     $pipeObject = Join-Path $out 'vrnmpipe.obj'
     $response = Join-Path $out 'original-pipe-dependency.rsp'
-    ($flags + ' /DMVDM_REDIRECTOR_WORKER_EXPORTS /Gy /Fo"' + $pipeObject + '" "' + $root + '/src/mvdm/vdmredir/vrnmpipe.c"') |
+    ($flags + ' /DMVDM_REDIRECTOR_WORKER_EXPORTS /Gy /Fo"' + $pipeObject + '" "' + $root + '/src/mvdm-host/vdmredir/vrnmpipe.c"') |
         Set-Content -LiteralPath $response -Encoding ASCII
     & $wrapper cl "@$response" 2>&1 |
         Tee-Object -FilePath (Join-Path $out 'build.txt') -Append

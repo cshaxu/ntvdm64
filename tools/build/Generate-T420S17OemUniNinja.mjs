@@ -14,16 +14,16 @@ const formalFlags = readFileSync(`${formal}/build.ninja`, "utf8")
   .match(/^cflags = (.+)$/m)?.[1].trim().replaceAll("$:", ":");
 if (!formalFlags) throw new Error("Missing formal command-owner flags");
 mkdirSync(`${build}/obj`, { recursive: true });
-const demSource = readFileSync(`${root}/src/mvdm/dos/dem/demfile.c`, "utf8");
+const demSource = readFileSync(`${root}/src/mvdm-host/dos/dem/demfile.c`, "utf8");
 const demStart = demSource.indexOf("VOID demCreateCommon (flCreateType)");
 const demEnd = demSource.indexOf("BOOL IsCdRomFile (PSTR pszPath)", demStart);
 if (demStart < 0 || demEnd <= demStart) throw new Error("DEM source boundaries changed");
 writeFileSync(`${build}/dem-create-body.inc`, demSource.slice(demStart, demEnd));
 writeFileSync(`${build}/dem-create-source.sha256`, createHash("sha256").update(demSource).digest("hex"));
-const mediaSource = readFileSync(`${root}/src/mvdm/dos/dem/demgset.c`, "utf8");
+const mediaSource = readFileSync(`${root}/src/mvdm-host/dos/dem/demgset.c`, "utf8");
 const mediaStart = mediaSource.search(/BOOL\s+GetMediaId\(/);
 const mediaEnd = mediaSource.indexOf("/* demGetDPB", mediaStart);
-const mediaHeader = readFileSync(`${root}/src/mvdm/dos/dem/dosdef.h`, "utf8");
+const mediaHeader = readFileSync(`${root}/src/mvdm-host/dos/dem/dosdef.h`, "utf8");
 const typeStart = mediaHeader.indexOf("#pragma pack(1)", mediaHeader.indexOf("/** VOLINFO"));
 const typeEnd = mediaHeader.indexOf("typedef VOLINFO *PVOLINFO;", typeStart);
 if (mediaStart < 0 || mediaEnd <= mediaStart || typeStart < 0 || typeEnd <= typeStart)
@@ -35,8 +35,8 @@ writeFileSync(`${build}/dem-media-source.sha256`, createHash("sha256").update(me
 const cflags = [
   "/nologo", "/TC", "/c", "/MT", "/W4", "/showIncludes", "/DWIN32", "/DWINNT",
   "/FI", `\"${root}/src/compat/include/nt.h\"`,
-  "/I", `\"${root}/src/mvdm/inc\"`,
-  "/I", `\"${root}/src/mvdm/oemuni\"`,
+  "/I", `\"${root}/src/mvdm-host/inc\"`,
+  "/I", `\"${root}/src/mvdm-host/oemuni\"`,
   "/I", `\"${root}/src/ntvdm-exe/softpc/include\"`,
   "/I", `\"${root}/src/compat/include\"`,
   "/I", `\"${root}/src/non-mvdm/public/sdk/inc\"`
@@ -50,17 +50,17 @@ const lines = [
   "rule regenerate",
   `  command = \"${process.execPath.replaceAll("\\", "/")}\" \"$root/tools/build/Generate-T420S17OemUniNinja.mjs\" \"$root\" \"${build}\" \"$formal\"`,
   "  generator = 1",
-  "build build.ninja: regenerate $root/tools/build/Generate-T420S17OemUniNinja.mjs $formal/build.ninja $root/src/mvdm/dos/dem/demfile.c $root/src/mvdm/dos/dem/demgset.c $root/src/mvdm/dos/dem/dosdef.h",
+  "build build.ninja: regenerate $root/tools/build/Generate-T420S17OemUniNinja.mjs $formal/build.ninja $root/src/mvdm-host/dos/dem/demfile.c $root/src/mvdm-host/dos/dem/demgset.c $root/src/mvdm-host/dos/dem/dosdef.h",
   "rule cc",
   "  command = cl.exe $cflags /Fo$out $in",
   "  deps = msvc",
   "  msvc_deps_prefix = Note: including file: ",
   "rule link",
   "  command = link.exe /nologo /out:$out $in $formal/obj/opennt-abi-host-compat/opennt_support_rtl.obj $formal/original-opennt-rtl-x86.lib kernel32.lib user32.lib gdi32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib libcmt.lib libvcruntime.lib libucrt.lib",
-  "build obj/file.obj: cc $root/src/mvdm/oemuni/file.c",
-  "build obj/process.obj: cc $root/src/mvdm/oemuni/process.c",
+  "build obj/file.obj: cc $root/src/mvdm-host/oemuni/file.c",
+  "build obj/process.obj: cc $root/src/mvdm-host/oemuni/process.c",
   "build obj/firmware-root-stub.obj: cc $root/tests/mvdm/oemuni/oemuni_firmware_root_stub.c",
-  "build obj/toemuni.obj: cc $root/src/mvdm/oemuni/toemuni.c",
+  "build obj/toemuni.obj: cc $root/src/mvdm-host/oemuni/toemuni.c",
   "  cflags = $cflags /Dgetch=oemuni_no_pause",
   "build obj/pause.obj: cc $root/tests/mvdm/oemuni/oemuni_pause_stub.c",
   "build obj/failure.obj: cc $root/tests/mvdm/oemuni/oemuni_failure_fixture.c",
@@ -83,7 +83,7 @@ const lines = [
   `  cflags = $cflags /I \"${build}\"`,
   "build oemuni-media-fixture.exe: link obj/media.obj",
   "build obj/pif-caller.obj: cc $root/tests/mvdm/oemuni/oemuni_pif_caller_fixture.c",
-  `  cflags = ${formalFlags} /I \"$root/src/mvdm/dos/command\"`,
+  `  cflags = ${formalFlags} /I \"$root/src/mvdm-host/dos/command\"`,
   "build oemuni-pif-caller-fixture.exe: link obj/pif-caller.obj $formal/obj/command/cmdpif.obj obj/file.obj obj/process.obj obj/firmware-root-stub.obj",
   "build obj/pif-environment.obj: cc $root/src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
   `  cflags = ${formalFlags} /Gy /Dmalloc=pif_test_malloc /Dfree=pif_test_free`,

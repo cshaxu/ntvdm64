@@ -6,7 +6,7 @@ if(!$build.StartsWith((Join-Path $root 'build')+'\',[StringComparison]::OrdinalI
     throw 'BuildRoot must be below repository build'
 }
 New-Item -ItemType Directory -Path $build -ErrorAction Stop | Out-Null
-$source=Join-Path $root 'src/mvdm/softpc.new/base/keymouse/keyba.c'
+$source=Join-Path $root 'src/mvdm-host/softpc.new/base/keymouse/keyba.c'
 $text=[IO.File]::ReadAllText($source)
 $patterns=@{
  'keyboard_device_add.inc'='^LOCAL VOID add_to_6805_buff IFN2.*?^\s*\} /\* end of add_to_6805_buff \*/';

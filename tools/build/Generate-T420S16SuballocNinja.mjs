@@ -13,7 +13,7 @@ mkdirSync(`${build}/obj`, { recursive: true });
 const cflags = [
   "/nologo", "/TC", "/c", "/MT", "/W4", "/DWIN32", "/DWINNT",
   "/FI", `\"${root}/src/compat/include/nt.h\"`,
-  "/I", `\"${root}/src/mvdm/inc\"`,
+  "/I", `\"${root}/src/mvdm-host/inc\"`,
   "/I", `\"${root}/src/compat/include\"`,
   "/I", `\"${root}/src/non-mvdm/public/sdk/inc\"`
 ].join(" ");
@@ -28,7 +28,7 @@ const lines = [
   "  msvc_deps_prefix = Note: including file: ",
   "rule link",
   "  command = link.exe /nologo /out:$out $in kernel32.lib libcmt.lib libvcruntime.lib libucrt.lib",
-  "build obj/suballoc.obj: cc $root/src/mvdm/suballoc/suballoc.c",
+  "build obj/suballoc.obj: cc $root/src/mvdm-host/suballoc/suballoc.c",
   "build obj/fixture.obj: cc $root/tests/mvdm/suballoc/suballoc_lifecycle_fixture.c",
   "build suballoc-lifecycle-fixture.exe: link obj/suballoc.obj obj/fixture.obj",
   "default suballoc-lifecycle-fixture.exe",

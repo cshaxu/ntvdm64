@@ -13,7 +13,7 @@ $flags=($graph|Where-Object {$_ -like 'host_cflags = *'}).Substring(14).Replace(
 $flags=[regex]::Replace($flags,'(?i)(?<!\S)/(?:c|TC)(?!\S)','')
 if(!$flags.Contains('/DCPU_40_STYLE') -or !$flags.Contains('/DV7VGA')){throw 'Wrong original object profile'}
 $objects=@('nt_cga','nt_ega','nt_munge')|ForEach-Object {Join-Path $cache "obj/host/$_.obj"}
-$inputs=@($PSCommandPath,$source,$driver,"$cache/build.ninja")+$objects+@('nt_cga','nt_ega','nt_munge'|ForEach-Object {Join-Path $repo "src/mvdm/softpc.new/host/src/$_.c"})
+$inputs=@($PSCommandPath,$source,$driver,"$cache/build.ninja")+$objects+@('nt_cga','nt_ega','nt_munge'|ForEach-Object {Join-Path $repo "src/mvdm-host/softpc.new/host/src/$_.c"})
 Get-FileHash -LiteralPath $inputs|Export-Csv "$out/inputs.csv" -NoTypeInformation
 $linked=($objects|ForEach-Object {'"'+$_+'"'}) -join ' '
 $command='@echo off'+"`r`n"+'call "'+$driver+'" cl.exe /nologo /MT /O2 '+$flags+' "'+$source+'" '+$linked+' /Fo:"'+$out+'/fixture.obj" /Fe:"'+$out+'/planar-object.exe" /link /opt:ref /map:"'+$out+'/planar-object.map" kernel32.lib user32.lib gdi32.lib'+"`r`n"+'exit /b %errorlevel%'+"`r`n"

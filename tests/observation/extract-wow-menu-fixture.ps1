@@ -9,12 +9,12 @@ New-Item -ItemType Directory -Force $output | Out-Null
 foreach ($entry in @(
     @('wumenu.c','0FC60E98713F9C37F6FEE8C5DF25DCBA55277DBAEF5B82C49A90E62AE6DB72C6'),
     @('wres16.c','24324D4B95B7C5AC102E9751872AF1DB779EFC0CFF223B32AA066034CB874AE9'))) {
-    foreach ($base in @((Join-Path $root 'src/mvdm/wow32'), 'O:/repos.external/OpenNT/base/mvdm/wow32')) {
+    foreach ($base in @((Join-Path $root 'src/mvdm-host/wow32'), 'O:/repos.external/OpenNT/base/mvdm/wow32')) {
         $path = Join-Path $base $entry[0]
         if ((Get-FileHash $path).Hash -ne $entry[1]) { throw "Menu source changed: $path" }
     }
 }
-$menu = [IO.File]::ReadAllText((Join-Path $root 'src/mvdm/wow32/wumenu.c'))
+$menu = [IO.File]::ReadAllText((Join-Path $root 'src/mvdm-host/wow32/wumenu.c'))
 $parts = @()
 foreach ($name in @('WU32LoadMenu','WU32LoadMenuIndirect')) {
     $start = $menu.IndexOf("ULONG FASTCALL $name(PVDMFRAME pFrame)")
@@ -22,7 +22,7 @@ foreach ($name in @('WU32LoadMenu','WU32LoadMenuIndirect')) {
     if ($start -lt 0 -or $end -le $start) { throw 'Menu thunk boundary changed.' }
     $parts += $menu.Substring($start, $end-$start)
 }
-$resource = [IO.File]::ReadAllText((Join-Path $root 'src/mvdm/wow32/wres16.c'))
+$resource = [IO.File]::ReadAllText((Join-Path $root 'src/mvdm-host/wow32/wres16.c'))
 $start = $resource.IndexOf('#define VALIDPUT')
 $end = $resource.IndexOf('MODNAME(', $start)
 $macros = $resource.Substring($start, $end-$start)

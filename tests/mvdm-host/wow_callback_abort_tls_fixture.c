@@ -2,7 +2,7 @@
  * Keep this owner in its own TU: original host_def.h has an unguarded
  * anonymous extern structure and cannot be included twice in one C TU. */
 #ifndef WOW_TEST_NTTHREAD_SOURCE
-#define WOW_TEST_NTTHREAD_SOURCE "../../src/mvdm/softpc.new/base/ccpu386/ntthread.c"
+#define WOW_TEST_NTTHREAD_SOURCE "../../src/mvdm-host/softpc.new/base/ccpu386/ntthread.c"
 #endif
 #include WOW_TEST_NTTHREAD_SOURCE
 int fixture_simulation_level(void)

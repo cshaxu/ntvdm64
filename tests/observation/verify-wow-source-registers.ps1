@@ -39,8 +39,8 @@ try {
     $manifest="$repo/artifacts/documentation-archive/20260910/etc/operations/ledgers/m0-t274-s5-mvdm-host-topology-manifest.tsv"
     foreach($row in Import-Csv $manifest -Delimiter "`t"){$topology[$row.target_path.Replace('\','/')]=$row}
     $registers=@{
-        'MVDM-HOST-DIV-'="$repo/src/mvdm/README.md"
-        'MVDM-SUPPORT-DIV-'="$repo/src/mvdm/README.md"
+        'MVDM-HOST-DIV-'="$repo/src/mvdm-host/README.md"
+        'MVDM-SUPPORT-DIV-'="$repo/src/mvdm-host/README.md"
         'OPENNT-HOST-'="$repo/src/non-mvdm/README.md"
         'ADAPTER-WIN32-'="$repo/src/compat/README.md"
         'ADAPTER-WOW-'="$repo/src/wow32-dll/README.md"
@@ -56,7 +56,7 @@ try {
             $original=$relative.Substring(16)
             if($original.StartsWith('netapi/')){$original='ds/'+$original}
             $source=Join-Path $OriginalRoot $original
-        }elseif($relative.StartsWith('src/mvdm/')){
+        }elseif($relative.StartsWith('src/mvdm-host/')){
             $original=$relative.Substring(9)
             if(!$topology.ContainsKey($original)){throw "Missing original provenance $relative"}
             $source=$topology[$original].selected_source_path

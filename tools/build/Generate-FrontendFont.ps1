@@ -4,7 +4,7 @@ $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '../..'))
 $output = [IO.Path]::GetFullPath($OutputFile)
 $prefix = (Join-Path $repo 'build') + [IO.Path]::DirectorySeparatorChar
 if (!$output.StartsWith($prefix,[StringComparison]::OrdinalIgnoreCase)) { throw 'Font output must remain below build/' }
-$rom = Join-Path $repo 'src/mvdm/softpc.new/roms/v7vga.rom'
+$rom = Join-Path $repo 'src/mvdm-guest/softpc.new/roms/v7vga.rom'
 if ((Get-FileHash -LiteralPath $rom -Algorithm SHA256).Hash -ne '970F105CD9E42EE56F07AAE695BAC89786D3455AB9D4C1EA9A1D1643B1E8F6F0') {
     throw 'Selected V7VGA font source changed'
 }

@@ -37,7 +37,7 @@ Read-only inputs:
   parent event on removal. BaseSrvGetVDMExitCode returns zero for the shared
   WOW sentinel. Parent completion is therefore not a load-success event and
   does not supply an actual per-application Win16 exit code.
-- Selected [wkman.c](../../../src/mvdm/wow32/wkman.c): W32Thread transfers
+- Selected [wkman.c](../../../src/mvdm-host/wow32/wkman.c): W32Thread transfers
   iW32ExecTaskId into td.VDMInfoiTaskID, then clears the global. It calls
   pfnInitTask with that shared task ID; failure destroys the task and exits
   its host thread. WK32WowFailedExec calls ExitVDM for the still-pending task.

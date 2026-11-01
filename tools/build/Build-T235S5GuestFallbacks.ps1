@@ -20,14 +20,14 @@ $haveHimemFallback = Test-Path -LiteralPath $himemFallback -PathType Leaf
 if ($haveHimemFallback) {
     & $himemFallback -RepositoryRoot $repository -BuildRoot (Join-Path $build 'himem')
 }
-# T414 recomposed the selected original MVDM tree at its historical-relative
-# canonical root.  The historical toolchain still consumes the same source
-# layout; only the retired parallel mirror prefix disappeared.
-$source = Join-Path $repository 'src\mvdm'
+# The historical staging layout combines the separately owned source roots.
+$source = Join-Path $repository 'src\mvdm-host'
+$guest = Join-Path $repository 'src\mvdm-guest'
 $tools = Join-Path $repository 'tools\historical\opennt-4.5'
 $mvdm = Join-Path $build 'redir\base\mvdm'
 New-Item -ItemType Directory -Path $mvdm | Out-Null
 Copy-Item -LiteralPath (Join-Path $source 'dos'), (Join-Path $source 'inc') -Destination $mvdm -Recurse
+Copy-Item -LiteralPath (Join-Path $guest 'dos\v86') -Destination (Join-Path $mvdm 'dos') -Recurse
 $redir = Join-Path $mvdm 'dos\v86\redir'
 Copy-Item -LiteralPath (Join-Path $tools 'masm.exe'), (Join-Path $tools 'link16.exe') -Destination $redir
 Copy-Item -LiteralPath (Join-Path $redir 'usa\redirmsg.inc') -Destination (Join-Path $redir 'redirmsg.inc')

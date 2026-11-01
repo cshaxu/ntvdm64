@@ -4,7 +4,7 @@ $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $out=[IO.Path]::GetFullPath((Join-Path $repo $BuildRoot))
 if (!$out.StartsWith((Join-Path $repo 'build/'),[StringComparison]::OrdinalIgnoreCase)) { throw 'Build root must be under build' }
 New-Item -ItemType Directory -Path $out -Force | Out-Null
-$source=Join-Path $repo 'src/mvdm/dpmi32/modesw.c'
+$source=Join-Path $repo 'src/mvdm-host/dpmi32/modesw.c'
 $text=[IO.File]::ReadAllText($source)
 $body=[regex]::Match($text,'(?ms)^VOID\r?\nDpmiCpu40SwitchToProtectedMode\(.*?^\}')
 if (!$body.Success) { throw 'Production PM entry body not found' }

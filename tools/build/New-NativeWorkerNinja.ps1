@@ -180,7 +180,7 @@ function Add-Edge([string]$target) {
   $originalAllowed=@('/base/ntos/rtl/error.c')
   if($Component -eq 'Launcher'){$originalAllowed+=@('/base/ntos/rtl/environ.c','/base/win32/client/vdm.c','/base/ntdll/csrutil.c')}
   if($Component -eq 'Service'){$originalAllowed+=@('/base/win32/server/srvvdm.c','/windows/core/ntuser/server/exports.c')}
-  if($normalized.Contains('/src/mvdm/') -or ($normalized.Contains('/src/non-mvdm/') -and !@($originalAllowed|Where-Object {$normalized.EndsWith($_)}).Count)){throw "Unadmitted original source: $path"}
+  if($normalized.Contains('/src/mvdm-host/') -or ($normalized.Contains('/src/non-mvdm/') -and !@($originalAllowed|Where-Object {$normalized.EndsWith($_)}).Count)){throw "Unadmitted original source: $path"}
   $manifest.Add(@{path=$path;sha256=(Get-FileHash $path).Hash;object=$target})
  }
 }

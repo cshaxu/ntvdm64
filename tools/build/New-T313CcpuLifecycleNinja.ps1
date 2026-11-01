@@ -31,8 +31,8 @@ $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\To
 if (!(Test-Path -LiteralPath $vs -PathType Leaf) -or !(Get-Command ninja -ErrorAction SilentlyContinue)) { throw 'MSVC Build Tools and Ninja are required.' }
 if (!(Test-Path -LiteralPath $NodeExecutable -PathType Leaf)) { throw "Node 22 is required: $NodeExecutable" }
 
-$ccpuRoot = Join-Path $root 'src/mvdm/softpc.new/base/ccpu386'
-$hostRoot = Join-Path $root 'src/mvdm/softpc.new/host/src'
+$ccpuRoot = Join-Path $root 'src/mvdm-host/softpc.new/base/ccpu386'
+$hostRoot = Join-Path $root 'src/mvdm-host/softpc.new/host/src'
 $ccpuFallbackSource = Join-Path $root 'src/ntvdm-exe/softpc/mvdm_ccpu_vector_defaults.c'
 $ccpu = @(Get-OriginalSources (Join-Path $ccpuRoot 'sources') | Where-Object { $_ -ne 'ntstubs.c' })
 $hostSources = @('nt_cprgs.c', 'nt_cpu.c', 'sim32.c', 'nt_mem.c')
@@ -42,15 +42,15 @@ $adapterSources = @('src/ntvdm-exe/softpc/mvdm_softpc_execution.c', 'src/ntvdm-e
 $testSources = @('tests/mvdm-host/ccpu_bounded_execution_fixture.c', 'tests/mvdm-host/ccpu_bounded_execution_fixture_seams.c')
 foreach ($name in $ccpu) { if (!(Test-Path -LiteralPath (Join-Path $ccpuRoot $name))) { throw "Missing original CCPU source: $name" } }
 foreach ($name in $hostSources) { if (!(Test-Path -LiteralPath (Join-Path $hostRoot $name))) { throw "Missing original host source: $name" } }
-foreach ($name in $controllerSources) { if (!(Test-Path -LiteralPath (Join-Path (Join-Path $root 'src/mvdm/softpc.new/base/system') $name))) { throw "Missing original controller source: $name" } }
-foreach ($name in $supportSources) { if (!(Test-Path -LiteralPath (Join-Path (Join-Path $root 'src/mvdm/softpc.new/base/support') $name))) { throw "Missing original support source: $name" } }
+foreach ($name in $controllerSources) { if (!(Test-Path -LiteralPath (Join-Path (Join-Path $root 'src/mvdm-host/softpc.new/base/system') $name))) { throw "Missing original controller source: $name" } }
+foreach ($name in $supportSources) { if (!(Test-Path -LiteralPath (Join-Path (Join-Path $root 'src/mvdm-host/softpc.new/base/support') $name))) { throw "Missing original support source: $name" } }
 foreach ($name in $adapterSources + $testSources) { if (!(Test-Path -LiteralPath (Join-Path $root $name))) { throw "Missing selected lifecycle source: $name" } }
 if (!(Test-Path -LiteralPath $ccpuFallbackSource)) { throw 'Required selected source is missing.' }
 
 New-Item -ItemType Directory -Force $build, (Join-Path $build 'generated/gdp'), (Join-Path $build 'obj/ccpu'), (Join-Path $build 'obj/host'), (Join-Path $build 'obj/controller'), (Join-Path $build 'obj/support'), (Join-Path $build 'obj/adapter'), (Join-Path $build 'obj/test'), (Join-Path $build 'obj/overlay'), (Join-Path $build 'obj/patch') | Out-Null
 $environment = Join-Path $build 'msvc-x86.cmd'
 @('@echo off', 'set "MVDM_T313_CALLER_CWD=%CD%"', 'if defined VSCMD_VER goto ready', ('call "' + $vs + '" -arch=x86 -host_arch=x64 >nul'), 'if errorlevel 1 exit /b %errorlevel%', ':ready', 'cd /d "%MVDM_T313_CALLER_CWD%"', '%*') | Set-Content -LiteralPath $environment -Encoding ascii
-$includeRoots = @('src', 'src/compat/include', 'src/non-mvdm/public/sdk/inc', 'src/non-mvdm/public/sdk/inc', 'src/non-mvdm/public/internal/base/inc', 'src/non-mvdm/public/internal/windows/inc', 'src/non-mvdm/public/ddk/inc', 'src/mvdm-support/inc', 'src/ntvdm-exe/softpc/include/generated/x86/prod', 'src/mvdm/softpc.new/base/ccpu386', 'src/mvdm/softpc.new/host/inc', 'src/mvdm/softpc.new/base/cvidc', 'src/mvdm/softpc.new/base/inc', 'src/ntvdm-exe/softpc/include', 'src/ntvdm-exe/session') | ForEach-Object { Join-Path $root $_ }
+$includeRoots = @('src', 'src/compat/include', 'src/non-mvdm/public/sdk/inc', 'src/non-mvdm/public/sdk/inc', 'src/non-mvdm/public/internal/base/inc', 'src/non-mvdm/public/internal/windows/inc', 'src/non-mvdm/public/ddk/inc', 'src/mvdm-support/inc', 'src/ntvdm-exe/softpc/include/generated/x86/prod', 'src/mvdm-host/softpc.new/base/ccpu386', 'src/mvdm-host/softpc.new/host/inc', 'src/mvdm-host/softpc.new/base/cvidc', 'src/mvdm-host/softpc.new/base/inc', 'src/ntvdm-exe/softpc/include', 'src/ntvdm-exe/session') | ForEach-Object { Join-Path $root $_ }
 $includes = $includeRoots | ForEach-Object { '/I "' + (NinjaPath $_) + '"' }
 $cflags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI "' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) + '" ' + ($includes -join ' ')
 $graph = [Collections.Generic.List[string]]::new()
@@ -62,8 +62,8 @@ $graph.Add('rule link'); $graph.Add('  command = cmd.exe /d /s /c call ' + (Ninj
 function Add-Objects([string]$Group, [string]$Rule, [string]$Directory, [string[]]$Names) { $objects = @(); foreach ($name in $Names) { $object = 'obj/' + $Group + '/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'; $graph.Add('build ' + $object + ': ' + $Rule + ' ' + (NinjaPath (Join-Path $Directory $name))); $objects += $object }; return $objects }
 $ccpuObjects = Add-Objects 'ccpu' 'cc' $ccpuRoot $ccpu
 $hostObjects = Add-Objects 'host' 'cc' $hostRoot $hostSources
-$controllerObjects = Add-Objects 'controller' 'cc' (Join-Path $root 'src/mvdm/softpc.new/base/system') $controllerSources
-$supportObjects = Add-Objects 'support' 'cc' (Join-Path $root 'src/mvdm/softpc.new/base/support') $supportSources
+$controllerObjects = Add-Objects 'controller' 'cc' (Join-Path $root 'src/mvdm-host/softpc.new/base/system') $controllerSources
+$supportObjects = Add-Objects 'support' 'cc' (Join-Path $root 'src/mvdm-host/softpc.new/base/support') $supportSources
 $adapterObjects = Add-Objects 'adapter' 'cc' $root $adapterSources
 $testObjects = Add-Objects 'test' 'cc' $root $testSources
 $patchObject = 'obj/patch/fmstubs_vector_defaults.obj'; $graph.Add('build ' + $patchObject + ': cc_patch ' + (NinjaPath $ccpuFallbackSource))

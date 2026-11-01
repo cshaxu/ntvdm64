@@ -8,18 +8,18 @@ DLL target versus the one `ntvdm.exe` worker?
 
 ## Inputs
 
-- [`src/mvdm/vdmredir/sources`](../../../src/mvdm/vdmredir/sources),
-  [`vdmredir.def`](../../../src/mvdm/vdmredir/vdmredir.def), and the 15
+- [`src/mvdm/vdmredir/sources`](../../../src/mvdm-host/vdmredir/sources),
+  [`vdmredir.def`](../../../src/mvdm-host/vdmredir/vdmredir.def), and the 15
   selected original C bodies beneath that same canonical mirror path.
-- [`src/mvdm/wow32/sources`](../../../src/mvdm/wow32/sources) and
-  [`wow32.def`](../../../src/mvdm/wow32/wow32.def): the original manifest
+- [`src/mvdm/wow32/sources`](../../../src/mvdm-host/wow32/sources) and
+  [`wow32.def`](../../../src/mvdm-host/wow32/wow32.def): the original manifest
   declares 86 C bodies, one resource and `W32DllInitialize`.
 - Fresh generated graph
   `build/M0-T421/S1/formal-x86-r1/build.ninja`, generated on 2026-09-22 by
   `New-T310OriginalSoftpcNinja.ps1` with the pinned Node 22 and x86 inputs.
 - Current target bindings under `src/ntvdm-exe/redir/` and
   `src/ntvdm-exe/wow/`, plus the original dynamic loader in
-  [`nt_bop.c`](../../../src/mvdm/softpc.new/host/src/nt_bop.c).
+  [`nt_bop.c`](../../../src/mvdm-host/softpc.new/host/src/nt_bop.c).
 - Read-only package inspection of `O:\winnt\VDMREDIR.dll` and
   `O:\winnt\WOW32.dll` with x86 `dumpbin`.
 

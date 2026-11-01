@@ -18,9 +18,9 @@ $compile=$commands|Where-Object {$_ -match '/wmdisp32\.c$'}|Select-Object -Last 
 $link=$commands|Where-Object {$_ -match '^link /nologo /machine:x86 /dll '}|Select-Object -Last 1
 if(!$compile -or !$link){throw 'Actual message TU/link closure missing'}
 $owner=if($P21Control){
- $s=(& git -C $repo show '4b8a7c8ae6eaaca3350d640650dd9d57201fd581:src/mvdm/wow32/wmdisp32.c') -join "`n"
+ $s=(& git -C $repo show '4b8a7c8ae6eaaca3350d640650dd9d57201fd581:src/mvdm-host/wow32/wmdisp32.c') -join "`n"
  if($LASTEXITCODE){throw 'Cannot read immutable P21 owner'};$s
-}else{[IO.File]::ReadAllText("$repo/src/mvdm/wow32/wmdisp32.c")}
+}else{[IO.File]::ReadAllText("$repo/src/mvdm-host/wow32/wmdisp32.c")}
 [IO.File]::WriteAllText("$root/message_original_owner.c",$owner,[Text.UTF8Encoding]::new($false))
 $source="$PSScriptRoot/wow_message_transaction_provider.c"
 $compile=$compile -replace '/Fo\S+\s+\S+\.c$',('/I"'+$root+'" /Fo"'+$root+'/message.obj" "'+$source+'"')

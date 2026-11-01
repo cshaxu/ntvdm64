@@ -56,22 +56,22 @@ function(ntvdm_generate script)
     WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}" COMMAND_ERROR_IS_FATAL ANY)
 endfunction()
 set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
-  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/obj.vdm/ntvdm.src"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/obj.vdm/ntvdm.src"
   "${CMAKE_SOURCE_DIR}/src/ntvdm-exe/ntvdm-export-ordinals.csv"
   "${CMAKE_SOURCE_DIR}/tools/build/GenerateCvidcCpuBinding.mjs"
-  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/cvidc/c2cpusad.h"
-  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/cvidc/cpu4gen.h"
-  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/cvidc/evidgen.h"
-  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/cvidc/sinit011.c"
-  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/cvidc/sinit012.c"
-  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/cvidc/sinit013.c"
-  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/cpu/src/evid/vglob.c"
-  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/inc/sas.h"
-  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/inc/gvi.h"
-  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/inc/egagraph.h"
-  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/inc/gfx_upd.h"
-  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/base/inc/egaports.h"
-  "${CMAKE_SOURCE_DIR}/src/mvdm/softpc.new/host/inc/nt_graph.h")
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/c2cpusad.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/cpu4gen.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/evidgen.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/sinit011.c"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/sinit012.c"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/sinit013.c"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/inc/sas.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/inc/gvi.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/inc/egagraph.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/inc/gfx_upd.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/inc/egaports.h"
+  "${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/host/inc/nt_graph.h")
 ntvdm_generate(New-T310OriginalSoftpcNinja.ps1 -Architecture x86
   -RepositoryRoot "${CMAKE_SOURCE_DIR}" -BuildRoot "${_worker_tree}"
   -NodeExecutable "${NTVDM_NODE}"
@@ -90,8 +90,8 @@ if(NTVDM_ARCHITECTURE STREQUAL "x86")
       -ParentImportLibrary "${_worker_tree}/ntvdm.lib" ${_cache_args}
     DEPENDS "${_worker_tree}/ntvdm.lib"
       "${CMAKE_SOURCE_DIR}/tools/build/New-T404S5Wow32ProviderNinja.ps1"
-      "${CMAKE_SOURCE_DIR}/src/mvdm/wow32/sources"
-      "${CMAKE_SOURCE_DIR}/src/mvdm/wow32/wow32.def"
+      "${CMAKE_SOURCE_DIR}/src/mvdm-host/wow32/sources"
+      "${CMAKE_SOURCE_DIR}/src/mvdm-host/wow32/wow32.def"
     VERBATIM)
   add_custom_target(wow32
     COMMAND cmd /d /c "${CMAKE_BINARY_DIR}/wow32/msvc-x86.cmd"

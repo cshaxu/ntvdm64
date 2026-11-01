@@ -6,7 +6,7 @@ if (!$output.StartsWith(($root + '\build\'), [StringComparison]::OrdinalIgnoreCa
     throw 'Fixture output must be under repository build.'
 }
 $hash = '6118B6837C7ED291CC9D70446B7D691699D49C9EF6F2BE60D8E0FAC478D93B65'
-$mirror = Join-Path $root 'src/mvdm/wow32/walias.c'
+$mirror = Join-Path $root 'src/mvdm-host/wow32/walias.c'
 foreach ($path in @($mirror, 'O:/repos.external/OpenNT/base/mvdm/wow32/walias.c')) {
     if ((Get-FileHash $path).Hash -ne $hash) { throw "Alias source changed: $path" }
 }

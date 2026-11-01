@@ -45,7 +45,8 @@ def main():
         supplemental = provenance.get(path)
         old = (ORIGINAL / path if primary else SECONDARY / path if secondary
                else Path(supplemental['source_path']))
-        current = ROOT / 'src/mvdm' / path
+        guest = ROOT / 'src/mvdm-guest' / path
+        current = guest if guest.is_file() else ROOT / 'src/mvdm-host' / path
         if not current.is_file():
             relocated = ROOT / 'tools/historical/opennt-4.5' / Path(path).name
             historical = (path.startswith('tools16/') and entry['opennt45_sha256'] and

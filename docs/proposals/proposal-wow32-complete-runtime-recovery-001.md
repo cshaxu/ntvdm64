@@ -55,7 +55,7 @@ source hashes, original owners, test procedures and superseded hypotheses:
   [S38 DPMI32](../etc/evidence/m0-t420-s38-dpmi32-capability-review.md) and
   [S39 DOSX](../etc/evidence/m0-t420-s39-dpmi-guest-capability-review.md).
 - [Source policy](../etc/operations/policy/source-policy.md),
-  [MVDM divergence register](../../src/mvdm/README.md),
+  [MVDM divergence register](../../src/mvdm-host/README.md),
   [OpenNT-host provenance](../../src/non-mvdm/README.md), and
   [worker WOW boundary](../../src/ntvdm-exe/wow/README.md).
 
@@ -107,8 +107,8 @@ Outstanding work, each assigned below:
 
 ## Capability scope and architecture boundary
 
-The original [sources manifest](../../src/mvdm/wow32/sources) selects 77 C
-translation units; [wowtbl.c](../../src/mvdm/wow32/wowtbl.c) assembles ten
+The original [sources manifest](../../src/mvdm-host/wow32/sources) selects 77 C
+translation units; [wowtbl.c](../../src/mvdm-host/wow32/wowtbl.c) assembles ten
 dispatch-table families. The scope includes initialization/BOP/thunk dispatch,
 16/32-bit structures and aliases, callbacks, KERNEL/DOS and module/memory/file
 services, USER classes/windows/messages/dialogs/input/hooks/timers, GDI

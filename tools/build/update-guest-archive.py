@@ -48,7 +48,7 @@ def main():
     additions = {}
     provenance = {}
     for source, target in [*(
-            (repo / "src/mvdm" / name, "WINNT/SYSTEM32/" + Path(name).name.upper())
+            (repo / "src/mvdm-guest" / name, "WINNT/SYSTEM32/" + Path(name).name.upper())
             for name in REQUIRED), *((Path("O:/winnt") / name, "WINNT/" + name) for name in APPS)]:
         data = source.read_bytes()
         record = known[str(source.resolve()).lower()]

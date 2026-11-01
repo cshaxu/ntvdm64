@@ -6,7 +6,7 @@ import subprocess
 import tempfile
 
 root = Path(__file__).resolve().parents[2]
-path = root / 'src/mvdm/dpmi32/dpmiint.c'
+path = root / 'src/mvdm-host/dpmi32/dpmiint.c'
 data = path.read_bytes()
 text = data.decode('latin1')
 match = re.search(r'BOOL\s+DpmiSwIntHandler\s*\(\s*ULONG\s+IntNumber\s*\)\s*/\*.*?\*/\s*\{', text, re.S)

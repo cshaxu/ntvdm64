@@ -13,7 +13,7 @@ typedef LPSTR LPSZ,PSZ;
 typedef struct {DWORD dwStyle,dwExStyle;} WW,*PWW;
 #include "../../src/compat/include/wow_control_message_abi.h"
 #include "parameter_types.h"
-#include "../../src/mvdm/wow32/wparam.h"
+#include "../../src/mvdm-host/wow32/wparam.h"
 #include "../../src/wow32-dll/include/wow_message_lifetime.h"
 #include "parameter_map_records.h"
 /* Address-only out-of-scope families; actual invocation is a fixture failure. */

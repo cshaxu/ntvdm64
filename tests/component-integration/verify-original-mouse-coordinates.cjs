@@ -12,8 +12,8 @@ const relative = path.relative(path.join(root, 'build'), output);
 if (!relative || relative.startsWith('..') || path.isAbsolute(relative))
     throw new Error('Expected a test-specific directory below repository build');
 const sourcePath = path.join(root, textCursor
-    ? 'src/mvdm/softpc.new/base/keymouse/mouse_io.c'
-    : 'src/mvdm/softpc.new/host/src/nt_mouse.c');
+    ? 'src/mvdm-host/softpc.new/base/keymouse/mouse_io.c'
+    : 'src/mvdm-host/softpc.new/host/src/nt_mouse.c');
 const bytes = fs.readFileSync(sourcePath);
 const source = bytes.toString('utf8');
 const names = textCursor

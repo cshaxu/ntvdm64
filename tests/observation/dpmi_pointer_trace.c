@@ -2,7 +2,7 @@
 #define DpmiSwitchToProtectedMode trace_switch_protected
 #define DpmiSegmentToSelector trace_segment_selector
 #define DpmiSimulateIretCF trace_iret_cf
-#include "../../src/mvdm/dpmi32/int21map.c"
+#include "../../src/mvdm-host/dpmi32/int21map.c"
 #undef DpmiSwitchToProtectedMode
 #undef DpmiSegmentToSelector
 #undef DpmiSimulateIretCF

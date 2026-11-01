@@ -2,7 +2,7 @@
  * files are included in this test TU only to inspect their private state;
  * production exposes no ThreadSimBuf layout or diagnostic getters. */
 #ifndef WOW_TEST_XTRN_SOURCE
-#define WOW_TEST_XTRN_SOURCE "../../src/mvdm/softpc.new/base/ccpu386/c_xtrn.c"
+#define WOW_TEST_XTRN_SOURCE "../../src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c"
 #endif
 #include WOW_TEST_XTRN_SOURCE
 #include <string.h>

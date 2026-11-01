@@ -1,6 +1,6 @@
 #define MVDM_REDIRECTOR_WORKER_EXPORTS
 #include "mvdm_redirector_async.h"
-#include "mvdm/inc/vrnmpipe.h"
+#include "mvdm-host/inc/vrnmpipe.h"
 #include "ntvdm-exe/session/session.h"
 #include <stdio.h>
 #include <string.h>

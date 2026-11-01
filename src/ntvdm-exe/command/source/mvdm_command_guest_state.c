@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "ntvdm-exe/session/session.h"
-#include "mvdm/dos/command/cmd.h"
+#include "mvdm-host/dos/command/cmd.h"
 
 /* DIVERGENCE(ADAPTER-SOFTPC-037): OpenNT retained these COMMAND/DEM/SoftPC
  * DOSDATA scalars as process-address aliases. Preserve one-bound-session use,

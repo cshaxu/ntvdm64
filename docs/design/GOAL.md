@@ -25,10 +25,13 @@ OpenNT and SoftPC recovery is source-first:
    the original unit composable;
 4. author new behavior only under a recorded last-resort exception.
 
-The canonical `src/mvdm` tree preserves the complete selected OpenNT
-`base/mvdm` relative layout. Its manifest distinguishes executable MVDM host,
-standalone-tool, immutable firmware and load-only DOS/WOW guest slices without
-splitting their source paths. It also keeps exact `mvdm-platform-abi`, the
+The canonical `src/mvdm-host` and `src/mvdm-guest` trees preserve the selected
+OpenNT `base/mvdm` relative layout across the owner-specified role split.
+The guest root contains guest-executed DOS/WOW, DOSX, SIM16, guest tools,
+BIOS, firmware and guest-side VDD examples; other paths remain in the host root.
+The manifest distinguishes executable host,
+standalone-tool, immutable firmware and load-only DOS/WOW guest slices.
+The project also keeps exact `mvdm-platform-abi`, the
 original SoftPC CCPU40 execution package and bounded historical-interface
 adapters, neutral `session`, cross-process `broker`, and final `app`
 composition. A preserved/buildable historical tool is never treated as a

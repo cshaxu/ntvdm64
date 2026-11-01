@@ -1,7 +1,7 @@
 # debugger family
 
 The selected debugger owner is the byte-identical original
-`src/mvdm/dbg/dbg.c`. It supplies `DBGInit`, `DBGDispatch`, module and
+`src/mvdm-host/dbg/dbg.c`. It supplies `DBGInit`, `DBGDispatch`, module and
 segment notifications, fault/return notifications, and the WOW-facing export
 shapes. Its `STATUS_VDM_EVENT` transport is a continuable Win32 debug
 exception, not a private CSR RPC. The selected public event layout is the

@@ -2,7 +2,7 @@
  * records and caller; preserve the original prepend and all device policy. */
 #define WriteConsoleInputVDMW observed_WriteConsoleInputVDMW
 #define nt_resume_event_thread observed_original_nt_resume_event_thread
-#include "../../src/mvdm/softpc.new/host/src/nt_event.c"
+#include "../../src/mvdm-host/softpc.new/host/src/nt_event.c"
 #undef WriteConsoleInputVDMW
 #undef nt_resume_event_thread
 #include <intrin.h>

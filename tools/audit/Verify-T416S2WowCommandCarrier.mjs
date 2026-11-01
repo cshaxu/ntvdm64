@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 const read = file => fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
-const cmdmisc = read('src/mvdm/dos/command/cmdmisc.c');
+const cmdmisc = read('src/mvdm-host/dos/command/cmdmisc.c');
 const firmware = read('src/ntvdm/softpc/mvdm_softpc_firmware.c');
 const firmwareHeader = read('src/ntvdm/softpc/include/mvdm_softpc_firmware.h');
 const sessionHeader = read('src/session/session.h');

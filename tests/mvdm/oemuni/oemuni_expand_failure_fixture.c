@@ -32,7 +32,7 @@ static VOID NTAPI checked_free(PANSI_STRING string)
 #define RtlAnsiStringToUnicodeString fail_ansi
 #define RtlUnicodeStringToOemString fail_oem
 #define RtlFreeAnsiString checked_free
-#include "../../../src/mvdm/oemuni/process.c"
+#include "../../../src/mvdm-host/oemuni/process.c"
 
 int main(void)
 {

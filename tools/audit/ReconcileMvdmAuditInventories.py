@@ -100,7 +100,8 @@ def main():
                 selected = 'conflict-unresolved'
             else:
                 original = base / rel
-                current = REPO / 'src/mvdm' / rel
+                guest = REPO / 'src/mvdm-guest' / rel
+                current = guest if guest.is_file() else REPO / 'src/mvdm-host' / rel
                 if original.is_file() and current.is_file():
                     percent, denominator, method = estimate(original, current)
                 else:

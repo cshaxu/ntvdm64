@@ -4,15 +4,15 @@ import hashlib
 root = Path(__file__).resolve().parents[2]
 items = [
     ('artifacts/mvdm-audit/shard-1/bop9-source-fixture.py',
-     'src/mvdm/softpc.new/host/src/nt_bop.c',
+     'src/mvdm-host/softpc.new/host/src/nt_bop.c',
      'C10228895446D6193AE6FD0215F5B93299359858DA1F7DD0626AC7CBB7E70153',
      "else 'reads=8'", "else 'reads=0'"),
     ('artifacts/mvdm-audit/shard-1/int15-source-fixture.py',
-     'src/mvdm/softpc.new/base/bios/tape_io.c',
+     'src/mvdm-host/softpc.new/base/bios/tape_io.c',
      '9073B54069F74950CB4B14D2B01E7AEAC0EDD2A482930AEF5DE6ABFF5CFCD5F3',
      "else 'reads=2'", "else 'reads=0'"),
     ('artifacts/mvdm-audit/shard-0/illegal-op-source-fixture.py',
-     'src/mvdm/softpc.new/base/system/illegalp.c',
+     'src/mvdm-host/softpc.new/base/system/illegalp.c',
      'C3214520B0944064CF396D3E22814836A8DC193B0F6594EFAFA627D7C038FF94',
      'else "reads=8"', 'else "reads=4"'),
 ]

@@ -34,8 +34,8 @@ $environment = Join-Path $build 'msvc-mt.cmd'
 $environmentNinja = $environment.Replace('\', '/')
 
 $sources = @(
-    'src/mvdm/suballoc/suballoc.c',
-    'src/mvdm/xms.486/xmsmemr.c',
+    'src/mvdm-host/suballoc/suballoc.c',
+    'src/mvdm-host/xms.486/xmsmemr.c',
     'tests/adapter-mvdm-host-out/softpc/xms_mapped_memory_fixture.c',
     'src/ntvdm-exe/softpc/mvdm_xms_memory.c',
     'src/ntvdm-exe/softpc/mvdm_softpc_guest_memory.c',
@@ -48,13 +48,13 @@ $cflags = '/nologo /std:c11 /MT /W4 /DWIN_32 /DCPU_40_STYLE ' +
     '/I ' + $root + '/src/compat/include ' +
     '/I ' + $root + '/src/ntvdm-exe/softpc/include ' +
     '/I ' + $root + '/src/non-mvdm/public/sdk/inc ' +
-    '/I ' + $root + '/src/mvdm/xms.486 ' +
-    '/I ' + $root + '/src/mvdm/inc ' +
+    '/I ' + $root + '/src/mvdm-host/xms.486 ' +
+    '/I ' + $root + '/src/mvdm-host/inc ' +
     '/I ' + $root + '/src/non-mvdm/public/sdk/inc ' +
     '/I ' + $root + '/src/non-mvdm/public/internal/base/inc ' +
     '/I ' + $root + '/src/non-mvdm/public/ddk/inc ' +
-    '/I ' + $root + '/src/mvdm/softpc.new/host/inc ' +
-    '/I ' + $root + '/src/mvdm/softpc.new/base/inc '
+    '/I ' + $root + '/src/mvdm-host/softpc.new/host/inc ' +
+    '/I ' + $root + '/src/mvdm-host/softpc.new/base/inc '
 $objects = @()
 $buildLines = @()
 foreach ($source in $sources) {

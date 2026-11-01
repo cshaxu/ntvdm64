@@ -26,7 +26,7 @@ static NTSTATUS NTAPI font_conversion(PUNICODE_STRING dst, PCOEM_STRING src, BOO
    conversion failures are substituted; no installed font is touched. */
 #define RemoveFontResourceW font_provider
 #define RtlOemStringToUnicodeString font_conversion
-#include "../../../src/mvdm/oemuni/file.c"
+#include "../../../src/mvdm-host/oemuni/file.c"
 
 int main(void)
 {

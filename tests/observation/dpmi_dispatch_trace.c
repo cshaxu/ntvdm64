@@ -1,6 +1,6 @@
 /* Test-only observation wrapper; no guest writes or production graph change. */
 #define DpmiDispatch s36_original_DpmiDispatch
-#include "../../src/mvdm/dpmi32/dpmi32.c"
+#include "../../src/mvdm-host/dpmi32/dpmi32.c"
 #undef DpmiDispatch
 #include <stdio.h>
 #ifdef DPMI_TRACE_XMEM_FAILURE

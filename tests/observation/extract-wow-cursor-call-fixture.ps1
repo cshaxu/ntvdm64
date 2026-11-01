@@ -8,7 +8,7 @@ $output = [IO.Path]::GetFullPath($BuildRoot)
 if (!$output.StartsWith(($root + '\build\'), [StringComparison]::OrdinalIgnoreCase)) {
     throw 'Fixture output must be under repository build.'
 }
-$source = Join-Path $root ('src/mvdm/wow32/' + $(if($Kind -eq 'Bitmap'){'wuser.c'}else{'wucursor.c'}))
+$source = Join-Path $root ('src/mvdm-host/wow32/' + $(if($Kind -eq 'Bitmap'){'wuser.c'}else{'wucursor.c'}))
 $text = [IO.File]::ReadAllText($source)
 $signature=if($Kind -eq 'Bitmap'){'ULONG FASTCALL WU32LoadBitmap(PVDMFRAME pFrame)'}else{'ULONG FASTCALL WU32LoadCursor(PVDMFRAME pFrame)'}
 $start = $text.IndexOf($signature)

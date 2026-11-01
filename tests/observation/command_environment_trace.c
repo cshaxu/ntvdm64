@@ -2,7 +2,7 @@
  * The formal product graph never selects this source. No guest writes here.
  */
 #define cmdGetInitEnvironment s35_original_GetInitEnvironment
-#include "../../src/mvdm/dos/command/cmdenv.c"
+#include "../../src/mvdm-host/dos/command/cmdenv.c"
 #undef cmdGetInitEnvironment
 
 #ifndef S35_ENVIRONMENT_TRACE_LOG

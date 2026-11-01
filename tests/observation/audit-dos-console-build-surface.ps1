@@ -19,7 +19,7 @@ foreach ($line in Get-Content -LiteralPath $graph) {
         $path = $Matches.file.Replace('$:', ':').Replace('$ ', ' ')
         if (-not [IO.Path]::IsPathRooted($path)) { $path = Join-Path (Split-Path $graph) $path }
         $full = [IO.Path]::GetFullPath($path).Replace('\','/')
-        if ($full.StartsWith($root + '/src/mvdm/', [StringComparison]::OrdinalIgnoreCase) -or
+        if ($full.StartsWith($root + '/src/mvdm-host/', [StringComparison]::OrdinalIgnoreCase) -or
             $full.StartsWith($root + '/src/ntvdm-exe/', [StringComparison]::OrdinalIgnoreCase)) {
             if (-not (Test-Path -LiteralPath $full -PathType Leaf)) { throw "Missing selected source: $full" }
             [void]$sources.Add($full)
@@ -71,7 +71,7 @@ if ($Dumpbin) {
     $mirrorObjects = 0
     $bypasses = [Collections.Generic.List[string]]::new()
     foreach ($item in $objects) {
-        $isMirror = $item.Source.StartsWith($root + '/src/mvdm/', [StringComparison]::OrdinalIgnoreCase)
+        $isMirror = $item.Source.StartsWith($root + '/src/mvdm-host/', [StringComparison]::OrdinalIgnoreCase)
         if ($isMirror) { ++$mirrorObjects }
         $objectPath = if ([IO.Path]::IsPathRooted($item.Object)) { $item.Object } else { Join-Path (Split-Path $graph) $item.Object }
         if (-not (Test-Path -LiteralPath $objectPath -PathType Leaf)) { throw "Missing compiled object: $objectPath" }

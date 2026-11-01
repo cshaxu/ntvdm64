@@ -1,7 +1,7 @@
 # Target-only WOW32.DLL binding manifest.
 #
 # The 77 selected original WOW32 bodies, original `wow32.def`, resource and
-# historical source manifest remain canonical under src/mvdm/wow32/.  This
+# historical source manifest remain canonical under src/mvdm-host/wow32/.  This
 # manifest owns only the standalone bindings that must reside in the late-
 # loaded DLL and import their worker-local state through ntvdm.exe's narrow
 # ABI.

@@ -43,7 +43,7 @@ if ([string]::IsNullOrWhiteSpace($RepositoryRoot)) {
     $RepositoryRoot = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 }
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$wow = Join-Path $root 'src/mvdm/wow32'
+$wow = Join-Path $root 'src/mvdm-host/wow32'
 $adapterWow = Join-Path $root 'src/wow32-dll/source'
 $manifest = Join-Path $wow 'sources'
 $definition = Join-Path $wow 'wow32.def'
@@ -375,10 +375,10 @@ $includeRoots = @(
     'src/compat/include',
     'src/wow32-dll/include',
     'src/ntvdm-exe/wow/include',
-    'src/mvdm/wow32',
-    'src/mvdm/inc',
-    'src/mvdm/softpc.new/base/inc',
-    'src/mvdm/softpc.new/host/inc',
+    'src/mvdm-host/wow32',
+    'src/mvdm-host/inc',
+    'src/mvdm-host/softpc.new/base/inc',
+    'src/mvdm-host/softpc.new/host/inc',
     'src/non-mvdm/public/sdk/inc',
     'src/non-mvdm/public/internal/base/inc',
     'src/non-mvdm/public/internal/windows/inc',

@@ -30,7 +30,7 @@ function CopyCase($source){
  foreach($m in $matchesFound){$next=[regex]::Match($text.Substring($m.Index+$m.Length),'(?m)^    case WM_');if(!$next.Success){throw 'Missing exact case boundary'};$length=$m.Length+$next.Index;$script:selections+=@{source=$source;name='COPYDATA-case';offset=$m.Index;length=$length};$text.Substring($m.Index,$length)}
 }
 try{
- $script:selections=@();$original="$repo/src/mvdm/wow32";$bodies=@()
+ $script:selections=@();$original="$repo/src/mvdm-host/wow32";$bodies=@()
  foreach($name in @('CopyDataAddNode','CopyDataFindData16','CopyDataFindData32','CopyDataDeleteNode')){$bodies+=Body "$original/wdde.c" $name}
  $bodies+=Body "$original/wmdisp32.c" 'WM32CopyData'
  $cases=@(CopyCase "$original/wmsg16.c")

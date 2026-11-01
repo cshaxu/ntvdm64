@@ -199,13 +199,11 @@ handoff/completion mechanisms belong here when their full contracts agree.
 Audit provenance, including project additions inside mirror files. Original
 execution, completion, blocking/resume and cleanup stay in their original owners.
 
-For these rules, `mvdm-host` names the manifest-selected executable host slice
-of the canonical physical `src/mvdm/` OpenNT `base/mvdm` tree. It is not a
-separate filesystem root; explicit paths use `mvdm/`. This preserves existing
-logical dependency vocabulary without splitting original source for builds or
-visual comparison.
+For these rules, `mvdm-host` names the host root of the selected OpenNT
+`base/mvdm` tree; `mvdm-guest` contains the owner-selected guest subtrees.
+Both preserve their original relative paths and provenance.
 
-1. The production source owners are the canonical physical `mvdm` tree (with
+1. The production source owners include `mvdm-host` and `mvdm-guest` (with
    manifest-declared host, guest, tool and firmware slices), `non-mvdm`,
    `compat`, declaration-only `interface`, `worker-base`, and the
    executable-owned `run16`, `basesrv`, `ntvdm`, `monitor` and admitted

@@ -2,7 +2,10 @@
 
 ## Original and shared compatibility roots
 
-`src/mvdm` remains the selected original MVDM mirror. `src/non-mvdm` retains
+`src/mvdm-host` and `src/mvdm-guest` contain the selected original MVDM mirror.
+The latter carries guest-executed DOS/WOW, DOSX, SIM16, guest tools, BIOS,
+firmware and the identified guest-side VDD examples. Other MVDM paths are
+under `src/mvdm-host`. `src/non-mvdm` retains
 the selected original non-MVDM sources at their original relative paths.
 Three colliding headers retain the previously selected, registered subsets;
 the unselected full variants remain available in Git history and provenance.
@@ -127,7 +130,8 @@ pair-only wording below, not the ban on native-specific frontend renderers.
 
 ```text
 src/
-  mvdm/
+  mvdm-host/
+  mvdm-guest/
   non-mvdm/
   compat/
   common/{protocol,codec,transport,console}/
@@ -143,9 +147,10 @@ src/
   nthook32-dll/
 ```
 
-`mvdm/` is the one canonical physical selected-OpenNT `base/mvdm` tree: its
-host, guest, tool and firmware slices retain their upstream-relative paths and
-their manifest-declared build roles. It has no private implementation partner:
+`mvdm-host/` and `mvdm-guest/` partition the canonical selected-OpenNT
+`base/mvdm` tree by actual guest versus host execution; within each root,
+original relative paths and manifest-declared build roles are retained. This
+split has no private implementation partner:
 strict mirror policy permits source only in its original OpenNT owner file,
 including audited original files newly imported at their upstream paths.
 The remaining

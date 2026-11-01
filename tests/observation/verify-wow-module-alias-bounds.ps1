@@ -53,7 +53,7 @@ function Invoke-OwnedExecutable([string]$Name, [string]$File, [int]$Seconds) {
 }
 
 try {
-    $source = Join-Path $repo 'src/mvdm/wow32/wole2.c'
+    $source = Join-Path $repo 'src/mvdm-host/wow32/wole2.c'
     $fixture = Join-Path $repo 'tests/adapter-mvdm-host-out/wow/wow_module_alias_fixture.c'
     $commands = @(& ninja.exe -C $provider -t commands wow32.dll)
     if ($LASTEXITCODE) { throw 'Cannot read the production WOW32 compile trace.' }

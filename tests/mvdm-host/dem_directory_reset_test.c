@@ -1,7 +1,7 @@
 /* Compile the actual selected original unit, not a copy of its private
  * structures or reset algorithm. Filesystem calls and NtVdmControl are real.
  * This is provider evidence; it is not a guest INT21 execution claim. */
-#include "mvdm/dos/dem/demsrch.c"
+#include "mvdm-host/dos/dem/demsrch.c"
 #include <stdio.h>
 
 static int assertions, failures;

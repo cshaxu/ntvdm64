@@ -12,7 +12,7 @@ $replacements=@{}
 Push-Location $provider
 try{
  foreach($name in @('wow32')){
-  $source="$repo/src/mvdm/wow32/wow32.c"
+  $source="$repo/src/mvdm-host/wow32/wow32.c"
   $text=[IO.File]::ReadAllText($source)
   $text=$text.Replace("`r`n","`n")
   $needle='if (!CreateSmallHeap())'

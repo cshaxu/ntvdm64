@@ -713,7 +713,7 @@ return-2 behavior; export presence alone is not behavioral acceptance.
 
 This directory owns the target-local binding edge of `WOW32.DLL`.  It is not
 an OpenNT mirror root: the selected 77 original WOW32 C bodies, `wow32.def`,
-`wow32.rc`, and their original manifest remain under `src/mvdm/wow32/`.
+`wow32.rc`, and their original manifest remain under `src/mvdm-host/wow32/`.
 Original USER support bodies remain in their original `src/non-mvdm/`
 paths.
 

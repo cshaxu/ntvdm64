@@ -5,7 +5,7 @@ $output = [IO.Path]::GetFullPath((Join-Path $root $BuildRoot))
 if (!$output.StartsWith(($root + '\build\'), [StringComparison]::OrdinalIgnoreCase)) {
     throw 'Fixture output must be under repository build.'
 }
-$source = Join-Path $root 'src/mvdm/wow32/wuser.c'
+$source = Join-Path $root 'src/mvdm-host/wow32/wuser.c'
 $text = [IO.File]::ReadAllText($source)
 $start = $text.IndexOf('ULONG FASTCALL WU32LoadBitmap(PVDMFRAME pFrame)')
 $finish = $text.IndexOf('ULONG FASTCALL WU32WOWGetIdFromDirectory', $start)

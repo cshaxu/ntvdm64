@@ -29,7 +29,7 @@ try{
  }
  if((Get-FileHash "$provider/wow32.dll").Hash -ne $normal){throw 'Normal provider changed'}
  $objects=@([regex]::Matches($link,'(?<!\S)obj/[^\s"]+\.(obj|res)')|ForEach-Object {Join-Path $provider $_.Value}|Select-Object -Unique)
- @($PSCommandPath,$source,"$repo/src/mvdm/wow32/wcall16.c","$provider/build.ninja")+$objects|Get-FileHash|Export-Csv -NoTypeInformation "$root/inputs.csv"
+ @($PSCommandPath,$source,"$repo/src/mvdm-host/wow32/wcall16.c","$provider/build.ninja")+$objects|Get-FileHash|Export-Csv -NoTypeInformation "$root/inputs.csv"
  @{kind='diagnostic-only';publishable=$false;target='SHLPROBE';fault='actual CallBack16 resolver Preparation/Returned';normalProvider=$normal;diagnosticProvider=(Get-FileHash "$root/WOW32.DLL").Hash}|ConvertTo-Json|Set-Content "$root/diagnostic-manifest.json"
  0|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/error.txt";1|Set-Content "$root/exit.txt";throw}

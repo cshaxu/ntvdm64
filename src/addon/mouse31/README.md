@@ -48,7 +48,7 @@ binaries/default profiles remain unchanged; live tests select the new driver
 only on recoverable installations. S3 owns final installation packaging.
 
 References: original source-shaped ABI comments in
-`src/mvdm/wow16/drivers/mouse/mouse31.asm` and `mouse.def` (WOW thunks, not reused
-as a DOS driver); original DPMI reflection in `src/mvdm/dpmi/dxintr.asm` and
+`src/mvdm-guest/wow16/drivers/mouse/mouse31.asm` and `mouse.def` (WOW thunks, not reused
+as a DOS driver); original DPMI reflection in `src/mvdm-guest/dpmi/dxintr.asm` and
 `dxint31.asm`; Microsoft DDK adaptation guide mouse contract and Microsoft
 article Q74572. These are ABI evidence, not imported implementation.

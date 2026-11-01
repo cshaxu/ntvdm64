@@ -494,10 +494,10 @@ new Run16/NTSRV Direct admission. The original `$Exec` calls
 successfully loaded-and-executed DOS program. The original process-removal
 path calls `SVC_PDBTERMINATE` with the terminating PSP before releasing its
 resources. The PSP contains the original parent-PSP field. Source anchors:
-[COMMAND dispatch](../../src/mvdm/dos/v86/cmd/command/tcode.asm),
-[DOS EXEC](../../src/mvdm/dos/v86/doskrnl/dos/msproc.asm),
-[DOS return](../../src/mvdm/dos/v86/doskrnl/dos/msctrlc.asm), and
-[PSP layout](../../src/mvdm/dos/v86/inc/pdb.inc). Audit and reuse
+[COMMAND dispatch](../../src/mvdm-guest/dos/v86/cmd/command/tcode.asm),
+[DOS EXEC](../../src/mvdm-guest/dos/v86/doskrnl/dos/msproc.asm),
+[DOS return](../../src/mvdm-guest/dos/v86/doskrnl/dos/msctrlc.asm), and
+[PSP layout](../../src/mvdm-guest/dos/v86/inc/pdb.inc). Audit and reuse
 these already-reached worker-local host service boundaries for observational
 entry/ordinary termination; do not add a guest BOP, rebuild guest media,
 infer an entry from a failed EXEC, or treat load-only/overlay or a COMMAND
@@ -511,7 +511,7 @@ TSR is a specific fidelity limit, not an ordinary termination: original
 `msctrlc.asm` exit path then skips `SVC_PDBTERMINATE` and restores the parent
 PSP. `SCS_TSR` is queried and cleared by an original guest `INT 21h` service,
 not published as a host completion event
-([original query](../../src/mvdm/dos/v86/doskrnl/dos/misc.asm)). The existing entry/PDB-termination
+([original query](../../src/mvdm-guest/dos/v86/doskrnl/dos/misc.asm)). The existing entry/PDB-termination
 pair therefore does not prove a TSR's foreground-return instant or its later
 resident lifetime. Continue auditing other original host-visible paths, but
 unless one supplies a proved terminal event, mark the affected observed node

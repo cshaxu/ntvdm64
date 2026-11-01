@@ -5,7 +5,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$wowRoot = Join-Path $root 'src\mvdm\wow32'
+$wowRoot = Join-Path $root 'src\mvdm-host\wow32'
 $tableNames = @('wktbl2.h', 'wutbl2.h', 'wgtbl2.h', 'wkbdtbl2.h',
     'wstbl2.h', 'wshtbl2.h', 'wwstbl2.h', 'wthtbl2.h', 'wmmtbl2.h',
     'wcmdgtbl.h')

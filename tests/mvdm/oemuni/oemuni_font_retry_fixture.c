@@ -42,7 +42,7 @@ static BOOL WINAPI close_provider(HANDLE handle)
 { (void)handle; ++closed; return TRUE; }
 #define CreateFileW create_provider
 #define RemoveFontResourceW remove_provider
-#include "../../../src/mvdm/oemuni/file.c"
+#include "../../../src/mvdm-host/oemuni/file.c"
 
 /* Test-only CPU/guest-memory inputs, not a replacement DEM implementation. */
 typedef struct { int unused; } mvdm_guest_location;

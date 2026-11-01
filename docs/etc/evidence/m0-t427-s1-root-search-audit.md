@@ -66,11 +66,11 @@ not passes unless explicitly recorded above.
 
 ## Original DOS ordering
 
-Original [path1.asm](../../../src/mvdm/dos/v86/cmd/command/path1.asm)
+Original [path1.asm](../../../src/mvdm-guest/dos/v86/cmd/command/path1.asm)
 Path_Search first calls search on the specified path/current directory;
 explicit path failure stops search. Only then does path_loop visit user PATH.
 Its documented early success applies even if that directory supplies EXE/BAT.
-Original [path2.asm](../../../src/mvdm/dos/v86/cmd/command/path2.asm)
+Original [path2.asm](../../../src/mvdm-guest/dos/v86/cmd/command/path2.asm)
 Search ranks .COM=8, .EXE=4, .BAT=2 within that directory; an explicit extension
 is retained. This supports directory-first, not extension-first global lookup.
 The current run16 .PIF slot is a separate compatibility concern to resolve

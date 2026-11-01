@@ -59,7 +59,7 @@ DWORD WINAPI mock_WaitForSingleObject(HANDLE, DWORD);
 BOOL WINAPI mock_WriteFile(HANDLE, LPCVOID, DWORD, LPDWORD, LPOVERLAPPED);
 BOOL WINAPI mock_ClearCommError(HANDLE, LPDWORD, LPCOMSTAT);
 
-#include "../../src/mvdm/softpc.new/host/src/nt_com.c"
+#include "../../src/mvdm-host/softpc.new/host/src/nt_com.c"
 
 #include <stdio.h>
 #include <string.h>

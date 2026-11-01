@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 
-#include "../../src/mvdm/softpc.new/host/inc/host_qev.h"
+#include "../../src/mvdm-host/softpc.new/host/inc/host_qev.h"
 #ifndef MVDM_QEV_EXPECT_HANDLE_BYTES
 #define MVDM_QEV_EXPECT_HANDLE_BYTES 8
 #endif

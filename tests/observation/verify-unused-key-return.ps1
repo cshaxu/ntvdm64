@@ -6,7 +6,7 @@ if(!$build.StartsWith((Join-Path $root 'build')+'\',[StringComparison]::OrdinalI
     throw 'BuildRoot must be below repository build'
 }
 New-Item -ItemType Directory -Path $build -ErrorAction Stop | Out-Null
-$source=Join-Path $root 'src/mvdm/softpc.new/host/src/nt_event.c'
+$source=Join-Path $root 'src/mvdm-host/softpc.new/host/src/nt_event.c'
 $body=[regex]::Match([IO.File]::ReadAllText($source),'(?ms)^void ReturnUnusedKeyEvents\(int UnusedKeyEvents\)\r?\n\{.*?^\}')
 if(!$body.Success){throw 'Original function extraction failed'}
 [IO.File]::WriteAllText((Join-Path $build 'unused_key_return.inc'),$body.Value)

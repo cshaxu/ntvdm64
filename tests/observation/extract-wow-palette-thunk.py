@@ -32,9 +32,9 @@ def extract(source, signature, name):
 
 
 result = {
-    'get_thunk_sha256': extract('src/mvdm/wow32/wgpal.c',
+    'get_thunk_sha256': extract('src/mvdm-host/wow32/wgpal.c',
         'ULONG FASTCALL WG32GetPaletteEntries(PVDMFRAME pFrame)', 'original-getpaletteentries.inc'),
-    'copy_sha256': extract('src/mvdm/wow32/wstruc.c',
+    'copy_sha256': extract('src/mvdm-host/wow32/wstruc.c',
         'VOID putpaletteentry16(VPPALETTEENTRY16 vppe, INT c, LPPALETTEENTRY lpp)', 'original-putpaletteentry.inc'),
 }
 (output / 'extract.json').write_text(json.dumps(result, indent=2) + '\n', encoding='utf-8')

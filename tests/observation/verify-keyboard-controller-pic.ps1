@@ -53,8 +53,8 @@ try {
     [pscustomobject]@{
         profile = 'x86 /MT NTVDM CCPU40'; elapsed_ms = $clock.ElapsedMilliseconds
         executable_sha256 = (Get-FileHash -LiteralPath $exe).Hash
-        keyba_sha256 = (Get-FileHash (Join-Path $root 'src/mvdm/softpc.new/base/keymouse/keyba.c')).Hash
-        ica_sha256 = (Get-FileHash (Join-Path $root 'src/mvdm/softpc.new/base/system/ica.c')).Hash
+        keyba_sha256 = (Get-FileHash (Join-Path $root 'src/mvdm-host/softpc.new/base/keymouse/keyba.c')).Hash
+        ica_sha256 = (Get-FileHash (Join-Path $root 'src/mvdm-host/softpc.new/base/system/ica.c')).Hash
         controller_reply = 'C0 returns input port; 20, AA, AB, D0 and E0 return their response bytes'
         scope = 'Actual controller/PIC; normal and early EOI slot order, controlled host callbacks, no BIOS ISR/timer acceptance'
     } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $out 'result.json') -Encoding UTF8

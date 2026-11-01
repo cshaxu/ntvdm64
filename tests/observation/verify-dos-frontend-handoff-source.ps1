@@ -24,9 +24,9 @@ function Assert-Order([string]$Label, [string]$Text, [string[]]$Statements) {
     "PASS source order: $Label"
 }
 
-$events = Read-Source 'src/mvdm/softpc.new/host/src/nt_event.c'
-$exec = Read-Source 'src/mvdm/dos/command/cmdexec.c'
-$misc = Read-Source 'src/mvdm/dos/command/cmdmisc.c'
+$events = Read-Source 'src/mvdm-host/softpc.new/host/src/nt_event.c'
+$exec = Read-Source 'src/mvdm-host/dos/command/cmdexec.c'
+$misc = Read-Source 'src/mvdm-host/dos/command/cmdmisc.c'
 $block = Region $events 'void nt_block_event_thread(ULONG BlockFlags)' 'void nt_resume_event_thread(void)'
 $resume = Region $events 'void nt_resume_event_thread(void)' 'SyncBiosKbdLedToKbdDevice('
 $execute = Region $exec 'VOID cmdExec32 (PCHAR pCmd32, PCHAR pEnv)' '/* cmdExecComspec32'

@@ -2,7 +2,7 @@
  * keyboard's input/count/port boundaries without file I/O at handoff. */
 #define keys_in_6805_buff observed_original_keys_in_6805_buff
 #define AT_kbd_init observed_original_AT_kbd_init
-#include "../../src/mvdm/softpc.new/base/keymouse/keyba.c"
+#include "../../src/mvdm-host/softpc.new/base/keymouse/keyba.c"
 #undef keys_in_6805_buff
 #undef AT_kbd_init
 #include <stdlib.h>

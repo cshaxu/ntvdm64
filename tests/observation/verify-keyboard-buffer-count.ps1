@@ -6,7 +6,7 @@ if(!$build.StartsWith((Join-Path $root 'build')+'\',[StringComparison]::OrdinalI
     throw 'BuildRoot must be below repository build'
 }
 New-Item -ItemType Directory -Path $build -ErrorAction Stop | Out-Null
-$source=Join-Path $root 'src/mvdm/softpc.new/base/keymouse/keyba.c'
+$source=Join-Path $root 'src/mvdm-host/softpc.new/base/keymouse/keyba.c'
 $body=[regex]::Match([IO.File]::ReadAllText($source),'(?ms)^GLOBAL int keys_in_6805_buff\(int \*part_key_transferred\)\r?\n\{.*?^\}')
 if(!$body.Success){throw 'Original function extraction failed'}
 [IO.File]::WriteAllText((Join-Path $build 'keyboard_buffer_count.inc'),$body.Value)
@@ -14,7 +14,7 @@ $fixture='tests/app/keyboard_buffer_count_test.c'
 if(@($HistoryBoundary,$BiosJoin,$OriginReturn).Where({$_}).Count -gt 1){throw 'Choose one keyboard fixture'}
 $extraObjects=@()
 if($OriginReturn){
-    $eventText=[IO.File]::ReadAllText((Join-Path $root 'src/mvdm/softpc.new/host/src/nt_event.c'))
+    $eventText=[IO.File]::ReadAllText((Join-Path $root 'src/mvdm-host/softpc.new/host/src/nt_event.c'))
     $functions=@{
         'keyboard_origin_init.inc'='void InitKeyHistory';
         'keyboard_origin_update.inc'='void update_key_history';
@@ -33,7 +33,7 @@ if($OriginReturn){
     $fixture='tests/app/keyboard_origin_return_test.c'
 }
 if($BiosJoin){
-    $eventSource=Join-Path $root 'src/mvdm/softpc.new/host/src/nt_event.c'
+    $eventSource=Join-Path $root 'src/mvdm-host/softpc.new/host/src/nt_event.c'
     $text=[IO.File]::ReadAllText($eventSource)
     $returned=[regex]::Match($text,'(?ms)^void ReturnUnusedKeyEvents\(int UnusedKeyEvents\)\r?\n\{.*?^\}')
     $bios=[regex]::Match($text,'(?ms)^VOID ReturnBiosBufferKeys\(VOID\)\r?\n\{.*?^\}')
@@ -45,7 +45,7 @@ if($BiosJoin){
 if($HistoryBoundary){
     $up=[regex]::Match([IO.File]::ReadAllText($source),'(?ms)^GLOBAL VOID host_key_up IFN1\(int,key\).*?(?=^#ifdef NTVDM\r?\nGLOBAL VOID RaiseAllDownKeys)')
     $down=[regex]::Match([IO.File]::ReadAllText($source),'(?ms)^GLOBAL VOID host_key_down IFN1\(int,key\).*?(?=^GLOBAL VOID host_key_up IFN1)')
-    $eventSource=Join-Path $root 'src/mvdm/softpc.new/host/src/nt_event.c'
+    $eventSource=Join-Path $root 'src/mvdm-host/softpc.new/host/src/nt_event.c'
     $returned=[regex]::Match([IO.File]::ReadAllText($eventSource),'(?ms)^void ReturnUnusedKeyEvents\(int UnusedKeyEvents\)\r?\n\{.*?^\}')
     $process=[regex]::Match([IO.File]::ReadAllText($eventSource),'(?ms)^VOID nt_process_keys\(PKEY_EVENT_RECORD KeyEvent\)\r?\n\{.*?^\}')
     if(!$up.Success -or !$down.Success -or !$process.Success -or !$returned.Success){throw 'Original history boundary extraction failed'}

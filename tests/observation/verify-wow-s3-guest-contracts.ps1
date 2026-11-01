@@ -21,7 +21,7 @@ if(!$out.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or
 $null=New-Item -ItemType Directory -Path $out
 $shell=(Get-Process -Id $PID).Path
 try {
-    $sourceRoots=@('src/wow32-dll','src/mvdm/wow32',
+    $sourceRoots=@('src/wow32-dll','src/mvdm-host/wow32',
         'src/non-mvdm/windows/core/ntuser',
         'tests/observation/verify-win16-hook-probe.ps1',
         'tests/observation/verify-wow-s3-guest-contracts.ps1',

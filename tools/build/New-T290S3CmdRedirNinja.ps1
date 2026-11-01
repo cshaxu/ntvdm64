@@ -21,8 +21,8 @@ $includes = @('src', 'src/compat/include',
     'src/non-mvdm/public/sdk/inc',
     'src/non-mvdm/public/sdk/inc',
     'src/non-mvdm/public/internal/base/inc',
-    'src/mvdm-support/inc', 'src/mvdm/inc', 'src/mvdm/dos/command', 'src/ntvdm-exe/session',
-    'src/mvdm/softpc.new/host/inc', 'src/mvdm/softpc.new/base/inc') |
+    'src/mvdm-support/inc', 'src/mvdm-host/inc', 'src/mvdm-host/dos/command', 'src/ntvdm-exe/session',
+    'src/mvdm-host/softpc.new/host/inc', 'src/mvdm-host/softpc.new/base/inc') |
     ForEach-Object { '/I "' + (Join-Path $root $_).Replace('\', '/') + '"' }
 $cflags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 ' + ($includes -join ' ')
 $content = @"
@@ -39,7 +39,7 @@ rule link
   command = cmd /c "`$environment link /nologo /out:`$out `$in"
   description = LINK `$out
 
-build obj/cmdredir.obj: cc `$root/src/mvdm/dos/command/cmdredir.c
+build obj/cmdredir.obj: cc `$root/src/mvdm-host/dos/command/cmdredir.c
 build obj/guest_memory_lease.obj: cc `$root/src/ntvdm-exe/session/guest_memory_lease.c
 build obj/session.obj: cc `$root/src/ntvdm-exe/session/session.c
 build obj/fixture.obj: cc `$root/tests/mvdm-host/dos/command/t290_s3_cmdredir_fixture.c

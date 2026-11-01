@@ -42,7 +42,7 @@ def main():
     records = []
     for stem, names in selected.items():
         obj = Coff(args.worker_build / 'obj/ccpu' / (stem + '.obj'))
-        source = Path('src/mvdm/softpc.new/base/ccpu386') / (stem + '.c')
+        source = Path('src/mvdm-host/softpc.new/base/ccpu386') / (stem + '.c')
         original = Path('O:/repos.external/OpenNT/base/mvdm/softpc.new/base/ccpu386') / (stem + '.c')
         assert sha(source.read_bytes()) == sha(original.read_bytes())
         for name in names:

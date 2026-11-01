@@ -6,7 +6,7 @@ const out=path.resolve(process.argv[2]);
 assert(/^build\/M\d+-T\d+\/S\d+\/.+/.test(path.relative(process.cwd(),out).replaceAll('\\','/')));
 fs.mkdirSync(out,{recursive:true});
 const read=p=>fs.readFileSync(p,'utf8').replaceAll('\r','');
-const current=read('src/mvdm/softpc.new/base/ccpu386/c_main.c');
+const current=read('src/mvdm-host/softpc.new/base/ccpu386/c_main.c');
 const original=read('O:/repos.external/OpenNT/base/mvdm/softpc.new/base/ccpu386/c_main.c');
 const macros=s=>s.slice(s.indexOf('#define UPDATE_INTEL_IP(x)'),s.indexOf('/* mark host format IP'));
 assert.equal(macros(current),macros(original));

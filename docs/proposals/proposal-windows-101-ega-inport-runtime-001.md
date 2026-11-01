@@ -106,15 +106,15 @@ WIN100.BIN SHA-256 为
    返回，入口的 JCXZ 到 `001Ch` far-call 串口探测段。停止时匹配的
    InPort 代码段 `0335h` 计数快照为 0；这是最终快照，不等于对所有
    检测轮次递送次数的完整测量。
-4. 原始 [host_com_open](../../src/mvdm/softpc.new/host/src/nt_com.c)
+4. 原始 [host_com_open](../../src/mvdm-host/softpc.new/host/src/nt_com.c)
    在 guest 首次写串口时调用真实 CreateFile。打开失败且 DisplayError
    为 TRUE 时，通过 RcErrorBoxPrintf 同步等待用户响应；之后才设置
    ADAPTER_NULL 并返回失败。
-   [资源文本](../../src/mvdm/softpc.new/obj.vdm/resource.rc)中的
+   [资源文本](../../src/mvdm-host/softpc.new/obj.vdm/resource.rc)中的
    EHS_ERR_OPENING_COM_PORT 与实际对话框吻合。这是此次“卡住”的
    直接等待点，不是已经证明的 CCPU 死循环或显示线程死锁。
 
-当前 [mouse.c](../../src/mvdm/softpc.new/base/keymouse/mouse.c) 的
+当前 [mouse.c](../../src/mvdm-host/softpc.new/base/keymouse/mouse.c) 的
 mode 1/2/3/4 仍由 `loadsainterrupts=5` 调用
 `ica_hw_interrupt(...,100)` 发送有限突发，没有真实周期 timer。
 已证明的是驱动 IRQ 检测失败分支及之后的阻塞链；**尚未分别证明

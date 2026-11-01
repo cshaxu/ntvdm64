@@ -1,6 +1,6 @@
 /* Test-only original exception-boundary observation; never changes CPU state. */
 #define host_exint_hook s38_original_host_exint_hook
-#include "../../src/mvdm/softpc.new/host/src/nt_inthk.c"
+#include "../../src/mvdm-host/softpc.new/host/src/nt_inthk.c"
 #undef host_exint_hook
 /* Keep the original TU's CRT binding, but write observations to the host file. */
 #undef fprintf

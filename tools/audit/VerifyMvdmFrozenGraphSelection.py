@@ -27,7 +27,7 @@ def main():
     source = AUDIT / 'frozen-file-reconciliation.csv'
     with source.open(encoding='utf-8', newline='') as stream:
         rows = list(csv.DictReader(stream))
-    prefix = (REPO / 'src/mvdm').as_posix().lower() + '/'
+    prefix = (REPO / 'src/mvdm-host').as_posix().lower() + '/'
     seen = collections.defaultdict(set)
     identities = []
     for name, relative, target in TARGETS:

@@ -4,10 +4,10 @@
 #include <nt.h>
 #include <vdm.h>
 #include <mvdm.h>
-#include "mvdm/inc/dpmi.h"
+#include "mvdm-host/inc/dpmi.h"
 #include <dpmidata.h>
 #include <dpmi32p.h>
-#include "mvdm/inc/vint.h"
+#include "mvdm-host/inc/vint.h"
 
 extern uint32_t c_getCR0(void);
 extern uint32_t c_sas_dw_at(uint32_t address);

@@ -16,7 +16,7 @@ $bytes = [ordered]@{
     pfnSizeofResource=8; pfnWowWndProcEx=24; pfnWowEditNextWord=20
     pfnWowSetFakeDialogClass=4; pfnWowCBStoreHandle=8
 }
-$source = Join-Path $RepositoryRoot 'src/mvdm/wow32/wow32.c'
+$source = Join-Path $RepositoryRoot 'src/mvdm-host/wow32/wow32.c'
 $header = Join-Path $RepositoryRoot 'src/non-mvdm/public/internal/windows/inc/wowuserp.h'
 $code = Get-Content -Raw -LiteralPath $source
 $declarations = Get-Content -Raw -LiteralPath $header

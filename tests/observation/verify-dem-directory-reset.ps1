@@ -57,7 +57,7 @@ try{
     $result=$stdout.Result+$stderr.Result
     $result | Set-Content (Join-Path $out 'result.txt')
     [pscustomobject]@{exit_code=$p.ExitCode;elapsed_ms=$clock.ElapsedMilliseconds;
-        original_sha256=(Get-FileHash (Join-Path $repo 'src/mvdm/dos/dem/demsrch.c')).Hash;
+        original_sha256=(Get-FileHash (Join-Path $repo 'src/mvdm-host/dos/dem/demsrch.c')).Hash;
         executable_sha256=(Get-FileHash $exe).Hash;
         scope='Actual original DEM functions and real NT directory calls; provider fixture, not guest INT21 proof'
     } | ConvertTo-Json | Set-Content (Join-Path $out 'result.json')

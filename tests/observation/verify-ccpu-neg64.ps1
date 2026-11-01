@@ -45,6 +45,6 @@ RunOwned wrong-oracle "$root/fixture.exe" '--wrong-oracle' 1
 if((Get-Content "$root/wrong-oracle.stdout.txt" -Raw) -notmatch 'FAIL NEG64 case=0'){throw 'Wrong oracle did not fail at the first case'}
 foreach($record in $before){if((Get-FileHash $record.Path).Hash -ne $record.Hash){throw 'Cached product changed'}}
 $before|Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root/normal-cache-inputs.json"
-Get-FileHash $source,$PSCommandPath,$driver,"$worker/build.ninja",$object,"$repo/src/mvdm/softpc.new/base/ccpu386/c_neg64.c","$repo/src/mvdm/softpc.new/base/ccpu386/c_neg64.h","$root/fixture.exe"|Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root/inputs.json"
+Get-FileHash $source,$PSCommandPath,$driver,"$worker/build.ninja",$object,"$repo/src/mvdm-host/softpc.new/base/ccpu386/c_neg64.c","$repo/src/mvdm-host/softpc.new/base/ccpu386/c_neg64.h","$root/fixture.exe"|Select-Object Path,Hash|ConvertTo-Json|Set-Content "$root/inputs.json"
 @{result='pass';cases=$results;observed_cases=631410;original_object_used=$true;cpu_state_stubs=$false;product_changed=$false;guest_changed=$false;scope='Selected native helper and typed ABI, distinct valid IS32 output words; not signed DIV/IMUL decoder or guest fault acceptance'}|ConvertTo-Json -Depth 6|Set-Content "$root/result.json"
 Get-Content "$root/result.json"

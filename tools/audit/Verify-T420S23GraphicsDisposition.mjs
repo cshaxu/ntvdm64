@@ -19,7 +19,7 @@ function collect(relative) {
 }
 
 const graph = read('build/M0-T420/S23/formal-x86-cvid-r7/build.ninja');
-const mode = read('src/mvdm/softpc.new/base/video/vga_mode.c');
+const mode = read('src/mvdm-host/softpc.new/base/video/vga_mode.c');
 const compat = read('src/ntvdm-exe/win32/console_compat.c');
 const proposal = read('docs/proposals/proposal-kvm-window-graphics-presentation-001.md');
 

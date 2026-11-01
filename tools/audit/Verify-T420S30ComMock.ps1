@@ -23,13 +23,13 @@ $log = Join-Path $OutputRoot 'nt-com-mock-fixture.log'
 $include = @(
     'src',
     'src\compat\include',
-    'src\mvdm\softpc.new\base\inc',
-    'src\mvdm\softpc.new\host\inc',
+    'src\mvdm-host\softpc.new\base\inc',
+    'src\mvdm-host\softpc.new\host\inc',
     'src\non-mvdm\public\sdk\inc',
     'src\non-mvdm\public\sdk\inc',
     'src\non-mvdm\public\internal\base\inc',
     'src\non-mvdm\public\internal\windows\inc',
-    'src\mvdm\inc',
+    'src\mvdm-host\inc',
     'src\ntvdm-exe\softpc\include'
 ) | ForEach-Object { '/I "' + (Join-Path $repo $_) + '"' }
 

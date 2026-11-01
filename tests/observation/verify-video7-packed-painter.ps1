@@ -15,7 +15,7 @@ $flags=($graph|Where-Object {$_ -like 'host_cflags = *'}).Substring(14).Replace(
 $release=($graph|Where-Object {$_ -like 'release_cflags = *'}).Substring(17)
 if(!$flags.Contains('/DCPU_40_STYLE') -or !$flags.Contains('/DV7VGA')){throw 'Expected actual production x86 Video7 profile'}
 New-Item -ItemType Directory $out|Out-Null
-$source=Join-Path $repo 'src/mvdm/softpc.new/host/src/nt_vga.c'
+$source=Join-Path $repo 'src/mvdm-host/softpc.new/host/src/nt_vga.c'
 $fixture=Join-Path $repo 'tests/mvdm-host/video7_packed_painter_test.c'
 "$flags $release /Gy /Fo`"$out/painter.obj`" `"$source`""|Set-Content "$out/source.rsp"
 "$($flags.Replace('/D_NO_CRT_STDIO_INLINE','')) $release /Gy /Fo`"$out/fixture.obj`" `"$fixture`""|Set-Content "$out/fixture.rsp"

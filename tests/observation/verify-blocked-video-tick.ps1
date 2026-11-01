@@ -6,7 +6,7 @@ $root=[IO.Path]::GetFullPath($BuildRoot)
 if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Require a fresh build-only evidence directory'}
 $wrapper=(Resolve-Path $CompilerWrapper).Path
 New-Item -ItemType Directory $root | Out-Null
-$source=Get-Content "$repo/src/mvdm/softpc.new/host/src/nt_graph.c" -Raw
+$source=Get-Content "$repo/src/mvdm-host/softpc.new/host/src/nt_graph.c" -Raw
 function Extract-Function([string]$Signature) {
     $at=$source.IndexOf($Signature,[StringComparison]::Ordinal)
     if($at -lt 0){throw "Missing production function: $Signature"}
@@ -19,7 +19,7 @@ function Extract-Function([string]$Signature) {
 }
 $body=(Extract-Function 'static void publish_text_update(void)')+"`r`n"+(Extract-Function 'void nt_graphics_tick(void)')
 [IO.File]::WriteAllText("$root/blocked_video_tick.inc",$body,[Text.Encoding]::ASCII)
-@("$repo/src/mvdm/softpc.new/host/src/nt_graph.c","$repo/tests/component-integration/blocked_video_tick_test.c") | ForEach-Object {
+@("$repo/src/mvdm-host/softpc.new/host/src/nt_graph.c","$repo/tests/component-integration/blocked_video_tick_test.c") | ForEach-Object {
     [pscustomobject]@{Path=$_;Sha256=Get-IsolatedFileSha256 $_}
 } | ConvertTo-Json | Set-Content "$root/inputs.json"
 & $wrapper cl.exe /nologo /MT /O2 /W4 /WX /TC "/I$root" "/Fo$root/test.obj" "/Fe$root/test.exe" "$repo/tests/component-integration/blocked_video_tick_test.c" *> "$root/build.log"

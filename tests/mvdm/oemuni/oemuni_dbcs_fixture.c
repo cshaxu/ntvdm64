@@ -143,8 +143,8 @@ static BOOL WINAPI fixed_volume(LPCWSTR root, LPWSTR volume, DWORD volume_size,
 #define GetEnvironmentVariableA checked_environment
 #define RtlAllocateHeap counted_alloc
 #define RtlFreeHeap counted_free
-#include "../../../src/mvdm/oemuni/file.c"
-#include "../../../src/mvdm/oemuni/process.c"
+#include "../../../src/mvdm-host/oemuni/file.c"
+#include "../../../src/mvdm-host/oemuni/process.c"
 
 int main(void)
 {

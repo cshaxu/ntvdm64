@@ -614,11 +614,11 @@ Original OpenNT/MVDM execution, scheduling, task completion, block/resume and
 cleanup stay in their mirrors; never extract original logic and reverse-call it.
 Backend-specific guest and native Console operations remain explicit locally.
 
-T414 uses `src/mvdm/` as the physical canonical selected-OpenNT
-`base/mvdm` tree. In this document, **MVDM host slice** (and retained shorthand
-`mvdm-host` in logical dependency names) means the manifest-selected executable
-portion of that tree, not a second filesystem root. Guest, tool and firmware
-paths in the same tree remain subject to their existing no-link rules.
+The selected OpenNT `base/mvdm` tree is partitioned between the physical
+`src/mvdm-host/` and `src/mvdm-guest/` roots by actual execution role. Guest
+DOS/WOW, DOSX, SIM16, guest tools, BIOS, firmware and guest-side VDD examples
+belong to the latter. Guest, tool and firmware paths retain their existing link
+and lifecycle rules.
 
 ## Mirror-preserving recovery model
 

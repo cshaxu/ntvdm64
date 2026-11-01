@@ -181,7 +181,7 @@ unbounded desktop lifetime require separate owner testing.
 Interface references: [RBIL AX=160E](https://fd.lod.bz/rbil/interrup/dos_kernel/2f160e.html),
 the supplied unchanged WIN.COM's actual 160E call sites, and the selected
 original V7 BIOS mode table and `set_v7_bank_for_seq_chain4` contract in
-`src/mvdm/softpc.new/base/video/video.c` and `base/inc/egaports.h`.
+`src/mvdm-host/softpc.new/base/video/video.c` and `base/inc/egaports.h`.
 
 The initial static 2026-10-25 release passes all four LogoCase values (Enabled, Missing,
 Invalid, Disabled). Enabled captures the exact original bitmap and then the

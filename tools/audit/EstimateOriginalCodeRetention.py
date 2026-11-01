@@ -77,7 +77,8 @@ def main():
         if row["selected_comparison_edition"] != "OpenNT":
             raise ValueError(f"Unreviewed source edition: {relative}")
         original = ORIGINAL / relative
-        current = ROOT / "src/mvdm" / relative
+        guest = ROOT / "src/mvdm-guest" / relative
+        current = guest if guest.is_file() else ROOT / "src/mvdm-host" / relative
         if digest(original) != row["opennt_sha256"].upper() or digest(current) != row["current_sha256"].upper():
             raise ValueError(f"Frozen source identity changed: {relative}")
         before, after = source_lines(original), source_lines(current)

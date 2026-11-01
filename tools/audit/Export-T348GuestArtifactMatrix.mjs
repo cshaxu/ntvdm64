@@ -81,6 +81,8 @@ function addRoot(rootName, rootPath, series, dispositionForPath, reference) {
 addRoot('mvdm-guest', join(repositoryRoot, 'src', 'mvdm-guest'), 'selected-original-mirror',
   (relativePath) => stagedGuestPaths.has(relativePath)
     ? { kind: 'runtime-media', destination: stagedGuestPaths.get(relativePath) }
+    : stagedFirmwarePaths.has(relativePath)
+      ? { kind: 'runtime-firmware-adjacent', destination: stagedFirmwarePaths.get(relativePath) }
     : relativePath.startsWith('wow16/') || relativePath.startsWith('font16/')
       ? { kind: 'runtime-deferred-wow16', destination: '' }
       : { kind: 'mirror-not-current-stage', destination: '' },
@@ -92,11 +94,6 @@ addRoot('build-output', join(repositoryRoot, 'build', 'output', 'dos'), 'source-
   'build/output/dos');
 addRoot('build-output', join(repositoryRoot, 'build', 'output', 'wow16'), 'source-built-cross-check',
   () => ({ kind: 'source-built-cross-check', destination: '' }), 'build/output/wow16');
-addRoot('mvdm-softpc-firmware', join(repositoryRoot, 'src', 'mvdm-softpc-firmware', 'softpc.new', 'roms'),
-  'selected-original-firmware', (relativePath) => stagedFirmwarePaths.has(`softpc.new/roms/${relativePath}`)
-    ? { kind: 'runtime-firmware-adjacent', destination: stagedFirmwarePaths.get(`softpc.new/roms/${relativePath}`) }
-    : { kind: 'firmware-not-current-stage', destination: '' }, 'Stage-OriginalSoftpcRuntime.mjs');
-
 rows.sort((left, right) => left[0].localeCompare(right[0]) || left[1].localeCompare(right[1]));
 const header = ['root', 'relative_path', 'size_bytes', 'sha256', 'file_class',
   'source_series', 'final_disposition', 'staged_destination', 'provenance_reference'];

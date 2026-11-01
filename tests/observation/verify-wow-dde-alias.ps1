@@ -83,7 +83,7 @@ function Invoke-Owned([string]$Name, [string]$File, [string[]]$Arguments,
 }
 
 try {
-    $inputs = @('src/mvdm/wow32/wdde.c', 'src/mvdm/wow32/wdde.h', 'src/mvdm/wow32/wmdisp32.c', 'src/mvdm/wow32/wumsg.c') |
+    $inputs = @('src/mvdm-host/wow32/wdde.c', 'src/mvdm-host/wow32/wdde.h', 'src/mvdm-host/wow32/wmdisp32.c', 'src/mvdm-host/wow32/wumsg.c') |
         ForEach-Object { Join-Path $repo $_ }
     Get-FileHash -LiteralPath @($inputs + @($fixture, $PSCommandPath, $driver)) |
         Export-Csv -NoTypeInformation "$root/source-inputs.csv"
@@ -91,8 +91,8 @@ try {
         $old = $variant -eq 'baseline'
         $directory = Join-Path $root $variant
         $null = New-Item -ItemType Directory -Path $directory
-        $header = Read-Input 'src/mvdm/wow32/wdde.h' $old
-        $source = Read-Input 'src/mvdm/wow32/wdde.c' $old
+        $header = Read-Input 'src/mvdm-host/wow32/wdde.h' $old
+        $source = Read-Input 'src/mvdm-host/wow32/wdde.c' $old
         $first = $header.IndexOf('typedef struct _HDDE {', [StringComparison]::Ordinal)
         if ($first -lt 0) { throw 'Original DDE type start missing' }
         $last = $header.IndexOf('} DDEINFO, *PDDEINFO;', $first, [StringComparison]::Ordinal)
@@ -123,9 +123,9 @@ try {
             foreach ($name in @('DDEBeginConversion', 'DDETrackhandle', 'DDERollback32')) {
                 $bodies += Select-Body $source $name $variant
             }
-            $bodies += Select-Body (Read-Input 'src/mvdm/wow32/wumsg.c' $false) 'W32CancelDDEPost' $variant
+            $bodies += Select-Body (Read-Input 'src/mvdm-host/wow32/wumsg.c' $false) 'W32CancelDDEPost' $variant
         }
-        $bodies += Select-Body (Read-Input 'src/mvdm/wow32/wmdisp32.c' $old) 'WM32DDEAck' $variant
+        $bodies += Select-Body (Read-Input 'src/mvdm-host/wow32/wmdisp32.c' $old) 'WM32DDEAck' $variant
         [IO.File]::WriteAllText("$directory/dde_alias_exact_bodies.h", ($bodies -join "`n`n"))
         $command = "@echo off`r`ncall `"$driver`" cl.exe /nologo /TC /O2 /MT /Gz /W4 /WX " +
             "/wd4127 /wd4213 /wd4305 /wd4706 /I`"$directory`" `"$fixture`" " +

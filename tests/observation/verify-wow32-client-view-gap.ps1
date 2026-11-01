@@ -8,8 +8,8 @@ $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
 $domain = Join-Path $root 'src\ntvdm-exe\softpc\mvdm_softpc_wow_page_domain.c'
 $bridge = Join-Path $root 'src\wow32-dll\source\wow_user_registration_bridge.c'
 $objects = Join-Path $root 'src\wow32-dll\source\wow_user_object_bindings.c'
-$wuman = Join-Path $root 'src\mvdm\wow32\wuman.c'
-$mouse = Join-Path $root 'src\mvdm\softpc.new\host\src\nt_mouse.c'
+$wuman = Join-Path $root 'src\mvdm-host\wow32\wuman.c'
+$mouse = Join-Path $root 'src\mvdm-host\softpc.new\host\src\nt_mouse.c'
 
 foreach ($path in @($domain, $bridge, $objects, $wuman, $mouse)) {
     if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { throw "Missing selected source: $path" }
@@ -70,7 +70,7 @@ $colourPublisher = $domainText.IndexOf('mvdm_softpc_wow_page_domain_publish_syst
 if ($colourPublisher -lt 0) {
     throw 'The shared USER system-colour publisher is absent.'
 }
-$user = Join-Path $root 'src\mvdm\wow32\wuser.c'
+$user = Join-Path $root 'src\mvdm-host\wow32\wuser.c'
 $userText = Get-Content -LiteralPath $user -Raw
 $setSysColors = $userText.IndexOf('SetSysColors(')
 $colourCall = if ($setSysColors -ge 0) {

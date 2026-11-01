@@ -48,7 +48,7 @@ def main():
         packaged = [entry(i.filename, z.read(i)) for i in z.infolist() if not i.is_dir()]
     candidates = []
     for tree in ("wow16", "bin86"):
-        for p in (repo / "src/mvdm" / tree).rglob("*"):
+        for p in (repo / "src/mvdm-guest" / tree).rglob("*"):
             if p.is_file() and p.suffix.lower() in (".dll", ".exe", ".drv", ".fon"):
                 candidates.append(entry(p, p.read_bytes()))
     # Exact accepted application fixtures only, never copy the installation tree.

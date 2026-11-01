@@ -55,7 +55,7 @@ try {
     [pscustomobject]@{
         profile = 'x86 /MT NTVDM CCPU40'; elapsed_ms = $clock.ElapsedMilliseconds
         executable_sha256 = (Get-FileHash -LiteralPath $exe).Hash
-        ica_sha256 = (Get-FileHash (Join-Path $root 'src/mvdm/softpc.new/base/system/ica.c')).Hash
+        ica_sha256 = (Get-FileHash (Join-Path $root 'src/mvdm-host/softpc.new/base/system/ica.c')).Hash
         scope = 'actual production PIC reset; controlled EOI callback boundary; no guest mutation'
     } | ConvertTo-Json | Set-Content -LiteralPath (Join-Path $out 'result.json') -Encoding UTF8
     Write-Output $text

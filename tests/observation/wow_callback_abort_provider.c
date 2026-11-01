@@ -2,7 +2,7 @@
  * inject at one of its actual resolver edges. Never selected for publication. */
 #define wow_original_CallBack16 diagnostic_original_callback
 #define GetPModeVDMPointerAssert diagnostic_callback_resolver
-#include "../../src/mvdm/wow32/wcall16.c"
+#include "../../src/mvdm-host/wow32/wcall16.c"
 #undef wow_original_CallBack16
 #undef GetPModeVDMPointerAssert
 #include <stdio.h>

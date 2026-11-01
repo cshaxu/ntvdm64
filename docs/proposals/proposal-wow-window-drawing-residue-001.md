@@ -45,20 +45,20 @@ The side investigation searched the existing message/DC bindings, read the
 following functions and consulted retained WINMINE evidence. It did not collect
 a new runtime paint trace or reproduce the defect independently.
 
-- [USER16](../../src/mvdm/wow16/user/user.asm) routes DefWindowProc through
-  its message-bit filter and WOW thunk. [WU32DefWindowProc](../../src/mvdm/wow32/wumsg.c)
+- [USER16](../../src/mvdm-guest/wow16/user/user.asm) routes DefWindowProc through
+  its message-bit filter and WOW thunk. [WU32DefWindowProc](../../src/mvdm-host/wow32/wumsg.c)
   converts arguments and calls native DefWindowProc. This is not evidence of
   a second independent Win3.1 default-caption painter.
 - The project [default-message table](../../src/wow32-dll/source/wow_private_user_compat.c)
   includes WM_NCCALCSIZE, WM_NCPAINT and WM_NCACTIVATE. Their mere inclusion
   does not prove correct runtime handling.
-- [Host-to-guest conversion](../../src/mvdm/wow32/wmdisp32.c) and
-  [guest-to-host conversion](../../src/mvdm/wow32/wmsg16.c) round-trip
+- [Host-to-guest conversion](../../src/mvdm-host/wow32/wmdisp32.c) and
+  [guest-to-host conversion](../../src/mvdm-host/wow32/wmsg16.c) round-trip
   non-client geometry. WM_NCPAINT preserves the special region value 1;
   the HDC-named conversion uses the shared GDI alias domain and is not by
   itself proof of a region/DC type error.
-- [GetWindowDC](../../src/mvdm/wow32/wuwind.c) and
-  [BeginPaint/GetDC](../../src/mvdm/wow32/wuser.c) retain separate native
+- [GetWindowDC](../../src/mvdm-host/wow32/wuwind.c) and
+  [BeginPaint/GetDC](../../src/mvdm-host/wow32/wuser.c) retain separate native
   API calls. Their runtime origin, clipping, state and resource lifetime
   remain unverified for the reported residual pixels.
 - [Window-view projection](../../src/ntvdm-exe/softpc/mvdm_softpc_wow_page_domain.c)

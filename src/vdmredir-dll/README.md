@@ -2,7 +2,7 @@
 
 This directory owns only the non-mirror binding edge of `VDMREDIR.DLL`.
 Original source, resource, definition and export ownership remain in
-`src/mvdm/vdmredir/`.
+`src/mvdm-host/vdmredir/`.
 
 `source/` contains three finite bindings:
 

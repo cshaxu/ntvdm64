@@ -11,7 +11,7 @@ if (!$match.Success) { throw 'Formal XMS flags not found' }
 $flags = $match.Groups[1].Value.Replace('$:', ':')
 if (Test-Path $BuildRoot) { throw 'Use a fresh compile-probe root' }
 $build = (New-Item -ItemType Directory -Path $BuildRoot).FullName
-$source = Join-Path $repo 'src\mvdm\xms.486\xmsmemr.c'
+$source = Join-Path $repo 'src\mvdm-host\xms.486\xmsmemr.c'
 $vs = 'C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 $command = 'call "' + $vs + '" -arch=x86 -host_arch=x64 >nul && cl.exe ' +
     $flags + ' /Fo"' + $build + '\xmsmemr.obj" "' + $source + '"'

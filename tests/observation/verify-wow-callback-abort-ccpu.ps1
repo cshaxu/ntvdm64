@@ -22,8 +22,8 @@ $inputs=@($PSCommandPath,"$worker/build.ninja","$ProviderBuildRoot/build.ninja",
  "$repo/tests/mvdm-host/wow_callback_abort_ccpu_fixture.c",
  "$repo/tests/mvdm-host/wow_callback_abort_tls_fixture.c",
  "$repo/src/wow32-dll/source/wow_callback_frame_lease.c","$repo/src/wow32-dll/include/wow_callback_frame_lease.h",
- "$repo/src/mvdm/softpc.new/base/ccpu386/c_main.c","$repo/src/mvdm/softpc.new/base/ccpu386/ntthread.c",
- "$repo/src/mvdm/softpc.new/base/ccpu386/c_xtrn.c")+@($dependencies[1..($dependencies.Count-1)]|ForEach-Object {"$worker/$_"})
+ "$repo/src/mvdm-host/softpc.new/base/ccpu386/c_main.c","$repo/src/mvdm-host/softpc.new/base/ccpu386/ntthread.c",
+ "$repo/src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c")+@($dependencies[1..($dependencies.Count-1)]|ForEach-Object {"$worker/$_"})
 $vs='C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\Tools\VsDevCmd.bat'
 function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$expected=0){
  $p=Start-Process $file -ArgumentList $arguments -WorkingDirectory $root -WindowStyle Hidden -PassThru -RedirectStandardOutput "$root/$name.out" -RedirectStandardError "$root/$name.err"
@@ -37,10 +37,10 @@ try{
  $targets=$dependencies[1..($dependencies.Count-1)] -join ' '
  Run-Owned prerequisites cmd.exe ('/d /s /c "call "'+$vs+'" -arch=x86 -host_arch=x64 >nul && cd /d "'+$worker+'" && ninja.exe '+$targets+'"')
  Get-FileHash $inputs|Export-Csv -NoTypeInformation "$root/inputs.csv"
- $cpuSource="$repo/src/mvdm/softpc.new/base/ccpu386/c_main.c";$fixtureExtra=''
+ $cpuSource="$repo/src/mvdm-host/softpc.new/base/ccpu386/c_main.c";$fixtureExtra=''
  if($ReferenceRevision){
   foreach($name in @('c_main','ntthread','c_xtrn')){
-   $body=(& git -C $repo show "${ReferenceRevision}:src/mvdm/softpc.new/base/ccpu386/$name.c") -join "`n"
+   $body=(& git -C $repo show "${ReferenceRevision}:src/mvdm-host/softpc.new/base/ccpu386/$name.c") -join "`n"
    if($LASTEXITCODE){throw 'Missing immutable CPU owner source'}
    [IO.File]::WriteAllText("$root/reference-$name.c",$body)
   }

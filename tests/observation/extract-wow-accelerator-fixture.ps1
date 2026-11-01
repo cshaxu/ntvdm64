@@ -3,7 +3,7 @@ $ErrorActionPreference='Stop'
 $repo=(Resolve-Path (Join-Path $PSScriptRoot '../..')).Path
 $out=[IO.Path]::GetFullPath($BuildRoot)
 if(!$out.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase)){throw 'Fixture output must be under repository build.'}
-$source=Join-Path $repo 'src/mvdm/wow32/waccel.c'
+$source=Join-Path $repo 'src/mvdm-host/wow32/waccel.c'
 $text=[IO.File]::ReadAllText($source)
 $signature='HACCEL CreateAccel32(VPVOID vpAccel16, DWORD cbAccel16)'
 $start=$text.IndexOf($signature)

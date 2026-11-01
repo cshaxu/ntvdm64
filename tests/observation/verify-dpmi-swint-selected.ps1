@@ -10,7 +10,7 @@ if (!$out.StartsWith($repo + '\build\', [StringComparison]::OrdinalIgnoreCase) -
 }
 $driver = (Resolve-Path -LiteralPath $CompilerDriver).Path
 $worker = (Resolve-Path "$repo/build/.ninja/msvc-x86-release/worker").Path
-$source = "$repo/src/mvdm/dpmi32/dpmiint.c"
+$source = "$repo/src/mvdm-host/dpmi32/dpmiint.c"
 $fixture = "$repo/tests/mvdm-host/dpmi_swint_selected_fixture.c"
 New-Item -ItemType Directory $out | Out-Null
 $command = & ninja.exe -C $worker -t commands obj/dpmi/dpmiint.obj | Select-Object -Last 1

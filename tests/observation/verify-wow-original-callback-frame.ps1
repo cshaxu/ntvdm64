@@ -28,7 +28,7 @@ function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds,
 try {
     # Compile the complete selected original file, never extract/rewrite the
     # function. /Gy permits discarding unrelated functions at this fixture link.
-    $sources=@('src/mvdm/wow32/wcall16.c','src/wow32-dll/source/wow_callback_frame_lease.c','tests/adapter-mvdm-host-out/wow/wow_callback_abort_fixture.c')
+    $sources=@('src/mvdm-host/wow32/wcall16.c','src/wow32-dll/source/wow_callback_frame_lease.c','tests/adapter-mvdm-host-out/wow/wow_callback_abort_fixture.c')
     $objects=@()
     foreach($source in $sources){
         $name=[IO.Path]::GetFileNameWithoutExtension($source)

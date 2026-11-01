@@ -18,7 +18,7 @@ function listFromMetadata(source, name) {
 const root = path.resolve(process.argv[2] ?? '.');
 const mapPath = process.argv[3] == null ? null : path.resolve(root, process.argv[3]);
 const metadata = requireText(root,
-  'src/mvdm/softpc.new/base/cvidc/c2cpusad.h', /CpuVectorNames/);
+  'src/mvdm-host/softpc.new/base/cvidc/c2cpusad.h', /CpuVectorNames/);
 const publicSlots = listFromMetadata(metadata, 'CpuVectorNames');
 const privateSlots = listFromMetadata(metadata, 'CpuPrivateVectorNames');
 const generator = requireText(root, 'tools/build/GenerateCvidcCpuBinding.mjs',
@@ -27,25 +27,25 @@ const binder = requireText(root,
   'src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c',
   /Cpu\.Sas\s*=\s*&Sas[\s\S]*Sas\.Sas_overwrite_memory\s*=\s*c_sas_overwrite_memory[\s\S]*Cpu\.Video\s*=\s*\(IHP\)&Video/);
 const qevnt = requireText(root,
-  'src/mvdm/softpc.new/base/system/qevnt.c',
+  'src/mvdm-host/softpc.new/base/system/qevnt.c',
   /ULONG\s+qevJumpRestart\s*=\s*100\s*;/);
 const cvidAccess = requireText(root,
-  'src/mvdm/softpc.new/base/cvidc/accessfn.c',
+  'src/mvdm-host/softpc.new/base/cvidc/accessfn.c',
   /Cpu\.CalcQuickEventInstTime/);
 const ccpuHeader = requireText(root,
-  'src/mvdm/softpc.new/base/ccpu386/cpu4gen.h',
+  'src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h',
   /#define\s+effective_addr\(seg, offset\)\s+c_effective_addr\(seg, offset\)/);
-const xt = requireText(root, 'src/mvdm/softpc.new/base/support/xt.c',
+const xt = requireText(root, 'src/mvdm-host/softpc.new/base/support/xt.c',
   /#ifdef CPU_30_STYLE[\s\S]*Cpu\.EffectiveAddr/);
-const evGlue = requireText(root, 'src/mvdm/softpc.new/base/cvidc/ev_glue.c',
+const evGlue = requireText(root, 'src/mvdm-host/softpc.new/base/cvidc/ev_glue.c',
   /setup_vga_globals[\s\S]*mvdm_cvidc_bind_vectors\(\)/);
-const localfm = requireText(root, 'src/mvdm/softpc.new/base/ccpu386/localfm.c',
+const localfm = requireText(root, 'src/mvdm-host/softpc.new/base/ccpu386/localfm.c',
   /extern\s+IHP\s+Gdp\s*;/);
-const main = requireText(root, 'src/mvdm/softpc.new/base/support/main.c',
+const main = requireText(root, 'src/mvdm-host/softpc.new/base/support/main.c',
   /mvdm_cvidc_bind_video_vector\(\)[\s\S]*config\(/);
-requireText(root, 'src/mvdm/softpc.new/base/cvidc/evidgen.h',
+requireText(root, 'src/mvdm-host/softpc.new/base/cvidc/evidgen.h',
   /#ifndef CPU_40_STYLE\s+#define\s+getVideorplane/);
-requireText(root, 'src/mvdm/softpc.new/base/inc/egacpu.h',
+requireText(root, 'src/mvdm-host/softpc.new/base/inc/egacpu.h',
   /extern IS32 getVideodirty_low IPT0\(\)/);
 if (/video_get_|video_set_|MVDM_CVIDC_VIDEO_BIND|boundVideo/.test(binder + generator)) {
   throw new Error('Autonomous accessor rebinding or typed wrapper generation returned');

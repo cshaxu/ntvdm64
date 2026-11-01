@@ -3,7 +3,7 @@
 #include <string.h>
 #include "wow32-dll/include/wow_task_parent.h"
 #include "wow32-dll/include/wow_callback_frame_lease.h"
-#include "mvdm/inc/tdb16.h"
+#include "mvdm-host/inc/tdb16.h"
 #include <stddef.h>
 
 #define CHECK(x) do { if (!(x)) { printf("FAIL line %d\n", __LINE__); return 1; } } while (0)

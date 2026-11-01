@@ -32,7 +32,7 @@ function Assert-NamedExports {
 }
 
 $root = (Resolve-Path -LiteralPath $RepositoryRoot).Path
-$wow32 = Join-Path $root 'src\mvdm\wow32'
+$wow32 = Join-Path $root 'src\mvdm-host\wow32'
 $dumpbin = Get-X86Dumpbin
 
 $wsockOrdinals = @(Select-String -LiteralPath (Join-Path $wow32 'wsext.c') -Pattern '\(char \*\)\s*([0-9]+)' -AllMatches |

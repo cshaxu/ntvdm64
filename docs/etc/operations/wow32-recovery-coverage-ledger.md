@@ -109,7 +109,7 @@ successor capability is marked complete by this audit ledger.
 
 ## Source coverage seed
 
-Exact manifest: [sources](../../../src/mvdm/wow32/sources), SHA-256
+Exact manifest: [sources](../../../src/mvdm-host/wow32/sources), SHA-256
 D24767FF50C4C7017E6FCF5F550E120DB0F580F7C07C77CBE7E99E4432F52B36.
 The active SOURCES block contains 77 C files plus wow32.rc; disabled !IF 0
 tables are not active inputs. EH reports those 77 compiled, not all accepted.
@@ -207,7 +207,7 @@ preceding DLL-boundary task; this list does not freeze old component paths.
 
 ## Dispatch coverage
 
-[wowtbl.c](../../../src/mvdm/wow32/wowtbl.c) SHA-256
+[wowtbl.c](../../../src/mvdm-host/wow32/wowtbl.c) SHA-256
 4C053570AF6E72B0159D0E1BC7C5E9859EF89D513781BBCD1E767DDAF7695960.
 
 | Table | Family | Review owner |

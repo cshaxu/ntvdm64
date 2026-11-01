@@ -22,20 +22,20 @@ function Run($name,$file,$arguments,$expected,$seconds){
  if(!$p.WaitForExit($seconds*1000)){$p.Kill($true);throw "$name deadline"};$p.Refresh();$row.exit=$p.ExitCode;$row.end=[DateTime]::UtcNow.ToString('o');$script:steps|ConvertTo-Json -Depth 5|Set-Content "$root/steps.json";if($p.ExitCode -ne $expected){throw "$name actual $($p.ExitCode), expected $expected"}
 }
 try{
- $paths=@('src/mvdm/inc/wow.h','src/mvdm/inc/wowusr.h','src/mvdm/inc/wowcmpat.h','src/mvdm/wow32/walias.h','src/mvdm/wow32/wmdisp32.h','src/mvdm/wow32/wparam.h','src/mvdm/wow32/wparam.c','src/mvdm/wow32/wmsg16.c','src/mvdm/wow32/wmsgcb.c','src/mvdm/wow32/wmdisp32.c','src/mvdm/wow32/wcntl32.c','src/mvdm/wow32/wuwind.c','src/wow32-dll/source/wow_message_lifetime.c','src/wow32-dll/include/wow_message_lifetime.h','tests/observation/wow_parameter_map_fixture.c','tests/observation/verify-wow-parameter-map.ps1')
+ $paths=@('src/mvdm-host/inc/wow.h','src/mvdm-host/inc/wowusr.h','src/mvdm-host/inc/wowcmpat.h','src/mvdm-host/wow32/walias.h','src/mvdm-host/wow32/wmdisp32.h','src/mvdm-host/wow32/wparam.h','src/mvdm-host/wow32/wparam.c','src/mvdm-host/wow32/wmsg16.c','src/mvdm-host/wow32/wmsgcb.c','src/mvdm-host/wow32/wmdisp32.c','src/mvdm-host/wow32/wcntl32.c','src/mvdm-host/wow32/wuwind.c','src/wow32-dll/source/wow_message_lifetime.c','src/wow32-dll/include/wow_message_lifetime.h','tests/observation/wow_parameter_map_fixture.c','tests/observation/verify-wow-parameter-map.ps1')
  $paths|ForEach-Object{Get-FileHash "$repo/$_"}|Export-Csv -NoTypeInformation "$root/inputs.csv"
  Get-FileHash "$repo/src/compat/include/wow_control_message_abi.h"|Export-Csv -NoTypeInformation "$root/control-abi-input.csv"
  foreach($kind in @('baseline','candidate')){
   $old=$kind -eq 'baseline';$dir="$root/$kind";$null=New-Item -ItemType Directory $dir
-  $wow=Read 'src/mvdm/inc/wow.h' $old;$aliases=Read 'src/mvdm/wow32/walias.h' $old;$forward=Read 'src/mvdm/wow32/wmdisp32.h' $old
+  $wow=Read 'src/mvdm-host/inc/wow.h' $old;$aliases=Read 'src/mvdm-host/wow32/walias.h' $old;$forward=Read 'src/mvdm-host/wow32/wmdisp32.h' $old
   $types="#pragma pack(push,1)`n"+(Region $wow 'typedef struct _PARMWP' '} PARM16, *PPARM16;' 'original PARM16')+"`n"
-  $types+=Region (Read 'src/mvdm/inc/wowusr.h' $old) 'typedef struct _SETWINDOWTEXT16' 'typedef SETWINDOWTEXT16 UNALIGNED *PSETWINDOWTEXT16;' 'original SetWindowText arguments'
+  $types+=Region (Read 'src/mvdm-host/inc/wowusr.h' $old) 'typedef struct _SETWINDOWTEXT16' 'typedef SETWINDOWTEXT16 UNALIGNED *PSETWINDOWTEXT16;' 'original SetWindowText arguments'
   $types+="`n#pragma pack(pop)`n"+(Region $aliases 'typedef struct _DLGDATA' '} MSGPARAMEX;' 'original reverse records')+"`n"+(Region $forward 'typedef struct _WM32MSGPARAMEX *LPWM32MSGPARAMEX;' '} WM32MSGPARAMEX;' 'original forward records')
   foreach($name in @('OLDCB_DIR','OLDCBEC_SETCOMBOFOCUS','OLDCBEC_KILLCOMBOFOCUS')){$line=[regex]::Match($wow,'(?m)^#define '+$name+'[^\n]*');if(!$line.Success){throw 'Missing original constant'};$types+="`n"+$line.Value}
-  $compat=Read 'src/mvdm/inc/wowcmpat.h' $old
+  $compat=Read 'src/mvdm-host/inc/wowcmpat.h' $old
   foreach($name in @('WOWCF_NOCBDIRTHUNK','WOWCF_DSBASEDSTRINGPOINTERS','WOWCF_DBASEHANDLEBUG')){$types+="`n"+[regex]::Match($compat,'(?m)^#define '+$name+'[^\n]*').Value}
   [IO.File]::WriteAllText("$dir/parameter_types.h",$types)
-  $map=Read 'src/mvdm/wow32/wparam.c' $old
+  $map=Read 'src/mvdm-host/wow32/wparam.c' $old
   [IO.File]::WriteAllText("$dir/parameter_map_records.h",(Region $map '#define MAPCACHESIZE' 'MAPPARAM gParamMap;' 'original map records/constants'))
   $cacheStart=$map.IndexOf('BOOL IsCacheBlock(PBLKCACHE pc, LPVOID pv);',[StringComparison]::Ordinal);if($cacheStart -lt 0){throw 'Original complete cache missing'}
   # Git's line-array transport omits the file's final newline. Select through
@@ -43,16 +43,16 @@ try{
   $cacheEnd=Body $map 'IsCacheBlock'
   [IO.File]::WriteAllText("$dir/parameter_cache.h",(Region $map 'BOOL IsCacheBlock(PBLKCACHE pc, LPVOID pv);' $cacheEnd 'complete original cache'))
   $bodies=@();foreach($name in @('FindParamMap','GetParam16','AddParamMap','ParamMapUpdateNode','DeleteParamMap','W32CheckThunkParamFlag','FreeParamMap','InitParamMap')){$bodies+=Body $map $name}
-  $bodies+=Body (Read 'src/mvdm/wow32/wmdisp32.c' $old) 'WM32SetText'
-  $bodies+=Body (Read 'src/mvdm/wow32/wcntl32.c' $old) 'WM32CBDir'
-  $combo=Read 'src/mvdm/wow32/wmsgcb.c' $old;foreach($name in @('ThunkCBMsg16','UnThunkCBMsg16')){$bodies+=Body $combo $name}
-  $messages=Read 'src/mvdm/wow32/wmsg16.c' $old
+  $bodies+=Body (Read 'src/mvdm-host/wow32/wmdisp32.c' $old) 'WM32SetText'
+  $bodies+=Body (Read 'src/mvdm-host/wow32/wcntl32.c' $old) 'WM32CBDir'
+  $combo=Read 'src/mvdm-host/wow32/wmsgcb.c' $old;foreach($name in @('ThunkCBMsg16','UnThunkCBMsg16')){$bodies+=Body $combo $name}
+  $messages=Read 'src/mvdm-host/wow32/wmsg16.c' $old
   $case=Region $messages '    case WM_SETTEXT:' '    case WM_ACTIVATEAPP:' 'original reverse text acquisition';$case=$case.Substring(0,$case.LastIndexOf('    case WM_ACTIVATEAPP:'))
   $release=$messages.Substring($messages.IndexOf('VOID FASTCALL UnThunkWMMsg16'))
   $release=Region $release '    case WM_SETTEXT:' '    case WM_GETTEXT:' 'original reverse text release';$release=$release.Substring(0,$release.LastIndexOf('    case WM_GETTEXT:'))
   $bodies+='BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex){LONG lParam=lpmpex->Parm16.WndProc.lParam;PLONG plParamNew=&lpmpex->lParam;switch(lpmpex->Parm16.WndProc.wMsg){'+"`n"+$case+"`n}return TRUE;}"
   $bodies+='VOID FASTCALL UnThunkWMMsg16(LPMSGPARAMEX lpmpex){switch(lpmpex->Parm16.WndProc.wMsg){'+"`n"+$release+"`n}}"
-  $bodies+=Body (Read 'src/mvdm/wow32/wuwind.c' $old) 'WU32SetWindowText'
+  $bodies+=Body (Read 'src/mvdm-host/wow32/wuwind.c' $old) 'WU32SetWindowText'
   $lifetime=Read 'src/wow32-dll/source/wow_message_lifetime.c' $old
   if(!$old){foreach($name in @('wow_message_free16','release_mdi','wow_message_release32')){$bodies+=Body $lifetime $name}}
   foreach($name in @('wow_message_unwind32','wow_message_unwind16')){$bodies+=Body $lifetime $name}

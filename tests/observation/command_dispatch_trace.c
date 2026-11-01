@@ -1,6 +1,6 @@
 /* Diagnostic-only wrapper around the unchanged COMMAND dispatcher. */
 #define CmdDispatch observed_CmdDispatch
-#include "../../src/mvdm/dos/command/cmddisp.c"
+#include "../../src/mvdm-host/dos/command/cmddisp.c"
 #undef CmdDispatch
 
 BOOL CmdDispatch(ULONG service)

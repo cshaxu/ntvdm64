@@ -34,25 +34,25 @@ function Run($name,$file,$Arguments,$expected,$seconds){
  if($p.ExitCode -ne $expected){throw "$name actual $($p.ExitCode), expected $expected"}
 }
 try{
- $paths=@('src/mvdm/inc/wow.h','src/mvdm/wow32/walias.h','src/mvdm/wow32/wstruc.h','src/mvdm/wow32/wstruc.c','src/mvdm/wow32/wmsgem.c','src/mvdm/wow32/wmsglb.c','src/mvdm/wow32/wmsg16.c','src/non-mvdm/windows/core/ntuser/inc/user.h','src/non-mvdm/windows/core/ntuser/client/lboxrare.c','tests/observation/wow_reverse_construction_fixture.c','tests/observation/verify-wow-reverse-construction.ps1')
+ $paths=@('src/mvdm-host/inc/wow.h','src/mvdm-host/wow32/walias.h','src/mvdm-host/wow32/wstruc.h','src/mvdm-host/wow32/wstruc.c','src/mvdm-host/wow32/wmsgem.c','src/mvdm-host/wow32/wmsglb.c','src/mvdm-host/wow32/wmsg16.c','src/non-mvdm/windows/core/ntuser/inc/user.h','src/non-mvdm/windows/core/ntuser/client/lboxrare.c','tests/observation/wow_reverse_construction_fixture.c','tests/observation/verify-wow-reverse-construction.ps1')
  $paths|ForEach-Object{Get-FileHash "$repo/$_"}|Export-Csv -NoTypeInformation "$root/inputs.csv"
  foreach($kind in @('baseline','candidate')){
   $old=$kind -eq 'baseline';$dir="$root/$kind";$null=New-Item -ItemType Directory $dir
-  $wow=Read 'src/mvdm/inc/wow.h' $old;$alias=Read 'src/mvdm/wow32/walias.h' $old;$struct=Read 'src/mvdm/wow32/wstruc.h' $old
+  $wow=Read 'src/mvdm-host/inc/wow.h' $old;$alias=Read 'src/mvdm-host/wow32/walias.h' $old;$struct=Read 'src/mvdm-host/wow32/wstruc.h' $old
   $types="#pragma pack(push,1)`n"+(Slice $wow 'typedef struct _PARMWP' '} PARM16, *PPARM16;' 'original PARM16')+"} PARM16, *PPARM16;`n#pragma pack(pop)`n"
   $types+=(Slice $alias 'typedef struct _DLGDATA' '#define MSG16NEEDSTHUNKING' 'original message/inline records')
   [IO.File]::WriteAllText("$dir/reverse_types.h",$types)
   $bodies=@((Slice $struct '#define STACKORHEAPALLOC' '#define PUTINTARRAY16' 'original stack-or-heap macros'))
   $user=Read 'src/non-mvdm/windows/core/ntuser/inc/user.h' $old
   $bodies+=Slice $user '#define MultDiv' '#define XPixFromXDU' 'original dialog-unit arithmetic'
-  $conversions=Read 'src/mvdm/wow32/wstruc.c' $old
+  $conversions=Read 'src/mvdm-host/wow32/wstruc.c' $old
   foreach($name in @('getintarray16','putintarray16')){$bodies+=Body $conversions $name}
-  foreach($pair in @(@('wmsgem.c','ThunkEMMsg16','UnThunkEMMsg16'),@('wmsglb.c','ThunkLBMsg16','UnThunkLBMsg16'))){$source=Read "src/mvdm/wow32/$($pair[0])" $old;foreach($name in $pair[1..2]){$bodies+=Body $source $name}}
+  foreach($pair in @(@('wmsgem.c','ThunkEMMsg16','UnThunkEMMsg16'),@('wmsglb.c','ThunkLBMsg16','UnThunkLBMsg16'))){$source=Read "src/mvdm-host/wow32/$($pair[0])" $old;foreach($name in $pair[1..2]){$bodies+=Body $source $name}}
   $native=Read 'src/non-mvdm/windows/core/ntuser/client/lboxrare.c' $old
   $bodies+=Body $native 'LBSetTabStops'
   $destruction=Slice $native '        if (pLBIV->iTabPixelPositions != NULL) {' '        Unlock(&pLBIV->spwnd);' 'original tab destruction'
   $bodies+='VOID DestroyTabs(PLBIV pLBIV){'+"`n"+$destruction+"`n}"
-  $source=Read 'src/mvdm/wow32/wmsg16.c' $old
+  $source=Read 'src/mvdm-host/wow32/wmsg16.c' $old
   $case=Slice $source '    case WM_WINHELP:' '    case WM_NCCALCSIZE:' 'original help acquisition'
   $release=$source.Substring($source.IndexOf('VOID FASTCALL UnThunkWMMsg16'))
   $caseFree=Slice $release '    case WM_WINHELP:' '    case WM_NCCALCSIZE:' 'original help release'

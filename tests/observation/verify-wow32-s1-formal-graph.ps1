@@ -20,7 +20,7 @@ function Get-ActiveWowSources([string]$path) {
         ForEach-Object { $_.Groups[1].Value })
 }
 
-$wowRoot = Join-Path $root 'src/mvdm/wow32'
+$wowRoot = Join-Path $root 'src/mvdm-host/wow32'
 $sources = @(Get-ActiveWowSources (Join-Path $wowRoot 'sources'))
 if ($sources.Count -ne 77) { throw "Expected 77 selected WOW32 sources, found $($sources.Count)." }
 

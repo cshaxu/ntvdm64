@@ -1,5 +1,11 @@
 # Source And Research Policy
 
+The selected original MVDM mirror is partitioned between `src/mvdm-host`
+and `src/mvdm-guest`. The guest root contains guest-executed DOS/WOW, DOSX,
+SIM16, guest tools, BIOS, firmware and guest-side VDD examples; the host root
+retains CCPU, devices, DPMI32, WOW32 and other host-executed source. This is a
+path and ownership distinction, not permission to modify or rebuild guest.
+
 The selected non-MVDM original sources live at their original relative paths
 under `src/non-mvdm`; every source retains its registered upstream origin and
 mirror restrictions. `src/compat` is project-owned shared compatibility code,
@@ -147,12 +153,11 @@ file-level precedence. The selected file's source path/hash and the rejected
 alternative are recorded. DOS/WOW16 guest components also retain every
 selected original source, resource, intermediate and binary product, but none
 of their objects is a host link input.
-T414 physically recomposes that selected `base/mvdm` union beneath `src/mvdm/`
-at its original relative paths. The manifest-selected executable host slice is
-still called `mvdm-host` in logical policy text, but is not a parallel source
-root. Guest, independent-tool and immutable-firmware paths share the same
-canonical tree while retaining their no-link roles; conceptual BOP, host and
-SoftPC-control categories do not create split source roots. Executable
+T414 recomposed that selected `base/mvdm` union at its original relative paths.
+The owner subsequently separated guest-executed source and firmware into
+`src/mvdm-guest/`; host-executed paths remain under `src/mvdm-host/`. Guest,
+independent-tool and immutable-firmware paths retain their no-link roles.
+Executable
 `softpc.new/base/*`, including `base/bios` and `base/keymouse`, remains in the
 host slice even when it initializes firmware state. Exact declarations required
 from outside MVDM belong to `mvdm-platform-abi`.
@@ -243,7 +248,8 @@ comparative evidence only and cannot become runtime/acceptance dependencies.
 The owner has expressly approved a narrow exception for
 `O:\repos.external\ntvdmx64`: an individually audited SoftPC patch body or
 generated SoftPC build carrier may be copied only into its named adapter/ABI
-carrier; it must not create a file below `src/mvdm` or `src/non-mvdm`. Each
+carrier; it must not create a file below `src/mvdm-host`, `src/mvdm-guest`
+or `src/non-mvdm`. Each
 imported file must have a register row naming
 the exact NTVDMx64 path and hash, the original SoftPC caller/interface it
 serves, the original-source alternative, the reason that alternative lacks a

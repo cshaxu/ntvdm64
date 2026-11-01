@@ -4,8 +4,8 @@
 #include <string.h>
 #include "insignia.h"
 #include "ios.h"
-#include "../../src/mvdm/softpc.new/base/ccpu386/in.h"
-#include "../../src/mvdm/softpc.new/base/ccpu386/out.h"
+#include "../../src/mvdm-host/softpc.new/base/ccpu386/in.h"
+#include "../../src/mvdm-host/softpc.new/base/ccpu386/out.h"
 
 #ifndef MVDM_IO_EXPECT_WORD_BYTES
 #define MVDM_IO_EXPECT_WORD_BYTES 2

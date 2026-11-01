@@ -17,7 +17,7 @@ for (let i = 0; i < args.length; ++i) {
     throw new Error(`Unexpected argument: ${args[i]}`);
   }
 }
-const sourcePath = 'src/mvdm/softpc.new/base/ccpu386/c_main.c';
+const sourcePath = 'src/mvdm-host/softpc.new/base/ccpu386/c_main.c';
 const source = revision ? spawnSync('git', ['show', `${revision}:${sourcePath}`],
   { encoding: 'utf8' }) : { status: 0, stdout: fs.readFileSync(sourcePath, 'utf8') };
 if (source.status !== 0) throw new Error('Cannot read selected source revision');

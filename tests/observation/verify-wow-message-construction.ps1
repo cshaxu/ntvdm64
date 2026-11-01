@@ -44,15 +44,15 @@ function Owned($name,$file,$arguments,$seconds,$expected){
 }
 try{
  $fixture="$PSScriptRoot/wow_message_construction_fixture.c"
- Get-FileHash "$repo/src/mvdm/inc/wow.h","$repo/src/mvdm/wow32/wmdisp32.c","$repo/src/mvdm/wow32/wmdisp32.h","$repo/src/mvdm/wow32/wmsg16.c","$repo/src/mvdm/wow32/wparam.c","$repo/src/mvdm/wow32/walias.h","$repo/src/wow32-dll/include/wow_message_lifetime.h",$fixture,$PSCommandPath,$CompilerDriver|Export-Csv -NoTypeInformation "$root/source-inputs.csv"
- Get-FileHash "$repo/src/mvdm/wow32/walloc16.c","$repo/src/mvdm/wow32/wcntl32.c","$repo/src/mvdm/wow32/wcommdlg.c","$repo/src/mvdm/wow32/wowhooks.c","$repo/src/wow32-dll/source/wow_message_lifetime.c"|Export-Csv -NoTypeInformation "$root/transaction-inputs.csv"
+ Get-FileHash "$repo/src/mvdm-host/inc/wow.h","$repo/src/mvdm-host/wow32/wmdisp32.c","$repo/src/mvdm-host/wow32/wmdisp32.h","$repo/src/mvdm-host/wow32/wmsg16.c","$repo/src/mvdm-host/wow32/wparam.c","$repo/src/mvdm-host/wow32/walias.h","$repo/src/wow32-dll/include/wow_message_lifetime.h",$fixture,$PSCommandPath,$CompilerDriver|Export-Csv -NoTypeInformation "$root/source-inputs.csv"
+ Get-FileHash "$repo/src/mvdm-host/wow32/walloc16.c","$repo/src/mvdm-host/wow32/wcntl32.c","$repo/src/mvdm-host/wow32/wcommdlg.c","$repo/src/mvdm-host/wow32/wowhooks.c","$repo/src/wow32-dll/source/wow_message_lifetime.c"|Export-Csv -NoTypeInformation "$root/transaction-inputs.csv"
  foreach($kind in @('baseline','candidate')){
   $old=$kind -eq 'baseline';$dir="$root/$kind";$null=New-Item -ItemType Directory $dir
-  $wow=Read-Source 'src/mvdm/inc/wow.h' $old
-  $header=Read-Source 'src/mvdm/wow32/wmdisp32.h' $old
-  $dispatch=Read-Source 'src/mvdm/wow32/wmdisp32.c' $old
-  $messages=Read-Source 'src/mvdm/wow32/wmsg16.c' $old
-  $map=Read-Source 'src/mvdm/wow32/wparam.c' $old
+  $wow=Read-Source 'src/mvdm-host/inc/wow.h' $old
+  $header=Read-Source 'src/mvdm-host/wow32/wmdisp32.h' $old
+  $dispatch=Read-Source 'src/mvdm-host/wow32/wmdisp32.c' $old
+  $messages=Read-Source 'src/mvdm-host/wow32/wmsg16.c' $old
+  $map=Read-Source 'src/mvdm-host/wow32/wparam.c' $old
   $types='#pragma pack(push,1)' + "`n" +
    (Region $wow 'typedef struct _PARMWP' '} PARM16, *PPARM16;' 'callback-records') + "`n" +
    (Region $wow 'typedef struct _POINT16' '} POINT16;' 'point16') + "`n" +
@@ -72,16 +72,16 @@ try{
   $types+="`n"+$constant.Value
   [IO.File]::WriteAllText("$dir/message_construction_types.h",$types)
   # The original current text owner now uses the actual inline call scratch.
-  $aliases=Read-Source 'src/mvdm/wow32/walias.h' $old
+  $aliases=Read-Source 'src/mvdm-host/wow32/walias.h' $old
   $start=$aliases.IndexOf('typedef struct _DLGDATA',[StringComparison]::Ordinal)
   $end=$aliases.IndexOf('#define MSG16NEEDSTHUNKING',$start,[StringComparison]::Ordinal)
   if($start -lt 0 -or $end -lt 0){throw 'Original message records missing'}
   [IO.File]::WriteAllText("$dir/message_construction_messages.h",$aliases.Substring($start,$end-$start))
   [IO.File]::WriteAllText("$dir/message_construction_map_types.h",(Region $map 'typedef struct tagParamNode* LPPARAMNODE;' 'MAPPARAM gParamMap;' 'original-map-records'))
-  $bodies=@(Body (Read-Source 'src/mvdm/wow32/walloc16.c' $old) 'stackalloc16')
+  $bodies=@(Body (Read-Source 'src/mvdm-host/wow32/walloc16.c' $old) 'stackalloc16')
   foreach($name in @('FindParamMap','GetParam16','AddParamMap','ParamMapUpdateNode','DeleteParamMap','FreeParamMap')){$bodies+=Body $map $name}
   foreach($name in @('WM32MDICreate','WM32Create','WM32GetText','WM32SetText','WM32GetDlgCode','WM32AskCBFormatName','WM32WinHelp','WM32SizeClipBoard','WM32DropObject')){$bodies+=Body $dispatch $name}
-  $controls=Read-Source 'src/mvdm/wow32/wcntl32.c' $old
+  $controls=Read-Source 'src/mvdm-host/wow32/wcntl32.c' $old
   $bodies+=Body $controls 'WM32CBDir'
   if($Transaction){
    foreach($name in @('WM32EMGetRect','WM32EMSetRect','WM32EMReplaceSel','WM32EMGetLine','WM32EMSetTabStops','WM32CBAddString','WM32CBGetLBText','WM32CBGetDropDownControlRect','WM32LBGetText','WM32LBDir','WM32LBGetSelItems','WM32LBSetTabStops','WM32LBGetItemRect','WM32LBAddString')){
@@ -91,8 +91,8 @@ try{
     if($name -eq 'WM32EMGetLine'){$body="#pragma warning(push)`n#pragma warning(disable:4244)`n"+$body+"`n#pragma warning(pop)"}
     $bodies+=$body
    }
-   $bodies+=Body (Read-Source 'src/mvdm/wow32/wcommdlg.c' $old) 'WM32msgSHAREVIOLATION'
-   $bodies+=Body (Read-Source 'src/mvdm/wow32/wowhooks.c' $old) 'ThunkCbtHook'
+   $bodies+=Body (Read-Source 'src/mvdm-host/wow32/wcommdlg.c' $old) 'WM32msgSHAREVIOLATION'
+   $bodies+=Body (Read-Source 'src/mvdm-host/wow32/wowhooks.c' $old) 'ThunkCbtHook'
   }
   $case=Region $messages '    case WM_SETTEXT:' '    case WM_ACTIVATEAPP:' 'text-thunk-case'
   $case=$case.Substring(0,$case.LastIndexOf('    case WM_ACTIVATEAPP:'))
@@ -109,7 +109,7 @@ try{
    $branch=Region $dispatch '    if (uMsg == EM_SCROLLCARET) {' "        return 0;   // notification message, no return code`n    }" 'native-only-return'
    $marker='        stack.completed = TRUE; /* DIV-349: successful native-only notification. */'
    if(!$branch.Contains($marker)){throw 'Successful native-only return must commit, not restore its nested call'}
-   $dialog=Region (Read-Source 'src/mvdm/wow32/wcommdlg.c' $false) "UINT APIENTRY`nWCD32CommonDialogProc(" 'ULONG FASTCALL WCD32ChooseColor' 'common-dialog-normal-return'
+   $dialog=Region (Read-Source 'src/mvdm-host/wow32/wcommdlg.c' $false) "UINT APIENTRY`nWCD32CommonDialogProc(" 'ULONG FASTCALL WCD32ChooseColor' 'common-dialog-normal-return'
    if($dialog -notmatch '(?s)uMsg == msgWOWCHOOSEFONT\).*?stack\.completed = TRUE; /\* DIV-349: intentionally filtered, not failed\. \*/\s*return\(FALSE\);'){throw 'Intentional common-dialog filter must commit normally'}
    $finalizer=Region $dispatch '    } __finally {' "`n}`n" 'wndproc-transaction-finalizer'
    foreach($variant in @('current','omitted')){

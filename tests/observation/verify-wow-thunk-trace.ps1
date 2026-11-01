@@ -45,7 +45,7 @@ try {
         'src/wow32-dll/include/wow_user_thunk_scope.h',
         'src/wow32-dll/include/wow_user_native_call.h',
         'src/compat/include/wow_user_declarations.h',
-        'src/mvdm/wow32/isvwow.h','src/mvdm/wow32/wow32.h',
+        'src/mvdm-host/wow32/isvwow.h','src/mvdm-host/wow32/wow32.h',
         'tests/adapter-mvdm-host-out/wow/wow_thunk_trace_fixture.c',
         'tests/adapter-mvdm-host-out/wow/wow_public_memory_abi_fixture.c')
     $inputs|ForEach-Object {Get-FileHash -LiteralPath (Join-Path $repo $_)}|

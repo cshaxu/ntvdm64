@@ -4,7 +4,7 @@
 #define DpmiMapAndCopyBuffer s38_ioctl_map
 #define DpmiSwitchToRealMode s38_ioctl_enter_real
 #define DpmiSimulateIretCF s38_ioctl_return
-#include "../../src/mvdm/dpmi32/int21map.c"
+#include "../../src/mvdm-host/dpmi32/int21map.c"
 #undef DpmiMapAndCopyBuffer
 #undef host_simulate
 #undef DpmiSwitchToRealMode

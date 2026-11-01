@@ -5,7 +5,7 @@ $output = [IO.Path]::GetFullPath((Join-Path $root $BuildRoot))
 if (!$output.StartsWith(($root + '\build\'), [StringComparison]::OrdinalIgnoreCase)) {
     throw 'Fixture output must be under repository build.'
 }
-$mirror = Join-Path $root 'src/mvdm/wow32/wmdisp32.c'
+$mirror = Join-Path $root 'src/mvdm-host/wow32/wmdisp32.c'
 $original = 'O:/repos.external/OpenNT/base/mvdm/wow32/wmdisp32.c'
 $expected = '4A9004C1F57AF28280D0176AFD72CAE76A7FBAE90FFB758426C287435E5912D4'
 foreach ($path in @($mirror, $original)) {

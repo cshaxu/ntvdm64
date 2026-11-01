@@ -17,7 +17,7 @@ $shell=(Get-Process -Id $PID).Path
 $null=New-Item -ItemType Directory $root
 try{
     $roots=@('src/wow32-dll','src/non-mvdm','src/compat',
-        'src/mvdm/wow32','src/ntvdm-exe/wow','src/ntvdm-exe/softpc',
+        'src/mvdm-host/wow32','src/ntvdm-exe/wow','src/ntvdm-exe/softpc',
         'tests/adapter-mvdm-host-out/wow','tests/mvdm-host',
         'tests/observation/verify-wow-task-lifecycle.ps1',
         'tests/observation/verify-wow-native-slot-group.ps1')

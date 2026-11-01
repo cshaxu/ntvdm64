@@ -86,20 +86,20 @@ runtime: the owner clarified boundary-recovery scope.
 | --- | --- |
 | Identifier Mode | M0 T473 S12, Ordinary Mode. |
 | Admission And Approval | Owner inserted the source-layout rename after S11; input handoff is deferred to S13. |
-| Objective | Clean proven excluded mirror branches with registered markers; exclude shared code from further removal. |
-| Delivery State | Owner-bounded [cleanup checkpoint](../../artifacts/mvdm-audit/s12-cleanup-freeze.md); prior shared-header changes and remaining selections need disposition. |
+| Objective | Split original MVDM guest sources into `src/mvdm-guest`, and rename the remaining mirror `src/mvdm-host`. |
+| Delivery State | [Role split](../../artifacts/mvdm-audit/s12-mvdm-role-split.md) tested and published; awaiting owner acceptance. [Prior cleanup](../../artifacts/mvdm-audit/s12-cleanup-freeze.md) remains bounded. |
 | Non-goals | Guest modification or rebuilding, semantic rewrites, new compatibility behavior. |
 | Reference Baseline | S11 closure and source policy; original host and ABI trees have three nonidentical colliding paths. |
 | Files And ABI Surface | Source roots, builds, tests, provenance and current authority references; preserve source cohorts. |
 | Applicable Rules | Source policy, immutable guest, original owner boundaries, minimal mirror diff. |
-| Verification | Trace actual build contexts and original sources; preserve active alternatives and guest; compare rebuilt ten-image outputs and run warranted regressions and documentation checks. |
+| Verification | Prove source-role paths and bytes, update build/test references, cached-build and compare ten images; run appropriate gates without rebuilding guest. |
 | Expected Markers | No conflicting overwrite, no stale active path, correct source provenance and matching deployed package. |
 | Held Selections | Preserve unselected [x86 CallProc32](../../artifacts/mvdm-audit/s12-i386-held.md) and [CPU/mouse paths](../../artifacts/mvdm-audit/s12-cpu-mouse-held.md) pending behavioral ownership review. |
 | Asset Needs | Existing sources and build caches; no new guest. |
 | Reporting Requirements | Paths, collisions, tests, publication, commit and remaining limits. |
 | Stop Conditions | Loss of source identity, guest changes or unapproved behavior change. |
 | Exit Criteria | Audited builds and tests, coherent publication, commit and push; wait for owner acceptance. |
-| Original Owner Request | Keep original non-MVDM relative paths under `src/non-mvdm`; retain shared project bindings under `src/compat`. |
+| Original Owner Request | Split guest-executed sources and firmware from MVDM host, preserve original paths and guest images; retain `non-mvdm` and `compat` owners. |
 | Similar-Issue Sweep | Check all active build, test, governance and provenance references. |
 | Candidate Proposal | [Source-layout rename](../proposals/proposal-original-source-layout-rename-001.md). |
 | Temporary Evidence | `build/t473-s12-flat`, 60-minute phase, 3-GiB size, 10-minute no-progress budget. |
