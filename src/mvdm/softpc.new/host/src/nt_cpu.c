@@ -49,10 +49,9 @@ GLOBAL	quick_event_delays	host_delays;
 /* DIVERGENCE(MVDM-HOST-DIV-030): CCPU SAS owns Start_of_M_area and
  * Length_of_M_area in ccpusas4.c.  These two historical duplicate host
  * definitions are unused by the selected CCPU path and collide at a modern
- * static link. Keep them for non-CCPU configurations. */
+ * static link. The unselected non-CCPU body is now marked by DIV-505. */
 #ifndef CCPU
-GLOBAL	host_addr Start_of_M_area;
-GLOBAL	IHPE Length_of_M_area;
+/* DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register. */
 #endif
 #ifdef A2CPU
 extern	void	route_on();
@@ -163,14 +162,7 @@ void	host_set_hw_int()
 void	host_clear_hw_int()
 {
 #ifndef CCPU
-#ifdef CPU_40_STYLE
-
-    cpu_clearHwInt();
-#else
-    IMPORT void a3_cpu_clear_hw_int();
-
-    a3_cpu_clear_hw_int();
-#endif /* CPU_40_STYLE */
+/* DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register. */
 #endif /* not CCPU */
 }
 #endif

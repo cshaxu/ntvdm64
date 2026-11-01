@@ -120,7 +120,7 @@ GLOBAL NTSTATUS	VdmInstallHardwareIntHandler IFN1(PVOID, HardwareIntHandler)
 #ifdef CCPU
     HWIntHandler = HardwareIntHandler;
 #else
-    GLOBAL_VDM_HwIntHandler = HardwareIntHandler;
+/* DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register. */
 #endif
     return(STATUS_SUCCESS);
 }
@@ -200,7 +200,7 @@ GLOBAL NTSTATUS	VdmInstallSoftwareIntHandler IFN1(PVOID, SoftwareIntHandler)
 #ifdef CCPU
     SWIntHandler = SoftwareIntHandler;
 #else
-    GLOBAL_VDM_SoftIntHandler = SoftwareIntHandler;
+/* DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register. */
 #endif
     return(STATUS_SUCCESS);
 }
@@ -572,7 +572,7 @@ GLOBAL NTSTATUS	VdmInstallFaultHandler IFN1(PVOID, FaultHandler)
 #ifdef CCPU
     EXIntHandler = FaultHandler;
 #else
-    GLOBAL_VDM_FaultHandler = FaultHandler;
+/* DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register. */
 #endif
     return(STATUS_SUCCESS);
 }

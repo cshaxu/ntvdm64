@@ -41,7 +41,7 @@
 #ifdef CCPU
 #include "ccpusas4.h"
 #else	/* ! CCPU */
-#include "Cpu_c.h"
+/* DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register. */
 #endif	/* ! CCPU */
 #endif	/* CPU_40_STYLE */
 

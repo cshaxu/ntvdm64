@@ -475,7 +475,7 @@ enum pla_type { pla_type_empty,
 		pla_type_nano_leave
 };
 #ifndef	CCPU
-#include <gdpvar.h>
+/* DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register. */
 #endif /* CCPU */
 #endif	/* CPU_40_STYLE */
 
@@ -5213,59 +5213,7 @@ LOCAL IBOOL decode_offset IFN3(char *, coffset, IU32 *, offset, IS32 *, seg)
 		decode_segoffset2[5].get_segreg_val = c_getCS;
 #endif /* SPC386 */
 #else  /* !CCPU */
-#ifdef CPU_40_STYLE
-		decode_segoffset[0].get_offset_val = Cpu.GetBX;
-		decode_segoffset[0].get_segreg_val = Cpu.GetDS;
-		decode_segoffset[1].get_offset_val = Cpu.GetSI;
-		decode_segoffset[1].get_segreg_val = Cpu.GetDS;
-		decode_segoffset[2].get_offset_val = Cpu.GetDI;
-		decode_segoffset[2].get_segreg_val = Cpu.GetDS;
-		decode_segoffset[3].get_offset_val = Cpu.GetSP;
-		decode_segoffset[3].get_segreg_val = Cpu.GetSS;
-		decode_segoffset[4].get_offset_val = Cpu.GetBP;
-		decode_segoffset[4].get_segreg_val = Cpu.GetSS;
-		decode_segoffset[5].get_offset_val = Cpu.GetIP;
-		decode_segoffset[5].get_segreg_val = Cpu.GetCS;
-		decode_segoffset2[0].get_offset_val = Cpu.GetEBX;
-		decode_segoffset2[0].get_segreg_val = Cpu.GetDS;
-		decode_segoffset2[1].get_offset_val = Cpu.GetESI;
-		decode_segoffset2[1].get_segreg_val = Cpu.GetDS;
-		decode_segoffset2[2].get_offset_val = Cpu.GetEDI;
-		decode_segoffset2[2].get_segreg_val = Cpu.GetDS;
-		decode_segoffset2[3].get_offset_val = Cpu.GetESP;
-		decode_segoffset2[3].get_segreg_val = Cpu.GetSS;
-		decode_segoffset2[4].get_offset_val = Cpu.GetEBP;
-		decode_segoffset2[4].get_segreg_val = Cpu.GetSS;
-		decode_segoffset2[5].get_offset_val = Cpu.GetEIP;
-		decode_segoffset2[5].get_segreg_val = Cpu.GetCS;
-#else  /* !CPU_40_STYLE */
-		decode_segoffset[0].get_offset_val = getBX;
-		decode_segoffset[0].get_segreg_val = getDS;
-		decode_segoffset[1].get_offset_val = getSI;
-		decode_segoffset[1].get_segreg_val = getDS;
-		decode_segoffset[2].get_offset_val = getDI;
-		decode_segoffset[2].get_segreg_val = getDS;
-		decode_segoffset[3].get_offset_val = getSP;
-		decode_segoffset[3].get_segreg_val = getSS;
-		decode_segoffset[4].get_offset_val = getBP;
-		decode_segoffset[4].get_segreg_val = getSS;
-		decode_segoffset[5].get_offset_val = getIP;
-		decode_segoffset[5].get_segreg_val = getCS;
-#ifdef SPC386
-		decode_segoffset2[0].get_offset_val = getEBX;
-		decode_segoffset2[0].get_segreg_val = getDS;
-		decode_segoffset2[1].get_offset_val = getESI;
-		decode_segoffset2[1].get_segreg_val = getDS;
-		decode_segoffset2[2].get_offset_val = getEDI;
-		decode_segoffset2[2].get_segreg_val = getDS;
-		decode_segoffset2[3].get_offset_val = getESP;
-		decode_segoffset2[3].get_segreg_val = getSS;
-		decode_segoffset2[4].get_offset_val = getEBP;
-		decode_segoffset2[4].get_segreg_val = getSS;
-		decode_segoffset2[5].get_offset_val = getEIP;
-		decode_segoffset2[5].get_segreg_val = getCS;
-#endif /* SPC386 */
-#endif /* !CPU_40_STYLE */
+/* DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register. */
 #endif /* !CCPU */
 		cold = FALSE;
 	}
@@ -5433,23 +5381,7 @@ LOCAL IBOOL decode_iaddr_ok IFN3 (char *, iaddr, IS32 *, seg, LIN_ADDR *, offset
 		decode_segreg[5].get_segreg_val = c_getGS;
 #endif /* SPC386 */
 #else  /* !CCPU */
-#ifdef CPU_40_STYLE
-		decode_segreg[0].get_segreg_val = Cpu.GetCS;
-		decode_segreg[1].get_segreg_val = Cpu.GetDS;
-		decode_segreg[2].get_segreg_val = Cpu.GetSS;
-		decode_segreg[3].get_segreg_val = Cpu.GetES;
-		decode_segreg[4].get_segreg_val = Cpu.GetFS;
-		decode_segreg[5].get_segreg_val = Cpu.GetGS;
-#else  /* !CPU_40_STYLE */
-		decode_segreg[0].get_segreg_val = getCS;
-		decode_segreg[1].get_segreg_val = getDS;
-		decode_segreg[2].get_segreg_val = getSS;
-		decode_segreg[3].get_segreg_val = getES;
-#ifdef SPC386
-		decode_segreg[4].get_segreg_val = getFS;
-		decode_segreg[5].get_segreg_val = getGS;
-#endif /* SPC386 */
-#endif /* !CPU_40_STYLE */
+/* DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register. */
 #endif /* !CCPU */
 		cold = FALSE;
 	}
@@ -6206,11 +6138,7 @@ LOCAL void dump_page_table_entries IFN3(int, first_index, int, last_index, IU32,
 			(entry & 0x02) ? 'W' : 'R');
 	}
 #ifndef	CCPU
-	else if ((((entry >> 9) & 7) == 6) && Sas.IsPageInstanceData(entry))
-	{
-		/* Not Present, but Windows instance data */
-		fprintf(trace_file, "Not Present, Instance data\n");
-	}
+/* DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register. */
 #endif /* CCPU */
 	else
 	{
