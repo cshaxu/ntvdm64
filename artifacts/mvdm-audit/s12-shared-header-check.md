@@ -32,6 +32,41 @@ multi-edge headers becomes single-source after deduplication. This joins a
 historical dependency snapshot to current commands and therefore does not
 extend coverage to the 15 missing headers or other configurations.
 
+## Follow-up on the 15 missing paths
+
+The historical inventory filtered paths to `src/mvdm/`, so 12 of the 15
+were outside its scope because they belong to `src/non-mvdm/`. A separate
+current-build check joined `ninja -t commands` C compiler objects to VALID
+`ninja -t deps` records for x86 worker/WOW32 and x64 worker, frontend, monitor,
+launcher, service and hook. Every C object in these eight graphs had a valid
+dependency record. Counts below deduplicate by C source path across graphs.
+
+| Previously missing path | Distinct observed C sources |
+| --- | ---: |
+| `non-mvdm/base/win32/inc/base.h` | 13 |
+| `non-mvdm/private/inc/dlcio.h` | 5 |
+| `non-mvdm/public/internal/base/inc/vdm.h` | 150 |
+| `non-mvdm/public/internal/ds/inc/debuglib.h` | 6 |
+| `non-mvdm/public/internal/ds/inc/netdebug.h` | 19 |
+| `non-mvdm/public/internal/ds/inc/netlib.h` | 13 |
+| `non-mvdm/public/internal/ds/inc/rapdebug.h` | 2 |
+| `non-mvdm/public/internal/windows/inc/pif.h` | 2 |
+| `non-mvdm/public/internal/windows/inc/wingdip.h` | 136 |
+| `non-mvdm/public/sdk/inc/ntdbg.h` | 1 |
+| `non-mvdm/windows/core/ntuser/client/usercli.h` | 44 |
+| `non-mvdm/windows/core/ntuser/inc/user.h` | 96 |
+| `mvdm-host/softpc.new/base/inc/hwvga.h` | 0 |
+| `mvdm-host/softpc.new/base/inc/j_c_lang.h` | 0 |
+| `mvdm-host/softpc.new/base/inc/mouse16b.h` | 0 |
+
+The three zeroes mean only that those **exact paths** were not dependencies in
+the observed graphs; they are not a global unreferenced-code claim. In
+particular, a different `base/cvidc/j_c_lang.h` exists, so a filename-only
+search cannot establish which header a consumer includes. The eight graphs do
+not cover guest, alternate configurations, resource compilation, non-default
+targets or future build profiles. These source counts do not identify which
+conditional branch was selected inside a shared header.
+
 No previously committed source was restored or changed by this check. The
 existing [bounded cleanup checkpoint](s12-cleanup-freeze.md) retains the open
 disposition of prior shared-header changes; this observation prevents calling
