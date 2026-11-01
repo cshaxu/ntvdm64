@@ -75,6 +75,7 @@ static DWORD test_bind(frontend_session *frontend,const void *owner,BOOL active,
 static void test_console_source_owner_handoff(void)
 {
     int owner_a=0,owner_b=0;HANDLE input,output;DWORD written,count,i,down=0,up=0;
+    BOOL returned=GetEnvironmentVariableW(L"MVDM_TEST_SOURCE_RETURNED",NULL,0)!=0;
     INPUT_RECORD key={0},records[16];frontend_video video={0};
     console_video_description description={4,2,4,8,8,{0}};
     BYTE pixels[8]={0};HWND window=NULL;ULONGLONG deadline;
@@ -93,6 +94,13 @@ static void test_console_source_owner_handoff(void)
         if(!down)Sleep(10);
     } while(!down && GetTickCount64()<deadline);
     CHECK(down==1);
+    if(returned) {
+        /* The worker did not consume this input: return it before relinquishing
+         * ownership, exactly as ReturnUnusedKeyEvents uses the prepend path. */
+        CHECK(!frontend_session_enter(test_frontend,&owner_a));
+        CHECK(!frontend_session_prepend(test_frontend,&key,1));
+        frontend_session_leave(test_frontend);
+    }
     CHECK(!frontend_session_bind(test_frontend,&owner_a,FALSE));
     CHECK(!frontend_session_bind(test_frontend,&owner_b,TRUE));
     CHECK(!frontend_video_begin(&video,1,&description));
@@ -104,10 +112,20 @@ static void test_console_source_owner_handoff(void)
     CHECK(!frontend_session_enter(test_frontend,&owner_b));
     CHECK(!frontend_session_read(test_frontend,FALSE,records,16,&count));
     frontend_session_leave(test_frontend);
-    for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT && !records[i].Event.KeyEvent.bKeyDown &&
-        records[i].Event.KeyEvent.wVirtualScanCode==0x1d)++up;
-    if(up)fprintf(private_report ? private_report : stderr,"source owner: B received %lu releases for A's key\n",up);
-    CHECK(up==0);
+    down=0;
+    for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT &&
+        records[i].Event.KeyEvent.wVirtualScanCode==0x1d) {
+        if(records[i].Event.KeyEvent.bKeyDown)++down;
+        else { CHECK(!returned || down==1);++up; }
+    }
+    if(returned) {
+        if(down!=1 || up!=1)fprintf(private_report ? private_report : stderr,
+            "returned source: B down=%lu up=%lu\n",down,up);
+        CHECK(down==1 && up==1);
+    } else {
+        if(up)fprintf(private_report ? private_report : stderr,"source owner: B received %lu releases for A's key\n",up);
+        CHECK(down==0 && up==0);
+    }
     CHECK(!frontend_session_bind(test_frontend,&owner_b,FALSE));
     CHECK(!frontend_session_bind(test_frontend,&owner_a,TRUE));
     CHECK(!frontend_session_enter(test_frontend,&owner_a));
@@ -115,7 +133,7 @@ static void test_console_source_owner_handoff(void)
     frontend_session_leave(test_frontend);
     for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT && !records[i].Event.KeyEvent.bKeyDown &&
         records[i].Event.KeyEvent.wVirtualScanCode==0x1d)++up;
-    CHECK(up==1);
+    CHECK(up==1); /* In the returned case the sole release was read by B. */
     CHECK(!frontend_session_bind(test_frontend,&owner_a,FALSE));
     frontend_video_dispose(&video);CloseHandle(input);CloseHandle(output);
 }
