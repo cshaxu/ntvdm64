@@ -170,21 +170,7 @@ LOCAL word rcpu_nop_segment = RCPU_NOP_SEGMENT,
 LOCAL word rcpu_poll_segment = RCPU_POLL_SEGMENT,
 	   rcpu_poll_offset  = RCPU_POLL_OFFSET;
 #else /* GISP_SVGA */
-/* If we are GISP_SVGA the segments will be variables anyway */
-#define int15_seg  RCPU_INT15_SEGMENT
-LOCAL word	int15_off = RCPU_INT15_OFFSET;
-
-#define int1b_seg  KEYBOARD_BREAK_INT_SEGMENT
-LOCAL word   int1b_off = KEYBOARD_BREAK_INT_OFFSET;
-
-#define int05_seg  PRINT_SCREEN_INT_SEGMENT
-LOCAL word  int05_off =	PRINT_SCREEN_INT_OFFSET;
-
-#define rcpu_nop_segment  RCPU_NOP_SEGMENT
-LOCAL word  rcpu_nop_offset  = RCPU_NOP_OFFSET;
-
-#define rcpu_poll_segment  RCPU_POLL_SEGMENT
-LOCAL word rcpu_poll_offset  = RCPU_POLL_OFFSET;
+/* DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register. */
 #endif /* GISP_SVGA */
 
 #if defined(IRET_HOOKS) && defined(GISP_CPU)
@@ -253,13 +239,7 @@ GLOBAL word rcpu_int1C_off = USER_TIMER_INT_OFFSET;
 GLOBAL word rcpu_int4A_seg = RCPU_INT4A_SEGMENT;
 GLOBAL word rcpu_int4A_off = RCPU_INT4A_OFFSET;
 #else /* GISP_SVGA */
-
-/* For GISPSVGA the segs will already be variables */
-#define	rcpu_int1C_seg = USER_TIMER_INT_SEGMENT;
-GLOBAL word rcpu_int1C_off = USER_TIMER_INT_OFFSET;
-
-#define	rcpu_int4A_seg = RCPU_INT4A_SEGMENT;
-GLOBAL word rcpu_int4A_off = RCPU_INT4A_OFFSET;
+/* DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register. */
 #endif /* GISP_SVGA */
 
 GLOBAL word dummy_int_seg = 0;

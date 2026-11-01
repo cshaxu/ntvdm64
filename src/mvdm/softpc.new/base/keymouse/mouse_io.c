@@ -2102,8 +2102,7 @@ the application OUTBs the necessary data.
 #endif		/* GISP_SVGA */
 		  		video_io();
 #else /* GISP_SVGA */
-				/* Video bios chain done from 16 bit */
-				/* NULL */;	
+/* DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register. */
 #endif /* GISP_SVGA */
 	}
                         else

@@ -664,7 +664,7 @@ void vga_disp_func()
 #ifndef HERC 
 	if (video_adapter != VGA)
 #else
-	if ( (video_adapter != VGA) && (video_adapter != HERCULES))
+/* DIVERGENCE MVDM-HOST-DIV-523: HERC alternative is not selected; see mirror register. */
 #endif	/* HERC */
 	{
 		/* we are not -so this function is not implemented */

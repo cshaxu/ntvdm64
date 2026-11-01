@@ -1,5 +1,9 @@
 # mvdm
 
+MVDM-HOST-DIV-523: replace unselected GISP_CPU, GISP_SVGA and HERC
+alternatives with markers, preserving conditional shells. The inventory is
+`../../artifacts/mvdm-audit/s12-legacy-engines-else.jsonl`.
+
 MVDM-HOST-DIV-522: replace unselected A3CPU, GISP_CPU, GISP_SVGA and
 HERC branches with markers, retaining conditionals. Original body hashes and
 locations are recorded in `../../artifacts/mvdm-audit/s12-legacy-engines.jsonl`.

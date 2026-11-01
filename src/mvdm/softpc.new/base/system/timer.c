@@ -1892,18 +1892,7 @@ LOCAL void timer_generate_int IFN1(long, n)
 	}
 }
 #else /* GISP_CPU */
-#if defined(IRET_HOOKS)
-		if (!HostDelayTimerInt(n))
-		{	/* no host need to delay this timer int, so generate one now. */
-			ica_hw_interrupt(ICA_MASTER,CPU_TIMER_INT, 1);
-		}
-
-#else /* !IRET_HOOKS */ 
-		/* GISP_CPU doesn't use quick events so use ica_hw_interrupt(,,n). */
-		ica_hw_interrupt(ICA_MASTER,CPU_TIMER_INT, n);
-#endif /* IRET_HOOKS */
-	}
-}
+/* DIVERGENCE MVDM-HOST-DIV-523: GISP_CPU alternative is not selected; see mirror register. */
 #endif /* GISP_CPU */
 
 #endif /* DELAYED_INTS */

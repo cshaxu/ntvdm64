@@ -1,0 +1,12 @@
+{"path":"src/mvdm/softpc.new/base/bios/bios.c","start":656,"end":668,"removed_lines":11,"sha256":"186a1ebc35723c69bfe57c5cefb4633ff3e7a34bb266dffd469756b9e7ff72b0","tag":"GISP_CPU","baseline":"bcb6636df"}
+{"path":"src/mvdm/softpc.new/base/system/timer.c","start":1894,"end":1907,"removed_lines":12,"sha256":"8cfde5521863929e9e66f622aba7c36917cc518de712c95c5549cbabb425b1ec","tag":"GISP_CPU","baseline":"bcb6636df"}
+{"path":"src/mvdm/softpc.new/base/inc/sas.h","start":724,"end":978,"removed_lines":253,"sha256":"4ccb79900eb4769cc8ef1c319fd28f0809fd09d5cebb68bd69cc1ca3b972068a","tag":"GISP_SVGA","baseline":"bcb6636df"}
+{"path":"src/mvdm/softpc.new/base/inc/sas.h","start":455,"end":457,"removed_lines":1,"sha256":"2fcba70389d635174185af72d70cdc96c180f4ee419a129cca87ae21790155b8","tag":"GISP_SVGA","baseline":"bcb6636df"}
+{"path":"src/mvdm/softpc.new/base/inc/sas.h","start":364,"end":367,"removed_lines":2,"sha256":"43b3a1bf716c30481b52cb6f52f55a9f38a3424c980a8d3158f3c19349994669","tag":"GISP_SVGA","baseline":"bcb6636df"}
+{"path":"src/mvdm/softpc.new/base/keymouse/keybd_io.c","start":255,"end":263,"removed_lines":7,"sha256":"798f964cfc1860a3988acf423189e0935bbafaaa9530f0cb829cc07748402885","tag":"GISP_SVGA","baseline":"bcb6636df"}
+{"path":"src/mvdm/softpc.new/base/keymouse/keybd_io.c","start":172,"end":188,"removed_lines":15,"sha256":"5066af45e4801d85b0f08b7039cb50a50493ed2fe6fadb9b717844efef080857","tag":"GISP_SVGA","baseline":"bcb6636df"}
+{"path":"src/mvdm/softpc.new/base/keymouse/mouse_io.c","start":2104,"end":2107,"removed_lines":2,"sha256":"0d464c402769e38b10068492519c1f6a082eb63f67c4aab8bdf23231c3ef98e5","tag":"GISP_SVGA","baseline":"bcb6636df"}
+{"path":"src/mvdm/softpc.new/base/support/main.c","start":288,"end":290,"removed_lines":1,"sha256":"2b315e0d987db496f45283d479935a9b71ece80bb12898eee1c55d5b36a635f0","tag":"GISP_SVGA","baseline":"bcb6636df"}
+{"path":"src/mvdm/softpc.new/base/system/rom.c","start":549,"end":552,"removed_lines":2,"sha256":"11a67b5910d10f265b61fd148f1f70fb486a2e0534debd84111981be00724844","tag":"GISP_SVGA","baseline":"bcb6636df"}
+{"path":"src/mvdm/softpc.new/base/system/rom.c","start":234,"end":242,"removed_lines":7,"sha256":"064f88e43547dcc162b5479ec6fe890d006295b5825c49b76b9ea99fad7bf1e5","tag":"GISP_SVGA","baseline":"bcb6636df"}
+{"path":"src/mvdm/softpc.new/base/video/vga_vide.c","start":666,"end":668,"removed_lines":1,"sha256":"ffce012105d01c752bbcbfad65b212399818d1b2d92b001c1e36c496fd2045ca","tag":"HERC","baseline":"bcb6636df"}

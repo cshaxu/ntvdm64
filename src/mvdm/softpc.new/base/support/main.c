@@ -286,7 +286,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 #ifndef GISP_SVGA
 	setup_vga_globals();
 #else /* GISP_SVGA */
-	setupHwVGAGlobals( );
+/* DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register. */
 #endif /* GISP_SVGA */
 
 #ifdef REAL_VGA

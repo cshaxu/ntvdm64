@@ -232,13 +232,7 @@ GLOBAL void read_video_rom IFN0()
 		break;
 
 #else			/* GISP_SVGA */
-
-	/* GISP_SVGA - only have the gisp vga roms or, none for CGA boot */
-	case VGA:
-		romLength = read_rom (GISP_VGAROM_FILENAME, EGA_ROM_START);
-	default:
-		break;
-
+/* DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register. */
 #endif		/* GISP_SVGA */	
 
 	}
@@ -547,8 +541,7 @@ GLOBAL void copyROM IFN0()
 #ifndef GISP_SVGA
 LOCAL sys_addr  cur_loc = DOS_SCRATCH_PAD;
 #else		/* GISP_SVGA */
-/* For GISP svga builds, we initialise from gispROMInit() */
-sys_addr  cur_loc;
+/* DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register. */
 #endif		/* GISP_SVGA */
 
 GLOBAL void display_string IFN1(char *, string_ptr)

@@ -654,17 +654,7 @@ void (*BIOS[])() = {
 #endif	/* !LDBIOS */
 
 #else /* ndef GISP_CPU */
-
-/* In the GISP technology,  BOPs FA, FC, FD and FE are
-   assumed to be handled directly by the host operating system and cannot
-   be used inside SoftPC.
- */
-			illegal_bop,	/* BOP FA */
-			hg_bop_handler,	/* BOP FB */ /* in hg_cpu.c */
-			illegal_bop,	/* BOP FC */
-			illegal_bop,	/* BOP FD */
-			illegal_bop,	/* BOP FE */
-			
+/* DIVERGENCE MVDM-HOST-DIV-523: GISP_CPU alternative is not selected; see mirror register. */
 #endif	/* GISP_CPU */
 
                         control_bop     /* BOP FF */
