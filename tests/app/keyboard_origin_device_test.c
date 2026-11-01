@@ -71,6 +71,7 @@ static void do_host_key_up(int key)
 }
 #include "keyboard_host_down.inc"
 #include "keyboard_host_up.inc"
+#include "keyboard_raise_all.inc"
 #include "keyboard_device_immediate.inc"
 #include "keyboard_device_translate.inc"
 #include "keyboard_device_output.inc"
@@ -138,5 +139,13 @@ int main(void)
     CHECK(output_full && !nt_keyboard_history.output);
     Reset6805and8042();CHECK(reset_pending_irq_calls==1);
     puts("PASS original full hardware reset clears device provenance but preserves captured return selection");
+    /* A consumed make survives in the guest but not in host key_down_count
+     * after the original suspension reset. A later generic source reset alone
+     * cannot reconstruct the required break from the reset device state. */
+    begin();host_key_down(0x32);end();
+    CHECK(key_down_count[0x32]!=0);clear_buff_6805();
+    Reset6805and8042();CHECK(!key_down_count[0x32]);
+    RaiseAllDownKeys();CHECK(buff_6805_in_ptr==buff_6805_out_ptr);
+    puts("PASS original suspend reset erases host held-key state before later release-all");
     CHECK(interrupts>0);return 0;
 }

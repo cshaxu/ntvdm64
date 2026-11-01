@@ -16,6 +16,7 @@ $patterns=@{
  'keyboard_device_mark.inc'='^LOCAL VOID mark_key_codes_6805_buff IFN1.*?^\}';
  'keyboard_host_down.inc'='^GLOBAL VOID host_key_down IFN1\(int,key\).*?(?=^GLOBAL VOID host_key_up IFN1)';
  'keyboard_host_up.inc'='^GLOBAL VOID host_key_up IFN1\(int,key\).*?(?=^#ifdef NTVDM\r?\nGLOBAL VOID RaiseAllDownKeys)';
+ 'keyboard_raise_all.inc'='^GLOBAL VOID RaiseAllDownKeys\(VOID\)\r?\n\{.*?^\}';
  'keyboard_device_immediate.inc'='^LOCAL VOID AddTo6805BuffImm IFN1.*?^\}';
  'keyboard_device_translate.inc'='^LOCAL half_word translate_6805_8042 IFN0.*?^\} /\* end of translate_6805_8042 \*/';
  'keyboard_device_output.inc'='^LOCAL VOID do_q_int\(char scancode\)\r?\n\{.*?^\}';
