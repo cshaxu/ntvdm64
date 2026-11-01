@@ -777,9 +777,6 @@ void MS_bop_F(void)
 
 #ifdef MONITOR
 #error Excluded original conditional branch
-#ifndef PROD
-#error Excluded original conditional branch
-#endif
 #endif
 #line 778
 

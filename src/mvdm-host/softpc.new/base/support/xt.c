@@ -98,39 +98,6 @@ int verbose;			/* TRUE => trace instructions   */
 
 #ifdef CPU_30_STYLE
 #error Excluded original conditional branch
-#ifndef GISP_CPU    /* GISP has its own versions of these internal to the CPU */
-#error Excluded original conditional branch
-#if defined(CPU_40_STYLE)
-#error Excluded original conditional branch
-#if defined(PROD) && !defined(CCPU)
-#error Excluded original conditional branch
-#endif	/* PROD & !CCPU */
-#else	/* !CPU_40_STYLE */
-#error Excluded original conditional branch
-#if !(defined(NTVDM) && defined(MONITOR))  /* MS NT monitor has own effective_addr fn */
-#error Excluded original conditional branch
-#if defined(SWIN_CPU_OPTS) || defined(CPU_40_STYLE)
-#error Excluded original conditional branch
-#endif /* SWIN_CPU_OPTS or CPU_40_STYLE*/
-#endif	/* !(NTVDM & MONITOR) */
-#endif	/* !CPU_40_STYLE */
-#if defined(NTVDM) && defined(CPU_40_STYLE)
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#ifdef SPC386
-#error Excluded original conditional branch
-#endif
-#ifndef SPC386
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif /* ifndef SPC386 else */
-#if !(defined(NTVDM) && defined(MONITOR))  /* MS NT monitor has own selector_outside_table fn */
-#error Excluded original conditional branch
-#endif	/* !(NTVDM & MONITOR) */
-#endif /* !GISP_CPU */
 #endif /* CPU_30_STYLE */
 #line 99
 /*

@@ -1,0 +1,415 @@
+{
+  "mode": "apply",
+  "files": 68,
+  "removed_lines": 2427,
+  "entries": [
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "removed_lines": 5,
+      "before_sha256": "823d689df594014eb8dbb6b5d85b99d615226829f07c77865f62092b41aa4217",
+      "after_sha256": "ae70ca4b3a2c8ba401afd7597d3863d5483a2f89228abf2f30ad6efef5e885a4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "removed_lines": 121,
+      "before_sha256": "8ff9c3520ef53a8c98dc3d90a00421edf570b451eae5f715d9e8f998f01edc32",
+      "after_sha256": "13e16d72c44a887b3406acc04a723787f09b1ac2f478ad125c53d3915d13bbaf"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "removed_lines": 3,
+      "before_sha256": "e9ec221514ed535b39afab9a585d0d85a06c93be191cf7cf4f09c25e7e43fcdf",
+      "after_sha256": "ae75aef0b4c2eed0b802413edceb421da5671c8b943a35099429a15ecc6de788"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "removed_lines": 6,
+      "before_sha256": "01405af4c2989a5072b69892c3fdf07cc99c8bc0e560f9a098feb751b61cb7c7",
+      "after_sha256": "80bb07819403566da26bfdf91f9a8c1cdd621c779c52871bf740d29b27fdbcd3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "removed_lines": 6,
+      "before_sha256": "938126d085d1dd64b52d4ed5d95dae97c5a18477bb7abdb7e6b5491f63e9a621",
+      "after_sha256": "0e9521ef671a730e2e5499391f8ad44b92bf9ca22000c5ade89d052233c1f0bd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "removed_lines": 17,
+      "before_sha256": "625ba8f1615c48ab807b83b951ce67dc2a67c1d343a8230a0f838827498b4a39",
+      "after_sha256": "f9075215f536b9fb9ee949e4eec3b6c69d1dfb3641bb1383be9e556e752a5618"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "removed_lines": 3,
+      "before_sha256": "63425122cfc8ad2e39b08295c775355f0f92ead926a58f646d1d2a8dbedc8d24",
+      "after_sha256": "fc4e70d67e940faccc5668c4f1c1388cbbc0cc2f993567fa8dd79ed13d920721"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "removed_lines": 8,
+      "before_sha256": "60d391e2eb362b71ca9a15df464acc1a57d91ee7e4065848775de83f0dd06eef",
+      "after_sha256": "5f7663bac5700336243c65c6f1fbb050584b05466d647bad3dce545c9bffb5c4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpupig.h",
+      "removed_lines": 9,
+      "before_sha256": "9a38664cf1ec9647862e6c870bcd41eb6618c834791ea0f77a242773b0e23d4a",
+      "after_sha256": "3f4c6e5678ef8d67c4dc0cae8d9d1418bb0ed4c4988a9216908d6c88515067f5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+      "removed_lines": 1075,
+      "before_sha256": "c27eb94812690d9e38e7e1e787c7e15a6d19ad9ec2bcc8c79da7ead45b2f093b",
+      "after_sha256": "146c7ae07b2bacbcb0b2b4e256325d620e79883815af09b94de37f9c65ab1bc5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "removed_lines": 5,
+      "before_sha256": "ec9359e1edd4ee17b6f922c76cc234f8897e71bf0bee621676042c38457526e5",
+      "after_sha256": "5dc5097a6e938c6fe3b6eb2d7fddb9ecad52d9c909dd444546a3b2a03fc475cf"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "removed_lines": 3,
+      "before_sha256": "1ca25a53e10d3b4d04ac43022925c84c8220180c692f1a6498efba2b0bc855f5",
+      "after_sha256": "a9c915a3a173cc977816be5ebcbd9dbcae7a804cea2706eff0bc0bcd04988bb9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "removed_lines": 3,
+      "before_sha256": "72ec666231e94767e797a1d9824908a413f1216dbbb2488405c1c38508ae51b1",
+      "after_sha256": "97c79ac43af9df2db103ce79ee52b31493bd2807926a3458a41d84f645de32ac"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "removed_lines": 11,
+      "before_sha256": "b783f10e475facc1a3e571cce59a2f0e540f5bdbe9c8327552b0c7a67a86c998",
+      "after_sha256": "d2b39312f52e3f42ca9e159b56b2ce94e79daec879ed5bfc9daff7edb27f2537"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+      "removed_lines": 33,
+      "before_sha256": "c5903c4c09c544d162f8c16fb8c2aa3c781d43b775d97a3885eeb29fc2800f19",
+      "after_sha256": "974981ad764bbe76848867e40a6c831232f7d3ece65db6e61c1326910f84a773"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/ega_dump.c",
+      "removed_lines": 5,
+      "before_sha256": "6569f2f96846a36ea518c508f66fa060c37fdabba3f30f3b2d415617f6987ef8",
+      "after_sha256": "12d474c226564a2cb01279bae5e4b24d62f4718f296e365df4fb47a1fbe5d782"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/pigyoda.c",
+      "removed_lines": 5,
+      "before_sha256": "0bb84f72c47baf843e8ccf5de822606079dd49213db644d41cda8ecd2c4f8a4b",
+      "after_sha256": "9035318798d0b0f07260cc94cf954b9fef16f084e508983c6bae8ff74f3b50ac"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "removed_lines": 65,
+      "before_sha256": "7ed35d4877f149869573710dfc83a3dbcb1593b9ff01f367c5bf04d4cd3ca53e",
+      "after_sha256": "60b8f96e51fd662d95dfa7caac261f94dc2075d617c3dc3a3fd5e550c9506c15"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "removed_lines": 41,
+      "before_sha256": "7b923e72344ead1d8b957f2ebb0417412cb272fad60a05762ae384d1d75e77da",
+      "after_sha256": "70181ccee1fafc9d85d3e2114a3b47e3b6c7a9b0def52d9db157f4c7208b0ce4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "removed_lines": 16,
+      "before_sha256": "8de271874f4eab793c8fa9fc547eb56122b1844e39df2995645fd6e19e765c8c",
+      "after_sha256": "c27521c5dc275f35b4af672fead12da609489cb7183f7ff4931d1194e87bd722"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "removed_lines": 3,
+      "before_sha256": "6ab13eb34b867d19d217b8152461ec3e930ba9120534c3298a4c772a20f67832",
+      "after_sha256": "367f93c71312c7c12f21f1fb902df27d480668cb525bc6c18280e48bf80936e3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_test.c",
+      "removed_lines": 6,
+      "before_sha256": "a3be63441adf56396e308fbd86d7dc95f0071e773980115b6a2647542120dcff",
+      "after_sha256": "5213723a877ad7c6241e8891f8ee8157ecc3fd7d3e982d3f0c78f16f7fd965dc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "removed_lines": 6,
+      "before_sha256": "fbf37d3dcf50f3d1129b2dded4d050eaaac8063d1d9f744cc174079e5c8d9824",
+      "after_sha256": "d76d29db49ba639a4e56b44f7c017f03d30aa687f3af2a494b29a6d591e91315"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "removed_lines": 6,
+      "before_sha256": "d57e8f4118761c221bd55ec0b147ebede15223bee9981164115098e3f7ebc02a",
+      "after_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "removed_lines": 5,
+      "before_sha256": "474d6dfc883e2c50d3c8217075edc569cf1a51348315d6bba66cc9f736f1f82f",
+      "after_sha256": "aa23941ca0646f52bbf9847625e211baf561a183186adce1893a464a69e46ce4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "removed_lines": 11,
+      "before_sha256": "68d632bd6de757130e038401b42ee7557479eabe9999440fbe5f942b3f1de703",
+      "after_sha256": "b022b20b5701714672e02f75e1a426211a09ad0656b9e0a0c3c5c15316d64cab"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "removed_lines": 6,
+      "before_sha256": "23867883aa2097295c821a5954014bf45ec3614b2355532cf04f30e09ec88c69",
+      "after_sha256": "700dbb3d5d343ae6664a808d5233f3d86c02798f54a1e2bdbd5fff40b6df1cf2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dsktrace.h",
+      "removed_lines": 5,
+      "before_sha256": "45945cad81b3d167c8b89b69a8a25f64b7ef56c018668f07d5ed7887502a56fb",
+      "after_sha256": "f8fd15b46a182e6c0fe68d69a858a2a7380f95fc2ba2527eda7986e36c11d935"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "removed_lines": 5,
+      "before_sha256": "72fa024e790feeecb0774f9df398871cd316ed8748446aded8abef98ed7e0382",
+      "after_sha256": "08c38f4d5967454cb09983cf3b93e35b2829cae04c6a00da653501fd0c9afad1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+      "removed_lines": 6,
+      "before_sha256": "a5c57a1fe3ab44e5bb8b4f611c0ccf0e9f75d6737619ece78f3eae9bc150c47a",
+      "after_sha256": "ea8760256e77d4d57a1dfe0f15d61a33ec30589db4425e257bb46fa0a2b817f1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gisp_sas.h",
+      "removed_lines": 6,
+      "before_sha256": "98ad4a2822b04545d7996e73999a7010caff633f2137f1954db7b11895d0188d",
+      "after_sha256": "eef0579057cb7e9b57a79ea04eb145dbaf694c2fcaee2da2349bef9d6329fc88"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hunter.h",
+      "removed_lines": 44,
+      "before_sha256": "b3fd58290dcf7f8d8540d48a5c6d11a6d617fac9245bc7b9cb6f554e91e48061",
+      "after_sha256": "5684b95b5304dc4ae1b15139d197caa0b584dc7db0f82328725ab0deeb7fa042"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hwvga.h",
+      "removed_lines": 12,
+      "before_sha256": "20177a5110f702dff89223571647fd56b252c5facf220fab55f3842b91d17cf9",
+      "after_sha256": "e2c7549ee8f4694b9d4a3318f578d4056082dc43bfec2f30fc908d7436d91490"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "removed_lines": 5,
+      "before_sha256": "f337db05abf1b3159d0fddc7539986ff2fd49881791d2ac7dc3ec3463c600c74",
+      "after_sha256": "54ea5b3e140de36c3c0e846f32274b7b3e69c3cbe1c37d97b7c46301f4de9c3c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "removed_lines": 12,
+      "before_sha256": "97b838b2eed65ea3225e0027ab72233f36237b1dd833139350294e46d2db15eb",
+      "after_sha256": "4a87e916507f79d136c47e4b87815bffc3fc181c6f7e456ad21f2e48816e80ac"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/quick_ev.h",
+      "removed_lines": 9,
+      "before_sha256": "0788810f9886cb29ac72aa0b27c38ad7a8910f793a4b060d0d1ad7df6ea0e573",
+      "after_sha256": "1435e2e98f54c312f277c9d319c95a9ebcb48af547b563cef1ed59d935b46dee"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "removed_lines": 5,
+      "before_sha256": "3c66de23fd47164be6a70ac5314713e3850e01477407d88291470eb9748d86ac",
+      "after_sha256": "2510fa96a9bc18a134f0e850db6b521ec6d9e5ee07a8a6b6f648dca3d420882b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "removed_lines": 24,
+      "before_sha256": "3d4afd26ed524822c449a21fa4956e8f518a750356da241fa92e0074398a3ed7",
+      "after_sha256": "f9d607970a4ab96f47121653fe0d1abac5cd116cbad53edfb3c985289ab7bf57"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+      "removed_lines": 35,
+      "before_sha256": "6c119d94912390957db0ad8ea96ced45248834c51c765657d9be84c2d58abbed",
+      "after_sha256": "22c9bfde5be2df338ba9d0b39a2669643f7879d0d51b88fd5a75e30238f35c69"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+      "removed_lines": 3,
+      "before_sha256": "aba8575c76b39eb906263b01a4c6fc1a62ab1390720eb02f2dd7e594bf8c4ba1",
+      "after_sha256": "5beb4870dc05919164d389988b04a403e9ae526a6c59b0f14e780b31c9532c3d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "removed_lines": 5,
+      "before_sha256": "d7b573a268d7c447b1b946f28d5940e8a2744c0d65e56c583512d03c05e2951b",
+      "after_sha256": "245aadb279631990847ef0e7cf8757ecd94d971e9312f8a42df34933d8880b83"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "removed_lines": 3,
+      "before_sha256": "a553594ed9f40d3009f3cee39ba68dc8e0e424e0b87894d9e3026b7d74dc8001",
+      "after_sha256": "0936f0cdd11c75c70cdd4c9b1fd9a44e1d323ca6b647122c4f9732b490c2d6b0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "removed_lines": 3,
+      "before_sha256": "fe2fd6deecb1ae9d28316e4d8d94ee93cfc1e50a31f1178ab59d88739cfb1943",
+      "after_sha256": "92bdc2b218e175f3c8928e539243082391881e96fb0057de6fc792b52bac29a6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "removed_lines": 33,
+      "before_sha256": "2c216d4b2bd477a6a69e4db71683d2f7a7f7d44e6539306506fe944f9853afd2",
+      "after_sha256": "de6cfff704cba1db0fd07dced688dd3ae0a93d5a0781f3279c7079ca0611a4dd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "removed_lines": 8,
+      "before_sha256": "3201f190331f84cb9e347ae55781d03490d9a464cc933f63acc4a131cf9b178f",
+      "after_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "removed_lines": 8,
+      "before_sha256": "114b97eaf57fce1ca5df41c078c66f6110a4a30d71cdfd6adcecd8f2fedd441f",
+      "after_sha256": "0107708f2b8c68c67676140d5d62268549b65c8aad68de9ff3f3f508892063fb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "removed_lines": 3,
+      "before_sha256": "0bdcb76fca8ccdce0f2f4de333fc5ac730eba10798b0f67e926bf5637532d20a",
+      "after_sha256": "b04cea60a3a8005cafe464ecd5918d21c12bb3924956012614fd90911e9e2050"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "removed_lines": 20,
+      "before_sha256": "f2bbd47e4304201e84c3968c9bc932426d3d5194fcfe412593b8e7a9ed7fd5f1",
+      "after_sha256": "83cfcdf32d4f0f04d7c8af62cd879ba24620457a27e3f55194fbb1a4ac4c8730"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+      "removed_lines": 6,
+      "before_sha256": "fc31b9f081053fa25140d35479bdfad2d0b35295dc5e9d2b98aa7173ff8f96cc",
+      "after_sha256": "4cdc74b9757f08149adf5b07cc2c717426b1a8b85f1004f4e362827bbb6ba3ea"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "removed_lines": 8,
+      "before_sha256": "23370be6600ef5084894fff40e0712f8cacd5aa645b86dc3ff08fdf80163c273",
+      "after_sha256": "9bd16a611b5769e441e268c285a577ef2ee2ad0847b6883fa4a0ad11ed359223"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "removed_lines": 11,
+      "before_sha256": "5918118f83cdded6a5f12c68a750422835ae822b35f4d3308ae7186b6f7e477a",
+      "after_sha256": "6ed74107d534d7d95129330e8cfcd43cd6175e2af27ac45ef7bf708bb9a25890"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "removed_lines": 159,
+      "before_sha256": "84e4c81d4cc8dae3eed4df8bd12ece671156ae8097f74685aae842ab7b73df46",
+      "after_sha256": "cce21059c2386eaa2776c1510349dc9228a5b7cce66041d0cbc004126ff2f6af"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "removed_lines": 74,
+      "before_sha256": "94f502d5b41592141f1651695bea2f63adc53e6c9e6547415b07ab3e06fe1ece",
+      "after_sha256": "4f52efb1e48a68490a43433fe3f6429ceceef88a98ec469756597827e3799cd9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "removed_lines": 36,
+      "before_sha256": "c1b16682675d0e624a1733552a048e29916dbd7e9e62853489b763f4176a5b20",
+      "after_sha256": "57519785d2bdf6020d0587a987713e397b0de01ef23f954981e27856df22c88e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "removed_lines": 11,
+      "before_sha256": "4bb80213c7ae961dc7342c19afd5e7835a3f1311a5ea8d48bfe400318d011c9b",
+      "after_sha256": "5b6bb29a054fb70ca23d266fc1d49b665c890ebf1f1f96d59902bfc2b180eb89"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "removed_lines": 8,
+      "before_sha256": "220a5a693dacf0ca95b04fc5882acb3d77d2a598ae14577998dcf93d7a4c5031",
+      "after_sha256": "383fc76d6991847b37fb95025eeb33a2b4294c89774cf80f62d89c03c3f3437d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "removed_lines": 5,
+      "before_sha256": "9543f270713e34fc82bc19a4e75bcbc71143094a8d560629b736f267d445e323",
+      "after_sha256": "e0172878f2272f75ed166b1f3185d5f59e0003f46b5fd958b95bfcca61266fb2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "removed_lines": 3,
+      "before_sha256": "90f351cd59ea01183bde64fb96a42b5e6e7cd92f341a6a4e3be68400ad0a97af",
+      "after_sha256": "032c0681ac8af7057e5d514a8c04c56b096c83878cc79183454ecb60e522aeb0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "removed_lines": 3,
+      "before_sha256": "fd5c5ed2a5c535758006caabaa74c20b02bcbfe3ce581ba86a5654b0e7a0783f",
+      "after_sha256": "527d692afa2ed9001c79d64d53e52cbbfbf8a1b0aaeb07efc05ae5191339db52"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
+      "removed_lines": 231,
+      "before_sha256": "0ecff32268a9856ecf03b40b30b6b950bf0c3384aaf5b6f029961d11a2903c54",
+      "after_sha256": "48c46f5ac657fb9c3755fd0d90d350200b20b76d0b71db86404ca0849293e554"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "removed_lines": 5,
+      "before_sha256": "5e2fb96d66a93d12530a9ebb5eb143e0fd1a1cc1348b0c9e4b8c32c1e61b0600",
+      "after_sha256": "7d0eeac927d2e0992f17950500335d4190ad827646afa09112424bd09682ddcc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "removed_lines": 17,
+      "before_sha256": "fddcecc0324eb5e3a13da1cf490f935473fd7d09b03f801486ebf715de9ecbe3",
+      "after_sha256": "bbc886876f746e653ea58b376c94e6e8d3f74a9df3f752937f34da2ead37b0bb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "removed_lines": 12,
+      "before_sha256": "947598be4515dd2c285f3a25ce6461affc2a0e4f87516a2375a5410338cbfe43",
+      "after_sha256": "64060de9d519c32f00fec53b7ad701e70e44adf1a0dfd418d7d8a90c01d0e628"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+      "removed_lines": 6,
+      "before_sha256": "9c2134f36d5078ef7d3b3a3621b898dceaaf82ecbbf1380a697178b3628e3776",
+      "after_sha256": "baab03e2f20d7a4e33ba87df317cb732d1c2927a55f228796ed7472754ac9f1d"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.c",
+      "removed_lines": 83,
+      "before_sha256": "79b73c305a17ea9cbfd4d07af121dc8ab8168118ef6833490d7b07bea09e8308",
+      "after_sha256": "2512205fe61f1ff707b8dd8d77c26121455450a71e12cca50c2beaf205b41117"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdisp.c",
+      "removed_lines": 3,
+      "before_sha256": "193217a87e0942962355644fe6ad9f24e74703690953778ff8e0b30281916fe7",
+      "after_sha256": "3fa60d1fe23656bc7081ab0e6b64d151c93b4f65d4d4e8ddbcefd845206afa16"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia1.c",
+      "removed_lines": 3,
+      "before_sha256": "d3e6e2afb1949f12434316813489f7f7a2cb8ccb44f1e8a7e69f25c77c680956",
+      "after_sha256": "dd5cad9f5a23547e196b3e4620f39d66c2758fa3ba612edaa80a833867adc2ee"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsa20.c",
+      "removed_lines": 6,
+      "before_sha256": "1bf571b8f58951aae546f83f27bbe2b5d4e293496a135a9860f8b4c9036f1f37",
+      "after_sha256": "3d3b82e743c478a307dd06d6d9a2539d0caa3819cf0a3d73025d4e2ef34b16bc"
+    }
+  ]
+}

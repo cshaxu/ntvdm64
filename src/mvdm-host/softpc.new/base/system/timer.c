@@ -460,9 +460,6 @@ LOCAL ULONG	adj_n_real_mode_ticks_before_full_speed = 0;/* The value which real_
 
 #if !defined(NTVDM)
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#if defined(IRET_HOOKS) && defined(GISP_CPU)
-#error Excluded original conditional branch
-#endif
 #endif
 #line 464
 
@@ -1812,11 +1809,6 @@ LOCAL void timer_generate_int IFN1(long, n)
 }
 #else /* GISP_CPU */
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_CPU alternative is not selected; see mirror register.
-#if defined(IRET_HOOKS)
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
 #endif /* GISP_CPU */
 #line 1812
 
@@ -2427,9 +2419,6 @@ LOCAL void getHostSysTime IFN1(struct host_timeval *, t)
 
 #ifndef	PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#ifndef	PIG
-#error Excluded original conditional branch
-#endif
 #endif
 #line 2417
 		*t = idealtime;
@@ -2504,9 +2493,6 @@ LOCAL void counter_init IFN1(COUNTER_UNIT *, p)
 
 #if !defined (NTVDM)
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#if defined(IRET_HOOKS) && defined(GISP_CPU)
-#error Excluded original conditional branch
-#endif
 #endif /* !NTVDM */
 #line 2489
 
@@ -2547,12 +2533,6 @@ void timer_init IFN0()
 
 #if !defined(NTVDM)
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#if defined(IRET_HOOKS) && defined(GISP_CPU)
-#error Excluded original conditional branch
-#endif
-#if defined(CPU_40_STYLE)
-#error Excluded original conditional branch
-#endif
 #endif /* !NTVDM */
 #line 2528
 }

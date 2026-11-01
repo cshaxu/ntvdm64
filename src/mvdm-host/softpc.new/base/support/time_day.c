@@ -375,9 +375,6 @@ void time_int()
  */
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#ifdef SEGMENTATION
-#error Excluded original conditional branch
-#endif
 #endif  /* ifndef NTVDM */
 #line 379
 

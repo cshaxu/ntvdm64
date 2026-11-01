@@ -89,49 +89,49 @@ GLOBAL UTINY Last_v7_fg_bg;			/* used by {ev}ga_mask_register_changed() */
 
 #ifndef CPU_40_STYLE	/* EVID without introducing EVID define */
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#ifdef VGG
-#error Excluded original conditional branch
-#endif
-#ifdef VGG
-#error Excluded original conditional branch
-#endif
-#ifdef VGG
-#error Excluded original conditional branch
-#endif
-#ifndef EGATEST
-#error Excluded original conditional branch
-#ifndef GISP_CPU
-#error Excluded original conditional branch
-#ifdef A3CPU
-#error Excluded original conditional branch
-#ifdef C_VID
-#error Excluded original conditional branch
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#endif
-#else
-#error Excluded original conditional branch
-#ifdef A_VID
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#endif
-#endif
-#endif
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #else	/* CPU_40_STYLE - EVID */
 #line 93
 WRT_POINTERS *mode_chain_handler_table[] = { 0 };
@@ -250,9 +250,6 @@ Glue_set_vid_wrt_ptrs IFN1(WRT_POINTERS *, handler )
 
 #if	0
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
 #endif	/* 0 */
 #line 206
 
@@ -318,11 +315,11 @@ ega_write_init IFN0()
 #ifndef GISP_CPU
 #ifdef A3CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
-#ifdef C_VID
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
+
+
+
+
+
 #else
 #line 260
 	gmi_define_mem(VIDEO,&Glue_writes);
@@ -661,29 +658,6 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 #else  /* CPU_40_STYLE */
 #line 581
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#if defined(EGA_DUMP) || defined(EGA_STAT)
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#ifdef EGATEST
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#ifndef GISP_CPU
-#error Excluded original conditional branch
-#ifdef A3CPU
-#error Excluded original conditional branch
-#ifdef C_VID
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#else
-#error Excluded original conditional branch
-#endif
-#endif
-#endif
-#endif
 #endif	/* CPU_40_STYLE */
 #line 583
 

@@ -29,10 +29,5 @@
 
 #ifdef PIG
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#ifdef ANSI
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
 #endif /* PIG */
 #line 33

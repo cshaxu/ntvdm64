@@ -285,9 +285,9 @@ extern void sas_stores_from_transbuf IPT3(sys_addr, dest, host_addr, src, sys_ad
 
 #ifdef BACK_M
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
-#ifndef HERC_REGEN_BUFF
-#error Excluded original conditional branch
-#endif
+
+
+
 #else
 #line 289
 
@@ -717,27 +717,6 @@ extern void sas_stores_from_transbuf IPT3(sys_addr, dest, host_addr, src, sys_ad
 
 #else		/* GISP_SVGA */
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
-#ifndef MOUSE_VIDEO_IO_SEGMENT
-#error Excluded original conditional branch
-#endif
-#ifndef MOUSE_INT1_SEGMENT
-#error Excluded original conditional branch
-#endif
-#ifndef MOUSE_INT2_SEGMENT
-#error Excluded original conditional branch
-#endif
-#ifndef	MOUSE_VERSION_SEGMENT
-#error Excluded original conditional branch
-#endif
-#ifndef	MOUSE_COPYRIGHT_SEGMENT
-#error Excluded original conditional branch
-#endif
-#ifdef EGG
-#error Excluded original conditional branch
-#endif
-#ifdef 	EGG
-#error Excluded original conditional branch
-#endif
 #endif /* GISP_SVGA */
 #line 716
 

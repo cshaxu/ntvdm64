@@ -65,11 +65,6 @@ IMPORT void		cpuEnableInterrupts IPT1(IBOOL, yes_or_no);
 
 #ifdef IRET_HOOKS
 #error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
-#ifdef CCPU
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
 #endif /* IRET_HOOKS */
 #line 69
 

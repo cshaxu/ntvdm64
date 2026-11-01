@@ -394,8 +394,9 @@ process enumeration. Console handles use a separate local binding.
 
 An imported production file is exact upstream, a true subset, or a
 same-shaped minimal modification in an existing upstream-relative file. A
-removed conditional body keeps its original conditional structure and uses
-only `#error` as its placeholder, with `#line` where necessary to preserve
+removed conditional body keeps its outer conditional boundary and uses
+only `#error` as its placeholder; nested conditions within that body are
+unnecessary. Use `#line` where necessary to preserve
 diagnostic locations; its provenance belongs in the external mirror ledger,
 not a placeholder comment. Changed expressions retain their local
 `DIVERGENCE:` explanation and component README entry. An actual original

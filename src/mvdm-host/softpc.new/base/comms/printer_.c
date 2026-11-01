@@ -206,9 +206,6 @@ void printer_io()
 
 #if defined(NTVDM) && defined(MONITOR)
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
-#ifdef PRINTER
-#error Excluded original conditional branch
-#endif
 #endif
 #line 210
 

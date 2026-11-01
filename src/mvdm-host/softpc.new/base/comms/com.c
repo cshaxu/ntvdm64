@@ -1649,11 +1649,6 @@ static void set_baud_rate IFN1(int, adapter)
 			RX_delay[i], TX_delay[i]);
 #ifdef IRET_HOOKS
 #error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
-#ifdef VARIABLE_TICK_COMMS
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
 #endif /* IRET_HOOKS */
 #line 1653
 	}

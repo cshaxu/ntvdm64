@@ -196,81 +196,81 @@ GLOBAL READ_POINTERS read_pointers;
 
 #ifndef CPU_40_STYLE	/* i.e. EVID without introducing an EVID define */
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#ifndef EGATEST
-#error Excluded original conditional branch
-#ifndef A3CPU
-#error Excluded original conditional branch
-#ifndef JOKER
-#error Excluded original conditional branch
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#endif
-#endif
-#endif
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#ifdef VGG
-#error Excluded original conditional branch
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#endif
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#ifdef VGG
-#error Excluded original conditional branch
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#endif
-#ifdef A_VID
-#error Excluded original conditional branch
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#else
-#error Excluded original conditional branch
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#endif
-#ifdef A3CPU
-#error Excluded original conditional branch
-#ifdef C_VID
-#error Excluded original conditional branch
-#endif
-#else
-#error Excluded original conditional branch
-#ifdef C_VID
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#endif
-#ifndef GISP_CPU
-#error Excluded original conditional branch
-#if (defined(A_VID) && defined(A2CPU) && !defined(A3CPU)) || (defined(A3CPU) && defined(C_VID))
-#error Excluded original conditional branch
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
-#endif
-#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #else	/* CPU_40_STYLE - evid */
 #line 200
 
@@ -566,11 +566,11 @@ Glue_set_vid_rd_ptrs IFN1(READ_POINTERS *, handler )
 #ifndef CPU_40_STYLE	/* EVID */
 #ifdef A3CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
-#ifdef C_VID
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
+
+
+
+
+
 #else					/* A3CPU */
 #line 483
 #ifdef C_VID
@@ -588,9 +588,6 @@ Glue_set_vid_rd_ptrs IFN1(READ_POINTERS *, handler )
 
 #if	0
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
 #endif	/* 0 */
 #line 499
 
@@ -680,22 +677,6 @@ ega_read_routines_update IFN0()
 #else  /* CPU_40_STYLE */
 #line 576
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#ifndef GISP_CPU
-#error Excluded original conditional branch
-#ifdef A3CPU
-#error Excluded original conditional branch
-#ifdef C_VID
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#else
-#error Excluded original conditional branch
-#endif
-#endif
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
 #endif  /* CPU_40_STYLE */
 #line 578
 
@@ -718,9 +699,6 @@ ega_read_routines_update IFN0()
 #else  /* CPU_40_STYLE */
 #line 596
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
 #endif	/* CPU_40_STYLE */
 #line 598
 				break;
@@ -731,9 +709,6 @@ ega_read_routines_update IFN0()
 #else  /* CPU_40_STYLE */
 #line 604
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
 #endif	/* CPU_40_STYLE */
 #line 606
 				EGA_CPU.read_mapped_plane_ch2 = EGA_planes +
@@ -747,9 +722,6 @@ ega_read_routines_update IFN0()
 #else  /* CPU_40_STYLE */
 #line 615
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
 #endif	/* CPU_40_STYLE */
 #line 617
 				break;
@@ -772,9 +744,6 @@ ega_read_routines_update IFN0()
 #else  /* CPU_40_STYLE */
 #line 634
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
 #endif	/* CPU_40_STYLE */
 #line 636
 				break;
@@ -795,9 +764,6 @@ ega_read_routines_update IFN0()
 #else  /* CPU_40_STYLE */
 #line 652
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
 #endif	/* CPU_40_STYLE */
 #line 654
 
@@ -813,9 +779,6 @@ ega_read_routines_update IFN0()
 #else  /* CPU_40_STYLE */
 #line 665
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
 #endif	/* CPU_40_STYLE */
 #line 667
 				break;
@@ -829,19 +792,6 @@ ega_read_routines_update IFN0()
 
 #ifndef CPU_40_STYLE
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#ifndef GISP_CPU
-#error Excluded original conditional branch
-#ifdef A3CPU
-#error Excluded original conditional branch
-#ifdef C_VID
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#else
-#error Excluded original conditional branch
-#endif
-#endif
 #endif	/* CPU_40_STYLE */
 #line 678
 }
@@ -859,9 +809,6 @@ ega_read_init IFN0()
 #else  /* CPU_40_STYLE */
 #line 691
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
 #endif	/* CPU_40_STYLE */
 #line 693
 
@@ -881,19 +828,6 @@ ega_read_init IFN0()
 
 #ifndef CPU_40_STYLE
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#ifndef GISP_CPU
-#error Excluded original conditional branch
-#ifdef A3CPU
-#error Excluded original conditional branch
-#ifdef C_VID
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#else
-#error Excluded original conditional branch
-#endif
-#endif
 #endif	/* CPU_40_STYLE */
 #line 709
 }
@@ -911,19 +845,6 @@ ega_read_term IFN0()
 #else  /* CPU_40_STYLE */
 #line 722
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#ifndef GISP_CPU
-#error Excluded original conditional branch
-#ifdef A3CPU
-#error Excluded original conditional branch
-#ifdef C_VID
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#else
-#error Excluded original conditional branch
-#endif
-#endif
 #endif	/* CPU_40_STYLE */
 #line 724
 }

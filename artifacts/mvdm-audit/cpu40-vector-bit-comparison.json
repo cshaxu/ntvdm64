@@ -1,0 +1,1418 @@
+[
+  {
+    "case": 0,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=0 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=0 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 2,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=2 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=2 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 3,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=3 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=3 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 4,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=4 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=4 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 6,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=6 fault=-1 carry=0 zero=0001 plus64k=0001"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=6 fault=-1 carry=0 zero=0001 plus64k=0001"
+    },
+    "match": true
+  },
+  {
+    "case": 7,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=7 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=7 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 8,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=8 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=8 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 9,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=9 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=9 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 10,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=10 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=10 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 11,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=11 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=11 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 12,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=12 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=12 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 13,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=13 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=13 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 14,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=14 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=14 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 15,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=15 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=15 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 16,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=16 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=16 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 17,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=17 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=17 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 18,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=18 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=18 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 19,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=19 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=19 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 20,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=20 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=20 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 21,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=21 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=21 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 22,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=22 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=22 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 23,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=23 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=23 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 24,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=24 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=24 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 25,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=25 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=25 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 26,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=26 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=26 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 27,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=27 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=27 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 28,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=28 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=28 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 29,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=29 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=29 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 30,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=30 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=30 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 31,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=31 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=31 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 32,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=32 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=32 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 33,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=33 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=33 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 34,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=34 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=34 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 35,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=35 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=35 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 36,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=36 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=36 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 37,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=37 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=37 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 38,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=38 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=38 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 39,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=39 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=39 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 40,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=40 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=40 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 41,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=41 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=41 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 42,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=42 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=42 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 43,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=43 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=43 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 44,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=44 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=44 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 45,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=45 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=45 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 46,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=46 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=46 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 47,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=47 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=47 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 48,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=48 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=48 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 49,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=49 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=49 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 50,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=50 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=50 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 51,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=51 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=51 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 52,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=52 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=52 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 53,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=53 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=53 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 54,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=54 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=54 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 55,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=55 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=55 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 56,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=56 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=56 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 57,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=57 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=57 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 58,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=58 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=58 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 59,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=59 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=59 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 60,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=60 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=60 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 61,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=61 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=61 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 62,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=62 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=62 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 63,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=63 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=63 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 64,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=64 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=64 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 65,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=65 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=65 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 66,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=66 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=66 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 67,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=67 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=67 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 68,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=68 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=68 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 69,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=69 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=69 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 70,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=70 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=70 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 71,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=71 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=71 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 72,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=72 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=72 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 73,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=73 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=73 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 74,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=74 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=74 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 75,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=75 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=75 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 76,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=76 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=76 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 77,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=77 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=77 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 78,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=78 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=78 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 79,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=79 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=79 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 80,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=80 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=80 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 81,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=81 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=81 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 82,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=82 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=82 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 83,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=83 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=83 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 84,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=84 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=84 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 85,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=85 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=85 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 86,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=86 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=86 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 87,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=87 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=87 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 88,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=88 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=88 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 89,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=89 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=89 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 90,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=90 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=90 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 91,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=91 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=91 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 92,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=92 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=92 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 93,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=93 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=93 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 94,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=94 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=94 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 95,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=95 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=95 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 96,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=96 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=96 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 97,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=97 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=97 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 98,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=98 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=98 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 99,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=99 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=99 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 100,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=100 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=100 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 101,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=101 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=101 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 102,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=102 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=102 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 103,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=103 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=103 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 104,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=104 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=104 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 105,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=105 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=105 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 106,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=106 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=106 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 107,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=107 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=107 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 108,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=108 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=108 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 109,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=109 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=109 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 110,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=110 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=110 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 111,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=111 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=111 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 112,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=112 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=112 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 113,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=113 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=113 fault=-1 carry=0 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 114,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=114 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=114 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 115,
+    "vector": {
+      "exit": 1,
+      "result": "bit case=115 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 1,
+      "result": "bit case=115 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 116,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=116 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=116 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 117,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=117 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=117 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 118,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=118 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=118 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  },
+  {
+    "case": 119,
+    "vector": {
+      "exit": 0,
+      "result": "bit case=119 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "direct": {
+      "exit": 0,
+      "result": "bit case=119 fault=-1 carry=1 zero=0001 plus64k=0000"
+    },
+    "match": true
+  }
+]

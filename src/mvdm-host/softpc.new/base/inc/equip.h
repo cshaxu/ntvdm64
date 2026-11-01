@@ -22,12 +22,6 @@
 
 #ifdef	BIGEND
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
-#ifdef	BIT_ORDER1
-#error Excluded original conditional branch
-#endif
-#ifdef	BIT_ORDER2
-#error Excluded original conditional branch
-#endif
 #endif
 #line 26
 

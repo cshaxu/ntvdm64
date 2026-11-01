@@ -141,11 +141,6 @@ typedef union {
 #endif
 #ifdef BIT_ORDER1
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
-#if defined(NTVDM) && defined(FIFO_ON)
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
 #endif
 #line 145
 

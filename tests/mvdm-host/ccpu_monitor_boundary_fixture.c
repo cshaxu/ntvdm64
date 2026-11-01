@@ -15,7 +15,6 @@ extern void setup_vga_globals(void);
 extern void sas_init(uint32_t);
 extern void sas_term(void);
 extern void c_cpu_init(void);
-extern void load_sw_cpu_access_functions(void);
 extern void c_cpu_simulate(void);
 extern void c_cpu_interrupt(int, unsigned short);
 extern uint32_t c_cpu_q_ev_get_count(void);
@@ -1095,7 +1094,7 @@ int main(int argc, char **argv) {
     if (!mvdm_softpc_ccpu_wait_begin()) return 3;
     sas_init(0x200000);
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 4;
-    setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
+    setup_vga_globals();c_cpu_init();
     if(test_case>=168 && test_case<=172) ok=protected_monitor_ownership();
     else if(test_case==148 || test_case==149) ok=protected_fault_decline_cpu();
     else if(test_case>=160 && test_case<=167) ok=v86_explicit_software_int();

@@ -885,11 +885,6 @@ boolean get_lim_configuration_data(PLIM_CONFIG_DATA buffer)
 
 #ifdef MONITOR
 #error Excluded original conditional branch
-#ifdef LIM
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
 #endif
 #line 886
 

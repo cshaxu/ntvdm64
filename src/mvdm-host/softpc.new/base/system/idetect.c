@@ -237,14 +237,6 @@ PURPOSE         :       called from keyboard BIOS as result of
 
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#ifdef SMEG
-#error Excluded original conditional branch
-#endif
-#ifdef SMEG
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
 #endif  /* NTVDM */
 #line 241
 

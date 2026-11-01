@@ -27,7 +27,6 @@ extern void sas_term(void);
 extern void c_cpu_init(void);
 extern void c_cpu_simulate(void);
 extern void c_cpu_unsimulate(void);
-extern void load_sw_cpu_access_functions(void);
 extern void c_sas_store(IU32 address, IU8 value);
 extern void c_sas_stores(IU32 address, IU8 *bytes, IU32 length);
 extern void c_sas_loads(IU32 address, IU8 *bytes, IU32 length);
@@ -99,7 +98,6 @@ int main(void)
 
     sas_init(UINT32_C(0x00200000));
     c_cpu_init();
-    load_sw_cpu_access_functions();
 
     session_initialize(&owner, 335u);
     if (!session_select_machine_backend(&owner, SESSION_MACHINE_BACKEND_SOFTPC) ||

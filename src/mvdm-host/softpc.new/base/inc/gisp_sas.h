@@ -20,11 +20,5 @@
 
 #ifdef GISP_SVGA
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
-#ifndef _GISP_SAS_H_
-#error Excluded original conditional branch
-#ifdef IRET_HOOKS
-#error Excluded original conditional branch
-#endif
-#endif
 #endif /* GISP_SVGA */
 #line 24

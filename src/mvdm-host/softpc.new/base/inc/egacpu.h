@@ -133,11 +133,11 @@ extern struct EGA_CPU_GLOBALS
 
 #ifndef CPU_40_STYLE	/* Vglobs done via access fns */
 #error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
-#ifdef	HOST_VGA_GLOBALS
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
+
+
+
+
+
 #else	/* CPU_40_STYLE */
 #line 137
 

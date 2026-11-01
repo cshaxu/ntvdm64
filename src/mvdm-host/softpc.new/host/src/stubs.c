@@ -38,15 +38,6 @@ double x;
 
 #ifdef MONITOR
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
-#ifndef CPU_40_STYLE
-#error Excluded original conditional branch
-#endif
-#ifdef LITTLEND
-#error Excluded original conditional branch
-#endif
-#ifdef BIGEND
-#error Excluded original conditional branch
-#endif
 #endif	//MONITOR
 #line 42
 
@@ -336,9 +327,6 @@ void DispatchInterrupts()
 
 #else //MONITOR
 #error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
-#ifndef YODA
-#error Excluded original conditional branch
-#endif
 #endif  //MONITOR
 #line 330
 

@@ -929,12 +929,6 @@ GLOBAL int free_page IFN1(short, EM_page_no)
 
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#ifdef PROD
-#error Excluded original conditional branch
-#endif
-#ifdef PROD
-#error Excluded original conditional branch
-#endif
 #endif	/* !NTVDM */
 #line 933
 

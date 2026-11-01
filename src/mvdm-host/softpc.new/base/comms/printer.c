@@ -88,9 +88,6 @@
 #include TimeH
 #ifdef SYSTEMV
 #error DIVERGENCE MVDM-HOST-DIV-529: SYSTEMV platform branch is not selected; see mirror register.
-#ifdef STINGER
-#error Excluded original conditional branch
-#endif
 #endif
 #line 92
 

@@ -15,9 +15,6 @@
 
 #ifdef BIT_ORDER1
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
-#ifdef V7VGA
-#error Excluded original conditional branch
-#endif
 #endif /* BIT_ORDER1 */
 #line 19
 
@@ -397,32 +394,6 @@ typedef	union
 /* The Sequencer Registers */
 #ifdef BIT_ORDER1
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
-#ifdef V7VGA
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#ifdef V7VGA
-#error Excluded original conditional branch
-#endif
-#ifdef V7VGA
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#ifdef V7VGA
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#ifdef V7VGA
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#ifdef V7VGA
-#error Excluded original conditional branch
-#endif
 #endif /* BIT_ORDER1 */
 #line 396
 
@@ -1042,12 +1013,6 @@ extern void set_v7_fg_latch_byte IPT2(IU8, index, IU8, value);
 #define SET_FG_LATCH(n, val)	set_v7_fg_latch_byte(n, val)
 #else
 #error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
-#ifdef BIGEND
-#error Excluded original conditional branch
-#endif
-#ifdef LITTLEND
-#error Excluded original conditional branch
-#endif
 #endif	/* CPU_40_STYLE */
 #line 1013
 #endif /* V7VGA */

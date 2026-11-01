@@ -361,22 +361,6 @@ LOCAL void hd_reset IFN2(int, drive, int, diag)
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#ifdef macintosh
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#ifdef ANSI
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#if defined(NTVDM) && defined(MONITOR)
-#error Excluded original conditional branch
-#endif
-#ifdef WDCTRL_BOP
-#error Excluded original conditional branch
-#endif
 #endif				/* nPROD */
 #line 365
 

@@ -27,3 +27,51 @@ In an uninstalled test-owned source copy, restored a CPU30 guard around the exis
 The remaining `floppy.c` failed because two local `reg byte_count` variables relied on the now-hidden CPU30 `reg` union. In the disposable copy only, using an `IU16` count and explicit low/high byte extraction allowed the same real compiler command to succeed. Original selected NT host defines `LITTLEND`, and `IU16` is an unsigned 16-bit type; the proposed arithmetic still needs behavioral and all-profile verification. The temporary experiment did not alter production source, fixtures, guest, installed files, or the published package. Results and compiler logs were produced under `build/t473-s13/cpu40-vector-probe/`.
 
 The experiment covers only nine hand-picked x86 sources, not every build command or x64 path. Replacing MONITOR-dependent `CpuH` selection can change declarations and selected behavior beyond register access, and the softpc floppy byte-count change itself is a mirror diff. A complete comparison must include all actual consumers, direct-vs-vector ABI, ISA behavior, exception delivery, and lifecycle before treating this as a clean replacement or measuring net diff. No production change is proposed as proven solely by these compiles.
+
+## Current candidate and bit-index baseline attribution
+
+The working-tree candidate keeps the original `reg` union used by device
+code, hides the CPU30 vector declarations from CPU40, selects the generated
+CPU40 interface for the already-selected MONITOR sources, and removes the
+CPU40 table installation. It does not select the retired hardware V86 monitor.
+The now-unselected CPU30 vector body in `host_cpu.h` is replaced by the
+required conditional `#error`; the `reg` union remains available.
+Both host-width product builds completed; the selected x86 link map no longer
+contains the access-vector installer or CPU register vector slots.
+
+The first bit-index comparison mistakenly used an S11 object that incorporated
+the separately held DIV-469 signed-index candidate. With that old object
+linked into the current direct fixture, case 0 passes. With the present original
+CCPU executor, both the historical-vector fixture and current direct fixture
+fail case 0 in the same way. This is consistent with the explicitly retained
+S11 non-pass in `s11-closure-audit.md`; the held CPU-internal patch was not
+reintroduced. Against that same current executor, 118 bit fixture cases had
+identical exit status and recorded bit outcome between vector and direct
+entry: 54 cases pass and 64 fail identically. This comparison does not make
+those shared failures passes and does not
+prove all instructions or all exception and timing behavior equivalent. The
+139-case monitor boundary and debug/reset fixture also passed. The vector
+control uses the earlier fixture object and a freshly compiled historical
+initializer with current remaining libraries; it is a focused control, not a
+complete reproduction of every old source object. Raw results were recorded
+in [the retained comparison](cpu40-vector-bit-comparison.json).
+
+The 16-gate Full suite and four Windows 3.1 mode/DOSONLY combinations passed
+on the pre-pruning direct-access package. After replacing the disabled CPU30
+body by `#error`, the rebuilt ten-image package matched nine images byte for
+byte; NTVDM differed in four bytes, exactly the PE and debug-directory link
+timestamps. The final relinked package is subject to its own Full gate.
+That final package subsequently passed all 16 selected Full gates; the
+external DOS4GW/NESticle case was explicitly skipped because its fixture was
+not supplied. All four [Windows 3.1 mode/DOSONLY cases](cpu40-win31-matrix.json)
+also passed against that package. Its ten images were installed and hash-verified in both
+`assets/release` and `O:/winnt/system32`. A subsequent blank-line compaction
+was corrected at alternative boundaries; the latest rebuild differs from the
+tested installed NTVDM only in the PE and debug link timestamps (four bytes),
+with the other nine hashes unchanged. One independent Full retry of an
+intermediate package returned 1817 before the initial Console prompt; its
+cause is not established.
+The latest package then passed all 16 [Full gates](cpu40-full-timings.json),
+including the earlier failing Console case, and was installed and verified
+at both release destinations. The isolated 1817 failure remains unrooted;
+passing a retry does not establish that it was fixed.

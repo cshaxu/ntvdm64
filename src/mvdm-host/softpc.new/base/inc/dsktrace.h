@@ -97,11 +97,6 @@
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
-#ifdef ANSI
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
 #endif
 #line 101
 

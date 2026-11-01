@@ -61,9 +61,6 @@
 extern void host_start_cpu(void);
 extern int InitialiseDosEmulation(int argc, char **argv);
 extern void mouse_driver_initialisation(void);
-#if defined(CCPU) && defined(CPU_40_STYLE)
-extern void load_sw_cpu_access_functions(void);
-#endif
 
 void init_virtual_drivers IPT0();
 
@@ -94,9 +91,6 @@ GLOBAL int *pargc;	/* Pointer to argc		*/
 
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#ifndef ProcCommonCommLineArgs
-#error Excluded original conditional branch
-#endif
 #endif /* NTVDM */
 #line 98
 
@@ -253,15 +247,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 
   cpu_init();
 
-#if defined(CCPU) && defined(CPU_40_STYLE)
-  /* DIVERGENCE(MVDM-HOST-DIV-182): the original generated CCPU access-vector
-   * initializer is gated by CPU_30_STYLE even though its selected CCPU body
-   * is also the CPU40 provider (DIV-151).  The retired CPU30 product shell
-   * installed this vector before any recursive BIOS host_simulate call.  The
-   * CPU40-only build must perform the same original vector installation after
-   * the original CPU initialization and before DOS/firmware startup. */
-  load_sw_cpu_access_functions();
-#endif
+
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.

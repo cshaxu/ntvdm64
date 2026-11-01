@@ -210,9 +210,6 @@ void (*emm_func[]) () = {
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#ifndef PROD
-#error Excluded original conditional branch
-#endif
 #endif
 #line 214
 

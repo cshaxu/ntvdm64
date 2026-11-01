@@ -16,49 +16,5 @@
 /* This file has no effect unless HUNTER is defined. */
 #ifdef	HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
-#ifdef EGG
-#error Excluded original conditional branch
-#endif
-#ifdef EGG
-#error Excluded original conditional branch
-#endif
-#ifdef	ANSI
-#error Excluded original conditional branch
-#ifndef	hunter_fopen
-#error Excluded original conditional branch
-#endif
-#else
-#error Excluded original conditional branch
-#ifndef	hunter_fopen
-#error Excluded original conditional branch
-#endif
-#endif
-#ifdef	ANSI
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#ifdef	ANSI
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#ifdef	ANSI
-#error Excluded original conditional branch
-#ifdef	EGG
-#error Excluded original conditional branch
-#endif
-#else
-#error Excluded original conditional branch
-#ifdef	EGG
-#error Excluded original conditional branch
-#endif
-#endif
-#ifdef	EGG
-#error Excluded original conditional branch
-#endif
-#ifndef	newline
-#error Excluded original conditional branch
-#endif
 #endif	/* HUNTER */
 #line 20

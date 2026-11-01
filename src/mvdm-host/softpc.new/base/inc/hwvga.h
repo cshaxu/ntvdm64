@@ -24,17 +24,5 @@
 
 #ifdef GISP_SVGA
 #error DIVERGENCE MVDM-HOST-DIV-534: unreferenced GISP hardware VGA interface is not selected; see mirror register.
-#ifndef _HWVGA_H_
-#error Excluded original conditional branch
-#ifndef hostStartFullScreen
-#error Excluded original conditional branch
-#endif
-#ifndef	hostStopFullScreen
-#error Excluded original conditional branch
-#endif
-#ifdef	HUNTER
-#error Excluded original conditional branch
-#endif
-#endif
 #endif /* GISP_SVGA */
 #line 28

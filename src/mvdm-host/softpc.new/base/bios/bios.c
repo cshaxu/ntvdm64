@@ -221,16 +221,16 @@ void (*BIOS[])() = {
 #endif /* DPMI */
 #ifdef NOVELL
 #error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
-#ifdef NOVELL_CFM
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#ifdef V4CLIENT
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
+
+
+
+
+
+
+
+
+
+
 #else	/* NOVELL */
 #line 225
 			illegal_bop,	/* BOP 34 */
@@ -703,116 +703,5 @@ void (*BIOS[])() = {
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#ifdef	MAC_LIKE
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#if !defined(NTVDM) && !defined(CPU_40_STYLE)
-#error Excluded original conditional branch
-#endif
-#ifndef NTVDM
-#error Excluded original conditional branch
-#endif
-#ifdef PROFILE
-#error Excluded original conditional branch
-#endif
-#ifdef SIGNAL_PROFILING
-#error Excluded original conditional branch
-#endif
-#ifndef NTVDM
-#error Excluded original conditional branch
-#endif
-#if  defined(RDCHK) && !defined(PROD)
-#error Excluded original conditional branch
-#endif
-#ifdef HFX
-#error Excluded original conditional branch
-#endif
-#ifdef DPMI
-#error Excluded original conditional branch
-#endif
-#ifdef DOS_APP_LIC
-#error Excluded original conditional branch
-#endif
-#ifdef NOVELL
-#error Excluded original conditional branch
-#endif
-#ifdef EGG
-#error Excluded original conditional branch
-#endif
-#ifdef NTVDM
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
-#ifdef SMEG
-#error Excluded original conditional branch
-#endif
-#if defined(IRET_HOOKS) && defined(GISP_CPU)
-#error Excluded original conditional branch
-#endif
-#ifdef GISP_SVGA
-#error Excluded original conditional branch
-#endif
-#ifdef PTY
-#error Excluded original conditional branch
-#endif
-#ifdef PC_CONFIG
-#error Excluded original conditional branch
-#endif
-#ifdef LIM
-#error Excluded original conditional branch
-#endif
-#ifdef SUSPEND
-#error Excluded original conditional branch
-#endif
-#ifdef GEN_DRVR
-#error Excluded original conditional branch
-#endif
-#ifdef SUSPEND
-#error Excluded original conditional branch
-#endif
-#ifdef CDROM
-#error Excluded original conditional branch
-#endif
-#ifdef SWINAPI
-#error Excluded original conditional branch
-#endif
-#ifdef MSWDVR
-#error Excluded original conditional branch
-#endif
-#if	defined(SOFTWIN_API) || defined(SWIN_HFX)
-#error Excluded original conditional branch
-#endif
-#ifdef	SOFTWIN_API
-#error Excluded original conditional branch
-#endif
-#ifdef	NOVELL_IPX
-#error Excluded original conditional branch
-#endif
-#ifdef	NOVELL_TCPIP
-#error Excluded original conditional branch
-#endif
-#ifdef SWIN_HFX
-#error Excluded original conditional branch
-#endif
-#if defined(XWINDOW) || defined(NTVDM)
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#ifdef GISP_SVGA
-#error Excluded original conditional branch
-#endif
-#endif
-#if defined(NTVDM) && defined(MONITOR)
-#error Excluded original conditional branch
-#endif
-#ifdef WDCTRL_BOP
-#error Excluded original conditional branch
-#endif
-#ifndef PROD
-#error Excluded original conditional branch
-#endif
-#endif
 #endif	/* PROD */
 #line 636

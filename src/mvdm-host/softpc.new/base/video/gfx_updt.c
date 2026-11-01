@@ -149,11 +149,6 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 #endif
 #else /* VGG */
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
-#if	defined(PROD) || (!defined(EGG))
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
 #endif /* VGG */
 #line 153
 
@@ -3306,27 +3301,6 @@ boolean	dummy_scroll IFN6(int,dummy1,int,dummy2,int,dummy3,int,
 
 #ifdef GORE
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
-#ifdef GORE_PIG
-#error Excluded original conditional branch
-#endif
-#ifdef GORE_PIG
-#error Excluded original conditional branch
-#endif
-#ifdef GORE_PIG
-#error Excluded original conditional branch
-#endif
-#ifdef GORE_PIG
-#error Excluded original conditional branch
-#endif
-#ifdef GORE_PIG
-#error Excluded original conditional branch
-#endif
-#ifdef GORE_PIG
-#error Excluded original conditional branch
-#endif
-#ifdef GORE_PIG
-#error Excluded original conditional branch
-#endif
 #endif /* GORE */
 #line 3304
 
@@ -3538,11 +3512,6 @@ set_mark_funcs IFN0()
 		case	EGA_GRAPHICS_MARKING:
 #ifdef GORE
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
-#ifdef	VGG
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
 #endif /* GORE */
 #line 3509
 
@@ -3859,11 +3828,11 @@ void mon_text_update()
 
 #ifndef CPU_40_STYLE
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#if defined(NTVDM)
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
+
+
+
+
+
 #else
 #line 3813
     if(getVideodirty_total() >= 1000000L ){

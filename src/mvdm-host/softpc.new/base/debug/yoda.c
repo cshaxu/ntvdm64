@@ -486,12 +486,6 @@ enum pla_type 	last_type[PLA_SIZE];
 
 #else /* !macintosh */
 #error DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register.
-#ifdef	CPU_40_STYLE
-#error Excluded original conditional branch
-#endif
-#ifdef	CPU_40_STYLE
-#error Excluded original conditional branch
-#endif
 #endif	/* macintosh */
 #line 490
 
@@ -1524,11 +1518,6 @@ LOCAL YODA_COMMAND(do_par)
 	       getGS_BASE(), getGS_LIMIT(), getGS_AR());
 #else /* SPC386 */
 #error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register.
-#ifdef CPU_30_STYLE
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
 #endif /* SPC386 */							 
 #line 1505
 	return(YODA_LOOP);
@@ -1850,9 +1839,6 @@ LOCAL YODA_COMMAND(do_query)
 #line 1805
 #ifdef A3CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
-#ifndef GISP_CPU
-#error Excluded original conditional branch
-#endif
 #endif /* A3CPU */
 #line 1808
 
@@ -4372,11 +4358,6 @@ LOCAL YODA_COMMAND(do_chewy)
 
 #if	defined(CPU_40_STYLE) && !defined(CCPU)
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
-#ifdef SFELLOW
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
 #endif /* CPU_40_STYLE && !CCPU */
 #line 4246
 
@@ -4792,9 +4773,6 @@ static struct
 #line 4639
 #ifdef A3CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
-#ifndef GISP_CPU
-#error Excluded original conditional branch
-#endif
 #endif /* A3CPU */
 #line 4642
 
@@ -5027,14 +5005,6 @@ LOCAL IBOOL decode_offset IFN3(char *, coffset, IU32 *, offset, IS32 *, seg)
 #else  /* !CCPU */
 #line 4855
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
-#ifdef CPU_40_STYLE
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#ifdef SPC386
-#error Excluded original conditional branch
-#endif
-#endif
 #endif /* !CCPU */
 #line 4857
 		cold = FALSE;
@@ -5212,14 +5182,6 @@ LOCAL IBOOL decode_iaddr_ok IFN3 (char *, iaddr, IS32 *, seg, LIN_ADDR *, offset
 #else  /* !CCPU */
 #line 5023
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
-#ifdef CPU_40_STYLE
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#ifdef SPC386
-#error Excluded original conditional branch
-#endif
-#endif
 #endif /* !CCPU */
 #line 5025
 		cold = FALSE;
@@ -5481,9 +5443,6 @@ void force_yoda IFN0()
 	}
 #ifdef A3CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
-#ifndef SFELLOW
-#error Excluded original conditional branch
-#endif
 #endif /* A3CPU */
 #line 5271
 

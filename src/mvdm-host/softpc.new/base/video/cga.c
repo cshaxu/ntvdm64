@@ -183,9 +183,6 @@ IMPORT READ_POINTERS simple_reads;
 
 #ifdef	A2CPU
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
-#ifndef	NO_STRING_OPERATIONS
-#error Excluded original conditional branch
-#endif
 #endif	/* A2CPU */
 #line 187
 
@@ -1368,11 +1365,11 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 
 #ifdef A3CPU 
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
-#ifdef C_VID
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
+
+
+
+
+
 #else	/* not A3CPU */
 #line 1359
 #ifdef A2CPU

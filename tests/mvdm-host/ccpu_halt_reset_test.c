@@ -11,7 +11,6 @@ extern void setup_vga_globals(void);
 extern void sas_init(uint32_t);
 extern void sas_term(void);
 extern void c_cpu_init(void);
-extern void load_sw_cpu_access_functions(void);
 extern void c_cpu_simulate(void);
 extern void c_cpu_interrupt(int, unsigned short);
 extern uint32_t c_cpu_q_ev_get_count(void);
@@ -275,7 +274,7 @@ int main(void)
     if (!mvdm_softpc_guest_memory_begin(&owner)) return 3;
     report("vga/cpu-init\n");
     setup_vga_globals();
-    load_sw_cpu_access_functions();
+
     debug_exception_pending = 1;
     CCPU_DR[6] = 0x4001;
     c_cpu_init();

@@ -71,11 +71,6 @@ BOOL DemInit (int argc, char *argv[])
 
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
-#ifndef i386
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
 #endif
 #line 75
 

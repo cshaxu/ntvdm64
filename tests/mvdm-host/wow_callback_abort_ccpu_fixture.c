@@ -18,7 +18,6 @@ extern void fixture_thread_exit(void);
 extern void *setup_global_data_ptr(void);
 extern void setup_vga_globals(void),sas_init(IU32),sas_term(void);
 extern void c_cpu_init(void),c_cpu_simulate(void),c_cpu_continue(void);
-extern void load_sw_cpu_access_functions(void);
 extern unsigned char *c_GetPhyAdd(IU32);
 extern void c_setIP(IU16),c_setSP(IU16),c_setCR3(IU32);
 extern void c_setGDT_BASE_LIMIT(IU32,IU16);
@@ -148,7 +147,7 @@ int main(int argc,char **argv)
             !session_thread_bind(&owner) || !setup_global_data_ptr() || !mvdm_softpc_ccpu_wait_begin())return 2;
     sas_init(0x200000);
     if(!mvdm_softpc_guest_memory_begin(&owner))return 2;
-    setup_vga_globals();load_sw_cpu_access_functions();c_cpu_init();
+    setup_vga_globals();c_cpu_init();
     if(argc==2 && !strcmp(argv[1],"--interface"))result=interface_cases();
     else if(argc==2 && !strcmp(argv[1],"--simulate"))result=simulate_cases();
     else{

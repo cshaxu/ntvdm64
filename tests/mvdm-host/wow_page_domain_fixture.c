@@ -55,7 +55,6 @@ extern void c_sas_disable_20_bit_wrapping(void);
 extern uint32_t c_sas_memory_size(void);
 extern uint8_t *c_GetPhyAdd(uint32_t address);
 extern void c_cpu_init(void);
-extern void load_sw_cpu_access_functions(void);
 extern uint32_t c_getCR0(void);
 extern uint32_t c_getCR3(void);
 extern void c_setCR3(uint32_t value);
@@ -5156,7 +5155,6 @@ static int run_fixture(void)
     sas_init(0x00800000u);
     sas_started = 1;
     c_cpu_init();
-    load_sw_cpu_access_functions();
     stage = "guest-memory";
     if (!mvdm_softpc_guest_memory_begin(&owner)) goto done;
     guest_memory_started = 1;

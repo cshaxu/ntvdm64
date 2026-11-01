@@ -258,10 +258,6 @@ $baseDebugNames = @(
 # unresolved edges are genuine modern-boundary adapters.  Individual fixtures
 # and hand-written stand-ins are not a source-selection mechanism.
 $hostNames = @(Get-OriginalSources $hostManifest)
-# `nt_cprgs.c` is a selected original host carrier.  The historical
-# `nt_aorc.c` bridge does not cover the 32-bit CCPU register surface reached
-# by DPMI; the complete original bridge is generated in CVIDC `accessfn.c`.
-$hostNames = @($hostNames + 'nt_cprgs.c') | Select-Object -Unique
 if (!(Test-Path -LiteralPath $hostEntrySource)) { throw "Original SoftPC host entry missing: $hostEntrySource" }
 if (!(Test-Path -LiteralPath $hostEntryResourceSource)) { throw "Original SoftPC resource source missing: $hostEntryResourceSource" }
 if (!(Test-Path -LiteralPath $hostExportDefinition)) { throw "Original SoftPC export definition missing: $hostExportDefinition" }

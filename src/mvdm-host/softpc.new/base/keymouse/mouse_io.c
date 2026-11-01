@@ -1505,11 +1505,6 @@ int curr_video_mode;
         parms_addr = find_mode_table(current_video_mode,&temp_word);
 #else
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#ifdef V7VGA
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
 #endif /* NTVDM */
 #line 1509
 		ega_default_crtc = parms_addr + EGA_PARMS_CRTC;

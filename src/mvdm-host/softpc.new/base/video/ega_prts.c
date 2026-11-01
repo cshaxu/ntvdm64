@@ -2409,11 +2409,11 @@ GLOBAL VOID ega_mask_register_changed IFN1(BOOL, gotBitProtection)
 
 #ifdef A3CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
-#ifdef C_VID
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
+
+
+
+
+
 #else
 #line 2413
 #if !(defined(NTVDM) && defined(MONITOR))
@@ -2468,9 +2468,6 @@ LOCAL void	ega_gc_mask IFN2(io_addr, port, half_word, value)
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#ifndef A2CPU
-#error Excluded original conditional branch
-#endif
 #endif
 #line 2462
 
@@ -2521,9 +2518,6 @@ void	ega_gc_mask_ff IFN2(io_addr, port, half_word, value)
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#ifndef A2CPU
-#error Excluded original conditional branch
-#endif
 #endif
 #line 2507
 

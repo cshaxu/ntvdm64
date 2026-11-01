@@ -120,12 +120,6 @@ extern uint16_t c_getAX(void);
 extern void c_setAX(uint16_t value);
 extern int32_t c_getCF(void);
 extern void c_setCF(int32_t value);
-extern void load_sw_cpu_access_functions(void);
-extern void (*host_simulate_func)(void);
-extern uint16_t (*getAX_func)(void);
-extern void (*setAX_func)(uint16_t value);
-extern int32_t (*getCF_func)(void);
-extern void (*setCF_func)(int32_t value);
 extern void c_cpu_simulate(void);
 extern void EDL_fast_bop(ULONG immed);
 extern struct SasVector cSasPtrs;
@@ -704,19 +698,11 @@ int main(void)
         sas_term();
         return 1;
     }
-    fputs("access-init\n", stderr);
-    load_sw_cpu_access_functions();
-    if (getAX_func != c_getAX || setAX_func != c_setAX ||
-        getCF_func != c_getCF || setCF_func != c_setCF ||
-        host_simulate_func != c_cpu_simulate) {
-        fputs("selected CCPU access table has an unexpected provider\n", stderr);
-        sas_term();
-        return 1;
-    }
-    setAX_func(UINT16_C(0x4a21));
-    setCF_func(1);
-    if (getAX_func() != UINT16_C(0x4a21) || getCF_func() == 0) {
-        fputs("selected CCPU access table did not preserve register/flag ABI\n", stderr);
+    /* Validate the generated CPU40 interface directly; no dispatch table. */
+    c_setAX(UINT16_C(0x4a21));
+    c_setCF(1);
+    if (c_getAX() != UINT16_C(0x4a21) || c_getCF() == 0) {
+        fputs("CCPU direct register/flag ABI failed\n", stderr);
         sas_term();
         return 1;
     }
@@ -806,14 +792,6 @@ int main(void)
     c_sas_store(UINT32_C(0x000ffffb), UINT8_C(0xd6));
     c_sas_store(UINT32_C(0x000ffffc), UINT8_C(0xfe));
     fputs("start\n", stderr);
-    /* `nt_cprgs.c` selects the original CCPU executor through this historical
-     * SoftPC CPU-access dispatch slot.  The fixture must not bypass that
-     * original selection by calling c_cpu_simulate directly. */
-    if (host_simulate_func == NULL) {
-        fputs("original host_simulate selection was not installed\n", stderr);
-        sas_term();
-        return 1;
-    }
     /* Enter through the original host wrapper rather than directly calling
      * the CCPU executor.  Under CPU_40_STYLE+CCPU its untouched source body
      * resolves cpu_simulate to c_cpu_simulate. */

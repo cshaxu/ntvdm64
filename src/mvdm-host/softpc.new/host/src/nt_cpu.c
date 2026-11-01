@@ -95,14 +95,6 @@ void	host_start_cpu()
 	host_simulate: This function starts up the cpu emulation
 	for recursive CPU calls from the Insignia BIOS
 */
-/* DIVERGENCE(MVDM-HOST-DIV-150): CPU_40_STYLE selects the original
- * host_cpu.h vector macro `host_simulate()` for in-header callers, while
- * original DEM/DPMI and BIOS consumers retain an external function import.
- * Undefine the local macro only while defining that public wrapper; it keeps
- * the original c_cpu_simulate execution body and provides no second loop. */
-#ifdef CCPU
-#undef host_simulate
-#endif
 void	host_simulate()
 {
     ASSERT(IcaLock.OwningThread != NtCurrentTeb()->ClientId.UniqueThread);
@@ -161,11 +153,6 @@ void	host_clear_hw_int()
 {
 #ifndef CCPU
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
-#ifdef CPU_40_STYLE
-#error Excluded original conditional branch
-#else
-#error Excluded original conditional branch
-#endif
 #endif /* not CCPU */
 #line 165
 }

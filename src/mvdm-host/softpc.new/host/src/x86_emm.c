@@ -48,12 +48,6 @@ The Following Routines are defined:
 #ifdef LIM
 #ifdef MONITOR  //x86 specific LIM functions
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
-#ifdef EMM_DEBUG
-#error Excluded original conditional branch
-#endif
-#ifdef EMM_DEBUG
-#error Excluded original conditional branch
-#endif
 #endif /* MONITOR */
 #line 52
 #endif /* LIM */

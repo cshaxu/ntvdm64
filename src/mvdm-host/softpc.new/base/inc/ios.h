@@ -450,12 +450,6 @@ IMPORT void	io_define_inb
 
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
-#ifdef	ANSI
-#error Excluded original conditional branch
-#endif
-#ifdef	ANSI
-#error Excluded original conditional branch
-#endif
 #endif	/* SFELLOW */
 #line 454
 
@@ -482,12 +476,6 @@ IMPORT void	io_define_outb
 
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
-#ifdef	ANSI
-#error Excluded original conditional branch
-#endif
-#ifdef	ANSI
-#error Excluded original conditional branch
-#endif
 #endif	/* SFELLOW */
 #line 479
 
