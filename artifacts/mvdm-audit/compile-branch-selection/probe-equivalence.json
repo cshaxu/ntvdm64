@@ -1,0 +1,58 @@
+[
+  {
+    "arch": "x86",
+    "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_sec.c",
+    "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+    "exits": [
+      0,
+      0
+    ],
+    "equal": true,
+    "sha256": [
+      "abcd56f41132471de0104360ffd78c9a0321a50a5e969529f74aa7f44ede3b81",
+      "abcd56f41132471de0104360ffd78c9a0321a50a5e969529f74aa7f44ede3b81"
+    ]
+  },
+  {
+    "arch": "x86",
+    "file": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_text_video.c",
+    "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+    "exits": [
+      0,
+      0
+    ],
+    "equal": true,
+    "sha256": [
+      "5a46f0ed8d8631b99853fdd1726b24a419e657b3fee4f09cdd5d010f9c0a8a9c",
+      "5a46f0ed8d8631b99853fdd1726b24a419e657b3fee4f09cdd5d010f9c0a8a9c"
+    ]
+  },
+  {
+    "arch": "x86",
+    "file": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c",
+    "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker",
+    "exits": [
+      0,
+      0
+    ],
+    "equal": true,
+    "sha256": [
+      "df2261221fbd5d89369409d70b19cc4169058e32ef7c92880dc149e9f11763df",
+      "df2261221fbd5d89369409d70b19cc4169058e32ef7c92880dc149e9f11763df"
+    ]
+  },
+  {
+    "arch": "x86",
+    "file": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_bitmap_bindings.c",
+    "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32",
+    "exits": [
+      0,
+      0
+    ],
+    "equal": true,
+    "sha256": [
+      "a910c3c2846d55995e31f2095d74771207e97079cc53f07041d1d8ea7cf1a923",
+      "a910c3c2846d55995e31f2095d74771207e97079cc53f07041d1d8ea7cf1a923"
+    ]
+  }
+]

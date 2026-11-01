@@ -87,7 +87,7 @@ runtime: the owner clarified boundary-recovery scope.
 | Identifier Mode | M0 T473 S13, Ordinary Mode. |
 | Admission And Approval | Owner accepted and closed S12 and admitted S13. [S12 evidence](../../artifacts/mvdm-audit/s12-excluded-branch-errors.md). |
 | Objective | Trace and repair Console/Window keyboard source transitions; independently investigate Win3.1 MS-DOS Prompt Alt+Enter. |
-| Delivery State | Published; awaiting owner acceptance. Full 16 gates, DOS4GW startup, four Win3.1 modes and synthetic DOS/native three-CAF and Alt+Enter return passed. Physical input and injected handoff failures remain unverified; the independent command-output observation is in TODO. [Evidence](../etc/evidence/m0-t473-s13-input-handoff.md). |
+| Delivery State | Published; awaiting owner acceptance. Full 16 gates, DOS4GW startup, four Win3.1 modes and synthetic DOS/native three-CAF and Alt+Enter return passed. Physical input and injected handoff failures remain unverified; command output is in TODO. [Compile-branch evidence](../../artifacts/mvdm-audit/compile-branch-selection/README.md). [Evidence](../etc/evidence/m0-t473-s13-input-handoff.md). |
 | Non-goals | Guest modification or rebuilding; DOS-specific shortcut workarounds; unrelated performance work. |
 | Reference Baseline | Published ten-image package at 1d2ddfb18; [handoff scope and prior observations](../etc/operations/m0-t473-s12-ntcon-input-source-handoff.md). |
 | Files And ABI Surface | NTCON frontend session, keyboard and channel; worker input client and original DOS scan-code handling; tests and evidence. |

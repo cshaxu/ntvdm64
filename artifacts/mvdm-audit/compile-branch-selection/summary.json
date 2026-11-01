@@ -1,0 +1,18 @@
+{
+  "branches": 18667,
+  "counts": {
+    "x86:selected": 3945,
+    "x64:selected": 333,
+    "x86:not-selected-in-observed-contexts": 4472,
+    "x64:not-selected-in-observed-contexts": 191,
+    "x64:unobserved": 18143,
+    "x86:unobserved": 10250
+  },
+  "contexts": 1051,
+  "passed": 1051,
+  "failed": 0,
+  "by_profile": {
+    "x86": 816,
+    "x64": 235
+  }
+}
