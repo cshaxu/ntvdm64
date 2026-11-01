@@ -266,6 +266,27 @@ int main(void)
     CHECK(kvm_hotkey_matcher_submit(&matcher, &key, count_input, &count, LIB_TRUE));
     CHECK(count.hotkeys == 1 && count.keys == 0);
     kvm_hotkey_matcher_discard(&matcher);
+    /* SoftPC's shared matcher buffers modifiers only while a chord remains
+     * possible. Once Ctrl has accompanied ordinary input, a later Ctrl+Alt+F
+     * is delivered as ordinary input; it is not retroactively a hotkey. */
+    memset(&count,0,sizeof(count));memset(&key,0,sizeof(key));
+    kvm_hotkey_matcher_initialize(&matcher,&registry);
+    key.type=KVM_EVENT_KEY;key.data.key.pressed=LIB_TRUE;
+    key.data.key.key=BASE_KEY_CONTROL;key.data.key.scan_code=0x1d;
+    key.data.key.modifiers=BASE_KEY_MODIFIER_CONTROL;
+    CHECK(kvm_hotkey_matcher_submit(&matcher,&key,count_input,&count,LIB_TRUE));
+    CHECK(count.keys==0 && count.hotkeys==0);
+    key.data.key.key='A';key.data.key.scan_code=0x1e;
+    CHECK(kvm_hotkey_matcher_submit(&matcher,&key,count_input,&count,LIB_TRUE));
+    CHECK(count.keys==2 && count.hotkeys==0);
+    key.data.key.key=BASE_KEY_ALT;key.data.key.scan_code=0x38;
+    key.data.key.modifiers=BASE_KEY_MODIFIER_CONTROL|BASE_KEY_MODIFIER_ALT;
+    CHECK(kvm_hotkey_matcher_submit(&matcher,&key,count_input,&count,LIB_TRUE));
+    key.data.key.key='F';key.data.key.scan_code=0x21;
+    CHECK(kvm_hotkey_matcher_submit(&matcher,&key,count_input,&count,LIB_TRUE));
+    CHECK(count.keys==4 && count.hotkeys==0);
+    kvm_hotkey_matcher_discard(&matcher);
+    puts("PASS shared matcher preserves previously delivered modifier chord as ordinary input");
     /* Link the real Win32 leaf, but never create a Window on the owner's desktop. */
     CHECK(kvm_window_create(&window, &options) == LIB_STATUS_INVALID_ARGUMENT);
     CHECK(window == NULL);
