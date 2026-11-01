@@ -57,7 +57,7 @@ LOCAL void setupVerboseGetenv IFN0()
 #ifdef	PROD
 		verboseGetenv = FALSE;
 #else	/* PROD */
-		verboseGetenv = TRUE;
+/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
 #endif	/* PROD */
 		env = host_getenv("VERBOSE_GETENV");
 		if (env)

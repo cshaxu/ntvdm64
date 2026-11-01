@@ -57,7 +57,7 @@ LOCAL VOID where IFN3(CHAR *, string, word, cs, LIN_ADDR, ip)
 #ifdef	PROD
 		"CS:%04x IP:%04x OP:%02x %02x %02x %02x %02x",
 #else	/* PROD */
-		"CS:IP %04x:%04x OP:%02x %02x %02x %02x %02x",
+/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
 #endif	/* PROD */
 		cs, ip,
 		sas_hw_at(ea), sas_hw_at(ea+1), sas_hw_at(ea+2),
@@ -106,8 +106,7 @@ void illegal_op_int()
 #ifdef PROD
 	host_error(EG_BAD_OP, ERR_QU_CO_RE, string);
 #else  /* PROD */
-	assert1( NO, "Illegal instruction\n%s\n", string );
-	force_yoda();
+/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
 #endif /* PROD */
 
 #else /* NTVDM */

@@ -45,20 +45,7 @@ LOCAL  BOOL first_exception = TRUE;
  * externally supplied CCPU_SHOW_EXCEPTIONS value into fprintf(NULL,...). */
 #define check_exception_env()
 #else
-#define check_exception_env()						\
-{									\
-	if (first_exception)						\
-	{								\
-		char *env = host_getenv ("CCPU_SHOW_EXCEPTIONS");	\
-		if (env != NULL)					\
-		{							\
-			show_exceptions = TRUE;				\
-			if (strcasecmp(env, "TRAP") == 0)		\
-				trap_exceptions = TRUE;			\
-		}							\
-	}								\
-	first_exception = FALSE;					\
-}
+/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
 #endif
 
 IMPORT FILE *trace_file;

@@ -159,12 +159,7 @@ LOCAL void io_empty_inb IFN2(io_addr, io_address, half_word *, value)
 	UNUSED(io_address);
 
 #else
-	if (BIT_NOT_SET(ios_empty_in, (IU16)io_address))
-	{
-		/* First time for this port */
-		always_trace1 ("INB attempted on empty port 0x%x", io_address);
-		SET_THE_BIT(ios_empty_in, (IU16)io_address);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
 #endif /* PROD */
 	*value = IO_EMPTY_PORT_BYTE_VALUE;
 }
@@ -183,13 +178,7 @@ LOCAL void io_empty_outb IFN2(io_addr, io_address, half_word, value)
 #ifdef PROD
 	UNUSED(io_address);
 #else
-
-	if (BIT_NOT_SET(ios_empty_out, (IU16)io_address))
-	{
-		/* First time for this port */
-		always_trace1 ("OUTB attempted on empty port 0x%x", io_address);
-		SET_THE_BIT(ios_empty_out, (IU16)io_address);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
 #endif /* PROD */
 	/* Do nothing! */
 }

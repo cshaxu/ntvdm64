@@ -167,7 +167,7 @@ ERROR RECOVERY	  :	describe how procedure reacts to errors
 #ifdef PROD
 #include "SOFTPC_EGA.seg"
 #else
-#include "SOFTPC_EGA_WRITE.seg"
+/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
 #endif
 #endif
 

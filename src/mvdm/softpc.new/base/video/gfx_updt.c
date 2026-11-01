@@ -202,9 +202,7 @@ a 4-byte boundary. This macro makes this true and reports if it wasn't. */
 #ifdef PROD
 #define ALIGN_SCREEN_START(start) (start &= ~3L)
 #else
-#define ALIGN_SCREEN_START(start) if (start & 3L) \
-	{ file_id; printf("Start of screen not 4-byte aligned"); newline; \
-	start &= ~3L; }
+/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
 #endif	/* PROD */
 
 GLOBAL LONG dirty_curs_offs = -1;		/* GLOBAL for JOKER */

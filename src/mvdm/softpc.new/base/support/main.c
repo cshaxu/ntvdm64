@@ -170,7 +170,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
     (VOID) host_error_ext(EG_SYS_INSECURE, ERR_QUIT, &err_data);
     exit(1);
 #else
-    always_trace1("Secure Mode ERROR:\"%s\" is insecure.", sys_config_filename);
+/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
 #endif
   }
 #endif

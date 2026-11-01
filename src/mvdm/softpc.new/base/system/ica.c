@@ -278,7 +278,7 @@ ADAPTER_STATE adapter_state[2];
 #ifdef PROD
 #define host_valid_iret_hook()	(TRUE)
 #else		/* allow disabling of iret hooks whilst debugging */
-#define host_valid_iret_hook()	(iretHooksEnabled)
+/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
 #endif
 #define host_bop_style_iret_hooks()	(FALSE)
 #define host_iret_bop_table_addr(line)	(0)
