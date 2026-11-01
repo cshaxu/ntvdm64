@@ -81,9 +81,7 @@ BOOL _GetClientRect(
     if (TestWF(pwnd, WFMINIMIZED) && !TestWF(pwnd, WFWIN40COMPAT)) {
 
 #ifdef WOW
-        *((LPDWORD)prc)    = 0l;
-        *(((LPWORD)prc)+2) = (WORD)ClientSharedInfo()->psi->aiSysMet[SM_CXMINIMIZED];
-        *(((LPWORD)prc)+3) = (WORD)ClientSharedInfo()->psi->aiSysMet[SM_CYMINIMIZED];
+/* DIVERGENCE OPENNT-HOST-135: 16-bit WOW rectangle layout is not selected here; see mirror register. */
 #else
         prc->left   = 0;
         prc->top    = 0;
@@ -94,9 +92,7 @@ BOOL _GetClientRect(
     } else {
 
 #ifdef WOW
-        *((LPDWORD)prc)    = 0l;
-        *(((LPWORD)prc)+2) = (WORD)(pwnd->rcClient.right - pwnd->rcClient.left);
-        *(((LPWORD)prc)+3) = (WORD)(pwnd->rcClient.bottom - pwnd->rcClient.top);
+/* DIVERGENCE OPENNT-HOST-135: 16-bit WOW rectangle layout is not selected here; see mirror register. */
 #else
         *prc = pwnd->rcClient;
         OffsetRect(prc, -pwnd->rcClient.left, -pwnd->rcClient.top);

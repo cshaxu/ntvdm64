@@ -1,4 +1,9 @@
 # non-mvdm original OpenNT sources
+OPENNT-HOST-135: retain the selected native RECT path in USER `_GetClientRect`
+and replace its unselected 16-bit WOW-layout branch bodies with markers.
+The separate Win16 thunk still converts RECT to RECT16. Ranges and hashes:
+`../../artifacts/mvdm-audit/s12-native-control-rect.jsonl`.
+
 OPENNT-HOST-134: replace the unselected INCLUDE_IO_BUFFER_SIZE_TABLE body
 from the OpenNT 4.5 `private/inc/dlcio.h` with a marker, retaining its
 conditional and the selected external declaration. Source range and body
