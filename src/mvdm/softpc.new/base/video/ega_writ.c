@@ -254,7 +254,7 @@ ega_write_init IFN0()
 	dump_writes = handler;
 #else
 #ifdef EGATEST
-	gmi_define_mem(VIDEO,(*handler));
+/* DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register. */
 #else
 #ifndef GISP_CPU
 #ifdef A3CPU

@@ -70,15 +70,7 @@ IMPORT	void	gmi_define_mem IPT2(mem_type, type, MEM_HANDLERS *, handlers);
 #define BACKWARDS 1
 
 #ifdef EGATEST
-#define gmi_redefine_mem(type,handlers) \
-b_write_ptrs[(int)type] = handlers.b_write; \
-w_write_ptrs[(int)type] = handlers.w_write; \
-b_fill_ptrs[(int)type] = handlers.b_fill; \
-w_fill_ptrs[(int)type] = handlers.w_fill; \
-b_fwd_move_ptrs[(int)type] = handlers.b_move_fwd; \
-b_bwd_move_ptrs[(int)type] = handlers.b_move_bwd; \
-w_fwd_move_ptrs[(int)type] = handlers.w_move_fwd; \
-w_bwd_move_ptrs[(int)type] = handlers.w_move_bwd; 
+/* DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register. */
 #else
 #define gmi_redefine_mem(type,handlers) \
 b_write_ptrs[(int)type] = handlers.b_write; \

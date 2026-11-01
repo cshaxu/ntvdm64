@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-529: replace unselected historical debug, documentation and
+host-platform branches with markers while retaining their conditional shells.
+Exact labels, ranges and hashes are in
+`../../artifacts/mvdm-audit/s12-historical-tail.jsonl`.
+
 MVDM-HOST-DIV-528: replace unselected BSD4_2, OS2_32, OS2_16,
 SOFTWIN_API, SWIN_HAW, SWIN_HFX, SWIN_SNDBLST_NULL, SLAVEPC and NOVELL
 branches with markers while preserving conditionals. The inventory is

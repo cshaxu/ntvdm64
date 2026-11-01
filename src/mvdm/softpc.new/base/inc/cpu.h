@@ -43,10 +43,7 @@ extern  void            (*(w_write_ptrs[]))();
 extern  void            (*(b_fill_ptrs[]))();
 extern  void            (*(w_fill_ptrs[]))();
 #ifdef EGATEST
-extern  void            (*(b_fwd_move_ptrs[]))();
-extern  void            (*(w_fwd_move_ptrs[]))();
-extern  void            (*(b_bwd_move_ptrs[]))();
-extern  void            (*(w_bwd_move_ptrs[]))();
+/* DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register. */
 #else
 extern  void            (*(b_move_ptrs[]))();
 extern  void            (*(w_move_ptrs[]))();

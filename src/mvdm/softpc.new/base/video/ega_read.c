@@ -163,7 +163,7 @@ IMPORT void setReadPointers IPT1(IUH, readset);
 #define	change_read_pointers(ptr)	dump_change_read_pointers(&ptr)
 #else
 #ifdef EGATEST
-#define	change_read_pointers(ptr)	read_pointers = ptr
+/* DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register. */
 #else
 #define	change_read_pointers(ptr)	read_glue_ptrs = ptr
 #endif /* EGATEST */

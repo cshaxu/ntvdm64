@@ -93,9 +93,7 @@ extern void reset_profile IPT0();
 #endif
 
 #ifdef SIGNAL_PROFILING
-extern void Start_sigprof IPT0();
-extern void Stop_sigprof IPT0();
-extern void Dump_sigprof IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-529: SIGNAL_PROFILING platform branch is not selected; see mirror register. */
 #endif
 
 #if !defined(PROD) && defined(CPU_40_STYLE)
@@ -419,9 +417,7 @@ void (*BIOS[])() = {
 #endif
 
 #ifdef SWINAPI
-			Gdi_call,	/* BOP 93 */
-			User_call,	/* BOP 94 */
-                        Swinapi_bop,    /* BOP 95 */
+/* DIVERGENCE MVDM-HOST-DIV-529: SWINAPI platform branch is not selected; see mirror register. */
 #else /* SWINAPI */
 
 			illegal_bop,	/* BOP 93 */
@@ -565,9 +561,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP D2 */
 			illegal_bop,	/* BOP D3 */
 #ifdef SIGNAL_PROFILING
-			Start_sigprof,	/* BOP D4 */
-			Stop_sigprof,	/* BOP D5 */
-			Dump_sigprof,	/* BOP D6 */
+/* DIVERGENCE MVDM-HOST-DIV-529: SIGNAL_PROFILING platform branch is not selected; see mirror register. */
 #else
 			illegal_bop,	/* BOP D4 */
 			illegal_bop,	/* BOP D5 */

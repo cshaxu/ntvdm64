@@ -66,8 +66,7 @@
  *	only the IO_READ flag set, the other with only the IO_WRITE flag set.
  */
 #ifdef	MAC68K
-GLOBAL char	*Ios_in_adapter_table = NULL;
-GLOBAL char	*Ios_out_adapter_table = NULL;
+/* DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register. */
 #else
 GLOBAL char	Ios_in_adapter_table[PC_IO_MEM_SIZE];
 GLOBAL char	Ios_out_adapter_table[PC_IO_MEM_SIZE];
@@ -958,10 +957,7 @@ GLOBAL void	io_init IFN0()
 	io_define_outb(EMPTY_ADAPTOR, io_empty_outb);
 
 #ifdef	MAC68K
-	if (Ios_in_adapter_table == NULL) {				/* First time around -- allocate */
-		Ios_in_adapter_table = host_malloc(PC_IO_MEM_SIZE);
-		Ios_out_adapter_table = host_malloc(PC_IO_MEM_SIZE);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register. */
 #endif	/* MAC68K */
 
 #ifndef PROD

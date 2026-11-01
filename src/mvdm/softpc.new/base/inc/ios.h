@@ -503,8 +503,7 @@ IMPORT void	io_init IPT0();
 
 /* Externs and macros for io_redefine_inb/outb */
 #ifdef MAC68K
-IMPORT char	*Ios_in_adapter_table;
-IMPORT char	*Ios_out_adapter_table;
+/* DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register. */
 #else
 IMPORT char	Ios_in_adapter_table[];
 IMPORT char	Ios_out_adapter_table[];

@@ -56,11 +56,6 @@ IMPORT VOID fill_alternate_bytes IPT3( IS8 *, start, IS8 *, end, IS8, value);
 IMPORT VOID fill_both_bytes IPT3( IU16, data, IU16 *, dest, ULONG, len );
 
 #ifdef	SETUID_ROOT
-
-/* real/effective user ID stuff */
-IMPORT void host_init_uid IPT0 ();
-IMPORT void host_set_root IPT0 ();
-IMPORT void host_revert_uid IPT0 ();
-
+/* DIVERGENCE MVDM-HOST-DIV-529: SETUID_ROOT platform branch is not selected; see mirror register. */
 #endif	/* SETUID_ROOT */
 

@@ -83,8 +83,7 @@ extern void host_applInit();
 /* Have global variables defined here to indicate what product to run as. */
 
 #ifdef SOFTWINDOWS
-GLOBAL IBOOL Running_SoftWindows = TRUE;
-GLOBAL CHAR *SPC_Product_Name = "SoftWindows";
+/* DIVERGENCE MVDM-HOST-DIV-529: SOFTWINDOWS platform branch is not selected; see mirror register. */
 #else
 GLOBAL IBOOL Running_SoftWindows = FALSE;
 GLOBAL CHAR *SPC_Product_Name = "SoftPC";
@@ -119,10 +118,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 #endif
 
 #ifdef	SETUID_ROOT
-
-	/* make sure the real and effective UIDs are OK */
-	host_init_uid ();
-
+/* DIVERGENCE MVDM-HOST-DIV-529: SETUID_ROOT platform branch is not selected; see mirror register. */
 #endif	/* SETUID_ROOT */
 
 #if !defined(PROD) || defined(HUNTER)

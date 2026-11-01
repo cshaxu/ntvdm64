@@ -4809,7 +4809,7 @@ LOCAL YODA_COMMAND(do_h)
 }
 
 #ifdef PCLABS_STATS
-int stats_counter;
+/* DIVERGENCE MVDM-HOST-DIV-529: PCLABS_STATS platform branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -5278,7 +5278,7 @@ void force_yoda IFN0()
 	entry_pending = FALSE;
 
 #ifdef PCLABS_STATS
-	return;
+/* DIVERGENCE MVDM-HOST-DIV-529: PCLABS_STATS platform branch is not selected; see mirror register. */
 #endif
 #ifdef 	GISP_SVGA
 /* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
@@ -5733,12 +5733,7 @@ LOCAL dump_descr IFN2(LIN_ADDR, address, IUM32, num)
 dump_string IFN4(IU16, selector, LIN_ADDR, offset, LIN_ADDR, len, long, mode)
 
 #ifdef DOCUMENTATION
-long selector;   /* Selector:Offset to start address for dump */
-long offset;     /*                    "                      */
-long len;        /* Nr. bytes to dump */
-long mode;       /* =1 Simple byte string dump */
-                 /* =2 Dump every other byte starting with first */
-                 /* =3 Dump every other byte starting with second */
+/* DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register. */
 #endif	/* DOCUMENTATION */
 
    {
@@ -6596,9 +6591,7 @@ LOCAL	void	set_access_break IFN1(int, port)
 LOCAL	void	set_host_address_break IFN3(LIN_ADDR, cs, LIN_ADDR, len, LIN_ADDR, stop)
 
 #ifdef DOCUMENTATION
-long cs;		/* start address */
-long len;		/* length to check */
-long stop;		/* stop or trace when changed */
+/* DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register. */
 #endif	/* DOCUMENTATION */
 
 {
@@ -6640,9 +6633,7 @@ IU8 *old, *now;
 LOCAL	void	set_data_break_words IFN3(LIN_ADDR, cs, LIN_ADDR, len, LIN_ADDR, stop)
 
 #ifdef DOCUMENTATION
-long cs;		/* start address */
-long len;		/* length to check */
-long stop;		/* stop or trace when changed */
+/* DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register. */
 #endif	/* DOCUMENTATION */
 
 {
@@ -7137,8 +7128,7 @@ IU32 current_opcode;
     addr = eff_addr(check_I_cs, check_I_ip);
 
 #ifdef PCLABS_STATS
-    log_stats(addr, sas_hw_at(addr), sas_hw_at(addr+1), sas_hw_at(addr+2));
-    return;
+/* DIVERGENCE MVDM-HOST-DIV-529: PCLABS_STATS platform branch is not selected; see mirror register. */
 #endif
 
     /* Lets get the next 4 bytes of code */

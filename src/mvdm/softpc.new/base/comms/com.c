@@ -1345,26 +1345,7 @@ recv_char IFN1(long, adapt_long)
 	set_recv_char_status(asp);
 	
 #ifdef DOCUMENTATION
-	/*
-	 * I think this is wrong for polled comms applications WTGC BCN 354
-	 */
-	
-	/*
-	 * If the data available interrupt is not to be delivered to the CPU,
-	 * then the adapter must come out of the critical region at once
-	 */
-	if (asp->data_available_interrupt_state != ON)
-	{
-		long	input_ready = 0;
-		
-		/* check for further input */
-		host_com_ioctl(adapter, HOST_COM_INPUT_READY,
-			(long)&input_ready);
-		if (input_ready)
-			recv_char((long)adapter);
-		else
-			com_critical_reset(adapter);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register. */
 #endif
 }
 #ifdef NTVDM

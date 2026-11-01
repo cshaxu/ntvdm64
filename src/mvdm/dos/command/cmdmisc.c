@@ -851,62 +851,7 @@ uint32_t cbGuestComSpec;
 VOID cmdSaveWorld (VOID)
 {
 #ifdef CHECK_IT_LATER
-SAVEWORLD VDMState;
-HANDLE  hFile;
-PCHAR   pVDM;
-DWORD   dwBytesWritten;
-
-    if(IsFirstVDMInSystem) {
-        IsFirstVDMInSystem = FALSE;
-        if ((hFile = CreateFile("c:\\nt\\bin86\\savevdm.wld",
-                            GENERIC_WRITE,
-                            0,
-                            NULL,
-                            OPEN_ALWAYS,
-                            0,
-                            NULL)) == (HANDLE)-1){
-            SaveWorldCreated = FALSE;
-            return;
-        }
-        VDMState.ax    =    getAX();
-        VDMState.bx    =    getBX();
-        VDMState.cx    =    getCX();
-        VDMState.dx    =    getDX();
-        VDMState.cs    =    getCS();
-        VDMState.ss    =    getSS();
-        VDMState.ds    =    getDS();
-        VDMState.es    =    getES();
-        VDMState.si    =    getSI();
-        VDMState.di    =    getDI();
-        VDMState.bp    =    getBP();
-        VDMState.sp    =    getSP();
-        VDMState.ip    =    getIP() + 1;
-        VDMState.flag  =    0;
-        VDMState.ImageSize = 1024*1024;
-
-        pVDM = (PVOID)GetVDMAddr(0,0);
-
-        if (WriteFile (hFile,
-                       (LPVOID)&VDMState,
-                       (DWORD)sizeof(VDMState),
-                       &dwBytesWritten,
-                       NULL) == FALSE){
-            SaveWorldCreated = FALSE;
-            CloseHandle(hFile);
-            return;
-        }
-
-        if (WriteFile (hFile,
-                       (LPVOID)pVDM,
-                       (DWORD)VDMState.ImageSize,
-                       &dwBytesWritten,
-                       NULL) == FALSE){
-            SaveWorldCreated = FALSE;
-            CloseHandle(hFile);
-            return;
-        }
-        CloseHandle(hFile);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-529: CHECK_IT_LATER platform branch is not selected; see mirror register. */
 #endif
     return;
 }

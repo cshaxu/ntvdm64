@@ -300,62 +300,7 @@ VOID putdrawitem16(VPDRAWITEMSTRUCT16 vpDI16, LPDRAWITEMSTRUCT lpDI)
 }
 
 #ifdef NOTUSED
-//
-// Allocate and fill a 32bit DropFileStruct based on a 16bit one.
-// 16 bit structure is not freed.
-//
-BOOL getdropfilestruct16(HAND16 hand16, PHANDLE phand32)
-{
-    PDROPFILESTRUCT16  lpdfs16;
-    LPDROPFILESTRUCT   lpdfs32;
-    VPVOID vp;
-    INT cb;
-
-    vp = GlobalLock16(hand16, &cb);
-
-    if (vp) {
-
-        GETMISCPTR(vp, lpdfs16);
-
-        *phand32 = GlobalAlloc(GMEM_DDESHARE,
-                               cb-sizeof(DROPFILESTRUCT16)+
-                               sizeof(DROPFILESTRUCT));
-
-        if (*phand32) {
-
-            lpdfs32 = GlobalLock(*phand32);
-
-            lpdfs32->pFiles = sizeof(DROPFILESTRUCT);
-            lpdfs32->pt.x = lpdfs16->x;
-            lpdfs32->pt.y = lpdfs16->y;
-            lpdfs32->fNC  = lpdfs16->fNC;
-            lpdfs32->fWide = FALSE;
-
-            RtlCopyMemory((LPBYTE)lpdfs32+lpdfs32->pFiles,
-                          (LPBYTE)lpdfs16+lpdfs16->pFiles,
-                          cb-sizeof(DROPFILESTRUCT16));
-
-            FREEMISCPTR(lpdfs16);
-            GlobalUnlock16(hand16);
-
-            GlobalUnlock(*phand32);
-
-            return TRUE;
-
-        } else {
-
-            FREEMISCPTR(lpdfs16);
-            GlobalUnlock16(hand16);
-
-            return FALSE;
-        }
-    } else {
-        *phand32 = NULL;
-    }
-
-    return FALSE;
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-529: NOTUSED platform branch is not selected; see mirror register. */
 #endif
 
 

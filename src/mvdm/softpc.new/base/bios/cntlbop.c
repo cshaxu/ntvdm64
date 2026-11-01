@@ -55,7 +55,7 @@ void end_secure_boot IPT0();
 #endif
 
 #if defined(RUNUX)
-IMPORT void runux IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-529: RUNUX platform branch is not selected; see mirror register. */
 #endif
 
 static control_bop_array base_bop_table[] = 
@@ -64,7 +64,7 @@ static control_bop_array base_bop_table[] =
      9, end_secure_boot,
 #endif
 #if defined(RUNUX)
-     8, runux,			/* BCN 2328 run a host (unix) script file */
+/* DIVERGENCE MVDM-HOST-DIV-529: RUNUX platform branch is not selected; see mirror register. */
 #endif
 #if defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)
      7, flatog,

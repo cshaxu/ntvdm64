@@ -319,9 +319,7 @@ extern void ISWSEntry();
 #endif /* WINSOCK */
 
 #ifdef SWINAPI
-extern void User_call IPT0();
-extern void Gdi_call IPT0();
-extern void Swinapi_bop IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-529: SWINAPI platform branch is not selected; see mirror register. */
 #endif /* SWINAPI */
 
 #if	defined(SOFTWIN_API) || defined(SWIN_HFX)

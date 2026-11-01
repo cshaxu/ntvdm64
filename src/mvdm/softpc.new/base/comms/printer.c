@@ -87,9 +87,7 @@
 #include TypesH
 #include TimeH
 #ifdef SYSTEMV
-#ifdef STINGER
-#include <sys/termio.h>
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-529: SYSTEMV platform branch is not selected; see mirror register. */
 #endif
 
 /*

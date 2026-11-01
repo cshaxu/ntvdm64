@@ -1267,7 +1267,7 @@ LOCAL void outputWaveForm IFN5(unsigned int, delay, unsigned long, lowclocks,
 	unsigned long, hiclocks, int, lohi, int, repeat)
 {
 #ifdef DOCUMENTATION
-	int ch;
+/* DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register. */
 #endif /* DOCUMENTATION */
 	pcu->out.startLogicLevel = lohi;
 	pcu->out.repeatWaveForm = repeat;
@@ -1282,15 +1282,7 @@ LOCAL void outputWaveForm IFN5(unsigned int, delay, unsigned long, lowclocks,
 	pcu->delay = 0;
 
 #ifdef DOCUMENTATION
-	if (pcu==&timers[0])
-		ch = 0;
-	if (pcu==&timers[1])
-		ch = 1;
-	if (pcu==&timers[2])
-		ch = 2;
-	sprintf(buf,"ch.%d waveform:delay %d lo %d hi %d lohi %d repeat %d\n",
-		ch,delay,lowclocks,hiclocks,lohi,repeat);
-	trace(buf,0);
+/* DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register. */
 #endif /* DOCUMENTATION */
 }
 
@@ -1628,16 +1620,7 @@ LOCAL UNBLOCK_FUNCTION CounterBufferLoaded IFN0()
 	loadCounter();
 
 #ifdef DOCUMENTATION
-	/*
-	 * Output state of timer if tracing.
-	 * Currently dumpCounter has no effect, so just leave this in
-	 * case anyone wants to implement it properly.
-	 */
-
-	if (io_verbose & TIMER_VERBOSE)
-	{
-		dumpCounter();
-	}
+/* DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register. */
 #endif /* DOCUMENTATION */
 
 	if (pcu->gate != GATE_SIGNAL_LOW)
