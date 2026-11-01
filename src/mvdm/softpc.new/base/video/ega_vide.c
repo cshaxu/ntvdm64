@@ -117,8 +117,7 @@ DESCRIPTION	  : 	describe what (not how) function does
 #include "host.h"
 
 #ifdef  GISP_SVGA 
-#include HostHwVgaH
-#include "hwvga.h"
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif		/* GISP_SVGA */
 
 /* [3.1.2 DECLARATIONS]                                                 */
@@ -674,14 +673,7 @@ void load_font IFN5
 
 #else
 #ifdef GISP_SVGA
-	if( hostIsFullScreen( ) )
-	{
-		loadFontToVGA( table , count , char_off , font_no , nbytes );
-	}
-	else
-	{
-		loadFontToEmulation( table , count , char_off , font_no , nbytes );
-	}
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #else /* GISP_SVGA */
 
 
@@ -1013,31 +1005,7 @@ GLOBAL void ega_set_mode IFN0()
 #endif
 
 #ifdef GISP_SVGA
-	/* Try and catch mode changes early */
-
-	/* Are we in the ROMS at the BOP 10 ? */
-	if( getCS( ) == EgaROMSegment )
-	{
-		if( videoModeIs( getAL( ) , GRAPH ) )
-		{
-			/* Seem to have got a video mode int 10 */
-			videoInfo.modeType = GRAPH;
-			if( !hostEasyMode( ) )
-			{
-				videoInfo.forcedFullScreen = TRUE;
-
-				/* point IP at the JMP to host roms */
-				setIP( 0x820 );
-
-				/* and return, to let the host bios do the change */
-				return;
-			}
-
-
-		}
-
-		/* Not in the vga roms so carry on */
-	}
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif		/* GISP_SVGA */
 
 #ifdef V7VGA

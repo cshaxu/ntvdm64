@@ -235,15 +235,6 @@ extern void (*ica_clear_int_func) IPT2(IU32, adapter, IU32, line_no);
 #endif  /* !NTVDM */
 
 #ifdef GISP_CPU
-/*
- *	Prototype functions for interfaces provided by the ICA.
- */
-
-typedef IBOOL HOOK_AGAIN_FUNC IPT1(IUM32, callers_ref);
-extern void Ica_enable_hooking IPT3(IUM8, line_number,
-			HOOK_AGAIN_FUNC *, hook_again, IUM32, callers_ref);
-
-extern void Ica_hook_bop IPT1(IUM8, line_number);
-
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
 #endif /* GISP_CPU */
 

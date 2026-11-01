@@ -108,7 +108,7 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 
 extern host_addr Start_of_M_area;	/* host addr (char *) of start of M */
 #ifdef	GISP_CPU
-extern	IHPE	Length_of_M_area;	/* offset of end of M */
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
 #else
 extern sys_addr Length_of_M_area;	/* sys addr (long) offset of end of M */
 #endif	/* GISP_CPU */
@@ -191,7 +191,7 @@ extern void sas_move_words_backward IPT3(sys_addr, src, sys_addr, dest,
 extern void sas_init IPT1(sys_addr, size);
 extern void sas_term IPT0();
 #ifdef	GISP_CPU
-extern IHPE sas_memory_size IPT0 ();
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
 #else
 extern sys_addr sas_memory_size IPT0();
 #endif	/* GISP_CPU */

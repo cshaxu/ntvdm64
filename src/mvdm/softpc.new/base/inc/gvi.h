@@ -62,32 +62,7 @@
 
 
 #ifdef HERC
-
-/* Hercules Page 0  */
-
-#define P0_EVEN_START1      0x0000  /* Start of the even bank         */
-#define P0_EVEN_END1        0x1E95  /* End of the even bank           */
-#define P0_ODD_START1       0x2000  /* Start of the odd bank          */
-#define P0_ODD_END1         0x3E95  /* End of the odd bank            */
-#define P0_EVEN_START2      0x4000  /* Start of the even bank         */
-#define P0_EVEN_END2        0x5E95  /* End of the even bank           */
-#define P0_ODD_START2       0x6000  /* Start of the odd bank          */
-#define P0_ODD_END2         0x7E95  /* End of the odd bank            */
-
-/* Hercules Page 1   */
-
-#define P1_EVEN_START1      0x8000  /* Start of the even bank         */
-#define P1_EVEN_END1        0x9E95  /* End of the even bank           */
-#define P1_ODD_START1       0xA000  /* Start of the odd bank          */
-#define P1_ODD_END1         0xBE95  /* End of the odd bank            */
-#define P1_EVEN_START2      0xC000  /* Start of the even bank         */
-#define P1_EVEN_END2        0xDE95  /* End of the even bank           */
-#define P1_ODD_START2       0xE000  /* Start of the odd bank          */
-#define P1_ODD_END2         0xFE95  /* End of the odd bank            */
-
-#define HERC_CURS_HEIGHT   2	 /* Default  Hercules MDA cursor height     */
-#define HERC_CURS_START    13 	 /* Default  Hercules MDA cursor starting scan line   */
-
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif	/* HERC */
 
 /*

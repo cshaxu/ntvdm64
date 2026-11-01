@@ -1008,7 +1008,7 @@ typedef struct
 #endif /* EGG */
 
 #ifdef HERC
-   MOUSE_AREA        MM_IN_HERC_graphics_virtual_screen;
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif /* HERC */
    boolean           MM_IN_cursor_EM_disabled;
    } MM_INSTANCE_DATA, **MM_INSTANCE_DATA_HANDLE;
@@ -1139,7 +1139,7 @@ IMPORT MM_INSTANCE_DATA_HANDLE mm_handle;
 #endif /* EGG */
 
 #ifdef HERC
-#define HERC_graphics_virtual_screen ((*mm_handle)->MM_IN_HERC_graphics_virtual_screen)
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif /* HERC */
 
 #define cursor_EM_disabled         ((*mm_handle)->MM_IN_cursor_EM_disabled)

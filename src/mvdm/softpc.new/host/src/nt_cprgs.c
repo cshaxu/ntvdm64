@@ -95,16 +95,7 @@ GLOBAL INT		(*getIOPL_func ) ();
 #endif
 
 #ifdef A3CPU
-GLOBAL word		(*getDF_func) ();
-GLOBAL word		(*getIF_func) ();
-GLOBAL word		(*getTF_func) ();
-GLOBAL word		(*getPF_func) ();
-GLOBAL word		(*getAF_func) ();
-GLOBAL word		(*getSF_func) ();
-GLOBAL word		(*getZF_func) ();
-GLOBAL word		(*getOF_func) ();
-GLOBAL word		(*getCF_func) ();
-GLOBAL word		(*getIOPL_func ) ();
+/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
 #endif
 
 GLOBAL word		(*getSTATUS_func) ();
@@ -245,138 +236,7 @@ GLOBAL VOID load_sw_cpu_access_functions()
 
 /* Temporary 3.0 stubs... */
 #ifdef A3CPU
-
-LOCAL double_word	a3_na_gOPA()
-{
-	printf ("%s:%d - getOPA() not supported.\n", __FILE__, __LINE__);
-	return 0;
-}
-LOCAL double_word	a3_na_gOPB()
-{
-	printf ("%s:%d - getOPB() not supported.\n", __FILE__, __LINE__);
-	return 0;
-}
-LOCAL double_word	a3_na_gOPR ()
-{
-	printf ("%s:%d - getOPR() not supported.\n", __FILE__, __LINE__);
-	return 0;
-}
-LOCAL sys_addr		a3_na_gSSD()
-{
-	printf ("%s:%d - getSSD() not supported.\n", __FILE__, __LINE__);
-	return 0;
-}
-LOCAL sys_addr		a3_na_gDSD()
-{
-	printf ("%s:%d - getDSD() not supported.\n", __FILE__, __LINE__);
-	return 0;
-}
-LOCAL VOID		a3_na_sOPLEN()
-{
-	printf ("%s:%d - setOPLEN() not supported.\n", __FILE__, __LINE__);
-}
-LOCAL VOID		a3_na_sOPA()
-{
-	printf ("%s:%d - setOPA() not supported.\n", __FILE__, __LINE__);
-}
-LOCAL VOID		a3_na_sOPB()
-{
-	printf ("%s:%d - setOPB() not supported.\n", __FILE__, __LINE__);
-}
-LOCAL VOID		a3_na_sOPR()
-{
-	printf ("%s:%d - setOPR() not supported.\n", __FILE__, __LINE__);
-}
-LOCAL VOID		a3_na_sMSW()
-{
-	printf ("%s:%d - setMSW() not supported.\n", __FILE__, __LINE__);
-}
-
-GLOBAL VOID load_sw_cpu_access_functions ()
-{
-  IMPORT VOID	_asm_simulate();
-
-  fprintf (stderr,"[load_sw_cpu_access_functions] init READ/WRITE functions.\n");
-
-  /* READ functions */
-  getAX_func     = a3_getAX;
-  getAH_func     = a3_getAH;
-  getAL_func     = a3_getAL;
-  getBX_func     = a3_getBX;
-  getBH_func     = a3_getBH;
-  getBL_func     = a3_getBL;
-  getCX_func     = a3_getCX;
-  getCH_func     = a3_getCH;
-  getCL_func     = a3_getCL;
-  getDX_func     = a3_getDX;
-  getDH_func     = a3_getDH;
-  getDL_func     = a3_getDL;
-  getSP_func     = a3_getSP;
-  getBP_func     = a3_getBP;
-  getSI_func     = a3_getSI;
-  getDI_func     = a3_getDI;
-  getIP_func     = a3_getIP;
-  getOPA_func    = a3_na_gOPA;
-  getOPB_func    = a3_na_gOPB;   
-  getOPR_func    = a3_na_gOPR;   
-  getSSD_func    = a3_na_gSSD;   
-  getDSD_func    = a3_na_gDSD;   
-  getCS_func     = a3_getCS;
-  getDS_func     = a3_getDS;
-  getES_func     = a3_getES;
-  getSS_func     = a3_getSS;
-  getMSW_func    = a3_getMSW;
-  getDF_func     = a3_getDF;
-  getIF_func     = a3_getIF;
-  getTF_func     = a3_getTF;
-  getPF_func     = a3_getPF;
-  getAF_func     = a3_getAF;
-  getSF_func     = a3_getSF;
-  getZF_func     = a3_getZF;
-  getOF_func     = a3_getOF;
-  getCF_func     = a3_getCF;
-
-  
-  /* WRITE functions */  
-  setAX_func     = a3_setAX;
-  setAH_func     = a3_setAH;
-  setAL_func     = a3_setAL;
-  setBX_func     = a3_setBX;
-  setBH_func     = a3_setBH;
-  setBL_func     = a3_setBL;
-  setCX_func     = a3_setCX;
-  setCH_func     = a3_setCH;
-  setCL_func     = a3_setCL;
-  setDX_func     = a3_setDX;
-  setDH_func     = a3_setDH;
-  setDL_func     = a3_setDL;
-  setSP_func     = a3_setSP;
-  setBP_func     = a3_setBP;
-  setSI_func     = a3_setSI;
-  setDI_func     = a3_setDI;
-  setIP_func     = a3_setIP;
-  setMSW_func    = a3_na_sMSW;
-  setDF_func     = a3_setDF;
-  setIF_func     = a3_setIF;
-  setTF_func     = a3_setTF;
-  setPF_func     = a3_setPF;
-  setAF_func     = a3_setAF;
-  setSF_func     = a3_setSF;
-  setZF_func     = a3_setZF;
-  setOF_func     = a3_setOF;
-  setCF_func     = a3_setCF;
-  setOPLEN_func  = a3_na_sOPLEN;   
-  setOPA_func    = a3_na_sOPA;     
-  setOPB_func    = a3_na_sOPB;     
-  setOPR_func    = a3_na_sOPR;     
-  setSS_func	 = a3_setSS;
-  setDS_func     = a3_setDS;
-  setES_func     = a3_setES;
-  setCS_func     = a3_setCS;
-
-  /* SW HOST_SIMULATE function */
-  host_simulate_func = _asm_simulate;
-}
+/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
 #endif /* A3CPU */
 
 #else /* CPU_40_STYLE */

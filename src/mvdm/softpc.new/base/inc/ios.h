@@ -44,8 +44,7 @@ typedef struct _extioentry {
 
 
 #ifdef HERC
-#define	HERC_PORT_START		0x3B0
-#define	HERC_PORT_END		0x3BF
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif
 
 /*
@@ -359,7 +358,7 @@ typedef struct _extioentry {
 #define AT_KEYB_ADAPTOR		26
 #define CMOS_ADAPTOR		27
 #ifdef HERC
-#define HERC_ADAPTOR		28
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif
 #if (NUM_SERIAL_PORTS > 2)
 #define COM3_ADAPTOR		29
@@ -394,8 +393,7 @@ typedef struct _extioentry {
 #else	/* NTVDM */
 
 #ifdef GISP_SVGA
-#define GISP_VGA_FUDGE_ADAPTER          36
-#define IO_MAX_NUMBER_ADAPTORS          37
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #else 		/* GISP_SVGA */
 
 /* Adapter for SoundBlaster Null Driver */

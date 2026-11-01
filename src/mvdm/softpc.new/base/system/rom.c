@@ -70,9 +70,7 @@
 #endif /* V7VGAROM_FILENAME */
 
 #ifdef 	GISP_SVGA
-#define	GISP_VGAROM_FILENAME         "hwvga.rom"
-#define	GISP_BIOS1ROM_FILENAME       "hwbios1.rom"
-#define	GISP_BIOS2ROM_FILENAME       BIOS2ROM_FILENAME
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif
 
 #ifndef ADAPTOR_ROM_START
@@ -280,7 +278,7 @@ GLOBAL void rom_init IFN0()
      */
 
 #ifdef GISP_SVGA
-	mapHostROMs( );
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #else		/* GISP_SVGA */
 #if	defined(macintosh) && defined(A2CPU)
 	/* not macintosh 2.0 cpus - they have sparse M */
@@ -301,17 +299,7 @@ GLOBAL void rom_init IFN0()
     
 	/* load the rom bios */
 #ifdef GISP_SVGA
-	if ((ULONG) config_inquire(C_GFX_ADAPTER, NULL) == CGA )
-	{
-		read_rom (BIOS1ROM_FILENAME, BIOS_START);
-		read_rom (BIOS2ROM_FILENAME, BIOS2_START);
-	}
-	else
-	{
-		read_rom (GISP_BIOS1ROM_FILENAME, BIOS_START);
-		read_rom (GISP_BIOS2ROM_FILENAME, BIOS2_START);
-	}
-
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #else		/* GISP_SVGA */
 
 	read_rom (BIOS1ROM_FILENAME, BIOS_START);

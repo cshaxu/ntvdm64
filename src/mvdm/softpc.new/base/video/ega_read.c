@@ -479,15 +479,7 @@ Glue_set_vid_rd_ptrs IFN1(READ_POINTERS *, handler )
 {
 #ifndef CPU_40_STYLE	/* EVID */
 #ifdef A3CPU
-#ifdef C_VID
-
-	C_vid_reads.b_read = handler->b_read;
-	C_vid_reads.w_read = handler->w_read;
-	C_vid_reads.str_read = handler->str_read;
-
-#else
-	UNUSED(handler);
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
 #else					/* A3CPU */
 #ifdef C_VID
 

@@ -673,8 +673,7 @@ void vga_disp_func()
 	}
 
 #ifdef HERC 
-     if( video_adapter == VGA)
-     {
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif	/* HERC */
 	video_mode = sas_hw_at_no_check(vd_video_mode);
 #ifdef V7VGA
@@ -754,43 +753,7 @@ void vga_disp_func()
 	sas_store(buf+0x31, 3);		/* 256KB video memory */
 	setAX(0x1B); /* We did it! */
 #ifdef HERC 
-       } /* if VGA */
-    if( video_adapter == HERCULES)
-     {
-	video_mode = sas_hw_at(vd_video_mode);
-	sas_storew(buf,INT10_1B_DATA);
-	sas_storew(buf+2,EGA_SEG);
-	sas_store(buf+0x4, video_mode);				/* Current video mode */
-	sas_storew(buf+5,sas_w_at(VID_COLS)); 			/* Cols on screen */
-	sas_storew(buf+7,sas_w_at(VID_LEN));  			/* Size of screen */
-	sas_storew(buf+9,sas_w_at(VID_ADDR)); 			/* Address of screen */
-	sas_move_bytes_forward(VID_CURPOS,buf+0xB,16);	    	/* Cursor positions */
-	sas_store(buf+0x1b, HERC_CURS_START+HERC_CURS_HEIGHT);  /* Cursor end line */
-	sas_store(buf+0x1c, HERC_CURS_START);		   	/* Cursor start line */
-	sas_store(buf+0x1D, sas_hw_at(vd_current_page));	
-	sas_storew(buf+0x1E,sas_w_at(VID_INDEX));
-	sas_store(buf+0x20, sas_hw_at(vd_crt_mode));
-	sas_store(buf+0x21, sas_hw_at(vd_crt_palette));
-	sas_store(buf+0x22, sas_hw_at(vd_rows_on_screen)+1);
-	sas_storew(buf+0x23, 14);				/* char height is 14 */
-	sas_store(buf+0x25,0x01 );	/* 01=MDA with monochrome display as Active display */
-	sas_store(buf+0x26, 0);		/* Inactive display (none) */
-
-	vd_mode_table[video_mode].ncols= 2;			/* Black & White 2 colors */
-	sas_storew(buf+0x27,vd_mode_table[video_mode].ncols);
-	vd_mode_table[video_mode].npages= 2;			/* support 2 pages  */
-	sas_store(buf+0x29, vd_mode_table[video_mode].npages);
-
-	sas_store(buf+0x2A, get_scanlines());
-
-	sas_store(buf+0x2B,0x00);	/* Primary Font select always 0 */
-	sas_store(buf+0x2C,0x00);	/* Secondary Font select always 0 */
-
-
-	sas_store(buf+0x2D, 0x30);	/* MDA with Monochrome Display */
-	sas_store(buf+0x31, 0);		/* 64KB video memory */
-	setAX(0x1B); /* We did it! */
-       } /* if HERCULES */
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif	/* HERC */
 }
 

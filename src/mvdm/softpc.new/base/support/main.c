@@ -271,9 +271,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 #endif /* PROD */
 
 #ifdef GISP_SVGA
-  /* We have to go here to ensure that config doesn't undo any of the
-  lovely patching that we do to the ROMs */
-  gispROMInit( );
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif /* GISP_SVGA */
 
 	/*

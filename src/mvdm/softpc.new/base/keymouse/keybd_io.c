@@ -550,14 +550,7 @@ LOCAL VOID check_indicators IFN1(IBOOL, eoi)
 #endif
 
 #ifdef	GISP_CPU
-	/*
-	** We do update an emulation of the keyboard lights but we don't
-	** want to do it via send_data and switching back to 16-bit.
-	** We call the host routines directly.
-	*/
-	host_kb_light_on (indicators);
-	host_kb_light_off ((~indicators)&0x7);
-
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
 #endif	/* GISP_CPU */
 #else	/* not NTVDM nor GISP_CPU */
 

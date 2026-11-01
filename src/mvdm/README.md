@@ -1,5 +1,9 @@
 # mvdm
 
+MVDM-HOST-DIV-522: replace unselected A3CPU, GISP_CPU, GISP_SVGA and
+HERC branches with markers, retaining conditionals. Original body hashes and
+locations are recorded in `../../artifacts/mvdm-audit/s12-legacy-engines.jsonl`.
+
 MVDM-HOST-DIV-521: replace unselected SFELLOW and macintosh alternatives
 with markers while retaining their conditionals. The removed bodies are
 inventoried in `../../artifacts/mvdm-audit/s12-platforms-else.jsonl`.

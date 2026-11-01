@@ -81,7 +81,7 @@ IMPORT   VOID a3_Cpu_set_hook_selector IPT1(IU16, selector);
  */
 
 #ifdef GISP_CPU
-extern IU32 GetInstructionPointer IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
 #else
 #define GetInstructionPointer getEIP
 #endif
@@ -98,8 +98,7 @@ extern void Cpu_do_hook IPT2(IUM8, line, IBOOL, is_hooked);
 extern void Cpu_inter_hook_processing IPT1(IUM8, line);
 extern void Cpu_unhook IPT1(IUM8, line_number);
 #ifdef GISP_CPU
-extern void Cpu_set_hook_selector IPT1(IU16, selector);
-extern void Cpu_hook_bop IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
 #endif
 
 #endif /* IRET_HOOKS */

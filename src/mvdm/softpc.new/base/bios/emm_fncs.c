@@ -313,17 +313,7 @@ GLOBAL void emm_init IFN0()
 	short	total_pages;
 
 #ifdef GISP_SVGA
-	/*
-	 * Check whether LIM is possible.  If it isn't (because the page
-	 * frame's already been used for the ROMs)
-	 * warn the user, and bail out.
-	 */
-	 
-	if (LimBufferInUse()) {
-		host_error(EG_NO_ROOM_FOR_LIM, ERR_CONT | ERR_QUIT, "");
-		setBX((word)0);		/* return error to driver */
-		return;
-	}
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif /* GISP_SVGA */
 
 #ifdef	SUN_VA

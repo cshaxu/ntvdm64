@@ -425,8 +425,7 @@ LOCAL EGA_graphics_cursor_display IPT0();
 #endif
 
 #ifdef HERC
-LOCAL void HERC_graphics_cursor_display IPT0();
-LOCAL void HERC_graphics_cursor_undisplay IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif /* HERC */
 
 void (*mouse_int1_action) IPT0();
@@ -889,10 +888,7 @@ GLOBAL void mouse_driver_initialisation IFN0()
    black_hole_default.bottom_right.y = -MOUSE_VIRTUAL_SCREEN_DEPTH;
 
 #ifdef HERC
-   HERC_graphics_virtual_screen.top_left.x = 0;
-   HERC_graphics_virtual_screen.top_left.y = 0;
-   HERC_graphics_virtual_screen.bottom_right.x = 720;
-   HERC_graphics_virtual_screen.bottom_right.y = 350;
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif /* HERC */
 
    cursor_EM_disabled = FALSE;
@@ -1269,16 +1265,7 @@ LOCAL void mouse16bCheckConditionalOff IFN0()
 LOCAL void get_screen_size IFN0()
 {
 #ifdef HERC
-	if (video_adapter == HERCULES){
-		if (get_cga_mode() == GRAPHICS){
-			virtual_screen.bottom_right.x = 720;
-			virtual_screen.bottom_right.y = 348;
-		}else{
-			virtual_screen.bottom_right.x = 640;
-			virtual_screen.bottom_right.y = 348;
-		}
-		return;
-	}
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif /* HERC */
 	switch(current_video_mode)
 	{
@@ -2080,7 +2067,7 @@ the application OUTBs the necessary data.
 			if (video_adapter == EGA || video_adapter == VGA)
 			{
 #ifdef GISP_SVGA
-				if( hostIsFullScreen( ) )
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif		/* GISP_SVGA */
 		  		ega_video_io();
 				if (!(getAL() & 0x20))
@@ -2089,7 +2076,7 @@ the application OUTBs the necessary data.
 			else
 #endif
 #ifdef GISP_SVGA
-				if( hostIsFullScreen( ) )
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif		/* GISP_SVGA */
 		  		video_io();
 #endif /* !NTVDM && !MONITOR */
@@ -2105,13 +2092,13 @@ the application OUTBs the necessary data.
 #ifdef EGG
 			if (video_adapter == EGA || video_adapter == VGA)
 #ifdef GISP_SVGA
-				if( hostIsFullScreen( ) )
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif		/* GISP_SVGA */
 		  		ega_video_io();
 			else
 #endif
 #ifdef GISP_SVGA
-				if( hostIsFullScreen( ) )
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif		/* GISP_SVGA */
 		  		video_io();
 #else /* GISP_SVGA */
@@ -2130,7 +2117,7 @@ the application OUTBs the necessary data.
 #endif	/* !X86GFX */
         }
 #ifdef GISP_SVGA
-	setCF( 1 );
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif /* GISP_SVGA */
 
 }
@@ -5059,36 +5046,7 @@ LOCAL MOUSE_BIT_ADDRESS point_as_graphics_cell_address IFN1(MOUSE_POINT *,point_
 }
 
 #ifdef HERC
-LOCAL MOUSE_BIT_ADDRESS point_as_HERC_graphics_cell_address IFN1(MOUSE_POINT *,point_ptr)
-{
-	IMPORT half_word herc_page;
-
-	/*
-	 *	Return the bit offset of the pixel in the graphics mode regen
-	 *	buffer (0, 1, 2, 3) bank corresponding to the virtual screen 
-	 *	position "*point_ptr"
-	 */
-	IS32 bit_address;
-
-	/*
-	 *	Get offset contributions for the cursor's row and column
-	 */
-	bit_address = ((IS32)720 * (point_ptr->y / 4)) + point_ptr->x;
-
-	/*
-	 *	Adjust for current video page - note that for 100% correct emulation,
-	 *	we should read location 40:49 (the BIOS video mode)... hercules 
-	 *	applications put a 6 here to indicate page 0 and a 5 for page 1.
-	 *	To avoid a performance penalty the global herc_page is used instead;
-	 *	this will have the side effect of making application which try to
-	 *	set the mouse pointer to the non-displayed page not succeed in doing so.
-	 */
-	if (herc_page != 0){
-		bit_address += 0x8000L * 8L;
-	}
-
-	return(bit_address);
-}
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif /* HERC */
 
 LOCAL MOUSE_BIT_ADDRESS ega_point_as_graphics_cell_address IFN1(MOUSE_POINT *,point_ptr)
@@ -5244,9 +5202,7 @@ LOCAL void cursor_display IFN0()
 			else
 #endif
 #ifdef HERC
-			if (video_adapter == HERCULES)
-				HERC_graphics_cursor_display();
-			else
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif /* HERC */
 				graphics_cursor_display();
 		}
@@ -5340,9 +5296,7 @@ LOCAL void cursor_undisplay IFN0()
 			else
 #endif
 #ifdef HERC
-			  if (video_adapter == HERCULES)
-			    HERC_graphics_cursor_undisplay();
-			  else
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif /* HERC */
 			    graphics_cursor_undisplay();
 #endif /* MOUSE_16_BIT */
@@ -6083,157 +6037,7 @@ LOCAL void graphics_cursor_display IFN0()
 
 
 #ifdef HERC
-LOCAL void HERC_graphics_cursor_display IFN0()
-{
-	/*
-	 *	Display a representation of the current mouse status on
-	 *	the screen using the graphics cursor, provided the
-	 *	cursor overlaps the virtual screen and lies completely
-	 *	outside the conditional off area
-	 */
-	int scan_line_mod;
-	MOUSE_BIT_ADDRESS bit_shift;
-	IS32 byte_offset;
-	sys_addr byte_address;
-	IU32 strip;
-	int line, line_max;
-	int byte_min, byte_max;
-
-	/*
-	 *	Get area cursor will cover on screen
-	 */
-	point_copy(&cursor_status.position, &save_area.top_left);
-	point_copy(&cursor_status.position, &save_area.bottom_right);
-	point_translate(&save_area.bottom_right, &graphics_cursor.size);
-	point_translate_back(&save_area.top_left, &graphics_cursor.hot_spot);
-	point_translate_back(&save_area.bottom_right, &graphics_cursor.hot_spot);
-
-	if (    area_is_intersected_by_area(&HERC_graphics_virtual_screen, &save_area)
-	    && !area_is_intersected_by_area(&black_hole, &save_area))
-	{
-		/*
-		 *	Record save position and screen area
-		 */
-		save_area_in_use = TRUE;
-		point_copy(&save_area.top_left, &save_position);
-		area_coerce_to_area(&save_area, &HERC_graphics_virtual_screen);
-
-		/*
-		 *	Get cursor byte offset relative to the start of the 
-		 *	even or odd bank, and bit shift to apply
-		 */
-		scan_line_mod = save_area.top_left.y % 4;
-		byte_offset = point_as_HERC_graphics_cell_address(&save_position);
-		bit_shift = byte_offset & 7;
-		byte_offset >>= 3;
-
-		/*
-		 *	Get range of cursor lines that need to be displayed
-		 */
-		line = save_area.top_left.y - save_position.y;
-		line_max = area_depth(&save_area);
-
-		/*
-		 *	Get range of bytes that need to be displayed
-		 */
-		byte_min = 0;
-		byte_max = 2;
-		if (save_position.x < 0)
-			byte_min += (7 - save_position.x) / 8;
-		else if (area_width(&save_area) < MOUSE_GRAPHICS_CURSOR_WIDTH)
-			byte_max -= (8 + MOUSE_GRAPHICS_CURSOR_WIDTH - area_width(&save_area)) / 8;
-
-		while (line < line_max)
-		{
-			switch (scan_line_mod){
-			case 0:
-				scan_line_mod++;
-				byte_address = gvi_pc_low_regen + 0x0000 + byte_offset;
-				break;
-			case 1:
-				scan_line_mod++;
-				byte_address = gvi_pc_low_regen + 0x2000 + byte_offset;
-				break;
-			case 2:
-				scan_line_mod++;
-				byte_address = gvi_pc_low_regen + 0x4000 + byte_offset;
-				break;
-			case 3:
-				scan_line_mod=0;
-				byte_address = gvi_pc_low_regen + 0x6000 + byte_offset;
-				byte_offset += 720 / 8;
-				break;
-			}
-
-			if (bit_shift)
-			{
-				/*
-				 *	Get save area
-				 */
-				strip =  (IU32)sas_hw_at(byte_address) << 16;
-				strip |= (unsigned short)sas_hw_at(byte_address+1) << 8;
-				strip |= sas_hw_at(byte_address+2);
-				graphics_cursor_background[line] = 
-						strip >> (8 - bit_shift);
-
-				/*
-				 *	Overlay cursor line
-				 */
-				strip &= (SHIFT_VAL >> bit_shift);
-				strip |= (IU32)((graphics_cursor_background[line] &
-				    graphics_cursor.screen[line]) ^
-				    graphics_cursor.cursor[line]) 
-						<< (8 - bit_shift);
-
-				/*
-				 *	Stash cursor line and alert gvi
-				 */
-				if (byte_min <= 0 && byte_max >= 0)
-				{
-					sas_store(byte_address, strip >> 16);
-				}
-				if (byte_min <= 1 && byte_max >= 1)
-				{
-					sas_store(byte_address+1, strip >> 8);
-				}
-				if (byte_min <= 2 && byte_max >= 2)
-				{
-					sas_store(byte_address+2, strip);
-				}
-			}
-			else
-			{
-				/*
-				 *	Get save area
-				 */
-				graphics_cursor_background[line] = (sas_hw_at(byte_address) << 8) + 
-								    sas_hw_at(byte_address+1);
-
-				/*
-				 *	Get overlaid cursor line
-				 */
-				strip = (graphics_cursor_background[line] & 
-				    graphics_cursor.screen[line]) ^
-				    graphics_cursor.cursor[line];
-
-				/*
-				 *	Stash cursor line and alert gvi
-				 */
-				if (byte_min <= 0 && byte_max >= 0)
-				{
-					sas_store(byte_address, strip >> 8);
-				}
-				if (byte_min <= 1 && byte_max >= 1)
-				{
-					sas_store(byte_address+1, strip);
-				}
-			}
-			line++;
-		}
-	}
-}
-
-
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif /* HERC */
 
 
@@ -6342,118 +6146,7 @@ LOCAL void graphics_cursor_undisplay IFN0()
 }
 
 #ifdef HERC
-
-LOCAL void HERC_graphics_cursor_undisplay IFN0()
-{
-	/*
-	 *	Remove the graphics cursor representation of the mouse
-	 *	status
-	 */
-	int scan_line_mod;
-	MOUSE_BIT_ADDRESS bit_shift;
-	IS32 byte_offset;
-	sys_addr byte_address;
-	IU32 strip;
-	int line, line_max;
-	int byte_min, byte_max;
-
-	/*
-	 *	Get cursor byte offset relative to the start of the 
-	 *	even or odd bank, and bit shift to apply
-	 */
-	scan_line_mod = save_area.top_left.y % 4;
-	byte_offset = point_as_HERC_graphics_cell_address(&save_position);
-	bit_shift = byte_offset & 7;
-	byte_offset >>= 3;
-
-	/*
-	 *	Get range of cursor lines that need to be displayed
-	 */
-	line = save_area.top_left.y - save_position.y;
-	line_max = area_depth(&save_area);
-
-	/*
-	 *	Get range of bytes that need to be displayed
-	 */
-	byte_min = 0;
-	byte_max = 2;
-	if (save_position.x < 0)
-		byte_min += (7 - save_position.x) / 8;
-	else if (area_width(&save_area) < MOUSE_GRAPHICS_CURSOR_WIDTH)
-		byte_max -= (8 + MOUSE_GRAPHICS_CURSOR_WIDTH - area_width(&save_area)) / 8;
-
-	while(line < line_max)
-	{
-			switch (scan_line_mod){
-			case 0:
-				scan_line_mod++;
-				byte_address = gvi_pc_low_regen + 0x0000 + byte_offset;
-				break;
-			case 1:
-				scan_line_mod++;
-				byte_address = gvi_pc_low_regen + 0x2000 + byte_offset;
-				break;
-			case 2:
-				scan_line_mod++;
-				byte_address = gvi_pc_low_regen + 0x4000 + byte_offset;
-				break;
-			case 3:
-				scan_line_mod=0;
-				byte_address = gvi_pc_low_regen + 0x6000 + byte_offset;
-				byte_offset += 720 / 8;
-				break;
-			}
-
-		if (bit_shift)
-		{
-			/*
-			 *	Get cursor line
-			 */
-			strip =  (IU32)sas_hw_at(byte_address) << 16;
-			strip |= (unsigned short)sas_hw_at(byte_address+1) << 8;
-			strip |= sas_hw_at(byte_address+2);
-
-			/*
-			 *	Overlay save area
-			 */
-			strip &= (SHIFT_VAL >> bit_shift);
-			strip |= (IU32)graphics_cursor_background[line]
-					<< (8 - bit_shift);
-
-			/*
-			 *	Stash cursor line and alert gvi
-			 */
-			if (byte_min <= 0 && byte_max >= 0)
-			{
-				sas_store(byte_address, strip >> 16);
-			}
-			if (byte_min <= 1 && byte_max >= 1)
-			{
-				sas_store(byte_address+1, strip >> 8);
-			}
-			if (byte_min <= 2 && byte_max >= 2)
-			{
-				sas_store(byte_address+2, strip);
-			}
-		}
-		else
-		{
-			/*
-			 *	Stash save area
-			 */
-			strip = graphics_cursor_background[line];
-			if (byte_min <= 0 && byte_max >= 0)
-			{
-				sas_store(byte_address, strip >> 8);
-			}
-			if (byte_min <= 1 && byte_max >= 1)
-			{
-				sas_store(byte_address+1, strip);
-			}
-		}
-		line++;
-	}
-}
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif /* HERC */
 
 

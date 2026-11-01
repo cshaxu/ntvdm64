@@ -374,7 +374,7 @@ IMPORT void set_index_state IPT0();
 IMPORT boolean in_index_state IPT0();
 
 #ifdef GISP_SVGA 
-#include "hwvgaio.h"
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif 	/* GISP_SVGA */
 
 /*
@@ -2156,11 +2156,7 @@ GLOBAL VOID vga_mask_register_changed IFN1(BOOL, gotBitProtection)
 	state = EGA_CPU.ega_state.mode_0.lookup & masks[EGA_CPU.write_mode];
 
 #ifdef A3CPU
-#ifdef C_VID
-	Glue_set_vid_wrt_ptrs(&mode_chain_handler_table[EGA_CPU.saved_mode_chain][state]);
-#else
-	Cpu_set_vid_wrt_ptrs(&mode_chain_handler_table[EGA_CPU.saved_mode_chain][state]);	
-#endif /* C_VID */
+/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
 #else
 #if !(defined(NTVDM) && defined(X86GFX))
 	Glue_set_vid_wrt_ptrs(&mode_chain_handler_table[EGA_CPU.saved_mode_chain][state]);
@@ -3034,209 +3030,7 @@ VOID    vote_vga_mode IFN0()
 }       /* vote_vga_mode */
 
 #ifdef GISP_SVGA
-/*(
- *	function	:	mapRealIOPorts( )
- *
- *	purpose		:	mapping of real io functions for HW
- *				vga on ccpu
- *
- *	inputs		:	none
- *	outputs		:	none
- *	returns		:	void
- *	globals		:	none
- *	
- *	
-)*/
-
-void
-mapRealIOPorts IFN0( )
-{
-	always_trace0("mapping vga ports to _real_ IN/OUT");
-	/*
-	 * Define sequencer's ports
-	 */
-
-	io_define_outb(EGA_SEQ_ADAP_INDEX, hostRealOUTB );
-	io_define_outb(EGA_SEQ_ADAP_DATA, hostRealOUTB );
-        io_define_inb(EGA_SEQ_ADAP_INDEX, hostRealINB );
-        io_define_inb(EGA_SEQ_ADAP_DATA, hostRealINB );
-
-	/*
-	 * Define CRTC's ports
-	 */
-
-	io_define_outb(EGA_CRTC_ADAPTOR, hostRealOUTB );
-	io_define_inb(EGA_CRTC_ADAPTOR, hostRealINB );
-
-	/*
-	 * Define Graphics Controller's ports
-	 */
-
-	io_define_outb(EGA_GC_ADAP_INDEX, hostRealOUTB );
-	Cpu_define_outb(EGA_GC_ADAP_INDEX, NULL );
-
-	io_define_outb(EGA_GC_ADAP_DATA, hostRealOUTB );
-	Cpu_define_outb(EGA_GC_ADAP_DATA,NULL);
-
-	io_define_inb(EGA_GC_ADAP_INDEX, hostRealINB );
-	io_define_inb(EGA_GC_ADAP_DATA, hostRealINB );
-
-	/*
-	 * Define Attribute controller's ports
-	 */
-
-	io_define_outb(EGA_AC_ADAPTOR, hostRealOUTB );
-	io_define_inb(EGA_AC_ADAPTOR, hostRealINB );
-
-	/*
-	 * Define Miscellaneous register's port
-	 */
-
-	io_define_outb(EGA_MISC_ADAPTOR, hostRealOUTB );
-	io_define_inb(EGA_MISC_ADAPTOR, hostRealINB );
-
-	/*
-	 * Define Feature controller's port
-	 */
-
-	io_define_outb(EGA_FEAT_ADAPTOR, hostRealOUTB );
-	io_define_inb(EGA_FEAT_ADAPTOR, hostRealINB );
-
-	/*
-	 * Define Input Status Register 0 port
-	 */
-
-	io_define_inb(EGA_IPSTAT0_ADAPTOR, hostRealINB );
-
-	/*
-	 * Define Input Status Register 1 port
-	 */
-
-	io_define_inb(EGA_IPSTAT1_ADAPTOR, hostRealINB );
-
-        /*
-         * Define VGA DAC register port
-         */
-        io_define_inb(VGA_DAC_INDEX_PORT, hostRealINB );
-        io_define_outb(VGA_DAC_INDEX_PORT, hostRealOUTB );
-        io_define_inb(VGA_DAC_DATA_PORT, hostRealINB );
-        io_define_outb(VGA_DAC_DATA_PORT, hostRealOUTB );
-
-}
-
-
-/*(
- *	function	:	mapEmulatedIOPorts( )
- *
- *	purpose		:	mapping of emulated io functions for HW
- *				vga on ccpu
- *
- *	inputs		:	none
- *	outputs		:	none
- *	returns		:	void
- *	globals		:	none
- *	
- *	
-)*/
-
-void
-mapEmulatedIOPorts IFN0( )
-{
-	always_trace0( "Mapping vga ports to Emulation" ); 
-
-	/*
-	 * Define sequencer's ports
-	 */
-
-	io_define_outb(EGA_SEQ_ADAP_INDEX,vga_seq_outb_index);
-	io_define_outb(EGA_SEQ_ADAP_DATA,ega_seq_reset);
-        io_define_inb(EGA_SEQ_ADAP_INDEX,vga_seq_inb);
-        io_define_inb(EGA_SEQ_ADAP_DATA,vga_seq_inb);
-	io_connect_port(EGA_SEQ_INDEX,EGA_SEQ_ADAP_INDEX,IO_READ_WRITE);
-	io_connect_port(EGA_SEQ_DATA,EGA_SEQ_ADAP_DATA,IO_READ_WRITE);
-
-	/*
-	 * Define CRTC's ports
-	 */
-
-	io_define_outb(EGA_CRTC_ADAPTOR,vga_crtc_outb);
-	io_define_inb(EGA_CRTC_ADAPTOR,vga_crtc_inb);
-	io_connect_port(EGA_CRTC_INDEX,EGA_CRTC_ADAPTOR,IO_READ_WRITE);
-	io_connect_port(EGA_CRTC_DATA,EGA_CRTC_ADAPTOR,IO_READ_WRITE);
-
-	/*
-	 * Define Graphics Controller's ports
-	 */
-
-	vga_gc_outb_index_addr = (UTINY *) &graphics_controller.address;
-
-	io_define_outb(EGA_GC_ADAP_INDEX,vga_gc_outb_index);
-	Cpu_define_outb(EGA_GC_ADAP_INDEX,_vga_gc_outb_index);
-
-	io_define_outb(EGA_GC_ADAP_DATA,ega_gc_set_reset);
-	Cpu_define_outb(EGA_GC_ADAP_DATA,NULL);
-
-	io_define_inb(EGA_GC_ADAP_INDEX,vga_gc_inb);
-	io_define_inb(EGA_GC_ADAP_DATA,vga_gc_inb);
-
-	io_connect_port(EGA_GC_INDEX,EGA_GC_ADAP_INDEX,IO_READ_WRITE);
-	io_connect_port(EGA_GC_DATA,EGA_GC_ADAP_DATA,IO_READ_WRITE);
-
-	/*
-	 * Define Attribute controller's ports
-	 */
-
-	io_define_outb(EGA_AC_ADAPTOR,vga_ac_outb);
-	io_define_inb(EGA_AC_ADAPTOR,vga_ac_inb);
-	io_connect_port(EGA_AC_INDEX_DATA,EGA_AC_ADAPTOR,IO_READ_WRITE);
-	io_connect_port(EGA_AC_SECRET,EGA_AC_ADAPTOR,IO_READ);
-
-	/*
-	 * Define Miscellaneous register's port
-	 */
-
-	io_define_outb(EGA_MISC_ADAPTOR,vga_misc_outb);
-	io_define_inb(EGA_MISC_ADAPTOR,vga_misc_inb);
-	io_connect_port(EGA_MISC_REG,EGA_MISC_ADAPTOR,IO_WRITE);
-	io_connect_port(VGA_MISC_READ_REG,EGA_MISC_ADAPTOR,IO_READ);
-
-	/*
-	 * Define Feature controller's port
-	 */
-
-	io_define_outb(EGA_FEAT_ADAPTOR,vga_feat_outb);
-	io_define_inb(EGA_FEAT_ADAPTOR,vga_feat_inb);
-	io_connect_port(EGA_FEAT_REG,EGA_FEAT_ADAPTOR,IO_WRITE);
-	io_connect_port(VGA_FEAT_READ_REG,EGA_FEAT_ADAPTOR,IO_READ);
-
-	/*
-	 * Define Input Status Register 0 port
-	 */
-
-	io_define_inb(EGA_IPSTAT0_ADAPTOR,vga_ipstat0_inb);
-	io_connect_port(EGA_IPSTAT0_REG,EGA_IPSTAT0_ADAPTOR,IO_READ);
-
-	/*
-	 * Define Input Status Register 1 port
-	 */
-
-	io_define_inb(EGA_IPSTAT1_ADAPTOR,vga_ipstat1_inb);
-	io_connect_port(EGA_IPSTAT1_REG,EGA_IPSTAT1_ADAPTOR,IO_READ);
-
-        /*
-         * Define VGA DAC register port
-         */
-        io_define_inb(VGA_DAC_INDEX_PORT,vga_dac_inb);
-        io_define_outb(VGA_DAC_INDEX_PORT,vga_dac_outb);
-        io_connect_port(VGA_DAC_MASK,VGA_DAC_INDEX_PORT,IO_READ_WRITE);
-        io_connect_port(VGA_DAC_RADDR,VGA_DAC_INDEX_PORT,IO_READ_WRITE);
-        io_connect_port(VGA_DAC_WADDR,VGA_DAC_INDEX_PORT,IO_READ_WRITE);
-        io_define_inb(VGA_DAC_DATA_PORT,vga_dac_data_inb);
-        io_define_outb(VGA_DAC_DATA_PORT,vga_dac_data_outb);
-        io_connect_port(VGA_DAC_DATA,VGA_DAC_DATA_PORT,IO_READ_WRITE);
-
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif 		/* GISP_SVGA */
 
 

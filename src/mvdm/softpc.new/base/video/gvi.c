@@ -67,7 +67,7 @@
 #include "gmi.h"
 #include "cga.h"
 #ifdef HERC
-#include "herc.h"
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif
 #include "debug.h"
 #include "gfx_upd.h"
@@ -196,9 +196,7 @@ void gvi_init IFN1(half_word, v_adapter)
 	    break;
 #endif
 #ifdef HERC
-	case HERCULES:
-	    herc_term();
-	    break;
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif
         default:
 #ifndef PROD
@@ -221,10 +219,7 @@ void gvi_init IFN1(half_word, v_adapter)
         video_adapter = v_adapter;
         break;
 #ifdef HERC
-    case HERCULES:
-	screen_height = HERC_HEIGHT;
-	video_adapter = v_adapter;
-	break;
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif
 #ifdef EGG
     case EGA:
@@ -266,9 +261,7 @@ void gvi_init IFN1(half_word, v_adapter)
         cga_init();
         break;
 #ifdef HERC
-    case HERCULES:
-	herc_init();
-	break;
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif
 #ifdef EGG
     case EGA:
@@ -310,9 +303,7 @@ void gvi_term IFN0()
         cga_term();
         break;
 #ifdef HERC
-    case HERCULES:
-	herc_term();
-	break;
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif
 #ifdef EGG
     case EGA:

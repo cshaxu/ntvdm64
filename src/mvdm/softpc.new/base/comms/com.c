@@ -56,7 +56,7 @@
 #include "idetect.h"
 #include "ckmalloc.h"
 #ifdef GISP_CPU
-#include "hg_cpu.h"	/* GISP CPU interface */
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
 #endif /* GISP_CPU */
 
 LOCAL UTINY selectBits[4] = { 0x1f, 0x3f, 0x7f, 0xff } ;
@@ -642,7 +642,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 						if (!qev_running) {
 							qev_running = TRUE;
 #ifdef GISP_CPU
-							hg_add_comms_cb(next_batch, MIN_COMMS_RX_QEV);
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
 #else
 							add_q_event_t(next_batch, MIN_COMMS_RX_QEV, adapter);
 #endif
@@ -1346,7 +1346,7 @@ next_batch IFN1 (long, dummy)
 	}
 	if (new_qe_reqd) {
 #ifdef GISP_CPU
-		hg_add_comms_cb(next_batch, MIN_COMMS_RX_QEV);
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
 #else
 		add_q_event_t(next_batch, MIN_COMMS_RX_QEV, 0);
 #endif

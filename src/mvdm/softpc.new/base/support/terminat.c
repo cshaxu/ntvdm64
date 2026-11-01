@@ -33,8 +33,7 @@
 #include "novell.h"
 #endif
 #ifdef GISP_SVGA
-#include HostHwVgaH
-#include "hwvga.h"
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif /* GISP_SVGA */
 #ifdef LICENSING
 #include "host_lic.h"
@@ -80,9 +79,7 @@ void terminate()
 #endif /* SWIN_SNDBLST_NULL */
 
 #ifdef GISP_SVGA
-	/* Get back to window if we are full screen */
-	if( hostIsFullScreen( ) )
-		disableFullScreenVideo( FALSE );
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif /* GISP_SVGA */
 
 	/* terminate COM and LPT devices */

@@ -264,7 +264,7 @@ int slow_needed = 0;
 char *slow_reason = "why slow is required";
 
 #ifdef GISP_SVGA
-LOCAL int	NoYodaThanks = FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif	/* GISP_SVGA */
 
 
@@ -1026,9 +1026,7 @@ IMPORT void set_dpmi_severity IPT0();
 IMPORT void com_debug IPT0();
 #ifndef GISP_CPU
 #ifdef A3CPU
-IMPORT void D2DmpBinaryImage IPT1(LONG, csbase24);
-IMPORT void IH_dump_frag_hist IPT1(ULONG, n);
-IMPORT void D2ForceTraceInit IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
 #endif
 #endif /* GISP_CPU */
 /*
@@ -1105,40 +1103,7 @@ LOCAL dump_descr IPT2(LIN_ADDR, address, IUM32, num);
  */
 
 #ifdef GISP_SVGA
-
-/* Allow us to turn Yoda "off" - this is so that if SoftPC is running full
-screen a force_yoda() won't leave you wanting to type c into a window you can't
-get at */
-LOCAL YODA_COMMAND(doNoYoda)
-{
-	char		* NotStr;
-
-	if( !NoYodaThanks )
-	{
-		stop = yoda_confirm("Are you really sure that you want to turn yoda off?");
-
-		if( stop )
-		{
-			NoYodaThanks = TRUE;
-		}
-	}
-	else
-	{
-		NoYodaThanks = FALSE;
-	}
-
-	if( NoYodaThanks )
-	{
-		printf( "On your head be it....call doNoYoda() from your debugger\nor set the global variable noYodaThanks FALSE to re-enable yoda\n" );
-	}
-	else
-	{
-		printf( "Yoda re-enabled\n" );
-	}
-
-	return 0;
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif /* GISP_SVGA */
 /*(
  *========================== do_pmt ==================================
@@ -1910,99 +1875,10 @@ LOCAL YODA_COMMAND(do_query)
 }
 
 #ifdef GISP_CPU
-LOCAL YODA_COMMAND(do_hgps)
-{
-	IMPORT VOID Hg_print_stats IPT0();
-	Hg_print_stats();
-	return(YODA_LOOP);
-}
-
-LOCAL YODA_COMMAND(do_hgcs)
-{
-	IMPORT VOID Hg_clear_stats IPT0();
-	Hg_clear_stats();
-	return(YODA_LOOP);
-}
-
-LOCAL YODA_COMMAND(do_vex)
-{
-	IMPORT IBOOL show_exceptions;
-	show_exceptions = !show_exceptions;
-	printf ("Verbose exceptions now %sabled.\n", (show_exceptions ? "en" : "dis"));
-	return(YODA_LOOP);
-}
-
-LOCAL YODA_COMMAND(do_bex)
-{
-	IMPORT IBOOL trap_exceptions;
-	trap_exceptions = !trap_exceptions;
-	printf ("Break on faults now %sabled.\n", (trap_exceptions ? "en" : "dis"));
-	return(YODA_LOOP);
-}
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
 #endif /* GISP_CPU */
 #ifdef A3CPU
-#ifndef GISP_CPU
-LOCAL YODA_COMMAND(do_dcs)
-{
-	long temp1, temp2, temp3;
-	UNUSED(cs);
-	UNUSED(ip);
-	UNUSED(len);
-	UNUSED(stop);
-
-	temp1 = -1;
-	sscanf(str, "%s %lx:%lx %lx", com, &temp1, &temp2, &temp3);
-	if (temp1 != -1)
-	{
-		D2DmpBinaryImage((LONG)temp1);
-		printf ("Use the dfih command to dump the instruction history for a fragment.\n");
-	}
-	return(YODA_LOOP);
-}
-
-LOCAL YODA_COMMAND(do_dfih)
-{
-	unsigned long temp1, temp2, temp3;
-	UNUSED(cs);
-	UNUSED(ip);
-	UNUSED(len);
-	UNUSED(stop);
-
-	temp1 = -1;
-	sscanf(str, "%s %i:%lx %lx", com, &temp1, &temp2, &temp3);
-	if (temp1 != -1)
-	{
-		IH_dump_frag_hist((ULONG)temp1);
-	}
-	return(YODA_LOOP);
-}
-
-LOCAL YODA_COMMAND(do_d2)
-{
-	UNUSED(str);
-	UNUSED(com);
-	UNUSED(cs);
-	UNUSED(ip);
-	UNUSED(len);
-	UNUSED(stop);
-
-	D2ForceTraceInit();
-	return(YODA_LOOP);
-}
-
-LOCAL YODA_COMMAND(do_d2threshold)
-{
-	IMPORT D2LowerThreshold, D2UpperThreshold;
-
-	UNUSED(cs);
-	UNUSED(ip);
-	UNUSED(len);
-	UNUSED(stop);
-
-	sscanf(str, "%s %lx lx", com,&D2LowerThreshold,&D2UpperThreshold);
-	return(YODA_LOOP);
-}
-#endif /* GISP_CPU */
+/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
 #endif /* A3CPU */
 
 LOCAL YODA_COMMAND(do_u)
@@ -2674,7 +2550,7 @@ LOCAL YODA_COMMAND(do_trace)
 	 {"pty",	PTY_VERBOSE,		&io_verbose,		0},
 	 {"gen_drvr",	GEN_DRVR_VERBOSE,	&io_verbose,		0},
 #if defined(HERC)
-	 {"herc",	HERC_VERBOSE,		&io_verbose,		0},
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif
 	 {"ipc",	IPC_VERBOSE,		&io_verbose,		0},
 	 {"lim",	LIM_VERBOSE,		&io_verbose,		0},
@@ -4460,20 +4336,7 @@ LOCAL YODA_COMMAND(do_chewy)
 
 #ifndef GISP_CPU
 #ifdef A3CPU
-LOCAL YODA_COMMAND(do_3c)
-{
-	extern void	Mgr_yoda();
-
-	UNUSED(str);
-	UNUSED(com);
-	UNUSED(cs);
-	UNUSED(ip);
-	UNUSED(len);
-	UNUSED(stop);
-
-	Mgr_yoda();
-	return(YODA_LOOP);
-}
+/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
 #endif
 #endif /* GISP_CPU */
 
@@ -4904,22 +4767,14 @@ static struct
 #endif	/* EGA_DUMP */
 
 #ifdef GISP_CPU
-{ "hgps",	do_hgps,	FALSE, NULL, "Print GISP CPU stats" },
-{ "hgcs",	do_hgcs,	FALSE, NULL, "Clear GISP CPU stats" },
-{ "vex",	do_vex,		FALSE, NULL, "Toggle verbose faults" },
-{ "bex",	do_bex,		FALSE, NULL, "Toggle break on faults" },
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
 #endif	/* GISP_CPU */
 
 #ifdef SYNCH_TIMERS
 { "qtrate",	do_qtrate,	FALSE, "<rate>", "set quick timer rate" },
 #endif
 #ifdef A3CPU
-#ifndef GISP_CPU
-{ "d2", 	do_d2,		FALSE, NULL, "Force D2 interact" },
-{ "dcs", 	do_dcs, 	FALSE, "<seg>", "Dump binary in code segment to 'csegbin'" },
-{ "dfih", 	do_dfih, 	FALSE, "<fragnr>", "Dump fragment history to 'fih_nnnn'" },
-{ "th",     do_d2threshold,	FALSE, "<lower> <upper>", "Set delta2 thresholds" },
-#endif /* GISP_CPU */
+/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
 #endif /* A3CPU */
 
 #ifdef PM
@@ -4966,7 +4821,7 @@ static struct
 
 #ifndef GISP_CPU
 #ifdef A3CPU
-{ "3c", 	do_3c,		FALSE, NULL, "3.0 CPU interface" },
+/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
 #endif
 #endif /* GISP_CPU */
 
@@ -4989,7 +4844,7 @@ static struct
 #endif /* MSWDVR_DEBUG */
 
 #ifdef GISP_SVGA
-{ "noyoda",	doNoYoda,	FALSE, NULL, "Toggle force_yoda on/off" },
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif		/* GISP_SVGA */
 #ifdef PROFILE
 { "pinfo",	doDumpProfiling,FALSE, NULL, "Dump all profiling info collected" },
@@ -5504,11 +5359,7 @@ void force_yoda IFN0()
 	return;
 #endif
 #ifdef 	GISP_SVGA
-	if( NoYodaThanks ) 
-	{
-		
-		return;
-	}
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif	/* GISP_SVGA */
 
 #if	defined(CPU_40_STYLE) && !defined(CCPU)
@@ -5552,20 +5403,7 @@ void force_yoda IFN0()
 		}
 	}
 #ifdef A3CPU
-	/* The A3CPU thread generation has already happened, and if
-	 * the YODA environment variable was not defined then you
-	 * aren't going to be able to use the YODA_INTERRUPT system
-	 */
-#ifndef SFELLOW
-	if (env_check == 0) {
-		env_check = (host_getenv("YODA") == NULL)? 1: 2;
-	    if (env_check == 1) {
-	        printf("Slow YODA not available (no breakpoint-based features)\n");
-	        printf("If you want Slow YODA facilities, you must do\n");
-	        printf("'setenv YODA TRUE' before starting an A3 CPU.\n");
-	    }
-	}
-#endif /* !SFELLOW */
+/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
 #endif /* A3CPU */
 
 

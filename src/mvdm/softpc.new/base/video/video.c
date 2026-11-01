@@ -143,9 +143,7 @@ LOCAL void 	M6845_reg_init IPT2(half_word, mode, word, base);
 LOCAL void 	vd_dummy IPT0();
 
 #ifdef HERC
-GLOBAL void herc_alt_sel IPT0();
-GLOBAL void herc_char_gen IPT0();
-GLOBAL void herc_video_init IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif /* HERC */
 
 void (*video_func[]) () = {
@@ -167,8 +165,7 @@ void (*video_func[]) () = {
 				vd_get_mode,
 				vd_dummy,
 #ifdef HERC
-				herc_char_gen,
-				herc_alt_sel,
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #else /* !HERC */
 				vd_dummy,
 				vd_dummy,
@@ -2639,7 +2636,7 @@ GLOBAL void video_init IFN0()
     word vd_addr_6845;
     word curmod;
 #ifdef HERC
-    EQUIPMENT_WORD equip_flag;
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif /* HERC */    
 
 
@@ -2658,18 +2655,7 @@ GLOBAL void video_init IFN0()
 		video_pc_high_regen = MDA_REGEN_END;
 		break;
 #ifdef HERC
-	case HERCULES:
-		/* put the BW card in the equipment list */
-                equip_flag.all = sas_w_at_no_check(EQUIP_FLAG);
-                equip_flag.bits.video_mode = VIDEO_MODE_80X25_BW;
-		sas_storew_no_check(EQUIP_FLAG, equip_flag.all);
-        	mode = 0x7;
-        	vd_addr_6845  = 0x3B4;
-		video_pc_low_regen = HERC_REGEN_START;
-		video_pc_high_regen = HERC_REGEN_END;
-		herc_video_init(); 
-		curmod = 0xb0c;	/* cursor is scans 11-12 */
-		break;
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif /* HERC */
 #ifdef EGG
     	case EGA:
@@ -2702,122 +2688,7 @@ GLOBAL void video_init IFN0()
 }
 
 #ifdef HERC
-GLOBAL void herc_video_init IFN0()
-{
-
-/* Initialize the INTs */
-	sas_storew(BIOS_EXTEND_CHAR*4, EGA_INT1F_OFF);
-	sas_storew(BIOS_EXTEND_CHAR*4+2, EGA_SEG);
-	sas_move_bytes_forward(BIOS_VIDEO_IO*4, 0x42*4, 4);  /* save old INT 10 as INT 42 */ 
-#ifdef GISP_SVGA
-	if((ULONG) config_inquire(C_GFX_ADAPTER, NULL) == CGA )
-		sas_storew(int_addr(0x10), CGA_VIDEO_IO_OFFSET);
-	else
-#endif      /* GISP_SVGA */
-	sas_storew(BIOS_VIDEO_IO*4, VIDEO_IO_OFFSET);
-	sas_storew(BIOS_VIDEO_IO*4+2, VIDEO_IO_SEGMENT);
-
-
-/* Now set up the EGA BIOS variables */
-	sas_storew(EGA_SAVEPTR,VGA_PARMS_OFFSET);
-	sas_storew(EGA_SAVEPTR+2,EGA_SEG);
-	sas_store(ega_info, 0x00);   /* Clear on mode change, 64K, EGA active, emulate cursor */
-	sas_store(ega_info3, 0xf9);  /* feature bits = 0xF, EGA installed, use 8*14 font */
-	set_VGA_flags(S350 | VGA_ACTIVE | VGA_MONO);
-	host_memset(EGA_planes, 0, 4*EGA_PLANE_SIZE);
-	host_mark_screen_refresh();
-	init_herc_globals();
-	load_herc_font(EGA_CGMN,256,0,0,14);	/* To initialize font */
-}
-
-
-GLOBAL void herc_char_gen IFN0()
-{
-	switch (getAL())
-	{
-		case 3:
-			break;
-		case 0:
-		case 0x10:
-			load_herc_font(effective_addr(getES(),getBP()),getCX(),getDX(),getBL(),getBH());
-			if(getAL()==0x10)
-				recalc_text(getBH());
-			break;
-		case 1:
-		case 0x11:
-			load_herc_font(EGA_CGMN,256,0,getBL(),14);
-			if(getAL()==0x11)
-				recalc_text(14);
-			break;
-
-		case 0x30:
-			setCX(sas_hw_at(ega_char_height));
-			setDL(VD_ROWS_ON_SCREEN);
-			switch (getBH())
-			{
-				case 0:
-					setBP(sas_w_at(BIOS_EXTEND_CHAR*4));
-					setES(sas_w_at(BIOS_EXTEND_CHAR*4+2));
-					break;
-				case 1:
-					setBP(sas_w_at(EGA_FONT_INT*4));
-					setES(sas_w_at(EGA_FONT_INT*4+2));
-					break;
-				case 2:
-					setBP(EGA_CGMN_OFF);
-					setES(EGA_SEG);
-					break;
-
-				default:
-					assert2(FALSE,"Illegal char_gen subfunction %#x %#x",getAL(),getBH());
-			}
-			break;
-		default:
-			assert1(FALSE,"Illegal char_gen %#x",getAL());
-	}
-}
-
-GLOBAL load_herc_font IFN5(sys_addr, table, int, count, int, char_off, int, font_no, int, nbytes)
-{
-	register int i, j;
-	register host_addr font_addr;
-	register sys_addr data_addr;
-	SAVED word font_off[] = { 0, 0x4000, 0x8000, 0xc000, 0x2000, 0x6000, 0xa000, 0xe000 };
-
-	/*
-	 * Work out where to put the font. We know where
-	 * it's going to end up in the planes so ...
-	 */
-
-	font_addr = &EGA_planes[FONT_BASE_ADDR] +
-					(font_off[font_no] << 2) + (FONT_MAX_HEIGHT*char_off << 2);
-	data_addr = table;
-
-	assert2( FALSE, "Font No. = %4d, No. of Bytes/char. def. = %4d", font_no, nbytes );
-
-	for(i=0; i<count; i++) {
-
-		for(j=0; j<nbytes; j++) {
-			*font_addr = sas_hw_at(data_addr++);
-			font_addr += 4;
-		}
-
-		font_addr += ((FONT_MAX_HEIGHT - nbytes) << 2);
-	}
-
-	host_update_fonts();
-}
-
-GLOBAL void herc_alt_sel IFN0()
-{
-        /*
-         * The code previously here caused *ALL* Hercules Display AutoDetect 
-	 * programs to fail and to believe that the adaptor is an EGA Mono -vs-
-	 * Hercules. It was designed to allow International Code Pages for DOS 
-	 * under Herc Mode. Removing it makes AutoDetect programs work and Herc
-	  Mono CodePages still work ok for dos versions 4.01 and 5.00
-         */
-}
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif /* HERC */
 
 #ifdef NTVDM

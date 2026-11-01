@@ -391,7 +391,7 @@ extern void switch_to_real_mode(void);
 #endif	/* NTVDM */
 
 #ifdef GISP_CPU
-extern void hg_bop_handler IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
 #endif	/* GISP_CPU */
 
 #ifdef HFX

@@ -1969,8 +1969,7 @@ extern void set_v7_fg_latch_byte IPT2(IU8, index, IU8, value);
 #endif /* V7VGA */
 
 #ifdef GISP_SVGA
-void mapRealIOPorts IPT0( );
-void mapEmulatedIOPorts IPT0( );
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif		/* GISP_SVGA */
  
 /* Global data structures to import into modules

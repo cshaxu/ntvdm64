@@ -21,9 +21,5 @@
 ]*/
 
 #ifdef GISP_SVGA
-
-extern void romMessageAddress IPT0( );
-extern void gispROMInit IPT0( );
-
-
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif /* GISP_SVGA */

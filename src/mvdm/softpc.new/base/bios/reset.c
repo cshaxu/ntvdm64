@@ -80,7 +80,7 @@
 #include "keyba.h"
 #include "rom.h"
 #ifdef GISP_SVGA
-#include "gisp_sas.h"
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif		/* GISP_SVGA */
 #include "hunter.h"
 #ifdef LICENSING
@@ -110,8 +110,7 @@ IMPORT void DPMI_reset IPT0();
 #endif /* DPMI */
 
 #ifdef GISP_SVGA
-#include HostHwVgaH
-#include "hwvga.h"
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif /* GISP_SVGA */
 
 #if	defined(DELTA) && defined(A2CPU)
@@ -197,16 +196,7 @@ static void setup_ivt()
 	sas_storew(int_addr(0xE), DISKETTE_INT_OFFSET);
 	sas_storew(int_addr(0xE) + 2, DISKETTE_INT_SEGMENT);
 #ifdef	GISP_SVGA
-	if((ULONG) config_inquire(C_GFX_ADAPTER, NULL) == CGA )
-	{
-		sas_storew(int_addr(0x10), CGA_VIDEO_IO_OFFSET);
-		sas_storew( int_addr(0x10) + 2 , VIDEO_IO_SEGMENT );
-	}
-	else
-	{
-		sas_storew(int_addr(0x10), GISP_INT_10_ADDR_OFFSET );
-		sas_storew( int_addr(0x10) + 2 , EgaROMSegment );
-	}
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #else		/* GISP_SVGA */
 	sas_storew(int_addr(0x10), VIDEO_IO_OFFSET);
 	sas_storew(int_addr(0x10) + 2, VIDEO_IO_SEGMENT);
@@ -354,7 +344,7 @@ half_word *low, *high;
 #endif
     case HERCULES:
 #ifdef HERC
-	break;
+/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
 #endif
     default:
 	break;
@@ -403,11 +393,11 @@ LOCAL void announce_variant IFN0()
 #endif /* A2CPU */
 
 #ifdef A3CPU
-	strcat (buff, " A3CPU");
+/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
 #endif /* A3CPU */
 
 #ifdef GISP_CPU
-	strcat( buff , " GISP_CPU" );
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
 #endif /* GISP_CPU */
 
 #if (defined(SPC386) && !defined(SPC486))
@@ -439,7 +429,7 @@ LOCAL void announce_variant IFN0()
 #endif /* BACK_M */
 
 #ifdef GISP_SVGA
-	strcat( buff , " GISP_SVGA" );
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif /* GISP_SVGA */
 
 #ifdef DPMI
@@ -859,13 +849,7 @@ void reset()
 	gfxAdapt = (ULONG)config_inquire(C_GFX_ADAPTER, NULL);
 
 #ifdef GISP_SVGA
-
-	/* The gisp build needs to do all its setup and then
-	** build the SoftPC ivt.
-	*/
-	initHWVGA( );
-	setup_ivt( );
-
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif          /* GISP_SVGA */
 
 	gvi_init((half_word) gfxAdapt);
@@ -1044,7 +1028,7 @@ void reset()
 	 */
 
 #ifdef GISP_SVGA
-	if(!LimBufferInUse()) {
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif /*GISP_SVGA */
 	if (soft_reset)			/* if LIM already initialised */
 		free_expanded_memory();
@@ -1057,7 +1041,7 @@ void reset()
 			host_error(EG_EXPANDED_MEM_FAILURE, ERR_QU_CO, NULL);
 		}
 #ifdef GISP_SVGA
-	}	/* end of additional check for no LIM buffer */
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif /*GISP_SVGA */
 #endif /* !SUN_VA & !NTVDM */
 

@@ -172,7 +172,7 @@ static void update_cursor_shape	IPT0();
 
 
 #ifdef A3CPU
-IMPORT WRT_POINTERS Glue_writes;
+/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
 #else
 IMPORT MEM_HANDLERS Glue_writes;
 #endif /* A3CPU */
@@ -1361,15 +1361,7 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 
 
 #ifdef A3CPU 
-#ifdef C_VID 
-	Cpu_set_vid_wrt_ptrs( &Glue_writes ); 
-	Cpu_set_vid_rd_ptrs( &Glue_reads ); 
-	Glue_set_vid_wrt_ptrs( &simple_writes ); 
-	Glue_set_vid_rd_ptrs( &simple_reads ); 
-#else
-	Cpu_set_vid_wrt_ptrs( &simple_writes ); 
-	Cpu_set_vid_rd_ptrs( &simple_reads ); 
-#endif	/* C_VID */
+/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
 #else	/* not A3CPU */
 #ifdef A2CPU
 /* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */

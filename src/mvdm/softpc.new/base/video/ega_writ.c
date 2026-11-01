@@ -182,20 +182,7 @@ Glue_set_vid_wrt_ptrs IFN1(WRT_POINTERS *, handler )
 #ifndef CPU_40_STYLE	/* EVID */
 #ifndef GISP_CPU
 #ifdef A3CPU
-#ifdef C_VID
-
-	C_vid_writes.b_write = handler->b_write;
-	C_vid_writes.w_write = handler->w_write;
-	C_vid_writes.b_fill = handler->b_fill;
-	C_vid_writes.w_fill = handler->w_fill;
-	C_vid_writes.b_fwd_move = handler->b_fwd_move;
-	C_vid_writes.b_bwd_move = handler->b_bwd_move;
-	C_vid_writes.w_fwd_move = handler->w_fwd_move;
-	C_vid_writes.w_bwd_move = handler->w_bwd_move;
-
-#else
-	UNUSED(handler);
-#endif /* C_VID */
+/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
 #else
 #ifdef C_VID
 
@@ -274,12 +261,7 @@ ega_write_init IFN0()
 #else
 #ifndef GISP_CPU
 #ifdef A3CPU
-#ifdef C_VID
-	Cpu_set_vid_wrt_ptrs( &Glue_writes );	
-	Glue_set_vid_wrt_ptrs( handler );
-#else
-	Cpu_set_vid_wrt_ptrs( handler );	
-#endif /* C_VID */
+/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
 #else
 	gmi_define_mem(VIDEO,&Glue_writes);
 	Glue_set_vid_wrt_ptrs( handler );

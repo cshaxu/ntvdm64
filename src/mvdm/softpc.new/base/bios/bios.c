@@ -319,7 +319,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 52 */
 #endif /* IRET_HOOKS  && GISP_CPU */
 #ifdef GISP_SVGA
-			romMessageAddress,	/* BOP 53 */
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #else
 			illegal_bop,	/* BOP 53 */
 #endif
@@ -564,8 +564,7 @@ void (*BIOS[])() = {
 			v_host_mouse_install2,	/* BOP C9 */ /* host_mouse_install2 */
 #else
 #ifdef GISP_SVGA 
-			mouse_install1,
-			mouse_install2,
+/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #else /* GISP_SVGA */
 			illegal_bop,	/* BOP C8 */
 			illegal_bop,	/* BOP C9 */
