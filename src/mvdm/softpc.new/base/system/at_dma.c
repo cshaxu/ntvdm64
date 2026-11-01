@@ -805,13 +805,7 @@ LOCAL void do_transfer	IFN6(int, type, int, decrement,
 				}
 			}
 #else
-			/* increment case - check for writing to ROM */
-			if ((dma_addr + length) >= ROM_START)
-			{
-				if (dma_addr >= ROM_START)
-					break;
-				length = ROM_START - dma_addr - 1;
-			}
+/* DIVERGENCE MVDM-HOST-DIV-540: non-LIM branch is not selected; see mirror register. */
 #endif /* LIM */
 #endif /* nPM */
 			sas_PWS(dma_addr, (host_addr) hw_buffer, length);
@@ -831,13 +825,7 @@ LOCAL void do_transfer	IFN6(int, type, int, decrement,
 				}
 			}
 #else
-			if (dma_addr >= ROM_START)
-			{
-				if (dma_addr-length >= ROM_START)
-					break;
-				length = dma_addr - ROM_START + length - 1;
-				dma_addr = ROM_START - 1;
-			}
+/* DIVERGENCE MVDM-HOST-DIV-540: non-LIM branch is not selected; see mirror register. */
 #endif /* LIM */
 #endif /* nPM */
 			bwd_dest_copy_to_M((half_word *)hw_buffer, dma_addr, length);

@@ -1554,8 +1554,7 @@ static void ega_set_palette IFN0()
 				not_imp();
 			}
 #else
-			assert1(FALSE,"Bad set palette submode %#x",getAL());
-			setAL(0);
+/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
 #endif
 			break;
 	}

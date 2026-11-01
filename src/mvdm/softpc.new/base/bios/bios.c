@@ -240,7 +240,7 @@ void (*BIOS[])() = {
 #ifdef EGG
 			ega_video_io,	/* BOP 42 */
 #else
-			illegal_bop,	/* BOP 42 */
+/* DIVERGENCE MVDM-HOST-DIV-540: non-EGG branch is not selected; see mirror register. */
 #endif
 			illegal_bop,	/* BOP 43 */
 			illegal_bop,	/* BOP 44 */
@@ -332,9 +332,7 @@ void (*BIOS[])() = {
 			emm_io,		/* BOP 67 */
 			return_from_call, /* BOP 68 */
 #else			
-			illegal_bop,	/* BOP 66 */
-			illegal_bop,	/* BOP 67 */
-			illegal_bop,	/* BOP 68 */
+/* DIVERGENCE MVDM-HOST-DIV-540: non-LIM branch is not selected; see mirror register. */
 #endif			
 #ifdef SUSPEND
 			suspend_softpc,	/* BOP 69 */

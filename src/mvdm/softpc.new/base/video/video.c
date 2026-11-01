@@ -97,7 +97,7 @@ IMPORT void ega_read_dot IPT3(int, page, int, col, int, row);
 #ifdef	EGG
 #define	VD_ROWS_ON_SCREEN	sas_hw_at_no_check(vd_rows_on_screen)
 #else
-#define VD_ROWS_ON_SCREEN	vd_rows_on_screen
+/* DIVERGENCE MVDM-HOST-DIV-540: non-EGG branch is not selected; see mirror register. */
 #endif	/* EGG */
 
 
@@ -181,7 +181,7 @@ void (*video_func[]) () = {
 #ifdef VGG
 				vga_disp_func,
 #else /* !VGG */
-				vd_dummy,
+/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
 #endif /* VGG */
 				vd_dummy,
 			   };
@@ -1422,7 +1422,7 @@ GLOBAL void vd_read_attrib_char IFN0()
 	else
 	    cgen = CHAR_GEN_ADDR;			/* match in char generator */
 #else
-	cgen = CHAR_GEN_ADDR;			/* match in char generator */
+/* DIVERGENCE MVDM-HOST-DIV-540: non-EGG branch is not selected; see mirror register. */
 #endif
 	if (cgen != 0)
 		for(i = 0; i < CHARS_IN_GEN; i++) {

@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-540: replace unselected non-EGG, non-VGG and non-LIM source
+alternatives only in observed C units that unconditionally include the
+defining `host_def.h` first. Mixed header contexts remain untouched. Ranges
+and hashes are in `../../artifacts/mvdm-audit/s12-host-invariants.jsonl`.
+
 MVDM-HOST-DIV-539: replace unselected non-SPC386 and non-C_VID branch
 bodies with markers only where all observed consumers explicitly select the
 corresponding flag. Mixed contexts remain untouched. Source ranges and

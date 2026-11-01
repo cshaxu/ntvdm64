@@ -161,27 +161,7 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 					}
 #endif
 #else /* VGG */
-#if	defined(PROD) || (!defined(EGG))
-#define	add_dirty_rec(line,st,len,off)	{	dirty[dirty_next].line_no = (line); \
-						dirty[dirty_next].start = (st); \
-						dirty[dirty_next].end = (st) + (len); \
-						dirty[dirty_next].video_copy_offset = (off); \
-						dirty_next++; \
-					}
-#else
-#define	add_dirty_rec(line,st,len,off)	{	if (io_verbose & EGA_DISPLAY_VERBOSE) {\
-							char	trace_string[80]; \
-							sprintf(trace_string,"dirty[%d]line_no %d, start %d end %d", \
-											dirty_next,(line),(st),(st)+(len));\
-							trace(trace_string,0); \
-						} \
-						dirty[dirty_next].line_no = (line); \
-						dirty[dirty_next].start = (st); \
-						dirty[dirty_next].end = (st) + (len); \
-						dirty[dirty_next].video_copy_offset = (off); \
-						dirty_next++; \
-					}
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
 #endif /* VGG */
 
 #define	get_dirty_line(ind)	(dirty[(ind)].line_no)
@@ -265,7 +245,7 @@ static	DIRTY_PARTS	dirty[768];
 /* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
 #endif /* V7VGA */
 #else
-static	DIRTY_PARTS	dirty[350];
+/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
 #endif
 #else
 /* DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register. */
@@ -304,8 +284,7 @@ static	int	search_video_copy IFN3(int, start_line,
 		add_dirty_rec((int)((ptr-vcopy)/quarter_opl)+start_line,
 		              j<<2, (int)(k-ptr+1)<<2, ptr-video_copy-j,0);
 #else
-		add_dirty_rec((int)((ptr-vcopy)/quarter_opl)+start_line,
-		              j<<2, (int)(k-ptr+1)<<2, ptr-video_copy-j);
+/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
 #endif /* VGG */
 
 		ptr += quarter_opl - j;
@@ -429,8 +408,7 @@ static	int	search_video_copy_aligned IFN3(int, start_line,
 		add_dirty_rec((int)((ptr-vcopy)/quarter_opl)+start_line,
 		              j<<2, (int)(k-ptr+1)<<2, ptr-video_copy-j,0);
 #else
-		add_dirty_rec((int)((ptr-vcopy)/quarter_opl)+start_line,
-		              j<<2, (int)(k-ptr+1)<<2, ptr-video_copy-j);
+/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
 #endif /* VGG */
 		ptr += quarter_opl - j;
 		/*
@@ -506,10 +484,7 @@ static	void	paint_records IFN2(int, start_rec, int, end_rec)
 			cur_start<<3, first_line, cur_end-cur_start,
 			last_line-first_line+1);
 #else
-		if (cur_end > cur_start)
-			(*paint_screen)((dirty_vc_offset<<2) + cur_start,
-			cur_start<<3, first_line, cur_end-cur_start,
-			last_line-first_line+1);
+/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
 #endif /* VGG */
 	}
 	/* Clear out video copy */
@@ -520,7 +495,7 @@ static	void	paint_records IFN2(int, start_rec, int, end_rec)
 #ifdef VGG
 		j =  &video_copy[ i->video_copy_offset+(i->start>>2)+i->v7frig];
 #else
-		j =  &video_copy[ i->video_copy_offset+(i->start>>2)];
+/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
 #endif /* VGG */
 		do *j++ = 0; while(j<end);
 	}
@@ -573,7 +548,7 @@ static	int	ega_text_find_dirty_lines IFN5(byte *, vcopy, byte *, planes,
 #ifdef VGG
 				add_dirty_rec(cur_y,j<<2,(k<<1)+2,screen_start+(offset<<1),0);
 #else
-				add_dirty_rec(cur_y,j<<2,(k<<1)+2,screen_start+(offset<<1));
+/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
 #endif /* VGG */
 				break;	/* onto next line */
 			}

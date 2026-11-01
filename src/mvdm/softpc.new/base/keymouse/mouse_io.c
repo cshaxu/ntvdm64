@@ -4927,7 +4927,7 @@ LOCAL void cursor_display IFN0()
 				else
 					VGA_graphics_cursor_display();
 #else
-				EGA_graphics_cursor_display();
+/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
 #endif /* VGG */
 			}
 			else
@@ -5016,7 +5016,7 @@ LOCAL void cursor_undisplay IFN0()
 			  	else
 					VGA_graphics_cursor_undisplay();
 #else
-				EGA_graphics_cursor_undisplay();
+/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
 #endif
 			}
 			else

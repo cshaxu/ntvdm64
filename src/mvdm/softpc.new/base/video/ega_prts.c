@@ -1791,8 +1791,7 @@ LOCAL void	ega_crtc_outb IFN2(io_addr, port, half_word, value)
 						set_screen_height_med_recal(
 							((CRTC_OVERFLOW*)&new)->as_bfld.vertical_display_enab_end_bit_8 );
 #else
-						set_screen_height_hi_recal(
-							((CRTC_OVERFLOW*)&new)->as_bfld.vertical_display_enab_end_bit_8 );
+/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
 #endif
 						flag_mode_change_required();
 					}

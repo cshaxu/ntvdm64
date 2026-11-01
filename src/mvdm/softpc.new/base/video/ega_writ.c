@@ -488,7 +488,7 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 #ifdef VGG
 	mode_and_chain = (EGA_CPU.chain << 2) + EGA_CPU.write_mode;
 #else
-	mode_and_chain = (EGA_CPU.chain * 3) + EGA_CPU.write_mode;
+/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
 #endif /* VGG */
 
 	if(( EGA_CPU.saved_mode_chain != mode_and_chain ) 
