@@ -32,20 +32,7 @@ extern q_ev_handle add_q_ev_int_action IPT5(unsigned long, time, Q_CALLBACK_FN, 
 #endif
 
 #ifndef CPU_40_STYLE
-/*
- * Host access routines for 3.0 CPU (4.0 supplies its own prototypes
- * in generated include files).
- */
-#ifndef host_calc_q_ev_inst_for_time
-extern ULONG host_calc_q_ev_inst_for_time IPT1( ULONG, time );
-#endif /* host_calc_q_ev_inst_for_time */
-#ifdef NTVDM
-extern ULONG host_calc_q_ev_time_for_inst IPT1(ULONG, inst);
-#endif
-
-extern void host_q_ev_set_count IPT1( ULONG, count );
-extern ULONG host_q_ev_get_count IPT0();
-
+/* DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register. */
 #else	/* CPU_40_STYLE */
 extern IU32 calc_q_inst_for_time IPT1(IU32, time);
 extern IU32 calc_q_time_for_inst IPT1(IU32, inst);

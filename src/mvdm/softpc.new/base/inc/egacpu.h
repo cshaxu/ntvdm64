@@ -159,93 +159,7 @@ extern struct EGA_CPU_GLOBALS
 } EGA_CPU;
 
 #ifndef CPU_40_STYLE	/* Vglobs done via access fns */
-#ifdef	HOST_VGA_GLOBALS
-/* Some hosts, such as the Mac, declare their own VGA_GLOBALS structure */
-IMPORT	VGA_GLOBALS		HostVGAGlobals;
-#define	VGLOBS			(&HostVGAGlobals)		/*Always used as a pointer*/
-#else
-#define VGLOBS			EGA_CPU.globals
-#endif
-
-#define	getVideolatches()		VGLOBS->latches
-#define	setVideolatches(value)		VGLOBS->latches = value
-#define	getVideorplane()		VGLOBS->VGA_rplane
-#define	setVideorplane(value)		VGLOBS->VGA_rplane = value
-#define	getVideowplane()		VGLOBS->VGA_wplane
-#define	setVideowplane(value)		VGLOBS->VGA_wplane = value
-#define	getVideoscratch()		VGLOBS->scratch
-#define	setVideoscratch(value)		VGLOBS->scratch = value
-#define	getVideosr_masked_val()		VGLOBS->sr_masked_val
-#define	setVideosr_masked_val(value)	VGLOBS->sr_masked_val = value
-#define	getVideosr_nmask()		VGLOBS->sr_nmask
-#define	setVideosr_nmask(value)		VGLOBS->sr_nmask = value
-#define	getVideodata_and_mask()		VGLOBS->data_and_mask
-#define	setVideodata_and_mask(value)	VGLOBS->data_and_mask = value
-#define	getVideodata_xor_mask()		VGLOBS->data_xor_mask
-#define	setVideodata_xor_mask(value)	VGLOBS->data_xor_mask = value
-#define	getVideolatch_xor_mask()	VGLOBS->latch_xor_mask
-#define	setVideolatch_xor_mask(value)	VGLOBS->latch_xor_mask = value
-#define	getVideobit_prot_mask()		VGLOBS->bit_prot_mask
-#define	setVideobit_prot_mask(value)	VGLOBS->bit_prot_mask = value
-#define	getVideoplane_enable()		VGLOBS->plane_enable
-#define	setVideoplane_enable(value)	VGLOBS->plane_enable = value
-#define	getVideoplane_enableMask()	VGLOBS->plane_enable_mask
-#define	setVideoplane_enable_mask(value)	VGLOBS->plane_enable_mask = value
-#define	getVideosr_lookup()		VGLOBS->sr_lookup
-#define	setVideosr_lookup(value)	VGLOBS->sr_lookup = value
-#define	getVideofwd_str_read_addr()	VGLOBS->fwd_str_read_addr
-#define	setVideofwd_str_read_addr(value)	VGLOBS->fwd_str_read_addr = value
-#define	getVideobwd_str_read_addr()	VGLOBS->bwd_str_read_addr
-#define	setVideobwd_str_read_addr(value)	VGLOBS->bwd_str_read_addr = value
-#define	getVideodirty_total()		VGLOBS->dirty_flag
-#define	setVideodirty_total(value)	VGLOBS->dirty_flag = value
-#define	getVideodirty_low()		VGLOBS->dirty_low
-#define	setVideodirty_low(value)	VGLOBS->dirty_low = value
-#define	getVideodirty_high()		VGLOBS->dirty_high
-#define	setVideodirty_high(value)	VGLOBS->dirty_high = value
-#define	getVideovideo_copy()		VGLOBS->video_copy
-#define	setVideovideo_copy(value)	VGLOBS->video_copy = value
-#define	getVideomark_byte()		VGLOBS->mark_byte
-#define	setVideomark_byte(value)	VGLOBS->mark_byte = value
-#define	getVideomark_word()		VGLOBS->mark_word
-#define	setVideomark_word(value)	VGLOBS->mark_word = value
-#define	getVideomark_string()		VGLOBS->mark_string
-#define	setVideomark_string(value)	VGLOBS->mark_string = value
-#define	getVideoread_shift_count()	VGLOBS->read_shift_count
-#define	setVideoread_shift_count(value)	VGLOBS->read_shift_count = value
-#define	getVideoread_mapped_plane()	VGLOBS->read_mapped_plane
-#define	setVideoread_mapped_plane(value)	VGLOBS->read_mapped_plane = value
-#define	getVideocolour_comp()		VGLOBS->colour_comp
-#define	setVideocolour_comp(value)	VGLOBS->colour_comp = value
-#define	getVideodont_care()		VGLOBS->dont_care
-#define	setVideodont_care(value)	VGLOBS->dont_care = value
-#define	getVideov7_bank_vid_copy_off()	VGLOBS->v7_vid_copy_off
-#define	setVideov7_bank_vid_copy_off(value)	VGLOBS->v7_vid_copy_off = value
-#define	getVideoscreen_ptr()		VGLOBS->screen_ptr
-#define	setVideoscreen_ptr(value)	VGLOBS->screen_ptr = value
-#define	getVideorotate()		VGLOBS->rotate
-#define	setVideorotate(value)		VGLOBS->rotate = value
-#define	getVideocalc_data_xor()		calc_data_xor
-#define	setVideocalc_data_xor(value)	calc_data_xor = value
-#define	getVideocalc_latch_xor()	calc_latch_xor
-#define	setVideocalc_latch_xor(value)	calc_latch_xor = value
-#define	getVideoread_byte_addr()		
-#define	setVideoread_byte_addr(value)	
-#define	getVideov7_fg_latches()		fg_latches
-#define	setVideov7_fg_latches(value)	fg_latches = value
-#define	getVideoGC_regs()		
-#define	setVideoGC_regs(value)		
-#define	getVideolast_GC_index()		
-#define	setVideolast_GC_index(value)	
-#define	getVideodither()		
-#define	setVideodither(value)	
-#define	getVideowrmode()	
-#define	setVideowrmode(value)	
-#define	getVideochain()	
-#define	setVideochain(value)	
-#define	getVideowrstate()	
-#define	setVideowrstate(value)	
-
+/* DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register. */
 #else	/* CPU_40_STYLE */
 
 extern void setVideorplane IPT1(IU8 *, value);
@@ -381,23 +295,7 @@ extern IU32 latchval;	/* used for following latch macros */
 #define put_latch3(value) put_latch(3, value)
 
 #else	/* CPU_40_STYLE */
-
-#define get_latch(n) (* ((UTINY *) (&VGLOBS->latches) + n))
-
-#define get_latch0 get_latch(0)
-#define get_latch1 get_latch(1)
-#define get_latch2 get_latch(2)
-#define get_latch3 get_latch(3)
-#define get_latch01 (* (USHORT *) (&VGLOBS->latches))
-#define get_latch23 (* (USHORT *) (&VGLOBS->latches + 2))
-
-#define put_latch(n, value) * ((UTINY *) (&VGLOBS->latches) + n) = (value)
-
-#define put_latch0(value) put_latch(0, value)
-#define put_latch1(value) put_latch(1, value)
-#define put_latch2(value) put_latch(2, value)
-#define put_latch3(value) put_latch(3, value)
-
+/* DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register. */
 #endif	/* CPU_40_STYLE */
 
 /*

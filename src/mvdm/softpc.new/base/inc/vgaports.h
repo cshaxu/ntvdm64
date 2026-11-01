@@ -1964,12 +1964,7 @@ struct extensions_controller
 extern void set_v7_fg_latch_byte IPT2(IU8, index, IU8, value);
 #define SET_FG_LATCH(n, val)	set_v7_fg_latch_byte(n, val)
 #else
-#ifdef BIGEND
-#define SET_FG_LATCH( n, val )	(*((UTINY *) &fg_latches + (n)) = value )
-#endif /* BIGEND */
-#ifdef LITTLEND
-#define SET_FG_LATCH( n, val )	(*((UTINY *) &fg_latches + (3 - n)) = value )
-#endif /* LITTLEND */
+/* DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register. */
 #endif	/* CPU_40_STYLE */
 #endif /* V7VGA */
 

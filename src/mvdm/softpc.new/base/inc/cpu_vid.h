@@ -122,19 +122,7 @@ extern void Cpu_set_vid_rd_ptrs IPT1( READ_POINTERS *, ptrs );
 #endif /* Cpu_set_vid_wrt_ptrs */
 
 #ifndef CPU_40_STYLE
-#ifdef A3CPU
-
-#ifdef C_VID
-extern WRT_POINTERS Glue_writes;
-#endif /* C_VID */
-
-#else /* A3CPU */
-
-#ifdef C_VID
-extern MEM_HANDLERS Glue_writes;
-#endif /* C_VID */
-
-#endif /* A3CPU */
+/* DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register. */
 #endif /* CPU_40_STYLE */
 
 extern WRT_POINTERS simple_writes;

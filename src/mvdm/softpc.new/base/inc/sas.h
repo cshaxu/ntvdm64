@@ -43,17 +43,7 @@ typedef enum  {
 #define SAS_MAX_TYPE		SAS_DANGEROUS
 
 #else /* CPU_40_STYLE */
-
-#define SAS_RAM			0
-#define SAS_VIDEO		1
-#define SAS_ROM			2
-#define SAS_WRAP		3
-#define SAS_IO			4
-#define SAS_MM_LIM		5
-#define SAS_INACCESSIBLE	6
-#define SAS_DANGEROUS		7
-#define SAS_MAX_TYPE		SAS_DANGEROUS
-
+/* DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register. */
 #endif /* CPU_40_STYLE else */
 
 #define SAS_TYPE_TO_STRING(type) (\
