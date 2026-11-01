@@ -145,40 +145,7 @@ void nt_init_cga_colour_med_graph()
                         byte4 = ( i & 0xC0 ) >> 6;
 
 #ifdef BIGEND
-                        cga_med_graph_hi_nyb[i]
-                                = ( byte4 << 24 ) | ( byte4 << 16)
-                                        | ( byte3 << 8 ) | byte3;
-                        cga_med_graph_lo_nyb[i]
-                                = ( byte2 << 24 ) | ( byte2 << 16)
-                                        | ( byte1 << 8 ) | byte1;
-
-#ifdef BIGWIN
-                        cga_med_graph_hi_lut_big[i]
-                                = ( byte4 << 24 ) | ( byte4 << 16)
-                                        | ( byte4 << 8 ) | byte3;
-                        cga_med_graph_mid_lut_big[i]
-                                = ( byte3 << 24) | ( byte3 << 16 )
-                                        | ( byte2 << 8 ) | byte2;
-                        cga_med_graph_lo_lut_big[i]
-                                = ( byte2 << 24 ) | ( byte1 << 16)
-                                        | ( byte1 << 8 ) | byte1;
-
-                        cga_med_graph_lut4_huge[i]
-                                = ( byte4 << 24 ) | ( byte4 << 16)
-                                        | ( byte4 << 8 ) | byte4;
-
-                        cga_med_graph_lut3_huge[i]
-                                = ( byte3 << 24 ) | ( byte3 << 16)
-                                        | ( byte3 << 8 ) | byte3;
-
-                        cga_med_graph_lut2_huge[i]
-                                = ( byte2 << 24 ) | ( byte2 << 16)
-                                        | ( byte2 << 8 ) | byte2;
-
-                        cga_med_graph_lut1_huge[i]
-                                = ( byte1 << 24 ) | ( byte1 << 16)
-                                        | ( byte1 << 8 ) | byte1;
-#endif /* BIGWIN */
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif /* BIGEND */
 
 #ifdef LITTLEND

@@ -21,65 +21,12 @@
  */
 
 #ifdef	BIGEND
-#ifdef	BIT_ORDER1
-typedef union 
-{
-	word all;
-	struct {
-		HALF_WORD_BIT_FIELD printer_count:2;
-		HALF_WORD_BIT_FIELD not_used:1;
-		HALF_WORD_BIT_FIELD game_io_present:1;
-		HALF_WORD_BIT_FIELD rs232_count:3;
-		HALF_WORD_BIT_FIELD unused:1;
-
-		HALF_WORD_BIT_FIELD max_diskette:2; /* BEWARE - 0 RELATIVE */
-		HALF_WORD_BIT_FIELD video_mode:2;
-		HALF_WORD_BIT_FIELD ram_size:2;
-		HALF_WORD_BIT_FIELD coprocessor_present:1;
-		HALF_WORD_BIT_FIELD diskette_present:1;
-	} bits;
-} EQUIPMENT_WORD;
-#endif
-#ifdef	BIT_ORDER2
-typedef union 
-{
-	word all;
-	struct {
-		HALF_WORD_BIT_FIELD unused:1;
-		HALF_WORD_BIT_FIELD rs232_count:3;
-		HALF_WORD_BIT_FIELD game_io_present:1;
-		HALF_WORD_BIT_FIELD not_used:1;
-		HALF_WORD_BIT_FIELD printer_count:2;
-
-		HALF_WORD_BIT_FIELD diskette_present:1;
-		HALF_WORD_BIT_FIELD coprocessor_present:1;
-		HALF_WORD_BIT_FIELD ram_size:2;
-		HALF_WORD_BIT_FIELD video_mode:2;
-		HALF_WORD_BIT_FIELD max_diskette:2; /* BEWARE - 0 RELATIVE */
-	} bits;
-} EQUIPMENT_WORD;
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef	LITTLEND
 #ifdef	BIT_ORDER1
-typedef union 
-{
-	word all;
-	struct {
-		HALF_WORD_BIT_FIELD max_diskette:2; /* BEWARE - 0 RELATIVE */
-		HALF_WORD_BIT_FIELD video_mode:2;
-		HALF_WORD_BIT_FIELD ram_size:2;
-		HALF_WORD_BIT_FIELD coprocessor_present:1;
-		HALF_WORD_BIT_FIELD diskette_present:1;
-
-		HALF_WORD_BIT_FIELD printer_count:2;
-		HALF_WORD_BIT_FIELD not_used:1;
-		HALF_WORD_BIT_FIELD game_io_present:1;
-		HALF_WORD_BIT_FIELD rs232_count:3;
-		HALF_WORD_BIT_FIELD unused:1;
-	} bits;
-} EQUIPMENT_WORD;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #endif
 #ifdef	BIT_ORDER2
 typedef union 

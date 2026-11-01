@@ -527,7 +527,7 @@ static	void	paint_records IFN2(int, start_rec, int, end_rec)
 }
 
 #ifdef BIGEND
-#define get_char_attr(unsigned_long_ptr)     ((*(unsigned_long_ptr)) >> 16)
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #else
 #define get_char_attr(unsigned_long_ptr)     (((*(unsigned_long_ptr)) & 0xffff))
 #endif
@@ -2501,7 +2501,7 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 	/* Fill exposed area of buffer */
 
 #ifdef BIGEND
-	data = (' ' << 8) | attr;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #else
 	data = (attr << 8) | ' ';
 #endif
@@ -2638,7 +2638,7 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,
 	/* Fill exposed area of buffer */
 
 #ifdef BIGEND
-	data = (' ' << 8) | attr;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #else
 	data = (attr << 8) | ' ';
 #endif

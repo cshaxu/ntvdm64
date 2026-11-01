@@ -252,8 +252,7 @@ fill_alternate_bytes IFN3(byte *, start, byte *, end, byte, value )
 }
 
 #ifdef  BIGEND
-#define first_half(wd)      ((wd & 0xff00) >> 8)
-#define sec_half(wd)        (wd & 0xff)
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #else
 #define first_half(wd)      (wd & 0xff)
 #define sec_half(wd)        ((wd & 0xff00) >> 8)
@@ -265,7 +264,7 @@ fill_both_bytes IFN3(USHORT, data, USHORT *, dest, ULONG, len )
 	USHORT swapped;
 
 #ifdef BIGEND
-	swapped = ((data & 0xff00) >> 8) | ((data & 0xff) << 8);
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif
 
 	if( (ULONG) dest & 1 )
@@ -288,7 +287,7 @@ fill_both_bytes IFN3(USHORT, data, USHORT *, dest, ULONG, len )
 		while( len-- )
 		{
 #ifdef BIGEND
-			*dest = swapped;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #else
 			*dest = data;
 #endif

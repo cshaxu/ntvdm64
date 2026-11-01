@@ -188,14 +188,7 @@ void nt_init_ega_lo_graph()
                         byte7 = ( i & 0x80 ) >> 7;
 
 #ifdef BIGEND
-                        or_of_bytes01 = ( byte1 << 24 ) | ( byte1 << 16 ) |
-                                                ( byte0 << 8 ) | byte0;
-                        or_of_bytes23 = ( byte3 << 24 ) | ( byte3 << 16 ) |
-                                                ( byte2 << 8 ) | byte2;
-                        or_of_bytes45 = ( byte5 << 24 ) | ( byte5 << 16 ) |
-                                                ( byte4 << 8 ) | byte4;
-                        or_of_bytes67 = ( byte7 << 24 ) | ( byte7 << 16 ) |
-                                                ( byte6 << 8 ) | byte6;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif /* BIGEND */
 
 #ifdef LITTLEND
@@ -231,20 +224,7 @@ void nt_init_ega_lo_graph()
 
 #ifdef BIGWIN
 #ifdef BIGEND
-
-                        or_of_bytes01 = ( byte1 << 24 ) | ( byte0 << 16 ) |
-                                                ( byte0 << 8 ) | byte0;
-                        or_of_bytes23 = ( byte2 << 24 ) | ( byte2 << 16 ) |
-                                                ( byte1 << 8 ) | byte1;
-                        or_of_bytes45 = ( byte3 << 24 ) | ( byte3 << 16 ) |
-                                                ( byte3 << 8 ) | byte2;
-                        or_of_bytes67 = ( byte5 << 24 ) | ( byte4 << 16 ) |
-                                                ( byte4 << 8 ) | byte4;
-                        or_of_bytes89 = ( byte6 << 24 ) | ( byte6 << 16 ) |
-                                                ( byte5 << 8 ) | byte5;
-                        or_of_bytesab = ( byte7 << 24 ) | ( byte7 << 16 ) |
-                                                ( byte7 << 8 ) | byte6;
-
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif /* BIGEND */
 
 #ifdef LITTLEND
@@ -413,10 +393,7 @@ void nt_init_ega_med_and_hi_graph_luts()
         byte7 = (i & 0x80) >> 7;
 
 #ifdef BIGEND
-
-        or_of_bytes1 = (byte3 << 24) | (byte2 << 16) | (byte1 << 8) | byte0;
-        or_of_bytes2 = (byte7 << 24) | (byte6 << 16) | (byte5 << 8) | byte4;
-
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif /* BIGEND */
 
 #ifdef LITTLEND
@@ -438,11 +415,7 @@ void nt_init_ega_med_and_hi_graph_luts()
 
 #ifdef BIGWIN
 #ifdef BIGEND
-
-        or_of_bytes1 = (byte2 << 24) | (byte1 << 16) | (byte0 << 8) | byte0;
-        or_of_bytes2 = (byte4 << 24) | (byte4 << 16) | (byte3 << 8) | byte2;
-        or_of_bytes3 = (byte7 << 24) | (byte6 << 16) | (byte6 << 8) | byte5;
-
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif /*BIGEND */
 
 #ifdef LITTLEND
@@ -467,12 +440,7 @@ void nt_init_ega_med_and_hi_graph_luts()
         lut3_big_ptr[3*i+2] = or_of_bytes1 << 3;
 
 #ifdef BIGEND
-
-        or_of_bytes1 = (byte1 << 24) | (byte1 << 16) | (byte0 << 8) | byte0;
-        or_of_bytes2 = (byte3 << 24) | (byte3 << 16) | (byte2 << 8) | byte2;
-        or_of_bytes3 = (byte5 << 24) | (byte5 << 16) | (byte4 << 8) | byte4;
-        or_of_bytes4 = (byte7 << 24) | (byte7 << 16) | (byte6 << 8) | byte6;
-
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif /* BIGEND */
 
 #ifdef LITTLEND

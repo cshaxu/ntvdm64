@@ -136,21 +136,7 @@ typedef	half_word	DMA_WORD[2];
 
 /* a DMA command */
 #ifdef BIT_ORDER1
-typedef union
-{
-	half_word all;
-	struct
-	{
-		 HALF_WORD_BIT_FIELD DACK_high:1;       /* not supported */
-		 HALF_WORD_BIT_FIELD DREQ_high:1;	/* not supported */
-		 HALF_WORD_BIT_FIELD extended_write:1;  /* not supported */
-		 HALF_WORD_BIT_FIELD rotate_priority:1;	  
-		 HALF_WORD_BIT_FIELD compressed_timing:1;/* not supported */
-		 HALF_WORD_BIT_FIELD controller_disable:1;
-		 HALF_WORD_BIT_FIELD ch0_address_hold:1;/* not supported */
-		 HALF_WORD_BIT_FIELD mm_enable:1;       /* not supported */
-       } bits;
-} DMA_COMMAND;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #endif
 #ifdef BIT_ORDER2
 typedef union
@@ -172,18 +158,7 @@ typedef union
 
 /* a DMA mode */
 #ifdef BIT_ORDER1
-typedef union
-{
- 	half_word all;
-	struct
-	{
-		 HALF_WORD_BIT_FIELD mode:2;	    /* single/block/demand/cascade */
-		 HALF_WORD_BIT_FIELD address_dec:1; /* inc or dec count  */
-		 HALF_WORD_BIT_FIELD auto_init:1;   /* autoinitialize ?  */
-		 HALF_WORD_BIT_FIELD transfer_type:2; /* read/write/verify */
-		 HALF_WORD_BIT_FIELD scratch:2;     /* channel select mapped here */
-       } bits;
-} DMA_MODE;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #endif
 #ifdef BIT_ORDER2
 typedef union
@@ -214,15 +189,7 @@ typedef union
 
 /* a DMA status */
 #ifdef BIT_ORDER1
-typedef union
-{
-	half_word all;
-	struct
-	{
-		HALF_WORD_BIT_FIELD request:4;		/* request pending   */
-		HALF_WORD_BIT_FIELD terminal_count:4;	/* terminal count reached */
-	} bits;
-} DMA_STATUS;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #endif
 #ifdef BIT_ORDER2
 typedef union
@@ -338,23 +305,7 @@ typedef	struct
  * It is not used within the DMA emulation
  */
 #ifdef BIGEND
-typedef union
-{
-	sys_addr all;
-	half_word array[4];
-	struct
-	{
-		half_word pad;
-		half_word page;
-		half_word high;
-		half_word low;
-	} parts;
-	struct
-	{
-		word high;
-		word low;
-	} words;
-} DMA_ADDRESS;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif
 #ifdef LITTLEND
 typedef union

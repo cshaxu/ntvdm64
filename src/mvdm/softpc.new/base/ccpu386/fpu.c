@@ -459,30 +459,7 @@ INTEL_COMP_NC
 };
 
 #ifdef BIGEND
-/* Note enforcement of word ordering as high word/low word */
-LOCAL FPU_I64 BCDLowNibble[] = {
-{0x002386f2, 0x6fc10000},
-{0x00005af3, 0x107a4000},
-{0x000000e8, 0xd4a51000},
-{0x00000002, 0x540be400},
-{0x00000000, 0x05f5e100},
-{0x00000000, 0x000f4240},
-{0x00000000, 0x00002710},
-{0x00000000, 0x00000064},
-{0x00000000, 0x00000001}
-};
-
-LOCAL FPU_I64 BCDHighNibble[] = {
-{0x01634578, 0x5d8a0000},
-{0x00038d7e, 0xa4c68000},
-{0x00000918, 0x4e72a000},
-{0x00000017, 0x4876e800},
-{0x00000000, 0x3b9aca00},
-{0x00000000, 0x00989680},
-{0x00000000, 0x000186a0},
-{0x00000000, 0x000003e8},
-{0x00000000, 0x0000000a}
-};
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #else	/* !BIGEND */
 LOCAL FPU_I64 BCDLowNibble[] = {
 {0x6fc10000, 0x002386f2},

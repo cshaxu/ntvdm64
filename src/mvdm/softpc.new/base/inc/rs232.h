@@ -33,13 +33,7 @@ typedef union {
 } DIVISOR_LATCH;
 #endif
 #ifdef BIGEND
-typedef union {
-   word all;
-   struct {
-      WORD_BIT_FIELD MSByte:8;
-      WORD_BIT_FIELD LSByte:8;
-   } byte;
-} DIVISOR_LATCH;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef BIT_ORDER2
@@ -55,16 +49,7 @@ typedef union {
       } INT_ENABLE_REG;
 #endif
 #ifdef BIT_ORDER1
-typedef union {
- 	half_word all;
-	struct {
-		 HALF_WORD_BIT_FIELD pad:4;
-		 HALF_WORD_BIT_FIELD modem_status:1;
-		 HALF_WORD_BIT_FIELD rx_line:1;
-		 HALF_WORD_BIT_FIELD tx_holding:1;
-		 HALF_WORD_BIT_FIELD data_available:1;
-	       } bits;
-      } INT_ENABLE_REG;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #endif
 
 #if defined(NTVDM) && defined(FIFO_ON)
@@ -80,15 +65,7 @@ typedef union {
       } INT_ID_REG;
 #endif
 #ifdef BIT_ORDER1
-typedef union {
-    half_word all;
-    struct {
-         HALF_WORD_BIT_FIELD fifo_enabled:2;
-         HALF_WORD_BIT_FIELD pad:2;
-         HALF_WORD_BIT_FIELD interrupt_ID:3;
-         HALF_WORD_BIT_FIELD no_int_pending:1;
-           } bits;
-      } INT_ID_REG;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #endif
 #else   /* NTVDM */
 
@@ -103,14 +80,7 @@ typedef union {
       } INT_ID_REG;
 #endif
 #ifdef BIT_ORDER1
-typedef union {
- 	half_word all;
-	struct {
-		 HALF_WORD_BIT_FIELD pad:5;
-		 HALF_WORD_BIT_FIELD interrupt_ID:2;
-		 HALF_WORD_BIT_FIELD no_int_pending:1;
-	       } bits;
-      } INT_ID_REG;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #endif
 
 #endif  /* ifdef NTVDM */
@@ -130,18 +100,7 @@ typedef union {
       } LINE_CONTROL_REG;
 #endif
 #ifdef BIT_ORDER1
-typedef union {
- 	half_word all;
-	struct {
-		 HALF_WORD_BIT_FIELD DLAB:1;
-		 HALF_WORD_BIT_FIELD set_break:1;
-		 HALF_WORD_BIT_FIELD stick_parity:1;
-		 HALF_WORD_BIT_FIELD even_parity:1;
-		 HALF_WORD_BIT_FIELD parity_enabled:1;
-		 HALF_WORD_BIT_FIELD no_of_stop_bits:1;
-		 HALF_WORD_BIT_FIELD word_length:2;
-	       } bits;
-      } LINE_CONTROL_REG;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef BIT_ORDER2
@@ -158,17 +117,7 @@ typedef union {
       } MODEM_CONTROL_REG;
 #endif
 #ifdef BIT_ORDER1
-typedef union {
- 	half_word all;
-	struct {
-		 HALF_WORD_BIT_FIELD pad:3;
-		 HALF_WORD_BIT_FIELD loop:1;
-		 HALF_WORD_BIT_FIELD OUT2:1;
-		 HALF_WORD_BIT_FIELD OUT1:1;
-		 HALF_WORD_BIT_FIELD RTS:1;
-		 HALF_WORD_BIT_FIELD DTR:1;
-	       } bits;
-      } MODEM_CONTROL_REG;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef BIT_ORDER2
@@ -191,23 +140,7 @@ typedef union {
       } LINE_STATUS_REG;
 #endif
 #ifdef BIT_ORDER1
-typedef union {
- 	half_word all;
-	struct {
-#if defined(NTVDM) && defined(FIFO_ON)
-		 HALF_WORD_BIT_FIELD fifo_error:1;
-#else
-		 HALF_WORD_BIT_FIELD pad:1;
-#endif
-		 HALF_WORD_BIT_FIELD tx_shift_empty:1;
-		 HALF_WORD_BIT_FIELD tx_holding_empty:1;
-		 HALF_WORD_BIT_FIELD break_interrupt:1;
-		 HALF_WORD_BIT_FIELD framing_error:1;
-		 HALF_WORD_BIT_FIELD parity_error:1;
-		 HALF_WORD_BIT_FIELD overrun_error:1;
-		 HALF_WORD_BIT_FIELD data_ready:1;
-	       } bits;
-      } LINE_STATUS_REG;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef BIT_ORDER2
@@ -226,19 +159,7 @@ typedef union {
       } MODEM_STATUS_REG;
 #endif
 #ifdef BIT_ORDER1
-typedef union {
- 	half_word all;
-	struct {
-		 HALF_WORD_BIT_FIELD RLSD:1;
-		 HALF_WORD_BIT_FIELD RI:1;
-		 HALF_WORD_BIT_FIELD DSR:1;
-		 HALF_WORD_BIT_FIELD CTS:1;
-		 HALF_WORD_BIT_FIELD delta_RLSD:1;
-		 HALF_WORD_BIT_FIELD TERI:1;
-		 HALF_WORD_BIT_FIELD delta_DSR:1;
-		 HALF_WORD_BIT_FIELD delta_CTS:1;
-	       } bits;
-      } MODEM_STATUS_REG;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #endif
 
 #if defined(NTVDM) && defined(FIFO_ON)
@@ -260,17 +181,7 @@ typedef union {
       } FIFO_CONTROL_REG;
 #endif
 #ifdef BIT_ORDER1
-typedef union {
-    half_word all;
-    struct {
-         HALF_WORD_BIT_FIELD trigger_level:2;
-         HALF_WORD_BIT_FIELD pad:2;
-         HALF_WORD_BIT_FIELD dma_mode_selected:1
-         HALF_WORD_BIT_FIELD tx_reset:1;
-         HALF_WORD_BIT_FIELD rx_reset:1
-         HALF_WORD_BIT_FIELD enabled:1;
-           } bits;
-      } FIFO_CONTROL_REG;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #endif
 
 #endif

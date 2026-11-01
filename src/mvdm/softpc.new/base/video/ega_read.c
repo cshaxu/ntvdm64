@@ -526,7 +526,7 @@ update_shift_count IFN0()
  			 */
 
 #ifdef BIGEND
- 			setVideoread_shift_count(( 3 - getVideoread_mapped_plane() ) << 3);
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #else
  			setVideoread_shift_count(getVideoread_mapped_plane() << 3);
 #endif /* BIGEND */

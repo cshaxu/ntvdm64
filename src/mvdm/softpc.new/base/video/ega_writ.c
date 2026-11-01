@@ -146,10 +146,7 @@ ULONG sr_lookup[16] =
 	0xffff0000,0xffff00ff,0xffffff00,0xffffffff
 #endif
 #ifdef BIGEND
-	0x00000000,0xff000000,0x00ff0000,0xffff0000,
-	0x0000ff00,0xff00ff00,0x00ffff00,0xffffff00,
-	0x000000ff,0xff0000ff,0x00ff00ff,0xffff00ff,
-	0x0000ffff,0xff00ffff,0x00ffffff,0xffffffff
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif
 };
 

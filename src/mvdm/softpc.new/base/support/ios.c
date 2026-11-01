@@ -206,8 +206,7 @@ LOCAL void generic_inw IFN2(io_addr, io_address, word *, value)
 #endif				/* LITTLEND */
 
 #ifdef BIGEND
-	*((half_word *) value + 0) = temp.byte.high;
-	*((half_word *) value + 1) = temp.byte.low;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif				/* BIGEND */
 }
 
@@ -254,8 +253,7 @@ LOCAL void generic_ind IFN2(io_addr, io_address, double_word *, value)
 #endif				/* LITTLEND */
 
 #ifdef BIGEND
-	*((word *) value + 0) = high;
-	*((word *) value + 1) = low;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif				/* BIGEND */
 }
 #endif /* SPC386 */

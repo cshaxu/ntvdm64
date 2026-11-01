@@ -101,32 +101,7 @@ FP80SE	sign_exp;
  */
 
 #ifdef BIGEND
-
-/* Format for double precision on bigendian host */
-#define HOST_R64_BYTE_0 0
-#define HOST_R64_BYTE_1 1
-#define HOST_R64_BYTE_2 2
-#define HOST_R64_BYTE_3 3
-#define HOST_R64_BYTE_4 4
-#define HOST_R64_BYTE_5 5
-#define HOST_R64_BYTE_6 6
-#define HOST_R64_BYTE_7 7
-
-/* Format for internal representation of an R80 on bigendian host */
-/* This reflects the struct { IU64 mant; IU16 sign_exp } format of FP80 */
-#define HOST_R80_BYTE_0 8
-#define HOST_R80_BYTE_1 9
-#define HOST_R80_BYTE_2 0
-#define HOST_R80_BYTE_3 1
-#define HOST_R80_BYTE_4 2
-#define HOST_R80_BYTE_5 3
-#define HOST_R80_BYTE_6 4
-#define HOST_R80_BYTE_7 5
-#define HOST_R80_BYTE_8 6
-#define HOST_R80_BYTE_9 7
-
-#define NPX_LOW_32_BITS  1
-#define NPX_HIGH_32_BITS 0
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif	/* BIGEND */
 
 #ifdef LITTLEND

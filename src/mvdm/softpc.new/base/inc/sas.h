@@ -772,15 +772,7 @@ extern void sas_stores_from_transbuf IPT3(sys_addr, dest, host_addr, src, sys_ad
 #ifdef BACK_M
 
 #ifdef BIGEND
-typedef union   {
-		double_word all;
-		struct  {
-			half_word hw0;
-			half_word hw1;
-			half_word hw2;
-			half_word hw3;
-	        	} hwords;
-		} IVT_ENTRY;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef LITTLEND
@@ -798,15 +790,7 @@ typedef union   {
 #else /* BACK_M */
 
 #ifdef BIGEND
-typedef union   {
-		double_word all;
-		struct  {
-			half_word hw3;
-			half_word hw2;
-			half_word hw1;
-			half_word hw0;
-	        	} hwords;
-		} IVT_ENTRY;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef LITTLEND

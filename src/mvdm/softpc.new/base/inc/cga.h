@@ -25,22 +25,7 @@
 
 
 #ifdef BIT_ORDER1
-typedef union                       /* Template for character attributes     */
-{
-    half_word all;
-    struct 
-    {
-        HALF_WORD_BIT_FIELD blinking  :1;   /* Blinking attribute                    */
-        HALF_WORD_BIT_FIELD background:3;   /* Background colour R,G,B               */
-        HALF_WORD_BIT_FIELD bold      :1;   /* Intensity bit                         */
-        HALF_WORD_BIT_FIELD foreground:3;   /* Foreground colour R,G,B               */
-    } bits;
-    struct 
-    {
-        HALF_WORD_BIT_FIELD background_and_blink:4;     
-        HALF_WORD_BIT_FIELD foreground_and_bold :4;
-    } plane;
-} ATTRIBUTE;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef BIT_ORDER2

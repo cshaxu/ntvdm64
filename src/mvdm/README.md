@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-524: replace unselected BIGEND and BIT_ORDER1 branches with
+markers while retaining their conditional shells. The observed Windows build
+uses little-endian and BIT_ORDER2. Original ranges and body hashes are in
+`../../artifacts/mvdm-audit/s12-endian.jsonl`.
+
 MVDM-HOST-DIV-523: replace unselected GISP_CPU, GISP_SVGA and HERC
 alternatives with markers, preserving conditional shells. The inventory is
 `../../artifacts/mvdm-audit/s12-legacy-engines-else.jsonl`.

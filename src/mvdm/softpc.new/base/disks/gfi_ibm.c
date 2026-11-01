@@ -199,9 +199,7 @@ int drive, *changed, *status;
 	       pkt_ptr = (unsigned char *) &lndma;
 	       cmd_pkt[0] = WTDMA;
 #ifdef	BIGEND
-	       /* Bigendian e.g. mc68000 */
-	       cmd_pkt[1] = *pkt_ptr;
-	       cmd_pkt[2] = *(pkt_ptr+1);
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #else
 	       /* Little endian e.g. VAX */
 	       cmd_pkt[1] = *(pkt_ptr+1);
@@ -356,11 +354,7 @@ static unsigned char *q;  /* spare ptr */
 	       lioff = (unsigned short) ioff;
 	       pkt_ptr = (unsigned char *) &lioff;
 #ifdef	BIGEND
-	       /* Bigendian e.g. mc68000 */
-                cmd_pkt[1] = *q++;
-                cmd_pkt[2] = *q;
-                cmd_pkt[3] = *pkt_ptr++;
-                cmd_pkt[4] = *pkt_ptr;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #else
 	       /* Little endian e.g. VAX */
                 cmd_pkt[1] = *(q+1);
@@ -402,11 +396,7 @@ static unsigned char *q;  /* spare ptr */
 	    lioff = (unsigned short) ioff;
 	    pkt_ptr = (unsigned char *) &lioff;
 #ifdef	BIGEND
-	    /* Bigendian e.g. mc68000 */
-        cmd_pkt[1] = *q++;
-        cmd_pkt[2] = *q;
-        cmd_pkt[3] = *pkt_ptr++;
-        cmd_pkt[4] = *pkt_ptr;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #else
        /* Little endian e.g. VAX */
         cmd_pkt[1] = *(q+1);

@@ -178,18 +178,7 @@ static int fla_ndma_sector_size;
  */ 
 
 #ifdef BIT_ORDER1
-typedef union {
-	 	half_word all;
-		struct {
-			 HALF_WORD_BIT_FIELD motor_3_on:1;
-			 HALF_WORD_BIT_FIELD motor_2_on:1;
-			 HALF_WORD_BIT_FIELD motor_1_on:1;
-			 HALF_WORD_BIT_FIELD motor_0_on:1;
-			 HALF_WORD_BIT_FIELD interrupts_enabled:1;
-			 HALF_WORD_BIT_FIELD not_reset:1;
-			 HALF_WORD_BIT_FIELD drive_select:2;
-		       } bits;
-	      } DOR;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef BIT_ORDER2

@@ -177,8 +177,7 @@ typedef	union {
 	unsigned short	as_word;
 	struct {
 #ifdef	BIGEND
-		unsigned char	hi_byte;
-		unsigned char	lo_byte;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #else
 		unsigned char	lo_byte;
 		unsigned char	hi_byte;
@@ -388,8 +387,7 @@ ega_copy_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 }
 
 #ifdef  BIGEND
-#define first_half(wd)      (((wd) & 0xff00) >> 8)
-#define sec_half(wd)        ((wd) & 0xff)
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #else
 #define first_half(wd)      ((wd) & 0xff)
 #define sec_half(wd)        (((wd) & 0xff00) >> 8)
@@ -404,7 +402,7 @@ ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 	note_entrance0("ega_copy_w_fill");
 
 #ifdef BIGEND
-	value = ((value >> 8) & 0xff) | ((value << 8) & 0xff00);
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif
 
     count >>= 1;

@@ -82,15 +82,7 @@ void rs232_io()
    } parameters;
 #endif
 #ifdef BIT_ORDER1
-   union {
-      half_word all;
-      struct {
-	 HALF_WORD_BIT_FIELD baud_rate:3;
-	 HALF_WORD_BIT_FIELD parity:2;
-	 HALF_WORD_BIT_FIELD stop_bit:1;
-	 HALF_WORD_BIT_FIELD word_length:2;
-      } bit;
-   } parameters;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #endif
 
    DIVISOR_LATCH divisor_latch;

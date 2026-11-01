@@ -20,34 +20,7 @@ typedef enum
 typedef union
 {
 #ifdef BIT_ORDER1
-	struct
-	{
-		unsigned unused:27;
-		unsigned sr:1;
-		unsigned bp:1;
-		unsigned func:2;
-		unsigned pe:1;
-	} state;
-	struct
-	{
-		unsigned unused:27;
-		unsigned lookup:5;
-	} mode_0;
-	struct
-	{
-		unsigned unused:31;
-		unsigned lookup:1;
-	} mode_1;
-	struct
-	{
-		unsigned unused:28;
-		unsigned lookup:4;
-	} mode_2;
-	struct
-	{
-		unsigned unused:28;
-		unsigned lookup:4;
-	} mode_3;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
 #else
 	struct
 	{

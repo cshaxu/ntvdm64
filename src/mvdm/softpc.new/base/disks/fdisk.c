@@ -1536,7 +1536,7 @@ GLOBAL VOID fdisk_inw IFN2(io_addr, port, USHORT *, value)
 #else	/* JOKER */
 
 #ifdef BIGEND
-	unsigned short  temp;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif
 		switch (port)
 	{
@@ -1547,8 +1547,7 @@ GLOBAL VOID fdisk_inw IFN2(io_addr, port, USHORT *, value)
 #endif
 
 #ifdef BIGEND
-		rmac(&temp, IOREAD);
-		*value = ((temp << 8) & 0xff00) | (temp >> 8);
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif
 
 #if 0
@@ -1639,7 +1638,7 @@ GLOBAL VOID fdisk_outb IFN2(io_addr, port, UTINY, value)
 GLOBAL VOID fdisk_outw IFN2(io_addr, port, USHORT, value)
 {
 #ifdef BIGEND
-	unsigned short  temp;
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif
 		switch (port)
 	{
@@ -1656,8 +1655,7 @@ GLOBAL VOID fdisk_outw IFN2(io_addr, port, USHORT, value)
 #endif
 
 #ifdef BIGEND
-		temp = ((value << 8) & 0xff00) | (value >> 8);
-		rmac(&temp, IOWRITE);
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif
 
 			break;

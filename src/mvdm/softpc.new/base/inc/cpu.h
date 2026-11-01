@@ -162,18 +162,7 @@ extern void host_cpu_interrupt	IPT0();
  */
 
 #ifdef BIGEND
-
-union sixteenbits
-{
-	word X;
-
-	struct
-	{
-		half_word lower;
-		half_word upper;
-	} word;
-};
-
+/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
 #endif	/* BIGEND */
 
 #ifdef LITTLEND
