@@ -238,8 +238,7 @@ static char buf[80];    /* Buffer for diagnostic prints */
 #endif /* !PROD || SHORT_TRACE */
 
 #ifdef PS_FLUSHING
-LOCAL IBOOL psFlushEnabled[NUM_SERIAL_PORTS];	/* TRUE if PostScript flushing
-						is enabled */
+/* DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register. */
 #endif	/* PS_FLUSHING */
 
 /* Control TX pacing */
@@ -873,15 +872,7 @@ void com_outb IFN2(io_addr, port, half_word, value)
 			if ( asp->loopback_state == OFF )
 			{
 #ifdef PS_FLUSHING
-				/*
-				 * If PostScript flushing is enabled for this
-				 * port then we flush on a Ctrl-D
-				 */
-				if ( psFlushEnabled[adapter] &&
-				     asp->tx_buffer == 0x04 /* ^D */ )
-					host_com_ioctl(adapter,HOST_COM_FLUSH,
-					              0);
-				else {
+/* DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register. */
 #endif	/* PS_FLUSHING */
 				host_com_write(adapter, asp->tx_buffer);
 #if defined (DELAYED_INTS) || defined (NTVDM)
@@ -895,7 +886,7 @@ void com_outb IFN2(io_addr, port, half_word, value)
 
 #endif /* DELAYED_INTS || NTVDM */
 #ifdef PS_FLUSHING
-				}
+/* DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register. */
 #endif	/* PS_FLUSHING */
 			}
 			else
@@ -2398,40 +2389,7 @@ GLOBAL void com_int_data(int adapter,int *controller, int *line)
 #endif /* NTVDM */
 
 #ifdef PS_FLUSHING
-/*(
-=========================== com_psflush_change ================================
-PURPOSE:
-	Handle change of PostScript flush configuration option for a serial
-	port.
-INPUT:
-	hostID - Configuration item I.D.
-	apply - TRUE if change to be applied
-OUTPUT:
-	None
-ALGORITHM:
-	If PostScript flushing is being enabled then;
-		set the PostScript flush enable flag for the port;
-		disable autoflush for the port;
-	else;
-		reset the PostScript flush enable flag for the port;
-		enable autoflush for the port;
-===============================================================================
-)*/
-
-GLOBAL void com_psflush_change IFN2(
-    IU8, hostID,
-    IBOOL, apply
-) {
-    IS32 adapter = hostID - C_COM1_PSFLUSH;
-
-    assert1(adapter < NUM_SERIAL_PORTS,"Bad hostID %d",hostID);
-
-    if ( apply )
-        if ( psFlushEnabled[adapter] = (IBOOL)config_inquire(hostID,NULL) )
-            host_com_disable_autoflush(adapter);
-        else
-            host_com_enable_autoflush(adapter);
-}
+/* DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register. */
 #endif	/* PS_FLUSHING */
 
 

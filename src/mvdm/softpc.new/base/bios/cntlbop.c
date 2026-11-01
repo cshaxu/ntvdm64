@@ -51,7 +51,7 @@ PURPOSE			: Supply a BOP FF function for implementation
 #endif
 
 #ifdef SECURE
-void end_secure_boot IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register. */
 #endif
 
 #if defined(RUNUX)
@@ -61,7 +61,7 @@ void end_secure_boot IPT0();
 static control_bop_array base_bop_table[] = 
 {
 #ifdef SECURE
-     9, end_secure_boot,
+/* DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register. */
 #endif
 #if defined(RUNUX)
 /* DIVERGENCE MVDM-HOST-DIV-529: RUNUX platform branch is not selected; see mirror register. */

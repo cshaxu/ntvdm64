@@ -316,7 +316,7 @@ typedef enum
 	EG_HELP_NOT_INSTALLED,
 #endif /* HOST_HELP */
 #ifdef SECURE
-	EG_SYS_INSECURE,
+/* DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register. */
 #endif
 
 	EG_INFINITE_LOOP,

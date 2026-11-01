@@ -41,7 +41,7 @@
 #include "host.h"
 #include "trace.h"
 #ifdef SECURE
-#include "debug.h"
+/* DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register. */
 #endif
 #include "gmi.h"
 #include "gfx_upd.h"
@@ -113,8 +113,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 #endif	/* CPU_40_STYLE */
 
 #ifdef SECURE
-	char * sys_config_filename;
-	ErrData err_data;
+/* DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef	SETUID_ROOT
@@ -148,7 +147,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 #endif /* !PROD */
 
 #ifdef SECURE
-  err_data.string_1 = err_data.string_2 = err_data.string_3 = "";
+/* DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register. */
 #endif
 
 #ifndef NTVDM

@@ -441,7 +441,7 @@ LOCAL void announce_variant IFN0()
 #endif /* IRET_HOOKS */
 
 #ifdef SECURE
-	strcat( buff , " SECURE" );
+/* DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef SYNCH_TIMERS

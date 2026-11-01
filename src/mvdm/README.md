@@ -1,5 +1,9 @@
 # mvdm
 
+MVDM-HOST-DIV-530: replace unselected SECURE and PS_FLUSHING branch bodies
+with markers, retaining the original conditionals. Their ranges and hashes
+are in `../../artifacts/mvdm-audit/s12-print-secure.jsonl`.
+
 MVDM-HOST-DIV-529: replace unselected historical debug, documentation and
 host-platform branches with markers while retaining their conditional shells.
 Exact labels, ranges and hashes are in

@@ -207,8 +207,7 @@ extern void host_com_da_int_change(int adapter, int da_int_state, int da_data_st
 #endif
 
 #ifdef PS_FLUSHING
-IMPORT void host_com_enable_autoflush IPT1(IS32,adapter);
-IMPORT void host_com_disable_autoflush IPT1(IS32,adapter);
+/* DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register. */
 #endif	/* PS_FLUSHING */
 
 #ifndef macintosh

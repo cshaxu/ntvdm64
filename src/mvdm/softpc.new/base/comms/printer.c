@@ -208,8 +208,7 @@ sys_addr lp16BitPrtBusy;
  */
 
 #ifdef PS_FLUSHING
-LOCAL IBOOL psFlushEnabled[NUM_PARALLEL_PORTS];	/* TRUE if PostScript flushing
-						is enabled */
+/* DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register. */
 #endif	/* PS_FLUSHING */
 
 
@@ -517,14 +516,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #endif
 
 #ifdef PS_FLUSHING
-				/*
-				 * If PostScript flushing is enabled for this
-				 * port then we flush on a Ctrl-D
-				 */
-				if ( psFlushEnabled[adapter] &&
-				     output_reg[adapter] == 0x04 /* ^D */ ) {
-					host_print_doc(adapter);
-				} else {
+/* DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register. */
 #endif	/* PS_FLUSHING */
 				       /*
 				 	* Send the stored internal buffer to
@@ -553,7 +545,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #endif /* DELAYED_INTS */
 					}
 #ifdef PS_FLUSHING
-				}
+/* DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register. */
 #endif	/* PS_FLUSHING */
 			}
 			else if (high_low(old_control, value, STROBE)
@@ -794,38 +786,5 @@ void printer_is_being_closed(int adapter)
 
 
 #ifdef PS_FLUSHING
-/*(
-=========================== printer_psflush_change ============================
-PURPOSE:
-	Handle change of PostScript flush configuration option for a printer
-	port.
-INPUT:
-	hostID - Configuration item I.D.
-	apply - TRUE if change to be applied
-OUTPUT:
-	None
-ALGORITHM:
-	If PostScript flushing is being enabled then;
-		set the PostScript flush enable flag for the port;
-		disable autoflush for the port;
-	else;
-		reset the PostScript flush enable flag for the port;
-		enable autoflush for the port;
-===============================================================================
-)*/
-
-GLOBAL void printer_psflush_change IFN2(
-    IU8, hostID,
-    IBOOL, apply
-) {
-    IS32 adapter = hostID - C_LPT1_PSFLUSH;
-
-    assert1(adapter < NUM_PARALLEL_PORTS,"Bad hostID %d",hostID);
-
-    if ( apply )
-        if ( psFlushEnabled[adapter] = (IBOOL)config_inquire(hostID,NULL) )
-            host_lpt_disable_autoflush(adapter);
-        else
-            host_lpt_enable_autoflush(adapter);
-}
+/* DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register. */
 #endif	/* PS_FLUSHING */

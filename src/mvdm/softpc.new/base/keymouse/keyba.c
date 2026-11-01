@@ -695,87 +695,7 @@ static half_word buff_overrun_6805 [4]=
 #endif /* macintosh */
 
 #ifdef SECURE /* { */
-/*
- * This table 'secure_keytab' identifies certain characters which
- * need special treatment by Secure SoftWindows.   The table is
- * indexed by keycodes, as used by the ROM routine for the U.S. English
- * keyboard.   These codes are defined in IBM Personal Computer AT
- * Hardware Technical Reference, Section 5 System BIOS Keyboard
- * Encoding and Usage.
- *
- * Characters requiring special treatment include Ctrl-Alt-DEL,
- * Ctrl-C and the others, including keys which modify the Boot.
- * Such keys require different treatment, but can be grouped into
- * about 4 different ActionClasses.
- * Any key which would generate an undesirable code has the action
- * bit set, along with the ActionClass number.   Additionally the
- * modifier keys are also tracked with this table.
- */
-
-#define SEC_ACTCLASS	0x07
-/* Action Classes have to be sequential from 0,
- * as they are used as an index into function
- * tables 'down_class' and 'up_class'
- */
-#define SEC_CLASS_0	0x00
-#define SEC_CLASS_1	0x01
-#define SEC_CLASS_2	0x02
-#define SEC_CLASS_3	0x03
-#define SEC_CLASS_4	0x04
-#define SEC_CLASS_5	0x05
-#define SEC_CLASS_6	0x06
-#define SEC_CLASS_7	0x07
-#define SEC_ACTION	0x08
-#define SEC_CTRL_L	0x10
-#define SEC_CTRL_R	0x20
-#define SEC_ALT_L	0x40
-#define SEC_ALT_R	0x80
-#define SEC_MOD_MASK	(SEC_CTRL_L|SEC_CTRL_R|SEC_ALT_L|SEC_ALT_R)
-
-LOCAL IU8 secure_keytab [] = {
-	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,	/* 0-15 */
-	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,	/* 16-31 */
-	0,0,0,0,0,0,0,0,0,0,0,0,        	/* 32-43 */
-	SEC_ACTION|SEC_CLASS_3,         	/* 44(LShft) Boot Modifier. */
-	0,0,0,                          	/* 45-47 */
-	SEC_ACTION|SEC_CLASS_2,         	/* 48("C") Used with Cntrl. */
-	0,0,0,0,0,0,0,0,                	/* 49-56 */
-	SEC_ACTION|SEC_CLASS_3,         	/* 57(RShft) Boot Modifier. */
-	SEC_CTRL_L,0,SEC_ALT_L,0,       	/* 58-61 */
-	SEC_ALT_R,0,SEC_CTRL_R,         	/* 62-64 */
-	0,0,0,0,0,0,0,0,0,0,0,          	/* 65-75 */
-	SEC_ACTION|SEC_CLASS_0,         	/* 76(Delete) */
-	0,0,0,0,0,0,0,0,0,0,0,0,0,0,    	/* 77-90 */
-	SEC_ACTION|SEC_CLASS_1,         	/* 91(KeyPad 7) */
-	SEC_ACTION|SEC_CLASS_1,         	/* 92(KeyPad 4) */
-	SEC_ACTION|SEC_CLASS_1,         	/* 93(KeyPad 1) */
-	0,0,                            	/* 94-95 */
-	SEC_ACTION|SEC_CLASS_1,         	/* 96(KeyPad 8) */
-	SEC_ACTION|SEC_CLASS_1,         	/* 97(KeyPad 5) */
-	SEC_ACTION|SEC_CLASS_1,         	/* 98(KeyPad 2) */
-	SEC_ACTION|SEC_CLASS_1,         	/* 99(KeyPad 0) */
-	0,                              	/* 100 */
-	SEC_ACTION|SEC_CLASS_1,         	/* 101(KeyPad 9) */
-	SEC_ACTION|SEC_CLASS_1,         	/* 102(KeyPad 6) */
-	SEC_ACTION|SEC_CLASS_1,         	/* 103(KeyPad 3) */
-	SEC_ACTION|SEC_CLASS_0,         	/* 104(KeyPad . DEL) */
-	0,0,0,0,0,0,0,                  	/* 105-111 */
-	SEC_ACTION|SEC_CLASS_3,         	/* 112(F1) */
-	SEC_ACTION|SEC_CLASS_3,         	/* 113(F2) */
-	SEC_ACTION|SEC_CLASS_3,         	/* 114(F3) */
-	SEC_ACTION|SEC_CLASS_3,         	/* 115(F4) */
-	SEC_ACTION|SEC_CLASS_3,         	/* 116(F5) */
-	SEC_ACTION|SEC_CLASS_3,         	/* 117(F6) */
-	SEC_ACTION|SEC_CLASS_3,         	/* 118(F7) */
-	SEC_ACTION|SEC_CLASS_3,         	/* 119(F8) */
-	SEC_ACTION|SEC_CLASS_3,         	/* 120(F9) */
-	SEC_ACTION|SEC_CLASS_3,         	/* 121(F10) */
-	SEC_ACTION|SEC_CLASS_3,         	/* 122(F11) */
-	SEC_ACTION|SEC_CLASS_3,         	/* 123(F12) */
-	0,0,                            	/* 124-125 */
-	SEC_ACTION|SEC_CLASS_2,         	/* 126(Break) */
-	0                               	/* 127 */
-};
+/* DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register. */
 #endif /* SECURE } */
 
 LOCAL VOID calc_buff_6805_left IPT0();
@@ -790,110 +710,7 @@ LOCAL INT buffer_status_8042 IPT0();
 #endif
 
 #ifdef SECURE /* { */
-/* Track the Modifier keys. */
-LOCAL IU8 keys_down = 0;
-
-/* Track which key downs have been supressed. */
-LOCAL IU8 keys_suppressed [0x80] = {0};
-
-/* Forward declarations keep compiler happy. */
-LOCAL VOID filtered_host_key_down IPT1(int,key);
-LOCAL VOID filtered_host_key_up IPT1(int,key);
-
-/* Here are the functions for handling special keys. */
-LOCAL VOID filt_dwn_reboot IFN1(int, key)
-{
-	/* The key is only nasty if Cntrl and Alt are down. */
-	if ((keys_down & (SEC_CTRL_L | SEC_CTRL_R)) != 0 &&
-	    (keys_down & (SEC_ALT_L  | SEC_ALT_R )) != 0 )
-	{
-		keys_suppressed[key] = 1;
-	}
-	else
-	{
-		filtered_host_key_down(key);
-	}
-}
-LOCAL VOID filt_dwn_kpad_numerics IFN1(int, key)
-{
-	/* The keys are only nasty if Alt is down. */
-	if ((keys_down & (SEC_CTRL_L | SEC_CTRL_R)) == 0 &&
-	    (keys_down & (SEC_ALT_L  | SEC_ALT_R )) != 0 )
-	{
-		keys_suppressed[key] = 1;
-	}
-	else
-	{
-		filtered_host_key_down(key);
-	}
-}
-LOCAL VOID filt_dwn_breaks IFN1(int, key)
-{
-	/*
-	 * The keys are only nasty if Control is down.
-	 * The upness of the Alt key is not checked as the
-	 * typematic feature would allow ALT-CTRL-C to be held
-	 * down, then ALT could be released to deliver a stream
-	 * of CTRL-C.
-	 */
-	if ((keys_down & (SEC_CTRL_L | SEC_CTRL_R)) != 0)
-	{
-		keys_suppressed[key] = 1;
-	}
-	else
-	{
-		filtered_host_key_down(key);
-	}
-}
-LOCAL VOID filt_dwn_boot_mods IFN1(int, key)
-{
-	/* The keys are only nasty if in Boot mode. */
-	if (!has_boot_finished())
-	{
-		keys_suppressed[key] = 1;
-	}
-	else
-	{
-		filtered_host_key_down(key);
-	}
-}
-LOCAL VOID filt_dwn_supress_up IFN1(int, key)
-{
-	if (keys_suppressed[key])
-	{
-		/* Key down was suppressed, do not forward key-up. */
-		keys_suppressed[key] = 0;
-	}
-	else
-	{
-		filtered_host_key_up(key);
-	}
-}
-
-/*
- * The following function table is indexed by the Action Class,
- * as defined in secure_keytab[].
- */
-LOCAL VOID (*down_class[]) IPT1(int, key) = {
-	filt_dwn_reboot,
-	filt_dwn_kpad_numerics,
-	filt_dwn_breaks,
-	filt_dwn_boot_mods,
-	filtered_host_key_down,
-	filtered_host_key_down,
-	filtered_host_key_down,
-	filtered_host_key_down
-};
-LOCAL VOID (*up_class[]) IPT1(int, key) = {
-	filt_dwn_supress_up,
-	filt_dwn_supress_up,
-	filt_dwn_supress_up,
-	filt_dwn_supress_up,
-	filtered_host_key_up,
-	filtered_host_key_up,
-	filtered_host_key_up,
-	filtered_host_key_up
-};
+/* DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register. */
 #endif /* SECURE } */
 
 /*
@@ -1347,24 +1164,7 @@ switch (key_set)
 
 GLOBAL VOID host_key_down IFN1(int,key)
 #ifdef SECURE /* { */
-{
-	IU8 keytab_entry;
-	/* Make a note of any modifier bits. */
-	keytab_entry = secure_keytab[key];
-	keys_down |= keytab_entry;
-	/* If any filtering action is required, go do it. */
-	if (config_inquire(C_SECURE, NULL) && (keytab_entry & SEC_ACTION) != 0)
-	{
-		/* The key may need filtering. */
-		(*down_class[keytab_entry & SEC_ACTCLASS])(key);
-	}
-	else
-	{
-		filtered_host_key_down(key);
-	}
-}
-
-LOCAL VOID filtered_host_key_down IFN1(int,key)
+/* DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register. */
 #endif /* SECURE } */
 {
 if (scanning_discontinued)
@@ -1405,24 +1205,7 @@ else
 
 GLOBAL VOID host_key_up IFN1(int,key)
 #ifdef SECURE /* { */
-{
-	IU8 keytab_entry;
-	/* Make a note of any modifier bits. */
-	keytab_entry = secure_keytab[key];
-	keys_down &= SEC_MOD_MASK ^ keytab_entry;
-	/* If any filtering action is required, go do it. */
-	if (config_inquire(C_SECURE, NULL) && (keytab_entry & SEC_ACTION) != 0)
-	{
-		/* The key may need filtering. */
-		(*up_class[keytab_entry & SEC_ACTCLASS])(key);
-	}
-	else
-	{
-		filtered_host_key_up(key);
-	}
-}
-
-LOCAL VOID filtered_host_key_up IFN1(int,key)
+/* DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register. */
 #endif /* SECURE } */
 {
 if (scanning_discontinued)
