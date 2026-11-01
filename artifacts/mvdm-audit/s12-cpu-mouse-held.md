@@ -13,11 +13,12 @@ is an unwanted platform alternative or a missing supported behavior.
   address-limit checks in CCPU, including calls and interrupts. Its correct
   selection needs an explicit original CPU/guest semantics comparison. It is
   not equivalent to an unused hardware V86 monitor.
-- `MOUSE_16_BIT` selects a historical 16-bit mouse-driver path in
-  `mouse_io.c`, including initialization and pointer handling. Its relationship
-  to the currently selected mouse implementation and supported Win3.1/DOS
-  paths has not been established by this label inventory. Keep it intact
-  rather than confuse it with the separately installed Win3.1 mouse driver.
+- `MOUSE_16_BIT` was initially held. Subsequent source tracing identified a
+  separate historical `mouse16bInstall` path with no implementation in the
+  source tree. The selected NTVDM path installs the INT 33 handler; the
+  separately installed mouse31 driver uses that host interface. The unselected
+  original bodies are now accounted for under MVDM-HOST-DIV-532; see
+  `s12-mouse16-legacy.jsonl`. No guest driver was modified.
 
-No source, guest or product image changed in this review. These are bounded
-ownership questions, not assertions of a failure or of runtime equivalence.
+The two remaining CPU selections are bounded ownership questions, not
+assertions of a failure or of runtime equivalence.

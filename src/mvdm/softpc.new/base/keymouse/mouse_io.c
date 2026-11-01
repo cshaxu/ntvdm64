@@ -129,9 +129,7 @@ LOCAL word              saved_int71_offset;
 #include "host_gfx.h"
 
 #ifdef MOUSE_16_BIT
-#include HostHwVgaH
-#include "hwvga.h"
-#include "mouse16b.h"
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #endif 		/* MOUSE_16_BIT */
 
 /*
@@ -988,10 +986,7 @@ void mouse_install1()
 #endif /* NTVDM */
 
 #ifdef MOUSE_16_BIT
-	/*
-	 *	Call 16-bit mouse driver initialisation routine
-	 */
-	mouse16bInstall( );
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #endif
 
 #if !defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX))
@@ -1025,7 +1020,7 @@ void mouse_install1()
 	sas_storew(int_addr(0x10), MOUSE_VIDEO_IO_OFFSET);
 	sas_storew(int_addr(0x10) + 2, MOUSE_VIDEO_IO_SEGMENT);
 #else		/* MOUSE_16_BIT */
-	sas_storedw(int_addr(0x10), mouseIOData.mouse_video_io );
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #endif		/* MOUSE_16_BIT */
 
 #else
@@ -1220,46 +1215,7 @@ void mouse_io_language()
 }
 
 #ifdef	MOUSE_16_BIT
-/*
- *	function	:	mouse16bCheckConditionalOff 
- *
- *	purpose		:	Make the 16 bit driver check the conditional
- *				off area and either draw or hide the pointer
- *				appropriately. This function is only called
- *				when the cursor flag is set to
- *				MOUSE_CURSOR_DISPLAYED.
- *
- *	inputs		:	none
- *	outputs		:	none
- *	returns		:	void
- *	globals		:	cursor_flag is decremented if the pointer has
- *				to be hidden
- *	
- *	
- */
-LOCAL void mouse16bCheckConditionalOff IFN0()
-{
-	/* If the mouse has moved into the conditional
-	** off area (the black hole) then the mouse
-	** must be hidden and the cursor flag
-	** decremented, otherwise the mouse is drawn
-	** in its new position.
-	*/
-	if ((cursor_position.x >=
-		black_hole.top_left.x) &&
-		(cursor_position.x <=
-		black_hole.bottom_right.x) &&
-		(cursor_position.y >=
-		black_hole.top_left.y) &&
-		(cursor_position.y <=
-		black_hole.bottom_right.y))
-	{
-		cursor_flag--;
-		mouse16bHidePointer();
-	}
-	else
-		mouse16bDrawPointer( &cursor_status );
-}
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #endif	/* MOUSE_16_BIT */
 
 LOCAL void get_screen_size IFN0()
@@ -1702,11 +1658,7 @@ extern void host_call_bios_mode_change();
 #endif
 
 #ifdef	MOUSE_16_BIT
-		/* Remember whether in text or graphics mode for
-		** later use.
-		*/
-		is_graphics_mode = ((current_video_mode > 3) &&
-			(current_video_mode != 7));
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #endif	/* MOUSE_16_BIT */
 
 		note_trace0(MOUSE_VERBOSE, "mouse_video_io:return()");
@@ -2535,9 +2487,7 @@ outb(ICA0_PORT_0, END_INTERRUPT);
 	if (condition_mask & MOUSE_CALL_MASK_POSITION_BIT)
 		if (cursor_flag == MOUSE_CURSOR_DISPLAYED)
 #ifdef	MOUSE_16_BIT
-			if (is_graphics_mode)
-				mouse16bCheckConditionalOff();
-			else
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #endif	/* MOUSE_16_BIT */
 			{
 			cursor_display();
@@ -2578,9 +2528,7 @@ void mouse_int2()
 		if (cursor_flag == MOUSE_CURSOR_DISPLAYED)
 		{
 #ifdef	MOUSE_16_BIT
-			if (is_graphics_mode)
-				mouse16bCheckConditionalOff();
-			else
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #endif	/* MOUSE_16_BIT */
 			{
 			cursor_display();
@@ -2850,9 +2798,7 @@ LOCAL void mouse_show_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 	if (cursor_flag != MOUSE_CURSOR_DISPLAYED)
 		if (++cursor_flag == MOUSE_CURSOR_DISPLAYED)
 #ifdef	MOUSE_16_BIT
-			if (is_graphics_mode)
-				mouse16bShowPointer(&cursor_status);
-			else
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #endif	/* MOUSE_16_BIT */
 			{
 			cursor_display();
@@ -2888,9 +2834,7 @@ LOCAL void mouse_hide_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 #if !defined(NTVDM) || !defined(MONITOR)
 	if (cursor_flag-- == MOUSE_CURSOR_DISPLAYED)
 #ifdef	MOUSE_16_BIT
-		if (is_graphics_mode)
-			mouse16bHidePointer();
-		else
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #endif	/* MOUSE_16_BIT */
 		{
 		cursor_undisplay();
@@ -3211,7 +3155,7 @@ LOCAL void mouse_set_graphics IFN4(word *,junk1,MOUSE_SCALAR *,hot_spot_x_ptr,MO
 #if !defined(NTVDM) || !defined(MONITOR)
 	
 #ifdef MOUSE_16_BIT
-	mouse16bSetBitmap( hot_spot_x_ptr , hot_spot_y_ptr , bitmap_address );
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #else		/* MOUSE_16_BIT */
 
 #ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): no host-arrow shape provider. */
@@ -3535,16 +3479,7 @@ LOCAL void mouse_conditional_off IFN4(word *,junk1,word *,junk2,MOUSE_SCALAR *,u
 	 *	conditional off area into account
 	 */
 #ifdef	MOUSE_16_BIT
-	if (is_graphics_mode)
-	{
-		if ((cursor_position.x >= black_hole.top_left.x) &&
-			(cursor_position.x <= black_hole.bottom_right.x) &&
-			(cursor_position.y >= black_hole.top_left.y) &&
-			(cursor_position.y <= black_hole.bottom_right.y))
-			if (cursor_flag-- == MOUSE_CURSOR_DISPLAYED)
-				mouse16bHidePointer();
-	}
-	else
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #endif	/* MOUSE_16_BIT */
 	{
 	if (cursor_flag == MOUSE_CURSOR_DISPLAYED)
@@ -4273,9 +4208,7 @@ LOCAL void mouse_set_video_mode IFN4
       cursor_mode_change(current_video_mode);
 
 #ifdef MOUSE_16_BIT
-      /* Remember whether in text or graphics mode for later use. */
-      is_graphics_mode = ((current_video_mode > 3) &&
-                          (current_video_mode != 7));
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #endif /* MOUSE_16_BIT */
 
       *video_mode_ptr = 0;   /* Indicate success */
@@ -5136,8 +5069,7 @@ LOCAL void cursor_display IFN0()
 	v_mode = sas_hw_at(vd_video_mode);
 
 #ifdef	MOUSE_16_BIT
-	if (is_graphics_mode)
-		return;
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #endif	/* MOUSE_16_BIT */
 
 	/*
@@ -5170,7 +5102,7 @@ LOCAL void cursor_display IFN0()
 	else
 	{
 #ifdef MOUSE_16_BIT
-	mouse16bShowPointer( );
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #else /* MOUSE_16_BIT */
 #ifndef NTVDM /* DIVERGENCE(MVDM-HOST-DIV-318): bypass the Console host arrow. */
 		if (host_mouse_installed())
@@ -5234,8 +5166,7 @@ LOCAL void cursor_undisplay IFN0()
 	v_mode = sas_hw_at(vd_video_mode);
 
 #ifdef	MOUSE_16_BIT
-	if (is_graphics_mode)
-		return;
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #endif	/* MOUSE_16_BIT */
 
 	/*
@@ -5278,7 +5209,7 @@ LOCAL void cursor_undisplay IFN0()
 			else
 			{
 #ifdef MOUSE_16_BIT
-				mouse16bHidePointer( );
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #else /* MOUSE_16_BIT */
 #ifdef EGG
 			if ((video_adapter == EGA  || video_adapter == VGA) && (v_mode > 6))

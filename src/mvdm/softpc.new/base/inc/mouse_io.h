@@ -980,7 +980,7 @@ typedef struct
    IBOOL             MM_IN_int10_chained;
 
 #ifdef	MOUSE_16_BIT
-   IBOOL             MM_IN_is_graphics_mode;
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #endif	/* MOUSE_16_BIT */ 
 
 #ifdef EGG
@@ -1112,7 +1112,7 @@ IMPORT MM_INSTANCE_DATA_HANDLE mm_handle;
 #define int10_chained              ((*mm_handle)->MM_IN_int10_chained)
 
 #ifdef	MOUSE_16_BIT
-#define is_graphics_mode           ((*mm_handle)->MM_IN_is_graphics_mode)
+/* DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register. */
 #endif	/* MOUSE_16_BIT */ 
 
 #ifdef EGG

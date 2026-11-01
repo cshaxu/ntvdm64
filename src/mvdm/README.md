@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-532: replace the unselected historical MOUSE_16_BIT branch
+bodies with markers, preserving conditionals. The selected INT 33 mouse path
+and the separately built mouse31 driver remain. Source ranges and hashes:
+`../../artifacts/mvdm-audit/s12-mouse16-legacy.jsonl`.
+
 MVDM-HOST-DIV-531: replace unselected JOKER, PC_CONFIG, CGAMONO, PROFILE,
 LICENSING and DOS_APP_LIC branches with markers while retaining conditionals.
 The source ranges and hashes are in
