@@ -231,13 +231,12 @@ int host_initialise_EM(short size)
 	status = VdmAllocateVirtualMemory(&EM_base_address, size * 0x100000, FALSE);
 	if (!NT_SUCCESS(status)) {
 #ifdef EMM_DEBUG
-	    printf("Couldn't allocate virtual memory for EMM, error code = %lx\n",
-		    status);
+/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
 #endif
 	    return FAILURE;
 	}
 #ifdef EMM_DEBUG
-	printf("EMM base address = %lx\n", ((sys_addr)EM_base_address);
+/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
 #endif
 
 	/* pagemap requires 1 bit per 16K page - i.e. 8 bytes per meg	*/
@@ -429,8 +428,7 @@ unsigned short	segment;	 segment in physical address space to
 				 EMM_PAGE_SIZE / INTEL_PAGE_SIZE
 				 );
 #ifdef EMM_DEBUG
-	printf("host_map_page, segment=%x, EMpage=%x, Dospage=%x, VdmPage=%x\n",
-		segment, EM_page_no, DosIntelPageNo, VdmIntelPageNo);
+/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
 #endif
 	if (NT_SUCCESS(Status)) {
 	    return(SUCCESS);
@@ -475,8 +473,7 @@ short		EM_page_no 	Expanded Memory page currently
 			 EM_starting_page_no;
 
 #ifdef EMM_DEBUG
-	printf("host_unmap_page, segment=%x, EMpage=%x, Dospage=%x, VdmPage=%x\n",
-		segment, EM_page_no, DosIntelPageNo, VdmIntelPageNo);
+/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
 #endif
 	Status = VdmUnmapDosMemory(DosIntelPageNo,
 				   EMM_PAGE_SIZE / INTEL_PAGE_SIZE

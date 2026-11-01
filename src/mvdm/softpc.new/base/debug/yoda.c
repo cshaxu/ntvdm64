@@ -4293,17 +4293,7 @@ YODA_CMD_RETURN do_rfrsh IFN6(char *, str, char *, com, IS32, cs, LIN_ADDR, ip, 
 }
 
 #ifdef	EGA_DUMP
-
-/*
- * add check point to ega dump file so that different activities can be
- * delimited
- */
-
-LOCAL	int	do_dumpcp IFN0()
-{
-	dump_add_checkpoint();
-	return(YODA_LOOP);
-}
+/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
 #endif	/* EGA_DUMP */
 
 LOCAL YODA_COMMAND(do_chewy)
@@ -4725,7 +4715,7 @@ static struct
 { "cd",		do_cdebug,	FALSE, NULL, "COM1 register debugger"},
 
 #ifdef	EGA_DUMP
-{ "dumpcp", 	do_dumpcp, 	FALSE, NULL, "Add check point to EGA dump trace" },
+/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
 #endif	/* EGA_DUMP */
 
 #ifdef GISP_CPU

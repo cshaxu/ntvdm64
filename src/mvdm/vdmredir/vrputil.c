@@ -71,7 +71,7 @@ Return Value:
 
     LastError = GetLastError();
 #ifdef VR_DIAGNOSE
-    DbgPrint("VrpMapLastError: last error was %d\n", LastError);
+/* DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register. */
 #endif
     return VrpMapDosError(LastError);
 }

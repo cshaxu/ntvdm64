@@ -224,8 +224,7 @@ extern void sas_loadw IPT2(sys_addr, addr, word *, val);
 extern void sas_storew IPT2(sys_addr, addr, word, val);
 extern void sas_storew_no_check IPT2(sys_addr, addr24, word, val);
 #else
-extern void sas_loadw_swap IPT2(sys_addr, addr, word *, val);
-extern void sas_storew_swap IPT2(sys_addr, addr, word, val);
+/* DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register. */
 #endif	/* SUN_VA */
 extern void sas_storedw IPT2(sys_addr, addr, double_word, val);
 extern void sas_loads IPT3(sys_addr, src, host_addr, dest, sys_addr, len);

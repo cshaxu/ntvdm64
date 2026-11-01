@@ -2388,8 +2388,7 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
  */
 
 #ifdef DUMB_TERMINAL
-        if (terminal_type != TERMINAL_TYPE_DUMB)
-        {
+/* DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register. */
 #endif /* DUMB_TERMINAL */            
 
 		/* originally dummy was char [2] */
@@ -2423,7 +2422,7 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 	    }
 	    width = (int)(top_right_ptr - top_left_ptr + 2) << 1;
 #ifdef DUMB_TERMINAL
-	}
+/* DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register. */
 #endif /* DUMB_TERMINAL */            
 
 	/* Do the host stuff */
@@ -2712,8 +2711,7 @@ boolean cga_text_scroll_up IFN6(int, start, int, width, int, height,
  */
 
 #ifdef DUMB_TERMINAL
-        if (terminal_type != TERMINAL_TYPE_DUMB)
-        {
+/* DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register. */
 #endif /* DUMB_TERMINAL */            
 
 		/* originally dummy was char [2] */
@@ -2747,7 +2745,7 @@ boolean cga_text_scroll_up IFN6(int, start, int, width, int, height,
 	    }
 	    width = (int)(top_right_ptr - top_left_ptr + 1) << 1;
 #ifdef DUMB_TERMINAL
-	}
+/* DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register. */
 #endif /* DUMB_TERMINAL */            
 
 	/* do the host stuff */

@@ -175,9 +175,7 @@ void gvi_init IFN1(half_word, v_adapter)
     if (soft_reset)
         switch (video_adapter) {
 #ifdef DUMB_TERMINAL
-        case MDA:
-            mda_term();
-            break;
+/* DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register. */
 #endif /* DUMB_TERMINAL */
         case CGA:
 #ifdef CGAMONO 
@@ -245,9 +243,7 @@ void gvi_init IFN1(half_word, v_adapter)
 /* Setting all these variables should be done in the appropriate xxx_init() */
     switch (video_adapter) {
 #ifdef DUMB_TERMINAL
-    case MDA:
-        mda_init();
-        break;
+/* DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register. */
 #endif /* DUMB_TERMINAL */
     case CGA:
 #ifdef CGAMONO  
@@ -278,7 +274,7 @@ void gvi_init IFN1(half_word, v_adapter)
 #endif	/* !NTVDM | (NTVDM & !X86GFX) */
 
 #ifdef EGA_DUMP
-	dump_init(host_getenv( "EGA_DUMP_FILE" ), video_adapter);
+/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
 #endif
 }
 
@@ -287,9 +283,7 @@ void gvi_term IFN0()
 {
     switch (video_adapter) {
 #ifdef DUMB_TERMINAL
-    case MDA:
-        mda_term();
-        break;
+/* DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register. */
 #endif /* DUMB_TERMINAL */
     case CGA:
 #ifdef CGAMONO  

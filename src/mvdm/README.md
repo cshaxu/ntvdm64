@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-527: replace unselected SHORT_TRACE, EGA_DUMP, SUN_VA,
+EMM_DEBUG, VR_DIAGNOSE and DUMB_TERMINAL branches with markers while
+preserving conditionals. Body hashes and locations are in
+`../../artifacts/mvdm-audit/s12-diagnostic.jsonl`.
+
 MVDM-HOST-DIV-526: mark seven unselected REAL_VGA alternatives and three
 unselected BACK_M address adjustments in the project-adapted EMM carrier.
 The active alias checks and copies are retained. Locations and hashes are in

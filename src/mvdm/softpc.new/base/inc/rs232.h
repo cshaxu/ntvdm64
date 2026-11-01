@@ -325,7 +325,7 @@ extern void tx_holding_register_empty(int adapter);
 		(((port & 0xf8) == 0xf8) ? COM2 : COM4))
 
 #ifdef SHORT_TRACE
-#define	id_for_adapter(adapter)	 	(adapter + '1')
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 
 #else
@@ -334,7 +334,7 @@ extern void tx_holding_register_empty(int adapter);
 
 
 #ifdef SHORT_TRACE
-#define	id_for_adapter(adapter)	(adapter == COM1 ? 'P' : 'S')
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 #endif /* more than 2 serial ports */
 

@@ -656,13 +656,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		else
 			*value = asp->divisor_latch.byte.LSByte;
 #ifdef SHORT_TRACE
-		if ( io_verbose & RS232_VERBOSE )
-		{
-			sprintf(buf, "%cRX  -> %x (%c)\n",
-				id_for_adapter(adapter), *value,
-				isprint(toascii(*value))?toascii(*value):'?');
-			super_trace(buf);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 #ifndef PROD
 /* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
@@ -675,12 +669,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		else
 			*value = asp->divisor_latch.byte.MSByte;
 #ifdef SHORT_TRACE
-		if ( io_verbose & RS232_VERBOSE )
-		{
-			sprintf(buf,"%cIER -> %x\n", id_for_adapter(adapter),
-				*value);
-			super_trace(buf);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 #ifndef PROD
 /* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
@@ -698,12 +687,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		}
 
 #ifdef SHORT_TRACE
-		if ( io_verbose & RS232_VERBOSE )
-		{
-			sprintf(buf,"%cIIR -> %x\n", id_for_adapter(adapter),
-				*value);
-			super_trace(buf);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 #ifndef PROD
 /* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
@@ -725,12 +709,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 
 		*value = asp->line_control_reg.all;
 #ifdef SHORT_TRACE
-		if ( io_verbose & RS232_VERBOSE )
-		{
-			sprintf(buf,"%cLCR -> %x\n", id_for_adapter(adapter),
-				*value);
-			super_trace(buf);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 #ifndef PROD
 /* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
@@ -740,12 +719,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 	case RS232_MCR:
 		*value = asp->modem_control_reg.all;
 #ifdef SHORT_TRACE
-		if ( io_verbose & RS232_VERBOSE )
-		{
-			sprintf(buf,"%cMCR -> %x\n", id_for_adapter(adapter),
-				*value);
-			super_trace(buf);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 #ifndef PROD
 /* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
@@ -766,17 +740,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 #endif
 	
 #ifdef SHORT_TRACE
-		if ((!asp->line_status_reg.bits.tx_holding_empty) || 
-			(!asp->line_status_reg.bits.tx_shift_empty))
-		{
-			IDLE_comlpt();
-		}
-		if ( io_verbose & RS232_VERBOSE )
-		{
-			sprintf(buf,"%cLSR -> %x\n", id_for_adapter(adapter),
-				*value);
-			super_trace(buf);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 #ifndef PROD
 /* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
@@ -851,12 +815,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 
 
 #ifdef SHORT_TRACE
-		if ( io_verbose & RS232_VERBOSE )
-		{
-			sprintf(buf,"%cMSR -> %x\n", id_for_adapter(adapter),
-				*value);
-			super_trace(buf);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 #ifndef PROD
 /* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
@@ -955,13 +914,7 @@ void com_outb IFN2(io_addr, port, half_word, value)
 #endif
 		}
 #ifdef SHORT_TRACE
-		if ( io_verbose & RS232_VERBOSE )
-		{
-			sprintf(buf,"%cTX  <- %x (%c)\n",
-				id_for_adapter(adapter), value,
-				isprint(toascii(value))?toascii(value):'?');
-			super_trace(buf);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 #ifndef PROD
 /* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
@@ -1021,12 +974,7 @@ void com_outb IFN2(io_addr, port, half_word, value)
 #endif /* NTVDM */
 		}
 #ifdef SHORT_TRACE
-		if ( io_verbose & RS232_VERBOSE )
-		{
-			sprintf(buf,"%cIER <- %x\n", id_for_adapter(adapter),
-				value);
-			super_trace(buf);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 #ifndef PROD
 /* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
@@ -1067,12 +1015,7 @@ vel];
 		 * Essentially a READ ONLY register
 		 */
 #ifdef SHORT_TRACE
-		if ( io_verbose & RS232_VERBOSE )
-		{
-			sprintf(buf,"%cIIR <- READ ONLY\n",
-				id_for_adapter(adapter));
-			super_trace(buf);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 #ifndef PROD
 /* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
@@ -1107,12 +1050,7 @@ vel];
 		set_line_control(adapter, value);
 		set_break(adapter);
 #ifdef SHORT_TRACE
-		if ( io_verbose & RS232_VERBOSE )
-		{
-			sprintf(buf,"%cLCR <- %x\n", id_for_adapter(adapter),
-				value);
-			super_trace(buf);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 #ifndef PROD
 /* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
@@ -1121,12 +1059,7 @@ vel];
 		
 	case RS232_MCR:
 #ifdef SHORT_TRACE
-		if ( io_verbose & RS232_VERBOSE )
-		{
-			sprintf(buf,"%cMCR <- %x\n", id_for_adapter(adapter),
-				value);
-			super_trace(buf);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 		/*
 		 * Optimisation - DOS keeps re-writing this register
@@ -1153,12 +1086,7 @@ vel];
 		asp->line_status_reg.all = value;
 		asp->line_status_reg.bits.tx_shift_empty = i;
 #ifdef SHORT_TRACE
-		if ( io_verbose & RS232_VERBOSE )
-		{
-			sprintf(buf,"%cLSR <- %x\n", id_for_adapter(adapter),
-				value);
-			super_trace(buf);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 #ifndef PROD
 /* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
@@ -1170,12 +1098,7 @@ vel];
 		 * Essentially a READ ONLY register.
 		 */
 #ifdef SHORT_TRACE
-		if ( io_verbose & RS232_VERBOSE )
-		{
-			sprintf(buf,"%cMSR <- READ ONLY\n",
-				id_for_adapter(adapter));
-			super_trace(buf);
-		}
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 #ifndef PROD
 /* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
@@ -2187,25 +2110,7 @@ static void set_loopback IFN1(int, adapter)
 }
 
 #ifdef SHORT_TRACE
-
-static char last_buffer[80];
-static int repeat_count = 0;
-
-static void super_trace IFN1(char *, string)
-{
-	if ( strcmp(string, last_buffer) == 0 )
-		repeat_count++;
-	else
-	{
-		if ( repeat_count != 0 )
-		{
-			fprintf(trace_file,"repeated %d\n",repeat_count);
-			repeat_count = 0;
-		}
-		fprintf(trace_file, "%s", string);
-		strcpy(last_buffer, string);
-	}
-}
+/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
 #endif
 
 

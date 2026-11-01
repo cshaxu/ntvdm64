@@ -113,7 +113,7 @@ void time_strobe()
             }
         }
 #ifdef	EGA_DUMP
-	dump_tick();
+/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
 #endif
 }
 

@@ -503,7 +503,7 @@ Return Value:
             rcv_data_length = (DWORD)SmbGetUshort((LPWORD)parm_ptr);
             rcv_dl_flag = TRUE;
 #ifdef VR_DIAGNOSE
-            DbgPrint("VrRemoteApi: rcv_data_length=%x\n", rcv_data_length);
+/* DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register. */
 #endif
             break;
 
@@ -514,8 +514,7 @@ Return Value:
             rcv_data_ptr = LPBYTE_FROM_POINTER(parm_ptr);
             rcv_dp_flag = TRUE;
 #ifdef VR_DIAGNOSE
-            DbgPrint("VrRemoteApi: Off=%x, Sel=%x, data_ptr=%x\n",
-                ReceiveBufferOffset, ReceiveBufferSelector, rcv_data_ptr);
+/* DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register. */
 #endif
             break;
 
@@ -687,7 +686,7 @@ Return Value:
             }
             serverName = computerName;
 #ifdef VR_DIAGNOSE
-            DbgPrint("VrRemoteApi: computername is %s\n", serverName);
+/* DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register. */
 #endif
         }
     }
@@ -736,8 +735,7 @@ Return Value:
 
     if (status) {
 #ifdef VR_DIAGNOSE
-        DbgPrint("Error: VrRemoteApi: RxpTransactSmb returns %d(%x)\n",
-            status, status);
+/* DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register. */
 #endif
         switch (status) {
         case NERR_BufTooSmall:  /* No data returned from API worker */
@@ -1100,7 +1098,7 @@ Return Value:
     default:
         remapi_err_flag = NERR_InternalError;
 #ifdef VR_DIAGNOSE
-        DbgPrint("VrpGetFieldSize: offending descriptor is '%c'\n", c);
+/* DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register. */
 #endif
         ASSERT(FALSE);
         return 0;
@@ -1411,7 +1409,7 @@ Return Value:
                     if (ptr == NULL) {
                         if ((*l_dsc == REM_ASCIZ) && OkToModifyDescriptor) {
 #ifdef VR_DIAGNOSE
-                            DbgPrint("VrpPackSendBuffer: modifying descriptor to REM_NULL_PTR\n");
+/* DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register. */
 #endif
                             *l_dsc = REM_NULL_PTR;
                         }

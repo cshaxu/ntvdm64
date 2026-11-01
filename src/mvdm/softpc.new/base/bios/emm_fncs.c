@@ -2,10 +2,7 @@
 #include "host_def.h"
 
 #ifdef	SUN_VA
-#define		MAXPATHLEN	1024
-#define		NL			0x0a
-#define		CR			0x0d
-#include	<ctype.h>
+/* DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register. */
 #endif
 
 /*			INSIGNIA MODULE SPECIFICATION
@@ -253,16 +250,12 @@ GLOBAL void emm_io IFN0()
 		func_names[func_num],getAX(),getBX(),getCX(),getDX());
 
 #ifdef EMM_DEBUG
-		printf("emm_io entry: func=%s, AX=%x, BX=%x, CX=%x, DX=%x\n",
-		       func_names[func_num],getAX(),getBX(),getCX(),getDX()
-		      );
+/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
 #endif
 		(*emm_func[func_num])();	
 
 #ifdef EMM_DEBUG
-		printf("emm_io exit: AX=%x, BX=%x, CX=%x, DX=%x\n",
-		       getAX(),getBX(),getCX(),getDX()
-		      );
+/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
 #endif
 
 		if (getAH() != SUCCESS) {
@@ -317,11 +310,7 @@ GLOBAL void emm_init IFN0()
 #endif /* GISP_SVGA */
 
 #ifdef	SUN_VA
-	half_word	emm_all[256];
-	half_word	*cptr;
-	half_word	temp;
-	int		i;
-	int		found_mb = FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register. */
 #endif
 	
 #if	defined(SUN_VA) || defined(NTVDM)
@@ -332,58 +321,7 @@ GLOBAL void emm_init IFN0()
 	offset68 = getDX();
 
 #ifdef	SUN_VA
-
-	/* 
-	 * config.sys command line pointer is passed in the DI:DX registers
-	  from the driver.
-	 */
-
-	ea  = effective_addr(getDI(), getCX());
-
-	i = 0;
-	do{
-		sas_load(ea + i, &temp);
-		emm_all[i] = temp;
-		if (temp == '/'){
-			found_mb = TRUE;
-			cptr = &emm_all[i+1];		/* point to digit after flag	*/
-		}
-		i++;
-	} while ( (temp != NULL)  && (temp != NL) && (temp != CR));
-	emm_all[i-1] = NULL;				/* In cased it is not NULL	*/
-
-
-	/*
-	 * Search for #MB of EMM requested
-	 */
-
-	if ((found_mb == TRUE) && isdigit(*cptr) ) {
-		temp = atoi(cptr);
-	} else {								/* EMM size not specified	*/
-		temp = 2;							/* default to 2MB			*/
-	}
-
-	/*
-	 * Initialise the LIM
-	 *
-	 */
-	if (limSize = (SHORT)config_inquire(C_LIM_SIZE, NULL)){
-		backFill = 640;					/* We will always have at least 640k	*/
-		limSize--;						/* Subtract 1M of regular DOS memory	*/	
-		/* 
-		 * Check that we have enough raw memory for the EMM request.
-		 * If not, set to the available memory size.
-		 */
-		if ( temp <= limSize) 
-			limSize = temp;
-
-		while (init_expanded_memory(limSize, backFill) != SUCCESS )
-		{
-			free_expanded_memory();
-			host_error(EG_EXPANDED_MEM_FAILURE, ERR_QU_CO, NULL);
-		}
-	}
-
+/* DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register. */
 #endif	/* SUN_VA	*/
 #ifdef NTVDM	/* Similar to SUN_VA but without command line sizing */
 	if ((limSize = (SHORT)config_inquire(C_LIM_SIZE, NULL)) && get_no_phys_pages())

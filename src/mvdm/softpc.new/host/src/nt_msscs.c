@@ -578,8 +578,7 @@ boolean init_lim_configuration_data(PLIM_CONFIG_DATA lim_data)
     lim_data->use_all_umb = !ram_flag_found;
 
 #ifdef EMM_DEBUG
-    printf("base segment=%x, backfill =%lx; altreg sets=%d\n",
-	   base_segment, lim_data->backfill, total_altreg_sets);
+/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
 #endif
 
     return TRUE;
@@ -619,7 +618,7 @@ unsigned short get_lim_page_frames(USHORT * page_table,
     }
     if (!reserve_umb_status) {
 #ifdef EMM_DEBUG
-	printf("couldn't find primary page frame\n");
+/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
 #endif
 	return FALSE;
     }
@@ -652,9 +651,7 @@ unsigned short get_lim_page_frames(USHORT * page_table,
     }
 
 #ifdef EMM_DEBUG
-    printf("page frames:\n");
-    for (i = 0; i < total_phys_pages; i++)
-	printf("page number %d, segment %x\n",i, page_table[i]);
+/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
 #endif
     return total_phys_pages;
 }

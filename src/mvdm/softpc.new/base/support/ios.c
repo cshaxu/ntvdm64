@@ -458,8 +458,7 @@ GLOBAL void	inb IFN2(io_addr, io_address, half_word *, value)
 #endif /* VIRTUALISATION */
 
 #ifdef EGA_DUMP
-	if (io_address >= MDA_PORT_START && io_address <= CGA_PORT_END)
-		dump_inb(io_address);
+/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
 #endif
 
 #ifdef VIRTUALISATION
@@ -499,8 +498,7 @@ GLOBAL void	outb IFN2(io_addr, io_address, half_word, value)
 #endif /* VIRTUALISATION */
 
 #ifdef EGA_DUMP
-	if (io_address >= MDA_PORT_START && io_address <= CGA_PORT_END)
-		dump_outb(io_address, value);
+/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
 #endif
 
 	sub_note_trace2( IOS_VERBOSE, "outb( %x, %x )", io_address, value );
@@ -536,8 +534,7 @@ GLOBAL void	inw IFN2(io_addr, io_address, word *, value)
 #endif /* VIRTUALISATION */
 
 #ifdef EGA_DUMP
-	if (io_address >= MDA_PORT_START && io_address <= CGA_PORT_END)
-		dump_inw(io_address);
+/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
 #endif
 
 #ifdef VIRTUALISATION
@@ -576,8 +573,7 @@ GLOBAL void	outw IFN2(io_addr, io_address, word, value)
 #endif /* VIRTUALISATION */
 
 #ifdef EGA_DUMP
-	if (io_address >= EGA_AC_INDEX_DATA && io_address <= EGA_IPSTAT1_REG)
-		dump_outw(io_address, value);
+/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
 #endif
 
 	sub_note_trace2( IOS_VERBOSE, "outw( %x, %x )", io_address, value );

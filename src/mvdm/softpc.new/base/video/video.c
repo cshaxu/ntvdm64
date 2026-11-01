@@ -751,8 +751,7 @@ GLOBAL void vd_scroll_up IFN0()
 	else
     		sensible_graph_scroll_up(t_row,l_col,rowsdiff,colsdiff,lines,attr);
 #ifdef EGA_DUMP
-	dump_scroll(sas_hw_at_no_check(vd_video_mode),0,video_pc_low_regen,sas_w_at_no_check(VID_ADDR),sas_w_at_no_check(VID_COLS),
-    		t_row,l_col,rowsdiff,colsdiff,lines,attr);
+/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
 #endif
     /*
      * re-enable video for this mode, if on a CGA adaptor (fixes ROUND42 bug).
@@ -1102,8 +1101,7 @@ GLOBAL void vd_scroll_down IFN0()
 	else
     		sensible_graph_scroll_down(t_row,l_col,rowsdiff,colsdiff,lines,attr);
 #ifdef EGA_DUMP
-	dump_scroll(sas_hw_at_no_check(vd_video_mode),1,video_pc_low_regen,sas_w_at_no_check(VID_ADDR),sas_w_at_no_check(VID_COLS),
-    		t_row,l_col,rowsdiff,colsdiff,lines,attr);
+/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
 #endif
     /*
      * re-enable video for this mode, if on a CGA adaptor (fixes ROUND42 bug).
@@ -2190,9 +2188,7 @@ GLOBAL void vd_write_teletype IFN0()
 		sensible_graph_scroll_up(0,0, VD_ROWS_ON_SCREEN+1,vd_cols_on_screen,1,0);
 
 #ifdef EGA_DUMP
-	if(!alpha_num_mode())attrib=0;
-	dump_scroll(sas_hw_at_no_check(vd_video_mode),0,video_pc_low_regen,sas_w_at_no_check(VID_ADDR),sas_w_at_no_check(VID_COLS),
-		0,0,vd_rows_on_screen+1,vd_cols_on_screen,1,attrib);
+/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
 #endif
 
     }
