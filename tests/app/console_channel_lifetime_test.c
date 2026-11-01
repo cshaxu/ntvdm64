@@ -72,6 +72,53 @@ static DWORD test_bind(frontend_session *frontend,const void *owner,BOOL active,
     }
     return error;
 }
+static void test_console_source_owner_handoff(void)
+{
+    int owner_a=0,owner_b=0;HANDLE input,output;DWORD written,count,i,down=0,up=0;
+    INPUT_RECORD key={0},records[16];frontend_video video={0};
+    console_video_description description={4,2,4,8,8,{0}};
+    BYTE pixels[8]={0};HWND window=NULL;ULONGLONG deadline;
+    CHECK(!frontend_session_console(test_frontend,&input,&output));
+    CHECK(!frontend_session_bind(test_frontend,&owner_a,TRUE));
+    key.EventType=KEY_EVENT;key.Event.KeyEvent.bKeyDown=TRUE;
+    key.Event.KeyEvent.wRepeatCount=1;key.Event.KeyEvent.wVirtualKeyCode=VK_CONTROL;
+    key.Event.KeyEvent.wVirtualScanCode=0x1d;key.Event.KeyEvent.dwControlKeyState=LEFT_CTRL_PRESSED;
+    CHECK(WriteConsoleInputW(input,&key,1,&written) && written==1);
+    deadline=GetTickCount64()+5000;
+    do {
+        CHECK(!frontend_session_enter(test_frontend,&owner_a));
+        CHECK(!frontend_session_read(test_frontend,FALSE,records,16,&count));
+        frontend_session_leave(test_frontend);
+        for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT && records[i].Event.KeyEvent.bKeyDown)++down;
+        if(!down)Sleep(10);
+    } while(!down && GetTickCount64()<deadline);
+    CHECK(down==1);
+    CHECK(!frontend_session_bind(test_frontend,&owner_a,FALSE));
+    CHECK(!frontend_session_bind(test_frontend,&owner_b,TRUE));
+    CHECK(!frontend_video_begin(&video,1,&description));
+    CHECK(!frontend_video_data(&video,1,0,pixels,sizeof(pixels)));
+    CHECK(!frontend_session_video(test_frontend,&owner_b,&video,FALSE));
+    deadline=GetTickCount64()+5000;
+    while(!(window=FindWindowW(L"LibKvmWindow",NULL)) && GetTickCount64()<deadline)Sleep(10);
+    CHECK(window);
+    CHECK(!frontend_session_enter(test_frontend,&owner_b));
+    CHECK(!frontend_session_read(test_frontend,FALSE,records,16,&count));
+    frontend_session_leave(test_frontend);
+    for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT && !records[i].Event.KeyEvent.bKeyDown &&
+        records[i].Event.KeyEvent.wVirtualScanCode==0x1d)++up;
+    if(up)fprintf(private_report ? private_report : stderr,"source owner: B received %lu releases for A's key\n",up);
+    CHECK(up==0);
+    CHECK(!frontend_session_bind(test_frontend,&owner_b,FALSE));
+    CHECK(!frontend_session_bind(test_frontend,&owner_a,TRUE));
+    CHECK(!frontend_session_enter(test_frontend,&owner_a));
+    CHECK(!frontend_session_read(test_frontend,FALSE,records,16,&count));
+    frontend_session_leave(test_frontend);
+    for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT && !records[i].Event.KeyEvent.bKeyDown &&
+        records[i].Event.KeyEvent.wVirtualScanCode==0x1d)++up;
+    CHECK(up==1);
+    CHECK(!frontend_session_bind(test_frontend,&owner_a,FALSE));
+    frontend_video_dispose(&video);CloseHandle(input);CloseHandle(output);
+}
 /* Diagnostic-only self-process snapshot; never enters a product binary. */
 static void audit_handles(const char *stage)
 {
@@ -1433,6 +1480,8 @@ int main(int argc,char **argv)
     read_entered=CreateEventW(NULL,TRUE,FALSE,NULL);CHECK(read_entered);
     CHECK(GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE),&original_cursor));
     CHECK(!frontend_session_create(&test_frontend));
+    if(GetEnvironmentVariableW(L"MVDM_TEST_SOURCE_OWNER",NULL,0))
+        test_console_source_owner_handoff();
     test_title_handoff();
     test_prepare_operation();
     test_standalone_text(FALSE,FALSE);
