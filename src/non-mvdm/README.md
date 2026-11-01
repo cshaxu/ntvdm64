@@ -1,4 +1,10 @@
 # non-mvdm original OpenNT sources
+OPENNT-HOST-132: replace unselected SUPPORT_LPK, FE_IME, DBCS, FE_SB,
+KANJI, KOREA, WASWIN31 and MEMPHIS_MENUS branches with markers, preserving
+conditionals. The recorded product profiles do not select these labels;
+locations and body hashes are in
+`../../artifacts/mvdm-audit/s12-nonmvdm-locale.jsonl`.
+
 OPENNT-HOST-131: replace unselected LATER, NEVER, NOT_NEEDED and BOGUS
 branches with markers while retaining conditionals. Original locations,
 body hashes and the separately reviewed adapted branch are in

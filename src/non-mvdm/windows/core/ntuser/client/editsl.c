@@ -85,8 +85,7 @@ int SLIchToLeftXPos(
         return (-30000);
 
 #ifdef SUPPORT_LPK
-    if (ped->lpfnCharset)
-        return (int)(* ped->lpfnCharset)(ped, EDITINTL_SLICHTOX, hdc, ich);
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
 
     if (ped->fNonPropFont)
@@ -205,11 +204,7 @@ void   SLGetClipRect(
     PSTR   pText;
 
 #ifdef SUPPORT_LPK
-    if (ped->lpfnCharset) {
-        (* ped->lpfnCharset)(ped, EDITINTL_GETCLIPRECT, hdc, ichStart,
-                iCount, lpClipRect);
-        return;
-    }
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
 
     CopyRect(lpClipRect, &ped->rcFmt);
@@ -386,11 +381,7 @@ void SLDrawLine(
         return;
 
 #ifdef SUPPORT_LPK
-    if (ped->lpfnCharset) {
-        (* ped->lpfnCharset)(ped, EDITINTL_SLDRAWLINE, hdc, xClipStPos,
-                xClipEndPos, ichStart, iCount, fSelStatus);
-        return ;
-    }
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
 
     // Reset ichStart to take care of the negative C widths
@@ -579,11 +570,7 @@ void SLDrawText(
         return;
 
 #ifdef SUPPORT_LPK
-    if (ped->lpfnCharset) {
-        (* ped->lpfnCharset)(ped, EDITINTL_SLDRAWTEXT, hdc, ichStart);
-        SLSetCaretPosition(ped, hdc);
-        return ;
-    }
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
 
     if (ichStart < ped->ichScreenStart )
@@ -755,9 +742,7 @@ BOOL SLScrollText(
         return (FALSE);
 
 #ifdef SUPPORT_LPK
-    if (ped->lpfnCharset) {
-        newScreenStartX=(ICH)(* ped->lpfnCharset)(ped, EDITINTL_SLSCROLLTEXT, hdc);
-    } else {
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
         /*
          * Calculate the new starting screen position
@@ -804,7 +789,7 @@ BOOL SLScrollText(
             ECUnlock(ped);
         }
 #ifdef SUPPORT_LPK
-    }
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
 
     if (ped->ichScreenStart != newScreenStartX) {
@@ -1612,8 +1597,7 @@ ICH SLMouseToIch(
     LPSTR lpText;
 
 #ifdef SUPPORT_LPK
-    if (ped->lpfnCharset)
-       return (ICH)(* ped->lpfnCharset)(ped, EDITINTL_MOUSETOICH, hdc, mousePt);
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
 
     if (width <= ped->rcFmt.left) {
@@ -1938,9 +1922,7 @@ void SLSetFocus(
         hdc = ECGetEditDC(ped, TRUE);
 
 #ifdef SUPPORT_LPK
-        if (ped->lpfnCharset) {
-            bDoCaret = (UINT)(* ped->lpfnCharset)(ped, EDITINTL_SETFOCUS, hdc);
-        } else
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
         {
             bDoCaret = TRUE;
@@ -1994,9 +1976,7 @@ void SLKillFocus(
          * Destroy the caret (Win31/Chicago hides it first)
          */
 #ifdef SUPPORT_LPK
-        if (ped->lpfnCharset)
-              bKillCaret = (UINT)(* ped->lpfnCharset)(ped, EDITINTL_SETFOCUS, (HDC)NULL);
-          else
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
               bKillCaret = TRUE;
 
@@ -2188,25 +2168,7 @@ LONG SLEditWndProc(
         break;
 
 #ifdef SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]
-    case WM_KEYUP:
-    case WM_SYSKEYUP:
-          /*
-          * If an intl LPK is present, give it first crack at the keys
-          * if it returns zero, dont process. Note that we DON'T give it
-          * WM_CHAR messages.  It's not supposed to be to build strings
-          * but to process control keys.
-          *
-          * keyup msgs : didn't process here before, always jump to ECDefWndProc).
-          * syskeydown : only show LPK if NOT for combo box
-          * keydown    : if LPK says reject, dont process. if this screws
-          *              something because the lpk processes something it
-          *              shouldn't, it's the lpk's problem, not edit's.
-          */
-          if (ped->lpfnCharset) {
-              (* ped->lpfnCharset)(ped, EDITINTL_KEYMESSAGE, message,
-                    wParam, lParam);
-            goto PassToDefaultWindowProc;
-        }
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
 
     case WM_KEYDOWN:
@@ -2216,12 +2178,7 @@ LONG SLEditWndProc(
          * lParam - modifiers such as repeat count etc. (not used)
          */
 #ifdef SUPPORT_LPK
-        if (ped->lpfnCharset) {
-           if ((* ped->lpfnCharset)(ped, EDITINTL_KEYMESSAGE, message,
-                   wParam, lParam) == 0) {
-               break;
-           }
-        }
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
         SLKeyDown(ped, wParam, 0);
         break;
@@ -2386,11 +2343,7 @@ foo:
         }
         else
 #ifdef SUPPORT_LPK
-        if (ped->lpfnCharset) {
-            (* ped->lpfnCharset)(ped, EDITINTL_KEYMESSAGE, message,
-                    wParamLo, lParam);
-            }
-        }
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
         goto PassToDefaultWindowProc;
         break;

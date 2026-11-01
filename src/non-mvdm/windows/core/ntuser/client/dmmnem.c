@@ -42,7 +42,7 @@ int FindMnemChar(
         while (chc = *lpstr++) {
             if (((WCHAR)CharLower((LPWSTR)(DWORD)(UTCHAR)chc) == CH_PREFIX)
 #ifdef KANJI
-                || chc == CH_KANJI2 || chc == CH_KANJI3
+/* DIVERGENCE OPENNT-HOST-132: KANJI branch is not selected; see mirror register. */
 #endif
             ) {
                 chnext = (WCHAR)CharLowerW((LPWSTR)(DWORD)(UTCHAR)*lpstr);
@@ -53,13 +53,7 @@ int FindMnemChar(
                     return 0x01;
                 else {
 #ifdef KANJI
-
-                    /*
-                     * If we are looking for kanji accelerators, we can't stop
-                     * on the first accelerator character found since there may
-                     * be many of them in the same string.
-                     */
-                    continue;
+/* DIVERGENCE OPENNT-HOST-132: KANJI branch is not selected; see mirror register. */
 #else
                     return 0x00;
 #endif

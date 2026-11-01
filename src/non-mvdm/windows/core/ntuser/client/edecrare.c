@@ -20,41 +20,7 @@ typedef BOOL (*PFNABCWIDTHS)(HDC, UINT, UINT, LPABC);
 typedef BOOL (*PFNCHARWIDTH)(HDC, UINT, UINT, LPINT);
 
 #ifdef SUPPORT_LPK
-/***************************************************************************\
-* FindCharsetBlock()
-* Looks in the global array of CHARSETBLOCKs to find the CHARSETBLOCK for a
-* given charset, or for the charset of a given hdc.
-* Returns a pointer to the CHARSETBLOCK, or NULL if not found.
-\***************************************************************************/
-
-PCHARSETBLOCK FindCharsetBlock(HDC hDC, UINT iCharset)
-{
-    PCHARSETBLOCK pCS;
-    UINT i;
-
-    if (gnCharset == 0) {
-        return NULL;
-    }
-
-    if (hDC != NULL) {
-        iCharset = GetTextCharset(hDC);
-    }
-
-    for (pCS = gpCharset, i = 0; i < gnCharset; pCS++, i++) {
-        if (pCS->iCharset == iCharset) {
-            return pCS;
-        }
-    }
-    return NULL;
-}
-
-EDITCHARSETPROC GetCharsetCallback(UINT iCharset) {
-    PCHARSETBLOCK pCS;
-    if (pCS = FindCharsetBlock(NULL, iCharset)) {
-        return (EDITCHARSETPROC)(pCS->lpfnEditCall);
-    }
-    return NULL;
-}
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif // SUPPORT_LPK
 
 int ECGetCaretWidth(BOOL fMultiLine)
@@ -315,9 +281,7 @@ BOOL ECCreate(
     ECReleaseEditDC(ped, hdc, TRUE);
 
 #ifdef SUPPORT_LPK
-    if( (ped->lpfnCharset = GetCharsetCallback(ped->charSet))) {
-       return (BOOL)(* ped->lpfnCharset)(ped, EDITINTL_CREATE, HW(pwnd));
-    } else
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif // SUPPORT_LPK
     return TRUE;
 }
@@ -372,9 +336,7 @@ void ECNcDestroyHandler(
             UserLocalFree(ped->charWidthBuffer);
 
 #ifdef SUPPORT_LPK
-        if (ped->lpfnCharset) {
-            (* ped->lpfnCharset)(ped, EDITINTL_DESTROY);
-        }
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif // SUPPORT_LPK
 
         /*
@@ -422,8 +384,7 @@ void ECSetPasswordChar(
         ECReleaseEditDC(ped, hdc, TRUE);
     }
 #ifdef SUPPORT_LPK
-    if (ped->lpfnCharset)
-        (* ped->lpfnCharset)(ped, EDITINTL_SETPASSWORD, pwchar ? TRUE : FALSE);
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif // SUPPORT_LPK
 
     if (pwchar)
@@ -747,26 +708,7 @@ void   ECSetFont(
 
 
 #ifdef SUPPORT_LPK
-    if (ped->lpfnCharset)
-        //
-        // clean out current one. Each LPK is responsible for cleaning
-        // itself out. After this call there should be NO traces left in
-        // the ped.
-        //
-        (* ped->lpfnCharset)(ped, EDITINTL_SETFONT,
-                              (TEXTMETRIC FAR *)NULL, (HWND)0, (HDC)NULL);
-
-    if (ped->charSet != TextMetrics.tmCharSet)
-        {
-        //
-        // new charset, see if there is a helper available
-        //
-        ped->charSet = TextMetrics.tmCharSet;
-        ped->lpfnCharset = GetCharsetCallback(TextMetrics.tmCharSet);
-        }
-    if( ped->lpfnCharset )
-        (* ped->lpfnCharset)(ped, EDITINTL_SETFONT,
-                      (TEXTMETRIC FAR *)&TextMetrics, ped->hwnd, hdc);
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif // SUPPORT_LPK
 
     if (!hfont) {

@@ -30,10 +30,7 @@
 UINT MLGetLineWidth(HDC hdc, LPSTR lpstr, int nCnt, PED ped)
 {
 #ifdef SUPPORT_LPK
-    if (ped->lpfnCharset) {
-        return (* ped->lpfnCharset)(ped, EDITINTL_MLGETLINEWIDTH,
-                hdc, lpstr, nCnt);
-    }
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
     return(ECTabTheTextOut(hdc, 0, 0, 0, 0, lpstr, nCnt, 0, ped, 0, ECT_CALC, NULL));
 }
@@ -515,10 +512,7 @@ void MLIchToXYPos(
      * Find out how many pixels we indent the line for funny formats
      */
 #ifdef SUPPORT_LPK
-    if (ped->lpfnCharset) {
-        xOffset = (int)(* ped->lpfnCharset(ped, EDITINTL_MLICHTOXY, hdc,
-                iline, pLineStart, cch);
-    } else {
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
         if (ped->format != ES_LEFT) {
             xOffset = MLCalcXOffset(ped, hdc, iline);
@@ -529,7 +523,7 @@ void MLIchToXYPos(
         xPosition = ped->rcFmt.left + xOffset +
                 MLGetLineWidth(hdc, pLineStart, cch, ped);
 #ifdef SUPPORT_LPK
-    }
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
 
     ECUnlock(ped);
@@ -569,9 +563,7 @@ ICH MLMouseToIch(
     int iCurWidth;
 
 #ifdef SUPPORT_LPK
-    if (ped->lpfnCharset) {
-        return (ICH)(* ped->lpfnCharset)(ped, EDITINTL_MLMOUSETOICH, hdc, mousePt);
-    }
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
 
     /*
@@ -1390,13 +1382,7 @@ void MLBuildchLines(
             if(ped->rcFmt.right > ped->rcFmt.left) {
 
 #ifdef SUPPORT_LPK
-                if (ped->lpfnCharset) {
-                    ichLineEnd = ichLineStart +
-                        (ICH)(* ped->lpfnCharset)(ped, EDITINTL_CCHINWIDTH,
-                                hdc, (LPSTR)(ptext+ichLineStart * ped->cbChar),
-                                ichCRLF - ichLineStart,
-                                ped->rcFmt.right-ped->rcFmt.left, TRUE);
-                } else
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
                 {
                     /*
@@ -2745,15 +2731,7 @@ AddDelta:
             SelectObject(hdc, ped->hFont);
 
 #ifdef SUPPORT_LPK
-        if (ped->lpfnCharset)
-            //
-            // tell intl dll's so drawing will know of the change and do any
-            // updates BEFORE the ScrollDC and InvalidateRect.
-            //
-            fUp = (BOOL)(* ped->lpfnCharset)(ped, EDITINTL_MLSCROLL, hdc, dx,
-                           dy, (RECT FAR *)&rc, (RECT FAR *)&rcUpdate,
-                           fVertical, newPos, cmd, (SCROLLINFO  FAR *)&si);
-        else
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
             fUp = TRUE;
 
@@ -2816,9 +2794,7 @@ void MLSetFocus(
          * never end up showing properly.
          */
 #ifdef SUPPORT_LPK
-        if (ped->lpfnCharset)
-            bDoCaret = (UINT)(* ped->lpfnCharset)(ped, EDITINTL_SETFOCUS, hdc);
-        else
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
             bDoCaret = TRUE;
 
@@ -2890,9 +2866,7 @@ void MLKillFocus(
          * Destroy the caret
          */
 #ifdef SUPPORT_LPK
-        if (ped->lpfnCharset)
-            bKillCaret = (UINT)(* ped->lpfnCharset)(ped, EDITINTL_SETFOCUS, (HDC)NULL);
-        else
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
             bKillCaret = TRUE;
 
@@ -3110,27 +3084,7 @@ LONG MLEditWndProc(
         break;
 
 #ifdef SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]
-    case WM_KEYUP:
-    case WM_SYSKEYUP:
-        //
-          // if an intl LPK is present, give it first crack at the keys
-          // if it returns zero, dont process. Note that we DONT give it
-          // WM_CHAR messages.  It's not supposed to be to build strings
-          // but to process control keys.
-          //
-          // keyup msgs : didn't process here before, always jump to ECDefWndProc).
-          // syskeydown : only show LPK if NOT for combo box
-          // keydown    : if LPK says reject, dont process. if this screws
-          //          something cause the lpk processes something it
-          //              shouldn't, its the lpk's problem, not edit's.
-          //
-          if (ped->lpfnCharset) {
-                if ((* ped->lpfnCharset)(ped, EDITINTL_KEYMESSAGE, message,
-                    wParam, lParam) == 0) {
-                    break;
-                }
-        }
-        goto PassToDefaultWindowProc;
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
 
     case WM_KEYDOWN:
@@ -3140,12 +3094,7 @@ LONG MLEditWndProc(
          * lParam - modifiers such as repeat count etc. (not used)
          */
 #ifdef SUPPORT_LPK
-        if (ped->lpfnCharset) {
-            if ((* ped->lpfnCharset)(ped, EDITINTL_KEYMESSAGE, message,
-                    wParam, lParam) == 0) {
-                break;
-            }
-        }
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
         MLKeyDown(ped, (UINT)wParam, 0);
         break;
@@ -3157,12 +3106,7 @@ LONG MLEditWndProc(
          * lParam - not used
          */
 #ifdef SUPPORT_LPK
-        if (ped->lpfnCharset) {
-            if ((* ped->lpfnCharset)(ped, EDITINTL_KEYMESSAGE, message,
-                    wParam, lParam) == 0) {
-                break;
-            }
-        }
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
         MLKillFocus(ped);
         break;
@@ -3590,13 +3534,7 @@ void MLDrawText(
     }
 
 #ifdef SUPPORT_LPK
-    if (ped->lpfnCharset) {
-        HideCaret(ped->hwnd);
-        (* ped->lpfnCharset)(ped, EDITINTL_MLDRAWTEXT, hdc, ichStart, ichEnd);
-        ShowCaret(ped->hwnd);
-        MLSetCaretPosition(ped, hdc);
-        return ;
-    }
+/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
 #endif
 
     // If it is either centered or right-justified, then draw the whole lines.

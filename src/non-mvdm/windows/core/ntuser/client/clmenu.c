@@ -90,9 +90,7 @@ LPBYTE MenuLoadWinTemplates(
         RtlZeroMemory(&mii, sizeof(mii));
         mii.cbSize = sizeof(MENUITEMINFO);
 #ifdef MEMPHIS_MENUS
-        mii.fMask = MIIM_ID | MIIM_STATE | MIIM_FTYPE;
-        if ( lpmenuText )
-            mii.fMask |= MIIM_STRING;
+/* DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register. */
 #else
         mii.fMask = MIIM_TYPE | MIIM_ID | MIIM_STATE;
 #endif // MEMPHIS_MENUS
@@ -134,7 +132,7 @@ LPBYTE MenuLoadWinTemplates(
         mii.cch = (UINT)-1;
         mii.wID = menuId;
 #ifdef MEMPHIS_MENUS
-        mii.hbmpItem = NULL;
+/* DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register. */
 #endif // MEMPHIS_MENUS
         if (!NtUserThunkedMenuItemInfo(hMenu, MFMWFP_NOITEM, TRUE, TRUE,
                     &mii, lpmenuText ? &str : NULL, FALSE)) {
@@ -200,7 +198,7 @@ PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates(
         RtlZeroMemory(&mii, sizeof(mii));
         mii.cbSize = sizeof(MENUITEMINFO);
 #ifdef MEMPHIS_MENUS
-        mii.fMask = MIIM_ID | MIIM_STATE | MIIM_FTYPE ;
+/* DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register. */
 #else
         mii.fMask = MIIM_TYPE | MIIM_ID | MIIM_STATE;
 #endif // MEMPHIS_MENUS
@@ -227,11 +225,7 @@ PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates(
             NtUserSetMenuContextHelpId(hMenu,dwHelpID);
         }
 #ifdef MEMPHIS_MENUS
-        if ( lpMenuTemplate->mtString[0] ) {
-            lpmenuText = lpMenuTemplate->mtString;
-            mii.fMask |= MIIM_STRING;
-        } else
-            lpmenuText = NULL;
+/* DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register. */
 #else
         lpmenuText = lpMenuTemplate->mtString[0] ?
                 lpMenuTemplate->mtString : NULL;
@@ -275,7 +269,7 @@ PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates(
         mii.cch = (UINT)-1;
         mii.wID = menuId;
 #ifdef MEMPHIS_MENUS
-        mii.hbmpItem = NULL;
+/* DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register. */
 #endif // MEMPHIS_MENUS
         if (!NtUserThunkedMenuItemInfo(hMenu, MFMWFP_NOITEM, TRUE, TRUE,
                     &mii, &str, FALSE)) {

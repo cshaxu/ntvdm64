@@ -243,15 +243,7 @@ BOOL IsDialogMessageA(
 
     switch (lpmsg->message) {
 #ifdef FE_SB // IsDialogMessageA()
-    case WM_CHAR:
-    case EM_SETPASSWORDCHAR:
-        /*
-         * Build DBCS-aware message.
-         */
-        BUILD_DBCS_MESSAGE_TO_CLIENTW_FROM_CLIENTA(lpmsg->message,lpmsg->wParam,TRUE);
-        /*
-         * Fall through.....
-         */
+/* DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register. */
 #else
     case WM_CHAR:
     case EM_SETPASSWORDCHAR:
@@ -262,8 +254,7 @@ BOOL IsDialogMessageA(
     case WM_SYSDEADCHAR:
     case WM_MENUCHAR:
 #ifdef FE_IME // IsDialogMessageA()
-    case WM_IME_CHAR:
-    case WM_IME_COMPOSITION:
+/* DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register. */
 #endif // FE_IME
 
         RtlMBMessageWParamCharToWCS(lpmsg->message, (PDWORD)&lpmsg->wParam);

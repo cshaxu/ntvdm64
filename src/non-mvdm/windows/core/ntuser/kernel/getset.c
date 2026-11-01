@@ -86,7 +86,7 @@ DWORD xxxSetWindowLong(
                 case FNID_STATIC:
                 case FNID_EDIT:
 #ifdef FE_IME
-                case FNID_IME:
+/* DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register. */
 #endif
                     /*
                      * Allow the 0 index for controls to be set if it's

@@ -366,9 +366,7 @@ Return Value:
                     NetpAssert( sizeof(TCHAR) == (2*sizeof(CHAR)) );
                     if ( fixedWrite ) {
 #ifdef DBCS // RapConvertSingleEntry()
-                        NetpCopyWStrToStrDBCS(
-                                (LPSTR) OutStructure,       // dest
-                                (LPWSTR) InStructure);      // src
+/* DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register. */
 #else
                         NetpCopyWStrToStr(
                                 (LPSTR) OutStructure,       // dest
@@ -645,14 +643,7 @@ Return Value:
                 InStructure += inLength;
                 if (inUNICODE) {
 #ifdef DBCS // RapConvertSingleEntry()
-                    if( outUNICODE )
-                    {
-                        stringSize = STRLEN( (LPTSTR) stringPtr );
-                    }
-                    else
-                    {
-                        stringSize = NetpUnicodeToDBCSLen( stringPtr ) + 1;
-                    }
+/* DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register. */
 #else
                     stringSize = STRLEN( (LPTSTR) stringPtr );
 #endif // DBCS
@@ -750,8 +741,7 @@ Return Value:
                     } else if ( inUNICODE ) {
 
 #ifdef DBCS // RapConvertSingleEntry()
-                        NetpCopyWStrToStrDBCS( (LPSTR)*StringLocation,
-                            (LPTSTR)stringPtr );
+/* DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register. */
 #else
                         NetpCopyTStrToStr( (LPSTR)*StringLocation,
                             (LPTSTR)stringPtr );
@@ -1088,7 +1078,7 @@ Return Value:
                         stringSize = STRSIZE( (LPTSTR)stringPtr );
                         if (!outUNICODE) {
 #ifdef DBCS // RapConvertSingleEntry()
-                            stringSize = NetpUnicodeToDBCSLen( stringPtr )+1;
+/* DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register. */
 #else
                             stringSize = stringSize / sizeof(WCHAR);
 #endif // DBCS
@@ -1174,8 +1164,7 @@ Return Value:
                                 return NERR_NoRoom;
                             }
 #ifdef DBCS // RapConvertSingleEntry()
-                            NetpCopyWStrToStrDBCS( Source,
-                                (LPTSTR)stringPtr );
+/* DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register. */
 #else
                             NetpCopyTStrToStr( Source,
                                 (LPTSTR)stringPtr );
@@ -1267,14 +1256,7 @@ Return Value:
 
                 if (inUNICODE) {
 #ifdef DBCS // RapConvertSingleEntry ()
-                    if( outUNICODE )
-                    {
-                        stringLength = STRLEN( (LPTSTR)stringPtr ) + 1;
-                    }
-                    else
-                    {
-                        stringLength = NetpUnicodeToDBCSLen( stringPtr ) + 1;
-                    }
+/* DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register. */
 #else
                     stringLength = STRLEN( (LPTSTR)stringPtr ) + 1;
 #endif // DBCS
@@ -1415,8 +1397,7 @@ Return Value:
                         } else if ( inUNICODE ) {
 
 #ifdef DBCS // RapConvertSingleEntry ()
-                            NetpCopyWStrToStrDBCS( (LPSTR)*StringLocation,
-                                stringPtr );
+/* DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register. */
 #else
                             LPTSTR Source;
 

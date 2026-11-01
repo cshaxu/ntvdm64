@@ -397,10 +397,7 @@ void MLSetSelection(
     ECReleaseEditDC(ped, hdc, FALSE);
 
 #ifdef KOREA
-    /*
-     * Extra parameter specified interim character mode
-     */
-    MLEnsureCaretVisible(ped,NULL);
+/* DIVERGENCE OPENNT-HOST-132: KOREA branch is not selected; see mirror register. */
 #else
     if (!fDoNotScrollCaret)
         MLEnsureCaretVisible(ped);

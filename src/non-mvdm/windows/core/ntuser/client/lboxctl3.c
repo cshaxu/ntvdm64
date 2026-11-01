@@ -500,9 +500,7 @@ BOOL xxxDlgDirListHelper(
                  * Post lpszPathSpecClient, the client side pointer.
                  */
 #ifdef WASWIN31
-                PostMessage(hwndLB, wDirMsg, attrib &
-                        ~(DDL_DIRECTORY | DDL_DRIVES | DDL_POSTMSGS),
-                        (LONG)lpszPathSpecClient);
+/* DIVERGENCE OPENNT-HOST-132: WASWIN31 branch is not selected; see mirror register. */
 #else
                 /*
                  * On NT, keep DDL_POSTMSGS in wParam because we need to know
@@ -526,10 +524,7 @@ BOOL xxxDlgDirListHelper(
             }
 
 #ifdef WASWIN31
-            /*
-             * Strip out just the subdirectory and drive bits.
-             */
-            attrib &= (DDL_DIRECTORY | DDL_DRIVES);
+/* DIVERGENCE OPENNT-HOST-132: WASWIN31 branch is not selected; see mirror register. */
 #else
             //
             // B#1433

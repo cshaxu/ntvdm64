@@ -33,7 +33,7 @@ CONST BYTE gabObjectCreateFlags[TYPE_CTYPES] = {
     OCF_PROCESSOWNED,                                   /* keyboard layout */
     OCF_PROCESSOWNED,                                   /* keyboard file */
 #ifdef FE_IME
-    OCF_THREADOWNED | OCF_MARKTHREAD,                   /* input context */
+/* DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register. */
 #endif
 };
 

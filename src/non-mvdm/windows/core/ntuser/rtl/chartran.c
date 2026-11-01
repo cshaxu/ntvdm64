@@ -24,8 +24,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
     DWORD dwUni;
     NTSTATUS Status;
 #ifdef FE_SB // RtlMBMessageWParamCharToWCS()
-    BOOL  bWmCrIrDbcsChar = FALSE;
-    WORD  wAnsi = LOWORD(*pWParam);
+/* DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register. */
 #endif // FE_SB
     WORD CodePage = THREAD_CODEPAGE();
 
@@ -35,44 +34,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
 
     switch(msg) {
 #ifdef FE_SB // RtlMBMessageWParamCharToWCS()
-    case WM_CHAR:
-        //
-        // WM_CHAR's wParam format for WM_IME_REPORT:IR_DBCSCHAR
-        //
-        if (*pWParam & WMCR_IR_DBCSCHAR) {
-            //
-            // Mark this message is sent as IR_DBCSCHAR format.
-            //
-            bWmCrIrDbcsChar = TRUE;
-        }
-
-        //
-        // Fall through....
-        //
-    case WM_IME_CHAR:
-    case WM_IME_COMPOSITION:
-        //
-        // We need to re-align for Unicode convertsion..
-        // WM_CHAR/WM_IME_CHAR/WM_IME_COMPOSITION's wParam format :
-        //
-        // ReAlign IR_DBCS char format to regular sequence.
-        //
-        // From:
-        //
-        //  HIWORD(wParam)         = 0;
-        //  HIBYTE(LOWORD(wParam)) = DBCS LeadingByte.
-        //  LOBYTE(LOWORD(wParan)) = DBCS TrailingByte or SBCS character.
-        //
-        // To:
-        //  HIWORD(wParam)         = 0;
-        //  HIBYTE(LOWORD(wParam)) = DBCS TrailingByte.
-        //  LOBYTE(LOWORD(wParam)) = DBCS LeadingByte or SBCS character.
-        //
-        *pWParam = MAKE_WPARAM_DBCSCHAR(wAnsi);
-
-        //
-        // Fall through...
-        //
+/* DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register. */
 #else
     case WM_CHAR:
 #endif // FE_SB
@@ -108,11 +70,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
         }
 
 #ifdef FE_SB // RtlMBMessageWParamCharToWCS
-        //
-        // if this character is sent for WM_IME_REPORT:IR_DBCSCHAR, we mark it.
-        //
-        if (bWmCrIrDbcsChar)
-            dwUni |= WMCR_IR_DBCSCHAR;
+/* DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register. */
 #else
 #ifdef DEBUG
         if ((dwUni == 0) || (dwUni > 0xFF)) {

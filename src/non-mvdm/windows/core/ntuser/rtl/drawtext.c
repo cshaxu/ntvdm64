@@ -63,35 +63,7 @@ LONG GetPrefixCount(
                 chprintpos++;
             }
 #ifdef FE_SB // GetPrefixCount()
-        } else if (ch == CH_ENGLISHPREFIX) {
-
-            /*
-             * Yup - increment the count of characters removed during print.
-             */
-            chcount++;
-
-            /*
-             * Next character is a real one, mark its location.
-             */
-            chprefixloc = chprintpos;
-
-        } else if (ch == CH_KANJIPREFIX) {
-
-            /*
-             * We only support Alpha Numeric(CH_ENGLISHPREFIX).
-             * no support for Kana(CH_KANJIPREFIX).
-             */
-            /*
-             * Yup - increment the count of characters removed during print.
-             */
-            chcount++;
-
-            if(cch) {
-                /* don't copy the character */
-                chcount++;
-                lpstr++;
-                cch--;
-            }
+/* DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register. */
 #endif // FE_SB
         } else {
 
