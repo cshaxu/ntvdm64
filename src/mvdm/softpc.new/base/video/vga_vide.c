@@ -239,10 +239,7 @@ GLOBAL VOID vga_write_dot
 	IFN4(LONG, colour, LONG, page, LONG, pixcol, LONG, row)
 {
 #ifdef REAL_VGA
-	register sys_addr screen_offset;
-
-	screen_offset = video_pc_low_regen+8*row*sas_w_at_no_check(VID_COLS)+pixcol;
-	sas_store(screen_offset, colour); /* WOW - that's easy!! */
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 	long screen_offset;
 	UTINY bank;
@@ -273,21 +270,7 @@ GLOBAL VOID vga_sensible_graph_scroll_up
 	rowsdiff *= char_height;
 	lines *= char_height;
 #ifdef REAL_VGA
-	/* Not done for back M */
-	dest = video_pc_low_regen+sas_loadw(VID_ADDR)+
-		row*col_incr*char_height+col;
-	source = dest+lines*col_incr;
-	for(i=0;i<rowsdiff-lines;i++)
-	{
-		memcpy_16(dest,source,colsdiff);
-		source += col_incr;
-		dest += col_incr;
-	}
-	while(lines--)
-	{
-		memset_16(dest,attr,colsdiff);
-		dest += col_incr;
-	}
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 	dest = sas_w_at_no_check(VID_ADDR)+ row*col_incr*char_height+col;
 	source = dest+lines*col_incr;
@@ -382,7 +365,7 @@ GLOBAL VOID vga_read_attrib_char IFN3(LONG, col, LONG, row, LONG, page)
 	col,row,page);*/
 /* VGA 256 colour mode has only one page, so ignore 'page' */
 #ifdef REAL_VGA
-	screen = video_pc_low_regen+row*scan_length*char_height+8*col;
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 	screen = &EGA_plane0123[row*scan_length*char_height+8*col];
 #endif  /* REAL_VGA */
@@ -409,7 +392,7 @@ GLOBAL VOID vga_read_dot IFN3(LONG, page, LONG, pixcol, LONG, row)
 	
 /*printf("vga_read_dot(%d,%d,%d)\n",page,col,row);*/
 #ifdef REAL_VGA
-	screen = video_pc_low_regen+8*row*sas_w_at_no_check(VID_COLS)+pixcol;
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 	screen = &EGA_plane0123[8*row*sas_w_at_no_check(VID_COLS)+pixcol];
 #endif  /* REAL_VGA */

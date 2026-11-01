@@ -498,28 +498,7 @@ IMPORT VOID dispatch_q_event();
 
 #ifndef SFELLOW
 #ifdef SYNCH_TIMERS
-
-#define SYNCH_TICK()					\
-	{						\
-		PigSynchCount += 1;			\
-		if (cpu_heartbeat != 0)			\
-		{					\
-			if ((--cpu_heartbeat) == 0)	\
-			{				\
-				dispatch_q_event();	\
-				quick_mode = FALSE;	\
-			}				\
-		}					\
-	}
-
-#define QUICK_EVENT_TICK()	/* Nothing */
-
-GLOBAL void SynchTick IFN0()
-{
-	quick_mode = FALSE;
-	SYNCH_TICK();
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #else	/* !SYNCH_TIMERS */
 
 #define SYNCH_TICK()	/* Nothing */
@@ -666,12 +645,7 @@ GLOBAL	PHY_ADDR	SasWrapMask = 0xfffff;
 #else /* !PIG */
 GLOBAL UTINY *CCPU_M;
 #ifdef BACK_M
-#define SETUP_HOST_IP(x)							\
-   ip_phy_addr = usr_chk_byte(GET_CS_BASE() + GET_EIP(), PG_R) &		\
-		    SasWrapMask;						\
-   x = &CCPU_M[-ip_phy_addr];							\
-   ip_phy_addr = (ip_phy_addr & ~0xfff) + 0x1000;				\
-   pg_end = &CCPU_M[-ip_phy_addr];
+/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
 #else
 #define SETUP_HOST_IP(x)							\
    ip_phy_addr = usr_chk_byte(GET_CS_BASE() + GET_EIP(), PG_R) &		\
@@ -841,12 +815,7 @@ IFN1(
 #endif
 
 #ifdef SYNCH_TIMERS
-   /* If we have taken a fault the EDL Cpu will have checked on
-    * the resulting transfer of control.
-    */
-   if (took_absolute_toc || took_relative_jump)
-	   goto CHECK_INTERRUPT;
-   quick_mode = TRUE;
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #else /* SYNCH_TIMERS */
    /* go slow until we are sure we can go fast */
    quick_mode = FALSE;
@@ -4293,13 +4262,13 @@ TYPEFF_3:
       goto DO_INST;
 
 #ifdef SYNCH_TIMERS
- CHECK_INTERRUPT:
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #endif /* SYNCH_TIMERS */
    quick_mode = FALSE;
 
    /* Action RESET first. <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 #ifdef SYNCH_TIMERS
-   if (took_absolute_toc || took_relative_jump)
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #endif /* SYNCH_TIMERS */
    if (c_cpu_take_event(CPU_RESET_EXCEPTION_MASK))
       {
@@ -4319,7 +4288,7 @@ CPU_RESTORED_RESET:
    /* Action Insignia (ie non Intel) Processing. <<<<<<<<<<<<<<< */
 
 #ifdef SYNCH_TIMERS
-   if (took_absolute_toc || took_relative_jump)
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #endif /* SYNCH_TIMERS */
    if (c_cpu_take_event(CPU_SIGALRM_EXCEPTION_MASK))
       {
@@ -4361,7 +4330,7 @@ CPU_RESTORED_RESET:
       }
 
 #ifdef SYNCH_TIMERS
-   if (took_absolute_toc || took_relative_jump)
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #endif /* SYNCH_TIMERS */
 #ifndef SFELLOW
    if (GET_IF() && c_cpu_take_event(CPU_HW_INT_MASK))
@@ -4578,7 +4547,7 @@ LOCAL VOID
 /* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else /* PIG */
 #ifdef BACK_M
-      return *(*q)--;
+/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
 #else
       return *(*q)++;
 #endif /* BACK_M */

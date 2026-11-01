@@ -425,7 +425,7 @@ LOCAL void announce_variant IFN0()
 #endif /* MSWDVR */
 
 #ifdef BACK_M
-	strcat (buff, " BACK_M");
+/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
 #endif /* BACK_M */
 
 #ifdef GISP_SVGA
@@ -437,7 +437,7 @@ LOCAL void announce_variant IFN0()
 #endif /* DPMI */
 
 #ifdef IRET_HOOKS
-	strcat( buff , " IRET_HOOKS" );
+/* DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register. */
 #endif /* IRET_HOOKS */
 
 #ifdef SECURE
@@ -445,7 +445,7 @@ LOCAL void announce_variant IFN0()
 #endif
 
 #ifdef SYNCH_TIMERS
-	strcat( buff , " SYNCH_TIMERS" );
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #endif
 
 	p = buff;

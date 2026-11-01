@@ -772,9 +772,7 @@ typedef MMCALLPROC3216 UNALIGNED *PMMCALLPROC3216;
 
 
 #ifdef NULLSTRUCT
-typedef struct _MMSYSTEMGETVERSION16 {         /* mm5 */
-} MMSYSTEMGETVERSION16;
-typedef MMSYSTEMGETVERSION16 UNALIGNED *PMMSYSTEMGETVERSION;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 typedef struct _OUTPUTDEBUGSTR16 {             /* mm30 */
@@ -809,9 +807,7 @@ typedef STACKLEAVE16 UNALIGNED *PSTACKLEAVE16;
 ------------------------------------------------------------------------------*/
 
 #ifdef NULLSTRUCT
-typedef struct _JOYGETNUMDEVS16 {              /* mm101 */
-} JOYGETNUMDEVS16;
-typedef JOYGETNUMDEVS16 UNALIGNED *PJOYGETNUMDEVS16;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 typedef struct _JOYGETDEVCAPS16 {              /* mm102 */
@@ -864,9 +860,7 @@ typedef struct _JOYSETCALIBRATION16 {          /* mm109 */
 typedef JOYSETCALIBRATION16 UNALIGNED *PJOYSETCALIBRATION16;
 
 #ifdef NULLSTRUCT
-typedef struct _MIDIOUTGETNUMDEVS16 {          /* mm201 */
-} MIDIOUTGETNUMDEVS16;
-typedef MIDIOUTGETNUMDEVS16 UNALIGNED *PMIDIOUTGETNUMDEVS16;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 typedef struct _MIDIOUTGETDEVCAPS16 {          /* mm202 */
@@ -972,9 +966,7 @@ typedef struct _MIDIOUTMESSAGE3216 {             /* mm216 */
 typedef MIDIOUTMESSAGE3216 UNALIGNED *PMIDIOUTMESSAGE3216;
 
 #ifdef NULLSTRUCT
-typedef struct _MIDIINGETNUMDEVS16 {           /* mm301 */
-} MIDIINGETNUMDEVS16;
-typedef MIDIINGETNUMDEVS16 UNALIGNED *PMIDIINGETNUMDEVS16;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 typedef struct _MIDIINGETDEVCAPS16 {           /* mm302 */
@@ -1056,9 +1048,7 @@ typedef struct _MIDIINMESSAGE3216 {              /* mm313 */
 typedef MIDIINMESSAGE3216 UNALIGNED *PMIDIINMESSAGE3216;
 
 #ifdef NULLSTRUCT
-typedef struct _AUXGETNUMDEVS16 {              /* mm350 */
-} AUXGETNUMDEVS16;
-typedef AUXGETNUMDEVS16 UNALIGNED *PAUGGETNUMDEVS16;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 typedef struct _AUXGETDEVCAPS16 {              /* mm351 */
@@ -1089,9 +1079,7 @@ typedef struct _AUXOUTMESSAGE3216 {              /* mm354 */
 typedef AUXOUTMESSAGE3216 UNALIGNED *PAUXOUTMESSAGE3216;
 
 #ifdef NULLSTRUCT
-typedef struct _WAVEOUTGETNUMDEVS16 {          /* mm401 */
-} WAVEOUTGETNUMDEVS16;
-typedef WAVEOUTGETNUMDEVS16 UNALIGNED *PWAVEOUTGETNUMDEVS16;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 typedef struct _WAVEOUTGETDEVCAPS16 {          /* mm402 */
@@ -1222,9 +1210,7 @@ typedef struct _WAVEOUTMESSAGE3216 {             /* mm421 */
 typedef WAVEOUTMESSAGE3216 UNALIGNED *PWAVEOUTMESSAGE3216;
 
 #ifdef NULLSTRUCT
-typedef struct _WAVEINGETNUMDEVS16 {           /* mm501 */
-} WAVEINGETNUMDEVS16;
-typedef WAVEINGETNUMDEVS16 UNALIGNED *PWAVEINGETNUMDEVS16;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 typedef struct _WAVEINGETDEVCAPS16 {           /* mm502 */
@@ -1320,9 +1306,7 @@ typedef struct _TIMEGETSYSTEMTIME16 {          /* mm601 */
 typedef TIMEGETSYSTEMTIME16 UNALIGNED *PTIMEGETSYSTEMTIME16;
 
 #ifdef NULLSTRUCT
-typedef struct _TIMEGETTIME16 {                /* mm607 */
-} TIMEGETTIME16;
-typedef TIMEGETTIME16 UNALIGNED *PTIMEGETTIME16;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 typedef struct _TIMESETEVENT16 {               /* mm602 */

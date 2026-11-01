@@ -2701,22 +2701,7 @@ LOCAL YODA_COMMAND(do_trace)
 LOCAL IBOOL check_trace_environment IFN1(char *, cmd)
 {
 #ifdef SYNCH_TIMERS
-	if (getenv("InitialJumpCounter") == NULL)
-	{
-		printf("Must have done \"setenv InitialJumpCounter ...\" to use %s\n", cmd);
-		return FALSE;
-	}
-	if (getenv("DisableQuickTickRecal") == NULL)
-	{
-		printf("Must have done \"setenv DisableQuickTickRecal ...\" to use %s\n", cmd);
-		return FALSE;
-	}
-	if (getenv("DEFAULT_QTIMER_RATE") == NULL)
-	{
-		printf("Must have done \"setenv DisableQuickTickRecal ...\" to use %s\n", cmd);
-		return FALSE;
-	}
-	return TRUE;
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #else	/* !SYNCH_TIMERS */
 
 	printf("%s command is only available if the SoftPC has been built with -DSYNCH_TIMERS\n");
@@ -4349,30 +4334,7 @@ LOCAL YODA_COMMAND(do_chewy)
 #endif
 
 #ifdef SYNCH_TIMERS
-LOCAL YODA_COMMAND(do_qtrate)
-{
-	extern IU32 Q_timer_restart_val;
-	extern IU32 Q_timer_microsecs;
-	extern void IdealTimeInit();
-	UNUSED(str);
-	UNUSED(com);
-	UNUSED(ip);
-	UNUSED(len);
-	UNUSED(stop);
-
-	if (cs == 0)
-	{
-		printf("quick timer rate is 0x%x (%d)\n", Q_timer_restart_val, Q_timer_restart_val);
-	}
-	else
-	{
-		printf("setting quick timer rate to 0x%x (%d)\n", cs, cs);
-		Q_timer_restart_val = cs;
-		Q_timer_microsecs = cs;
-		IdealTimeInit();
-	}
-	return(YODA_LOOP);
-}
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #endif	/* SYNCH_TIMERS */
 
 #ifdef PROFILE
@@ -4771,7 +4733,7 @@ static struct
 #endif	/* GISP_CPU */
 
 #ifdef SYNCH_TIMERS
-{ "qtrate",	do_qtrate,	FALSE, "<rate>", "set quick timer rate" },
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #endif
 #ifdef A3CPU
 /* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */

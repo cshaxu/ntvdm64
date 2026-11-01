@@ -352,7 +352,7 @@ ERROR RECOVERY	  :	none.
 #include	"egaports.h"
 
 #ifdef GORE
-#include  "gore.h"
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #endif /* GORE */
 
 #include  "ga_mark.h"
@@ -1321,7 +1321,7 @@ set_banking IFN2(UTINY, rd_bank, UTINY, wrt_bank)
 		setVideov7_bank_vid_copy_off(woffs >> 4);
 
 #ifdef GORE
-	gd.max_vis_addr = get_screen_length() - 1 + woffs;
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #endif /* GORE */
 }
 

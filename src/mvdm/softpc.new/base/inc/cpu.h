@@ -64,21 +64,7 @@ extern  half_word       *haddr_of_src_string;
  */
  
 #ifdef BACK_M
-typedef struct
-{
-                half_word FOURTH_BYTE;
-                half_word THIRD_BYTE;
-                half_word SECOND_BYTE;
-                half_word OPCODE;
-}  OPCODE_FRAME;
-
-typedef struct
-{
-                signed_char FOURTH_BYTE;
-                signed_char THIRD_BYTE;
-                signed_char SECOND_BYTE;
-                signed_char OPCODE;
-}  SIGNED_OPCODE_FRAME;
+/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
 #else
 typedef struct
 {

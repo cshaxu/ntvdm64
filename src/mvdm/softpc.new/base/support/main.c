@@ -77,7 +77,7 @@ extern void host_applInit();
 #endif	/* ANSI */
 
 #ifdef REAL_VGA
-extern int screen_init;
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #endif
 
 /* Have global variables defined here to indicate what product to run as. */
@@ -290,14 +290,13 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 #endif /* GISP_SVGA */
 
 #ifdef REAL_VGA
-	if (screen_init == 0)
-	{
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #endif /* REAL_VGA */
 
   host_init_screen();
 
 #ifdef REAL_VGA
-	}
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #endif /* REAL_VGA */
 
 #ifdef IPC

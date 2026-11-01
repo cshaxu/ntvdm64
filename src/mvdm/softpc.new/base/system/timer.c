@@ -381,7 +381,7 @@ LOCAL unsigned long guess IPT0();
 LOCAL void throwaway IPT0();
 #endif
 #ifdef SYNCH_TIMERS
-GLOBAL void IdealTimeInit IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #else
 LOCAL void IdealTimeInit IPT0();
 #endif
@@ -2597,14 +2597,7 @@ void	axe_ticks IFN1(int, ticks)
 #endif
 
 #ifdef SYNCH_TIMERS
-
-GLOBAL void IdealTimeInit IFN0()
-{
-
-    extern IU32 Q_timer_restart_val;
-
-    idealInterval = Q_timer_restart_val;
-
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #else
 
 LOCAL void IdealTimeInit IFN0()

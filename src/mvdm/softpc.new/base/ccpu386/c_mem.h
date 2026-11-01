@@ -26,7 +26,7 @@ IMPORT UTINY *pg_end;	/* point up to which host may safely read
 /* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else	/* !PIG */
 #ifdef BACK_M
-#define DIFF_INST_BYTE(n, o) ((o) - (n))
+/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
 #else
 #define DIFF_INST_BYTE(n, o) ((n) - (o))
 #endif /* BACK_M */
@@ -37,8 +37,7 @@ IMPORT UTINY *pg_end;	/* point up to which host may safely read
 /* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else	/* !PIG */
 #ifdef BACK_M
-#define GET_INST_BYTE(x) \
-   ( (x) <= pg_end ? ccpu_new_code_page(&(x)) : *(x)-- )
+/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
 #else
 #define GET_INST_BYTE(x) \
    ( (x) >= pg_end ? ccpu_new_code_page(&(x)) : *(x)++ )

@@ -108,17 +108,7 @@ Defines are:
 #define unix_memmove(dst,src,len) memmove((dst),(src),(len))
 
 #ifdef	BACK_M
-#define	EM_host_address(offset) (EM_host_base_address + EM_size - offset)
-#define	EM_loads(from, to, length) memcpy(to - (length) + 1, get_byte_addr(from) - (length) + 1, length)
-#define	EM_stores(to, from, length) \
-	sas_overwrite_memory(to, length); \
-	CopyMemory(get_byte_addr(to) - (length) + 1, from - (length) + 1, length)
-#define	EM_moves(from,to,length) \
-	sas_overwrite_memory(to, length); \
-	MoveMemory(get_byte_addr(to) - (length) + 1, get_byte_addr(from) - (length) + 1, length)
-#define	EM_memcpy(to, from, length) \
-	MoveMemory((to) - (length) + 1, (from) - (length) + 1, length)
-#define	EM_pointer(ptr, length) (ptr + length - 1)
+/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
 #else
 #define	EM_host_address(offset) (EM_host_base_address + offset)
 #define	EM_loads(from, to, length) memcpy(to, get_byte_addr(from), length)

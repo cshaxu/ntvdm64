@@ -325,7 +325,7 @@ rdm0_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )
     while( count-- )
     {
 #ifdef BACK_M
-        *dest-- = *(planes + offset);
+/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
 #else
         *dest++ = *(planes + offset);
 #endif
@@ -409,8 +409,7 @@ rdm1_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )	/* used to cor
 	ULONG tcount, lsb;
 
 #ifdef BACK_M
-#define	PLUS -
-#define	MINUS +
+/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
 #else
 #define	PLUS +
 #define	MINUS -

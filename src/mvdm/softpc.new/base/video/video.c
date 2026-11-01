@@ -368,9 +368,7 @@ GLOBAL void vd_set_mode IFN0()
 	     * Clear the video area
 	     */
 #ifdef REAL_VGA
-	    sas_fillsw_16(video_pc_low_regen,
-				vd_mode_table[sas_hw_at_no_check(vd_video_mode)].clear_char,
-				 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 	    sas_fillsw(video_pc_low_regen,
 				vd_mode_table[sas_hw_at_no_check(vd_video_mode)].clear_char,
@@ -422,8 +420,7 @@ GLOBAL void vd_set_mode IFN0()
      * Clear the video area
      */
 #ifdef REAL_VGA
-    sas_fillsw_16(video_pc_low_regen, vd_mode_table[sas_hw_at_no_check(vd_video_mode)].clear_char,
-				 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
     sas_fillsw(video_pc_low_regen, vd_mode_table[sas_hw_at_no_check(vd_video_mode)].clear_char,
 				 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
@@ -802,7 +799,7 @@ LOCAL void sensible_text_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, i
     for(i = 0; i < rowsdiff-lines; i++)
     {
 #ifdef REAL_VGA
-		VcopyStr(&M[dest],&M[source], colsdiff*2);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		if( !screen_updated )
 			sas_move_bytes_forward (source, dest, colsdiff*2);
@@ -818,7 +815,7 @@ LOCAL void sensible_text_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, i
     while(lines--)
     {
 #ifdef REAL_VGA
-		sas_fillsw_16(dest, (attr << 8)|' ', colsdiff);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		if( !screen_updated )
 			sas_fillsw(dest, (attr << 8)|' ', colsdiff);
@@ -874,7 +871,7 @@ LOCAL void sensible_graph_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, 
 	for(i = 0; i < rowsdiff-lines; i++)
 	{
 #ifdef REAL_VGA
-		VcopyStr(&M[dest],&M[source], colsdiff);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		sas_move_bytes_forward (source,dest, colsdiff);
 #endif
@@ -882,7 +879,7 @@ LOCAL void sensible_graph_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, 
 		 * graphics mode has to cope with odd bank as well
 		 */
 #ifdef REAL_VGA
-		VcopyStr(&M[dest+ODD_OFF],&M[source+ODD_OFF], colsdiff);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		sas_move_bytes_forward (source+ODD_OFF,dest+ODD_OFF, colsdiff);
 #endif
@@ -895,8 +892,7 @@ LOCAL void sensible_graph_scroll_up IFN6(int, t_row, int, l_col, int, rowsdiff, 
 	while( lines-- )
 	{
 #ifdef REAL_VGA
-		sas_fills_16(dest, attr, colsdiff);
-		sas_fills_16(dest+ODD_OFF, attr, colsdiff);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		sas_fills(dest, attr, colsdiff);
 		sas_fills(dest+ODD_OFF, attr, colsdiff);
@@ -963,7 +959,7 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
     if (is_alpha) {
 	    for(i = 0; i < rowsdiff-lines; i++) {
 #ifdef REAL_VGA
-	        VcopyStr(&M[dest],&M[source], colsdiff*2);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		sas_move_bytes_forward (source,dest, colsdiff*2);
 #endif
@@ -975,7 +971,7 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
      else {
 	    for(i = 0; i < rowsdiff-lines; i++) {
 #ifdef REAL_VGA
-	        VcopyStr(&M[dest],&M[source], colsdiff);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		sas_move_bytes_forward (source,dest, colsdiff);
 #endif
@@ -983,7 +979,7 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
 	         * graphics mode has to cope with odd bank as well
 	         */
 #ifdef REAL_VGA
-	        VcopyStr(&M[dest+ODD_OFF],&M[source+ODD_OFF], colsdiff);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		sas_move_bytes_forward (source+ODD_OFF,dest+ODD_OFF, colsdiff);
 #endif
@@ -1001,7 +997,7 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
 		lines = 0; /* force termination */
 	    }
 #ifdef REAL_VGA
-	    sas_fillsw_16(dest, (attr << 8)|' ', colsdiff);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 	    sas_fillsw(dest, (attr << 8)|' ', colsdiff);
 #endif
@@ -1012,8 +1008,7 @@ LOCAL void kinky_scroll_up IFN7(int, t_row, int, l_col, int, rowsdiff, int, cols
 
 	while( lines-- ) {
 #ifdef REAL_VGA
-	    sas_fills_16(dest, attr, colsdiff);
-	    sas_fills_16(dest+ODD_OFF, attr, colsdiff);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 	    sas_fills(dest, attr, colsdiff);
 	    sas_fills(dest+ODD_OFF, attr, colsdiff);
@@ -1145,7 +1140,7 @@ LOCAL void sensible_text_scroll_down IFN6(int, t_row, int, l_col, int, rowsdiff,
 	for(i = 0; i < rowsdiff-lines; i++)
 	{
 #ifdef REAL_VGA
-		VcopyStr(&M[dest],&M[source], colsdiff*2);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		if( !screen_updated )
 			sas_move_bytes_forward (source, dest, colsdiff*2);
@@ -1159,7 +1154,7 @@ LOCAL void sensible_text_scroll_down IFN6(int, t_row, int, l_col, int, rowsdiff,
 	while(lines--)
 	{
 #ifdef REAL_VGA
-		sas_fillsw_16(dest, (attr << 8)|' ', colsdiff);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		if( !screen_updated )
 			sas_fillsw(dest, (attr << 8)|' ', colsdiff);
@@ -1212,8 +1207,7 @@ LOCAL void sensible_graph_scroll_down IFN6(int, t_row, int, l_col, int, rowsdiff
 		 */
 
 #ifdef REAL_VGA
-		VcopyStr(&M[dest],&M[source], colsdiff);
-		VcopyStr(&M[dest+ODD_OFF],&M[source+ODD_OFF], colsdiff);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		sas_move_bytes_forward (source, dest, colsdiff);
 		sas_move_bytes_forward (source+ODD_OFF, dest+ODD_OFF, colsdiff);
@@ -1227,8 +1221,7 @@ LOCAL void sensible_graph_scroll_down IFN6(int, t_row, int, l_col, int, rowsdiff
 	while( lines-- )
 	{
 #ifdef REAL_VGA
-		sas_fills_16(dest, attr, colsdiff);
-		sas_fills_16(dest+ODD_OFF, attr, colsdiff);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		sas_fills(dest, attr, colsdiff);
 		sas_fills(dest+ODD_OFF, attr, colsdiff);
@@ -1285,7 +1278,7 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
 	if (is_alpha) {
 	    for(i = 0; i < rowsdiff-lines; i++) {
 #ifdef REAL_VGA
-	        VcopyStr(&M[dest],&M[source], colsdiff*2);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		sas_move_bytes_forward (source, dest, colsdiff*2);
 #endif
@@ -1296,7 +1289,7 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
 	else {
 	    for(i = 0; i < rowsdiff-lines; i++) {
 #ifdef REAL_VGA
-	        VcopyStr(&M[dest],&M[source], colsdiff);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		sas_move_bytes_forward (source, dest, colsdiff);
 #endif
@@ -1304,7 +1297,7 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
 	         * graphics mode has to do odd & even banks
 	         */
 #ifdef REAL_VGA
-	        VcopyStr(&M[dest+ODD_OFF],&M[source+ODD_OFF], colsdiff);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		sas_move_bytes_forward (source+ODD_OFF, dest+ODD_OFF, colsdiff);
 #endif
@@ -1318,7 +1311,7 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
     if (is_alpha) {		/* alpha blank */
 	while(lines--) {
 #ifdef REAL_VGA
-	    sas_fillsw_16(dest, (attr << 8)|' ', colsdiff);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 	    sas_fillsw(dest, (attr << 8)|' ', colsdiff);
 #endif
@@ -1329,8 +1322,7 @@ LOCAL void kinky_scroll_down IFN7(int, t_row, int, l_col, int, rowsdiff, int, co
 
 	while(lines--) {
 #ifdef REAL_VGA
-	    sas_fills_16(dest, attr, colsdiff);
-	    sas_fills_16(dest+ODD_OFF, attr, colsdiff);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 	    sas_fills(dest, attr, colsdiff);
 	    sas_fills(dest+ODD_OFF, attr, colsdiff);
@@ -1502,7 +1494,7 @@ GLOBAL void vd_write_char_attrib IFN0()
 		/* place in memory */
 
 #ifdef REAL_VGA
-		sas_fillsw_16(video_pc_low_regen + cpos, (getBL() << 8) | getAL(), getCX());
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 		for(i = 0; i < getCX(); i++)
 		{
@@ -2093,20 +2085,7 @@ GLOBAL void vd_write_teletype IFN0()
     if(alpha_num_mode())
     {
 #ifdef REAL_VGA
-        /*
-         * tell the 6845 all about the change 
-         */
-	cur_pos = (sas_w_at_no_check(VID_ADDR)+vd_page_offset(vd_cursor_col,
-		vd_cursor_row))>>1; /* Word address, not byte */
-        outb(vd_addr_6845, R14_CURS_ADDRH);
-        outb(vd_addr_6845+1,  cur_pos >> 8);
-        outb(vd_addr_6845, R15_CURS_ADDRL);
-        outb(vd_addr_6845+1,  cur_pos & 0xff);
-	/*
-	 * save the current cursor position in the bios
-	 */
-	sas_store_no_check(current_cursor_col, vd_cursor_col);
-	sas_store_no_check(current_cursor_row , vd_cursor_row);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 	if(re_entrant)
         {
@@ -2594,31 +2573,7 @@ LOCAL void vd_dummy IFN0()
 }
 
 #ifdef REAL_VGA
-/* STF */
-GLOBAL sas_fillsw_16 IFN3(sys_addr, address, word, value, sys_addr, length)
-{
-    register word *to;
-
-    to = (word *)&M[address];
-    while(length--)
-	*to++ = value;
-}
-
-GLOBAL sas_fills_16 IFN3(sys_addr, address, half_word, value, sys_addr, length)
-{
-    register half_word *to;
-
-    to = (half_word *)&M[address];
-    while(length--)
-	*to++ = value;
-}
-/* STF */
-
-GLOBAL VcopyStr IFN3(half_word *, to, half_word *, from, int, len)
-{
-    while(len--)
-	*to++ = *from++;
-}
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef SEGMENTATION

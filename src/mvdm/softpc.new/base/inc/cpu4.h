@@ -64,13 +64,7 @@ typedef enum CPU_INT_TYPE CPU_INT_TYPE;
 IMPORT void		cpuEnableInterrupts IPT1(IBOOL, yes_or_no);
 
 #ifdef IRET_HOOKS
-#ifdef CCPU
-IMPORT   VOID c_Cpu_set_hook_selector  IPT1(IU16, selector);
-#define  Cpu_set_hook_selector         c_Cpu_set_hook_selector
-#else
-IMPORT   VOID a3_Cpu_set_hook_selector IPT1(IU16, selector);
-#define  Cpu_set_hook_selector         a3_Cpu_set_hook_selector
-#endif
+/* DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register. */
 #endif /* IRET_HOOKS */
 
 /*

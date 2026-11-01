@@ -479,11 +479,7 @@ IFN4(
 /* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
 #else /* !PIG */
 #ifdef SYNCH_TIMERS
-   if (doing_fault)
-      {
-      extern void SynchTick IPT0();
-      SynchTick();
-      }
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #endif /* SYNCH_TIMERS */
 #endif /* PIG */
    /* mark successful end to interrupt */

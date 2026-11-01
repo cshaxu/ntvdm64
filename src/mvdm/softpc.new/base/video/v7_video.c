@@ -448,8 +448,7 @@ v7vga_extended_set_mode()
 		else
 			clr_char = vd_mode_table[video_mode].clear_char;
 #ifdef REAL_VGA
-   		sas_fillsw_16(video_pc_low_regen, clr_char,
-				 	(video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
     	sas_fillsw(video_pc_low_regen, clr_char,
 				 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);

@@ -111,7 +111,7 @@ GLOBALS		  :	uses EGA_GRAPH struct, specially display_state to
 #include	"host_gfx.h"
 
 #ifdef GORE
-#include	"gore.h"
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #endif /* GORE */
 
 /* [3.1.2 DECLARATIONS]                                                 */
@@ -343,10 +343,7 @@ DISPLAY_MODE	mode;
 /* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
 #endif /* GISP_SVGA */
 #ifdef GORE
-			if (get_256_colour_mode())
-			    set_gfx_update_routines( process_object_list, EGA_GRAPHICS_MARKING, VGA_GRAPH_SCROLL );
-			else
-			    set_gfx_update_routines( process_object_list, EGA_GRAPHICS_MARKING, EGA_GRAPH_SCROLL );
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #else
 			if (get_256_colour_mode())
 			    set_gfx_update_routines( vga_graph_update, EGA_GRAPHICS_MARKING, VGA_GRAPH_SCROLL );
@@ -414,7 +411,7 @@ DISPLAY_MODE	mode;
 #endif /* GISP_SVGA */
 			do_display_trace("dumping EGA_GRAPH struct ...", dump_EGA_GRAPH());
 #ifdef GORE
-			set_gfx_update_routines( process_object_list, EGA_GRAPHICS_MARKING, NO_SCROLL );
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #else
 			set_gfx_update_routines( ega_graph_update, EGA_GRAPHICS_MARKING, NO_SCROLL );
 #endif /* GORE */

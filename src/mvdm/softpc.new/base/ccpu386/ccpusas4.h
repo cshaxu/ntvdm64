@@ -27,7 +27,7 @@ extern PHY_ADDR SasWrapMask;
 
 #if !defined(PIG)
 #ifdef BACK_M
-#define IncCpuPtrLS8(ptr) (ptr)--
+/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
 #else	/* BACK_M */
 #define IncCpuPtrLS8(ptr) (ptr)++
 #endif	/* BACK_M */

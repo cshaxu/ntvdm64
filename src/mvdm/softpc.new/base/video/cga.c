@@ -97,7 +97,7 @@ IMPORT void setReadPointers IPT1(IUH, readset);
 #include "ckmalloc.h"
 
 #ifdef REAL_VGA
-#include "avm361.h"
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 #include "host_gfx.h"
 #endif
@@ -604,7 +604,7 @@ switch (address) {
 		{
                     Ra_cursor_start = value;
 #ifdef REAL_VGA
-		    CRTC_REG(0xa, value);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #endif
 		    update_cursor_shape();
 		}
@@ -615,7 +615,7 @@ switch (address) {
 		{
                     Rb_cursor_end = (value & CURSOR_USED_BITS);
 #ifdef REAL_VGA
-		    CRTC_REG(0xb, value);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #endif
 		    update_cursor_shape();
 		}
@@ -637,7 +637,7 @@ switch (address) {
 			screen_refresh_required();
 		}
 #ifdef REAL_VGA
-		CRTC_REG(0xc, value);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #endif
                 break;
 
@@ -654,7 +654,7 @@ switch (address) {
 			screen_refresh_required();
 		}
 #ifdef REAL_VGA
-		CRTC_REG(0xd, value);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #endif
                 break;
 
@@ -1253,9 +1253,7 @@ LOCAL void cga_only_b_move IFN4(UTINY *, laddr, UTINY *, haddr, UTINY *, src,
 		{
 			dst_ptr += len;
 #ifdef	BACK_M
-			src_ptr -= len;
-			for ( ; len > 0; len--)
-				*(--dst_ptr) = *(++src_ptr);
+/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
 #else
 			src_ptr += len;
 			for ( ; len > 0; len--)
@@ -1265,8 +1263,7 @@ LOCAL void cga_only_b_move IFN4(UTINY *, laddr, UTINY *, haddr, UTINY *, src,
 		else
 		{
 #ifdef	BACK_M
-			for ( ; len > 0; len--)
-				*dst_ptr++ = *src_ptr--;
+/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
 #else
 			memcpy(dst_ptr, src_ptr, len);
 #endif	/* BACK_M */

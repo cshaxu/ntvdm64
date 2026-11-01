@@ -239,12 +239,7 @@ void gvi_init IFN1(half_word, v_adapter)
     }
 
 #ifdef GORE
-	/*
-	 *	GORE variables must be set up before doing any other
-	 *	graphics.
-	 */
-
-    init_gore_update();
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #endif /* GORE */
 
 /* Setting all these variables should be done in the appropriate xxx_init() */
@@ -325,6 +320,6 @@ void gvi_term IFN0()
     }
 
 #ifdef GORE
-    term_gore_update();
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #endif /* GORE */
 }

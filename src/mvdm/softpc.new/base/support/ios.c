@@ -465,7 +465,7 @@ GLOBAL void	inb IFN2(io_addr, io_address, half_word *, value)
 #ifdef VIRTUALISATION
 
 #ifdef SYNCH_TIMERS
-	value32 = 0;
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #endif	/* SYNCH_TIMERS */
 
 	if (IOVirtualised(io_address, &value32, BIOS_INB_OFFSET, (sizeof(IU8))))
@@ -543,7 +543,7 @@ GLOBAL void	inw IFN2(io_addr, io_address, word *, value)
 #ifdef VIRTUALISATION
 
 #ifdef SYNCH_TIMERS
-	value32 = 0;
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #endif	/* SYNCH_TIMERS */
 
 	if (IOVirtualised(io_address, &value32, BIOS_INW_OFFSET, (sizeof(IU16))))
@@ -616,7 +616,7 @@ GLOBAL void	ind IFN2(io_addr, io_address, IU32 *, value)
 	IU32 value32;
 
 #ifdef SYNCH_TIMERS
-	value32 = 0;
+/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
 #endif	/* SYNCH_TIMERS */
 
 	if (IOVirtualised(io_address, &value32, BIOS_IND_OFFSET, (sizeof(IU32)))) 

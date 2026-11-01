@@ -91,7 +91,7 @@ GLOBALS		  :	describe what exported data objects are
 #endif /* EGG */
 
 #ifdef GORE
-#include "gore.h"
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #endif /* GORE */
 
 #include "ga_mark.h"
@@ -3340,98 +3340,7 @@ boolean	dummy_scroll IFN6(int,dummy1,int,dummy2,int,dummy3,int,
 /*---------------------  End of scrolling routines --------------------------*/
 
 #ifdef GORE
-
-#ifdef GORE_PIG
-GLOBAL UTINY gore_copy[0x80000];	/* Big enough for enormous Super7 VGA modes */
-#endif /* GORE_PIG */
-
-LOCAL VOID
-gore_mark_byte_nch IFN0()
-{
-#ifdef GORE_PIG
-	gore_copy[(Ead >> 2) + (v7_write_bank << 16)] = gd.gd_b_wrt.mark_type;
-#endif /* GORE_PIG */
-
-	(*gu_handler.b_wrt)(( Ead >> 2 ) + ( v7_write_bank << 16 ));
-}
-
-LOCAL VOID
-gore_mark_word_nch IFN0()
-{
-#ifdef GORE_PIG
-	gore_copy[(Ead >> 2 ) + 1 + (v7_write_bank << 16)] =
-			gore_copy[(Ead >> 2) + (v7_write_bank << 16)] = gd.gd_w_wrt.mark_type;
-#endif /* GORE_PIG */
-
-	(*gu_handler.w_wrt)(( Ead >> 2 ) + ( v7_write_bank << 16 ));
-}
-
-LOCAL VOID
-gore_mark_string_nch IFN0()
-{
-	ULONG temp =  ( Ead >> 2 ) + ( v7_write_bank << 16 );
-
-#ifdef GORE_PIG
-	memfill( gd.gd_b_str.mark_type, &gore_copy[temp], &gore_copy[temp+V3-1] );
-#endif /* GORE_PIG */
-
-	(*gu_handler.b_str)( temp, temp + V3 - 1, V3 );
-}
-
-LOCAL VOID
-gore_mark_byte_ch4 IFN0()
-{
-	ULONG temp =  Ead + ( v7_write_bank << 16 );
-
-#ifdef GORE_PIG
-	if( temp < gd.dirty_low )
-		gd.dirty_low = temp;
-
-	if( temp > gd.dirty_high )
-		gd.dirty_high = temp;
-
-	gore_copy[temp] = gd.gd_b_wrt.mark_type;
-#endif /* GORE_PIG */
-
-	(*gu_handler.b_wrt)( temp );
-}
-
-LOCAL VOID
-gore_mark_word_ch4 IFN0()
-{
-	ULONG temp =  Ead + ( v7_write_bank << 16 );
-
-#ifdef GORE_PIG
-	if( temp < gd.dirty_low )
-		gd.dirty_low = temp;
-
-	if(( temp + 1 ) > gd.dirty_high )
-		gd.dirty_high = temp + 1;
-
-	gore_copy[temp + 1] = gore_copy[temp] = gd.gd_w_wrt.mark_type;
-#endif /* GORE_PIG */
-
-	(*gu_handler.w_wrt)( Ead + ( v7_write_bank << 16 ));
-}
-
-LOCAL VOID
-gore_mark_string_ch4 IFN0()
-{
-	ULONG temp =  Ead + ( v7_write_bank << 16 );
-	ULONG temp2 =  temp + V3 - 1;
-
-#ifdef GORE_PIG
-	if( temp < gd.dirty_low )
-		gd.dirty_low = temp;
-
-	if( temp2 > gd.dirty_high )
-		gd.dirty_high = temp2;
-
-	memfill( gd.gd_b_str.mark_type, &gore_copy[temp], &gore_copy[temp2] );
-#endif /* GORE_PIG */
-
-	(*gu_handler.b_str)( temp, temp2, V3 );
-}
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #endif /* GORE */
 
 #ifdef	EGG
@@ -3489,7 +3398,7 @@ GLOBAL VOID cga_mark_string IFN2(int, laddr, int, haddr)
 GLOBAL VOID ega_mark_byte IFN1(int, off_in)
 {
 #ifdef GORE
-	(*gu_handler.b_wrt)( off_in );
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #else
 	register int offset = off_in>>2;
 
@@ -3508,7 +3417,7 @@ GLOBAL VOID ega_mark_byte IFN1(int, off_in)
 GLOBAL VOID ega_mark_word IFN1(int, addr)
 {
 #ifdef GORE
-	(*gu_handler.w_wrt)( addr );
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #else
 
 	register	int	offset1 = addr >> 2;
@@ -3530,7 +3439,7 @@ GLOBAL VOID ega_mark_word IFN1(int, addr)
 GLOBAL VOID ega_mark_wfill IFN3(int, laddr, int, haddr, int, col)
 {
 #ifdef GORE
-	(*gu_handler.w_fill)( laddr, haddr, haddr - laddr + 1, col );
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #else
 
 	register	int	offset1 = laddr >> 2;
@@ -3553,7 +3462,7 @@ GLOBAL VOID ega_mark_wfill IFN3(int, laddr, int, haddr, int, col)
 GLOBAL VOID ega_mark_string IFN2(int, laddr, int, haddr)
 {
 #ifdef GORE
-	(*gu_handler.b_str)( laddr, haddr, haddr - laddr + 1 );
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #else
 	register	int	offset1 = laddr >> 2;
 	register	int	offset2 = haddr >> 2;
@@ -3580,7 +3489,7 @@ GLOBAL VOID screen_refresh_required IFN0()
 {
 
 #ifdef GORE
-	(*gu_handler.b_str)( 0, get_screen_length(), get_screen_length() );
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #endif /* GORE */
 
 #ifndef CPU_40_STYLE
@@ -3636,14 +3545,7 @@ set_mark_funcs IFN0()
 
 		case	EGA_GRAPHICS_MARKING:
 #ifdef GORE
-			reset_gore_ptrs();
-			gd.curr_line_diff = get_bytes_per_line();
-			gd.max_vis_addr = get_screen_length() - 1 + ( v7_write_bank << 16 );
-#ifdef	VGG
-			gd.shift_count = get_256_colour_mode() ? 0 : 3;
-#else
-			gd.shift_count = 3;
-#endif	/* VGG */
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #endif /* GORE */
 
 			update_alg.mark_byte = ega_mark_byte;
@@ -3656,10 +3558,7 @@ set_mark_funcs IFN0()
 			{
 				case UNCHAINED:
 #ifdef GORE
-					setVideomark_byte(gore_mark_byte_nch);
-					setVideomark_word(gore_mark_word_nch);
-
-					SET_VGLOBS_MARK_STRING(gore_mark_string_nch);
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #else
 #ifndef CPU_40_STYLE	/* EVID */
 /* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
@@ -3677,10 +3576,7 @@ set_mark_funcs IFN0()
 #ifdef	VGG
 				case CHAIN4:
 #ifdef GORE
-					setVideomark_byte(gore_mark_byte_ch4);
-					setVideomark_word(gore_mark_word_ch4);
-
-					SET_VGLOBS_MARK_STRING(gore_mark_string_ch4);
+/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
 #else
 #ifndef CPU_40_STYLE	/* EVID */
 /* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */

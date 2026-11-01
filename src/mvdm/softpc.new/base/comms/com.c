@@ -112,10 +112,7 @@ static struct ADAPTER_STATE
 	int com_baud_ind;
 	int had_first_read;
 #ifdef IRET_HOOKS
-	IUM32 batch_size;
-	IUM32 current_count;
-	IBOOL batch_running;
-	IBOOL qev_running;
+/* DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register. */
 #endif /* IRET_HOOKS */
 #ifdef NTVDM
     MODEM_STATUS_REG last_modem_status_value;
@@ -132,12 +129,7 @@ static struct ADAPTER_STATE
 
 
 #ifdef IRET_HOOKS
-/*
- * Also have an overall quick events running flag that is set, if either
- * adapter has an event running.
- */
-
-IBOOL qev_running = FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register. */
 #endif /* IRET_HOOKS */
 
 /*
@@ -297,7 +289,7 @@ LOCAL void next_batch IPT1(long, l_adapter);
 #ifdef NTVDM
 static void lsr_change(struct ADAPTER_STATE *asp, unsigned int error);
 #ifdef FIFO_ON
-static void recv_char_from_fifo(struct ADAPTER_STATE *asp);
+/* DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register. */
 #endif
 #endif
 
@@ -609,23 +601,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 				{
 #ifdef NTVDM
 #ifdef FIFO_ON
-                    if (asp->fifo_control_reg.bits.enabled) {
-                    recv_char_from_fifo(asp);
-                    *value = asp->rx_buffer;
-                    host_com_fifo_char_read(adapter);
-                    if (asp->rx_fifo_write_counter)
-                        /* say this if we have more char in
-                           the buffer to be deliveried
-                        */
-                        asp->line_status_reg.bits.data_ready = 1;
-                    else
-                        host_com_char_read(adapter,
-                            asp->int_enable_reg.bits.data_available);
-                    }
-                    else
-                    host_com_char_read(adapter,
-                       asp->int_enable_reg.bits.data_available
-                       );
+/* DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register. */
 #else /* !FIFO_ON */
                     host_com_char_read(adapter,
                     asp->int_enable_reg.bits.data_available
@@ -674,12 +650,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 				set_xmit_char_status(asp);
 			}
 #ifdef IRET_HOOKS
-			{
-			LOCAL IBOOL	com_hook_again IPT1(IUM32, adapter);
-			GLOBAL IBOOL is_hooked IPT1(IUM8, line_number);
-				if(!is_hooked(asp->hw_interrupt_priority))
-					com_hook_again(adapter);
-			}
+/* DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register. */
 #endif /* IRET_HOOKS */
 		}
 		else
@@ -1374,32 +1345,7 @@ void com_recv_char(int adapter)
     int error;
 
 #ifdef FIFO_ON
-    if(asp->fifo_control_reg.bits.enabled) {
-    /* pull data from serial driver until the fifo is full or
-       there are no more data
-    */
-    asp->rx_fifo_read_counter = 0;
-
-    asp->rx_fifo_write_counter = host_com_read_char(adapter,
-                   asp->rx_fifo,
-                   FIFO_BUFFER_SIZE
-                   );
-    /* if the total chars in the fifo is more than or equalt to the trigger
-       count, raise a RDA int, otherwise, raise a fifo time out int.
-       We will continue to delivery char available in the fifo until
-       the rx_fifo_write_counter reaches zero every time the application
-       read out the byte we put in rx_buffer
-    */
-    if (asp->rx_fifo_write_counter) {
-        /* we have at least one byte to delivery */
-        asp->line_status_reg.bits.data_ready = 1;
-        if (asp->rx_fifo_write_counter >= asp->fifo_trigger_counter)
-        raise_rda_interrupt(asp);
-        else
-        raise_fifo_timeout_interrupt(asp);
-    }
-    }
-    else
+/* DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register. */
 #endif
 
     {
@@ -1414,18 +1360,7 @@ void com_recv_char(int adapter)
     }
 }
 #ifdef FIFO_ON
-static void recv_char_from_fifo(struct ADAPTER_STATE *asp)
-{
-    int error;
-
-    asp->rx_buffer = asp->rx_fifo[asp->rx_fifo_read_counter].data;
-    error = asp->rx_fifo[asp->rx_fifo_read_counter++].error;
-    if (error != 0) {
-    lsr_change(asp, error);
-    raise_rls_interrupt(asp);
-    }
-    asp->rx_fifo_write_counter--;
-}
+/* DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register. */
 #endif
 
 #else /* NTVDM */
@@ -1526,12 +1461,7 @@ static void lsr_change(struct ADAPTER_STATE *asp, unsigned int new_lsr)
 */
     if (new_lsr & HOST_COM_FIFO_ERROR)
 #ifdef FIFO_ON
-    if (asp->fifo_control_reg.bits.enabled)
-        asp->line_status_reg.bits.fifo_error = 1;
-    else if (asp->line_control_reg.bits.parity_enabled == PARITYENABLE_OFF)
-        asp->line_status_reg.bits.framing_error = 1;
-    else
-        asp->line_status_reg.bits.parity_error = 1;
+/* DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register. */
 #else
     if (asp->line_control_reg.bits.parity_enabled == PARITYENABLE_OFF)
         asp->line_status_reg.bits.framing_error = 1;
@@ -1868,15 +1798,7 @@ static void set_baud_rate IFN1(int, adapter)
 			" delay for baud %d RX:%d TX:%d", bauds[i],
 			RX_delay[i], TX_delay[i]);
 #ifdef IRET_HOOKS
-#ifdef VARIABLE_TICK_COMMS
-		asp->batch_size = ((bauds[i] / BITS_PER_ASYNC_CHAR) /
-							(COMMS_QEV_PER_SEC/2)) + 1;
-		sure_note_trace2(RS232_VERBOSE,
-					"baud %d asp->batch_size =%d",bauds[i],asp->batch_size);
-#else /* VARIABLE_TICK_COMMS */
-		asp->batch_size = ((bauds[i] / BITS_PER_ASYNC_CHAR) /
-							COMMS_QEV_PER_SEC) + 1;
-#endif /* VARIABLE_TICK_COMMS */
+/* DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register. */
 #endif /* IRET_HOOKS */
 	}
 #else /* NTVDM */
@@ -2422,20 +2344,7 @@ static void com_reset IFN1(int, adapter)
 	set_out2(adapter);
 
 #ifdef IRET_HOOKS
-	/*
-	 * Remove any existing hook call-back, and re-instate it afresh.
-	 */
-
-	Ica_enable_hooking(asp->hw_interrupt_priority, NULL, adapter);
-	Ica_enable_hooking(asp->hw_interrupt_priority, com_hook_again, adapter);
-
-	/*
-	 * Clear the IRET status flags.
-	 */
-
-	asp->batch_running = FALSE;
-	asp->qev_running = FALSE;
-	asp->batch_size = 10;	/* sounds like a safe default ! */
+/* DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register. */
 #endif /* IRET_HOOKS */
 }
 

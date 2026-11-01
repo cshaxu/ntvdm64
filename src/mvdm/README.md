@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-525: replace unselected REAL_VGA, NULLSTRUCT, BACK_M,
+SYNCH_TIMERS, FIFO_ON, GORE and IRET_HOOKS branches with registered markers,
+retaining the conditional shells. Original body hashes and locations are in
+`../../artifacts/mvdm-audit/s12-legacy-devices.jsonl`.
+
 MVDM-HOST-DIV-524: replace unselected BIGEND and BIT_ORDER1 branches with
 markers while retaining their conditional shells. The observed Windows build
 uses little-endian and BIT_ORDER2. Original ranges and body hashes are in

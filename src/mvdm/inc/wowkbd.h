@@ -55,9 +55,7 @@ typedef struct _ANSITOOEMBUFF16 {       /* kb134 */
 typedef ANSITOOEMBUFF16 UNALIGNED *PANSITOOEMBUFF16;
 
 #ifdef NULLSTRUCT
-typedef struct _GETKBCODEPAGE16 {       /* kb132 */
-} GETKBCODEPAGE16;
-typedef GETKBCODEPAGE16 UNALIGNED *PGETKBCODEPAGE16;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 typedef struct _GETKEYBOARDTYPE16 {     /* kb130 */

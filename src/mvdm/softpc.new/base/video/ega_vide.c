@@ -1271,8 +1271,7 @@ GLOBAL void ega_set_mode IFN0()
 	if(!get_EGA_no_clear())
 	{
 #ifdef REAL_VGA
-    	    sas_fillsw_16(video_pc_low_regen, vd_mode_table[video_mode].clear_char,
-				 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else /* REAL_VGA */
     	    sas_fillsw(video_pc_low_regen, vd_mode_table[video_mode].clear_char,
 				 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
@@ -1987,7 +1986,7 @@ void ega_sensible_graph_scroll_up IFN6(int, row,
 	lines *= char_height;
 	source = dest+lines*col_incr;
 #ifdef REAL_VGA
-	vga_card_scroll_up(source, dest, rowsdiff, colsdiff, lines, attr, col_incr);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 	screen_updated = (col+colsdiff) <= col_incr;  /* Check for silly scroll */
 
@@ -2031,9 +2030,7 @@ void ega_sensible_graph_scroll_down IFN6(int, row,
 	rowsdiff *= char_height;
 	lines *= char_height;
 #ifdef REAL_VGA
-	dest += rowsdiff*col_incr-1; /* Last byte in destination */
-	source = dest-lines*col_incr;
-	vga_card_scroll_down(source, dest, rowsdiff, colsdiff, lines, attr, col_incr);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else
 	screen_updated = (col+colsdiff) <= col_incr;  /* Check for silly scroll */
 	if(screen_updated)
@@ -2121,7 +2118,7 @@ void ega_read_dot IFN3(int, page, int, col, int, row)
 	byte val;
 	byte mask;
 #ifdef	REAL_VGA
-	extern half_word vga_card_read_dot();
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #endif
 
 

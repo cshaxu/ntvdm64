@@ -141,9 +141,7 @@ extern half_word M[];
  */
 
 #ifdef BACK_M
-#define inc_M_ptr(p,o)	(p-(o))
-#define get_byte_addr(addr) ((IU8 *)((IHPE)Start_of_M_area + Length_of_M_area - 1 - (PHY_ADDR)(addr)))
-#define M_get_dw_ptr(address) ((IHPE)Start_of_M_area + Length_of_M_area - 1 - (long)(address) - 3)
+/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
 #else /* BACK_M */
 #define inc_M_ptr(p,o)	(p+(o))
 #define get_byte_addr(addr) ((IU8 *)((IHPE)Start_of_M_area + (PHY_ADDR)(addr)))
@@ -162,8 +160,7 @@ extern half_word M[];
 #define M_low (long)Start_of_M_area
 #define M_high (long)(Length_of_M_area-1)
 #ifdef BACK_M
-#define get_addr(type,address) (M_low+M_high- (long)(address) - (sizeof(type)-1))
-#define get_offset_into_M(p) (M_high - p)
+/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
 #else /* BACK_M */
 #define get_addr(type,address) (M_low+ (long)(address))
 #define get_offset_into_M(p) (p - M_low)
@@ -288,13 +285,7 @@ extern void sas_stores_from_transbuf IPT3(sys_addr, dest, host_addr, src, sys_ad
 /* Memory bounds for the colour graphics adaptor */
 
 #ifdef BACK_M
-
-#ifndef HERC_REGEN_BUFF
-#define CGA_REGEN_BUFF	0xBBFFFL
-#define MDA_REGEN_BUFF	0xB7FFFL
-#define HERC_REGEN_BUFF	0xBFFFFL
-#endif /* HERC_REGEN_BUFF */
-
+/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
 #else
 
 #ifndef HERC_REGEN_BUFF

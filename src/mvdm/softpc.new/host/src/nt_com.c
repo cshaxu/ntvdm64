@@ -739,39 +739,7 @@ GLOBAL CPU void host_com_close IFN1(int, adapter)
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 #ifdef FIFO_ON
-GLOBAL CPU UTINY host_com_read_char( int adapter, FIFORXDATA * buffer, UTINY count)
-{
-    CURRENT_ADAPTER();
-    UCHAR host_error;
-    RXBUFCHARTYPE CharType;
-    UTINY RetCount = count;
-   /* if xoff is in progress, don't read nothing */
-   if (!current->XOFFInProgress) {
-	while (count) {
-	    CharType = GetCharacterTypeInBuffer(current);
-	    if (CharType == RXCHAR || CharType == CHARINERROR) {
-		buffer->error = 0;
-		GetCharFromRXBuffer(current, CharType, &buffer->data, &host_error);
-		if (!host_error)
-		    buffer->error = MapHostToBaseError(host_error);
-		buffer++;
-		count--;
-	    }
-	    else
-		break;
-	}
-    }
-      /* Tell comms idle system that there has been comms activity */
-    IDLE_comlpt();
-    current->SuspendTickCounter = current->SuspendTimeoutTicks;
-    return (RetCount - count);
-
-}
-GLOBAL CPU void host_com_fifo_char_read(int adapter)
-{
-    CURRENT_ADAPTER();
-    current->CharReadFromUART = TRUE;
-}
+/* DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register. */
 #endif
 
 GLOBAL RXCPU VOID host_com_read IFN3(int, adapter, UTINY *, data, int *, error)

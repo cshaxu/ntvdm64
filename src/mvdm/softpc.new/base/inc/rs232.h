@@ -339,12 +339,7 @@ extern void tx_holding_register_empty(int adapter);
 #endif /* more than 2 serial ports */
 
 #ifdef IRET_HOOKS
-/*
- * A macro we need for IRET hooks, the number of bits in a an async
- * character on a comms line, which is about 8 (for the character)
- * plus two stop bits.
- */
-#define BITS_PER_ASYNC_CHAR 10
+/* DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register. */
 #endif /* IRET_HOOKS */
 
 /* BCN 2730 define generic macros which can be SVID3 or old style

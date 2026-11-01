@@ -40,9 +40,7 @@
 /* XLATON */
 
 #ifdef NULLSTRUCT
-typedef struct _CLOSESOUND16 {			/* s2 */
-} CLOSESOUND16;
-typedef CLOSESOUND16 UNALIGNED *PCLOSESOUND16;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 typedef struct _COUNTVOICENOTES16 {		/* s13 */
@@ -51,21 +49,15 @@ typedef struct _COUNTVOICENOTES16 {		/* s13 */
 typedef COUNTVOICENOTES16 UNALIGNED *PCOUNTVOICENOTES16;
 
 #ifdef NULLSTRUCT
-typedef struct _GETTHRESHOLDEVENT16 {		/* s14 */
-} GETTHRESHOLDEVENT16;
-typedef GETTHRESHOLDEVENT16 UNALIGNED *PGETTHRESHOLDEVENT16;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef NULLSTRUCT
-typedef struct _GETTHRESHOLDSTATUS16 {		/* s15 */
-} GETTHRESHOLDSTATUS16;
-typedef GETTHRESHOLDSTATUS16 UNALIGNED *PGETTHRESHOLDSTATUS16;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef NULLSTRUCT
-typedef struct _OPENSOUND16 {			/* s1 */
-} OPENSOUND16;
-typedef OPENSOUND16 UNALIGNED *POPENSOUND16;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 typedef struct _SETSOUNDNOISE16 {		/* s7 */
@@ -118,21 +110,15 @@ typedef struct _SETVOICETHRESHOLD16 {		/* s16 */
 typedef SETVOICETHRESHOLD16 UNALIGNED *PSETVOICETHRESHOLD16;
 
 #ifdef NULLSTRUCT
-typedef struct _STARTSOUND16 {			/* s9 */
-} STARTSOUND16;
-typedef STARTSOUND16 UNALIGNED *PSTARTSOUND16;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef NULLSTRUCT
-typedef struct _STOPSOUND16 {			/* s10 */
-} STOPSOUND16;
-typedef STOPSOUND16 UNALIGNED *PSTOPSOUND16;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 #ifdef NULLSTRUCT
-typedef struct _SYNCALLVOICES16 {		/* s12 */
-} SYNCALLVOICES16;
-typedef SYNCALLVOICES16 UNALIGNED *PSYNCALLVOICES16;
+/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
 #endif
 
 typedef struct _WAITSOUNDSTATE16 {		/* s11 */

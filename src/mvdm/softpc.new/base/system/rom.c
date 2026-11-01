@@ -204,7 +204,7 @@ OUTPUT:		None.
 GLOBAL void read_video_rom IFN0()
 {
 #ifdef REAL_VGA
-	read_rom (VGAROM_FILENAME, EGA_ROM_START);
+/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
 #else /* REAL_VGA */
 	PHY_ADDR romLength = 0;
 
