@@ -1,0 +1,22 @@
+[
+  {
+    "path": "src/mvdm/vdmredir/vrnetapi.c",
+    "start": 270,
+    "end": 278,
+    "removed_lines": 7,
+    "removed_sha256": "9ba7cff013403c899ee11fc682f3a7116cd67b9e700c80ecc33e71154b9cc57b",
+    "baseline": "2338f3ced",
+    "prior": "project-adapted printed computer/domain buffers",
+    "divergence": "MVDM-HOST-DIV-517"
+  },
+  {
+    "path": "src/mvdm/vdmredir/vrnmpipe.c",
+    "start": 1344,
+    "end": 1362,
+    "removed_lines": 17,
+    "removed_sha256": "5a6d2a8fe152dac0b16dfb6da6535fca739059f729f8d6c6624686b105d0bfde",
+    "baseline": "2338f3ced",
+    "prior": "project-adapted named-pipe debug output",
+    "divergence": "MVDM-HOST-DIV-517"
+  }
+]

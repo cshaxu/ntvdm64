@@ -656,13 +656,7 @@ Return Value:
         setCS(Handlers[IntNumber].CsSelector);
 
 #if DBG
-        if (Handlers[IntNumber].CsSelector != getCS()) {
-            char szFormat[] = "NTVDM Dpmi Error! Can't set CS to %.4X\n";
-            char szMsg[sizeof(szFormat)+30];
-       
-            wsprintf(szMsg, szFormat, Handlers[IntNumber].CsSelector);
-            OutputDebugString(szMsg);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
     }
 
@@ -838,7 +832,7 @@ Routine Description:
         //
         if (!BuildStackFrame(6, &VdmStackPointer, &NewSP)) {
 #if DBG
-            OutputDebugString("NTVDM: Dpmi encountered a stack fault!\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
             DpmiFaultHandler(STACK_FAULT, 0);
             return;
@@ -941,7 +935,7 @@ Routine Description:
 
         if (!BuildStackFrame(3, &VdmStackPointer, &NewSP)) {
 #if DBG
-            OutputDebugString("NTVDM: Dpmi encountered a stack fault!\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
             DpmiFaultHandler(STACK_FAULT, 0);
             return;
@@ -1102,13 +1096,7 @@ Return Value:
         SaveEIP);
 
 #if DBG
-    if (Handlers[IntNumber].CsSelector != getCS()) {
-        char szFormat[] = "NTVDM Dpmi Error! Can't set CS to %.4X\n";
-        char szMsg[sizeof(szFormat)+30];
-       
-        wsprintf(szMsg, szFormat, Handlers[IntNumber].CsSelector);
-        OutputDebugString(szMsg);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     DBGTRACE(DPMI_DISPATCH_FAULT, IntNumber, 0, 0);

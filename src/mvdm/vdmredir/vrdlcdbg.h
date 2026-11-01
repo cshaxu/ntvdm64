@@ -177,10 +177,7 @@ DumpDosAdapter(
 //
 
 #if DBG
-#define CHECK_CCB_COMMAND(pccb) \
-            ASSERT(IsCcbCommandValid(((PLLC_DOS_CCB)pccb)->uchDlcCommand))
-#define CHECK_CCB_RETCODE(pccb) \
-            ASSERT(IsCcbErrorCodeAllowable(((PLLC_DOS_CCB)pccb)->uchDlcCommand, ((PLLC_DOS_CCB)pccb)->uchDlcStatus))
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 #define CHECK_CCB_COMMAND(pccb)
 #define CHECK_CCB_RETCODE(pccb)

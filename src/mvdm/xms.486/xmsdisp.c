@@ -45,13 +45,7 @@ BOOL XMSDispatch (ULONG iSvc)
 {
 
 #if DBG
-
-    if (iSvc >= XMS_LASTSVC){
-	printf("XMS:Unimplemented SVC index %x\n",iSvc);
-	setCF(1);
-	return FALSE;
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     (apfnXMSSvc [iSvc])();

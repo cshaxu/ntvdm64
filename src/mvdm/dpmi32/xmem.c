@@ -90,7 +90,7 @@ Return Value:
     if (!NT_SUCCESS(Status)) {
         setCF(1);
 #if DBG
-        OutputDebugString("DPMI: DpmiAllocateXmem failed to get memory block\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         return;
     }
@@ -159,7 +159,7 @@ Return Value:
     if (!NT_SUCCESS(Status)) {
         setCF(1);
 #if DBG
-        OutputDebugString("DPMI: DpmiFreeXmem failed to free block\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         return;
     }
@@ -211,7 +211,7 @@ Return Value:
     if (!Status) {
         setCF(1);
 #if DBG
-        OutputDebugString("DPMI: DpmiAllocateXmem failed to get memory block\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         return;
     }
@@ -270,7 +270,7 @@ Return Value:
 
             if (!NT_SUCCESS(Status)) {
 #if DBG
-                OutputDebugString("DPMI: DpmiFreeXmem failed to free block\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
                 return;
             }
@@ -322,7 +322,7 @@ Return Value:
 
         if (!NT_SUCCESS(Status)) {
 #if DBG
-            OutputDebugString("DPMI: DpmiFreeXmem failed to free block\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
             return;
         }

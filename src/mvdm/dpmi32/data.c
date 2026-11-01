@@ -108,8 +108,7 @@ USHORT CurrentDtaOffset;
 // Selector limits
 //
 #if DBG
-ULONG SelectorLimit[LDT_SIZE];
-PULONG ExpSelectorLimit = SelectorLimit;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 PULONG ExpSelectorLimit = NULL;
 #endif

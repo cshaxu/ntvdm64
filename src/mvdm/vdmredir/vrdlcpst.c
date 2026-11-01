@@ -402,10 +402,7 @@ Return Value:
     PLLC_CCB cancelledReceive = NULL;
 
 #if DBG
-
-    CHAR reasonCode;
-    DWORD reasonCount;
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     IF_DEBUG(DLC_ASYNC) {
@@ -607,10 +604,7 @@ Return Value:
             }
 
 #if DBG
-
-            reasonCode = 'T';
-            reasonCount = pReadParms->Type.Event.usCcbCount;
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         }
@@ -1163,26 +1157,7 @@ Return Value:
             //
 
 #if DBG
-
-            //
-            // ensure that the CCB that we are removing from the head of the queue
-            // is the same one returned by PeekEvent
-            //
-
-            {
-                PLLC_CCB CcbAtQueueHead;
-
-                CcbAtQueueHead = GetEvent(adapterNumber);
-                if (pReadCcb != CcbAtQueueHead) {
-                    DbgPrint("VrDlcHwInterrupt: "
-                             "*** ERROR: GetEvent CCB (%x) != PeekEvent CCB (%x) ***\n",
-                             CcbAtQueueHead,
-                             pReadCcb
-                             );
-                    DbgBreakPoint();
-                }
-            }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 
             GetEvent(adapterNumber);
@@ -1197,30 +1172,7 @@ Return Value:
             //
 
 #if DBG
-
-            //
-            // ensure that the CCB that we are removing from the head of the queue
-            // is the same one returned by FindCompletedRead
-            //
-
-            {
-                PLLC_CCB CcbAtQueueHead;
-
-                CcbAtQueueHead = RemoveDeferredReceive(adapterNumber, stationId, &GetNewEvent);
-                if (pReadCcb != CcbAtQueueHead) {
-                    DbgPrint("VrDlcHwInterrupt: "
-                             "*** ERROR: GetEvent CCB (%x) != PeekEvent CCB (%x) ***\n",
-                             CcbAtQueueHead,
-                             pReadCcb
-                             );
-                    DbgBreakPoint();
-                }
-                if (GetNewEvent) {
-                    reasonCode = 'R';
-                    reasonCount = Adapters[adapterNumber].LocalBusyInfo[LINK_ID(stationId)].Depth;
-                }
-            }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 
             RemoveDeferredReceive(adapterNumber, stationId, &GetNewEvent);
@@ -1255,21 +1207,7 @@ Return Value:
         //
 
 #if DBG
-
-        IF_DEBUG(DLC_ASYNC) {
-            DPUT2("*** Calling ica_hw_interrupt from within ISR. Cause = %d %s ***\n",
-                    reasonCount,
-                    reasonCode == 'T' ? "multiple transmits" : "deferred I-Frames"
-                    );
-        }
-
-        IF_DEBUG(CRITICAL) {
-            CRITDUMP(("*** Calling ica_hw_interrupt from within ISR. Cause = %d %s ***\n",
-                        reasonCount,
-                        reasonCode == 'T' ? "multiple transmits" : "deferred I-Frames"
-                        ));
-        }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         IssueHardwareInterrupt();
@@ -1924,10 +1862,7 @@ Return Value:
         }
 
 #if DBG
-
-        //ASSERT(DosDlcFlowControl(AdapterNumber, StationId, LLC_SET_LOCAL_BUSY_BUFFER) == LLC_STATUS_SUCCESS);
-        ASSERT(DlcFlowControl(AdapterNumber, StationId, LLC_SET_LOCAL_BUSY_USER) == LLC_STATUS_SUCCESS);
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 
         //DosDlcFlowControl(AdapterNumber, StationId, LLC_SET_LOCAL_BUSY_BUFFER);
@@ -2330,16 +2265,7 @@ Return Value:
     ASSERT(LOBYTE(StationId) != 0);
 
 #if DBG
-
-    IF_DEBUG(DLC_ASYNC) {
-        DPUT4("DeferReceive: deferring I-Frame for %d.%04x. CCB = %08x. Current depth is %d\n",
-                AdapterNumber,
-                StationId,
-                pReadCcb,
-                Adapters[AdapterNumber].LocalBusyInfo[LINK_ID(StationId)].Depth
-                );
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     pQueue = &Adapters[AdapterNumber].LocalBusyInfo[LINK_ID(StationId)].Queue;
@@ -2354,19 +2280,7 @@ Return Value:
     }
 
 #if DBG
-
-    ++Adapters[AdapterNumber].LocalBusyInfo[LINK_ID(StationId)].Depth;
-    ASSERT(Adapters[AdapterNumber].LocalBusyInfo[LINK_ID(StationId)].Depth <= MAX_I_FRAME_DEPTH);
-
-    IF_DEBUG(CRITICAL) {
-        CRITDUMP(("DeferReceive: %d.%04x CCB=%08x Depth=%d\n",
-                 AdapterNumber,
-                 StationId,
-                 pReadCcb,
-                 Adapters[AdapterNumber].LocalBusyInfo[LINK_ID(StationId)].Depth
-                 ));
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 }
@@ -2574,9 +2488,7 @@ Return Value:
     }
 
 #if DBG
-
-    --Adapters[AdapterNumber].LocalBusyInfo[link].Depth;
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -2624,10 +2536,7 @@ Return Value:
         }
 
 #if DBG
-
-        //ASSERT(DosDlcFlowControl(AdapterNumber, StationId, LLC_RESET_LOCAL_BUSY_BUFFER) == LLC_STATUS_SUCCESS);
-        ASSERT(DlcFlowControl(AdapterNumber, StationId, LLC_RESET_LOCAL_BUSY_USER) == LLC_STATUS_SUCCESS);
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 
         //DosDlcFlowControl(AdapterNumber, StationId, LLC_RESET_LOCAL_BUSY_BUFFER);
@@ -3221,14 +3130,7 @@ Return Value:
     }
 
 #if DBG
-
-    IF_DEBUG(DLC_ASYNC) {
-        DPUT2("InitiateRead: returning pCcb=%x%c", pCcb, pCcb ? '\n' : ' ');
-        if (!pCcb) {
-            DPUT1("*ErrorStatus=%x\n", *ErrorStatus);
-        }
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     return pCcb;
@@ -3486,11 +3388,7 @@ Return Value:
     EnterCriticalSection(&Adapters[AdapterNumber].EventQueueCritSec);
 
 #if DBG
-
-    if (!Adapters[AdapterNumber].QueueElements) {
-        DPUT("FlushEventQueue: queue is EMPTY!\n");
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     while (Adapters[AdapterNumber].QueueElements) {
@@ -3630,7 +3528,7 @@ Return Value:
                     ReleaseReceiveResources(thisCcb);
 
 #if DBG
-                    --pAdapter->LocalBusyInfo[i].Depth;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
                     thisCcb = *pQueue;
@@ -3817,9 +3715,7 @@ Return Value:
 
 {
 #if DBG
-
-    LONG deferredInts;
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     IF_DEBUG(CRITICAL) {
@@ -3844,9 +3740,7 @@ Return Value:
     --HardwareIntsQueued;
 
 #if DBG
-
-    deferredInts = HardwareIntsQueued;
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -3873,15 +3767,7 @@ Return Value:
     LeaveCriticalSection(&HardwareIntCritSec);
 
 #if DBG
-
-    IF_DEBUG(CRITICAL) {
-        CRITDUMP(("*** EOF INT ACK (%d) ***\n", deferredInts));
-    }
-
-    IF_DEBUG(DLC_ASYNC) {
-        DPUT1("*** EOF INT ACK (%d) ***\n", deferredInts);
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 }
@@ -3914,9 +3800,7 @@ Return Value:
 
 {
 #if DBG
-
-    LONG deferredInts;
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     IF_DEBUG(CRITICAL) {
@@ -3941,9 +3825,7 @@ Return Value:
     HardwareIntsQueued -= Count;
 
 #if DBG
-
-    deferredInts = HardwareIntsQueued;
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -3959,15 +3841,7 @@ Return Value:
     LeaveCriticalSection(&HardwareIntCritSec);
 
 #if DBG
-
-    IF_DEBUG(CRITICAL) {
-        CRITDUMP(("*** EOF CancelHardwareInterrupts (%d) ***\n", deferredInts));
-    }
-
-    IF_DEBUG(DLC_ASYNC) {
-        DPUT1("*** EOF CancelHardwareInterrupts (%d) ***\n", deferredInts);
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 }

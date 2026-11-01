@@ -184,7 +184,7 @@ VOID host_EOI_hook(int IrqLine, int CallCount)
 {
      if ((ULONG)IrqLine >= sizeof(EoiHooks)/sizeof(EOIHOOKPROC)) {
 #if DBG
-         DbgPrint("ntvdm.Eoi_hook: Invalid IrqLine=%lx\n", (ULONG)IrqLine);
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
          return;
          }

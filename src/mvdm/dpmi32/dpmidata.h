@@ -209,7 +209,7 @@ extern USHORT CurrentDtaOffset;
 extern USHORT CurrentPspSelector;
 
 #if DBG
-extern ULONG SelectorLimit[LDT_SIZE];
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 extern ULONG IntelBase;

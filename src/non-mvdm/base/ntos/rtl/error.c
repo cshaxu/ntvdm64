@@ -178,7 +178,7 @@ Return Value:
     DbgPrint("RTL: ERROR_MR_MID_NOT_FOUND is being returned\n");
 
 #if DBG
-    DbgBreakPoint();
+/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
 #endif // DBG
 
 #endif // NTOS_KERNEL_RUNTIME

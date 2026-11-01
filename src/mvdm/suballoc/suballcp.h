@@ -55,11 +55,7 @@ Revision History:
 // Signature macros for SUBALLOCATION
 //
 #if DBG
-//
-// signature is "SubA"
-//
-#define INIT_SUBALLOC_SIGNATURE(p) p->Signature = (ULONG)0x41627553
-#define ASSERT_SUBALLOC(p) ASSERT((p->Signature == (ULONG)0x41627553))
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 #define INIT_SUBALLOC_SIGNATURE(p)
 #define ASSERT_SUBALLOC(p)
@@ -128,7 +124,7 @@ typedef enum {
 //
 typedef struct _SubAllocation {
 #if DBG
-    ULONG Signature;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
     PSACOMMITROUTINE CommitRoutine;
     PSACOMMITROUTINE DecommitRoutine;

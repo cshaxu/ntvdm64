@@ -24,10 +24,7 @@ Revision History:
 --*/
 
 #if DBG
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 #include <nt.h>
@@ -54,7 +51,7 @@ TerminateDlcEmulation(
 
 
 #if DBG
-FILE* hVrDebugLog = NULL;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 BOOLEAN
@@ -88,68 +85,7 @@ Return Value:
     BOOL ok;
 
 #if DBG
-    if (Reason == DLL_PROCESS_ATTACH) {
-
-        //
-        // a little run-time diagnostication, madam?
-        //
-
-        LPSTR ptr;
-
-        //
-        // override VrDebugFlags from VR environment variable
-        //
-
-        if (ptr = getenv("VR")) {
-            if (!_strnicmp(ptr, "0x", 2)) {
-                ptr += 2;
-            }
-            for (VrDebugFlags = 0; isxdigit(*ptr); ++ptr) {
-                VrDebugFlags = VrDebugFlags * 16
-                    + (*ptr
-                        - ('0' + ((*ptr <= '9') ? 0
-                            : ((islower(*ptr) ? 'a' : 'A') - ('9' + 1)))));
-            }
-            IF_DEBUG(DLL) {
-                DBGPRINT("Setting VrDebugFlags to %#08x from environment variable (VR)\n", VrDebugFlags);
-            }
-        }
-        IF_DEBUG(TO_FILE) {
-            if ((hVrDebugLog = fopen(VRDEBUG_FILE, "w+")) == NULL) {
-                VrDebugFlags &= ~DEBUG_TO_FILE;
-            } else {
-
-                char currentDirectory[256];
-                int n;
-
-                currentDirectory[0] = 0;
-                if (n = GetCurrentDirectory(sizeof(currentDirectory), currentDirectory)) {
-                    if (currentDirectory[n-1] == '\\') {
-                        currentDirectory[n-1] = 0;
-                    }
-                }
-                DbgPrint("Writing debug output to %s\\" VRDEBUG_FILE "\n", currentDirectory);
-            }
-        }
-        IF_DEBUG(DLL) {
-            DBGPRINT("VrDllInitialize: process %d Attaching\n", GetCurrentProcessId());
-        }
-    } else if (Reason == DLL_PROCESS_DETACH) {
-        IF_DEBUG(DLL) {
-            DBGPRINT("VrDllInitialize: process %d Detaching\n", GetCurrentProcessId());
-        }
-        if (hVrDebugLog) {
-            fclose(hVrDebugLog);
-        }
-    } else {
-        IF_DEBUG(DLL) {
-            DBGPRINT("VrDllInitialize: Thread %d.%d %staching\n",
-                     GetCurrentProcessId(),
-                     GetCurrentThreadId(),
-                     (Reason == DLL_THREAD_ATTACH) ? "At" : "De"
-                     );
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     if (Reason == DLL_PROCESS_ATTACH) {

@@ -75,8 +75,7 @@ VOID demDasdInit(VOID)
 VOID demAbsRead (VOID)
 {
 #if DBG
-    if (fShowSVCMsg & DEM_ABSDRD)
-        OutputDebugStringOem("DEM: INT 25 Called \n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
     demAbsReadWrite(FALSE);
 }
@@ -108,8 +107,7 @@ VOID demAbsRead (VOID)
 VOID demAbsWrite(VOID)
 {
 #if DBG
-    if (fShowSVCMsg & DEM_ABSWRT)
-        OutputDebugStringOem("DEM: INT 26 Called \n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
     demAbsReadWrite(TRUE);
 }
@@ -148,15 +146,7 @@ VOID demAbsReadWrite(BOOL IsWrite)
 	return;
     }
 #if DBG
-    if (fShowSVCMsg & (DEM_ABSDRD | DEM_ABSWRT)) {
-	sprintf(demDebugBuffer, "Drive Number: %d\n", Drive);
-	OutputDebugStringOem(demDebugBuffer);
-	sprintf(demDebugBuffer, "StartSector: %d\n", StartSector);
-	OutputDebugStringOem(demDebugBuffer);
-	sprintf(demDebugBuffer, "Total Sectors: %d\n", Sectors);
-	OutputDebugStringOem(demDebugBuffer);
-	sprintf(demDebugBuffer, "Buffer: %x:%x\n", BufferSeg, BufferOff);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     if (IsWrite)
@@ -176,10 +166,7 @@ VOID demAbsReadWrite(BOOL IsWrite)
    if (SectorsReturned != Sectors) {
 	LastError = GetLastError();
 #if DBG
-	if (fShowSVCMsg & (DEM_ABSDRD | DEM_ABSWRT)) {
-	    sprintf(demDebugBuffer, "dem: AbsRDWR Failed, error=%lx\n", LastError);
-	    OutputDebugStringOem(demDebugBuffer);
-	}
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 	setAX(demWinErrorToDosError(LastError));
 	setCF(1);

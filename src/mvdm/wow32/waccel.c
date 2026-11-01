@@ -256,7 +256,7 @@ HACCEL CreateAccel32(VPVOID vpAccel16, DWORD cbAccel16)
     HACCEL  hAccel = (HACCEL)NULL;
     UINT    i;
 #if DBG
-    UINT    LastKeyIndex = 0xffffffff;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -277,9 +277,7 @@ HACCEL CreateAccel32(VPVOID vpAccel16, DWORD cbAccel16)
             for (i=0; i<nElem16; ++i) {
                  lpAccel[i].fVirt = *(LPBYTE)(pAccel16);
 #if DBG
-                 if ((lpAccel[i].fVirt & 0x80) && i < LastKeyIndex) {
-                    LastKeyIndex = i;
-                 }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
                  ((LPBYTE)pAccel16)++;
                  lpAccel[i].key   = FETCHWORD(*(LPWORD)pAccel16);
@@ -289,11 +287,7 @@ HACCEL CreateAccel32(VPVOID vpAccel16, DWORD cbAccel16)
             }
 
 #if DBG
-            if (LastKeyIndex == 0xffffffff) {
-                LOGDEBUG(LOG_ALWAYS, ("WOW::CreateAccel32 : no LastKey found in 16-bit haccel\n"));
-            } else if (LastKeyIndex < nElem16-1) {
-                LOGDEBUG(LOG_ALWAYS, ("WOW::CreateAccel32 : bogus LastKey flags ignored in 16-bit haccel\n"));
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
             hAccel = CreateAcceleratorTable(lpAccel, i);
             free_w(lpAccel);

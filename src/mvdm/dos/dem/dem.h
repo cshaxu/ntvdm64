@@ -249,9 +249,7 @@ VOID demPipeFileEOF	    (VOID);
 /** Debug Function Prototypes */
 
 #if DBG
-
-VOID demPrintMsg (ULONG iMsg);
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 
 #define demPrintMsg(x)

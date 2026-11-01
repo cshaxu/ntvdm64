@@ -50,13 +50,7 @@ Revision History:
 
 
 #if DBG
-
-extern DWORD RappTrace;
-
-#define DEBUG if (TRUE)
-
-#define IF_DEBUG(Function) if (RappTrace & RAP_DEBUG_ ## Function)
-
+/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
 #else
 
 #define DEBUG if (FALSE)

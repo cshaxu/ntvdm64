@@ -194,7 +194,7 @@ Return Value:
             // BUGBUG: Write this to the eventlog file
             //
 #if DBG
-            DbgPrint( "   Unmapped NT status is " FORMAT_NTSTATUS "\n", NtStatus);
+/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
 #endif
             return NERR_InternalError;
     }

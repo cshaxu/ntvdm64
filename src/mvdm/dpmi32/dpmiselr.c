@@ -36,7 +36,7 @@ Revision History:
 #include "ntvdm-exe/softpc/include/mvdm_softpc_wow_page_domain.h"
 
 #if DBG
-USHORT CheckValue=0;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 #ifndef i386
@@ -254,7 +254,7 @@ Return Value:
 
             FlatAddress[(registerAX >> 3) + i] = Base;
 #if DBG
-            SelectorLimit[(registerAX >> 3) + i] = Limit;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 #if defined(CPU_40_STYLE)
             ULONG Selector = registerAX + i * sizeof(LDT_ENTRY);
@@ -312,12 +312,7 @@ Return Value:
     
 #ifndef i386
 #if DBG
-    //
-    // debugbug
-    //
-    if (registerAX == CheckValue) {
-        force_yoda();    
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 #endif // not i386
 }

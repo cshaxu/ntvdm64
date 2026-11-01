@@ -140,8 +140,7 @@ Return Value:
 
     if (SvcCode > LAST_VR_FUNCTION) {
 #if DBG
-        DbgPrint("Error: VrDisp: Unsupported SVC code: %d\n", SvcCode);
-        VrUnsupportedFunction();
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         return FALSE;
     }

@@ -132,14 +132,7 @@ Return Value:
         sizeof(NCBW));
 
 #if DBG
-    IF_DEBUG(NETBIOS) {
-        DBGPRINT("VrNetbios5c: NCB @ %04x:%04x Command=%02x pncbw=%08x\n",
-                 es,
-                 bx,
-                 pncb->ncb_command,
-                 pncbw
-                 );
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     if ( pncbw == NULL ) {
@@ -311,17 +304,7 @@ Return Value:
     PNCB pdosNcb = pncbw->ncb_original_ncb;
 
 #if DBG
-
-    IF_DEBUG(NETBIOS) {
-        DBGPRINT("Netbios32Post: NCB @ %04x:%04x Command=%02x ANR=%08x. pncbw @ %08x\n",
-                 pncbw->ncb_es,
-                 pncbw->ncb_bx,
-                 pncbw->ncb_command,
-                 READ_DWORD(&pdosNcb->ncb_post),
-                 pncbw
-                 );
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     if ( READ_DWORD(&pdosNcb->ncb_post) ) {
@@ -382,9 +365,7 @@ Return Value:
 {
 
 #if DBG
-    IF_DEBUG(NETBIOS) {
-        DBGPRINT("Netbios5cInterrupt\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     EnterCriticalSection( &PostCrit );
@@ -403,14 +384,7 @@ Return Value:
         pncb = pncbw->ncb_original_ncb;
 
 #if DBG
-        IF_DEBUG(NETBIOS) {
-            DBGPRINT("Netbios5cInterrupt returning pncbw: %lx, 16-bit NCB: %04x:%04x Command=%02x\n",
-                     pncbw,
-                     pncbw->ncb_es,
-                     pncbw->ncb_bx,
-                     pncbw->ncb_command
-                     );
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         //  Copy back the fields that might have changed during the call.

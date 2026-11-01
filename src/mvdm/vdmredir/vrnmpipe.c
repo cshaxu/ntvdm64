@@ -246,8 +246,7 @@ ForgetPipeIo(
     );
 
 #if DBG
-VOID DumpOpenPipeList(VOID);
-VOID DumpRequestQueue(VOID);
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 //
@@ -309,15 +308,7 @@ Return Value:
     POPEN_NAMED_PIPE_INFO OpenNamedPipeInfo;
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrGetNamedPipeInfo(0x%08x, %d, %04x:%04x, %d)\n",
-                 HANDLE_FROM_WORDS(getBP(), getBX()),
-                 getDX(),
-                 getDS(),
-                 getSI(),
-                 getCX()
-                 );
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -386,37 +377,14 @@ Return Value:
     } else {
 
 #if DBG
-
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrGetNamedPipeInfo: Error: can't map handle 0x%08x\n", Handle);
-        }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         SET_ERROR(ERROR_INVALID_HANDLE);
     }
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        if (getCF()) {
-            DbgPrint("VrGetNamedPipeInfo: returning ERROR: %d\n", getAX());
-        } else {
-            DbgPrint("VrGetNamedPipeInfo: returning OK. PIPEINFO:\n"
-                     "cbOut     %04x\n"
-                     "cbIn      %04x\n"
-                     "cbMaxInst %02x\n"
-                     "cbCurInst %02x\n"
-                     "cbName    %02x\n"
-                     "szName    %s\n",
-                     READ_WORD(&PipeInfo->cbOut),
-                     READ_WORD(&PipeInfo->cbIn),
-                     READ_BYTE(&PipeInfo->cbMaxInst),
-                     READ_BYTE(&PipeInfo->cbCurInst),
-                     READ_BYTE(&PipeInfo->cbName),
-                     READ_BYTE(&PipeInfo->szName)
-                     );
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 }
@@ -466,9 +434,7 @@ Return Value:
     WORD    PipeHandleState;
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrGetNamedPipeHandleState\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     Handle = HANDLE_FROM_WORDS(getBP(), getBX());
@@ -550,9 +516,7 @@ Return Value:
 #define ILLEGAL_NMP_SETMODE_BITS    ~(NP_NBLK | NP_RMESG | NP_WMESG)
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrSetNamedPipeHandleState(0x%08x, %04x)\n", Handle, getCX());
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -581,11 +545,7 @@ Return Value:
     if (!(Ok = SetNamedPipeHandleState(Handle, &WinPipeMode, NULL, NULL))) {
 
 #if DBG
-
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("Error: VrSetNamedPipeHandleState: returning %d\n", GetLastError());
-        }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         SET_ERROR(VrpMapLastError());
@@ -638,14 +598,7 @@ Return Value:
     BOOL Ok;
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrPeekNamedPipe(0x%08x, %04x:%04x, %d)\n",
-                 HANDLE_FROM_WORDS(getBP(), getBX()),
-                 getDS(),
-                 getSI(),
-                 getCX()
-                 );
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     Handle = HANDLE_FROM_WORDS(getBP(), getBX());
@@ -693,22 +646,14 @@ Return Value:
         setCF(0);
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrPeekNamedPipe: Ok: %d bytes peeked, %d avail, %d left in message\n",
-                     BytesRead,
-                     BytesAvailable,
-                     BytesLeftInMessage
-                     );
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     } else {
         SET_ERROR(VrpMapLastError());
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrPeekNamedPipe: Error %d\n", getAX());
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         BytesRead = 0;
@@ -772,17 +717,7 @@ Return Value:
     HANDLE Handle;
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrTransactNamedPipe(0x%08x, TxLen=%d, TxBuf=%04x:%04x, RxLen=%d, RxBuf=%04x:%04x)\n",
-                 HANDLE_FROM_WORDS(getBP(), getBX()),
-                 getCX(),
-                 getDS(),
-                 getSI(),
-                 getDX(),
-                 getES(),
-                 getDI()
-                 );
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -822,9 +757,7 @@ Return Value:
         if (Error == ERROR_IO_PENDING) {
 
 #if DBG
-            IF_DEBUG(NAMEPIPE) {
-                DbgPrint("VrTransactNamedPipe: Ok, Waiting on hEvent...\n");
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
             Error = WaitForSingleObject(pipeio.Overlapped.hEvent, NAMED_PIPE_TIMEOUT);
@@ -846,9 +779,7 @@ Return Value:
         if (Error == NO_ERROR || Error == ERROR_MORE_DATA) {
 
 #if DBG
-            IF_DEBUG(NAMEPIPE) {
-                DbgPrint("WaitForSingleObject completed. BytesRead=%d\n", BytesRead);
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
             setCX((WORD)BytesRead);
@@ -869,9 +800,7 @@ Return Value:
             if (Error == WAIT_TIMEOUT) {
 
 #if DBG
-                IF_DEBUG(NAMEPIPE) {
-                    DbgPrint("VrTransactNamedPipe: Wait timed out: closing handle %08x\n", Handle);
-                }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
                 CloseHandle(Handle);
                 VrpRemoveOpenNamedPipeInfo(Handle);
@@ -881,9 +810,7 @@ Return Value:
             SET_ERROR((WORD)Error);
 
 #if DBG
-            IF_DEBUG(NAMEPIPE) {
-                DbgPrint("VrTransactNamedPipe: Error: %d\n", getAX());
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         }
 
@@ -949,9 +876,7 @@ Return Value:
     StructurePointer = (PDOS_CALL_NAMED_PIPE_STRUCT)POINTER_FROM_WORDS(getDS(), getSI());
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrCallNamedPipe(%s)\n", (LPSTR)READ_FAR_POINTER(&StructurePointer->lpPipeName));
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     Ok = CallNamedPipe((LPSTR)READ_FAR_POINTER(&StructurePointer->lpPipeName),
@@ -966,9 +891,7 @@ Return Value:
         SET_ERROR(VrpMapLastError());
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrCallNamedPipe: Error: CallNamedPipe returns %u\n", getAX());
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
     } else {
         WRITE_WORD(READ_FAR_POINTER(&StructurePointer->lpBytesRead), (WORD)BytesRead);
@@ -976,9 +899,7 @@ Return Value:
         setCF(0);
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrCallNamedPipe: Ok\n");
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
     }
 }
@@ -1025,12 +946,7 @@ Return Value:
     //
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrWaitNamedPipe(%s, %d)\n",
-                    LPSTR_FROM_WORDS(getDS(), getDX()),
-                    DWORD_FROM_WORDS(getBX(), getCX())
-                    );
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     Ok = WaitNamedPipe(LPSTR_FROM_WORDS(getDS(), getDX()),
@@ -1041,9 +957,7 @@ Return Value:
     } else {
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("WaitNamedPipe returns TRUE\n");
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         setAX(0);
         setCF(0);
@@ -1095,9 +1009,7 @@ Return Value:
     LPVDM_HANDLE_INFO_1 StructurePointer;
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrNetHandleGetInfo\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     Handle = HANDLE_FROM_WORDS(getBP(), getBX());
@@ -1181,10 +1093,7 @@ Return Value:
     LPBYTE  Buffer;
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrNetHandleGetInfo\n");
-        DbgBreakPoint();
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     Handle = HANDLE_FROM_WORDS(getBP(), getBX());
@@ -1342,23 +1251,7 @@ Return Value:
     Type = (DWORD)getAX() & 0xff;   // 0x86, 0x8f, 0x90 or 0x91
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint(   "\n"
-                    "VrReadWriteAsyncNmPipe (%04x) [%s] request @ %04x:%04x, handle %08x\n"
-                    "\n",
-                    (DWORD)getAX(), // type of read/write request
-                    Type == ANP_READ
-                        ? "READ"
-                        : Type == ANP_WRITE
-                            ? "WRITE"
-                            : Type == ANP_READ2
-                                ? "READ2"
-                                : Type == ANP_WRITE2
-                                    ? "WRITE2"
-                                    : "?????",
-                    getDS(), getSI(), Handle
-                    );
-    }
+/* DIVERGENCE MVDM-HOST-DIV-517: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -1369,9 +1262,7 @@ Return Value:
     if (!pipeInfo) {
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrReadWriteAsyncNmPipe: Handle 0x%08x is invalid\n", Handle);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         SET_ERROR(ERROR_INVALID_HANDLE);
@@ -1390,11 +1281,7 @@ Return Value:
         if (VrpNmpSomethingToDo == NULL) {
 
 #if DBG
-            IF_DEBUG(NAMEPIPE) {
-                DbgPrint("VrReadWriteAsyncNmPipe: Error: Couldn't create something-to-do event: %d\n",
-                            GetLastError()
-                            );
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
             //
@@ -1419,11 +1306,7 @@ Return Value:
         if (hThread == NULL) {
 
 #if DBG
-            IF_DEBUG(NAMEPIPE) {
-                DbgPrint("VrReadWriteAsyncNmPipe: Error: Couldn't create thread: %d\n",
-                            GetLastError()
-                            );
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
             CloseHandle(VrpNmpSomethingToDo);
@@ -1441,9 +1324,7 @@ Return Value:
     if (pAsyncInfo == NULL) {
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrReadWriteAsyncNmPipe: Error: Couldn't allocate structure\n");
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         SET_ERROR(ERROR_NOT_ENOUGH_MEMORY);
@@ -1468,9 +1349,7 @@ Return Value:
     if (hEvent == NULL) {
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrReadWriteAsyncNmPipe: Error: Couldn't create event: %d\n", GetLastError());
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         LocalFree((HLOCAL)pAsyncInfo);
@@ -1500,7 +1379,7 @@ Return Value:
     }
 
 #if DBG
-    pAsyncInfo->RequestType = Type;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -1523,14 +1402,7 @@ Return Value:
                       );
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrReadWriteAsyncNmPipe: ReadFile(%x, %x, %d, ...): %d\n",
-                     Handle,
-                     buffer,
-                     length,
-                     ok
-                     );
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     } else {
@@ -1542,14 +1414,7 @@ Return Value:
                        );
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrReadWriteAsyncNmPipe: WriteFile(%x, %x, %d, ...): %d\n",
-                     Handle,
-                     buffer,
-                     length,
-                     ok
-                     );
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     }
@@ -1569,9 +1434,7 @@ Return Value:
         //
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrReadWriteAsyncNmPipe: Error: IO operation returns %d\n", error);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         VrpDequeueAsyncRequest(pAsyncInfo);
@@ -1582,20 +1445,14 @@ Return Value:
     } else {
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrReadWriteAsyncNmPipe: IO operation started: returns %s\n",
-                     error == ERROR_IO_PENDING ? "ERROR_IO_PENDING" : "NO_ERROR"
-                     );
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         setCF(0);
     }
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrReadWriteAsyncNmPipe: returning CF=%d, AX=%d\n", getCF(), getAX());
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 }
 
@@ -1634,9 +1491,7 @@ Return Value:
     mvdm_redirector_async_trace("interrupt-enter");
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrNmPipeInterrupt\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 
@@ -1650,11 +1505,7 @@ Return Value:
         mvdm_redirector_async_trace("interrupt-empty");
 
 #if DBG
-
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrNmPipeInterrupt - nothing to do\n");
-        }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         //
@@ -1690,15 +1541,7 @@ Return Value:
         mvdm_redirector_async_trace("interrupt-callback-ready");
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrNmPipeInterrupt: Setting DOS Registers:\n"
-                     "DS:SI=%04x:%04x, ES:DI=%04x:%04x, CX:BX=%04x:%04x, AL=%02x\n",
-                     getDS(), getSI(),
-                     getES(), getDI(),
-                     getCX(), getBX(),
-                     getAL()
-                     );
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         //
@@ -1736,9 +1579,7 @@ Return Value:
 
 {
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrTerminateNamedPipes\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 }
@@ -1819,9 +1660,7 @@ Return Value:
     UNREFERENCED_PARAMETER(Parameters);
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrAsyncNamedPipeThread: *** Started ***\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     while (TRUE) {
@@ -1843,9 +1682,7 @@ Return Value:
         if (index > 0 && index < numberOfHandles) {
 
 #if DBG
-            IF_DEBUG(NAMEPIPE) {
-                DbgPrint("VrpAsyncNmPipeThread: event #%d fired\n", index);
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
             pRequest = VrpSearchForRequestByEventHandle(eventList[index]);
@@ -1854,13 +1691,7 @@ Return Value:
             }
 
 #if DBG
-            else {
-                IF_DEBUG(NAMEPIPE) {
-                    DbgPrint("VrpAsyncNmPipeThread: Couldn't find request for handle 0x%08x\n",
-                                eventList[index]
-                                );
-                }
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         } else if (index) {
@@ -1870,30 +1701,19 @@ Return Value:
             //
 
 #if DBG
-            IF_DEBUG(NAMEPIPE) {
-                DbgPrint("VrpAsyncNmPipeThread: Error: WaitForMultipleObjects returns %d (%d)\n",
-                            index,
-                            GetLastError()
-                            );
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         }
 
 #if DBG
-        else {
-            IF_DEBUG(NAMEPIPE) {
-                DbgPrint("VrpAsyncNmPipeThread: Something-to-do event fired\n");
-            }
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     }
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrpAsyncNmPipeThread: *** Terminated ***\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     return 0;   // appease the compiler-god
@@ -1929,9 +1749,7 @@ Return Value:
     PDOS_ASYNC_NAMED_PIPE_INFO ptr;
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrpSnapshotEventList\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     pList[0] = VrpNmpSomethingToDo;
@@ -1944,9 +1762,7 @@ Return Value:
     LeaveCriticalSection(&VrNmpRequestQueueCritSec);
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrpSnapshotEventList: returning %d events\n", count);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     return count;
@@ -1984,9 +1800,7 @@ Return Value:
     PDOS_ASYNC_NAMED_PIPE_INFO ptr;
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrpSearchForRequestByEventHandle(0x%08x)\n", EventHandle);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     EnterCriticalSection(&VrNmpRequestQueueCritSec);
@@ -1999,22 +1813,7 @@ Return Value:
     LeaveCriticalSection(&VrNmpRequestQueueCritSec);
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrpLocateAsyncRequestByEventHandle returning 0x%08x: Request is %s\n",
-                 ptr,
-                 !ptr
-                    ? "NO REQUEST!!"
-                    : ptr->RequestType == ANP_READ
-                        ? "READ"
-                        : ptr->RequestType == ANP_WRITE
-                            ? "WRITE"
-                            : ptr->RequestType == ANP_READ2
-                                ? "READ2"
-                                : ptr->RequestType == ANP_WRITE2
-                                    ? "WRITE2"
-                                    : "UNKNOWN REQUEST!!"
-                 );
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     return ptr;
@@ -2064,11 +1863,7 @@ Return Value:
     }
 
 #if DBG
-
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrpCompleteAsyncRequest(0x%08x)\n", pAsyncInfo);
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     ok = GetOverlappedResult(pAsyncInfo->Handle,
@@ -2095,14 +1890,7 @@ Return Value:
     }
 
 #if DBG
-
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrpCompleteAsyncRequest: error=%d, bytesTransferred=%d\n",
-                    error,
-                    bytesTransferred
-                    );
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -2114,14 +1902,7 @@ Return Value:
     if (!pAsyncInfo->ANR) {
 
 #if DBG
-
-        PDOS_ASYNC_NAMED_PIPE_INFO ptr;
-
-        ptr = VrpDequeueAsyncRequest(pAsyncInfo);
-        if (ptr != pAsyncInfo) {
-            DbgPrint("*** Error: incorrect request packet dequeued ***\n");
-            DbgBreakPoint();
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 
         VrpDequeueAsyncRequest(pAsyncInfo);
@@ -2140,9 +1921,7 @@ Return Value:
         //
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrpCompleteAsyncRequest: *** INTERRUPTING VDM ***\n");
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         VrQueueCompletionHandler(VrNmPipeInterrupt);
@@ -2179,9 +1958,7 @@ Return Value:
 
 {
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrpQueueAsyncRequest\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     EnterCriticalSection(&VrNmpRequestQueueCritSec);
@@ -2237,9 +2014,7 @@ Return Value:
     PDOS_ASYNC_NAMED_PIPE_INFO prev = (PDOS_ASYNC_NAMED_PIPE_INFO)&RequestQueueHead;
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrpDequeueAsyncRequest(0x%08x)\n", pAsyncInfo);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     EnterCriticalSection(&VrNmpRequestQueueCritSec);
@@ -2268,9 +2043,7 @@ Return Value:
     LeaveCriticalSection(&VrNmpRequestQueueCritSec);
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrpDequeueAsyncRequest returning %08x\n", ptr);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     return ptr;
@@ -2307,9 +2080,7 @@ Return Value:
     PDOS_ASYNC_NAMED_PIPE_INFO ptr;
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrpFindCompletedRequest\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     EnterCriticalSection(&VrNmpRequestQueueCritSec);
@@ -2321,22 +2092,7 @@ Return Value:
     LeaveCriticalSection(&VrNmpRequestQueueCritSec);
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrpFindCompletedRequest returning 0x%08x: Request is %s\n",
-                 ptr,
-                 !ptr
-                    ? "NO REQUEST!!"
-                    : ptr->RequestType == ANP_READ
-                        ? "READ"
-                        : ptr->RequestType == ANP_WRITE
-                            ? "WRITE"
-                            : ptr->RequestType == ANP_READ2
-                                ? "READ2"
-                                : ptr->RequestType == ANP_WRITE2
-                                    ? "WRITE2"
-                                    : "UNKNOWN REQUEST!!"
-                 );
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     return ptr;
@@ -2378,17 +2134,13 @@ Return Value:
     BOOL ok;
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrAddOpenNamedPipeInfo\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     if (VrIsNamedPipeName(lpFileName)) {
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("Adding %s as named pipe\n", lpFileName);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         //
@@ -2401,9 +2153,7 @@ Return Value:
     } else {
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrAddOpenNamedPipeInfo: Error: not named pipe: %s\n", lpFileName);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         ok = FALSE;
@@ -2442,21 +2192,7 @@ Return Value:
 
 {
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrRemoveOpenNamedPipeInfo\n");
-    }
-
-    if (!VrpRemoveOpenNamedPipeInfo(Handle)) {
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("Handle 0x%08x is not a named pipe\n", Handle);
-        }
-        return FALSE;
-    } else {
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrRemoveOpenNamedPipeInfo - Handle 0x%08x has been removed\n", Handle);
-        }
-        return TRUE;
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
     VrpRemoveOpenNamedPipeInfo(Handle);
 #endif
@@ -2504,9 +2240,7 @@ Return Value:
     DWORD dwBytesRead;
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrReadNamePipe(0x%08x, %x, %d)\n", Handle, Buffer, Buflen);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -2548,9 +2282,7 @@ Return Value:
         } else {
 
 #if DBG
-            IF_DEBUG(NAMEPIPE) {
-                DbgPrint("VrReadNamedPipe: ReadFile failed: %d\n", GetLastError());
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
             //
@@ -2612,9 +2344,7 @@ Return Value:
     if (!success) {
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrReadNamePipe: Error: Returning %d\n", error);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         SetLastError(error);
@@ -2622,9 +2352,7 @@ Return Value:
         *BytesRead = dwBytesRead;
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrReadNamePipe: Ok: %d bytes read from pipe\n", *BytesRead);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     }
@@ -2675,9 +2403,7 @@ Return Value:
     DWORD error;
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrWriteNamePipe(0x%08x, %x, %d)\n", Handle, Buffer, Buflen);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -2724,9 +2450,7 @@ Return Value:
     if (!success) {
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrWriteNamePipe: Error: Returning %d\n", error);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         SetLastError(error);
@@ -2737,13 +2461,7 @@ Return Value:
     }
 
 #if DBG
-
-    else {
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrWriteNamePipe: Ok: %d bytes written to pipe\n", *BytesWritten);
-        }
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     return success;
@@ -2798,7 +2516,7 @@ Return Value:
     int     CharCount;
 
 #if DBG
-    LPSTR   OriginalName = Name;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     if (IS_ASCII_PATH_SEPARATOR(*Name)) {
@@ -2818,9 +2536,7 @@ Return Value:
                 //
 
 #if DBG
-                IF_DEBUG(NAMEPIPE) {
-                    DbgPrint("VrIsNamedPipeName - returning FALSE for %s\n", OriginalName);
-                }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
                 return FALSE;
             }
@@ -2837,9 +2553,7 @@ Return Value:
         } else {
 
 #if DBG
-            IF_DEBUG(NAMEPIPE) {
-                DbgPrint("VrIsNamedPipeName - returning FALSE for %s\n", OriginalName);
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
             return FALSE;
@@ -2856,9 +2570,7 @@ Return Value:
             if (IS_ASCII_PATH_SEPARATOR(*Name)) {
 
 #if DBG
-                IF_DEBUG(NAMEPIPE) {
-                    DbgPrint("VrIsNamedPipeName - returning TRUE for %s\n", OriginalName);
-                }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
                 return TRUE;
@@ -2867,9 +2579,7 @@ Return Value:
     }
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrIsNamedPipeName - returning FALSE for %s\n", OriginalName);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     return FALSE;
@@ -3003,9 +2713,7 @@ Return Value:
         } while (pipeName);
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrConvertLocalNtPipeName - returning %s\n", Buffer);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     }
@@ -3083,9 +2791,7 @@ Return Value:
     if (PipeInfo == NULL) {
 
 #if DBG
-        IF_DEBUG(NAMEPIPE) {
-            DbgPrint("VrpAddOpenNamedPipeInfo: couldn't allocate structure - returning FALSE\n");
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         return FALSE;
@@ -3112,13 +2818,7 @@ Return Value:
     LastOpenNamedPipeInfo = PipeInfo;
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrpAddOpenNamedPipeInfo - adding structure @ %08x, Handle=0x%08x, Name=%s\n",
-            PipeInfo,
-            PipeInfo->Handle,
-            PipeInfo->Name
-            );
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     return TRUE;
@@ -3196,11 +2896,7 @@ Return Value:
     POPEN_NAMED_PIPE_INFO ptr, prev = NULL;
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrpRemoveOpenNamedPipeInfo(0x%08x)\n", Handle);
-        DumpOpenPipeList();
-        DumpRequestQueue();
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     for (ptr = OpenNamedPipeInfoList; ptr; ) {
@@ -3215,13 +2911,7 @@ Return Value:
             }
 
 #if DBG
-            IF_DEBUG(NAMEPIPE) {
-                DbgPrint("VrpRemoveOpenNamedPipeInfo - freeing structure @ %08x, Handle=0x%08x, Name=%s\n",
-                    ptr,
-                    ptr->Handle,
-                    ptr->Name
-                    );
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
             LocalFree(ptr);
@@ -3233,9 +2923,7 @@ Return Value:
     }
 
 #if DBG
-    IF_DEBUG(NAMEPIPE) {
-        DbgPrint("VrpRemoveOpenNamedPipeInfo: Can't find 0x%08x in list\n", Handle);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     return FALSE;
@@ -3318,106 +3006,5 @@ Return Value:
 
 
 #if DBG
-VOID DumpOpenPipeList()
-{
-    POPEN_NAMED_PIPE_INFO ptr = OpenNamedPipeInfoList;
-
-    DbgPrint("DumpOpenPipeList\n");
-
-    if (!ptr) {
-        DbgPrint("DumpOpenPipeList: no open named pipe structures\n");
-    } else {
-        while (ptr) {
-            DbgPrint("\n"
-                     "OPEN_NAMED_PIPE_INFO structure @%08x:\n"
-                     "Next. . . . . . . . . . %08x\n"
-                     "Handle. . . . . . . . . %08x\n"
-                     "NameLength. . . . . . . %d\n"
-                     "DosPdb. . . . . . . . . %04x\n"
-                     "Name. . . . . . . . . . %s\n",
-                     ptr,
-                     ptr->Next,
-                     ptr->Handle,
-                     ptr->NameLength,
-                     ptr->DosPdb,
-                     ptr->Name
-                     );
-            ptr = ptr->Next;
-        }
-        DbgPrint("\n");
-    }
-}
-
-VOID DumpRequestQueue()
-{
-    PDOS_ASYNC_NAMED_PIPE_INFO ptr;
-
-    DbgPrint("DumpRequestQueue\n");
-
-    EnterCriticalSection(&VrNmpRequestQueueCritSec);
-    ptr = RequestQueueHead;
-    if (!ptr) {
-        DbgPrint("DumpRequestQueue: no request packets queued\n");
-    } else {
-        for (; ptr; ptr = ptr->Next) {
-
-            //
-            // NT (308c) can't handle all this being put on the stack - gets
-            // fault in KdpCopyDataToStack
-            //
-
-            DbgPrint("\n"
-                     "DOS_ASYNC_NAMED_PIPE_INFO structure @%08x:\n"
-                     "Next. . . . . . . . . . %08x\n"
-                     "Overlapped.Internal . . %08x\n"
-                     "Overlapped.InternalHigh %08x\n"
-                     "Overlapped.Offset . . . %08x\n"
-                     "Overlapped.OffsetHigh . %08x\n"
-                     "Overlapped.hEvent . . . %08x\n",
-                     ptr,
-                     ptr->Next,
-                     ptr->Overlapped.Internal,
-                     ptr->Overlapped.InternalHigh,
-                     ptr->Overlapped.Offset,
-                     ptr->Overlapped.OffsetHigh,
-                     ptr->Overlapped.hEvent
-                     );
-            DbgPrint("Type2 . . . . . . . . . %d\n"
-                     "Completed . . . . . . . %d\n"
-                     "Handle. . . . . . . . . %08x\n"
-                     "Buffer. . . . . . . . . %04x:%04x\n"
-                     "BytesTransferred. . . . %d\n"
-                     "pBytesTransferred . . . %08x\n"
-                     "pErrorCode. . . . . . . %08x\n"
-                     "ANR . . . . . . . . . . %04x:%04x\n"
-                     "Semaphore . . . . . . . %04x:%04x\n"
-                     "RequestType . . . . . . %04x [%s]\n",
-                     ptr->Type2,
-                     ptr->Completed,
-                     ptr->Handle,
-                     HIWORD(ptr->Buffer),
-                     LOWORD(ptr->Buffer),
-                     ptr->BytesTransferred,
-                     ptr->pBytesTransferred,
-                     ptr->pErrorCode,
-                     HIWORD(ptr->ANR),
-                     LOWORD(ptr->ANR),
-                     HIWORD(ptr->Semaphore),
-                     LOWORD(ptr->Semaphore),
-                     ptr->RequestType,
-                     ptr->RequestType == ANP_READ
-                        ? "READ"
-                        : ptr->RequestType == ANP_READ2
-                            ? "READ2"
-                            : ptr->RequestType == ANP_WRITE
-                                ? "WRITE"
-                                : ptr->RequestType == ANP_WRITE2
-                                    ? "WRITE2"
-                                    : "*** UNKNOWN REQUEST ***"
-                    );
-        }
-        DbgPrint("\n");
-    }
-    LeaveCriticalSection(&VrNmpRequestQueueCritSec);
-}
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif

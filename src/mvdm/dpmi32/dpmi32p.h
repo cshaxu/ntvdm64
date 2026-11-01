@@ -23,8 +23,7 @@ Revision History:
 
 
 #if DBG
-#define GET_SELECTOR_LIMIT(Selector, Limit) \
-    Limit = SelectorLimit[(Selector & ~0x7) / sizeof(LDT_ENTRY)]
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 #ifdef i386
 #define GET_SELECTOR_LIMIT(Selector, Limit) _asm      \

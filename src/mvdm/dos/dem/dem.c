@@ -26,7 +26,7 @@ extern VOID	TerminateVDM(VOID);
 CHAR demDebugBuffer [256];
 
 #if DBG
-BOOL ToDebugOnF11 = FALSE;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 BOOL DemInit (int argc, char *argv[])
@@ -70,12 +70,7 @@ BOOL DemInit (int argc, char *argv[])
 
 
 #if DBG
-#ifndef i386
-    if( getenv( "YODA" ) != 0 )
-#else
-    if( getenv( "DEBUGDOS" ) != 0 )
-#endif
-	ToDebugOnF11 = TRUE;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     return TRUE;

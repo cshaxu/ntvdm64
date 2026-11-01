@@ -13,83 +13,7 @@
 static VOID demFastIoUnavailable(VOID);
 
 #if DBG
-
-PCHAR	aSVCNames[] = {
-     "demChgFilePtr",
-     "demChMod",
-     "demClose",
-     "demCreate",
-     "demCreateDir",
-     "demDelete",
-     "demDeleteDir",
-     "demDeleteFCB",
-     "demFileTimes",
-     "demFindFirst",
-     "demFindFirstFCB",
-     "demFindNext",
-     "demFindNextFCB",
-     "demGetBootDrive",
-     "demGetDriveFreeSpace",
-     "demGetDrives",
-     "demGSetMediaID",
-     "demLoadDos",
-     "demOpen",
-     "demQueryCurrentDir",
-     "demQueryDate",
-     "demQueryTime",
-     "demRead",
-     "demRename",
-     "demSetCurrentDir",
-     "demSetDate",
-     "demSetDefaultDrive",
-     "demSetDTALocation",
-     "demSetTime",
-     "demSetV86KernelAddr",
-     "demWrite",
-     "demGetDriveInfo",
-     "demRenameFCB",
-     "demIOCTL",
-     "demCreateNew",
-     "DemDiskReset",
-     "DemSetDPB",
-     "DemGetDPB",
-     "DemSleazeFunc",
-     "demCommit",
-     "DemExtHandle",
-     "DemAbsDRD",
-     "DemAbsDWRT",
-     "DemGsetCDPG",
-     "DemCreateFCB",
-     "DemOpenFCB",
-     "DemCloseFCB",
-     "DemFCBIO",
-     "DemDate16",
-     "DemGetFileInfo",
-     "DemSetHardErrorInfo",
-     "DemRetry",
-     "DemLoadDosAppSym",
-     "DemFreeDosAppSym",
-     "DemEntryDosApp",
-     "DemDOSDispCall",
-     "DemDOSDispRet",
-     "DemOutputString",
-     "DemInputString",
-     "DemIsDebug",
-     "DemTerminatePDB",
-     "DemExitVDM",
-     "DemWOWFiles",
-     "DemLockOper",
-     "demNotYetImplemented",
-     "DemGetComputerName",
-     "DemFastRead",
-     "DemFastWrite",
-     "DemCheckPath",
-     "DemSystemSymbolOp",
-     "DemGetDpbList",
-     "DemPipeFileDataEOF",
-     "DemPipeFileEOF"
-};
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif   // DBG
 
 DWORD  fShowSVCMsg = 0;
@@ -188,21 +112,12 @@ PFNSVC  apfnSVC [] = {
 BOOL DemDispatch (ULONG iSvc)
 {
 #if DBG
-    if(iSvc < SVC_DEMLASTSVC && (fShowSVCMsg & DEMSVCTRACE) &&
-	 apfnSVC[iSvc] != demNotYetImplemented){
-	sprintf(demDebugBuffer,"DemDispatch: Entering %s\n\tAX=%.4x BX=%.4x CX=%.4x DX=%.4x DI=%.4x SI=%.4x\n",
-	       aSVCNames[iSvc],getAX(),getBX(),getCX(),getDX(),getDI(),getSI());
-        OutputDebugStringOem(demDebugBuffer);
-	sprintf(demDebugBuffer,"\tCS=%.4x IP=%.4x DS=%.4x ES=%.4x SS=%.4x SP=%.4x BP=%.4x\n",
-                getCS(),getIP(), getDS(),getES(),getSS(),getSP(),getBP());
-        OutputDebugStringOem(demDebugBuffer);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     if (iSvc >= SVC_DEMLASTSVC){
 #if DBG
-	sprintf(demDebugBuffer,"Unimplemented SVC index %x\n",iSvc);
-        OutputDebugStringOem(demDebugBuffer);
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 	setCF(1);
 	return FALSE;
@@ -216,14 +131,7 @@ BOOL DemDispatch (ULONG iSvc)
 
 
 #if DBG
-    if((fShowSVCMsg & DEMSVCTRACE)){
-	sprintf(demDebugBuffer,"DemDispatch:On Leaving %s\n\tAX=%.4x BX=%.4x CX=%.4x DX=%.4x DI=%.4x SI=%.4x\n",
-               aSVCNames[iSvc],getAX(),getBX(),getCX(),getDX(),getDI(),getSI());
-        OutputDebugStringOem(demDebugBuffer);
-	sprintf(demDebugBuffer,"\tCS=%.4x IP=%.4x DS=%.4x ES=%.4x SS=%.4x SP=%.4x BP=%.4x CF=%x\n",
-                getCS(),getIP(), getDS(),getES(),getSS(),getSP(),getBP(),getCF());
-        OutputDebugStringOem(demDebugBuffer);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
     return TRUE;
 }

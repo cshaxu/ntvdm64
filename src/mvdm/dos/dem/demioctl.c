@@ -65,11 +65,7 @@ ULONG	iIoctl;
     iIoctl = (ULONG) getAL();
 
 #if DBG
-    if (iIoctl >= MAX_IOCTL_INDEX){
-	setAX((USHORT) ERROR_INVALID_FUNCTION);
-        setCF(1);
-        return;
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     (apfnSVCIoctl [iIoctl])();

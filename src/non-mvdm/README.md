@@ -1,4 +1,9 @@
 # non-mvdm original OpenNT sources
+OPENNT-HOST-130: retain original `#if DBG` conditions and selected
+alternatives while replacing current-product-disabled debug bodies with
+numbered markers. Original body hashes and locations:
+`../../artifacts/mvdm-audit/s12-dbg-subsets.jsonl`.
+
 OPENNT-HOST-129: replace the original literal-zero body in the selected
 `public/internal/base/inc/vdm.h` with the numbered exclusion marker; retain
 all conditional directives. Provenance and body hash:

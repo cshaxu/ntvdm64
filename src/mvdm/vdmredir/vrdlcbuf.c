@@ -351,9 +351,7 @@ Return Value:
         }
 
 #if DBG
-        IF_DEBUG(DLC_BUFFERS) {
-            DumpDosDlcBufferPool(&aBufferPools[PoolIndex]);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     }
@@ -454,11 +452,7 @@ Return Value:
     WORD bufferSize;
 
 #if DBG
-    DWORD numBufs = BuffersToGet;
-
-    IF_DEBUG(DLC_BUFFERS) {
-        DPUT2("GetBuffers(PoolIndex=%#02x, BuffersToGet=%d)\n", PoolIndex, BuffersToGet);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     EnterCriticalSection(&BufferSemaphore);
@@ -561,9 +555,7 @@ Return Value:
             status = LLC_STATUS_SUCCESS;
 
 #if DBG
-            IF_DEBUG(DLC_BUFFERS) {
-                DumpDosDlcBufferChain(*pdpBuffer, numBufs ? numBufs : 1);
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         } else {
@@ -643,7 +635,7 @@ Return Value:
     PDOS_DLC_BUFFER_POOL pBufferPool = &aBufferPools[PoolIndex];
 
 #if DBG
-    int n = 0;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     IF_DEBUG(DLC_BUFFERS) {
@@ -680,7 +672,7 @@ Return Value:
             ++pBufferPool->BufferCount;
 
 #if DBG
-            ++n;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
             pBuffer = pNextBuffer;
@@ -703,13 +695,7 @@ Return Value:
         pBufferPool->dpBuffer = dpBase;
 
 #if DBG
-        IF_DEBUG(DLC_BUFFERS) {
-            DumpDosDlcBufferChain(dpBuffer, n);
-        }
-
-    } else {
-
-        DPUT("ERROR: App tried to free NULL buffer chain\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     }
@@ -851,9 +837,7 @@ Return Value:
         }
 
 #if DBG
-        else {
-            DPUT("CalculateBufferRequirement: Error: invalid options: BREAK && CONTIGUOUS???\n");
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     } else if (dataSpace < pFrame->Contiguous.cbBuffer) {

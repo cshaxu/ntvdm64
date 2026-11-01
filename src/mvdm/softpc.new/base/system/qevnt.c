@@ -108,10 +108,7 @@ q_event_init(
 
 
 #if DBG
-     if (sizeof(QEVHANDLE) > sizeof(ULONGLONG)) {
-         DbgPrint("sizeof(QEVHANDLE) > sizeof(ULONGLONG)\n");
-         DbgBreakPoint();
-         }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
      host_ica_lock();

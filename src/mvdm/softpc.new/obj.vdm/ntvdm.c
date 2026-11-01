@@ -27,7 +27,7 @@ typedef struct _CpuEnvironmentVariable {
 PCPUENVVAR CpuEnvVarListHead=NULL;
 
 #if DBG
-BOOLEAN verboseGetenv;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 
@@ -334,11 +334,7 @@ CpuEnvInit(
     NtClose(CpuEnvKey);
 
 #if DBG
-    {
-    char *pEnvStr;
-    pEnvStr = getenv("VERBOSE_GETENV");
-    verboseGetenv = pEnvStr && !_stricmp(pEnvStr, "TRUE");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 }
@@ -364,9 +360,7 @@ char * _CRTAPI1 getenv(const char *Name)
      }
 
 #if DBG
-   if (verboseGetenv) {
-       DbgPrint("getenv %s:<%s>\n", Name, Value);
-       }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
   return Value;

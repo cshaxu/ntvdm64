@@ -53,7 +53,7 @@ Revision History:
 //
 
 #if DBG
-#define PRIVATE
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 #define PRIVATE static
 #endif

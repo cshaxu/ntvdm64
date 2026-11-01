@@ -1311,8 +1311,7 @@ DWORD W32RemoteThread(VOID)
         );
     if ( !NT_SUCCESS(Status) ) {
 #if DBG
-        DbgPrint("NTVDM: Could not get thread information\n");
-        DbgBreakPoint();
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         return( 0 );
     }
@@ -1335,8 +1334,7 @@ DWORD W32RemoteThread(VOID)
 
     if ( !NT_SUCCESS(Status) ) {
 #if DBG
-        DbgPrint("NTVDM: Could not get open thread handle\n");
-        DbgBreakPoint();
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         return( 0 );
     }
@@ -1346,8 +1344,7 @@ DWORD W32RemoteThread(VOID)
     Status = NtClose( hThread );
     if ( !NT_SUCCESS(Status) ) {
 #if DBG
-        DbgPrint("NTVDM: Could not close thread handle\n");
-        DbgBreakPoint();
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         return( 0 );
     }

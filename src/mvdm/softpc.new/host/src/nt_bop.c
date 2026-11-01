@@ -407,21 +407,7 @@ ULONG DefaultVrInitialized() {
 //
 
 #if DBG
-ULONG DefaultVrError(VOID);
-ULONG DefaultVrError() {
-    printf("MS_bop_7: Error: function called without VDMREDIR loaded!\n");
-    HostDebugBreak();
-    return 0;
-}
-MYFARPROC VrDispatch = &DefaultVrError;
-MYFARPROC VrInitialized = &DefaultVrInitialized;
-MYFARPROC VrReadNamedPipe = &DefaultVrError;
-MYFARPROC VrWriteNamedPipe = &DefaultVrError;
-MYFARPROC VrIsNamedPipeName = &DefaultVrError;
-MYFARPROC VrIsNamedPipeHandle = &DefaultVrError;
-MYFARPROC VrAddOpenNamedPipeInfo = &DefaultVrError;
-MYFARPROC VrConvertLocalNtPipeName = &DefaultVrError;
-MYFARPROC VrRemoveOpenNamedPipeInfo = &DefaultVrError;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 MYFARPROC VrDispatch;
 MYFARPROC VrInitialized = DefaultVrInitialized;
@@ -519,8 +505,7 @@ returnError:
         break;
 
 #if DBG
-    default:
-        printf("MS_bop_7: BAD: VdmRedirLoadState=%d???\n", VdmRedirLoadState);
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
     }
 
@@ -542,7 +527,7 @@ BOOL IsVdmRedirLoaded() {
 BOOL LoadVdmRedir() {
 
 #if DBG
-    LPSTR funcName = "";
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     if (VdmRedirLoaded) {
@@ -557,55 +542,55 @@ BOOL LoadVdmRedir() {
 
         if ((VrDispatch = (MYFARPROC)GetProcAddress(hVdmRedir, "VrDispatch")) == NULL) {
 #if DBG
-            funcName = "VrDispatch";
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
             goto closeAndReturnError;
         }
         if ((VrInitialized = (MYFARPROC)GetProcAddress(hVdmRedir, "VrInitialized")) == NULL) {
 #if DBG
-            funcName = "VrInitialized";
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
             goto closeAndReturnError;
         }
         if ((VrReadNamedPipe = (MYFARPROC)GetProcAddress(hVdmRedir, "VrReadNamedPipe")) == NULL) {
 #if DBG
-            funcName = "VrReadNamedPipe";
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
             goto closeAndReturnError;
         }
         if ((VrWriteNamedPipe = (MYFARPROC)GetProcAddress(hVdmRedir, "VrWriteNamedPipe")) == NULL) {
 #if DBG
-            funcName = "VrWriteNamedPipe";
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
             goto closeAndReturnError;
         }
         if ((VrIsNamedPipeName = (MYFARPROC)GetProcAddress(hVdmRedir, "VrIsNamedPipeName")) == NULL) {
 #if DBG
-            funcName = "VrIsNamedPipeName";
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
             goto closeAndReturnError;
         }
         if ((VrIsNamedPipeHandle = (MYFARPROC)GetProcAddress(hVdmRedir, "VrIsNamedPipeHandle")) == NULL) {
 #if DBG
-            funcName = "VrIsNamedPipeHandle";
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
             goto closeAndReturnError;
         }
         if ((VrAddOpenNamedPipeInfo = (MYFARPROC)GetProcAddress(hVdmRedir, "VrAddOpenNamedPipeInfo")) == NULL) {
 #if DBG
-            funcName = "VrAddOpenNamedPipeInfo";
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
             goto closeAndReturnError;
         }
         if ((VrConvertLocalNtPipeName = (MYFARPROC)GetProcAddress(hVdmRedir, "VrConvertLocalNtPipeName")) == NULL) {
 #if DBG
-            funcName = "VrConvertLocalNtPipeName";
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
             goto closeAndReturnError;
         }
         if ((VrRemoveOpenNamedPipeInfo = (MYFARPROC)GetProcAddress(hVdmRedir, "VrRemoveOpenNamedPipeInfo")) == NULL) {
 #if DBG
-            funcName = "VrRemoveOpenNamedPipeInfo";
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
             goto closeAndReturnError;
         }
@@ -616,7 +601,7 @@ BOOL LoadVdmRedir() {
 closeAndReturnError:
 
 #if DBG
-        printf("MS_bop_7: Error: cannot locate entry point %s in VDMREDIR.DLL\n", funcName);
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     CloseHandle(hVdmRedir);

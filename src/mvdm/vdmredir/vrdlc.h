@@ -979,12 +979,7 @@ typedef struct {
     PLLC_CCB Queue;
 
 #if DBG
-
-    //
-    // track queue depth for each link station in debug version
-    //
-
-    DWORD Depth;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 } LOCAL_BUSY_INFO;

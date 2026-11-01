@@ -68,26 +68,7 @@ Revision History:
 #define VRDEBUG_FILE        "VRDEBUG.LOG"
 
 #if DBG
-#include <stdio.h>
-extern  DWORD   VrDebugFlags;
-extern  FILE*   hVrDebugLog;
-
-extern  VOID    DbgOut(LPSTR, ...);
-
-#define IF_DEBUG(type)      if (VrDebugFlags & DEBUG_##type)
-#define DEBUG_BREAK()       IF_DEBUG(BREAKPOINT) { \
-                                DbgPrint("BP %s.%d\n", __FILE__, __LINE__); \
-                                DbgBreakPoint(); \
-                            }
-#define DBGPRINT            DbgOut
-#define DPUT(s)             DBGPRINT(s)
-#define DPUT1(s, a)         DBGPRINT(s, a)
-#define DPUT2(s, a, b)      DBGPRINT(s, a, b)
-#define DPUT3(s, a, b, c)   DBGPRINT(s, a, b, c)
-#define DPUT4(s, a, b, c, d) DBGPRINT(s, a, b, c, d)
-#define DPUT5(s, a, b, c, d, e) DBGPRINT(s, a, b, c, d, e)
-#define CRITDUMP(x)         DbgPrint x
-#define DUMPCCB             DumpCcb
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 #define IF_DEBUG(type)      if (0)
 #define DEBUG_BREAK()
@@ -578,14 +559,7 @@ VrDumpDosMemoryStructure(
 //
 
 #if DBG
-#define DIAGNOSTIC_ENTRY    VrDiagnosticEntryPoint
-#define DIAGNOSTIC_EXIT     VrDiagnosticExitPoint
-#define BREAK_ON_PAUSE      VrPauseBreak
-#define BREAK_ON_ERROR      VrErrorBreak
-//#define INFORM(s, ...)      VrPrint(DM_INFORMATION, s, ...)
-//#define WARN(s, ...)        VrPrint(DM_WARNING, s, ...)
-//#define ERROR(s, ...)       VrPrint(DM_ERROR, s, ...)
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 
 //

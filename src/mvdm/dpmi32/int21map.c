@@ -434,18 +434,7 @@ Return Value:
 --*/
 {
 #if DBG
-	OutputDebugString(
-        "WARNING: DOS INT 21 call AX=#DX will not be translated.\n"
-        );
-	OutputDebugString(
-        "         Protected mode applications should not be using\n"
-        );
-	OutputDebugString(
-    "         this type of FCB call. Convert this application\n"
-    );
-	OutputDebugString(
-    "         to use the handle calls.\n"
-    );
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
     NoTranslation();
 }
@@ -1385,7 +1374,7 @@ Return Value:
 
     if (IoctlMinor >= MAX_SUPPORTED_DOS_IOCTL_CALL) {
 #if DBG
-        OutputDebugString("DPMI: IOCTL DOS CALL NOT SUPPORTED\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         NoTranslation();
         return;
@@ -2024,7 +2013,7 @@ Return Value:
 {
 
 #if DBG
-    OutputDebugString("DPMI:  Int 21 function 53 is not supported\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
     setCF(1);
     DpmiSimulateIretCF();
@@ -2181,7 +2170,7 @@ Return Value:
 
     if (Func5DhMinor >= MAX_SUPPORTED_DOS_5D_CALL) {
 #if DBG
-        OutputDebugString("DPMI: DOS FUNCTION 5D UNSUPPORTED\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         NoTranslation();
         return;
@@ -2227,7 +2216,7 @@ Return Value:
 
     if (Func5EhMinor >= MAX_SUPPORTED_DOS_5E_CALL) {
 #if DBG
-        OutputDebugString("DPMI: DOS FUNCTION 5E UNSUPPORTED\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         NoTranslation();
         return;
@@ -2317,7 +2306,7 @@ Return Value:
         DpmiSimulateIretCF();
     } else {
 #if DBG
-        OutputDebugString("DPMI: UNSUPPORTED INT 21 FUNCTION 5F\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         NoTranslation();
     }
@@ -2347,9 +2336,7 @@ Return Value:
 --*/
 {
 #if DBG
-	OutputDebugString("WARNING: DOS INT 21 call AX=#DX will not be translated.\n");
-	OutputDebugString("         Use of this call is not supported from Prot\n");
-	OutputDebugString( "         mode applications.\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
     NoTranslation();
 }
@@ -2416,10 +2403,7 @@ Return Value:
 --*/
 {
 #if DBG
-	OutputDebugString("WARNING: DOS INT 21 call AX=#DX will not be translated.");
-	OutputDebugString("         Use of this call by a Prot Mode app is not");
-	OutputDebugString("         appropriate. There is a better INT 21 call, or a");
-	OutputDebugString("         Windows call which should be used instead of this.");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
     NoTranslation();
 }
@@ -2690,7 +2674,7 @@ Return Value:
         IoctlSubFunction != 0x47 && IoctlSubFunction != 0x67
     ) {
 #if DBG
-        OutputDebugString("DPMI: IOCTL DOS CALL NOT SUPPORTED\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         NoTranslation();
         return;

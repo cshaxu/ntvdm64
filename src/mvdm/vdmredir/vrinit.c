@@ -180,10 +180,7 @@ Return Value:
     LPBYTE lpVdmVrInitialized;
 
 #if DBG
-    DIAGNOSTIC_INFO info;
-
-    VrDebugInit();
-    DIAGNOSTIC_ENTRY("VrInitialize", DG_NONE, &info);
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //

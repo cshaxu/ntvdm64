@@ -597,24 +597,7 @@ VOID demCommit(VOID)
     hFile = GETHANDLE(getAX(),getBP());
     bRet = FlushFileBuffers(hFile);
 #if DBG
-    if (!bRet) {
-
-        //
-        // FlushFileBuffers fails with access denied if the handle
-        // is open for read-only access, however it's not an error
-        // for DOS.
-        //
-
-        DWORD LastError;
-        LastError = GetLastError();
-
-        if (LastError != ERROR_ACCESS_DENIED) {
-            sprintf(demDebugBuffer,
-                    "ntvdm demCommit warning: FlushFileBuffers error %d\n",
-                    LastError);
-            OutputDebugStringOem(demDebugBuffer);
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     setCF(0);

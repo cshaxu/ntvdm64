@@ -704,9 +704,7 @@ Return Value:
     if (!NT_SUCCESS(ntstatus)) {
 
 #if DBG
-        IF_DEBUG(NETAPI) {
-            DbgPrint("VrRemoteApi: Unexpected situation: RtlAnsiStringToUnicodeString returns %x\n", ntstatus);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         return ERROR_NOT_ENOUGH_MEMORY;
@@ -714,9 +712,7 @@ Return Value:
     uncName = uString.Buffer;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrpTransactVdm: UncName=%ws\n", uncName);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     status = RxpTransactSmb((LPTSTR)uncName,

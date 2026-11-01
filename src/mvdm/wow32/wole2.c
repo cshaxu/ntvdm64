@@ -92,7 +92,7 @@ BOOL GetThreadIDHTASKALIAS(
 
     if ( !NT_SUCCESS(Status) ) {
 #if DBG
-        DbgPrint("WOW32: Could not get open thread handle\n");
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         return( FALSE );
     }
@@ -117,8 +117,7 @@ BOOL GetThreadIDHTASKALIAS(
     Status = NtClose( hThread );
     if ( !NT_SUCCESS(Status) ) {
 #if DBG
-        DbgPrint("WOW32: Could not close thread handle\n");
-        DbgBreakPoint();
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         return( FALSE );
     }

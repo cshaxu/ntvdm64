@@ -44,11 +44,7 @@ PFNSVC	apfnSVCCmd [] = {
 BOOL CmdDispatch (ULONG iSvc)
 {
 #if DBG
-    if (iSvc >= SVC_CMDLASTSVC){
-	DbgPrint("Unimplemented SVC index for COMMAND %x\n",iSvc);
-	setCF(1);
-	return FALSE;
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
     (apfnSVCCmd [iSvc])();
 

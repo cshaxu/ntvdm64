@@ -141,11 +141,7 @@ Revision History:
 
 /*lint -save -e767 */  // Don't complain about different definitions
 #if DBG
-
-extern DWORD NetlibpTrace;
-
-#define IF_DEBUG(Function) if (NetlibpTrace & NETLIB_DEBUG_ ## Function)
-
+/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
 #else
 
 #define IF_DEBUG(Function) \

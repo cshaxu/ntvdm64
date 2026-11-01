@@ -287,10 +287,7 @@ RtlQueryEnvironmentVariable_U(
 
             }
 #if DBG
-        if (*p == UNICODE_NULL)
-            DbgPrint( "RTL: QEV - Empty Environment being searched: %08x\n", p);
-        else if ((UCHAR)((*p) >> 8) != '\0')
-            DbgPrint( "RTL: QEV - Possible ANSI Environment being searched: %08x\n", p);
+/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
 #endif
 
         if ( RtlpEnvironCacheValid && p == Peb->ProcessParameters->Environment ) {

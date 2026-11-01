@@ -131,7 +131,7 @@ VOID DeleteConfigFiles(VOID)
 {
     if (pchTmpConfigFile)  {
 #if DBG
-      if (!(fShowSVCMsg & KEEPBOOTFILES))
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         DeleteFile(pchTmpConfigFile);
 
@@ -141,7 +141,7 @@ VOID DeleteConfigFiles(VOID)
 
     if (pchTmpAutoexecFile) {
 #if DBG
-      if (!(fShowSVCMsg & KEEPBOOTFILES))
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         DeleteFile(pchTmpAutoexecFile);
 

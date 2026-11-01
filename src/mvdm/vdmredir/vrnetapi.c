@@ -95,13 +95,7 @@ Revision History:
 //
 
 #if DBG
-
-VOID
-DumpWkstaInfo(
-    IN DWORD Level,
-    IN LPBYTE Buffer
-    );
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 NET_API_STATUS
@@ -110,13 +104,7 @@ VrpTransactVdm(
     );
 
 #if DBG
-PRIVATE
-VOID
-DumpTransactionPacket(
-    IN  struct tr_packet* TransactionPacket,
-    IN  BOOL    IsInput,
-    IN  BOOL    DumpData
-    );
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 //
@@ -209,12 +197,7 @@ Return Value:
     register DWORD len;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrGetCDNames\n");
-        IF_DEBUG(BREAKPOINT) {
-            DbgBreakPoint();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     rc1 = NetWkstaGetInfo(NULL, 100, (LPBYTE*)&wkstaInfo);
@@ -268,13 +251,7 @@ Return Value:
     }
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrGetCDNames: computername=%s, PDCname=%s, logon domain=%s\n\n",
-                computerBuf,
-                primaryDomainBuf,
-                logonDomainBuf
-                );
-    }
+/* DIVERGENCE MVDM-HOST-DIV-517: DBG debug branch is not selected; see mirror register. */
 #endif
 }
 
@@ -307,9 +284,7 @@ Return Value:
     DWORD   nameLen;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrGetComputerName\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     nameLen = sizeof(nameBuf)-1;
@@ -320,9 +295,7 @@ Return Value:
         if (nameLen > LM20_CNLEN) {
             SET_ERROR(NERR_BufTooSmall);
 #if DBG
-            IF_DEBUG(NETAPI) {
-                DbgPrint("VrGetComputerName returning ERROR %d!\n", getAX());
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         } else {
             /* DIVERGENCE(MVDM-HOST-DIV-171): the original direct guest alias
@@ -336,9 +309,7 @@ Return Value:
                 setCF(0);
             }
 #if DBG
-            IF_DEBUG(NETAPI) {
-                DbgPrint("VrGetComputerName returning %s\n", nameBuf);
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         }
     }
@@ -371,18 +342,11 @@ Return Value:
 
 {
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrGetDomainName\n");
-        IF_DEBUG(BREAKPOINT) {
-            DbgBreakPoint();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrGetDomainName - unsupported SVC\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     SET_ERROR(ERROR_NOT_SUPPORTED);
@@ -414,18 +378,11 @@ Return Value:
 
 {
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrGetLogonServer\n");
-        IF_DEBUG(BREAKPOINT) {
-            DbgBreakPoint();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrGetLogonServer - unsupported SVC\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     SET_ERROR(ERROR_NOT_SUPPORTED);
@@ -465,12 +422,7 @@ Return Value:
     DWORD len;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrGetUserName\n");
-        IF_DEBUG(BREAKPOINT) {
-            DbgBreakPoint();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     status = NetWkstaUserGetInfo(NULL, 0, &buffer);
@@ -531,18 +483,11 @@ Return Value:
 
 {
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrGetDCName\n");
-        IF_DEBUG(BREAKPOINT) {
-            DbgBreakPoint();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetGetDCName - unsupported SVC\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     SET_ERROR(ERROR_NOT_SUPPORTED);
@@ -588,12 +533,7 @@ Return Value:
     struct NetMessageBufferSendStruc* structurePointer;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetMessageBufferSend\n");
-        IF_DEBUG(BREAKPOINT) {
-            DbgBreakPoint();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     structurePointer = (struct NetMessageBufferSendStruc*)
@@ -617,9 +557,7 @@ Return Value:
         SET_ERROR(VrpMapDosError(status));
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetMessageBufferSend: returning %d\n", status);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     } else {
@@ -654,12 +592,7 @@ Return Value:
     DWORD status;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetNullTransactApi\n");
-        IF_DEBUG(BREAKPOINT) {
-            DbgBreakPoint();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     status = VrpTransactVdm(TRUE);
@@ -715,16 +648,7 @@ Return Value:
     //
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetRemoteApi: ApiNumber=%d, ServerName=%s\n"
-                 "ParmDesc=%s, DataDesc=%s, AuxDesc=%s\n",
-                 ApiNumber,
-                 LPSTR_FROM_POINTER(ServerNamePointer),
-                 ParameterDescriptor,
-                 DataDescriptor,
-                 AuxDescriptor
-                 );
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -1140,9 +1064,7 @@ VrNetRemoteApi_exit:
         SET_ERROR((WORD)status);
 
 #if DBG
-        IF_DEBUG(NETAPI) {
-            DbgPrint("Error: VrNetRemoteApi returning %u\n", (DWORD)getAX());
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     } else {
@@ -1290,12 +1212,7 @@ Return Value:
 //    DWORD nAvail;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetServerEnum: type=0x%02x\n", callType);
-        IF_DEBUG(BREAKPOINT) {
-            DbgBreakPoint();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     if (callType == 0x4c) {
@@ -1359,9 +1276,7 @@ Return Value:
     default:
 
 #if DBG
-        IF_DEBUG(NETAPI) {
-            DbgPrint("VrNetServerEnum - invalid level %d. Returning early\n", level);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         SET_ERROR(ERROR_INVALID_LEVEL);
@@ -1375,14 +1290,7 @@ Return Value:
     parameters.Domain = domain;
 
 #if DBG
-
-    IF_DEBUG(NETAPI) {
-        DbgPrint("buffer @%04x:%04x, length=%d, level=%d, type=0x%08x, domain=%s\n",
-                bufferSegment, bufferOffset, parameters.BufLen, level,
-                parameters.ServerType, parameters.Domain
-                );
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 //    //
@@ -1447,15 +1355,7 @@ Return Value:
     }
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetServerEnum: returning %d for NetServerEnum2\n", getAX());
-        if (getAX() == NERR_Success || getAX() == ERROR_MORE_DATA) {
-            DbgPrint("EntriesRead=%d, TotalAvail=%d\n",
-                        parameters.EntriesRead,
-                        parameters.TotalAvail
-                        );
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 //    //
@@ -1519,16 +1419,7 @@ Return Value:
     NET_API_STATUS status;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetServiceControl: Service=%s, Opcode=%d, OemArg=%d, Buffer @%04x:%04x, len=%d\n",
-                serviceName,
-                opcode,
-                oemArg,
-                seg,
-                off,
-                buflen
-                );
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     if (opcode > 4) {
@@ -1588,9 +1479,7 @@ Return Value:
     }
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetServiceControl: returning %d\n", status);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     if (status == NERR_Success || status == ERROR_MORE_DATA) {
@@ -1663,12 +1552,7 @@ Return Value:
     DWORD   status;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetTransactApi\n");
-        IF_DEBUG(BREAKPOINT) {
-            DbgBreakPoint();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     status = VrpTransactVdm(FALSE);
@@ -1720,12 +1604,7 @@ Return Value:
     char    myDataBuffer[sizeof(struct use_info_1) + LM20_PWLEN + 1];
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetUseAdd\n");
-        IF_DEBUG(BREAKPOINT) {
-            DbgBreakPoint();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -1806,9 +1685,7 @@ Return Value:
     }
     if (status != NERR_Success) {
 #if DBG
-        IF_DEBUG(NETAPI) {
-            DbgPrint("Error: VrNetUseAdd: XsNetUseAdd returns %u\n", status);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         SET_ERROR((WORD)status);
     } else {
@@ -1859,12 +1736,7 @@ Return Value:
     XS_PARAMETER_HEADER header;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetUseDel\n");
-        IF_DEBUG(BREAKPOINT) {
-            DbgBreakPoint();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     force = (WORD)getBX();
@@ -1943,12 +1815,7 @@ Return Value:
     LPBYTE  receiveBuffer;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetUseEnum\n");
-        IF_DEBUG(BREAKPOINT) {
-            DbgBreakPoint();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     if (level <= 1) {
@@ -2053,12 +1920,7 @@ Return Value:
     LPBYTE  receiveBuffer;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetUseGetInfo\n");
-        IF_DEBUG(BREAKPOINT) {
-            DbgBreakPoint();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -2077,42 +1939,32 @@ Return Value:
         dataDesc = (level == 1) ? REM16_use_info_1 : REM16_use_info_0;
 
 #if DBG
-        IF_DEBUG(NETAPI) {
-            DbgPrint("VrNetUseGetInfo: dataDesc=%s\n", dataDesc);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         parameters.UseName= POINTER_FROM_POINTER(&(structurePointer->NUGI_usename));
 
 #if DBG
-        IF_DEBUG(NETAPI) {
-            DbgPrint("VrNetUseGetInfo: UseName=%s\n", parameters.UseName);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         parameters.Level  = level;
 
 #if DBG
-        IF_DEBUG(NETAPI) {
-            DbgPrint("VrNetUseGetInfo: level=%d\n", level);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         receiveBuffer = POINTER_FROM_POINTER(&(structurePointer->NUGI_buffer));
 
 #if DBG
-        IF_DEBUG(NETAPI) {
-            DbgPrint("VrNetUseGetInfo: receiveBuffer=%x\n", receiveBuffer);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         parameters.Buffer = receiveBuffer;
         parameters.BufLen = READ_WORD(&structurePointer->NUGI_buflen);
 
 #if DBG
-        IF_DEBUG(NETAPI) {
-            DbgPrint("VrNetUseGetInfo: BufLen=%d\n", parameters.BufLen);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         header.Status = 0;
@@ -2136,9 +1988,7 @@ Return Value:
         setDX(parameters.TotalAvail);
 
 #if DBG
-        IF_DEBUG(NETAPI) {
-            DbgPrint("VrNetUseGetInfo: TotalAvail=%d\n", parameters.TotalAvail);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         if ((status == NERR_Success) || (status == ERROR_MORE_DATA)) {
@@ -2215,12 +2065,7 @@ Return Value:
     DWORD   totalAvail;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("\nVrNetWkstaGetInfo\n");
-        IF_DEBUG(BREAKPOINT) {
-            DbgBreakPoint();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     level = (DWORD)getBX();
@@ -2241,12 +2086,7 @@ Return Value:
         SET_ERROR(ERROR_INVALID_LEVEL);
 
 #if DBG
-        IF_DEBUG(NETAPI) {
-            DbgPrint("VrNetWkstaGetInfo: Error: returning %d for level %d\n",
-                     getAX(),
-                     level
-                     );
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         return;
@@ -2261,9 +2101,7 @@ Return Value:
         SET_ERROR(ERROR_INVALID_PARAMETER);
 
 #if DBG
-        IF_DEBUG(NETAPI) {
-            DbgPrint("VrNetWkstaGetInfo: Error: buffer=NULL, buflen=%d\n", bufLen);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         return;
@@ -2279,11 +2117,7 @@ Return Value:
     }
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetWkstaGetInfo: level=%d, bufLen = %d (0x%x), buffer = %x:%x\n",
-            level, bufLen, bufLen, bufferSegment, bufferOffset
-            );
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     parameters.Level = (WORD)level;
@@ -2310,13 +2144,7 @@ Return Value:
     }
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetWkstaGetInfo: status after XsNetWkstaGetInfo=%d, TotalAvail=%d\n",
-                 status,
-                 parameters.TotalAvail
-                 );
-//        DumpWkstaInfo(level, buffer);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -2676,9 +2504,7 @@ Return Value:
         } else {
 
 #if DBG
-            IF_DEBUG(NETAPI) {
-                DbgPrint("VrNetWkstaGetInfo: NetWkstaUserGetInfo returns %d\n", net_status);
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         }
@@ -2691,9 +2517,7 @@ Return Value:
         setDX((WORD)totalAvail);
 
 #if DBG
-        IF_DEBUG(NETAPI) {
-            DbgPrint("VrNetWkstaGetInfo: TotalAvail=%d\n", getDX());
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     }
@@ -2724,204 +2548,13 @@ Return Value:
     }
 
 #if DBG
-
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetWkstaGetInfo: return status=%d, TotalAvail=%d\n", getAX(), getDX());
-    }
-
-    if (status == NERR_Success || status == ERROR_MORE_DATA) {
-        IF_DEBUG(NETAPI) {
-            DumpWkstaInfo(level, buffer);
-        }
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 }
 
 #if DBG
-
-#define POSSIBLE_STRING(s)  ((s) ? (s) : "")
-
-VOID
-DumpWkstaInfo(
-    IN DWORD level,
-    IN LPBYTE buffer
-    )
-{
-    switch (level) {
-    case 0:
-    case 1:
-
-        //
-        // DbgPrint resets the test machine if we try it with this
-        // string & these args all at once!
-        //
-
-        DbgPrint(   "reserved1      %04x\n",
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_reserved_1)
-                    );
-
-        DbgPrint(   "reserved2      %08x\n",
-                    READ_DWORD(&((struct wksta_info_0*)buffer)->wki0_reserved_2)
-                    );
-
-        DbgPrint(   "lanroot        %04x:%04x \"%s\"\n",
-                    GET_SEGMENT(&((struct wksta_info_0*)buffer)->wki0_root),
-                    GET_OFFSET(&((struct wksta_info_0*)buffer)->wki0_root),
-                    POSSIBLE_STRING(LPSTR_FROM_POINTER(&((struct wksta_info_0*)buffer)->wki0_root))
-                    );
-
-        DbgPrint(   "computername   %04x:%04x \"%s\"\n",
-                    GET_SEGMENT(&((struct wksta_info_0*)buffer)->wki0_computername),
-                    GET_OFFSET(&((struct wksta_info_0*)buffer)->wki0_computername),
-                    POSSIBLE_STRING(LPSTR_FROM_POINTER(&((struct wksta_info_0*)buffer)->wki0_computername))
-                    );
-
-        DbgPrint(   "username       %04x:%04x \"%s\"\n",
-                    GET_SEGMENT(&((struct wksta_info_0*)buffer)->wki0_username),
-                    GET_OFFSET(&((struct wksta_info_0*)buffer)->wki0_username),
-                    POSSIBLE_STRING(LPSTR_FROM_POINTER(&((struct wksta_info_0*)buffer)->wki0_username))
-                    );
-
-        DbgPrint(   "langroup       %04x:%04x \"%s\"\n",
-                    GET_SEGMENT(&((struct wksta_info_0*)buffer)->wki0_langroup),
-                    GET_OFFSET(&((struct wksta_info_0*)buffer)->wki0_langroup),
-                    POSSIBLE_STRING(LPSTR_FROM_POINTER(&((struct wksta_info_0*)buffer)->wki0_langroup))
-                    );
-
-        DbgPrint(   "ver major      %02x\n"
-                    "ver minor      %02x\n"
-                    "reserved3      %08x\n"
-                    "charwait       %04x\n"
-                    "chartime       %08x\n"
-                    "charcount      %04x\n",
-                    READ_BYTE(&((struct wksta_info_0*)buffer)->wki0_ver_major),
-                    READ_BYTE(&((struct wksta_info_0*)buffer)->wki0_ver_minor),
-                    READ_DWORD(&((struct wksta_info_0*)buffer)->wki0_reserved_3),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_charwait),
-                    READ_DWORD(&((struct wksta_info_0*)buffer)->wki0_chartime),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_charcount)
-                    );
-
-        DbgPrint(   "reserved4      %04x\n"
-                    "reserved5      %04x\n"
-                    "keepconn       %04x\n"
-                    "keepsearch     %04x\n"
-                    "maxthreads     %04x\n"
-                    "maxcmds        %04x\n",
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_reserved_4),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_reserved_5),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_keepconn),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_keepsearch),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_maxthreads),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_maxcmds)
-                    );
-
-        DbgPrint(   "reserved6      %04x\n"
-                    "numworkbuf     %04x\n"
-                    "sizworkbuf     %04x\n"
-                    "maxwrkcache    %04x\n"
-                    "sesstimeout    %04x\n"
-                    "sizerror       %04x\n",
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_reserved_6),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_numworkbuf),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_sizworkbuf),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_maxwrkcache),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_sesstimeout),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_sizerror)
-                    );
-
-        DbgPrint(   "numalerts      %04x\n"
-                    "numservices    %04x\n"
-                    "errlogsz       %04x\n"
-                    "printbuftime   %04x\n"
-                    "numcharbuf     %04x\n"
-                    "sizcharbuf     %04x\n",
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_numalerts),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_numservices),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_errlogsz),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_printbuftime),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_numcharbuf),
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_sizcharbuf)
-                    );
-
-        DbgPrint(   "logon server   %04x:%04x \"%s\"\n",
-                    GET_SEGMENT(&((struct wksta_info_0*)buffer)->wki0_logon_server),
-                    GET_OFFSET(&((struct wksta_info_0*)buffer)->wki0_logon_server),
-                    POSSIBLE_STRING(LPSTR_FROM_POINTER(&((struct wksta_info_0*)buffer)->wki0_logon_server))
-                    );
-
-        DbgPrint(   "wrkheuristics  %04x:%04x \"%s\"\n",
-                    GET_SEGMENT(&((struct wksta_info_0*)buffer)->wki0_wrkheuristics),
-                    GET_OFFSET(&((struct wksta_info_0*)buffer)->wki0_wrkheuristics),
-                    POSSIBLE_STRING(LPSTR_FROM_POINTER(&((struct wksta_info_0*)buffer)->wki0_wrkheuristics))
-                    );
-
-        DbgPrint(   "mailslots      %04x\n",
-                    READ_WORD(&((struct wksta_info_0*)buffer)->wki0_mailslots)
-                    );
-
-        if (level == 1) {
-            DbgPrint(
-                    "logon domain   %04x:%04x \"%s\"\n",
-                    GET_SEGMENT(&((struct wksta_info_1*)buffer)->wki1_logon_domain),
-                    GET_OFFSET(&((struct wksta_info_1*)buffer)->wki1_logon_domain),
-                    POSSIBLE_STRING(LPSTR_FROM_POINTER(&((struct wksta_info_1*)buffer)->wki1_logon_domain))
-                    );
-            DbgPrint(
-                    "other domains  %04x:%04x \"%s\"\n",
-                    GET_SEGMENT(&((struct wksta_info_1*)buffer)->wki1_oth_domains),
-                    GET_OFFSET(&((struct wksta_info_1*)buffer)->wki1_oth_domains),
-                    POSSIBLE_STRING(LPSTR_FROM_POINTER(&((struct wksta_info_1*)buffer)->wki1_oth_domains))
-                    );
-
-            DbgPrint(
-                    "numdgrambuf    %04x\n",
-                    ((struct wksta_info_1*)buffer)->wki1_numdgrambuf
-                    );
-        }
-        break;
-
-    case 10:
-        DbgPrint(   "computername   %04x:%04x \"%s\"\n",
-                    GET_SEGMENT(&((struct wksta_info_10*)buffer)->wki10_computername),
-                    GET_OFFSET(&((struct wksta_info_10*)buffer)->wki10_computername),
-                    POSSIBLE_STRING(LPSTR_FROM_POINTER(&((struct wksta_info_10*)buffer)->wki10_computername))
-                    );
-
-        DbgPrint(   "username       %04x:%04x \"%s\"\n",
-                    GET_SEGMENT(&((struct wksta_info_10*)buffer)->wki10_username),
-                    GET_OFFSET(&((struct wksta_info_10*)buffer)->wki10_username),
-                    POSSIBLE_STRING(LPSTR_FROM_POINTER(&((struct wksta_info_10*)buffer)->wki10_username))
-                    );
-
-        DbgPrint(   "langroup       %04x:%04x \"%s\"\n",
-                    GET_SEGMENT(&((struct wksta_info_10*)buffer)->wki10_langroup),
-                    GET_OFFSET(&((struct wksta_info_10*)buffer)->wki10_langroup),
-                    POSSIBLE_STRING(LPSTR_FROM_POINTER(&((struct wksta_info_10*)buffer)->wki10_langroup))
-                    );
-
-        DbgPrint(   "ver major      %02x\n"
-                    "ver minor      %02x\n"
-                    "logon domain   %04x:%04x \"%s\"\n",
-                    READ_BYTE(&((struct wksta_info_10*)buffer)->wki10_ver_major),
-                    READ_BYTE(&((struct wksta_info_10*)buffer)->wki10_ver_minor),
-                    GET_SEGMENT(&((struct wksta_info_10*)buffer)->wki10_logon_domain),
-                    GET_OFFSET(&((struct wksta_info_10*)buffer)->wki10_logon_domain),
-                    POSSIBLE_STRING(LPSTR_FROM_POINTER(&((struct wksta_info_10*)buffer)->wki10_logon_domain))
-                    );
-
-        DbgPrint(   "other domains  %04x:%04x \"%s\"\n",
-                    GET_SEGMENT(&((struct wksta_info_10*)buffer)->wki10_oth_domains),
-                    GET_OFFSET(&((struct wksta_info_10*)buffer)->wki10_oth_domains),
-                    POSSIBLE_STRING(LPSTR_FROM_POINTER(&((struct wksta_info_10*)buffer)->wki10_oth_domains))
-                    );
-        break;
-    }
-    DbgPrint("\n");
-}
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 
@@ -2948,18 +2581,11 @@ Return Value:
 
 {
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetWkstaSetInfo\n");
-        IF_DEBUG(BREAKPOINT) {
-            DbgBreakPoint();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrNetWkstaSetInfo - unsupported SVC\n");
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     SET_ERROR(ERROR_NOT_SUPPORTED);
@@ -3107,10 +2733,7 @@ Return Value:
     LPSTR dosPointer;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrGetAssignListEntry\n");
-        VrDumpRealMode16BitRegisters(FALSE);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -3157,17 +2780,7 @@ Return Value:
         //
 
 #if DBG
-
-        IF_DEBUG(NETAPI) {
-            if (status != NERR_Success) {
-                DbgPrint("VrGetAssignListEntry: XsNetUseEnum returns header.Status == %d\n", status);
-            }
-        }
-
-        if (status == NERR_Success) {
-            ASSERT(parameters.EntriesRead == parameters.TotalAvail);
-        }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     }
@@ -3220,13 +2833,7 @@ Return Value:
                     driveInfo[index] = infoPtr;
 
 #if DBG
-                    IF_DEBUG(NETAPI) {
-                        DbgPrint("Index=%d Drive=%s Netname=%s\n",
-                                index,
-                                infoPtr->ui1_local,
-                                (LPSTR)infoBase + ((DWORD)infoPtr->ui1_remote - converter)
-                                );
-                    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
                 } else if (infoPtr->ui1_asg_type == USE_SPOOLDEV && infoPtr->ui1_local[0]) {
@@ -3240,13 +2847,7 @@ Return Value:
                     printInfo[index] = infoPtr;
 
 #if DBG
-                    IF_DEBUG(NETAPI) {
-                        DbgPrint("Index=%d Printer=%s Netname=%s\n",
-                                index,
-                                infoPtr->ui1_local,
-                                (LPSTR)infoBase + ((DWORD)infoPtr->ui1_remote - converter)
-                                );
-                    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
                 }
@@ -3293,13 +2894,7 @@ Return Value:
             if (!entryNumber) {
 
 #if DBG
-                IF_DEBUG(NETAPI) {
-                    DbgPrint("LocalName=%s, RemoteName=%s, UserWord=%04x\n",
-                            infoPtr->ui1_local,
-                            (LPSTR)infoBase + ((DWORD)infoPtr->ui1_remote - converter),
-                            userWord
-                            );
-                }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
                 //
@@ -3313,11 +2908,7 @@ Return Value:
                 wstatus = VrpTranslateDosNetPath(&remoteName, &dosPointer);
 
 #if DBG
-                IF_DEBUG(NETAPI) {
-                    if (wstatus != 0) {
-                        DbgPrint("VrGetAssignListEntry: wstatus == %d\n", wstatus);
-                    }
-                }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
                 setBL((BYTE)(infoPtr->ui1_asg_type == 0 ? 4 : 3));
@@ -3424,12 +3015,7 @@ Return Value:
     LPSTR dosString;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrDefineMacro \"%s\" == \"%s\"\n",
-                 LPSTR_FROM_WORDS(getDS(), getSI()),
-                 LPSTR_FROM_WORDS(getES(), getDI())
-                 );
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     bl = getBL();
@@ -3530,11 +3116,7 @@ Return Value:
         status = NetpNtStatusToApiStatus(ntstatus);
 
 #if DBG
-        if (!NT_SUCCESS(ntstatus)) {
-            IF_DEBUG(NETAPI) {
-                DbgPrint("VrDefineMacro: Error: XsNetUseAdd returns %x\n", ntstatus);
-            }
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     } else {
@@ -3549,9 +3131,7 @@ Return Value:
     if (status != NERR_Success) {
 
 #if DBG
-        IF_DEBUG(NETAPI) {
-            DbgPrint("Error: VrDefineMacro: XsNetUseAdd returns %u\n", status);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         SET_ERROR((WORD)status);
@@ -3621,9 +3201,7 @@ Return Value:
     XS_PARAMETER_HEADER header;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrBreakMacro %s\n", LPSTR_FROM_WORDS(getDS(), getSI()));
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     parameters.UseName = LPSTR_FROM_WORDS(getDS(), getSI());
@@ -3718,18 +3296,13 @@ Return Value:
     WORD apiNumber;
 
 #if DBG
-    BOOL dumpRxData;
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrpTransactVdm: tr_packet @ %04x:%04x\n", getDS(), getSI());
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     transactionPacket = (struct tr_packet*)POINTER_FROM_WORDS(getDS(), getSI());
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DumpTransactionPacket(transactionPacket, TRUE, TRUE);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     receiveBufferLen = (DWORD)READ_WORD(&transactionPacket->tr_rdlen);
@@ -3758,9 +3331,7 @@ Return Value:
     if (!NT_SUCCESS(ntstatus)) {
 
 #if DBG
-        IF_DEBUG(NETAPI) {
-            DbgPrint("VrpTransactVdm: Unexpected situation: RtlAnsiStringToUnicodeString returns %x\n", ntstatus);
-        }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         return ERROR_NOT_ENOUGH_MEMORY;
@@ -3768,9 +3339,7 @@ Return Value:
     uncName = uString.Buffer;
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrpTransactVdm: UncName=%ws\n", uncName);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     //
@@ -4013,15 +3582,7 @@ Return Value:
     }
 
 #if DBG
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrpTransactVdm: returning %d\n\n", status);
-        if (status == NERR_Success || status == ERROR_MORE_DATA) {
-            dumpRxData = TRUE;
-        } else {
-            dumpRxData = FALSE;
-        }
-        DumpTransactionPacket(transactionPacket, FALSE, dumpRxData);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
 VrpTransactVdm_exit:
@@ -4084,124 +3645,5 @@ Return Value:
 }
 
 #if DBG
-PRIVATE
-VOID
-DumpTransactionPacket(
-    IN struct tr_packet* TransactionPacket,
-    IN BOOL IsInput,
-    IN BOOL DumpData
-    )
-{
-    LPBYTE password;
-    WORD parmSeg;
-    WORD parmOff;
-    WORD dataSeg;
-    WORD dataOff;
-    DWORD parmLen;
-    DWORD dataLen;
-    char passwordBuf[8*3+1];
-
-    password = LPBYTE_FROM_POINTER(&TransactionPacket->tr_passwd);
-    if (password) {
-        sprintf(passwordBuf, "%02x-%02x-%02x-%02x-%02x-%02x-%02x-%02x",
-                password[0],
-                password[1],
-                password[2],
-                password[3],
-                password[4],
-                password[5],
-                password[6],
-                password[7]
-                );
-    } else {
-        passwordBuf[0] = 0;
-    }
-
-    DbgPrint(   "DumpTransactionPacket(%08x)\n"
-                "name               %04x:%04x \"%s\"\n"
-                "password           %04x:%04x %s\n"
-                "send parm buffer   %04x:%04x\n"
-                "send data buffer   %04x:%04x\n"
-                "rcv setup buffer   %04x:%04x\n"
-                "rcv parm buffer    %04x:%04x\n"
-                "rcv data buffer    %04x:%04x\n"
-                "send parm len      %04x\n"
-                "send data len      %04x\n"
-                "rcv parm len       %04x\n"
-                "rcv data len       %04x\n"
-                "rcv setup len      %04x\n"
-                "flags              %04x\n"
-                "timeout            %08x (%d)\n"
-                "reserved           %04x\n"
-                "send setup len     %04x\n"
-                "\n",
-                TransactionPacket,
-                GET_SEGMENT(&TransactionPacket->tr_name),
-                GET_OFFSET(&TransactionPacket->tr_name),
-                LPSTR_FROM_POINTER(&TransactionPacket->tr_name),
-                GET_SEGMENT(&TransactionPacket->tr_passwd),
-                GET_OFFSET(&TransactionPacket->tr_passwd),
-                passwordBuf,
-                GET_SEGMENT(&TransactionPacket->tr_spbuf),
-                GET_OFFSET(&TransactionPacket->tr_spbuf),
-                GET_SEGMENT(&TransactionPacket->tr_sdbuf),
-                GET_OFFSET(&TransactionPacket->tr_sdbuf),
-                GET_SEGMENT(&TransactionPacket->tr_rsbuf),
-                GET_OFFSET(&TransactionPacket->tr_rsbuf),
-                GET_SEGMENT(&TransactionPacket->tr_rpbuf),
-                GET_OFFSET(&TransactionPacket->tr_rpbuf),
-                GET_SEGMENT(&TransactionPacket->tr_rdbuf),
-                GET_OFFSET(&TransactionPacket->tr_rdbuf),
-                READ_WORD(&TransactionPacket->tr_splen),
-                READ_WORD(&TransactionPacket->tr_sdlen),
-                READ_WORD(&TransactionPacket->tr_rplen),
-                READ_WORD(&TransactionPacket->tr_rdlen),
-                READ_WORD(&TransactionPacket->tr_rslen),
-                READ_WORD(&TransactionPacket->tr_flags),
-                READ_DWORD(&TransactionPacket->tr_timeout),
-                READ_DWORD(&TransactionPacket->tr_timeout),
-                READ_WORD(&TransactionPacket->tr_resvd),
-                READ_WORD(&TransactionPacket->tr_sslen)
-                );
-    if (IsInput) {
-        parmLen = (DWORD)READ_WORD(&TransactionPacket->tr_splen);
-        dataLen = (DWORD)READ_WORD(&TransactionPacket->tr_sdlen);
-        parmSeg = GET_SEGMENT(&TransactionPacket->tr_spbuf);
-        parmOff = GET_OFFSET(&TransactionPacket->tr_spbuf);
-        dataSeg = GET_SEGMENT(&TransactionPacket->tr_sdbuf);
-        dataOff = GET_OFFSET(&TransactionPacket->tr_sdbuf);
-    } else {
-        parmLen = (DWORD)READ_WORD(&TransactionPacket->tr_rplen);
-        dataLen = (DWORD)READ_WORD(&TransactionPacket->tr_rdlen);
-        parmSeg = GET_SEGMENT(&TransactionPacket->tr_rpbuf);
-        parmOff = GET_OFFSET(&TransactionPacket->tr_rpbuf);
-        dataSeg = GET_SEGMENT(&TransactionPacket->tr_rdbuf);
-        dataOff = GET_OFFSET(&TransactionPacket->tr_rdbuf);
-    }
-    if (DumpData) {
-        if (IsInput) {
-            IF_DEBUG(TRANSACT_TX) {
-                if (parmLen) {
-                    DbgPrint("Send Parameters:\n");
-                    VrDumpDosMemory('B', parmLen, parmSeg, parmOff);
-                }
-                if (dataLen) {
-                    DbgPrint("Send Data:\n");
-                    VrDumpDosMemory('B', dataLen, dataSeg, dataOff);
-                }
-            }
-        } else {
-            IF_DEBUG(TRANSACT_RX) {
-                if (parmLen) {
-                    DbgPrint("Received Parameters:\n");
-                    VrDumpDosMemory('B', parmLen, parmSeg, parmOff);
-                }
-                if (dataLen) {
-                    DbgPrint("Received Data:\n");
-                    VrDumpDosMemory('B', dataLen, dataSeg, dataOff);
-                }
-            }
-        }
-    }
-}
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif

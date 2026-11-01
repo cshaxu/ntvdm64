@@ -113,9 +113,7 @@ Revision History:
 #include <debugfmt.h>           // Most FORMAT_ equates.
 
 #if DBG
-
-// Normal netlib debug version.  No extra includes.
-
+/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
 #else // not DBG
 
 #ifdef CDEBUG
@@ -169,24 +167,7 @@ extern "C" {
 //
 
 #if DBG
-
-VOID
-NetpAssertFailed(
-    IN LPDEBUG_STRING FailedAssertion,
-    IN LPDEBUG_STRING FileName,
-    IN DWORD LineNumber,
-    IN LPDEBUG_STRING Message OPTIONAL
-    );
-
-// Normal networking debug version.
-#define NetpAssert(Predicate) \
-    { \
-        /*lint -save -e506 */  /* don't complain about constant values here */ \
-        if (!(Predicate)) \
-            NetpAssertFailed( #Predicate, __FILE__, __LINE__, NULL ); \
-        /*lint -restore */ \
-    }
-
+/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
 #else // not DBG
 
 #ifdef CDEBUG
@@ -215,13 +196,7 @@ NetpAssertFailed(
 //
 
 #if DBG
-
-// NT debug version.  Calls DbgBreakPoint.
-VOID
-NetpBreakPoint(
-    VOID
-    );
-
+/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
 #else // not DBG
 
 #ifdef CDEBUG
@@ -240,300 +215,7 @@ NetpBreakPoint(
 
 
 #if DBG
-VOID
-NetpDbgDisplayBool(
-    IN LPDEBUG_STRING Tag,
-    IN BOOL Value
-    );
-
-VOID
-NetpDbgDisplayConnection(
-    IN DWORD Level,
-    IN LPVOID Info
-    );
-
-VOID
-NetpDbgDisplayConnectionArray(
-    IN DWORD Level,
-    IN LPVOID Array,
-    IN DWORD EntryCount
-    );
-
-VOID
-NetpDbgDisplayDword(
-    IN LPDEBUG_STRING Tag,
-    IN DWORD Value
-    );
-
-VOID
-NetpDbgDisplayDwordHex(
-    IN LPDEBUG_STRING Tag,
-    IN DWORD Value
-    );
-
-VOID
-NetpDbgDisplayFile(
-    IN DWORD Level,
-    IN LPVOID Info
-    );
-
-VOID
-NetpDbgDisplayFileArray(
-    IN DWORD Level,
-    IN LPVOID Array,
-    IN DWORD EntryCount
-    );
-
-VOID
-NetpDbgDisplayFileId(
-    IN DWORD Id
-    );
-
-VOID
-NetpDbgDisplayFilePermissions(
-    IN DWORD Perm
-    );
-
-VOID
-NetpDbgDisplayFileTime(
-    IN LPVOID GmtFileTime   // Pointer to FILETIME structure (winbase.h)
-    );
-
-VOID
-NetpDbgDisplayLanManVersion(
-    IN DWORD MajorVersion,
-    IN DWORD MinorVersion
-    );
-
-VOID
-NetpDbgDisplayLargeIntegerTime(
-    IN LPVOID GmtFileTime   // Pointer to LARGE_INTEGER structure.
-    );
-
-VOID
-NetpDbgDisplayLong(
-    IN LPDEBUG_STRING Tag,
-    IN LONG Value
-    );
-
-VOID
-NetpDbgDisplayPlatformId(
-    IN DWORD Value
-    );
-
-VOID
-NetpDbgDisplayPrintDest(
-    IN DWORD Level,
-    IN LPVOID Info,
-    IN BOOL HasUnicodeStrings
-    );
-
-VOID
-NetpDbgDisplayPrintDestArray(
-    IN DWORD Level,
-    IN LPVOID Array,
-    IN DWORD EntryCount,
-    IN BOOL HasUnicodeStrings
-    );
-
-VOID
-NetpDbgDisplayPrintJob(
-    IN DWORD Level,
-    IN LPVOID Info,
-    IN BOOL HasUnicodeStrings
-    );
-
-VOID
-NetpDbgDisplayPrintJobArray(
-    IN DWORD Level,
-    IN LPVOID Array,
-    IN DWORD EntryCount,
-    IN BOOL HasUnicodeStrings
-    );
-
-VOID
-NetpDbgDisplayPrintQ(
-    IN DWORD Level,
-    IN LPVOID Info,
-    IN BOOL HasUnicodeStrings
-    );
-
-VOID
-NetpDbgDisplayPrintQArray(
-    IN DWORD Level,
-    IN LPVOID Array,
-    IN DWORD EntryCount,
-    IN BOOL HasUnicodeStrings
-    );
-
-VOID
-NetpDbgDisplayRepl(
-    IN DWORD Level,
-    IN LPVOID Info
-    );
-
-VOID
-NetpDbgDisplayReplExportDir(
-    IN DWORD Level,
-    IN LPVOID Info
-    );
-
-VOID
-NetpDbgDisplayReplExportDirArray(
-    IN DWORD Level,
-    IN LPVOID Array,
-    IN DWORD EntryCount
-    );
-
-VOID
-NetpDbgDisplayReplImportDir(
-    IN DWORD Level,
-    IN LPVOID Info
-    );
-
-VOID
-NetpDbgDisplayReplImportDirArray(
-    IN DWORD Level,
-    IN LPVOID Array,
-    IN DWORD EntryCount
-    );
-
-VOID
-NetpDbgDisplayReplList(
-    IN LPDEBUG_STRING Tag,
-    IN LPCTSTR Value
-    );
-
-VOID
-NetpDbgDisplayReplState(
-    IN DWORD State
-    );
-
-VOID
-NetpDbgDisplayServerInfo(
-    IN DWORD Level,
-    IN LPVOID Info
-    );
-
-VOID
-NetpDbgDisplayService(
-    IN DWORD Level,
-    IN LPVOID Info
-    );
-
-VOID
-NetpDbgDisplayServiceArray(
-    IN DWORD Level,
-    IN LPVOID Array,
-    IN DWORD EntryCount
-    );
-
-VOID
-NetpDbgDisplayServiceCode(
-    IN DWORD Code
-    );
-
-VOID
-NetpDbgDisplayServicePid(
-    IN DWORD Pid
-    );
-
-VOID
-NetpDbgDisplayServiceStatus(
-    IN DWORD Status
-    );
-
-VOID
-NetpDbgDisplaySession(
-    IN DWORD Level,
-    IN LPVOID Info
-    );
-
-VOID
-NetpDbgDisplaySessionArray(
-    IN DWORD Level,
-    IN LPVOID Array,
-    IN DWORD EntryCount
-    );
-
-VOID
-NetpDbgDisplayStr(
-    IN LPDEBUG_STRING Tag,
-    IN LPSTR Value
-    );
-
-VOID
-NetpDbgDisplayString(
-    IN LPDEBUG_STRING Tag,
-    IN LPTSTR Value
-    );
-
-VOID
-NetpDbgDisplayTag(
-    IN LPDEBUG_STRING Tag
-    );
-
-VOID
-NetpDbgDisplayTimestamp(
-    IN LPDEBUG_STRING Tag,
-    IN DWORD Time               // Seconds since 1970.
-    );
-
-VOID
-NetpDbgDisplayTod(
-    IN LPDEBUG_STRING Tag,
-    IN LPVOID TimePtr           // LPTIME_OF_DAY_INFO.
-    );
-
-VOID
-NetpDbgDisplayTStr(
-    IN LPDEBUG_STRING Tag,
-    IN LPTSTR Value
-    );
-
-VOID
-NetpDbgDisplayUseInfo(
-    IN DWORD Level,
-    IN LPVOID Buffer
-    );
-
-VOID
-NetpDbgDisplayWord(
-    IN LPDEBUG_STRING Tag,
-    IN WORD Value
-    );
-
-VOID
-NetpDbgDisplayWordHex(
-    IN LPDEBUG_STRING Tag,
-    IN WORD Value
-    );
-
-VOID
-NetpDbgDisplayWksta(
-    IN DWORD Level,
-    IN LPVOID Info
-    );
-
-VOID
-NetpDbgDisplayWkstaUser(
-    IN DWORD Level,
-    IN LPVOID Info
-    );
-
-VOID
-NetpDbgDisplayWkstaUserArray(
-    IN DWORD Level,
-    IN LPVOID Array,
-    IN DWORD EntryCount
-    );
-
-VOID
-NetpDbgDisplayWStr(
-    IN LPDEBUG_STRING Tag,
-    IN LPWSTR Value
-    );
-
+/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
 #else // not DBG
 
 #define NetpDbgDisplayBool(Tag,Value)         /* nothing */
@@ -597,21 +279,7 @@ NetpDbgDisplayWStr(
 //
 
 #if DBG
-
-#define NetpKdPrint(_x_) NetpDbgPrint _x_
-
-VOID
-NetpDbgPrint(
-    IN LPDEBUG_STRING FORMATSTRING,     // PRINTF()-STYLE FORMAT STRING.
-    ...                                 // OTHER ARGUMENTS ARE POSSIBLE.
-    );
-
-VOID
-NetpHexDump(
-    LPBYTE Buffer,
-    DWORD BufferSize
-    );
-
+/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
 #else // not DBG
 
 #ifdef CDEBUG

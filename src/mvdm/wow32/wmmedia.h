@@ -236,37 +236,7 @@ VOID UnThunkStatusCmd( MCIDEVICEID devID, DWORD OrigFlags,
 
 
 #if DBG
-/* -----------------------------------------------------------------------
- *
- * MCI Command Thunks Debugging Functions and Macros
- *
- * ----------------------------------------------------------------------- */
-typedef struct {
-    UINT    uMsg;
-    LPSTR   lpstMsgName;
-} MCI_MESSAGE_NAMES;
-
-extern int                  mmDebugLevel;
-extern int                  mmTraceWave;
-extern int                  mmTraceMidi;
-extern MCI_MESSAGE_NAMES    mciMessageNames[32];
-
-extern VOID wow32MciSetDebugLevel( VOID );
-extern VOID wow32MciDebugOutput( LPSTR lpstrFormatStr, ... );
-
-#define dprintf( _x_ )                          wow32MciDebugOutput _x_
-#define dprintf1( _x_ ) if (mmDebugLevel >= 1) {wow32MciDebugOutput _x_ ;} else
-#define dprintf2( _x_ ) if (mmDebugLevel >= 2) {wow32MciDebugOutput _x_ ;} else
-#define dprintf3( _x_ ) if (mmDebugLevel >= 3) {wow32MciDebugOutput _x_ ;} else
-#define dprintf4( _x_ ) if (mmDebugLevel >= 4) {wow32MciDebugOutput _x_ ;} else
-#define dprintf5( _x_ ) if (mmDebugLevel >= 5) {wow32MciDebugOutput _x_ ;} else
-
-#define trace_wave( _x_ ) if (mmTraceWave) {wow32MciDebugOutput _x_ ;} else
-#define trace_midi( _x_ ) if (mmTraceMidi) {wow32MciDebugOutput _x_ ;} else
-#define trace_aux( _x_ )  if (mmTraceAux)  {wow32MciDebugOutput _x_ ;} else
-#define trace_joy( _x_ )  if (mmTraceJoy)  {wow32MciDebugOutput _x_ ;} else
-
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 
 #define dprintf( _x_ )

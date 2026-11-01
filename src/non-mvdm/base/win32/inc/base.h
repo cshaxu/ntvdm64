@@ -46,7 +46,7 @@ Revision History:
 //
 
 #if DBG
-#define IF_DEBUG if (TRUE)
+/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
 #else
 #define IF_DEBUG if (FALSE)
 #endif

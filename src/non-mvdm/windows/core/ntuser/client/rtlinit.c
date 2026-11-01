@@ -187,18 +187,14 @@ PVOID AllocLookasideEntry(
          * Allocate a local structure.
          */
 #if DBG
-        pla->AllocSlowCalls++;
+/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
 #endif // DBG
         if ((pEntry = UserLocalAlloc(0, pla->EntrySize)) == NULL)
             return NULL;
         }
     RtlZeroMemory(pEntry, pla->EntrySize);
 #if DBG
-    pla->AllocCalls++;
-
-    if (pla->AllocCalls - pla->DelCalls > pla->AllocHiWater ) {
-        pla->AllocHiWater = pla->AllocCalls - pla->DelCalls;
-        }
+/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
 #endif // DBG
 
     return pEntry;
@@ -217,7 +213,7 @@ void FreeLookasideEntry(
     PVOID pEntry)
 {
 #if DBG
-    pla->DelCalls++;
+/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
 #endif // DBG
 
     //
@@ -229,7 +225,7 @@ void FreeLookasideEntry(
         RtlLeaveCriticalSection(&gcsLookaside);
     } else {
 #if DBG
-        pla->DelSlowCalls++;
+/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
 #endif // DBG
         UserLocalFree(pEntry);
     }

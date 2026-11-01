@@ -69,11 +69,7 @@ Return Value:
     WORD DosPdb = getAX();
 
 #if DBG
-
-    IF_DEBUG(NETAPI) {
-        DbgPrint("VrTerminateDosProcess. PDB=%04x\n", DosPdb);
-    }
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     VrTerminateMailslots(DosPdb);
@@ -106,10 +102,7 @@ Return Value:
 {
 
 #if DBG
-
-    DbgPrint("VrUnsupportedFunction\n");
-    VrDumpRealMode16BitRegisters(TRUE);
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     SET_ERROR(ERROR_NOT_SUPPORTED);

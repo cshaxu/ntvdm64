@@ -55,35 +55,13 @@ ULONG iSvc;
     iSvc = CurrentISVC;
 
 #if DBG
-    if(iSvc < SVC_DEMLASTSVC && (fShowSVCMsg & DEMSVCTRACE) &&
-         apfnSVC[iSvc] != demNotYetImplemented){
-        sprintf(demDebugBuffer,"demRetry:Retrying %s\n\tAX=%.4x BX=%.4x CX=%.4x DX=%.4x DI=%.4x SI=%.4x\n",
-               aSVCNames[iSvc],getAX(),getBX(),getCX(),getDX(),getDI(),getSI());
-        OutputDebugStringOem(demDebugBuffer);
-        sprintf(demDebugBuffer,"\tCS=%.4x IP=%.4x DS=%.4x ES=%.4x SS=%.4x SP=%.4x BP=%.4x\n",
-                getCS(),getIP(), getDS(),getES(),getSS(),getSP(),getBP());
-        OutputDebugStringOem(demDebugBuffer);
-    }
-
-    if (iSvc >= SVC_DEMLASTSVC || apfnSVC[iSvc] == demNotYetImplemented ){
-        ASSERT(FALSE);
-        setCF(1);
-        setAX(0xff);
-        return;
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif // DBG
 
     (apfnSVC [iSvc])();
 
 #if DBG
-    if((fShowSVCMsg & DEMSVCTRACE)){
-        sprintf(demDebugBuffer,"demRetry:After %s\n\tAX=%.4x BX=%.4x CX=%.4x DX=%.4x DI=%.4x SI=%.4x\n",
-               aSVCNames[iSvc],getAX(),getBX(),getCX(),getDX(),getDI(),getSI());
-        OutputDebugStringOem(demDebugBuffer);
-        sprintf(demDebugBuffer,"\tCS=%.4x IP=%.4x DS=%.4x ES=%.4x SS=%.4x SP=%.4x BP=%.4x CF=%x\n",
-               getCS(),getIP(), getDS(),getES(),getSS(),getSP(),getBP(),getCF());
-        OutputDebugStringOem(demDebugBuffer);
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
     return;
 }
@@ -137,10 +115,7 @@ ULONG ulErrCode;
         && ulErrCode != ERROR_WRONG_DISK )
        {
 #if DBG
-       if (fShowSVCMsg & DEMERROR) {
-           sprintf(demDebugBuffer,"demClientErr: ErrCode=%ld\n", ulErrCode);
-           OutputDebugStringOem(demDebugBuffer);
-           }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         if (bSetRegs) {
             setAX((USHORT)ulErrCode);
@@ -165,13 +140,7 @@ ULONG ulErrCode;
         pHardErrPacket->vhe_HrdErrCode =  (UCHAR)ulErrCode;
 
 #if DBG
-        if (fShowSVCMsg & DEMERROR) {
-            sprintf(demDebugBuffer,
-                    "demClientErr HRDERR: DriveNum=%ld ErrCode=%ld\n",
-                    (DWORD)pHardErrPacket->vhe_bDriveNum,
-                    (DWORD)pHardErrPacket->vhe_HrdErrCode);
-            OutputDebugStringOem(demDebugBuffer);
-            }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
         // Save Away Information for possible retry operation
         demSaveHardErrInfo ();

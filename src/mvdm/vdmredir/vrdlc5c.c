@@ -763,42 +763,7 @@ Return Value:
     setAL((UCHAR)status);
 
 #if DBG
-    IF_DEBUG(DOS_CCB_OUT) {
-
-        DPUT2("VrDlc5cHandler: returning AL=%02x CCB.RETCODE=%02x\n",
-                status,
-                pOutputCcb->uchDlcStatus
-                );
-
-        //
-        // dump the CCB being returned to the DOS app
-        //
-
-        DumpCcb(pOutputCcb,
-                TRUE,                           // DumpAll
-                FALSE,                          // CcbIsInput
-                TRUE,                           // IsDos
-                HIWORD(dpOriginalCcbAddress),   // segment
-                LOWORD(dpOriginalCcbAddress)    // offset
-                );
-    }
-
-    //
-    // make sure (in debug version) that the error code being returned is valid
-    // for this particular command. Doesn't necessarily mean the return code is
-    // semantically correct, just that it belongs to the set of allowed DLC
-    // return codes for the DLC command being processed
-    //
-
-    IF_DEBUG(DLC) {
-        if (!IsCcbErrorCodeAllowable(pOutputCcb->uchDlcCommand, pOutputCcb->uchDlcStatus)) {
-            DPUT2("Returning bad error code: Command=%02x, Retcode=%02x\n",
-                    pOutputCcb->uchDlcCommand,
-                    pOutputCcb->uchDlcStatus
-                    );
-            DEBUG_BREAK();
-        }
-    }
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 }
 
@@ -1235,9 +1200,7 @@ Return Value:
         break;
 
 #if DBG
-    default:
-        DPUT1("ProcessImmediateCommand: Error: Command is NOT immediate (%x)\n", Command);
-        DbgBreakPoint();
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
     }
@@ -1984,14 +1947,7 @@ Return Value:
         pNewCcb->ulCompletionFlag = LLC_DOS_SPECIAL_COMMAND;
 
 #if DBG
-
-        //
-        // clear out the first-buffer field to stop the debug code displaying
-        // a ton of garbage if the field is left uninitialized
-        //
-
-        WRITE_DWORD(&pOutputCcb->u.pParms->DosReceive.pFirstBuffer, 0);
-        pNtParms->Receive.pFirstBuffer = NULL;
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #endif
 
         break;
@@ -3245,9 +3201,7 @@ Return Value:
     Adapters[AdapterNumber].AdapterCloseCcb.ulCompletionFlag = VRDLC_COMMAND_COMPLETION;
 
 #if DBG
-
-    ASSERT(lpAcsLan(&Adapters[AdapterNumber].AdapterCloseCcb, NULL) == LLC_STATUS_SUCCESS);
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 
     lpAcsLan(&Adapters[AdapterNumber].AdapterCloseCcb, NULL);
@@ -3348,9 +3302,7 @@ Return Value:
     Adapters[AdapterNumber].DirectCloseCcb.ulCompletionFlag = VRDLC_COMMAND_COMPLETION;
 
 #if DBG
-
-    ASSERT(lpAcsLan(&Adapters[AdapterNumber].DirectCloseCcb, NULL) == LLC_STATUS_SUCCESS);
-
+/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
 #else
 
     lpAcsLan(&Adapters[AdapterNumber].DirectCloseCcb, NULL);
