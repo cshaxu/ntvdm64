@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-526: mark seven unselected REAL_VGA alternatives and three
+unselected BACK_M address adjustments in the project-adapted EMM carrier.
+The active alias checks and copies are retained. Locations and hashes are in
+`../../artifacts/mvdm-audit/s12-device-tail.jsonl`.
+
 MVDM-HOST-DIV-525: replace unselected REAL_VGA, NULLSTRUCT, BACK_M,
 SYNCH_TIMERS, FIFO_ON, GORE and IRET_HOOKS branches with registered markers,
 retaining the conditional shells. Original body hashes and locations are in

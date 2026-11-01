@@ -454,7 +454,7 @@ void low_set_mode IFN1(int, mode)
 #ifndef REAL_VGA
 	do_outb(EGA_SEQ_INDEX,0,1);	/* Synchronous reset - turn off Sequencer */
 #else
-	do_outb(EGA_SEQ_INDEX,0,0);	/* Reset - turn off Sequencer */
+/* DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register. */
 #endif
 	do_outb(EGA_CRTC_INDEX,0x11,0);
 	for(i=0;i<EGA_PARMS_SEQ_SIZE;i++)
@@ -919,7 +919,7 @@ write_ch_set IFN5(sys_addr, char_addr, int, screen_off,
 		}
 	}
 #else
-	vga_card_w_ch_set(char_addr, screen_off, colour, nchs, scan_length, char_height);
+/* DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register. */
 #endif
 }
 
@@ -984,7 +984,7 @@ void write_ch_xor IFN5(sys_addr, char_addr, int, screen_off,
 		}
 	}
 #else
-	vga_card_w_ch_xor(char_addr, screen_off, colour, nchs, scan_length, char_height);
+/* DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register. */
 #endif
 }
 
@@ -1968,7 +1968,7 @@ void ega_write_dot IFN4(int, colour, int, page, int, pixcol, int, row)
 
 	(*update_alg.mark_byte)(screen_off);
 #else
-	vga_card_w_dot(screen_off, pixmask, colour);
+/* DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register. */
 #endif
 }
 
@@ -2105,7 +2105,7 @@ void ega_read_attrib_char IFN3(int, col, int, row, int, page)
 		screen_off += sas_w_at_no_check(VID_COLS);
 	}
 #else
-	vga_card_read_ch(screen_off, sas_w_at_no_check(VID_COLS), char_height, the_char);
+/* DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register. */
 #endif
 	/* Now search the font */
 	search_font((char *)the_char,(int)char_height);
@@ -2155,7 +2155,7 @@ void ega_read_dot IFN3(int, page, int, col, int, row)
 	val |= ((data & mask) >> shift) << 3;
 
 #else
-	val = vga_card_read_dot(screen_off, shift);
+/* DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register. */
 #endif
 	setAL(val);
 }

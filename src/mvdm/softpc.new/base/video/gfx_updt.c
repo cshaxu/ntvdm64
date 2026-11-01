@@ -3677,11 +3677,7 @@ void cursor_changed IFN2(int, x, int, y)
 	
 	setVideodirty_total(getVideodirty_total() + 1);
 #else
-    IU32 offset;
-
-    offset = (y * 2 * get_chars_per_line()) + (x << 1);
-    offset += get_screen_start()<<1;	/* Because screen start is in WORDS */
-    vga_card_place_cursor((word)offset);
+/* DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register. */
 #endif
 } 
 #endif

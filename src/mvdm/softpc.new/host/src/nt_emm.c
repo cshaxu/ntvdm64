@@ -135,7 +135,7 @@ static int em_loads(sys_addr from, unsigned char *to, int length)
     count = (uint32_t)length;
     guest_from = from;
 #ifdef BACK_M
-    guest_from -= count - (count != 0u);
+/* DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register. */
 #endif
     if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_from, count)) {
         EM_loads(from, to, length);
@@ -158,7 +158,7 @@ static int em_stores(sys_addr to, unsigned char *from, int length)
     count = (uint32_t)length;
     guest_to = to;
 #ifdef BACK_M
-    guest_to -= count - (count != 0u);
+/* DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register. */
 #endif
     if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_to, count)) {
         EM_stores(to, from, length);
@@ -184,8 +184,7 @@ static int em_moves(sys_addr from, sys_addr to, int length)
     guest_from = from;
     guest_to = to;
 #ifdef BACK_M
-    guest_from -= count - (count != 0u);
-    guest_to -= count - (count != 0u);
+/* DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register. */
 #endif
     if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_from, count) &&
         !mvdm_softpc_physical_mapping_span_is_aliased(guest_to, count)) {
