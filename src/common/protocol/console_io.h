@@ -8,7 +8,7 @@
 /* Direct worker/frontend wire header; no pointers or native resource
  * identities cross the pipe.  Local payload pointers below are explicitly
  * process-local staging only.  Peers are authenticated by BaseSrv attachment. */
-#define CONSOLE_IO_VERSION 29u
+#define CONSOLE_IO_VERSION 30u
 /* One-hop worker -> launcher stream routing, not an authorization token.
  * Versioned name; three low bits designate worker-local interactive endpoints.
  * File/pipe handles remain actual inherited resources. Consume before launch. */
@@ -33,8 +33,16 @@ typedef struct console_io_input {
     uint32_t type,flags,control,repeat,virtual_key,scan,character,key_down;
     int32_t x,y;
     uint32_t buttons,menu,focus;
+    /* Frontend-issued input receipt; zero for input without an attributable
+     * physical event. It is an opaque channel-local correlation value. */
+    uint32_t receipt_low,receipt_high;
 } console_io_input;
+typedef char console_io_input_wire_size_check[(sizeof(console_io_input)==60u) ? 1 : -1];
 #define CONSOLE_IO_INPUT_CAPACITY (CONSOLE_IO_TILE_BYTES/sizeof(console_io_input))
+/* READ_INPUT: caller may later return these receipts through PREPEND_KEYS. */
+#define CONSOLE_IO_INPUT_RETURNABLE 1u
+/* Maximum live return receipts supplied by a reader with READ_INPUT. */
+#define CONSOLE_IO_INPUT_LIVE_CAPACITY 100u
 enum console_io_operation {
     CONSOLE_IO_WRITE = 1,
     CONSOLE_IO_SCREEN_INFO,

@@ -28,6 +28,7 @@ DWORD ntcon_worker_prepare_text(ntcon_worker_client *,COORD);
 /* Encode/send one atomic key batch. Return raw server status/count so the
  * original API and native all-or-error caller retain their distinct contracts. */
 DWORD ntcon_worker_prepend_keys(ntcon_worker_client *,const INPUT_RECORD *,DWORD,console_io_reply *);
+DWORD ntcon_worker_prepend_keys_tagged(ntcon_worker_client *,const INPUT_RECORD *,const uint64_t *,DWORD,console_io_reply *);
 
 /* Exchange returns transport status; call also interprets the server result.
  * Server errors such as BUSY are retryable; framing/I/O failures are sticky. */

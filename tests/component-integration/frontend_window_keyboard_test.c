@@ -204,6 +204,47 @@ int main(int argc,char **argv)
     kvm_input_event event = {0};
     INPUT_RECORD record;
     HKL layout = GetKeyboardLayout(0);
+    {
+        KEY_EVENT_RECORD physical={0};unsigned left,right,no_scan;
+        physical.wVirtualKeyCode=VK_CONTROL;physical.wVirtualScanCode=0x1d;
+        assert(frontend_keyboard_key_identity(&physical,&left));
+        physical.dwControlKeyState=ENHANCED_KEY;
+        assert(frontend_keyboard_key_identity(&physical,&right));
+        assert(left==0x1d && right==0x11d);
+        physical.wVirtualScanCode=0xe01d;physical.dwControlKeyState=0;
+        assert(frontend_keyboard_key_identity(&physical,&no_scan) && no_scan==right);
+        physical.wVirtualScanCode=0;
+        assert(frontend_keyboard_key_identity(&physical,&no_scan));
+        assert(no_scan==512u+VK_CONTROL && no_scan!=left && no_scan!=right);
+        physical.wVirtualKeyCode=0;assert(!frontend_keyboard_key_identity(&physical,&no_scan));
+    }
+    {
+        frontend_window_keyboard_state console={0};KEY_EVENT_RECORD original={0};
+        INPUT_RECORD released;
+        original.bKeyDown=TRUE;original.wRepeatCount=3;original.wVirtualKeyCode=VK_RCONTROL;
+        original.dwControlKeyState=RIGHT_CTRL_PRESSED;
+        assert(frontend_keyboard_accept_record(&console,23,&original));
+        assert(frontend_keyboard_accept_record(&console,23,&original));
+        assert(console.held_count==1);
+        original.wVirtualKeyCode=VK_PACKET;original.uChar.UnicodeChar=L'a';
+        assert(frontend_keyboard_accept_record(&console,23,&original));
+        assert(console.held_count==1); /* character-only packets have no break */
+        frontend_window_keyboard_release_begin(&console,TRUE);
+        assert(frontend_window_keyboard_release_next(&console,&released));
+        assert(!released.Event.KeyEvent.bKeyDown && released.Event.KeyEvent.wRepeatCount==1 &&
+            released.Event.KeyEvent.wVirtualKeyCode==VK_RCONTROL &&
+            !(released.Event.KeyEvent.dwControlKeyState&ENHANCED_KEY));
+        assert(!frontend_window_keyboard_release_next(&console,&released));
+        assert(!console.held_count && !console.source_identity);
+        original.wVirtualKeyCode=VK_CONTROL;original.wVirtualScanCode=0xe01d;
+        original.uChar.UnicodeChar=0;original.dwControlKeyState=RIGHT_CTRL_PRESSED;
+        assert(frontend_keyboard_accept_record(&console,24,&original));
+        frontend_window_keyboard_release_begin(&console,TRUE);
+        assert(frontend_window_keyboard_release_next(&console,&released));
+        assert(!released.Event.KeyEvent.bKeyDown &&
+            (released.Event.KeyEvent.dwControlKeyState&ENHANCED_KEY));
+        assert(!frontend_window_keyboard_release_next(&console,&released));
+    }
     event.type = KVM_EVENT_KEY;
     event.data.key.key = 'A';
     event.data.key.scan_code = 0x1e;

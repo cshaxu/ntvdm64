@@ -992,20 +992,29 @@ BOOL WINAPI MvdmReadConsoleOutputW(HANDLE output,PCHAR_INFO buffer,COORD size,
 }
 
 
-static BOOL input_operation(HANDLE input,INPUT_RECORD *records,DWORD length,LPDWORD read,BOOL peek)
+static BOOL input_operation(HANDLE input,INPUT_RECORD *records,uint64_t *receipts,DWORD length,LPDWORD read,BOOL peek,
+    const uint64_t *live,DWORD live_count)
 {
     console_client *client=input_client(input);
     console_io_reply reply;
     DWORD error,i;
     BOOL ok;
-    if (!client) return peek ? PeekConsoleInputW(input,records,length,read) :
-        ReadConsoleInputW(input,records,length,read);
-    if (!read || (!records && length)) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
+    if (!client) {
+        ok=peek ? PeekConsoleInputW(input,records,length,read) :
+            ReadConsoleInputW(input,records,length,read);
+        if(ok && receipts && read)for(i=0;i<*read;++i)receipts[i]=0;
+        return ok;
+    }
+    if (!read || (!records && length) || live_count>CONSOLE_IO_INPUT_LIVE_CAPACITY ||
+        (live_count && (!live || !receipts || peek))) { SetLastError(ERROR_INVALID_PARAMETER);return FALSE; }
     *read=0;
     EnterCriticalSection(&client->lock);
     ZeroMemory(&client->request,offsetof(console_io_request,data));
     client->request.operation=peek ? CONSOLE_IO_PEEK_INPUT : CONSOLE_IO_READ_INPUT;
     client->request.state.count=min(length,CONSOLE_IO_INPUT_CAPACITY);
+    client->request.state.mode=receipts ? CONSOLE_IO_INPUT_RETURNABLE : 0;
+    client->request.bytes=live_count*sizeof(*live);
+    client->request.data=(BYTE *)live;
     error=exchange(client,&reply);ok=!error && reply.result;
     if (!error && !ok) error=reply.error;
     if (ok && (reply.state.count>client->request.state.count ||
@@ -1016,6 +1025,7 @@ static BOOL input_operation(HANDLE input,INPUT_RECORD *records,DWORD length,LPDW
         console_io_input wire;
         memcpy(&wire,reply.data+i*sizeof(wire),sizeof(wire));
         if (!decode_input(&wire,&records[i])) { error=ntcon_worker_client_fail(&client->channel,ERROR_INVALID_DATA);ok=FALSE; }
+        if(receipts)receipts[i]=(uint64_t)wire.receipt_low|((uint64_t)wire.receipt_high<<32);
     }
     if (ok) *read=reply.state.count;
     if (ok) {
@@ -1028,14 +1038,19 @@ static BOOL input_operation(HANDLE input,INPUT_RECORD *records,DWORD length,LPDW
 }
 BOOL WINAPI MvdmReadConsoleInputW(HANDLE input,PINPUT_RECORD records,DWORD length,LPDWORD read)
 {
-    return input_operation(input,records,length,read,FALSE);
+    return input_operation(input,records,NULL,length,read,FALSE,NULL,0);
 }
 BOOL WINAPI MvdmPeekConsoleInputW(HANDLE input,PINPUT_RECORD records,DWORD length,LPDWORD read)
 {
-    return input_operation(input,records,length,read,TRUE);
+    return input_operation(input,records,NULL,length,read,TRUE,NULL,0);
+}
+BOOL ntvdm_console_read_input_tagged(HANDLE input,PINPUT_RECORD records,uint64_t *receipts,
+    DWORD length,LPDWORD read,BOOL peek,const uint64_t *live,DWORD live_count)
+{
+    return input_operation(input,records,receipts,length,read,peek,live,live_count);
 }
 
-BOOL ntvdm_console_prepend_keys(HANDLE input,PINPUT_RECORD records,DWORD length,LPDWORD written)
+BOOL ntvdm_console_prepend_keys_tagged(HANDLE input,PINPUT_RECORD records,const uint64_t *receipts,DWORD length,LPDWORD written)
 {
     console_client *client=input_client(input);
     console_io_reply reply;
@@ -1055,11 +1070,15 @@ BOOL ntvdm_console_prepend_keys(HANDLE input,PINPUT_RECORD records,DWORD length,
         SetLastError(ERROR_INVALID_PARAMETER);return FALSE;
     }
     EnterCriticalSection(&client->lock);
-    error=ntcon_worker_prepend_keys(&client->channel,records,length,&reply);
+    error=ntcon_worker_prepend_keys_tagged(&client->channel,records,receipts,length,&reply);
     if (!error) {
         *written=reply.state.count;ok=reply.result;if (!ok) error=reply.error;
     }
     LeaveCriticalSection(&client->lock);
     if (error) SetLastError(error);
     return ok;
+}
+BOOL ntvdm_console_prepend_keys(HANDLE input,PINPUT_RECORD records,DWORD length,LPDWORD written)
+{
+    return ntvdm_console_prepend_keys_tagged(input,records,NULL,length,written);
 }

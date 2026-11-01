@@ -2,6 +2,21 @@
 
 #define KEY_LOCK_BITS (CAPSLOCK_ON | NUMLOCK_ON | SCROLLLOCK_ON)
 
+BOOL frontend_keyboard_key_identity(const KEY_EVENT_RECORD *key,unsigned *identity)
+{
+    unsigned scan;
+    if(!key || !identity)return FALSE;
+    scan=key->wVirtualScanCode;
+    if(!scan) {
+        if(!key->wVirtualKeyCode || key->wVirtualKeyCode>255)return FALSE;
+        *identity=512u+key->wVirtualKeyCode;
+        return TRUE;
+    }
+    if((scan&255u)==0u || (scan>255u && (scan&0xff00u)!=0xe000u))return FALSE;
+    *identity=(scan&255u) | ((scan>255u || (key->dwControlKeyState&ENHANCED_KEY)) ? 256u : 0u);
+    return TRUE;
+}
+
 DWORD frontend_keyboard_dispatch(frontend_keyboard_delivery *delivery,
     const frontend_window_input *input,frontend_keyboard_sink sink,void *context)
 {
@@ -199,10 +214,38 @@ BOOL frontend_window_keyboard_record(const kvm_input_event *event,
     return TRUE;
 }
 
+BOOL frontend_keyboard_accept_record(frontend_window_keyboard_state *state,
+    lib_u64 source_identity,const KEY_EVENT_RECORD *key)
+{
+    unsigned identity;
+    if (!state || !key || !source_identity) {
+        SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
+    }
+    if (state->releasing || (state->source_identity &&
+        state->source_identity != source_identity)) {
+        SetLastError(ERROR_INVALID_STATE); return FALSE;
+    }
+    if(!key->wVirtualScanCode && key->wVirtualKeyCode==VK_PACKET) {
+        state->source_identity=source_identity;state->locks=key->dwControlKeyState&KEY_LOCK_BITS;
+        return TRUE;
+    }
+    if(!frontend_keyboard_key_identity(key,&identity) || identity>=ARRAYSIZE(state->held)) {
+        SetLastError(ERROR_INVALID_DATA);return FALSE;
+    }
+    state->source_identity=source_identity;state->locks=key->dwControlKeyState&KEY_LOCK_BITS;
+    if(key->bKeyDown) {
+        if(!state->held[identity].bKeyDown)++state->held_count;
+        state->held[identity]=*key;
+    } else {
+        if(state->held[identity].bKeyDown)--state->held_count;
+        ZeroMemory(&state->held[identity],sizeof(state->held[identity]));
+    }
+    return TRUE;
+}
+
 BOOL frontend_window_keyboard_accept(frontend_window_keyboard_state *state,
     const kvm_input_event *event, DWORD control_state, HKL layout, INPUT_RECORD *record)
 {
-    unsigned identity;
     if (!state || !event || !record || !event->source_identity) {
         SetLastError(ERROR_INVALID_PARAMETER); return FALSE;
     }
@@ -212,20 +255,7 @@ BOOL frontend_window_keyboard_accept(frontend_window_keyboard_state *state,
     }
     if (!frontend_window_keyboard_record(event, event->type == KVM_EVENT_KEY ?
         delivered_modifiers(state, event, control_state) : control_state, layout, record)) return FALSE;
-    state->source_identity = event->source_identity;
-    state->locks = control_state & KEY_LOCK_BITS;
-    if (event->type == KVM_EVENT_KEY) {
-        identity = event->data.key.scan_code |
-            ((event->data.key.flags & BASE_KEY_FLAG_EXTENDED) ? 256u : 0u);
-        if (record->Event.KeyEvent.bKeyDown) {
-            if (!state->held[identity].bKeyDown) ++state->held_count;
-            state->held[identity] = record->Event.KeyEvent;
-        } else {
-            if (state->held[identity].bKeyDown) --state->held_count;
-            ZeroMemory(&state->held[identity], sizeof(state->held[identity]));
-        }
-    }
-    return TRUE;
+    return frontend_keyboard_accept_record(state,event->source_identity,&record->Event.KeyEvent);
 }
 
 void frontend_window_keyboard_release_begin(frontend_window_keyboard_state *state, BOOL retiring)
@@ -241,7 +271,7 @@ BOOL frontend_window_keyboard_release_next(frontend_window_keyboard_state *state
     if (!state || !record) { SetLastError(ERROR_INVALID_PARAMETER); return FALSE; }
     ZeroMemory(record, sizeof(*record));
     if (state->releasing) {
-        for (i = 0; i < 512; ++i) if (state->held[i].bKeyDown) {
+        for (i = 0; i < ARRAYSIZE(state->held); ++i) if (state->held[i].bKeyDown) {
             record->EventType = KEY_EVENT;
             record->Event.KeyEvent = state->held[i];
             ZeroMemory(&state->held[i], sizeof(state->held[i]));
@@ -252,7 +282,18 @@ BOOL frontend_window_keyboard_release_next(frontend_window_keyboard_state *state
             if (state->held[0x38].bKeyDown) modifiers |= LEFT_ALT_PRESSED;
             if (state->held[0x138].bKeyDown) modifiers |= RIGHT_ALT_PRESSED;
             if (state->held[0x2a].bKeyDown || state->held[0x36].bKeyDown) modifiers |= SHIFT_PRESSED;
-            if (i & 256u) modifiers |= ENHANCED_KEY;
+            if(state->held[512u+VK_LCONTROL].bKeyDown)modifiers|=LEFT_CTRL_PRESSED;
+            if(state->held[512u+VK_RCONTROL].bKeyDown)modifiers|=RIGHT_CTRL_PRESSED;
+            if(state->held[512u+VK_LMENU].bKeyDown)modifiers|=LEFT_ALT_PRESSED;
+            if(state->held[512u+VK_RMENU].bKeyDown)modifiers|=RIGHT_ALT_PRESSED;
+            if(state->held[512u+VK_SHIFT].bKeyDown || state->held[512u+VK_LSHIFT].bKeyDown ||
+                state->held[512u+VK_RSHIFT].bKeyDown)modifiers|=SHIFT_PRESSED;
+            if(state->held[512u+VK_CONTROL].bKeyDown)modifiers|=
+                state->held[512u+VK_CONTROL].dwControlKeyState&(LEFT_CTRL_PRESSED|RIGHT_CTRL_PRESSED);
+            if(state->held[512u+VK_MENU].bKeyDown)modifiers|=
+                state->held[512u+VK_MENU].dwControlKeyState&(LEFT_ALT_PRESSED|RIGHT_ALT_PRESSED);
+            if((i<512u && (i&256u)) || (record->Event.KeyEvent.dwControlKeyState&ENHANCED_KEY))
+                modifiers|=ENHANCED_KEY;
             record->Event.KeyEvent.bKeyDown = FALSE;
             record->Event.KeyEvent.wRepeatCount = 1;
             record->Event.KeyEvent.dwControlKeyState = modifiers;

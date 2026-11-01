@@ -35,8 +35,8 @@ typedef struct frontend_console {
     void (*publish_title)(void *,const char *);
     DWORD (*handoff_title)(void *,char *,DWORD);
     /* Copied input owned by frontend; callbacks hold the enter lock. */
-    DWORD (*read_input)(void *,BOOL,INPUT_RECORD *,DWORD,DWORD *);
-    DWORD (*prepend_input)(void *,const INPUT_RECORD *,DWORD);
+    DWORD (*read_input)(void *,BOOL,BOOL,INPUT_RECORD *,uint64_t *,DWORD,DWORD *,const uint64_t *,DWORD);
+    DWORD (*prepend_input)(void *,const INPUT_RECORD *,const uint64_t *,DWORD);
     DWORD (*read_text_configuration)(void *,DWORD,DWORD,console_io_reply *);
 } frontend_console;
 DWORD frontend_console_dispatch(frontend_console *,const console_io_request *,

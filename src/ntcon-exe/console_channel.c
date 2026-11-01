@@ -239,15 +239,20 @@ static BOOL active(frontend_io_channel *channel)
     if(enter(channel))return FALSE;
     leave(channel);return TRUE;
 }
-static DWORD read_input(void *context,BOOL peek,INPUT_RECORD *records,DWORD count,DWORD *read)
+static DWORD read_input(void *context,BOOL peek,BOOL returnable,INPUT_RECORD *records,uint64_t *receipts,DWORD count,DWORD *read,
+    const uint64_t *live,DWORD live_count)
 {
     frontend_io_channel *channel=context;
-    return frontend_session_read(channel->root,peek,records,count,read);
+    if(!peek && returnable) {
+        DWORD error=frontend_session_input_live(channel->root,live,live_count);
+        if(error)return error;
+    }
+    return frontend_session_read_owned(channel->root,peek,returnable,records,receipts,count,read);
 }
-static DWORD prepend_input(void *context,const INPUT_RECORD *records,DWORD count)
+static DWORD prepend_input(void *context,const INPUT_RECORD *records,const uint64_t *receipts,DWORD count)
 {
     frontend_io_channel *channel=context;
-    return frontend_session_prepend(channel->root,records,count);
+    return frontend_session_prepend_tagged(channel->root,records,receipts,count);
 }
 
 /* Explicit cancellation plus peer death. Never close an OVERLAPPED event or
@@ -381,7 +386,7 @@ static DWORD WINAPI console_channel_main(void *context)
              * event covers arrivals after this peek, including Window input. */
             if (!ResetEvent(channel->ready))error=GetLastError();
             if(!error && !enter(channel)) {
-                error=read_input(channel,TRUE,&record,1,&count);
+                error=read_input(channel,TRUE,FALSE,&record,NULL,1,&count,NULL,0);
                 leave(channel);
             }
             channel->input_pending=count!=0;

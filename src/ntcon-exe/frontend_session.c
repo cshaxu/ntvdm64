@@ -9,6 +9,31 @@
 #include "compat/include/console_grid.h"
 #include <stdint.h>
 
+/* Local queue metadata is never part of the worker wire format. A zero
+ * source marks input returned by a worker or synthesized independently of a
+ * physical source; it must not be mistaken for a Console/Window receipt. */
+typedef struct frontend_input_item {
+    INPUT_RECORD record;
+    uint64_t source;
+    uint64_t receipt;
+    BOOL retirement;
+} frontend_input_item;
+typedef struct frontend_input_transition {
+    KEY_EVENT_RECORD key;
+    uint64_t receipt;
+    BOOL removed;
+} frontend_input_transition;
+typedef struct frontend_input_owner {
+    const void *owner;
+    uint64_t source;
+    BOOL retired,defer,returnable;
+    frontend_window_keyboard_state keys;
+    frontend_window_keyboard_state baseline;
+    frontend_input_transition *history;
+    DWORD history_count,history_capacity;
+    struct frontend_input_owner *next;
+} frontend_input_owner;
+
 /* Visible presentation and copied input only. The active identity is a local
  * authenticated channel, never a worker kind, process tree or task record. */
 struct frontend_session {
@@ -59,8 +84,11 @@ struct frontend_session {
     frontend_window_mouse window_mouse;
     BOOL window_active;
     BOOL console_f_down,console_shortcut;
-    INPUT_RECORD *input;
+    frontend_input_item *input;
     DWORD input_count,input_capacity;
+    uint64_t input_source;
+    uint64_t input_receipt;
+    frontend_input_owner *input_owners;
     HANDLE input_ready;
     volatile LONG display_request;
 };
@@ -433,11 +461,20 @@ DWORD frontend_session_project_text(frontend_session *frontend)
 /* Copied frontend transport records, serialized by io_lock. Windows still
  * owns Console processing and the guest owns its keyboard device. Grow before
  * mutation; no truncation or partial prepend on allocation failure. */
-static DWORD input_write(frontend_session *frontend,
-    const INPUT_RECORD *records,DWORD count,BOOL prepend)
+static BOOL input_trackable_key(const INPUT_RECORD *record)
 {
-    DWORD total;SIZE_T capacity;INPUT_RECORD *grown;
+    unsigned identity;
+    return record->EventType==KEY_EVENT &&
+        (record->Event.KeyEvent.wVirtualScanCode || record->Event.KeyEvent.wVirtualKeyCode!=VK_PACKET) &&
+        frontend_keyboard_key_identity(&record->Event.KeyEvent,&identity);
+}
+static DWORD input_write(frontend_session *frontend,
+    const INPUT_RECORD *records,DWORD count,BOOL prepend,uint64_t source)
+{
+    DWORD total,i,receipts=0;SIZE_T capacity;frontend_input_item *grown;
     if(count>MAXDWORD-frontend->input_count)return ERROR_ARITHMETIC_OVERFLOW;
+    if(source)for(i=0;i<count;++i)if(input_trackable_key(&records[i]))++receipts;
+    if(receipts>UINT64_MAX-frontend->input_receipt)return ERROR_ARITHMETIC_OVERFLOW;
     total=frontend->input_count+count;
     if(total>frontend->input_capacity) {
         capacity=(SIZE_T)total;
@@ -448,26 +485,62 @@ static DWORD input_write(frontend_session *frontend,
         if(!grown)return ERROR_NOT_ENOUGH_MEMORY;
         frontend->input=grown;frontend->input_capacity=(DWORD)capacity;
     }
+    /* Signal before committing the copied records. The consumer holds the
+     * same lock, and an event failure therefore leaves the queue unchanged. */
+    if(total && !SetEvent(frontend->input_ready))return GetLastError();
     if(count) {
         if(prepend)memmove(frontend->input+count,frontend->input,
-            frontend->input_count*sizeof(*records));
-        memcpy(frontend->input+(prepend ? 0 : frontend->input_count),records,count*sizeof(*records));
+            frontend->input_count*sizeof(*frontend->input));
+        for(i=0;i<count;++i) {
+            frontend_input_item *item=&frontend->input[(prepend ? 0 : frontend->input_count)+i];
+            item->record=records[i];item->source=source;item->retirement=FALSE;
+            item->receipt=source && input_trackable_key(&records[i]) ? ++frontend->input_receipt : 0;
+        }
         frontend->input_count=total;
     }
-    return !total || SetEvent(frontend->input_ready) ? ERROR_SUCCESS : GetLastError();
+    return ERROR_SUCCESS;
 }
 static DWORD window_records(void *context,const INPUT_RECORD *records,DWORD count)
 {
     frontend_session *frontend=context;
     /* Both workers consume this copied queue through the same channel. */
-    return input_write(frontend,records,count,FALSE);
+    return input_write(frontend,records,count,FALSE,frontend->input_source);
+}
+static DWORD discard_retired_records(void *context,const INPUT_RECORD *records,DWORD count)
+{
+    (void)context;(void)records;(void)count;return ERROR_SUCCESS;
+}
+/* Ordered with accepted input under io_lock. The queue marker belongs to the
+ * source, while a suspended channel retains its own release obligation. */
+static DWORD input_retire(frontend_session *frontend)
+{
+    INPUT_RECORD marker={0};frontend_input_owner *entry;DWORD error;
+    if(frontend->input_source==UINT64_MAX)return ERROR_ARITHMETIC_OVERFLOW;
+    error=input_write(frontend,&marker,1,FALSE,frontend->input_source);
+    if(error)return error;
+    frontend->input[frontend->input_count-1].retirement=TRUE;
+    for(entry=frontend->input_owners;entry;entry=entry->next)
+        if(entry->source==frontend->input_source) {
+            entry->retired=TRUE;entry->defer=(entry->owner==frontend->owner);
+        }
+    ++frontend->input_source;
+    return ERROR_SUCCESS;
 }
 static lib_bool window_input(void *context,const frontend_window_input *input)
 {
     frontend_session *frontend=context;
-    DWORD error;
+    DWORD error;BOOL retiring;
     error=frontend_window_mouse_dispatch(&frontend->window_mouse,input,window_records,frontend);
     if(error)return FALSE;
+    retiring=input->event.type==KVM_EVENT_SOURCE_RETIRED || input->event.type==KVM_EVENT_INPUT_RESET;
+    if(retiring && (!frontend->keyboard.physical.source_identity ||
+        frontend->keyboard.physical.source_identity==input->event.source_identity)) {
+        /* Retire the library's physical/translation view without placing its
+         * projected releases in the shared queue under the wrong owner. */
+        error=frontend_keyboard_dispatch(&frontend->keyboard,input,discard_retired_records,frontend);
+        if(error)return FALSE;
+        return input_retire(frontend)==ERROR_SUCCESS;
+    }
     return frontend_keyboard_dispatch(&frontend->keyboard,input,
         window_records,frontend)==ERROR_SUCCESS;
 }
@@ -497,9 +570,18 @@ static DWORD window_route(void *context,BOOL window,BOOL graphics)
         }
         frontend->console_surface=surface;
     }
+    if(frontend->window_active!=window && frontend->input_source==UINT64_MAX)
+        return ERROR_ARITHMETIC_OVERFLOW;
     if(frontend->window_active!=window &&
         !SetConsoleActiveScreenBuffer(window ? frontend->console_surface : frontend->console_output))
         return GetLastError();
+    if(frontend->window_active!=window && window) {
+        DWORD error=input_retire(frontend);
+        if(error) {
+            if(!SetConsoleActiveScreenBuffer(frontend->console_output))return GetLastError();
+            return error;
+        }
+    } else if(frontend->window_active!=window)++frontend->input_source;
     frontend->window_active=window;
     /* Painting must work before the user moves the mouse. Geometry may arrive
        after a forced Window selection; the frame path completes that case. */
@@ -571,7 +653,7 @@ static DWORD collect_console(frontend_session *frontend)
             error=console_input(frontend,&records[i],&keep);if(error)return error;
             if(keep)records[kept++]=records[i];
         }
-        error=input_write(frontend,records,kept,FALSE);if(error)return error;
+        error=input_write(frontend,records,kept,FALSE,frontend->input_source);if(error)return error;
     }
     return ERROR_SUCCESS;
 }
@@ -623,7 +705,7 @@ static DWORD present_loop(frontend_session *frontend)
                 keys[2].Event.KeyEvent.uChar.UnicodeChar=0;
                 keys[3]=keys[0];keys[3].Event.KeyEvent.bKeyDown=FALSE;
                 keys[3].Event.KeyEvent.dwControlKeyState=0;
-                error=input_write(frontend,keys,ARRAYSIZE(keys),FALSE);
+                error=input_write(frontend,keys,ARRAYSIZE(keys),FALSE,0);
                 if(error)break;
             }
         }
@@ -737,6 +819,7 @@ DWORD frontend_session_create(frontend_session **output)
     *output=NULL;
     frontend=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*frontend));
     if(!frontend)return ERROR_NOT_ENOUGH_MEMORY;
+    frontend->input_source=1;
     InitializeCriticalSection(&frontend->io_lock);
     InitializeCriticalSection(&frontend->handoff_lock);
     frontend->console_input=CreateFileW(L"CONIN$",GENERIC_READ|GENERIC_WRITE,
@@ -930,7 +1013,7 @@ static DWORD apply_binding(frontend_session *frontend,const void *owner,BOOL act
     /* Consumer-specific mouse coordinates cannot cross worker boundaries.
      * Keep unsent keyboard/focus typeahead in the one frontend queue. */
     for(i=0;i<frontend->input_count;++i) {
-        WORD type=frontend->input[i].EventType;
+        WORD type=frontend->input[i].record.EventType;
         if(type!=CONSOLE_INPUT_FRAME_MOUSE && type!=MOUSE_EVENT)
             frontend->input[kept++]=frontend->input[i];
     }
@@ -941,7 +1024,27 @@ static DWORD apply_binding(frontend_session *frontend,const void *owner,BOOL act
         strcpy_s(frontend->handoff_title,sizeof(frontend->handoff_title),frontend->worker_title);
         frontend->handoff_title_valid=TRUE;
     }
+    if(!active) {
+        /* Poll/clear above can itself retire a source. Update after it has
+         * drained, otherwise its freshly marked obligations remain deferred. */
+        frontend_input_owner *entry;
+        for(entry=frontend->input_owners;entry;entry=entry->next)
+            if(entry->owner==owner) {
+                if(entry->retired)entry->defer=FALSE;
+                /* Original worker returns unused input before releasing its
+                 * channel. Earlier receipts cannot be returned afterward. */
+                entry->baseline=entry->keys;entry->history_count=0;
+            }
+    }
     frontend->owner=active ? owner : NULL;
+    if(active) {
+        frontend_input_owner *entry;
+        for(entry=frontend->input_owners;entry;entry=entry->next)
+            if(entry->owner==owner && entry->retired && !entry->defer && entry->keys.held_count) {
+                if(!SetEvent(frontend->input_ready))return GetLastError();
+                break;
+            }
+    }
     frontend->title_owner=NULL;frontend->worker_title_valid=FALSE;
     frontend->video=NULL;frontend->video_serial=0;
     frontend->committed_video=NULL;frontend->committed_video_serial=0;
@@ -1179,23 +1282,363 @@ HANDLE frontend_session_ready(frontend_session *frontend)
 {
     return frontend->input_ready;
 }
+/* A channel can relinquish the frontend while its worker remains alive.
+ * Keep its delivered physical state separate until that channel is forgotten. */
+static frontend_input_owner *input_owner(frontend_session *frontend,
+    const void *owner,uint64_t source,BOOL create)
+{
+    frontend_input_owner *entry;
+    for(entry=frontend->input_owners;entry;entry=entry->next)
+        if(entry->owner==owner && entry->source==source)return entry;
+    if(!create)return NULL;
+    entry=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,sizeof(*entry));
+    if(!entry)return NULL;
+    entry->owner=owner;entry->source=source;entry->next=frontend->input_owners;
+    frontend->input_owners=entry;return entry;
+}
+static void input_forget_owner(frontend_session *frontend,const void *owner)
+{
+    frontend_input_owner **link=&frontend->input_owners;
+    while(*link) {
+        frontend_input_owner *entry=*link;
+        if(!owner || entry->owner==owner) {
+            *link=entry->next;if(entry->history)HeapFree(GetProcessHeap(),0,entry->history);
+            HeapFree(GetProcessHeap(),0,entry);
+        } else link=&entry->next;
+    }
+}
+static void input_prune_released(frontend_session *frontend,const void *owner)
+{
+    frontend_input_owner **link=&frontend->input_owners;
+    while(*link) {
+        frontend_input_owner *entry=*link;
+        if(entry->owner==owner && entry->source!=frontend->input_source &&
+            !entry->keys.held_count && !entry->history_count) {
+            *link=entry->next;if(entry->history)HeapFree(GetProcessHeap(),0,entry->history);
+            HeapFree(GetProcessHeap(),0,entry);
+        } else link=&entry->next;
+    }
+}
+static DWORD input_record_transition(frontend_input_owner *entry,const KEY_EVENT_RECORD *key,uint64_t receipt)
+{
+    frontend_input_transition *grown;DWORD capacity;
+    if(entry->history_count==entry->history_capacity) {
+        capacity=entry->history_capacity ? entry->history_capacity*2u : 16u;
+        if(capacity<entry->history_capacity || (SIZE_T)capacity>SIZE_MAX/sizeof(*grown))return ERROR_ARITHMETIC_OVERFLOW;
+        grown=entry->history ? HeapReAlloc(GetProcessHeap(),0,entry->history,(SIZE_T)capacity*sizeof(*grown)) :
+            HeapAlloc(GetProcessHeap(),0,(SIZE_T)capacity*sizeof(*grown));
+        if(!grown)return ERROR_NOT_ENOUGH_MEMORY;
+        entry->history=grown;entry->history_capacity=capacity;
+    }
+    entry->history[entry->history_count++]=(frontend_input_transition){*key,receipt,FALSE};
+    return ERROR_SUCCESS;
+}
+static BOOL input_receipt_live(uint64_t receipt,const uint64_t *live,DWORD count)
+{
+    DWORD first=0,last=count;
+    if(!receipt)return FALSE;
+    while(first<last) {
+        DWORD middle=first+(last-first)/2;
+        if(live[middle]<receipt)first=middle+1;else last=middle;
+    }
+    return first<count && live[first]==receipt;
+}
+/* Reconcile the worker's bounded, returnable history with this projection.
+ * Between live transitions only the last non-returnable transition for each
+ * key can affect a later replay. Also retain the last global transition in
+ * each interval, because it supplies the lock state. Earlier transitions
+ * before the first live receipt can be folded into the baseline. */
+DWORD frontend_session_input_live(frontend_session *frontend,const uint64_t *live,DWORD count)
+{
+    frontend_input_owner *entry;
+    uint64_t sorted[CONSOLE_IO_INPUT_LIVE_CAPACITY];DWORD index;
+    if(!frontend || count>CONSOLE_IO_INPUT_LIVE_CAPACITY || (count && !live))return ERROR_INVALID_PARAMETER;
+    for(index=0;index<count;++index) {
+        DWORD pos=index;uint64_t value=live[index];
+        while(pos && sorted[pos-1]>value){sorted[pos]=sorted[pos-1];--pos;}
+        sorted[pos]=value;
+    }
+    /* Validate every ledger before marking or folding any of them. */
+    for(entry=frontend->input_owners;entry;entry=entry->next)if(entry->owner==frontend->owner) {
+        DWORD i;
+        if(!entry->source || (entry->baseline.source_identity &&
+            entry->baseline.source_identity!=entry->source))return ERROR_INVALID_STATE;
+        for(i=0;i<entry->history_count;++i)if(entry->history[i].removed!=TRUE) {
+            unsigned identity;
+            if(entry->history[i].removed || !frontend_keyboard_key_identity(&entry->history[i].key,&identity) ||
+                identity>=ARRAYSIZE(entry->keys.held))return ERROR_INVALID_DATA;
+        }
+    }
+    for(entry=frontend->input_owners;entry;entry=entry->next)if(entry->owner==frontend->owner && entry->history_count) {
+        DWORD pending[768],global=MAXDWORD,first=entry->history_count,i,out=0;
+        frontend_window_keyboard_state baseline=entry->baseline;
+        for(i=0;i<ARRAYSIZE(pending);++i)pending[i]=MAXDWORD;
+        for(i=entry->history_count;i>0;) {
+            frontend_input_transition *item=&entry->history[--i];unsigned identity;
+            if(item->removed==TRUE)continue;
+            if(!frontend_keyboard_key_identity(&item->key,&identity) || identity>=ARRAYSIZE(pending))
+                return ERROR_INVALID_DATA;
+            if(input_receipt_live(item->receipt,sorted,count)) {
+                item->removed=2;first=i;
+                if(pending[identity]!=MAXDWORD)entry->history[pending[identity]].removed=2;
+                if(global!=MAXDWORD)entry->history[global].removed=2;
+                pending[identity]=global=MAXDWORD;
+            } else {
+                if(pending[identity]==MAXDWORD)pending[identity]=i;
+                if(global==MAXDWORD)global=i;
+            }
+        }
+        /* A key may have no live transition at all. Its latest event after
+         * the first live receipt still contributes to the final projection. */
+        for(i=0;i<ARRAYSIZE(pending);++i)
+            if(pending[i]!=MAXDWORD && pending[i]>=first)entry->history[pending[i]].removed=2;
+        baseline.releasing=baseline.retiring=FALSE;
+        for(i=0;i<first;++i)if(entry->history[i].removed!=TRUE &&
+            !frontend_keyboard_accept_record(&baseline,entry->source,&entry->history[i].key))
+            return ERROR_INVALID_DATA;
+        for(i=first;i<entry->history_count;++i)if(entry->history[i].removed==2) {
+            frontend_input_transition item=entry->history[i];
+            item.removed=FALSE;
+            if(!input_receipt_live(item.receipt,sorted,count))item.receipt=0;
+            entry->history[out++]=item;
+        }
+        entry->baseline=baseline;entry->history_count=out;
+    }
+    input_prune_released(frontend,frontend->owner);
+    return ERROR_SUCCESS;
+}
+DWORD frontend_session_read_owned(frontend_session *frontend,BOOL peek,BOOL returnable,
+    INPUT_RECORD *records,uint64_t *receipts,DWORD capacity,DWORD *read)
+{
+    frontend_session copy,*view=frontend;frontend_input_owner *entry;DWORD pos=0,out=0,error=0;
+    *read=0;
+    if(peek) {
+        BOOL retirement=FALSE;DWORD i;
+        /* Ordinary readiness/peek does not need a speculative history copy.
+         * Only an encountered source boundary can synthesize extra records. */
+        for(entry=frontend->input_owners;entry;entry=entry->next)
+            if(entry->owner==frontend->owner && entry->retired && !entry->defer && entry->keys.held_count) {
+                retirement=TRUE;break;
+            }
+        for(i=0;!retirement && i<frontend->input_count && i<capacity;++i)
+            if(frontend->input[i].retirement)retirement=TRUE;
+        if(!retirement) {
+            out=min(capacity,frontend->input_count);
+            for(i=0;i<out;++i) {
+                records[i]=frontend->input[i].record;
+                if(receipts)receipts[i]=frontend->input[i].receipt;
+            }
+            *read=out;return ERROR_SUCCESS;
+        }
+        /* Peek runs the same ordered state machine against private ledgers;
+         * it must not retire keys or advance the actual queue. */
+        copy=*frontend;copy.input_owners=NULL;view=&copy;
+        for(entry=frontend->input_owners;entry;entry=entry->next)if(entry->owner==frontend->owner) {
+            frontend_input_owner *cloned=HeapAlloc(GetProcessHeap(),0,sizeof(*cloned));
+            if(!cloned){error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
+            *cloned=*entry;cloned->history=NULL;cloned->history_capacity=0;
+            if(entry->history_count) {
+                cloned->history=HeapAlloc(GetProcessHeap(),0,(SIZE_T)entry->history_count*sizeof(*cloned->history));
+                if(!cloned->history){HeapFree(GetProcessHeap(),0,cloned);error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
+                memcpy(cloned->history,entry->history,(SIZE_T)entry->history_count*sizeof(*cloned->history));
+                cloned->history_capacity=entry->history_count;
+            }
+            cloned->next=view->input_owners;view->input_owners=cloned;
+        }
+    }
+    while(out<capacity) {
+        frontend_input_owner *retiring=NULL;
+        for(entry=view->input_owners;entry;entry=entry->next)
+            if(entry->owner==frontend->owner && entry->retired && !entry->defer && entry->keys.held_count) {
+                retiring=entry;break;
+            }
+        if(retiring) {
+            frontend_window_keyboard_state next=retiring->keys;
+            if(!next.releasing)frontend_window_keyboard_release_begin(&next,TRUE);
+            if(frontend_window_keyboard_release_next(&next,&records[out])) {
+                uint64_t receipt;
+                receipt=0;
+                if(retiring->returnable) {
+                    if(view->input_receipt==UINT64_MAX){error=ERROR_ARITHMETIC_OVERFLOW;break;}
+                    receipt=view->input_receipt+1;
+                    error=input_record_transition(retiring,&records[out].Event.KeyEvent,receipt);
+                    if(error)break;
+                    view->input_receipt=receipt;
+                }
+                if(!next.held_count) {
+                    INPUT_RECORD ignored;
+                    if(frontend_window_keyboard_release_next(&next,&ignored) || GetLastError()!=ERROR_NO_DATA) {
+                        error=ERROR_INVALID_STATE;break;
+                    }
+                }
+                retiring->keys=next;
+                if(!retiring->returnable)retiring->baseline=next;
+                if(receipts)receipts[out]=receipt;++out;continue;
+            }
+            if(GetLastError()!=ERROR_NO_DATA){error=GetLastError();break;}
+        }
+        if(pos==frontend->input_count)break;
+        {
+            frontend_input_item *item=&frontend->input[pos];
+            if(item->retirement) {
+                entry=input_owner(view,frontend->owner,item->source,FALSE);
+                if(entry) {entry->retired=TRUE;entry->defer=FALSE;}
+                ++pos;continue;
+            }
+            if(item->source && input_trackable_key(&item->record)) {
+                entry=input_owner(view,frontend->owner,item->source,TRUE);
+                if(!entry) {error=ERROR_NOT_ENOUGH_MEMORY;break;}
+                if(entry->keys.releasing || (entry->keys.source_identity &&
+                    entry->keys.source_identity!=item->source)) {error=ERROR_INVALID_STATE;break;}
+                if(returnable)entry->returnable=TRUE;
+                if(entry->returnable) {
+                    error=input_record_transition(entry,&item->record.Event.KeyEvent,
+                        returnable ? item->receipt : 0);
+                    if(error)break;
+                }
+                if(entry && !frontend_keyboard_accept_record(&entry->keys,item->source,
+                    &item->record.Event.KeyEvent)) {error=ERROR_INVALID_DATA;break;}
+                if(!entry->returnable)entry->baseline=entry->keys;
+            }
+            records[out]=item->record;if(receipts)receipts[out]=item->receipt;++out;++pos;
+        }
+    }
+    if(!peek) {
+        BOOL pending=FALSE;
+        frontend->input_count-=pos;
+        memmove(frontend->input,frontend->input+pos,frontend->input_count*sizeof(*frontend->input));
+        input_prune_released(frontend,frontend->owner);
+        for(entry=frontend->input_owners;entry;entry=entry->next)
+            if(entry->owner==frontend->owner && entry->retired && !entry->defer && entry->keys.held_count) {
+                pending=TRUE;break;
+            }
+        if(error && out)error=ERROR_SUCCESS; /* Return a committed prefix, retry the rest. */
+        if(!frontend->input_count && !pending && !ResetEvent(frontend->input_ready) && !error)error=GetLastError();
+    }
+    *read=out;
+done:
+    if(peek)input_forget_owner(view,NULL);
+    return error;
+}
+DWORD frontend_session_read_tagged(frontend_session *frontend,BOOL peek,
+    INPUT_RECORD *records,uint64_t *receipts,DWORD capacity,DWORD *read)
+{
+    return frontend_session_read_owned(frontend,peek,TRUE,records,receipts,capacity,read);
+}
 DWORD frontend_session_read(frontend_session *frontend,BOOL peek,
     INPUT_RECORD *records,DWORD capacity,DWORD *read)
 {
-    DWORD count=frontend->input_count;
-    *read=0;
-    if(count>capacity)count=capacity;
-    if(count)memcpy(records,frontend->input,count*sizeof(*records));
-    if(!peek && count) {
-        frontend->input_count-=count;
-        memmove(frontend->input,frontend->input+count,frontend->input_count*sizeof(*records));
-        if(!frontend->input_count && !ResetEvent(frontend->input_ready))return GetLastError();
+    return frontend_session_read_tagged(frontend,peek,records,NULL,capacity,read);
+}
+DWORD frontend_session_prepend_tagged(frontend_session *frontend,const INPUT_RECORD *records,
+    const uint64_t *receipts,DWORD count)
+{
+    typedef struct receipt_match {frontend_input_owner *entry;DWORD index;} receipt_match;
+    receipt_match *matches=NULL;INPUT_RECORD *batch=NULL;DWORD *positions=NULL;
+    BOOL *markers=NULL;DWORD i,j,error,extra=0;
+    if(count>MAXDWORD-frontend->input_count)return ERROR_ARITHMETIC_OVERFLOW;
+    if(receipts && count) {
+        if((SIZE_T)count>SIZE_MAX/sizeof(*matches))return ERROR_NOT_ENOUGH_MEMORY;
+        matches=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,(SIZE_T)count*sizeof(*matches));
+        if(!matches)return ERROR_NOT_ENOUGH_MEMORY;
+        for(i=0;i<count;++i)if(receipts[i]) {
+            frontend_input_owner *entry;DWORD k;
+            for(j=0;j<i;++j)if(receipts[j]==receipts[i]) {error=ERROR_INVALID_DATA;goto done;}
+            for(entry=frontend->input_owners;entry && !matches[i].entry;entry=entry->next) {
+                if(entry->owner!=frontend->owner)continue;
+                for(k=0;k<entry->history_count;++k)if(!entry->history[k].removed &&
+                    entry->history[k].receipt==receipts[i]) {
+                    if(records[i].EventType!=KEY_EVENT ||
+                        records[i].Event.KeyEvent.bKeyDown!=entry->history[k].key.bKeyDown ||
+                        records[i].Event.KeyEvent.wVirtualKeyCode!=entry->history[k].key.wVirtualKeyCode) {
+                        error=ERROR_INVALID_DATA;goto done;
+                    }
+                    matches[i].entry=entry;matches[i].index=k;break;
+                }
+            }
+            if(!matches[i].entry) {error=ERROR_NOT_FOUND;goto done;}
+        }
     }
-    *read=count;return ERROR_SUCCESS;
+    if(matches && count) {
+        markers=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,(SIZE_T)count*sizeof(*markers));
+        positions=HeapAlloc(GetProcessHeap(),0,(SIZE_T)count*sizeof(*positions));
+        if(!markers || !positions){error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
+    }
+    for(i=0;matches && i<count;++i)if(matches[i].entry && matches[i].entry->retired) {
+        BOOL marker=FALSE,unread=FALSE;
+        uint64_t source=matches[i].entry->source;
+        for(j=i+1;j<count;++j)if(matches[j].entry && matches[j].entry->source==source)break;
+        if(j<count)continue; /* Place one boundary after the last returned record of this source. */
+        for(j=0;j<frontend->input_count;++j)if(frontend->input[j].source==source) {
+            if(frontend->input[j].retirement){marker=TRUE;break;}
+            unread=TRUE;
+        }
+        /* If the original boundary remains, older unread source records stay
+         * before it. Never insert a replacement boundary ahead of them. */
+        /* A retired source cannot append more input. Its old queued records
+         * must precede its original or reconstructed boundary. */
+        if(unread && !marker) {error=ERROR_INVALID_STATE;goto done;}
+        if(!marker){markers[i]=TRUE;++extra;}
+    }
+    if(extra) {
+        DWORD at=0;
+        if(extra>MAXDWORD-count || (SIZE_T)(count+extra)>SIZE_MAX/sizeof(*batch)) {
+            error=ERROR_ARITHMETIC_OVERFLOW;goto done;
+        }
+        batch=HeapAlloc(GetProcessHeap(),HEAP_ZERO_MEMORY,(SIZE_T)(count+extra)*sizeof(*batch));
+        if(!batch){error=ERROR_NOT_ENOUGH_MEMORY;goto done;}
+        for(i=0;i<count;++i) {
+            positions[i]=at;batch[at++]=records[i];
+            if(markers[i])++at;
+        }
+    }
+    /* Validate each projected ledger before changing the queue. Receipt
+     * identity, not equal key contents, selects the removed transitions. */
+    for(i=0;matches && i<count;++i)if(matches[i].entry) {
+        frontend_input_owner *entry=matches[i].entry;frontend_window_keyboard_state next=entry->baseline;
+        DWORD k;BOOL skip;
+        for(j=0;j<i;++j)if(matches[j].entry==entry)break;
+        if(j<i)continue;
+        next.releasing=next.retiring=FALSE;
+        for(k=0;k<entry->history_count;++k) {
+            skip=entry->history[k].removed;
+            for(j=0;!skip && j<count;++j)if(matches[j].entry==entry && matches[j].index==k)skip=TRUE;
+            if(!skip && !frontend_keyboard_accept_record(&next,entry->source,&entry->history[k].key)) {
+                error=ERROR_INVALID_DATA;goto done;
+            }
+        }
+    }
+    error=input_write(frontend,batch ? batch : records,count+extra,TRUE,0);
+    if(error)goto done;
+    for(i=0;matches && i<count;++i)if(matches[i].entry) {
+        frontend_input_owner *entry=matches[i].entry;DWORD at=extra ? positions[i] : i;
+        frontend->input[at].source=entry->source;frontend->input[at].receipt=receipts[i];
+        if(markers[i]) {
+            frontend->input[at+1].source=entry->source;
+            frontend->input[at+1].retirement=TRUE;
+        }
+        entry->history[matches[i].index].removed=TRUE;
+    }
+    for(i=0;matches && i<count;++i)if(matches[i].entry) {
+        frontend_input_owner *entry=matches[i].entry;frontend_window_keyboard_state next=entry->baseline;
+        DWORD k;BOOL releasing=entry->keys.releasing,retiring=entry->keys.retiring;
+        for(j=0;j<i;++j)if(matches[j].entry==entry)break;
+        if(j<i)continue;
+        next.releasing=next.retiring=FALSE;
+        for(k=0;k<entry->history_count;++k)if(!entry->history[k].removed)
+            (void)frontend_keyboard_accept_record(&next,entry->source,&entry->history[k].key);
+        next.releasing=releasing;next.retiring=retiring;entry->keys=next;
+    }
+done:
+    if(batch)HeapFree(GetProcessHeap(),0,batch);
+    if(positions)HeapFree(GetProcessHeap(),0,positions);
+    if(markers)HeapFree(GetProcessHeap(),0,markers);
+    if(matches)HeapFree(GetProcessHeap(),0,matches);
+    return error;
 }
 DWORD frontend_session_prepend(frontend_session *frontend,const INPUT_RECORD *records,DWORD count)
 {
-    return input_write(frontend,records,count,TRUE);
+    return frontend_session_prepend_tagged(frontend,records,NULL,count);
 }
 void frontend_session_forget(frontend_session *frontend,const void *owner)
 {
@@ -1205,6 +1648,7 @@ void frontend_session_forget(frontend_session *frontend,const void *owner)
      * below still detaches its borrowed channel storage before disposal. */
     (void)frontend_session_bind(frontend,owner,FALSE);
     EnterCriticalSection(&frontend->io_lock);
+    input_forget_owner(frontend,owner);
     if(frontend->owner==owner) {
         frontend->owner=NULL;frontend->video=NULL;
         frontend->video_serial=0;frontend->committed_video=NULL;frontend->committed_video_serial=0;
@@ -1261,6 +1705,7 @@ DWORD frontend_session_destroy(frontend_session *frontend)
     if(frontend->handoff)CloseHandle(frontend->handoff);
     if(frontend->handoff_done)CloseHandle(frontend->handoff_done);
     if(frontend->input_ready)CloseHandle(frontend->input_ready);
+    input_forget_owner(frontend,NULL);
     if(frontend->input)HeapFree(GetProcessHeap(),0,frontend->input);
     DeleteCriticalSection(&frontend->handoff_lock);
     DeleteCriticalSection(&frontend->io_lock);

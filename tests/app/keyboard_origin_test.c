@@ -63,6 +63,47 @@ int main(void)
     CHECK(mvdm_keyboard_history_selected(&state)==2);
     CHECK(mvdm_keyboard_history_age(&state,1)==1 && mvdm_keyboard_history_age(&state,2)==100);
     puts("PASS history wrap expires old origins instead of aliasing overwritten records");
+    memset(&state,0,sizeof(state));
+    for(index=0;index<203;++index)
+        CHECK(mvdm_keyboard_history_record_receipt(&state,(uint64_t)index+1000));
+    mvdm_keyboard_history_select_begin(&state);
+    mvdm_keyboard_history_select(&state,3); /* expired, even if slot reused */
+    mvdm_keyboard_history_select(&state,104);
+    mvdm_keyboard_history_select(&state,203);
+    CHECK(mvdm_keyboard_history_selected(&state)==2);
+    CHECK(mvdm_keyboard_history_receipt(&state,1)==1202);
+    CHECK(mvdm_keyboard_history_receipt(&state,2)==1103);
+    {
+        uint64_t live[MVDM_KEY_HISTORY_CAPACITY];
+        CHECK(mvdm_keyboard_history_live(&state,live)==100);
+        CHECK(live[0]==1103 && live[99]==1202);
+    }
+    CHECK(!mvdm_keyboard_history_receipt(&state,3));
+    mvdm_keyboard_history_clear_device(&state);
+    CHECK(mvdm_keyboard_history_receipt(&state,1)==1202 &&
+        mvdm_keyboard_history_receipt(&state,2)==1103);
+    CHECK(mvdm_keyboard_history_record(&state));
+    mvdm_keyboard_history_select_begin(&state);mvdm_keyboard_history_select(&state,204);
+    CHECK(!mvdm_keyboard_history_receipt(&state,1)); /* ordinary synthetic input */
+    puts("PASS distinct receipts survive selection and device reset; wrap rejects overwritten origins");
+    {
+        const uint64_t batch[]={101,0,103};
+        memset(&state,0,sizeof(state));
+        CHECK(mvdm_keyboard_history_stage_receipts(&state,batch,3));
+        CHECK(!mvdm_keyboard_history_stage_receipts(&state,batch,1));
+        CHECK(mvdm_keyboard_history_record(&state));
+        CHECK(mvdm_keyboard_history_record(&state));
+        CHECK(mvdm_keyboard_history_record(&state));
+        mvdm_keyboard_history_select_begin(&state);
+        mvdm_keyboard_history_select(&state,1);mvdm_keyboard_history_select(&state,2);
+        mvdm_keyboard_history_select(&state,3);
+        CHECK(mvdm_keyboard_history_receipt(&state,1)==103 &&
+            mvdm_keyboard_history_receipt(&state,2)==0 &&
+            mvdm_keyboard_history_receipt(&state,3)==101);
+        CHECK(mvdm_keyboard_history_stage_receipts(&state,NULL,0));
+        CHECK(!mvdm_keyboard_history_stage_receipts(&state,batch,MVDM_KEY_RECEIPT_BATCH_CAPACITY+1));
+    }
+    puts("PASS ordered per-batch receipt staging and unfinished-batch rejection");
     memset(&state,0,sizeof(state));state.issued=UINT64_MAX;
     CHECK(!mvdm_keyboard_history_record(&state) && state.issued==UINT64_MAX);
     mvdm_keyboard_history_select(&state,UINT64_MAX);

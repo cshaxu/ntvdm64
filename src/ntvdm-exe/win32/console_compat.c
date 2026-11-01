@@ -14,7 +14,10 @@
 #include "console_input.h"
 #include "ntvdm-exe/softpc/mvdm_softpc_mouse_bridge.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_text_video.h"
+#include "ntvdm-exe/softpc/include/mvdm_keyboard_history.h"
 #include "common/protocol/console_io.h"
+typedef char keyboard_live_capacity_check[(MVDM_KEY_HISTORY_CAPACITY<=CONSOLE_IO_INPUT_LIVE_CAPACITY) ? 1 : -1];
+extern mvdm_keyboard_history nt_keyboard_history;
 
 
 /*
@@ -429,11 +432,13 @@ BOOL ntvdm_console_read_pc_input(HANDLE input, PINPUT_RECORD records,
     DWORD capacity, LPDWORD read, USHORT flags)
 {
     INPUT_RECORD raw[5];
-    DWORD available, index, used = 0u, limit;
+    uint64_t raw_receipts[5],key_receipts[NTVDM_PC_INPUT_RECORDS];
+    uint64_t live[MVDM_KEY_HISTORY_CAPACITY];
+    DWORD available, index, used = 0u, limit,key_count=0;BOOL tagged=FALSE;
     /* Validate before consuming: every raw record can expand to eight keys.
      * One bounded batch, no hidden carry queue across DOS/native handoff. */
     if (!records || !read || capacity < NTVDM_PC_INPUT_RECORDS ||
-        (flags & CONSOLE_READ_NOREMOVE) != 0u) {
+        (flags & CONSOLE_READ_NOREMOVE) != 0u || (flags & ~CONSOLE_READ_VALID) != 0u) {
         SetLastError(ERROR_INVALID_PARAMETER);
         return FALSE;
     }
@@ -445,13 +450,27 @@ BOOL ntvdm_console_read_pc_input(HANDLE input, PINPUT_RECORD records,
      * holding ICA or drop/merge motion across a button or direction change. */
     limit=min((DWORD)ARRAYSIZE(raw),mvdm_softpc_mouse_capacity(mvdm_softpc_mouse_current()));
     if (!limit) return TRUE;
-    if (!ReadConsoleInputExW(input, raw, limit, &available, flags))
-        return FALSE;
+    if(flags & CONSOLE_READ_NOWAIT) {
+        if(!PeekConsoleInputW(input,raw,1,&available))return FALSE;
+        if(!available)return TRUE;
+    }
+    if(!ntvdm_console_read_input_tagged(input,raw,raw_receipts,limit,&available,FALSE,
+        live,mvdm_keyboard_history_live(&nt_keyboard_history,live)))return FALSE;
     for (index = 0u; index < available; ++index) {
-        if (raw[index].EventType == KEY_EVENT)
-            used += nt_rdp_normalize_key(&raw[index].Event.KeyEvent,
-                records + used, capacity - used);
-        else records[used++] = raw[index];
+        if (raw[index].EventType == KEY_EVENT) {
+            DWORD first=used,j,produced;
+            produced=nt_rdp_normalize_key(&raw[index].Event.KeyEvent,records+used,capacity-used);
+            used+=produced;
+            /* A scan-less character may expand into several synthetic PC
+             * transitions. It has no single physical held-key receipt. */
+            for(j=first;j<used;++j)if(records[j].EventType==KEY_EVENT) {
+                uint64_t receipt=produced==1 ? raw_receipts[index] : 0;
+                key_receipts[key_count++]=receipt;if(receipt)tagged=TRUE;
+            }
+        } else records[used++] = raw[index];
+    }
+    if(tagged && !mvdm_keyboard_history_stage_receipts(&nt_keyboard_history,key_receipts,key_count)) {
+        SetLastError(ERROR_INVALID_STATE);return FALSE;
     }
     *read = used;
     return TRUE;
@@ -460,8 +479,18 @@ BOOL ntvdm_console_read_pc_input(HANDLE input, PINPUT_RECORD records,
 BOOL WINAPI WriteConsoleInputVDMW(HANDLE input, PINPUT_RECORD records, DWORD count,
                                   LPDWORD written)
 {
+    uint64_t receipts[MVDM_KEY_HISTORY_CAPACITY];DWORD i;
     /* ADAPTER-WIN32-051: original atomic Console prepend, executed by the
      * authenticated frontend; no worker-only returned-key queue. */
+    /* This adapter has only the original event-thread callers. During
+     * ReturnUnusedKeyEvents the selected history remains live until the
+     * call returns; BIOS-buffer writes happen after InitKeyHistory. The
+     * selected ordinals are newest-first while the returned batch is oldest-first. */
+    if(count && count<=MVDM_KEY_HISTORY_CAPACITY &&
+        mvdm_keyboard_history_selected(&nt_keyboard_history)>=count) {
+        for(i=0;i<count;++i)receipts[i]=mvdm_keyboard_history_receipt(&nt_keyboard_history,count-i);
+        return ntvdm_console_prepend_keys_tagged(input,records,receipts,count,written);
+    }
     return ntvdm_console_prepend_keys(input,records,count,written);
 }
 

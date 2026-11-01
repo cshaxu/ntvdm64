@@ -4,8 +4,12 @@
 #include <string.h>
 #include "conapi.h"
 #include "common/protocol/console_mouse.h"
+#include "ntvdm-exe/softpc/include/mvdm_keyboard_history.h"
+static mvdm_keyboard_history nt_keyboard_history;
 static INPUT_RECORD queue[1024];
-static DWORD queued, position, reads, peeks;
+static DWORD queued, position, reads, peeks;static BOOL use_receipts;
+static uint64_t returned_receipts[100];static DWORD returned_count;static BOOL returned_tagged;
+static uint64_t sent_live[100];static DWORD sent_live_count;
 static DWORD mouse_capacity=256;
 static BOOL WINAPI batch_read(HANDLE h,PINPUT_RECORD out,DWORD capacity,LPDWORD count)
 {
@@ -21,10 +25,31 @@ static BOOL WINAPI batch_peek(HANDLE h,PINPUT_RECORD out,DWORD capacity,LPDWORD 
     memcpy(out,queue+position,take*sizeof(*out));*count=take;
     return TRUE;
 }
+static BOOL batch_read_tagged(HANDLE h,PINPUT_RECORD out,uint64_t *receipts,DWORD capacity,LPDWORD count,BOOL peek,
+    const uint64_t *live,DWORD live_count)
+{
+    DWORD first=position,i;
+    if(live_count>100)return FALSE;
+    sent_live_count=live_count;if(live_count)memcpy(sent_live,live,live_count*sizeof(*live));
+    BOOL ok=peek ? batch_peek(h,out,capacity,count) : batch_read(h,out,capacity,count);
+    if(ok && receipts)for(i=0;i<*count;++i)receipts[i]=use_receipts ? 1000u+first+i : 0;
+    return ok;
+}
+static BOOL batch_prepend_tagged(HANDLE h,PINPUT_RECORD records,const uint64_t *receipts,DWORD count,LPDWORD written)
+{
+    (void)h;(void)records;if(count>100)return FALSE;
+    if(receipts)memcpy(returned_receipts,receipts,count*sizeof(*receipts));
+    returned_count=count;returned_tagged=receipts!=NULL;*written=count;return TRUE;
+}
+static BOOL batch_prepend(HANDLE h,PINPUT_RECORD records,DWORD count,LPDWORD written)
+{ return batch_prepend_tagged(h,records,NULL,count,written); }
 #undef ReadConsoleInputW
 #undef PeekConsoleInputW
 #define ReadConsoleInputW batch_read
 #define PeekConsoleInputW batch_peek
+#define ntvdm_console_read_input_tagged batch_read_tagged
+#define ntvdm_console_prepend_keys_tagged batch_prepend_tagged
+#define ntvdm_console_prepend_keys batch_prepend
 #define mvdm_softpc_mouse_capacity batch_mouse_capacity
 #include "../../src/ntvdm-exe/win32/console_compat.c"
 DWORD batch_mouse_capacity(mvdm_mouse_bridge *state)
@@ -149,6 +174,47 @@ int main(void)
     CHECK(!memcmp(&out[0],&queue[0],sizeof(out[0])));
     CHECK(ReadConsoleInputExW(input,out,4,&got,CONSOLE_READ_NOWAIT) && got==4 && reads==1);
     for(i=0;i<got;++i) CHECK(!memcmp(&out[i],&queue[i],sizeof(out[i])));
+    reset(4);
+    for(i=0;i<4;++i) {
+        queue[i].EventType=KEY_EVENT;queue[i].Event.KeyEvent.wRepeatCount=1;
+        queue[i].Event.KeyEvent.bKeyDown=i<2;
+        queue[i].Event.KeyEvent.wVirtualKeyCode=(i==0 || i==3) ? VK_MENU : VK_RETURN;
+        queue[i].Event.KeyEvent.wVirtualScanCode=(i==0 || i==3) ? 0x38 : 0x1c;
+        queue[i].Event.KeyEvent.dwControlKeyState=i==3 ? 0 : LEFT_ALT_PRESSED;
+    }
+    CHECK(ntvdm_console_read_pc_input(input,out,NTVDM_PC_INPUT_RECORDS,&got,CONSOLE_READ_NOWAIT));
+    CHECK(got==4 && !memcmp(out,queue,4*sizeof(*out)));
     printf("BATCH-KEY expansion/mixed-order/capacity/Alt-Enter PASS\n");
+    memset(&nt_keyboard_history,0,sizeof(nt_keyboard_history));reset(2);use_receipts=TRUE;
+    queue[0].EventType=KEY_EVENT;queue[0].Event.KeyEvent.bKeyDown=TRUE;
+    queue[0].Event.KeyEvent.wRepeatCount=1;queue[0].Event.KeyEvent.wVirtualKeyCode='A';
+    queue[0].Event.KeyEvent.wVirtualScanCode=0x1e;queue[1]=queue[0];
+    CHECK(ntvdm_console_read_pc_input(input,out,NTVDM_PC_INPUT_RECORDS,&got,CONSOLE_READ_NOWAIT));
+    CHECK(got==2 && nt_keyboard_history.receipt_batch_count==2);
+    CHECK(mvdm_keyboard_history_record(&nt_keyboard_history));
+    CHECK(mvdm_keyboard_history_record(&nt_keyboard_history));
+    mvdm_keyboard_history_select_begin(&nt_keyboard_history);
+    mvdm_keyboard_history_select(&nt_keyboard_history,1);mvdm_keyboard_history_select(&nt_keyboard_history,2);
+    CHECK(mvdm_keyboard_history_receipt(&nt_keyboard_history,1)==1001 &&
+        mvdm_keyboard_history_receipt(&nt_keyboard_history,2)==1000);
+    CHECK(WriteConsoleInputVDMW(input,out,2,&got) && got==2 && returned_tagged &&
+        returned_count==2 && returned_receipts[0]==1000 && returned_receipts[1]==1001);
+    /* A shortened original return contains the newest selected entries,
+     * still ordered oldest-first in the emitted subset. */
+    CHECK(mvdm_keyboard_history_record_receipt(&nt_keyboard_history,1002));
+    mvdm_keyboard_history_select_begin(&nt_keyboard_history);
+    mvdm_keyboard_history_select(&nt_keyboard_history,1);mvdm_keyboard_history_select(&nt_keyboard_history,2);
+    mvdm_keyboard_history_select(&nt_keyboard_history,3);
+    CHECK(WriteConsoleInputVDMW(input,out,2,&got) && got==2 && returned_tagged &&
+        returned_receipts[0]==1001 && returned_receipts[1]==1002);
+    memset(&nt_keyboard_history,0,sizeof(nt_keyboard_history));returned_tagged=TRUE;
+    CHECK(WriteConsoleInputVDMW(input,out,2,&got) && got==2 && !returned_tagged);
+    CHECK(mvdm_keyboard_history_record_receipt(&nt_keyboard_history,3001));
+    CHECK(mvdm_keyboard_history_record_receipt(&nt_keyboard_history,0));
+    CHECK(mvdm_keyboard_history_record_receipt(&nt_keyboard_history,3003));
+    reset(1);queue[0].EventType=MOUSE_EVENT;use_receipts=FALSE;
+    CHECK(ntvdm_console_read_pc_input(input,out,NTVDM_PC_INPUT_RECORDS,&got,CONSOLE_READ_NOWAIT));
+    CHECK(got==1 && sent_live_count==2 && sent_live[0]==3001 && sent_live[1]==3003);
+    printf("BATCH-RECEIPT identical keys remain distinct through normalization and original history PASS\n");
     return 0;
 }

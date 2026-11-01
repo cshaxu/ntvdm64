@@ -13,16 +13,25 @@
 BOOL frontend_window_keyboard_record(const kvm_input_event *event,
     DWORD control_state, HKL layout, INPUT_RECORD *record);
 
-/* Only records actually delivered to the selected backend enter this ledger. Host
- * shortcuts must be consumed before accept. Native control_state is captured
- * in the Window UI input callback, not sampled later on a different event thread. */
+/* Identity is physical scan plus extended side where available. Scan-less
+ * Console records use a separate virtual-key namespace, so an ordinary scan
+ * never aliases a scan-less key or the other Ctrl/Alt side. */
+BOOL frontend_keyboard_key_identity(const KEY_EVENT_RECORD *key,unsigned *identity);
+
+/* Caller supplies the records owned by its delivery boundary. Host shortcuts
+ * must be consumed before accept. A queued record is not a worker receipt. */
 typedef struct frontend_window_keyboard_state {
-    KEY_EVENT_RECORD held[512];
+    KEY_EVENT_RECORD held[768];
     lib_u64 source_identity;
     DWORD locks;
     unsigned held_count;
     BOOL releasing, retiring;
 } frontend_window_keyboard_state;
+
+/* Accept an original Console-shaped record after the caller's source and
+ * ownership checks. Character-only packets do not establish a held key. */
+BOOL frontend_keyboard_accept_record(frontend_window_keyboard_state *state,
+    lib_u64 source_identity,const KEY_EVENT_RECORD *key);
 
 BOOL frontend_window_keyboard_accept(frontend_window_keyboard_state *state,
     const kvm_input_event *event, DWORD control_state, HKL layout, INPUT_RECORD *record);

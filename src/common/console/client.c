@@ -40,8 +40,8 @@ DWORD ntcon_worker_prepare_text(ntcon_worker_client *client,COORD size)
     return ntcon_worker_call(client,&request,&reply);
 }
 
-DWORD ntcon_worker_prepend_keys(ntcon_worker_client *client,const INPUT_RECORD *records,
-    DWORD count,console_io_reply *reply)
+DWORD ntcon_worker_prepend_keys_tagged(ntcon_worker_client *client,const INPUT_RECORD *records,
+    const uint64_t *receipts,DWORD count,console_io_reply *reply)
 {
     console_io_request request={0};console_io_input payload[CONSOLE_IO_INPUT_CAPACITY];DWORD i,error;
     if(!client || !reply || (!records && count) || count>CONSOLE_IO_INPUT_CAPACITY)
@@ -55,12 +55,18 @@ DWORD ntcon_worker_prepend_keys(ntcon_worker_client *client,const INPUT_RECORD *
         wire.repeat=key->wRepeatCount;wire.virtual_key=key->wVirtualKeyCode;
         wire.scan=key->wVirtualScanCode;wire.character=key->uChar.UnicodeChar;
         wire.control=key->dwControlKeyState;
+        if(receipts) {wire.receipt_low=(uint32_t)receipts[i];wire.receipt_high=(uint32_t)(receipts[i]>>32);}
         payload[i]=wire;
     }
     request.data=(BYTE *)payload;
     error=ntcon_worker_exchange(client,&request,reply);
     if(!error && reply->state.count>count)error=ntcon_worker_client_fail(client,ERROR_INVALID_DATA);
     return error;
+}
+DWORD ntcon_worker_prepend_keys(ntcon_worker_client *client,const INPUT_RECORD *records,
+    DWORD count,console_io_reply *reply)
+{
+    return ntcon_worker_prepend_keys_tagged(client,records,NULL,count,reply);
 }
 
 static DWORD transfer(ntcon_worker_client *client,BOOL write,void *buffer,DWORD bytes)

@@ -105,7 +105,7 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
     cells=request->operation>=CONSOLE_IO_READ_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
     write_cells=request->operation>=CONSOLE_IO_WRITE_CELLS_A && request->operation<=CONSOLE_IO_WRITE_CELLS_W;
     if (request->operation!=CONSOLE_IO_WRITE && !write_cells &&
-        request->operation!=CONSOLE_IO_PREPEND_KEYS &&
+        request->operation!=CONSOLE_IO_PREPEND_KEYS && request->operation!=CONSOLE_IO_READ_INPUT &&
         request->operation!=CONSOLE_IO_SET_TITLE_A &&
         request->operation!=CONSOLE_IO_PUBLISH_TITLE_A &&
         request->operation!=CONSOLE_IO_VIDEO_BEGIN &&
@@ -130,7 +130,11 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
     if(request->operation==CONSOLE_IO_PRESENT_BARRIER && !s->mode)
         return ERROR_INVALID_DATA;
     if ((request->operation==CONSOLE_IO_READ_INPUT || request->operation==CONSOLE_IO_PEEK_INPUT) &&
-        s->count>CONSOLE_IO_INPUT_CAPACITY)
+        (s->count>CONSOLE_IO_INPUT_CAPACITY || s->mode>CONSOLE_IO_INPUT_RETURNABLE))
+        return ERROR_INVALID_DATA;
+    if(request->operation==CONSOLE_IO_READ_INPUT &&
+        (request->bytes>CONSOLE_IO_INPUT_LIVE_CAPACITY*sizeof(uint64_t) ||
+         request->bytes%sizeof(uint64_t) || (request->bytes && s->mode!=CONSOLE_IO_INPUT_RETURNABLE)))
         return ERROR_INVALID_DATA;
     if (request->operation==CONSOLE_IO_WINDOW_RECT && s->mode>1) return ERROR_INVALID_DATA;
     if(request->operation==CONSOLE_IO_PREPARE_TEXT_REGION &&
@@ -410,6 +414,7 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
         write_vdm_input prepend=(write_vdm_input)GetProcAddress(GetModuleHandleW(L"kernel32.dll"),
             "WriteConsoleInputVDMW");
         INPUT_RECORD records[CONSOLE_IO_INPUT_CAPACITY];
+        uint64_t receipts[CONSOLE_IO_INPUT_CAPACITY];
         DWORD i;
         if (!prepend && !owner->prepend_input) { SetLastError(ERROR_CALL_NOT_IMPLEMENTED);break; }
         ZeroMemory(records,sizeof(records));
@@ -427,12 +432,13 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
             records[i].Event.KeyEvent.wVirtualScanCode=(WORD)wire.scan;
             records[i].Event.KeyEvent.uChar.UnicodeChar=(WCHAR)wire.character;
             records[i].Event.KeyEvent.dwControlKeyState=wire.control;
+            receipts[i]=(uint64_t)wire.receipt_low|((uint64_t)wire.receipt_high<<32);
         }
         /* Validate the whole original return batch before front insertion.
          * The selected frontend queue or native Console owns the mutation. */
         if (i==s->count) {
             if(owner->prepend_input) {
-                DWORD error=owner->prepend_input(owner->io_context,records,s->count);
+                DWORD error=owner->prepend_input(owner->io_context,records,receipts,s->count);
                 ok=!error;SetLastError(error);if(ok)count=s->count;
             } else ok=prepend(owner->input,records,s->count,&count);
         }
@@ -442,10 +448,14 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
     case CONSOLE_IO_READ_INPUT:
     case CONSOLE_IO_PEEK_INPUT: {
         INPUT_RECORD records[CONSOLE_IO_INPUT_CAPACITY];
+        uint64_t receipts[CONSOLE_IO_INPUT_CAPACITY]={0};
         DWORD i;
         if(owner->read_input) {
+            uint64_t live[CONSOLE_IO_INPUT_LIVE_CAPACITY];
+            if(request->bytes)memcpy(live,request->data,request->bytes);
             DWORD error=owner->read_input(owner->io_context,request->operation==CONSOLE_IO_PEEK_INPUT,
-                records,s->count,&count);
+                s->mode==CONSOLE_IO_INPUT_RETURNABLE,records,receipts,s->count,&count,
+                live,request->bytes/sizeof(uint64_t));
             ok=!error;SetLastError(error);
         } else if(request->operation==CONSOLE_IO_PEEK_INPUT)
             ok=PeekConsoleInputW(owner->input,records,s->count,&count);
@@ -459,6 +469,7 @@ DWORD frontend_console_dispatch(frontend_console *owner,const console_io_request
             for (i=0;i<count;i++) {
                   console_io_input wire;
                   if (!encode_input(&records[i],&wire)) { ok=FALSE;SetLastError(ERROR_INVALID_DATA);break; }
+                wire.receipt_low=(uint32_t)receipts[i];wire.receipt_high=(uint32_t)(receipts[i]>>32);
                 memcpy(reply->data+i*sizeof(wire),&wire,sizeof(wire));
             }
             if (ok) { reply->state.count=count;reply->bytes=count*sizeof(console_io_input); }

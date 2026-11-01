@@ -20,6 +20,8 @@ HANDLE ntvdm_console_input_wait_handle(void);
 BOOL ntvdm_console_inherit_launch_capabilities(HANDLE *,HANDLE *);
 BOOL WINAPI MvdmWriteConsoleA(HANDLE,const VOID *,DWORD,LPDWORD,LPVOID);
 BOOL ntvdm_console_prepend_keys(HANDLE,PINPUT_RECORD,DWORD,LPDWORD);
+BOOL ntvdm_console_prepend_keys_tagged(HANDLE,PINPUT_RECORD,const uint64_t *,DWORD,LPDWORD);
+BOOL ntvdm_console_read_input_tagged(HANDLE,PINPUT_RECORD,uint64_t *,DWORD,LPDWORD,BOOL,const uint64_t *,DWORD);
 /* -1: no frontend bound; 0: remote failure; 1: copied result available. */
 int ntvdm_console_window_query(DWORD query,LONG values[4]);
 /* Latest original resolved text palette, owned by this worker endpoint. */

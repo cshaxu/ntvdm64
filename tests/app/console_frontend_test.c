@@ -40,9 +40,10 @@ static void leave_screen(void *context)
 {
     (void)context;++screen_leaves;
 }
-static DWORD relative_input(void *context,BOOL peek,INPUT_RECORD *records,DWORD capacity,DWORD *count)
+static DWORD relative_input(void *context,BOOL peek,BOOL returnable,INPUT_RECORD *records,uint64_t *receipts,DWORD capacity,DWORD *count,
+    const uint64_t *live,DWORD live_count)
 {
-    (void)peek;
+    (void)peek;(void)returnable;(void)receipts;(void)live;(void)live_count;
     if(!capacity)return ERROR_INSUFFICIENT_BUFFER;
     ZeroMemory(records,sizeof(*records));records->EventType=CONSOLE_INPUT_FRAME_MOUSE;
     memcpy(&records->Event,context,sizeof(console_frame_mouse_input));*count=1;return ERROR_SUCCESS;
@@ -197,6 +198,15 @@ int main(void)
     operation(&owner,CONSOLE_IO_SET_POINTER_CLIP);request.state.has_clip=2;
     CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);
     operation(&owner,CONSOLE_IO_SET_POINTER);request.bytes=1;
+    CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);
+    operation(&owner,CONSOLE_IO_READ_INPUT);
+    request.state.mode=CONSOLE_IO_INPUT_RETURNABLE;request.bytes=1;
+    CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);
+    request.bytes=(CONSOLE_IO_INPUT_LIVE_CAPACITY+1)*sizeof(uint64_t);
+    CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);
+    request.bytes=sizeof(uint64_t);request.state.mode=0;
+    CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);
+    operation(&owner,CONSOLE_IO_PEEK_INPUT);request.bytes=sizeof(uint64_t);
     CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);
     operation(&owner,CONSOLE_IO_CURRENT_FONT);request.state.mode=2;
     CHECK(frontend_console_dispatch(&owner,&request,&reply)==ERROR_INVALID_DATA);

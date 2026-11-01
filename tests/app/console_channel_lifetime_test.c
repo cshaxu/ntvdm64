@@ -75,8 +75,14 @@ static DWORD test_bind(frontend_session *frontend,const void *owner,BOOL active,
 static void test_console_source_owner_handoff(void)
 {
     int owner_a=0,owner_b=0;HANDLE input,output;DWORD written,count,i,down=0,up=0;
-    BOOL returned=GetEnvironmentVariableW(L"MVDM_TEST_SOURCE_RETURNED",NULL,0)!=0;
-    INPUT_RECORD key={0},records[16];frontend_video video={0};
+    BOOL compact=GetEnvironmentVariableW(L"MVDM_TEST_SOURCE_LIVE_HISTORY",NULL,0)!=0;
+    BOOL repeat=compact || GetEnvironmentVariableW(L"MVDM_TEST_SOURCE_REPEAT_RETURN",NULL,0)!=0;
+    BOOL late_unread=GetEnvironmentVariableW(L"MVDM_TEST_SOURCE_LATE_UNREAD",NULL,0)!=0;
+    BOOL late_neutral=GetEnvironmentVariableW(L"MVDM_TEST_SOURCE_LATE_NEUTRAL",NULL,0)!=0;
+    BOOL no_return=GetEnvironmentVariableW(L"MVDM_TEST_SOURCE_NO_RETURN",NULL,0)!=0;
+    BOOL late=late_unread || late_neutral || GetEnvironmentVariableW(L"MVDM_TEST_SOURCE_LATE_RETURN",NULL,0)!=0;
+    BOOL returned=repeat || late || GetEnvironmentVariableW(L"MVDM_TEST_SOURCE_RETURNED",NULL,0)!=0;
+    INPUT_RECORD key={0},sent[2],records[16];uint64_t receipts[16],receipt=0;frontend_video video={0};
     console_video_description description={4,2,4,8,8,{0}};
     BYTE pixels[8]={0};HWND window=NULL;ULONGLONG deadline;
     CHECK(!frontend_session_console(test_frontend,&input,&output));
@@ -84,27 +90,70 @@ static void test_console_source_owner_handoff(void)
     key.EventType=KEY_EVENT;key.Event.KeyEvent.bKeyDown=TRUE;
     key.Event.KeyEvent.wRepeatCount=1;key.Event.KeyEvent.wVirtualKeyCode=VK_CONTROL;
     key.Event.KeyEvent.wVirtualScanCode=0x1d;key.Event.KeyEvent.dwControlKeyState=LEFT_CTRL_PRESSED;
-    CHECK(WriteConsoleInputW(input,&key,1,&written) && written==1);
+    sent[0]=sent[1]=key;
+    if(late_unread) {sent[1].Event.KeyEvent.wVirtualKeyCode='A';sent[1].Event.KeyEvent.wVirtualScanCode=0x1e;}
+    CHECK(WriteConsoleInputW(input,sent,(repeat || late_unread) ? 2 : 1,&written) && written==((repeat || late_unread) ? 2u : 1u));
     deadline=GetTickCount64()+5000;
     do {
         CHECK(!frontend_session_enter(test_frontend,&owner_a));
-        CHECK(!frontend_session_read(test_frontend,FALSE,records,16,&count));
+        CHECK(!frontend_session_read_owned(test_frontend,FALSE,!no_return,records,receipts,late_unread ? 1 : 16,&count));
         frontend_session_leave(test_frontend);
-        for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT && records[i].Event.KeyEvent.bKeyDown)++down;
-        if(!down)Sleep(10);
-    } while(!down && GetTickCount64()<deadline);
-    CHECK(down==1);
+        for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT && records[i].Event.KeyEvent.bKeyDown) {
+            ++down;receipt=receipts[i];
+        }
+        if(down<(repeat ? 2u : 1u))Sleep(10);
+    } while(down<(repeat ? 2u : 1u) && GetTickCount64()<deadline);
+    CHECK(down==(repeat ? 2u : 1u));
+    if(late) {
+        /* The source boundary has already been consumed before the worker
+         * discovers that its earlier make remained in its device queue. */
+        CHECK(!frontend_video_begin(&video,1,&description));
+        CHECK(!frontend_video_data(&video,1,0,pixels,sizeof(pixels)));
+        CHECK(!frontend_session_video(test_frontend,&owner_a,&video,FALSE));
+        deadline=GetTickCount64()+5000;
+        while(!(window=FindWindowW(L"LibKvmWindow",NULL)) && GetTickCount64()<deadline)Sleep(10);
+        CHECK(window);
+        if(late_unread) {
+            /* Observe the boundary without consuming either older typeahead
+             * or the releases that follow it. */
+            deadline=GetTickCount64()+5000;
+            do {
+                CHECK(!frontend_session_enter(test_frontend,&owner_a));
+                CHECK(!frontend_session_read(test_frontend,TRUE,records,16,&count));
+                frontend_session_leave(test_frontend);up=0;
+                for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT &&
+                    records[i].Event.KeyEvent.wVirtualScanCode==0x1d && !records[i].Event.KeyEvent.bKeyDown)++up;
+                if(!up)Sleep(10);
+            }while(!up && GetTickCount64()<deadline);
+            CHECK(up==1);up=0;
+        } else {
+            CHECK(!frontend_session_enter(test_frontend,&owner_a));
+            CHECK(!frontend_session_read(test_frontend,FALSE,records,16,&count));
+            frontend_session_leave(test_frontend);
+            for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT &&
+                records[i].Event.KeyEvent.wVirtualScanCode==0x1d && !records[i].Event.KeyEvent.bKeyDown)++up;
+            CHECK(up==1);up=0;
+        }
+    }
     if(returned) {
         /* The worker did not consume this input: return it before relinquishing
          * ownership, exactly as ReturnUnusedKeyEvents uses the prepend path. */
         CHECK(!frontend_session_enter(test_frontend,&owner_a));
-        CHECK(!frontend_session_prepend(test_frontend,&key,1));
+        if(compact)CHECK(!frontend_session_input_live(test_frontend,&receipt,1));
+        if(late_neutral) {
+            INPUT_RECORD returned_records[2]={key,{0}};uint64_t ids[2]={receipt,0};
+            returned_records[1].EventType=FOCUS_EVENT;
+            returned_records[1].Event.FocusEvent.bSetFocus=TRUE;
+            CHECK(receipt && !frontend_session_prepend_tagged(test_frontend,returned_records,ids,2));
+        } else CHECK(receipt && !frontend_session_prepend_tagged(test_frontend,&key,&receipt,1));
         frontend_session_leave(test_frontend);
     }
     CHECK(!frontend_session_bind(test_frontend,&owner_a,FALSE));
     CHECK(!frontend_session_bind(test_frontend,&owner_b,TRUE));
-    CHECK(!frontend_video_begin(&video,1,&description));
-    CHECK(!frontend_video_data(&video,1,0,pixels,sizeof(pixels)));
+    if(!late) {
+        CHECK(!frontend_video_begin(&video,1,&description));
+        CHECK(!frontend_video_data(&video,1,0,pixels,sizeof(pixels)));
+    }
     CHECK(!frontend_session_video(test_frontend,&owner_b,&video,FALSE));
     deadline=GetTickCount64()+5000;
     while(!(window=FindWindowW(L"LibKvmWindow",NULL)) && GetTickCount64()<deadline)Sleep(10);
@@ -112,6 +161,12 @@ static void test_console_source_owner_handoff(void)
     CHECK(!frontend_session_enter(test_frontend,&owner_b));
     CHECK(!frontend_session_read(test_frontend,FALSE,records,16,&count));
     frontend_session_leave(test_frontend);
+    if(late_neutral) {
+        BOOL found=FALSE;
+        for(i=0;i<count;++i)if(records[i].EventType==FOCUS_EVENT &&
+            records[i].Event.FocusEvent.bSetFocus)found=TRUE;
+        CHECK(found);
+    }
     down=0;
     for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT &&
         records[i].Event.KeyEvent.wVirtualScanCode==0x1d) {
@@ -133,9 +188,260 @@ static void test_console_source_owner_handoff(void)
     frontend_session_leave(test_frontend);
     for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT && !records[i].Event.KeyEvent.bKeyDown &&
         records[i].Event.KeyEvent.wVirtualScanCode==0x1d)++up;
-    CHECK(up==1); /* In the returned case the sole release was read by B. */
+    CHECK(up==(repeat ? 2u : 1u)); /* A still owns the first repeated make. */
     CHECK(!frontend_session_bind(test_frontend,&owner_a,FALSE));
     frontend_video_dispose(&video);CloseHandle(input);CloseHandle(output);
+}
+static void test_window_source_owner_handoff(void)
+{
+    int owner_a=0,owner_b=0;DWORD count,i,down=0,up=0;
+    INPUT_RECORD records[16];frontend_video video={0},text={0};
+    console_video_description description={4,2,4,8,8,{0}};
+    BYTE pixels[8]={0};HWND window=NULL;ULONGLONG deadline;
+    CHECK(!frontend_session_bind(test_frontend,&owner_a,TRUE));
+    CHECK(!frontend_video_begin(&video,1,&description));
+    CHECK(!frontend_video_data(&video,1,0,pixels,sizeof(pixels)));
+    CHECK(!frontend_session_video(test_frontend,&owner_a,&video,FALSE));
+    deadline=GetTickCount64()+5000;
+    while(!(window=FindWindowW(L"LibKvmWindow",NULL)) && GetTickCount64()<deadline)Sleep(10);
+    CHECK(window && PostMessageW(window,WM_KEYDOWN,'A',0x001e0001));
+    deadline=GetTickCount64()+5000;
+    do {
+        CHECK(!frontend_session_enter(test_frontend,&owner_a));
+        CHECK(!frontend_session_read(test_frontend,FALSE,records,16,&count));
+        frontend_session_leave(test_frontend);
+        for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT &&
+            records[i].Event.KeyEvent.wVirtualScanCode==0x1e) {
+            if(records[i].Event.KeyEvent.bKeyDown)++down;else ++up;
+        }
+        if(!down)Sleep(10);
+    }while(!down && GetTickCount64()<deadline);
+    if(up)fprintf(private_report ? private_report : stderr,"window owner: release preceded handoff: %lu\n",up);
+    CHECK(down==1 && up==0);
+    CHECK(!frontend_session_bind(test_frontend,&owner_a,FALSE));
+    CHECK(!frontend_session_bind(test_frontend,&owner_b,TRUE));
+    text.published_serial=2;
+    CHECK(!frontend_session_video(test_frontend,&owner_b,&text,FALSE));
+    CHECK(!frontend_session_display(test_frontend,FALSE));
+    deadline=GetTickCount64()+5000;
+    while(IsWindow(window) && GetTickCount64()<deadline)Sleep(10);
+    CHECK(!IsWindow(window));
+    CHECK(!frontend_session_enter(test_frontend,&owner_b));
+    CHECK(!frontend_session_read(test_frontend,FALSE,records,16,&count));
+    frontend_session_leave(test_frontend);
+    for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT &&
+        records[i].Event.KeyEvent.wVirtualScanCode==0x1e && !records[i].Event.KeyEvent.bKeyDown)++up;
+    CHECK(up==0);
+    CHECK(!frontend_session_bind(test_frontend,&owner_b,FALSE));
+    CHECK(!frontend_session_bind(test_frontend,&owner_a,TRUE));
+    CHECK(!frontend_session_enter(test_frontend,&owner_a));
+    CHECK(!frontend_session_read(test_frontend,FALSE,records,16,&count));
+    frontend_session_leave(test_frontend);
+    for(i=0;i<count;++i)if(records[i].EventType==KEY_EVENT &&
+        records[i].Event.KeyEvent.wVirtualScanCode==0x1e && !records[i].Event.KeyEvent.bKeyDown)++up;
+    CHECK(up==1);
+    CHECK(!frontend_session_bind(test_frontend,&owner_a,FALSE));
+    frontend_video_dispose(&video);
+}
+/* Exercise replay after retaining non-contiguous receipts. Intermediate
+ * unretained transitions still determine each key's final state. */
+static void test_input_history_compaction(void)
+{
+    int owner_a=0,owner_b=0;HANDLE input,output;DWORD written,count,total=0,i,a_up=0,b_up=0;
+    INPUT_RECORD sent[8],got[16],returned[2];uint64_t ids[16],live[3],back[2];
+    frontend_video video={0};console_video_description description={4,2,4,8,8,{0}};
+    BYTE pixels[8]={0};HWND window=NULL;ULONGLONG deadline;
+    const WORD vk[8]={'A','B','A','A','B','A','B','A'};
+    const BOOL down[8]={TRUE,TRUE,FALSE,TRUE,FALSE,FALSE,TRUE,TRUE};
+    CHECK(!frontend_session_console(test_frontend,&input,&output));
+    CHECK(!frontend_session_bind(test_frontend,&owner_a,TRUE));
+    ZeroMemory(sent,sizeof(sent));
+    for(i=0;i<8;++i) {
+        sent[i].EventType=KEY_EVENT;sent[i].Event.KeyEvent.bKeyDown=down[i];
+        sent[i].Event.KeyEvent.wRepeatCount=1;sent[i].Event.KeyEvent.wVirtualKeyCode=vk[i];
+        sent[i].Event.KeyEvent.wVirtualScanCode=vk[i]=='A' ? 0x1e : 0x30;
+    }
+    CHECK(WriteConsoleInputW(input,sent,8,&written) && written==8);
+    deadline=GetTickCount64()+5000;
+    do {
+        CHECK(!frontend_session_enter(test_frontend,&owner_a));
+        CHECK(!frontend_session_read_tagged(test_frontend,FALSE,got+total,ids+total,8-total,&count));
+        frontend_session_leave(test_frontend);total+=count;
+        if(total<8)Sleep(10);
+    }while(total<8 && GetTickCount64()<deadline);
+    CHECK(total==8);
+    for(i=0;i<8;++i)CHECK(ids[i] && got[i].Event.KeyEvent.wVirtualKeyCode==vk[i] &&
+        got[i].Event.KeyEvent.bKeyDown==down[i]);
+    live[0]=ids[5];live[1]=ids[0];live[2]=ids[3]; /* deliberately unsorted */
+    returned[0]=got[0];returned[1]=got[5];back[0]=ids[0];back[1]=ids[5];
+    CHECK(!frontend_session_enter(test_frontend,&owner_a));
+    CHECK(!frontend_session_input_live(test_frontend,live,3));
+    CHECK(!frontend_session_prepend_tagged(test_frontend,returned,back,2));
+    frontend_session_leave(test_frontend);
+    CHECK(!frontend_session_bind(test_frontend,&owner_a,FALSE));
+    CHECK(!frontend_session_bind(test_frontend,&owner_b,TRUE));
+    CHECK(!frontend_video_begin(&video,1,&description));
+    CHECK(!frontend_video_data(&video,1,0,pixels,sizeof(pixels)));
+    CHECK(!frontend_session_video(test_frontend,&owner_b,&video,FALSE));
+    deadline=GetTickCount64()+5000;
+    while(!(window=FindWindowW(L"LibKvmWindow",NULL)) && GetTickCount64()<deadline)Sleep(10);
+    CHECK(window);
+    CHECK(!frontend_session_enter(test_frontend,&owner_b));
+    CHECK(!frontend_session_read(test_frontend,FALSE,got,16,&count));
+    frontend_session_leave(test_frontend);
+    CHECK(count>=2 && got[0].Event.KeyEvent.bKeyDown && !got[1].Event.KeyEvent.bKeyDown);
+    CHECK(!frontend_session_bind(test_frontend,&owner_b,FALSE));
+    CHECK(!frontend_session_bind(test_frontend,&owner_a,TRUE));
+    CHECK(!frontend_session_enter(test_frontend,&owner_a));
+    CHECK(!frontend_session_read(test_frontend,FALSE,got,16,&count));
+    frontend_session_leave(test_frontend);
+    for(i=0;i<count;++i)if(got[i].EventType==KEY_EVENT && !got[i].Event.KeyEvent.bKeyDown) {
+        if(got[i].Event.KeyEvent.wVirtualKeyCode=='A')++a_up;
+        if(got[i].Event.KeyEvent.wVirtualKeyCode=='B')++b_up;
+    }
+    CHECK(a_up==1 && b_up==1);
+    CHECK(!frontend_session_bind(test_frontend,&owner_a,FALSE));
+    frontend_video_dispose(&video);CloseHandle(input);CloseHandle(output);
+    puts("PASS retained non-contiguous receipts preserve intermediate key transitions");
+}
+static void test_input_mixed_source_return(void)
+{
+    int owner_a=0,owner_b=0;HANDLE input,output;DWORD written,count,i,found;
+    INPUT_RECORD key={0},got[16],returned[2];uint64_t ids[16],back[2]={0};
+    frontend_video video={0},text={0};console_video_description description={4,2,4,8,8,{0}};
+    BYTE pixels[8]={0};HWND window=NULL;ULONGLONG deadline;BOOL saw_ctrl_up=FALSE,saw_a_up=FALSE;
+    CHECK(!frontend_session_console(test_frontend,&input,&output));
+    CHECK(!frontend_session_bind(test_frontend,&owner_a,TRUE));
+    key.EventType=KEY_EVENT;key.Event.KeyEvent.bKeyDown=TRUE;
+    key.Event.KeyEvent.wRepeatCount=1;key.Event.KeyEvent.wVirtualKeyCode=VK_CONTROL;
+    key.Event.KeyEvent.wVirtualScanCode=0x1d;key.Event.KeyEvent.dwControlKeyState=LEFT_CTRL_PRESSED;
+    CHECK(WriteConsoleInputW(input,&key,1,&written) && written==1);
+    deadline=GetTickCount64()+5000;
+    do {
+        CHECK(!frontend_session_enter(test_frontend,&owner_a));
+        CHECK(!frontend_session_read_tagged(test_frontend,FALSE,got,ids,16,&count));
+        frontend_session_leave(test_frontend);
+        for(i=0;i<count;++i)if(got[i].EventType==KEY_EVENT && got[i].Event.KeyEvent.bKeyDown &&
+            got[i].Event.KeyEvent.wVirtualScanCode==0x1d){returned[0]=got[i];back[0]=ids[i];}
+        if(!back[0])Sleep(10);
+    }while(!back[0] && GetTickCount64()<deadline);
+    CHECK(back[0]);
+    CHECK(!frontend_video_begin(&video,1,&description));
+    CHECK(!frontend_video_data(&video,1,0,pixels,sizeof(pixels)));
+    CHECK(!frontend_session_video(test_frontend,&owner_a,&video,FALSE));
+    deadline=GetTickCount64()+5000;
+    while(!(window=FindWindowW(L"LibKvmWindow",NULL)) && GetTickCount64()<deadline)Sleep(10);
+    CHECK(window && PostMessageW(window,WM_KEYDOWN,'A',0x001e0001));
+    deadline=GetTickCount64()+5000;
+    do {
+        CHECK(!frontend_session_enter(test_frontend,&owner_a));
+        CHECK(!frontend_session_read_tagged(test_frontend,FALSE,got,ids,16,&count));
+        frontend_session_leave(test_frontend);
+        for(i=0;i<count;++i)if(got[i].EventType==KEY_EVENT) {
+            if(got[i].Event.KeyEvent.wVirtualScanCode==0x1d && !got[i].Event.KeyEvent.bKeyDown)saw_ctrl_up=TRUE;
+            if(got[i].Event.KeyEvent.wVirtualScanCode==0x1e && got[i].Event.KeyEvent.bKeyDown)
+                {returned[1]=got[i];back[1]=ids[i];}
+        }
+        if(!back[1] || !saw_ctrl_up)Sleep(10);
+    }while((!back[1] || !saw_ctrl_up) && GetTickCount64()<deadline);
+    CHECK(back[1] && saw_ctrl_up);
+    text.published_serial=2;
+    CHECK(!frontend_session_video(test_frontend,&owner_a,&text,FALSE));
+    CHECK(!frontend_session_display(test_frontend,FALSE));
+    deadline=GetTickCount64()+5000;
+    while(IsWindow(window) && GetTickCount64()<deadline)Sleep(10);
+    CHECK(!IsWindow(window));
+    deadline=GetTickCount64()+5000;
+    do {
+        CHECK(!frontend_session_enter(test_frontend,&owner_a));
+        CHECK(!frontend_session_read_tagged(test_frontend,FALSE,got,ids,16,&count));
+        frontend_session_leave(test_frontend);
+        for(i=0;i<count;++i)if(got[i].EventType==KEY_EVENT &&
+            got[i].Event.KeyEvent.wVirtualScanCode==0x1e && !got[i].Event.KeyEvent.bKeyDown)saw_a_up=TRUE;
+        if(!saw_a_up)Sleep(10);
+    }while(!saw_a_up && GetTickCount64()<deadline);
+    CHECK(saw_a_up);
+    CHECK(!frontend_session_enter(test_frontend,&owner_a));
+    CHECK(!frontend_session_prepend_tagged(test_frontend,returned,back,2));
+    frontend_session_leave(test_frontend);
+    CHECK(!frontend_session_bind(test_frontend,&owner_a,FALSE));
+    CHECK(!frontend_session_bind(test_frontend,&owner_b,TRUE));
+    CHECK(!frontend_session_enter(test_frontend,&owner_b));
+    CHECK(!frontend_session_read(test_frontend,FALSE,got,16,&count));
+    frontend_session_leave(test_frontend);
+    found=0;
+    for(i=0;i<count;++i)if(got[i].EventType==KEY_EVENT) {
+        WORD scan=got[i].Event.KeyEvent.wVirtualScanCode;
+        if((scan==0x1d || scan==0x1e) && found<4) {
+            CHECK(scan==(found<2 ? 0x1d : 0x1e));
+            CHECK(!!got[i].Event.KeyEvent.bKeyDown==!(found%2));++found;
+        }
+    }
+    CHECK(found==4);
+    CHECK(!frontend_session_bind(test_frontend,&owner_b,FALSE));
+    frontend_video_dispose(&video);CloseHandle(input);CloseHandle(output);
+    puts("PASS late return of two retired input sources preserves ordered boundaries");
+}
+static void test_input_receipt_identity(void)
+{
+    int owner=0;HANDLE input,output;DWORD written,count,i,keys;ULONGLONG deadline;
+    INPUT_RECORD key[2]={0},peeked[16],read[16];uint64_t peek_ids[16],read_ids[16];
+    CHECK(!frontend_session_console(test_frontend,&input,&output));
+    CHECK(!frontend_session_bind(test_frontend,&owner,TRUE));
+    key[0].EventType=KEY_EVENT;key[0].Event.KeyEvent.bKeyDown=TRUE;
+    key[0].Event.KeyEvent.wRepeatCount=1;key[0].Event.KeyEvent.wVirtualKeyCode='A';
+    key[0].Event.KeyEvent.wVirtualScanCode=0x1e;key[1]=key[0];
+    CHECK(WriteConsoleInputW(input,key,2,&written) && written==2);
+    deadline=GetTickCount64()+5000;
+    do {
+        CHECK(!frontend_session_enter(test_frontend,&owner));
+        CHECK(!frontend_session_read_tagged(test_frontend,TRUE,peeked,peek_ids,16,&count));
+        frontend_session_leave(test_frontend);
+        keys=0;for(i=0;i<count;++i)if(peeked[i].EventType==KEY_EVENT)++keys;
+        if(keys<2)Sleep(10);
+    }while(keys<2 && GetTickCount64()<deadline);
+    CHECK(keys==2 && count==2 && peek_ids[0] && peek_ids[1] && peek_ids[0]!=peek_ids[1]);
+    CHECK(!memcmp(&peeked[0],&peeked[1],sizeof(INPUT_RECORD)));
+    CHECK(!frontend_session_enter(test_frontend,&owner));
+    CHECK(!frontend_session_read_tagged(test_frontend,FALSE,read,read_ids,16,&count));
+    frontend_session_leave(test_frontend);
+    CHECK(count==2 && read_ids[0]==peek_ids[0] && read_ids[1]==peek_ids[1]);
+    CHECK(!memcmp(read,peeked,2*sizeof(INPUT_RECORD)));
+    {
+        uint64_t duplicate[2]={read_ids[0],read_ids[0]},unknown=UINT64_MAX;
+        CHECK(!frontend_session_enter(test_frontend,&owner));
+        CHECK(frontend_session_prepend_tagged(test_frontend,read,duplicate,2)==ERROR_INVALID_DATA);
+        CHECK(frontend_session_prepend_tagged(test_frontend,read,&unknown,1)==ERROR_NOT_FOUND);
+        CHECK(!frontend_session_read_tagged(test_frontend,TRUE,peeked,peek_ids,16,&count) && !count);
+        frontend_session_leave(test_frontend);
+    }
+    /* Returning only the second identical make must preserve the first one. */
+    CHECK(!frontend_session_enter(test_frontend,&owner));
+    CHECK(!frontend_session_prepend_tagged(test_frontend,&read[1],&read_ids[1],1));
+    CHECK(!frontend_session_read_tagged(test_frontend,TRUE,peeked,peek_ids,16,&count));
+    CHECK(count==1 && peek_ids[0]==read_ids[1] && !memcmp(&peeked[0],&read[1],sizeof(INPUT_RECORD)));
+    CHECK(!frontend_session_read_tagged(test_frontend,FALSE,peeked,peek_ids,16,&count));
+    CHECK(count==1 && peek_ids[0]==read_ids[1]);
+    frontend_session_leave(test_frontend);
+    /* An input record with no representable physical key identity must not
+     * claim a receipt that the return ledger can never resolve. */
+    key[0].Event.KeyEvent.wVirtualKeyCode='Q';key[0].Event.KeyEvent.wVirtualScanCode=0xe100;
+    CHECK(WriteConsoleInputW(input,key,1,&written) && written==1);
+    deadline=GetTickCount64()+5000;
+    do {
+        CHECK(!frontend_session_enter(test_frontend,&owner));
+        CHECK(!frontend_session_read_tagged(test_frontend,FALSE,read,read_ids,16,&count));
+        frontend_session_leave(test_frontend);
+        if(!count)Sleep(10);
+    }while(!count && GetTickCount64()<deadline);
+    CHECK(count==1 && !read_ids[0] && read[0].Event.KeyEvent.wVirtualScanCode==0xe100);
+    CHECK(!frontend_session_enter(test_frontend,&owner));
+    CHECK(!frontend_session_prepend_tagged(test_frontend,read,read_ids,1));
+    CHECK(!frontend_session_read_tagged(test_frontend,FALSE,peeked,peek_ids,16,&count));
+    CHECK(count==1 && !peek_ids[0] && !memcmp(&peeked[0],&read[0],sizeof(INPUT_RECORD)));
+    frontend_session_leave(test_frontend);
+    CHECK(!frontend_session_bind(test_frontend,&owner,FALSE));
+    frontend_session_forget(test_frontend,&owner);CloseHandle(input);CloseHandle(output);
 }
 /* Diagnostic-only self-process snapshot; never enters a product binary. */
 static void audit_handles(const char *stage)
@@ -487,17 +793,39 @@ static void run_case(unsigned mode,unsigned round)
             CHECK(WaitForSingleObject(frontend_session_ready(test_frontend),5000)==WAIT_OBJECT_0);
             ZeroMemory(&request.state,sizeof(request.state));
             request.sequence=3;request.operation=CONSOLE_IO_READ_INPUT;request.state.count=1;
+            request.state.mode=CONSOLE_IO_INPUT_RETURNABLE;
             peer_io(TRUE,&request,CONSOLE_IO_REQUEST_HEADER_BYTES);
             peer_io(FALSE,&reply,CONSOLE_IO_REPLY_HEADER_BYTES);
             CHECK(reply.result && reply.sequence==3 && reply.state.count==1 &&
                 reply.bytes==sizeof(console_io_input));
             peer_io(FALSE,&received,reply.bytes);
-            CHECK(received.type==KEY_EVENT && received.virtual_key=='V' && received.character==L'v');
-            request.sequence=4;request.operation=CONSOLE_IO_WRITE;request.bytes=1;
+            CHECK(received.type==KEY_EVENT && received.virtual_key=='V' && received.character==L'v' &&
+                (received.receipt_low || received.receipt_high));
+            if(!round) {
+                console_io_input original=received;
+                uint64_t live=(uint64_t)received.receipt_low|((uint64_t)received.receipt_high<<32);
+                request.sequence=4;request.operation=CONSOLE_IO_READ_INPUT;
+                request.state.count=1;request.bytes=sizeof(live);request.data=(BYTE *)&live;
+                peer_request(&request);peer_io(FALSE,&reply,CONSOLE_IO_REPLY_HEADER_BYTES);
+                CHECK(reply.result && !reply.state.count && !reply.bytes);
+                request.sequence=5;request.operation=CONSOLE_IO_PREPEND_KEYS;
+                request.state.count=1;request.bytes=sizeof(received);request.data=(BYTE *)&received;
+                peer_request(&request);peer_io(FALSE,&reply,CONSOLE_IO_REPLY_HEADER_BYTES);
+                CHECK(reply.result && reply.state.count==1);
+                request.sequence=6;request.operation=CONSOLE_IO_READ_INPUT;
+                request.state.count=1;request.state.mode=CONSOLE_IO_INPUT_RETURNABLE;
+                request.bytes=0;peer_request(&request);
+                peer_io(FALSE,&reply,CONSOLE_IO_REPLY_HEADER_BYTES);
+                CHECK(reply.result && reply.state.count==1 && reply.bytes==sizeof(received));
+                peer_io(FALSE,&received,reply.bytes);
+                CHECK(!memcmp(&received,&original,sizeof(received)));
+                puts("PASS authenticated wire return preserves the exact key receipt");
+            }
+            request.sequence=round ? 4 : 7;request.operation=CONSOLE_IO_WRITE;request.bytes=1;
             request.data=(BYTE *)"!";
             peer_request(&request);
             peer_io(FALSE,&reply,CONSOLE_IO_REPLY_HEADER_BYTES);
-            CHECK(reply.result && reply.sequence==4 && reply.state.count==1 && !reply.bytes);
+            CHECK(reply.result && reply.sequence==(round ? 4u : 7u) && reply.state.count==1 && !reply.bytes);
             puts("PASS queued input is consumed and the following output completes on the real variable-record channel");
         }
     } else if(mode==2) {
@@ -1500,6 +1828,14 @@ int main(int argc,char **argv)
     CHECK(!frontend_session_create(&test_frontend));
     if(GetEnvironmentVariableW(L"MVDM_TEST_SOURCE_OWNER",NULL,0))
         test_console_source_owner_handoff();
+    if(GetEnvironmentVariableW(L"MVDM_TEST_SOURCE_WINDOW_OWNER",NULL,0))
+        test_window_source_owner_handoff();
+    if(GetEnvironmentVariableW(L"MVDM_TEST_INPUT_RECEIPT",NULL,0))
+        test_input_receipt_identity();
+    if(GetEnvironmentVariableW(L"MVDM_TEST_INPUT_COMPACTION",NULL,0))
+        test_input_history_compaction();
+    if(GetEnvironmentVariableW(L"MVDM_TEST_INPUT_MIXED_SOURCES",NULL,0))
+        test_input_mixed_source_return();
     test_title_handoff();
     test_prepare_operation();
     test_standalone_text(FALSE,FALSE);

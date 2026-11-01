@@ -1,10 +1,29 @@
 #include "include/mvdm_keyboard_history.h"
 #include <string.h>
 
-int mvdm_keyboard_history_record(mvdm_keyboard_history *state)
+int mvdm_keyboard_history_record_receipt(mvdm_keyboard_history *state,uint64_t receipt)
 {
     if(!state || state->issued==UINT64_MAX)return 0;
+    state->receipts[(unsigned)(state->issued%MVDM_KEY_HISTORY_CAPACITY)]=receipt;
     ++state->issued;
+    return 1;
+}
+int mvdm_keyboard_history_record(mvdm_keyboard_history *state)
+{
+    uint64_t receipt=0;
+    if(!state)return 0;
+    if(state->receipt_batch_next<state->receipt_batch_count)
+        receipt=state->receipt_batch[state->receipt_batch_next];
+    if(!mvdm_keyboard_history_record_receipt(state,receipt))return 0;
+    if(state->receipt_batch_next<state->receipt_batch_count)++state->receipt_batch_next;
+    return 1;
+}
+int mvdm_keyboard_history_stage_receipts(mvdm_keyboard_history *state,const uint64_t *receipts,unsigned count)
+{
+    if(!state || count>MVDM_KEY_RECEIPT_BATCH_CAPACITY || (!receipts && count) ||
+        state->receipt_batch_next!=state->receipt_batch_count)return 0;
+    if(count)memcpy(state->receipt_batch,receipts,count*sizeof(*receipts));
+    state->receipt_batch_count=count;state->receipt_batch_next=0;
     return 1;
 }
 int mvdm_keyboard_history_begin(mvdm_keyboard_history *state)
@@ -41,6 +60,23 @@ unsigned mvdm_keyboard_history_age(const mvdm_keyboard_history *state,unsigned o
     for(age=0;age<MVDM_KEY_HISTORY_CAPACITY;++age)
         if(state->selected[age] && !--ordinal)return age+1;
     return 0;
+}
+uint64_t mvdm_keyboard_history_receipt(const mvdm_keyboard_history *state,unsigned ordinal)
+{
+    unsigned age=mvdm_keyboard_history_age(state,ordinal);
+    if(!age || age>state->issued)return 0;
+    return state->receipts[(unsigned)((state->issued-age)%MVDM_KEY_HISTORY_CAPACITY)];
+}
+unsigned mvdm_keyboard_history_live(const mvdm_keyboard_history *state,uint64_t *receipts)
+{
+    uint64_t first=state->issued>MVDM_KEY_HISTORY_CAPACITY ?
+        state->issued-MVDM_KEY_HISTORY_CAPACITY : 0;
+    unsigned count=0;
+    while(first<state->issued) {
+        uint64_t receipt=state->receipts[(unsigned)(first++%MVDM_KEY_HISTORY_CAPACITY)];
+        if(receipt)receipts[count++]=receipt;
+    }
+    return count;
 }
 unsigned mvdm_keyboard_history_pending(mvdm_keyboard_history *state,
     unsigned first,unsigned next,unsigned capacity,unsigned held,

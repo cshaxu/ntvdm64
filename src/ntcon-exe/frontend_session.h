@@ -65,6 +65,10 @@ DWORD frontend_session_read_text_configuration(frontend_session *,DWORD,DWORD,co
 /* Borrowed readiness; data operations require the successful enter lock. */
 HANDLE frontend_session_ready(frontend_session *);
 DWORD frontend_session_read(frontend_session *,BOOL,INPUT_RECORD *,DWORD,DWORD *);
+DWORD frontend_session_read_tagged(frontend_session *,BOOL,INPUT_RECORD *,uint64_t *,DWORD,DWORD *);
+DWORD frontend_session_read_owned(frontend_session *,BOOL,BOOL,INPUT_RECORD *,uint64_t *,DWORD,DWORD *);
+DWORD frontend_session_input_live(frontend_session *,const uint64_t *,DWORD);
 DWORD frontend_session_prepend(frontend_session *,const INPUT_RECORD *,DWORD);
+DWORD frontend_session_prepend_tagged(frontend_session *,const INPUT_RECORD *,const uint64_t *,DWORD);
 void frontend_session_forget(frontend_session *,const void *);
 #endif
