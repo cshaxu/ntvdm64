@@ -36,6 +36,10 @@
 
 #if 0
 #error DIVERGENCE MVDM-HOST-DIV-495: original inactive legacy multimedia branch excluded; see mirror register.
+#if DBG
+#error Excluded original conditional branch
 #endif
+#endif
+#line 40
 
 

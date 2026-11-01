@@ -293,7 +293,14 @@ extern void bootstrap3();
 
 #ifdef NOVELL
 #error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
+#ifdef NOVELL_CFM
+#error Excluded original conditional branch
 #endif
+#ifdef V4CLIENT
+#error Excluded original conditional branch
+#endif
+#endif
+#line 297
 
 #ifdef	MSWDVR
 extern void ms_windows();

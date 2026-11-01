@@ -1649,9 +1649,16 @@ static void set_baud_rate IFN1(int, adapter)
 			RX_delay[i], TX_delay[i]);
 #ifdef IRET_HOOKS
 #error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
+#ifdef VARIABLE_TICK_COMMS
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif /* IRET_HOOKS */
+#line 1653
 	}
 #else /* NTVDM */
+#line 1655
     //The host is not limited in the baud rates that it supports
 
     if(asp->divisor_latch.all)
@@ -1660,6 +1667,7 @@ static void set_baud_rate IFN1(int, adapter)
         */
         host_com_ioctl(adapter,HOST_COM_BAUD,115200/asp->divisor_latch.all);
 #endif /* NTVDM */
+#line 1663
 }
 
 static void set_line_control IFN2(int, adapter, int, value)

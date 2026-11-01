@@ -150,4 +150,13 @@ void illegal_dvr_bop IFN0()
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#ifdef CPU_40_STYLE
+#error Excluded original conditional branch
+#ifndef	CCPU
+#error Excluded original conditional branch
+#endif
+#else
+#error Excluded original conditional branch
+#endif
 #endif /* ! PROD */
+#line 154

@@ -94,7 +94,11 @@ GLOBAL int *pargc;	/* Pointer to argc		*/
 
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#ifndef ProcCommonCommLineArgs
+#error Excluded original conditional branch
+#endif
 #endif /* NTVDM */
+#line 98
 
 /* Does this host need to have a different entry point ? */
 

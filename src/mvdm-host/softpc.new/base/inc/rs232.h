@@ -141,7 +141,13 @@ typedef union {
 #endif
 #ifdef BIT_ORDER1
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
+#if defined(NTVDM) && defined(FIFO_ON)
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
 #endif
+#endif
+#line 145
 
 #ifdef BIT_ORDER2
 typedef union {
@@ -158,9 +164,11 @@ typedef union {
 	       } bits;
       } MODEM_STATUS_REG;
 #endif
+#line 161
 #ifdef BIT_ORDER1
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
+#line 164
 
 #if defined(NTVDM) && defined(FIFO_ON)
 /* refer to NS 16550A data sheet for fifo control register description
@@ -185,6 +193,7 @@ typedef union {
 #endif
 
 #endif
+#line 188
 
 /* register select code definitions follow: */
 
@@ -194,6 +203,7 @@ typedef union {
 #if defined(NTVDM) && defined(FIFO_ON)
 #define RS232_FIFO  2
 #endif
+#line 197
 #define RS232_LCR	3
 #define RS232_MCR	4
 #define RS232_LSR	5
@@ -224,6 +234,7 @@ typedef union {
 
 #define FIFO_BUFFER_SIZE    FIFO_SIZE
 #endif
+#line 227
 
 #define OFF 0
 #define ON 1
@@ -234,6 +245,7 @@ typedef union {
 #if defined(NTVDM) && defined(FIFO_ON)
 #define FIFO_INT 6   /* fifo rda time out interrupt ID */
 #endif
+#line 237
 
 #define RLS_INT 3     /* receiver line status interrupt ID */
 #define RDA_INT 2     /* data available interrupt ID */
@@ -254,18 +266,22 @@ typedef union {
 #define PARITYENABLE_ON 1   /* line control setting for parity enabled */
 #define PARITYENABLE_OFF 0  /* line control setting for parity disabled */
 #else
+#line 257
 #define PARITY_ON 1   /* line control setting for parity enabled */
 #define PARITY_OFF 0  /* line control setting for parity disabled */
 #endif
+#line 260
 
 #ifdef NTVDM
 // collision with winbase.h PARITY_ODD define
 #define EVENPARITY_ODD 0  /* line control setting for odd parity */
 #define EVENPARITY_EVEN 1 /* line control setting for even parity */
 #else
+#line 266
 #define PARITY_ODD 0  /* line control setting for odd parity */
 #define PARITY_EVEN 1 /* line control setting for even parity */
 #endif
+#line 269
 
 #define PARITY_STICK 1  /* line control setting for stick(y) parity */
 
@@ -277,6 +293,7 @@ typedef union {
 #define COM3 2
 #define COM4 3
 #endif
+#line 280
 
 #if defined(NTVDM) && defined(FIFO_ON)
 typedef     struct _FIFORXDATA{
@@ -284,6 +301,7 @@ typedef     struct _FIFORXDATA{
     half_word   error;
 }FIFORXDATA, *PFIFORXDATA;
 #endif
+#line 287
 
 /*
  * ============================================================================
@@ -308,6 +326,7 @@ extern int com_save_txbyte IPT1(CHAR,value);
 #ifdef PS_FLUSHING
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
+#line 311
 
 #ifdef NTVDM
 extern void com_lsr_change(int adapter);
@@ -316,6 +335,7 @@ extern void SyncBaseLineSettings(int adapter,DIVISOR_LATCH *divisor_latch,
 extern void tx_shift_register_empty(int adapter);
 extern void tx_holding_register_empty(int adapter);
 #endif
+#line 319
 
 #if (NUM_SERIAL_PORTS > 2)
 #define	adapter_for_port(port) \
@@ -329,6 +349,7 @@ extern void tx_holding_register_empty(int adapter);
 #endif
 
 #else
+#line 332
 
 #define	adapter_for_port(port)	(((port) >= RS232_PRI_PORT_START && (port) <= RS232_PRI_PORT_END) ? COM1 : COM2)
 
@@ -337,10 +358,12 @@ extern void tx_holding_register_empty(int adapter);
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #endif /* more than 2 serial ports */
+#line 340
 
 #ifdef IRET_HOOKS
 #error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
 #endif /* IRET_HOOKS */
+#line 344
 
 /* BCN 2730 define generic macros which can be SVID3 or old style
  * in either case the structure used should be a termios
@@ -349,9 +372,12 @@ extern void tx_holding_register_empty(int adapter);
 #ifdef SVID3_TCGET
 #error DIVERGENCE MVDM-HOST-DIV-536: SVID3_TCGET branch is not selected; see mirror register.
 #else
+#line 352
 #define	TCGET TCGETA
 #define	TCSET TCSETA
 #define	TCSETF TCSETAF
 #endif	/* SVID3_TCGET */
+#line 356
 
 #endif /* _RS232_H */
+#line 358

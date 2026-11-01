@@ -296,7 +296,11 @@ IFN1(
 
 #ifdef PIG
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
+#ifdef	PIG_DONT_CHECK_OTHER_WORD_ON_STACK
+#error Excluded original conditional branch
+#endif
 #endif /* PIG */
+#line 300
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* Temporary Pop word or double word from the stack.                  */

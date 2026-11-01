@@ -116,6 +116,10 @@ host_reset()
 	/*::::::::::::::::::::::::::::::::::::::::::::::::: Enable idle detect */
     }
 
+#ifdef MONITOR
+#error Excluded original conditional branch
+#endif  /* MONITOR */
+#line 119
 
 
     //

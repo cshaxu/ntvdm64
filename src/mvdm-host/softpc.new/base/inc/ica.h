@@ -201,7 +201,13 @@ typedef struct {
 
 #if !defined(NTVDM)
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#ifdef  REAL_ICA
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif  /* !NTVDM */
+#line 205
 
 #ifdef GISP_CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.

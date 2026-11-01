@@ -222,6 +222,10 @@ VDMVIRTUALICA VirtualIca[2];
  * hook inside kernel)
  */
 
+#ifdef MONITOR
+#error Excluded original conditional branch
+#endif
+#line 225
 
 
 /*

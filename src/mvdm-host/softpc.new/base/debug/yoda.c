@@ -486,7 +486,14 @@ enum pla_type 	last_type[PLA_SIZE];
 
 #else /* !macintosh */
 #error DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register.
+#ifdef	CPU_40_STYLE
+#error Excluded original conditional branch
+#endif
+#ifdef	CPU_40_STYLE
+#error Excluded original conditional branch
+#endif
 #endif	/* macintosh */
+#line 490
 
 int	pla_ptr=0;
 
@@ -521,6 +528,7 @@ GLOBAL void set_last_address IFN2( word, cs, LIN_ADDR, ip)
     }
     last_type[pla_ptr] = cs_code_kind;
 #endif	/* CPU_40_STYLE */
+#line 524
 
     last_cs[pla_ptr] = cs;
     last_ip[pla_ptr] = ip;
@@ -546,6 +554,7 @@ GLOBAL void set_last_bop_done IFN1( word, number )
     }
 }
 #endif	/* CPU_40_STYLE */
+#line 549
 
 #ifdef	CPU_40_STYLE
 GLOBAL void set_last_simulate IFN2(int, nesting_level, IBOOL, is_simulate)
@@ -563,6 +572,7 @@ GLOBAL void set_last_simulate IFN2(int, nesting_level, IBOOL, is_simulate)
     }
 }
 #endif	/* CPU_40_STYLE */
+#line 566
 
 #ifdef	CPU_40_STYLE
 GLOBAL void set_last_intack IFN1( word, line )
@@ -580,6 +590,7 @@ GLOBAL void set_last_intack IFN1( word, line )
     }
 }
 #endif	/* CPU_40_STYLE */
+#line 583
 
 #ifdef	CPU_40_STYLE
 GLOBAL void set_last_pig_force IFN0()
@@ -629,6 +640,7 @@ GLOBAL void set_last_nano_leave IFN0()
     }
 }
 #endif	/* CPU_40_STYLE */
+#line 632
 
 
 host_addr	host_dest_addr;		/* address just written to by cpu */
@@ -769,6 +781,7 @@ static char *NPXOpcodes[] = {
 	"Fldenv"
 };
 #endif	/* GENERIC_NPX && !CPU_40_STYLE */
+#line 772
 
 #ifdef PM
 #ifdef SPC386
@@ -943,6 +956,7 @@ static char *segment_names[] =
 static int descr_trace = 0x3f;
 
 #endif /* PM */
+#line 946
 
 static int low_trace_limit = 0x0;
 static int high_trace_limit = 0x400000;
@@ -950,13 +964,16 @@ static int high_trace_limit = 0x400000;
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #endif /* SFELLOW */
+#line 953
 
 #ifdef SPC386
 #define DASM_INTERNAL
 #include <dasm.h>
 #else /* SPC386 */
+#line 958
 #error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register.
 #endif /* SPC386 */
+#line 960
 
 /*
  * ==========================================================================
@@ -978,12 +995,14 @@ IMPORT void com_debug IPT0();
 #ifdef DPMI
 IMPORT void set_dpmi_severity IPT0();
 #endif /* DPMI */
+#line 981
 IMPORT void com_debug IPT0();
 #ifndef GISP_CPU
 #ifdef A3CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 #endif
 #endif /* GISP_CPU */
+#line 987
 /*
  * ==========================================================================
  * Local functions
@@ -1025,6 +1044,7 @@ LOCAL	void	add_inst_mix(void);
 LOCAL	void	do_compress_npx(FILE *);
 #endif
 #else	/* ANSI */
+#line 1028
 LOCAL	void	clear_reg_break();
 LOCAL	void	print_reg_break();
 LOCAL	BOOL	check_reg_break();
@@ -1049,6 +1069,7 @@ LOCAL	void	add_inst_mix();
 LOCAL	void	do_compress_npx();
 #endif
 #endif
+#line 1052
 
 LOCAL dump_descr IPT2(LIN_ADDR, address, IUM32, num);
 
@@ -1060,6 +1081,7 @@ LOCAL dump_descr IPT2(LIN_ADDR, address, IUM32, num);
 #ifdef GISP_SVGA
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
+#line 1063
 /*(
  *========================== do_pmt ==================================
  * do_pmt
@@ -1163,6 +1185,7 @@ LOCAL YODA_COMMAND(do_resetNPXfreq)
 	return(YODA_LOOP);
 }
 #endif	/* GENERIC_NPX && !CPU_40_STYLE */
+#line 1166
 
 
 #ifdef PM
@@ -1501,7 +1524,13 @@ LOCAL YODA_COMMAND(do_par)
 	       getGS_BASE(), getGS_LIMIT(), getGS_AR());
 #else /* SPC386 */
 #error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register.
+#ifdef CPU_30_STYLE
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif /* SPC386 */							 
+#line 1505
 	return(YODA_LOOP);
 }
 
@@ -1587,6 +1616,7 @@ LOCAL YODA_COMMAND(do_pdseg)
 }
 
 #endif
+#line 1590
 #ifdef MUST_BLOCK_TIMERS
 LOCAL YODA_COMMAND(do_blt)
 {
@@ -1612,10 +1642,12 @@ LOCAL YODA_COMMAND(do_ubt)
 	return(YODA_LOOP);
 }
 #endif /* MUST_BLOCK_TIMERS */
+#line 1615
 
 #ifdef BSD4_2
 #error DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register.
 #endif /* BSD4_2 */
+#line 1619
 
 #if defined(CPU_40_STYLE) && !defined (SFELLOW) && !defined (NTVDM)
 extern IBOOL DoingVDDStuff;
@@ -1641,6 +1673,7 @@ LOCAL YODA_COMMAND(do_debug_vdd)
 	return(YODA_LOOP);
 }
 #endif /* CPU_40_STYLE && !SFELLOW */
+#line 1644
 
 LOCAL YODA_COMMAND(do_tf)
 {
@@ -1654,6 +1687,7 @@ LOCAL YODA_COMMAND(do_tf)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 1657
 	newtrace[0] = '\0';
 	sscanf(str, "%s %s", com, newtrace);
 	if ((trace_file != stderr) && (trace_file != stdout))
@@ -1667,6 +1701,7 @@ LOCAL YODA_COMMAND(do_tf)
 	    }
 	}
 #endif /* SFELLOW */
+#line 1670
 	return(YODA_LOOP);
 }
 
@@ -1682,6 +1717,7 @@ LOCAL YODA_COMMAND(do_read)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 1685
 	newfile [0] = '\0';
 
 	sscanf (str, "%s %s", com, newfile);
@@ -1712,6 +1748,7 @@ LOCAL YODA_COMMAND(do_read)
 		puts ("No pathname supplied, reading stdin");
 	}
 #endif /* SFELLOW */
+#line 1715
 	return (YODA_LOOP);
 }
 
@@ -1720,6 +1757,7 @@ LOCAL YODA_COMMAND(do_toff)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 1723
 	UNUSED(str);
 	UNUSED(com);
 	UNUSED(cs);
@@ -1729,6 +1767,7 @@ LOCAL YODA_COMMAND(do_toff)
 
 	timer_int_enabled = 0;
 #endif /* SFELLOW */
+#line 1732
 	return(YODA_LOOP);
 }
 
@@ -1737,6 +1776,7 @@ LOCAL YODA_COMMAND(do_ton)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 1740
 	UNUSED(str);
 	UNUSED(com);
 	UNUSED(cs);
@@ -1746,6 +1786,7 @@ LOCAL YODA_COMMAND(do_ton)
 
 	timer_int_enabled = 1;
 #endif /* SFELLOW */
+#line 1749
 	return(YODA_LOOP);
 }
 
@@ -1761,11 +1802,13 @@ LOCAL YODA_COMMAND(do_toff2)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 1764
 	if (chewy) {
 		printf("Take care!\nThe power of the force is strong, and it can do evil as well as good.\n");
 	}
 	axe_ticks( -1 );
 #endif /* SFELLOW */
+#line 1769
 	return(YODA_LOOP);
 }
 
@@ -1781,8 +1824,10 @@ LOCAL YODA_COMMAND(do_ton2)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 1784
 	axe_ticks( 0 );
 #endif /* SFELLOW */
+#line 1786
 	return(YODA_LOOP);
 }
 
@@ -1802,9 +1847,14 @@ LOCAL YODA_COMMAND(do_query)
 #ifdef GISP_CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif /* GISP_CPU */
+#line 1805
 #ifdef A3CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
+#ifndef GISP_CPU
+#error Excluded original conditional branch
+#endif
 #endif /* A3CPU */
+#line 1808
 
 LOCAL YODA_COMMAND(do_u)
 {
@@ -1869,8 +1919,10 @@ LOCAL YODA_COMMAND(do_u)
 		}
 	}
 #else /* SPC386 */
+#line 1872
 #error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register.
 #endif /* SPC386 */
+#line 1874
 	disable_bkpt = 0;
 	return(YODA_LOOP_AND_REPEAT);
 }
@@ -1889,6 +1941,7 @@ LOCAL YODA_COMMAND(do_del)
 	return(YODA_LOOP);
 }
 #endif /* DELTA */
+#line 1892
 
 LOCAL YODA_COMMAND(do_j)
 {
@@ -1910,8 +1963,10 @@ LOCAL YODA_COMMAND(do_j)
 		nextip += dasm((char *)-1, (word)getCS(), getEIP(), 0);
 	}
 #else /* SPC386 */
+#line 1913
 #error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register.
 #endif /* SPC386 */
+#line 1915
 	disable_bkpt = 0;
 	set_inst_break(getCS(), nextip, 1, 1, 1);
 	disable_timer = 0;
@@ -1931,9 +1986,11 @@ LOCAL YODA_COMMAND(do_ctnpx)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 1934
 	compress_npx = fopen("comp_npx","w");
 	printf("compress_npx is %x\n",compress_npx);
 #endif /* SFELLOW */
+#line 1937
 	return(YODA_LOOP);
 }
 
@@ -1958,6 +2015,7 @@ LOCAL YODA_COMMAND(do_287r)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 1961
 	extern ULONG get_287_status_word IPT0();
 	extern ULONG get_287_control_word IPT0();
 	extern ULONG get_287_sp IPT0();
@@ -2031,9 +2089,11 @@ LOCAL YODA_COMMAND(do_287r)
 	 */
 	do_compress_npx(stdout);
 #endif /* SFELLOW */
+#line 2034
 	return(YODA_LOOP);
 }
 #endif	/* NPX */
+#line 2037
 
 LOCAL YODA_COMMAND(do_inb)
 {
@@ -2087,6 +2147,7 @@ LOCAL YODA_COMMAND(do_ind)
 	return(YODA_LOOP);
 }
 #endif	/* SPC386 */
+#line 2090
 
 LOCAL YODA_COMMAND(do_outb)
 {
@@ -2132,6 +2193,7 @@ LOCAL YODA_COMMAND(do_outd)
 	return(YODA_LOOP);
 }
 #endif	/* SPC386 */
+#line 2135
 
 LOCAL YODA_COMMAND(do_luke)
 {
@@ -2163,9 +2225,11 @@ LOCAL char * fff_strings[] = {
 #ifdef SUNOS50
 #error DIVERGENCE MVDM-HOST-DIV-536: SUNOS50 branch is not selected; see mirror register.
 #endif /* SUNOS50 */
+#line 2166
 "Sorry, there is no faul                             "
 };
 #endif /* !macintosh */
+#line 2169
 
 LOCAL YODA_COMMAND(do_fff)
 {
@@ -2177,13 +2241,17 @@ LOCAL YODA_COMMAND(do_fff)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 2180
 #ifdef macintosh
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #else
+#line 2183
 	if (chewy)
 		printf("%s\n", fff_strings[(rand()/3) % (sizeof(fff_strings) / sizeof(char *))]);
 #endif /* macintosh else */
+#line 2186
 #endif /* SFELLOW */
+#line 2187
 }
 
 #if !defined(REAL_VGA) && !defined(SFELLOW)
@@ -2289,7 +2357,9 @@ LOCAL YODA_COMMAND(do_read_planes)
 	return(YODA_LOOP);
 }
 #endif /* EGG */
+#line 2292
 #endif /* not REAL_VGA and not SFELLOW */
+#line 2293
 
 LOCAL YODA_COMMAND(do_db)
 {
@@ -2380,15 +2450,19 @@ LOCAL YODA_COMMAND(do_it)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 2383
 		set_hfx_severity();
 #endif /* SFELLOW */
+#line 2385
 
 	    if (io_verbose & HDA_VERBOSE)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 2390
 		setdisktrace();
 #endif /* SFELLOW */
+#line 2392
 	}
 	return(YODA_LOOP);
 }
@@ -2410,6 +2484,7 @@ LOCAL YODA_COMMAND(do_sit)
 	    if (sub_io_verbose & DPMI_VERBOSE)
 		set_dpmi_severity();
 #endif /* DPMI */
+#line 2413
 	}
 	return(YODA_LOOP);
 }
@@ -2427,8 +2502,10 @@ LOCAL YODA_COMMAND(do_dt)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 2430
 	disk_trace = 1;
 #endif /* SFELLOW */
+#line 2432
 	return(YODA_LOOP);
 }
 
@@ -2477,6 +2554,7 @@ LOCAL YODA_COMMAND(do_trace)
 #if defined(HERC)
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
+#line 2480
 	 {"ipc",	IPC_VERBOSE,		&io_verbose,		0},
 	 {"lim",	LIM_VERBOSE,		&io_verbose,		0},
 	 {"hfx",	HFX_VERBOSE,		&io_verbose,		0},
@@ -2516,6 +2594,7 @@ LOCAL YODA_COMMAND(do_trace)
 #ifdef WDCTRL_BOP
 	 {"hda_wdctrl",	WDCTRL,			&disktraceinfo,		0},
 #endif /* WDCTRL */
+#line 2519
 #ifdef HFX
 	 {"hfx_input",	DEBUG_INPUT,		&severity,		3},
 	 {"hfx_reg",	DEBUG_REG,		&severity,		0},
@@ -2523,6 +2602,7 @@ LOCAL YODA_COMMAND(do_trace)
 	 {"hfx_host",	DEBUG_HOST,		&severity,		0},
 	 {"hfx_init",	DEBUG_INIT,		&severity,		0}
 #endif /* HFX */
+#line 2526
 	};
 
 	static int n_flags = sizeof(trace_flags)/sizeof(struct trace_flag_t);
@@ -2586,14 +2666,18 @@ LOCAL YODA_COMMAND(do_trace)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 2589
 #ifdef HFX
 				io_verbose    = sub_io_verbose =
 				disktraceinfo = severity
 #else /* HFX */
+#line 2593
 				io_verbose    = sub_io_verbose =
 				disktraceinfo 
 #endif /* HFX */
+#line 2596
 #endif /* SFELLOW */
+#line 2597
 					      = negate ? ~mask : mask;
 		}
 	}
@@ -2628,13 +2712,16 @@ LOCAL IBOOL check_trace_environment IFN1(char *, cmd)
 #ifdef SYNCH_TIMERS
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #else	/* !SYNCH_TIMERS */
+#line 2631
 
 	printf("%s command is only available if the SoftPC has been built with -DSYNCH_TIMERS\n");
 	return FALSE;
 
 #endif	/* SYNCH_TIMERS */
+#line 2636
 }
 #endif /* CPU_40_STYLE */
+#line 2638
 
 #ifdef CPU_40_STYLE
 LOCAL void ct_initialise IPT0();
@@ -2651,6 +2738,7 @@ LOCAL YODA_COMMAND(do_ct)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 2654
 	if (!check_trace_environment("ct"))
 		return(YODA_LOOP);
 
@@ -2666,9 +2754,11 @@ LOCAL YODA_COMMAND(do_ct)
 		printf("Will break after producing %ld. instructions\n", compress_break);
 	}
 #endif /* SFELLOW */
+#line 2669
 	return(YODA_LOOP);
 }
 #endif /* CPU_40_STYLE */
+#line 2672
 
 #ifdef CPU_40_STYLE
 LOCAL YODA_COMMAND(do_ttOFF)
@@ -2689,6 +2779,7 @@ LOCAL YODA_COMMAND(do_ttOFF)
 	return(YODA_LOOP);
 }
 #endif /* CPU_40_STYLE */
+#line 2692
 
 #ifdef CPU_40_STYLE
 LOCAL YODA_COMMAND(do_tt)
@@ -2703,6 +2794,7 @@ LOCAL YODA_COMMAND(do_tt)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 2706
 	if (!check_trace_environment("tt"))
 		return(YODA_LOOP);
 
@@ -2741,9 +2833,11 @@ LOCAL YODA_COMMAND(do_tt)
 		printf("Will break after %ld. instructions\n", compare_break);
 
 #endif /* SFELLOW */
+#line 2744
 	return(YODA_LOOP);
 }
 #endif /* CPU_40_STYLE */
+#line 2747
 
 #ifdef CPU_40_STYLE
 LOCAL YODA_COMMAND(do_ctOFF)
@@ -2763,6 +2857,7 @@ LOCAL YODA_COMMAND(do_ctOFF)
 	return(YODA_LOOP);
 }
 #endif /* CPU_40_STYLE */
+#line 2766
 
 LOCAL YODA_COMMAND(do_nt)
 {
@@ -3409,6 +3504,7 @@ LOCAL YODA_COMMAND(do_eric)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 3412
 	inst_mix_count = 1;
 	if (cs == 1)
 	{
@@ -3416,6 +3512,7 @@ LOCAL YODA_COMMAND(do_eric)
 	    disk_inst = 1;
 	}
 #endif /* SFELLOW */
+#line 3419
 	return(YODA_LOOP);
 }
 
@@ -3431,6 +3528,7 @@ LOCAL YODA_COMMAND(do_nic)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 3434
 	inst_mix_count = 0;
 	if (disk_inst == 1)
 	{
@@ -3441,6 +3539,7 @@ LOCAL YODA_COMMAND(do_nic)
 	    printf("Instruction mix results dumped to file\n");
 	}
 #endif /* SFELLOW */
+#line 3444
 	return(YODA_LOOP);
 }
 
@@ -3499,6 +3598,7 @@ LOCAL YODA_COMMAND(do_eax)
 	return(YODA_LOOP);
 }
 #endif	/* SPC386 */
+#line 3502
 
 LOCAL YODA_COMMAND(do_bx)
 {
@@ -3525,6 +3625,7 @@ LOCAL YODA_COMMAND(do_ebx)
 	return(YODA_LOOP);
 }
 #endif	/* SPC386 */
+#line 3528
 
 LOCAL YODA_COMMAND(do_cx)
 {
@@ -3551,6 +3652,7 @@ LOCAL YODA_COMMAND(do_ecx)
 	return(YODA_LOOP);
 }
 #endif	/* SPC386 */
+#line 3554
 
 LOCAL YODA_COMMAND(do_if)
 {
@@ -3589,6 +3691,7 @@ LOCAL YODA_COMMAND(do_eip)
 	return(YODA_LOOP);
 }
 #endif	/* SPC386 */
+#line 3592
 
 LOCAL YODA_COMMAND(do_dx)
 {
@@ -3615,6 +3718,7 @@ LOCAL YODA_COMMAND(do_edx)
 	return(YODA_LOOP);
 }
 #endif	/* SPC386 */
+#line 3618
 
 LOCAL YODA_COMMAND(do_si)
 {
@@ -3641,6 +3745,7 @@ LOCAL YODA_COMMAND(do_esi)
 	return(YODA_LOOP);
 }
 #endif	/* SPC386 */
+#line 3644
 
 LOCAL YODA_COMMAND(do_di)
 {
@@ -3667,6 +3772,7 @@ LOCAL YODA_COMMAND(do_edi)
 	return(YODA_LOOP);
 }
 #endif	/* SPC386 */
+#line 3670
 
 LOCAL YODA_COMMAND(do_bp)
 {
@@ -3693,6 +3799,7 @@ LOCAL YODA_COMMAND(do_ebp)
 	return(YODA_LOOP);
 }
 #endif	/* SPC386 */
+#line 3696
 
 LOCAL YODA_COMMAND(do_sp)
 {
@@ -3719,6 +3826,7 @@ LOCAL YODA_COMMAND(do_esp)
 	return(YODA_LOOP);
 }
 #endif	/* SPC386 */
+#line 3722
 
 LOCAL YODA_COMMAND(do_es)
 {
@@ -3745,6 +3853,7 @@ LOCAL YODA_COMMAND(do_fs)
 	return(YODA_LOOP);
 }
 #endif	/* SPC386 */
+#line 3748
 
 #ifdef	SPC386
 LOCAL YODA_COMMAND(do_gs)
@@ -3759,6 +3868,7 @@ LOCAL YODA_COMMAND(do_gs)
 	return(YODA_LOOP);
 }
 #endif	/* SPC386 */
+#line 3762
 
 LOCAL YODA_COMMAND(do_ss)
 {
@@ -3886,6 +3996,7 @@ GLOBAL IBOOL effective_lin_addr IFN5(IBOOL, pe,
 			return TRUE;
 		}
 #endif /* SWIN_CPU_OPTS or CPU_40_STYLE*/
+#line 3889
 
 		if ( !selector_outside_table(seg, &descr_addr) ) {
 			read_descriptor(descr_addr, &entry);
@@ -3962,8 +4073,10 @@ print_pla IFN3(IU16, cs, LIN_ADDR, ip, enum pla_type, what)
 		fprintf (trace_file, "%s", buff);
 		break;
 #else	/* CPU_40_STYLE */
+#line 3965
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
+#line 3967
 	case pla_type_bop_done:
 		fprintf(trace_file, "---- %16s ---- BOP %02x completed\n", "", ip);
 		break;
@@ -3993,8 +4106,10 @@ print_pla IFN3(IU16, cs, LIN_ADDR, ip, enum pla_type, what)
 	}
 }
 #else /* CPU_40_STYLE */
+#line 3996
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
+#line 3998
 
 LOCAL YODA_COMMAND(do_pla)
 {
@@ -4020,8 +4135,10 @@ LOCAL YODA_COMMAND(do_pla)
 #ifdef	CPU_40_STYLE
 		print_pla(last_cs[i], last_ip[i], last_type[i]);
 #else
+#line 4023
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#line 4025
 
 	/* Print the start of the buffer. */
 	if (pla_length > pla_ptr)
@@ -4033,8 +4150,10 @@ LOCAL YODA_COMMAND(do_pla)
 #ifdef	CPU_40_STYLE
 		print_pla(last_cs[i], last_ip[i], last_type[i]);
 #else
+#line 4036
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#line 4038
 
 	return(YODA_LOOP);
 }
@@ -4107,6 +4226,7 @@ LOCAL YODA_COMMAND(do_q)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 4110
 	if (*com == 'Q') {
 		terminate();	/* no saving throw - requested by Wayne */
 	} else {
@@ -4122,6 +4242,7 @@ LOCAL YODA_COMMAND(do_q)
 		}
 	}
 #endif /* SFELLOW */
+#line 4125
 	return(YODA_LOOP);
 }
 
@@ -4145,6 +4266,7 @@ LOCAL YODA_COMMAND(do_idle)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 4148
 	char tempstr1[10],tempstr2[10];
 
 	UNUSED(com);
@@ -4169,6 +4291,7 @@ LOCAL YODA_COMMAND(do_idle)
 
 	printf("unrecognised string '%s'\n",tempstr2);
 #endif /* SFELLOW */
+#line 4172
 	return(YODA_LOOP);
 }
 
@@ -4184,8 +4307,10 @@ LOCAL YODA_COMMAND(do_cdebug)
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 4187
 	com_debug();
 #endif /* SFELLOW */
+#line 4189
 	return (YODA_LOOP);
 }
 
@@ -4194,6 +4319,7 @@ LOCAL void do_screen_refresh IFN0()
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 4197
 	extern host_timer_event();
 
 	host_mark_screen_refresh();
@@ -4201,6 +4327,7 @@ LOCAL void do_screen_refresh IFN0()
 
 	host_timer_event();
 #endif /* SFELLOW */
+#line 4204
 }
 
 YODA_CMD_RETURN do_rfrsh IFN6(char *, str, char *, com, IS32, cs, LIN_ADDR, ip, LIN_ADDR, len, LIN_ADDR, stop)
@@ -4220,6 +4347,7 @@ YODA_CMD_RETURN do_rfrsh IFN6(char *, str, char *, com, IS32, cs, LIN_ADDR, ip, 
 #ifdef	EGA_DUMP
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #endif	/* EGA_DUMP */
+#line 4223
 
 LOCAL YODA_COMMAND(do_chewy)
 {
@@ -4238,23 +4366,34 @@ LOCAL YODA_COMMAND(do_chewy)
 #ifdef A3CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 #endif
+#line 4241
 #endif /* GISP_CPU */
+#line 4242
 
 #if	defined(CPU_40_STYLE) && !defined(CCPU)
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
+#ifdef SFELLOW
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif /* CPU_40_STYLE && !CCPU */
+#line 4246
 
 #ifdef PIG
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
+#line 4250
 
 #ifdef SYNCH_TIMERS
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #endif	/* SYNCH_TIMERS */
+#line 4254
 
 #ifdef PROFILE
 #error DIVERGENCE MVDM-HOST-DIV-531: PROFILE branch is not selected; see mirror register.
 #endif	/* PROFILE */
+#line 4258
 
 #ifdef CPU_40_STYLE
 
@@ -4441,6 +4580,7 @@ LOCAL YODA_COMMAND(do_blwd)
 }
 
 #endif /* CPU_40_STYLE */
+#line 4444
 
 /*
  *	YODA COMMAND TABLE
@@ -4461,10 +4601,12 @@ static struct
 { "blt", 	do_blt, 	FALSE, NULL, "Block the timer signal" },
 { "ubt", 	do_ubt, 	FALSE, NULL, "Unblock the timer signal" },
 #endif /* MUST_BLOCK_TIMERS */
+#line 4464
 
 #ifdef BSD4_2
 #error DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register.
 #endif /* BSD4_2 */
+#line 4468
 
 { "tf", 	do_tf, 		FALSE, "<filename>", "Re-direct trace output" },
 { "read", 	do_read, 	FALSE, "<filename>", "Take commands from file" },
@@ -4478,6 +4620,7 @@ static struct
 #ifdef	DELTA
 { "del", 	do_del, 	FALSE, NULL, "Go to delta debugger" },
 #endif /* DELTA */
+#line 4481
 
 { "j", 		do_j, 		FALSE, NULL, "Jump over call or int" },
 { "ctnpx", 	do_ctnpx, 	FALSE, NULL, "Compress trace npx" },
@@ -4486,6 +4629,7 @@ static struct
 #ifdef	NPX
 { "287r", 	do_287r, 	FALSE, NULL, "Print 287 registers" },
 #endif	/* NPX */
+#line 4489
 
 { "inb", 	do_inb,		FALSE, "<port>", "display the contents of a port" },
 { "outb", 	do_outb, 	FALSE, "<port> <val>", "change the contents of a port" },
@@ -4495,6 +4639,7 @@ static struct
 { "ind", 	do_ind,		FALSE, "<port>", "display the contents of a 32 bit port" },
 { "outd", 	do_outd, 	FALSE, "<port> <val>", "change the contents of a 32 bit port" },
 #endif	/* SPC386 */
+#line 4498
 { "i", 		do_inb,		FALSE, "<port>", "alias for inb" },
 { "o", 		do_outb, 	FALSE, "<port> <val>", "alias for outb" },
 { "luke", 	do_luke, 	FALSE, NULL, "Switch between fast/slow yoda" },
@@ -4516,13 +4661,16 @@ static struct
 { "read_planes", do_read_planes,
 				FALSE, NULL, "Read EGA planes" },
 #endif /* EGG */
+#line 4519
 #endif /* !REAL_VGA && !SFELLOW */
+#line 4520
 
 { "db", 	do_db, 		TRUE,  "<len>", "Display bytes" },
 { "dw", 	do_dw, 		TRUE,  "<len>", "Display words" },
 #ifdef SPC386
 { "dd", 	do_dd, 		TRUE,  "<len>", "Display dwords" },
 #endif	/* SPC386 */
+#line 4526
 { "da", 	do_da, 		TRUE,  "<len>", "Display in hex/ascii" },
 { "t", 		do_t, 		FALSE, NULL, "Trace all CPU instructions" },
 { "it", 	do_it, 		FALSE, "<val>", "Set trace bits (use trace!)" },
@@ -4535,6 +4683,7 @@ static struct
 { "tt", 	do_tt, 		FALSE, NULL, "test  Compressed trace file" },
 { "ctOFF", 	do_ctOFF, 	FALSE, NULL, "Switch compress trace off" },
 #endif /* CPU_40_STYLE */
+#line 4538
 { "nt", 	do_nt, 		FALSE, NULL, "Disable all tracing" },
 { "c", 		do_c, 		FALSE, NULL, "Continue execution" },
 { "bint", 	do_bint, 	FALSE, NULL, "Break on interrupt" },
@@ -4597,6 +4746,7 @@ static struct
 { "esp", 	do_esp,		FALSE, "<value>", "Set ESP to <value>" },
 { "eip", 	do_eip,		FALSE, "<value>", "Set EIP to <value>" },
 #endif	/* SPC386 */
+#line 4600
 { "cs", 	do_cs, 		FALSE, "<value>", "Set CS to <value>" },
 { "ds", 	do_ds, 		FALSE, "<value>", "Set DS to <value>" },
 { "es", 	do_es, 		FALSE, "<value>", "Set ES to <value>" },
@@ -4605,6 +4755,7 @@ static struct
 { "fs", 	do_fs, 		FALSE, "<value>", "Set FS to <value>" },
 { "gs", 	do_gs, 		FALSE, "<value>", "Set GS to <value>" },
 #endif	/* SPC386 */
+#line 4608
 { "sseg", 	do_sseg, 	FALSE, "<value>", "Set SS to value" },
 { "byte", 	do_byte, 	TRUE,  "<value>", "Set byte memory location to value" },
 { "word", 	do_word, 	TRUE,  "<value>", "Set word memory location to value" },
@@ -4628,23 +4779,31 @@ static struct
 #ifdef	EGA_DUMP
 #error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #endif	/* EGA_DUMP */
+#line 4631
 
 #ifdef GISP_CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif	/* GISP_CPU */
+#line 4635
 
 #ifdef SYNCH_TIMERS
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #endif
+#line 4639
 #ifdef A3CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
+#ifndef GISP_CPU
+#error Excluded original conditional branch
+#endif
 #endif /* A3CPU */
+#line 4642
 
 #ifdef PM
 { "pm", 	do_pm,		FALSE, NULL, "Set protected mode" },
 #ifdef	LIM
 { "zaplim", 	do_zaplim, 	FALSE, NULL, "Zap LIM" },
 #endif	/* :IM */
+#line 4648
 { "rm", 	do_rm, 		FALSE, NULL, "Set real mode" },
 { "pg", 	do_pg, 		FALSE, NULL, "Set paging mode 1 (enabled) or 0 (disabled)" },
 { "pgdt", 	do_pgdt,	FALSE, NULL, "Print global descriptor table" },
@@ -4664,6 +4823,7 @@ static struct
 { "rtc", 	do_rtc,		FALSE, NULL, "Re-initialise the rtc" },
 { "ica", 	do_ica,		FALSE, NULL, "Show status of ica" },
 #endif
+#line 4667
 #ifdef CPU_40_STYLE
 { "blrb", 	do_blrb,		FALSE, NULL, "Break on linear read byte" },
 { "blrw", 	do_blrw,		FALSE, NULL, "Break on linear read word" },
@@ -4674,11 +4834,13 @@ static struct
 { "pdb", 	do_pdb,			FALSE, NULL, "Print data breakpoints" },
 { "cdb", 	do_cdb,			FALSE, NULL, "Clear data breakpoint" },
 #endif /* CPU_40_STYLE */
+#line 4677
 
 #if defined(CPU_40_STYLE) && !defined (SFELLOW) && !defined(NTVDM)
 { "vdd", 	do_vdd,		FALSE,	"0 or 1",	"Turn Windows VDD trapping off or on" },
 { "debug_vdd", 	do_debug_vdd,	FALSE,	"0 or 1",	"Turn Windows VDD debugging off or on" },
 #endif /* CPU_40_STYLE && !SFELLOW && !NTVDM*/
+#line 4682
 
 { "rfrsh", 	do_rfrsh,	FALSE, NULL, "Toggle Yoda screen refresh" },
 
@@ -4686,32 +4848,40 @@ static struct
 #ifdef A3CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 #endif
+#line 4689
 #endif /* GISP_CPU */
+#line 4690
 
 #if	defined(CPU_40_STYLE) && !defined(CCPU)
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif /* CPU_40_STYLE && !CCPU */
+#line 4694
 
 #ifdef PIG
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
+#line 4698
 
 #if	defined(GENERIC_NPX) && !defined(CPU_40_STYLE)
 { "NPXdisp",	do_NPXdisp, 	FALSE, "<len>", "Display last <len> NPX instructions" },
 { "NPXfreq",	do_NPXfreq,	FALSE, NULL, "Display frequency of NPX instructions" },
 { "resetNPXfreq", do_resetNPXfreq, FALSE, NULL, "Reset frequency of NPX instructions" },
 #endif	/* GENERIC_NPX && !CPU_40_STYLE */
+#line 4704
 
 #ifdef MSWDVR_DEBUG
 #error DIVERGENCE MVDM-HOST-DIV-536: MSWDVR_DEBUG branch is not selected; see mirror register.
 #endif /* MSWDVR_DEBUG */
+#line 4708
 
 #ifdef GISP_SVGA
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
+#line 4712
 #ifdef PROFILE
 #error DIVERGENCE MVDM-HOST-DIV-531: PROFILE branch is not selected; see mirror register.
 #endif	/* PROFILE */
+#line 4715
 { "pmt",	do_pmt,		FALSE, NULL, "Print map of SAS memory types"}
 };
 
@@ -4752,6 +4922,7 @@ LOCAL YODA_COMMAND(do_h)
 #ifdef PCLABS_STATS
 #error DIVERGENCE MVDM-HOST-DIV-529: PCLABS_STATS platform branch is not selected; see mirror register.
 #endif
+#line 4755
 
 /*
  * Convert string to lowercase in-situ. We assume that tolower() doesn't
@@ -4821,6 +4992,7 @@ LOCAL IBOOL decode_offset IFN3(char *, coffset, IU32 *, offset, IS32 *, seg)
 		{"eip", NULL, NULL}
 	};
 #endif /* SPC386 */
+#line 4824
 
 	if( cold )
 	{
@@ -4851,9 +5023,20 @@ LOCAL IBOOL decode_offset IFN3(char *, coffset, IU32 *, offset, IS32 *, seg)
 		decode_segoffset2[5].get_offset_val = c_getEIP;
 		decode_segoffset2[5].get_segreg_val = c_getCS;
 #endif /* SPC386 */
+#line 4854
 #else  /* !CCPU */
+#line 4855
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
+#ifdef CPU_40_STYLE
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#ifdef SPC386
+#error Excluded original conditional branch
+#endif
+#endif
 #endif /* !CCPU */
+#line 4857
 		cold = FALSE;
 	}
 
@@ -4935,8 +5118,10 @@ LOCAL IBOOL decode_offset IFN3(char *, coffset, IU32 *, offset, IS32 *, seg)
 #ifdef SPC386
 		*offset = iaddr16b;
 #else
+#line 4938
 #error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register.
 #endif
+#line 4940
 		*seg  = getDS();
 		retVal = TRUE;
 
@@ -4961,6 +5146,7 @@ LOCAL IBOOL decode_offset IFN3(char *, coffset, IU32 *, offset, IS32 *, seg)
 				break;
 			}
 #endif /* SPC386 */
+#line 4964
 		}
 	}
 
@@ -4972,8 +5158,10 @@ LOCAL IBOOL decode_offset IFN3(char *, coffset, IU32 *, offset, IS32 *, seg)
 #ifdef SPC386
 		*offset = (*offset + ireg_offset + const_offset);
 #else
+#line 4975
 #error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register.
 #endif
+#line 4977
 
 	return(retVal);
 }
@@ -5006,6 +5194,7 @@ LOCAL IBOOL decode_iaddr_ok IFN3 (char *, iaddr, IS32 *, seg, LIN_ADDR *, offset
 		,{"fs", NULL},
 		{"gs", NULL}
 #endif /* SPC 386 */
+#line 5009
 	};
 
 	if( cold )
@@ -5019,9 +5208,20 @@ LOCAL IBOOL decode_iaddr_ok IFN3 (char *, iaddr, IS32 *, seg, LIN_ADDR *, offset
 		decode_segreg[4].get_segreg_val = c_getFS;
 		decode_segreg[5].get_segreg_val = c_getGS;
 #endif /* SPC386 */
+#line 5022
 #else  /* !CCPU */
+#line 5023
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
+#ifdef CPU_40_STYLE
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#ifdef SPC386
+#error Excluded original conditional branch
+#endif
+#endif
 #endif /* !CCPU */
+#line 5025
 		cold = FALSE;
 	}
 
@@ -5062,8 +5262,10 @@ LOCAL IBOOL decode_iaddr_ok IFN3 (char *, iaddr, IS32 *, seg, LIN_ADDR *, offset
 #ifdef SPC386
 			*seg = iaddr16b;
 #else
+#line 5065
 #error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register.
 #endif
+#line 5067
 		} else {
 			ISM8 n;
 			
@@ -5154,6 +5356,7 @@ GLOBAL VOID Enter_yoda IFN0()
 #ifdef	PIG
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
+#line 5157
 
 	if (entry_pending)
 	{
@@ -5167,10 +5370,12 @@ GLOBAL VOID Enter_yoda IFN0()
 	}
 }
 #endif	/* CPU_40_STYLE */
+#line 5170
 
 #if defined(CPU_40_STYLE) && !defined(CCPU)
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #else	/* CPU_40_STYLE && !CCPU */
+#line 5174
 
 GLOBAL IBOOL GetCpuCmdLine IFN4(char *, buff, int, size, FILE *, stream, char *, who)
 {
@@ -5195,6 +5400,7 @@ GLOBAL IBOOL GetCpuCmdLine IFN4(char *, buff, int, size, FILE *, stream, char *,
 	return FALSE;
 }
 #endif	/* CPU_40_STYLE && !CCPU */
+#line 5198
 
 GLOBAL IBOOL AlreadyInYoda = FALSE;
 
@@ -5215,19 +5421,23 @@ void force_yoda IFN0()
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #endif /* SFELLOW */
+#line 5218
 
 	entry_pending = FALSE;
 
 #ifdef PCLABS_STATS
 #error DIVERGENCE MVDM-HOST-DIV-529: PCLABS_STATS platform branch is not selected; see mirror register.
 #endif
+#line 5224
 #ifdef 	GISP_SVGA
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif	/* GISP_SVGA */
+#line 5227
 
 #if	defined(CPU_40_STYLE) && !defined(CCPU)
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #else	/* CPU_40_STYLE && !CCPU */
+#line 5231
 
 	if (AlreadyInYoda) {
 		printf("Recursive call to force_yoda() disallowed!\n");
@@ -5238,10 +5448,12 @@ void force_yoda IFN0()
 	prompt = "yoda";
 
 #endif	/* CPU_40_STYLE && !CCPU  */
+#line 5241
 
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #endif /* SFELLOW */
+#line 5245
 
 	if (firstTime) {
 		firstTime = FALSE;
@@ -5253,9 +5465,11 @@ void force_yoda IFN0()
 #if !defined(macintosh) && !defined(SFELLOW)
 			(void)srand(time(NULL));
 #endif /* !macintosh && !SFELLOW */
+#line 5256
 #if defined(SPC386) && !defined(GISP_CPU)
 			printf("\nRemember, not everything is as it seems!  An experienced Jedi will know\nthe difference between the physical world and the logical world at all times.\n\n");
 #endif /* SPC386 & !GISP_CPU */
+#line 5259
 
 		if (in_stream == NULL)
 			in_stream = stdin;
@@ -5267,13 +5481,18 @@ void force_yoda IFN0()
 	}
 #ifdef A3CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
+#ifndef SFELLOW
+#error Excluded original conditional branch
+#endif
 #endif /* A3CPU */
+#line 5271
 
 
 #ifdef MUST_BLOCK_TIMERS
 	if( !timer_blocked )
         host_block_timer();
 #endif /* MUST_BLOCK_TIMERS */
+#line 5277
 
    	disable_timer = 1;
 	disable_bkpt = 1;
@@ -5290,6 +5509,7 @@ void force_yoda IFN0()
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 5293
 		if (! GetCpuCmdLine(str, 80, in_stream, prompt))
 		{
 			/* if read fails on file */
@@ -5321,6 +5541,7 @@ void force_yoda IFN0()
 			strcpy(str, repeat_command);
 		}
 #endif /* SFELLOW */
+#line 5324
 	
 		/*
 		 * Setup default command arguments and do initial command
@@ -5390,16 +5611,19 @@ void force_yoda IFN0()
 			if( !timer_blocked )
 				host_release_timer();
 #endif /* MUST_BLOCK_TIMERS */
+#line 5393
 			In_yoda = FALSE;
 			AlreadyInYoda = FALSE;
 
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #endif /* SFELLOW */
+#line 5399
 
 #if defined(CPU_40_STYLE) && !defined(CCPU)
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif /* CPU_40_STYLE && !CCPU */
+#line 5403
 			return;
 		case YODA_HELP:
 			/*
@@ -5481,8 +5705,10 @@ LOCAL dump_descr IFN2(LIN_ADDR, address, IUM32, num)
 #ifdef SPC386
       high_limit = sas_w_at(address+6);	/* 4th word of descr */
 #else /* SPC386 */
+#line 5484
 #error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register.
 #endif /* SPC386 */
+#line 5486
 
       output_name = segment_names[AR];
 
@@ -5509,8 +5735,10 @@ LOCAL dump_descr IFN2(LIN_ADDR, address, IUM32, num)
 	 output_type = 9;
 	 break;
 #else /* SPC386 */
+#line 5512
 #error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register.
 #endif /* SPC386 */
+#line 5514
 
       case 0x01:   /* SPECIAL */
       case 0x02:
@@ -5570,8 +5798,10 @@ LOCAL dump_descr IFN2(LIN_ADDR, address, IUM32, num)
 	       i, p, dpl, output_name, base, tlimit);
 	    }
 #else /* SPC386 */
+#line 5573
 #error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register.
 #endif /* SPC386 */
+#line 5575
 	 break;
 
       case 2:
@@ -5657,6 +5887,7 @@ LOCAL dump_descr IFN2(LIN_ADDR, address, IUM32, num)
       }
    }
 #endif /* PM */
+#line 5660
 
 /*
    Dump Readable String.
@@ -5666,6 +5897,7 @@ dump_string IFN4(IU16, selector, LIN_ADDR, offset, LIN_ADDR, len, long, mode)
 #ifdef DOCUMENTATION
 #error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register.
 #endif	/* DOCUMENTATION */
+#line 5669
 
    {
    int i;
@@ -5736,6 +5968,7 @@ LOCAL void dump_page_table_entries IFN3(int, first_index, int, last_index, IU32,
 #ifndef	CCPU
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif /* CCPU */
+#line 5739
 	else
 	{
 		/* Not Present */
@@ -5814,6 +6047,7 @@ LOCAL void dump_page_table IFN2(
 	
 	disable_bkpt = 0;
 #endif /* CPU_40_STYLE */
+#line 5817
 }
 
 LOCAL void show_phys_addr IFN1(LIN_ADDR, lin)
@@ -5851,6 +6085,7 @@ LOCAL void show_phys_addr IFN1(LIN_ADDR, lin)
 		}
 	}
 #endif /* CPU_40_STYLE */
+#line 5854
 }
 
 LOCAL void guess_lin_phys IFN1(PHY_ADDR, phys)
@@ -5898,6 +6133,7 @@ LOCAL void guess_lin_phys IFN1(PHY_ADDR, phys)
 		fprintf(trace_file, "\n");
 	}
 #endif /* CPU_40_STYLE */
+#line 5901
 }
 
 LOCAL void guess_lin_pte IFN1(PHY_ADDR, pte_addr)
@@ -5934,6 +6170,7 @@ LOCAL void guess_lin_pte IFN1(PHY_ADDR, pte_addr)
 		fprintf(trace_file, "\n");
 	}
 #endif /* CPU_40_STYLE */
+#line 5937
 }
 
 LOCAL	void	dump_phys_bytes IFN2(IS32, cs, IS32, len)
@@ -5967,6 +6204,7 @@ LOCAL	void	dump_phys_bytes IFN2(IS32, cs, IS32, len)
       }
    fprintf(trace_file,"\n");
 #endif /* CPU_40_STYLE */
+#line 5970
    }
 
 LOCAL	void	dump_bytes IFN3(IU16, cs, LIN_ADDR, ip, LIN_ADDR, len)
@@ -6066,6 +6304,7 @@ LOCAL void init_br_structs IFN0()
 	init_br_regentry(br_regESP,"ESP",THIRTY_TWO_BIT);
 	init_br_regentry(br_regEBP,"EBP",THIRTY_TWO_BIT);
 #endif
+#line 6069
 	init_br_regentry(br_regAH,"AH",EIGHT_BIT);
 	init_br_regentry(br_regBH,"BH",EIGHT_BIT);
 	init_br_regentry(br_regCH,"CH",EIGHT_BIT);
@@ -6367,6 +6606,7 @@ LOCAL	BOOL	check_reg_break IFN0()
 			break;
 
 #endif /* SPC386 */
+#line 6370
 		}
 		if ((val >= brp->minval) && (val <= brp->maxval))
 		{
@@ -6524,6 +6764,7 @@ LOCAL	void	set_host_address_break IFN3(LIN_ADDR, cs, LIN_ADDR, len, LIN_ADDR, st
 #ifdef DOCUMENTATION
 #error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register.
 #endif	/* DOCUMENTATION */
+#line 6527
 
 {
 DATA_BPTS *ptr;
@@ -6566,6 +6807,7 @@ LOCAL	void	set_data_break_words IFN3(LIN_ADDR, cs, LIN_ADDR, len, LIN_ADDR, stop
 #ifdef DOCUMENTATION
 #error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register.
 #endif	/* DOCUMENTATION */
+#line 6569
 
 {
 DATA_BPTS *ptr;
@@ -6698,7 +6940,9 @@ valid_for_compress IFN2(word, cs, word, ip)
 #define GLOBAL_PigSynchCount	PigSynchCount
 extern IUH PigSynchCount;
 #endif	/* !CCPU */
+#line 6701
 #endif /* CPU_40_STYLE && SYNCH_TIMERS */
+#line 6702
 
 #if defined(CPU_40_STYLE) && defined(SYNCH_TIMERS)
 LOCAL void ct_get_regs IFN1(IU32 *, regs)
@@ -6739,6 +6983,7 @@ LOCAL void ct_get_regs IFN1(IU32 *, regs)
 					/*  ~   ^  */
 }
 #endif /* CPU_40_STYLE && SYNCH_TIMERS */
+#line 6742
 
 #if defined(CPU_40_STYLE) && defined(SYNCH_TIMERS)
 LOCAL IBOOL ct_show_reg_diffs IFN4(FILE *, f, IU32 *, good_regs, IU32 *, bad_regs, IU32 *, old_regs)
@@ -6805,6 +7050,7 @@ LOCAL IBOOL ct_show_reg_diffs IFN4(FILE *, f, IU32 *, good_regs, IU32 *, bad_reg
 	return (problem);
 }
 #endif /* CPU_40_STYLE && SYNCH_TIMERS */
+#line 6808
 
 
 #define MAX_REGS ('`' - '@')
@@ -6824,6 +7070,7 @@ LOCAL void ct_initialise IFN0()
 	ct_last = regs_a;
 	ct_line_num = 0;
 #endif /* CPU_40_STYLE && SYNCH_TIMERS */
+#line 6827
 }
 
 #if defined(CPU_40_STYLE) && defined(SYNCH_TIMERS)
@@ -6862,6 +7109,7 @@ LOCAL void ct_make_line IFN3(char *, line, IU32 *, old, IU32 *, new)
 	*line = '\0';
 }
 #endif /* CPU_40_STYLE && SYNCH_TIMERS */
+#line 6865
 
 
 /* This is the decryption algorithm for the gobblygook produced by the function
@@ -6917,6 +7165,7 @@ LOCAL void ct_read_line IFN3(char *, line, IU32 *, old, IU32 *, new)
 	}
 }
 #endif /* CPU_40_STYLE && SYNCH_TIMERS */
+#line 6920
 
 
 int     tpending = 0;
@@ -7049,6 +7298,7 @@ IU32 current_opcode;
 	}
     }
 #endif /* CPU_40_STYLE && SYNCH_TIMERS */
+#line 7052
 
     /*
      * EOR
@@ -7061,6 +7311,7 @@ IU32 current_opcode;
 #ifdef PCLABS_STATS
 #error DIVERGENCE MVDM-HOST-DIV-529: PCLABS_STATS platform branch is not selected; see mirror register.
 #endif
+#line 7064
 
     /* Lets get the next 4 bytes of code */
 
@@ -7076,6 +7327,7 @@ IU32 current_opcode;
 	}
     }
 #endif	/* NPX */
+#line 7079
 
     /*
      * EOR
@@ -7092,6 +7344,7 @@ IU32 current_opcode;
 		host_graphics_tick();
     }
 #endif /* MUST_BLOCK_TIMERS */
+#line 7095
 
     if (head_br_regs != NULL)
     {
@@ -7335,6 +7588,7 @@ IU32 current_opcode;
 			    printf("Windows VMM Call %04x %s\n", service, vmm_ptr->name);
 		    }
 #endif /* SPC386 */
+#line 7338
 		    /*
 		    ** A normal break on opcode so lets break then.
 		    */
@@ -7353,8 +7607,10 @@ IU32 current_opcode;
 			    nextip = GetInstructionPointer();
 				    nextip += dasm((char *)-1, (word)getCS(), getEIP(), 0);
 #else /* SPC386 */
+#line 7356
 #error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register.
 #endif /* SPC386 */
+#line 7358
 			    set_inst_break(getCS(), nextip, 1, 0, 1);
 			    disable_timer = 0;
 			}
@@ -7489,6 +7745,7 @@ IU32 current_opcode;
 			cpu_interrupt (CPU_YODA_INT, 0);
         }
 #endif
+#line 7492
 }
 
 #ifdef DELTA
@@ -7499,6 +7756,7 @@ void    delta_check_I IFN0()
     delta_prompt = 0;
 }
 #endif /* DELTA */
+#line 7502
 
 
 void check_D IFN2(LIN_ADDR, addr, IS32, len)
@@ -7545,6 +7803,7 @@ LOCAL	void	print_inst_mix IFN1(int, key)
     if (out_stream == NULL)
 	out_stream = stdout;
 #endif /* !SFELLOW */
+#line 7548
 
     if (key != 0)
         printf("Opcode %x has been called %d times\n", key, inst_mix[key]);
@@ -7570,6 +7829,7 @@ LOCAL	void	cga_test IFN0()
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 7573
     /*
      * Write test pattern to cga
      */
@@ -7648,6 +7908,7 @@ LOCAL	void	cga_test IFN0()
 	}
     }
 #endif /* SFELLOW */
+#line 7651
 }
 
 /*
@@ -7666,6 +7927,7 @@ char	file[80];
 #ifdef DELTA
 	printf( "last_dest_addr " );
 #endif /* DELTA */
+#line 7669
 
 	printf( "\n" );
 	printf("Enter: r/i/c/f/C/p/s/Z/l/F ? ");
@@ -7689,15 +7951,18 @@ char	file[80];
 #ifdef SFELLOW
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else /* SFELLOW */
+#line 7692
 	        	printf("file to be written to ? ");
 		        gets(file);
         		file_back_trace(file);
 #endif /* SFELLOW */
+#line 7696
         		break;
 
 #ifdef DELTA
       		case 'l': back_trace_flags |= LAST_DEST; break;
 #endif /* DELTA */
+#line 7701
 
 		default : printf("bad choice\n");
 	}
@@ -7715,10 +7980,12 @@ yoda_intr IFN1(int, signo)
 #if	defined(CPU_40_STYLE) && !defined(CCPU)
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif	/* CPU_40_STYLE && !CCPU */
+#line 7718
 
 #ifndef SFELLOW
     printf("Intercepted signal %d\n", signo);
 #endif /* !SFELLOW */
+#line 7722
 
 	if (trace_file != stdout)
 		printf("Output is redirected to a file\n");
@@ -7728,6 +7995,7 @@ yoda_intr IFN1(int, signo)
 #if	defined(CPU_40_STYLE) && !defined(CCPU)
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif	/* CPU_40_STYLE && !CCPU */
+#line 7731
 }
 
 #ifdef NPX
@@ -7751,14 +8019,17 @@ LOCAL	void	do_compress_npx IFN1(FILE *, fp)
 #ifdef SPC386
 	dasm(buff, (word)getCS(), (IU32)GetInstructionPointer(), SIXTEEN_BIT);
 #else
+#line 7754
 #error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register.
 #endif /* SPC386 */
+#line 7756
 	fprintf(fp,"%sc%04x s%04x t%04x", buff, cw287, sw287, tw287);
 	for (i=0;i<8;i++)
 		fprintf(fp," %s", host_get_287_reg_as_string(i, FALSE));
 	fprintf(fp,"\n");
 }
 #endif	/* NPX */
+#line 7762
 
 GLOBAL void	da_block IFN3(IU16, cs, LIN_ADDR, ip, LIN_ADDR, len) 
 {
@@ -7828,6 +8099,7 @@ GLOBAL void	da_block IFN3(IU16, cs, LIN_ADDR, ip, LIN_ADDR, len)
 	last_da_ip=ip;
 }
 #endif /* nPROD */
+#line 7831
 
 
 /*----------------------------------------------------------------------*/
@@ -8859,6 +9131,7 @@ LOCAL print_stats IFN0()
 #if 0
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 8862
 
 	if (command != USE_NORMAL && command != USE_ZEROF)
 	{
@@ -8885,6 +9158,7 @@ LOCAL print_stats IFN0()
 #if 0
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 8888
 }
 
 LOCAL char stats_file_name[20];
@@ -8911,6 +9185,7 @@ GLOBAL print_pclabs IFN0()
 }
 
 #endif /* PCLABS STATS */
+#line 8914
 
 /* extra functions called in FmDebug.c which support suspension and resumption 
 	of a separate filter process. BCN 3406 */
@@ -8919,6 +9194,7 @@ GLOBAL yoda_suspend_filter_process IFN0 ()
 #ifdef host_suspend_filter_process
 	host_suspend_filter_process();
 #endif
+#line 8922
 }
 
 GLOBAL yoda_resume_filter_process IFN0 ()
@@ -8926,6 +9202,7 @@ GLOBAL yoda_resume_filter_process IFN0 ()
 #ifdef	host_resume_filter_process
 	host_resume_filter_process();
 #endif
+#line 8929
 }
 
 GLOBAL yoda_kill_filter_process IFN0 ()
@@ -8933,5 +9210,7 @@ GLOBAL yoda_kill_filter_process IFN0 ()
 #ifdef	host_kill_filter_process
 	host_kill_filter_process();
 #endif
+#line 8936
 }
 #endif /* YODA */
+#line 8938

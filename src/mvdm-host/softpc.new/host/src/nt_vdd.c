@@ -212,6 +212,10 @@ WORD FreeVddAdapter(HANDLE hVdd)
    return 0;
 }
 
+#ifdef MONITOR
+#error Excluded original conditional branch
+#endif /* MONITOR */
+#line 215
 
 
 /*** VDDInstallIOHook - This service is provided for VDDs to hook the
@@ -268,6 +272,10 @@ BOOL VDDInstallIOHook (
    WORD              w, i;
    WORD              wAdapter;
    PVDD_IO_PORTRANGE pPRange;
+#ifdef MONITOR
+#error Excluded original conditional branch
+#endif
+#line 271
 
 
       // check parameters
@@ -317,6 +325,10 @@ BOOL VDDInstallIOHook (
    while (i) {
           for (w = pPRange->First; w <= pPRange->Last; w++)
             {
+#ifdef MONITOR
+#error Excluded original conditional branch
+#endif
+#line 320
               if (!io_connect_port(w, (half_word)wAdapter, IO_READ_WRITE))
                  {
                   // if one of the port connects failed
@@ -345,6 +357,10 @@ BOOL VDDInstallIOHook (
           i--;
           }
 
+#ifdef MONITOR
+#error Excluded original conditional branch
+#endif /* MONITOR */
+#line 348
    return TRUE;
 }
 
@@ -373,6 +389,10 @@ VOID VDDDeInstallIOHook (
 {
     WORD w;
     WORD wAdapter;
+#ifdef MONITOR
+#error Excluded original conditional branch
+#endif
+#line 376
 
 
     wAdapter = FreeVddAdapter(hVdd);
@@ -385,11 +405,19 @@ VOID VDDDeInstallIOHook (
    while (cPortRange--) {
           for (w = pPortRange->First; w <= pPortRange->Last; w++)
             {
+#ifdef MONITOR
+#error Excluded original conditional branch
+#endif
+#line 388
               io_disconnect_port(w, (half_word)wAdapter);
               }
           pPortRange++;
 	  }
 
+#ifdef MONITOR
+#error Excluded original conditional branch
+#endif	/* MONITOR */
+#line 393
 }
 
 

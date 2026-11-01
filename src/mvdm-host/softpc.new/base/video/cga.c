@@ -183,7 +183,11 @@ IMPORT READ_POINTERS simple_reads;
 
 #ifdef	A2CPU
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
+#ifndef	NO_STRING_OPERATIONS
+#error Excluded original conditional branch
+#endif
 #endif	/* A2CPU */
+#line 187
 
 /*
  *==========================================================================
@@ -408,6 +412,7 @@ switch (address) {
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
+#line 411
 
 /*
  * This is the data register, the function to be performed depends on the
@@ -606,6 +611,7 @@ switch (address) {
 #ifdef REAL_VGA
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
+#line 609
 		    update_cursor_shape();
 		}
 		break;
@@ -617,6 +623,7 @@ switch (address) {
 #ifdef REAL_VGA
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
+#line 620
 		    update_cursor_shape();
 		}
                 break;
@@ -639,6 +646,7 @@ switch (address) {
 #ifdef REAL_VGA
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
+#line 642
                 break;
 
             case 0x0D:
@@ -656,6 +664,7 @@ switch (address) {
 #ifdef REAL_VGA
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
+#line 659
                 break;
 
             /*
@@ -722,6 +731,7 @@ switch (address) {
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
+#line 725
         timer_video_enabled = (boolean) (value & VIDEO_ENABLE);
 
         if (value != current_mode) {
@@ -1301,6 +1311,7 @@ LOCAL MEM_HANDLERS cga_only_handlers =
 };
 
 #endif /* not EGG or A3CPU or A2CPU or C_VID or A_VID */
+#line 1304
 
 #ifdef SEGMENTATION
 /*
@@ -1310,6 +1321,7 @@ LOCAL MEM_HANDLERS cga_only_handlers =
  */
 #include "SOFTPC_INIT.seg"
 #endif
+#line 1313
 
 void cga_init()
 {
@@ -1321,6 +1333,7 @@ io_addr i;
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
+#line 1324
 
 
 /*
@@ -1355,7 +1368,13 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 
 #ifdef A3CPU 
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
+#ifdef C_VID
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #else	/* not A3CPU */
+#line 1359
 #ifdef A2CPU
 #error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #else
@@ -1369,15 +1388,19 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 #endif /* not EGG or C_VID or A_VID */
 #endif /* A2CPU */
 #endif /* A3CPU */
+#line 1372
 
 #endif /* JOKER */
+#line 1374
 #endif /* GISP_CPU */
+#line 1375
 
 #ifdef CPU_40_STYLE
 	setVideochain(3);
 	SetWritePointers();
 	SetReadPointers(3);
 #endif	/* CPU_40_STYLE */
+#line 1381
 
 	sas_connect_memory(gvi_pc_low_regen,gvi_pc_high_regen,(half_word)SAS_VIDEO);
 
@@ -1450,6 +1473,9 @@ GLOBAL void setup_vga_globals IFN0()
 #ifndef CPU_40_STYLE	/* Evid interface */
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#line 1453
 }
 #endif	/* not EGG or C_VID or A_VID */
+#line 1455
 #endif	/* !NTVDM | (NTVDM & !X86GFX) */
+#line 1456

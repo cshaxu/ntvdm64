@@ -15,7 +15,11 @@
 
 #ifdef BIT_ORDER1
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
+#ifdef V7VGA
+#error Excluded original conditional branch
+#endif
 #endif /* BIT_ORDER1 */
+#line 19
 
 #ifdef BIT_ORDER2
 /* CRTC Mode Control Register. Index 0x17 */
@@ -388,11 +392,39 @@ typedef	union
 	} as_bfld;
 } INPUT_STAT_REG1;
 #endif /* BIT_ORDER2 */
+#line 391
 
 /* The Sequencer Registers */
 #ifdef BIT_ORDER1
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
+#ifdef V7VGA
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#ifdef V7VGA
+#error Excluded original conditional branch
+#endif
+#ifdef V7VGA
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#ifdef V7VGA
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#ifdef V7VGA
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#ifdef V7VGA
+#error Excluded original conditional branch
+#endif
 #endif /* BIT_ORDER1 */
+#line 396
 
 #ifdef BIT_ORDER2
 struct sequencer
@@ -1002,6 +1034,7 @@ struct extensions_controller
 #endif /* V7VGA */
 
 #endif /* BIT_ORDER2 */
+#line 1005
 
 #ifdef V7VGA
 #ifdef CPU_40_STYLE
@@ -1009,12 +1042,21 @@ extern void set_v7_fg_latch_byte IPT2(IU8, index, IU8, value);
 #define SET_FG_LATCH(n, val)	set_v7_fg_latch_byte(n, val)
 #else
 #error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
+#ifdef BIGEND
+#error Excluded original conditional branch
+#endif
+#ifdef LITTLEND
+#error Excluded original conditional branch
+#endif
 #endif	/* CPU_40_STYLE */
+#line 1013
 #endif /* V7VGA */
+#line 1014
 
 #ifdef GISP_SVGA
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
+#line 1018
  
 /* Global data structures to import into modules
  */
@@ -1031,11 +1073,13 @@ IMPORT VOID disable_gfx_update_routines IPT0();
 #ifndef cursor_changed
 IMPORT VOID cursor_changed IPT2(int, x, int, y);
 #endif
+#line 1034
 IMPORT VOID update_shift_count IPT0();
 
 #ifdef V7VGA 
 IMPORT struct extensions_controller extensions_controller;
 #endif /* V7VGA */ 
+#line 1039
 IMPORT struct crt_controller		crt_controller;
 IMPORT struct sequencer			sequencer;
 IMPORT struct attribute_controller	attribute_controller;
@@ -1052,5 +1096,7 @@ IMPORT	byte	DAC_data_mask;
 #ifdef V7VGA
 IMPORT	int	DAC_data_bits;
 #endif
+#line 1055
 
 #endif	/* VGG */
+#line 1057

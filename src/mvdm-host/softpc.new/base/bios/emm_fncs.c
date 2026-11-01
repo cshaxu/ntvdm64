@@ -210,13 +210,18 @@ void (*emm_func[]) () = {
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#ifndef PROD
+#error Excluded original conditional branch
 #endif
+#endif
+#line 214
 
 /* Defintion of this is non-standard */
 
 #ifndef min
 #define min(a,b)	(((a)<(b)) ? (a) : (b))
 #endif
+#line 220
 
 /*
 ===========================================================================
@@ -249,11 +254,13 @@ GLOBAL void emm_io IFN0()
 #ifdef EMM_DEBUG
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
+#line 252
 		(*emm_func[func_num])();	
 
 #ifdef EMM_DEBUG
 #error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
+#line 257
 
 		if (getAH() != SUCCESS) {
 			sure_note_trace5(LIM_VERBOSE, "func %s failed - AX %#x BX %#x CX %#x DX %#x\n",
@@ -278,6 +285,7 @@ GLOBAL void emm_io IFN0()
  */
 #include "SOFTPC_INIT.seg"
 #endif
+#line 281
 
 /*
 ===========================================================================
@@ -305,14 +313,17 @@ GLOBAL void emm_init IFN0()
 #ifdef GISP_SVGA
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
+#line 308
 
 #ifdef	SUN_VA
 #error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif
+#line 312
 	
 #if	defined(SUN_VA) || defined(NTVDM)
 	SHORT limSize, backFill;
 #endif
+#line 316
 
 	segment68 = getDS();
 	offset68 = getDX();
@@ -320,6 +331,7 @@ GLOBAL void emm_init IFN0()
 #ifdef	SUN_VA
 #error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif	/* SUN_VA	*/
+#line 323
 #ifdef NTVDM	/* Similar to SUN_VA but without command line sizing */
 	if ((limSize = (SHORT)config_inquire(C_LIM_SIZE, NULL)) && get_no_phys_pages())
 	{
@@ -340,6 +352,7 @@ GLOBAL void emm_init IFN0()
 	}
 
 #endif	/* NTVDM */
+#line 343
 
 	total_pages = get_total_pages();
 	setBX(total_pages);
@@ -353,6 +366,7 @@ GLOBAL void emm_init IFN0()
 #if defined(A2CPU) && defined(DELTA)
 		reset_delta_data_structures();
 #endif /* A2CPU && DELTA */
+#line 356
 	}	
 	return;
 }	
@@ -366,6 +380,7 @@ GLOBAL void emm_init IFN0()
  */
 #include "SOFTPC_LIM.seg"
 #endif
+#line 369
 
 /*
 ===========================================================================
@@ -2217,8 +2232,10 @@ LOCAL void Get_Hardware_Configuration_Array IFN0()
 
 			write_intel_word(segment, offset, get_no_altreg_sets());
 #else
+#line 2220
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 2222
 
 			offset += 2;
 			write_intel_word(segment, offset, context_save_area_size);
@@ -2451,8 +2468,10 @@ LOCAL void Alternate_Map_Register_Support IFN0()
     return;
 
 #else
+#line 2454
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 2456
 
 }
 
@@ -2576,6 +2595,7 @@ GLOBAL void reset_emm_funcs IFN0()
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 2579
 
 	return;
 }
@@ -2583,4 +2603,6 @@ GLOBAL void reset_emm_funcs IFN0()
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
+#line 2586
 #endif /* LIM */
+#line 2587

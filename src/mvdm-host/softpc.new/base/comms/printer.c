@@ -88,7 +88,11 @@
 #include TimeH
 #ifdef SYSTEMV
 #error DIVERGENCE MVDM-HOST-DIV-529: SYSTEMV platform branch is not selected; see mirror register.
+#ifdef STINGER
+#error Excluded original conditional branch
 #endif
+#endif
+#line 92
 
 /*
  * SoftPC include files
@@ -109,6 +113,7 @@
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 112
 
 
 /*
@@ -135,6 +140,7 @@
 #ifdef	ERROR
 #undef	ERROR
 #endif
+#line 138
 
 static half_word output_reg[NUM_PARALLEL_PORTS];
 static half_word control_reg[NUM_PARALLEL_PORTS];
@@ -174,6 +180,7 @@ sys_addr lp16BitPrtId;
 sys_addr lp16BitPrtCount;
 sys_addr lp16BitPrtBusy;
 #endif
+#line 177
 
 #define STATE_READY     0
 #define STATE_OUT       1
@@ -182,6 +189,7 @@ sys_addr lp16BitPrtBusy;
 #define STATE_DATA	3
 #define STATE_DONGLE	4
 #endif
+#line 185
 
 /*
  * State transitions:
@@ -210,6 +218,7 @@ sys_addr lp16BitPrtBusy;
 #ifdef PS_FLUSHING
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
+#line 213
 
 
 /*
@@ -247,8 +256,10 @@ static sys_addr state_addr;
 #define set_state(adap,val)	(sas_store_no_check(state_addr+(adap),(val)))
 
 #else /* NTVDM && MONITOR */
+#line 250
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* NTVDM && MONITOR */
+#line 252
 
 static void printer_inb IPT2(io_addr, port, half_word *, value);
 static void printer_outb IPT2(io_addr, port, half_word, value);
@@ -285,8 +296,10 @@ static void lpr_state_out_event IFN1(long,adapter)
 } 
 
 #else	/* NTVDM && MONITOR */
+#line 288
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM && MONITOR */
+#line 290
 
 static void printer_inb IFN2(io_addr,port, half_word *,value)
 {
@@ -323,6 +336,7 @@ static void printer_inb IFN2(io_addr,port, half_word *,value)
 		case STATE_DATA:
 
 #endif
+#line 326
 
 		case STATE_READY:
 			notbusy_check(adapter);
@@ -342,9 +356,11 @@ static void printer_inb IFN2(io_addr,port, half_word *,value)
 			delete_q_event(handle_for_out_event[adapter]);
                         lpr_state_out_event(adapter);
 #else
+#line 345
 			set_low(status_reg[adapter], ACK);
                         state[adapter] = STATE_OUTA;
 #endif /* DELAYED INTS */
+#line 348
 			break;
     	case STATE_OUTA:
 			notbusy_check(adapter);		/* <chrisP 11Sep91> */
@@ -353,9 +369,11 @@ static void printer_inb IFN2(io_addr,port, half_word *,value)
 			delete_q_event(handle_for_outa_event[adapter]);
 			lpr_state_outa_event(adapter);
 #else
+#line 356
 			set_high(status_reg[adapter], ACK);
 			state[adapter] = STATE_READY;
 #endif
+#line 359
 			break;
     	default:	
 			note_trace1(PRINTER_VERBOSE, 
@@ -384,6 +402,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #ifdef PC_CONFIG
 #error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
 #endif
+#line 387
 
 
 	note_trace2(PRINTER_VERBOSE,"outb to printer port %#x with value %#x",
@@ -440,6 +459,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 
 	// fall through
 #endif
+#line 443
 	case STATE_OUT:
 	case STATE_OUTA:
 	case STATE_READY:
@@ -449,6 +469,7 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #if defined(NTVDM)
 			set_state(adapter, STATE_DATA);
 #endif
+#line 452
 			/* Write char to internal buffer */
 			output_reg[adapter] = value;
 			break;
@@ -464,9 +485,11 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #ifdef PC_CONFIG
 #error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
 #else
+#line 467
 				/* this was a call to host_print_doc - <chrisP 28Aug91> */
 				host_reset_print(adapter);
 #endif
+#line 470
 
 			if (toggled(old_control, value, AUTO_FEED))
 				host_print_auto_feed(adapter,
@@ -485,10 +508,12 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 				set_state(adapter, STATE_READY);
 			    }
 #endif
+#line 488
 
 #ifdef PS_FLUSHING
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
+#line 492
 				       /*
 				 	* Send the stored internal buffer to
 				 	* the printer
@@ -507,17 +532,21 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 #if defined(NTVDM) && !defined(MONITOR)
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else /* NTVDM && !MONITOR */
+#line 510
 				    		set_status(adapter,
 					       	get_status(adapter) & ~NOTBUSY);
 #endif /* NTVDM && !MONITOR */
+#line 513
 				    		set_state(adapter, STATE_OUT);
 #ifndef DELAYED_INTS
 				    		handle_for_out_event[adapter]=add_q_event_t(lpr_state_out_event,HOST_PRINTER_DELAY,adapter);
 #endif /* DELAYED_INTS */
+#line 517
 					}
 #ifdef PS_FLUSHING
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
+#line 521
 			}
 			else if (high_low(old_control, value, STROBE)
 				 	&& get_state(adapter) == STATE_OUT)
@@ -545,10 +574,12 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 			}
 
 #endif
+#line 548
 
 #ifndef	PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 552
 			break;
 		}
 		break;
@@ -602,6 +633,7 @@ static void notbusy_check IFN1(int,adapter)
 #if defined(NTVDM)
 		  get_state(adapter) == STATE_DATA ||
 #endif
+#line 605
 		  get_state(adapter) == STATE_OUTA)
 	     &&	!(get_status(adapter) & NOTBUSY)
 	     &&	!(host_lpt_status(adapter) & HOST_LPT_BUSY))
@@ -609,12 +641,15 @@ static void notbusy_check IFN1(int,adapter)
 #if defined(NTVDM) && !defined(MONITOR)
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else /* NTVDM && !MONITOR */
+#line 612
 		set_status(adapter, get_status(adapter) | NOTBUSY);
 #endif /* NTVDM && !MONITOR */
+#line 614
 
 #ifndef	PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 618
 
 		if (get_control(adapter) & IRQ)
                 {
@@ -630,6 +665,7 @@ static void notbusy_check IFN1(int,adapter)
  */
 #include "SOFTPC_INIT.seg"
 #endif
+#line 633
 
 /*
 ** Initialise the printer port required.
@@ -655,6 +691,7 @@ void printer_init IFN1(int,adapter)
 	}
 	else
 #endif /* NTVDM && MONITOR */
+#line 658
 	{
 	    control_reg[adapter] = 0xEC;
 	    status_reg[adapter] = 0xDF;
@@ -679,6 +716,7 @@ void printer_init IFN1(int,adapter)
 	    set_state(adapter, STATE_READY);
 	else
 #endif /* NTVDM && MONITOR */
+#line 682
 	    state[adapter] = STATE_READY;
 
 } /* end of printer_init() */
@@ -738,8 +776,10 @@ sys_addr table_addr;
     }
 }
 #endif /* NTVDM && MONITOR */
+#line 741
 
 #endif 
+#line 743
 
 #ifdef NTVDM
 void printer_is_being_closed(int adapter)

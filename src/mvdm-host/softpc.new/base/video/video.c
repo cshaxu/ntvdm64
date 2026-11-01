@@ -1882,7 +1882,13 @@ GLOBAL void vd_read_dot IFN0()
 
 #else
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
+#ifdef NTVDM
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif /* CPU_40_STYLE */
+#line 1886
 
 GLOBAL void vd_write_teletype IFN0()
 {
@@ -2643,7 +2649,11 @@ GLOBAL void video_init IFN0()
 
 #ifdef HERC
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
+#ifdef GISP_SVGA
+#error Excluded original conditional branch
+#endif
 #endif /* HERC */
+#line 2647
 
 #ifdef NTVDM
 void enable_stream_io(void)

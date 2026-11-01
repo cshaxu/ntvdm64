@@ -2409,11 +2409,18 @@ GLOBAL VOID ega_mask_register_changed IFN1(BOOL, gotBitProtection)
 
 #ifdef A3CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
+#ifdef C_VID
+#error Excluded original conditional branch
 #else
+#error Excluded original conditional branch
+#endif
+#else
+#line 2413
 #if !(defined(NTVDM) && defined(MONITOR))
 	Glue_set_vid_wrt_ptrs(&mode_chain_handler_table[EGA_CPU.saved_mode_chain][state]);
 #endif /* !(NTVDM && MONITOR) */
 #endif /* A3CPU */
+#line 2417
 
 	EGA_CPU.saved_state = state;
 }
@@ -2431,6 +2438,7 @@ LOCAL void	ega_gc_mask IFN2(io_addr, port, half_word, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2434
 	note_entrance2("ega_gc_mask(%x,%x)", port, value);
 
 	/*
@@ -2447,24 +2455,31 @@ LOCAL void	ega_gc_mask IFN2(io_addr, port, half_word, value)
 #ifndef	USE_OLD_MASK_CODE
 		ega_mask_register_changed(/*bit protection :=*/0);
 #else
+#line 2450
 		write_state.bp = 0;
 		setVideowrstate(EGA_CPU.ega_state.mode_0.lookup);
 		EGA_CPU.fun_or_protection = (graphics_controller.data_rotate.as.abyte != 0);
 		ega_write_routines_update(BIT_PROT);
 #endif	/* USE_OLD_MASK_CODE */
+#line 2455
 
 		/* Alter the function table used by ega_gc_index */
 		ega_gc_regs[8] = ega_gc_mask_ff;
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
+#ifndef A2CPU
+#error Excluded original conditional branch
 #endif
+#endif
+#line 2462
 
 		io_redefine_outb(EGA_GC_ADAP_DATA,ega_gc_mask_ff);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#line 2468
 	}
 }
 
@@ -2476,6 +2491,7 @@ void	ega_gc_mask_ff IFN2(io_addr, port, half_word, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2479
 	note_entrance2("ega_gc_mask(%x,%x)", port, value);
 
 	/*
@@ -2492,24 +2508,31 @@ void	ega_gc_mask_ff IFN2(io_addr, port, half_word, value)
 #ifndef	USE_OLD_MASK_CODE
 		ega_mask_register_changed(/*bit protection :=*/1);
 #else
+#line 2495
 		write_state.bp = 1;
 		setVideowrstate(EGA_CPU.ega_state.mode_0.lookup);
 		EGA_CPU.fun_or_protection = TRUE;
 		ega_write_routines_update(BIT_PROT);
 #endif	/* USE_OLD_MASK_CODE*/
+#line 2500
 
 		/* Alter the function table used by ega_gc_index */
 		ega_gc_regs[8] = ega_gc_mask;
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
+#ifndef A2CPU
+#error Excluded original conditional branch
 #endif
+#endif
+#line 2507
 
 		io_redefine_outb(EGA_GC_ADAP_DATA,ega_gc_mask);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#line 2513
 	}
 }
 
@@ -2519,6 +2542,7 @@ LOCAL void	ega_index_invalid IFN2(io_addr, port, half_word, value)
 	UNUSED(port);
 	UNUSED(value);
 #endif
+#line 2522
 	note_entrance2("ega_index_invalid(%x,%x)", port, value);
 	assert1(NO,"Invalid index %d",graphics_controller.address.as_bfld.index);
 }
@@ -2532,6 +2556,7 @@ LOCAL void	ega_ac_outb IFN2(io_addr, port, half_word, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2535
 	note_entrance2("ega_ac_outb(%x,%x)", port, value);
 	assert1( port == EGA_AC_INDEX_DATA || port == EGA_AC_SECRET, "Bad port %x", port);
 	new.value = value;
@@ -2647,6 +2672,7 @@ MISC_OUTPUT_REG new;
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2650
 	note_entrance2("ega_misc_outb(%x,%x)", port, value);
 	assert1(port==EGA_MISC_REG,"Bad port %x",port);
 	new.as.abyte = value;
@@ -2695,6 +2721,7 @@ LOCAL void	ega_feat_outb IFN2(io_addr, port, half_word, value)
 	UNUSED(port);
 	UNUSED(value);
 #endif
+#line 2698
 	note_entrance2("ega_feat_outb(%x,%x)", port, value);
 	NON_PROD(feature_control_register.as.abyte = value);
 }
@@ -2704,6 +2731,7 @@ LOCAL void	ega_ipstat0_inb IFN2(io_addr, port, half_word *, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2707
 	note_entrance1("ega_ipstat0_inb(%x)", port);
 	input_status_register_zero.as_bfld.switch_sense = 
 	
@@ -2780,6 +2808,7 @@ LOCAL void	ega_ipstat1_inb IFN2(io_addr, port, half_word *, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2783
 	note_entrance1("ega_ipstat1_inb(%x)", port);
     note_entrance2("ega_ipstat1_inb(%x,%x)", port, value);
 
@@ -2876,5 +2905,8 @@ LOCAL	void	vote_ega_mode IFN0()
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 2879
 #endif /* EGG */
+#line 2880
 #endif /* REAL_VGA */
+#line 2881

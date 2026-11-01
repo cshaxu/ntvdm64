@@ -180,4 +180,88 @@ Revision History:
 
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#ifdef VR_DEBUG_FLAGS
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifndef DBGDBG
+#error Excluded original conditional branch
+#endif
+#if DBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifdef DBGDBG
+#error Excluded original conditional branch
+#endif
+#ifndef DBGDBG
+#error Excluded original conditional branch
+#endif
 #endif // DBG
+#line 184

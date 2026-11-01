@@ -146,7 +146,11 @@ void nt_init_cga_colour_med_graph()
 
 #ifdef BIGEND
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
+#ifdef BIGWIN
+#error Excluded original conditional branch
+#endif
 #endif /* BIGEND */
+#line 150
 
 #ifdef LITTLEND
                         cga_med_graph_hi_nyb[i]

@@ -33,4 +33,38 @@
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-502: non-PROD debug branch is not selected; see mirror register.
+#ifdef CPU_30_STYLE
+#error Excluded original conditional branch
+#ifdef BACK_M
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#endif
+#ifdef BIT_ORDER1
+#error Excluded original conditional branch
+#endif
+#ifdef BIGEND
+#error Excluded original conditional branch
+#endif
+#ifdef BIT_ORDER2
+#error Excluded original conditional branch
+#endif
+#ifdef LITTLEND
+#error Excluded original conditional branch
+#endif
+#ifdef NTVDM
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#ifdef SEGMENTATION
+#error Excluded original conditional branch
+#endif
+#ifdef ANSI
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif /* PROD */
+#line 37

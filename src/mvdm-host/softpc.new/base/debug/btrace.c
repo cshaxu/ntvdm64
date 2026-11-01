@@ -45,4 +45,16 @@
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#ifdef ANSI
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
 #endif
+#ifdef DELTA
+#error Excluded original conditional branch
+#endif
+#ifdef DELTA
+#error Excluded original conditional branch
+#endif
+#endif
+#line 49

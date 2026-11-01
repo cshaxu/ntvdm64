@@ -101,6 +101,10 @@ Return Value:
         ccpu386newthread();
 #endif
 /****************************** STF ********************************/
+#ifdef MONITOR
+#error Excluded original conditional branch
+#endif
+#line 104
         if (!(dwCreationFlags & CREATE_SUSPENDED))
             ResumeThread(Thread);
 
@@ -158,5 +162,9 @@ Return Value:
     ccpu386exitthread();
 #endif
 /****************************** STF ********************************/
+#ifdef MONITOR
+#error Excluded original conditional branch
+#endif
+#line 161
     ExitThread(dwExitCode);
 }

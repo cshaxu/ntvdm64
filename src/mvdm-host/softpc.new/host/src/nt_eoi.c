@@ -44,6 +44,10 @@ RTL_CRITICAL_SECTION IcaLock;   // ICA critical section lock
 ULONG UndelayIrqLine=0;
 ULONG DelayIrqLine=0xffffffff;  // all ints are blocked until, spckbd loaded
 
+#ifdef MONITOR
+#error Excluded original conditional branch
+#endif
+#line 47
 
 HANDLE hWowIdleEvent = INVALID_HANDLE_VALUE;
 
@@ -333,6 +337,10 @@ void InitializeIcaLock(void)
 
 
 
+#ifdef MONITOR
+#error Excluded original conditional branch
+#endif
+#line 336
 
 
 
@@ -394,6 +402,10 @@ void ica_reset_interrupt_state(void)
     VirtualIca[ICA_MASTER].ica_cpu_int =
     VirtualIca[ICA_SLAVE].ica_cpu_int  = FALSE;
 
+#ifdef MONITOR
+#error Excluded original conditional branch
+#endif
+#line 397
     DelayIrqLine  = 0;
 
     //Tell CPU to remove any pending interrupts

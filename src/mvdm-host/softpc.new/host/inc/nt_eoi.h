@@ -29,6 +29,10 @@ extern ULONG UndelayIrqLine;
 
 extern VDMVIRTUALICA VirtualIca[];
 
+#ifdef MONITOR
+#error Excluded original conditional branch
+#endif
+#line 32
 
 //from base ica.c
 LONG ica_intack(ULONG *hook_addr);

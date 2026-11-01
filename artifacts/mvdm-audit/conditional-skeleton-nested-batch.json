@@ -1,0 +1,2747 @@
+[
+  {
+    "path": "src/mvdm-host/dos/dem/dem.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\dem.c",
+    "original_start": 67,
+    "original_end": 72,
+    "marker_line": 73,
+    "nested_directives": 3,
+    "source_sha256": "2573da2dbf964c5e75102145b031766113cfc4e914dc00f0d80fdc6d98f5a2de"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\bios.c",
+    "original_start": 228,
+    "original_end": 247,
+    "marker_line": 223,
+    "nested_directives": 6,
+    "source_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\bios.c",
+    "original_start": 682,
+    "original_end": 886,
+    "marker_line": 634,
+    "nested_directives": 73,
+    "source_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\emm_fncs.c",
+    "original_start": 221,
+    "original_end": 256,
+    "marker_line": 212,
+    "nested_directives": 2,
+    "source_sha256": "2ffb142bb4ad67958493668e06bec3d81936790497965cdc5ca8a2ac0e142722"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\ill_bop.c",
+    "original_start": 65,
+    "original_end": 152,
+    "marker_line": 59,
+    "nested_directives": 4,
+    "source_sha256": "89df5a6fa3fc27def18b904fcd83f6c872778fec33dfc58634c9f73449165799"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\rtc_bios.c",
+    "original_start": 44,
+    "original_end": 62,
+    "marker_line": 44,
+    "nested_directives": 4,
+    "source_sha256": "bc5e3a66a552e293ae1ec9653205f8432867b4290e3d4ecad6ae5cd1ccab4cb6"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+    "original_start": 513,
+    "original_end": 535,
+    "marker_line": 519,
+    "nested_directives": 2,
+    "source_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+    "original_start": 762,
+    "original_end": 765,
+    "marker_line": 805,
+    "nested_directives": 2,
+    "source_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+    "original_start": 2366,
+    "original_end": 2385,
+    "marker_line": 2383,
+    "nested_directives": 2,
+    "source_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+    "original_start": 3703,
+    "original_end": 3722,
+    "marker_line": 3664,
+    "nested_directives": 2,
+    "source_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+    "original_start": 4890,
+    "original_end": 4920,
+    "marker_line": 4793,
+    "nested_directives": 3,
+    "source_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_stack.c",
+    "original_start": 348,
+    "original_end": 385,
+    "marker_line": 298,
+    "nested_directives": 2,
+    "source_sha256": "a038c8e79688b5e7430e3a9baf0c5e11848c4d2de89584ae71a4209c7ed54292"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tlb.c",
+    "original_start": 859,
+    "original_end": 952,
+    "marker_line": 867,
+    "nested_directives": 5,
+    "source_sha256": "a83a7dd3f7e3fbb83723047aacddbd22d4001591c6d444d4bd6d45dd73e38fd8"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpupig.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpupig.h",
+    "original_start": 13,
+    "original_end": 166,
+    "marker_line": 13,
+    "nested_directives": 6,
+    "source_sha256": "73b2e7ceda4cb3ba83343b1fe07a428dccab76a196b2d7c3951c37962be1e1db"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 191,
+    "original_end": 197,
+    "marker_line": 191,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 204,
+    "original_end": 210,
+    "marker_line": 198,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 217,
+    "original_end": 223,
+    "marker_line": 205,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 230,
+    "original_end": 236,
+    "marker_line": 212,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 243,
+    "original_end": 249,
+    "marker_line": 219,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 256,
+    "original_end": 262,
+    "marker_line": 226,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 269,
+    "original_end": 275,
+    "marker_line": 233,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 282,
+    "original_end": 288,
+    "marker_line": 240,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 295,
+    "original_end": 301,
+    "marker_line": 247,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 308,
+    "original_end": 314,
+    "marker_line": 254,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 321,
+    "original_end": 327,
+    "marker_line": 261,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 334,
+    "original_end": 340,
+    "marker_line": 268,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 347,
+    "original_end": 353,
+    "marker_line": 275,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 360,
+    "original_end": 366,
+    "marker_line": 282,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 373,
+    "original_end": 379,
+    "marker_line": 289,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 386,
+    "original_end": 392,
+    "marker_line": 296,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 399,
+    "original_end": 407,
+    "marker_line": 303,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 414,
+    "original_end": 422,
+    "marker_line": 310,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 429,
+    "original_end": 437,
+    "marker_line": 317,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 444,
+    "original_end": 452,
+    "marker_line": 324,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 459,
+    "original_end": 467,
+    "marker_line": 331,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 474,
+    "original_end": 482,
+    "marker_line": 338,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 489,
+    "original_end": 497,
+    "marker_line": 345,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 504,
+    "original_end": 512,
+    "marker_line": 352,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 519,
+    "original_end": 527,
+    "marker_line": 359,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 534,
+    "original_end": 542,
+    "marker_line": 366,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 549,
+    "original_end": 557,
+    "marker_line": 373,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 564,
+    "original_end": 572,
+    "marker_line": 380,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 579,
+    "original_end": 587,
+    "marker_line": 387,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 594,
+    "original_end": 602,
+    "marker_line": 394,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 609,
+    "original_end": 617,
+    "marker_line": 401,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 624,
+    "original_end": 632,
+    "marker_line": 408,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 639,
+    "original_end": 647,
+    "marker_line": 415,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 654,
+    "original_end": 662,
+    "marker_line": 422,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 669,
+    "original_end": 677,
+    "marker_line": 429,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 684,
+    "original_end": 692,
+    "marker_line": 436,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 699,
+    "original_end": 705,
+    "marker_line": 443,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 712,
+    "original_end": 718,
+    "marker_line": 450,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 725,
+    "original_end": 733,
+    "marker_line": 457,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 740,
+    "original_end": 748,
+    "marker_line": 464,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 755,
+    "original_end": 761,
+    "marker_line": 471,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 820,
+    "original_end": 826,
+    "marker_line": 509,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 833,
+    "original_end": 839,
+    "marker_line": 516,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 846,
+    "original_end": 852,
+    "marker_line": 523,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 859,
+    "original_end": 865,
+    "marker_line": 530,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 872,
+    "original_end": 878,
+    "marker_line": 537,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 885,
+    "original_end": 891,
+    "marker_line": 544,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 898,
+    "original_end": 904,
+    "marker_line": 551,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 911,
+    "original_end": 917,
+    "marker_line": 558,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 924,
+    "original_end": 930,
+    "marker_line": 565,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 937,
+    "original_end": 943,
+    "marker_line": 572,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 950,
+    "original_end": 956,
+    "marker_line": 579,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 963,
+    "original_end": 969,
+    "marker_line": 586,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 976,
+    "original_end": 982,
+    "marker_line": 593,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 989,
+    "original_end": 995,
+    "marker_line": 600,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1002,
+    "original_end": 1008,
+    "marker_line": 607,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1015,
+    "original_end": 1021,
+    "marker_line": 614,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1028,
+    "original_end": 1034,
+    "marker_line": 621,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1041,
+    "original_end": 1047,
+    "marker_line": 628,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1054,
+    "original_end": 1060,
+    "marker_line": 635,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1067,
+    "original_end": 1073,
+    "marker_line": 642,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1080,
+    "original_end": 1086,
+    "marker_line": 649,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1093,
+    "original_end": 1099,
+    "marker_line": 656,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1106,
+    "original_end": 1112,
+    "marker_line": 663,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1119,
+    "original_end": 1125,
+    "marker_line": 670,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1132,
+    "original_end": 1138,
+    "marker_line": 677,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1145,
+    "original_end": 1151,
+    "marker_line": 684,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1158,
+    "original_end": 1164,
+    "marker_line": 691,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1171,
+    "original_end": 1177,
+    "marker_line": 698,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1184,
+    "original_end": 1190,
+    "marker_line": 705,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1197,
+    "original_end": 1203,
+    "marker_line": 712,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1210,
+    "original_end": 1216,
+    "marker_line": 719,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1223,
+    "original_end": 1229,
+    "marker_line": 726,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1236,
+    "original_end": 1242,
+    "marker_line": 733,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1249,
+    "original_end": 1255,
+    "marker_line": 740,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1262,
+    "original_end": 1268,
+    "marker_line": 747,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1275,
+    "original_end": 1281,
+    "marker_line": 754,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1288,
+    "original_end": 1294,
+    "marker_line": 761,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1301,
+    "original_end": 1307,
+    "marker_line": 768,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1314,
+    "original_end": 1320,
+    "marker_line": 775,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1327,
+    "original_end": 1333,
+    "marker_line": 782,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1340,
+    "original_end": 1346,
+    "marker_line": 789,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1353,
+    "original_end": 1359,
+    "marker_line": 796,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1366,
+    "original_end": 1372,
+    "marker_line": 803,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1379,
+    "original_end": 1385,
+    "marker_line": 810,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1392,
+    "original_end": 1398,
+    "marker_line": 817,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1405,
+    "original_end": 1411,
+    "marker_line": 824,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1418,
+    "original_end": 1424,
+    "marker_line": 831,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1431,
+    "original_end": 1437,
+    "marker_line": 838,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1444,
+    "original_end": 1450,
+    "marker_line": 845,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1457,
+    "original_end": 1463,
+    "marker_line": 852,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1470,
+    "original_end": 1476,
+    "marker_line": 859,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1483,
+    "original_end": 1489,
+    "marker_line": 866,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1496,
+    "original_end": 1502,
+    "marker_line": 873,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1509,
+    "original_end": 1515,
+    "marker_line": 880,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1522,
+    "original_end": 1528,
+    "marker_line": 887,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1535,
+    "original_end": 1541,
+    "marker_line": 894,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1548,
+    "original_end": 1554,
+    "marker_line": 901,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1561,
+    "original_end": 1567,
+    "marker_line": 908,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1574,
+    "original_end": 1580,
+    "marker_line": 915,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1587,
+    "original_end": 1593,
+    "marker_line": 922,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1600,
+    "original_end": 1606,
+    "marker_line": 929,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1613,
+    "original_end": 1619,
+    "marker_line": 936,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1626,
+    "original_end": 1632,
+    "marker_line": 943,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1639,
+    "original_end": 1645,
+    "marker_line": 950,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1652,
+    "original_end": 1658,
+    "marker_line": 957,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1665,
+    "original_end": 1671,
+    "marker_line": 964,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1678,
+    "original_end": 1684,
+    "marker_line": 971,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1691,
+    "original_end": 1697,
+    "marker_line": 978,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1821,
+    "original_end": 1827,
+    "marker_line": 1051,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1834,
+    "original_end": 1840,
+    "marker_line": 1058,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1847,
+    "original_end": 1853,
+    "marker_line": 1065,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1860,
+    "original_end": 1866,
+    "marker_line": 1072,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1873,
+    "original_end": 1879,
+    "marker_line": 1079,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1886,
+    "original_end": 1892,
+    "marker_line": 1086,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1899,
+    "original_end": 1905,
+    "marker_line": 1093,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1912,
+    "original_end": 1918,
+    "marker_line": 1100,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1925,
+    "original_end": 1931,
+    "marker_line": 1107,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1938,
+    "original_end": 1944,
+    "marker_line": 1114,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1951,
+    "original_end": 1957,
+    "marker_line": 1121,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1964,
+    "original_end": 1970,
+    "marker_line": 1128,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1977,
+    "original_end": 1983,
+    "marker_line": 1135,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 1990,
+    "original_end": 1996,
+    "marker_line": 1142,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2003,
+    "original_end": 2009,
+    "marker_line": 1149,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2016,
+    "original_end": 2022,
+    "marker_line": 1156,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2029,
+    "original_end": 2035,
+    "marker_line": 1163,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2042,
+    "original_end": 2048,
+    "marker_line": 1170,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2055,
+    "original_end": 2061,
+    "marker_line": 1177,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2068,
+    "original_end": 2074,
+    "marker_line": 1184,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2081,
+    "original_end": 2087,
+    "marker_line": 1191,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2094,
+    "original_end": 2100,
+    "marker_line": 1198,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2107,
+    "original_end": 2113,
+    "marker_line": 1205,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2120,
+    "original_end": 2126,
+    "marker_line": 1212,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2133,
+    "original_end": 2139,
+    "marker_line": 1219,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2146,
+    "original_end": 2152,
+    "marker_line": 1226,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2159,
+    "original_end": 2165,
+    "marker_line": 1233,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2172,
+    "original_end": 2178,
+    "marker_line": 1240,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2185,
+    "original_end": 2191,
+    "marker_line": 1247,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2198,
+    "original_end": 2204,
+    "marker_line": 1254,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2211,
+    "original_end": 2217,
+    "marker_line": 1261,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2224,
+    "original_end": 2230,
+    "marker_line": 1268,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2237,
+    "original_end": 2243,
+    "marker_line": 1275,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2250,
+    "original_end": 2256,
+    "marker_line": 1282,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2329,
+    "original_end": 2335,
+    "marker_line": 1355,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2342,
+    "original_end": 2348,
+    "marker_line": 1362,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2355,
+    "original_end": 2361,
+    "marker_line": 1369,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2368,
+    "original_end": 2374,
+    "marker_line": 1376,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2381,
+    "original_end": 2387,
+    "marker_line": 1383,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2394,
+    "original_end": 2400,
+    "marker_line": 1390,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2407,
+    "original_end": 2413,
+    "marker_line": 1397,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2420,
+    "original_end": 2426,
+    "marker_line": 1404,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2433,
+    "original_end": 2439,
+    "marker_line": 1411,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2446,
+    "original_end": 2452,
+    "marker_line": 1418,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2459,
+    "original_end": 2465,
+    "marker_line": 1425,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2472,
+    "original_end": 2478,
+    "marker_line": 1432,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2485,
+    "original_end": 2491,
+    "marker_line": 1439,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2498,
+    "original_end": 2504,
+    "marker_line": 1446,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2511,
+    "original_end": 2517,
+    "marker_line": 1453,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2524,
+    "original_end": 2530,
+    "marker_line": 1460,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2537,
+    "original_end": 2543,
+    "marker_line": 1467,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2550,
+    "original_end": 2556,
+    "marker_line": 1474,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2563,
+    "original_end": 2569,
+    "marker_line": 1481,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2576,
+    "original_end": 2582,
+    "marker_line": 1488,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2589,
+    "original_end": 2595,
+    "marker_line": 1495,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2602,
+    "original_end": 2608,
+    "marker_line": 1502,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2615,
+    "original_end": 2621,
+    "marker_line": 1509,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2628,
+    "original_end": 2634,
+    "marker_line": 1516,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2641,
+    "original_end": 2647,
+    "marker_line": 1523,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2654,
+    "original_end": 2660,
+    "marker_line": 1530,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2667,
+    "original_end": 2673,
+    "marker_line": 1537,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2680,
+    "original_end": 2686,
+    "marker_line": 1544,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2693,
+    "original_end": 2699,
+    "marker_line": 1551,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2706,
+    "original_end": 2712,
+    "marker_line": 1558,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2719,
+    "original_end": 2725,
+    "marker_line": 1565,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2732,
+    "original_end": 2738,
+    "marker_line": 1572,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2745,
+    "original_end": 2751,
+    "marker_line": 1579,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2758,
+    "original_end": 2764,
+    "marker_line": 1586,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2771,
+    "original_end": 2777,
+    "marker_line": 1593,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2784,
+    "original_end": 2790,
+    "marker_line": 1600,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2797,
+    "original_end": 2803,
+    "marker_line": 1607,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2810,
+    "original_end": 2816,
+    "marker_line": 1614,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2823,
+    "original_end": 2829,
+    "marker_line": 1621,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2836,
+    "original_end": 2842,
+    "marker_line": 1628,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2849,
+    "original_end": 2855,
+    "marker_line": 1635,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2862,
+    "original_end": 2868,
+    "marker_line": 1642,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2875,
+    "original_end": 2881,
+    "marker_line": 1649,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2888,
+    "original_end": 2894,
+    "marker_line": 1656,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2901,
+    "original_end": 2907,
+    "marker_line": 1663,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2914,
+    "original_end": 2920,
+    "marker_line": 1670,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2927,
+    "original_end": 2933,
+    "marker_line": 1677,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2940,
+    "original_end": 2946,
+    "marker_line": 1684,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2953,
+    "original_end": 2959,
+    "marker_line": 1691,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+    "original_start": 2966,
+    "original_end": 2972,
+    "marker_line": 1698,
+    "nested_directives": 3,
+    "source_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+    "original_start": 2019,
+    "original_end": 2027,
+    "marker_line": 1651,
+    "nested_directives": 3,
+    "source_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
+    "original_start": 90,
+    "original_end": 92,
+    "marker_line": 90,
+    "nested_directives": 2,
+    "source_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer_.c",
+    "original_start": 201,
+    "original_end": 222,
+    "marker_line": 208,
+    "nested_directives": 2,
+    "source_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\btrace.c",
+    "original_start": 47,
+    "original_end": 192,
+    "marker_line": 47,
+    "nested_directives": 7,
+    "source_sha256": "5a19a8cf73bd5c06c47bf3292189c8989bc970933bb4968336580f4be0028e3f"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\dasm.c",
+    "original_start": 35,
+    "original_end": 2946,
+    "marker_line": 35,
+    "nested_directives": 21,
+    "source_sha256": "6f90249d51eee69af65f59de138f915dc05af3a67b7bb529ea33596c04888b9b"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/ega_dump.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\ega_dump.c",
+    "original_start": 35,
+    "original_end": 224,
+    "marker_line": 35,
+    "nested_directives": 3,
+    "source_sha256": "18c7205169a62e40e80122deba5645f1cd7ce0d760ea71d95e9688a5a1da98aa"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/pigyoda.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\pigyoda.c",
+    "original_start": 31,
+    "original_end": 354,
+    "marker_line": 31,
+    "nested_directives": 3,
+    "source_sha256": "ede413a201fc0d4115b5bb0cd50aad3dd34d93a61dc734df49bfd464132ee7f2"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\trace.c",
+    "original_start": 60,
+    "original_end": 69,
+    "marker_line": 60,
+    "nested_directives": 3,
+    "source_sha256": "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\trace.c",
+    "original_start": 249,
+    "original_end": 459,
+    "marker_line": 239,
+    "nested_directives": 18,
+    "source_sha256": "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\trace.c",
+    "original_start": 497,
+    "original_end": 557,
+    "marker_line": 277,
+    "nested_directives": 19,
+    "source_sha256": "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\yoda.c",
+    "original_start": 501,
+    "original_end": 527,
+    "marker_line": 488,
+    "nested_directives": 4,
+    "source_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\yoda.c",
+    "original_start": 1611,
+    "original_end": 1616,
+    "marker_line": 1503,
+    "nested_directives": 3,
+    "source_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\yoda.c",
+    "original_start": 1993,
+    "original_end": 2054,
+    "marker_line": 1806,
+    "nested_directives": 2,
+    "source_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\yoda.c",
+    "original_start": 4541,
+    "original_end": 4576,
+    "marker_line": 4244,
+    "nested_directives": 3,
+    "source_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\yoda.c",
+    "original_start": 5025,
+    "original_end": 5030,
+    "marker_line": 4640,
+    "nested_directives": 2,
+    "source_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\yoda.c",
+    "original_start": 5246,
+    "original_end": 5298,
+    "marker_line": 4855,
+    "nested_directives": 5,
+    "source_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\yoda.c",
+    "original_start": 5466,
+    "original_end": 5482,
+    "marker_line": 5023,
+    "nested_directives": 5,
+    "source_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\yoda.c",
+    "original_start": 5746,
+    "original_end": 5759,
+    "marker_line": 5269,
+    "nested_directives": 2,
+    "source_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\diskbios.c",
+    "original_start": 366,
+    "original_end": 560,
+    "marker_line": 363,
+    "nested_directives": 10,
+    "source_sha256": "d05908d6199675e65ebcf0f2b2c864169e80276639fb8de25b007c5e66751cdc"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/disks/gfi_test.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_test.c",
+    "original_start": 4,
+    "original_end": 38,
+    "marker_line": 4,
+    "nested_directives": 4,
+    "source_sha256": "cfba520508d5e274ac23d471af6656b7bc41af1a8b0606b3b7020570ab2e2210"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\dos\\emm_mngr.c",
+    "original_start": 971,
+    "original_end": 1071,
+    "marker_line": 931,
+    "nested_directives": 4,
+    "source_sha256": "fd73ce7181f7dfb61432d63466c7641c3d010ca0c60bf446666b6c0118ddb8a9"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+    "original_start": 295,
+    "original_end": 311,
+    "marker_line": 295,
+    "nested_directives": 4,
+    "source_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu4.h",
+    "original_start": 67,
+    "original_end": 73,
+    "marker_line": 67,
+    "nested_directives": 3,
+    "source_sha256": "c1296168c866527a931bfa4b7cefe21f54acc96a6f242b0a60d6cdba4cdba725"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu_vid.h",
+    "original_start": 113,
+    "original_end": 125,
+    "marker_line": 125,
+    "nested_directives": 7,
+    "source_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\debug.h",
+    "original_start": 28,
+    "original_end": 293,
+    "marker_line": 28,
+    "nested_directives": 4,
+    "source_sha256": "59246b3c18bf6dfcd79b4e61bf961bc0382800deb4d968c198ceb415c284f21b"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/dsktrace.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\dsktrace.h",
+    "original_start": 110,
+    "original_end": 116,
+    "marker_line": 99,
+    "nested_directives": 3,
+    "source_sha256": "f5e99686a7c84d8a1b1b25db57c35d459c88c1b6dec395c332f027647474d082"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egacpu.h",
+    "original_start": 150,
+    "original_end": 236,
+    "marker_line": 135,
+    "nested_directives": 3,
+    "source_sha256": "4a53a9d1c7fb984deb2c5b0fd629442ee8a35272ad90323624d55daa65886194"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\equip.h",
+    "original_start": 24,
+    "original_end": 61,
+    "marker_line": 24,
+    "nested_directives": 4,
+    "source_sha256": "9530d21a819d9e3ff63d9fd8173f2c0df049cc48aa9ee49a740bad6db921e8aa"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/gisp_sas.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gisp_sas.h",
+    "original_start": 22,
+    "original_end": 58,
+    "marker_line": 22,
+    "nested_directives": 4,
+    "source_sha256": "2413fd0f1b4a4d9cb0238a4c811d088d2d0d1b0c0eaa423956400bd8256558e3"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/hunter.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\hunter.h",
+    "original_start": 18,
+    "original_end": 613,
+    "marker_line": 18,
+    "nested_directives": 28,
+    "source_sha256": "92958f20ad0e03e8423eb190f0793813e02a752b1820e94aff01049573475edf"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/hwvga.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\hwvga.h",
+    "original_start": 26,
+    "original_end": 96,
+    "marker_line": 26,
+    "nested_directives": 8,
+    "source_sha256": "5230bef1d6b5773f92fa6fe1f4c9d7b19e05c171be1491e9cab52016ab820b72"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ica.h",
+    "original_start": 209,
+    "original_end": 240,
+    "marker_line": 203,
+    "nested_directives": 3,
+    "source_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ios.h",
+    "original_start": 483,
+    "original_end": 497,
+    "marker_line": 452,
+    "nested_directives": 4,
+    "source_sha256": "ae58169de7aa969000f7cf4374d3d850b55d352c3d4c6edcf52dec0e985620a4"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ios.h",
+    "original_start": 522,
+    "original_end": 536,
+    "marker_line": 477,
+    "nested_directives": 4,
+    "source_sha256": "ae58169de7aa969000f7cf4374d3d850b55d352c3d4c6edcf52dec0e985620a4"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/quick_ev.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\quick_ev.h",
+    "original_start": 35,
+    "original_end": 48,
+    "marker_line": 35,
+    "nested_directives": 4,
+    "source_sha256": "c59fec315058b2cc03394d02d9c3756350357f7eb8cb48a541e56aae1b7939a2"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/quick_ev.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\quick_ev.h",
+    "original_start": 57,
+    "original_end": 72,
+    "marker_line": 44,
+    "nested_directives": 2,
+    "source_sha256": "c59fec315058b2cc03394d02d9c3756350357f7eb8cb48a541e56aae1b7939a2"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\rs232.h",
+    "original_start": 194,
+    "original_end": 210,
+    "marker_line": 143,
+    "nested_directives": 3,
+    "source_sha256": "80ddf84cdde4d7e5544210a489a103b2850a38f9f3a285199eb07ac8de4e7779"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\sas.h",
+    "original_start": 297,
+    "original_end": 303,
+    "marker_line": 287,
+    "nested_directives": 2,
+    "source_sha256": "63832958d3a6b9ef2f9f209e5ada4af8067fab3b5cdb6f317c5663cbd2b5f2ef"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\sas.h",
+    "original_start": 731,
+    "original_end": 983,
+    "marker_line": 714,
+    "nested_directives": 14,
+    "source_sha256": "63832958d3a6b9ef2f9f209e5ada4af8067fab3b5cdb6f317c5663cbd2b5f2ef"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\vgaports.h",
+    "original_start": 17,
+    "original_end": 392,
+    "marker_line": 17,
+    "nested_directives": 2,
+    "source_sha256": "7d2c9ceadd144ea014757549ab83e8ff8e28b6e92c11f0cd379119d07c0bd2f2"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\vgaports.h",
+    "original_start": 769,
+    "original_end": 1350,
+    "marker_line": 394,
+    "nested_directives": 16,
+    "source_sha256": "7d2c9ceadd144ea014757549ab83e8ff8e28b6e92c11f0cd379119d07c0bd2f2"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\vgaports.h",
+    "original_start": 1967,
+    "original_end": 1972,
+    "marker_line": 1011,
+    "nested_directives": 4,
+    "source_sha256": "7d2c9ceadd144ea014757549ab83e8ff8e28b6e92c11f0cd379119d07c0bd2f2"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\yoda.h",
+    "original_start": 53,
+    "original_end": 68,
+    "marker_line": 53,
+    "nested_directives": 2,
+    "source_sha256": "9488860e836e9b4fb17ec69558bc65ce1a8afb99286f62e6092759c959569fc1"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+    "original_start": 1725,
+    "original_end": 1732,
+    "marker_line": 1507,
+    "nested_directives": 3,
+    "source_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/main.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+    "original_start": 87,
+    "original_end": 89,
+    "marker_line": 96,
+    "nested_directives": 2,
+    "source_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+    "original_start": 508,
+    "original_end": 764,
+    "marker_line": 377,
+    "nested_directives": 2,
+    "source_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+    "original_start": 250,
+    "original_end": 282,
+    "marker_line": 239,
+    "nested_directives": 5,
+    "source_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\illegalp.c",
+    "original_start": 191,
+    "original_end": 394,
+    "marker_line": 152,
+    "nested_directives": 5,
+    "source_sha256": "94f049032a9298802cab09afc61651469dcbf1fec80ab36444e5c2fed2f681ad"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
+    "original_start": 548,
+    "original_end": 584,
+    "marker_line": 510,
+    "nested_directives": 2,
+    "source_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+    "original_start": 483,
+    "original_end": 488,
+    "marker_line": 462,
+    "nested_directives": 2,
+    "source_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+    "original_start": 1933,
+    "original_end": 1944,
+    "marker_line": 1810,
+    "nested_directives": 3,
+    "source_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+    "original_start": 2639,
+    "original_end": 2642,
+    "marker_line": 2415,
+    "nested_directives": 2,
+    "source_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+    "original_start": 2729,
+    "original_end": 2767,
+    "marker_line": 2487,
+    "nested_directives": 2,
+    "source_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+    "original_start": 2807,
+    "original_end": 2827,
+    "marker_line": 2526,
+    "nested_directives": 4,
+    "source_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timestrb.c",
+    "original_start": 87,
+    "original_end": 96,
+    "marker_line": 86,
+    "nested_directives": 4,
+    "source_sha256": "e314b1b5e88474ac9d1c978b3db71820fee667f7de3eff23b66e48bf0d3532e7"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\cga.c",
+    "original_start": 182,
+    "original_end": 203,
+    "marker_line": 185,
+    "nested_directives": 2,
+    "source_sha256": "8591c1b0e178f4b8791ed289588d3ed8a06ef514f8bdfca4797a190eb51e2777"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\cga.c",
+    "original_start": 1383,
+    "original_end": 1391,
+    "marker_line": 1357,
+    "nested_directives": 3,
+    "source_sha256": "8591c1b0e178f4b8791ed289588d3ed8a06ef514f8bdfca4797a190eb51e2777"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_prts.c",
+    "original_start": 2941,
+    "original_end": 2945,
+    "marker_line": 2411,
+    "nested_directives": 3,
+    "source_sha256": "1dedadd482f631e9b82a0fde92b84ff74c724faaaac782ae538639e0738e7002"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_prts.c",
+    "original_start": 2994,
+    "original_end": 2997,
+    "marker_line": 2460,
+    "nested_directives": 2,
+    "source_sha256": "1dedadd482f631e9b82a0fde92b84ff74c724faaaac782ae538639e0738e7002"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_prts.c",
+    "original_start": 3042,
+    "original_end": 3045,
+    "marker_line": 2505,
+    "nested_directives": 2,
+    "source_sha256": "1dedadd482f631e9b82a0fde92b84ff74c724faaaac782ae538639e0738e7002"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+    "original_start": 195,
+    "original_end": 377,
+    "marker_line": 198,
+    "nested_directives": 49,
+    "source_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+    "original_start": 659,
+    "original_end": 667,
+    "marker_line": 481,
+    "nested_directives": 3,
+    "source_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+    "original_start": 683,
+    "original_end": 687,
+    "marker_line": 497,
+    "nested_directives": 2,
+    "source_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+    "original_start": 766,
+    "original_end": 783,
+    "marker_line": 576,
+    "nested_directives": 10,
+    "source_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+    "original_start": 803,
+    "original_end": 808,
+    "marker_line": 596,
+    "nested_directives": 2,
+    "source_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+    "original_start": 816,
+    "original_end": 820,
+    "marker_line": 604,
+    "nested_directives": 2,
+    "source_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+    "original_start": 831,
+    "original_end": 837,
+    "marker_line": 615,
+    "nested_directives": 2,
+    "source_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+    "original_start": 856,
+    "original_end": 861,
+    "marker_line": 634,
+    "nested_directives": 2,
+    "source_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+    "original_start": 879,
+    "original_end": 884,
+    "marker_line": 652,
+    "nested_directives": 2,
+    "source_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+    "original_start": 897,
+    "original_end": 902,
+    "marker_line": 665,
+    "nested_directives": 2,
+    "source_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+    "original_start": 913,
+    "original_end": 923,
+    "marker_line": 676,
+    "nested_directives": 8,
+    "source_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+    "original_start": 938,
+    "original_end": 942,
+    "marker_line": 691,
+    "nested_directives": 2,
+    "source_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+    "original_start": 958,
+    "original_end": 969,
+    "marker_line": 707,
+    "nested_directives": 8,
+    "source_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+    "original_start": 984,
+    "original_end": 995,
+    "marker_line": 722,
+    "nested_directives": 8,
+    "source_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_writ.c",
+    "original_start": 91,
+    "original_end": 300,
+    "marker_line": 91,
+    "nested_directives": 28,
+    "source_sha256": "42b33f105e30d31a2805d9f835a74d80c47b4d96ee77101c18f096772e60c47a"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_writ.c",
+    "original_start": 424,
+    "original_end": 436,
+    "marker_line": 204,
+    "nested_directives": 2,
+    "source_sha256": "42b33f105e30d31a2805d9f835a74d80c47b4d96ee77101c18f096772e60c47a"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_writ.c",
+    "original_start": 492,
+    "original_end": 497,
+    "marker_line": 258,
+    "nested_directives": 3,
+    "source_sha256": "42b33f105e30d31a2805d9f835a74d80c47b4d96ee77101c18f096772e60c47a"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_writ.c",
+    "original_start": 820,
+    "original_end": 842,
+    "marker_line": 581,
+    "nested_directives": 14,
+    "source_sha256": "42b33f105e30d31a2805d9f835a74d80c47b4d96ee77101c18f096772e60c47a"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
+    "original_start": 157,
+    "original_end": 177,
+    "marker_line": 151,
+    "nested_directives": 3,
+    "source_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
+    "original_start": 3337,
+    "original_end": 3428,
+    "marker_line": 3302,
+    "nested_directives": 14,
+    "source_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
+    "original_start": 3645,
+    "original_end": 3652,
+    "marker_line": 3507,
+    "nested_directives": 3,
+    "source_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
+    "original_start": 4194,
+    "original_end": 4199,
+    "marker_line": 3811,
+    "nested_directives": 3,
+    "source_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_prts.c",
+    "original_start": 2157,
+    "original_end": 2161,
+    "marker_line": 2154,
+    "nested_directives": 3,
+    "source_sha256": "16305a48051b980b4c9f8aba15dda7bd6801964bb02897b8c2290a1eff04fbbc"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_prts.c",
+    "original_start": 2208,
+    "original_end": 2211,
+    "marker_line": 2201,
+    "nested_directives": 2,
+    "source_sha256": "16305a48051b980b4c9f8aba15dda7bd6801964bb02897b8c2290a1eff04fbbc"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_prts.c",
+    "original_start": 2258,
+    "original_end": 2261,
+    "marker_line": 2248,
+    "nested_directives": 2,
+    "source_sha256": "16305a48051b980b4c9f8aba15dda7bd6801964bb02897b8c2290a1eff04fbbc"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/video.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+    "original_start": 1887,
+    "original_end": 1894,
+    "marker_line": 1884,
+    "nested_directives": 3,
+    "source_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/video.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+    "original_start": 2713,
+    "original_end": 2828,
+    "marker_line": 2645,
+    "nested_directives": 2,
+    "source_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+    "original_start": 153,
+    "original_end": 186,
+    "marker_line": 148,
+    "nested_directives": 2,
+    "source_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cpu.c",
+    "original_start": 127,
+    "original_end": 134,
+    "marker_line": 163,
+    "nested_directives": 3,
+    "source_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_yoda.c",
+    "original_start": 270,
+    "original_end": 1192,
+    "marker_line": 270,
+    "nested_directives": 11,
+    "source_sha256": "2ec898da6746f0992020845bde73a30edaf7cdd5c744559501eb9cbaa000df0a"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\stubs.c",
+    "original_start": 56,
+    "original_end": 240,
+    "marker_line": 40,
+    "nested_directives": 6,
+    "source_sha256": "c1821a3738bbee78293a47262cb8df14e68043cfd6b4092b7fa56bdb01c6d991"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\stubs.c",
+    "original_start": 556,
+    "original_end": 567,
+    "marker_line": 328,
+    "nested_directives": 2,
+    "source_sha256": "c1821a3738bbee78293a47262cb8df14e68043cfd6b4092b7fa56bdb01c6d991"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\x86_emm.c",
+    "original_start": 50,
+    "original_end": 946,
+    "marker_line": 50,
+    "nested_directives": 4,
+    "source_sha256": "117d119314787e09b853e05de0e35bb6935fb2d763f4fec7eef6b1d804e3d189"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrdebug.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdebug.c",
+    "original_start": 182,
+    "original_end": 2371,
+    "marker_line": 182,
+    "nested_directives": 55,
+    "source_sha256": "a857e79085fabc406667f849229100ee7b92cd13107ceeb37fa798aedeba42ea"
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrdisp.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdisp.c",
+    "original_start": 138,
+    "original_end": 142,
+    "marker_line": 138,
+    "nested_directives": 2,
+    "source_sha256": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389"
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmmedia1.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmedia1.c",
+    "original_start": 38,
+    "original_end": 552,
+    "marker_line": 38,
+    "nested_directives": 2,
+    "source_sha256": "74b1872bf1afff7a59721564f52b33c4fd74d9d7e329ccdbff33f6bd612778d2"
+  },
+  {
+    "path": "src/mvdm-host/xms.486/xmsa20.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsa20.c",
+    "original_start": 68,
+    "original_end": 79,
+    "marker_line": 68,
+    "nested_directives": 2,
+    "source_sha256": "7261b7064a089b655b8d41d3e4ef6887be869af2b7b62970389aeee9a8acc94b"
+  },
+  {
+    "path": "src/mvdm-host/xms.486/xmsa20.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsa20.c",
+    "original_start": 92,
+    "original_end": 103,
+    "marker_line": 81,
+    "nested_directives": 2,
+    "source_sha256": "7261b7064a089b655b8d41d3e4ef6887be869af2b7b62970389aeee9a8acc94b"
+  }
+]

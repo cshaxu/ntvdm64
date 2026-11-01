@@ -66,7 +66,11 @@ VOID xmsEnableA20Wrapping(VOID)
 
 #if 0 // this is not necessay because the intel space(pointed by
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
+#ifdef MIPS
+#error Excluded original conditional branch
 #endif
+#endif
+#line 70
 
 }
 
@@ -79,6 +83,10 @@ VOID xmsDisableA20Wrapping(VOID)
 	*pHimemA20State = 1;
 #if 0 // this is not necessay because the intel space(pointed by
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
+#ifdef MIPS
+#error Excluded original conditional branch
 #endif
+#endif
+#line 83
 
 }

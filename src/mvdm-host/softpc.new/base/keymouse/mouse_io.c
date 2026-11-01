@@ -1505,7 +1505,13 @@ int curr_video_mode;
         parms_addr = find_mode_table(current_video_mode,&temp_word);
 #else
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#ifdef V7VGA
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif /* NTVDM */
+#line 1509
 		ega_default_crtc = parms_addr + EGA_PARMS_CRTC;
 		ega_default_seq = parms_addr + EGA_PARMS_SEQ;
 		ega_default_graph = parms_addr + EGA_PARMS_GRAPH;
@@ -1516,9 +1522,11 @@ int curr_video_mode;
 #if defined(NTVDM) && defined(MONITOR)
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
+#line 1519
 
 }
 #endif
+#line 1522
 
 void mouse_video_io()
 {

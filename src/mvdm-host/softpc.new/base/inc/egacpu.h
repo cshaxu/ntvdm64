@@ -133,7 +133,13 @@ extern struct EGA_CPU_GLOBALS
 
 #ifndef CPU_40_STYLE	/* Vglobs done via access fns */
 #error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
+#ifdef	HOST_VGA_GLOBALS
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #else	/* CPU_40_STYLE */
+#line 137
 
 extern void setVideorplane IPT1(IU8 *, value);
 extern IU8 * getVideorplane IPT0();
@@ -229,6 +235,7 @@ extern struct VideoVector C_Video;	/* in (generated) vglfunc.c */
 #define SetMarkPointers	setMarkPointers
 #endif	/* C_VID */
 #endif	/* CPU_40_STYLE */
+#line 232
 
 #define write_state EGA_CPU.ega_state.state
 

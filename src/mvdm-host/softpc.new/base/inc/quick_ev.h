@@ -33,13 +33,25 @@ extern q_ev_handle add_q_event_t IPT3(Q_CALLBACK_FN, func, unsigned long, time, 
 
 #ifndef CPU_40_STYLE
 #error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
+#ifndef host_calc_q_ev_inst_for_time
+#error Excluded original conditional branch
+#endif
+#ifdef NTVDM
+#error Excluded original conditional branch
+#endif
 #else	/* CPU_40_STYLE */
+#line 37
 extern IU32 calc_q_inst_for_time IPT1(IU32, time);
 extern IU32 calc_q_time_for_inst IPT1(IU32, inst);
 #define host_calc_q_ev_inst_for_time      calc_q_inst_for_time
 #define host_calc_q_ev_time_for_inst      calc_q_time_for_inst
 #endif	/* CPU_40_STYLE */
+#line 42
 
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#ifdef CPU_40_STYLE
+#error Excluded original conditional branch
+#endif
 #endif  /* !NTVDM */
+#line 46

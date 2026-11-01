@@ -136,7 +136,11 @@ Return Value:
 {
 #if 0
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
+#if DBG
+#error Excluded original conditional branch
 #endif
+#endif
+#line 140
 
     if (SvcCode > LAST_VR_FUNCTION) {
 #if DBG

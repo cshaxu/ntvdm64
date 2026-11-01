@@ -517,7 +517,11 @@ IMPORT VOID dispatch_q_event();
 #endif /* SYNCH_TIMERS */
 #else	/* SFELLOW */
 #error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.
+#ifdef host_timer_event
+#error Excluded original conditional branch
+#endif
 #endif	/* SFELLOW */
+#line 521
 
 #ifdef SFELLOW
 extern int ica_intack IPT0();
@@ -803,7 +807,11 @@ IFN1(
    took_absolute_toc = FALSE;
 #ifdef PIG
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
+#if defined(SFELLOW)
+#error Excluded original conditional branch
+#endif
 #endif	/* PIG */
+#line 807
 
    /* somewhere for exceptions to return to */
 #ifdef NTVDM
@@ -2381,7 +2389,11 @@ TYPE70:
 
 #ifdef PIG
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
+#ifdef SYNCH_BOTH_WAYS
+#error Excluded original conditional branch
+#endif
 #endif	/* PIG */
+#line 2385
       break;
 
    case 0x71:   /* T2 JNO  Jb */   inst32 = JNO;    goto TYPE70;
@@ -3662,7 +3674,11 @@ TYPEE0:
 
 #ifdef PIG
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
+#ifdef SYNCH_BOTH_WAYS
+#error Excluded original conditional branch
+#endif
 #endif	/* PIG */
+#line 3666
       break;
 
    case 0xe1:   /* T2 LOOPE  Jb */
@@ -4791,7 +4807,13 @@ LOCAL VOID
 
 #ifdef	PIG
 #error DIVERGENCE MVDM-HOST-DIV-499: PIG comparison profile is not selected; see mirror register.
+#ifdef NTVDM
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* PIG */
+#line 4795
 
 
    /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

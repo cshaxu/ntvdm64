@@ -123,7 +123,19 @@ extern void Cpu_set_vid_rd_ptrs IPT1( READ_POINTERS *, ptrs );
 
 #ifndef CPU_40_STYLE
 #error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
+#ifdef A3CPU
+#error Excluded original conditional branch
+#ifdef C_VID
+#error Excluded original conditional branch
+#endif
+#else
+#error Excluded original conditional branch
+#ifdef C_VID
+#error Excluded original conditional branch
+#endif
+#endif
 #endif /* CPU_40_STYLE */
+#line 127
 
 extern WRT_POINTERS simple_writes;
 extern WRT_POINTERS dth_md0_writes, dth_md1_writes, dth_md2_writes, dth_md3_writes;

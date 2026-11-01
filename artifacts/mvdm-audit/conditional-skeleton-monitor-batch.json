@@ -1,0 +1,121 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+    "original_start": 234,
+    "original_end": 237,
+    "current_insert_line": 225,
+    "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+    "original_start": 33,
+    "original_end": 38,
+    "current_insert_line": 32,
+    "original_sha256": "57ae39f20535e93b451e83a0e54e6e45f43512e12d99ae3ffc6a58e4f1ada8e3"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/config.c",
+    "original_start": 1194,
+    "original_end": 1214,
+    "current_insert_line": 886,
+    "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "original_start": 735,
+    "original_end": 745,
+    "current_insert_line": 778,
+    "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+    "original_start": 458,
+    "original_end": 460,
+    "current_insert_line": 397,
+    "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+    "original_start": 381,
+    "original_end": 404,
+    "current_insert_line": 336,
+    "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+    "original_start": 51,
+    "original_end": 55,
+    "current_insert_line": 47,
+    "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+    "original_start": 113,
+    "original_end": 123,
+    "current_insert_line": 119,
+    "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+    "original_start": 158,
+    "original_end": 160,
+    "current_insert_line": 161,
+    "original_sha256": "776330ea072cfd005ea05968dc676634385d1c9f349bd71ba1667ecd3be68438"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+    "original_start": 98,
+    "original_end": 100,
+    "current_insert_line": 104,
+    "original_sha256": "776330ea072cfd005ea05968dc676634385d1c9f349bd71ba1667ecd3be68438"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+    "original_start": 444,
+    "original_end": 453,
+    "current_insert_line": 393,
+    "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+    "original_start": 425,
+    "original_end": 438,
+    "current_insert_line": 388,
+    "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+    "original_start": 410,
+    "original_end": 412,
+    "current_insert_line": 376,
+    "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+    "original_start": 372,
+    "original_end": 381,
+    "current_insert_line": 348,
+    "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+    "original_start": 330,
+    "original_end": 343,
+    "current_insert_line": 320,
+    "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+    "original_start": 278,
+    "original_end": 280,
+    "current_insert_line": 271,
+    "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+    "original_start": 219,
+    "original_end": 221,
+    "current_insert_line": 215,
+    "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3"
+  }
+]

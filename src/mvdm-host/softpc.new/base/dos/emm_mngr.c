@@ -929,7 +929,14 @@ GLOBAL int free_page IFN1(short, EM_page_no)
 
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#endif
+#ifdef PROD
+#error Excluded original conditional branch
+#endif
 #endif	/* !NTVDM */
+#line 933
 
 /*
 ========================================================================
@@ -982,11 +989,13 @@ GLOBAL int map_page IFN2(short, EM_page_no,
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 985
 
 	}
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 990
 	if(host_map_page(EM_page_no, segment) != SUCCESS)
 		return(FAILURE);
 
@@ -1041,6 +1050,7 @@ GLOBAL int unmap_page IFN1(unsigned char, physical_page_no)
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 1044
 
 	if(host_unmap_page(segment, EM_page_no) != SUCCESS)
 		return(FAILURE);
@@ -1144,8 +1154,10 @@ GLOBAL int save_map IFN5(short, handle_no,
 #ifdef NTVDM
 			write_intel_word(dst_segment, offset, LEAVE);
 #else
+#line 1147
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 1149
 			offset += 2;
 		}
 		read_intel_word(src_segment, src_offset, (word *)&no_to_save);
@@ -1206,6 +1218,7 @@ GLOBAL int restore_map (short handle_no,
 			short pages_out[], 
 			short pages_in[])
 #else
+#line 1209
 GLOBAL int restore_map (handle_no, segment, offset, pages_out, pages_in)
 short handle_no;
 unsigned short segment; 
@@ -1213,6 +1226,7 @@ unsigned short offset;
 short pages_out[]; 
 short pages_in[];
 #endif	/* ANSI */
+#line 1216
 {
 	short	i,		/* loop counter				*/
 		new_page,	/* page number read from map		*/
@@ -1229,8 +1243,10 @@ short pages_in[];
 #ifdef NTVDM
 			if(new_page < LEAVE || new_page >= total_pages)
 #else
+#line 1232
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 1234
 				return(FAILURE);
 		}
 		old_page = EM_page_mapped[i];
@@ -1243,8 +1259,10 @@ short pages_in[];
 #ifdef NTVDM
 		if(old_page != EMPTY && old_page != new_page && new_page != LEAVE)
 #else
+#line 1246
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 1248
 			pages_out[i] = old_page;
 		else
 			pages_out[i] = EMPTY;
@@ -1252,8 +1270,10 @@ short pages_in[];
 #ifdef NTVDM
 		if(new_page != EMPTY && new_page != old_page && new_page != LEAVE)
 #else
+#line 1255
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 1257
 			pages_in[i] = new_page;
 		else
 			pages_in[i] = EMPTY;
@@ -1469,6 +1489,7 @@ DESCRIPTION	:
  */
 #include "SOFTPC_LIM2.seg"
 #endif
+#line 1472
 
 GLOBAL short get_total_pages IFN0()
 {
@@ -1483,6 +1504,7 @@ GLOBAL short get_total_pages IFN0()
  */
 #include "SOFTPC_LIM.seg"
 #endif
+#line 1486
 
 GLOBAL short get_unallocated_pages IFN0()
 {
@@ -1494,8 +1516,10 @@ GLOBAL unsigned short get_base_address IFN0()
 #ifdef NTVDM
 	return(physical_page[0]);
 #else
+#line 1497
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 1499
 }
 
 GLOBAL short get_total_handles IFN0()
@@ -1662,6 +1686,7 @@ GLOBAL boolean activate_altreg_set(unsigned short set, short * page_in)
     return TRUE;
 }
 #endif	/* NTVDM */
+#line 1665
 
 #if !defined(NTVDM) || defined(MVDM_SOFTPC_RECOVER_LIM_WRITEBACK)
 
@@ -1854,8 +1879,11 @@ LIM_str_write IFN2( sys_addr, intel_addr, ULONG, length )
 	sas_overwrite_memory( intel_addr, length );
 }
 #endif	/* !NTVDM || MVDM_SOFTPC_RECOVER_LIM_WRITEBACK */
+#line 1857
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif	/* !PROD	*/
+#line 1861
 #endif 	/* LIM		*/
+#line 1862

@@ -285,7 +285,11 @@ extern void sas_stores_from_transbuf IPT3(sys_addr, dest, host_addr, src, sys_ad
 
 #ifdef BACK_M
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
+#ifndef HERC_REGEN_BUFF
+#error Excluded original conditional branch
+#endif
 #else
+#line 289
 
 #ifndef HERC_REGEN_BUFF
 #define CGA_REGEN_BUFF	0xB8000L
@@ -294,6 +298,7 @@ extern void sas_stores_from_transbuf IPT3(sys_addr, dest, host_addr, src, sys_ad
 #endif /* HERC_REGEN_BUFF */
 
 #endif /* BACK_M */
+#line 297
 
 #define CGA_REGEN_START	0xB8000L
 #define CGA_REGEN_END		0xBBFFFL
@@ -712,7 +717,29 @@ extern void sas_stores_from_transbuf IPT3(sys_addr, dest, host_addr, src, sys_ad
 
 #else		/* GISP_SVGA */
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
+#ifndef MOUSE_VIDEO_IO_SEGMENT
+#error Excluded original conditional branch
+#endif
+#ifndef MOUSE_INT1_SEGMENT
+#error Excluded original conditional branch
+#endif
+#ifndef MOUSE_INT2_SEGMENT
+#error Excluded original conditional branch
+#endif
+#ifndef	MOUSE_VERSION_SEGMENT
+#error Excluded original conditional branch
+#endif
+#ifndef	MOUSE_COPYRIGHT_SEGMENT
+#error Excluded original conditional branch
+#endif
+#ifdef EGG
+#error Excluded original conditional branch
+#endif
+#ifdef 	EGG
+#error Excluded original conditional branch
+#endif
 #endif /* GISP_SVGA */
+#line 716
 
 /*
  * Offsets for a set of instructions that are used in virtualisation

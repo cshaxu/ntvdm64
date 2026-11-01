@@ -865,4 +865,13 @@ IFN1(
 
 #ifdef PIG
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
+#ifdef FAST_TLB
+#error Excluded original conditional branch
 #endif
+#ifdef SPC486
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#endif
+#line 869

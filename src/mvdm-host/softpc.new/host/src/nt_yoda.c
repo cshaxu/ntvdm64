@@ -268,9 +268,28 @@ LOCAL CALL_STACK_ENTRY *call_next_free = call_stack;
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#ifdef HUNTER
+#error Excluded original conditional branch
+#endif
+#ifdef HUNTER
+#error Excluded original conditional branch
+#endif
+#ifdef HUNTER
+#error Excluded original conditional branch
+#endif
+#ifdef HUNTER
+#error Excluded original conditional branch
+#endif
+#ifdef CPU_40_STYLE
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif /* ndef PROD */
+#line 272
 
 #endif /* YODA */
+#line 274
 
 /* This stub exported as called from main() */
 void    host_set_yoda_ints()

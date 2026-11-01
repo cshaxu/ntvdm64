@@ -161,9 +161,16 @@ void	host_clear_hw_int()
 {
 #ifndef CCPU
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
+#ifdef CPU_40_STYLE
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif /* not CCPU */
+#line 165
 }
 #endif
+#line 167
 
 
 #ifdef CCPU

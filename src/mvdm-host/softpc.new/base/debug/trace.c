@@ -58,7 +58,13 @@ FILE *trace_file;
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#ifdef SPC386
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif /* nPROD */
+#line 62
 
 static int trace_start = 0;
 
@@ -237,10 +243,41 @@ int  dump_info;
 {
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#if	defined(CPU_40_STYLE) && !defined(CCPU)
+#error Excluded original conditional branch
+#endif
+#if defined(NPX) && !(defined(NTVDM) && defined(MONITOR))
+#error Excluded original conditional branch
+#ifdef CPU_40_STYLE
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#endif
+#ifdef SPC386
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#ifdef PM
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#endif
+#ifdef SFELLOW
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#if	defined(CPU_40_STYLE) && !defined(CCPU)
+#error Excluded original conditional branch
+#endif
 #else	/* PROD */
+#line 241
 	UNUSED(error_msg);
 	UNUSED(dump_info);
 #endif	/* PROD */
+#line 244
 }
 
 void trace_init()
@@ -275,5 +312,37 @@ void trace_init()
 /* Get the code for 4.0 style CPUs */
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#ifdef CPU_40_STYLE
+#error Excluded original conditional branch
+#if defined(NPX)
+#error Excluded original conditional branch
+#ifdef CCPU
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#ifdef CCPU
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#ifdef CCPU
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#ifdef CCPU
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#ifdef CCPU
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
+#endif
+#endif
 #endif /* !PROD */
+#line 279
 

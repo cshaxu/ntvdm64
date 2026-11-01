@@ -51,6 +51,11 @@ extern void force_yoda();
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
+#ifdef MSWDVR_DEBUG
+#error Excluded original conditional branch
+#endif
 #else /* !PROD */
+#line 55
 
 #endif /* !PROD else*/
+#line 57

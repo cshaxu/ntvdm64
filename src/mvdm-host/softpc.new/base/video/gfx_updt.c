@@ -149,7 +149,13 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 #endif
 #else /* VGG */
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
+#if	defined(PROD) || (!defined(EGG))
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif /* VGG */
+#line 153
 
 #define	get_dirty_line(ind)	(dirty[(ind)].line_no)
 #define	get_dirty_start(ind)	(dirty[(ind)].start)
@@ -3300,7 +3306,29 @@ boolean	dummy_scroll IFN6(int,dummy1,int,dummy2,int,dummy3,int,
 
 #ifdef GORE
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
+#ifdef GORE_PIG
+#error Excluded original conditional branch
+#endif
+#ifdef GORE_PIG
+#error Excluded original conditional branch
+#endif
+#ifdef GORE_PIG
+#error Excluded original conditional branch
+#endif
+#ifdef GORE_PIG
+#error Excluded original conditional branch
+#endif
+#ifdef GORE_PIG
+#error Excluded original conditional branch
+#endif
+#ifdef GORE_PIG
+#error Excluded original conditional branch
+#endif
+#ifdef GORE_PIG
+#error Excluded original conditional branch
+#endif
 #endif /* GORE */
+#line 3304
 
 #ifdef	EGG
 /*
@@ -3439,10 +3467,12 @@ GLOBAL VOID ega_mark_string IFN2(int, laddr, int, haddr)
 }
 
 #endif /* EGG */
+#line 3442
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
 #include "SOFTPC_GRAPHICS.seg"
 #endif
+#line 3446
 
 GLOBAL VOID screen_refresh_required IFN0()
 {
@@ -3450,12 +3480,15 @@ GLOBAL VOID screen_refresh_required IFN0()
 #ifdef GORE
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
+#line 3453
 
 #ifndef CPU_40_STYLE
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else
+#line 3457
 	setVideodirty_total(1000000L);
 #endif	/* CPU_40_STYLE */
+#line 3459
 }
 
 #ifdef EGG
@@ -3505,7 +3538,13 @@ set_mark_funcs IFN0()
 		case	EGA_GRAPHICS_MARKING:
 #ifdef GORE
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
+#ifdef	VGG
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif /* GORE */
+#line 3509
 
 			update_alg.mark_byte = ega_mark_byte;
 			update_alg.mark_word = ega_mark_word;
@@ -3519,12 +3558,14 @@ set_mark_funcs IFN0()
 #ifdef GORE
 #error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
+#line 3522
 #ifndef CPU_40_STYLE	/* EVID */
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
 					SetMarkPointers(2);
 #endif	/* CPU_40_STYLE - EVID */
 #endif /* GORE */
+#line 3528
 					break;
 
 				case CHAIN2:
@@ -3545,6 +3586,7 @@ set_mark_funcs IFN0()
 #endif /* GORE */
 					break;
 #endif	/* VGG */
+#line 3548
 			}
 
 			break;
@@ -3555,10 +3597,12 @@ set_mark_funcs IFN0()
 	}
 }
 #endif	/* !NTVDM | (NTVDM & !X86GFX) */
+#line 3558
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
 #include "SOFTPC_GRAPHICS.seg"
 #endif
+#line 3562
 
 GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 		MARKING_TYPE, marking_type, SCROLL_TYPE, scroll_type)
@@ -3574,9 +3618,11 @@ GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 #if defined(NTVDM) && defined(MONITOR)
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
+#line 3577
 			update_alg.scroll_up = text_scroll_up;
 			update_alg.scroll_down = text_scroll_down;
 #endif	/* NTVDM & MONITOR */
+#line 3580
 			break;
 #if !defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )	/* remove unneeded code */
 		case	CGA_GRAPH_SCROLL:
@@ -3599,7 +3645,9 @@ GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 			break;
 #endif /* V7VGA */
 #endif /* VGG */
+#line 3602
 #endif /* !NTVDM | (NTVDM & !X86GFX) */
+#line 3603
 	}
 
 	curr_mark_type = marking_type;
@@ -3623,8 +3671,10 @@ GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 		inhibit_gfx_update_routines();
 }
 #endif /* EGG */
+#line 3626
 
 #endif /* REAL_VGA */
+#line 3628
 
 #ifndef cursor_changed
 void cursor_changed IFN2(int, x, int, y)
@@ -3809,9 +3859,16 @@ void mon_text_update()
 
 #ifndef CPU_40_STYLE
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
+#if defined(NTVDM)
+#error Excluded original conditional branch
 #else
+#error Excluded original conditional branch
+#endif
+#else
+#line 3813
     if(getVideodirty_total() >= 1000000L ){
 #endif
+#line 3815
 
 	/*
 	** screen_refresh_required() has requested a complete screen
@@ -4022,6 +4079,7 @@ boolean mon_text_scroll_up IFN6(sys_addr, start, int, width, int, height, int, a
 	if ( getVM() )
 	   return FALSE;   /* Don't optimise in V86 Mode */
 #endif
+#line 4025
 	/*
 	 * The colour we fill with for colour text displays is controlled by
 	 * bits 4-6 of attr, with bit 7 turning on blinking (which we don't support)
@@ -4147,6 +4205,7 @@ boolean mon_text_scroll_down IFN6(sys_addr, start, int, width, int, height, int,
 	if ( getVM() )
 	   return FALSE;   /* Don't optimise in V86 Mode */
 #endif
+#line 4150
 
 	/*
 	 * The colour we fill with for colour text displays is controlled by
@@ -4222,6 +4281,7 @@ boolean mon_text_scroll_down IFN6(sys_addr, start, int, width, int, height, int,
 	return TRUE;
 }
 #endif	/* MONITOR */
+#line 4225
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::: Text handling routines :::::::::::::::::::::::::::*/
@@ -4301,8 +4361,10 @@ void paint_text_rect(int screen_start)
 #ifdef MONITOR
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #else
+#line 4304
     int offset = (RectTop * (get_offset_per_line()<<1)) + (RectLeft<<2);
 #endif
+#line 4306
 
     /* Is there a rectangled defined */
     if(!RectDefined) return;
@@ -4315,8 +4377,10 @@ void paint_text_rect(int screen_start)
 #ifdef MONITOR
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #else
+#line 4318
 		   RectLeft*get_pix_char_width(),RectTop*get_host_char_height(),
 #endif
+#line 4320
 		    (RectRight - RectLeft +1)*2,		/* Len */
 		    RectBottom - RectTop +1);			/* Height */
 
@@ -4431,8 +4495,11 @@ void jazz_text_update()
 	host_end_update();
 }
 #endif /* MONITOR */
+#line 4434
 #endif /* NTVDM */
+#line 4435
 #endif /* REAL_VGA */
+#line 4436
 
 #ifdef NTVDM
 void stream_io_update(void)

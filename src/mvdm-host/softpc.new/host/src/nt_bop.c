@@ -775,6 +775,13 @@ void MS_bop_F(void)
     kb_setup_vectors();
 
 
+#ifdef MONITOR
+#error Excluded original conditional branch
+#ifndef PROD
+#error Excluded original conditional branch
+#endif
+#endif
+#line 778
 
     /*
      * Now that spckbd is loaded, and the ivt rom vectors are hooked

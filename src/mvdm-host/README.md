@@ -1,5 +1,9 @@
 # mvdm
 
+MVDM-HOST-DIV-548: restore original nested excluded conditional structures
+and anchored historical MONITOR/CPU30 shells; deleted bodies use `#error`.
+Evidence: `../../artifacts/mvdm-audit/conditional-skeleton-nested-batch.md`.
+
 MVDM-HOST-DIV-547: restore original CPU30 and nested FLOPPY_B conditional
 structure for removed host branches, with errors and line-number restoration.
 Evidence: `../../artifacts/mvdm-audit/conditional-skeleton-first-slice.md`.

@@ -57,5 +57,12 @@ void illegal_bop()
 {
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#ifdef	YODA
+#error Excluded original conditional branch
+#endif
+#ifdef	YODA
+#error Excluded original conditional branch
+#endif
 #endif /* PROD */
+#line 61
 }

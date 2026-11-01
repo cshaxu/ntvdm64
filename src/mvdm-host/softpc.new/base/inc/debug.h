@@ -26,7 +26,14 @@
 
 #ifndef	PROD
 #error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
+#ifndef	newline
+#error Excluded original conditional branch
+#endif
+#ifndef	file_id
+#error Excluded original conditional branch
+#endif
 #else /* PROD */
+#line 30
 
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
@@ -117,3 +124,4 @@
 #define	assert8_do(test,str,p1,p2,p3,p4,p5,p6,p7,p8,do)
 
 #endif /* PROD */
+#line 120

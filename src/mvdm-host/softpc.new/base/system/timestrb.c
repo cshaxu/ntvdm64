@@ -84,7 +84,14 @@ void time_strobe()
 
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
+#ifndef	REAL_TIMER
+#error Excluded original conditional branch
 #endif
+#if defined(CPU_40_STYLE)
+#error Excluded original conditional branch
+#endif
+#endif
+#line 88
 
         /*
          * Check to see if the screen is currently enabled.

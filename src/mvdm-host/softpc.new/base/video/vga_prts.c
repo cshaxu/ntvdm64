@@ -2152,11 +2152,18 @@ GLOBAL VOID vga_mask_register_changed IFN1(BOOL, gotBitProtection)
 
 #ifdef A3CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
+#ifdef C_VID
+#error Excluded original conditional branch
 #else
+#error Excluded original conditional branch
+#endif
+#else
+#line 2156
 #if !(defined(NTVDM) && defined(X86GFX))
 	Glue_set_vid_wrt_ptrs(&mode_chain_handler_table[EGA_CPU.saved_mode_chain][state]);
 #endif /* !(NTVDM && X86GFX) */
 #endif /* A3CPU */
+#line 2160
 
 	EGA_CPU.saved_state = state;
 }
@@ -2170,6 +2177,7 @@ GLOBAL VOID	vga_gc_mask IFN2(USHORT,port,FAST UTINY,value)
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2173
 	NON_PROD(if(io_verbose & EGA_PORTS_VERBOSE)fprintf(trace_file,"gc(8,%x)\n",value);)
 	note_entrance2("vga_gc_mask(%x,%x)", port, value);
 
@@ -2188,24 +2196,31 @@ GLOBAL VOID	vga_gc_mask IFN2(USHORT,port,FAST UTINY,value)
 #ifndef	USE_OLD_MASK_CODE
 		vga_mask_register_changed(/*bit protection :=*/0);
 #else
+#line 2191
 		write_state.bp = 0;
 		setVideowrstate(EGA_CPU.ega_state.mode_0.lookup);
 		EGA_CPU.fun_or_protection = (graphics_controller.data_rotate.as.abyte != 0);
 		ega_write_routines_update(BIT_PROT);
 #endif	/* USE_OLD_MASK_CODE */
+#line 2196
 
 		/* Alter the function table used by ega_gc_index */
 		ega_gc_regs[8] = FAST_FUNC_ADDR(vga_gc_mask_ff);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
+#ifndef A2CPU
+#error Excluded original conditional branch
 #endif
+#endif
+#line 2203
 
 		io_redefine_outb(EGA_GC_ADAP_DATA,vga_gc_mask_ff);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#line 2209
 	}
 }
 
@@ -2217,6 +2232,7 @@ GLOBAL VOID	vga_gc_mask_ff IFN2(USHORT,port,FAST UTINY,value)
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2220
 	NON_PROD(if(io_verbose & EGA_PORTS_VERBOSE)fprintf(trace_file,"gc(8,%x)\n",value);)
 	note_entrance2("vga_gc_mask(%x,%x)", port, value);
 
@@ -2235,24 +2251,31 @@ GLOBAL VOID	vga_gc_mask_ff IFN2(USHORT,port,FAST UTINY,value)
 #ifndef	USE_OLD_MASK_CODE
 		vga_mask_register_changed(/*bit protection :=*/1);
 #else
+#line 2238
 		write_state.bp = 1;
 		setVideowrstate(EGA_CPU.ega_state.mode_0.lookup);
 		EGA_CPU.fun_or_protection = TRUE;
 		ega_write_routines_update(BIT_PROT);
 #endif	/* USE_OLD_MASK_CODE*/
+#line 2243
 
 		/* Alter the function table used by ega_gc_index */
 		ega_gc_regs[8] = FAST_FUNC_ADDR(vga_gc_mask);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
+#ifndef A2CPU
+#error Excluded original conditional branch
 #endif
+#endif
+#line 2250
 
 		io_redefine_outb(EGA_GC_ADAP_DATA,vga_gc_mask);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#line 2256
 	}
 }
 /* end of 'same as EGA' gc routines */
@@ -2265,6 +2288,7 @@ GLOBAL VOID	vga_seq_map_mask IFN2(io_addr,port,half_word,value)
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2268
 	NON_PROD(if(io_verbose & EGA_PORTS_VERBOSE)fprintf(trace_file,"seq(2,%x)\n",value);)
 	note_entrance2("vga_seq_map_mask(%x,%x)", port, value);
 
@@ -2413,6 +2437,7 @@ GLOBAL VOID  vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 }
 
 #else   /* !(NTVDM || host_get_time_ms || host_get_count_ms) */
+#line 2416
 
 GLOBAL VOID	vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 {
@@ -2514,6 +2539,7 @@ GLOBAL VOID	vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 }
 
 #endif /* !(NTVDM || host_get_time_ms || host_get_count_ms) */
+#line 2517
 
 GLOBAL VOID	vga_gc_inb IFN2(io_addr,port,half_word *, value)
 {
@@ -2574,6 +2600,7 @@ GLOBAL VOID	vga_ac_outb IFN2(io_addr,port,half_word,value)
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2577
 
 	note_entrance2("vga_ac_outb(%x,%x)", port, value);
 	assert1( port == EGA_AC_INDEX_DATA, "Bad port %x", port);
@@ -2582,8 +2609,10 @@ GLOBAL VOID	vga_ac_outb IFN2(io_addr,port,half_word,value)
 	attribute_controller.address.as_bfld.index_state = !attribute_controller.address.as_bfld.index_state;
 	if (attribute_controller.address.as_bfld.index_state) {
 #else
+#line 2585
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
+#line 2587
 		note_entrance1("Setting index to %d", value);
 		if (((value & 0x20) >> 5) != attribute_controller.address.as_bfld.palette_address_source)
 		{
@@ -2609,8 +2638,10 @@ GLOBAL VOID	vga_ac_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 		attribute_controller.address.as.abyte = (attribute_controller.address.as_bfld.index_state << 7) | (value & 0x3f);
 #else
+#line 2612
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
+#line 2614
 	} else {
 		NON_PROD(if(io_verbose & EGA_PORTS_VERBOSE)fprintf(trace_file,"attr(%#x,%#x)\n",attribute_controller.address.as_bfld.index,value);)
 		switch (attribute_controller.address.as_bfld.index) {
@@ -2767,6 +2798,7 @@ MISC_OUTPUT_REG new;
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2770
 
 	NON_PROD(if(io_verbose & EGA_PORTS_VERBOSE)fprintf(trace_file,"misc %#x\n",value);)
 
@@ -2789,6 +2821,7 @@ MISC_OUTPUT_REG new;
 		else
 			sas_disconnect_memory(gvi_pc_low_regen,gvi_pc_high_regen);
 #endif		/* GISP_SVGA */
+#line 2792
 		EGA_CPU.ram_enabled = new.as_bfld.enable_ram;
 		ega_read_routines_update();
 		ega_write_routines_update(RAM_ENABLED);
@@ -2804,6 +2837,7 @@ GLOBAL VOID	vga_misc_inb IFN2(io_addr,port,half_word *, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2807
 	assert1(port==VGA_MISC_READ_REG,"Bad port %x",port);
 	*value = miscellaneous_output_register.as.abyte;
 }
@@ -2813,6 +2847,7 @@ GLOBAL VOID	vga_ipstat0_inb IFN2(io_addr,port,half_word *, value)
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2816
 	note_entrance1("vga_ipstat0_inb(%x)", port);
 	*value = input_status_register_zero.as.abyte;
 	note_entrance1("returning %x",*value);
@@ -2823,6 +2858,7 @@ GLOBAL VOID	vga_feat_outb IFN2(io_addr,port,half_word,value)
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2826
 	note_entrance2("ega_feat_outb(%x,%x)", port, value);
 	feature_control_register.as.abyte = value;
 }
@@ -2873,6 +2909,7 @@ GLOBAL VOID	vga_dac_data_outb IFN2(io_addr,port,half_word,value)
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2876
 
     note_entrance1("vga_dac_data_outb %#x",port);
     switch(DAC_rgb_state) {
@@ -2932,6 +2969,7 @@ GLOBAL VOID	vga_dac_data_inb IFN2(io_addr,port,half_word *,value)
 #ifdef PROD
 	UNUSED(port);
 #endif
+#line 2935
 	note_entrance1("vga_dac_data_inb %#x",port);
     switch(DAC_rgb_state) {
 
@@ -2961,6 +2999,7 @@ GLOBAL VOID	vga_dac_data_inb IFN2(io_addr,port,half_word *,value)
 #if defined(NTVDM) && defined(X86GFX)
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM & X86GFX */
+#line 2964
 
 VOID    vote_vga_mode IFN0()
 {
@@ -3016,10 +3055,14 @@ VOID    vote_vga_mode IFN0()
 #ifdef GISP_SVGA
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif 		/* GISP_SVGA */
+#line 3019
 
 
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 3024
 #endif /* VGG */
+#line 3025
 #endif /* REAL_VGA */
+#line 3026
