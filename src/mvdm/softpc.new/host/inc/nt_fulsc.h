@@ -75,25 +75,7 @@
 #define AC_MODE_CONTROL_REG	16
 
 #ifndef PROD
-/* Debug stuff. */
-#define FullScreenTrace0(s) \
-	if (FullScreenDebug) always_trace0(s)
-#define FullScreenTrace1(s ,p0) \
-	if (FullScreenDebug) always_trace1(s, p0)
-#define FullScreenTrace2(s, p0, p1) \
-	if (FullScreenDebug) always_trace2(s, p0, p1)
-#define FullScreenTrace3(s, p0, p1, p2) \
-	if (FullScreenDebug) always_trace3(s, p0, p1, p2)
-#define FullScreenTrace4(s, p0, p1, p2, p3) \
-	if (FullScreenDebug) always_trace4(s, p0, p1, p2, p3)
-#define FullScreenTrace5(s, p0, p1, p2, p3, p4) \
-	if (FullScreenDebug) always_trace5(s, p0, p1, p2, p3, p4)
-#define FullScreenTrace6(s, p0, p1, p2, p3, p4, p5) \
-	if (FullScreenDebug) always_trace6(s, p0, p1, p2, p3, p4, p5)
-#define FullScreenTrace7(s, p0, p1, p2, p3, p4, p5, p6) \
-	if (FullScreenDebug) always_trace7(s, p0, p1, p2, p3, p4, p5, p6)
-#define FullScreenTrace8(s, p0, p1, p2, p3, p4, p5, p6, p7) \
-	if (FullScreenDebug) always_trace7(s, p0, p1, p2, p3, p4, p5, p6, p7)
+/* DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register. */
 #else /* !PROD */
 #define FullScreenTrace0(s)
 #define FullScreenTrace1(s ,p0)
@@ -147,7 +129,7 @@ IMPORT HANDLE StartTToG;
 IMPORT HANDLE EndTToG;
 IMPORT BOOL BiosModeChange;
 #ifndef PROD
-IMPORT UTINY FullScreenDebug;
+/* DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register. */
 #endif /* PROD */
 
 extern DWORD savedScreenState;

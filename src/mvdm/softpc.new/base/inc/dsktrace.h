@@ -85,18 +85,7 @@
 /* disk tracing macro
  */
 #ifndef PROD
-#define dt0(infoid,hndl,fmt) \
-	{if (io_verbose & HDA_VERBOSE) disktrace(infoid,0,hndl,fmt,0,0,0,0,0);}
-#define dt1(infoid,hndl,fmt,i) \
-	{if (io_verbose & HDA_VERBOSE) disktrace(infoid,1,hndl,fmt,i,0,0,0,0);}
-#define dt2(infoid,hndl,fmt,i,j) \
-	{if (io_verbose & HDA_VERBOSE) disktrace(infoid,2,hndl,fmt,i,j,0,0,0);}
-#define dt3(infoid,hndl,fmt,i,j,k) \
-	{if (io_verbose & HDA_VERBOSE) disktrace(infoid,3,hndl,fmt,i,j,k,0,0);}
-#define dt4(infoid,hndl,fmt,i,j,k,l) \
-	{if (io_verbose & HDA_VERBOSE) disktrace(infoid,4,hndl,fmt,i,j,k,l,0);}
-#define dt5(infoid,hndl,fmt,i,j,k,l,m) \
-	{if (io_verbose & HDA_VERBOSE) disktrace(infoid,5,hndl,fmt,i,j,k,l,m);}
+/* DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register. */
 #else
 #define dt0(infoid,hndl,fmt) ;
 #define dt1(infoid,hndl,fmt,i) ;
@@ -107,12 +96,6 @@
 #endif
 
 #ifndef PROD
-VOID	setdisktrace();
-IMPORT	IU32 disktraceinfo;
-#ifdef ANSI
-void disktrace (int, int, int, char *, unsigned long, unsigned long, unsigned long, unsigned long, unsigned long);
-#else
-VOID	disktrace();
-#endif /* ANSI */
+/* DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register. */
 #endif
 

@@ -46,7 +46,7 @@ AMMENDMENTS	:
 
 #define MIN_FUNC_NO		0x40	/* Lowest function code		*/
 #ifndef PROD
-#define	MAX_FUNC_NO		0x5f	/* Highest function code	*/
+/* DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register. */
 #else					/* (includes trace options)	*/
 #define	MAX_FUNC_NO		0x5d	/* Highest function code	*/
 #endif

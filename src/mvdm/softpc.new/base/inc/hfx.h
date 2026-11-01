@@ -61,20 +61,7 @@ typedef struct {
 #define SRVRIN	0x40
 
 #ifndef PROD
-extern IU32 severity;
-#include "trace.h"
-
-#define DEBUG_INPUT	0x1
-#define DEBUG_REG	0x2
-#define DEBUG_FUNC	0x4
-#define DEBUG_HOST	0x8
-#define DEBUG_INIT	0x10
-#define DEBUG_CHDIR	0x20
-#define hfx_trace0(trace_bit,str)	if(severity&trace_bit){fprintf(trace_file,str);}
-#define hfx_trace1(trace_bit,str,p1)	if(severity&trace_bit){fprintf(trace_file,str,p1);}
-#define hfx_trace2(trace_bit,str,p1,p2)	if(severity&trace_bit){fprintf(trace_file,str,p1,p2);}
-#define hfx_trace3(trace_bit,str,p1,p2,p3)	if(severity&trace_bit){fprintf(trace_file,str,p1,p2,p3);}
-#define hfx_trace4(trace_bit,str,p1,p2,p3,p4)	if(severity&trace_bit){fprintf(trace_file,str,p1,p2,p3,p4);}
+/* DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register. */
 #else
 #define hfx_trace0(trace_bit,str)
 #define hfx_trace1(trace_bit,str,p1)

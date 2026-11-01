@@ -50,22 +50,7 @@ extern void force_yoda();
  */
 
 #ifndef PROD
-
-typedef enum {YODA_RETURN, YODA_RETURN_AND_REPEAT, YODA_HELP, YODA_LOOP, YODA_LOOP_AND_REPEAT} YODA_CMD_RETURN;
-#define YODA_COMMAND(name) \
-	YODA_CMD_RETURN name IFN6(char *, str, char *, com, IS32, cs, \
-				LIN_ADDR, ip, LIN_ADDR, len, LIN_ADDR, stop)
-
-#ifdef MSWDVR_DEBUG
-extern YODA_CMD_RETURN do_mswdvr_debug IPT6(char *,str, char *, com, IS32, cs, LIN_ADDR, ip, LIN_ADDR, len, LIN_ADDR, stop);
-#endif /* MSWDVR_DEBUG */
-
-extern IBOOL AlreadyInYoda;
-
-extern IU32 IntelMsgDest;
-#define IM_DST_TRACE	1
-#define IM_DST_RING	2
-
+/* DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register. */
 #else /* !PROD */
 
 #endif /* !PROD else*/
