@@ -393,10 +393,14 @@ process enumeration. Console handles use a separate local binding.
 ## Strict mirror practice
 
 An imported production file is exact upstream, a true subset, or a
-same-shaped minimal modification in an existing upstream-relative file. Each
-crop or changed expression is marked `DIVERGENCE:` and indexed in the component
-README. An actual original OpenNT file may be newly imported at its original
-relative path after provenance and package-boundary admission, as byte-exact
+same-shaped minimal modification in an existing upstream-relative file. A
+removed conditional body keeps its original conditional structure and uses
+only `#error` as its placeholder, with `#line` where necessary to preserve
+diagnostic locations; its provenance belongs in the external mirror ledger,
+not a placeholder comment. Changed expressions retain their local
+`DIVERGENCE:` explanation and component README entry. An actual original
+OpenNT file may be newly imported at its original relative path after
+provenance and package-boundary admission, as byte-exact
 source, a registered true subset or a minimal same-shaped adaptation. A
 project-invented file or material new mechanism belongs in its named adapter
 or ABI family; it may not be placed in a mirror or private overlay.

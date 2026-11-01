@@ -112,12 +112,20 @@ W32Dispatch handled-exception stack restoration defect is approved for a
 minimal host correction. Similar source-proven original-host corrections may
 be designed, exception-registered and implemented without repeated approval,
 even when no matching existing SoftPC patch is available. Every retained
-mirror diff needs its local DIVERGENCE marker and exception/provenance record,
-original contract, rejected reuse alternatives, bounded diff budget and
+mirror diff needs its exception/provenance record, original contract, rejected
+reuse alternatives, bounded diff budget and
 positive/negative/lifecycle evidence. Prefer composable original logic and
 existing matching corrections; this is not permission for guest changes,
 silent semantic relaxations, wholesale rewrites or unverified publication.
 This supersedes only the no-new-original-host-correction restriction below.
+
+Owner clarification: for removed original conditional bodies, preserve the
+complete original conditional structure and replace each removed body with
+`#error` alone, not a divergence comment. Restore missing structure where
+verified against the pinned source, and retain or add `#line` when needed for
+diagnostic line numbers. Record the deletion and provenance externally; other
+actual code adaptations retain their applicable local divergence explanations.
+This does not authorize modifying or rebuilding guest.
 
 Owner clarification dated 2026-10-04 distinguishes defect cause, not location:
 

@@ -127,9 +127,16 @@ against their defect contract, not presented as performance optimizations.
   ending, final-newline and whitespace formatting before closure; do not leave
   a format-only difference as a mirror diff.  The evidence records the sweep
   and every intentionally retained non-format difference.
-- Each deleted logical block has a `DIVERGENCE:` crop marker and README row.
-  Each changed expression has a local `DIVERGENCE:` explanation and README
-  row identifying original purpose, reason and implementation.
+- For a deleted original conditional branch body, retain or restore its full
+  original conditional structure, including nested conditions and alternatives;
+  the removed body is represented solely by `#error`, never a comment
+  placeholder. Preserve selected alternatives and add `#line` where needed to
+  retain original diagnostic line numbers. Do not add a divergence comment to
+  the deleted body; record its provenance and exception in the external mirror
+  ledger. Do not modify or rebuild guest to apply this rule.
+- Each changed expression still has a local `DIVERGENCE:` explanation and
+  README row identifying original purpose, reason and implementation. Deletions
+  outside a conditional are not replaced by an unconditional `#error`.
 - If more than 50 percent of retained source/preprocessor/data lines differ,
   the implementation is not a mirror file. Place it in the named adapter/ABI
   family and retain only the smallest registered owner-local boundary.
