@@ -1,4 +1,9 @@
 # non-mvdm original OpenNT sources
+OPENNT-HOST-136: replace unselected kernel-USER and historical architecture
+branches with markers, retaining conditionals and selected user-mode paths.
+Labels, original ranges and hashes are in
+`../../artifacts/mvdm-audit/s12-nonmvdm-kernel.jsonl`.
+
 OPENNT-HOST-135: retain the selected native RECT path in USER `_GetClientRect`
 and replace its unselected 16-bit WOW-layout branch bodies with markers.
 The separate Win16 thunk still converts RECT to RECT16. Ranges and hashes:

@@ -595,7 +595,7 @@ LoadSymbols64To32(
 }
 
 #ifdef _IA64_
-#include <pshpck16.h>
+/* DIVERGENCE OPENNT-HOST-136: _IA64_ branch is not selected; see mirror register. */
 #endif
 
 typedef struct _DBGKD_WAIT_STATE_CHANGE32 {
@@ -674,7 +674,7 @@ WaitStateChange64To32(
 
 
 #ifdef _IA64_
-#include <poppack.h>
+/* DIVERGENCE OPENNT-HOST-136: _IA64_ branch is not selected; see mirror register. */
 #endif
 
 //

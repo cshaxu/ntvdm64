@@ -115,7 +115,7 @@ typedef struct _VdmVirtualIca{
 
 /* XLATON */
 #if defined(_PC98_)
-#define  FIXED_NTVDMSTATE_SEGMENT   0x60
+/* DIVERGENCE OPENNT-HOST-136: _PC98_ branch is not selected; see mirror register. */
 #else  // !_PC98_
 #define  FIXED_NTVDMSTATE_SEGMENT   0x70
 #endif // _PC98_

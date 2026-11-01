@@ -55,9 +55,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
         } else {
             int cwch;
 #ifdef _USERK_
-            cwch = EngMultiByteToWideChar(CodePage,
-                    (LPWSTR)&dwUni, sizeof(dwUni) / sizeof(WCHAR),
-                    (LPSTR)pWParam, 2);
+/* DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register. */
 #else
             cwch = MultiByteToWideChar(CodePage, 0,
                     (LPSTR)pWParam, 2,
@@ -162,7 +160,7 @@ WCSToMBEx(
 {
     ULONG nCharsInAnsiString;
 #ifdef _USERK_
-    INT iCharsInAnsiString;
+/* DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register. */
 #endif // _USERK_
 
     if (nAnsiChar == 0 || cchUnicodeString == 0) {
@@ -249,24 +247,7 @@ WCSToMBEx(
     } else {
 
 #ifdef _USERK_
-        /*
-         * Call GRE to convert string to Unicode. (Kernel mode)
-         * I believe we will never hit this code which is why I am adding the
-         * assert [gerritv] 5-21-96
-         */
-
-        UserAssert(FALSE);
-
-        iCharsInAnsiString = EngWideCharToMultiByte(
-                                 (UINT)wCodePage,
-                                 (LPWSTR)pUnicodeString,
-                                 cchUnicodeString * sizeof(WCHAR),
-                                 (LPSTR)*ppAnsiString,
-                                 nAnsiChar);
-
-        nCharsInAnsiString = (iCharsInAnsiString == -1) ? 0 :
-                                                          (ULONG) iCharsInAnsiString;
-
+/* DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register. */
 #else
         /*
          * Call NLS API (Kernel32) to convert string to Unicode. (User mode)
@@ -373,25 +354,7 @@ int MBToWCSEx(
         ULONG nCharsInUnicodeString;
 
 #ifdef _USERK_
-        INT   iCharsInUnicodeString;
-
-        /*
-         * Call GRE to convert string to Unicode. (Kernel mode)
-         * I believe we will never hit this code which is why I am
-         * adding this assert.  [gerritv] 5-21-96
-         */
-
-        UserAssert(0);
-
-        iCharsInUnicodeString = EngMultiByteToWideChar(
-                                    (UINT)wCodePage,
-                                    (LPWSTR)*ppUnicodeString,
-                                    (int)cchUnicodeString * sizeof(WCHAR),
-                                    (LPSTR)pAnsiString,
-                                    (int)nAnsiChar);
-
-        nCharsInUnicodeString = (iCharsInUnicodeString == -1) ? 0 :
-                                                          (ULONG) iCharsInUnicodeString;
+/* DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register. */
 #else
         /*
          * Call NLS API (Kernel32) to convert string to Unicode. (User mode)

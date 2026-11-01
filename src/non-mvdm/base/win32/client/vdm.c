@@ -2263,14 +2263,7 @@ Return Value:
                     RtlImageNtHeader(NtCurrentPeb()->ImageBaseAddress)->FileHeader.Machine) {
 
 #ifdef _MIPS_
-                if ( ImageInformation.Machine == IMAGE_FILE_MACHINE_R3000 ||
-                     ImageInformation.Machine == IMAGE_FILE_MACHINE_R4000 ) {
-                    ;
-                }
-                else {
-                    SetLastError(ERROR_BAD_EXE_FORMAT);
-                    goto GBTtryexit;
-                }
+/* DIVERGENCE OPENNT-HOST-136: _MIPS_ branch is not selected; see mirror register. */
 #else
                 SetLastError(ERROR_BAD_EXE_FORMAT);
                 goto GBTtryexit;

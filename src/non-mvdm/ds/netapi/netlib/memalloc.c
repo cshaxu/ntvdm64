@@ -235,7 +235,7 @@ Return Value:
         HANDLE hOldMem;
 
 #ifdef notdef // LocalHandle returns 0 for LMEM_FIXED block
-        hOldMem = LocalHandle( (LPSTR) OldAddress);
+/* DIVERGENCE OPENNT-HOST-136: notdef branch is not selected; see mirror register. */
 #else
         hOldMem = (HANDLE) OldAddress;
 #endif // notdef

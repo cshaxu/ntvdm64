@@ -1,0 +1,9 @@
+{"path":"src/non-mvdm/windows/core/ntuser/rtl/chartran.c","start":375,"end":395,"removed_lines":19,"sha256":"d153849b71c4b1e4ff16594eb50f57e3484e69b38043c1143a8a72a7f6f798b1","tag":"_USERK_","baseline":"cbff5cac2"}
+{"path":"src/non-mvdm/windows/core/ntuser/rtl/chartran.c","start":251,"end":270,"removed_lines":18,"sha256":"c05d71249c2a20b84c0297c866b635ec89b43fd827ab890044feee99d6c2b1ca","tag":"_USERK_","baseline":"cbff5cac2"}
+{"path":"src/non-mvdm/windows/core/ntuser/rtl/chartran.c","start":164,"end":166,"removed_lines":1,"sha256":"171ff74bef7d189f19ea44f4a743009ca4c7ffb295ff3c8cdb70d1f1d7ae5041","tag":"_USERK_","baseline":"cbff5cac2"}
+{"path":"src/non-mvdm/windows/core/ntuser/rtl/chartran.c","start":57,"end":61,"removed_lines":3,"sha256":"76516f8bdbfee21a5a2fa3f7a750189d029f11de11153a537a4b8e03d62aa27e","tag":"_USERK_","baseline":"cbff5cac2"}
+{"path":"src/non-mvdm/public/sdk/inc/ntdbg.h","start":676,"end":678,"removed_lines":1,"sha256":"26e93ef502d0c75b958a6d2314bacd68c652f1d2606ad8d8e3d1cc67fffea74e","tag":"_IA64_","baseline":"cbff5cac2"}
+{"path":"src/non-mvdm/public/sdk/inc/ntdbg.h","start":597,"end":599,"removed_lines":1,"sha256":"44e851f5d336cbaf0dd286c992dc0aac65b0d37709b521ad188ee43278c2ca1c","tag":"_IA64_","baseline":"cbff5cac2"}
+{"path":"src/non-mvdm/base/win32/client/vdm.c","start":2265,"end":2274,"removed_lines":8,"sha256":"d2015ff49d92bbd00b24a5d458168e833b21a1601b56720315a4e77bea922c0c","tag":"_MIPS_","baseline":"cbff5cac2"}
+{"path":"src/non-mvdm/public/internal/base/inc/vdm.h","start":117,"end":119,"removed_lines":1,"sha256":"bc7347f202962128edbb7c73e346fa09f6db90f2b05e1911a1bda72dc7c473b7","tag":"_PC98_","baseline":"cbff5cac2"}
+{"path":"src/non-mvdm/ds/netapi/netlib/memalloc.c","start":237,"end":239,"removed_lines":1,"sha256":"0e97dae14b535298a851e1fa2715bb2ebbcf85a02d1a164e98ecccef574d6ee9","tag":"notdef","baseline":"cbff5cac2"}
