@@ -46,10 +46,11 @@ try {
     }
     $text = $stdout.Result + $stderr.Result
     $text | Set-Content -LiteralPath (Join-Path $out 'controller.txt') -Encoding UTF8
-    if ($process.ExitCode -ne 0 -or $text -notmatch 'assertions=46 failures=0' -or
+    if ($process.ExitCode -ne 0 -or $text -notmatch 'assertions=86 failures=0' -or
         $text -notmatch 'PASS actual INTACK/EOI' -or
         $text -notmatch 'PASS early EOI retains unread port-60 byte' -or
-        $text -notmatch 'PASS PIC reset cancels rather than early-acknowledges') { throw 'Controller/PIC assertions failed.' }
+        $text -notmatch 'PASS PIC reset cancels rather than early-acknowledges' -or
+        $text -notmatch 'PASS physical Alt\+Enter and following key through controller/PIC') { throw 'Controller/PIC assertions failed.' }
     [pscustomobject]@{
         profile = 'x86 /MT NTVDM CCPU40'; elapsed_ms = $clock.ElapsedMilliseconds
         executable_sha256 = (Get-FileHash -LiteralPath $exe).Hash

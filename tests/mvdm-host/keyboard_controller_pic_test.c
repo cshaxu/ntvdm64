@@ -12,6 +12,7 @@ extern void sas_init(PHY_ADDR), sas_term(void), c_cpu_init(void);
 extern void AT_kbd_init(void), kbd_outb(io_addr, half_word);
 extern void kbd_inb(io_addr, half_word *), KbdEOIHook(int, int);
 extern void AddTo6805BuffImm(half_word), continue_output(void);
+extern void host_key_down(int), host_key_up(int);
 extern BOOL bBiosOwnsKbdHdw, bKbdEoiPending, bForceDelayInts;
 extern BOOL bDelayIntPending;
 extern ULONG DelayIrqLine;
@@ -49,6 +50,28 @@ static IU8 pic(IU8 command)
     ica_outb(0x20, command);
     ica_inb(0x20, &value);
     return value;
+}
+
+/* Exercise the actual physical-key path, including translation, controller
+ * output and PIC acknowledgement. The two orderings model the two guest ISR
+ * contracts; each transition is completed before the next physical key. */
+static void chord_key(int key, BOOL down, half_word expected, BOOL early_eoi)
+{
+    half_word value = 0;
+    IU32 hook = 0;
+    bDelayIntPending = FALSE;
+    if (down) host_key_down(key); else host_key_up(key);
+    CHECK(output_full && bKbdEoiPending);
+    if (!(pic(0x0a) & 2)) ica_hw_interrupt(0, 1, 1);
+    CHECK(ica_intack(&hook) == 9);
+    if (early_eoi) ica_outb(0x20, 0x20);
+    kbd_inb(0x60, &value);
+    if (value != expected)
+        fprintf(stderr, "key=%d down=%d early=%d got=%02x expected=%02x\n",
+            key, down, early_eoi, value, expected);
+    CHECK(value == expected);
+    if (!early_eoi) ica_outb(0x20, 0x20);
+    CHECK(!output_full && !bKbdEoiPending);
 }
 
 int main(void)
@@ -167,6 +190,20 @@ int main(void)
     CHECK(ica_intack(&hook) == 9);
     ica_outb(0x20, 0x20);
     CHECK(!output_full && !bKbdEoiPending && !pending_8042);
+    /* NT key numbers 60 and 43 are left Alt and Enter. The guest sees the
+     * translated set-1 make/break sequence; neither ISR ordering may strand
+     * a modifier or lose the following ordinary key. */
+    chord_key(60, TRUE,  0x38, FALSE);
+    chord_key(43, TRUE,  0x1c, FALSE);
+    chord_key(43, FALSE, 0x9c, FALSE);
+    chord_key(60, FALSE, 0xb8, FALSE);
+    chord_key(60, TRUE,  0x38, TRUE);
+    chord_key(43, TRUE,  0x1c, TRUE);
+    chord_key(43, FALSE, 0x9c, TRUE);
+    chord_key(60, FALSE, 0xb8, TRUE);
+    chord_key(49, TRUE,  0x2f, TRUE);  /* V */
+    chord_key(49, FALSE, 0xaf, TRUE);
+    fprintf(stderr, "PASS physical Alt+Enter and following key through controller/PIC\n");
     sas_term(); (void)session_thread_unbind(&owner); (void)session_dispose(&owner);
     fprintf(stderr, "KEYBOARD_PIC_PROFILE assertions=%u failures=%u\n", assertions, failures);
     return failures ? 1 : 0;
