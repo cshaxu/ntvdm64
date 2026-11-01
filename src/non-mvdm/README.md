@@ -1,4 +1,9 @@
 # non-mvdm original OpenNT sources
+OPENNT-HOST-133: replace unselected CDEBUG, SYSMODALWINDOWS,
+MEMPHIS_MENU_WATERMARKS, PIF_PROPERTY_SHEETS and UNDO_CLEANUP branches with
+markers, retaining conditionals. Their source ranges and hashes are in
+`../../artifacts/mvdm-audit/s12-nonmvdm-features.jsonl`.
+
 OPENNT-HOST-132: replace unselected SUPPORT_LPK, FE_IME, DBCS, FE_SB,
 KANJI, KOREA, WASWIN31 and MEMPHIS_MENUS branches with markers, preserving
 conditionals. The recorded product profiles do not select these labels;

@@ -2324,15 +2324,7 @@ ICH PASCAL NEAR MLPasteText(
     HCURSOR hCursorOld;
 
 #ifdef UNDO_CLEANUP           // #ifdef Added in Chicago  - johnl
-    if (!ped->fAutoVScroll) {
-
-        /*
-         * Empty the undo buffer if this edit control limits the amount of text
-         * the user can add to the window rect. This is so that we can undo this
-         * operation if doing in causes us to exceed the window boundaries.
-         */
-        ECEmptyUndo(ped);
-    }
+/* DIVERGENCE OPENNT-HOST-133: UNDO_CLEANUP branch is not selected; see mirror register. */
 #endif
 
     hCursorOld = NtUserSetCursor(LoadCursor(NULL, IDC_WAIT));

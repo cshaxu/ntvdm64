@@ -110,9 +110,7 @@ Revision History:
 #include <wchar.h>      // iswdigit().
 
 #ifdef CDEBUG                   // Debug in ANSI C environment?
-
-#include <netdebug.h>           // NetpAssert().
-
+/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
 #endif // ndef CDEBUG
 
 
@@ -200,16 +198,7 @@ NetpAtoX(
 //     );
 
 #ifdef CDEBUG
-
-// Note that C6 version doesn't allow 32-bit Size, hence the
-// assertion.  Replace this macro with another if this is a problem.
-
-#define NetpMoveMemory(Dest,Src,Size)                                   \
-                {                                                       \
-                    NetpAssert( (Size) == (DWORD) (size_t) (Size));     \
-                    (void) memcpy( (Dest), (Src), (size_t) (Size) );    \
-                }
-
+/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
 #else // ndef CDEBUG
 
 #define NetpMoveMemory(Dest,Src,Size)                                   \

@@ -306,7 +306,7 @@ typedef struct tagMENU {
     PITEM           rgItems;        /* The list of items in this menu */
     DWORD           dwContextHelpId;// Context help Id for the whole menu
 #ifdef MEMPHIS_MENU_WATERMARKS
-    HBRUSH          hbrBack;        // background brush for menu
+/* DIVERGENCE OPENNT-HOST-133: MEMPHIS_MENU_WATERMARKS branch is not selected; see mirror register. */
 #endif // MEMPHIS_MENU_WATERMARKS
 
 } MENU, *PMENU;

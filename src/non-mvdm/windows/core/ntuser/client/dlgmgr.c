@@ -92,14 +92,7 @@ ShowIt:
                 fShown = TRUE;
 
 #ifdef SYSMODALWINDOWS
-                if (pwnd == gspwndSysModal) {
-                    /*
-                     * Make this a topmost window
-                     */
-                    NtUserSetWindowPos(hwnd, HWND_TOPMOST, 0, 0, 0, 0,
-                               SWP_NOSIZE | SWP_NOMOVE |
-                               SWP_NOREDRAW | SWP_NOACTIVATE);
-                }
+/* DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register. */
 #endif
 
                 NtUserShowWindow(hwnd, SHOW_OPENWINDOW);

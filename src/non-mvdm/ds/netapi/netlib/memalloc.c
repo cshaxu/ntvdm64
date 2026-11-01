@@ -69,7 +69,7 @@ Revision History:
 #include <netlib.h>     // My prototypes, NetpMoveMemory().
 #include <prefix.h>     // PREFIX_ equates.
 #ifdef CDEBUG
-#include <stdlib.h>     // free(), malloc(), realloc().
+/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
 #endif // def CDEBUG
 
 
@@ -120,8 +120,7 @@ Return Value:
                 RtlProcessHeap( ), 0,              // heap handle
                 Size ));                        // bytes wanted
 #else // def CDEBUG
-    NetpAssert( Size == (DWORD) (size_t) Size );
-    NewAddress = malloc( (size_t) Size ));
+/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
 #endif // def CDEBUG
 #endif // ndef WIN32
 
@@ -173,7 +172,7 @@ Return Value:
                 RtlProcessHeap( ), 0,              // heap handle
                 Address);                       // addr of alloc'ed space.
 #else // def CDEBUG
-    free( Address );
+/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
 #endif // def CDEBUG
 #endif // ndef WIN32
 } // NetpMemoryFree

@@ -117,11 +117,7 @@ Revision History:
 #else // not DBG
 
 #ifdef CDEBUG
-
-// ANSI C debug version.
-#include <assert.h>             // assert().
-#include <stdio.h>              // printf().
-
+/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
 #else // ndef CDEBUG
 
 // Nondebug version.
@@ -171,10 +167,7 @@ extern "C" {
 #else // not DBG
 
 #ifdef CDEBUG
-
-// ANSI C debug version.
-#define NetpAssert(Predicate)   assert(Predicate)
-
+/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
 #else // ndef CDEBUG
 
 // Nondebug version.
@@ -200,10 +193,7 @@ extern "C" {
 #else // not DBG
 
 #ifdef CDEBUG
-
-// ANSI C debug version.
-#define NetpBreakPoint          NetpAssert(FALSE)
-
+/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
 #else // ndef CDEBUG
 
 // Nondebug version.
@@ -283,13 +273,7 @@ extern "C" {
 #else // not DBG
 
 #ifdef CDEBUG
-
-//  ANSI C debug version.
-//  BUGBUG: Perhaps sending this to stderr would be better?
-
-#define NetpKdPrint(_x_)        NetpDbgPrint _x_
-#define NetpDbgPrint            (void) printf
-
+/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
 #else // ndef CDEBUG
 
 //  Nondebug version.  Note that NetpKdPrint() eliminates all its

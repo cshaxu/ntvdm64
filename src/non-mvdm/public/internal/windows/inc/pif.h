@@ -982,14 +982,7 @@ BOOL WINAPI PifPropGetPages(LPVOID lpv, LPFNADDPROPSHEETPAGE lpfnAddPage, LPARAM
 
 
 #ifdef  PIF_PROPERTY_SHEETS
-int  WINAPI LoadPropertyLib(LPCTSTR lpszDLL, int fLoad);
-int  WINAPI EnumPropertyLibs(int iLib, LPHANDLE lphDLL, LPSTR lpszDLL, int cbszDLL);
-BOOL WINAPI FreePropertyLib(int hLib);
-int  WINAPI AddPropertySheet(const PROPSHEETPAGE FAR *lppsi, int iType);
-BOOL WINAPI RemovePropertySheet(int hSheet);
-int  WINAPI LoadPropertySheets(int hProps, int flags);
-int  WINAPI EnumPropertySheets(int hProps, int iType, int iSheet, LPPROPSHEETPAGE lppsi);
-int  WINAPI FreePropertySheets(int hProps, int flags);
+/* DIVERGENCE OPENNT-HOST-133: PIF_PROPERTY_SHEETS branch is not selected; see mirror register. */
 #endif  /* PIF_PROPERTY_SHEETS */
 
 #endif	/* !NTVDM && WINAPI */

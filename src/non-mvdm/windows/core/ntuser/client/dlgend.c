@@ -22,7 +22,7 @@ BOOL EndDialog(
     HWND hwndOwner;
     BOOL fWasActive = FALSE;
 #ifdef SYSMODALWINDOWS
-    HWND hwndOldSysModal;
+/* DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register. */
 #endif
 
     if ((pwnd = ValidateHwnd(hwnd)) == NULL) {
@@ -101,25 +101,7 @@ BOOL EndDialog(
         return TRUE;
 
 #ifdef SYSMODALWINDOWS
-
-    /*
-     * If this guy was sysmodal, set the sysmodal flag to previous guy so we
-     * won't have a hidden sysmodal window that will screw things
-     * up royally...
-     */
-    if (pwnd == gspwndSysModal) {
-        hwndOldSysModal = PDLG(pwnd)->hwndSysModalSave;
-        if (hwndOldSysModal && !IsWindow(hwndOldSysModal))
-            hwndOldSysModal = NULL;
-
-        SetSysModalWindow(hwndOldSysModal);
-
-        // If there was a previous system modal window, we want to
-        // activate it instead of this window's owner.
-        //
-        if (hwndOldSysModal)
-            hwndOwner = hwndOldSysModal;
-    }
+/* DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register. */
 #endif
 
     /*
@@ -149,23 +131,7 @@ BOOL EndDialog(
     }
 
 #ifdef SYSMODALWINDOWS
-
-    /*
-     * If this guy was sysmodal, set the sysmodal flag to previous guy so we
-     * won't have a hidden sysmodal window that will screw things
-     * up royally...
-     * See comments for Bug #134; SANKAR -- 08-25-89 --;
-     */
-    if (pwnd == gspwndSysModal) {
-
-        /*
-         * Check if the previous Sysmodal guy is still valid?
-         */
-        hwndOldSysModal = PDLG(pwnd)->hwndSysModalSave;
-        if (hwndOldSysModal && !IsWindow(hwndOldSysModal))
-            hwndOldSysModal = NULL;
-        SetSysModalWindow(hwndOldSysModal);
-    }
+/* DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register. */
 #endif
 
     /*
