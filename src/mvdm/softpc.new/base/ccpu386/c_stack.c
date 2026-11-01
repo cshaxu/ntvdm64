@@ -28,11 +28,7 @@ Stack (and related SP/BP access) Support.
 #include <ccpupig.h>
 
 #if	defined(PIG) && !defined(PROD)
-/* The Soft486 CPU may (when not constrained SAFE_PUSH) corrupt the unwritten
- * parts of, say, an interrupt fram which contains 16-bit items pushed into
- * 32-bit allocated slots. This defines makes the Pigger blind to these locations.
- */
-#define PIG_DONT_CHECK_OTHER_WORD_ON_STACK
+/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
 #endif	/* PIG && !PROD */
 
 /*

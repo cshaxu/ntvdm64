@@ -81,76 +81,7 @@ half_word ica_lock;
  * exclude only this obsolete CPU-state carrier from the CPU40 build.
  */
 #if defined(CCPU) && !defined(CPU_40_STYLE)
-#ifndef MAC_LIKE
-reg A;		/* Accumulator		*/
-reg B;		/* Base			*/
-reg C;		/* Count		*/
-reg D;		/* Data			*/
-reg BP;		/* Base pointer		*/
-reg SI;		/* Source Index		*/
-reg DI;		/* Destination Index	*/
-#endif /* MAC_LIKE */
-reg SP;		/* Stack Pointer	*/
-
-reg IP;		/* Instruction Pointer	*/
-
-reg CS;		/* Code Segment		*/
-reg DS;		/* Data Segment		*/
-reg SS;		/* Stack Segment	*/
-reg ES;		/* Extra Segment	*/
-
-/* Code Segment Register */
-half_word CS_AR;    /* Access Rights Byte */
-sys_addr  CS_base;  /* Base Address */
-word      CS_limit; /* Segment 'size' */
-int       CPL;      /* Current Privilege Level */
-
-/* Data Segment Register */
-half_word DS_AR;    /* Access Rights Byte */
-sys_addr  DS_base;  /* Base Address */
-word      DS_limit; /* Segment 'size' */
-
-/* Stack Segment Register */
-half_word SS_AR;    /* Access Rights Byte */
-sys_addr  SS_base;  /* Base Address */
-word      SS_limit; /* Segment 'size' */
-
-/* Extra Segment Register */
-half_word ES_AR;    /* Access Rights Byte */
-sys_addr  ES_base;  /* Base Address */
-word      ES_limit; /* Segment 'size' */
-
-/* Global Descriptor Table Register */
-sys_addr GDTR_base;  /* Base Address */
-word     GDTR_limit; /* Segment 'size' */
-
-/* Interrupt Descriptor Table Register */
-sys_addr IDTR_base;  /* Base Address */
-word     IDTR_limit; /* Segment 'size' */
-
-/* Local Descriptor Table Register */
-reg      LDTR;       /* Selector */
-sys_addr LDTR_base;  /* Base Address */
-word     LDTR_limit; /* Segment 'size' */
-
-/* Task Register */
-reg      TR;       /* Selector */
-sys_addr TR_base;  /* Base Address */
-word     TR_limit; /* Segment 'size' */
-
-mreg MSW;	/* Machine Status Word */
-
-int STATUS_CF;
-int STATUS_SF;
-int STATUS_ZF;
-int STATUS_AF;
-int STATUS_OF;
-int STATUS_PF;
-int STATUS_TF;
-int STATUS_IF;
-int STATUS_DF;
-int STATUS_NT;
-int STATUS_IOPL;
+/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
 #endif /* defined(CCPU) && !defined(CPU_40_STYLE) */
 
 /*

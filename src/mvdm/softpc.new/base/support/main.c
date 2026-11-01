@@ -175,11 +175,7 @@ INT      main IFN2(INT, argc, CHAR **, argv)
   }
 #endif
 #if defined(CPU_40_STYLE) && !defined(CCPU)
-  {
-	extern void parse_lc_options IPT2(int *,pargc, char ***,pargv);
-
-  	parse_lc_options(&argc,&argv);
-  }
+/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
 #endif /* assembler 4.0 cpu */
 
   verbose = FALSE;

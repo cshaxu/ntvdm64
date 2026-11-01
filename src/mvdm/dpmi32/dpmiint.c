@@ -1502,7 +1502,7 @@ Return Value:
 #if defined(CPU_40_STYLE) && defined(CCPU)
     pCode = Sim32pGetVDMPointerWithLinear(SegCS<<16, TRUE, &CodeBase);
 #else
-    pCode = Sim32GetVDMPointer(SegCS<<16, 1, TRUE);
+/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
 #endif
 
     /* The original x86 monitor always exposed an alias for an active

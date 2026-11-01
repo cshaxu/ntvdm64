@@ -320,26 +320,7 @@ void MS_bop_1(void) {
         (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
     (*WOWDispatchEntry)();
 #else
-    // Dispatch to WOW dispatcher
-    {
-	static BYTE **AddressOfLocal;
-	BYTE *localSimulateContext = GLOBAL_SimulateContext;
-
-	AddressOfLocal = &localSimulateContext;
-
-	(*WOWDispatchEntry)();
-
-	SET_GLOBAL_SimulateContext(localSimulateContext);
-
-	if(AddressOfLocal != &localSimulateContext)
-	{
-	    //Thread switch detected via stack change, force CPU to
-	    //abort the current fragment, reseting GDP var's refering
-	    //to the host stack
-
-	    setEIP(getEIP());
-	}
-    }
+/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
 #endif	/* CPU_40_STYLE */
     /* S42 observation only: the original dispatcher has returned and CPU
      * state remains entirely owned by the original BOP/CCPU sequence. */

@@ -99,7 +99,7 @@ extern void Dump_sigprof IPT0();
 #endif
 
 #if !defined(PROD) && defined(CPU_40_STYLE)
-extern void FmDebugBop IPT0();
+/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
 #endif
 
 #if defined(CPU_40_STYLE) && !defined(NTVDM)
@@ -131,7 +131,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 04 */
 #endif	/* WDCTRL_BOP */
 #if !defined(PROD) && defined(CPU_40_STYLE)
-			FmDebugBop,	/* BOP 05 */
+/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
 #else
 			illegal_bop,	/* BOP 05 */
 #endif	/* !PROD && CPU_40_STYLE */

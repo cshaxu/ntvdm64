@@ -293,7 +293,7 @@ LOCAL YODA_CMD_RETURN go_slow IFN0()
 		printf("Switching to Slow YODA...\n");
 		yint = 1; fast = 0; do_condition_checks = 1;
 #if defined(CPU_40_STYLE) && !defined(CCPU)
-		Nano_slow_yoda(); /* Check that Nano will give us check_I's */
+/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
 #endif	/* CPU_40_STYLE && !CCPU */
 	}
 #if	defined(A2CPU) || defined(GISP_CPU)
@@ -4511,42 +4511,7 @@ LOCAL YODA_COMMAND(do_3c)
 #endif /* GISP_CPU */
 
 #if	defined(CPU_40_STYLE) && !defined(CCPU)
-LOCAL YODA_COMMAND(do_4c)
-{
-	extern void	FmDebug IPT1(IUH, hook);
-
-	UNUSED(str);
-	UNUSED(com);
-	UNUSED(cs);
-	UNUSED(ip);
-	UNUSED(len);
-	UNUSED(stop);
-
-	FmDebug(0);
-	return(YODA_LOOP);
-}
-
-LOCAL YODA_COMMAND(do_imdst)
-{
-	UNUSED(ip);
-	UNUSED(len);
-	UNUSED(stop);
-
-#ifdef SFELLOW
-
-	UNUSED(cs);
-	printf(SfNotImp);
-
-#else /* SFELLOW */
-
-	IntelMsgDest = cs & 3;
-	printf("Intel messages to trace output %s\n", IntelMsgDest & IM_DST_TRACE?"ON":"OFF");
-	printf("Intel messages to ring buffer %s\n", IntelMsgDest & IM_DST_RING?"ON":"OFF");
-
-#endif /* SFELLOW */
-
-	return(YODA_LOOP);
-}
+/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
 #endif /* CPU_40_STYLE && !CCPU */
 
 #ifdef PIG
@@ -5039,8 +5004,7 @@ static struct
 #endif /* GISP_CPU */
 
 #if	defined(CPU_40_STYLE) && !defined(CCPU)
-{ "4c", 	do_4c,		FALSE, NULL, "4.0 CPU interface" },
-{ "imdst",	do_imdst,	FALSE, "[0|1|2|3]",	"Direct Intel debug message output (trace=bit0, ring=bit1)" },
+/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
 #endif /* CPU_40_STYLE && !CCPU */
 
 #ifdef PIG
@@ -5520,10 +5484,7 @@ GLOBAL VOID Enter_yoda IFN0()
 #endif	/* CPU_40_STYLE */
 
 #if defined(CPU_40_STYLE) && !defined(CCPU)
-/* Use the integrated command line reader from FmDebug.c */
-
-GLOBAL IBOOL GetCpuCmdLine IPT4(char *, buff, int, size, FILE *, stream, char *, who);
-
+/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
 #else	/* CPU_40_STYLE && !CCPU */
 
 GLOBAL IBOOL GetCpuCmdLine IFN4(char *, buff, int, size, FILE *, stream, char *, who)
@@ -5584,10 +5545,7 @@ void force_yoda IFN0()
 #endif	/* GISP_SVGA */
 
 #if	defined(CPU_40_STYLE) && !defined(CCPU)
-
-	EnterDebug("Yoda");
-	prompt = "";
-
+/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
 #else	/* CPU_40_STYLE && !CCPU */
 
 	if (AlreadyInYoda) {
@@ -5777,7 +5735,7 @@ void force_yoda IFN0()
 #endif /* SFELLOW */
 
 #if defined(CPU_40_STYLE) && !defined(CCPU)
-			LeaveDebug();
+/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
 #endif /* CPU_40_STYLE && !CCPU */
 			return;
 		case YODA_HELP:
@@ -8112,9 +8070,7 @@ intr IFN0()
 yoda_intr IFN1(int, signo)
 {
 #if	defined(CPU_40_STYLE) && !defined(CCPU)
-
-	EnterDebug("Intr");
-
+/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
 #endif	/* CPU_40_STYLE && !CCPU */
 
 #ifndef SFELLOW
@@ -8127,9 +8083,7 @@ yoda_intr IFN1(int, signo)
 	force_yoda();
 
 #if	defined(CPU_40_STYLE) && !defined(CCPU)
-
-	LeaveDebug();
-
+/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
 #endif	/* CPU_40_STYLE && !CCPU */
 }
 
