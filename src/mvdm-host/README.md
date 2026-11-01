@@ -1,5 +1,9 @@
 # mvdm
 
+MVDM-HOST-DIV-550: restore 22 nested PROD alternatives in the existing
+excluded CPU4GEN non-CCPU shells. Evidence:
+`../../artifacts/mvdm-audit/conditional-skeleton-cpu4gen.md`.
+
 MVDM-HOST-DIV-549: restore original CPU30/CCPU/A2CPU conditional shells in
 `nt_cprgs.c` without changing the selected CPU40 branch. Evidence:
 `../../artifacts/mvdm-audit/conditional-skeleton-cprgs.md`.

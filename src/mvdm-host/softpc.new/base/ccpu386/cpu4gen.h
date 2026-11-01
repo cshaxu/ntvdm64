@@ -763,6 +763,11 @@ IMPORT	void	c_setEIP	IPT1(IU32, val);
 #else	/* CCPU */
 #line 478
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 480
 
@@ -775,6 +780,11 @@ IMPORT	ISM32	c_setCS	IPT1(IU16, val);
 #else	/* CCPU */
 #line 488
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 490
 
@@ -784,6 +794,11 @@ IMPORT	ISM32	c_setSS	IPT1(IU16, val);
 #else	/* CCPU */
 #line 495
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 497
 
@@ -793,6 +808,11 @@ IMPORT	ISM32	c_setDS	IPT1(IU16, val);
 #else	/* CCPU */
 #line 502
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 504
 
@@ -1754,6 +1774,11 @@ IMPORT	IU32	c_getCR3	IPT0();
 #else	/* CCPU */
 #line 985
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 987
 
@@ -1766,6 +1791,11 @@ IMPORT	ISM32	c_getCF	IPT0();
 #else	/* CCPU */
 #line 995
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 997
 
@@ -1775,6 +1805,11 @@ IMPORT	ISM32	c_getPF	IPT0();
 #else	/* CCPU */
 #line 1002
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1004
 
@@ -1784,6 +1819,11 @@ IMPORT	ISM32	c_getAF	IPT0();
 #else	/* CCPU */
 #line 1009
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1011
 
@@ -1793,6 +1833,11 @@ IMPORT	ISM32	c_getZF	IPT0();
 #else	/* CCPU */
 #line 1016
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1018
 
@@ -1802,6 +1847,11 @@ IMPORT	ISM32	c_getSF	IPT0();
 #else	/* CCPU */
 #line 1023
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1025
 
@@ -1811,6 +1861,11 @@ IMPORT	ISM32	c_getTF	IPT0();
 #else	/* CCPU */
 #line 1030
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1032
 
@@ -1820,6 +1875,11 @@ IMPORT	ISM32	c_getIF	IPT0();
 #else	/* CCPU */
 #line 1037
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1039
 
@@ -1829,6 +1889,11 @@ IMPORT	ISM32	c_getDF	IPT0();
 #else	/* CCPU */
 #line 1044
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1046
 
@@ -3080,6 +3145,11 @@ IMPORT	void	c_setRegConstraint	IPT2(IU32, regId, IU8, constraintType);
 #else	/* CCPU */
 #line 1705
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1707
 
@@ -3088,6 +3158,11 @@ IMPORT	void	c_setRegConstraint	IPT2(IU32, regId, IU8, constraintType);
 #else	/* CCPU */
 #line 1711
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1713
 
@@ -3097,6 +3172,11 @@ IMPORT	void	c_trashIntelRegisters	IPT0();
 #else	/* CCPU */
 #line 1718
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1720
 
@@ -3105,6 +3185,11 @@ IMPORT	void	c_trashIntelRegisters	IPT0();
 #else	/* CCPU */
 #line 1724
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1726
 
@@ -3113,6 +3198,11 @@ IMPORT	void	c_trashIntelRegisters	IPT0();
 #else	/* CCPU */
 #line 1730
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1732
 
@@ -3121,6 +3211,11 @@ IMPORT	void	c_trashIntelRegisters	IPT0();
 #else	/* CCPU */
 #line 1736
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1738
 
@@ -3129,6 +3224,11 @@ IMPORT	void	c_trashIntelRegisters	IPT0();
 #else	/* CCPU */
 #line 1742
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1744
 
@@ -3137,6 +3237,11 @@ IMPORT	void	c_trashIntelRegisters	IPT0();
 #else	/* CCPU */
 #line 1748
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1750
 
@@ -3145,6 +3250,11 @@ IMPORT	void	c_trashIntelRegisters	IPT0();
 #else	/* CCPU */
 #line 1754
 #error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
+#ifdef PROD
+#error Excluded original conditional branch
+#else
+#error Excluded original conditional branch
+#endif
 #endif	/* CCPU */
 #line 1756
 
