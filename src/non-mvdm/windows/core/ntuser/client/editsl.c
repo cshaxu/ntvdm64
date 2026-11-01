@@ -85,7 +85,7 @@ int SLIchToLeftXPos(
         return (-30000);
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
 
     if (ped->fNonPropFont)
@@ -204,7 +204,7 @@ void   SLGetClipRect(
     PSTR   pText;
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
 
     CopyRect(lpClipRect, &ped->rcFmt);
@@ -381,7 +381,7 @@ void SLDrawLine(
         return;
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
 
     // Reset ichStart to take care of the negative C widths
@@ -570,7 +570,7 @@ void SLDrawText(
         return;
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
 
     if (ichStart < ped->ichScreenStart )
@@ -742,7 +742,7 @@ BOOL SLScrollText(
         return (FALSE);
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
         /*
          * Calculate the new starting screen position
@@ -789,7 +789,7 @@ BOOL SLScrollText(
             ECUnlock(ped);
         }
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
 
     if (ped->ichScreenStart != newScreenStartX) {
@@ -1597,7 +1597,7 @@ ICH SLMouseToIch(
     LPSTR lpText;
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
 
     if (width <= ped->rcFmt.left) {
@@ -1922,7 +1922,7 @@ void SLSetFocus(
         hdc = ECGetEditDC(ped, TRUE);
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
         {
             bDoCaret = TRUE;
@@ -1976,7 +1976,7 @@ void SLKillFocus(
          * Destroy the caret (Win31/Chicago hides it first)
          */
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
               bKillCaret = TRUE;
 
@@ -1998,7 +1998,7 @@ void SLKillFocus(
         if (!ped->fNoHideSel && (ped->ichMinSel != ped->ichMaxSel)) {
             NtUserInvalidateRect(ped->hwnd, NULL, FALSE);
 #if 0
-/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
         }
     }
@@ -2168,7 +2168,7 @@ LONG SLEditWndProc(
         break;
 
 #ifdef SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
 
     case WM_KEYDOWN:
@@ -2178,7 +2178,7 @@ LONG SLEditWndProc(
          * lParam - modifiers such as repeat count etc. (not used)
          */
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
         SLKeyDown(ped, wParam, 0);
         break;
@@ -2343,7 +2343,7 @@ foo:
         }
         else
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
         goto PassToDefaultWindowProc;
         break;
@@ -2435,7 +2435,7 @@ foo:
         break;
 
 #if 0
-/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 
     default:

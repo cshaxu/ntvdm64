@@ -14,7 +14,7 @@
  */
 
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 #ifdef SEGMENTATION
@@ -44,5 +44,5 @@
 #include "trace.h"
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif

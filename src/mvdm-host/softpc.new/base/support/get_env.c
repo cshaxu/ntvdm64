@@ -36,7 +36,7 @@
 #endif
 
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 #ifndef NTVDM
@@ -57,7 +57,7 @@ LOCAL void setupVerboseGetenv IFN0()
 #ifdef	PROD
 		verboseGetenv = FALSE;
 #else	/* PROD */
-/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif	/* PROD */
 		env = host_getenv("VERBOSE_GETENV");
 		if (env)
@@ -71,7 +71,7 @@ LOCAL void setupVerboseGetenv IFN0()
 			how = "Setting";
 		}
 #ifndef	PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif	/* PROD */
 		firstGetenv = FALSE;
 	}
@@ -85,7 +85,7 @@ GLOBAL IBOOL IBOOLgetenv IFN2(char *, name, IBOOL, default_value)
         IBOOL value;
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 	value = default_value;
@@ -95,13 +95,13 @@ GLOBAL IBOOL IBOOLgetenv IFN2(char *, name, IBOOL, default_value)
 #ifdef NTVDM
             value = _stricmp(env, "TRUE") == 0;
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
         }
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 	return (value);
@@ -114,7 +114,7 @@ GLOBAL ISM32 ISM32getenv IFN2(char *, name, ISM32, default_value)
         ISM32 value;
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 	value = default_value;
@@ -125,12 +125,12 @@ GLOBAL ISM32 ISM32getenv IFN2(char *, name, ISM32, default_value)
 		if (ptr == env)	/* cannot do conversion */
                         value = default_value;
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
         }
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 	return (value);
 }
@@ -142,7 +142,7 @@ GLOBAL char *STRINGgetenv IFN2(char *, name, char *, default_value)
         char *value;
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 	value = default_value;
@@ -151,12 +151,12 @@ GLOBAL char *STRINGgetenv IFN2(char *, name, char *, default_value)
 	{
                 value = env;
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
         }
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 	return (value);
 }

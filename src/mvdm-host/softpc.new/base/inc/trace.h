@@ -69,7 +69,7 @@
 #define PTY_VERBOSE		0x2000000L /* Print Pesudo-terminal messages */
 #define GEN_DRVR_VERBOSE	0x4000000L /* Generic driver messages */
 #ifdef HERC
-/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
 #define IPC_VERBOSE		0x10000000L /* Interproc communication debug */
 #define LIM_VERBOSE		0x20000000L /* LIM messages */

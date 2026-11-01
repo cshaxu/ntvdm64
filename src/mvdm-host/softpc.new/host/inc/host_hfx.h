@@ -13,12 +13,12 @@
  */
 
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 #ifdef HFX
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #endif
 
 /*

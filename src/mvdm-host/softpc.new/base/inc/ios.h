@@ -44,7 +44,7 @@ typedef struct _extioentry {
 
 
 #ifdef HERC
-/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
 
 /*
@@ -309,7 +309,7 @@ typedef struct _extioentry {
 /* SoundBlaster I/O Ports */
 
 #ifdef SWIN_SNDBLST_NULL
-/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register.
 #endif
 
 /*
@@ -355,7 +355,7 @@ typedef struct _extioentry {
 #define AT_KEYB_ADAPTOR		26
 #define CMOS_ADAPTOR		27
 #ifdef HERC
-/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
 #if (NUM_SERIAL_PORTS > 2)
 #define COM3_ADAPTOR		29
@@ -390,13 +390,13 @@ typedef struct _extioentry {
 #else	/* NTVDM */
 
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else 		/* GISP_SVGA */
 
 /* Adapter for SoundBlaster Null Driver */
 
 #ifdef SWIN_SNDBLST_NULL
-/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register.
 #endif
 
 #ifndef IO_MAX_NUMBER_ADAPTORS
@@ -406,7 +406,7 @@ typedef struct _extioentry {
 #endif		/* GISP_SVGA */
 #endif	/* NTVDM */
 #else	/* SFELLOW */
-/* DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.
 #endif /*SFELLOW */
 
 /*
@@ -449,7 +449,7 @@ IMPORT void	io_define_inb
 );
 
 #ifdef SFELLOW
-/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #endif	/* SFELLOW */
 
 IMPORT void	io_define_in_routines
@@ -474,7 +474,7 @@ IMPORT void	io_define_outb
 );
 
 #ifdef SFELLOW
-/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #endif	/* SFELLOW */
 
 IMPORT void	io_define_out_routines
@@ -503,7 +503,7 @@ IMPORT void	io_init IPT0();
 
 /* Externs and macros for io_redefine_inb/outb */
 #ifdef MAC68K
-/* DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register.
 #else
 IMPORT char	Ios_in_adapter_table[];
 IMPORT char	Ios_out_adapter_table[];

@@ -47,7 +47,7 @@ typedef enum {EIGHT_BIT, SIXTEEN_BIT, THIRTY_TWO_BIT} SIZE_SPECIFIER;
 #endif
 
 #ifdef SOFTWINDOWS
-/* DIVERGENCE MVDM-HOST-DIV-529: SOFTWINDOWS platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: SOFTWINDOWS platform branch is not selected; see mirror register.
 #else
 #define SPC_PRODUCT_NAME "SoftPC"
 #endif
@@ -73,7 +73,7 @@ typedef enum {EIGHT_BIT, SIXTEEN_BIT, THIRTY_TWO_BIT} SIZE_SPECIFIER;
 /* ========================================================== */
 
 #ifdef A2CPU
-/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif /* A2CPU */
 
 #ifdef CCPU

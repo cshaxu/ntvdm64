@@ -14,7 +14,7 @@
 ]*/
 
 #ifdef BIT_ORDER1
-/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif /* BIT_ORDER1 */
 
 #ifdef BIT_ORDER2
@@ -391,7 +391,7 @@ typedef	union
 
 /* The Sequencer Registers */
 #ifdef BIT_ORDER1
-/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif /* BIT_ORDER1 */
 
 #ifdef BIT_ORDER2
@@ -1008,12 +1008,12 @@ struct extensions_controller
 extern void set_v7_fg_latch_byte IPT2(IU8, index, IU8, value);
 #define SET_FG_LATCH(n, val)	set_v7_fg_latch_byte(n, val)
 #else
-/* DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
 #endif	/* CPU_40_STYLE */
 #endif /* V7VGA */
 
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
  
 /* Global data structures to import into modules

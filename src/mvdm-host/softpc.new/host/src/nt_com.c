@@ -55,7 +55,7 @@ GLOBAL void host_com_unlock(int adapter);
 GLOBAL int host_com_open(int);
 
 #if 0
-/* DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #line 61 /* MVDM-HOST-DIV-497: preserve original diagnostic line numbers. */
 
@@ -739,7 +739,7 @@ GLOBAL CPU void host_com_close IFN1(int, adapter)
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
 #ifdef FIFO_ON
-/* DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register.
 #endif
 
 GLOBAL RXCPU VOID host_com_read IFN3(int, adapter, UTINY *, data, int *, error)
@@ -934,7 +934,7 @@ void SendDataToDriver(int adapter, char data)
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::::: Display error */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 972 /* MVDM-HOST-DIV-501: preserve original diagnostic line numbers. */
     /* tell base that the tx shift register is empty */
@@ -1712,7 +1712,7 @@ void CPU FlushTXBuffer(int adapter, FLUSHTYPE FlushReason)
 	if (error != ERROR_SUCCESS) {
 	    ClearCommError(current->handle, &error, NULL);
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 	}
 	tx_shift_register_empty(adapter);
@@ -1735,7 +1735,7 @@ void CPU FlushTXBuffer(int adapter, FLUSHTYPE FlushReason)
 	}
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     }
@@ -1756,7 +1756,7 @@ void CPU FlushTXBuffer(int adapter, FLUSHTYPE FlushReason)
 	{
 	    ClearCommError(current->handle,&error,NULL);
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 	}
     }
@@ -2136,5 +2136,5 @@ void CPU EmptyRXBuffer(int adapter)
 
 
 #if 0
-/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif

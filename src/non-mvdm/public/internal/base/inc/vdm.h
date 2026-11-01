@@ -115,7 +115,7 @@ typedef struct _VdmVirtualIca{
 
 /* XLATON */
 #if defined(_PC98_)
-/* DIVERGENCE OPENNT-HOST-136: _PC98_ branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-136: _PC98_ branch is not selected; see mirror register.
 #else  // !_PC98_
 #define  FIXED_NTVDMSTATE_SEGMENT   0x70
 #endif // _PC98_
@@ -167,7 +167,7 @@ typedef struct _VdmVirtualIca{
 /* XLATOFF */
 
 #if DBG
-/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else
 #define INITIAL_VDM_TIB_FLAGS (VDM_USE_DBG_VDMEVENT | VDM_BREAK_DEBUGGER)
 #endif
@@ -208,7 +208,7 @@ typedef struct _Vdm_FaultHandler {
 /* XLATON */
 // ==== CHANGED TO _VdmDpmiInfo
 #if 0
-/* DIVERGENCE OPENNT-HOST-129: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-129: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 
 typedef struct _VdmDpmiInfo {        /* VDMTIB */

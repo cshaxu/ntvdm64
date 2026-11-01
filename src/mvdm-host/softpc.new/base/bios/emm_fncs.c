@@ -2,7 +2,7 @@
 #include "host_def.h"
 
 #ifdef	SUN_VA
-/* DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif
 
 /*			INSIGNIA MODULE SPECIFICATION
@@ -90,7 +90,7 @@ AMMENDMENTS	:
 #include "timeval.h"
 #include "debug.h"
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #include "timer.h"
 #include <error.h>
@@ -98,7 +98,7 @@ AMMENDMENTS	:
 
 /*	Global Variables		*/
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 /*	Forward Declarations		*/
@@ -126,11 +126,11 @@ static unsigned short alt_map_segment,	/* segment address of map array	*/
 		      			/* in function 28		*/
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 /* 	Internal Function Declarations	*/
@@ -169,7 +169,7 @@ LOCAL void Increment_Address IPT4(unsigned short *,seg_or_page,
 			      unsigned long, increment_by,
 			      unsigned char, memory_type);
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 void (*emm_func[]) () = {
@@ -204,12 +204,12 @@ void (*emm_func[]) () = {
 	Prepare_Expanded_Memory_HW_For_Warm_Boot,
 	Enable_Disable_OSE_Function_Set_Functions
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 	};
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 /* Defintion of this is non-standard */
@@ -247,12 +247,12 @@ GLOBAL void emm_io IFN0()
 		func_names[func_num],getAX(),getBX(),getCX(),getDX());
 
 #ifdef EMM_DEBUG
-/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
 		(*emm_func[func_num])();	
 
 #ifdef EMM_DEBUG
-/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
 
 		if (getAH() != SUCCESS) {
@@ -303,11 +303,11 @@ GLOBAL void emm_init IFN0()
 	short	total_pages;
 
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 
 #ifdef	SUN_VA
-/* DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif
 	
 #if	defined(SUN_VA) || defined(NTVDM)
@@ -318,7 +318,7 @@ GLOBAL void emm_init IFN0()
 	offset68 = getDX();
 
 #ifdef	SUN_VA
-/* DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif	/* SUN_VA	*/
 #ifdef NTVDM	/* Similar to SUN_VA but without command line sizing */
 	if ((limSize = (SHORT)config_inquire(C_LIM_SIZE, NULL)) && get_no_phys_pages())
@@ -2217,7 +2217,7 @@ LOCAL void Get_Hardware_Configuration_Array IFN0()
 
 			write_intel_word(segment, offset, get_no_altreg_sets());
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 			offset += 2;
@@ -2451,7 +2451,7 @@ LOCAL void Alternate_Map_Register_Support IFN0()
     return;
 
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 }
@@ -2574,13 +2574,13 @@ GLOBAL void reset_emm_funcs IFN0()
 	alt_map_segment = 0;
 	alt_map_offset  = 0;
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 	return;
 }
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 #endif /* LIM */

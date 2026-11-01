@@ -142,7 +142,7 @@ GLOBAL IU8 *Start_of_M_area = NULL;
 GLOBAL PHY_ADDR Length_of_M_area = 0; /* DIVERGENCE(MVDM-HOST-DIV-055):
                                         guest physical byte count; see sas.h. */
 #ifdef BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #endif
 
 void	    (*temp_func) ();
@@ -264,7 +264,7 @@ GLOBAL PHY_ADDR highCheckAccess = 0;
 #endif /* !CHECK_ACCESS else */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* ndef PROD */
 
 
@@ -367,7 +367,7 @@ sas_init IFN1(PHY_ADDR, size)
 		IMPORT IU8 *CCPU_M;
 
 #ifdef BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
 		CCPU_M = Start_of_M_area;
 #endif				/* BACK_M */
@@ -382,7 +382,7 @@ sas_init IFN1(PHY_ADDR, size)
 
 	Length_of_M_area = size;
 #ifdef BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #endif
 
 	/* init the ROM (load the bios roms etc) */
@@ -1277,7 +1277,7 @@ c_GetLinAdd IFN1(PHY_ADDR, linAddr)
 		return(c_GetPhyAdd(phyAddr));
 	else {
 #ifndef	PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 		return(c_GetPhyAdd(0));	/* as good as anything! */
 	}
@@ -1320,7 +1320,7 @@ c_GetPhyAdd IFN1(PHY_ADDR, addr)
 	if (mvdm_softpc_physical_mapping_resolve(addr, &retVal))
 		return(retVal);
 #ifdef BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else 
 	return((IU8 *)((IHPE)Start_of_M_area + (IHPE)addr));
 #endif
@@ -1437,7 +1437,7 @@ biosDoInst IFN5(IU16, vCS, LIN_ADDR, vEIP, IU32, vEAX, IU16, vDS, IU32, vEDX)
 #ifdef	PROD
 		host_error(EG_OWNUP, ERR_QUIT, "biosDoInst: Virtualisation sequencing failure");
 #else
-/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif
 	}
 
@@ -1948,7 +1948,7 @@ LOCAL	void	c_sas_not_used	IFN0()
 {
 	always_trace0("c_sas_not_used called");
 #ifndef	PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 }
 

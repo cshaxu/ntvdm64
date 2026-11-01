@@ -187,14 +187,14 @@ PVOID AllocLookasideEntry(
          * Allocate a local structure.
          */
 #if DBG
-/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif // DBG
         if ((pEntry = UserLocalAlloc(0, pla->EntrySize)) == NULL)
             return NULL;
         }
     RtlZeroMemory(pEntry, pla->EntrySize);
 #if DBG
-/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif // DBG
 
     return pEntry;
@@ -213,7 +213,7 @@ void FreeLookasideEntry(
     PVOID pEntry)
 {
 #if DBG
-/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif // DBG
 
     //
@@ -225,7 +225,7 @@ void FreeLookasideEntry(
         RtlLeaveCriticalSection(&gcsLookaside);
     } else {
 #if DBG
-/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif // DBG
         UserLocalFree(pEntry);
     }

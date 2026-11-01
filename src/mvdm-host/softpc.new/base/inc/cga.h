@@ -20,12 +20,12 @@
  */
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 
 
 #ifdef BIT_ORDER1
-/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 
 #ifdef BIT_ORDER2
@@ -54,7 +54,7 @@ typedef union                       /* Template for character attributes     */
  */
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 
 extern void cga_init	IPT0();

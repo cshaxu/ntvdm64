@@ -73,18 +73,18 @@
 #include "debug.h"
 #include "video.h"
 #ifdef NOVELL
-/* DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
 #endif
 #include "emm.h"
 #include "quick_ev.h"
 #include "keyba.h"
 #include "rom.h"
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
 #include "hunter.h"
 #ifdef LICENSING
-/* DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register.
 #endif /* LICENSING */
 
 /* Exports */
@@ -96,7 +96,7 @@
 VIDEOFUNCS	*working_video_funcs;
 KEYBDFUNCS	*working_keybd_funcs;
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 HOSTMOUSEFUNCS	*working_mouse_funcs;
 
@@ -110,7 +110,7 @@ IMPORT void DPMI_reset IPT0();
 #endif /* DPMI */
 
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 
 #if	defined(DELTA) && defined(A2CPU)
@@ -151,7 +151,7 @@ IMPORT	CHAR	*host_get_years IPT0();
 IMPORT	CHAR	*host_get_copyright IPT0();
 
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 
 #define STATUS_PORT   0x64   /* keyboard status port */
@@ -196,7 +196,7 @@ static void setup_ivt()
 	sas_storew(int_addr(0xE), DISKETTE_INT_OFFSET);
 	sas_storew(int_addr(0xE) + 2, DISKETTE_INT_SEGMENT);
 #ifdef	GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else		/* GISP_SVGA */
 	sas_storew(int_addr(0x10), VIDEO_IO_OFFSET);
 	sas_storew(int_addr(0x10) + 2, VIDEO_IO_SEGMENT);
@@ -327,7 +327,7 @@ half_word *low, *high;
     {
     case CGA:
 #ifdef CGAMONO
-/* DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register.
 #endif
 	high_switches |= (PPI_CGA_80_COLUMN);
 	break;
@@ -344,7 +344,7 @@ half_word *low, *high;
 #endif
     case HERCULES:
 #ifdef HERC
-/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
     default:
 	break;
@@ -389,15 +389,15 @@ LOCAL void announce_variant IFN0()
 #endif /* CCPU */
 
 #ifdef A2CPU
-/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif /* A2CPU */
 
 #ifdef A3CPU
-/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 #endif /* A3CPU */
 
 #ifdef GISP_CPU
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif /* GISP_CPU */
 
 #if (defined(SPC386) && !defined(SPC486))
@@ -409,11 +409,11 @@ LOCAL void announce_variant IFN0()
 #endif /* SPC486 */
 
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
 
 #ifdef A_VID
-/* DIVERGENCE MVDM-HOST-DIV-535: A_VID branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-535: A_VID branch is not selected; see mirror register.
 #endif /* A_VID */
 
 #ifdef C_VID
@@ -425,11 +425,11 @@ LOCAL void announce_variant IFN0()
 #endif /* MSWDVR */
 
 #ifdef BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #endif /* BACK_M */
 
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 
 #ifdef DPMI
@@ -437,15 +437,15 @@ LOCAL void announce_variant IFN0()
 #endif /* DPMI */
 
 #ifdef IRET_HOOKS
-/* DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
 #endif /* IRET_HOOKS */
 
 #ifdef SECURE
-/* DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
 #endif
 
 #ifdef SYNCH_TIMERS
-/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #endif
 
 	p = buff;
@@ -496,7 +496,7 @@ LOCAL void announce_variant IFN0()
 void reset()
 {
 #ifndef	NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 	EQUIPMENT_WORD equip_flag;
 	half_word low_switches, high_switches;
@@ -707,14 +707,14 @@ void reset()
 	 * NTVDM: if soft reset We will never get here...
 	 */
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 
 	/*
 	 * Shutdown ODI network driver in case it was running
 	 */
 #ifdef NOVELL
-/* DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
 #endif
 
         /* Shutdown SmartCopy */
@@ -734,7 +734,7 @@ void reset()
 #endif /* !defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX)) */
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 
 	ica0_init();
@@ -780,7 +780,7 @@ void reset()
                 equip_flag.bits.max_diskette++;
 	}
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 
 	sas_storew(EQUIP_FLAG, equip_flag.all);
@@ -791,12 +791,12 @@ void reset()
 	gfxAdapt = (ULONG)config_inquire(C_GFX_ADAPTER, NULL);
 
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif          /* GISP_SVGA */
 
 	gvi_init((half_word) gfxAdapt);
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 
 	SWTMR_init_funcptrs ();
@@ -811,7 +811,7 @@ void reset()
 	video_init();
 
 #ifdef SWIN_SNDBLST_NULL
-/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register.
 #endif /* SWIN_SNDBLST_NULL */
 
 #ifndef NTVDM	/* No signon for NTVDM - transparent integration */
@@ -874,7 +874,7 @@ void reset()
 	}
 
 #ifdef LICENSING
-/* DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register.
 #endif /* LICENSING */
 
 	/* skip another 1 line */
@@ -887,7 +887,7 @@ void reset()
 	 * sort of a SoftPC they are running.
 	 */
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 
 #endif	/* NTVDM */
@@ -928,11 +928,11 @@ void reset()
 #endif /* DELTA && A2CPU */
 
 #ifdef SOFTWIN_API
-/* DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register.
 #endif
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 
 #ifdef LIM
@@ -951,7 +951,7 @@ void reset()
 	 */
 
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /*GISP_SVGA */
 	if (soft_reset)			/* if LIM already initialised */
 		free_expanded_memory();
@@ -964,7 +964,7 @@ void reset()
 			host_error(EG_EXPANDED_MEM_FAILURE, ERR_QU_CO, NULL);
 		}
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /*GISP_SVGA */
 #endif /* !SUN_VA & !NTVDM */
 
@@ -975,7 +975,7 @@ void reset()
 #endif
 
 #ifndef	NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 	/* Do diskette BIOS POST */

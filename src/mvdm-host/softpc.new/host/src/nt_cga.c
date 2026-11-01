@@ -40,7 +40,7 @@
 #include "nt_det.h"
 
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
 
 /* Externs */
@@ -74,7 +74,7 @@ static unsigned int cga_med_graph_lut1_huge[256];
 // for risc we have 4 bytes per character because of vga interleaving
 //
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #else
 #define TEXT_INCVAL 4
 #endif
@@ -97,12 +97,12 @@ void nt_init_text()
     sub_note_trace0(HERC_HOST_VERBOSE, "nt_init_text");
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif	//X86GFX
     closeGraphicsBuffer(); /* Tim Oct 92 */
 
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif  //MONITOR
 }
 
@@ -145,7 +145,7 @@ void nt_init_cga_colour_med_graph()
                         byte4 = ( i & 0xC0 ) >> 6;
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif /* BIGEND */
 
 #ifdef LITTLEND
@@ -931,5 +931,5 @@ void nt_cga_colour_hi_graph_huge(int offset, int screen_x, int screen_y,
 }
 
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */

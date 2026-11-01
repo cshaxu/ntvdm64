@@ -75,7 +75,7 @@
 #define AC_MODE_CONTROL_REG	16
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #else /* !PROD */
 #define FullScreenTrace0(s)
 #define FullScreenTrace1(s ,p0)
@@ -117,7 +117,7 @@ typedef struct
 IMPORT HANDLE MainThread;
 IMPORT DWORD stateLength;
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif
 IMPORT PVOID textState; //Tim Nov 92.
 IMPORT WCHAR_STRING videoSection;
@@ -127,14 +127,14 @@ IMPORT HANDLE StartTToG;
 IMPORT HANDLE EndTToG;
 IMPORT BOOL BiosModeChange;
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #endif /* PROD */
 
 extern DWORD savedScreenState;
 extern BOOL  ConsoleInitialised;
 extern BOOL  ConsoleNoUpdates;
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif /* X86GFX */
 extern BOOL blocked_in_gfx_mode;
 
@@ -174,7 +174,7 @@ IMPORT VOID ResetConsoleState IPT0();
 IMPORT int  getModeType(VOID);
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif
 
 

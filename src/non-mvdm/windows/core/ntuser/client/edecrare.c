@@ -20,7 +20,7 @@ typedef BOOL (*PFNABCWIDTHS)(HDC, UINT, UINT, LPABC);
 typedef BOOL (*PFNCHARWIDTH)(HDC, UINT, UINT, LPINT);
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
 
 int ECGetCaretWidth(BOOL fMultiLine)
@@ -281,7 +281,7 @@ BOOL ECCreate(
     ECReleaseEditDC(ped, hdc, TRUE);
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
     return TRUE;
 }
@@ -336,7 +336,7 @@ void ECNcDestroyHandler(
             UserLocalFree(ped->charWidthBuffer);
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
 
         /*
@@ -384,7 +384,7 @@ void ECSetPasswordChar(
         ECReleaseEditDC(ped, hdc, TRUE);
     }
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
 
     if (pwchar)
@@ -708,7 +708,7 @@ void   ECSetFont(
 
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
 
     if (!hfont) {

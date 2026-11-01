@@ -95,7 +95,7 @@ GLOBAL INT		(*getIOPL_func ) ();
 #endif
 
 #ifdef A3CPU
-/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 #endif
 
 GLOBAL word		(*getSTATUS_func) ();
@@ -236,11 +236,11 @@ GLOBAL VOID load_sw_cpu_access_functions()
 
 /* Temporary 3.0 stubs... */
 #ifdef A3CPU
-/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 #endif /* A3CPU */
 
 #else /* CPU_40_STYLE */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 
 
@@ -253,5 +253,5 @@ GLOBAL VOID load_sw_cpu_access_functions()
 
 
 #ifdef SUN_VA
-/* DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif SUN_VA

@@ -3298,7 +3298,7 @@ ULONG FASTCALL WU32ValidateRgn(PVDMFRAME pFrame)
 --*/
 
 #if 0
-/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 
 

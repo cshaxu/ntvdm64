@@ -79,7 +79,7 @@ GLOBAL void ms_bop ()		    /* called from MS_bop_5 ie bop 0x55 */
 LOCAL void ms_not_a_bop()
 {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 }
 

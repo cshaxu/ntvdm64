@@ -386,7 +386,7 @@ IMPORT SYSTEM_TABLE_ADDRESS_REGISTER	CCPU_STAR[];
 #define SET_SF(x)	CCPU_FLAGS[7] = (x)
 #define SET_TF(x)	CCPU_FLAGS[8] = (x)
 #ifdef SFELLOW
-/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else
 #define SET_IF(x)	CCPU_FLAGS[9] = (x)
 #endif /* SFELLOW */

@@ -590,7 +590,7 @@ Return Value:
     //BUGBUG turn off task bits
     SaveEFLAGS &= ~0x4000;
 #if !defined(CPU_40_STYLE)
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 
     if (!(getMSW() & MSW_PE)) {
@@ -631,7 +631,7 @@ Return Value:
             /* PushInt changes DX after loading the return EIP into EDX. */
             *(PDWORD16)(VdmStackPointer-8) = (getEIP() & 0xffff0000UL) | getCS();
 #else
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
             *(PDWORD16)(VdmStackPointer-12) = getEIP();
         } else {
@@ -656,7 +656,7 @@ Return Value:
         setCS(Handlers[IntNumber].CsSelector);
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
     }
 
@@ -832,7 +832,7 @@ Routine Description:
         //
         if (!BuildStackFrame(6, &VdmStackPointer, &NewSP)) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
             DpmiFaultHandler(STACK_FAULT, 0);
             return;
@@ -935,7 +935,7 @@ Routine Description:
 
         if (!BuildStackFrame(3, &VdmStackPointer, &NewSP)) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
             DpmiFaultHandler(STACK_FAULT, 0);
             return;
@@ -1096,7 +1096,7 @@ Return Value:
         SaveEIP);
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     DBGTRACE(DPMI_DISPATCH_FAULT, IntNumber, 0, 0);
@@ -1199,7 +1199,7 @@ BuildStackFrameWithWidth(
     BOOL WideFrame,
     BOOL NativePushInt,
 #else
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
     PUCHAR *pVdmStackPointer,
     ULONG *pNewSP
@@ -1268,7 +1268,7 @@ Notes:
     #if defined(CPU_40_STYLE)
     if (WideFrame) {
     #else
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
     #endif
         StackOffset = StackUnits*sizeof(DWORD);
     } else {
@@ -1490,7 +1490,7 @@ Return Value:
 #if defined(CPU_40_STYLE) && defined(CCPU)
     pCode = Sim32pGetVDMPointerWithLinear(SegCS<<16, TRUE, &CodeBase);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif
 
     /* The original x86 monitor always exposed an alias for an active

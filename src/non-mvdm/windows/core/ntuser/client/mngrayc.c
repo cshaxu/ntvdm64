@@ -145,7 +145,7 @@ BOOL ClientDrawState(
              * we're supporting GrayString().
              */
 #if 0 // This will get turned on if/when we change GrayString to tie
-/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
             break;
 
@@ -181,7 +181,7 @@ BOOL ClientDrawState(
 
         case DST_COMPLEX:
 #if 0
-/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
             break;
 

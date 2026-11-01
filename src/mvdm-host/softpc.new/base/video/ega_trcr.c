@@ -12,7 +12,7 @@
 
 
 #ifdef EGA_DUMP
-/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #endif
 
 #endif	/* !NTVDM | (NTVDM & !X86GFX) */

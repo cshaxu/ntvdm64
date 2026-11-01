@@ -189,7 +189,7 @@ IMPORT VOID PrioWaitIfIdle(half_word);
 void idle_kybd_poll();
 void idle_tick();
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 
@@ -199,7 +199,7 @@ void idle_tick();
    [5.2.1 INTERNAL DATA DEFINITIONS                                     */
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else
 #include <vdm.h>
   
@@ -236,7 +236,7 @@ PURPOSE         :       called from keyboard BIOS as result of
 
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
 
 #ifdef NTVDM
@@ -273,7 +273,7 @@ void idle_kybd_poll(void)
 	nCharPollsPerTick++;
 }
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 /*
@@ -298,7 +298,7 @@ void idle_tick(void)
 	    ExternalWaitRequest = FALSE;
 	}
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
         if (IdleNoActivity)
         {
@@ -332,7 +332,7 @@ void idle_tick(void)
 }
 
 #else  /* NTVDM */
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 /*
@@ -349,7 +349,7 @@ void idetect (event)
 int event;
 {
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 	switch (event)
@@ -358,13 +358,13 @@ int event;
 	case IDLE_WAITIO:
 #ifdef NTVDM
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 		IdleNoActivity = 1;
                 PrioWaitIfIdle(10);
 		break;
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 		/* fall thru to idle init */
 
@@ -375,7 +375,7 @@ int event;
 #ifdef NTVDM
                 IdleNoActivity = 1;
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 		break;
 
@@ -406,7 +406,7 @@ int flag;
 {
 #ifdef NTVDM
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
     if (IdleDisabledFromPIF)    /* configured setting overrides normal control*/
 	ienabled = 0;
@@ -414,6 +414,6 @@ int flag;
 	ienabled = flag;
 #endif /* PIG */
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
 }

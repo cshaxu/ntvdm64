@@ -50,7 +50,7 @@ LONG DefWindowProcWorker(
     int icolFore;
     PWND pwndParent;
 #ifdef FE_IME
-/* DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif
 
 #ifdef DEBUG
@@ -390,7 +390,7 @@ LONG DefWindowProcWorker(
         break;
 
 #if defined(FE_IME) // DefWindowProcWorker()
-/* DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif
 
     }

@@ -979,7 +979,7 @@ typedef struct {
     PLLC_CCB Queue;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 } LOCAL_BUSY_INFO;

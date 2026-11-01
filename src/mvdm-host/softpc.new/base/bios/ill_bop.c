@@ -15,7 +15,7 @@
  */
 
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 #ifdef SEGMENTATION
@@ -46,16 +46,16 @@
 #include "debug.h"
 
 #ifndef	PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif	/* PROD */
 
 #if defined(NTVDM) && defined(MONITOR)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
 void illegal_bop()
 {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 }

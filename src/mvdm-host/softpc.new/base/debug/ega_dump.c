@@ -32,6 +32,6 @@ SccsID = "@(#)ega_dump.c	1.12 3/9/94 Copyright Insignia Solutions Ltd."
 
 #ifdef	EGG
 #ifndef	PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif	/* PROD */
 #endif	/* EGG */

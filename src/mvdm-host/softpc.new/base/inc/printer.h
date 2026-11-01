@@ -39,7 +39,7 @@ extern	void printer_status_changed();
 #endif
 
 #ifdef PS_FLUSHING
-/* DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
 
 /*

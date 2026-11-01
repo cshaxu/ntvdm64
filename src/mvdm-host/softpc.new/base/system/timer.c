@@ -32,7 +32,7 @@
  */
 
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 #ifdef SEGMENTATION
@@ -71,11 +71,11 @@
 #include "quick_ev.h"
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 
 #ifdef NTVDM
@@ -111,15 +111,15 @@ ULONG EoiIntsPending=0;
 ULONG EoiDelayInUse=0;
 int ticks_blocked = 0;
 #else /* NTVDM */
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 #ifdef HUNTER			/* Only needed for HUNTER */
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 int timer_int_enabled;		/* Whether Bios timer ints are required */
 
@@ -243,7 +243,7 @@ typedef struct {
 	int		freezeCounter;
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 	unsigned int	delay;
@@ -361,7 +361,7 @@ LOCAL void startCounting IPT0();
 #ifdef NTVDM
 unsigned long updateCount(void);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 LOCAL unsigned  short bin_to_bcd IPT1(unsigned long, val);
 LOCAL word bcd_to_bin IPT1(word, val);
@@ -370,23 +370,23 @@ LOCAL void Timer_init IPT0();
 LOCAL unsigned long timer_conv IPT1(word, count);
 LOCAL void issueIREQ0 IPT1(unsigned int, n);
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #ifdef SYNCH_TIMERS
-/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #else
 LOCAL void IdealTimeInit IPT0();
 #endif
 LOCAL void updateIdealTime IPT0();
 LOCAL void getIdealTime IPT1(struct host_timeval *, t);
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 LOCAL void setTriggerCond IPT0();
 LOCAL void WtComplete IPT0();
 LOCAL void counter_init IPT1(COUNTER_UNIT *, p);
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 #if defined(NTVDM)
@@ -405,7 +405,7 @@ word                RealTimeCountCounterZero;
 
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     /* for optimizing timer hardware interrupt generation */
@@ -449,17 +449,17 @@ LOCAL ULONG	n_rm_instrs_before_full_speed = 3000000;/* Nominal number of instruc
 LOCAL ULONG	adj_n_real_mode_ticks_before_full_speed = 0;/* The value which real_mode_ticks_in_a_row must reach
 							   before the hack is disabled */
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 #endif /* NTVDM */
 
 #ifndef PROD	/* Specific Timer change tracing that isn't timer_verbose */
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 #if !defined(NTVDM)
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 /*
@@ -496,7 +496,7 @@ SWTMR_init_funcptrs IFN0()
 	timer_tick_func			= SWTMR_time_tick;
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 }
 
@@ -508,7 +508,7 @@ SWTMR_time_tick IFN0()
      * Give the idle detector a chance to see if we are really idle.
      */
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
     /*
@@ -517,7 +517,7 @@ SWTMR_time_tick IFN0()
      */
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
     /* ideal time goes up by the number of timer clocks
@@ -564,18 +564,18 @@ void SWTMR_gate IFN2(io_addr, port, half_word, value)
 #ifdef  NTVDM
     host_ica_lock();
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
     emu_8253 (port, GATE_SIGNAL, value);
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 #ifdef NTVDM
     host_ica_unlock();
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 }
 
@@ -585,7 +585,7 @@ void SWTMR_inb IFN2(io_addr, port, half_word *, value)
 #ifdef NTVDM
     host_ica_lock();
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 
@@ -622,12 +622,12 @@ void SWTMR_inb IFN2(io_addr, port, half_word *, value)
 			break;
 	}
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #ifdef NTVDM
     host_ica_unlock();
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 }
@@ -651,13 +651,13 @@ void SWTMR_outb IFN2(io_addr, port, half_word, value)
 	else
 	    emu_8253 (port, WRITE_SIGNAL, value);
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 #ifdef NTVDM
     host_ica_unlock();
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 }
@@ -670,7 +670,7 @@ void SWTMR_outb IFN2(io_addr, port, half_word, value)
 /* --------------------------------------------------------------------------- */
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 
 #ifdef NTVDM
@@ -709,7 +709,7 @@ void ReinitIdealTime IFN1(struct host_timeval *, t)
 /* **************************************************************************** */
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 /*
@@ -850,7 +850,7 @@ LOCAL void controlWordReg IFN1(half_word, cwd)
 			pcu->tc = 0;
 			pcu->tickadjust = 0;
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 			m  = (cwd & 0xe)  >> 1;
@@ -915,7 +915,7 @@ LOCAL void loadCounter IFN0()
 {
         unsigned long modulo;
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 	/* set counter */
@@ -956,7 +956,7 @@ LOCAL void loadCounter IFN0()
 		if (maxback > max_backlog)
 		{
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 			max_backlog = maxback;
                 }
@@ -965,7 +965,7 @@ LOCAL void loadCounter IFN0()
         }
 
 #if defined(NTVDM) && !defined(PROD)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /*NTVDM & !PROD*/
 }
 
@@ -989,7 +989,7 @@ LOCAL void readCounter IFN0()
 	    countread = bin_to_bcd(countread);
 
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 	pcu->latchvaluemsb = countread >> 8;
@@ -1204,7 +1204,7 @@ LOCAL void outputWaveForm IFN5(unsigned int, delay, unsigned long, lowclocks,
 	unsigned long, hiclocks, int, lohi, int, repeat)
 {
 #ifdef DOCUMENTATION
-/* DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register.
 #endif /* DOCUMENTATION */
 	pcu->out.startLogicLevel = lohi;
 	pcu->out.repeatWaveForm = repeat;
@@ -1219,7 +1219,7 @@ LOCAL void outputWaveForm IFN5(unsigned int, delay, unsigned long, lowclocks,
 	pcu->delay = 0;
 
 #ifdef DOCUMENTATION
-/* DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register.
 #endif /* DOCUMENTATION */
 }
 
@@ -1234,7 +1234,7 @@ LOCAL void timestamp IFN0()
 	   host_GetSysTime(&LastTimeCounterZero);
 	   }
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 	/* Go and get the time since it was activated */
 	(*pcu->getTime)(&pcu->activationTime);
@@ -1555,7 +1555,7 @@ LOCAL UNBLOCK_FUNCTION CounterBufferLoaded IFN0()
 	loadCounter();
 
 #ifdef DOCUMENTATION
-/* DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register.
 #endif /* DOCUMENTATION */
 
 	if (pcu->gate != GATE_SIGNAL_LOW)
@@ -1657,7 +1657,7 @@ LOCAL unsigned long clocksSinceCounterActivated IFN1(struct host_timeval *, now)
     {
     case 0:  usec_val = now->tv_usec - first->tv_usec;
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 	     nclocks  = (usec_val * TIMER_CLOCK_DENOM) / TIMER_CLOCK_NUMER;
              break;
@@ -1670,7 +1670,7 @@ LOCAL unsigned long clocksSinceCounterActivated IFN1(struct host_timeval *, now)
 	     nclocks   = ((now->tv_usec - first->tv_usec) * TIMER_CLOCK_DENOM) / TIMER_CLOCK_NUMER;
 	     nclocks  += secs * (1000000L * TIMER_CLOCK_DENOM / TIMER_CLOCK_NUMER);
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 	     break;
     }
@@ -1683,7 +1683,7 @@ LOCAL unsigned long clocksSinceCounterActivated IFN1(struct host_timeval *, now)
 LOCAL void updateCounter IFN0()
 {
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
     unsigned long wrap;
 
@@ -1697,7 +1697,7 @@ LOCAL void updateCounter IFN0()
 #ifdef NTVDM
 		wrap = updateCount();
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 		if (wrap)
 			pcu->tickadjust = pcu->Count;
@@ -1709,7 +1709,7 @@ LOCAL void updateCounter IFN0()
 			else
 				issueIREQ0(1);
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 
 		}
@@ -1722,7 +1722,7 @@ LOCAL void updateCounter IFN0()
 #ifdef NTVDM
 		wrap = updateCount();
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 		if (wrap)
 		{
@@ -1734,7 +1734,7 @@ LOCAL void updateCounter IFN0()
 
 		}
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 		return;
 	}
@@ -1772,7 +1772,7 @@ LOCAL void timer_generate_int IFN1(long, n)
 	if (getPE()){
 		/* Prot mode tick... */
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 		hack_active = TRUE;
 		real_mode_ticks_in_a_row = 0;
@@ -1798,7 +1798,7 @@ LOCAL void timer_generate_int IFN1(long, n)
 		}else{
 			ticks_lost_this_time = TRUE;
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 		}
 	}else{
@@ -1807,7 +1807,7 @@ LOCAL void timer_generate_int IFN1(long, n)
 	}
 }
 #else /* GISP_CPU */
-/* DIVERGENCE MVDM-HOST-DIV-523: GISP_CPU alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-523: GISP_CPU alternative is not selected; see mirror register.
 #endif /* GISP_CPU */
 
 #endif /* DELAYED_INTS */
@@ -1959,7 +1959,7 @@ void TimerEoiHook(int IrqLine, int CallCount)
 
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 
@@ -1968,11 +1968,11 @@ LOCAL void issueIREQ0 IFN1(unsigned int, n)
 	IU16 int_delay;	/* delay before handling wrapped int */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 
 #ifndef PROD
@@ -1986,7 +1986,7 @@ LOCAL void issueIREQ0 IFN1(unsigned int, n)
        	if ( time_factor == 0 )
        		time_factor = 1;
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
 	pig_factor = 1;
 #endif
@@ -1997,7 +1997,7 @@ LOCAL void issueIREQ0 IFN1(unsigned int, n)
     {
 #ifndef PROD
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 			ticks_blocked = time_factor-1;
 #endif
@@ -2019,7 +2019,7 @@ LOCAL void issueIREQ0 IFN1(unsigned int, n)
                             TimerGenerateMultipleInterrupts(n);
                             }
 #else /* !NTVDM */
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* !NTVDM */
 #endif /* !DELAYED_INTS */
 		}
@@ -2192,7 +2192,7 @@ LOCAL void updateCount IFN3(unsigned long, ticks, unsigned long *, wrap,
 			ticks %= modulo;
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 		}
 	}
@@ -2269,7 +2269,7 @@ LOCAL unsigned long guess IFN0()
 		pcu->saveCount = pcu->Count;
 		pcu->timeFrig = ((ticksPerIdealInterval * 7) >> 3) / pcu->guessesPerHostTick;	   /* guesses over 7/8 of tick */
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 	}
 	if(pcu->guessesSoFar++ > pcu->guessesPerHostTick)
@@ -2280,7 +2280,7 @@ LOCAL unsigned long guess IFN0()
 	 */
 		pcu->timeFrig = (pcu->timeFrig >> 1) + 1;
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 	}
 	pcu->microtick += pcu->timeFrig;
@@ -2300,7 +2300,7 @@ LOCAL void throwaway IFN0()
 	if (!pcu->microtick)
 		return;
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 	pcu->Count = pcu->saveCount;
 	pcu->microtick = 0;
@@ -2412,7 +2412,7 @@ LOCAL void getHostSysTime IFN1(struct host_timeval *, t)
 		 */
 
 #ifndef	PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 		*t = idealtime;
 	}
@@ -2428,7 +2428,7 @@ LOCAL void getHostSysTime IFN1(struct host_timeval *, t)
 void	axe_ticks IFN1(int, ticks)
 {
 #ifndef	PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif	/* PROD */
 		ticks_blocked = ticks;
 }
@@ -2446,7 +2446,7 @@ void	axe_ticks IFN1(int, ticks)
 #endif
 
 #ifdef SYNCH_TIMERS
-/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #else
 
 LOCAL void IdealTimeInit IFN0()
@@ -2456,7 +2456,7 @@ LOCAL void IdealTimeInit IFN0()
 #endif
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 }
 
@@ -2470,7 +2470,7 @@ LOCAL void Timer_init IFN0()
 	timers[1].getTime = host_GetSysTime;    /* We don't really expect anyone to use timer 1 */
 	timers[2].getTime = host_GetSysTime;    /* Use real host time for timer 2 */
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 }
 
@@ -2479,12 +2479,12 @@ LOCAL void counter_init IFN1(COUNTER_UNIT *, p)
 	p->state = uninit;
 	p->initialCount = 0x10000L;	/* Avoid dividing by zero in updateCount()! */
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 }
 
 #if !defined (NTVDM)
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* !NTVDM */
 
 void timer_init IFN0()
@@ -2511,7 +2511,7 @@ void timer_init IFN0()
     Timer_init();
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else
     RegisterEOIHook(CPU_TIMER_INT, TimerEoiHook);
 #endif
@@ -2523,7 +2523,7 @@ void timer_init IFN0()
 	host_timer_init();
 
 #if !defined(NTVDM)
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* !NTVDM */
 }
 
@@ -2548,6 +2548,6 @@ void	timer_post IFN0()
 
 #ifdef DOCUMENTATION
 #ifndef	PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* nPROD */
 #endif /* DOCUMENTATION */

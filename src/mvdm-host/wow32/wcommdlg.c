@@ -33,7 +33,7 @@ MODNAME(wcommdlg.c);
 // Debugging macros
 //
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
 
 #define WCDDUMPCHOOSECOLORDATA16(p16)
@@ -479,7 +479,7 @@ Routine Description:
     }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     // This should be removed when all thunk functions appropiately fill these

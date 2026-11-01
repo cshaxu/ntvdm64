@@ -54,7 +54,7 @@
 #include "host_qev.h"
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 
 #include "host_gfx.h"
@@ -78,12 +78,12 @@ void time_strobe()
 #endif
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif    
 
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
         /*
@@ -104,7 +104,7 @@ void time_strobe()
             }
         }
 #ifdef	EGA_DUMP
-/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #endif
 }
 

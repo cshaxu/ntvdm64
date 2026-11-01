@@ -669,7 +669,7 @@ HBITMAP CreateScreenBitmap(
                 dib4Vga.bi.biBitCount = planes * bpp ? planes * bpp : oemInfo.BitCount;
 
 #if 0 // We use to do the dib-section create, but this breaks icons
-/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #else
 #line 689 /* OPENNT-HOST-128: retain original diagnostic line numbers. */
 

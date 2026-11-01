@@ -81,7 +81,7 @@ BOOL _GetClientRect(
     if (TestWF(pwnd, WFMINIMIZED) && !TestWF(pwnd, WFWIN40COMPAT)) {
 
 #ifdef WOW
-/* DIVERGENCE OPENNT-HOST-135: 16-bit WOW rectangle layout is not selected here; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-135: 16-bit WOW rectangle layout is not selected here; see mirror register.
 #else
         prc->left   = 0;
         prc->top    = 0;
@@ -92,7 +92,7 @@ BOOL _GetClientRect(
     } else {
 
 #ifdef WOW
-/* DIVERGENCE OPENNT-HOST-135: 16-bit WOW rectangle layout is not selected here; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-135: 16-bit WOW rectangle layout is not selected here; see mirror register.
 #else
         *prc = pwnd->rcClient;
         OffsetRect(prc, -pwnd->rcClient.left, -pwnd->rcClient.top);

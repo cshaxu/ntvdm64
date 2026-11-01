@@ -243,7 +243,7 @@ BOOL IsDialogMessageA(
 
     switch (lpmsg->message) {
 #ifdef FE_SB // IsDialogMessageA()
-/* DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
 #else
     case WM_CHAR:
     case EM_SETPASSWORDCHAR:
@@ -254,7 +254,7 @@ BOOL IsDialogMessageA(
     case WM_SYSDEADCHAR:
     case WM_MENUCHAR:
 #ifdef FE_IME // IsDialogMessageA()
-/* DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif // FE_IME
 
         RtlMBMessageWParamCharToWCS(lpmsg->message, (PDWORD)&lpmsg->wParam);
@@ -295,7 +295,7 @@ BOOL IsDialogMessageW(
     CheckLock(pwndDlg);
 
 #ifdef LATER // JerrySh - we shouldn't need this on the client-side
-/* DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
 #endif
 
     if (CallMsgFilter(lpMsg, MSGF_DIALOGBOX))

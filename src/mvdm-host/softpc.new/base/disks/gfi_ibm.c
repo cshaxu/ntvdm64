@@ -50,7 +50,7 @@ extern int megapkt;
  * ============================================================================
  */
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 /*
@@ -199,7 +199,7 @@ int drive, *changed, *status;
 	       pkt_ptr = (unsigned char *) &lndma;
 	       cmd_pkt[0] = WTDMA;
 #ifdef	BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
 	       /* Little endian e.g. VAX */
 	       cmd_pkt[1] = *(pkt_ptr+1);
@@ -269,7 +269,7 @@ int drive, *changed, *status;
 	int	i;
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 	   err = 1;
 	   if (ncom > 0 && ncom < 10)
@@ -318,7 +318,7 @@ int drive, *changed, *status;
 		    }
 		}
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 	    return(0);
 	}
@@ -354,7 +354,7 @@ static unsigned char *q;  /* spare ptr */
 	       lioff = (unsigned short) ioff;
 	       pkt_ptr = (unsigned char *) &lioff;
 #ifdef	BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
 	       /* Little endian e.g. VAX */
                 cmd_pkt[1] = *(q+1);
@@ -396,7 +396,7 @@ static unsigned char *q;  /* spare ptr */
 	    lioff = (unsigned short) ioff;
 	    pkt_ptr = (unsigned char *) &lioff;
 #ifdef	BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
        /* Little endian e.g. VAX */
         cmd_pkt[1] = *(q+1);

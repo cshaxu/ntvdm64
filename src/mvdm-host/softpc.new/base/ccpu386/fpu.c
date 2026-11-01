@@ -259,7 +259,7 @@ GLOBAL BOOL NpxException;
 */
 
 #ifdef SUN4
-/* DIVERGENCE MVDM-HOST-DIV-536: SUN4 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-536: SUN4 branch is not selected; see mirror register.
 #endif /* SUN4 */
 
 LOCAL IU32 NpxControl;
@@ -459,7 +459,7 @@ INTEL_COMP_NC
 };
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else	/* !BIGEND */
 LOCAL FPU_I64 BCDLowNibble[] = {
 {0x6fc10000, 0x002386f2},
@@ -1283,7 +1283,7 @@ GLOBAL VOID InitNpx IFN1(IBOOL, disabled)
 #ifndef SFELLOW
 		check_malloc(FPUStackBase, 8, FPSTACKENTRY);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.
 #endif	/* SFELLOW */
 		first = FALSE;
 	}

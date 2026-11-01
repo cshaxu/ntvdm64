@@ -45,7 +45,7 @@ BOOL XMSDispatch (ULONG iSvc)
 {
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     (apfnXMSSvc [iSvc])();

@@ -21,7 +21,7 @@
  */
 
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 #ifdef SEGMENTATION
@@ -43,7 +43,7 @@
 #include TypesH
 
 #ifdef SYSTEMV
-/* DIVERGENCE MVDM-HOST-DIV-529: SYSTEMV platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: SYSTEMV platform branch is not selected; see mirror register.
 #endif
 
 /*
@@ -63,7 +63,7 @@
 #include "ntvdm-exe/softpc/include/mvdm_softpc_termination.h"
 
 #if defined(NTVDM) && defined(MONITOR)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
 #if defined(NTVDM)
@@ -85,7 +85,7 @@ static sys_addr timeout_address[] = {
 #endif /* PRINTER */
 
 #if defined(NTVDM) && defined(MONITOR)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 /*
  * The printer bios consists of three functions:
@@ -205,7 +205,7 @@ void printer_io()
 }
 
 #if defined(NTVDM) && defined(MONITOR)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
 #if defined(NTVDM)

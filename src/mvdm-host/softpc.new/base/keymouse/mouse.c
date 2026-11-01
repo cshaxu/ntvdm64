@@ -28,7 +28,7 @@
  */
 
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 #ifdef SEGMENTATION
@@ -74,7 +74,7 @@ int button_right = 0;	/* Current state of right button */
 int delta_x = 0, delta_y = 0;	/* Current mouse delta moves */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 static half_word data1_reg = 0,
@@ -119,7 +119,7 @@ void mouse_inb IFN2(io_addr, port, half_word *, value)
 		break;
 	    default :
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 		break;
 	}
@@ -140,7 +140,7 @@ void mouse_inb IFN2(io_addr, port, half_word *, value)
     }
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 }
 
@@ -148,7 +148,7 @@ void mouse_inb IFN2(io_addr, port, half_word *, value)
 void mouse_outb IFN2(io_addr, port, half_word, value)
 {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 	/*
@@ -172,7 +172,7 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 
 			if ((value & 0x20) && ((mouse_mode_reg & 0x20) == 0)) {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 				/* clear the interrupt */
 				ica_clear_int(AT_CPU_MOUSE_ADAPTER, AT_CPU_MOUSE_INT);
@@ -203,7 +203,7 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 			/* ready for next read from queue, so send interrupt */
 			else if ((mouse_mode_reg & 0x20) && ((value & 0x20)==0)){
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 			}
 			/*
@@ -213,7 +213,7 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 			switch (value & 0x7) {
 			case 0x0 :		/* 0 Hz INTR low */
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 				ica_clear_int(AT_CPU_MOUSE_ADAPTER, AT_CPU_MOUSE_INT);
 				break;
@@ -243,7 +243,7 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 			    {
 				loadsainterrupts--;
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 				/*
 				** AT version is asking for a 100 interrupts.
@@ -256,12 +256,12 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 				break;
 			case 0x5: /* reserved */
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 				break;
 			case 0x6 :		/* 0 Hz INTR hi */
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 				ica_hw_interrupt(AT_CPU_MOUSE_ADAPTER,AT_CPU_MOUSE_INT,1);
 				break;
@@ -269,7 +269,7 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 				break;
 			default:
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 				break;
 
@@ -283,7 +283,7 @@ void mouse_outb IFN2(io_addr, port, half_word, value)
 		else
 		if ((address_reg & 0x07) == INTERFACE_CONTROL_REG){
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 		}
 
@@ -353,7 +353,7 @@ void mouse_init IFN0()
     int p;
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     mouse_inb_toggle = 0;
@@ -372,7 +372,7 @@ void mouse_init IFN0()
 #endif
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
     }
     host_deinstall_host_mouse();

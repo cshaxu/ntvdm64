@@ -75,7 +75,7 @@ VOID demDasdInit(VOID)
 VOID demAbsRead (VOID)
 {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
     demAbsReadWrite(FALSE);
 }
@@ -107,7 +107,7 @@ VOID demAbsRead (VOID)
 VOID demAbsWrite(VOID)
 {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
     demAbsReadWrite(TRUE);
 }
@@ -146,7 +146,7 @@ VOID demAbsReadWrite(BOOL IsWrite)
 	return;
     }
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     if (IsWrite)
@@ -166,7 +166,7 @@ VOID demAbsReadWrite(BOOL IsWrite)
    if (SectorsReturned != Sectors) {
 	LastError = GetLastError();
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 	setAX(demWinErrorToDosError(LastError));
 	setCF(1);

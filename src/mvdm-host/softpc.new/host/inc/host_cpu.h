@@ -71,7 +71,7 @@ typedef union
     } reg;
 
 #ifdef A2CPU
-/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif A2CPU
 
 /*
@@ -83,7 +83,7 @@ extern word m_s_w;
 
 #ifndef EGATEST
 #ifdef A2CPU
-/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif A2CPU
 
 
@@ -140,7 +140,7 @@ extern word m_s_w;
 #endif CCPU
 
 #ifdef A2CPU
-/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif A2CPU
 
 /*  common WRITE functions  */
@@ -195,7 +195,7 @@ extern word m_s_w;
 #endif CCPU
 
 #ifdef A2CPU
-/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif A2CPU
 #endif EGATEST
 
@@ -279,7 +279,7 @@ extern ISM32            (*getIOPL_func) (void);
 #endif CCPU
 
 #ifdef A2CPU
-/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif A2CPU
 
 
@@ -329,7 +329,7 @@ extern void             (*setIOPL_func) ();
 #endif CCPU
 
 #ifdef A2CPU
-/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif A2CPU
 
 
@@ -344,6 +344,6 @@ extern void             (*host_simulate_func) (void);
  *
  */
 #ifdef A2CPU
-/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif A2CPU
 

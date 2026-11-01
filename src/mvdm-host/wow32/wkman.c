@@ -1311,7 +1311,7 @@ DWORD W32RemoteThread(VOID)
         );
     if ( !NT_SUCCESS(Status) ) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
         return( 0 );
     }
@@ -1334,7 +1334,7 @@ DWORD W32RemoteThread(VOID)
 
     if ( !NT_SUCCESS(Status) ) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
         return( 0 );
     }
@@ -1344,7 +1344,7 @@ DWORD W32RemoteThread(VOID)
     Status = NtClose( hThread );
     if ( !NT_SUCCESS(Status) ) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
         return( 0 );
     }
@@ -1836,7 +1836,7 @@ ULONG FASTCALL WK32RegisterShellWindowHandle(PVDMFRAME pFrame)
 
 // gwFirstCmdShow is no longer used, and is available.
 #if 0
-/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 
     ghwndShell = HWND32(parg16->hwndShell);

@@ -212,7 +212,7 @@ void MS_bop_1(void) {
     if ((hWOWDll = SafeLoadLibrary("WOW32")) == NULL)
     {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
         mvdm_softpc_report_wow_stage("load-failed",
             (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
@@ -224,7 +224,7 @@ void MS_bop_1(void) {
     if ((WOWInitEntry = (MYFARPROC)GetProcAddress(hWOWDll, "W32Init")) == NULL)
     {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
         mvdm_softpc_report_wow_stage("init-export-missing",
             (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
@@ -239,7 +239,7 @@ void MS_bop_1(void) {
     if ((WOWDispatchEntry = (MYFARPROC)GetProcAddress(hWOWDll, "W32Dispatch")) == NULL)
     {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
         mvdm_softpc_report_wow_stage("dispatch-export-missing",
             (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
@@ -252,7 +252,7 @@ void MS_bop_1(void) {
     if ((GetCommHandle = (GCHfn) GetProcAddress(hWOWDll, "GetCommHandle")) == NULL)
     {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
         FreeLibrary(hWOWDll);
         TerminateVDM();
@@ -262,7 +262,7 @@ void MS_bop_1(void) {
     if ((GetCommShadowMSR = (GCSfn) GetProcAddress(hWOWDll, "GetCommShadowMSR")) == NULL)
     {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
         FreeLibrary(hWOWDll);
         TerminateVDM();
@@ -275,7 +275,7 @@ void MS_bop_1(void) {
     if (!pW32HungAppNotifyThread)
     {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
         FreeLibrary(hWOWDll);
         TerminateVDM();
@@ -289,7 +289,7 @@ void MS_bop_1(void) {
     if ((*WOWInitEntry)() == FALSE)
     {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
         mvdm_softpc_report_wow_stage("init-failed",
             (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
@@ -320,7 +320,7 @@ void MS_bop_1(void) {
         (unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());
     (*WOWDispatchEntry)();
 #else
-/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif	/* CPU_40_STYLE */
     /* S42 observation only: the original dispatcher has returned and CPU
      * state remains entirely owned by the original BOP/CCPU sequence. */
@@ -347,7 +347,7 @@ void MS_bop_2(void) {
 void MS_bop_int3(void) {
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 }
 
@@ -407,7 +407,7 @@ ULONG DefaultVrInitialized() {
 //
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
 MYFARPROC VrDispatch;
 MYFARPROC VrInitialized = DefaultVrInitialized;
@@ -505,7 +505,7 @@ returnError:
         break;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
     }
 
@@ -527,7 +527,7 @@ BOOL IsVdmRedirLoaded() {
 BOOL LoadVdmRedir() {
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     if (VdmRedirLoaded) {
@@ -542,55 +542,55 @@ BOOL LoadVdmRedir() {
 
         if ((VrDispatch = (MYFARPROC)GetProcAddress(hVdmRedir, "VrDispatch")) == NULL) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
             goto closeAndReturnError;
         }
         if ((VrInitialized = (MYFARPROC)GetProcAddress(hVdmRedir, "VrInitialized")) == NULL) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
             goto closeAndReturnError;
         }
         if ((VrReadNamedPipe = (MYFARPROC)GetProcAddress(hVdmRedir, "VrReadNamedPipe")) == NULL) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
             goto closeAndReturnError;
         }
         if ((VrWriteNamedPipe = (MYFARPROC)GetProcAddress(hVdmRedir, "VrWriteNamedPipe")) == NULL) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
             goto closeAndReturnError;
         }
         if ((VrIsNamedPipeName = (MYFARPROC)GetProcAddress(hVdmRedir, "VrIsNamedPipeName")) == NULL) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
             goto closeAndReturnError;
         }
         if ((VrIsNamedPipeHandle = (MYFARPROC)GetProcAddress(hVdmRedir, "VrIsNamedPipeHandle")) == NULL) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
             goto closeAndReturnError;
         }
         if ((VrAddOpenNamedPipeInfo = (MYFARPROC)GetProcAddress(hVdmRedir, "VrAddOpenNamedPipeInfo")) == NULL) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
             goto closeAndReturnError;
         }
         if ((VrConvertLocalNtPipeName = (MYFARPROC)GetProcAddress(hVdmRedir, "VrConvertLocalNtPipeName")) == NULL) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
             goto closeAndReturnError;
         }
         if ((VrRemoveOpenNamedPipeInfo = (MYFARPROC)GetProcAddress(hVdmRedir, "VrRemoveOpenNamedPipeInfo")) == NULL) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
             goto closeAndReturnError;
         }
@@ -601,7 +601,7 @@ BOOL LoadVdmRedir() {
 closeAndReturnError:
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     CloseHandle(hVdmRedir);
@@ -707,7 +707,7 @@ void MS_bop_A(void)
         if (control == 1)
             WakeUpNow();
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 }
 
@@ -761,7 +761,7 @@ void MS_bop_E(void)
        }
    else {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
        }
 }
@@ -924,7 +924,7 @@ void ISV_DeRegisterModule (void)
     Handle = (ULONG)getAX();
     if (Handle == 0 || Handle > MAX_ISV_BOP){
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
     TerminateVDM();
     return;
@@ -945,7 +945,7 @@ void ISV_DispatchCall (void)
     Handle = (ULONG)getAX();
     if (Handle == 0 || Handle > MAX_ISV_BOP){
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
     TerminateVDM();
     return;

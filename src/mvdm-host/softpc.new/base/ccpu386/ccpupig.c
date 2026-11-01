@@ -13,5 +13,5 @@ C CPU <-> Pigger Interface
 #include <host_def.h>
 
 #ifdef	PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */

@@ -42,7 +42,7 @@ int FindMnemChar(
         while (chc = *lpstr++) {
             if (((WCHAR)CharLower((LPWSTR)(DWORD)(UTCHAR)chc) == CH_PREFIX)
 #ifdef KANJI
-/* DIVERGENCE OPENNT-HOST-132: KANJI branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: KANJI branch is not selected; see mirror register.
 #endif
             ) {
                 chnext = (WCHAR)CharLowerW((LPWSTR)(DWORD)(UTCHAR)*lpstr);
@@ -53,7 +53,7 @@ int FindMnemChar(
                     return 0x01;
                 else {
 #ifdef KANJI
-/* DIVERGENCE OPENNT-HOST-132: KANJI branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: KANJI branch is not selected; see mirror register.
 #else
                     return 0x00;
 #endif
@@ -311,7 +311,7 @@ PWND xxxGotoNextMnem(
                      * Delay
                      */
 #ifdef LATER
-/* DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
 #else
                     Sleep(1);
 #endif

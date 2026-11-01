@@ -55,13 +55,13 @@ ULONG iSvc;
     iSvc = CurrentISVC;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif // DBG
 
     (apfnSVC [iSvc])();
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
     return;
 }
@@ -115,7 +115,7 @@ ULONG ulErrCode;
         && ulErrCode != ERROR_WRONG_DISK )
        {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
         if (bSetRegs) {
             setAX((USHORT)ulErrCode);
@@ -140,7 +140,7 @@ ULONG ulErrCode;
         pHardErrPacket->vhe_HrdErrCode =  (UCHAR)ulErrCode;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
         // Save Away Information for possible retry operation
         demSaveHardErrInfo ();

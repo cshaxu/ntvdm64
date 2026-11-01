@@ -111,7 +111,7 @@ GLOBALS		  :	uses EGA_GRAPH struct, specially display_state to
 #include	"host_gfx.h"
 
 #ifdef GORE
-/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
 
 /* [3.1.2 DECLARATIONS]                                                 */
@@ -121,7 +121,7 @@ GLOBALS		  :	uses EGA_GRAPH struct, specially display_state to
 #include	"egamode.h"
 
 #ifdef GISP_SVGA 
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 
 /*
@@ -191,7 +191,7 @@ IMPORT	DISPLAY_MODE	choose_mode[];
 /* [5.2.2 INTERNAL PROCEDURE DEFINITIONS]				*/
 
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 
 static	void	set_update_routine(mode)
@@ -205,7 +205,7 @@ DISPLAY_MODE	mode;
 	note_display_state1("VGA set_update_routine(%s)", get_mode_string(mode) );
 
 #if defined(NTVDM) && defined(MONITOR)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* MONITOR */
 /* NTVDM monitor: All text monitor cases dealt with. For frozen graphics */
 /* now fall through to do decode to correct paint routines per mode */
@@ -217,7 +217,7 @@ DISPLAY_MODE	mode;
 		case CGA_TEXT_80_SP_WR:
 			assert0( is_it_text(), "In text memory mode, but not in alpha mode !!" );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else /* GISP_SVGA */
 			set_gfx_update_routines( ega_wrap_split_text_update, SIMPLE_MARKING, NO_SCROLL );
 #endif /* GISP_SVGA */
@@ -229,7 +229,7 @@ DISPLAY_MODE	mode;
 		case CGA_TEXT_80_SP:
 			assert0( is_it_text(), "In text memory mode, but not in alpha mode !!" );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else /* GISP_SVGA */
 			set_gfx_update_routines( ega_split_text_update, SIMPLE_MARKING, NO_SCROLL );
 #endif /* GISP_SVGA */
@@ -239,7 +239,7 @@ DISPLAY_MODE	mode;
 		case EGA_TEXT_80_WR:
 			assert0( is_it_text(), "In text memory mode, but not in alpha mode !!" );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else /* GISP_SVGA */
 			set_gfx_update_routines( ega_wrap_text_update, SIMPLE_MARKING, NO_SCROLL );
 #endif /* GISP_SVGA */
@@ -255,7 +255,7 @@ DISPLAY_MODE	mode;
 			}
 #else
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else /* GISP_SVGA */
 			set_gfx_update_routines( ega_text_update, SIMPLE_MARKING, TEXT_SCROLL );
 #endif /* GISP_SVGA */
@@ -266,7 +266,7 @@ DISPLAY_MODE	mode;
 		case CGA_TEXT_80_WR:
 			assert0( is_it_text(), "In text memory mode, but not in alpha mode !!" );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 			set_gfx_update_routines( ega_wrap_text_update, SIMPLE_MARKING, NO_SCROLL );
 			host_update_fonts();
@@ -275,7 +275,7 @@ DISPLAY_MODE	mode;
 		case CGA_TEXT_80:
 			assert0( is_it_text(), "In text memory mode, but not in alpha mode !!" );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 			assert1( get_screen_height() == 200, "screen height %d for text mode", get_screen_height() );
 			set_gfx_update_routines( text_update, SIMPLE_MARKING, TEXT_SCROLL );
@@ -284,14 +284,14 @@ DISPLAY_MODE	mode;
 		case CGA_MED:
 			assert0( !is_it_text(), "In graphics memory mode, but not in graphics mode !!" );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 			set_gfx_update_routines( cga_med_graph_update, CGA_GRAPHICS_MARKING, CGA_GRAPH_SCROLL );
 			break;
 		case CGA_HI:
 			assert0( !is_it_text(), "In graphics memory mode, but not in graphics mode !!" );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 			set_gfx_update_routines( cga_hi_graph_update, CGA_GRAPHICS_MARKING, CGA_GRAPH_SCROLL );
 			break;
@@ -300,7 +300,7 @@ DISPLAY_MODE	mode;
 		case EGA_LO_WR:
 			assert0( !is_it_text(), "In graphics memory mode, but not in graphics mode !!" );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 			set_gfx_update_routines( ega_wrap_graph_update, EGA_GRAPHICS_MARKING, NO_SCROLL );
 			break;
@@ -309,10 +309,10 @@ DISPLAY_MODE	mode;
 		case EGA_LO:
 			assert0( !is_it_text(), "In graphics memory mode, but not in graphics mode !!" );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 #ifdef GORE
-/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 			if (get_256_colour_mode())
 			    set_gfx_update_routines( vga_graph_update, EGA_GRAPHICS_MARKING, VGA_GRAPH_SCROLL );
@@ -325,7 +325,7 @@ DISPLAY_MODE	mode;
 		case EGA_LO_SP_WR:
 			assert0( !is_it_text(), "In graphics memory mode, but not in graphics mode !!" );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 			set_gfx_update_routines( ega_wrap_split_graph_update, EGA_GRAPHICS_MARKING, NO_SCROLL );
 			break;
@@ -335,7 +335,7 @@ DISPLAY_MODE	mode;
 		case EGA_LO_SP:
 			assert0( !is_it_text(), "In graphics memory mode, but not in graphics mode !!" );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 			if (get_256_colour_mode())
 				set_gfx_update_routines(vga_split_graph_update,
@@ -349,7 +349,7 @@ DISPLAY_MODE	mode;
 		case TEXT_80_FUN:
 			assert1(NO,"Funny memory organisation selected %s", get_mode_string(mode) );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 			do_display_trace("dumping EGA_GRAPH struct ...", dump_EGA_GRAPH());
 			set_gfx_update_routines( text_update, SIMPLE_MARKING, NO_SCROLL );
@@ -358,7 +358,7 @@ DISPLAY_MODE	mode;
 		case CGA_HI_FUN:
 			assert1(NO,"Funny memory organisation selected %s", get_mode_string(mode) );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 			do_display_trace("dumping EGA_GRAPH struct ...", dump_EGA_GRAPH());
 			set_gfx_update_routines( cga_hi_graph_update, CGA_GRAPHICS_MARKING, NO_SCROLL );
@@ -366,7 +366,7 @@ DISPLAY_MODE	mode;
 		case CGA_MED_FUN:
 			assert1(NO,"Funny memory organisation selected %s", get_mode_string(mode) );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 			do_display_trace("dumping EGA_GRAPH struct ...", dump_EGA_GRAPH());
 			set_gfx_update_routines( cga_med_graph_update, CGA_GRAPHICS_MARKING, NO_SCROLL );
@@ -376,11 +376,11 @@ DISPLAY_MODE	mode;
 		case EGA_LO_FUN:
 			assert1(NO,"Funny memory organisation selected %s", get_mode_string(mode) );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 			do_display_trace("dumping EGA_GRAPH struct ...", dump_EGA_GRAPH());
 #ifdef GORE
-/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 			set_gfx_update_routines( ega_graph_update, EGA_GRAPHICS_MARKING, NO_SCROLL );
 #endif /* GORE */
@@ -388,14 +388,14 @@ DISPLAY_MODE	mode;
 		case DUMMY_FUN:
 			assert0(NO,"Using the dummy mode!!");
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 			set_gfx_update_routines( dummy_calc, SIMPLE_MARKING, NO_SCROLL );
 			break;
 		default:
 			assert1(NO,"Bad display mode %d", (int) mode );
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 			break;
 	}
@@ -500,7 +500,7 @@ boolean	choose_vga_display_mode()
 		/* For the 2 & 4 colour modes 63h & 64h */
 		mode = EGA_HI;
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 	else
 		mode = choose_mode[get_munged_index()];

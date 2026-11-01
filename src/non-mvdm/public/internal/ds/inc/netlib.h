@@ -110,7 +110,7 @@ Revision History:
 #include <wchar.h>      // iswdigit().
 
 #ifdef CDEBUG                   // Debug in ANSI C environment?
-/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
 #endif // ndef CDEBUG
 
 
@@ -198,7 +198,7 @@ NetpAtoX(
 //     );
 
 #ifdef CDEBUG
-/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
 #else // ndef CDEBUG
 
 #define NetpMoveMemory(Dest,Src,Size)                                   \

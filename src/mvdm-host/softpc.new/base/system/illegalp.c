@@ -45,7 +45,7 @@
 #endif
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 /* Routine to produce human readable form of where an illegal instruction occured */
@@ -57,7 +57,7 @@ LOCAL VOID where IFN3(CHAR *, string, word, cs, LIN_ADDR, ip)
 #ifdef	PROD
 		"CS:%04x IP:%04x OP:%02x %02x %02x %02x %02x",
 #else	/* PROD */
-/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif	/* PROD */
 		cs, ip,
 		sas_hw_at(ea), sas_hw_at(ea+1), sas_hw_at(ea+2),
@@ -65,14 +65,14 @@ LOCAL VOID where IFN3(CHAR *, string, word, cs, LIN_ADDR, ip)
 }
 
 #if defined(NTVDM) && defined(MONITOR)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
 
 void illegal_op()
 {
 #ifndef	PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 }
 
@@ -106,7 +106,7 @@ void illegal_op_int()
 #ifdef PROD
 	host_error(EG_BAD_OP, ERR_QU_CO_RE, string);
 #else  /* PROD */
-/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif /* PROD */
 
 #else /* NTVDM */
@@ -143,11 +143,11 @@ void illegal_op_int()
 void illegal_dvr_bop IFN0()
 {
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* ! NTVDM */
 }
 
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* ! PROD */

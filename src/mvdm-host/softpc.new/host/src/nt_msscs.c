@@ -94,7 +94,7 @@ void scs_init(int argc, char **argv)
 
     if(!DBGInit (argc,argv)) {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
         TerminateVDM();
     }
@@ -153,7 +153,7 @@ InitialiseDosEmulation(int argc, char **argv)
     //
     TlsDirectError = TlsAlloc();
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 
@@ -205,7 +205,7 @@ InitialiseDosEmulation(int argc, char **argv)
          BytesRead )
         {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
          host_error(EG_SYS_MISSING_FILE, ERR_QUIT, buffer);
          if (hFile != INVALID_HANDLE_VALUE) {
@@ -222,7 +222,7 @@ InitialiseDosEmulation(int argc, char **argv)
         {
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
           host_error(EG_SYS_MISSING_FILE, ERR_QUIT, buffer);
           CloseHandle(hFile);
@@ -578,7 +578,7 @@ boolean init_lim_configuration_data(PLIM_CONFIG_DATA lim_data)
     lim_data->use_all_umb = !ram_flag_found;
 
 #ifdef EMM_DEBUG
-/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
 
     return TRUE;
@@ -618,7 +618,7 @@ unsigned short get_lim_page_frames(USHORT * page_table,
     }
     if (!reserve_umb_status) {
 #ifdef EMM_DEBUG
-/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
 	return FALSE;
     }
@@ -651,7 +651,7 @@ unsigned short get_lim_page_frames(USHORT * page_table,
     }
 
 #ifdef EMM_DEBUG
-/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
     return total_phys_pages;
 }
@@ -1094,7 +1094,7 @@ void nt_std_handle_notification (BOOL fIsRedirection)
     stdoutRedirected = fIsRedirection;
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
 }
 

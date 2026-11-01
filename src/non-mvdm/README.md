@@ -1,4 +1,9 @@
 # non-mvdm original OpenNT sources
+OPENNT-HOST-137: replace the previously registered excluded-branch
+placeholders with `#error` directives under their existing conditions. Their
+original divergence identifiers and reasons remain in the diagnostics; the
+per-file hashes are in `../../artifacts/mvdm-audit/s12-excluded-branch-errors.jsonl`.
+
 OPENNT-HOST-136: replace unselected kernel-USER and historical architecture
 branches with markers, retaining conditionals and selected user-mode paths.
 Labels, original ranges and hashes are in

@@ -202,7 +202,7 @@ ULONG event_thread_blocked_reason = 0xFFFFFFFF;
 
 HCURSOR cur_cursor = NULL;     /* Current cursor handle */
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
 
 
@@ -641,7 +641,7 @@ void nt_process_focus(PFOCUS_EVENT_RECORD FocusEvent)
         MouseOutOfFocus();      /* turn off mouse 'attachment' */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
     }
 
@@ -1064,7 +1064,7 @@ void nt_process_mouse(PMOUSE_EVENT_RECORD MouseEvent)
      * mouse interrupt handler code.
      */
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
     {
     ULONG maxWidth = sc.PC_W_Width,
@@ -1381,7 +1381,7 @@ BOOL CntrlHandler(ULONG CtrlType)
        case CTRL_LOGOFF_EVENT:
        case CTRL_SHUTDOWN_EVENT:
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1389 /* MVDM-HOST-DIV-501: preserve original diagnostic line numbers. */
             if (CntrlHandlerState & CNTRL_PUSHEXIT) {
@@ -1405,7 +1405,7 @@ BOOL CntrlHandler(ULONG CtrlType)
             break;
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 1413 /* MVDM-HOST-DIV-501: preserve original diagnostic line numbers. */
        }
@@ -1500,7 +1500,7 @@ BOOL CntrlHandler(ULONG CtrlType)
 	       ;
 
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 
 	    /* If keeping window open when exiting and fullscreen, return to desktop */
@@ -1578,7 +1578,7 @@ BOOL CntrlHandler(ULONG CtrlType)
     if (!VDMForWOW && !ntvdm_console_set_active(FALSE))
         DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 }
@@ -1615,7 +1615,7 @@ void nt_resume_event_thread(void)
 
 	enable_stream_io();
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 
     }
@@ -1623,7 +1623,7 @@ void nt_resume_event_thread(void)
 
     CntrlHandlerState &= ~CNTRL_VDMBLOCKED;
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     // Setup Console modes

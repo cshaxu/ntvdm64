@@ -292,7 +292,7 @@ extern void bootstrap2();
 extern void bootstrap3();
 
 #ifdef NOVELL
-/* DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
 #endif
 
 #ifdef	MSWDVR
@@ -319,7 +319,7 @@ extern void ISWSEntry();
 #endif /* WINSOCK */
 
 #ifdef SWINAPI
-/* DIVERGENCE MVDM-HOST-DIV-529: SWINAPI platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: SWINAPI platform branch is not selected; see mirror register.
 #endif /* SWINAPI */
 
 #if	defined(SOFTWIN_API) || defined(SWIN_HFX)
@@ -328,24 +328,24 @@ extern void SoftWindowsTerm IPT0();
 #endif	/* SOFTWIN_API or SWIN_HFX */
 
 #if	defined(SOFTWIN_API)
-/* DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register.
 #endif	/* SOFTWIN_API */
 
 #ifdef SWIN_HAW
-/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register.
 #endif	/* SWIN_HAW */
 
 #ifdef ANSI
 extern void host_reset(void);
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* ! NTVDM */
 extern void display_string(char *);
 extern void clear_string(void);
 #else
 extern void host_reset();
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* ! NTVDM */
 extern void display_string();
 extern void clear_string();
@@ -373,7 +373,7 @@ extern void switch_to_real_mode(void);
 #endif	/* NTVDM */
 
 #ifdef GISP_CPU
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif	/* GISP_CPU */
 
 #ifdef HFX
@@ -381,7 +381,7 @@ extern void test_for_us IPT0();
 #endif /* HFX */
 
 #ifdef DOS_APP_LIC
-/* DIVERGENCE MVDM-HOST-DIV-531: DOS_APP_LIC branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-531: DOS_APP_LIC branch is not selected; see mirror register.
 #endif
 
 IMPORT int soft_reset;

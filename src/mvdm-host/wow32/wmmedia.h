@@ -236,7 +236,7 @@ VOID UnThunkStatusCmd( MCIDEVICEID devID, DWORD OrigFlags,
 
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
 
 #define dprintf( _x_ )

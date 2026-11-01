@@ -2,7 +2,7 @@
 ** nt_reset.h
 */
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif
 
 extern BOOL   VDMForWOW;

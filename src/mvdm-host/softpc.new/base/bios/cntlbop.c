@@ -47,24 +47,24 @@ PURPOSE			: Supply a BOP FF function for implementation
 #include "host_bop.h"
 
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 #ifdef SECURE
-/* DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
 #endif
 
 #if defined(RUNUX)
-/* DIVERGENCE MVDM-HOST-DIV-529: RUNUX platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: RUNUX platform branch is not selected; see mirror register.
 #endif
 
 static control_bop_array base_bop_table[] = 
 {
 #ifdef SECURE
-/* DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
 #endif
 #if defined(RUNUX)
-/* DIVERGENCE MVDM-HOST-DIV-529: RUNUX platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: RUNUX platform branch is not selected; see mirror register.
 #endif
 #if defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)
      7, flatog,
@@ -72,14 +72,14 @@ static control_bop_array base_bop_table[] =
      6, flbtog,
 #endif /* FLOPPY_B */
 #ifdef SLAVEPC
-/* DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */
      4, comtog,
      3, D_kyhot,             /* Flush the COM/LPT ports */
      2, D_kyhot2,            /* Rock the screen         */
 #endif /* DUMB_TERMINAL && !NO_SERIAL_UIF */
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
      0,	NULL
 };

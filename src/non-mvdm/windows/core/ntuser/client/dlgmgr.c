@@ -92,7 +92,7 @@ ShowIt:
                 fShown = TRUE;
 
 #ifdef SYSMODALWINDOWS
-/* DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
 #endif
 
                 NtUserShowWindow(hwnd, SHOW_OPENWINDOW);

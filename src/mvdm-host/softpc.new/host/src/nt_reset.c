@@ -20,7 +20,7 @@
 #include "host_def.h"
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 
 #include <sys\types.h>
@@ -102,7 +102,7 @@ host_reset()
 {
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 
     if (host_stream_io_enabled) {
@@ -128,7 +128,7 @@ host_reset()
     host_ica_unlock();
 
 #ifdef	HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #else	/* ! ( HUNTER ) */
 #ifdef X86GFX
     /* DIVERGENCE(MVDM-HOST-DIV-322): software VGA changes remain observable. */
@@ -289,7 +289,7 @@ host_applClose(void)
 
   GfxCloseDown();             // ensure video section destroyed
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
 
 
@@ -324,7 +324,7 @@ void host_terminate(void)
     mvdm_softpc_report_termination("host-terminate", _ReturnAddress());
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
 
     if(VDMForWOW)
@@ -369,7 +369,7 @@ manager_files_init()
 
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif				/* nPROD */
 
 

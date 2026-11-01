@@ -95,7 +95,7 @@ Revision History:
 //
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 NET_API_STATUS
@@ -104,7 +104,7 @@ VrpTransactVdm(
     );
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 //
@@ -197,7 +197,7 @@ Return Value:
     register DWORD len;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     rc1 = NetWkstaGetInfo(NULL, 100, (LPBYTE*)&wkstaInfo);
@@ -251,7 +251,7 @@ Return Value:
     }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-517: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-517: DBG debug branch is not selected; see mirror register.
 #endif
 }
 
@@ -284,7 +284,7 @@ Return Value:
     DWORD   nameLen;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     nameLen = sizeof(nameBuf)-1;
@@ -295,7 +295,7 @@ Return Value:
         if (nameLen > LM20_CNLEN) {
             SET_ERROR(NERR_BufTooSmall);
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
         } else {
             /* DIVERGENCE(MVDM-HOST-DIV-171): the original direct guest alias
@@ -309,7 +309,7 @@ Return Value:
                 setCF(0);
             }
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
         }
     }
@@ -342,11 +342,11 @@ Return Value:
 
 {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     SET_ERROR(ERROR_NOT_SUPPORTED);
@@ -378,11 +378,11 @@ Return Value:
 
 {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     SET_ERROR(ERROR_NOT_SUPPORTED);
@@ -422,7 +422,7 @@ Return Value:
     DWORD len;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     status = NetWkstaUserGetInfo(NULL, 0, &buffer);
@@ -483,11 +483,11 @@ Return Value:
 
 {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     SET_ERROR(ERROR_NOT_SUPPORTED);
@@ -533,7 +533,7 @@ Return Value:
     struct NetMessageBufferSendStruc* structurePointer;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     structurePointer = (struct NetMessageBufferSendStruc*)
@@ -557,7 +557,7 @@ Return Value:
         SET_ERROR(VrpMapDosError(status));
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     } else {
@@ -592,7 +592,7 @@ Return Value:
     DWORD status;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     status = VrpTransactVdm(TRUE);
@@ -648,7 +648,7 @@ Return Value:
     //
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     //
@@ -1064,7 +1064,7 @@ VrNetRemoteApi_exit:
         SET_ERROR((WORD)status);
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     } else {
@@ -1212,7 +1212,7 @@ Return Value:
 //    DWORD nAvail;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     if (callType == 0x4c) {
@@ -1276,7 +1276,7 @@ Return Value:
     default:
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
         SET_ERROR(ERROR_INVALID_LEVEL);
@@ -1290,7 +1290,7 @@ Return Value:
     parameters.Domain = domain;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 //    //
@@ -1355,7 +1355,7 @@ Return Value:
     }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 //    //
@@ -1419,7 +1419,7 @@ Return Value:
     NET_API_STATUS status;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     if (opcode > 4) {
@@ -1479,7 +1479,7 @@ Return Value:
     }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     if (status == NERR_Success || status == ERROR_MORE_DATA) {
@@ -1552,7 +1552,7 @@ Return Value:
     DWORD   status;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     status = VrpTransactVdm(FALSE);
@@ -1604,7 +1604,7 @@ Return Value:
     char    myDataBuffer[sizeof(struct use_info_1) + LM20_PWLEN + 1];
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     //
@@ -1685,7 +1685,7 @@ Return Value:
     }
     if (status != NERR_Success) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
         SET_ERROR((WORD)status);
     } else {
@@ -1736,7 +1736,7 @@ Return Value:
     XS_PARAMETER_HEADER header;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     force = (WORD)getBX();
@@ -1815,7 +1815,7 @@ Return Value:
     LPBYTE  receiveBuffer;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     if (level <= 1) {
@@ -1920,7 +1920,7 @@ Return Value:
     LPBYTE  receiveBuffer;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     //
@@ -1939,32 +1939,32 @@ Return Value:
         dataDesc = (level == 1) ? REM16_use_info_1 : REM16_use_info_0;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
         parameters.UseName= POINTER_FROM_POINTER(&(structurePointer->NUGI_usename));
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
         parameters.Level  = level;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
         receiveBuffer = POINTER_FROM_POINTER(&(structurePointer->NUGI_buffer));
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
         parameters.Buffer = receiveBuffer;
         parameters.BufLen = READ_WORD(&structurePointer->NUGI_buflen);
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
         header.Status = 0;
@@ -1988,7 +1988,7 @@ Return Value:
         setDX(parameters.TotalAvail);
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
         if ((status == NERR_Success) || (status == ERROR_MORE_DATA)) {
@@ -2065,7 +2065,7 @@ Return Value:
     DWORD   totalAvail;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     level = (DWORD)getBX();
@@ -2086,7 +2086,7 @@ Return Value:
         SET_ERROR(ERROR_INVALID_LEVEL);
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
         return;
@@ -2101,7 +2101,7 @@ Return Value:
         SET_ERROR(ERROR_INVALID_PARAMETER);
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
         return;
@@ -2117,7 +2117,7 @@ Return Value:
     }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     parameters.Level = (WORD)level;
@@ -2144,7 +2144,7 @@ Return Value:
     }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     //
@@ -2504,7 +2504,7 @@ Return Value:
         } else {
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
         }
@@ -2517,7 +2517,7 @@ Return Value:
         setDX((WORD)totalAvail);
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     }
@@ -2548,13 +2548,13 @@ Return Value:
     }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 
@@ -2581,11 +2581,11 @@ Return Value:
 
 {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     SET_ERROR(ERROR_NOT_SUPPORTED);
@@ -2733,7 +2733,7 @@ Return Value:
     LPSTR dosPointer;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     //
@@ -2780,7 +2780,7 @@ Return Value:
         //
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     }
@@ -2833,7 +2833,7 @@ Return Value:
                     driveInfo[index] = infoPtr;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
                 } else if (infoPtr->ui1_asg_type == USE_SPOOLDEV && infoPtr->ui1_local[0]) {
@@ -2847,7 +2847,7 @@ Return Value:
                     printInfo[index] = infoPtr;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
                 }
@@ -2894,7 +2894,7 @@ Return Value:
             if (!entryNumber) {
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
                 //
@@ -2908,7 +2908,7 @@ Return Value:
                 wstatus = VrpTranslateDosNetPath(&remoteName, &dosPointer);
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
                 setBL((BYTE)(infoPtr->ui1_asg_type == 0 ? 4 : 3));
@@ -3015,7 +3015,7 @@ Return Value:
     LPSTR dosString;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     bl = getBL();
@@ -3116,7 +3116,7 @@ Return Value:
         status = NetpNtStatusToApiStatus(ntstatus);
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     } else {
@@ -3131,7 +3131,7 @@ Return Value:
     if (status != NERR_Success) {
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
         SET_ERROR((WORD)status);
@@ -3201,7 +3201,7 @@ Return Value:
     XS_PARAMETER_HEADER header;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     parameters.UseName = LPSTR_FROM_WORDS(getDS(), getSI());
@@ -3296,13 +3296,13 @@ Return Value:
     WORD apiNumber;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     transactionPacket = (struct tr_packet*)POINTER_FROM_WORDS(getDS(), getSI());
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     receiveBufferLen = (DWORD)READ_WORD(&transactionPacket->tr_rdlen);
@@ -3331,7 +3331,7 @@ Return Value:
     if (!NT_SUCCESS(ntstatus)) {
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
         return ERROR_NOT_ENOUGH_MEMORY;
@@ -3339,7 +3339,7 @@ Return Value:
     uncName = uString.Buffer;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     //
@@ -3582,7 +3582,7 @@ Return Value:
     }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 VrpTransactVdm_exit:
@@ -3645,5 +3645,5 @@ Return Value:
 }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif

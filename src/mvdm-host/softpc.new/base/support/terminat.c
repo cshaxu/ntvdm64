@@ -30,13 +30,13 @@
 #include "gvi.h"
 #include CpuH
 #ifdef NOVELL
-/* DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
 #endif
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 #ifdef LICENSING
-/* DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register.
 #endif
 #include "emm.h"
 
@@ -75,16 +75,16 @@ void terminate()
 #endif
 
 #ifdef SWIN_SNDBLST_NULL
-/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register.
 #endif /* SWIN_SNDBLST_NULL */
 
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif /* GISP_SVGA */
 
 	/* terminate COM and LPT devices */
 #ifdef  PC_CONFIG
-/* DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
 #else
 	for (i = 0 ; i < NUM_PARALLEL_PORTS; i++)
 		config_activate(C_LPT1_NAME + i, FALSE);
@@ -101,7 +101,7 @@ void terminate()
 	gvi_term();	/* close down the video adaptor */
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 #ifdef LIM
@@ -113,7 +113,7 @@ void terminate()
 	config_activate(C_FLOPPY_B_DEVICE, FALSE);
 #endif /* FLOPPY_B */
 #ifdef SLAVEPC
-/* DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */
 
 	/*
@@ -121,11 +121,11 @@ void terminate()
 	 */
 
 #ifdef NOVELL
-/* DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
 #endif
 
 #ifdef LICENSING
-/* DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register.
 #endif
 	/*
 	 * Do any host-specific termination bits.

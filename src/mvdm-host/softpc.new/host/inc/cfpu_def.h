@@ -101,7 +101,7 @@ FP80SE	sign_exp;
  */
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif	/* BIGEND */
 
 #ifdef LITTLEND

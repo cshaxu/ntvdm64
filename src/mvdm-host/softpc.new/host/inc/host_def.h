@@ -140,7 +140,7 @@ extern void host_simulate(void);
 #define host_pipe_init()
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
 
 #define HOST_TIMER_TOOLONG_DELAY        15000   //BCN 1781

@@ -763,7 +763,7 @@ Return Value:
     setAL((UCHAR)status);
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 }
 
@@ -1200,7 +1200,7 @@ Return Value:
         break;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     }
@@ -1947,7 +1947,7 @@ Return Value:
         pNewCcb->ulCompletionFlag = LLC_DOS_SPECIAL_COMMAND;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
         break;
@@ -3201,7 +3201,7 @@ Return Value:
     Adapters[AdapterNumber].AdapterCloseCcb.ulCompletionFlag = VRDLC_COMMAND_COMPLETION;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
 
     lpAcsLan(&Adapters[AdapterNumber].AdapterCloseCcb, NULL);
@@ -3302,7 +3302,7 @@ Return Value:
     Adapters[AdapterNumber].DirectCloseCcb.ulCompletionFlag = VRDLC_COMMAND_COMPLETION;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
 
     lpAcsLan(&Adapters[AdapterNumber].DirectCloseCcb, NULL);

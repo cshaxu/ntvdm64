@@ -39,7 +39,7 @@
  */
 
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 #ifdef SEGMENTATION
@@ -98,7 +98,7 @@ BOOL UpDateInProgress(void);
 IMPORT VOID host_init_bda_timer(void);
 
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 #ifdef ANSI
@@ -139,7 +139,7 @@ void time_of_day()
      */
 
 #ifdef BSD4_2
-/* DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register.
 #endif
 
     switch (getAH()) {
@@ -158,7 +158,7 @@ void time_of_day()
 
 #else   /* ! NTVDM */
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 	    /*
 	     * First get the time from the host
@@ -180,7 +180,7 @@ void time_of_day()
 	    sas_store(TIMER_OVFL, 0);	/* Always write zero after read	*/
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #endif /* NTVDM */
 
@@ -196,14 +196,14 @@ void time_of_day()
 	    sas_store(TIMER_OVFL, 0);
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 	    break;
 	case 2:	/* read the real time clock	*/
 
 #ifndef NTVDM
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #endif
 		if( UPDATE_IN_PROGRESS )
@@ -218,7 +218,7 @@ void time_of_day()
 		}
 #ifndef NTVDM
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #endif
 		break;
@@ -247,7 +247,7 @@ void time_of_day()
 
 #ifndef NTVDM
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #endif
 		if( UPDATE_IN_PROGRESS )
@@ -262,7 +262,7 @@ void time_of_day()
 		}
 #ifndef NTVDM
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #endif
 		break;
@@ -293,7 +293,7 @@ void time_of_day()
 		{
 			setCF(1);
 #ifdef BSD4_2
-/* DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register.
 #endif
 			return;
 		}
@@ -346,7 +346,7 @@ void time_of_day()
     setAH( 0 );
 
 #ifdef BSD4_2
-/* DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register.
 #endif
 }
 
@@ -357,7 +357,7 @@ void time_int()
      * NT port does everything in 16 bit int08 handler
      */
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
 }
 
@@ -374,14 +374,14 @@ void time_int()
  *  to the time of day stuff is not needed
  */
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* ifndef NTVDM */
 
 
 void time_of_day_init()
 {
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
 }
 

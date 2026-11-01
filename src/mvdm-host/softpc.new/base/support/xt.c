@@ -81,7 +81,7 @@ half_word ica_lock;
  * exclude only this obsolete CPU-state carrier from the CPU40 build.
  */
 #if defined(CCPU) && !defined(CPU_40_STYLE)
-/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif /* defined(CCPU) && !defined(CPU_40_STYLE) */
 
 /*
@@ -410,6 +410,6 @@ CsIsBig IFN1(IU16, csVal)
 		return(sas_hw_at(base + offset + 6) & 0x40);
 	}
 #else /* SPC386 */
-/* DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register.
 #endif /* SPC386 */
 }

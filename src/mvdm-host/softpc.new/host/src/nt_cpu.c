@@ -51,10 +51,10 @@ GLOBAL	quick_event_delays	host_delays;
  * definitions are unused by the selected CCPU path and collide at a modern
  * static link. The unselected non-CCPU body is now marked by DIV-505. */
 #ifndef CCPU
-/* DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif
 #ifdef A2CPU
-/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif
 
 #ifdef I286
@@ -70,7 +70,7 @@ long		idt_base;
 #define setLIMIT(limit, value) limit = value
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 
@@ -160,7 +160,7 @@ void	host_set_hw_int()
 void	host_clear_hw_int()
 {
 #ifndef CCPU
-/* DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif /* not CCPU */
 }
 #endif
@@ -218,7 +218,7 @@ VOID EmulatorEndIretHook()
         setSP(getSP()+6);
     }
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif  /* PROD */
 }
 #endif /* A3CPU */

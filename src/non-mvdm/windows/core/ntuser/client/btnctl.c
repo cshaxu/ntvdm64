@@ -245,7 +245,7 @@ HBRUSH xxxBNInitDC(
     }
 
 #ifdef LATER
-/* DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
 #endif
 
     return(hbr);
@@ -300,7 +300,7 @@ void BNReleaseDC(
     HWND hwnd) /* DIVERGENCE(OPENNT-HOST-117): captured before any callout. */
 {
 #ifdef LATER
-/* DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
 #endif
 
     if (pbutn->hFont) {

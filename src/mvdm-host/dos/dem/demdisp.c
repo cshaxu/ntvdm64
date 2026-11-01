@@ -13,7 +13,7 @@
 static VOID demFastIoUnavailable(VOID);
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif   // DBG
 
 DWORD  fShowSVCMsg = 0;
@@ -112,12 +112,12 @@ PFNSVC  apfnSVC [] = {
 BOOL DemDispatch (ULONG iSvc)
 {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     if (iSvc >= SVC_DEMLASTSVC){
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 	setCF(1);
 	return FALSE;
@@ -131,7 +131,7 @@ BOOL DemDispatch (ULONG iSvc)
 
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
     return TRUE;
 }

@@ -91,7 +91,7 @@ GLOBALS		  :	describe what exported data objects are
 #endif /* EGG */
 
 #ifdef GORE
-/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
 
 #include "ga_mark.h"
@@ -131,7 +131,7 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 #if	defined(PROD) || (!defined(EGG))
 #define	init_dirty_recs()		dirty_next = 0
 #else
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
 #define	get_dirty_rec_total()		(dirty_next)
@@ -145,10 +145,10 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 						dirty_next++; \
 					}
 #else
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 #else /* VGG */
-/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
 
 #define	get_dirty_line(ind)	(dirty[(ind)].line_no)
@@ -169,7 +169,7 @@ a 4-byte boundary. This macro makes this true and reports if it wasn't. */
 #ifdef PROD
 #define ALIGN_SCREEN_START(start) (start &= ~3L)
 #else
-/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif	/* PROD */
 
 GLOBAL LONG dirty_curs_offs = -1;		/* GLOBAL for JOKER */
@@ -188,7 +188,7 @@ GLOBAL LONG dirty_curs_y;
 	boolean	dummy_scroll IPT6(int,dummy1,int,dummy2,int,dummy3,
 			int,dummy4,int,dummy5,int,dummy6);
 #if defined(NTVDM) && defined(MONITOR)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* NTVDM & MONITOR */
 
 	LOCAL VOID save_gfx_update_routines IPT0();
@@ -228,13 +228,13 @@ byte *video_copy;		/* video_copy is now allocated in host_init_screen()'s */
 #ifdef V7VGA
 static	DIRTY_PARTS	dirty[768];
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 #else
-/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif
 #else
-/* DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register.
 #endif
 
 IMPORT half_word bg_col_mask;
@@ -270,7 +270,7 @@ static	int	search_video_copy IFN3(int, start_line,
 		add_dirty_rec((int)((ptr-vcopy)/quarter_opl)+start_line,
 		              j<<2, (int)(k-ptr+1)<<2, ptr-video_copy-j,0);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
 
 		ptr += quarter_opl - j;
@@ -394,7 +394,7 @@ static	int	search_video_copy_aligned IFN3(int, start_line,
 		add_dirty_rec((int)((ptr-vcopy)/quarter_opl)+start_line,
 		              j<<2, (int)(k-ptr+1)<<2, ptr-video_copy-j,0);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
 		ptr += quarter_opl - j;
 		/*
@@ -470,7 +470,7 @@ static	void	paint_records IFN2(int, start_rec, int, end_rec)
 			cur_start<<3, first_line, cur_end-cur_start,
 			last_line-first_line+1);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
 	}
 	/* Clear out video copy */
@@ -481,14 +481,14 @@ static	void	paint_records IFN2(int, start_rec, int, end_rec)
 #ifdef VGG
 		j =  &video_copy[ i->video_copy_offset+(i->start>>2)+i->v7frig];
 #else
-/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
 		do *j++ = 0; while(j<end);
 	}
 }
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
 #define get_char_attr(unsigned_long_ptr)     (((*(unsigned_long_ptr)) & 0xffff))
 #endif
@@ -534,7 +534,7 @@ static	int	ega_text_find_dirty_lines IFN5(byte *, vcopy, byte *, planes,
 #ifdef VGG
 				add_dirty_rec(cur_y,j<<2,(k<<1)+2,screen_start+(offset<<1),0);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
 				break;	/* onto next line */
 			}
@@ -2349,7 +2349,7 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
  */
 
 #ifdef DUMB_TERMINAL
-/* DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
 #endif /* DUMB_TERMINAL */            
 
 		/* originally dummy was char [2] */
@@ -2383,7 +2383,7 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 	    }
 	    width = (int)(top_right_ptr - top_left_ptr + 2) << 1;
 #ifdef DUMB_TERMINAL
-/* DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
 #endif /* DUMB_TERMINAL */            
 
 	/* Do the host stuff */
@@ -2461,7 +2461,7 @@ boolean text_scroll_up IFN6(int, start, int, width, int, height,
 	/* Fill exposed area of buffer */
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
 	data = (attr << 8) | ' ';
 #endif
@@ -2598,7 +2598,7 @@ boolean text_scroll_down IFN6(int, start, int, width, int, height,
 	/* Fill exposed area of buffer */
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
 	data = (attr << 8) | ' ';
 #endif
@@ -2672,7 +2672,7 @@ boolean cga_text_scroll_up IFN6(int, start, int, width, int, height,
  */
 
 #ifdef DUMB_TERMINAL
-/* DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
 #endif /* DUMB_TERMINAL */            
 
 		/* originally dummy was char [2] */
@@ -2706,7 +2706,7 @@ boolean cga_text_scroll_up IFN6(int, start, int, width, int, height,
 	    }
 	    width = (int)(top_right_ptr - top_left_ptr + 1) << 1;
 #ifdef DUMB_TERMINAL
-/* DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.
 #endif /* DUMB_TERMINAL */            
 
 	/* do the host stuff */
@@ -3299,7 +3299,7 @@ boolean	dummy_scroll IFN6(int,dummy1,int,dummy2,int,dummy3,int,
 /*---------------------  End of scrolling routines --------------------------*/
 
 #ifdef GORE
-/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
 
 #ifdef	EGG
@@ -3357,7 +3357,7 @@ GLOBAL VOID cga_mark_string IFN2(int, laddr, int, haddr)
 GLOBAL VOID ega_mark_byte IFN1(int, off_in)
 {
 #ifdef GORE
-/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 	register int offset = off_in>>2;
 
@@ -3376,7 +3376,7 @@ GLOBAL VOID ega_mark_byte IFN1(int, off_in)
 GLOBAL VOID ega_mark_word IFN1(int, addr)
 {
 #ifdef GORE
-/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 
 	register	int	offset1 = addr >> 2;
@@ -3398,7 +3398,7 @@ GLOBAL VOID ega_mark_word IFN1(int, addr)
 GLOBAL VOID ega_mark_wfill IFN3(int, laddr, int, haddr, int, col)
 {
 #ifdef GORE
-/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 
 	register	int	offset1 = laddr >> 2;
@@ -3421,7 +3421,7 @@ GLOBAL VOID ega_mark_wfill IFN3(int, laddr, int, haddr, int, col)
 GLOBAL VOID ega_mark_string IFN2(int, laddr, int, haddr)
 {
 #ifdef GORE
-/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 	register	int	offset1 = laddr >> 2;
 	register	int	offset2 = haddr >> 2;
@@ -3448,11 +3448,11 @@ GLOBAL VOID screen_refresh_required IFN0()
 {
 
 #ifdef GORE
-/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
 
 #ifndef CPU_40_STYLE
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else
 	setVideodirty_total(1000000L);
 #endif	/* CPU_40_STYLE */
@@ -3481,7 +3481,7 @@ set_mark_funcs IFN0()
 			update_alg.mark_string = simple_update;
 
 #ifndef CPU_40_STYLE	/* EVID */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
 			SetMarkPointers(0);
 #endif	/* CPU_40_STYLE - EVID */
@@ -3495,7 +3495,7 @@ set_mark_funcs IFN0()
 			update_alg.mark_string = cga_mark_string;
 
 #ifndef CPU_40_STYLE	/* EVID */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
 			SetMarkPointers(1);
 #endif	/* CPU_40_STYLE - EVID */
@@ -3504,7 +3504,7 @@ set_mark_funcs IFN0()
 
 		case	EGA_GRAPHICS_MARKING:
 #ifdef GORE
-/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #endif /* GORE */
 
 			update_alg.mark_byte = ega_mark_byte;
@@ -3517,10 +3517,10 @@ set_mark_funcs IFN0()
 			{
 				case UNCHAINED:
 #ifdef GORE
-/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 #ifndef CPU_40_STYLE	/* EVID */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
 					SetMarkPointers(2);
 #endif	/* CPU_40_STYLE - EVID */
@@ -3535,10 +3535,10 @@ set_mark_funcs IFN0()
 #ifdef	VGG
 				case CHAIN4:
 #ifdef GORE
-/* DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: GORE platform branch is not selected; see mirror register.
 #else
 #ifndef CPU_40_STYLE	/* EVID */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
 					SetMarkPointers(3);
 #endif	/* CPU_40_STYLE - EVID */
@@ -3572,7 +3572,7 @@ GLOBAL void set_gfx_update_routines IFN3(T_calc_update, update_routine,
 			break;
 		case	TEXT_SCROLL:
 #if defined(NTVDM) && defined(MONITOR)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
 			update_alg.scroll_up = text_scroll_up;
 			update_alg.scroll_down = text_scroll_down;
@@ -3635,7 +3635,7 @@ void cursor_changed IFN2(int, x, int, y)
 	
 	setVideodirty_total(getVideodirty_total() + 1);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
 } 
 #endif
@@ -3654,7 +3654,7 @@ void base_cursor_shape_changed IFN0()
 
 #ifndef REAL_VGA
 #ifdef HERC
-/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
 
 #if defined(VGG) || defined(EGG)
@@ -3802,13 +3802,13 @@ void mon_text_update()
     /*::::::::::::::::::::::::::::::::::::::::::: Check for buffer overflows */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     /*::::::::::::::::::::::::::::::::::::::::::::::: Has the screen changed */
 
 #ifndef CPU_40_STYLE
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else
     if(getVideodirty_total() >= 1000000L ){
 #endif
@@ -4299,7 +4299,7 @@ void add_to_rect(int screen_start, register int x, register int y, int len)
 void paint_text_rect(int screen_start)
 {
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #else
     int offset = (RectTop * (get_offset_per_line()<<1)) + (RectLeft<<2);
 #endif
@@ -4313,7 +4313,7 @@ void paint_text_rect(int screen_start)
 
     (*paint_screen)(offset + screen_start,			/* Start Offset */
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #else
 		   RectLeft*get_pix_char_width(),RectTop*get_host_char_height(),
 #endif
@@ -4439,7 +4439,7 @@ void stream_io_update(void)
 {
 
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 
     if (*stream_io_dirty_count_ptr) {

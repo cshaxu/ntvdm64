@@ -20,7 +20,7 @@ typedef enum
 typedef union
 {
 #ifdef BIT_ORDER1
-/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #else
 	struct
 	{
@@ -132,7 +132,7 @@ extern struct EGA_CPU_GLOBALS
 } EGA_CPU;
 
 #ifndef CPU_40_STYLE	/* Vglobs done via access fns */
-/* DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
 #else	/* CPU_40_STYLE */
 
 extern void setVideorplane IPT1(IU8 *, value);
@@ -268,7 +268,7 @@ extern IU32 latchval;	/* used for following latch macros */
 #define put_latch3(value) put_latch(3, value)
 
 #else	/* CPU_40_STYLE */
-/* DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
 #endif	/* CPU_40_STYLE */
 
 /*

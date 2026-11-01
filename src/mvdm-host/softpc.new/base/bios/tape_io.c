@@ -95,7 +95,7 @@ half_word target_AR;
 			alarm;		/* value read from alarm register	*/	
 
 #if defined(NTVDM) && defined(MONITOR)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* NTVDM & MONITOR */
         /*
          *	Determine function
@@ -116,7 +116,7 @@ half_word target_AR;
 
 	case INT15_EMS_DETERMINE:
 #if 0 /* I'm sure we've all had enough of this one */
-/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #ifdef PM
                 outb(CMOS_PORT, CMOS_U_M_S_LO);
@@ -170,7 +170,7 @@ half_word target_AR;
 			sas_move_words_forward ( source_base, target_base, byte_count >> 1);
 			xmsEnableA20Wrapping();
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 		}
 		else
@@ -256,7 +256,7 @@ half_word target_AR;
 		break;
 	case INT15_CONFIGURATION:
 #if defined(NTVDM) && defined(MONITOR)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
 		setES( getCS() );
 		setBX( CONF_TABLE_OFFSET );
@@ -283,7 +283,7 @@ half_word target_AR;
 		 *	All other functions invalid.
 		 */			
 #ifndef	PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif	/* PROD */
 
 		/* Fall through */

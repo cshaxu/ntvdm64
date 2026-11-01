@@ -500,7 +500,7 @@ BOOL xxxDlgDirListHelper(
                  * Post lpszPathSpecClient, the client side pointer.
                  */
 #ifdef WASWIN31
-/* DIVERGENCE OPENNT-HOST-132: WASWIN31 branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: WASWIN31 branch is not selected; see mirror register.
 #else
                 /*
                  * On NT, keep DDL_POSTMSGS in wParam because we need to know
@@ -524,7 +524,7 @@ BOOL xxxDlgDirListHelper(
             }
 
 #ifdef WASWIN31
-/* DIVERGENCE OPENNT-HOST-132: WASWIN31 branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: WASWIN31 branch is not selected; see mirror register.
 #else
             //
             // B#1433

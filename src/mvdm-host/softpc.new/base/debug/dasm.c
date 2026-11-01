@@ -32,5 +32,5 @@
 
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-502: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-502: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */

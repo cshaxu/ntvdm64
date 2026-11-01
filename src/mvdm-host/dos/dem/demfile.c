@@ -204,7 +204,7 @@ mvdm_guest_location fileNameLocation;
     lpFileName = fileName;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     //
@@ -455,7 +455,7 @@ LPSTR   lpFileName;
     lpFileName = (LPSTR) GetVDMAddr (getDS(),getDX());
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     if (DeleteFileOem (lpFileName) == FALSE){
@@ -501,7 +501,7 @@ DWORD   dwAttr;
     lpFileName = (LPSTR) GetVDMAddr (getDS(),getDX());
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 
@@ -561,7 +561,7 @@ LPSTR   lpSrc,lpDst;
     lpDst = (LPSTR) GetVDMAddr (getES(),getDI());
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     // DOS rename fails accross drives with 11h error code
@@ -666,7 +666,7 @@ DWORD   dwLastError;
 
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     dwDesiredAccess = GENERIC_WRITE | GENERIC_READ;
@@ -843,7 +843,7 @@ CHAR    szFileName[MAX_PATH];
     sprintf(szFileName, "%c:%sNUL", cDRV, lpFileName);
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 

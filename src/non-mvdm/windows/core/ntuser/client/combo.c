@@ -1504,7 +1504,7 @@ BOOL xxxCBHideListBoxWindow(
     TL tlpwndList;
 
 #if 0
-/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 
     CheckLock(pcbox->spwnd);
@@ -1746,7 +1746,7 @@ void xxxCBShowListBoxWindow(
     NtUserShowWindow(hwndList, SW_SHOWNA);
 
 #ifdef LATER
-/* DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
 #endif
 
     /*

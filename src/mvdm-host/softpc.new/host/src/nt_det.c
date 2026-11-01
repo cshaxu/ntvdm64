@@ -89,7 +89,7 @@ GLOBAL WCHAR_STRING videoSection;
 GLOBAL WCHAR_STRING textSection; // Tim Oct 92
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 #line 96 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 
@@ -143,7 +143,7 @@ LOCAL VOID syncVGAEmulationToHardware(VOID);
 LOCAL BOOL funnyMode(VOID);
 LOCAL VOID freezeWindow(VOID);
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 #line 150 /* MVDM-HOST-DIV-500: preserve original diagnostic line numbers. */
 
@@ -179,7 +179,7 @@ GLOBAL VOID doNullRegister()
 	  )
 		ErrorExit();
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 
 }
@@ -203,7 +203,7 @@ GLOBAL VOID initTextSection(VOID)
     textBufferSize.Y = 50;
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #else
 #line 223 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
     sc.ScreenState = WINDOWED;
@@ -212,7 +212,7 @@ GLOBAL VOID initTextSection(VOID)
     if( !RegisterConsoleVDM( VDMForWOW ?
                                 CONSOLE_REGISTER_WOW : CONSOLE_REGISTER_VDM,
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #else
 #line 232 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 			     NULL,
@@ -231,7 +231,7 @@ GLOBAL VOID initTextSection(VOID)
 	ErrorExit();
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 #line 253 /* MVDM-HOST-DIV-510: preserve original diagnostic line numbers. */
 
@@ -817,7 +817,7 @@ LOCAL VOID syncHardwareToVGAEmulation(SHORT dataType)
 						   videoState->PlaneLength;
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
    /* Transfer to this label only occurs if console has removed videostate */
@@ -838,7 +838,7 @@ syncHandshake:
     if (timo != 0)		// 0 is 'signalled'
     {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
         SetLastError(ERROR_SERVICE_REQUEST_TIMEOUT);
 	ErrorExit();
@@ -956,7 +956,7 @@ LOCAL VOID syncVGAEmulationToHardware(VOID)
     if (timo != 0)		/* 0 is 'signalled' */
     {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
         SetLastError(ERROR_SERVICE_REQUEST_TIMEOUT);
 	ErrorExit();
@@ -1035,7 +1035,7 @@ LOCAL VOID syncVGAEmulationToHardware(VOID)
     plane4Ptr = GET_OFFSET(Plane4Offset);
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 
     /*
@@ -1154,7 +1154,7 @@ LOCAL VOID syncVGAEmulationToHardware(VOID)
     else {
 	ModeSetBatch = TRUE;
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     }
@@ -1170,7 +1170,7 @@ LOCAL VOID syncVGAEmulationToHardware(VOID)
     {
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 
         /* if in middle of mode change, don't want to draw screen */
@@ -1225,7 +1225,7 @@ LOCAL VOID syncVGAEmulationToHardware(VOID)
 	if (timo != 0)		/* 0 is 'signalled' */
 	{
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
             SetLastError(ERROR_SERVICE_REQUEST_TIMEOUT);
 	    ErrorExit();
@@ -1249,7 +1249,7 @@ LOCAL VOID syncVGAEmulationToHardware(VOID)
 
         blocked_in_gfx_mode = FALSE;   /* save restart mode switch */
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
     }
 
@@ -1362,7 +1362,7 @@ LOCAL VOID freezeWindow(VOID)
 }
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 #endif /* X86GFX */
 

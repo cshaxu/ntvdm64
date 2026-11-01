@@ -167,7 +167,7 @@ ERROR RECOVERY	  :	describe how procedure reacts to errors
 #ifdef PROD
 #include "SOFTPC_EGA.seg"
 #else
-/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif
 #endif
 
@@ -177,7 +177,7 @@ typedef	union {
 	unsigned short	as_word;
 	struct {
 #ifdef	BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
 		unsigned char	lo_byte;
 		unsigned char	hi_byte;
@@ -235,7 +235,7 @@ IMPORT VOID	_ch2_mode0_chn_word_move_glue();
 WRT_POINTERS mode0_copy_handlers;
 WRT_POINTERS mode0_gen_handlers;
 #else
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 #else
 /* DIVERGENCE(MVDM-HOST-DIV-136): these local table providers retain their
@@ -387,7 +387,7 @@ ega_copy_b_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 }
 
 #ifdef  BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
 #define first_half(wd)      ((wd) & 0xff)
 #define sec_half(wd)        (((wd) & 0xff00) >> 8)
@@ -402,7 +402,7 @@ ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 	note_entrance0("ega_copy_w_fill");
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 
     count >>= 1;
@@ -446,7 +446,7 @@ ega_copy_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
  * CPU_40 uses EVID_WRT_POINTERS, which keeps guest offsets and native source
  * pointers in separately typed slots. */
 #ifndef CPU_40_STYLE
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 
 VOID
@@ -930,7 +930,7 @@ ega_mode0_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 
 /* DIVERGENCE MVDM-HOST-DIV-079: non-CPU_40 direct-pointer string path. */
 #ifndef CPU_40_STYLE
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 
 VOID

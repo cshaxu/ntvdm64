@@ -87,7 +87,7 @@ IN32 IFN2(
 	IU32 temp;
 
 #ifdef SFELLOW
-/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else
 	IN16(&temp, op2);
 	*pop1 = temp;

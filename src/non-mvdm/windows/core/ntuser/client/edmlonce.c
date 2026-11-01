@@ -70,7 +70,7 @@ LONG MLCreate(
         ped->format = ES_RIGHT;
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #else
     if (ped->format != ES_LEFT)
 #endif

@@ -453,7 +453,7 @@ int verify_equip_byte IFN1(half_word *, equip)
 		*equip |= CO_PROCESSOR_PRESENT;
 
 #ifdef SLAVEPC
-/* DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */
 	{
 		num_flops  =

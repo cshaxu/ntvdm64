@@ -68,7 +68,7 @@ Revision History:
 #define VRDEBUG_FILE        "VRDEBUG.LOG"
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
 #define IF_DEBUG(type)      if (0)
 #define DEBUG_BREAK()
@@ -559,7 +559,7 @@ VrDumpDosMemoryStructure(
 //
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
 
 //

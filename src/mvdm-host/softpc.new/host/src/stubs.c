@@ -14,11 +14,11 @@
 #include "chkmallc.h"
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 
 
@@ -37,7 +37,7 @@ double x;
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::: SAS wrapping stubs */
 
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif	//MONITOR
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ASSERT CODE */
@@ -161,7 +161,7 @@ GLOBAL void host_sigio_event IPT0()
 
 #ifndef GENERIC_NPX
 #ifndef CPU_40_STYLE
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 #endif /* GENERIC_NPX */
 #endif
@@ -310,7 +310,7 @@ getIntelRegistersPointer()
 }
 
 #if  0
-/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 
 int FlatAddress[1];
@@ -325,7 +325,7 @@ void DispatchInterrupts()
 }
 
 #else //MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif  //MONITOR
 
 

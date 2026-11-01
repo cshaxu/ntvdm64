@@ -97,7 +97,7 @@ IMPORT void setReadPointers IPT1(IUH, readset);
 #include "ckmalloc.h"
 
 #ifdef REAL_VGA
-/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 #include "host_gfx.h"
 #endif
@@ -122,7 +122,7 @@ static int current_mode = -1;	/* Value of Mode Select at last call    */
  */
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 
 static half_word index_reg = 00 ;	/* Index register	 */
@@ -172,7 +172,7 @@ static void update_cursor_shape	IPT0();
 
 
 #ifdef A3CPU
-/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 #else
 IMPORT MEM_HANDLERS Glue_writes;
 #endif /* A3CPU */
@@ -182,7 +182,7 @@ IMPORT READ_POINTERS read_glue_ptrs;
 IMPORT READ_POINTERS simple_reads;
 
 #ifdef	A2CPU
-/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #endif	/* A2CPU */
 
 /*
@@ -406,7 +406,7 @@ switch (address) {
     case 0x3D5:
     case 0x3D7:
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 
 /*
@@ -604,7 +604,7 @@ switch (address) {
 		{
                     Ra_cursor_start = value;
 #ifdef REAL_VGA
-/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
 		    update_cursor_shape();
 		}
@@ -615,7 +615,7 @@ switch (address) {
 		{
                     Rb_cursor_end = (value & CURSOR_USED_BITS);
 #ifdef REAL_VGA
-/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
 		    update_cursor_shape();
 		}
@@ -637,7 +637,7 @@ switch (address) {
 			screen_refresh_required();
 		}
 #ifdef REAL_VGA
-/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
                 break;
 
@@ -654,7 +654,7 @@ switch (address) {
 			screen_refresh_required();
 		}
 #ifdef REAL_VGA
-/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
                 break;
 
@@ -720,7 +720,7 @@ switch (address) {
          */
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
         timer_video_enabled = (boolean) (value & VIDEO_ENABLE);
 
@@ -1253,7 +1253,7 @@ LOCAL void cga_only_b_move IFN4(UTINY *, laddr, UTINY *, haddr, UTINY *, src,
 		{
 			dst_ptr += len;
 #ifdef	BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
 			src_ptr += len;
 			for ( ; len > 0; len--)
@@ -1263,7 +1263,7 @@ LOCAL void cga_only_b_move IFN4(UTINY *, laddr, UTINY *, haddr, UTINY *, src,
 		else
 		{
 #ifdef	BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
 			memcpy(dst_ptr, src_ptr, len);
 #endif	/* BACK_M */
@@ -1319,7 +1319,7 @@ IMPORT void Glue_set_vid_wrt_ptrs IPT1(WRT_POINTERS *, handler );
 io_addr i;
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 
 
@@ -1349,15 +1349,15 @@ for(i = CGA_PORT_START; i <= CGA_PORT_END; i++)
 /* GISP CPU physically cannot perform read and/or write checks */
 
 #ifdef	JOKER
-/* DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register.
 #else	/* not JOKER */
 
 
 #ifdef A3CPU 
-/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 #else	/* not A3CPU */
 #ifdef A2CPU
-/* DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
 #else
 #if !defined(EGG) && !defined(C_VID) && !defined(A_VID)
    	gmi_define_mem(SAS_VIDEO, &cga_only_handlers);
@@ -1448,7 +1448,7 @@ OUTPUT:		None.
 GLOBAL void setup_vga_globals IFN0()
 {
 #ifndef CPU_40_STYLE	/* Evid interface */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 }
 #endif	/* not EGG or C_VID or A_VID */

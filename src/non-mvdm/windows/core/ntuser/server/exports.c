@@ -61,7 +61,7 @@ _UserTestTokenForInteractive(
          */
         Status = NtUserTestForInteractiveUser(&pStats->AuthenticationId);
 #ifdef LATER
-/* DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
 #endif
     }
 

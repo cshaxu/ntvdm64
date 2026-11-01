@@ -23,5 +23,5 @@
 #pragma hdrstop
 
 #if 0
-/* DIVERGENCE MVDM-HOST-DIV-495: original inactive legacy multimedia branch excluded; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-495: original inactive legacy multimedia branch excluded; see mirror register.
 #endif

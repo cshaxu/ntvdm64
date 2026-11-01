@@ -25,11 +25,11 @@
 #endif
 
 #ifdef OS2_16
-/* DIVERGENCE MVDM-HOST-DIV-528: OS2_16 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: OS2_16 platform branch is not selected; see mirror register.
 #endif
 
 #ifdef OS2_32
-/* DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
 #endif
 
 #include <stdarg.h>
@@ -75,7 +75,7 @@
 #endif
 
 #ifdef OS2_32
-/* DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.
 #endif
 #define SIGHIT(flChk)   ((iSigCheck++ & 0x7FF)?(flSignals & (flChk)):(kbhit(),(flSignals & (flChk))))
 
@@ -246,7 +246,7 @@ VOID demPipeFileEOF	    (VOID);
 /** Debug Function Prototypes */
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
 
 #define demPrintMsg(x)

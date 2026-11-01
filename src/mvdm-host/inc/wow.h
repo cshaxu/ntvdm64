@@ -56,7 +56,7 @@
 
 #undef  LOG
 #ifdef  NOLOG
-/* DIVERGENCE MVDM-HOST-DIV-536: NOLOG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-536: NOLOG branch is not selected; see mirror register.
 #else
 #define SETREQLOG(l) iReqLogLevel = (l)
 #define LOG(l,args)  {SETREQLOG(l) ; logprintf args;}

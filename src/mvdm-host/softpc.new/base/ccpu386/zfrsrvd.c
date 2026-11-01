@@ -29,7 +29,7 @@ Reserved Floating Point CPU Functions.
 #include <c_xcptn.h>	/* Definition of Int16() */
 #include <fault.h>
 #ifdef SFELLOW
-/* DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #endif	/* SFELLOW */
 
 typedef union
@@ -4853,7 +4853,7 @@ void TakeNpxExceptionInt()
 #ifndef SFELLOW
 		ica_hw_interrupt (ICA_SLAVE, CPU_AT_NPX_INT, 1);
 #else	/* SFELLOW */
-/* DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.
 #endif	/* SFELLOW */
 	}
 	else

@@ -16,7 +16,7 @@
 */
 
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 #ifdef SEGMENTATION
@@ -106,7 +106,7 @@ LOCAL int maxsectors, maxoffset;
 LOCAL int tfstatus;
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 /*
@@ -360,7 +360,7 @@ LOCAL void hd_reset IFN2(int, drive, int, diag)
 }
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif				/* nPROD */
 
 
@@ -399,7 +399,7 @@ LOCAL void (*disk_func[]) () =
 };
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* nPROD */
 
 /* Fixed disk BIOS mainline */
@@ -407,7 +407,7 @@ void disk_io IFN0()
 {
 	register int BIOS_command;
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 
@@ -419,7 +419,7 @@ void disk_io IFN0()
 	BIOS_command = getAH ();
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 
 	/* clear up the status before we kick off */
@@ -474,7 +474,7 @@ void disk_io IFN0()
 		 * of a device.
 		 */
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 		setCF (1);	/* cmd fails */
 	}
@@ -1040,7 +1040,7 @@ GLOBAL void wdctrl_bop IFN0()
 	command = getDH();
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 	/* clear up the status before we kick off */
@@ -1161,7 +1161,7 @@ GLOBAL void wdctrl_bop IFN0()
 		setAL ((unsigned char) com.sectors);
 	}
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif	/* PROD */
 	else
 	{
@@ -1179,7 +1179,7 @@ GLOBAL void wdctrl_bop IFN0()
 		 * of a device.
 		 */
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 		setCF (1);	/* cmd fails */
 	}

@@ -24,7 +24,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
     DWORD dwUni;
     NTSTATUS Status;
 #ifdef FE_SB // RtlMBMessageWParamCharToWCS()
-/* DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
 #endif // FE_SB
     WORD CodePage = THREAD_CODEPAGE();
 
@@ -34,7 +34,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
 
     switch(msg) {
 #ifdef FE_SB // RtlMBMessageWParamCharToWCS()
-/* DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
 #else
     case WM_CHAR:
 #endif // FE_SB
@@ -55,7 +55,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
         } else {
             int cwch;
 #ifdef _USERK_
-/* DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
 #else
             cwch = MultiByteToWideChar(CodePage, 0,
                     (LPSTR)pWParam, 2,
@@ -68,7 +68,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
         }
 
 #ifdef FE_SB // RtlMBMessageWParamCharToWCS
-/* DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
 #else
 #ifdef DEBUG
         if ((dwUni == 0) || (dwUni > 0xFF)) {
@@ -160,7 +160,7 @@ WCSToMBEx(
 {
     ULONG nCharsInAnsiString;
 #ifdef _USERK_
-/* DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
 #endif // _USERK_
 
     if (nAnsiChar == 0 || cchUnicodeString == 0) {
@@ -247,7 +247,7 @@ WCSToMBEx(
     } else {
 
 #ifdef _USERK_
-/* DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
 #else
         /*
          * Call NLS API (Kernel32) to convert string to Unicode. (User mode)
@@ -354,7 +354,7 @@ int MBToWCSEx(
         ULONG nCharsInUnicodeString;
 
 #ifdef _USERK_
-/* DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
 #else
         /*
          * Call NLS API (Kernel32) to convert string to Unicode. (User mode)

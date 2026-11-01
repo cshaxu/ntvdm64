@@ -44,7 +44,7 @@ BOOL MoreMouseEvents(void);
 VOID DelayMouseEvents(ULONG count);
 void FlushMouseEvents(void);
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif //X86GFX
 
 VOID KbdResume(VOID);

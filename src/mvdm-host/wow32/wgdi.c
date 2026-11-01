@@ -700,12 +700,12 @@ ULONG FASTCALL WG32CreateIC(PVDMFRAME pFrame)
     len = psz1 ? strlen(psz1) : 0;
     if (len >= 7) {
 #if 0
-/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 
         if (!_stricmp(psz1+len-7, "pscript")
 #if 0
-/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
            ) {
 
@@ -2038,7 +2038,7 @@ ULONG FASTCALL WG32FrameRgn(PVDMFRAME pFrame)
 
 
 #if 0
-/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 
 ULONG FASTCALL WG32GetBitmapBits(PVDMFRAME pFrame)
@@ -3976,7 +3976,7 @@ ULONG FASTCALL WG32UnrealizeObject(PVDMFRAME pFrame)
 // *** New Private APIs ***
 
 #if 0
-/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 
 

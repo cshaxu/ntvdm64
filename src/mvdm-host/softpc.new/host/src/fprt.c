@@ -4,7 +4,7 @@
 #include "stdio.h"
 #include "stdarg.h"
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
 
 void OutputString(char *);
@@ -12,7 +12,7 @@ void OutputString(char *);
 int _CRTAPI1 printf(const char *str, ...)
 {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
     return(0);
 }
@@ -24,10 +24,10 @@ static HANDLE pipe=NULL;
 void OutputString(char *str)
 {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
 }
 
@@ -39,7 +39,7 @@ void OutputString(char *str)
 VOID InputString(char *str, int len)
 {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 }
 
@@ -48,7 +48,7 @@ VOID InputString(char *str, int len)
 int _CRTAPI2 fprintf(FILE *tf, const char *str, ...)
 {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
     return(0);
 }
@@ -121,7 +121,7 @@ size_t _CRTAPI1 fwrite(const void *buf, size_t size, size_t len, FILE *stream)
 
     tmp_buf[len] = 0;		// Bullshit write into a const ptr!
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif  /* PROD */
     return(len);
 }

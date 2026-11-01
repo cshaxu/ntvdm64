@@ -65,7 +65,7 @@
 #include "debug.h"
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 #include "host_gfx.h"
@@ -143,7 +143,7 @@ int table;	/* Which table to use */
     rgb_struct rgb;
 
 #ifdef	macintosh
-/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #else	/* macintosh */
 
     switch (table)
@@ -171,7 +171,7 @@ int table;	/* Which table to use */
     }
 
 #ifdef	macintosh
-/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #endif	/* macintosh */
 }
 
@@ -239,7 +239,7 @@ GLOBAL VOID vga_write_dot
 	IFN4(LONG, colour, LONG, page, LONG, pixcol, LONG, row)
 {
 #ifdef REAL_VGA
-/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 	long screen_offset;
 	UTINY bank;
@@ -270,7 +270,7 @@ GLOBAL VOID vga_sensible_graph_scroll_up
 	rowsdiff *= char_height;
 	lines *= char_height;
 #ifdef REAL_VGA
-/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 	dest = sas_w_at_no_check(VID_ADDR)+ row*col_incr*char_height+col;
 	source = dest+lines*col_incr;
@@ -365,7 +365,7 @@ GLOBAL VOID vga_read_attrib_char IFN3(LONG, col, LONG, row, LONG, page)
 	col,row,page);*/
 /* VGA 256 colour mode has only one page, so ignore 'page' */
 #ifdef REAL_VGA
-/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 	screen = &EGA_plane0123[row*scan_length*char_height+8*col];
 #endif  /* REAL_VGA */
@@ -392,7 +392,7 @@ GLOBAL VOID vga_read_dot IFN3(LONG, page, LONG, pixcol, LONG, row)
 	
 /*printf("vga_read_dot(%d,%d,%d)\n",page,col,row);*/
 #ifdef REAL_VGA
-/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 	screen = &EGA_plane0123[8*row*sas_w_at_no_check(VID_COLS)+pixcol];
 #endif  /* REAL_VGA */
@@ -640,14 +640,14 @@ void vga_disp_func()
 	byte temp,mode_reg, video_mode;
 
 #if defined(NTVDM) && defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM & X86GFX */
 
 	/* check that we really are a VGA */
 #ifndef HERC 
 	if (video_adapter != VGA)
 #else
-/* DIVERGENCE MVDM-HOST-DIV-523: HERC alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-523: HERC alternative is not selected; see mirror register.
 #endif	/* HERC */
 	{
 		/* we are not -so this function is not implemented */
@@ -656,7 +656,7 @@ void vga_disp_func()
 	}
 
 #ifdef HERC 
-/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif	/* HERC */
 	video_mode = sas_hw_at_no_check(vd_video_mode);
 #ifdef V7VGA
@@ -671,7 +671,7 @@ void vga_disp_func()
  * x86 it has to live in ntio.sys.
  */
 #if defined(NTVDM) && defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
 	sas_storew(buf,INT10_1B_DATA);
 	sas_storew(buf+2,EGA_SEG);
@@ -708,7 +708,7 @@ void vga_disp_func()
 		sas_store(buf+0x29, vd_mode_table[video_mode].npages);
 	}
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 	sas_store(buf+0x2A, get_scanlines());
 
@@ -734,7 +734,7 @@ void vga_disp_func()
 	sas_store(buf+0x31, 3);		/* 256KB video memory */
 	setAX(0x1B); /* We did it! */
 #ifdef HERC 
-/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif	/* HERC */
 }
 

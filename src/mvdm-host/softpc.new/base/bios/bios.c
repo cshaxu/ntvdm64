@@ -17,7 +17,7 @@
  */
 
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 #ifdef SEGMENTATION
@@ -50,7 +50,7 @@
 #include "virtual.h"
 #include "gispsvga.h"
 #ifdef SWIN_HFX
-/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_HFX platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HFX platform branch is not selected; see mirror register.
 #endif
 
 
@@ -61,14 +61,14 @@ extern void get_lar();
 #ifdef CPU_40_STYLE
 #define SWAP_INSTANCE virtual_swap_instance()
 #else
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 
 /*
    Traps for BOP's requiring virtualisation.
  */
 #ifdef SWIN_HFX
-/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_HFX platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HFX platform branch is not selected; see mirror register.
 #endif
 LOCAL void v_mouse_install1	IFN0() { SWAP_INSTANCE; mouse_install1(); }
 LOCAL void v_mouse_install2	IFN0() { SWAP_INSTANCE; mouse_install2(); }
@@ -88,23 +88,23 @@ LOCAL void v_redirector		IFN0() { SWAP_INSTANCE; redirector(); }
 LOCAL void v_mouse_EM_callback	IFN0() { SWAP_INSTANCE; mouse_EM_callback(); }
 
 #ifdef PROFILE
-/* DIVERGENCE MVDM-HOST-DIV-531: PROFILE branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-531: PROFILE branch is not selected; see mirror register.
 #endif
 
 #ifdef SIGNAL_PROFILING
-/* DIVERGENCE MVDM-HOST-DIV-529: SIGNAL_PROFILING platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: SIGNAL_PROFILING platform branch is not selected; see mirror register.
 #endif
 
 #if !defined(PROD) && defined(CPU_40_STYLE)
-/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif
 
 #if defined(CPU_40_STYLE) && !defined(NTVDM)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 #ifdef NTVDM
@@ -118,7 +118,7 @@ void (*BIOS[])() = {
 			dummy_int,   	/* BOP 01 */
 			unexpected_int,	/* BOP 02 */
 #ifdef DOS_APP_LIC
-/* DIVERGENCE MVDM-HOST-DIV-531: DOS_APP_LIC branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-531: DOS_APP_LIC branch is not selected; see mirror register.
 #else
 			illegal_bop,   	/* BOP 03 */
 #endif	/* DOS_APP_LIC */
@@ -128,7 +128,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 04 */
 #endif	/* WDCTRL_BOP */
 #if !defined(PROD) && defined(CPU_40_STYLE)
-/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #else
 			illegal_bop,	/* BOP 05 */
 #endif	/* !PROD && CPU_40_STYLE */
@@ -137,7 +137,7 @@ void (*BIOS[])() = {
 #if defined(NTVDM) || defined(CPU_40_STYLE)
 			illegal_bop,   	/* BOP 08 */
 #else /* !(NTVDM || CPU_40_STYLE) */
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* !(NTVDM || CPU_40_STYLE) */
 			keyboard_int,  	/* BOP 09 */
 			illegal_bop,   	/* BOP 0A */
@@ -163,7 +163,7 @@ void (*BIOS[])() = {
 /* NT port, kill vdm instance, instead of warmbooting */
 			terminate,
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 			time_of_day,	/* BOP 1A */
 			illegal_bop,	/* BOP 1B */
@@ -185,7 +185,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 23 */
 			illegal_bop,	/* BOP 24 */
 #if defined(CPU_40_STYLE) && !defined(NTVDM)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
 			illegal_bop,	/* BOP 25 */
 #endif /* CPU_40_STYLE */
@@ -195,7 +195,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 29 */
 			illegal_bop,	/* BOP 2A */
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else /* NTVDM */
                         illegal_bop,    /* BOP 2B */
                         illegal_bop,    /* BOP 2C */
@@ -220,7 +220,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 33 */
 #endif /* DPMI */
 #ifdef NOVELL
-/* DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
 #else	/* NOVELL */
 			illegal_bop,	/* BOP 34 */
 			illegal_bop,	/* BOP 35 */
@@ -240,7 +240,7 @@ void (*BIOS[])() = {
 #ifdef EGG
 			ega_video_io,	/* BOP 42 */
 #else
-/* DIVERGENCE MVDM-HOST-DIV-540: non-EGG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-540: non-EGG branch is not selected; see mirror register.
 #endif
 			illegal_bop,	/* BOP 43 */
 			illegal_bop,	/* BOP 44 */
@@ -296,7 +296,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 52 */
 #endif /* IRET_HOOKS  && GISP_CPU */
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else
 			illegal_bop,	/* BOP 53 */
 #endif
@@ -323,7 +323,7 @@ void (*BIOS[])() = {
 #endif
 			illegal_bop,	/* BOP 64 */
 #ifdef PC_CONFIG
-/* DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-531: PC_CONFIG branch is not selected; see mirror register.
 #else
 			illegal_bop,	/* BOP 65 */
 #endif
@@ -332,7 +332,7 @@ void (*BIOS[])() = {
 			emm_io,		/* BOP 67 */
 			return_from_call, /* BOP 68 */
 #else			
-/* DIVERGENCE MVDM-HOST-DIV-540: non-LIM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-540: non-LIM branch is not selected; see mirror register.
 #endif			
 #ifdef SUSPEND
 			suspend_softpc,	/* BOP 69 */
@@ -362,7 +362,7 @@ void (*BIOS[])() = {
 #ifdef NTVDM
                         rtc_int,        /* BOP 70 */
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
                         re_direct,      /* BOP 71 */
 			D11_int,	/* BOP 72 */
@@ -372,7 +372,7 @@ void (*BIOS[])() = {
 			D11_int,	/* BOP 76 */
 			D11_int,	/* BOP 77 */
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else /* NTVDM */
 			illegal_bop,	/* BOP 78 */
 			illegal_bop,	/* BOP 79 */
@@ -406,11 +406,11 @@ void (*BIOS[])() = {
 			illegal_bop,	 /* BOP 91 */
 			illegal_bop,	 /* BOP 92 */
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 #ifdef SWINAPI
-/* DIVERGENCE MVDM-HOST-DIV-529: SWINAPI platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: SWINAPI platform branch is not selected; see mirror register.
 #else /* SWINAPI */
 
 			illegal_bop,	/* BOP 93 */
@@ -439,12 +439,12 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 9D */
 #endif	/* SOFTWIN_API or SWIN_HFX */
 #if	defined(SOFTWIN_API)
-/* DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register.
 #else
 			illegal_bop,	/* BOP 9E */
 #endif	/* SOFTWIN_API */
 #ifdef SWIN_HAW
-/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register.
 #else
 			illegal_bop,	/* BOP 9F */
 #endif /* SWIN_HAW */
@@ -481,7 +481,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP A8 */ 
 			illegal_bop,	/* BOP A9 */
 #ifdef SWIN_HFX
-/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_HFX platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HFX platform branch is not selected; see mirror register.
 #else
 			illegal_bop,	/* BOP AA */
 			illegal_bop,	/* BOP AB */
@@ -503,7 +503,7 @@ void (*BIOS[])() = {
 #ifdef CPU_40_STYLE
 			virtual_device_trap,	/* BOP B1 */
 #else
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 			illegal_bop,	/* BOP B2 */
 			illegal_bop,	/* BOP B3 */
@@ -532,7 +532,7 @@ void (*BIOS[])() = {
 			v_host_mouse_install2,	/* BOP C9 */ /* host_mouse_install2 */
 #else
 #ifdef GISP_SVGA 
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else /* GISP_SVGA */
 			illegal_bop,	/* BOP C8 */
 			illegal_bop,	/* BOP C9 */
@@ -545,7 +545,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP CE */
 			illegal_bop,	/* BOP CF */
 #ifdef PROFILE
-/* DIVERGENCE MVDM-HOST-DIV-531: PROFILE branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-531: PROFILE branch is not selected; see mirror register.
 #else
 			illegal_bop,	/* BOP D0 */
 			illegal_bop,	/* BOP D1 */
@@ -553,7 +553,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP D2 */
 			illegal_bop,	/* BOP D3 */
 #ifdef SIGNAL_PROFILING
-/* DIVERGENCE MVDM-HOST-DIV-529: SIGNAL_PROFILING platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: SIGNAL_PROFILING platform branch is not selected; see mirror register.
 #else
 			illegal_bop,	/* BOP D4 */
 			illegal_bop,	/* BOP D5 */
@@ -594,7 +594,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP F7 */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #else
 			illegal_bop,	/* BOP F8 */
 			illegal_bop,	/* BOP F9 */
@@ -606,7 +606,7 @@ void (*BIOS[])() = {
 #if defined(NTVDM) && defined(MONITOR)
                         switch_to_real_mode,	/* BOP FD */
 #else
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM && MONITOR */
 #if !defined(LDBIOS)
                         host_unsimulate,/* BOP FE */
@@ -614,12 +614,12 @@ void (*BIOS[])() = {
 #if defined(NTVDM) && defined(MONITOR)
                         host_unsimulate,	/* BOP FE */
 #else
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM && MONITOR */
 #endif	/* !LDBIOS */
 
 #else /* ndef GISP_CPU */
-/* DIVERGENCE MVDM-HOST-DIV-523: GISP_CPU alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-523: GISP_CPU alternative is not selected; see mirror register.
 #endif	/* GISP_CPU */
 
                         control_bop     /* BOP FF */
@@ -631,5 +631,5 @@ void (*BIOS[])() = {
 
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif	/* PROD */

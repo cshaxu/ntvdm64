@@ -503,7 +503,7 @@ Return Value:
             rcv_data_length = (DWORD)SmbGetUshort((LPWORD)parm_ptr);
             rcv_dl_flag = TRUE;
 #ifdef VR_DIAGNOSE
-/* DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
             break;
 
@@ -514,7 +514,7 @@ Return Value:
             rcv_data_ptr = LPBYTE_FROM_POINTER(parm_ptr);
             rcv_dp_flag = TRUE;
 #ifdef VR_DIAGNOSE
-/* DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
             break;
 
@@ -686,7 +686,7 @@ Return Value:
             }
             serverName = computerName;
 #ifdef VR_DIAGNOSE
-/* DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
         }
     }
@@ -703,7 +703,7 @@ Return Value:
     if (!NT_SUCCESS(ntstatus)) {
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
         return ERROR_NOT_ENOUGH_MEMORY;
@@ -711,7 +711,7 @@ Return Value:
     uncName = uString.Buffer;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     status = RxpTransactSmb((LPTSTR)uncName,
@@ -735,7 +735,7 @@ Return Value:
 
     if (status) {
 #ifdef VR_DIAGNOSE
-/* DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
         switch (status) {
         case NERR_BufTooSmall:  /* No data returned from API worker */
@@ -1098,7 +1098,7 @@ Return Value:
     default:
         remapi_err_flag = NERR_InternalError;
 #ifdef VR_DIAGNOSE
-/* DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
         ASSERT(FALSE);
         return 0;
@@ -1409,7 +1409,7 @@ Return Value:
                     if (ptr == NULL) {
                         if ((*l_dsc == REM_ASCIZ) && OkToModifyDescriptor) {
 #ifdef VR_DIAGNOSE
-/* DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
                             *l_dsc = REM_NULL_PTR;
                         }

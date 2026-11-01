@@ -308,7 +308,7 @@ VOID RcErrorBoxPrintf(UINT wId, CHAR *szMsg);
 int RcMessageBox(UINT wId, CHAR *msg1, CHAR *msg2, ULONG dwOptions);
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #endif
 
 

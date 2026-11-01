@@ -54,7 +54,7 @@
 #include "pmvdm.h"
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif  //HUNTER
 
 
@@ -65,7 +65,7 @@ IMPORT SHORT gfi_floppy_active (UTINY hostID, BOOL active, CHAR *err);
 IMPORT ULONG xmsMemorySize;
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
 
 
@@ -146,7 +146,7 @@ VOID host_fdisk_valid
 VOID process_pif_exe (char *PifName)
 {
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 
     GetPIFData(&pfdata, PifName);
@@ -202,7 +202,7 @@ VOID process_pif_exe (char *PifName)
 	    if (pfdata.fullorwin == PF_WINDOWED)
 	    {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 	        if (!SetConsoleDisplayMode(sc.OutputHandle,
 				           CONSOLE_WINDOWED_MODE,
@@ -215,7 +215,7 @@ VOID process_pif_exe (char *PifName)
 	    if (pfdata.fullorwin == PF_FULLSCREEN)
 	    {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 	        if (!SetConsoleDisplayMode(sc.OutputHandle,
 				           CONSOLE_FULLSCREEN_MODE,
@@ -274,7 +274,7 @@ GLOBAL VOID config( VOID )
     ULONG dpmiMemorySize, vdmMemorySize;
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
 
          /*
@@ -476,7 +476,7 @@ GLOBAL VOID config( VOID )
 #endif
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 	sas_init(vdmMemorySize*ONEKB);
@@ -491,7 +491,7 @@ GLOBAL VOID config( VOID )
 
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 
            //  Now see if we can get the console window handle
@@ -505,7 +505,7 @@ GLOBAL VOID config( VOID )
             if (!hWndConsole) {
                 hWndConsole = HWND_DESKTOP;
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
                 }
             }
@@ -652,7 +652,7 @@ config_inquire(UTINY hostID, ConfigValues *values)
 
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
 
 		case C_COM_SYNCWRITE:
@@ -750,7 +750,7 @@ short host_runtime_inquire IFN1(UTINY, what)
                         return (runtime_status.sound_on);
                 default:
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
                         ;
         }
@@ -771,7 +771,7 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
                         break;
                 default:
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
                         ;
         }
@@ -780,7 +780,7 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
 
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
 
 /*
@@ -790,7 +790,7 @@ void host_runtime_set IFN2(UTINY, what, SHORT, val)
  */
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/

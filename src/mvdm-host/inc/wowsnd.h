@@ -40,7 +40,7 @@
 /* XLATON */
 
 #ifdef NULLSTRUCT
-/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
 
 typedef struct _COUNTVOICENOTES16 {		/* s13 */
@@ -49,15 +49,15 @@ typedef struct _COUNTVOICENOTES16 {		/* s13 */
 typedef COUNTVOICENOTES16 UNALIGNED *PCOUNTVOICENOTES16;
 
 #ifdef NULLSTRUCT
-/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
 
 #ifdef NULLSTRUCT
-/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
 
 #ifdef NULLSTRUCT
-/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
 
 typedef struct _SETSOUNDNOISE16 {		/* s7 */
@@ -110,15 +110,15 @@ typedef struct _SETVOICETHRESHOLD16 {		/* s16 */
 typedef SETVOICETHRESHOLD16 UNALIGNED *PSETVOICETHRESHOLD16;
 
 #ifdef NULLSTRUCT
-/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
 
 #ifdef NULLSTRUCT
-/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
 
 #ifdef NULLSTRUCT
-/* DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
 
 typedef struct _WAITSOUNDSTATE16 {		/* s11 */

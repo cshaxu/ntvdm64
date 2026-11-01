@@ -434,7 +434,7 @@ Return Value:
 --*/
 {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
     NoTranslation();
 }
@@ -1374,7 +1374,7 @@ Return Value:
 
     if (IoctlMinor >= MAX_SUPPORTED_DOS_IOCTL_CALL) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
         NoTranslation();
         return;
@@ -2013,7 +2013,7 @@ Return Value:
 {
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
     setCF(1);
     DpmiSimulateIretCF();
@@ -2170,7 +2170,7 @@ Return Value:
 
     if (Func5DhMinor >= MAX_SUPPORTED_DOS_5D_CALL) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
         NoTranslation();
         return;
@@ -2216,7 +2216,7 @@ Return Value:
 
     if (Func5EhMinor >= MAX_SUPPORTED_DOS_5E_CALL) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
         NoTranslation();
         return;
@@ -2306,7 +2306,7 @@ Return Value:
         DpmiSimulateIretCF();
     } else {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
         NoTranslation();
     }
@@ -2336,7 +2336,7 @@ Return Value:
 --*/
 {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
     NoTranslation();
 }
@@ -2403,7 +2403,7 @@ Return Value:
 --*/
 {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
     NoTranslation();
 }
@@ -2674,7 +2674,7 @@ Return Value:
         IoctlSubFunction != 0x47 && IoctlSubFunction != 0x67
     ) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
         NoTranslation();
         return;

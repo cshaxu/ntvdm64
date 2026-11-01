@@ -43,7 +43,7 @@ typedef enum  {
 #define SAS_MAX_TYPE		SAS_DANGEROUS
 
 #else /* CPU_40_STYLE */
-/* DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-514: non-CPU40 branch is not selected for these consumers; see mirror register.
 #endif /* CPU_40_STYLE else */
 
 #define SAS_TYPE_TO_STRING(type) (\
@@ -108,7 +108,7 @@ extern  PHY_ADDR Length_of_M_area;       /* offset of end of M */
 
 extern host_addr Start_of_M_area;	/* host addr (char *) of start of M */
 #ifdef	GISP_CPU
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #else
 extern sys_addr Length_of_M_area;	/* sys addr (long) offset of end of M */
 #endif	/* GISP_CPU */
@@ -141,7 +141,7 @@ extern half_word M[];
  */
 
 #ifdef BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else /* BACK_M */
 #define inc_M_ptr(p,o)	(p+(o))
 #define get_byte_addr(addr) ((IU8 *)((IHPE)Start_of_M_area + (PHY_ADDR)(addr)))
@@ -160,7 +160,7 @@ extern half_word M[];
 #define M_low (long)Start_of_M_area
 #define M_high (long)(Length_of_M_area-1)
 #ifdef BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else /* BACK_M */
 #define get_addr(type,address) (M_low+ (long)(address))
 #define get_offset_into_M(p) (p - M_low)
@@ -188,7 +188,7 @@ extern void sas_move_words_backward IPT3(sys_addr, src, sys_addr, dest,
 extern void sas_init IPT1(sys_addr, size);
 extern void sas_term IPT0();
 #ifdef	GISP_CPU
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #else
 extern sys_addr sas_memory_size IPT0();
 #endif	/* GISP_CPU */
@@ -224,7 +224,7 @@ extern void sas_loadw IPT2(sys_addr, addr, word *, val);
 extern void sas_storew IPT2(sys_addr, addr, word, val);
 extern void sas_storew_no_check IPT2(sys_addr, addr24, word, val);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif	/* SUN_VA */
 extern void sas_storedw IPT2(sys_addr, addr, double_word, val);
 extern void sas_loads IPT3(sys_addr, src, host_addr, dest, sys_addr, len);
@@ -284,7 +284,7 @@ extern void sas_stores_from_transbuf IPT3(sys_addr, dest, host_addr, src, sys_ad
 /* Memory bounds for the colour graphics adaptor */
 
 #ifdef BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
 
 #ifndef HERC_REGEN_BUFF
@@ -352,7 +352,7 @@ extern void sas_stores_from_transbuf IPT3(sys_addr, dest, host_addr, src, sys_ad
 #ifndef GISP_SVGA
 #define VIDEO_IO_OFFSET		0xF065
 #else		/* GISP_SVGA */
-/* DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA  */
 #define VIDEO_IO_RE_ENTRY	0xF06C
 #define MEMORY_SIZE_OFFSET	0xF841
@@ -442,7 +442,7 @@ extern void sas_stores_from_transbuf IPT3(sys_addr, dest, host_addr, src, sys_ad
 #ifndef GISP_SVGA 
 #define EGA_ENTRY_OFF	0x0898
 #else	 	/* GISP_SVGA */
-/* DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA */
 
 /* Off set info for EGA character tables */
@@ -711,7 +711,7 @@ extern void sas_stores_from_transbuf IPT3(sys_addr, dest, host_addr, src, sys_ad
 
 
 #else		/* GISP_SVGA */
-/* DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif /* GISP_SVGA */
 
 /*
@@ -762,7 +762,7 @@ extern void sas_stores_from_transbuf IPT3(sys_addr, dest, host_addr, src, sys_ad
 #ifdef BACK_M
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 
 #ifdef LITTLEND
@@ -780,7 +780,7 @@ typedef union   {
 #else /* BACK_M */
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 
 #ifdef LITTLEND

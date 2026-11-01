@@ -286,7 +286,7 @@ IFN5(
 	 flags = flags & ~BIT14_MASK;   /* clear NT */
       spr_write_dword(next_addr, (IU32)flags);
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
       next_addr += 4;
 
@@ -337,7 +337,7 @@ IFN5(
 	 flags = flags & ~BIT14_MASK;   /* clear NT */
       spr_write_word(next_addr, (IU16)flags);
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
       next_addr += 2;
 
@@ -561,7 +561,7 @@ IFN5(
    /* code ok, load hidden cache */
    load_CS_cache(new_cs, cs_descr, &cs_entry);
 #if 0
-/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 
    /* check new SS and load if ok */

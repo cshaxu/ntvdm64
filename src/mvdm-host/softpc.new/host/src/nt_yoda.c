@@ -267,7 +267,7 @@ LOCAL CALL_STACK_ENTRY *call_next_free = call_stack;
 /******EXPORT VARS*******/
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* ndef PROD */
 
 #endif /* YODA */

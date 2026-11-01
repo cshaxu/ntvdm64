@@ -113,11 +113,11 @@ Revision History:
 #include <debugfmt.h>           // Most FORMAT_ equates.
 
 #if DBG
-/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else // not DBG
 
 #ifdef CDEBUG
-/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
 #else // ndef CDEBUG
 
 // Nondebug version.
@@ -163,11 +163,11 @@ extern "C" {
 //
 
 #if DBG
-/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else // not DBG
 
 #ifdef CDEBUG
-/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
 #else // ndef CDEBUG
 
 // Nondebug version.
@@ -189,11 +189,11 @@ extern "C" {
 //
 
 #if DBG
-/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else // not DBG
 
 #ifdef CDEBUG
-/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
 #else // ndef CDEBUG
 
 // Nondebug version.
@@ -205,7 +205,7 @@ extern "C" {
 
 
 #if DBG
-/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else // not DBG
 
 #define NetpDbgDisplayBool(Tag,Value)         /* nothing */
@@ -269,11 +269,11 @@ extern "C" {
 //
 
 #if DBG
-/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else // not DBG
 
 #ifdef CDEBUG
-/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
 #else // ndef CDEBUG
 
 //  Nondebug version.  Note that NetpKdPrint() eliminates all its

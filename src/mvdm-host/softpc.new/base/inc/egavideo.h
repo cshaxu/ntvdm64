@@ -50,7 +50,7 @@
 
 /* Location of font definitions */
 #if 0
-/* DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 
 #ifdef VGG

@@ -46,7 +46,7 @@ Revision History:
 // Force code to be stepped through
 //
 #if 0
-/* DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #else
 #define ASSERT_STEPTHROUGH
 #endif
@@ -55,7 +55,7 @@ Revision History:
 // Signature macros for SUBALLOCATION
 //
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
 #define INIT_SUBALLOC_SIGNATURE(p)
 #define ASSERT_SUBALLOC(p)
@@ -124,7 +124,7 @@ typedef enum {
 //
 typedef struct _SubAllocation {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
     PSACOMMITROUTINE CommitRoutine;
     PSACOMMITROUTINE DecommitRoutine;

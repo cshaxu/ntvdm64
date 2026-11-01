@@ -397,7 +397,7 @@ void MLSetSelection(
     ECReleaseEditDC(ped, hdc, FALSE);
 
 #ifdef KOREA
-/* DIVERGENCE OPENNT-HOST-132: KOREA branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: KOREA branch is not selected; see mirror register.
 #else
     if (!fDoNotScrollCaret)
         MLEnsureCaretVisible(ped);

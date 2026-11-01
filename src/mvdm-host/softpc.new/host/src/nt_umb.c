@@ -96,7 +96,7 @@ DWORD	*Size
 {
 
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 
     PUMBNODE	UMB;
@@ -121,7 +121,7 @@ DWORD	*Size
 		    sas_connect_memory(UMB->Base, UMB->Base + UMB->Size - 1, SAS_RAM);
 
 #else
-/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
 		    UMB->Owner = UMB_OWNER_RAM;
 		}
@@ -155,7 +155,7 @@ DWORD	*Size
 		return FALSE;
 	    }
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 	    // return the block address
 	    *Address = (PVOID)UMB->Base;
@@ -189,7 +189,7 @@ DWORD	*Size
 	    // on MIPS, rom blocks are BIOS and VIDEO. No reason to change it
 	    return FALSE;
 #else
-/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
 
 	case UMB_OWNER_ROM:
@@ -208,7 +208,7 @@ DWORD	*Size
 		return FALSE;
 	    }
 #ifdef	MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 	    UMB->Owner = UMB_OWNER_ROM;
 	    break;
@@ -239,7 +239,7 @@ DWORD	Size
 {
 
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 
     PUMBNODE    UMB;
@@ -270,7 +270,7 @@ DWORD	Size
 #ifndef	MONITOR
 	    sas_connect_memory(UMB->Base, UMB->Base + UMB->Size - 1, SAS_RAM);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
 	    UMB->Owner = UMB_OWNER_RAM;
 	    xmsReleaseUMBNotify((PVOID)UMB->Base, UMB->Size);
@@ -280,7 +280,7 @@ DWORD	Size
 #ifndef	MONITOR
 	    sas_connect_memory(dwBase, dwBase + Size - 1, SAS_RAM);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
 	    UMB->Owner = UMB_OWNER_RAM;
 	    xmsReleaseUMBNotify((PVOID)UMB->Base, UMB->Size);
@@ -303,7 +303,7 @@ DWORD	Size
 {
 
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 
     PUMBNODE    UMB;
@@ -325,7 +325,7 @@ DWORD	Size
 #ifndef	MONITOR
     sas_connect_memory(dwBase, dwBase + Size - 1, SAS_RAM);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
 
     return TRUE;
@@ -341,7 +341,7 @@ DWORD	Size
 )
 {
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 
     PUMBNODE UMB;
@@ -364,7 +364,7 @@ DWORD	Size
 #ifndef	MONITOR
     sas_connect_memory(dwBase, dwBase + Size - 1, SAS_VDD);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
 
      return TRUE;
@@ -385,7 +385,7 @@ BOOL
 GetUMBForEMM(VOID)
 {
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
     return TRUE;
 }
@@ -402,7 +402,7 @@ PUMBNODE  UMB
 {
 
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 
     while (UMB != NULL) {
@@ -425,7 +425,7 @@ PUMBNODE  UMB
 #ifndef	MONITOR
     sas_connect_memory(dwBase, dwBase + Size - 1, SAS_VDD);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif
     return TRUE;
 }
@@ -442,7 +442,7 @@ WORD	    Owner
 )
 {
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
 
     DWORD SizeBefore, SizeAfter;
@@ -488,7 +488,7 @@ WORD	    Owner
     }
 
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
     return UMBBefore;
 }
@@ -541,5 +541,5 @@ InitUMBList(VOID)
 }
 
 #else
-/* DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-508: MONITOR alternative is not selected for this source; see mirror register.
 #endif

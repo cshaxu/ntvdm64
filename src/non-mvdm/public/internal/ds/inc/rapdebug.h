@@ -50,7 +50,7 @@ Revision History:
 
 
 #if DBG
-/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else
 
 #define DEBUG if (FALSE)

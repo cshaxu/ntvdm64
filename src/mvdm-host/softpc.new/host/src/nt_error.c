@@ -150,7 +150,7 @@ int DisplayErrorTerm(int ErrorNo,	/* Softpc Error number */
     UNUSED(ErrorNo);    //Always internal error
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     // assume NT error if either of top two bits set (err or warning).
@@ -195,7 +195,7 @@ SHORT host_error(int error_num, int options, char *extra_char)
 
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     ErrorDialogBox(message, NULL, RMB_ICON_STOP | RMB_ABORT | RMB_IGNORE);
@@ -614,7 +614,7 @@ int ErrorDialogBox(char *message, char *pEdit, DWORD dwOptions)
 
     else {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
         ResumeTimerThread();
 
@@ -1157,7 +1157,7 @@ ULONG WOWSysErrorBox(
 
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 VOID RcErrorBoxPrintf(UINT wId, CHAR *szMsg)

@@ -112,12 +112,12 @@ DESCRIPTION	  : 	describe what (not how) function does
 #include "host_gfx.h"
 #include "idetect.h"
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #include "host.h"
 
 #ifdef  GISP_SVGA 
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
 
 /* [3.1.2 DECLARATIONS]                                                 */
@@ -127,7 +127,7 @@ GLOBAL IU8 Currently_emulated_video_mode = 0;	/* Holds last video mode
 						 * set through bios */
 
 #if defined(NTVDM) && defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
 #ifdef NTVDM
@@ -453,7 +453,7 @@ void low_set_mode IFN1(int, mode)
 #ifndef REAL_VGA
 	do_outb(EGA_SEQ_INDEX,0,1);	/* Synchronous reset - turn off Sequencer */
 #else
-/* DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
 	do_outb(EGA_CRTC_INDEX,0x11,0);
 	for(i=0;i<EGA_PARMS_SEQ_SIZE;i++)
@@ -616,7 +616,7 @@ void low_set_mode IFN1(int, mode)
     	video_pc_high_regen = vd_mode_table[video_mode].end_addr;
 	}
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 
 #ifdef VGG
@@ -667,10 +667,10 @@ void load_font IFN5
 
 
 #if defined(NTVDM) && defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else /* GISP_SVGA */
 
 
@@ -749,7 +749,7 @@ void recalc_text IFN1(int, height)
     else
         do_outb(EGA_CRTC_INDEX,9,height-1); /* Character height */
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 	do_outb(EGA_CRTC_INDEX,0xA,height-1);	/* Cursor start */
 	do_outb(EGA_CRTC_INDEX,0xB,0);		/* Cursor end */
@@ -916,7 +916,7 @@ write_ch_set IFN5(sys_addr, char_addr, int, screen_off,
 		}
 	}
 #else
-/* DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
 }
 
@@ -981,7 +981,7 @@ void write_ch_xor IFN5(sys_addr, char_addr, int, screen_off,
 		}
 	}
 #else
-/* DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
 }
 
@@ -998,11 +998,11 @@ GLOBAL void ega_set_mode IFN0()
 #endif /* V7VGA */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
 
 #ifdef V7VGA
@@ -1099,7 +1099,7 @@ GLOBAL void ega_set_mode IFN0()
 			host_mswin_disable();
 		}
 #else
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 	}
 #endif /* MSWDVR */
@@ -1107,7 +1107,7 @@ GLOBAL void ega_set_mode IFN0()
 	Currently_emulated_video_mode = video_mode;
 
 #if defined(NTVDM) && defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif  /* NTVDM & X86GFX */
 
 	save_addr = follow_ptr(EGA_SAVEPTR);
@@ -1254,7 +1254,7 @@ GLOBAL void ega_set_mode IFN0()
 	if(!get_EGA_no_clear())
 	{
 #ifdef REAL_VGA
-/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else /* REAL_VGA */
     	    sas_fillsw(video_pc_low_regen, vd_mode_table[video_mode].clear_char,
 				 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
@@ -1280,7 +1280,7 @@ GLOBAL void ega_set_mode IFN0()
     mouse_video_mode_changed(video_mode);
 #endif
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 }
 
@@ -1538,7 +1538,7 @@ static void ega_set_palette IFN0()
 				not_imp();
 			}
 #else
-/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif
 			break;
 	}
@@ -1558,7 +1558,7 @@ GLOBAL void ega_char_gen IFN0()
 				recalc_text(getBH());
 
 #if defined(NTVDM) && defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif /* NTVDM && X86GFX */
 			break;
 		case 1:
@@ -1568,7 +1568,7 @@ GLOBAL void ega_char_gen IFN0()
 				recalc_text(14);
 
 #if defined(NTVDM) && defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM & X86GFX */
 			break;
 		case 2:
@@ -1578,7 +1578,7 @@ GLOBAL void ega_char_gen IFN0()
 				recalc_text(8);
 
 #if defined(NTVDM) && defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM & X86GFX */
 			break;
 #ifdef VGG
@@ -1589,7 +1589,7 @@ GLOBAL void ega_char_gen IFN0()
 				recalc_text(16);
 
 #if defined(NTVDM) && defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM & X86GFX */
 			break;
 #endif	/* VGG */
@@ -1604,7 +1604,7 @@ GLOBAL void ega_char_gen IFN0()
 			break;
 		case 0x22:
 #if defined(NTVDM) && defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
 			sas_storew_no_check(EGA_FONT_INT*4,EGA_CGMN_OFF);
 			sas_storew_no_check(EGA_FONT_INT*4+2,EGA_SEG);
@@ -1613,7 +1613,7 @@ GLOBAL void ega_char_gen IFN0()
 			break;
 		case 0x23:
 #if defined(NTVDM) && defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
 			sas_storew_no_check(EGA_FONT_INT*4,EGA_CGDDOT_OFF);
 			sas_storew_no_check(EGA_FONT_INT*4+2,EGA_SEG);
@@ -1623,7 +1623,7 @@ GLOBAL void ega_char_gen IFN0()
 #ifdef VGG
 		case 0x24:
 #if defined(NTVDM) && defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
 			sas_storew_no_check(EGA_FONT_INT*4,EGA_HIFONT_OFF);
 			sas_storew_no_check(EGA_FONT_INT*4+2,EGA_SEG);
@@ -1646,7 +1646,7 @@ GLOBAL void ega_char_gen IFN0()
 					break;
 
 #if defined(NTVDM) && defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else	/* NTVDM & X86GFX */
 
 				case 2:
@@ -1758,7 +1758,7 @@ void ega_video_init IFN0()
 	sas_storew_no_check(EGA_SAVEPTR+2,EGA_SEG);
 #endif	/* !NTVDM | (NTVDM & !X86GFX) */
 #if defined(NTVDM) && defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
 #ifdef V7VGA
 	if ( video_adapter == VGA )
@@ -1766,7 +1766,7 @@ void ega_video_init IFN0()
 	else
 		sas_store_no_check(ega_info, 0x60);   /* Clear on mode change, 256K, EGA active, emulate cursor */
 #else	/* V7VGA  -- Macs don't have V7 */
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 
 #endif /* NTVDM & X86GFX */
@@ -1805,7 +1805,7 @@ void ega_video_io IFN0()
 #ifdef V7VGA
 #define check_video_func(AH)	((AH >= 0 && AH < EGA_FUNC_SIZE) || (AH == 0x6f && video_adapter == VGA))
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif
 
     if (getAH() != 0xff)
@@ -1914,7 +1914,7 @@ void ega_write_dot IFN4(int, colour, int, page, int, pixcol, int, row)
 
 	(*update_alg.mark_byte)(screen_off);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
 }
 
@@ -1932,7 +1932,7 @@ void ega_sensible_graph_scroll_up IFN6(int, row,
 	lines *= char_height;
 	source = dest+lines*col_incr;
 #ifdef REAL_VGA
-/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 	screen_updated = (col+colsdiff) <= col_incr;  /* Check for silly scroll */
 
@@ -1976,7 +1976,7 @@ void ega_sensible_graph_scroll_down IFN6(int, row,
 	rowsdiff *= char_height;
 	lines *= char_height;
 #ifdef REAL_VGA
-/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
 	screen_updated = (col+colsdiff) <= col_incr;  /* Check for silly scroll */
 	if(screen_updated)
@@ -2051,7 +2051,7 @@ void ega_read_attrib_char IFN3(int, col, int, row, int, page)
 		screen_off += sas_w_at_no_check(VID_COLS);
 	}
 #else
-/* DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
 	/* Now search the font */
 	search_font((char *)the_char,(int)char_height);
@@ -2064,7 +2064,7 @@ void ega_read_dot IFN3(int, page, int, col, int, row)
 	byte val;
 	byte mask;
 #ifdef	REAL_VGA
-/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #endif
 
 
@@ -2101,7 +2101,7 @@ void ega_read_dot IFN3(int, page, int, col, int, row)
 	val |= ((data & mask) >> shift) << 3;
 
 #else
-/* DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-526: REAL_VGA branch is not selected; see mirror register.
 #endif
 	setAL(val);
 }
@@ -2200,7 +2200,7 @@ sys_addr find_mode_table IFN2(int, mode, sys_addr *, save_addr)
 			return params_addr;
 		    }
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 		}
 		if(babyModeTable > 0)

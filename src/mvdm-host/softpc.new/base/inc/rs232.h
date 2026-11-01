@@ -33,7 +33,7 @@ typedef union {
 } DIVISOR_LATCH;
 #endif
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 
 #ifdef BIT_ORDER2
@@ -49,7 +49,7 @@ typedef union {
       } INT_ENABLE_REG;
 #endif
 #ifdef BIT_ORDER1
-/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 
 #if defined(NTVDM) && defined(FIFO_ON)
@@ -65,7 +65,7 @@ typedef union {
       } INT_ID_REG;
 #endif
 #ifdef BIT_ORDER1
-/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 #else   /* NTVDM */
 
@@ -80,7 +80,7 @@ typedef union {
       } INT_ID_REG;
 #endif
 #ifdef BIT_ORDER1
-/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 
 #endif  /* ifdef NTVDM */
@@ -100,7 +100,7 @@ typedef union {
       } LINE_CONTROL_REG;
 #endif
 #ifdef BIT_ORDER1
-/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 
 #ifdef BIT_ORDER2
@@ -117,7 +117,7 @@ typedef union {
       } MODEM_CONTROL_REG;
 #endif
 #ifdef BIT_ORDER1
-/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 
 #ifdef BIT_ORDER2
@@ -140,7 +140,7 @@ typedef union {
       } LINE_STATUS_REG;
 #endif
 #ifdef BIT_ORDER1
-/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 
 #ifdef BIT_ORDER2
@@ -159,7 +159,7 @@ typedef union {
       } MODEM_STATUS_REG;
 #endif
 #ifdef BIT_ORDER1
-/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 
 #if defined(NTVDM) && defined(FIFO_ON)
@@ -181,7 +181,7 @@ typedef union {
       } FIFO_CONTROL_REG;
 #endif
 #ifdef BIT_ORDER1
-/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 
 #endif
@@ -306,7 +306,7 @@ extern int com_save_rxbytes IPT2(int,n, CHAR *,buf);
 extern int com_save_txbyte IPT1(CHAR,value);
 
 #ifdef PS_FLUSHING
-/* DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
 
 #ifdef NTVDM
@@ -325,7 +325,7 @@ extern void tx_holding_register_empty(int adapter);
 		(((port & 0xf8) == 0xf8) ? COM2 : COM4))
 
 #ifdef SHORT_TRACE
-/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 
 #else
@@ -334,12 +334,12 @@ extern void tx_holding_register_empty(int adapter);
 
 
 #ifdef SHORT_TRACE
-/* DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
 #endif /* more than 2 serial ports */
 
 #ifdef IRET_HOOKS
-/* DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
 #endif /* IRET_HOOKS */
 
 /* BCN 2730 define generic macros which can be SVID3 or old style
@@ -347,7 +347,7 @@ extern void tx_holding_register_empty(int adapter);
  */
 
 #ifdef SVID3_TCGET
-/* DIVERGENCE MVDM-HOST-DIV-536: SVID3_TCGET branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-536: SVID3_TCGET branch is not selected; see mirror register.
 #else
 #define	TCGET TCGETA
 #define	TCSET TCSETA

@@ -62,7 +62,7 @@
 
 
 #ifdef HERC
-/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif	/* HERC */
 
 /*
@@ -109,7 +109,7 @@ typedef union {
         struct
         {
 #ifdef  BIT_ORDER1
-/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #else
                 unsigned        low_byte        : 8,
                                 top_bit         : 1,
@@ -129,7 +129,7 @@ typedef union {
         struct
         {
 #ifdef  BIT_ORDER1
-/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #else
                 unsigned        low_byte        : 8,
 				med_bit		: 1,

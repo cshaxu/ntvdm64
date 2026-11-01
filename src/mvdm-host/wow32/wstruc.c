@@ -300,7 +300,7 @@ VOID putdrawitem16(VPDRAWITEMSTRUCT16 vpDI16, LPDRAWITEMSTRUCT lpDI)
 }
 
 #ifdef NOTUSED
-/* DIVERGENCE MVDM-HOST-DIV-529: NOTUSED platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: NOTUSED platform branch is not selected; see mirror register.
 #endif
 
 
@@ -902,7 +902,7 @@ VOID getlogfont16(VPLOGFONT16 vplf, LPLOGFONT lplf)
     lplf->lfPitchAndFamily = plf16->lfPitchAndFamily;
 
 #if 0
-/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #else
 
 #if (LF_FACESIZE != 32)

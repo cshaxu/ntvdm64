@@ -36,7 +36,17 @@ struct host_timezone {
 };
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+struct host_tm {
+	int     tm_sec;
+	int     tm_min;
+	int     tm_hour;
+	int     tm_mday;
+	int     tm_mon;
+	int     tm_year;
+	int     tm_wday;
+	int     tm_yday;
+	int     tm_isdst;
+};
 #endif
 
 
@@ -48,7 +58,9 @@ extern long host_time IPT1(long *, tloc);
 extern struct host_tm *host_localtime IPT1(time_t *, clock);
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+extern void host_gettimeofday IPT2(struct host_timeval *, time,
+				   struct host_timezone *, zone);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+extern void host_GetSysTime(struct host_timeval *);
+#define host_gettimeofday(timeval, timezn) host_GetSysTime((timeval))
 #endif

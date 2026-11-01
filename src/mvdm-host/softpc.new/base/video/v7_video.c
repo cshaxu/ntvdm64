@@ -280,7 +280,7 @@ v7vga_extended_set_mode()
 	ULONG font_offset;
 	word clr_char;
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 	set_host_pix_height(1);
 	set_banking( 0, 0 );
@@ -448,7 +448,7 @@ v7vga_extended_set_mode()
 		else
 			clr_char = vd_mode_table[video_mode].clear_char;
 #ifdef REAL_VGA
-/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
     	sas_fillsw(video_pc_low_regen, clr_char,
 				 (video_pc_high_regen - video_pc_low_regen)/ 2 + 1);
@@ -462,7 +462,7 @@ v7vga_extended_set_mode()
     mouse_video_mode_changed(video_mode);
 #endif
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 }
 

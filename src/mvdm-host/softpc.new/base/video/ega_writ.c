@@ -88,7 +88,7 @@ GLOBAL UTINY Last_v7_fg_bg;			/* used by {ev}ga_mask_register_changed() */
 #endif
 
 #ifndef CPU_40_STYLE	/* EVID without introducing EVID define */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else	/* CPU_40_STYLE - EVID */
 WRT_POINTERS *mode_chain_handler_table[] = { 0 };
 #ifdef C_VID
@@ -114,7 +114,7 @@ MEM_HANDLERS Glue_writes =
 	move_word_fwd_ev_glue,
 };
 #else	/* C_VID */
-/* DIVERGENCE MVDM-HOST-DIV-539: non-C_VID branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-539: non-C_VID branch is not selected; see mirror register.
 #endif	/* CVID */
 WRT_POINTERS dth_md0_writes;
 WRT_POINTERS dth_md2_writes;
@@ -145,7 +145,7 @@ ULONG sr_lookup[16] =
 	0xffff0000,0xffff00ff,0xffffff00,0xffffffff
 #endif
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 };
 
@@ -178,7 +178,7 @@ Glue_set_vid_wrt_ptrs IFN1(WRT_POINTERS *, handler )
 #ifndef CPU_40_STYLE	/* EVID */
 #ifndef GISP_CPU
 #ifdef A3CPU
-/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 #else
 #ifdef C_VID
 
@@ -201,7 +201,7 @@ Glue_set_vid_wrt_ptrs IFN1(WRT_POINTERS *, handler )
 	A_vid_writes = *handler;
 
 #if	0
-/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif	/* 0 */
 
 #endif /* C_VID */
@@ -244,18 +244,18 @@ ega_write_init IFN0()
 #endif
 
 #ifdef	JOKER
-/* DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register.
 #else	/* not JOKER */
 
 #if defined(EGA_DUMP) || defined(EGA_STAT)
 	dump_writes = handler;
 #else
 #ifdef EGATEST
-/* DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register.
 #else
 #ifndef GISP_CPU
 #ifdef A3CPU
-/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 #else
 	gmi_define_mem(VIDEO,&Glue_writes);
 	Glue_set_vid_wrt_ptrs( handler );
@@ -300,7 +300,7 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 	ULONG mode_and_chain;
 	WRT_POINTERS *handler;
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 	note_entrance1("ega_write_routines_update(%d)",reason);
@@ -488,7 +488,7 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 #ifdef VGG
 	mode_and_chain = (EGA_CPU.chain << 2) + EGA_CPU.write_mode;
 #else
-/* DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
 
 	if(( EGA_CPU.saved_mode_chain != mode_and_chain ) 
@@ -578,11 +578,11 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 #ifdef CPU_40_STYLE
 		SetWritePointers();
 #else  /* CPU_40_STYLE */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 		set_mark_funcs();

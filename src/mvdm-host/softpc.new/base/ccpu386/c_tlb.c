@@ -523,7 +523,7 @@ IFN2(
       {
       phy_write_dword(pte_addr, new_pte);
 #ifdef	PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
       }
 
@@ -531,7 +531,7 @@ IFN2(
       {
       phy_write_dword(pde_addr, new_pde);
 #ifdef	PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
       }
 
@@ -815,7 +815,7 @@ xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
             {
             phy_write_dword(pte_addr, new_pte);
 #ifdef	PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
             }
          if (new_pde != pde)
@@ -823,7 +823,7 @@ xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
             IU8 mask;
             phy_write_dword(pde_addr, new_pde);
 #ifdef	PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
             }
 	 }
@@ -864,5 +864,5 @@ IFN1(
    }
 
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif

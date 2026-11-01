@@ -351,7 +351,7 @@ Return Value:
         }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     }
@@ -452,7 +452,7 @@ Return Value:
     WORD bufferSize;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     EnterCriticalSection(&BufferSemaphore);
@@ -555,7 +555,7 @@ Return Value:
             status = LLC_STATUS_SUCCESS;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
         } else {
@@ -635,7 +635,7 @@ Return Value:
     PDOS_DLC_BUFFER_POOL pBufferPool = &aBufferPools[PoolIndex];
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     IF_DEBUG(DLC_BUFFERS) {
@@ -672,7 +672,7 @@ Return Value:
             ++pBufferPool->BufferCount;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
             pBuffer = pNextBuffer;
@@ -695,7 +695,7 @@ Return Value:
         pBufferPool->dpBuffer = dpBase;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     }
@@ -837,7 +837,7 @@ Return Value:
         }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     } else if (dataSpace < pFrame->Contiguous.cbBuffer) {

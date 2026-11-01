@@ -20,7 +20,7 @@
 /* Common types, not defined in NT/WIN32
  */
 #ifdef H2INC
-/* DIVERGENCE MVDM-HOST-DIV-536: H2INC branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-536: H2INC branch is not selected; see mirror register.
 #endif
 
 // typedef int INT;

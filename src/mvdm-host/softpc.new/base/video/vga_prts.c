@@ -374,7 +374,7 @@ IMPORT void set_index_state IPT0();
 IMPORT boolean in_index_state IPT0();
 
 #ifdef GISP_SVGA 
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif 	/* GISP_SVGA */
 
 /*
@@ -566,7 +566,7 @@ LOCAL VOID	do_chain_majority_decision IFN0()
  */
 GLOBAL VOID	do_new_cursor IFN0()
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 {
 
@@ -709,7 +709,7 @@ GLOBAL VOID	vga_init IFN0()
 	io_define_out_routines(EGA_GC_ADAP_INDEX, vga_gc_outb_index, vga_gc_outw, NULL, NULL);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 
 	io_define_outb(EGA_GC_ADAP_DATA,ega_gc_set_reset);
@@ -867,7 +867,7 @@ GLOBAL VOID	vga_init IFN0()
 #ifdef V7VGA
 	set_screen_limit(0x20000);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 	set_screen_start(0);
 	set_word_addressing(YES);
@@ -877,7 +877,7 @@ GLOBAL VOID	vga_init IFN0()
 #ifdef NTVDM
 	set_screen_split(0x3FF);	/* 10 bits for VGA line compare register */
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 	set_prim_font_index(0);
@@ -1023,7 +1023,7 @@ GLOBAL VOID	vga_seq_outb_index IFN2(io_addr,port,half_word,value)
 	sequencer.address.as.abyte = ( value & 0x07 );
 
 #ifndef V7VGA
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* !V7VGA */
 	io_redefine_outb(EGA_SEQ_ADAP_DATA,ega_seq_regs[value & 0x07]);
 }
@@ -1228,7 +1228,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 					if (crtc_0_8_protect == FALSE && crtc_0_7_protect == FALSE)
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 						crt_controller.horizontal_total = value;
 					break;
@@ -1237,7 +1237,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 					if (crtc_0_8_protect == FALSE && crtc_0_7_protect == FALSE)
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 					{
 						crt_controller.horizontal_display_end = value+1;
@@ -1256,7 +1256,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 					if (crtc_0_8_protect == FALSE && crtc_0_7_protect == FALSE)
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 						crt_controller.start_horizontal_blanking = value;
 					break;
@@ -1265,7 +1265,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 					if (crtc_0_8_protect == FALSE && crtc_0_7_protect == FALSE)
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 						crt_controller.end_horizontal_blanking.as.abyte = value;
 					break;
@@ -1274,7 +1274,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 					if (crtc_0_8_protect == FALSE && crtc_0_7_protect == FALSE)
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 						crt_controller.start_horizontal_retrace = value;
 					break;
@@ -1283,7 +1283,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 					if (crtc_0_8_protect == FALSE && crtc_0_7_protect == FALSE)
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 						crt_controller.end_horizontal_retrace.as.abyte = value;
 					break;
@@ -1292,7 +1292,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 					if (crtc_0_8_protect == FALSE && crtc_0_7_protect == FALSE)
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 						crt_controller.vertical_total = value;
 					break;
@@ -1348,7 +1348,7 @@ GLOBAL VOID	vga_crtc_outb IFN2(io_addr,port,half_word,value)
 #ifdef NTVDM
 						crt_controller.crtc_overflow.as.abyte = new.value;
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 #ifdef V7VGA
 					}
@@ -2151,7 +2151,7 @@ GLOBAL VOID vga_mask_register_changed IFN1(BOOL, gotBitProtection)
 	state = EGA_CPU.ega_state.mode_0.lookup & masks[EGA_CPU.write_mode];
 
 #ifdef A3CPU
-/* DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 #else
 #if !(defined(NTVDM) && defined(X86GFX))
 	Glue_set_vid_wrt_ptrs(&mode_chain_handler_table[EGA_CPU.saved_mode_chain][state]);
@@ -2198,13 +2198,13 @@ GLOBAL VOID	vga_gc_mask IFN2(USHORT,port,FAST UTINY,value)
 		ega_gc_regs[8] = FAST_FUNC_ADDR(vga_gc_mask_ff);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 
 		io_redefine_outb(EGA_GC_ADAP_DATA,vga_gc_mask_ff);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 	}
 }
@@ -2245,13 +2245,13 @@ GLOBAL VOID	vga_gc_mask_ff IFN2(USHORT,port,FAST UTINY,value)
 		ega_gc_regs[8] = FAST_FUNC_ADDR(vga_gc_mask);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 
 		io_redefine_outb(EGA_GC_ADAP_DATA,vga_gc_mask);
 
 #ifndef CPU_40_STYLE	/* TEMPORARY */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 	}
 }
@@ -2331,7 +2331,7 @@ GLOBAL VOID	v_ret_intr_status IFN0()
 #define IPSTAT1_STATE_3     	(IPSTAT1_STATE_2 + 10)
 #define IPSTAT1_CYCLE_TIME  	IPSTAT1_STATE_3
 #else	/* NTVDM */
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
 
 GLOBAL VOID  vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
@@ -2343,7 +2343,7 @@ GLOBAL VOID  vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 
 
 #if defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 
 #ifdef PROD
@@ -2351,7 +2351,7 @@ GLOBAL VOID  vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 #endif
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 
     note_entrance2("vga_ipstat1_inb(%x,%x)", port, value);
@@ -2359,7 +2359,7 @@ GLOBAL VOID  vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 #ifdef V7VGA
 	attribute_controller.address.as_bfld.index_state = 0;
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 
 #if defined(NTVDM) || defined(host_get_count_ms)
@@ -2367,7 +2367,7 @@ GLOBAL VOID  vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 #ifdef NTVDM
    CurrTime = GetPerfCounter();
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
    cycles = CurrTime >= RefreshStartTime
@@ -2446,7 +2446,7 @@ GLOBAL VOID	vga_ipstat1_inb IFN2(io_addr,port,half_word *,value)
 #ifdef V7VGA
 	attribute_controller.address.as_bfld.index_state = 0;
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 
     vga_ip0_state_count --;	/* attempt relative 'timings' */
@@ -2582,7 +2582,7 @@ GLOBAL VOID	vga_ac_outb IFN2(io_addr,port,half_word,value)
 	attribute_controller.address.as_bfld.index_state = !attribute_controller.address.as_bfld.index_state;
 	if (attribute_controller.address.as_bfld.index_state) {
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 		note_entrance1("Setting index to %d", value);
 		if (((value & 0x20) >> 5) != attribute_controller.address.as_bfld.palette_address_source)
@@ -2609,7 +2609,7 @@ GLOBAL VOID	vga_ac_outb IFN2(io_addr,port,half_word,value)
 #ifdef V7VGA
 		attribute_controller.address.as.abyte = (attribute_controller.address.as_bfld.index_state << 7) | (value & 0x3f);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
 	} else {
 		NON_PROD(if(io_verbose & EGA_PORTS_VERBOSE)fprintf(trace_file,"attr(%#x,%#x)\n",attribute_controller.address.as_bfld.index,value);)
@@ -2959,7 +2959,7 @@ GLOBAL VOID	vga_dac_data_inb IFN2(io_addr,port,half_word *,value)
 }
 
 #if defined(NTVDM) && defined(X86GFX)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM & X86GFX */
 
 VOID    vote_vga_mode IFN0()
@@ -3014,12 +3014,12 @@ VOID    vote_vga_mode IFN0()
 }       /* vote_vga_mode */
 
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif 		/* GISP_SVGA */
 
 
 #ifdef HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
 #endif /* VGG */
 #endif /* REAL_VGA */

@@ -43,7 +43,7 @@ extern  void            (*(w_write_ptrs[]))();
 extern  void            (*(b_fill_ptrs[]))();
 extern  void            (*(w_fill_ptrs[]))();
 #ifdef EGATEST
-/* DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register.
 #else
 extern  void            (*(b_move_ptrs[]))();
 extern  void            (*(w_move_ptrs[]))();
@@ -61,7 +61,7 @@ extern  half_word       *haddr_of_src_string;
  */
  
 #ifdef BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
 typedef struct
 {
@@ -145,7 +145,7 @@ extern void host_cpu_interrupt	IPT0();
  */
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif	/* BIGEND */
 
 #ifdef LITTLEND

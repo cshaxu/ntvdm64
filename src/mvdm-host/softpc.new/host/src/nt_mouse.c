@@ -66,7 +66,7 @@ IMPORT word         F9_SEGMENT,F9_OFFSET;
 IMPORT word         savedtextoffset,savedtextsegment;
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
 
 
@@ -128,7 +128,7 @@ FORWARD void   WindowedGraphicsScale(half_word,IS16,IS16,IS16 *,IS16 *);
 FORWARD void   dummy(short *,short *,unsigned short *);
 FORWARD void   LimitCoordinates(half_word,IS16 *,IS16 *);
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
 FORWARD void   TextScale(IS16 *,IS16 *,IS16 *, IS16 *);
 
@@ -333,7 +333,7 @@ if(mvdm_softpc_mouse_route_active())
    bFunctionZeroReset = TRUE;
    }
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /*X86GFX */
 
 //
@@ -351,7 +351,7 @@ m2pY = 16;
 GLOBAL void mouse_set_position IFN2(USHORT, newx, USHORT, newy)
 {
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
 
 
@@ -376,7 +376,7 @@ if((sc.ScreenState == WINDOWED && bPointerOff) || mvdm_softpc_mouse_route_active
    return;
    }
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
 }
 
@@ -396,7 +396,7 @@ GLOBAL void mouse_cursor_mode_change()
 GLOBAL	void host_mouse_conditional_off_enabled(void)
 {
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 
 
@@ -412,7 +412,7 @@ VOID host_os_mouse_pointer(MOUSE_CURSOR_STATUS *mcs,MOUSE_CALL_MASK *call_mask,
                            MOUSE_VECTOR *counter)
 {
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
 
 host_ica_lock(); // synch with the event thread
@@ -424,7 +424,7 @@ if(!mvdm_softpc_mouse_apply(mcs,counter,&old_x,&old_y,&bPointerInSamePlace,
 GetNextMouseEvent();
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
    {
    ScaleToWindowedVirtualCoordinates(&mcs->position.x,&mcs->position.y,counter);
@@ -468,7 +468,7 @@ if(bPointerInSamePlace)
 else
    {
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
 
    //
@@ -478,7 +478,7 @@ else
    *call_mask |= 1;
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif	   // X86GFX
    }
 
@@ -493,7 +493,7 @@ else
 //
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
 }
 
@@ -626,7 +626,7 @@ old_r_button = os_pointer_data.button_r;
 }
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
 
 //=========================================================================
@@ -1329,7 +1329,7 @@ switch(vm)
 void host_show_pointer()
 {
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
 }
 
@@ -1344,7 +1344,7 @@ void host_show_pointer()
 void host_hide_pointer()
 {
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
 }
 
@@ -1748,7 +1748,7 @@ if (tR.top != WarpClientRect.top ||
    CToS(&tR);
 
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif    //MONITOR
 
    //
@@ -1853,7 +1853,7 @@ os_pointer_data.y=0;
 host_ica_unlock();
 }
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
 
 //===========================================================================
@@ -1867,7 +1867,7 @@ host_ica_unlock();
 void FullscTextPtr(int x,int y)
 {
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif // X86GFX
 }
 

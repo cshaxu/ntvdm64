@@ -129,7 +129,7 @@ SIGNALS ISSUED	  :	NONE
 #ifdef PROD
 #include "SOFTPC_EGA.seg"
 #else
-/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif
 #endif
 
@@ -171,7 +171,7 @@ IMPORT VOID	_ch2_mode1_chn_word_move_glue();
 WRT_POINTERS mode1_handlers;
 WRT_POINTERS mode2_handlers;
 #else
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 #else
 /* DIVERGENCE(MVDM-HOST-DIV-136): these local table providers retain their
@@ -252,7 +252,7 @@ fill_alternate_bytes IFN3(byte *, start, byte *, end, byte, value )
 }
 
 #ifdef  BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
 #define first_half(wd)      (wd & 0xff)
 #define sec_half(wd)        ((wd & 0xff00) >> 8)
@@ -264,7 +264,7 @@ fill_both_bytes IFN3(USHORT, data, USHORT *, dest, ULONG, len )
 	USHORT swapped;
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 
 	if( (ULONG) dest & 1 )
@@ -287,7 +287,7 @@ fill_both_bytes IFN3(USHORT, data, USHORT *, dest, ULONG, len )
 		while( len-- )
 		{
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
 			*dest = data;
 #endif
@@ -387,7 +387,7 @@ ega_mode1_chn_w_write IFN2(ULONG, value, ULONG, offset )
  * helpers carry native pointers through legacy ULONG fields and are not
  * installed by the CPU_40_STYLE selection path. */
 #ifndef CPU_40_STYLE
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 
 VOID
@@ -766,7 +766,7 @@ ega_mode2_chn_w_fill IFN3(ULONG, value, ULONG, offset, ULONG, count )
 
 /* DIVERGENCE MVDM-HOST-DIV-143: the CPU_40 EVID path owns string moves. */
 #ifndef CPU_40_STYLE
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 
 #endif

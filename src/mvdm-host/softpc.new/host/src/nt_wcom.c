@@ -43,7 +43,7 @@ GCSfn GetCommShadowMSR;
 /*::::::::::::::::::::::::::::::::::::::::::::: Internal function protocols */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 BOOL SetupBaudRate(HANDLE FileHandle, DIVISOR_LATCH divisor_latch);
@@ -89,7 +89,7 @@ void wow_com_inb(io_addr port, half_word *value)
 
    FileH = (HANDLE)(*GetCommHandle)((WORD)adapter);
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     /*.................................................... Process port read */
@@ -158,7 +158,7 @@ void wow_com_inb(io_addr port, half_word *value)
     /*.......................................... Handle invalid port accesses */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 
@@ -183,7 +183,7 @@ void wow_com_outb(io_addr port, half_word value)
 
     FileH = (HANDLE)(*GetCommHandle)((WORD)adapter);
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     /*.................................................... Process port write */
@@ -245,7 +245,7 @@ void wow_com_outb(io_addr port, half_word value)
     /*.......................................... Handle invalid port accesses */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 }
@@ -394,5 +394,5 @@ BOOL SetupBaudRate(HANDLE FileHandle, DIVISOR_LATCH divisor_latch)
 
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif

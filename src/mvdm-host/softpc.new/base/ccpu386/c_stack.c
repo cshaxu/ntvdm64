@@ -28,7 +28,7 @@ Stack (and related SP/BP access) Support.
 #include <ccpupig.h>
 
 #if	defined(PIG) && !defined(PROD)
-/* DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif	/* PIG && !PROD */
 
 /*
@@ -254,7 +254,7 @@ IFN1(
    }
 
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -289,13 +289,13 @@ IFN1(
       addr = GET_SS_BASE() + GetStackPointer();
       vir_write_word(addr, NO_PHYSICAL_MAPPING, (IU16)data);
 #ifdef	PIG_DONT_CHECK_OTHER_WORD_ON_STACK
-/* DIVERGENCE MVDM-HOST-DIV-536: PIG_DONT_CHECK_OTHER_WORD_ON_STACK branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-536: PIG_DONT_CHECK_OTHER_WORD_ON_STACK branch is not selected; see mirror register.
 #endif	/* PIG_DONT_CHECK_OTHER_WORD_ON_STACK */
       }
    }
 
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -548,6 +548,6 @@ IFN2(
    }
 
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
 

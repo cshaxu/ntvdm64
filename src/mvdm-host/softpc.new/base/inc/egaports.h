@@ -28,7 +28,7 @@
 	extern void ega_term IPT0();
 	extern void ega_gc_outb_index IPT2(io_addr,ia,half_word,hw);
 #ifdef	HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
 	IMPORT VOID update_banking IPT0();
 	IMPORT VOID set_banking IPT2(IU8, rd_bank, IU8, wrt_bank);

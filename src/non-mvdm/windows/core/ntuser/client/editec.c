@@ -307,7 +307,7 @@ void  ECMenu(
         EnableMenuItem(hMenu, EM_SETSEL, MF_BYCOMMAND | MFS_GRAYED);
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
 
     // BOGUS
@@ -347,7 +347,7 @@ void  ECMenu(
 
     if (cmd && (cmd != -1)) {
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
 
         SendMessage(hwnd, cmd, 0, (cmd == EM_SETSEL) ? 0xFFFFFFFF : 0L );
@@ -1678,7 +1678,7 @@ BOOL ECInsertText(
      */
     ped->fDirty = TRUE;
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
 
     return TRUE;
@@ -1949,14 +1949,14 @@ void   ECResetTextInfo(PED ped)
     ECEmptyUndo(Pundo(ped));
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
     if (ped->fSingle) {
         if (!ped->listboxHwnd)
             ECNotifyParent(ped, EN_UPDATE);
     } else {
 #ifdef BOGUS
-/* DIVERGENCE OPENNT-HOST-131: BOGUS branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-131: BOGUS branch is not selected; see mirror register.
 #endif
         MLBuildchLines(ped, 0, 0, FALSE, NULL, NULL);
     }
@@ -2020,7 +2020,7 @@ BOOL ECSetText(
         cchLength = StringLength(lpstr, ped->fAnsi);
 
 #ifdef NEVER
-/* DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register.
 #endif
 
         /*
@@ -2311,19 +2311,19 @@ LONG EditWndProc(
      */
 
 #ifdef SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
             goto HandleEditMsg;
 
         break;
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
 
     case WM_INPUTLANGCHANGE:
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
         goto HandleEditMsg;
 

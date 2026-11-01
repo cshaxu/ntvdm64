@@ -107,7 +107,7 @@ Return Value:
 
     if (Index >= MAX_DPMI_BOP_FUNC) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
         return;
     }

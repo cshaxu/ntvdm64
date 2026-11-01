@@ -659,7 +659,7 @@ typedef struct _LLC_IOCTL_BUFFERS {
 //  together and this table must be defined only once.  
 //
 #ifdef INCLUDE_IO_BUFFER_SIZE_TABLE
-/* DIVERGENCE OPENNT-HOST-134: INCLUDE_IO_BUFFER_SIZE_TABLE branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-134: INCLUDE_IO_BUFFER_SIZE_TABLE branch is not selected; see mirror register.
 #else
 
 extern LLC_IOCTL_BUFFERS aDlcIoBuffers[];

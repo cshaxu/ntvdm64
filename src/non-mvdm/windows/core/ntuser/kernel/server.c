@@ -276,7 +276,7 @@ CONST WORD gawEditWndProc[] = {
     WM_RBUTTONUP,
     WM_FINALDESTROY,
 #if 0
-/* DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
     WM_PAINT,
     WM_PASTE,
@@ -375,7 +375,7 @@ CONST WORD gawDefWindowSpecMsgs[] = {
     WM_POWERBROADCAST,
     WM_MOUSEWHEEL,
 #ifdef FE_IME
-/* DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif
     0
 };

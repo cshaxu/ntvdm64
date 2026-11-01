@@ -1498,7 +1498,7 @@ GLOBAL VOID fdisk_inb IFN2(io_addr, port, UTINY *,value)
 		 		 * sector buffer must be accessed only in 16 bit quantities
 		 		 */
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 				break;
 			default:
@@ -1514,11 +1514,11 @@ GLOBAL VOID fdisk_inb IFN2(io_addr, port, UTINY *,value)
 GLOBAL VOID fdisk_inw IFN2(io_addr, port, USHORT *, value)
 {
 #ifdef	JOKER
-/* DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register.
 #else	/* JOKER */
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 		switch (port)
 	{
@@ -1529,11 +1529,11 @@ GLOBAL VOID fdisk_inw IFN2(io_addr, port, USHORT *, value)
 #endif
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 
 #if 0
-/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #else
 		dt1(DHW | PORTIO, INW_TRACE_HNDL, "inw on sector buffer", *value)
 #endif
@@ -1561,7 +1561,7 @@ GLOBAL VOID fdisk_outb IFN2(io_addr, port, UTINY, value)
 		 * byte access to sector buffer is not a good idea
 		 */
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 		break;
 	case TFPCMP:
@@ -1620,13 +1620,13 @@ GLOBAL VOID fdisk_outb IFN2(io_addr, port, UTINY, value)
 GLOBAL VOID fdisk_outw IFN2(io_addr, port, USHORT, value)
 {
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 		switch (port)
 	{
 	case TFBASE:
 #if 0
-/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #else
 		dt1(DHW | PORTIO, OUTW_TRACE_HNDL, "outw to sector buffer",
 		    (unsigned) value)
@@ -1637,7 +1637,7 @@ GLOBAL VOID fdisk_outw IFN2(io_addr, port, USHORT, value)
 #endif
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 
 			break;
@@ -1690,14 +1690,14 @@ GLOBAL VOID fdisk_ioattach IFN0()
 		nheads = drives[0].maxhead + 1;
 		nsects = drives[0].maxsect + 1;
 #ifdef REAL_ROM
-/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
 		patch_rom(DPB0, (unsigned char) (ncyls & 0xff));
 		patch_rom(DPB0+1, (unsigned char) (ncyls >> 8));
 		patch_rom(DPB0+2, nheads);
 		patch_rom(DPB0+0xe, nsects);
 #ifdef REAL_ROM
-/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
 		dt1(DHW | IOAD, 0, "drive 0 wiredup, total cyls %d\n",
 		    (unsigned) ncyls)
@@ -1718,14 +1718,14 @@ GLOBAL VOID fdisk_ioattach IFN0()
 		nheads = drives[1].maxhead + 1;
 		nsects = drives[1].maxsect + 1;
 #ifdef REAL_ROM
-/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
 		patch_rom(DPB1, ncyls & 0xff);
 		patch_rom(DPB1 + 1, (ncyls >> 8));
 		patch_rom(DPB1+2, nheads);
 		patch_rom(DPB1+0xe, nsects);
 #ifdef REAL_ROM
-/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
 		dt1(DHW | IOAD, 0, "drive 1 wiredup, total cyls %d\n",
 		    (unsigned) ncyls)
@@ -1753,14 +1753,14 @@ GLOBAL VOID fdisk_iodetach IFN0()
 		 */
 		drives[0].wiredup = 0;
 #ifdef REAL_ROM
-/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
 		patch_rom(DPB0, 0);
 		patch_rom(DPB0 + 1, 0);
 		patch_rom(DPB0 + 2, 0);
 		patch_rom(DPB0 + 0xe, 0);
 #ifdef REAL_ROM
-/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
 		dt0(DHW | IOAD, 0, "drive 0 unplugged\n")
 	}
@@ -1773,14 +1773,14 @@ GLOBAL VOID fdisk_iodetach IFN0()
 		 */
 		drives[1].wiredup = 0;
 #ifdef REAL_ROM
-/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
 		patch_rom(DPB1, 0);
 		patch_rom(DPB1 + 1, 0);
 		patch_rom(DPB1 + 2, 0);
 		patch_rom(DPB1 + 0xe, 0);
 #ifdef REAL_ROM
-/* DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-535: REAL_ROM branch is not selected; see mirror register.
 #endif
 		dt0(DHW | IOAD, 0, "drive 1 unplugged\n")
 	}
@@ -1822,7 +1822,7 @@ GLOBAL VOID fdisk_physattach IFN1(int,driveno)
 }
 
 #ifdef macintosh
-/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #endif /* macintosh */
 
 GLOBAL VOID fdisk_reset IFN0()

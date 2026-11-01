@@ -50,7 +50,7 @@ LONG SLCreate(
         ped->listboxHwnd = GetDlgItem(lpCreateStruct->hwndParent, CBLISTBOXID);
 
 #ifdef SUPPORT_LPK
-/* DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
 
     /*
@@ -119,7 +119,7 @@ BOOL SLUndo(
         ped->ichInsStart = ped->ichInsEnd = (ICH)-1;
 
 #ifdef NEVER
-/* DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register.
 #else
 
         /*
@@ -148,7 +148,7 @@ BOOL SLUndo(
          */
         SLSetSelection(ped, ichDeleted, ichDeleted);
 #ifdef KOREA
-/* DIVERGENCE OPENNT-HOST-132: KOREA branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: KOREA branch is not selected; see mirror register.
 #else
         SLInsertText(ped, hDeletedText, cchDeleted);
 #endif

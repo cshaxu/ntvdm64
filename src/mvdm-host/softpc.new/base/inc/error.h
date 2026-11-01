@@ -297,12 +297,12 @@ typedef enum
 	EG_UPDATE_LICFILE_FAILED,
 	EG_WRONG_MSWDVR,
 #ifdef DOS_APP_LIC
-/* DIVERGENCE MVDM-HOST-DIV-531: DOS_APP_LIC branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-531: DOS_APP_LIC branch is not selected; see mirror register.
 #endif
 	EG_FAILED_RCLOCAL,
 
 #ifdef SOFTWIN_API
-/* DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register.
 #endif /* SOFTWIN_API */
 
 	EG_OVERWRITE_DRIVE_C,
@@ -314,7 +314,7 @@ typedef enum
 	EG_HELP_NOT_INSTALLED,
 #endif /* HOST_HELP */
 #ifdef SECURE
-/* DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
 #endif
 
 	EG_INFINITE_LOOP,

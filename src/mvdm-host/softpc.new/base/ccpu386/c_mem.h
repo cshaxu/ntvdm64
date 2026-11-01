@@ -23,10 +23,10 @@ IMPORT UTINY *pg_end;	/* point up to which host may safely read
    n = new posn, o = old posn. */
 
 #ifdef	PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else	/* !PIG */
 #ifdef BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
 #define DIFF_INST_BYTE(n, o) ((n) - (o))
 #endif /* BACK_M */
@@ -34,10 +34,10 @@ IMPORT UTINY *pg_end;	/* point up to which host may safely read
 
 /* To get next inst. byte and move pointer to next inst. byte. */
 #ifdef	PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else	/* !PIG */
 #ifdef BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
 #define GET_INST_BYTE(x) \
    ( (x) >= pg_end ? ccpu_new_code_page(&(x)) : *(x)++ )
@@ -48,7 +48,7 @@ IMPORT UTINY *pg_end;	/* point up to which host may safely read
 /* >>>>>>>>>>>>>>>> KOSHER FORM <<<<<<<<<<<<<<<< */
 
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
 
 #define phy_read_byte(x)	((IU8)(phy_r8((PHY_ADDR)x)))

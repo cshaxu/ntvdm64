@@ -17,7 +17,7 @@
 
 #include <stdio.h>
 #if defined(NTVDM) && defined(MONITOR)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 
 #include TypesH
@@ -41,7 +41,7 @@
 #ifdef CCPU
 #include "ccpusas4.h"
 #else	/* ! CCPU */
-/* DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif	/* ! CCPU */
 #endif	/* CPU_40_STYLE */
 
@@ -53,7 +53,7 @@
 #ifdef	CPU_40_STYLE
 #define	BIOS2ROM_FILENAME	"bios4.rom"
 #else	/* CPU_40_STYLE */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
 #endif /* BIOS2ROM_FILENAME */
 
@@ -70,7 +70,7 @@
 #endif /* V7VGAROM_FILENAME */
 
 #ifdef 	GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif
 
 #ifndef ADAPTOR_ROM_START
@@ -157,7 +157,7 @@ patchCheckSum IFN3(PHY_ADDR, start, PHY_ADDR, length, PHY_ADDR, offset)
 	sas_connect_memory(start, start + roundedLength - 1, SAS_RAM);
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 	signature = sas_PR16(start);
@@ -204,7 +204,7 @@ OUTPUT:		None.
 GLOBAL void read_video_rom IFN0()
 {
 #ifdef REAL_VGA
-/* DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else /* REAL_VGA */
 	PHY_ADDR romLength = 0;
 
@@ -216,7 +216,7 @@ GLOBAL void read_video_rom IFN0()
 #ifdef V7VGA
 		romLength = read_rom (V7VGAROM_FILENAME, EGA_ROM_START);
 #else	/* V7VGA */
-/* DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif  /* V7VGA */
 		break;
 #endif	/* VGG */
@@ -232,7 +232,7 @@ GLOBAL void read_video_rom IFN0()
 		break;
 
 #else			/* GISP_SVGA */
-/* DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA */	
 
 	}
@@ -272,7 +272,7 @@ GLOBAL void rom_init IFN0()
      */
 
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else		/* GISP_SVGA */
 #if	defined(macintosh) && defined(A2CPU)
 	/* not macintosh 2.0 cpus - they have sparse M */
@@ -293,7 +293,7 @@ GLOBAL void rom_init IFN0()
     
 	/* load the rom bios */
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else		/* GISP_SVGA */
 
 	read_rom (BIOS1ROM_FILENAME, BIOS_START);
@@ -351,7 +351,7 @@ LOCAL LONG read_rom IFN2(char *, name, sys_addr, address)
 
     return( size );
 #else
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* !(NTVDM && MONITOR) */
 }
 
@@ -461,7 +461,7 @@ GLOBAL VOID patch_rom IFN2(sys_addr, addr, half_word, val)
 	 */
 
 #ifdef macintosh
-/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #endif /* macintosh */
  
 	/* The page might not be present (Arrggghhhh!!!!!)
@@ -507,7 +507,7 @@ GLOBAL VOID patch_rom IFN2(sys_addr, addr, half_word, val)
 #endif /* GISP_SVGA */
 
 #else	/* CPU_40_STYLE */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
 
 #endif	/* !NTVDM | (NTVDM & !X86GFX) */
@@ -541,7 +541,7 @@ GLOBAL void copyROM IFN0()
 #ifndef GISP_SVGA
 LOCAL sys_addr  cur_loc = DOS_SCRATCH_PAD;
 #else		/* GISP_SVGA */
-/* DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA */
 
 GLOBAL void display_string IFN1(char *, string_ptr)
@@ -590,7 +590,7 @@ GLOBAL void display_string IFN1(char *, string_ptr)
 	if (((endLinAddr ^ DOS_SCRATCH_PAD) > 0xfff) || (endLinAddr > DOS_SCRATCH_PAD_END))
 	{
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 		if ((DOS_SCRATCH_PAD_END ^ DOS_SCRATCH_PAD) > 0xfff)
 		{
@@ -617,7 +617,7 @@ GLOBAL void display_string IFN1(char *, string_ptr)
 	*IncCpuPtrLS8(hostPtr) = '$';
 	*IncCpuPtrLS8(hostPtr) = '\0';
 #else /* CPU_40_STYLE */
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
 #endif	/* !NTVDM | !MONITOR */
 	cur_loc+=strlen(string_ptr);

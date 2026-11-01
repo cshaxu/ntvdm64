@@ -141,7 +141,7 @@ Revision History:
 
 /*lint -save -e767 */  // Don't complain about different definitions
 #if DBG
-/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else
 
 #define IF_DEBUG(Function) \

@@ -75,7 +75,7 @@ typedef struct
     HANDLE      FocusEvent;               /* Focus has changed event */
     HANDLE      ActiveOutputBufferHandle; /* The current Console screen buffer handle. */
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-512: X86GFX branch is not selected for these consumers; see mirror register.
 #endif
     WORD	ScreenSizeX;
     WORD	ScreenSizeY;
@@ -390,7 +390,7 @@ extern void nt_v7vga_mono_hi_graph_huge(int offset, int screen_x, int screen_y,
 #endif /* V7VGA */
 
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register.
 #endif /* MONITOR */
 
 void high_stretch3(unsigned char *buffer, int length);
@@ -421,7 +421,7 @@ int get_screen_scale IFN0();
 void SetupConsoleMode(void);
 
 #ifdef MONITOR
-/* DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register.
 #endif /* MONITOR */
 
 void do_new_cursor(void);

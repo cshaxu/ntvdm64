@@ -42,6 +42,6 @@ IMPORT void CrulesRuntimeError IPT1(char *, message);
 #define	REGLONG		0
 #endif
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
 #define __J_C_LANG	/* mark as already included */

@@ -69,7 +69,7 @@ Return Value:
     WORD DosPdb = getAX();
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     VrTerminateMailslots(DosPdb);
@@ -102,7 +102,7 @@ Return Value:
 {
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     SET_ERROR(ERROR_NOT_SUPPORTED);

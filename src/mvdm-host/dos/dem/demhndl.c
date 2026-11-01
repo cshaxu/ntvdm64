@@ -597,7 +597,7 @@ VOID demCommit(VOID)
     hFile = GETHANDLE(getAX(),getBP());
     bRet = FlushFileBuffers(hFile);
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     setCF(0);

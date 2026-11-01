@@ -851,7 +851,7 @@ uint32_t cbGuestComSpec;
 VOID cmdSaveWorld (VOID)
 {
 #ifdef CHECK_IT_LATER
-/* DIVERGENCE MVDM-HOST-DIV-529: CHECK_IT_LATER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: CHECK_IT_LATER platform branch is not selected; see mirror register.
 #endif
     return;
 }

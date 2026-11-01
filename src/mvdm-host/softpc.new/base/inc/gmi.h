@@ -57,7 +57,7 @@ IMPORT	boolean	gmi_disconnect_mem IPT3(sys_addr, laddr,
 	sys_addr, haddr, mem_type, type);
 IMPORT	void	gmi_define_mem IPT2(mem_type, type, MEM_HANDLERS *, handlers);
 #else	/* CCPU */
-/* DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif	/* CCPU */
 
 #endif /* UNIVERSAL */
@@ -70,7 +70,7 @@ IMPORT	void	gmi_define_mem IPT2(mem_type, type, MEM_HANDLERS *, handlers);
 #define BACKWARDS 1
 
 #ifdef EGATEST
-/* DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register.
 #else
 #define gmi_redefine_mem(type,handlers) \
 b_write_ptrs[(int)type] = handlers.b_write; \

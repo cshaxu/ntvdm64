@@ -44,7 +44,7 @@
  */
 
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 #ifdef SEGMENTATION
@@ -166,7 +166,7 @@ static half_word fdc_result_count;
 /* The following sector buffer is used for non_dma transfers */
 
 #ifdef macintosh
-/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #else
 static char fla_ndma_buffer[8192];
 #endif
@@ -178,7 +178,7 @@ static int fla_ndma_sector_size;
  */ 
 
 #ifdef BIT_ORDER1
-/* DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
 
 #ifdef BIT_ORDER2
@@ -423,7 +423,7 @@ void fla_inb IFN2(io_addr, port, half_word *,value)
 			break;
 	}
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
     }
     else
@@ -695,7 +695,7 @@ void fla_outb IFN2(io_addr, port, half_word, value)
     }
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     fla_busy = FALSE;
@@ -800,7 +800,7 @@ static void fla_atomicxqt IFN0()
 }
 
 #else    /* NTVDM */
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif    /* NTVDM */
 
 

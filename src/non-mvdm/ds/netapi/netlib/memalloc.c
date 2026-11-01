@@ -69,7 +69,7 @@ Revision History:
 #include <netlib.h>     // My prototypes, NetpMoveMemory().
 #include <prefix.h>     // PREFIX_ equates.
 #ifdef CDEBUG
-/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
 #endif // def CDEBUG
 
 
@@ -120,7 +120,7 @@ Return Value:
                 RtlProcessHeap( ), 0,              // heap handle
                 Size ));                        // bytes wanted
 #else // def CDEBUG
-/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
 #endif // def CDEBUG
 #endif // ndef WIN32
 
@@ -172,7 +172,7 @@ Return Value:
                 RtlProcessHeap( ), 0,              // heap handle
                 Address);                       // addr of alloc'ed space.
 #else // def CDEBUG
-/* DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
 #endif // def CDEBUG
 #endif // ndef WIN32
 } // NetpMemoryFree
@@ -235,7 +235,7 @@ Return Value:
         HANDLE hOldMem;
 
 #ifdef notdef // LocalHandle returns 0 for LMEM_FIXED block
-/* DIVERGENCE OPENNT-HOST-136: notdef branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-136: notdef branch is not selected; see mirror register.
 #else
         hOldMem = (HANDLE) OldAddress;
 #endif // notdef

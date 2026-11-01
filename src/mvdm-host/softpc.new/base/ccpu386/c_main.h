@@ -126,7 +126,7 @@ typedef struct
 IMPORT IU8 pf_table[];
 
 #ifdef	PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
 
 
@@ -165,7 +165,7 @@ IMPORT VOID c_cpu_unsimulate IPT0();
 
 
 #if 0				/* ROG */
-/* DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif				/* 0 ROG */
 
 #endif /* !DOUBLE_CPU */

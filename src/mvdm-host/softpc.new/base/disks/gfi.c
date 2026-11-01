@@ -27,7 +27,7 @@
  */
 
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 #ifdef SEGMENTATION
@@ -153,7 +153,7 @@ IFN2(FDC_CMD_BLOCK *,command_block,FDC_RESULT_BLOCK *,result_block)
     int ret_stat = SUCCESS;
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     if (get_type_cmd(command_block) == FDC_SPECIFY)
@@ -184,7 +184,7 @@ IFN2(FDC_CMD_BLOCK *,command_block,FDC_RESULT_BLOCK *,result_block)
 GLOBAL SHORT gfi_drive_on IFN1(UTINY,drive)
 {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     /*
@@ -197,7 +197,7 @@ GLOBAL SHORT gfi_drive_on IFN1(UTINY,drive)
 GLOBAL SHORT gfi_drive_off IFN1(UTINY,drive)
 {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     /*
@@ -215,7 +215,7 @@ GLOBAL SHORT gfi_reset IFN2(FDC_RESULT_BLOCK *,result_block, UTINY, drive)
      */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     /*
@@ -242,7 +242,7 @@ GLOBAL SHORT gfi_reset IFN2(FDC_RESULT_BLOCK *,result_block, UTINY, drive)
 GLOBAL SHORT gfi_high IFN2(UTINY,drive,half_word,datarate)
 {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
     /*
@@ -256,7 +256,7 @@ GLOBAL SHORT gfi_high IFN2(UTINY,drive,half_word,datarate)
 GLOBAL SHORT gfi_drive_type IFN1(UTINY,drive)
 {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
  
     /*
@@ -269,7 +269,7 @@ GLOBAL SHORT gfi_drive_type IFN1(UTINY,drive)
 GLOBAL SHORT gfi_change IFN1(UTINY,drive)
 {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
  
     /*
@@ -285,7 +285,7 @@ IFN4(UTINY, hostID, ConfigValues *,vals, NameTable *,table, CHAR *,err)
 {
 	UNUSED(table);
 #ifdef SLAVEPC
-/* DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */
 
 	return host_gfi_rdiskette_valid(hostID, vals, err);
@@ -295,7 +295,7 @@ GLOBAL VOID
 gfi_floppy_change IFN2(UTINY, hostID, BOOL, apply)
 {
 #ifdef SLAVEPC
-/* DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */
 
 	host_gfi_rdiskette_change(hostID, apply);
@@ -305,7 +305,7 @@ GLOBAL SHORT
 gfi_floppy_active IFN3(UTINY, hostID, BOOL, active, CHAR *,err)
 {
 #ifdef SLAVEPC
-/* DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */
 
 	return host_gfi_rdiskette_active(hostID, active, err);
@@ -315,7 +315,7 @@ GLOBAL VOID
 gfi_attach_adapter IFN2(UTINY, adapter, BOOL, attach)
 {
 #ifdef SLAVEPC
-/* DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */
 
 	config_activate(C_FLOPPY_A_DEVICE + adapter, attach);

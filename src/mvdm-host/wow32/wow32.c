@@ -1875,7 +1875,7 @@ Return Value:
 #endif
 
 #if 0 // this code is a paranoid check, only useful when debugging GetPModeVDMPointer.
-/* DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 
         return vp;
@@ -1899,9 +1899,9 @@ ULONG FASTCALL W32GetFastAddress( PVDMFRAME pFrame )
     UNREFERENCED_PARAMETER(pFrame);
     return mvdm_softpc_fast_bop_dispatch_offset();
 #elif FASTBOPPING
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 }
 
@@ -1911,9 +1911,9 @@ ULONG FASTCALL W32GetFastCbRetAddress( PVDMFRAME pFrame )
     UNREFERENCED_PARAMETER(pFrame);
     return mvdm_softpc_fast_bop_callback_offset();
 #elif FASTBOPPING
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 }
 
@@ -1947,9 +1947,9 @@ ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )
      * but in worker guest memory rather than leaking a host array address. */
     return mvdm_softpc_wow_page_domain_flat_address_array(FlatAddress);
 #elif FASTBOPPING
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #else
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 }
 

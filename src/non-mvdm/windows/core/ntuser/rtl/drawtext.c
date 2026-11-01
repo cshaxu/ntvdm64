@@ -63,7 +63,7 @@ LONG GetPrefixCount(
                 chprintpos++;
             }
 #ifdef FE_SB // GetPrefixCount()
-/* DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: FE_SB branch is not selected; see mirror register.
 #endif // FE_SB
         } else {
 

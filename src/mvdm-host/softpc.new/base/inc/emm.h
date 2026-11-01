@@ -46,7 +46,7 @@ AMMENDMENTS	:
 
 #define MIN_FUNC_NO		0x40	/* Lowest function code		*/
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #else					/* (includes trace options)	*/
 #define	MAX_FUNC_NO		0x5d	/* Highest function code	*/
 #endif
@@ -133,7 +133,7 @@ IMPORT boolean init_lim_configuration_data(PLIM_CONFIG_DATA lim_config_data);
 IMPORT unsigned short get_lim_backfill_segment(void);
 
 #if defined(MONITOR) && !defined(PROD)
-/* DIVERGENCE MVDM-HOST-DIV-518: MONITOR without PROD is not selected in observed consumers; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: MONITOR without PROD is not selected in observed consumers; see mirror register.
 #endif
 
 #endif
@@ -198,7 +198,7 @@ IMPORT int	reallocate_handle IPT3(short, handle_no,
 				       short, old_page_count,
 				       short, new_page_count);
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 

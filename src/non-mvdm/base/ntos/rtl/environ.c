@@ -287,7 +287,7 @@ RtlQueryEnvironmentVariable_U(
 
             }
 #if DBG
-/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif
 
         if ( RtlpEnvironCacheValid && p == Peb->ProcessParameters->Environment ) {

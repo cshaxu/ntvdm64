@@ -23,5 +23,5 @@
 
 
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-534: unreferenced GISP hardware VGA interface is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-534: unreferenced GISP hardware VGA interface is not selected; see mirror register.
 #endif /* GISP_SVGA */

@@ -365,7 +365,7 @@ gfi_slave_drive_type IFN1(UTINY, drive)
 	drivetype( drive, &dtype, &status );
 	note_trace2( GFI_VERBOSE, "dtype=%x status=%x", dtype, status );
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
 
 	if ( status != SUCCESS )
@@ -620,7 +620,7 @@ gfi_slave_command
    	       if (nres != info.n_resblk)
 	       {
 #ifndef	PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
        		   failure(PROTOCOL);
 	       }
@@ -724,7 +724,7 @@ int *status;
       ioff += nbytes;
    }
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
    return(0);
 }

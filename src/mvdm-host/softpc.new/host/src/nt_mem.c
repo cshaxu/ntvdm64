@@ -463,7 +463,7 @@ GLOBAL NTSTATUS VdmAllocateVirtualMemory IFN3(PULONG, INTELAddress,
         ((ULONG) (IHPE)commitAddr) - (ULONG)intelMem);
 
 #ifdef DEBUG_MEM_DUMP
-/* DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
 #endif
 #endif
 
@@ -658,7 +658,7 @@ GLOBAL NTSTATUS VdmFreeVirtualMemory IFN1(ULONG, INTELAddress)
 
 #ifdef DEBUG_MEM
 #ifdef DEBUG_MEM_DUMP
-/* DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
 #endif
 #endif
 
@@ -902,7 +902,7 @@ GLOBAL NTSTATUS VdmReallocateVirtualMemory IFN3(ULONG, INTELOriginalAddress,
 #ifdef DEBUG_MEM
     printf("to %lx\n", *INTELNewAddress);
 #ifdef DEBUG_MEM_DUMP
-/* DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
 #endif
 #endif
     /* Success. */
@@ -991,7 +991,7 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
 
 #ifdef DEBUG_MEM
 #ifdef DEBUG_MEM_DUMP
-/* DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
 #endif
     printf("NTVDM:VdmAddVirtualMemory => *IntelAddress=%lx\n", *IntelAddress);
 #endif
@@ -1017,7 +1017,7 @@ GLOBAL NTSTATUS VdmRemoveVirtualMemory IFN1(ULONG, IntelAddress)
 #ifdef DEBUG_MEM
     printf("NTVDM:VdmRemoveVirtualMemory at %lx)\n", IntelAddress);
 #ifdef DEBUG_MEM_DUMP
-/* DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
 #endif
 #endif
 
@@ -1052,7 +1052,7 @@ GLOBAL NTSTATUS VdmRemoveVirtualMemory IFN1(ULONG, IntelAddress)
 
 #ifdef DEBUG_MEM
 #ifdef DEBUG_MEM_DUMP
-/* DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
 #endif
 #endif
     return VdmFreeVirtualMemory(IntelAddress);
@@ -1096,7 +1096,7 @@ LOCAL SECTION_HEADER *addHeaderEntry IFN5(SECTION_HEADER *, prevHeader,
     IU32     commitSize;
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
 
     /* Commit and zero table header entries if necessary. */
@@ -1364,7 +1364,7 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
             lastPage;               /* Last page that needs committing. */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
 
     /*
@@ -1379,7 +1379,7 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
  * Also insufficient anyway in general case
  */
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
     lastPage = currentAllocLastPage;
 #endif

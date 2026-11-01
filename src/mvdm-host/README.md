@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-543: turn the previously registered excluded-branch
+placeholders into `#error` directives while preserving their conditions and
+numbered explanations. Actual selected `timeval.h` declarations incorrectly
+removed by DIV-537 are restored from the pre-removal original. The per-file
+hashes and counts are in `../../artifacts/mvdm-audit/s12-excluded-branch-errors.jsonl`.
+
 MVDM-HOST-DIV-541: replace unselected original compound host-condition
 bodies with markers only where each observed C compile context proves the
 outcome. Existing divergences and a body containing a held CPU label remain.
@@ -26,7 +32,8 @@ MVDM-HOST-DIV-537: replace unselected non-NTVDM branch bodies with markers
 only in observed C compile units explicitly defining NTVDM and headers whose
 observed consumers all explicitly define it. Mixed or uncertain header
 contexts remain untouched. Original ranges and hashes are in
-`../../artifacts/mvdm-audit/s12-non-ntvdm.jsonl`.
+`../../artifacts/mvdm-audit/s12-non-ntvdm.jsonl`. Correction: `timeval.h`
+has mixed consumers, so DIV-543 restores both original alternatives.
 
 MVDM-HOST-DIV-536: replace unselected small historical diagnostic, tool and
 host-platform branches with markers, preserving conditionals. Exact labels,

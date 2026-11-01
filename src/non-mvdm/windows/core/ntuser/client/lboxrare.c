@@ -131,7 +131,7 @@ LONG xxxLBCreate(
     plb->iLastMouseMove = -1;
 
 #ifdef NEVER
-/* DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register.
 #endif
 
     /*

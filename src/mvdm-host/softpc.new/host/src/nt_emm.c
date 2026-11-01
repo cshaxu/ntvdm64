@@ -108,7 +108,7 @@ Defines are:
 #define unix_memmove(dst,src,len) memmove((dst),(src),(len))
 
 #ifdef	BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
 #define	EM_host_address(offset) (EM_host_base_address + offset)
 #define	EM_loads(from, to, length) memcpy(to, get_byte_addr(from), length)
@@ -135,7 +135,7 @@ static int em_loads(sys_addr from, unsigned char *to, int length)
     count = (uint32_t)length;
     guest_from = from;
 #ifdef BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register.
 #endif
     if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_from, count)) {
         EM_loads(from, to, length);
@@ -158,7 +158,7 @@ static int em_stores(sys_addr to, unsigned char *from, int length)
     count = (uint32_t)length;
     guest_to = to;
 #ifdef BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register.
 #endif
     if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_to, count)) {
         EM_stores(to, from, length);
@@ -184,7 +184,7 @@ static int em_moves(sys_addr from, sys_addr to, int length)
     guest_from = from;
     guest_to = to;
 #ifdef BACK_M
-/* DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-526: BACK_M branch is not selected; see mirror register.
 #endif
     if (!mvdm_softpc_physical_mapping_span_is_aliased(guest_from, count) &&
         !mvdm_softpc_physical_mapping_span_is_aliased(guest_to, count)) {
@@ -231,12 +231,12 @@ int host_initialise_EM(short size)
 	status = VdmAllocateVirtualMemory(&EM_base_address, size * 0x100000, FALSE);
 	if (!NT_SUCCESS(status)) {
 #ifdef EMM_DEBUG
-/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
 	    return FAILURE;
 	}
 #ifdef EMM_DEBUG
-/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
 
 	/* pagemap requires 1 bit per 16K page - i.e. 8 bytes per meg	*/
@@ -428,7 +428,7 @@ unsigned short	segment;	 segment in physical address space to
 				 EMM_PAGE_SIZE / INTEL_PAGE_SIZE
 				 );
 #ifdef EMM_DEBUG
-/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
 	if (NT_SUCCESS(Status)) {
 	    return(SUCCESS);
@@ -473,7 +473,7 @@ short		EM_page_no 	Expanded Memory page currently
 			 EM_starting_page_no;
 
 #ifdef EMM_DEBUG
-/* DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: EMM_DEBUG branch is not selected; see mirror register.
 #endif
 	Status = VdmUnmapDosMemory(DosIntelPageNo,
 				   EMM_PAGE_SIZE / INTEL_PAGE_SIZE

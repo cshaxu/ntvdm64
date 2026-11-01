@@ -27,7 +27,7 @@ typedef struct _CpuEnvironmentVariable {
 PCPUENVVAR CpuEnvVarListHead=NULL;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 
@@ -132,7 +132,7 @@ DWORD       dw;
                   NULL );
      if (!NT_SUCCESS(dw) || MyDebugPort == NULL)  {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
            return;
           }
@@ -334,7 +334,7 @@ CpuEnvInit(
     NtClose(CpuEnvKey);
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 }
@@ -360,7 +360,7 @@ char * _CRTAPI1 getenv(const char *Name)
      }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
   return Value;

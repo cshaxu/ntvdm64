@@ -2263,7 +2263,7 @@ Return Value:
                     RtlImageNtHeader(NtCurrentPeb()->ImageBaseAddress)->FileHeader.Machine) {
 
 #ifdef _MIPS_
-/* DIVERGENCE OPENNT-HOST-136: _MIPS_ branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-136: _MIPS_ branch is not selected; see mirror register.
 #else
                 SetLastError(ERROR_BAD_EXE_FORMAT);
                 goto GBTtryexit;

@@ -107,7 +107,7 @@ LOCAL struct tms process_t_start, process_t_resettable;
 #define host_times(x)	times(x)
 
 #else  /* macintosh */
-/* DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register.
 #endif /* !macintosh */
 
 /***** LOCAL FN ****/
@@ -537,7 +537,7 @@ addEOI IFN3 (EOIHANDLE, newhandle, char *, tag, IU8, attrib)
 	lastEoin = eoin = EventsOfInterest;
 	do {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 	    lastEoin = eoin;
 	    eoin = eoin->next;
@@ -1519,7 +1519,7 @@ NewEOI IFN2 (char *, tag, IU8, attrib)
     {
 	(void)addEOI(CurMaxEOI, tag, attrib);	/* No init file, enable all */
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 	return(CurMaxEOI);		/* return new handle */
     }
@@ -1559,7 +1559,7 @@ NewEOI IFN2 (char *, tag, IU8, attrib)
 	    {
 		(void)addEOI(CurMaxEOI, tag, flags);
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 		return(CurMaxEOI);
 	    }
@@ -1568,7 +1568,7 @@ NewEOI IFN2 (char *, tag, IU8, attrib)
 
     (void)addEOI(CurMaxEOI, tag, attrib | EOI_DISABLED);
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
     return(CurMaxEOI);		/* return new handle */
 }
@@ -2504,7 +2504,7 @@ GLOBAL void GenerateAllProfileInfo IFN1(FILE *, stream)
     fprintf( stream, "SoftPC start time %24.24s, current time %8.8s\n\n",
 				start_time, ctime(&now)+11 );
 #ifdef macintosh
-/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #else  /* macintosh */
     {
     	struct tms c_t;
@@ -2621,7 +2621,7 @@ CollateSequenceGraph IFN1 (FILE *, stream)
     IU8 walked;				/* masked state per node */
 
 #ifdef DEBUGGING_PROF 	/* for seq graph */
-/* DIVERGENCE MVDM-HOST-DIV-536: DEBUGGING_PROF branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-536: DEBUGGING_PROF branch is not selected; see mirror register.
 #endif /* DEBUGGING_PROF for seq graph */
 
     if (EventGraph == GRAPHPTRNULL)
@@ -3279,7 +3279,7 @@ ProfileInit IFN0 ()
     elapsed_t_start = elapsed_t_resettable = host_times( &process_t_start );
 
 #ifdef macintosh
-/* DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #else  /* macintosh */
 
     process_t_resettable.tms_utime  =  process_t_start.tms_utime;

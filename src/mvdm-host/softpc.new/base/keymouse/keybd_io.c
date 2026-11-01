@@ -47,7 +47,7 @@
  */
 
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 #ifdef SEGMENTATION
@@ -82,7 +82,7 @@
 #include "keyba.h"
 #include "ica.h"
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 #include "debug.h"
@@ -170,7 +170,7 @@ LOCAL word rcpu_nop_segment = RCPU_NOP_SEGMENT,
 LOCAL word rcpu_poll_segment = RCPU_POLL_SEGMENT,
 	   rcpu_poll_offset  = RCPU_POLL_OFFSET;
 #else /* GISP_SVGA */
-/* DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif /* GISP_SVGA */
 
 #if defined(IRET_HOOKS) && defined(GISP_CPU)
@@ -225,7 +225,7 @@ extern word stream_io_buffer_size;
 extern sys_addr stream_io_bios_busy_sysaddr;
 
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
 
 /*
@@ -239,7 +239,7 @@ GLOBAL word rcpu_int1C_off = USER_TIMER_INT_OFFSET;
 GLOBAL word rcpu_int4A_seg = RCPU_INT4A_SEGMENT;
 GLOBAL word rcpu_int4A_off = RCPU_INT4A_OFFSET;
 #else /* GISP_SVGA */
-/* DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif /* GISP_SVGA */
 
 GLOBAL word dummy_int_seg = 0;
@@ -530,7 +530,7 @@ LOCAL VOID check_indicators IFN1(IBOOL, eoi)
 #endif
 
 #ifdef	GISP_CPU
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif	/* GISP_CPU */
 #else	/* not NTVDM nor GISP_CPU */
 
@@ -613,7 +613,7 @@ LOCAL VOID K26 IFN0()
 
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else	/* NTVDM */
 
 void INT15(void);
@@ -623,7 +623,7 @@ word sp_int15_handler_off = 0;
 #endif	/* NTVDM */
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else   /* NTVDM */
 /* NTVDM code size is too large, change this often used macro
  * to a function, as the call overhead is not justified
@@ -657,7 +657,7 @@ void BEEP(char *message)
 ** highly speed sensitive!
 */
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else   /* NTVDM */
 
 
@@ -704,7 +704,7 @@ void NtPutInBuffer(half_word s, half_word v)
 /* <tur 17-Jun-93> Eurrgh; macros with embedded "return"s! */
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* !NTVDM */
 
 LOCAL VOID CheckAndPutInBufferFunc IFN2(half_word, s,half_word, v)
@@ -715,7 +715,7 @@ LOCAL VOID CheckAndPutInBufferFunc IFN2(half_word, s,half_word, v)
 	}
 	else {
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else /* NTVDM */
 		NtPutInBuffer(s, v);
 #endif /* !NTVDM */
@@ -762,7 +762,7 @@ LOCAL VOID PAUSE IFN0()
 }
 
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 /*
@@ -771,7 +771,7 @@ LOCAL VOID PAUSE IFN0()
 LOCAL void exit_from_kbd_int IFN0()
 {
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 	note_trace0( BIOS_KB_VERBOSE, "KBD BIOS - END" );
 	setIF( 0 );
@@ -806,7 +806,7 @@ void keyboard_int IFN0()
             }
 #endif
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 	setIF(0);
         note_trace0(BIOS_KB_VERBOSE,"KBD BIOS start");
@@ -1106,7 +1106,7 @@ label2:	/* NOT IN HOLD STATE	*/
 		if( (sas_hw_at_no_check(kb_flag) & CTL_SHIFT ) && (code == DEL_KEY) )
                 {
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else
                         K26();
 #endif
@@ -1434,7 +1434,7 @@ void keyboard_io()
      case 0:
        WaitIfIdle();
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
        break;
 
@@ -1466,7 +1466,7 @@ void keyboard_io()
 }
 
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 #ifdef SEGMENTATION
@@ -1516,7 +1516,7 @@ void keyboard_init()
         host_kb_init();
 
 #if defined(CPU_40_STYLE) && !defined (NTVDM)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
 }
 
@@ -1632,7 +1632,7 @@ void kb_setup_vectors(void)
         effective_addr(KbdSeg, *pkio_table++));
    stream_io_bios_busy_sysaddr = effective_addr(KbdSeg, *pkio_table++);
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
    TimerInt1CSeg = KbdSeg;
    TimerInt1COff = dummy_int_off;
@@ -1684,7 +1684,7 @@ void UpdateKbdInt15(word Seg,word Off)
     if(int15Off != sp_int15_handler_off || int15Seg != sp_int15_handler_seg)
       {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
        sp_int15_handler_off = sp_int15_handler_seg = 0;
        return;

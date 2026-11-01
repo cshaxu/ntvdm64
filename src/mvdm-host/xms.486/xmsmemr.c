@@ -149,7 +149,7 @@ Return Value:
 #ifdef CPU_40_STYLE
     mvdm_xms_move_memory(Destination, Source, Count);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
 
 }

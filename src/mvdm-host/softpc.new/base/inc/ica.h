@@ -64,7 +64,7 @@
 #endif
 
 #if defined (SWIN_HAW) 
-/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register.
 #endif
 
 #if defined (ASPI)
@@ -80,7 +80,7 @@
  * bit-number macro from replacing the CCPU interrupt enum.  CPU30 is retired
  * in this product; the unselected non-CCPU body is now marked by DIV-506. */
 #if !defined(CCPU)
-/* DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-506: non-CCPU host branch is not selected; see mirror register.
 #endif /* 3.0 CPU or CCPU */
 
 #define DIVIDE_OVERFLOW_INT     0
@@ -200,10 +200,10 @@ typedef struct {
 
 
 #if !defined(NTVDM)
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* !NTVDM */
 
 #ifdef GISP_CPU
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif /* GISP_CPU */
 

@@ -93,7 +93,7 @@ void host_idle_init(void)
     IdleEvent = CreateEvent((LPSECURITY_ATTRIBUTES) NULL, FALSE, FALSE, NULL);
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 }
 

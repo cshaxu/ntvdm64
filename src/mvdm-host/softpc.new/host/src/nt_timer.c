@@ -160,7 +160,7 @@ ERROR RECOVERY    :     errors are ignored
 
 #include "debug.h"
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
 #line 166 /* MVDM-HOST-DIV-501: preserve original diagnostic line numbers. */
 
@@ -387,7 +387,7 @@ void host_timer_event()
         unsigned char FgBgPriority;
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
 
         host_graphics_tick();               // video graphics stuff
@@ -580,7 +580,7 @@ DWORD HeartBeatThread(PVOID pv)
                         );
 
 #ifdef X86GFX
-/* DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 
 
@@ -596,14 +596,14 @@ DWORD HeartBeatThread(PVOID pv)
 
 
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
 
 DWORD Win32_host_timer(void)
 {
     NTSTATUS      status;
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
     LONG          DelayPeriod;
     LARGE_INTEGER DiffTime;
@@ -685,7 +685,7 @@ HBresume:
           * Update the VirtualTimerHardware
           */
 #ifdef PIG
-/* DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
 #line 708 /* MVDM-HOST-DIV-498: preserve original diagnostic line numbers. */
        time_tick();

@@ -805,7 +805,7 @@ LOCAL void do_transfer	IFN6(int, type, int, decrement,
 				}
 			}
 #else
-/* DIVERGENCE MVDM-HOST-DIV-540: non-LIM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-540: non-LIM branch is not selected; see mirror register.
 #endif /* LIM */
 #endif /* nPM */
 			sas_PWS(dma_addr, (host_addr) hw_buffer, length);
@@ -825,7 +825,7 @@ LOCAL void do_transfer	IFN6(int, type, int, decrement,
 				}
 			}
 #else
-/* DIVERGENCE MVDM-HOST-DIV-540: non-LIM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-540: non-LIM branch is not selected; see mirror register.
 #endif /* LIM */
 #endif /* nPM */
 			bwd_dest_copy_to_M((half_word *)hw_buffer, dma_addr, length);

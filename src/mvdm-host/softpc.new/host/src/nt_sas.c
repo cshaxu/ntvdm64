@@ -26,7 +26,7 @@ LOCAL    UTINY *reserve_for_M = NULL;
 //
 
 #ifdef SUN_VA
-/* DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif
 
 #ifdef HOST_SAS
@@ -53,7 +53,7 @@ LOCAL    UTINY *reserve_for_M = NULL;
 IMPORT	VOID	sas_load();
 IMPORT	VOID	sas_store();
 #ifdef SUN_VA
-/* DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #else
 IMPORT	VOID	sas_loadw();
 IMPORT	VOID	sas_storew();
@@ -88,13 +88,13 @@ GLOBAL    SAS_FUNCTIONS host_sas_funcs =
 {
 	sas_load,
 #ifdef SUN_VA
-/* DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #else
 	sas_loadw,
 #endif
 	sas_store,
 #ifdef SUN_VA
-/* DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #else
 	sas_storew,
 #endif
@@ -129,7 +129,7 @@ GLOBAL    SAS_FUNCTIONS host_sas_funcs =
 //}
 
 #ifdef SUN_VA
-/* DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif /* SUN_VA */
 
 //UTINY *host_sas_term()

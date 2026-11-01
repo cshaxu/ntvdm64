@@ -121,7 +121,7 @@ typedef struct
 						arg5,int,arg6);
 	void (*paint_cursor) IPT3(int,arg1, int,arg2, half_word,arg3);
 #ifdef GISP_SVGA 
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
 #ifdef EGG
 	void (*set_paint) IPT2(DISPLAY_MODE,arg1, int,arg2);
@@ -170,7 +170,7 @@ extern VIDEOFUNCS *working_video_funcs;
 #define host_paint_cursor(x,y,attr)\
 	(working_video_funcs->paint_cursor)(x,y,attr)
 #ifdef GISP_SVGA
-/* DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
 #ifdef EGG
 #define host_set_paint_routine(mode,ht)\
@@ -264,7 +264,7 @@ extern	void	vga_graph_update IPT0();
 extern	void	vga_split_graph_update IPT0();
 
 #if defined(HERC)
-/* DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif
 
 extern	boolean	dummy_scroll IPT6(int,dummy1,int,dummy2,int,dummy3,

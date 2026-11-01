@@ -66,13 +66,13 @@
  *	only the IO_READ flag set, the other with only the IO_WRITE flag set.
  */
 #ifdef	MAC68K
-/* DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register.
 #else
 GLOBAL char	Ios_in_adapter_table[PC_IO_MEM_SIZE];
 GLOBAL char	Ios_out_adapter_table[PC_IO_MEM_SIZE];
 #endif	/* MAC68K */
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 
 /*
@@ -158,7 +158,7 @@ LOCAL void io_empty_inb IFN2(io_addr, io_address, half_word *, value)
 	UNUSED(io_address);
 
 #else
-/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif /* PROD */
 	*value = IO_EMPTY_PORT_BYTE_VALUE;
 }
@@ -177,7 +177,7 @@ LOCAL void io_empty_outb IFN2(io_addr, io_address, half_word, value)
 #ifdef PROD
 	UNUSED(io_address);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif /* PROD */
 	/* Do nothing! */
 }
@@ -205,7 +205,7 @@ LOCAL void generic_inw IFN2(io_addr, io_address, word *, value)
 #endif				/* LITTLEND */
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif				/* BIGEND */
 }
 
@@ -252,7 +252,7 @@ LOCAL void generic_ind IFN2(io_addr, io_address, double_word *, value)
 #endif				/* LITTLEND */
 
 #ifdef BIGEND
-/* DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif				/* BIGEND */
 }
 #endif /* SPC386 */
@@ -291,7 +291,7 @@ LOCAL void generic_outd IFN2(io_addr, io_address, double_word, value)
 
 /* MS NT monitor uses these string routines {in,out}s{b,w} string io support */
 #if defined(NTVDM) && defined(MONITOR)
-/* DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM & MONITOR */
 
 LOCAL void generic_insb IFN3(io_addr, io_address, half_word *, valarray,
@@ -456,13 +456,13 @@ GLOBAL void	inb IFN2(io_addr, io_address, half_word *, value)
 #endif /* VIRTUALISATION */
 
 #ifdef EGA_DUMP
-/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #endif
 
 #ifdef VIRTUALISATION
 
 #ifdef SYNCH_TIMERS
-/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #endif	/* SYNCH_TIMERS */
 
 	if (IOVirtualised(io_address, &value32, BIOS_INB_OFFSET, (sizeof(IU8))))
@@ -496,7 +496,7 @@ GLOBAL void	outb IFN2(io_addr, io_address, half_word, value)
 #endif /* VIRTUALISATION */
 
 #ifdef EGA_DUMP
-/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #endif
 
 	sub_note_trace2( IOS_VERBOSE, "outb( %x, %x )", io_address, value );
@@ -532,13 +532,13 @@ GLOBAL void	inw IFN2(io_addr, io_address, word *, value)
 #endif /* VIRTUALISATION */
 
 #ifdef EGA_DUMP
-/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #endif
 
 #ifdef VIRTUALISATION
 
 #ifdef SYNCH_TIMERS
-/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #endif	/* SYNCH_TIMERS */
 
 	if (IOVirtualised(io_address, &value32, BIOS_INW_OFFSET, (sizeof(IU16))))
@@ -571,7 +571,7 @@ GLOBAL void	outw IFN2(io_addr, io_address, word, value)
 #endif /* VIRTUALISATION */
 
 #ifdef EGA_DUMP
-/* DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.
 #endif
 
 	sub_note_trace2( IOS_VERBOSE, "outw( %x, %x )", io_address, value );
@@ -610,7 +610,7 @@ GLOBAL void	ind IFN2(io_addr, io_address, IU32 *, value)
 	IU32 value32;
 
 #ifdef SYNCH_TIMERS
-/* DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #endif	/* SYNCH_TIMERS */
 
 	if (IOVirtualised(io_address, &value32, BIOS_IND_OFFSET, (sizeof(IU32)))) 
@@ -858,7 +858,7 @@ GLOBAL BOOL	io_connect_port IFN3(io_addr, io_address, half_word, adapter,
 	return TRUE;
 }
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 
 
@@ -883,7 +883,7 @@ GLOBAL void     io_disconnect_port IFN2(io_addr, io_address, half_word, adapter)
         Ios_out_adapter_table[io_address & (PC_IO_MEM_SIZE-1)] = EMPTY_ADAPTOR;
 }
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
 
 
@@ -942,11 +942,11 @@ GLOBAL void	io_init IFN0()
 	io_define_outb(EMPTY_ADAPTOR, io_empty_outb);
 
 #ifdef	MAC68K
-/* DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-529: MAC68K platform branch is not selected; see mirror register.
 #endif	/* MAC68K */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
 
 	for (i = 0; i < PC_IO_MEM_SIZE; i++){
@@ -960,7 +960,7 @@ GLOBAL void	io_init IFN0()
 GLOBAL char GetExtIoInAdapter (io_addr ioaddr)
 {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
     return EMPTY_ADAPTOR;
 }
@@ -968,7 +968,7 @@ GLOBAL char GetExtIoInAdapter (io_addr ioaddr)
 GLOBAL char GetExtIoOutAdapter (io_addr ioaddr)
 {
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
     return EMPTY_ADAPTOR;
 }

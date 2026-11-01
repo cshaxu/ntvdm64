@@ -50,7 +50,7 @@ extern void force_yoda();
  */
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #else /* !PROD */
 
 #endif /* !PROD else*/

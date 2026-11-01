@@ -17,7 +17,7 @@
 #ifdef HFX
 
 #ifdef SCCSID
-/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
 
 /****************************************************************/
@@ -61,7 +61,7 @@ typedef struct {
 #define SRVRIN	0x40
 
 #ifndef PROD
-/* DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #else
 #define hfx_trace0(trace_bit,str)
 #define hfx_trace1(trace_bit,str,p1)
@@ -705,6 +705,6 @@ IMPORT void		set_hfx_drive_state	IPT2(IU8, drive, drv_stat, state);
 
 
 #ifdef SWIN_HFX
-/* DIVERGENCE MVDM-HOST-DIV-528: SWIN_HFX platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HFX platform branch is not selected; see mirror register.
 #endif /* SWIN_HFX */
 #endif /* HFX */

@@ -64,7 +64,7 @@ extern UTINY number_of_floppy;
 #endif	/* NTVDM */
 
 #ifndef	PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* nPROD */
 
 
@@ -82,7 +82,7 @@ void diskette_io()
 	int op = getAH(), drive = getDL();
 
 #ifndef	PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 
 #ifndef	JOKER
@@ -109,7 +109,7 @@ void diskette_io()
 #ifdef NTVDM
 		if (drive >= number_of_floppy)
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 			op = FL_FNC_ERR;
 
@@ -132,7 +132,7 @@ void diskette_io()
 
 
 #ifndef	PROD
-/* DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 }
 
@@ -174,7 +174,7 @@ void diskette_int()
 	setCS(int15_seg);
 	setIP(int15_off);
 #else
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
 
 	host_simulate();
@@ -204,7 +204,7 @@ void diskette_post()
 	 */
 	half_word diskette_id_reg, hf_cntrl, interrupt_mask;
 #ifndef NTVDM
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
 	EQUIPMENT_WORD equip_flag;
 
@@ -246,7 +246,7 @@ void diskette_post()
 		sas_store(DRIVE_CAPABILITY, hf_cntrl);
 
 #ifndef NTVDM	/* prevent floppies showing up in bios data area */
-/* DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
 	}
 }

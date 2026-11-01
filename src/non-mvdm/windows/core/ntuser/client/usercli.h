@@ -79,7 +79,7 @@ typedef struct _LOOKASIDE {
     ZONE_HEADER LookasideZone;
     DWORD EntrySize;
 #if DBG
-/* DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif // DBG
 } LOOKASIDE, *PLOOKASIDE;
 

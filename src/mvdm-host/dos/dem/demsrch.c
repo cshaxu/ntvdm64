@@ -306,7 +306,7 @@ DWORD demFileFindFirst (
 
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     STOREDWORD(pDta->FFindId,0);
@@ -468,7 +468,7 @@ DWORD demFileFindNext (
         }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     SearchAttr = pFFindEntry->usSrchAttr;
@@ -538,7 +538,7 @@ VOID demFindFirstFCB (VOID)
     lpFile = (LPSTR) GetVDMAddr (getES(),getDI());
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     pFCBSrchBuf = (PSRCHBUF) GetVDMAddr (getDS(),getSI());
@@ -636,7 +636,7 @@ VOID demFindNextFCB (VOID)
         }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     SearchAttr = getAL() ? getDL() : 0;
@@ -1131,7 +1131,7 @@ FileFindOpen(
              }
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
 
@@ -1159,7 +1159,7 @@ FFOFinallyExit:;
     finally {
          if (!NT_SUCCESS(Status)) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
              FileFindClose(pFFindEntry);
@@ -1349,7 +1349,7 @@ FileFindReset(
                        pFFindEntry->FindBufferLength, &pFFindEntry->FindBufferNext);
                }
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
                return Status;
                }
@@ -1462,7 +1462,7 @@ FileFindLast(
 
        if (Status == STATUS_NO_MORE_FILES || Status == STATUS_NO_SUCH_FILE) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
            return Status;
            }
@@ -1563,7 +1563,7 @@ FileFindNext(
 
            if (!NT_SUCCESS(Status)) {
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
                return Status;
                }
@@ -2079,7 +2079,7 @@ VOID FillFCBSrchBuf(
     FILETIME    ftLocal;
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     // Copy file name (Max Name = 8 and Max ext = 3)
@@ -2168,7 +2168,7 @@ FillSrchDta(
     STOREWORD(pDta->usHighSize,(USHORT)(pFFindDD->dwFileSizeLow >> 16));
 
 #if DBG
-/* DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
     strncpy(pDta->achFileName,pFFindDD->cFileName, 13);

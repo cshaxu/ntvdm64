@@ -84,7 +84,7 @@ typedef ICH *LPICH;
 #define TYPE_KBDLAYOUT      14          // Keyboard Layout handle (HKL) object.
 #define TYPE_KBDFILE        15          // Keyboard Layout file object.
 #ifdef FE_IME
-/* DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #else
 #define TYPE_CTYPES         16          // Count of TYPEs; Must be LAST + 1
 #endif
@@ -269,7 +269,7 @@ typedef struct tagITEM {
     HANDLE  hbmpChecked;    /* Bitmap for an on  check */
     HANDLE  hbmpUnchecked;   /* Bitmap for an off check */
 #ifdef MEMPHIS_MENUS
-/* DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
 #endif // MEMPHIS_MENUS
     HANDLE  hTypeData;     // if ownerdraw, MAKELONG(width, height)
                             // if bitmap,    hBitmap
@@ -286,7 +286,7 @@ typedef struct tagITEM {
     DWORD   ulX;                /* String: Underline start */
     DWORD   ulWidth;            /* String: underline width */
 #ifdef MEMPHIS_MENUS
-/* DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
 #endif // MEMPHIS_MENUS
 } ITEM, *PITEM, *LPITEM;
 
@@ -306,7 +306,7 @@ typedef struct tagMENU {
     PITEM           rgItems;        /* The list of items in this menu */
     DWORD           dwContextHelpId;// Context help Id for the whole menu
 #ifdef MEMPHIS_MENU_WATERMARKS
-/* DIVERGENCE OPENNT-HOST-133: MEMPHIS_MENU_WATERMARKS branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-133: MEMPHIS_MENU_WATERMARKS branch is not selected; see mirror register.
 #endif // MEMPHIS_MENU_WATERMARKS
 
 } MENU, *PMENU;
@@ -353,7 +353,7 @@ typedef struct tagWND {          // wnd
     HRGN          hrgnClip;     // Clipping region for this window
     int           iHungRedraw;  // Index into hung redraw table
 #ifdef FE_IME
-/* DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #endif
 
     WW;         // WOW-USER common fields. Defined in wowuserp.h

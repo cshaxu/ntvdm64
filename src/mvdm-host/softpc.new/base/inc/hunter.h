@@ -15,5 +15,5 @@
 
 /* This file has no effect unless HUNTER is defined. */
 #ifdef	HUNTER
-/* DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register. */
+#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif	/* HUNTER */

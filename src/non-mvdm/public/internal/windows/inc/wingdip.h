@@ -217,7 +217,7 @@ WINAPI SetFontEnumeration (
 #define GFRI_TTFILENAME     4L
 #define GFRI_ISREMOVED      5L
 #ifdef DBCS // for GetFontResourceInfo()
-/* DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register. */
+#error DIVERGENCE OPENNT-HOST-132: DBCS branch is not selected; see mirror register.
 #endif // DBCS
 
 // file path separator for Add/RemoveFontResourceA/W
