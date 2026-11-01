@@ -1,0 +1,31 @@
+[
+  {
+    "source": "o:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c",
+    "events": [
+      {
+        "file": "o:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c",
+        "active": {
+          "CCPU": "ABSENT",
+          "PROD": "ABSENT",
+          "NTVDM": "ABSENT"
+        }
+      },
+      {
+        "file": "o:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c",
+        "active": {
+          "CCPU": "ABSENT",
+          "PROD": "ABSENT",
+          "NTVDM": "o:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc/host_def.h"
+        }
+      },
+      {
+        "file": "o:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h",
+        "active": {
+          "CCPU": "ABSENT",
+          "PROD": "ABSENT",
+          "NTVDM": "o:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc/host_def.h"
+        }
+      }
+    ]
+  }
+]

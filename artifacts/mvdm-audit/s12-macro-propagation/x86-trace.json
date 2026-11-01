@@ -1,0 +1,102 @@
+[
+  {
+    "source": "o:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_common_dialog_calls.c",
+    "events": [
+      {
+        "file": "o:/repos.hobby/ntvdm64/src/compat/include/wow_user_declarations.h",
+        "active": {
+          "WCB16_CDECL": "ABSENT",
+          "WM_DRAGLOOP": "ABSENT",
+          "WOW_USER_PRIVATE_REDIRECT": "ABSENT",
+          "OPENNT_HOST_NTRTL_SUBSET_H": "ABSENT"
+        }
+      },
+      {
+        "file": "o:/repos.hobby/ntvdm64/src/compat/include/wow_user_declarations.h",
+        "active": {
+          "WCB16_CDECL": "",
+          "WM_DRAGLOOP": "ABSENT",
+          "WOW_USER_PRIVATE_REDIRECT": "ABSENT",
+          "OPENNT_HOST_NTRTL_SUBSET_H": "ABSENT"
+        }
+      },
+      {
+        "file": "o:/repos.hobby/ntvdm64/src/compat/include/wow_control_message_abi.h",
+        "active": {
+          "WCB16_CDECL": "",
+          "WM_DRAGLOOP": "ABSENT",
+          "WOW_USER_PRIVATE_REDIRECT": "ABSENT",
+          "OPENNT_HOST_NTRTL_SUBSET_H": "o:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc/ntrtl.h"
+        }
+      },
+      {
+        "file": "o:/repos.hobby/ntvdm64/src/compat/include/wow_control_message_abi.h",
+        "active": {
+          "WCB16_CDECL": "",
+          "WM_DRAGLOOP": "",
+          "WOW_USER_PRIVATE_REDIRECT": "ABSENT",
+          "OPENNT_HOST_NTRTL_SUBSET_H": "o:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc/ntrtl.h"
+        }
+      },
+      {
+        "file": "o:/repos.hobby/ntvdm64/src/wow32-dll/include/wow_user_private_access.h",
+        "active": {
+          "WCB16_CDECL": "",
+          "WM_DRAGLOOP": "o:/repos.hobby/ntvdm64/src/mvdm-host/inc/wow.h",
+          "WOW_USER_PRIVATE_REDIRECT": "o:/repos.hobby/ntvdm64/src/mvdm-host/wow32/precomp.h",
+          "OPENNT_HOST_NTRTL_SUBSET_H": "o:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc/ntrtl.h"
+        }
+      },
+      {
+        "file": "o:/repos.hobby/ntvdm64/src/wow32-dll/include/wow_menu_native_bindings.h",
+        "active": {
+          "WCB16_CDECL": "",
+          "WM_DRAGLOOP": "o:/repos.hobby/ntvdm64/src/mvdm-host/inc/wow.h",
+          "WOW_USER_PRIVATE_REDIRECT": "o:/repos.hobby/ntvdm64/src/mvdm-host/wow32/precomp.h",
+          "OPENNT_HOST_NTRTL_SUBSET_H": "o:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc/ntrtl.h"
+        }
+      }
+    ]
+  },
+  {
+    "source": "o:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_class_words_binding.c",
+    "events": [
+      {
+        "file": "o:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_class_words_binding.c",
+        "active": {
+          "WCB16_CDECL": "ABSENT",
+          "WM_DRAGLOOP": "ABSENT",
+          "WOW_USER_PRIVATE_REDIRECT": "ABSENT",
+          "OPENNT_HOST_NTRTL_SUBSET_H": "ABSENT"
+        }
+      },
+      {
+        "file": "o:/repos.hobby/ntvdm64/src/compat/include/wow_user_declarations.h",
+        "active": {
+          "WCB16_CDECL": "ABSENT",
+          "WM_DRAGLOOP": "ABSENT",
+          "WOW_USER_PRIVATE_REDIRECT": "ABSENT",
+          "OPENNT_HOST_NTRTL_SUBSET_H": "ABSENT"
+        }
+      },
+      {
+        "file": "o:/repos.hobby/ntvdm64/src/compat/include/wow_user_declarations.h",
+        "active": {
+          "WCB16_CDECL": "",
+          "WM_DRAGLOOP": "ABSENT",
+          "WOW_USER_PRIVATE_REDIRECT": "ABSENT",
+          "OPENNT_HOST_NTRTL_SUBSET_H": "ABSENT"
+        }
+      },
+      {
+        "file": "o:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_class_words_binding.c",
+        "active": {
+          "WCB16_CDECL": "",
+          "WM_DRAGLOOP": "ABSENT",
+          "WOW_USER_PRIVATE_REDIRECT": "ABSENT",
+          "OPENNT_HOST_NTRTL_SUBSET_H": "o:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc/ntrtl.h"
+        }
+      }
+    ]
+  }
+]

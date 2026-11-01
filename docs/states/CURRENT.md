@@ -86,8 +86,8 @@ runtime: the owner clarified boundary-recovery scope.
 | --- | --- |
 | Identifier Mode | M0 T473 S12, Ordinary Mode. |
 | Admission And Approval | Owner inserted the source-layout rename after S11; input handoff is deferred to S13. |
-| Objective | Split original MVDM guest sources into `src/mvdm-guest`, and rename the remaining mirror `src/mvdm-host`. |
-| Delivery State | [Role split](../../artifacts/mvdm-audit/s12-mvdm-role-split.md) tested and published; awaiting owner acceptance. [Prior cleanup](../../artifacts/mvdm-audit/s12-cleanup-freeze.md) remains bounded. |
+| Objective | Audit original-header and build-macro propagation into authored components. |
+| Delivery State | Owner accepted [role split](../../artifacts/mvdm-audit/s12-mvdm-role-split.md); [macro audit](../../artifacts/mvdm-audit/s12-macro-propagation/README.md) completed without product changes. |
 | Non-goals | Guest modification or rebuilding, semantic rewrites, new compatibility behavior. |
 | Reference Baseline | S11 closure and source policy; original host and ABI trees have three nonidentical colliding paths. |
 | Files And ABI Surface | Source roots, builds, tests, provenance and current authority references; preserve source cohorts. |
