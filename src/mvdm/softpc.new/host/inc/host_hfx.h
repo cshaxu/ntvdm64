@@ -13,7 +13,7 @@
  */
 
 #ifdef SCCSID
-/* static char SccsID[]="@(#)host_hfx.h	1.7 2/13/91 Copyright Insignia Solutions Ltd."; */
+/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
 #endif
 
 #ifdef HFX

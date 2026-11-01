@@ -50,7 +50,7 @@ extern int megapkt;
  * ============================================================================
  */
 #ifdef SCCSID
-static char SccsID[]="@(#)gfi_IBM.c	1.9 8/10/92 Copyright Insignia Solutions Ltd.";
+/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
 #endif
 
 /*

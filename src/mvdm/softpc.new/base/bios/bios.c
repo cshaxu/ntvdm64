@@ -17,7 +17,7 @@
  */
 
 #ifdef SCCSID
-static char SccsID[]="@(#)bios.c	1.64 06/28/95 Copyright Insignia Solutions Ltd.";
+/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
 #endif
 
 #ifdef SEGMENTATION

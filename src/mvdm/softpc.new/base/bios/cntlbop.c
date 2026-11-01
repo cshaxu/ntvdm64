@@ -47,7 +47,7 @@ PURPOSE			: Supply a BOP FF function for implementation
 #include "host_bop.h"
 
 #ifdef SCCSID
-static char SccsID[] = "@(#)cntlbop.c	1.12 05/15/95 Copyright Insignia Solutions Ltd.";
+/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
 #endif
 
 #ifdef SECURE

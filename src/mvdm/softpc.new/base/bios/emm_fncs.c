@@ -101,7 +101,7 @@ AMMENDMENTS	:
 
 /*	Global Variables		*/
 #ifdef SCCSID
-static char SccsID[]="@(#)emm_funcs.c	1.27 2/22/94 Copyright Insignia Solutions Ltd.";
+/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
 #endif
 
 /*	Forward Declarations		*/

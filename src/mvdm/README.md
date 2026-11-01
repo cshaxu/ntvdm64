@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-518: replace 29 unselected SCCSID identification-string
+branches and one unselected MONITOR/non-PROD declaration branch with
+markers. Original strings and per-branch hashes remain in
+`../../artifacts/mvdm-audit/s12-sccsid-compound.json`; enabled MONITOR
+paths are unchanged.
+
 MVDM-HOST-DIV-494: update three existing host-only include paths in
 `dos/command/cmdenv.c` and `dos/command/cmdexec.c` for the non-MVDM/compat
 source-layout rename. The selected declarations, call behavior and guest

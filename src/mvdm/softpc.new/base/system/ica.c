@@ -130,7 +130,7 @@
  */
 
 #ifdef SCCSID
-LOCAL char SccsID[]="@(#)ica.c	1.38 10/19/95 Copyright Insignia Solutions Ltd.";
+/* DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register. */
 #endif
 
 #ifdef SEGMENTATION

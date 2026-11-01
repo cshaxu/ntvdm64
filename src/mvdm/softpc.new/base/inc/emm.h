@@ -133,8 +133,7 @@ IMPORT boolean init_lim_configuration_data(PLIM_CONFIG_DATA lim_config_data);
 IMPORT unsigned short get_lim_backfill_segment(void);
 
 #if defined(MONITOR) && !defined(PROD)
-IMPORT unsigned short get_emm_page_size(void);
-IMPORT unsigned short get_intel_page_size(void);
+/* DIVERGENCE MVDM-HOST-DIV-518: MONITOR without PROD is not selected in observed consumers; see mirror register. */
 #endif
 
 #endif

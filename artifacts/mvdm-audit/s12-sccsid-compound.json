@@ -1,0 +1,272 @@
+[
+  {
+    "path": "src/mvdm/softpc.new/base/bios/bios.c",
+    "start": 19,
+    "end": 21,
+    "removed_sha256": "a1a617a076e87a6f92b460d930520ec3d4d7f565fe3fd0999fc61c1542aca478",
+    "removed_text": "static char SccsID[]=\"@(#)bios.c\t1.64 06/28/95 Copyright Insignia Solutions Ltd.\";\r\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/bios/cntlbop.c",
+    "start": 49,
+    "end": 51,
+    "removed_sha256": "5dbd8b24545fb9e5576536c280e273951248e87ba3d263533c42c8b0cc50d712",
+    "removed_text": "static char SccsID[] = \"@(#)cntlbop.c\t1.12 05/15/95 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/bios/emm_fncs.c",
+    "start": 103,
+    "end": 105,
+    "removed_sha256": "59fd5469222be1e243b29876902b448034cd0ba69adf628cc08ee43fa9f7081c",
+    "removed_text": "static char SccsID[]=\"@(#)emm_funcs.c\t1.27 2/22/94 Copyright Insignia Solutions Ltd.\";\r\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/bios/ill_bop.c",
+    "start": 17,
+    "end": 19,
+    "removed_sha256": "36a7562a3b59d1fb12cfb797e5d452b8224806d6ff6d3274961f503bb0133841",
+    "removed_text": "static char SccsID[]=\"@(#)ill_bop.c\t1.11 12/07/94 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/bios/mem_size.c",
+    "start": 16,
+    "end": 18,
+    "removed_sha256": "bc888d6d349d8b9a0e80e6d35d3d355636768264f9a5560501c1cd4c9cfad3c7",
+    "removed_text": "static char SccsID[]=\"@(#)mem_size.c\t1.7 08/03/93 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/bios/slave_bs.c",
+    "start": 33,
+    "end": 35,
+    "removed_sha256": "9f2ce040f747942e470f6e801d6fff69d3b80de2b711a16d61bd885735572ee6",
+    "removed_text": "static char SccsID[]=\" @(#)slave_bios.c\t1.6 08/10/92 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/bios/virtual.c",
+    "start": 13,
+    "end": 15,
+    "removed_sha256": "7f02c12c5d88f1971a2b63aa57eeaff5c14905ecea8efe6358f0de717cecc77a",
+    "removed_text": "static char SccsID[]=\"@(#)virtual.c\t1.9 07/05/95 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/comms/com.c",
+    "start": 15,
+    "end": 17,
+    "removed_sha256": "8419821b891aa78135b22136402f7a62796b207bf7ee2cd8f7396d31abd97cae",
+    "removed_text": "static char SccsID[]=\"@(#)com.c\t1.45 04/26/94 Copyright Insignia Solutions Ltd.\";\r\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/comms/printer.c",
+    "start": 69,
+    "end": 71,
+    "removed_sha256": "d0d4d93975c20b4b160b8a2f6f6f1e8b26f3444e93dfdc94ed54db75fae914ae",
+    "removed_text": "static char SccsID[] = \"@(#)printer.c\t1.19 11/14/94 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/comms/printer_.c",
+    "start": 23,
+    "end": 25,
+    "removed_sha256": "a9a2921c1f11a8ffb517e80294464c39365e6af97bb8554c5f96e9045ce3d7ba",
+    "removed_text": "static char SccsID[]=\"@(#)printer_io.c\t1.11 08/25/93 Copyright Insignia Solutions Ltd.\";\r\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/comms/rs232_io.c",
+    "start": 14,
+    "end": 16,
+    "removed_sha256": "984ed38a1a00dfeb992d7f38c6e8c9c49513209f4408757adb48e56c63fd11a4",
+    "removed_text": "static char SccsID[]=\"@(#)rs232_io.c\t1.7 08/03/93 Copyright Insignia Solutions Ltd.\";\r\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/debug/btrace.c",
+    "start": 16,
+    "end": 18,
+    "removed_sha256": "98699f190cf25c480b50e3b5ea9125349c2988c82d49ef09bda9020e295ce11f",
+    "removed_text": "static char SccsID[]=\"@(#)btrace.c\t1.10 08/03/93 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/debug/yoda.c",
+    "start": 36,
+    "end": 38,
+    "removed_sha256": "fd01e0a11efcc2d45a8b99c9b302ef7fb27ff8645f96e01153545fb118ff3378",
+    "removed_text": "static char SccsID[]=\"@(#)yoda.c\t1.100 07/06/95 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/disks/diskbios.c",
+    "start": 18,
+    "end": 20,
+    "removed_sha256": "bf8d40382e376ed3087e8598cd0e34727256224f7f8de0a1678015542f9cc337",
+    "removed_text": "static char\tSccsID[] = \"@(#)diskbios.c\t1.36 04/12/95 Copyright Insignia Solutions Inc.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/disks/fla.c",
+    "start": 46,
+    "end": 48,
+    "removed_sha256": "039ece30dab1ccea0c2e3a4acf7a6c61d4195f14cde4e8262a1a1e19ebe52a94",
+    "removed_text": "static char SccsID[]=\"@(#)fla.c\t1.18 07/06/94 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/disks/gfi.c",
+    "start": 29,
+    "end": 31,
+    "removed_sha256": "b69f922a67c1ae523ccca5909acb98da02603defd7b57728f4eca98505e53ae8",
+    "removed_text": "static char SccsID[]=\"@(#)gfi.c\t1.16 08/03/93 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/disks/gfi_ibm.c",
+    "start": 52,
+    "end": 54,
+    "removed_sha256": "1c3cb9bfc28076f7c36c6f4d640dc4eaaf37e695f55e3398c13c20f48c7e9bd5",
+    "removed_text": "static char SccsID[]=\"@(#)gfi_IBM.c\t1.9 8/10/92 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/disks/gfi_mpty.c",
+    "start": 23,
+    "end": 25,
+    "removed_sha256": "3117246475ff80c513a0395638f868f0c859711d7d7a1d77ef38e40aca7d548c",
+    "removed_text": "static char SccsID[]=\"@(#)gfi_empty.c\t1.13 08/03/93 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/inc/hfx.h",
+    "start": 19,
+    "end": 21,
+    "removed_sha256": "cf49c78532cb8aee573a5bb8c76b94a1efed289272501063d22699575b583382",
+    "removed_text": "/* static char SccsID[]=\"@(#)hfx.h\t1.32 05/24/95 Copyright Insignia Solutions Ltd.\"; */\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/keymouse/keyba.c",
+    "start": 46,
+    "end": 48,
+    "removed_sha256": "d6a7fb9e39502d337c89e283f93f26b0aa459706913af4a08ba3bdb779bbeeb7",
+    "removed_text": "static char SccsID[]=\"@(#)keyba.c\t1.57 06/22/95 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/keymouse/keybd_io.c",
+    "start": 49,
+    "end": 51,
+    "removed_sha256": "df0630e06b4adefcf1ffefc089fd3fd34d0bd983182c823466bcfa0d9eec0c02",
+    "removed_text": "static char SccsID[]=\"@(#)keybd_io.c\t1.35 06/27/95 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/keymouse/mouse.c",
+    "start": 30,
+    "end": 32,
+    "removed_sha256": "8075e41a3abd872bcb6b7408c51605a56c1753a717a6cc305fb815098b63fab6",
+    "removed_text": "static char SccsID[]=\"@(#)mouse.c\t1.17+ 07/10/95 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/keymouse/ppi.c",
+    "start": 17,
+    "end": 19,
+    "removed_sha256": "fcb21fadb8b5ea6582f4997bf9ff50e7a728c95133abe01cd66782fa307ece69",
+    "removed_text": "static char SccsID[]=\"@(#)ppi.c\t1.9 08/10/92 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/support/time_day.c",
+    "start": 41,
+    "end": 43,
+    "removed_sha256": "2fd0f935fa7ea1f639a94f34e6ae36e4c5c91ce0c161d2add94b5098d5389525",
+    "removed_text": "static char SccsID[]=\"@(#)time_day.c\t1.27 4/20/94 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/system/dummy_nt.c",
+    "start": 16,
+    "end": 18,
+    "removed_sha256": "779ebad0e262c729213095a61908e3d1c83620d6731fa966075bb49d93687ee2",
+    "removed_text": "static char SccsID[]=\"@(#)dummy_int.c\t1.4 08/10/92 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/system/ica.c",
+    "start": 132,
+    "end": 134,
+    "removed_sha256": "5c02e02471b1531c11453982f8d1aeb7290145d8ae767dfe1cd4b99e43b86b0f",
+    "removed_text": "LOCAL char SccsID[]=\"@(#)ica.c\t1.38 10/19/95 Copyright Insignia Solutions Ltd.\";\r\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/system/timer.c",
+    "start": 34,
+    "end": 36,
+    "removed_sha256": "fbf25ce4ffea96ff6cf5cd7d32e9458f5f2602e328a401aacb8f008f84f91e44",
+    "removed_text": "static char SccsID[]=\"@(#)timer.c\t1.41 05/31/95 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/system/unexp_nt.c",
+    "start": 17,
+    "end": 19,
+    "removed_sha256": "e188e110917649f6e67c737e82f3fe6ab6b78047c476942893bdd8e43f0f5424",
+    "removed_text": "static char SccsID[]=\"@(#)unexp_int.c\t1.8 06/15/95 Copyright Insignia Solutions Ltd.\";\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/host/inc/host_hfx.h",
+    "start": 15,
+    "end": 17,
+    "removed_sha256": "201a83d5a93e9fc87f72b17ea47a569b603c0f58afee04a4090802edb530c1be",
+    "removed_text": "/* static char SccsID[]=\"@(#)host_hfx.h\t1.7 2/13/91 Copyright Insignia Solutions Ltd.\"; */\n",
+    "condition": "SCCSID identification strings are not selected",
+    "baseline": "ce133d8e7"
+  },
+  {
+    "path": "src/mvdm/softpc.new/base/inc/emm.h",
+    "start": 135,
+    "end": 138,
+    "removed_sha256": "36ba9acbec73a837791efc81ea4ffac4c82178ecdba3b61aa4a46a208530de78",
+    "removed_text": "IMPORT unsigned short get_emm_page_size(void);\r\nIMPORT unsigned short get_intel_page_size(void);\r\n",
+    "condition": "MONITOR without PROD is not selected in observed consumers",
+    "baseline": "ce133d8e7"
+  }
+]
