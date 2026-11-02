@@ -250,6 +250,17 @@ for name, count in (('dpmi32.c', 1), ('dpmi32p.h', 1), ('dpmiselr.c', 1), ('mode
             raise SystemExit('original DPMI i386 boundary failed: ' + name)
 print('PASS original DPMI i386 kernel VDM boundaries')
 
+emm = (repo / 'src/mvdm-host/softpc.new/base/inc/emm.h').read_text(encoding='latin1').splitlines()
+markers = [line for line in emm if 'unsupported X86GFX EMS mapping profile' in line]
+if len(markers) != 1:
+    raise SystemExit('missing rejected X86GFX EMS mapping profile')
+probe.write_text('#if defined(X86GFX) && defined(NTVDM)\n' + markers[0] + '\n#endif\n', encoding='ascii')
+for defines, success in (([], True), (['/DNTVDM'], True), (['/DX86GFX'], True), (['/DX86GFX', '/DNTVDM'], False)):
+    result = subprocess.run(base[:-1] + defines + base[-1:], capture_output=True, text=True, errors='replace')
+    if (result.returncode == 0) != success:
+        raise SystemExit('EMS X86GFX/NTVDM compound boundary failed')
+print('PASS original EMS X86GFX/NTVDM compound boundary')
+
 nt_bop = (repo / 'src/mvdm-host/softpc.new/host/src/nt_bop.c').read_text(encoding='latin1').splitlines()
 marker = 'unsupported hardware-host FPU save path'
 positions = [i for i, line in enumerate(nt_bop) if marker in line]

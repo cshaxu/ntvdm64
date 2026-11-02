@@ -1,0 +1,15 @@
+{
+  "scope": "actual retained EMS selected alternative diagnostic line",
+  "records": [
+    {
+      "architecture": "x86",
+      "logical_line": 306,
+      "exit": 2
+    },
+    {
+      "architecture": "x64",
+      "logical_line": 306,
+      "exit": 2
+    }
+  ]
+}

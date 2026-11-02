@@ -1,0 +1,69 @@
+{
+  "scope": "first-depth EMS header X86GFX AND NTVDM arm only; other X86GFX video profiles not classified",
+  "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+  "before_sha256": "d3280a2cff46a0e6e82371d4a52ace9edd60615d7b6295a3a6347ce4a99156e9",
+  "after_sha256": "568af7bbf7f5ef24b5b6688dfc9c5e45e9d0f6caa0d92ae7f7f49921ad8962f7",
+  "original_sha256": "d92cc144f50e60de5042f76c67574a3fdc22b0ad38411d92d1459d4a02b17789",
+  "removed_body_sha256": "49bf598a9c87dc3e7d4337ad9783d0e683538293a628b68f973ab445c3a4afdd",
+  "removed_lines": 9,
+  "original_else_continuation": 305,
+  "actual_contexts": 18,
+  "included_X86GFX_definitions": [],
+  "resource_contexts_checked": 6,
+  "controls": [
+    {
+      "arch": "x86",
+      "defines": [],
+      "exit": 0
+    },
+    {
+      "arch": "x86",
+      "defines": [
+        "/DNTVDM"
+      ],
+      "exit": 0
+    },
+    {
+      "arch": "x86",
+      "defines": [
+        "/DX86GFX"
+      ],
+      "exit": 0
+    },
+    {
+      "arch": "x86",
+      "defines": [
+        "/DX86GFX",
+        "/DNTVDM"
+      ],
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "defines": [],
+      "exit": 0
+    },
+    {
+      "arch": "x64",
+      "defines": [
+        "/DNTVDM"
+      ],
+      "exit": 0
+    },
+    {
+      "arch": "x64",
+      "defines": [
+        "/DX86GFX"
+      ],
+      "exit": 0
+    },
+    {
+      "arch": "x64",
+      "defines": [
+        "/DX86GFX",
+        "/DNTVDM"
+      ],
+      "exit": 2
+    }
+  ]
+}

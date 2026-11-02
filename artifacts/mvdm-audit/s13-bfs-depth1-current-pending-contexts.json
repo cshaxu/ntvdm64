@@ -2900,15 +2900,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
-      "start": 291,
-      "kind": "if",
-      "expression": "defined(X86GFX) && defined(NTVDM)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 18
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/gfiempty.h",
       "start": 22,
       "kind": "ifdef",
@@ -7996,7 +7987,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 36
+      "count": 35
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",

@@ -1,0 +1,155 @@
+{
+  "scope": "first-depth EMS X86GFX+NTVDM branch; observation and include-chain macro inventory, not an exclusion decision",
+  "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+  "current_group": 291,
+  "original_group": 294,
+  "source_sha256": "d3280a2cff46a0e6e82371d4a52ace9edd60615d7b6295a3a6347ce4a99156e9",
+  "original_sha256": "d92cc144f50e60de5042f76c67574a3fdc22b0ad38411d92d1459d4a02b17789",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/config.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/config.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "flags": {
+        "X86GFX": false,
+        "NTVDM": true
+      }
+    }
+  ],
+  "x86gfx_definitions": []
+}

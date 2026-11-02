@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-621: preserve the original EMS `X86GFX && NTVDM` selector
+while rejecting its unused kernel-VDM mapping arm in this header's supported
+include contexts. Other X86GFX video sources are unaffected. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-emm-x86gfx-exclusion.json`.
+
 Three first-depth CPU40 frame guards in `dpmi32/dpmiint.c` are local
 DIV-481 adaptations; the pinned original frame logic is unconditional at
 those positions. The selected-object checks passed, while the separate

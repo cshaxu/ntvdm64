@@ -289,16 +289,9 @@ IMPORT int	host_exchg_EM_to_EM	IPT5(int, length,
 
 
 #if defined(X86GFX) && defined(NTVDM)
-
-// for x86 platform, we don't have to update logical page
-// as they are in a single section of view.
-// If we did an unmap as for mips, then mirror pages will
-// get unmapped which is not what we want.
-
-#define host_update_logical_page
-#define host_patch_one_page     patch_one_page_full
-
+#error DIVERGENCE MVDM-HOST-DIV-621: unsupported X86GFX EMS mapping profile
 #else /* (NTVDM AND X86GFX) */
+#line 305
 
 #ifndef host_update_logical_page
 #define host_update_logical_page	host_unmap_page
