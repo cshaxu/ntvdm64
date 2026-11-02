@@ -1,0 +1,46 @@
+{
+  "path": "src/mvdm-host/wow32/wow32.c",
+  "before_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
+  "candidate_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7",
+  "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+  "entries": [
+    [
+      1525,
+      1532,
+      1898,
+      1906
+    ],
+    [
+      1537,
+      1544,
+      1910,
+      1918
+    ],
+    [
+      1572,
+      1581,
+      1944,
+      1954
+    ]
+  ],
+  "original_outer_lines": [
+    1870,
+    1879,
+    1910
+  ],
+  "actual_graph": "build/.ninja/msvc-x86-release/wow32",
+  "selected_preprocessing_sha256": "68083406326773f49ecc252a1ccd850c3b02b429dc00957e0c72bebcd915e431",
+  "selected_equal": true,
+  "line_mapping": "preserve previous selected diagnostic logical lines; not claiming NT4 line identity",
+  "fast_profile_evidence": "fastwow.h defines FASTBOPPING 0 in selected wow32 build; original fast branch rejected",
+  "nested": "existing CPU40 branch is preserved verbatim and queued at depth 2",
+  "selected_line_controls": [
+    1900,
+    1912,
+    1948
+  ],
+  "guard_tests": "passed",
+  "product_build": "cached x86/x64 passed",
+  "package": "seven byte-identical and three differ only in verified timestamp fields; published full-tested binaries retained",
+  "limitations": "this is three original structures, not completion of all first-depth reconciliation; separate wow-page-domain target link remains unresolved"
+}

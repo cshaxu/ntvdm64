@@ -57108,7 +57108,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57121,7 +57121,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57134,7 +57134,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57147,7 +57147,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57160,7 +57160,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57173,7 +57173,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57186,7 +57186,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57199,7 +57199,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57212,7 +57212,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57225,7 +57225,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 9,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57238,7 +57238,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57251,7 +57251,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57264,7 +57264,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57277,7 +57277,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57290,7 +57290,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57303,7 +57303,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57316,7 +57316,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57329,7 +57329,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57342,7 +57342,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57355,7 +57355,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57368,7 +57368,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57381,7 +57381,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57394,7 +57394,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57407,7 +57407,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57420,7 +57420,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57433,7 +57433,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57446,7 +57446,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57459,7 +57459,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57472,7 +57472,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57485,7 +57485,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57498,7 +57498,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57511,7 +57511,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 27,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57524,7 +57524,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57537,7 +57537,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57550,7 +57550,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57563,7 +57563,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
@@ -57576,163 +57576,124 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
-      "start": 1525,
-      "cut": 1528,
-      "group_end": 1532,
-      "kind": "if",
-      "expression": "defined(CPU_40_STYLE)",
-      "status": "retained-observed",
-      "pending_reason": null,
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
-    },
-    {
-      "path": "src/mvdm-host/wow32/wow32.c",
-      "start": 1528,
-      "cut": 1530,
-      "group_end": 1532,
-      "kind": "elif",
-      "expression": "FASTBOPPING",
-      "status": "already-excluded",
-      "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
-    },
-    {
-      "path": "src/mvdm-host/wow32/wow32.c",
-      "start": 1530,
-      "cut": 1532,
-      "group_end": 1532,
-      "kind": "else",
-      "expression": "",
-      "status": "already-excluded",
-      "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
-    },
-    {
-      "path": "src/mvdm-host/wow32/wow32.c",
-      "start": 1537,
-      "cut": 1540,
-      "group_end": 1544,
-      "kind": "if",
-      "expression": "defined(CPU_40_STYLE)",
-      "status": "retained-observed",
-      "pending_reason": null,
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
-    },
-    {
-      "path": "src/mvdm-host/wow32/wow32.c",
-      "start": 1540,
-      "cut": 1542,
-      "group_end": 1544,
-      "kind": "elif",
-      "expression": "FASTBOPPING",
-      "status": "already-excluded",
-      "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
-    },
-    {
-      "path": "src/mvdm-host/wow32/wow32.c",
-      "start": 1542,
-      "cut": 1544,
-      "group_end": 1544,
-      "kind": "else",
-      "expression": "",
-      "status": "already-excluded",
-      "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
-    },
-    {
-      "path": "src/mvdm-host/wow32/wow32.c",
-      "start": 1562,
-      "cut": 1564,
-      "group_end": 1564,
+      "start": 1574,
+      "cut": 1576,
+      "group_end": 1576,
       "kind": "if",
       "expression": "FASTBOPPING",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
-      "start": 1572,
-      "cut": 1577,
-      "group_end": 1581,
-      "kind": "if",
-      "expression": "defined(CPU_40_STYLE)",
-      "status": "retained-observed",
-      "pending_reason": null,
-      "guard_only": false,
-      "body_lines": 4,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
-    },
-    {
-      "path": "src/mvdm-host/wow32/wow32.c",
-      "start": 1577,
-      "cut": 1579,
-      "group_end": 1581,
-      "kind": "elif",
-      "expression": "FASTBOPPING",
-      "status": "already-excluded",
-      "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
-    },
-    {
-      "path": "src/mvdm-host/wow32/wow32.c",
-      "start": 1579,
-      "cut": 1581,
-      "group_end": 1581,
-      "kind": "else",
-      "expression": "",
-      "status": "already-excluded",
-      "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
-    },
-    {
-      "path": "src/mvdm-host/wow32/wow32.c",
-      "start": 1585,
-      "cut": 1587,
-      "group_end": 1587,
+      "start": 1603,
+      "cut": 1605,
+      "group_end": 1605,
       "kind": "ifdef",
       "expression": "DEBUG",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
-      "start": 1670,
-      "cut": 1672,
-      "group_end": 1672,
+      "start": 1688,
+      "cut": 1690,
+      "group_end": 1690,
       "kind": "ifdef",
       "expression": "DEBUG_OR_WOWPROFILE",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce"
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "start": 1525,
+      "cut": 1527,
+      "group_end": 1537,
+      "kind": "if",
+      "expression": "FASTBOPPING",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "start": 1527,
+      "cut": 1537,
+      "group_end": 1537,
+      "kind": "else",
+      "expression": "",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 9,
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "start": 1543,
+      "cut": 1545,
+      "group_end": 1555,
+      "kind": "if",
+      "expression": "FASTBOPPING",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "start": 1545,
+      "cut": 1555,
+      "group_end": 1555,
+      "kind": "else",
+      "expression": "",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 9,
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "start": 1584,
+      "cut": 1586,
+      "group_end": 1598,
+      "kind": "if",
+      "expression": "FASTBOPPING",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "start": 1586,
+      "cut": 1598,
+      "group_end": 1598,
+      "kind": "else",
+      "expression": "",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 11,
+      "source_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.h",
@@ -65850,8 +65811,8 @@
   "errors": [],
   "status_counts": {
     "unselected-file": 760,
-    "newly-excluded": 653,
-    "already-excluded": 1705,
+    "newly-excluded": 656,
+    "already-excluded": 1699,
     "pending": 64,
     "retained-observed": 1874,
     "retained-original-assertion": 9

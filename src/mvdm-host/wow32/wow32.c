@@ -1522,6 +1522,10 @@ Return Value:
 
 ULONG FASTCALL W32GetFastAddress( PVDMFRAME pFrame )
 {
+#if FASTBOPPING
+#error Excluded unsupported FASTBOPPING host profile
+#else
+#line 1898
 #if defined(CPU_40_STYLE)
     UNREFERENCED_PARAMETER(pFrame);
     return mvdm_softpc_fast_bop_dispatch_offset();
@@ -1530,10 +1534,16 @@ ULONG FASTCALL W32GetFastAddress( PVDMFRAME pFrame )
 #else
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#endif
+#line 1906
 }
 
 ULONG FASTCALL W32GetFastCbRetAddress( PVDMFRAME pFrame )
 {
+#if FASTBOPPING
+#error Excluded unsupported FASTBOPPING host profile
+#else
+#line 1910
 #if defined(CPU_40_STYLE)
     UNREFERENCED_PARAMETER(pFrame);
     return mvdm_softpc_fast_bop_callback_offset();
@@ -1542,6 +1552,8 @@ ULONG FASTCALL W32GetFastCbRetAddress( PVDMFRAME pFrame )
 #else
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#endif
+#line 1918
 }
 
 ULONG FASTCALL W32GetTableOffsets( PVDMFRAME pFrame )
@@ -1569,6 +1581,10 @@ ULONG FASTCALL W32GetTableOffsets( PVDMFRAME pFrame )
 
 ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )
 {
+#if FASTBOPPING
+#error Excluded unsupported FASTBOPPING host profile
+#else
+#line 1944
 #if defined(CPU_40_STYLE)
     /* Original PMODE32 KRNL386 asks for this table before taking its
      * WOW-specific selector publication path.  Return the same table shape,
@@ -1579,6 +1595,8 @@ ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )
 #else
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#endif
+#line 1954
 }
 
 

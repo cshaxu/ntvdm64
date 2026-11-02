@@ -79,14 +79,14 @@
     {
       "path": "src/mvdm-host/wow32/wow32.c",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
-      "working_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
+      "working_sha256": "90e4463faf135c0f256ed96601548774a5e8624e6ac2abf3c2d9889af97e98b7",
       "original_lines": [
         1870,
         1879,
         1910
       ],
       "missing_signature_occurrences": 3,
-      "disposition": "three original #if FASTBOPPING groups currently expressed as elif under CPU40; outer structure requires restoration while preserving selected CPU40 behavior"
+      "disposition": "resolved: three original #if FASTBOPPING / #else outer selectors restored; selected CPU40 behavior preserved and nested logic queued; see s13-bfs-depth1-fastwow-original-outers.json"
     }
   ],
   "limitations": "Signature mismatch counts are leads, not counts of proven missing structures. All other original mirrors still require independent reconciliation."

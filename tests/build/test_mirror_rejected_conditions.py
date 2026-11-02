@@ -370,3 +370,15 @@ rejected = subprocess.run(base[:-1] + ['/DPMODE32'] + base[-1:], capture_output=
 if allowed.returncode or not rejected.returncode or 'Excluded unsupported PMODE32 host thunk profile' not in rejected.stdout + rejected.stderr:
     raise SystemExit('host PMODE32 guard failed')
 print('PASS selected WOW thunks and excluded host PMODE32 profile')
+
+# Original WOW outer selectors reject the unselected fast-monitor profile.
+fastwow = (repo / 'src/mvdm-host/wow32/wow32.c').read_text(encoding='latin1')
+pattern = r'(?m)^#if FASTBOPPING\s*\n#error Excluded unsupported FASTBOPPING host profile\s*$'
+if len(re.findall(pattern, fastwow)) != 3:
+    raise SystemExit('missing one of the three original FASTBOPPING outer guards')
+probe.write_text('#if FASTBOPPING\n#error Excluded unsupported FASTBOPPING host profile\n#endif\n', encoding='ascii')
+allowed = subprocess.run(base, capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base[:-1] + ['/DFASTBOPPING=1'] + base[-1:], capture_output=True, text=True, errors='replace')
+if allowed.returncode or not rejected.returncode or 'Excluded unsupported FASTBOPPING host profile' not in rejected.stdout + rejected.stderr:
+    raise SystemExit('FASTBOPPING guard failed')
+print('PASS original FASTBOPPING outer guards and selected profile')

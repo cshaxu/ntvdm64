@@ -128,9 +128,24 @@
       "file": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
       "original_condition": "#if HANDLE_FIXUP (FIXUP_HANDLEZ, original line 2358)",
       "evidence": "s13-bfs-depth1-usercli-fixup.json"
+    },
+    {
+      "file": "src/mvdm-host/wow32/wow32.c",
+      "original_condition": "#if FASTBOPPING / #else (original line 1870)",
+      "evidence": "s13-bfs-depth1-fastwow-original-outers.json"
+    },
+    {
+      "file": "src/mvdm-host/wow32/wow32.c",
+      "original_condition": "#if FASTBOPPING / #else (original line 1879)",
+      "evidence": "s13-bfs-depth1-fastwow-original-outers.json"
+    },
+    {
+      "file": "src/mvdm-host/wow32/wow32.c",
+      "original_condition": "#if FASTBOPPING / #else (original line 1910)",
+      "evidence": "s13-bfs-depth1-fastwow-original-outers.json"
     }
   ],
-  "derived_total": 66,
-  "derived_current_bfs_total": 33,
+  "derived_total": 69,
+  "derived_current_bfs_total": 36,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }
