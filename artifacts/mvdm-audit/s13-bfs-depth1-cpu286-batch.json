@@ -1,0 +1,192 @@
+{
+  "scope": "13 first-depth CPU_286 disassembler arms; CCPU execution unchanged",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "current_start": 447,
+      "original_start": 447,
+      "current_cut": 452,
+      "original_cut": 452,
+      "current_end": 457,
+      "original_end": 457,
+      "body_sha256": "c009796b136c1dd5489721bd93fb7e05248a25bd450abc6302980f326aaad893",
+      "removed_lines": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "current_start": 611,
+      "original_start": 609,
+      "current_cut": 613,
+      "original_cut": 611,
+      "current_end": 615,
+      "original_end": 613,
+      "body_sha256": "8b3a86c88290a67ba3eb690183d25f92a22d34bf0625f551e245d6a681fbc657",
+      "removed_lines": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "current_start": 637,
+      "original_start": 635,
+      "current_cut": 639,
+      "original_cut": 637,
+      "current_end": 641,
+      "original_end": 639,
+      "body_sha256": "1ee6f892367c8e52b53237a12dad060642b5fd79e5b9fbe307901fa25c8fda00",
+      "removed_lines": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "current_start": 643,
+      "original_start": 641,
+      "current_cut": 647,
+      "original_cut": 645,
+      "current_end": 651,
+      "original_end": 649,
+      "body_sha256": "0f178cbdf9d99b81cb2520068e6080dc3ab1bb2f66edce07095ce32517e26a28",
+      "removed_lines": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "current_start": 663,
+      "original_start": 661,
+      "current_cut": 668,
+      "original_cut": 666,
+      "current_end": 673,
+      "original_end": 671,
+      "body_sha256": "d3bbe8cc3a7cf2ebeb15523bcf49661e0f7a64674382ac09bb28836da7a1fbf9",
+      "removed_lines": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "current_start": 687,
+      "original_start": 685,
+      "current_cut": 695,
+      "original_cut": 693,
+      "current_end": 703,
+      "original_end": 701,
+      "body_sha256": "4d33420474962dbf9cbfb696c0efa16779b04c37276151edb8b07b425544a861",
+      "removed_lines": 7
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "current_start": 799,
+      "original_start": 797,
+      "current_cut": 884,
+      "original_cut": 882,
+      "current_end": 969,
+      "original_end": 967,
+      "body_sha256": "f8277e11eeee5da4b9fdba1d76f93c427f132545746b577e8b7a47efba024044",
+      "removed_lines": 84
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "current_start": 1182,
+      "original_start": 1180,
+      "current_cut": 1184,
+      "original_cut": 1182,
+      "current_end": 1186,
+      "original_end": 1184,
+      "body_sha256": "242f981e6d46edb8604fd0fceff2f241445104f2ed76998e809285d507a17414",
+      "removed_lines": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "current_start": 1309,
+      "original_start": 1307,
+      "current_cut": 1312,
+      "original_cut": 1310,
+      "current_end": 1315,
+      "original_end": 1313,
+      "body_sha256": "e0ec9015b71c07367c8ccb359693688d43aafe06854f2834ae4316a6ab6d9fbd",
+      "removed_lines": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "current_start": 1387,
+      "original_start": 1385,
+      "current_cut": 1389,
+      "original_cut": 1387,
+      "current_end": 1391,
+      "original_end": 1389,
+      "body_sha256": "3e518c6ff2a48d1f25dd6893a4c54f4c6eea2843c65faf8d89aeb5a5d9cf2e7f",
+      "removed_lines": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "current_start": 1398,
+      "original_start": 1396,
+      "current_cut": 1400,
+      "original_cut": 1398,
+      "current_end": 1402,
+      "original_end": 1400,
+      "body_sha256": "450c0fdad430c434da4d21991623db28fef8ee37e55eb2c5f3857e93eaa2d6f5",
+      "removed_lines": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "current_start": 1405,
+      "original_start": 1403,
+      "current_cut": 1408,
+      "original_cut": 1406,
+      "current_end": 1411,
+      "original_end": 1409,
+      "body_sha256": "9334e063dc9632c137e5600f32b6bf47d46d80e8b43d9aa0f1c886de6903273e",
+      "removed_lines": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "current_start": 1414,
+      "original_start": 1412,
+      "current_cut": 1416,
+      "original_cut": 1414,
+      "current_end": 1418,
+      "original_end": 1416,
+      "body_sha256": "2305f160643cf3cf9a62c8be530a19b882c3e2dba5a9a0f100e60f07df9ca86b",
+      "removed_lines": 1
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "normal_pass": true,
+      "forced_rejected": true
+    }
+  ],
+  "file": {
+    "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+    "before": "a35c1ad46fcfe02f591252c4c27c77794f8a0f6775e150ce8e9237a8f528f57a",
+    "after": "5a8494ecede9f51f185810cd4b632f88157563ce123bfe6c66381e68b3e91cf6"
+  },
+  "removed_inner_group_count": 0,
+  "macro_evidence": {
+    "compile_commands_checked": 2070,
+    "jobs_sha256": "623d1067dca46b9fabf571db17d6567d8f03e04047245ca9ac11fcda71c725ea",
+    "command_macro_definitions_found": 0,
+    "source_generated_sdk_definitions_found": 0,
+    "scope": "src, tests, tools, generated Ninja trees and eight SDK include roots",
+    "controls": "x86/x64 normal and forced selector controls; thirteen original removed bodies matched after line-ending normalization; selected bodies retained verbatim"
+  },
+  "validation": {
+    "x86_cached_build": "passed; no work",
+    "x64_cached_build": "passed; no work",
+    "guard_gate": "x86 and x64; see progress record",
+    "published_release": "all ten product images byte-identical to accepted prior release at both destinations",
+    "published_images": [
+      "run16.exe",
+      "ntsrv.exe",
+      "ntcon.exe",
+      "ntvdm.exe",
+      "ntvwm.exe",
+      "ntmon.exe",
+      "WOW32.DLL",
+      "VDMREDIR.DLL",
+      "nthook32.dll",
+      "nthook64.dll"
+    ]
+  }
+}

@@ -445,16 +445,15 @@ LOCAL OPCODE_INFO opcode_info[] =
    /* 62 62     */{T6, {{I_BOUND16  , A_Gw  , A_Ma16},{I_BOUND32  , A_Gd  , A_Ma32}}},
    /* 63 63     */{T5,OI(I_ARPL     , A_Ew  , A_Gw  )},
 #ifdef CPU_286
-   /* 64 64     */{BAD_OPCODE},
-   /* 65 65     */{BAD_OPCODE},
-   /* 66 66     */{BAD_OPCODE},
-   /* 67 67     */{BAD_OPCODE},
+#error DIVERGENCE MVDM-HOST-DIV-607: unsupported CPU_286 profile
 #else
+#line 453
    /* 64 64     */{T0,OI(P_FS       , A_    , A_    )},
    /* 65 65     */{T0,OI(P_GS       , A_    , A_    )},
    /* 66 66     */{T0,OI(P_OO       , A_    , A_    )},
    /* 67 67     */{T0,OI(P_AO       , A_    , A_    )},
 #endif /* CPU_286 */
+#line 458
    /* 68 68     */{T2, {{I_PUSH16   , A_Iw  , A_    },{I_PUSH32   , A_Id  , A_    }}},
    /* 69 69     */{T7, {{I_IMUL16T3 , A_Gw  , A_EwIw},{I_IMUL32T3 , A_Gd  , A_EdId}}},
    /* 6a 6a     */{T2, {{I_PUSH16   , A_Ix  , A_    },{I_PUSH32   , A_Iy  , A_    }}},
@@ -609,10 +608,12 @@ LOCAL OPCODE_INFO opcode_info[] =
    /* ef ef     */{T6, {{I_OUT16    , A_Fdx , A_Fax },{I_OUT32    , A_Fdx , A_Feax}}},
    
 #ifdef CPU_286
-   /* f0 f0     */{T0,OI(I_LOCK     , A_    , A_    )},
+#error DIVERGENCE MVDM-HOST-DIV-607: unsupported CPU_286 profile
 #else
+#line 612
    /* f0 f0     */{T0,OI(P_LOCK     , A_    , A_    )},
 #endif /* CPU_286 */
+#line 614
    /* f1 f1     */{T0,OI(P_F1       , A_    , A_    )},
    /* f2 f2     */{T0,OI(P_REPNE    , A_    , A_    )},
    /* f3 f3     */{T0,OI(P_REPE     , A_    , A_    )},
@@ -635,20 +636,22 @@ LOCAL OPCODE_INFO opcode_info[] =
    /*103 0f/03  */{T5, {{I_LSL      , A_Gw  , A_Ew  },{I_LSL      , A_Gd  , A_Ew  }}},
    /*104 0f/04  */{BAD_OPCODE},
 #ifdef CPU_286
-   /*105 0f/05  */{T0,OI(I_LOADALL  , A_    , A_    )},
+#error DIVERGENCE MVDM-HOST-DIV-607: unsupported CPU_286 profile
 #else
+#line 638
    /*105 0f/05  */{BAD_OPCODE},
 #endif /* CPU_286 */
+#line 640
    /*106 0f/06  */{T0,OI(I_CLTS     , A_    , A_    )},
 #ifdef CPU_286
-   /*105 0f/07  */{BAD_OPCODE},
-   /*105 0f/08  */{BAD_OPCODE},
-   /*105 0f/09  */{BAD_OPCODE},
+#error DIVERGENCE MVDM-HOST-DIV-607: unsupported CPU_286 profile
 #else
+#line 646
    /*107 0f/07  */{T0,OI(I_ZRSRVD   , A_    , A_    )},
    /*108 0f/08  */{T0,OI(I_INVD     , A_    , A_    )},
    /*109 0f/09  */{T0,OI(I_WBINVD   , A_    , A_    )},
 #endif /* CPU_286 */
+#line 650
    /*10a 0f/0a  */{BAD_OPCODE},
    /*10b 0f/0b  */{BAD_OPCODE},
    /*10c 0f/0c  */{BAD_OPCODE},
@@ -661,16 +664,15 @@ LOCAL OPCODE_INFO opcode_info[] =
 #endif /* PIG */
    
 #ifdef CPU_286
-   /*110 0f/10  */{BAD_OPCODE},
-   /*111 0f/11  */{BAD_OPCODE},
-   /*112 0f/12  */{BAD_OPCODE},
-   /*113 0f/13  */{BAD_OPCODE},
+#error DIVERGENCE MVDM-HOST-DIV-607: unsupported CPU_286 profile
 #else
+#line 667
    /*110 0f/10  */{T0,OI(I_ZRSRVD   , A_    , A_    )},
    /*111 0f/11  */{T0,OI(I_ZRSRVD   , A_    , A_    )},
    /*112 0f/12  */{T0,OI(I_ZRSRVD   , A_    , A_    )},
    /*113 0f/13  */{T0,OI(I_ZRSRVD   , A_    , A_    )},
 #endif /* CPU_286 */
+#line 672
    /*114 0f/14  */{BAD_OPCODE},
    /*115 0f/15  */{BAD_OPCODE},
    /*116 0f/16  */{BAD_OPCODE},
@@ -685,14 +687,9 @@ LOCAL OPCODE_INFO opcode_info[] =
    /*11f 0f/1f  */{BAD_OPCODE},
    
 #ifdef CPU_286
-   /*120 0f/20  */{BAD_OPCODE},
-   /*121 0f/21  */{BAD_OPCODE},
-   /*122 0f/22  */{BAD_OPCODE},
-   /*123 0f/23  */{BAD_OPCODE},
-   /*124 0f/24  */{BAD_OPCODE},
-   /*125 0f/25  */{BAD_OPCODE},
-   /*126 0f/26  */{BAD_OPCODE},
+#error DIVERGENCE MVDM-HOST-DIV-607: unsupported CPU_286 profile
 #else
+#line 694
    /*120 0f/20  */{T4,OI(I_MOV_CR   , A_Rd  , A_Cd  )},
    /*121 0f/21  */{T4,OI(I_MOV_DR   , A_Rd  , A_Dd  )},
    /*122 0f/22  */{T4,OI(I_MOV_CR   , A_Cd  , A_Rd  )},
@@ -701,6 +698,7 @@ LOCAL OPCODE_INFO opcode_info[] =
    /*125 0f/25  */{BAD_OPCODE},
    /*126 0f/26  */{T4,OI(I_MOV_TR   , A_Td  , A_Rd  )},
 #endif /* CPU_286 */
+#line 702
    /*127 0f/27  */{BAD_OPCODE},
    /*128 0f/28  */{BAD_OPCODE},
    /*129 0f/29  */{BAD_OPCODE},
@@ -797,91 +795,9 @@ LOCAL OPCODE_INFO opcode_info[] =
    /*17f 0f/7f  */{BAD_OPCODE},
     
 #ifdef CPU_286
-   /*180 0f/80  */{BAD_OPCODE},
-   /*181 0f/81  */{BAD_OPCODE},
-   /*182 0f/82  */{BAD_OPCODE},
-   /*183 0f/83  */{BAD_OPCODE},
-   /*184 0f/84  */{BAD_OPCODE},
-   /*185 0f/85  */{BAD_OPCODE},
-   /*186 0f/86  */{BAD_OPCODE},
-   /*187 0f/87  */{BAD_OPCODE},
-   /*188 0f/88  */{BAD_OPCODE},
-   /*189 0f/89  */{BAD_OPCODE},
-   /*18a 0f/8a  */{BAD_OPCODE},
-   /*18b 0f/8b  */{BAD_OPCODE},
-   /*18c 0f/8c  */{BAD_OPCODE},
-   /*18d 0f/8d  */{BAD_OPCODE},
-   /*18e 0f/8e  */{BAD_OPCODE},
-   /*18f 0f/8f  */{BAD_OPCODE},
-   
-   /*190 0f/90  */{BAD_OPCODE},
-   /*191 0f/91  */{BAD_OPCODE},
-   /*192 0f/92  */{BAD_OPCODE},
-   /*193 0f/93  */{BAD_OPCODE},
-   /*194 0f/94  */{BAD_OPCODE},
-   /*195 0f/95  */{BAD_OPCODE},
-   /*196 0f/96  */{BAD_OPCODE},
-   /*197 0f/97  */{BAD_OPCODE},
-   /*198 0f/98  */{BAD_OPCODE},
-   /*199 0f/99  */{BAD_OPCODE},
-   /*19a 0f/9a  */{BAD_OPCODE},
-   /*19b 0f/9b  */{BAD_OPCODE},
-   /*19c 0f/9c  */{BAD_OPCODE},
-   /*19d 0f/9d  */{BAD_OPCODE},
-   /*19e 0f/9e  */{BAD_OPCODE},
-   /*19f 0f/9f  */{BAD_OPCODE},
-    
-   /*1a0 0f/a0  */{BAD_OPCODE},
-   /*1a1 0f/a1  */{BAD_OPCODE},
-   /*1a2 0f/a2  */{BAD_OPCODE},
-   /*1a3 0f/a3  */{BAD_OPCODE},
-   /*1a4 0f/a4  */{BAD_OPCODE},
-   /*1a5 0f/a5  */{BAD_OPCODE},
-   /*1a6 0f/a6  */{BAD_OPCODE},
-   /*1a7 0f/a7  */{BAD_OPCODE},
-   /*1a8 0f/a8  */{BAD_OPCODE},
-   /*1a9 0f/a9  */{BAD_OPCODE},
-   /*1aa 0f/aa  */{BAD_OPCODE},
-   /*1ab 0f/ab  */{BAD_OPCODE},
-   /*1ac 0f/ac  */{BAD_OPCODE},
-   /*1ad 0f/ad  */{BAD_OPCODE},
-   /*1aa 0f/ae  */{BAD_OPCODE},
-   /*1af 0f/af  */{BAD_OPCODE},
-   
-   /*1b0 0f/b0  */{BAD_OPCODE},
-   /*1b1 0f/b1  */{BAD_OPCODE},
-   /*1b2 0f/b2  */{BAD_OPCODE},
-   /*1b3 0f/b3  */{BAD_OPCODE},
-   /*1b4 0f/b4  */{BAD_OPCODE},
-   /*1b5 0f/b5  */{BAD_OPCODE},
-   /*1b6 0f/b6  */{BAD_OPCODE},
-   /*1b7 0f/b7  */{BAD_OPCODE},
-   /*1b8 0f/b8  */{BAD_OPCODE},
-   /*1b9 0f/b9  */{BAD_OPCODE},
-   /*1ba 0f/ba  */{BAD_OPCODE},
-   /*1bb 0f/bb  */{BAD_OPCODE},
-   /*1bc 0f/bc  */{BAD_OPCODE},
-   /*1bd 0f/bd  */{BAD_OPCODE},
-   /*1be 0f/be  */{BAD_OPCODE},
-   /*1bf 0f/bf  */{BAD_OPCODE},
-   
-   /*1c0 0f/c0  */{BAD_OPCODE},
-   /*1c1 0f/c1  */{BAD_OPCODE},
-   /*1c2 0f/c2  */{BAD_OPCODE},
-   /*1c3 0f/c3  */{BAD_OPCODE},
-   /*1c4 0f/c4  */{BAD_OPCODE},
-   /*1c5 0f/c5  */{BAD_OPCODE},
-   /*1c6 0f/c6  */{BAD_OPCODE},
-   /*1c7 0f/c7  */{BAD_OPCODE},
-   /*1c8 0f/c8  */{BAD_OPCODE},
-   /*1c9 0f/c9  */{BAD_OPCODE},
-   /*1ca 0f/ca  */{BAD_OPCODE},
-   /*1cb 0f/cb  */{BAD_OPCODE},
-   /*1cc 0f/cc  */{BAD_OPCODE},
-   /*1cd 0f/cd  */{BAD_OPCODE},
-   /*1ce 0f/ce  */{BAD_OPCODE},
-   /*1cf 0f/cf  */{BAD_OPCODE},
+#error DIVERGENCE MVDM-HOST-DIV-607: unsupported CPU_286 profile
 #else
+#line 883
    /*180 0f/80  */{T2, {{I_JO16     , A_Jw  , A_    },{I_JO32     , A_Jd  , A_    }}},
    /*181 0f/81  */{T2, {{I_JNO16    , A_Jw  , A_    },{I_JNO32    , A_Jd  , A_    }}},
    /*182 0f/82  */{T2, {{I_JB16     , A_Jw  , A_    },{I_JB32     , A_Jd  , A_    }}},
@@ -967,6 +883,7 @@ LOCAL OPCODE_INFO opcode_info[] =
    /*1ce 0f/ce  */{T1,OI(I_BSWAP    , A_Hd  , A_    )},
    /*1cf 0f/cf  */{T1,OI(I_BSWAP    , A_Hd  , A_    )},
 #endif /* CPU_286 */
+#line 968
    
    /*1d0 0f/d0  */{BAD_OPCODE},
    /*1d1 0f/d1  */{BAD_OPCODE},
@@ -1180,10 +1097,12 @@ LOCAL OPCODE_INFO opcode_info[] =
    /*28d 0f/01/5*/{T0,OI(I_ZBADOP   , A_Ew  , A_    )},
    /*28e 0f/01/6*/{T2,OI(I_LMSW     , A_Ew  , A_    )},
 #ifdef CPU_286
-   /*28f 0f/01/7*/{T0,OI(I_ZBADOP   , A_Ew  , A_    )},
+#error DIVERGENCE MVDM-HOST-DIV-607: unsupported CPU_286 profile
 #else
+#line 1183
    /*28f 0f/01/7*/{TB,OI(I_INVLPG   , A_M   , A_    )},
 #endif /* CPU_286 */
+#line 1185
 
    /*290 0f/ba/0*/{T0, {{I_ZBADOP   , A_Ew  , A_    },{I_ZBADOP   , A_Ed  , A_    }}},
    /*291 0f/ba/1*/{T0, {{I_ZBADOP   , A_Ew  , A_    },{I_ZBADOP   , A_Ed  , A_    }}},
@@ -1307,12 +1226,13 @@ LOCAL OPCODE_INFO opcode_info[] =
    /*2fa dd/m3/2*/{T4,OI(I_FST      , A_Vn  , A_Vt  )},
    /*2fb dd/m3/3*/{T4,OI(I_FSTP     , A_Vn  , A_Vt  )},
 #ifdef CPU_286
-   /*2fc dd/m3/4*/{T0,OI(I_ZFRSRVD  , A_    , A_    )},
-   /*2fd dd/m3/5*/{T0,OI(I_ZFRSRVD  , A_    , A_    )},
+#error DIVERGENCE MVDM-HOST-DIV-607: unsupported CPU_286 profile
 #else
+#line 1311
    /*2fc dd/m3/4*/{T6,OI(I_FUCOM    , A_Vn  , A_Vt  )},
    /*2fd dd/m3/5*/{T6,OI(I_FUCOMP   , A_Vn  , A_Vt  )},
 #endif /* CPU_286 */
+#line 1314
    /*2fe dd/m3/6*/{T0,OI(I_ZFRSRVD  , A_    , A_    )},
    /*2ff dd/m3/7*/{T0,OI(I_ZFRSRVD  , A_    , A_    )},
 
@@ -1385,10 +1305,12 @@ LOCAL OPCODE_INFO opcode_info[] =
    /*33b d9/f3  */{T5,OI(I_FPATAN   , A_Vt  , A_V1  )},
    /*33c d9/f4  */{T4,OI(I_FXTRACT  , A_Vq  , A_Vt  )},
 #ifdef CPU_286
-   /*33d d9/f5  */{T0,OI(I_ZFRSRVD  , A_    , A_    )},
+#error DIVERGENCE MVDM-HOST-DIV-607: unsupported CPU_286 profile
 #else
+#line 1388
    /*33d d9/f5  */{T5,OI(I_FPREM1   , A_Vt  , A_V1  )},
 #endif /* CPU_286 */
+#line 1390
    /*33e d9/f6  */{T0,OI(I_FDECSTP  , A_    , A_    )},
    /*33f d9/f7  */{T0,OI(I_FINCSTP  , A_    , A_    )},
 
@@ -1396,26 +1318,31 @@ LOCAL OPCODE_INFO opcode_info[] =
    /*341 d9/f9  */{T5,OI(I_FYL2XP1  , A_Vt  , A_V1  )},
    /*342 d9/fa  */{T1,OI(I_FSQRT    , A_Vt  , A_    )},
 #ifdef CPU_286
-   /*343 d9/fb  */{T0,OI(I_ZFRSRVD  , A_    , A_    )},
+#error DIVERGENCE MVDM-HOST-DIV-607: unsupported CPU_286 profile
 #else
+#line 1399
    /*343 d9/fb  */{T4,OI(I_FSINCOS  , A_Vq  , A_Vt  )},
 #endif /* CPU_286 */
+#line 1401
    /*344 d9/fc  */{T1,OI(I_FRNDINT  , A_Vt  , A_    )},
    /*345 d9/fd  */{T5,OI(I_FSCALE   , A_Vt  , A_V1  )},
 #ifdef CPU_286
-   /*346 d9/fe  */{T0,OI(I_ZFRSRVD  , A_    , A_    )},
-   /*347 d9/ff  */{T0,OI(I_ZFRSRVD  , A_    , A_    )},
+#error DIVERGENCE MVDM-HOST-DIV-607: unsupported CPU_286 profile
 #else
+#line 1407
    /*346 d9/fe  */{T1,OI(I_FSIN     , A_Vt  , A_    )},
    /*347 d9/ff  */{T1,OI(I_FCOS     , A_Vt  , A_    )},
 #endif /* CPU_286 */
+#line 1410
 
    /*348 da/e8  */{T0,OI(I_ZFRSRVD  , A_    , A_    )},
 #ifdef CPU_286
-   /*349 da/e9  */{T0,OI(I_ZFRSRVD  , A_    , A_    )},
+#error DIVERGENCE MVDM-HOST-DIV-607: unsupported CPU_286 profile
 #else
+#line 1415
    /*349 da/e9  */{T6,OI(I_FUCOMPP  , A_Vt  , A_V1  )},
 #endif /* CPU_286 */
+#line 1417
    /*34a da/ea  */{T0,OI(I_ZFRSRVD  , A_    , A_    )},
    /*34b da/eb  */{T0,OI(I_ZFRSRVD  , A_    , A_    )},
    /*34c da/ec  */{T0,OI(I_ZFRSRVD  , A_    , A_    )},
