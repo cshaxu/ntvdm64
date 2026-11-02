@@ -64700,7 +64700,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 80,
-      "source_sha256": "67c7b84bfcf07bc25419e797f9a5f9e500ab1ce9f658cdc06614df3027af7c39"
+      "source_sha256": "8292f9d635e0b025b622b12662169ede4334529a270ee5744c225911a5125166"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
@@ -64713,7 +64713,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 420,
-      "source_sha256": "67c7b84bfcf07bc25419e797f9a5f9e500ab1ce9f658cdc06614df3027af7c39"
+      "source_sha256": "8292f9d635e0b025b622b12662169ede4334529a270ee5744c225911a5125166"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
@@ -64726,7 +64726,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 87,
-      "source_sha256": "67c7b84bfcf07bc25419e797f9a5f9e500ab1ce9f658cdc06614df3027af7c39"
+      "source_sha256": "8292f9d635e0b025b622b12662169ede4334529a270ee5744c225911a5125166"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
@@ -64739,7 +64739,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 154,
-      "source_sha256": "67c7b84bfcf07bc25419e797f9a5f9e500ab1ce9f658cdc06614df3027af7c39"
+      "source_sha256": "8292f9d635e0b025b622b12662169ede4334529a270ee5744c225911a5125166"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
@@ -64752,7 +64752,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 252,
-      "source_sha256": "67c7b84bfcf07bc25419e797f9a5f9e500ab1ce9f658cdc06614df3027af7c39"
+      "source_sha256": "8292f9d635e0b025b622b12662169ede4334529a270ee5744c225911a5125166"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
@@ -64765,7 +64765,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 38,
-      "source_sha256": "67c7b84bfcf07bc25419e797f9a5f9e500ab1ce9f658cdc06614df3027af7c39"
+      "source_sha256": "8292f9d635e0b025b622b12662169ede4334529a270ee5744c225911a5125166"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
@@ -64778,7 +64778,20 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 12,
-      "source_sha256": "67c7b84bfcf07bc25419e797f9a5f9e500ab1ce9f658cdc06614df3027af7c39"
+      "source_sha256": "8292f9d635e0b025b622b12662169ede4334529a270ee5744c225911a5125166"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "start": 1083,
+      "cut": 1085,
+      "group_end": 1085,
+      "kind": "ifdef",
+      "expression": "FE_SB",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "8292f9d635e0b025b622b12662169ede4334529a270ee5744c225911a5125166"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
@@ -65720,7 +65733,7 @@
   "errors": [],
   "status_counts": {
     "unselected-file": 760,
-    "newly-excluded": 646,
+    "newly-excluded": 647,
     "already-excluded": 1696,
     "pending": 75,
     "retained-observed": 1869,

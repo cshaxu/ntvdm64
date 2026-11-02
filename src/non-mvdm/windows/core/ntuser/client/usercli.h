@@ -1079,3 +1079,7 @@ typedef struct tagMDIWND {
 #define DBT_TEXT            0x0001
 #define DBT_FOCUS           0x0002
 #endif
+#line 2374
+#ifdef FE_SB // DBCS Messaging macros for client side.
+#error Excluded unsupported FE_SB client messaging macros
+#endif // FE_SB

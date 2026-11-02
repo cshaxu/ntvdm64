@@ -1863,3 +1863,8 @@ MEMPHIS_MENU_WATERMARKS condition shells; unsupported bodies are #error.
 Retained local owners are reordered relative to OpenNT; both original shells
 are global and precede the restored FE_SB shell. Logical lines 380/500 are
 anchored. Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-ntstubs-memphis.json.
+
+OPENNT-HOST-160: restore the original global FE_SB client messaging condition
+in usercli.h; unsupported body is #error. It remains outside the local
+subset guards, matching the original global header placement. Original logical
+line 2374 is retained. Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-usercli-fe-sb.json.

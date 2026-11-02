@@ -1,0 +1,16 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+  "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+  "before_sha256": "67c7b84bfcf07bc25419e797f9a5f9e500ab1ce9f658cdc06614df3027af7c39",
+  "after_sha256": "8292f9d635e0b025b622b12662169ede4334529a270ee5744c225911a5125166",
+  "original_guard_line": 2374,
+  "original_endif_line": 2671,
+  "current_guard_line": 1083,
+  "omitted_original_body_sha256": "747aa92f2ea2a35901ff3cc1fc4d25d3df927a7b8c803ccdb31f83abfa705c43",
+  "scope": "original first-depth global FE_SB client messaging macro condition",
+  "original_structure": "Original FE_SB guard and closing directive outside the original header guard are restored outside current local subset guards; excluded body replaced by #error; original logical line 2374 anchored.",
+  "selection_proof": "All 102 observed supported header inclusion contexts map to real compiler jobs without FE_SB. No FE_SB definition found in current USER/compat/test/build sources.",
+  "validation": "46 WOW32 object contexts rebuilt with DLL; all 56 independent call-boundary objects rebuilt; x86/x64 selected and forced rejection line controls, cached builds and rejection suites passed.",
+  "package": "s13-bfs-depth1-usercli-fe-sb-package-compare.json: seven byte-identical and three PE timestamp-only; prior Full-tested release retained.",
+  "limits": "Original FE_SB macro body remains unsupported. Five other original first-depth missing-boundary records remain; no completion claim."
+}

@@ -50,18 +50,6 @@
       "disposition": "pending; no unconditional restoration or rejection"
     },
     {
-      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
-      "original_line": 2374,
-      "directive": "ifdef",
-      "expression": "FE_SB",
-      "classification": "unresolved",
-      "original_owners": [],
-      "exact_current_nested": [],
-      "current_anchors": [],
-      "boundary_review": "Original FE_SB block occurs after the removed handle-fixup region and outside the original guard; insertion into the two-phase subset requires a proven owner/context.",
-      "disposition": "pending; no unconditional restoration or rejection"
-    },
-    {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
       "original_line": 1257,
       "directive": "ifndef",

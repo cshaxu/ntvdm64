@@ -774,3 +774,18 @@ for macro, original_line in (('MEMPHIS_MENUS', 380), ('MEMPHIS_MENU_WATERMARKS',
     if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
         raise SystemExit('unsupported ntstubs menu owner did not reject: ' + macro)
 print('PASS restored ntstubs menu guards and original lines')
+
+source = (repo / 'src/non-mvdm/windows/core/ntuser/client/usercli.h').read_text(encoding='latin1').splitlines()
+marker = '#error Excluded unsupported FE_SB client messaging macros'
+matches = [i for i, line in enumerate(source) if line.strip() == '#ifdef FE_SB // DBCS Messaging macros for client side.' and source[i+1].strip() == marker and source[i+2].strip() == '#endif // FE_SB']
+if len(matches) != 1 or source[matches[0]-1].strip() != '#line 2374':
+    raise SystemExit('restored usercli FE_SB guard or original line missing')
+i = matches[0]
+probe.write_text('\n'.join(source[i-1:i+3] + ['int after_usercli_guard = __LINE__;']) + '\n', encoding='ascii')
+selected = subprocess.run(base + ['/UFE_SB', str(probe)], capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base + ['/DFE_SB', str(probe)], capture_output=True, text=True, errors='replace')
+if selected.returncode or not re.search(r'int\s+after_usercli_guard\s*=\s*2377\s*;', selected.stdout):
+    raise SystemExit('usercli FE_SB selected guard or line failed: ' + selected.stderr)
+if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
+    raise SystemExit('unsupported FE_SB client messaging macros did not reject')
+print('PASS restored usercli FE_SB guard and original line')
