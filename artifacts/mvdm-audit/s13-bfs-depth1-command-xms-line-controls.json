@@ -1,0 +1,70 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "consumer": "src/mvdm-host/dos/command/cmd.c",
+      "expected": {
+        "S13LINE_44da5d9cd51f82": 72,
+        "S13LINE_d3dad611def3ad": 43,
+        "S13LINE_92de953d0eea7b": 23
+      },
+      "observed": {
+        "before": {
+          "S13LINE_44da5d9cd51f82": [
+            72
+          ],
+          "S13LINE_d3dad611def3ad": [
+            43
+          ],
+          "S13LINE_92de953d0eea7b": [
+            23
+          ]
+        },
+        "after": {
+          "S13LINE_44da5d9cd51f82": [
+            72
+          ],
+          "S13LINE_d3dad611def3ad": [
+            43
+          ],
+          "S13LINE_92de953d0eea7b": [
+            23
+          ]
+        }
+      }
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "consumer": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "expected": {
+        "S13LINE_bf7ac4ea8479ab": 74,
+        "S13LINE_8bb9a52d845d64": 45,
+        "S13LINE_e0f51e235b038e": 25
+      },
+      "observed": {
+        "before": {
+          "S13LINE_bf7ac4ea8479ab": [
+            74
+          ],
+          "S13LINE_8bb9a52d845d64": [
+            45
+          ],
+          "S13LINE_e0f51e235b038e": [
+            25
+          ]
+        },
+        "after": {
+          "S13LINE_bf7ac4ea8479ab": [
+            74
+          ],
+          "S13LINE_8bb9a52d845d64": [
+            45
+          ],
+          "S13LINE_e0f51e235b038e": [
+            25
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -20,8 +20,9 @@
 */
 
 #ifdef DOS
-#define SIGNALS
+#error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
+#line 25
 
 #ifdef OS2_16
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_16 platform branch is not selected; see mirror register.
@@ -39,9 +40,9 @@
 #include <process.h>
 
 #ifdef WIN_16
-#define WIN
-#define API16
+#error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
+#line 45
 
 #ifdef WIN_32
 #define WIN
@@ -68,9 +69,9 @@
 #endif
 
 #ifdef SIGNALS
-#include <conio.h>
-#include <signal.h>
+#error DIVERGENCE MVDM-HOST-DIV-600: Unsupported original DOS/Win16 host profile
 #endif
+#line 74
 
 #ifdef OS2_32
 #error DIVERGENCE MVDM-HOST-DIV-528: OS2_32 platform branch is not selected; see mirror register.

@@ -1,0 +1,17 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/inc/error.h",
+  "original_sha256": "40953fbb22a9c6a5bff875414e4dd6822340ec4a2501edec79415573fea16ab3",
+  "prior_sha256": "91d0d7fc6c644a8aae898a180129a46bbbb6deaf59cc39f1abf95f2ad93b82dd",
+  "restored_sha256": "40953fbb22a9c6a5bff875414e4dd6822340ec4a2501edec79415573fea16ab3",
+  "reason": "Supported RC target includes error.h without PROD; previous DIV-504 assumed only C contexts. Restore exact original declaration, keeping original #ifndef PROD structure.",
+  "failed_command_log": "build/t473-s13/batch194-worker-reference-build.log",
+  "status": "restored; x86 native RC and x64-reference cached builds passed",
+  "x86_rc_sha256": "882C48D551A23F4C58DE8E89B98C15C6AC85453A250CFA69C7D39A0BB826CDC4",
+  "prior_cached_rc_sha256": "882C48D551A23F4C58DE8E89B98C15C6AC85453A250CFA69C7D39A0BB826CDC4",
+  "x64_reference_rc_sha256": "882C48D551A23F4C58DE8E89B98C15C6AC85453A250CFA69C7D39A0BB826CDC4",
+  "gfi_contract": {
+    "checks": 433,
+    "result": "pass",
+    "log": "build/t473-s13/batch194-gfi.log"
+  }
+}

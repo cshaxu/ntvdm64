@@ -3,56 +3,16 @@
   "records": [
     {
       "path": "src/mvdm-host/dos/command/cmd.h",
-      "start": 20,
-      "cut": 22,
-      "group_end": 22,
-      "kind": "ifdef",
-      "expression": "DOS",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 1,
-      "source_sha256": "55afb36bb8d6441019bf661ef0247a9de34ccc3e547a8b1f98f284e8b54db9c3",
-      "prior_evidence": [
-        {
-          "family": "header",
-          "artifact": "s13-bfs-depth1-header-profile-summary.json",
-          "original_entry_line": 20
-        }
-      ]
-    },
-    {
-      "path": "src/mvdm-host/dos/command/cmd.h",
-      "start": 39,
-      "cut": 42,
-      "group_end": 42,
-      "kind": "ifdef",
-      "expression": "WIN_16",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "55afb36bb8d6441019bf661ef0247a9de34ccc3e547a8b1f98f284e8b54db9c3",
-      "prior_evidence": [
-        {
-          "family": "header",
-          "artifact": "s13-bfs-depth1-header-profile-summary.json",
-          "original_entry_line": 39
-        }
-      ]
-    },
-    {
-      "path": "src/mvdm-host/dos/command/cmd.h",
-      "start": 44,
-      "cut": 51,
-      "group_end": 53,
+      "start": 45,
+      "cut": 52,
+      "group_end": 54,
       "kind": "ifdef",
       "expression": "WIN_32",
       "status": "pending",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "55afb36bb8d6441019bf661ef0247a9de34ccc3e547a8b1f98f284e8b54db9c3",
+      "source_sha256": "633b9668a804a85b61e6c8f92273984a6026860d71cfa409ae63c8b92a577c90",
       "prior_evidence": [
         {
           "family": "header",
@@ -63,16 +23,16 @@
     },
     {
       "path": "src/mvdm-host/dos/command/cmd.h",
-      "start": 55,
-      "cut": 61,
-      "group_end": 61,
+      "start": 56,
+      "cut": 62,
+      "group_end": 62,
       "kind": "ifdef",
       "expression": "FLAT_32",
       "status": "pending",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "body_lines": 5,
-      "source_sha256": "55afb36bb8d6441019bf661ef0247a9de34ccc3e547a8b1f98f284e8b54db9c3",
+      "source_sha256": "633b9668a804a85b61e6c8f92273984a6026860d71cfa409ae63c8b92a577c90",
       "prior_evidence": [
         {
           "family": "header",
@@ -83,41 +43,21 @@
     },
     {
       "path": "src/mvdm-host/dos/command/cmd.h",
-      "start": 63,
-      "cut": 66,
-      "group_end": 66,
+      "start": 64,
+      "cut": 67,
+      "group_end": 67,
       "kind": "ifdef",
       "expression": "WIN",
       "status": "pending",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "55afb36bb8d6441019bf661ef0247a9de34ccc3e547a8b1f98f284e8b54db9c3",
+      "source_sha256": "633b9668a804a85b61e6c8f92273984a6026860d71cfa409ae63c8b92a577c90",
       "prior_evidence": [
         {
           "family": "header",
           "artifact": "s13-bfs-depth1-header-profile-summary.json",
           "original_entry_line": 63
-        }
-      ]
-    },
-    {
-      "path": "src/mvdm-host/dos/command/cmd.h",
-      "start": 68,
-      "cut": 71,
-      "group_end": 71,
-      "kind": "ifdef",
-      "expression": "SIGNALS",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "55afb36bb8d6441019bf661ef0247a9de34ccc3e547a8b1f98f284e8b54db9c3",
-      "prior_evidence": [
-        {
-          "family": "header",
-          "artifact": "s13-bfs-depth1-header-profile-summary.json",
-          "original_entry_line": 68
         }
       ]
     },
@@ -1042,66 +982,6 @@
       ]
     },
     {
-      "path": "src/mvdm-host/xms.486/xms.h",
-      "start": 22,
-      "cut": 24,
-      "group_end": 24,
-      "kind": "ifdef",
-      "expression": "DOS",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 1,
-      "source_sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5",
-      "prior_evidence": [
-        {
-          "family": "header",
-          "artifact": "s13-bfs-depth1-header-profile-summary.json",
-          "original_entry_line": 22
-        }
-      ]
-    },
-    {
-      "path": "src/mvdm-host/xms.486/xms.h",
-      "start": 41,
-      "cut": 44,
-      "group_end": 44,
-      "kind": "ifdef",
-      "expression": "WIN_16",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5",
-      "prior_evidence": [
-        {
-          "family": "header",
-          "artifact": "s13-bfs-depth1-header-profile-summary.json",
-          "original_entry_line": 41
-        }
-      ]
-    },
-    {
-      "path": "src/mvdm-host/xms.486/xms.h",
-      "start": 70,
-      "cut": 73,
-      "group_end": 73,
-      "kind": "ifdef",
-      "expression": "SIGNALS",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5",
-      "prior_evidence": [
-        {
-          "family": "header",
-          "artifact": "s13-bfs-depth1-header-profile-summary.json",
-          "original_entry_line": 70
-        }
-      ]
-    },
-    {
       "path": "src/non-mvdm/private/inc/dlcio.h",
       "start": 470,
       "cut": 472,
@@ -1247,7 +1127,7 @@
       "families": [
         "header"
       ],
-      "count": 35
+      "count": 29
     },
     {
       "families": [

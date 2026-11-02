@@ -165,25 +165,7 @@
     },
     {
       "path": "src/mvdm-host/dos/command/cmd.h",
-      "start": 20,
-      "kind": "ifdef",
-      "expression": "DOS",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 24
-    },
-    {
-      "path": "src/mvdm-host/dos/command/cmd.h",
-      "start": 39,
-      "kind": "ifdef",
-      "expression": "WIN_16",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 24
-    },
-    {
-      "path": "src/mvdm-host/dos/command/cmd.h",
-      "start": 44,
+      "start": 45,
       "kind": "ifdef",
       "expression": "WIN_32",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
@@ -192,7 +174,7 @@
     },
     {
       "path": "src/mvdm-host/dos/command/cmd.h",
-      "start": 55,
+      "start": 56,
       "kind": "ifdef",
       "expression": "FLAT_32",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
@@ -201,18 +183,9 @@
     },
     {
       "path": "src/mvdm-host/dos/command/cmd.h",
-      "start": 63,
+      "start": 64,
       "kind": "ifdef",
       "expression": "WIN",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 24
-    },
-    {
-      "path": "src/mvdm-host/dos/command/cmd.h",
-      "start": 68,
-      "kind": "ifdef",
-      "expression": "SIGNALS",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "current_actual_includers": 24
@@ -9182,33 +9155,6 @@
       "current_actual_includers": 1
     },
     {
-      "path": "src/mvdm-host/xms.486/xms.h",
-      "start": 22,
-      "kind": "ifdef",
-      "expression": "DOS",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 22
-    },
-    {
-      "path": "src/mvdm-host/xms.486/xms.h",
-      "start": 41,
-      "kind": "ifdef",
-      "expression": "WIN_16",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 22
-    },
-    {
-      "path": "src/mvdm-host/xms.486/xms.h",
-      "start": 70,
-      "kind": "ifdef",
-      "expression": "SIGNALS",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 22
-    },
-    {
       "path": "src/mvdm-host/xms.486/xmsmemr.c",
       "start": 151,
       "kind": "else",
@@ -10714,7 +10660,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 60
+      "count": 54
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",

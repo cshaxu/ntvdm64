@@ -1,0 +1,628 @@
+{
+  "scope": "Markers show branch selection in witnessed product contexts only; absence does not prove unsupported across all contexts",
+  "tags": {
+    "S13MARK_44da5d9cd51f827c": {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "line": 68,
+      "expression": "SIGNALS"
+    },
+    "S13MARK_25394928bbc49ea1": {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "line": 63,
+      "expression": "WIN"
+    },
+    "S13MARK_cf2804b94e51ab8f": {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "line": 55,
+      "expression": "FLAT_32"
+    },
+    "S13MARK_0e37f4e0d5297e5e": {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "line": 44,
+      "expression": "WIN_32"
+    },
+    "S13MARK_d3dad611def3ad20": {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "line": 39,
+      "expression": "WIN_16"
+    },
+    "S13MARK_92de953d0eea7bad": {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "line": 20,
+      "expression": "DOS"
+    },
+    "S13_HEADER_COMMAND": {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "line": 0,
+      "expression": "positive-header-entry"
+    },
+    "S13MARK_bf7ac4ea8479ab7a": {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": 70,
+      "expression": "SIGNALS"
+    },
+    "S13MARK_8bb9a52d845d64a2": {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": 41,
+      "expression": "WIN_16"
+    },
+    "S13MARK_e0f51e235b038e28": {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": 22,
+      "expression": "DOS"
+    },
+    "S13_HEADER_XMS": {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": 0,
+      "expression": "positive-header-entry"
+    }
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddata.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddisp.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexit.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdredir.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsa20.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmisc.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsumb.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_xms_memory.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "tests/observation/keyba_observed.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexit.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddata.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddisp.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdredir.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsa20.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmisc.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsumb.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/dos/command/cmd.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_COMMAND"
+      ],
+      "error": ""
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_xms_memory.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    },
+    {
+      "path": "tests/observation/keyba_observed.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "included": [
+        "src/mvdm-host/xms.486/xms.h"
+      ],
+      "exit": 0,
+      "found": [
+        "S13_HEADER_XMS"
+      ],
+      "error": ""
+    }
+  ],
+  "counts": {
+    "S13MARK_44da5d9cd51f827c": 0,
+    "S13MARK_25394928bbc49ea1": 0,
+    "S13MARK_cf2804b94e51ab8f": 0,
+    "S13MARK_0e37f4e0d5297e5e": 0,
+    "S13MARK_d3dad611def3ad20": 0,
+    "S13MARK_92de953d0eea7bad": 0,
+    "S13_HEADER_COMMAND": 24,
+    "S13MARK_bf7ac4ea8479ab7a": 0,
+    "S13MARK_8bb9a52d845d64a2": 0,
+    "S13MARK_e0f51e235b038e28": 0,
+    "S13_HEADER_XMS": 22
+  },
+  "failures": []
+}

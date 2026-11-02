@@ -1,0 +1,89 @@
+{
+  "scope": "six first-depth arms; supported selected paths unchanged",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "start": 68,
+      "end": 71,
+      "expression": "SIGNALS",
+      "original_start": 70,
+      "body_sha256": "54c3608c16f70783bbd07196a369b88612cda4d94c9bd2b626f8d3c990915b9f",
+      "source_sha256": "55afb36bb8d6441019bf661ef0247a9de34ccc3e547a8b1f98f284e8b54db9c3",
+      "original_sha256": "ea707e7955198462f93a0e795ae1751d83749578e93653e9b0baf4594d069711",
+      "following_logical_line": 72,
+      "after_sha256": "633b9668a804a85b61e6c8f92273984a6026860d71cfa409ae63c8b92a577c90",
+      "current_start_line": 69,
+      "registration": "MVDM-HOST-DIV-600"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "start": 39,
+      "end": 42,
+      "expression": "WIN_16",
+      "original_start": 41,
+      "body_sha256": "7b26db4e2047a0bf5930d5caeeae9d9da28bc182f6ec08d90fa80fc5df47caa8",
+      "source_sha256": "55afb36bb8d6441019bf661ef0247a9de34ccc3e547a8b1f98f284e8b54db9c3",
+      "original_sha256": "ea707e7955198462f93a0e795ae1751d83749578e93653e9b0baf4594d069711",
+      "following_logical_line": 43,
+      "after_sha256": "633b9668a804a85b61e6c8f92273984a6026860d71cfa409ae63c8b92a577c90",
+      "current_start_line": 40,
+      "registration": "MVDM-HOST-DIV-600"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "start": 20,
+      "end": 22,
+      "expression": "DOS",
+      "original_start": 20,
+      "body_sha256": "4ab03285af706c02867272be616abf6d202d7622c9b800531b717b933fd21534",
+      "source_sha256": "55afb36bb8d6441019bf661ef0247a9de34ccc3e547a8b1f98f284e8b54db9c3",
+      "original_sha256": "ea707e7955198462f93a0e795ae1751d83749578e93653e9b0baf4594d069711",
+      "following_logical_line": 23,
+      "after_sha256": "633b9668a804a85b61e6c8f92273984a6026860d71cfa409ae63c8b92a577c90",
+      "current_start_line": 20,
+      "registration": "MVDM-HOST-DIV-600"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "start": 70,
+      "end": 73,
+      "expression": "SIGNALS",
+      "original_start": 72,
+      "body_sha256": "0ac60ccca455bf072f58d4319e3fefa512082b729804f8f635adfdc1ef15014f",
+      "source_sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5",
+      "original_sha256": "0fad52bf1e4c6db87bdc77cf9ec2f35540da2fc4972d2b32e32d57a46776a9fc",
+      "following_logical_line": 74,
+      "after_sha256": "920404f64af0644a09150a2df0a3d6fbc0ac9ee378281c603d980e4adb3d520f",
+      "current_start_line": 71,
+      "registration": "MVDM-HOST-DIV-600"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "start": 41,
+      "end": 44,
+      "expression": "WIN_16",
+      "original_start": 43,
+      "body_sha256": "ec97dc0cf5772b7db61a12ae78079579a5dabe4d31db08e49f3d3480697e120b",
+      "source_sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5",
+      "original_sha256": "0fad52bf1e4c6db87bdc77cf9ec2f35540da2fc4972d2b32e32d57a46776a9fc",
+      "following_logical_line": 45,
+      "after_sha256": "920404f64af0644a09150a2df0a3d6fbc0ac9ee378281c603d980e4adb3d520f",
+      "current_start_line": 42,
+      "registration": "MVDM-HOST-DIV-600"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "start": 22,
+      "end": 24,
+      "expression": "DOS",
+      "original_start": 22,
+      "body_sha256": "bf6109b2b4266504ae77ae54afd1e903c6fb9e5b236fa5e00aac2d28eee0870d",
+      "source_sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5",
+      "original_sha256": "0fad52bf1e4c6db87bdc77cf9ec2f35540da2fc4972d2b32e32d57a46776a9fc",
+      "following_logical_line": 25,
+      "after_sha256": "920404f64af0644a09150a2df0a3d6fbc0ac9ee378281c603d980e4adb3d520f",
+      "current_start_line": 22,
+      "registration": "MVDM-HOST-DIV-600"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "macro": "DOS",
+      "consumer": "src/mvdm-host/dos/command/cmd.c",
+      "exit": 2,
+      "rejection_seen": true
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "macro": "WIN_16",
+      "consumer": "src/mvdm-host/dos/command/cmd.c",
+      "exit": 2,
+      "rejection_seen": true
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "macro": "SIGNALS",
+      "consumer": "src/mvdm-host/dos/command/cmd.c",
+      "exit": 2,
+      "rejection_seen": true
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "macro": "DOS",
+      "consumer": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "exit": 2,
+      "rejection_seen": true
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "macro": "WIN_16",
+      "consumer": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "exit": 2,
+      "rejection_seen": true
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "macro": "SIGNALS",
+      "consumer": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "exit": 2,
+      "rejection_seen": true
+    }
+  ]
+}
