@@ -444,15 +444,6 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 1018,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
       "start": 1543,
       "kind": "else",
       "expression": "",
@@ -465,33 +456,6 @@
       "start": 1559,
       "kind": "else",
       "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 1991,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2591,
-      "kind": "if",
-      "expression": "defined(NTVDM) && defined(X86GFX)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2626,
-      "kind": "if",
-      "expression": "defined(NTVDM) && defined(X86GFX)",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "current_actual_includers": 2
@@ -645,42 +609,6 @@
       "start": 53,
       "kind": "ifndef",
       "expression": "CCPU",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
-      "start": 602,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
-      "start": 808,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 768,
-      "kind": "ifdef",
-      "expression": "X86GFX",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
-      "start": 480,
-      "kind": "ifdef",
-      "expression": "X86GFX",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "current_actual_includers": 2
@@ -1006,7 +934,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 24
+      "count": 16
     },
     {
       "reason": "combined-i386-cpu40-supported-context-unresolved",

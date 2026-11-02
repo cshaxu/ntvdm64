@@ -5,8 +5,8 @@
   "depth1_status": {
     "unselected-file": 742,
     "newly-excluded": 642,
-    "already-excluded": 1681,
-    "pending": 109,
+    "already-excluded": 1689,
+    "pending": 101,
     "retained-observed": 1869,
     "retained-original-assertion": 9
   },

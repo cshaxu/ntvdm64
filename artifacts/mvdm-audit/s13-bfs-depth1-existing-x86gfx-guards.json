@@ -1,0 +1,123 @@
+{
+  "scope": "eight existing X86GFX #error alternatives in four selected host C files; no source changes",
+  "evidence": "Both real worker source compile commands per file omit X86GFX and no source-local mutation. Search of MVDM host and test/build tools found only the legacy T281 nt_bop island and T310 CVIDC rule enabling X86GFX; neither selects these four translation units. Mouse-coordinate and blocked-video independent tests extract selected functions rather than compile whole files.",
+  "boundary": "X86GFX is not a global false assumption: current CVIDC-specific graph and historical island use it; this disposition applies only to these four source paths. Original selector exact-boundary correspondence remains separately reviewed.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/keymouse/mouse_io.obj",
+          "command_sha256": "7ba6cade9bd1b4fc0dc01fc82cd424e883af3710f207aa771b1fd25a5807d5a2"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/keymouse/mouse_io.obj",
+          "command_sha256": "7ba6cade9bd1b4fc0dc01fc82cd424e883af3710f207aa771b1fd25a5807d5a2"
+        }
+      ],
+      "guards": [
+        {
+          "line": 1018,
+          "group_expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX))",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+        },
+        {
+          "line": 1991,
+          "group_expression": "X86GFX",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-511: X86GFX alternative is not selected for this source; see mirror register."
+        },
+        {
+          "line": 2591,
+          "group_expression": "defined(NTVDM) && defined(X86GFX)",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+        },
+        {
+          "line": 2626,
+          "group_expression": "defined(NTVDM) && defined(X86GFX)",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "current_sha256": "4aad1200537d2d2de5a4e890cab4caa1a26d90a565c305b0733b89542ee2a0bd",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/host/nt_fulsc.obj",
+          "command_sha256": "a17f31648e705a77b63e47f19462c70f83bfe70160247b714fd2847df55de623"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/host/nt_fulsc.obj",
+          "command_sha256": "a17f31648e705a77b63e47f19462c70f83bfe70160247b714fd2847df55de623"
+        }
+      ],
+      "guards": [
+        {
+          "line": 602,
+          "group_expression": "X86GFX",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-511: X86GFX alternative is not selected for this source; see mirror register."
+        },
+        {
+          "line": 808,
+          "group_expression": "X86GFX",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-511: X86GFX alternative is not selected for this source; see mirror register."
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "current_sha256": "0f57d1a99ea71c9258a0e7664db08af1699ac15d0b7a6af5333e5fc4078e26e1",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/host/nt_graph.obj",
+          "command_sha256": "70e5732c249689c20754089975fbda18688474974ad549f30568cf8395ef3981"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/host/nt_graph.obj",
+          "command_sha256": "70e5732c249689c20754089975fbda18688474974ad549f30568cf8395ef3981"
+        }
+      ],
+      "guards": [
+        {
+          "line": 768,
+          "group_expression": "X86GFX",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/host/nt_mouse.obj",
+          "command_sha256": "ddabfd236fb904c172e74f2462da0c73bc6b454da7f6a84e64a8e8d9b30e1568"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/host/nt_mouse.obj",
+          "command_sha256": "ddabfd236fb904c172e74f2462da0c73bc6b454da7f6a84e64a8e8d9b30e1568"
+        }
+      ],
+      "guards": [
+        {
+          "line": 480,
+          "group_expression": "X86GFX",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register."
+        }
+      ]
+    }
+  ]
+}

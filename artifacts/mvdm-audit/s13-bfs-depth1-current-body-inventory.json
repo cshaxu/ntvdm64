@@ -30519,8 +30519,8 @@
       "group_end": 1020,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
@@ -30844,8 +30844,8 @@
       "group_end": 1993,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
@@ -31065,8 +31065,8 @@
       "group_end": 2593,
       "kind": "if",
       "expression": "defined(NTVDM) && defined(X86GFX)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
@@ -31091,8 +31091,8 @@
       "group_end": 2628,
       "kind": "if",
       "expression": "defined(NTVDM) && defined(X86GFX)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
@@ -46262,8 +46262,8 @@
       "group_end": 604,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "4aad1200537d2d2de5a4e890cab4caa1a26d90a565c305b0733b89542ee2a0bd"
@@ -46340,8 +46340,8 @@
       "group_end": 810,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "4aad1200537d2d2de5a4e890cab4caa1a26d90a565c305b0733b89542ee2a0bd"
@@ -46756,8 +46756,8 @@
       "group_end": 770,
       "kind": "ifdef",
       "expression": "X86GFX",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "0f57d1a99ea71c9258a0e7664db08af1699ac15d0b7a6af5333e5fc4078e26e1"
@@ -47289,8 +47289,8 @@
       "group_end": 482,
       "kind": "ifdef",
       "expression": "X86GFX",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4"
@@ -65682,13 +65682,13 @@
   "status_counts": {
     "unselected-file": 742,
     "newly-excluded": 642,
-    "already-excluded": 1681,
-    "pending": 109,
+    "already-excluded": 1689,
+    "pending": 101,
     "retained-observed": 1869,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
     "not-guard": 83,
-    "guard": 26
+    "guard": 18
   }
 }
