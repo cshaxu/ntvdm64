@@ -2721,15 +2721,6 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 497,
-      "kind": "ifdef",
-      "expression": "NO_CHIP_BUG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
       "start": 499,
       "kind": "else",
       "expression": "",
@@ -2739,7 +2730,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 609,
+      "start": 611,
       "kind": "ifdef",
       "expression": "CPU_286",
       "pending_reason": "file-not-witnessed-in-product",
@@ -2748,18 +2739,9 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 611,
+      "start": 613,
       "kind": "else",
       "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 635,
-      "kind": "ifdef",
-      "expression": "CPU_286",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -2767,15 +2749,6 @@
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
       "start": 637,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 641,
       "kind": "ifdef",
       "expression": "CPU_286",
       "pending_reason": "file-not-witnessed-in-product",
@@ -2784,7 +2757,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 645,
+      "start": 639,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -2793,7 +2766,25 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 655,
+      "start": 643,
+      "kind": "ifdef",
+      "expression": "CPU_286",
+      "pending_reason": "file-not-witnessed-in-product",
+      "guard_only": false,
+      "current_actual_includers": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "start": 647,
+      "kind": "else",
+      "expression": "",
+      "pending_reason": "file-not-witnessed-in-product",
+      "guard_only": false,
+      "current_actual_includers": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "start": 657,
       "kind": "ifdef",
       "expression": "PIG",
       "pending_reason": "file-not-witnessed-in-product",
@@ -2802,7 +2793,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 657,
+      "start": 659,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -2811,7 +2802,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 661,
+      "start": 663,
       "kind": "ifdef",
       "expression": "CPU_286",
       "pending_reason": "file-not-witnessed-in-product",
@@ -2820,7 +2811,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 666,
+      "start": 668,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -2829,7 +2820,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 685,
+      "start": 687,
       "kind": "ifdef",
       "expression": "CPU_286",
       "pending_reason": "file-not-witnessed-in-product",
@@ -2838,7 +2829,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 693,
+      "start": 695,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -2847,7 +2838,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 797,
+      "start": 799,
       "kind": "ifdef",
       "expression": "CPU_286",
       "pending_reason": "file-not-witnessed-in-product",
@@ -2856,18 +2847,9 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 882,
+      "start": 884,
       "kind": "else",
       "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 1180,
-      "kind": "ifdef",
-      "expression": "CPU_286",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -2875,15 +2857,6 @@
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
       "start": 1182,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 1307,
       "kind": "ifdef",
       "expression": "CPU_286",
       "pending_reason": "file-not-witnessed-in-product",
@@ -2892,7 +2865,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 1310,
+      "start": 1184,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -2901,9 +2874,18 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 1385,
+      "start": 1309,
       "kind": "ifdef",
       "expression": "CPU_286",
+      "pending_reason": "file-not-witnessed-in-product",
+      "guard_only": false,
+      "current_actual_includers": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "start": 1312,
+      "kind": "else",
+      "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -2911,17 +2893,17 @@
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
       "start": 1387,
-      "kind": "else",
-      "expression": "",
+      "kind": "ifdef",
+      "expression": "CPU_286",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 1396,
-      "kind": "ifdef",
-      "expression": "CPU_286",
+      "start": 1389,
+      "kind": "else",
+      "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -2929,15 +2911,6 @@
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
       "start": 1398,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 1403,
       "kind": "ifdef",
       "expression": "CPU_286",
       "pending_reason": "file-not-witnessed-in-product",
@@ -2946,7 +2919,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 1406,
+      "start": 1400,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -2955,9 +2928,18 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 1412,
+      "start": 1405,
       "kind": "ifdef",
       "expression": "CPU_286",
+      "pending_reason": "file-not-witnessed-in-product",
+      "guard_only": false,
+      "current_actual_includers": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "start": 1408,
+      "kind": "else",
+      "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -2965,24 +2947,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
       "start": 1414,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 1429,
       "kind": "ifdef",
-      "expression": "NPX_287",
+      "expression": "CPU_286",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 1431,
+      "start": 1416,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -2991,7 +2964,16 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 1533,
+      "start": 1433,
+      "kind": "else",
+      "expression": "",
+      "pending_reason": "file-not-witnessed-in-product",
+      "guard_only": false,
+      "current_actual_includers": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "start": 1537,
       "kind": "ifdef",
       "expression": "SPC386",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3000,27 +2982,9 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 1537,
+      "start": 1541,
       "kind": "else",
       "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 2071,
-      "kind": "ifdef",
-      "expression": "INTEL_BOOK_NOT_OS2",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
-      "start": 2098,
-      "kind": "ifdef",
-      "expression": "OLDPIG",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -3252,16 +3216,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
-      "start": 1198,
-      "kind": "ifdef",
-      "expression": "SWIN_CPU_OPTS",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
-      "start": 1202,
+      "start": 1203,
       "kind": "ifdef",
       "expression": "CPU_PRIVATE",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3432,16 +3387,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/gore.h",
-      "start": 26,
-      "kind": "ifdef",
-      "expression": "INTERLEAVED",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/gore.h",
-      "start": 34,
+      "start": 28,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3504,16 +3450,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
-      "start": 526,
-      "kind": "ifdef",
-      "expression": "MSWDVR_DEBUG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
-      "start": 613,
+      "start": 528,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3570,15 +3507,6 @@
       "start": 679,
       "kind": "ifdef",
       "expression": "JLD_PRIVATE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/keycaps.h",
-      "start": 13,
-      "kind": "ifdef",
-      "expression": "UIF_TEST",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -3684,16 +3612,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/novell.h",
-      "start": 160,
-      "kind": "ifdef",
-      "expression": "V4CLIENT",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/novell.h",
-      "start": 167,
+      "start": 168,
       "kind": "ifndef",
       "expression": "PROD",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3702,7 +3621,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/novell.h",
-      "start": 169,
+      "start": 170,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3765,16 +3684,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/smeg_hea.h",
-      "start": 15,
-      "kind": "ifdef",
-      "expression": "SMEG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/smeg_hea.h",
-      "start": 90,
+      "start": 17,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3885,15 +3795,6 @@
       "start": 22,
       "kind": "ifndef",
       "expression": "_VGASTATE_H_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/winhelp.h",
-      "start": 20,
-      "kind": "ifdef",
-      "expression": "HOST_HELP",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -4907,15 +4808,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
-      "start": 1512,
-      "kind": "ifdef",
-      "expression": "QEVENT_TESTER",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
       "start": 345,
       "kind": "else",
@@ -5223,16 +5115,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 461,
-      "kind": "ifdef",
-      "expression": "TEST_CASE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 480,
+      "start": 476,
       "kind": "ifdef",
       "expression": "STAND_ALONE",
       "pending_reason": "file-not-witnessed-in-product",
@@ -5241,7 +5124,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 482,
+      "start": 478,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -5250,7 +5133,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 490,
+      "start": 486,
       "kind": "ifndef",
       "expression": "STAND_ALONE",
       "pending_reason": "file-not-witnessed-in-product",
@@ -5259,16 +5142,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 501,
-      "kind": "ifdef",
-      "expression": "TEST_CASE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 518,
+      "start": 503,
       "kind": "ifdef",
       "expression": "STAND_ALONE",
       "pending_reason": "file-not-witnessed-in-product",
@@ -6723,15 +6597,6 @@
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_vflop.c",
-      "start": 4,
-      "kind": "ifdef",
-      "expression": "VFLOPPY",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
@@ -9229,7 +9094,7 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 856
+      "count": 841
     },
     {
       "reason": "file-not-witnessed-in-product",

@@ -524,93 +524,9 @@ typedef struct {
 /* Functions */
 
 #ifdef MSWDVR_DEBUG
-
-/*
- * Low-level functions.
- */
-extern VOID	DReportColEnquire IPT2(MSWCOLOUR,colour,sys_addr,pcolour);
-extern VOID	DReportPixelEnquire IPT2(MSWPIXEL,pixel,MSWCOLOUR,rgb);
-extern VOID	DPrintBitmap IPT3(UTINY *,bitmap,ULONG,bytes_per_line,ULONG,height);
-extern VOID	DPrintMonoBitmap IPT4(UTINY *,bitmap,ULONG,bytes_per_line,ULONG,width,ULONG,height);
-extern VOID	DPrintImageDetails IPT1(XImage *,img);
-extern VOID	DPrintBitmapDetails IPT1(sys_addr,bm);
-extern VOID	DPrintDevBitmapDetails IPT1(sys_addr,bm);
-extern VOID	DPrintMessage IPT1(CHAR *,message);
-extern VOID	DPrintInteger IPT1(LONG,integer);
-extern VOID	DPrintColourmap IPT2(MSWCOLOURMAP *,colourmap,ULONG,colourmapSize);
-extern VOID	DPrintSrcDstRect IPT6(LONG,sx,LONG,sy,LONG,dx,LONG,dy,ULONG,xext,ULONG,yext);
-extern VOID	DPrintPBrush IPT1(sys_addr, lpBrush);
-extern VOID	DPrintPPen IPT1(sys_addr,PPen);
-extern VOID	DPrintDrawMode IPT2(sys_addr,DrawMode, BOOL, text);
-extern VOID	DPrintDevice IPT1(sys_addr,Device);
-extern VOID	DPrintlpPoints IPT2(sys_addr,lpPoints,word,Count);
-extern VOID	DPrintClipRect IPT1(sys_addr,lpClipRect);
-extern VOID	DPrintObject IPT3(word,style,sys_addr,lpInObj,sys_addr,lpOutObj);
-extern VOID	DPrintFontInfo IPT1(sys_addr,pfont);
-extern VOID	DPrintTextXForm IPT1(sys_addr,lpTextXForm);
-extern VOID	DPrintDIBHeader IPT2(sys_addr,lpDIBHeader,word,setOrget);
-extern VOID	DPrintTransTable IPT2(MSWPIXEL *,table,ULONG,tableSize);
-extern VOID	DDrawLogo IPT1(sys_addr,stkframe);
-
-/*
- * High-level functions
- */
-extern VOID	DBitblt IPT11 ( sys_addr,lpDestDev, word,dstXOrg,word,dstYOrg,
-		sys_addr,lpSrcDev,  word,srcXOrg,word,srcYOrg,
-		word,xext,word,yext,double_word,rop3,
-		sys_addr,lpPBrush,sys_addr,lpDrawMode);
-extern VOID	DColorInfo IPT3(sys_addr,lpDestDev,double_word,colorin,sys_addr,lpPColor);
-extern VOID	DControl IPT4(sys_addr,lpDestDev,word,wFunction,sys_addr,lpInData,sys_addr,lpOutData);
-extern VOID	DDisable IPT1(sys_addr,lpDestDev);
-extern VOID	DEnable IPT5(sys_addr,lpDestDev,word,wStyle,sys_addr,lpDestType,sys_addr,
-		lpOutputFile,sys_addr,lpData);
-extern VOID	DEnumDFonts IPT1(sys_addr,stkframe);
-extern VOID	DEnumObj IPT1(sys_addr,stkframe);
-extern VOID	DOutput IPT8(sys_addr,lpDestDev,word,lpStyle,word,Count,sys_addr,lpPoints,
-		sys_addr,lpPPen,sys_addr,lpPBrush,sys_addr,lpDrawMode,sys_addr,lpClipRect);
-extern VOID	DPixel IPT5(sys_addr,lpDestDev,word,x,word,y,double_word,PhysColor,sys_addr,lpDrawMode);
-#ifdef SWIN_DEVBMP
-extern VOID	DBitmapBits IPT4(sys_addr,lpDevice,double_word,fFlags,double_word,dwCount,double_word,lpBits);
-extern VOID	DSelectBitmap IPT4(sys_addr,lpDevice,sys_addr,lpPrevBitmap,sys_addr,lpBitmap,double_word,fFlags);
-#endif
-extern VOID	DRealizeObject IPT5(word,Style,sys_addr,lpInObj,sys_addr,lpOutObj,word,originX,word,originY);
-extern VOID	DStrblt IPT9(sys_addr,lpDestDev,word,DestxOrg,word,DestyOrg,sys_addr,lpClipRect,
-		sys_addr,lpString,word,Count,sys_addr,lpFont,sys_addr,lpDrawMode, sys_addr,lpTextXForm);
-extern VOID	DScanlr IPT5(sys_addr,lpDestDev,word,x,word,y,double_word,PhysColor,word,Style);
-extern VOID	DDeviceMode IPT1(sys_addr,stkframe);
-extern VOID	DInquire IPT1(sys_addr,stkframe);
-extern VOID	DSetCursor IPT1(sys_addr,lpCursorShape);
-extern VOID	DMoveCursor IPT1(sys_addr,stkframe);
-extern VOID	DCheckCursor IPT1(sys_addr,stkframe);
-extern VOID	DSaveScreenBitmap IPT5(word, command, word, x, word, y, word, xext, word, yext);
-extern VOID	DExtTextOut IPT12(sys_addr, dstdev, word, dx, word, dy, sys_addr, cliprect, sys_addr, 
-		str, word, strlnth, sys_addr, pfont, sys_addr, drawmode, sys_addr, textxform, 
-		sys_addr, txtcharwidths, sys_addr, opaquerect, word, options);
-extern VOID	DGetCharWidth IPT7(sys_addr,dstdev,sys_addr,buffer,word,first,word,last,sys_addr,
-		pfont,sys_addr,drawmode,sys_addr,textxform);
-extern VOID	DDeviceBitmap IPT1(sys_addr,stkframe);
-extern VOID	DDeviceBitmapBits IPT8(sys_addr,lpDestDev,word,setOrget,word,startScan,word,
-		numScans,sys_addr,lpDIBBits,sys_addr,lpDIBHeader,sys_addr,
-		lpDrawMode,sys_addr,lpColorInfo);
-extern VOID	DSetDIBitsToDevice IPT10(sys_addr, lpDestDev, word, screenXOrigin, word, 
-		screenYOrigin, word, startScan, word, numScans, sys_addr, lpClipRect, 
-		sys_addr, lpDrawMode, sys_addr, lpDIBBits, sys_addr, lpDIBHeader, 
-		sys_addr, lpColorInfo);
-extern VOID	DFastBorder IPT11(sys_addr,lpDestDev,word,dx,word,dy,word,xext,word,yext,
-		word,hbt,word,vbt,double_word,rop3,sys_addr,pbrush,
-		sys_addr,drawmode,sys_addr,cliprect);
-extern VOID	DSetAttribute IPT1(sys_addr,stkframe);
-extern VOID	DSetPalette IPT3(word,wIndex,word,wCount,sys_addr,lpColorTable);
-extern VOID	DGetPalette IPT3(word,wIndex,word,wCount,sys_addr,lpColorTable);
-extern VOID	DSetPalTrans IPT1(sys_addr,lpTranslate);
-extern VOID	DGetPalTrans IPT1(sys_addr,lpTranslate);
-extern VOID	DUpdateColors IPT5(word,wStartX,word,wStartY,word,wExtX,word,wExtY,sys_addr,lpTranslate);
-extern char *	DGXopToString IPT1(int, gxop);
-extern void	DPrintLineStyle IPT1(int, style);
-extern void	DPrintBrushStyle IPT1(int, style);
-extern void	DPrintStyle IPT1(int, lpStyle);
-
+#error DIVERGENCE MVDM-HOST-DIV-605: unsupported MSWDVR_DEBUG profile
 #else
+#line 614
 
 #define DPrintMonoBitmap(bitmap,bytes_per_line,width,height)
 #define DReportColEnquire(p1,p2)
@@ -657,3 +573,4 @@ extern void	DPrintStyle IPT1(int, lpStyle);
 #define DUpdateColors(p1,p2,p3,p4,p5)
 
 #endif 
+#line 660

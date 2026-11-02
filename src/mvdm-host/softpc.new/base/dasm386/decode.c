@@ -495,10 +495,12 @@ LOCAL OPCODE_INFO opcode_info[] =
    /* 8b 8b     */{T4, {{I_MOV16    , A_Gw  , A_Ew  },{I_MOV32    , A_Gd  , A_Ed  }}},
 
 #ifdef NO_CHIP_BUG
-   /* 8c 8c     */{T4,OI(I_MOV16    , A_Ew  , A_Nw  )},
+#error DIVERGENCE MVDM-HOST-DIV-605: unsupported NO_CHIP_BUG profile
 #else
+#line 500
    /* 8c 8c     */{T4, {{I_MOV16    , A_Ew  , A_Nw  },{I_MOV32    , A_Ex  , A_Nw  }}},
 #endif /* NO_CHIP_BUG */
+#line 502
 
    /* 8d 8d     */{TA, {{I_LEA      , A_Gw  , A_M   },{I_LEA      , A_Gd  , A_M   }}},
    /* 8e 8e     */{T4,OI(I_MOV_SR   , A_Lw  , A_Ew  )},
@@ -1427,10 +1429,12 @@ LOCAL OPCODE_INFO opcode_info[] =
    /*353 db/e3  */{T0,OI(I_FINIT    , A_    , A_    )},
 
 #ifdef NPX_287
-   /*354 db/e4  */{T0,OI(I_FSETPM   , A_    , A_    )},
+#error DIVERGENCE MVDM-HOST-DIV-605: unsupported NPX_287 profile
 #else
+#line 1432
    /*354 db/e4  */{T0,OI(I_FNOP     , A_    , A_    )},
 #endif /* NPX_287 */
+#line 1434
 
    /*355 db/e5  */{T0,OI(I_ZFRSRVD  , A_    , A_    )},
    /*356 db/e6  */{T0,OI(I_ZFRSRVD  , A_    , A_    )},
@@ -2069,14 +2073,9 @@ decode IFN4 (
 	 d_arg->arg_type = A_Rd;
 	 decoding = INST_BYTE(f,p);
 #ifdef INTEL_BOOK_NOT_OS2
-	 if ( GET_MODE(decoding) != 3 )
-	    {
-	    /* memory access not allowed -- force a bad op. */
-	    d_inst->inst_id = I_ZBADOP;
-	    d_arg->arg_type = A_;
-	    break;
-	    }
+#error DIVERGENCE MVDM-HOST-DIV-605: unsupported INTEL_BOOK_NOT_OS2 profile
 #endif /* INTEL_BOOK_NOT_OS2 */
+#line 2080
 	 p++;
 	 d_arg->identifier = GET_R_M(decoding);
 	 break;
@@ -2096,10 +2095,9 @@ decode IFN4 (
 	    p++;   /* allow for errant modR/M byte */
 	    d_inst->inst_id = I_ZBADOP;
 #ifdef OLDPIG
-	    if ( INST_OFFSET_BYTE(f,p, -2) == 0xc5 &&
-		 INST_OFFSET_BYTE(f,p, -1) == 0xc5 )
-	       d_inst->inst_id = I_ZZEXIT;
+#error DIVERGENCE MVDM-HOST-DIV-605: unsupported OLDPIG profile
 #endif /* OLDPIG */
+#line 2103
 	    break;
 	    }
 	 

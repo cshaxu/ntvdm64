@@ -459,13 +459,9 @@ LOCAL void dat2obj IFN3(char *, label, char *, datfile, IU16, machineId)
 }
 
 #ifdef  TEST_CASE
-#ifndef PROD
-LOCAL IU32 testdata[] = {
-	0x31415926,
-	0x11223344, 0x55667788, 0x99aabbcc, 0xddeeff00,
-	0x14142135 };
+#error DIVERGENCE MVDM-HOST-DIV-605: unsupported TEST_CASE profile
 #endif
-#endif
+#line 469
 
 /*(
 ========================== host_convert_dat_files ==========================
@@ -499,20 +495,9 @@ host_convert_dat_files IFN2(char *,src,char *,dest)
 	//dat2obj("onsub", "online.dat", machineId);
 
 #ifdef  TEST_CASE
-#ifndef PROD
-	/* Generate a specimen .dat file which we could write as 
-	 * a .s file and compile directly: helpful for debugging.
-	 */
-	open_gen_file("test.dat");
-	if (out_file == stderr) {
-		return;
-	}
-	fwrite(&testdata, sizeof(testdata), 1, out_file);
-	close_gen_file();
-
-	dat2obj("testd", "test.dat", machineId);
+#error DIVERGENCE MVDM-HOST-DIV-605: unsupported TEST_CASE profile
 #endif
-#endif
+#line 516
 }
 
 #ifdef STAND_ALONE

@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-605: preserve original first-depth selectors for unsupported
+legacy platform and diagnostic profiles, rejecting their bodies. Source and
+SDK macro scans and x86/x64 controls are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-platform-batch.json`.
+
 MVDM-HOST-DIV-604: preserve the original STUBBED host configuration selectors while rejecting unsupported arms.  Source and SDK macro
 scans and x86/x64 selected/forced controls are recorded in
 `../../artifacts/mvdm-audit/s13-bfs-depth1-stubbed-batch.json`.
@@ -50,7 +55,7 @@ and `../../artifacts/mvdm-audit/s13-bfs-depth1-compound-header-batch.json` and
 outer groups are in `../../artifacts/mvdm-audit/s13-bfs-depth1-hfx-header-batch.json`;
 BIOS alternatives are in `../../artifacts/mvdm-audit/s13-bfs-depth1-bios-ansi-batch.json`;
 WOW callback arms are in `../../artifacts/mvdm-audit/s13-bfs-depth1-wow-extra-batch.json`;
-platform alternatives are in `../../artifacts/mvdm-audit/s13-bfs-depth1-platform-batch.json`;
+platform alternatives are in `../../artifacts/mvdm-audit/s13-bfs-depth1-platform-v2-batch.json`;
 timing headers are in `../../artifacts/mvdm-audit/s13-bfs-depth1-timing-header-batch.json`;
 WOW header arms are in `../../artifacts/mvdm-audit/s13-bfs-depth1-wow-header-batch.json`.
 Host video alternatives (not the separate cvidc profile) are in

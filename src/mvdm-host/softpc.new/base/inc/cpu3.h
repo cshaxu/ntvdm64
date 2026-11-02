@@ -1196,8 +1196,9 @@ extern IU32 GetStackPointer IPT0();
 #endif
 
 #ifdef SWIN_CPU_OPTS
-extern IBOOL Cpu_find_dcache_entry IPT2(IU16, seg, LIN_ADDR *, base);
+#error DIVERGENCE MVDM-HOST-DIV-605: unsupported SWIN_CPU_OPTS profile
 #endif
+#line 1201
 
 #ifdef	CPU_PRIVATE
 /*

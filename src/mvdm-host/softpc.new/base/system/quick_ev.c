@@ -1510,47 +1510,6 @@ add_q_ev_int_action IFN5(unsigned long, time, Q_CALLBACK_FN, func, IU32, adapter
 #endif /* CPU_40_STYLE && !SFELLOW */
 
 #ifdef QEVENT_TESTER
-
-/*
- * The routine qevent_tester() below can be called from a BOP, which
- * in turn can be called from a .BAT file using bop.com in a loop.
- * This doesn't test the quick event system exhaustively but puts it
- * under a bit more pressure.
- */
-
-LOCAL q_ev_handle handles[256];
-LOCAL IU8 deleter = 1;
-
-LOCAL void
-tester_func IFN1
-(
-	IU32,	param
-)
-{
-	SAVED IU8 do_delete = 0;
-
-	handles[param] = 0;
-
-	if( handles[deleter] && (( do_delete++ & 0x1 ) == 0 ))
-	{
-		delete_q_event( handles[deleter] );
-	}
-
-	deleter += 7;
-}
-
-GLOBAL void
-qevent_tester IFN0()
-{
-	SAVED IU8 indx = 0;
-
-	handles[indx++] = add_q_event_i((Q_CALLBACK_FN) tester_func, 100, indx );
-	handles[indx++] = add_q_event_t((Q_CALLBACK_FN) tester_func, 300, indx );
-	handles[indx++] = add_q_event_i((Q_CALLBACK_FN) tester_func, 1000, indx );
-	handles[indx++] = add_q_event_t((Q_CALLBACK_FN) tester_func, 3000, indx );
-	handles[indx++] = add_q_event_i((Q_CALLBACK_FN) tester_func, 10000, indx );
-	handles[indx++] = add_q_event_t((Q_CALLBACK_FN) tester_func, 30000, indx );
-	handles[indx++] = add_q_event_i((Q_CALLBACK_FN) tester_func, 100000, indx );
-	handles[indx++] = add_q_event_t((Q_CALLBACK_FN) tester_func, 300000, indx );
-}
+#error DIVERGENCE MVDM-HOST-DIV-605: unsupported QEVENT_TESTER profile
 #endif /* QEVENT_TESTER */
+#line 1557

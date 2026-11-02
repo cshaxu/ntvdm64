@@ -158,8 +158,9 @@ extern	void	DriverAddProtocol IPT0 ();
 extern	void	DriverChangePromiscuous IPT0 ();
 extern	void	DriverCheckForMore IPT0 ();
 #ifdef V4CLIENT
-extern	void	ODIChangeIntStatus IPT1 ( IU16, status ) ;
+#error DIVERGENCE MVDM-HOST-DIV-605: unsupported V4CLIENT profile
 #endif	/* V4CLIENT */
+#line 163
 extern	void	net_term IPT0 ();
 
 /* misc defines */

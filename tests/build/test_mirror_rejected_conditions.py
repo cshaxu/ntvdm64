@@ -195,6 +195,20 @@ for path, macro, expected_count, divergence in (
     ('src/mvdm-host/wow32/wkglobal.c', 'API16', 8, '603'),
     ('src/mvdm-host/wow32/wklocal.c', 'API16', 2, '603'),
     ('src/mvdm-host/softpc.new/host/src/stf_conf.c', 'STUBBED', 4, '604'),
+    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'INTEL_BOOK_NOT_OS2', 1, '605'),
+    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'NO_CHIP_BUG', 1, '605'),
+    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'NPX_287', 1, '605'),
+    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'OLDPIG', 1, '605'),
+    ('src/mvdm-host/softpc.new/base/inc/cpu3.h', 'SWIN_CPU_OPTS', 1, '605'),
+    ('src/mvdm-host/softpc.new/base/inc/gore.h', 'INTERLEAVED', 1, '605'),
+    ('src/mvdm-host/softpc.new/base/inc/host_msw.h', 'MSWDVR_DEBUG', 1, '605'),
+    ('src/mvdm-host/softpc.new/base/inc/keycaps.h', 'UIF_TEST', 1, '605'),
+    ('src/mvdm-host/softpc.new/base/inc/novell.h', 'V4CLIENT', 1, '605'),
+    ('src/mvdm-host/softpc.new/base/inc/smeg_hea.h', 'SMEG', 1, '605'),
+    ('src/mvdm-host/softpc.new/base/inc/winhelp.h', 'HOST_HELP', 1, '605'),
+    ('src/mvdm-host/softpc.new/base/system/quick_ev.c', 'QEVENT_TESTER', 1, '605'),
+    ('src/mvdm-host/softpc.new/dat2obj/dat2obj.c', 'TEST_CASE', 2, '605'),
+    ('src/mvdm-host/softpc.new/host/src/nt_vflop.c', 'VFLOPPY', 1, '605'),
 ):
     lines = (repo / path).read_text(encoding='latin1').splitlines()
     marker = 'MVDM-HOST-DIV-' + divergence + ': unsupported ' + macro + ' profile'
@@ -202,7 +216,7 @@ for path, macro, expected_count, divergence in (
     if len(positions) != expected_count:
         raise SystemExit('incorrect excluded profile guard count: ' + path)
     for i in positions:
-        if lines[i-1].strip() != '#ifdef ' + macro:
+        if not re.match(r'^\s*#\s*ifdef\s+' + re.escape(macro) + r'\s*$', lines[i-1]):
             raise SystemExit('excluded profile lost original selector: ' + path)
         probe.write_text('\n'.join(lines[i-1:i+1] + ['#endif']) + '\n', encoding='ascii')
         allowed = subprocess.run(base, capture_output=True, text=True, errors='replace')
@@ -210,4 +224,4 @@ for path, macro, expected_count, divergence in (
                                   capture_output=True, text=True, errors='replace')
         if allowed.returncode or not rejected.returncode or marker not in rejected.stdout + rejected.stderr:
             raise SystemExit('excluded profile selection failed: ' + path)
-print('PASS original SECURE, EGATEST, API16 and STUBBED profile guards')
+print('PASS original excluded host and WOW profile guards')

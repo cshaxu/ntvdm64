@@ -1,0 +1,440 @@
+{
+  "scope": "15 first-depth arms, original bodies matched; nested source and queue entries inside excluded arms removed without deeper audit",
+  "macro_evidence": {
+    "compile_commands_checked": 2070,
+    "jobs_sha256": "623d1067dca46b9fabf571db17d6567d8f03e04047245ca9ac11fcda71c725ea",
+    "command_macro_definitions_found": 0,
+    "source_generated_sdk_definitions_found": 0,
+    "scope": "src, tests, tools, generated Ninja trees and eight SDK include roots",
+    "controls": "30 x86/x64 isolated selector checks; original removed body matched byte-for-byte after line-ending normalization; selected bodies retained verbatim"
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "macro": "NO_CHIP_BUG",
+      "original_start": 497,
+      "original_cut": 499,
+      "original_end": 501,
+      "removed_body_sha256": "b28d47719f6658e5902582952d8555f2861b84a0c3df7bfe425fcbf74032f38f",
+      "removed_lines": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "macro": "NPX_287",
+      "original_start": 1429,
+      "original_cut": 1431,
+      "original_end": 1433,
+      "removed_body_sha256": "dbebc4f02500425f3781ad166cbdcac039fcdbb718f50bf5e6e388ed9d18b066",
+      "removed_lines": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "macro": "INTEL_BOOK_NOT_OS2",
+      "original_start": 2071,
+      "original_cut": 2079,
+      "original_end": 2079,
+      "removed_body_sha256": "de343b141d0ec6532406b588697138c57a7d2027941d071bf5a41d2135084808",
+      "removed_lines": 7
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "macro": "OLDPIG",
+      "original_start": 2098,
+      "original_cut": 2102,
+      "original_end": 2102,
+      "removed_body_sha256": "4e41036bba7597f21d27c91f11dc9133c84a2d1016dd4154060baec4a98329ae",
+      "removed_lines": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "macro": "SWIN_CPU_OPTS",
+      "original_start": 1198,
+      "original_cut": 1200,
+      "original_end": 1200,
+      "removed_body_sha256": "b062e938e8a4093ea5db944335aacdcb528ef4a5fc9c41eacc9b6b3709d0509c",
+      "removed_lines": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gore.h",
+      "macro": "INTERLEAVED",
+      "original_start": 26,
+      "original_cut": 34,
+      "original_end": 42,
+      "removed_body_sha256": "a5eb0e1cd6d4fe20a2f2d8b0212f006e5f66baf2b3a0d21f31f579a0a1b1777a",
+      "removed_lines": 7
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
+      "macro": "MSWDVR_DEBUG",
+      "original_start": 526,
+      "original_cut": 613,
+      "original_end": 659,
+      "removed_body_sha256": "8843fb2fa336ffd97f4db326e24d5c4ca2eb18ca1c9f8b5dd78a527bcac1af7e",
+      "removed_lines": 86
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/keycaps.h",
+      "macro": "UIF_TEST",
+      "original_start": 13,
+      "original_cut": 151,
+      "original_end": 151,
+      "removed_body_sha256": "5de298b244bd5efc34d2b70ecf610967604436d55086f38934189a132d184587",
+      "removed_lines": 137
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/novell.h",
+      "macro": "V4CLIENT",
+      "original_start": 160,
+      "original_cut": 162,
+      "original_end": 162,
+      "removed_body_sha256": "4daeceac6db725fdc8157268c8d638f29b5bd282088618cafe279a7a784d1c1f",
+      "removed_lines": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/smeg_hea.h",
+      "macro": "SMEG",
+      "original_start": 15,
+      "original_cut": 90,
+      "original_end": 96,
+      "removed_body_sha256": "127b7aef32a2754102cb204e8b2d4cc7b6ca59b0aab04f2553388c021c8e94aa",
+      "removed_lines": 74
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winhelp.h",
+      "macro": "HOST_HELP",
+      "original_start": 20,
+      "original_cut": 89,
+      "original_end": 89,
+      "removed_body_sha256": "4ed6c76112a6e5cf56fc25a236642ec49a20fbebd94cb02070be6d5d0265973e",
+      "removed_lines": 68
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "macro": "QEVENT_TESTER",
+      "original_start": 1512,
+      "original_cut": 1556,
+      "original_end": 1556,
+      "removed_body_sha256": "040876604a4d2d2b4206e29751bbfefa2a726862d148d2aa50267dd65142a74b",
+      "removed_lines": 43
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "macro": "TEST_CASE",
+      "original_start": 461,
+      "original_cut": 468,
+      "original_end": 468,
+      "removed_body_sha256": "691bb4de3e772d41930ed2376ff704f3a2c690ceb1059e581adb99e31bf5a275",
+      "removed_lines": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "macro": "TEST_CASE",
+      "original_start": 501,
+      "original_cut": 515,
+      "original_end": 515,
+      "removed_body_sha256": "033c07d780373cd54b6554a358d2d563a4d8b71043814bb1094fdd5db8c1f741",
+      "removed_lines": 13
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vflop.c",
+      "macro": "VFLOPPY",
+      "original_start": 4,
+      "original_cut": 604,
+      "original_end": 604,
+      "removed_body_sha256": "8295ae4ef30fee95132ac9573fca2d2aa5d79afef035b44912d5595668e29042",
+      "removed_lines": 599
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "start": 497,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "start": 1429,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "start": 2071,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "start": 2098,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "start": 1198,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/gore.h",
+      "start": 26,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
+      "start": 526,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/keycaps.h",
+      "start": 13,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/novell.h",
+      "start": 160,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/smeg_hea.h",
+      "start": 15,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/winhelp.h",
+      "start": 20,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "start": 1512,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "start": 461,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "start": 501,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vflop.c",
+      "start": 4,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "start": 497,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "start": 1429,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "start": 2071,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "start": 2098,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "start": 1198,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/gore.h",
+      "start": 26,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
+      "start": 526,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/keycaps.h",
+      "start": 13,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/novell.h",
+      "start": 160,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/smeg_hea.h",
+      "start": 15,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/winhelp.h",
+      "start": 20,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "start": 1512,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "start": 461,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "start": 501,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vflop.c",
+      "start": 4,
+      "normal_pass": true,
+      "forced_rejected": true
+    }
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "before": "4839d441cf3b5f15faddab6284b4c948f10c4586a4abe822741b9d409c45bc7e",
+      "after": "a35c1ad46fcfe02f591252c4c27c77794f8a0f6775e150ce8e9237a8f528f57a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "before": "c711c104e058563c8f247032366ae4424967e8a09592a073bdf5e379e7f21f95",
+      "after": "aee92f447164977ef7dd3c01526211de10553c1202210cf21421bbdfb201a7c4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gore.h",
+      "before": "a12a6e13ba5b6a1b3253ad53514d241501e64445bebe7c9d35e0b633c0b1e48f",
+      "after": "31363a2f25352891adb3b4a943fedbcffccad04926085bd13fc64298c095bdd9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
+      "before": "61ee2e94695e04888f91fe4b07f7c60f5b1d9f6e353af45b7b2d548499c779a7",
+      "after": "320ed3fc7b12f3ea5072c1f4a645edf167ba214d773f0850da828ac8de77e034"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/keycaps.h",
+      "before": "876ddb3481bc47ef83a760f6217356d3507d59c6a02caba9b9222cfc3a5d611a",
+      "after": "22c13314a43c9a8fea65867e1edd0224c4d1bf64e16db3c24b7260a2d31cc403"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/novell.h",
+      "before": "027b12b8898d930fd2ecaf72489da03383108a21b1623ee0a13e6ffc949d557c",
+      "after": "08032a5b6d2de9c3181202984fdb7f1bd1b12ba92473672b701f7ce5acbbd081"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/smeg_hea.h",
+      "before": "24066e15c58a76e8db5273e0ff460de586149b1e04fb4d9957680d651d355b5d",
+      "after": "6a2ea838451c5a4b4b402b00136cee2ba2cbff8887389bf95c83e21d4f96965f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winhelp.h",
+      "before": "c418f4da556a2f266b18a16d50ac106c99b73afa00bce02c79fcef0e83e3fe38",
+      "after": "c5dada7b36e4b1117ac69fb094b86fa2320c7527adb1399f0d009136bab40bdc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "before": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61",
+      "after": "f51322c62783e9f3d78d716b77b1f2b25b23effbb83d4d7551172ce9c292e731"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "before": "c179bea2ce71c33477e26dad3edfaf9a5f3639935310bc042d66ab6d37be1818",
+      "after": "b4cc2445a18cebd7f8153fded458993b0e1b12d6159bc2afeadda790f9a05b5f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vflop.c",
+      "before": "6b38f54fa330d884ce2d9b42abe0df8792a9e40fdb73c06e6cd6aba6af3df695",
+      "after": "85d1d8f76542ccbb81df654e5382bcb9ea86a6ce6c3f9bd5d9afe6bf5e353e6d"
+    }
+  ],
+  "removed_inner_group_count": 8,
+  "notices_retained_at_file_scope": {
+    "src/mvdm-host/softpc.new/base/inc/winhelp.h": "Copyright (c) 1990,1991,1992,1993 Bristol Technology Inc.",
+    "src/mvdm-host/softpc.new/host/src/nt_vflop.c": "(c) Copyright Insignia Solutions 1991"
+  },
+  "validation": {
+    "x86_cached_build": "passed; no work",
+    "x64_cached_build": "passed; no work",
+    "guard_gate": "x86 and x64; see progress record",
+    "published_release": "all ten product images byte-identical to accepted prior release at both destinations",
+    "published_images": [
+      "run16.exe",
+      "ntsrv.exe",
+      "ntcon.exe",
+      "ntvdm.exe",
+      "ntvwm.exe",
+      "ntmon.exe",
+      "WOW32.DLL",
+      "VDMREDIR.DLL",
+      "nthook32.dll",
+      "nthook64.dll"
+    ]
+  }
+}

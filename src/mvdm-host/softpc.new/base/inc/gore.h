@@ -24,14 +24,9 @@
 ]*/
 
 #ifdef INTERLEAVED
-
-#define	B_POS_UNIT_DIFF	 4
-#define	B_NEG_UNIT_DIFF	-4
-#define	W_POS_UNIT_DIFF	 8
-#define	W_NEG_UNIT_DIFF	-8
-#define	CURR_LINE_DIFF	320
-
+#error DIVERGENCE MVDM-HOST-DIV-605: unsupported INTERLEAVED profile
 #else
+#line 35
 
 #define	B_POS_UNIT_DIFF	 1
 #define	B_NEG_UNIT_DIFF	-1
@@ -40,6 +35,7 @@
 #define	CURR_LINE_DIFF	80
 
 #endif /* INTERLEAVED */
+#line 43
 
 
 typedef struct
