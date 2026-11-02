@@ -2,8 +2,8 @@
   "scope": "all fixed-baseline MVDM-host first-depth original signature multiplicities against current first-depth structures; nested signatures recorded only, no inner branch inspection or automatic restoration",
   "files_checked": 1321,
   "counts": {
-    "root_signature_multiplicity_satisfied": 3558,
-    "missing_root_occurrences": 20
+    "root_signature_multiplicity_satisfied": 3559,
+    "missing_root_occurrences": 19
   },
   "records": [
     {
@@ -156,29 +156,6 @@
       "current_root_lines": [],
       "current_nested_lines": [],
       "missing_multiplicity": 2,
-      "classification": "missing-signature-needs-owner-check"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
-      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_cpu.h",
-      "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
-      "working_sha256": "5ebc1fcbee5c270e59c2e572a8b5082724068e4328c9b2040b6f9e5bc812c6c9",
-      "signature": [
-        [
-          "ifdef",
-          "CPU_30_STYLE"
-        ],
-        [
-          "else",
-          ""
-        ]
-      ],
-      "original_lines": [
-        17
-      ],
-      "current_root_lines": [],
-      "current_nested_lines": [],
-      "missing_multiplicity": 1,
       "classification": "missing-signature-needs-owner-check"
     },
     {

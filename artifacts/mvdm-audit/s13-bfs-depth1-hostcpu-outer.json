@@ -1,0 +1,32 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+  "before_sha256": "5ebc1fcbee5c270e59c2e572a8b5082724068e4328c9b2040b6f9e5bc812c6c9",
+  "after_sha256": "e7dc11cd3a445e2f7e37df01650c055ec62a48d384a823bf08c6c599301f3c89",
+  "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
+  "original_outer": 17,
+  "original_else": 112,
+  "original_end": 506,
+  "selected_body_sha256": "dcfcb9fbee162a9004ac755e6661dacccfe946c94360b07238c4e3a3ed3033cc",
+  "outer": 16,
+  "else": 18,
+  "next_depth_group": 38,
+  "scope": "original CPU30 outer conditional and CPU40 else; local DIV-320 byte order union preserved as selected body; inner LITTLEND condition queued without new review",
+  "preprocessor": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "preprocessing_equal": true,
+      "sha256": "21a9f14ce66c7339578ed148b6bc236d522ae36852a6cb11b22752b4da61ece7"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "preprocessing_equal": true,
+      "sha256": "21a9f14ce66c7339578ed148b6bc236d522ae36852a6cb11b22752b4da61ece7"
+    }
+  ],
+  "overlay_control": "forced #error in scratch shadow header confirmed the real include chain selects it",
+  "tests": "both real worker builds and cached x86/x64 builds passed; x86/x64 actual byte-order fixtures and CPU30 forced rejection passed; original continuation line 507 checked",
+  "package": "s13-bfs-depth1-hostcpu-outer-package-compare.json: eight exact, two PE timestamp only",
+  "remaining_boundaries": "existing DPMI non-CCPU and x87 fixture gaps remain"
+}

@@ -577,3 +577,15 @@ for field, original_body_line, continuation in (('fDpmiHookInts', 1168, 1175), (
     if not (outputs[0] == outputs[1] == outputs[2]) or marker.strip() in outputs[3]:
         raise SystemExit('DPMI hook selection changed: ' + field)
 print('PASS original DPMI hook selectors and four profiles')
+
+host_cpu = (repo / 'src/mvdm-host/softpc.new/host/inc/host_cpu.h').read_text(encoding='latin1')
+if '#ifdef CPU_30_STYLE\n#error Excluded original conditional branch\n#else /* CPU_30_STYLE */\n#line 113\n' not in host_cpu or not host_cpu.rstrip().endswith('#line 507'):
+    raise SystemExit('host_cpu original outer selector or line mapping missing')
+probe.write_text(host_cpu + 'int after_host_cpu = __LINE__;\n', encoding='ascii')
+selected = subprocess.run(base + ['/DLITTLEND', str(probe)], capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base + ['/DLITTLEND', '/DCPU_30_STYLE', str(probe)], capture_output=True, text=True, errors='replace')
+if selected.returncode or 'typedef union' not in selected.stdout or not re.search(r'int\s+after_host_cpu\s*=\s*507\s*;', selected.stdout):
+    raise SystemExit('host_cpu CPU40 selected carrier or original line failed: ' + selected.stderr)
+if not rejected.returncode or 'Excluded original conditional branch' not in rejected.stdout + rejected.stderr:
+    raise SystemExit('host_cpu CPU30 selection did not reject')
+print('PASS host_cpu original CPU30 outer and selected CPU40 union')

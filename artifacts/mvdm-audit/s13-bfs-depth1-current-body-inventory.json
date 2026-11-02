@@ -41173,45 +41173,6 @@
       "source_sha256": "40953fbb22a9c6a5bff875414e4dd6822340ec4a2501edec79415573fea16ab3"
     },
     {
-      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
-      "start": 34,
-      "cut": 37,
-      "group_end": 39,
-      "kind": "ifdef",
-      "expression": "LITTLEND",
-      "status": "retained-observed",
-      "pending_reason": null,
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "5ebc1fcbee5c270e59c2e572a8b5082724068e4328c9b2040b6f9e5bc812c6c9"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
-      "start": 37,
-      "cut": 39,
-      "group_end": 39,
-      "kind": "else",
-      "expression": "",
-      "status": "newly-excluded",
-      "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 1,
-      "source_sha256": "5ebc1fcbee5c270e59c2e572a8b5082724068e4328c9b2040b6f9e5bc812c6c9"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
-      "start": 72,
-      "cut": 74,
-      "group_end": 74,
-      "kind": "ifdef",
-      "expression": "CPU_30_STYLE",
-      "status": "already-excluded",
-      "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 1,
-      "source_sha256": "5ebc1fcbee5c270e59c2e572a8b5082724068e4328c9b2040b6f9e5bc812c6c9"
-    },
-    {
       "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
       "start": 29,
       "cut": 31,
@@ -65676,12 +65637,38 @@
       "guard_only": false,
       "body_lines": 20,
       "source_sha256": "2f6c8f88fccaad6847b903d9c25d28bbd65494541eda7b9c9e3679e5b2e27eaf"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "start": 16,
+      "cut": 18,
+      "group_end": 76,
+      "kind": "ifdef",
+      "expression": "CPU_30_STYLE",
+      "status": "already-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "e7dc11cd3a445e2f7e37df01650c055ec62a48d384a823bf08c6c599301f3c89"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "start": 18,
+      "cut": 76,
+      "group_end": 76,
+      "kind": "else",
+      "expression": "",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 57,
+      "source_sha256": "e7dc11cd3a445e2f7e37df01650c055ec62a48d384a823bf08c6c599301f3c89"
     }
   ],
   "errors": [],
   "status_counts": {
     "pending": 871,
-    "newly-excluded": 635,
+    "newly-excluded": 634,
     "already-excluded": 1669,
     "retained-observed": 1868,
     "retained-original-assertion": 9

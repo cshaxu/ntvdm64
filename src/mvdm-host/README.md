@@ -522,8 +522,10 @@ boundaries are recorded in
 MVDM-HOST-DIV-551: select the original generated CPU40 declarations for
 CPU40 sources that also define MONITOR; MONITOR's unrelated selected code is
 unchanged. The legacy CPU30 interface remains excluded.
-MVDM-HOST-DIV-552: expose the original `reg` union independently of the CPU30
-access-vector guard because selected device I/O still uses that original type.
+MVDM-HOST-DIV-552: retain the CPU40 `reg` union needed by selected device I/O.
+The original CPU30 outer selector has been restored; its CPU30 arm remains
+rejected and the selected CPU40 union retains the DIV-320 byte-order adaptation.
+Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-hostcpu-outer.json`.
 
 MVDM-HOST-DIV-550: restore 22 nested PROD alternatives in the existing
 excluded CPU4GEN non-CCPU shells. Evidence:

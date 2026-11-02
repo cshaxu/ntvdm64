@@ -1,7 +1,7 @@
 {
   "scope": "first-depth-or-outer #line directives with a unique unchanged code anchor before the next conditional/directive; lexical leads only, require semantic and preprocessor verification; no nested branch audit",
   "stats": {
-    "line_directives_at_depth_0_or_1": 1369
+    "line_directives_at_depth_0_or_1": 1371
   },
   "records": [
     {

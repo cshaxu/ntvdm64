@@ -63,9 +63,14 @@
       "file": "src/mvdm-host/dpmi32/dpmiint.c",
       "original_condition": "#ifndef i386 (DisableIntHooks)",
       "evidence": "s13-bfs-depth1-dpmi-hook-outers.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "original_condition": "#ifdef CPU_30_STYLE / #else",
+      "evidence": "s13-bfs-depth1-hostcpu-outer.json"
     }
   ],
-  "derived_total": 53,
-  "derived_current_bfs_total": 20,
+  "derived_total": 54,
+  "derived_current_bfs_total": 21,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }
