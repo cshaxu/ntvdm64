@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-629: correct three original diagnostic continuations in
+`host/src/nt_eoi.c` and `host/src/nt_fulsc.c`. This deliberately changes only
+the line-number arguments reported on error, including the local replacement
+for original `ErrorExit`. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-error-line-diagnostics.json`.
+
 MVDM-HOST-DIV-628: restore four consecutive original DEBUG/i386 continuation
 positions in `wow32/wow32.c`; the excluded guards and selected code remain
 unchanged. Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-wow32-adjacent-lines.json`.

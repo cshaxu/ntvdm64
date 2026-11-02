@@ -769,7 +769,7 @@ VOID copyConsoleToRegen(SHORT startCol, SHORT startLine, SHORT width,
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 1865
+#line 1846
 
 
     /* Allocate the buffer to get the console data into */
@@ -1002,7 +1002,7 @@ int getModeType(VOID)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 2379
+#line 2362
 
 void host_enable_stream_io(void)
 {

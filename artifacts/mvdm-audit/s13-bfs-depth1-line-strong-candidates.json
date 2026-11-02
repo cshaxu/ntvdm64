@@ -7175,7 +7175,7 @@
       "observed_anchor_logical_line": 70,
       "candidate_original_target": 75,
       "matches": false,
-      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "current_sha256": "901d259b7d57dcb8decf035e1c5598456b46e80c0cfee5ec9ae39c829b788db8",
       "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
       "matching_code_lines_before_next_directive": 6,
       "matched_lines": [
@@ -7216,7 +7216,7 @@
       "observed_anchor_logical_line": 98,
       "candidate_original_target": 112,
       "matches": false,
-      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "current_sha256": "901d259b7d57dcb8decf035e1c5598456b46e80c0cfee5ec9ae39c829b788db8",
       "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
       "matching_code_lines_before_next_directive": 5,
       "matched_lines": [
@@ -7253,7 +7253,7 @@
       "observed_anchor_logical_line": 227,
       "candidate_original_target": 240,
       "matches": false,
-      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "current_sha256": "901d259b7d57dcb8decf035e1c5598456b46e80c0cfee5ec9ae39c829b788db8",
       "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
       "matching_code_lines_before_next_directive": 5,
       "matched_lines": [
@@ -7290,7 +7290,7 @@
       "observed_anchor_logical_line": 275,
       "candidate_original_target": 308,
       "matches": false,
-      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "current_sha256": "901d259b7d57dcb8decf035e1c5598456b46e80c0cfee5ec9ae39c829b788db8",
       "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
       "matching_code_lines_before_next_directive": 6,
       "matched_lines": [
@@ -7331,7 +7331,7 @@
       "observed_anchor_logical_line": 293,
       "candidate_original_target": 337,
       "matches": false,
-      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "current_sha256": "901d259b7d57dcb8decf035e1c5598456b46e80c0cfee5ec9ae39c829b788db8",
       "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
       "matching_code_lines_before_next_directive": 6,
       "matched_lines": [
@@ -7363,63 +7363,6 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
-      "line_directive": 336,
-      "depth": 0,
-      "current_target": 305,
-      "anchor_current_line": 343,
-      "anchor_original_line": 356,
-      "anchor": "void host_ica_lock(void)",
-      "observed_anchor_logical_line": 311,
-      "candidate_original_target": 350,
-      "matches": false,
-      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
-      "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
-      "matching_code_lines_before_next_directive": 10,
-      "matched_lines": [
-        {
-          "current": 343,
-          "original": 356
-        },
-        {
-          "current": 345,
-          "original": 358
-        },
-        {
-          "current": 348,
-          "original": 361
-        },
-        {
-          "current": 350,
-          "original": 363
-        },
-        {
-          "current": 353,
-          "original": 366
-        },
-        {
-          "current": 355,
-          "original": 368
-        },
-        {
-          "current": 358,
-          "original": 371
-        },
-        {
-          "current": 359,
-          "original": 372
-        },
-        {
-          "current": 360,
-          "original": 373
-        },
-        {
-          "current": 361,
-          "original": 374
-        }
-      ]
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
       "line_directive": 436,
       "depth": 0,
       "current_target": 397,
@@ -7429,7 +7372,7 @@
       "observed_anchor_logical_line": 400,
       "candidate_original_target": 461,
       "matches": false,
-      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "current_sha256": "901d259b7d57dcb8decf035e1c5598456b46e80c0cfee5ec9ae39c829b788db8",
       "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
       "matching_code_lines_before_next_directive": 8,
       "matched_lines": [
@@ -7478,7 +7421,7 @@
       "observed_anchor_logical_line": 440,
       "candidate_original_target": 511,
       "matches": false,
-      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "current_sha256": "901d259b7d57dcb8decf035e1c5598456b46e80c0cfee5ec9ae39c829b788db8",
       "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
       "matching_code_lines_before_next_directive": 4,
       "matched_lines": [
@@ -7511,7 +7454,7 @@
       "observed_anchor_logical_line": 524,
       "candidate_original_target": 511,
       "matches": false,
-      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
+      "current_sha256": "4aad1200537d2d2de5a4e890cab4caa1a26d90a565c305b0733b89542ee2a0bd",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
       "matching_code_lines_before_next_directive": 9,
       "matched_lines": [
@@ -7564,7 +7507,7 @@
       "observed_anchor_logical_line": 703,
       "candidate_original_target": 687,
       "matches": false,
-      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
+      "current_sha256": "4aad1200537d2d2de5a4e890cab4caa1a26d90a565c305b0733b89542ee2a0bd",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
       "matching_code_lines_before_next_directive": 3,
       "matched_lines": [
@@ -7593,7 +7536,7 @@
       "observed_anchor_logical_line": 724,
       "candidate_original_target": 705,
       "matches": false,
-      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
+      "current_sha256": "4aad1200537d2d2de5a4e890cab4caa1a26d90a565c305b0733b89542ee2a0bd",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
       "matching_code_lines_before_next_directive": 3,
       "matched_lines": [
@@ -7613,188 +7556,6 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
-      "line_directive": 772,
-      "depth": 0,
-      "current_target": 1865,
-      "anchor_current_line": 776,
-      "anchor_original_line": 1849,
-      "anchor": "nChars = width * height;",
-      "observed_anchor_logical_line": 1868,
-      "candidate_original_target": 1846,
-      "matches": false,
-      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
-      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
-      "matching_code_lines_before_next_directive": 15,
-      "matched_lines": [
-        {
-          "current": 776,
-          "original": 1849
-        },
-        {
-          "current": 777,
-          "original": 1850
-        },
-        {
-          "current": 780,
-          "original": 1853
-        },
-        {
-          "current": 781,
-          "original": 1854
-        },
-        {
-          "current": 782,
-          "original": 1855
-        },
-        {
-          "current": 783,
-          "original": 1856
-        },
-        {
-          "current": 784,
-          "original": 1857
-        },
-        {
-          "current": 785,
-          "original": 1858
-        },
-        {
-          "current": 786,
-          "original": 1859
-        },
-        {
-          "current": 787,
-          "original": 1860
-        },
-        {
-          "current": 788,
-          "original": 1861
-        },
-        {
-          "current": 789,
-          "original": 1862
-        },
-        {
-          "current": 792,
-          "original": 1865
-        },
-        {
-          "current": 793,
-          "original": 1866
-        },
-        {
-          "current": 796,
-          "original": 1869
-        }
-      ]
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
-      "line_directive": 1005,
-      "depth": 0,
-      "current_target": 2379,
-      "anchor_current_line": 1007,
-      "anchor_original_line": 2363,
-      "anchor": "void host_enable_stream_io(void)",
-      "observed_anchor_logical_line": 2380,
-      "candidate_original_target": 2362,
-      "matches": false,
-      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
-      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
-      "matching_code_lines_before_next_directive": 22,
-      "matched_lines": [
-        {
-          "current": 1007,
-          "original": 2363
-        },
-        {
-          "current": 1009,
-          "original": 2365
-        },
-        {
-          "current": 1010,
-          "original": 2366
-        },
-        {
-          "current": 1013,
-          "original": 2369
-        },
-        {
-          "current": 1015,
-          "original": 2371
-        },
-        {
-          "current": 1017,
-          "original": 2373
-        },
-        {
-          "current": 1018,
-          "original": 2374
-        },
-        {
-          "current": 1020,
-          "original": 2376
-        },
-        {
-          "current": 1021,
-          "original": 2377
-        },
-        {
-          "current": 1022,
-          "original": 2378
-        },
-        {
-          "current": 1025,
-          "original": 2381
-        },
-        {
-          "current": 1026,
-          "original": 2382
-        },
-        {
-          "current": 1027,
-          "original": 2383
-        },
-        {
-          "current": 1029,
-          "original": 2385
-        },
-        {
-          "current": 1031,
-          "original": 2387
-        },
-        {
-          "current": 1032,
-          "original": 2388
-        },
-        {
-          "current": 1035,
-          "original": 2391
-        },
-        {
-          "current": 1036,
-          "original": 2392
-        },
-        {
-          "current": 1042,
-          "original": 2398
-        },
-        {
-          "current": 1048,
-          "original": 2404
-        },
-        {
-          "current": 1051,
-          "original": 2407
-        },
-        {
-          "current": 1052,
-          "original": 2408
-        }
-      ]
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
       "line_directive": 1057,
       "depth": 0,
       "current_target": 2431,
@@ -7804,7 +7565,7 @@
       "observed_anchor_logical_line": 2434,
       "candidate_original_target": 2411,
       "matches": false,
-      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
+      "current_sha256": "4aad1200537d2d2de5a4e890cab4caa1a26d90a565c305b0733b89542ee2a0bd",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
       "matching_code_lines_before_next_directive": 3,
       "matched_lines": [

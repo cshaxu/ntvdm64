@@ -1,0 +1,686 @@
+{
+  "scope": "three original error-report line corrections; tested isolated package and intended same-identity release differ only by package identity resource",
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 374315,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 3018,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 1229,
+        "CleanupMs": 566,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 201,
+        "CleanupMs": 486,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66390,
+        "CleanupMs": 497,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 47787,
+        "CleanupMs": 454,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 48884,
+        "CleanupMs": 350,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 15238,
+        "CleanupMs": 397,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 11393,
+        "CleanupMs": 396,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 45031,
+        "CleanupMs": 380,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12724,
+        "CleanupMs": 463,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28783,
+        "CleanupMs": 466,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 31191,
+        "CleanupMs": 475,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3773,
+        "CleanupMs": 487,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7731,
+        "CleanupMs": 457,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 10294,
+        "CleanupMs": 412,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4126,
+        "CleanupMs": 419,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6664,
+        "CleanupMs": 437,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20662,
+        "CleanupMs": 389,
+        "Passed": true
+      }
+    ]
+  },
+  "win31_matrix": [
+    {
+      "case": "std-dosonly0",
+      "dosonly": false,
+      "enhanced": false,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 21,
+      "hwnd": 4456,
+      "observedDosOnly": 0,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\diagnostic-lines-win31-retargeted-matrix\\std-dosonly0.observer.txt"
+    },
+    {
+      "case": "std-dosonly1",
+      "dosonly": true,
+      "enhanced": false,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 21,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\diagnostic-lines-win31-retargeted-matrix\\std-dosonly1.observer.txt"
+    },
+    {
+      "case": "386-dosonly0",
+      "dosonly": false,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 0,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\diagnostic-lines-win31-retargeted-matrix\\386-dosonly0.observer.txt"
+    },
+    {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\diagnostic-lines-win31-retargeted-matrix\\386-dosonly1.observer.txt"
+    }
+  ],
+  "guest_binary_hashes_after_matrix": [
+    {
+      "name": "WIN.COM",
+      "sha256": "0E34B06601B2C9056186C937E2BAA8ADF14BD572FD15BC72B8B7FFF679AA2E47"
+    },
+    {
+      "name": "SYSTEM\\KRNL386.EXE",
+      "sha256": "75E931AE000FB7C70CF686DA6F7D3FCB032FDC0E0A4E3187ED68179B85E2CD4A"
+    },
+    {
+      "name": "SYSTEM\\USER.EXE",
+      "sha256": "98036967F8396B387DA431699A9D3BE95EB56FCD0118F529E1FC2F25105EFAC6"
+    },
+    {
+      "name": "SYSTEM\\GDI.EXE",
+      "sha256": "6D28146961AB4733E167B1657289206CE16A856E431F843E4EE3D504836DFB6F"
+    },
+    {
+      "name": "SYSTEM\\V7VGA.DRV",
+      "sha256": "83032A1386558FF6B4869876ECB7F13824805A6AD987B3E2F10CE49A7CE95A8C"
+    },
+    {
+      "name": "SYSTEM\\MOUSE.DRV",
+      "sha256": "F4A4C4F742161AAF7E83441C5440ACEA7C20B73BA6B4EEC0EFF1D5A8F214A36E"
+    }
+  ],
+  "games": [
+    {
+      "game": "mine",
+      "result": "PASS flag/counter, reset, open cell, WM_CLOSE and run16 completion",
+      "probe_excerpt": "window-ready elapsed=890 inherited-desktop=0\nowned-window=06A20C98 pid=39312\nPASS unchanged title and native frame=1\nboard-ready elapsed=94 cell=3cc8733b counter=47d384f2\ncapture=before ok=1\nphase=flag elapsed=31 cell=62c0567b reference=3cc8733b\ncapture=flag ok=1\ncounter-before=47d384f2 counter-flag=8caf84f2\nphase=reset elapsed=63 cell=3cc8733b reference=3cc8733b\ncapture=reset ok=1\nphase=open elapsed=31 cell=c7639615 reference=3cc8733b\ncapture=open ok=1\nPASS flag changed cell+counter, F2 restored covered cell, left click changed cell\nPASS owned game window closed after WM_CLOSE\n"
+    },
+    {
+      "game": "sol",
+      "result": "PASS SOL deal, stock draw, WM_CLOSE and run16 completion",
+      "probe_excerpt": "owned-window=04B90B76 pid=18736 client=585x384\ngeometry phase=before client_ok=1 client=585x384 outer_ok=1 outer=130,130,731,573 style=16cf0000 exstyle=00000100\ngeometry-context observer_awareness=0 target_awareness=0 equal=1 target_dpi=96 screen=1280x720 maxtrack=1300x740 monitor_ok=1 monitor=0,0,1280,720 work=0,0,1280,672\ndeal-menu-state=0 enabled=1\nphase=ready pixels=47072715 reference=00000000\ncapture=before ok=1\nphase=pre-deal-draw pixels=b9b3e5bc reference=65174fed\ncapture=pre-deal-draw ok=1\nphase=deal-waste-cleared pixels=65174fed expected=65174fed\nphase=deal pixels=666e93a5 reference=00000000\ncapture=deal ok=1\ndeal-tableau same=0 old=47072715 new=666e93a5 not_a_randomness_assertion=1\nphase=draw-stock pixels=9345ac17 reference=65174fed\ncapture=draw ok=1\nPASS SOL stock draw, Deal cleared nonempty waste, redealt tableau present, second stock draw and normal owned window close\n"
+    }
+  ],
+  "keyboard_pic": {
+    "profile": "x86 /MT NTVDM CCPU40",
+    "elapsed_ms": 263,
+    "executable_sha256": "F63E11CEC01AA0AFC904E62078DC90DB10ED4AF4C9FB19EFEA8A4C5E972E95DA",
+    "keyba_sha256": "796CC0E4C0698BE1ABAEBF9728490A36497DE9818AE1F4E4C37719328576DF9A",
+    "ica_sha256": "B9527BC864083FE7783E9836BDE7A1BC3784D18B838C439455CA7E57C001EE2A",
+    "controller_reply": "C0 returns input port; 20, AA, AB, D0 and E0 return their response bytes",
+    "scope": "Actual controller/PIC; normal and early EOI slot order, controlled host callbacks, no BIOS ISR/timer acceptance",
+    "output": "PASS masked port read preserves original EOI-owned slot and IRQ request\nPASS actual INTACK/EOI advances queued bytes and retires final slot\nPASS early EOI retains unread port-60 byte and advances once\nPASS PIC reset cancels rather than early-acknowledges unread keyboard output\nPASS physical Alt+Enter and following key through controller/PIC\nKEYBOARD_PIC_PROFILE assertions=86 failures=0\n\n"
+  },
+  "pic_reset": {
+    "profile": "x86 /MT NTVDM CCPU40",
+    "elapsed_ms": 294,
+    "executable_sha256": "AFC5D65B58D3093976C32767591CA9010BA3BC17AD365944F74E28310385280B",
+    "ica_sha256": "B9527BC864083FE7783E9836BDE7A1BC3784D18B838C439455CA7E57C001EE2A",
+    "scope": "actual production PIC reset; controlled EOI callback boundary; no guest mutation",
+    "output": "PASS PIC reset retires pending and in-service master ownership\nPASS PIC reset retains controller-local cascade ownership\nPASS PIC reset distinguishes callback-requeued ownership\nPASS PIC automatic EOI leaves no stale reset ownership\nPASS actual RTC reset cancellation and periodic requeue\nPASS actual mouse reset cancellation flushes without requeue\nPIC_RESET_EOI assertions=24 failures=0\n\n"
+  },
+  "x87_baseline_comparison": {
+    "scope": "regression comparison to prior known-failing x87 fixtures; not a success verdict",
+    "fixtures": [
+      {
+        "fixture": "ccpu-x87-span-test.exe",
+        "sha256": "abad39d00cd017a1e833f30d068c73ffb2eebbaf9dfe791add6ee5a8e08c1551",
+        "baseline": "s13-bfs-depth1-batch188-x87-historical-control.json",
+        "cases": [
+          {
+            "case": 0,
+            "exit": 1,
+            "stderr": "case=0 bits=16 restore=0 short=0 vector=13 error=0 ip=8002",
+            "matches_baseline": true
+          },
+          {
+            "case": 1,
+            "exit": 0,
+            "stderr": "case=1 bits=32 restore=0 short=0 vector=-1 error=0 ip=0000",
+            "matches_baseline": true
+          },
+          {
+            "case": 2,
+            "exit": 1,
+            "stderr": "case=2 bits=16 restore=1 short=0 vector=13 error=0 ip=8002",
+            "matches_baseline": true
+          },
+          {
+            "case": 3,
+            "exit": 0,
+            "stderr": "case=3 bits=32 restore=1 short=0 vector=-1 error=0 ip=0000",
+            "matches_baseline": true
+          },
+          {
+            "case": 4,
+            "exit": 0,
+            "stderr": "case=4 bits=16 restore=0 short=1 vector=13 error=0 ip=8002",
+            "matches_baseline": true
+          },
+          {
+            "case": 5,
+            "exit": 1,
+            "stderr": "case=5 bits=32 restore=0 short=1 vector=-1 error=0 ip=0000",
+            "matches_baseline": true
+          },
+          {
+            "case": 6,
+            "exit": 0,
+            "stderr": "case=6 bits=16 restore=1 short=1 vector=13 error=0 ip=8002",
+            "matches_baseline": true
+          },
+          {
+            "case": 7,
+            "exit": 1,
+            "stderr": "case=7 bits=32 restore=1 short=1 vector=-1 error=0 ip=0000",
+            "matches_baseline": true
+          }
+        ]
+      },
+      {
+        "fixture": "ccpu-x87-page-test.exe",
+        "sha256": "302b00c5e7ee3cb34708d602427990eb034ed6728f2eacd64c0f54e085ae4e46",
+        "baseline": "s13-bfs-depth1-batch188-x87-pages-control.json",
+        "cases": [
+          {
+            "case": 0,
+            "exit": 1,
+            "stderr": "case=0 group=0 span=94 bits=16 read=0 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=0000ffff second=5a5a5a5a first_tail=0000037f",
+            "matches_baseline": true
+          },
+          {
+            "case": 1,
+            "exit": 1,
+            "stderr": "case=1 group=0 span=108 bits=32 read=0 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=00000000 second=5a5a5a5a first_tail=0000037f",
+            "matches_baseline": true
+          },
+          {
+            "case": 2,
+            "exit": 0,
+            "stderr": "case=2 group=0 span=94 bits=16 read=1 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 3,
+            "exit": 0,
+            "stderr": "case=3 group=0 span=108 bits=32 read=1 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 4,
+            "exit": 1,
+            "stderr": "case=4 group=0 span=94 bits=16 read=0 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=0000ffff second=5a5a5a5a first_tail=0000037f",
+            "matches_baseline": true
+          },
+          {
+            "case": 5,
+            "exit": 1,
+            "stderr": "case=5 group=0 span=108 bits=32 read=0 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=00000000 second=5a5a5a5a first_tail=0000037f",
+            "matches_baseline": true
+          },
+          {
+            "case": 6,
+            "exit": 1,
+            "stderr": "case=6 group=0 span=94 bits=16 read=1 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 7,
+            "exit": 1,
+            "stderr": "case=7 group=0 span=108 bits=32 read=1 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 8,
+            "exit": 1,
+            "stderr": "case=8 group=1 span=14 bits=16 read=0 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=0000ffff second=5a5a5a5a first_tail=0000037f",
+            "matches_baseline": true
+          },
+          {
+            "case": 9,
+            "exit": 1,
+            "stderr": "case=9 group=1 span=28 bits=32 read=0 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=00000000 second=5a5a5a5a first_tail=0000037f",
+            "matches_baseline": true
+          },
+          {
+            "case": 10,
+            "exit": 0,
+            "stderr": "case=10 group=1 span=14 bits=16 read=1 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 11,
+            "exit": 0,
+            "stderr": "case=11 group=1 span=28 bits=32 read=1 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 12,
+            "exit": 1,
+            "stderr": "case=12 group=1 span=14 bits=16 read=0 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=0000ffff second=5a5a5a5a first_tail=0000037f",
+            "matches_baseline": true
+          },
+          {
+            "case": 13,
+            "exit": 1,
+            "stderr": "case=13 group=1 span=28 bits=32 read=0 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=00000000 second=5a5a5a5a first_tail=0000037f",
+            "matches_baseline": true
+          },
+          {
+            "case": 14,
+            "exit": 1,
+            "stderr": "case=14 group=1 span=14 bits=16 read=1 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 15,
+            "exit": 1,
+            "stderr": "case=15 group=1 span=28 bits=32 read=1 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 16,
+            "exit": 1,
+            "stderr": "case=16 group=2 span=8 bits=16 read=0 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=fff80000 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 17,
+            "exit": 1,
+            "stderr": "case=17 group=2 span=8 bits=32 read=0 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=fff80000 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 18,
+            "exit": 1,
+            "stderr": "case=18 group=2 span=8 bits=16 read=1 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=3ff00000 first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 19,
+            "exit": 1,
+            "stderr": "case=19 group=2 span=8 bits=32 read=1 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=3ff00000 first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 20,
+            "exit": 1,
+            "stderr": "case=20 group=2 span=8 bits=16 read=0 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=fff80000 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 21,
+            "exit": 1,
+            "stderr": "case=21 group=2 span=8 bits=32 read=0 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=fff80000 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 22,
+            "exit": 1,
+            "stderr": "case=22 group=2 span=8 bits=16 read=1 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 23,
+            "exit": 1,
+            "stderr": "case=23 group=2 span=8 bits=32 read=1 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 24,
+            "exit": 1,
+            "stderr": "case=24 group=3 span=10 bits=16 read=0 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=c0000000 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 25,
+            "exit": 1,
+            "stderr": "case=25 group=3 span=10 bits=32 read=0 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=c0000000 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 26,
+            "exit": 0,
+            "stderr": "case=26 group=3 span=10 bits=16 read=1 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 27,
+            "exit": 0,
+            "stderr": "case=27 group=3 span=10 bits=32 read=1 absent=0 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 28,
+            "exit": 1,
+            "stderr": "case=28 group=3 span=10 bits=16 read=0 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=c0000000 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 29,
+            "exit": 1,
+            "stderr": "case=29 group=3 span=10 bits=32 read=0 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=c0000000 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 30,
+            "exit": 1,
+            "stderr": "case=30 group=3 span=10 bits=16 read=1 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 31,
+            "exit": 1,
+            "stderr": "case=31 group=3 span=10 bits=32 read=1 absent=1 readonly=0 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 32,
+            "exit": 1,
+            "stderr": "case=32 group=0 span=94 bits=16 read=0 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=0000ffff second=5a5a5a5a first_tail=0000037f",
+            "matches_baseline": true
+          },
+          {
+            "case": 33,
+            "exit": 1,
+            "stderr": "case=33 group=0 span=108 bits=32 read=0 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=00000000 second=5a5a5a5a first_tail=0000037f",
+            "matches_baseline": true
+          },
+          {
+            "case": 34,
+            "exit": 0,
+            "stderr": "case=34 group=0 span=94 bits=16 read=1 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 35,
+            "exit": 0,
+            "stderr": "case=35 group=0 span=108 bits=32 read=1 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 40,
+            "exit": 1,
+            "stderr": "case=40 group=1 span=14 bits=16 read=0 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=0000ffff second=5a5a5a5a first_tail=0000037f",
+            "matches_baseline": true
+          },
+          {
+            "case": 41,
+            "exit": 1,
+            "stderr": "case=41 group=1 span=28 bits=32 read=0 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=00000000 second=5a5a5a5a first_tail=0000037f",
+            "matches_baseline": true
+          },
+          {
+            "case": 42,
+            "exit": 0,
+            "stderr": "case=42 group=1 span=14 bits=16 read=1 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 43,
+            "exit": 0,
+            "stderr": "case=43 group=1 span=28 bits=32 read=1 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 48,
+            "exit": 1,
+            "stderr": "case=48 group=2 span=8 bits=16 read=0 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=fff80000 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 49,
+            "exit": 1,
+            "stderr": "case=49 group=2 span=8 bits=32 read=0 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=fff80000 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 50,
+            "exit": 1,
+            "stderr": "case=50 group=2 span=8 bits=16 read=1 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=3ff00000 first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 51,
+            "exit": 1,
+            "stderr": "case=51 group=2 span=8 bits=32 read=1 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=3ff00000 first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 56,
+            "exit": 1,
+            "stderr": "case=56 group=3 span=10 bits=16 read=0 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=c0000000 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 57,
+            "exit": 1,
+            "stderr": "case=57 group=3 span=10 bits=32 read=0 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=c0000000 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 58,
+            "exit": 0,
+            "stderr": "case=58 group=3 span=10 bits=16 read=1 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          },
+          {
+            "case": 59,
+            "exit": 0,
+            "stderr": "case=59 group=3 span=10 bits=32 read=1 absent=0 readonly=1 first_supervisor=0 vector=-1 error=0 cr2=00000000 guard=a5a5a5a5 second=5a5a5a5a first_tail=00000000",
+            "matches_baseline": true
+          }
+        ]
+      }
+    ]
+  },
+  "preprocessor_difference_check": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "directive_line": 336,
+      "changes": [
+        {
+          "before": 328,
+          "after": 373,
+          "original_line": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+        }
+      ],
+      "only_diagnostic_line_arguments_changed": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "directive_line": 772,
+      "changes": [
+        {
+          "before": 1885,
+          "after": 1866,
+          "original_line": "ErrorExit();"
+        }
+      ],
+      "only_diagnostic_line_arguments_changed": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "directive_line": 1005,
+      "changes": [
+        {
+          "before": 2391,
+          "after": 2374,
+          "original_line": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+        },
+        {
+          "before": 2395,
+          "after": 2378,
+          "original_line": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);"
+        },
+        {
+          "before": 2399,
+          "after": 2382,
+          "original_line": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);"
+        },
+        {
+          "before": 2405,
+          "after": 2388,
+          "original_line": "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);"
+        }
+      ],
+      "only_diagnostic_line_arguments_changed": true
+    }
+  ],
+  "line_controls": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 356,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 356,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 1849,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 1849,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 2363,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 2363,
+      "verified": true,
+      "error": ""
+    }
+  ],
+  "limitations": [
+    "x87 span and paging acceptance probes still fail as in the prior known baseline; all 56 direct cases matched that baseline.",
+    "The separate non-CCPU DPMI negative-object fixture remains failed, as previously recorded.",
+    "First Full attempt failed before testing because sandbox denied the required short O:\\tmp stage; a subsequent attempted long TEMP path caused Win16 initialization failure. Both are superseded by the successful original-short-path Full run.",
+    "DOS4GW Full gate verifies a visible graphics window, not gameplay."
+  ]
+}
