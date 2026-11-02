@@ -1,0 +1,53 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmiint.c",
+  "before_sha256": "72c97f3f54207b29caf41135a6627508b37fab7c2b3c74a08c24bec55225a9e0",
+  "candidate_sha256": "0c1a2ea3058e4563fcdfb01cde37f0a3a90d8ee1e0cb9313d2bad71c67f2f794",
+  "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+  "entries": [
+    [
+      792,
+      819,
+      689,
+      716
+    ],
+    [
+      905,
+      928,
+      798,
+      821
+    ]
+  ],
+  "removed": [
+    {
+      "current_line": 905,
+      "original_line": 798,
+      "original_else": 821,
+      "body_sha256": "28472b3bc4ee4964e974722a4eb4887d54ada6004098ac9d141c4d5335988ab3"
+    },
+    {
+      "current_line": 792,
+      "original_line": 689,
+      "original_else": 716,
+      "body_sha256": "0ab4c9148d3e958000d9cbac33e34f884e9d5f7fe22b71a1d4fd267d925f2156"
+    }
+  ],
+  "checks": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "sha256": "fbfead078a8e4cc4698ba436d0a133237246061215409fa5d1ce0064a1474b42"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "sha256": "fbfead078a8e4cc4698ba436d0a133237246061215409fa5d1ce0064a1474b42"
+    }
+  ],
+  "line_controls": [
+    819,
+    928
+  ],
+  "actual_selected": "both worker preprocessed outputs identical",
+  "tests": "both worker targets, rejection suite, and complete selected DPMI software-interrupt/fault/IRET fixture passed",
+  "selected_test_sha256": "e189420c0917a35f494448891eae65d9f57b6c79706e82080937ec942d390eeb",
+  "package": "six byte-identical and four PE timestamp-only; existing full-tested release retained",
+  "limitations": "Only unselected i386 kernel-return branches replaced; guest code and selected CCPU implementation remain. Original-wide reconciliation and standalone page-domain link remain open."
+}

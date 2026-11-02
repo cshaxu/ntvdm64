@@ -29,24 +29,6 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "start": 792,
-      "kind": "ifdef",
-      "expression": "i386",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "start": 905,
-      "kind": "ifdef",
-      "expression": "i386",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/dpmi32/i386/dpmimem.c",
       "start": 153,
       "kind": "if",
@@ -526,7 +508,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 11
+      "count": 9
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",

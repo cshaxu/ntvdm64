@@ -790,33 +790,9 @@ Routine Description:
     // Fast iret (without executing final 16-bit iret)
     //
 #ifdef i386
-
-    setCS(*(PWORD16)(VdmStackPointer+2));
-    setEFLAGS((getEFLAGS()&0xffff0000) | *(PWORD16)(VdmStackPointer+4));
-
-    //
-    // if EndUseLockedPMStack fails, then we need to restore EIP and pop
-    // the stack frame
-    //
-
-    if (!EndUseLockedPMStack()) {
-
-        setEIP((DWORD)*(PWORD16)(VdmStackPointer));
-
-        //
-        // Pop iret frame off the stack
-        //
-        if (bSsBig) {
-            setESP(getESP()+6);
-        } else {
-            setSP(getSP()+6);
-        }
-    }
-
-    //
-    // Slow iret (with executing final 16-bit iret)
-    //
+#error Excluded unsupported i386 kernel VDM interrupt return
 #else
+#line 819
     if (EndUseLockedPMStack()) {
         ULONG NewEIP, NewEFLAGS, NewCS;
 
@@ -903,29 +879,9 @@ Routine Description:
     }
 
 #ifdef i386
-
-    setCS(*(PDWORD16)(VdmStackPointer+4));
-    setEFLAGS(*(PDWORD16)(VdmStackPointer+8));
-
-    //
-    // if EndUseLockedPMStack succeeds, then we don't need to restore EIP
-    //
-
-    if (!EndUseLockedPMStack()) {
-
-        setEIP(*(PDWORD16)(VdmStackPointer));
-
-        //
-        // Pop iret frame off the stack
-        //
-        if (bSsBig) {
-            setESP(getESP()+12);
-        } else {
-            setSP(getSP()+12);
-        }
-    } 
-
+#error Excluded unsupported i386 kernel VDM interrupt return
 #else
+#line 928
     if (EndUseLockedPMStack()) {
         ULONG NewEIP, NewCS, NewEFLAGS;
 
