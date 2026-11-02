@@ -1873,3 +1873,10 @@ OPENNT-HOST-161: restore the original server.c PAGE_SIZE fallback condition
 and its selected original definition, which current source-owner preprocessing
 observes as needed; the omitted shared-section implementation stays omitted.
 Original logical line 1257 is anchored. Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-server-page-size.json.
+
+OPENNT-HOST-162: restore original usercli.h retail DBG and HANDLE_FIXUP
+condition shells and their original selected macro definitions; unsupported
+branches use #error. Existing color-only adapter macros remain because those
+consumers do not include usercli.h; equivalent duplicate definitions are
+validated. Original selector and selected-body line numbers are anchored.
+Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-usercli-fixup.json.

@@ -1,0 +1,719 @@
+{
+  "scope": "102 recompiled object hash comparisons; causes of differences not individually attributed",
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/dialog_native_owner_probe.obj",
+      "before": "7fb4b711bdc7e5456818afd94860d7bbc5225a71467aab8b1c44f32ac87534f0",
+      "after": "396007e748b9879046af7f5cfde67870450a43e9e1a6e35677408ac18ca3a5db",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/control_extent.obj",
+      "before": "df920889f74184c9d6bdd2923bb0fae3a037add1f6124476acda2b990b5ef9b7",
+      "after": "afabbc6bf1398b6e303acdeb2c10bed304cd16d2e8e9ccdc5b3505aa6726fec8",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/memory_fixture.obj",
+      "before": "95a8aa991b97789584a124761738a37a56cc3710872b898625e9b59f31126b30",
+      "after": "ea745d5ab91bb20d3fd1a5d8301aadbe4e0986cc614911ad8891c9bbfa595f5c",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/default_original_fixture.obj",
+      "before": "87d6247bd6ac022a567058b2063dfb9141dd82a9319010ea934683746cb9a754",
+      "after": "a01e694c08f9e8a8ea87cfb95bb515d99cda6bfe833e423a32b94d13e97a9ca2",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/creator_lifetime_fixture.obj",
+      "before": "40831cf6aaf8085ba0436ed06b7fd0f87d623d9d82d20b9bd21724de4ec8a195",
+      "after": "74c69088e6543336ade2c7d0a6a8c9c6ae86b17fce45735231ca110d9a004fee",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/dialog_creation_adapter.obj",
+      "before": "d7665ff06c04a2627e822c7d7117be7ca9b694dad01143b31310cfde6d4ffdfa",
+      "after": "9720bf56fc15e5758155a19095f2a64b52522c0078d2bc37c5ee485e37d5f2f5",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/mnemonic_lifetime_fixture.obj",
+      "before": "1520bc425ddf55faa5b801bdc967634f0b4a4402520fdf05999b8bd9f215a624",
+      "after": "63f36f2b2e78ac6f033367374e5701a8b638a2f2418ea114fee393cbf8e38768",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/keyboard_unreached.obj",
+      "before": "051f925777085b5c30386d2cb467171b33cb85d9498214dc6665b7ace961e0bb",
+      "after": "735f7bc17f470572b5f9e740b0f911713e84a2ed793b310524df42dc9e52514b",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/keyboard_lifetime_fixture.obj",
+      "before": "4d45e1620ffda0b2de55d46360e6c3815a9d46557459416ed74cae4351c27589",
+      "after": "fbba549ee51dece6fd1d4bab14d11832e89c0e6babadaac911001ecce5439cb9",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/dialog_finalization_adapter.obj",
+      "before": "4adb5881afac115ee2050f34022e4405084af796a1be2e9530ec21f0577f51ec",
+      "after": "95f3608173f054a89b779b8a0b13e1459c924db064fe706420f4ab41e7262b0f",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/dialog_end_fixture.obj",
+      "before": "d6376d4e6c288b80d9751747b9cf4b6f02b54cc3b4aca4fc1d9b3374a4c12d70",
+      "after": "8975a38a8ae84d1049c24374e6b587e5d9b3eeb789818dbe09f4108d40adbb73",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/getset_fixture.obj",
+      "before": "8da65e9a3cef113b8d30585ef471b78596001845b9c89f44b03291e42a52151d",
+      "after": "c80062d44785354a2bc1142307b3bd9cf355638567a92320c7e487fa84087335",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/getset_client.obj",
+      "before": "98a0c125b9015d6bf7037b6e6aaeea92e4b515a6c874524908850ad20a7156fb",
+      "after": "5373c0b70fb104eda5e08b21c71bc895a1a396be2deb69d570fcf28fe3688573",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/getset_reader.obj",
+      "before": "cea340ff75ab9f7047c72d7841adb0c71ac5a14e08f233eac7659b0aeba2d4b1",
+      "after": "274d77e836f99a561cf97de83180e408121df4cfd732f478ed3ae52c0af70fd8",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/getset_server.obj",
+      "before": "5354a251365d9b4811d63b10d95d59097485e791da7bd41ba818ee69ab8ec5d2",
+      "after": "88e35936a8e76fb05d59d1816769ab9255bf31144fa3834b1cbc265fc2ca4270",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/getset_callproc.obj",
+      "before": "d89cf0b88d3f662555d64c44b836b728e61ac7ee48df2587eebb3cb8958935ab",
+      "after": "c81ec8f66c413d7fa8fcd2ecaab33cc72518ddc229438d59a56ab450fcc2eedb",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/native_getset_reader.obj",
+      "before": "f8c32c8300d203689050aeab49ab2f869bdfeef94b1159bcaec77181dbdbb88e",
+      "after": "c740a437334fa1941edf499c8af0ba5e9a75b848214d96e79dc065640dee364b",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/native_getset_client.obj",
+      "before": "878538abd557b25dee055a493b11b166ca0a20ac78e37e9cdb5dc0a75cf95f07",
+      "after": "882b579262d01c9090c92aa2e41ff6a1fb7c9f5abbc1fb0431a18c6ebf1fc2c3",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/native_getset_server.obj",
+      "before": "3533efb9511740bfedcb5c77bb0ee69f0317f673ec3ccb18cfeac50d4aefb3e3",
+      "after": "d3250436be51125d935a67a559a482c992d2e016a768e04ecce635b23b8b87a2",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/navigation_graph.obj",
+      "before": "964d9684156a148d88ace10270d1988d812294fbb59ba4685d769ea8df2ba5bb",
+      "after": "43468d301139fbaca8c864bf1d0963fa3aa37136564d8db5fe6734ad82379aea",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/button_lifetime_adapter.obj",
+      "before": "8e0b35da0d55b63ab90e2880e3ad8fd1c8b64d10f9a574f2df640e927448015e",
+      "after": "a1309889681def5efdd2118fa94a8f0613078838f1784ad63e6c335480ff5993",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/button_lifetime_fixture.obj",
+      "before": "e8aa13d962ace08005977b233d93cc613f958e640ec7719e43b5342d4964ab95",
+      "after": "16b892b76ff50e5bd7cb6f6550f04a4d4ca3bbfab35ae1d9d08038079386e068",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/button_blit_owner.obj",
+      "before": "151d81acbd80fb90d3ab30ee2cec4570c0e37d2a195202e1c3f75a552366241d",
+      "after": "1904b317abb7f578c67b8110f7749df5fdb14c03d1f6093b592f76f80c01e3ff",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/button_dc_owner.obj",
+      "before": "963d13f9b041cfdcb196a451d54dfd35df7b8c1ff58cc18784deb239b9763361",
+      "after": "9c45a71fca994b91bd69461d1c2a800c5f32a31bb2c5da3a001726477e91b8d9",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/button_dc_unreached.obj",
+      "before": "d327badbc3f1d51babd86a48b4ab6c09db0c008e03c905179d55f4a03143597d",
+      "after": "9bea29e6b389b9448b029a4400ffd3288c19766f173a4322cea0e3190a08a76c",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_editec.obj",
+      "before": "3e332369646d35d39cc4d27f81c8b65fd56590fb5ebc8af06779e4f6c4a9f92a",
+      "after": "dc81931928192a4815a5cad4677d47a12e5280a15bb215fcfa433e17e515f92a",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_editml.obj",
+      "before": "e832289b35ab186f216deeddd12475f335569392ffa28fb4b8ef9dd3efbe8c09",
+      "after": "520d3012c30da9572eab2cd8407524d9a496e39b124248840e2a3b3da6ae6d58",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_edecrare.obj",
+      "before": "31b51bffad529abc4f4176e0d00340e742e5000abc649f7764196b65b972475f",
+      "after": "64a9ee5603a27134d4136aa665337914ef8457521e58d7610ee52be761c40822",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_editsl.obj",
+      "before": "91019723e55fea26bed4d60d0581a60a204fe299e139228ec870c2b0d0ae94ad",
+      "after": "7bd84a3fe77a86cd45fc61e5c052a88a1ae34777e70f88cab0500aa9d11936e9",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_edmlonce.obj",
+      "before": "998c990a351fb6f21523a241946b1529d35368ea8594c739ae41e54ea40991e5",
+      "after": "19b5f8c081720a99a8a0bfaa5a1d8eb8bdcaac294418128d07882d749a82be82",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_edmlrare.obj",
+      "before": "bbd5de410f60071052229b498f5587fbfb8750fa58bc041e09c576cb07baa726",
+      "after": "f98a4be13062d5445869c42b53c2beb73b4530f9ff950ba0767e66135e0ee6ac",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_edslrare.obj",
+      "before": "fff093cdbb5d81605592c4313e863a9d5014295615e03f8c08c5a9c1b012a300",
+      "after": "2ff586c6b8f7eb35bdde3ed2c0596843c9618766fe45650bb3cd10a2b17472a5",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_combo.obj",
+      "before": "d9e76f3ad1bd86b71036300c7019513137dee1f032819992c89480e8b976077e",
+      "after": "2890a68fe9e0dcd0abb7889b0ff47155316c1ce2b0449a80b88cb515d051b958",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_lboxctl2.obj",
+      "before": "59943b8b6c9e7cea3ac11d9557f6e3ad008f01f2445de407d17369ebb473d16f",
+      "after": "0371f2bbd29fad58dcdee89a9c5c47f5378b3f70726b846079c6aabbd6fee198",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_lb1.obj",
+      "before": "586a5d5cc786c7b7154913b6f3ffa5acccb75061169e43344a69f2fa940c42df",
+      "after": "2e6eed17cb08de761a807120980b315356a5d8afa8ea5a77467eb0ad88cf574d",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_comboini.obj",
+      "before": "ad0d9ee76aa85033957f6cbf9b1a32801daee61c6da0308bf2188ccd773c6d91",
+      "after": "33d553fac8aa7fea3922c3f22fb7b6068bb591c4de55a8060e362b1732c72af2",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_combodir.obj",
+      "before": "e19280f7a9ffcf5efdab10c9f24f514afe403082af7d014c94ee772235fbb284",
+      "after": "ff67df127fd240f48f41dc951bab2312ee991ada95f8420cc1f38004942d1906",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_lboxctl1.obj",
+      "before": "3dd42f51b864740ad2ffb1e345c228464e4b61867b624a26befffd11c4d995b9",
+      "after": "cc1332c8f254be023d66c2c0e9c64fc15cd260dbe2b1cc68514e0e7aa40d4524",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_lboxctl3.obj",
+      "before": "d66fb0b28f015f25c0145d89600982a291abcb9f5f624920562759d414c96183",
+      "after": "6178b45a7594dffae06c3c4f1120362fbf98630f9e082f10409ebc290130052b",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_lboxmult.obj",
+      "before": "659cf6b2924cab6f565282e3b252838a07362c58a1f166dfc69b8c86a23621f0",
+      "after": "3de58cd229046c55e7ee38f551f545824be181d6c8ea6f1751ae8f1e48f957d5",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_lboxrare.obj",
+      "before": "df00e6715f3555f68f719e1d3b9a730374540e39b320e9ec706b1071768368fe",
+      "after": "5ce283a20d3cc04f37676c1fbdaee4dc18177f1ae0d1880990fe6370da0a525f",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_lboxvar.obj",
+      "before": "087f2b3352aace4e7b055793e63d2349f777194addf5f5696ac823d659e0df80",
+      "after": "0188adb7399e05b7dc725cf63a18f9d0006c87568fe7b1f9ba72bd75a3a9c995",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_dlgbegin.obj",
+      "before": "722e54974a5ae8f77cbbbc201d07cfc7f6cc47276c1bf02d74dccd18c108b7e8",
+      "after": "4630a038d252faba253e47401d913f410f89c2a902a4d27ebe23d3998b442624",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_dlgmgrc.obj",
+      "before": "8f3d1f11be106d1727f8aad4937813fde9db098a3180f0b2498b88ed077cd02c",
+      "after": "b13f7b12caddc4f6cfbd77a254671d29cfb8fcb1fd50aaeed50be9c199dd9d04",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_dlgmgr.obj",
+      "before": "6d7d2a021d1cc4963a559cfea528a2588f58cd356d324f8ee811d6497f273fe5",
+      "after": "a540f5e1c1e086c562fea896f2f27f90b84f1e619f25dd09018c4583f70278bd",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_dlgmgr2.obj",
+      "before": "9bb308f09f7775f670a4c7a1ddfb3d6cfbe8c203b375c494d967e5c492103af6",
+      "after": "6953c508986fbaf9803f458a511839cc750a782ba87234a37323784f8870443e",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_dlgend.obj",
+      "before": "82ec80fb106078bbbdef021816230d4695fe4b88e708b0cbf588ac214e911b77",
+      "after": "9161147bb94a3e1bc227f9e4fc8f562b32eca72f20af746fa073e0e8b8f9fb1e",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_dmmnem.obj",
+      "before": "fc470b36b7e86220db21f1d5dd6fd9a9baf0d7b9602c77b089fedda5c98c2d42",
+      "after": "37d8cca5c7e9ee5a59ad343b93be4e891fd47c64ac477ee4228c62c01868fa85",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_wow.obj",
+      "before": "b803d50b049f23002c57217fd7e9c7ba5ecee805cca6c944d1b3aa89bbb383dc",
+      "after": "4307d03ba54323c84244a9227e454641174846aae848c7794bd221328d4a9b43",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_winmgrc.obj",
+      "before": "d0751a0abd341015d25e5e2bf9924908eacbc7f9b9d24729b58db6fab8c61a16",
+      "after": "19b6bf55dcee1af0e4e627da04827cf3a064aac9071e99d4f60f3326aceefd96",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_default.obj",
+      "before": "9047d0060a26d51960356cc6df1a5f2bb294df751b6a6efc313cf72826ad18e9",
+      "after": "a828702e7020d107498a658714f625ca1d8f7b36bece6b641e519c88e09b71de",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_draw.obj",
+      "before": "8450254fbe40458e3065077f4f7385a57b4406cc787c51710e13b096132981f1",
+      "after": "318bebe640501d2a1c852cde09c61373373df029ecbad76ea509f268d2e0d168",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_btnctl.obj",
+      "before": "2915426d7f1782e1d1490bff62e2144c7f084aab9b375c8c26e09fb18c24314c",
+      "after": "7ef53d2d969d0a31c082772ce2622c4da2bd8e6fe6fd59ba175fa16d85303ffd",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_keyboard.obj",
+      "before": "ec637fb5ba95962061d50811e62756712878514f5f0a09fc1dc5da277a70fa7a",
+      "after": "2d2fe2bffa3f09d3f071dcf12e8029b7254d4a778a97a32f6f87aaffa6d85332",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_mngrayc.obj",
+      "before": "2ac449f22e5ac4e16b49d8ce0193a6a4c3d7482ee0d012e2395f70520c2ef97a",
+      "after": "6b5b65fafc4ae36d05eca25f0622fc22173b6e8ce9a93c72f6a3ae38e19b8e0f",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/default_view.obj",
+      "before": "da6281f51415a96f6558b2a87882d56c24132980eeba129557ac40ace50bf73f",
+      "after": "76a40dd284334b7e827b8ecbcfdbd9eb6c25b26013b11db1bf707a22aea22f47",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-editec.obj",
+      "before": "55990d371728cfd5d6f2e55bb8b87012b20c627fd4a8ea5f0441b9fe5aa9216c",
+      "after": "0e92424c366e1001a7462b8fcb2dca4581b1dfc18cb9603aa2d953e281ced8b4",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-editml.obj",
+      "before": "6e6996fb2de0232c7c05ab06e4ed77c78c412979b5b754a173e3a6c2b5d319e0",
+      "after": "6beab186d86aa61d1baf855744078c1ce5ca978a68bb7d298044c2543866aa89",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-editsl.obj",
+      "before": "392d6a6b3ac105472b9d9c914340b7a1f7e07293e3d3babeb9dfd1c42622b88f",
+      "after": "f45eb50b5fb0806851e3b979021fe6e81f27ddd31d5ccc8e7c554cbce9cf184b",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-edecrare.obj",
+      "before": "60dd9eed3ba544bdaa221bf8423e405f42d499c1c58411592448d1802b7a3938",
+      "after": "031fb981c2d657144efeda4076802c9ababc0281c6555dd69b797489a932785e",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-edslrare.obj",
+      "before": "acf53c6e524d2d78e8ebe2942c6d7b23a27cb3b369dff2afb9f3e31bda91a5b2",
+      "after": "20fdef8cd3d3374d956b7f23a29795c570fbb0e832a454101b1805c0ef1178f9",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-edmlonce.obj",
+      "before": "8c8968a275f80fa4e88d13388c5cbac1bc6910282f464842839dbee459e52653",
+      "after": "eff307524d35a0f0dab0e8a7e3edf9ac8fb216041d493f41293bbe0556ea346a",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-edmlrare.obj",
+      "before": "92968c41462c1dd16e7a9d78b86348d2a9c43cbfe2a5ccbdf5ec7bde07bfc552",
+      "after": "f18ba9ea6ba462c4810e0b8b5249c8efcc20f3a786826f4924984f9969f1be96",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-combo.obj",
+      "before": "d9399421b5a5006a60189a75327e1a03f3e9fd7a04c56b9657802b9c77d2e41a",
+      "after": "eccc4fee4d4c0d271be1b69ef94bd0a48d84c3bbc46f9e1fa2c0913824aa1315",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-combodir.obj",
+      "before": "458fdd535738463975de519e0a572e8b66b3e0a19845dea7d144c0d87b4108db",
+      "after": "c2fc442410ef1567cb502287af15e18e8923495936e6fb1c2b72033da260d3ae",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-comboini.obj",
+      "before": "399d87a23db7cfac3aa5463fd4a92388286818bcd923fdf40580d13ec490948d",
+      "after": "400556153ed7f05fac3e70806403d22611135899bc095236f4db52e6cd10ea02",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-lboxctl1.obj",
+      "before": "b150a36cabc81e4fe379eef5da1d7bd4840edea113c0ed6f0ab6b95b36e984bb",
+      "after": "932a3dd5e84034de3ff6399c470c320dfc96f7c9700506381526c91462a49470",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-lb1.obj",
+      "before": "e5c87ab3e84fea1d6826bfea15ae9f609c1f427780068e2368acf70b2580fc90",
+      "after": "e0545db985dc562bd308f4bd4837503aa176603339acb15ebd8a98f6fa4eed40",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-lboxctl3.obj",
+      "before": "b5b3c9ab66c427cdda59196ee09b94cea2e290dac3a1194416a20efe7c1b0717",
+      "after": "e8a4cf8b1d993dc5c11a633a27c8b803d8682094b0a56eda06c920930ad0c81d",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-lboxmult.obj",
+      "before": "22cb59076b972edc1b6990550ca2b291a4599f1f5044657f6d58bb815ec8d7db",
+      "after": "0758dd2a792cba493bc67dad49e2bf1b621cb50c19172545d666cf0d0c0ba82e",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-lboxctl2.obj",
+      "before": "d23277785d4f1af325baaedddd59ac245f97c972e68bf5fed15ddb619dc1b90d",
+      "after": "a0dfbe33149e94505293ed7b1caf0efd6f58a0c8ee6efad1e2818390026d2af6",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-lboxrare.obj",
+      "before": "aade4d07d3535afba4936d4f71a19ae8e91e6a49c77aebc3817fe571b052d7d9",
+      "after": "5dee685913d9f32e8f14ee484d6a57a5f0413ead0cc070bf9d428da7086b6e0e",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-lboxvar.obj",
+      "before": "95eff2ea1a1dde6861831d54ae06d9f4cfe9d8a286807ce225116e916cb6bad1",
+      "after": "dbcd599d6279f36529502f9f1b7e9a483f1765f4ee808c0f4d514c41abb0bd56",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-dlgmgr.obj",
+      "before": "fa9dc04ef3e6f61a6316a9e8fc04aabe3ae34c803dd6fb66210bf2284d866b2a",
+      "after": "3f7e551c6272fc94a3b81de1b74c478a6a0fce9af7d86322341cbef229fe0c70",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-dlgbegin.obj",
+      "before": "f8ece6f51129f6106c94dc7c84b11c78fe056b720b7f8e51ce957d56c5e515df",
+      "after": "a7a0dcaa2ced5ecaeb245afb7290eb9045c931acd19a308a22f4ed466e1c1d13",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-dlgend.obj",
+      "before": "febf4cd46ca40836177a769f72bb5b52c3a1b7f82d6ff419906ce6485c657eb9",
+      "after": "ff9872dcc21d0e8c23d3d676d155af2d99f9bb4500f6c3f3a6f6f448307d20a2",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-dlgmgrc.obj",
+      "before": "b0b777171c2f27c961ac62d5410338d4d8786c5f69f739f61870fc9307aee19d",
+      "after": "040a588b34a3aac648752b04c08d379fa3b621ed0c1e5c56a992ed763f35da03",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-wow.obj",
+      "before": "a778a9aa8c2a2b35e6945fe7d833c589e10ab9998a15f4ba5f1818507d0512a9",
+      "after": "3d1353c7b63eaa7b951a53d7bbf9bb84b559066f59e893508f09a3c12fc2374d",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-dmmnem.obj",
+      "before": "5f9b02742d2f16e3584f0b9e729e2dda95320d6874bde5dd726ecbee825089a5",
+      "after": "b4ef7d6bd7abd216248270dd839e9d5d7f4ff62a1abe920d8445b397072b8cdf",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-dlgmgr2.obj",
+      "before": "2961441fb32d38be35ae2e938afc1625667a24bcc86b9d3977d161b308eed5b0",
+      "after": "1bf80ed9da2438e0370efec880c2f901d6cb14d6e542617009de36fec42c8913",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-winmgrc.obj",
+      "before": "064d86af1e7e100163a07ac582426eda425082a81ad54f26a97d20767a4e9385",
+      "after": "1b1a301720a7267b02efd62094dab0d654b8304b7d44f3a6044b978402f98752",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-view-winmgr.obj",
+      "before": "fdf3217bea775b37dd539cbaf3e425ff2f89b7b9176d267388344d2072eabe22",
+      "after": "14878b53d49e0d93ed68b2743a8b7fc520f67675c3badf98f45da5665e06590c",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-view-wow.obj",
+      "before": "d372a34397321a38c0e91d8ddc7d742273dfb94a5362b792e952cdcc75552653",
+      "after": "fea5e1b834dddd9aaf6c6ea529074b120fffd7520912c287489a3283df6fb0a4",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-lookaside.obj",
+      "before": "089d39839576671f3df8dbbc7b54d049206cb89797ea98f7bdf639b8801b5bbb",
+      "after": "5ffc68f6e849cfaf8f8589a0cbc43e595fcfeee05a9bb786496485ec598deeca",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-text.obj",
+      "before": "f6d53df28109d4f87284ac6c442a4fe09284748a324695a8d1a6b29f10f7b584",
+      "after": "930c07daa15fd0d97c875b7d595b3dbb57dc232bc5d29aa352e76c98a54aec8e",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/dialog-template.obj",
+      "before": "d99c3e8b7fc94126bf68dade6f27268b16f5975bd972e67324839884e1998876",
+      "after": "1af498b5ea898a3d4ca007673b33d7ff73431df26dcb74d74c34b5ca8e2b0c58",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-fnid.obj",
+      "before": "7f97a54a3d42de25261fd9388fdc764bb1c44cc7f93ce0a372de00428ff36a0c",
+      "after": "29b96b447d8d02968594865f2fd45acd6e19a80225e3997b700697e5e21db4e0",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/default-client.obj",
+      "before": "d462ac0295f72c74e4e9ec2d03e95af4e9762bf2b4743ebda63ac0b4b1c5dfb6",
+      "after": "9cb443e3e1dd5f0816ceac19facab5ada08287cf780a863da46ea260fb9dff4d",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/private-word-reader.obj",
+      "before": "3879f3059921fe680d2dac01c6931d5b4f7b52342fc356f772c0ea65552be649",
+      "after": "3f41cb1e4d008237e1eec6abfda26411750494c1be40e7b1bc81bcf3df4225d0",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/private-word-setter.obj",
+      "before": "25eacd1da46b2313fe151c862007b5e735cd263e6de8c03bc587894719152b7f",
+      "after": "0fbbbe3099b0212f422a9ffa6c565e64bc04046251578cee1300479270f40298",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/private-word-client.obj",
+      "before": "e8e14503d18ec510c8df00a02784b3debfca60707d2759d6e2d2c1f3f6e0f1f3",
+      "after": "21f013423bbe992a5dcd68e7fd351c5b560b84e44323a2aa1ce3d822f39c6cda",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/client-callproc.obj",
+      "before": "c5fc69c4c09079d3eb028f1f908187340c520f4f2169d15c23fe263cb9ade675",
+      "after": "560e2ea20f495741b082e39e7653685b97d49404ab1e89731394869903010000",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-client-draw.obj",
+      "before": "a09bb49717f023a5238f8f35d52cf1ed01c32182951f5156ad6e1be3e4c7cb7d",
+      "after": "ca27c501bcd111fe65171944c0242552aa68e74ea3151ac965cbe24b8b361e09",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/button-blit.obj",
+      "before": "183c06bd983d1c1fa99a3891eab41c3b11d6a92f498139bb0f97b82180d44e26",
+      "after": "eb446e9d634e2f1db1b2ce263b873c50e6bd6ce92f8b97604d08d77aa7867870",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/button-client.obj",
+      "before": "74dff7d41377fec120d29c4eab58fed941b0ff1be35b19323daf317ab42cf859",
+      "after": "65c86b3d65713fc7110bd6820875a07ea12fff212364dd555d999928a7be2f17",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/wow32-dll/wow_dialog_creation_binding.obj",
+      "before": "7491d62596057b49d6d533cb5ec77ad7041555f0f266c63456aa0e61d258d183",
+      "after": "cb3604fa54b8d837d4582514d912ffbf12f09f11cf1fc99affb5f2fa045e6267",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/wow32-dll/wow_dialog_finalization_binding.obj",
+      "before": "caddb0af4caad1080345b2e293dd9dd36bada56d12a6bb5f43d3c05b2ec45995",
+      "after": "84ac9309b663c07913772a5fdb578ba57aca3da17a03ffcf797684f58c95c737",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/wow32-dll/wow_button_lifetime.obj",
+      "before": "b1b3d8856cc7e08f551ad53252d3c27dbffc2a48dd0681e36bfc5a5d50c2c6c0",
+      "after": "d80d1597921a3c7cac79ce505d9cc26c92d4f1d8b1f9b79b4224dab816dc9e54",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/wow32-dll/wow_edit_lookaside_bindings.obj",
+      "before": "81f80822246e6f31bb3aadf568ca3f8c86631bd980160fbaac9dba7f171613d1",
+      "after": "58053f1189ec1cb6b2b3abac1b5f5e10e09adc23e50a0ddd39d808a020d5985d",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/wow32-dll/wow_edit_entry_bindings.obj",
+      "before": "57613105bda7b33370c3259ddc3c4273fceabf737d2b4d249601b2cf6e31efe8",
+      "after": "2aaedb6001ada482121bbb2458c0b127963a2b1bdbb41e388098309bddeb5207",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/wow32-dll/wow_control_extent_bindings.obj",
+      "before": "e3afc346448d7802b844f42db82d7215d153642f53755639d09e42534ee4d23a",
+      "after": "1b7f02911ed08c282b8df251afe6490b35ef8dca5a682c67aa4a430acd8531ad",
+      "identical": false
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/wow32-dll/wow_edit_state_bindings.obj",
+      "before": "f4e73583941515c071cdaf3c8087ff06506d21da508e24c780e3f80240dc61a7",
+      "after": "a62cbf8aa626146255edc45f5bb90989459c95a3da001882f8a2be0ebb6d1fc3",
+      "identical": false
+    }
+  ]
+}

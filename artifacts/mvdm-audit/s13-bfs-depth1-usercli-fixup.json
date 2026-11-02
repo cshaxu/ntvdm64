@@ -1,0 +1,47 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+  "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+  "before_sha256": "8292f9d635e0b025b622b12662169ede4334529a270ee5744c225911a5125166",
+  "after_sha256": "771fc0fbcce586991c814a40450ce15931ebc13c1d83ee3695b1b4117f9c738f",
+  "groups": [
+    {
+      "macro": "DBG",
+      "name": "HANDLE_WARNING",
+      "original_line": 2307,
+      "original_else_line": 2316,
+      "current_line": 1083,
+      "current_else_line": 1085
+    },
+    {
+      "macro": "DBG",
+      "name": "CHECK_HANDLE_WARNING",
+      "original_line": 2320,
+      "original_else_line": 2336,
+      "current_line": 1090,
+      "current_else_line": 1092
+    },
+    {
+      "macro": "HANDLE_FIXUP",
+      "name": "FIXUP_HANDLE",
+      "original_line": 2342,
+      "original_else_line": 2351,
+      "current_line": 1097,
+      "current_else_line": 1099
+    },
+    {
+      "macro": "HANDLE_FIXUP",
+      "name": "FIXUP_HANDLEZ",
+      "original_line": 2358,
+      "original_else_line": 2367,
+      "current_line": 1107,
+      "current_else_line": 1109
+    }
+  ],
+  "scope": "four original first-depth DBG and HANDLE_FIXUP global condition groups",
+  "original_structure": "Original global selectors and all four selected retail #else definitions restored byte-for-byte linewise from pinned original. Unselected bodies #error; #line restores original selector and selected-body diagnostics.",
+  "selection_proof": "All 102 observed supported include job commands omit DBG/HANDLE_FIXUP switches; no HANDLE_FIXUP definition found in current source/test/build scopes. Existing in-source DBG rejection plus the 102 actual recompilations verifies DBG is false in those contexts; one unrelated test explicitly defines DBG=0.",
+  "adapter_boundary": "wow_edit_call_bindings.h retains two equivalent definitions because color-only owner does not include usercli.h; standalone /WX macro redefinition control and 102 builds show no conflicting macro warnings.",
+  "validation": "46 WOW32 and 56 call-boundary objects rebuilt; x86/x64 selected/forced rejection and logical-line controls pass; five linked call-boundary fixtures pass; cached builds and rejection suites pass. All 102 object hashes differ, cause not individually attributed; do not claim object byte identity.",
+  "package": "s13-bfs-depth1-usercli-fixup-package-compare.json: seven byte-identical and three PE timestamp-only; prior Full-tested publication retained.",
+  "limits": "The recorded first-depth original unresolved list is now empty; this is not proof the broader original-structure inventory is complete. First-depth current queue still has pending items; later levels remain."
+}

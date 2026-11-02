@@ -801,3 +801,21 @@ provided = subprocess.run(base + ['/DPAGE_SIZE=8192', str(probe)], capture_outpu
 if default.returncode or provided.returncode or not re.search(r'int\s+page_value\s*=\s*0x1000\s*;', default.stdout) or not re.search(r'int\s+page_value\s*=\s*8192\s*;', provided.stdout) or not re.search(r'int\s+after_page_guard\s*=\s*1261\s*;', default.stdout):
     raise SystemExit('server PAGE_SIZE selected or provided branch failed')
 print('PASS original server PAGE_SIZE fallback and original line')
+
+source = (repo / 'src/non-mvdm/windows/core/ntuser/client/usercli.h').read_text(encoding='latin1').splitlines()
+for macro, name, original_line, selected_line, end_line in (('DBG', 'HANDLE_WARNING', 2307, 2317, 2318), ('DBG', 'CHECK_HANDLE_WARNING', 2320, 2337, 2338), ('HANDLE_FIXUP', 'FIXUP_HANDLE', 2342, 2352, 2356), ('HANDLE_FIXUP', 'FIXUP_HANDLEZ', 2358, 2368, 2372)):
+    marker = '#error Excluded unsupported ' + macro + ' ' + name + ' profile'
+    matches = [i for i, line in enumerate(source) if line.strip() == marker]
+    if len(matches) != 1:
+        raise SystemExit('original fixup guard missing: ' + name)
+    i = matches[0]; end = next(j for j in range(i+1, len(source)) if source[j].strip() == '#endif')
+    if source[i-2].strip() != '#line ' + str(original_line) or source[i-1].strip() != '#if ' + macro or source[i+1].strip() != '#else' or source[i+2].strip() != '#line ' + str(selected_line):
+        raise SystemExit('original fixup selector/selected line missing: ' + name)
+    probe.write_text('\n'.join(source[i-2:end+1] + ['int after_fixup_guard = __LINE__;']) + '\n', encoding='ascii')
+    selected = subprocess.run(base + ['/U' + macro, str(probe)], capture_output=True, text=True, errors='replace')
+    rejected = subprocess.run(base + ['/D' + macro + '=1', str(probe)], capture_output=True, text=True, errors='replace')
+    if selected.returncode or not re.search(r'int\s+after_fixup_guard\s*=\s*' + str(end_line+1) + r'\s*;', selected.stdout):
+        raise SystemExit('fixup retail selection or original line failed: ' + name + selected.stderr)
+    if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr or ('(' + str(original_line+1) + ')') not in rejected.stdout + rejected.stderr:
+        raise SystemExit('unsupported fixup profile or error line not rejected: ' + name)
+print('PASS original retail fixup guards and logical lines')

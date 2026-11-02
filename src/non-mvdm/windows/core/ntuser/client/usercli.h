@@ -1079,6 +1079,40 @@ typedef struct tagMDIWND {
 #define DBT_TEXT            0x0001
 #define DBT_FOCUS           0x0002
 #endif
+#line 2307
+#if DBG
+#error Excluded unsupported DBG HANDLE_WARNING profile
+#else
+#line 2317
+#define HANDLE_WARNING()
+#endif
+#line 2320
+#if DBG
+#error Excluded unsupported DBG CHECK_HANDLE_WARNING profile
+#else
+#line 2337
+#define CHECK_HANDLE_WARNING(h,bZ)
+#endif
+#line 2342
+#if HANDLE_FIXUP
+#error Excluded unsupported HANDLE_FIXUP FIXUP_HANDLE profile
+#else
+#line 2352
+#define FIXUP_HANDLE(h)                                 \
+{                                                       \
+    CHECK_HANDLE_WARNING(h,FALSE);                      \
+}
+#endif
+#line 2358
+#if HANDLE_FIXUP
+#error Excluded unsupported HANDLE_FIXUP FIXUP_HANDLEZ profile
+#else
+#line 2368
+#define FIXUP_HANDLEZ(h)                                \
+{                                                       \
+    CHECK_HANDLE_WARNING(h,TRUE);                       \
+}
+#endif
 #line 2374
 #ifdef FE_SB // DBCS Messaging macros for client side.
 #error Excluded unsupported FE_SB client messaging macros
