@@ -2,8 +2,8 @@
   "scope": "all fixed-baseline MVDM-host first-depth original signature multiplicities against current first-depth structures; nested signatures recorded only, no inner branch inspection or automatic restoration",
   "files_checked": 1321,
   "counts": {
-    "root_signature_multiplicity_satisfied": 3555,
-    "missing_root_occurrences": 23
+    "root_signature_multiplicity_satisfied": 3557,
+    "missing_root_occurrences": 21
   },
   "records": [
     {
@@ -47,52 +47,6 @@
       ],
       "original_lines": [
         23
-      ],
-      "current_root_lines": [],
-      "current_nested_lines": [],
-      "missing_multiplicity": 1,
-      "classification": "missing-signature-needs-owner-check"
-    },
-    {
-      "path": "src/mvdm-host/inc/mvdm.h",
-      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\mvdm.h",
-      "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
-      "working_sha256": "9c74c7a6db9a5d743482695411a989e9731c1f5b94d139182b2cc21ba871394f",
-      "signature": [
-        [
-          "ifdef",
-          "i386"
-        ],
-        [
-          "else",
-          ""
-        ]
-      ],
-      "original_lines": [
-        73
-      ],
-      "current_root_lines": [],
-      "current_nested_lines": [],
-      "missing_multiplicity": 1,
-      "classification": "missing-signature-needs-owner-check"
-    },
-    {
-      "path": "src/mvdm-host/inc/suballoc.h",
-      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\suballoc.h",
-      "original_sha256": "98263eed4c261650c4b9c9b23f09f2ef19b31a0b1eb5c805d4c672ee85ded85c",
-      "working_sha256": "23d2e7a2eb84686905b1898a7c69b016967caa37290aa84e09c6ad7f2e54dce9",
-      "signature": [
-        [
-          "ifdef",
-          "i386"
-        ],
-        [
-          "else",
-          ""
-        ]
-      ],
-      "original_lines": [
-        32
       ],
       "current_root_lines": [],
       "current_nested_lines": [],

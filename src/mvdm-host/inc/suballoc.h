@@ -30,11 +30,19 @@ Revision History:
 //   to make defining data structures easier
 //
 /* DIVERGENCE(MVDM-SUPPORT-DIV-007): recognize MSVC's x86 target macro. */
-#if defined(i386) || defined(_M_IX86)
+#ifdef i386
+#line 33
 #define COMMIT_GRANULARITY 4096
 #else
+#if defined(_M_IX86)
+#line 33
+#define COMMIT_GRANULARITY 4096
+#else
+#line 35
 #define COMMIT_GRANULARITY 65536
 #endif
+#endif
+#line 37
 
 //
 // Types

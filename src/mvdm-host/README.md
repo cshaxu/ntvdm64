@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-624: restore the original `i386` outer selectors in `inc/mvdm.h`
+and `inc/suballoc.h`, retaining the existing MSVC `_M_IX86` compatibility
+selection in their outer alternatives and preserving original continuation
+lines. Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-i386-headers-restoration.json`.
+
 MVDM-HOST-DIV-623: restore the original `#ifndef X86GFX` outer selector in
 `host/src/nt_graph.c`, retain the existing CCPU software-display adaptation
 inside it, and restore the following original diagnostic line. Evidence:
@@ -1924,8 +1929,8 @@ runtime-discovery inputs.  The complete per-file provenance is in
 | --- | --- | --- | --- | --- |
 | MVDM-SUPPORT-DIV-001 | Model `DEMEXTERR.ExtendedErrorPointer` as a 32-bit field in the packed DOS data record. | The original x86 `PUCHAR` happens to be 32 bits; on x64 it widens and changes the guest ABI. | Preserve the source record's nine-byte packed layout by storing the guest pointer numerically as `ULONG`. | `inc/dossvc.h` |
 | MVDM-SUPPORT-DIV-005 | Declare the internal MVDM hardware/software/fault interrupt registration callbacks. | The original public declarations carried function pointers as `PVOID`, relying on an invalid function/data-pointer conversion that has no safe C ABI meaning. | Retain the original registration entrypoint names and callback parameters/results, but publish three named `int`-returning function-pointer types. | `inc/intapi.h`; `softpc.new/host/inc/nt_inthk.h`; `softpc.new/host/src/nt_inthk.c` |
-| MVDM-SUPPORT-DIV-006 | Select original fetch/store macros. | MSVC defines _M_IX86 rather than the historical i386 spelling. | Extend only the original condition; retain both original branches. The x86 product selects direct accesses. | `inc/mvdm.h` |
-| MVDM-SUPPORT-DIV-007 | Select original suballocation granularity. | MSVC defines _M_IX86 rather than i386. | Extend only the original condition and retain both branches; selected x86 remains 4096 bytes. | `inc/suballoc.h` |
+| MVDM-SUPPORT-DIV-006 | Select original fetch/store macros. | MSVC defines _M_IX86 rather than the historical i386 spelling. | Preserve both original alternatives and select the same x86 access macros for MSVC inside the original non-i386 alternative. | `inc/mvdm.h` |
+| MVDM-SUPPORT-DIV-007 | Select original suballocation granularity. | MSVC defines _M_IX86 rather than i386. | Preserve both original alternatives and select the same 4096-byte granularity for MSVC inside the original non-i386 alternative. | `inc/suballoc.h` |
 | MVDM-SUPPORT-DIV-008 | Retired in T473 S11: original absolute NT include restored. | This mirror header is not selected by the current worker/WOW32 dependency graphs. | Source restoration only; future selection must resolve the original include dependency. See `artifacts/mvdm-audit/s11-mirror-restoration/review.md`. | `inc/vdmtib.h` |
 
 ### Existing MVDM host divergences

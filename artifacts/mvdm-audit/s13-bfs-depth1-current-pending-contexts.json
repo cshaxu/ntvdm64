@@ -497,6 +497,15 @@
       "current_actual_includers": 160
     },
     {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "start": 64,
+      "kind": "ifdef",
+      "expression": "i386",
+      "pending_reason": "original-i386-arm-needs-supported-context-witness",
+      "guard_only": false,
+      "current_actual_includers": 160
+    },
+    {
       "path": "src/mvdm-host/inc/softpc.h",
       "start": 33,
       "kind": "ifdef",
@@ -516,10 +525,10 @@
     },
     {
       "path": "src/mvdm-host/inc/suballoc.h",
-      "start": 35,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "start": 33,
+      "kind": "ifdef",
+      "expression": "i386",
+      "pending_reason": "original-i386-arm-needs-supported-context-witness",
       "guard_only": false,
       "current_actual_includers": 26
     },
@@ -3306,7 +3315,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/xt.c",
-      "start": 162,
+      "start": 164,
       "kind": "else",
       "expression": "",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
@@ -5520,7 +5529,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 766,
+      "start": 768,
       "kind": "ifdef",
       "expression": "X86GFX",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
@@ -7987,7 +7996,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 35
+      "count": 34
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",
@@ -8018,6 +8027,12 @@
       "guard_only": true,
       "has_current_includer": false,
       "count": 3
+    },
+    {
+      "reason": "original-i386-arm-needs-supported-context-witness",
+      "guard_only": false,
+      "has_current_includer": true,
+      "count": 2
     }
   ]
 }

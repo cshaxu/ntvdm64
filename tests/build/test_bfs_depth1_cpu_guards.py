@@ -411,3 +411,50 @@ excluded = subprocess.run(base + [str(probe)], capture_output=True, text=True, e
 if not excluded.returncode or 'MVDM-HOST-DIV-580' not in excluded.stdout + excluded.stderr:
     raise SystemExit('nt_graph existing non-CCPU adaptation no longer rejects')
 print('PASS nt_graph original outer selector, existing adaptation and line mapping')
+
+for header, continuation, payload in (
+    ('mvdm.h', 84, 'FETCHWORD(x)\nFETCHDWORD(x)\nSTOREWORD(x,y)\nSTOREDWORD(x,y)'),
+    ('suballoc.h', 37, 'int selected = COMMIT_GRANULARITY;'),
+):
+    text = (repo / 'src/mvdm-host/inc' / header).read_text(encoding='latin1')
+    start = text.index('#ifdef i386\n')
+    end = text.index(f'#line {continuation}\n', start) + len(f'#line {continuation}\n')
+    group = text[start:end]
+    outer, rest = group.split('\n#else\n#if defined(_M_IX86)\n', 1)
+    adapted, rest = rest.split('\n#else\n', 1)
+    generic, tail = rest.split('\n#endif\n#endif\n', 1)
+    direct = outer.split('\n', 1)[1]
+    if direct != adapted or tail.strip() != f'#line {continuation}':
+        raise SystemExit(f'{header}: original i386 boundary or MSVC selection changed')
+    baseline = '#if defined(i386) || defined(_M_IX86)\n' + direct + '\n#else\n' + generic + '\n#endif\n'
+    profiles = (['/Di386'], ['/U_M_IX86', '/D_M_IX86=600'], ['/U_M_IX86', '/Ui386'])
+    for defines in profiles:
+        outputs = []
+        for content in (baseline, group):
+            probe.write_text(content + payload + '\n', encoding='ascii')
+            result = subprocess.run(base + defines + [str(probe)], capture_output=True,
+                                    text=True, errors='replace')
+            if result.returncode:
+                raise SystemExit(f'{header}: macro profile failed: ' + result.stderr)
+            outputs.append('\n'.join(line for line in result.stdout.splitlines() if line.strip()))
+        if outputs[0] != outputs[1]:
+            raise SystemExit(f'{header}: original selector changed macro output')
+    probe.write_text(group + 'int after_outer = __LINE__;\n', encoding='ascii')
+    line = subprocess.run(base + [str(probe)], capture_output=True, text=True, errors='replace')
+    if line.returncode or not re.search(r'int\s+after_outer\s*=\s*' + str(continuation) + r'\s*;', line.stdout):
+        raise SystemExit(f'{header}: original continuation line changed')
+    first_line, other_line = ((74, 79) if header == 'mvdm.h' else (33, 35))
+    occurrences = [(first_line, 0), (first_line, 1), (other_line, 0)]
+    for defines, (expected_line, occurrence) in zip(profiles, occurrences):
+        marker = f'#line {expected_line}\n'
+        parts = group.split(marker)
+        if len(parts) <= occurrence + 1:
+            raise SystemExit(f'{header}: missing original alternative line directive')
+        parts[occurrence + 1] = '#error BRANCH_LINE_CONTROL\n' + parts[occurrence + 1]
+        probe.write_text(marker.join(parts), encoding='ascii')
+        line = subprocess.run(base + defines + [str(probe)], capture_output=True,
+                              text=True, errors='replace')
+        if not line.returncode or not re.search(r'\(' + str(expected_line) + r'\).*BRANCH_LINE_CONTROL',
+                                                line.stdout + line.stderr):
+            raise SystemExit(f'{header}: original alternative diagnostic line changed')
+print('PASS original i386 header selectors, MSVC profiles and continuation lines')

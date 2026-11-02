@@ -1,0 +1,114 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "before_sha256": "9c74c7a6db9a5d743482695411a989e9731c1f5b94d139182b2cc21ba871394f",
+      "candidate_sha256": "f4a9ede9ecade77b8d9a2546dd5e70f7075805c623bdf2e5aa216ac9a84f1cae",
+      "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
+      "original_following_line": 84,
+      "controls": [
+        {
+          "arch": "x86",
+          "profile": "legacy-i386",
+          "preprocessing_equal": true
+        },
+        {
+          "arch": "x86",
+          "profile": "msvc-x86",
+          "preprocessing_equal": true
+        },
+        {
+          "arch": "x86",
+          "profile": "generic",
+          "preprocessing_equal": true
+        },
+        {
+          "arch": "x64",
+          "profile": "legacy-i386",
+          "preprocessing_equal": true
+        },
+        {
+          "arch": "x64",
+          "profile": "msvc-x86",
+          "preprocessing_equal": true
+        },
+        {
+          "arch": "x64",
+          "profile": "generic",
+          "preprocessing_equal": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "before_sha256": "23d2e7a2eb84686905b1898a7c69b016967caa37290aa84e09c6ad7f2e54dce9",
+      "candidate_sha256": "3776d9d5621f820c8478e73bd3a33dafad96bc25855cf1ca572819d4feeed015",
+      "original_sha256": "98263eed4c261650c4b9c9b23f09f2ef19b31a0b1eb5c805d4c672ee85ded85c",
+      "original_following_line": 37,
+      "controls": [
+        {
+          "arch": "x86",
+          "profile": "legacy-i386",
+          "preprocessing_equal": true
+        },
+        {
+          "arch": "x86",
+          "profile": "msvc-x86",
+          "preprocessing_equal": true
+        },
+        {
+          "arch": "x86",
+          "profile": "generic",
+          "preprocessing_equal": true
+        },
+        {
+          "arch": "x64",
+          "profile": "legacy-i386",
+          "preprocessing_equal": true
+        },
+        {
+          "arch": "x64",
+          "profile": "msvc-x86",
+          "preprocessing_equal": true
+        },
+        {
+          "arch": "x64",
+          "profile": "generic",
+          "preprocessing_equal": true
+        }
+      ]
+    }
+  ],
+  "actual_graph_witnesses": [
+    {
+      "header": "mvdm.h",
+      "source": "src/mvdm-host/vdmredir/vrnetb.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "selected": "BFS_ORIGINAL_ELSE"
+    },
+    {
+      "header": "mvdm.h",
+      "source": "src/mvdm-host/vdmredir/vrnetb.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "selected": "BFS_ORIGINAL_ELSE"
+    },
+    {
+      "header": "suballoc.h",
+      "source": "src/mvdm-host/xms.486/xms.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "selected": "BFS_ORIGINAL_ELSE"
+    },
+    {
+      "header": "suballoc.h",
+      "source": "src/mvdm-host/xms.486/xms.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "selected": "BFS_ORIGINAL_ELSE"
+    }
+  ],
+  "final_source_sha256": {
+    "src/mvdm-host/inc/mvdm.h": "98275b6dd2f676c45f237c2e5e2ff6c3ef6d57bfcda576655617685462a65164",
+    "src/mvdm-host/inc/suballoc.h": "8cdfab30f7a842253ea673935a9654ba526b3011f2d7c7a3cae3980a25c45477"
+  },
+  "line_controls": "Compiler tests verify original first, MSVC-adapted and generic branch logical lines and original outer continuation on x86 and x64.",
+  "limitations": "The original i386 arms remain pending supported-context evidence. The fixed-original signature inventory has 21 remaining structural leads across 10 records. The separate non-CCPU DPMI negative-object fixture remains failed."
+}

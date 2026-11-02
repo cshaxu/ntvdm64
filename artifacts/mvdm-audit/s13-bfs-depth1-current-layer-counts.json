@@ -3,18 +3,18 @@
   "depth1_groups": 4074,
   "depth1_arms": 5050,
   "depth1_status": {
-    "pending": 886,
+    "pending": 887,
     "newly-excluded": 629,
     "already-excluded": 1660,
-    "retained-observed": 1866,
+    "retained-observed": 1865,
     "retained-original-assertion": 9
   },
   "depth2_parent_status_counts": {
-    "retained-observed": 1401,
+    "retained-observed": 1403,
     "pending": 1632
   },
-  "restored_original_groups_relative_to_fixed_head": 48,
-  "restored_in_current_bfs_pass": 15,
+  "restored_original_groups_relative_to_fixed_head": 50,
+  "restored_in_current_bfs_pass": 17,
   "restoration_count_evidence": "s13-bfs-depth1-restoration-count.json",
   "original_missing_structures": "separate s13-bfs-depth1-original-unresolved-boundaries.json; not claimed complete"
 }

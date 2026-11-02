@@ -3509,7 +3509,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "9c74c7a6db9a5d743482695411a989e9731c1f5b94d139182b2cc21ba871394f"
+      "source_sha256": "98275b6dd2f676c45f237c2e5e2ff6c3ef6d57bfcda576655617685462a65164"
     },
     {
       "path": "src/mvdm-host/inc/mvdm.h",
@@ -3522,33 +3522,33 @@
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "9c74c7a6db9a5d743482695411a989e9731c1f5b94d139182b2cc21ba871394f"
+      "source_sha256": "98275b6dd2f676c45f237c2e5e2ff6c3ef6d57bfcda576655617685462a65164"
     },
     {
       "path": "src/mvdm-host/inc/mvdm.h",
       "start": 64,
-      "cut": 69,
-      "group_end": 74,
-      "kind": "if",
-      "expression": "defined(i386) || defined(_M_IX86)",
-      "status": "retained-observed",
-      "pending_reason": null,
+      "cut": 70,
+      "group_end": 84,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "pending",
+      "pending_reason": "original-i386-arm-needs-supported-context-witness",
       "guard_only": false,
-      "body_lines": 4,
-      "source_sha256": "9c74c7a6db9a5d743482695411a989e9731c1f5b94d139182b2cc21ba871394f"
+      "body_lines": 5,
+      "source_sha256": "98275b6dd2f676c45f237c2e5e2ff6c3ef6d57bfcda576655617685462a65164"
     },
     {
       "path": "src/mvdm-host/inc/mvdm.h",
-      "start": 69,
-      "cut": 74,
-      "group_end": 74,
+      "start": 70,
+      "cut": 84,
+      "group_end": 84,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
-      "body_lines": 4,
-      "source_sha256": "9c74c7a6db9a5d743482695411a989e9731c1f5b94d139182b2cc21ba871394f"
+      "body_lines": 13,
+      "source_sha256": "98275b6dd2f676c45f237c2e5e2ff6c3ef6d57bfcda576655617685462a65164"
     },
     {
       "path": "src/mvdm-host/inc/sharewow.h",
@@ -3618,28 +3618,28 @@
     {
       "path": "src/mvdm-host/inc/suballoc.h",
       "start": 33,
-      "cut": 35,
-      "group_end": 37,
-      "kind": "if",
-      "expression": "defined(i386) || defined(_M_IX86)",
-      "status": "retained-observed",
-      "pending_reason": null,
+      "cut": 36,
+      "group_end": 44,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "pending",
+      "pending_reason": "original-i386-arm-needs-supported-context-witness",
       "guard_only": false,
-      "body_lines": 1,
-      "source_sha256": "23d2e7a2eb84686905b1898a7c69b016967caa37290aa84e09c6ad7f2e54dce9"
+      "body_lines": 2,
+      "source_sha256": "8cdfab30f7a842253ea673935a9654ba526b3011f2d7c7a3cae3980a25c45477"
     },
     {
       "path": "src/mvdm-host/inc/suballoc.h",
-      "start": 35,
-      "cut": 37,
-      "group_end": 37,
+      "start": 36,
+      "cut": 44,
+      "group_end": 44,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "retained-observed",
+      "pending_reason": null,
       "guard_only": false,
-      "body_lines": 1,
-      "source_sha256": "23d2e7a2eb84686905b1898a7c69b016967caa37290aa84e09c6ad7f2e54dce9"
+      "body_lines": 7,
+      "source_sha256": "8cdfab30f7a842253ea673935a9654ba526b3011f2d7c7a3cae3980a25c45477"
     },
     {
       "path": "src/mvdm-host/inc/vdmredir.h",
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 886,
+    "pending": 887,
     "newly-excluded": 629,
     "already-excluded": 1660,
-    "retained-observed": 1866,
+    "retained-observed": 1865,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
-    "not-guard": 837,
+    "not-guard": 838,
     "guard": 49
   }
 }
