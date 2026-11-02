@@ -25254,8 +25254,8 @@
       "group_end": 201,
       "kind": "ifndef",
       "expression": "NTVDM",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "d3280a2cff46a0e6e82371d4a52ace9edd60615d7b6295a3a6347ce4a99156e9"
@@ -26515,8 +26515,8 @@
       "group_end": 144,
       "kind": "if",
       "expression": "!defined(NTVDM)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "d03fb73cf11f56ef8e62df868d9a5848a321f456421a1896a1467fc702944b1f"
@@ -26541,8 +26541,8 @@
       "group_end": 13,
       "kind": "ifndef",
       "expression": "NTVDM",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "93f39b454bb7f5bcf3aca46ef8f8bf2bef5c88ef5ba5332a80020fdd10d93d00"
@@ -27425,8 +27425,8 @@
       "group_end": 32,
       "kind": "ifndef",
       "expression": "NTVDM",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "1435e2e98f54c312f277c9d319c95a9ebcb48af547b563cef1ed59d935b46dee"
@@ -27464,8 +27464,8 @@
       "group_end": 53,
       "kind": "ifndef",
       "expression": "NTVDM",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "1435e2e98f54c312f277c9d319c95a9ebcb48af547b563cef1ed59d935b46dee"
@@ -34341,8 +34341,8 @@
       "group_end": 150,
       "kind": "if",
       "expression": "!defined(NTVDM)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a"
@@ -34367,8 +34367,8 @@
       "group_end": 176,
       "kind": "if",
       "expression": "!defined(NTVDM)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a"
@@ -34458,8 +34458,8 @@
       "group_end": 340,
       "kind": "if",
       "expression": "!defined (NTVDM)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a"
@@ -37214,8 +37214,8 @@
       "group_end": 430,
       "kind": "if",
       "expression": "!defined(NTVDM)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777"
@@ -38046,8 +38046,8 @@
       "group_end": 2141,
       "kind": "if",
       "expression": "!defined (NTVDM)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777"
@@ -38085,8 +38085,8 @@
       "group_end": 2181,
       "kind": "if",
       "expression": "!defined(NTVDM)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777"
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 946,
+    "pending": 935,
     "newly-excluded": 615,
-    "already-excluded": 1617,
+    "already-excluded": 1628,
     "retained-observed": 1863,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
     "not-guard": 850,
-    "guard": 96
+    "guard": 85
   }
 }

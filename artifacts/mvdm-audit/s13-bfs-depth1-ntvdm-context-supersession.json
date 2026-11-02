@@ -1,0 +1,177 @@
+{
+  "scope": "11 existing non-NTVDM guards in specific NTVDM source/include contexts, not a global invariant",
+  "context_summary": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "contexts": 18,
+      "all_define_NTVDM": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "contexts": 80,
+      "all_define_NTVDM": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/idetect.h",
+      "contexts": 50,
+      "all_define_NTVDM": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/quick_ev.h",
+      "contexts": 26,
+      "all_define_NTVDM": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "contexts": 2,
+      "all_define_NTVDM": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "contexts": 2,
+      "all_define_NTVDM": true
+    }
+  ],
+  "resource_contexts_checked": 6,
+  "manual_PIC_tests": "verify-keyboard-controller-pic.ps1 and verify-pic-reset-eoi.ps1 use production graph and assert /DNTVDM",
+  "controls": [
+    {
+      "arch": "x86",
+      "selector": "#ifndef NTVDM",
+      "ntvdm_defined": true,
+      "returncode": 0
+    },
+    {
+      "arch": "x86",
+      "selector": "#ifndef NTVDM",
+      "ntvdm_defined": false,
+      "returncode": 2
+    },
+    {
+      "arch": "x86",
+      "selector": "#if !defined(NTVDM)",
+      "ntvdm_defined": true,
+      "returncode": 0
+    },
+    {
+      "arch": "x86",
+      "selector": "#if !defined(NTVDM)",
+      "ntvdm_defined": false,
+      "returncode": 2
+    },
+    {
+      "arch": "x64",
+      "selector": "#ifndef NTVDM",
+      "ntvdm_defined": true,
+      "returncode": 0
+    },
+    {
+      "arch": "x64",
+      "selector": "#ifndef NTVDM",
+      "ntvdm_defined": false,
+      "returncode": 2
+    },
+    {
+      "arch": "x64",
+      "selector": "#if !defined(NTVDM)",
+      "ntvdm_defined": true,
+      "returncode": 0
+    },
+    {
+      "arch": "x64",
+      "selector": "#if !defined(NTVDM)",
+      "ntvdm_defined": false,
+      "returncode": 2
+    }
+  ],
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "current_line": 199,
+      "original_line": 201,
+      "historical_start": 200,
+      "historical_body_sha256": "4b1ae08a6ebba7f4e17c255efcd1eefe2771b86ddf47a8a786d7d8456431c213",
+      "original_sha256": "d92cc144f50e60de5042f76c67574a3fdc22b0ad38411d92d1459d4a02b17789"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "current_line": 142,
+      "original_line": 208,
+      "historical_start": 202,
+      "historical_body_sha256": "005df46ce8015a609a6934037eb9448cb4249256775d25f2e89a402b5bb5c208",
+      "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/idetect.h",
+      "current_line": 11,
+      "original_line": 11,
+      "historical_start": 11,
+      "historical_body_sha256": "6ce83de5bf24d34da8efff7e1b985fba634567dece403f482171d5852de786df",
+      "original_sha256": "204aa44f2d86e2a38eccbfc0bfbcf838252b101b2b085992cc9fbf744d41b799"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/quick_ev.h",
+      "current_line": 30,
+      "original_line": 30,
+      "historical_start": 30,
+      "historical_body_sha256": "7e9d2e97c0fcd377a4321084814fd2f832e048783efd3c3c6b6a92aabb5b8937",
+      "original_sha256": "c59fec315058b2cc03394d02d9c3756350357f7eb8cb48a541e56aae1b7939a2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/quick_ev.h",
+      "current_line": 51,
+      "original_line": 56,
+      "historical_start": 43,
+      "historical_body_sha256": "e3c2505cf26c473d22527e1d766ad5ee87a7bb555990b61d7ff1ca16b0ca5f3b",
+      "original_sha256": "c59fec315058b2cc03394d02d9c3756350357f7eb8cb48a541e56aae1b7939a2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_line": 148,
+      "original_line": 148,
+      "historical_start": 148,
+      "historical_body_sha256": "bf91841274785bb6a37dc35237cdd98856cf7c2f3d7e55685edc4b850cb3aded",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_line": 174,
+      "original_line": 176,
+      "historical_start": 176,
+      "historical_body_sha256": "3d7c0f050a81524627ff013f2c14d602816bf0964d82c993a1d87dd39dda6baa",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_line": 338,
+      "original_line": 371,
+      "historical_start": 367,
+      "historical_body_sha256": "85470d667c6016ccf28c074544b3d65edf17fb552c8d3ce92d52e7ea5e0b8255",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_line": 428,
+      "original_line": 482,
+      "historical_start": 478,
+      "historical_body_sha256": "331dbfd057e8e9dfd4d8031c67cfee37838344d4bc070792cad9b3af735f0cdc",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_line": 2139,
+      "original_line": 2728,
+      "historical_start": 2624,
+      "historical_body_sha256": "956129293d19217fea0bcdfa61d0cf863ccfbdc21cbdbf2ad2d8aef893c7c75d",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_line": 2179,
+      "original_line": 2806,
+      "historical_start": 2702,
+      "historical_body_sha256": "8eb1aa65af6d50e42a153da20609d50ca8022ff58019c5b53eff8002a9e4173b",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
+    }
+  ]
+}
