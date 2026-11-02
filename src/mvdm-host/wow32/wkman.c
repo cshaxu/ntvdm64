@@ -4395,7 +4395,7 @@ ULONG FASTCALL WK32FatalExit(PVDMFRAME pFrame)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 4538
+#line 4479
 
 
 //

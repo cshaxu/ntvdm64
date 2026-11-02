@@ -687,7 +687,7 @@
     "removed_body_lines": 1,
     "subsumed_markers": {},
     "selected_alternative_line": null,
-    "following_line": 335,
+    "following_line": 308,
     "preceding_anchor": [
       "NP(selector, FAULT_LOADDS_NOTPRESENT);",
       "if ( GET_AR_P(entry.AR) == NOT_PRESENT )",
@@ -703,7 +703,9 @@
     "current_start_line": 334,
     "current_cut_line": 336,
     "current_end_line": 336,
-    "after_sha256": "9a6086f543b768b7d5531a43ed10e09e7abec9ac66dcbc7cbe7029a918aacdd8"
+    "after_sha256": "9a6086f543b768b7d5531a43ed10e09e7abec9ac66dcbc7cbe7029a918aacdd8",
+    "prior_following_line": 335,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-unconditional-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",

@@ -981,7 +981,7 @@
     "removed_body_lines": 23,
     "subsumed_markers": {},
     "selected_alternative_line": 607,
-    "following_line": 610,
+    "following_line": 585,
     "preceding_anchor": [
       "PBLKHEADER pbh = (PBLKHEADER)lpv - 1;",
       "if (IsCacheBlock(pc, lpv)) {",
@@ -997,7 +997,9 @@
     "current_start_line": 578,
     "current_cut_line": 580,
     "current_end_line": 584,
-    "after_sha256": "35c648e16f616f91c0083bd5da217ff2b5a3dd0885bcffdff1a276bbc9f85063"
+    "after_sha256": "35c648e16f616f91c0083bd5da217ff2b5a3dd0885bcffdff1a276bbc9f85063",
+    "prior_following_line": 610,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-unconditional-batch.json"
   },
   {
     "path": "src/mvdm-host/wow32/wres16.c",
@@ -1117,7 +1119,7 @@
     "removed_body_lines": 10,
     "subsumed_markers": {},
     "selected_alternative_line": null,
-    "following_line": 1304,
+    "following_line": 1227,
     "preceding_anchor": [
       "CFOLELinkSrcDescriptor = RegisterClipboardFormat (\"Link Source Descriptor\");",
       "CFOLEObjectDescriptor = RegisterClipboardFormat (\"Object Descriptor\");",
@@ -1133,7 +1135,9 @@
     "current_start_line": 1292,
     "current_cut_line": 1294,
     "current_end_line": 1294,
-    "after_sha256": "53cd661fdce36b3eba38e51a6142512c9236233d185059067028e538e5c12313"
+    "after_sha256": "53cd661fdce36b3eba38e51a6142512c9236233d185059067028e538e5c12313",
+    "prior_following_line": 1304,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-unconditional-batch.json"
   },
   {
     "path": "src/mvdm-host/wow32/wucomm.c",

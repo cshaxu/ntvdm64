@@ -1,5 +1,16 @@
 # mvdm
 
+MVDM-HOST-DIV-626: correct six original diagnostic continuation mappings in
+unconditional first-depth-or-outer source spans. Their unchanged source
+anchors and actual worker/WOW preprocessing controls are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-line-unconditional-batch.json`.
+
+MVDM-HOST-DIV-625: correct the selected `GetVDMSize` continuation in
+`host/src/config.c` to its pinned OpenNT diagnostic line 510. This supersedes
+the earlier DIV-569 existing-line mapping; the profile selector and selected
+calculation are unchanged. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-config-original-line.json`.
+
 MVDM-HOST-DIV-624: restore the original `i386` outer selectors in `inc/mvdm.h`
 and `inc/suballoc.h`, retaining the existing MSVC `_M_IX86` compatibility
 selection in their outer alternatives and preserving original continuation

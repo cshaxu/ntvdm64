@@ -1,0 +1,3364 @@
+{
+  "scope": "depth-zero unconditional source spans; unique baseline anchors; actual graph preprocessing controls; no branch classification",
+  "plans": [
+    {
+      "lead": {
+        "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+        "line_directive": 803,
+        "depth": 0,
+        "current_target": 1007,
+        "anchor_current_line": 817,
+        "anchor_original_line": 1109,
+        "anchor": "GLOBAL void reset_bios_flags IFN0()",
+        "observed_anchor_logical_line": 1020,
+        "candidate_original_target": 1096,
+        "matches": false,
+        "current_sha256": "0a758c8287148763f594b2ceb983d3217585e77a878eccf9baebe5dc731d4da5",
+        "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+        "matching_code_lines_before_next_directive": 12,
+        "matched_lines": [
+          {
+            "current": 807,
+            "original": 1099
+          },
+          {
+            "current": 808,
+            "original": 1100
+          },
+          {
+            "current": 809,
+            "original": 1101
+          },
+          {
+            "current": 810,
+            "original": 1102
+          },
+          {
+            "current": 811,
+            "original": 1103
+          },
+          {
+            "current": 814,
+            "original": 1106
+          },
+          {
+            "current": 817,
+            "original": 1109
+          },
+          {
+            "current": 819,
+            "original": 1111
+          },
+          {
+            "current": 820,
+            "original": 1112
+          },
+          {
+            "current": 821,
+            "original": 1113
+          },
+          {
+            "current": 822,
+            "original": 1114
+          },
+          {
+            "current": 825,
+            "original": 1117
+          }
+        ],
+        "span_end_current_line": 827,
+        "span_unique_anchors": 12,
+        "span_anchors": [
+          {
+            "current": 807,
+            "original": 1099,
+            "logical_candidate": 1099,
+            "anchor": "================================ reset_bios_flags ============================="
+          },
+          {
+            "current": 808,
+            "original": 1100,
+            "logical_candidate": 1100,
+            "anchor": "PURPOSE: To ensure that we reset \"cleanly\""
+          },
+          {
+            "current": 809,
+            "original": 1101,
+            "logical_candidate": 1101,
+            "anchor": "-- clear out the keyboard flags and the CMOS shutdown byte."
+          },
+          {
+            "current": 810,
+            "original": 1102,
+            "logical_candidate": 1102,
+            "anchor": "This fixes things like Lotus 123r31 giving an \"Involuntary"
+          },
+          {
+            "current": 811,
+            "original": 1103,
+            "logical_candidate": 1103,
+            "anchor": "return to real mode\" error when rebooting via the user interface."
+          },
+          {
+            "current": 814,
+            "original": 1106,
+            "logical_candidate": 1106,
+            "anchor": "==============================================================================="
+          },
+          {
+            "current": 817,
+            "original": 1109,
+            "logical_candidate": 1109,
+            "anchor": "GLOBAL void reset_bios_flags IFN0()"
+          },
+          {
+            "current": 819,
+            "original": 1111,
+            "logical_candidate": 1111,
+            "anchor": "sas_PW16(RESET_FLAG, SOFT_FLAG);"
+          },
+          {
+            "current": 820,
+            "original": 1112,
+            "logical_candidate": 1112,
+            "anchor": "sas_PW8 (kb_flag, 0);"
+          },
+          {
+            "current": 821,
+            "original": 1113,
+            "logical_candidate": 1113,
+            "anchor": "sas_PW8 (kb_flag_1, 0);"
+          },
+          {
+            "current": 822,
+            "original": 1114,
+            "logical_candidate": 1114,
+            "anchor": "sas_PW8 (alt_input, 0);"
+          },
+          {
+            "current": 825,
+            "original": 1117,
+            "logical_candidate": 1117,
+            "anchor": "cmos_clear_shutdown_byte();"
+          }
+        ]
+      },
+      "before_sha256": "0a758c8287148763f594b2ceb983d3217585e77a878eccf9baebe5dc731d4da5",
+      "candidate_sha256": "ee493343646468729cb84ebd21c8925683e486d14c30f2bd2386fe0cc4c63074"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+        "line_directive": 337,
+        "depth": 0,
+        "current_target": 335,
+        "anchor_current_line": 338,
+        "anchor_original_line": 308,
+        "anchor": "spr_write_byte(descr_addr+5, (IU8)entry.AR | ACCESSED);",
+        "observed_anchor_logical_line": 335,
+        "candidate_original_target": 308,
+        "matches": false,
+        "current_sha256": "9a6086f543b768b7d5531a43ed10e09e7abec9ac66dcbc7cbe7029a918aacdd8",
+        "original_sha256": "6e5f4607f259d50abe7ad27741e48d6110737097da88ea46627fa275903135c9",
+        "matching_code_lines_before_next_directive": 33,
+        "matched_lines": [
+          {
+            "current": 338,
+            "original": 308
+          },
+          {
+            "current": 339,
+            "original": 309
+          },
+          {
+            "current": 344,
+            "original": 314
+          },
+          {
+            "current": 347,
+            "original": 317
+          },
+          {
+            "current": 348,
+            "original": 318
+          },
+          {
+            "current": 350,
+            "original": 320
+          },
+          {
+            "current": 352,
+            "original": 322
+          },
+          {
+            "current": 354,
+            "original": 324
+          },
+          {
+            "current": 355,
+            "original": 325
+          },
+          {
+            "current": 356,
+            "original": 326
+          },
+          {
+            "current": 360,
+            "original": 330
+          },
+          {
+            "current": 361,
+            "original": 331
+          },
+          {
+            "current": 362,
+            "original": 332
+          },
+          {
+            "current": 365,
+            "original": 335
+          },
+          {
+            "current": 367,
+            "original": 337
+          },
+          {
+            "current": 375,
+            "original": 345
+          },
+          {
+            "current": 376,
+            "original": 346
+          },
+          {
+            "current": 379,
+            "original": 349
+          },
+          {
+            "current": 384,
+            "original": 354
+          },
+          {
+            "current": 385,
+            "original": 355
+          },
+          {
+            "current": 386,
+            "original": 356
+          },
+          {
+            "current": 387,
+            "original": 357
+          },
+          {
+            "current": 388,
+            "original": 358
+          },
+          {
+            "current": 389,
+            "original": 359
+          },
+          {
+            "current": 391,
+            "original": 361
+          },
+          {
+            "current": 392,
+            "original": 362
+          },
+          {
+            "current": 394,
+            "original": 364
+          },
+          {
+            "current": 402,
+            "original": 372
+          },
+          {
+            "current": 403,
+            "original": 373
+          },
+          {
+            "current": 406,
+            "original": 376
+          },
+          {
+            "current": 411,
+            "original": 381
+          },
+          {
+            "current": 412,
+            "original": 382
+          },
+          {
+            "current": 414,
+            "original": 384
+          }
+        ],
+        "span_end_current_line": 427,
+        "span_unique_anchors": 25,
+        "span_anchors": [
+          {
+            "current": 338,
+            "original": 308,
+            "logical_candidate": 308,
+            "anchor": "spr_write_byte(descr_addr+5, (IU8)entry.AR | ACCESSED);"
+          },
+          {
+            "current": 339,
+            "original": 309,
+            "logical_candidate": 309,
+            "anchor": "entry.AR |= ACCESSED;"
+          },
+          {
+            "current": 347,
+            "original": 317,
+            "logical_candidate": 317,
+            "anchor": "SET_SR_BASE(indx, entry.base);"
+          },
+          {
+            "current": 348,
+            "original": 318,
+            "logical_candidate": 318,
+            "anchor": "SET_SR_LIMIT(indx, entry.limit);"
+          },
+          {
+            "current": 350,
+            "original": 320,
+            "logical_candidate": 320,
+            "anchor": "SET_SR_AR_DPL(indx, GET_AR_DPL(entry.AR));"
+          },
+          {
+            "current": 354,
+            "original": 324,
+            "logical_candidate": 324,
+            "anchor": "SET_SR_AR_W(indx, GET_AR_W(entry.AR));"
+          },
+          {
+            "current": 355,
+            "original": 325,
+            "logical_candidate": 325,
+            "anchor": "SET_SR_AR_E(indx, GET_AR_E(entry.AR));"
+          },
+          {
+            "current": 356,
+            "original": 326,
+            "logical_candidate": 326,
+            "anchor": "SET_SR_AR_C(indx, 0);   /* not conforming */"
+          },
+          {
+            "current": 360,
+            "original": 330,
+            "logical_candidate": 330,
+            "anchor": "SET_SR_AR_C(indx, GET_AR_C(entry.AR));"
+          },
+          {
+            "current": 361,
+            "original": 331,
+            "logical_candidate": 331,
+            "anchor": "SET_SR_AR_W(indx, 0);   /* deny write access */"
+          },
+          {
+            "current": 362,
+            "original": 332,
+            "logical_candidate": 332,
+            "anchor": "SET_SR_AR_E(indx, 0);   /* expand up */"
+          },
+          {
+            "current": 365,
+            "original": 335,
+            "logical_candidate": 335,
+            "anchor": "SET_SR_AR_X(indx, GET_AR_X(entry.AR));"
+          },
+          {
+            "current": 367,
+            "original": 337,
+            "logical_candidate": 337,
+            "anchor": "SET_SR_AR_R(indx, 1);   /* must be readable */"
+          },
+          {
+            "current": 379,
+            "original": 349,
+            "logical_candidate": 349,
+            "anchor": "ISM32, index\t/* index to segment register */"
+          },
+          {
+            "current": 384,
+            "original": 354,
+            "logical_candidate": 354,
+            "anchor": "SET_SR_LIMIT(index, 0xffff);"
+          },
+          {
+            "current": 385,
+            "original": 355,
+            "logical_candidate": 355,
+            "anchor": "SET_SR_AR_W(index, 1);     /* allow write access */"
+          },
+          {
+            "current": 386,
+            "original": 356,
+            "logical_candidate": 356,
+            "anchor": "SET_SR_AR_R(index, 1);     /* allow read access */"
+          },
+          {
+            "current": 387,
+            "original": 357,
+            "logical_candidate": 357,
+            "anchor": "SET_SR_AR_E(index, 0);     /* expand up */"
+          },
+          {
+            "current": 388,
+            "original": 358,
+            "logical_candidate": 358,
+            "anchor": "SET_SR_AR_C(index, 0);     /* not conforming */"
+          },
+          {
+            "current": 389,
+            "original": 359,
+            "logical_candidate": 359,
+            "anchor": "SET_SR_AR_X(index, 0);     /* not big (16-bit) */"
+          },
+          {
+            "current": 392,
+            "original": 362,
+            "logical_candidate": 362,
+            "anchor": "SET_SR_AR_DPL(index, 3);"
+          },
+          {
+            "current": 394,
+            "original": 364,
+            "logical_candidate": 364,
+            "anchor": "SET_SR_AR_DPL(index, 0);"
+          },
+          {
+            "current": 418,
+            "original": 388,
+            "logical_candidate": 388,
+            "anchor": "SET_SS_BASE((IU32)selector << 4);"
+          },
+          {
+            "current": 423,
+            "original": 393,
+            "logical_candidate": 393,
+            "anchor": "check_SS(selector, (ISM32)GET_CPL(), &descr_addr, &entry);"
+          },
+          {
+            "current": 424,
+            "original": 394,
+            "logical_candidate": 394,
+            "anchor": "load_SS_cache(selector, descr_addr, &entry);"
+          }
+        ]
+      },
+      "before_sha256": "9a6086f543b768b7d5531a43ed10e09e7abec9ac66dcbc7cbe7029a918aacdd8",
+      "candidate_sha256": "73b84ca8e3350b24a9d36797d5cb50234740bbc72c2219702d3660b9dec46b7b"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+        "line_directive": 466,
+        "depth": 0,
+        "current_target": 467,
+        "anchor_current_line": 470,
+        "anchor_original_line": 476,
+        "anchor": "*equip |= TWO_DRIVES;",
+        "observed_anchor_logical_line": 470,
+        "candidate_original_target": 473,
+        "matches": false,
+        "current_sha256": "b8c38a65b56156b8a4faef61adf2ac123f82ee80f745f82793e45692f71b0092",
+        "original_sha256": "00156a734520b5d59442bf9d6127f4e722a7a697f9be33f34feecf4aef06d850",
+        "matching_code_lines_before_next_directive": 24,
+        "matched_lines": [
+          {
+            "current": 469,
+            "original": 475
+          },
+          {
+            "current": 471,
+            "original": 477
+          },
+          {
+            "current": 474,
+            "original": 480
+          },
+          {
+            "current": 475,
+            "original": 481
+          },
+          {
+            "current": 484,
+            "original": 490
+          },
+          {
+            "current": 489,
+            "original": 495
+          },
+          {
+            "current": 495,
+            "original": 501
+          },
+          {
+            "current": 497,
+            "original": 503
+          },
+          {
+            "current": 499,
+            "original": 505
+          },
+          {
+            "current": 501,
+            "original": 507
+          },
+          {
+            "current": 503,
+            "original": 509
+          },
+          {
+            "current": 504,
+            "original": 510
+          },
+          {
+            "current": 511,
+            "original": 517
+          },
+          {
+            "current": 512,
+            "original": 518
+          },
+          {
+            "current": 513,
+            "original": 519
+          },
+          {
+            "current": 514,
+            "original": 520
+          },
+          {
+            "current": 517,
+            "original": 523
+          },
+          {
+            "current": 523,
+            "original": 529
+          },
+          {
+            "current": 531,
+            "original": 537
+          },
+          {
+            "current": 532,
+            "original": 538
+          },
+          {
+            "current": 533,
+            "original": 539
+          },
+          {
+            "current": 534,
+            "original": 540
+          },
+          {
+            "current": 540,
+            "original": 546
+          },
+          {
+            "current": 544,
+            "original": 550
+          }
+        ],
+        "span_end_current_line": 1207,
+        "span_unique_anchors": 174,
+        "span_anchors": [
+          {
+            "current": 474,
+            "original": 480,
+            "logical_candidate": 480,
+            "anchor": "equip_err = (*equip ^ cmos[CMOS_EQUIP]);"
+          },
+          {
+            "current": 484,
+            "original": 490,
+            "logical_candidate": 490,
+            "anchor": "GLOBAL void cmos_inb IFN2(io_addr, port, half_word *, value)"
+          },
+          {
+            "current": 497,
+            "original": 503,
+            "logical_candidate": 503,
+            "anchor": "if (port == CMOS_DATA)"
+          },
+          {
+            "current": 503,
+            "original": 509,
+            "logical_candidate": 509,
+            "anchor": "switch (cmos_index) {"
+          },
+          {
+            "current": 511,
+            "original": 517,
+            "logical_candidate": 517,
+            "anchor": "if (RtcUpdateCycle > 0 && !--RtcUpdateCycle) {"
+          },
+          {
+            "current": 517,
+            "original": 523,
+            "logical_candidate": 523,
+            "anchor": "cmos[CMOS_REG_C] |= C_UF;"
+          },
+          {
+            "current": 531,
+            "original": 537,
+            "logical_candidate": 537,
+            "anchor": "cmos[CMOS_REG_C] = C_CLEAR;"
+          },
+          {
+            "current": 532,
+            "original": 538,
+            "logical_candidate": 538,
+            "anchor": "if (!(cmos[CMOS_REG_B] & PIE) && rtc_period_mSeconds) {"
+          },
+          {
+            "current": 533,
+            "original": 539,
+            "logical_candidate": 539,
+            "anchor": "if (!(*value & C_PF) || (TogglePfCount & 0x8)) {"
+          },
+          {
+            "current": 534,
+            "original": 540,
+            "logical_candidate": 540,
+            "anchor": "cmos[CMOS_REG_C]  |= C_PF;"
+          },
+          {
+            "current": 582,
+            "original": 588,
+            "logical_candidate": 588,
+            "anchor": "note_trace2(CMOS_VERBOSE, \"cmos_inb() - port %x, returning val %x\","
+          },
+          {
+            "current": 587,
+            "original": 593,
+            "logical_candidate": 593,
+            "anchor": "GLOBAL void cmos_outb IFN2(io_addr, port, half_word, value)"
+          },
+          {
+            "current": 589,
+            "original": 595,
+            "logical_candidate": 595,
+            "anchor": "static IU32 pirUsec[] = {"
+          },
+          {
+            "current": 618,
+            "original": 624,
+            "logical_candidate": 624,
+            "anchor": "note_trace2(CMOS_VERBOSE, \"cmos_outb() - port %x, val %x\", port, value);"
+          },
+          {
+            "current": 625,
+            "original": 631,
+            "logical_candidate": 631,
+            "anchor": "if (port == CMOS_PORT)"
+          },
+          {
+            "current": 627,
+            "original": 633,
+            "logical_candidate": 633,
+            "anchor": "cmos_register = &cmos[cmos_index = (value & CMOS_ADDR_MASK)];"
+          },
+          {
+            "current": 629,
+            "original": 635,
+            "logical_candidate": 635,
+            "anchor": "} else if (port == CMOS_DATA)"
+          },
+          {
+            "current": 644,
+            "original": 650,
+            "logical_candidate": 650,
+            "anchor": "bin2bcd = no_bin2bcd;"
+          },
+          {
+            "current": 645,
+            "original": 651,
+            "logical_candidate": 651,
+            "anchor": "bcd2bin = no_bcd2bin;"
+          },
+          {
+            "current": 646,
+            "original": 652,
+            "logical_candidate": 652,
+            "anchor": "data_mode_yes = FALSE;"
+          },
+          {
+            "current": 659,
+            "original": 665,
+            "logical_candidate": 665,
+            "anchor": "if (!twenty4_hour_clock)"
+          },
+          {
+            "current": 667,
+            "original": 673,
+            "logical_candidate": 673,
+            "anchor": "if (twenty4_hour_clock)"
+          },
+          {
+            "current": 669,
+            "original": 675,
+            "logical_candidate": 675,
+            "anchor": "_24to12 = yes_24to12;"
+          },
+          {
+            "current": 670,
+            "original": 676,
+            "logical_candidate": 676,
+            "anchor": "_12to24 = yes_12to24;"
+          },
+          {
+            "current": 671,
+            "original": 677,
+            "logical_candidate": 677,
+            "anchor": "twenty4_hour_clock = FALSE;"
+          },
+          {
+            "current": 680,
+            "original": 686,
+            "logical_candidate": 686,
+            "anchor": "if (*cmos_register != value) {"
+          },
+          {
+            "current": 682,
+            "original": 688,
+            "logical_candidate": 688,
+            "anchor": "unsigned char ChangedBits;"
+          },
+          {
+            "current": 684,
+            "original": 690,
+            "logical_candidate": 690,
+            "anchor": "ChangedBits = *cmos_register ^ value;"
+          },
+          {
+            "current": 687,
+            "original": 693,
+            "logical_candidate": 693,
+            "anchor": "if (ChangedBits & PIE) {"
+          },
+          {
+            "current": 688,
+            "original": 694,
+            "logical_candidate": 694,
+            "anchor": "if ((value & PIE) && rtc_period_mSeconds) {"
+          },
+          {
+            "current": 689,
+            "original": 695,
+            "logical_candidate": 695,
+            "anchor": "QueueRtcInterrupt(C_PF, FALSE);"
+          },
+          {
+            "current": 693,
+            "original": 699,
+            "logical_candidate": 699,
+            "anchor": "if (ChangedBits & (AIE | SET)) {"
+          },
+          {
+            "current": 694,
+            "original": 700,
+            "logical_candidate": 700,
+            "anchor": "if (ChangedBits & SET) {"
+          },
+          {
+            "current": 709,
+            "original": 715,
+            "logical_candidate": 715,
+            "anchor": "rtc_period_mSeconds = pirUsec[*cmos_register & (RS3 | RS2 | RS1 | RS0)];"
+          },
+          {
+            "current": 711,
+            "original": 717,
+            "logical_candidate": 717,
+            "anchor": "if ((*cmos_register & 0x70) != 0x20)"
+          },
+          {
+            "current": 714,
+            "original": 720,
+            "logical_candidate": 720,
+            "anchor": "note_trace1(CMOS_VERBOSE,"
+          },
+          {
+            "current": 715,
+            "original": 721,
+            "logical_candidate": 721,
+            "anchor": "\"Cmos unsuported divider rate 0x%02x ignored\","
+          },
+          {
+            "current": 723,
+            "original": 729,
+            "logical_candidate": 729,
+            "anchor": "ht->Second = (*bcd2bin)(value);"
+          },
+          {
+            "current": 727,
+            "original": 733,
+            "logical_candidate": 733,
+            "anchor": "ht->Minute = (*bcd2bin)(value);"
+          },
+          {
+            "current": 731,
+            "original": 737,
+            "logical_candidate": 737,
+            "anchor": "ht->Hour = (*_12to24)((*bcd2bin)(value));"
+          },
+          {
+            "current": 736,
+            "original": 742,
+            "logical_candidate": 742,
+            "anchor": "ht->WeekDay  = (*bcd2bin)(value) - 1;"
+          },
+          {
+            "current": 740,
+            "original": 746,
+            "logical_candidate": 746,
+            "anchor": "ht->Day = (*bcd2bin)(value);"
+          },
+          {
+            "current": 745,
+            "original": 751,
+            "logical_candidate": 751,
+            "anchor": "ht->Month = (*bcd2bin)(value);"
+          },
+          {
+            "current": 749,
+            "original": 755,
+            "logical_candidate": 755,
+            "anchor": "ht->Year -=  ht->Year % 100;"
+          },
+          {
+            "current": 750,
+            "original": 756,
+            "logical_candidate": 756,
+            "anchor": "ht->Year += (*bcd2bin)(value);"
+          },
+          {
+            "current": 755,
+            "original": 761,
+            "logical_candidate": 761,
+            "anchor": "ht->Year  += (*bcd2bin)(value) * 100;"
+          },
+          {
+            "current": 768,
+            "original": 774,
+            "logical_candidate": 774,
+            "anchor": "if (cmos_index <= CMOS_HR_ALARM) {"
+          },
+          {
+            "current": 774,
+            "original": 780,
+            "logical_candidate": 780,
+            "anchor": "note_trace2(CMOS_VERBOSE,"
+          },
+          {
+            "current": 775,
+            "original": 781,
+            "logical_candidate": 781,
+            "anchor": "\"cmos_outb() - Value %x to unsupported port %x\", value, port);"
+          },
+          {
+            "current": 785,
+            "original": 791,
+            "logical_candidate": 791,
+            "anchor": "GLOBAL void  cmos_equip_update IFN0()"
+          },
+          {
+            "current": 787,
+            "original": 793,
+            "logical_candidate": 793,
+            "anchor": "half_word       equip;"
+          },
+          {
+            "current": 791,
+            "original": 797,
+            "logical_candidate": 797,
+            "anchor": "if (verify_equip_byte(&equip))"
+          },
+          {
+            "current": 793,
+            "original": 799,
+            "logical_candidate": 799,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"updating the equip byte silently\");"
+          },
+          {
+            "current": 808,
+            "original": 814,
+            "logical_candidate": 814,
+            "anchor": "GLOBAL int cmos_write_byte IFN2(int, cmos_byte, half_word, new_value)"
+          },
+          {
+            "current": 813,
+            "original": 819,
+            "logical_candidate": 819,
+            "anchor": "note_trace2(CMOS_VERBOSE, \"cmos_write_byte() byte=%x value=%x\","
+          },
+          {
+            "current": 817,
+            "original": 823,
+            "logical_candidate": 823,
+            "anchor": "cmos[cmos_byte] = new_value;"
+          },
+          {
+            "current": 824,
+            "original": 830,
+            "logical_candidate": 830,
+            "anchor": "always_trace2(\"ERROR: cmos write request: byte=%x value=%x\","
+          },
+          {
+            "current": 836,
+            "original": 842,
+            "logical_candidate": 842,
+            "anchor": "GLOBAL int cmos_read_byte IFN2(int, cmos_byte, half_word *, value)"
+          },
+          {
+            "current": 845,
+            "original": 851,
+            "logical_candidate": 851,
+            "anchor": "note_trace2(CMOS_VERBOSE, \"cmos_read_byte() byte=%x value=%x\","
+          },
+          {
+            "current": 850,
+            "original": 856,
+            "logical_candidate": 856,
+            "anchor": "always_trace1(\"ERROR: cmos read request: byte=%x\", cmos_byte);"
+          },
+          {
+            "current": 857,
+            "original": 863,
+            "logical_candidate": 863,
+            "anchor": "void cmos_error IFN6(int, err, half_word, diag, half_word, equip,"
+          },
+          {
+            "current": 858,
+            "original": 864,
+            "logical_candidate": 864,
+            "anchor": "int, equip_err, half_word, floppy, half_word, disk)"
+          },
+          {
+            "current": 860,
+            "original": 866,
+            "logical_candidate": 866,
+            "anchor": "char            err_string[256];"
+          },
+          {
+            "current": 864,
+            "original": 870,
+            "logical_candidate": 870,
+            "anchor": "strcpy(err_string, \"shut \");"
+          },
+          {
+            "current": 865,
+            "original": 871,
+            "logical_candidate": 871,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"eek! someone's furtling with the shutdown byte\");"
+          },
+          {
+            "current": 867,
+            "original": 873,
+            "logical_candidate": 873,
+            "anchor": "strcpy(err_string, \"\");"
+          },
+          {
+            "current": 871,
+            "original": 877,
+            "logical_candidate": 877,
+            "anchor": "strcat(err_string, \"power \");"
+          },
+          {
+            "current": 872,
+            "original": 878,
+            "logical_candidate": 878,
+            "anchor": "note_trace0(CMOS_VERBOSE, \" The battery is dead - this shouldn't happen!\");"
+          },
+          {
+            "current": 876,
+            "original": 882,
+            "logical_candidate": 882,
+            "anchor": "strcat(err_string, \"diag \");"
+          },
+          {
+            "current": 878,
+            "original": 884,
+            "logical_candidate": 884,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"bad battery\");"
+          },
+          {
+            "current": 879,
+            "original": 885,
+            "logical_candidate": 885,
+            "anchor": "if (diag & BAD_CONFIG)"
+          },
+          {
+            "current": 880,
+            "original": 886,
+            "logical_candidate": 886,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"bad config\");"
+          },
+          {
+            "current": 881,
+            "original": 887,
+            "logical_candidate": 887,
+            "anchor": "if (diag & BAD_CKSUM)"
+          },
+          {
+            "current": 882,
+            "original": 888,
+            "logical_candidate": 888,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"bad chksum\");"
+          },
+          {
+            "current": 883,
+            "original": 889,
+            "logical_candidate": 889,
+            "anchor": "if (diag & W_MEM_SIZE)"
+          },
+          {
+            "current": 884,
+            "original": 890,
+            "logical_candidate": 890,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"memory size != configuration\");"
+          },
+          {
+            "current": 886,
+            "original": 892,
+            "logical_candidate": 892,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"fixed disk failure on init\");"
+          },
+          {
+            "current": 887,
+            "original": 893,
+            "logical_candidate": 893,
+            "anchor": "if (diag & CMOS_CLK_FAIL)"
+          },
+          {
+            "current": 888,
+            "original": 894,
+            "logical_candidate": 894,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"cmos clock not updating or invalid\");"
+          },
+          {
+            "current": 892,
+            "original": 898,
+            "logical_candidate": 898,
+            "anchor": "strcat(err_string, \"equip \");"
+          },
+          {
+            "current": 896,
+            "original": 902,
+            "logical_candidate": 902,
+            "anchor": "if (equip_err & DRIVE_INFO)"
+          },
+          {
+            "current": 897,
+            "original": 903,
+            "logical_candidate": 903,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"incorrect diskette - resetting\");"
+          },
+          {
+            "current": 898,
+            "original": 904,
+            "logical_candidate": 904,
+            "anchor": "if (equip_err & DISPLAY_INFO)"
+          },
+          {
+            "current": 899,
+            "original": 905,
+            "logical_candidate": 905,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"incorrect display - resetting\");"
+          },
+          {
+            "current": 900,
+            "original": 906,
+            "logical_candidate": 906,
+            "anchor": "if (equip_err & NPX_INFO)"
+          },
+          {
+            "current": 901,
+            "original": 907,
+            "logical_candidate": 907,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"incorrect npx - resetting CMOS\");"
+          },
+          {
+            "current": 902,
+            "original": 908,
+            "logical_candidate": 908,
+            "anchor": "if (equip_err & RESVD_INFO)"
+          },
+          {
+            "current": 903,
+            "original": 909,
+            "logical_candidate": 909,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"incorrect reserved bytes - resetting\");"
+          },
+          {
+            "current": 908,
+            "original": 914,
+            "logical_candidate": 914,
+            "anchor": "strcat(err_string, \"flop \");"
+          },
+          {
+            "current": 909,
+            "original": 915,
+            "logical_candidate": 915,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"incorrect diskette type - resetting\");"
+          },
+          {
+            "current": 913,
+            "original": 919,
+            "logical_candidate": 919,
+            "anchor": "strcat(err_string, \"disk \");"
+          },
+          {
+            "current": 914,
+            "original": 920,
+            "logical_candidate": 920,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"incorrect disk type - resetting\");"
+          },
+          {
+            "current": 918,
+            "original": 924,
+            "logical_candidate": 924,
+            "anchor": "strcat(err_string, \"bms \");"
+          },
+          {
+            "current": 919,
+            "original": 925,
+            "logical_candidate": 925,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"bad base memory - resetting\");"
+          },
+          {
+            "current": 923,
+            "original": 929,
+            "logical_candidate": 929,
+            "anchor": "strcat(err_string, \"extended memory \");"
+          },
+          {
+            "current": 924,
+            "original": 930,
+            "logical_candidate": 930,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"bad extended memory CMOS entry - resetting\");"
+          },
+          {
+            "current": 926,
+            "original": 932,
+            "logical_candidate": 932,
+            "anchor": "if (err & BAD_CHECKSUM)"
+          },
+          {
+            "current": 928,
+            "original": 934,
+            "logical_candidate": 934,
+            "anchor": "strcat(err_string, \"cksum \");"
+          },
+          {
+            "current": 929,
+            "original": 935,
+            "logical_candidate": 935,
+            "anchor": "note_trace0(CMOS_VERBOSE, \"bad Checksum - resetting\");"
+          },
+          {
+            "current": 933,
+            "original": 939,
+            "logical_candidate": 939,
+            "anchor": "cmos[CMOS_SHUT_DOWN] = SHUT_INIT;"
+          },
+          {
+            "current": 935,
+            "original": 941,
+            "logical_candidate": 941,
+            "anchor": "cmos[CMOS_REG_D] = REG_D_INIT;"
+          },
+          {
+            "current": 937,
+            "original": 943,
+            "logical_candidate": 943,
+            "anchor": "cmos[CMOS_DIAG] = DIAG_INIT;"
+          },
+          {
+            "current": 941,
+            "original": 947,
+            "logical_candidate": 947,
+            "anchor": "cmos[CMOS_DISKETTE] = floppy;"
+          },
+          {
+            "current": 943,
+            "original": 949,
+            "logical_candidate": 949,
+            "anchor": "cmos[CMOS_DISK] = disk;"
+          },
+          {
+            "current": 946,
+            "original": 952,
+            "logical_candidate": 952,
+            "anchor": "cmos[CMOS_B_M_S_LO] = BM_LO_INIT;"
+          },
+          {
+            "current": 947,
+            "original": 953,
+            "logical_candidate": 953,
+            "anchor": "cmos[CMOS_B_M_S_HI] = BM_HI_INIT;"
+          },
+          {
+            "current": 951,
+            "original": 957,
+            "logical_candidate": 957,
+            "anchor": "cmos[CMOS_E_M_S_LO] = (half_word)((sys_addr) (sas_memory_size() - PC_MEM_SIZE) >> 10);"
+          },
+          {
+            "current": 952,
+            "original": 958,
+            "logical_candidate": 958,
+            "anchor": "cmos[CMOS_E_M_S_HI] = (half_word)((sys_addr) (sas_memory_size() - PC_MEM_SIZE) >> 18);"
+          },
+          {
+            "current": 967,
+            "original": 973,
+            "logical_candidate": 973,
+            "anchor": "GLOBAL void rtc_init(void)"
+          },
+          {
+            "current": 973,
+            "original": 979,
+            "logical_candidate": 979,
+            "anchor": "RtcEoiPending  = FALSE;"
+          },
+          {
+            "current": 976,
+            "original": 982,
+            "logical_candidate": 982,
+            "anchor": "ht->Second    = st.wSecond;"
+          },
+          {
+            "current": 977,
+            "original": 983,
+            "logical_candidate": 983,
+            "anchor": "ht->Minute    = st.wMinute;"
+          },
+          {
+            "current": 978,
+            "original": 984,
+            "logical_candidate": 984,
+            "anchor": "ht->Hour      = st.wHour;"
+          },
+          {
+            "current": 979,
+            "original": 985,
+            "logical_candidate": 985,
+            "anchor": "ht->Day       = st.wDay;"
+          },
+          {
+            "current": 980,
+            "original": 986,
+            "logical_candidate": 986,
+            "anchor": "ht->Month     = st.wMonth;"
+          },
+          {
+            "current": 981,
+            "original": 987,
+            "logical_candidate": 987,
+            "anchor": "ht->Year      = st.wYear;"
+          },
+          {
+            "current": 982,
+            "original": 988,
+            "logical_candidate": 988,
+            "anchor": "ht->WeekDay   = st.wDayOfWeek;"
+          },
+          {
+            "current": 984,
+            "original": 990,
+            "logical_candidate": 990,
+            "anchor": "host_GetSysTime(&RtcTickTime);"
+          },
+          {
+            "current": 1002,
+            "original": 1008,
+            "logical_candidate": 1008,
+            "anchor": "GLOBAL void RtcTick(struct host_timeval *time)"
+          },
+          {
+            "current": 1007,
+            "original": 1013,
+            "logical_candidate": 1013,
+            "anchor": "RtcTickTime = *time;"
+          },
+          {
+            "current": 1012,
+            "original": 1018,
+            "logical_candidate": 1018,
+            "anchor": "if (RtcAlarmTime && RtcAlarmTime <= RtcTickTime.tv_sec) {"
+          },
+          {
+            "current": 1013,
+            "original": 1019,
+            "logical_candidate": 1019,
+            "anchor": "RtcLastAlarm = RtcTickTime.tv_sec;"
+          },
+          {
+            "current": 1015,
+            "original": 1021,
+            "logical_candidate": 1021,
+            "anchor": "QueueRtcInterrupt(C_AF, FALSE);"
+          },
+          {
+            "current": 1024,
+            "original": 1030,
+            "logical_candidate": 1030,
+            "anchor": "if (RtcUpdateCycle >= 0) {"
+          },
+          {
+            "current": 1036,
+            "original": 1042,
+            "logical_candidate": 1042,
+            "anchor": "else if (cmos[CMOS_REG_B] & UIE) {"
+          },
+          {
+            "current": 1044,
+            "original": 1050,
+            "logical_candidate": 1050,
+            "anchor": "GLOBAL void cmos_init IFN0()"
+          },
+          {
+            "current": 1060,
+            "original": 1066,
+            "logical_candidate": 1066,
+            "anchor": "io_define_inb(CMOS_ADAPTOR, cmos_inb);"
+          },
+          {
+            "current": 1061,
+            "original": 1067,
+            "logical_candidate": 1067,
+            "anchor": "io_define_outb(CMOS_ADAPTOR, cmos_outb);"
+          },
+          {
+            "current": 1063,
+            "original": 1069,
+            "logical_candidate": 1069,
+            "anchor": "for (i = CMOS_PORT_START; i <= CMOS_PORT_END; i++)"
+          },
+          {
+            "current": 1064,
+            "original": 1070,
+            "logical_candidate": 1070,
+            "anchor": "io_connect_port(i, CMOS_ADAPTOR, IO_READ_WRITE);"
+          },
+          {
+            "current": 1067,
+            "original": 1073,
+            "logical_candidate": 1073,
+            "anchor": "RegisterEOIHook(8,   // ICA_SLAVE, CPU_RTC_INT"
+          },
+          {
+            "current": 1074,
+            "original": 1080,
+            "logical_candidate": 1080,
+            "anchor": "GLOBAL void cmos_pickup IFN0()"
+          },
+          {
+            "current": 1082,
+            "original": 1088,
+            "logical_candidate": 1088,
+            "anchor": "GLOBAL void cmos_post IFN0()"
+          },
+          {
+            "current": 1092,
+            "original": 1098,
+            "logical_candidate": 1098,
+            "anchor": "int             cmos_err, equip_err;"
+          },
+          {
+            "current": 1093,
+            "original": 1099,
+            "logical_candidate": 1099,
+            "anchor": "half_word       diag, equip, floppy, disk;"
+          },
+          {
+            "current": 1101,
+            "original": 1107,
+            "logical_candidate": 1107,
+            "anchor": "if (cmos[CMOS_SHUT_DOWN])"
+          },
+          {
+            "current": 1102,
+            "original": 1108,
+            "logical_candidate": 1108,
+            "anchor": "cmos_err |= BAD_SHUT_DOWN;"
+          },
+          {
+            "current": 1105,
+            "original": 1111,
+            "logical_candidate": 1111,
+            "anchor": "if (!(cmos[CMOS_REG_D] & VRT))"
+          },
+          {
+            "current": 1106,
+            "original": 1112,
+            "logical_candidate": 1112,
+            "anchor": "cmos_err |= BAD_REG_D;"
+          },
+          {
+            "current": 1109,
+            "original": 1115,
+            "logical_candidate": 1115,
+            "anchor": "if (diag = cmos[CMOS_DIAG])"
+          },
+          {
+            "current": 1110,
+            "original": 1116,
+            "logical_candidate": 1116,
+            "anchor": "cmos_err |= BAD_DIAG;"
+          },
+          {
+            "current": 1113,
+            "original": 1119,
+            "logical_candidate": 1119,
+            "anchor": "if (equip_err = verify_equip_byte(&equip))"
+          },
+          {
+            "current": 1114,
+            "original": 1120,
+            "logical_candidate": 1120,
+            "anchor": "cmos_err |= BAD_EQUIP;"
+          },
+          {
+            "current": 1117,
+            "original": 1123,
+            "logical_candidate": 1123,
+            "anchor": "floppy = gfi_drive_type(1) | (gfi_drive_type(0) << 4);"
+          },
+          {
+            "current": 1118,
+            "original": 1124,
+            "logical_candidate": 1124,
+            "anchor": "if (floppy != cmos[CMOS_DISKETTE])"
+          },
+          {
+            "current": 1119,
+            "original": 1125,
+            "logical_candidate": 1125,
+            "anchor": "cmos_err |= BAD_FLOPPY;"
+          },
+          {
+            "current": 1122,
+            "original": 1128,
+            "logical_candidate": 1128,
+            "anchor": "disk = 0x30;         /* Drive C type always 3 - then <<4 */"
+          },
+          {
+            "current": 1124,
+            "original": 1130,
+            "logical_candidate": 1130,
+            "anchor": "if ( *((CHAR *) config_inquire(C_HARD_DISK2_NAME, NULL)))"
+          },
+          {
+            "current": 1125,
+            "original": 1131,
+            "logical_candidate": 1131,
+            "anchor": "disk = 0x34;         /* 3 << 4 | 4 */"
+          },
+          {
+            "current": 1126,
+            "original": 1132,
+            "logical_candidate": 1132,
+            "anchor": "if (disk != cmos[CMOS_DISK])"
+          },
+          {
+            "current": 1127,
+            "original": 1133,
+            "logical_candidate": 1133,
+            "anchor": "cmos_err |= BAD_DISK;"
+          },
+          {
+            "current": 1130,
+            "original": 1136,
+            "logical_candidate": 1136,
+            "anchor": "if ((cmos[CMOS_B_M_S_LO] != BM_LO_INIT) || (cmos[CMOS_B_M_S_HI] != BM_HI_INIT))"
+          },
+          {
+            "current": 1131,
+            "original": 1137,
+            "logical_candidate": 1137,
+            "anchor": "cmos_err |= BAD_BMS;"
+          },
+          {
+            "current": 1134,
+            "original": 1140,
+            "logical_candidate": 1140,
+            "anchor": "if ((cmos[CMOS_E_M_S_LO] !="
+          },
+          {
+            "current": 1135,
+            "original": 1141,
+            "logical_candidate": 1141,
+            "anchor": "((sys_addr) (sas_memory_size() - PC_MEM_SIZE) >> 10) & 0xff) ||"
+          },
+          {
+            "current": 1136,
+            "original": 1142,
+            "logical_candidate": 1142,
+            "anchor": "(cmos[CMOS_E_M_S_HI] !="
+          },
+          {
+            "current": 1137,
+            "original": 1143,
+            "logical_candidate": 1143,
+            "anchor": "((sys_addr) (sas_memory_size() - PC_MEM_SIZE) >> 18) & 0xff))"
+          },
+          {
+            "current": 1138,
+            "original": 1144,
+            "logical_candidate": 1144,
+            "anchor": "cmos_err |= BAD_XMS;"
+          },
+          {
+            "current": 1151,
+            "original": 1157,
+            "logical_candidate": 1157,
+            "anchor": "if ((checksum & 0xff) != cmos[CMOS_CKSUM_LO])"
+          },
+          {
+            "current": 1155,
+            "original": 1161,
+            "logical_candidate": 1161,
+            "anchor": "if ((checksum >> 8) != cmos[CMOS_CKSUM_HI])"
+          },
+          {
+            "current": 1161,
+            "original": 1167,
+            "logical_candidate": 1167,
+            "anchor": "cmos_error(cmos_err, diag, equip, equip_err, floppy, disk);"
+          },
+          {
+            "current": 1163,
+            "original": 1169,
+            "logical_candidate": 1169,
+            "anchor": "cmos[CMOS_REG_A] = REG_A_INIT;"
+          },
+          {
+            "current": 1166,
+            "original": 1172,
+            "logical_candidate": 1172,
+            "anchor": "cmos[CMOS_U_M_S_LO] = (half_word)((sys_addr) (sas_memory_size() - PC_MEM_SIZE) >> 10);"
+          },
+          {
+            "current": 1167,
+            "original": 1173,
+            "logical_candidate": 1173,
+            "anchor": "cmos[CMOS_U_M_S_HI] = (half_word)((sys_addr) (sas_memory_size() - PC_MEM_SIZE) >> 18);"
+          },
+          {
+            "current": 1170,
+            "original": 1176,
+            "logical_candidate": 1176,
+            "anchor": "cmos_register = &cmos[cmos_index = CMOS_SHUT_DOWN];"
+          },
+          {
+            "current": 1179,
+            "original": 1185,
+            "logical_candidate": 1185,
+            "anchor": "GLOBAL void cmos_update IFN0()"
+          },
+          {
+            "current": 1187,
+            "original": 1193,
+            "logical_candidate": 1193,
+            "anchor": "========================= cmos_clear_shutdown_byte ============================"
+          },
+          {
+            "current": 1189,
+            "original": 1195,
+            "logical_candidate": 1195,
+            "anchor": "To clear the \"shutdown\" byte in the CMOS which indicates that the"
+          },
+          {
+            "current": 1190,
+            "original": 1196,
+            "logical_candidate": 1196,
+            "anchor": "next reset is not a \"soft\" one. (e.g. it is a CTRL-ALT-DEL or panel"
+          },
+          {
+            "current": 1191,
+            "original": 1197,
+            "logical_candidate": 1197,
+            "anchor": "reset). This routine is needed (rather than just doung cmos_outb()"
+          },
+          {
+            "current": 1192,
+            "original": 1198,
+            "logical_candidate": 1198,
+            "anchor": "since the processor might currently be in enhanced mode with io to CMOS"
+          },
+          {
+            "current": 1196,
+            "original": 1202,
+            "logical_candidate": 1202,
+            "anchor": "==============================================================================="
+          },
+          {
+            "current": 1199,
+            "original": 1205,
+            "logical_candidate": 1205,
+            "anchor": "GLOBAL void cmos_clear_shutdown_byte IFN0()"
+          },
+          {
+            "current": 1203,
+            "original": 1209,
+            "logical_candidate": 1209,
+            "anchor": "cmos[CMOS_SHUT_DOWN] = 0;"
+          }
+        ]
+      },
+      "before_sha256": "b8c38a65b56156b8a4faef61adf2ac123f82ee80f745f82793e45692f71b0092",
+      "candidate_sha256": "1f427e87f5884cd771da9e5bdfb7ac1fec5077933eb5fe07c34e6d0d822e731f"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/wow32/wkman.c",
+        "line_directive": 4398,
+        "depth": 0,
+        "current_target": 4538,
+        "anchor_current_line": 4410,
+        "anchor_original_line": 4490,
+        "anchor": "const LPVOID pBlock,",
+        "observed_anchor_logical_line": 4549,
+        "candidate_original_target": 4479,
+        "matches": false,
+        "current_sha256": "428e5554d964b9ac06f89132a38cb63d2b08a067d6d9bfc07204137a6a8811eb",
+        "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+        "matching_code_lines_before_next_directive": 5,
+        "matched_lines": [
+          {
+            "current": 4409,
+            "original": 4489
+          },
+          {
+            "current": 4410,
+            "original": 4490
+          },
+          {
+            "current": 4411,
+            "original": 4491
+          },
+          {
+            "current": 4412,
+            "original": 4492
+          },
+          {
+            "current": 4413,
+            "original": 4493
+          }
+        ],
+        "span_end_current_line": 4891,
+        "span_unique_anchors": 101,
+        "span_anchors": [
+          {
+            "current": 4410,
+            "original": 4490,
+            "logical_candidate": 4490,
+            "anchor": "const LPVOID pBlock,"
+          },
+          {
+            "current": 4412,
+            "original": 4492,
+            "logical_candidate": 4492,
+            "anchor": "LPVOID * lplpBuffer,"
+          },
+          {
+            "current": 4417,
+            "original": 4497,
+            "logical_candidate": 4497,
+            "anchor": "static PSZ apszSFI[] = {"
+          },
+          {
+            "current": 4418,
+            "original": 4498,
+            "logical_candidate": 4498,
+            "anchor": "\"\\\\StringFileInfo\\\\040904E4\\\\\","
+          },
+          {
+            "current": 4419,
+            "original": 4499,
+            "logical_candidate": 4499,
+            "anchor": "\"\\\\StringFileInfo\\\\04090000\\\\\""
+          },
+          {
+            "current": 4421,
+            "original": 4501,
+            "logical_candidate": 4501,
+            "anchor": "char szSubBlock[128];"
+          },
+          {
+            "current": 4425,
+            "original": 4505,
+            "logical_candidate": 4505,
+            "anchor": "strcpy(szSubBlock+SFILEN, lpName);"
+          },
+          {
+            "current": 4427,
+            "original": 4507,
+            "logical_candidate": 4507,
+            "anchor": "for (fRet = FALSE, i = 0;"
+          },
+          {
+            "current": 4428,
+            "original": 4508,
+            "logical_candidate": 4508,
+            "anchor": "i < (sizeof apszSFI / sizeof apszSFI[0]) && !fRet;"
+          },
+          {
+            "current": 4431,
+            "original": 4511,
+            "logical_candidate": 4511,
+            "anchor": "RtlCopyMemory(szSubBlock, apszSFI[i], SFILEN);"
+          },
+          {
+            "current": 4432,
+            "original": 4512,
+            "logical_candidate": 4512,
+            "anchor": "fRet = VerQueryValue(pBlock, szSubBlock, lplpBuffer, puLen);"
+          },
+          {
+            "current": 4446,
+            "original": 4526,
+            "logical_candidate": 4526,
+            "anchor": "WowGetProductNameVersion("
+          },
+          {
+            "current": 4449,
+            "original": 4529,
+            "logical_candidate": 4529,
+            "anchor": "DWORD cbProductName,"
+          },
+          {
+            "current": 4450,
+            "original": 4530,
+            "logical_candidate": 4530,
+            "anchor": "PSZ pszProductVersion,"
+          },
+          {
+            "current": 4451,
+            "original": 4531,
+            "logical_candidate": 4531,
+            "anchor": "DWORD cbProductVersion"
+          },
+          {
+            "current": 4454,
+            "original": 4534,
+            "logical_candidate": 4534,
+            "anchor": "DWORD dwZeroMePlease;"
+          },
+          {
+            "current": 4464,
+            "original": 4544,
+            "logical_candidate": 4544,
+            "anchor": "(cbVerInfo = GetFileVersionInfoSize(pszExePath, &dwZeroMePlease)) &&"
+          },
+          {
+            "current": 4467,
+            "original": 4547,
+            "logical_candidate": 4547,
+            "anchor": "MyVerQueryValue(lpVerInfo, \"ProductName\", &pName, &cbName) &&"
+          },
+          {
+            "current": 4468,
+            "original": 4548,
+            "logical_candidate": 4548,
+            "anchor": "cbName <= cbProductName &&"
+          },
+          {
+            "current": 4469,
+            "original": 4549,
+            "logical_candidate": 4549,
+            "anchor": "MyVerQueryValue(lpVerInfo, \"ProductVersion\", &pVersion, &cbVersion) &&"
+          },
+          {
+            "current": 4470,
+            "original": 4550,
+            "logical_candidate": 4550,
+            "anchor": "cbVersion <= cbProductVersion"
+          },
+          {
+            "current": 4474,
+            "original": 4554,
+            "logical_candidate": 4554,
+            "anchor": "strcpy(pszProductName, pName);"
+          },
+          {
+            "current": 4475,
+            "original": 4555,
+            "logical_candidate": 4555,
+            "anchor": "strcpy(pszProductVersion, pVersion);"
+          },
+          {
+            "current": 4495,
+            "original": 4575,
+            "logical_candidate": 4575,
+            "anchor": "PSZ pszProductVersion"
+          },
+          {
+            "current": 4506,
+            "original": 4586,
+            "logical_candidate": 4586,
+            "anchor": "(cbVerInfo = GetFileVersionInfoSize(pszExePath, &dwJunk)) &&"
+          },
+          {
+            "current": 4509,
+            "original": 4589,
+            "logical_candidate": 4589,
+            "anchor": "MyVerQueryValue(lpVerInfo, \"ProductName\", &pName, &dwJunk) &&"
+          },
+          {
+            "current": 4510,
+            "original": 4590,
+            "logical_candidate": 4590,
+            "anchor": "! _stricmp(pszProductName, pName) &&"
+          },
+          {
+            "current": 4511,
+            "original": 4591,
+            "logical_candidate": 4591,
+            "anchor": "MyVerQueryValue(lpVerInfo, \"ProductVersion\", &pVersion, &dwJunk) &&"
+          },
+          {
+            "current": 4512,
+            "original": 4592,
+            "logical_candidate": 4592,
+            "anchor": "! _stricmp(pszProductVersion, pVersion)"
+          },
+          {
+            "current": 4550,
+            "original": 4630,
+            "logical_candidate": 4630,
+            "anchor": "ULONG FASTCALL WK32WowShouldWeSayWin95(PVDMFRAME pFrame)"
+          },
+          {
+            "current": 4552,
+            "original": 4632,
+            "logical_candidate": 4632,
+            "anchor": "PWOWSHOULDWESAYWIN9516 parg16;"
+          },
+          {
+            "current": 4557,
+            "original": 4637,
+            "logical_candidate": 4637,
+            "anchor": "static WORD wLastCallerDS = 0;    // One entry cache."
+          },
+          {
+            "current": 4558,
+            "original": 4638,
+            "logical_candidate": 4638,
+            "anchor": "static ULONG ulLastRet = 0;"
+          },
+          {
+            "current": 4562,
+            "original": 4642,
+            "logical_candidate": 4642,
+            "anchor": "GETPSZPTR(parg16->pszFilename, pszFilename);"
+          },
+          {
+            "current": 4570,
+            "original": 4650,
+            "logical_candidate": 4650,
+            "anchor": "if (wLastCallerDS == parg16->wCallerDS) {"
+          },
+          {
+            "current": 4572,
+            "original": 4652,
+            "logical_candidate": 4652,
+            "anchor": "(\"WowShouldWeSayWin95 returning cached value 0x%x for  DS %x\","
+          },
+          {
+            "current": 4573,
+            "original": 4653,
+            "logical_candidate": 4653,
+            "anchor": "ulLastRet, parg16->wCallerDS));"
+          },
+          {
+            "current": 4586,
+            "original": 4666,
+            "logical_candidate": 4666,
+            "anchor": "(\"WowShouldWeSayWin95 DS %x modname '%s' filename '%s'\\n\","
+          },
+          {
+            "current": 4587,
+            "original": 4667,
+            "logical_candidate": 4667,
+            "anchor": "parg16->wCallerDS, szModName, pszFilename));"
+          },
+          {
+            "current": 4589,
+            "original": 4669,
+            "logical_candidate": 4669,
+            "anchor": "if (!strcmp(szModName, \"ISSET_SE\")) {         // InstallShield setup kit"
+          },
+          {
+            "current": 4593,
+            "original": 4673,
+            "logical_candidate": 4673,
+            "anchor": "CHAR szVerSubstring[4];"
+          },
+          {
+            "current": 4596,
+            "original": 4676,
+            "logical_candidate": 4676,
+            "anchor": "if (! WowGetProductNameVersion(pszFilename, szName, sizeof szName,"
+          },
+          {
+            "current": 4597,
+            "original": 4677,
+            "logical_candidate": 4677,
+            "anchor": "szVersion, sizeof szVersion) ||"
+          },
+          {
+            "current": 4598,
+            "original": 4678,
+            "logical_candidate": 4678,
+            "anchor": "_stricmp(szName, \"InstallSHIELD\")) {"
+          },
+          {
+            "current": 4618,
+            "original": 4698,
+            "logical_candidate": 4698,
+            "anchor": "if (RtlEqualMemory(szVersion, \"2.20.90\", 7) &&"
+          },
+          {
+            "current": 4619,
+            "original": 4699,
+            "logical_candidate": 4699,
+            "anchor": "('3' == szVersion[7] ||"
+          },
+          {
+            "current": 4620,
+            "original": 4700,
+            "logical_candidate": 4700,
+            "anchor": "'4' == szVersion[7] ||"
+          },
+          {
+            "current": 4621,
+            "original": 4701,
+            "logical_candidate": 4701,
+            "anchor": "'5' == szVersion[7]) ) {"
+          },
+          {
+            "current": 4633,
+            "original": 4713,
+            "logical_candidate": 4713,
+            "anchor": "if (! RtlEqualMemory(szVersion, \"3.00.\", 5)) {"
+          },
+          {
+            "current": 4638,
+            "original": 4718,
+            "logical_candidate": 4718,
+            "anchor": "RtlCopyMemory(szVerSubstring, &szVersion[5], 3);"
+          },
+          {
+            "current": 4639,
+            "original": 4719,
+            "logical_candidate": 4719,
+            "anchor": "szVerSubstring[3] = 0;"
+          },
+          {
+            "current": 4640,
+            "original": 4720,
+            "logical_candidate": 4720,
+            "anchor": "RtlCharToInteger(szVerSubstring, 10, &dwSubVer);"
+          },
+          {
+            "current": 4642,
+            "original": 4722,
+            "logical_candidate": 4722,
+            "anchor": "if (dwSubVer >= 88) {"
+          },
+          {
+            "current": 4648,
+            "original": 4728,
+            "logical_candidate": 4728,
+            "anchor": "} else if (!strcmp(szModName, \"NCSETUP\")) {         // NetScape SmartMarks setup"
+          },
+          {
+            "current": 4659,
+            "original": 4739,
+            "logical_candidate": 4739,
+            "anchor": "FILETIME ftThisFile;"
+          },
+          {
+            "current": 4664,
+            "original": 4744,
+            "logical_candidate": 4744,
+            "anchor": "FILE_SHARE_READ | FILE_SHARE_WRITE,"
+          },
+          {
+            "current": 4667,
+            "original": 4747,
+            "logical_candidate": 4747,
+            "anchor": "FILE_ATTRIBUTE_NORMAL,"
+          },
+          {
+            "current": 4673,
+            "original": 4753,
+            "logical_candidate": 4753,
+            "anchor": "GetFileTime(hfile, NULL, NULL, &ftThisFile);"
+          },
+          {
+            "current": 4688,
+            "original": 4768,
+            "logical_candidate": 4768,
+            "anchor": "if (ftThisFile.dwHighDateTime == 0x1ba78ad &&"
+          },
+          {
+            "current": 4689,
+            "original": 4769,
+            "logical_candidate": 4769,
+            "anchor": "ftThisFile.dwLowDateTime == 0xf28b4a00) {"
+          },
+          {
+            "current": 4699,
+            "original": 4779,
+            "logical_candidate": 4779,
+            "anchor": "} else if (!strcmp(szModName, \"EXPLORE\")) {         // MS Ancient Lands and"
+          },
+          {
+            "current": 4703,
+            "original": 4783,
+            "logical_candidate": 4783,
+            "anchor": "\"Microsoft Exploration Series\","
+          },
+          {
+            "current": 4711,
+            "original": 4791,
+            "logical_candidate": 4791,
+            "anchor": "} else if (!strcmp(szModName, \"BBALL\")) {         // MS Complete NBA Basketball 1994"
+          },
+          {
+            "current": 4715,
+            "original": 4795,
+            "logical_candidate": 4795,
+            "anchor": "\"Microsoft Complete NBA Basketball\","
+          },
+          {
+            "current": 4719,
+            "original": 4799,
+            "logical_candidate": 4799,
+            "anchor": "\"Microsoft Complete Baseball\","
+          },
+          {
+            "current": 4729,
+            "original": 4809,
+            "logical_candidate": 4809,
+            "anchor": "DWORD flOptionsSave;"
+          },
+          {
+            "current": 4740,
+            "original": 4820,
+            "logical_candidate": 4820,
+            "anchor": "flOptionsSave = flOptions;"
+          },
+          {
+            "current": 4741,
+            "original": 4821,
+            "logical_candidate": 4821,
+            "anchor": "flOptions |= OPT_DEBUG;"
+          },
+          {
+            "current": 4742,
+            "original": 4822,
+            "logical_candidate": 4822,
+            "anchor": "LOGDEBUG(LOG_ALWAYS, (\"Should add version-resource checking to WK32WowShouldWeSayWin95 for %s.\\n\", szModName));"
+          },
+          {
+            "current": 4743,
+            "original": 4823,
+            "logical_candidate": 4823,
+            "anchor": "flOptions = flOptionsSave;"
+          },
+          {
+            "current": 4748,
+            "original": 4828,
+            "logical_candidate": 4828,
+            "anchor": "ulRet = 0x5f03;  // 3.95"
+          },
+          {
+            "current": 4751,
+            "original": 4831,
+            "logical_candidate": 4831,
+            "anchor": "wLastCallerDS = parg16->wCallerDS;"
+          },
+          {
+            "current": 4754,
+            "original": 4834,
+            "logical_candidate": 4834,
+            "anchor": "LOGDEBUG(LOG_WARNING, (\"WowShouldWeSayWin95 returning %x.\\n\", ulRet));"
+          },
+          {
+            "current": 4757,
+            "original": 4837,
+            "logical_candidate": 4837,
+            "anchor": "FREEPSZPTR(pszFilename);"
+          },
+          {
+            "current": 4770,
+            "original": 4850,
+            "logical_candidate": 4850,
+            "anchor": "ULONG FASTCALL WK32GetVersionEx(PVDMFRAME pFrame)"
+          },
+          {
+            "current": 4772,
+            "original": 4852,
+            "logical_candidate": 4852,
+            "anchor": "PGETVERSIONEX16 parg16;"
+          },
+          {
+            "current": 4773,
+            "original": 4853,
+            "logical_candidate": 4853,
+            "anchor": "POSVERSIONINFO posvi;"
+          },
+          {
+            "current": 4777,
+            "original": 4857,
+            "logical_candidate": 4857,
+            "anchor": "GETMISCPTR(parg16->lpVersionInfo, posvi);"
+          },
+          {
+            "current": 4779,
+            "original": 4859,
+            "logical_candidate": 4859,
+            "anchor": "ulRet = GetVersionEx(posvi);"
+          },
+          {
+            "current": 4799,
+            "original": 4879,
+            "logical_candidate": 4879,
+            "anchor": "ULONG FASTCALL WK32WowGetModuleHandle(PVDMFRAME pFrame)"
+          },
+          {
+            "current": 4801,
+            "original": 4881,
+            "logical_candidate": 4881,
+            "anchor": "PWOWGETMODULEHANDLE16 parg16;"
+          },
+          {
+            "current": 4808,
+            "original": 4888,
+            "logical_candidate": 4888,
+            "anchor": "GETPSZPTR(parg16->lpszModuleName, pszModuleName);"
+          },
+          {
+            "current": 4812,
+            "original": 4892,
+            "logical_candidate": 4892,
+            "anchor": "while (pWOA && strcmp(pszModuleName, pWOA->szModuleName)) {"
+          },
+          {
+            "current": 4816,
+            "original": 4896,
+            "logical_candidate": 4896,
+            "anchor": "if (pWOA && pWOA->ptdWOA) {"
+          },
+          {
+            "current": 4817,
+            "original": 4897,
+            "logical_candidate": 4897,
+            "anchor": "ul = pWOA->ptdWOA->hMod16;"
+          },
+          {
+            "current": 4818,
+            "original": 4898,
+            "logical_candidate": 4898,
+            "anchor": "LOGDEBUG(LOG_ALWAYS, (\"WK32WowGetModuleHandle(%s) returning %04x.\\n\","
+          },
+          {
+            "current": 4819,
+            "original": 4899,
+            "logical_candidate": 4899,
+            "anchor": "pszModuleName, ul));"
+          },
+          {
+            "current": 4840,
+            "original": 4920,
+            "logical_candidate": 4920,
+            "anchor": "ULONG FASTCALL WK32GetShortPathName(PVDMFRAME pFrame)"
+          },
+          {
+            "current": 4842,
+            "original": 4922,
+            "logical_candidate": 4922,
+            "anchor": "PGETSHORTPATHNAME16 parg16;"
+          },
+          {
+            "current": 4843,
+            "original": 4923,
+            "logical_candidate": 4923,
+            "anchor": "PSZ pszLongPath, pszShortPath;"
+          },
+          {
+            "current": 4847,
+            "original": 4927,
+            "logical_candidate": 4927,
+            "anchor": "GETPSZPTR(parg16->pszLongPath, pszLongPath);"
+          },
+          {
+            "current": 4848,
+            "original": 4928,
+            "logical_candidate": 4928,
+            "anchor": "if (parg16->pszShortPath == parg16->pszLongPath) {"
+          },
+          {
+            "current": 4849,
+            "original": 4929,
+            "logical_candidate": 4929,
+            "anchor": "pszShortPath = pszLongPath;"
+          },
+          {
+            "current": 4851,
+            "original": 4931,
+            "logical_candidate": 4931,
+            "anchor": "GETVDMPTR(parg16->pszShortPath, parg16->cchShortPath, pszShortPath);"
+          },
+          {
+            "current": 4854,
+            "original": 4934,
+            "logical_candidate": 4934,
+            "anchor": "ul = GetShortPathName(pszLongPath, pszShortPath, parg16->cchShortPath);"
+          },
+          {
+            "current": 4856,
+            "original": 4936,
+            "logical_candidate": 4936,
+            "anchor": "FLUSHVDMPTR(parg16->pszShortPath, ul+1, pszShortPath);"
+          },
+          {
+            "current": 4858,
+            "original": 4938,
+            "logical_candidate": 4938,
+            "anchor": "FREEVDMPTR(pszShortPath);  // Safe even if no GETVDMPTR"
+          },
+          {
+            "current": 4859,
+            "original": 4939,
+            "logical_candidate": 4939,
+            "anchor": "FREEPSZPTR(pszLongPath);"
+          },
+          {
+            "current": 4878,
+            "original": 4958,
+            "logical_candidate": 4958,
+            "anchor": "ULONG FASTCALL WK32WowReserveHtask(PVDMFRAME pFrame)"
+          },
+          {
+            "current": 4880,
+            "original": 4960,
+            "logical_candidate": 4960,
+            "anchor": "PWOWRESERVEHTASK16 parg16;"
+          },
+          {
+            "current": 4885,
+            "original": 4965,
+            "logical_candidate": 4965,
+            "anchor": "ul = AddTaskSharedList(parg16->htask, 0, NULL, NULL);"
+          }
+        ]
+      },
+      "before_sha256": "428e5554d964b9ac06f89132a38cb63d2b08a067d6d9bfc07204137a6a8811eb",
+      "candidate_sha256": "6b036bb87f5ae271a4503c14eb3e6e45b51ec565b4e40563f9a8b9f1927749f8"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/wow32/wparam.c",
+        "line_directive": 557,
+        "depth": 0,
+        "current_target": 610,
+        "anchor_current_line": 561,
+        "anchor_original_line": 588,
+        "anchor": "while (NULL != pbhf) {",
+        "observed_anchor_logical_line": 613,
+        "candidate_original_target": 585,
+        "matches": false,
+        "current_sha256": "de20d372f6548459dc21be8fd242ca3549339a8fae76f68bb95161e9197095a0",
+        "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a",
+        "matching_code_lines_before_next_directive": 25,
+        "matched_lines": [
+          {
+            "current": 561,
+            "original": 588
+          },
+          {
+            "current": 565,
+            "original": 592
+          },
+          {
+            "current": 567,
+            "original": 594
+          },
+          {
+            "current": 570,
+            "original": 597
+          },
+          {
+            "current": 571,
+            "original": 598
+          },
+          {
+            "current": 573,
+            "original": 600
+          },
+          {
+            "current": 574,
+            "original": 601
+          },
+          {
+            "current": 582,
+            "original": 609
+          },
+          {
+            "current": 584,
+            "original": 611
+          },
+          {
+            "current": 585,
+            "original": 612
+          },
+          {
+            "current": 590,
+            "original": 617
+          },
+          {
+            "current": 591,
+            "original": 618
+          },
+          {
+            "current": 593,
+            "original": 620
+          },
+          {
+            "current": 595,
+            "original": 622
+          },
+          {
+            "current": 596,
+            "original": 623
+          },
+          {
+            "current": 600,
+            "original": 627
+          },
+          {
+            "current": 607,
+            "original": 634
+          },
+          {
+            "current": 612,
+            "original": 639
+          },
+          {
+            "current": 613,
+            "original": 640
+          },
+          {
+            "current": 618,
+            "original": 645
+          },
+          {
+            "current": 620,
+            "original": 647
+          },
+          {
+            "current": 624,
+            "original": 651
+          },
+          {
+            "current": 628,
+            "original": 655
+          },
+          {
+            "current": 630,
+            "original": 657
+          },
+          {
+            "current": 631,
+            "original": 658
+          }
+        ],
+        "span_end_current_line": 640,
+        "span_unique_anchors": 15,
+        "span_anchors": [
+          {
+            "current": 561,
+            "original": 588,
+            "logical_candidate": 588,
+            "anchor": "while (NULL != pbhf) {"
+          },
+          {
+            "current": 567,
+            "original": 594,
+            "logical_candidate": 594,
+            "anchor": "pbhf->dwSize += pbh->dwSize; // adjust the size"
+          },
+          {
+            "current": 570,
+            "original": 597,
+            "logical_candidate": 597,
+            "anchor": "if (NULL != pbhLast) {"
+          },
+          {
+            "current": 571,
+            "original": 598,
+            "logical_candidate": 598,
+            "anchor": "if (((LPBYTE)pbhf + pbhf->dwSize) == (LPBYTE)pbhLast) {"
+          },
+          {
+            "current": 573,
+            "original": 600,
+            "logical_candidate": 600,
+            "anchor": "pbhLast->dwSize += pbhf->dwSize;"
+          },
+          {
+            "current": 574,
+            "original": 601,
+            "logical_candidate": 601,
+            "anchor": "pbhLast->pNext   = pbhf->pNext;"
+          },
+          {
+            "current": 582,
+            "original": 609,
+            "logical_candidate": 609,
+            "anchor": "if (((LPBYTE)pbh + pbh->dwSize) == (LPBYTE)pbhf) {"
+          },
+          {
+            "current": 584,
+            "original": 611,
+            "logical_candidate": 611,
+            "anchor": "pbh->dwSize += pbhf->dwSize;    // adjust the size"
+          },
+          {
+            "current": 585,
+            "original": 612,
+            "logical_candidate": 612,
+            "anchor": "pbh->pNext   = pbhf->pNext;     // next ptr too"
+          },
+          {
+            "current": 590,
+            "original": 617,
+            "logical_candidate": 617,
+            "anchor": "if (NULL != pbh->pNext) {"
+          },
+          {
+            "current": 595,
+            "original": 622,
+            "logical_candidate": 622,
+            "anchor": "pbhf->dwSize += pbh->dwSize;"
+          },
+          {
+            "current": 613,
+            "original": 640,
+            "logical_candidate": 640,
+            "anchor": "pbhf = pbhf->pNext; // on to the next block"
+          },
+          {
+            "current": 628,
+            "original": 655,
+            "logical_candidate": 655,
+            "anchor": "BOOL IsCacheBlock(PBLKCACHE pc, LPVOID pv)"
+          },
+          {
+            "current": 630,
+            "original": 657,
+            "logical_candidate": 657,
+            "anchor": "LONG lOffset = (LONG)pv - (LONG)pc->pCache;"
+          },
+          {
+            "current": 631,
+            "original": 658,
+            "logical_candidate": 658,
+            "anchor": "return (lOffset >= 0 && lOffset < (LONG)pc->dwCacheSize);"
+          }
+        ]
+      },
+      "before_sha256": "de20d372f6548459dc21be8fd242ca3549339a8fae76f68bb95161e9197095a0",
+      "candidate_sha256": "ee64fbbf0afac5d52e3dc65e60e7a9cbf5ae15abe80dd3306dba9deb364e2599"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/wow32/wuclip.c",
+        "line_directive": 1295,
+        "depth": 0,
+        "current_target": 1304,
+        "anchor_current_line": 1301,
+        "anchor_original_line": 1232,
+        "anchor": "HGLOBAL W32ConvertObjDescriptor(HANDLE hMem, UINT flag)",
+        "observed_anchor_logical_line": 1309,
+        "candidate_original_target": 1227,
+        "matches": false,
+        "current_sha256": "53cd661fdce36b3eba38e51a6142512c9236233d185059067028e538e5c12313",
+        "original_sha256": "c386af38376945cb4fd141d878bca8ef5140b15dccc9695a0adcb0941fbb0083",
+        "matching_code_lines_before_next_directive": 7,
+        "matched_lines": [
+          {
+            "current": 1301,
+            "original": 1232
+          },
+          {
+            "current": 1303,
+            "original": 1234
+          },
+          {
+            "current": 1305,
+            "original": 1236
+          },
+          {
+            "current": 1306,
+            "original": 1237
+          },
+          {
+            "current": 1307,
+            "original": 1238
+          },
+          {
+            "current": 1311,
+            "original": 1242
+          },
+          {
+            "current": 1313,
+            "original": 1244
+          }
+        ],
+        "span_end_current_line": 1315,
+        "span_unique_anchors": 3,
+        "span_anchors": [
+          {
+            "current": 1301,
+            "original": 1232,
+            "logical_candidate": 1232,
+            "anchor": "HGLOBAL W32ConvertObjDescriptor(HANDLE hMem, UINT flag)"
+          },
+          {
+            "current": 1306,
+            "original": 1237,
+            "logical_candidate": 1237,
+            "anchor": "if (!LoadLibraryAndGetProcAddresses(\"OLETHK32.DLL\", OleStringConversion, WOW_OLESTRINGCONVERSION_COUNT)) {"
+          },
+          {
+            "current": 1311,
+            "original": 1242,
+            "logical_candidate": 1242,
+            "anchor": "hMemOut = (HANDLE) (*OleStringConversion[WOW_OLE_STRINGCONVERSION].lpfn) (hMem, flag);"
+          }
+        ]
+      },
+      "before_sha256": "53cd661fdce36b3eba38e51a6142512c9236233d185059067028e538e5c12313",
+      "candidate_sha256": "1a1bf4cffb8ab42f790793e71bec0bca7f96363bb4f0296909ed54455100d33b"
+    },
+    {
+      "lead": {
+        "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+        "line_directive": 2648,
+        "depth": 0,
+        "current_target": 2647,
+        "anchor_current_line": 2653,
+        "anchor_original_line": 2628,
+        "anchor": "pConsoleRecord->SequenceNumber = VDMSequenceNumber;",
+        "observed_anchor_logical_line": 2651,
+        "candidate_original_target": 2624,
+        "matches": false,
+        "current_sha256": "66ad05e25373b363c81ce8fdeff2a8b2d7b38fdd38559c3199dbb7e785fe26f1",
+        "original_sha256": "c1e2177c6c00679d85cfa475f620841f6736b0e56d8dbf790b71afe33e1ed80b",
+        "matching_code_lines_before_next_directive": 42,
+        "matched_lines": [
+          {
+            "current": 2649,
+            "original": 2624
+          },
+          {
+            "current": 2653,
+            "original": 2628
+          },
+          {
+            "current": 2654,
+            "original": 2629
+          },
+          {
+            "current": 2660,
+            "original": 2635
+          },
+          {
+            "current": 2661,
+            "original": 2636
+          },
+          {
+            "current": 2664,
+            "original": 2639
+          },
+          {
+            "current": 2665,
+            "original": 2640
+          },
+          {
+            "current": 2666,
+            "original": 2641
+          },
+          {
+            "current": 2668,
+            "original": 2643
+          },
+          {
+            "current": 2669,
+            "original": 2644
+          },
+          {
+            "current": 2670,
+            "original": 2645
+          },
+          {
+            "current": 2671,
+            "original": 2646
+          },
+          {
+            "current": 2672,
+            "original": 2647
+          },
+          {
+            "current": 2673,
+            "original": 2648
+          },
+          {
+            "current": 2674,
+            "original": 2649
+          },
+          {
+            "current": 2676,
+            "original": 2651
+          },
+          {
+            "current": 2677,
+            "original": 2652
+          },
+          {
+            "current": 2678,
+            "original": 2653
+          },
+          {
+            "current": 2683,
+            "original": 2658
+          },
+          {
+            "current": 2684,
+            "original": 2659
+          },
+          {
+            "current": 2685,
+            "original": 2660
+          },
+          {
+            "current": 2686,
+            "original": 2661
+          },
+          {
+            "current": 2687,
+            "original": 2662
+          },
+          {
+            "current": 2688,
+            "original": 2663
+          },
+          {
+            "current": 2689,
+            "original": 2664
+          },
+          {
+            "current": 2690,
+            "original": 2665
+          },
+          {
+            "current": 2691,
+            "original": 2666
+          },
+          {
+            "current": 2695,
+            "original": 2670
+          },
+          {
+            "current": 2699,
+            "original": 2674
+          },
+          {
+            "current": 2700,
+            "original": 2675
+          },
+          {
+            "current": 2702,
+            "original": 2677
+          },
+          {
+            "current": 2704,
+            "original": 2679
+          },
+          {
+            "current": 2705,
+            "original": 2680
+          },
+          {
+            "current": 2706,
+            "original": 2681
+          },
+          {
+            "current": 2710,
+            "original": 2685
+          },
+          {
+            "current": 2713,
+            "original": 2688
+          },
+          {
+            "current": 2719,
+            "original": 2694
+          },
+          {
+            "current": 2720,
+            "original": 2695
+          },
+          {
+            "current": 2723,
+            "original": 2698
+          },
+          {
+            "current": 2725,
+            "original": 2700
+          },
+          {
+            "current": 2726,
+            "original": 2701
+          },
+          {
+            "current": 2727,
+            "original": 2702
+          }
+        ],
+        "span_end_current_line": 2946,
+        "span_unique_anchors": 58,
+        "span_anchors": [
+          {
+            "current": 2653,
+            "original": 2628,
+            "logical_candidate": 2628,
+            "anchor": "pConsoleRecord->SequenceNumber = VDMSequenceNumber;"
+          },
+          {
+            "current": 2660,
+            "original": 2635,
+            "logical_candidate": 2635,
+            "anchor": "BaseSrvCleanupVDMResources ("
+          },
+          {
+            "current": 2661,
+            "original": 2636,
+            "logical_candidate": 2636,
+            "anchor": "IN PCSR_PROCESS Process"
+          },
+          {
+            "current": 2668,
+            "original": 2643,
+            "logical_candidate": 2643,
+            "anchor": "if (!Process->fVDM) {"
+          },
+          {
+            "current": 2671,
+            "original": 2646,
+            "logical_candidate": 2646,
+            "anchor": "pBatRecord = BatRecordHead;"
+          },
+          {
+            "current": 2672,
+            "original": 2647,
+            "logical_candidate": 2647,
+            "anchor": "while (pBatRecord &&"
+          },
+          {
+            "current": 2673,
+            "original": 2648,
+            "logical_candidate": 2648,
+            "anchor": "pBatRecord->SequenceNumber != Process->SequenceNumber)"
+          },
+          {
+            "current": 2677,
+            "original": 2652,
+            "logical_candidate": 2652,
+            "anchor": "BaseSrvFreeAndRemoveBatRecord(pBatRecord);"
+          },
+          {
+            "current": 2686,
+            "original": 2661,
+            "logical_candidate": 2661,
+            "anchor": "if (WOWHead->SequenceNumber == Process->SequenceNumber){"
+          },
+          {
+            "current": 2687,
+            "original": 2662,
+            "logical_candidate": 2662,
+            "anchor": "BaseSrvRemoveWOWRecordByITask((ULONG)-1);"
+          },
+          {
+            "current": 2689,
+            "original": 2664,
+            "logical_candidate": 2664,
+            "anchor": "dwWowExecThreadId = dwWowExecProcessId = 0;"
+          },
+          {
+            "current": 2690,
+            "original": 2665,
+            "logical_candidate": 2665,
+            "anchor": "ulWowExecProcessSequenceNumber = 0;"
+          },
+          {
+            "current": 2705,
+            "original": 2680,
+            "logical_candidate": 2680,
+            "anchor": "if (pConsoleHead->SequenceNumber == Process->SequenceNumber){"
+          },
+          {
+            "current": 2706,
+            "original": 2681,
+            "logical_candidate": 2681,
+            "anchor": "BaseSrvExitVDMWorker (pConsoleHead);"
+          },
+          {
+            "current": 2719,
+            "original": 2694,
+            "logical_candidate": 2694,
+            "anchor": "BaseSrvExitVDMWorker ("
+          },
+          {
+            "current": 2747,
+            "original": 2722,
+            "logical_candidate": 2722,
+            "anchor": "BaseSrvFillPifInfo ("
+          },
+          {
+            "current": 2749,
+            "original": 2724,
+            "logical_candidate": 2724,
+            "anchor": "PBASE_GET_NEXT_VDM_COMMAND_MSG b"
+          },
+          {
+            "current": 2758,
+            "original": 2733,
+            "logical_candidate": 2733,
+            "anchor": "Status  = STATUS_INVALID_PARAMETER;"
+          },
+          {
+            "current": 2766,
+            "original": 2741,
+            "logical_candidate": 2741,
+            "anchor": "if (lpVDMInfo->TitleLen && lpVDMInfo->Title)"
+          },
+          {
+            "current": 2768,
+            "original": 2743,
+            "logical_candidate": 2743,
+            "anchor": "Title = lpVDMInfo->Title;"
+          },
+          {
+            "current": 2769,
+            "original": 2744,
+            "logical_candidate": 2744,
+            "anchor": "TitleLen = lpVDMInfo->TitleLen;"
+          },
+          {
+            "current": 2772,
+            "original": 2747,
+            "logical_candidate": 2747,
+            "anchor": "else if (lpVDMInfo->AppName && lpVDMInfo->AppLen)"
+          },
+          {
+            "current": 2774,
+            "original": 2749,
+            "logical_candidate": 2749,
+            "anchor": "Title = lpVDMInfo->AppName;"
+          },
+          {
+            "current": 2775,
+            "original": 2750,
+            "logical_candidate": 2750,
+            "anchor": "TitleLen = lpVDMInfo->AppLen;"
+          },
+          {
+            "current": 2798,
+            "original": 2773,
+            "logical_candidate": 2773,
+            "anchor": "if ( (!b->TitleLen || TitleLen <= b->TitleLen) &&"
+          },
+          {
+            "current": 2799,
+            "original": 2774,
+            "logical_candidate": 2774,
+            "anchor": "(!b->PifLen || lpVDMInfo->PifLen <= b->PifLen) &&"
+          },
+          {
+            "current": 2800,
+            "original": 2775,
+            "logical_candidate": 2775,
+            "anchor": "(!b->CurDirectoryLen ||"
+          },
+          {
+            "current": 2801,
+            "original": 2776,
+            "logical_candidate": 2776,
+            "anchor": "lpVDMInfo->CurDirectoryLen <= b->CurDirectoryLen) &&"
+          },
+          {
+            "current": 2802,
+            "original": 2777,
+            "logical_candidate": 2777,
+            "anchor": "(!b->ReservedLen || lpVDMInfo->ReservedLen <= b->ReservedLen))"
+          },
+          {
+            "current": 2805,
+            "original": 2780,
+            "logical_candidate": 2780,
+            "anchor": "if (Title && TitleLen)  {"
+          },
+          {
+            "current": 2806,
+            "original": 2781,
+            "logical_candidate": 2781,
+            "anchor": "RtlMoveMemory(b->Title, Title, TitleLen);"
+          },
+          {
+            "current": 2814,
+            "original": 2789,
+            "logical_candidate": 2789,
+            "anchor": "if (lpVDMInfo->PifLen && b->PifLen)"
+          },
+          {
+            "current": 2819,
+            "original": 2794,
+            "logical_candidate": 2794,
+            "anchor": "if (lpVDMInfo->CurDirectoryLen && b->CurDirectoryLen)"
+          },
+          {
+            "current": 2822,
+            "original": 2797,
+            "logical_candidate": 2797,
+            "anchor": "lpVDMInfo->CurDirectoryLen"
+          },
+          {
+            "current": 2824,
+            "original": 2799,
+            "logical_candidate": 2799,
+            "anchor": "if (lpVDMInfo->Reserved && b->ReservedLen)"
+          },
+          {
+            "current": 2827,
+            "original": 2802,
+            "logical_candidate": 2802,
+            "anchor": "lpVDMInfo->ReservedLen"
+          },
+          {
+            "current": 2833,
+            "original": 2808,
+            "logical_candidate": 2808,
+            "anchor": "except(EXCEPTION_EXECUTE_HANDLER) {"
+          },
+          {
+            "current": 2834,
+            "original": 2809,
+            "logical_candidate": 2809,
+            "anchor": "Status = GetExceptionCode();"
+          },
+          {
+            "current": 2839,
+            "original": 2814,
+            "logical_candidate": 2814,
+            "anchor": "b->PifLen = (USHORT)lpVDMInfo->PifLen;"
+          },
+          {
+            "current": 2841,
+            "original": 2816,
+            "logical_candidate": 2816,
+            "anchor": "b->TitleLen = TitleLen;"
+          },
+          {
+            "current": 2857,
+            "original": 2832,
+            "logical_candidate": 2832,
+            "anchor": "\\***************************************************************************/"
+          },
+          {
+            "current": 2863,
+            "original": 2838,
+            "logical_candidate": 2838,
+            "anchor": "BYTE achBuffer[100];"
+          },
+          {
+            "current": 2864,
+            "original": 2839,
+            "logical_candidate": 2839,
+            "anchor": "PTOKEN_USER pUser = (PTOKEN_USER) &achBuffer;"
+          },
+          {
+            "current": 2865,
+            "original": 2840,
+            "logical_candidate": 2840,
+            "anchor": "DWORD dwBytesRequired;"
+          },
+          {
+            "current": 2867,
+            "original": 2842,
+            "logical_candidate": 2842,
+            "anchor": "BOOL fAllocatedBuffer = FALSE;"
+          },
+          {
+            "current": 2869,
+            "original": 2844,
+            "logical_candidate": 2844,
+            "anchor": "SID_IDENTIFIER_AUTHORITY SidIdAuth = SECURITY_NT_AUTHORITY;"
+          },
+          {
+            "current": 2870,
+            "original": 2845,
+            "logical_candidate": 2845,
+            "anchor": "static PSID pSystemSid = NULL;"
+          },
+          {
+            "current": 2874,
+            "original": 2849,
+            "logical_candidate": 2849,
+            "anchor": "NtStatus = RtlAllocateAndInitializeSid("
+          },
+          {
+            "current": 2876,
+            "original": 2851,
+            "logical_candidate": 2851,
+            "anchor": "1,                   // SubAuthorityCount, 1 for local system"
+          },
+          {
+            "current": 2877,
+            "original": 2852,
+            "logical_candidate": 2852,
+            "anchor": "SECURITY_LOCAL_SYSTEM_RID,"
+          },
+          {
+            "current": 2882,
+            "original": 2857,
+            "logical_candidate": 2857,
+            "anchor": "if (!NT_SUCCESS(NtStatus)) {"
+          },
+          {
+            "current": 2892,
+            "original": 2867,
+            "logical_candidate": 2867,
+            "anchor": "sizeof(achBuffer),         // TokenInformationLength"
+          },
+          {
+            "current": 2898,
+            "original": 2873,
+            "logical_candidate": 2873,
+            "anchor": "if (NtStatus != STATUS_BUFFER_TOO_SMALL)"
+          },
+          {
+            "current": 2907,
+            "original": 2882,
+            "logical_candidate": 2882,
+            "anchor": "pUser = (PTOKEN_USER) RtlAllocateHeap(BaseSrvHeap, MAKE_TAG( VDM_TAG ), dwBytesRequired);"
+          },
+          {
+            "current": 2913,
+            "original": 2888,
+            "logical_candidate": 2888,
+            "anchor": "fAllocatedBuffer = TRUE;"
+          },
+          {
+            "current": 2923,
+            "original": 2898,
+            "logical_candidate": 2898,
+            "anchor": "dwBytesRequired,           // TokenInformationLength"
+          },
+          {
+            "current": 2937,
+            "original": 2912,
+            "logical_candidate": 2912,
+            "anchor": "fSystem = RtlEqualSid(pSystemSid,  pUser->User.Sid);"
+          },
+          {
+            "current": 2939,
+            "original": 2914,
+            "logical_candidate": 2914,
+            "anchor": "if (fAllocatedBuffer)"
+          }
+        ]
+      },
+      "before_sha256": "66ad05e25373b363c81ce8fdeff2a8b2d7b38fdd38559c3199dbb7e785fe26f1",
+      "candidate_sha256": "7257c879c10610351ce4844ed22463bbdb4e3b6289a3274563fb750b73a92c88"
+    },
+    {
+      "lead": {
+        "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+        "line_directive": 247,
+        "depth": 0,
+        "current_target": 287,
+        "anchor_current_line": 252,
+        "anchor_original_line": 292,
+        "anchor": "NetpKdPrint(( PREFIX_NETLIB \"NetpMemoryReallocate: new address is \"",
+        "observed_anchor_logical_line": 291,
+        "candidate_original_target": 288,
+        "matches": false,
+        "current_sha256": "1702274975c93d95f711e490d1148d84dfcb94c94354f9d92d99588355d56f6e",
+        "original_sha256": "45b70c02c0aeb79f674e68a475669d45e2e5e6fab21f20e9bfcfe229d8958525",
+        "matching_code_lines_before_next_directive": 7,
+        "matched_lines": [
+          {
+            "current": 249,
+            "original": 289
+          },
+          {
+            "current": 251,
+            "original": 291
+          },
+          {
+            "current": 252,
+            "original": 292
+          },
+          {
+            "current": 253,
+            "original": 293
+          },
+          {
+            "current": 256,
+            "original": 296
+          },
+          {
+            "current": 258,
+            "original": 298
+          },
+          {
+            "current": 260,
+            "original": 300
+          }
+        ],
+        "span_end_current_line": 263,
+        "span_unique_anchors": 4,
+        "span_anchors": [
+          {
+            "current": 249,
+            "original": 289,
+            "logical_candidate": 289,
+            "anchor": "} // must be realloc of something to something else"
+          },
+          {
+            "current": 252,
+            "original": 292,
+            "logical_candidate": 292,
+            "anchor": "NetpKdPrint(( PREFIX_NETLIB \"NetpMemoryReallocate: new address is \""
+          },
+          {
+            "current": 253,
+            "original": 293,
+            "logical_candidate": 293,
+            "anchor": "FORMAT_LPVOID \".\\n\", (LPVOID) OldAddress ));"
+          },
+          {
+            "current": 260,
+            "original": 300,
+            "logical_candidate": 300,
+            "anchor": "} // NetpMemoryReallocate"
+          }
+        ]
+      },
+      "before_sha256": "1702274975c93d95f711e490d1148d84dfcb94c94354f9d92d99588355d56f6e",
+      "candidate_sha256": "188a6504e1cae72d744f735918986764bcd8fa1bc6799f67cdd960ebfa4b9d0f"
+    }
+  ],
+  "controls": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "76981dd3dd90b38e7669b88e7cace5c6531b19c1350efe56c3f8c9022bfae0b8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "76981dd3dd90b38e7669b88e7cace5c6531b19c1350efe56c3f8c9022bfae0b8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "165140de5e37a6afcc0c6b936392f39645bba02024b06cc81640cf6ff56cb9c2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "165140de5e37a6afcc0c6b936392f39645bba02024b06cc81640cf6ff56cb9c2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "066eea071eb71a3522a18fc4d65a4439135ffa22a7a80d17d009cd40812cde88"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "066eea071eb71a3522a18fc4d65a4439135ffa22a7a80d17d009cd40812cde88"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "source": "src/mvdm-host/wow32/wkman.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "b44c9b7b5891050da8238d8d7844bacea51d39d6877eb2d5c12681c1fa47b40c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "source": "src/mvdm-host/wow32/wparam.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "62fd100dbd5fa788961001cf946ca7d718e7423b5740d111908420053868497a"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "source": "src/mvdm-host/wow32/wuclip.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "8e51feb1fcabcc2a29994f284619f8ff1779990793f26e17bc7b9c51d779cb21"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "550467b149586b634ceeb686bb74c826993bacc3f750118c6ec45c37b818d4a8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/service",
+      "source": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "ef5e844471c99e57db8b50ccfbf5a3ee042e5f1d25f9634bc769ba75154474c8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "550467b149586b634ceeb686bb74c826993bacc3f750118c6ec45c37b818d4a8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "643a5f71a185aed5f9b6cb6fbb037303976dbe54fab2f966711b41d9a781d28c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "643a5f71a185aed5f9b6cb6fbb037303976dbe54fab2f966711b41d9a781d28c"
+    }
+  ],
+  "diagnostic_controls": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 1109,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 1109,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 308,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 308,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 476,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 476,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "expected_line": 4490,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "expected_line": 588,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "expected_line": 1232,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 2628,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "graph": "build/.ninja/msvc-x64-release/service",
+      "expected_line": 2628,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 2628,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 292,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 292,
+      "verified": true,
+      "error": ""
+    }
+  ],
+  "limitations": "Only unconditional spans with offset-consistent unique fixed-original anchors and identical selected preprocessing were changed. Other lexical leads remain unclassified; fixture data retain prior numbers. DPMI non-CCPU negative-object fixture remains failed."
+}

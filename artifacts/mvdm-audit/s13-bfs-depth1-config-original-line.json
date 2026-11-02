@@ -1,0 +1,21 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/config.c",
+  "before_sha256": "469ee7189e17e2a186a71d7a37ea0d4044d1658f2bc88f06f0fb08505617b5fa",
+  "candidate_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5",
+  "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+  "original_selected_line": 510,
+  "controls": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "selected_preprocessing_equal_after_filename_normalization": true,
+      "sha256": "512a1e29990fab54adda38021350c15ad3d5b9b077b7cc1b9736ce883da2df1f",
+      "original_line_510_verified": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "selected_preprocessing_equal_after_filename_normalization": true,
+      "sha256": "512a1e29990fab54adda38021350c15ad3d5b9b077b7cc1b9736ce883da2df1f",
+      "original_line_510_verified": true
+    }
+  ]
+}

@@ -2645,7 +2645,7 @@ BaseSrvUpdateVDMSequenceNumber (
 #if DEVL
 #error Unsupported excluded original configuration
 #endif
-#line 2647
+#line 2624
             RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
             return;
         }

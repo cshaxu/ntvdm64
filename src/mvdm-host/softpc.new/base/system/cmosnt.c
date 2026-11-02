@@ -463,7 +463,7 @@ int verify_equip_byte IFN1(half_word *, equip)
 #ifdef FLOPPY_B
 #error Unsupported excluded original configuration
 #endif
-#line 467
+#line 473
 	}
 
 	if (num_flops == 2)

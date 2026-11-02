@@ -345,7 +345,7 @@ if len(matches) != 1:
 i = matches[0]
 marker = '#error Excluded unsupported non-CPU40 i386 memory-size profile'
 if (lines[i+1].strip() != marker or lines[i+2].strip() != '#else'
-        or lines[i+3].strip() != '#line 464'
+        or lines[i+3].strip() != '#line 510'
         or lines[i+4].strip() != 'vdmMemorySize = GetVDMSize(VDMForWOW);'):
     raise SystemExit('memory-size guard, selected calculation or line control changed')
 probe.write_text('\n'.join(lines[i:i+4] + ['int selected_line = __LINE__;', '#endif']) + '\n',
@@ -354,7 +354,7 @@ selected = subprocess.run(base + ['/DCPU_40_STYLE', '/Di386', str(probe)],
                           capture_output=True, text=True, errors='replace')
 excluded = subprocess.run(base + ['/Di386', str(probe)], capture_output=True,
                           text=True, errors='replace')
-if selected.returncode or not re.search(r'int\s+selected_line\s*=\s*464\s*;', selected.stdout):
+if selected.returncode or not re.search(r'int\s+selected_line\s*=\s*510\s*;', selected.stdout):
     raise SystemExit('CPU40 memory-size selection or line mapping failed: ' + selected.stderr)
 if not excluded.returncode or marker[7:] not in excluded.stdout + excluded.stderr:
     raise SystemExit('unsupported i386 memory-size arm did not fail at its guard')

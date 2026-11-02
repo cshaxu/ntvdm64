@@ -421,7 +421,7 @@ GLOBAL VOID config( VOID )
 #if (defined(i386) || defined(_M_IX86)) && !defined(CPU_40_STYLE)
 #error Excluded unsupported non-CPU40 i386 memory-size profile
 #else
-#line 464
+#line 510
 	 vdmMemorySize = GetVDMSize(VDMForWOW);
 
 	 // Extend the vdm size if the user asks for it through a .PIF.

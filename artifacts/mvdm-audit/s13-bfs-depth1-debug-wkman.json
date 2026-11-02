@@ -159,12 +159,14 @@
     "removed_body_lines": 67,
     "subsumed_markers": {},
     "selected_alternative_line": null,
-    "following_line": 4538,
+    "following_line": 4479,
     "status": "actual x86 WOW selected preprocessing equal ignoring blank lines; WOW object compiled; x86/x64 guard and line controls pass; full product/runtime pending",
     "registration": "MVDM-HOST-DIV-575",
     "current_start_line": 4400,
     "after_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17",
     "current_cut_line": 4402,
-    "current_end_line": 4402
+    "current_end_line": 4402,
+    "prior_following_line": 4538,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-unconditional-batch.json"
   }
 ]

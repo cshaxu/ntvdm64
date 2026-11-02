@@ -208,7 +208,7 @@
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
       "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
-      "working_sha256": "469ee7189e17e2a186a71d7a37ea0d4044d1658f2bc88f06f0fb08505617b5fa",
+      "working_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5",
       "signature": [
         [
           "ifdef",

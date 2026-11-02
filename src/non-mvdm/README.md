@@ -1,5 +1,9 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-153: correct original diagnostic continuation mappings in two
+unconditional source spans without changing selected preprocessing. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-line-unconditional-batch.json`.
+
 OPENNT-HOST-152: restore original diagnostic positions after two excluded
 first-depth branches, preserving their selected continuations. See
 `../../artifacts/mvdm-audit/s13-bfs-depth1-original-line-batch.json`.

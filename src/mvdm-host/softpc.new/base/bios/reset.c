@@ -800,7 +800,7 @@ void reset()
 #ifdef HFX
 #error Unsupported excluded original configuration
 #endif
-#line 1007
+#line 1096
 }
 
 /*(

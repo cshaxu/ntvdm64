@@ -1292,7 +1292,7 @@ VOID InitCBFormats ()
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 1304
+#line 1227
 
 
 }

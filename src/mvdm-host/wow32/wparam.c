@@ -554,7 +554,7 @@ VOID CacheBlockFree(PBLKCACHE pc, LPVOID lpv)
         PBLKHEADER pbhf = pc->pCacheFree;
         PBLKHEADER pbhLast = NULL;
 #endif
-#line 610
+#line 585
         // list of free nodes
 
         // insert in order
