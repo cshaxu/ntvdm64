@@ -4863,34 +4863,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 222,
-      "kind": "ifdef",
-      "expression": "_MIPS_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 226,
-      "kind": "ifdef",
-      "expression": "_PPC_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 230,
-      "kind": "ifdef",
-      "expression": "ALPHA",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 236,
+      "start": 239,
       "kind": "ifndef",
       "expression": "PROD",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4899,7 +4872,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 336,
+      "start": 339,
       "kind": "ifdef",
       "expression": "WITHSIZE",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4908,7 +4881,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 341,
+      "start": 344,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4917,7 +4890,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 356,
+      "start": 359,
       "kind": "ifdef",
       "expression": "WITHSIZE",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4926,7 +4899,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 360,
+      "start": 363,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4935,7 +4908,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 386,
+      "start": 389,
       "kind": "ifdef",
       "expression": "WITHSIZE",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4944,7 +4917,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 390,
+      "start": 393,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4953,7 +4926,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 425,
+      "start": 428,
       "kind": "ifdef",
       "expression": "WITHSIZE",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4962,7 +4935,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 476,
+      "start": 479,
       "kind": "ifdef",
       "expression": "STAND_ALONE",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4971,7 +4944,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 478,
+      "start": 481,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4980,7 +4953,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 486,
+      "start": 489,
       "kind": "ifndef",
       "expression": "STAND_ALONE",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4989,7 +4962,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
-      "start": 503,
+      "start": 506,
       "kind": "ifdef",
       "expression": "STAND_ALONE",
       "pending_reason": "file-not-witnessed-in-product",
@@ -8914,7 +8887,7 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 821
+      "count": 818
     },
     {
       "reason": "file-not-witnessed-in-product",

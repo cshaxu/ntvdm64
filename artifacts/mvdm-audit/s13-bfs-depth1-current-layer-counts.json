@@ -3,9 +3,9 @@
   "depth1_groups": 4074,
   "depth1_arms": 5050,
   "depth1_status": {
-    "pending": 987,
+    "pending": 984,
     "already-excluded": 1603,
-    "newly-excluded": 593,
+    "newly-excluded": 596,
     "retained-observed": 1863,
     "retained-original-assertion": 4
   },

@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-609: preserve original first-depth selectors for unsupported
+dat2obj MIPS, PowerPC and Alpha host profiles, rejecting their bodies. Source and
+SDK macro scans and x86/x64 controls are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-dat2obj-arch-batch.json`.
+
 MVDM-HOST-DIV-608: preserve original first-depth selectors for unsupported
 CMOS TEST_HARNESS profile, rejecting their bodies. Source and
 SDK macro scans and x86/x64 controls are recorded in

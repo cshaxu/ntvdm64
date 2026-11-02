@@ -220,16 +220,19 @@ LOCAL IU16 getMachineId IFN0()
 #endif /* _X86_ */
 
 #ifdef _MIPS_
-		machineId = IMAGE_FILE_MACHINE_R4000;
+#error DIVERGENCE MVDM-HOST-DIV-609: unsupported _MIPS_ profile
 #endif /* _MIPS_ */
+#line 225
 
 #ifdef _PPC_
-		machineId = IMAGE_FILE_MACHINE_POWERPC;
+#error DIVERGENCE MVDM-HOST-DIV-609: unsupported _PPC_ profile
 #endif /* _PPC_ */
+#line 229
 
 #ifdef ALPHA
-		machineId = IMAGE_FILE_MACHINE_ALPHA;
+#error DIVERGENCE MVDM-HOST-DIV-609: unsupported ALPHA profile
 #endif /* ALPHA */
+#line 233
 
 		/* Empty brace if none of the above are defined. */
 	}

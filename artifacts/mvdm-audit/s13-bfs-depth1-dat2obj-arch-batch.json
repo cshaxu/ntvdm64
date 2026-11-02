@@ -1,0 +1,110 @@
+{
+  "scope": "three first-depth arms, original bodies matched; nested source and queue entries inside excluded arms removed without deeper audit",
+  "macro_evidence": {
+    "compile_commands_checked": 2070,
+    "jobs_sha256": "623d1067dca46b9fabf571db17d6567d8f03e04047245ca9ac11fcda71c725ea",
+    "command_macro_definitions_found": 0,
+    "source_generated_sdk_definitions_found": 0,
+    "scope": "src, tests, tools, generated Ninja trees and eight SDK include roots",
+    "controls": "6 x86/x64 isolated selector checks; original removed body matched after line-ending normalization; selected x86 condition retained"
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "macro": "_MIPS_",
+      "original_start": 222,
+      "original_cut": 224,
+      "original_end": 224,
+      "removed_body_sha256": "2419fce5e7214ec68e03fb6e78d5d2e284aa5705bc425988d4ffd15d60a01d34",
+      "removed_lines": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "macro": "_PPC_",
+      "original_start": 226,
+      "original_cut": 228,
+      "original_end": 228,
+      "removed_body_sha256": "45adebc5435e7888cf11067096e9c48dc0432beda1ddff579957dae068bdf19b",
+      "removed_lines": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "macro": "ALPHA",
+      "original_start": 230,
+      "original_cut": 232,
+      "original_end": 232,
+      "removed_body_sha256": "b3211aa01ce3ce3d0816218978db83fd814e23e7c1f73812a7710e2faa107a34",
+      "removed_lines": 1
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "start": 222,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "start": 226,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "start": 230,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "start": 222,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "start": 226,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "start": 230,
+      "normal_pass": true,
+      "forced_rejected": true
+    }
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "before": "b4cc2445a18cebd7f8153fded458993b0e1b12d6159bc2afeadda790f9a05b5f",
+      "after": "49f7980131944c8ad92402b96f94ddd2f4be471bba248d7cb986efa4a00e6c89"
+    }
+  ],
+  "removed_inner_group_count": 0,
+  "validation": {
+    "x86_cached_build": "passed; no work",
+    "x64_cached_build": "passed; no work",
+    "guard_gate": "x86 and x64; see progress record",
+    "published_release": "all ten product images byte-identical to accepted prior release at both destinations",
+    "published_images": [
+      "run16.exe",
+      "ntsrv.exe",
+      "ntcon.exe",
+      "ntvdm.exe",
+      "ntvwm.exe",
+      "ntmon.exe",
+      "WOW32.DLL",
+      "VDMREDIR.DLL",
+      "nthook32.dll",
+      "nthook64.dll"
+    ]
+  }
+}
