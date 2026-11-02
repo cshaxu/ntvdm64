@@ -7211,42 +7211,6 @@
       "current_actual_includers": 90
     },
     {
-      "path": "src/mvdm-host/wow32/wuclass.c",
-      "start": 250,
-      "kind": "if",
-      "expression": "(GCL_WNDPROC != (-24) || GCL_MENUNAME != (-8))",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 1
-    },
-    {
-      "path": "src/mvdm-host/wow32/wuclass.c",
-      "start": 430,
-      "kind": "if",
-      "expression": "(GCL_HBRBACKGROUND != (-10) || GCL_HCURSOR != (-12) || GCL_HICON != (-14) || GCL_HMODULE != (-16) || GCL_CBWNDEXTRA != (-18) || GCL_CBCLSEXTRA != (-20) || GCL_STYLE != (-26))",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 1
-    },
-    {
-      "path": "src/mvdm-host/wow32/wuclass.c",
-      "start": 711,
-      "kind": "if",
-      "expression": "(GCL_MENUNAME != (-8) || GCL_WNDPROC != (-24))",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 1
-    },
-    {
-      "path": "src/mvdm-host/wow32/wuclass.c",
-      "start": 946,
-      "kind": "if",
-      "expression": "(GCL_HBRBACKGROUND != (-10) || GCL_HCURSOR != (-12) || GCL_HICON != (-14) || GCL_CBWNDEXTRA != (-18) || GCL_CBCLSEXTRA != (-20) || GCL_STYLE != (-26))",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 1
-    },
-    {
       "path": "src/mvdm-host/wow32/wusercli.h",
       "start": 12,
       "kind": "ifdef",
@@ -7263,15 +7227,6 @@
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "current_actual_includers": 2
-    },
-    {
-      "path": "src/non-mvdm/base/ntos/rtl/error.c",
-      "start": 36,
-      "kind": "if",
-      "expression": "ERROR_SUCCESS != 0 || NO_ERROR != 0",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 6
     },
     {
       "path": "src/non-mvdm/base/win32/client/basedll.h",
@@ -8710,7 +8665,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 111
+      "count": 106
     },
     {
       "reason": "file-not-witnessed-in-product",

@@ -3,11 +3,11 @@
   "depth1_groups": 4074,
   "depth1_arms": 5050,
   "depth1_status": {
-    "pending": 965,
+    "pending": 960,
     "newly-excluded": 615,
     "already-excluded": 1603,
     "retained-observed": 1863,
-    "retained-original-assertion": 4
+    "retained-original-assertion": 9
   },
   "depth2_parent_status_counts": {
     "retained-observed": 1396,

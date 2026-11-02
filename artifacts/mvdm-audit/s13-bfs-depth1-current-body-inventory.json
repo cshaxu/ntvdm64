@@ -58300,8 +58300,8 @@
       "group_end": 252,
       "kind": "if",
       "expression": "(GCL_WNDPROC != (-24) || GCL_MENUNAME != (-8))",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "retained-original-assertion",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "3333e4001fb992e772a0f33ff62c393532e2698b8ac7a0ccf715ea8cca234adc"
@@ -58365,8 +58365,8 @@
       "group_end": 432,
       "kind": "if",
       "expression": "(GCL_HBRBACKGROUND != (-10) || GCL_HCURSOR != (-12) || GCL_HICON != (-14) || GCL_HMODULE != (-16) || GCL_CBWNDEXTRA != (-18) || GCL_CBCLSEXTRA != (-20) || GCL_STYLE != (-26))",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "retained-original-assertion",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "3333e4001fb992e772a0f33ff62c393532e2698b8ac7a0ccf715ea8cca234adc"
@@ -58378,8 +58378,8 @@
       "group_end": 713,
       "kind": "if",
       "expression": "(GCL_MENUNAME != (-8) || GCL_WNDPROC != (-24))",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "retained-original-assertion",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "3333e4001fb992e772a0f33ff62c393532e2698b8ac7a0ccf715ea8cca234adc"
@@ -58482,8 +58482,8 @@
       "group_end": 948,
       "kind": "if",
       "expression": "(GCL_HBRBACKGROUND != (-10) || GCL_HCURSOR != (-12) || GCL_HICON != (-14) || GCL_CBWNDEXTRA != (-18) || GCL_CBCLSEXTRA != (-20) || GCL_STYLE != (-26))",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "retained-original-assertion",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "3333e4001fb992e772a0f33ff62c393532e2698b8ac7a0ccf715ea8cca234adc"
@@ -59535,8 +59535,8 @@
       "group_end": 38,
       "kind": "if",
       "expression": "ERROR_SUCCESS != 0 || NO_ERROR != 0",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "retained-original-assertion",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "356ebf6b2235e08b1493569ec6a7c37be0cb095802e723736878cf2b25b94b5f"
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 965,
+    "pending": 960,
     "newly-excluded": 615,
     "already-excluded": 1603,
     "retained-observed": 1863,
-    "retained-original-assertion": 4
+    "retained-original-assertion": 9
   },
   "pending_by_guard": {
     "not-guard": 850,
-    "guard": 115
+    "guard": 110
   }
 }

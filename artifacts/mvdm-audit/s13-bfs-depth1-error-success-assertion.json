@@ -1,0 +1,39 @@
+{
+  "scope": "preserve original first-depth SDK success-code assertion",
+  "path": "src/non-mvdm/base/ntos/rtl/error.c",
+  "current_line": 36,
+  "original_line": 35,
+  "original_sha256": "88bf09ab98778e0ca58d9d232d3b7aba6115223f43eddf981f6e06b786e77e48",
+  "controls": [
+    {
+      "arch": "x86",
+      "mode": "normal",
+      "returncode": 0
+    },
+    {
+      "arch": "x86",
+      "mode": "invalid_success",
+      "returncode": 2
+    },
+    {
+      "arch": "x86",
+      "mode": "invalid_no_error",
+      "returncode": 2
+    },
+    {
+      "arch": "x64",
+      "mode": "normal",
+      "returncode": 0
+    },
+    {
+      "arch": "x64",
+      "mode": "invalid_success",
+      "returncode": 2
+    },
+    {
+      "arch": "x64",
+      "mode": "invalid_no_error",
+      "returncode": 2
+    }
+  ]
+}
