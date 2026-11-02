@@ -1,0 +1,1120 @@
+{
+  "scope": "86 whole original public internal header files, file disposition only; no inferred macro truth values or source edits",
+  "graphs_checked": [
+    "build/.ninja/console-observers-x64/build.ninja",
+    "build/.ninja/msvc-x64-formal-release/build.ninja",
+    "build/.ninja/msvc-x64-release/build.ninja",
+    "build/.ninja/msvc-x86-formal-release/build.ninja",
+    "build/.ninja/msvc-x86-release/build.ninja",
+    "build/.ninja/msvc-x86-suballoc-audit/build.ninja",
+    "build/.ninja/observations-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x86/build.ninja",
+    "build/.ninja/t463-s2-dialog-end-boundary/build.ninja",
+    "build/.ninja/t463-s2-dialog-procedure/build.ninja",
+    "build/.ninja/t473-s8-control-boundaries/build.ninja",
+    "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x86/wow32/build.ninja",
+    "build/.ninja/pkg-uuid-x64/frontend/build.ninja",
+    "build/.ninja/pkg-uuid-x64/hook/build.ninja",
+    "build/.ninja/pkg-uuid-x64/launcher/build.ninja",
+    "build/.ninja/pkg-uuid-x64/monitor/build.ninja",
+    "build/.ninja/pkg-uuid-x64/service/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+    "build/.ninja/msvc-x86-release/call-boundaries/build.ninja",
+    "build/.ninja/msvc-x86-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x86-release/worker/build.ninja",
+    "build/.ninja/msvc-x86-release/wow32/build.ninja",
+    "build/.ninja/msvc-x64-release/frontend/build.ninja",
+    "build/.ninja/msvc-x64-release/hook/build.ninja",
+    "build/.ninja/msvc-x64-release/launcher/build.ninja",
+    "build/.ninja/msvc-x64-release/monitor/build.ninja",
+    "build/.ninja/msvc-x64-release/observation/build.ninja",
+    "build/.ninja/msvc-x64-release/service/build.ninja",
+    "build/.ninja/msvc-x64-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x64-release/worker/build.ninja",
+    "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja"
+  ],
+  "method": "Current build jobs, 34 Ninja graphs and dependencies, tests/tools exact basename references; pinned original and current hashes verified.",
+  "limitation": "Reopen entire branch queues if supported build or direct test begins using these files. No claim about individual condition values or unbuilt scenarios.",
+  "records": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/acd.h",
+      "current_sha256": "69c895fdd720b27e00713d9dc5fedb27e5e7737facc7efa83379f277518966f4",
+      "original_sha256": "97ec1f691e053a74f04358e7df2279232f2dd625def6241f4576154c6b173cd3",
+      "arms": [
+        {
+          "line": 22,
+          "kind": "ifndef",
+          "expression": "_RASACD_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/alertmsg.h",
+      "current_sha256": "2894879f72505fd333a19dce5b0d142d75918dafcd6f552da9bdc0a626085d60",
+      "original_sha256": "4e23ee63dad3ed091e1cd2ae0744ae674b2024ed59b380330ac1c50907f0294c",
+      "arms": [
+        {
+          "line": 32,
+          "kind": "ifndef",
+          "expression": "_ALERTMSG_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/arc.h",
+      "current_sha256": "e188bef39db838de53cdae08c8bfcd8f976f9fb64079413b24d1cd11262e3836",
+      "original_sha256": "91e85dec145edf9abfcb2174aa1d2bee323614f58fabdb669d307b2a1ea1ed08",
+      "arms": [
+        {
+          "line": 23,
+          "kind": "ifndef",
+          "expression": "_ARC_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/arccodes.h",
+      "current_sha256": "f8b06b0277bacccb3bd0ae6a20ad138f3fb70d23a715b04247806d4cd2c8ce52",
+      "original_sha256": "7188b36559f3ede2c3a4acf9637b6245efe932655de7176c596321d93fe79cc1",
+      "arms": [
+        {
+          "line": 22,
+          "kind": "ifndef",
+          "expression": "_ARCCODES_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/csr.h",
+      "current_sha256": "f6a5796c25b5d95b2b4057b4ba699e169ed48188910a839636f78fbec772b9d1",
+      "original_sha256": "fe916885a69bcb46c24afbd7bbfa2dae43abc75d39339e095a79421b78cd1d7c",
+      "arms": [
+        {
+          "line": 38,
+          "kind": "ifndef",
+          "expression": "DBG"
+        },
+        {
+          "line": 48,
+          "kind": "if",
+          "expression": "DBG"
+        },
+        {
+          "line": 50,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/dfsfsctl.h",
+      "current_sha256": "ddc1970935c1efdf059e477ed54d713e4e7f36e2d2cb81e3fbffad38c19c1433",
+      "original_sha256": "aeca1a1b9bdc2f70424b3865edc0b000543e93e49b9c321ce9d9b280e625a7a2",
+      "arms": [
+        {
+          "line": 17,
+          "kind": "ifndef",
+          "expression": "_DFSFSCTL_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/elfkrnl.h",
+      "current_sha256": "c5012ede8357581f8f0f8da31b8f72139f3a8a633d8725944a51f3de496d0afe",
+      "original_sha256": "7b96fd06e110588e69a9b141731a060e3e06ffeba3c4875a2a3a9ef2df9ef21b",
+      "arms": [
+        {
+          "line": 15,
+          "kind": "ifndef",
+          "expression": "_ELFKRNL_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/fmifs.h",
+      "current_sha256": "28e11c0c05a5b3e49dfd6b3bdf3c5dc72e38c06ac3c8bf88439eb0a59dae247f",
+      "original_sha256": "6840066775156a6653b9d794c0266aeff17fad1d3cc6076d3067b7c0e5f5b45a",
+      "arms": [
+        {
+          "line": 21,
+          "kind": "if",
+          "expression": "!defined( _FMIFS_DEFN_ )"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/hostannc.h",
+      "current_sha256": "2662fff2b919afe8df0f3a89820bbef1f91d7f936a88be94a7a88aa181e45797",
+      "original_sha256": "6e2b6f801f1687af6b11cd5724a37ecee1460fd9bee410ebd5612f1fa01b5abb",
+      "arms": [
+        {
+          "line": 25,
+          "kind": "ifndef",
+          "expression": "_HOSTANNC_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/nbtioctl.h",
+      "current_sha256": "3bc7b2a6eb503c5d73a74437f697826a91ec98754a40c05cd731c1420aea2350",
+      "original_sha256": "ad0e694b03bc4206fb65981aef4fb188e86fd461f455ebad8b917033751e8210",
+      "arms": [
+        {
+          "line": 24,
+          "kind": "ifndef",
+          "expression": "_NBTIOCTL_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/netlogon.h",
+      "current_sha256": "f9bb5b4e705b380aae9c1ae3585894c173f0cf69bad6a02d455f81214c70b5bc",
+      "original_sha256": "0feaef9fb8eaa9f48cffb8eaf842c347190a3e7b6d919b7c003dddfd09b4fb3c",
+      "arms": [
+        {
+          "line": 245,
+          "kind": "ifndef",
+          "expression": "NO_PACKING"
+        },
+        {
+          "line": 306,
+          "kind": "ifndef",
+          "expression": "NO_PACKING"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/pnpmgr.h",
+      "current_sha256": "caa05599f7717f55728ee960be1a4a333e7183510244b5a7169f0867c93f44b1",
+      "original_sha256": "682590b8c25e513973a10f9b21d3e3cfd8614be9b11985148a5e784b8c9100c5",
+      "arms": [
+        {
+          "line": 16,
+          "kind": "ifndef",
+          "expression": "_PNPMGR_"
+        },
+        {
+          "line": 105,
+          "kind": "ifndef",
+          "expression": "FAR"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/pnpsetup.h",
+      "current_sha256": "82fc2d430e17f7af3cf9d56cc8048e7e50d1e26f1659f5af16373dd2bc6785ef",
+      "original_sha256": "05de8da48a91a8e55c15e2ee090ac19ac21051021964e1f2eeab53def70d8ae9",
+      "arms": [
+        {
+          "line": 24,
+          "kind": "ifndef",
+          "expression": "FAR"
+        },
+        {
+          "line": 33,
+          "kind": "ifndef",
+          "expression": "_SETUP_DEVICE_ARRIVAL_NOTIFICATION_DEFINED_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/profiles.h",
+      "current_sha256": "4940f312a8f401e47a3a85b43299d859f9e99bbe367346b94de9c17cdf2ee967",
+      "original_sha256": "9ba20a1f435a74af1fc6f9f31ec5534c949a8def0b2c4eed8b149a1e809b52ee",
+      "arms": [
+        {
+          "line": 25,
+          "kind": "ifndef",
+          "expression": "_PROFILES_H_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/seopaque.h",
+      "current_sha256": "f9b9f99060781674de6f38c068b9f160eff86ddb9c0da73eadfb458ff4a1f76b",
+      "original_sha256": "baefe55569694866c00f23352e93825eb91146cf5132bb72e26286b610930f34",
+      "arms": [
+        {
+          "line": 26,
+          "kind": "ifndef",
+          "expression": "_SEOPAQUE_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/sertlp.h",
+      "current_sha256": "0c1c8176f6cd3205714d0320fb738158a0e0ab78dd637bb9f1ffe2199b8ab1fc",
+      "original_sha256": "aee4e8bff745720d07dd6f36e552bf8ac986d489be7807d811324e5b4299acdb",
+      "arms": [
+        {
+          "line": 31,
+          "kind": "ifndef",
+          "expression": "_SERTLP_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/setupblk.h",
+      "current_sha256": "d90add429284f356a5b10a669a8b228a7c93343090a06b1e737e752b7d16e5fe",
+      "original_sha256": "fa79e87ffd83b558200ab41ccf881d3ced33a9b8df38e558a780e1ba8909bebb",
+      "arms": [
+        {
+          "line": 1,
+          "kind": "ifndef",
+          "expression": "_SETUPBLK_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/sm.h",
+      "current_sha256": "6c15b5ddef2397a9683955bc3659ccbcbff7ff9e05fabe594abfe415f463f708",
+      "original_sha256": "7ae92f25399c402cbbb49a5900768cf44cd81cffed6d00cac6b502a20143edd5",
+      "arms": [
+        {
+          "line": 21,
+          "kind": "ifndef",
+          "expression": "_SM_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smb.h",
+      "current_sha256": "5764862a4b7c788462a06edfae5f29177c7c46b78f39930524c65c4aca7a60f9",
+      "original_sha256": "45553f23d730aeecc99bfc1ba1b3bdf2b53d882d31115b1d2fb858fa0e40ceb0",
+      "arms": [
+        {
+          "line": 23,
+          "kind": "ifndef",
+          "expression": "_SMB_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbipx.h",
+      "current_sha256": "a12da0b3c63841fe10702d447fe8093692c15b514bbf8f9fc0278f0d9b9e500f",
+      "original_sha256": "08e4f362d4ef00a9428c7ef3aa5b7379af1a11701d2cf00cf6bf20ff5e7b1df2",
+      "arms": [
+        {
+          "line": 23,
+          "kind": "ifndef",
+          "expression": "_SMBIPX_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtrans.h",
+      "current_sha256": "b178014ee0e9c7792eeca75828f7714d8da946ed2681932167c62973833a5f73",
+      "original_sha256": "cc7d7ee8d3ec918a8dea5594594dbd801c549c30aff2876e9be57471cfb82261",
+      "arms": [
+        {
+          "line": 23,
+          "kind": "ifndef",
+          "expression": "_SMBTRANS_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/smbtrsup.h",
+      "current_sha256": "1d92678241a510a4ce7b26711faf1f1e59d8263586e50b6f31e79615c2978311",
+      "original_sha256": "dadd39e17cddd27547319769e1b1799c802fbb3099b60b21a37e5ac6c446c68e",
+      "arms": [
+        {
+          "line": 28,
+          "kind": "ifndef",
+          "expression": "_SMBTRSUP_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/srvfsctl.h",
+      "current_sha256": "759ed95643cde0d1bfafc0b2a34f7ef4cdb1e7fbb36a5df7185552476fef7834",
+      "original_sha256": "ecc6205f0e6871de24eb3ecbf1b3e378be2cdfcf4109f440fa8e7b5aff83f441",
+      "arms": [
+        {
+          "line": 22,
+          "kind": "ifndef",
+          "expression": "_SRVFSCTL_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/svcs.h",
+      "current_sha256": "be5be516ecdd44e79a9652a4a79f726400da1a6c0a21afb13d3149fa06887012",
+      "original_sha256": "109f8132de59dcf06f30273b77fc98027ef58169b893dcc0180fa37671a9f4d5",
+      "arms": [
+        {
+          "line": 34,
+          "kind": "ifndef",
+          "expression": "_SVCS_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdi.h",
+      "current_sha256": "e2d310021e1fc0d9e63f8fb896ef700c9c5db3678cab289d37181aab462cc539",
+      "original_sha256": "dcad14f13c02afd9aa952ded041165a44a9792e7cf4c995cd3d4963beddb42c8",
+      "arms": [
+        {
+          "line": 29,
+          "kind": "ifndef",
+          "expression": "_TDI_USER_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdikrnl.h",
+      "current_sha256": "874c86f752b02a4bea8cc6f1eb068af7f501bd5e50cac687f182c5fa33e9b184",
+      "original_sha256": "2ccad27fd47278e391037ab827b72d93b2e445cdc61964f44db54c0a6fef1758",
+      "arms": [
+        {
+          "line": 23,
+          "kind": "ifndef",
+          "expression": "_TDI_KRNL_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/winnlsp.h",
+      "current_sha256": "88daca29ee6c84ee4d80884daf2f1539d2b957be4a7e710c2245fcbfa8ce9df3",
+      "original_sha256": "4eb15a535609541f9b43899733ebeddda7c60415303295228b1e42e8b4d8df9a",
+      "arms": [
+        {
+          "line": 15,
+          "kind": "ifndef",
+          "expression": "_WINNLSP_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/winsvcp.h",
+      "current_sha256": "340a011e4c109639b5ddd2f2d847824c8110f0567400ed300fb4bedbcc7b14df",
+      "original_sha256": "0921d657dc58153698fa76f82871c8c70001773580add78790053d859428df58",
+      "arms": [
+        {
+          "line": 28,
+          "kind": "ifndef",
+          "expression": "_WINSVCP_INCLUDED"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/xactsrv2.h",
+      "current_sha256": "06c0176089eedde6da30c092ce533f0438b6c4fc5266c8bd180e881d062356d3",
+      "original_sha256": "a157473863d9df9dad373298a18d454c2d8448385689a04e9e5bcf965e0d5118",
+      "arms": [
+        {
+          "line": 22,
+          "kind": "ifndef",
+          "expression": "_XACTSRV_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/align.h",
+      "current_sha256": "2bad93351b7fe722343b8835d9ea8e5996d1ea13438be24bf2cbe94889308f34",
+      "original_sha256": "b2922ca133bfd608bf86f33595c1dfb2b325cb31a0e83d4bfe18f0d91795e28f",
+      "arms": [
+        {
+          "line": 17,
+          "kind": "ifndef",
+          "expression": "_ALIGN_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/configp.h",
+      "current_sha256": "e2b025127cb88516b9e24bf4e8f1f378f71a5ceb01d0c6e26b58acb0f84f0a6d",
+      "original_sha256": "b20d9cc466dad59ea33becfe923824e959a7551cd4db2ea5359d48e6259d053a",
+      "arms": [
+        {
+          "line": 35,
+          "kind": "ifndef",
+          "expression": "CONFIGP_H"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/confname.h",
+      "current_sha256": "1f5ff57b8176b4b0505882dbffa3ada250a7c3d09d0a86442f698c50bf48aaa4",
+      "original_sha256": "e992c67363160f99259395503e3fbde72d968e4063b243559fdcf7ec010820f8",
+      "arms": [
+        {
+          "line": 58,
+          "kind": "ifndef",
+          "expression": "_CONFNAME_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/dlserver.h",
+      "current_sha256": "b8892fc49485be1f3c004fd3e548c513c63d6dbca86e3c4ef3fe055b5f1f5e0f",
+      "original_sha256": "517e24032f715358914bafe963eb15d26f10def77330433f24f0c78ea9c2a481",
+      "arms": [
+        {
+          "line": 66,
+          "kind": "ifndef",
+          "expression": "_DLSERVER_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/dlwksta.h",
+      "current_sha256": "d56d105d9f16531ff4c2d4cea79438f9b605797eb9d33924f7aeadb5b0ccd7ac",
+      "original_sha256": "386f9dc0bb6dda6d20f651e088dd959d138237a227b0b8603c09229d0cde214f",
+      "arms": [
+        {
+          "line": 35,
+          "kind": "ifndef",
+          "expression": "_DLWKSTA_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/dosprint.h",
+      "current_sha256": "aa73c66d6e521af5fb50749895450c36a72a80816ed0539bfdbaea71158ffca8",
+      "original_sha256": "2123d9c40a7cd8073792cfe7ee7cbfb1785282365766d0339b65c0a4e58fabef",
+      "arms": [
+        {
+          "line": 29,
+          "kind": "ifndef",
+          "expression": "_DosPRINT_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/dosprtp.h",
+      "current_sha256": "823d3f49d14320f6359e03479768f74b43ebd8f1f93c7b0dea9f78e0c95da859",
+      "original_sha256": "e3e2662857ea2fe5ae97642f6a0bef5ea981002660e5a8ceffaacac4f6935d5c",
+      "arms": [
+        {
+          "line": 42,
+          "kind": "ifndef",
+          "expression": "_DOSPRTP_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/hashfunc.h",
+      "current_sha256": "d8c091eef28d902332fc293514aeb91bae43cf3ca0d723fbc2cd46d06dbc6613",
+      "original_sha256": "b7269c8699f2c057cd86c610d3319df90cb2682770c65493322b3e7d530521e2",
+      "arms": [
+        {
+          "line": 25,
+          "kind": "ifndef",
+          "expression": "_HASHFUNC_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/icanon.h",
+      "current_sha256": "9988968d2ab1a984c8bd9ea0b679150f0e99b4d9654872a3f963312deb613cd5",
+      "original_sha256": "e837ba030bfb4f55a4e7b8ac4c88f7d54ef5b5ff63434cc2b65111f9c5152799",
+      "arms": [
+        {
+          "line": 46,
+          "kind": "ifndef",
+          "expression": "_ICANON_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/logonmsv.h",
+      "current_sha256": "25571ddf3a8f767af23f9c6bf09b563de51f33e24955713913765d7dab544578",
+      "original_sha256": "3994307ad3b7520f7574a6b8177125b3d5ba5bf37ce096b3d9611ff978118b37",
+      "arms": [
+        {
+          "line": 28,
+          "kind": "ifndef",
+          "expression": "__LOGONMSV_H__"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/lsaicli.h",
+      "current_sha256": "50d7c7d850fd315b0d77bf2b3a3dcfc1cf5dbced036d72e4d823008aaf02a0f9",
+      "original_sha256": "25cbf9c48bd8587f0585ddfdc0ee36061a8a25c9de4db44cb8f473867193028b",
+      "arms": [
+        {
+          "line": 30,
+          "kind": "ifndef",
+          "expression": "_LSAICLI_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/lsaisrv.h",
+      "current_sha256": "045a1f71252c03765128c988b73758ec66510d2f54f888e32ffcc63f20c154f8",
+      "original_sha256": "71b5b11121b7570dbb56d06024fc55d3f892dc606812bde6d954375ef983d5ff",
+      "arms": [
+        {
+          "line": 30,
+          "kind": "ifndef",
+          "expression": "_LSAISRV_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/lsarpc.h",
+      "current_sha256": "5a742ea3124df63830c53c44ca5b3876555e2d408a62729c02047f393c4c82aa",
+      "original_sha256": "5a742ea3124df63830c53c44ca5b3876555e2d408a62729c02047f393c4c82aa",
+      "arms": [
+        {
+          "line": 15,
+          "kind": "ifndef",
+          "expression": "__lsarpc_h__"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/lsass.h",
+      "current_sha256": "42624be75b6a6ebc1004ba61a9a8a8a928fa5dc5d6656adab0a0b3d7405875a4",
+      "original_sha256": "2bb766c27ee8129833a55de4aca5a9e52392570ca5c149fd48a73cc9943a13b6",
+      "arms": [
+        {
+          "line": 28,
+          "kind": "ifndef",
+          "expression": "_LSASS_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/mapsupp.h",
+      "current_sha256": "8bf427edebfc093f65e7f7937702f480120f4e8511ff784cb0e7ef8cd1c7caf8",
+      "original_sha256": "c426d20a0bea1350fd202f7c45638f68647b8c3119acc84ccad83df0385a1d2a",
+      "arms": [
+        {
+          "line": 32,
+          "kind": "ifndef",
+          "expression": "_MAPSUPP_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlock.h",
+      "current_sha256": "faa913127de39d61425622d94b28eed75db45fea65b9db53034efa5cdc1f0a69",
+      "original_sha256": "dadaefe455d80221691dee11e0304645e4996b8a2195d2e5a61001640ce9ff08",
+      "arms": [
+        {
+          "line": 67,
+          "kind": "ifndef",
+          "expression": "_NETLOCK_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlockp.h",
+      "current_sha256": "632cbd8ff1cf165bb234312b0b61cae73f156c98d39030411833737b64a3e7ce",
+      "original_sha256": "5ffef28fad37f08213886c254b491b8a480c1fca9926d47a3d3d3293a3fae9ea",
+      "arms": [
+        {
+          "line": 44,
+          "kind": "ifndef",
+          "expression": "_NETLOCKP_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netrpc.h",
+      "current_sha256": "55c6de04f24045579ddcf8b9222c90cbb0c052b46ca06bf0d8e2bb3f5e492c7f",
+      "original_sha256": "df7e7d38b781cc4df30983c15afa98bc30878ae0ed1971ac5fc486733791fc83",
+      "arms": [
+        {
+          "line": 181,
+          "kind": "ifndef",
+          "expression": "_NETRPC_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/nticanon.h",
+      "current_sha256": "412a862c2b4547b839155514da597277921d19cbf255301154822bae50eea0bc",
+      "original_sha256": "1d60b2f751de29cc7f8b834740d9fb68e247fd1833cfd241692de249b829a221",
+      "arms": [
+        {
+          "line": 25,
+          "kind": "ifndef",
+          "expression": "_NTICANON_H_INCLUDED"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/ntrmlsa.h",
+      "current_sha256": "062e0dc77bc76b1b217f3ede552c751d7a68e1c258c9a9ea744446670b0d2afc",
+      "original_sha256": "c819d14b5008d5111e2933a9b0c1133742e2e62a12cb8e48eddb7ee92229b7eb",
+      "arms": [
+        {
+          "line": 27,
+          "kind": "ifndef",
+          "expression": "_NTRMLSA_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/ntsamp.h",
+      "current_sha256": "c3305f56d1534ddd605fe3332b4927e827afd69b51fb65e94113b2b529387505",
+      "original_sha256": "2abbf3e981feb807bb3594c2fd94ebb5755e447c3d18c97e306dfd83fa7fdd30",
+      "arms": [
+        {
+          "line": 28,
+          "kind": "ifndef",
+          "expression": "_NTSAMPRIVATE_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/permit.h",
+      "current_sha256": "ab808ea9b71ddcd9a7a817ed29578dc3b3e9395e8bc8da1f05ff8c9e38f06225",
+      "original_sha256": "c2d1e8e9e3e7ea4dc11805df0afba7e3e4f532c6ff462428d3d21cf7aefd0013",
+      "arms": [
+        {
+          "line": 33,
+          "kind": "ifndef",
+          "expression": "_PERMIT_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rx.h",
+      "current_sha256": "fe7d94e51f54e69f4aecd1a22e384d8f5eed3cd3cb0049ad29d4c3580d13e19c",
+      "original_sha256": "2576b2cf2302fe8f816844f1715403fb35f2fa3fed3279f2cc03c503a6f0552d",
+      "arms": [
+        {
+          "line": 43,
+          "kind": "ifndef",
+          "expression": "_RX_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxaudit.h",
+      "current_sha256": "cb7819cef78fec66eb1dda2d25ecae9bbc04d140bd8c4d14099a0ef3d26f48b8",
+      "original_sha256": "74faad360c6d686e257a0841cba588b96c333657f451aafc174139e1d35c9201",
+      "arms": [
+        {
+          "line": 36,
+          "kind": "ifndef",
+          "expression": "_RXAUDIT_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxconfig.h",
+      "current_sha256": "8b6ccbc275c14f4509847631f069e3934c3dacd396acc64398c3f390a3551b04",
+      "original_sha256": "a9579ab415748a9d6bf3b82b9c9c90bf63d3359c0fcac36c533740d861595c91",
+      "arms": [
+        {
+          "line": 28,
+          "kind": "ifndef",
+          "expression": "_RXCONFIG_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxconn.h",
+      "current_sha256": "087fc37fc54431465dbf4ffcb2196ec00dd2eaaa24d71091728db712e454a28b",
+      "original_sha256": "26f3258084419c4c31adb2b2832279910c8345af1fe8d008155161263cc9e902",
+      "arms": [
+        {
+          "line": 35,
+          "kind": "ifndef",
+          "expression": "_RXCONN_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxdomain.h",
+      "current_sha256": "d344418c18fe3e99660829a23ee9ef0377038680f753a39438f7fb4b24c6b42e",
+      "original_sha256": "e77dfdcd9bb7660795dbcd3df6ced55bb935abf59ac2e6336648ab45ee92aab7",
+      "arms": [
+        {
+          "line": 38,
+          "kind": "ifndef",
+          "expression": "_RXDOMAIN_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxerrlog.h",
+      "current_sha256": "714596a178cda27793aa172a708d74466cf2ecb205fc39332d5f2f9f0a480a71",
+      "original_sha256": "3a65d4358cc152de17a1808e62d81fd468082ec98b75ef30011000715eaf15dc",
+      "arms": [
+        {
+          "line": 34,
+          "kind": "ifndef",
+          "expression": "_RXERRLOG_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxfile.h",
+      "current_sha256": "edbbf2e2238909656a61a5a0a81c9741ba54b5edfb517b0b8240e7026b55ea22",
+      "original_sha256": "29555ae2e0418807d38448480f6bba0d10c9a32432de865d01d9acb65ef27e23",
+      "arms": [
+        {
+          "line": 33,
+          "kind": "ifndef",
+          "expression": "_RXFILE_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxpdebug.h",
+      "current_sha256": "51be35fa8f86a30ea68cead7898d2cefac964c63e6a8e0105de489077dd697b7",
+      "original_sha256": "2e91683121ab14cc67a70d236398d6ab6e3b599bc0a0025d5103ad9c73c59a78",
+      "arms": [
+        {
+          "line": 44,
+          "kind": "ifndef",
+          "expression": "_RXPDEBUG_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxprint.h",
+      "current_sha256": "5720d1f7db6c88dd4db9eebb92e889cb75d1c5c220b413af5c72db73a2ef9c50",
+      "original_sha256": "3affdaccc5dd5ab0486a09546cbb8a85287162e2308195903e5fdfd0e5d2937e",
+      "arms": [
+        {
+          "line": 56,
+          "kind": "ifndef",
+          "expression": "_RXPRINT_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxremutl.h",
+      "current_sha256": "7e98b234da89a87d9654dc3e7acb0241fecdded8955f8d0fbb4e9b25c41e32fd",
+      "original_sha256": "844c5741b2336cc0ae5743e3ba853c3c6497382244efd260182245c07264d5c1",
+      "arms": [
+        {
+          "line": 41,
+          "kind": "ifndef",
+          "expression": "_RXREMUTL_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxserver.h",
+      "current_sha256": "82bd075563163172a277ef904ae92dc8aa56f2cb226bd4a923784147ed08a8ec",
+      "original_sha256": "04f0063118df79c226528c92f24c2afc11f3066aadde708c067642146166ef22",
+      "arms": [
+        {
+          "line": 39,
+          "kind": "ifndef",
+          "expression": "_RXSERVER_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxsess.h",
+      "current_sha256": "593b4a43f3df63319fd2b15e2fc1d04879637cbc11a9a30293bc6cc8af64e54c",
+      "original_sha256": "e3569c50a0dc8a54ed6bddd3e178bea6484a84a4bacaba86d82b46c806ea1b56",
+      "arms": [
+        {
+          "line": 32,
+          "kind": "ifndef",
+          "expression": "_RXSESS_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxsvc.h",
+      "current_sha256": "35ea7eb3de1db05243e6afedd424a8647ebaa670dd3a10764b67c5465e61b09e",
+      "original_sha256": "11f1b67f6cfb15ac278a03ef5f3b1ca112931f80450d0171b65a0cb449218c74",
+      "arms": [
+        {
+          "line": 33,
+          "kind": "ifndef",
+          "expression": "_RXSVC_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxuse.h",
+      "current_sha256": "b817f06ff0d1b21a70435a3076b0385e6cc576b7cbbfd09d42969eef2d4a3715",
+      "original_sha256": "f4d7accae9a2fa3b13772dd3c4c87fc882e05bbd3d914f9886448865ac324f0e",
+      "arms": [
+        {
+          "line": 37,
+          "kind": "ifndef",
+          "expression": "_RXUSE_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxwksta.h",
+      "current_sha256": "fd0f4f2073a26b2c11e33a472536a8c4fdd3e2849e3538ddb55eb135c6ce3f99",
+      "original_sha256": "87e04271fd8474c36fe0a02de4be164bf90b306a2a688811ea66df7bb25db7bd",
+      "arms": [
+        {
+          "line": 38,
+          "kind": "ifndef",
+          "expression": "_RXWKSTA_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/samimp.h",
+      "current_sha256": "a8cfa62fbdfcb0935f70d6b7309c94d9c625623d732c371ac9d3992d51a76e5e",
+      "original_sha256": "ebc9bb41cad86e8786e57d21d0b5cedf245bc44f87cf957d6d9a123590ecaf62",
+      "arms": [
+        {
+          "line": 9,
+          "kind": "ifdef",
+          "expression": "MIDL_PASS"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/samisrv.h",
+      "current_sha256": "0c6eb6c61929b72292f6cc89038306aaff1c07db45e7bfce0fb714af6acb7ca1",
+      "original_sha256": "8ebabe6173027f2153994cff892358e5e63d1f553346e79a4aaab89f88f6e080",
+      "arms": [
+        {
+          "line": 30,
+          "kind": "ifndef",
+          "expression": "_SAMISRV_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/samrpc.h",
+      "current_sha256": "996c511debe79616d1a82ac8d0d70b9efae9547ef54cf99713d2abbc64758ec3",
+      "original_sha256": "7662c75ac02d9063618cbfb8e7cd319c17f8f4291d91d85ed41ad5f00037d63a",
+      "arms": [
+        {
+          "line": 15,
+          "kind": "ifndef",
+          "expression": "__samrpc_h__"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/samsrv.h",
+      "current_sha256": "f15d78f41ab0cb6f1d70a73df57c7b0f1c240c47ffe93153254fa17b61a40527",
+      "original_sha256": "d426fcacded24c58ce2793fd3d6ea76f848d0bd2f5a73153955213d93eba1715",
+      "arms": [
+        {
+          "line": 34,
+          "kind": "ifndef",
+          "expression": "_SAMSRV_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/secobj.h",
+      "current_sha256": "d64a52644497432a949c37799d123c8d5f3dfadbe17d2fe8ae5c180226202654",
+      "original_sha256": "99e5ea1c424b795235dde4146f07b502a7eff359e0be26774ed87e36fbfa5cbb",
+      "arms": [
+        {
+          "line": 23,
+          "kind": "ifndef",
+          "expression": "_SECOBJ_INCLUDED_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/services.h",
+      "current_sha256": "2ef151cd619a75794f8819c9f6ed1bdca4b5bbd56e11b091f62016e2e84f4c71",
+      "original_sha256": "e7092a2ec6660703800c00bf94736a3cbf7e9e9f1473098a130cab51220676d5",
+      "arms": [
+        {
+          "line": 34,
+          "kind": "ifndef",
+          "expression": "_LMSERVICES_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/ssi.h",
+      "current_sha256": "8626c66164d133b2d0f44c0c7f7a9f78483ebfdbf3ab7aea2de71cb6e122c4a4",
+      "original_sha256": "522783006081c27d395d5aaa64695bddbd414878dca870ff88f3379938560b75",
+      "arms": [
+        {
+          "line": 43,
+          "kind": "ifdef",
+          "expression": "MIDL_PASS"
+        },
+        {
+          "line": 45,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 59,
+          "kind": "ifdef",
+          "expression": "MIDL_PASS"
+        },
+        {
+          "line": 63,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/strarray.h",
+      "current_sha256": "e77002a8948a0f51a698a581cf8c668f22d48fffab315de728d4f4895ad3ccef",
+      "original_sha256": "89f5cee2992d38781467b555998534db86e64cdbde026301c05e96f1ed43b1a4",
+      "arms": [
+        {
+          "line": 41,
+          "kind": "ifndef",
+          "expression": "_STRARRAY_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/uascache.h",
+      "current_sha256": "d0e17e66e1787040e50a5f003ed799c2b514e5282475445064afe2dd9ddfdd38",
+      "original_sha256": "74024f77a5c044130a39bb916b6678523b90cf305b7163ac8a5c287bcd4e2f5d",
+      "arms": [
+        {
+          "line": 29,
+          "kind": "ifndef",
+          "expression": "_UASCACHE_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/afd.h",
+      "current_sha256": "8c8a2015491469403ee229caa0b5bd90e3b01d7493a18686a5f22b2af1972df5",
+      "original_sha256": "c2ab91657f7e548448e78591b579f7b4069810456beef18eac14fc8494e694a3",
+      "arms": [
+        {
+          "line": 24,
+          "kind": "ifndef",
+          "expression": "_AFD_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/ipinfo.h",
+      "current_sha256": "3f508a86cee4971e50df6fa918ee9a70dbd6abdf3c4a6106b7f4cc5007f713c9",
+      "original_sha256": "fc1436d84e395732aa1384c4c2429e1d0088807a895aa96d4b4ad02d93aa726e",
+      "arms": [
+        {
+          "line": 12,
+          "kind": "ifndef",
+          "expression": "IPINFO_INCLUDED"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/llinfo.h",
+      "current_sha256": "4ceca89b86a24b1ffe5b5737149e1a3e0dad38f1b2b044ee9c938701bf9c9e3d",
+      "original_sha256": "acd3a592086186681555f49f1e84bb054663736957dea5a0e4c99011a850b19e",
+      "arms": [
+        {
+          "line": 12,
+          "kind": "ifndef",
+          "expression": "LLINFO_INCLUDED"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/mpr.h",
+      "current_sha256": "a43675e9380cffc487d3bd7e5521296da539a68337898fc5dea126e2f371af6a",
+      "original_sha256": "19edb96745773de474127eb5683522d1aeb0751163b05acf7b117fd7a0876dbe",
+      "arms": [
+        {
+          "line": 83,
+          "kind": "ifndef",
+          "expression": "_MPR_H_INCLUDED"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/ntstapi.h",
+      "current_sha256": "0a4251b0e5c8c36619d2c41cf8288aa90f59f9d1b301294bd18ff2f345d1936c",
+      "original_sha256": "68aa4e4254e3e9543dd1d8a2c4d7452580be60d3829ed349906b6c85191708fa",
+      "arms": [
+        {
+          "line": 29,
+          "kind": "ifndef",
+          "expression": "_NTSTAPI_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/tdiinfo.h",
+      "current_sha256": "a2bc16ec0b0ddeb6f9c7faff7f4db7911601c8263f5abcdb51c2564bf2ff340c",
+      "original_sha256": "84ae450db3d6207548eaa8b8eccefcd082c9ea028d8ae4476a45ff4930cf08cf",
+      "arms": [
+        {
+          "line": 13,
+          "kind": "ifndef",
+          "expression": "TDI_INFO_INCLUDED"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/tdistat.h",
+      "current_sha256": "47ea38cf3109be156c1005a3f61e0484b8337e0bad384da9ab7640778c2e1b54",
+      "original_sha256": "9436c3282ed336c68858eb5f43cf79b535ab1ba47ce0e72ce4c620583b3525c5",
+      "arms": [
+        {
+          "line": 11,
+          "kind": "ifndef",
+          "expression": "NT"
+        },
+        {
+          "line": 52,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/upsfunc.h",
+      "current_sha256": "9826c9b78bd3d73b3340232cdc08304c6754f6a242e7e7556022915517272be2",
+      "original_sha256": "0452f4abc32355222af29f0263c99dec857949640d7e67a09fa015d4ba082ce2",
+      "arms": [
+        {
+          "line": 24,
+          "kind": "ifndef",
+          "expression": "_UPSFUNC_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/ws2ifsl.h",
+      "current_sha256": "d23f23e80ee4749e3548f0972bc280d0fd476aca0d8dea06e0c7e2f19d100bf3",
+      "original_sha256": "cc0898613d355f272226bde820c1fc9bb4862551ff37473d2d02be0775ffad77",
+      "arms": [
+        {
+          "line": 21,
+          "kind": "ifndef",
+          "expression": "_WS2IFSL_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/wsahelp.h",
+      "current_sha256": "079ae68ab3e9e50bbf08c9ac88fa299a8f766ba5fcf9b09b47ee61325fe3cb04",
+      "original_sha256": "32b431336255d194b301141dff60f663cfbc71aa0e69e26ccf46c2409fd22a19",
+      "arms": [
+        {
+          "line": 28,
+          "kind": "ifndef",
+          "expression": "_WSAHELP_H_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/net/inc/wsasetup.h",
+      "current_sha256": "d9f77568d1b40e7893e58e4b1083417e232d52175394ee69e470b8096a09cd86",
+      "original_sha256": "381d44e1d40302e6221690caf20817593f99e071a1892cdac8c29a03636cbe1c",
+      "arms": [
+        {
+          "line": 23,
+          "kind": "ifndef",
+          "expression": "_WSASETUP_"
+        }
+      ]
+    }
+  ]
+}
