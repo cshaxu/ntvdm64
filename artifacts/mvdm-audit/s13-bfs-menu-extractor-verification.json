@@ -1,0 +1,36 @@
+{
+  "scope": "original menu fixture extraction verification and menu-resource integration",
+  "original_identity": "Both fixed upstream OpenNT whole-file SHA-256 hashes remain required. Mirror extracted thunk, macro and converter bodies are compared ordinally against pinned original after CRLF/LF normalization.",
+  "negative_control": "A scratch-only copy of the mirror WU32LoadMenu body was changed; extractor rejected it as differing from pinned original.",
+  "integration": {
+    "case": "menu-resource",
+    "result": "pass",
+    "exit_code": 0,
+    "required_witnesses": [
+      "WOW_ORIGINAL_MENU_RESOURCE errors=0 resource_cases=16 parser_cases=7 invalid_repeats=64",
+      "WOW_PAGE_DOMAIN_LIFECYCLE_OK"
+    ],
+    "stderr_sha256": "6dc24ac3e32b7eba6bc8ad7dfa20ccc91b8a5b20628a64c7ad005920a1553ad3",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "host": "C:/Users/neko/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/powershell/pwsh.exe",
+    "launch": "-NoProfile -ExecutionPolicy Bypass -File, desktop-capable elevated execution context",
+    "runner_parent_pid": "not captured by existing runner",
+    "compiler_environment_child_pid": 20092,
+    "token_class": "separate same-context pwsh check: Medium Mandatory Level, check PID 612"
+  },
+  "inputs": [
+    {
+      "path": "tests/observation/extract-wow-menu-fixture.ps1",
+      "sha256": "1c6983e2d18c45a790bb176a0eee921275971d155cfc33391f1c6d7a464ac837"
+    },
+    {
+      "path": "tests/observation/verify-wow-task-lifecycle.ps1",
+      "sha256": "f15cc48111016cde027f9dc3f7877f59ae562fc1bb325ce15778eb16428239b4"
+    },
+    {
+      "path": "tests/mvdm-host/wow_page_domain_fixture.c",
+      "sha256": "9047947f708651214c29a70b1eed0bee857a3f60f407f444d987ffd7177787d6"
+    }
+  ],
+  "limits": "The legacy standalone wow-page-domain-test target still fails to link its missing WOW-object closure; this passing formal menu-resource case does not make that separate target pass. Prior runtime test parent PID not captured; token check ran in a separate same-permission invocation. No product binaries changed."
+}

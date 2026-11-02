@@ -1939,3 +1939,7 @@ Replaced the original non-x86 cleanup alignment alternative with #error while re
 ### Page-domain fixture compile repair and remaining link gap
 
 Guarded fault-injection references with their existing WOW_WINDOW_BORROW_FIXTURE owner; the ordinary native-call flow remains unconditional. Both default worker fixture objects now compile, and the independent special graph-snapshot configuration compiles. Both old page-domain test targets still fail to link with 20 missing WOW symbols; the existing menu-resource verifier also stops at its fixed wumenu.c hash check. Neither runtime test is claimed passed. No product source or binaries changed. Evidence: `s13-bfs-page-domain-fixture-compile.json`.
+
+### Menu extraction and formal menu-resource validation
+
+Kept pinned original whole-file hashes while comparing each actually extracted WOW menu thunk, converter and macro block ordinally after newline normalization. A scratch modified-body negative control was rejected. The checked-in formal menu-resource fixture then built, linked and passed under a desktop-capable modern pwsh: 16 resource cases, 7 parser cases, 64 invalid repeats and page-domain lifecycle passed. Medium integrity was independently checked in the same permission context; original test-runner parent PID was not captured. The separate legacy wow-page-domain-test target still has its 20-symbol link gap. No product binaries changed. Evidence: `s13-bfs-menu-extractor-verification.json`.

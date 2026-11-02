@@ -9,28 +9,39 @@ New-Item -ItemType Directory -Force $output | Out-Null
 foreach ($entry in @(
     @('wumenu.c','0FC60E98713F9C37F6FEE8C5DF25DCBA55277DBAEF5B82C49A90E62AE6DB72C6'),
     @('wres16.c','24324D4B95B7C5AC102E9751872AF1DB779EFC0CFF223B32AA066034CB874AE9'))) {
-    foreach ($base in @((Join-Path $root 'src/mvdm-host/wow32'), 'O:/repos.external/OpenNT/base/mvdm/wow32')) {
-        $path = Join-Path $base $entry[0]
-        if ((Get-FileHash $path).Hash -ne $entry[1]) { throw "Menu source changed: $path" }
-    }
+    $path = Join-Path 'O:/repos.external/OpenNT/base/mvdm/wow32' $entry[0]
+    if ((Get-FileHash $path).Hash -ne $entry[1]) { throw "Pinned original menu source changed: $path" }
 }
-$menu = [IO.File]::ReadAllText((Join-Path $root 'src/mvdm-host/wow32/wumenu.c'))
+function Read-MenuSource([string]$Base, [string]$Name) {
+    [IO.File]::ReadAllText((Join-Path $Base $Name)).Replace("`r`n", "`n")
+}
+function Get-MenuPart([string]$Text, [string]$Begin, [string]$End) {
+    $start = $Text.IndexOf($Begin, [StringComparison]::Ordinal)
+    if ($start -lt 0) { throw "Menu source boundary missing: $Begin" }
+    $endIndex = $Text.IndexOf($End, $start, [StringComparison]::Ordinal)
+    if ($endIndex -le $start) { throw "Menu source end boundary missing: $End" }
+    $Text.Substring($start, $endIndex - $start)
+}
+$mirrorBase = Join-Path $root 'src/mvdm-host/wow32'
+$originalBase = 'O:/repos.external/OpenNT/base/mvdm/wow32'
+$menu = Read-MenuSource $mirrorBase 'wumenu.c'
+$originalMenu = Read-MenuSource $originalBase 'wumenu.c'
 $parts = @()
 foreach ($name in @('WU32LoadMenu','WU32LoadMenuIndirect')) {
-    $start = $menu.IndexOf("ULONG FASTCALL $name(PVDMFRAME pFrame)")
-    $end = $menu.IndexOf("`r`n/*++", $start)
-    if ($start -lt 0 -or $end -le $start) { throw 'Menu thunk boundary changed.' }
-    $parts += $menu.Substring($start, $end-$start)
+    $begin = "ULONG FASTCALL $name(PVDMFRAME pFrame)"
+    $part = Get-MenuPart $menu $begin "`n/*++"
+    if ($part -cne (Get-MenuPart $originalMenu $begin "`n/*++")) { throw "Menu thunk differs from pinned original: $name" }
+    $parts += $part
 }
-$resource = [IO.File]::ReadAllText((Join-Path $root 'src/mvdm-host/wow32/wres16.c'))
-$start = $resource.IndexOf('#define VALIDPUT')
-$end = $resource.IndexOf('MODNAME(', $start)
-$macros = $resource.Substring($start, $end-$start)
-$start = $resource.IndexOf('DWORD ConvertMenu16(')
-$end = $resource.IndexOf('DWORD ConvertDialog16(', $start)
-if ($start -lt 0 -or $end -le $start) { throw 'Menu converter boundary changed.' }
+$resource = Read-MenuSource $mirrorBase 'wres16.c'
+$originalResource = Read-MenuSource $originalBase 'wres16.c'
+$macros = Get-MenuPart $resource '#define VALIDPUT' 'MODNAME('
+$originalMacros = Get-MenuPart $originalResource '#define VALIDPUT' 'MODNAME('
+$converter = Get-MenuPart $resource 'DWORD ConvertMenu16(' 'DWORD ConvertDialog16('
+$originalConverter = Get-MenuPart $originalResource 'DWORD ConvertMenu16(' 'DWORD ConvertDialog16('
+if ($macros -cne $originalMacros -or $converter -cne $originalConverter) { throw 'Menu converter differs from pinned original' }
 [IO.File]::WriteAllText((Join-Path $output 'original-menu-convert.inc'),
-    $macros + $resource.Substring($start, $end-$start), [Text.Encoding]::ASCII)
+    $macros + $converter, [Text.Encoding]::ASCII)
 [IO.File]::WriteAllText((Join-Path $output 'original-menu-thunks.inc'),
     ($parts -join "`r`n"), [Text.Encoding]::ASCII)
 # Controlled resource inputs are namespaced together with only their original
