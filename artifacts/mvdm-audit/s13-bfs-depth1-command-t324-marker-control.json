@@ -1,0 +1,11 @@
+{
+  "scope": "T324 actual standalone profile with sentinels in disposable shadow; selected first-depth arms only",
+  "selected": {
+    "WIN": true,
+    "FLAT_32": true,
+    "WIN_32": true,
+    "positive-header-entry": true
+  },
+  "exit": 0,
+  "profile_source": "tools/build/New-T324S2LocalRedirectorNinja.ps1"
+}

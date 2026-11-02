@@ -978,36 +978,6 @@ void ISV_DispatchCall (void)
 }
 
 #ifdef i386
-/*
- * "Safe" version of LoadLibrary which preserves floating-point state
- * across the load.  This is critical on x86 because the FP state being
- * preserved is the 16-bit app's state.  MSVCRT.DLL is one offender which
- * changes the Precision bits in its Dll init routine.
- *
- * On RISC, this is an alias for LoadLibrary
- *
- */
-HINSTANCE SafeLoadLibrary(char *name)
-{
-    HINSTANCE hInst;
-    BYTE FpuState[108];
-
-    // Save the 487 state
-    _asm {
-        lea    ecx, [FpuState]
-        fsave  [ecx]
-    }
-
-    /* DIVERGENCE(MVDM-HOST-DIV-323): root only internal WOW32/VDMREDIR
-     * providers; preserve arbitrary VDD loading and this FPU save/restore. */
-    hInst = mvdm_softpc_load_library(name);
-
-    // Restore the 487 state
-    _asm {
-        lea    ecx, [FpuState]
-        frstor [ecx]
-    }
-
-    return hInst;
-}
+#error DIVERGENCE MVDM-HOST-DIV-601: unsupported hardware-host FPU save path
 #endif  //i386
+#line 994

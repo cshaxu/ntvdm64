@@ -1,0 +1,16 @@
+{
+  "scope": "scratch candidate; one first-depth i386 host-FPU arm",
+  "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+  "start": 980,
+  "end": 1013,
+  "following_logical_line": 994,
+  "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+  "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+  "removed_body_sha256": "9bf4ed1862082d755297cb80a1a565cf129f8918d7c3df57f0cfb802938ea0e8",
+  "candidate_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb",
+  "removed_local_patch": "MVDM-HOST-DIV-323 only within excluded function",
+  "original_body_exact_after_removing_local_patch": true,
+  "current_start_line": 980,
+  "registration": "MVDM-HOST-DIV-601",
+  "removed_diff_registration": "MVDM-HOST-DIV-323"
+}

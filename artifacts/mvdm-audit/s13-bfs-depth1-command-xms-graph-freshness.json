@@ -1,0 +1,373 @@
+{
+  "scope": "requery exact ninja compile commands for 46 real contexts after latest configure",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/bios/tape_io.obj",
+      "same": true,
+      "current_sha256": "7019a648f71869ab29aa9e526baa962767df81415f398aeac6d6e344b90c5f35",
+      "snapshot_sha256": "7019a648f71869ab29aa9e526baa962767df81415f398aeac6d6e344b90c5f35"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/keymouse/keyba.obj",
+      "same": true,
+      "current_sha256": "3dfd0bd7693e24c03a1adf4f70a5e6c44c609ee418bb32ff31f1b949fae5d354",
+      "snapshot_sha256": "3dfd0bd7693e24c03a1adf4f70a5e6c44c609ee418bb32ff31f1b949fae5d354"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/bios/tape_io.obj",
+      "same": true,
+      "current_sha256": "7019a648f71869ab29aa9e526baa962767df81415f398aeac6d6e344b90c5f35",
+      "snapshot_sha256": "7019a648f71869ab29aa9e526baa962767df81415f398aeac6d6e344b90c5f35"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/keymouse/keyba.obj",
+      "same": true,
+      "current_sha256": "3dfd0bd7693e24c03a1adf4f70a5e6c44c609ee418bb32ff31f1b949fae5d354",
+      "snapshot_sha256": "3dfd0bd7693e24c03a1adf4f70a5e6c44c609ee418bb32ff31f1b949fae5d354"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/command/cmd.obj",
+      "same": true,
+      "current_sha256": "bf114273681d4b310425a63ba73c860934da07ee9f3374907d9f1f326c01180d",
+      "snapshot_sha256": "bf114273681d4b310425a63ba73c860934da07ee9f3374907d9f1f326c01180d"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddata.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/command/cmddata.obj",
+      "same": true,
+      "current_sha256": "9752ee64b57345ace2195c2d81ba70a416124b302c993ccd91df75411bce97e6",
+      "snapshot_sha256": "9752ee64b57345ace2195c2d81ba70a416124b302c993ccd91df75411bce97e6"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddisp.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/command/cmddisp.obj",
+      "same": true,
+      "current_sha256": "1d7edbcf63f167157167fb021c5a3f282810a919701e4f1f4558f49155f765cb",
+      "snapshot_sha256": "1d7edbcf63f167157167fb021c5a3f282810a919701e4f1f4558f49155f765cb"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexit.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/command/cmdexit.obj",
+      "same": true,
+      "current_sha256": "c5dfdb82d0ba9b0252d02a21f7c6392d858f9cc8aa4a5ac73263d9eabb81897a",
+      "snapshot_sha256": "c5dfdb82d0ba9b0252d02a21f7c6392d858f9cc8aa4a5ac73263d9eabb81897a"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/command/cmdmisc.obj",
+      "same": true,
+      "current_sha256": "67ac916be1748dfd6596e829bf8c8d8b0a41d6f51ddaa327a38e8eba7a938a94",
+      "snapshot_sha256": "67ac916be1748dfd6596e829bf8c8d8b0a41d6f51ddaa327a38e8eba7a938a94"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/command/cmdexec.obj",
+      "same": true,
+      "current_sha256": "a7234ac73ae8385ca2d3b91729bbd7dd3cccb2285e3536ccfbfd6c02f126c5e7",
+      "snapshot_sha256": "a7234ac73ae8385ca2d3b91729bbd7dd3cccb2285e3536ccfbfd6c02f126c5e7"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdredir.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/command/cmdredir.obj",
+      "same": true,
+      "current_sha256": "abc4fc546e36f65eb147cdcc9d58a70eb394615adf3d807fef3e0d1dfebee201",
+      "snapshot_sha256": "abc4fc546e36f65eb147cdcc9d58a70eb394615adf3d807fef3e0d1dfebee201"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/command/cmdpif.obj",
+      "same": true,
+      "current_sha256": "7feddc2901f9298d53208e0a8eda0a4c6890ee943c20be27f623e64665473545",
+      "snapshot_sha256": "7feddc2901f9298d53208e0a8eda0a4c6890ee943c20be27f623e64665473545"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/command/cmdconf.obj",
+      "same": true,
+      "current_sha256": "2434ad21067612dd94322fc1d50b9f025e6bb769d2a9ebc9404735c1a6cfa6fb",
+      "snapshot_sha256": "2434ad21067612dd94322fc1d50b9f025e6bb769d2a9ebc9404735c1a6cfa6fb"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/command/cmdenv.obj",
+      "same": true,
+      "current_sha256": "e90ef46f486036202ea3455cd251f75120976c2249b3f72da27a1300175fbbb5",
+      "snapshot_sha256": "e90ef46f486036202ea3455cd251f75120976c2249b3f72da27a1300175fbbb5"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/command/cmdkeyb.obj",
+      "same": true,
+      "current_sha256": "9f35416881a3d580301e4974062b41ac2743248fb9a315f28a1f4b8f19624190",
+      "snapshot_sha256": "9f35416881a3d580301e4974062b41ac2743248fb9a315f28a1f4b8f19624190"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/xms/xms.obj",
+      "same": true,
+      "current_sha256": "d56cb7fb0cb1e5097f6e9c1179ab4d955a26f36226730c1a8ab4cd9ca0575e6d",
+      "snapshot_sha256": "d56cb7fb0cb1e5097f6e9c1179ab4d955a26f36226730c1a8ab4cd9ca0575e6d"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsa20.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/xms/xmsa20.obj",
+      "same": true,
+      "current_sha256": "04537c8c3593f9bbea9e4eec8128bd81c89797f3bbcad9bbd932940e207e2893",
+      "snapshot_sha256": "04537c8c3593f9bbea9e4eec8128bd81c89797f3bbcad9bbd932940e207e2893"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/xms/xmsblock.obj",
+      "same": true,
+      "current_sha256": "0da40298faeef9dd6ccc73ff10e14bda7be3f3a04c9a91b3ecb021fbcfcc0cbc",
+      "snapshot_sha256": "0da40298faeef9dd6ccc73ff10e14bda7be3f3a04c9a91b3ecb021fbcfcc0cbc"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmisc.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/xms/xmsmisc.obj",
+      "same": true,
+      "current_sha256": "5d5bc72c4c1096170dfaaa5ccf85694561fd097180dda01bf07f941093c200ff",
+      "snapshot_sha256": "5d5bc72c4c1096170dfaaa5ccf85694561fd097180dda01bf07f941093c200ff"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/xms/xmsdisp.obj",
+      "same": true,
+      "current_sha256": "2df62ec0bca03939ccee20898b034d7068abf1475a207b4b40832c39a85c7dcc",
+      "snapshot_sha256": "2df62ec0bca03939ccee20898b034d7068abf1475a207b4b40832c39a85c7dcc"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsumb.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/xms/xmsumb.obj",
+      "same": true,
+      "current_sha256": "4ae7ba5547a4f1a36f72343e5200bca94e152517b3df23d1d276c2f7cf05ba8b",
+      "snapshot_sha256": "4ae7ba5547a4f1a36f72343e5200bca94e152517b3df23d1d276c2f7cf05ba8b"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/xms/xmsmemr.obj",
+      "same": true,
+      "current_sha256": "932ee004b8f1ecd64996dedbfa23c9d59cabbf0934a98747be1f99eb79b55903",
+      "snapshot_sha256": "932ee004b8f1ecd64996dedbfa23c9d59cabbf0934a98747be1f99eb79b55903"
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/adapter-basesrv/mvdm_command_guest_state.obj",
+      "same": true,
+      "current_sha256": "330d08245f03fa73d10aca95f53cda92087599ec7d0a7f1846115bf6c1e8cd06",
+      "snapshot_sha256": "330d08245f03fa73d10aca95f53cda92087599ec7d0a7f1846115bf6c1e8cd06"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_xms_memory.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/adapter-softpc/mvdm_xms_memory.obj",
+      "same": true,
+      "current_sha256": "d6d01c04116fe21f4e6ea2d2db3b026f5dd505295113f3a480d61d9204f3a9c9",
+      "snapshot_sha256": "d6d01c04116fe21f4e6ea2d2db3b026f5dd505295113f3a480d61d9204f3a9c9"
+    },
+    {
+      "path": "tests/observation/keyba_observed.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/tests/keyba_observed.obj",
+      "same": true,
+      "current_sha256": "4d233e21aa9b65cb9f317682c1cb6f0a1d4ed16a673c8dd2daae854064179bdf",
+      "snapshot_sha256": "4d233e21aa9b65cb9f317682c1cb6f0a1d4ed16a673c8dd2daae854064179bdf"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/command/cmd.obj",
+      "same": true,
+      "current_sha256": "bf114273681d4b310425a63ba73c860934da07ee9f3374907d9f1f326c01180d",
+      "snapshot_sha256": "bf114273681d4b310425a63ba73c860934da07ee9f3374907d9f1f326c01180d"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexit.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/command/cmdexit.obj",
+      "same": true,
+      "current_sha256": "c5dfdb82d0ba9b0252d02a21f7c6392d858f9cc8aa4a5ac73263d9eabb81897a",
+      "snapshot_sha256": "c5dfdb82d0ba9b0252d02a21f7c6392d858f9cc8aa4a5ac73263d9eabb81897a"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddata.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/command/cmddata.obj",
+      "same": true,
+      "current_sha256": "9752ee64b57345ace2195c2d81ba70a416124b302c993ccd91df75411bce97e6",
+      "snapshot_sha256": "9752ee64b57345ace2195c2d81ba70a416124b302c993ccd91df75411bce97e6"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/command/cmdmisc.obj",
+      "same": true,
+      "current_sha256": "67ac916be1748dfd6596e829bf8c8d8b0a41d6f51ddaa327a38e8eba7a938a94",
+      "snapshot_sha256": "67ac916be1748dfd6596e829bf8c8d8b0a41d6f51ddaa327a38e8eba7a938a94"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddisp.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/command/cmddisp.obj",
+      "same": true,
+      "current_sha256": "1d7edbcf63f167157167fb021c5a3f282810a919701e4f1f4558f49155f765cb",
+      "snapshot_sha256": "1d7edbcf63f167157167fb021c5a3f282810a919701e4f1f4558f49155f765cb"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdexec.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/command/cmdexec.obj",
+      "same": true,
+      "current_sha256": "a7234ac73ae8385ca2d3b91729bbd7dd3cccb2285e3536ccfbfd6c02f126c5e7",
+      "snapshot_sha256": "a7234ac73ae8385ca2d3b91729bbd7dd3cccb2285e3536ccfbfd6c02f126c5e7"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdpif.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/command/cmdpif.obj",
+      "same": true,
+      "current_sha256": "7feddc2901f9298d53208e0a8eda0a4c6890ee943c20be27f623e64665473545",
+      "snapshot_sha256": "7feddc2901f9298d53208e0a8eda0a4c6890ee943c20be27f623e64665473545"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdredir.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/command/cmdredir.obj",
+      "same": true,
+      "current_sha256": "abc4fc546e36f65eb147cdcc9d58a70eb394615adf3d807fef3e0d1dfebee201",
+      "snapshot_sha256": "abc4fc546e36f65eb147cdcc9d58a70eb394615adf3d807fef3e0d1dfebee201"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/command/cmdconf.obj",
+      "same": true,
+      "current_sha256": "2434ad21067612dd94322fc1d50b9f025e6bb769d2a9ebc9404735c1a6cfa6fb",
+      "snapshot_sha256": "2434ad21067612dd94322fc1d50b9f025e6bb769d2a9ebc9404735c1a6cfa6fb"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdkeyb.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/command/cmdkeyb.obj",
+      "same": true,
+      "current_sha256": "9f35416881a3d580301e4974062b41ac2743248fb9a315f28a1f4b8f19624190",
+      "snapshot_sha256": "9f35416881a3d580301e4974062b41ac2743248fb9a315f28a1f4b8f19624190"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdenv.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/command/cmdenv.obj",
+      "same": true,
+      "current_sha256": "e90ef46f486036202ea3455cd251f75120976c2249b3f72da27a1300175fbbb5",
+      "snapshot_sha256": "e90ef46f486036202ea3455cd251f75120976c2249b3f72da27a1300175fbbb5"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/xms/xms.obj",
+      "same": true,
+      "current_sha256": "d56cb7fb0cb1e5097f6e9c1179ab4d955a26f36226730c1a8ab4cd9ca0575e6d",
+      "snapshot_sha256": "d56cb7fb0cb1e5097f6e9c1179ab4d955a26f36226730c1a8ab4cd9ca0575e6d"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsa20.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/xms/xmsa20.obj",
+      "same": true,
+      "current_sha256": "04537c8c3593f9bbea9e4eec8128bd81c89797f3bbcad9bbd932940e207e2893",
+      "snapshot_sha256": "04537c8c3593f9bbea9e4eec8128bd81c89797f3bbcad9bbd932940e207e2893"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmisc.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/xms/xmsmisc.obj",
+      "same": true,
+      "current_sha256": "5d5bc72c4c1096170dfaaa5ccf85694561fd097180dda01bf07f941093c200ff",
+      "snapshot_sha256": "5d5bc72c4c1096170dfaaa5ccf85694561fd097180dda01bf07f941093c200ff"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/xms/xmsdisp.obj",
+      "same": true,
+      "current_sha256": "2df62ec0bca03939ccee20898b034d7068abf1475a207b4b40832c39a85c7dcc",
+      "snapshot_sha256": "2df62ec0bca03939ccee20898b034d7068abf1475a207b4b40832c39a85c7dcc"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsumb.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/xms/xmsumb.obj",
+      "same": true,
+      "current_sha256": "4ae7ba5547a4f1a36f72343e5200bca94e152517b3df23d1d276c2f7cf05ba8b",
+      "snapshot_sha256": "4ae7ba5547a4f1a36f72343e5200bca94e152517b3df23d1d276c2f7cf05ba8b"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/xms/xmsmemr.obj",
+      "same": true,
+      "current_sha256": "932ee004b8f1ecd64996dedbfa23c9d59cabbf0934a98747be1f99eb79b55903",
+      "snapshot_sha256": "932ee004b8f1ecd64996dedbfa23c9d59cabbf0934a98747be1f99eb79b55903"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/xms/xmsblock.obj",
+      "same": true,
+      "current_sha256": "0da40298faeef9dd6ccc73ff10e14bda7be3f3a04c9a91b3ecb021fbcfcc0cbc",
+      "snapshot_sha256": "0da40298faeef9dd6ccc73ff10e14bda7be3f3a04c9a91b3ecb021fbcfcc0cbc"
+    },
+    {
+      "path": "src/ntvdm-exe/command/source/mvdm_command_guest_state.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/adapter-basesrv/mvdm_command_guest_state.obj",
+      "same": true,
+      "current_sha256": "330d08245f03fa73d10aca95f53cda92087599ec7d0a7f1846115bf6c1e8cd06",
+      "snapshot_sha256": "330d08245f03fa73d10aca95f53cda92087599ec7d0a7f1846115bf6c1e8cd06"
+    },
+    {
+      "path": "src/ntvdm-exe/softpc/mvdm_xms_memory.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/adapter-softpc/mvdm_xms_memory.obj",
+      "same": true,
+      "current_sha256": "d6d01c04116fe21f4e6ea2d2db3b026f5dd505295113f3a480d61d9204f3a9c9",
+      "snapshot_sha256": "d6d01c04116fe21f4e6ea2d2db3b026f5dd505295113f3a480d61d9204f3a9c9"
+    },
+    {
+      "path": "tests/observation/keyba_observed.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/tests/keyba_observed.obj",
+      "same": true,
+      "current_sha256": "4d233e21aa9b65cb9f317682c1cb6f0a1d4ed16a673c8dd2daae854064179bdf",
+      "snapshot_sha256": "4d233e21aa9b65cb9f317682c1cb6f0a1d4ed16a673c8dd2daae854064179bdf"
+    }
+  ]
+}

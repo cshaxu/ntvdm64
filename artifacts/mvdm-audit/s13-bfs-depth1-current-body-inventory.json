@@ -44069,7 +44069,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44082,7 +44082,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44095,7 +44095,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44108,7 +44108,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44121,7 +44121,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44134,7 +44134,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44147,7 +44147,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44160,7 +44160,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44173,7 +44173,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44186,7 +44186,7 @@
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44199,7 +44199,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44212,7 +44212,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44225,7 +44225,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 9,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44238,7 +44238,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44251,7 +44251,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44264,7 +44264,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44277,7 +44277,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44290,7 +44290,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44303,7 +44303,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44316,7 +44316,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44329,7 +44329,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44342,7 +44342,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44355,7 +44355,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44368,7 +44368,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44381,7 +44381,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44394,7 +44394,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44407,7 +44407,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44420,7 +44420,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44433,7 +44433,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44446,7 +44446,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44459,7 +44459,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44472,7 +44472,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44485,7 +44485,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -44498,20 +44498,20 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
       "start": 980,
-      "cut": 1013,
-      "group_end": 1013,
+      "cut": 982,
+      "group_end": 982,
       "kind": "ifdef",
       "expression": "i386",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 32,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
@@ -65654,13 +65654,13 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 1183,
+    "pending": 1182,
     "already-excluded": 1470,
-    "newly-excluded": 538,
+    "newly-excluded": 539,
     "retained-observed": 1859
   },
   "pending_by_guard": {
-    "not-guard": 931,
+    "not-guard": 930,
     "guard": 252
   }
 }

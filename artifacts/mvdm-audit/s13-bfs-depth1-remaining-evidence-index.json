@@ -802,26 +802,6 @@
       ]
     },
     {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
-      "start": 980,
-      "cut": 1013,
-      "group_end": 1013,
-      "kind": "ifdef",
-      "expression": "i386",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 32,
-      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
-      "prior_evidence": [
-        {
-          "family": "source",
-          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
-          "original_entry_line": 980
-        }
-      ]
-    },
-    {
       "path": "src/mvdm-host/wow32/wdib.c",
       "start": 319,
       "cut": 321,
@@ -1133,7 +1113,7 @@
       "families": [
         "source"
       ],
-      "count": 11
+      "count": 10
     },
     {
       "families": [

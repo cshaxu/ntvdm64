@@ -1,0 +1,257 @@
+{
+  "scope": "standalone fixture witnesses; failing preprocessing is not proof of a supported selected branch",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "arm": 93,
+      "source_sha256": "1b99f6cda69b874e8e9ac73b2da493cdfde4742fb1f0eb67c647ed82cd374e18",
+      "observations": [
+        {
+          "fixture": "qevnt",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "ios",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "gfi",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "keycode",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "nls",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "umb",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "vdd",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "niddb",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egaports.h",
+      "arm": 73,
+      "source_sha256": "face41b8a7fd360e0f99b9f779a87b11ddf4bf0b43b6c9f2ffd6133782cbb129",
+      "observations": [
+        {
+          "fixture": "qevnt",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "ios",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "gfi",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "keycode",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "nls",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "umb",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "vdd",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "niddb",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "arm": 28,
+      "source_sha256": "36e2874c485836e78fec5df42832b5353d0c15cc6aee1ef38a2ad2b33dad490b",
+      "observations": [
+        {
+          "fixture": "qevnt",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "ios",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "gfi",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "keycode",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "nls",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "umb",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "vdd",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "niddb",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "arm": 106,
+      "source_sha256": "655c332ff639ab73f6b37043db11357d154ada60c11c3493e2b210f04eaf9cc0",
+      "observations": [
+        {
+          "fixture": "qevnt",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "ios",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "gfi",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "keycode",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "nls",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "umb",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": true,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "vdd",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "niddb",
+          "exit": 0,
+          "marker_present": false,
+          "header_entry_present": false,
+          "diagnostic_tail": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "scope": "two real nt_bop translation contexts; no selected i386 branch, measured following logical line; historical raw-host FP path separately inspected",
+  "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+  "start": 980,
+  "end": 1013,
+  "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/host/nt_bop.obj",
+      "mode": "line",
+      "values": [
+        994
+      ],
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/host/nt_bop.obj",
+      "mode": "selection",
+      "values": [],
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/host/nt_bop.obj",
+      "mode": "line",
+      "values": [
+        994
+      ],
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/host/nt_bop.obj",
+      "mode": "selection",
+      "values": [],
+      "exit": 0
+    }
+  ]
+}

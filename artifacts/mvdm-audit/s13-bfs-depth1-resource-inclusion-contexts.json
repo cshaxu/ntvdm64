@@ -1,0 +1,77 @@
+{
+  "scope": "six actual MS resource compiler /p contexts; exit 1 is RC preprocess-only behavior and output marker is required; visited includes only, not proof unvisited branches excluded",
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "target": "obj/host/softpc-resource.res",
+      "returncode": 1,
+      "preprocess_marker": true,
+      "output_sha256": "92ba131b7030e20c6276b0f9e9a3081f2da19ecdb1298f8c7eb4d1534bd2fd5a",
+      "repo_includes": [
+        "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc/nt_uis.h",
+        "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc/error.h",
+        "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc/host_rrr.h"
+      ],
+      "include_count": 3
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "target": "obj/redir/vdmredir.res",
+      "returncode": 1,
+      "preprocess_marker": true,
+      "output_sha256": "4af8a312f7c2682f5e34c9f6d5270e104cbb604ef185458307a3b7118c8b865d",
+      "repo_includes": [
+        "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vdmredir.rc"
+      ],
+      "include_count": 1
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "target": "obj/host/softpc-resource.res",
+      "returncode": 1,
+      "preprocess_marker": true,
+      "output_sha256": "9cfcc7ad504f503ebb65caf95a602e1116bae94743af4fea9e8022315b279ab0",
+      "repo_includes": [
+        "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc/nt_uis.h",
+        "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc/error.h",
+        "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc/host_rrr.h"
+      ],
+      "include_count": 3
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "target": "obj/redir/vdmredir.res",
+      "returncode": 1,
+      "preprocess_marker": true,
+      "output_sha256": "09d7980076d5122643828df576dc4e963d1bca7ee1e0457d4f38e21eaf1628a2",
+      "repo_includes": [
+        "O:/repos.hobby/ntvdm64/src/mvdm-host/vdmredir/vdmredir.rc"
+      ],
+      "include_count": 1
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "target": "obj/wow32.res",
+      "returncode": 1,
+      "preprocess_marker": true,
+      "output_sha256": "67cbd71eac2c742c778adcfcdebc5fa186df5bb007b24d911647034bd53c31c9",
+      "repo_includes": [
+        "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.rc",
+        "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/isz.h",
+        "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/sz.src"
+      ],
+      "include_count": 3
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "target": "obj/opennt-user/edit-menu.res",
+      "returncode": 1,
+      "preprocess_marker": true,
+      "output_sha256": "8ac153ee95dd2b8fdaaadca1be51ca53ac6eb4919612e0d8beb4bc4daf3e41b7",
+      "repo_includes": [
+        "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/res.rc"
+      ],
+      "include_count": 1
+    }
+  ]
+}

@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-601: retain the original i386 condition and reject its
+hardware-host FPU save/load path in nt_bop.c. The excluded function was
+the sole mirror location of DIV-323; the active CCPU path and separately
+tested adapter are unchanged. See `../../artifacts/mvdm-audit/s13-bfs-depth1-ntbop-i386-batch.json`.
+
 MVDM-HOST-DIV-600: reject the DOS, WIN_16 and SIGNALS first-depth
 header arms in command/cmd.h and xms.486/xms.h. Preserve the original
 selectors, selected Win32 and fallback branches, and diagnostic lines.
@@ -1803,7 +1808,6 @@ firmware include are removed; original retry/failure order is unchanged.
 
 | ID | Original purpose | Reason | Implementation | Files |
 | --- | --- | --- | --- | --- |
-| MVDM-HOST-DIV-323 | SafeLoadLibrary preserves original FPU save/load/restore around DLL loading. | Exact internal WOW32/VDMREDIR providers must come from the current product root, not CWD/PATH. | Delegate only the load expression to `mvdm_softpc_load_library` in the existing firmware adapter; common root joins internal names, arbitrary VDD names/explicit paths retain LoadLibraryA. No guest or general host DLL policy change. | `softpc.new/host/src/nt_bop.c` |
 | MVDM-HOST-DIV-324 | Preserve GetWowKernelCmdLine environment construction and guest-copy order. | KRNL386 takes SYSTEMROOT from the boot PDB before the submitted Win16 task record; the native worker must retain host SYSTEMROOT. | After the WOW boot guest MULTI_SZ is complete, project its SYSTEMROOT; the existing firmware adapter uses common's bounded projection and returns CRT-owned bytes. Native environment and lpszzVDMEnv32 remain unchanged; original error/termination shape is retained. No immutable guest or scheduler change. | `dos/command/cmdmisc.c`; `../ntvdm-exe/softpc/mvdm_softpc_firmware.c` |
 | MVDM-HOST-DIV-222 | Adapt the original `53:01` register-frame handoff to CCPU segment-cache semantics. | The kernel-VDM x86 owner writes passive CONTEXT selectors before PE; CCPU immediately resolves each setter through its active descriptor cache. | Capture the source frame while real-mode SS is valid, clear NT as original `ntos/vdm/x86/vdmmisc.asm::VdmSwapContexts` does with `EFLAGS_USER_SANITIZE` (retain the CCPU IF/IOPL policy), enable PE/CPL-3, then load the same CS:EIP, SS:ESP and DS fields through CCPU. Restore the already selected worker WOW page/GDT view on this reentry path, matching native user-selector lifetime; kernel VDM state bits remain absent. | `dpmi32/modesw.c` |
 | MVDM-HOST-DIV-223 | Bind DOSX's source-delivered LDT to CCPU after `53:0F`. | Historical non-i386 only used the table for host address conversion, while CPU40 executes selectors directly. | Derive the guest-linear table base from the existing `Ldt`/`IntelBase` pair and install it in CCPU with an internal-valid LDTR selector. | `dpmi32/dpmi32.c` |

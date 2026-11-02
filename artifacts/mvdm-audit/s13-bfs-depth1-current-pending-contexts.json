@@ -7643,15 +7643,6 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
-      "start": 980,
-      "kind": "ifdef",
-      "expression": "i386",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
       "start": 31,
       "kind": "ifdef",
@@ -10660,7 +10651,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 54
+      "count": 53
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",

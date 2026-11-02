@@ -1,0 +1,16 @@
+{
+  "scope": "current-source first-depth disposition and child group counts; no child content audit",
+  "depth1_groups": 4074,
+  "depth1_arms": 5050,
+  "depth1_status": {
+    "pending": 1182,
+    "already-excluded": 1470,
+    "newly-excluded": 539,
+    "retained-observed": 1859
+  },
+  "depth2_parent_status_counts": {
+    "pending": 1677,
+    "retained-observed": 1395
+  },
+  "original_missing_structures": "separate s13-bfs-depth1-original-unresolved-boundaries.json; not claimed complete"
+}

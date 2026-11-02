@@ -1,0 +1,52 @@
+{
+  "scope": "actual RC /p included source files compared to the first-depth C/H inventory; no inner-branch or unobserved-context claim",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/error.h",
+      "rc_contexts": 2,
+      "first_depth": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_rrr.h",
+      "rc_contexts": 2,
+      "first_depth": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_uis.h",
+      "rc_contexts": 2,
+      "first_depth": {}
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vdmredir.rc",
+      "rc_contexts": 2,
+      "first_depth": {}
+    },
+    {
+      "path": "src/mvdm-host/wow32/isz.h",
+      "rc_contexts": 1,
+      "first_depth": {
+        "retained-observed": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/sz.src",
+      "rc_contexts": 1,
+      "first_depth": {}
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.rc",
+      "rc_contexts": 1,
+      "first_depth": {}
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/res.rc",
+      "rc_contexts": 1,
+      "first_depth": {}
+    }
+  ],
+  "first_depth_excluded_in_rc_visited_files": 0
+}

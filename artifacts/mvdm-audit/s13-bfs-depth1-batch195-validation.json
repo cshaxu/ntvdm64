@@ -1,0 +1,20 @@
+{
+  "worker_build": "pass",
+  "reference_worker_build": "pass",
+  "guard_tests": [
+    {
+      "architecture": "x86",
+      "test": "test_mirror_rejected_conditions",
+      "result": "pass",
+      "output": "PASS 235 retained guards: normal selection and rejected profiles (x86)\nPASS DPMI i386 with CPU40 accepted; legacy kernel path rejected\nPASS original ntsend ANSI and Unicode capture selections\nPASS CCPU fixture includes cpu.h without selecting the excluded monitor profile\nPASS original userk MSDWP function selection\nPASS original ntrtl MIDL_PASS inline selection\nPASS CPU40 virtual interrupt state; unsupported hardware-monitor alternative rejected\nPASS CCPU excludes original hardware-host FPU save path\n"
+    },
+    {
+      "architecture": "x64",
+      "test": "test_mirror_rejected_conditions",
+      "result": "pass",
+      "output": "PASS 235 retained guards: normal selection and rejected profiles (x64)\nPASS DPMI i386 with CPU40 accepted; legacy kernel path rejected\nPASS original ntsend ANSI and Unicode capture selections\nPASS CCPU fixture includes cpu.h without selecting the excluded monitor profile\nPASS original userk MSDWP function selection\nPASS original ntrtl MIDL_PASS inline selection\nPASS CPU40 virtual interrupt state; unsupported hardware-monitor alternative rejected\nPASS CCPU excludes original hardware-host FPU save path\n"
+    }
+  ],
+  "published_images": "retained previously full-tested exact hashes; new build differs only in PE timestamps",
+  "comparison": "s13-bfs-depth1-batch195-image-compare.json"
+}

@@ -1,0 +1,125 @@
+{
+  "scope": "ten PE images with identical package UUID; differences checked against COFF and IMAGE_DEBUG_DIRECTORY timestamps",
+  "records": [
+    {
+      "name": "run16.exe",
+      "different_bytes": 0,
+      "offsets": [],
+      "coff_timestamp": 264,
+      "debug_timestamps": [
+        209524
+      ],
+      "timestamps_only": true
+    },
+    {
+      "name": "ntsrv.exe",
+      "different_bytes": 4,
+      "offsets": [
+        256,
+        257,
+        289428,
+        289429
+      ],
+      "coff_timestamp": 256,
+      "debug_timestamps": [
+        289428
+      ],
+      "timestamps_only": true
+    },
+    {
+      "name": "ntcon.exe",
+      "different_bytes": 0,
+      "offsets": [],
+      "coff_timestamp": 248,
+      "debug_timestamps": [
+        246004
+      ],
+      "timestamps_only": true
+    },
+    {
+      "name": "ntvdm.exe",
+      "different_bytes": 4,
+      "offsets": [
+        288,
+        289,
+        1696364,
+        1696365
+      ],
+      "coff_timestamp": 288,
+      "debug_timestamps": [
+        1696364
+      ],
+      "timestamps_only": true
+    },
+    {
+      "name": "ntvwm.exe",
+      "different_bytes": 0,
+      "offsets": [],
+      "coff_timestamp": 264,
+      "debug_timestamps": [
+        229060
+      ],
+      "timestamps_only": true
+    },
+    {
+      "name": "ntmon.exe",
+      "different_bytes": 0,
+      "offsets": [],
+      "coff_timestamp": 264,
+      "debug_timestamps": [
+        146260
+      ],
+      "timestamps_only": true
+    },
+    {
+      "name": "WOW32.DLL",
+      "different_bytes": 0,
+      "offsets": [],
+      "coff_timestamp": 280,
+      "debug_timestamps": [
+        625412
+      ],
+      "timestamps_only": true
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "different_bytes": 4,
+      "offsets": [
+        280,
+        281,
+        123572,
+        123573
+      ],
+      "coff_timestamp": 280,
+      "debug_timestamps": [
+        123572
+      ],
+      "timestamps_only": true
+    },
+    {
+      "name": "nthook32.dll",
+      "different_bytes": 4,
+      "offsets": [
+        280,
+        281,
+        133156,
+        133157
+      ],
+      "coff_timestamp": 280,
+      "debug_timestamps": [
+        133156
+      ],
+      "timestamps_only": true
+    },
+    {
+      "name": "nthook64.dll",
+      "different_bytes": 0,
+      "offsets": [],
+      "coff_timestamp": 272,
+      "debug_timestamps": [
+        167348
+      ],
+      "timestamps_only": true
+    }
+  ]
+}

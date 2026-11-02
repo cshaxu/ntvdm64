@@ -1,0 +1,18 @@
+{
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "selected_equal": true,
+      "before_sha256": "3c630fa0abb682a723c485bdd3660c780f4d6ca71260341b5c2b98d8e3f90b21",
+      "after_sha256": "13f5442b62db4e91b1ac2812a6005ff05f89bcaf1f25fe2510e4109c3c47692f",
+      "forced_i386_rejected": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "selected_equal": true,
+      "before_sha256": "3c630fa0abb682a723c485bdd3660c780f4d6ca71260341b5c2b98d8e3f90b21",
+      "after_sha256": "13f5442b62db4e91b1ac2812a6005ff05f89bcaf1f25fe2510e4109c3c47692f",
+      "forced_i386_rejected": true
+    }
+  ]
+}
