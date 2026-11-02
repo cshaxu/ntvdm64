@@ -80,9 +80,12 @@ half_word ica_lock;
  * delivery.  Keep the original shared support data and routines below, but
  * exclude only this obsolete CPU-state carrier from the CPU40 build.
  */
+#if defined(CCPU) && !defined(CPU_30_STYLE)
 #if defined(CCPU) && !defined(CPU_40_STYLE)
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif /* defined(CCPU) && !defined(CPU_40_STYLE) */
+#endif /* defined(CCPU) && !defined(CPU_30_STYLE) */
+#line 147
 
 /*
  * Global Flags and variables
@@ -99,7 +102,7 @@ int verbose;			/* TRUE => trace instructions   */
 #ifdef CPU_30_STYLE
 #error Excluded original conditional branch
 #endif /* CPU_30_STYLE */
-#line 99
+#line 340
 /*
  * The following is a table lookup for finding parity of a byte
  */

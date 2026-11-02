@@ -8,9 +8,14 @@
       "file": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
       "original_condition": "#ifdef DEBUG",
       "evidence": "s13-bfs-depth1-clmsg-debug-restoration.json and s13-bfs-depth1-consolidated-batch.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "original_condition": "#if defined(CCPU) && !defined(CPU_30_STYLE)",
+      "evidence": "s13-bfs-depth1-xt-outer-restoration.json"
     }
   ],
-  "derived_total": 42,
-  "derived_current_bfs_total": 9,
+  "derived_total": 43,
+  "derived_current_bfs_total": 10,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

@@ -3558,16 +3558,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/xt.c",
-      "start": 83,
-      "kind": "if",
-      "expression": "defined(CCPU) && !defined(CPU_40_STYLE)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
-      "start": 159,
+      "start": 162,
       "kind": "else",
       "expression": "",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
@@ -8314,7 +8305,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 67
+      "count": 66
     },
     {
       "reason": "file-not-witnessed-in-product",

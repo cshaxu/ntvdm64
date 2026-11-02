@@ -357,3 +357,31 @@ if selected.returncode or not re.search(r'int\s+selected_line\s*=\s*464\s*;', se
 if not excluded.returncode or marker[7:] not in excluded.stdout + excluded.stderr:
     raise SystemExit('unsupported i386 memory-size arm did not fail at its guard')
 print('PASS CPU40 memory-size selection, line mapping, and unsupported arm rejection')
+
+lines = (repo / 'src/mvdm-host/softpc.new/base/support/xt.c').read_text(
+    encoding='latin1').split('\n')
+outer = '#if defined(CCPU) && !defined(CPU_30_STYLE)'
+inner = '#if defined(CCPU) && !defined(CPU_40_STYLE)'
+matches = [i for i, line in enumerate(lines) if line.strip() == outer]
+if len(matches) != 1:
+    raise SystemExit('missing restored original xt.c outer selector')
+i = matches[0]
+expected = [outer, inner,
+            '#error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.',
+            '#endif /* defined(CCPU) && !defined(CPU_40_STYLE) */',
+            '#endif /* defined(CCPU) && !defined(CPU_30_STYLE) */', '#line 147']
+if [line.strip() for line in lines[i:i+6]] != expected:
+    raise SystemExit('xt.c original selector or existing adaptation changed')
+probe.write_text('\n'.join(expected + ['int after_outer = __LINE__;']) + '\n', encoding='ascii')
+selected = subprocess.run(base + ['/DCCPU', '/DCPU_40_STYLE', str(probe)],
+                          capture_output=True, text=True, errors='replace')
+excluded = subprocess.run(base + ['/DCCPU', str(probe)],
+                          capture_output=True, text=True, errors='replace')
+if selected.returncode or not re.search(r'int\s+after_outer\s*=\s*147\s*;', selected.stdout):
+    raise SystemExit('xt.c selected outer selector or original line mapping failed: ' + selected.stderr)
+if not excluded.returncode or 'MVDM-HOST-DIV-515' not in excluded.stdout + excluded.stderr:
+    raise SystemExit('xt.c existing non-CPU40 adaptation no longer rejects')
+line_matches = [i for i, line in enumerate(lines) if line.strip() == '#line 340']
+if len(line_matches) != 1 or lines[line_matches[0]-1].strip() != '#endif /* CPU_30_STYLE */':
+    raise SystemExit('xt.c original post-CPU30 logical line mapping changed')
+print('PASS xt.c original outer selector, existing adaptation and line mappings')

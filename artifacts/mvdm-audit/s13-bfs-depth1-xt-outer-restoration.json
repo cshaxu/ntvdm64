@@ -1,0 +1,65 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+  "before_sha256": "c97b75325cf2743bacacd0f510606f62e96f0a9df1d67796434dc89b593472ea",
+  "candidate_sha256": "489b9d46180691e81cd975435a014d19e766cf33feac16a2c755ac93d93085f1",
+  "original_outer_line": 75,
+  "original_outer_end": 146,
+  "original_cpu30_end": 339,
+  "controls": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "selected_output_equal_ignoring_blank_lines": true,
+      "sha256": "db727f628b2dcdec002a83b814f0133dc6fa7f2471ea5edbcadb2b38d7cd5798"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "selected_output_equal_ignoring_blank_lines": true,
+      "sha256": "db727f628b2dcdec002a83b814f0133dc6fa7f2471ea5edbcadb2b38d7cd5798"
+    },
+    {
+      "logical_line": 152,
+      "diagnostic_verified": true
+    },
+    {
+      "logical_line": 340,
+      "diagnostic_verified": true
+    }
+  ],
+  "scope": "restore fixed OpenNT first-depth selector; keep existing DIV-147 adaptation as next-depth conditional without auditing it",
+  "actual_marker_selected_graphs": [
+    "build/.ninja/msvc-x86-release/worker",
+    "build/.ninja/msvc-x64-release/worker-reference-x86"
+  ],
+  "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+  "restored_first_depth_groups": 1,
+  "corrected_cpu30_line_directive": {
+    "before": 99,
+    "after": 340
+  },
+  "same_source_path_object_control": {
+    "before_sha256": "cd0df2ee7b7e733992b4f5c544ab26fc5bbe4ba22417210df1213a43f9338e1f",
+    "after_sha256": "cd0df2ee7b7e733992b4f5c544ab26fc5bbe4ba22417210df1213a43f9338e1f",
+    "byte_identical": true
+  },
+  "raw_unstaged_vs_packaged": {
+    "different_bytes": 22395,
+    "section_differences": {
+      ".text": 0,
+      ".rdata": 2,
+      ".data": 0,
+      ".detourc": 0,
+      ".detourd": 0,
+      ".rsrc": 22387,
+      ".reloc": 0
+    },
+    "resource_difference": "raw un-staged executable lacks NTVDM_PACKAGE_ID resource; all other 13 resource payload hashes match",
+    "scope": "unpackaged raw worker executable vs previously staged baseline; not an equivalent package comparison"
+  },
+  "packaged_comparison": "s13-bfs-depth1-xt-packaged-image-compare.json",
+  "validation": {
+    "actual_x86_worker_and_x64_reference_worker": "passed",
+    "x86_and_x64_cpu_guard_tests": "passed",
+    "top_level_cached_x86_and_x64": "passed; no work",
+    "retained_existing_release": "packaged candidate has only PE timestamp differences; no partial release or repeat runtime tests"
+  }
+}
