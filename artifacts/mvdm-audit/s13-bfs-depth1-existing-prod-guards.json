@@ -1,0 +1,80 @@
+{
+  "scope": "three existing unselected non-PROD #error arms in selected CCPU, PIC and timer C sources; no source changes",
+  "evidence": "Both real worker compile contexts for each source define PROD; no source-local PROD mutation. CCPU lifecycle fixture uses /DPROD; PIC fixture uses original worker object.",
+  "original_boundary": "The selected PROD guard in c_xcptn.c is a local DIV-271 production fix, absent from pinned original; the PIC/timer originals contain PROD selectors, without this alone establishing exact structural correspondence. Further original-boundary review remains.",
+  "limits": "No claim for unsupported debug configurations or other independent fixtures not named; reopen for admitted debug builds.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "current_sha256": "75c46dfb87a12ac861e86bafc312092fb8f6c0590d69de16d211580b0d6dba2f",
+      "original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+      "original_contains_prod_selector": false,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/ccpu/c_xcptn.obj",
+          "command_sha256": "1a0131fbc1946dfa2b27d4d3d044f2d60888f999556e6e8b7a4a67259afa4dfd"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/ccpu/c_xcptn.obj",
+          "command_sha256": "1a0131fbc1946dfa2b27d4d3d044f2d60888f999556e6e8b7a4a67259afa4dfd"
+        }
+      ],
+      "guards": [
+        {
+          "line": 47,
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register."
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "original_contains_prod_selector": true,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/system/ica.obj",
+          "command_sha256": "f9f2459b763aa68b3f3cb3efeb606812d508ae705bdddd74b134a1347972af39"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/system/ica.obj",
+          "command_sha256": "f9f2459b763aa68b3f3cb3efeb606812d508ae705bdddd74b134a1347972af39"
+        }
+      ],
+      "guards": [
+        {
+          "line": 1447,
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "4e2728687508b9c240c56e65fc4ca8e93a557e2ffdeaf61f761775b11d0a0d6b",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "original_contains_prod_selector": true,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/system/timer.obj",
+          "command_sha256": "6770a759a7fa6832c17eab2bbe91f803b3b13d355edee0c6add1221f4f7c27d3"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/system/timer.obj",
+          "command_sha256": "6770a759a7fa6832c17eab2bbe91f803b3b13d355edee0c6add1221f4f7c27d3"
+        }
+      ],
+      "guards": [
+        {
+          "line": 928,
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+        }
+      ]
+    }
+  ]
+}
