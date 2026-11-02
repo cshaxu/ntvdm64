@@ -10,7 +10,10 @@ fs.mkdirSync(out,{recursive:true});
 const read=p=>fs.readFileSync(p,'utf8').replaceAll('\r','');
 const file='src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c';
 const current=read(file);
-const original=read('O:/repos.external/OpenNT/base/mvdm/softpc.new/base/ccpu386/c_xcptn.c');
+const originalPath='O:/repos.external/OpenNT/base/mvdm/softpc.new/base/ccpu386/c_xcptn.c';
+const originalBytes=fs.readFileSync(originalPath);
+assert.equal(crypto.createHash('sha256').update(originalBytes).digest('hex'),'e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2');
+const original=originalBytes.toString('utf8').replaceAll('\r','');
 const patch=fs.readFileSync('O:/repos.external/ntvdmx64/ntvdmpatch/patches/common/ccpu.patch');
 assert.equal(crypto.createHash('sha256').update(patch).digest('hex'),'d3ea35d3f7c3bd4617f5f6edc90725d3a70f503e353677c251720d9e5c9929fc');
 const patchText=patch.toString('utf8').replaceAll('\r','');
@@ -19,16 +22,19 @@ for(const [start,end] of [['252c259','312c320'],['312c320','373c382'],['373c382'
  assert(hunk.length>0,'Pinned upstream hunk must remain available for provenance review');
 }
 const block=/if\(GET_PE\(\) && host_exint_hook\([^\n]+\) \{\n[\s\S]*?c_cpu_continue\(\);[^\n]*\n[\t ]*\}/g;
-assert.equal([...current.matchAll(block)].length,5);
-const releaseGuard=/^#ifdef PROD\n\/\* DIVERGENCE\(MVDM-HOST-DIV-271\):[\s\S]*?^#define check_exception_env\(\)\n#else\n(#define check_exception_env\(\)[\s\S]*?^}\n)#endif\n/m;
+const recoveredBlocks=[...current.matchAll(block)].map(match=>match[0]);
+assert.equal(recoveredBlocks.length,5);
+for (const recovered of recoveredBlocks) {
+ const originalBlock=recovered.replace(') {',')').replace(/\n[\t ]*\}$/,'');
+ assert.equal(original.split(originalBlock).length-1,1,'Each recovered block must map uniquely to the pinned original');
+}
+const releaseGuard=/^#ifdef PROD\n\/\* DIVERGENCE\(MVDM-HOST-DIV-271\):[\s\S]*?^#define check_exception_env\(\)\n#else\n#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register\.\n#endif\n/m;
 assert.match(current,releaseGuard,
  'Production must make the non-product CCPU_SHOW_EXCEPTIONS gate inert');
-const before=current.replace(releaseGuard,'$1')
- .replace(/^[\t ]*\/\* DIVERGENCE: MVDM-HOST-DIV-268:.*\n/gm,'')
- .replace(block,s=>s.replace(') {',')').replace(/\n[\t ]*\}$/,''));
-const normalize=s=>s.replace(/^#include <yoda.h>\n/m,'')
- .replace(/^\s*IMPORT char \*host_getenv.*\n/m,'');
-assert.equal(normalize(before),normalize(original),'Only DIV-268 and the PROD-only DIV-271 release gate may differ from original exception logic');
+// S13 intentionally replaces excluded branches with #error.  Use the pinned
+// original directly for the negative baseline rather than recovering deleted
+// text from the selected mirror or asserting that unrelated subsets match.
+const before=original;
 const prelude=String.raw`
 #include <stdio.h>
 #include <stdint.h>
@@ -154,8 +160,8 @@ int main(void) {
  return 0;
 }
 `;
-for(const [name,source] of [['exception-profile',current],['exception-before',before]])
- fs.writeFileSync(path.join(out,name+'.c'),prelude+source.replace(/^#include[^\n]*\n/gm,'')+harness);
+for(const [name,source,profile] of [['exception-profile',current,'#define PROD 1\n'],['exception-before',before,'']])
+ fs.writeFileSync(path.join(out,name+'.c'),prelude+profile+source.replace(/^#include[^\n]*\n/gm,'')+harness);
 fs.writeFileSync(path.join(out,'exception-prod-environment.c'),
  prelude+'\n#define PROD 1\n'+current.replace(/^#include[^\n]*\n/gm,'')+prodHarness);
-console.log('PASS exact five-block source delta and pinned upstream patch hash');
+console.log('PASS five recovered blocks mapped to pinned original and upstream patch hash');

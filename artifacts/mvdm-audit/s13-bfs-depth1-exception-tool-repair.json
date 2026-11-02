@@ -1,0 +1,17 @@
+{
+  "scope": "repair pre-existing test-only exception profile generator for excluded non-PROD mirror branch; no product source or binary change",
+  "generator_before_sha256": "7315d2b53647e49f34b1753ba9e912aba73e0b61a05a12b5042e37fabd8b1a91",
+  "generator_after_sha256": "b50549f506b1e1955971a7a9e03491f0906ca88ea2a5ed1d9b29557c6f4cfa53",
+  "selected_source_sha256": "75c46dfb87a12ac861e86bafc312092fb8f6c0590d69de16d211580b0d6dba2f",
+  "pinned_original_sha256": "e1f8f19a1f513402a10dc13eaf3b43d45a208fd71a72692f690f808a7e7762b2",
+  "ntvdmx64_patch_sha256": "d3ea35d3f7c3bd4617f5f6edc90725d3a70f503e353677c251720d9e5c9929fc",
+  "x86_tool_exit": 0,
+  "candidate_cases": 27,
+  "candidate_failures": 0,
+  "prod_environment_passed": true,
+  "original_negative_cases": 27,
+  "original_negative_failures": 101,
+  "original_negative_expected": true,
+  "log_sha256": "a4a6b3daa31805b0e5d7fa0cfb56776ba2f9f1fc03678c9033962309177ea62b",
+  "limitations": "The tool verifies five patched blocks individually against the fixed original, not whole-file equality after S13 conditional subsetting; standalone fixture does not prove complete exception lifecycle behavior."
+}
