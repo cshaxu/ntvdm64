@@ -1,0 +1,602 @@
+{
+  "scope": "file-level disposition for unselected historical CVIDC header; internal conditions are not classified false",
+  "path": "src/mvdm-host/softpc.new/base/cvidc/sas4gen.h",
+  "current_sha256": "60449cac0c2d4614a87e91377592a6459821bd025da9a22f2dd519a8bea6dce3",
+  "original_sha256": "ecda9cc4909ec3b945f90441a1ec441adaf807dcf6f419523c80c334e87067a0",
+  "selected_generated_header": "src\\ntvdm-exe\\softpc\\include\\generated\\x86\\prod\\sas4gen.h",
+  "selected_header_sha256": "abc942914e4ea58f17d4549c3fcd6753500b012b83056b33b285c4dcee79008b",
+  "actual_include_contexts": {
+    "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h": 192
+  },
+  "ninja_dependency_graphs_checked": [
+    "build/.ninja/console-observers-x64/build.ninja",
+    "build/.ninja/msvc-x64-formal-release/build.ninja",
+    "build/.ninja/msvc-x64-release/build.ninja",
+    "build/.ninja/msvc-x86-formal-release/build.ninja",
+    "build/.ninja/msvc-x86-release/build.ninja",
+    "build/.ninja/msvc-x86-suballoc-audit/build.ninja",
+    "build/.ninja/observations-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x86/build.ninja",
+    "build/.ninja/t463-s2-dialog-end-boundary/build.ninja",
+    "build/.ninja/t463-s2-dialog-procedure/build.ninja",
+    "build/.ninja/t473-s8-control-boundaries/build.ninja",
+    "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x86/wow32/build.ninja",
+    "build/.ninja/pkg-uuid-x64/frontend/build.ninja",
+    "build/.ninja/pkg-uuid-x64/hook/build.ninja",
+    "build/.ninja/pkg-uuid-x64/launcher/build.ninja",
+    "build/.ninja/pkg-uuid-x64/monitor/build.ninja",
+    "build/.ninja/pkg-uuid-x64/service/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+    "build/.ninja/msvc-x86-release/call-boundaries/build.ninja",
+    "build/.ninja/msvc-x86-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x86-release/worker/build.ninja",
+    "build/.ninja/msvc-x86-release/wow32/build.ninja",
+    "build/.ninja/msvc-x64-release/frontend/build.ninja",
+    "build/.ninja/msvc-x64-release/hook/build.ninja",
+    "build/.ninja/msvc-x64-release/launcher/build.ninja",
+    "build/.ninja/msvc-x64-release/monitor/build.ninja",
+    "build/.ninja/msvc-x64-release/observation/build.ninja",
+    "build/.ninja/msvc-x64-release/service/build.ninja",
+    "build/.ninja/msvc-x64-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x64-release/worker/build.ninja",
+    "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja"
+  ],
+  "source_include": "src/mvdm-host/softpc.new/base/inc/sas.h uses <sas4gen.h>; current actual include chains select the product generated header",
+  "other_live_entries": "CMakeLists.txt and tools/build/GenerateCvidcCpuBinding.mjs explicitly read the product generated header; tests/observation/build-worker-performance.ps1 orders its directory before cvidc",
+  "historical_exception": "tools/build/New-T281OriginalBopDispatchNinja.ps1 searches the CVIDC path without the product generated include first, but references missing src/mvdm-platform-abi and src/mvdm-support directories and is not invoked by current tracked tests/build scripts. Do not call this a supported or validated current context. If revived, re-open this entire header queue.",
+  "reclassified_pending_arms": [
+    {
+      "line": 122,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 125,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 135,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 138,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 148,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 151,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 161,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 164,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 174,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 177,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 187,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 190,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 200,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 203,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 213,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 216,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 226,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 229,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 239,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 242,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 252,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 255,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 265,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 268,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 278,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 281,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 291,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 294,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 304,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 307,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 317,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 320,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 330,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 333,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 343,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 346,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 356,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 359,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 369,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 372,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 382,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 385,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 395,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 398,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 408,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 411,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 421,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 424,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 434,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 437,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 447,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 450,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 460,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 463,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 473,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 476,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 486,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 489,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 499,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 502,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 512,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 515,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 525,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 528,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 538,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 541,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 551,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 554,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 564,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 567,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 577,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 580,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 590,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 593,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 603,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 606,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 616,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 619,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 629,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 632,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 642,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 645,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 655,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 658,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 668,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 671,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 681,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 684,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 694,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 697,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 707,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 710,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 720,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 723,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 733,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 736,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 746,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 748,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 758,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 761,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 771,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 774,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 784,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 787,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 797,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 800,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 810,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 813,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 823,
+      "kind": "ifdef",
+      "expression": "CCPU"
+    },
+    {
+      "line": 826,
+      "kind": "else",
+      "expression": ""
+    }
+  ]
+}
