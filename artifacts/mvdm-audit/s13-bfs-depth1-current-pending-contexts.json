@@ -7635,16 +7635,7 @@
     },
     {
       "path": "src/non-mvdm/base/win32/server/srvinit.c",
-      "start": 161,
-      "kind": "ifdef",
-      "expression": "WX86",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/non-mvdm/base/win32/server/srvinit.c",
-      "start": 475,
+      "start": 209,
       "kind": "if",
       "expression": "DBG",
       "pending_reason": "file-not-witnessed-in-product",
@@ -7653,18 +7644,9 @@
     },
     {
       "path": "src/non-mvdm/base/win32/server/srvinit.c",
-      "start": 477,
+      "start": 211,
       "kind": "else",
       "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/non-mvdm/base/win32/server/srvinit.c",
-      "start": 662,
-      "kind": "ifdef",
-      "expression": "WX86",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -8525,15 +8507,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/non-mvdm/public/internal/ds/inc/token.h",
-      "start": 99,
-      "kind": "ifdef",
-      "expression": "DOS3",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/non-mvdm/public/internal/ds/inc/uascache.h",
       "start": 29,
       "kind": "ifndef",
@@ -9094,7 +9067,7 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 841
+      "count": 838
     },
     {
       "reason": "file-not-witnessed-in-product",

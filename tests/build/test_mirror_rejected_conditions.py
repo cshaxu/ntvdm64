@@ -190,28 +190,30 @@ if allowed.returncode or not rejected.returncode or marker not in rejected.stdou
 print('PASS CCPU excludes original hardware-host FPU save path')
 
 for path, macro, expected_count, divergence in (
-    ('src/mvdm-host/softpc.new/base/bios/bootstra.c', 'SECURE', 4, '602'),
-    ('src/mvdm-host/softpc.new/base/inc/cpu2.h', 'EGATEST', 1, '602'),
-    ('src/mvdm-host/wow32/wkglobal.c', 'API16', 8, '603'),
-    ('src/mvdm-host/wow32/wklocal.c', 'API16', 2, '603'),
-    ('src/mvdm-host/softpc.new/host/src/stf_conf.c', 'STUBBED', 4, '604'),
-    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'INTEL_BOOK_NOT_OS2', 1, '605'),
-    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'NO_CHIP_BUG', 1, '605'),
-    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'NPX_287', 1, '605'),
-    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'OLDPIG', 1, '605'),
-    ('src/mvdm-host/softpc.new/base/inc/cpu3.h', 'SWIN_CPU_OPTS', 1, '605'),
-    ('src/mvdm-host/softpc.new/base/inc/gore.h', 'INTERLEAVED', 1, '605'),
-    ('src/mvdm-host/softpc.new/base/inc/host_msw.h', 'MSWDVR_DEBUG', 1, '605'),
-    ('src/mvdm-host/softpc.new/base/inc/keycaps.h', 'UIF_TEST', 1, '605'),
-    ('src/mvdm-host/softpc.new/base/inc/novell.h', 'V4CLIENT', 1, '605'),
-    ('src/mvdm-host/softpc.new/base/inc/smeg_hea.h', 'SMEG', 1, '605'),
-    ('src/mvdm-host/softpc.new/base/inc/winhelp.h', 'HOST_HELP', 1, '605'),
-    ('src/mvdm-host/softpc.new/base/system/quick_ev.c', 'QEVENT_TESTER', 1, '605'),
-    ('src/mvdm-host/softpc.new/dat2obj/dat2obj.c', 'TEST_CASE', 2, '605'),
-    ('src/mvdm-host/softpc.new/host/src/nt_vflop.c', 'VFLOPPY', 1, '605'),
+    ('src/mvdm-host/softpc.new/base/bios/bootstra.c', 'SECURE', 4, 'MVDM-HOST-DIV-602'),
+    ('src/mvdm-host/softpc.new/base/inc/cpu2.h', 'EGATEST', 1, 'MVDM-HOST-DIV-602'),
+    ('src/mvdm-host/wow32/wkglobal.c', 'API16', 8, 'MVDM-HOST-DIV-603'),
+    ('src/mvdm-host/wow32/wklocal.c', 'API16', 2, 'MVDM-HOST-DIV-603'),
+    ('src/mvdm-host/softpc.new/host/src/stf_conf.c', 'STUBBED', 4, 'MVDM-HOST-DIV-604'),
+    ('src/non-mvdm/base/win32/server/srvinit.c', 'WX86', 2, 'OPENNT-HOST-150'),
+    ('src/non-mvdm/public/internal/ds/inc/token.h', 'DOS3', 1, 'OPENNT-HOST-150'),
+    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'INTEL_BOOK_NOT_OS2', 1, 'MVDM-HOST-DIV-605'),
+    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'NO_CHIP_BUG', 1, 'MVDM-HOST-DIV-605'),
+    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'NPX_287', 1, 'MVDM-HOST-DIV-605'),
+    ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'OLDPIG', 1, 'MVDM-HOST-DIV-605'),
+    ('src/mvdm-host/softpc.new/base/inc/cpu3.h', 'SWIN_CPU_OPTS', 1, 'MVDM-HOST-DIV-605'),
+    ('src/mvdm-host/softpc.new/base/inc/gore.h', 'INTERLEAVED', 1, 'MVDM-HOST-DIV-605'),
+    ('src/mvdm-host/softpc.new/base/inc/host_msw.h', 'MSWDVR_DEBUG', 1, 'MVDM-HOST-DIV-605'),
+    ('src/mvdm-host/softpc.new/base/inc/keycaps.h', 'UIF_TEST', 1, 'MVDM-HOST-DIV-605'),
+    ('src/mvdm-host/softpc.new/base/inc/novell.h', 'V4CLIENT', 1, 'MVDM-HOST-DIV-605'),
+    ('src/mvdm-host/softpc.new/base/inc/smeg_hea.h', 'SMEG', 1, 'MVDM-HOST-DIV-605'),
+    ('src/mvdm-host/softpc.new/base/inc/winhelp.h', 'HOST_HELP', 1, 'MVDM-HOST-DIV-605'),
+    ('src/mvdm-host/softpc.new/base/system/quick_ev.c', 'QEVENT_TESTER', 1, 'MVDM-HOST-DIV-605'),
+    ('src/mvdm-host/softpc.new/dat2obj/dat2obj.c', 'TEST_CASE', 2, 'MVDM-HOST-DIV-605'),
+    ('src/mvdm-host/softpc.new/host/src/nt_vflop.c', 'VFLOPPY', 1, 'MVDM-HOST-DIV-605'),
 ):
     lines = (repo / path).read_text(encoding='latin1').splitlines()
-    marker = 'MVDM-HOST-DIV-' + divergence + ': unsupported ' + macro + ' profile'
+    marker = divergence + ': unsupported ' + macro + ' profile'
     positions = [i for i, line in enumerate(lines) if marker in line]
     if len(positions) != expected_count:
         raise SystemExit('incorrect excluded profile guard count: ' + path)

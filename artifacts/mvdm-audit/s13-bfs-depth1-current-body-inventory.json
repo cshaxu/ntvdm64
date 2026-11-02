@@ -59747,59 +59747,59 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 28,
-      "source_sha256": "55499e216114ba9d3b93603c9bf4e1afa8104ab0aa681bc4a5367538af2c8da0"
+      "source_sha256": "d330230595c68f36574a2af2e875281cffab38d50cfaa340bca7c74eb2e5cb81"
     },
     {
       "path": "src/non-mvdm/base/win32/server/srvinit.c",
       "start": 161,
-      "cut": 430,
-      "group_end": 430,
+      "cut": 163,
+      "group_end": 163,
       "kind": "ifdef",
       "expression": "WX86",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 268,
-      "source_sha256": "55499e216114ba9d3b93603c9bf4e1afa8104ab0aa681bc4a5367538af2c8da0"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "d330230595c68f36574a2af2e875281cffab38d50cfaa340bca7c74eb2e5cb81"
     },
     {
       "path": "src/non-mvdm/base/win32/server/srvinit.c",
-      "start": 475,
-      "cut": 477,
-      "group_end": 479,
+      "start": 209,
+      "cut": 211,
+      "group_end": 213,
       "kind": "if",
       "expression": "DBG",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "55499e216114ba9d3b93603c9bf4e1afa8104ab0aa681bc4a5367538af2c8da0"
+      "source_sha256": "d330230595c68f36574a2af2e875281cffab38d50cfaa340bca7c74eb2e5cb81"
     },
     {
       "path": "src/non-mvdm/base/win32/server/srvinit.c",
-      "start": 477,
-      "cut": 479,
-      "group_end": 479,
+      "start": 211,
+      "cut": 213,
+      "group_end": 213,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "55499e216114ba9d3b93603c9bf4e1afa8104ab0aa681bc4a5367538af2c8da0"
+      "source_sha256": "d330230595c68f36574a2af2e875281cffab38d50cfaa340bca7c74eb2e5cb81"
     },
     {
       "path": "src/non-mvdm/base/win32/server/srvinit.c",
-      "start": 662,
-      "cut": 700,
-      "group_end": 700,
+      "start": 396,
+      "cut": 398,
+      "group_end": 398,
       "kind": "ifdef",
       "expression": "WX86",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 37,
-      "source_sha256": "55499e216114ba9d3b93603c9bf4e1afa8104ab0aa681bc4a5367538af2c8da0"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "d330230595c68f36574a2af2e875281cffab38d50cfaa340bca7c74eb2e5cb81"
     },
     {
       "path": "src/non-mvdm/base/win32/server/srvvdm.c",
@@ -62079,15 +62079,15 @@
     {
       "path": "src/non-mvdm/public/internal/ds/inc/token.h",
       "start": 99,
-      "cut": 102,
-      "group_end": 102,
+      "cut": 101,
+      "group_end": 101,
       "kind": "ifdef",
       "expression": "DOS3",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "a513b53cd0d2ec65651fba56290caec78de4dc036f26f16e51085f2320f5e3fe"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "1d2c587664865ce52264f64a3d30b9e85ab16efa94d26d2737ea9c07aa7d87e0"
     },
     {
       "path": "src/non-mvdm/public/internal/ds/inc/uascache.h",
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 1007,
+    "pending": 1004,
     "already-excluded": 1603,
-    "newly-excluded": 573,
+    "newly-excluded": 576,
     "retained-observed": 1863,
     "retained-original-assertion": 4
   },
   "pending_by_guard": {
-    "not-guard": 892,
+    "not-guard": 889,
     "guard": 115
   }
 }

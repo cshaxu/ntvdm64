@@ -1,0 +1,115 @@
+{
+  "scope": "three first-depth arms, original bodies matched; nested source and queue entries inside excluded arms removed without deeper audit",
+  "macro_evidence": {
+    "compile_commands_checked": 2070,
+    "jobs_sha256": "623d1067dca46b9fabf571db17d6567d8f03e04047245ca9ac11fcda71c725ea",
+    "command_macro_definitions_found": 0,
+    "source_generated_sdk_definitions_found": 0,
+    "scope": "src, tests, tools, generated Ninja trees and eight SDK include roots",
+    "controls": "6 x86/x64 isolated selector checks; original removed body matched after line-ending normalization; selected bodies retained verbatim"
+  },
+  "records": [
+    {
+      "path": "src/non-mvdm/base/win32/server/srvinit.c",
+      "macro": "WX86",
+      "original_start": 161,
+      "original_cut": 430,
+      "original_end": 430,
+      "removed_body_sha256": "458b673542ef519de658e3762cc7701504a20858867fd31518c1b233326863c9",
+      "removed_lines": 268
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvinit.c",
+      "macro": "WX86",
+      "original_start": 662,
+      "original_cut": 700,
+      "original_end": 700,
+      "removed_body_sha256": "8ff5bb1a8b27fa58d2b6b2fe1961ac88c6586aa5127262f55124e396cb4e4b4f",
+      "removed_lines": 37
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/token.h",
+      "macro": "DOS3",
+      "original_start": 99,
+      "original_cut": 102,
+      "original_end": 102,
+      "removed_body_sha256": "fc1e47ba4653ba30368a5cc0d5f632c8691f43c348483d52e9889f09f8e024aa",
+      "removed_lines": 2
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "path": "src/non-mvdm/base/win32/server/srvinit.c",
+      "start": 161,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/non-mvdm/base/win32/server/srvinit.c",
+      "start": 662,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/non-mvdm/public/internal/ds/inc/token.h",
+      "start": 99,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/non-mvdm/base/win32/server/srvinit.c",
+      "start": 161,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/non-mvdm/base/win32/server/srvinit.c",
+      "start": 662,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/non-mvdm/public/internal/ds/inc/token.h",
+      "start": 99,
+      "normal_pass": true,
+      "forced_rejected": true
+    }
+  ],
+  "files": [
+    {
+      "path": "src/non-mvdm/base/win32/server/srvinit.c",
+      "before": "55499e216114ba9d3b93603c9bf4e1afa8104ab0aa681bc4a5367538af2c8da0",
+      "after": "d330230595c68f36574a2af2e875281cffab38d50cfaa340bca7c74eb2e5cb81"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/token.h",
+      "before": "a513b53cd0d2ec65651fba56290caec78de4dc036f26f16e51085f2320f5e3fe",
+      "after": "1d2c587664865ce52264f64a3d30b9e85ab16efa94d26d2737ea9c07aa7d87e0"
+    }
+  ],
+  "removed_inner_group_count": 0,
+  "validation": {
+    "x86_cached_build": "passed; no work",
+    "x64_cached_build": "passed; no work",
+    "guard_gate": "x86 and x64; see progress record",
+    "published_release": "all ten product images byte-identical to accepted prior release at both destinations",
+    "published_images": [
+      "run16.exe",
+      "ntsrv.exe",
+      "ntcon.exe",
+      "ntvdm.exe",
+      "ntvwm.exe",
+      "ntmon.exe",
+      "WOW32.DLL",
+      "VDMREDIR.DLL",
+      "nthook32.dll",
+      "nthook64.dll"
+    ]
+  }
+}

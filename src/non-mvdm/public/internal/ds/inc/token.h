@@ -97,6 +97,6 @@ GetToken(
 //
 
 #ifdef DOS3
-extern USHORT   cbMaxPathLen;
-extern USHORT   cbMaxPathCompLen;
+#error DIVERGENCE OPENNT-HOST-150: unsupported DOS3 profile
 #endif
+#line 103
