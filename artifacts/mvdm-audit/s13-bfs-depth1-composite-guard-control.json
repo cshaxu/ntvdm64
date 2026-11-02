@@ -1,0 +1,261 @@
+{
+  "scope": "first-depth existing guard, pinned unique original group, macro-definition scan, compiler positive and negative controls; no source modification",
+  "scan": {
+    "directories": [
+      "src",
+      "tests",
+      "tools",
+      "build/.ninja",
+      "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.43.34808\\include",
+      "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Auxiliary\\VS\\include",
+      "C:\\Program Files (x86)\\Windows Kits\\10\\include\\10.0.22621.0\\ucrt",
+      "C:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\um",
+      "C:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\shared",
+      "C:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\winrt",
+      "C:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\cppwinrt",
+      "C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.7\\include\\um"
+    ],
+    "pattern": "(?i)^\\s*#\\s*(?:define|undef)\\s+(?:A2CPU|SWIN_HAW|SOFTWIN_API|HERC|JOKER)\\b",
+    "returncode": 1,
+    "matches": []
+  },
+  "checks": [
+    {
+      "architecture": "x86",
+      "case": "delta-none",
+      "defined": [],
+      "expected_success": true,
+      "returncode": 0
+    },
+    {
+      "architecture": "x86",
+      "case": "delta-only",
+      "defined": [
+        "DELTA"
+      ],
+      "expected_success": true,
+      "returncode": 0
+    },
+    {
+      "architecture": "x86",
+      "case": "a2-only",
+      "defined": [
+        "A2CPU"
+      ],
+      "expected_success": true,
+      "returncode": 0
+    },
+    {
+      "architecture": "x86",
+      "case": "both",
+      "defined": [
+        "DELTA",
+        "A2CPU"
+      ],
+      "expected_success": false,
+      "returncode": 2
+    },
+    {
+      "architecture": "x86",
+      "case": "SWIN_HAW-absent",
+      "defined": [],
+      "expected_success": true,
+      "returncode": 0
+    },
+    {
+      "architecture": "x86",
+      "case": "SWIN_HAW-defined",
+      "defined": [
+        "SWIN_HAW"
+      ],
+      "expected_success": false,
+      "returncode": 2
+    },
+    {
+      "architecture": "x86",
+      "case": "SOFTWIN_API-absent",
+      "defined": [],
+      "expected_success": true,
+      "returncode": 0
+    },
+    {
+      "architecture": "x86",
+      "case": "SOFTWIN_API-defined",
+      "defined": [
+        "SOFTWIN_API"
+      ],
+      "expected_success": false,
+      "returncode": 2
+    },
+    {
+      "architecture": "x86",
+      "case": "HERC-absent",
+      "defined": [],
+      "expected_success": true,
+      "returncode": 0
+    },
+    {
+      "architecture": "x86",
+      "case": "HERC-defined",
+      "defined": [
+        "HERC"
+      ],
+      "expected_success": false,
+      "returncode": 2
+    },
+    {
+      "architecture": "x86",
+      "case": "joker-absent",
+      "defined": [],
+      "expected_success": true,
+      "returncode": 0
+    },
+    {
+      "architecture": "x86",
+      "case": "joker-defined",
+      "defined": [
+        "JOKER"
+      ],
+      "expected_success": false,
+      "returncode": 2
+    },
+    {
+      "architecture": "x64",
+      "case": "delta-none",
+      "defined": [],
+      "expected_success": true,
+      "returncode": 0
+    },
+    {
+      "architecture": "x64",
+      "case": "delta-only",
+      "defined": [
+        "DELTA"
+      ],
+      "expected_success": true,
+      "returncode": 0
+    },
+    {
+      "architecture": "x64",
+      "case": "a2-only",
+      "defined": [
+        "A2CPU"
+      ],
+      "expected_success": true,
+      "returncode": 0
+    },
+    {
+      "architecture": "x64",
+      "case": "both",
+      "defined": [
+        "DELTA",
+        "A2CPU"
+      ],
+      "expected_success": false,
+      "returncode": 2
+    },
+    {
+      "architecture": "x64",
+      "case": "SWIN_HAW-absent",
+      "defined": [],
+      "expected_success": true,
+      "returncode": 0
+    },
+    {
+      "architecture": "x64",
+      "case": "SWIN_HAW-defined",
+      "defined": [
+        "SWIN_HAW"
+      ],
+      "expected_success": false,
+      "returncode": 2
+    },
+    {
+      "architecture": "x64",
+      "case": "SOFTWIN_API-absent",
+      "defined": [],
+      "expected_success": true,
+      "returncode": 0
+    },
+    {
+      "architecture": "x64",
+      "case": "SOFTWIN_API-defined",
+      "defined": [
+        "SOFTWIN_API"
+      ],
+      "expected_success": false,
+      "returncode": 2
+    },
+    {
+      "architecture": "x64",
+      "case": "HERC-absent",
+      "defined": [],
+      "expected_success": true,
+      "returncode": 0
+    },
+    {
+      "architecture": "x64",
+      "case": "HERC-defined",
+      "defined": [
+        "HERC"
+      ],
+      "expected_success": false,
+      "returncode": 2
+    },
+    {
+      "architecture": "x64",
+      "case": "joker-absent",
+      "defined": [],
+      "expected_success": true,
+      "returncode": 0
+    },
+    {
+      "architecture": "x64",
+      "case": "joker-defined",
+      "defined": [
+        "JOKER"
+      ],
+      "expected_success": false,
+      "returncode": 2
+    }
+  ],
+  "rows": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "current_arm_line": 326,
+      "original_group_line": 348,
+      "original_arm_line": 348,
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "condition": "defined(SOFTWIN_API)",
+      "status": "already-excluded"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
+      "current_arm_line": 266,
+      "original_group_line": 263,
+      "original_arm_line": 263,
+      "original_sha256": "a8577d81b26da6831e8d5dd496e41ebd40a947c3d641c39c77304d509ba2be61",
+      "condition": "defined(HERC)",
+      "status": "already-excluded"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "current_arm_line": 67,
+      "original_group_line": 66,
+      "original_arm_line": 66,
+      "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+      "condition": "defined(SWIN_HAW)",
+      "status": "already-excluded"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_arm_line": 2879,
+      "original_group_line": 2933,
+      "original_arm_line": 2994,
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "condition": "JOKER",
+      "status": "already-excluded"
+    }
+  ],
+  "limitation": "Existing graph and command-flag evidence recorded in previous checkpoints; no exclusion inferred solely from absence of build reachability."
+}

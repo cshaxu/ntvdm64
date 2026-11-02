@@ -3107,15 +3107,6 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
-      "start": 2879,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
       "start": 46,
       "kind": "ifndef",
@@ -3132,15 +3123,6 @@
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "current_actual_includers": 644
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
-      "start": 326,
-      "kind": "if",
-      "expression": "defined(SOFTWIN_API)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 84
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
@@ -3503,15 +3485,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/gfx_upd.h",
-      "start": 266,
-      "kind": "if",
-      "expression": "defined(HERC)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 62
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
       "start": 28,
       "kind": "else",
@@ -3636,15 +3609,6 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
-      "start": 67,
-      "kind": "if",
-      "expression": "defined (SWIN_HAW)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 80
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
@@ -9448,7 +9412,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 117
+      "count": 113
     },
     {
       "reason": "file-not-witnessed-in-product",

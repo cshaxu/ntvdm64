@@ -22784,8 +22784,8 @@
       "group_end": 2881,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "1061f78f7602480edc3ad0d0de1370bda8ae1df3f5e1d38ecb2fd0cb8255fb68"
@@ -23746,8 +23746,8 @@
       "group_end": 328,
       "kind": "if",
       "expression": "defined(SOFTWIN_API)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "eebdb2a775ef3692317ff5b990baf59c6651a67f8795f15e53577978239e50db"
@@ -25722,8 +25722,8 @@
       "group_end": 268,
       "kind": "if",
       "expression": "defined(HERC)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "2213bdd7d4f5f4e45d5843277e20686b34dea37316f9d3c42865fa54f7bf17a6"
@@ -26450,8 +26450,8 @@
       "group_end": 69,
       "kind": "if",
       "expression": "defined (SWIN_HAW)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "d03fb73cf11f56ef8e62df868d9a5848a321f456421a1896a1467fc702944b1f"
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 1047,
-    "already-excluded": 1597,
+    "pending": 1043,
+    "already-excluded": 1601,
     "newly-excluded": 539,
     "retained-observed": 1863,
     "retained-original-assertion": 4
   },
   "pending_by_guard": {
     "not-guard": 926,
-    "guard": 121
+    "guard": 117
   }
 }
