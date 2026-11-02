@@ -1,0 +1,108 @@
+{
+  "scope": "four existing first-depth non-CPU40 #error arms in four selected host C translation units; no source changes",
+  "evidence": "Two current real worker compile commands per file define CPU_40_STYLE; checked source files and current test/build directories for CPU_40_STYLE undef. Both XMS standalone graph generators explicitly select CPU_40_STYLE. Existing DIV-513 historical body hashes recorded in s12-noncpu40-subsets.jsonl.",
+  "limits": "Graph observations and named independent fixture builds; unsupported future profiles or newly admitted tests require review. The independent fixture may compile its own harness; this classification only concerns the actual four source files.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "current_sha256": "8c4d1a0ad9b2cbf86be4c5f44a18661196bf2caff4cb14c382ba529861e43c33",
+      "original_sha256": "a21e43830622d5d04bfcd018c6751cdc7a3de54c166621731494363c8d5a60ae",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/dpmi/dpmimemr.obj",
+          "command_sha256": "197659fa3cc6387b16f22846ca9a63541e61dbfc25b3943d62bf2040217ab4a0"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/dpmi/dpmimemr.obj",
+          "command_sha256": "197659fa3cc6387b16f22846ca9a63541e61dbfc25b3943d62bf2040217ab4a0"
+        }
+      ],
+      "guards": [
+        {
+          "line": 265,
+          "guard": "#else",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+        }
+      ],
+      "original_cpu40_selector_present": false
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "current_sha256": "36aa9653d2da9c2b0e3487cfb58064aa1c850618cddcfb912d18c0636ae6eaa3",
+      "original_sha256": "e47bd6f7a1f48ba94022c9d5ed78714c269f751737f8f69711fc44c06523f8f0",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/dpmi/i386_dpmi386.obj",
+          "command_sha256": "99cb79989907acbcf50de878b0fdd26a02a4f31674ef5f94d901e18f2c5146d1"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/dpmi/i386_dpmi386.obj",
+          "command_sha256": "99cb79989907acbcf50de878b0fdd26a02a4f31674ef5f94d901e18f2c5146d1"
+        }
+      ],
+      "guards": [
+        {
+          "line": 74,
+          "guard": "#else",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+        }
+      ],
+      "original_cpu40_selector_present": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "current_sha256": "0caae2986bd5256ecdee046d9961c5176a3d5178426a198b5f42fb3eb0bef369",
+      "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/bios/bios.obj",
+          "command_sha256": "6c705bd39ca949e654d9a8d79e686e8d47fb8a8ef5fd09a835d5c14dc2f09491"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/bios/bios.obj",
+          "command_sha256": "6c705bd39ca949e654d9a8d79e686e8d47fb8a8ef5fd09a835d5c14dc2f09491"
+        }
+      ],
+      "guards": [
+        {
+          "line": 63,
+          "guard": "#else",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+        }
+      ],
+      "original_cpu40_selector_present": true
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "current_sha256": "b414e7f1a100e23b42b1022232af5b3d04df01b9784d3536316fb7a43cec9df2",
+      "original_sha256": "70970ed738101458f8036b5a283f034eb64baf32ead84a59a6b02278b327612c",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/xms/xmsmemr.obj",
+          "command_sha256": "932ee004b8f1ecd64996dedbfa23c9d59cabbf0934a98747be1f99eb79b55903"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/xms/xmsmemr.obj",
+          "command_sha256": "932ee004b8f1ecd64996dedbfa23c9d59cabbf0934a98747be1f99eb79b55903"
+        }
+      ],
+      "guards": [
+        {
+          "line": 151,
+          "guard": "#else",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register."
+        }
+      ],
+      "original_cpu40_selector_present": false
+    }
+  ],
+  "original_structure_boundary": "bios.c has original CPU_40_STYLE condition groups. The examined CPU_40_STYLE guards in dpmimemr.c, dpmi386.c and xmsmemr.c are local condition structure: the pinned original files do not contain this selector. Their existing registered adaptations are preserved, not claimed to be original shells; separate original-boundary review remains necessary."
+}

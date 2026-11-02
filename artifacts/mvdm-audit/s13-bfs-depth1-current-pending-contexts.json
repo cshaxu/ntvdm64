@@ -56,24 +56,6 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
-      "start": 265,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
-      "start": 74,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/dpmi32/i386/dpmimem.c",
       "start": 153,
       "kind": "if",
@@ -306,15 +288,6 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
-      "start": 63,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
@@ -830,15 +803,6 @@
       "current_actual_includers": 90
     },
     {
-      "path": "src/mvdm-host/xms.486/xmsmemr.c",
-      "start": 151,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/non-mvdm/base/win32/server/srvinit.c",
       "start": 94,
       "kind": "if",
@@ -1069,7 +1033,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 31
+      "count": 27
     },
     {
       "reason": "combined-i386-cpu40-supported-context-unresolved",

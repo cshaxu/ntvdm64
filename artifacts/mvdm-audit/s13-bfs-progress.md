@@ -105,7 +105,7 @@ errors. It is not a count of proven missing boundaries. Candidate rows and the
 per-arm current queue are under the task scratch directory `build/t473-s13/bfs`.
 Of these, 73 original depth-one groups in kernel `ntstubs.c` have been
 classified separately: the registered OPENNT-HOST-076 subset retains only
-the complete `NtUserSetWindowFNID` body (original lines 6170–6188), which has
+the complete `NtUserSetWindowFNID` body (original lines 6170â€“6188), which has
 no enclosing conditional; all 73 candidate groups lie outside that retained
 body. This is an omitted-whole-function subset disposition, not a claim that
 the other original functions were restored. One additional candidate in
@@ -119,11 +119,11 @@ the guard closes at the end of the file. This disposition does not certify
 the corresponding current inclusion behavior. `_USERCLI_` is not included
 in this group because the original file also has content after its guard.
 For `ntcftxt.h`, the registered OPENNT-HOST-036/046 subset retains five
-original functions: `GetClassInfo` (111–155), `StringDuplicate` (578–588),
-`InitClsMenuName` (595–632), `RegisterClassExWOW` (701–844), and
-`UnregisterClass` (1051–1087). The original has eleven top-level `#ifdef
+original functions: `GetClassInfo` (111â€“155), `StringDuplicate` (578â€“588),
+`InitClsMenuName` (595â€“632), `RegisterClassExWOW` (701â€“844), and
+`UnregisterClass` (1051â€“1087). The original has eleven top-level `#ifdef
 UNICODE` groups; the initial selector and the two groups intersecting retained
-functions (601–617 and 802–806) correspond to the three current groups. Its
+functions (601â€“617 and 802â€“806) correspond to the three current groups. Its
 eighteen `#ifndef UNICODE` groups and two `#ifdef FE_SB` groups do not
 intersect any of those five function ranges. The 28 excess original groups
 are therefore classified as outside this registered function subset, without
@@ -131,7 +131,7 @@ asserting that other text APIs were restored or that all local semantics have
 been independently reviewed. Original group interval and retained-line
 comparisons were checked against the frozen original and current sources.
 For `handtabl.c`, OPENNT-HOST-063 retains only the original ownership table
-at lines 39–59; of 28 original depth-one groups, only the `FE_IME` group at
+at lines 39â€“59; of 28 original depth-one groups, only the `FE_IME` group at
 line 56 intersects that table. The 27 other groups lie outside the retained
 table subset. Their source identities and locations are recorded in
 `s13-bfs-depth1-handtabl.json`; this does not decide whether the retained
@@ -161,7 +161,7 @@ of the string-I/O consumers; source hashes and exact expressions are in
 candidates are unreviewed.
 
 One of those candidates, `nt_sec.c`, is now specifically identified rather
-than treated as a generic text mismatch: original lines 115–158 form a
+than treated as a generic text mismatch: original lines 115â€“158 form a
 top-level `#ifdef X86GFX` absent from the local file. This file was not
 witnessed in the collected contexts, while X86GFX is used elsewhere. The
 file's supported role and all applicable profiles must therefore be established
@@ -1874,4 +1874,8 @@ Classified 85 pending outer arms in 36 whole other historical source/header file
 
 ### First-depth existing non-NTVDM guards
 
-Reclassified five existing DIV-537 #error arms in c_main.c, floppy.c, ios.c and timer.c after checking both actual worker compilation commands, source macro mutations and independent CCPU/I/O test build flags. The original condition shells remain; no source or binaries changed. The historical removed-body ledger remains the provenance evidence. Status: {'unselected-file': 742, 'newly-excluded': 642, 'already-excluded': 1674, 'pending': 116, 'retained-observed': 1869, 'retained-original-assertion': 9}; child categories: {'retained-observed': 1410, 'pending': 80, 'unselected-file': 1551}. Evidence: `s13-bfs-depth1-existing-ntvdm-guards.json`; queue: `s13-bfs-depth1-working-queue-195r76.zip`.
+Reclassified five existing DIV-537 #error arms in c_main.c, floppy.c, ios.c and timer.c after checking both actual worker compilation commands, source macro mutations and independent CCPU/I/O test build flags. Existing condition shells remain; no source or binaries changed. The bios.c selector is original; the other three files have locally added CPU40 selectors, not present in their pinned originals, requiring separate original-boundary review. The historical removed-body ledger remains the provenance evidence. Status: {'unselected-file': 742, 'newly-excluded': 642, 'already-excluded': 1674, 'pending': 116, 'retained-observed': 1869, 'retained-original-assertion': 9}; child categories: {'retained-observed': 1410, 'pending': 80, 'unselected-file': 1551}. Evidence: `s13-bfs-depth1-existing-ntvdm-guards.json`; queue: `s13-bfs-depth1-working-queue-195r76.zip`.
+
+### First-depth existing non-CPU_40_STYLE guards
+
+Reclassified four existing DIV-513 #error arms in dpmimemr.c, dpmi386.c, bios.c and xmsmemr.c after checking both actual worker compilation commands, source macro mutations and independent XMS test build flags. Existing condition shells remain; no source or binaries changed. The bios.c selector is original; the other three files have locally added CPU40 selectors, not present in their pinned originals, requiring separate original-boundary review. The historical removed-body ledger remains the provenance evidence. Status: {'unselected-file': 742, 'newly-excluded': 642, 'already-excluded': 1678, 'pending': 112, 'retained-observed': 1869, 'retained-original-assertion': 9}; child categories: {'retained-observed': 1410, 'pending': 80, 'unselected-file': 1551}. Evidence: `s13-bfs-depth1-existing-cpu40-guards.json`; queue: `s13-bfs-depth1-working-queue-195r77.zip`.
