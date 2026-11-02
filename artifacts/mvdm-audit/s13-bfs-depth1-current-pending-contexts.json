@@ -3891,16 +3891,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 122,
-      "kind": "ifdef",
-      "expression": "TEST_HARNESS",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 290,
+      "start": 291,
       "kind": "ifndef",
       "expression": "JOKER",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3909,7 +3900,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 363,
+      "start": 364,
       "kind": "ifdef",
       "expression": "FLOPPY_B",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3918,7 +3909,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 387,
+      "start": 388,
       "kind": "ifndef",
       "expression": "NTVDM",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3927,7 +3918,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 389,
+      "start": 390,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3936,7 +3927,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 395,
+      "start": 396,
       "kind": "ifdef",
       "expression": "NTVDM",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3945,7 +3936,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 428,
+      "start": 429,
       "kind": "ifndef",
       "expression": "NTVDM",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3954,7 +3945,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 463,
+      "start": 464,
       "kind": "ifndef",
       "expression": "NTVDM",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3963,7 +3954,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 508,
+      "start": 509,
       "kind": "ifdef",
       "expression": "NTVDM",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3972,7 +3963,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 574,
+      "start": 575,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3981,7 +3972,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 595,
+      "start": 596,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3990,7 +3981,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 638,
+      "start": 639,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3999,7 +3990,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 675,
+      "start": 676,
       "kind": "ifndef",
       "expression": "NTVDM",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4008,7 +3999,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 682,
+      "start": 683,
       "kind": "ifndef",
       "expression": "NTVDM",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4017,7 +4008,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 694,
+      "start": 695,
       "kind": "ifdef",
       "expression": "NTVDM",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4026,7 +4017,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 721,
+      "start": 722,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4035,7 +4026,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 827,
+      "start": 828,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4044,7 +4035,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 838,
+      "start": 839,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4053,7 +4044,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 924,
+      "start": 925,
       "kind": "ifndef",
       "expression": "PROD",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4062,7 +4053,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 963,
+      "start": 964,
       "kind": "ifndef",
       "expression": "TEST_HARNESS",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4071,7 +4062,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 967,
+      "start": 968,
       "kind": "ifndef",
       "expression": "NTVDM",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4080,7 +4071,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 973,
+      "start": 974,
       "kind": "ifndef",
       "expression": "NTVDM",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4089,7 +4080,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 983,
+      "start": 984,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4098,7 +4089,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1084,
+      "start": 1085,
       "kind": "if",
       "expression": "!defined(JOKER) && !defined(NTVDM)",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4107,7 +4098,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1095,
+      "start": 1096,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4116,7 +4107,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1102,
+      "start": 1103,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4125,7 +4116,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1106,
+      "start": 1107,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4134,7 +4125,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1112,
+      "start": 1113,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4143,7 +4134,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1114,
+      "start": 1115,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4152,7 +4143,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1125,
+      "start": 1126,
       "kind": "ifndef",
       "expression": "PROD",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4161,7 +4152,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1136,
+      "start": 1137,
       "kind": "ifdef",
       "expression": "NTVDM",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4170,7 +4161,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1175,
+      "start": 1176,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -4179,18 +4170,9 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1250,
+      "start": 1251,
       "kind": "if",
       "expression": "!defined(NTVDM) && !defined(macintosh)",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1292,
-      "kind": "ifdef",
-      "expression": "TEST_HARNESS",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -8932,7 +8914,7 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 823
+      "count": 821
     },
     {
       "reason": "file-not-witnessed-in-product",

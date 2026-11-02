@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-608: preserve original first-depth selectors for unsupported
+CMOS TEST_HARNESS profile, rejecting their bodies. Source and
+SDK macro scans and x86/x64 controls are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-cmos-harness-batch.json`.
+
 MVDM-HOST-DIV-607: preserve original CPU_286 disassembler selectors and
 reject this unsupported build profile. CCPU guest instruction execution is
 unaffected. See `../../artifacts/mvdm-audit/s13-bfs-depth1-cpu286-batch.json`.

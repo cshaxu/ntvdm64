@@ -120,8 +120,9 @@ extern unsigned long GetTickCount (VOID);
 #endif
 
 #ifdef TEST_HARNESS
-unsigned long   io_verbose = 0;
+#error DIVERGENCE MVDM-HOST-DIV-608: unsupported TEST_HARNESS profile
 #endif
+#line 125
 
 int             rtc_int_enabled;
 
@@ -1290,29 +1291,6 @@ GLOBAL SHORT ValidateCmos IFN4(
 
 
 #ifdef TEST_HARNESS
-main()
-{
-	int             i;
-	half_word       j;
-
-	cmos_init();
-
-	printf("\n");
-	for (i = 0; i < CMOS_SIZE; i++)
-	{
-		cmos_outb(CMOS_PORT, i);
-		cmos_inb(CMOS_DATA, &j);
-		printf("%c", j);
-	}
-	printf("\n");
-	for (i = 0; i < CMOS_SIZE; i++)
-	{
-		cmos_outb(CMOS_PORT, i);
-		cmos_outb(CMOS_DATA, (i + 0x30));
-		printf("%c", cmos[i]);
-	}
-	printf("\n");
-
-	cmos_update();
-}
+#error DIVERGENCE MVDM-HOST-DIV-608: unsupported TEST_HARNESS profile
 #endif				/* TEST_HARNESS */
+#line 1319

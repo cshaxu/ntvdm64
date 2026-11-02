@@ -1,0 +1,87 @@
+{
+  "scope": "two first-depth arms, original bodies matched; nested source and queue entries inside excluded arms removed without deeper audit",
+  "macro_evidence": {
+    "compile_commands_checked": 2070,
+    "jobs_sha256": "623d1067dca46b9fabf571db17d6567d8f03e04047245ca9ac11fcda71c725ea",
+    "command_macro_definitions_found": 0,
+    "source_generated_sdk_definitions_found": 0,
+    "scope": "src, tests, tools, generated Ninja trees and eight SDK include roots",
+    "controls": "4 x86/x64 isolated selector checks; original removed body matched after line-ending normalization; normal #ifndef branch retained verbatim"
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "macro": "TEST_HARNESS",
+      "original_start": 122,
+      "original_cut": 124,
+      "original_end": 124,
+      "removed_body_sha256": "8fd8238f07e77c751d2b52e144c4366e456761de37bae90b2a9d864c010238e5",
+      "removed_lines": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "macro": "TEST_HARNESS",
+      "original_start": 1292,
+      "original_cut": 1318,
+      "original_end": 1318,
+      "removed_body_sha256": "9402c94739b6e65c42acf2db19754608f22b71790f314f0fe90ab12b90a27754",
+      "removed_lines": 25
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "start": 122,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "start": 1292,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "start": 122,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "start": 1292,
+      "normal_pass": true,
+      "forced_rejected": true
+    }
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "before": "550f77df4e43b76047a6bc6c9afe43fab6bafc05c135379e8c75da58377860ea",
+      "after": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+    }
+  ],
+  "removed_inner_group_count": 0,
+  "validation": {
+    "x86_cached_build": "passed; no work",
+    "x64_cached_build": "passed; no work",
+    "guard_gate": "x86 and x64; see progress record",
+    "published_release": "all ten product images byte-identical to accepted prior release at both destinations",
+    "published_images": [
+      "run16.exe",
+      "ntsrv.exe",
+      "ntcon.exe",
+      "ntvdm.exe",
+      "ntvwm.exe",
+      "ntmon.exe",
+      "WOW32.DLL",
+      "VDMREDIR.DLL",
+      "nthook32.dll",
+      "nthook64.dll"
+    ]
+  }
+}

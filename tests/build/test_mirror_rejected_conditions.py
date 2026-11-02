@@ -195,6 +195,7 @@ for path, macro, expected_count, divergence in (
     ('src/mvdm-host/wow32/wkglobal.c', 'API16', 8, 'MVDM-HOST-DIV-603'),
     ('src/mvdm-host/wow32/wklocal.c', 'API16', 2, 'MVDM-HOST-DIV-603'),
     ('src/mvdm-host/softpc.new/host/src/stf_conf.c', 'STUBBED', 4, 'MVDM-HOST-DIV-604'),
+    ('src/mvdm-host/softpc.new/base/system/cmos.c', 'TEST_HARNESS', 2, 'MVDM-HOST-DIV-608'),
     ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'CPU_286', 13, 'MVDM-HOST-DIV-607'),
     ('src/non-mvdm/base/win32/server/srvinit.c', 'WX86', 2, 'OPENNT-HOST-150'),
     ('src/non-mvdm/public/internal/ds/inc/token.h', 'DOS3', 1, 'OPENNT-HOST-150'),
