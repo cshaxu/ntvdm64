@@ -1,0 +1,30 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/cntlbop.h",
+  "original_sha256": "b14316fbd29fee3d582cd88c0b869e46ea01c41964fc1a4bfca87742db2a09cb",
+  "before_sha256": "811d2d80d49632e5b62e34303db12f1887c2ccc3f8de237d0e7685fcc90043d0",
+  "after_sha256": "4696b60c198280f8d893026fa01ff4f17b86240187fe188be5b14f2a766a3c10",
+  "arms": [
+    {
+      "macro": "SUCCESS",
+      "original_group": 26,
+      "removed_original_body_sha256": "84fee81450147ee43bac5f67cb894aa150eb410e2764db12781b1afeddf1a302"
+    },
+    {
+      "macro": "NULL",
+      "original_group": 60,
+      "removed_original_body_sha256": "9b60e6275f5e43aafa6b67ac7e223888ac48d54c9cab348996cad806c1c35e9f"
+    }
+  ],
+  "actual_includers": [
+    "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+    "src/mvdm-host/softpc.new/base/bios/bios.c"
+  ],
+  "inclusion": "Each source includes xt.h before cntlbop.h; xt.h supplies SUCCESS and guarantees NULL.",
+  "scope": "two first-depth fallback arms in cntlbop.h; current selected host control-BOP include contexts only",
+  "proof": "Three selected sources include xt.h first; xt.h unconditionally supplies SUCCESS and supplies NULL if missing. Both original worker graphs compile those three sources (six contexts).",
+  "standalone_boundary": "No direct independent supported test includes cntlbop.h; legacy T281 build script is not currently runnable because its old include roots do not exist. Reopen if such a configuration is admitted.",
+  "validation": "both worker and cached x86/x64 builds, forced missing-provider guards and original line controls passed; standard rejection suites passed",
+  "package": "s13-bfs-depth1-cntlbop-fallbacks-package-compare.json: eight identical, two PE timestamp-only; prior Full-tested release retained",
+  "limits": "Previously documented non-CCPU DPMI and x87 fixture failures remain."
+}

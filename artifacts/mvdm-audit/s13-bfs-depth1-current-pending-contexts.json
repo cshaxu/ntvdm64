@@ -1217,24 +1217,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/cntlbop.h",
-      "start": 26,
-      "kind": "ifndef",
-      "expression": "SUCCESS",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 6
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cntlbop.h",
-      "start": 60,
-      "kind": "ifndef",
-      "expression": "NULL",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 6
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
       "start": 19,
       "kind": "if",
@@ -4315,7 +4297,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 23
+      "count": 21
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",

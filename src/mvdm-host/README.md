@@ -2281,3 +2281,8 @@ MVDM-HOST-DIV-639: preserve the original SDK fallback conditions for
 unsupported missing-SDK bodies. The selected worker/WOW contexts receive
 these definitions from the host SDK; see
 `../../artifacts/mvdm-audit/s13-bfs-depth1-mvdm-wow-sdk-fallbacks.json`.
+
+MVDM-HOST-DIV-640: preserve the original `SUCCESS` and `NULL` fallback
+selectors in `softpc.new/base/inc/cntlbop.h` and reject unsupported missing
+providers. All selected control-BOP sources include `xt.h` first. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-cntlbop-fallbacks.json`.

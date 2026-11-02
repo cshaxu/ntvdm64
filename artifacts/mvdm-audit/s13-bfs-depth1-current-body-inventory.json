@@ -24019,11 +24019,11 @@
       "group_end": 28,
       "kind": "ifndef",
       "expression": "SUCCESS",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "811d2d80d49632e5b62e34303db12f1887c2ccc3f8de237d0e7685fcc90043d0"
+      "source_sha256": "4696b60c198280f8d893026fa01ff4f17b86240187fe188be5b14f2a766a3c10"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cntlbop.h",
@@ -24032,11 +24032,11 @@
       "group_end": 62,
       "kind": "ifndef",
       "expression": "NULL",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "811d2d80d49632e5b62e34303db12f1887c2ccc3f8de237d0e7685fcc90043d0"
+      "source_sha256": "4696b60c198280f8d893026fa01ff4f17b86240187fe188be5b14f2a766a3c10"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cntlbop.h",
@@ -24049,7 +24049,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "811d2d80d49632e5b62e34303db12f1887c2ccc3f8de237d0e7685fcc90043d0"
+      "source_sha256": "4696b60c198280f8d893026fa01ff4f17b86240187fe188be5b14f2a766a3c10"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/config.h",
@@ -65680,15 +65680,15 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 478,
-    "newly-excluded": 638,
+    "pending": 476,
+    "newly-excluded": 640,
     "already-excluded": 1669,
     "unselected-file": 389,
     "retained-observed": 1869,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
-    "not-guard": 439,
+    "not-guard": 437,
     "guard": 39
   }
 }

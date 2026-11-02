@@ -24,7 +24,7 @@
  */
 
 #ifndef SUCCESS
-#define SUCCESS 		0	/* Generic success code. */
+#error Excluded unsupported missing SUCCESS control-BOP profile
 #endif
 
 #define ERR_NO_FUNCTION		1	/* Function not implemented. */
@@ -58,7 +58,7 @@ typedef struct
 #define GENERIC 	1 
 
 #ifndef NULL
-#define NULL	0L
+#error Excluded unsupported missing NULL control-BOP profile
 #endif
 /*
  * ============================================================================
