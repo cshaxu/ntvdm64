@@ -2990,15 +2990,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
-      "start": 277,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 56
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/egaports.h",
       "start": 73,
       "kind": "else",
@@ -3249,24 +3240,6 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
-      "start": 45,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 192
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
-      "start": 106,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 192
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/smeg_hea.h",
@@ -8149,7 +8122,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 49
+      "count": 48
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",
@@ -8161,7 +8134,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 50
+      "count": 48
     },
     {
       "reason": "file-not-witnessed-in-product",

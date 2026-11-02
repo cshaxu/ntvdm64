@@ -196,6 +196,17 @@ if allowed.returncode or 'setIP(offset);' not in allowed.stdout or not rejected.
     raise SystemExit('original mouse CPU30 outer boundary failed: ' + allowed.stderr + rejected.stderr)
 print('PASS original mouse CPU30 boundary and selected CPU40 callback')
 
+sas = (repo / 'src/mvdm-host/softpc.new/base/inc/sas.h').read_text(encoding='latin1').splitlines()
+hits = [i for i, line in enumerate(sas) if 'unsupported non-CPU40 SAS interface' in line]
+if len(hits) != 1 or not sas[hits[0] - 1].strip().startswith('#else'):
+    raise SystemExit('missing original SAS non-CPU40 alternative rejection')
+probe.write_text('#ifdef CPU_40_STYLE\n#else\n' + sas[hits[0]] + '\n#endif\n', encoding='ascii')
+allowed = subprocess.run(base[:-1] + ['/DCPU_40_STYLE'] + base[-1:], capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base, capture_output=True, text=True, errors='replace')
+if allowed.returncode or not rejected.returncode or 'unsupported non-CPU40 SAS interface' not in rejected.stdout + rejected.stderr:
+    raise SystemExit('SAS CPU40 original boundary failed: ' + allowed.stderr + rejected.stderr)
+print('PASS original SAS CPU40 boundary')
+
 nt_bop = (repo / 'src/mvdm-host/softpc.new/host/src/nt_bop.c').read_text(encoding='latin1').splitlines()
 marker = 'unsupported hardware-host FPU save path'
 positions = [i for i, line in enumerate(nt_bop) if marker in line]

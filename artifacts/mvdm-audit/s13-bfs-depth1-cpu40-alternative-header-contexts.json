@@ -1,0 +1,1503 @@
+{
+  "scope": "actual source include chains for two candidate original header selectors; observation only",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/video.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/gvi.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/cga.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/debug/trace.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/video.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/gvi.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/cga.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/debug/trace.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "tests/component-integration/softpc_text_video_test.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "tests/component-integration/softpc_text_video_test.c",
+          "cpu40_flag": true,
+          "exit": 0
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/sasCdef.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/bios/reset.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/bios/build_id.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/system/rom.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/system/timer.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/system/unexp_nt.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/support/time_day.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/support/ios.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/support/main.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/support/xt.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/video.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/gvi.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/video/cga.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/comms/com.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/debug/trace.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/sim32.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/config.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/sasCdef.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/bios/reset.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/bios/build_id.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/system/rom.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/system/timer.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/system/unexp_nt.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/support/time_day.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/support/ios.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/support/main.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/support/xt.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/video.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/gvi.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/video/cga.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/comms/com.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/debug/trace.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/sim32.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/config.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/base/debug/pigyoda.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_sas.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/stubs.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "tests/observation/keyba_observed.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "tests/observation/nt_event_observed.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "tests/mvdm-host/ccpu_bit_fault_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "tests/mvdm-host/ccpu_x87_span_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "tests/mvdm-host/ccpu_x87_page_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "tests/mvdm-host/ccpu_stack_transition_test.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "tests/mvdm-host/ccpu_far_exception_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "tests/mvdm-host/keyboard_controller_pic_test.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "source": "tests/mvdm-host/pic_reset_eoi_test.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/base/debug/pigyoda.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_sas.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/stubs.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "tests/observation/keyba_observed.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "tests/observation/nt_event_observed.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "tests/mvdm-host/ccpu_bit_fault_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "tests/mvdm-host/ccpu_x87_span_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "tests/mvdm-host/ccpu_far_exception_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "tests/mvdm-host/ccpu_x87_page_fixture.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "tests/mvdm-host/ccpu_stack_transition_test.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "tests/mvdm-host/pic_reset_eoi_test.c",
+          "cpu40_flag": true,
+          "exit": 0
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "source": "tests/mvdm-host/keyboard_controller_pic_test.c",
+          "cpu40_flag": true,
+          "exit": 0
+        }
+      ]
+    }
+  ]
+}

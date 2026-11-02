@@ -1,0 +1,25 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+  "before_sha256": "655c332ff639ab73f6b37043db11357d154ada60c11c3493e2b210f04eaf9cc0",
+  "candidate_sha256": "a55258f597da204288a1338227df2a44a514d53e4d70dcc118f830597217a9ba",
+  "original_sha256": "63832958d3a6b9ef2f9f209e5ada4af8067fab3b5cdb6f317c5663cbd2b5f2ef",
+  "original_group_line": 74,
+  "original_group_end": 271,
+  "current_group_line": 64,
+  "current_else_line": 106,
+  "current_group_end": 266,
+  "removed_lines": 159,
+  "removed_sha256": "4e8620e45b915782823a6ad071cc9bf04c5aa649b7693aa5019484d67d8706b7",
+  "subsumed_markers": [
+    "MVDM-HOST-DIV-522",
+    "MVDM-HOST-DIV-525",
+    "MVDM-HOST-DIV-527"
+  ],
+  "scope": "whole unselected outer non-CPU40 SAS branch only; selected CPU40 branch unchanged",
+  "removed_inner_groups_by_depth": {
+    "2": 3,
+    "3": 6,
+    "4": 1
+  },
+  "replacement_logical_line": 272
+}

@@ -1,0 +1,15 @@
+{
+  "scope": "original post-guard #line diagnostic",
+  "controls": [
+    {
+      "architecture": "x86",
+      "exit": 2,
+      "logical_line": 272
+    },
+    {
+      "architecture": "x64",
+      "exit": 2,
+      "logical_line": 272
+    }
+  ]
+}

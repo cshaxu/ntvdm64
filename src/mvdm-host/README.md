@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-616: preserve the original CPU40 SAS interface selector and
+replace the complete unsupported non-CPU40 alternate with `#error`.
+Its inner DIV-522, DIV-525 and DIV-527 markers are superseded at this
+location only; those registrations remain for other occurrences. See
+`../../artifacts/mvdm-audit/s13-bfs-depth1-sas-outer-exclusion.json`.
+
 MVDM-HOST-DIV-615: restore the original `CPU_30_STYLE` outer selector around
 the DIV-222 CPU40 mouse callback adaptation; the original CPU30 arm is
 excluded and the adapted non-CPU30 arm is retained for the next BFS depth.

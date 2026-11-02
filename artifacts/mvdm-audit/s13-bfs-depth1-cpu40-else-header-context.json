@@ -1,0 +1,51 @@
+{
+  "scope": "two original first-depth CPU40 header alternatives; actual contexts and fixed original, not a global CPU40 invariant",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "group": 250,
+      "arm": 277,
+      "original_group": 344,
+      "historical_body_sha256": "154d22ebff95e6295e07974dcd05e5dcf0f23d5f4173f2f410c22e18f698e1e5",
+      "original_sha256": "4a53a9d1c7fb984deb2c5b0fd629442ee8a35272ad90323624d55daa65886194",
+      "actual_contexts": 56,
+      "include_files_scanned": 351,
+      "cpu40_undefinitions": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "group": 30,
+      "arm": 45,
+      "original_group": 30,
+      "historical_body_sha256": "2e1f5a84141cf79c6c05eeb5d9c7a7ce07e837ffda40fc2b99cfc647e97505e1",
+      "original_sha256": "63832958d3a6b9ef2f9f209e5ada4af8067fab3b5cdb6f317c5663cbd2b5f2ef",
+      "actual_contexts": 192,
+      "include_files_scanned": 749,
+      "cpu40_undefinitions": []
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "cpu40_defined": true,
+      "exit": 0
+    },
+    {
+      "arch": "x86",
+      "cpu40_defined": false,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "cpu40_defined": true,
+      "exit": 0
+    },
+    {
+      "arch": "x64",
+      "cpu40_defined": false,
+      "exit": 2
+    }
+  ],
+  "resource_contexts_checked": 6,
+  "standalone_fixture": "UMB fixture includes sas.h and explicitly defines CPU_40_STYLE; NIDDB fixture lists sas.h as evidence only"
+}
