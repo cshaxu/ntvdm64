@@ -1,0 +1,129 @@
+{
+  "scope": "nine existing #error alternatives, four worker translation units; no source changes",
+  "evidence": "Both worker graphs per translation unit; host_def.h defines EGG and VGG; source includes host_def.h and does not change the relevant macros. The CVIDC video.c rule defines MONITOR and X86GFX, but gfx_updt.c and rom.c do not. ICA test-only compilation was checked independently for NTVDM.",
+  "host_def_sha256": "0ab22fc80460cbaf4c7b27e69099e44c2832808dad65c5bfe62c5ce3054bbf9d",
+  "boundary": "MONITOR and X86GFX are per-source choices, not global exclusions; original-boundary reconciliation remains separately incomplete.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/system/ica.obj",
+          "command_sha256": "f9f2459b763aa68b3f3cb3efeb606812d508ae705bdddd74b134a1347972af39"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/system/ica.obj",
+          "command_sha256": "f9f2459b763aa68b3f3cb3efeb606812d508ae705bdddd74b134a1347972af39"
+        }
+      ],
+      "guards": [
+        {
+          "line": 1402,
+          "group_expression": "NTVDM",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "current_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550",
+      "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/system/rom.obj",
+          "command_sha256": "57911991f859fc98136f9e3be048bb202e3e4f52430c913dd3fb94d053eaf8a5"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/system/rom.obj",
+          "command_sha256": "57911991f859fc98136f9e3be048bb202e3e4f52430c913dd3fb94d053eaf8a5"
+        }
+      ],
+      "guards": [
+        {
+          "line": 345,
+          "group_expression": "!(defined(NTVDM) && defined(MONITOR))",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "current_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c",
+      "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/video/gfx_updt.obj",
+          "command_sha256": "474160d4c96e2423b50d46840538e6c445b223ede3e641e690043ec30b39bbe0"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/video/gfx_updt.obj",
+          "command_sha256": "92e881a5b9d6cc0a9fef052d1a00338c54ad21dfcd2fafcf4fbfa75ad469a7f9"
+        }
+      ],
+      "guards": [
+        {
+          "line": 133,
+          "group_expression": "defined(PROD) || (!defined(EGG))",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+        },
+        {
+          "line": 150,
+          "group_expression": "VGG",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register."
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "current_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/video/video.obj",
+          "command_sha256": "8cf297df02d6aebd0693483970b1f6395c7d0457bf911af96a78e21ac9246807"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/video/video.obj",
+          "command_sha256": "79b550574e8b1d1a85ee97771df516034d31c8b805c594c07dd6c0143b11cd9a"
+        }
+      ],
+      "guards": [
+        {
+          "line": 99,
+          "group_expression": "EGG",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-540: non-EGG branch is not selected; see mirror register."
+        },
+        {
+          "line": 192,
+          "group_expression": "VGG",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register."
+        },
+        {
+          "line": 1435,
+          "group_expression": "EGG",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-540: non-EGG branch is not selected; see mirror register."
+        },
+        {
+          "line": 1944,
+          "group_expression": "defined(NTVDM) && defined(MONITOR)",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+        },
+        {
+          "line": 2010,
+          "group_expression": "defined(NTVDM) && defined(X86GFX)",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+        }
+      ]
+    }
+  ]
+}
