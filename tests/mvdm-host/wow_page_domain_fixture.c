@@ -4622,6 +4622,7 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
     task.hTaskWow = 0x4321u;
     runtime.lifecycle = &native_owner; /* No second task/handoff in this fixture. */
     if (!wow_user_runtime_bind(&binding, &runtime, &thread, NULL)) return FALSE;
+#ifdef WOW_WINDOW_BORROW_FIXTURE
     if (callback_failure_kind) {
         HANDLE signal = OpenEventA(EVENT_MODIFY_STATE, FALSE, native_failure_signal);
         if (!signal) goto cleanup;
@@ -4651,6 +4652,7 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
         /* Reaching this point is failure even if ordinary cleanup succeeds. */
         return FALSE;
     }
+#endif
     {
         wow_user_native_call call;
         MSG message;
@@ -4663,13 +4665,18 @@ static BOOL verify_native_menu_entry(wow_task_order_process *process,
         if (!PeekMessageA(&message, NULL, WM_APP + 93, WM_APP + 93, PM_REMOVE) ||
                 message.wParam != 173u || message.lParam != 97u) goto cleanup;
         if (PeekMessageA(&message, NULL, WM_APP + 93, WM_APP + 93, PM_NOREMOVE)) goto cleanup;
+#ifdef WOW_WINDOW_BORROW_FIXTURE
         if (native_failure_signal) {
             HANDLE signal = OpenEventA(EVENT_MODIFY_STATE, FALSE, native_failure_signal);
             if (!signal) goto cleanup;
             SetEvent(signal); CloseHandle(signal);
             thread.ppi = NULL; /* Deliberate required-publication fault after consumption. */
         }
-        if (!wow_user_native_call_end(&call) || native_failure_signal) goto cleanup;
+#endif
+        if (!wow_user_native_call_end(&call)) goto cleanup;
+#ifdef WOW_WINDOW_BORROW_FIXTURE
+        if (native_failure_signal) goto cleanup;
+#endif
         if (thread.execution || !wow_task_execution_ready(&thread)) goto cleanup;
         if (PeekMessageA(&message, NULL, WM_APP + 93, WM_APP + 93, PM_NOREMOVE)) goto cleanup;
         fprintf(stderr, "WOW_REMOVED_MESSAGE_CCPU consumed_once=1 restored=1 no_replay=1\n");

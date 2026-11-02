@@ -1,0 +1,25 @@
+{
+  "scope": "repair misplaced fault-injection references in the shared page-domain test fixture only",
+  "root_cause": "Default fixture did not define WOW_WINDOW_BORROW_FIXTURE but compiled fault-injection code referencing names and types declared only inside that configuration.",
+  "change": "Guard only fault-injection blocks and signal post-check with the same existing configuration; ordinary native-call begin/end remains unconditional.",
+  "evidence": {
+    "fixture_sha256": "9047947f708651214c29a70b1eed0bee857a3f60f407f444d987ffd7177787d6",
+    "default_x86_worker_and_reference": "Fixture compilation now succeeds in both graphs; linking fails due to 20 missing WOW symbols.",
+    "special_graph_snapshot": "Compilation using production provider flags with WOW_WINDOW_BORROW_FIXTURE and WOW_GRAPH_SNAPSHOT_FIXTURE succeeds",
+    "special_log_sha256": "47b602a34b16d07aae9b0496b4b47a541c678eb3fc3b0de69d55f5755fe1b88a",
+    "lifecycle_integration": "Existing menu-resource script stopped at pre-existing fixed wumenu.c source hash mismatch; no runtime pass claimed.",
+    "link_logs": [
+      {
+        "profile": "x86",
+        "link_failure": "LNK1120: 20 unresolved externals",
+        "log_sha256": "eec03b3fcfcb506e4bc2ed22da1fce69074391918f23341a5dd99a508f777151"
+      },
+      {
+        "profile": "x64",
+        "link_failure": "LNK1120: 20 unresolved externals",
+        "log_sha256": "5b3afe4f8de797d4f6496a732b4834d389c0c4b7bcb438975c3b613b4d75846c"
+      }
+    ]
+  },
+  "limits": "Full page-domain executable still cannot link; its missing production-object closure and the lifecycle script source identity must be addressed before that test can run. No product binaries changed."
+}
