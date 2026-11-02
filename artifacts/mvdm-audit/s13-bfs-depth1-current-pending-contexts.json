@@ -741,15 +741,6 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
-      "start": 4667,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
       "start": 4692,
       "kind": "else",
       "expression": "",
@@ -2756,15 +2747,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
-      "start": 802,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
       "start": 1516,
       "kind": "else",
@@ -3423,15 +3405,6 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 145,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
       "start": 1018,
       "kind": "else",
       "expression": "",
@@ -3487,33 +3460,6 @@
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
       "start": 5904,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 160,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 179,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 859,
       "kind": "else",
       "expression": "",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
@@ -3855,24 +3801,6 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/ica.c",
-      "start": 446,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
-      "start": 1288,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
       "start": 1402,
       "kind": "elif",
       "expression": "ASPI",
@@ -3885,15 +3813,6 @@
       "start": 1447,
       "kind": "if",
       "expression": "!defined(PROD)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
-      "start": 59,
-      "kind": "else",
-      "expression": "",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "current_actual_includers": 2
@@ -4304,15 +4223,6 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
-      "start": 174,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
       "start": 99,
       "kind": "else",
@@ -4333,15 +4243,6 @@
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
       "start": 1435,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1885,
       "kind": "else",
       "expression": "",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
@@ -8278,7 +8179,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 63
+      "count": 52
     },
     {
       "reason": "file-not-witnessed-in-product",

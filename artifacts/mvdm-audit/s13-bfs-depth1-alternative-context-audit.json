@@ -1,0 +1,681 @@
+{
+  "scope": "first-depth existing alternate guards; source-local actual graph contexts and original surrounding anchors, no nested branch decisions",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "group": 636,
+      "arm": 639,
+      "macro": "CPU_40_STYLE",
+      "current_occurrences": 6,
+      "original_occurrences": 0,
+      "contexts": [],
+      "disposition": "deferred-original-structure"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "group": 1196,
+      "arm": 1202,
+      "macro": "CPU_40_STYLE",
+      "current_occurrences": 6,
+      "original_occurrences": 0,
+      "contexts": [],
+      "disposition": "deferred-original-structure"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "group": 1269,
+      "arm": 1271,
+      "macro": "CPU_40_STYLE",
+      "current_occurrences": 6,
+      "original_occurrences": 0,
+      "contexts": [],
+      "disposition": "deferred-original-structure"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "group": 262,
+      "arm": 265,
+      "macro": "CPU_40_STYLE",
+      "current_occurrences": 1,
+      "original_occurrences": 0,
+      "contexts": [],
+      "disposition": "deferred-original-structure"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "group": 70,
+      "arm": 74,
+      "macro": "CPU_40_STYLE",
+      "current_occurrences": 1,
+      "original_occurrences": 0,
+      "contexts": [],
+      "disposition": "deferred-original-structure"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "group": 61,
+      "arm": 63,
+      "macro": "CPU_40_STYLE",
+      "current_occurrences": 1,
+      "original_occurrences": 1,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 61,
+      "original_end": 65,
+      "before": [
+        "extern void get_lar();",
+        "extern void get_lar();"
+      ],
+      "after": [
+        "LOCAL void v_mouse_install1\tIFN0() { SWAP_INSTANCE; mouse_install1(); }",
+        "LOCAL void v_SwinRedirector\tIFN0() { SWAP_INSTANCE; SwinRedirector(); }"
+      ],
+      "anchors_match": false,
+      "disposition": "deferred-context-or-anchor"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "group": 804,
+      "arm": 808,
+      "macro": "NTVDM",
+      "current_occurrences": 4,
+      "original_occurrences": 4,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 769,
+      "original_end": 773,
+      "before": [
+        "took_absolute_toc = FALSE;",
+        "pig_mmio_info.flags &= ~(MM_INPUT_OCCURRED | MM_OUTPUT_OCCURRED);"
+      ],
+      "after": [
+        "quick_mode = FALSE;",
+        "if (took_absolute_toc || took_relative_jump)"
+      ],
+      "anchors_match": false,
+      "disposition": "deferred-context-or-anchor"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "group": 4663,
+      "arm": 4667,
+      "macro": "NTVDM",
+      "current_occurrences": 4,
+      "original_occurrences": 4,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 4838,
+      "original_end": 4842,
+      "before": [
+        "fprintf(stderr, \"Stack overflow in host_simulate()!\\n\");",
+        "fprintf(stderr, \"Stack overflow in host_simulate()!\\n\");"
+      ],
+      "after": [
+        "in_C = 0;",
+        "in_C = 0;"
+      ],
+      "anchors_match": true,
+      "disposition": "candidate"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "group": 4690,
+      "arm": 4692,
+      "macro": "NTVDM",
+      "current_occurrences": 4,
+      "original_occurrences": 4,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 4855,
+      "original_end": 4859,
+      "before": [
+        "debug_exception_pending = FALSE;",
+        "c_cpu_continue IFN0()"
+      ],
+      "after": [
+        "GLOBAL VOID",
+        "GLOBAL VOID"
+      ],
+      "anchors_match": false,
+      "disposition": "deferred-context-or-anchor"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "group": 41,
+      "arm": 47,
+      "macro": "PROD",
+      "current_occurrences": 1,
+      "original_occurrences": 0,
+      "contexts": [],
+      "disposition": "deferred-original-structure"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "group": 729,
+      "arm": 802,
+      "macro": "NTVDM",
+      "current_occurrences": 1,
+      "original_occurrences": 1,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 745,
+      "original_end": 894,
+      "before": [
+        "fla_hw_interrupt();",
+        "fla_hw_interrupt();"
+      ],
+      "after": [
+        "static void fdc_request_write_data_to_cpu IFN0()",
+        "static void fdc_request_write_data_to_cpu IFN0()"
+      ],
+      "anchors_match": true,
+      "disposition": "candidate"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "group": 1509,
+      "arm": 1516,
+      "macro": "NTVDM",
+      "current_occurrences": 9,
+      "original_occurrences": 9,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 1524,
+      "original_end": 1537,
+      "before": [
+        "md_offset += MD_TBL3_OFFSET;",
+        "md_offset = MD_TBL3_OFFSET;"
+      ],
+      "after": [
+        "md_segment = dr_type_seg;",
+        "md_segment = dr_type_seg;"
+      ],
+      "anchors_match": false,
+      "disposition": "deferred-context-or-anchor"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "group": 250,
+      "arm": 277,
+      "macro": "CPU_40_STYLE",
+      "current_occurrences": 1,
+      "original_occurrences": 1,
+      "contexts": [],
+      "original_group": 344,
+      "original_end": 389,
+      "before": [
+        "IMPORT ULONG sr_lookup[16];",
+        "IMPORT ULONG sr_lookup[16];"
+      ],
+      "after": [
+        "^ getVideodata_xor_mask())) | (val & ((latch) ^ getVideolatch_xor_mask())))",
+        "^ getVideodata_xor_mask())) | (val & ((latch) ^ getVideolatch_xor_mask())))"
+      ],
+      "anchors_match": true,
+      "disposition": "deferred-context-or-anchor"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "group": 30,
+      "arm": 45,
+      "macro": "CPU_40_STYLE",
+      "current_occurrences": 2,
+      "original_occurrences": 2,
+      "contexts": [],
+      "original_group": 30,
+      "original_end": 57,
+      "before": [
+        null,
+        null
+      ],
+      "after": [
+        "((type) == SAS_RAM)? \"RAM\" :\\",
+        "((type) == SAS_RAM)? \"RAM\" :\\"
+      ],
+      "anchors_match": false,
+      "disposition": "deferred-context-or-anchor"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "group": 140,
+      "arm": 145,
+      "macro": "CPU_40_STYLE",
+      "current_occurrences": 1,
+      "original_occurrences": 1,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 186,
+      "original_end": 196,
+      "before": [
+        "LOCAL word              saved_int71_offset;",
+        "LOCAL word              saved_int71_offset;"
+      ],
+      "after": [
+        "LOCAL BOOL jap_mouse=FALSE;",
+        "LOCAL BOOL jap_mouse=FALSE;"
+      ],
+      "anchors_match": true,
+      "disposition": "candidate"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "group": 5897,
+      "arm": 5904,
+      "macro": "CPU_40_STYLE",
+      "current_occurrences": 1,
+      "original_occurrences": 0,
+      "contexts": [],
+      "disposition": "deferred-original-structure"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "group": 157,
+      "arm": 160,
+      "macro": "PROD",
+      "current_occurrences": 2,
+      "original_occurrences": 2,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 159,
+      "original_end": 169,
+      "before": [
+        "LOCAL void io_empty_inb IFN2(io_addr, io_address, half_word *, value)",
+        "LOCAL void io_empty_inb IFN2(io_addr, io_address, half_word *, value)"
+      ],
+      "after": [
+        "*value = IO_EMPTY_PORT_BYTE_VALUE;",
+        "*value = IO_EMPTY_PORT_BYTE_VALUE;"
+      ],
+      "anchors_match": true,
+      "disposition": "candidate"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "group": 177,
+      "arm": 179,
+      "macro": "PROD",
+      "current_occurrences": 2,
+      "original_occurrences": 2,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 184,
+      "original_end": 194,
+      "before": [
+        "UNUSED(value);",
+        "UNUSED(value);"
+      ],
+      "after": [
+        "LOCAL void generic_inw IFN2(io_addr, io_address, word *, value)",
+        "LOCAL void generic_inw IFN2(io_addr, io_address, word *, value)"
+      ],
+      "anchors_match": true,
+      "disposition": "candidate"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "group": 847,
+      "arm": 859,
+      "macro": "NTVDM",
+      "current_occurrences": 2,
+      "original_occurrences": 2,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 867,
+      "original_end": 890,
+      "before": [
+        "if (insd_func) Ios_insd_function[adapter]  = insd_func;",
+        "if (insd_func) Ios_insd_function[adapter]  = insd_func;"
+      ],
+      "after": [
+        "GLOBAL void     io_disconnect_port IFN2(io_addr, io_address, half_word, adapter)",
+        "GLOBAL void     io_disconnect_port IFN2(io_addr, io_address, half_word, adapter)"
+      ],
+      "anchors_match": true,
+      "disposition": "candidate"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "group": 872,
+      "arm": 884,
+      "macro": "NTVDM",
+      "current_occurrences": 2,
+      "original_occurrences": 2,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 901,
+      "original_end": 920,
+      "before": [
+        "return TRUE;",
+        "Ios_out_adapter_table[io_address & (PC_IO_MEM_SIZE-1)] = adapter;"
+      ],
+      "after": [
+        "GLOBAL IOS_FUNC_INB *get_inb_ptr IFN1(io_addr, io_address)",
+        "GLOBAL IOS_FUNC_INB *get_inb_ptr IFN1(io_addr, io_address)"
+      ],
+      "anchors_match": false,
+      "disposition": "deferred-context-or-anchor"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "group": 436,
+      "arm": 446,
+      "macro": "NTVDM",
+      "current_occurrences": 2,
+      "original_occurrences": 2,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 483,
+      "original_end": 494,
+      "before": [
+        "IUM8 iret_hook_mask;",
+        "IUM8 iret_hook_mask;"
+      ],
+      "after": [
+        "irr_and_not_imr = asp->ica_irr & ~(asp->ica_imr | iret_hook_mask);",
+        "irr_and_not_imr = asp->ica_irr & ~(asp->ica_imr | iret_hook_mask);"
+      ],
+      "anchors_match": true,
+      "disposition": "candidate"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "group": 1277,
+      "arm": 1288,
+      "macro": "NTVDM",
+      "current_occurrences": 2,
+      "original_occurrences": 2,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 1487,
+      "original_end": 1522,
+      "before": [
+        "int_no = line + asp->ica_base;",
+        "int_no = line + asp->ica_base;"
+      ],
+      "after": [
+        "host_ica_unlock();",
+        "host_ica_unlock();"
+      ],
+      "anchors_match": true,
+      "disposition": "candidate"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "group": 57,
+      "arm": 59,
+      "macro": "PROD",
+      "current_occurrences": 1,
+      "original_occurrences": 1,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 54,
+      "original_end": 58,
+      "before": [
+        "sprintf(string,",
+        "sprintf(string,"
+      ],
+      "after": [
+        "sas_hw_at(ea), sas_hw_at(ea+1), sas_hw_at(ea+2),",
+        "sas_hw_at(ea), sas_hw_at(ea+1), sas_hw_at(ea+2),"
+      ],
+      "anchors_match": true,
+      "disposition": "candidate"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "group": 626,
+      "arm": 628,
+      "macro": "NTVDM",
+      "current_occurrences": 13,
+      "original_occurrences": 13,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 712,
+      "original_end": 716,
+      "before": [
+        "emu_8253 (port, WRITE_SIGNAL, value);",
+        "trace(buf, DUMP_REG);"
+      ],
+      "after": [
+        "void ReinitIdealTime IFN1(struct host_timeval *, t)",
+        "GLOBAL ULONG get_DOS_ticks IFN0()"
+      ],
+      "anchors_match": false,
+      "disposition": "deferred-context-or-anchor"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "group": 172,
+      "arm": 174,
+      "macro": "PROD",
+      "current_occurrences": 1,
+      "original_occurrences": 1,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 195,
+      "original_end": 201,
+      "before": [
+        "dirty_next++; \\",
+        "dirty_next++; \\"
+      ],
+      "after": [
+        "GLOBAL LONG dirty_curs_offs = -1;",
+        "GLOBAL LONG dirty_curs_offs = -1;"
+      ],
+      "anchors_match": true,
+      "disposition": "candidate"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "group": 1880,
+      "arm": 1885,
+      "macro": "CPU_40_STYLE",
+      "current_occurrences": 1,
+      "original_occurrences": 1,
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "flag": true,
+          "undefinitions": []
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "flag": true,
+          "undefinitions": []
+        }
+      ],
+      "original_group": 1881,
+      "original_end": 1895,
+      "before": [
+        "setAL(( data >> right_just) & bitmask);",
+        "setAL(( data >> right_just) & bitmask);"
+      ],
+      "after": [
+        "GLOBAL void vd_write_teletype IFN0()",
+        "GLOBAL void vd_write_teletype IFN0()"
+      ],
+      "anchors_match": true,
+      "disposition": "candidate"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "group": 140,
+      "arm": 142,
+      "macro": "CPU_40_STYLE",
+      "current_occurrences": 1,
+      "original_occurrences": 0,
+      "contexts": [],
+      "disposition": "deferred-original-structure"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "group": 149,
+      "arm": 151,
+      "macro": "CPU_40_STYLE",
+      "current_occurrences": 1,
+      "original_occurrences": 0,
+      "contexts": [],
+      "disposition": "deferred-original-structure"
+    }
+  ]
+}

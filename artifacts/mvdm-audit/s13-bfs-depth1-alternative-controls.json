@@ -1,0 +1,182 @@
+{
+  "scope": "x86/x64 controls of eleven existing first-depth alternate guards; no source changes",
+  "records": [
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "arm": 4667,
+      "macro": "NTVDM",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "arm": 802,
+      "macro": "NTVDM",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "arm": 145,
+      "macro": "CPU_40_STYLE",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "arm": 160,
+      "macro": "PROD",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "arm": 179,
+      "macro": "PROD",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "arm": 859,
+      "macro": "NTVDM",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "arm": 446,
+      "macro": "NTVDM",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "arm": 1288,
+      "macro": "NTVDM",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "arm": 59,
+      "macro": "PROD",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "arm": 174,
+      "macro": "PROD",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "arm": 1885,
+      "macro": "CPU_40_STYLE",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "arm": 4667,
+      "macro": "NTVDM",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "arm": 802,
+      "macro": "NTVDM",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "arm": 145,
+      "macro": "CPU_40_STYLE",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "arm": 160,
+      "macro": "PROD",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "arm": 179,
+      "macro": "PROD",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "arm": 859,
+      "macro": "NTVDM",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "arm": 446,
+      "macro": "NTVDM",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "arm": 1288,
+      "macro": "NTVDM",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "arm": 59,
+      "macro": "PROD",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "arm": 174,
+      "macro": "PROD",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "arm": 1885,
+      "macro": "CPU_40_STYLE",
+      "selected_exit": 0,
+      "forced_alternative_exit": 2
+    }
+  ],
+  "limitations": "Original surrounding anchors establish selector location, not byte equality of the historic removed body. Other original structures and unsupported contexts remain pending."
+}
