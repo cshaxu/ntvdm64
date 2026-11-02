@@ -1,0 +1,5038 @@
+{
+  "scope": "remaining first-depth unguarded arms in previously witnessed files; evidence links are not exclusion decisions",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "start": 20,
+      "cut": 22,
+      "group_end": 22,
+      "kind": "ifdef",
+      "expression": "DOS",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "55afb36bb8d6441019bf661ef0247a9de34ccc3e547a8b1f98f284e8b54db9c3",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 20
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "start": 39,
+      "cut": 42,
+      "group_end": 42,
+      "kind": "ifdef",
+      "expression": "WIN_16",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "55afb36bb8d6441019bf661ef0247a9de34ccc3e547a8b1f98f284e8b54db9c3",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 39
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "start": 44,
+      "cut": 51,
+      "group_end": 53,
+      "kind": "ifdef",
+      "expression": "WIN_32",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 6,
+      "source_sha256": "55afb36bb8d6441019bf661ef0247a9de34ccc3e547a8b1f98f284e8b54db9c3",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 44
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "start": 55,
+      "cut": 61,
+      "group_end": 61,
+      "kind": "ifdef",
+      "expression": "FLAT_32",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 5,
+      "source_sha256": "55afb36bb8d6441019bf661ef0247a9de34ccc3e547a8b1f98f284e8b54db9c3",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 55
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "start": 63,
+      "cut": 66,
+      "group_end": 66,
+      "kind": "ifdef",
+      "expression": "WIN",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "55afb36bb8d6441019bf661ef0247a9de34ccc3e547a8b1f98f284e8b54db9c3",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 63
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "start": 68,
+      "cut": 71,
+      "group_end": 71,
+      "kind": "ifdef",
+      "expression": "SIGNALS",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "55afb36bb8d6441019bf661ef0247a9de34ccc3e547a8b1f98f284e8b54db9c3",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 68
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "start": 440,
+      "cut": 444,
+      "group_end": 444,
+      "kind": "if",
+      "expression": "(FILE_BEGIN != 0 || FILE_CURRENT != 1 || FILE_END !=2)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "f4897e902663dad1f53466cb7f7d2730ea9687d6475c79669ddde11bc6759168",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 440
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "start": 253,
+      "cut": 258,
+      "group_end": 258,
+      "kind": "if",
+      "expression": "defined(i386)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 4,
+      "source_sha256": "04f8cadf013f3139de78e8a1a4a433a3b0d56fbf453157716d6b163bbe68b6f2",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 253
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "start": 52,
+      "cut": 57,
+      "group_end": 57,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 4,
+      "source_sha256": "c37cbc2e860fdfcb38793020e283b5babc55c46324a753aa0220aba8f67902b4",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 52
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "start": 31,
+      "cut": 44,
+      "group_end": 108,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 12,
+      "source_sha256": "0358654ff6aeca9a35762914a7d3665ddbdb4246e6436243469bcdc21764e8d5",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 31
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "start": 94,
+      "cut": 98,
+      "group_end": 98,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 94
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "start": 422,
+      "cut": 428,
+      "group_end": 428,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 5,
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 422
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "start": 619,
+      "cut": 622,
+      "group_end": 622,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 619
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "start": 629,
+      "cut": 631,
+      "group_end": 631,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 629
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "start": 652,
+      "cut": 660,
+      "group_end": 660,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 7,
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 652
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "start": 796,
+      "cut": 823,
+      "group_end": 868,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 26,
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 796
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "start": 909,
+      "cut": 932,
+      "group_end": 965,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 22,
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 909
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.h",
+      "start": 42,
+      "cut": 48,
+      "group_end": 48,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 5,
+      "source_sha256": "0c3a6a8710cd798bf39ae084f723f4c1de0480e5f7d7bc45082c19ac82f27886",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 42
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "start": 305,
+      "cut": 309,
+      "group_end": 309,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "bbd70c5fe50084e64704fde231206ea4999f3ea3442a67719b3c2db1e86f8b24",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 305
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "start": 135,
+      "cut": 137,
+      "group_end": 139,
+      "kind": "ifdef",
+      "expression": "DBCS",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "f2d05901e4ccb57b6120c56b36b5c1d0ac03db593ce835ccd78be7a8c6aa4a2c",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 135
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "start": 205,
+      "cut": 213,
+      "group_end": 213,
+      "kind": "ifdef",
+      "expression": "Verbose",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 7,
+      "source_sha256": "f2d05901e4ccb57b6120c56b36b5c1d0ac03db593ce835ccd78be7a8c6aa4a2c",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 205
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "start": 206,
+      "cut": 209,
+      "group_end": 219,
+      "kind": "if",
+      "expression": "defined(i386)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "9d19900e7f87ed5c96a6682f825aa1839d3c3313364f6089d3b057d87e0019de",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 206
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "start": 278,
+      "cut": 281,
+      "group_end": 291,
+      "kind": "if",
+      "expression": "defined(i386)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "9d19900e7f87ed5c96a6682f825aa1839d3c3313364f6089d3b057d87e0019de",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 278
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "start": 57,
+      "cut": 59,
+      "group_end": 59,
+      "kind": "ifndef",
+      "expression": "MAKEWORD",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "58d53501684b75ce32ad94dff6c04add52a435dbac28832ac7dc84652315e99a",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 57
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "start": 68,
+      "cut": 73,
+      "group_end": 73,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 4,
+      "source_sha256": "58d53501684b75ce32ad94dff6c04add52a435dbac28832ac7dc84652315e99a",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 68
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/softpc.h",
+      "start": 33,
+      "cut": 35,
+      "group_end": 35,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "04dad85bea7e01954c337fe3a3dc700e8bd7407b60f01eb2393f6055a2bdf8f3",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 33
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/softpc.h",
+      "start": 230,
+      "cut": 531,
+      "group_end": 656,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 300,
+      "source_sha256": "04dad85bea7e01954c337fe3a3dc700e8bd7407b60f01eb2393f6055a2bdf8f3",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 230
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "start": 35,
+      "cut": 37,
+      "group_end": 37,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "23d2e7a2eb84686905b1898a7c69b016967caa37290aa84e09c6ad7f2e54dce9",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 35
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "start": 29,
+      "cut": 39,
+      "group_end": 39,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 9,
+      "source_sha256": "8e863faec45e6df3f09b6a78e9e0a1b7e841d6818e6197dd36e1f70ec2e828bf",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 29
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "start": 1209,
+      "cut": 1211,
+      "group_end": 1211,
+      "kind": "ifndef",
+      "expression": "WM_USER",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "8e863faec45e6df3f09b6a78e9e0a1b7e841d6818e6197dd36e1f70ec2e828bf",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 1209
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "start": 1240,
+      "cut": 1242,
+      "group_end": 1249,
+      "kind": "ifndef",
+      "expression": "WIN31",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "8e863faec45e6df3f09b6a78e9e0a1b7e841d6818e6197dd36e1f70ec2e828bf",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 1240
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "start": 1276,
+      "cut": 1278,
+      "group_end": 1288,
+      "kind": "ifndef",
+      "expression": "WIN31",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "8e863faec45e6df3f09b6a78e9e0a1b7e841d6818e6197dd36e1f70ec2e828bf",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 1276
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "start": 1319,
+      "cut": 1321,
+      "group_end": 1330,
+      "kind": "ifndef",
+      "expression": "WIN31",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "8e863faec45e6df3f09b6a78e9e0a1b7e841d6818e6197dd36e1f70ec2e828bf",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 1319
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "start": 37,
+      "cut": 63,
+      "group_end": 63,
+      "kind": "ifdef",
+      "expression": "DEBUG",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 25,
+      "source_sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 37
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "start": 76,
+      "cut": 101,
+      "group_end": 101,
+      "kind": "if",
+      "expression": "defined(_WOWFAX16_)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 24,
+      "source_sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 76
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "start": 161,
+      "cut": 163,
+      "group_end": 163,
+      "kind": "ifndef",
+      "expression": "_DEF_WOW32_",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 161
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wowinfo.h",
+      "start": 20,
+      "cut": 28,
+      "group_end": 28,
+      "kind": "ifndef",
+      "expression": "UNALIGNED",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 7,
+      "source_sha256": "9d93877c7253d3c5f90eba3e72d554d6534fc25b4b78624a8281eaaef89c79e5",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 20
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wowmmed.h",
+      "start": 23,
+      "cut": 26,
+      "group_end": 26,
+      "kind": "ifndef",
+      "expression": "_INC_MMSYSTEM",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "b0b9be6f465387caba2d4950b5ae5c771123efe6169e3ffcb4d867b1cf6f67a0",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 23
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "start": 69,
+      "cut": 80,
+      "group_end": 80,
+      "kind": "if",
+      "expression": "defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 10,
+      "source_sha256": "b7a1b588e189265f5023a260f8df7118263962de3f87a498e57be997f13631bd",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 69
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "start": 104,
+      "cut": 106,
+      "group_end": 106,
+      "kind": "ifdef",
+      "expression": "NPX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "7485467a6802013b69a2425ef5d8aa416647b96746be17c303260d487fa66fe8",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 104
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "start": 291,
+      "cut": 310,
+      "group_end": 312,
+      "kind": "ifdef",
+      "expression": "NPX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 18,
+      "source_sha256": "7485467a6802013b69a2425ef5d8aa416647b96746be17c303260d487fa66fe8",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 290
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "start": 649,
+      "cut": 651,
+      "group_end": 651,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "7485467a6802013b69a2425ef5d8aa416647b96746be17c303260d487fa66fe8",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 649
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "start": 710,
+      "cut": 712,
+      "group_end": 712,
+      "kind": "if",
+      "expression": "defined (GEN_DRVR) || defined (CDROM)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "7485467a6802013b69a2425ef5d8aa416647b96746be17c303260d487fa66fe8",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 710
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "start": 720,
+      "cut": 722,
+      "group_end": 722,
+      "kind": "ifdef",
+      "expression": "NPX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "7485467a6802013b69a2425ef5d8aa416647b96746be17c303260d487fa66fe8",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 720
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "start": 143,
+      "cut": 145,
+      "group_end": 145,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "dbb9d622d6ac68c28aeaaa243a2a7f2d65e74836df537ce0a979074d75f93284",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 143
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "start": 199,
+      "cut": 202,
+      "group_end": 202,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "dbb9d622d6ac68c28aeaaa243a2a7f2d65e74836df537ce0a979074d75f93284",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 199
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "start": 264,
+      "cut": 267,
+      "group_end": 267,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "dbb9d622d6ac68c28aeaaa243a2a7f2d65e74836df537ce0a979074d75f93284",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 264
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "start": 204,
+      "cut": 210,
+      "group_end": 210,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 5,
+      "source_sha256": "761cd97a34ad552491e38efd9e5aa7ba683c23a7b02bfbcd675fd281c8195152",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 208
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "start": 4335,
+      "cut": 4340,
+      "group_end": 4340,
+      "kind": "if",
+      "expression": "defined(SFELLOW) && !defined(PROD)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 4,
+      "source_sha256": "761cd97a34ad552491e38efd9e5aa7ba683c23a7b02bfbcd675fd281c8195152",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 4333
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "start": 4639,
+      "cut": 4642,
+      "group_end": 4642,
+      "kind": "if",
+      "expression": "defined(SWITCHNPX)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "761cd97a34ad552491e38efd9e5aa7ba683c23a7b02bfbcd675fd281c8195152",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 4637
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "start": 4712,
+      "cut": 4726,
+      "group_end": 4726,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 13,
+      "source_sha256": "761cd97a34ad552491e38efd9e5aa7ba683c23a7b02bfbcd675fd281c8195152",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 4710
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "start": 209,
+      "cut": 216,
+      "group_end": 216,
+      "kind": "ifdef",
+      "expression": "DOUBLE_CPU",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 6,
+      "source_sha256": "8e1adef9f8390073e237516d367267681604b0b3486cc7c2ee71808e6de32e12",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 209
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "start": 159,
+      "cut": 161,
+      "group_end": 161,
+      "kind": "ifndef",
+      "expression": "NULL",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "d402c49ff1f841f9c9ba1bbf839b4177d8fc147e99a0d5787e67b7f84201824d",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 159
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "start": 1736,
+      "cut": 1750,
+      "group_end": 1757,
+      "kind": "if",
+      "expression": "(HOST_BIAS >= 16383)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 13,
+      "source_sha256": "d402c49ff1f841f9c9ba1bbf839b4177d8fc147e99a0d5787e67b7f84201824d",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 1736
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "start": 1862,
+      "cut": 1866,
+      "group_end": 1866,
+      "kind": "if",
+      "expression": "(HOST_BIAS >= 16383)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "d402c49ff1f841f9c9ba1bbf839b4177d8fc147e99a0d5787e67b7f84201824d",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 1862
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/gdpvar.h",
+      "start": 1,
+      "cut": 1857,
+      "group_end": 1857,
+      "kind": "ifndef",
+      "expression": "_gdpvar_h",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1855,
+      "source_sha256": "6ca53692e60067bef99950b87e1126de8e8858799cdde86cb6a8f51db9dad54a",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 1
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "start": 47,
+      "cut": 49,
+      "group_end": 49,
+      "kind": "ifdef",
+      "expression": "DOUBLE_CPU",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "41929686f0a078ff58d7b4af3248cb2c2c06c84ebf72330d9330148fc65cbad6",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 47
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "start": 65,
+      "cut": 67,
+      "group_end": 67,
+      "kind": "ifdef",
+      "expression": "DOUBLE_CPU",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "41929686f0a078ff58d7b4af3248cb2c2c06c84ebf72330d9330148fc65cbad6",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 65
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shld.c",
+      "start": 114,
+      "cut": 116,
+      "group_end": 116,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "8c06e5b9d5c57d07ab6f656dfa8c1f1c7cb995163f41cffefbd91ea03886b58f",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 114
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shrd.c",
+      "start": 116,
+      "cut": 118,
+      "group_end": 118,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "5820bab4e620a4aa1cdddce53dea4755189e7dc7677b246de270eb81a2dbee68",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 116
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "start": 236,
+      "cut": 238,
+      "group_end": 238,
+      "kind": "if",
+      "expression": "!defined(PROD) || defined(SHORT_TRACE)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 236
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "start": 821,
+      "cut": 828,
+      "group_end": 828,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 6,
+      "source_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 821
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "start": 1530,
+      "cut": 1553,
+      "group_end": 1553,
+      "kind": "if",
+      "expression": "!defined(PROD) || defined(IRET_HOOKS)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 22,
+      "source_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 1530
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "start": 2139,
+      "cut": 2141,
+      "group_end": 2141,
+      "kind": "ifndef",
+      "expression": "COM3_ADAPTOR",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 2139
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "start": 2142,
+      "cut": 2144,
+      "group_end": 2144,
+      "kind": "ifndef",
+      "expression": "COM4_ADAPTOR",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 2142
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "start": 50,
+      "cut": 52,
+      "group_end": 54,
+      "kind": "if",
+      "expression": "defined(IP32) || defined(TK43) || defined(macintosh)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "062cd0820acc962588146bec0cfa02d7bd65ee7d831ecb5a341a6651b9ab7476",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 50
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "start": 41,
+      "cut": 3297,
+      "group_end": 3301,
+      "kind": "ifdef",
+      "expression": "PROFILE",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3255,
+      "source_sha256": "9070fd972a92da845354cfcbb0ee8b58569dc9ea1b5319f22f76edb2a346f3e7",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 41
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "start": 82,
+      "cut": 233,
+      "group_end": 233,
+      "kind": "if",
+      "expression": "!defined(PROD) && defined(SPC386)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 150,
+      "source_sha256": "3915714ff36cd1adadcfc8399cb759305ba2817ca4e9db9b95b0ccbb0eb2a7a8",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 82
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "start": 280,
+      "cut": 304,
+      "group_end": 304,
+      "kind": "if",
+      "expression": "!defined(PROD) || defined(HUNTER)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 23,
+      "source_sha256": "3915714ff36cd1adadcfc8399cb759305ba2817ca4e9db9b95b0ccbb0eb2a7a8",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 280
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "start": 1008,
+      "cut": 1196,
+      "group_end": 1196,
+      "kind": "ifdef",
+      "expression": "WDCTRL_BOP",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 187,
+      "source_sha256": "060b545602902d90e0ad5d1ed0804a9d0b0d27dcfc8bd4650b721c2a27cb24c9",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 1007
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+      "start": 46,
+      "cut": 48,
+      "group_end": 48,
+      "kind": "ifndef",
+      "expression": "TRUE",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "abd9b6682731d5452193222e4e5ced6d9b6cbec8416129eb46876e2b6ae1f2b9",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 46
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+      "start": 50,
+      "cut": 52,
+      "group_end": 52,
+      "kind": "ifndef",
+      "expression": "FALSE",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "abd9b6682731d5452193222e4e5ced6d9b6cbec8416129eb46876e2b6ae1f2b9",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 50
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 185,
+      "cut": 187,
+      "group_end": 187,
+      "kind": "ifdef",
+      "expression": "PTY",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 185
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 189,
+      "cut": 191,
+      "group_end": 191,
+      "kind": "ifdef",
+      "expression": "GEN_DRVR",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 189
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 199,
+      "cut": 201,
+      "group_end": 201,
+      "kind": "ifdef",
+      "expression": "SUSPEND",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 199
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 203,
+      "cut": 207,
+      "group_end": 207,
+      "kind": "ifdef",
+      "expression": "CDROM",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 203
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 215,
+      "cut": 223,
+      "group_end": 223,
+      "kind": "ifdef",
+      "expression": "DPMI",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 7,
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 215
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 251,
+      "cut": 253,
+      "group_end": 253,
+      "kind": "ifdef",
+      "expression": "WIN_VTD",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 251
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 299,
+      "cut": 305,
+      "group_end": 305,
+      "kind": "ifdef",
+      "expression": "MSWDVR",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 5,
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 299
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 307,
+      "cut": 311,
+      "group_end": 311,
+      "kind": "ifdef",
+      "expression": "NOVELL_IPX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 307
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 313,
+      "cut": 316,
+      "group_end": 316,
+      "kind": "ifdef",
+      "expression": "NOVELL_TCPIP",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 313
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 318,
+      "cut": 320,
+      "group_end": 320,
+      "kind": "ifdef",
+      "expression": "WINSOCK",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 318
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 326,
+      "cut": 329,
+      "group_end": 329,
+      "kind": "if",
+      "expression": "defined(SOFTWIN_API) || defined(SWIN_HFX)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 326
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 346,
+      "cut": 353,
+      "group_end": 353,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 6,
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 346
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 358,
+      "cut": 361,
+      "group_end": 361,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 358
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 380,
+      "cut": 382,
+      "group_end": 382,
+      "kind": "ifdef",
+      "expression": "HFX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 380
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 390,
+      "cut": 392,
+      "group_end": 392,
+      "kind": "if",
+      "expression": "defined(SPC386) && defined(WDCTRL_BOP)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 390
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "start": 84,
+      "cut": 96,
+      "group_end": 96,
+      "kind": "if",
+      "expression": "!defined(EGG) && !defined(A_VID) && !defined(C_VID)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 11,
+      "source_sha256": "78eaaf259d3976d772e3b72d3f75678a9350793ffd2f6c6e843efba5ab17538c",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 84
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cntlbop.h",
+      "start": 26,
+      "cut": 28,
+      "group_end": 28,
+      "kind": "ifndef",
+      "expression": "SUCCESS",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "6ef8ba49296ccca57924c0232484fd38542d34c98f41998b7294ce635b8b0cda",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 26
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cntlbop.h",
+      "start": 60,
+      "cut": 62,
+      "group_end": 62,
+      "kind": "ifndef",
+      "expression": "NULL",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "6ef8ba49296ccca57924c0232484fd38542d34c98f41998b7294ce635b8b0cda",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 60
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cntlbop.h",
+      "start": 72,
+      "cut": 79,
+      "group_end": 79,
+      "kind": "if",
+      "expression": "defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 6,
+      "source_sha256": "6ef8ba49296ccca57924c0232484fd38542d34c98f41998b7294ce635b8b0cda",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 72
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "start": 93,
+      "cut": 97,
+      "group_end": 97,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "1b99f6cda69b874e8e9ac73b2da493cdfde4742fb1f0eb67c647ed82cd374e18",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 93
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "start": 22,
+      "cut": 25,
+      "group_end": 25,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "700dbb3d5d343ae6664a808d5233f3d86c02798f54a1e2bdbd5fff40b6df1cf2",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 22
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egaports.h",
+      "start": 73,
+      "cut": 81,
+      "group_end": 81,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 7,
+      "source_sha256": "face41b8a7fd360e0f99b9f779a87b11ddf4bf0b43b6c9f2ffd6133782cbb129",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 73
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egaread.h",
+      "start": 8,
+      "cut": 13,
+      "group_end": 13,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 4,
+      "source_sha256": "e84f967733ed9e18df9e372a4a2bbf942d4984a685cf12b3410eca07ba973097",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 8
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "start": 94,
+      "cut": 98,
+      "group_end": 98,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "dea92c3d4b4445d5f077f24ea209e5f3744a572faec423806ae1d0f899813253",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 94
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "start": 100,
+      "cut": 102,
+      "group_end": 102,
+      "kind": "ifdef",
+      "expression": "MSWDVR",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "dea92c3d4b4445d5f077f24ea209e5f3744a572faec423806ae1d0f899813253",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 100
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "start": 40,
+      "cut": 45,
+      "group_end": 45,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 4,
+      "source_sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 40
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "start": 183,
+      "cut": 185,
+      "group_end": 185,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 183
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "start": 292,
+      "cut": 302,
+      "group_end": 309,
+      "kind": "if",
+      "expression": "defined(X86GFX) && defined(NTVDM)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 9,
+      "source_sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 292
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/error.h",
+      "start": 4,
+      "cut": 418,
+      "group_end": 418,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 413,
+      "source_sha256": "52d05ba2f86186203242c67472ff8b849209af3ff49e975ce3b5b6c897daf53f",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 4
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "start": 192,
+      "cut": 196,
+      "group_end": 196,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 192
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "start": 478,
+      "cut": 482,
+      "group_end": 482,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 478
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "start": 502,
+      "cut": 516,
+      "group_end": 516,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 13,
+      "source_sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 502
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "start": 527,
+      "cut": 531,
+      "group_end": 531,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 527
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "start": 543,
+      "cut": 549,
+      "group_end": 549,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 5,
+      "source_sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 543
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gendrvr.h",
+      "start": 21,
+      "cut": 23,
+      "group_end": 23,
+      "kind": "if",
+      "expression": "defined (GEN_DRVR) || defined (CDROM)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "013b5d77b7d28a921f52eecdd2d00ae687576d3419e007901050d37bd7b5e599",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 21
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gendrvr.h",
+      "start": 25,
+      "cut": 27,
+      "group_end": 27,
+      "kind": "ifdef",
+      "expression": "GEN_DRVR",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "013b5d77b7d28a921f52eecdd2d00ae687576d3419e007901050d37bd7b5e599",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 25
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "start": 28,
+      "cut": 36,
+      "group_end": 36,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 7,
+      "source_sha256": "36e2874c485836e78fec5df42832b5353d0c15cc6aee1ef38a2ad2b33dad490b",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 28
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "start": 154,
+      "cut": 156,
+      "group_end": 156,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "20163ca8a5e16e008e8297f0247406a94bc44cd73b0bd93c708254ffe693f356",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 154
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "start": 251,
+      "cut": 253,
+      "group_end": 253,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "20163ca8a5e16e008e8297f0247406a94bc44cd73b0bd93c708254ffe693f356",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 251
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hfx.h",
+      "start": 17,
+      "cut": 710,
+      "group_end": 710,
+      "kind": "ifdef",
+      "expression": "HFX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 692,
+      "source_sha256": "8fb9ca6d10d3d9331cb2e5baa50ee653993d8162dfbdc59844c0abbd22b81b77",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 17
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "start": 46,
+      "cut": 48,
+      "group_end": 48,
+      "kind": "ifdef",
+      "expression": "SUSPEND",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "74e554fee6d9008fe59882301bfa07e300d810c66b7559e42afa3fb35c64bc00",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 46
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_nls.h",
+      "start": 76,
+      "cut": 80,
+      "group_end": 80,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "2f435d96cc54753dd5184a51d45adda120f8a7fad613b3b21fbfd44d7f55e5a3",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 76
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_sas.h",
+      "start": 20,
+      "cut": 66,
+      "group_end": 66,
+      "kind": "if",
+      "expression": "defined(BASE_SAS) && defined(HOST_SAS)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 45,
+      "source_sha256": "00c5ab25083ff6a19ce2ad461c43bb37adbd2aeb241865cc9b3a2c4847ea8d2e",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 20
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "start": 62,
+      "cut": 64,
+      "group_end": 64,
+      "kind": "if",
+      "expression": "defined (NOVELL) || defined (NOVELL_IPX)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "c8706a9599ba62d19ac54deb99e125c78b59bf5cd4f1ad4eea25ea883095c9f4",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 62
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "start": 70,
+      "cut": 72,
+      "group_end": 72,
+      "kind": "if",
+      "expression": "defined (ASPI)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "c8706a9599ba62d19ac54deb99e125c78b59bf5cd4f1ad4eea25ea883095c9f4",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 70
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "start": 134,
+      "cut": 199,
+      "group_end": 199,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 64,
+      "source_sha256": "c8706a9599ba62d19ac54deb99e125c78b59bf5cd4f1ad4eea25ea883095c9f4",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 134
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/idetect.h",
+      "start": 43,
+      "cut": 47,
+      "group_end": 47,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "5af404ec517e927063bf526603e8dd07a9a88e846a31811b7104244273c7a344",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 43
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "start": 25,
+      "cut": 27,
+      "group_end": 27,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "4a87e916507f79d136c47e4b87815bffc3fc181c6f7e456ad21f2e48816e80ac",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 25
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "start": 498,
+      "cut": 501,
+      "group_end": 501,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "4a87e916507f79d136c47e4b87815bffc3fc181c6f7e456ad21f2e48816e80ac",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 498
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/lock.h",
+      "start": 31,
+      "cut": 38,
+      "group_end": 38,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 6,
+      "source_sha256": "e285b5590e9c53ffb839d03e90c93da4fdcc0019671d23374188917f47300d15",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 31
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "start": 255,
+      "cut": 257,
+      "group_end": 257,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "b1d787529ed23b6cdd8c2e0592f1ba40275a136852af4519ae270690cb186631",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 255
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "start": 790,
+      "cut": 812,
+      "group_end": 812,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 21,
+      "source_sha256": "b1d787529ed23b6cdd8c2e0592f1ba40275a136852af4519ae270690cb186631",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 790
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ppi.h",
+      "start": 33,
+      "cut": 37,
+      "group_end": 37,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "f4e0c66e1dd7ab4e6976fde1c5a996613d18a6430ec1718147ce0d9b226844dd",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 33
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/profile.h",
+      "start": 245,
+      "cut": 248,
+      "group_end": 248,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "375bec6bbcf23682a3c22f07a0a59c77462b5810100f02e961c5040692dffdd8",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 245
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "start": 106,
+      "cut": 266,
+      "group_end": 266,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 159,
+      "source_sha256": "655c332ff639ab73f6b37043db11357d154ada60c11c3493e2b210f04eaf9cc0",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 106
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "start": 79,
+      "cut": 82,
+      "group_end": 82,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "d33e302d37db7fd87664f8b71b7f7829c6c3b935edcc1e000ddda54668e7be79",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 79
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "start": 90,
+      "cut": 93,
+      "group_end": 96,
+      "kind": "ifdef",
+      "expression": "SWIN_MOUSE_OPTS",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "d33e302d37db7fd87664f8b71b7f7829c6c3b935edcc1e000ddda54668e7be79",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 90
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "start": 38,
+      "cut": 50,
+      "group_end": 50,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 11,
+      "source_sha256": "922d7adf54ebcf87b331481a58be008f3651d474f04211abdfe018d2d79cdb0f",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 38
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "start": 60,
+      "cut": 63,
+      "group_end": 66,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "922d7adf54ebcf87b331481a58be008f3651d474f04211abdfe018d2d79cdb0f",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 60
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "start": 74,
+      "cut": 76,
+      "group_end": 76,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 74
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "start": 138,
+      "cut": 140,
+      "group_end": 140,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 138
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "start": 181,
+      "cut": 183,
+      "group_end": 183,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 181
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "start": 239,
+      "cut": 241,
+      "group_end": 241,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 239
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+      "start": 42,
+      "cut": 46,
+      "group_end": 46,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "5beb4870dc05919164d389988b04a403e9ae526a6c59b0f14e780b31c9532c3d",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 42
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "start": 2179,
+      "cut": 2181,
+      "group_end": 2181,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "614a25ecb9008e7e39acbf694a8fe96b3511c53c00a7ecd7eb8c6a140ff559df",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 2179
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "start": 535,
+      "cut": 559,
+      "group_end": 559,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 23,
+      "source_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 535
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "start": 108,
+      "cut": 110,
+      "group_end": 110,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "4d271558ab83c5b6703b699fc5214cc383c374d5bd07c9f90bf5468fcd5e1983",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 107
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "start": 126,
+      "cut": 130,
+      "group_end": 130,
+      "kind": "if",
+      "expression": "!defined(PROD) || defined(HUNTER)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "4d271558ab83c5b6703b699fc5214cc383c374d5bd07c9f90bf5468fcd5e1983",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 125
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "start": 144,
+      "cut": 146,
+      "group_end": 146,
+      "kind": "if",
+      "expression": "!defined(NTVDM) && !defined(macintosh) && !defined(VMS)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "4d271558ab83c5b6703b699fc5214cc383c374d5bd07c9f90bf5468fcd5e1983",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 143
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "start": 161,
+      "cut": 174,
+      "group_end": 174,
+      "kind": "ifdef",
+      "expression": "SECURE",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 12,
+      "source_sha256": "4d271558ab83c5b6703b699fc5214cc383c374d5bd07c9f90bf5468fcd5e1983",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 160
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "start": 232,
+      "cut": 246,
+      "group_end": 246,
+      "kind": "if",
+      "expression": "!defined(PROD) || defined(HUNTER)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 13,
+      "source_sha256": "4d271558ab83c5b6703b699fc5214cc383c374d5bd07c9f90bf5468fcd5e1983",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 231
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "start": 798,
+      "cut": 810,
+      "group_end": 810,
+      "kind": "ifndef",
+      "expression": "PM",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 11,
+      "source_sha256": "f1b2879dd3df7c3d3c37765cd528a742172a5ce4978a2c1dfb07ff2e98b0e098",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 798
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "start": 817,
+      "cut": 830,
+      "group_end": 830,
+      "kind": "ifndef",
+      "expression": "PM",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 12,
+      "source_sha256": "f1b2879dd3df7c3d3c37765cd528a742172a5ce4978a2c1dfb07ff2e98b0e098",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 817
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "start": 272,
+      "cut": 276,
+      "group_end": 276,
+      "kind": "ifdef",
+      "expression": "HOOKED_IRETS",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "ad063a5df6d1962c66e6ea02fc1125921fc49f57464d19b7667360aa51b0bb0c",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 272
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "start": 334,
+      "cut": 336,
+      "group_end": 336,
+      "kind": "ifdef",
+      "expression": "HOOKED_IRETS",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "ad063a5df6d1962c66e6ea02fc1125921fc49f57464d19b7667360aa51b0bb0c",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 334
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "start": 1208,
+      "cut": 1211,
+      "group_end": 1211,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "ad063a5df6d1962c66e6ea02fc1125921fc49f57464d19b7667360aa51b0bb0c",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 1208
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "start": 1327,
+      "cut": 1493,
+      "group_end": 1493,
+      "kind": "ifdef",
+      "expression": "HOOKED_IRETS",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 165,
+      "source_sha256": "ad063a5df6d1962c66e6ea02fc1125921fc49f57464d19b7667360aa51b0bb0c",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 1327
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "start": 305,
+      "cut": 317,
+      "group_end": 317,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 11,
+      "source_sha256": "e5ab070ec285e3823b8342f82e0f38eb7eb6ab64cff3c426536646800f252e17",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 304
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "start": 419,
+      "cut": 455,
+      "group_end": 455,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 35,
+      "source_sha256": "4d06d007979fa0c85b3083b00f4a67086b39dbbff21d4a5cd5bbbb817919eb38",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 419
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "start": 645,
+      "cut": 647,
+      "group_end": 647,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "4d06d007979fa0c85b3083b00f4a67086b39dbbff21d4a5cd5bbbb817919eb38",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 645
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "start": 2236,
+      "cut": 2240,
+      "group_end": 2240,
+      "kind": "ifdef",
+      "expression": "DOCUMENTATION",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "4d06d007979fa0c85b3083b00f4a67086b39dbbff21d4a5cd5bbbb817919eb38",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 2235
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+      "start": 76,
+      "cut": 78,
+      "group_end": 78,
+      "kind": "if",
+      "expression": "!defined(REAL_TIMER) && !defined(NTVDM)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "9721d2572acc6749aeb187eddd51a9d57f34e4c5e8c32bd021502d97849cba0f",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 76
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "start": 313,
+      "cut": 315,
+      "group_end": 315,
+      "kind": "if",
+      "expression": "!defined(EGG) && !defined(C_VID) && !defined(A_VID)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "ad5273149aca246d05cd043be4f367041273ec1eab969e316094977ea045fdb6",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 313
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "start": 323,
+      "cut": 325,
+      "group_end": 325,
+      "kind": "if",
+      "expression": "!defined(EGG) && !defined(C_VID) && !defined(A_VID)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "ad5273149aca246d05cd043be4f367041273ec1eab969e316094977ea045fdb6",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 323
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "start": 25,
+      "cut": 29,
+      "group_end": 29,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 25
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "start": 37,
+      "cut": 41,
+      "group_end": 41,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 37
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "start": 48,
+      "cut": 51,
+      "group_end": 51,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 48
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "start": 60,
+      "cut": 63,
+      "group_end": 63,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 60
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "start": 72,
+      "cut": 75,
+      "group_end": 75,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 72
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "start": 88,
+      "cut": 91,
+      "group_end": 91,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 88
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "start": 196,
+      "cut": 209,
+      "group_end": 209,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 12,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 196
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "start": 37,
+      "cut": 40,
+      "group_end": 40,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "08af5c8467aea265179de2f8d6980533d337ef5357190a92ee099d828d98e070",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 37
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "start": 240,
+      "cut": 242,
+      "group_end": 244,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "0ab22fc80460cbaf4c7b27e69099e44c2832808dad65c5bfe62c5ce3054bbf9d",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 240
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_hfx.h",
+      "start": 19,
+      "cut": 142,
+      "group_end": 142,
+      "kind": "ifdef",
+      "expression": "HFX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 122,
+      "source_sha256": "554b4aa254be060e54e51b34b153bd523c4f6e7f8e584bb4e16acd2b979aa846",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 19
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "start": 115,
+      "cut": 121,
+      "group_end": 121,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 5,
+      "source_sha256": "11558a25a208b90d6f2995a9dbdec4cd87f910ad8c38d72f931d9b6dc2a3b535",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 115
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_pif.h",
+      "start": 97,
+      "cut": 100,
+      "group_end": 100,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "0e970eb7fb050158cc2038f348e5d4de1d1ffd0d40f6babb7f15c64230eb9133",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 97
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "start": 980,
+      "cut": 1013,
+      "group_end": 1013,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 32,
+      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 980
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "start": 98,
+      "cut": 112,
+      "group_end": 112,
+      "kind": "ifdef",
+      "expression": "_ALPHA_",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 13,
+      "source_sha256": "e0b3099b5e7e25ad60f4219d706926a9f905771521e63f2a0fee7d17e4cc48ea",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 102
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "start": 1479,
+      "cut": 1481,
+      "group_end": 1481,
+      "kind": "ifdef",
+      "expression": "X86GFX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 1479
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "start": 1508,
+      "cut": 1514,
+      "group_end": 1514,
+      "kind": "ifdef",
+      "expression": "X86GFX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 5,
+      "source_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 1508
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "start": 201,
+      "cut": 204,
+      "group_end": 204,
+      "kind": "ifdef",
+      "expression": "X86GFX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 201
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "start": 250,
+      "cut": 253,
+      "group_end": 253,
+      "kind": "ifdef",
+      "expression": "X86GFX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 537
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "start": 305,
+      "cut": 308,
+      "group_end": 308,
+      "kind": "ifdef",
+      "expression": "X86GFX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 592
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "start": 529,
+      "cut": 719,
+      "group_end": 719,
+      "kind": "ifdef",
+      "expression": "X86GFX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 189,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 1039
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "start": 1083,
+      "cut": 1086,
+      "group_end": 1086,
+      "kind": "ifdef",
+      "expression": "X86GFX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 1593
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "start": 1110,
+      "cut": 1113,
+      "group_end": 1113,
+      "kind": "ifdef",
+      "expression": "X86GFX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 1620
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "start": 1127,
+      "cut": 1130,
+      "group_end": 1130,
+      "kind": "ifdef",
+      "expression": "X86GFX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 1637
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "start": 1241,
+      "cut": 1244,
+      "group_end": 1244,
+      "kind": "ifdef",
+      "expression": "X86GFX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 1751
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "start": 90,
+      "cut": 92,
+      "group_end": 92,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 90
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "start": 739,
+      "cut": 752,
+      "group_end": 752,
+      "kind": "if",
+      "expression": "defined(CCPU) && defined(X86GFX)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 12,
+      "source_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 739
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "start": 819,
+      "cut": 826,
+      "group_end": 826,
+      "kind": "if",
+      "expression": "!defined(CCPU) || defined(X86GFX)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 6,
+      "source_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 819
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "start": 2081,
+      "cut": 2085,
+      "group_end": 2085,
+      "kind": "ifdef",
+      "expression": "X86GFX",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 2081
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+      "start": 59,
+      "cut": 62,
+      "group_end": 62,
+      "kind": "if",
+      "expression": "NOTUSEDNOTUSED",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "93cca81de84332b75efd4b07fbb808d8a4fe6bdfffaa9b0acf02bc2a4856e39e",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 59
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "start": 285,
+      "cut": 339,
+      "group_end": 339,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 53,
+      "source_sha256": "7cda05518a3473d52c7383620cd000f936b93219a1e746461c26116cc0531565",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 285
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "start": 382,
+      "cut": 427,
+      "group_end": 427,
+      "kind": "ifdef",
+      "expression": "NOTUSEDNOTUSED",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 44,
+      "source_sha256": "0b5d06d2a7a3f714a6f1a607ac9476fb5c0ae490832a8e45d43acc58fd3b505f",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 382
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+      "start": 53,
+      "cut": 55,
+      "group_end": 55,
+      "kind": "ifndef",
+      "expression": "CMOS_FILE_NAME",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "cb0428a15f3d546c62abc667dabd2321768f3f7a5ade0bacd29cc64e4717276d",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 53
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sas.c",
+      "start": 32,
+      "cut": 117,
+      "group_end": 117,
+      "kind": "ifdef",
+      "expression": "HOST_SAS",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 84,
+      "source_sha256": "acc0798371852cf6c2600047957551381ed1fbe279ab366b0b206105a199790c",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 32
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "start": 93,
+      "cut": 127,
+      "group_end": 209,
+      "kind": "ifndef",
+      "expression": "WOWFASTEDIT",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 33,
+      "source_sha256": "92f3ce07b9978acdcc702c95166d5151b7c57488076b3b21322885311fa30264",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 93
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "start": 694,
+      "cut": 698,
+      "group_end": 711,
+      "kind": "if",
+      "expression": "FASTBOPPING",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "92f3ce07b9978acdcc702c95166d5151b7c57488076b3b21322885311fa30264",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 689
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "start": 319,
+      "cut": 321,
+      "group_end": 321,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "1a5c054f8765757f0924c6e25fbd146f19d08c5bf08d171406efe776f4cbc3b9",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 319
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "start": 664,
+      "cut": 666,
+      "group_end": 666,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "1a5c054f8765757f0924c6e25fbd146f19d08c5bf08d171406efe776f4cbc3b9",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 664
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "start": 333,
+      "cut": 337,
+      "group_end": 337,
+      "kind": "ifdef",
+      "expression": "DBCS",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "cda62e3b5807782c7088626ce95b9fddd5fc5db5f65896700df547a822364745",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 333
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "start": 506,
+      "cut": 510,
+      "group_end": 510,
+      "kind": "ifdef",
+      "expression": "DBCS",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "cda62e3b5807782c7088626ce95b9fddd5fc5db5f65896700df547a822364745",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 506
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "start": 853,
+      "cut": 857,
+      "group_end": 857,
+      "kind": "if",
+      "expression": "(FILE_BEGIN != 0 || FILE_CURRENT != 1 || FILE_END !=2)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "838d9acb172fc6fa431ce561c1049121e505bf08b24d0211b0d5ebc76c961dbf",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 853
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "start": 1158,
+      "cut": 1163,
+      "group_end": 1163,
+      "kind": "if",
+      "expression": "NO_W32TRYCALL",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 4,
+      "source_sha256": "428e5554d964b9ac06f89132a38cb63d2b08a067d6d9bfc07204137a6a8811eb",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 1148
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "start": 1173,
+      "cut": 1177,
+      "group_end": 1177,
+      "kind": "if",
+      "expression": "NO_W32TRYCALL",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "428e5554d964b9ac06f89132a38cb63d2b08a067d6d9bfc07204137a6a8811eb",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 1162
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.h",
+      "start": 84,
+      "cut": 88,
+      "group_end": 88,
+      "kind": "ifdef",
+      "expression": "NEWALIAS",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "7246e9756d481ce5bb6b64058951cbc2c949c86b580082eb4b6ba7a465fa106d",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 84
+        },
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 84
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstruc.h",
+      "start": 112,
+      "cut": 124,
+      "group_end": 124,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 11,
+      "source_sha256": "f991da66791e191238227cbe93b264cba7def8b5b6eb93e812eb9013039cc47b",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 112
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgbm.h",
+      "start": 25,
+      "cut": 27,
+      "group_end": 27,
+      "kind": "ifndef",
+      "expression": "BM_CLICK",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "7b97c720ec18d1f703abea9df2088893d41568060314f2573b6471b0e5d3259b",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 25
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.c",
+      "start": 1320,
+      "cut": 1323,
+      "group_end": 1323,
+      "kind": "ifdef",
+      "expression": "DEBUG_OR_WOWPROFILE",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "8dbb8e6828c8f0ff3286bf917b40964eb859d1091ec0757c801c9422ed2fb7b3",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 1320
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "start": 166,
+      "cut": 184,
+      "group_end": 184,
+      "kind": "if",
+      "expression": "defined (_X86_)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 17,
+      "source_sha256": "61da41eb4ada1b473339bf1d78cd0b3ac967666c76eddd89f356d592f0516942",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 166
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "start": 468,
+      "cut": 470,
+      "group_end": 470,
+      "kind": "ifdef",
+      "expression": "_X86_",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "61da41eb4ada1b473339bf1d78cd0b3ac967666c76eddd89f356d592f0516942",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 468
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "start": 943,
+      "cut": 990,
+      "group_end": 1017,
+      "kind": "if",
+      "expression": "NO_W32TRYCALL",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 46,
+      "source_sha256": "61da41eb4ada1b473339bf1d78cd0b3ac967666c76eddd89f356d592f0516942",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 943
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "start": 957,
+      "cut": 961,
+      "group_end": 961,
+      "kind": "ifdef",
+      "expression": "DBG",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "aa71d6fdcc135bd8aa717223b5024fbe79cb9a03b532151c045f3736c2967d97",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 957
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "start": 50,
+      "cut": 52,
+      "group_end": 52,
+      "kind": "ifdef",
+      "expression": "MAPPARAM_EXTRA",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "35c648e16f616f91c0083bd5da217ff2b5a3dd0885bcffdff1a276bbc9f85063",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 50
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "start": 230,
+      "cut": 232,
+      "group_end": 232,
+      "kind": "ifdef",
+      "expression": "MAPPARAM_EXTRA",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "35c648e16f616f91c0083bd5da217ff2b5a3dd0885bcffdff1a276bbc9f85063",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 230
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "start": 242,
+      "cut": 275,
+      "group_end": 275,
+      "kind": "ifdef",
+      "expression": "MAPPARAM_EXTRA",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 32,
+      "source_sha256": "35c648e16f616f91c0083bd5da217ff2b5a3dd0885bcffdff1a276bbc9f85063",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 242
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "start": 306,
+      "cut": 311,
+      "group_end": 311,
+      "kind": "ifdef",
+      "expression": "MAPPARAM_EXTRA",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 4,
+      "source_sha256": "35c648e16f616f91c0083bd5da217ff2b5a3dd0885bcffdff1a276bbc9f85063",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 306
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "start": 361,
+      "cut": 363,
+      "group_end": 365,
+      "kind": "ifdef",
+      "expression": "MAPPARAM_EXTRA",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "35c648e16f616f91c0083bd5da217ff2b5a3dd0885bcffdff1a276bbc9f85063",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 361
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wspool.h",
+      "start": 59,
+      "cut": 61,
+      "group_end": 63,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "2a92782fd0d9b824a1807e45ed89a7265180aa8dc340783f20ff7ae51a82f4e5",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 59
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "start": 272,
+      "cut": 274,
+      "group_end": 274,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "238effebef4d05a04b29889c94f9049fd40fc6ad860761c33edcb4069bf44b47",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 276
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "start": 747,
+      "cut": 749,
+      "group_end": 749,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "238effebef4d05a04b29889c94f9049fd40fc6ad860761c33edcb4069bf44b47",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 751
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "start": 776,
+      "cut": 778,
+      "group_end": 778,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "238effebef4d05a04b29889c94f9049fd40fc6ad860761c33edcb4069bf44b47",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 780
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.c",
+      "start": 702,
+      "cut": 704,
+      "group_end": 704,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "ffe2cdfbdf899032e18965bce35b22d503fc3a47466bfe1a4a66cb361bffeaed",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 702
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.h",
+      "start": 12,
+      "cut": 41,
+      "group_end": 97,
+      "kind": "ifdef",
+      "expression": "PMODE32",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 28,
+      "source_sha256": "199e9018b7edfacc26d7bee87d54f8f660155ef567a19c69c1966cd625d582e2",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 12
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "start": 1704,
+      "cut": 1706,
+      "group_end": 1706,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "3f160a1833a71488d7e4b3e48dbcadf0aeaa7351751e636232121cbdd5a1433c",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 1704
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "start": 2477,
+      "cut": 2479,
+      "group_end": 2479,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "3f160a1833a71488d7e4b3e48dbcadf0aeaa7351751e636232121cbdd5a1433c",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 2477
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "start": 2514,
+      "cut": 2516,
+      "group_end": 2516,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "3f160a1833a71488d7e4b3e48dbcadf0aeaa7351751e636232121cbdd5a1433c",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 2514
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "start": 22,
+      "cut": 24,
+      "group_end": 24,
+      "kind": "ifdef",
+      "expression": "DOS",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 22
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "start": 41,
+      "cut": 44,
+      "group_end": 44,
+      "kind": "ifdef",
+      "expression": "WIN_16",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 41
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "start": 70,
+      "cut": 73,
+      "group_end": 73,
+      "kind": "ifdef",
+      "expression": "SIGNALS",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "f9c4bcd6f47e8cf2bb3fc33f9b23bac85dcbc05fb00dac7bf2050c9badd30ec5",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 70
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "start": 27,
+      "cut": 33,
+      "group_end": 33,
+      "kind": "if",
+      "expression": "defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 5,
+      "source_sha256": "b6dea35bc24ba7baf538b6a0e99be17dd8c73509953b5959a6aca4f5c9e44b22",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 27
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "start": 26,
+      "cut": 28,
+      "group_end": 28,
+      "kind": "if",
+      "expression": "defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "cda496c598082dbed3a593169db9527ee5fef2aeb808829aba468f4a91f0016b",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 26
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "start": 175,
+      "cut": 184,
+      "group_end": 184,
+      "kind": "ifndef",
+      "expression": "NTOS_KERNEL_RUNTIME",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 8,
+      "source_sha256": "cda496c598082dbed3a593169db9527ee5fef2aeb808829aba468f4a91f0016b",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 175
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "start": 72,
+      "cut": 1358,
+      "group_end": 1358,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1285,
+      "source_sha256": "2d28a402941948bfcf61c366fcfc74b9c6c27ef02b14d2df7719d302bc2e2477",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 72
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "start": 231,
+      "cut": 233,
+      "group_end": 233,
+      "kind": "if",
+      "expression": "!defined(OPENNT_BASE_VDM_SERVER)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "5016d623cb8295cda7e9788cbde1fa6d52c3f52a98bea3dc63fc8a54067fe414",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 231
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "start": 2626,
+      "cut": 2628,
+      "group_end": 2628,
+      "kind": "if",
+      "expression": "DEVL",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "f819d815ff94fc7465b4b5bbd5f3cbc975b7671db6f8f11465b99a91730dbe68",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 2626
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "start": 2644,
+      "cut": 2646,
+      "group_end": 2646,
+      "kind": "if",
+      "expression": "DEVL",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "f819d815ff94fc7465b4b5bbd5f3cbc975b7671db6f8f11465b99a91730dbe68",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 2644
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "start": 117,
+      "cut": 125,
+      "group_end": 125,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 7,
+      "source_sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 117
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "start": 166,
+      "cut": 177,
+      "group_end": 177,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 10,
+      "source_sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 166
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "start": 255,
+      "cut": 281,
+      "group_end": 286,
+      "kind": "elif",
+      "expression": "!defined(CDEBUG)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 25,
+      "source_sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 255
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "start": 281,
+      "cut": 286,
+      "group_end": 286,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 4,
+      "source_sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 281
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "start": 60,
+      "cut": 157,
+      "group_end": 157,
+      "kind": "if",
+      "expression": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 96,
+      "source_sha256": "d0a538fa12c6f512c480ab199f1b122752efddeaf9e9d2b7caf1f760ede06f9e",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 60
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "start": 288,
+      "cut": 410,
+      "group_end": 410,
+      "kind": "if",
+      "expression": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 121,
+      "source_sha256": "d0a538fa12c6f512c480ab199f1b122752efddeaf9e9d2b7caf1f760ede06f9e",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 288
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "start": 413,
+      "cut": 674,
+      "group_end": 674,
+      "kind": "if",
+      "expression": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 260,
+      "source_sha256": "d0a538fa12c6f512c480ab199f1b122752efddeaf9e9d2b7caf1f760ede06f9e",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 413
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "start": 55,
+      "cut": 60,
+      "group_end": 60,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 4,
+      "source_sha256": "0acc7ea4dd544b5f8b4ef40f748a20e74f4d4bed5bd5d286ba544fcc930fd42d",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 55
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "start": 870,
+      "cut": 872,
+      "group_end": 872,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "5aba39b2ff30af6f22fb0c002c07aa581d58a1e96d9f3b6ec4d4abdf417b3acb",
+      "prior_evidence": [
+        {
+          "family": "source",
+          "artifact": "s13-bfs-depth1-deduplicated-source-candidates.json",
+          "original_entry_line": 870
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/private/inc/dlcio.h",
+      "start": 470,
+      "cut": 472,
+      "group_end": 472,
+      "kind": "ifndef",
+      "expression": "MAX_PATH",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "52eccef61e7776db4361d0cb8f0ceac099fbbb9e7808d55994c4d7d0025d5f2b",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 470
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntdddisk.h",
+      "start": 18,
+      "cut": 907,
+      "group_end": 907,
+      "kind": "ifndef",
+      "expression": "_NTDDDISK_H_",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 888,
+      "source_sha256": "660b695c26ffd2e79a9d62d99d8c097fa2af7d1bb5475c89b69703345d4f5081",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 18
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntdbg.h",
+      "start": 22,
+      "cut": 4189,
+      "group_end": 4189,
+      "kind": "ifndef",
+      "expression": "_NTDBG_",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 4166,
+      "source_sha256": "33606d8977bdea48f291fccff2f2fe357ac7d018db5cb424508016e6b2073ffe",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 22
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/wownt32.h",
+      "start": 16,
+      "cut": 254,
+      "group_end": 254,
+      "kind": "ifndef",
+      "expression": "_WOWNT32_",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 237,
+      "source_sha256": "fe726b917229ef7aad3615d001ac32f5d1c4a7237486b68195a3650acde5bcee",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 16
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "start": 626,
+      "cut": 628,
+      "group_end": 628,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "413c772f4234542bc44278dd4a25a27dac25d618c12de8d97757f409d224d436",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 626
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "start": 635,
+      "cut": 638,
+      "group_end": 638,
+      "kind": "ifndef",
+      "expression": "WOW_NATIVE_DIALOG_PROCEDURE_OWNER",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 2,
+      "source_sha256": "413c772f4234542bc44278dd4a25a27dac25d618c12de8d97757f409d224d436",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 635
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "start": 891,
+      "cut": 893,
+      "group_end": 893,
+      "kind": "ifndef",
+      "expression": "UNICODE",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "16f697a80b636de08a20bb0fecda0d8a7e660eba1147ebf7461b299f41414a60",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 891
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "start": 1139,
+      "cut": 1141,
+      "group_end": 1141,
+      "kind": "ifndef",
+      "expression": "UNICODE",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "16f697a80b636de08a20bb0fecda0d8a7e660eba1147ebf7461b299f41414a60",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 1139
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "start": 104,
+      "cut": 112,
+      "group_end": 120,
+      "kind": "ifdef",
+      "expression": "UNICODE",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 7,
+      "source_sha256": "e0ed75ed45d52eaf8e8efb124035565299e0fb29bbf20e735133d17ca4bb5dbf",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 104
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "start": 248,
+      "cut": 250,
+      "group_end": 252,
+      "kind": "ifdef",
+      "expression": "UNICODE",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "e0ed75ed45d52eaf8e8efb124035565299e0fb29bbf20e735133d17ca4bb5dbf",
+      "prior_evidence": [
+        {
+          "family": "header",
+          "artifact": "s13-bfs-depth1-header-profile-summary.json",
+          "original_entry_line": 248
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "start": 213,
+      "cut": 215,
+      "group_end": 215,
+      "kind": "else",
+      "expression": "",
+      "status": "pending",
+      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "bf930830d7d6a1096c13039e5dd3219cef927c262677c63c81c3a612978d4a79",
+      "prior_evidence": [
+        {
+          "family": "remaining",
+          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
+          "original_entry_line": 213
+        }
+      ]
+    }
+  ],
+  "classification_counts": [
+    {
+      "families": [
+        "header"
+      ],
+      "count": 58
+    },
+    {
+      "families": [
+        "remaining"
+      ],
+      "count": 117
+    },
+    {
+      "families": [
+        "source"
+      ],
+      "count": 74
+    },
+    {
+      "families": [
+        "header",
+        "source"
+      ],
+      "count": 1
+    }
+  ],
+  "unlinked": 0
+}

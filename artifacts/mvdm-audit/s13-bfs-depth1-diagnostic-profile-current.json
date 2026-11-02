@@ -1,0 +1,9 @@
+{
+  "scope": "independently supported diagnostic build, not default product",
+  "source_sha256": "761cd97a34ad552491e38efd9e5aa7ba683c23a7b02bfbcd675fd281c8195152",
+  "current_line": 863,
+  "fixture": "tests/observation/verify-decode-diagnostics.ps1",
+  "result": "normal object excludes five observers; diagnostic object contains all five",
+  "baseline_path_correction": "68e860553 uses src/mvdm before the directory rename",
+  "guest_compiled": false
+}

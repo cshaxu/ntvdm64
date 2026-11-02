@@ -7249,8 +7249,8 @@
       "group_end": 884,
       "kind": "if",
       "expression": "defined(NTVDM) && defined(MVDM_CCPU_DECODE_DIAGNOSTICS)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "retained-observed",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 20,
       "source_sha256": "761cd97a34ad552491e38efd9e5aa7ba683c23a7b02bfbcd675fd281c8195152"
@@ -65654,13 +65654,13 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 1378,
+    "pending": 1377,
     "already-excluded": 1470,
     "newly-excluded": 344,
-    "retained-observed": 1858
+    "retained-observed": 1859
   },
   "pending_by_guard": {
-    "not-guard": 1126,
+    "not-guard": 1125,
     "guard": 252
   }
 }

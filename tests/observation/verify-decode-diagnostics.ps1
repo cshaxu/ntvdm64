@@ -22,7 +22,7 @@ $arguments=@([regex]::Matches(($flags[0] -replace '^cflags = ','').Replace('$:',
 $diagnostic=Join-Path $root 'c_main-diagnostic.obj'
 $source=Join-Path $repo 'src/mvdm-host/softpc.new/base/ccpu386/c_main.c'
 $current=Get-Content $source -Raw
-$prior=(& git -C $repo show '68e860553:src/mvdm-host/softpc.new/base/ccpu386/c_main.c') -join "`n"
+$prior=(& git -C $repo show '68e860553:src/mvdm/softpc.new/base/ccpu386/c_main.c') -join "`n"
 if($LASTEXITCODE){throw 'Accepted source comparison unavailable'}
 $oldBlock=[regex]::Match($prior,'(?s)DECODE:\s*#ifdef NTVDM(?<body>.*?)#endif')
 $newBlock=[regex]::Match($current,'(?s)DECODE:\s*/\* DIVERGENCE: MVDM-HOST-DIV-325\..*?\*/\s*#if defined\(NTVDM\) && defined\(MVDM_CCPU_DECODE_DIAGNOSTICS\)(?<body>.*?)#endif')

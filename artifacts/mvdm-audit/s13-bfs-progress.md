@@ -1310,6 +1310,12 @@ chartran.c due to loop-variable reuse. The source was correct. The queue is
 corrected in `s13-bfs-depth1-corrected-queue.zip`; its 5,050 first-depth arms
 now match the physical directives, with zero mismatches. Earlier post-batch
 queue snapshots are superseded; see `s13-bfs-depth1-queue-correction.json`.
-Current status: 1,858 observed retained, 1,470 previously excluded, 344
-newly excluded and 1,378 pending; of the pending arms, 252 already contain
-only `#error` and 1,126 still require a disposition.
+The separately supported CCPU decode diagnostic profile selects another arm:
+the normal object omits its five observers, while an explicitly diagnostic
+object contains all five. Its historical fixture's Git lookup was corrected
+for the old pre-rename path and the fixture passed. See
+`s13-bfs-depth1-diagnostic-profile-current.json`.
+Current status: 1,859 observed retained, 1,470 previously excluded, 344
+newly excluded and 1,377 pending; of the pending arms, 252 already contain
+only `#error` and 1,125 still require a disposition. The corrected latest
+queue is `s13-bfs-depth1-current-queue.zip`.
