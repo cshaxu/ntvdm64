@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-631: reject three original `NO_W32TRYCALL` alternatives in the
+selected WOW32 `wkman.c` and `wow32.c` contexts, retaining the original guards,
+selected `W32TryCall` path and original diagnostic continuations. This does
+not globally reject `i386` or change the shared header. Scope and proof:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-wow-trycall-exclusion.json`.
+
 MVDM-HOST-DIV-630: correct original diagnostic mappings inside selected
 first-depth branches and their continuations without changing selected
 preprocessing. Original anchors and both diagnostic controls per actual graph

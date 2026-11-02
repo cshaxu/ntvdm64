@@ -1,7 +1,7 @@
 {
   "scope": "first-depth-or-outer #line directives with a unique unchanged code anchor before the next conditional/directive; lexical leads only, require semantic and preprocessor verification; no nested branch audit",
   "stats": {
-    "line_directives_at_depth_0_or_1": 1357
+    "line_directives_at_depth_0_or_1": 1361
   },
   "records": [
     {
@@ -5587,7 +5587,7 @@
       "observed_anchor_logical_line": 227,
       "candidate_original_target": 203,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5601,7 +5601,7 @@
       "observed_anchor_logical_line": 570,
       "candidate_original_target": 545,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5615,7 +5615,7 @@
       "observed_anchor_logical_line": 623,
       "candidate_original_target": 596,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5629,7 +5629,7 @@
       "observed_anchor_logical_line": 857,
       "candidate_original_target": 827,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5643,7 +5643,7 @@
       "observed_anchor_logical_line": 918,
       "candidate_original_target": 882,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5657,119 +5657,119 @@
       "observed_anchor_logical_line": 1135,
       "candidate_original_target": 1128,
       "matches": true,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
       "path": "src/mvdm-host/wow32/wkman.c",
-      "line_directive": 1329,
+      "line_directive": 1326,
       "depth": 0,
       "current_target": 1377,
-      "anchor_current_line": 1331,
+      "anchor_current_line": 1328,
       "anchor_original_line": 1349,
       "anchor": "wPrevTDB = *pCurTDB;",
       "observed_anchor_logical_line": 1378,
       "candidate_original_target": 1348,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
       "path": "src/mvdm-host/wow32/wkman.c",
-      "line_directive": 1351,
+      "line_directive": 1348,
       "depth": 1,
       "current_target": 1373,
-      "anchor_current_line": 1352,
+      "anchor_current_line": 1349,
       "anchor_original_line": 1373,
       "anchor": "setIP( (WORD)vcRemote.Eip );",
       "observed_anchor_logical_line": 1373,
       "candidate_original_target": 1373,
       "matches": true,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
       "path": "src/mvdm-host/wow32/wkman.c",
-      "line_directive": 1358,
+      "line_directive": 1355,
       "depth": 0,
       "current_target": 1408,
-      "anchor_current_line": 1366,
+      "anchor_current_line": 1363,
       "anchor_original_line": 1386,
       "anchor": "td.VDMInfoiTaskID = -1;",
       "observed_anchor_logical_line": 1415,
       "candidate_original_target": 1379,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
       "path": "src/mvdm-host/wow32/wkman.c",
-      "line_directive": 1392,
+      "line_directive": 1389,
       "depth": 1,
       "current_target": 1442,
-      "anchor_current_line": 1394,
+      "anchor_current_line": 1391,
       "anchor_original_line": 1414,
       "anchor": "setIP((WORD)vcSave.Eip);",
       "observed_anchor_logical_line": 1443,
       "candidate_original_target": 1413,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
       "path": "src/mvdm-host/wow32/wkman.c",
-      "line_directive": 1565,
+      "line_directive": 1562,
       "depth": 1,
       "current_target": 1591,
-      "anchor_current_line": 1566,
+      "anchor_current_line": 1563,
       "anchor_original_line": 1591,
       "anchor": "vcRemote.Eip   = getIP();",
       "observed_anchor_logical_line": 1591,
       "candidate_original_target": 1591,
       "matches": true,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
       "path": "src/mvdm-host/wow32/wkman.c",
-      "line_directive": 1571,
+      "line_directive": 1568,
       "depth": 0,
       "current_target": 1596,
-      "anchor_current_line": 1573,
+      "anchor_current_line": 1570,
       "anchor_original_line": 1597,
       "anchor": "W32FreeTask(CURRENTPTD());",
       "observed_anchor_logical_line": 1597,
       "candidate_original_target": 1596,
       "matches": true,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
       "path": "src/mvdm-host/wow32/wkman.c",
-      "line_directive": 1609,
+      "line_directive": 1606,
       "depth": 0,
       "current_target": 1668,
-      "anchor_current_line": 1616,
+      "anchor_current_line": 1613,
       "anchor_original_line": 1643,
       "anchor": "GETVDMPTR(vpnum_tasks, 1, lpNum_Tasks);",
       "observed_anchor_logical_line": 1674,
       "candidate_original_target": 1637,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
       "path": "src/mvdm-host/wow32/wkman.c",
-      "line_directive": 4398,
+      "line_directive": 4395,
       "depth": 0,
       "current_target": 4479,
-      "anchor_current_line": 4410,
+      "anchor_current_line": 4407,
       "anchor_original_line": 4490,
       "anchor": "const LPVOID pBlock,",
       "observed_anchor_logical_line": 4490,
       "candidate_original_target": 4479,
       "matches": true,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -6175,7 +6175,7 @@
       "observed_anchor_logical_line": 66,
       "candidate_original_target": 59,
       "matches": true,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6189,7 +6189,7 @@
       "observed_anchor_logical_line": 73,
       "candidate_original_target": 71,
       "matches": true,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6203,7 +6203,7 @@
       "observed_anchor_logical_line": 93,
       "candidate_original_target": 92,
       "matches": true,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6217,7 +6217,7 @@
       "observed_anchor_logical_line": 197,
       "candidate_original_target": 181,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6231,7 +6231,7 @@
       "observed_anchor_logical_line": 476,
       "candidate_original_target": 470,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6245,7 +6245,7 @@
       "observed_anchor_logical_line": 628,
       "candidate_original_target": 597,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6259,7 +6259,7 @@
       "observed_anchor_logical_line": 703,
       "candidate_original_target": 673,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6273,7 +6273,7 @@
       "observed_anchor_logical_line": 758,
       "candidate_original_target": 745,
       "matches": true,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6287,7 +6287,7 @@
       "observed_anchor_logical_line": 823,
       "candidate_original_target": 784,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6301,7 +6301,7 @@
       "observed_anchor_logical_line": 898,
       "candidate_original_target": 871,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6315,7 +6315,7 @@
       "observed_anchor_logical_line": 1030,
       "candidate_original_target": 1001,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6329,7 +6329,7 @@
       "observed_anchor_logical_line": 1040,
       "candidate_original_target": 1011,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6343,91 +6343,119 @@
       "observed_anchor_logical_line": 1043,
       "candidate_original_target": 1039,
       "matches": true,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
-      "line_directive": 1370,
+      "line_directive": 932,
+      "depth": 1,
+      "current_target": 1125,
+      "anchor_current_line": 942,
+      "anchor_original_line": 1134,
+      "anchor": "DWORD FASTCALL W32TryCall(PVDMFRAME pFrame , LPFNW32 lpfnW32 )",
+      "observed_anchor_logical_line": 1134,
+      "candidate_original_target": 1125,
+      "matches": true,
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
+      "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line_directive": 960,
+      "depth": 0,
+      "current_target": 1152,
+      "anchor_current_line": 972,
+      "anchor_original_line": 1163,
+      "anchor": "INT W32Exception(DWORD dwException, PEXCEPTION_POINTERS pexi)",
+      "observed_anchor_logical_line": 1163,
+      "candidate_original_target": 1152,
+      "matches": true,
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
+      "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line_directive": 1327,
       "depth": 0,
       "current_target": 1640,
-      "anchor_current_line": 1373,
+      "anchor_current_line": 1330,
       "anchor_original_line": 1642,
       "anchor": "BOOL IsDebuggerAttached(VOID)",
       "observed_anchor_logical_line": 1642,
       "candidate_original_target": 1640,
       "matches": true,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
-      "line_directive": 1508,
+      "line_directive": 1465,
       "depth": 0,
       "current_target": 1809,
-      "anchor_current_line": 1516,
+      "anchor_current_line": 1473,
       "anchor_original_line": 1783,
       "anchor": "if (!((ExpLdt)[(Address >> 18) | 1] & LDT_DESC_PRESENT)) {",
       "observed_anchor_logical_line": 1816,
       "candidate_original_target": 1776,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
-      "line_directive": 1557,
+      "line_directive": 1514,
       "depth": 1,
       "current_target": 1889,
-      "anchor_current_line": 1558,
+      "anchor_current_line": 1515,
       "anchor_original_line": 1861,
       "anchor": "return GetPModeVDMPointerMacro(Address, 0);",
       "observed_anchor_logical_line": 1889,
       "candidate_original_target": 1861,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
-      "line_directive": 1560,
+      "line_directive": 1517,
       "depth": 0,
       "current_target": 1891,
-      "anchor_current_line": 1566,
+      "anchor_current_line": 1523,
       "anchor_original_line": 1868,
       "anchor": "ULONG FASTCALL W32GetFastAddress( PVDMFRAME pFrame )",
       "observed_anchor_logical_line": 1896,
       "candidate_original_target": 1863,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
-      "line_directive": 1608,
+      "line_directive": 1565,
       "depth": 0,
       "current_target": 1938,
-      "anchor_current_line": 1613,
+      "anchor_current_line": 1570,
       "anchor_original_line": 1908,
       "anchor": "ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )",
       "observed_anchor_logical_line": 1942,
       "candidate_original_target": 1904,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
-      "line_directive": 1631,
+      "line_directive": 1588,
       "depth": 0,
       "current_target": 2290,
-      "anchor_current_line": 1633,
+      "anchor_current_line": 1590,
       "anchor_original_line": 2252,
       "anchor": "PVOID FASTCALL malloc_w (ULONG size)",
       "observed_anchor_logical_line": 2291,
       "candidate_original_target": 2251,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {

@@ -23,7 +23,8 @@ function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds,
     if($p.ExitCode -ne $expected){throw "Failed $name actual=$($p.ExitCode) expected=$expected"}
 }
 try {
-    Run-Owned 'extract-wndproc' 'powershell.exe' ('-NoProfile -ExecutionPolicy Bypass -File "'+$repo+'/tests/observation/extract-wow-wndproc-fixture.ps1" -BuildRoot "'+$root+'"') 30
+    $childPowerShell = (Get-Process -Id $PID).Path
+    Run-Owned 'extract-wndproc' $childPowerShell ('-NoProfile -ExecutionPolicy Bypass -File "'+$repo+'/tests/observation/extract-wow-wndproc-fixture.ps1" -BuildRoot "'+$root+'"') 30
     if((Get-Content "$root/extract-wndproc.out" -Raw) -notmatch '^WOW_WNDPROC_CURRENT_MIRROR_BYTE_EXACT_BODY'){throw 'Current mirror WndProc body extraction failed'}
     # The fixture compiles the byte-exact extracted WndProc itself. Linking
     # wmdisp32.c as well duplicates that symbol and pulls in its unrelated

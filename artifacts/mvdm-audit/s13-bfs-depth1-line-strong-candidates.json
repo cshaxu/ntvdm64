@@ -8485,7 +8485,7 @@
       "observed_anchor_logical_line": 227,
       "candidate_original_target": 203,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
       "matching_code_lines_before_next_directive": 29,
       "matched_lines": [
@@ -8618,7 +8618,7 @@
       "observed_anchor_logical_line": 623,
       "candidate_original_target": 596,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
       "matching_code_lines_before_next_directive": 28,
       "matched_lines": [
@@ -8747,7 +8747,7 @@
       "observed_anchor_logical_line": 857,
       "candidate_original_target": 827,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
       "matching_code_lines_before_next_directive": 13,
       "matched_lines": [
@@ -8816,7 +8816,7 @@
       "observed_anchor_logical_line": 918,
       "candidate_original_target": 882,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
       "matching_code_lines_before_next_directive": 24,
       "matched_lines": [
@@ -8920,223 +8920,223 @@
     },
     {
       "path": "src/mvdm-host/wow32/wkman.c",
-      "line_directive": 1329,
+      "line_directive": 1326,
       "depth": 0,
       "current_target": 1377,
-      "anchor_current_line": 1331,
+      "anchor_current_line": 1328,
       "anchor_original_line": 1349,
       "anchor": "wPrevTDB = *pCurTDB;",
       "observed_anchor_logical_line": 1378,
       "candidate_original_target": 1348,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
       "matching_code_lines_before_next_directive": 11,
       "matched_lines": [
         {
-          "current": 1331,
+          "current": 1328,
           "original": 1349
         },
         {
-          "current": 1333,
+          "current": 1330,
           "original": 1351
         },
         {
-          "current": 1339,
+          "current": 1336,
           "original": 1357
         },
         {
-          "current": 1340,
+          "current": 1337,
           "original": 1358
         },
         {
-          "current": 1341,
+          "current": 1338,
           "original": 1359
         },
         {
-          "current": 1342,
+          "current": 1339,
           "original": 1360
         },
         {
-          "current": 1343,
+          "current": 1340,
           "original": 1361
         },
         {
-          "current": 1344,
+          "current": 1341,
           "original": 1362
         },
         {
-          "current": 1345,
+          "current": 1342,
           "original": 1363
         },
         {
-          "current": 1346,
+          "current": 1343,
           "original": 1364
         },
         {
-          "current": 1347,
+          "current": 1344,
           "original": 1365
         }
       ]
     },
     {
       "path": "src/mvdm-host/wow32/wkman.c",
-      "line_directive": 1358,
+      "line_directive": 1355,
       "depth": 0,
       "current_target": 1408,
-      "anchor_current_line": 1366,
+      "anchor_current_line": 1363,
       "anchor_original_line": 1386,
       "anchor": "td.VDMInfoiTaskID = -1;",
       "observed_anchor_logical_line": 1415,
       "candidate_original_target": 1379,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
       "matching_code_lines_before_next_directive": 11,
       "matched_lines": [
         {
-          "current": 1363,
+          "current": 1360,
           "original": 1383
         },
         {
-          "current": 1365,
+          "current": 1362,
           "original": 1385
         },
         {
-          "current": 1366,
+          "current": 1363,
           "original": 1386
         },
         {
-          "current": 1367,
+          "current": 1364,
           "original": 1387
         },
         {
-          "current": 1368,
+          "current": 1365,
           "original": 1388
         },
         {
-          "current": 1374,
+          "current": 1371,
           "original": 1394
         },
         {
-          "current": 1377,
+          "current": 1374,
           "original": 1397
         },
         {
-          "current": 1378,
+          "current": 1375,
           "original": 1398
         },
         {
-          "current": 1381,
+          "current": 1378,
           "original": 1401
         },
         {
-          "current": 1383,
+          "current": 1380,
           "original": 1403
         },
         {
-          "current": 1384,
+          "current": 1381,
           "original": 1404
         }
       ]
     },
     {
       "path": "src/mvdm-host/wow32/wkman.c",
-      "line_directive": 1609,
+      "line_directive": 1606,
       "depth": 0,
       "current_target": 1668,
-      "anchor_current_line": 1616,
+      "anchor_current_line": 1613,
       "anchor_original_line": 1643,
       "anchor": "GETVDMPTR(vpnum_tasks, 1, lpNum_Tasks);",
       "observed_anchor_logical_line": 1674,
       "candidate_original_target": 1637,
       "matches": false,
-      "current_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+      "current_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
       "matching_code_lines_before_next_directive": 21,
       "matched_lines": [
         {
-          "current": 1616,
+          "current": 1613,
           "original": 1643
         },
         {
-          "current": 1620,
+          "current": 1617,
           "original": 1647
         },
         {
-          "current": 1625,
+          "current": 1622,
           "original": 1652
         },
         {
-          "current": 1628,
+          "current": 1625,
           "original": 1655
         },
         {
-          "current": 1633,
+          "current": 1630,
           "original": 1660
         },
         {
-          "current": 1636,
+          "current": 1633,
           "original": 1663
         },
         {
-          "current": 1638,
+          "current": 1635,
           "original": 1665
         },
         {
-          "current": 1640,
+          "current": 1637,
           "original": 1667
         },
         {
-          "current": 1656,
+          "current": 1653,
           "original": 1683
         },
         {
-          "current": 1659,
+          "current": 1656,
           "original": 1686
         },
         {
-          "current": 1663,
+          "current": 1660,
           "original": 1690
         },
         {
-          "current": 1666,
+          "current": 1663,
           "original": 1693
         },
         {
-          "current": 1670,
+          "current": 1667,
           "original": 1697
         },
         {
-          "current": 1672,
+          "current": 1669,
           "original": 1699
         },
         {
-          "current": 1673,
+          "current": 1670,
           "original": 1700
         },
         {
-          "current": 1680,
+          "current": 1677,
           "original": 1707
         },
         {
-          "current": 1681,
+          "current": 1678,
           "original": 1708
         },
         {
-          "current": 1682,
+          "current": 1679,
           "original": 1709
         },
         {
-          "current": 1684,
+          "current": 1681,
           "original": 1711
         },
         {
-          "current": 1685,
+          "current": 1682,
           "original": 1712
         },
         {
-          "current": 1687,
+          "current": 1684,
           "original": 1714
         }
       ]
@@ -9152,7 +9152,7 @@
       "observed_anchor_logical_line": 628,
       "candidate_original_target": 597,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
       "matching_code_lines_before_next_directive": 3,
       "matched_lines": [
@@ -9181,7 +9181,7 @@
       "observed_anchor_logical_line": 898,
       "candidate_original_target": 871,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
       "matching_code_lines_before_next_directive": 4,
       "matched_lines": [
@@ -9205,49 +9205,49 @@
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
-      "line_directive": 1508,
+      "line_directive": 1465,
       "depth": 0,
       "current_target": 1809,
-      "anchor_current_line": 1516,
+      "anchor_current_line": 1473,
       "anchor_original_line": 1783,
       "anchor": "if (!((ExpLdt)[(Address >> 18) | 1] & LDT_DESC_PRESENT)) {",
       "observed_anchor_logical_line": 1816,
       "candidate_original_target": 1776,
       "matches": false,
-      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+      "current_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
       "matching_code_lines_before_next_directive": 8,
       "matched_lines": [
         {
-          "current": 1516,
+          "current": 1473,
           "original": 1783
         },
         {
-          "current": 1517,
+          "current": 1474,
           "original": 1784
         },
         {
-          "current": 1520,
+          "current": 1477,
           "original": 1787
         },
         {
-          "current": 1531,
+          "current": 1488,
           "original": 1798
         },
         {
-          "current": 1532,
+          "current": 1489,
           "original": 1799
         },
         {
-          "current": 1538,
+          "current": 1495,
           "original": 1805
         },
         {
-          "current": 1540,
+          "current": 1497,
           "original": 1807
         },
         {
-          "current": 1541,
+          "current": 1498,
           "original": 1808
         }
       ]

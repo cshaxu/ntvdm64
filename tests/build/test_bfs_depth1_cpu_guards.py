@@ -458,3 +458,27 @@ for header, continuation, payload in (
                                                 line.stdout + line.stderr):
             raise SystemExit(f'{header}: original alternative diagnostic line changed')
 print('PASS original i386 header selectors, MSVC profiles and continuation lines')
+
+trycall_marker = '#error Excluded unsupported NO_W32TRYCALL WOW profile'
+for path, following, selected_line in (
+    ('src/mvdm-host/wow32/wkman.c', 1179, None),
+    ('src/mvdm-host/wow32/wkman.c', 1192, None),
+    ('src/mvdm-host/wow32/wow32.c', 1152, 1125),
+):
+    source = (repo / path).read_text(encoding='latin1').split('\n')
+    start, cut, end = find_guard(source, r'^\s*#\s*if\s+NO_W32TRYCALL\b',
+                                 trycall_marker, following, selected_line, path)
+    snippet = ['#if NO_W32TRYCALL', trycall_marker]
+    if selected_line is not None:
+        snippet += ['#else', source[cut + 1].strip(), 'int selected_line = __LINE__;']
+    snippet += ['#endif', source[end + 1].strip(), 'int following_line = __LINE__;']
+    probe.write_text('\n'.join(snippet) + '\n', encoding='ascii')
+    selected = subprocess.run(base + [str(probe)], capture_output=True, text=True, errors='replace')
+    rejected = subprocess.run(base + ['/DNO_W32TRYCALL=1', str(probe)],
+                              capture_output=True, text=True, errors='replace')
+    if (selected.returncode or not re.search(r'int\s+following_line\s*=\s*' + str(following) + r'\s*;', selected.stdout)
+            or (selected_line is not None and not re.search(r'int\s+selected_line\s*=\s*' + str(selected_line) + r'\s*;', selected.stdout))):
+        raise SystemExit('WOW try-call selected mapping failed: ' + path + selected.stderr)
+    if not rejected.returncode or trycall_marker[7:] not in rejected.stdout + rejected.stderr:
+        raise SystemExit('unsupported WOW try-call profile did not fail: ' + path)
+print('PASS three scoped WOW try-call exclusions and original line mappings')

@@ -1,0 +1,189 @@
+{
+  "scope": "Three first-depth NO_W32TRYCALL arms in the two selected WOW C files, not a global i386 exclusion",
+  "plan": {
+    "scope": "three original NO_W32TRYCALL arms in the selected WOW source package",
+    "records": [
+      {
+        "path": "src/mvdm-host/wow32/wkman.c",
+        "before_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+        "candidate_sha256": "4da0f527c7b807b2fa94dba88c2cb49201a01d5e5b071b15ef26a29b2975c493",
+        "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+        "groups": [
+          {
+            "current_group": 1158,
+            "current_cut": null,
+            "current_end": 1163,
+            "original_group": 1173,
+            "original_cut": null,
+            "original_end": 1178,
+            "removed_body_sha256": "75472f39a3c34ee664521bd57c9defbecfc8e72a3ad711e184830b8041b148e3",
+            "removed_body_lines": 4
+          },
+          {
+            "current_group": 1173,
+            "current_cut": null,
+            "current_end": 1177,
+            "original_group": 1187,
+            "original_cut": null,
+            "original_end": 1191,
+            "removed_body_sha256": "f9d5fb9d7bfaf3f5a916adca2c3e84a8958543c518138ad6f2dfeb692e2c0bb9",
+            "removed_body_lines": 3
+          }
+        ],
+        "graph": "build/.ninja/msvc-x86-release/wow32",
+        "selected_preprocessing_equal": true,
+        "selected_sha256": "b44c9b7b5891050da8238d8d7844bacea51d39d6877eb2d5c12681c1fa47b40c"
+      },
+      {
+        "path": "src/mvdm-host/wow32/wow32.c",
+        "before_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+        "candidate_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
+        "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+        "groups": [
+          {
+            "current_group": 929,
+            "current_cut": 976,
+            "current_end": 1003,
+            "original_group": 1077,
+            "original_cut": 1124,
+            "original_end": 1151,
+            "removed_body_sha256": "fb94a6a5fd0646557152a566d9856b9db8c52e67bf4f0b2d56edc6adb71cc9bb",
+            "removed_body_lines": 46
+          }
+        ],
+        "graph": "build/.ninja/msvc-x86-release/wow32",
+        "selected_preprocessing_equal": true,
+        "selected_sha256": "68083406326773f49ecc252a1ccd850c3b02b429dc00957e0c72bebcd915e431"
+      }
+    ]
+  },
+  "negative_controls": [
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "actual_graph": "build/.ninja/msvc-x86-release/wow32",
+      "forced_condition": 1,
+      "first_error_observed": true,
+      "note": "MSVC stops after the first #error; each guard is also tested independently."
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "guard_index": 0,
+      "compiler": "x86",
+      "default_selected": true,
+      "forced_condition_rejected": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "guard_index": 0,
+      "compiler": "x64",
+      "default_selected": true,
+      "forced_condition_rejected": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "guard_index": 1,
+      "compiler": "x86",
+      "default_selected": true,
+      "forced_condition_rejected": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "guard_index": 1,
+      "compiler": "x64",
+      "default_selected": true,
+      "forced_condition_rejected": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "actual_graph": "build/.ninja/msvc-x86-release/wow32",
+      "forced_condition": 1,
+      "first_error_observed": true,
+      "note": "MSVC stops after the first #error; each guard is also tested independently."
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "guard_index": 0,
+      "compiler": "x86",
+      "default_selected": true,
+      "forced_condition_rejected": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "guard_index": 0,
+      "compiler": "x64",
+      "default_selected": true,
+      "forced_condition_rejected": true
+    }
+  ],
+  "line_controls": [
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "original_line": 1183,
+      "verified": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "original_line": 1205,
+      "verified": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "original_line": 1134,
+      "verified": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "original_line": 1163,
+      "verified": true
+    }
+  ],
+  "actual_context": {
+    "scope": "actual selected WOW translation-unit commands and includes; standalone test scripts require separate validation",
+    "records": [
+      {
+        "path": "src/mvdm-host/wow32/wkman.c",
+        "graph": "build/.ninja/msvc-x86-release/wow32",
+        "object": "obj/wkman.obj",
+        "command_sha256": "c1c64b87fb7fc65f22acbf8fd7e5ce5e8dd2822386699c234887d891df5058ae",
+        "source_sha256": "cf3048b3a500d0179a49a9ac7574688facc56faea4c190a53087f421795f672d",
+        "compiler_flag_does_not_define_i386_or_trycall": true,
+        "included_macro_directives": [
+          {
+            "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\inc\\wow.h",
+            "line": 37,
+            "text": "#define NO_W32TRYCALL 1"
+          }
+        ]
+      },
+      {
+        "path": "src/mvdm-host/wow32/wow32.c",
+        "graph": "build/.ninja/msvc-x86-release/wow32",
+        "object": "obj/wow32.obj",
+        "command_sha256": "56bae7d6c2586b6ce6860dd1a7697a3ec4602d98401f36ac746784a2d3ed2e2b",
+        "source_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+        "compiler_flag_does_not_define_i386_or_trycall": true,
+        "included_macro_directives": [
+          {
+            "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\inc\\wow.h",
+            "line": 37,
+            "text": "#define NO_W32TRYCALL 1"
+          }
+        ]
+      }
+    ],
+    "limitations": [
+      "Negative observation alone is not exclusion proof.",
+      "i386 is not globally rejected; this concerns only the listed WOW compilation contexts."
+    ]
+  },
+  "additional_evidence": {
+    "ninja_graphs_checked": 34,
+    "fastwow_asm_graph_references": 0,
+    "selected_wow_exception_fixture": "build/t473-s13/wow-trycall-dispatch-fixture-r2/fixture.out: PASS (8 dispatch phases, 5 hard-error scopes, debugger first chance)",
+    "exception_fixture_initial_failure": "Old child Windows PowerShell failed Get-FileHash; use the invoking pwsh executable and rerun passed",
+    "node_source_check": "node tests/app/wow_console_startup_test.mjs fails on pre-existing assertion that Run16 directly creates worker; unchanged Run16 and test versus HEAD, NTSRV owns creation; not a Full test gate",
+    "builds_and_guards": "selected WOW32 and cached x86/x64 builds, guard and rejection tests passed",
+    "package_comparison": "s13-bfs-depth1-wow-trycall-package-compare.json: 8 identical, 2 PE timestamps only; previously fully tested release retained",
+    "remaining_boundaries": "Previously documented non-CCPU DPMI and x87 fixture failures remain; no claim of universal equivalence"
+  }
+}

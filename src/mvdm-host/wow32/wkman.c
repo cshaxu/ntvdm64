@@ -1153,28 +1153,25 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 1204
+#line 1172
 
 #if NO_W32TRYCALL
-    {
-    extern INT W32FilterException(INT, PEXCEPTION_POINTERS);
-    }
-    try {
+#error Excluded unsupported NO_W32TRYCALL WOW profile
 #endif
+#line 1179
 #if FASTBOPPING
 #error Unsupported excluded original configuration
 #else
-#line 1215
+#line 1183
         SaveIp = getIP();
         host_simulate();
         setIP(SaveIp);
 #endif
-#line 1219
+#line 1187
 #if NO_W32TRYCALL
-    } except (W32FilterException(GetExceptionCode(),
-                                 GetExceptionInformation())) {
-    }
+#error Excluded unsupported NO_W32TRYCALL WOW profile
 #endif
+#line 1192
     //
     //  We should Never Come Here, an app should get terminated via calling wk32killtask thunk
     //  not by doing an unsimulate call.
@@ -1183,12 +1180,12 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #else
-#line 1232
+#line 1200
     if (IsDebuggerAttached() && (flOptions & OPT_DEBUG)) {
         DbgBreakPoint();
     }
 #endif
-#line 1236
+#line 1204
 
     W32DestroyTask(&td);
     host_ExitThread(EXIT_SUCCESS);

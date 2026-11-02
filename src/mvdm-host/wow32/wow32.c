@@ -927,53 +927,9 @@ VOID W32Dispatch()
 
 
 #if NO_W32TRYCALL
-
-INT
-W32FilterException(
-    INT ExceptionCode,
-    PEXCEPTION_POINTERS ExceptionInformation
-    )
-
-/* W32FilterException - Filter WOW32 thread exceptions
- *
- * ENTRY
- *
- *    ExceptionCode - Indicate type of exception
- *
- *    ExceptionInformation - Supplies a pointer to ExceptionInformation
- *                           structure.
- *
- * EXIT
- *
- *    return exception disposition value.
- */
-
-{
-    extern BOOLEAN IsW32WorkerException(VOID);
-    extern VOID W32SetExceptionContext(PCONTEXT);
-
-    INT Disposition = EXCEPTION_CONTINUE_SEARCH;
-
-    if ((ExceptionCode != EXCEPTION_WOW32_ASSERTION) &&
-        IsW32WorkerException()) {
-
-        Disposition = W32Exception(ExceptionCode, ExceptionInformation);
-        if (Disposition == EXCEPTION_EXECUTE_HANDLER) {
-
-            //
-            // if this is the exception we want to handle, change its
-            // context to the point where we can safely fail the api and
-            // return exception disposition as continue execution.
-            //
-
-            W32SetExceptionContext(ExceptionInformation->ContextRecord);
-            Disposition = EXCEPTION_CONTINUE_EXECUTION;
-        }
-    }
-    return(Disposition);
-}
-
+#error Excluded unsupported NO_W32TRYCALL WOW profile
 #else
+#line 1125
 
 /* W32TryCall - Called from FASTWOW to do a TryExcept Around API Calls
  *
@@ -1001,6 +957,7 @@ DWORD FASTCALL W32TryCall(PVDMFRAME pFrame , LPFNW32 lpfnW32 )
 }
 
 #endif
+#line 1152
 
 /* W32Exception - Handle WOW32 thread exceptions
  *
