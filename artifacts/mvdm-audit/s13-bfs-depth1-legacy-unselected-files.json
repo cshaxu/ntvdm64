@@ -1,0 +1,670 @@
+{
+  "scope": "nine whole legacy tool and debugger translation units absent from current selected production and direct compile-test graphs. File-level only; individual macro values are not proven false.",
+  "ninja_graphs_checked": [
+    "build/.ninja/console-observers-x64/build.ninja",
+    "build/.ninja/msvc-x64-formal-release/build.ninja",
+    "build/.ninja/msvc-x64-release/build.ninja",
+    "build/.ninja/msvc-x86-formal-release/build.ninja",
+    "build/.ninja/msvc-x86-release/build.ninja",
+    "build/.ninja/msvc-x86-suballoc-audit/build.ninja",
+    "build/.ninja/observations-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x86/build.ninja",
+    "build/.ninja/t463-s2-dialog-end-boundary/build.ninja",
+    "build/.ninja/t463-s2-dialog-procedure/build.ninja",
+    "build/.ninja/t473-s8-control-boundaries/build.ninja",
+    "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x86/wow32/build.ninja",
+    "build/.ninja/pkg-uuid-x64/frontend/build.ninja",
+    "build/.ninja/pkg-uuid-x64/hook/build.ninja",
+    "build/.ninja/pkg-uuid-x64/launcher/build.ninja",
+    "build/.ninja/pkg-uuid-x64/monitor/build.ninja",
+    "build/.ninja/pkg-uuid-x64/service/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+    "build/.ninja/msvc-x86-release/call-boundaries/build.ninja",
+    "build/.ninja/msvc-x86-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x86-release/worker/build.ninja",
+    "build/.ninja/msvc-x86-release/wow32/build.ninja",
+    "build/.ninja/msvc-x64-release/frontend/build.ninja",
+    "build/.ninja/msvc-x64-release/hook/build.ninja",
+    "build/.ninja/msvc-x64-release/launcher/build.ninja",
+    "build/.ninja/msvc-x64-release/monitor/build.ninja",
+    "build/.ninja/msvc-x64-release/observation/build.ninja",
+    "build/.ninja/msvc-x64-release/service/build.ninja",
+    "build/.ninja/msvc-x64-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x64-release/worker/build.ninja",
+    "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja"
+  ],
+  "build_and_test_reference_audit": "CMakeLists, src target scripts, tests and tools/build searched by component, file path and source inclusion; dat2obj and dasm386 have source-only negative marker checks in tests/build/test_mirror_rejected_conditions.py. Their historical original sources manifests still list them as members of their own unselected legacy targets.",
+  "limitations": "If a later supported target or standalone test builds any of these original files, reopen its condition queue; 34 existing graphs and static searches are not a statement about arbitrary hypothetical configurations.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/decode.c",
+      "current_sha256": "5a8494ecede9f51f185810cd4b632f88157563ce123bfe6c66381e68b3e91cf6",
+      "original_sha256": "b09a41349966bc7cffc4c4a9975455d6e596fc5abfd230539a507fd4238b4c50",
+      "pending_arms_reclassified": 19,
+      "arms": [
+        {
+          "line": 449,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 498,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 612,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 640,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 648,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 660,
+          "kind": "ifdef",
+          "expression": "PIG"
+        },
+        {
+          "line": 662,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 668,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 691,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 799,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 1101,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 1230,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 1309,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 1322,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 1331,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 1341,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 1360,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 1464,
+          "kind": "ifdef",
+          "expression": "SPC386"
+        },
+        {
+          "line": 1468,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/dat2obj/dat2obj.c",
+      "current_sha256": "49f7980131944c8ad92402b96f94ddd2f4be471bba248d7cb986efa4a00e6c89",
+      "original_sha256": "9ddeb8decf8bbadbeaf61dcbee3b2607d6a28a15f06c1b0d35e719563a77c3da",
+      "pending_arms_reclassified": 19,
+      "arms": [
+        {
+          "line": 38,
+          "kind": "ifdef",
+          "expression": "STAND_ALONE"
+        },
+        {
+          "line": 61,
+          "kind": "ifdef",
+          "expression": "IMAGE_FILE_MACHINE_I860"
+        },
+        {
+          "line": 63,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 70,
+          "kind": "ifdef",
+          "expression": "IMAGE_FILE_MACHINE_POWERPC"
+        },
+        {
+          "line": 72,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 82,
+          "kind": "ifdef",
+          "expression": "STAND_ALONE"
+        },
+        {
+          "line": 218,
+          "kind": "ifdef",
+          "expression": "_X86_"
+        },
+        {
+          "line": 239,
+          "kind": "ifndef",
+          "expression": "PROD"
+        },
+        {
+          "line": 339,
+          "kind": "ifdef",
+          "expression": "WITHSIZE"
+        },
+        {
+          "line": 344,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 359,
+          "kind": "ifdef",
+          "expression": "WITHSIZE"
+        },
+        {
+          "line": 363,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 389,
+          "kind": "ifdef",
+          "expression": "WITHSIZE"
+        },
+        {
+          "line": 393,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 428,
+          "kind": "ifdef",
+          "expression": "WITHSIZE"
+        },
+        {
+          "line": 479,
+          "kind": "ifdef",
+          "expression": "STAND_ALONE"
+        },
+        {
+          "line": 481,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 489,
+          "kind": "ifndef",
+          "expression": "STAND_ALONE"
+        },
+        {
+          "line": 506,
+          "kind": "ifdef",
+          "expression": "STAND_ALONE"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/procdep.c",
+      "current_sha256": "53168b175334532d20014c54b12591f2d8529de7f8a87535d1cd8e737035c28a",
+      "original_sha256": "33912500d91e1c6a59c7986f19c9e7b251371ee54f675407e1cbd90b8ad7910a",
+      "pending_arms_reclassified": 18,
+      "arms": [
+        {
+          "line": 66,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 72,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 194,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 200,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 238,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 244,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 323,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 329,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 366,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 372,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 409,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 415,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 453,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 459,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 497,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 503,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 618,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 624,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/pmode.c",
+      "current_sha256": "a05fd84c20b672bc35b253302b1a044671e0803d822135b9ca24009e1fa4d644",
+      "original_sha256": "30187f0832c3ea0bc1933321fb247eec4b6d3d2a4749ad05375dd44409be0349",
+      "pending_arms_reclassified": 4,
+      "arms": [
+        {
+          "line": 194,
+          "kind": "ifdef",
+          "expression": "i386"
+        },
+        {
+          "line": 196,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 260,
+          "kind": "ifndef",
+          "expression": "i386"
+        },
+        {
+          "line": 279,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/platform.c",
+      "current_sha256": "9cdfe0eee7f303359ebb06fa2fcc2de4a3561d5eb21e2d75f8bcd9fa7a5e2f7a",
+      "original_sha256": "3483655e311e105900194db2a9bd6083bc03bb2da943bdd16e8da29ab74f9e53",
+      "pending_arms_reclassified": 14,
+      "arms": [
+        {
+          "line": 47,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 49,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 62,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 64,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 76,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 78,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 90,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 92,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 104,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 106,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 118,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 120,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 132,
+          "kind": "if",
+          "expression": "defined(i386)"
+        },
+        {
+          "line": 134,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/util.c",
+      "current_sha256": "86a2ad67c7832af1ea19311a307e661c66f521ad74506e7c7804c56f66286ee3",
+      "original_sha256": "572625bf57190ade673921f11a564c36e45f8458cbb5c63726b9d00d55e89702",
+      "pending_arms_reclassified": 10,
+      "arms": [
+        {
+          "line": 60,
+          "kind": "ifndef",
+          "expression": "i386"
+        },
+        {
+          "line": 132,
+          "kind": "ifndef",
+          "expression": "i386"
+        },
+        {
+          "line": 187,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 255,
+          "kind": "ifndef",
+          "expression": "i386"
+        },
+        {
+          "line": 274,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 357,
+          "kind": "ifdef",
+          "expression": "i386"
+        },
+        {
+          "line": 370,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 403,
+          "kind": "ifdef",
+          "expression": "i386"
+        },
+        {
+          "line": 423,
+          "kind": "ifdef",
+          "expression": "i386"
+        },
+        {
+          "line": 469,
+          "kind": "ifdef",
+          "expression": "i386"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/misc.c",
+      "current_sha256": "b6757f032042b7b1eb431a026e54e1bf08a4662ca522e6dd0d76fda1d3a0a647",
+      "original_sha256": "bfbf56ceda6cdb56e09ba098377b1edaa2aa9cfa168c3d79b083e74d754bfca9",
+      "pending_arms_reclassified": 7,
+      "arms": [
+        {
+          "line": 508,
+          "kind": "ifndef",
+          "expression": "i386"
+        },
+        {
+          "line": 567,
+          "kind": "ifdef",
+          "expression": "i386"
+        },
+        {
+          "line": 583,
+          "kind": "ifdef",
+          "expression": "i386"
+        },
+        {
+          "line": 605,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 671,
+          "kind": "ifdef",
+          "expression": "i386"
+        },
+        {
+          "line": 687,
+          "kind": "ifdef",
+          "expression": "i386"
+        },
+        {
+          "line": 709,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/bde/bdeutil.c",
+      "current_sha256": "f9364b2b0d56eb3c6fd24d96058cdd1d1c5ab41b38480d9225f56ec5cf6bc95f",
+      "original_sha256": "0b9f7bdcb968ad38d95c2170afb0e84325c77e6d7a68161b6d63a89e4fcd225b",
+      "pending_arms_reclassified": 10,
+      "arms": [
+        {
+          "line": 39,
+          "kind": "ifndef",
+          "expression": "i386"
+        },
+        {
+          "line": 106,
+          "kind": "ifndef",
+          "expression": "i386"
+        },
+        {
+          "line": 163,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 230,
+          "kind": "ifndef",
+          "expression": "i386"
+        },
+        {
+          "line": 249,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 375,
+          "kind": "ifdef",
+          "expression": "i386"
+        },
+        {
+          "line": 391,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 436,
+          "kind": "ifdef",
+          "expression": "i386"
+        },
+        {
+          "line": 452,
+          "kind": "ifdef",
+          "expression": "i386"
+        },
+        {
+          "line": 498,
+          "kind": "ifdef",
+          "expression": "i386"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmdbg/vdmdbg.c",
+      "current_sha256": "02ed2ac6cb65dfe3565e90a84c9dab2f0f65183d2d6d280a2b06f2edb7d51707",
+      "original_sha256": "11cad596254d09929987cf110f5b492862972d06077c5fecc100dc79b087e1d2",
+      "pending_arms_reclassified": 10,
+      "arms": [
+        {
+          "line": 37,
+          "kind": "if",
+          "expression": "DBG"
+        },
+        {
+          "line": 117,
+          "kind": "ifdef",
+          "expression": "i386"
+        },
+        {
+          "line": 122,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 215,
+          "kind": "ifndef",
+          "expression": "i386"
+        },
+        {
+          "line": 525,
+          "kind": "ifdef",
+          "expression": "i386"
+        },
+        {
+          "line": 527,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 1511,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        },
+        {
+          "line": 1535,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        },
+        {
+          "line": 1566,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        },
+        {
+          "line": 1607,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        }
+      ]
+    }
+  ]
+}
