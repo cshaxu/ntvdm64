@@ -1987,3 +1987,7 @@ Mapped seven original VDM classifier, DefWindowProc, dialog and USER table selec
 ### Map twelve further original selectors to selected local owners
 
 Matched twelve additional original conditional lines to current depth-2 structures using exact preceding three nonempty source anchors and retained parent ownership. No nested bodies were audited or changed. The separate original multiplicity inventory now has 21 candidate records; partially resolved records keep their remaining count and mapped original line numbers. Evidence: `s13-bfs-depth1-nested-original-owner-map.json`.
+
+### Reconcile earlier USER client selector restorations
+
+Verified against the fixed original and current queue that five original USER client DBG/HANDLE_FIXUP/FE_SB conditions were already restored at depth 1 in earlier batches; the remaining clmsg DEBUG condition exists inside the selected default-window owner and is queued at depth 2. Removed four resolved multiplicity records; 17 remain. The original whole-file _USERCLI_ guard remains unresolved: the current header intentionally has separately guarded multiple inclusion cohorts, so blindly wrapping the file could suppress selected declarations. No source changed. Evidence: `s13-bfs-depth1-usercli-and-clmsg-reconciliation.json`.

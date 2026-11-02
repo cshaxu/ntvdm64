@@ -1,0 +1,84 @@
+{
+  "scope": "five original USER client selectors restored in earlier batches and one DEBUG selector already beneath selected owner",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2307,
+      "current_line": 1083,
+      "expression": "DBG",
+      "kind": "restored original root",
+      "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+      "working_sha256": "771fc0fbcce586991c814a40450ce15931ebc13c1d83ee3695b1b4117f9c738f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2320,
+      "current_line": 1090,
+      "expression": "DBG",
+      "kind": "restored original root",
+      "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+      "working_sha256": "771fc0fbcce586991c814a40450ce15931ebc13c1d83ee3695b1b4117f9c738f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2342,
+      "current_line": 1097,
+      "expression": "HANDLE_FIXUP",
+      "kind": "restored original root",
+      "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+      "working_sha256": "771fc0fbcce586991c814a40450ce15931ebc13c1d83ee3695b1b4117f9c738f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2358,
+      "current_line": 1107,
+      "expression": "HANDLE_FIXUP",
+      "kind": "restored original root",
+      "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+      "working_sha256": "771fc0fbcce586991c814a40450ce15931ebc13c1d83ee3695b1b4117f9c738f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2374,
+      "current_line": 1117,
+      "expression": "FE_SB",
+      "kind": "restored original root",
+      "original_sha256": "11edc7c5b3f32ce40114bd0c4026e43381f2b131f036506376e23c8eb1db5bba",
+      "working_sha256": "771fc0fbcce586991c814a40450ce15931ebc13c1d83ee3695b1b4117f9c738f"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 572,
+      "current_line": 60,
+      "parent_line": 40,
+      "expression": "DEBUG",
+      "kind": "original selector beneath retained local default-window owner; queued for next depth",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "working_sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c"
+    }
+  ],
+  "limits": "The _USERCLI_ original whole-file guard remains unresolved because this adapted header has independently guarded multiple inclusion sections; no source edit or unsupported equivalence claim.",
+  "unresolved_original_header_guard": {
+    "original_selector": "#ifndef _USERCLI_",
+    "reason": "wow_edit_state_bindings.c includes wow_edit_state_bindings.h, whose lookaside header includes usercli.h with WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY, then includes usercli.h again after defining combo and extent layouts; an enclosing original whole-file guard would suppress the second selected cohort.",
+    "source_sha256": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+        "sha256": "771fc0fbcce586991c814a40450ce15931ebc13c1d83ee3695b1b4117f9c738f"
+      },
+      {
+        "path": "src/wow32-dll/source/wow_edit_state_bindings.c",
+        "sha256": "e97f2c86a5dd8611bed431801a070357d443eecc94b7446df47d186b51b54dae"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_edit_state_bindings.h",
+        "sha256": "1f142dcf71744bfcab3b8f5fef99f3ce25c8e7da4ad4ed482bc44a5e96512911"
+      },
+      {
+        "path": "src/wow32-dll/include/wow_edit_lookaside_bindings.h",
+        "sha256": "353af4d5f10a7998e0b694ca4a587bd846972cb0b7f1ae35556cb199dcc2ddf3"
+      }
+    ],
+    "status": "pending; no semantic change approved or made"
+  }
+}
