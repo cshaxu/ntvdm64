@@ -5582,6 +5582,15 @@
       "current_actual_includers": 2
     },
     {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "start": 146,
+      "kind": "else",
+      "expression": "",
+      "pending_reason": "combined-i386-cpu40-supported-context-unresolved",
+      "guard_only": false,
+      "current_actual_includers": 2
+    },
+    {
       "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
       "start": 138,
       "kind": "ifdef",
@@ -8036,6 +8045,12 @@
       "guard_only": true,
       "has_current_includer": true,
       "count": 48
+    },
+    {
+      "reason": "combined-i386-cpu40-supported-context-unresolved",
+      "guard_only": false,
+      "has_current_includer": true,
+      "count": 1
     },
     {
       "reason": "file-not-witnessed-in-product",

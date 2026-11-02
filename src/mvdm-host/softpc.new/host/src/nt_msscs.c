@@ -144,7 +144,11 @@ InitialiseDosEmulation(int argc, char **argv)
 #error Excluded unsupported non-CPU40 virtual interrupt state
 #endif
 #else
-#error Excluded unsupported original i386 host monitor virtual interrupt state
+#ifdef CPU_40_STYLE
+    fVirtualInt |= MIPS_BIT_MASK;
+#else
+#error Excluded unsupported non-CPU40 virtual interrupt state
+#endif
 #endif /* i386 */
 #line 128
     sas_storedw((ULONG)FIXED_NTVDMSTATE_LINEAR,fVirtualInt);

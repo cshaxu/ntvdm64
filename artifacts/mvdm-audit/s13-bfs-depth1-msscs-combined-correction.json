@@ -1,0 +1,20 @@
+{
+  "scope": "correct premature i386 outer rejection; preserve earlier CPU40 behavior without asserting combined configuration is supported",
+  "before_sha256": "a8382d6caa876cfcd79e28a98dc5c9b05105da3d090b0635bb87e5b13a4abb25",
+  "after_sha256": "52eeb0eadc50d81bfd2bc7e6024163232a0906e6aa6421972f5f5dfff67afa34",
+  "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+  "controls": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "selected_output_equal_ignoring_blank_lines": true,
+      "sha256": "10f6091207531f60859622b67ab79b456844307307ff728fd1f528698113f2bb"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "selected_output_equal_ignoring_blank_lines": true,
+      "sha256": "10f6091207531f60859622b67ab79b456844307307ff728fd1f528698113f2bb"
+    }
+  ],
+  "earlier_evidence": "s13-mirror-conditional-reconciliation.md DIV-554",
+  "pending": "Whether i386+CPU40 is a supported context for this source"
+}

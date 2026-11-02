@@ -164,8 +164,8 @@ print('PASS original ntrtl MIDL_PASS inline selection')
 
 virtual_state = (repo / 'src/mvdm-host/softpc.new/host/src/nt_msscs.c').read_text(encoding='latin1').split('\n')
 selected = [i for i, line in enumerate(virtual_state) if 'fVirtualInt |= MIPS_BIT_MASK;' in line]
-if len(selected) != 1:
-    raise SystemExit('missing unique virtual interrupt state selection')
+if len(selected) != 2:
+    raise SystemExit('missing CPU40 virtual interrupt state in an original outer alternative')
 i = selected[0]
 if virtual_state[i-1].strip() != '#ifdef CPU_40_STYLE' or virtual_state[i+1].strip() != '#else':
     raise SystemExit('virtual interrupt state lost CPU40 boundary')
@@ -176,14 +176,15 @@ if allowed.returncode or not rejected.returncode or 'Excluded unsupported non-CP
     raise SystemExit('virtual interrupt state CPU40 selection failed: ' + allowed.stderr + rejected.stderr)
 print('PASS CPU40 virtual interrupt state; unsupported hardware-monitor alternative rejected')
 
-if virtual_state[i-2].strip() != '#ifndef i386' or virtual_state[i+4].strip() != '#else' or virtual_state[i+6].strip() != '#endif /* i386 */':
+if virtual_state[i-2].strip() != '#ifndef i386' or virtual_state[i+4].strip() != '#else' or virtual_state[i+10].strip() != '#endif /* i386 */':
     raise SystemExit('virtual interrupt state lost original i386 outer boundary')
-probe.write_text('\n'.join(virtual_state[i-2:i+7]) + '\n', encoding='ascii')
+probe.write_text('\n'.join(virtual_state[i-2:i+11]) + '\n', encoding='ascii')
 allowed = subprocess.run(base[:-1] + ['/DCPU_40_STYLE'] + base[-1:], capture_output=True, text=True, errors='replace')
-rejected = subprocess.run(base[:-1] + ['/DCPU_40_STYLE', '/Di386'] + base[-1:], capture_output=True, text=True, errors='replace')
-if allowed.returncode or not rejected.returncode or 'Excluded unsupported original i386 host monitor virtual interrupt state' not in rejected.stdout + rejected.stderr:
+combined = subprocess.run(base[:-1] + ['/DCPU_40_STYLE', '/Di386'] + base[-1:], capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base[:-1] + ['/Di386'] + base[-1:], capture_output=True, text=True, errors='replace')
+if allowed.returncode or combined.returncode or 'fVirtualInt |= MIPS_BIT_MASK;' not in combined.stdout or not rejected.returncode or 'Excluded unsupported non-CPU40 virtual interrupt state' not in rejected.stdout + rejected.stderr:
     raise SystemExit('original i386 virtual interrupt boundary failed: ' + allowed.stderr + rejected.stderr)
-print('PASS original i386 virtual interrupt boundary')
+print('PASS original i386 boundary with CPU40 behavior preserved in either arm')
 
 mouse = (repo / 'src/mvdm-host/softpc.new/base/keymouse/mouse_io.c').read_text(encoding='latin1')
 mouse = mouse[mouse.index('LOCAL void jump_to_user_subroutine IFN3'):]

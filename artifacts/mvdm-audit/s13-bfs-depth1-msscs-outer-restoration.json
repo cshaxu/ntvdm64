@@ -19,5 +19,6 @@
   ],
   "scope": "restore fixed OpenNT first-depth i386 selector; existing DIV-039 CPU40 condition remains unreviewed at next depth",
   "restored_first_depth_groups": 1,
-  "rejected_alternative": "original i386 hardware monitor virtual interrupt state"
+  "rejected_alternative": "original i386 hardware monitor virtual interrupt state",
+  "followup_correction": "Original i386 arm rejection superseded: prior DIV-554 documents possible i386/CPU40 coexistence. Preserve DIV-039 CPU40 behavior in both arms and keep supported-context classification pending; see s13-bfs-depth1-msscs-combined-correction.json."
 }
