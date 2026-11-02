@@ -1887,3 +1887,7 @@ Classified three existing non-PROD #error arms in c_xcptn.c, ica.c and timer.c a
 ### First-depth source-specific X86GFX guards
 
 Verified eight existing excluded X86GFX alternatives in mouse_io.c, nt_fulsc.c, nt_graph.c and nt_mouse.c against both worker compile commands and direct independent test/source use. This is source-specific: CVIDC has a real X86GFX rule and the old T281 nt_bop island also names it. No source or binaries changed. Original-boundary correspondence is tracked separately. Status: {'unselected-file': 742, 'newly-excluded': 642, 'already-excluded': 1689, 'pending': 101, 'retained-observed': 1869, 'retained-original-assertion': 9}; child categories: {'retained-observed': 1410, 'pending': 80, 'unselected-file': 1551}. Evidence: `s13-bfs-depth1-existing-x86gfx-guards.json`; queue: `s13-bfs-depth1-working-queue-195r79.zip`.
+
+### First-depth mouse V7VGA guards
+
+Verified two existing non-V7VGA #error alternatives in mouse_io.c against both worker commands and independent mouse-test source usage. No source or binary changed; disposition is source-specific and exact original-boundary correspondence remains under separate review. Status: {'unselected-file': 742, 'newly-excluded': 642, 'already-excluded': 1691, 'pending': 99, 'retained-observed': 1869, 'retained-original-assertion': 9}; children: {'retained-observed': 1410, 'pending': 80, 'unselected-file': 1551}. Evidence: `s13-bfs-depth1-existing-v7vga-guards.json`; queue: `s13-bfs-depth1-working-queue-195r80.zip`.

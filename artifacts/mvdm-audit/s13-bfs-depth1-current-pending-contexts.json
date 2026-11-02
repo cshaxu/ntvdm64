@@ -443,24 +443,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 1543,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 1559,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/support/xt.c",
       "start": 164,
       "kind": "else",
@@ -934,7 +916,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 16
+      "count": 14
     },
     {
       "reason": "combined-i386-cpu40-supported-context-unresolved",

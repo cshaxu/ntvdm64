@@ -1,0 +1,30 @@
+{
+  "scope": "two existing V7VGA alternatives in mouse_io.c; no source changes",
+  "evidence": "Two real worker compile commands define V7VGA, source does not mutate it. Independent mouse-coordinate fixture extracts individual functions rather than compiling full translation unit; performance worker flags define V7VGA.",
+  "limits": "Disposition is source-specific; original selector exact-boundary correspondence is separately reviewed. Future supported display profiles must reopen this classification.",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "current_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7",
+  "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+  "contexts": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/keymouse/mouse_io.obj",
+      "command_sha256": "7ba6cade9bd1b4fc0dc01fc82cd424e883af3710f207aa771b1fd25a5807d5a2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/keymouse/mouse_io.obj",
+      "command_sha256": "7ba6cade9bd1b4fc0dc01fc82cd424e883af3710f207aa771b1fd25a5807d5a2"
+    }
+  ],
+  "guards": [
+    {
+      "line": 1543,
+      "rejection": "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+    },
+    {
+      "line": 1559,
+      "rejection": "#error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register."
+    }
+  ]
+}
