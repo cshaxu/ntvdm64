@@ -1,0 +1,56 @@
+{
+  "scope": "one first-depth FLOPPY_B arm in alternate CMOS source; selected disk implementation unchanged",
+  "record": {
+    "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+    "current_start": 364,
+    "current_end": 368,
+    "original_start": 363,
+    "original_end": 367,
+    "body_sha256": "10d33f6e5ef49ae14ef67197fa47642f1631f1be1164a4e5d0f42036ba62baff",
+    "removed_lines": 3,
+    "controls": [
+      {
+        "arch": "x86",
+        "normal_pass": true,
+        "forced_rejected": true
+      },
+      {
+        "arch": "x64",
+        "normal_pass": true,
+        "forced_rejected": true
+      }
+    ]
+  },
+  "file": {
+    "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+    "before": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624",
+    "after": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
+  },
+  "removed_inner_group_count": 0,
+  "macro_evidence": {
+    "compile_commands_checked": 2070,
+    "jobs_sha256": "623d1067dca46b9fabf571db17d6567d8f03e04047245ca9ac11fcda71c725ea",
+    "command_macro_definitions_found": 0,
+    "source_generated_sdk_definitions_found": 0,
+    "scope": "src, tests, tools, generated Ninja trees and eight SDK include roots",
+    "controls": "x86/x64 normal/forced selector controls; original removed body matched after line-ending normalization; selected disk implementation untouched"
+  },
+  "validation": {
+    "x86_cached_build": "passed; no work",
+    "x64_cached_build": "passed; no work",
+    "guard_gate": "x86 and x64; see progress record",
+    "published_release": "all ten product images byte-identical to accepted prior release at both destinations",
+    "published_images": [
+      "run16.exe",
+      "ntsrv.exe",
+      "ntcon.exe",
+      "ntvdm.exe",
+      "ntvwm.exe",
+      "ntmon.exe",
+      "WOW32.DLL",
+      "VDMREDIR.DLL",
+      "nthook32.dll",
+      "nthook64.dll"
+    ]
+  }
+}

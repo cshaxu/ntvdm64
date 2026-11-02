@@ -211,6 +211,7 @@ for path, macro, expected_count, divergence in (
     ('src/mvdm-host/softpc.new/dat2obj/dat2obj.c', '_PPC_', 1, 'MVDM-HOST-DIV-609'),
     ('src/mvdm-host/softpc.new/dat2obj/dat2obj.c', 'ALPHA', 1, 'MVDM-HOST-DIV-609'),
     ('src/mvdm-host/softpc.new/base/system/cmos.c', 'TEST_HARNESS', 2, 'MVDM-HOST-DIV-608'),
+    ('src/mvdm-host/softpc.new/base/system/cmos.c', 'FLOPPY_B', 1, 'MVDM-HOST-DIV-612'),
     ('src/mvdm-host/softpc.new/base/dasm386/decode.c', 'CPU_286', 13, 'MVDM-HOST-DIV-607'),
     ('src/non-mvdm/base/win32/server/srvinit.c', 'WX86', 2, 'OPENNT-HOST-150'),
     ('src/non-mvdm/public/internal/ds/inc/token.h', 'DOS3', 1, 'OPENNT-HOST-150'),

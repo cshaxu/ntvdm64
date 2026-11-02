@@ -1,5 +1,9 @@
 # mvdm
 
+MVDM-HOST-DIV-612: preserve the original FLOPPY_B selector in the unselected
+CMOS implementation and reject its unsupported profile. This does not change
+the selected disk implementation. See `../../artifacts/mvdm-audit/s13-bfs-depth1-floppy-b-batch.json`.
+
 MVDM-HOST-DIV-611: preserve original first-depth selectors for unsupported
 SIM32 ALLOCA macro profile, rejecting their bodies. Source and
 SDK macro scans and x86/x64 controls are recorded in

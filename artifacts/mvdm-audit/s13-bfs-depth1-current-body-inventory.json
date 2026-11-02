@@ -33734,7 +33734,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 6,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
@@ -33747,7 +33747,7 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
@@ -33760,7 +33760,7 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 29,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
@@ -33773,7 +33773,7 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
@@ -33786,7 +33786,7 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
@@ -33799,7 +33799,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
@@ -33812,7 +33812,7 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 35,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
@@ -33825,436 +33825,436 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 7,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
       "start": 364,
-      "cut": 368,
-      "group_end": 368,
+      "cut": 366,
+      "group_end": 366,
       "kind": "ifdef",
       "expression": "FLOPPY_B",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 3,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 388,
-      "cut": 390,
-      "group_end": 394,
+      "start": 387,
+      "cut": 389,
+      "group_end": 393,
       "kind": "ifndef",
       "expression": "NTVDM",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 390,
-      "cut": 394,
-      "group_end": 394,
+      "start": 389,
+      "cut": 393,
+      "group_end": 393,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 396,
-      "cut": 405,
-      "group_end": 405,
+      "start": 395,
+      "cut": 404,
+      "group_end": 404,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 8,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 429,
-      "cut": 434,
-      "group_end": 434,
+      "start": 428,
+      "cut": 433,
+      "group_end": 433,
       "kind": "ifndef",
       "expression": "NTVDM",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 464,
-      "cut": 478,
-      "group_end": 478,
+      "start": 463,
+      "cut": 477,
+      "group_end": 477,
       "kind": "ifndef",
       "expression": "NTVDM",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 13,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 509,
-      "cut": 515,
-      "group_end": 515,
+      "start": 508,
+      "cut": 514,
+      "group_end": 514,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 5,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 575,
-      "cut": 577,
-      "group_end": 577,
+      "start": 574,
+      "cut": 576,
+      "group_end": 576,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 596,
-      "cut": 598,
-      "group_end": 598,
+      "start": 595,
+      "cut": 597,
+      "group_end": 597,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 639,
-      "cut": 641,
-      "group_end": 641,
+      "start": 638,
+      "cut": 640,
+      "group_end": 640,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 676,
-      "cut": 678,
-      "group_end": 678,
+      "start": 675,
+      "cut": 677,
+      "group_end": 677,
       "kind": "ifndef",
       "expression": "NTVDM",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 683,
-      "cut": 685,
-      "group_end": 685,
+      "start": 682,
+      "cut": 684,
+      "group_end": 684,
       "kind": "ifndef",
       "expression": "NTVDM",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 695,
-      "cut": 722,
-      "group_end": 741,
+      "start": 694,
+      "cut": 721,
+      "group_end": 740,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 26,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 722,
-      "cut": 741,
-      "group_end": 741,
+      "start": 721,
+      "cut": 740,
+      "group_end": 740,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 18,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 819,
-      "cut": 826,
-      "group_end": 826,
+      "start": 818,
+      "cut": 825,
+      "group_end": 825,
       "kind": "ifdef",
       "expression": "SEGMENTATION",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 6,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 828,
-      "cut": 837,
-      "group_end": 837,
+      "start": 827,
+      "cut": 836,
+      "group_end": 836,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 8,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 839,
-      "cut": 849,
-      "group_end": 849,
+      "start": 838,
+      "cut": 848,
+      "group_end": 848,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 9,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 925,
-      "cut": 928,
-      "group_end": 928,
+      "start": 924,
+      "cut": 927,
+      "group_end": 927,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 964,
-      "cut": 966,
-      "group_end": 966,
+      "start": 963,
+      "cut": 965,
+      "group_end": 965,
       "kind": "ifndef",
       "expression": "TEST_HARNESS",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 968,
-      "cut": 972,
-      "group_end": 972,
+      "start": 967,
+      "cut": 971,
+      "group_end": 971,
       "kind": "ifndef",
       "expression": "NTVDM",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 974,
-      "cut": 979,
-      "group_end": 979,
+      "start": 973,
+      "cut": 978,
+      "group_end": 978,
       "kind": "ifndef",
       "expression": "NTVDM",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 984,
-      "cut": 989,
-      "group_end": 989,
+      "start": 983,
+      "cut": 988,
+      "group_end": 988,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1085,
-      "cut": 1087,
-      "group_end": 1087,
+      "start": 1084,
+      "cut": 1086,
+      "group_end": 1086,
       "kind": "if",
       "expression": "!defined(JOKER) && !defined(NTVDM)",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1096,
-      "cut": 1098,
-      "group_end": 1098,
+      "start": 1095,
+      "cut": 1097,
+      "group_end": 1097,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1103,
-      "cut": 1107,
-      "group_end": 1111,
+      "start": 1102,
+      "cut": 1106,
+      "group_end": 1110,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1107,
-      "cut": 1111,
-      "group_end": 1111,
+      "start": 1106,
+      "cut": 1110,
+      "group_end": 1110,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1113,
-      "cut": 1115,
-      "group_end": 1124,
+      "start": 1112,
+      "cut": 1114,
+      "group_end": 1123,
       "kind": "if",
       "expression": "defined(NTVDM) || defined(macintosh)",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1115,
-      "cut": 1124,
-      "group_end": 1124,
+      "start": 1114,
+      "cut": 1123,
+      "group_end": 1123,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 8,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1126,
-      "cut": 1134,
-      "group_end": 1134,
+      "start": 1125,
+      "cut": 1133,
+      "group_end": 1133,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 7,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1137,
-      "cut": 1176,
-      "group_end": 1230,
+      "start": 1136,
+      "cut": 1175,
+      "group_end": 1229,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 38,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1176,
-      "cut": 1230,
-      "group_end": 1230,
+      "start": 1175,
+      "cut": 1229,
+      "group_end": 1229,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 53,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1251,
-      "cut": 1289,
-      "group_end": 1289,
+      "start": 1250,
+      "cut": 1288,
+      "group_end": 1288,
       "kind": "if",
       "expression": "!defined(NTVDM) && !defined(macintosh)",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 37,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
-      "start": 1293,
-      "cut": 1295,
-      "group_end": 1295,
+      "start": 1292,
+      "cut": 1294,
+      "group_end": 1294,
       "kind": "ifdef",
       "expression": "TEST_HARNESS",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "1383af3c9501e18087a9d73d1cc751d26668004fd5a417ceb6351731e3b3c624"
+      "source_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 966,
-    "newly-excluded": 614,
+    "pending": 965,
+    "newly-excluded": 615,
     "already-excluded": 1603,
     "retained-observed": 1863,
     "retained-original-assertion": 4
   },
   "pending_by_guard": {
-    "not-guard": 851,
+    "not-guard": 850,
     "guard": 115
   }
 }
