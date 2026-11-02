@@ -44,11 +44,11 @@
 #endif	/* ANSI */
 
 #ifndef TRUE
-#define TRUE	((IBOOL)!0)
+#error Excluded unsupported missing TRUE base profile
 #endif
 
 #ifndef FALSE
-#define FALSE	((IBOOL)0)
+#error Excluded unsupported missing FALSE base profile
 #endif
 
 #define	PRIVATETYPE		/* documents private typedefs local to a source file */

@@ -1,0 +1,24 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
+  "original_sha256": "084991cfc23dc79529cc67a43488ec114be882fb62a9f95b879e1b6995f7afae",
+  "before_sha256": "abd9b6682731d5452193222e4e5ced6d9b6cbec8416129eb46876e2b6ae1f2b9",
+  "after_sha256": "0ce657cf891190110dce0aa667ab4ff29f9ad30353df86f2a252a59e0a3dc527",
+  "arms": [
+    {
+      "macro": "TRUE",
+      "original_group": 46,
+      "removed_original_body_sha256": "343bebc179d2876e504b8c289e7ff103c5293eeb77e1642d00e2d6d53793f489"
+    },
+    {
+      "macro": "FALSE",
+      "original_group": 50,
+      "removed_original_body_sha256": "588783fe183d2b099656cffdac06ae83f7770a55a41fbb565a78750928261426"
+    }
+  ],
+  "include_owner": "softpc.new/host/inc/insignia.h; windows.h or previously selected nt.h supplies TRUE/FALSE before base_def.h",
+  "scope": "Two first-depth base_def.h fallback branches; selected current host contexts",
+  "proof": "base_def.h has one direct include owner insignia.h; its selected path includes Windows headers first. Both worker graphs rebuild 319 actions each; current nt.h supplies windows.h. Independent object fixtures compile with real flags. Absence of NT_INCLUDED overrides was checked in current selected builds and test entry points.",
+  "validation": "x86 and x64 reference workers linked; x86/x64 incremental builds no-op; synthetic selected/forced-missing provider controls and line checks pass; ios/gfi/vdd/umb/keycode independently built object contracts pass.",
+  "package": "s13-bfs-depth1-base-bool-fallbacks-package-compare.json: 8 exact, 2 timestamp only; previous fully tested release remains.",
+  "limits": "Independent fixtures cover their own contexts only; unsupported future SDK configurations require reassessment. Existing DPMI non-CCPU and x87 fixture gaps remain."
+}

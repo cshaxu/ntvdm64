@@ -1181,24 +1181,6 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
-      "start": 46,
-      "kind": "ifndef",
-      "expression": "TRUE",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 644
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/base_def.h",
-      "start": 50,
-      "kind": "ifndef",
-      "expression": "FALSE",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 644
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
       "start": 241,
       "kind": "else",
@@ -4297,7 +4279,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 21
+      "count": 19
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",

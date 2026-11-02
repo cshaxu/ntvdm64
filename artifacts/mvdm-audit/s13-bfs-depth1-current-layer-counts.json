@@ -3,8 +3,8 @@
   "depth1_groups": 4073,
   "depth1_arms": 5052,
   "depth1_status": {
-    "pending": 476,
-    "newly-excluded": 640,
+    "pending": 474,
+    "newly-excluded": 642,
     "already-excluded": 1669,
     "unselected-file": 389,
     "retained-observed": 1869,

@@ -2286,3 +2286,9 @@ MVDM-HOST-DIV-640: preserve the original `SUCCESS` and `NULL` fallback
 selectors in `softpc.new/base/inc/cntlbop.h` and reject unsupported missing
 providers. All selected control-BOP sources include `xt.h` first. Evidence:
 `../../artifacts/mvdm-audit/s13-bfs-depth1-cntlbop-fallbacks.json`.
+
+MVDM-HOST-DIV-641: preserve the original `TRUE` and `FALSE` fallback
+selectors in `softpc.new/base/inc/base_def.h`, rejecting unsupported missing
+host Boolean definitions. Selected `insignia.h` and NT include paths provide
+these before this header. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-base-bool-fallbacks.json`.

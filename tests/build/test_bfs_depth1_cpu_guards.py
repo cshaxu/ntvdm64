@@ -695,3 +695,19 @@ for macro, original_line in (('SUCCESS', 26), ('NULL', 60)):
     if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
         raise SystemExit('missing control-BOP provider did not reject: ' + macro)
 print('PASS control-BOP fallback guards and original lines')
+
+for macro, original_line in (('TRUE', 46), ('FALSE', 50)):
+    source = (repo / 'src/mvdm-host/softpc.new/base/inc/base_def.h').read_text(encoding='latin1').splitlines()
+    marker = '#error Excluded unsupported missing ' + macro + ' base profile'
+    matches = [i for i, line in enumerate(source) if line.strip() == '#ifndef ' + macro
+               and source[i + 1].strip() == marker and source[i + 2].strip() == '#endif']
+    if len(matches) != 1 or matches[0] + 1 != original_line:
+        raise SystemExit('base Boolean fallback guard or original line missing: ' + macro)
+    probe.write_text('\n'.join(['#line ' + str(original_line)] + source[matches[0]:matches[0] + 3] + ['int after_bool = __LINE__;']) + '\n', encoding='ascii')
+    selected = subprocess.run(base + ['/D' + macro, str(probe)], capture_output=True, text=True, errors='replace')
+    rejected = subprocess.run(base + ['/U' + macro, str(probe)], capture_output=True, text=True, errors='replace')
+    if selected.returncode or not re.search(r'int\s+after_bool\s*=\s*' + str(original_line + 3) + r'\s*;', selected.stdout):
+        raise SystemExit('base Boolean provider or original line failed: ' + macro)
+    if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
+        raise SystemExit('missing base Boolean provider did not reject: ' + macro)
+print('PASS base Boolean fallback guards and original lines')
