@@ -2989,7 +2989,8 @@
     "removed_body_sha256": "cf183c0dd9a2f78879803bfbd8f0fb31e5658c84b221375c1c4a6c6d2edc6059",
     "removed_body_lines": 4,
     "after_sha256": "9401c9aab0929d9c57b4b73c66905aaaca1fb256c7138035412d0fc80e245182",
-    "final_sha256": "3e214e9d9dba55104613bc7371b6b881e3bfbd26a8d6c20777801b9dbcb13f5f"
+    "final_sha256": "3e214e9d9dba55104613bc7371b6b881e3bfbd26a8d6c20777801b9dbcb13f5f",
+    "disposition": "subsumed-restored-original-outer"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
@@ -3007,5 +3008,19 @@
       656
     ],
     "final_sha256": "0caae2986bd5256ecdee046d9961c5176a3d5178426a198b5f42fb3eb0bef369"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+    "macro": "0",
+    "line": 95,
+    "body_end": 96,
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\copy_fnc.c",
+    "original_sha256": "320d697e9969cf146d5b0f94813aa62b501b0eefeff31806b22d463912965518",
+    "local_sha256": "9a93576ad3a62296a0a1971e762c912bbc3f3d2d87808a14ca682b960254d2e5",
+    "removed_body_sha256": "cf183c0dd9a2f78879803bfbd8f0fb31e5658c84b221375c1c4a6c6d2edc6059",
+    "removed_body_lines": 4,
+    "after_sha256": "9401c9aab0929d9c57b4b73c66905aaaca1fb256c7138035412d0fc80e245182",
+    "final_sha256": "e5e2c712cfd7307481be688a894065e0b3dfc03e28f946bb374689a9fdf1c7bc",
+    "selection_scope": "Fixed original #if 0 restored; selected DIV-064 loop retained in else."
   }
 ]

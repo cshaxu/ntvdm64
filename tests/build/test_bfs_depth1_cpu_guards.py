@@ -274,16 +274,18 @@ matches = [i for i, line in enumerate(lines) if line.strip() == condition]
 if len(matches) != 1:
     raise SystemExit('missing unique parity-table guard')
 i = matches[0]
-expected = [condition, '#error Excluded unsupported non-CPU40 parity-table profile',
-            '#endif /* !defined(MAC_LIKE) && !defined(CPU_40_STYLE) */', '#line 370']
-if [line.strip() for line in lines[i:i+4]] != expected:
+expected = ['#if !defined(MAC_LIKE) && !defined(CPU_30_STYLE)', condition,
+            '#error Excluded unsupported non-CPU40 parity-table profile',
+            '#endif /* !defined(MAC_LIKE) && !defined(CPU_40_STYLE) */',
+            '#endif /* !defined(MAC_LIKE) && !defined(CPU_30_STYLE) */', '#line 607']
+if [line.strip() for line in lines[i-1:i+5]] != expected:
     raise SystemExit('parity-table guard or line control changed')
 probe.write_text('\n'.join(expected + ['int following_line = __LINE__;']) + '\n',
                  encoding='ascii')
-for defines in (['/DCPU_40_STYLE'], ['/DMAC_LIKE']):
+for defines in (['/DCPU_40_STYLE'], ['/DMAC_LIKE'], ['/DCPU_30_STYLE']):
     selected = subprocess.run(base + defines + [str(probe)], capture_output=True,
                               text=True, errors='replace')
-    if selected.returncode or not re.search(r'int\s+following_line\s*=\s*370\s*;', selected.stdout):
+    if selected.returncode or not re.search(r'int\s+following_line\s*=\s*607\s*;', selected.stdout):
         raise SystemExit('parity-table selected branch or line mapping failed: ' + selected.stderr)
 excluded = subprocess.run(base + [str(probe)], capture_output=True, text=True, errors='replace')
 if not excluded.returncode or 'Excluded unsupported non-CPU40 parity-table profile' not in excluded.stdout + excluded.stderr:

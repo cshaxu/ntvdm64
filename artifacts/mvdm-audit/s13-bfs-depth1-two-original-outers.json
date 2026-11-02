@@ -1,0 +1,74 @@
+{
+  "scope": "two first-depth original conditions restored without changing selected local adaptations",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "before_sha256": "489b9d46180691e81cd975435a014d19e766cf33feac16a2c755ac93d93085f1",
+      "after_sha256": "dad2719a6fe379b5629b1c6d7fbb475e5f22bd5816fbd3b2ee6d75898faee00c",
+      "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+      "original_group": 346,
+      "original_group_end": 606,
+      "original_following_line": 607,
+      "controls": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "selected_preprocessing_equal_ignoring_blank_lines": true,
+          "sha256": "db727f628b2dcdec002a83b814f0133dc6fa7f2471ea5edbcadb2b38d7cd5798"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "selected_preprocessing_equal_ignoring_blank_lines": true,
+          "sha256": "db727f628b2dcdec002a83b814f0133dc6fa7f2471ea5edbcadb2b38d7cd5798"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "before_sha256": "3e214e9d9dba55104613bc7371b6b881e3bfbd26a8d6c20777801b9dbcb13f5f",
+      "after_sha256": "59ecc1ab43938dd61cc38b31858f3b7ba28a1d6b9edb2aad6ed5beebb034d89e",
+      "original_sha256": "320d697e9969cf146d5b0f94813aa62b501b0eefeff31806b22d463912965518",
+      "original_group": 115,
+      "original_group_end": 123,
+      "original_following_line": 124,
+      "controls": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "selected_preprocessing_equal_ignoring_blank_lines": true,
+          "sha256": "67a244cb0707f1ebeaf893acf1807b44ebadf0965455f8cd939ba22ca3b2acae"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "selected_preprocessing_equal_ignoring_blank_lines": true,
+          "sha256": "67a244cb0707f1ebeaf893acf1807b44ebadf0965455f8cd939ba22ca3b2acae"
+        }
+      ]
+    }
+  ],
+  "line_controls": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "logical_line": 609,
+      "verified": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "logical_line": 609,
+      "verified": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "logical_line": 125,
+      "verified": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "logical_line": 125,
+      "verified": true
+    }
+  ],
+  "limitations": "Fixed original signature inventory yields 24 further unmatched first-depth occurrences across 13 file/signature records; these are leads, not established missing structures. Guest-specific fax contexts are not proof of unsupported profiles. The non-CCPU DPMI negative-object fixture remains failed."
+}

@@ -1,0 +1,322 @@
+{
+  "scope": "all fixed-baseline MVDM-host first-depth original signature multiplicities against current first-depth structures; nested signatures recorded only, no inner branch inspection or automatic restoration",
+  "files_checked": 1321,
+  "counts": {
+    "root_signature_multiplicity_satisfied": 3554,
+    "missing_root_occurrences": 24
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "working_sha256": "21319196302ee1a5bd2750b7fef9c71b07dca7ce589f9da9e5f6fbb887deb7fc",
+      "signature": [
+        [
+          "ifndef",
+          "i386"
+        ]
+      ],
+      "original_lines": [
+        859,
+        1167,
+        1201,
+        1237
+      ],
+      "current_root_lines": [
+        1417
+      ],
+      "current_nested_lines": [],
+      "missing_multiplicity": 3,
+      "classification": "missing-signature-needs-owner-check"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.h",
+      "original_sha256": "245976d103b8dd3b918b008b85e9e94b3ec245fb9119c28b897f936a94b69b5e",
+      "working_sha256": "883641ea972a0db135433e9afd8bd6ddaf07ba7fdb9f258f1270c318d132f037",
+      "signature": [
+        [
+          "ifndef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "original_lines": [
+        23
+      ],
+      "current_root_lines": [],
+      "current_nested_lines": [],
+      "missing_multiplicity": 1,
+      "classification": "missing-signature-needs-owner-check"
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\mvdm.h",
+      "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
+      "working_sha256": "9c74c7a6db9a5d743482695411a989e9731c1f5b94d139182b2cc21ba871394f",
+      "signature": [
+        [
+          "ifdef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "original_lines": [
+        73
+      ],
+      "current_root_lines": [],
+      "current_nested_lines": [],
+      "missing_multiplicity": 1,
+      "classification": "missing-signature-needs-owner-check"
+    },
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\suballoc.h",
+      "original_sha256": "98263eed4c261650c4b9c9b23f09f2ef19b31a0b1eb5c805d4c672ee85ded85c",
+      "working_sha256": "23d2e7a2eb84686905b1898a7c69b016967caa37290aa84e09c6ad7f2e54dce9",
+      "signature": [
+        [
+          "ifdef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "original_lines": [
+        32
+      ],
+      "current_root_lines": [],
+      "current_nested_lines": [],
+      "missing_multiplicity": 1,
+      "classification": "missing-signature-needs-owner-check"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "working_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7",
+      "signature": [
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ],
+      "original_lines": [
+        2641,
+        2670,
+        2950,
+        2996,
+        3310,
+        4171,
+        4280,
+        5227,
+        5250,
+        5351
+      ],
+      "current_root_lines": [
+        2292,
+        3761,
+        3858
+      ],
+      "current_nested_lines": [
+        2944,
+        4780,
+        4846,
+        4906
+      ],
+      "missing_multiplicity": 7,
+      "classification": "nested-signature-needs-owner-check"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\ios.c",
+      "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+      "working_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757",
+      "signature": [
+        [
+          "if",
+          "defined(NTVDM)&&defined(MONITOR)"
+        ]
+      ],
+      "original_lines": [
+        308,
+        413
+      ],
+      "current_root_lines": [
+        293
+      ],
+      "current_nested_lines": [],
+      "missing_multiplicity": 1,
+      "classification": "missing-signature-needs-owner-check"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "working_sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea",
+      "signature": [
+        [
+          "ifndef",
+          "CPU_40_STYLE"
+        ]
+      ],
+      "original_lines": [
+        54,
+        102
+      ],
+      "current_root_lines": [
+        115
+      ],
+      "current_nested_lines": [],
+      "missing_multiplicity": 1,
+      "classification": "missing-signature-needs-owner-check"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
+      "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+      "working_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550",
+      "signature": [
+        [
+          "if",
+          "!defined(NTVDM)||(defined(NTVDM)&&!defined(X86GFX))"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "original_lines": [
+        282
+      ],
+      "current_root_lines": [],
+      "current_nested_lines": [],
+      "missing_multiplicity": 1,
+      "classification": "missing-signature-needs-owner-check"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "working_sha256": "98ddba8fc2c1bc9495a88882f592df042130dbbc0618ff53c03b61eb478c9786",
+      "signature": [
+        [
+          "if",
+          "(defined(NTVDM)&&defined(MONITOR))||defined(GISP_SVGA)"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "original_lines": [
+        1579,
+        2042
+      ],
+      "current_root_lines": [],
+      "current_nested_lines": [],
+      "missing_multiplicity": 2,
+      "classification": "missing-signature-needs-owner-check"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_cpu.h",
+      "original_sha256": "e79dd6aa79d24e37ad8390c8879abf3436674ee101037f0e09415148a938ac95",
+      "working_sha256": "5ebc1fcbee5c270e59c2e572a8b5082724068e4328c9b2040b6f9e5bc812c6c9",
+      "signature": [
+        [
+          "ifdef",
+          "CPU_30_STYLE"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "original_lines": [
+        17
+      ],
+      "current_root_lines": [],
+      "current_nested_lines": [],
+      "missing_multiplicity": 1,
+      "classification": "missing-signature-needs-owner-check"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "working_sha256": "469ee7189e17e2a186a71d7a37ea0d4044d1658f2bc88f06f0fb08505617b5fa",
+      "signature": [
+        [
+          "ifdef",
+          "i386"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "original_lines": [
+        506
+      ],
+      "current_root_lines": [],
+      "current_nested_lines": [],
+      "missing_multiplicity": 1,
+      "classification": "missing-signature-needs-owner-check"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "working_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0",
+      "signature": [
+        [
+          "ifndef",
+          "X86GFX"
+        ]
+      ],
+      "original_lines": [
+        760
+      ],
+      "current_root_lines": [],
+      "current_nested_lines": [],
+      "missing_multiplicity": 1,
+      "classification": "missing-signature-needs-owner-check"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+      "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+      "working_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "signature": [
+        [
+          "if",
+          "FASTBOPPING"
+        ],
+        [
+          "else",
+          ""
+        ]
+      ],
+      "original_lines": [
+        1870,
+        1879,
+        1910
+      ],
+      "current_root_lines": [],
+      "current_nested_lines": [],
+      "missing_multiplicity": 3,
+      "classification": "missing-signature-needs-owner-check"
+    }
+  ],
+  "limitations": "Signature multiplicity and same-named nested structures are hints, not ownership or reachability proof. Entire removed original functions and local owner changes need separate source mapping."
+}

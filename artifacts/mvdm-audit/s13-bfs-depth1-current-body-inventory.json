@@ -33552,46 +33552,33 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "489b9d46180691e81cd975435a014d19e766cf33feac16a2c755ac93d93085f1"
+      "source_sha256": "dad2719a6fe379b5629b1c6d7fbb475e5f22bd5816fbd3b2ee6d75898faee00c"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/xt.c",
-      "start": 116,
-      "cut": 118,
-      "group_end": 118,
-      "kind": "if",
-      "expression": "!defined(MAC_LIKE) && !defined(CPU_40_STYLE)",
-      "status": "newly-excluded",
-      "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 1,
-      "source_sha256": "489b9d46180691e81cd975435a014d19e766cf33feac16a2c755ac93d93085f1"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
-      "start": 143,
-      "cut": 162,
-      "group_end": 164,
+      "start": 145,
+      "cut": 164,
+      "group_end": 166,
       "kind": "ifdef",
       "expression": "SPC386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 18,
-      "source_sha256": "489b9d46180691e81cd975435a014d19e766cf33feac16a2c755ac93d93085f1"
+      "source_sha256": "dad2719a6fe379b5629b1c6d7fbb475e5f22bd5816fbd3b2ee6d75898faee00c"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/xt.c",
-      "start": 162,
-      "cut": 164,
-      "group_end": 164,
+      "start": 164,
+      "cut": 166,
+      "group_end": 166,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "489b9d46180691e81cd975435a014d19e766cf33feac16a2c755ac93d93085f1"
+      "source_sha256": "dad2719a6fe379b5629b1c6d7fbb475e5f22bd5816fbd3b2ee6d75898faee00c"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/xt.c",
@@ -33604,7 +33591,20 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "489b9d46180691e81cd975435a014d19e766cf33feac16a2c755ac93d93085f1"
+      "source_sha256": "dad2719a6fe379b5629b1c6d7fbb475e5f22bd5816fbd3b2ee6d75898faee00c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "start": 116,
+      "cut": 120,
+      "group_end": 120,
+      "kind": "if",
+      "expression": "!defined(MAC_LIKE) && !defined(CPU_30_STYLE)",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "dad2719a6fe379b5629b1c6d7fbb475e5f22bd5816fbd3b2ee6d75898faee00c"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
@@ -43835,7 +43835,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "3e214e9d9dba55104613bc7371b6b881e3bfbd26a8d6c20777801b9dbcb13f5f"
+      "source_sha256": "e5e2c712cfd7307481be688a894065e0b3dfc03e28f946bb374689a9fdf1c7bc"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
@@ -43848,7 +43848,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 5,
-      "source_sha256": "3e214e9d9dba55104613bc7371b6b881e3bfbd26a8d6c20777801b9dbcb13f5f"
+      "source_sha256": "e5e2c712cfd7307481be688a894065e0b3dfc03e28f946bb374689a9fdf1c7bc"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
@@ -43861,7 +43861,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "3e214e9d9dba55104613bc7371b6b881e3bfbd26a8d6c20777801b9dbcb13f5f"
+      "source_sha256": "e5e2c712cfd7307481be688a894065e0b3dfc03e28f946bb374689a9fdf1c7bc"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
@@ -43874,59 +43874,59 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "3e214e9d9dba55104613bc7371b6b881e3bfbd26a8d6c20777801b9dbcb13f5f"
+      "source_sha256": "e5e2c712cfd7307481be688a894065e0b3dfc03e28f946bb374689a9fdf1c7bc"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
       "start": 95,
-      "cut": 98,
-      "group_end": 103,
+      "cut": 97,
+      "group_end": 100,
       "kind": "if",
-      "expression": "1",
+      "expression": "0",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "e5e2c712cfd7307481be688a894065e0b3dfc03e28f946bb374689a9fdf1c7bc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "start": 97,
+      "cut": 100,
+      "group_end": 100,
+      "kind": "else",
+      "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "3e214e9d9dba55104613bc7371b6b881e3bfbd26a8d6c20777801b9dbcb13f5f"
+      "source_sha256": "e5e2c712cfd7307481be688a894065e0b3dfc03e28f946bb374689a9fdf1c7bc"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
-      "start": 98,
-      "cut": 103,
-      "group_end": 103,
-      "kind": "else",
-      "expression": "",
-      "status": "already-excluded",
-      "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 4,
-      "source_sha256": "3e214e9d9dba55104613bc7371b6b881e3bfbd26a8d6c20777801b9dbcb13f5f"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
-      "start": 160,
-      "cut": 162,
-      "group_end": 171,
+      "start": 158,
+      "cut": 160,
+      "group_end": 169,
       "kind": "if",
       "expression": "0",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "3e214e9d9dba55104613bc7371b6b881e3bfbd26a8d6c20777801b9dbcb13f5f"
+      "source_sha256": "e5e2c712cfd7307481be688a894065e0b3dfc03e28f946bb374689a9fdf1c7bc"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
-      "start": 162,
-      "cut": 171,
-      "group_end": 171,
+      "start": 160,
+      "cut": 169,
+      "group_end": 169,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 8,
-      "source_sha256": "3e214e9d9dba55104613bc7371b6b881e3bfbd26a8d6c20777801b9dbcb13f5f"
+      "source_sha256": "e5e2c712cfd7307481be688a894065e0b3dfc03e28f946bb374689a9fdf1c7bc"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/cpucstbs.c",
@@ -65656,8 +65656,8 @@
   "status_counts": {
     "pending": 886,
     "newly-excluded": 630,
-    "already-excluded": 1661,
-    "retained-observed": 1864,
+    "already-excluded": 1660,
+    "retained-observed": 1865,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {

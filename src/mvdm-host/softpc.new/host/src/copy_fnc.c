@@ -92,15 +92,13 @@ fwd_word_fill(
                 data4 = data+(data<<16);
 
 /* DIVERGENCE(MVDM-HOST-DIV-064): select the original in-source fill loop. */
-#if 1
+#if 0
+#error Excluded unsupported original constant-false fill branch
+#else
                 do *l_addr4++ = data4; while (h_addr4 > l_addr4);
                 l_addr = (unsigned char *)l_addr4;
-#else
-#error Excluded unsupported alternate fill implementation
-
-
-
 #endif
+#line 124
 
 	}
 	switch(h_addr-l_addr)

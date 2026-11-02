@@ -113,10 +113,12 @@ int verbose;			/* TRUE => trace instructions   */
  * in the selected CCPU40 product produces a second provider with no distinct
  * consumer. Unsupported non-CPU40 profiles are rejected below.
  */
+#if !defined(MAC_LIKE) && !defined(CPU_30_STYLE)
 #if !defined(MAC_LIKE) && !defined(CPU_40_STYLE)
 #error Excluded unsupported non-CPU40 parity-table profile
 #endif /* !defined(MAC_LIKE) && !defined(CPU_40_STYLE) */
-#line 370
+#endif /* !defined(MAC_LIKE) && !defined(CPU_30_STYLE) */
+#line 607
 
 
 /*(

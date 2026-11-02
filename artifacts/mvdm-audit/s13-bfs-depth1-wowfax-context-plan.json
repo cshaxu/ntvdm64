@@ -1,0 +1,25 @@
+{
+  "scope": "observed header includes only; guest/fax standalone profiles not decided",
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "source": "src/mvdm-host/wow32/wkman.c",
+      "flags": {
+        "DEBUG": false,
+        "_WOWFAX16_": false,
+        "_DEF_WOW32_": false
+      },
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "source": "src/mvdm-host/wow32/wow32fax.c",
+      "flags": {
+        "DEBUG": false,
+        "_WOWFAX16_": false,
+        "_DEF_WOW32_": false
+      },
+      "exit": 0
+    }
+  ]
+}

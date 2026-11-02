@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-622: restore the original first-depth parity-table selector in
+`base/support/xt.c` and the original constant-false selector in
+`host/src/copy_fnc.c`. Preserve the selected DIV-155 and DIV-064 adaptations,
+reject the excluded fill arm, and restore the original following source lines.
+Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-two-original-outers.json`.
+
 MVDM-HOST-DIV-621: preserve the original EMS `X86GFX && NTVDM` selector
 while rejecting its unused kernel-VDM mapping arm in this header's supported
 include contexts. Other X86GFX video sources are unaffected. Evidence:
@@ -367,6 +373,7 @@ startup path is unchanged. Source identities and body hash are recorded in
 
 MVDM-HOST-DIV-567: replace the excluded non-CPU40 parity-table body in
 `base/support/xt.c` with `#error` and preserve the following diagnostic line
+mapping. DIV-622 restores the original outer condition and corrects that line
 mapping. DIV-155's existing CPU40 ownership condition remains necessary;
 original and removed local body hashes are in
 `../../artifacts/mvdm-audit/s13-bfs-depth1-xt-parity.json`.
@@ -390,9 +397,9 @@ is retained outside the excluded X86GFX fullscreen block for the selected
 NTIO handoff. This records an existing placement adaptation; it does not
 re-enable the original hardware fullscreen transition.
 
-MVDM-HOST-DIV-562: replace the inactive alternative of the existing
-`copy_fnc.c` literal `#if 1` with `#error`, preserving the selected original
-fill loop and its DIV-064 adaptation. Source and body hashes are in
+MVDM-HOST-DIV-562: superseded at this location by DIV-622, which restores the
+original `copy_fnc.c` literal `#if 0` and keeps the DIV-064 fill loop in the
+selected alternative. Previous source and body hashes are in
 `../../artifacts/mvdm-audit/s13-rejected-legacy-branches.json`.
 
 MVDM-HOST-DIV-563: restore missing original MONITOR selection boundaries in
