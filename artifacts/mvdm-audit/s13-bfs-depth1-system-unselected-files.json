@@ -1,0 +1,510 @@
+{
+  "scope": "whole translation units absent from currently supported production and independently compiled test graphs; their branch conditions remain unknown, no original source changed",
+  "system_manifest": "src\\mvdm-host\\softpc.new\\base\\system\\sources",
+  "system_manifest_sha256": "961d22231c72622316a0ceeff1ca10f8c8dec18ca81b4ecd84f17b9211a19027",
+  "system_sources": [
+    "at_dma.c",
+    "cmosnt.c",
+    "ica.c",
+    "idetect.c",
+    "illegalp.c",
+    "qevnt.c",
+    "rom.c",
+    "timer.c",
+    "timestrb.c",
+    "dummy_nt.c",
+    "unexp_nt.c"
+  ],
+  "ninja_graphs_checked": 34,
+  "actual_graph_jobs": {
+    "quick_ev.c": [],
+    "cmos.c": [],
+    "qevnt.c": [
+      {
+        "graph": "build/.ninja/msvc-x86-release/worker",
+        "path": "src/mvdm-host/softpc.new/base/system/qevnt.c"
+      },
+      {
+        "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+        "path": "src/mvdm-host/softpc.new/base/system/qevnt.c"
+      }
+    ],
+    "cmosnt.c": [
+      {
+        "graph": "build/.ninja/msvc-x86-release/worker",
+        "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c"
+      },
+      {
+        "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+        "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c"
+      }
+    ]
+  },
+  "test_only_references": [
+    "tests/build/test_mirror_rejected_conditions.py reads rejected markers in these two files; these are deliberate unsupported-profile negative checks, not supported compile configurations"
+  ],
+  "source_search": "tracked src/tests/tools/build text searched for quick_ev, cmos translation-unit references and dynamic system source selection; product generator uses explicit original system sources manifest",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "current_sha256": "f51322c62783e9f3d78d716b77b1f2b25b23effbb83d4d7551172ce9c292e731",
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "pending_arms_reclassified": 39,
+      "arms": [
+        {
+          "line": 93,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 100,
+          "kind": "if",
+          "expression": "defined(CPU_40_STYLE) && !defined (SFELLOW)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 104,
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 112,
+          "kind": "ifdef",
+          "expression": "CPU_40_STYLE",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 148,
+          "kind": "if",
+          "expression": "defined(CPU_40_STYLE) && !defined(SFELLOW)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 175,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 185,
+          "kind": "if",
+          "expression": "defined(CPU_40_STYLE) && !defined(SFELLOW)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 191,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 202,
+          "kind": "if",
+          "expression": "defined(CPU_40_STYLE) && !defined(SFELLOW)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 207,
+          "kind": "if",
+          "expression": "defined NTVDM && !defined MONITOR",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 233,
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 237,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 257,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 289,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 298,
+          "kind": "if",
+          "expression": "defined NTVDM && !defined MONITOR",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 310,
+          "kind": "if",
+          "expression": "defined NTVDM && !defined MONITOR",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 373,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 381,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 536,
+          "kind": "if",
+          "expression": "(defined(NTVDM) && defined(MONITOR)) || defined(GISP_CPU)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 541,
+          "kind": "if",
+          "expression": "defined NTVDM && !defined MONITOR",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 547,
+          "kind": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 554,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 585,
+          "kind": "ifdef",
+          "expression": "CPU_40_STYLE",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 606,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 619,
+          "kind": "if",
+          "expression": "defined NTVDM && !defined MONITOR",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 651,
+          "kind": "ifdef",
+          "expression": "CPU_40_STYLE",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 653,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 716,
+          "kind": "ifdef",
+          "expression": "CPU_40_STYLE",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 724,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 743,
+          "kind": "ifndef",
+          "expression": "PROD",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 832,
+          "kind": "if",
+          "expression": "defined NTVDM && !defined MONITOR",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 840,
+          "kind": "if",
+          "expression": "defined NTVDM && !defined MONITOR",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 925,
+          "kind": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 927,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 942,
+          "kind": "ifndef",
+          "expression": "PROD",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 952,
+          "kind": "ifdef",
+          "expression": "CPU_40_STYLE",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 1008,
+          "kind": "if",
+          "expression": "defined NTVDM && !defined MONITOR",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 1016,
+          "kind": "if",
+          "expression": "defined NTVDM && !defined MONITOR",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 1028,
+          "kind": "if",
+          "expression": "defined(CPU_40_STYLE) && !defined(SFELLOW)",
+          "prior_reason": "file-not-witnessed-in-product"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "current_sha256": "6b810bd4959e0ccfd276279b6417d64481ad34a53b2b92e24667a3c2ddf04707",
+      "original_sha256": "c993b3e020ddd2f25524e20bef0b7651bcdf52a7d222e90fd643f828b788ac1e",
+      "pending_arms_reclassified": 35,
+      "arms": [
+        {
+          "line": 68,
+          "kind": "if",
+          "expression": "defined(NTVDM) || defined(macintosh)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 81,
+          "kind": "if",
+          "expression": "defined(NTVDM) || defined(macintosh)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 111,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 117,
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 291,
+          "kind": "ifndef",
+          "expression": "JOKER",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 387,
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 389,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 395,
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 428,
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 463,
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 508,
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 574,
+          "kind": "if",
+          "expression": "defined(NTVDM) || defined(macintosh)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 595,
+          "kind": "if",
+          "expression": "defined(NTVDM) || defined(macintosh)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 638,
+          "kind": "if",
+          "expression": "defined(NTVDM) || defined(macintosh)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 675,
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 682,
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 694,
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 721,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 827,
+          "kind": "if",
+          "expression": "defined(NTVDM) || defined(macintosh)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 838,
+          "kind": "if",
+          "expression": "defined(NTVDM) || defined(macintosh)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 924,
+          "kind": "ifndef",
+          "expression": "PROD",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 963,
+          "kind": "ifndef",
+          "expression": "TEST_HARNESS",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 967,
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 973,
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 983,
+          "kind": "if",
+          "expression": "defined(NTVDM) || defined(macintosh)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 1084,
+          "kind": "if",
+          "expression": "!defined(JOKER) && !defined(NTVDM)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 1095,
+          "kind": "if",
+          "expression": "defined(NTVDM) || defined(macintosh)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 1102,
+          "kind": "if",
+          "expression": "defined(NTVDM) || defined(macintosh)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 1106,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 1112,
+          "kind": "if",
+          "expression": "defined(NTVDM) || defined(macintosh)",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 1114,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 1125,
+          "kind": "ifndef",
+          "expression": "PROD",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 1136,
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 1175,
+          "kind": "else",
+          "expression": "",
+          "prior_reason": "file-not-witnessed-in-product"
+        },
+        {
+          "line": 1250,
+          "kind": "if",
+          "expression": "!defined(NTVDM) && !defined(macintosh)",
+          "prior_reason": "file-not-witnessed-in-product"
+        }
+      ]
+    }
+  ],
+  "limitation": "This disposition depends on the current manifest and supported graph set; if a later target admits either translation unit, re-open its full conditional queue. No claim that its individual macro conditions are false."
+}
