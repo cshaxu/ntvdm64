@@ -2,24 +2,6 @@
   "scope": "current first-depth pending arms, actual supported graph file inclusions only; no arm exclusion inferred",
   "records": [
     {
-      "path": "src/mvdm-host/bde/bde.h",
-      "start": 234,
-      "kind": "ifndef",
-      "expression": "i386",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/bde/bdemisc.c",
-      "start": 245,
-      "kind": "ifndef",
-      "expression": "i386",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/bde/precomp.h",
       "start": 10,
       "kind": "if",
@@ -398,15 +380,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/dasm386/dasm386.c",
-      "start": 43,
-      "kind": "ifdef",
-      "expression": "PIG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": true,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
       "start": 1516,
       "kind": "else",
@@ -443,80 +416,8 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/dasm.h",
-      "start": 21,
-      "kind": "ifdef",
-      "expression": "DASM_INTERNAL",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/decode.h",
-      "start": 12,
-      "kind": "ifndef",
-      "expression": "_DECODE_H_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/gfiempty.h",
-      "start": 22,
-      "kind": "ifdef",
-      "expression": "ANSI",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/gfiempty.h",
-      "start": 33,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/gore.h",
       "start": 28,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/hg_cpu.h",
-      "start": 203,
-      "kind": "ifdef",
-      "expression": "LIM",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/hg_cpu.h",
-      "start": 210,
-      "kind": "ifndef",
-      "expression": "PROD",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/hg_stat.h",
-      "start": 23,
-      "kind": "ifdef",
-      "expression": "PROD",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/hg_stat.h",
-      "start": 25,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -542,114 +443,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/host_sig.h",
-      "start": 16,
-      "kind": "ifdef",
-      "expression": "ANSI",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/host_sig.h",
-      "start": 18,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/host_uis.h",
-      "start": 1,
-      "kind": "ifndef",
-      "expression": "_HOST_UIS_H",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/lm_clien.h",
-      "start": 29,
-      "kind": "ifndef",
-      "expression": "_LM_CLIENT_H_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/m_errorp.h",
-      "start": 1,
-      "kind": "ifndef",
-      "expression": "_x_ERROR_H",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/m_fs.h",
-      "start": 1,
-      "kind": "ifndef",
-      "expression": "_x_FS_H",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/m_lpcmp.h",
-      "start": 1,
-      "kind": "ifndef",
-      "expression": "_M_LPCMp_H",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/make_dis.h",
-      "start": 13,
-      "kind": "ifndef",
-      "expression": "SOURCE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/make_dis.h",
-      "start": 54,
-      "kind": "ifndef",
-      "expression": "DeleteHDDataFile",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/make_dis.h",
-      "start": 57,
-      "kind": "ifndef",
-      "expression": "FeedbackHDCreation",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/mouse16b.h",
-      "start": 26,
-      "kind": "ifndef",
-      "expression": "_MOUSE_16B_H_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/msw_dbg.h",
-      "start": 21,
-      "kind": "ifndef",
-      "expression": "MSW_DBG_H",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/novell.h",
       "start": 168,
       "kind": "ifndef",
@@ -663,15 +456,6 @@
       "start": 170,
       "kind": "else",
       "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/rommap.h",
-      "start": 25,
-      "kind": "ifndef",
-      "expression": "_ROMMAP_H_",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -717,87 +501,6 @@
       "start": 151,
       "kind": "ifndef",
       "expression": "PROD",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/unix_asy.h",
-      "start": 32,
-      "kind": "ifdef",
-      "expression": "ANSI",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/unix_asy.h",
-      "start": 35,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
-      "start": 26,
-      "kind": "ifndef",
-      "expression": "USER_HOME",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
-      "start": 30,
-      "kind": "ifndef",
-      "expression": "SYSTEM_HOME",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
-      "start": 38,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
-      "start": 44,
-      "kind": "ifndef",
-      "expression": "USER_CONFIG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/vgastate.h",
-      "start": 22,
-      "kind": "ifndef",
-      "expression": "_VGASTATE_H_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/worm.h",
-      "start": 107,
-      "kind": "ifdef",
-      "expression": "ANSI",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/worm.h",
-      "start": 111,
-      "kind": "else",
-      "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -920,15 +623,6 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/video/ga_glue.c",
-      "start": 23,
-      "kind": "ifdef",
-      "expression": "C_VID",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
       "start": 133,
       "kind": "else",
@@ -1001,24 +695,6 @@
       "current_actual_includers": 624
     },
     {
-      "path": "src/mvdm-host/softpc.new/host/inc/hostgrph.h",
-      "start": 36,
-      "kind": "ifndef",
-      "expression": "SUN_VA",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/inc/nt_getxx.h",
-      "start": 1,
-      "kind": "ifdef",
-      "expression": "CCPU",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/softpc.new/host/inc/nt_mon.h",
       "start": 55,
       "kind": "ifdef",
@@ -1032,24 +708,6 @@
       "start": 57,
       "kind": "else",
       "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/inc/sdos_ddi.h",
-      "start": 28,
-      "kind": "ifndef",
-      "expression": "_sdos_ddi-h_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/inc/winsigni.h",
-      "start": 1,
-      "kind": "ifndef",
-      "expression": "_INSIGNIA_H",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -1172,51 +830,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.h",
-      "start": 65,
-      "kind": "ifdef",
-      "expression": "DEBUG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.h",
-      "start": 84,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdd/samples/sample1/fax32/fax32.h",
-      "start": 7,
-      "kind": "ifdef",
-      "expression": "WIN_32",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdd/samples/sample1/fax32/fax32.h",
-      "start": 11,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdd/samples/sample1/fax32/fax32.h",
-      "start": 15,
-      "kind": "ifdef",
-      "expression": "WIN",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/vdmexts/help.c",
       "start": 141,
       "kind": "ifdef",
@@ -1230,15 +843,6 @@
       "start": 549,
       "kind": "ifdef",
       "expression": "VERBOSE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdmexts/vdmexts.h",
-      "start": 321,
-      "kind": "ifndef",
-      "expression": "i386",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -1262,24 +866,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/wow32/witbl.h",
-      "start": 21,
-      "kind": "ifdef",
-      "expression": "DEBUG_OR_WOWPROFILE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wowtable.h",
-      "start": 19,
-      "kind": "ifdef",
-      "expression": "DEBUG_OR_WOWPROFILE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/wow32/wusercli.h",
       "start": 12,
       "kind": "ifdef",
@@ -1296,15 +882,6 @@
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "current_actual_includers": 2
-    },
-    {
-      "path": "src/non-mvdm/base/win32/client/basedll.h",
-      "start": 22,
-      "kind": "ifndef",
-      "expression": "_BASEP_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
     },
     {
       "path": "src/non-mvdm/base/win32/server/srvinit.c",
@@ -1341,15 +918,6 @@
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "current_actual_includers": 10
-    },
-    {
-      "path": "src/non-mvdm/public/ddk/inc/ntddcdrm.h",
-      "start": 24,
-      "kind": "ifndef",
-      "expression": "_NTDDCDRM_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
     },
     {
       "path": "src/non-mvdm/public/ddk/inc/ntdddisk.h",
@@ -1442,15 +1010,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/non-mvdm/public/internal/printscan/inc/winddiui.h",
-      "start": 10,
-      "kind": "ifndef",
-      "expression": "_WINDDIUI_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/non-mvdm/public/internal/windows/inc/winuserp.h",
       "start": 16,
       "kind": "ifndef",
@@ -1482,15 +1041,6 @@
       "start": 23,
       "kind": "ifndef",
       "expression": "_NTIOAPI_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/non-mvdm/public/sdk/inc/ntseapi.h",
-      "start": 26,
-      "kind": "ifndef",
-      "expression": "_NTSEAPI_",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -1576,13 +1126,13 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 108
+      "count": 59
     },
     {
       "reason": "file-not-witnessed-in-product",
       "guard_only": true,
       "has_current_includer": false,
-      "count": 2
+      "count": 1
     },
     {
       "reason": "original-i386-arm-needs-supported-context-witness",

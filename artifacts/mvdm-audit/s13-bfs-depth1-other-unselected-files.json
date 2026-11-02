@@ -1,0 +1,545 @@
+{
+  "scope": "36 whole other historical source/header files, file disposition only; no inferred macro truth values or source edits",
+  "graphs_checked": [
+    "build/.ninja/console-observers-x64/build.ninja",
+    "build/.ninja/msvc-x64-formal-release/build.ninja",
+    "build/.ninja/msvc-x64-release/build.ninja",
+    "build/.ninja/msvc-x86-formal-release/build.ninja",
+    "build/.ninja/msvc-x86-release/build.ninja",
+    "build/.ninja/msvc-x86-suballoc-audit/build.ninja",
+    "build/.ninja/observations-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x86/build.ninja",
+    "build/.ninja/t463-s2-dialog-end-boundary/build.ninja",
+    "build/.ninja/t463-s2-dialog-procedure/build.ninja",
+    "build/.ninja/t473-s8-control-boundaries/build.ninja",
+    "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x86/wow32/build.ninja",
+    "build/.ninja/pkg-uuid-x64/frontend/build.ninja",
+    "build/.ninja/pkg-uuid-x64/hook/build.ninja",
+    "build/.ninja/pkg-uuid-x64/launcher/build.ninja",
+    "build/.ninja/pkg-uuid-x64/monitor/build.ninja",
+    "build/.ninja/pkg-uuid-x64/service/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+    "build/.ninja/msvc-x86-release/call-boundaries/build.ninja",
+    "build/.ninja/msvc-x86-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x86-release/worker/build.ninja",
+    "build/.ninja/msvc-x86-release/wow32/build.ninja",
+    "build/.ninja/msvc-x64-release/frontend/build.ninja",
+    "build/.ninja/msvc-x64-release/hook/build.ninja",
+    "build/.ninja/msvc-x64-release/launcher/build.ninja",
+    "build/.ninja/msvc-x64-release/monitor/build.ninja",
+    "build/.ninja/msvc-x64-release/observation/build.ninja",
+    "build/.ninja/msvc-x64-release/service/build.ninja",
+    "build/.ninja/msvc-x64-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x64-release/worker/build.ninja",
+    "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja"
+  ],
+  "method": "Current build jobs, 34 Ninja graphs and dependencies, tests/tools exact basename references; pinned original and current hashes verified.",
+  "limitation": "Reopen entire branch queues if supported build or direct test begins using these files. No claim about individual condition values or unbuilt scenarios.",
+  "records": [
+    {
+      "path": "src/mvdm-host/bde/bde.h",
+      "current_sha256": "3529e3bba56ec74a23dde5e79310c9e85128a374185117366e82e98e2d8a0d17",
+      "original_sha256": "e85678f92da6f86f65e30b38530ccda84a03d632ee39917d5b3eec81d1a8fc8e",
+      "arms": [
+        {
+          "line": 234,
+          "kind": "ifndef",
+          "expression": "i386"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/bde/bdemisc.c",
+      "current_sha256": "2d385b3f0a5e671edd5e3039c4def9f705e80cac7746a4225043b759768a6a46",
+      "original_sha256": "0bf544626a6e6b2bcd80f52efb21942eaa58fcfd0e1b1a682652c975e290919b",
+      "arms": [
+        {
+          "line": 245,
+          "kind": "ifndef",
+          "expression": "i386"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/dasm386.c",
+      "current_sha256": "0df8e6074da26f719a6b0aa72f89e3bf71af2071ac1a7e8bf29b11f8bb795176",
+      "original_sha256": "13e50a6d575f65068c7b3eade04c4789c9fe587c69624810b69351bb765c4c6c",
+      "arms": [
+        {
+          "line": 43,
+          "kind": "ifdef",
+          "expression": "PIG"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dasm.h",
+      "current_sha256": "25701d961e72cb47ef84cbfc6efb702de83b7198b837edad8d227ae5ccd5aa68",
+      "original_sha256": "bb18cfba18fc1f8379feef143161e3e62462354cb101a95ac5e8f6e434c0dbe0",
+      "arms": [
+        {
+          "line": 21,
+          "kind": "ifdef",
+          "expression": "DASM_INTERNAL"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/decode.h",
+      "current_sha256": "c4502f6c9d2439c0764abd0d80eee077888d9902a689e5f7dc854be30826d3d5",
+      "original_sha256": "d9ecc3cc6097818f6ab37478612778163fc1b647cf76c3159f30978534dab027",
+      "arms": [
+        {
+          "line": 12,
+          "kind": "ifndef",
+          "expression": "_DECODE_H_"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gfiempty.h",
+      "current_sha256": "d3eafe8659a294981af3ce3ddce6afa4bbe62dbb962078e94e2bb2fa0cc0b293",
+      "original_sha256": "2990b990982a7381bb75662cf11c2378b958a912d188b4544d88be93cf9e6d0d",
+      "arms": [
+        {
+          "line": 22,
+          "kind": "ifdef",
+          "expression": "ANSI"
+        },
+        {
+          "line": 33,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hg_cpu.h",
+      "current_sha256": "d04da67ee5ee4ff974868ad8fefcc43f6a8049f584f9613b5042136dfc28477b",
+      "original_sha256": "81ae1604f915ac0d7ca8e0ad9a07b0ae280f7b0029edd2260c6cba142276b7a0",
+      "arms": [
+        {
+          "line": 203,
+          "kind": "ifdef",
+          "expression": "LIM"
+        },
+        {
+          "line": 210,
+          "kind": "ifndef",
+          "expression": "PROD"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hg_stat.h",
+      "current_sha256": "9153598b36e26c703e7d43a72dfcf2d60a46a63b0328734b1ac2f48597036e66",
+      "original_sha256": "b628d6dd29dbf4b1f039f0362922ade1dc1e4588c5271b95f45a7addd080e9ea",
+      "arms": [
+        {
+          "line": 23,
+          "kind": "ifdef",
+          "expression": "PROD"
+        },
+        {
+          "line": 25,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_sig.h",
+      "current_sha256": "c7e7d314bc218f6368787d88db083733412159bbf64a10d2c11872da14a614d3",
+      "original_sha256": "c3090a8b6b8f9f270d8d4276b88c4b5157c928a38b27ec79cccef4186d6a108b",
+      "arms": [
+        {
+          "line": 16,
+          "kind": "ifdef",
+          "expression": "ANSI"
+        },
+        {
+          "line": 18,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_uis.h",
+      "current_sha256": "fa91735ede8341fbf582ceabb15fef7ff1c4dc2a144b71d7fb0d22ef03d89662",
+      "original_sha256": "929e79db4ec85a73286a04100c74415091bf7ce3f9ee890e374edeae47c103df",
+      "arms": [
+        {
+          "line": 1,
+          "kind": "ifndef",
+          "expression": "_HOST_UIS_H"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/lm_clien.h",
+      "current_sha256": "a70e1935d16c793bf7b86efe0b376760bd43a26d04828e4948ae6aa64ba47c28",
+      "original_sha256": "dcf42ddb359e55b9368c5d4e4b8f7a4ed075af40e26328b0434e3565406a8c6b",
+      "arms": [
+        {
+          "line": 29,
+          "kind": "ifndef",
+          "expression": "_LM_CLIENT_H_"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/m_errorp.h",
+      "current_sha256": "599883b665cd4374ff4645480f1f539fa7b52a7a2f040942018d63d525bd69f9",
+      "original_sha256": "ca61755977b972853bda02c4f659554e14efd7b7abab238f0b30e51dbd9b3d66",
+      "arms": [
+        {
+          "line": 1,
+          "kind": "ifndef",
+          "expression": "_x_ERROR_H"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/m_fs.h",
+      "current_sha256": "1cf878554dbbf016807b36144d1be9825126ff90d7ee3f89d8a42fb9549021fc",
+      "original_sha256": "b6206bbaab8b425286721c07e1c7082dfdc0e3ff103d7d753420bcb7ef2f398e",
+      "arms": [
+        {
+          "line": 1,
+          "kind": "ifndef",
+          "expression": "_x_FS_H"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/m_lpcmp.h",
+      "current_sha256": "c9f5af6edc86d226327ae98ef074f1893317706f20162b8baa3f74dc651bcf4d",
+      "original_sha256": "157ac9a370fc9c2e7586dbea939d39c6f0ca1ef32f91f1f2a26e441fa9fb4628",
+      "arms": [
+        {
+          "line": 1,
+          "kind": "ifndef",
+          "expression": "_M_LPCMp_H"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/make_dis.h",
+      "current_sha256": "dae7ddbe7bbc08b4bd01fb5066999d8b27364007d789321b1e61ddabd8df2db8",
+      "original_sha256": "aa42e79db75fcda7b0971580a86c095bf8aa49bf13e8ce6acad98f24ca9c4aa6",
+      "arms": [
+        {
+          "line": 13,
+          "kind": "ifndef",
+          "expression": "SOURCE"
+        },
+        {
+          "line": 54,
+          "kind": "ifndef",
+          "expression": "DeleteHDDataFile"
+        },
+        {
+          "line": 57,
+          "kind": "ifndef",
+          "expression": "FeedbackHDCreation"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse16b.h",
+      "current_sha256": "300724b8d12c2cdf7ff901133ade393de83311b715526c4429b33d0aacde7cbc",
+      "original_sha256": "ef535eea17068630110026351373b0e5514ae2464a92474633dbe8140318b250",
+      "arms": [
+        {
+          "line": 26,
+          "kind": "ifndef",
+          "expression": "_MOUSE_16B_H_"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/msw_dbg.h",
+      "current_sha256": "2166b7a60ba4be4a3850ced4b23a7387adf74194091acb25df292ad1e899223d",
+      "original_sha256": "3726b678c5bd4e98484c423b685b178d28c074625ce1de934d946f07021848e7",
+      "arms": [
+        {
+          "line": 21,
+          "kind": "ifndef",
+          "expression": "MSW_DBG_H"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rommap.h",
+      "current_sha256": "a08afc9d77a8a545c3f7fc2145d22b2c7f0238b6f5e0e2fe1181b898cd388e73",
+      "original_sha256": "b3e37f197c8bf67333bc72ea5035dcc529d714330ece237abdf0bc06a1152105",
+      "arms": [
+        {
+          "line": 25,
+          "kind": "ifndef",
+          "expression": "_ROMMAP_H_"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_asy.h",
+      "current_sha256": "516e70f4b06caa952c4a93d6a176e4ce51525244851cc0040163493d10688d99",
+      "original_sha256": "ef87c2c6eb2300a4339846a80334687828fd184b20a274f568f87446157dbfc0",
+      "arms": [
+        {
+          "line": 32,
+          "kind": "ifdef",
+          "expression": "ANSI"
+        },
+        {
+          "line": 35,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "current_sha256": "d911a78990e1fcb794b3061ce58afc38c0e5a3ca1ebfa64792d377f5680aabb9",
+      "original_sha256": "1db2d689864893264a6c40445525840a6047213caea4945a646fc59cc41d9019",
+      "arms": [
+        {
+          "line": 26,
+          "kind": "ifndef",
+          "expression": "USER_HOME"
+        },
+        {
+          "line": 30,
+          "kind": "ifndef",
+          "expression": "SYSTEM_HOME"
+        },
+        {
+          "line": 38,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 44,
+          "kind": "ifndef",
+          "expression": "USER_CONFIG"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/vgastate.h",
+      "current_sha256": "e9ff7a7677abf3dd23ccabc5d6849560a06f4943b7cf1286c33db37cff812295",
+      "original_sha256": "bfff3b82a50c1ac89d1beb0195cffd7e4fb82a90715c25d279fd8aa8bd77580c",
+      "arms": [
+        {
+          "line": 22,
+          "kind": "ifndef",
+          "expression": "_VGASTATE_H_"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/worm.h",
+      "current_sha256": "2583b2cdbc5bccc3d1dbfca781b76bd460eb52e0f71e4f49f36e9df134defbba",
+      "original_sha256": "d49a3112a511c092090753bf4b65c714785a049f09f312f0a78006a91531dc61",
+      "arms": [
+        {
+          "line": 107,
+          "kind": "ifdef",
+          "expression": "ANSI"
+        },
+        {
+          "line": 111,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ga_glue.c",
+      "current_sha256": "7cd2f02a150c3a8699938d67962cc969d3f1ddb9ee4c6e3d6b792244f8ef2bf1",
+      "original_sha256": "8bbd170935279a625b5add89e491dd788f914d963788fe007b0ac08c942f5536",
+      "arms": [
+        {
+          "line": 23,
+          "kind": "ifdef",
+          "expression": "C_VID"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/hostgrph.h",
+      "current_sha256": "81a5d44ca57274fe0e2f897866736ed2d3cbef8cf8a238cc51f80ca015e2ac4b",
+      "original_sha256": "de614afaf98aba14ba184f6ce8381b17c20a244f9f96f823ea60b713861b26e4",
+      "arms": [
+        {
+          "line": 36,
+          "kind": "ifndef",
+          "expression": "SUN_VA"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_getxx.h",
+      "current_sha256": "533a42fc16105fd519a459d3e424d5c743b0afc95a04ef69e561ef8034a9eab6",
+      "original_sha256": "b7adbf0d1f261f852f78179e757fb1ed8004db8ea6711ddf1fc4d5bb19819c46",
+      "arms": [
+        {
+          "line": 1,
+          "kind": "ifdef",
+          "expression": "CCPU"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/sdos_ddi.h",
+      "current_sha256": "e183eb2d65ff8254829f8f20d3d102e03136a0542db32ab74bffb08da4d41a50",
+      "original_sha256": "c6b1f280ca1a33eadab8509fee4e064b388f4e508355ae9540b3fe1ef0fd10d1",
+      "arms": [
+        {
+          "line": 28,
+          "kind": "ifndef",
+          "expression": "_sdos_ddi-h_"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/winsigni.h",
+      "current_sha256": "699060f80cf01ec822defd8c2bcff82cb5f37846b6895e48c0b4367b784f840d",
+      "original_sha256": "54088b4dcd3e1255852d94eb4beec3dafdfb9f915d20a810624b62179db2c44a",
+      "arms": [
+        {
+          "line": 1,
+          "kind": "ifndef",
+          "expression": "_INSIGNIA_H"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/vcdex.h",
+      "current_sha256": "bd80cb9c105fc9cd308e839bd9c549312dad5886f25f462656ce6c44cb88223e",
+      "original_sha256": "ef58ff9747b8b14a904a3b2894fb496fea500771aaec462dd8cefed63bc00b5a",
+      "arms": [
+        {
+          "line": 65,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        },
+        {
+          "line": 84,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/sample1/fax32/fax32.h",
+      "current_sha256": "357e1c2d7220ec180e981610ba0f6a6ef00341b926a4f073f06b10555203b4ac",
+      "original_sha256": "efdab3d2e2bd986c90192c1e539a739bcff54c39ec8be700101b251f911f177b",
+      "arms": [
+        {
+          "line": 7,
+          "kind": "ifdef",
+          "expression": "WIN_32"
+        },
+        {
+          "line": 11,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 15,
+          "kind": "ifdef",
+          "expression": "WIN"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/vdmexts.h",
+      "current_sha256": "e2841fce0dfb35d537e5b532c470b34a721338717f8470d25d45ade3a2e2a8c5",
+      "original_sha256": "1e79c2ae94e529e01122a087a728a16561c36d26c76052c06b18db5ded498e76",
+      "arms": [
+        {
+          "line": 321,
+          "kind": "ifndef",
+          "expression": "i386"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/witbl.h",
+      "current_sha256": "f7876bd02b05d09b8e19d2d46eb3a71bc2d5540784f9e1168da9a24e67f04477",
+      "original_sha256": "f6c77e7764d702501085ce7be7f8d8ba79cb70673e6830cb9b7fd7d0550a2a03",
+      "arms": [
+        {
+          "line": 21,
+          "kind": "ifdef",
+          "expression": "DEBUG_OR_WOWPROFILE"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtable.h",
+      "current_sha256": "fdb13f79cb84e9647d5ec6e6c678df8484ab2fb5e4719a203a01441ba0456702",
+      "original_sha256": "414bf1f402654d8e8a9f2afd5ec192f9585c43c1c755b40a74b1041f80f5f281",
+      "arms": [
+        {
+          "line": 19,
+          "kind": "ifdef",
+          "expression": "DEBUG_OR_WOWPROFILE"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/basedll.h",
+      "current_sha256": "bddba811878bdf52d34e9cb957bb3fa202e687e65b13235483c68ceae621854c",
+      "original_sha256": "f7f295d58032ab2157b448ff421445f7e45c59662b026e82c5307d75e953be2a",
+      "arms": [
+        {
+          "line": 22,
+          "kind": "ifndef",
+          "expression": "_BASEP_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddcdrm.h",
+      "current_sha256": "fa8f48a7b7e224517b1c82596da07feb583ba0563265357da6fd0da8b5ffc09c",
+      "original_sha256": "a6c5c64a7dec56163dc86382ba550b2ae4eeacbc2bea2016e38001e3b3d90286",
+      "arms": [
+        {
+          "line": 24,
+          "kind": "ifndef",
+          "expression": "_NTDDCDRM_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/printscan/inc/winddiui.h",
+      "current_sha256": "27c69996460f207fe4a0077a5ec93320926a3b1bd228779738c4487d0c5e0215",
+      "original_sha256": "9d84cbe81b902ac3bc93965f654fd07e9c4adc39783f695c4cd92f988d9d38ee",
+      "arms": [
+        {
+          "line": 10,
+          "kind": "ifndef",
+          "expression": "_WINDDIUI_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntseapi.h",
+      "current_sha256": "f4082fd7d67a69df72dc2ef9c381758c7cc8a0e945c19213282211207f1f5f07",
+      "original_sha256": "c380bc1fc7fb57ae6e55834ac5bbe1621a847f36119ff5b771d536eb6a120b30",
+      "arms": [
+        {
+          "line": 26,
+          "kind": "ifndef",
+          "expression": "_NTSEAPI_"
+        }
+      ]
+    }
+  ]
+}
