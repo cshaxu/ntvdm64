@@ -458,3 +458,15 @@ rejected = subprocess.run(base[:-1] + ['/DALLOC_PRAGMA', '/DNTOS_KERNEL_RUNTIME'
 if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
     raise SystemExit('kernel RTL time selector not rejected')
 print('PASS original RTL time selector and both operands')
+
+# DPMI kernel-VDM state is not available in the selected CCPU worker.
+dpmi_data = (repo / 'src/mvdm-host/dpmi32/dpmidata.h').read_text(encoding='latin1')
+marker = '#error Excluded unsupported i386 kernel VDM DPMI state'
+if '#ifdef i386\n' + marker not in dpmi_data:
+    raise SystemExit('DPMI original i386 exclusion missing')
+probe.write_text('#ifdef i386\n' + marker + '\n#endif\n', encoding='ascii')
+allowed = subprocess.run(base[:-1] + ['/Ui386'] + base[-1:], capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base[:-1] + ['/Di386'] + base[-1:], capture_output=True, text=True, errors='replace')
+if allowed.returncode or not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
+    raise SystemExit('DPMI i386 state guard failed')
+print('PASS DPMI i386 kernel state exclusion')

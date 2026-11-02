@@ -1,0 +1,17 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmidata.h",
+  "before_sha256": "0358654ff6aeca9a35762914a7d3665ddbdb4246e6436243469bcdc21764e8d5",
+  "after_sha256": "f1d94f3e394860c23485664d170d195d8fe8e38317bec2450b20a87f48d7ff13",
+  "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+  "removed_original_arm_sha256": "0d793abb4772286c73b62e3f697c2b8c6200e526667c7500000c921a79f31f0a",
+  "product_contexts": 36,
+  "context_source_files": 154,
+  "line_control": 46,
+  "selected_preprocessed_graphs": "both worker outputs equal to before; all 36 actual include contexts had no i386, with 154 actual source/include files checked for macro mutation",
+  "test": "both worker builds and rejected-conditions suite pass; selected software-interrupt/fault phases of DPMI script passed but full script fails on pre-existing DIV-515 non-CCPU compilation",
+  "failing_log_sha256": "277446cefcd8fc7ce75dd4c277795f51b85cd343cd7ae37f773ef4992561b211",
+  "prior_failing_log_sha256": "e5cb15f84a7adf42ccd8b9d57be21141892e61f825610d9e0ab7b72c6a7e02ae",
+  "old_t289_graph": "historical i386 script depends on missing src/mvdm-host-overlay and src/mvdm-platform-abi paths and is not an operational supported graph",
+  "package": "six byte-identical and four PE timestamp-only; full-tested release retained",
+  "limit": "Does not prove any legacy kernel VDM i386 profile; that branch is now intentionally rejected. Original-wide reconciliation and standalone page-domain link remain open."
+}

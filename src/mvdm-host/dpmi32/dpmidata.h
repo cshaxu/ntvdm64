@@ -28,20 +28,10 @@ Revision History:
 // Defines to allow us to use a common dispatch table without having
 // to add a bunch of stub functions
 //
-#ifdef i386 
-
-#define LockedPMStackSel      VdmTib.PmStackInfo.SsSelector
-#define LockedPMStackCount    VdmTib.PmStackInfo.LockCount
-#define PMLockOrigEIP         VdmTib.PmStackInfo.SaveEip
-#define PMLockOrigESP         VdmTib.PmStackInfo.SaveEsp
-#define PMLockOrigSS          VdmTib.PmStackInfo.SaveSsSelector
-
-#define DosxFaultHandlerIret  VdmTib.PmStackInfo.DosxFaultIret
-#define DosxFaultHandlerIretd VdmTib.PmStackInfo.DosxFaultIretD
-#define DosxIntHandlerIret    VdmTib.PmStackInfo.DosxIntIret
-#define DosxIntHandlerIretd   VdmTib.PmStackInfo.DosxIntIretD
-
+#ifdef i386
+#error Excluded unsupported i386 kernel VDM DPMI state
 #else
+#line 45
 
 #if defined(CPU_40_STYLE)
 /* CPU40 owns the same DPMI BOP frame transition in `modesw.c`.  The
