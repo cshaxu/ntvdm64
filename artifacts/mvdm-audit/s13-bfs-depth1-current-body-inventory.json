@@ -3743,163 +3743,163 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba"
+      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
       "start": 29,
-      "cut": 39,
-      "group_end": 39,
+      "cut": 31,
+      "group_end": 31,
       "kind": "ifdef",
       "expression": "i386",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 9,
-      "source_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 58,
-      "cut": 60,
-      "group_end": 63,
+      "start": 51,
+      "cut": 53,
+      "group_end": 56,
       "kind": "ifdef",
       "expression": "NOLOG",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba"
+      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 60,
-      "cut": 63,
-      "group_end": 63,
+      "start": 53,
+      "cut": 56,
+      "group_end": 56,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba"
+      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 66,
-      "cut": 68,
-      "group_end": 75,
+      "start": 59,
+      "cut": 61,
+      "group_end": 68,
       "kind": "ifdef",
       "expression": "DEBUG",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba"
+      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 68,
-      "cut": 75,
-      "group_end": 75,
+      "start": 61,
+      "cut": 68,
+      "group_end": 68,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba"
+      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 1209,
-      "cut": 1211,
-      "group_end": 1211,
+      "start": 1202,
+      "cut": 1204,
+      "group_end": 1204,
       "kind": "ifndef",
       "expression": "WM_USER",
       "status": "pending",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba"
+      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 1240,
-      "cut": 1242,
-      "group_end": 1250,
+      "start": 1233,
+      "cut": 1235,
+      "group_end": 1243,
       "kind": "ifndef",
       "expression": "WIN31",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba"
+      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 1242,
-      "cut": 1250,
-      "group_end": 1250,
+      "start": 1235,
+      "cut": 1243,
+      "group_end": 1243,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 7,
-      "source_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba"
+      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 1278,
-      "cut": 1280,
-      "group_end": 1291,
+      "start": 1271,
+      "cut": 1273,
+      "group_end": 1284,
       "kind": "ifndef",
       "expression": "WIN31",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba"
+      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 1280,
-      "cut": 1291,
-      "group_end": 1291,
+      "start": 1273,
+      "cut": 1284,
+      "group_end": 1284,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 10,
-      "source_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba"
+      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 1323,
-      "cut": 1325,
-      "group_end": 1335,
+      "start": 1316,
+      "cut": 1318,
+      "group_end": 1328,
       "kind": "ifndef",
       "expression": "WIN31",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba"
+      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 1325,
-      "cut": 1335,
-      "group_end": 1335,
+      "start": 1318,
+      "cut": 1328,
+      "group_end": 1328,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 9,
-      "source_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba"
+      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
     },
     {
       "path": "src/mvdm-host/inc/wowcomm.h",
@@ -58131,11 +58131,11 @@
       "group_end": 63,
       "kind": "ifdef",
       "expression": "i386",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "2a92782fd0d9b824a1807e45ed89a7265180aa8dc340783f20ff7ae51a82f4e5"
+      "source_sha256": "8ab7945ce7b6bb64dd7ab9a0cd117efb616ec55b99dfc66c93bd3ba685d6695e"
     },
     {
       "path": "src/mvdm-host/wow32/wspool.h",
@@ -58148,7 +58148,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "2a92782fd0d9b824a1807e45ed89a7265180aa8dc340783f20ff7ae51a82f4e5"
+      "source_sha256": "8ab7945ce7b6bb64dd7ab9a0cd117efb616ec55b99dfc66c93bd3ba685d6695e"
     },
     {
       "path": "src/mvdm-host/wow32/wstbl.h",
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 873,
-    "newly-excluded": 634,
+    "pending": 871,
+    "newly-excluded": 636,
     "already-excluded": 1669,
     "retained-observed": 1865,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
-    "not-guard": 833,
+    "not-guard": 831,
     "guard": 40
   }
 }

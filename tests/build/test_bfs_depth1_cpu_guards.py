@@ -503,3 +503,31 @@ for following in (322, 667):
     if not rejected.returncode or wdib_marker[7:] not in rejected.stdout + rejected.stderr:
         raise SystemExit('unsupported WOW DIB i386 profile did not fail')
 print('PASS scoped WOW DIB exclusions and original continuation lines')
+
+header_marker = '#error Excluded unsupported i386 WOW header profile'
+for path, continuation, has_else in (
+    ('src/mvdm-host/inc/wow.h', 40, False),
+    ('src/mvdm-host/wow32/wspool.h', 64, True),
+):
+    lines = (repo / path).read_text(encoding='latin1').splitlines()
+    starts = [i for i, line in enumerate(lines) if line.strip() == '#ifdef i386'
+              and i + 1 < len(lines) and lines[i + 1].strip() == header_marker]
+    if len(starts) != 1:
+        raise SystemExit('WOW i386 header guard missing: ' + path)
+    start = starts[0]
+    if has_else:
+        if start + 5 != 63 or [x.strip() for x in lines[start + 2:start + 5]] != ['#else', '#define SafeLoadLibrary(name) LoadLibrary(name)', '#endif']:
+            raise SystemExit('WOW spool selected alternative changed')
+        snippet = ['#ifdef i386', header_marker, '#else', 'int selected = 1;', '#endif', '#line 64', 'int following_line = __LINE__;']
+    else:
+        if [x.strip() for x in lines[start + 2:start + 4]] != ['#endif', '#line 40']:
+            raise SystemExit('WOW header original continuation changed')
+        snippet = ['#ifdef i386', header_marker, '#endif', lines[start + 3].strip(), 'int following_line = __LINE__;']
+    probe.write_text('\n'.join(snippet) + '\n', encoding='ascii')
+    good = subprocess.run(base + [str(probe)], capture_output=True, text=True, errors='replace')
+    bad = subprocess.run(base + ['/Di386', str(probe)], capture_output=True, text=True, errors='replace')
+    if good.returncode or not re.search(r'int\s+following_line\s*=\s*' + str(continuation) + r'\s*;', good.stdout):
+        raise SystemExit('WOW header selected or original-line control failed: ' + path)
+    if not bad.returncode or header_marker[7:] not in bad.stdout + bad.stderr:
+        raise SystemExit('WOW header i386 rejection failed: ' + path)
+print('PASS two scoped WOW i386 header guards and original continuation lines')

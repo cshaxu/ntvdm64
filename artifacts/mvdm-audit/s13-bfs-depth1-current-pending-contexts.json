@@ -543,16 +543,7 @@
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 29,
-      "kind": "ifdef",
-      "expression": "i386",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 90
-    },
-    {
-      "path": "src/mvdm-host/inc/wow.h",
-      "start": 1209,
+      "start": 1202,
       "kind": "ifndef",
       "expression": "WM_USER",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
@@ -6419,15 +6410,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/wow32/wspool.h",
-      "start": 59,
-      "kind": "ifdef",
-      "expression": "i386",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 90
-    },
-    {
       "path": "src/mvdm-host/wow32/wusercli.h",
       "start": 12,
       "kind": "ifdef",
@@ -7870,7 +7852,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 29
+      "count": 27
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",

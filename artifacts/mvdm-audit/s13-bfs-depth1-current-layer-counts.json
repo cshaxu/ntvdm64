@@ -3,15 +3,15 @@
   "depth1_groups": 4074,
   "depth1_arms": 5050,
   "depth1_status": {
-    "pending": 873,
-    "newly-excluded": 634,
+    "pending": 871,
+    "newly-excluded": 636,
     "already-excluded": 1669,
     "retained-observed": 1865,
     "retained-original-assertion": 9
   },
   "depth2_parent_status_counts": {
     "retained-observed": 1403,
-    "pending": 1632
+    "pending": 1631
   },
   "restored_original_groups_relative_to_fixed_head": 50,
   "restored_in_current_bfs_pass": 17,

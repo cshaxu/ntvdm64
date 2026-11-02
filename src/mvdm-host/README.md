@@ -2237,3 +2237,9 @@ MVDM-HOST-DIV-632: retain the original WOW DIB `i386` condition frames in
 `wow32/wdib.c`, replacing the two unselected i386-only bodies with `#error`.
 The selected WOW32 graph uses the original non-i386 mapping implementation;
 see `../../artifacts/mvdm-audit/s13-bfs-depth1-wdib-i386.json`.
+
+MVDM-HOST-DIV-633: preserve the original `i386` outer conditions in
+`inc/wow.h` and `wow32/wspool.h`, replacing their unsupported WOW-profile
+bodies with `#error`. The original WOW non-i386 spool selection remains;
+this does not exclude i386 in other source contexts. See
+`../../artifacts/mvdm-audit/s13-bfs-depth1-wow-i386-headers.json`.

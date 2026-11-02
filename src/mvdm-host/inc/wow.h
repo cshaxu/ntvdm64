@@ -27,16 +27,9 @@
 #include <wownt32.h>
 
 #ifdef i386
-#ifndef DEBUG     // should be DEBUG_OR_WOWPROFILE, but
-                  // that won't work for assembler as things are.
-
-//
-// Flag to control enable/disable W32TryCall function.
-//
-
-#define NO_W32TRYCALL 1
+#error Excluded unsupported i386 WOW header profile
 #endif
-#endif
+#line 40
 
 /* WOW constants
  */
