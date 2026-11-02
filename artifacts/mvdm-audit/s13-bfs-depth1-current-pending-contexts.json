@@ -326,24 +326,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
-      "start": 808,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
-      "start": 4692,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
       "start": 47,
       "kind": "else",
@@ -378,15 +360,6 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
-      "start": 1516,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
@@ -560,15 +533,6 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 890,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/support/xt.c",
       "start": 164,
       "kind": "else",
@@ -598,15 +562,6 @@
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
       "start": 345,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
-      "start": 628,
       "kind": "else",
       "expression": "",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
@@ -1114,7 +1069,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 36
+      "count": 31
     },
     {
       "reason": "combined-i386-cpu40-supported-context-unresolved",

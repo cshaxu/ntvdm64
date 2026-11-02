@@ -7171,8 +7171,8 @@
       "group_end": 810,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "8913f71c6632f75b745b5061e43cd1d56c6d26208092e606ff0bf5710a8f603c"
@@ -8276,8 +8276,8 @@
       "group_end": 4694,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "8913f71c6632f75b745b5061e43cd1d56c6d26208092e606ff0bf5710a8f603c"
@@ -22628,8 +22628,8 @@
       "group_end": 1518,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "bb7d1d3c03010d7f2da52a7c26c3a655d9ffd684e27dd16264bbf96e65c2ee1f"
@@ -32521,8 +32521,8 @@
       "group_end": 892,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
@@ -37461,8 +37461,8 @@
       "group_end": 630,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "4e2728687508b9c240c56e65fc4ca8e93a557e2ffdeaf61f761775b11d0a0d6b"
@@ -65682,13 +65682,13 @@
   "status_counts": {
     "unselected-file": 742,
     "newly-excluded": 642,
-    "already-excluded": 1669,
-    "pending": 121,
+    "already-excluded": 1674,
+    "pending": 116,
     "retained-observed": 1869,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
     "not-guard": 83,
-    "guard": 38
+    "guard": 33
   }
 }

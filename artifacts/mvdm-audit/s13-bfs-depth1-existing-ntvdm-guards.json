@@ -1,0 +1,108 @@
+{
+  "scope": "five existing first-depth non-NTVDM #error arms in four selected host C translation units; no source changes",
+  "evidence": "Two current real worker compile commands per file define NTVDM; checked source files and current test/build directories for NTVDM undef. CCPU lifecycle fixture builds with /DNTVDM, callback test reuses actual worker flags, I/O object fixture defines NTVDM. Existing DIV-537 historical body hashes recorded in s12-non-ntvdm.jsonl.",
+  "limits": "Graph observations and named independent fixture builds; unsupported future profiles or newly admitted tests require review. The independent fixture may compile its own harness; this classification only concerns the actual four source files.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_sha256": "8913f71c6632f75b745b5061e43cd1d56c6d26208092e606ff0bf5710a8f603c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/ccpu/c_main.obj",
+          "command_sha256": "3187f7f824ed9aa838e02ff463a679fb5d270011264c3d6fdf535b38618f8ab7"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/ccpu/c_main.obj",
+          "command_sha256": "3187f7f824ed9aa838e02ff463a679fb5d270011264c3d6fdf535b38618f8ab7"
+        }
+      ],
+      "guards": [
+        {
+          "line": 808,
+          "guard": "#else",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+        },
+        {
+          "line": 4692,
+          "guard": "#else",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_sha256": "bb7d1d3c03010d7f2da52a7c26c3a655d9ffd684e27dd16264bbf96e65c2ee1f",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/disks/floppy.obj",
+          "command_sha256": "5fc7f8825d81575de1ddcc16c995f818a331ede9e78ad0933521830bef9d847d"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/disks/floppy.obj",
+          "command_sha256": "5fc7f8825d81575de1ddcc16c995f818a331ede9e78ad0933521830bef9d847d"
+        }
+      ],
+      "guards": [
+        {
+          "line": 1516,
+          "guard": "#else",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "current_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e",
+      "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/support/ios.obj",
+          "command_sha256": "d7ee0ecedf5e37efccb971094d717263f6b0cb07a60119a6328df46078f6e411"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/support/ios.obj",
+          "command_sha256": "d7ee0ecedf5e37efccb971094d717263f6b0cb07a60119a6328df46078f6e411"
+        }
+      ],
+      "guards": [
+        {
+          "line": 890,
+          "guard": "#else",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "4e2728687508b9c240c56e65fc4ca8e93a557e2ffdeaf61f761775b11d0a0d6b",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/system/timer.obj",
+          "command_sha256": "6770a759a7fa6832c17eab2bbe91f803b3b13d355edee0c6add1221f4f7c27d3"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/system/timer.obj",
+          "command_sha256": "6770a759a7fa6832c17eab2bbe91f803b3b13d355edee0c6add1221f4f7c27d3"
+        }
+      ],
+      "guards": [
+        {
+          "line": 628,
+          "guard": "#else",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+        }
+      ]
+    }
+  ]
+}
