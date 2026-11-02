@@ -1,0 +1,71 @@
+{
+  "scope": "three first-depth local DIV-481 frame guards; no claim that non-CCPU DPMI fixture as a whole passes",
+  "path": "src/mvdm-host/dpmi32/dpmiint.c",
+  "source_sha256": "21319196302ee1a5bd2750b7fef9c71b07dca7ce589f9da9e5f6fbb887deb7fc",
+  "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+  "adaptation_commit": "f1a641bd725c9ae1e936aee3b393a2b4f7865c01",
+  "groups": [
+    636,
+    1196,
+    1269
+  ],
+  "worker_graphs": [
+    "build/.ninja/msvc-x86-release/worker",
+    "build/.ninja/msvc-x64-release/worker-reference-x86"
+  ],
+  "include_files_scanned": 123,
+  "controls": [
+    {
+      "arch": "x86",
+      "line": 636,
+      "selected_exit": 0,
+      "forced_else_exit": 2
+    },
+    {
+      "arch": "x86",
+      "line": 1196,
+      "selected_exit": 0,
+      "forced_else_exit": 2
+    },
+    {
+      "arch": "x86",
+      "line": 1269,
+      "selected_exit": 0,
+      "forced_else_exit": 2
+    },
+    {
+      "arch": "x64",
+      "line": 636,
+      "selected_exit": 0,
+      "forced_else_exit": 2
+    },
+    {
+      "arch": "x64",
+      "line": 1196,
+      "selected_exit": 0,
+      "forced_else_exit": 2
+    },
+    {
+      "arch": "x64",
+      "line": 1269,
+      "selected_exit": 0,
+      "forced_else_exit": 2
+    }
+  ],
+  "selected_fixture": {
+    "result_sha256": "b2b124140496f0272caa5054be0283334326ff9548bc5c90bb169b3faa34998d",
+    "cases": [
+      "absent/v86/stack failure",
+      "handler widths",
+      "stack limits",
+      "null mapping",
+      "fault and interrupt return"
+    ]
+  },
+  "unresolved_negative_fixture": {
+    "source": "tests/observation/verify-dpmi-swint-selected.ps1",
+    "result": "failed at existing nested DIV-515 when compiled with /UCCPU; independently recorded before this batch",
+    "log_sha256": "6062261f2706789cb83d566a11f31b4d822a49437670456496b24c0cab2328cd",
+    "owner": "next BFS depth; not treated as passed"
+  }
+}

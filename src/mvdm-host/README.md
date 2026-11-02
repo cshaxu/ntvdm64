@@ -1,5 +1,11 @@
 # mvdm
 
+Three first-depth CPU40 frame guards in `dpmi32/dpmiint.c` are local
+DIV-481 adaptations; the pinned original frame logic is unconditional at
+those positions. The selected-object checks passed, while the separate
+non-CCPU compile remains a failed nested-boundary test. See
+`../../artifacts/mvdm-audit/s13-bfs-depth1-dpmi-local-frame-guards.json`.
+
 MVDM-HOST-DIV-620: reject the unsupported non-little-endian alternative of
 the existing DIV-320 host register union adaptation, retaining the selected
 byte layout and the original continuation diagnostic position. Evidence:

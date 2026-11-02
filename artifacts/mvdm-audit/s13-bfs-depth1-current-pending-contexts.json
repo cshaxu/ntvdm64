@@ -147,15 +147,6 @@
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "start": 639,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/dpmi32/dpmiint.c",
       "start": 792,
       "kind": "ifdef",
       "expression": "i386",
@@ -170,24 +161,6 @@
       "expression": "i386",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "start": 1202,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "start": 1271,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
       "current_actual_includers": 2
     },
     {
@@ -8035,7 +8008,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 48
+      "count": 45
     },
     {
       "reason": "combined-i386-cpu40-supported-context-unresolved",
