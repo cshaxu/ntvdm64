@@ -1,0 +1,201 @@
+{
+  "scope": "whole unselected original non-mvdm conapi.h, not individual condition truth",
+  "path": "src/non-mvdm/public/internal/windows/inc/conapi.h",
+  "source_sha256": "a8f80ca5f612a7918539f5bff7614bb41b870d6e8cb1fbf553076b1590508fc1",
+  "original_sha256": "1a78135501f91ac2a004cb68c5831c626e907481afc62970eb97747d16485de2",
+  "selected_header": "src/compat/include/conapi.h",
+  "selected_header_sha256": "95e4272d19ce0b2a2b18b0c02324c1904284138a29d4b7b318c4314f1997c6be",
+  "actual_include_contexts": {
+    "pending": 503,
+    "newly-excluded": 634,
+    "already-excluded": 1669,
+    "unselected-file": 368,
+    "retained-observed": 1869,
+    "retained-original-assertion": 9
+  },
+  "ninja_dependency_graphs_checked": [
+    "build/.ninja/console-observers-x64/build.ninja",
+    "build/.ninja/msvc-x64-formal-release/build.ninja",
+    "build/.ninja/msvc-x64-release/build.ninja",
+    "build/.ninja/msvc-x86-formal-release/build.ninja",
+    "build/.ninja/msvc-x86-release/build.ninja",
+    "build/.ninja/msvc-x86-suballoc-audit/build.ninja",
+    "build/.ninja/observations-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x86/build.ninja",
+    "build/.ninja/t463-s2-dialog-end-boundary/build.ninja",
+    "build/.ninja/t463-s2-dialog-procedure/build.ninja",
+    "build/.ninja/t473-s8-control-boundaries/build.ninja",
+    "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x86/wow32/build.ninja",
+    "build/.ninja/pkg-uuid-x64/frontend/build.ninja",
+    "build/.ninja/pkg-uuid-x64/hook/build.ninja",
+    "build/.ninja/pkg-uuid-x64/launcher/build.ninja",
+    "build/.ninja/pkg-uuid-x64/monitor/build.ninja",
+    "build/.ninja/pkg-uuid-x64/service/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+    "build/.ninja/msvc-x86-release/call-boundaries/build.ninja",
+    "build/.ninja/msvc-x86-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x86-release/worker/build.ninja",
+    "build/.ninja/msvc-x86-release/wow32/build.ninja",
+    "build/.ninja/msvc-x64-release/frontend/build.ninja",
+    "build/.ninja/msvc-x64-release/hook/build.ninja",
+    "build/.ninja/msvc-x64-release/launcher/build.ninja",
+    "build/.ninja/msvc-x64-release/monitor/build.ninja",
+    "build/.ninja/msvc-x64-release/observation/build.ninja",
+    "build/.ninja/msvc-x64-release/service/build.ninja",
+    "build/.ninja/msvc-x64-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x64-release/worker/build.ninja",
+    "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja"
+  ],
+  "independent_test_audit": "Console source fixture build scripts use src/compat/include directly or inherit production host flags. PIF builders that put public/internal/windows/inc on the search path use pif.h and do not include conapi.h. No direct include of the original full path was found.",
+  "reclassified_pending_arms": [
+    {
+      "line": 1,
+      "kind": "ifndef",
+      "expression": "NOGDI"
+    },
+    {
+      "line": 189,
+      "kind": "ifdef",
+      "expression": "UNICODE"
+    },
+    {
+      "line": 191,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 209,
+      "kind": "ifdef",
+      "expression": "UNICODE"
+    },
+    {
+      "line": 211,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 223,
+      "kind": "ifdef",
+      "expression": "UNICODE"
+    },
+    {
+      "line": 225,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 233,
+      "kind": "ifdef",
+      "expression": "UNICODE"
+    },
+    {
+      "line": 235,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 251,
+      "kind": "ifdef",
+      "expression": "UNICODE"
+    },
+    {
+      "line": 253,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 267,
+      "kind": "ifdef",
+      "expression": "UNICODE"
+    },
+    {
+      "line": 269,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 281,
+      "kind": "ifdef",
+      "expression": "UNICODE"
+    },
+    {
+      "line": 283,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 297,
+      "kind": "ifdef",
+      "expression": "UNICODE"
+    },
+    {
+      "line": 299,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 311,
+      "kind": "ifdef",
+      "expression": "UNICODE"
+    },
+    {
+      "line": 313,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 329,
+      "kind": "ifdef",
+      "expression": "UNICODE"
+    },
+    {
+      "line": 331,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 383,
+      "kind": "ifdef",
+      "expression": "UNICODE"
+    },
+    {
+      "line": 385,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 397,
+      "kind": "ifdef",
+      "expression": "UNICODE"
+    },
+    {
+      "line": 399,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 446,
+      "kind": "ifdef",
+      "expression": "UNICODE"
+    },
+    {
+      "line": 448,
+      "kind": "else",
+      "expression": ""
+    },
+    {
+      "line": 468,
+      "kind": "ifdef",
+      "expression": "UNICODE"
+    },
+    {
+      "line": 470,
+      "kind": "else",
+      "expression": ""
+    }
+  ],
+  "limitation": "A later target or independent test may add a new include path; reopen this original header queue on admission. Historical/unobserved configurations and individual branch expressions remain unproven."
+}
