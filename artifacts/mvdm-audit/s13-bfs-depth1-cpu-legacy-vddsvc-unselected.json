@@ -1,0 +1,176 @@
+{
+  "scope": "three unselected original headers only; individual conditions not adjudicated",
+  "graphs_checked": [
+    "build/.ninja/console-observers-x64/build.ninja",
+    "build/.ninja/msvc-x64-formal-release/build.ninja",
+    "build/.ninja/msvc-x64-release/build.ninja",
+    "build/.ninja/msvc-x86-formal-release/build.ninja",
+    "build/.ninja/msvc-x86-release/build.ninja",
+    "build/.ninja/msvc-x86-suballoc-audit/build.ninja",
+    "build/.ninja/observations-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x86/build.ninja",
+    "build/.ninja/t463-s2-dialog-end-boundary/build.ninja",
+    "build/.ninja/t463-s2-dialog-procedure/build.ninja",
+    "build/.ninja/t473-s8-control-boundaries/build.ninja",
+    "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x86/wow32/build.ninja",
+    "build/.ninja/pkg-uuid-x64/frontend/build.ninja",
+    "build/.ninja/pkg-uuid-x64/hook/build.ninja",
+    "build/.ninja/pkg-uuid-x64/launcher/build.ninja",
+    "build/.ninja/pkg-uuid-x64/monitor/build.ninja",
+    "build/.ninja/pkg-uuid-x64/service/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+    "build/.ninja/msvc-x86-release/call-boundaries/build.ninja",
+    "build/.ninja/msvc-x86-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x86-release/worker/build.ninja",
+    "build/.ninja/msvc-x86-release/wow32/build.ninja",
+    "build/.ninja/msvc-x64-release/frontend/build.ninja",
+    "build/.ninja/msvc-x64-release/hook/build.ninja",
+    "build/.ninja/msvc-x64-release/launcher/build.ninja",
+    "build/.ninja/msvc-x64-release/monitor/build.ninja",
+    "build/.ninja/msvc-x64-release/observation/build.ninja",
+    "build/.ninja/msvc-x64-release/service/build.ninja",
+    "build/.ninja/msvc-x64-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x64-release/worker/build.ninja",
+    "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja"
+  ],
+  "observed_cpu_headers": {
+    "o:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc/cpu4.h": 172
+  },
+  "cpu_owner": "src/mvdm-host/softpc.new/host/inc/host_def.h maps CpuH to cpu4.h in both accepted branches; non-CPU40 monitor interface rejected",
+  "test_references": "cpu2.h and cpu3.h are read by test_mirror_rejected_conditions.py for unsupported marker controls, not built as selected headers; vddsvc.h direct includes are restricted to historical VDD sample sources, not current selected graphs or direct compile tests",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
+      "current_sha256": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35",
+      "original_sha256": "7e9cb73f825974421128e93c90a0096ad10518b6f48e47824e4b5d140638d216",
+      "reclassified_pending_arms": 10,
+      "arms": [
+        {
+          "line": 44,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 78,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 140,
+          "kind": "ifndef",
+          "expression": "host_simulate"
+        },
+        {
+          "line": 144,
+          "kind": "ifndef",
+          "expression": "host_cpu_reset"
+        },
+        {
+          "line": 148,
+          "kind": "ifndef",
+          "expression": "host_cpu_init"
+        },
+        {
+          "line": 152,
+          "kind": "ifndef",
+          "expression": "host_cpu_interrupt"
+        },
+        {
+          "line": 175,
+          "kind": "ifdef",
+          "expression": "LITTLEND"
+        },
+        {
+          "line": 217,
+          "kind": "ifdef",
+          "expression": "CCPU"
+        },
+        {
+          "line": 533,
+          "kind": "ifndef",
+          "expression": "SPC386"
+        },
+        {
+          "line": 539,
+          "kind": "ifdef",
+          "expression": "CPU_PRIVATE"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "current_sha256": "aee92f447164977ef7dd3c01526211de10553c1202210cf21421bbdfb201a7c4",
+      "original_sha256": "ad167e9ff54476da9bc31c724d284073fb5c8796aa4417c66524aecb9e33bc0a",
+      "reclassified_pending_arms": 5,
+      "arms": [
+        {
+          "line": 71,
+          "kind": "ifdef",
+          "expression": "CPU_PRIVATE"
+        },
+        {
+          "line": 82,
+          "kind": "ifdef",
+          "expression": "CCPU"
+        },
+        {
+          "line": 821,
+          "kind": "ifdef",
+          "expression": "SPC386"
+        },
+        {
+          "line": 1192,
+          "kind": "ifndef",
+          "expression": "SPC386"
+        },
+        {
+          "line": 1203,
+          "kind": "ifdef",
+          "expression": "CPU_PRIVATE"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
+      "current_sha256": "5fa32f985179d9c554500bb242244bf484f75560fdf966cb464ee2e767c039b9",
+      "original_sha256": "70769da0455aa0b610ab046a4000bc108176dabeb8178ff8b649c41f7cd0897d",
+      "reclassified_pending_arms": 6,
+      "arms": [
+        {
+          "line": 24,
+          "kind": "ifndef",
+          "expression": "_NT_VDD"
+        },
+        {
+          "line": 53,
+          "kind": "ifndef",
+          "expression": "i386"
+        },
+        {
+          "line": 154,
+          "kind": "ifdef",
+          "expression": "i386"
+        },
+        {
+          "line": 167,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 189,
+          "kind": "ifdef",
+          "expression": "i386"
+        },
+        {
+          "line": 275,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    }
+  ],
+  "limitation": "Reopen file queues if a CPU20/CPU30 or historical sample VDD build is admitted later; this does not change or test those unsupported configurations."
+}

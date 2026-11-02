@@ -1271,141 +1271,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 44,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 78,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 140,
-      "kind": "ifndef",
-      "expression": "host_simulate",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 144,
-      "kind": "ifndef",
-      "expression": "host_cpu_reset",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 148,
-      "kind": "ifndef",
-      "expression": "host_cpu_init",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 152,
-      "kind": "ifndef",
-      "expression": "host_cpu_interrupt",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 175,
-      "kind": "ifdef",
-      "expression": "LITTLEND",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 217,
-      "kind": "ifdef",
-      "expression": "CCPU",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 533,
-      "kind": "ifndef",
-      "expression": "SPC386",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 539,
-      "kind": "ifdef",
-      "expression": "CPU_PRIVATE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
-      "start": 71,
-      "kind": "ifdef",
-      "expression": "CPU_PRIVATE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
-      "start": 82,
-      "kind": "ifdef",
-      "expression": "CCPU",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
-      "start": 821,
-      "kind": "ifdef",
-      "expression": "SPC386",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
-      "start": 1192,
-      "kind": "ifndef",
-      "expression": "SPC386",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
-      "start": 1203,
-      "kind": "ifdef",
-      "expression": "CPU_PRIVATE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/dasm.h",
       "start": 21,
       "kind": "ifdef",
@@ -4430,60 +4295,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
-      "start": 24,
-      "kind": "ifndef",
-      "expression": "_NT_VDD",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
-      "start": 53,
-      "kind": "ifndef",
-      "expression": "i386",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
-      "start": 154,
-      "kind": "ifdef",
-      "expression": "i386",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
-      "start": 167,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
-      "start": 189,
-      "kind": "ifdef",
-      "expression": "i386",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/non-mvdm/public/sdk/inc/vddsvc.h",
-      "start": 275,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/non-mvdm/public/sdk/inc/wownt32.h",
       "start": 16,
       "kind": "ifndef",
@@ -4564,7 +4375,7 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 432
+      "count": 411
     },
     {
       "reason": "file-not-witnessed-in-product",

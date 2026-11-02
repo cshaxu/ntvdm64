@@ -3,17 +3,17 @@
   "depth1_groups": 4073,
   "depth1_arms": 5052,
   "depth1_status": {
-    "pending": 503,
+    "pending": 482,
     "newly-excluded": 634,
     "already-excluded": 1669,
-    "unselected-file": 368,
+    "unselected-file": 389,
     "retained-observed": 1869,
     "retained-original-assertion": 9
   },
   "depth2_parent_status_counts": {
     "retained-observed": 1410,
-    "pending": 1559,
-    "unselected-file": 72
+    "pending": 1527,
+    "unselected-file": 104
   },
   "restored_original_groups_relative_to_fixed_head": 56,
   "restored_in_current_bfs_pass": 23,
