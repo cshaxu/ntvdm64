@@ -1,0 +1,68 @@
+{
+  "scope": "first depth PIG guards of two original CCPU source files; only their actual PROD/non-PIG contexts",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_getset.c",
+      "original_sha256": "02783213debc6b9a712adecf37941b4fea01c60c0cc86c0d3cdf526b1ff43374",
+      "current_sha256": "b2220ae93fdfc1eba0566480597f6c319bd1a3a6d22e2225847e785612e55770",
+      "expression": "defined(PIG)",
+      "actual_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "original_sha256": "a038c8e79688b5e7430e3a9baf0c5e11848c4d2de89584ae71a4209c7ed54292",
+      "current_sha256": "7f25e27f6bfd36997bba8537be453761b436ccd7914880b867f6950f1b9892cc",
+      "expression": "defined(PIG) && !defined(PROD)",
+      "actual_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "file": "c_getset.c",
+      "prod_pig_absent": 0,
+      "pig_nonprod": 2,
+      "pig_prod": 2
+    },
+    {
+      "arch": "x86",
+      "file": "c_stack.c",
+      "prod_pig_absent": 0,
+      "pig_nonprod": 2,
+      "pig_prod": 0
+    },
+    {
+      "arch": "x86",
+      "line_diagnostic": 37,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "file": "c_getset.c",
+      "prod_pig_absent": 0,
+      "pig_nonprod": 2,
+      "pig_prod": 2
+    },
+    {
+      "arch": "x64",
+      "file": "c_stack.c",
+      "prod_pig_absent": 0,
+      "pig_nonprod": 2,
+      "pig_prod": 0
+    },
+    {
+      "arch": "x64",
+      "line_diagnostic": 37,
+      "exit": 2
+    }
+  ],
+  "line_restoration": "c_stack.c next original logical line 37",
+  "earlier_pig_evidence": "s13-bfs-depth1-pig.json",
+  "note": "This does not exclude PIG for hypothetical future configurations or claim guest CPU support changed."
+}

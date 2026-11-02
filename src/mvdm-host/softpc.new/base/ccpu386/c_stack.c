@@ -30,6 +30,7 @@ Stack (and related SP/BP access) Support.
 #if	defined(PIG) && !defined(PROD)
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif	/* PIG && !PROD */
+#line 37
 
 /*
    =====================================================================

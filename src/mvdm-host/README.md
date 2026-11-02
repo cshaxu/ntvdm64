@@ -1,5 +1,10 @@
 # mvdm
 
+The original PIG selectors in `c_getset.c` and `c_stack.c` are retained;
+their supported CPU40 worker contexts exclude the comparison profile. The
+`c_stack.c` DIV-515 subset restores original diagnostic line 37 after the
+excluded body. Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-pig-line-context.json`.
+
 The `dpmi32/dpmiint.c` non-CPU40 guard in `DpmiSwIntHandler` is a local
 DIV-481 failure-state adaptation, not an original OpenNT conditional. It
 defers flag updates until frame validation; see `../../artifacts/mvdm-audit/s13-bfs-depth1-dpmi-local-guard-origin.json`.

@@ -731,15 +731,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_getset.c",
-      "start": 30,
-      "kind": "if",
-      "expression": "defined(PIG)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
       "start": 808,
       "kind": "else",
@@ -762,15 +753,6 @@
       "start": 4692,
       "kind": "else",
       "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
-      "start": 30,
-      "kind": "if",
-      "expression": "defined(PIG) && !defined(PROD)",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "current_actual_includers": 2
@@ -8296,7 +8278,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 65
+      "count": 63
     },
     {
       "reason": "file-not-witnessed-in-product",
