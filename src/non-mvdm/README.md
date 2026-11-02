@@ -1,5 +1,10 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-155: correct the original continuation position in
+`windows/core/ntuser/client/lboxctl3.c`, retaining the selected code unchanged.
+Both WOW32 and call-boundary compiler contexts are documented in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-lbox-original-line.json`.
+
 OPENNT-HOST-154: correct original diagnostic continuations in two first-depth
 source spans without changing selected preprocessing. Evidence:
 `../../artifacts/mvdm-audit/s13-bfs-depth1-line-first-depth-batch.json`.

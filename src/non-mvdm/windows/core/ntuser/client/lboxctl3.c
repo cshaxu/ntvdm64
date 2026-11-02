@@ -891,7 +891,7 @@ INT xxxLbDir(
 #ifndef UNICODE
 #error Unsupported excluded original configuration
 #endif
-#line 894
+#line 899
 
     if (fWasVisible = IsLBoxVisible(plb)) {
         SendMessage(HWq(plb->spwnd), WM_SETREDRAW, FALSE, 0);

@@ -7358,14 +7358,14 @@
       "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
       "line_directive": 894,
       "depth": 0,
-      "current_target": 894,
+      "current_target": 899,
       "anchor_current_line": 896,
       "anchor_original_line": 900,
       "anchor": "if (fWasVisible = IsLBoxVisible(plb)) {",
-      "observed_anchor_logical_line": 895,
+      "observed_anchor_logical_line": 900,
       "candidate_original_target": 899,
-      "matches": false,
-      "current_sha256": "7cff933266855fa671eb287a2e2522b015a4faed06cbc3c7a561b74fbb8362cf",
+      "matches": true,
+      "current_sha256": "ca8633e0573bf598c9cdf8c454b7537d901c116c7cc263fe0caf4a2f8865fdcb",
       "original_sha256": "c20aedad6b3ec2a596f7423ebceb0d130a56b2f978a3988c4de0e15b49bb8989"
     },
     {

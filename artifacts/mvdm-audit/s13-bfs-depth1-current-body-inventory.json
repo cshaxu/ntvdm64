@@ -64479,7 +64479,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "7cff933266855fa671eb287a2e2522b015a4faed06cbc3c7a561b74fbb8362cf"
+      "source_sha256": "ca8633e0573bf598c9cdf8c454b7537d901c116c7cc263fe0caf4a2f8865fdcb"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
@@ -64492,7 +64492,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 8,
-      "source_sha256": "7cff933266855fa671eb287a2e2522b015a4faed06cbc3c7a561b74fbb8362cf"
+      "source_sha256": "ca8633e0573bf598c9cdf8c454b7537d901c116c7cc263fe0caf4a2f8865fdcb"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
@@ -64505,7 +64505,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "7cff933266855fa671eb287a2e2522b015a4faed06cbc3c7a561b74fbb8362cf"
+      "source_sha256": "ca8633e0573bf598c9cdf8c454b7537d901c116c7cc263fe0caf4a2f8865fdcb"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
@@ -64518,7 +64518,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 19,
-      "source_sha256": "7cff933266855fa671eb287a2e2522b015a4faed06cbc3c7a561b74fbb8362cf"
+      "source_sha256": "ca8633e0573bf598c9cdf8c454b7537d901c116c7cc263fe0caf4a2f8865fdcb"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
@@ -64531,7 +64531,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "7cff933266855fa671eb287a2e2522b015a4faed06cbc3c7a561b74fbb8362cf"
+      "source_sha256": "ca8633e0573bf598c9cdf8c454b7537d901c116c7cc263fe0caf4a2f8865fdcb"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
@@ -64544,7 +64544,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "7cff933266855fa671eb287a2e2522b015a4faed06cbc3c7a561b74fbb8362cf"
+      "source_sha256": "ca8633e0573bf598c9cdf8c454b7537d901c116c7cc263fe0caf4a2f8865fdcb"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
