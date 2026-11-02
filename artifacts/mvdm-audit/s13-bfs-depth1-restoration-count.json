@@ -73,9 +73,14 @@
       "file": "src/mvdm-host/softpc.new/base/support/ios.c",
       "original_condition": "#if defined(NTVDM) && defined(MONITOR)",
       "evidence": "s13-bfs-depth1-ios-monitor-outer.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/host/src/config.c",
+      "original_condition": "#ifdef i386",
+      "evidence": "s13-bfs-depth1-config-i386-outer.json"
     }
   ],
-  "derived_total": 55,
-  "derived_current_bfs_total": 22,
+  "derived_total": 56,
+  "derived_current_bfs_total": 23,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

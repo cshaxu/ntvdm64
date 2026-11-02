@@ -2263,3 +2263,9 @@ string-I/O carrier in `softpc.new/base/support/ios.c`. The earlier guard in
 that file already rejects MONITOR; the original carrier is retained for CCPU
 in the selected alternative. Evidence:
 `../../artifacts/mvdm-audit/s13-bfs-depth1-ios-monitor-outer.json`.
+
+MVDM-HOST-DIV-637: restore the original `#ifdef i386` memory-sizing outer
+condition in `softpc.new/host/src/config.c`. Retain the existing CPU40
+DPMI-headroom selection and the prior rejection of unsupported non-CPU40 x86
+profiles in the nested alternatives. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-config-i386-outer.json`.

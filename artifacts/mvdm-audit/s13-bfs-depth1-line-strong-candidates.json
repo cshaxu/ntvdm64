@@ -5897,7 +5897,7 @@
       "observed_anchor_logical_line": 239,
       "candidate_original_target": 278,
       "matches": false,
-      "current_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5",
+      "current_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d",
       "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
       "matching_code_lines_before_next_directive": 23,
       "matched_lines": [
@@ -5997,49 +5997,49 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "line_directive": 705,
+      "line_directive": 726,
       "depth": 0,
       "current_target": 739,
-      "anchor_current_line": 708,
+      "anchor_current_line": 729,
       "anchor_original_line": 848,
       "anchor": "short host_runtime_inquire IFN1(UTINY, what)",
       "observed_anchor_logical_line": 741,
       "candidate_original_target": 846,
       "matches": false,
-      "current_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5",
+      "current_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d",
       "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
       "matching_code_lines_before_next_directive": 8,
       "matched_lines": [
         {
-          "current": 708,
+          "current": 729,
           "original": 848
         },
         {
-          "current": 710,
+          "current": 731,
           "original": 850
         },
         {
-          "current": 712,
+          "current": 733,
           "original": 852
         },
         {
-          "current": 713,
+          "current": 734,
           "original": 853
         },
         {
-          "current": 714,
+          "current": 735,
           "original": 854
         },
         {
-          "current": 715,
+          "current": 736,
           "original": 855
         },
         {
-          "current": 716,
+          "current": 737,
           "original": 856
         },
         {
-          "current": 717,
+          "current": 738,
           "original": 857
         }
       ]

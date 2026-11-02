@@ -338,27 +338,43 @@ if not excluded.returncode or marker[7:] not in excluded.stdout + excluded.stder
     raise SystemExit('unsupported monitor backfill arm did not fail at its guard')
 print('PASS single monitor backfill guard, line mapping, and unsupported arm rejection')
 
-condition = '#if (defined(i386) || defined(_M_IX86)) && !defined(CPU_40_STYLE)'
-matches = [i for i, line in enumerate(lines) if line.strip() == condition]
-if len(matches) != 1:
-    raise SystemExit('missing unique i386 memory-size guard')
-i = matches[0]
 marker = '#error Excluded unsupported non-CPU40 i386 memory-size profile'
-if (lines[i+1].strip() != marker or lines[i+2].strip() != '#else'
-        or lines[i+3].strip() != '#line 510'
-        or lines[i+4].strip() != 'vdmMemorySize = GetVDMSize(VDMForWOW);'):
-    raise SystemExit('memory-size guard, selected calculation or line control changed')
-probe.write_text('\n'.join(lines[i:i+4] + ['int selected_line = __LINE__;', '#endif']) + '\n',
-                 encoding='ascii')
-selected = subprocess.run(base + ['/DCPU_40_STYLE', '/Di386', str(probe)],
-                          capture_output=True, text=True, errors='replace')
-excluded = subprocess.run(base + ['/Di386', str(probe)], capture_output=True,
-                          text=True, errors='replace')
-if selected.returncode or not re.search(r'int\s+selected_line\s*=\s*510\s*;', selected.stdout):
-    raise SystemExit('CPU40 memory-size selection or line mapping failed: ' + selected.stderr)
-if not excluded.returncode or marker[7:] not in excluded.stdout + excluded.stderr:
-    raise SystemExit('unsupported i386 memory-size arm did not fail at its guard')
-print('PASS CPU40 memory-size selection, line mapping, and unsupported arm rejection')
+matches = [i for i, line in enumerate(lines) if line.strip() == '#ifdef i386'
+           and i + 2 < len(lines) and lines[i + 1].strip() == '#if defined(CPU_40_STYLE)'
+           and lines[i + 2].strip() == '#line 510']
+if len(matches) != 1:
+    raise SystemExit('original i386 memory-size outer selector missing')
+start = matches[0]
+depth = 1
+for end in range(start + 1, len(lines)):
+    directive = re.match(r'^\s*#\s*(if|ifdef|ifndef|endif)\b', lines[end])
+    if not directive:
+        continue
+    if directive.group(1) in ('if', 'ifdef', 'ifndef'):
+        depth += 1
+    else:
+        depth -= 1
+        if not depth:
+            break
+else:
+    raise SystemExit('original i386 memory-size outer selector unclosed')
+if lines[end + 1].strip() != '#line 523':
+    raise SystemExit('original memory-size continuation changed')
+probe.write_text('\n'.join(lines[start:end + 2] + ['int after_config = __LINE__;']) + '\n', encoding='ascii')
+selected_outputs = []
+for defines in (['/Ui386', '/U_M_IX86'], ['/Ui386', '/U_M_IX86', '/DCPU_40_STYLE'],
+                ['/Ui386', '/D_M_IX86=600', '/DCPU_40_STYLE'], ['/Di386', '/U_M_IX86', '/DCPU_40_STYLE']):
+    selected = subprocess.run(base + defines + [str(probe)], capture_output=True, text=True, errors='replace')
+    if selected.returncode or not re.search(r'int\s+after_config\s*=\s*523\s*;', selected.stdout):
+        raise SystemExit('CPU40 memory-size selection or original line failed: ' + selected.stderr)
+    selected_outputs.append('\n'.join(line for line in selected.stdout.splitlines() if line.strip()))
+if len(set(selected_outputs)) != 1:
+    raise SystemExit('CPU40 memory-size profile outputs differ')
+for defines in (['/Ui386', '/D_M_IX86=600'], ['/Di386', '/U_M_IX86']):
+    excluded = subprocess.run(base + defines + [str(probe)], capture_output=True, text=True, errors='replace')
+    if not excluded.returncode or marker[7:] not in excluded.stdout + excluded.stderr:
+        raise SystemExit('unsupported i386 memory-size arm did not fail at its guard')
+print('PASS original memory-size outer selector, six profiles and line mapping')
 
 lines = (repo / 'src/mvdm-host/softpc.new/base/support/xt.c').read_text(
     encoding='latin1').split('\n')

@@ -1,0 +1,90 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/config.c",
+  "before_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5",
+  "candidate_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d",
+  "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+  "old_group": 421,
+  "old_end": 437,
+  "original_group": 506,
+  "original_end": 522,
+  "delta": 21,
+  "original_selected_body_sha256": "c621ad20a1e348faafcc65c648ca02b9b07bead40f1d346f0fcb48d2b941f7f4",
+  "controls": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "equal": true,
+      "before": "512a1e29990fab54adda38021350c15ad3d5b9b077b7cc1b9736ce883da2df1f",
+      "after": "512a1e29990fab54adda38021350c15ad3d5b9b077b7cc1b9736ce883da2df1f"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "equal": true,
+      "before": "512a1e29990fab54adda38021350c15ad3d5b9b077b7cc1b9736ce883da2df1f",
+      "after": "512a1e29990fab54adda38021350c15ad3d5b9b077b7cc1b9736ce883da2df1f"
+    }
+  ],
+  "profile_controls": [
+    {
+      "flags": [
+        "/Ui386",
+        "/U_M_IX86"
+      ],
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_outputs_equal": true
+    },
+    {
+      "flags": [
+        "/Ui386",
+        "/U_M_IX86",
+        "/DCPU_40_STYLE"
+      ],
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_outputs_equal": true
+    },
+    {
+      "flags": [
+        "/Ui386",
+        "/D_M_IX86=600"
+      ],
+      "before_exit": 2,
+      "after_exit": 2,
+      "selected_outputs_equal": false
+    },
+    {
+      "flags": [
+        "/Ui386",
+        "/D_M_IX86=600",
+        "/DCPU_40_STYLE"
+      ],
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_outputs_equal": true
+    },
+    {
+      "flags": [
+        "/Di386",
+        "/U_M_IX86"
+      ],
+      "before_exit": 2,
+      "after_exit": 2,
+      "selected_outputs_equal": false
+    },
+    {
+      "flags": [
+        "/Di386",
+        "/U_M_IX86",
+        "/DCPU_40_STYLE"
+      ],
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_outputs_equal": true
+    }
+  ],
+  "tests": "both worker builds, cached x86/x64 builds and x86/x64 six-profile original line controls passed; rejection suite rerun",
+  "line_mapping": "original non-i386 body begins line 510 and continuation begins line 523",
+  "reason_duplicate": "original outer i386 alternative must retain the already-supported CPU40 calculation, while original non-i386 alternative also selects it; identical original body exists in mutually exclusive preprocessor paths",
+  "package": "s13-bfs-depth1-config-i386-outer-package-compare.json: eight identical, two PE timestamp-only; previously Full-tested package retained",
+  "limits": "Only first-depth original selector audited; two nested adaptation selectors queued. Previously documented non-CCPU DPMI and x87 fixture failures remain."
+}

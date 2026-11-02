@@ -43510,7 +43510,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
@@ -43523,7 +43523,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
@@ -43536,7 +43536,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
@@ -43549,7 +43549,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
@@ -43562,7 +43562,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
@@ -43575,7 +43575,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
@@ -43588,7 +43588,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
@@ -43601,137 +43601,124 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 7,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
       "start": 421,
-      "cut": 423,
-      "group_end": 437,
-      "kind": "if",
-      "expression": "(defined(i386) || defined(_M_IX86)) && !defined(CPU_40_STYLE)",
-      "status": "newly-excluded",
+      "cut": 439,
+      "group_end": 457,
+      "kind": "ifdef",
+      "expression": "i386",
+      "status": "retained-observed",
       "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "guard_only": false,
+      "body_lines": 17,
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "start": 423,
-      "cut": 437,
-      "group_end": 437,
+      "start": 439,
+      "cut": 457,
+      "group_end": 457,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
-      "body_lines": 13,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "body_lines": 17,
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "start": 439,
-      "cut": 441,
-      "group_end": 441,
+      "start": 460,
+      "cut": 462,
+      "group_end": 462,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "start": 444,
-      "cut": 451,
-      "group_end": 451,
+      "start": 465,
+      "cut": 472,
+      "group_end": 472,
       "kind": "ifdef",
       "expression": "CPU_40_STYLE",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "start": 454,
-      "cut": 456,
-      "group_end": 456,
+      "start": 475,
+      "cut": 477,
+      "group_end": 477,
       "kind": "ifdef",
       "expression": "X86GFX",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "start": 468,
-      "cut": 470,
-      "group_end": 470,
+      "start": 489,
+      "cut": 491,
+      "group_end": 491,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "start": 615,
-      "cut": 617,
-      "group_end": 617,
+      "start": 636,
+      "cut": 638,
+      "group_end": 638,
       "kind": "ifdef",
       "expression": "HUNTER",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "start": 699,
-      "cut": 701,
-      "group_end": 704,
+      "start": 720,
+      "cut": 722,
+      "group_end": 725,
       "kind": "ifdef",
       "expression": "MONITOR",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "start": 701,
-      "cut": 704,
-      "group_end": 704,
+      "start": 722,
+      "cut": 725,
+      "group_end": 725,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "start": 719,
-      "cut": 721,
-      "group_end": 721,
-      "kind": "ifndef",
-      "expression": "PROD",
-      "status": "already-excluded",
-      "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
@@ -43744,59 +43731,72 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "start": 749,
-      "cut": 751,
-      "group_end": 751,
+      "start": 761,
+      "cut": 763,
+      "group_end": 763,
+      "kind": "ifndef",
+      "expression": "PROD",
+      "status": "already-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "start": 770,
+      "cut": 772,
+      "group_end": 772,
       "kind": "ifdef",
       "expression": "HUNTER",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "start": 759,
-      "cut": 761,
-      "group_end": 761,
+      "start": 780,
+      "cut": 782,
+      "group_end": 782,
       "kind": "ifdef",
       "expression": "HUNTER",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "start": 840,
-      "cut": 850,
-      "group_end": 850,
+      "start": 861,
+      "cut": 871,
+      "group_end": 871,
       "kind": "ifdef",
       "expression": "LIM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 9,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/config.c",
-      "start": 853,
-      "cut": 855,
-      "group_end": 855,
+      "start": 874,
+      "cut": 876,
+      "group_end": 876,
       "kind": "ifdef",
       "expression": "MONITOR",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "6519981ed773b96e093ebee0ac05c536bbf93742b88d3aee84186f4a2ce24cd5"
+      "source_sha256": "69e88b41f377a96f1c2ec469beaea8591a5ece7588fb07f62abe4092832e6c7d"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
@@ -65681,9 +65681,9 @@
   "errors": [],
   "status_counts": {
     "pending": 687,
-    "newly-excluded": 635,
+    "newly-excluded": 634,
     "already-excluded": 1669,
-    "retained-observed": 1868,
+    "retained-observed": 1869,
     "unselected-file": 184,
     "retained-original-assertion": 9
   },
