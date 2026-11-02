@@ -1298,3 +1298,18 @@ published and verified at both release destinations. See
 `s13-bfs-depth1-consolidated-full-test.json` and
 `s13-bfs-depth1-consolidated-win31.json`; the DOS4GW witness does not assert
 gameplay. This is a progress baseline, not completion of the first layer.
+After that delivery, the retained-profile suite also passed 235 guard cases
+plus DPMI, ANSI/Unicode, CPU40 and USER profile controls on x86.
+Another first-depth marker pass succeeded in all 2,070 current build-graph
+contexts. Four getset.c alternatives are selected by the call-boundaries
+tests and must be retained; their witnesses are in
+`s13-bfs-depth1-pending-positive.json`. The remaining unobserved arms are
+not excluded merely because this pass did not select them.
+The batch queue initially attached the restored clmsg DEBUG selector to
+chartran.c due to loop-variable reuse. The source was correct. The queue is
+corrected in `s13-bfs-depth1-corrected-queue.zip`; its 5,050 first-depth arms
+now match the physical directives, with zero mismatches. Earlier post-batch
+queue snapshots are superseded; see `s13-bfs-depth1-queue-correction.json`.
+Current status: 1,858 observed retained, 1,470 previously excluded, 344
+newly excluded and 1,378 pending; of the pending arms, 252 already contain
+only `#error` and 1,126 still require a disposition.

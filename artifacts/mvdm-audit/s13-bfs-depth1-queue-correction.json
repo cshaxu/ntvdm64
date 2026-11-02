@@ -1,0 +1,12 @@
+{
+  "issue": "batch inventory recorded the restored clmsg.c DEBUG selector under chartran.c due to loop-variable reuse",
+  "source_and_build_effect": "none; actual restored guard was always in clmsg.c",
+  "correction": "corrected the queue owner to src/non-mvdm/windows/core/ntuser/client/clmsg.c and checked all current first-depth group/arm physical directives",
+  "validated_arms": 5050,
+  "queue_sha256": "54dfb9cbc2f6fcba1db6a81404f82613f84da2df6dcd27dfc0508fd13ce3f20c",
+  "supersedes": [
+    "s13-bfs-depth1-post-batch-queue.zip",
+    "s13-bfs-depth1-after-positive-queue.zip"
+  ],
+  "evidence": "s13-bfs-depth1-current-body-inventory.json"
+}

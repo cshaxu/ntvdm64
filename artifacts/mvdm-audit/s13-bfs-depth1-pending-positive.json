@@ -1,0 +1,53 @@
+{
+  "scope": "positive first-depth observations from actual call-boundary graph; no negative result implies exclusion",
+  "contexts": 2070,
+  "failures": 0,
+  "positive": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "line": 59,
+      "id": 1378,
+      "witnesses": [
+        [
+          "build/.ninja/msvc-x86-release/call-boundaries",
+          "obj/getset_server.obj"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "line": 54,
+      "id": 1379,
+      "witnesses": [
+        [
+          "build/.ninja/msvc-x86-release/call-boundaries",
+          "obj/getset_reader.obj"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "line": 92,
+      "id": 1380,
+      "witnesses": [
+        [
+          "build/.ninja/msvc-x86-release/call-boundaries",
+          "obj/getset_reader.obj"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "line": 161,
+      "id": 1381,
+      "witnesses": [
+        [
+          "build/.ninja/msvc-x86-release/call-boundaries",
+          "obj/getset_reader.obj"
+        ]
+      ]
+    }
+  ],
+  "archive_sha256": "44384ba984aebd66721331f207081de91abae3550bd48b55cca84e417615bfa5",
+  "limitation": "Instrumentation observes the branch; real graph compile flags confirm the relevant independent test profiles. No unobserved arm is classified by this run."
+}
