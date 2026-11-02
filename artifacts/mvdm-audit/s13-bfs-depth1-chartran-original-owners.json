@@ -1,0 +1,70 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+  "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+  "working_sha256": "e2cd5d6a924328db5528a16d413ab34a34e393bf11f971aa69bbdf527d0b8f7c",
+  "mapped_current_first_depth_conditions": [
+    {
+      "original_line": 17,
+      "current_line": 18,
+      "expression": "_USERK_",
+      "status": "newly-excluded"
+    },
+    {
+      "original_line": 59,
+      "current_line": 168,
+      "expression": "_USERK_",
+      "status": "already-excluded"
+    },
+    {
+      "original_line": 146,
+      "current_line": 255,
+      "expression": "_USERK_",
+      "status": "already-excluded"
+    },
+    {
+      "original_line": 270,
+      "current_line": 362,
+      "expression": "_USERK_",
+      "status": "already-excluded"
+    },
+    {
+      "original_line": 515,
+      "current_line": 63,
+      "expression": "_USERK_",
+      "status": "already-excluded"
+    },
+    {
+      "original_line": 446,
+      "current_line": 32,
+      "expression": "FE_SB",
+      "status": "already-excluded"
+    },
+    {
+      "original_line": 457,
+      "current_line": 42,
+      "expression": "FE_SB",
+      "status": "already-excluded"
+    },
+    {
+      "original_line": 530,
+      "current_line": 76,
+      "expression": "FE_SB",
+      "status": "already-excluded"
+    }
+  ],
+  "unresolved_owner": "RtlWCSMessageWParamCharToMB",
+  "unresolved_original_conditions": {
+    "_USERK_": [
+      378
+    ],
+    "FE_SB": [
+      326,
+      351,
+      393
+    ],
+    "FE_IME": [
+      337
+    ]
+  },
+  "boundary": "Original function absent in current subset; source position and supported contexts must be handled coherently before treating its first-depth selectors as resolved."
+}

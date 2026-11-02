@@ -1,0 +1,46 @@
+{
+  "scope": "original selectors previously restored at first depth, verified using pinned original line and current #line anchor",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 380,
+      "current_line": 293,
+      "expression": "MEMPHIS_MENUS",
+      "current_status": "newly-excluded",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "working_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474",
+      "evidence": "Restored pinned original global selector; 9 selected source compile contexts omit feature; see s13-bfs-depth1-ntstubs-memphis.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 500,
+      "current_line": 297,
+      "expression": "MEMPHIS_MENU_WATERMARKS",
+      "current_status": "newly-excluded",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "working_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474",
+      "evidence": "Restored pinned original global selector; 9 selected source compile contexts omit feature; see s13-bfs-depth1-ntstubs-memphis.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 1611,
+      "current_line": 301,
+      "expression": "FE_SB",
+      "current_status": "newly-excluded",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "working_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474",
+      "evidence": "Pinned original global selector restored at original line 1611; all nine selected source compile contexts omit FE_SB; see s13-bfs-depth1-ntstubs-fe-sb.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1257,
+      "current_line": 413,
+      "expression": "PAGE_SIZE",
+      "current_status": "retained-observed",
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "working_sha256": "3740c3789f3069fb0957cacbb83758fc157027c1205097400139a5b89edbc679",
+      "evidence": "Actual WOW32 server compile profile does not define PAGE_SIZE after includes; original selected fallback restored unchanged. See s13-bfs-depth1-server-page-size.json"
+    }
+  ],
+  "limits": "Other unresolved multiplicity records are not resolved by this evidence."
+}

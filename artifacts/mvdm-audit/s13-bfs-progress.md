@@ -1991,3 +1991,11 @@ Matched twelve additional original conditional lines to current depth-2 structur
 ### Reconcile earlier USER client selector restorations
 
 Verified against the fixed original and current queue that five original USER client DBG/HANDLE_FIXUP/FE_SB conditions were already restored at depth 1 in earlier batches; the remaining clmsg DEBUG condition exists inside the selected default-window owner and is queued at depth 2. Removed four resolved multiplicity records; 17 remain. The original whole-file _USERCLI_ guard remains unresolved: the current header intentionally has separately guarded multiple inclusion cohorts, so blindly wrapping the file could suppress selected declarations. No source changed. Evidence: `s13-bfs-depth1-usercli-and-clmsg-reconciliation.json`.
+
+### Reconcile four previously restored original positions
+
+Confirmed two NTSTUBS Memphis guards, its FE_SB fnINWPARAMDBCSCHAR guard, and the USER server PAGE_SIZE guard were previously restored at first depth: current selector, queue entry, pinned original line and #line anchor agree. Removed three fully resolved candidate records and reduced the remaining FE_SB count by one; 14 candidate records remain. No source or binaries changed. Evidence: `s13-bfs-depth1-original-restored-position-map.json`.
+
+### Trace original character-conversion conditions to function owners
+
+Mapped eight current first-depth USERK/FE_SB selectors to their pinned original locations. The five remaining original selectors belong to the original `RtlWCSMessageWParamCharToMB`, which is absent from the current chartran subset. They remain open as an original-subset boundary; moving their directives into unrelated current functions would misrepresent original structure. No source changed. Evidence: `s13-bfs-depth1-chartran-original-owners.json`.

@@ -98,38 +98,8 @@
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
       "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
       "directive": "ifdef",
-      "expression": "MEMPHIS_MENUS",
-      "unpaired_count": 1,
-      "all_original_first_depth_lines": [
-        380
-      ],
-      "all_current_first_depth_lines": [],
-      "current_nested_structural_locations_only": [],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
-    },
-    {
-      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
-      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
-      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
-      "directive": "ifdef",
-      "expression": "MEMPHIS_MENU_WATERMARKS",
-      "unpaired_count": 1,
-      "all_original_first_depth_lines": [
-        500
-      ],
-      "all_current_first_depth_lines": [],
-      "current_nested_structural_locations_only": [],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
-    },
-    {
-      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
-      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
-      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
-      "directive": "ifdef",
       "expression": "FE_SB",
-      "unpaired_count": 6,
+      "unpaired_count": 5,
       "all_original_first_depth_lines": [
         693,
         753,
@@ -141,7 +111,10 @@
       "all_current_first_depth_lines": [],
       "current_nested_structural_locations_only": [],
       "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
+      "reason": "unreviewed; multiplicity mismatch only",
+      "resolved_root_original_lines": [
+        1611
+      ]
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
@@ -240,21 +213,6 @@
       "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
       "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
-      "directive": "ifndef",
-      "expression": "PAGE_SIZE",
-      "unpaired_count": 1,
-      "all_original_first_depth_lines": [
-        1257
-      ],
-      "all_current_first_depth_lines": [],
-      "current_nested_structural_locations_only": [],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
-    },
-    {
-      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
-      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
-      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
       "directive": "ifdef",
       "expression": "ANDREVA_DBG",
       "unpaired_count": 1,
@@ -289,8 +247,8 @@
         18
       ],
       "current_nested_structural_locations_only": [],
-      "disposition": "pending-boundary-proof",
-      "reason": "one original first-depth _USERK_ selector restored under OPENNT-HOST-145; one original multiplicity candidate remains unreviewed; see s13-bfs-depth1-original-chartran.json"
+      "disposition": "pending-unselected-function-boundary",
+      "reason": "Remaining signature occurrences lie within original RtlWCSMessageWParamCharToMB, a function absent from the current chartran.c subset. Do not relocate its preprocessor directives outside the removed function or infer a selected body; original-subset treatment remains open."
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
@@ -313,8 +271,8 @@
         76
       ],
       "current_nested_structural_locations_only": [],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
+      "disposition": "pending-unselected-function-boundary",
+      "reason": "Remaining signature occurrences lie within original RtlWCSMessageWParamCharToMB, a function absent from the current chartran.c subset. Do not relocate its preprocessor directives outside the removed function or infer a selected body; original-subset treatment remains open."
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
@@ -328,8 +286,8 @@
       ],
       "all_current_first_depth_lines": [],
       "current_nested_structural_locations_only": [],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
+      "disposition": "pending-unselected-function-boundary",
+      "reason": "Remaining signature occurrences lie within original RtlWCSMessageWParamCharToMB, a function absent from the current chartran.c subset. Do not relocate its preprocessor directives outside the removed function or infer a selected body; original-subset treatment remains open."
     }
   ],
   "limitations": [
