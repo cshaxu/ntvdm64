@@ -1,0 +1,127 @@
+{
+  "scope": "five existing excluded arms in selected original host C translation units; no source changes",
+  "evidence": "Both actual worker commands select SPC386 and CCPU and omit MONITOR; relevant source and host/base include trees do not locally redefine these macros. T313 CCPU and T310 heartbeat standalone graph flags checked. Legacy T281 nt_bop generator mentions MONITOR but its !CPU_40_STYLE alternative avoids this specific guard; its other historically removed dependencies and rejected paths are not claimed supported. Existing negative source/guard tests remain.",
+  "limits": "This does not assert all MONITOR usages are disabled globally; T310 has a CVIDC-specific rule with MONITOR. Exact original boundary correspondence remains independently audited.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "current_sha256": "dad2719a6fe379b5629b1c6d7fbb475e5f22bd5816fbd3b2ee6d75898faee00c",
+      "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/support/xt.obj",
+          "command_sha256": "5373b1cb6e3afd606ff593480a4868f2b846402b48081acb72ab0d93f479bd51"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/support/xt.obj",
+          "command_sha256": "5373b1cb6e3afd606ff593480a4868f2b846402b48081acb72ab0d93f479bd51"
+        }
+      ],
+      "guards": [
+        {
+          "line": 164,
+          "group_expression": "SPC386",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-539: non-SPC386 branch is not selected; see mirror register."
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "f8af567557ab2d3f895c93225ceb56b90d1c7e51cbc485212642e08eebd15462",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/host/nt_bop.obj",
+          "command_sha256": "4c3a0b812a50af25ad72c051578315aa4cdc61d6f07662c0d9403ad834de4cb7"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/host/nt_bop.obj",
+          "command_sha256": "4c3a0b812a50af25ad72c051578315aa4cdc61d6f07662c0d9403ad834de4cb7"
+        }
+      ],
+      "guards": [
+        {
+          "line": 326,
+          "group_expression": "!defined(CPU_40_STYLE) || defined(CCPU)",
+          "rejection": "    (*WOWDispatchEntry)();"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "current_sha256": "c2b950d588b62953194a3f6e5063f76e5db3ca3237993ae6842b9651f75fe274",
+      "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/host/nt_cpu.obj",
+          "command_sha256": "52c70edb4077b49ce204b6c2ed3823a487b34e4d709f530fedf51ac87d5cb7ce"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/host/nt_cpu.obj",
+          "command_sha256": "52c70edb4077b49ce204b6c2ed3823a487b34e4d709f530fedf51ac87d5cb7ce"
+        }
+      ],
+      "guards": [
+        {
+          "line": 53,
+          "group_expression": "CCPU",
+          "rejection": "#error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register."
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "current_sha256": "a8e6db859ec2046fbbcb646251c97b358acffdb732877236145a59d5b26af6f0",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/host/nt_reset.obj",
+          "command_sha256": "a5b95146d94c029f82f0860a0b11d2c13b5ae8f904a1519221f239b1ab028dc8"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/host/nt_reset.obj",
+          "command_sha256": "a5b95146d94c029f82f0860a0b11d2c13b5ae8f904a1519221f239b1ab028dc8"
+        }
+      ],
+      "guards": [
+        {
+          "line": 138,
+          "group_expression": "MONITOR",
+          "rejection": "#error Excluded unsupported monitor ICA initialization wait"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "current_sha256": "ad20d7cb91742cb365f5f7775db2738c8513843810f202ea232431066efdf3a1",
+      "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+      "contexts": [
+        {
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/host/nt_timer.obj",
+          "command_sha256": "c93a1a2b8843c2f4b675d5a9feea8dbe9d186619d1c2d6f3f22d9acfd490bdc0"
+        },
+        {
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/host/nt_timer.obj",
+          "command_sha256": "c93a1a2b8843c2f4b675d5a9feea8dbe9d186619d1c2d6f3f22d9acfd490bdc0"
+        }
+      ],
+      "guards": [
+        {
+          "line": 243,
+          "group_expression": "defined(MONITOR) && defined(X86GFX)",
+          "rejection": "#error Excluded unsupported monitor timer switch state"
+        }
+      ]
+    }
+  ]
+}

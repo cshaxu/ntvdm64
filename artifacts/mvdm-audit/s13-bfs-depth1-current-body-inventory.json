@@ -33587,8 +33587,8 @@
       "group_end": 166,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "dad2719a6fe379b5629b1c6d7fbb475e5f22bd5816fbd3b2ee6d75898faee00c"
@@ -44156,8 +44156,8 @@
       "group_end": 328,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "f8af567557ab2d3f895c93225ceb56b90d1c7e51cbc485212642e08eebd15462"
@@ -44897,8 +44897,8 @@
       "group_end": 55,
       "kind": "ifndef",
       "expression": "CCPU",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "c2b950d588b62953194a3f6e5063f76e5db3ca3237993ae6842b9651f75fe274"
@@ -47783,8 +47783,8 @@
       "group_end": 140,
       "kind": "ifdef",
       "expression": "MONITOR",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "a8e6db859ec2046fbbcb646251c97b358acffdb732877236145a59d5b26af6f0"
@@ -48589,8 +48589,8 @@
       "group_end": 245,
       "kind": "if",
       "expression": "defined(MONITOR) && defined(X86GFX)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "ad20d7cb91742cb365f5f7775db2738c8513843810f202ea232431066efdf3a1"
@@ -65682,13 +65682,13 @@
   "status_counts": {
     "unselected-file": 755,
     "newly-excluded": 643,
-    "already-excluded": 1691,
-    "pending": 85,
+    "already-excluded": 1696,
+    "pending": 80,
     "retained-observed": 1869,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
     "not-guard": 69,
-    "guard": 16
+    "guard": 11
   }
 }
