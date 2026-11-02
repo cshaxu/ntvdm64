@@ -4,7 +4,8 @@
 
 **Active: M0 T473 S13**
 
-Mirror-condition BFS: [first-depth progress](../../artifacts/mvdm-audit/s13-bfs-progress.md); exclusion and stage closure remain incomplete.
+Mirror-condition BFS: S13 is depth 1; each following depth is a sequential S,
+admitted automatically after full layer delivery. [Progress](../../artifacts/mvdm-audit/s13-bfs-progress.md).
 
 Prior owner-approved delivery: restore the four MVDM ANSI-profile files changed
 by MVDM-HOST-DIV-479, preserving authored build boundaries; verify actual

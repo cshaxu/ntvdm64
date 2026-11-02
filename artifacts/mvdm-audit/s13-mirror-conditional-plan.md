@@ -53,3 +53,10 @@ exclusion delivery separately from depth completion. Finish the retained-arm
 audit and next-depth queue before advancing; report unresolved boundaries
 honestly. The 7f2bb2924 checkpoint preserved earlier mixed-pass work without
 claiming either phase complete.
+
+Owner sequencing clarification: each BFS depth is one sequential S in this T.
+S13 owns depth 1; after its exclusion and retained-arm review, queue handoff,
+cached build, required tests, coherent publication, commit and push, admit the
+next numbered S for depth 2 automatically. Repeat for each nonempty next-depth
+queue. Intermediate P deliveries are progress, not depth or S closure. An
+unproven arm remains explicitly unresolved and is never replaced on that basis.
