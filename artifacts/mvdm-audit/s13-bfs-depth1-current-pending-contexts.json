@@ -866,24 +866,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
-      "start": 118,
-      "kind": "if",
-      "expression": "defined(DELTA) && defined(A2CPU)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
-      "start": 726,
-      "kind": "if",
-      "expression": "defined(DELTA) && defined(A2CPU)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_getset.c",
       "start": 30,
       "kind": "if",
@@ -9412,7 +9394,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 113
+      "count": 111
     },
     {
       "reason": "file-not-witnessed-in-product",

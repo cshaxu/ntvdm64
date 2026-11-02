@@ -5715,8 +5715,8 @@
       "group_end": 120,
       "kind": "if",
       "expression": "defined(DELTA) && defined(A2CPU)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "0a758c8287148763f594b2ceb983d3217585e77a878eccf9baebe5dc731d4da5"
@@ -6118,8 +6118,8 @@
       "group_end": 728,
       "kind": "if",
       "expression": "defined(DELTA) && defined(A2CPU)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "0a758c8287148763f594b2ceb983d3217585e77a878eccf9baebe5dc731d4da5"
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 1043,
-    "already-excluded": 1601,
+    "pending": 1041,
+    "already-excluded": 1603,
     "newly-excluded": 539,
     "retained-observed": 1863,
     "retained-original-assertion": 4
   },
   "pending_by_guard": {
     "not-guard": 926,
-    "guard": 117
+    "guard": 115
   }
 }

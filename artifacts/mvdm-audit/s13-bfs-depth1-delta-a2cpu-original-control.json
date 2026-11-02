@@ -1,0 +1,25 @@
+{
+  "scope": "first-depth repeated composite original body identity; positive and negative compiler controls in s13-bfs-depth1-composite-guard-control.json",
+  "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+  "previous_file_sha256": "c69a9c47ea907760d34561e00cf24f519bb804fd2548d38e115e58d327391cc2",
+  "rows": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_line": 118,
+      "original_line": 117,
+      "previous_commit": "7f2bb292^",
+      "previous_line": 116,
+      "normalized_body_sha256": "22eef7795498811b35b7b647204fcf20bf82dd3655ddffc069b3abddde10ea3b",
+      "body_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_line": 726,
+      "original_line": 1017,
+      "previous_commit": "7f2bb292^",
+      "previous_line": 930,
+      "normalized_body_sha256": "2bebbecf6777a8043f6cb738b3c2664e561f110dbcfb8f47e03cc7b09831b659",
+      "body_equal": true
+    }
+  ]
+}
