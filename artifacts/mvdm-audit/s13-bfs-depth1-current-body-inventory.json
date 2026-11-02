@@ -4177,15 +4177,15 @@
     {
       "path": "src/mvdm-host/inc/wowmmed.h",
       "start": 23,
-      "cut": 26,
-      "group_end": 26,
+      "cut": 25,
+      "group_end": 25,
       "kind": "ifndef",
       "expression": "_INC_MMSYSTEM",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "b0b9be6f465387caba2d4950b5ae5c771123efe6169e3ffcb4d867b1cf6f67a0"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "320fcd47c9194a2861dd0618ef95290863cce15326923c4a5eb89218e4b2d927"
     },
     {
       "path": "src/mvdm-host/inc/wowmmed.h",
@@ -4198,7 +4198,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b0b9be6f465387caba2d4950b5ae5c771123efe6169e3ffcb4d867b1cf6f67a0"
+      "source_sha256": "320fcd47c9194a2861dd0618ef95290863cce15326923c4a5eb89218e4b2d927"
     },
     {
       "path": "src/mvdm-host/inc/wowmmed.h",
@@ -4211,7 +4211,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b0b9be6f465387caba2d4950b5ae5c771123efe6169e3ffcb4d867b1cf6f67a0"
+      "source_sha256": "320fcd47c9194a2861dd0618ef95290863cce15326923c4a5eb89218e4b2d927"
     },
     {
       "path": "src/mvdm-host/inc/wowmmed.h",
@@ -4224,7 +4224,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b0b9be6f465387caba2d4950b5ae5c771123efe6169e3ffcb4d867b1cf6f67a0"
+      "source_sha256": "320fcd47c9194a2861dd0618ef95290863cce15326923c4a5eb89218e4b2d927"
     },
     {
       "path": "src/mvdm-host/inc/wowmmed.h",
@@ -4237,7 +4237,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b0b9be6f465387caba2d4950b5ae5c771123efe6169e3ffcb4d867b1cf6f67a0"
+      "source_sha256": "320fcd47c9194a2861dd0618ef95290863cce15326923c4a5eb89218e4b2d927"
     },
     {
       "path": "src/mvdm-host/inc/wowmmed.h",
@@ -4250,7 +4250,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b0b9be6f465387caba2d4950b5ae5c771123efe6169e3ffcb4d867b1cf6f67a0"
+      "source_sha256": "320fcd47c9194a2861dd0618ef95290863cce15326923c4a5eb89218e4b2d927"
     },
     {
       "path": "src/mvdm-host/inc/wowmmed.h",
@@ -4263,7 +4263,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b0b9be6f465387caba2d4950b5ae5c771123efe6169e3ffcb4d867b1cf6f67a0"
+      "source_sha256": "320fcd47c9194a2861dd0618ef95290863cce15326923c4a5eb89218e4b2d927"
     },
     {
       "path": "src/mvdm-host/inc/wowmmed.h",
@@ -4276,7 +4276,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b0b9be6f465387caba2d4950b5ae5c771123efe6169e3ffcb4d867b1cf6f67a0"
+      "source_sha256": "320fcd47c9194a2861dd0618ef95290863cce15326923c4a5eb89218e4b2d927"
     },
     {
       "path": "src/mvdm-host/inc/wowmmed.h",
@@ -4289,7 +4289,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "b0b9be6f465387caba2d4950b5ae5c771123efe6169e3ffcb4d867b1cf6f67a0"
+      "source_sha256": "320fcd47c9194a2861dd0618ef95290863cce15326923c4a5eb89218e4b2d927"
     },
     {
       "path": "src/mvdm-host/inc/wowsnd.h",
@@ -56948,11 +56948,11 @@
       "group_end": 27,
       "kind": "ifndef",
       "expression": "BM_CLICK",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "7b97c720ec18d1f703abea9df2088893d41568060314f2573b6471b0e5d3259b"
+      "source_sha256": "68a56be86cf351d08b82b1058f7bf92d9f73f69ef931b35f22b6e1dc9ea09d45"
     },
     {
       "path": "src/mvdm-host/wow32/wmsgcb.c",
@@ -65680,15 +65680,15 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 482,
-    "newly-excluded": 634,
+    "pending": 480,
+    "newly-excluded": 636,
     "already-excluded": 1669,
     "unselected-file": 389,
     "retained-observed": 1869,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
-    "not-guard": 443,
+    "not-guard": 441,
     "guard": 39
   }
 }

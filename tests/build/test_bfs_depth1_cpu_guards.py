@@ -629,3 +629,29 @@ rejected = subprocess.run(base + ['/DNTVDM', '/DMONITOR', str(probe)], capture_o
 if not rejected.returncode or ios_marker[7:] not in rejected.stdout + rejected.stderr:
     raise SystemExit('IOS monitor profile did not reject')
 print('PASS IOS original MONITOR outer and preserved CCPU selection')
+
+for path, macro, continuation in (
+    ('src/mvdm-host/wow32/wmsgbm.h', 'BM_CLICK', None),
+    ('src/mvdm-host/inc/wowmmed.h', '_INC_MMSYSTEM', 27),
+):
+    source = (repo / path).read_text(encoding='latin1').splitlines()
+    marker = '#error Excluded unsupported missing ' + macro + ' SDK profile'
+    matches = [i for i, line in enumerate(source) if line.strip() == '#ifndef ' + macro
+               and i + 2 < len(source) and source[i + 1].strip() == marker
+               and source[i + 2].strip() == '#endif']
+    if len(matches) != 1:
+        raise SystemExit('WOW SDK fallback guard missing: ' + path)
+    i = matches[0]
+    snippet = source[i:i + 3]
+    if continuation is not None:
+        if source[i + 3].strip() != '#line ' + str(continuation):
+            raise SystemExit('WOW SDK fallback original continuation missing: ' + path)
+        snippet += [source[i + 3], 'int after_fallback = __LINE__;']
+    probe.write_text('\n'.join(snippet) + '\n', encoding='ascii')
+    selected = subprocess.run(base + ['/D' + macro, str(probe)], capture_output=True, text=True, errors='replace')
+    rejected = subprocess.run(base + ['/U' + macro, str(probe)], capture_output=True, text=True, errors='replace')
+    if selected.returncode or (continuation is not None and not re.search(r'int\s+after_fallback\s*=\s*' + str(continuation) + r'\s*;', selected.stdout)):
+        raise SystemExit('WOW SDK provider or original line check failed: ' + path + selected.stderr)
+    if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
+        raise SystemExit('WOW missing SDK provider did not reject: ' + path)
+print('PASS scoped WOW SDK fallbacks and original continuation')

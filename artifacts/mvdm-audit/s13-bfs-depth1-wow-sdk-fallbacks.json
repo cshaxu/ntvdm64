@@ -1,0 +1,36 @@
+{
+  "scope": "two first-depth SDK fallback arms in WOW32 host include chain, not a global SDK or guest rule",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wmsgbm.h",
+      "macro": "BM_CLICK",
+      "original_sha256": "3cc1b146978c625e2850ef427128a7bc84acb5205b4c6901d6310845bf04a6b2",
+      "before_sha256": "7b97c720ec18d1f703abea9df2088893d41568060314f2573b6471b0e5d3259b",
+      "after_sha256": "68a56be86cf351d08b82b1058f7bf92d9f73f69ef931b35f22b6e1dc9ea09d45",
+      "original_group": 25,
+      "original_end": 27,
+      "removed_original_body_sha256": "a99861c123d927d4cc22a8a5d0f0048bd001e7a61881a17ebffbc72e4efa6cb8",
+      "actual_wow_contexts": 90,
+      "selected_provider": "Windows SDK winuser.h (WINVER >= 0x0400)",
+      "physical_delta": 0
+    },
+    {
+      "path": "src/mvdm-host/inc/wowmmed.h",
+      "macro": "_INC_MMSYSTEM",
+      "original_sha256": "8416869d9f2a35a41e10187f0f27fa35198b750e5474cc5e281d30ba9f2918b9",
+      "before_sha256": "b0b9be6f465387caba2d4950b5ae5c771123efe6169e3ffcb4d867b1cf6f67a0",
+      "after_sha256": "320fcd47c9194a2861dd0618ef95290863cce15326923c4a5eb89218e4b2d927",
+      "original_group": 23,
+      "original_end": 26,
+      "removed_original_body_sha256": "a08db23b25cf1cb36f580bdbeb5a26636a33355b5279900c4900c9862b6d7afe",
+      "actual_wow_contexts": 90,
+      "selected_provider": "Windows SDK mmsystem.h include guard",
+      "physical_delta": 0
+    }
+  ],
+  "actual_include_contexts": "Both headers included in 90 WOW translation-unit contexts via wow32/precomp.h. mmsystem.h precedes wowmmed.h; winuser.h supplies BM_CLICK under WINVER >= 0x0400. All 90 translation units successfully rebuilt with the error guards.",
+  "standalone_test_and_guest_boundary": "No direct test or guest references found for the two headers; wowinfo.h was not changed because guest wowexec.c includes it. Supported current x86 toolchain profile uses Windows SDK 10.0.22621.0. A legacy SDK or WINVER < 0x0400 is not claimed supported.",
+  "validation": "x86/x64 selected and missing-provider rejection controls, 90-unit WOW rebuild, cached builds and guard suites, WOW dispatch exception fixture passed; original line 27 controlled",
+  "package": "s13-bfs-depth1-wow-sdk-fallbacks-package-compare.json: eight identical and two PE timestamp-only; previously Full-tested publication retained",
+  "remaining": "Existing non-CCPU DPMI and x87 fixture gaps remain documented."
+}

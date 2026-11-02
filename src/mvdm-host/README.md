@@ -2269,3 +2269,9 @@ condition in `softpc.new/host/src/config.c`. Retain the existing CPU40
 DPMI-headroom selection and the prior rejection of unsupported non-CPU40 x86
 profiles in the nested alternatives. Evidence:
 `../../artifacts/mvdm-audit/s13-bfs-depth1-config-i386-outer.json`.
+
+MVDM-HOST-DIV-638: preserve the original SDK fallback selectors for
+`BM_CLICK` in `wow32/wmsgbm.h` and `_INC_MMSYSTEM` in `inc/wowmmed.h`, with
+unsupported missing-SDK bodies rejected. The selected WOW32 precomp path
+uses the host SDK providers. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-wow-sdk-fallbacks.json`.

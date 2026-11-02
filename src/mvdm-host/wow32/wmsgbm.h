@@ -23,5 +23,5 @@ VOID FASTCALL    UnThunkBMMsg16(LPMSGPARAMEX lpmpex);
 #define WIN31_BM_CLICK  (WM_USER + 99)
 
 #ifndef BM_CLICK
-#define BM_CLICK        0x00F5     // user\server\usersrv.h
+#error Excluded unsupported missing BM_CLICK SDK profile
 #endif

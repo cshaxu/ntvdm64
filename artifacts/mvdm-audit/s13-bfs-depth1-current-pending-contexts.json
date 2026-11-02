@@ -299,15 +299,6 @@
       "current_actual_includers": 90
     },
     {
-      "path": "src/mvdm-host/inc/wowmmed.h",
-      "start": 23,
-      "kind": "ifndef",
-      "expression": "_INC_MMSYSTEM",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 90
-    },
-    {
       "path": "src/mvdm-host/sim32/sim32.h",
       "start": 16,
       "kind": "ifndef",
@@ -3206,15 +3197,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/wow32/wmsgbm.h",
-      "start": 25,
-      "kind": "ifndef",
-      "expression": "BM_CLICK",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 90
-    },
-    {
       "path": "src/mvdm-host/wow32/wowtable.h",
       "start": 19,
       "kind": "ifdef",
@@ -4351,7 +4333,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 27
+      "count": 25
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",

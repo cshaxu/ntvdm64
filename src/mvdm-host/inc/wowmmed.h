@@ -21,9 +21,9 @@
 typedef WORD    MMVER16;      // major (high byte), minor (low byte)
 
 #ifndef _INC_MMSYSTEM
-typedef DWORD   FOURCC;         // a four character code
-typedef LONG    LPARAM;
+#error Excluded unsupported missing _INC_MMSYSTEM SDK profile
 #endif
+#line 27
 
 #define MAXPNAMELEN      32     // max product name length (including NULL)
 
