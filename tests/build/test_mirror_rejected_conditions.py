@@ -361,3 +361,12 @@ result = subprocess.run(base[:-1] + ['/Dalloca=_alloca'] + base[-1:], capture_ou
 if result.returncode:
     raise SystemExit('lowercase alloca incorrectly rejected: ' + result.stderr)
 print('PASS lowercase alloca remains distinct from ALLOCA profile')
+
+# The host PMODE32 path is distinct from the supported guest PMODE32 ABI.
+header = repo / 'src/mvdm-host/wow32/wusercli.h'
+probe.write_text('#include "' + header.as_posix() + '"\n', encoding='ascii')
+allowed = subprocess.run(base, capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base[:-1] + ['/DPMODE32'] + base[-1:], capture_output=True, text=True, errors='replace')
+if allowed.returncode or not rejected.returncode or 'Excluded unsupported PMODE32 host thunk profile' not in rejected.stdout + rejected.stderr:
+    raise SystemExit('host PMODE32 guard failed')
+print('PASS selected WOW thunks and excluded host PMODE32 profile')

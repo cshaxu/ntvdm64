@@ -139,13 +139,14 @@ $sharedAbi = [ordered]@{
 $header = Get-Content -Raw (Join-Path $RepositoryRoot 'src/mvdm-host/wow32/wusercli.h')
 $body = Get-Content -Raw (Join-Path $RepositoryRoot 'src/mvdm-host/wow32/wusercli.c')
 $dispatch = Get-Content -Raw (Join-Path $RepositoryRoot 'src/mvdm-host/wow32/wutbl2.h')
-$local = [regex]::Matches($header, '(?m)^#define\s+(WU32\w+)\s+LOCALAPI\s*$')
-if ($local.Count -ne 26) { throw "Expected 26 mappings, found $($local.Count)" }
-$rows = foreach ($entry in $local) {
+if ($header -notmatch '(?s)#ifdef PMODE32\s+#error Excluded unsupported PMODE32 host thunk profile\s+#else') {
+    throw 'Unsupported host PMODE32 mappings were not rejected'
+}
+$selected = [regex]::Matches($header, '(?m)^#define\s+(WU32\w+)\s+(WU32\w+)\s*$')
+if ($selected.Count -ne 26) { throw "Expected 26 selected mappings, found $($selected.Count)" }
+$rows = foreach ($entry in $selected) {
     $name = $entry.Groups[1].Value
-    $target = [regex]::Match($header, '(?m)^#define\s+' + $name + '\s+(WU32\w+)\s*$')
-    if (!$target.Success) { throw "No original thunk for $name" }
-    $function = $target.Groups[1].Value
+    $function = $entry.Groups[2].Value
     if ($body -notmatch ('ULONG\s+FASTCALL\s+' + $function + '\s*\(')) {
         throw "Missing original function body: $function"
     }

@@ -10,35 +10,9 @@ ULONG FASTCALL WU32GetKeyboardState(PVDMFRAME pFrame);
 
 
 #ifdef PMODE32
-
-#define WU32CLIENTTOSCREEN             LOCALAPI
-#define WU32GETCLASSNAME               LOCALAPI
-#define WU32GETCLIENTRECT              LOCALAPI
-#define WU32GETCURSORPOS               LOCALAPI
-#define WU32GETDESKTOPWINDOW           LOCALAPI
-#define WU32GETDLGITEM                 LOCALAPI
-#define WU32GETMENU                    LOCALAPI
-#define WU32GETMENUITEMCOUNT           LOCALAPI
-#define WU32GETMENUITEMID              LOCALAPI
-#define WU32GETMENUSTATE               LOCALAPI
-#define WU32GETNEXTWINDOW              LOCALAPI
-#define WU32GETPARENT                  LOCALAPI
-#define WU32GETSUBMENU                 LOCALAPI
-#define WU32GETSYSCOLOR                LOCALAPI
-#define WU32GETSYSTEMMETRICS           LOCALAPI
-#define WU32GETTICKCOUNT               LOCALAPI
-#define WU32GETTOPWINDOW               LOCALAPI
-#define WU32GETWINDOW                  LOCALAPI
-#define WU32GETWINDOWRECT              LOCALAPI
-#define WU32ISCHILD                    LOCALAPI
-#define WU32ISICONIC                   LOCALAPI
-#define WU32ISWINDOW                   LOCALAPI
-#define WU32ISWINDOWENABLED            LOCALAPI
-#define WU32ISWINDOWVISIBLE            LOCALAPI
-#define WU32ISZOOMED                   LOCALAPI
-#define WU32SCREENTOCLIENT             LOCALAPI
-
+#error Excluded unsupported PMODE32 host thunk profile
 #else
+#line 42
 
 #define WU32CLIENTTOSCREEN             WU32ClientToScreen
 #define WU32GETCLASSNAME               WU32GetClassName

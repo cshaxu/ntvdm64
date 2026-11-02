@@ -58959,28 +58959,28 @@
     {
       "path": "src/mvdm-host/wow32/wusercli.h",
       "start": 12,
-      "cut": 41,
-      "group_end": 97,
+      "cut": 14,
+      "group_end": 71,
       "kind": "ifdef",
       "expression": "PMODE32",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 28,
-      "source_sha256": "199e9018b7edfacc26d7bee87d54f8f660155ef567a19c69c1966cd625d582e2"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "afa3cb2879e9697ae1b6cf87996e3fc7799c2413a5214e59c8e4143882792209"
     },
     {
       "path": "src/mvdm-host/wow32/wusercli.h",
-      "start": 41,
-      "cut": 97,
-      "group_end": 97,
+      "start": 14,
+      "cut": 71,
+      "group_end": 71,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
-      "body_lines": 55,
-      "source_sha256": "199e9018b7edfacc26d7bee87d54f8f660155ef567a19c69c1966cd625d582e2"
+      "body_lines": 56,
+      "source_sha256": "afa3cb2879e9697ae1b6cf87996e3fc7799c2413a5214e59c8e4143882792209"
     },
     {
       "path": "src/mvdm-host/wow32/wutbl.h",
@@ -65850,14 +65850,14 @@
   "errors": [],
   "status_counts": {
     "unselected-file": 760,
-    "newly-excluded": 652,
+    "newly-excluded": 653,
     "already-excluded": 1705,
-    "pending": 65,
+    "pending": 64,
     "retained-observed": 1874,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
-    "not-guard": 63,
+    "not-guard": 62,
     "guard": 2
   }
 }
