@@ -293,12 +293,12 @@ typedef struct _WKSTA_INFO_RESPONSE_PACKET {
     USHORT  OsVersion ;
     CHAR    ComputerName[1] ;       // var-length ASCIIZ string */
 #if 0
-//
-//  The following two ASCIIZ strings are not defined in the structure
-//  but are concatenated to the end of the structure.
-//
-    CHAR        UserName[] ;
-    CHAR        LogonDomain[] ;
+#error Excluded unsupported original disabled branch
+
+
+
+
+
 #endif
 } WKSTA_INFO_RESPONSE_PACKET, *PWKSTA_INFO_RESPONSE_PACKET;
 
@@ -308,12 +308,12 @@ typedef struct _WKSTA_RELOGON_REQUEST_PACKET {
     ULONG   Flags ;
     CHAR    ReturnMailslot[1] ; // var-length ASCIIZ string
 #if 0
-//
-//  The following ASCIIZ string is not defined in the structure
-//  but is concatenated to the end of the structure.
-//
+#error Excluded unsupported original disabled branch
 
-    CHAR    DC_Name[] ;
+
+
+
+
 #endif
 } WKSTA_RELOGON_REQUEST_PACKET, *PWKSTA_RELOGON_REQUEST_PACKET;
 

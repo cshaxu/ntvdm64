@@ -372,10 +372,12 @@ IFN4(
  */
 
 #ifdef SPC486
-#define XX_error_code stack_sel
+#error Excluded unsupported SPC486 profile
 #else
+#line 376
 #define XX_error_code 0
 #endif
+#line 378
 
    if ( GET_OPERAND_SIZE() == USE16 )
       bytes = nr_items * 2;

@@ -120,12 +120,12 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 
 /* [5.1.1 #DEFINES]							*/
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_GRAPHICS.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 #if	defined(PROD) || (!defined(EGG))
@@ -497,7 +497,7 @@ static	void	paint_records IFN2(int, start_rec, int, end_rec)
 #ifdef EGG
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#include "SOFTPC_EGA.seg"
+#error Excluded unsupported SEGMENTATION configuration
 #endif
 
 static	int	ega_text_find_dirty_lines IFN5(byte *, vcopy, byte *, planes,
@@ -575,7 +575,7 @@ static	void	ega_text_paint_dirty_recs IFN2(int, start_rec, int, end_rec)
 #endif /* EGG */
 
 #ifdef SEGMENTATION 			/* See note with first use of this flag */
-#include "SOFTPC_GRAPHICS.seg"
+#error Excluded unsupported SEGMENTATION configuration
 #endif
 
 #endif /* REAL_VGA */
@@ -708,7 +708,7 @@ void	reset_paint_routines IFN0()
 #ifdef EGG
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#include "SOFTPC_EGA.seg"
+#error Excluded unsupported SEGMENTATION configuration
 #endif
 
 void	ega_wrap_split_text_update IFN0()
@@ -1144,7 +1144,7 @@ void ega_text_update IFN0()
 #endif /* EGG */
 
 #ifdef SEGMENTATION 			/* See note with first use of this flag */
-#include "SOFTPC_GRAPHICS.seg"
+#error Excluded unsupported SEGMENTATION configuration
 #endif
 
 /*
@@ -1757,7 +1757,7 @@ cga_hi_graph_update IFN0()
 #ifdef EGG
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#include "SOFTPC_EGA.seg"
+#error Excluded unsupported SEGMENTATION configuration
 #endif
 
 void	ega_wrap_split_graph_update IFN0()
@@ -2260,7 +2260,7 @@ void	ega_wrap_graph_update IFN0()
 #endif /* EGG */
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#include "SOFTPC_GRAPHICS.seg"
+#error Excluded unsupported SEGMENTATION configuration
 #endif
 
 /*---------------------  Scrolling routines --------------------------*/
@@ -3209,12 +3209,12 @@ boolean v7vga_graph_scroll_down IFN6(int, start, int, width, int, height,
 #ifdef EGG
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#if		defined(JOKER) && !defined(PROD)
-#include "SOFTPC_GRAPHICS.seg"
-#undef	SEGMENTATION		/* HeeHee! */
-#else
-#include "SOFTPC_EGA.seg"
-#endif	/* DEV JOKER variants */
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 /*ARGSUSED5*/
@@ -3276,7 +3276,7 @@ boolean ega_graph_scroll_down IFN6(int, start, int, width, int, height,
 #endif /* EGG */
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#include "SOFTPC_GRAPHICS.seg"
+#error Excluded unsupported SEGMENTATION configuration
 #endif
 
 #endif /* REAL_VGA */
@@ -3353,7 +3353,7 @@ GLOBAL VOID cga_mark_string IFN2(int, laddr, int, haddr)
 }
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#include "SOFTPC_EGA.seg"
+#error Excluded unsupported SEGMENTATION configuration
 #endif
 
 GLOBAL VOID ega_mark_byte IFN1(int, off_in)
@@ -3444,7 +3444,7 @@ GLOBAL VOID ega_mark_string IFN2(int, laddr, int, haddr)
 #line 3442
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#include "SOFTPC_GRAPHICS.seg"
+#error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 3446
 
@@ -3468,7 +3468,7 @@ GLOBAL VOID screen_refresh_required IFN0()
 #ifdef EGG
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#include "SOFTPC_EGA.seg"
+#error Excluded unsupported SEGMENTATION configuration
 #endif
 
 LOCAL MARKING_TYPE curr_mark_type;
@@ -3569,7 +3569,7 @@ set_mark_funcs IFN0()
 #line 3558
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#include "SOFTPC_GRAPHICS.seg"
+#error Excluded unsupported SEGMENTATION configuration
 #endif
 #line 3562
 
@@ -3679,7 +3679,7 @@ void base_cursor_shape_changed IFN0()
 #if defined(VGG) || defined(EGG)
 
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#include "SOFTPC_EGA.seg"
+#error Excluded unsupported SEGMENTATION configuration
 #endif
 
 /* ============================================================================
@@ -3765,7 +3765,7 @@ GLOBAL void enable_gfx_update_routines IFN0()
 
 #endif /* VGG */
 #ifdef SEGMENTATION 		/* See note with first use of this flag */
-#include "SOFTPC_GRAPHICS.seg"
+#error Excluded unsupported SEGMENTATION configuration
 #endif
 
 #ifdef NTVDM

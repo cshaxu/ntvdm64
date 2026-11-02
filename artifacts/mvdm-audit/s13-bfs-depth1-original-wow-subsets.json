@@ -1,0 +1,180 @@
+{
+  "scope": "first-depth original candidates only; no child conditions reviewed",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "424a28e338b80604b31ec71e60285bc3638fb2cf9da7d2e607c6c84c860ed726",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "directive": "ifndef",
+      "expression": "WOW",
+      "original_group_lines": [
+        15,
+        890
+      ],
+      "retained_original_function_ranges": {
+        "_GetDlgItem": [
+          251,
+          265
+        ]
+      },
+      "disposition": "outside admitted function bodies; no restoration",
+      "retained_conditions_note": "none of the original root groups intersects retained _GetDlgItem"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "424a28e338b80604b31ec71e60285bc3638fb2cf9da7d2e607c6c84c860ed726",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "directive": "ifdef",
+      "expression": "WOW",
+      "original_group_lines": [
+        19,
+        304,
+        313,
+        435,
+        719,
+        776,
+        795,
+        835,
+        911,
+        1067
+      ],
+      "retained_original_function_ranges": {
+        "_GetDlgItem": [
+          251,
+          265
+        ]
+      },
+      "disposition": "outside admitted function bodies; no restoration",
+      "retained_conditions_note": "none of the original root groups intersects retained _GetDlgItem"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "424a28e338b80604b31ec71e60285bc3638fb2cf9da7d2e607c6c84c860ed726",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "directive": "ifdef",
+      "expression": "ENABLE_CLIENTSIDE_ACCESSCHECK",
+      "original_group_lines": [
+        519,
+        752
+      ],
+      "retained_original_function_ranges": {
+        "_GetDlgItem": [
+          251,
+          265
+        ]
+      },
+      "disposition": "outside admitted function bodies; no restoration",
+      "retained_conditions_note": "none of the original root groups intersects retained _GetDlgItem"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "413fc6e2209039169fd1b72c4272e22df1df6c9a2d4bbd1a8b8ab3b2eeaf7820",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "directive": "ifdef",
+      "expression": "WOW",
+      "original_group_lines": [
+        15,
+        135
+      ],
+      "retained_original_function_ranges": {
+        "_IsChild": [
+          682,
+          699
+        ],
+        "_IsWindowVisible": [
+          716,
+          737
+        ],
+        "_ClientToScreen": [
+          749,
+          757
+        ],
+        "_GetClientRect": [
+          769,
+          806
+        ],
+        "_ScreenToClient": [
+          836,
+          844
+        ]
+      },
+      "disposition": "outside admitted function bodies; no restoration",
+      "retained_conditions_note": "rtl _GetClientRect original WOW groups at lines 781 and 794 remain in current source"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "413fc6e2209039169fd1b72c4272e22df1df6c9a2d4bbd1a8b8ab3b2eeaf7820",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "directive": "ifndef",
+      "expression": "WOW",
+      "original_group_lines": [
+        244,
+        344
+      ],
+      "retained_original_function_ranges": {
+        "_IsChild": [
+          682,
+          699
+        ],
+        "_IsWindowVisible": [
+          716,
+          737
+        ],
+        "_ClientToScreen": [
+          749,
+          757
+        ],
+        "_GetClientRect": [
+          769,
+          806
+        ],
+        "_ScreenToClient": [
+          836,
+          844
+        ]
+      },
+      "disposition": "outside admitted function bodies; no restoration",
+      "retained_conditions_note": "rtl _GetClientRect original WOW groups at lines 781 and 794 remain in current source"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "413fc6e2209039169fd1b72c4272e22df1df6c9a2d4bbd1a8b8ab3b2eeaf7820",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "directive": "if",
+      "expression": "defined(DEBUG) && !defined(_USERK_) && !defined(WOW)",
+      "original_group_lines": [
+        262
+      ],
+      "retained_original_function_ranges": {
+        "_IsChild": [
+          682,
+          699
+        ],
+        "_IsWindowVisible": [
+          716,
+          737
+        ],
+        "_ClientToScreen": [
+          749,
+          757
+        ],
+        "_GetClientRect": [
+          769,
+          806
+        ],
+        "_ScreenToClient": [
+          836,
+          844
+        ]
+      },
+      "disposition": "outside admitted function bodies; no restoration",
+      "retained_conditions_note": "rtl _GetClientRect original WOW groups at lines 781 and 794 remain in current source"
+    }
+  ]
+}

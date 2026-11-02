@@ -1,0 +1,293 @@
+{
+  "scope": "three first-depth non-PROD outer branches; inner groups not audited",
+  "production_contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "74d040039f92671ef0da05ba7d98b8ed652af4483f18dd982df06d8c227c4c5d",
+      "includes": 209,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "390afff592d3eaa7a016bab804a0ec22cacb3b99bbe07a908b06647a37ac0349",
+      "includes": 175,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "ba2914eefe3c74ad8beab9c336148eb097fd99612630757ec9c6ae441c0fcf38",
+      "includes": 188,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "includes": 185,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "includes": 189,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "3915714ff36cd1adadcfc8399cb759305ba2817ca4e9db9b95b0ccbb0eb2a7a8",
+      "includes": 174,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "includes": 192,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "01506dc2f6685a35770060fa3d9d860d418130aafed00bcb240cd8ab1d1e2db0",
+      "includes": 179,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "74d040039f92671ef0da05ba7d98b8ed652af4483f18dd982df06d8c227c4c5d",
+      "includes": 209,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "390afff592d3eaa7a016bab804a0ec22cacb3b99bbe07a908b06647a37ac0349",
+      "includes": 175,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "ba2914eefe3c74ad8beab9c336148eb097fd99612630757ec9c6ae441c0fcf38",
+      "includes": 188,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "includes": 185,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "includes": 189,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "3915714ff36cd1adadcfc8399cb759305ba2817ca4e9db9b95b0ccbb0eb2a7a8",
+      "includes": 174,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "includes": 192,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "01506dc2f6685a35770060fa3d9d860d418130aafed00bcb240cd8ab1d1e2db0",
+      "includes": 179,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    }
+  ],
+  "preprocess": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "568fe1e4805d0bc53b7acaec6a1d9ce1c6089abbf6a6c381bf0109586610b7e5",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "06ed6c447927db73046e1b2cbf9c690697313f152bf0b2ce03adb53daffe839e",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "3d1e9824d5c51c6bf83294eb65e1d688368e01f41da15bbf0b911081cd30a446",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "c6df774f66888bcadc2c57b53858113d1fe6251cef4a27661dcd28f32de391b8",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    }
+  ],
+  "guard_controls": [
+    {
+      "guard": 0,
+      "prod": false,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 0,
+      "prod": true,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 1,
+      "prod": false,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 1,
+      "prod": true,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 2,
+      "prod": false,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 2,
+      "prod": true,
+      "exit": 0,
+      "ok": true
+    }
+  ],
+  "baseline_logical_probes": 3,
+  "post_edit_line_directives_verified": 3,
+  "subsumed_unreviewed_groups": 20,
+  "subsumed_markers": [
+    "MVDM-HOST-DIV-498",
+    "MVDM-HOST-DIV-520",
+    "MVDM-HOST-DIV-522",
+    "MVDM-HOST-DIV-525",
+    "MVDM-HOST-DIV-530",
+    "MVDM-HOST-DIV-535"
+  ],
+  "marker_registration": "all continue at other source locations",
+  "object_build": "x86 reset.obj and timer.obj compiled; linked PIC and keyboard fixtures",
+  "fixture_results": {
+    "pic_reset_eoi": "24 assertions, 0 failures",
+    "keyboard_controller_pic": "86 assertions, 0 failures"
+  },
+  "limitations": "controlled source-linked host fixtures, no real guest or full product acceptance"
+}

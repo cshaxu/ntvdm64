@@ -1,0 +1,11 @@
+# S13 BFS working checkpoint
+
+This is a preservation checkpoint requested by the owner, not S13 or first-depth closure, acceptance, a product release, or a claim of complete compiler-context coverage. The fixed starting worktree baseline remains `c97d4ee2c8be6d71f32272a674a3b0d76bb71a6c`; the mirror-source baseline and status remain in the archived queue and the linked audit records. Guest files and images were not modified for this work.
+
+First depth currently contains 4,073 groups and 5,049 arms: 1,854 observed retained, 1,470 existing exclusions, 232 newly excluded, and 1,493 pending. The original-boundary comparison has 67 unresolved multiplicity candidates. Forty-one original first-depth groups were restored relative to the fixed worktree baseline, eight of them during the BFS pass. Subsequent-depth arms remain unreviewed. These are working inventory values, not a proof of full reachability.
+
+`bfs-working-evidence.zip` and its manifest preserve the task-local queue, selected scripts, preprocessed comparisons and textual logs from `build/t473-s13`. The archive has 1,318 entries and its complete contents and queue were independently hash-checked. The `shadow` copy, compilation cache, objects, executables and guest media are excluded. Before restoring an extracted file, compare its stored hash with any newer local evidence; do not overwrite newer work.
+
+Checkpoint checks: all 1,636 queue-tracked current source hashes matched; the 235-guard mirror suite and the CPU guard suite passed after correcting the latter's stale physical-line assumptions. `git diff --check` passed. Recent 29 controlled WOW call-boundary fixtures passed after a first script-owned build deadline; the failed first attempt and resumed run are preserved in the archive. These checks do not replace full architecture, guest runtime, or ten-component release gates.
+
+The current branch changes include the mirror condition work and its exception registrations, corresponding test fixtures and audit artifacts. The retained non-MVDM fixture changes reflect the ongoing conditional reconciliation and are included rather than discarded. No attempt is made to represent this checkpoint as an accepted product build. Continue from [the plan](../s13-mirror-conditional-plan.md), [progress log](../s13-bfs-progress.md), archived queue and unresolved original candidates.

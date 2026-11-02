@@ -886,15 +886,9 @@ ULONG FASTCALL W32CreateWindow(PVDMFRAME pFrame)
     }
 
 #ifdef DEBUG
-    if (hwnd32) {
-        CHAR    szClassName[80];
-
-        LOGDEBUG(LOG_WARNING,("  Window %04x created on class = %s\n", GETHWND16(hwnd32),
-                (GetClassName(hwnd32, szClassName, sizeof(szClassName)) ? szClassName : "Unknown")));
-    } else {
-        LOGDEBUG(LOG_WARNING,("  CreateWindow failed, class = %s\n", pszClass));
-    }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 898
 
     FREEPSZPTR(psz1);
     FREEPSZPTR(psz2);

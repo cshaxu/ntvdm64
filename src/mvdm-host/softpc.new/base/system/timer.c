@@ -36,12 +36,12 @@
 #endif
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_SUPPORT.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 
@@ -951,17 +951,9 @@ LOCAL void loadCounter IFN0()
 #endif
 
 #ifndef NTVDM
-		/* how many interrupts in MAX_BACK_SECS seconds? */
-		maxback = (1193180 * MAX_BACK_SECS) / modulo;
-
-		if (maxback > max_backlog)
-		{
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#error Excluded unsupported non-NTVDM timer profile
 #endif
-			max_backlog = maxback;
-                }
-#endif
+#line 964
 
         }
 
@@ -1638,47 +1630,9 @@ LOCAL void startCounting IFN0()
 }
 
 #ifndef NTVDM
-/* calculate the number of 8253 clocks elapsed since counter was last
- * activated
- */
-
-LOCAL unsigned long clocksSinceCounterActivated IFN1(struct host_timeval *, now)
-{
-    struct host_timeval *first;
-    register unsigned long usec_val, nclocks;
-    register unsigned int secs;
-
-    first = &pcu->activationTime;
-    (*pcu->getTime)(now);
-
-    /* calculate #.usecs elapsed */
-
-    secs = (int)(now->tv_sec - first->tv_sec);
-    switch (secs)
-    {
-    case 0:  usec_val = now->tv_usec - first->tv_usec;
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#error Excluded unsupported non-NTVDM timer profile
 #endif
-	     nclocks  = (usec_val * TIMER_CLOCK_DENOM) / TIMER_CLOCK_NUMER;
-             break;
-
-    case 1:  usec_val = 1000000L + now->tv_usec - first->tv_usec;
-	     nclocks  = (usec_val * TIMER_CLOCK_DENOM) / TIMER_CLOCK_NUMER;
-             break;
-
-    default:
-	     nclocks   = ((now->tv_usec - first->tv_usec) * TIMER_CLOCK_DENOM) / TIMER_CLOCK_NUMER;
-	     nclocks  += secs * (1000000L * TIMER_CLOCK_DENOM / TIMER_CLOCK_NUMER);
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-	     break;
-    }
-    return nclocks;
-}
-
-#endif
+#line 1681
 
 
 LOCAL void updateCounter IFN0()
@@ -1743,78 +1697,7 @@ LOCAL void updateCounter IFN0()
 
 
 #ifndef NTVDM
-#ifndef DELAYED_INTS
-/*
- *	timer_no_longer_too_soon() - this is the function invoked by the quick event manager
- *	"HOST_TIMER_TOOLONG_DELAY" instructions after a hardware interrupt is generated. It
- *	clears the variable "too_soon_after_previous" to allow more interrupts to be
- *	generated and kicks off an immediate one if any have been suppressed this time.
- */
-LOCAL void timer_no_longer_too_soon IFN1(long, dummy)
-{
-	UNUSED(dummy);
-
-	too_soon_after_previous = FALSE;
-	if (ticks_lost_this_time){
-		/* At least one tick was suppressed... so send another one immediately */
-		timer_generate_int (1);
-	}
-}
-
-/*
- *	timer_generate_int() -The routine to generate a single timer hardware interrupt (and to
- *	schedule a quick event timer call on itself to have the remaining pending interrupts
- *	generated at a later time).
- *
- */
-LOCAL void timer_generate_int IFN1(long, n)
-{
-#if !(defined(GISP_CPU) || defined(CPU_40_STYLE))
-	if (getPE()){
-		/* Prot mode tick... */
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-		hack_active = TRUE;
-		real_mode_ticks_in_a_row = 0;
-
-	}else{
-		/* Real Mode Tick... */
-		if (hack_active){
-			real_mode_ticks_in_a_row++;
-			if (real_mode_ticks_in_a_row >= adj_n_real_mode_ticks_before_full_speed){
-				hack_active = FALSE;
-				always_trace0 ("PM timer Hack deactivated.");
-			}
-		}
-	}
-#endif	/* ! (GISP_CPU||CPU_40_STYLE) */
-
-	if (hack_active){
-		if (!too_soon_after_previous){
-			ica_hw_interrupt(ICA_MASTER,CPU_TIMER_INT, 1);
-			too_soon_after_previous = TRUE;
-			ticks_lost_this_time = FALSE;
-			add_q_event_i(timer_no_longer_too_soon,HOST_TIMER_TOOLONG_DELAY,0);
-		}else{
-			ticks_lost_this_time = TRUE;
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-		}
-	}else{
-#ifndef GISP_CPU 
-		ica_hw_interrupt(ICA_MASTER,CPU_TIMER_INT, 1);
-	}
-}
-#else /* GISP_CPU */
-#error DIVERGENCE MVDM-HOST-DIV-523: GISP_CPU alternative is not selected; see mirror register.
-#endif /* GISP_CPU */
-#line 1812
-
-#endif /* DELAYED_INTS */
-#line 1814
-
+#error Excluded unsupported non-NTVDM timer profile
 #else   /* NTVDM */
 #line 1816
 
@@ -1982,31 +1865,16 @@ LOCAL void issueIREQ0 IFN1(unsigned int, n)
 #endif
 
 #ifndef PROD
-    if ( time_factor == 0 )
-    {
-	char *env;
-
- 	env = host_getenv("TIMER_FACTOR");
-       	if ( env )
-       		time_factor = atoi(env);
-       	if ( time_factor == 0 )
-       		time_factor = 1;
-#ifdef PIG
-#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#else
-	pig_factor = 1;
+#error DIVERGENCE MVDM-HOST-DIV-590: non-PROD branch is not selected
 #endif
-    }
-#endif
+#line 1995
 
     if (ticks_blocked == 0)
     {
 #ifndef PROD
-#ifdef PIG
-#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
+#error DIVERGENCE MVDM-HOST-DIV-590: non-PROD branch is not selected
 #endif
-			ticks_blocked = time_factor-1;
-#endif
+#line 2004
 		if (timer_int_enabled)
 		{
 #ifdef DELAYED_INTS
@@ -2140,179 +2008,16 @@ unsigned long updateCount(void)
 
 
 #else
-LOCAL void updateCount IFN3(unsigned long, ticks, unsigned long *, wrap,
-	struct host_timeval *, now)
-{
-	unsigned long modulo = pcu->initialCount;
-
-	/*
-	 * PCLABS version 4.2 uses counter 2 (the sound channel) to
-	 * time around 45 ms on a 8MHz 286. On SoftPC we cannot
-	 * guarantee to go that fast, and so we must wind the tick
-	 * rate down to ensure that the counter does not wrap. How much
-	 * we wind down the tick rate is host dependent. The object is
-	 * to get the test finishing in less than
-	 * host_timer_2_frig_factor/18 secs.
-	 *
-	 * host_timer_2_frig_factor is now redundant. 28/4/93 niall.
-	 */
-
-	if (pcu == &timers[2]) {
-		/*
-		 * PMINFO uses ~counter, so one tick becomes 0.
-		 * 2 ticks is just as good. Avoid guessing (frig_factor!).
-		 */
-		if ((ticks - pcu->lastTicks) == 0)
-			ticks = 2;
-	}
-
-	/* if the counter has been read too quickly after its last
-	 * access, then the host may not show any visible change in
-	 * host time ... in which case we just guess at a suitable
-	 * number of elapsed ticks.
-	 */
-
-	if ((long)(ticks - pcu->lastTicks) <= 0){
-		ticks = guess();
-	}else{
-		throwaway();
-		pcu->lastTicks = ticks;
-	}
-
-	/* the counter holds some count down value ...
-	 * if the number of 8253 clocks elapsed exceeds this amount
-	 * then the counter must have wrapped
-	 */
-
-	if ( ticks < modulo ) {
-		*wrap = 0;
-	} else {
-		*wrap = 1;
-		ticks -= modulo;
-
-		if ( pcu->m == INT_ON_TERMINALCOUNT )
-			modulo = 0x10000L;
-
-		if ( ticks >= modulo ) {
-			*wrap += ticks/modulo;
-			ticks %= modulo;
-
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-		}
-	}
-
-	/* calculate new counter value */
-	pcu->Count = (word)(modulo-ticks);
-
-	/* calculate time at which last wrap point occurred, and
- 	 * use this to stamp the counter
-	 */
-
-	if (*wrap)
-		setLastWrap((unsigned int)(modulo-pcu->Count),now);
-
-}
-
-
-
-/* calculate time for last wrap around of counter, and use this
- * to mark counter activation time.
- */
-
-LOCAL void setLastWrap IFN2(unsigned int, nclocks, struct host_timeval *, now)
-{
-	struct host_timeval *stamp;
-	unsigned long usecs;
-
-	stamp  = &pcu->activationTime;
-	*stamp = *now;
-	usecs  = ((unsigned long)nclocks * TIMER_CLOCK_NUMER) / TIMER_CLOCK_DENOM;
-
-	if (stamp->tv_usec < usecs)
-	{
-		stamp->tv_sec--;
-		stamp->tv_usec += 1000000L;
-	}
-	stamp->tv_usec -= usecs;
-
-	pcu->lastTicks = nclocks;
-}
-
+#error Excluded unsupported non-NTVDM alternative
 #endif  /* NTVDM*/
+#line 2238
 
 
 
 #ifndef NTVDM
-/*
- * If the host timer gives the same result as last time it was called,
- * we must give the illusion that time has passed.
- * The algorithm uesd is to keep track of how often we have to guess
- * between host timer ticks, and to assume that guesses should be evenly
- * distributed between host ticks, ie. the time between two guesses should be:
- * 	Guess ticks = hosttickinterval/nguesses
- * If we find that the total guessed time is getting dangerously near to being the time
- * between two host ticks, we start reducing the guess tick interval so as to avoid
- * guessing a total time that is too large.
- * 
- * From observation, applications use the timer in both coarse and fine 'modes'.
- * The coarse mode is the hardware interrupt handler and then in between 
- * interrupts, the timer is polled to detect time passing (hence guess below).
- * The fine mode polling does not commence until some portion of the tick time
- * has elapsed - probably as the coarse int handler will consume some of the
- * time. If guess() bases its timefrig over the whole tick, then given the
- * above behaviour, a polling counter can reach tick end time before the int
- * is delivered. This can fool applications (e.g. Win 3.1 VTD) into having
- * time pass at the wrong rate (approx double for Win 3.1). By calculating
- * the timefrig on most (7/8) of the tick period, this problem is avoided.
- */
-
-LOCAL unsigned long guess IFN0()
-{
-	if (!pcu->microtick)
-	{
-		pcu->saveCount = pcu->Count;
-		pcu->timeFrig = ((ticksPerIdealInterval * 7) >> 3) / pcu->guessesPerHostTick;	   /* guesses over 7/8 of tick */
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-	}
-	if(pcu->guessesSoFar++ > pcu->guessesPerHostTick)
-	{
-	/*
-	 * PC Program is reading the timer more often than in the last timer tick, so need to
-	 * decay timeFrig to avoid too much 'time' passing between host ticks
-	 */
-		pcu->timeFrig = (pcu->timeFrig >> 1) + 1;
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-	}
-	pcu->microtick += pcu->timeFrig;
-	return (pcu->microtick + pcu->lastTicks);
-}
-
-
-/*
- * After a few (maybe none) guesses, the host timer has finally ticked.
- * Try and work out a good frig factor for the next few guesses, based
- * on the number of guesses we had to make.
- */
-LOCAL void throwaway IFN0()
-{
-	pcu->guessesPerHostTick = (pcu->guessesPerHostTick + pcu->guessesSoFar)>>1;
-	pcu->guessesSoFar = 2;		/* Handy to count from 2! */
-	if (!pcu->microtick)
-		return;
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-	pcu->Count = pcu->saveCount;
-	pcu->microtick = 0;
-}
-
+#error Excluded unsupported non-NTVDM timer profile
 #endif  /* ndef NTVDM */
+#line 2310
 
 LOCAL unsigned  short bin_to_bcd IFN1(unsigned long, val)
 {
@@ -2394,36 +2099,7 @@ LOCAL void updateIdealTime IFN0()
 }
 
 #ifndef NTVDM
-
-/* get current host system time ... used for time-stamping and
- * querying during io from Intel application
- */
-
-LOCAL void getHostSysTime IFN1(struct host_timeval *, t)
-{
-	struct host_timezone dummy;
- 	host_gettimeofday(t, &dummy);
-
-	/*
-	 * check that we haven't gone back in time.
-	 */
-
-	if (t->tv_sec < idealtime.tv_sec ||
-	 (t->tv_usec < idealtime.tv_usec && t->tv_sec == idealtime.tv_sec))
-	{
-		/*
-		 * The real time has fallen behind the ideal time.
-		 * This should never happen... If it does we must
-		 * stay at the ideal time.
-		 */
-
-#ifndef	PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-#line 2417
-		*t = idealtime;
-	}
-}
+#error Excluded unsupported non-NTVDM timer profile
 #endif /* !NTVDM */
 #line 2421
 
@@ -2445,12 +2121,12 @@ void	axe_ticks IFN1(int, ticks)
  * Initialization code
  */
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_INIT.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 #ifdef SYNCH_TIMERS

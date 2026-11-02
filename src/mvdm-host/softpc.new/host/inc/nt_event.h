@@ -16,7 +16,7 @@
 #define ES_SCALEVENT    4
 #define ES_YODA         8
 #ifdef YODA
-void CheckForYodaEvents(void);
+#error Excluded unsupported YODA configuration
 #endif
 #ifndef X86GFX
 void GetScaleEvent(void);

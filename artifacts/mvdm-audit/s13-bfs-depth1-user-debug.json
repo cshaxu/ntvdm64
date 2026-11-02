@@ -1,0 +1,246 @@
+{
+  "contexts": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "exit": 0,
+      "source_sha256": "41b6fe5548fc76c1cfb99027fe7833f25ccadfbc1a57b09a50cebf042691cf38",
+      "includes": 252,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "exit": 0,
+      "source_sha256": "41b6fe5548fc76c1cfb99027fe7833f25ccadfbc1a57b09a50cebf042691cf38",
+      "includes": 253,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "exit": 0,
+      "source_sha256": "1739e989fffac5861649b8a27692097dbf814f5babeaf4f65bf2f9df7a97e835",
+      "includes": 302,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "exit": 0,
+      "source_sha256": "c6491769dededbc2572ff3dce2f5402b54fd4d7cb0b6590e8bb35c52565e42a2",
+      "includes": 302,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "exit": 0,
+      "source_sha256": "b3752244f22acac4aee67409cb1b1d2f568c1c931701135296b3160077b53ef4",
+      "includes": 305,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "exit": 0,
+      "source_sha256": "38044df32d4c31bf2f7ffc2399749a369021d5e407443963c6e0b019a7d47f2b",
+      "includes": 305,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "1739e989fffac5861649b8a27692097dbf814f5babeaf4f65bf2f9df7a97e835",
+      "includes": 217,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "c6491769dededbc2572ff3dce2f5402b54fd4d7cb0b6590e8bb35c52565e42a2",
+      "includes": 217,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "b3752244f22acac4aee67409cb1b1d2f568c1c931701135296b3160077b53ef4",
+      "includes": 220,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "38044df32d4c31bf2f7ffc2399749a369021d5e407443963c6e0b019a7d47f2b",
+      "includes": 220,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "41b6fe5548fc76c1cfb99027fe7833f25ccadfbc1a57b09a50cebf042691cf38",
+      "includes": 217,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "e1eaea491db6e7c3670d4e3a0cb4626a0d26c8b2024684a0a9495adb07cbe8d5",
+      "includes": 149,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    }
+  ],
+  "branches": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "start_before": 290,
+      "cut_before": 294,
+      "end_before": 294,
+      "original_start": 282,
+      "original_cut": 286,
+      "original_end": 286,
+      "removed_body_sha256": "a222811cac0e59354fd9542311f4f0df9b57aaec5a7526c9c08eb257eef4e3ad",
+      "removed_body_lines": 3,
+      "alternative_logical_line": null,
+      "following_logical_line": 295
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "start_before": 146,
+      "cut_before": 148,
+      "end_before": 148,
+      "original_start": 154,
+      "original_cut": 156,
+      "original_end": 156,
+      "removed_body_sha256": "117f109570f1a2aa5d5c7b257e84f260d226ef1066333424299e1b1afefa3660",
+      "removed_body_lines": 1,
+      "alternative_logical_line": null,
+      "following_logical_line": 149
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "start_before": 167,
+      "cut_before": 169,
+      "end_before": 171,
+      "original_start": 175,
+      "original_cut": 177,
+      "original_end": 179,
+      "removed_body_sha256": "3dfb2015f2f28a22338ffa265eced631ba98d7cdce152d638674e9f766f491f1",
+      "removed_body_lines": 1,
+      "alternative_logical_line": 170,
+      "following_logical_line": 172
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
+      "start_before": 174,
+      "cut_before": 183,
+      "end_before": 183,
+      "original_start": 182,
+      "original_cut": 191,
+      "original_end": 191,
+      "removed_body_sha256": "1a91f4f4c19e1b7708b23c3ca5ed76852b9778f396363e7d9ef73d7084e2367c",
+      "removed_body_lines": 8,
+      "alternative_logical_line": null,
+      "following_logical_line": 184
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "start_before": 610,
+      "cut_before": 614,
+      "end_before": 614,
+      "original_start": 649,
+      "original_cut": 653,
+      "original_end": 653,
+      "removed_body_sha256": "a4b4e822ecf9fb468e6639fee121c4c24bb279e09fe95bd5b8297ac5196ab647",
+      "removed_body_lines": 3,
+      "alternative_logical_line": null,
+      "following_logical_line": 615
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "start_before": 504,
+      "cut_before": 513,
+      "end_before": 513,
+      "original_start": 508,
+      "original_cut": 517,
+      "original_end": 517,
+      "removed_body_sha256": "64af75e99bb2dc4cdd618098c1d88405328e3975f1c19fa79a39b28efd1b9407",
+      "removed_body_lines": 8,
+      "alternative_logical_line": null,
+      "following_logical_line": 514
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "start_before": 31,
+      "cut_before": 35,
+      "end_before": 35,
+      "original_start": 268,
+      "original_cut": 272,
+      "original_end": 272,
+      "removed_body_sha256": "250da3412af00340ba1b756d17243c098dd9e0dc0a8c7cba2dcfc246bf150e3b",
+      "removed_body_lines": 3,
+      "alternative_logical_line": null,
+      "following_logical_line": 36
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "start_before": 252,
+      "cut_before": 256,
+      "end_before": 256,
+      "original_start": 785,
+      "original_cut": 789,
+      "original_end": 789,
+      "removed_body_sha256": "30f49ba7d808a5d6269b8d142a38382d3e3894788b5ea053b24f8de90fcf4cda",
+      "removed_body_lines": 3,
+      "alternative_logical_line": null,
+      "following_logical_line": 257
+    }
+  ],
+  "status": "locally-verified",
+  "registration": "OPENNT-HOST-146",
+  "limitations": [
+    "Selected WOW/call-boundaries release contexts and queue fixture release flags; no guest runtime or full layer release acceptance."
+  ],
+  "verification": {
+    "preprocessor": "six actual x86 WOW translation units match before/after after scratch filename normalization and blank line filtering",
+    "objects": "six selected WOW objects compile; existing ANSI warning",
+    "guard": "eight isolated normal/rejected checks pass",
+    "diagnostic_lines": "nine selected/following logical positions measured with real preprocessors",
+    "queue": "30 current directives in six files match remapped working queue",
+    "control_fixture": "29 controlled call-boundary fixture programs passed, exit 0; build/t473-s13/user-debug-control-fixture-resume",
+    "initial_scratch_failure": "line probe first failed on missing original quote-include directory; corrected and all nine probes passed; comparison first failed on wrong scratch path; corrected and all six passed",
+    "initial_test_invocation": "default RepositoryRoot initialization failed; explicit repository root started the test",
+    "first_control_fixture": "First broad build hit its script-owned deadline after 98/143 build steps; original process exited and all ninja/cl processes were confirmed gone before resuming in a new evidence directory."
+  }
+}

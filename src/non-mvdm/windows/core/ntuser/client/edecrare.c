@@ -608,10 +608,9 @@ void   ECSetFont(
     if (ped->f40Compat && (TextMetrics.tmPitchAndFamily & TMPF_TRUETYPE)) {
         ped->fTrueType = GetCharWidthInfo(hdc, &cwi);
 #ifdef DEBUG
-        if (!ped->fTrueType) {
-            RIPMSG0(RIP_WARNING, "ECSetFont: GetCharWidthInfo Failed");
-        }
+#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
+#line 615
     } else {
         ped->fTrueType = FALSE;
     }

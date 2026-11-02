@@ -25,14 +25,9 @@ HINSTANCE FASTCALL WK32LoadLibraryEx32(PVDMFRAME pFrame)
     PLOADLIBRARYEX32 parg16;
 
 #ifdef i386
-    BYTE FpuState[108];
-
-    // Save the 487 state
-    _asm {
-        lea    ecx, [FpuState]
-        fsave  [ecx]
-    }
+#error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #endif
+#line 36
 
     GETARGPTR(pFrame, sizeof(LOADLIBRARYEX32), parg16);
     GETVDMPTR(parg16->lpszLibFile,0,psz1);
@@ -48,12 +43,9 @@ HINSTANCE FASTCALL WK32LoadLibraryEx32(PVDMFRAME pFrame)
     FREEARGPTR(parg16);
 
 #ifdef i386
-    // Restore the 487 state
-    _asm {
-        lea    ecx, [FpuState]
-        frstor [ecx]
-    }
+#error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #endif
+#line 57
 
     return (hinstance);
 }
@@ -172,41 +164,9 @@ DWORD FASTCALL WK32ICallProc32(PVDMFRAME pFrame)
 
 
 #ifdef i386
-
-    {
-        extern DWORD WK32ICallProc32MakeCall(DWORD pfn, DWORD cArgs, VOID *pArgs);
-
-        //
-        // On x86 we call an assembly routine to actually make the call to
-        // the client's Win32 routine.  The code is much more compact
-        // this way, and it's the only way we can be compatible with
-        // Win95's implementation, which cleans up the stack if the
-        // routine doesn't.
-        //
-        // This assembly routine "pushes" the arguments by copying
-        // them as a block, so they must be in the proper order for
-        // the destination calling convention.
-        //
-
-        if ( ! fSourceCDECL) {
-            //
-            // Invert the parameters
-            //
-            pArg = lpArgs;
-            lpArgs = dwTemp;
-
-            nParam = cParams;
-            while ( nParam != 0 ) {
-                --nParam;
-                lpArgs[nParam] = *pArg;
-                pArg++;
-            }
-        }
-
-        dwReturn = WK32ICallProc32MakeCall(parg16->lpProcAddress, cParams, lpArgs);
-    }
-
+#error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #else
+#line 210
 
     if ( fSourceCDECL != fDestCDECL ) {
         //
@@ -521,6 +481,7 @@ DWORD FASTCALL WK32ICallProc32(PVDMFRAME pFrame)
     }
 
 #endif
+#line 524
 
 
     FREEARGPTR(parg16);

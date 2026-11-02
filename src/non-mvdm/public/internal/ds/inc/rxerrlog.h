@@ -61,17 +61,17 @@ RxNetErrorLogRead (
     );
 
 #if 0
-NET_API_STATUS
-RxNetErrorLogWrite (
-    IN LPBYTE Reserved1 OPTIONAL,
-    IN DWORD Code,
-    IN LPTSTR Component,
-    IN LPBYTE Buffer,
-    IN DWORD NumBytes,
-    IN LPBYTE MsgBuf,
-    IN DWORD StrCount,
-    IN LPBYTE Reserved2 OPTIONAL
-    );
+#error Excluded unsupported original disabled branch
+
+
+
+
+
+
+
+
+
+
 #endif // 0
 
 

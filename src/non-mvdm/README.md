@@ -1,5 +1,47 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-146: replace eight first-depth DEBUG USER bodies with #error,
+retaining original conditions, selected alternatives and measured diagnostic
+lines. Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-user-debug.json`.
+
+OPENNT-HOST-145: restore the original first-depth _USERK_ selector in
+`windows/core/ntuser/rtl/chartran.c`, rejecting the unsupported kernel USER
+arm while retaining the OPENNT-HOST-119 user-mode codepage adapter. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-original-chartran.json`.
+
+OPENNT-HOST-144: restore the original first-depth ALLOC_PRAGMA condition in
+`base/ntos/ex/probe.c`, rejecting its unsupported kernel allocation profile;
+preserve the existing user-mode binding and logical line positions. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-original-probe.json`.
+
+OPENNT-HOST-143: restore the original `!MIDL_PASS` condition around the
+retained `RtlConvertLongToLuid` inline in the `ntrtl.h` subset. Other SDK
+declarations and the subset include guard are unchanged. Evidence:
+`../../artifacts/mvdm-audit/s13-mirror-conditional-reconciliation.md`.
+
+OPENNT-HOST-142: restore the original `!MSDWP` condition around
+`EnterWowCritSect` and `ExitWowCritSect` in the reordered `userk.h` subset.
+The intervening pseudo-event declarations originate outside that original
+condition; preserve their existing ownership and placement. Source evidence:
+`../../artifacts/mvdm-audit/s13-mirror-conditional-reconciliation.md`.
+
+OPENNT-HOST-141: replace seven original `#if 0` code bodies with `#error`,
+retaining their original outer conditions and line positions. Original and
+removed-body hashes are in
+`../../artifacts/mvdm-audit/s13-rejected-legacy-branches.json`.
+
+OPENNT-HOST-140: restore the original `UNICODE` selection for the three
+retained text-capture aliases in `ntsend.h`, including their original Unicode
+capture and cleanup dependencies. The same header serves Unicode control
+clients and the ANSI class client; neither profile is rejected. Evidence:
+`../../artifacts/mvdm-audit/s13-mirror-conditional-reconciliation.md`.
+
+OPENNT-HOST-139: restore the original ANSI/Unicode selection around
+`ntcftxt.h`'s class-client subset. The Unicode arm is excluded, while the
+original ANSI definitions own `IS_ANSI`; the caller's duplicate definition is
+removed. The retained product and class-registration fixture use the ANSI
+profile. Evidence: `../../artifacts/mvdm-audit/s13-mirror-conditional-reconciliation.md`.
+
 OPENNT-HOST-138: remove the divergence comment attached to the retained
 `clres.c` line directive; preserve its number and excluded-branch guards.
 Evidence: `../../artifacts/mvdm-audit/excluded-branch-annotation-cleanup.md`.

@@ -1,0 +1,143 @@
+path,original,old_directives,new_directives,unmatched,examples
+src/mvdm-host/dos/dem/dem.c,O:\repos.external\OpenNT\base\mvdm\dos\dem\dem.c,7,4,3,67:ifndef i386 | 69:else  | 73:endif
+src/mvdm-host/dpmi32/dpmiint.c,O:\repos.external\OpenNT\base\mvdm\dpmi32\dpmiint.c,28,90,4,100:if DBG | 859:ifndef i386 | 1167:ifndef i386 | 1237:ifndef i386
+src/mvdm-host/dpmi32/dpmiint.h,O:\repos.external\OpenNT\base\mvdm\dpmi32\dpmiint.h,3,3,1,23:ifndef i386
+src/mvdm-host/inc/mvdm.h,O:\repos.external\OpenNT\base\mvdm\inc\mvdm.h,7,7,1,73:ifdef i386
+src/mvdm-host/inc/suballoc.h,O:\repos.external\OpenNT\base\mvdm\inc\suballoc.h,3,3,1,32:ifdef i386
+src/mvdm-host/softpc.new/base/bios/bios.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\bios\bios.c,256,174,82,238:ifdef NOVELL_CFM | 240:else  | 242:endif  | 243:ifdef V4CLIENT | 245:else
+src/mvdm-host/softpc.new/base/bios/emm_fncs.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\bios\emm_fncs.c,58,56,2,252:ifndef PROD | 255:endif
+src/mvdm-host/softpc.new/base/bios/ill_bop.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\bios\ill_bop.c,14,10,4,74:ifdef YODA | 149:ifdef YODA | 152:endif  | 153:endif
+src/mvdm-host/softpc.new/base/bios/reset.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\bios\reset.c,161,159,6,514:ifdef LIM | 516:endif  | 742:ifdef HFX | 745:endif  | 755:ifdef NTVDM
+src/mvdm-host/softpc.new/base/bios/rtc_bios.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\bios\rtc_bios.c,8,4,4,53:ifdef RCPU_INT4A_SEGMENT | 55:endif  | 56:ifdef RCPU_INT4A_OFFSET | 153:endif
+src/mvdm-host/softpc.new/base/bios/tape_io.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\bios\tape_io.c,39,34,5,143:ifdef CPU_30_STYLE | 148:ifndef PROD | 151:endif  | 156:else  | 162:endif
+src/mvdm-host/softpc.new/base/ccpu386/c_main.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\ccpu386\c_main.c,214,214,17,531:ifdef host_timer_event | 533:endif  | 541:if !defined(PROD) | 763:if defined(SFELLOW) | 765:endif
+src/mvdm-host/softpc.new/base/ccpu386/c_stack.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\ccpu386\c_stack.c,15,13,2,381:ifdef PIG_DONT_CHECK_OTHER_WORD_ON_STACK | 383:endif
+src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\ccpu386\c_tlb.c,48,43,5,875:ifdef FAST_TLB | 906:ifdef SPC486 | 908:else  | 910:endif  | 953:endif
+src/mvdm-host/softpc.new/base/ccpu386/ccpupig.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\ccpu386\ccpupig.h,8,2,6,112:if defined(SFELLOW) | 124:if COLLECT_MMIO_STATS | 158:if COLLECT_MMIO_STATS | 161:endif  | 163:endif
+src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\ccpu386\cpu4gen.h,1301,656,1286,192:ifdef PROD | 200:ifdef CCPU | 203:else  | 205:ifdef PROD | 207:else
+src/mvdm-host/softpc.new/base/comms/com.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\comms\com.c,257,246,11,645:ifdef GISP_CPU | 647:else  | 649:endif  | 1425:ifndef PROD | 1429:endif
+src/mvdm-host/softpc.new/base/comms/printer.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\comms\printer.c,86,84,2,90:ifdef STINGER | 92:endif
+src/mvdm-host/softpc.new/base/comms/printer_.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\comms\printer_.c,28,26,2,210:ifdef PRINTER | 221:endif
+src/mvdm-host/softpc.new/base/debug/btrace.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\debug\btrace.c,13,6,7,73:ifdef ANSI | 75:else  | 101:ifdef DELTA | 104:endif  | 136:ifdef DELTA
+src/mvdm-host/softpc.new/base/debug/dasm.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\debug\dasm.c,25,4,21,139:ifdef CPU_30_STYLE | 141:ifdef BACK_M | 150:else  | 161:endif  | 166:ifdef BIT_ORDER1
+src/mvdm-host/softpc.new/base/debug/debuggng.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\debug\debuggng.c,4,2,2,11:ifdef EGG | 53:endif
+src/mvdm-host/softpc.new/base/debug/ega_dump.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\debug\ega_dump.c,7,4,3,56:ifdef ANSI | 58:else  | 226:endif
+src/mvdm-host/softpc.new/base/debug/pigyoda.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\debug\pigyoda.c,5,2,3,37:ifdef ANSI | 39:else  | 355:endif
+src/mvdm-host/softpc.new/base/debug/trace.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\debug\trace.c,62,22,40,60:ifdef SPC386 | 64:else  | 67:endif  | 281:if defined(CPU_40_STYLE) && !defined(CCPU) | 283:endif
+src/mvdm-host/softpc.new/base/debug/yoda.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\debug\yoda.c,530,14,516,83:ifndef PROD | 84:if defined(BSD4_2) || defined(SYSTEMV) | 109:ifndef SFELLOW | 111:ifdef NEXT | 115:else
+src/mvdm-host/softpc.new/base/disks/diskbios.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\disks\diskbios.c,45,35,10,385:ifdef macintosh | 387:else  | 389:endif  | 448:ifdef ANSI | 452:else
+src/mvdm-host/softpc.new/base/disks/gfi.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\disks\gfi.c,30,28,2,340:ifdef FLOPPY_B | 343:endif
+src/mvdm-host/softpc.new/base/disks/gfi_ibm.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\disks\gfi_ibm.c,19,2,17,38:ifdef SEGMENTATION | 52:ifdef SCCSID | 54:endif  | 201:ifdef BIGEND | 205:else
+src/mvdm-host/softpc.new/base/disks/gfi_sflp.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\disks\gfi_sflp.c,22,2,20,43:ifdef SEGMENTATION | 277:ifndef PROD | 278:endif  | 307:ifndef PROD | 308:endif
+src/mvdm-host/softpc.new/base/disks/gfi_test.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\disks\gfi_test.c,8,4,4,22:ifdef SCCSID | 24:endif  | 26:ifdef SEGMENTATION | 33:endif
+src/mvdm-host/softpc.new/base/dos/emm_mngr.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\dos\emm_mngr.c,77,73,5,1024:ifdef PROD | 1026:endif  | 1042:ifdef PROD | 1044:endif  | 1883:ifndef NTVDM
+src/mvdm-host/softpc.new/base/inc/bios.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\bios.h,60,56,4,306:ifdef NOVELL_CFM | 308:endif  | 309:ifdef V4CLIENT | 311:endif
+src/mvdm-host/softpc.new/base/inc/cpu.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\cpu.h,64,2,62,26:ifdef CPU_30_STYLE | 73:ifdef CPU_PRIVATE | 84:ifdef CCPU | 101:ifndef host_calc_q_ev_inst_for_time | 103:endif
+src/mvdm-host/softpc.new/base/inc/cpu3.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\cpu3.h,169,151,18,475:ifdef SWITCHED_CPU | 477:else  | 479:endif  | 489:ifndef SWITCHED_CPU | 604:ifdef CPU_PRIVATE
+src/mvdm-host/softpc.new/base/inc/cpu4.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\cpu4.h,22,17,5,67:ifdef CCPU | 70:else  | 73:endif  | 100:ifdef GISP_CPU | 103:endif
+src/mvdm-host/softpc.new/base/inc/cpu_vid.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\cpu_vid.h,19,17,7,113:ifdef A3CPU | 115:ifdef C_VID | 119:else  | 121:ifdef C_VID | 123:endif
+src/mvdm-host/softpc.new/base/inc/debug.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\debug.h,14,10,4,31:ifndef newline | 33:endif  | 35:ifndef file_id | 37:endif
+src/mvdm-host/softpc.new/base/inc/dsktrace.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\dsktrace.h,8,5,3,112:ifdef ANSI | 114:else  | 117:endif
+src/mvdm-host/softpc.new/base/inc/egacpu.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\egacpu.h,20,22,3,150:ifdef HOST_VGA_GLOBALS | 154:else  | 156:endif
+src/mvdm-host/softpc.new/base/inc/equip.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\equip.h,12,8,4,24:ifdef BIT_ORDER1 | 42:endif  | 43:ifdef BIT_ORDER2 | 61:endif
+src/mvdm-host/softpc.new/base/inc/flexlmif.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\flexlmif.h,4,2,2,25:ifdef SOFTWINDOWS_AND_SOFTPC | 55:endif
+src/mvdm-host/softpc.new/base/inc/gisp_sas.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\gisp_sas.h,6,2,4,22:ifndef _GISP_SAS_H_ | 36:ifdef IRET_HOOKS | 58:endif  | 59:endif
+src/mvdm-host/softpc.new/base/inc/hosthunt.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\hosthunt.h,5,2,3,20:ifdef NTVDM | 24:else  | 39:endif
+src/mvdm-host/softpc.new/base/inc/hunter.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\hunter.h,30,2,28,86:ifdef EGG | 124:ifdef EGG | 132:endif  | 153:ifdef ANSI | 157:ifndef hunter_fopen
+src/mvdm-host/softpc.new/base/inc/hwvga.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\hwvga.h,10,2,8,26:ifndef _HWVGA_H_ | 82:ifndef hostStartFullScreen | 86:ifndef hostStopFullScreen | 88:endif  | 90:ifdef HUNTER
+src/mvdm-host/softpc.new/base/inc/ica.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\ica.h,29,28,3,209:ifdef REAL_ICA | 219:else  | 240:endif
+src/mvdm-host/softpc.new/base/inc/ios.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\ios.h,64,56,8,485:ifdef ANSI | 488:endif  | 493:ifdef ANSI | 496:endif  | 524:ifdef ANSI
+src/mvdm-host/softpc.new/base/inc/quick_ev.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\quick_ev.h,13,7,6,39:ifndef host_calc_q_ev_inst_for_time | 41:endif  | 42:ifdef NTVDM | 44:endif  | 57:ifdef CPU_40_STYLE
+src/mvdm-host/softpc.new/base/inc/rs232.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\rs232.h,81,70,11,71:ifdef BIT_ORDER2 | 81:endif  | 82:ifdef BIT_ORDER1 | 92:endif  | 197:if defined(NTVDM) && defined(FIFO_ON)
+src/mvdm-host/softpc.new/base/inc/sas.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\sas.h,100,80,20,298:ifndef HERC_REGEN_BUFF | 302:endif  | 761:ifndef MOUSE_VIDEO_IO_SEGMENT | 763:endif  | 777:ifndef MOUSE_INT1_SEGMENT
+src/mvdm-host/softpc.new/base/inc/unix_cnf.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\unix_cnf.h,18,13,5,35:ifndef SYSTEM_CONFIG | 37:endif  | 50:ifdef ANSI | 52:else  | 55:endif
+src/mvdm-host/softpc.new/base/inc/vgaports.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\vgaports.h,63,41,22,171:ifdef V7VGA | 184:endif  | 771:ifdef V7VGA | 783:else  | 794:endif
+src/mvdm-host/softpc.new/base/inc/xt.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\xt.h,30,27,3,73:ifdef CPU_30_STYLE | 92:else  | 107:endif
+src/mvdm-host/softpc.new/base/inc/yoda.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\inc\yoda.h,8,6,2,59:ifdef MSWDVR_DEBUG | 61:endif
+src/mvdm-host/softpc.new/base/keymouse/keyba.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\keymouse\keyba.c,261,276,3,2566:ifdef CPU_30_STYLE | 2568:else  | 2571:endif
+src/mvdm-host/softpc.new/base/keymouse/mouse_io.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\keymouse\mouse_io.c,312,313,18,1725:ifdef V7VGA | 1730:else  | 1732:endif  | 2641:ifndef NTVDM | 2950:ifndef NTVDM
+src/mvdm-host/softpc.new/base/support/ios.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\support\ios.c,112,112,1,413:if defined(NTVDM) && defined(MONITOR)
+src/mvdm-host/softpc.new/base/support/main.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\support\main.c,71,67,4,45:endif  | 54:ifndef CPU_40_STYLE | 87:ifndef ProcCommonCommLineArgs | 89:endif
+src/mvdm-host/softpc.new/base/support/time_day.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\support\time_day.c,56,54,2,716:ifdef SEGMENTATION | 723:endif
+src/mvdm-host/softpc.new/base/support/xt.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\support\xt.c,32,9,25,75:if defined(CCPU) && !defined(CPU_30_STYLE) | 76:ifndef MAC_LIKE | 84:endif  | 159:ifndef GISP_CPU | 164:if defined(CPU_40_STYLE)
+src/mvdm-host/softpc.new/base/system/ica.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\system\ica.c,212,206,12,149:if defined(CPU_40_STYLE) || defined(GISP_CPU) | 151:endif  | 1500:ifdef HOOKED_IRETS | 1510:ifdef CPU_40_STYLE | 1519:endif
+src/mvdm-host/softpc.new/base/system/idetect.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\system\idetect.c,39,34,5,250:ifdef SMEG | 255:endif  | 260:ifdef SMEG | 276:else  | 278:endif
+src/mvdm-host/softpc.new/base/system/illegalp.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\system\illegalp.c,33,32,5,370:ifdef CPU_40_STYLE | 375:ifndef CCPU | 382:else  | 384:endif  | 395:endif
+src/mvdm-host/softpc.new/base/system/rom.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\system\rom.c,106,104,3,282:if !defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) ) | 575:ifndef GISP_SVGA | 583:endif
+src/mvdm-host/softpc.new/base/system/timer.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\system\timer.c,216,203,13,483:if defined(IRET_HOOKS) && defined(GISP_CPU) | 488:endif  | 1933:if defined(IRET_HOOKS) | 1939:else  | 1942:endif
+src/mvdm-host/softpc.new/base/system/timestrb.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\system\timestrb.c,16,12,4,87:ifndef REAL_TIMER | 90:endif  | 94:if defined(CPU_40_STYLE) | 96:endif
+src/mvdm-host/softpc.new/base/video/cga.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\video\cga.c,65,60,5,199:ifndef NO_STRING_OPERATIONS | 202:endif  | 1383:ifdef C_VID | 1388:else  | 1391:endif
+src/mvdm-host/softpc.new/base/video/ega_prts.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\video\ega_prts.c,130,123,7,2941:ifdef C_VID | 2943:else  | 2945:endif  | 2994:ifndef A2CPU | 2997:endif
+src/mvdm-host/softpc.new/base/video/ega_read.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\video\ega_read.c,202,100,109,195:ifndef EGATEST | 196:ifndef A3CPU | 197:ifndef JOKER | 203:ifndef NO_STRING_OPERATIONS | 206:endif
+src/mvdm-host/softpc.new/base/video/ega_writ.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\video\ega_writ.c,130,80,50,97:ifdef VGG | 99:endif  | 104:ifdef VGG | 106:endif  | 108:ifdef VGG
+src/mvdm-host/softpc.new/base/video/egawrtm0.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\video\egawrtm0.c,55,28,32,167:ifdef PROD | 169:else  | 171:endif  | 209:ifdef A_VID | 233:ifndef NO_STRING_OPERATIONS
+src/mvdm-host/softpc.new/base/video/egwrtm12.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\video\egwrtm12.c,45,30,20,129:ifdef PROD | 133:endif  | 134:endif  | 156:ifdef A_VID | 169:ifndef NO_STRING_OPERATIONS
+src/mvdm-host/softpc.new/base/video/gfx_updt.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\video\gfx_updt.c,287,261,26,157:if defined(PROD) || (!defined(EGG)) | 164:else  | 177:endif  | 3246:if defined(JOKER) && !defined(PROD) | 3249:else
+src/mvdm-host/softpc.new/base/video/vga_prts.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\video\vga_prts.c,215,208,7,2157:ifdef C_VID | 2159:else  | 2161:endif  | 2208:ifndef A2CPU | 2211:endif
+src/mvdm-host/softpc.new/base/video/video.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\base\video\video.c,255,250,8,1511:if ( defined(NTVDM) && defined(MONITOR) ) || defined(GISP_SVGA) | 1579:if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA ) | 1888:ifdef NTVDM | 1891:else  | 1893:endif
+src/mvdm-host/softpc.new/host/inc/host_cpu.h,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\inc\host_cpu.h,35,5,33,19:ifndef _HOST_CPU_H | 23:ifdef MONITOR | 48:ifdef BIGEND | 89:endif  | 92:ifdef LITTLEND
+src/mvdm-host/softpc.new/host/src/config.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\config.c,53,50,5,506:ifdef i386 | 830:if 0 | 835:endif  | 1204:ifdef LIM | 1209:else
+src/mvdm-host/softpc.new/host/src/copy_fnc.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\copy_fnc.c,13,13,1,115:if 0
+src/mvdm-host/softpc.new/host/src/nt_bop.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\nt_bop.c,68,66,2,739:ifndef PROD | 744:endif
+src/mvdm-host/softpc.new/host/src/nt_cga.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\nt_cga.c,31,29,2,160:ifdef BIGWIN | 186:endif
+src/mvdm-host/softpc.new/host/src/nt_com.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\nt_com.c,20,16,4,302:endif  | 388:ifdef MONITOR | 390:endif  | 712:ifdef MONITOR
+src/mvdm-host/softpc.new/host/src/nt_cprgs.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\nt_cprgs.c,165,18,150,378:ifdef CCPU | 999:endif CCPU | 1015:ifdef A2CPU | 1061:ifdef MIKE_DEBUG | 1063:endif MIKE_DEBUG
+src/mvdm-host/softpc.new/host/src/nt_cpu.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\nt_cpu.c,35,24,15,127:ifdef CPU_40_STYLE | 130:else  | 134:endif  | 191:ifndef PROD | 194:endif
+src/mvdm-host/softpc.new/host/src/nt_eoi.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\nt_eoi.c,29,27,2,268:if DBG | 270:endif
+src/mvdm-host/softpc.new/host/src/nt_fulsc.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\nt_fulsc.c,78,90,2,700:ifdef SEPARATE_DETECT_THREAD | 2121:ifdef V7VGA
+src/mvdm-host/softpc.new/host/src/nt_graph.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\nt_graph.c,84,95,8,226:ifdef V7VGA | 228:endif  | 243:ifdef V7VGA | 245:endif  | 260:ifdef V7VGA
+src/mvdm-host/softpc.new/host/src/nt_msscs.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\nt_msscs.c,25,28,1,123:ifndef i386
+src/mvdm-host/softpc.new/host/src/nt_sec.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\nt_sec.c,2,0,2,115:ifdef X86GFX | 158:endif
+src/mvdm-host/softpc.new/host/src/nt_timer.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\nt_timer.c,36,32,5,241:if defined (MONITOR) && defined (X86GFX) | 782:ifdef X86GFX | 788:endif  | 810:ifdef X86GFX | 815:endif
+src/mvdm-host/softpc.new/host/src/nt_umb.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\nt_umb.c,52,44,8,892:if DBG | 917:if DBG | 919:endif  | 986:if DBG | 989:endif
+src/mvdm-host/softpc.new/host/src/nt_vdd.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\nt_vdd.c,21,19,2,84:ifdef YODA | 86:endif
+src/mvdm-host/softpc.new/host/src/nt_yoda.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\nt_yoda.c,15,2,13,269:ifndef PROD | 270:ifdef HUNTER | 314:ifdef HUNTER | 321:endif  | 325:ifdef HUNTER
+src/mvdm-host/softpc.new/host/src/stubs.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\stubs.c,39,31,8,93:ifndef CPU_40_STYLE | 98:endif  | 108:ifdef LITTLEND | 113:endif  | 114:ifdef BIGEND
+src/mvdm-host/softpc.new/host/src/x86_emm.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\host\src\x86_emm.c,8,4,4,474:ifdef EMM_DEBUG | 477:endif  | 558:ifdef EMM_DEBUG | 948:endif
+src/mvdm-host/softpc.new/obj.vdm/c_regs.c,O:\repos.external\OpenNT\base\mvdm\softpc.new\obj.vdm\c_regs.c,14,4,10,15:ifndef CCPU | 173:ifndef PROD | 175:endif  | 181:ifndef PROD | 183:endif
+src/mvdm-host/vdmredir/vrdebug.c,O:\repos.external\OpenNT\base\mvdm\vdmredir\vrdebug.c,57,2,55,181:if DBG | 198:ifdef VR_DEBUG_FLAGS | 200:else  | 202:endif  | 204:ifdef DBGDBG
+src/mvdm-host/vdmredir/vrdisp.c,O:\repos.external\OpenNT\base\mvdm\vdmredir\vrdisp.c,8,6,2,138:if DBG | 142:endif
+src/mvdm-host/wow32/wmmedia1.c,O:\repos.external\OpenNT\base\mvdm\wow32\wmmedia1.c,4,2,2,41:if DBG | 553:endif
+src/mvdm-host/wow32/wmmedia2.c,O:\repos.external\OpenNT\base\mvdm\wow32\wmmedia2.c,32,2,30,48:if DBG | 486:if DBG | 489:endif  | 532:if DBG | 536:endif
+src/mvdm-host/wow32/wmmstru1.c,O:\repos.external\OpenNT\base\mvdm\wow32\wmmstru1.c,12,2,10,31:if DBG | 120:if DBG | 154:endif  | 1205:if DBG | 1207:endif
+src/mvdm-host/wow32/wmmstru2.c,O:\repos.external\OpenNT\base\mvdm\wow32\wmmstru2.c,14,2,12,55:if DBG | 149:if DBG | 151:endif  | 190:if DBG | 192:endif
+src/mvdm-host/wow32/wmmstruc.c,O:\repos.external\OpenNT\base\mvdm\wow32\wmmstruc.c,11,2,9,54:ifdef MIPS_COMPILER_PACKING_BUG | 56:else  | 111:ifdef MIPS_COMPILER_PACKING_BUG | 113:else  | 115:endif
+src/mvdm-host/wow32/wow32.c,O:\repos.external\OpenNT\base\mvdm\wow32\wow32.c,84,93,3,1870:if FASTBOPPING | 1879:if FASTBOPPING | 1910:if FASTBOPPING
+src/mvdm-host/xms.486/xmsa20.c,O:\repos.external\OpenNT\base\mvdm\xms.486\xmsa20.c,8,4,4,70:ifdef MIPS | 79:endif  | 94:ifdef MIPS | 104:endif
+src/mvdm-host/xms.486/xmsblock.c,O:\repos.external\OpenNT\base\mvdm\xms.486\xmsblock.c,3,0,3,194:ifdef i386 | 196:else  | 208:endif
+src/non-mvdm/base/ntos/ex/probe.c,O:\repos.external\OpenNT\base\ntos\ex\probe.c,5,0,5,27:if defined(ALLOC_PRAGMA) | 30:endif  | 106:if defined(_ALPHA_) | 121:else  | 128:endif
+src/non-mvdm/base/win32/client/vdm.c,O:\repos.external\OpenNT\base\win32\client\vdm.c,7,15,1,1084:ifdef OLD_CFG_BASED
+src/non-mvdm/public/sdk/inc/ntexapi.h,O:\repos.external\OpenNT\public\sdk\inc\ntexapi.h,37,2,36,23:ifndef _NTEXAPI_ | 26:if _MSC_VER > 1000 | 30:ifdef __cplusplus | 32:endif  | 1063:if DEVL
+src/non-mvdm/public/sdk/inc/ntpsapi.h,O:\repos.external\OpenNT\public\sdk\inc\ntpsapi.h,17,5,13,138:ifndef CLIENT_ID64_DEFINED | 149:endif  | 386:ifdef _IA64_ | 389:endif  | 396:if !defined(_X86_)
+src/non-mvdm/public/sdk/inc/ntregapi.h,O:\repos.external\OpenNT\public\sdk\inc\ntregapi.h,8,2,7,22:ifndef _NTREGAPI_ | 25:if _MSC_VER > 1000 | 29:ifdef __cplusplus | 31:endif  | 520:ifdef __cplusplus
+src/non-mvdm/public/sdk/inc/ntrtl.h,O:\repos.external\OpenNT\public\sdk\inc\ntrtl.h,81,14,74,31:ifndef _NTRTL_ | 34:if defined (_MSC_VER) | 35:if ( _MSC_VER >= 800 ) | 37:if _MSC_VER >= 1200 | 44:if (_MSC_VER > 1020)
+src/non-mvdm/public/sdk/inc/nturtl.h,O:\repos.external\OpenNT\public\sdk\inc\nturtl.h,2,2,1,28:ifndef _NTURTL_
+src/non-mvdm/windows/core/ntuser/client/clglobal.c,O:\repos.external\OpenNT\windows\core\ntuser\client\clglobal.c,13,9,4,24:if DBG | 26:endif  | 1309:ifdef WX86 | 1316:endif
+src/non-mvdm/windows/core/ntuser/client/client.c,O:\repos.external\OpenNT\windows\core\ntuser\client\client.c,7,6,5,642:ifdef DEBUG | 644:endif  | 2288:ifdef DEBUG | 3494:ifdef FE_IME | 3502:endif
+src/non-mvdm/windows/core/ntuser/client/clmenu.c,O:\repos.external\OpenNT\windows\core\ntuser\client\clmenu.c,22,13,9,434:ifdef MEMPHIS_MENUS | 540:ifdef DEBUG | 545:endif  | 658:if IS_ANSI | 662:else
+src/non-mvdm/windows/core/ntuser/client/clmsg.c,O:\repos.external\OpenNT\windows\core\ntuser\client\clmsg.c,41,12,31,23:ifdef DEBUG | 270:ifdef FE_SB | 273:endif  | 327:ifdef FE_IME | 330:endif
+src/non-mvdm/windows/core/ntuser/client/clres.c,O:\repos.external\OpenNT\windows\core\ntuser\client\clres.c,23,10,17,881:ifdef DEBUG | 1480:if 0 | 2298:if 0 | 2624:if 0 | 2626:else
+src/non-mvdm/windows/core/ntuser/client/globals.h,O:\repos.external\OpenNT\windows\core\ntuser\client\globals.h,8,2,7,14:ifndef _GLOBALS_ | 18:if DBG | 85:ifndef RC_INVOKED | 91:endif  | 135:ifdef WX86
+src/non-mvdm/windows/core/ntuser/client/handles.c,O:\repos.external\OpenNT\windows\core\ntuser\client\handles.c,3,0,3,38:ifdef TESTING | 59:else  | 61:endif
+src/non-mvdm/windows/core/ntuser/client/ntstubs.c,O:\repos.external\OpenNT\windows\core\ntuser\client\ntstubs.c,37,15,28,77:ifdef FE_IME | 83:endif  | 358:ifdef LATER | 368:endif  | 380:ifdef MEMPHIS_MENUS
+src/non-mvdm/windows/core/ntuser/client/usercli.h,O:\repos.external\OpenNT\windows\core\ntuser\client\usercli.h,51,26,39,15:ifndef _USERCLI_ | 22:if DBG | 26:ifdef RIP_COMPONENT | 28:endif  | 44:ifndef WOW
+src/non-mvdm/windows/core/ntuser/client/wow.c,O:\repos.external\OpenNT\windows\core\ntuser\client\wow.c,38,0,38,15:ifndef WOW | 17:endif  | 19:ifdef WOW | 20:if (WOW != WINVER) | 22:endif
+src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h,O:\repos.external\OpenNT\windows\core\ntuser\inc\ntcftxt.h,99,9,90,14:ifdef UNICODE | 16:ifndef _UNICODE | 18:endif  | 19:else  | 22:endif
+src/non-mvdm/windows/core/ntuser/inc/user.h,O:\repos.external\OpenNT\windows\core\ntuser\inc\user.h,75,34,55,15:ifndef _USER_ | 30:ifndef RC_INVOKED | 32:endif  | 35:if !defined(FASTCALL) | 36:if defined(_X86_)
+src/non-mvdm/windows/core/ntuser/kernel/class.c,O:\repos.external\OpenNT\windows\core\ntuser\kernel\class.c,5,4,3,375:ifdef FE_SB | 1070:ifdef DBG | 1074:endif
+src/non-mvdm/windows/core/ntuser/kernel/exitwin.c,O:\repos.external\OpenNT\windows\core\ntuser\kernel\exitwin.c,3,0,3,134:ifndef LATER | 136:else  | 142:endif
+src/non-mvdm/windows/core/ntuser/kernel/getset.c,O:\repos.external\OpenNT\windows\core\ntuser\kernel\getset.c,12,7,8,749:ifdef DEBUG | 751:endif  | 759:ifdef DEBUG | 769:endif  | 776:ifdef DEBUG
+src/non-mvdm/windows/core/ntuser/kernel/handtabl.c,O:\repos.external\OpenNT\windows\core\ntuser\kernel\handtabl.c,71,2,69,18:ifdef DEBUG_LOCKS | 20:else  | 22:endif  | 81:ifdef FE_IME | 83:endif
+src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c,O:\repos.external\OpenNT\windows\core\ntuser\kernel\inctlpan.c,4,0,4,101:ifdef LATER | 272:endif  | 840:ifndef KOREA | 848:endif
+src/non-mvdm/windows/core/ntuser/kernel/input.c,O:\repos.external\OpenNT\windows\core\ntuser\kernel\input.c,53,0,53,17:ifdef MARKPATH | 19:endif  | 22:ifdef TRACESYSPEEK | 56:endif  | 58:if DBG
+src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c,O:\repos.external\OpenNT\windows\core\ntuser\kernel\ntstubs.c,203,0,203,149:if DBG | 151:else  | 153:endif  | 268:ifdef FE_IME | 280:endif
+src/non-mvdm/windows/core/ntuser/kernel/profile.c,O:\repos.external\OpenNT\windows\core\ntuser\kernel\profile.c,6,0,6,68:ifdef FE_SB | 70:endif  | 745:ifdef DEBUG | 750:endif  | 827:ifdef DEBUG
+src/non-mvdm/windows/core/ntuser/kernel/queue.c,O:\repos.external\OpenNT\windows\core\ntuser\kernel\queue.c,53,2,51,30:ifdef DEBUG | 36:else  | 38:endif  | 43:if DBG | 49:endif
+src/non-mvdm/windows/core/ntuser/kernel/random.c,O:\repos.external\OpenNT\windows\core\ntuser\kernel\random.c,2,0,2,185:ifdef DEBUG | 189:endif
+src/non-mvdm/windows/core/ntuser/kernel/server.c,O:\repos.external\OpenNT\windows\core\ntuser\kernel\server.c,33,6,28,53:ifdef FE_IME | 55:endif  | 583:ifdef FE_IME | 833:ifdef FE_IME | 839:endif
+src/non-mvdm/windows/core/ntuser/kernel/userk.h,O:\repos.external\OpenNT\windows\core\ntuser\kernel\userk.h,107,6,103,16:ifndef _USERK_ | 22:ifndef _WINBASE_ | 54:if (WINVER >= 0x0400) | 56:endif  | 58:endif _WINBASE_
+src/non-mvdm/windows/core/ntuser/rtl/chartran.c,O:\repos.external\OpenNT\windows\core\ntuser\rtl\chartran.c,39,21,26,17:ifdef _USERK_ | 19:else  | 21:endif  | 59:ifdef _USERK_ | 61:endif
+src/non-mvdm/windows/core/ntuser/rtl/draw.c,O:\repos.external\OpenNT\windows\core\ntuser\rtl\draw.c,3,2,2,680:ifdef WINDOWS_ME | 683:else
+src/non-mvdm/windows/core/ntuser/rtl/drawtext.c,O:\repos.external\OpenNT\windows\core\ntuser\rtl\drawtext.c,36,4,33,59:ifdef FE_SB | 511:ifdef _USERK_ | 513:else  | 543:ifdef _USERK_ | 545:endif
+src/non-mvdm/windows/core/ntuser/rtl/userrtl.h,O:\repos.external\OpenNT\windows\core\ntuser\rtl\userrtl.h,29,2,28,15:ifndef _USERRTL_ | 30:ifdef _USERK_ | 35:else  | 42:if DBG | 44:endif
+src/non-mvdm/windows/core/ntuser/rtl/wow.c,O:\repos.external\OpenNT\windows\core\ntuser\rtl\wow.c,21,6,15,15:ifdef WOW | 108:else  | 127:endif  | 135:ifdef WOW | 144:else

@@ -91,12 +91,13 @@ IFN2(
 
 
 #ifdef SPC486
-#define CR0_VALID_BITS 0xe005003f
-#define CR3_VALID_BITS 0xfffff018
+#error Excluded unsupported SPC486 profile
 #else
+#line 97
 #define CR0_VALID_BITS 0x8000001f
 #define CR3_VALID_BITS 0xfffff000
 #endif /* SPC486 */
+#line 100
 
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

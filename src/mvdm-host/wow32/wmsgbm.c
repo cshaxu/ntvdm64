@@ -19,27 +19,9 @@ MODNAME(wmsgbm.c);
 
 
 #ifdef DEBUG
-
-MSGINFO amiBM[] = {
-   {OLDBM_GETCHECK, "BM_GETCHECK"},             // 0x0400
-   {OLDBM_SETCHECK, "BM_SETCHECK"},             // 0x0401
-   {OLDBM_GETSTATE, "BM_GETSTATE"},             // 0x0402
-   {OLDBM_SETSTATE, "BM_SETSTATE"},             // 0x0403
-   {OLDBM_SETSTYLE, "BM_SETSTYLE"},             // 0x0404
-};
-
-PSZ GetBMMsgName(WORD wMsg)
-{
-    INT i;
-    register PMSGINFO pmi;
-
-    for (pmi=amiBM,i=NUMEL(amiBM); i>0; i--,pmi++)
-        if ((WORD)pmi->uMsg == wMsg)
-        return pmi->pszMsgName;
-    return GetWMMsgName(wMsg);
-}
-
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 43
 
 
 BOOL FASTCALL ThunkBMMsg16(LPMSGPARAMEX lpmpex)

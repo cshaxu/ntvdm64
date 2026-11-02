@@ -1,0 +1,55 @@
+{
+  "scope": "two original first-depth MONITOR groups only",
+  "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_com.c",
+  "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32",
+  "before_sha256": "bd0e265a4d1a4caae9dc02a17915970e1d66863e42266879b51c204b39923334",
+  "after_sha256": "54404a2250d781e37b918dc5b324fc4845b6cad53bd2adfc3356731e34ad40d1",
+  "original_group_lines": [
+    388,
+    712
+  ],
+  "restored_current_lines": [
+    391,
+    716
+  ],
+  "following_logical_lines": [
+    391,
+    712
+  ],
+  "production_contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "bd0e265a4d1a4caae9dc02a17915970e1d66863e42266879b51c204b39923334",
+      "includes": 191,
+      "monitor_definitions": [],
+      "monitor_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "bd0e265a4d1a4caae9dc02a17915970e1d66863e42266879b51c204b39923334",
+      "includes": 191,
+      "monitor_definitions": [],
+      "monitor_flags": [],
+      "errors": ""
+    }
+  ],
+  "fixture_before": "build/t473-s13/bfs-depth1-ntcom-monitor/before/nt-com-mock-fixture.log",
+  "verification": {
+    "production_preprocess": "x86 worker before/after both succeed; nonblank selected outputs equal after replacing the single scratch __FILE__ path; raw outputs are not equal",
+    "mock_fixture_before": "T420_S30_NT_COM_MOCK_OPEN_WRITE_READ_CLOSE_OK",
+    "mock_fixture_after": "T420_S30_NT_COM_MOCK_OPEN_WRITE_READ_CLOSE_OK",
+    "guard_isolation": "each extracted guard compiles without MONITOR and fails with its own DIV-579 when MONITOR is set, x86 MSVC",
+    "full_unit_negative": "/DMONITOR compilation stops earlier at nt_eoi.h existing #error, so it does not directly reach DIV-579",
+    "line_control": "#line 391 and #line 712 retain the previous logical positions; preprocessed __LINE__ value 1466 matches",
+    "runtime_coverage": "fixture uses test host boundaries; full DOS/WOW/Win3.x and product-release gate remains pending",
+    "fixture_log_before_sha256": "6b5da5750c4c826d0eca8468db91aa22ba6cae7a1a2ac6727e415a0a05585223",
+    "fixture_log_after_sha256": "6b5da5750c4c826d0eca8468db91aa22ba6cae7a1a2ac6727e415a0a05585223"
+  },
+  "register": "MVDM-HOST-DIV-579"
+}

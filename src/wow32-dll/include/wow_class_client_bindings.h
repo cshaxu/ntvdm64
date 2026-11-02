@@ -52,7 +52,6 @@ int MBToWCSEx(WORD, LPCSTR, int, LPWSTR *, int, BOOL);
 #define NtUserRegisterClassExWOW wow_class_client_publish
 #define NtUserUnregisterClass wow_class_client_remove
 #define NtUserGetClassInfo wow_class_client_query_native
-#define IS_ANSI TRUE
 #undef GetClassInfo
 #define GetClassInfo wow_original_get_class_info
 #undef UnregisterClass

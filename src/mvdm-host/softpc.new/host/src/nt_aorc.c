@@ -512,12 +512,12 @@ IU32	val;
 }
 
 #if 0
-#undef setFLAGS
-GLOBAL void setFLAGS(val)
-IU32 val;
-{
-    c_setEFLAGS(val);
-}
+#error Excluded unsupported original disabled branch
+
+
+
+
+
 #endif
 
 #undef setESP

@@ -485,16 +485,12 @@ else { \
 }
 
 #ifdef DEBUG
-#define LINK_WORKLIST(pc, pNew, pLast) \
-if (NULL == pLast) { \
-    pc->pCacheHead = pNew; \
-} \
-else { \
-    pLast->pNext = pNew; \
-}
+#error Excluded unsupported DEBUG WOW profile
 #else 
+#line 496
 #define LINK_WORKLIST(pc, pNew, pLast)
 #endif
+#line 498
 
 VOID CacheBlockInit(PBLKCACHE pc, DWORD dwCacheSize)
 {
@@ -553,9 +549,9 @@ LPVOID CacheBlockAllocate(PBLKCACHE pc, DWORD dwSize)
 
                 // include into busy blocks
 #ifdef DEBUG
-                pbh->pNext = pc->pCacheHead;
-                pc->pCacheHead = pbh;
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 559
                 return (LPVOID)(pbh+1);
            }
 
@@ -580,33 +576,13 @@ VOID CacheBlockFree(PBLKCACHE pc, LPVOID lpv)
         PBLKHEADER pbh = (PBLKHEADER)lpv - 1;
 
 #ifdef DEBUG
-        PBLKHEADER pbhf = pc->pCacheHead;
-        PBLKHEADER pbhLast = NULL;
-        
-        // remove from the list of working nodes
-        while (NULL != pbhf && pbhf != pbh) {
-            pbhLast = pbhf;
-            pbhf = pbhf->pNext;
-        }
-
-        if (NULL != pbhf) {
-
-            // link in pbh->pNext into a worklist
-
-            LINK_WORKLIST(pc, pbh->pNext, pbhLast); 
-        } 
-        else {
-            LOGDEBUG(LOG_ALWAYS, ("Alert! CacheBlockFree - invalid ptr\n"));
-            return;
-        }
-        
-        pbhf = pc->pCacheFree;
-        pbhLast = NULL;
-        
+#error Excluded unsupported DEBUG WOW profile
 #else
+#line 607
         PBLKHEADER pbhf = pc->pCacheFree;
         PBLKHEADER pbhLast = NULL;
 #endif
+#line 610
         // list of free nodes
 
         // insert in order

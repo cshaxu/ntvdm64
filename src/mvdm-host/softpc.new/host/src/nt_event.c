@@ -114,7 +114,7 @@ WORD   BWVKey = 0;
 char   achES[]="EyeStrain";
 #endif
 #ifdef YODA
-BOOL   bYoda;
+#error Excluded unsupported YODA configuration
 #endif
 BOOL   stdoutRedirected=FALSE;
 ULONG  CntrlHandlerState=0;
@@ -932,11 +932,11 @@ VOID nt_process_keys(PKEY_EVENT_RECORD KeyEvent)
 
         switch(KeyEvent->wVirtualKeyCode) {
 #ifdef YODA
-        case VK_F11:
-            if (getenv("YODA")) {
-                EventStatus |= ~ES_YODA;
-            }
-            break;
+#error Excluded unsupported YODA configuration
+
+
+
+
 #endif
 
         case VK_SHIFT:
@@ -1263,37 +1263,37 @@ GLOBAL void GetScaleEvent(void)
 
 
 #ifdef YODA
-void CheckForYodaEvents(void)
-{
-    static HANDLE YodaEvent = NULL;
+#error Excluded unsupported YODA configuration
 
-    /*:::::::::::::::::::::::::::::::::: check for Yoda event object signal */
 
-    if(YodaEvent == NULL)
-    {
-    if((YodaEvent = OpenEvent(EVENT_ALL_ACCESS,FALSE,"YodaEvent")) == NULL)
-    {
-        always_trace0("Failed to open Yoda event object\n");
-        YodaEvent =  (HANDLE) -1;
-    }
-    }
 
-    if(YodaEvent && YodaEvent != (HANDLE) -1)
-    {
-    if(!WaitForSingleObject(YodaEvent,0))
-    {
-        ResetEvent(YodaEvent);
-        Enter_yoda();
-    }
-    }
 
-     // check for yoda kbd event
-    if (EventStatus & ES_YODA) {
-        EventStatus &= ~ES_YODA;
-        Enter_yoda();
-        }
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif
 
 

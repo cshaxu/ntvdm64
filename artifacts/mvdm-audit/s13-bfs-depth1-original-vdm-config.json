@@ -1,0 +1,16 @@
+{
+  "scope": "original first-depth conditional around obsolete-signature function only",
+  "path": "src/non-mvdm/base/win32/client/vdm.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\win32\\client\\vdm.c",
+  "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
+  "current_sha256": "9eb4b0dd076219c6ad22f2c03da350354119bb6956487241d5bc6ac3634a8b25",
+  "original_group_lines": [
+    1084,
+    1149
+  ],
+  "retained_caller": "BaseGetVdmConfigInfo",
+  "existing_provider": "src/ntsrv-exe/opennt/source/base_config.c",
+  "provider_sha256": "5274db2ebb5f2d9401718eba7d9d4cc719bd24cabd4cd28ebb937c7861f97220",
+  "register": "OPENNT-HOST-014",
+  "limitations": "does not assess caller behavior or other original condition groups"
+}

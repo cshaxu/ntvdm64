@@ -363,32 +363,9 @@ ULONG FASTCALL WK32GetProfileString(PVDMFRAME pFrame)
     }
 
 #ifdef DEBUG
-
-    //
-    // Make noise on the debugger if pszDefault has trailing blanks at
-    // this point indicating that WOWCFEX_ZAPGPPSDEFBLANKS might need
-    // to be turned on for this app.
-    //
-
-    if ( ! (CURRENTPTD()->dwWOWCompatFlagsEx & WOWCFEX_ZAPGPPSDEFBLANKS) &&
-        pszKey &&
-        pszDefault &&
-        ' ' == pszDefault[strlen(pszDefault) - 1]) {
-
-        char szMsg[256];
-
-        sprintf(szMsg,
-                "\n"
-                "WOW32 COMPATIBILITY ALERT: Task %.8s has trailing blanks in pszDefault to\n"
-                "Get[Private]ProfileString but WOWCFEX_ZAPGPPSDEFBLANKS (0x00000000 0x%08x)\n"
-                "is not enabled.  Try enabling this bit if you're having problems.\n"
-                "\n",
-                ((PTDB)SEGPTR(CURRENTPTD()->htask16,0))->TDB_ModName,
-                WOWCFEX_ZAPGPPSDEFBLANKS
-                );
-        OutputDebugString(szMsg);
-    }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 392
 
 
 FlushAndReturn:
@@ -579,32 +556,9 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
     }
 
 #ifdef DEBUG
-
-    //
-    // Make noise on the debugger if pszDefault has trailing blanks at
-    // this point indicating that WOWCFEX_ZAPGPPSDEFBLANKS might need
-    // to be turned on for this app.
-    //
-
-    if ( ! (cFlagsEx & WOWCFEX_ZAPGPPSDEFBLANKS) &&
-        pszKey &&
-        pszDefault &&
-        ' ' == pszDefault[strlen(pszDefault) - 1]) {
-
-        char szMsg[256];
-
-        sprintf(szMsg,
-                "\n"
-                "WOW32 COMPATIBILITY ALERT: Task %.8s has trailing blanks in pszDefault to\n"
-                "Get[Private]ProfileString but WOWCFEX_ZAPGPPSDEFBLANKS (0x00000000 0x%08x)\n"
-                "is not enabled.  Try enabling this bit if you're having problems.\n"
-                "\n",
-                ((PTDB)SEGPTR(CURRENTPTD()->htask16,0))->TDB_ModName,
-                WOWCFEX_ZAPGPPSDEFBLANKS
-                );
-        OutputDebugString(szMsg);
-    }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 608
 
 
 FlushAndReturn:
@@ -614,49 +568,9 @@ FlushAndReturn:
     }
 
 #ifdef DEBUG
-
-    //
-    // Check for bad return on retrieving entire section by walking
-    // the section making sure it's full of null-terminated strings
-    // with an extra null at the end.  Also ensure that this all fits
-    // within the buffer.
-    //
-
-    if (!pszKey) {
-        PSZ psz;
-
-        //
-        // We don't want to complain if the poorly-formed buffer was the one
-        // passed in as pszDefault by the caller.
-        //
-
-        // Although the api docs clearly state that pszDefault should never
-        // be null but win3.1 is nice enough to still deal with this. Delphi is
-        // passing pszDefault as NULL and this following code causes an
-        // assertion in WOW. So added the pszDefault check first.
-        //
-        // sudeepb 11-Sep-1995
-
-
-        if (!pszDefault || strcmp(pszReturnBuffer, pszDefault)) {
-
-            psz = pszReturnBuffer;
-
-            while (psz < (pszReturnBuffer + ul + 2) && *psz) {
-                psz += strlen(psz) + 1;
-            }
-
-            WOW32ASSERTMSGF(
-                psz < (pszReturnBuffer + ul + 2),
-                ("GetPrivateProfileString of entire section returns poorly formed buffer.\n"
-                 "pszReturnBuffer = %p, return value = %d\n",
-                 pszReturnBuffer,
-                 ul
-                 ));
-        }
-    }
-
+#error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
+#line 660
 
     FREEPSZPTR(pszSection);
     FREEPSZPTR(pszKey);

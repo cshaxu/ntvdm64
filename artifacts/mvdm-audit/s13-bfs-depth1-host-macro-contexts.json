@@ -1,0 +1,2881 @@
+{
+  "scope": "first-depth host MONITOR and X86GFX guards, per-source actual product/reference and direct event fixture contexts",
+  "macros": [
+    "MONITOR",
+    "X86GFX"
+  ],
+  "actual_contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "includes": 203,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "5b1ab8254b4df45f8d4b4d97bb99e25cb43018b709dba85b92db20a9813404c9",
+      "includes": 183,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "includes": 211,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "7cda05518a3473d52c7383620cd000f936b93219a1e746461c26116cc0531565",
+      "includes": 206,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "527d692afa2ed9001c79d64d53e52cbbfbf8a1b0aaeb07efc05ae5191339db52",
+      "includes": 182,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "a67f73bd95a1fe81e2b878a63dd145ad9a486d701cc3a3f2c58841db080f48d3",
+      "includes": 182,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "7a5d4b0b52af30faacb978c4258ccef3e8b3f6397425eb9ea4abae0df2c5cb1d",
+      "includes": 176,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "includes": 213,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "includes": 192,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "includes": 204,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "includes": 238,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "includes": 192,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_nls.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "433fdb715abe00f63d28f88ca69fcee0fab4d6898cc63068412594563098a830",
+      "includes": 169,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "64060de9d519c32f00fec53b7ad701e70e44adf1a0dfd418d7d8a90c01d0e628",
+      "includes": 174,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "includes": 204,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "includes": 182,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "3c6df963fed846249fd8c14e2d54a1bf7aa344a9a88d4efdb9b87d0589c1fa01",
+      "includes": 178,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "729f8cb1148d4acccc2ceddbe50b37c40ed0d3f407a3f37c23b1484ef9abdd86",
+      "includes": 158,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "3d2ed5781ebd7644c4f52e98bd522c1541be6998905b81c53879824182aa1ce9",
+      "includes": 197,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "includes": 175,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "0b5d06d2a7a3f714a6f1a607ac9476fb5c0ae490832a8e45d43acc58fd3b505f",
+      "includes": 222,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "tests/observation/nt_event_observed.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "48786018a381951ff2cf9167e8233a8f538c0e798e1a218c8cd3535dca82ef2a",
+      "includes": 254,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "includes": 203,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "5b1ab8254b4df45f8d4b4d97bb99e25cb43018b709dba85b92db20a9813404c9",
+      "includes": 183,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "includes": 211,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "7cda05518a3473d52c7383620cd000f936b93219a1e746461c26116cc0531565",
+      "includes": 206,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "527d692afa2ed9001c79d64d53e52cbbfbf8a1b0aaeb07efc05ae5191339db52",
+      "includes": 182,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "a67f73bd95a1fe81e2b878a63dd145ad9a486d701cc3a3f2c58841db080f48d3",
+      "includes": 182,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "7a5d4b0b52af30faacb978c4258ccef3e8b3f6397425eb9ea4abae0df2c5cb1d",
+      "includes": 176,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "includes": 213,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "includes": 192,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "includes": 204,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "includes": 238,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "includes": 192,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_nls.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "433fdb715abe00f63d28f88ca69fcee0fab4d6898cc63068412594563098a830",
+      "includes": 169,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "64060de9d519c32f00fec53b7ad701e70e44adf1a0dfd418d7d8a90c01d0e628",
+      "includes": 174,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "includes": 204,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "includes": 182,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "3c6df963fed846249fd8c14e2d54a1bf7aa344a9a88d4efdb9b87d0589c1fa01",
+      "includes": 178,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "729f8cb1148d4acccc2ceddbe50b37c40ed0d3f407a3f37c23b1484ef9abdd86",
+      "includes": 158,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "3d2ed5781ebd7644c4f52e98bd522c1541be6998905b81c53879824182aa1ce9",
+      "includes": 197,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "includes": 175,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "0b5d06d2a7a3f714a6f1a607ac9476fb5c0ae490832a8e45d43acc58fd3b505f",
+      "includes": 222,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "tests/observation/nt_event_observed.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "48786018a381951ff2cf9167e8233a8f538c0e798e1a218c8cd3535dca82ef2a",
+      "includes": 254,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "existing_exclusions": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "macro": "MONITOR",
+      "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "local_line": 931,
+      "local_end": 933,
+      "original_line": 984,
+      "preceding_anchor": [
+        "note_trace0(MOUSE_VERBOSE, \"mouse_install1:\");",
+        "#endif",
+        "sys_addr block_offset;"
+      ],
+      "following_anchor": [
+        "save_area_in_use = FALSE;",
+        "mouse_com_rev = getAL();",
+        "#ifdef NTVDM"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "macro": "MONITOR",
+      "current_sha256": "5b1ab8254b4df45f8d4b4d97bb99e25cb43018b709dba85b92db20a9813404c9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\qevnt.c",
+      "original_sha256": "3e0d97d17bcc4c107b5173bf38868c79ab68d3042d29472a1a7259364da2947c",
+      "local_line": 206,
+      "local_end": 291,
+      "original_line": 206,
+      "preceding_anchor": [
+        "{",
+        ")",
+        "long param"
+      ],
+      "following_anchor": [
+        "}",
+        "q_ev_handle",
+        "add_q_event_i("
+      ],
+      "guard": "#error Excluded unsupported quick-event hardware monitor path",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "macro": "X86GFX",
+      "current_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "local_line": 148,
+      "local_end": 150,
+      "original_line": 190,
+      "preceding_anchor": [
+        "{",
+        "VOID process_pif_exe (char *PifName)",
+        "Read PIF file and update VDM and console state from settings."
+      ],
+      "following_anchor": [
+        "GetPIFData(&pfdata, PifName);",
+        "PIFEMSMemSize = pfdata.emsdes;",
+        "PIFExtendMemSize = pfdata.xmsdes;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "macro": "X86GFX",
+      "current_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "local_line": 493,
+      "local_end": 495,
+      "original_line": 544,
+      "preceding_anchor": [
+        "#endif",
+        "InitNtCpuInfo();",
+        "#ifdef CPU_40_STYLE"
+      ],
+      "following_anchor": [
+        "if (!VDMForWOW)  {",
+        "i = 6;",
+        "do {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "macro": "MONITOR",
+      "current_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "local_line": 738,
+      "local_end": 743,
+      "original_line": 819,
+      "preceding_anchor": [
+        "{",
+        "void host_runtime_init()",
+        "FALSE, FALSE, TRUE, TRUE};"
+      ],
+      "following_anchor": [
+        "}",
+        "short host_runtime_inquire IFN1(UTINY, what)",
+        "{"
+      ],
+      "guard": "#error Excluded unsupported monitor floating-point status",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "macro": "MONITOR",
+      "current_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "local_line": 892,
+      "local_end": 894,
+      "original_line": 1194,
+      "preceding_anchor": [
+        "#endif",
+        "}",
+        "return FALSE;"
+      ],
+      "following_anchor": [
+        "#define REGISTRY_BUFFER_SIZE 512",
+        "ULONG",
+        "GetVDMSize (BOOL fwow)"
+      ],
+      "guard": "#error Excluded original conditional branch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "macro": "MONITOR",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 747,
+      "local_end": 752,
+      "original_line": 680,
+      "preceding_anchor": [
+        "{",
+        "void MS_bop_D(void)",
+        "}"
+      ],
+      "following_anchor": [
+        "}",
+        "extern  LARGE_INTEGER   CounterStart, FrequenceStart;",
+        "void MS_bop_E(void)"
+      ],
+      "guard": "#error Excluded unsupported monitor IRET BOP",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "macro": "MONITOR",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 788,
+      "local_end": 790,
+      "original_line": 735,
+      "preceding_anchor": [
+        "kb_setup_vectors();",
+        "extern void kb_setup_vectors(void);",
+        "{"
+      ],
+      "following_anchor": [
+        "host_ica_lock();",
+        "DelayIrqLine = 0;",
+        "if (!ica_restart_interrupts(ICA_SLAVE))"
+      ],
+      "guard": "#error Excluded original conditional branch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "macro": "MONITOR",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 806,
+      "local_end": 811,
+      "original_line": 760,
+      "preceding_anchor": [
+        "host_ica_unlock();",
+        "ica_restart_interrupts(ICA_MASTER);",
+        "if (!ica_restart_interrupts(ICA_SLAVE))"
+      ],
+      "following_anchor": [
+        "}",
+        "#define MAX_ISV_BOP  10",
+        "typedef struct _ISVBOP {"
+      ],
+      "guard": "#error Excluded unsupported monitor keyboard setup carry",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "macro": "MONITOR",
+      "current_sha256": "527d692afa2ed9001c79d64d53e52cbbfbf8a1b0aaeb07efc05ae5191339db52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "local_line": 42,
+      "local_end": 44,
+      "original_line": 42,
+      "preceding_anchor": [
+        "#include \"nt_det.h\"",
+        "#include \"nt_cgalt.h\"",
+        "#include \"nt_cga.h\""
+      ],
+      "following_anchor": [
+        "extern char *image_buffer;",
+        "static unsigned int cga_med_graph_hi_nyb[256];",
+        "static unsigned int cga_med_graph_lo_nyb[256];"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "macro": "MONITOR",
+      "current_sha256": "527d692afa2ed9001c79d64d53e52cbbfbf8a1b0aaeb07efc05ae5191339db52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "local_line": 76,
+      "local_end": 80,
+      "original_line": 77,
+      "preceding_anchor": [
+        "#define CGA_GRAPH_INCVAL 4",
+        "#endif",
+        "static unsigned int cga_med_graph_lut1_huge[256];"
+      ],
+      "following_anchor": [
+        "void nt_init_text()",
+        "{",
+        "half_word misc;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "macro": "X86GFX",
+      "current_sha256": "527d692afa2ed9001c79d64d53e52cbbfbf8a1b0aaeb07efc05ae5191339db52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "local_line": 99,
+      "local_end": 101,
+      "original_line": 100,
+      "preceding_anchor": [
+        "sub_note_trace0(HERC_HOST_VERBOSE, \"nt_init_text\");",
+        "IMPORT void vga_misc_inb(io_addr, half_word *);",
+        "half_word misc;"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "macro": "MONITOR",
+      "current_sha256": "527d692afa2ed9001c79d64d53e52cbbfbf8a1b0aaeb07efc05ae5191339db52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "local_line": 104,
+      "local_end": 106,
+      "original_line": 105,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "}",
+        "void nt_init_cga_mono_graph()",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "macro": "MONITOR",
+      "current_sha256": "527d692afa2ed9001c79d64d53e52cbbfbf8a1b0aaeb07efc05ae5191339db52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "local_line": 934,
+      "local_end": 936,
+      "original_line": 971,
+      "preceding_anchor": [
+        "}",
+        "#endif /* BIGWIN */",
+        "GetLastError() );"
+      ],
+      "following_anchor": [],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "macro": "X86GFX",
+      "current_sha256": "3d2ed5781ebd7644c4f52e98bd522c1541be6998905b81c53879824182aa1ce9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_det.c",
+      "original_sha256": "c58d15d58672440bf94e015f61a10b43311e601ae150dae5b1559f2399f9dadc",
+      "local_line": 91,
+      "local_end": 93,
+      "original_line": 91,
+      "preceding_anchor": [
+        "GLOBAL WCHAR_STRING textSection; // Tim Oct 92",
+        "GLOBAL WCHAR_STRING videoSection;",
+        "GLOBAL PVOID textState; // Tim Oct 92."
+      ],
+      "following_anchor": [
+        "GLOBAL BOOL NoTicks;",
+        "GLOBAL PBYTE *textBuffer;",
+        "GLOBAL COORD  textBufferSize;      // Dimensions of the shared buffer"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "macro": "X86GFX",
+      "current_sha256": "3d2ed5781ebd7644c4f52e98bd522c1541be6998905b81c53879824182aa1ce9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_det.c",
+      "original_sha256": "c58d15d58672440bf94e015f61a10b43311e601ae150dae5b1559f2399f9dadc",
+      "local_line": 181,
+      "local_end": 183,
+      "original_line": 182,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "}",
+        "GLOBAL VOID initTextSection(VOID)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "macro": "X86GFX",
+      "current_sha256": "3d2ed5781ebd7644c4f52e98bd522c1541be6998905b81c53879824182aa1ce9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_det.c",
+      "original_sha256": "c58d15d58672440bf94e015f61a10b43311e601ae150dae5b1559f2399f9dadc",
+      "local_line": 205,
+      "local_end": 210,
+      "original_line": 206,
+      "preceding_anchor": [
+        "textBufferSize.Y = 50;",
+        "textBufferSize.X = 80;",
+        "DWORD flags;"
+      ],
+      "following_anchor": [
+        "if( !RegisterConsoleVDM( VDMForWOW ?",
+        "CONSOLE_REGISTER_WOW : CONSOLE_REGISTER_VDM,",
+        "#ifdef X86GFX"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "macro": "X86GFX",
+      "current_sha256": "3d2ed5781ebd7644c4f52e98bd522c1541be6998905b81c53879824182aa1ce9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_det.c",
+      "original_sha256": "c58d15d58672440bf94e015f61a10b43311e601ae150dae5b1559f2399f9dadc",
+      "local_line": 214,
+      "local_end": 220,
+      "original_line": 228,
+      "preceding_anchor": [
+        "CONSOLE_REGISTER_WOW : CONSOLE_REGISTER_VDM,",
+        "if( !RegisterConsoleVDM( VDMForWOW ?",
+        "#endif"
+      ],
+      "following_anchor": [
+        "NULL,            // sectionname no longer used",
+        "0,               // sectionnamelen no longer used",
+        "&stateLength,"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "macro": "X86GFX",
+      "current_sha256": "3d2ed5781ebd7644c4f52e98bd522c1541be6998905b81c53879824182aa1ce9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_det.c",
+      "original_sha256": "c58d15d58672440bf94e015f61a10b43311e601ae150dae5b1559f2399f9dadc",
+      "local_line": 233,
+      "local_end": 235,
+      "original_line": 247,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "} /* end initTextSection() */",
+        "#ifdef X86GFX",
+        "GLOBAL VOID InitDetect(VOID)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "macro": "MONITOR",
+      "current_sha256": "a67f73bd95a1fe81e2b878a63dd145ad9a486d701cc3a3f2c58841db080f48d3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ega.c",
+      "original_sha256": "ebc58583cec7e257a997185a1ab83f3284dbd1efe6e06c99f680bcce93dca695",
+      "local_line": 43,
+      "local_end": 45,
+      "original_line": 43,
+      "preceding_anchor": [
+        "#include \"nt_egalt.h\"",
+        "#include \"nt_ega.h\"",
+        "#include \"nt_graph.h\""
+      ],
+      "following_anchor": [
+        "static unsigned int ega_lo_graph_0_0[256];",
+        "static unsigned int ega_lo_graph_0_1[256];",
+        "static unsigned int ega_lo_graph_0_2[256];"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "macro": "MONITOR",
+      "current_sha256": "a67f73bd95a1fe81e2b878a63dd145ad9a486d701cc3a3f2c58841db080f48d3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ega.c",
+      "original_sha256": "ebc58583cec7e257a997185a1ab83f3284dbd1efe6e06c99f680bcce93dca695",
+      "local_line": 1633,
+      "local_end": 1635,
+      "original_line": 1666,
+      "preceding_anchor": [
+        "}",
+        "offset, screen_x, screen_y, width, height);",
+        "\"nt_ega_mono_hi_graph_huge off=%d x=%d y=%d width=%d h=%d - NOT SUPPORTED\\n\","
+      ],
+      "following_anchor": [],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "macro": "MONITOR",
+      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+      "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+      "local_line": 47,
+      "local_end": 49,
+      "original_line": 51,
+      "preceding_anchor": [
+        "ULONG DelayIrqLine=0xffffffff;  // all ints are blocked until, spckbd loaded",
+        "ULONG UndelayIrqLine=0;",
+        "RTL_CRITICAL_SECTION IcaLock;   // ICA critical section lock"
+      ],
+      "following_anchor": [
+        "HANDLE hWowIdleEvent = INVALID_HANDLE_VALUE;",
+        "static EOIHOOKPROC EoiHooks[16]={NULL};  // must be init to NULL",
+        "#ifndef MONITOR"
+      ],
+      "guard": "#error Excluded original conditional branch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "macro": "MONITOR",
+      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+      "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+      "local_line": 235,
+      "local_end": 240,
+      "original_line": 234,
+      "preceding_anchor": [
+        "ULONG  IrqLine;",
+        "int adapter;",
+        "{"
+      ],
+      "following_anchor": [
+        "host_ica_lock();",
+        "IrqLine = 1 << IrqLineNum;",
+        "if (!(DelayIrqLine & IrqLine) || Delay == 0xffffffff) {"
+      ],
+      "guard": "#error Excluded unsupported delayed-interrupt monitor declarations",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "macro": "MONITOR",
+      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+      "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+      "local_line": 260,
+      "local_end": 291,
+      "original_line": 257,
+      "preceding_anchor": [
+        "}",
+        "Delay = 1000;",
+        "if (Delay < 1000) {"
+      ],
+      "following_anchor": [
+        "}",
+        "if (CallCount) {",
+        "adapter = IrqLineNum >> 3;"
+      ],
+      "guard": "#error Excluded unsupported delayed-interrupt monitor dispatch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "macro": "MONITOR",
+      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+      "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+      "local_line": 368,
+      "local_end": 370,
+      "original_line": 381,
+      "preceding_anchor": [
+        "}",
+        "}",
+        "}"
+      ],
+      "following_anchor": null,
+      "guard": "#error Excluded original conditional branch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "macro": "MONITOR",
+      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+      "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+      "local_line": 433,
+      "local_end": 435,
+      "original_line": 458,
+      "preceding_anchor": [
+        "VirtualIca[ICA_SLAVE].ica_cpu_int  = FALSE;",
+        "VirtualIca[ICA_MASTER].ica_cpu_int =",
+        "}"
+      ],
+      "following_anchor": [
+        "DelayIrqLine  = 0;",
+        "host_clear_hw_int();",
+        "host_ica_unlock();"
+      ],
+      "guard": "#error Excluded original conditional branch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "macro": "MONITOR",
+      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+      "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+      "local_line": 476,
+      "local_end": 487,
+      "original_line": 500,
+      "preceding_anchor": [
+        "{",
+        "VOID ica_RestartInterrupts(ULONG IrqLine)",
+        "}"
+      ],
+      "following_anchor": null,
+      "guard": "#error Excluded unsupported monitor interrupt restart",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "macro": "MONITOR",
+      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+      "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+      "local_line": 491,
+      "local_end": 493,
+      "original_line": 521,
+      "preceding_anchor": [
+        "}",
+        "#endif",
+        "host_ica_unlock();"
+      ],
+      "following_anchor": [],
+      "guard": "#error Excluded unsupported monitor IRET table",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "macro": "X86GFX",
+      "current_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "local_line": 204,
+      "local_end": 206,
+      "original_line": 178,
+      "preceding_anchor": [
+        "HCURSOR cur_cursor = NULL;     /* Current cursor handle */",
+        "ULONG event_thread_blocked_reason = 0xFFFFFFFF;",
+        "ULONG NoMouseTics;"
+      ],
+      "following_anchor": [
+        "Flag to keep track of whether or not the Hide Pointer system menu item is",
+        "greyed (i.e. the window is iconised) or enabled.",
+        "============================================================================*/"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "macro": "X86GFX",
+      "current_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "local_line": 1066,
+      "local_end": 1068,
+      "original_line": 1014,
+      "preceding_anchor": [
+        "mouse_pos.y = MouseEvent->dwMousePosition.Y;    /* Mouse Y */",
+        "mouse_pos.x = MouseEvent->dwMousePosition.X;    /* Mouse X */",
+        "? 1 : 0;"
+      ],
+      "following_anchor": [
+        "{",
+        "ULONG maxWidth = sc.PC_W_Width,",
+        "maxHeight = sc.PC_W_Height;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "macro": "MONITOR",
+      "current_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "local_line": 1502,
+      "local_end": 1504,
+      "original_line": 1422,
+      "preceding_anchor": [
+        ";",
+        "while(ShowConsoleCursor(sc.OutputHandle,TRUE) < 0)",
+        "ResetConsoleState();"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "macro": "X86GFX",
+      "current_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "local_line": 1617,
+      "local_end": 1619,
+      "original_line": 1525,
+      "preceding_anchor": [
+        "enable_stream_io();",
+        "DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(), __FILE__,__LINE__);",
+        "&sc.ConsoleBuffInfo))"
+      ],
+      "following_anchor": [
+        "}",
+        "nt_init_event_thread();  // does nothing if init already",
+        "CntrlHandlerState &= ~CNTRL_VDMBLOCKED;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 25,
+      "local_end": 27,
+      "original_line": 25,
+      "preceding_anchor": [
+        "#include \"insignia.h\"",
+        "#include \"host_def.h\"",
+        "#include <windows.h>"
+      ],
+      "following_anchor": [
+        "#include <vdm.h>",
+        "#include <stdlib.h>",
+        "#include <string.h>"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 72,
+      "local_end": 74,
+      "original_line": 71,
+      "preceding_anchor": [
+        "GLOBAL BOOL\tConsoleNoUpdates = FALSE;",
+        "GLOBAL BOOL\tConsoleInitialised = FALSE;",
+        "#include \"nt_reset.h\""
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 142,
+      "local_end": 144,
+      "original_line": 142,
+      "preceding_anchor": [
+        "IMPORT VOID disable_gfx_update_routines(VOID);",
+        "IMPORT VOID enable_gfx_update_routines(VOID);",
+        "IMPORT VOID recalc_text(int);"
+      ],
+      "following_anchor": [
+        "VOID enableUpdates(VOID);",
+        "VOID disableUpdates(VOID);",
+        "VOID copyConsoleToRegen(SHORT, SHORT, SHORT, SHORT);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 159,
+      "local_end": 161,
+      "original_line": 159,
+      "preceding_anchor": [
+        "GLOBAL int getModeType(VOID);",
+        "VOID waitForInputFocus(VOID);",
+        "VOID setVDMCursorPosition(UTINY, PCOORD);"
+      ],
+      "following_anchor": [
+        "GLOBAL VOID nt_init_event_thread(VOID)",
+        "{",
+        "note_entrance0(\"nt_init_event_thread\");"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 547,
+      "local_end": 549,
+      "original_line": 542,
+      "preceding_anchor": [
+        "}",
+        "ConsBufferInfo.srWindow.Top + 1;",
+        "consoleHeight = ConsBufferInfo.srWindow.Bottom -"
+      ],
+      "following_anchor": [
+        "if (consoleHeight <= MID_VAL(VGA_HEIGHT_0, VGA_HEIGHT_1))",
+        "{",
+        "vgaHeight = VGA_HEIGHT_0;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 617,
+      "local_end": 619,
+      "original_line": 616,
+      "preceding_anchor": [
+        "sas_storew_no_check(VID_LEN, 0x1000);",
+        "if (vgaHeight == 25)",
+        "recalc_text(charHeight);"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 622,
+      "local_end": 624,
+      "original_line": 621,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "sas_storew_no_check(VID_COLS, 80);   // fixup from 40 char shutdown",
+        "} /* end of calcScreenParams() */",
+        "GLOBAL VOID ConsoleInit(VOID)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 678,
+      "local_end": 680,
+      "original_line": 699,
+      "preceding_anchor": [
+        "NULL);",
+        "FALSE,",
+        "FALSE,"
+      ],
+      "following_anchor": [
+        "disableUpdates();",
+        "calcScreenParams( &charHeight, &vgaHeight );",
+        "StartupCharHeight = charHeight;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 695,
+      "local_end": 697,
+      "original_line": 718,
+      "preceding_anchor": [
+        "StartupCharHeight = charHeight;",
+        "calcScreenParams( &charHeight, &vgaHeight );",
+        "disableUpdates();"
+      ],
+      "following_anchor": [
+        "cursorLine = ConsBufferInfo.dwCursorPosition.Y;",
+        "if (cursorLine < vgaHeight)",
+        "topLine = 0;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 737,
+      "local_end": 739,
+      "original_line": 789,
+      "preceding_anchor": [
+        "{",
+        "GLOBAL VOID GfxReset(VOID)",
+        "}"
+      ],
+      "following_anchor": [
+        "}",
+        "GLOBAL VOID ResetConsoleState(VOID)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 761,
+      "local_end": 763,
+      "original_line": 836,
+      "preceding_anchor": [
+        "{",
+        "GLOBAL VOID ResetConsoleState(VOID)",
+        "}"
+      ],
+      "following_anchor": [
+        "SMALL_RECT\tnewWin;",
+        "BOOL itfailed = FALSE;",
+        "#ifdef X86GFX"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 768,
+      "local_end": 770,
+      "original_line": 878,
+      "preceding_anchor": [
+        "BOOL itfailed = FALSE;",
+        "SMALL_RECT\tnewWin;",
+        "#endif /* X86GFX */"
+      ],
+      "following_anchor": [
+        "closeGraphicsBuffer();",
+        "if (StreamIoSwitchOn && !host_stream_io_enabled) {",
+        "SetConsoleScreenBufferSize(sc.OutputHandle, sc.ConsoleBuffInfo.dwSize);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 1249,
+      "local_end": 1251,
+      "original_line": 1214,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "GLOBAL VOID DoFullScreenResume(VOID)",
+        "{",
+        "USHORT vgaHeight, height;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 1278,
+      "local_end": 1280,
+      "original_line": 1490,
+      "preceding_anchor": [
+        "#endif",
+        "PVOID pDummy;",
+        "#ifndef X86GFX"
+      ],
+      "following_anchor": [
+        "if( !RegisterConsoleVDM( VDMForWOW ?",
+        "CONSOLE_REGISTER_WOW : CONSOLE_REGISTER_VDM,",
+        "#ifdef X86GFX"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 1286,
+      "local_end": 1292,
+      "original_line": 1558,
+      "preceding_anchor": [
+        "CONSOLE_REGISTER_WOW : CONSOLE_REGISTER_VDM,",
+        "if( !RegisterConsoleVDM( VDMForWOW ?",
+        "#endif /* X86GFX */"
+      ],
+      "following_anchor": [
+        "NULL,            // sectionname no longer used",
+        "0,               // sectionname no longer used",
+        "&stateLength,"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 1310,
+      "local_end": 1319,
+      "original_line": 1582,
+      "preceding_anchor": [
+        "ErrorExit();",
+        ")",
+        ")"
+      ],
+      "following_anchor": [
+        "if (sc.ScreenState != WINDOWED) {",
+        "if (!GetConsoleScreenBufferInfo(sc.OutputHandle, &ConsBufferInfo))",
+        "ErrorExit();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 1385,
+      "local_end": 1387,
+      "original_line": 1659,
+      "preceding_anchor": [
+        "}",
+        "{",
+        "GLOBAL VOID GfxCloseDown(VOID)"
+      ],
+      "following_anchor": [
+        "VOID enableUpdates(VOID)",
+        "{",
+        "enable_gfx_update_routines();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 1466,
+      "local_end": 1468,
+      "original_line": 1842,
+      "preceding_anchor": [
+        "register half_word\t*to;",
+        "SMALL_RECT\t readRegion;",
+        "LONG\t nChars;"
+      ],
+      "following_anchor": [
+        "nChars = width * height;",
+        "assert0(nChars <= MAX_CONSOLE_SIZE, \"Console buffer overflow\");",
+        "bufSize.X = width;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "MONITOR",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 1642,
+      "local_end": 1644,
+      "original_line": 2026,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "do_new_cursor();      /* make sure the emulation knows about it */",
+        "}",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 1699,
+      "local_end": 1701,
+      "original_line": 2094,
+      "preceding_anchor": [
+        "}",
+        "return(modeType);",
+        "}"
+      ],
+      "following_anchor": [
+        "void host_enable_stream_io(void)",
+        "{",
+        "sc.ScreenState = STREAM_IO;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "macro": "X86GFX",
+      "current_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 30,
+      "local_end": 32,
+      "original_line": 30,
+      "preceding_anchor": [
+        "::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/",
+        "for resizing the console window.",
+        "Tim September 92. New function resizeWindow(), called from textResize()"
+      ],
+      "following_anchor": [
+        "#include <sys\\types.h>",
+        "#include \"xt.h\"",
+        "#include CpuH"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "macro": "MONITOR",
+      "current_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 229,
+      "local_end": 231,
+      "original_line": 213,
+      "preceding_anchor": [
+        "};",
+        "#endif /* V7VGA */",
+        "nt_v7vga_hi_graph_huge,"
+      ],
+      "following_anchor": [
+        "static INITFUNCS mono_init_funcs =",
+        "{",
+        "nt_init_text,"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "macro": "MONITOR",
+      "current_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 258,
+      "local_end": 260,
+      "original_line": 290,
+      "preceding_anchor": [
+        "};",
+        "nt_init_vga_hi_graph,",
+        "nt_init_ega_hi_graph,"
+      ],
+      "following_anchor": [
+        "void nt_init_screen (void);",
+        "void nt_init_adaptor (int, int);",
+        "void nt_change_mode (void);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "macro": "X86GFX",
+      "current_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 521,
+      "local_end": 523,
+      "original_line": 562,
+      "preceding_anchor": [
+        "sc.ConsoleBufInfo.hMutex = 0;",
+        "CloseHandle(sc.ConsoleBufInfo.hMutex);",
+        "#endif  // MONITOR"
+      ],
+      "following_anchor": [
+        "}",
+        "} /* end of closeGraphicsBuffer() */",
+        "GLOBAL void resetWindowParams()"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "macro": "X86GFX",
+      "current_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 548,
+      "local_end": 550,
+      "original_line": 595,
+      "preceding_anchor": [
+        "static boolean  already_called = FALSE;",
+        "static int\t    med_res_swapped = FALSE;",
+        "{"
+      ],
+      "following_anchor": [
+        "sub_note_trace0(ALL_ADAPT_VERBOSE, \"nt_init_screen\\n\");",
+        "host_error makes a call to nt_init_screen. Thus a check is made here to",
+        "see if the user interface has already been initialised. If it has then"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "macro": "MONITOR",
+      "current_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 569,
+      "local_end": 573,
+      "original_line": 616,
+      "preceding_anchor": [
+        "#endif",
+        "init_lut();",
+        "#ifdef BIGWIN"
+      ],
+      "following_anchor": [
+        "if(!EGA_planes) EGA_planes = (byte *) host_malloc(4*EGA_PLANE_SIZE);",
+        "if(!DAC) DAC = (PC_palette *) host_malloc(sizeof(PC_palette) * VGA_DAC_SIZE);",
+        "if (video_copy == NULL || EGA_planes == NULL || DAC == NULL)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "macro": "MONITOR",
+      "current_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 612,
+      "local_end": 614,
+      "original_line": 659,
+      "preceding_anchor": [
+        "}",
+        "select_paint_routines();",
+        "sc.PCBackground = RGB(0,0,0);        /* Black RGB */"
+      ],
+      "following_anchor": [
+        "void nt_init_adaptor(int adaptor, int height)",
+        "{",
+        "sub_note_trace2(ALL_ADAPT_VERBOSE,"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "macro": "MONITOR",
+      "current_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 712,
+      "local_end": 714,
+      "original_line": 782,
+      "preceding_anchor": [
+        "coord,&nCharWritten);",
+        "ScreenInfo.dwSize.X * ScreenInfo.dwSize.Y,",
+        "FillConsoleOutputAttribute(sc.OutputHandle, (WORD) sc.PCBackground,"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "macro": "X86GFX",
+      "current_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 909,
+      "local_end": 911,
+      "original_line": 902,
+      "preceding_anchor": [
+        "if (ConsoleInitialised == TRUE && ConsoleNoUpdates == FALSE)",
+        "if(update_vlt) set_the_vlt();",
+        "{"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "macro": "MONITOR",
+      "current_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 1326,
+      "local_end": 1328,
+      "original_line": 1287,
+      "preceding_anchor": [
+        "{",
+        "if (get_chain4_mode())",
+        "{"
+      ],
+      "following_anchor": [
+        "paint_screen = nt_paint_funcs->vga_graph;",
+        "}",
+        "else"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "macro": "X86GFX",
+      "current_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 1379,
+      "local_end": 1385,
+      "original_line": 1344,
+      "preceding_anchor": [
+        "}",
+        "break;",
+        "paint_screen = dummy_paint_screen;"
+      ],
+      "following_anchor": [
+        "current_mode = mode;",
+        "}",
+        "#ifdef BIGWIN"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "macro": "MONITOR",
+      "current_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 1489,
+      "local_end": 1491,
+      "original_line": 1479,
+      "preceding_anchor": [
+        "}",
+        "}",
+        "nt_init_funcs = &mono_init_funcs;"
+      ],
+      "following_anchor": [
+        "void prepare_surface(void)",
+        "{",
+        "CONSOLE_SCREEN_BUFFER_INFO ScreenInfo;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "X86GFX",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 68,
+      "local_end": 70,
+      "original_line": 58,
+      "preceding_anchor": [
+        "IMPORT word         savedtextoffset,savedtextsegment;",
+        "IMPORT word         F9_SEGMENT,F9_OFFSET;",
+        "IMPORT sys_addr     conditional_off_sysaddr;"
+      ],
+      "following_anchor": [
+        "LOCAL BOOL           mouse_state;",
+        "LOCAL BOOL           bFullscTextBkgrndSaved = FALSE;",
+        "LOCAL BOOL           bPointerInSamePlace = FALSE;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "X86GFX",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 130,
+      "local_end": 132,
+      "original_line": 127,
+      "preceding_anchor": [
+        "FORWARD void   LimitCoordinates(half_word,IS16 *,IS16 *);",
+        "FORWARD void   dummy(short *,short *,unsigned short *);",
+        "FORWARD void   WindowedGraphicsScale(half_word,IS16,IS16,IS16 *,IS16 *);"
+      ],
+      "following_anchor": [
+        "FORWARD void   TextScale(IS16 *,IS16 *,IS16 *, IS16 *);",
+        "void LazyMouseInterrupt();",
+        "VOID MouseEoiHook(int IrqLine, int CallCount);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "X86GFX",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 335,
+      "local_end": 337,
+      "original_line": 327,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "m2pX = 8;",
+        "m2pY = 16;",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "X86GFX",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 353,
+      "local_end": 355,
+      "original_line": 389,
+      "preceding_anchor": [
+        "{",
+        "GLOBAL void mouse_set_position IFN2(USHORT, newx, USHORT, newy)",
+        "}"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "X86GFX",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 378,
+      "local_end": 380,
+      "original_line": 420,
+      "preceding_anchor": [
+        "}",
+        "return;",
+        "bFunctionFour = TRUE;"
+      ],
+      "following_anchor": [
+        "}",
+        "GLOBAL void mouse_cursor_display()",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "X86GFX",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 398,
+      "local_end": 400,
+      "original_line": 510,
+      "preceding_anchor": [
+        "{",
+        "GLOBAL\tvoid host_mouse_conditional_off_enabled(void)",
+        "}"
+      ],
+      "following_anchor": [
+        "}",
+        "VOID host_os_mouse_pointer(MOUSE_CURSOR_STATUS *mcs,MOUSE_CALL_MASK *call_mask,",
+        "MOUSE_VECTOR *counter)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "X86GFX",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 414,
+      "local_end": 416,
+      "original_line": 541,
+      "preceding_anchor": [
+        "{",
+        "MOUSE_VECTOR *counter)",
+        "VOID host_os_mouse_pointer(MOUSE_CURSOR_STATUS *mcs,MOUSE_CALL_MASK *call_mask,"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "X86GFX",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 426,
+      "local_end": 428,
+      "original_line": 549,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "{",
+        "ScaleToWindowedVirtualCoordinates(&mcs->position.x,&mcs->position.y,counter);",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "X86GFX",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 470,
+      "local_end": 472,
+      "original_line": 594,
+      "preceding_anchor": [
+        "{",
+        "else",
+        "}"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "X86GFX",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 495,
+      "local_end": 497,
+      "original_line": 713,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "}",
+        "void AssembleCallMask(MOUSE_CALL_MASK *call_mask)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "X86GFX",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 628,
+      "local_end": 630,
+      "original_line": 849,
+      "preceding_anchor": [
+        "}",
+        "old_r_button = os_pointer_data.button_r;",
+        "old_l_button = os_pointer_data.button_l;"
+      ],
+      "following_anchor": [
+        "void ScaleToWindowedVirtualCoordinates(IS16 *outx,IS16 *outy,",
+        "MOUSE_VECTOR *counter)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "X86GFX",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 1331,
+      "local_end": 1333,
+      "original_line": 1740,
+      "preceding_anchor": [
+        "{",
+        "void host_show_pointer()",
+        "}"
+      ],
+      "following_anchor": [
+        "}",
+        "void host_hide_pointer()",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "X86GFX",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 1346,
+      "local_end": 1348,
+      "original_line": 1786,
+      "preceding_anchor": [
+        "{",
+        "void host_hide_pointer()",
+        "}"
+      ],
+      "following_anchor": [
+        "}",
+        "void MouseDetachMenuItem(BOOL bForce)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "MONITOR",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 1750,
+      "local_end": 1752,
+      "original_line": 2223,
+      "preceding_anchor": [
+        "CToS(&tR);",
+        "{",
+        "tR.left != WarpClientRect.left)"
+      ],
+      "following_anchor": [
+        "ClipCursor(&tR);",
+        "GetClipCursor(&WarpBorderRect);",
+        "WarpBorderRect.right--;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "X86GFX",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 1855,
+      "local_end": 1857,
+      "original_line": 2346,
+      "preceding_anchor": [
+        "}",
+        "host_ica_unlock();",
+        "os_pointer_data.y=0;"
+      ],
+      "following_anchor": [
+        "void FullscTextPtr(int x,int y)",
+        "{",
+        "#ifdef X86GFX"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "macro": "X86GFX",
+      "current_sha256": "9d85beed461fc0611b613234dbc1956b943db12208de3501b92bf41528acc8b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "local_line": 1869,
+      "local_end": 1871,
+      "original_line": 2410,
+      "preceding_anchor": [
+        "{",
+        "void FullscTextPtr(int x,int y)",
+        "#endif //X86GFX"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "macro": "X86GFX",
+      "current_sha256": "7cda05518a3473d52c7383620cd000f936b93219a1e746461c26116cc0531565",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_msscs.c",
+      "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+      "local_line": 1096,
+      "local_end": 1098,
+      "original_line": 1075,
+      "preceding_anchor": [
+        "stdoutRedirected = fIsRedirection;",
+        "{",
+        "void nt_std_handle_notification (BOOL fIsRedirection)"
+      ],
+      "following_anchor": [
+        "}",
+        "BOOL VDDInstallUserHook (",
+        "HANDLE\t\thVDD,"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_nls.c",
+      "macro": "X86GFX",
+      "current_sha256": "433fdb715abe00f63d28f88ca69fcee0fab4d6898cc63068412594563098a830",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_nls.c",
+      "original_sha256": "6cef4fc4adf6ce81f42cfa4ebfa9c1edb153a3ce651a69321f5b5022a9b6fa06",
+      "local_line": 40,
+      "local_end": 42,
+      "original_line": 40,
+      "preceding_anchor": [
+        "char szSysErrMsg[MAX_PATH]=\"\";",
+        "char szDoomMsg[MAX_PATH]=\"\";",
+        "#include \"nt_uis.h\""
+      ],
+      "following_anchor": [
+        "char szHideMouseMenuStr[64];",
+        "char szDisplayMouseMenuStr[64];",
+        "Function:\t\thost_nls_get_message()"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_nls.c",
+      "macro": "X86GFX",
+      "current_sha256": "433fdb715abe00f63d28f88ca69fcee0fab4d6898cc63068412594563098a830",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_nls.c",
+      "original_sha256": "6cef4fc4adf6ce81f42cfa4ebfa9c1edb153a3ce651a69321f5b5022a9b6fa06",
+      "local_line": 99,
+      "local_end": 101,
+      "original_line": 99,
+      "preceding_anchor": [
+        ")",
+        "NULL",
+        "sizeof(szDoomMsg)/sizeof(CHAR),"
+      ],
+      "following_anchor": [
+        "||",
+        "!LoadString(GetModuleHandle(NULL),",
+        "SM_HIDE_MOUSE,"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "macro": "X86GFX",
+      "current_sha256": "0b5d06d2a7a3f714a6f1a607ac9476fb5c0ae490832a8e45d43acc58fd3b505f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "local_line": 22,
+      "local_end": 24,
+      "original_line": 22,
+      "preceding_anchor": [
+        "#include \"host_def.h\"",
+        "#include \"insignia.h\"",
+        "#include <vdmapi.h>"
+      ],
+      "following_anchor": [
+        "#include <sys\\types.h>",
+        "#include \"xt.h\"",
+        "#include \"sas.h\""
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "macro": "MONITOR",
+      "current_sha256": "0b5d06d2a7a3f714a6f1a607ac9476fb5c0ae490832a8e45d43acc58fd3b505f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "local_line": 75,
+      "local_end": 77,
+      "original_line": 70,
+      "preceding_anchor": [
+        "#endif",
+        "extern char achES[];",
+        "extern WORD BWVKey;"
+      ],
+      "following_anchor": [
+        "extern IU8 lcifo[];",
+        "GLOBAL BOOL VDMForWOW = FALSE;",
+        "GLOBAL BOOL fSeparateWow = FALSE;  // TRUE if CREATE_SEPARATE_WOW_VDM flag"
+      ],
+      "guard": "#error Excluded unsupported monitor IVT declarations",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "macro": "X86GFX",
+      "current_sha256": "0b5d06d2a7a3f714a6f1a607ac9476fb5c0ae490832a8e45d43acc58fd3b505f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "local_line": 112,
+      "local_end": 114,
+      "original_line": 98,
+      "preceding_anchor": [
+        "{",
+        "host_reset()",
+        "void"
+      ],
+      "following_anchor": [
+        "if (host_stream_io_enabled) {",
+        "sc.ScreenState = STREAM_IO;",
+        "ConsoleInitialised = TRUE;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "macro": "MONITOR",
+      "current_sha256": "0b5d06d2a7a3f714a6f1a607ac9476fb5c0ae490832a8e45d43acc58fd3b505f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "local_line": 127,
+      "local_end": 129,
+      "original_line": 113,
+      "preceding_anchor": [
+        "}",
+        "MouseAttachMenuItem(sc.ActiveOutputBufferHandle);",
+        "ConsoleInit();"
+      ],
+      "following_anchor": null,
+      "guard": "#error Excluded original conditional branch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "macro": "X86GFX",
+      "current_sha256": "0b5d06d2a7a3f714a6f1a607ac9476fb5c0ae490832a8e45d43acc58fd3b505f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "local_line": 311,
+      "local_end": 313,
+      "original_line": 292,
+      "preceding_anchor": [
+        "GfxCloseDown();             // ensure video section destroyed",
+        "TerminateHeartBeat();",
+        "InitSound(FALSE);"
+      ],
+      "following_anchor": [
+        "host_lpt_close_all();       /* Close all open printer ports */",
+        "host_com_close_all();       /* Close all open comms ports */",
+        "MouseDetachMenuItem(TRUE);  /* Force the menu item away on quit */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+      "macro": "MONITOR",
+      "current_sha256": "729f8cb1148d4acccc2ceddbe50b37c40ed0d3f407a3f37c23b1484ef9abdd86",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_thred.c",
+      "original_sha256": "776330ea072cfd005ea05968dc676634385d1c9f349bd71ba1667ecd3be68438",
+      "local_line": 104,
+      "local_end": 106,
+      "original_line": 98,
+      "preceding_anchor": [
+        "#endif",
+        "ccpu386newthread();",
+        "#if defined(CCPU) || defined(PIG)"
+      ],
+      "following_anchor": [
+        "if (!(dwCreationFlags & CREATE_SUSPENDED))",
+        "ResumeThread(Thread);",
+        "} else {"
+      ],
+      "guard": "#error Excluded original conditional branch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+      "macro": "MONITOR",
+      "current_sha256": "729f8cb1148d4acccc2ceddbe50b37c40ed0d3f407a3f37c23b1484ef9abdd86",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_thred.c",
+      "original_sha256": "776330ea072cfd005ea05968dc676634385d1c9f349bd71ba1667ecd3be68438",
+      "local_line": 165,
+      "local_end": 167,
+      "original_line": 158,
+      "preceding_anchor": [
+        "#endif",
+        "ccpu386exitthread();",
+        "#if defined(CCPU) || defined(PIG)"
+      ],
+      "following_anchor": [
+        "ExitThread(dwExitCode);",
+        "}"
+      ],
+      "guard": "#error Excluded original conditional branch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "macro": "X86GFX",
+      "current_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
+      "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+      "local_line": 397,
+      "local_end": 399,
+      "original_line": 390,
+      "preceding_anchor": [
+        "unsigned char FgBgPriority;",
+        "if (!VDMForWOW)  {",
+        "{"
+      ],
+      "following_anchor": [
+        "host_graphics_tick();               // video graphics stuff",
+        "#ifndef X86GFX",
+        "GetScaleEvent();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "macro": "MONITOR",
+      "current_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
+      "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+      "local_line": 580,
+      "local_end": 582,
+      "original_line": 571,
+      "preceding_anchor": [
+        "try {",
+        "DWORD dwRet = (DWORD)-1;",
+        "{"
+      ],
+      "following_anchor": [
+        "SetThreadPriority(ThreadInfo.HeartBeat.Handle,",
+        "!(dwWNTPifFlags & COMPAT_TIMERTIC)",
+        "? THREAD_PRIORITY_TIME_CRITICAL"
+      ],
+      "guard": "#error Excluded unsupported monitor timer lock setup",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "macro": "X86GFX",
+      "current_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
+      "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+      "local_line": 602,
+      "local_end": 604,
+      "original_line": 596,
+      "preceding_anchor": [
+        ");",
+        ": THREAD_PRIORITY_HIGHEST",
+        "? THREAD_PRIORITY_TIME_CRITICAL"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "macro": "MONITOR",
+      "current_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
+      "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+      "local_line": 607,
+      "local_end": 609,
+      "original_line": 608,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "dwRet = Win32_host_timer();",
+        "}",
+        "except(VdmUnhandledExceptionFilter(GetExceptionInformation())) {"
+      ],
+      "guard": "#error Excluded unsupported monitor timer lock release",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "macro": "MONITOR",
+      "current_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
+      "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+      "local_line": 764,
+      "local_end": 789,
+      "original_line": 768,
+      "preceding_anchor": [
+        "liDelay.QuadPart  = Int32x32To64(Delay, -10);",
+        "LARGE_INTEGER liDelay;",
+        "NTSTATUS status;"
+      ],
+      "following_anchor": null,
+      "guard": "#error Excluded unsupported monitor heartbeat wait",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "macro": "MONITOR",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "local_line": 98,
+      "local_end": 100,
+      "original_line": 98,
+      "preceding_anchor": [
+        "{",
+        ")",
+        "DWORD\t*Size"
+      ],
+      "following_anchor": [
+        "PUMBNODE\tUMB;",
+        "LARGE_INTEGER SectionOffset;",
+        "DWORD dwBase;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "macro": "MONITOR",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "local_line": 157,
+      "local_end": 159,
+      "original_line": 167,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "break;",
+        "case UMB_OWNER_XMS:",
+        "while (UMB != NULL && UMB->Owner != UMB_OWNER_RAM) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "macro": "MONITOR",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "local_line": 210,
+      "local_end": 212,
+      "original_line": 271,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "UMB->Owner = UMB_OWNER_ROM;",
+        "break;",
+        "default:"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "macro": "MONITOR",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "local_line": 241,
+      "local_end": 243,
+      "original_line": 319,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "PUMBNODE    UMB;",
+        "LARGE_INTEGER   SectionOffset;",
+        "DWORD       SizeView, dwBase;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "macro": "MONITOR",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "local_line": 305,
+      "local_end": 307,
+      "original_line": 425,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "PUMBNODE    UMB;",
+        "DWORD   dwBase;",
+        "UMB = UMBList;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "macro": "MONITOR",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "local_line": 343,
+      "local_end": 345,
+      "original_line": 516,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "PUMBNODE UMB;",
+        "DWORD   dwBase;",
+        "dwBase = (DWORD)Address;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "macro": "MONITOR",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "local_line": 387,
+      "local_end": 389,
+      "original_line": 598,
+      "preceding_anchor": [
+        "{",
+        "GetUMBForEMM(VOID)",
+        "BOOL"
+      ],
+      "following_anchor": [
+        "return TRUE;",
+        "}",
+        "BOOL"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "macro": "MONITOR",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "local_line": 404,
+      "local_end": 406,
+      "original_line": 630,
+      "preceding_anchor": [
+        "{",
+        ")",
+        "PUMBNODE  UMB"
+      ],
+      "following_anchor": [
+        "while (UMB != NULL) {",
+        "if (UMB->Owner == UMB_OWNER_NONE &&",
+        "UMB->Base <= dwBase &&"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "macro": "MONITOR",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "local_line": 444,
+      "local_end": 446,
+      "original_line": 696,
+      "preceding_anchor": [
+        "{",
+        ")",
+        "WORD\t    Owner"
+      ],
+      "following_anchor": [
+        "DWORD SizeBefore, SizeAfter;",
+        "PUMBNODE\tUMBBefore, UMBAfter;",
+        "SizeBefore = dwBase - UMB->Base;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "macro": "MONITOR",
+      "current_sha256": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "local_line": 490,
+      "local_end": 492,
+      "original_line": 744,
+      "preceding_anchor": [
+        "}",
+        "UMB->Owner = Owner;",
+        "else {"
+      ],
+      "following_anchor": [
+        "return UMBBefore;",
+        "}",
+        "#ifndef\tMONITOR"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "macro": "MONITOR",
+      "current_sha256": "3c6df963fed846249fd8c14e2d54a1bf7aa344a9a88d4efdb9b87d0589c1fa01",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vdd.c",
+      "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3",
+      "local_line": 215,
+      "local_end": 217,
+      "original_line": 219,
+      "preceding_anchor": [
+        "}",
+        "return 0;",
+        "}"
+      ],
+      "following_anchor": [
+        "BOOL VDDInstallIOHook (",
+        "HANDLE            hVdd,",
+        "WORD              cPortRange,"
+      ],
+      "guard": "#error Excluded original conditional branch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "macro": "MONITOR",
+      "current_sha256": "3c6df963fed846249fd8c14e2d54a1bf7aa344a9a88d4efdb9b87d0589c1fa01",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vdd.c",
+      "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3",
+      "local_line": 275,
+      "local_end": 277,
+      "original_line": 278,
+      "preceding_anchor": [
+        "PVDD_IO_PORTRANGE pPRange;",
+        "WORD              wAdapter;",
+        "WORD              w, i;"
+      ],
+      "following_anchor": [
+        "if (IsBadCodePtr((FARPROC)pIOFn->inb_handler) ||",
+        "IsBadCodePtr((FARPROC)pIOFn->outb_handler))",
+        "{"
+      ],
+      "guard": "#error Excluded original conditional branch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "macro": "MONITOR",
+      "current_sha256": "3c6df963fed846249fd8c14e2d54a1bf7aa344a9a88d4efdb9b87d0589c1fa01",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vdd.c",
+      "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3",
+      "local_line": 328,
+      "local_end": 330,
+      "original_line": 330,
+      "preceding_anchor": [
+        "{",
+        "for (w = pPRange->First; w <= pPRange->Last; w++)",
+        "while (i) {"
+      ],
+      "following_anchor": [
+        "if (!io_connect_port(w, (half_word)wAdapter, IO_READ_WRITE))",
+        "{",
+        "i = w;"
+      ],
+      "guard": "#error Excluded original conditional branch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "macro": "MONITOR",
+      "current_sha256": "3c6df963fed846249fd8c14e2d54a1bf7aa344a9a88d4efdb9b87d0589c1fa01",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vdd.c",
+      "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3",
+      "local_line": 360,
+      "local_end": 362,
+      "original_line": 372,
+      "preceding_anchor": [
+        "}",
+        "i--;",
+        "pPRange++;"
+      ],
+      "following_anchor": [
+        "return TRUE;",
+        "}",
+        "VOID VDDDeInstallIOHook ("
+      ],
+      "guard": "#error Excluded original conditional branch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "macro": "MONITOR",
+      "current_sha256": "3c6df963fed846249fd8c14e2d54a1bf7aa344a9a88d4efdb9b87d0589c1fa01",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vdd.c",
+      "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3",
+      "local_line": 392,
+      "local_end": 394,
+      "original_line": 410,
+      "preceding_anchor": [
+        "WORD wAdapter;",
+        "WORD w;",
+        "{"
+      ],
+      "following_anchor": [
+        "wAdapter = FreeVddAdapter(hVdd);",
+        "if (!wAdapter) {",
+        "return;"
+      ],
+      "guard": "#error Excluded original conditional branch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "macro": "MONITOR",
+      "current_sha256": "3c6df963fed846249fd8c14e2d54a1bf7aa344a9a88d4efdb9b87d0589c1fa01",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vdd.c",
+      "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3",
+      "local_line": 408,
+      "local_end": 410,
+      "original_line": 425,
+      "preceding_anchor": [
+        "{",
+        "for (w = pPortRange->First; w <= pPortRange->Last; w++)",
+        "while (cPortRange--) {"
+      ],
+      "following_anchor": [
+        "io_disconnect_port(w, (half_word)wAdapter);",
+        "}",
+        "pPortRange++;"
+      ],
+      "guard": "#error Excluded original conditional branch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "macro": "MONITOR",
+      "current_sha256": "3c6df963fed846249fd8c14e2d54a1bf7aa344a9a88d4efdb9b87d0589c1fa01",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vdd.c",
+      "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3",
+      "local_line": 417,
+      "local_end": 419,
+      "original_line": 444,
+      "preceding_anchor": [
+        "}",
+        "pPortRange++;",
+        "}"
+      ],
+      "following_anchor": [
+        "}",
+        "WORD VDDReserveIrqLine (",
+        "HANDLE            hVdd,"
+      ],
+      "guard": "#error Excluded original conditional branch",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "macro": "MONITOR",
+      "current_sha256": "7a5d4b0b52af30faacb978c4258ccef3e8b3f6397425eb9ea4abae0df2c5cb1d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vga.c",
+      "original_sha256": "81db9f2e415e58c21b0a10110d03d0f16532c2150aba84feb2cab8f74627ee6d",
+      "local_line": 36,
+      "local_end": 38,
+      "original_line": 36,
+      "preceding_anchor": [
+        "#include \"nt_graph.h\"",
+        "#include \"conapi.h\"",
+        "#include \"host_rrr.h\""
+      ],
+      "following_anchor": [
+        "IMPORT int DisplayErrorTerm(int, DWORD, char *, int);",
+        "void nt_init_vga_hi_graph()",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "macro": "MONITOR",
+      "current_sha256": "7a5d4b0b52af30faacb978c4258ccef3e8b3f6397425eb9ea4abae0df2c5cb1d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vga.c",
+      "original_sha256": "81db9f2e415e58c21b0a10110d03d0f16532c2150aba84feb2cab8f74627ee6d",
+      "local_line": 1646,
+      "local_end": 1648,
+      "original_line": 1638,
+      "preceding_anchor": [
+        "#endif /* V7VGA */",
+        "}",
+        "offset, screen_x, screen_y, width, height);"
+      ],
+      "following_anchor": [],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "macro": "X86GFX",
+      "current_sha256": "64060de9d519c32f00fec53b7ad701e70e44adf1a0dfd418d7d8a90c01d0e628",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\stubs.c",
+      "original_sha256": "c1821a3738bbee78293a47262cb8df14e68043cfd6b4092b7fa56bdb01c6d991",
+      "local_line": 16,
+      "local_end": 18,
+      "original_line": 16,
+      "preceding_anchor": [
+        "#include \"chkmallc.h\"",
+        "#include \"config.h\"",
+        "#include \"sas.h\""
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "macro": "MONITOR",
+      "current_sha256": "64060de9d519c32f00fec53b7ad701e70e44adf1a0dfd418d7d8a90c01d0e628",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\stubs.c",
+      "original_sha256": "c1821a3738bbee78293a47262cb8df14e68043cfd6b4092b7fa56bdb01c6d991",
+      "local_line": 20,
+      "local_end": 22,
+      "original_line": 21,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "#ifndef MONITOR",
+        "GLOBAL double log1p(x)",
+        "double x;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "macro": "MONITOR",
+      "current_sha256": "64060de9d519c32f00fec53b7ad701e70e44adf1a0dfd418d7d8a90c01d0e628",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\stubs.c",
+      "original_sha256": "c1821a3738bbee78293a47262cb8df14e68043cfd6b4092b7fa56bdb01c6d991",
+      "local_line": 39,
+      "local_end": 41,
+      "original_line": 55,
+      "preceding_anchor": [
+        "#endif /* !MONITOR */",
+        "}",
+        "return log(1+x);"
+      ],
+      "following_anchor": [
+        "void _assert(void *exp, void *file, unsigned line)",
+        "{",
+        "char linestr[100];"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.",
+      "blank_lines_after_guard": 0
+    }
+  ],
+  "limitations": "Only compiled C sources with both worker and worker-reference-x86 current-hash contexts; event source additionally requires direct-including fixture; unique pinned original anchor and sole existing #error required. Other files and arms remain pending."
+}

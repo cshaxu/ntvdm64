@@ -1,0 +1,39 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\xt.c",
+  "original_sha256": "a95cda1054b1840df73dbcec6e23cacbee1ddf2fd1ed071318c8c9252f21c0cc",
+  "original_group_lines": [
+    346,
+    606
+  ],
+  "original_body_sha256": "b95dc1e563eaf790a798cb1a5f6d27aa205fe27a1d97f9f18d53a60a18e754ff",
+  "local_before_sha256": "de6cfff704cba1db0fd07dced688dd3ae0a93d5a0781f3279c7079ca0611a4dd",
+  "local_after_sha256": "c97b75325cf2743bacacd0f510606f62e96f0a9df1d67796434dc89b593472ea",
+  "local_original_group_lines": [
+    113,
+    373
+  ],
+  "removed_local_body_sha256": "310517c1d352b4cf9a33b6f3d2eacbc602d31c44e88c30d84abf7d0520a2d951",
+  "removed_local_body_lines": 259,
+  "original_condition": "!defined(MAC_LIKE) && !defined(CPU_30_STYLE)",
+  "retained_local_condition": "!defined(MAC_LIKE) && !defined(CPU_40_STYLE)",
+  "line_control": "#line 370 preserves the next logical line after prior #line 99",
+  "registrations": [
+    "MVDM-HOST-DIV-155",
+    "MVDM-HOST-DIV-567"
+  ],
+  "proof": "Project selected worker is CPU40; generated xt.c product/reference commands select CPU40; no project test source directly includes xt.c. Full depth-one configuration inventory and regression gates remain pending.",
+  "selected_preprocess": {
+    "x86_real_compile_context": "passed",
+    "raw_sha256_before": "5d39d99a7ff1485168fca8e629d26b2eceaddada4f39bd7c2d7ace012485dc92",
+    "raw_sha256_after": "7ee594528d41a19e6aae413313c923a31ab2f53922b6ae0dfb223153223f34c2",
+    "nonblank_output_equal": true,
+    "raw_difference": "removed inactive source lines and line-control blank lines"
+  },
+  "removed_body_matches_original_after_crlf_normalization": true,
+  "controls": {
+    "x86": "CPU40 and MAC_LIKE conjunction controls and nonCPU40 error passed; next logical line 370",
+    "x64": "CPU40 and MAC_LIKE conjunction controls and nonCPU40 error passed; next logical line 370"
+  },
+  "test": "tests/build/test_bfs_depth1_cpu_guards.py"
+}

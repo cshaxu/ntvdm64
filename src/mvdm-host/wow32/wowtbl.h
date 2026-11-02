@@ -42,17 +42,5 @@ VOID InitThunkTableOffsets(VOID);
 extern TABLEOFFSETS tableoffsets;
 
 #ifdef DEBUG_OR_WOWPROFILE
-
-extern PSZ apszModNames[];
-extern INT nModNames;
-extern INT cAPIThunks;
-
-
-
-INT ModFromCallID(INT iFun);
-PSZ GetModName(INT iFun);
-INT GetOrdinal(INT iFun);
-INT TableOffsetFromName(PSZ szTab);
-
-
+#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected
 #endif

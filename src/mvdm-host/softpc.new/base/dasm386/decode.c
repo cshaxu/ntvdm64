@@ -653,7 +653,7 @@ LOCAL OPCODE_INFO opcode_info[] =
    /*10d 0f/0d  */{BAD_OPCODE},
    /*10e 0f/0e  */{BAD_OPCODE},
 #ifdef PIG
-   /*10f 0f/0f  */{T0,OI(I_ZZEXIT   , A_    , A_    )},
+#error Excluded unsupported PIG configuration
 #else
    /*10f 0f/0f  */{BAD_OPCODE},
 #endif /* PIG */

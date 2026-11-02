@@ -23,12 +23,12 @@
 #ifdef	CCPU
 
 #ifdef SEGMENTATION
+#error Excluded unsupported SEGMENTATION configuration
 
-/*
- * The following #include specifies the code segment into which this module
- * will by placed by the MPW C compiler on the Mac II running MultiFinder.
- */
-#include <SOFTPC_SUPPORT.seg>
+
+
+
+
 #endif
 
 

@@ -1,0 +1,115 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+    "before_sha256": "74d040039f92671ef0da05ba7d98b8ed652af4483f18dd982df06d8c227c4c5d",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+    "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+    "local_group_before": 375,
+    "local_cut_before": 498,
+    "local_end_before": 498,
+    "original_group": 385,
+    "original_cut": 507,
+    "original_end": 507,
+    "removed_body_sha256": "0c6f7904600b1d163d7489419f3e0d4bd36cea975638eee44afa0f245349caa6",
+    "original_body_sha256": "1af76deb44a0e4d52a0c02ec4a8d4c1ee5063538355d3cbcbb4f0def6b2ed6b6",
+    "removed_body_lines": 122,
+    "subsumed_markers": [
+      "MVDM-HOST-DIV-498",
+      "MVDM-HOST-DIV-520",
+      "MVDM-HOST-DIV-522",
+      "MVDM-HOST-DIV-525",
+      "MVDM-HOST-DIV-530",
+      "MVDM-HOST-DIV-535"
+    ],
+    "selected_alternative_line": null,
+    "following_line": 499,
+    "preceding_anchor": [
+      "",
+      "",
+      ""
+    ],
+    "following_anchor": [
+      "",
+      "void reset()",
+      "{"
+    ],
+    "status": "locally-verified",
+    "registration": "MVDM-HOST-DIV-590",
+    "current_start_line": 375,
+    "current_cut_line": 377,
+    "current_end_line": 377,
+    "after_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "before_sha256": "ba2914eefe3c74ad8beab9c336148eb097fd99612630757ec9c6ae441c0fcf38",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+    "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+    "local_group_before": 1867,
+    "local_cut_before": 1883,
+    "local_end_before": 1883,
+    "original_group": 2151,
+    "original_cut": 2174,
+    "original_end": 2174,
+    "removed_body_sha256": "ec6910bf5d08378ebd1bce9a7f05a6cdac3132d66e54b9114b1553cf028a2955",
+    "original_body_sha256": "5c59d5b6fa16a000fd8b8b784a16448c55e65f19cad04d440d81b710798aa9b1",
+    "removed_body_lines": 15,
+    "subsumed_markers": [
+      "MVDM-HOST-DIV-498"
+    ],
+    "selected_alternative_line": null,
+    "following_line": 1995,
+    "preceding_anchor": [
+      "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.",
+      "#endif",
+      ""
+    ],
+    "following_anchor": [
+      "",
+      "if (ticks_blocked == 0)",
+      "{"
+    ],
+    "status": "locally-verified",
+    "registration": "MVDM-HOST-DIV-590",
+    "current_start_line": 1867,
+    "current_cut_line": 1869,
+    "current_end_line": 1869,
+    "after_sha256": "86936aef29e5d5d3a02166375586bffdcdf4afb48c5d9f50532947516cbbfa51"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "before_sha256": "ba2914eefe3c74ad8beab9c336148eb097fd99612630757ec9c6ae441c0fcf38",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+    "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+    "local_group_before": 1887,
+    "local_cut_before": 1892,
+    "local_end_before": 1892,
+    "original_group": 2178,
+    "original_cut": 2185,
+    "original_end": 2185,
+    "removed_body_sha256": "17d8b71d62b6d94dad5331154499f8b6b73ff098e80e5d809fe603625d1a6fef",
+    "original_body_sha256": "a3fa69560d2b566f33b90356edad5dc368c92f8a72394123adbc711fb4771f29",
+    "removed_body_lines": 4,
+    "subsumed_markers": [
+      "MVDM-HOST-DIV-498"
+    ],
+    "selected_alternative_line": null,
+    "following_line": 2004,
+    "preceding_anchor": [
+      "",
+      "if (ticks_blocked == 0)",
+      "{"
+    ],
+    "following_anchor": [
+      "if (timer_int_enabled)",
+      "{",
+      "#ifdef DELAYED_INTS"
+    ],
+    "status": "locally-verified",
+    "registration": "MVDM-HOST-DIV-590",
+    "current_start_line": 1874,
+    "current_cut_line": 1876,
+    "current_end_line": 1876,
+    "after_sha256": "86936aef29e5d5d3a02166375586bffdcdf4afb48c5d9f50532947516cbbfa51"
+  }
+]

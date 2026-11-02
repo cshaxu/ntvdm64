@@ -465,13 +465,9 @@ ULONG FASTCALL WU32SystemParametersInfo(PVDMFRAME pFrame)
 
     default:
 #ifdef DEBUG
-        {
-            DWORD dwSaveOptions = flOptions;
-            flOptions |= OPT_DEBUG;
-            LOGDEBUG(0, ("WARNING SystemParametersInfo case %d not pre-thunked in WOW!\n", parg16->f1));
-            flOptions = dwSaveOptions;
-        }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 475
         break;
     }
 
@@ -671,13 +667,9 @@ ULONG FASTCALL WU32SystemParametersInfo(PVDMFRAME pFrame)
 
     default:
 #ifdef DEBUG
-        {
-            DWORD dwSaveOptions = flOptions;
-            flOptions |= OPT_DEBUG;
-            LOGDEBUG(0, ("WARNING SystemParametersInfo case %d not post-thunked in WOW!\n", parg16->f1));
-            flOptions = dwSaveOptions;
-        }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 681
         break;
     }
 

@@ -57,12 +57,12 @@
 
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_MOUSE.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 
@@ -5142,9 +5142,9 @@ LOCAL EGA_graphics_cursor_display IFN0()
 
 {
 #ifdef REAL_VGA
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif /* PROD */
+#error Excluded unsupported REAL_VGA configuration
+
+
 #else
 	/*
 	 *	Display a representation of the current mouse status on
@@ -5332,9 +5332,9 @@ LOCAL EGA_graphics_cursor_undisplay IFN0()
 
 {
 #ifdef REAL_VGA
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif /* PROD */
+#error Excluded unsupported REAL_VGA configuration
+
+
 #else
 	/*
 	 *	Remove the graphics cursor representation of the mouse
@@ -5414,9 +5414,9 @@ LOCAL EGA_graphics_cursor_undisplay IFN0()
 LOCAL VOID	VGA_graphics_cursor_display IFN0()
 {
 #ifdef REAL_VGA
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif /* PROD */
+#error Excluded unsupported REAL_VGA configuration
+
+
 #else /* REAL_VGA */
 
 	MOUSE_BYTE_ADDRESS byte_offset;
@@ -5500,9 +5500,9 @@ LOCAL VOID	VGA_graphics_cursor_display IFN0()
 LOCAL VOID	VGA_graphics_cursor_undisplay IFN0()
 {
 #ifdef REAL_VGA
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif /* PROD */
+#error Excluded unsupported REAL_VGA configuration
+
+
 #else /* REAL_VGA */
 
 	/*

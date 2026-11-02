@@ -33,32 +33,6 @@ BSWAP CPU functions.
 
 
 #ifdef SPC486
-
-GLOBAL VOID
-BSWAP
-       	          
-IFN1(
-	IU32 *, pop1	/* pntr to dst/src operand */
-    )
-
-
-   {
-   IU32 src;	/* temp for source */
-   IU32 dst;	/* temp for destination */
-
-   src = *pop1;		/* get source operand */
-
-   /*
-                        =================      =================
-      Munge bytes from  | A | B | C | D |  to  | D | C | B | A |
-                        =================      =================
-    */
-   dst = ((src & 0xff000000) >> 24) |	/* A->D */
-         ((src & 0x00ff0000) >>  8) |	/* B->C */
-         ((src & 0x0000ff00) <<  8) |	/* C->B */
-         ((src & 0x000000ff) << 24);	/* D->A */
-
-   *pop1 = dst;		/* return destination operand */
-   }
-
+#error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
+#line 65

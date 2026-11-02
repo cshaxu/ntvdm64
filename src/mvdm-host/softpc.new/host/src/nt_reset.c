@@ -66,8 +66,16 @@ extern VIDEOFUNCS nt_video_funcs;
 extern KEYBDFUNCS nt_keybd_funcs;
 extern HOSTMOUSEFUNCS the_mouse_funcs;
 
+#ifndef MONITOR
+#line 69
 extern WORD BWVKey;
 extern char achES[];
+#endif
+#line 71
+#ifdef MONITOR
+#error Excluded unsupported monitor IVT declarations
+#endif
+#line 71
 
 
 extern IU8 lcifo[];
@@ -127,6 +135,10 @@ host_reset()
     // on x86 needed now, for fullscreen switch notification.
     //
     ResumeThread(ThreadInfo.HeartBeat.Handle);
+#ifdef MONITOR
+#error Excluded unsupported monitor ICA initialization wait
+#endif
+#line 126
 
 
     host_ica_unlock();
@@ -201,6 +213,8 @@ void  host_applInit(int argc,char *argv[])
                 bSwitchF = TRUE;
                 continue;
             }
+#ifndef MONITOR
+#line 200
             //
             // Check for windowed graphics resize
             //
@@ -216,6 +230,8 @@ void  host_applInit(int argc,char *argv[])
                }
             }
             else
+#endif
+#line 215
             if(tolower(*psz) == 'w'){
                 VDMForWOW = TRUE;
                 if (bSwitchF)

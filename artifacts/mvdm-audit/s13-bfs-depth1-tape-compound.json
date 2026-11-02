@@ -1,0 +1,36 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+  "source_sha256": "dbb9d622d6ac68c28aeaaa243a2a7f2d65e74836df537ce0a979074d75f93284",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
+  "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+  "local_line": 112,
+  "original_line": 100,
+  "anchor": [
+    "#endif /* PM */",
+    "half_word\tmask,\t\t/* interrupt mask\t\t\t*/",
+    "alarm;\t\t/* value read from alarm register\t*/"
+  ],
+  "contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "dbb9d622d6ac68c28aeaaa243a2a7f2d65e74836df537ce0a979074d75f93284",
+      "includes": 194,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "dbb9d622d6ac68c28aeaaa243a2a7f2d65e74836df537ce0a979074d75f93284",
+      "includes": 194,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "limitation": "No runtime or unrelated contexts inferred."
+}

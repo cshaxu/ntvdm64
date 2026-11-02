@@ -19,5 +19,5 @@ extern W32 aw32Sound[];
 
 
 #ifdef DEBUG_OR_WOWPROFILE
-extern INT iSoundMax;
+#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected
 #endif

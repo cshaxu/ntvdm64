@@ -1,0 +1,377 @@
+{
+  "scope": "first-depth #ifndef NTVDM existing sole-error guards in selected sources",
+  "contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "ffa1d65dac15a2b396e4febe9d1ae3c1ba4f04ab2856c85b943d1e3d8f66d28e",
+      "includes": 202,
+      "ntvdm_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          154,
+          "#define NTVDM\t// To enable NT specific base code."
+        ]
+      ],
+      "ntvdm_flags": [
+        "/DNTVDM"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "9721d2572acc6749aeb187eddd51a9d57f34e4c5e8c32bd021502d97849cba0f",
+      "includes": 166,
+      "ntvdm_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          154,
+          "#define NTVDM\t// To enable NT specific base code."
+        ]
+      ],
+      "ntvdm_flags": [
+        "/DNTVDM"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "1430887916bcd42c4f7da75cbdff04a8823658a508b823d61e9784489a1e1152",
+      "includes": 184,
+      "ntvdm_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          154,
+          "#define NTVDM\t// To enable NT specific base code."
+        ]
+      ],
+      "ntvdm_flags": [
+        "/DNTVDM"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "includes": 185,
+      "ntvdm_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          154,
+          "#define NTVDM\t// To enable NT specific base code."
+        ]
+      ],
+      "ntvdm_flags": [
+        "/DNTVDM"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "78193f48952dc08e5cb7ad1fd46e0be227a4a70e9fefc7da1f7b2863e4280016",
+      "includes": 185,
+      "ntvdm_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          154,
+          "#define NTVDM\t// To enable NT specific base code."
+        ]
+      ],
+      "ntvdm_flags": [
+        "/DNTVDM"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "cced3337564ac40552044a79b0eaf0bc858266a8241c6c4f5df19600a4f5931c",
+      "includes": 192,
+      "ntvdm_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          154,
+          "#define NTVDM\t// To enable NT specific base code."
+        ]
+      ],
+      "ntvdm_flags": [
+        "/DNTVDM"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "tests/observation/keyba_observed.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "c1f8f0137fdf3f222f95d294738c9a4c34a358469ac448a0e1f0718bd7c2d5fa",
+      "includes": 203,
+      "ntvdm_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          154,
+          "#define NTVDM\t// To enable NT specific base code."
+        ]
+      ],
+      "ntvdm_flags": [
+        "/DNTVDM"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "ffa1d65dac15a2b396e4febe9d1ae3c1ba4f04ab2856c85b943d1e3d8f66d28e",
+      "includes": 202,
+      "ntvdm_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          154,
+          "#define NTVDM\t// To enable NT specific base code."
+        ]
+      ],
+      "ntvdm_flags": [
+        "/DNTVDM"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "9721d2572acc6749aeb187eddd51a9d57f34e4c5e8c32bd021502d97849cba0f",
+      "includes": 166,
+      "ntvdm_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          154,
+          "#define NTVDM\t// To enable NT specific base code."
+        ]
+      ],
+      "ntvdm_flags": [
+        "/DNTVDM"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "1430887916bcd42c4f7da75cbdff04a8823658a508b823d61e9784489a1e1152",
+      "includes": 184,
+      "ntvdm_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          154,
+          "#define NTVDM\t// To enable NT specific base code."
+        ]
+      ],
+      "ntvdm_flags": [
+        "/DNTVDM"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "includes": 185,
+      "ntvdm_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          154,
+          "#define NTVDM\t// To enable NT specific base code."
+        ]
+      ],
+      "ntvdm_flags": [
+        "/DNTVDM"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "78193f48952dc08e5cb7ad1fd46e0be227a4a70e9fefc7da1f7b2863e4280016",
+      "includes": 185,
+      "ntvdm_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          154,
+          "#define NTVDM\t// To enable NT specific base code."
+        ]
+      ],
+      "ntvdm_flags": [
+        "/DNTVDM"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "cced3337564ac40552044a79b0eaf0bc858266a8241c6c4f5df19600a4f5931c",
+      "includes": 192,
+      "ntvdm_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          154,
+          "#define NTVDM\t// To enable NT specific base code."
+        ]
+      ],
+      "ntvdm_flags": [
+        "/DNTVDM"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "tests/observation/keyba_observed.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "c1f8f0137fdf3f222f95d294738c9a4c34a358469ac448a0e1f0718bd7c2d5fa",
+      "includes": 203,
+      "ntvdm_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          154,
+          "#define NTVDM\t// To enable NT specific base code."
+        ]
+      ],
+      "ntvdm_flags": [
+        "/DNTVDM"
+      ],
+      "errors": ""
+    }
+  ],
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "current_sha256": "ffa1d65dac15a2b396e4febe9d1ae3c1ba4f04ab2856c85b943d1e3d8f66d28e",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "local_line": 364,
+      "original_line": 364,
+      "ordinal": 2,
+      "group_count": 8,
+      "independent_anchors": 7,
+      "individually_anchored": false,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "current_sha256": "78193f48952dc08e5cb7ad1fd46e0be227a4a70e9fefc7da1f7b2863e4280016",
+      "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+      "local_line": 103,
+      "original_line": 113,
+      "ordinal": 3,
+      "group_count": 9,
+      "independent_anchors": 9,
+      "individually_anchored": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "current_sha256": "78193f48952dc08e5cb7ad1fd46e0be227a4a70e9fefc7da1f7b2863e4280016",
+      "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+      "local_line": 132,
+      "original_line": 147,
+      "ordinal": 6,
+      "group_count": 9,
+      "independent_anchors": 9,
+      "individually_anchored": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "current_sha256": "78193f48952dc08e5cb7ad1fd46e0be227a4a70e9fefc7da1f7b2863e4280016",
+      "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+      "local_line": 158,
+      "original_line": 177,
+      "ordinal": 9,
+      "group_count": 9,
+      "independent_anchors": 9,
+      "individually_anchored": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+      "current_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "local_line": 155,
+      "original_line": 148,
+      "ordinal": 2,
+      "group_count": 2,
+      "independent_anchors": 2,
+      "individually_anchored": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "current_sha256": "1430887916bcd42c4f7da75cbdff04a8823658a508b823d61e9784489a1e1152",
+      "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+      "local_line": 349,
+      "original_line": 507,
+      "ordinal": 7,
+      "group_count": 8,
+      "independent_anchors": 8,
+      "individually_anchored": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timestrb.c",
+      "current_sha256": "9721d2572acc6749aeb187eddd51a9d57f34e4c5e8c32bd021502d97849cba0f",
+      "original_sha256": "e314b1b5e88474ac9d1c978b3db71820fee667f7de3eff23b66e48bf0d3532e7",
+      "local_line": 85,
+      "original_line": 86,
+      "ordinal": 1,
+      "group_count": 1,
+      "independent_anchors": 1,
+      "individually_anchored": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
+      "current_sha256": "cced3337564ac40552044a79b0eaf0bc858266a8241c6c4f5df19600a4f5931c",
+      "original_sha256": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+      "local_line": 364,
+      "original_line": 416,
+      "ordinal": 1,
+      "group_count": 2,
+      "independent_anchors": 2,
+      "individually_anchored": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
+      "current_sha256": "cced3337564ac40552044a79b0eaf0bc858266a8241c6c4f5df19600a4f5931c",
+      "original_sha256": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+      "local_line": 375,
+      "original_line": 456,
+      "ordinal": 2,
+      "group_count": 2,
+      "independent_anchors": 2,
+      "individually_anchored": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+    }
+  ],
+  "limits": "ordered matching where independent anchor not unique; non-sole bodies, uncompiled files and nested conditions remain pending; no source changed"
+}

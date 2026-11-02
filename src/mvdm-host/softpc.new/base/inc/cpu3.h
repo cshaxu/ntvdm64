@@ -458,363 +458,363 @@ IMPORT VOID c_setCPL	IPT1(INT, val);
 #endif /* CCPU */
 
 #ifdef A3CPU
-
-/*
- *	Function imports...
- */
-
-/*
- *	cpu_init() - Initialises the 3.0 CPU.
- */
-
-IMPORT VOID		a3_cpu_init IPT0();
-
-/*
- *	cpu_interrupt() - Interrupts the 3.0 CPU.
- */
-#ifdef SWITCHED_CPU
-IMPORT VOID		a3_cpu_interrupt IPT2(CPU_INT_TYPE, type, IU16, number);
-#else
-IMPORT VOID		a3_cpu_interrupt();
-#endif
-
-/*
- *	cpu_simulate() - Performs INTEL CPU emulation.
- */
-IMPORT VOID		_asm_simulate();
-
-IMPORT VOID		a3_cpu_q_ev_set_count();
-IMPORT ULONG		a3_cpu_q_ev_get_count();
-
-#ifndef SWITCHED_CPU
-
-extern IU32 a3_cpu_calc_q_ev_inst_for_time IPT1 (IU32, time);
-
-/*
- *	cpu_EOA_hook() - Resets the 3.0 CPU prior to running the next application.
- */
-IMPORT VOID		a3_cpu_EOA_hook();
-
-/*
- *	cpu_terminate() - Closes down the CPU.
- */
-IMPORT VOID		a3_cpu_terminate();
-
-/*
- *	Intel register Access...
- */
-
-IMPORT half_word	a3_getAL();
-IMPORT half_word	a3_getBL();
-IMPORT half_word	a3_getCL();
-IMPORT half_word	a3_getDL();
-IMPORT half_word	a3_getAH();
-IMPORT half_word	a3_getBH();
-IMPORT half_word	a3_getCH();
-IMPORT half_word	a3_getDH();
-
-IMPORT word		a3_getAX();
-IMPORT word		a3_getBX();
-IMPORT word		a3_getCX();
-IMPORT word		a3_getDX();
-IMPORT word		a3_getSP();
-IMPORT word		a3_getBP();
-IMPORT word		a3_getSI();
-IMPORT word		a3_getDI();
-
-IMPORT word		a3_getIP();
-
-IMPORT word		a3_getCS();
-IMPORT word		a3_getDS();
-IMPORT word		a3_getES();
-IMPORT word		a3_getSS();
-
-IMPORT word		a3_getAF();
-IMPORT word		a3_getCF();
-IMPORT word		a3_getDF();
-IMPORT word		a3_getIF();
-IMPORT word		a3_getIOPL();
-IMPORT word		a3_getNT();
-IMPORT word		a3_getOF();
-IMPORT word		a3_getPF();
-IMPORT word		a3_getSF();
-IMPORT word		a3_getTF();
-IMPORT word		a3_getZF();
-
-IMPORT word		a3_getSTATUS();
-
-IMPORT word		a3_getEM();
-IMPORT word		a3_getMP();
-IMPORT word		a3_getPE();
-IMPORT word		a3_getTS();
-
-IMPORT word		a3_getMSW();
-
-IMPORT sys_addr		a3_getGDT_BASE();
-IMPORT word		a3_getGDT_LIMIT();
-
-IMPORT sys_addr		a3_getIDT_BASE();
-IMPORT word		a3_getIDT_LIMIT();
-
-IMPORT sys_addr		a3_getLDT_BASE();
-IMPORT word		a3_getLDT_LIMIT();
-IMPORT word		a3_getLDT_SELECTOR();
-
-IMPORT sys_addr		a3_getTR_BASE();
-IMPORT word		a3_getTR_LIMIT();
-IMPORT word		a3_getTR_SELECTOR();
-
-IMPORT VOID		a3_setAL();
-IMPORT VOID		a3_setCL();
-IMPORT VOID		a3_setDL();
-IMPORT VOID		a3_setBL();
-IMPORT VOID		a3_setAH();
-IMPORT VOID		a3_setCH();
-IMPORT VOID		a3_setDH();
-IMPORT VOID		a3_setBH();
-
-IMPORT VOID		a3_setAX();
-IMPORT VOID		a3_setCX();
-IMPORT VOID		a3_setDX();
-IMPORT VOID		a3_setBX();
-IMPORT VOID		a3_setSP();
-IMPORT VOID		a3_setBP();
-IMPORT VOID		a3_setSI();
-IMPORT VOID		a3_setDI();
-
-IMPORT VOID		a3_setIP();
-
-IMPORT INT		a3_setES();
-IMPORT INT		a3_setCS();
-IMPORT INT		a3_setSS();
-IMPORT INT		a3_setDS();
-
-IMPORT VOID		a3_setCF();
-IMPORT VOID		a3_setPF();
-IMPORT VOID		a3_setAF();
-IMPORT VOID		a3_setZF();
-IMPORT VOID		a3_setSF();
-IMPORT VOID		a3_setTF();
-IMPORT VOID		a3_setIF();
-IMPORT VOID		a3_setDF();
-IMPORT VOID		a3_setOF();
-IMPORT VOID		a3_setIOPL();
-IMPORT VOID		a3_setNT();
-
-#ifdef CPU_PRIVATE
-
-IMPORT word		a3_p_getCPL();
-IMPORT word		a3_p_getES_SELECTOR();
-IMPORT sys_addr		a3_p_getES_BASE();
-IMPORT word		a3_p_getES_LIMIT();
-IMPORT half_word	a3_p_getES_AR();
-IMPORT VOID		a3_p_setES_SELECTOR();
-IMPORT VOID		a3_p_setES_BASE();
-IMPORT VOID		a3_p_setES_LIMIT();
-IMPORT VOID		a3_p_setES_AR();
-IMPORT word		a3_p_getCS_SELECTOR();
-IMPORT sys_addr		a3_p_getCS_BASE();
-IMPORT word		a3_p_getCS_LIMIT();
-IMPORT half_word	a3_p_getCS_AR();
-IMPORT VOID		a3_p_setCS_SELECTOR();
-IMPORT VOID		a3_p_setCS_BASE();
-IMPORT VOID		a3_p_setCS_LIMIT();
-IMPORT VOID		a3_p_setCS_AR();
-IMPORT word		a3_p_getDS_SELECTOR();
-IMPORT sys_addr		a3_p_getDS_BASE();
-IMPORT word		a3_p_getDS_LIMIT();
-IMPORT half_word	a3_p_getDS_AR();
-IMPORT VOID		a3_p_setDS_SELECTOR();
-IMPORT VOID		a3_p_setDS_BASE();
-IMPORT VOID		a3_p_setDS_LIMIT();
-IMPORT VOID		a3_p_setDS_AR();
-IMPORT word		a3_p_getSS_SELECTOR();
-IMPORT sys_addr		a3_p_getSS_BASE();
-IMPORT word		a3_p_getSS_LIMIT();
-IMPORT half_word	a3_p_getSS_AR();
-IMPORT VOID		a3_p_setSS_SELECTOR();
-IMPORT VOID		a3_p_setSS_BASE();
-IMPORT VOID		a3_p_setSS_LIMIT();
-IMPORT VOID		a3_p_setSS_AR();
-IMPORT VOID		a3_p_setPE();
-IMPORT VOID		a3_p_setMP();
-IMPORT VOID		a3_p_setEM();
-IMPORT VOID		a3_p_setTS();
-IMPORT VOID		a3_p_setMSW();
-IMPORT VOID		a3_p_setCPL();
-IMPORT VOID		a3_p_setGDT_BASE();
-IMPORT VOID		a3_p_setGDT_LIMIT();
-IMPORT VOID		a3_p_setIDT_BASE();
-IMPORT VOID		a3_p_setIDT_LIMIT();
-IMPORT VOID		a3_p_setLDT_SELECTOR();
-IMPORT VOID		a3_p_setLDT_BASE();
-IMPORT VOID		a3_p_setLDT_LIMIT();
-IMPORT VOID		a3_p_setTR_SELECTOR();
-IMPORT VOID		a3_p_setTR_BASE();
-IMPORT VOID		a3_p_setTR_LIMIT();
-
-#endif /* CPU_PRIVATE */
-#endif /* SWITCHED_CPU */
+#error Excluded unsupported A3CPU configuration
 
 
-/*
- *	Macro definitions...
- */
 
-#define cpu_init		a3_cpu_init
-#define cpu_simulate		_asm_simulate
-#define	host_q_ev_set_count	a3_cpu_q_ev_set_count
-#define	host_q_ev_get_count	a3_cpu_q_ev_get_count
-#ifndef host_calc_q_ev_inst_for_time
-#define	host_calc_q_ev_inst_for_time	a3_cpu_calc_q_ev_inst_for_time
-#endif /* host_calc_q_ev_inst_for_time */
-#define cpu_EOA_hook		a3_cpu_EOA_hook
-#define cpu_terminate		a3_cpu_terminate
 
-/*
- *	Intel register Access...
- */
 
-#ifndef getAX
 
-#define cpu_interrupt		a3_cpu_interrupt
 
-#define getAL		a3_getAL
-#define getBL		a3_getBL
-#define getCL		a3_getCL
-#define getDL		a3_getDL
-#define getAH		a3_getAH
-#define getBH		a3_getBH
-#define getCH		a3_getCH
-#define getDH		a3_getDH
-#define getAX		a3_getAX
-#define getBX		a3_getBX
-#define getCX		a3_getCX
-#define getDX		a3_getDX
-#define getSP		a3_getSP
-#define getBP		a3_getBP
-#define getSI		a3_getSI
-#define getDI		a3_getDI
-#define getIP		a3_getIP
-#define getCS		a3_getCS
-#define getDS		a3_getDS
-#define getES		a3_getES
-#define getSS		a3_getSS
-#define getAF		a3_getAF
-#define getCF		a3_getCF
-#define getDF		a3_getDF
-#define getIF		a3_getIF
-#define getIOPL		a3_getIOPL
-#define getNT		a3_getNT
-#define getOF		a3_getOF
-#define getPF		a3_getPF
-#define getSF		a3_getSF
-#define getTF		a3_getTF
-#define getZF		a3_getZF
-#define getSTATUS	a3_getSTATUS
-#define getEM		a3_getEM
-#define getMP		a3_getMP
-#define getPE		a3_getPE
-#define getTS		a3_getTS
-#define getMSW		a3_getMSW
-#define getGDT_BASE	a3_getGDT_BASE
-#define getGDT_LIMIT	a3_getGDT_LIMIT
-#define getIDT_BASE	a3_getIDT_BASE
-#define getIDT_LIMIT	a3_getIDT_LIMIT
-#define getLDT_BASE	a3_getLDT_BASE
-#define getLDT_LIMIT	a3_getLDT_LIMIT
-#define getLDT_SELECTOR	a3_getLDT_SELECTOR
-#define getTR_BASE	a3_getTR_BASE
-#define getTR_LIMIT	a3_getTR_LIMIT
-#define getTR_SELECTOR	a3_getTR_SELECTOR
-#define setAL		a3_setAL
-#define setCL		a3_setCL
-#define setDL		a3_setDL
-#define setBL		a3_setBL
-#define setAH		a3_setAH
-#define setCH		a3_setCH
-#define setDH		a3_setDH
-#define setBH		a3_setBH
-#define setAX		a3_setAX
-#define setCX		a3_setCX
-#define setDX		a3_setDX
-#define setBX		a3_setBX
-#define setSP		a3_setSP
-#define setBP		a3_setBP
-#define setSI		a3_setSI
-#define setDI		a3_setDI
-#define setIP		a3_setIP
-#define setES		a3_setES
-#define setCS		a3_setCS
-#define setSS		a3_setSS
-#define setDS		a3_setDS
-#define setCF		a3_setCF
-#define setPF		a3_setPF
-#define setAF		a3_setAF
-#define setZF		a3_setZF
-#define setSF		a3_setSF
-#define setTF		a3_setTF
-#define setIF		a3_setIF
-#define setDF		a3_setDF
-#define setOF		a3_setOF
-#define setIOPL		a3_setIOPL
-#define setNT		a3_setNT
 
-#endif /* getAX */
 
-#ifdef CPU_PRIVATE
 
-#define getCPL		a3_p_getCPL
-#define getES_SELECTOR	a3_p_getES_SELECTOR
-#define getCS_SELECTOR	a3_p_getCS_SELECTOR
-#define getSS_SELECTOR	a3_p_getSS_SELECTOR
-#define getDS_SELECTOR	a3_p_getDS_SELECTOR
-#define getES_BASE	a3_p_getES_BASE
-#define getCS_BASE	a3_p_getCS_BASE
-#define getDS_BASE	a3_p_getDS_BASE
-#define getSS_BASE	a3_p_getSS_BASE
-#define getES_LIMIT	a3_p_getES_LIMIT
-#define getCS_LIMIT	a3_p_getCS_LIMIT
-#define getDS_LIMIT	a3_p_getDS_LIMIT
-#define getSS_LIMIT	a3_p_getSS_LIMIT
-#define getES_AR	a3_p_getES_AR
-#define getCS_AR	a3_p_getCS_AR
-#define getDS_AR	a3_p_getDS_AR
-#define getSS_AR	a3_p_getSS_AR
-#define setES_SELECTOR	a3_p_setES_SELECTOR
-#define setCS_SELECTOR	a3_p_setCS_SELECTOR
-#define setSS_SELECTOR	a3_p_setSS_SELECTOR
-#define setDS_SELECTOR	a3_p_setDS_SELECTOR
-#define setES_BASE	a3_p_setES_BASE
-#define setCS_BASE	a3_p_setCS_BASE
-#define setDS_BASE	a3_p_setDS_BASE
-#define setSS_BASE	a3_p_setSS_BASE
-#define setES_LIMIT	a3_p_setES_LIMIT
-#define setCS_LIMIT	a3_p_setCS_LIMIT
-#define setDS_LIMIT	a3_p_setDS_LIMIT
-#define setSS_LIMIT	a3_p_setSS_LIMIT
-#define setES_AR	a3_p_setES_AR
-#define setCS_AR	a3_p_setCS_AR
-#define setDS_AR	a3_p_setDS_AR
-#define setSS_AR	a3_p_setSS_AR
-#define setPE		a3_p_setPE
-#define setMP		a3_p_setMP
-#define setEM		a3_p_setEM
-#define setTS		a3_p_setTS
-#define setMSW		a3_p_setMSW
-#define setCPL		a3_p_setCPL
-#define setGDT_BASE	a3_p_setGDT_BASE
-#define setGDT_LIMIT	a3_p_setGDT_LIMIT
-#define setIDT_BASE	a3_p_setIDT_BASE
-#define setIDT_LIMIT	a3_p_setIDT_LIMIT
-#define setLDT_SELECTOR	a3_p_setLDT_SELECTOR
-#define setLDT_BASE	a3_p_setLDT_BASE
-#define setLDT_LIMIT	a3_p_setLDT_LIMIT
-#define setTR_SELECTOR	a3_p_setTR_SELECTOR
-#define setTR_BASE	a3_p_setTR_BASE
-#define setTR_LIMIT	a3_p_setTR_LIMIT
 
-#endif /* CPU_PRIVATE */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif /* A3CPU */
 
@@ -1046,13 +1046,13 @@ IMPORT   IU32  a3_setGS                IPT1(IU16, val);
 #endif
 
 #ifdef IRET_HOOKS
-#ifdef CCPU
-IMPORT   VOID c_Cpu_set_hook_selector  IPT1(IU16, selector);
-#define  Cpu_set_hook_selector         c_Cpu_set_hook_selector
-#else
-IMPORT   VOID a3_Cpu_set_hook_selector IPT1(IU16, selector);
-#define  Cpu_set_hook_selector         a3_Cpu_set_hook_selector
-#endif
+#error Excluded unsupported IRET_HOOKS configuration
+
+
+
+
+
+
 #endif /* IRET_HOOKS */
 
 #ifdef CPU_PRIVATE
@@ -1166,18 +1166,18 @@ extern IU32 GetStackPointer IPT0();
 #endif /* SPC386 */
 
 #ifdef IRET_HOOKS
-/*
- * The interfaces provided by the CPU so that the ICA can initiate and
- * terminate an iret hook.
- */
+#error Excluded unsupported IRET_HOOKS configuration
 
-extern void Cpu_do_hook IPT2(IUM8, line, IBOOL, is_hooked);
-extern void Cpu_inter_hook_processing IPT1(IUM8, line);
-extern void Cpu_unhook IPT1(IUM8, line_number);
-#ifdef GISP_CPU
-extern void Cpu_set_hook_selector IPT1(IU16, selector);
-extern void Cpu_hook_bop IPT0();
-#endif
+
+
+
+
+
+
+
+
+
+
 
 #endif /* IRET_HOOKS */
 

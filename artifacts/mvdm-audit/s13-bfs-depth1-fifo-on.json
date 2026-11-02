@@ -1,0 +1,223 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+  "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+  "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+  "contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "includes": 189,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "includes": 189,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "classified": [
+    {
+      "local_line": 90,
+      "original_line": 90,
+      "anchors": [
+        [
+          "before",
+          90,
+          [
+            "MODEM_CONTROL_REG modem_control_reg;",
+            "LINE_STATUS_REG line_status_reg;",
+            "MODEM_STATUS_REG modem_status_reg;"
+          ]
+        ],
+        [
+          "after",
+          90,
+          [
+            "half_word scratch;      /* scratch register */",
+            "int break_state;        /* either OFF or ON */",
+            "int loopback_state;     /* either OFF or ON */"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported FIFO_ON configuration"
+    },
+    {
+      "local_line": 158,
+      "original_line": 166,
+      "anchors": [
+        [
+          "before",
+          166,
+          [
+            "*\tthat they can be accessed from some SUN_VA code. Please do not make",
+            "*\tthem static.",
+            "*/"
+          ]
+        ],
+        [
+          "after",
+          166,
+          [
+            "unsigned long RX_delay[] =",
+            "{",
+            "34, /* 115200 baud */"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported FIFO_ON configuration"
+    },
+    {
+      "local_line": 396,
+      "original_line": 406,
+      "anchors": [
+        [
+          "before",
+          406,
+          [
+            "asp->int_id_reg.bits.interrupt_ID = RDA_INT;",
+            "asp->int_id_reg.bits.no_int_pending = 0;",
+            "}"
+          ]
+        ],
+        [
+          "after",
+          406,
+          [
+            "else if ( asp->tx_holding_register_empty_interrupt_state == ON )",
+            "{",
+            "asp->int_id_reg.bits.interrupt_ID = THRE_INT;"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported FIFO_ON configuration"
+    },
+    {
+      "local_line": 431,
+      "original_line": 441,
+      "anchors": [
+        [
+          "after",
+          441,
+          [
+            ")",
+            "{",
+            "#ifndef DELAYED_INTS"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported FIFO_ON configuration"
+    },
+    {
+      "local_line": 455,
+      "original_line": 465,
+      "anchors": [
+        [
+          "after",
+          465,
+          [
+            ")",
+            "{",
+            "ica_clear_int(0, asp->hw_interrupt_priority);"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported FIFO_ON configuration"
+    },
+    {
+      "local_line": 463,
+      "original_line": 473,
+      "anchors": [
+        [
+          "before",
+          473,
+          [
+            "ica_clear_int(0, asp->hw_interrupt_priority);",
+            "}",
+            "}"
+          ]
+        ],
+        [
+          "after",
+          473,
+          [
+            "static void com_flush_input IFN1(int, adapter)",
+            "{",
+            "struct ADAPTER_STATE *asp = &adapter_state[adapter];"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported FIFO_ON configuration"
+    },
+    {
+      "local_line": 697,
+      "original_line": 835,
+      "anchors": [
+        [
+          "before",
+          835,
+          [
+            "asp->line_status_reg.bits.break_interrupt = 0;",
+            "asp->receiver_line_status_interrupt_state = OFF;",
+            "clear_interrupt(asp);"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported FIFO_ON configuration"
+    },
+    {
+      "local_line": 916,
+      "original_line": 1171,
+      "anchors": [
+        [
+          "after",
+          1171,
+          [
+            "case RS232_LCR:",
+            "#ifdef NTVDM",
+            "that probe the UART and those that use it. Probes of the UART"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported FIFO_ON configuration"
+    },
+    {
+      "local_line": 2105,
+      "original_line": 2543,
+      "anchors": [
+        [
+          "before",
+          2543,
+          [
+            "asp->rts_state = ON;",
+            "asp->out1_state = ON;",
+            "asp->out2_state = ON;"
+          ]
+        ],
+        [
+          "after",
+          2543,
+          [
+            "com_critical_reset(adapter);",
+            "set_baud_rate(adapter);",
+            "set_line_control(adapter, 0);"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported FIFO_ON configuration"
+    }
+  ],
+  "limitations": [
+    "Other build contexts require independent evidence.",
+    "No runtime or guest validation implied."
+  ]
+}

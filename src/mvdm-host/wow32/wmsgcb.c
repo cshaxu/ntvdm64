@@ -20,47 +20,9 @@ MODNAME(wmsgcb.c);
 
 
 #ifdef DEBUG
-
-MSGINFO amiCB[] = {
-   {OLDCB_GETEDITSEL,       "CB_GETEDITSEL"},       // 0x0400
-   {OLDCB_LIMITTEXT,        "CB_LIMITTEXT"},        // 0x0401
-   {OLDCB_SETEDITSEL,       "CB_SETEDITSEL"},       // 0x0402
-   {OLDCB_ADDSTRING,        "CB_ADDSTRING"},        // 0x0403
-   {OLDCB_DELETESTRING,     "CB_DELETESTRING"},     // 0x0404
-   {OLDCB_DIR,          "CB_DIR"},          // 0x0405
-   {OLDCB_GETCOUNT,     "CB_GETCOUNT"},         // 0x0406
-   {OLDCB_GETCURSEL,        "CB_GETCURSEL"},        // 0x0407
-   {OLDCB_GETLBTEXT,        "CB_GETLBTEXT"},        // 0x0408
-   {OLDCB_GETLBTEXTLEN,     "CB_GETLBTEXTLEN"},     // 0x0409
-   {OLDCB_INSERTSTRING,     "CB_INSERTSTRING"},     // 0x040A
-   {OLDCB_RESETCONTENT,     "CB_RESETCONTENT"},     // 0x040B
-   {OLDCB_FINDSTRING,       "CB_FINDSTRING"},       // 0x040C
-   {OLDCB_SELECTSTRING,     "CB_SELECTSTRING"},     // 0x040D
-   {OLDCB_SETCURSEL,        "CB_SETCURSEL"},        // 0x040E
-   {OLDCB_SHOWDROPDOWN,     "CB_SHOWDROPDOWN"},     // 0x040F
-   {OLDCB_GETITEMDATA,      "CB_GETITEMDATA"},      // 0x0410
-   {OLDCB_SETITEMDATA,      "CB_SETITEMDATA"},      // 0x0411
-   {OLDCB_GETDROPPEDCONTROLRECT,"CB_GETDROPPEDCONTROLRECT"},    // 0x0412
-   {OLDCB_SETITEMHEIGHT,    "CB_SETITEMHEIGHT"},        // 0x0413
-   {OLDCB_GETITEMHEIGHT,    "CB_GETITEMHEIGHT"},        // 0x0414
-   {OLDCB_SETEXTENDEDUI,    "CB_SETEXTENDEDUI"},        // 0x0415
-   {OLDCB_GETEXTENDEDUI,    "CB_GETEXTENDEDUI"},        // 0x0416
-   {OLDCB_GETDROPPEDSTATE,  "CB_GETDROPPEDSTATE"},      // 0x0417
-   {OLDCB_FINDSTRINGEXACT,  "CB_FINDSTRINGEXACT"},      // 0x0418
-};
-
-PSZ GetCBMsgName(WORD wMsg)
-{
-    INT i;
-    register PMSGINFO pmi;
-
-    for (pmi=amiCB,i=NUMEL(amiCB); i>0; i--,pmi++)
-        if ((WORD)pmi->uMsg == wMsg)
-        return pmi->pszMsgName;
-    return GetWMMsgName(wMsg);
-}
-
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 64
 
 
 

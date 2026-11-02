@@ -26,6 +26,10 @@ Revision History:
  * environment supplies the process address ceiling and status raising. */
 #define WOW_ORIGINAL_USER_PROBE
 #include "wow_user_probe_bindings.h"
+#if defined(ALLOC_PRAGMA)
+#error DIVERGENCE OPENNT-HOST-144: kernel allocation pragma profile is not selected
+#endif
+#line 29
 
 #undef ProbeForRead
 NTKERNELAPI

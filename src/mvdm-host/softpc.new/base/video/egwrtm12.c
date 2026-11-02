@@ -121,16 +121,16 @@ SIGNALS ISSUED	  :	NONE
 /* [5.1.1 #DEFINES]							*/
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#ifdef PROD
-#include "SOFTPC_EGA.seg"
-#else
-#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
-#endif
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
+
+
+
+
 #endif
 
 /* [5.1.2 TYPEDEF, STRUCTURE, ENUM DECLARATIONS]			*/
@@ -298,12 +298,12 @@ fill_both_bytes IFN3(USHORT, data, USHORT *, dest, ULONG, len )
 
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_EGA_CHN.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 VOID

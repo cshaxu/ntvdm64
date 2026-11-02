@@ -17,12 +17,12 @@
 #endif
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_COMMS.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 /*
@@ -88,12 +88,12 @@ static struct ADAPTER_STATE
 	LINE_STATUS_REG line_status_reg;
 	MODEM_STATUS_REG modem_status_reg;
 #if defined(NTVDM) && defined(FIFO_ON)
-    FIFO_CONTROL_REG  fifo_control_reg;
-    FIFORXDATA  rx_fifo[FIFO_BUFFER_SIZE];
-    half_word   rx_fifo_write_counter;
-    half_word   rx_fifo_read_counter;
-    half_word   fifo_trigger_counter;
-    int fifo_timeout_interrupt_state;
+#error Excluded unsupported FIFO_ON configuration
+
+
+
+
+
 #endif
 	half_word scratch;      /* scratch register */
 
@@ -156,7 +156,7 @@ static LINE_CONTROL_REG LCRFlushMask;
  */
 
 #if defined(NTVDM) && defined(FIFO_ON)
-static half_word    level_to_counter[4] = { 1, 4, 8, 14};
+#error Excluded unsupported FIFO_ON configuration
 #endif
 
 /*
@@ -394,11 +394,11 @@ static void generate_iir IFN1(struct ADAPTER_STATE *, asp)
 		asp->int_id_reg.bits.no_int_pending = 0;
 	}
 #if defined(NTVDM) && defined(FIFO_ON)
-    else if (asp->fifo_timeout_interrupt_state == ON)
-    {
-        asp->int_id_reg.bits.interrupt_ID = FIFO_INT;
-        asp->int_id_reg.bits.no_int_pending = 0;
-    }
+#error Excluded unsupported FIFO_ON configuration
+
+
+
+
 #endif
 	else if ( asp->tx_holding_register_empty_interrupt_state == ON )
 	{
@@ -429,7 +429,7 @@ static void raise_interrupt IFN1(struct ADAPTER_STATE *, asp)
 	&&   ( asp->tx_holding_register_empty_interrupt_state == OFF )
 	&&   ( asp->modem_status_interrupt_state              == OFF ) 
 #if defined(NTVDM) && defined(FIFO_ON)
-    &&   (asp->fifo_timeout_interrupt_state               == OFF )
+#error Excluded unsupported FIFO_ON configuration
 #endif
        )
 	{
@@ -453,7 +453,7 @@ static void clear_interrupt IFN1(struct ADAPTER_STATE *, asp)
 	&&   ( asp->tx_holding_register_empty_interrupt_state == OFF )
 	&&   ( asp->modem_status_interrupt_state              == OFF ) 
 #if defined(NTVDM) && defined(FIFO_ON)
-    &&   ( asp->fifo_timeout_interrupt_state              == OFF )
+#error Excluded unsupported FIFO_ON configuration
 #endif
        )
 	{
@@ -461,25 +461,25 @@ static void clear_interrupt IFN1(struct ADAPTER_STATE *, asp)
 	}
 }
 #if defined(NTVDM) && defined(FIFO_ON)
+#error Excluded unsupported FIFO_ON configuration
 
-static void raise_fifo_timeout_interrupt(struct ADAPTER_STATE *asp)
-{
-    if (( asp->modem_control_reg.bits.OUT2 == 0 ) &&
-        ( asp->loopback_state == OFF ))
-        return;
 
-    /*
-     * Check if data available interrupt is enabled
-     */
-    if ( asp->int_enable_reg.bits.data_available == 0 )
-        return;
 
-    /*
-     * Raise interrupt
-     */
-    raise_interrupt(asp);
-    asp->fifo_timeout_interrupt_state = ON;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif
 
 
@@ -597,37 +597,9 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 #endif /* NTVDM */
 
 #ifndef NTVDM
-#ifdef IRET_HOOKS
-					if (!asp->batch_running) {
-						asp->batch_running = TRUE;
-						asp->current_count = 1;
-						asp->qev_running = TRUE;
-						if (!qev_running) {
-							qev_running = TRUE;
-#ifdef GISP_CPU
-#error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
-#else
-							add_q_event_t(next_batch, MIN_COMMS_RX_QEV, adapter);
-#endif
-						}
-					} else { /* batch running */
-						asp->current_count++;
-					}
-#else /* IRET_HOOKS */
-					host_com_ioctl(adapter, HOST_COM_INPUT_READY,
-						(long)&input_ready);
-					if (input_ready)
-#ifdef DELAYED_INTS
-						recv_char((long)adapter);
-#else
-						add_q_event_t(recv_char,
-							RX_delay[asp->com_baud_ind],
-							adapter);
-#endif /* DELAYED_INTS */
-					else
-						com_critical_reset(adapter);
-#endif /* IRET_HOOKS */
+#error Excluded unsupported non-NTVDM serial profile
 #endif /* !NTVDM */
+#line 631
 				}
 
 
@@ -723,7 +695,7 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		asp->receiver_line_status_interrupt_state = OFF;
 		clear_interrupt(asp);
 #if defined(NTVDM) && defined(FIFO_ON)
-        asp->fifo_timeout_interrupt_state = OFF;
+#error Excluded unsupported FIFO_ON configuration
 #endif
 	
 #ifdef SHORT_TRACE
@@ -942,33 +914,33 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		break;
 		
 #if defined(NTVDM) && defined(FIFO_ON)
-    case RS232_FIFO:
-        {
-        FIFO_CONTROL_REG    new_reg;
-        new_reg.all = value;
-        if (new_reg.bits.enabled != asp->fifo_control_reg.bits.enabled)
-        {
-            /* fifo enable state change, clear the fifo */
-            asp->rx_fifo_write_counter = 0;
-            asp->rx_fifo_read_counter = 0;
+#error Excluded unsupported FIFO_ON configuration
 
-        }
-        if (new_reg.bits.enabled != 0) {
-            asp->fifo_trigger_counter = level_to_counter[new_reg.bits.trigger_le
-vel];
-            if (new_reg.bits.rx_reset) {
-            asp->rx_fifo_write_counter = 0;
-            asp->rx_fifo_read_counter = 0;
-            }
-            asp->int_id_reg.bits.fifo_enabled = 3;
-        }
-        else {
-            asp->fifo_control_reg.bits.enabled = 0;
-            asp->int_id_reg.bits.fifo_enabled = 0;
-        }
-        asp->fifo_control_reg.all = new_reg.all;
-        break;
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #else /* !(NTVDM && FIFO_ON) */
 	case RS232_IIR:
 		/* 
@@ -1098,117 +1070,117 @@ vel];
 
 
 #ifdef IRET_HOOKS
-/*(
- *========================== com_hook_again() ==================================
- * com_hook_again
- *
- * Purpose
- *	This is the function that we tell the ica to call when a comms
- *	interrupt service routine IRETs.
- *
- * Input
- *	adapter_id	The adapter id for the line. (Note the caller doesn't
- *			know what this is, he's just returning something
- *			we gave him earlier).
- *
- * Outputs
- *	return	TRUE if there are more interrupts to service, FALSE otherwise.
- *
- * Description
- *	First we call host_com_ioctl to find out if there are characters
- *	waiting.  If not, or we have reached the end of the current batch,
- *	we mark the end of batch and return FALSE.
- *	Otherwise we call recv_char() to kick-off the next character
- *	and return TRUE.
-)*/
-
-LOCAL IBOOL		/* local because we pass a pointer to it */
-com_hook_again IFN1(IUM32, adapter)
-{
-	int input_ready;	/* the host wants a pointer to an 'int'! */
-	struct ADAPTER_STATE *asp = &adapter_state[adapter];
-
-	host_com_ioctl(adapter, HOST_COM_INPUT_READY, (long)&input_ready);
-
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-
-	if((!input_ready)  || (asp->current_count >= asp->batch_size)) {
-		asp->batch_running = FALSE;
-		return(FALSE);
-	} else {
-		recv_char((long)adapter);
-		return(TRUE);	/* more to do */
-	}
-}
-
-/*(
- *========================== next_batch() ==================================
- * next_batch
- *
- * Purpose
- *	This function is called by the quick event system to kick-off the
- *	next batch of characters.
- *
- * Input
- *	dummy		Sometimes the adapter id, sometimes not.  Don't
- *			use it!
- *
- * Outputs
- *	None.
- *
- * Description
- *	If a batch is already running, now would not be a good time
- *	to start another, so we simply press the snooze button.
- *	Otherwise we check whether there is any data to process,
- *	and if so kick-off the next batch.
-)*/
-
-LOCAL void
-next_batch IFN1 (long, dummy)
-{
-	int input_ready;	/* the host wants a pointer to an 'int'! */
-	IUM8	adapter;	/* check all adapters */
-	struct ADAPTER_STATE *asp;
-	IBOOL	new_qe_reqd;	/* Do we need to restart the quick event */
-
-	UNUSED(dummy);
-
-	new_qe_reqd = FALSE;	/* Dont need another by default */
-
-	for (adapter = 0; adapter < NUM_SERIAL_PORTS; adapter++) {
-		asp = &adapter_state[adapter];
+#error Excluded unsupported IRET_HOOKS configuration
 
 
-		if (asp->batch_running) {
-			new_qe_reqd = TRUE;	/* not finished yet */
-		} else if (asp->qev_running) {
-			/*
-			 * We need to set qev running to false, as it has now
-			 * finished. If there is data to process, we call
-			 * recv_char() which will start-off a new batch (and
-			 * set the batch_running flag).
-			 */
-	
-			asp->qev_running = FALSE;
-			host_com_ioctl((int)adapter,HOST_COM_INPUT_READY, (long)&input_ready);
-			if(input_ready) {
-				recv_char((int)adapter);
-			}
-		}
-	}
-	if (new_qe_reqd) {
-#ifdef GISP_CPU
-#error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
-#else
-		add_q_event_t(next_batch, MIN_COMMS_RX_QEV, 0);
-#endif
-		sure_note_trace0(RS232_VERBOSE, "Reset batch quick event");
-	} else {
-		qev_running = FALSE;
-	}
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif /* of ifdef IRET_HOOKS */
 
@@ -1632,26 +1604,7 @@ static void set_baud_rate IFN1(int, adapter)
 	com_flush_input(adapter);
 
 #ifndef NTVDM
-
-	/*
-	 * Check for valid divisor latch
-	 */
-	for (i = 0; i < no_valid_latches && asp->divisor_latch.all !=
-		valid_latches[i]; i++)
-			;
-	
-	if (i < no_valid_latches)	/* ie map found */
-	{
-		host_com_ioctl(adapter, HOST_COM_BAUD, speeds[i]);
-		asp->com_baud_ind = i;
-		sure_note_trace3(RS232_VERBOSE,
-			" delay for baud %d RX:%d TX:%d", bauds[i],
-			RX_delay[i], TX_delay[i]);
-#ifdef IRET_HOOKS
-#error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
-#endif /* IRET_HOOKS */
-#line 1653
-	}
+#error Excluded unsupported non-NTVDM serial profile
 #else /* NTVDM */
 #line 1655
     //The host is not limited in the baud rates that it supports
@@ -2072,12 +2025,12 @@ void com2_flush_printer IFN0()
 
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_INIT.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 static void com_reset IFN1(int, adapter)
@@ -2150,13 +2103,13 @@ static void com_reset IFN1(int, adapter)
 	asp->out1_state = ON;
 	asp->out2_state = ON;
 #if defined(NTVDM) && defined(FIFO_ON)
-    /* disable fifo */
-    asp->fifo_control_reg.all = 0;
-    asp->int_id_reg.bits.fifo_enabled = 0;
-    asp->rx_fifo_write_counter = 0;
-    asp->rx_fifo_read_counter = 0;
-    asp->fifo_trigger_counter = 1;
-    asp->fifo_timeout_interrupt_state = OFF;
+#error Excluded unsupported FIFO_ON configuration
+
+
+
+
+
+
 #endif
 		
 	/*

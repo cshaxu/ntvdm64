@@ -1,0 +1,180 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+    "before_sha256": "1e257c03f0c9ba553bf8d6883b6da91fd1645092e46a2340e32ac27630597f43",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+    "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+    "local_arm_lines": [
+      599,
+      630
+    ],
+    "original_arm_lines": [
+      637,
+      668
+    ],
+    "removed_local_body_sha256": "5d0329951a107ff137a6485909b9689003ad436d19cad25641cba2ad9f275450",
+    "original_body_sha256": "1c05e96c51753380dfec547a37839ad04ab86289e6607d5bedce54f0d3cc77bf",
+    "removed_local_body_lines": 30,
+    "same_original_after_newlines": false,
+    "subsumed_existing_markers": {},
+    "retained_sibling": false,
+    "following_logical_line": 631,
+    "status": "selected preprocessing and focused guard controls passed; x86 objects compiled; full integration pending",
+    "after_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+    "current_start_line": 599,
+    "error_marker": "Excluded unsupported non-NTVDM serial profile",
+    "continuation_line": 631,
+    "child_queue_groups_removed": 3,
+    "registration": "MVDM-HOST-DIV-570"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+    "before_sha256": "1e257c03f0c9ba553bf8d6883b6da91fd1645092e46a2340e32ac27630597f43",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+    "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+    "local_arm_lines": [
+      1634,
+      1655
+    ],
+    "original_arm_lines": [
+      2002,
+      2030
+    ],
+    "removed_local_body_sha256": "e49f03d080172681ad4ed3519be7087fd5ca84c76b04061211316370568c4e0b",
+    "original_body_sha256": "792129f3c1a28596bd67e985be90482be6fa6fa004dcef764b47cc9ad3dd29df",
+    "removed_local_body_lines": 20,
+    "same_original_after_newlines": false,
+    "subsumed_existing_markers": {
+      "MVDM-HOST-DIV-525": 1
+    },
+    "retained_sibling": true,
+    "following_logical_line": null,
+    "status": "selected preprocessing and focused guard controls passed; x86 objects compiled; full integration pending",
+    "after_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+    "current_start_line": 1606,
+    "error_marker": "Excluded unsupported non-NTVDM serial profile",
+    "continuation_line": 1655,
+    "child_queue_groups_removed": 3,
+    "registration": "MVDM-HOST-DIV-570"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "before_sha256": "0088ec167676cd6472c9b59113eb76de9d48fb11e65ad94b9e2796053fdaa53a",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+    "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+    "local_arm_lines": [
+      953,
+      964
+    ],
+    "original_arm_lines": [
+      1025,
+      1036
+    ],
+    "removed_local_body_sha256": "7a8895bb644a2c27a1922d4a57024b0fc2d490fe966959503b6fe174b9da578e",
+    "original_body_sha256": "97fda1fb3b5deeddca67ba866b29a16d4ab2a0292b677e2ae8047e533c5e55ea",
+    "removed_local_body_lines": 10,
+    "same_original_after_newlines": false,
+    "subsumed_existing_markers": {
+      "MVDM-HOST-DIV-500": 1
+    },
+    "retained_sibling": false,
+    "following_logical_line": 964,
+    "status": "selected preprocessing and focused guard controls passed; x86 objects compiled; full integration pending",
+    "after_sha256": "8bcfec70e88ad230ef3259c4ecccb2f29032ba743f27653c6326994556feca3b",
+    "current_start_line": 953,
+    "error_marker": "Excluded unsupported non-NTVDM timer profile",
+    "continuation_line": 964,
+    "child_queue_groups_removed": 7,
+    "registration": "MVDM-HOST-DIV-570"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "before_sha256": "0088ec167676cd6472c9b59113eb76de9d48fb11e65ad94b9e2796053fdaa53a",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+    "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+    "local_arm_lines": [
+      1640,
+      1681
+    ],
+    "original_arm_lines": [
+      1737,
+      1783
+    ],
+    "removed_local_body_sha256": "b8b55931b599ecbd442261d1cf032d90706181b38feb2106b55a533c7aa15435",
+    "original_body_sha256": "0127b30b3b12a955e6f541b23653c2419a53b6600da7bfca7b273a5e351434b9",
+    "removed_local_body_lines": 40,
+    "same_original_after_newlines": false,
+    "subsumed_existing_markers": {
+      "MVDM-HOST-DIV-500": 2
+    },
+    "retained_sibling": false,
+    "following_logical_line": 1681,
+    "status": "selected preprocessing and focused guard controls passed; x86 objects compiled; full integration pending",
+    "after_sha256": "8bcfec70e88ad230ef3259c4ecccb2f29032ba743f27653c6326994556feca3b",
+    "current_start_line": 1632,
+    "error_marker": "Excluded unsupported non-NTVDM timer profile",
+    "continuation_line": 1681,
+    "child_queue_groups_removed": 7,
+    "registration": "MVDM-HOST-DIV-570"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "before_sha256": "0088ec167676cd6472c9b59113eb76de9d48fb11e65ad94b9e2796053fdaa53a",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+    "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+    "local_arm_lines": [
+      2247,
+      2315
+    ],
+    "original_arm_lines": [
+      2455,
+      2533
+    ],
+    "removed_local_body_sha256": "98c64162f95eaea0f9f136f2e63f4c9b15a299d2be30d5a838a2cc9a6fff90e5",
+    "original_body_sha256": "7be76c0dbc9031c9dabb2015ef8e109aa5441e2cec661ecf987f78c5882bff52",
+    "removed_local_body_lines": 67,
+    "same_original_after_newlines": false,
+    "subsumed_existing_markers": {
+      "MVDM-HOST-DIV-500": 3
+    },
+    "retained_sibling": false,
+    "following_logical_line": 2310,
+    "status": "selected preprocessing and focused guard controls passed; x86 objects compiled; full integration pending",
+    "after_sha256": "8bcfec70e88ad230ef3259c4ecccb2f29032ba743f27653c6326994556feca3b",
+    "current_start_line": 2032,
+    "error_marker": "Excluded unsupported non-NTVDM timer profile",
+    "continuation_line": 2310,
+    "child_queue_groups_removed": 7,
+    "registration": "MVDM-HOST-DIV-570"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "before_sha256": "0088ec167676cd6472c9b59113eb76de9d48fb11e65ad94b9e2796053fdaa53a",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+    "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+    "local_arm_lines": [
+      2396,
+      2427
+    ],
+    "original_arm_lines": [
+      2614,
+      2647
+    ],
+    "removed_local_body_sha256": "3ab2b5c9f4cc48a2425d75f4151dad81eb7ff4093bc8148bdee9f2f1d827e3cc",
+    "original_body_sha256": "0552498fa1852f1299886b37e3de1790669ea28d6811f6fc0b9cf16976dcfbf9",
+    "removed_local_body_lines": 30,
+    "same_original_after_newlines": false,
+    "subsumed_existing_markers": {
+      "MVDM-HOST-DIV-500": 1
+    },
+    "retained_sibling": false,
+    "following_logical_line": null,
+    "status": "selected preprocessing and focused guard controls passed; x86 objects compiled; full integration pending",
+    "after_sha256": "8bcfec70e88ad230ef3259c4ecccb2f29032ba743f27653c6326994556feca3b",
+    "current_start_line": 2116,
+    "error_marker": "Excluded unsupported non-NTVDM timer profile",
+    "continuation_line": 2421,
+    "child_queue_groups_removed": 7,
+    "registration": "MVDM-HOST-DIV-570"
+  }
+]

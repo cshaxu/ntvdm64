@@ -1,0 +1,358 @@
+{
+  "macro_contexts": [
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "d6cc5610492e4194c25e0fea81000f26a0d136045680b302de8118382a30fbf4",
+      "includes": 339,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          97,
+          "#define WOWPROFILE   // DEBUG => WOWPROFILE"
+        ],
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          103,
+          "#define DEBUG_OR_WOWPROFILE"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtbl.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "53d4a15982cba1f3dc913870261e35c46c16d27c7b9846f34977ae225d41c9ba",
+      "includes": 332,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          97,
+          "#define WOWPROFILE   // DEBUG => WOWPROFILE"
+        ],
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          103,
+          "#define DEBUG_OR_WOWPROFILE"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "c648e970dc15ff09436e0bf38599ba3fb94a444e421314304d802cf649ce16b9",
+      "includes": 324,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          97,
+          "#define WOWPROFILE   // DEBUG => WOWPROFILE"
+        ],
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          103,
+          "#define DEBUG_OR_WOWPROFILE"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "8dbb8e6828c8f0ff3286bf917b40964eb859d1091ec0757c801c9422ed2fb7b3",
+      "includes": 322,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          97,
+          "#define WOWPROFILE   // DEBUG => WOWPROFILE"
+        ],
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          103,
+          "#define DEBUG_OR_WOWPROFILE"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "1032565dbc656936fe8e0ce6144532e9cea2699d402e848d59e850c1db08420b",
+      "includes": 323,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          97,
+          "#define WOWPROFILE   // DEBUG => WOWPROFILE"
+        ],
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          103,
+          "#define DEBUG_OR_WOWPROFILE"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "preprocess": [
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "1a5748a46d0fc9c9a3068e341cfead8a88225cd3da649c76349711664aa79e6c",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "5e6864e2acf0ce933407be80b37f803014e5b101f2014b0af350ae0c0e318f0f",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtbl.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "e6c9a9945b986ada7651c76ff86b032faf82ff078cee40a5001f4c4dc0fdf61f",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "61c60cd258bc32a4cdfb1fbb020f70a5d56d0f0f921ab43a907969050fd36ed7",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    }
+  ],
+  "guard_controls": [
+    {
+      "guard": 0,
+      "macro": "WOWPROFILE",
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 0,
+      "macro": "WOWPROFILE",
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 1,
+      "macro": "WOWPROFILE",
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 1,
+      "macro": "WOWPROFILE",
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 2,
+      "macro": "WOWPROFILE",
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 2,
+      "macro": "WOWPROFILE",
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 3,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 3,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 4,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 4,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 5,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 5,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 6,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 6,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 7,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 7,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 8,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 8,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 9,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 9,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 10,
+      "macro": "WOWPROFILE",
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 10,
+      "macro": "WOWPROFILE",
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 11,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 11,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 12,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 12,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 13,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 13,
+      "macro": "DEBUG_OR_WOWPROFILE",
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    }
+  ],
+  "line_controls": {
+    "baseline_probes": "build/t473-s13/bfs-wowprofile2-lines/baseline-lines.json",
+    "count": 14,
+    "following_directives_verified": 14
+  },
+  "objects": [
+    "obj/wow32.obj",
+    "obj/wowtbl.obj"
+  ],
+  "object_result": "both built successfully in cached x86 WOW32 graph",
+  "limitations": "full WOW/DOS/Win3.x and product acceptance pending; historical WndProc extraction hash mismatch remains separately open"
+}

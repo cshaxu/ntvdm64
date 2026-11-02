@@ -1,0 +1,185 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+  "current_sha256": "4a22ca2c6f0cb55055d5a1deb4de47cdab46831a4bb8bb8624ded874faed330a",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+  "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+  "retained_original_table_lines": [
+    39,
+    59
+  ],
+  "registered_divergences": [
+    "OPENNT-HOST-063",
+    "OPENNT-HOST-132"
+  ],
+  "scope": "depth-one only; matched FE_IME arm current disposition separately pending",
+  "groups": [
+    {
+      "line": 18,
+      "directive": "ifdef",
+      "expression": "DEBUG_LOCKS",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 56,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "disposition": "retained table conditional; reachability pending"
+    },
+    {
+      "line": 81,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 86,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 134,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 286,
+      "directive": "if",
+      "expression": "(DBG || TRACE_OBJECT_ALLOCS)",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 456,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 544,
+      "directive": "if",
+      "expression": "0",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 585,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 594,
+      "directive": "ifndef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 764,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 797,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 852,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 963,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 1056,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 1084,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 1139,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 1169,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 1198,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 1250,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 1321,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 1353,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 1394,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 1519,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 1691,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 1714,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 1886,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    },
+    {
+      "line": 1933,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "disposition": "outside registered retained table subset"
+    }
+  ]
+}

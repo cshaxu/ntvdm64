@@ -22,55 +22,9 @@ VPVOID  WordBreakProc16 = 0;
 extern WBP W32WordBreakProc;
 
 #ifdef DEBUG
-
-MSGINFO amiEM[] = {
-   {OLDEM_GETSEL,               "EM_GETSEL"},                       // 0x0400
-   {OLDEM_SETSEL,               "EM_SETSEL"},                       // 0x0401
-   {OLDEM_GETRECT,              "EM_GETRECT"},                      // 0x0402
-   {OLDEM_SETRECT,              "EM_SETRECT"},                      // 0x0403
-   {OLDEM_SETRECTNP,            "EM_SETRECTNP"},                    // 0x0404
-   {OLDEM_SCROLL,               "EM_SCROLL"},                       // 0x0405
-   {OLDEM_LINESCROLL,           "EM_LINESCROLL"},                   // 0x0406
-   {OLDEM_GETMODIFY,            "EM_GETMODIFY"},                    // 0x0408
-   {OLDEM_SETMODIFY,            "EM_SETMODIFY"},                    // 0x0409
-   {OLDEM_GETLINECOUNT,         "EM_GETLINECOUNT"},                 // 0x040A
-   {OLDEM_LINEINDEX,            "EM_LINEINDEX"},                    // 0x040B
-   {OLDEM_SETHANDLE,            "EM_SETHANDLE"},                    // 0x040C
-   {OLDEM_GETHANDLE,            "EM_GETHANDLE"},                    // 0x040D
-   {OLDEM_GETTHUMB,             "EM_GETTHUMB"},                     // 0x040E
-   {OLDEM_LINELENGTH,           "EM_LINELENGTH"},                   // 0x0411
-   {OLDEM_REPLACESEL,           "EM_REPLACESEL"},                   // 0x0412
-   {OLDEM_SETFONT,              "EM_SETFONT"},                      // 0x0413
-   {OLDEM_GETLINE,              "EM_GETLINE"},                      // 0x0414
-   {OLDEM_LIMITTEXT,            "EM_LIMITTEXT"},                    // 0x0415
-   {OLDEM_CANUNDO,              "EM_CANUNDO"},                      // 0x0416
-   {OLDEM_UNDO,                 "EM_UNDO"},                         // 0x0417
-   {OLDEM_FMTLINES,             "EM_FMTLINES"},                     // 0x0418
-   {OLDEM_LINEFROMCHAR,         "EM_LINEFROMCHAR"},                 // 0x0419
-   {OLDEM_SETWORDBREAK,         "EM_SETWORDBREAK"},                 // 0x041A
-   {OLDEM_SETTABSTOPS,          "EM_SETTABSTOPS"},                  // 0x041B
-   {OLDEM_SETPASSWORDCHAR,      "EM_SETPASSWORDCHAR"},              // 0x041C
-   {OLDEM_EMPTYUNDOBUFFER,      "EM_EMPTYUNDOBUFFER"},              // 0x041D
-   {OLDEM_GETFIRSTVISIBLELINE,  "EM_GETFIRSTVISIBLELINE"},          // 0x041E
-   {OLDEM_SETREADONLY,          "EM_SETREADONLY"},                  // 0x041F
-   {OLDEM_SETWORDBREAKPROC,     "EM_SETWORDBREAKPROC"},             // 0x0420
-   {OLDEM_GETWORDBREAKPROC,     "EM_GETWORDBREAKPROC"},             // 0x0421
-   {OLDEM_GETPASSWORDCHAR,      "EM_GETPASSWORDCHAR"}               // 0x0422
-};
-
-PSZ GetEMMsgName(WORD wMsg)
-{
-    INT i;
-    register PMSGINFO pmi;
-
-    for (pmi=amiEM,i=NUMEL(amiEM); i>0; i--,pmi++) {
-        if ((WORD)pmi->uMsg == wMsg)
-            return pmi->pszMsgName;
-    }
-    return GetWMMsgName(wMsg);
-}
-
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 74
 
 
 BOOL FASTCALL ThunkEMMsg16(LPMSGPARAMEX lpmpex)

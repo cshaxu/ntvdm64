@@ -96,10 +96,10 @@ fwd_word_fill(
                 do *l_addr4++ = data4; while (h_addr4 > l_addr4);
                 l_addr = (unsigned char *)l_addr4;
 #else
-                count = h_addr4 - l_addr4;
-                RtlFillMemoryUlong(l_addr4, count, data4);
-                l_addr = (unsigned char *)l_addr4;
-                l_addr += count;
+#error Excluded unsupported alternate fill implementation
+
+
+
 #endif
 
 	}

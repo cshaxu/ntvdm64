@@ -41,7 +41,7 @@
  * in this file at a later date.
  */
 #ifdef	PIG
-#undef	CCPU
+#error Excluded unsupported PIG configuration
 #endif	/* PIG */
 #include "sas.h"
 

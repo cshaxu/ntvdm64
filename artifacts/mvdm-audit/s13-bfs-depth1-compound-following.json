@@ -1,0 +1,161 @@
+{
+  "scope": "first-depth compound NTVDM && MONITOR guards matched by unique following anchors",
+  "classified": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "current_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\ill_bop.c",
+      "original_sha256": "89df5a6fa3fc27def18b904fcd83f6c872778fec33dfc58634c9f73449165799",
+      "local_line": 52,
+      "original_line": 58,
+      "following_anchor": [
+        "void illegal_bop()",
+        "{",
+        "#ifndef PROD"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "current_sha256": "b104e4d3f599d97ba05998b2bd9c918ea1fb718fbcdffc1c548fd570b9a7f674",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer_.c",
+      "original_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81",
+      "local_line": 207,
+      "original_line": 200,
+      "following_anchor": [
+        "#if defined(NTVDM)",
+        "void printer_bop_openclose(int func)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "local_line": 2001,
+      "original_line": 2238,
+      "following_anchor": [
+        "void mouse_EM_callback()",
+        "{",
+        "note_trace1(MOUSE_VERBOSE,"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "local_line": 3308,
+      "original_line": 3702,
+      "following_anchor": [
+        "UNUSED(m1);",
+        "UNUSED(m2);",
+        "UNUSED(m3);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "current_sha256": "c3d5b62cd7de868750cc40e9bc4e203c571b0edb8fa8c7178c1dac30d28d2e44",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\illegalp.c",
+      "original_sha256": "94f049032a9298802cab09afc61651469dcbf1fec80ab36444e5c2fed2f681ad",
+      "local_line": 67,
+      "original_line": 64,
+      "following_anchor": [
+        "void illegal_op()",
+        "{",
+        "#ifndef\tPROD"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    }
+  ],
+  "contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
+      "includes": 171,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "c3d5b62cd7de868750cc40e9bc4e203c571b0edb8fa8c7178c1dac30d28d2e44",
+      "includes": 179,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "b104e4d3f599d97ba05998b2bd9c918ea1fb718fbcdffc1c548fd570b9a7f674",
+      "includes": 182,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
+      "includes": 171,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "c3d5b62cd7de868750cc40e9bc4e203c571b0edb8fa8c7178c1dac30d28d2e44",
+      "includes": 179,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "b104e4d3f599d97ba05998b2bd9c918ea1fb718fbcdffc1c548fd570b9a7f674",
+      "includes": 182,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "includes": 203,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "includes": 203,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "limitations": [
+    "Only actual same-hash x86 worker/reference contexts; test or other contexts require independent evidence.",
+    "No runtime or guest validation implied."
+  ]
+}

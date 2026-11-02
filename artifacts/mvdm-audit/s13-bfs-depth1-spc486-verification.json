@@ -1,0 +1,2277 @@
+{
+  "original_profile_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bswap.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "16b8260d51041fc1a350018397ca4098de279eb94043727eae9160724d4bddd7",
+      "includes": 170,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cmpxchg.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "31864ed50ec06922d3220501f713b9137c241d18ce9cf9c7d39b4f2d59257731",
+      "includes": 168,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "536f8544dab1ab81b5a14ea89d537f8a58df6291f19a4661338538a45abfd828",
+      "includes": 167,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "370774b364135049441137ac7e6205597f53f7a35acb348a1ab9cb4caedbcea2",
+      "includes": 299,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "2cb653fbc2065a692ccf2ef98970cfdf290c133a4e17b0cf5508f84535edee6f",
+      "includes": 173,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "8c3ddb4448bec21e62ac16ef933971375dc9ff388494083cf41e37d44712fb21",
+      "includes": 170,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "fc4e70d67e940faccc5668c4f1c1388cbbc0cc2f993567fa8dd79ed13d920721",
+      "includes": 170,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "5f7663bac5700336243c65c6f1fbb050584b05466d647bad3dce545c9bffb5c4",
+      "includes": 175,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "ca64ec64cfd906bc4d229c6b9bb00f9b8a0cc865535f9c775ea7cc737bef054f",
+      "includes": 167,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invlpg.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "909b84cf9466a4f36756ff98b1949bec64e7a632443cf9ead6dabc94ef1bde97",
+      "includes": 168,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/mov.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "d274ed1ad9f8114f8c7ff0c0d6d57f08116d70fd8e6b26f0d0051b70ba9f8348",
+      "includes": 177,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/wbinvd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "a0e32377cb179eb3be70a5ff1c9c9a7194daff135e1617173cc46a18870b965a",
+      "includes": 167,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/xadd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "87b973e680365c518f41e0096b219f06850cbfe0edde6866b91cf80f7f21d6c4",
+      "includes": 168,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "b11c8029d3e6f7a67302b2fb197ec17e37b385fdb5add6f6c086fdafdee1b887",
+      "includes": 178,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "135ca24ff83d7fca210b108953a34e9b7a8da2cea563c4c0bf3ab1c6511a214d",
+      "includes": 194,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bswap.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "16b8260d51041fc1a350018397ca4098de279eb94043727eae9160724d4bddd7",
+      "includes": 170,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cmpxchg.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "31864ed50ec06922d3220501f713b9137c241d18ce9cf9c7d39b4f2d59257731",
+      "includes": 168,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "536f8544dab1ab81b5a14ea89d537f8a58df6291f19a4661338538a45abfd828",
+      "includes": 167,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "370774b364135049441137ac7e6205597f53f7a35acb348a1ab9cb4caedbcea2",
+      "includes": 299,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "2cb653fbc2065a692ccf2ef98970cfdf290c133a4e17b0cf5508f84535edee6f",
+      "includes": 173,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "8c3ddb4448bec21e62ac16ef933971375dc9ff388494083cf41e37d44712fb21",
+      "includes": 170,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "fc4e70d67e940faccc5668c4f1c1388cbbc0cc2f993567fa8dd79ed13d920721",
+      "includes": 170,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "5f7663bac5700336243c65c6f1fbb050584b05466d647bad3dce545c9bffb5c4",
+      "includes": 175,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invd.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "ca64ec64cfd906bc4d229c6b9bb00f9b8a0cc865535f9c775ea7cc737bef054f",
+      "includes": 167,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invlpg.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "909b84cf9466a4f36756ff98b1949bec64e7a632443cf9ead6dabc94ef1bde97",
+      "includes": 168,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/mov.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "d274ed1ad9f8114f8c7ff0c0d6d57f08116d70fd8e6b26f0d0051b70ba9f8348",
+      "includes": 177,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/wbinvd.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "a0e32377cb179eb3be70a5ff1c9c9a7194daff135e1617173cc46a18870b965a",
+      "includes": 167,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/xadd.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "87b973e680365c518f41e0096b219f06850cbfe0edde6866b91cf80f7f21d6c4",
+      "includes": 168,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "b11c8029d3e6f7a67302b2fb197ec17e37b385fdb5add6f6c086fdafdee1b887",
+      "includes": 178,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "135ca24ff83d7fca210b108953a34e9b7a8da2cea563c4c0bf3ab1c6511a214d",
+      "includes": 194,
+      "spc486_definitions": [],
+      "spc486_flags": [],
+      "errors": ""
+    }
+  ],
+  "selected_preprocessing": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "0891a20ba97526c6598cd895b0af1e93fca92b7a21ebb5d9f2326ef03b0f5e1f",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "8d106d6d89b5547077d461125256b78f3eb9e3c4b5b7c7da5e6a30280c6ab4e1",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bswap.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "016dc9c924327b5463fbcfd5d16817eb743600007e112bc5fda9504c8a670f2c",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "d108aba4212c91c2e7aee8e957c902a02ca0c89b336b3399199aba64d0af4385",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "2cb89a28314e7b6c88a1fdcc16fd7c5bbec80595eb4e8cfb72369715e795b088",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "afbeab61ef129f5a0af3a4eade1c61bdc548e9b4d8f10453788e31f770f3699d",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "12dfc20f1f39ca5d03f166e69b78fdc724314933858619481934174fa6fb68cd",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "e949897be4f5e2590708bba6acdf1f308075a4e18961d610ebab7df720761b76",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "c20195f1b615bef75284c170e028765854442fc6526aa6204f0477e3c74f7f15",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "fb1d76e182c9785d44f13433e43de86dcab33b2c0ec358e799b6f91b25ab693d",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "4bbdc3b8d6050131332db36984c00e211111751f5f79592fe441c97c5213b75c",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "04a0443ef98c7710a9687be85f0e58af532ae6cde59a505f4669ea5edfc5312f",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "1e64e54b6a307b108aa58953ff3df00e91059086393369b8a5092e8ee8de1047",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "5e70b3a8e908ddd7bfadec582f4eb3fa7135477dee4829f303907679e383beed",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "07f69b792589b033315d4ae3e0835ffcfd4746125691d2cdaccf1007bba784c4",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "91a07208762498daaaa97a798bbc33c0fe1004e4a8da44dd4c62a7b79546701a",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cmpxchg.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "46449f145a89b0209dabe58e42e7cb4a90bf384a77b4db907e30467c69d606cd",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "60f244ee4a95bb8d2e13178d600131da837c0cda650921018cd82ec4aa889da0",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invd.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "c8e68c25b4b7c1cecd085cb4382159ee1d037cfe50d3014b13341ecc639c7660",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "344421b302ec3e31018fc37516d5737c268f19dc73b1f7dbfda08185f34e03ac",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/invlpg.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "11dc691236cc67f51d67f50fd86ef2c04499ebfebaa8c0054dc7cefafb253b68",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "e27b4ac3485ac364d04d12728a696ddf1df3811e0a5c7d7a4540c31387a28d39",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/mov.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "89f9dd4e848cce71f2ab4e58a86a15af7d7b22e4e0e92e8224e489fa27add795",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "41f39cf382874ad39ecbd5a718c6285ebf258cc04502f93a16cd4e551af97b72",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/wbinvd.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "a36c89ec2c04b05953453359f62f3d1d0f522b1de5ea6f30916b184c887a829a",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "eab0ffd904d8245ccd3f1484444c3d735db87cbe680105b2531f787222d3b365",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/xadd.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "db2dabe5fe6fc8ae6a23d02f8c2f21682b5b4577cf282a51c7ff066ad86e5aea",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "ca92d77fc75b6980a20a05fb51b861e71d27eced2948d0dc699c280ec4d80749",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "f2e0e776ba25611e6bd676326ebf821c57aac908e5c69a5b78073462663e1624",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "0eb191a195fb2663db7fa5350a7ea15db035e4c6238593341b15d4d70b31ed87",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    }
+  ],
+  "c_reg_logical_filename_normalized": {
+    "records": [
+      {
+        "name": "before",
+        "exit": 0,
+        "sha256": "4b41e4f3db1f0fd61c723df94e11122acd52c0b191066f460f89084e2ca58add"
+      },
+      {
+        "name": "after",
+        "exit": 0,
+        "sha256": "fb1d76e182c9785d44f13433e43de86dcab33b2c0ec358e799b6f91b25ab693d"
+      }
+    ],
+    "raw_equal": false,
+    "equal_ignoring_blank_lines": true
+  },
+  "c_reg_initial_difference": "Only __FILE__ path differs because before source was copied to a scratch path; __LINE__ and the remainder are the same. A #line restoring the real logical filename makes selected outputs equal ignoring blank lines.",
+  "objects": "15 x86 worker source objects compiled in actual Ninja graph",
+  "guard_controls": "x86 and x64 pass for all 35 SPC486 arms including 17 selected alternatives",
+  "ccpu_matrix": {
+    "scope": "118 case baseline/candidate comparison using 15 pre-cleanup translation units and current fixture dependencies; native oracle separately passes",
+    "baseline_sha256": "1ec6e3ef7954e9e5849e49049477e8efa7fa62af8444b1529d361dfcbed7b264",
+    "candidate_sha256": "36ca76e87bbbdddb89b93bda82d9ff1f4820e72d594101ae12e786e1400b53b1",
+    "oracle_sha256": "5c37a2f4c608319493d73213ebded4143cc2230c2dd06279bff2790099df4b09",
+    "baseline_map_sha256": "b9a49eb076c66caa5d1742ba2f97ce06b9898e57802a0447a54dee2384d6078d",
+    "cases": [
+      {
+        "case": 0,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=0 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=0 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 2,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=2 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=2 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 3,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=3 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=3 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 4,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=4 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=4 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 6,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=6 fault=-1 carry=0 zero=0001 plus64k=0001"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=6 fault=-1 carry=0 zero=0001 plus64k=0001"
+        },
+        "match": true
+      },
+      {
+        "case": 7,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=7 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=7 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 8,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=8 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=8 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 9,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=9 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=9 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 10,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=10 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=10 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 11,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=11 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=11 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 12,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=12 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=12 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 13,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=13 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=13 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 14,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=14 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=14 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 15,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=15 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=15 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 16,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=16 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=16 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 17,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=17 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=17 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 18,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=18 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=18 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 19,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=19 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=19 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 20,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=20 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=20 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 21,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=21 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=21 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 22,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=22 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=22 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 23,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=23 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=23 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 24,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=24 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=24 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 25,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=25 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=25 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 26,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=26 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=26 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 27,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=27 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=27 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 28,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=28 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=28 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 29,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=29 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=29 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 30,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=30 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=30 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 31,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=31 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=31 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 32,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=32 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=32 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 33,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=33 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=33 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 34,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=34 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=34 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 35,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=35 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=35 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 36,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=36 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=36 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 37,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=37 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=37 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 38,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=38 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=38 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 39,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=39 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=39 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 40,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=40 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=40 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 41,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=41 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=41 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 42,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=42 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=42 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 43,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=43 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=43 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 44,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=44 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=44 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 45,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=45 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=45 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 46,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=46 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=46 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 47,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=47 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=47 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 48,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=48 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=48 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 49,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=49 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=49 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 50,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=50 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=50 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 51,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=51 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=51 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 52,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=52 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=52 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 53,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=53 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=53 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 54,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=54 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=54 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 55,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=55 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=55 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 56,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=56 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=56 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 57,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=57 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=57 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 58,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=58 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=58 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 59,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=59 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=59 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 60,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=60 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=60 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 61,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=61 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=61 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 62,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=62 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=62 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 63,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=63 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=63 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 64,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=64 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=64 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 65,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=65 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=65 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 66,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=66 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=66 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 67,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=67 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=67 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 68,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=68 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=68 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 69,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=69 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=69 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 70,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=70 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=70 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 71,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=71 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=71 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 72,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=72 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=72 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 73,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=73 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=73 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 74,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=74 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=74 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 75,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=75 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=75 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 76,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=76 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=76 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 77,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=77 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=77 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 78,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=78 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=78 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 79,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=79 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=79 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 80,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=80 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=80 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 81,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=81 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=81 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 82,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=82 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=82 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 83,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=83 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=83 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 84,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=84 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=84 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 85,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=85 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=85 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 86,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=86 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=86 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 87,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=87 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=87 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 88,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=88 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=88 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 89,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=89 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=89 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 90,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=90 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=90 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 91,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=91 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=91 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 92,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=92 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=92 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 93,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=93 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=93 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 94,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=94 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=94 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 95,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=95 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=95 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 96,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=96 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=96 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 97,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=97 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=97 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 98,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=98 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=98 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 99,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=99 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=99 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 100,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=100 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=100 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 101,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=101 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=101 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 102,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=102 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=102 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 103,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=103 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=103 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 104,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=104 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=104 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 105,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=105 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=105 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 106,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=106 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=106 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 107,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=107 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=107 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 108,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=108 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=108 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 109,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=109 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=109 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 110,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=110 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=110 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 111,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=111 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=111 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 112,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=112 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=112 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 113,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=113 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=113 fault=-1 carry=0 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 114,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=114 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=114 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 115,
+        "baseline": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=115 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 1,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=115 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 116,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=116 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=116 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 117,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=117 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=117 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 118,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=118 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=118 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      },
+      {
+        "case": 119,
+        "baseline": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=119 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "candidate": {
+          "exit": 0,
+          "stdout": "",
+          "stderr": "ccpu386ThrdExptnPtr id:<thread> called with Bad Id\nsas-init\ncpu-init\nSOFTPC_WORD_PORT_LAYOUT_OK scalar=65536 repeated=2\nseed\nstart\nreturned-start\nreenter\nreturned-recursive\nbit case=119 fault=-1 carry=1 zero=0001 plus64k=0000"
+        },
+        "match": true
+      }
+    ],
+    "matching": 118,
+    "mismatches": 0,
+    "baseline_failures": 64,
+    "candidate_failures": 64
+  },
+  "historical_comparison": "All 118 baseline exit codes match cpu40-vector-bit-comparison.json; both current and pre-cleanup fixture fail 64 and pass 54. Matrix is not a passing semantic test.",
+  "runtime_limits": "No complete DOS/WOW/Win3.x product acceptance; full product gate pending."
+}

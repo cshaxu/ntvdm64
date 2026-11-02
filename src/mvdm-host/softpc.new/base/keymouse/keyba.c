@@ -48,12 +48,12 @@
 #endif
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_PPI.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 
@@ -279,9 +279,9 @@ void Reset6805and8042(void);
 #endif
 
 #if defined(IRET_HOOKS) && defined(GISP_CPU)
-extern IBOOL HostDelayKbdInt IPT1(char, scancode);
-extern IBOOL HostPendingKbdInt IPT1(char *,scancode);
-extern void HostResetKdbInts IPT0();
+#error Excluded unsupported GISP_CPU configuration
+
+
 
 #endif /* IRET_HOOKS && GISP_CPU */
 
@@ -2075,77 +2075,9 @@ LOCAL VOID do_q_int(char scancode)
 }
 
 #else   /* NTVDM */
-
-LOCAL VOID do_int IFN1(long,scancode)
-{
-	output_contents = (char)scancode;
-	kbd_status |= 1;			/* Character now available! */
-	if (int_enabled)
-	{
-		sure_note_trace0(AT_KBD_VERBOSE,"keyboard interrupting");
-		ica_hw_interrupt(KEYBOARD_INT_ADAPTER, KEYBOARD_INT_LINE, 1);
-	}
-}
-
-LOCAL VOID do_q_int IFN1(char,scancode)
-{
-	output_full = TRUE;
-
-#if defined(IRET_HOOKS) && defined(GISP_CPU)
-	if (!HostDelayKbdInt(scancode))
-	{	/* no host need to delay this kbd int, so generate one now. */
-		do_int ((long) scancode);
-	}
-
-#else /* !IRET_HOOKS || !GISP_CPU */ 
-
-#ifdef DELAYED_INTS
-	do_int ((long) scancode);
-#else
-	add_q_event_i( do_int, HOST_KEYBA_INST_DELAY, (long)scancode);
-#endif	/* DELAYED_INTS */
-
-#endif /* IRET_HOOKS && GISP_CPU */
-}
-
-
-/* typematic keyboard repeats */
-
-GLOBAL VOID do_key_repeats IFN0()
-{
-#ifndef REAL_KBD
-
-#ifdef JOKER
-#error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register.
-#endif
-
-if (typematic_key_valid)
-	{
-	if (repeat_count==repeat_target && repeat_delay_count==repeat_delay_target)
-		{
-		scan_code_6805_size=make_sizes[keytypes[typematic_key]];
-		scan_code_6805_array=make_arrays[typematic_key];
-		add_codes_to_6805_buff(scan_code_6805_size,scan_code_6805_array);
-		codes_to_translate ();
-		repeat_count=0;
-		}
-	else
-		{
-		if (repeat_delay_count==repeat_delay_target)
-			{
-			repeat_count++;
-			}
-		else
-			{
-			repeat_delay_count++;
-			}
-		}
-	}
-#endif
-
-} /* end of do_key_repeats */
-
+#error Excluded unsupported non-NTVDM alternative
 #endif	/* NTVDM */
+#line 2149
 
 
 LOCAL VOID cmd_to_8042  IFN1(half_word,cmd_code)
@@ -2623,72 +2555,9 @@ GLOBAL VOID kbd_inb IFN2(io_addr,port,half_word *,val)
          HostReleaseKbd();
 
 #else	/* not NTVDM */
-
-	{
-		*val=output_contents;
-
-		output_full = FALSE;
-
-		kbd_status &= 0xfe;		/* Mask out "char avail" bit */
-
-		/* Other ports should really clear this IRQ as well, but... */
-
-#ifdef JOKER
-#error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register.
-#endif	/* JOKER */
-
-		/* <tur 06-Jul-93> BCN 2040 Replace previous horrible hack with a better one!
-		**
-		** The following is to cope with programs that read this port more than once
-		** expecting the same value each time, while the keyboard interface is ENABLED.
-		** On a real PC, this port is filled via a serial connection, and so there's at
-		** least a few milliseconds before a new char arrives and the port is overwritten.
-		** SoftPC, however, doesn't have this delay; ideally, we'd like to
-		** refill the buffer immediately. However, if the keyboard interface is
-		** enabled, we should delay refilling the buffer for a few ms.
-		*/
-
-		if (keyboard_interface_disabled) {		/* We're in business */
-
-			/* NB: We have always assumed that anyone reading this port with the
-			** Keyboard interface disabled will ONLY READ IT ONCE (like the BIOS.)
-			**
-			** Since this seems to work, let's just go ahead and refill the buffer.
-			** (If any problems show up, we'll just have to do a quick event as in
-			** the keyboard interface enabled case below.)
-			*/
-
-			/* If there is an outstanding sloppy read quick event delete it */
-			if (refillDelayedHandle) {			
-				delete_q_event(refillDelayedHandle);
-				refillDelayedHandle = 0;
-			}
-
-			continue_output();
-
-		}
-		else {									/* keyboard interface is enabled */
-
-			/* Do not allow port 0x60 to be overwritten for a few milliseconds.
-			** Even 10 ms isn't as bad as the two whole timer ticks (100ms) which
-			** is what it was doing previously.
-			** Keyboard response for some games, including Windows, should now
-			** be a good bit better.
-			** The original code continued output after the second read of the port
-			** with the interface enabled, which seems to imply that no PC apps have
-			** been found which read the port more than twice while expecing the same
-			** value. However, we now allow for multipe reads of the port, while enabled.
-			** Under this circumstance the port will only be re-primed after the quick event
-			** from the first sloppy read has been processed.
-			*/
-
-			if (!refillDelayedHandle) 			/* if we're not already delaying, delay! */
-				refillDelayedHandle = add_q_event_t(allowRefill, KBD_CONT_DELAY, 0);
-
-		}
-
-	}
+#error Excluded unsupported non-NTVDM alternative
 #endif	/* NTVDM */
+#line 2692
 
 	sure_note_trace2(AT_KBD_VERBOSE,"...kbd_inb(%#x) returns %#x", port, *val);
 
@@ -2746,12 +2615,12 @@ GLOBAL VOID kbd_outb IFN2(io_addr,port,half_word,val)
 #endif /* ! NTVDM */
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_INIT.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 GLOBAL VOID AT_kbd_post IFN0()
@@ -2764,141 +2633,51 @@ GLOBAL VOID AT_kbd_post IFN0()
 }
 
 #if defined(IRET_HOOKS) && defined(GISP_CPU)
-/*(
- *======================= KbdHookAgain() ============================
- * KbdHookAgain
- *
- * Purpose
- *	This is the function that we tell the ica to call when a keybd
- *	interrupt service routine IRETs.
- *
- * Input
- *	adapter_id	The adapter id for the line. (Note the caller doesn't
- *			know what this is, he's just returning something
- *			we gave him earlier).
- *
- * Outputs
- *	return	TRUE if there are more interrupts to service, FALSE otherwise.
- *
- * Description
- * 	Check if we have a delayed scancode, if so then generate the kbd int
- *	and return TRUE, else return FALSE
-)*/
+#error Excluded unsupported GISP_CPU configuration
 
-GLOBAL IBOOL		
-KbdHookAgain IFN1(IUM32, adapter)
-{	char scancode;
 
-	if (HostPendingKbdInt(&scancode))
-	{	/* We have a host delayed scancode, so generate a kdb int. */
-		sure_note_trace0(AT_KBD_VERBOSE,"callback with saved code");
-		output_full = TRUE;
-		do_int ((long) scancode);
-		return(TRUE);	/* more to do */
-	}
-	else
-	{
-		sure_note_trace0(AT_KBD_VERBOSE,"no saved data after IRET");
-		return(FALSE);
-	}
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif /* IRET_HOOKS && GISP_CPU */
 
 #ifndef NTVDM
-
-GLOBAL VOID AT_kbd_init IFN0()
-{
-	int key,i;
-	SHORT videoAdapt;
-
-	sure_note_trace0(AT_KBD_VERBOSE,"AT Keyboard initialisation");
-
-#if defined(IRET_HOOKS) && defined(GISP_CPU)
-	/*
-	 * Remove any existing hook call-back, and re-instate it afresh.
-	 * KbdHookAgain is what gets called on a keyboard int iret.
-	 */
-
-	Ica_enable_hooking(KEYBOARD_INT_LINE, NULL, KEYBOARD_INT_ADAPTER);
-	Ica_enable_hooking(KEYBOARD_INT_LINE, KbdHookAgain, KEYBOARD_INT_ADAPTER);
-
-	/* Host routine to reset any internal data for IRET_HOOK delayed ints. */
-	HostResetKdbInts();
-
-#endif /* IRET_HOOKS && GISP_CPU */
-
-#ifdef	macintosh
-#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
-#endif	/* macintosh */
-
-	videoAdapt = (ULONG) config_inquire(C_GFX_ADAPTER, NULL);
-
-	buff_6805_out_ptr=0;
-	clear_buff_6805 ();
-	key_set=DEFAULT_SCAN_CODE_SET;
-	current_light_pattern=0;
-#ifdef REAL_KBD
-#error DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register.
-#endif
-	host_kb_light_on (7);
-
-#ifndef REAL_KBD
-	for (key=0;key<127;key++)
-	{
-		set_3_key_state [key] = set_3_default_key_state [key];
-		key_down_count[key]=0;
-	}
-	repeat_delay_target=2*BASE_DELAY_UNIT;
-	repeat_target=DEFAULT_REPEAT_TARGET;
-#endif
-	typematic_key_valid = waiting_for_next_code = 
-		waiting_for_next_8042_code=FALSE;
-	shift_on = l_shift_on = r_shift_on=FALSE;
-	ctrl_on = l_ctrl_on = r_ctrl_on=FALSE;
-	alt_on = l_alt_on = r_alt_on=FALSE;
-	waiting_for_upcode=FALSE;
-	input_port_val=0xbf;
-	if (videoAdapt == MDA || videoAdapt == HERCULES)
-		input_port_val |= 0x40;
-	kbd_status = 0x10;
-	cmd_byte_8042=0x45;
-	keyboard_disabled = keyboard_interface_disabled=FALSE;
-	op_port_remembered_bits=0xc;
-
-#ifdef PM
-	if ( gate_a20_status )
-	{
-                sas_enable_20_bit_wrapping();
-                gate_a20_status = 0;
-	}
-#endif
-
-	pending_8042 = output_full = in_anomalous_state=FALSE;
-	int_enabled = translating=TRUE;
-	scanning_discontinued=FALSE;
-	held_event_count=0;
-
-	io_define_inb(AT_KEYB_ADAPTOR, kbd_inb);
-	io_define_outb(AT_KEYB_ADAPTOR, kbd_outb);
-
-	for (i=KEYBA_PORT_START;i<=KEYBA_PORT_END;i+=2)
-		io_connect_port(i, AT_KEYB_ADAPTOR, IO_READ_WRITE);
-
-#ifndef REAL_KBD
-	init_key_arrays();
-#endif
-
-	host_kb_light_off (5);
-	num_lock_on = TRUE;
-
-	host_key_down_fn_ptr = host_key_down;
-	host_key_up_fn_ptr = host_key_up;
-	do_key_repeats_fn_ptr = do_key_repeats;
-
-} /* end of AT_kbd_init */
-
+#error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected
 #else	/* NTVDM */
+#line 2902
 
 GLOBAL VOID AT_kbd_init()
 {
@@ -2940,3 +2719,4 @@ GLOBAL VOID AT_kbd_init()
 
 } /* end of AT_kbd_init */
 #endif	/* NTVDM */
+#line 2943

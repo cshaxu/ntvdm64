@@ -531,28 +531,9 @@ BOOL WOWCallback16Ex(
          )
 {
 #ifdef DEBUG
-    static BOOL fFirstTime = TRUE;
-
-    if (fFirstTime) {
-
-        //
-        // Ensure that wownt32.h's definition of WCB16_MAX_CBARGS
-        // matches wow.h's definition of PARMWCB16.
-        //
-
-        WOW32ASSERT( WCB16_MAX_CBARGS == sizeof(PARMWCB16) );
-
-        //
-        // If the PARMWCB16 structure is smaller than the PARM16
-        // union, we should increase the size of PARMWCB16 and
-        // WCB16_MAX_CBARG to allow the use of the extra bytes.
-        //
-
-        WOW32ASSERT( sizeof(PARMWCB16) == sizeof(PARM16) );
-
-        fFirstTime = FALSE;
-    }
+#error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
+#line 556
 
     if (cbArgs > sizeof(PARM16)) {
         LOGDEBUG(LOG_ALWAYS, ("WOWCallback16V: cbArgs = %u, must be <= %u",
@@ -587,70 +568,9 @@ BOOL WOWCallback16Ex(
 BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)
 {
 #ifdef DEBUG
-    static PSZ apszCallBacks[] = {
-    "ERROR:RETURN",         // RET_RETURN       (not a callback!)
-    "ERROR:DEBUGRETURN",    // RET_DEBUGRETURN  (not a callback!)
-    "DEBUG",                // RET_DEBUG
-    "WNDPROC",              // RET_WNDPROC
-    "ENUMFONTPROC",         // RET_ENUMFONTPROC
-    "ENUMWINDOWPROC",       // RET_ENUMWINDOWPROC
-    "LOCALALLOC",           // RET_LOCALALLOC
-    "LOCALREALLOC",         // RET_LOCALREALLOC
-    "LOCALLOCK",            // RET_LOCALLOCK
-    "LOCALUNLOCK",          // RET_LOCALUNLOCK
-    "LOCALSIZE",            // RET_LOCALSIZE
-    "LOCALFREE",            // RET_LOCALFREE
-    "GLOBALALLOCLOCK",      // RET_GLOBALALLOCLOCK
-    "GLOBALLOCK",           // RET_GLOBALLOCK
-    "GLOBALUNLOCK",         // RET_GLOBALUNLOCK
-    "GLOBALUNLOCKFREE",     // RET_GLOBALUNLOCKFREE
-    "FINDRESOURCE",         // RET_FINDRESOURCE
-    "LOADRESOURCE",         // RET_LOADRESOURCE
-    "FREERESOURCE",         // RET_FREERESOURCE
-    "LOCKRESOURCE",         // RET_LOCKRESOURCE
-    "UNLOCKRESOURCE",       // RET_UNLOCKRESOURCE
-    "SIZEOFRESOURCE",       // RET_SIZEOFRESOURCE
-    "LOCKSEGMENT",          // RET_LOCKSEGMENT
-    "UNLOCKSEGMENT",        // RET_UNLOCKSEGMENT
-    "ENUMMETAFILEPROC",     // RET_ENUMMETAFILEPROC
-    "TASKSTARTED    ",      // RET_TASKSTARTED
-    "HOOKPROC",             // RET_HOOKPROC
-    "SUBCLASSPROC",         // RET_SUBCLASSPROC
-    "LINEDDAPROC",          // RET_LINEDDAPROC
-    "GRAYSTRINGPROC",       // RET_GRAYSTRINGPROC
-    "FORCETASKEXIT",        // RET_FORCETASKEXIT
-    "SETCURDIR",            // RET_SETCURDIR
-    "ENUMOBJPROC",          // RET_ENUMOBJPROC
-    "SETCURSORICONFLAG",    // RET_SETCURSORICONFLAG
-    "SETABORTPROC",         // RET_SETABORTPROC
-    "ENUMPROPSPROC",        // RET_ENUMPROPSPROC
-    "FORCESEGMENTFAULT",    // RET_FORCESEGMENTFAULT
-    "UNUSEDFUNC",           // 
-    "UNUSEDFUNC",           // 
-    "UNUSEDFUNC",           // 
-    "UNUSEDFUNC",           // 
-    "UNUSEDFUNC",           // 
-    "GETEXEPTR",            // RET_GETEXEPTR
-    "UNUSEDFUNC",           //
-    "FORCETASKFAULT",       // RET_FORCETASKFAULT
-    "GETEXPWINVER",         // RET_GETEXPWINVER
-    "GETCURDIR",            // RET_GETCURDIR
-    "GETDOSPDB",            // RET_GETDOSPDB
-    "GETDOSSFT",            // RET_GETDOSSFT
-    "FOREGROUNDIDLE",       // RET_FOREGROUNDIDLE
-    "WINSOCKBLOCKHOOK",     // RET_WINSOCKBLOCKHOOK
-    "WOWDDEFREEHANDLE",     // RET_WOWDDEFREEHANDLE
-    "CHANGESELECTOR",       // RET_CHANGESELECTOR
-    "GETMODULEFILENAME",    // RET_GETMODULEFILENAME
-    "WORDBREAKPROC",        // RET_WORDBREAKPROC
-    "WINEXEC",              // RET_WINEXEC
-    "WOWCALLBACK16",        // RET_WOWCALLBACK16
-    "GETDIBSIZE",           // RET_GETDIBSIZE
-    "GETDIBFLAGS",          // RET_GETDIBFLAGS
-    "SETDIBSEL",            // RET_SETDIBSEL
-    "FREEDIBSEL"            // RET_FREEDIBSEL
-    };
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 654
     register PTD ptd;
     register PVDMFRAME pFrame;
     register PCBVDMFRAME pCBFrame;
@@ -665,8 +585,9 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     USHORT SaveIp;
 #endif
 #ifdef DEBUG
-    VPVOID   vpStackT, vpCBStackT;
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 670
 
 
     WOW32ASSERT(iRetID != RET_RETURN && iRetID != RET_DEBUGRETURN);
@@ -712,11 +633,9 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     pCBFrame->wLocalBP   = pFrame->wLocalBP;
 
 #ifdef DEBUG
-    // Save
-
-    vpStackT = ptd->vpStack;
-    vpCBStackT = ptd->vpCBStack;
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 720
 
     if (pParm16)
         RtlCopyMemory(&pCBFrame->Parm16, pParm16, sizeof(PARM16));
@@ -743,41 +662,9 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     }
 
 #ifdef DEBUG
-    if (iRetID == RET_WNDPROC) {
-        LOGDEBUG(9,("%04X          Calling WIN16 WNDPROC(%08lx:%04x,%04x,%04x,%04x,%04x)\n",
-            pFrame->wTDB,
-            vpfnProc,
-            pParm16->WndProc.hwnd,
-            pParm16->WndProc.wMsg,
-            pParm16->WndProc.wParam,
-            HIWORD(pParm16->WndProc.lParam),
-            LOWORD(pParm16->WndProc.lParam)
-           )
-        );
-
-    } else if (iRetID == RET_HOOKPROC) {
-        LOGDEBUG(9,("%04X         Calling WIN16 HOOKPROC(%08lx: %04x,%04x,%04x,%04x)\n",
-            pFrame->wTDB,
-            vpfnProc,
-            pParm16->HookProc.nCode,
-            pParm16->HookProc.wParam,
-            HIWORD(pParm16->HookProc.lParam),
-            LOWORD(pParm16->HookProc.lParam)
-            )
-        );
-
-
-    } else {
-        LOGDEBUG(9,("%04X         Calling WIN16 %s(%04x,%04x,%04x)\n",
-            pFrame->wTDB,
-            apszCallBacks[iRetID],
-            pParm16->WndProc.wParam,
-            HIWORD(pParm16->WndProc.lParam),
-            LOWORD(pParm16->WndProc.lParam)
-           )
-        );
-    }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 781
 
     wow_callback_frame_trace("before", (DWORD)iRetID, ptd->vpStack,
         ptd->vpCBStack, 0, pFrame->wTDB,

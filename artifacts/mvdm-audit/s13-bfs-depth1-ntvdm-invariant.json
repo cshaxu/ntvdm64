@@ -1,0 +1,44 @@
+{
+  "scope": "actual x86 worker translation units; not an inference about unrelated files or future profiles",
+  "include_trace": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "exit": 0,
+      "source_sha256": "1e257c03f0c9ba553bf8d6883b6da91fd1645092e46a2340e32ac27630597f43",
+      "included_files": 189,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "exit": 0,
+      "source_sha256": "0088ec167676cd6472c9b59113eb76de9d48fb11e65ad94b9e2796053fdaa53a",
+      "included_files": 188,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exit": 0,
+      "source_sha256": "a33505d2e4e8627b925e428fc1044cfd5e110452ae41983f945742eb4c8026d2",
+      "included_files": 209,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true
+    }
+  ],
+  "host_def_sha256": "0ab22fc80460cbaf4c7b27e69099e44c2832808dad65c5bfe62c5ce3054bbf9d",
+  "host_def_definition": "line 154: #define NTVDM",
+  "selected_preprocessing": "com and timer real x86 contexts equal ignoring blank lines; raw outputs differ",
+  "focused_guard_controls": "x86 and x64 pass; snippet controls do not establish additional supported worker profiles",
+  "objects": "x86 com.obj and timer.obj compiled",
+  "full_build_and_runtime": "not yet performed for this batch"
+}

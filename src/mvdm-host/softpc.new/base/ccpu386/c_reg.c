@@ -1202,48 +1202,9 @@ c_getVM()
    }
 
 #ifdef	SPC486
-GLOBAL ISM32
-c_getAC()
-   {
-   return (ISM32)GET_AC();
-   }
-
-GLOBAL ISM32
-c_getET()
-   {
-   return (ISM32)GET_ET();
-   }
-
-GLOBAL ISM32
-c_getNE()
-   {
-   return (ISM32)GET_NE();
-   }
-
-GLOBAL ISM32
-c_getWP()
-   {
-   return (ISM32)GET_WP();
-   }
-
-GLOBAL ISM32
-c_getAM()
-   {
-   return (ISM32)GET_AM();
-   }
-
-GLOBAL ISM32
-c_getNW()
-   {
-   return (ISM32)GET_NW();
-   }
-
-GLOBAL ISM32
-c_getCD()
-   {
-   return (ISM32)GET_CD();
-   }
+#error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
+#line 1256
 
 GLOBAL IU16
 c_getSTATUS()
@@ -1410,18 +1371,9 @@ IFN1(
 
 
 #ifdef	SPC486
-GLOBAL VOID
-c_setAC
-                 
-IFN1(
-	ISM32, val
-    )
-
-
-   {
-   SET_AC(val);
-   }
+#error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
+#line 1434
 
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -1548,66 +1500,9 @@ IFN1(
    }
 
 #ifdef	SPC486
-GLOBAL VOID
-c_setNE
-                 
-IFN1(
-	ISM32, val
-    )
-
-
-   {
-   SET_NE(val);
-   }
-
-GLOBAL VOID
-c_setWP
-                 
-IFN1(
-	ISM32, val
-    )
-
-
-   {
-   SET_WP(val);
-   }
-
-GLOBAL VOID
-c_setAM
-                 
-IFN1(
-	ISM32, val
-    )
-
-
-   {
-   SET_AM(val);
-   }
-
-GLOBAL VOID
-c_setNW
-                 
-IFN1(
-	ISM32, val
-    )
-
-
-   {
-   SET_NW(val);
-   }
-
-GLOBAL VOID
-c_setCD
-                 
-IFN1(
-	ISM32, val
-    )
-
-
-   {
-   SET_CD(val);
-   }
+#error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
+#line 1620
 
 GLOBAL VOID
 c_setPG

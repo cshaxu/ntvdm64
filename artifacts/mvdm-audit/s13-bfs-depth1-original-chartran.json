@@ -1,0 +1,44 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+  "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+  "original_condition_line": 17,
+  "original_else_line": 19,
+  "original_end_line": 21,
+  "before_sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae",
+  "after_sha256": "e2cd5d6a924328db5528a16d413ab34a34e393bf11f971aa69bbdf527d0b8f7c",
+  "current_condition_line": 18,
+  "contexts": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "exit": 0,
+      "source_sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae",
+      "includes": 149,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "73892cd8ad385daace236c7b0e2f6bc904db26ecb933068767d1fdd88ac1a4ae",
+      "includes": 149,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "registration": "OPENNT-HOST-145",
+  "status": "locally-verified",
+  "limitations": [
+    "Actual WOW/call-boundaries contexts only; complete supported-context and release acceptance remain open."
+  ],
+  "verification": {
+    "preprocessor": "WOW and call-boundaries preprocessing before/after matches after scratch filename normalization and ignoring blank lines",
+    "objects": "x86 WOW and call-boundaries chartran objects compiled",
+    "guard": "isolated user branch accepted; kernel USER branch rejected",
+    "diagnostics": "pre-existing logical positions preserved with #line"
+  }
+}

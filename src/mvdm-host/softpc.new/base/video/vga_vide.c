@@ -23,12 +23,12 @@
 #ifdef VGG
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "VIDEO_BIOS_VGA.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 /*
@@ -309,22 +309,22 @@ GLOBAL VOID vga_sensible_graph_scroll_down
 	rowsdiff *= char_height;
 	lines *= char_height;
 #ifdef REAL_VGA
-	/* Not done for back M */
-	dest = video_pc_low_regen+sas_loadw(VID_ADDR)+
-		row*col_incr*char_height+col;
-	dest += (rowsdiff-1)*col_incr;
-	source = dest-lines*col_incr;
-	for(i=0;i<rowsdiff-lines;i++)
-	{
-		memcpy_16(dest,source,colsdiff);
-		source -= col_incr;
-		dest -= col_incr;
-	}
-	while(lines--)
-	{
-		memset_16(dest,attr,colsdiff);
-		dest -= col_incr;
-	}
+#error Excluded unsupported REAL_VGA configuration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #else
 	dest = sas_w_at_no_check(VID_ADDR)+ row*col_incr*char_height+col;
 	screen_updated = (col+colsdiff) <= col_incr;  /* Check for silly scroll */

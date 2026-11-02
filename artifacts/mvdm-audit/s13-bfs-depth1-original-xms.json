@@ -1,0 +1,44 @@
+{
+  "path": "src/mvdm-host/xms.486/xmsblock.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsblock.c",
+  "original_sha256": "bad1de87b499d3052e757d858b39437232f5653610dc5560c06afcc5e05fd391",
+  "original_condition_line": 194,
+  "original_else_line": 196,
+  "original_end_line": 208,
+  "before_sha256": "05b6b3b21e5249c02883abcfe61ab6ca0fe6aab6daa6f784dd838932d3e37dfa",
+  "after_sha256": "0299af7148f217e237a8f094e972da7b7a4d61f534d99d1ccc786e28ab752d5b",
+  "current_condition_line": 213,
+  "contexts": [
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "05b6b3b21e5249c02883abcfe61ab6ca0fe6aab6daa6f784dd838932d3e37dfa",
+      "includes": 177,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "05b6b3b21e5249c02883abcfe61ab6ca0fe6aab6daa6f784dd838932d3e37dfa",
+      "includes": 177,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "registration": "MVDM-HOST-DIV-594",
+  "status": "locally-verified",
+  "limitations": [
+    "Actual worker/reference x86 contexts only; full level-wide release and runtime acceptance remain open."
+  ],
+  "verification": {
+    "preprocessor": "real x86 worker output matches before/after after scratch filename normalization and ignoring blank lines",
+    "object": "x86 cached worker xmsblock.obj built with existing warnings",
+    "guard": "isolated non-i386 selected path accepted; historical i386 rejected",
+    "diagnostics": "pre-existing logical positions preserved with #line"
+  }
+}

@@ -1,0 +1,309 @@
+{
+  "scope": "original first-depth bounds; no inner branch classification",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+      "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+      "current_sha256": "a549389f2dcec8fb9932eb5b1554c193042264057cbd474b3324594a229ed56a",
+      "expression": "DEBUG",
+      "original_group_ranges": [
+        [
+          642,
+          644
+        ],
+        [
+          2288,
+          2292
+        ]
+      ],
+      "retained_function_ranges": [
+        [
+          2183,
+          2194
+        ],
+        [
+          2203,
+          2253
+        ],
+        [
+          2326,
+          2333
+        ],
+        [
+          2345,
+          2350
+        ],
+        [
+          2362,
+          2368
+        ],
+        [
+          2383,
+          2406
+        ],
+        [
+          2826,
+          2832
+        ],
+        [
+          2834,
+          2840
+        ]
+      ],
+      "register": "OPENNT-HOST-038/071/088/094"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+      "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+      "current_sha256": "a549389f2dcec8fb9932eb5b1554c193042264057cbd474b3324594a229ed56a",
+      "expression": "FE_IME",
+      "original_group_ranges": [
+        [
+          3494,
+          3502
+        ]
+      ],
+      "retained_function_ranges": [
+        [
+          2183,
+          2194
+        ],
+        [
+          2203,
+          2253
+        ],
+        [
+          2326,
+          2333
+        ],
+        [
+          2345,
+          2350
+        ],
+        [
+          2362,
+          2368
+        ],
+        [
+          2383,
+          2406
+        ],
+        [
+          2826,
+          2832
+        ],
+        [
+          2834,
+          2840
+        ]
+      ],
+      "register": "OPENNT-HOST-038/071/088/094"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+      "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+      "current_sha256": "40dc0a6b96414d7e920c16d1006f53df7bb1dc2e928732bba0961bc2def7cc05",
+      "expression": "FE_SB",
+      "original_group_ranges": [
+        [
+          375,
+          379
+        ]
+      ],
+      "retained_function_ranges": [
+        [
+          80,
+          131
+        ],
+        [
+          500,
+          558
+        ],
+        [
+          891,
+          910
+        ],
+        [
+          930,
+          975
+        ]
+      ],
+      "register": "OPENNT-HOST-039/059/060"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+      "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+      "current_sha256": "40dc0a6b96414d7e920c16d1006f53df7bb1dc2e928732bba0961bc2def7cc05",
+      "expression": "DBG",
+      "original_group_ranges": [
+        [
+          1070,
+          1074
+        ]
+      ],
+      "retained_function_ranges": [
+        [
+          80,
+          131
+        ],
+        [
+          500,
+          558
+        ],
+        [
+          891,
+          910
+        ],
+        [
+          930,
+          975
+        ]
+      ],
+      "register": "OPENNT-HOST-039/059/060"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "current_sha256": "59b57920a816fbc1e46413c6c9747468b2f27149f46c7af27f69aa06e680211a",
+      "expression": "FE_SB",
+      "original_group_ranges": [
+        [
+          22,
+          25
+        ],
+        [
+          59,
+          640
+        ],
+        [
+          677,
+          711
+        ],
+        [
+          719,
+          722
+        ],
+        [
+          875,
+          885
+        ],
+        [
+          1213,
+          1215
+        ],
+        [
+          1224,
+          1228
+        ]
+      ],
+      "retained_function_ranges": [
+        [
+          761,
+          860
+        ],
+        [
+          1867,
+          1956
+        ],
+        [
+          1971,
+          1974
+        ]
+      ],
+      "register": "OPENNT-HOST-097/110"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "current_sha256": "59b57920a816fbc1e46413c6c9747468b2f27149f46c7af27f69aa06e680211a",
+      "expression": "DEBUG",
+      "original_group_ranges": [
+        [
+          1598,
+          1601
+        ]
+      ],
+      "retained_function_ranges": [
+        [
+          761,
+          860
+        ],
+        [
+          1867,
+          1956
+        ],
+        [
+          1971,
+          1974
+        ]
+      ],
+      "register": "OPENNT-HOST-097/110"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "current_sha256": "59b57920a816fbc1e46413c6c9747468b2f27149f46c7af27f69aa06e680211a",
+      "expression": "LATER",
+      "original_group_ranges": [
+        [
+          1622,
+          1634
+        ],
+        [
+          1673,
+          1685
+        ]
+      ],
+      "retained_function_ranges": [
+        [
+          761,
+          860
+        ],
+        [
+          1867,
+          1956
+        ],
+        [
+          1971,
+          1974
+        ]
+      ],
+      "register": "OPENNT-HOST-097/110"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "current_sha256": "59b57920a816fbc1e46413c6c9747468b2f27149f46c7af27f69aa06e680211a",
+      "expression": "_USERK_",
+      "original_group_ranges": [
+        [
+          1657,
+          1661
+        ]
+      ],
+      "retained_function_ranges": [
+        [
+          761,
+          860
+        ],
+        [
+          1867,
+          1956
+        ],
+        [
+          1971,
+          1974
+        ]
+      ],
+      "register": "OPENNT-HOST-097/110"
+    }
+  ]
+}

@@ -103,6 +103,8 @@ q_event_init(
       void
       )
 {
+#ifndef MONITOR
+#line 106
      PLIST_ENTRY Next;
      PQEV_ENTRY pqevEntry;
 
@@ -135,6 +137,8 @@ q_event_init(
      host_TimeStamp(&qevCalibTime);
 
      host_ica_unlock();
+#endif
+#line 138
 }
 
 
@@ -142,6 +146,8 @@ q_event_init(
 /*
  *  Caller must hold ica lock
  */
+#ifndef MONITOR
+#line 145
 void
 ResetCpuQevCount(
      PLARGE_INTEGER CurrTime
@@ -179,6 +185,8 @@ ResetCpuQevCount(
      qevNextDueTime.QuadPart = CurrTime->QuadPart + DelayTime;
      host_q_ev_set_count(host_calc_q_ev_inst_for_time(DelayTime));
 }
+#endif
+#line 182
 
 
 
@@ -195,6 +203,10 @@ add_q_event_t(
       long param
       )
 {
+#ifdef MONITOR
+#error Excluded unsupported quick-event hardware monitor path
+#else
+#line 198
 
 
         QEVHANDLE   qevHandle;
@@ -276,6 +288,8 @@ add_q_event_t(
         return qevHandle.Handle;
 
 
+#endif
+#line 279
 }
 
 
@@ -307,6 +321,8 @@ dispatch_q_event(
     void
     )
 {
+#ifndef MONITOR
+#line 310
         PQEV_ENTRY  pqevEntry;
         LARGE_INTEGER CurrTime;
         Q_CALLBACK_FN qevCallBack = NULL;
@@ -342,6 +358,8 @@ dispatch_q_event(
         if (qevCallBack) {
             (*qevCallBack)(Param);
             }
+#endif
+#line 345
 }
 
 
@@ -350,6 +368,8 @@ delete_q_event(
         q_ev_handle Handle
         )
 {
+#ifndef MONITOR
+#line 353
         QEVHANDLE   qevHandle;
         PLIST_ENTRY Next;
         LARGE_INTEGER CurrTime;
@@ -418,11 +438,15 @@ delete_q_event(
 
 
         host_ica_unlock();
+#endif
+#line 421
 }
 
 
 
 
+#ifndef MONITOR
+#line 426
 /*
  * The QuickEvent list stores time in usecs. The CPU quick event counter
  * uses Instruction Jump Counts (IJC) which tracks progress in emulated
@@ -580,3 +604,4 @@ quick_tick_recalibrate(void)
 
 }
 
+#endif

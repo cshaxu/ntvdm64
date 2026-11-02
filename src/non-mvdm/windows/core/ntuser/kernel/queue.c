@@ -250,10 +250,9 @@ NTSTATUS xxxInitTask(
                 }
             }
 #ifdef DEBUG
-            if (pwti == NULL) {
-                RIPMSG0(RIP_WARNING, "InitTask couldn't find WOW struct\n");
-            }
+#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
+#line 257
         }
     }
     pti->pClientInfo->dwTIFlags |= pti->TIF_flags;

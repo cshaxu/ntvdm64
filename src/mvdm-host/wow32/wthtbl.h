@@ -20,5 +20,5 @@ extern W32 aw32ToolHelp[];
 
 
 #ifdef DEBUG_OR_WOWPROFILE
-extern INT iToolHelpMax;
+#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected
 #endif

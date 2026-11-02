@@ -1,0 +1,206 @@
+{
+  "scope": "first-depth DBG existing guards in selected DPMI/DEM/redirector TUs",
+  "contexts": [
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "includes": 185,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "includes": 159,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "includes": 157,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "includes": 158,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "includes": 185,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "includes": 159,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "includes": 157,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "includes": 158,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    }
+  ],
+  "fixture_context": "DEM directory and DPMI trace fixtures inherit selected original build flags; test trace additions do not define DBG",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "current_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+      "local_line": 436,
+      "original_line": 426,
+      "ordinal": 1,
+      "group_count": 9,
+      "independent_anchors": 5,
+      "individually_anchored": false,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "current_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+      "local_line": 2338,
+      "original_line": 2325,
+      "ordinal": 7,
+      "group_count": 9,
+      "independent_anchors": 5,
+      "individually_anchored": false,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "current_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+      "local_line": 2405,
+      "original_line": 2394,
+      "ordinal": 8,
+      "group_count": 9,
+      "independent_anchors": 5,
+      "individually_anchored": false,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "current_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+      "local_line": 2676,
+      "original_line": 2662,
+      "ordinal": 9,
+      "group_count": 9,
+      "independent_anchors": 5,
+      "individually_anchored": false,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
+      "current_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "local_line": 272,
+      "original_line": 271,
+      "ordinal": 4,
+      "group_count": 5,
+      "independent_anchors": 3,
+      "individually_anchored": false,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
+      "current_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "local_line": 324,
+      "original_line": 323,
+      "ordinal": 5,
+      "group_count": 5,
+      "independent_anchors": 3,
+      "individually_anchored": false,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "local_line": 1351,
+      "original_line": 1327,
+      "ordinal": 7,
+      "group_count": 11,
+      "independent_anchors": 9,
+      "individually_anchored": false,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "local_line": 1565,
+      "original_line": 1547,
+      "ordinal": 9,
+      "group_count": 11,
+      "independent_anchors": 9,
+      "individually_anchored": false,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 1134,
+      "original_line": 1233,
+      "ordinal": 28,
+      "group_count": 35,
+      "independent_anchors": 34,
+      "individually_anchored": false,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    }
+  ],
+  "limits": "identical blocks without unique individual anchors assigned in source order after complete group-kind agreement and non-conflicting anchors; no source changed"
+}

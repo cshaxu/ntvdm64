@@ -78,19 +78,9 @@ Return Value:
     BOOL    Result;
 
 #ifdef DEBUG
-    //
-    // Filename argument must already be lowercase.  Be sure.
-    //
-
-    {
-        char Lowercase[MAX_PATH];
-
-        WOW32ASSERT(strlen(FileName) < MAX_PATH-1);
-        strcpy(Lowercase, FileName);
-        _strlwr(Lowercase);
-        WOW32ASSERT(!strcmp(FileName, Lowercase));
-    }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 94
 
     if (!strcmp(FileName, szWinDotIni)) {
         Result = TRUE;

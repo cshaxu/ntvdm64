@@ -48,12 +48,12 @@
 #endif
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_FLOPPY.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 
@@ -1039,12 +1039,12 @@ static void fla_ndma_unbump_sectid IFN0()
 }
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * function will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_INIT.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 void fla_init IFN0()

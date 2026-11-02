@@ -34,26 +34,6 @@ XADD CPU functions.
 
 
 #ifdef SPC486
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/* Generic - one size fits all 'xadd'.                                */
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-GLOBAL VOID
-XADD
-       	    	    	                    
-IFN3(
-	IU32 *, pop1,	/* pntr to dst/lsrc operand */
-	IU32 *, pop2,	/* pntr to dst/rsrc operand */
-	IUM8, op_sz	/* 8, 16 or 32-bit */
-    )
-
-
-   {
-   IU32 temp;
-
-   temp = *pop1;
-   ADD(pop1, *pop2, op_sz);
-   *pop2 = temp;
-   }
-
+#error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
+#line 60

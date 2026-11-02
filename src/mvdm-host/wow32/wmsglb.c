@@ -19,58 +19,9 @@ MODNAME(wmsglb.c);
 
 
 #ifdef DEBUG
-
-MSGINFO amiLB[] = {
-   {OLDLB_ADDSTRING,        "LB_ADDSTRING"},        // 0x0401
-   {OLDLB_INSERTSTRING,     "LB_INSERTSTRING"},     // 0x0402
-   {OLDLB_DELETESTRING,     "LB_DELETESTRING"},     // 0x0403
-   {OLDLB_RESETCONTENT,     "LB_RESETCONTENT"},     // 0x0405
-   {OLDLB_SETSEL,       "LB_SETSEL"},           // 0x0406
-   {OLDLB_SETCURSEL,        "LB_SETCURSEL"},        // 0x0407
-   {OLDLB_GETSEL,       "LB_GETSEL"},           // 0x0408
-   {OLDLB_GETCURSEL,        "LB_GETCURSEL"},        // 0x0409
-   {OLDLB_GETTEXT,      "LB_GETTEXT"},          // 0x040A
-   {OLDLB_GETTEXTLEN,       "LB_GETTEXTLEN"},       // 0x040B
-   {OLDLB_GETCOUNT,     "LB_GETCOUNT"},         // 0x040C
-   {OLDLB_SELECTSTRING,     "LB_SELECTSTRING"},     // 0x040D
-   {OLDLB_DIR,          "LB_DIR"},          // 0x040E
-   {OLDLB_GETTOPINDEX,      "LB_GETTOPINDEX"},      // 0x040F
-   {OLDLB_FINDSTRING,       "LB_FINDSTRING"},       // 0x0410
-   {OLDLB_GETSELCOUNT,      "LB_GETSELCOUNT"},      // 0x0411
-   {OLDLB_GETSELITEMS,      "LB_GETSELITEMS"},      // 0x0412
-   {OLDLB_SETTABSTOPS,      "LB_SETTABSTOPS"},      // 0x0413
-   {OLDLB_GETHORIZONTALEXTENT,  "LB_GETHORIZONTALEXTENT"},  // 0x0414
-   {OLDLB_SETHORIZONTALEXTENT,  "LB_SETHORIZONTALEXTENT"},  // 0x0415
-   {OLDLB_SETCOLUMNWIDTH,   "LB_SETCOLUMNWIDTH"},       // 0x0416
-   {OLDLB_ADDFILE,      "LB_ADDFILE"},          // 0x0417
-   {OLDLB_SETTOPINDEX,      "LB_SETTOPINDEX"},      // 0x0418
-   {OLDLB_GETITEMRECT,      "LB_GETITEMRECT"},      // 0x0419
-   {OLDLB_GETITEMDATA,      "LB_GETITEMDATA"},      // 0x041A
-   {OLDLB_SETITEMDATA,      "LB_SETITEMDATA"},      // 0x041B
-   {OLDLB_SELITEMRANGE,     "LB_SELITEMRANGE"},     // 0x041C
-   {OLDLB_SETANCHORINDEX,   "LB_SETANCHORINDEX"},       // 0x041D
-   {OLDLB_GETANCHORINDEX,   "LB_GETANCHORINDEX"},       // 0x041E
-   {OLDLB_SETCARETINDEX,    "LB_SETCARETINDEX"},        // 0x041F
-   {OLDLB_GETCARETINDEX,    "LB_GETCARETINDEX"},        // 0x0420
-   {OLDLB_SETITEMHEIGHT,    "LB_SETITEMHEIGHT"},        // 0x0421
-   {OLDLB_GETITEMHEIGHT,    "LB_GETITEMHEIGHT"},        // 0x0422
-   {OLDLB_FINDSTRINGEXACT,  "LB_FINDSTRINGEXACT"},      // 0x0423
-   {OLDLBCB_CARETON,        "LBCB_CARETON"},            // 0x0424
-   {OLDLBCB_CARETOFF,        "LBCB_CARETOFF"},          // 0x0425
-};
-
-PSZ GetLBMsgName(WORD wMsg)
-{
-    INT i;
-    register PMSGINFO pmi;
-
-    for (pmi=amiLB,i=NUMEL(amiLB); i>0; i--,pmi++)
-        if ((WORD)pmi->uMsg == wMsg)
-        return pmi->pszMsgName;
-    return GetWMMsgName(wMsg);
-}
-
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 74
 
 
 BOOL FASTCALL ThunkLBMsg16(LPMSGPARAMEX lpmpex)

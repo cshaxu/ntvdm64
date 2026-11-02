@@ -17,12 +17,12 @@
 
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_BIOS.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 /*
@@ -75,21 +75,36 @@ void cassette_io()
         unsigned long setup_int15_function = (unsigned long)getAH();
         unsigned long setup_int15_argument = (unsigned long)getAL();
 #ifdef PM
+#ifndef CPU_30_STYLE
+#line 78
 IMPORT void retrieve_descr_fields IPT4(half_word *, AR, sys_addr *, base,
 	word *, limit, sys_addr, descr_addr);
+#endif /* not CPU_30_STYLE */
+#line 80
 half_word cmos_u_m_s_hi;
 half_word cmos_u_m_s_lo;
 sys_addr gdt;
 sys_addr  source;
 sys_addr  source_base;
 sys_addr  target;
+#if (!defined(PROD) || !defined(CPU_30_STYLE))
+#line 86
 word      source_limit;
 word      target_limit;
+#endif
+#line 88
 sys_addr  target_base;
 sys_addr byte_count;   /* Max size is 0x8000 * 2 = 10000 */
+#ifdef CPU_30_STYLE
+#error Excluded unsupported CPU30 descriptor path
+#else
+#line 90
 half_word source_AR;
 half_word target_AR;
+#endif /* CPU_30_STYLE */
+#line 92
 #endif /* PM */
+#line 93
 
 	half_word	mask,		/* interrupt mask			*/
 			alarm;		/* value read from alarm register	*/	
@@ -266,13 +281,9 @@ half_word target_AR;
 		break;
 
 #ifdef	SPC486
-	case 0xc9:
-		setCF( 0 );
-		setAH( 0 );
-		setCX( 0xE401 );
-		note_trace0(GENERAL_VERBOSE, "INT15: C9 chip revision");
-		break;
+#error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
+#line 276
 
 	/* Keyboard intercept 0x4f, wait_event 83, wait 86 are all no longer
 	 * passed through from ROM.

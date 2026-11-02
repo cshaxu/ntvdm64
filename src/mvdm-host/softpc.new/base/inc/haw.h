@@ -18,7 +18,7 @@
 
 
 #ifdef SCCSID
-static char SccsID[]="@(#)haw.h	1.2 12/20/94";
+#error Excluded unsupported SCCSID configuration
 #endif
 
 /* Standard device sample formats */

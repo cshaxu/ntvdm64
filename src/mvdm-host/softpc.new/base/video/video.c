@@ -42,12 +42,12 @@
 
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "VIDEO_BIOS.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 
@@ -1574,7 +1574,7 @@ GLOBAL void vd_write_char IFN0()
 		for(i = 0; i < getCX(); i++)
 		{
 #if ( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined( GISP_SVGA )
-                        *((unsigned char *)( video_pc_low_regen + cpos)) =  getAL();
+#error DIVERGENCE MVDM-HOST-DIV-581: standalone SAS excludes direct video memory writes
 #else
 #ifdef	EGG
 			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
@@ -2028,7 +2028,7 @@ GLOBAL void vd_write_teletype IFN0()
 		 */
 
 #if ( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined( GISP_SVGA )
-                *((unsigned char *)( video_pc_low_regen + ch_addr)) = ch;
+#error DIVERGENCE MVDM-HOST-DIV-581: standalone SAS excludes direct video memory writes
 #else
 #ifdef	EGG
 			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
@@ -2577,12 +2577,12 @@ LOCAL void vd_dummy IFN0()
 #endif
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_INIT.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 GLOBAL void video_init IFN0()

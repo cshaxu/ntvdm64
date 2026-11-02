@@ -1,0 +1,26 @@
+[
+  {
+    "path": "src/mvdm-host/inc/mvdm.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\mvdm.h",
+    "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
+    "current_sha256": "58d53501684b75ce32ad94dff6c04add52a435dbac28832ac7dc84652315e99a",
+    "original_line": 73,
+    "local_line": 63,
+    "original_condition": "#ifdef\ti386",
+    "local_condition": "#if defined(i386) || defined(_M_IX86)",
+    "registered_adaptation": "MVDM-SUPPORT-DIV-006",
+    "conclusion": "existing adapted first-depth framework; no restoration; reachability requires separate assessment"
+  },
+  {
+    "path": "src/mvdm-host/inc/suballoc.h",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\suballoc.h",
+    "original_sha256": "98263eed4c261650c4b9c9b23f09f2ef19b31a0b1eb5c805d4c672ee85ded85c",
+    "current_sha256": "23d2e7a2eb84686905b1898a7c69b016967caa37290aa84e09c6ad7f2e54dce9",
+    "original_line": 32,
+    "local_line": 33,
+    "original_condition": "#ifdef i386",
+    "local_condition": "#if defined(i386) || defined(_M_IX86)",
+    "registered_adaptation": "MVDM-SUPPORT-DIV-007",
+    "conclusion": "existing adapted first-depth framework; no restoration; reachability requires separate assessment"
+  }
+]

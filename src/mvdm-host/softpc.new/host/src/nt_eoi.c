@@ -58,6 +58,8 @@ HANDLE hWowIdleEvent = INVALID_HANDLE_VALUE;
 static EOIHOOKPROC EoiHooks[16]={NULL};  // must be init to NULL
 
 
+#ifndef MONITOR
+#line 57
 void DelayIrqQuickEvent(long param);
 q_ev_handle DelayHandle[16];
 #define pNtVDMState ((PULONG)(Start_of_M_area + FIXED_NTVDMSTATE_LINEAR))
@@ -65,6 +67,8 @@ q_ev_handle DelayHandle[16];
 LARGE_INTEGER BlockTime = {0,0};
 extern LARGE_INTEGER CurrHeartBeat;
 void host_TimeStamp(PLARGE_INTEGER pliTime);
+#endif
+#line 64
 
 
 /*
@@ -91,7 +95,11 @@ BlockWOWIdle(
    if (Blocking) {
        *pNtVDMState |= VDM_WOWBLOCKED;
 
+#ifndef MONITOR
+#line 90
        BlockTime = CurrHeartBeat;
+#endif
+#line 91
 
        }
    else {
@@ -99,6 +107,8 @@ BlockWOWIdle(
 
 
 
+#ifndef MONITOR
+#line 98
        if (BlockTime.QuadPart &&
            (CurrHeartBeat.QuadPart >= BlockTime.QuadPart + SYSTEM_TICK_INTV/2))
           {
@@ -108,6 +118,8 @@ BlockWOWIdle(
            ActivityCheckAfterTimeSlice();
            return;
            }
+#endif
+#line 107
        }
 
    host_ica_unlock();
@@ -220,7 +232,13 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
    int adapter;
    ULONG  IrqLine;
 
+#ifdef MONITOR
+#error Excluded unsupported delayed-interrupt monitor declarations
+#else
+#line 219
    ULONG TicCount;
+#endif
+#line 220
 
    host_ica_lock();
 
@@ -239,6 +257,10 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
            }
 
 
+#ifdef MONITOR
+#error Excluded unsupported delayed-interrupt monitor dispatch
+#else
+#line 238
         //
         // Cancel delay hw interrupt, delete quick event if any
         //
@@ -266,6 +288,8 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
         // Keep Wow Tasks active
         //
         WOWIdle(TRUE);
+#endif
+#line 265
 
 
 
@@ -294,6 +318,8 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
  * QuickEvent call back function
  *
  */
+#ifndef MONITOR
+#line 293
 void DelayIrqQuickEvent(long param)
 {
    ULONG IrqLineNum = param;
@@ -306,6 +332,8 @@ void DelayIrqQuickEvent(long param)
    host_ica_unlock();
 
 }
+#endif
+#line 305
 
 
 
@@ -445,6 +473,10 @@ VOID DisableEmulatorIretHooks(void)
 //
 VOID ica_RestartInterrupts(ULONG IrqLine)
 {
+#ifdef MONITOR
+#error Excluded unsupported monitor interrupt restart
+#else
+#line 436
     host_ica_lock();
 
     DelayIrqLine &= ~IrqLine;
@@ -452,5 +484,10 @@ VOID ica_RestartInterrupts(ULONG IrqLine)
     ica_restart_interrupts(IrqLine >> 3 ? ICA_SLAVE : ICA_MASTER);
 
     host_ica_unlock();
+#endif
+#line 443
 }
 
+#ifdef MONITOR
+#error Excluded unsupported monitor IRET table
+#endif

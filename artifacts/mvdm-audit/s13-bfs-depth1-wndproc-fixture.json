@@ -1,0 +1,29 @@
+{
+  "scope": "controlled WOW32 dispatch exception fixture and byte-exact current-mirror WndProc extraction",
+  "files": {
+    "tests/observation/extract-wow-wndproc-fixture.ps1": "d1fbafcbed4909d7dfebdfecd3616174b10412215a8bd778e786dd2ebe456be8",
+    "tests/observation/verify-wow-dispatch-exception.ps1": "eeb1ebd36808e591562c75f8b0d18542fd21baf1403e63a63f723e48dbf969b8",
+    "tests/adapter-mvdm-host-out/wow/wow_dispatch_exception_fixture.c": "a598c9bfb19369c0d606767ddc94a38c79ae053d89a68e2c77affbbb2b1aefe5",
+    "src/mvdm-host/wow32/wmdisp32.c": "c75908fda4000b814375c8d74b1fa020e4c3c5bb5f8a062730a844bd6d7759b7",
+    "src/mvdm-host/wow32/wow32.c": "5ca36174406908c1db9dfec2ad09cc35ec11f3ce565c1f72f58c3436619d6071"
+  },
+  "original_source_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4",
+  "extraction": {
+    "originalSha256": "4A9004C1F57AF28280D0176AFD72CAE76A7FBAE90FFB758426C287435E5912D4",
+    "length": 8302,
+    "mirrorSha256": "C75908FDA4000B814375C8D74B1FA020E4C3C5BB5F8A062730A844BD6D7759B7",
+    "bodySha256": "D9EDBDEB7B6D62AED33FA208DD5D6988B1899360A146F3ABE02DCFC4F18CDBEF",
+    "start": 973
+  },
+  "result": {
+    "exit": 0,
+    "dispatch_phases": 8,
+    "hard_error_modes": 5,
+    "debugger_first_chance": "child exit 0",
+    "fixture_output_sha256": "52ab8e47bc553c6233091f8867be6f103f1c5e6f0bf278f16e79d6be33bb2855",
+    "fixture_map_sha256": "49fa62d0381339f913ddd9865916fa6b31e2a0e9d472ba36e2ea6eadf9cf6bd6",
+    "unrelated_service_map_gate": "passed"
+  },
+  "limitations": "controlled host fixture; does not prove real Win16 execution or cover full product acceptance",
+  "prior_failures": "prior extraction demanded entire source match original; first retest found absolute path bug, second found duplicate wmdisp source, third found conflated fixture runtime-fail sentinel, fourth found PowerShell Get-FileHash pipeline bug; all corrected before final pass"
+}

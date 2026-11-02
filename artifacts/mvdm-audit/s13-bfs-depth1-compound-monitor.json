@@ -1,0 +1,255 @@
+{
+  "scope": "first-depth compound NTVDM && MONITOR sole-error branches",
+  "contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "dbb9d622d6ac68c28aeaaa243a2a7f2d65e74836df537ce0a979074d75f93284",
+      "includes": 194,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
+      "includes": 171,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "49cfaa407346a464aa8ee90fa3dc30116cc8644b82313c95ff2d67451cd1db71",
+      "includes": 177,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "c3d5b62cd7de868750cc40e9bc4e203c571b0edb8fa8c7178c1dac30d28d2e44",
+      "includes": 179,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
+      "includes": 182,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "6ea5365b039b059a4b16dbe2c8d0f630c4db670105159644fcfd7d84630038c6",
+      "includes": 173,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "includes": 189,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "b104e4d3f599d97ba05998b2bd9c918ea1fb718fbcdffc1c548fd570b9a7f674",
+      "includes": 182,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "dbb9d622d6ac68c28aeaaa243a2a7f2d65e74836df537ce0a979074d75f93284",
+      "includes": 194,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
+      "includes": 171,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "49cfaa407346a464aa8ee90fa3dc30116cc8644b82313c95ff2d67451cd1db71",
+      "includes": 177,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "c3d5b62cd7de868750cc40e9bc4e203c571b0edb8fa8c7178c1dac30d28d2e44",
+      "includes": 179,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
+      "includes": 182,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "6ea5365b039b059a4b16dbe2c8d0f630c4db670105159644fcfd7d84630038c6",
+      "includes": 173,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "includes": 189,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "b104e4d3f599d97ba05998b2bd9c918ea1fb718fbcdffc1c548fd570b9a7f674",
+      "includes": 182,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "classified": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "source_sha256": "dbb9d622d6ac68c28aeaaa243a2a7f2d65e74836df537ce0a979074d75f93284",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
+      "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+      "local_line": 273,
+      "original_line": 275,
+      "anchor": [
+        "case INT15_INTERRUPT_COMPLETE:",
+        "break;",
+        "case INT15_CONFIGURATION:"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "source_sha256": "49cfaa407346a464aa8ee90fa3dc30116cc8644b82313c95ff2d67451cd1db71",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\virtual.c",
+      "original_sha256": "346e2186fe608c318a25796c7d6a35bbc8de6f21c255b212c2ddfc2bc3c89f40",
+      "local_line": 21,
+      "original_line": 21,
+      "anchor": [
+        "*    O/S include files.",
+        "*/",
+        "#include <stdio.h>"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_line": 33,
+      "original_line": 33,
+      "anchor": [
+        "*/",
+        "#include <stdio.h>",
+        "#include <ctype.h>"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "source_sha256": "b104e4d3f599d97ba05998b2bd9c918ea1fb718fbcdffc1c548fd570b9a7f674",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer_.c",
+      "original_sha256": "53edfe9fb4bb9d965acb8a7cc5f33d14cdf0694957dadfa912e0175488dbcf81",
+      "local_line": 87,
+      "original_line": 86,
+      "anchor": [
+        "LPT2_TIMEOUT_ADDRESS,",
+        "LPT3_TIMEOUT_ADDRESS };",
+        "#endif /* PRINTER */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "source_sha256": "6ea5365b039b059a4b16dbe2c8d0f630c4db670105159644fcfd7d84630038c6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\ios.c",
+      "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+      "local_line": 293,
+      "original_line": 308,
+      "anchor": [
+        "==============================================================================",
+        "*/",
+        "/* MS NT monitor uses these string routines {in,out}s{b,w} string io support */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "source_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
+      "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+      "local_line": 19,
+      "original_line": 19,
+      "anchor": [
+        "* (C) Copyright Insignia Solutions Ltd, 1994.",
+        "*/",
+        "#include <stdio.h>"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    }
+  ],
+  "limitations": [
+    "First-depth unique anchor matches only; unmatched groups retained pending.",
+    "No product runtime or guest validation implied."
+  ]
+}

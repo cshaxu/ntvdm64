@@ -1,0 +1,86 @@
+{
+  "original_profile_traces": [
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "dc2d0bd2f6631c43edc492e517dbe6dd116bc28b7c3822163de66f09c959f28f",
+      "includes": 339,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "101b160b8a69b19150839128028f6e2e55a11da7ab66ace109e371131f1c4032",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    }
+  ],
+  "callback_provider_fixture_trace": {
+    "fixture": "tests/observation/wow_callback_abort_provider.c",
+    "fixture_sha256": "cff759ef23aef0592fc654f973aa3b204bb5b1a05d037c7fae2510d7bc7d3849",
+    "exit": 0,
+    "included_count": 325,
+    "provider_included": true,
+    "debug_definitions": [],
+    "debug_flags": [],
+    "error": ""
+  },
+  "selected_preprocessing": [
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "81458ebfef712065972992a4ad3bbbd0f8c5b56eb57d3b613bc3d73eb3e57d2a",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "61c56d4eb2cf644a8a3df6441e20616df186a8aa33e2c365ab65387c35b64754",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "c6c230b364341d59a89ed0e9a131ae68ff8842f001837d411903304b18fb5df9",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "1a5748a46d0fc9c9a3068e341cfead8a88225cd3da649c76349711664aa79e6c",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    }
+  ],
+  "objects": "x86 WOW wow32.obj and wcall16.obj compiled",
+  "guard_controls": "x86 and x64 pass for all 20 DEBUG arms including two selected alternatives",
+  "callback_test": {
+    "exit": 0,
+    "fixture_sha256": "2e5e8e70209e3ec873913116ca3503f9d4c8b00f8958174182dd0403f1d186db",
+    "abort_sha256": "8ba24615201dcadb0415ff3e5bdc93c4f12363c06c44bfd69e34ba5feb747896",
+    "inputs_sha256": "d8aace948f88210ee7d13f945f694a0920bc86a84fa8a93dabeede1534bde4ec",
+    "abort_cases": 11,
+    "scope": "selected original CallBack16 frame with controlled resolver and CPU, not full guest runtime"
+  },
+  "harness_fix": "Get-FileHash now receives explicit -LiteralPath for each string; first run reached passing behavioral assertions but failed on the former PowerShell pipeline binding.",
+  "runtime_limits": "No WOW application runtime check performed on intermediate objects; full product gate pending."
+}

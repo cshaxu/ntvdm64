@@ -204,7 +204,11 @@ DWORD HeartBeatThread(PVOID pv);
 void CreepAdjust(LARGE_INTEGER DiffTime);
 void DemHeartBeat(void);
 
+#ifndef MONITOR
+#line 207
 void quick_tick_recalibrate(void);
+#endif
+#line 208
 
 void rtc_init(void);
 void RtcTick(struct host_timeval *time);
@@ -236,6 +240,10 @@ LARGE_INTEGER CreepTicCount;
 int    HeartBeatResumes=0;
 BOOL   bDoingTicInterrupt=FALSE;
 BOOL   bUpdateRtc;
+#if defined(MONITOR) && defined(X86GFX)
+#error Excluded unsupported monitor timer switch state
+#endif
+#line 239
 
 
 
@@ -411,12 +419,16 @@ void host_timer_event()
             PrioWaitIfIdle(FgBgPriority);
         }
 
+#ifndef MONITOR
+#line 414
    quick_tick_recalibrate();
+#endif
+#line 415
 
 
 
 #ifdef YODA
-    CheckForYodaEvents();
+#error Excluded unsupported YODA configuration
 #endif
 
     host_com_heart_beat();              //  com  device
@@ -484,7 +496,11 @@ VOID host_init_bda_timer(void)
     // reset the Real Time Clock
     rtc_init();
 
+#ifndef MONITOR
+#line 487
     q_event_init();
+#endif
+#line 488
 
 }
 
@@ -561,6 +577,10 @@ DWORD HeartBeatThread(PVOID pv)
    DWORD dwRet = (DWORD)-1;
 
    try {
+#ifdef MONITOR
+#error Excluded unsupported monitor timer lock setup
+#endif
+#line 564
 
 
 
@@ -584,6 +604,10 @@ DWORD HeartBeatThread(PVOID pv)
 #endif
 
 
+#ifdef MONITOR
+#error Excluded unsupported monitor timer lock release
+#endif
+#line 587
       dwRet = Win32_host_timer();
 
       }
@@ -737,6 +761,10 @@ NTSTATUS DelayHeartBeat(LONG Delay)
 
      liDelay.QuadPart  = Int32x32To64(Delay, -10);
 
+#ifdef MONITOR
+#error Excluded unsupported monitor heartbeat wait
+#else
+#line 757
 //
 // On Risc platforms we only have to deal with the
 // HeartBeat Resume\Suspend objects so things are much simpler
@@ -758,6 +786,8 @@ NTSTATUS DelayHeartBeat(LONG Delay)
          }
 
 
+#endif
+#line 778
          // alerted to die
      /* DIVERGENCE: MVDM-HOST-DIV-040. The same-shaped public Win32 adapter
       * wakes this alertable wait through QueueUserAPC.  Modern user-mode

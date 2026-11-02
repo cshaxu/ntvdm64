@@ -1,0 +1,1098 @@
+{
+  "scope": "Actual x86 worker profile, supported associated controller and directly-including keyboard fixture contexts",
+  "product_include_evidence": "s13-bfs-depth1-ntvdm-invariant.json and s13-bfs-depth1-ntvdm-batch2-existing.json",
+  "keyboard_fixture_evidence": "s13-bfs-depth1-ntvdm-keyba-existing.json",
+  "existing_exclusions": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_sha256": "74d040039f92671ef0da05ba7d98b8ed652af4483f18dd982df06d8c227c4c5d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "local_group_line": 776,
+      "local_else_line": 786,
+      "original_group_line": 832,
+      "preceding_anchor": [
+        "equip_flag.bits.ram_size = 0;",
+        "equip_flag.bits.rs232_count = NUM_SERIAL_PORTS;",
+        "equip_flag.bits.game_io_present = FALSE;"
+      ],
+      "following_anchor": [
+        "sas_storew(EQUIP_FLAG, equip_flag.all);",
+        "sas_storew(MEMORY_VAR, host_get_memory_size());",
+        "gfxAdapt = (ULONG)config_inquire(C_GFX_ADAPTER, NULL);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_group_line": 124,
+      "local_else_line": 126,
+      "original_group_line": 127,
+      "preceding_anchor": [
+        "} adapter_state[NUM_SERIAL_PORTS];",
+        "#endif",
+        "int modem_status_changed;"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_group_line": 1193,
+      "local_else_line": 1221,
+      "original_group_line": 1515,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "GLOBAL void",
+        "recv_char IFN1(long, adapt_long)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_group_line": 1650,
+      "local_else_line": 1652,
+      "original_group_line": 2070,
+      "preceding_anchor": [
+        "newLCR.bits.no_of_stop_bits + 1);",
+        "host_com_ioctl(adapter, HOST_COM_STOPBITS,",
+        "!= newLCR.bits.no_of_stop_bits)"
+      ],
+      "following_anchor": [
+        "{",
+        "newParity = HOST_COM_PARITY_NONE;",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_group_line": 1660,
+      "local_else_line": 1662,
+      "original_group_line": 2080,
+      "preceding_anchor": [
+        "{",
+        "else if (newLCR.bits.stick_parity == PARITY_STICK)",
+        "}"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_group_line": 1669,
+      "local_else_line": 1671,
+      "original_group_line": 2089,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "HOST_COM_PARITY_ODD : HOST_COM_PARITY_EVEN;",
+        "}",
+        "#ifdef NTVDM"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_group_line": 1680,
+      "local_else_line": 1682,
+      "original_group_line": 2100,
+      "preceding_anchor": [
+        "}",
+        "HOST_COM_PARITY_ODD : HOST_COM_PARITY_EVEN;",
+        "#endif"
+      ],
+      "following_anchor": [
+        "{",
+        "parity = HOST_COM_PARITY_NONE;",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_group_line": 1690,
+      "local_else_line": 1692,
+      "original_group_line": 2110,
+      "preceding_anchor": [
+        "{",
+        "else if (asp->line_control_reg.bits.stick_parity == PARITY_STICK)",
+        "}"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_group_line": 1699,
+      "local_else_line": 1701,
+      "original_group_line": 2119,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "HOST_COM_PARITY_ODD : HOST_COM_PARITY_EVEN;",
+        "}",
+        "if (newParity != parity)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "current_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_group_line": 2178,
+      "local_else_line": 2188,
+      "original_group_line": 2629,
+      "preceding_anchor": [
+        "adapter_state[adapter].had_first_read = FALSE;",
+        "#endif",
+        "host_com_disable_open(adapter,TRUE);"
+      ],
+      "following_anchor": [
+        "for(i = port_start[adapter]; i <= port_end[adapter]; i++)",
+        "io_connect_port(i, com_adaptor[adapter], IO_READ_WRITE);",
+        "adapter_state[adapter].hw_interrupt_priority = int_pri[adapter];"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "local_group_line": 668,
+      "local_else_line": 671,
+      "original_group_line": 668,
+      "preceding_anchor": [
+        "setDL(equip_flag.bits.max_diskette + 1);",
+        "else",
+        "setDL(0);"
+      ],
+      "following_anchor": [
+        "{",
+        "if (! high_density(drive))",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "local_group_line": 1044,
+      "local_else_line": 1047,
+      "original_group_line": 1050,
+      "preceding_anchor": [
+        "word md_segment, md_offset;",
+        "half_word lastrate;",
+        "half_word dt_drive_type;"
+      ],
+      "following_anchor": [
+        "sys_addr md_table;",
+        "translate_new(drive);",
+        "sas_load(FDD_STATUS+drive, &disk_state);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "local_group_line": 1189,
+      "local_else_line": 1194,
+      "original_group_line": 1196,
+      "preceding_anchor": [
+        "sys_addr dt_start, dt_end;",
+        "half_word dt_drive_type;",
+        "{"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "local_group_line": 1249,
+      "local_else_line": 1251,
+      "original_group_line": 1259,
+      "preceding_anchor": [
+        "sas_load(DRIVE_CAPABILITY, &hf_cntrl);",
+        "half_word hf_cntrl, disk_state;",
+        "{"
+      ],
+      "following_anchor": [
+        "{",
+        "sas_load(FDD_STATUS+drive, &disk_state);",
+        "if (disk_state == 0)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "local_group_line": 1289,
+      "local_else_line": 1291,
+      "original_group_line": 1299,
+      "preceding_anchor": [
+        "sas_load(FDD_STATUS+drive, &disk_state);",
+        "sas_load(DRIVE_CAPABILITY, &hf_cntrl);",
+        "int shift_count = drive << 2;"
+      ],
+      "following_anchor": [
+        "{",
+        "if ((hf_cntrl & (DC_MULTI_RATE << shift_count)) == 0)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "local_group_line": 1455,
+      "local_else_line": 1458,
+      "original_group_line": 1465,
+      "preceding_anchor": [
+        "{",
+        "&& (dr_type_check(drive_type, &md_segment, &md_offset) != FAILURE))",
+        "if (    (drive_type != GFI_DRIVE_TYPE_NULL)"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "local_group_line": 1491,
+      "local_else_line": 1498,
+      "original_group_line": 1502,
+      "preceding_anchor": [
+        "{",
+        "if (dt_start >= dt_end)",
+        "}"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "local_group_line": 1526,
+      "local_else_line": 1533,
+      "original_group_line": 1545,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "}",
+        "send_spec_md(md_segment, md_offset);",
+        "if (chk_lastrate(drive) != FAILURE)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "current_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "local_group_line": 109,
+      "local_else_line": 111,
+      "original_group_line": 334,
+      "preceding_anchor": [
+        "if (op != FL_DISK_RESET && op != FL_DISK_STATUS && op != FL_DISK_PARMS)",
+        "op = FL_FNC_ERR;",
+        "if (!fl_operation_in_range(op))"
+      ],
+      "following_anchor": [
+        "op = FL_FNC_ERR;",
+        "sas_load(FLOPPY_STATUS, &diskette_status);",
+        "setAH(diskette_status);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "current_sha256": "2344df6d17aafae3ebcc3ca2ddfcef18acc19ef298b92664334bec85f04ef0e1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "local_group_line": 259,
+      "local_else_line": 263,
+      "original_group_line": 243,
+      "preceding_anchor": [
+        "20.5.92 MG - took out the hack - see below.",
+        "be determined one day.",
+        "It works OK on a real PC, so the real reason it fails on SoftPC needs to"
+      ],
+      "following_anchor": [
+        "#ifndef macintosh",
+        "static half_word buff_6805[BUFF_6805_PMAX];",
+        "#else"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "current_sha256": "2344df6d17aafae3ebcc3ca2ddfcef18acc19ef298b92664334bec85f04ef0e1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "local_group_line": 339,
+      "local_else_line": 343,
+      "original_group_line": 337,
+      "preceding_anchor": [
+        "int held_event_type[HELD_EVENT_MAX];",
+        "int held_event_key[HELD_EVENT_MAX];",
+        "int held_event_count;"
+      ],
+      "following_anchor": [
+        "int shift_on, l_shift_on, r_shift_on;",
+        "int ctrl_on, l_ctrl_on, r_ctrl_on;",
+        "int alt_on, l_alt_on, r_alt_on;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "current_sha256": "2344df6d17aafae3ebcc3ca2ddfcef18acc19ef298b92664334bec85f04ef0e1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "local_group_line": 1666,
+      "local_else_line": 1680,
+      "original_group_line": 1886,
+      "preceding_anchor": [
+        "#endif /* REAL_KBD */",
+        "} /* end of do_host_key_up */",
+        "} /* end of if not disabled */"
+      ],
+      "following_anchor": [
+        "LOCAL VOID cmd_to_6805 IFN1(half_word,cmd_code)",
+        "{",
+        "int i,key_to_change;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "current_sha256": "2344df6d17aafae3ebcc3ca2ddfcef18acc19ef298b92664334bec85f04ef0e1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "local_group_line": 2389,
+      "local_else_line": 2403,
+      "original_group_line": 2595,
+      "preceding_anchor": [
+        "{",
+        "if (code_to_send_valid)",
+        "8042 being placed in an unusable state. */"
+      ],
+      "following_anchor": [
+        "}",
+        "} /* end of cmd_to_8042 */",
+        "LOCAL half_word translate_6805_8042 IFN0()"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "local_group_line": 180,
+      "local_else_line": 227,
+      "original_group_line": 190,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "#ifndef GISP_SVGA",
+        "GLOBAL word rcpu_int1C_seg = USER_TIMER_INT_SEGMENT;",
+        "GLOBAL word rcpu_int1C_off = USER_TIMER_INT_OFFSET;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "local_group_line": 1417,
+      "local_else_line": 1468,
+      "original_group_line": 1487,
+      "preceding_anchor": [
+        "}",
+        "IDLE_poll();",
+        "{"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "local_group_line": 947,
+      "local_else_line": 952,
+      "original_group_line": 1053,
+      "preceding_anchor": [
+        "mouse_com_rev = getAL();",
+        "save_area_in_use = FALSE;",
+        "#endif /* MONITOR */"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "local_group_line": 973,
+      "local_else_line": 976,
+      "original_group_line": 1083,
+      "preceding_anchor": [
+        "sas_loadw (int_addr(0x33) + 2, &saved_int33_segment);",
+        "sas_loadw (int_addr(0x33) + 0, &saved_int33_offset);",
+        "outb(ICA0_PORT_1, interrupt_mask_register);"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "local_group_line": 2121,
+      "local_else_line": 2200,
+      "original_group_line": 2361,
+      "preceding_anchor": [
+        "note_trace0(MOUSE_VERBOSE, \"mouse_int1:\");",
+        "MOUSE_CALL_MASK condition_mask;",
+        "#endif"
+      ],
+      "following_anchor": [
+        "mouse_update(condition_mask);",
+        "note_trace0(MOUSE_VERBOSE, \"mouse_int1:return()\");",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "local_group_line": 3651,
+      "local_else_line": 3653,
+      "original_group_line": 4047,
+      "preceding_anchor": [
+        "boolean\t\tfailed = FALSE;",
+        "{",
+        "LOCAL void mouse_driver_disable IFN4(word *,m1,word *,m2,word *,m3,word *,m4)"
+      ],
+      "following_anchor": [
+        "half_word\tinterrupt_mask_register;",
+        "UNUSED(m4);",
+        "note_trace0(MOUSE_VERBOSE, \"mouse_io: mouse_disable()\");"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "local_group_line": 3664,
+      "local_else_line": 3669,
+      "original_group_line": 4061,
+      "preceding_anchor": [
+        "if (!failed){",
+        "mouse_driver_disabled = TRUE;",
+        "note_trace0(MOUSE_VERBOSE, \"mouse_io: mouse_disable()\");"
+      ],
+      "following_anchor": [
+        "}",
+        "if (!failed){",
+        "inb(ICA1_PORT_1, &interrupt_mask_register);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "local_group_line": 3687,
+      "local_else_line": 3690,
+      "original_group_line": 4091,
+      "preceding_anchor": [
+        "outb(ICA0_PORT_1, interrupt_mask_register);",
+        "interrupt_mask_register |= (1 << CPU_MOUSE_INT);",
+        "inb(ICA0_PORT_1, &interrupt_mask_register);"
+      ],
+      "following_anchor": [
+        "}else{",
+        "}",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "local_group_line": 3738,
+      "local_else_line": 3743,
+      "original_group_line": 4145,
+      "preceding_anchor": [
+        "mouse_driver_disabled = FALSE;",
+        "return;",
+        "if (!mouse_driver_disabled)"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "current_sha256": "78193f48952dc08e5cb7ad1fd46e0be227a4a70e9fefc7da1f7b2863e4280016",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+      "local_group_line": 32,
+      "local_else_line": 38,
+      "original_group_line": 32,
+      "preceding_anchor": [
+        "#include <get_env.h>",
+        "#include  <debug.h>\t/* for always_trace macros */",
+        "#include  <error.h>"
+      ],
+      "following_anchor": [
+        "#ifndef NTVDM",
+        "LOCAL void badGetenv IFN3(char *, name, char *, type_name, char *, value)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "current_sha256": "78193f48952dc08e5cb7ad1fd46e0be227a4a70e9fefc7da1f7b2863e4280016",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+      "local_group_line": 95,
+      "local_else_line": 97,
+      "original_group_line": 97,
+      "preceding_anchor": [
+        "{",
+        "if (env)",
+        "env = host_getenv(name);"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "current_sha256": "52adadbff06e69b3d685bc7634511212c15dfe196463f00c683aad4ab6dd9634",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+      "local_group_line": 94,
+      "local_else_line": 100,
+      "original_group_line": 94,
+      "preceding_anchor": [
+        "#endif",
+        "#    define DAY_COUNT\tBIOS_VAR_START + 0xCE",
+        "#ifdef XTSFD"
+      ],
+      "following_anchor": [
+        "#ifdef ANSI",
+        "LOCAL void get_host_timestamp(word *, word *, half_word *);",
+        "LOCAL void write_host_timestamp(int, int);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_sha256": "6c420934ac348553f9c63f462b3c6fd8c13d6c828b6c94eab9d12ca29be2e739",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "local_group_line": 1543,
+      "local_else_line": 1546,
+      "original_group_line": 2007,
+      "preceding_anchor": [
+        "#define INIT0_ICW4      (IU8)0x01",
+        "#define INIT0_ICW3\t(IU8)0x04",
+        "#define INIT0_ICW2\t(IU8)0x08"
+      ],
+      "following_anchor": [
+        "void ica0_post IFN0()",
+        "{",
+        "ica_outb(ICA0_PORT_0, INIT0_ICW1);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_sha256": "6c420934ac348553f9c63f462b3c6fd8c13d6c828b6c94eab9d12ca29be2e739",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "local_group_line": 1567,
+      "local_else_line": 1570,
+      "original_group_line": 2038,
+      "preceding_anchor": [
+        "io_addr i;",
+        "{",
+        "void ica0_init IFN0()"
+      ],
+      "following_anchor": [
+        "for(i = ICA0_PORT_START; i <= ICA0_PORT_END; i++)",
+        "io_connect_port(i, ICA0_ADAPTOR, IO_READ_WRITE);",
+        "adapter_state[ICA_MASTER].ica_master = TRUE;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_sha256": "6c420934ac348553f9c63f462b3c6fd8c13d6c828b6c94eab9d12ca29be2e739",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "local_group_line": 1592,
+      "local_else_line": 1600,
+      "original_group_line": 2081,
+      "preceding_anchor": [
+        "#define INIT1_ICW4      (IU8)0x01",
+        "#define INIT1_ICW3\t(IU8)0x02",
+        "#define INIT1_ICW2\t(IU8)0x70"
+      ],
+      "following_anchor": [
+        "void ica1_post IFN0()",
+        "{",
+        "ica_outb(ICA1_PORT_0, INIT1_ICW1);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_sha256": "6c420934ac348553f9c63f462b3c6fd8c13d6c828b6c94eab9d12ca29be2e739",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "local_group_line": 1624,
+      "local_else_line": 1627,
+      "original_group_line": 2113,
+      "preceding_anchor": [
+        "io_addr i;",
+        "{",
+        "void ica1_init IFN0()"
+      ],
+      "following_anchor": [
+        "for(i = ICA1_PORT_START; i <= ICA1_PORT_END; i++)",
+        "io_connect_port(i, ICA1_ADAPTOR, IO_READ_WRITE);",
+        "adapter_state[ICA_SLAVE].ica_master = FALSE;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "current_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "local_group_line": 188,
+      "local_else_line": 191,
+      "original_group_line": 188,
+      "preceding_anchor": [
+        "[5.1 LOCAL DECLARATIONS]                                                */",
+        "5.MODULE INTERNALS   : (not visible externally, global internally)]",
+        "#include \"idetect.h\""
+      ],
+      "following_anchor": [
+        "[5.2 LOCAL DEFINITIONS]",
+        "[5.2.1 INTERNAL DATA DEFINITIONS                                     */",
+        "#ifndef NTVDM"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "current_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "local_group_line": 243,
+      "local_else_line": 276,
+      "original_group_line": 285,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "======================================================================",
+        "FUNCTION        :       idle_tick()",
+        "PURPOSE         :       check polling activity and graphics activity"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "current_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "local_group_line": 292,
+      "local_else_line": 335,
+      "original_group_line": 347,
+      "preceding_anchor": [
+        "======================================================================",
+        "counter.",
+        "for triggering going idle. Otherwise reset"
+      ],
+      "following_anchor": [
+        "7.INTERMODULE INTERFACE IMPLEMENTATION :",
+        "[7.1 INTERMODULE DATA DEFINITIONS]                              */",
+        "[7.2 INTERMODULE PROCEDURE DEFINITIONS]                         */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "current_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "local_group_line": 360,
+      "local_else_line": 367,
+      "original_group_line": 443,
+      "preceding_anchor": [
+        "case IDLE_WAITIO:",
+        "{",
+        "switch (event)"
+      ],
+      "following_anchor": [
+        "case IDLE_INIT:",
+        "nCharPollsPerTick = 0;",
+        "i_counter = 0;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "current_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "local_group_line": 376,
+      "local_else_line": 378,
+      "original_group_line": 459,
+      "preceding_anchor": [
+        "i_counter = 0;",
+        "nCharPollsPerTick = 0;",
+        "case IDLE_INIT:"
+      ],
+      "following_anchor": [
+        "break;",
+        "case IDLE_KYBD_POLL:",
+        "idle_kybd_poll();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "current_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "local_group_line": 408,
+      "local_else_line": 417,
+      "original_group_line": 493,
+      "preceding_anchor": [
+        "{",
+        "int flag;",
+        "void idle_ctl (flag)"
+      ],
+      "following_anchor": [
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "9491a9ad5c9762556ad0540382075566d48fd2fe266762b176ee610d3e3b73a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_group_line": 107,
+      "local_else_line": 113,
+      "original_group_line": 107,
+      "preceding_anchor": [
+        "static unsigned long idealInterval;",
+        "static struct host_timeval idealtime;",
+        "#endif"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "9491a9ad5c9762556ad0540382075566d48fd2fe266762b176ee610d3e3b73a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_group_line": 361,
+      "local_else_line": 363,
+      "original_group_line": 367,
+      "preceding_anchor": [
+        "LOCAL void startCounting IPT0();",
+        "LOCAL void updateCounter IPT0();",
+        "LOCAL void loadCounter IPT0();"
+      ],
+      "following_anchor": [
+        "LOCAL unsigned  short bin_to_bcd IPT1(unsigned long, val);",
+        "LOCAL word bcd_to_bin IPT1(word, val);",
+        "LOCAL void emu_8253 IPT3(io_addr, port, int, signal, half_word, value);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "9491a9ad5c9762556ad0540382075566d48fd2fe266762b176ee610d3e3b73a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_group_line": 565,
+      "local_else_line": 567,
+      "original_group_line": 607,
+      "preceding_anchor": [
+        "{",
+        "void SWTMR_gate IFN2(io_addr, port, half_word, value)",
+        "}"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "9491a9ad5c9762556ad0540382075566d48fd2fe266762b176ee610d3e3b73a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_group_line": 576,
+      "local_else_line": 578,
+      "original_group_line": 622,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "}",
+        "void SWTMR_inb IFN2(io_addr, port, half_word *, value)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "9491a9ad5c9762556ad0540382075566d48fd2fe266762b176ee610d3e3b73a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_group_line": 586,
+      "local_else_line": 588,
+      "original_group_line": 632,
+      "preceding_anchor": [
+        "{",
+        "void SWTMR_inb IFN2(io_addr, port, half_word *, value)",
+        "}"
+      ],
+      "following_anchor": [
+        "pcu = &timers[port & 3];",
+        "if (!pcu->countlatched)",
+        "readCounter();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "9491a9ad5c9762556ad0540382075566d48fd2fe266762b176ee610d3e3b73a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_group_line": 628,
+      "local_else_line": 630,
+      "original_group_line": 678,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "}",
+        "void SWTMR_outb IFN2(io_addr, port, half_word, value)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "9491a9ad5c9762556ad0540382075566d48fd2fe266762b176ee610d3e3b73a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_group_line": 973,
+      "local_else_line": 984,
+      "original_group_line": 1056,
+      "preceding_anchor": [
+        "updateCounter();",
+        "int countread;",
+        "{"
+      ],
+      "following_anchor": [
+        "pcu->latchvaluemsb = countread >> 8;",
+        "pcu->latchvaluelsb = countread & 0xff;",
+        "sure_note_trace1(TIMER_VERBOSE,\"reading count %d\",pcu->Count);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "9491a9ad5c9762556ad0540382075566d48fd2fe266762b176ee610d3e3b73a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_group_line": 1224,
+      "local_else_line": 1229,
+      "original_group_line": 1318,
+      "preceding_anchor": [
+        "{",
+        "LOCAL void timestamp IFN0()",
+        "}"
+      ],
+      "following_anchor": [
+        "(*pcu->getTime)(&pcu->activationTime);",
+        "}",
+        "LOCAL UNBLOCK_FUNCTION timererror IFN0()"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "9491a9ad5c9762556ad0540382075566d48fd2fe266762b176ee610d3e3b73a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_group_line": 1652,
+      "local_else_line": 1654,
+      "original_group_line": 1801,
+      "preceding_anchor": [
+        "return;",
+        "if (pcu->gate == GATE_SIGNAL_LOW)",
+        "case SQUAREWAVE_GEN:"
+      ],
+      "following_anchor": [
+        "if (wrap)",
+        "pcu->tickadjust = pcu->Count;",
+        "if (pcu->m == INT_ON_TERMINALCOUNT && wrap)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "9491a9ad5c9762556ad0540382075566d48fd2fe266762b176ee610d3e3b73a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_group_line": 1677,
+      "local_else_line": 1679,
+      "original_group_line": 1827,
+      "preceding_anchor": [
+        "return;",
+        "if (pcu->tc)",
+        "case HW_TRIG_STROBE:"
+      ],
+      "following_anchor": [
+        "if (wrap)",
+        "{",
+        "pcu->Count = 0;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "9491a9ad5c9762556ad0540382075566d48fd2fe266762b176ee610d3e3b73a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_group_line": 2265,
+      "local_else_line": 2269,
+      "original_group_line": 2707,
+      "preceding_anchor": [
+        "counter_init(&timers[i]);",
+        "for (i=0; i<3; i++)",
+        "int i;"
+      ],
+      "following_anchor": [
+        "}",
+        "LOCAL void counter_init IFN1(COUNTER_UNIT *, p)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "source_undef_check": "no NTVDM undef directive in current source"
+    }
+  ],
+  "limitations": "No source rewrite or inference to other profiles; #else is classified only when parent #ifdef NTVDM is selected."
+}

@@ -541,34 +541,6 @@ BOOL LoadLibraryAndGetProcAddresses(char *name, DLLENTRYPOINTS *p, int num)
 }
 
 #ifdef i386
-/*
- * "Safe" version of LoadLibrary which preserves floating-point state
- * across the load.  This is critical on x86 because the FP state being
- * preserved is the 16-bit app's state.  MSVCRT.DLL is one offender which
- * changes the Precision bits in its Dll init routine.
- *
- * On RISC, this is an alias for LoadLibrary
- *
- */
-HINSTANCE SafeLoadLibrary(char *name)
-{
-    HINSTANCE hInst;
-    BYTE FpuState[108];
-
-    // Save the 487 state
-    _asm {
-        lea    ecx, [FpuState]
-        fsave  [ecx]
-    }
-
-    hInst = LoadLibrary(name);
-
-    // Restore the 487 state
-    _asm {
-        lea    ecx, [FpuState]
-        frstor [ecx]
-    }
-
-    return hInst;
-}
+#error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #endif  //i386
+#line 575

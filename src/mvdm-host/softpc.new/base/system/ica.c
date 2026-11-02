@@ -134,12 +134,12 @@
 #endif
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_ICA.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 /* these ports have iret hooks enabled automatically - others will have to
@@ -265,33 +265,9 @@ void
 
 
 #else   /* !NTVDM */
-
-/* regular SoftPC definitions for ica */
-ADAPTER_STATE adapter_state[2];
-
-/* iret hook related defines */
-#ifdef PROD
-#define host_valid_iret_hook()	(TRUE)
-#else		/* allow disabling of iret hooks whilst debugging */
-#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
-#endif
-#define host_bop_style_iret_hooks()	(FALSE)
-#define host_iret_bop_table_addr(line)	(0)
-
-/* crit section style locks only available on NT */
-#define host_ica_lock()
-#define host_ica_unlock()
-#define host_ica_real_locks() (FALSE)
-
-/* macro'ise simplistic ica lock scheme */
-
-LOCAL IUM8      ica_lock;
-
-#define ica_lock_set(x) ica_lock = x
-#define	ica_lock_inc()	ica_lock++
-#define ica_lock_dec()  ica_lock--
-
+#error Excluded unsupported non-NTVDM alternative
 #endif  /* NTVDM */
+#line 291
 
 #ifdef HOOKED_IRETS		/* iret hook related variables */
 LOCAL IBOOL  iretHooksEnabled = FALSE;
@@ -459,7 +435,13 @@ ica_scan_irr IFN1(IU32, adapter)
 
 #if defined (NTVDM)
 
+#ifdef MONITOR
+#error Excluded unsupported monitor PIC interrupt ownership
+#else
+#line 458
     iret_hook_mask = (IU8)(DelayIrqLine >> (adapter << 3));
+#endif
+#line 459
 
 #else  /* !NTVDM */
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
@@ -1143,18 +1125,9 @@ void SWPIC_hw_interrupt IFN3(IU32, adapter, IU32, line_no, IS32, call_count)
      */
 
 #ifndef NTVDM
-    if (!host_ica_real_locks())
-    {
-	if (ica_lock_inc())
-	{
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected
 #endif
-		ica_lock_dec();
-		return;
-	}
-    }
-#endif
+#line 1154
 
 #if defined (CPU_40_STYLE) && !defined(NTVDM)
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
@@ -1303,7 +1276,13 @@ ica_intack IFN0()
 
 #if defined (NTVDM)
 
+#ifdef MONITOR
+#error Excluded unsupported monitor PIC IRET address
+#else
+#line 1302
     *hook_address = 0;
+#endif
+#line 1303
 
 
 #else
@@ -1317,235 +1296,19 @@ ica_intack IFN0()
 
 
 #ifndef NTVDM
-#ifdef CPU_40_STYLE
-
-/*(
- ======================= Asynchronous Access to the ICA ==========================
-
-	Potential asynchronous interrupt sources, in descending order of priority
-	so that the higher priority interrupt gets raised first (saves a bit of work)
-	These things will share the CPU_SIGIO_EVENT callback from the CPU, and may have
-	their own specific routine to be called (which presumably includes ica_hw_interrupt,
-	but doesn't need to do so).
-
-=========================================================================
-)*/
-typedef struct {
-	IU32	adapter;
-	IU32	line_no;
-	void	(*interrupt) IPT0();
-	IBOOL	pending;
-} ICA_ASYNC_HANDLER;
-
-#define ICA_IMPOSSIBLE_LINE	100
-
-/* Make this a GLOBAL variable so that the C compilers can't optimise
- * accesses to it.
- */
-GLOBAL ICA_ASYNC_HANDLER async_handlers[] = {
-
-#ifdef NOVELL
-#error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.
-#endif /* NOVELL */
-
-#ifdef SWIN_HAW
-#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register.
-#endif /* SWIN_HAW */
-
-#ifdef ASPI
-	{ ICA_SLAVE,	ASPI_INT,	0 },
-#endif /* ASPI */
-
-	{ 0, ICA_IMPOSSIBLE_LINE, 0}
-};
-	
-/*(
-======================= ica_async_hw_interrupt ==========================
-
-PURPOSE: Simplified interface to replace ica_hw_interrupt() when triggered
-	by truly asynchronous host facilties such as signal handlers. This
-	routine remembers the need for an interrupt on the appropriate line,
-	notifies the CPU that a SIGIO event has occurred, and issues the
-	necessary ica_hw_interrupt calls during the ica_sigio_event callback.
-
-INPUT: adapter: IU32. master/slave.
-       line: IU32. IRQ line interrupt will appear on.
-       call_count: IU32. number of interrupts (must be 1).
-
-=========================================================================
-)*/
-
-GLOBAL void ica_async_hw_interrupt IFN3(IU32, adapter, IU32, line_no, IS32, call_count)
-{
-	ICA_ASYNC_HANDLER *iahp;
-	
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif /* !PROD */
-
-	for (iahp = async_handlers; iahp->line_no != ICA_IMPOSSIBLE_LINE; iahp++) {
-		if (iahp->adapter == adapter && iahp->line_no == line_no) {
-		
-			/* This is as near to an atomic action as we can easily arrange,
-			 * though there is a minute possibility of missing an interrupt
-			 * if it is called between the test and the store in the ica_sigio_event
-			 * handler below.
-			 */
-			if (!iahp->pending) {
-				iahp->pending = TRUE;				/* set the flag */
-				cpu_interrupt(CPU_SIGIO_EVENT, 0);	/* inform the CPU */
-			}
-			return;
-		}
-	}
-	always_trace2("Unexpected ica_async_interrupt(%d, %d)", adapter, line_no);
-}
-
-/*(
- ========================== ica_sigio_event ==========================
-
-PURPOSE: Called by the CPU in response to cpu_interrupt(CPU_SIGIO_EVENT,0)
-	at a point when it is possible to make calls to the ICA hardware
-	emulation without suffering from race conditions etc.
-
-=========================================================================
-)*/
-
-GLOBAL void ica_sigio_event IFN0()
-{
-	ICA_ASYNC_HANDLER *iahp;
-	
-	for (iahp = async_handlers; iahp->line_no != ICA_IMPOSSIBLE_LINE; iahp++) {
-		/* This is as near to an atomic action as we can easily arrange,
-		 * though there is a minute possibility of missing an interrupt...
-		 */
-		if (iahp->pending) {
-			iahp->pending = FALSE;			/* clear the flag */
-			if (iahp->interrupt) {
-				(*(iahp->interrupt))();		/* call special handler */
-			} else {
-				ica_hw_interrupt(iahp->adapter, iahp->line_no, 1);
-			}
-		}
-	}
-	
-}
-
-LOCAL void ica_sigio_init IFN0()
-{
-	ICA_ASYNC_HANDLER *iahp;
-	
-	for (iahp = async_handlers; iahp->line_no != ICA_IMPOSSIBLE_LINE; iahp++) {
-		iahp->pending = FALSE;
-	}
-}
-
-/*(
- =========================== action_interrupt ==========================
-
-PURPOSE: Associate an action with an interrupt on the line. When the CPU
-	 is next able to process an interrupt on the requested line, the
-	 callback function will be executed. That callback can then call
-	 the relevant hardware interrupt interface once it has performed
-	 the rest of the associated emulation.
-
-INPUT: adapter: IU32. master/slave.
-       line: IU32. IRQ line interrupt will appear on.
-       func: callback function address to callback when line available.
-       parm: IU32. parameter to pass to above fn.
-
-OUTPUT: Returns false (failure) if action_int already pending on that line
-	otherwise true (success).
-
-=========================================================================
-)*/
-GLOBAL IBOOL
-action_interrupt IFN4(IU32, adapter, IU32, line, ICA_CALLBACK, func, IU32, parm)
-{
-	ADAPTER_STATE *asp = &adapter_state[adapter];
-
-	host_ica_lock();	/* real lock if available */
-
-	line &= 7;
-
-	/* check if callback already outstanding on this line */
-	if (asp->callback_fn[line] != NO_ICA_CALLBACK)
-	{
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif	/* PROD */
-		host_ica_unlock();	/* real unlock if available */
-		return(FALSE);
-	}
-
-	/* store callback information */
-	asp->callback_fn[line] = func;
-	asp->callback_parm[line] = parm;
-
-	/* set interrupt request bit */
-	asp->ica_irr |= (1 << line);
-	asp->ica_count[line]++;
-
-	/* make apparent interrupt visible to apps */
-	asp->ica_isr |= (1 << line);
-
-	/* get cpu attention for this int. (i.e. get intack called a.s.a.p) */
-	host_set_hw_int();
-
-	host_ica_unlock();	/* real unlock */
-}
-
-/*(
- ======================== cancel_action_interrupt =======================
-
-PURPOSE: Associate an action with an interrupt on the line. When the CPU
-	 is next able to process an interrupt on the requested line, the
-	 callback function will be executed. That callback can then call
-	 the relevant hardware interrupt interface once it has performed
-	 the rest of the associated emulation.
-
-INPUT: adapter: IU32. master/slave.
-       line: IU32. IRQ line to cancel interrupt action
-
-OUTPUT: None.
-
-=========================================================================
-)*/
-GLOBAL void
-cancel_action_interrupt IFN2(IU32, adapter, IU32, line)
-{
-	ADAPTER_STATE *asp = &adapter_state[adapter];
-
-	host_ica_lock();	/* real lock if available */
-
-	/* remove visibility of interrupt request. */
-	asp->ica_isr &= ~(1 << line);
-
-	/* irr & count should be cleared by intack, but possible this fn.
-	 * has been called before the callback has been executed.
-	 */
-	if (asp->callback_fn[line] != NO_ICA_CALLBACK)
-	{
-		asp->ica_irr &= ~(1 << line);
-		asp->ica_count[line] = 0;
-	}
-
-	/* clear callback information */
-	asp->callback_fn[line] = NO_ICA_CALLBACK;
-	asp->callback_parm[line] = 0;
-
-	host_ica_unlock();	/* remove real lock */
-
-}
-#endif  /* CPU_40_STYLE */
-
+#error Excluded unsupported non-NTVDM PIC profile
 #endif  /* !NTVDM */
+#line 1539
 
 
 
 #if defined(NTVDM)
 
 
+#ifdef MONITOR
+#error Excluded unsupported monitor PIC IRET hook
+#else
+#line 1545
 /*
  *  obsolete, to be removed... but the current ntvdm emulator libs ref
  * */
@@ -1555,6 +1318,8 @@ ica_iret_hook_called IFN1(IU32, abs_line)
 {
     return; // do nothing!
 }
+#endif
+#line 1554
 
 #endif   /* NTVDM */
 
@@ -1729,12 +1494,12 @@ ica_check_stale_iret_hook IFN0()
 
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_INIT.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 #define INIT0_ICW1	(IU8)0x11	

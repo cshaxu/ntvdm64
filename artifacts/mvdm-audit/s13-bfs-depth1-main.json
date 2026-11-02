@@ -1,0 +1,32 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/main.c",
+  "pre_change_sha256": "0936f0cdd11c75c70cdd4c9b1fd9a44e1d323ca6b647122c4f9732b490c2d6b0",
+  "post_change_sha256": "358975d51f096a0df5a9ed41643a209e4b7013860f4de29ff1ac85ba8b7e4e87",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+  "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+  "original_top_level_lines": [
+    54,
+    56
+  ],
+  "original_body_sha256": "7ad575444f2eb323ce814755a57ccf6ce3b385a8e6f66f629149152bca6f9f3d",
+  "current_selection": "#ifndef CPU_40_STYLE -> #error; #else -> DIV-083 existing host_start_cpu declaration",
+  "registrations": [
+    "MVDM-HOST-DIV-083",
+    "MVDM-HOST-DIV-566"
+  ],
+  "proof_scope": "Generated x86 product compiler command uses CPU_40_STYLE; non-CPU40 project execution profile is prohibited. Negative checks exercise the first-depth guard only; full depth-one regression and publication remain pending.",
+  "selected_preprocess": {
+    "x86_real_compile_context": "passed",
+    "raw_sha256_before": "58b3c347cda973c31dcc31adaa2f89a9a426aa2a3c2ced9ecf36bbe2ee8240f5",
+    "raw_sha256_after": "2b14f4317d70ba6954ef497ef5b401a63516a98133123454a0b516de40cedabc",
+    "nonblank_output_equal": true,
+    "raw_difference": "added preprocessor blank lines"
+  },
+  "controls": {
+    "x86": "passed: selected 61/62 line controls and non-CPU40 #error",
+    "x64": "passed: selected 61/62 line controls and non-CPU40 #error",
+    "production_x86_object": "passed; C4210 warning remains at logical line 107, matching prior build"
+  },
+  "test": "tests/build/test_bfs_depth1_cpu_guards.py",
+  "subsequent_div568_working_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679"
+}

@@ -1,0 +1,48 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+  "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+  "before_sha256": "a0b2e375ad714bb2c840f108368358bee33538bf2daa75f3421db07babc17b9d",
+  "after_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+  "original_first_depth_group": 760,
+  "current_group_line": 690,
+  "condition": "!defined(X86GFX) && !defined(CCPU)",
+  "removed_body_sha256": "41cfd775cb1f769cd8ecfc36ac01a276bae42438718e9c81d837f690da1b8b65",
+  "removed_body_lines": 3,
+  "prior_following_logical_line": 781,
+  "production_contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "a0b2e375ad714bb2c840f108368358bee33538bf2daa75f3421db07babc17b9d",
+      "includes": 213,
+      "ccpu_definitions": [],
+      "ccpu_flags": [
+        "/DCCPU"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "a0b2e375ad714bb2c840f108368358bee33538bf2daa75f3421db07babc17b9d",
+      "includes": 213,
+      "ccpu_definitions": [],
+      "ccpu_flags": [
+        "/DCCPU"
+      ],
+      "errors": ""
+    }
+  ],
+  "previous_adaptation": "MVDM-HOST-DIV-322 remains registered for other display-owner behavior",
+  "register": "MVDM-HOST-DIV-580",
+  "verification": {
+    "selected_preprocess": "x86 worker preprocessed outputs equal ignoring blanks after normalizing four scratch __FILE__ paths; both exits zero; raw outputs differ",
+    "diagnostic_line": "injected __LINE__ immediately before next original comment equals 782 before and after; first following blank remains logical 781",
+    "guard": "four extracted x86 MSVC CCPU/X86GFX combinations give expected success or DIV-580 failure",
+    "compile": "cached x86 worker obj/host/nt_graph.obj compiled successfully",
+    "full_product": "pending; these checks are not a runtime or full product release test"
+  }
+}

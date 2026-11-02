@@ -1,10 +1,281 @@
 # mvdm
 
-CPU40 access-vector cleanup candidate: DIV-150 and DIV-182 are removed from
-the active working-tree path, while the DIV-151 initializer remains as
+MVDM-HOST-DIV-595: reject three unselected DEBUG initialization branches in
+`wow32/wow32.c`, retaining their existing conditions, selected registry
+adaptation, and logical diagnostic positions. The excluded local DEBUG
+adaptation is subsumed. Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-wow-local-debug.json`.
+
+MVDM-HOST-DIV-594: restore the original first-depth i386 selector around
+the DIV-077 XMS copy adaptation in `xms.486/xmsblock.c`; reject the
+unsupported historic i386 arm and retain the selected adapter. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-original-xms.json`.
+
+MVDM-HOST-DIV-593: restore the original EOF X86GFX first-depth guard in
+`softpc.new/host/src/nt_sec.c`, replacing its unsupported body with #error.
+Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-original-nt-sec.json`.
+
+MVDM-HOST-DIV-592: restore the original first-depth NO_STRING_OPERATIONS
+condition in `softpc.new/base/inc/cpu_vid.h` around the DIV-089 typed
+declarations. Both CPU40/C_VID and alternative declaration forms remain;
+#line preserves pre-existing diagnostic positions. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-original-cpu-vid.json`.
+
+MVDM-HOST-DIV-591: replace four unselected non-NTVDM outer bodies in
+`base/support/get_env.c`, `base/keymouse/keyba.c`, `base/system/ica.c` and
+`base/system/illegalp.c` with `#error`. Preserve original first-depth
+conditions, selected alternatives and measured diagnostic lines. The removed
+inner guards are subsumed; their registrations remain applicable elsewhere.
+Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-ntvdm-outer-batch.json`.
+
+MVDM-HOST-DIV-590: replace three unselected non-PROD outer bodies in
+`softpc.new/base/bios/reset.c` and `softpc.new/base/system/timer.c` with
+`#error`. Their first-depth conditions and measured following diagnostic
+lines remain. Inner excluded branches are subsumed by the outer rejection;
+their registrations remain applicable at other locations. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-nonprod-outer-batch.json`.
+
+MVDM-HOST-DIV-589: replace six unselected historical `i386` branches in
+`wow32/wkgthunk.c`, `wgprnset.c`, `wkmem.c` and `wow32.c` with `#error`.
+Original first-depth conditions, the selected alternative and measured
+diagnostic positions are retained. Source identities are in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-wow-i386-batch.json`.
+
+MVDM-HOST-DIV-588: replace 35 unselected historical `i386` debugger branches
+in `dbg/dbg.c` with `#error`, preserving original outer conditions, selected
+software-executor alternatives and measured diagnostic lines. Source and
+original body hashes are in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-debugger-i386-batch.json`.
+
+MVDM-HOST-DIV-587: replace eleven unselected DEBUG_OR_WOWPROFILE declaration
+bodies in the WOW32 thunk-table headers with `#error`, retaining each original
+outer condition and the selected release declarations. Each replacement
+preserves following physical lines or ends at EOF. Original identities and
+observed include contexts are in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-wowprofile-headers.json`.
+
+MVDM-HOST-DIV-586: replace fourteen unselected WOWPROFILE and
+DEBUG_OR_WOWPROFILE bodies in `wow32/wow32.c` and `wow32/wowtbl.c` with
+`#error`, preserving their original outer conditions and measured following
+diagnostic lines. Source identities and original body hashes are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-wowprofile2-batch.json`.
+
+MVDM-HOST-DIV-585: replace eleven unselected WOWPROFILE bodies in
+`wow32/wmdisp32.c` and `wow32/wudlg.c` with `#error`, preserving their
+original outer conditions and measured following diagnostic lines. The
+selected release path is unchanged; original bodies and context evidence are
+recorded in `../../artifacts/mvdm-audit/s13-bfs-depth1-wowprofile-batch.json`.
+
+MVDM-HOST-DIV-584: replace the remaining unsupported X86GFX declaration
+branch at the end of `softpc.new/host/inc/nt_fulsc.h` with `#error`, retaining
+its original outer condition. No selected declaration or caller changes;
+the group ends at EOF. Compile-context and original-boundary evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-ntfulsc-header.json`.
+
+MVDM-HOST-DIV-583: retrospectively register the existing CPU40-first WOW32
+selection in `wow32/wow32.c` for fast dispatch, callback return and flat
+address-array publication. The original `FASTBOPPING` alternatives remain
+as same-depth alternatives guarded under DIV-513; current CPU40 entrypoints
+are unchanged. This selection record does not establish complete callback or
+fast-BOP runtime semantics. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-wow32-fast-selectors.json`.
+
+MVDM-HOST-DIV-582: retrospectively register the existing CPU40 selection in
+`dpmi32/dpmiint.c` and `dpmi32/dpmiint.h`. Four original `#ifndef i386`
+boundaries select the software-executor handler/carrier and interrupt-hook
+paths on CPU40 even when the host is i386. This records current selection;
+it does not establish complete DPMI fault semantics. Original/current
+boundary evidence is in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-original-dpmi-selectors.json`.
+
+MVDM-HOST-DIV-581: register the existing standalone-SAS selector adaptation
+on two first-depth video write conditions and replace their unselected direct
+host-pointer write bodies with `#error`. The selected SAS path is unchanged.
+Original boundaries and actual compile contexts are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-video-sas.json`.
+
+MVDM-HOST-DIV-580: replace the unsupported non-CCPU, non-X86GFX branch in
+`softpc.new/host/src/nt_graph.c` with `#error`, retaining the existing DIV-322
+condition and selected software-display path. Preserve the subsequent logical
+line number; evidence is in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-ntgraph-ccpu.json`.
+
+MVDM-HOST-DIV-579: restore the two original `MONITOR` outer conditions in
+`softpc.new/host/src/nt_com.c`, excluding their unsupported hardware-monitor
+IRET hooks with `#error`. Preserve the existing selected CCPU path and its
+diagnostic line numbers. Source identities and context evidence are recorded
+in `../../artifacts/mvdm-audit/s13-bfs-depth1-ntcom-monitor.json`.
+
+MVDM-HOST-DIV-578: replace 35 unselected SPC486 bodies in 15 SoftPC source
+units with `#error`, retaining original outer conditions, selected CCPU
+alternatives and measured diagnostic lines. This does not change the selected
+CPU implementation. Original and removed-body identities are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-spc486.json`; DIV-521 remains
+registered where still applicable.
+
+MVDM-HOST-DIV-577: replace 20 unsupported DEBUG bodies in selected
+`wow32/wow32.c` and `wow32/wcall16.c` with `#error`, retaining original outer
+conditions, release alternatives and measured diagnostic lines. The callback
+fixture's build context is included in the audit. Source and removed-body
+identities are in `../../artifacts/mvdm-audit/s13-bfs-depth1-debug-wow-special.json`.
+Nested DIV-496 remains registered at its other locations.
+
+MVDM-HOST-DIV-576: replace 43 unsupported DEBUG bodies in 24 selected WOW32
+source units with `#error`, preserving their original outer conditions,
+selected alternatives and measured diagnostic lines. Original and removed
+body identities are in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-debug-wow-batch.json`.
+
+MVDM-HOST-DIV-575: replace seven unsupported DEBUG bodies in the original
+`wow32/wkman.c` with `#error`. Their original conditions and selected release
+alternatives remain, with `#line` preserving diagnostic positions. Original
+and removed-body identities are in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-debug-wkman.json`.
+
+MVDM-HOST-DIV-574: replace five unreachable non-NTVDM `#else` bodies in
+keyboard, time-service, PIC and timer sources with `#error`. The original
+outer conditions and selected NTVDM arms remain; following diagnostic line
+numbers are retained with `#line`. Source and removed-body identities are in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-ntvdm-else-new.json`. Nested
+DIV-500, DIV-503 and DIV-531 remain registered where still applicable.
+
+MVDM-HOST-DIV-573: replace five unsupported non-NTVDM time-service and PIC
+arms in `base/support/time_day.c` and `base/system/ica.c` with `#error`,
+retaining the original outer boundaries and following diagnostic lines.
+Original and removed-body hashes are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-ntvdm-batch3.json`. Nested
+DIV-500 and DIV-528 registrations remain applicable at other locations.
+
+MVDM-HOST-DIV-572: replace the original, unsupported non-NTVDM BIOS signon
+arm in `base/bios/reset.c` with `#error`, preserving its original outer
+condition and the following diagnostic line. Original and removed-body hashes
+are recorded in `../../artifacts/mvdm-audit/s13-bfs-depth1-ntvdm-reset.json`.
+Nested DIV-500 and DIV-531 registrations remain applicable elsewhere.
+
+MVDM-HOST-DIV-571: replace the unreachable non-NTVDM timer arm in
+`base/system/timer.c` with `#error`, retaining the original top-level
+alternative and its existing diagnostic line controls. The retained timer
+profile and original source identities are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-ntvdm-timer2.json`. The nested
+DIV-500 and DIV-523 registrations remain applicable at other locations.
+
+MVDM-HOST-DIV-570: replace six unreachable top-level non-NTVDM serial and
+timer arms with `#error`, retaining their conditional frameworks and the
+selected-path diagnostic lines. The affected sources include `host_def.h`,
+which defines NTVDM for the supported worker profile. Removed-body identities
+and original comparisons are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-ntvdm-arms.json`. Earlier nested
+DIV-500 and DIV-525 registrations remain applicable to their other locations.
+
+MVDM-HOST-DIV-569: replace the non-CPU40 i386 memory-size arm in
+`host/src/config.c` with `#error`, retaining DIV-056's local profile selector
+and the selected original `GetVDMSize` calculation. `#line` preserves the
+selected arm's existing logical line. Source identities and removed-body hash:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-config-memory.json`.
+
+MVDM-HOST-DIV-568: preserve the original top-level profiling condition in
+`base/support/main.c`, reject its unsupported non-CPU40 body with `#error`,
+and preserve the following logical diagnostic line. The selected CPU40
+startup path is unchanged. Source identities and body hash are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-main-profile.json`.
+
+MVDM-HOST-DIV-567: replace the excluded non-CPU40 parity-table body in
+`base/support/xt.c` with `#error` and preserve the following diagnostic line
+mapping. DIV-155's existing CPU40 ownership condition remains necessary;
+original and removed local body hashes are in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-xt-parity.json`.
+
+MVDM-HOST-DIV-566: restore the original top-level `#ifndef CPU_40_STYLE`
+boundary around the host startup declaration in `base/support/main.c`.
+The unsupported non-CPU40 arm is rejected; the selected CPU40 alternative
+retains the declaration already admitted by DIV-083. `#line` preserves the
+existing selected-path diagnostic positions. Original and selected-profile
+evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-main.json`.
+
+MVDM-HOST-DIV-564: restore the original `!LDBIOS && !CPU_30_STYLE`
+selection for the BIOS BOP FE continuation and reject its unadmitted
+alternative. The selected CPU40 BOP FE and BOP FD entries are unchanged.
+Original and removed-body hashes:
+`../../artifacts/mvdm-audit/s13-rejected-legacy-branches.json`.
+
+MVDM-HOST-DIV-565: register the existing `MVDM-NTIO-WINDOWED-STATE`
+divergence in `nt_fulsc.c`: the original state-only `getNtScreenState` body
+is retained outside the excluded X86GFX fullscreen block for the selected
+NTIO handoff. This records an existing placement adaptation; it does not
+re-enable the original hardware fullscreen transition.
+
+MVDM-HOST-DIV-562: replace the inactive alternative of the existing
+`copy_fnc.c` literal `#if 1` with `#error`, preserving the selected original
+fill loop and its DIV-064 adaptation. Source and body hashes are in
+`../../artifacts/mvdm-audit/s13-rejected-legacy-branches.json`.
+
+MVDM-HOST-DIV-563: restore missing original MONITOR selection boundaries in
+`ica.c`, `nt_bop.c`, `nt_reset.c` and `config.c`; rejected historical monitor
+arms contain `#error`. The existing `config.c` LIM-backfill guard is retained
+once, without adding a duplicate. Keep the selected CCPU PIC, original
+non-MONITOR IRET no-op, BOP, initialization and configuration behavior. Evidence and original
+body hashes: `../../artifacts/mvdm-audit/s13-event-condition-boundaries.json`.
+
+MVDM-HOST-DIV-561: replace the unadmitted `NTVDM && MONITOR` body of the
+original `cpu.h` with `#error`, preserving its outer condition. Both live
+`CpuH` selections use `cpu4.h`; the only direct `cpu.h` fixture uses CCPU40
+without MONITOR. This does not remove the selected CCPU or software V86 code.
+Source and removed-body hashes: `../../artifacts/mvdm-audit/s13-rejected-legacy-branches.json`.
+
+MVDM-HOST-DIV-559: restore the remaining original MONITOR conditions in
+`nt_eoi.c` and `nt_timer.c`, rejecting the omitted hardware-monitor arms.
+The CCPU heartbeat, WOW-idle and EOI implementations remain selected; exact
+original ranges and source hashes are in
+`../../artifacts/mvdm-audit/s13-event-condition-boundaries.json`.
+
+MVDM-HOST-DIV-560: replace six remaining original YODA-only bodies with
+`#error`, retaining their outer conditions and source line positions. YODA is
+not an admitted build profile. Original and removed-body hashes are in
+`../../artifacts/mvdm-audit/s13-rejected-legacy-branches.json`.
+
+MVDM-HOST-DIV-558: restore original MONITOR conditional boundaries in
+`qevnt.c` and `nt_eoi.c`; reject the removed hardware-monitor quick-event and
+delayed-interrupt alternatives. The selected CCPU queue, EOI and timer bodies
+remain unchanged. Original and working-tree hashes and rejected original
+body ranges: `../../artifacts/mvdm-audit/s13-event-condition-boundaries.json`.
+
+MVDM-HOST-DIV-557: replace 18 original `#if 0` code bodies with
+`#error`, retaining their original outer conditions and line positions.
+Original identity and removed-body hashes are in
+`../../artifacts/mvdm-audit/s13-rejected-legacy-branches.json`.
+
+MVDM-HOST-DIV-556: replace original `SEGMENTATION` branch bodies with
+`#error`, retaining their outer conditions and source line positions. The
+106 bodies contain only historical Mac MPW `.seg` includes and nested selection
+of those includes; no supported build defines `SEGMENTATION`. Original and
+removed-body hashes are in `../../artifacts/mvdm-audit/s13-rejected-legacy-branches.json`.
+
+MVDM-HOST-DIV-555: restore original CPU30 conditional boundaries around the
+BIOS reset continuations, INT 15 declarations and original shared-header
+declarations; keep DIV-265's selected CPU40 behavior, DIV-146's CCPU enum
+ownership and reject the unavailable CPU30 descriptor branch. Preserve
+diagnostic locations and existing supported selections. Evidence:
+`../../artifacts/mvdm-audit/s13-mirror-conditional-reconciliation.md`.
+
+MVDM-HOST-DIV-554: restore the original `i386` conditional at the removed
+`VdmSetInt21Handler` kernel-monitor call and reject the unavailable non-CPU40
+path without rejecting an `i386`-defined CPU40 build. The selected CCPU
+interrupt registration is unchanged; the historical kernel control service
+remains unimplemented. See
+`../../artifacts/mvdm-audit/s13-mirror-conditional-reconciliation.md`.
+
+MVDM-HOST-DIV-553: replace 87 excluded legacy platform, CPU, debug and device
+single-condition or false-conjunct bodies with `#error`, retaining their
+surrounding branches and applicable source line positions.
+Eight former inner rejections are subsumed by their excluded outer branches.
+The source identities and removed-body hashes are recorded in
+`../../artifacts/mvdm-audit/s13-rejected-legacy-branches.json`. This does not
+select these historical profiles or change any selected device/CPU body.
+
+CPU40 access-vector cleanup: DIV-150 and DIV-182 are removed from
+the active path, while the DIV-151 initializer remains as
 unselected mirror source. The generated CPU40 accessors and original recursive
-wrapper are selected directly. This candidate is not release evidence;
-source, control comparisons and remaining boundaries are recorded in
+wrapper are selected directly. Source, control comparisons and remaining
+boundaries are recorded in
 `../../artifacts/mvdm-audit/cpu40-access-vector-investigation.md`.
 
 MVDM-HOST-DIV-551: select the original generated CPU40 declarations for
@@ -1556,7 +1827,7 @@ firmware include are removed; original retry/failure order is unchanged.
 | MVDM-HOST-DIV-139 | Define the x86 `LDT_ENTRY` descriptor layout for the non-kernel-VDM DPMI source branch. | Modern public `winnt.h` supplies that same declaration before the historical source-local fallback, causing a duplicate C type definition. | Preserve the original fallback verbatim only when the public declaration carrier is absent; no selector algorithm or descriptor field is changed. | `dpmi32/dpmidata.h` |
 | MVDM-HOST-DIV-146 | Deliver a keyboard-controller output-port reset pulse to the selected CCPU40 executor. | The original non-CPU30 branch writes CCPU's private `cpu_interrupt_map` directly and calls the historical host wake hook. This composition intentionally keeps that private bitmap inside `c_main.c`. | Use the original public `cpu_interrupt(CPU_HW_RESET, 0)` entrypoint; it sets the same CCPU40 reset event and clears quick mode for the selected executor. | `softpc.new/base/keymouse/keyba.c` |
 | MVDM-HOST-DIV-147 | Provide the historical shared SoftPC support definitions. | `xt.c`'s CCPU/non-CPU30 declaration block is an obsolete monitor-owned duplicate of CCPU40 register, descriptor and machine-status state; selected CCPU40 owns that state privately in `c_main.c`. | Retain the source file and every non-state support definition, but exclude only the obsolete CPU-state declaration block when `CPU_40_STYLE` is selected. | `softpc.new/base/support/xt.c` |
-| MVDM-HOST-DIV-155 | Provide the historical non-CCPU parity lookup table. | In the selected CPU40 CCPU product, `c_main.c` owns `pf_table`; `xt.c`'s original monitor-path copy is a duplicate provider and has no separate CPU40 consumer. | Retain the original table for all other profiles but exclude only this duplicate table under `CPU_40_STYLE`. | `softpc.new/base/support/xt.c` |
+| MVDM-HOST-DIV-155 | Select the historical non-CCPU parity lookup table only outside CPU40. | In the selected CPU40 CCPU product, `c_main.c` owns `pf_table`; `xt.c`'s original monitor-path copy is a duplicate provider and has no separate CPU40 consumer. | Preserve the existing CPU40 exclusion condition. DIV-567 now replaces the unsupported non-CPU40 body with `#error`; the remaining condition adaptation is still necessary for CPU40. | `softpc.new/base/support/xt.c` |
 | MVDM-HOST-DIV-177 | Translate a SIM32 protected-mode selector:offset into a numeric guest-linear address. | The original SIM32 body uses the CPU30 `DESCR/read_descriptor` carrier, while CPU40 keeps compatible descriptor decoding inside its execution core. | Preserve the caller's explicit pm argument, real-mode arithmetic and the -1 invalid-selector result. Protected requests always use original CPU40 selector_outside_GDT_LDT/read_descriptor_linear, even when CPU PE is clear; no hidden-cache selection or CPU30 monitor state is recreated. | `softpc.new/host/src/sim32.c`; `../ntvdm-exe/softpc/mvdm_softpc_effective_address.c`; `softpc.new/base/ccpu386/c_bsic.c` |
 | MVDM-HOST-DIV-178 | Retain original `CallBack16` protected-mode resolution, including segment faults and FlatAddress native mappings. | A caller alias must not survive the second potentially guest-reentrant resolution. The former current-mode/SAS lease bypassed the original resolver. | Snapshot only caller wTDB/wLocalBP immediately after original GETFRAMEPTR; never write the snapshot back. Restore original callback resolution, flush/free and post-return reacquisition. Remove the autonomous acquire_vp path. Two CBFRAMEPTR assignments retain the original resolver without the legacy cast-lvalue spelling. Runtime acceptance pending in T447 S2. | `wow32/wcall16.c`; `../wow32-dll/source/wow_callback_frame_lease.c` |
 | MVDM-HOST-DIV-179 | Include the original WOW32 precompiled-declaration cohort. | The original `base/mvdm` tree placed `winuserp.h` and `vdm.h` on a private include root; the split product deliberately keeps those declaration-only files in `opennt-abi` instead. | Replace only the two include spellings with the same-named byte-identical ABI carriers. This adds no USER/GDI, CSR, VDM-control or provider behavior. | `wow32/precomp.h`; `../opennt-abi/source/public/internal/{windows/inc/winuserp.h,base/inc/vdm.h}` |
@@ -1580,13 +1851,13 @@ firmware include are removed; original retry/failure order is unchanged.
 | MVDM-HOST-DIV-036 | Resolve an Intel physical byte to CCPU backing memory. | The original CCPU assumes every physical address is an offset in one native `Start_of_M_area` block; an admitted external host-page span must instead remain live through its session-owned mapping identity. | Add one selector-blind adapter probe before the unchanged original RAM calculation. The adapter returns a native pointer only to this synchronous CCPU access path after validating the owning session, mapping identity, span and lifetime; otherwise the original RAM path runs unchanged. Bounded PID-correlated first-hit trace: `resolve.external-hit`. | `softpc.new/base/ccpu386/ccpusas4.c`; `../ntvdm/softpc/{include/mvdm_softpc_physical_mapping.h,mvdm_softpc_physical_mapping.c}` |
 | MVDM-HOST-DIV-037 | Locate original SoftPC ROM/CMOS resources through `host_find_file`. | The original body hardcodes the NT system directory, which is neither the project firmware package nor a portable product installation boundary. | Preserve the original function name, ANSI parameters and `host_error` failure order; replace only its system-directory lookup with the session-owned configured firmware-root adapter. | `softpc.new/host/src/nt_unix.c`; `../ntvdm/softpc/mvdm_softpc_firmware.c`; `../session/session.[ch]` |
 | MVDM-HOST-DIV-038 | Load the original `ntio.sys` image in `InitialiseDosEmulation`. | The original body hardcodes the NT system directory. The current product stages immutable MVDM system media beside its executable rather than requiring an installed NT4 system file. | Preserve original file validation, `CreateFile`/`ReadFile`, SAS write, virtual-interrupt restore and `CS:IP` entry ordering; replace only directory discovery with the session-owned MVDM-system adapter. A controlled termination that returns now returns `-1`, matching the original terminal failure direction. | `softpc.new/host/src/nt_msscs.c`; `../ntvdm/softpc/mvdm_softpc_firmware.c`; `../app/package_layout.[ch]`; `../session/session.[ch]` |
-| MVDM-HOST-DIV-039 | Initialize the fixed virtual-interrupt state for the selected SoftPC machine profile. | Historical `#ifndef i386` chose the original software-CPU (RISC-host) path, while `i386` chose the NT kernel-V86 monitor. This product deliberately selects original `CPU_40_STYLE` on an x86 host; host ISA must not accidentally select the unavailable kernel-V86 product shell. | Preserve the original software-CPU transition by selecting the non-`i386` `MIPS_BIT_MASK` state only under `CPU_40_STYLE`; retain the original V86-monitor clear state for any future non-CCPU profile. The bit remains a historical `FSTI/FCLI` behavior selector only—no MIPS guest code or second CPU is enabled. | `softpc.new/host/src/nt_msscs.c`; `../../tools/build/New-T310OriginalSoftpcNinja.ps1` |
+| MVDM-HOST-DIV-039 | Initialize the fixed virtual-interrupt state for the selected SoftPC machine profile. | Historical `#ifndef i386` chose the original software-CPU (RISC-host) path, while `i386` chose the NT kernel-V86 monitor. This product deliberately selects original `CPU_40_STYLE` on an x86 host; host ISA must not accidentally select the unavailable kernel-V86 product shell. | Preserve the original software-CPU transition by selecting the non-`i386` `MIPS_BIT_MASK` state under `CPU_40_STYLE`; reject the unsupported hardware-monitor alternative at compile time. The bit remains a historical `FSTI/FCLI` behavior selector only—no MIPS guest code or second CPU is enabled. | `softpc.new/host/src/nt_msscs.c`; `../../tools/build/New-T310OriginalSoftpcNinja.ps1` |
 | MVDM-HOST-DIV-040 | Terminate the original SoftPC heartbeat at its alertable wait. | Original NT4 alert wakes with STATUS_ALERTED. The compatibility carrier prefers the native NTDLL NtAlertThread when available; only its public APC fallback returns STATUS_USER_APC. | Preserve the original termination block and accept either status. The APC fallback is not a general replacement for a pending NT alert on arbitrary threads; timer, PIC and session policy remain with their existing owners. | `softpc.new/host/src/nt_timer.c`; `../ntvdm-exe/win32/nt_thread_alert_compat.c` |
 | MVDM-HOST-DIV-043 | Publish the original EGA BIOS chain-write callback globals. | `cga.c` used old-style unprototyped global function pointers while the same original interface is already explicitly two-`ULONG` in `video.h`; x64 then loses the checked callback contract when EGA routines are assigned. | Preserve names, storage and call order, changing only the two global declarations to the existing `video.h` `IPT2` shape. | `softpc.new/base/video/cga.c`; original declaration evidence `softpc.new/base/inc/video.h` |
 | MVDM-HOST-DIV-044 | Preserve the original NTVDM host-code selection without implicitly selecting a second machine profile. | The original common host header defines `CPU_30_STYLE`, which selects the separate NT4 kernel-VDM V86-monitor contract. The product admits only the original CCPU40 software-executor profile, so a shared header must not re-enable the retired route. | Retain `NTVDM` and the original remaining host declarations; remove only the `CPU_30_STYLE` definition and document the exclusion at its former insertion point. `CPU_40_STYLE` remains the sole build-manifest selection. | `softpc.new/host/inc/host_def.h`; `../../tools/build/New-T313CcpuLifecycleNinja.ps1`; `../../tools/build/New-T310OriginalSoftpcNinja.ps1` |
 | MVDM-HOST-DIV-146 | Let the historical ICA header publish its non-CCPU interrupt-map bit macros. | The original combined CCPU40 build also defined `CPU_30_STYLE`, using it incidentally to suppress `CPU_HW_INT` before CCPU's distinct event enum. The product no longer defines the retired CPU30 marker. | Preserve the original non-CCPU branch and prevent the ICA macro only when the original `CCPU` executor is selected; CCPU's original event enum remains authoritative. | `softpc.new/base/inc/ica.h` |
 | MVDM-HOST-DIV-055 | Store the selected SAS physical-memory capacity. | The original CPU_40 declaration used the host-sized `IHPE` alias, although the value is produced from a physical-address input and returned through the fixed-width `TYPE_sas_memory_size` interface. On x64 that silently widens a guest capacity and narrows it on return. | Preserve all source control flow while declaring the capacity as `PHY_ADDR`; it remains a guest physical extent and never a host pointer or mapping token. | `softpc.new/base/inc/sas.h`, `softpc.new/base/ccpu386/ccpusas4.c` |
-| MVDM-HOST-DIV-056 | Select the original x86 memory-size branch. | The modern MSVC target advertises `_M_IX86`, not the historical `i386` spelling. | Recognize either macro locally; keep both original branch bodies and all calculations unchanged. Only Win32/x86 is a supported target. | `softpc.new/host/src/config.c` |
+| MVDM-HOST-DIV-056 | Select the original memory-size branch for the CPU40 worker. | The original i386 arm assumes the unavailable NT kernel-VDM allocator; standalone CPU40 must retain the original non-i386 `GetVDMSize` calculation even on an x86 host. | Recognize historical `i386` and modern `_M_IX86` while excluding CPU40 from the i386 arm. DIV-569 replaces the unsupported non-CPU40 arm with `#error`; the selected calculation is unchanged. | `softpc.new/host/src/config.c` |
 | MVDM-HOST-DIV-057 | Declare the original `host_simulate` controller re-entry form. | Non-MONITOR sources select `cpu4.h`, which omits the declaration although original keyboard, mouse, BIOS and storage code call the same `void` entrypoint.  Modern C otherwise assumes an `int` result and loses the call ABI. | The shared original host declaration carrier publishes only `void host_simulate(void)`; selected SoftPC/CCPU implementation and all call order remain unchanged. | `softpc.new/host/inc/host_def.h` |
 | MVDM-HOST-DIV-058 | Carry mouse range endpoints from the original INT 33h state to the host range notifier. | The caller's `MOUSE_SCALAR *` endpoints and the host declarations' `word *` parameters had equal NT4 width but incompatible signed scalar pointer types; modern MSVC correctly rejects the call shape. | Preserve the four-pointer API, call order and implementation.  Declare both caller and host definitions with the actual `MOUSE_SCALAR *` endpoint type. | `softpc.new/base/keymouse/mouse_io.c`, `softpc.new/host/src/nt_mouse.c` |
 | MVDM-HOST-DIV-059 | Read the NTIO keyboard vector table and stream-buffer cells through original SoftPC SAS backing memory. | The original x86 build treated fixed-width `effective_addr` results as host pointers; x64 truncates those values before the cast. | Retain the original table order and all `effective_addr` calculations, but combine each physical number with the existing native-width `Start_of_M_area` backing pointer.  No new mapping manager or device shim is created. | `softpc.new/base/keymouse/keybd_io.c` |

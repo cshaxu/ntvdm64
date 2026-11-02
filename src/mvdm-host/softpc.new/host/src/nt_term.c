@@ -20,7 +20,7 @@
 #include "xt.h"
 #include "nt_graph.h"
 #ifdef HUNTER
-#include "nt_hunt.h"
+#error Excluded unsupported HUNTER configuration
 #endif /* HUNTER */
 #include "ntcheese.h"
 
@@ -54,8 +54,8 @@ void host_terminate()
 
     host_term_cleanup();
 #ifdef HUNTER
-    if (TrapperDump != (HANDLE) -1)
-	CloseHandle(TrapperDump);
+#error Excluded unsupported HUNTER configuration
+
 #endif /* HUNTER */
 
     if(VDMForWOW)

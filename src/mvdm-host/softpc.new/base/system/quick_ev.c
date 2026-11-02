@@ -57,16 +57,16 @@
  */
  
 #ifdef SCCSID
-LOCAL char SccsID[]="@(#)quick_ev.c	1.43 07/04/95 Copyright Insignia Solutions Ltd.";
+#error Excluded unsupported SCCSID configuration
 #endif
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_QUICKEV.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 /*
@@ -89,7 +89,7 @@ LOCAL char SccsID[]="@(#)quick_ev.c	1.43 07/04/95 Copyright Insignia Solutions L
 #include "timer.h"
 
 #ifdef SFELLOW
-#include "malloc.h"
+#error Excluded unsupported SFELLOW configuration
 #else
 /* for host_malloc & host_free */
 #include "host_hfx.h" 
@@ -167,11 +167,11 @@ LOCAL q_ev_handle next_free_handle = 1;
 	Separate list for events on timer ticks
 */
 #if defined(SFELLOW)
-/*
- * a single, shared free list (both tic and quick events
- * use the same structs)
- */
-#define	tic_free_list_head	q_free_list_head
+#error Excluded unsupported SFELLOW configuration
+
+
+
+
 #else
 LOCAL t_q_event *tic_free_list_head = NULL;
 #endif	/* SFELLOW */
@@ -250,10 +250,10 @@ q_ev_handle *free_handle;
 		ptr = *head;
 		*head = (*head)->next;
 #ifdef SFELLOW
-		ptr->next_free = *free_ptr;
-		*free_ptr = ptr;
-	}
-	*head = *tail = NULL;
+#error Excluded unsupported SFELLOW configuration
+
+
+
 #else	/* SFELLOW */
 		host_free(ptr);
 	}
@@ -275,17 +275,17 @@ LOCAL t_q_event* makeSomeFreeEvents IPT0()
 {
 	t_q_event *nptr;
 #ifdef SFELLOW
-	IUH	count;
+#error Excluded unsupported SFELLOW configuration
 
-	nptr = SFMalloc(4096,TRUE);
-	for (count=0; count< (4096/sizeof(t_q_event)); count++)
-	{
-		nptr->next_free = q_free_list_head;
-		q_free_list_head = nptr;
-		nptr++;
-	}
-	nptr = q_free_list_head;
-	q_free_list_head = nptr->next_free;
+
+
+
+
+
+
+
+
+
 #else
 	nptr = (t_q_event *)host_malloc(sizeof(t_q_event));
 #endif
@@ -369,7 +369,7 @@ add_event IFN10(t_q_event **, head, t_q_event **, tail, t_q_event **, free,
 	{
 		/* we have no free list elements, so we must create one */
 #if defined(SFELLOW)
-		if ((nptr = (t_q_event *)makeSomeFreeEvents()) ==
+#error Excluded unsupported SFELLOW configuration
 #else
 		if ((nptr = (t_q_event *)host_malloc(sizeof(t_q_event))) ==
 #endif	/* SFELLOW */
@@ -377,7 +377,7 @@ add_event IFN10(t_q_event **, head, t_q_event **, tail, t_q_event **, free,
 		{
 			always_trace0("ARRGHH! malloc failed in add_q_event");
 #if defined(SFELLOW)
-			return 0;
+#error Excluded unsupported SFELLOW configuration
 #else
 			return 0xffff;
 #endif	/* SFELLOW */
@@ -1142,7 +1142,7 @@ IU32
 calc_q_inst_for_time IFN1(IU32, time)
 {
 #ifdef SYNCH_TIMERS
-	return (time * SYNCS_PER_USEC);
+#error Excluded unsupported SYNCH_TIMERS configuration
 #else
 	IU32 inst, jumps;
 
@@ -1171,7 +1171,7 @@ IU32
 calc_q_time_for_inst IFN1(IU32, inst)
 {
 #ifdef SYNCH_TIMERS
-	return (inst / SYNCS_PER_USEC);
+#error Excluded unsupported SYNCH_TIMERS configuration
 #else
 	IU32 time, jumps;
 

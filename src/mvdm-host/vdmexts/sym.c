@@ -725,19 +725,19 @@ BOOL ExtractSymbol(
                             break;
                     }
 #if 0
-                    break;
-                case V86_MODE:
-                    mod_addr = mod_offset + (ULONG)(seg_num << 4) + this_offset;
-                    switch( direction ) {
-                        case BEFORE:
-                            this_dist = v86_addr - mod_addr;
-                            break;
-                        case AFTER:
-                            this_dist = mod_addr - v86_addr;
-                            break;
-                    }
-                    break;
-            }
+#error Excluded unsupported original disabled branch
+
+
+
+
+
+
+
+
+
+
+
+
 #endif
 
             if ( this_dist >= 0 && (this_dist < *dist || *dist == -1) ) {

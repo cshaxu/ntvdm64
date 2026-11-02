@@ -1,0 +1,53 @@
+{
+  "path": "src/non-mvdm/base/ntos/ex/probe.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\ntos\\ex\\probe.c",
+  "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+  "original_condition_line": 27,
+  "original_end_line": 30,
+  "before_sha256": "7be72a9d5e918ef19238ab279d58a41e9aee0d0a5d8bb0a10f0ef33514b418ad",
+  "after_sha256": "d90adbadd7b0d9937302509c577e5f846a05ba4562ccf02f7d6ddfb346e17f82",
+  "current_condition_line": 29,
+  "contexts": [
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "7be72a9d5e918ef19238ab279d58a41e9aee0d0a5d8bb0a10f0ef33514b418ad",
+      "includes": 148,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "7be72a9d5e918ef19238ab279d58a41e9aee0d0a5d8bb0a10f0ef33514b418ad",
+      "includes": 147,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "7be72a9d5e918ef19238ab279d58a41e9aee0d0a5d8bb0a10f0ef33514b418ad",
+      "includes": 148,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "registration": "OPENNT-HOST-144",
+  "status": "locally-verified",
+  "limitations": [
+    "Actual current WOW and worker contexts only; complete support matrix and release acceptance remain open."
+  ],
+  "verification": {
+    "preprocessor": "worker and WOW source preprocessing before/after matches after scratch filename normalization and ignoring blank lines",
+    "objects": "x86 worker and WOW probe objects compiled",
+    "guard": "isolated normal accepted, ALLOC_PRAGMA rejected",
+    "diagnostics": "pre-existing logical positions preserved with #line"
+  }
+}

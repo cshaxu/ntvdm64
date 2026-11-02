@@ -12,12 +12,12 @@
  */
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_CMOS.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 
@@ -348,13 +348,13 @@ LOCAL int verify_equip_byte IFN1(half_word *, equip)
 		*equip |= CO_PROCESSOR_PRESENT;
 
 #ifdef SLAVEPC
-	if (host_runtime_inquire(C_FLOPPY_SERVER) == GFI_SLAVE_SERVER)
-	{
-		num_flops =
-			(*(CHAR *) config_inquire(C_SLAVEPC_DEVICE, NULL))
-			? 1:0;
-	}
-	else
+#error Excluded unsupported SLAVEPC configuration
+
+
+
+
+
+
 #endif /* SLAVEPC */
 	{
 		num_flops  =
@@ -816,12 +816,12 @@ GLOBAL int cmos_read_byte IFN2(int, cmos_byte, half_word *, value)
 }
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_INIT.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 #if defined(NTVDM) || defined(macintosh)

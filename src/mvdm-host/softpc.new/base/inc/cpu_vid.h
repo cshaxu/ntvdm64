@@ -90,18 +90,21 @@ typedef struct
 	 * only matched it by 32-bit typedef coincidence. */
 	IU32 (*b_read) IPT1(IU32, eaOff);
 	IU32 (*w_read) IPT1(IU32, eaOff);
-
-#ifndef	NO_STRING_OPERATIONS
-	void (*str_read) IPT3(IU8 *, dest, IU32, eaOff, IU32, count);
-#endif	/* NO_STRING_OPERATIONS */
 #else
+#line 98
 	IU32 (*b_read) IPT1(ULONG, offset);
 	IU32 (*w_read) IPT1(ULONG, offset);
-
-#ifndef	NO_STRING_OPERATIONS
-	void (*str_read) IPT3(IU8 *, dest, ULONG, offset, ULONG, count);
-#endif	/* NO_STRING_OPERATIONS */
 #endif
+#ifndef	NO_STRING_OPERATIONS
+#if defined(CPU_40_STYLE) && defined(C_VID)
+#line 95
+	void (*str_read) IPT3(IU8 *, dest, IU32, eaOff, IU32, count);
+#else
+#line 102
+	void (*str_read) IPT3(IU8 *, dest, ULONG, offset, ULONG, count);
+#endif
+#endif	/* NO_STRING_OPERATIONS */
+#line 105
 
 } READ_POINTERS; 
 

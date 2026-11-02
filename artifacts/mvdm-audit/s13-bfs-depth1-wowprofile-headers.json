@@ -1,0 +1,1461 @@
+{
+  "scope": "first-depth selected headers only",
+  "register": "MVDM-HOST-DIV-587",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wgtbl.h",
+      "start": 21,
+      "end": 23,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgtbl.h",
+      "original_start": 21,
+      "original_end": 23,
+      "source_sha256": "9ca6b1b9de1e9ce1191597f0efb8fec2d3225044214c7355ab802dfab0bf90ef",
+      "original_sha256": "43cc4724b0e6040c0ed6cdf12c4478c40a1e0bcd3b74bf6b32d91b9f77df71a1",
+      "contexts": [
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        }
+      ],
+      "at_eof": true,
+      "removed_body_sha256": "506439eecd5dd3ba998b607e5f8acc0f363e31d8bc9ad14919fff8635afae96c",
+      "removed_body_lines": 1,
+      "after_sha256": "ab1275723ae504a98f55fab7291dc4f459281f84db9535f16ce40d05886213ae",
+      "line_control": "single body line replaced one-for-one",
+      "status": "locally-verified"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkbtbl.h",
+      "start": 21,
+      "end": 23,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkbtbl.h",
+      "original_start": 21,
+      "original_end": 23,
+      "source_sha256": "534af169b9ebc96ce69a3c23a71c1253e17ea1671b91e91d3aec23a36342e2bd",
+      "original_sha256": "416aa19bd74bfdf5b5b4bb7ae849fee56e9ecc378f47eea9f70ed252d8db8cc6",
+      "contexts": [
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        }
+      ],
+      "at_eof": true,
+      "removed_body_sha256": "4b00a07019ff1bcb519ce70f185ef84415d8ec737bf9b05f94045f6e894e248f",
+      "removed_body_lines": 1,
+      "after_sha256": "f1c5779ec4cd863888907295d64c0356ff3cc44082e02c7338e84d6ea4f3a259",
+      "line_control": "single body line replaced one-for-one",
+      "status": "locally-verified"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wktbl.h",
+      "start": 21,
+      "end": 23,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wktbl.h",
+      "original_start": 21,
+      "original_end": 23,
+      "source_sha256": "361ff40b16c2536b1e7c582d9cfbb65abc108ae627f2df5535ca0972e8734b4b",
+      "original_sha256": "054dc8c4703bde7388d9131dd84c9d3d64913d42a4f251eb89088587a0c2347f",
+      "contexts": [
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        }
+      ],
+      "at_eof": true,
+      "removed_body_sha256": "0eda8701a93216a7c42fd948fc49a0c99562d491ede75b43eb18f03180b4652a",
+      "removed_body_lines": 1,
+      "after_sha256": "9ff65d009815c7f64074958ee5a090724c201f0efe635da8ecf3c683336271cd",
+      "line_control": "single body line replaced one-for-one",
+      "status": "locally-verified"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmtbl.h",
+      "start": 21,
+      "end": 23,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmtbl.h",
+      "original_start": 21,
+      "original_end": 23,
+      "source_sha256": "84c3995216ed01f4cc8789c32610f74afea194e58aab5b75e13a1b94223b9578",
+      "original_sha256": "c35252b376c0f6132df8439f19ef66c780a2cf3bb39720b62c0d1d8b6f2069e4",
+      "contexts": [
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        }
+      ],
+      "at_eof": true,
+      "removed_body_sha256": "1c41c1993755fc5ca3a6fcb3f57dcb51cd638aaea594d6a2e48844863348323e",
+      "removed_body_lines": 1,
+      "after_sha256": "cf1a6e3f1dfaa14e545c67fb4a215b0dd8a26cf0dbb700ce6787cd10beec7f85",
+      "line_control": "single body line replaced one-for-one",
+      "status": "locally-verified"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.h",
+      "start": 25,
+      "end": 27,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmtbl32.h",
+      "original_start": 25,
+      "original_end": 27,
+      "source_sha256": "e32745d8e25e7ac2dc89b227c542593b3623fd763f742bd2a7f51c3ada74e140",
+      "original_sha256": "c64cfbdd5b28db353fd24edd971044fe8f086d86b40aaffd648ffcfe4c653afb",
+      "contexts": [
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/mapembed.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/waccel.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/walias.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/walloc16.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcall16.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcall32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcntl32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcommdlg.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcuricon.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wdde.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wdib.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wdos.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgdi.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgdi31.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgfont.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgmeta.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgpal.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgprnset.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgtext.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wheap.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkbman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkernel.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkfileio.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkgthunk.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkmem.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmdisp32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmalias.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmedia.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmedia1.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmedia2.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmstru1.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmstru2.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmstruc.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsg16.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgbm.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgcb.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgem.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsglb.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgsbm.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmtbl32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wole2.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32fax.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wowhooks.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wowtbl.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wparam.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wreldc.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wres16.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wres32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsdata.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsext.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wshell.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wspool.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsraw.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wstruc.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsubcls.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wthman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wucaret.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuclass.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuclip.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wucomm.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wucursor.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wudlg.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuhook.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wulang.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wumenu.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wumsg.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuser.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuser31.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wusercli.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wutext.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wutmr.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuwind.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_common_dialog_calls.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_hook_callback.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_idle_hook_binding.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_launch_identity.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_message_lifetime.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_registry_binding.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_shell_callback.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_task_cleanup_entry.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_task_termination.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_user_native_extension.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_user_thunk_scope.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/tests/build/wow_thunk_macro_boundary.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        }
+      ],
+      "at_eof": false,
+      "removed_body_sha256": "ff423f21b0f42d6154010e954cd9df55f303fbf288c195405c7b173530030f14",
+      "removed_body_lines": 1,
+      "after_sha256": "bc17285fd2a86bf64706c1fcff80db50a5e7ef2eba275850c578876e7ca0ffd5",
+      "line_control": "single body line replaced one-for-one",
+      "status": "locally-verified"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtbl.h",
+      "start": 44,
+      "end": 58,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowtbl.h",
+      "original_start": 44,
+      "original_end": 58,
+      "source_sha256": "61e30681aab67c6e370b38cef3fe1c7ffe60fe3b362a5098ef53d26f4025dbe9",
+      "original_sha256": "343409d8adc9c2f013fbc3c44c2c1f611556321832c95037ef7f90f7e439fe01",
+      "contexts": [
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/mapembed.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/waccel.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/walias.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/walloc16.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcall16.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcall32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcntl32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcommdlg.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcuricon.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wdde.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wdib.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wdos.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgdi.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgdi31.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgfont.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgmeta.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgpal.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgprnset.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgtext.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wheap.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkbman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkernel.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkfileio.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkgthunk.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkmem.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmdisp32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmalias.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmedia.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmedia1.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmedia2.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmstru1.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmstru2.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmstruc.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsg16.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgbm.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgcb.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgem.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsglb.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgsbm.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmtbl32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wole2.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32fax.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wowhooks.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wowtbl.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wparam.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wreldc.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wres16.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wres32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsdata.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsext.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wshell.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wspool.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsraw.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wstruc.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsubcls.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wthman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wucaret.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuclass.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuclip.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wucomm.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wucursor.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wudlg.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuhook.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wulang.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wumenu.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wumsg.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuser.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuser31.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wusercli.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wutext.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wutmr.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuwind.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_common_dialog_calls.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_hook_callback.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_idle_hook_binding.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_launch_identity.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_message_lifetime.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_registry_binding.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_shell_callback.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_task_cleanup_entry.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_task_termination.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_user_native_extension.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_user_thunk_scope.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/tests/build/wow_thunk_macro_boundary.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        }
+      ],
+      "at_eof": true,
+      "removed_body_sha256": "7e984db5b4714e4a3047317f8b49f60daf4f502e767d248b4ef9aebc9ab65a2a",
+      "removed_body_lines": 13,
+      "after_sha256": "4c7b55713ccdc3a90a2c406b288c4d0ea128dc1ee0219f3a6a39569ba1527cb5",
+      "line_control": "branch ends at EOF",
+      "status": "locally-verified"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wshltbl.h",
+      "start": 23,
+      "end": 25,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wshltbl.h",
+      "original_start": 23,
+      "original_end": 25,
+      "source_sha256": "d53852f9b1b9958e8b623ecd8ac9aec2b700bbe96248ff8fcd9b814b22986d77",
+      "original_sha256": "8f3479c3135087e2b4c12d7c4d32750e8a78024e15e6b453ca09b5081eac6f5d",
+      "contexts": [
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        }
+      ],
+      "at_eof": true,
+      "removed_body_sha256": "7547643ca45d6883cf750540e3b5a696ab2b2d823f0c8dd92ea574ac2a05d38c",
+      "removed_body_lines": 1,
+      "after_sha256": "befd173bf35c786b210924de13a262ba86de2c6226463c32b17da030e29099ab",
+      "line_control": "single body line replaced one-for-one",
+      "status": "locally-verified"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsocktbl.h",
+      "start": 21,
+      "end": 23,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wsocktbl.h",
+      "original_start": 21,
+      "original_end": 23,
+      "source_sha256": "6e79b81eab2f5783d3fbc2e34d974578a64c15eabae60a08202b6ba89d2391f8",
+      "original_sha256": "a16351b3392f882b17a406688cd03b27e3c9e58a358c14a75af925c2ee0923dc",
+      "contexts": [
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/mapembed.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/waccel.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/walias.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/walloc16.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcall16.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcall32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcntl32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcommdlg.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wcuricon.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wdde.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wdib.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wdos.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgdi.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgdi31.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgfont.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgmeta.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgpal.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgprnset.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wgtext.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wheap.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkbman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkernel.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkfileio.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkgthunk.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wkmem.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmdisp32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmalias.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmedia.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmedia1.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmedia2.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmstru1.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmstru2.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmmstruc.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsg16.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgbm.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgcb.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgem.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsglb.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmsgsbm.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wmtbl32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wole2.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32fax.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wowhooks.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wowtbl.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wparam.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wreldc.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wres16.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wres32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsdata.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsext.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wshell.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wspool.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsraw.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wstruc.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wsubcls.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wthman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wucaret.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuclass.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuclip.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wucomm.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wucursor.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wudlg.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuhook.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wulang.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuman.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wumenu.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wumsg.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuser.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuser31.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wusercli.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wutext.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wutmr.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wuwind.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_common_dialog_calls.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_hook_callback.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_idle_hook_binding.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_launch_identity.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_message_lifetime.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_registry_binding.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_shell_callback.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_task_cleanup_entry.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_task_termination.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_user_native_extension.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/wow32-dll/source/wow_user_thunk_scope.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        },
+        {
+          "source": "O:/repos.hobby/ntvdm64/tests/build/wow_thunk_macro_boundary.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        }
+      ],
+      "at_eof": false,
+      "removed_body_sha256": "45fb02edc6ba37e10e8b2766284c00c4dab9386f0a8fd3b8c250c118f8e2eca7",
+      "removed_body_lines": 1,
+      "after_sha256": "e4eb4402016f3820b0bba355cf95bb85b4e24f92f1e000dae98089ec7647be9f",
+      "line_control": "single body line replaced one-for-one",
+      "status": "locally-verified"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstbl.h",
+      "start": 21,
+      "end": 23,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wstbl.h",
+      "original_start": 21,
+      "original_end": 23,
+      "source_sha256": "bc47238022d649876196deb53a8260adfacaba46cc2d4d6056fc908a5657e822",
+      "original_sha256": "e05abe8a2fb397e299aba997e1928c3f74e00eecb23277b4c1c60f66480d439a",
+      "contexts": [
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        }
+      ],
+      "at_eof": true,
+      "removed_body_sha256": "59853e4e4acb434fb9a80259bff8da07361fb85116711a8e2bf9740195d6b953",
+      "removed_body_lines": 1,
+      "after_sha256": "46bff14a04cb668a3cdebbd2c960a725677a60d051f4734243f2c976a75a2cc7",
+      "line_control": "single body line replaced one-for-one",
+      "status": "locally-verified"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wthtbl.h",
+      "start": 22,
+      "end": 24,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wthtbl.h",
+      "original_start": 22,
+      "original_end": 24,
+      "source_sha256": "ef9c55dc72a11f9c9be616dc0ceb1987daea11f6770885c1dc9d7b27b9735116",
+      "original_sha256": "8423dfbab62c8ee94f069502f829317c153ae371702f851b94da12f6a18a4b89",
+      "contexts": [
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        }
+      ],
+      "at_eof": true,
+      "removed_body_sha256": "e7b05fc298b9436ff30b37e14c098f00d2aac24cc1451fd8bd333a405d59cca0",
+      "removed_body_lines": 1,
+      "after_sha256": "ebadbe26b3b558d7289eb5e53f2e3c0dee1b4cafabb1f6618c84553b43472057",
+      "line_control": "single body line replaced one-for-one",
+      "status": "locally-verified"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutbl.h",
+      "start": 22,
+      "end": 24,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wutbl.h",
+      "original_start": 22,
+      "original_end": 24,
+      "source_sha256": "ddcaca25c337388ea8267680cfdb3a315d88962a145c7785eca18700fcb5aa17",
+      "original_sha256": "22d88170a6047c25a31a5165d1fa079e0d6bf4ecf94f123b2544ee95bdb644f2",
+      "contexts": [
+        {
+          "source": "O:/repos.hobby/ntvdm64/src/mvdm-host/wow32/wow32.c",
+          "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+        }
+      ],
+      "at_eof": true,
+      "removed_body_sha256": "ac55b50ede5caf4986eec8d5c44494b29518bddad2fa719ad1a718caa2404874",
+      "removed_body_lines": 1,
+      "after_sha256": "a459ddf2fff86f1821873624253a473898b31f96956e6f1a64b873b573caea82",
+      "line_control": "single body line replaced one-for-one",
+      "status": "locally-verified"
+    }
+  ],
+  "excluded_from_batch": [
+    "witbl.h",
+    "wowtable.h"
+  ],
+  "verification": {
+    "generated_compile_commands_inventoried": 2836,
+    "debug_profile_flags_found": 0,
+    "macro_definition_rule": "WOWPROFILE only follows DEBUG and DEBUG_OR_WOWPROFILE only follows WOWPROFILE in selected wow32.h; direct DEBUG/WOWPROFILE definitions in project test or WOW32 sources were not found",
+    "preprocess": [
+      {
+        "unit": "wow32.c",
+        "nonblank_equal_after_scratch_path_normalization": true
+      },
+      {
+        "unit": "wowtbl.c",
+        "nonblank_equal_after_scratch_path_normalization": true
+      }
+    ],
+    "guards": [
+      {
+        "guard": 0,
+        "defined": false,
+        "exit": 0,
+        "ok": true
+      },
+      {
+        "guard": 0,
+        "defined": true,
+        "exit": 2,
+        "ok": true
+      },
+      {
+        "guard": 1,
+        "defined": false,
+        "exit": 0,
+        "ok": true
+      },
+      {
+        "guard": 1,
+        "defined": true,
+        "exit": 2,
+        "ok": true
+      },
+      {
+        "guard": 2,
+        "defined": false,
+        "exit": 0,
+        "ok": true
+      },
+      {
+        "guard": 2,
+        "defined": true,
+        "exit": 2,
+        "ok": true
+      },
+      {
+        "guard": 3,
+        "defined": false,
+        "exit": 0,
+        "ok": true
+      },
+      {
+        "guard": 3,
+        "defined": true,
+        "exit": 2,
+        "ok": true
+      },
+      {
+        "guard": 4,
+        "defined": false,
+        "exit": 0,
+        "ok": true
+      },
+      {
+        "guard": 4,
+        "defined": true,
+        "exit": 2,
+        "ok": true
+      },
+      {
+        "guard": 5,
+        "defined": false,
+        "exit": 0,
+        "ok": true
+      },
+      {
+        "guard": 5,
+        "defined": true,
+        "exit": 2,
+        "ok": true
+      },
+      {
+        "guard": 6,
+        "defined": false,
+        "exit": 0,
+        "ok": true
+      },
+      {
+        "guard": 6,
+        "defined": true,
+        "exit": 2,
+        "ok": true
+      },
+      {
+        "guard": 7,
+        "defined": false,
+        "exit": 0,
+        "ok": true
+      },
+      {
+        "guard": 7,
+        "defined": true,
+        "exit": 2,
+        "ok": true
+      },
+      {
+        "guard": 8,
+        "defined": false,
+        "exit": 0,
+        "ok": true
+      },
+      {
+        "guard": 8,
+        "defined": true,
+        "exit": 2,
+        "ok": true
+      },
+      {
+        "guard": 9,
+        "defined": false,
+        "exit": 0,
+        "ok": true
+      },
+      {
+        "guard": 9,
+        "defined": true,
+        "exit": 2,
+        "ok": true
+      },
+      {
+        "guard": 10,
+        "defined": false,
+        "exit": 0,
+        "ok": true
+      },
+      {
+        "guard": 10,
+        "defined": true,
+        "exit": 2,
+        "ok": true
+      }
+    ],
+    "build": "cached x86 wow32.dll 91 steps completed successfully with compiler/link warnings",
+    "dispatch_fixture": "build/t473-s13/wow-dispatch-current-s13-r6/exit.txt = 0; controlled host fixture, not Win16 execution",
+    "line_controls": "ten single-line bodies replaced one-for-one; wowtbl.h group ends at EOF",
+    "limits": "witbl.h and wowtable.h had no observed supported inclusion and remain pending; full layer/product acceptance remains pending"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "scope": "First-depth NTVDM outer branches, DIV-591; no guest modification",
+  "files": [
+    "src/mvdm-host/softpc.new/base/support/get_env.c",
+    "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+    "src/mvdm-host/softpc.new/base/system/ica.c",
+    "src/mvdm-host/softpc.new/base/system/illegalp.c"
+  ],
+  "evidence": {
+    "actual_product_x86_preprocessing": "selected output matches before excluding blank lines in all four files; build/t473-s13/bfs-ntvdm-outer-compare/result.json",
+    "compile": "four x86 worker objects compiled; no full product build",
+    "guard": "8 isolated profile controls and six logical line directives verified; build/t473-s13/bfs-depth1-ntvdm-extra2/guard-results.json",
+    "regression": "source-linked PIC reset fixture 24/24 and keyboard/PIC fixture 86/86",
+    "mirror_guard": "test_mirror_rejected_conditions.py passed 235 retained guards and six additional profile checks"
+  },
+  "limitations": [
+    "No guest runtime, full architecture matrix, release, or full acceptance claimed.",
+    "The removed outer branches subsume ten previously unreviewed nested groups; nested semantics were not independently audited.",
+    "Previous per-file trace hashes describe pre-edit snapshots."
+  ]
+}

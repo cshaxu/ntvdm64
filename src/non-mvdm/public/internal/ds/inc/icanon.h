@@ -56,14 +56,14 @@ extern "C" {
 //
 
 #if 0
-#define I_NetPathType           NetpPathType
-#define I_NetPathCanonicalize   NetpPathCanonicalize
-#define I_NetPathCompare        NetpPathCompare
-#define I_NetNameValidate       NetpNameValidate
-#define I_NetNameCanonicalize   NetpNameCanonicalize
-#define I_NetNameCompare        NetpNameCompare
-#define I_NetListCanonicalize   NetpListCanonicalize
-#define I_NetListTraverse       NetpListTraverse
+#error Excluded unsupported original disabled branch
+
+
+
+
+
+
+
 #else
 #define NetpPathType            I_NetPathType
 #define NetpPathCanonicalize    I_NetPathCanonicalize

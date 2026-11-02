@@ -40,43 +40,9 @@
 #endif
 
 #ifndef NTVDM
-LOCAL void badGetenv IFN3(char *, name, char *, type_name, char *, value)
-{
-	printf("Bad getenv(\"%s\") %s value \"%s\"", name, type_name, value);
-}
-
-
-LOCAL void setupVerboseGetenv IFN0()
-{
-	SAVED IBOOL firstGetenv = TRUE;
-	char *env;
-	char *how = "Defaulting";
-
-	if (firstGetenv)
-	{
-#ifdef	PROD
-		verboseGetenv = FALSE;
-#else	/* PROD */
-#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
-#endif	/* PROD */
-		env = host_getenv("VERBOSE_GETENV");
-		if (env)
-		{
-			if (strcmp(env, "FALSE") == 0)
-				verboseGetenv = FALSE;
-			else if (strcmp(env, "TRUE") == 0)
-				verboseGetenv = TRUE;
-			else
-				badGetenv("VERBOSE_GETENV", "IBOOL", env);
-			how = "Setting";
-		}
-#ifndef	PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif	/* PROD */
-		firstGetenv = FALSE;
-	}
-}
+#error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected
 #endif
+#line 80
 
 
 GLOBAL IBOOL IBOOLgetenv IFN2(char *, name, IBOOL, default_value)

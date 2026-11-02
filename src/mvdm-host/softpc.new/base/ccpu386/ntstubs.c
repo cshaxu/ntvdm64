@@ -83,10 +83,10 @@ void _asm_simulate()
 }
 
 #if 0
-void cpu_simulate()
-{
-    c_cpu_simulate();
-}
+#error Excluded unsupported original disabled branch
+
+
+
 #endif
 
 void copyROM()

@@ -1,0 +1,32 @@
+{
+  "original_profile_trace": [
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "49a15adb809d1b4aa8d010e6a603d38e55434c6be19308c70f739feb52194f6f",
+      "includes": 332,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    }
+  ],
+  "selected_preprocessing": {
+    "records": [
+      {
+        "name": "before",
+        "exit": 0,
+        "sha256": "dbd887a8519b4afc44bd1ab9bc3c0f8791fce6b1ebca05b824110ccb1f0e40c1"
+      },
+      {
+        "name": "after",
+        "exit": 0,
+        "sha256": "9e6ed503200bfe59e0657b11ab7768e61a6535d065723ed4bfeb89957399813a"
+      }
+    ],
+    "raw_equal": false,
+    "equal_ignoring_blank_lines": true
+  },
+  "guard_controls": "x86 and x64 positive/negative and logical-line checks pass",
+  "runtime_limits": "No WOW application runtime check performed on this intermediate object; full product gate pending."
+}

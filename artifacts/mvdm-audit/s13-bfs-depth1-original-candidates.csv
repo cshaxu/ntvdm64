@@ -1,0 +1,128 @@
+path,directive,expression,unpaired_count,classification
+src/mvdm-host/dpmi32/dpmiint.c,ifndef,i386,3,"original groups map to retained CPU40-or-non-i386 selection, registered DIV-582; see s13-bfs-depth1-original-dpmi-selectors.json"
+src/mvdm-host/dpmi32/dpmiint.h,ifndef,i386,1,"original groups map to retained CPU40-or-non-i386 selection, registered DIV-582; see s13-bfs-depth1-original-dpmi-selectors.json"
+src/mvdm-host/inc/mvdm.h,ifdef,i386,1,"original top-level line 73 corresponds to local line 63; expression extended under MVDM-SUPPORT-DIV-006; both arms retained, profile dispositions separately pending"
+src/mvdm-host/inc/suballoc.h,ifdef,i386,1,"original top-level line 32 corresponds to local line 33; expression extended under MVDM-SUPPORT-DIV-007; both arms retained, profile dispositions separately pending"
+src/mvdm-host/softpc.new/base/inc/cpu_vid.h,ifndef,NO_STRING_OPERATIONS,1,original first-depth guard restored as current line 98 under DIV-592; local type variants retained; see s13-bfs-depth1-original-cpu-vid.json
+src/mvdm-host/softpc.new/base/keymouse/mouse_io.c,ifndef,NTVDM,7,original groups map one-to-one to registered DIV-318 non-MONITOR CCPU mouse branches; per-arm reachability remains separately classified; see s13-bfs-depth1-original-mouse-route.json
+src/mvdm-host/softpc.new/base/keymouse/mouse_io.c,ifdef,CPU_30_STYLE,1,"original group 6625 maps to current CPU40 group 5897 under DIV-222 mouse callback adaptation; selected arm witnessed, alternate still pending; see s13-bfs-depth1-original-mouse-callback.json"
+src/mvdm-host/softpc.new/base/support/ios.c,if,defined(NTVDM) && defined(MONITOR),1,original top-level line 413 maps to retained local top-level line 398 with registered MVDM-HOST-DIV-477 CCPU selector extension; current arm product-witnessed
+src/mvdm-host/softpc.new/base/support/main.c,ifndef,CPU_40_STYLE,1,"restored original first-depth boundary, DIV-566; unsupported original arm rejected, DIV-083 CPU40 declaration retained in else"
+src/mvdm-host/softpc.new/base/support/xt.c,if,defined(CCPU) && !defined(CPU_30_STYLE),1,original line 75 maps to local line 83; CPU40 exclusion adaptation DIV-147; existing #error arm remains pending separate profile proof
+src/mvdm-host/softpc.new/base/support/xt.c,if,!defined(MAC_LIKE) && !defined(CPU_30_STYLE),1,original line 346 maps to local line 113; DIV-155 condition adaptation retained and unsupported body replaced under DIV-567
+src/mvdm-host/softpc.new/base/system/rom.c,if,!defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) ),1,original group at 282 maps to current group 260 under registered DIV-165 ROM-residency selector; current selected arm is product-witnessed; see s13-bfs-depth1-video-sas.json
+src/mvdm-host/softpc.new/base/video/video.c,if,( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA ),2,original lines 1579 and 2042 map to current lines 1576 and 2030 with standalone SAS condition; now sole #error DIV-581; see s13-bfs-depth1-video-sas.json
+src/mvdm-host/softpc.new/host/src/config.c,ifdef,i386,1,"original line 506 maps to current line 460; registered DIV-056 CPU40 ownership adaptation retained, unsupported arm removed under DIV-569"
+src/mvdm-host/softpc.new/host/src/copy_fnc.c,if,0,1,original literal #if 0 intentionally changed to #if 1 by DIV-064; original fill loop selected; alternative explicitly rejected by DIV-562
+src/mvdm-host/softpc.new/host/src/nt_com.c,ifdef,MONITOR,2,restored original first-depth groups lines 388 and 712 as unsupported hardware monitor #error arms under DIV-579; see s13-bfs-depth1-ntcom-monitor.json
+src/mvdm-host/softpc.new/host/src/nt_graph.c,ifndef,X86GFX,1,original line 760 maps to local line 690 under registered DIV-322 CCPU selector adaptation; its current arm remains pending reachability proof; see s13-bfs-depth1-original-ntgraph.json
+src/mvdm-host/softpc.new/host/src/nt_msscs.c,ifndef,i386,1,original host-ISA selector replaced by CPU_40_STYLE ownership selector in DIV-039; software-CPU selected body retains original intent; unsupported alternative rejected
+src/mvdm-host/softpc.new/host/src/nt_sec.c,ifdef,X86GFX,1,original first-depth EOF guard restored and excluded under DIV-593; see s13-bfs-depth1-original-nt-sec.json
+src/mvdm-host/softpc.new/host/src/nt_timer.c,if,defined (MONITOR) && defined (X86GFX),1,"same unique top-level condition after whitespace normalization: original line 241, current line 243; arm reachability remains pending"
+src/mvdm-host/wow32/wow32.c,if,FASTBOPPING,3,original three FASTBOPPING groups mapped to CPU40-first groups with FASTBOPPING elif; existing alternate guards under DIV-513; see s13-bfs-depth1-wow32-fast-selectors.json
+src/mvdm-host/xms.486/xmsblock.c,ifdef,i386,1,original first-depth selector restored under DIV-594; selected DIV-077 adapter preserved and historical i386 rejected; see s13-bfs-depth1-original-xms.json
+src/non-mvdm/base/ntos/ex/probe.c,if,defined(ALLOC_PRAGMA),1,original first-depth kernel allocation pragma guard restored and excluded under OPENNT-HOST-144; see s13-bfs-depth1-original-probe.json
+src/non-mvdm/base/ntos/ex/probe.c,if,defined(_ALPHA_),1,original group lines 106-128 precedes retained body at 148; OPENNT-HOST-061 retained ProbeForRead; see s13-bfs-depth1-original-standalone-subsets.json
+src/non-mvdm/base/ntos/rtl/time.c,if,defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME),1,unreviewed; multiplicity mismatch only
+src/non-mvdm/base/win32/client/vdm.c,ifdef,_X86_,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/base/win32/client/vdm.c,ifdef,_MIPS_,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/base/win32/client/vdm.c,ifdef,OLD_CFG_BASED,1,original old-signature BaseGetVDMKeyword group 1084-1149 not included in OPENNT-HOST-014 subset; selected caller uses separate modern-signature provider; see s13-bfs-depth1-original-vdm-config.json
+src/non-mvdm/public/sdk/inc/ntexapi.h,ifndef,_NTEXAPI_,1,original whole-file include guard; ordinary include guards excluded from branch-body policy; local inclusion behavior remains separately subject to validation
+src/non-mvdm/public/sdk/inc/ntregapi.h,ifndef,_NTREGAPI_,1,original whole-file include guard; ordinary include guards excluded from branch-body policy; local inclusion behavior remains separately subject to validation
+src/non-mvdm/public/sdk/inc/ntrtl.h,ifndef,_NTRTL_,1,original whole-file include guard; ordinary include guards excluded from branch-body policy; local inclusion behavior remains separately subject to validation
+src/non-mvdm/public/sdk/inc/nturtl.h,ifndef,_NTURTL_,1,original whole-file include guard; ordinary include guards excluded from branch-body policy; local inclusion behavior remains separately subject to validation
+src/non-mvdm/windows/core/ntuser/client/clglobal.c,if,DBG,1,original debug globals at 24 outside OPENNT-HOST-092 retained control scalars and message table; see s13-bfs-depth1-original-clglobal.json
+src/non-mvdm/windows/core/ntuser/client/clglobal.c,ifdef,WX86,1,original Wx86 globals at 1309 outside OPENNT-HOST-092 retained control scalars and message table; see s13-bfs-depth1-original-clglobal.json
+src/non-mvdm/windows/core/ntuser/client/client.c,ifdef,DEBUG,2,"original groups at [642, 2288] do not enclose or overlap registered retained function ranges; OPENNT-HOST-038/071/088/094; see s13-bfs-depth1-original-selected-subsets.json"
+src/non-mvdm/windows/core/ntuser/client/client.c,ifdef,FE_IME,1,original groups at [3494] do not enclose or overlap registered retained function ranges; OPENNT-HOST-038/071/088/094; see s13-bfs-depth1-original-selected-subsets.json
+src/non-mvdm/windows/core/ntuser/client/clmenu.c,ifdef,MEMPHIS_MENUS,1,original group at line 434 is after all OPENNT-HOST-043/045 retained menu clients and parsers (last ends 432); see s13-bfs-depth1-original-clmenu.json
+src/non-mvdm/windows/core/ntuser/client/clmenu.c,ifdef,MEMPHIS_MENU_WATERMARKS,1,original group at line 676 is after all OPENNT-HOST-043/045 retained menu clients and parsers (last ends 432); see s13-bfs-depth1-original-clmenu.json
+src/non-mvdm/windows/core/ntuser/client/clmsg.c,ifdef,DEBUG,2,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/clmsg.c,ifdef,DEBUG,1,original groups lines 23 fall wholly outside OPENNT-HOST-089/120 retained functions; nested-in-retained groups remain separately pending
+src/non-mvdm/windows/core/ntuser/client/clmsg.c,ifdef,FE_SB,6,"original groups lines 270,331,453,1719,1777,1803 fall wholly outside OPENNT-HOST-089/120 retained functions; nested-in-retained groups remain separately pending"
+src/non-mvdm/windows/core/ntuser/client/clmsg.c,ifdef,FE_IME,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/clmsg.c,ifdef,FE_IME,1,original groups lines 327 fall wholly outside OPENNT-HOST-089/120 retained functions; nested-in-retained groups remain separately pending
+src/non-mvdm/windows/core/ntuser/client/clmsg.c,ifndef,LATER,1,original groups lines 373 fall wholly outside OPENNT-HOST-089/120 retained functions; nested-in-retained groups remain separately pending
+src/non-mvdm/windows/core/ntuser/client/clmsg.c,if,defined(FE_IME),1,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/clmsg.c,if,0,1,original groups lines 1650 fall wholly outside OPENNT-HOST-089/120 retained functions; nested-in-retained groups remain separately pending
+src/non-mvdm/windows/core/ntuser/client/clres.c,ifdef,DEBUG,2,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/clres.c,if,0,7,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/clres.c,ifdef,LATER,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,ifdef,FE_SB,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,ifdef,FE_IME,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c,ifdef,LATER,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/globals.h,ifndef,_GLOBALS_,1,original whole-file include guard; ordinary include guards excluded from branch-body policy; local inclusion behavior remains separately subject to validation
+src/non-mvdm/windows/core/ntuser/client/handles.c,ifdef,TESTING,1,original line 38 lies outside OPENNT-HOST-069/070 sole GetFullUserHandle body; see s13-bfs-depth1-original-small-subsets.json
+src/non-mvdm/windows/core/ntuser/client/mngrayc.c,if,0,2,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/ntstubs.c,ifdef,FE_IME,3,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/ntstubs.c,ifdef,LATER,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/ntstubs.c,ifdef,MEMPHIS_MENUS,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/ntstubs.c,ifdef,MEMPHIS_MENU_WATERMARKS,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/ntstubs.c,ifdef,FE_SB,6,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/ntstubs.c,ifdef,DEBUG,3,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/rtlinit.c,if,DBG,4,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/usercli.h,ifndef,_USERCLI_,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/usercli.h,if,DBG,2,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/usercli.h,if,HANDLE_FIXUP,2,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/usercli.h,ifdef,FE_SB,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/client/wow.c,ifndef,WOW,2,"original first-depth groups at lines 15,890 fall outside registered retained function bodies; see s13-bfs-depth1-original-wow-subsets.json"
+src/non-mvdm/windows/core/ntuser/client/wow.c,ifdef,WOW,10,"original first-depth groups at lines 19,304,313,435,719,776,795,835,911,1067 fall outside registered retained function bodies; see s13-bfs-depth1-original-wow-subsets.json"
+src/non-mvdm/windows/core/ntuser/client/wow.c,ifdef,ENABLE_CLIENTSIDE_ACCESSCHECK,2,"original first-depth groups at lines 519,752 fall outside registered retained function bodies; see s13-bfs-depth1-original-wow-subsets.json"
+src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h,ifdef,UNICODE,8,registered OPENNT-HOST-036/046 five-function subset: these unmatched original groups fall outside retained function ranges; two retained function UNICODE groups and original global selector preserved; local semantics reviewed separately
+src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h,ifndef,UNICODE,18,registered OPENNT-HOST-036/046 five-function subset: these unmatched original groups fall outside retained function ranges; two retained function UNICODE groups and original global selector preserved; local semantics reviewed separately
+src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h,ifdef,FE_SB,2,registered OPENNT-HOST-036/046 five-function subset: these unmatched original groups fall outside retained function ranges; two retained function UNICODE groups and original global selector preserved; local semantics reviewed separately
+src/non-mvdm/windows/core/ntuser/inc/user.h,ifndef,_USER_,1,original whole-file include guard; ordinary include guards excluded from branch-body policy; local inclusion behavior remains separately subject to validation
+src/non-mvdm/windows/core/ntuser/kernel/class.c,ifdef,FE_SB,1,original groups at [375] do not enclose or overlap registered retained function ranges; OPENNT-HOST-039/059/060; see s13-bfs-depth1-original-selected-subsets.json
+src/non-mvdm/windows/core/ntuser/kernel/class.c,ifdef,DBG,1,original groups at [1070] do not enclose or overlap registered retained function ranges; OPENNT-HOST-039/059/060; see s13-bfs-depth1-original-selected-subsets.json
+src/non-mvdm/windows/core/ntuser/kernel/exitwin.c,ifndef,LATER,1,original group lines 134-142 precedes retained body at 508; OPENNT-HOST-052 retained xxxRegisterUserHungAppHandlers; see s13-bfs-depth1-original-standalone-subsets.json
+src/non-mvdm/windows/core/ntuser/kernel/getset.c,ifdef,DEBUG,4,"original first-depth groups 749,759,776,781 are outside OPENNT-HOST-086 retained xxxSetWindowLong; see s13-bfs-depth1-original-function-subsets.json"
+src/non-mvdm/windows/core/ntuser/kernel/handtabl.c,ifdef,DEBUG_LOCKS,1,outside OPENNT-HOST-063 retained original table lines 39-59; separate retained FE_IME arm remains pending
+src/non-mvdm/windows/core/ntuser/kernel/handtabl.c,ifdef,FE_IME,3,outside OPENNT-HOST-063 retained original table lines 39-59; separate retained FE_IME arm remains pending
+src/non-mvdm/windows/core/ntuser/kernel/handtabl.c,ifdef,DEBUG,20,outside OPENNT-HOST-063 retained original table lines 39-59; separate retained FE_IME arm remains pending
+src/non-mvdm/windows/core/ntuser/kernel/handtabl.c,if,(DBG || TRACE_OBJECT_ALLOCS),1,outside OPENNT-HOST-063 retained original table lines 39-59; separate retained FE_IME arm remains pending
+src/non-mvdm/windows/core/ntuser/kernel/handtabl.c,if,0,1,outside OPENNT-HOST-063 retained original table lines 39-59; separate retained FE_IME arm remains pending
+src/non-mvdm/windows/core/ntuser/kernel/handtabl.c,ifndef,DEBUG,1,outside OPENNT-HOST-063 retained original table lines 39-59; separate retained FE_IME arm remains pending
+src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c,ifdef,LATER,1,original line 101 lies outside OPENNT-HOST-113 sole sysBmpStyles table; see s13-bfs-depth1-original-small-subsets.json
+src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c,ifndef,KOREA,1,original line 840 lies outside OPENNT-HOST-113 sole sysBmpStyles table; see s13-bfs-depth1-original-small-subsets.json
+src/non-mvdm/windows/core/ntuser/kernel/input.c,ifdef,MARKPATH,3,outside registered retained function ranges
+src/non-mvdm/windows/core/ntuser/kernel/input.c,ifdef,TRACESYSPEEK,2,outside registered retained function ranges
+src/non-mvdm/windows/core/ntuser/kernel/input.c,if,DBG,10,outside registered retained function ranges
+src/non-mvdm/windows/core/ntuser/kernel/input.c,ifdef,SYSMODALWINDOWS,1,outside registered retained function ranges
+src/non-mvdm/windows/core/ntuser/kernel/input.c,if,0,1,outside registered retained function ranges
+src/non-mvdm/windows/core/ntuser/kernel/input.c,if,(CBKEYSTATERECENTDOWN % 4) != 0,1,outside registered retained function ranges
+src/non-mvdm/windows/core/ntuser/kernel/input.c,ifdef,NEVER,1,outside registered retained function ranges
+src/non-mvdm/windows/core/ntuser/kernel/input.c,ifdef,DEBUG,3,outside registered retained function ranges
+src/non-mvdm/windows/core/ntuser/kernel/input.c,ifdef,FE_IME,3,outside registered retained function ranges
+src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c,if,DBG,2,outside retained complete NtUserSetWindowFNID body; OPENNT-HOST-076; original body lines 6170-6188 have no enclosing conditional
+src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c,ifdef,FE_IME,4,outside retained complete NtUserSetWindowFNID body; OPENNT-HOST-076; original body lines 6170-6188 have no enclosing conditional
+src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c,if,defined(_X86_),52,outside retained complete NtUserSetWindowFNID body; OPENNT-HOST-076; original body lines 6170-6188 have no enclosing conditional
+src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c,ifdef,NEVER,3,outside retained complete NtUserSetWindowFNID body; OPENNT-HOST-076; original body lines 6170-6188 have no enclosing conditional
+src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c,ifdef,MEMPHIS_MENUS,9,outside retained complete NtUserSetWindowFNID body; OPENNT-HOST-076; original body lines 6170-6188 have no enclosing conditional
+src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c,ifdef,MEMPHIS_MENU_WATERMARKS,1,outside retained complete NtUserSetWindowFNID body; OPENNT-HOST-076; original body lines 6170-6188 have no enclosing conditional
+src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c,if,0,1,outside retained complete NtUserSetWindowFNID body; OPENNT-HOST-076; original body lines 6170-6188 have no enclosing conditional
+src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c,ifdef,DEBUG,1,outside retained complete NtUserSetWindowFNID body; OPENNT-HOST-076; original body lines 6170-6188 have no enclosing conditional
+src/non-mvdm/windows/core/ntuser/kernel/profile.c,ifdef,FE_SB,1,original first-depth groups 68 are outside OPENNT-HOST-055 retained string/integer profile readers; original table omitted in favor of registered compat mappings; see s13-bfs-depth1-original-function-subsets.json
+src/non-mvdm/windows/core/ntuser/kernel/profile.c,ifdef,DEBUG,2,"original first-depth groups 745,827 are outside OPENNT-HOST-055 retained string/integer profile readers; see s13-bfs-depth1-original-function-subsets.json"
+src/non-mvdm/windows/core/ntuser/kernel/queue.c,ifdef,DEBUG,5,outside registered retained function ranges; retained original top-level DEBUG arm separately pending
+src/non-mvdm/windows/core/ntuser/kernel/queue.c,if,DBG,12,outside registered retained function ranges; retained original top-level DEBUG arm separately pending
+src/non-mvdm/windows/core/ntuser/kernel/queue.c,ifdef,FE_IME,5,outside registered retained function ranges; retained original top-level DEBUG arm separately pending
+src/non-mvdm/windows/core/ntuser/kernel/queue.c,ifdef,LOCK_MOUSE_CODE,1,outside registered retained function ranges; retained original top-level DEBUG arm separately pending
+src/non-mvdm/windows/core/ntuser/kernel/random.c,ifdef,DEBUG,1,original group lines 185-189 precedes retained body at 208; OPENNT-HOST-102 retained xxxGetControlBrush; see s13-bfs-depth1-original-standalone-subsets.json
+src/non-mvdm/windows/core/ntuser/kernel/server.c,ifdef,FE_IME,7,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/kernel/server.c,if,0,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/kernel/server.c,ifdef,DEBUG,5,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/kernel/server.c,ifndef,PAGE_SIZE,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/kernel/server.c,ifdef,ANDREVA_DBG,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/kernel/userk.h,ifndef,_USERK_,1,ordinary original include guard; excluded-branch rule does not apply; current subset uses WOW_USER_OBJECT_FLAGS_ONLY for distinct inclusion
+src/non-mvdm/windows/core/ntuser/rtl/chartran.c,ifdef,_USERK_,1,one original first-depth _USERK_ selector restored under OPENNT-HOST-145; one original multiplicity candidate remains unreviewed; see s13-bfs-depth1-original-chartran.json
+src/non-mvdm/windows/core/ntuser/rtl/chartran.c,ifdef,FE_SB,3,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/rtl/chartran.c,ifdef,FE_IME,1,unreviewed; multiplicity mismatch only
+src/non-mvdm/windows/core/ntuser/rtl/draw.c,ifdef,WINDOWS_ME,1,original first-depth groups 680 are outside OPENNT-HOST-077/111 retained DrawPushButton and DrawFrame; see s13-bfs-depth1-original-function-subsets.json
+src/non-mvdm/windows/core/ntuser/rtl/drawtext.c,ifdef,FE_SB,7,"original groups at [22, 59, 677, 719, 875, 1213, 1224] do not enclose or overlap registered retained function ranges; OPENNT-HOST-097/110; see s13-bfs-depth1-original-selected-subsets.json"
+src/non-mvdm/windows/core/ntuser/rtl/drawtext.c,ifdef,DEBUG,1,original groups at [1598] do not enclose or overlap registered retained function ranges; OPENNT-HOST-097/110; see s13-bfs-depth1-original-selected-subsets.json
+src/non-mvdm/windows/core/ntuser/rtl/drawtext.c,ifdef,LATER,2,"original groups at [1622, 1673] do not enclose or overlap registered retained function ranges; OPENNT-HOST-097/110; see s13-bfs-depth1-original-selected-subsets.json"
+src/non-mvdm/windows/core/ntuser/rtl/drawtext.c,ifdef,_USERK_,1,original groups at [1657] do not enclose or overlap registered retained function ranges; OPENNT-HOST-097/110; see s13-bfs-depth1-original-selected-subsets.json
+src/non-mvdm/windows/core/ntuser/rtl/userrtl.h,ifndef,_USERRTL_,1,original whole-file include guard; ordinary include guards excluded from branch-body policy; local inclusion behavior remains separately subject to validation
+src/non-mvdm/windows/core/ntuser/rtl/wow.c,ifdef,WOW,2,"original first-depth groups at lines 15,135 fall outside registered retained function bodies; see s13-bfs-depth1-original-wow-subsets.json"
+src/non-mvdm/windows/core/ntuser/rtl/wow.c,ifndef,WOW,2,"original first-depth groups at lines 244,344 fall outside registered retained function bodies; see s13-bfs-depth1-original-wow-subsets.json"
+src/non-mvdm/windows/core/ntuser/rtl/wow.c,if,defined(DEBUG) && !defined(_USERK_) && !defined(WOW),1,original first-depth groups at lines 262 fall outside registered retained function bodies; see s13-bfs-depth1-original-wow-subsets.json

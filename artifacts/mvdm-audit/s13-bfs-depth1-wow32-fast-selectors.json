@@ -1,0 +1,67 @@
+{
+  "scope": "three first-depth groups; no inner branch review",
+  "path": "src/mvdm-host/wow32/wow32.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
+  "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+  "current_sha256": "d6cc5610492e4194c25e0fea81000f26a0d136045680b302de8118382a30fbf4",
+  "existing_selection_register": "MVDM-HOST-DIV-583",
+  "existing_guards_register": "MVDM-HOST-DIV-513",
+  "product_context": [
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "d6cc5610492e4194c25e0fea81000f26a0d136045680b302de8118382a30fbf4",
+      "includes": 339,
+      "cpu40_definitions": [],
+      "cpu40_flags": [
+        "/DCPU_40_STYLE"
+      ],
+      "errors": ""
+    }
+  ],
+  "fixture_contexts": [
+    "tests/observation/build-wow-host-attach-failure.ps1 uses provider compile command",
+    "tests/observation/verify-wow-dispatch-exception.ps1 requires /DCPU_40_STYLE from provider"
+  ],
+  "records": [
+    {
+      "function": "W32GetFastAddress",
+      "original_line": 1870,
+      "current_line": 1600,
+      "arm_lines": [
+        1600,
+        1603,
+        1605
+      ],
+      "product_cpu40_arm": "observed",
+      "other_arms": "existing #error under DIV-513"
+    },
+    {
+      "function": "W32GetFastCbRetAddress",
+      "original_line": 1879,
+      "current_line": 1612,
+      "arm_lines": [
+        1612,
+        1615,
+        1617
+      ],
+      "product_cpu40_arm": "observed",
+      "other_arms": "existing #error under DIV-513"
+    },
+    {
+      "function": "W32GetFlatAddressArray",
+      "original_line": 1910,
+      "current_line": 1646,
+      "arm_lines": [
+        1646,
+        1651,
+        1653
+      ],
+      "product_cpu40_arm": "observed",
+      "other_arms": "existing #error under DIV-513"
+    }
+  ],
+  "limitations": "classification and trace do not establish complete runtime correctness of CPU40 fast-BOP or callback semantics",
+  "subsequent_change": "DIV-586 and DIV-589 later replace other first-depth bodies in the same source; recorded hash is the audited snapshot and current queue positions were remapped."
+}

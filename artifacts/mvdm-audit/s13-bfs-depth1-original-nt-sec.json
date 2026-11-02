@@ -1,0 +1,43 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_sec.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_sec.c",
+  "original_sha256": "2ba1facf8d0c0a00c71f78dfb1fc8e2d001b699e2659465044a94738b637c9bd",
+  "original_condition_line": 115,
+  "original_end_line": 158,
+  "before_sha256": "19497d281ee0e139f7feb314578786eb208af2c782073debf3d678c4880a59fe",
+  "after_sha256": "15ffac3ab16453e66ed7b5c94f5302ece860f9b466d955520234a5e36f186cd1",
+  "current_condition_line": 116,
+  "contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sec.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "19497d281ee0e139f7feb314578786eb208af2c782073debf3d678c4880a59fe",
+      "includes": 179,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sec.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "19497d281ee0e139f7feb314578786eb208af2c782073debf3d678c4880a59fe",
+      "includes": 179,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "registration": "MVDM-HOST-DIV-593",
+  "status": "locally-verified",
+  "limitations": [
+    "Current actual x86 worker/reference contexts only; full supported-context audit and layer acceptance remain open."
+  ],
+  "verification": {
+    "preprocessor": "real x86 worker preprocessor output matches after normalizing scratch source filename and ignoring blank lines; __FILE__ and __LINE__ expansions otherwise preserved",
+    "object": "x86 cached worker nt_sec.obj built with warnings",
+    "guard": "isolated normal accepted, X86GFX profile rejected",
+    "initial_comparison": "initial unnormalized comparison detected only expected scratch __FILE__ pathname differences; normalized comparison passed"
+  }
+}

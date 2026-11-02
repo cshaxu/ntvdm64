@@ -1,0 +1,317 @@
+{
+  "scope": "demsrch and int21map, including three directly source-including fixtures",
+  "product_contexts": [
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "includes": 185,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "includes": 157,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "includes": 185,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "includes": 157,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    }
+  ],
+  "fixture_contexts": [
+    {
+      "fixture": "tests/mvdm-host/dem_directory_reset_test.c",
+      "provider": "src/mvdm-host/dos/dem/demsrch.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "fixture_sha256": "516290b302f7ec717770673259c3933fb07f7906de194efdb97f97212871b265",
+      "provider_included": true,
+      "includes": 186,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "fixture": "tests/observation/dpmi_pointer_trace.c",
+      "provider": "src/mvdm-host/dpmi32/int21map.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "fixture_sha256": "c840258f1a60908e244b4ed53488f71477e4b5b3f33ccd914c3a98b1edfd7be0",
+      "provider_included": true,
+      "includes": 161,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "fixture": "tests/observation/dpmi_ioctl_boundary.c",
+      "provider": "src/mvdm-host/dpmi32/int21map.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "fixture_sha256": "b078d3c053bf9fee58d7b209f5963ce39a80ec8dc2a889c63356b31b02216bc0",
+      "provider_included": true,
+      "includes": 161,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "fixture": "tests/mvdm-host/dem_directory_reset_test.c",
+      "provider": "src/mvdm-host/dos/dem/demsrch.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "fixture_sha256": "516290b302f7ec717770673259c3933fb07f7906de194efdb97f97212871b265",
+      "provider_included": true,
+      "includes": 186,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "fixture": "tests/observation/dpmi_pointer_trace.c",
+      "provider": "src/mvdm-host/dpmi32/int21map.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "fixture_sha256": "c840258f1a60908e244b4ed53488f71477e4b5b3f33ccd914c3a98b1edfd7be0",
+      "provider_included": true,
+      "includes": 161,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "fixture": "tests/observation/dpmi_ioctl_boundary.c",
+      "provider": "src/mvdm-host/dpmi32/int21map.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "fixture_sha256": "b078d3c053bf9fee58d7b209f5963ce39a80ec8dc2a889c63356b31b02216bc0",
+      "provider_included": true,
+      "includes": 161,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    }
+  ],
+  "existing_exclusions": [
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "local_line": 308,
+      "original_line": 282,
+      "anchor": [
+        "WCHAR          wcFile[MAX_PATH + sizeof(WCHAR)];",
+        "UNICODE_STRING FileUni;",
+        "FFINDDOSDATA   FFindDD;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "local_line": 470,
+      "original_line": 447,
+      "anchor": [
+        "}",
+        "return(ERROR_NO_MORE_FILES);",
+        "STOREDWORD(pDta->pFFindEntry,0);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "local_line": 540,
+      "original_line": 520,
+      "anchor": [
+        "lpFile = (LPSTR) GetVDMAddr (getES(),getDI());",
+        "WCHAR           wcFile[MAX_PATH];",
+        "UNICODE_STRING  FileUni;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "local_line": 638,
+      "original_line": 621,
+      "anchor": [
+        "}",
+        "return;",
+        "setCF(1);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "local_line": 1133,
+      "original_line": 1119,
+      "anchor": [
+        "}",
+        "}",
+        "pwc++;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "local_line": 1161,
+      "original_line": 1155,
+      "anchor": [
+        "if (!NT_SUCCESS(Status)) {",
+        "finally {",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "local_line": 1464,
+      "original_line": 1443,
+      "anchor": [
+        "if (Status == STATUS_NO_MORE_FILES || Status == STATUS_NO_SUCH_FILE) {",
+        ");",
+        "FALSE"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "local_line": 2081,
+      "original_line": 2066,
+      "anchor": [
+        "FILETIME    ftLocal;",
+        "USHORT      usDate,usTime,i;",
+        "PCHAR       pDot;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "current_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "local_line": 2170,
+      "original_line": 2158,
+      "anchor": [
+        "STOREWORD(pDta->usHighSize,(USHORT)(pFFindDD->dwFileSizeLow >> 16));",
+        "STOREWORD(pDta->usLowSize,(USHORT)pFFindDD->dwFileSizeLow);",
+        "STOREWORD(pDta->usDateLastWrite,usDate);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "current_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+      "local_line": 1376,
+      "original_line": 1373,
+      "anchor": [
+        "if (IoctlMinor >= MAX_SUPPORTED_DOS_IOCTL_CALL) {",
+        "IoctlMinor = getAL();",
+        "USHORT IoctlMinor;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "current_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+      "local_line": 2172,
+      "original_line": 2159,
+      "anchor": [
+        "if (Func5DhMinor >= MAX_SUPPORTED_DOS_5D_CALL) {",
+        "Func5DhMinor = getAL();",
+        "USHORT Func5DhMinor;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "current_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+      "local_line": 2218,
+      "original_line": 2205,
+      "anchor": [
+        "if (Func5EhMinor >= MAX_SUPPORTED_DOS_5E_CALL) {",
+        "Func5EhMinor = getAL();",
+        "USHORT Func5EhMinor;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "current_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+      "local_line": 2308,
+      "original_line": 2295,
+      "anchor": [
+        "} else {",
+        "DpmiSimulateIretCF();",
+        "DpmiRestoreSegmentsAndStack();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    }
+  ],
+  "limitations": "Only these pinned sources and supported compiler contexts; no new source rewrite or runtime proof."
+}

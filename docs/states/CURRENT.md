@@ -4,6 +4,8 @@
 
 **Active: M0 T473 S13**
 
+The mirror-condition BFS work is paused at an owner-requested [working checkpoint](../../artifacts/mvdm-audit/s13-checkpoint/README.md). First depth, full verification and stage closure remain incomplete.
+
 Prior owner-approved delivery: restore the four MVDM ANSI-profile files changed
 by MVDM-HOST-DIV-479, preserving authored build boundaries; verify actual
 cached product builds and product verification before delivery. The restoration
@@ -17,8 +19,7 @@ its original S12 evidence and scope remain in the handoff document.
 The DOS4GW/NESticle integration case and its unresolved environment-sensitive
 startup issue are recorded in [TODO](TODO.md) and [evidence](../../artifacts/mvdm-audit/dos4gw-nesticle-integration.md).
 
-The CPU40 monitor and TLB boundary are in a
-tested partial baseline. Full (16 gates), 93 CCPU cases,
+CPU40 monitor/TLB remain a tested partial baseline: Full (16 gates), 93 CCPU cases,
 Winmine/SOL/WRITE, four SOL Options cycles and four Win3.1 modes passed; both
 release destinations matched all ten image hashes. CPU30 source removal published; CCPU V86 stays. Mouse unverified. Unfinished DPMI mapped-code, operand-fault,
 reentry and NPX/debug work transfers to the queued recovery; earlier publication
@@ -86,8 +87,8 @@ runtime: the owner clarified boundary-recovery scope.
 | --- | --- |
 | Identifier Mode | M0 T473 S13, Ordinary Mode. |
 | Admission And Approval | Owner accepted and closed S12 and admitted S13. [S12 evidence](../../artifacts/mvdm-audit/s12-excluded-branch-errors.md). |
-| Objective | Trace and repair Console/Window keyboard source transitions; independently investigate Win3.1 MS-DOS Prompt Alt+Enter. |
-| Delivery State | Published; awaiting owner acceptance. Full 16 gates, DOS4GW startup, four Win3.1 modes and synthetic DOS/native three-CAF and Alt+Enter return passed. Physical input and injected handoff failures remain unverified; command output is in TODO. [Compile-branch evidence](../../artifacts/mvdm-audit/compile-branch-selection/README.md). [Evidence](../etc/evidence/m0-t473-s13-input-handoff.md). |
+| Objective | Input handoff; owner adds [mirror conditional reconciliation](../../artifacts/mvdm-audit/s13-mirror-conditional-plan.md). |
+| Delivery State | Handoff published; review active. Full 16 gates, DOS4GW startup, four Win3.1 modes and synthetic DOS/native three-CAF and Alt+Enter return passed. Physical input and injected handoff failures remain unverified; command output is in TODO. [Compile-branch evidence](../../artifacts/mvdm-audit/compile-branch-selection/README.md). [Evidence](../etc/evidence/m0-t473-s13-input-handoff.md). |
 | Non-goals | Guest modification or rebuilding; DOS-specific shortcut workarounds; unrelated performance work. |
 | Reference Baseline | Published ten-image package at 1d2ddfb18; [handoff scope and prior observations](../etc/operations/m0-t473-s12-ntcon-input-source-handoff.md). |
 | Files And ABI Surface | NTCON frontend session, keyboard and channel; worker input client and original DOS scan-code handling; tests and evidence. |
@@ -98,7 +99,7 @@ runtime: the owner clarified boundary-recovery scope.
 | Reporting Requirements | Root cause, observed behavior, negative and lifecycle evidence, image hashes and unverified physical-input boundaries. |
 | Stop Conditions | Guest modification or unapproved observable semantic change. |
 | Exit Criteria | Scoped review, regression evidence, coherent publication, commit and push; await owner acceptance. |
-| Original Owner Request | Close S12 and execute the approved S13 input-source handoff scope. |
+| Original Owner Request | Execute S13 input handoff; comprehensively reconcile mirror conditionals under the adopted rule, then build, test, publish, commit and push. |
 | Similar-Issue Sweep | Console-to-Window and Window-to-Console, DOS and native CUI, modifiers, focus and lifecycle. |
 | Candidate Proposal | [NTCON input handoff](../proposals/proposal-ntcon-input-source-handoff-001.md). |
 | Temporary Evidence | `build/t473-s13`, owner S13, 60-minute phase, 3-GiB size and 10-minute no-progress budget; stable caches retained. |
@@ -216,18 +217,12 @@ T459 S1--S4 used `build/t459-s1` through `build/t459-s4` only for disposable
 evidence. Their retained results are indexed from the closure; stable `.ninja`
 and `.ccache` remain reusable caches and are never task evidence roots.
 
-T467 S3/S4 may use only `build/t467-s3` for disposable build, probe,
-publication-recovery and acceptance evidence, with a 60-minute phase, 3-GiB
-size and 10-minute no-progress budget. Stable `.ninja` and `.ccache` remain
-reusable caches and are never task evidence roots.
+T467 S3/S4 disposable build and acceptance evidence uses `build/t467-s3`
+(60-minute phase, 3-GiB, 10-minute no-progress budget).
 
-T471 S1 may use only `build/t471-s1` for disposable package-freeze evidence,
-with a 30-minute phase, 1-GiB size and 10-minute no-progress budget. Stable
-`.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
-
-T471 S2/S3 may use only `build/t471-s2` for disposable acceptance evidence,
-with a 60-minute phase, 3-GiB size and 10-minute no-progress budget. Stable
-`.ninja` and `.ccache` remain reusable caches and are never task evidence roots.
+T471 S1 package-freeze evidence uses `build/t471-s1` (30-minute phase,
+1-GiB, 10-minute no-progress budget); S2/S3 acceptance evidence uses
+`build/t471-s2` (60-minute phase, 3-GiB, 10-minute no-progress budget).
 
 T473 S1/S9 may use only `build/t473-s9` for disposable closure-ledger and
 WOW-session evidence,

@@ -521,11 +521,11 @@ IMPORT VOID dispatch_q_event();
 #line 521
 
 #ifdef SFELLOW
-extern int ica_intack IPT0();
-extern int VectorBase8259Slave IPT0();
-#if !defined(PROD)
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif	/* !PROD */
+#error Excluded unsupported SFELLOW configuration
+
+
+
+
 #endif	/* SFELLOW */
 
 #if defined(NTVDM) && !defined(SFELLOW)
@@ -672,11 +672,11 @@ GLOBAL ULONG m_la2[3];		/* Memory Operand(2) Linear Addr. */
 GLOBAL ULONG m_pa2[3];		/* Memory Operand(2) Physical Addr. */
 
 #if defined(PIG) && defined(SFELLOW)
-/*
- * memory-mapped I/O information. Counts number of memory-mapped inputs and
- * outputs since the last pig synch.
- */
-GLOBAL	struct pig_mmio_info	pig_mmio_info;
+#error Excluded unsupported PIG configuration
+
+
+
+
 
 #endif /* PIG && SFELLOW */
 
@@ -1158,16 +1158,12 @@ TYPE0F01_2:
 	 case 7:   /* T2 INVLPG Mm */
 
 #ifdef SPC486
-	    note_486_instruction("INVLPG");
-
-	    if ( GET_CPL() != 0 )
-	       GP((IU16)0, FAULT_CCPU_INVLPG_ACCESS);
-	    D_Mm(0);
-	    F_Mm(0);
-	    INVLPG(ops[0].sng);
+#error Excluded unsupported SPC486 profile
 #else
+#line 1167
 	    Int6();
 #endif /* SPC486 */
+#line 1169
 
 	    break;
 	    } /* end switch ( GET_XXX(modRM) ) */
@@ -1283,28 +1279,24 @@ TYPE0F02:
       case  0x08:   /* T0 INVD */
 
 #ifdef SPC486
-	 note_486_instruction("INVD");
-
-	 if ( GET_CPL() != 0 )
-	    GP((IU16)0, FAULT_CCPU_INVD_ACCESS);
-	 INVD();
+#error Excluded unsupported SPC486 profile
 #else
+#line 1290
 	 Int6();
 #endif /* SPC486 */
+#line 1292
 
 	 break;
 
       case  0x09:   /* T0 WBINVD */
 
 #ifdef SPC486
-	 note_486_instruction("WBINVD");
-
-	 if ( GET_CPL() != 0 )
-	    GP((IU16)0, FAULT_CCPU_WBIND_ACCESS);
-	 WBINVD();
+#error Excluded unsupported SPC486 profile
 #else
+#line 1304
 	 Int6();
 #endif /* SPC486 */
+#line 1306
 
 	 break;
 
@@ -1585,48 +1577,24 @@ TYPE0FAB:
       case  0xb0:   /* T5 CMPXCHG Eb Gb */
 
 #ifdef SPC486
-	 note_486_instruction("CMPXCHG Eb Gb");
-
-	 modRM = GET_INST_BYTE(p);
-	 D_Eb(0, RW0, PG_W);
-	 D_Gb(1);
-	 F_Eb(0);
-	 F_Gb(1);
-	 CMPXCHG8(&ops[0].sng, ops[1].sng);
-	 P_Eb(0);
+#error Excluded unsupported SPC486 profile
 #else
+#line 1596
 	 Int6();
 #endif /* SPC486 */
+#line 1598
 
 	 break;
 
       case  0xb1:   /* T5 CMPXCHG Ev Gv */
 
 #ifdef SPC486
-	 note_486_instruction("CMPXCHG Ev Gv");
-
-	 modRM = GET_INST_BYTE(p);
-	 if ( GET_OPERAND_SIZE() == USE16 )
-	    {
-	    D_Ew(0, RW0, PG_W);
-	    D_Gw(1);
-	    F_Ew(0);
-	    F_Gw(1);
-	    CMPXCHG16(&ops[0].sng, ops[1].sng);
-	    P_Ew(0);
-	    }
-	 else   /* USE32 */
-	    {
-	    D_Ed(0, RW0, PG_W);
-	    D_Gd(1);
-	    F_Ed(0);
-	    F_Gd(1);
-	    CMPXCHG32(&ops[0].sng, ops[1].sng);
-	    P_Ed(0);
-	    }
+#error Excluded unsupported SPC486 profile
 #else
+#line 1626
 	 Int6();
 #endif /* SPC486 */
+#line 1628
 
 	 break;
 
@@ -1764,51 +1732,24 @@ TYPE0FAB:
       case  0xc0:   /* T8 XADD Eb Gb */
 
 #ifdef SPC486
-	 note_486_instruction("XADD Eb Gb");
-
-	 modRM = GET_INST_BYTE(p);
-	 D_Eb(0, RW0, PG_W);
-	 D_Gb(1);
-	 F_Eb(0);
-	 F_Gb(1);
-	 XADD(&ops[0].sng, &ops[1].sng, 8);
-	 P_Eb(0);
-	 P_Gb(1);
+#error Excluded unsupported SPC486 profile
 #else
+#line 1776
 	 Int6();
 #endif /* SPC486 */
+#line 1778
 
 	 break;
 
       case  0xc1:   /* T8 XADD Ev Gv */
 
 #ifdef SPC486
-	 note_486_instruction("XADD Ev Gv");
-
-	 modRM = GET_INST_BYTE(p);
-	 if ( GET_OPERAND_SIZE() == USE16 )
-	    {
-	    D_Ew(0, RW0, PG_W);
-	    D_Gw(1);
-	    F_Ew(0);
-	    F_Gw(1);
-	    XADD(&ops[0].sng, &ops[1].sng, 16);
-	    P_Ew(0);
-	    P_Gw(1);
-	    }
-	 else   /* USE32 */
-	    {
-	    D_Ed(0, RW0, PG_W);
-	    D_Gd(1);
-	    F_Ed(0);
-	    F_Gd(1);
-	    XADD(&ops[0].sng, &ops[1].sng, 32);
-	    P_Ed(0);
-	    P_Gd(1);
-	    }
+#error Excluded unsupported SPC486 profile
 #else
+#line 1808
 	 Int6();
 #endif /* SPC486 */
+#line 1810
 
 	 break;
 
@@ -1822,25 +1763,12 @@ TYPE0FAB:
       case  0xcf:
 
 #ifdef SPC486
-	 note_486_instruction("BSWAP Hv");
-
-	 if ( GET_OPERAND_SIZE() == USE16 )
-	    {
-	    D_Hd(0);		/* BSWAP 16 bit reads 32 bit & writes 16 */
-	    F_Hd(0);		/* so getting EAX -> EAX' -> AX */
-	    BSWAP(&ops[0].sng);
-	    P_Hw(0);
-	    }
-	 else   /* USE32 */
-	    {
-	    D_Hd(0);
-	    F_Hd(0);
-	    BSWAP(&ops[0].sng);
-	    P_Hd(0);
-	    }
+#error Excluded unsupported SPC486 profile
 #else
+#line 1840
 	 Int6();
 #endif /* SPC486 */
+#line 1842
 
 	 break;
 	 } /* end switch ( opcode ) 0F */
@@ -4626,8 +4554,9 @@ LOCAL VOID
       /* All FLAGS are cleared */
       /* NB. VM MUST BE CLEARED BEFORE SEGMENT REGISTERS ARE LOADED. */
 #ifdef SPC486
-      SET_AC(0);
+#error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
+#line 4627
       SET_RF(0); SET_VM(0); SET_NT(0); SET_IOPL(0);
       SET_PF(0); SET_CF(0); SET_AF(0); SET_ZF(0); SET_SF(0); SET_OF(0);
       SET_TF(0); SET_IF(0); SET_DF(0);
@@ -4661,9 +4590,9 @@ LOCAL VOID
 
       SET_CR(CR_STAT, 0);
 #ifdef SPC486
-      SET_CD(1);
-      SET_NW(1);
+#error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
+#line 4663
 
       SET_DR(DR_DAR0, 0);   /* Really Undefined */
       SET_DR(DR_DAR1, 0);   /* Really Undefined */
@@ -4692,10 +4621,12 @@ LOCAL VOID
       SET_EAX(0);
       SET_ECX(0);   /* Really Undefined */
 #ifdef SPC486
-      SET_EDX(0x0000E401);	/* Give component ID : revision ID */
+#error Excluded unsupported SPC486 profile
 #else
+#line 4693
       SET_EDX(0x00000303);	/* Give component ID : revision ID */
 #endif
+#line 4695
       SET_EBX(0);   /* Really Undefined */
       SET_ESP(0);	/* Really Undefined */
       SET_EBP(0);   /* Really Undefined */

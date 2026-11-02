@@ -29,10 +29,9 @@ DWORD xxxSetWindowLong(
      * Hide the window proc from other processes
      */
 #ifdef DEBUG
-    if (PpiCurrent() != GETPTI(pwnd)->ppi) {
-        RIPMSG0(RIP_WARNING, "Setting cross process windowlong; win95 would fail");
-    }
+#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
+#line 36
 
     /*
      * CheckLock(pwnd);  The only case that leaves the critical section is

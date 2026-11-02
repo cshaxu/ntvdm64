@@ -1,0 +1,378 @@
+{
+  "scope": "first-depth SEGMENTATION sole-error branches with unique original anchors",
+  "contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe",
+      "includes": 209,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "614a25ecb9008e7e39acbf694a8fe96b3511c53c00a7ecd7eb8c6a140ff559df",
+      "includes": 202,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "ad063a5df6d1962c66e6ea02fc1125921fc49f57464d19b7667360aa51b0bb0c",
+      "includes": 175,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "86936aef29e5d5d3a02166375586bffdcdf4afb48c5d9f50532947516cbbfa51",
+      "includes": 188,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "21846776c2f3538e914cd255780d7e252e9381e2a82ed299709046752f320625",
+      "includes": 180,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "1430887916bcd42c4f7da75cbdff04a8823658a508b823d61e9784489a1e1152",
+      "includes": 184,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "includes": 189,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "tests/observation/keyba_observed.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "c1f8f0137fdf3f222f95d294738c9a4c34a358469ac448a0e1f0718bd7c2d5fa",
+      "includes": 203,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe",
+      "includes": 209,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "614a25ecb9008e7e39acbf694a8fe96b3511c53c00a7ecd7eb8c6a140ff559df",
+      "includes": 202,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "ad063a5df6d1962c66e6ea02fc1125921fc49f57464d19b7667360aa51b0bb0c",
+      "includes": 175,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "86936aef29e5d5d3a02166375586bffdcdf4afb48c5d9f50532947516cbbfa51",
+      "includes": 188,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "21846776c2f3538e914cd255780d7e252e9381e2a82ed299709046752f320625",
+      "includes": 180,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "1430887916bcd42c4f7da75cbdff04a8823658a508b823d61e9784489a1e1152",
+      "includes": 184,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "includes": 189,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "tests/observation/keyba_observed.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "c1f8f0137fdf3f222f95d294738c9a4c34a358469ac448a0e1f0718bd7c2d5fa",
+      "includes": 203,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "classified": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "local_line": 21,
+      "original_line": 21,
+      "anchors": [
+        [
+          "before",
+          21,
+          [
+            "function after this routine has returned.",
+            "(c)Copyright Insignia Solutions Ltd., 1990. All rights reserved.",
+            "]*/"
+          ]
+        ],
+        [
+          "after",
+          21,
+          [
+            "#include <stdlib.h>",
+            "#include <stdio.h>",
+            "#include TypesH"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_line": 19,
+      "original_line": 19,
+      "anchors": [
+        [
+          "after",
+          19,
+          [
+            "#include <stdio.h>",
+            "#include <ctype.h>",
+            "#if defined(NTVDM) && defined(MONITOR)"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_line": 2027,
+      "original_line": 2465,
+      "anchors": [
+        [
+          "before",
+          2465,
+          [
+            "host_com_unlock(COM2);",
+            "#endif",
+            "}"
+          ]
+        ],
+        [
+          "after",
+          2465,
+          [
+            "static void com_reset IFN1(int, adapter)",
+            "{",
+            "struct ADAPTER_STATE *asp = &adapter_state[adapter];"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "source_sha256": "614a25ecb9008e7e39acbf694a8fe96b3511c53c00a7ecd7eb8c6a140ff559df",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "local_line": 50,
+      "original_line": 50,
+      "anchors": [
+        [
+          "after",
+          50,
+          [
+            "#include <stdio.h>",
+            "#include TypesH",
+            "#include TimeH"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "source_sha256": "614a25ecb9008e7e39acbf694a8fe96b3511c53c00a7ecd7eb8c6a140ff559df",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "local_line": 2617,
+      "original_line": 3036,
+      "anchors": [
+        [
+          "after",
+          3036,
+          [
+            "GLOBAL VOID AT_kbd_post IFN0()",
+            "{",
+            "kbd_status = 0x14;"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "source_sha256": "1430887916bcd42c4f7da75cbdff04a8823658a508b823d61e9784489a1e1152",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+      "local_line": 45,
+      "original_line": 45,
+      "anchors": [
+        [
+          "after",
+          45,
+          [
+            "#include <stdlib.h>",
+            "#include <stdio.h>",
+            "#include TimeH"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "source_sha256": "ad063a5df6d1962c66e6ea02fc1125921fc49f57464d19b7667360aa51b0bb0c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "local_line": 1496,
+      "original_line": 1993,
+      "anchors": [
+        [
+          "before",
+          1993,
+          [
+            "}",
+            "#endif  /* CPU_40_STYLE */",
+            "#endif\t/* HOOKED_IRETS */"
+          ]
+        ],
+        [
+          "after",
+          1993,
+          [
+            "#define INIT0_ICW1\t(IU8)0x11",
+            "#define INIT0_ICW2\t(IU8)0x08",
+            "#define INIT0_ICW3\t(IU8)0x04"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "source_sha256": "86936aef29e5d5d3a02166375586bffdcdf4afb48c5d9f50532947516cbbfa51",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_line": 38,
+      "original_line": 38,
+      "anchors": [
+        [
+          "after",
+          38,
+          [
+            "#include <stdio.h>",
+            "#include TypesH",
+            "#include TimeH"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "source_sha256": "86936aef29e5d5d3a02166375586bffdcdf4afb48c5d9f50532947516cbbfa51",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_line": 2123,
+      "original_line": 2670,
+      "anchors": [
+        [
+          "before",
+          2670,
+          [
+            "/*",
+            "* Initialization code",
+            "*/"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported SEGMENTATION configuration"
+    }
+  ],
+  "limitations": [
+    "Unmatched or not compiled sources remain pending.",
+    "No guest or runtime validation inferred."
+  ]
+}

@@ -1,0 +1,1868 @@
+{
+  "scope": "11 direct-source x86 worker and x86-reference C translation units",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "includes": 159,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdisp.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "3fa60d1fe23656bc7081ab0e6b64d151c93b4f65d4d4e8ddbcefd845206afa16",
+      "includes": 176,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "19df41c0c5684e3ca2c5fbe77d969ca2b27237b1e8763905e4fb411c80d2d790",
+      "includes": 175,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "ae8f13a5ccbb38f8411c0d387d0abca7dd206cacd219736b8b31e9a5c4e34926",
+      "includes": 157,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "26e245025ef37e69f75721b86767c378ac50f274e5a3610ed312cad1d33b493c",
+      "includes": 190,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "10447fb253fa3e6f769bd469769e10a440080256ada4851ad8de2c2e11b4bd04",
+      "includes": 170,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "includes": 170,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "includes": 163,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "includes": 192,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "includes": 182,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "bc05f16d93a9fa2933aa057d0c9c8b6ca6f1ff6b97a4701d9509ac156311b6c5",
+      "includes": 154,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "includes": 159,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdisp.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "3fa60d1fe23656bc7081ab0e6b64d151c93b4f65d4d4e8ddbcefd845206afa16",
+      "includes": 176,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "19df41c0c5684e3ca2c5fbe77d969ca2b27237b1e8763905e4fb411c80d2d790",
+      "includes": 175,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "ae8f13a5ccbb38f8411c0d387d0abca7dd206cacd219736b8b31e9a5c4e34926",
+      "includes": 157,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "26e245025ef37e69f75721b86767c378ac50f274e5a3610ed312cad1d33b493c",
+      "includes": 190,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "10447fb253fa3e6f769bd469769e10a440080256ada4851ad8de2c2e11b4bd04",
+      "includes": 170,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "includes": 170,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "includes": 163,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "includes": 192,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "includes": 182,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "bc05f16d93a9fa2933aa057d0c9c8b6ca6f1ff6b97a4701d9509ac156311b6c5",
+      "includes": 154,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    }
+  ],
+  "existing_exclusions": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 413,
+      "local_end": 425,
+      "original_line": 355,
+      "preceding_anchor": [
+        "}",
+        "return FALSE;",
+        "ULONG DefaultVrInitialized() {"
+      ],
+      "following_anchor": [
+        "BOOL LoadVdmRedir(VOID);",
+        "VOID",
+        "MS_bop_7("
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 511,
+      "local_end": 513,
+      "original_line": 466,
+      "preceding_anchor": [
+        "break;",
+        "setAX(ERROR_INVALID_FUNCTION);",
+        "setCF(1);"
+      ],
+      "following_anchor": [
+        "}",
+        "setIP((USHORT)(getIP() + 1));",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 533,
+      "local_end": 535,
+      "original_line": 489,
+      "preceding_anchor": [
+        "BOOL LoadVdmRedir() {",
+        "}",
+        "return VdmRedirLoaded;"
+      ],
+      "following_anchor": [
+        "if (VdmRedirLoaded) {",
+        "return TRUE;",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 548,
+      "local_end": 550,
+      "original_line": 504,
+      "preceding_anchor": [
+        "if ((VrDispatch = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrDispatch\")) == NULL) {",
+        "if (hVdmRedir = SafeLoadLibrary(\"VDMREDIR\")) {",
+        "}"
+      ],
+      "following_anchor": [
+        "goto closeAndReturnError;",
+        "}",
+        "if ((VrInitialized = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrInitialized\")) == NULL) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 554,
+      "local_end": 556,
+      "original_line": 510,
+      "preceding_anchor": [
+        "if ((VrInitialized = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrInitialized\")) == NULL) {",
+        "}",
+        "goto closeAndReturnError;"
+      ],
+      "following_anchor": [
+        "goto closeAndReturnError;",
+        "}",
+        "if ((VrReadNamedPipe = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrReadNamedPipe\")) == NULL) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 560,
+      "local_end": 562,
+      "original_line": 516,
+      "preceding_anchor": [
+        "if ((VrReadNamedPipe = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrReadNamedPipe\")) == NULL) {",
+        "}",
+        "goto closeAndReturnError;"
+      ],
+      "following_anchor": [
+        "goto closeAndReturnError;",
+        "}",
+        "if ((VrWriteNamedPipe = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrWriteNamedPipe\")) == NULL) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 566,
+      "local_end": 568,
+      "original_line": 522,
+      "preceding_anchor": [
+        "if ((VrWriteNamedPipe = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrWriteNamedPipe\")) == NULL) {",
+        "}",
+        "goto closeAndReturnError;"
+      ],
+      "following_anchor": [
+        "goto closeAndReturnError;",
+        "}",
+        "if ((VrIsNamedPipeName = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrIsNamedPipeName\")) == NULL) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 572,
+      "local_end": 574,
+      "original_line": 528,
+      "preceding_anchor": [
+        "if ((VrIsNamedPipeName = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrIsNamedPipeName\")) == NULL) {",
+        "}",
+        "goto closeAndReturnError;"
+      ],
+      "following_anchor": [
+        "goto closeAndReturnError;",
+        "}",
+        "if ((VrIsNamedPipeHandle = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrIsNamedPipeHandle\")) == NULL) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 578,
+      "local_end": 580,
+      "original_line": 534,
+      "preceding_anchor": [
+        "if ((VrIsNamedPipeHandle = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrIsNamedPipeHandle\")) == NULL) {",
+        "}",
+        "goto closeAndReturnError;"
+      ],
+      "following_anchor": [
+        "goto closeAndReturnError;",
+        "}",
+        "if ((VrAddOpenNamedPipeInfo = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrAddOpenNamedPipeInfo\")) == NULL) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 584,
+      "local_end": 586,
+      "original_line": 540,
+      "preceding_anchor": [
+        "if ((VrAddOpenNamedPipeInfo = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrAddOpenNamedPipeInfo\")) == NULL) {",
+        "}",
+        "goto closeAndReturnError;"
+      ],
+      "following_anchor": [
+        "goto closeAndReturnError;",
+        "}",
+        "if ((VrConvertLocalNtPipeName = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrConvertLocalNtPipeName\")) == NULL) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 590,
+      "local_end": 592,
+      "original_line": 546,
+      "preceding_anchor": [
+        "if ((VrConvertLocalNtPipeName = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrConvertLocalNtPipeName\")) == NULL) {",
+        "}",
+        "goto closeAndReturnError;"
+      ],
+      "following_anchor": [
+        "goto closeAndReturnError;",
+        "}",
+        "if ((VrRemoveOpenNamedPipeInfo = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrRemoveOpenNamedPipeInfo\")) == NULL) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 596,
+      "local_end": 598,
+      "original_line": 552,
+      "preceding_anchor": [
+        "if ((VrRemoveOpenNamedPipeInfo = (MYFARPROC)GetProcAddress(hVdmRedir, \"VrRemoveOpenNamedPipeInfo\")) == NULL) {",
+        "}",
+        "goto closeAndReturnError;"
+      ],
+      "following_anchor": [
+        "goto closeAndReturnError;",
+        "}",
+        "VdmRedirLoaded = TRUE;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "current_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+      "local_line": 607,
+      "local_end": 609,
+      "original_line": 563,
+      "preceding_anchor": [
+        "closeAndReturnError:",
+        "}",
+        "return TRUE;"
+      ],
+      "following_anchor": [
+        "CloseHandle(hVdmRedir);",
+        "return FALSE;",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "current_sha256": "cd127ff57388e9d5d26a8ad649945ac8382baedf5bf61169be618001b1595bf8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+      "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+      "local_line": 202,
+      "local_end": 204,
+      "original_line": 201,
+      "preceding_anchor": [
+        "if ((ULONG)IrqLine >= sizeof(EoiHooks)/sizeof(EOIHOOKPROC)) {",
+        "{",
+        "VOID host_EOI_hook(int IrqLine, int CallCount)"
+      ],
+      "following_anchor": [
+        "return;",
+        "}",
+        "if (EoiHooks[IrqLine]) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdisp.c",
+      "current_sha256": "3fa60d1fe23656bc7081ab0e6b64d151c93b4f65d4d4e8ddbcefd845206afa16",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdisp.c",
+      "original_sha256": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389",
+      "local_line": 143,
+      "local_end": 145,
+      "original_line": 146,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "return FALSE;",
+        "}",
+        "VrDispatchTable[SvcCode]();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "current_sha256": "10447fb253fa3e6f769bd469769e10a440080256ada4851ad8de2c2e11b4bd04",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlc5c.c",
+      "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+      "local_line": 765,
+      "local_end": 767,
+      "original_line": 765,
+      "preceding_anchor": [
+        "setAL((UCHAR)status);",
+        "}",
+        "}"
+      ],
+      "following_anchor": [
+        "}",
+        "LLC_STATUS",
+        "ValidateDosAddress("
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "current_sha256": "10447fb253fa3e6f769bd469769e10a440080256ada4851ad8de2c2e11b4bd04",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlc5c.c",
+      "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+      "local_line": 1202,
+      "local_end": 1204,
+      "original_line": 1237,
+      "preceding_anchor": [
+        "break;",
+        ");",
+        "0"
+      ],
+      "following_anchor": [
+        "}",
+        "return status;",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "current_sha256": "10447fb253fa3e6f769bd469769e10a440080256ada4851ad8de2c2e11b4bd04",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlc5c.c",
+      "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+      "local_line": 1949,
+      "local_end": 1951,
+      "original_line": 1986,
+      "preceding_anchor": [
+        "pNewCcb->ulCompletionFlag = LLC_DOS_SPECIAL_COMMAND;",
+        "pNtParms->Receive.uchRcvReadOption = 0;",
+        "pNtParms->Receive.ulReceiveFlag = (DWORD)dpOriginalCcbAddress;"
+      ],
+      "following_anchor": [
+        "break;",
+        "case LLC_RECEIVE_CANCEL:",
+        "IF_DEBUG(DLC) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "current_sha256": "10447fb253fa3e6f769bd469769e10a440080256ada4851ad8de2c2e11b4bd04",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlc5c.c",
+      "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+      "local_line": 3203,
+      "local_end": 3209,
+      "original_line": 3247,
+      "preceding_anchor": [
+        "Adapters[AdapterNumber].AdapterCloseCcb.ulCompletionFlag = VRDLC_COMMAND_COMPLETION;",
+        "InitializeCcb2(&Adapters[AdapterNumber].AdapterCloseCcb, AdapterNumber, LLC_DIR_CLOSE_ADAPTER);",
+        "{"
+      ],
+      "following_anchor": [
+        "Adapters[AdapterNumber].IsOpen = FALSE;",
+        "}",
+        "LLC_STATUS"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "current_sha256": "10447fb253fa3e6f769bd469769e10a440080256ada4851ad8de2c2e11b4bd04",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlc5c.c",
+      "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+      "local_line": 3304,
+      "local_end": 3310,
+      "original_line": 3350,
+      "preceding_anchor": [
+        "Adapters[AdapterNumber].DirectCloseCcb.ulCompletionFlag = VRDLC_COMMAND_COMPLETION;",
+        "InitializeCcb2(&Adapters[AdapterNumber].DirectCloseCcb, AdapterNumber, LLC_DIR_CLOSE_DIRECT);",
+        "{"
+      ],
+      "following_anchor": [
+        "Adapters[AdapterNumber].DirectStationOpen = FALSE;",
+        "}",
+        "LLC_STATUS"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "current_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "local_line": 353,
+      "local_end": 355,
+      "original_line": 353,
+      "preceding_anchor": [
+        "}",
+        "}",
+        "WRITE_DWORD(&((PLLC_DOS_BUFFER)ptr32)->Next.pNextBuffer, NULL);"
+      ],
+      "following_anchor": [
+        "}",
+        "LeaveCriticalSection(&BufferSemaphore);",
+        "return LLC_STATUS_SUCCESS;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "current_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "local_line": 454,
+      "local_end": 456,
+      "original_line": 456,
+      "preceding_anchor": [
+        "WORD bufferSize;",
+        "WORD n;",
+        "LLC_STATUS status;"
+      ],
+      "following_anchor": [
+        "EnterCriticalSection(&BufferSemaphore);",
+        "if (PartialList) {",
+        "if (pBufferPool->BufferCount < BuffersToGet) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "current_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "local_line": 557,
+      "local_end": 559,
+      "original_line": 563,
+      "preceding_anchor": [
+        "status = LLC_STATUS_SUCCESS;",
+        "WRITE_FAR_POINTER(&pBuffer->pNext, NULL);",
+        "pBufferPool->dpBuffer = READ_DWORD(&pBuffer->pNext);"
+      ],
+      "following_anchor": [
+        "} else {",
+        "status = LLC_STATUS_LOST_DATA_NO_BUFFERS;",
+        "n = 0;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "current_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "local_line": 637,
+      "local_end": 639,
+      "original_line": 645,
+      "preceding_anchor": [
+        "PDOS_DLC_BUFFER_POOL pBufferPool = &aBufferPools[PoolIndex];",
+        "PLLC_DOS_BUFFER pBuffer;        // flat NT pointer",
+        "PLLC_DOS_BUFFER pNextBuffer;    // flat NT pointer"
+      ],
+      "following_anchor": [
+        "IF_DEBUG(DLC_BUFFERS) {",
+        "DPUT2(\"FreeBuffers: PoolIndex=%x dpBuffer=%x\\n\", PoolIndex, dpBuffer);",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "current_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "local_line": 674,
+      "local_end": 676,
+      "original_line": 682,
+      "preceding_anchor": [
+        "++pBufferPool->BufferCount;",
+        "while (pNextBuffer) {",
+        "if (pNextBuffer) {"
+      ],
+      "following_anchor": [
+        "pBuffer = pNextBuffer;",
+        "pNextBuffer = (PLLC_DOS_BUFFER)READ_FAR_POINTER(&pBuffer->pNext);",
+        "WRITE_WORD(&pBuffer->Next.cbFrame, 0);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "current_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "local_line": 697,
+      "local_end": 699,
+      "original_line": 705,
+      "preceding_anchor": [
+        "pBufferPool->dpBuffer = dpBase;",
+        "WRITE_DWORD(&pBuffer->pNext, pBufferPool->dpBuffer);",
+        "}"
+      ],
+      "following_anchor": [
+        "}",
+        "if (pBufferPool->BufferCount > pBufferPool->MaximumBufferCount) {",
+        "pBufferPool->MaximumBufferCount = pBufferPool->BufferCount;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "current_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "local_line": 839,
+      "local_end": 841,
+      "original_line": 853,
+      "preceding_anchor": [
+        "}",
+        "dataLeft = pFrame->NotContiguous.cbBuffer;",
+        "if (!(pFrame->Contiguous.uchOptions & (LLC_CONTIGUOUS_MAC | LLC_CONTIGUOUS_DATA))) {"
+      ],
+      "following_anchor": [
+        "} else if (dataSpace < pFrame->Contiguous.cbBuffer) {",
+        "dataLeft = pFrame->Contiguous.cbBuffer - dataSpace;",
+        "} else {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 404,
+      "local_end": 406,
+      "original_line": 404,
+      "preceding_anchor": [
+        "PLLC_CCB cancelledReceive = NULL;",
+        "WORD stationId;",
+        "BYTE sapNumber;"
+      ],
+      "following_anchor": [
+        "IF_DEBUG(DLC_ASYNC) {",
+        "DPUT(\"VrDlcHwInterrupt entered\\n\");",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 606,
+      "local_end": 608,
+      "original_line": 609,
+      "preceding_anchor": [
+        "}",
+        ");",
+        "LOWORD(pReadParms->Type.Event.pCcbCompletionList)"
+      ],
+      "following_anchor": [
+        "}",
+        "if (pFlatCcbAddr->uchDlcStatus == LLC_STATUS_SUCCESS && READ_DWORD(&pParms->Transmit.pXmitQueue2)) {",
+        "IF_DEBUG(DLC_ASYNC) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 1159,
+      "local_end": 1165,
+      "original_line": 1165,
+      "preceding_anchor": [
+        "if (frameType == CURRENT) {",
+        "if (pReadCcb) {",
+        "}"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 1174,
+      "local_end": 1180,
+      "original_line": 1199,
+      "preceding_anchor": [
+        "} else {",
+        "#endif",
+        "GetEvent(adapterNumber);"
+      ],
+      "following_anchor": [
+        "}",
+        "LocalFree((HLOCAL)pReadCcb);",
+        "IF_DEBUG(DLC_ALLOC) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 1209,
+      "local_end": 1211,
+      "original_line": 1257,
+      "preceding_anchor": [
+        "if (GetNewEvent) {",
+        "}",
+        "}"
+      ],
+      "following_anchor": [
+        "IssueHardwareInterrupt();",
+        "}",
+        "if (cancelledReceive) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 1864,
+      "local_end": 1871,
+      "original_line": 1926,
+      "preceding_anchor": [
+        "}",
+        "Adapters[AdapterNumber].LastIndex = link;",
+        "|| Adapters[AdapterNumber].LastIndex == NO_LINKS_BUSY) {"
+      ],
+      "following_anchor": [
+        "} else {",
+        "IF_DEBUG(DLC_ASYNC) {",
+        "DPUT3(\"SetEmulatedLocalBusyState: setting %d:%04x to BUSY from %s\\n\","
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 2267,
+      "local_end": 2269,
+      "original_line": 2332,
+      "preceding_anchor": [
+        "ASSERT(LOBYTE(StationId) != 0);",
+        "ASSERT(HIBYTE(StationId) != 0);",
+        "ASSERT(pReadCcb->pNext == NULL);"
+      ],
+      "following_anchor": [
+        "pQueue = &Adapters[AdapterNumber].LocalBusyInfo[LINK_ID(StationId)].Queue;",
+        "pLlcCcb = *pQueue;",
+        "if (!pLlcCcb) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 2282,
+      "local_end": 2284,
+      "original_line": 2356,
+      "preceding_anchor": [
+        "}",
+        "pLlcCcb->pNext = pReadCcb;",
+        "}"
+      ],
+      "following_anchor": [
+        "}",
+        "VOID",
+        "DeferAllIFrames("
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 2490,
+      "local_end": 2492,
+      "original_line": 2576,
+      "preceding_anchor": [
+        "}",
+        ");",
+        "Adapters[AdapterNumber].LocalBusyInfo[LINK_ID(StationId)].Depth"
+      ],
+      "following_anchor": [
+        "if (*pQueue == NULL) {",
+        "IF_DEBUG(DLC_ASYNC) {",
+        "DPUT2(\"RemoveDeferredReceive: %d.%04x: change state to NOT_BUSY\\n\","
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 2538,
+      "local_end": 2545,
+      "original_line": 2626,
+      "preceding_anchor": [
+        "}",
+        "Adapters[AdapterNumber].LastIndex = NO_LINKS_BUSY;",
+        "Adapters[AdapterNumber].FirstIndex = NO_LINKS_BUSY;"
+      ],
+      "following_anchor": [
+        "SetThreadPriority(hEventThread, THREAD_PRIORITY_ABOVE_NORMAL);",
+        "} else {",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 3132,
+      "local_end": 3134,
+      "original_line": 3223,
+      "preceding_anchor": [
+        "}",
+        "} else {",
+        "}"
+      ],
+      "following_anchor": [
+        "return pCcb;",
+        "}",
+        "VOID"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 3390,
+      "local_end": 3392,
+      "original_line": 3488,
+      "preceding_anchor": [
+        "EnterCriticalSection(&Adapters[AdapterNumber].EventQueueCritSec);",
+        "}",
+        ");"
+      ],
+      "following_anchor": [
+        "while (Adapters[AdapterNumber].QueueElements) {",
+        "pCcb = Adapters[AdapterNumber].EventQueueHead;",
+        "--Adapters[AdapterNumber].QueueElements;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 3530,
+      "local_end": 3532,
+      "original_line": 3632,
+      "preceding_anchor": [
+        "ReleaseReceiveResources(thisCcb);",
+        "}",
+        ");"
+      ],
+      "following_anchor": [
+        "thisCcb = *pQueue;",
+        "} else {",
+        "pQueue = &thisCcb->pNext;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 3717,
+      "local_end": 3719,
+      "original_line": 3819,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "IF_DEBUG(CRITICAL) {",
+        "CRITDUMP((\"*** INT ACK ***\\n\"));",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 3742,
+      "local_end": 3744,
+      "original_line": 3846,
+      "preceding_anchor": [
+        "--HardwareIntsQueued;",
+        "EnterCriticalSection(&HardwareIntCritSec);",
+        "}"
+      ],
+      "following_anchor": [
+        "ASSERT(HardwareIntsQueued >= -1);",
+        "if (HardwareIntsQueued >= 0) {",
+        "IF_DEBUG(CRITICAL) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 3769,
+      "local_end": 3771,
+      "original_line": 3875,
+      "preceding_anchor": [
+        "LeaveCriticalSection(&HardwareIntCritSec);",
+        "}",
+        "DPUT(\"AcknowledgeHardwareInterrupt: LEAVING HardwareIntCritSec\\n\");"
+      ],
+      "following_anchor": [
+        "}",
+        "VOID",
+        "CancelHardwareInterrupts("
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 3802,
+      "local_end": 3804,
+      "original_line": 3916,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "IF_DEBUG(CRITICAL) {",
+        "CRITDUMP((\"*** CancelHardwareInterrupts(%d) ***\\n\", Count));",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 3827,
+      "local_end": 3829,
+      "original_line": 3943,
+      "preceding_anchor": [
+        "HardwareIntsQueued -= Count;",
+        "EnterCriticalSection(&HardwareIntCritSec);",
+        "}"
+      ],
+      "following_anchor": [
+        "ASSERT(HardwareIntsQueued >= -1);",
+        "IF_DEBUG(CRITSEC) {",
+        "DPUT(\"CancelHardwareInterrupts: LEAVING HardwareIntCritSec\\n\");"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "current_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "local_line": 3843,
+      "local_end": 3845,
+      "original_line": 3961,
+      "preceding_anchor": [
+        "LeaveCriticalSection(&HardwareIntCritSec);",
+        "}",
+        "DPUT(\"CancelHardwareInterrupts: LEAVING HardwareIntCritSec\\n\");"
+      ],
+      "following_anchor": [
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "current_sha256": "19df41c0c5684e3ca2c5fbe77d969ca2b27237b1e8763905e4fb411c80d2d790",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrinit.c",
+      "original_sha256": "088ecff80459ed358ebf4f7dd291821748475a8fbdccaf27a1ee1df2b6648273",
+      "local_line": 182,
+      "local_end": 184,
+      "original_line": 182,
+      "preceding_anchor": [
+        "LPBYTE lpVdmVrInitialized;",
+        "{",
+        "--*/"
+      ],
+      "following_anchor": [
+        "if (IsVrInitialized) {",
+        "return TRUE;",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "current_sha256": "ae8f13a5ccbb38f8411c0d387d0abca7dd206cacd219736b8b31e9a5c4e34926",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmisc.c",
+      "original_sha256": "1af57aba3be6a1425eb18187a73c579f56619a2593bce3b2c20be8cf67216b6d",
+      "local_line": 71,
+      "local_end": 73,
+      "original_line": 71,
+      "preceding_anchor": [
+        "WORD DosPdb = getAX();",
+        "{",
+        "--*/"
+      ],
+      "following_anchor": [
+        "VrTerminateMailslots(DosPdb);",
+        "VrTerminateNamedPipes(DosPdb);",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "current_sha256": "ae8f13a5ccbb38f8411c0d387d0abca7dd206cacd219736b8b31e9a5c4e34926",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmisc.c",
+      "original_sha256": "1af57aba3be6a1425eb18187a73c579f56619a2593bce3b2c20be8cf67216b6d",
+      "local_line": 104,
+      "local_end": 106,
+      "original_line": 108,
+      "preceding_anchor": [
+        "{",
+        "--*/",
+        "Sets CF=1 in x86 context image and AX=ERROR_NOT_SUPPORTED (50)"
+      ],
+      "following_anchor": [
+        "SET_ERROR(ERROR_NOT_SUPPORTED);",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 226,
+      "local_end": 228,
+      "original_line": 226,
+      "preceding_anchor": [
+        "Handle16 = getBX();",
+        "DosPdb = getAX();",
+        "PVR_MAILSLOT_INFO   ptr;"
+      ],
+      "following_anchor": [
+        "if (!(ptr = VrpMapMailslotHandle16(Handle16))) {",
+        "SET_ERROR(ERROR_INVALID_HANDLE);",
+        "} else {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 300,
+      "local_end": 302,
+      "original_line": 303,
+      "preceding_anchor": [
+        "BOOL    Ok;",
+        "DWORD   MaxMessageSize, NextSize, MessageCount;",
+        "PVR_MAILSLOT_INFO   ptr;"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 374,
+      "local_end": 376,
+      "original_line": 380,
+      "preceding_anchor": [
+        "BOOL    Ok;",
+        "CHAR    LocalMailslot[LOCAL_MAILSLOT_NAMELEN+1];",
+        "LPSTR   lpName;"
+      ],
+      "following_anchor": [
+        "if ((Handle16 = VrpAllocateHandle16()) == 0) {",
+        "SET_ERROR(ERROR_PATH_NOT_FOUND);    // all handles used!",
+        "return;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 397,
+      "local_end": 399,
+      "original_line": 406,
+      "preceding_anchor": [
+        "NameLength = strlen(lpName);",
+        "lpName = LPSTR_FROM_WORDS(getDS(), getSI());",
+        "}"
+      ],
+      "following_anchor": [
+        "if (NameLength <= MAILSLOT_PREFIX_LENGTH) {",
+        "SET_ERROR(ERROR_PATH_NOT_FOUND);",
+        "VrpFreeHandle16(Handle16);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 447,
+      "local_end": 449,
+      "original_line": 458,
+      "preceding_anchor": [
+        "VrpMakeLocalMailslotName(LocalMailslot, lpName);",
+        "}",
+        "return;"
+      ],
+      "following_anchor": [
+        "Handle32 = CreateMailslot(LocalMailslot,",
+        "(DWORD)getBX(),     // nMaxMessageSize",
+        "0,                  // lReadTimeout"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 459,
+      "local_end": 461,
+      "original_line": 476,
+      "preceding_anchor": [
+        "SET_ERROR(VrpMapLastError());",
+        "if (Handle32 == HANDLE_FUNCTION_FAILED) {",
+        ");"
+      ],
+      "following_anchor": [
+        "VrpFreeMailslotStructure(ptr);",
+        "VrpFreeHandle16(Handle16);",
+        "} else {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 467,
+      "local_end": 469,
+      "original_line": 488,
+      "preceding_anchor": [
+        "} else {",
+        "VrpFreeHandle16(Handle16);",
+        "VrpFreeMailslotStructure(ptr);"
+      ],
+      "following_anchor": [
+        "ptr->DosPdb = getAX();",
+        "ptr->Handle16 = Handle16;",
+        "ptr->Handle32 = Handle32;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 497,
+      "local_end": 499,
+      "original_line": 520,
+      "preceding_anchor": [
+        "if (!Ok) {",
+        ");",
+        "NULL            // lpReadTimeout"
+      ],
+      "following_anchor": [
+        "ptr->MessageSize = getCX();",
+        "}",
+        "ptr->NameLength = NameLength;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 549,
+      "local_end": 551,
+      "original_line": 576,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "SET_ERROR(ERROR_NOT_SUPPORTED);",
+        "}",
+        "VOID"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 589,
+      "local_end": 591,
+      "original_line": 621,
+      "preceding_anchor": [
+        "BOOL    Ok;",
+        "DWORD   NextSize;",
+        "DWORD   BytesRead;"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 608,
+      "local_end": 610,
+      "original_line": 643,
+      "preceding_anchor": [
+        "} else {",
+        "SET_ERROR(VrpMapLastError());",
+        "if (!SetMailslotInfo(Handle, MAKE_DWORD(getDX(), getCX()))) {"
+      ],
+      "following_anchor": [
+        "Ok = ReadFile(Handle,",
+        "POINTER_FROM_WORDS(getES(), getDI()),",
+        "ptr->MessageSize,"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 622,
+      "local_end": 624,
+      "original_line": 659,
+      "preceding_anchor": [
+        "} else {",
+        "SET_ERROR(VrpMapLastError());",
+        "if (!Ok) {"
+      ],
+      "following_anchor": [
+        "setAX((WORD)BytesRead);",
+        "NextSize = MAILSLOT_NO_MESSAGE;",
+        "Ok = GetMailslotInfo(Handle,"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 645,
+      "local_end": 647,
+      "original_line": 688,
+      "preceding_anchor": [
+        "}",
+        "setCX((WORD)NextSize);",
+        "} else {"
+      ],
+      "following_anchor": [
+        "setDX(0);",
+        "setCF(0);",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 698,
+      "local_end": 700,
+      "original_line": 743,
+      "preceding_anchor": [
+        "Name = LPSTR_FROM_WORDS(getDS(), getSI());",
+        "struct  DosWriteMailslotStruct* StructurePointer;",
+        "CHAR    LocalMailslotName[LOCAL_MAILSLOT_NAMELEN+1];"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 704,
+      "local_end": 706,
+      "original_line": 752,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "SET_ERROR(ERROR_PATH_NOT_FOUND);",
+        "}",
+        "if (!IS_ASCII_PATH_SEPARATOR(Name[1])) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 727,
+      "local_end": 729,
+      "original_line": 777,
+      "preceding_anchor": [
+        "SET_ERROR(VrpMapLastError());",
+        "if (Handle == HANDLE_FUNCTION_FAILED) {",
+        ");"
+      ],
+      "following_anchor": [
+        "} else {",
+        "StructurePointer = (struct DosWriteMailslotStruct*)",
+        "POINTER_FROM_WORDS(getES(), getDI());"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 744,
+      "local_end": 746,
+      "original_line": 796,
+      "preceding_anchor": [
+        "Ok = SetMailslotInfo(Handle, READ_DWORD(&StructurePointer->DWMS_Timeout));",
+        "POINTER_FROM_WORDS(getES(), getDI());",
+        "StructurePointer = (struct DosWriteMailslotStruct*)"
+      ],
+      "following_anchor": [
+        "Ok = WriteFile(Handle,",
+        "READ_FAR_POINTER(&StructurePointer->DWMS_Buffer),",
+        "(DWORD)getCX(),"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 757,
+      "local_end": 759,
+      "original_line": 817,
+      "preceding_anchor": [
+        "SET_ERROR(VrpMapLastError());",
+        "if (!Ok) {",
+        ");"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 763,
+      "local_end": 765,
+      "original_line": 825,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "setCF(0);",
+        "}",
+        "CloseHandle(Handle);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 804,
+      "local_end": 806,
+      "original_line": 871,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "VrpRemoveProcessMailslots(DosPdb);",
+        "}",
+        "PRIVATE"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 847,
+      "local_end": 849,
+      "original_line": 916,
+      "preceding_anchor": [
+        "int     CharCount;",
+        "{",
+        "--*/"
+      ],
+      "following_anchor": [
+        "if (IS_ASCII_PATH_SEPARATOR(*Name)) {",
+        "++Name;",
+        "if (IS_ASCII_PATH_SEPARATOR(*Name)) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 867,
+      "local_end": 869,
+      "original_line": 936,
+      "preceding_anchor": [
+        "if (!CharCount || !*Name) {",
+        "}",
+        "++CharCount;"
+      ],
+      "following_anchor": [
+        "return FALSE;",
+        "}",
+        "++Name;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 885,
+      "local_end": 887,
+      "original_line": 956,
+      "preceding_anchor": [
+        "if (IS_ASCII_PATH_SEPARATOR(*Name)) {",
+        "Name += 8;",
+        "if (!_strnicmp(Name, \"MAILSLOT\", 8)) {"
+      ],
+      "following_anchor": [
+        "return TRUE;",
+        "}",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 894,
+      "local_end": 896,
+      "original_line": 967,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "return FALSE;",
+        "}",
+        "PRIVATE"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 940,
+      "local_end": 942,
+      "original_line": 1015,
+      "preceding_anchor": [
+        "}",
+        "strcat(lpBuffer, lpName);",
+        "strcpy(lpBuffer, LOCAL_MAILSLOT_PREFIX);"
+      ],
+      "following_anchor": [
+        "}",
+        "PRIVATE",
+        "PVR_MAILSLOT_INFO   MailslotInfoList    = NULL;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 1043,
+      "local_end": 1045,
+      "original_line": 1120,
+      "preceding_anchor": [
+        "}",
+        "}",
+        "ptr = ptr->Next;"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 1089,
+      "local_end": 1091,
+      "original_line": 1177,
+      "preceding_anchor": [
+        "}",
+        "}",
+        "break;"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 1171,
+      "local_end": 1173,
+      "original_line": 1278,
+      "preceding_anchor": [
+        "PVR_MAILSLOT_INFO   ptr, previous = NULL, next;",
+        "{",
+        "--*/"
+      ],
+      "following_anchor": [
+        "for (ptr = MailslotInfoList; ptr; ) {",
+        "if (ptr->DosPdb == DosPdb) {",
+        "#if DBG"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 1184,
+      "local_end": 1186,
+      "original_line": 1295,
+      "preceding_anchor": [
+        "if (ptr->DosPdb == DosPdb) {",
+        "for (ptr = MailslotInfoList; ptr; ) {",
+        "#endif"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 1190,
+      "local_end": 1192,
+      "original_line": 1309,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "if (!previous) {",
+        "MailslotInfoList = ptr->Next;",
+        "} else {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 1306,
+      "local_end": 1308,
+      "original_line": 1433,
+      "preceding_anchor": [
+        "Handle16Bitmap[i] |= j;",
+        "for (j=1, Handle16=1; map & j; ++Handle16, j <<= 1);",
+        "int j;"
+      ],
+      "following_anchor": [
+        "return Handle16;",
+        "}",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 1318,
+      "local_end": 1320,
+      "original_line": 1451,
+      "preceding_anchor": [
+        "}",
+        "}",
+        "return Handle16;"
+      ],
+      "following_anchor": [
+        "return 0;",
+        "}",
+        "PRIVATE"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 1361,
+      "local_end": 1363,
+      "original_line": 1497,
+      "preceding_anchor": [
+        "--Handle16;",
+        "{",
+        "--*/"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "current_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "local_line": 1367,
+      "local_end": 1369,
+      "original_line": 1508,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "current_sha256": "26e245025ef37e69f75721b86767c378ac50f274e5a3610ed312cad1d33b493c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "local_line": 705,
+      "local_end": 707,
+      "original_line": 697,
+      "preceding_anchor": [
+        "if (!NT_SUCCESS(ntstatus)) {",
+        "ntstatus = RtlAnsiStringToUnicodeString(&uString, &aString, (BOOLEAN)TRUE);",
+        "RtlInitAnsiString(&aString, serverName);"
+      ],
+      "following_anchor": [
+        "return ERROR_NOT_ENOUGH_MEMORY;",
+        "}",
+        "uncName = uString.Buffer;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "current_sha256": "26e245025ef37e69f75721b86767c378ac50f274e5a3610ed312cad1d33b493c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "local_line": 713,
+      "local_end": 715,
+      "original_line": 707,
+      "preceding_anchor": [
+        "uncName = uString.Buffer;",
+        "}",
+        "return ERROR_NOT_ENOUGH_MEMORY;"
+      ],
+      "following_anchor": [
+        "status = RxpTransactSmb((LPTSTR)uncName,",
+        "NULL,",
+        "parm_buf,               // Send parm buffer"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "current_sha256": "bc05f16d93a9fa2933aa057d0c9c8b6ca6f1ff6b97a4701d9509ac156311b6c5",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\netlib\\ntstatus.c",
+      "original_sha256": "3db640c6cdc48e0835cc6a54c69bd12196245fba3feeb486a79e45a7c9abbf86",
+      "local_line": 196,
+      "local_end": 198,
+      "original_line": 196,
+      "preceding_anchor": [
+        "}",
+        "return error;",
+        "if ( error != (NET_API_STATUS)NtStatus ) {"
+      ],
+      "following_anchor": [
+        "return NERR_InternalError;",
+        "}",
+        "} // NetpNtStatusToApiStatus"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register."
+    }
+  ],
+  "method": "Original top-level groups matched by unique three-line preceding or following anchor; whole #error body verified at outer depth; LF used for physical indexing.",
+  "limitations": "No inference for untested compiler contexts or other files; no runtime change."
+}

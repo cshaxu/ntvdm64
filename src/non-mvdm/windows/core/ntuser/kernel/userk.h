@@ -8,6 +8,8 @@
 #define OCF_USEQUOTA         0x0008
 #ifndef WOW_USER_OBJECT_FLAGS_ONLY
 #define PSEUDO_EVENT_ON ((HANDLE)0xFFFFFFFF)
+#ifndef MSDWP
+#line 11
 _inline
 VOID
 EnterWowCritSect(
@@ -30,6 +32,8 @@ EnterWowCritSect(
 
    return;
 }
+#endif
+#line 33
 #define PSEUDO_EVENT_OFF ((HANDLE)0x00000000)
 #define CLOSE_PSEUDO_EVENT(phE)                                 \
     CheckCritIn();                                              \
@@ -40,6 +44,8 @@ EnterWowCritSect(
         *(phE) = PSEUDO_EVENT_OFF;                              \
     }
 
+#ifndef MSDWP
+#line 43
 _inline
 VOID
 ExitWowCritSect(
@@ -56,4 +62,6 @@ ExitWowCritSect(
 
    return;
 }
+#endif
+#line 59
 #endif

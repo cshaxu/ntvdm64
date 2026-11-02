@@ -1,0 +1,148 @@
+[
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+    "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+    "current_sha256": "26e0438aa19736f3ab93e531dbe2f2c2435bd2d340a2f3272ae8c429dfd3366f",
+    "original_function_ranges": {
+      "AddAttachment": [
+        4990,
+        5042
+      ],
+      "Recalc2": [
+        5043,
+        5107
+      ],
+      "RecalcThreadAttachment": [
+        5108,
+        5152
+      ]
+    },
+    "registrations": [
+      "OPENNT-HOST-057",
+      "OPENNT-HOST-058"
+    ],
+    "retained_original_top_level_condition_lines": [],
+    "candidates": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+        "directive": "ifdef",
+        "expression": "MARKPATH",
+        "unpaired_count": "3",
+        "classification": "outside registered retained function ranges"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+        "directive": "ifdef",
+        "expression": "TRACESYSPEEK",
+        "unpaired_count": "2",
+        "classification": "outside registered retained function ranges"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+        "directive": "if",
+        "expression": "DBG",
+        "unpaired_count": "10",
+        "classification": "outside registered retained function ranges"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+        "directive": "ifdef",
+        "expression": "SYSMODALWINDOWS",
+        "unpaired_count": "1",
+        "classification": "outside registered retained function ranges"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+        "directive": "if",
+        "expression": "0",
+        "unpaired_count": "1",
+        "classification": "outside registered retained function ranges"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+        "directive": "if",
+        "expression": "(CBKEYSTATERECENTDOWN % 4) != 0",
+        "unpaired_count": "1",
+        "classification": "outside registered retained function ranges"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+        "directive": "ifdef",
+        "expression": "NEVER",
+        "unpaired_count": "1",
+        "classification": "outside registered retained function ranges"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+        "directive": "ifdef",
+        "expression": "DEBUG",
+        "unpaired_count": "3",
+        "classification": "outside registered retained function ranges"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+        "directive": "ifdef",
+        "expression": "FE_IME",
+        "unpaired_count": "3",
+        "classification": "outside registered retained function ranges"
+      }
+    ]
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+    "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+    "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+    "current_sha256": "e1eaea491db6e7c3670d4e3a0cb4626a0d26c8b2024684a0a9495adb07cbe8d5",
+    "original_function_ranges": {
+      "SetAppCompatFlags": [
+        517,
+        627
+      ],
+      "xxxInitTask": [
+        647,
+        856
+      ],
+      "_ShowStartGlass": [
+        857,
+        893
+      ]
+    },
+    "registrations": [
+      "OPENNT-HOST-053"
+    ],
+    "retained_original_top_level_condition_lines": [
+      785
+    ],
+    "candidates": [
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+        "directive": "ifdef",
+        "expression": "DEBUG",
+        "unpaired_count": "5",
+        "classification": "outside registered retained function ranges; retained original top-level DEBUG arm separately pending"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+        "directive": "if",
+        "expression": "DBG",
+        "unpaired_count": "12",
+        "classification": "outside registered retained function ranges; retained original top-level DEBUG arm separately pending"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+        "directive": "ifdef",
+        "expression": "FE_IME",
+        "unpaired_count": "5",
+        "classification": "outside registered retained function ranges; retained original top-level DEBUG arm separately pending"
+      },
+      {
+        "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+        "directive": "ifdef",
+        "expression": "LOCK_MOUSE_CODE",
+        "unpaired_count": "1",
+        "classification": "outside registered retained function ranges; retained original top-level DEBUG arm separately pending"
+      }
+    ]
+  }
+]

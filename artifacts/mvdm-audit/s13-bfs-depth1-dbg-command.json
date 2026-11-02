@@ -1,0 +1,66 @@
+{
+  "path": "src/mvdm-host/dos/command/cmddisp.c",
+  "current_sha256": "85c5a429e146ca2dbbff63a336d29a78565fc05c493835d272589fdfcbf31c1e",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmddisp.c",
+  "original_sha256": "2a906e7100da9db6f16bab91c767b149f28e63a0db2803297812a8e86d2b19d6",
+  "product_contexts": [
+    {
+      "path": "src/mvdm-host/dos/command/cmddisp.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "85c5a429e146ca2dbbff63a336d29a78565fc05c493835d272589fdfcbf31c1e",
+      "includes": 168,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmddisp.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "85c5a429e146ca2dbbff63a336d29a78565fc05c493835d272589fdfcbf31c1e",
+      "includes": 168,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    }
+  ],
+  "fixture_contexts": [
+    {
+      "fixture": "tests/observation/command_dispatch_trace.c",
+      "provider": "src/mvdm-host/dos/command/cmddisp.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "fixture_sha256": "49c8086a4d3e13c1d522441a903ea8f4d8c76fe4d52f8ccf72053c9c209c0f69",
+      "provider_included": true,
+      "includes": 169,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "fixture": "tests/observation/command_dispatch_trace.c",
+      "provider": "src/mvdm-host/dos/command/cmddisp.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "fixture_sha256": "49c8086a4d3e13c1d522441a903ea8f4d8c76fe4d52f8ccf72053c9c209c0f69",
+      "provider_included": true,
+      "includes": 169,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    }
+  ],
+  "existing_exclusions": [
+    {
+      "local_line": 46,
+      "original_line": 46,
+      "anchor": [
+        "{",
+        "BOOL CmdDispatch (ULONG iSvc)",
+        "};"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    }
+  ]
+}

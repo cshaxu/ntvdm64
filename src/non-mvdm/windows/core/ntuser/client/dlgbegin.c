@@ -288,10 +288,9 @@ HWND InternalCreateDialog(
         }
     } else {
 #ifdef DEBUG
-        if (dt.style != (dt.style & (DS_VALID31 | DS_3DLOOK | 0xffff0000))) {
-            RIPMSG1(RIP_WARNING, "CreateDialog: stripping invalid bits %lX", dt.style);
-        }
+#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif // DEBUG
+#line 295
 
 
         /*

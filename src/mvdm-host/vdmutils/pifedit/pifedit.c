@@ -3753,19 +3753,19 @@ void CpyCmdStr( LPSTR szDst, LPSTR szSrc ) {
             break;
 
 #if 0
-        //
-        // This 'case' makes it difficult to put a '^' in a filename.
-        // (due to cmd processing, it needs to appear 4 times in the line)!
-        //
-        // With out this case, it is impossible to put a '"' in the middle
-        // of a filename, but " is illegal in a filename on _ALL_ NT
-        // filesystems, and is not supported by any command line utility
-        // in that context.
-        //
-        case '^':
-            /* use '^' to mean 'quote next char' */
-            szSrc++;
-            /* FALL THROUGH to default */
+#error Excluded unsupported original disabled branch
+
+
+
+
+
+
+
+
+
+
+
+
 #endif
 
         default:

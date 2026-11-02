@@ -1,0 +1,678 @@
+{
+  "scope": "14 direct-source C units across x86 worker/WOW32, x86 reference and x64 launcher where generated",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "3915016769d57307fd5d6d4975b2b5caf5461addd59bfcc09fa6182b01224a84",
+      "includes": 173,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "includes": 173,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "includes": 215,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetb.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "4f70cd3edbf922852f95a8b5453c5ca9589070a79403dfd4c8aef7cb9edf520d",
+      "includes": 179,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "db78341538014af2f0003967df01dac29fa357d2a8a81022e3f05c08d86faca9",
+      "includes": 148,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "2512205fe61f1ff707b8dd8d77c26121455450a71e12cca50c2beaf205b41117",
+      "includes": 148,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdll.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "a704a9141f4f67752a2479bce603519103c6a57316e6efdd0af9f0918d0ff7c5",
+      "includes": 152,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "8b434cc2162274ec5884cd03c743f2cad8190d85cd92eb2be7b583b9b3a93cc5",
+      "includes": 170,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa",
+      "includes": 168,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "b6dea35bc24ba7baf538b6a0e99be17dd8c73509953b5959a6aca4f5c9e44b22",
+      "includes": 151,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "49a15adb809d1b4aa8d010e6a603d38e55434c6be19308c70f739feb52194f6f",
+      "includes": 332,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/waccel.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "b84e4821bb550209081cc9782e9f9c01b1bb9d5754a7be99c6eea9fa739b50b0",
+      "includes": 322,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "a72c354d1d05b1e2cf9f4fd70727bf227944a5556dee0ef0426ad4ee22593121",
+      "includes": 328,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wole2.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "889ef5e6e3d2c2b5f501e5e59c51b0afef023ad5754f30110b5399859ec3ef5a",
+      "includes": 322,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "graph": "build/.ninja/msvc-x64-release/launcher",
+      "exit": 0,
+      "source_sha256": "b6dea35bc24ba7baf538b6a0e99be17dd8c73509953b5959a6aca4f5c9e44b22",
+      "includes": 148,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "3915016769d57307fd5d6d4975b2b5caf5461addd59bfcc09fa6182b01224a84",
+      "includes": 173,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "includes": 173,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "includes": 215,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetb.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "4f70cd3edbf922852f95a8b5453c5ca9589070a79403dfd4c8aef7cb9edf520d",
+      "includes": 179,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "db78341538014af2f0003967df01dac29fa357d2a8a81022e3f05c08d86faca9",
+      "includes": 148,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "2512205fe61f1ff707b8dd8d77c26121455450a71e12cca50c2beaf205b41117",
+      "includes": 148,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdll.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "a704a9141f4f67752a2479bce603519103c6a57316e6efdd0af9f0918d0ff7c5",
+      "includes": 152,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "8b434cc2162274ec5884cd03c743f2cad8190d85cd92eb2be7b583b9b3a93cc5",
+      "includes": 170,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa",
+      "includes": 168,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "b6dea35bc24ba7baf538b6a0e99be17dd8c73509953b5959a6aca4f5c9e44b22",
+      "includes": 151,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    }
+  ],
+  "existing_exclusions": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "current_sha256": "3915016769d57307fd5d6d4975b2b5caf5461addd59bfcc09fa6182b01224a84",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdconf.c",
+      "original_sha256": "32892c8c489bed9e4be8faed12e1bafbc6c580ba81a509425e8493de1e6ffc0a",
+      "local_line": 133,
+      "original_line": 132,
+      "anchor": [
+        "if (pchTmpConfigFile)  {",
+        "{",
+        "VOID DeleteConfigFiles(VOID)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "current_sha256": "3915016769d57307fd5d6d4975b2b5caf5461addd59bfcc09fa6182b01224a84",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdconf.c",
+      "original_sha256": "32892c8c489bed9e4be8faed12e1bafbc6c580ba81a509425e8493de1e6ffc0a",
+      "local_line": 143,
+      "original_line": 142,
+      "anchor": [
+        "if (pchTmpAutoexecFile) {",
+        "}",
+        "pchTmpConfigFile = NULL;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "current_sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.c",
+      "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+      "local_line": 29,
+      "original_line": 26,
+      "anchor": [
+        "PCPUENVVAR CpuEnvVarListHead=NULL;",
+        "} CPUENVVAR, *PCPUENVVAR;",
+        "char Name[1];"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "current_sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.c",
+      "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+      "local_line": 336,
+      "original_line": 317,
+      "anchor": [
+        "NtClose(CpuEnvKey);",
+        "};",
+        "Index++;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "current_sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.c",
+      "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+      "local_line": 362,
+      "original_line": 347,
+      "anchor": [
+        "}",
+        "CpuEnvVar = CpuEnvVar->Next;",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.c",
+      "current_sha256": "2512205fe61f1ff707b8dd8d77c26121455450a71e12cca50c2beaf205b41117",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdebug.c",
+      "original_sha256": "a857e79085fabc406667f849229100ee7b92cd13107ceeb37fa798aedeba42ea",
+      "local_line": 181,
+      "original_line": 181,
+      "anchor": [
+        "--*/",
+        "Revision History:",
+        "at 2 (assumes bx is segment register, because that's the syntax)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif // DBG"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.c",
+      "current_sha256": "db78341538014af2f0003967df01dac29fa357d2a8a81022e3f05c08d86faca9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcdbg.c",
+      "original_sha256": "98e30a6019415eed62efa2aed0d921d4f8b7f4fe5da150e664c925d9e61504c2",
+      "local_line": 87,
+      "original_line": 87,
+      "anchor": [
+        "--*/",
+        "Revision History:",
+        "Richard L Firth (rfirth) 30-Apr-1992"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdll.c",
+      "current_sha256": "a704a9141f4f67752a2479bce603519103c6a57316e6efdd0af9f0918d0ff7c5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdll.c",
+      "original_sha256": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10",
+      "local_line": 26,
+      "original_line": 26,
+      "anchor": [
+        "--*/",
+        "Revision History:",
+        "Richard L Firth (rfirth) 11-May-1992"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdll.c",
+      "current_sha256": "a704a9141f4f67752a2479bce603519103c6a57316e6efdd0af9f0918d0ff7c5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdll.c",
+      "original_sha256": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10",
+      "local_line": 53,
+      "original_line": 56,
+      "anchor": [
+        ");",
+        "VOID",
+        "TerminateDlcEmulation("
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdll.c",
+      "current_sha256": "a704a9141f4f67752a2479bce603519103c6a57316e6efdd0af9f0918d0ff7c5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdll.c",
+      "original_sha256": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10",
+      "local_line": 87,
+      "original_line": 90,
+      "anchor": [
+        "BOOL ok;",
+        "{",
+        "--*/"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "local_line": 97,
+      "original_line": 96,
+      "anchor": [
+        "#include <crypt.h>      // Needed by NetUserPasswordSet",
+        "#include <lmaccess.h>   // USER_PASSWORD_PARMNUM",
+        "#include <rxuser.h>     // RxNetUser..."
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "current_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "local_line": 106,
+      "original_line": 111,
+      "anchor": [
+        ");",
+        "IN  BOOL    NullSessionFlag",
+        "VrpTransactVdm("
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetb.c",
+      "current_sha256": "4f70cd3edbf922852f95a8b5453c5ca9589070a79403dfd4c8aef7cb9edf520d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetb.c",
+      "original_sha256": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157",
+      "local_line": 134,
+      "original_line": 134,
+      "anchor": [
+        "sizeof(NCBW));",
+        "RtlProcessHeap(), 0,",
+        "pncbw = RtlAllocateHeap("
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetb.c",
+      "current_sha256": "4f70cd3edbf922852f95a8b5453c5ca9589070a79403dfd4c8aef7cb9edf520d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetb.c",
+      "original_sha256": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157",
+      "local_line": 306,
+      "original_line": 313,
+      "anchor": [
+        "PNCB pdosNcb = pncbw->ncb_original_ncb;",
+        "PNCBW pncbw = (PNCBW) pncb;",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetb.c",
+      "current_sha256": "4f70cd3edbf922852f95a8b5453c5ca9589070a79403dfd4c8aef7cb9edf520d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetb.c",
+      "original_sha256": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157",
+      "local_line": 367,
+      "original_line": 384,
+      "anchor": [
+        "{",
+        "--*/",
+        "None. Returns values in VDM Ax, Es and Bx registers."
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetb.c",
+      "current_sha256": "4f70cd3edbf922852f95a8b5453c5ca9589070a79403dfd4c8aef7cb9edf520d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetb.c",
+      "original_sha256": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157",
+      "local_line": 386,
+      "original_line": 405,
+      "anchor": [
+        "pncb = pncbw->ncb_original_ncb;",
+        "pncbw = CONTAINING_RECORD( entry, NCBW, u.ncb_next );",
+        "LeaveCriticalSection( &PostCrit );"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "current_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "local_line": 1709,
+      "original_line": 1887,
+      "anchor": [
+        "}",
+        "VrpCompleteAsyncRequest(pRequest);",
+        "if (pRequest != NULL) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/wow32/waccel.c",
+      "current_sha256": "b84e4821bb550209081cc9782e9f9c01b1bb9d5754a7be99c6eea9fa739b50b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\waccel.c",
+      "original_sha256": "c78dd24195e1a7d28dc3a9ee535b4104e9859f98ea8869f8f5591bc9c159a8e8",
+      "local_line": 258,
+      "original_line": 258,
+      "anchor": [
+        "UINT    i;",
+        "HACCEL  hAccel = (HACCEL)NULL;",
+        "LPACCEL lpAccel;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/wow32/waccel.c",
+      "current_sha256": "b84e4821bb550209081cc9782e9f9c01b1bb9d5754a7be99c6eea9fa739b50b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\waccel.c",
+      "original_sha256": "c78dd24195e1a7d28dc3a9ee535b4104e9859f98ea8869f8f5591bc9c159a8e8",
+      "local_line": 279,
+      "original_line": 279,
+      "anchor": [
+        "lpAccel[i].fVirt = *(LPBYTE)(pAccel16);",
+        "for (i=0; i<nElem16; ++i) {",
+        "if (lpAccel) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/wow32/waccel.c",
+      "current_sha256": "b84e4821bb550209081cc9782e9f9c01b1bb9d5754a7be99c6eea9fa739b50b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\waccel.c",
+      "original_sha256": "c78dd24195e1a7d28dc3a9ee535b4104e9859f98ea8869f8f5591bc9c159a8e8",
+      "local_line": 289,
+      "original_line": 291,
+      "anchor": [
+        "}",
+        "((LPWORD)pAccel16)++;",
+        "lpAccel[i].cmd   = FETCHWORD(*(LPWORD)pAccel16);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "current_sha256": "a72c354d1d05b1e2cf9f4fd70727bf227944a5556dee0ef0426ad4ee22593121",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcommdlg.c",
+      "original_sha256": "01ce83329ae37a3e987971398115b8c7b5d9dcbc3320bdffaaa595244740a7d0",
+      "local_line": 35,
+      "original_line": 34,
+      "anchor": [
+        "MODNAME(wcommdlg.c);",
+        "#include <wowcmndg.h>",
+        "#include <dlgs.h>"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#else"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_sha256": "49a15adb809d1b4aa8d010e6a603d38e55434c6be19308c70f739feb52194f6f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+      "local_line": 1313,
+      "original_line": 1281,
+      "anchor": [
+        "if ( !NT_SUCCESS(Status) ) {",
+        ");",
+        "NULL"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_sha256": "49a15adb809d1b4aa8d010e6a603d38e55434c6be19308c70f739feb52194f6f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+      "local_line": 1336,
+      "original_line": 1305,
+      "anchor": [
+        "if ( !NT_SUCCESS(Status) ) {",
+        "&ThreadInfo.ClientId );",
+        "&obja,"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "current_sha256": "49a15adb809d1b4aa8d010e6a603d38e55434c6be19308c70f739feb52194f6f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkman.c",
+      "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+      "local_line": 1346,
+      "original_line": 1316,
+      "anchor": [
+        "if ( !NT_SUCCESS(Status) ) {",
+        "Status = NtClose( hThread );",
+        "cpu_createthread( hThread );"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wole2.c",
+      "current_sha256": "889ef5e6e3d2c2b5f501e5e59c51b0afef023ad5754f30110b5399859ec3ef5a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wole2.c",
+      "original_sha256": "85fab0277735cff414d0f339557f110bf1501cbbe0f933dcf95232d9a61fd5e9",
+      "local_line": 94,
+      "original_line": 90,
+      "anchor": [
+        "if ( !NT_SUCCESS(Status) ) {",
+        "&cid );",
+        "&obja,"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wole2.c",
+      "current_sha256": "889ef5e6e3d2c2b5f501e5e59c51b0afef023ad5754f30110b5399859ec3ef5a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wole2.c",
+      "original_sha256": "85fab0277735cff414d0f339557f110bf1501cbbe0f933dcf95232d9a61fd5e9",
+      "local_line": 119,
+      "original_line": 115,
+      "anchor": [
+        "if ( !NT_SUCCESS(Status) ) {",
+        "Status = NtClose( hThread );",
+        "&ftDummy );"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "current_sha256": "8b434cc2162274ec5884cd03c743f2cad8190d85cd92eb2be7b583b9b3a93cc5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsdisp.c",
+      "original_sha256": "24b0fa2fe32bd7a94606d424a10b0961a9911190cb2684456af04034e04bff01",
+      "local_line": 47,
+      "original_line": 47,
+      "anchor": [
+        "{",
+        "BOOL XMSDispatch (ULONG iSvc)",
+        "};"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "current_sha256": "b6dea35bc24ba7baf538b6a0e99be17dd8c73509953b5959a6aca4f5c9e44b22",
+      "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\environ.c",
+      "original_sha256": "6c67b0c09c40e9186ce28a735221634bade1d9402be085d965223092aa7d4f00",
+      "local_line": 289,
+      "original_line": 288,
+      "anchor": [
+        "}",
+        "p = Peb->ProcessParameters->Environment;",
+        "RtlAcquirePebLock();"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    }
+  ],
+  "limitations": "Direct-source tests and generated graphs examined; other files and future configurations are not decided."
+}

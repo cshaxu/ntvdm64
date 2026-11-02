@@ -1,0 +1,206 @@
+{
+  "method": "Same count and ordered outer arm-kind sequences; previously independently anchored original groups agree in every affected source. Existing bodies contain only #error and optional blank lines.",
+  "compilation_evidence": "s13-bfs-depth1-macro-cohort.json",
+  "existing_exclusions": [
+    {
+      "path": "src/mvdm-host/inc/wowkrn.h",
+      "macro": "NULLSTRUCT",
+      "current_sha256": "0e172fc74921ae84831ed646b0432320dd565cace21182ce5a8b1deac340c3d1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
+      "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+      "local_line": 410,
+      "original_line": 414,
+      "ordinal": 3,
+      "total_groups": 12,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 11,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/inc/wowsnd.h",
+      "macro": "NULLSTRUCT",
+      "current_sha256": "00d8cd7ba8f60e24583794c1911ffa1609c8d9172a473d7f85172ca247eae713",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowsnd.h",
+      "original_sha256": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6",
+      "local_line": 55,
+      "original_line": 59,
+      "ordinal": 3,
+      "total_groups": 7,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 5,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/inc/wowsnd.h",
+      "macro": "NULLSTRUCT",
+      "current_sha256": "00d8cd7ba8f60e24583794c1911ffa1609c8d9172a473d7f85172ca247eae713",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowsnd.h",
+      "original_sha256": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6",
+      "local_line": 116,
+      "original_line": 126,
+      "ordinal": 6,
+      "total_groups": 7,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 5,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/inc/wowusr.h",
+      "macro": "NULLSTRUCT",
+      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "local_line": 1364,
+      "original_line": 1402,
+      "ordinal": 20,
+      "total_groups": 41,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 40,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "macro": "REAL_VGA",
+      "current_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "local_line": 825,
+      "original_line": 820,
+      "ordinal": 4,
+      "total_groups": 24,
+      "arm_kinds": [
+        "ifdef",
+        "else"
+      ],
+      "independent_anchor_count": 17,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "macro": "REAL_VGA",
+      "current_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "local_line": 889,
+      "original_line": 884,
+      "ordinal": 6,
+      "total_groups": 24,
+      "arm_kinds": [
+        "ifdef",
+        "else"
+      ],
+      "independent_anchor_count": 17,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "macro": "REAL_VGA",
+      "current_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "local_line": 902,
+      "original_line": 897,
+      "ordinal": 7,
+      "total_groups": 24,
+      "arm_kinds": [
+        "ifdef",
+        "else"
+      ],
+      "independent_anchor_count": 17,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "macro": "REAL_VGA",
+      "current_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "local_line": 981,
+      "original_line": 977,
+      "ordinal": 9,
+      "total_groups": 24,
+      "arm_kinds": [
+        "ifdef",
+        "else"
+      ],
+      "independent_anchor_count": 17,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "macro": "REAL_VGA",
+      "current_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "local_line": 989,
+      "original_line": 985,
+      "ordinal": 10,
+      "total_groups": 24,
+      "arm_kinds": [
+        "ifdef",
+        "else"
+      ],
+      "independent_anchor_count": 17,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "macro": "REAL_VGA",
+      "current_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "local_line": 1163,
+      "original_line": 1161,
+      "ordinal": 14,
+      "total_groups": 24,
+      "arm_kinds": [
+        "ifdef",
+        "else"
+      ],
+      "independent_anchor_count": 17,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "macro": "REAL_VGA",
+      "current_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "local_line": 1298,
+      "original_line": 1298,
+      "ordinal": 18,
+      "total_groups": 24,
+      "arm_kinds": [
+        "ifdef",
+        "else"
+      ],
+      "independent_anchor_count": 17,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "macro": "HUNTER",
+      "current_sha256": "0b5d06d2a7a3f714a6f1a607ac9476fb5c0ae490832a8e45d43acc58fd3b505f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+      "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
+      "local_line": 346,
+      "original_line": 324,
+      "ordinal": 2,
+      "total_groups": 2,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 1,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+    }
+  ],
+  "limitations": "Identically shaped adjacent excluded groups cannot independently demonstrate deleted-body order; no source or behavior changed."
+}

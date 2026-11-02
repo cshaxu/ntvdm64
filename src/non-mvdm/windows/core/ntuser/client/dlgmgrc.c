@@ -144,8 +144,9 @@ PWND _NextSibblingOrAncestor (PWND pwndRoot, PWND pwndStart)
 {
     PWND pwndParent;
 #ifdef DEBUG
-    PWND pwndNext;
+#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
+#line 149
 
     // If there is a sibbling, go for it
     if (pwndStart->spwndNext != NULL) {
@@ -165,22 +166,18 @@ PWND _NextSibblingOrAncestor (PWND pwndRoot, PWND pwndStart)
     // a WS_EX_CONTROLPARENT parent.
 
 #ifdef DEBUG
-    pwndNext =
+#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #else
+#line 170
     return
 #endif
+#line 172
         _GetChildControl(pwndRoot, pwndParent);
 
 #ifdef DEBUG
-    if ((pwndNext != pwndParent) || !TestWF(pwndParent, WEFCONTROLPARENT)) {
-        // Code looping through the controls in a dialog might go into an infinite
-        //  loop because of this (i.e., xxxRemoveDefaultButton, _GetNextDlgTabItem,..)
-        // We've walked up the parent chain but will never walk down the child chain again
-        //  because there is a NON WS_EX_CONTROLPARENT parent window somewhere in the chain.
-        RIPMSG0 (RIP_ERROR, "_NextSibblingOrAncestor: Non WS_EX_CONTROLPARENT window in parent chain");
-    }
-    return pwndNext;
+#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
+#line 184
 }
 
 PWND _NextControl(

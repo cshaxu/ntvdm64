@@ -249,7 +249,7 @@ IMPORT VOID init_bcd_driver IPT0();
  */
  
 #ifdef	macintosh
-#define UNKNOWN_DRIVE_NUMBER	('?' - 'A')
+#error Excluded unsupported macintosh configuration
 #else
 #define UNKNOWN_DRIVE_NUMBER	-1
 #endif	/* macintosh */

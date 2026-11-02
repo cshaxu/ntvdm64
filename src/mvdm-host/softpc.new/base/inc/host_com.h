@@ -188,8 +188,8 @@ IMPORT SHORT host_com_active IPT3(UTINY,hostID, BOOL,active, CHAR *,errString);
 IMPORT VOID host_com_close IPT1(int,adapter);
 
 #if defined(NTVDM) && defined(FIFO_ON)
-IMPORT UTINY host_com_read_char(int adapter, FIFORXDATA *buffer, UTINY count);
-IMPORT VOID host_com_fifo_char_read(int adapter);
+#error Excluded unsupported FIFO_ON configuration
+
 #endif
 
 IMPORT VOID host_com_read IPT3(int,adapter,UTINY *,value, int *,error_mask);

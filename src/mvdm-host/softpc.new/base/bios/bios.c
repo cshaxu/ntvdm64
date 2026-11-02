@@ -21,12 +21,12 @@
 #endif
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "BIOS_SUPPORT.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 
@@ -308,7 +308,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 51 */
 #endif /* SMEG */
 #if defined(IRET_HOOKS) && defined(GISP_CPU)
-			Cpu_hook_bop,	/* BOP 52 */
+#error Excluded unsupported GISP_CPU configuration
 #else
 			illegal_bop,	/* BOP 52 */
 #endif /* IRET_HOOKS  && GISP_CPU */
@@ -676,15 +676,15 @@ void (*BIOS[])() = {
 #else
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM && MONITOR */
-#if !defined(LDBIOS)
+#if !defined(LDBIOS) && !defined(CPU_30_STYLE)
                         host_unsimulate,/* BOP FE */
 #else
-#if defined(NTVDM) && defined(MONITOR)
-                        host_unsimulate,	/* BOP FE */
-#else
-#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
-#endif	/* NTVDM && MONITOR */
-#endif	/* !LDBIOS */
+#error Excluded unsupported LDBIOS or CPU30 BIOS continuation
+
+
+
+
+#endif	/* !LDBIOS && !CPU_30_STYLE */
 
 #else /* ndef GISP_CPU */
 #line 622

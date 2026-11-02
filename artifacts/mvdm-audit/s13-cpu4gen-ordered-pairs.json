@@ -1,0 +1,26 @@
+{
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+  "original_sha256": "7c03d8f75644e6c2d0b4fb1a1e66ab93c55225df61e8329d5fffdf1d08a5fccb",
+  "local": "src\\mvdm-host\\softpc.new\\base\\ccpu386\\cpu4gen.h",
+  "local_sha256": "146c7ae07b2bacbcb0b2b4e256325d620e79883815af09b94de37f9c65ab1bc5",
+  "ordered_pairs": 215,
+  "rejected_alternatives": 215,
+  "same_selected_pairs": 202,
+  "different_selected_pair_ordinals": [
+    43,
+    44,
+    45,
+    46,
+    115,
+    116,
+    117,
+    118,
+    119,
+    120,
+    121,
+    122,
+    123
+  ],
+  "registered_divergence": "MVDM-HOST-DIV-046",
+  "limitations": "text block comparison, not full translation unit behavioral proof"
+}

@@ -40,6 +40,8 @@ __declspec(noreturn) void __cdecl fixture_unreachable_dependency(void);
  * from their complete selected TU below, so this is not a retyped filter. */
 static unsigned idle_blocks,idle_unblocks,stack_enters,stack_leaves,unwinds;
 static WW callback_words;
+__declspec(noreturn) static void fixture_unexpected_conversion(void)
+{ fputs("FAIL unexpected conversion path reached\n",stderr); ExitProcess(91); }
 void WINAPI wow_message_stack_enter(wow_message_stack *scope)
 {
     ZeroMemory(scope,sizeof(*scope));scope->task16=CURRENTPTD()->htask16;++stack_enters;
@@ -49,12 +51,12 @@ void WINAPI wow_message_stack_leave(wow_message_stack *scope,BOOL abnormal)
 void WINAPI wow_message_unwind32(LPWM32MSGPARAMEX message)
 { (void)message;++unwinds; }
 void WINAPI wow_message_unwind16(MSGPARAMEX *message)
-{ (void)message;fixture_unreachable_dependency(); }
-PWC FindPWC(HANDLE window) { (void)window;fixture_unreachable_dependency();return NULL; }
+{ (void)message;fixture_unexpected_conversion(); }
+PWC FindPWC(HANDLE window) { (void)window;fixture_unexpected_conversion();return NULL; }
 WNDPROC GetStdClassWndProc(DWORD kind)
-{ (void)kind;fixture_unreachable_dependency();return NULL; }
+{ (void)kind;fixture_unexpected_conversion();return NULL; }
 BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX message)
-{ (void)message;fixture_unreachable_dependency();return FALSE; }
+{ (void)message;fixture_unexpected_conversion();return FALSE; }
 #include "original-wndproc.inc"
 
 /* Link-only resolution for the TU's unrelated initialization graph. The

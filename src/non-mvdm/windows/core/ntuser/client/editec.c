@@ -502,15 +502,9 @@ UINT ECTabTheTextOut(
         fOpaque = (GetBkMode(hdc) == OPAQUE) || (fDraw == ECT_SELECTED);
     }
 #ifdef DEBUG
-    else {
-        //
-        // Both MLGetLineWidth() and ECCchInWidth() should be clipping
-        // nCount to avoid overflow.
-        //
-        if (nCount > MAXLINELENGTH)
-            RIPMSG0(RIP_WARNING, "ECTabTheTextOut: nCount > MAXLINELENGTH");
-    }
+#error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
+#line 514
 
     // Let us define the Clip rectangle.
     rc.left   = xClipStPos;

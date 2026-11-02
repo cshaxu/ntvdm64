@@ -1,0 +1,4106 @@
+{
+  "scope": "same-hash first-depth guarded source in observed successful product/test include contexts; all compiled graphs and project macro definitions inventoried",
+  "macros": [
+    "BIGEND",
+    "CPU_286",
+    "SFELLOW",
+    "SUPPORT_LPK"
+  ],
+  "generated_graph_inventory": {
+    "macros": [
+      "SUPPORT_LPK",
+      "BIGEND",
+      "SFELLOW",
+      "CPU_286"
+    ],
+    "commands": 2836,
+    "errors": [],
+    "flag_counts": {
+      "SUPPORT_LPK": 0,
+      "BIGEND": 0,
+      "SFELLOW": 0,
+      "CPU_286": 0
+    },
+    "flags": {}
+  },
+  "project_definition_scan": "No exact macro definitions or undefinitions in src, tests or tools C/C++/headers/build scripts; legacy original makefile flags are not active generated graphs.",
+  "instrumentation_input_hashes": {
+    "bfs-live": {
+      "branches_sha256": "c4815230ce7fc07d31fc820979f756de8935b4b201a525c4ad9c5b48a92d0d45",
+      "contexts_sha256": "b5f349b592cd522e3160a642d991314f3636de6cd69e7394f90bd5fc184ca590"
+    },
+    "bfs-depth1-alltests": {
+      "branches_sha256": "7bd9032775a91c305117ee561be8bb149406133e7406c36a2f504fb1a8315ada",
+      "contexts_sha256": "6b0ec89a7f96f4bb1cebd2422e6f8095dd7f7c99d65447eba8fe5e0d471a0274"
+    },
+    "bfs-depth1-tests": {
+      "branches_sha256": "7bd9032775a91c305117ee561be8bb149406133e7406c36a2f504fb1a8315ada",
+      "contexts_sha256": "af064187d7d4deed33c5bb881a2a87d08df32dc825782872acd920ac7ccd75ee"
+    }
+  },
+  "per_file_successful_contexts": {
+    "src/mvdm-host/softpc.new/base/ccpu386/c_reg.h": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/aaa.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/aad.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/aam.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/aas.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/adc.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/add.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/and.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/arpl.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/bound.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/bsf.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/bsr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/bswap.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/bt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/btc.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/btr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/bts.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/call.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cbw.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cdq.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/clc.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cld.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cli.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/clts.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cmc.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cmp.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cmpxchg.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cwd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cwde.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_addr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_debug.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_div64.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_mul64.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_neg64.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_prot.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/daa.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/das.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/dec.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/div.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/enter.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/idiv.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/imul.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/in.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/inc.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/into.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/intx.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/invd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/invlpg.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/jcxz.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/jxx.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lahf.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lar.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lea.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/leave.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lidt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/loopxx.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lsl.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/ltr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/mov.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/movsx.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/mul.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/neg.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/nop.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/not.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/or.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/out.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/pop.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/popa.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/popf.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/push.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/pusha.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/pushf.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/rcl.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/rcr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/rol.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/ror.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/rsrvd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sahf.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sar.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sbb.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/setxx.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sgdt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/shl.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/shld.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/shr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/shrd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sidt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sldt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/smsw.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/stc.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/std.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sti.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/str.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sub.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/test.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/verr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/verw.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/wait.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/wbinvd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/xadd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/xchg.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/xlat.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/xor.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/aaa.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/aad.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/aam.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/aas.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/adc.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/add.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/and.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/arpl.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/bound.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/bsf.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/bsr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/bswap.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/bt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/btc.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/btr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/bts.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/call.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cbw.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cdq.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/clc.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cld.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cli.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/clts.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cmc.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cmp.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cmpxchg.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cwd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/cwde.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_addr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_debug.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_div64.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_mul64.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_neg64.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_prot.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/daa.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/das.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/dec.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/div.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/enter.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/idiv.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/imul.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/in.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/inc.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/into.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/intx.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/invd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/invlpg.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/jcxz.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/jxx.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lahf.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lar.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lea.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/leave.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lidt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lmsw.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/loopxx.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lsl.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/ltr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/mov.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/movsx.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/mul.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/neg.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/nop.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/not.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/or.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/out.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/pop.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/popa.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/popf.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/push.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/pusha.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/pushf.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/rcl.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/rcr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/rol.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/ror.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/rsrvd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sahf.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sar.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sbb.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/setxx.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sgdt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/shl.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/shld.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/shr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/shrd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sidt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sldt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/smsw.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/stc.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/std.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sti.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/str.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/sub.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/test.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/verr.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/verw.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/wait.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/wbinvd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/xadd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/xchg.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/xlat.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/xor.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/mvdm_softpc_effective_address.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-depth1-alltests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_bit_fault_fixture.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-depth1-alltests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_x87_span_fixture.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-depth1-alltests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_x87_page_fixture.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-depth1-alltests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_far_exception_fixture.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-depth1-alltests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_stack_transition_test.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      }
+    ],
+    "src/mvdm-host/softpc.new/base/ccpu386/fpu.c": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      }
+    ],
+    "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SINIT011.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SINIT012.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SINIT013.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID000.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID001.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID002.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID003.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID004.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID005.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID006.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID007.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID008.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID009.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID010.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID011.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID012.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID013.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID014.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID015.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID016.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID017.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID018.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID019.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID020.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID021.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID022.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID023.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID024.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID025.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID026.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID027.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID028.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID029.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID030.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SINIT011.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SINIT012.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SINIT013.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID000.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID001.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID002.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID003.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID004.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID005.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID006.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID007.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID008.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID009.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID010.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID011.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID012.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID013.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID014.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID015.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID016.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID017.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID018.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID019.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID020.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID021.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID022.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID023.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID024.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID025.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID026.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID027.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID028.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID029.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/SEVID030.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      }
+    ],
+    "src/mvdm-host/softpc.new/base/disks/fdisk.c": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/fdisk.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/fdisk.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      }
+    ],
+    "src/mvdm-host/softpc.new/base/inc/dma.h": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/at_dma.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/at_dma.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-depth1-alltests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-depth1-alltests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      }
+    ],
+    "src/mvdm-host/softpc.new/base/inc/equip.h": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_vide.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/video.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_vide.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_vide.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/video.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_vide.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      }
+    ],
+    "src/mvdm-host/softpc.new/base/inc/ios.h": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/in.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/out.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/tape_io.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/at_dma.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/cmosnt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/ica.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/timer.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/unexp_nt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/diskbios.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/fdisk.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/fla.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/gfi.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/support/time_day.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/support/ios.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_prts.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_vide.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/video.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/v7_ports.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/v7_video.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_prts.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_vide.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_read.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/cga.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/comms/com.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/comms/printer.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/comms/printer_.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_error.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_com.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_det.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_umb.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/in.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/out.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/reset.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/bios/tape_io.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/at_dma.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/cmosnt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/ica.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/timer.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/system/unexp_nt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/diskbios.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/fdisk.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/fla.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/gfi.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/support/time_day.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/support/ios.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_prts.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_vide.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/video.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/v7_ports.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/v7_video.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_prts.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/vga_vide.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_read.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/video/cga.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/comms/com.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/comms/printer.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/comms/printer_.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_error.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_com.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_det.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_umb.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-depth1-alltests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/tests/observation/keyba_observed.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-depth1-alltests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-depth1-alltests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-depth1-alltests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      }
+    ],
+    "src/mvdm-host/softpc.new/base/inc/j_c_lang.h": [
+      {
+        "scan": "bfs-depth1-alltests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/tests/mvdm-host/cvidc_vector_binding_fixture.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      }
+    ],
+    "src/mvdm-host/softpc.new/base/support/ios.c": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/support/ios.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/support/ios.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      }
+    ],
+    "src/mvdm-host/softpc.new/host/inc/cfpu_def.h": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      },
+      {
+        "scan": "bfs-depth1-alltests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/tests/mvdm-host/x87_layout_fixture.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      }
+    ],
+    "src/mvdm-host/softpc.new/host/src/nt_cga.c": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_cga.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_cga.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      }
+    ],
+    "src/mvdm-host/softpc.new/host/src/nt_ega.c": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_ega.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker"
+      },
+      {
+        "scan": "bfs-live",
+        "arch": "x64",
+        "file": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/src/nt_ega.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86"
+      }
+    ],
+    "src/non-mvdm/windows/core/ntuser/client/edecrare.c": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+      },
+      {
+        "scan": "bfs-depth1-tests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries"
+      }
+    ],
+    "src/non-mvdm/windows/core/ntuser/client/editec.c": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/editec.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+      },
+      {
+        "scan": "bfs-depth1-tests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/editec.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries"
+      }
+    ],
+    "src/non-mvdm/windows/core/ntuser/client/editml.c": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/editml.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+      },
+      {
+        "scan": "bfs-depth1-tests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/editml.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries"
+      }
+    ],
+    "src/non-mvdm/windows/core/ntuser/client/editsl.c": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/editsl.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+      },
+      {
+        "scan": "bfs-depth1-tests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/editsl.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries"
+      }
+    ],
+    "src/non-mvdm/windows/core/ntuser/client/edmlonce.c": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+      },
+      {
+        "scan": "bfs-depth1-tests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries"
+      }
+    ],
+    "src/non-mvdm/windows/core/ntuser/client/edslrare.c": [
+      {
+        "scan": "bfs-live",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32"
+      },
+      {
+        "scan": "bfs-depth1-tests",
+        "arch": "x86",
+        "file": "O:/repos.hobby/ntvdm64/src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+        "directory": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\call-boundaries"
+      }
+    ]
+  },
+  "existing_exclusions": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.h",
+      "macro": "SFELLOW",
+      "current_sha256": "1cdb7e3778ed570b7d02036d58c19485e4b744b76c2ce920a7a7db3e520f3d27",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_reg.h",
+      "original_sha256": "968a23e991127bf74872c9ca48d37341a64a4732fe9fec397d78464644138a35",
+      "local_line": 388,
+      "local_end": 392,
+      "original_line": 388,
+      "preceding_anchor": [
+        "#define SET_TF(x)\tCCPU_FLAGS[8] = (x)",
+        "#define SET_SF(x)\tCCPU_FLAGS[7] = (x)",
+        "#define SET_ZF(x)\tCCPU_FLAGS[6] = (x)"
+      ],
+      "following_anchor": [
+        "#define SET_DF(x)\tCCPU_FLAGS[10] = (x)",
+        "#define SET_OF(x)\tCCPU_FLAGS[11] = (x)",
+        "#define SET_IOPL(x)\tCCPU_FLAGS[12] = (x)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "macro": "BIGEND",
+      "current_sha256": "d402c49ff1f841f9c9ba1bbf839b4177d8fc147e99a0d5787e67b7f84201824d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\fpu.c",
+      "original_sha256": "1309239998f72b64583b184d33623c763c3c98ea185081f8d8b294cd9b8c524f",
+      "local_line": 461,
+      "local_end": 487,
+      "original_line": 460,
+      "preceding_anchor": [
+        "};",
+        "INTEL_COMP_NC",
+        "INTEL_COMP_NC,"
+      ],
+      "following_anchor": [
+        "LOCAL FPSTACKENTRY *FpatanTable[64];",
+        "LOCAL IBOOL NpxDisabled = FALSE; /* Set by the UIF */",
+        "IMPORT VOID DoNpxException();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+      "macro": "BIGEND",
+      "current_sha256": "e93c4939ffc90bd00dde4b73e31d8f01ff8bf3e6e17174a6fbb3b997b6a38516",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\j_c_lang.h",
+      "original_sha256": "24f207c966e47150f1b1be512ed73a4ff8c331009a212e4ceda76b822944dda1",
+      "local_line": 44,
+      "local_end": 46,
+      "original_line": 42,
+      "preceding_anchor": [
+        "#endif",
+        "#define\tREGLONG\t\t0",
+        "#define\tREGWORD\t\t0"
+      ],
+      "following_anchor": [
+        "#define __J_C_LANG\t/* mark as already included */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "macro": "BIGEND",
+      "current_sha256": "5908873bd5f6391511efc733b04537bd56007df973b95d0cd1124ab84ff283d4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fdisk.c",
+      "original_sha256": "f95a9a26a9ef201e9552f2459a6ba85080e17fb8ccae3fb6280c63eb2fa78607",
+      "local_line": 1622,
+      "local_end": 1624,
+      "original_line": 1641,
+      "preceding_anchor": [
+        "{",
+        "GLOBAL VOID fdisk_outw IFN2(io_addr, port, USHORT, value)",
+        "}"
+      ],
+      "following_anchor": [
+        "switch (port)",
+        "{",
+        "case TFBASE:"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "macro": "BIGEND",
+      "current_sha256": "5908873bd5f6391511efc733b04537bd56007df973b95d0cd1124ab84ff283d4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fdisk.c",
+      "original_sha256": "f95a9a26a9ef201e9552f2459a6ba85080e17fb8ccae3fb6280c63eb2fa78607",
+      "local_line": 1639,
+      "local_end": 1641,
+      "original_line": 1659,
+      "preceding_anchor": [
+        "#endif",
+        "rmac(&value, IOWRITE);",
+        "#ifdef LITTLEND"
+      ],
+      "following_anchor": [
+        "break;",
+        "default:",
+        "dt1(DHW | PORTIO, 0, \"outw to port %x(hex) ignored!\\n\","
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "macro": "BIGEND",
+      "current_sha256": "1bd227f7ecaaa315551191e1f1d0d7ff6036dc0427e3c09f53262b3aeb036c52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\dma.h",
+      "original_sha256": "d69831cddb3de18bebe1532c659608b404686374324b3eeebed5607e15a774e4",
+      "local_line": 307,
+      "local_end": 309,
+      "original_line": 340,
+      "preceding_anchor": [
+        "#define\tDMA_PAGE_REDUNDANT_BITS\t0x10",
+        "#define\tDMA1_REDUNDANT_BITS\t0x01",
+        "#define\tDMA_REDUNDANT_BITS\t0x10"
+      ],
+      "following_anchor": [
+        "#ifdef LITTLEND",
+        "typedef union",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+      "macro": "BIGEND",
+      "current_sha256": "ea8760256e77d4d57a1dfe0f15d61a33ec30589db4425e257bb46fa0a2b817f1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\equip.h",
+      "original_sha256": "9530d21a819d9e3ff63d9fd8173f2c0df049cc48aa9ee49a740bad6db921e8aa",
+      "local_line": 23,
+      "local_end": 25,
+      "original_line": 23,
+      "preceding_anchor": [],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "macro": "SFELLOW",
+      "current_sha256": "4a87e916507f79d136c47e4b87815bffc3fc181c6f7e456ad21f2e48816e80ac",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ios.h",
+      "original_sha256": "ae58169de7aa969000f7cf4374d3d850b55d352c3d4c6edcf52dec0e985620a4",
+      "local_line": 451,
+      "local_end": 453,
+      "original_line": 482,
+      "preceding_anchor": [
+        ");",
+        "#endif\t/* ANSI */",
+        "void (*func) IPT2(io_addr, io_address, half_word *, value)"
+      ],
+      "following_anchor": [
+        "IMPORT void\tio_define_in_routines",
+        "(",
+        "#ifdef\tANSI"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "macro": "SFELLOW",
+      "current_sha256": "4a87e916507f79d136c47e4b87815bffc3fc181c6f7e456ad21f2e48816e80ac",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ios.h",
+      "original_sha256": "ae58169de7aa969000f7cf4374d3d850b55d352c3d4c6edcf52dec0e985620a4",
+      "local_line": 477,
+      "local_end": 479,
+      "original_line": 521,
+      "preceding_anchor": [
+        ");",
+        "#endif\t/* ANSI */",
+        "void (*func) IPT2(io_addr, io_address, half_word, value)"
+      ],
+      "following_anchor": [
+        "IMPORT void\tio_define_out_routines",
+        "(",
+        "#ifdef\tANSI"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/j_c_lang.h",
+      "macro": "BIGEND",
+      "current_sha256": "d25433b094bf7101a8a390f8eb8e3b233a93cd60ef4ce9e81d77d5600c17e885",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\j_c_lang.h",
+      "original_sha256": "1c0727f420986a3cde9992af5cf3c4c7b084029f3a3a4c04ad7549e7b01235a4",
+      "local_line": 42,
+      "local_end": 44,
+      "original_line": 42,
+      "preceding_anchor": [
+        "#endif",
+        "#define\tREGLONG\t\t0",
+        "#define\tREGWORD\t\t0"
+      ],
+      "following_anchor": [
+        "#define __J_C_LANG\t/* mark as already included */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "macro": "BIGEND",
+      "current_sha256": "6ea5365b039b059a4b16dbe2c8d0f630c4db670105159644fcfd7d84630038c6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\ios.c",
+      "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+      "local_line": 207,
+      "local_end": 209,
+      "original_line": 220,
+      "preceding_anchor": [
+        "#endif\t\t\t\t/* LITTLEND */",
+        "#ifdef LITTLEND",
+        "(io_address, &temp.byte.high);"
+      ],
+      "following_anchor": [
+        "}",
+        "=============================== generic_outw ==================================",
+        "PURPOSE:"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "macro": "BIGEND",
+      "current_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\cfpu_def.h",
+      "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f",
+      "local_line": 103,
+      "local_end": 105,
+      "original_line": 68,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "#ifdef LITTLEND",
+        "#define HOST_R64_BYTE_0 7",
+        "#define HOST_R64_BYTE_1 6"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "macro": "BIGEND",
+      "current_sha256": "527d692afa2ed9001c79d64d53e52cbbfbf8a1b0aaeb07efc05ae5191339db52",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "local_line": 147,
+      "local_end": 149,
+      "original_line": 152,
+      "preceding_anchor": [
+        "byte4 = ( i & 0xC0 ) >> 6;",
+        "byte3 = ( i & 0x30 ) >> 4;",
+        "byte2 = ( i & 0x0C ) >> 2;"
+      ],
+      "following_anchor": [
+        "#ifdef LITTLEND",
+        "cga_med_graph_hi_nyb[i]",
+        "= ( byte3 << 24 ) | ( byte3 << 16)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "macro": "BIGEND",
+      "current_sha256": "a67f73bd95a1fe81e2b878a63dd145ad9a486d701cc3a3f2c58841db080f48d3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ega.c",
+      "original_sha256": "ebc58583cec7e257a997185a1ab83f3284dbd1efe6e06c99f680bcce93dca695",
+      "local_line": 190,
+      "local_end": 192,
+      "original_line": 191,
+      "preceding_anchor": [
+        "byte7 = ( i & 0x80 ) >> 7;",
+        "byte6 = ( i & 0x40 ) >> 6;",
+        "byte5 = ( i & 0x20 ) >> 5;"
+      ],
+      "following_anchor": [
+        "#ifdef LITTLEND",
+        "or_of_bytes01 = ( byte0 << 24 ) | ( byte0 << 16 ) |",
+        "( byte1 << 8 ) | byte1;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "macro": "BIGEND",
+      "current_sha256": "a67f73bd95a1fe81e2b878a63dd145ad9a486d701cc3a3f2c58841db080f48d3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ega.c",
+      "original_sha256": "ebc58583cec7e257a997185a1ab83f3284dbd1efe6e06c99f680bcce93dca695",
+      "local_line": 395,
+      "local_end": 397,
+      "original_line": 416,
+      "preceding_anchor": [
+        "byte7 = (i & 0x80) >> 7;",
+        "byte6 = (i & 0x40) >> 6;",
+        "byte5 = (i & 0x20) >> 5;"
+      ],
+      "following_anchor": [
+        "#ifdef LITTLEND",
+        "or_of_bytes1 = (byte0 << 24) | (byte1 << 16) | (byte2 << 8) | byte3;",
+        "or_of_bytes2 = (byte4 << 24) | (byte5 << 16) | (byte6 << 8) | byte7;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "c6491769dededbc2572ff3dce2f5402b54fd4d7cb0b6590e8bb35c52565e42a2",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edecrare.c",
+      "original_sha256": "b50e0f8f305f6456b3a952ddd63c815357136f222328c6d83dd0e76e697b5634",
+      "local_line": 22,
+      "local_end": 24,
+      "original_line": 22,
+      "preceding_anchor": [
+        "typedef BOOL (*PFNCHARWIDTH)(HDC, UINT, UINT, LPINT);",
+        "typedef BOOL (*PFNABCWIDTHS)(HDC, UINT, UINT, LPABC);",
+        "#define WS_EX_EDGEMASK (WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE)"
+      ],
+      "following_anchor": [
+        "int ECGetCaretWidth(BOOL fMultiLine)",
+        "{",
+        "return fMultiLine ? 2 : 1;"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "c6491769dededbc2572ff3dce2f5402b54fd4d7cb0b6590e8bb35c52565e42a2",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edecrare.c",
+      "original_sha256": "b50e0f8f305f6456b3a952ddd63c815357136f222328c6d83dd0e76e697b5634",
+      "local_line": 283,
+      "local_end": 285,
+      "original_line": 317,
+      "preceding_anchor": [
+        "ECReleaseEditDC(ped, hdc, TRUE);",
+        "ped->hkl = GetKeyboardLayout(0);",
+        "ped->charSet = GetTextCharset(hdc);"
+      ],
+      "following_anchor": [
+        "return TRUE;",
+        "}",
+        "\\***************************************************************************/"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "c6491769dededbc2572ff3dce2f5402b54fd4d7cb0b6590e8bb35c52565e42a2",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edecrare.c",
+      "original_sha256": "b50e0f8f305f6456b3a952ddd63c815357136f222328c6d83dd0e76e697b5634",
+      "local_line": 338,
+      "local_end": 340,
+      "original_line": 374,
+      "preceding_anchor": [
+        "UserLocalFree(ped->charWidthBuffer);",
+        "if (ped->charWidthBuffer)",
+        "}"
+      ],
+      "following_anchor": [
+        "FreeLookasideEntry(&EditLookaside, ped);",
+        "}",
+        "NtUserSetWindowFNID(HWq(pwnd), FNID_CLEANEDUP_BIT);"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "c6491769dededbc2572ff3dce2f5402b54fd4d7cb0b6590e8bb35c52565e42a2",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edecrare.c",
+      "original_sha256": "b50e0f8f305f6456b3a952ddd63c815357136f222328c6d83dd0e76e697b5634",
+      "local_line": 386,
+      "local_end": 388,
+      "original_line": 424,
+      "preceding_anchor": [
+        "}",
+        "ECReleaseEditDC(ped, hdc, TRUE);",
+        "ped->cPasswordCharWidth = max(size.cx, 1);"
+      ],
+      "following_anchor": [
+        "if (pwchar)",
+        "SetWindowState(ped->pwnd, EFPASSWORD);",
+        "else"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "c6491769dededbc2572ff3dce2f5402b54fd4d7cb0b6590e8bb35c52565e42a2",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edecrare.c",
+      "original_sha256": "b50e0f8f305f6456b3a952ddd63c815357136f222328c6d83dd0e76e697b5634",
+      "local_line": 710,
+      "local_end": 712,
+      "original_line": 749,
+      "preceding_anchor": [
+        "}",
+        "ped->wMaxNegCcharPos = HIWORD(dwMaxOverlapChars);     // Right",
+        "ped->wMaxNegAcharPos = LOWORD(dwMaxOverlapChars);     // Left"
+      ],
+      "following_anchor": [
+        "if (!hfont) {",
+        "ped->cxSysCharWidth = ped->aveCharWidth;",
+        "ped->cySysCharHeight= ped->lineHeight;"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "1739e989fffac5861649b8a27692097dbf814f5babeaf4f65bf2f9df7a97e835",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editec.c",
+      "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+      "local_line": 309,
+      "local_end": 311,
+      "original_line": 309,
+      "preceding_anchor": [
+        "EnableMenuItem(hMenu, EM_SETSEL, MF_BYCOMMAND | MFS_GRAYED);",
+        "if ((ped->ichMinSel == 0) && (ped->ichMaxSel == ped->cch))",
+        "EnableMenuItem(hMenu, WM_COPY, MF_BYCOMMAND | MFS_GRAYED);"
+      ],
+      "following_anchor": [
+        "if (pt->x == -1 && pt->y == -1) {",
+        "RECT rc;",
+        "GetWindowRect(hwnd, &rc);"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "1739e989fffac5861649b8a27692097dbf814f5babeaf4f65bf2f9df7a97e835",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editec.c",
+      "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+      "local_line": 349,
+      "local_end": 351,
+      "original_line": 350,
+      "preceding_anchor": [
+        "if (cmd && (cmd != -1)) {",
+        "NtUserDestroyMenu(hMenu);",
+        "x, y, hwnd, NULL);"
+      ],
+      "following_anchor": [
+        "SendMessage(hwnd, cmd, 0, (cmd == EM_SETSEL) ? 0xFFFFFFFF : 0L );",
+        "}",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "1739e989fffac5861649b8a27692097dbf814f5babeaf4f65bf2f9df7a97e835",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editec.c",
+      "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+      "local_line": 1680,
+      "local_end": 1682,
+      "original_line": 1684,
+      "preceding_anchor": [
+        "ped->fDirty = TRUE;",
+        "ped->ichMinSel = ped->ichMaxSel = (ped->ichCaret += cchInsert);",
+        "ECMergeUndoInsertInfo(Pundo(ped), ped->ichCaret, cchInsert);"
+      ],
+      "following_anchor": [
+        "return TRUE;",
+        "}",
+        "\\***************************************************************************/"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "1739e989fffac5861649b8a27692097dbf814f5babeaf4f65bf2f9df7a97e835",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editec.c",
+      "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+      "local_line": 1951,
+      "local_end": 1953,
+      "original_line": 1957,
+      "preceding_anchor": [
+        "ECEmptyUndo(Pundo(ped));",
+        "ped->fDirty = FALSE;",
+        "ped->xOffset = ped->ichScreenStart = 0;"
+      ],
+      "following_anchor": [
+        "if (ped->fSingle) {",
+        "if (!ped->listboxHwnd)",
+        "ECNotifyParent(ped, EN_UPDATE);"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "1739e989fffac5861649b8a27692097dbf814f5babeaf4f65bf2f9df7a97e835",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editec.c",
+      "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+      "local_line": 2313,
+      "local_end": 2315,
+      "original_line": 2330,
+      "preceding_anchor": [
+        "switch (message) {",
+        "lreturn = 1L;",
+        "ped = ((PEDITWND)pwnd)->ped;"
+      ],
+      "following_anchor": [
+        "goto HandleEditMsg;",
+        "break;",
+        "#ifdef SUPPORT_LPK"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "1739e989fffac5861649b8a27692097dbf814f5babeaf4f65bf2f9df7a97e835",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editec.c",
+      "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+      "local_line": 2320,
+      "local_end": 2322,
+      "original_line": 2345,
+      "preceding_anchor": [
+        "break;",
+        "goto HandleEditMsg;",
+        "#endif // SUPPORT_LPK"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "1739e989fffac5861649b8a27692097dbf814f5babeaf4f65bf2f9df7a97e835",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editec.c",
+      "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+      "local_line": 2325,
+      "local_end": 2327,
+      "original_line": 2358,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "goto HandleEditMsg;",
+        "case WM_COPY:",
+        "lreturn = (LONG)ECCopy(ped);"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "local_line": 32,
+      "local_end": 34,
+      "original_line": 32,
+      "preceding_anchor": [
+        "{",
+        "UINT MLGetLineWidth(HDC hdc, LPSTR lpstr, int nCnt, PED ped)",
+        "\\***************************************************************************/"
+      ],
+      "following_anchor": [
+        "return(ECTabTheTextOut(hdc, 0, 0, 0, 0, lpstr, nCnt, 0, ped, 0, ECT_CALC, NULL));",
+        "}",
+        "\\***************************************************************************/"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "local_line": 514,
+      "local_end": 516,
+      "original_line": 517,
+      "preceding_anchor": [
+        "}",
+        "cch = (pText - pLineStart)/ped->cbChar;",
+        "pText = pLineStart;"
+      ],
+      "following_anchor": [
+        "if (ped->format != ES_LEFT) {",
+        "xOffset = MLCalcXOffset(ped, hdc, iline);",
+        "} else {"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "local_line": 525,
+      "local_end": 527,
+      "original_line": 531,
+      "preceding_anchor": [
+        "MLGetLineWidth(hdc, pLineStart, cch, ped);",
+        "xPosition = ped->rcFmt.left + xOffset +",
+        "}"
+      ],
+      "following_anchor": [
+        "ECUnlock(ped);",
+        "ppt->x = xPosition;",
+        "ppt->y = yPosition;"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "local_line": 565,
+      "local_end": 567,
+      "original_line": 571,
+      "preceding_anchor": [
+        "int iCurWidth;",
+        "int iOldTextWidth;",
+        "int textWidth;"
+      ],
+      "following_anchor": [
+        "line = ped->ichScreenStart;",
+        "if (height <= ped->rcFmt.top) {",
+        "line = max(0, line-1);"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "local_line": 1384,
+      "local_end": 1386,
+      "original_line": 1392,
+      "preceding_anchor": [
+        "if(ped->rcFmt.right > ped->rcFmt.left) {",
+        "} else {",
+        "ped->maxPixelWidth = max(ped->maxPixelWidth,(int)LineWidth);"
+      ],
+      "following_anchor": [
+        "{",
+        "if (ped->fAnsi) {",
+        "ichLineEnd = ichLineStart +"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "local_line": 2725,
+      "local_end": 2727,
+      "original_line": 2752,
+      "preceding_anchor": [
+        "SelectObject(hdc, ped->hFont);",
+        "if (ped->hFont)",
+        "ECSetEditClip(ped, hdc, fIncludeLeftMargin);"
+      ],
+      "following_anchor": [
+        "fUp = TRUE;",
+        "if (fUp)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "local_line": 2788,
+      "local_end": 2790,
+      "original_line": 2823,
+      "preceding_anchor": [
+        "hdc = ECGetEditDC(ped, TRUE);",
+        "ped->fFocus = 1; /* Set focus */",
+        "BOOL bDoCaret;"
+      ],
+      "following_anchor": [
+        "bDoCaret = TRUE;",
+        "if (bDoCaret)",
+        "NtUserCreateCaret(ped->hwnd, (HBITMAP)NULL, ECGetCaretWidth(TRUE), ped->lineHeight);"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "local_line": 2860,
+      "local_end": 2862,
+      "original_line": 2897,
+      "preceding_anchor": [
+        "}",
+        "ECReleaseEditDC(ped, hdc, FALSE);",
+        "MLDrawText(ped, hdc, ped->ichMinSel, ped->ichMaxSel, TRUE);"
+      ],
+      "following_anchor": [
+        "bKillCaret = TRUE;",
+        "if(bKillCaret) {",
+        "NtUserDestroyCaret();"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "local_line": 3078,
+      "local_end": 3080,
+      "original_line": 3117,
+      "preceding_anchor": [
+        "break;",
+        "}",
+        "MLScroll(ped, fVert, EM_LINESCROLL, cLineScroll, TRUE);"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "local_line": 3088,
+      "local_end": 3090,
+      "original_line": 3147,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "MLKeyDown(ped, (UINT)wParam, 0);",
+        "break;",
+        "case WM_KILLFOCUS:"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "local_line": 3100,
+      "local_end": 3102,
+      "original_line": 3164,
+      "preceding_anchor": [
+        "case WM_KILLFOCUS:",
+        "break;",
+        "MLKeyDown(ped, (UINT)wParam, 0);"
+      ],
+      "following_anchor": [
+        "MLKillFocus(ped);",
+        "break;",
+        "case WM_CAPTURECHANGED:"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "591c2c88edfdf58c738f489eb77660851e0345e85b182061d9edad342730eb9d",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "local_line": 3528,
+      "local_end": 3530,
+      "original_line": 3597,
+      "preceding_anchor": [
+        "}",
+        "return;",
+        "NtUserInvalidateRect(ped->hwnd, &rcStrip, TRUE);"
+      ],
+      "following_anchor": [
+        "if (ped->format != ES_LEFT) {",
+        "ichStart = ped->chLines[wCurLine];",
+        "ichEnd = ped->chLines[wEndLine] + MLLine(ped, wEndLine);"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "local_line": 87,
+      "local_end": 89,
+      "original_line": 87,
+      "preceding_anchor": [
+        "return (-30000);",
+        "else if (cchDiff < -1000)",
+        "return (30000);"
+      ],
+      "following_anchor": [
+        "if (ped->fNonPropFont)",
+        "return (ped->rcFmt.left + cchDiff*ped->aveCharWidth);",
+        "if (ped->charPasswordChar)"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "local_line": 206,
+      "local_end": 208,
+      "original_line": 207,
+      "preceding_anchor": [
+        "PSTR   pText;",
+        "int    iStCount;",
+        "{"
+      ],
+      "following_anchor": [
+        "CopyRect(lpClipRect, &ped->rcFmt);",
+        "pText = ECLock(ped) ;",
+        "if ((iStCount = (int)(ichStart - ped->ichScreenStart)) > 0) {"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "local_line": 383,
+      "local_end": 385,
+      "original_line": 388,
+      "preceding_anchor": [
+        "return;",
+        "if (xClipStPos >= xClipEndPos || !_IsWindowVisible(ped->pwnd) )",
+        "HBRUSH  hbrBack;"
+      ],
+      "following_anchor": [
+        "ichNewStart = max((int)(ichStart - ped->wMaxNegCcharPos), 0);",
+        "iCount = (int)(min(ichStart+iCount+ped->wMaxNegAcharPos, ped->cch)",
+        "- ichNewStart);"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "local_line": 572,
+      "local_end": 574,
+      "original_line": 581,
+      "preceding_anchor": [
+        "return;",
+        "if (!_IsWindowVisible(ped->pwnd))",
+        "SIZE   size;"
+      ],
+      "following_anchor": [
+        "if (ichStart < ped->ichScreenStart )",
+        "ichStart = ped->ichScreenStart;",
+        "CopyRect((LPRECT)&rc, (LPRECT)&ped->rcFmt);"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "local_line": 744,
+      "local_end": 746,
+      "original_line": 757,
+      "preceding_anchor": [
+        "return (FALSE);",
+        "if (!ped->fAutoHScroll)",
+        "ICH cch;"
+      ],
+      "following_anchor": [
+        "if (ped->ichCaret <= ped->ichScreenStart) {",
+        "pTextScreenStart = ECLock(ped);",
+        "scrollAmount = ECCchInWidth(ped, hdc, (LPSTR)pTextScreenStart,"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "local_line": 791,
+      "local_end": 793,
+      "original_line": 806,
+      "preceding_anchor": [
+        "}",
+        "ECUnlock(ped);",
+        "}"
+      ],
+      "following_anchor": [
+        "if (ped->ichScreenStart != newScreenStartX) {",
+        "if (ped->wLeftMargin && (ped->ichScreenStart == 0)) {",
+        "RECT   rc;"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "local_line": 1599,
+      "local_end": 1601,
+      "original_line": 1614,
+      "preceding_anchor": [
+        "LPSTR lpText;",
+        "ICH cchLo, cchHi;",
+        "ICH cch;"
+      ],
+      "following_anchor": [
+        "if (width <= ped->rcFmt.left) {",
+        "if (ped->ichScreenStart)",
+        "return (ped->ichScreenStart - 1);"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "local_line": 1924,
+      "local_end": 1926,
+      "original_line": 1940,
+      "preceding_anchor": [
+        "hdc = ECGetEditDC(ped, TRUE);",
+        "ped->fFocus = TRUE; /* Set focus */",
+        "if (!ped->fFocus) {"
+      ],
+      "following_anchor": [
+        "{",
+        "bDoCaret = TRUE;",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "local_line": 1978,
+      "local_end": 1980,
+      "original_line": 1996,
+      "preceding_anchor": [
+        "if (ped->fFocus) {",
+        "BOOL bKillCaret;",
+        "{"
+      ],
+      "following_anchor": [
+        "bKillCaret = TRUE;",
+        "if (bKillCaret) {",
+        "NtUserDestroyCaret();"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "local_line": 2170,
+      "local_end": 2172,
+      "original_line": 2190,
+      "preceding_anchor": [
+        "break;",
+        "}",
+        "return code;"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "local_line": 2180,
+      "local_end": 2182,
+      "original_line": 2218,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "SLKeyDown(ped, wParam, 0);",
+        "break;",
+        "case WM_KILLFOCUS:"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "local_line": 2345,
+      "local_end": 2347,
+      "original_line": 2388,
+      "preceding_anchor": [
+        "else",
+        "}",
+        "break;"
+      ],
+      "following_anchor": [
+        "goto PassToDefaultWindowProc;",
+        "break;",
+        "case EM_GETLINE:"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "20fcfff84bc7ac88d51822df0ba212b5e66603d7beb8abf899a6a389354a9b78",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edmlonce.c",
+      "original_sha256": "ac63e8b953b97c91fe4f0c7813919cf1fa482ea253e2edfd3ef7cf606e5940a2",
+      "local_line": 72,
+      "local_end": 76,
+      "original_line": 72,
+      "preceding_anchor": [
+        "ped->format = ES_RIGHT;",
+        "if (TestWF(ped->pwnd, WEFRIGHT) && !ped->format)",
+        "ped->format = (LOWORD(windowStyle) & LOWORD(ES_FMTMASK));"
+      ],
+      "following_anchor": [
+        "{",
+        "windowStyle &= ~WS_HSCROLL;",
+        "ClearWindowState(ped->pwnd, WFHSCROLL);"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+      "macro": "SUPPORT_LPK",
+      "current_sha256": "82c0512cccbd16712dc283f942b102ba973e97ab9f2bcc1fa49f9fe47a9c6bf4",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edslrare.c",
+      "original_sha256": "b33dea4aa66b7713b651b259a37d7f993802f40c042514122b73580baec4f0df",
+      "local_line": 52,
+      "local_end": 54,
+      "original_line": 52,
+      "preceding_anchor": [
+        "ped->listboxHwnd = GetDlgItem(lpCreateStruct->hwndParent, CBLISTBOXID);",
+        "if (windowStyle & ES_COMBOBOX)",
+        "ped->undoType = UNDO_NONE;"
+      ],
+      "following_anchor": [
+        "ECSetFont(ped, NULL, FALSE);",
+        "if ((PVOID)lpCreateStruct->lpszName > MM_HIGHEST_USER_ADDRESS)",
+        "lpWindowText = REBASEPTR(ped->pwnd, (PVOID)lpCreateStruct->lpszName);"
+      ],
+      "guard": "#error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.",
+      "blank_lines_after_guard": 0
+    }
+  ],
+  "limitations": "No inference for unobserved files, changed snapshots, failed contexts, unsupported original builds, or non-sole-error bodies; no source modified."
+}

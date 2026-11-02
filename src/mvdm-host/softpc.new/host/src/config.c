@@ -458,9 +458,9 @@ GLOBAL VOID config( VOID )
  * such allocator: its SAS is the entire standalone machine, so retain the
  * original non-i386 DPMI-headroom calculation for this one backend. */
 #if (defined(i386) || defined(_M_IX86)) && !defined(CPU_40_STYLE)
-	 // adding 1024 below is for conventional memory
-	 vdmMemorySize = xmsMemorySize + emsMemorySize + 1024;
+#error Excluded unsupported non-CPU40 i386 memory-size profile
 #else
+#line 464
 	 vdmMemorySize = GetVDMSize(VDMForWOW);
 
 	 // Extend the vdm size if the user asks for it through a .PIF.
@@ -735,7 +735,13 @@ struct
 
 void host_runtime_init()
 {
+#ifdef MONITOR
+#error Excluded unsupported monitor floating-point status
+#else
+#line 738
     runtime_status.npx_enabled = TRUE;
+#endif
+#line 739
 }
 
 short host_runtime_inquire IFN1(UTINY, what)

@@ -250,9 +250,9 @@
      */
 
 #if 0
-     if (port == ADLIB_DATA_PORT && AdlibRegister == AD_NEW) {
-         data &= 0xFE;
-     }
+#error Excluded unsupported original disabled branch
+
+
 #endif
 
 
@@ -316,7 +316,7 @@
                          if ((data & 1) && !(Status & 0x40)) {
                              dprintf2(("Timer 1 started"));
 #if 0
-                             Timer1Started = TRUE;
+#error Excluded unsupported original disabled branch
 #else
                              Status |= 0xC0;
 #endif
@@ -327,7 +327,7 @@
                          if ((data & 2) && !(Status & 0x20)) {
                              dprintf2(("Timer 2 started"));
 #if 0
-                             Timer2Started = TRUE;
+#error Excluded unsupported original disabled branch
 #else
                              Status |= 0xA0;
 #endif
@@ -374,42 +374,42 @@
      }
 
 #if 0 // WSS interrupt screwed this up
-    /*
-     *  Are we expecting a state change ?
-     */
+#error Excluded unsupported original disabled branch
 
-     if (Timer1Started || Timer2Started) {
 
-        /*
-         *  Read the status port from the driver - this is how the
-         *  driver interprets read.
-         *  Well, actually don't because the WSS driver doesn't work!
-         */
 
-         if (!ReadFile(DeviceHandle,
-                       &Status,
-                       1,
-                       &BytesRead,
-                       NULL)) {
 
-             dprintf1(("Failed to read from device - code %d", GetLastError()));
-         } else {
 
-            /*
-             *  Look for state change
-             */
 
-             if (Status & 0x40) {
-                 Timer1Started = FALSE;
-                 dprintf2(("Timer 1 finished"));
-             }
 
-             if (Status & 0x20) {
-                 Timer2Started = FALSE;
-                 dprintf2(("Timer 2 finished"));
-             }
-         }
-     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif
 
      dprintf3(("Data read was %2X", Status));

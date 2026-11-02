@@ -36,5 +36,5 @@ extern int terminal_type;
 #ifndef SUN_VA
 #define HOST_HERC_PAINT_OFFSET(row)	(row * get_char_height())
 #else
-#define HOST_HERC_PAINT_OFFSET(row)	(row)
+#error Excluded unsupported SUN_VA configuration
 #endif /* SUN_VA */

@@ -4,7 +4,8 @@
 #include "wow_creation_owner_fixture.h"
 #include <stdio.h>
 
-/* Hash-pinned, exact W32Win16WndProcEx body. Task TLS and final guest callback
+/* Byte-exact current mirror W32Win16WndProcEx body, with recorded source hash.
+ * Task TLS and final guest callback
  * are controlled; selected messages bypass message thunks. Not Win16 execution. */
 static OPENNT_SUPPORT_TEB teb;
 static TD task;

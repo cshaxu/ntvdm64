@@ -1,0 +1,29 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+    "current_sha256": "3e214e9d9dba55104613bc7371b6b881e3bfbd26a8d6c20777801b9dbcb13f5f",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\copy_fnc.c",
+    "original_sha256": "320d697e9969cf146d5b0f94813aa62b501b0eefeff31806b22d463912965518",
+    "original_line": 115,
+    "current_line": 95,
+    "registrations": [
+      "MVDM-HOST-DIV-064",
+      "MVDM-HOST-DIV-562"
+    ],
+    "disposition": "original #if 0 intentionally selects original fill loop through #if 1; current else is sole #error",
+    "scope": "first-depth condition correspondence; selected behavior retains separate existing evidence"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+    "current_sha256": "7cda05518a3473d52c7383620cd000f936b93219a1e746461c26116cc0531565",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_msscs.c",
+    "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+    "original_line": 123,
+    "current_line": 140,
+    "registrations": [
+      "MVDM-HOST-DIV-039"
+    ],
+    "disposition": "original #ifndef i386 replaced by CPU40 machine-owner selector, avoiding hardware V86 shell",
+    "scope": "first-depth condition correspondence; selected behavior retains separate existing evidence"
+  }
+]

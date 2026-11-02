@@ -1,0 +1,1079 @@
+{
+  "scope": "first-depth sole-error branches per source and macro",
+  "contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+      "includes": 299,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "b7a1b588e189265f5023a260f8df7118263962de3f87a498e57be997f13631bd",
+      "includes": 167,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe",
+      "includes": 209,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "614a25ecb9008e7e39acbf694a8fe96b3511c53c00a7ecd7eb8c6a140ff559df",
+      "includes": 202,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "includes": 203,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "ad063a5df6d1962c66e6ea02fc1125921fc49f57464d19b7667360aa51b0bb0c",
+      "includes": 175,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "86936aef29e5d5d3a02166375586bffdcdf4afb48c5d9f50532947516cbbfa51",
+      "includes": 188,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "21846776c2f3538e914cd255780d7e252e9381e2a82ed299709046752f320625",
+      "includes": 180,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "1430887916bcd42c4f7da75cbdff04a8823658a508b823d61e9784489a1e1152",
+      "includes": 184,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "includes": 185,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "includes": 189,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "includes": 211,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "00953ea06ef57d3e4fe534cfa8e83781656c6de77a2b0e6e63ae341fbac5822f",
+      "includes": 157,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "includes": 238,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "tests/observation/keyba_observed.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "c1f8f0137fdf3f222f95d294738c9a4c34a358469ac448a0e1f0718bd7c2d5fa",
+      "includes": 203,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "tests/observation/nt_event_observed.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "48786018a381951ff2cf9167e8233a8f538c0e798e1a218c8cd3535dca82ef2a",
+      "includes": 254,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+      "includes": 299,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "b7a1b588e189265f5023a260f8df7118263962de3f87a498e57be997f13631bd",
+      "includes": 167,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe",
+      "includes": 209,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "614a25ecb9008e7e39acbf694a8fe96b3511c53c00a7ecd7eb8c6a140ff559df",
+      "includes": 202,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "includes": 203,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "ad063a5df6d1962c66e6ea02fc1125921fc49f57464d19b7667360aa51b0bb0c",
+      "includes": 175,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "86936aef29e5d5d3a02166375586bffdcdf4afb48c5d9f50532947516cbbfa51",
+      "includes": 188,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "21846776c2f3538e914cd255780d7e252e9381e2a82ed299709046752f320625",
+      "includes": 180,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "1430887916bcd42c4f7da75cbdff04a8823658a508b823d61e9784489a1e1152",
+      "includes": 184,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "includes": 185,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "includes": 189,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "includes": 211,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "00953ea06ef57d3e4fe534cfa8e83781656c6de77a2b0e6e63ae341fbac5822f",
+      "includes": 157,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "includes": 238,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "tests/observation/keyba_observed.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "c1f8f0137fdf3f222f95d294738c9a4c34a358469ac448a0e1f0718bd7c2d5fa",
+      "includes": 203,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "tests/observation/nt_event_observed.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "48786018a381951ff2cf9167e8233a8f538c0e798e1a218c8cd3535dca82ef2a",
+      "includes": 254,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          165,
+          "#define YODA                           //ie YODA in non x86 checked only"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "classified": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "local_line": 82,
+      "original_line": 82,
+      "macro": "GISP_SVGA",
+      "anchors": [
+        [
+          "before",
+          82,
+          [
+            "#include \"quick_ev.h\"",
+            "#include \"keyba.h\"",
+            "#include \"rom.h\""
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "local_line": 112,
+      "original_line": 112,
+      "macro": "GISP_SVGA",
+      "anchors": [
+        [
+          "before",
+          112,
+          [
+            "#ifdef DPMI",
+            "IMPORT void DPMI_reset IPT0();",
+            "#endif /* DPMI */"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "local_line": 198,
+      "original_line": 199,
+      "macro": "GISP_SVGA",
+      "anchors": [
+        [
+          "before",
+          199,
+          [
+            "*/",
+            "sas_storew(int_addr(0xE), DISKETTE_INT_OFFSET);",
+            "sas_storew(int_addr(0xE) + 2, DISKETTE_INT_SEGMENT);"
+          ]
+        ],
+        [
+          "after",
+          199,
+          [
+            "sas_storew(int_addr(0x11), EQUIPMENT_OFFSET);",
+            "sas_storew(int_addr(0x11) + 2, EQUIPMENT_SEGMENT);",
+            "sas_storew(int_addr(0x12), MEMORY_SIZE_OFFSET);"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "local_line": 677,
+      "original_line": 859,
+      "macro": "GISP_SVGA",
+      "anchors": [
+        [
+          "before",
+          859,
+          [
+            "/* Load up the amount of memory into the BIOS. */",
+            "sas_storew(MEMORY_VAR, host_get_memory_size());",
+            "gfxAdapt = (ULONG)config_inquire(C_GFX_ADAPTER, NULL);"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "local_line": 819,
+      "original_line": 775,
+      "macro": "SYNCH_TIMERS",
+      "anchors": [
+        [
+          "after",
+          775,
+          [
+            "goto NEXT_INST;",
+            "DO_INST:",
+            "#ifdef\tPIG"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "local_line": 4202,
+      "original_line": 4335,
+      "macro": "SYNCH_TIMERS",
+      "anchors": [
+        [
+          "before",
+          4335,
+          [
+            "#endif /* SYNCH_TIMERS */",
+            "quick_mode = FALSE;",
+            "/* Action RESET first. <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "local_line": 4222,
+      "original_line": 4353,
+      "macro": "SYNCH_TIMERS",
+      "anchors": [
+        [
+          "before",
+          4353,
+          [
+            "goto NEXT_INST;",
+            "}",
+            "/* Action Insignia (ie non Intel) Processing. <<<<<<<<<<<<<<< */"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "local_line": 4264,
+      "original_line": 4399,
+      "macro": "SYNCH_TIMERS",
+      "anchors": [
+        [
+          "before",
+          4399,
+          [
+            "Int1_f();   /* a CODE Breakpoint triggered */",
+            "}",
+            "}"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_line": 15,
+      "original_line": 15,
+      "macro": "SCCSID",
+      "anchors": [
+        [
+          "before",
+          15,
+          [
+            "*\t\t  For a detailed description of the Asynchronous Adaptor Card.",
+            "*",
+            "*/"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_line": 114,
+      "original_line": 114,
+      "macro": "IRET_HOOKS",
+      "anchors": [
+        [
+          "before",
+          114,
+          [
+            "int hw_interrupt_priority;",
+            "int com_baud_ind;",
+            "int had_first_read;"
+          ]
+        ],
+        [
+          "after",
+          114,
+          [
+            "#ifdef NTVDM",
+            "MODEM_STATUS_REG last_modem_status_value;",
+            "int modem_status_changed;"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_line": 131,
+      "original_line": 134,
+      "macro": "IRET_HOOKS",
+      "anchors": [
+        [
+          "after",
+          134,
+          [
+            "static int com_critical[NUM_SERIAL_PORTS];",
+            "#define is_com_critical(adapter)\t(com_critical[adapter] != 0)",
+            "#define com_critical_start(adapter)\t(++com_critical[adapter])"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_line": 611,
+      "original_line": 677,
+      "macro": "IRET_HOOKS",
+      "anchors": [
+        [
+          "before",
+          677,
+          [
+            "{",
+            "set_xmit_char_status(asp);",
+            "}"
+          ]
+        ],
+        [
+          "after",
+          677,
+          [
+            "}",
+            "else",
+            "#ifdef SHORT_TRACE"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_line": 1072,
+      "original_line": 1392,
+      "macro": "IRET_HOOKS",
+      "anchors": [
+        [
+          "before",
+          1392,
+          [
+            "host_com_unlock(adapter);",
+            "#endif",
+            "}"
+          ]
+        ],
+        [
+          "after",
+          1392,
+          [
+            "#ifdef  NTVDM",
+            "void com_recv_char(int adapter)",
+            "{"
+          ]
+        ]
+      ],
+      "guard": "#error Excluded unsupported IRET_HOOKS configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "local_line": 2134,
+      "original_line": 2572,
+      "macro": "IRET_HOOKS",
+      "anchors": [
+        [
+          "before",
+          2572,
+          [
+            "set_rts(adapter);",
+            "set_out1(adapter);",
+            "set_out2(adapter);"
+          ]
+        ],
+        [
+          "after",
+          2572,
+          [
+            "}",
+            "#ifndef COM3_ADAPTOR",
+            "#define COM3_ADAPTOR 0"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "source_sha256": "614a25ecb9008e7e39acbf694a8fe96b3511c53c00a7ecd7eb8c6a140ff559df",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "local_line": 46,
+      "original_line": 46,
+      "macro": "SCCSID",
+      "anchors": [
+        [
+          "before",
+          46,
+          [
+            "* Notes:",
+            "*",
+            "*/"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "source_sha256": "614a25ecb9008e7e39acbf694a8fe96b3511c53c00a7ecd7eb8c6a140ff559df",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "local_line": 692,
+      "original_line": 704,
+      "macro": "SECURE",
+      "anchors": [
+        [
+          "before",
+          704,
+          [
+            "0,0xff,0,0",
+            "};",
+            "#endif /* macintosh */"
+          ]
+        ],
+        [
+          "after",
+          704,
+          [
+            "LOCAL VOID calc_buff_6805_left IPT0();",
+            "LOCAL VOID do_host_key_down IPT1( int,key );",
+            "LOCAL VOID do_host_key_up IPT1( int,key );"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "source_sha256": "614a25ecb9008e7e39acbf694a8fe96b3511c53c00a7ecd7eb8c6a140ff559df",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "local_line": 707,
+      "original_line": 799,
+      "macro": "SECURE",
+      "anchors": [
+        [
+          "before",
+          799,
+          [
+            "#ifndef HUNTER",
+            "LOCAL INT buffer_status_8042 IPT0();",
+            "#endif"
+          ]
+        ],
+        [
+          "after",
+          799,
+          [
+            "=============================== keyba_running ==================================",
+            "PURPOSE:",
+            "This access function is used to by other modules to check whether"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "local_line": 43,
+      "original_line": 43,
+      "macro": "SECURE",
+      "anchors": [
+        [
+          "before",
+          43,
+          [
+            "#include \"gvi.h\"",
+            "#include \"host.h\"",
+            "#include \"trace.h\""
+          ]
+        ],
+        [
+          "after",
+          43,
+          [
+            "#include \"gmi.h\"",
+            "#include \"gfx_upd.h\"",
+            "#include \"cmos.h\""
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "local_line": 259,
+      "original_line": 264,
+      "macro": "GISP_SVGA",
+      "anchors": [
+        [
+          "after",
+          264,
+          [
+            "#ifndef A3CPU",
+            "(VOID) setup_global_data_ptr();",
+            "#endif\t/* not A3CPU */"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "source_sha256": "1430887916bcd42c4f7da75cbdff04a8823658a508b823d61e9784489a1e1152",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+      "local_line": 41,
+      "original_line": 41,
+      "macro": "SCCSID",
+      "anchors": [
+        [
+          "before",
+          41,
+          [
+            "*\t\t  Removed calls to cpu_sw_interrupt and replaced with",
+            "*\t\t  host_simulate",
+            "*/"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "source_sha256": "ad063a5df6d1962c66e6ea02fc1125921fc49f57464d19b7667360aa51b0bb0c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "local_line": 132,
+      "original_line": 132,
+      "macro": "SCCSID",
+      "anchors": [
+        [
+          "before",
+          132,
+          [
+            "*                   testing.",
+            "*",
+            "*/"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "source_sha256": "86936aef29e5d5d3a02166375586bffdcdf4afb48c5d9f50532947516cbbfa51",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_line": 34,
+      "original_line": 34,
+      "macro": "SCCSID",
+      "anchors": [
+        [
+          "before",
+          34,
+          [
+            "*                Also convert references to gettimeofday() to",
+            "*                host_getIdealTime().",
+            "*/"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "source_sha256": "86936aef29e5d5d3a02166375586bffdcdf4afb48c5d9f50532947516cbbfa51",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_line": 375,
+      "original_line": 383,
+      "macro": "SYNCH_TIMERS",
+      "anchors": [
+        [
+          "after",
+          383,
+          [
+            "LOCAL void updateIdealTime IPT0();",
+            "LOCAL void getIdealTime IPT1(struct host_timeval *, t);",
+            "#ifndef NTVDM"
+          ]
+        ]
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register."
+    }
+  ],
+  "limitations": [
+    "YODA has an included conditional definition and is not classified here.",
+    "Unmatched sources, headers, and other actual configurations remain pending.",
+    "No runtime or guest validation inferred."
+  ]
+}

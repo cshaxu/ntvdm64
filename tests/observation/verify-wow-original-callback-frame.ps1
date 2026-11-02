@@ -60,6 +60,6 @@ try {
         ([regex]::Matches($output,'ORIGINAL_CALLBACK_FRAME phase=')).Count -ne 4){throw 'Missing frame assertions'}
     if(([regex]::Matches((Get-Content "$root/abort.out" -Raw),'CALLBACK_ABORT_OK name=')).Count -ne 11){throw 'Missing complete abort phase/mode/terminal assertions'}
     @($sources|ForEach-Object {"$repo/$_"}) + @("$ProviderBuildRoot/build.ninja","$repo/tests/adapter-mvdm-host-out/wow/wow_original_callback_frame_fixture.c","$repo/src/wow32-dll/include/wow_callback_frame_lease.h") |
-        Get-FileHash | Select-Object Path,Hash | ConvertTo-Json | Set-Content "$root/inputs.json"
+        ForEach-Object { Get-FileHash -LiteralPath $_ } | Select-Object Path,Hash | ConvertTo-Json | Set-Content "$root/inputs.json"
     '0'|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/error.txt";'1'|Set-Content "$root/exit.txt";throw}

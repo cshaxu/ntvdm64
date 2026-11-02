@@ -688,10 +688,9 @@ void nt_clear_screen(void)
     if(sc.ScreenBufHandle) return;
 
 #if !defined(X86GFX) && !defined(CCPU)
-    /* DIVERGENCE(MVDM-HOST-DIV-322): software VGA still clears its backing. */
-    if (sc.ScreenState == FULLSCREEN)   // don't want sudden screen clears
-        return;
+#error DIVERGENCE MVDM-HOST-DIV-580: non-CCPU non-X86GFX display branch is not selected
 #endif
+#line 781
 
     /*::::::::::::::::::::::::::::: Get information on current screen size */
 

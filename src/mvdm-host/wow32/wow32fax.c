@@ -218,12 +218,9 @@ ULONG WOW32FaxHandler(UINT iFun, LPSTR lpIn)
     VPVOID vp;
 
 #ifdef DEBUG
-    int    DebugStringIndex = iFun - (WM_USER+0x100+1);
-
-    if ((DebugStringIndex >= WM_DDRV_FIRST) && (DebugStringIndex <= WM_DDRV_LAST) ) {
-        LOGDEBUG(0,("WOW32FaxHandler, %s, 0x%lX\n", (LPSTR)szWmDdrvDebugStrings[DebugStringIndex], (LPSTR) lpIn));
-    }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 227
 
     switch (iFun) {
         case WM_DDRV_SUBCLASS:

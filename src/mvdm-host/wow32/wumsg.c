@@ -878,10 +878,9 @@ get_next_dde_message:
 
 
 #ifdef DEBUG
-    if (t1.message == WM_TIMER) {
-        WOW32ASSERT(HIWORD(t1.wParam) == 0);
-    }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 885
 
     { /* DIVERGENCE(MVDM-HOST-DIV-350): GetMessage consumed its own queue item. */
         BOOL savedThunkDDE = fThunkDDEmsg;
@@ -1180,10 +1179,9 @@ get_next_dde_message:
     FREEVDMPTR(pFrame);
 
 #ifdef DEBUG
-    if (ul && t1.message == WM_TIMER) {
-        WOW32ASSERT(HIWORD(t1.wParam) == 0);
-    }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 1187
 
     // If PeekMessage returned NULL don't bother to copy anything back
 

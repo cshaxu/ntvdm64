@@ -1,0 +1,705 @@
+{
+  "original_profile_traces": [
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "a790e54dec42ff96120a701c38082a4f08144bc58a932a9cf60ecca2b83d75aa",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "d56abf4f150cffcaa209c4fc5c25013a346105bc9fd479b27a03e1260caf3a89",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "41de8f11399e7815b06bbcd0ed97f237480e093bf691da72e0bdf13ca438819e",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wres16.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "6142e4097cf8b3064ef729fca3dc6a100b9c99ce358a2620dc9b1285d54bffbf",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "810c892aaa423190e4a0cc9b3b45d2a8c09b58a3209d86ea7136d1e0c9a416be",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "b56a75b08a3880acfb6e110fa74dddf718e48f4673fabd1c5eae0dab9fff5462",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgbm.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "97fc40e12c5aaed2931202496c51c98f22d19a5ce713301eb9173c4290c02288",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgcb.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "af2f31ce67ffa1a15a59f4ab0993ed6e4781cbdceabc5a96e6be8682f51114e3",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgem.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "251325307c9e698ee579e3493f15f93abb6dafe7d289f334ac3714c513566be9",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsglb.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "9f5d3549b2e3c1fcaa4342da0a04d37f74477dda07903071291e74539af426a2",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgsbm.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "48107c29a7c436d75d5c272b71d81020bf56dc1f1dc1ecbe89c2e630690efb41",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "0593995bf9159b23bb21afff66a961ef83c6e052bc09adb5c6a6cb09d559879a",
+      "includes": 329,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "dafc1e3a472dd55458cb41d216df25acbe11bad68ee4bd8d8e90e8ff554da998",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "4afd8937d3815e99ed6b29a8b27d547c86fa77ab4a176949ec2a96604c091ace",
+      "includes": 331,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "ed16975c6804506e56423d37e4de3525b26ff5e1dcb47bc64418bf80571a54a9",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "fd996581326f266c6ec80905fa087be22435e9254dd7382b67f626ce902a6500",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "3b30b2af4f1bbb588c051c15d03fbf9c7e1e299ffea02bb4bcc74a74df6c10fa",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "c9c8b11d65ac3f2b1ee9216a8102ef56908bff5c5bf4ed2dd2badc30ca8a4284",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "6fda9165958da8b4d98c9ea6214787d5d4e9dd2e1bdadfbd7f31e60d5ff22d8e",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "7833fa05f1c91129f88c6d625bb4c104801901806bf9b0b4ee40ded820a45cef",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "63f92bb51c6cbab216e23e97538bf52be489742675f8ff7fd278109248409ecd",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "ca414bae02133a1feeae845ab9e40737714a15bf293cb0da0a0de2f66f778d98",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wheap.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "eefe512e73136fbb1ae3a0864cd9c162817eb1058854cd601938b832570b2eb2",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "da3930424a77fbaab5184897475128f8070e9bedd45a15a19f508dbfb22a36d4",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    }
+  ],
+  "selected_preprocessing": [
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "96c4b53f1e4e48b0b280f873bf3dd89f4a519893e7fdd427fe23af3aea4e31d0",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "1a7a8d749ab1cd127d0b4c4a01091d3c782695a2bb449db75ffc3c611880d555",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "5a40de76607bf79dc68ed0d4318324520ddd1d4283c6b29aa5eed06c65a492ef",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "dbd258d667d45e145971fdd09279b22f9acf04c8cb3cc4a170f3bd9e58c8a149",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wheap.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "9df82353bff5afe558c3941da37b225981916df49f084e9a94aebc80ce41e9de",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "0165d7cd7e9d8914467f1871fe8ad825bde40d3d50a480547898bd843a444557",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "1f75c530b9b1fd047ac34748b88c443169d851036aeb172ea12f9cd743eb2c7c",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "7b6edb04791eb7c87ca9cfc0e578ec3d3bf312396a4a95b87ba76d193054dc04",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "e9350702a4547757415899aa5d1a734104462dd31c65a6c41ca0bb508ae6d063",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "e9350702a4547757415899aa5d1a734104462dd31c65a6c41ca0bb508ae6d063",
+          "error": ""
+        }
+      ],
+      "raw_equal": true,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "94ec42a5785e6b74a77bd917269384fbca458de87f2d1c74606a4d9a775c53d0",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "1f9ca7887340a47ae8b65a303fca2c7fb1c873e8f912c19b1b3be4534c279666",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "2c3e19542005ebf3f28b1a43f08ffa0b6888bf3fb2bb0fc84f485a3adafc0d28",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "dc9754a7c8202eb6363f9d291af7889606f896d5c5fa505da7e8924fc8a55fa9",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "2848811954aacb7f2f2f4e7829f2314ef805ae7c1d6eb5ce2871b879dce490bd",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "8a24f48253e76f954e6bcec941a95f44a106ac9a1770a4335113c9715f78643b",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgbm.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "e8b89b4a9a4a5bc89c5f59459579a1ea3cac04bf736f11224d3adadffbd505e2",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "25d40d5334875be8958e4078c4ef0e638af38732dbef1924e3b6e448d53ecab6",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgcb.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "602bf83a457497dc43f532d940b6e1643811aa117fd49148d20036be57fc0984",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "98d71372e016791745fd1909522e30cd63ea2d8a39ce68dc7e55782ace84583f",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgem.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "028974697e225972c11acdbc02b8c0f387a6b08d3917ca7bc06687154a9f93c2",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "562c53f2e7a9d5cd238bb626e62abf85de81794880d242022ed7a862c1c4feaa",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsglb.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "f6b8b1b4e18cd3cdbcb80d662f28a497e3f91be0bb2cf8eb087ba553ce47f6fa",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "69fd8db7c093007d3fe697d8ed656e4298465078d620177597cc5992d2095e51",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgsbm.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "92d8c578691b12a48e03f935b3cd5efa3212ba41fd7dabf9c648d868c9694740",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "f850a12f629ca0a1e0b77d9a96b35d1af70d4e2963ccea0d0a88ea04b1662abb",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "fc0651f7dce20d0adc1ed4896e97f46bd15955f2ce6e74b1de05f5d79f6be174",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "906965da78f31621bf0797f6b6b3e1fd217e6b3381b16954edcb2e32fdfff1f2",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "66262d95c6ebca0d6f55500653fdcc1694852a44b4f46b75b9c856fd6ddce476",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "f8fbce6c6548efdb61f6abbdd7c5fd3b9f40c9bad4033c7d55fda1437cf0b55c",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "41f4a08f933c3b4d8d53ac174bc3f2780792251e2cfa9871929ffb60c6d94d15",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "49b287a4e620c77c3c09045ca3f0aee203b424d93eeca1bdd08a9c9edc267b02",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wres16.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "b61c826fcde2ccde66945d08b1c4a3418fd666c1a9fb9bcb6707e279af79eaf0",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "65d47bd20d4c9f5fcf7bdf77f78397c299f1e8e453c44379acc180955b3bccf1",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "9cd6105e5ff8c590a902d50e93c24e8eb871e481803ed66a3f40852ed7352098",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "4eb15c23b4a246d1228f623f82951c730c39031629bdc500f8cf003b173578fd",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "e6521339a26393e6acf5c70bb5ac7c5a4ff849213e6edcf3e430f67128fd5f3e",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "86c6627591ceed6bdcd6083c8583bca30a1d21186a91498cd40eabc4e79b7c8e",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "4cd390285c5edd247794c8a5e93924b510f4b0056eefdd907e2a0dcbeede3f84",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "5688d730e5f5e5b8638e47a67e159b188e2ab08260eb65bb55adfc241bd43cc9",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "2b23ea84f085df6e41efdca2d9991189a0ce73f61aa9985fb18e305ee32a53be",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "0b9abaeecdc52a2e2767ea790b9a879e122700b54365b303a73d24c209d55dcc",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "fbaf8b135368a960fe8a61e512a7d343091e228693fd4fb2fcb05072838ef8f8",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "2337d9e9026acc68af9ccd90e942681405a4e0b85ad5f087d3cc45ee564566f0",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "6ccc993766355b62ead0535f0f9facbe000982bc3bfed13a5bc98e054629277a",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "578fa3ccac3f5e31f8753f37002c622140b94c8c6f53d0ec049a34b1e2277623",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "773b1e0b7031df1a2a667353e73e4e87a2345bbda2e084a12e1c74587ad43d84",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "4b2df9f1ded25316b647e59f3ebc03ffbef37b420e2681c42b2ed6ddbe9312c0",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    }
+  ],
+  "objects": "24 x86 WOW source objects compiled in actual Ninja graph",
+  "guard_controls": "x86 and x64 pass for all 43 DEBUG arms including three selected alternatives",
+  "runtime_limits": "No WOW application runtime check performed on these intermediate objects; full product gate pending."
+}

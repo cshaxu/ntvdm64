@@ -32,9 +32,9 @@
 #endif /* SYSTEM_HOME */
 
 #ifdef HUNTER
-#ifndef SYSTEM_CONFIG
-#define SYSTEM_CONFIG	"$SPCHOME/trap.spcconfig"
-#endif /* SYSTEM_CONFIG */
+#error Excluded unsupported HUNTER configuration
+
+
 #else
 #ifndef SYSTEM_CONFIG
 #define SYSTEM_CONFIG	"$SPCHOME/sys.spcconfig"
@@ -46,10 +46,10 @@
 #endif /* USER_CONFIG */
 
 #ifdef HUNTER
-IMPORT VOID
-#ifdef ANSI
-loadNlsString(CHAR **strP, USHORT catEntry);
-#else /* ANSI */
-loadNlsString();
-#endif /* ANSI */
+#error Excluded unsupported HUNTER configuration
+
+
+
+
+
 #endif /* HUNTER */

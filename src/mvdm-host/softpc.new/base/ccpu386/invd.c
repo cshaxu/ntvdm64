@@ -32,14 +32,6 @@ INVD CPU Functions.
 
 
 #ifdef SPC486
-
-VOID
-INVD()
-   {
-   /*
-      If cache is implemented - then make call to flush cache.
-      flush_cache();
-    */
-   }
-
+#error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
+#line 46

@@ -1,0 +1,66 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+  "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+  "contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "includes": 203,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "includes": 203,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "classified": [
+    {
+      "local_line": 2428,
+      "original_line": 2808,
+      "condition": "defined(MONITOR) && defined(NTVDM)",
+      "anchor": [
+        "sas_load(MOUSE_VIDEO_CRT_MODE, &crt_mode);",
+        "#if !defined(NTVDM) || (defined(NTVDM) && defined(V7VGA))",
+        "if ((crt_mode == 1) && extensions_controller.foreground_latch_1)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "local_line": 2511,
+      "original_line": 2891,
+      "condition": "defined(MONITOR) && defined(NTVDM)",
+      "anchor": [
+        "vector_set (&mouse_sens,     MOUSE_SENS_DEF,     MOUSE_SENS_DEF);",
+        "vector_set (&mouse_sens_val, MOUSE_SENS_DEF_VAL, MOUSE_SENS_DEF_VAL);",
+        "mouse_double_thresh = MOUSE_DOUBLE_DEF;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "local_line": 3267,
+      "original_line": 3660,
+      "condition": "defined (NTVDM) && defined(MONITOR)",
+      "anchor": [
+        "note_trace0(MOUSE_VERBOSE, \"mouse_io:return()\");",
+        "}",
+        "LOCAL void mouse_get_state_size IFN4(word *,m1,word *,m2,word *,m3,word *,m4)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    }
+  ],
+  "limitations": [
+    "No other include contexts or guest runtime inferred."
+  ]
+}

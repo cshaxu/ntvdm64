@@ -1,0 +1,101 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "current_sha256": "2344df6d17aafae3ebcc3ca2ddfcef18acc19ef298b92664334bec85f04ef0e1",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+  "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+  "product_context": {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+    "exit": 0,
+    "source_sha256": "2344df6d17aafae3ebcc3ca2ddfcef18acc19ef298b92664334bec85f04ef0e1",
+    "included_files": 202,
+    "host_def": [
+      "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+    ],
+    "undef_ntvdm": [],
+    "flags_include_ntvdm": true,
+    "flag_check": "corrected /D or -D pattern against generated compdb"
+  },
+  "fixture_context": {
+    "fixture": "tests/observation/keyba_observed.c",
+    "fixture_sha256": "c1f8f0137fdf3f222f95d294738c9a4c34a358469ac448a0e1f0718bd7c2d5fa",
+    "exit": 0,
+    "included_count": 203,
+    "host_def": [
+      "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+    ],
+    "source": [
+      "O:\\repos.hobby\\ntvdm64\\tests\\observation\\..\\..\\src\\mvdm-host\\softpc.new\\base\\keymouse\\keyba.c"
+    ],
+    "undef_ntvdm": [],
+    "flags_include_ntvdm": true
+  },
+  "existing_exclusions": [
+    {
+      "local_line": 215,
+      "original_line": 199,
+      "anchor": [
+        "GLOBAL VOID ( *host_key_up_fn_ptr )();",
+        "GLOBAL VOID ( *host_key_down_fn_ptr )();",
+        "#endif"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif\t/* NTVDM */"
+    },
+    {
+      "local_line": 1942,
+      "original_line": 2173,
+      "anchor": [
+        "#endif",
+        "}",
+        "scanning_discontinued=FALSE;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "local_line": 2566,
+      "original_line": 2799,
+      "anchor": [
+        "#endif\t/* NTVDM */",
+        "}",
+        "HostReleaseKbd();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    },
+    {
+      "local_line": 2729,
+      "original_line": 2969,
+      "anchor": [
+        "}",
+        "cmd_to_6805(val);",
+        "else"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#else   /* NTVDM */"
+    },
+    {
+      "local_line": 2744,
+      "original_line": 2987,
+      "anchor": [
+        "} /*end of kbd_outb */",
+        "#endif\t/* NTVDM */",
+        "HostReleaseKbd();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif /* ! NTVDM */"
+    },
+    {
+      "local_line": 2761,
+      "original_line": 3049,
+      "anchor": [
+        "kbd_status = 0x14;",
+        "{",
+        "GLOBAL VOID AT_kbd_post IFN0()"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif"
+    }
+  ],
+  "disposition": "existing guards classified, no rewrite or restoration"
+}

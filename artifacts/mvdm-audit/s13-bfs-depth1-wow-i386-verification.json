@@ -1,0 +1,201 @@
+{
+  "scope": "six first-depth historical i386 WOW branches",
+  "contexts": [
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "5ca36174406908c1db9dfec2ad09cc35ec11f3ce565c1f72f58c3436619d6071",
+      "includes": 339,
+      "i386_definitions": [],
+      "i386_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgprnset.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "2b13e6c5079cddd08d304a33e43f2bd2cf9106a98ffb5792341967876e3dc304",
+      "includes": 322,
+      "i386_definitions": [],
+      "i386_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "ea273fbd70aa44da496ce91c160e7219ec6425810be91ec0e99be834bc83933d",
+      "includes": 323,
+      "i386_definitions": [],
+      "i386_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkgthunk.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "51f66db9ee3da7879d7d345e22c2331922cca408ef90326c98fa58bdaeb59ec0",
+      "includes": 323,
+      "i386_definitions": [],
+      "i386_flags": [],
+      "errors": ""
+    }
+  ],
+  "preprocess": [
+    {
+      "path": "src/mvdm-host/wow32/wgprnset.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "5a177d32ae672b19e2e5cd444dc7adbb3e11976f1c5749841c0dda4d724e0508",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "7022308aa7ecc7bed38fd197e96def667ee72acd49ade60c3d82db95ad44ad00",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkgthunk.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "a2516784621cc4d9138f330a624444ab1d56a6de478805a94ac7e15afaf1e25e",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "fd62b5983aebbd2fb2e5f34c81495a5f345ff343826a181894b01a954e772ff5",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "e59c086da79ee2fa46dd2d46c6cbfcbc1d56b48a7b551a3d8eb5c14b3ea09fd7",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "75eeba38ca9f6094f66c7ba9140008a6a1c04603d2ee47e0837d54271aac84af",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "947e0d01051b80a4e2fe215bf5e5d812a1008a9ed8696e1f32195fa6be58f54f",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "b30264eae6dba33332805cf1ad504b0f2287db2e01d2cb28f4d59df37e5265fa",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    }
+  ],
+  "guards": [
+    {
+      "guard": 0,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 0,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 1,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 1,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 2,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 2,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 3,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 3,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 4,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 4,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 5,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 5,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    }
+  ],
+  "logical_line_controls": 7,
+  "object_build": "four x86 WOW objects compiled successfully",
+  "controlled_dispatch_fixture": "build/t473-s13/wow-dispatch-current-s13-r7/exit.txt = 0",
+  "limits": "controlled host fixture and compile checks do not prove full guest, printing, floating-point, or product release behavior; DPMI special CPU40/i386 branch remains separate"
+}

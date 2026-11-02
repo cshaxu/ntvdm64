@@ -43,16 +43,16 @@
  */
 
 #ifdef SCCSID
-static char SccsID[]="@(#)bootstrap.c	1.9 09/19/94 Copyright Insignia Solutions Ltd.";
+#error Excluded unsupported SCCSID configuration
 #endif
 
 #ifdef SEGMENTATION
-/*
- * The following #include define specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_INIT.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 

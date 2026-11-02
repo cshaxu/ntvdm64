@@ -48,10 +48,32 @@ cleanup:
         (pinstr)->strCapture.Buffer = (LPWSTR)(psz);        \
     }
 
-/* DIVERGENCE(OPENNT-HOST-046): selected original ANSI aliases. */
+/* DIVERGENCE(OPENNT-HOST-140): retain the original text-width selection and
+ * only the capture aliases used by the admitted client closures. */
+#define COPYLPWSTRID(pinstr, psz) \
+    (pinstr)->fAllocated = FALSE;                           \
+    (pinstr)->pstr = &(pinstr)->strCapture;                 \
+    if (HIWORD(psz))                                        \
+        RtlInitUnicodeString(&(pinstr)->strCapture, (psz)); \
+    else {                                                  \
+        (pinstr)->strCapture.Length =                       \
+                (pinstr)->strCapture.MaximumLength = 0;     \
+        (pinstr)->strCapture.Buffer = (LPWSTR)(psz);        \
+    }
+#define CLEANUPLPWSTR(instr)
+
+#ifdef UNICODE
+#line 52
+#define COPYLPTSTRID                COPYLPWSTRID
+#define FIRSTCOPYLPTSTRID           COPYLPWSTRID
+#define CLEANUPLPTSTR               CLEANUPLPWSTR
+#else
+#line 52
 #define COPYLPTSTRID                COPYLPSTRIDW
 #define FIRSTCOPYLPTSTRID           COPYLPSTRIDW
 #define CLEANUPLPTSTR               CLEANUPLPSTRW
+#endif
+#line 55
 
 #define FIRSTCOPYLPSTRW(pinstr, psz) \
     if (!RtlCaptureAnsiString((pinstr), (LPCSTR)(psz), FALSE))    \

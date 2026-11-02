@@ -176,50 +176,12 @@ ULONG FASTCALL WK32WaitEvent(PVDMFRAME pFrame)
 ULONG FASTCALL WK32KernelTrace(PVDMFRAME pFrame)
 {
 #ifdef DEBUG
-PBYTE pb1;
-PBYTE pb2;
-register PKERNELTRACE16 parg16;
-
- // Check Filtering - Trace Correct TaskID and Kernel Tracing Enabled
-
-    if (((WORD)(pFrame->wTDB & fLogTaskFilter) == pFrame->wTDB) &&
-        ((fLogFilter & FILTER_KERNEL16) != 0 )) {
-
-        GETARGPTR(pFrame, sizeof(KERNELTRACE16), parg16);
-        GETVDMPTR(parg16->lpRoutineName, 50, pb1);
-        GETVDMPTR(parg16->lpUserArgs, parg16->cParms, pb2);
-        if ((fLogFilter & FILTER_VERBOSE) == 0 ) {
-          LOGDEBUG(12, ("%s(", pb1));
-        } else {
-          LOGDEBUG(12, ("%04X %08X %04X %s:%s(",pFrame->wTDB, pb2, pFrame->wAppDS, (LPSZ)"Kernel16", pb1));
-        }
-
-        pb2 += 2*sizeof(WORD);              // point past callers CS:IP
-
-        pb2 += parg16->cParms;
-
-        while (parg16->cParms > 0) {
-        pb2 -= sizeof(WORD);
-        parg16->cParms -= sizeof(WORD);
-        LOGDEBUG(12,( "%04x", *(PWORD)pb2));
-        if (parg16->cParms > 0) {
-            LOGDEBUG(12,( ","));
-        }
-    }
-
-    LOGDEBUG(12,( ")\n"));
-    if (fDebugWait != 0) {
-        DbgPrint("WOWSingle Step\n");
-        DbgBreakPoint();
-    }
-
-    FREEVDMPTR(pb1);
-    FREEVDMPTR(pb2);
-    FREEARGPTR(parg16);
- }
+#error Excluded unsupported DEBUG WOW profile
 #else
+#line 221
     UNREFERENCED_PARAMETER(pFrame);
 #endif
+#line 223
     return TRUE;
 }
 
@@ -605,20 +567,9 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
     }
 
 #ifdef DEBUG
-    {
-        char szModName[9];
-
-        RtlCopyMemory(szModName, ((PTDB)SEGPTR(pFrame->wTDB,0))->TDB_ModName, 8);
-        szModName[8] = 0;
-
-        LOGDEBUG( hThread ? LOG_IMPORTANT : LOG_ALWAYS,
-            ("\nWK32WOWInitTask: %s task %04x %s\n",
-                hThread ? "created" : "ERROR failed to create",
-                pFrame->wTDB,
-                szModName
-            ));
-    }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 622
 
     return hThread ? TRUE : FALSE;
 }
@@ -1190,17 +1141,9 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
     BlockWOWIdle(FALSE);
 
 #ifdef DEBUG
-    // BUGBUG: HACK ALERT
-    // This code has been added to aid in debugging a problem that only
-    // seems to occur on MIPS chk
-    // What appears to be happening is that the SS:SP is set correctly
-    // above, but sometime later, perhaps during the "BlockWOWIdle" call,
-    // the emulator's flat stack pointer ends up getting reset to WOWEXEC's
-    // stack. The SETVDMSTACK call below will reset the values we want so
-    // that the user can continue normally.
-    WOW32ASSERTMSG(LOWORD(vpInitialSSSP)==getSP(), "WOW32: W32Thread Error - SP is invalid!\n");
-    SETVDMSTACK(vpInitialSSSP);
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 1204
 
 #if NO_W32TRYCALL
     {
@@ -1227,12 +1170,14 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
     //
 
 #ifdef DEBUG
-    WOW32ASSERTMSG(FALSE, "WOW32: W32Thread Error - Too many unsimulate calls\n");
+#error Excluded unsupported DEBUG WOW profile
 #else
+#line 1232
     if (IsDebuggerAttached() && (flOptions & OPT_DEBUG)) {
         DbgBreakPoint();
     }
 #endif
+#line 1236
 
     W32DestroyTask(&td);
     host_ExitThread(EXIT_SUCCESS);
@@ -1449,12 +1394,14 @@ DWORD W32RemoteThread(VOID)
     //
 
 #ifdef DEBUG
-    WOW32ASSERTMSG(FALSE, "WOW32: W32RemoteThread Error - Too many unsimulate calls");
+#error Excluded unsupported DEBUG WOW profile
 #else
+#line 1454
     if (IsDebuggerAttached() && (flOptions & OPT_DEBUG)) {
         DbgBreakPoint();
     }
 #endif
+#line 1458
 
     W32DestroyTask(&td);
     host_ExitThread(EXIT_SUCCESS);
@@ -2485,28 +2432,12 @@ ULONG FASTCALL WK32WOWOutputDebugString(PVDMFRAME pFrame)
     GETPSZPTRNOLOG(parg16->vpString, psz1);
 
 #ifdef DEBUG            // So we can intermingle LOGGER output & WOW Logging
-    if ( !(flOptions & OPT_DEBUG) ) {
-        OutputDebugString(psz1);
-    } else {
-        INT  length;
-        char text[TMP_LINE_LEN];
-        PSZ  pszTemp;
-
-        length = strlen(psz1);
-        if ( length > TMP_LINE_LEN-1 ) {
-            strncpy( text, psz1, TMP_LINE_LEN );
-            text[TMP_LINE_LEN-2] = '\n';
-            text[TMP_LINE_LEN-1] = '\0';
-            pszTemp = text;
-        } else {
-            pszTemp = psz1;
-        }
-
-        LOGDEBUG(LOG_ALWAYS, ("%s", pszTemp));     // in debug version
-    }
+#error Excluded unsupported DEBUG WOW profile
 #else
+#line 2508
     OutputDebugString(psz1);
 #endif
+#line 2510
     FREEPSZPTR(psz1);
     FREEARGPTR(parg16);
     RETURN(0);
@@ -4467,74 +4398,9 @@ ULONG FASTCALL WK32FatalExit(PVDMFRAME pFrame)
 //
 
 #ifdef DEBUG
-
-ULONG FASTCALL WK32WowPartyByNumber(PVDMFRAME pFrame)
-{
-    PWOWPARTYBYNUMBER16 parg16;
-    PSZ psz;
-    ULONG ulRet = 0;
-
-    GETARGPTR(pFrame, sizeof(*parg16), parg16);
-    GETPSZPTR(parg16->psz, psz);
-
-    switch (parg16->dw) {
-
-        case 0:  // Access violation
-            *(char *)0xa0000000 = 0;
-            break;
-
-        case 1:  // Stack overflow
-            {
-                char EatStack[2048];
-
-                strcpy(EatStack, psz);
-                WK32WowPartyByNumber(pFrame);
-                strcpy(EatStack, psz);
-            }
-            break;
-
-        case 2:  // Datatype misalignment
-            {
-                DWORD adw[2];
-                PDWORD pdw = (void *)((char *)adw + 2);
-
-                *pdw = (DWORD)-1;
-
-                //
-                // On some platforms the above will just work (hardware or
-                // emulation), so we force it with RaiseException.
-                //
-                RaiseException((DWORD)EXCEPTION_DATATYPE_MISALIGNMENT,
-                               0, 0, NULL);
-            }
-            break;
-
-        case 3:  // Integer divide by zero
-            ulRet = 1 / (parg16->dw - 3);
-            break;
-
-        case 4:  // Other exception
-            RaiseException((DWORD)EXCEPTION_ARRAY_BOUNDS_EXCEEDED,
-                           EXCEPTION_NONCONTINUABLE, 0, NULL);
-            break;
-
-        default:
-            {
-                char szMsg[255];
-
-                wsprintf(szMsg, "WOW Unhandled Party By Number (%d, '%s')", parg16->dw, psz);
-
-                MessageBeep(0);
-                MessageBox(NULL, szMsg, "WK32WowPartyByNumber", MB_OK | MB_ICONEXCLAMATION);
-            }
-    }
-
-    FREEPSZPTR(psz);
-    FREEARGPTR(parg16);
-    return ulRet;
-}
-
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 4538
 
 
 //

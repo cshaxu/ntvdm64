@@ -1,0 +1,94 @@
+{
+  "video": {
+    "path": "src/mvdm-host/softpc.new/base/video/video.c",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+    "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+    "before_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+    "after_sha256": "bdf5bb3433dfa5c83f241af9ee84d47570d4946a3558dfba030137051faf2f5b",
+    "original_group_lines": [
+      1579,
+      2042
+    ],
+    "current_group_lines": [
+      1576,
+      2030
+    ],
+    "removed_bodies": [
+      {
+        "line": 1577,
+        "sha256": "c8ca5cfacde25f51e877383cd50be4ad8cbea57609abbacd26881776076fd141",
+        "body": "*((unsigned char *)( video_pc_low_regen + cpos)) =  getAL();"
+      },
+      {
+        "line": 2031,
+        "sha256": "1ed58c04553481ca87b85c9a9fa23d7d99d5865e7e749cf98231e15ccd1aed7d",
+        "body": "*((unsigned char *)( video_pc_low_regen + ch_addr)) = ch;"
+      }
+    ],
+    "standalone_contexts": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/video.c",
+        "graph": "build/.ninja/msvc-x86-release/worker",
+        "exit": 0,
+        "source_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+        "includes": 194,
+        "macro_definitions": [],
+        "macro_flags": [
+          "/DMVDM_STANDALONE_SAS_VIDEO"
+        ],
+        "errors": ""
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/video.c",
+        "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+        "exit": 0,
+        "source_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+        "includes": 194,
+        "macro_definitions": [],
+        "macro_flags": [
+          "/DMVDM_STANDALONE_SAS_VIDEO"
+        ],
+        "errors": ""
+      }
+    ],
+    "gisp_contexts": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/video.c",
+        "graph": "build/.ninja/msvc-x86-release/worker",
+        "exit": 0,
+        "source_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+        "includes": 194,
+        "macro_definitions": [],
+        "macro_flags": [],
+        "errors": ""
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/video.c",
+        "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+        "exit": 0,
+        "source_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+        "includes": 194,
+        "macro_definitions": [],
+        "macro_flags": [],
+        "errors": ""
+      }
+    ],
+    "verification": {
+      "selected_preprocess": "x86 worker before and after raw byte-identical sha256 bf7309d0081140c51c542ef327cbc0ef5294c89ed6f96cb91f1ec848aef0867c, both exit zero",
+      "object": "cached x86 worker obj/video/video.obj built successfully",
+      "guard": "eight isolated MSVC controls: standalone/monitor, monitor without standalone, GISP_SVGA and no-defines for each guard all matched expected outcome",
+      "limitations": "object and guard checks are not complete DOS/WOW/Win3.x or hardware VGA acceptance; second-depth conditional at line 1508 not assessed"
+    }
+  },
+  "rom": {
+    "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+    "current_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
+    "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+    "original_group_line": 282,
+    "current_group_line": 260,
+    "register": "MVDM-HOST-DIV-165"
+  },
+  "scope": "first-depth only; nested branches not reviewed",
+  "register": "MVDM-HOST-DIV-581"
+}

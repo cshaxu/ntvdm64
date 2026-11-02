@@ -1,0 +1,249 @@
+{
+  "method": "Same count and ordered arm-kind sequence of original/current top-level PIG groups in each same-hash file; all 33 independent previously proven original anchors agree with this order. Existing bodies are sole #error.",
+  "compilation_evidence": "s13-bfs-depth1-pig.json",
+  "existing_exclusions": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
+      "current_sha256": "099596740c9523768c5d3d3afed2a3d5139ee6db1a083b6ec812e6fd93ae5988",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_intr.c",
+      "original_sha256": "9e6d69b1e05309ca87db41c66b89eb9d0862f2078c08a16fe20b82669bc46a7a",
+      "local_line": 253,
+      "original_line": 253,
+      "ordinal": 2,
+      "total_groups": 9,
+      "arm_kinds": [
+        "ifdef",
+        "else"
+      ],
+      "independent_anchor_count": 5,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
+      "current_sha256": "099596740c9523768c5d3d3afed2a3d5139ee6db1a083b6ec812e6fd93ae5988",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_intr.c",
+      "original_sha256": "9e6d69b1e05309ca87db41c66b89eb9d0862f2078c08a16fe20b82669bc46a7a",
+      "local_line": 260,
+      "original_line": 261,
+      "ordinal": 3,
+      "total_groups": 9,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 5,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
+      "current_sha256": "099596740c9523768c5d3d3afed2a3d5139ee6db1a083b6ec812e6fd93ae5988",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_intr.c",
+      "original_sha256": "9e6d69b1e05309ca87db41c66b89eb9d0862f2078c08a16fe20b82669bc46a7a",
+      "local_line": 322,
+      "original_line": 325,
+      "ordinal": 4,
+      "total_groups": 9,
+      "arm_kinds": [
+        "ifdef",
+        "else"
+      ],
+      "independent_anchor_count": 5,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
+      "current_sha256": "099596740c9523768c5d3d3afed2a3d5139ee6db1a083b6ec812e6fd93ae5988",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_intr.c",
+      "original_sha256": "9e6d69b1e05309ca87db41c66b89eb9d0862f2078c08a16fe20b82669bc46a7a",
+      "local_line": 329,
+      "original_line": 333,
+      "ordinal": 5,
+      "total_groups": 9,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 5,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_sha256": "370774b364135049441137ac7e6205597f53f7a35acb348a1ab9cb4caedbcea2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "local_line": 3695,
+      "original_line": 3749,
+      "ordinal": 20,
+      "total_groups": 35,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 25,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_sha256": "370774b364135049441137ac7e6205597f53f7a35acb348a1ab9cb4caedbcea2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "local_line": 3712,
+      "original_line": 3766,
+      "ordinal": 21,
+      "total_groups": 35,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 25,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_sha256": "370774b364135049441137ac7e6205597f53f7a35acb348a1ab9cb4caedbcea2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "local_line": 3724,
+      "original_line": 3778,
+      "ordinal": 22,
+      "total_groups": 35,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 25,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_sha256": "370774b364135049441137ac7e6205597f53f7a35acb348a1ab9cb4caedbcea2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "local_line": 3766,
+      "original_line": 3829,
+      "ordinal": 24,
+      "total_groups": 35,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 25,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_sha256": "370774b364135049441137ac7e6205597f53f7a35acb348a1ab9cb4caedbcea2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "local_line": 3814,
+      "original_line": 3877,
+      "ordinal": 25,
+      "total_groups": 35,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 25,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_sha256": "370774b364135049441137ac7e6205597f53f7a35acb348a1ab9cb4caedbcea2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "local_line": 3831,
+      "original_line": 3894,
+      "ordinal": 26,
+      "total_groups": 35,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 25,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_sha256": "370774b364135049441137ac7e6205597f53f7a35acb348a1ab9cb4caedbcea2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "local_line": 3843,
+      "original_line": 3906,
+      "ordinal": 27,
+      "total_groups": 35,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 25,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_sha256": "370774b364135049441137ac7e6205597f53f7a35acb348a1ab9cb4caedbcea2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "local_line": 3859,
+      "original_line": 3922,
+      "ordinal": 28,
+      "total_groups": 35,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 25,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_sha256": "370774b364135049441137ac7e6205597f53f7a35acb348a1ab9cb4caedbcea2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "local_line": 3885,
+      "original_line": 3948,
+      "ordinal": 29,
+      "total_groups": 35,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 25,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "current_sha256": "370774b364135049441137ac7e6205597f53f7a35acb348a1ab9cb4caedbcea2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "local_line": 4378,
+      "original_line": 4444,
+      "ordinal": 31,
+      "total_groups": 35,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 25,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "current_sha256": "5f7663bac5700336243c65c6f1fbb050584b05466d647bad3dce545c9bffb5c4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tlb.c",
+      "original_sha256": "a83a7dd3f7e3fbb83723047aacddbd22d4001591c6d444d4bd6d45dd73e38fd8",
+      "local_line": 525,
+      "original_line": 525,
+      "ordinal": 1,
+      "total_groups": 5,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 3,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "current_sha256": "5f7663bac5700336243c65c6f1fbb050584b05466d647bad3dce545c9bffb5c4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tlb.c",
+      "original_sha256": "a83a7dd3f7e3fbb83723047aacddbd22d4001591c6d444d4bd6d45dd73e38fd8",
+      "local_line": 817,
+      "original_line": 804,
+      "ordinal": 3,
+      "total_groups": 5,
+      "arm_kinds": [
+        "ifdef"
+      ],
+      "independent_anchor_count": 3,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    }
+  ],
+  "limitations": "Identically shaped adjacent excluded groups cannot reveal their removed body ordering from current source alone; each retains its original ordinal and remains excluded. No behavior or source changed."
+}

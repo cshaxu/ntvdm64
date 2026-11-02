@@ -1,0 +1,132 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+  "current_sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+  "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+  "admitted_function_ranges": [
+    [
+      555,
+      1217,
+      "DefWindowProcWorker",
+      "OPENNT-HOST-089"
+    ],
+    [
+      1916,
+      1922,
+      "GetCPD",
+      "OPENNT-HOST-120"
+    ]
+  ],
+  "original_first_depth_groups_outside_retained_functions": [
+    {
+      "line": 23,
+      "end": 25,
+      "kind": "ifdef",
+      "expression": "DEBUG",
+      "retained_function_intersection": []
+    },
+    {
+      "line": 270,
+      "end": 273,
+      "kind": "ifdef",
+      "expression": "FE_SB",
+      "retained_function_intersection": []
+    },
+    {
+      "line": 327,
+      "end": 330,
+      "kind": "ifdef",
+      "expression": "FE_IME",
+      "retained_function_intersection": []
+    },
+    {
+      "line": 331,
+      "end": 363,
+      "kind": "ifdef",
+      "expression": "FE_SB",
+      "retained_function_intersection": []
+    },
+    {
+      "line": 373,
+      "end": 451,
+      "kind": "ifndef",
+      "expression": "LATER",
+      "retained_function_intersection": []
+    },
+    {
+      "line": 453,
+      "end": 469,
+      "kind": "ifdef",
+      "expression": "FE_SB",
+      "retained_function_intersection": []
+    },
+    {
+      "line": 1650,
+      "end": 1676,
+      "kind": "if",
+      "expression": "0",
+      "retained_function_intersection": []
+    },
+    {
+      "line": 1719,
+      "end": 1721,
+      "kind": "ifdef",
+      "expression": "FE_SB",
+      "retained_function_intersection": []
+    },
+    {
+      "line": 1777,
+      "end": 1792,
+      "kind": "ifdef",
+      "expression": "FE_SB",
+      "retained_function_intersection": []
+    },
+    {
+      "line": 1803,
+      "end": 1852,
+      "kind": "ifdef",
+      "expression": "FE_SB",
+      "retained_function_intersection": []
+    }
+  ],
+  "original_first_depth_groups_intersecting_retained_functions_still_pending": [
+    {
+      "line": 566,
+      "end": 570,
+      "kind": "ifdef",
+      "expression": "FE_IME",
+      "retained_function_intersection": [
+        "DefWindowProcWorker"
+      ]
+    },
+    {
+      "line": 572,
+      "end": 577,
+      "kind": "ifdef",
+      "expression": "DEBUG",
+      "retained_function_intersection": [
+        "DefWindowProcWorker"
+      ]
+    },
+    {
+      "line": 905,
+      "end": 1208,
+      "kind": "if",
+      "expression": "defined(FE_IME)",
+      "retained_function_intersection": [
+        "DefWindowProcWorker"
+      ]
+    },
+    {
+      "line": 1214,
+      "end": 1216,
+      "kind": "ifdef",
+      "expression": "DEBUG",
+      "retained_function_intersection": [
+        "DefWindowProcWorker"
+      ]
+    }
+  ],
+  "basis": "OPENNT-HOST-089 and 120 admit complete named functions as original subset. An original conditional entirely outside those admitted ranges is not a retained source branch.",
+  "limitations": "Retained-function condition groups remain unreviewed under their current component selector; this does not prove selected behavior or permit skipping them."
+}

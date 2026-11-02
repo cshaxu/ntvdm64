@@ -372,10 +372,9 @@ INT GetBMI16Size(PVPVOID vpbmi16, WORD fuColorUse, LPDWORD lpdwClrUsed)
     // if this asserts it's an app bug
     // Changed assert to warning at Craig's request - DaveHart
 #ifdef DEBUG
-    if (!(nEntries > 1) && !(nBitCount == 24)) {
-        LOGDEBUG(LOG_ALWAYS, ("WOW::GetBMI16Size:bad BitCount:a-craigj\n"));
-    }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 379
 
     // this will never be true for a CORE type DIB
     if(*lpdwClrUsed > (DWORD)nEntries) {
@@ -677,14 +676,9 @@ VOID getmsg16(VPMSG16 vpmsg16, LPMSG lpmsg, LPMSGPARAMEX lpmpex)
     uParam  = INT32(wParam);              // default thunking - sign extend
 
 #ifdef DEBUG
-    if (HIWORD(wParam) &&
-        !(message==WM_TIMER || message==WM_COMMAND || message==WM_DROPFILES ||
-          (message >= WM_DDE_FIRST && message <= WM_DDE_LAST))) {
-
-        LOGDEBUG(LOG_ALWAYS,("WOW: getmsg16 - losing HIWORD(wParam)!"));
-        WOW32ASSERT(FALSE);
-        }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 688
 
     if ( message == WM_TIMER ) {
         HAND16  htask16;

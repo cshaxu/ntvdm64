@@ -1698,12 +1698,9 @@ BOOL DeletePortTabEntry(PWOWPORT pWOWPort)
                     WAIT_TIMEOUT);
 
 #ifdef DEBUG
-        if (fTimeOut) {
-            LOGDEBUG(LOG_ALWAYS,
-                ("WOW DeletePortTabEntry: Comm writer thread for port %d refused\n"
-                 "    to die when asked nicely.\n", (int)pWOWPort->idComDev));
-        }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 1707
 
         CloseHandle(pWOWPort->hWriteThread);
         CloseHandle(pWOWPort->hWriteEvent);
@@ -2530,10 +2527,9 @@ CleanupAfterWriteComplete:
             //
 
 #ifdef DEBUG
-            if (pwp->pchWriteHead >= pwp->pchWriteBuf + pwp->cbWriteBuf) {
-                WOW32ASSERT(pwp->pchWriteHead == pwp->pchWriteBuf + pwp->cbWriteBuf);
-            }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 2537
 
             if (pwp->pchWriteHead == pwp->pchWriteBuf + pwp->cbWriteBuf) {
                 pwp->pchWriteHead = pwp->pchWriteBuf;

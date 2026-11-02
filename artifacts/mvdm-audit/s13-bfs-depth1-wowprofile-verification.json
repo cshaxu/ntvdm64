@@ -1,0 +1,297 @@
+{
+  "scope": "11 WOWPROFILE first-depth bodies only",
+  "macro_contexts": [
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "d6cc5610492e4194c25e0fea81000f26a0d136045680b302de8118382a30fbf4",
+      "includes": 339,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          97,
+          "#define WOWPROFILE   // DEBUG => WOWPROFILE"
+        ],
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          103,
+          "#define DEBUG_OR_WOWPROFILE"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtbl.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "53d4a15982cba1f3dc913870261e35c46c16d27c7b9846f34977ae225d41c9ba",
+      "includes": 332,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          97,
+          "#define WOWPROFILE   // DEBUG => WOWPROFILE"
+        ],
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          103,
+          "#define DEBUG_OR_WOWPROFILE"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "c648e970dc15ff09436e0bf38599ba3fb94a444e421314304d802cf649ce16b9",
+      "includes": 324,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          97,
+          "#define WOWPROFILE   // DEBUG => WOWPROFILE"
+        ],
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          103,
+          "#define DEBUG_OR_WOWPROFILE"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "8dbb8e6828c8f0ff3286bf917b40964eb859d1091ec0757c801c9422ed2fb7b3",
+      "includes": 322,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          97,
+          "#define WOWPROFILE   // DEBUG => WOWPROFILE"
+        ],
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          103,
+          "#define DEBUG_OR_WOWPROFILE"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "1032565dbc656936fe8e0ce6144532e9cea2699d402e848d59e850c1db08420b",
+      "includes": 323,
+      "macro_definitions": [
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          97,
+          "#define WOWPROFILE   // DEBUG => WOWPROFILE"
+        ],
+        [
+          "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\wow32\\wow32.h",
+          103,
+          "#define DEBUG_OR_WOWPROFILE"
+        ]
+      ],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "preprocess": [
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "1f9ca7887340a47ae8b65a303fca2c7fb1c873e8f912c19b1b3be4534c279666",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "817f30915107b29c71e70477fedcda633fe88a74a264883d46a5909255d74ea3",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "d80fdba212558b98fcd99d8695443db8a7f03e3bbb539966fad1285c6a9a6456",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "42cd47610f8ed4e058287b2cb7a887f1ab2e0eea8401f373d5aed2d9f376764f",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    }
+  ],
+  "guard_controls": [
+    {
+      "guard": 0,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 0,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 1,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 1,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 2,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 2,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 3,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 3,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 4,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 4,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 5,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 5,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 6,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 6,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 7,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 7,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 8,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 8,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 9,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 9,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 10,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 10,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    }
+  ],
+  "line_controls": {
+    "baseline_probes": "build/t473-s13/bfs-wowprofile-lines/baseline-lines.json",
+    "count": 11,
+    "following_directives_verified": 11
+  },
+  "objects": [
+    "obj/wmdisp32.obj",
+    "obj/wudlg.obj"
+  ],
+  "object_result": "both built successfully in cached x86 WOW32 graph",
+  "unresolved_test": "tests/observation/extract-wow-wndproc-fixture.ps1 requires original byte-identical wmdisp32.c; that check was already false before this batch (before hash c648e970dc15ff09436e0bf38599ba3fb94a444e421314304d802cf649ce16b9 vs pinned original 4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4). Reconcile its expected contract and dependent fixture before layer closure.",
+  "limits": "no full WOW/DOS/Win3.x acceptance; guarded profiler branch not runtime-tested",
+  "unresolved_test_status": "Reconciled and controlled fixture passed: s13-bfs-depth1-wndproc-fixture.json; real guest runtime and full gate remain pending."
+}

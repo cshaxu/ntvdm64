@@ -1,0 +1,24 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+  "current_sha256": "d7b33368ab265366d67e3361b2dca57a9c373e43d9557359de35fc986307c162",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmenu.c",
+  "original_sha256": "dee4bdb0c79e58993b25ab65c37eb71cc4cfc9a551a9a0e07b5a2f67eb8461cd",
+  "retained_original_ranges": [
+    [
+      29,
+      432
+    ]
+  ],
+  "register": "OPENNT-HOST-043/045",
+  "records": [
+    {
+      "expression": "MEMPHIS_MENUS",
+      "original_group_line": 434
+    },
+    {
+      "expression": "MEMPHIS_MENU_WATERMARKS",
+      "original_group_line": 676
+    }
+  ],
+  "scope": "original outer groups only; no nested contents audited"
+}

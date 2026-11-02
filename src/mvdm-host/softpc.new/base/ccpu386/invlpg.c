@@ -33,17 +33,6 @@ INVLPG CPU Functions.
 
 
 #ifdef SPC486
-
-GLOBAL VOID
-INVLPG
-       	          
-IFN1(
-	IU32, op1	/* src operand */
-    )
-
-
-   {
-   invalidate_tlb_entry((IU32) op1);
-   }
-
+#error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
+#line 50

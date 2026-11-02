@@ -15,7 +15,13 @@
 
 #include "compat/include/wow_char_conversion_abi.h"
 /* DIVERGENCE(OPENNT-HOST-119): current layout input, no native CLIENTINFO cast. */
+#ifdef _USERK_
+#error DIVERGENCE OPENNT-HOST-145: kernel USER profile is not selected
+#else
+#line 18
 #define THREAD_CODEPAGE() OpenNtUserThreadCodePage()
+#endif // _USERK_
+#line 19
 #define IS_ACP(cp) (((cp) == NlsAnsiCodePage) || ((cp) == CP_ACP))
 
 /* DIVERGENCE(OPENNT-HOST-119): restore the original message converter. */

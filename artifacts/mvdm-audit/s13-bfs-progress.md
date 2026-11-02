@@ -1,0 +1,1201 @@
+# S13 breadth-first conditional review
+
+**Owner correction:** work strictly one depth at a time. The earlier deeper
+first-pass figures below are historical exploratory output only, not current
+classification or completion evidence. All 8,549 depth-two-and-deeper arm
+statuses in the task queue were reset to unreviewed. Depth one remains active;
+children can be queued but must not be examined or classified until the
+current depth's source and original-boundary work is complete.
+
+Baseline: Git `c97d4ee2c8be6d71f32272a674a3b0d76bb71a6c` plus the
+existing uncommitted S13 changes. The task-local baseline and queue record
+the current and original SHA-256 for each of 1,636 host/non-MVDM C, C++ and
+header files in the existing pinned-original manifest. All 1,636 pinned
+original hashes matched. This manifest is an input inventory, not yet proof
+that every relevant file or supported test profile has been included.
+
+Initial lexical inventory: current tree 4,066 depth-one groups and 5,039
+arms; original mirror 4,219 depth-one groups. These counts are separate and
+do not equate the groups by text. The parser reported an unclosed trailing
+comment in both copies of `sim32/sim32.c`; the file must be independently
+classified before treating either parse as complete. The trailing unmatched
+`/*` is present in both the pinned original and current bytes; no reference to
+this translation unit was found in the checked generated Ninja trees, build
+tools or tests. That search does not establish that every supported context
+has been enumerated, and the file has not been modified.
+
+Depth one, initial review: 63 literal `#if 0` arms already contain a single
+`#error`; their conditions are false independent of macro state. No source
+was modified for this review. The original-correspondence and diagnostic-line
+checks for these arms remain separate. Of 5,039 current arms, 63 have that
+established exclusion, 0 have been established retained, and 4,976 have not
+yet been classified; no next-depth work has been admitted from a retained
+arm. This does not reconcile missing original condition structure.
+
+The CMake production presets name x86 and x64; ordinary and ccache variants
+share configuration trees. Individual generated rules also set different
+per-source macros, including scoped `MONITOR`, so these names are not an
+exhaustive profile or header-inclusion proof. Fresh instrumented preprocessing
+is being collected from generated Ninja compilation commands. A positive hit
+can support reachability in that exact successful context; absence of a hit
+cannot establish universal exclusion.
+
+Fresh collection covered 1,658 generated compiler contexts: 1,646 succeeded
+and 12 failed because generated test/reference trees could not resolve headers.
+One failure came from the older `call-boundaries` Ninja tree: running its
+existing generator and retrying that source with the x86 compiler environment
+preprocessed successfully. The other eleven were from the x64 configure
+tree's `worker-reference-x86` graph, for which CMake names `-Architecture x86`
+and passes the graph as a reference to native generators; CMake does not
+expose its worker build target in the x64 branch. The initial collector also
+incorrectly used an x64 compiler environment for those x86 reference entries.
+They were not used as positive or negative product-branch evidence; no claim
+is made that this reference graph is an independently supported build.
+For a narrower positive witness, the current ten product targets' Ninja
+dependency commands were matched to the compilation database: 981 contexts
+matched and all 981 preprocessed successfully. Source-hash-matched markers
+observed in these contexts establish 1,849 depth-one arms as retained in at
+least one x86 or x64 product context. The 63 literal-false arms and four
+`CPU_30_STYLE` arms prohibited by `docs/rules/CODING.md` are already excluded
+with sole `#error`; 3,123 arms are provisionally marked pending because this
+collection does not establish their reachability or universal exclusion.
+They have not received individual semantic disposition. These retained
+arms contain 1,395 depth-two groups eligible for later review. A group under
+an unreviewed arm may also be reachable; including such arms leaves 3,203
+potential depth-two groups. These numbers
+describe current source only and do not settle original mirror reconciliation,
+include-guard classification, diagnostic mapping or the failed test profiles.
+
+The first-depth-only test-source collection subsequently preprocessed 224
+generated x86/x64 test contexts successfully. One additional first-depth arm,
+`j_c_lang.h`'s `#ifdef LITTLEND`, was reached by the existing x86
+`cvidc-vector-binding-fixture.exe` source and current generated worker graph;
+that fixture is recorded in the T473 S5 evidence. This positive test witness
+does not establish that any unobserved test arm is unreachable. Updated
+current-tree first-depth counts are 1,850 retained, 67 existing exclusions
+and 3,122 pending; the immediate-child queue counts remain 1,395 / 3,203.
+The three further first-depth markers seen in the unfiltered 1,658-context
+collection came exclusively from the x86 reference graph incorrectly run
+with an x64 environment (`mvdm.h:68`, `suballoc.h:35`, and `cleanup.c:213`).
+They remain pending rather than being counted as supported x64 reachability.
+The regenerated `call-boundaries` default target's 15 source/test contexts
+all preprocessed successfully; they added no first-depth marker beyond the
+product witnesses.
+
+Among current first-depth boundaries, 395 were independently checked as
+whole-file include guards: the matching define immediately follows the guard,
+and its matching endif is the final significant line. Of these, 91 are
+already product-witnessed and 304 remain pending inclusion-context review.
+The coding rule excludes ordinary include guards from deleted-branch-body
+replacement, so none of these 395 is replaced with `#error` merely for lack
+of a marker. This boundary classification does not prove header contents or
+every original/local guard mapping. The per-file source identities, line
+positions and statuses are in `s13-bfs-depth1-include-guards.json`.
+
+The initial inventory used a library line splitter that also treated form-feed
+as a line boundary. It was corrected to split on LF only and the queue rebuilt;
+group and arm totals were unchanged, while eleven additional positive markers
+matched the corrected physical line numbers. The values above are corrected.
+
+An independent depth-one original/current per-file directive-multiset triage
+finds 351 unpaired original groups in 59 files. This is a worklist only: it
+does not distinguish omitted whole functions, intended changed conditions,
+include guards, or misplaced matching directives, and can miss positional
+errors. It is not a count of proven missing boundaries. Candidate rows and the
+per-arm current queue are under the task scratch directory `build/t473-s13/bfs`.
+Of these, 73 original depth-one groups in kernel `ntstubs.c` have been
+classified separately: the registered OPENNT-HOST-076 subset retains only
+the complete `NtUserSetWindowFNID` body (original lines 6170–6188), which has
+no enclosing conditional; all 73 candidate groups lie outside that retained
+body. This is an omitted-whole-function subset disposition, not a claim that
+the other original functions were restored. One additional candidate in
+`userk.h` is the original `_USERK_` include guard; ordinary include guards
+are explicitly outside the excluded-branch-body rule, and the retained subset
+has the separate `WOW_USER_OBJECT_FLAGS_ONLY` inclusion control. Seven further
+original depth-one candidates are ordinary whole-file include guards in
+`ntexapi.h`, `ntregapi.h`, `ntrtl.h`, `nturtl.h`, `globals.h`, `user.h`, and
+`userrtl.h`; each original opening is followed by its matching define and
+the guard closes at the end of the file. This disposition does not certify
+the corresponding current inclusion behavior. `_USERCLI_` is not included
+in this group because the original file also has content after its guard.
+For `ntcftxt.h`, the registered OPENNT-HOST-036/046 subset retains five
+original functions: `GetClassInfo` (111–155), `StringDuplicate` (578–588),
+`InitClsMenuName` (595–632), `RegisterClassExWOW` (701–844), and
+`UnregisterClass` (1051–1087). The original has eleven top-level `#ifdef
+UNICODE` groups; the initial selector and the two groups intersecting retained
+functions (601–617 and 802–806) correspond to the three current groups. Its
+eighteen `#ifndef UNICODE` groups and two `#ifdef FE_SB` groups do not
+intersect any of those five function ranges. The 28 excess original groups
+are therefore classified as outside this registered function subset, without
+asserting that other text APIs were restored or that all local semantics have
+been independently reviewed. Original group interval and retained-line
+comparisons were checked against the frozen original and current sources.
+For `handtabl.c`, OPENNT-HOST-063 retains only the original ownership table
+at lines 39–59; of 28 original depth-one groups, only the `FE_IME` group at
+line 56 intersects that table. The 27 other groups lie outside the retained
+table subset. Their source identities and locations are recorded in
+`s13-bfs-depth1-handtabl.json`; this does not decide whether the retained
+`FE_IME` arm is reachable. `input.c` retains original `AddAttachment`,
+`Recalc2` and `RecalcThreadAttachment` (OPENNT-HOST-057/058); its 25
+unmatched top-level groups lie outside those functions. `queue.c` retains
+original `SetAppCompatFlags`, `xxxInitTask` and `_ShowStartGlass`
+(OPENNT-HOST-053); the original top-level `DEBUG` arm in `xxxInitTask`
+remains in the local subset and is still pending reachability review, while
+the other 23 unmatched groups lie outside those functions. Source identities
+and ranges are recorded in `s13-bfs-depth1-input-queue.json`. The remaining
+In `copy_fnc.c`, DIV-064 deliberately changes the original top-level `#if 0`
+at line 115 to `#if 1` to select the original fill loop; the current `#else`
+is universally unreachable and already contains only `#error` (DIV-562).
+In `nt_msscs.c`, DIV-039 intentionally replaces original `#ifndef i386` with
+the CPU40 machine-owner selector; the local selected CPU40 path was witnessed
+in the product configuration and the other arm remains separately pending
+all-supported-context proof. Both exact correspondences and frozen source
+identities are in `s13-bfs-depth1-selected-condition-adaptations.json`.
+In `ios.c`, the original top-level `NTVDM && MONITOR` condition at line 413
+corresponds to the product-witnessed local condition at line 398, whose
+registered DIV-477 adaptation admits CCPU alongside MONITOR. The other
+original condition with the same expression retains its original spelling.
+This is a first-depth condition correspondence, not a fresh behavioral proof
+of the string-I/O consumers; source hashes and exact expressions are in
+`s13-bfs-depth1-ios.json`. The remaining 164 original-group multiplicity
+candidates are unreviewed.
+
+One of those candidates, `nt_sec.c`, is now specifically identified rather
+than treated as a generic text mismatch: original lines 115–158 form a
+top-level `#ifdef X86GFX` absent from the local file. This file was not
+witnessed in the collected contexts, while X86GFX is used elsewhere. The
+file's supported role and all applicable profiles must therefore be established
+before deciding whether an exclusion sentinel belongs at that boundary.
+`s13-bfs-depth1-nt-sec-pending.json` pins the exact source identities. The
+removed hardware-V86 implementation is not restored.
+
+First-depth implementation: DIV-566 restores the original top-level
+`#ifndef CPU_40_STYLE` boundary in `base/support/main.c`. Its unsupported
+non-CPU40 arm is `#error`; the original DIV-083 CPU40 declaration remains in
+the selected alternative. Explicit `#line` directives preserve the existing
+selected declaration and subsequent diagnostic positions. The actual x86
+worker compilation succeeded; the existing C4210 warning remained at logical
+line 107. Real-context preprocessing before and after differs only by blank
+lines, and separate x86/x64 preprocessor controls verified lines 61/62 and
+the non-CPU40 error. Source hashes, the removed original arm and proof limits
+are in `s13-bfs-depth1-main.json`; the focused test is
+`tests/build/test_bfs_depth1_cpu_guards.py`. The rest of depth one remains
+open, so the complete build, publication and release gates have not run for
+this depth.
+After this edit, the current depth-one inventory contains 4,067 groups and
+5,041 arms: 1,851 retained, 68 previously excluded, one newly excluded, and
+3,121 pending. The original unmatched-candidate worklist has 163 pending
+groups. These are progress counts, not proof that the breadth-first layer is
+complete.
+
+DIV-567 replaces the first-depth `xt.c` parity-table body, guarded by a
+required `!CPU_40_STYLE` conjunct, with `#error` for the unsupported profile.
+The existing DIV-155 condition adaptation remains registered because it
+keeps the selected CPU40 path from introducing a duplicate provider. The
+removed 259-line local body matches the original after CRLF normalization;
+`#line 370` preserves the next logical diagnostic line. The selected x86
+preprocessor output matches the prior source apart from blank lines, the real
+x86 `xt.obj` build succeeds, and x86/x64 first-depth controls check both
+conjuncts, the error and the logical line. The full source identity and proof
+limits are in `s13-bfs-depth1-xt-parity.json`; no child condition was reviewed.
+This also maps the two original `xt.c` top-level CPU selector differences to
+their existing DIV-147 and DIV-155 adaptations. Updated first-depth counts are
+1,851 retained, 68 prior exclusions, 2 newly excluded and 3,120 pending;
+161 original multiplicity candidates remain unreviewed.
+
+The original `nt_timer.c` top-level MONITOR/X86GFX condition at line 241 and
+the local condition at line 243 are the unique such groups in their respective
+files and differ only in whitespace. This classifies one original
+multiplicity mismatch without deciding whether the arm is reachable; 160
+original candidates remain unreviewed.
+
+DIV-568 retains the existing first-depth `PROFILE && !CPU_40_STYLE` condition
+in `main.c` and replaces its five-line unsupported body with `#error`; the
+discarded body matches the original after newline normalization. This did not
+restore an additional missing condition framework. `#line 221` preserves the
+following prior logical line. The real x86 object build and the selected-path
+preprocessor comparison succeeded; x86/x64 controls exercised both sides of
+the conjunction, the rejected arm and the line mapping. Evidence and source
+hashes: `s13-bfs-depth1-main-profile.json`. Updated current depth-one counts:
+1,851 retained, 68 prior exclusions, 3 newly excluded, and 3,119 pending.
+Exactly one original first-depth framework has been restored in this pass
+(DIV-566); DIV-567 and DIV-568 retain existing frameworks. Full first-depth
+build, publication, test, commit and push remain due at layer completion.
+
+The previously added `config.c` MONITOR LIM-backfill sentinel duplicated an
+already retained top-level sentinel for the same original group. The duplicate
+and its redundant test entry were removed; the original sentinel and its
+`#line 886` remain. The true x86 object build and selected preprocessing
+passed, x86/x64 first-depth guard controls passed, and actual warning lines
+757, 898 and 945 match the earlier build. See
+`s13-bfs-depth1-config-dedup.json`. This reduces the first-depth group count
+by one and does not remove an original framework.
+
+Restoration-count scope: DIV-566 is the one original first-depth framework
+restored since starting this BFS pass. Across the entire uncommitted tree
+relative to `c97d4ee2c`, the first-depth Git-diff inventory found 34 added
+condition-group openings. All 34 have now been anchored to their original
+top-level conditions using unique condition, original function or adjacent
+source context; repeated `MONITOR` conditions were checked individually.
+The per-group source hashes, original line positions and anchors are in
+`s13-bfs-depth1-restoration-candidates.json`. Thus 34 original first-depth
+frameworks have been restored in the uncommitted work, including the one in
+this BFS pass. This counts groups, not arms or `#error` replacements, and
+does not assert that their semantic/profile or line-number audit is complete.
+
+After eliminating the duplicated `config.c` sentinel, the current first-depth
+inventory is 4,066 groups and 5,040 arms: 1,851 retained, 68 existing proven
+exclusions, 3 newly excluded, and 3,118 pending. These numbers do not imply
+that pending original structure, diagnostics or supported contexts are done.
+
+DIV-569 subsequently replaces the non-CPU40 i386 memory-size arm at
+`config.c:460` with `#error`. Its removed two-line body matches the pinned
+original after newline normalization. DIV-056 remains registered for the
+selected CPU40 condition and original `GetVDMSize` calculation; its previous
+description of retaining both bodies has been corrected. `#line 464` keeps
+the selected sibling's existing logical line. The actual x86 object build,
+selected nonblank preprocessing comparison, and x86/x64 guard controls pass;
+the previous warning locations remain unchanged. Per-source identities and
+tests are in `s13-bfs-depth1-config-memory.json`. This is an existing
+condition framework, not an additional restoration. Current first-depth
+counts are 1,851 retained, 68 prior exclusions, 4 newly excluded, and 3,117
+pending; 159 original multiplicity candidates remain unreviewed. Restored
+first-depth framework count remains 34.
+
+The `#if 1` alternative also updates the current-tree first-depth totals to
+1,850 retained, 68 existing proven exclusions, and 3,121 pending. No source
+was newly rewritten for these two determinations.
+
+Only immediate children of depth-one arms remain queued. A pending parent is
+potentially reachable and cannot suppress its children. Their contents and
+dispositions will be reviewed only after depth one has passed its independent
+build, publication, test, commit and push gate.
+
+Of the 978 current mirror files containing conditional directives, 563 had a
+file marker in successful product dependency contexts. The same 563 were
+witnessed across all 1,646 successful generated contexts; 415 were not. A
+missing marker does not establish that a file is wholly excluded from every
+supported fixture or include path. The failed contexts and source/generator
+inventory must be resolved before a whole-file exclusion is decided.
+
+
+DIV-570 replaces six first-depth non-NTVDM serial/timer arms in existing
+condition groups, not six restorations. Their original/local body hashes and
+actual x86 include evidence are recorded in `s13-bfs-depth1-ntvdm-arms.json`
+and `s13-bfs-depth1-ntvdm-invariant.json`. Actual selected x86 preprocessing
+is equal ignoring blank lines, but raw output is not identical; the two x86
+objects compile and x86/x64 focused guard and logical-line controls pass.
+Full product build and runtime verification remain pending. First-depth
+counts: 4,066 groups, 5,040 arms; 1,851 observed retained, 68 earlier
+excluded, 10 newly excluded, 3,111 pending. 34 original first-depth groups
+restored relative to HEAD; no restoration in DIV-570. Of these 34, one was
+restored after this BFS pass began. 159 original matching candidates remain
+unreviewed. Structural pruning leaves 8,537 deeper current arms unreviewed;
+this does not constitute a classification of those arms.
+
+Original-baseline first-depth reconciliation: two apparent i386 mismatches in
+`inc/mvdm.h` and `inc/suballoc.h` correspond to existing first-depth
+conditions extended under the registered MVDM-SUPPORT-DIV-006/007 adapters.
+They do not add restored groups. Pinned hashes, line anchors and conclusions
+are in `s13-bfs-depth1-i386-correspondence.json`; arm reachability remains
+a separate question. This reduces unreviewed original multiplicity candidates
+from 159 to 157 (77 rows). The first-depth restored-group count remains 34.
+
+The actual NTVDM invariant and unique original first-depth anchors also
+confirm 26 previously present sole-`#error` arms in `com.c`, `timer.c` and
+`reset.c`; `s13-bfs-depth1-ntvdm-existing.json` records each. No source or
+framework was restored in this classification. Current first-depth counts:
+1,851 observed retained, 94 prior exclusions, 10 newly excluded, 3,085
+pending, across 4,066 groups / 5,040 arms. Restored groups remain 34.
+
+DIV-571 replaces one existing first-depth non-NTVDM timer arm and preserves
+its original selected sibling and the previously existing `#line 1816` and
+`#line 1959`. No new condition group was restored. Actual x86 preprocessing
+matched the preceding candidate ignoring blank lines, but not bytewise; the
+timer object rebuilt and x86/x64 focused positive/negative and logical-line
+controls passed. Full product and runtime verification remain pending.
+First-depth totals are 4,066 groups / 5,040 arms: 1,851 observed retained,
+94 previous exclusions, 11 newly excluded, 3,084 pending. The second-depth
+queue contains 3,193 candidate groups, including children of unresolved
+first-depth arms; their selection and bodies have not been classified.
+Original-group restorations remain 34; 157 original multiplicity candidates
+remain unreviewed.
+
+An additional actual worker include-chain sweep confirms 37 existing
+first-depth NTVDM exclusions in 14 source files, each with an original anchor
+and sole `#error`; see `s13-bfs-depth1-ntvdm-batch2-existing.json`. The
+keyboard source has an additional directly including observation fixture and
+was left pending for separate context verification; `nt_rflop.c` also remains
+pending its additional syntax-test context. No source was rewritten and no
+condition group was restored. First-depth totals: 4,066 groups / 5,040 arms;
+1,851 observed retained, 131 prior exclusions, 11 newly excluded, 3,047
+pending. Restored original groups remain 34; unreviewed original multiplicity
+candidates remain 157. The 3,193 second-depth candidate groups include
+children of unresolved first-depth arms and have not been reviewed.
+
+The separately compiled `keyba_observed.c` fixture was then checked with its
+actual x86 compiler command and include trace. It includes both original
+`keyba.c` and `host_def.h`, defines NTVDM and contains no NTVDM undef in its
+recorded include chain. Together with the product trace and unique pinned
+original anchors, this confirms six existing keyboard first-depth exclusions;
+see `s13-bfs-depth1-ntvdm-keyba-existing.json`. No new restoration or source
+change resulted. First depth: 4,066 groups / 5,040 arms; 1,851 observed
+retained, 137 prior exclusions, 11 newly excluded, 3,041 pending. Original
+frameworks restored: 34; 157 original multiplicity candidates still open.
+
+The 3,193 currently queued second-depth group candidates were checked only
+against their first-depth parent-arm identities: 1,395 are below observed
+retained arms and 1,798 below still-pending arms. None is below an already
+classified excluded first-depth arm. This checks queue placement only and
+does not examine or classify the candidate groups themselves.
+
+Original `client/clmsg.c` reconciliation used the pinned original and the
+registered complete-function subsets OPENNT-HOST-089/120. Ten original
+first-depth groups lie wholly outside those admitted function ranges; four
+intersect `DefWindowProcWorker` and remain pending under its local selector.
+Only original group start/end and admitted function boundaries were checked;
+the retained groups were not classified as excluded. Evidence is
+`s13-bfs-depth1-clmsg-original.json`. The original multiplicity candidates
+still unreviewed decrease from 157 to 147; no framework was restored.
+
+The current original first-depth correspondence queue is also retained at
+`s13-bfs-depth1-original-candidates.csv`; its multiplicity count is distinct
+from both current-tree arms and restored-group count.
+
+DIV-572 replaces the first-depth non-NTVDM BIOS signon body in `reset.c`;
+the original boundary remains and `#line 898` preserves the observed following
+line. Actual x86 preprocessing matched its previous selected path ignoring
+blank lines, but not bytewise. The x86 object and x86/x64 focused condition,
+negative and line controls pass; full product/runtime testing remains pending.
+Two previously excluded timer arms were separately anchored to the pinned
+original and classified; see `s13-bfs-depth1-ntvdm-timer-anchors.json`. Neither
+change restored a condition group. First depth: 4,066 groups / 5,040 arms;
+1,851 observed retained, 139 prior exclusions, 12 newly excluded and 3,038
+pending. Restored original groups remain 34; 147 original multiplicity
+candidates remain unreviewed.
+
+DIV-573 replaces five existing first-depth non-NTVDM arms in time service
+and PIC, with the pinned original boundaries retained and following logical
+lines preserved. Source/body identities are in `s13-bfs-depth1-ntvdm-batch3.json`.
+The actual x86 selected preprocessor outputs compare equal ignoring blank lines
+(not bytewise); both x86 objects compile and x86/x64 positive/negative guard
+and line controls pass. Rebuilt controller fixtures pass PIC reset (24
+assertions) and keyboard/PIC (86 assertions); full product and runtime gates
+are pending. Results are in `s13-bfs-depth1-batch3-verification.json`.
+First depth: 4,066 groups / 5,040 arms, 1,851 observed retained, 139 prior
+exclusions, 17 newly excluded, 3,033 pending. Restored original first-depth
+groups remain 34; 147 original candidates remain unreviewed.
+
+After DIV-573, the next-depth queue contains 3,186 candidate groups: 1,395
+below observed-retained first-depth arms and 1,791 below pending arms. No
+second-depth groups below a classified excluded first-depth arm remain. All
+8,519 remaining deeper arms retain the unreviewed status. This is a queue
+integrity check, not a review of any next-depth body.
+
+First-depth DBG review: 23 pre-existing sole-`#error` branches in 12 DEM
+and DPMI source files were matched to unique original anchors. Actual x86
+worker and x86-reference compiler commands both succeeded; their commands
+and included file chains contain no DBG definition, undefinition or command
+flag. Directly source-including test fixtures use two additional files, which
+remain pending rather than being inferred from product evidence. Source hashes,
+24 compiler-context traces and per-arm anchors are in
+`s13-bfs-depth1-dbg-batch1.json`. No code was changed or restored by this
+classification. First depth: 4,066 groups / 5,040 arms; 1,851 observed
+retained, 162 prior exclusions, 17 newly excluded, 3,010 pending. Restored
+original groups remain 34; 147 original multiplicity candidates remain open.
+
+The `demsrch.c` and `int21map.c` DBG review additionally traced their actual
+product and reference compile contexts and the three direct source-including
+fixtures in both contexts. All ten syntax/include-chain checks succeeded with
+no DBG definition, undefinition or flag; 13 existing `#error` arms also match
+unique original anchors. Details: `s13-bfs-depth1-dbg-fixtures.json`. No
+source or original structure was changed. First depth now has 4,066 groups /
+5,040 arms: 1,851 observed retained, 175 existing exclusions confirmed, 17
+newly excluded and 2,997 pending. Restored original groups remain 34; 147
+original multiplicity candidates remain unreviewed.
+
+The next DBG batch checked 25 actual x86 worker/WOW32, x86-reference and x64
+launcher compiler/include contexts for 14 sources. Twenty-eight existing
+sole-error arms match unique original anchors. The additional COMMAND
+dispatcher source and direct-including fixture were each checked in x86
+worker and reference contexts, confirming one more existing arm. The traces
+are `s13-bfs-depth1-dbg-batch2.json` and `s13-bfs-depth1-dbg-command.json`.
+No source rewrite or original framework restoration resulted. First depth:
+4,066 groups / 5,040 arms; 1,851 observed retained, 204 previous exclusions,
+17 newly excluded, 2,968 pending. Restored original groups remain 34; 147
+original multiplicity candidates remain open.
+
+A subsequent first-depth DBG pass used three uniquely matching following
+source lines after the conditional group, pinned original identities and the
+already recorded complete compiler/include contexts. It confirmed 113 more
+existing sole-error branches across eight files, without modifying source.
+Physical line positions are split on LF rather than generic splitlines, so
+form-feed bytes do not shift indices. A separate physical-line recheck of all
+65 previous DBG classifications found no mismatches. Details:
+`s13-bfs-depth1-dbg-following-anchors.json`. First depth: 4,066 groups /
+5,040 arms; 1,851 observed retained, 317 earlier exclusions, 17 newly
+excluded, 2,855 pending. Restored original groups remain 34; 147 original
+multiplicity candidates remain unreviewed.
+
+Original-baseline reconciliation for `client/wow.c` and `rtl/wow.c` accounted
+for 19 further first-depth groups in six candidate rows. Their recorded
+original line positions fall outside the specific original function bodies
+admitted by OPENNT-HOST-078/106/108; the two original `_GetClientRect` WOW
+groups remain present locally. Fixed-original and current hashes, retained
+function ranges and group positions are recorded in
+`s13-bfs-depth1-original-wow-subsets.json`. This did not change source or
+restore conditions. Remaining original multiplicity candidates: 128 groups
+in 68 rows; restored original first-depth groups remain 34, one during this
+BFS pass. These original-source counts are separate from the 5,040 current
+source arms.
+
+A broader first-depth cohort classified 178 additional existing sole-error
+arms in 83 files. It first excluded names defined or undefined in project
+source and names set by any of the 2,836 generated compile commands; the
+remaining entries still required matching source hashes, successful actual
+preprocessing and uniquely anchored pinned-original outer groups. MONITOR and
+X86GFX have real per-target definitions and are not treated as globally absent;
+UNICODE and YODA have project definitions and were also excluded from this
+cohort. Details and evidence limits are in
+`s13-bfs-depth1-macro-broad-cohort.json`. No source or condition structure was
+changed. Root: 4,066 groups / 5,040 arms; 1,851 observed retained, 1,165
+existing exclusions, 127 newly excluded, 1,897 pending. Restored original
+first-depth groups remain 34 (one in the current BFS pass); 147 original
+multiplicity candidates remain unreviewed.
+
+The next DBG batch checked 22 x86 worker/reference compile contexts for 11
+additional directly compiled host units, with no DBG definition or flag in
+those commands or their include chains. Distinct original first-depth anchors
+confirm 86 existing sole-error arms; see `s13-bfs-depth1-dbg-batch3.json`.
+All checks use physical LF positions; no source changed and no original
+structure was restored. First depth: 4,066 groups / 5,040 arms; 1,851 observed
+retained, 403 existing exclusions confirmed, 17 newly excluded, 2,769 pending.
+Restored original groups remain 34; 147 original multiplicity candidates remain
+unreviewed. The 3,186 second-depth candidates have not been reviewed.
+
+Three more DPMI sources and their direct-including observation fixtures were
+checked in six product/reference and six fixture syntax/include contexts.
+Five existing DBG exclusions have unique original first-depth anchors; see
+`s13-bfs-depth1-dbg-dpmi2.json`. The fixture-only trace variants do not occur
+in the included provider source and do not define DBG. No source was changed.
+First depth: 4,066 groups / 5,040 arms; 1,851 observed retained, 408 existing
+exclusions, 17 newly excluded, 2,764 pending. Original first-depth frameworks
+restored remain 34; 147 original multiplicity candidates remain open.
+
+The first PROD batch checked 10 actual x86 worker/reference compiler and
+include chains for five SoftPC units, all selecting `/DPROD` without a
+subsequent include-chain redefinition. Relevant controller/PIC and BOP
+fixture generators explicitly select PROD as recorded in
+`s13-bfs-depth1-prod-batch1.json`. Sixty-seven existing sole-error arms have
+unique original first-depth anchors. No source or framework was changed.
+First depth: 4,066 groups / 5,040 arms; 1,851 observed retained, 475 existing
+exclusions, 17 newly excluded, 2,697 pending. Restored first-depth original
+groups remain 34; 147 original multiplicity candidates remain unreviewed.
+
+The second PROD batch collected 80 actual x86 worker/reference compiler and
+include-chain traces for 40 sources, each selecting `/DPROD` with no PROD
+redefinition in its recorded include chain. Unique original outer anchors
+confirm 120 existing sole-error arms across 39 files. `nt_event.c` and
+`nt_com.c` were held for their source-including fixtures; `nt_rflop.c` was
+held for a differently flagged older syntax graph; files absent from generated
+compilation graphs were not classified by absence. Evidence is
+`s13-bfs-depth1-prod-batch2.json`. No source changed or framework was restored.
+First depth: 4,066 groups / 5,040 arms; 1,851 observed retained, 595 prior
+exclusions, 17 newly excluded, 2,577 pending. Restored original groups remain
+34; 147 original multiplicity candidates remain unreviewed.
+
+The NTVDM first-depth sweep now also covers `#else` arms of original
+`#ifdef NTVDM` groups: unique original anchors, actual worker/include-chain
+evidence and the separately checked keyboard fixture confirm 56 existing
+sole-error alternatives in 12 files. Parent groups remain unchanged. See
+`s13-bfs-depth1-ntvdm-else.json`. First depth: 4,066 groups / 5,040 arms;
+1,851 observed retained, 651 prior exclusions, 17 newly excluded, 2,521
+pending. No new framework was restored; cumulative original first-depth
+restorations remain 34.
+
+DIV-574 replaces five first-depth non-NTVDM `#else` bodies in keyboard,
+time, PIC and timer sources; it retains the original group frameworks and
+selected arms, and uses `#line` for the observed following logical lines.
+The four actual x86 selected preprocessor outputs match before/after ignoring
+blank lines, but not bytewise. All four x86 objects rebuilt; x86/x64 focused
+positive, negative and line controls pass. Rebuilt PIC and keyboard/PIC
+fixtures passed 24 and 86 assertions respectively. Source identities, removed
+body hashes and fixture evidence are in `s13-bfs-depth1-ntvdm-else-new.json`
+and `s13-bfs-depth1-else-verification.json`; full product/runtime gates are
+still pending. Root: 4,066 groups / 5,040 arms, 1,851 observed retained,
+651 existing exclusions, 22 new exclusions, 2,516 pending. Restored original
+first-depth groups remain 34; 147 original multiplicity candidates are open.
+
+The PROD review of `nt_com.c` and `nt_event.c` now includes both actual
+worker/reference builds and their directly source-including fixtures. The
+serial mock lifecycle passed, and the event fixture syntax/include checks
+selected PROD in both graphs. Nine original-anchored existing exclusions
+were confirmed; see `s13-bfs-depth1-prod-special.json`. The serial mock is not
+physical COM acceptance. No source changed in this classification. First
+depth: 4,066 groups / 5,040 arms; 1,851 observed retained, 660 existing
+exclusions, 22 newly excluded and 2,507 pending. Restored original groups
+remain 34; 147 original multiplicity candidates remain open.
+
+The PIG first-depth review inventoried 2,836 generated commands across 15
+current graphs, with no PIG definition flag, and found no project host/test
+`#define` or `#undef PIG`. The old `cdefine.inc` PIG option is not part of
+the generated active graphs. For same-hash sources with successful actual
+product/test preprocessing and a uniquely anchored original outer condition,
+64 existing sole-error arms in 17 files were confirmed. Per-file compilation
+contexts and instrumentation hashes are in `s13-bfs-depth1-pig.json`. Files
+without matching source snapshots or witnessed include contexts remain open;
+no code or original group was restored by this pass. First depth: 4,066 groups
+/ 5,040 arms; 1,851 observed retained, 724 existing exclusions, 22 newly
+excluded, 2,443 pending. Original first-depth restorations remain 34; 147
+original multiplicity candidates remain unreviewed.
+
+DIV-575 replaces seven unsupported `#ifdef DEBUG` bodies in the actual
+WOW32 `wkman.c` translation unit, preserving original top-level groups,
+selected alternatives and measured logical lines. The actual x86 WOW
+compiler/include chain contains no DEBUG definition or flag. The selected
+preprocessor output matches before/after ignoring blank lines, not bytewise;
+the x86 WOW object and x86/x64 positive/negative and line controls pass.
+No intermediate WOW runtime test was claimed; full product/runtime gates are
+pending. See `s13-bfs-depth1-debug-wkman.json` and its `-verification.json`.
+Root: 4,066 groups / 5,040 arms; 1,851 observed retained, 724 prior exclusions,
+29 newly excluded and 2,436 pending. Restored original first-depth groups
+remain 34; 147 original multiplicity candidates remain unreviewed.
+
+The remaining PIG review confirmed 16 existing guards using equal ordered
+original/current first-depth group sequences and 33 independently verified
+anchors in three same-hash CCPU files; adjacent identical excluded bodies
+cannot independently reveal deleted-body ordering, which is recorded as a
+provenance limit. Fresh product/reference include traces and unique original
+anchors confirmed three more in the changed BIOS/timer files. Evidence:
+`s13-bfs-depth1-pig-ordered.json` and `s13-bfs-depth1-pig-changed.json`.
+The two PIG groups in unwitnessed DASM source files remain pending; absence
+of a build observation alone is not treated as proof. No source changed.
+First depth: 4,066 groups / 5,040 arms; 1,851 observed retained, 743 prior
+exclusions, 29 newly excluded, 2,417 pending. Restored original first-depth
+groups remain 34; 147 original multiplicity candidates remain unreviewed.
+
+DIV-576 replaces 43 unsupported first-depth DEBUG arms in 24 actual WOW32
+source units, preserving original group boundaries and three selected else
+alternatives. Their actual x86 WOW compiler/include chains contain no DEBUG
+definition or flag. Forty-six measured line probes cover selected alternatives
+and following lines. The selected preprocessing of all 24 sources matches
+before/after ignoring blank lines, not bytewise; all 24 x86 WOW objects and
+x86/x64 positive/negative line controls pass. These intermediate objects have
+not received WOW application runtime acceptance; full product gates remain
+pending. See `s13-bfs-depth1-debug-wow-batch.json` and its
+`-verification.json`. Root: 4,066 groups / 5,040 arms; 1,851 observed
+retained, 743 prior exclusions, 72 newly excluded, 2,374 pending. Restored
+original first-depth groups remain 34; 147 original multiplicity candidates
+remain unreviewed.
+
+DIV-577 replaces 20 unsupported DEBUG first-depth bodies in selected
+`wow32.c` and `wcall16.c`, retaining original outer conditions and two selected
+else alternatives. The actual x86 WOW and direct-including callback fixture
+contexts contain no DEBUG flag or definition. Twenty-two pre-edit probes
+measured selected and following logical lines. Both selected preprocessors
+match before/after ignoring blank lines, not bytewise; x86 objects and x86/x64
+guard controls pass. The callback-frame fixture passes four frame phases and
+11 abort cases; it is a controlled host fixture, not full guest acceptance.
+The first run passed behavioral assertions but its final PowerShell hash
+pipeline failed; the harness now uses explicit `-LiteralPath` and a fresh
+complete rerun passed. Evidence: `s13-bfs-depth1-debug-wow-special.json` and
+its `-verification.json`. Full product/runtime gates remain pending. Root:
+4,066 groups / 5,040 arms, 1,851 observed retained, 743 earlier exclusions,
+92 newly excluded, 2,354 pending. Restored original first-depth groups remain
+34; 147 original multiplicity candidates remain unreviewed.
+
+A first-depth macro-cohort pass audited HUNTER, SPC486, SEGMENTATION, HERC,
+NULLSTRUCT and REAL_VGA against 2,836 generated graph commands and project
+macro definitions. For same-hash files actually reached by successful
+product/test preprocessing, with unique original outer anchors and a sole
+existing `#error`, it confirmed 166 prior exclusions: NULLSTRUCT 65,
+SEGMENTATION 48, HUNTER 15, HERC 20 and REAL_VGA 18. No SPC486 body was
+classified in this pass. The per-file actual contexts, hashes, and limits are
+in `s13-bfs-depth1-macro-cohort.json`; unwitnessed or changed files and
+non-sole-error bodies remain pending. No source or framework was changed.
+Root: 4,066 groups / 5,040 arms; 1,851 observed retained, 909 existing
+exclusions, 92 newly excluded, 2,188 pending. Restored original first-depth
+groups remain 34; 147 original multiplicity candidates remain unreviewed.
+
+DIV-578 replaces 35 unsupported SPC486 first-depth bodies in 15 SoftPC
+units, retaining original outer conditions, 17 selected alternatives and
+measured logical lines. Both actual x86 worker/reference compile/include
+chains and project macro inventory contain no SPC486 definition. All 15
+objects and x86/x64 guard controls pass. Selected preprocessing matches
+ignoring blank lines in 14 files; c_reg differed only in the scratch `__FILE__`
+path and matches after restoring the real logical filename. The selected
+CCPU bit matrix is NOT a semantic pass: 64 of 118 cases fail in both isolated
+pre-cleanup and current-source fixtures; all 118 full results match between
+them and their exit statuses match the prior vector/direct comparison. This
+pre-existing boundary is not concealed or attributed to the branch cleanup.
+See `s13-bfs-depth1-spc486.json` and its `-verification.json`; full product
+acceptance remains pending. Root: 4,066 groups / 5,040 arms, 1,851 observed
+retained, 909 prior exclusions, 127 newly excluded, 2,153 pending. Restored
+original first-depth groups remain 34; 147 original candidates remain open.
+
+Further first-depth reconciliation confirmed 25 existing `#error` arms:
+12 from original-order correspondence and 13 HUNTER arms from uniquely
+anchored original correspondence. The latter use eight successful actual
+product/reference include traces and two successful keyboard fixture traces;
+their limits are recorded in `s13-bfs-depth1-macro-ordered.json` and
+`s13-bfs-depth1-hunter-changed.json`. This classifies existing source only;
+it does not add exclusions or restore condition structures. Root: 4,066
+groups / 5,040 arms; 1,851 observed retained, 934 previously excluded,
+127 newly excluded and 2,128 pending. The number of original first-depth
+groups restored relative to the fixed HEAD remains 34, of which one was
+restored during the present BFS pass. Another 147 original multiplicity
+candidates remain unreviewed, so this count is not a final reconciliation.
+
+The next same-hash cohort independently inventories 2,836 generated compile
+commands and project definitions for SUPPORT_LPK, BIGEND, SFELLOW and CPU_286.
+Using successful product/test preprocessing and unique pinned-original outer
+anchors, it confirms 53 existing sole-error arms: SUPPORT_LPK 38, BIGEND 12,
+SFELLOW 3; none of the CPU_286 candidates met these evidence requirements.
+Details and unresolved boundaries are in `s13-bfs-depth1-macro-next-cohort.json`.
+No source was changed and no original condition was restored in this cohort.
+Root: 4,066 groups / 5,040 arms; 1,851 observed retained, 987 existing
+exclusions, 127 newly excluded, 2,075 pending. Restored original first-depth
+groups remain 34, including one in the current BFS pass; 147 original
+multiplicity candidates remain unreviewed.
+
+Latest first-depth snapshot: 4,066 current groups / 5,040 arms; 1,851
+observed retained, 1,165 already excluded, 127 newly excluded, 1,897 pending.
+Original-baseline reconciliation has 128 unreviewed candidate groups in 68
+rows; 34 original first-depth groups were restored relative to fixed HEAD,
+including one in the current BFS pass. The next-depth candidate count is
+3,174, including children of still-pending parent arms. This snapshot does not
+claim completion or alter the per-depth delivery gate.
+Original first-depth subset reconciliation also resolved three groups in
+`client/handles.c` and `kernel/inctlpan.c`: their pinned-original positions
+are outside the respectively registered GetFullUserHandle body and
+sysBmpStyles table. See `s13-bfs-depth1-original-small-subsets.json`.
+No source or condition was restored. The current count of unreviewed original
+multiplicity candidates is 125 groups in 65 rows; first-depth restorations
+remain 34 relative to fixed HEAD, including one in the current BFS pass.
+Further original first-depth subset reconciliation accounts for three groups
+in `probe.c`, `random.c` and `exitwin.c`: each group ends before the sole
+registered retained function begins. Source hashes, exact original positions
+and registrations are recorded in
+`s13-bfs-depth1-original-standalone-subsets.json`. The separate ALLOC_PRAGMA
+candidate in probe.c remains open because it mentions the retained function;
+no inference is made from its position alone. Original candidates remaining:
+122 groups; restored groups remain 34 relative to fixed HEAD (one in this BFS
+pass). No source or deeper condition was changed.
+Two more original first-depth groups in `client/clmenu.c` lie after the
+OPENNT-HOST-043/045 retained menu client/parser bodies; the original positions,
+source hashes and boundaries are in `s13-bfs-depth1-original-clmenu.json`.
+No condition was restored. Remaining original multiplicity candidates: 120
+groups in 60 rows. Restored first-depth groups remain 34 relative to fixed HEAD,
+including one in the current BFS pass. Current source arm counts are unchanged.
+Original first-depth reconciliation resolved eight groups from `getset.c`,
+`profile.c` and `rtl/draw.c` outside the specifically registered retained
+function bodies, including the original profile table conditional whose mapping
+is provided by the registered compatibility binding. Function ranges, original
+positions and hashes are in `s13-bfs-depth1-original-function-subsets.json`.
+No current source or retained condition was changed. Remaining original
+multiplicity candidates: 112 groups in 56 rows; the count of restored original
+first-depth groups is still 34 relative to fixed HEAD, one in the current BFS
+pass. Current source arm counts remain 1,851 observed retained, 1,165 existing
+exclusions, 127 newly excluded and 1,897 pending.
+First-depth original reconciliation additionally resolved 16 groups in
+`client/client.c`, `kernel/class.c` and `rtl/drawtext.c`. For each, both
+original group boundaries were checked against every retained registered
+function range, including the FE_SB group that remains inside GetPrefixCount.
+Only groups with no retained-range intersection were classified outside the
+subset. See `s13-bfs-depth1-original-selected-subsets.json`; no source changed.
+Original candidates remaining: 96 groups in 48 rows. Restored first-depth
+groups remain 34 relative to fixed HEAD, including one in the BFS pass.
+DIV-579 restores two original first-depth MONITOR shells in `host/src/nt_com.c`
+with sole `#error` bodies and `#line` preserving the prior logical positions.
+Both actual x86 worker/reference contexts have no MONITOR flag or definition;
+the source-linked serial mock passes before and after. Production x86 selected
+preprocessor output matches after normalizing its sole scratch __FILE__ path;
+raw output differs by that path. Isolated guard positive/negative controls pass;
+the full-unit negative build stops at the earlier nt_eoi.h guard. These are
+local checks, not a complete product or real-COM acceptance. Details are in
+`s13-bfs-depth1-ntcom-monitor.json`.
+
+Current first-depth snapshot: 4,068 groups / 5,042 arms, 1,851 observed
+retained, 1,165 existing exclusions, 129 newly excluded, 1,897 pending.
+Original multiplicity candidates remaining: 94 groups in 47 rows. Original
+first-depth groups restored relative to fixed HEAD total 36, including three
+in the current BFS pass. All 8,501 deeper arms remain unreviewed.
+Original nt_graph.c line 760 maps to the current first-depth DIV-322 CCPU
+condition at line 690; original source and retained-body anchor evidence is in
+`s13-bfs-depth1-original-ntgraph.json`. Both generated actual worker contexts
+define CCPU and have no CCPU undefinition. DIV-580 replaces the unselected
+non-CCPU/non-X86GFX body with `#error`, retaining the adapted outer condition
+and logical line numbers. The x86 object builds; all four isolated CCPU/X86GFX
+combinations give the expected result; selected preprocessing matches after
+normalizing four scratch __FILE__ paths, and injected `__LINE__` probes match
+at 782. These do not replace full product tests. Evidence:
+`s13-bfs-depth1-ntgraph-ccpu.json`.
+
+First-depth current snapshot: 4,068 groups / 5,042 arms, 1,851 observed
+retained, 1,165 existing exclusions, 130 newly excluded, 1,896 pending.
+Original multiplicity candidates remaining: 93 groups. Restored original
+first-depth groups remain 36 relative to fixed HEAD (three in this BFS pass).
+Original first-depth reconciliation mapped seven `mouse_io.c` NTVDM groups to
+registered DIV-318 non-MONITOR route conditions, plus `rom.c` group 282 to
+DIV-165 and `video.c` groups 1579/2042 to their standalone-SAS adaptations.
+The mouse mapping is in `s13-bfs-depth1-original-mouse-route.json`; ROM/video
+and their compile-context evidence are in `s13-bfs-depth1-video-sas.json`.
+No mouse or ROM source was modified. DIV-581 records the two existing video
+selector adaptations and replaces only their unselected direct-write bodies
+with `#error`; the x86 video object built, before/after selected preprocessing
+is raw byte-identical, and eight isolated guard checks passed. These checks do
+not assert complete VGA or product acceptance. A similar second-depth condition
+was not assessed.
+
+First-depth current snapshot: 4,068 groups / 5,042 arms; 1,851 observed
+retained, 1,165 existing exclusions, 132 newly excluded, 1,894 pending.
+Original multiplicity candidates remaining: 83 groups in 43 rows. Restored
+first-depth groups remain 36 relative to fixed HEAD, three in this BFS pass.
+Four DPMI first-depth original `#ifndef i386` groups map to the existing
+CPU40-or-non-i386 conditions in `dpmiint.c` and `dpmiint.h`; the original
+software-executor selection is retrospectively registered as DIV-582. Three
+original WOW32 FASTBOPPING groups map to CPU40-first groups retaining
+FASTBOPPING as a same-depth alternative; the existing selection is registered
+as DIV-583. Six existing excluded alternatives were classified using actual
+WOW32 CPU40 compile contexts and fixture graph requirements. These are source
+selection and structural evidence, not full DPMI or fast-BOP behavior proof.
+See `s13-bfs-depth1-original-dpmi-selectors.json` and
+`s13-bfs-depth1-wow32-fast-selectors.json`. No executable source changed.
+
+First-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed retained,
+1,171 previously excluded, 132 newly excluded, 1,888 pending. Original
+multiplicity candidates remaining: 76 groups in 40 rows. Restored original
+first-depth groups remain 36 relative to fixed HEAD, three in this BFS pass.
+First-depth original reconciliation confirmed that `clglobal.c` debug and Wx86
+condition groups lie outside OPENNT-HOST-092's retained scalar/table subset.
+The `base/win32/client/vdm.c` OLD_CFG_BASED group encloses an omitted,
+old-signature BaseGetVDMKeyword; the retained caller uses the separately owned
+modern-signature provider. Source identities, bounds, and limits are in
+`s13-bfs-depth1-original-clglobal.json` and
+`s13-bfs-depth1-original-vdm-config.json`. No runtime source changed. First-
+depth original candidates remaining: 73 groups. Restored groups remain 36
+relative to fixed HEAD, including three in this BFS pass. Current-source arm
+counts are unchanged.
+The original mouse callback CPU30 condition at line 6625 maps to the existing
+CPU40 condition at current line 5897 under DIV-222. Both anchors select the
+unadjusted callback offset; the selected current arm was product-observed and
+its alternative remains pending. See `s13-bfs-depth1-original-mouse-callback.json`.
+No source or deeper condition changed. First-depth original candidates now
+remaining: 72 groups. Restored groups remain 36 relative to fixed HEAD (three
+in this BFS pass); current-source arm counts are unchanged.
+A fresh first-depth per-file MONITOR/X86GFX cohort captured 44 successful
+actual x86 worker/reference compiler include traces, including the two
+compilations of the direct-including `nt_event_observed.c` fixture. Among
+current-hash C files with both production contexts and no per-source macro
+definition, it matched unique pinned-original outer boundaries and verified
+sole existing `#error` bodies. It classified 117 prior exclusions in 21
+files: MONITOR 58, X86GFX 59. No global claim is made for those macros; the
+video unit is deliberately outside this cohort. No source or inner branch was
+changed. Traces and individual correspondence are in
+`s13-bfs-depth1-host-macro-contexts.json`.
+
+Current first-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed
+retained, 1,288 prior exclusions, 132 newly excluded, 1,771 pending. Original
+multiplicity candidates remain 72 groups. Restored original first-depth groups
+remain 36 relative to fixed HEAD, three in this BFS pass. All 8,501 deeper
+arms remain unreviewed; per-layer full gates remain pending.
+Six host headers were checked against 161 historical actual inclusion contexts,
+each mapped to fresh successful current-source compilation. All ten generated
+TU contexts that explicitly set MONITOR or X86GFX were also freshly compiled
+and verified not to include these headers. Ten existing first-depth #error
+arms were matched to pinned original outer boundaries and classified (four
+MONITOR, six X86GFX). Evidence is in
+`s13-bfs-depth1-host-header-contexts.json`.
+
+The remaining `nt_fulsc.h` X86GFX arm was an actual unselected declaration
+body. DIV-584 preserves its original condition and replaces the body with
+#error; this branch ends at EOF. Cached nt_graph and nt_com object compiles
+passed, nt_com selected preprocessing was byte-identical, nt_graph selected
+nonblank preprocessing matched, and positive/negative isolated guard controls
+passed. These do not establish full runtime or product acceptance. Details are
+in `s13-bfs-depth1-ntfulsc-header.json`.
+
+Current first-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed
+retained, 1,298 existing exclusions, 133 newly excluded, 1,760 pending.
+Original multiplicity candidates remain 72 groups; restored first-depth groups
+remain 36 relative to fixed HEAD, including three in this BFS pass.
+DIV-585 replaces eleven first-depth WOWPROFILE bodies in `wmdisp32.c` and
+`wudlg.c`, preserving original condition shells and all eleven measured
+following logical line positions. Current compiler/include traces establish
+release WOW32 macro selection, and the removed bodies match the pinned
+originals. Cached x86 WOW32 objects build; both selected preprocess outputs
+match ignoring blank lines; all 22 isolated guard controls pass. Evidence:
+`s13-bfs-depth1-wowprofile-batch.json` and
+`s13-bfs-depth1-wowprofile-verification.json`. Full product acceptance remains
+open. The historical extract-wow-wndproc-fixture.ps1 byte-exact source hash
+check was already inconsistent before this batch; its contract and dependent
+fixture require reconciliation before layer closure.
+
+Current first-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed
+retained, 1,298 previous exclusions, 144 newly excluded, 1,749 pending.
+Original multiplicity candidates remain 72; restored first-depth groups remain
+36 relative to fixed HEAD, including three in this BFS pass.
+DIV-586 replaces fourteen first-depth WOWPROFILE/DEBUG_OR_WOWPROFILE bodies
+in `wow32.c` and `wowtbl.c`, retaining original condition boundaries and
+fourteen measured following logical lines. Each body matches the fixed original;
+actual WOW32 compiler/include contexts select the non-profile path. Cached x86
+objects built, selected preprocessing matched ignoring blank lines, and all 28
+isolated guard controls passed. Evidence: `s13-bfs-depth1-wowprofile2-batch.json`
+and `s13-bfs-depth1-wowprofile2-verification.json`. Full runtime/product tests
+remain pending, including the previously identified WndProc fixture mismatch.
+
+Current first-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed
+retained, 1,298 previous exclusions, 158 newly excluded, 1,735 pending.
+Original multiplicity candidates remain 72; restored first-depth groups remain
+36 relative to fixed HEAD, including three in this BFS pass. All 8,501 deeper
+arms remain unreviewed.
+The stale WndProc extraction gate is reconciled: the extractor verifies the
+fixed original source identity, extracts the current selected mirror function
+byte-for-byte, records both source/body hashes, accepts validated absolute or
+relative build paths, and does not assert that the full adapted source equals
+NT4. Its bounded dispatch fixture now links the extracted function only once;
+its explicitly unreachable conversion sentinels remain fail-closed and distinct
+from the map-gated unrelated-original-service sentinel. The hash collection
+pipeline now uses literal file arguments. A clean full fixture rerun passed
+eight exception phases, five hard-error modes, the debugger-first-chance child,
+and the unrelated-service map gate. See `s13-bfs-depth1-wndproc-fixture.json`.
+This is controlled host evidence, not real Win16 acceptance. First-depth source
+counts and 36 restored original groups (three in the BFS pass) are unchanged.
+DIV-587 replaces eleven unselected first-depth DEBUG_OR_WOWPROFILE bodies in
+WOW32 thunk-table headers, preserving their original outer conditions. Ten
+bodies were replaced line-for-line and the remaining group ends at EOF. The
+pinned-original bodies match; actual include contexts were collected and 2,836
+generated commands had no DEBUG/WOWPROFILE profile flags. The two unobserved
+headers remain pending. Before/after selected preprocessing of wow32.c and
+wowtbl.c matches after scratch path normalization; 22 isolated guard controls
+pass; the cached WOW32 DLL graph completed 91 steps; the controlled dispatch
+exception fixture passed again. Evidence:
+`s13-bfs-depth1-wowprofile-headers.json`. This is not a full product or guest
+acceptance.
+
+First-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed retained,
+1,298 prior exclusions, 169 newly excluded, 1,724 pending. Original candidates
+remain 72 groups. Restored original first-depth groups remain 36 relative to
+fixed HEAD, including three in this BFS pass. Deeper arms remain unreviewed.
+First-depth `#if DBG` reconciliation used fresh successful worker and
+worker-reference compiler/include traces for six selected redirector, DPMI and
+DEM source units. No trace defines or undefines DBG or supplies a DBG flag;
+direct-source fixtures inherit the production profile. Matching complete
+original/current group-kind sequences and non-conflicting unique anchors
+classified 44 existing #error arms: 35 in vrnetapi/vrnmpipe and nine in
+int21map/xmem/demsrch/vrmslot. Identical unanchored blocks are assigned by
+order, an explicit evidence limitation. See
+`s13-bfs-depth1-vdmredir-dbg.json` and `s13-bfs-depth1-dpmi-dem-dbg.json`.
+No source or nested condition changed.
+
+First-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed retained,
+1,342 existing exclusions, 169 newly excluded, 1,680 pending. Original
+multiplicity candidates remain 72; restored first-depth groups remain 36
+relative to fixed HEAD, three in the current BFS pass.
+DIV-588 replaces 35 first-depth historical i386 debugger bodies with
+#error, preserving original condition shells, 21 selected alternatives and
+56 measured diagnostic positions. All removed bodies match their pinned
+original counterparts; both generated worker contexts lack the historic i386
+macro. Cached x86 dbg.obj built, selected preprocessing matched ignoring blank
+lines, and all 70 isolated guard controls passed. Two independent Win32
+debugger transport/module layout smoke tests also passed; those smokes do not
+execute the modified dbg.c body. Evidence: `s13-bfs-depth1-debugger-i386-batch.json`
+and `s13-bfs-depth1-debugger-i386-verification.json`. Full product and real
+guest acceptance remain pending.
+
+First-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed retained,
+1,342 existing exclusions, 204 newly excluded, 1,645 pending. Original
+multiplicity candidates remain 72; restored first-depth groups remain 36
+relative to fixed HEAD, three in this BFS pass. All 8,501 deeper arms remain
+unreviewed.
+DIV-589 replaces six original first-depth historical i386 branches across
+`wkgthunk.c`, `wgprnset.c`, `wkmem.c` and `wow32.c`, preserving all outer
+conditions, the selected alternative and seven measured logical positions.
+Their removed bodies match the pinned originals; the actual WOW32 source
+contexts have no historic i386 flag or source/header definition. Four cached
+x86 objects built; selected preprocessing matched ignoring blanks; 12 isolated
+guard checks and the controlled dispatch fixture passed. This is not full
+printing, floating-point, guest or release acceptance. See
+`s13-bfs-depth1-wow-i386-batch.json` and its `-verification.json`. The DPMI
+conditional with an explicitly supported CPU40/i386 test remains separate.
+
+First-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed retained,
+1,342 existing exclusions, 210 newly excluded, 1,639 pending. Original
+multiplicity candidates remain 72; restored original first-depth groups remain
+36 relative to fixed HEAD, including three in this BFS pass.
+First-depth PROD reconciliation classified 45 existing sole-error guards in
+nine selected host units after fresh x86 worker/reference compiler traces
+proved `/DPROD` without overrides and original outer group sequences matched
+with non-conflicting anchors. The 28 `nt_rflop.c` guards have 28 independent
+ordinal anchors; the other 17 are in com.c, trace.c, main.c, ica.c, timer.c,
+nt_bop.c and nt_wcom.c. The old T280 PDB syntax script supplies a non-PROD
+profile but references removed include directories; a direct same-flags
+probe fails on missing ntpsapi.h, so it is recorded as a stale non-working
+historical graph, not silently counted as a supported passing build. This does
+not prove non-PROD runtime behavior. Details:
+`s13-bfs-depth1-rflop-prod.json`, `s13-bfs-depth1-prod-extra.json`. Non-sole
+bodies, uncompiled units and nested conditions remain pending. No source changed.
+
+First-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed retained,
+1,387 existing exclusions, 210 newly excluded, 1,594 pending. Original
+multiplicity candidates remain 72; restored original first-depth groups remain
+36 relative to fixed HEAD, including three in this BFS pass.
+DIV-590 replaces three first-depth non-PROD bodies in BIOS reset and timer
+units with #error, retaining outer conditions and three measured following
+logical positions. The 20 nested unreviewed groups are subsumed and removed
+from the next-depth inventory, without auditing their contents. Existing
+DIV-498/520/522/525/530/535 registrations remain applicable elsewhere;
+no whole-project registration was removed. Both selected preprocess outputs
+match ignoring blank lines, x86 objects build, six isolated guard controls pass,
+and source-linked PIC reset (24 assertions) and keyboard/PIC (86 assertions)
+fixtures pass. Details: `s13-bfs-depth1-nonprod-outer-batch.json` and
+`s13-bfs-depth1-nonprod-outer-verification.json`. Full real-guest and product
+acceptance remain pending.
+
+First-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed retained,
+1,387 existing exclusions, 213 newly excluded, 1,591 pending. Original
+multiplicity candidates remain 72; restored first-depth groups remain 36
+relative to fixed HEAD, including three in this BFS pass. Remaining deeper
+unreviewed arm count is 8,480 after removing the subsumed nested inventory.
+
+First-depth NTVDM reconciliation classified nine existing sole-error guards in
+six source units, based on actual selected x86 worker/reference and relevant
+fixture include contexts. DIV-591 replaces four additional proven unselected
+outer bodies in get_env, keyba, ica and illegalp; ten nested unreviewed groups
+are subsumed without auditing them. Six logical diagnostic positions are
+preserved. Selected preprocessed output matches ignoring blank lines; four
+x86 objects, eight isolated guard controls, PIC (24/24), keyboard/PIC (86/86)
+and the mirror guard suite (235 guards plus six profile checks) pass. See
+`s13-bfs-depth1-ntvdm-extra.json`, `s13-bfs-depth1-ntvdm-outer-batch.json`
+and `s13-bfs-depth1-ntvdm-outer-verification.json`. Traces refer to pre-edit
+snapshots. These results do not establish guest or complete release coverage.
+
+First-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed retained,
+1,396 existing exclusions, 217 newly excluded, 1,578 pending. Original
+multiplicity candidates remain 72. Relative to fixed HEAD, 36 previously
+deleted first-depth groups were restored, including three in this BFS pass;
+this count is separate from exclusions. Remaining deeper arms: 8,468, all
+unreviewed. First depth remains open; no level-wide build or release claimed.
+
+First-depth compound NTVDM && MONITOR reconciliation classified 13 existing
+sole-error arms: seven in mouse_io.c and six in six other source files.
+Each classified arm has a matching pinned-original outer condition and unique
+preceding anchor; current-hash actual x86 worker and worker-reference compiler
+include traces prove MONITOR was not defined in those contexts. Sixteen new
+traces succeeded for the other eight files. Six unmatched source arms and the
+CPU header require separate evidence and remain pending. No source or nested
+condition changed. See `s13-bfs-depth1-mouse-compound.json` and
+`s13-bfs-depth1-compound-monitor.json`; these are not runtime proof.
+
+First-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed retained,
+1,409 existing exclusions, 217 newly excluded, 1,565 pending. Fixed-HEAD
+restored original first-depth groups remain 36, including three in this BFS
+pass. Original multiplicity candidates remain 72; deeper arms 8,468 remain
+unreviewed. The first-depth gate remains open.
+
+First-depth follow-up matched eight previously pending MONITOR compound
+sole-error arms using unique following anchors and the pinned original outer
+conditions. Worker/reference same-hash compiler traces show MONITOR undefined.
+The eight arms comprise five across four files and three further mouse arms.
+Only classification changed, with no edits or inspection of nested semantics.
+Evidence: `s13-bfs-depth1-compound-following.json` and
+`s13-bfs-depth1-mouse-compound-extra.json`. Other contexts and the remaining
+unmatched guards still require separate proof.
+
+First-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed retained,
+1,417 existing exclusions, 217 newly excluded, 1,557 pending. Restored
+original first-depth groups remain 36 relative to fixed HEAD, including three
+in this BFS pass. Original multiplicity candidates remain 72; 8,468 deeper
+arms remain unreviewed. First-depth gate is still open.
+
+An additional tape_io.c NTVDM/MONITOR guard matched a unique original
+preceding anchor after ignoring diagnostic #line directives; the current
+following content contains a registered local instrumentation patch, so it
+was not treated as an exact following anchor. Both actual same-hash x86
+worker/reference include traces exclude MONITOR. Evidence is in
+`s13-bfs-depth1-tape-compound.json`. No code changed.
+
+First-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed retained,
+1,418 existing exclusions, 217 newly excluded, 1,556 pending. Original
+first-depth groups restored remain 36 relative to fixed HEAD, including three
+in the BFS pass; 72 original multiplicity candidates remain. First depth has
+not passed its build, release, test and submission gate.
+
+First-depth SHORT_TRACE reconciliation classified eleven existing sole-error
+branches in com.c using unique pinned-original preceding anchors and fresh
+same-hash worker/reference compiler traces without the SHORT_TRACE macro.
+Three other SHORT_TRACE arms remain pending because these anchors do not match.
+No source code or deeper branch was changed; see
+`s13-bfs-depth1-short-trace.json`.
+
+First-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed retained,
+1,429 existing exclusions, 217 newly excluded, 1,545 pending. Original
+first-depth groups restored remain 36 relative to fixed HEAD (three in this
+BFS pass). The 72 original multiplicity candidates and all 8,468 deeper arms
+remain unresolved and unreviewed respectively. First-depth release gate open.
+
+First-depth SEGMENTATION reconciliation classified nine existing sole-error
+guards in six host C files using unique original outer anchors and fresh
+same-hash x86 worker/reference compiler include traces. The direct-including
+keyba observation fixture was also traced in both graphs. Units without a
+working build context and guards without a unique anchor remain pending. No
+source code or deeper branch changed. Evidence:
+`s13-bfs-depth1-segmentation.json`. No runtime or guest validation implied.
+
+First-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed retained,
+1,438 existing exclusions, 217 newly excluded, 1,536 pending. Restored
+original first-depth groups remain 36 relative to fixed HEAD, including three
+in this BFS pass. Original multiplicity candidates remain 72; deeper arms
+remain unreviewed. First-depth release gate still open.
+
+First-depth FIFO_ON reconciliation classified nine existing sole-error
+NTVDM && FIFO_ON arms in com.c. Their original outer structures have unique
+preceding or following anchors, and fresh same-hash actual x86 worker and
+worker-reference traces contain no FIFO_ON definition or compiler flag.
+Evidence: `s13-bfs-depth1-fifo-on.json`. No source or nested branch changed.
+The separate msvc-*-formal-release and pkg-uuid-* Ninja files found for
+com.c still reference the old, nonexistent src/mvdm path; those historical
+files are not evidence of an active current-source configuration. The
+complete supported-context audit remains open.
+
+First-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed retained,
+1,447 existing exclusions, 217 newly excluded, 1,527 pending. Original
+first-depth groups restored remain 36 relative to fixed HEAD (three in BFS).
+The 72 original multiplicity candidates and 8,468 unreviewed deeper arms
+remain. The level-wide build, release, test and submission gate is open.
+
+First-depth legacy-source reconciliation classified 23 existing sole-error
+arms using unique original outer anchors and 32 fresh same-hash compiler
+include traces across worker/reference and direct-including fixtures. Counts:
+GISP_SVGA 5, SYNCH_TIMERS 5, SCCSID 5, IRET_HOOKS 5, SECURE 3. Macro
+definitions were evaluated per macro and source; YODA remains pending because
+an included header contains a conditional definition. No source or deeper
+branch changed. Evidence: `s13-bfs-depth1-legacy-sources.json`. These traces
+alone do not prove every supported context or runtime behavior.
+
+First-depth snapshot: 4,068 groups / 5,042 arms; 1,851 observed retained,
+1,470 existing exclusions, 217 newly excluded, 1,504 pending. Restored
+original first-depth groups remain 36 relative to fixed HEAD, three in this
+BFS pass. Original multiplicity candidates remain 72, deeper arms remain
+unreviewed, and the first-depth release gate remains open.
+
+First-depth original-boundary investigation found cpu_vid.h original line 90
+NO_STRING_OPERATIONS guard duplicated at current lines 94/101 inside the
+DIV-089 CPU40/C_VID type adaptation. Twenty-two fresh real include contexts
+compiled with CPU40/C_VID set and NO_STRING_OPERATIONS unset; the source,
+original hashes and exact contexts are recorded in
+`s13-bfs-depth1-original-cpu-vid.json`. The original first-depth guard has
+not yet been restored. Reordering must retain both declaration variants and
+logical diagnostics, and requires context-complete validation and queue
+remapping. No inner disposition has been decided. This candidate remains in
+the original-boundary unresolved inventory; no restoration counted.
+
+DIV-592 restores the original first-depth NO_STRING_OPERATIONS guard in
+cpu_vid.h, while retaining the DIV-089 typed CPU40/C_VID and alternate
+declarations. The new inner selector is queued unreviewed. All 22 actual
+worker/reference inclusion-context preprocessor outputs match before/after
+ignoring blank lines; three representative x86 objects compile (with existing
+warnings). An extracted declaration matrix covers eight macro combinations:
+outputs and measured logical line positions match. One initial object build
+command used a wrong target path and was corrected; the corrected build
+passed. Evidence: `s13-bfs-depth1-original-cpu-vid.json` and task build logs.
+These checks do not replace the full layer release and guest acceptance.
+
+First-depth snapshot: 4,069 groups / 5,043 arms; 1,852 observed retained,
+1,470 existing exclusions, 217 newly excluded, 1,504 pending. Restored
+first-depth groups total 37 relative to fixed HEAD, four in this BFS pass.
+One original multiplicity candidate is resolved; 71 remain. The depth-2
+queue was remapped without deciding the newly nested selector. First-depth
+release gate remains open.
+
+DIV-593 restores the original first-depth X86GFX EOF guard in nt_sec.c and
+replaces its body with #error. Two actual same-hash worker/reference x86
+include contexts exclude X86GFX; the x86 object compiled with warnings, and
+normal/unsupported isolated guard controls passed. Before/after product
+preprocessing matches after normalizing the scratch input pathname and ignoring
+blank lines. The unnormalized first attempt exposed only expected __FILE__
+path differences; __LINE__ values matched. Evidence:
+`s13-bfs-depth1-original-nt-sec.json`. No guest or full-layer acceptance.
+
+First-depth snapshot: 4,070 groups / 5,044 arms; 1,852 observed retained,
+1,470 existing exclusions, 218 newly excluded, 1,504 pending. Restored
+first-depth groups total 38 relative to fixed HEAD, five in this BFS pass.
+Seventy original multiplicity candidates remain. First-depth gate open.
+
+DIV-594 restores the original first-depth i386 selector around the DIV-077
+XMS copy adaptation. The selected non-i386 adapter remains intact; the
+historical i386 branch is rejected. Two real worker/reference x86 source
+contexts exclude i386. Before/after product preprocessing matches after
+normalizing the scratch filename and ignoring blank lines; xmsblock.obj
+compiled with existing warnings, and selected/rejected guard controls passed.
+Logical line positions are preserved. Evidence:
+`s13-bfs-depth1-original-xms.json`. No guest runtime or full-layer release
+acceptance is claimed.
+
+First-depth snapshot: 4,071 groups / 5,046 arms; 1,853 observed retained,
+1,470 existing exclusions, 219 newly excluded, 1,504 pending. Restored
+first-depth groups total 39 relative to fixed HEAD, six in this BFS pass.
+Sixty-nine original multiplicity candidates remain. First-depth gate open.
+
+OPENNT-HOST-144 restores the original first-depth ALLOC_PRAGMA guard in
+probe.c, rejecting the unsupported kernel allocation profile while retaining
+the user-mode binding and #line diagnostics. Three current worker/reference
+and WOW compiler contexts exclude that macro. Worker and WOW preprocessing
+outputs match before/after following scratch filename normalization and blank
+line filtering; the two x86 objects compile; normal/rejected guard controls
+pass. Evidence: `s13-bfs-depth1-original-probe.json`. No whole-layer or
+runtime acceptance is claimed.
+
+First-depth snapshot: 4,072 groups / 5,047 arms; 1,853 observed retained,
+1,470 existing exclusions, 220 newly excluded, 1,504 pending. Restored
+first-depth groups total 40 relative to fixed HEAD, seven in this BFS pass.
+Sixty-eight original multiplicity candidates remain. First-depth gate open.
+
+OPENNT-HOST-145 restores the original first-depth _USERK_ codepage selector
+in chartran.c, rejecting the kernel USER arm while retaining the existing
+OPENNT-HOST-119 user-mode adapter and logical diagnostics. Both actual WOW
+and call-boundaries contexts exclude _USERK_. Their before/after preprocessing
+outputs match after scratch filename normalization and blank line filtering;
+both x86 objects compile; normal/rejected guard controls pass. Evidence:
+`s13-bfs-depth1-original-chartran.json`. A second unmatched original _USERK_
+condition remains open. No whole-layer or runtime acceptance is claimed.
+
+First-depth snapshot: 4,073 groups / 5,049 arms; 1,854 observed retained,
+1,470 existing exclusions, 221 newly excluded, 1,504 pending. Restored
+first-depth groups total 41 relative to fixed HEAD, eight in this BFS pass.
+Sixty-seven original multiplicity candidates remain. First-depth gate open.
+
+DIV-595 replaces three unselected local DEBUG initialization bodies in
+wow32.c with #error, retaining their first-depth conditions, the non-debug
+registry facade and measured diagnostic line numbers. The current WOW build
+and its dispatch fixture use the release macro profile. Selected preprocessing
+matches after scratch filename normalization and ignoring blank lines; the
+WOW object compiles with existing warnings, six isolated guard controls pass,
+and the controlled W32Dispatch/W32Exception fixture exits zero. These local
+branches include initialization adaptation, not three original-structure
+restorations. Evidence: `s13-bfs-depth1-wow-local-debug.json`. No guest or
+whole-layer release acceptance claimed.
+
+First-depth snapshot: 4,073 groups / 5,049 arms; 1,854 observed retained,
+1,470 existing exclusions, 224 newly excluded, 1,501 pending. Restored
+first-depth groups total 41 relative to fixed HEAD, eight in this BFS pass.
+Sixty-seven original multiplicity candidates remain. First-depth gate open.
+
+OPENNT-HOST-146 replaces eight first-depth DEBUG USER bodies in six source
+files; each removed body matched its pinned-original counterpart. Both actual
+WOW and call-boundaries release compiler contexts exclude DEBUG, including
+queue fixture compile flags derived from the product command. Selected WOW
+preprocessing matches before/after in all six files after scratch-path
+normalization and blank filtering; six x86 objects and eight isolated
+normal/rejected guard controls pass, and 30 remapped queue directives match
+source. All 29 controlled call-boundary fixture programs pass. The first
+broad fixture build hit its script-owned deadline after 98/143 steps; after
+all ninja/cl processes had exited, a new evidence directory reused the
+intermediates and completed. Initial source-probe and invocation mistakes
+were corrected and are recorded in `s13-bfs-depth1-user-debug.json`. This
+does not establish guest runtime behavior or whole-layer acceptance.
+
+First-depth snapshot: 4,073 groups / 5,049 arms; 1,854 observed retained,
+1,470 existing exclusions, 232 newly excluded, 1,493 pending. Restored
+first-depth groups remain 41 relative to fixed HEAD, eight in this BFS pass.
+Sixty-seven original multiplicity candidates remain. First-depth gate open.

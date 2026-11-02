@@ -1,0 +1,1398 @@
+[
+  {
+    "path": "src/mvdm-host/dos/dem/dem.c",
+    "matched_code_lines": 17,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "matched_code_lines": 453,
+    "possible_missing_ancestor_lines": 61,
+    "ancestors": [
+      {
+        "condition": "ifndef i386 first",
+        "matched_lines": 61,
+        "example_original_local": [
+          862,
+          976
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/dpmi32/dpmiint.h",
+    "matched_code_lines": 17,
+    "possible_missing_ancestor_lines": 8,
+    "ancestors": [
+      {
+        "condition": "ifndef i386 first",
+        "matched_lines": 8,
+        "example_original_local": [
+          25,
+          28
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/inc/mvdm.h",
+    "matched_code_lines": 9,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/inc/suballoc.h",
+    "matched_code_lines": 28,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+    "matched_code_lines": 279,
+    "possible_missing_ancestor_lines": 6,
+    "ancestors": [
+      {
+        "condition": "ifdef SIGNAL_PROFILING else",
+        "matched_lines": 3,
+        "example_original_local": [
+          595,
+          598
+        ]
+      },
+      {
+        "condition": "ifdef NOVELL first",
+        "matched_lines": 1,
+        "example_original_local": [
+          246,
+          220
+        ]
+      },
+      {
+        "condition": "ifdef V4CLIENT else",
+        "matched_lines": 1,
+        "example_original_local": [
+          246,
+          220
+        ]
+      },
+      {
+        "condition": "ifdef EGG else",
+        "matched_lines": 1,
+        "example_original_local": [
+          267,
+          259
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+    "matched_code_lines": 877,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+    "matched_code_lines": 1,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+    "matched_code_lines": 349,
+    "possible_missing_ancestor_lines": 3,
+    "ancestors": [
+      {
+        "condition": "ifdef LICENSING first",
+        "matched_lines": 3,
+        "example_original_local": [
+          965,
+          885
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+    "matched_code_lines": 41,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+    "matched_code_lines": 74,
+    "possible_missing_ancestor_lines": 2,
+    "ancestors": [
+      {
+        "condition": "ifdef CPU_30_STYLE else",
+        "matched_lines": 2,
+        "example_original_local": [
+          158,
+          159
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+    "matched_code_lines": 1501,
+    "possible_missing_ancestor_lines": 4,
+    "ancestors": [
+      {
+        "condition": "ifndef SFELLOW first",
+        "matched_lines": 2,
+        "example_original_local": [
+          492,
+          538
+        ]
+      },
+      {
+        "condition": "ifdef SYNCH_TIMERS first",
+        "matched_lines": 2,
+        "example_original_local": [
+          492,
+          538
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+    "matched_code_lines": 151,
+    "possible_missing_ancestor_lines": 1,
+    "ancestors": [
+      {
+        "condition": "ifdef PIG first",
+        "matched_lines": 1,
+        "example_original_local": [
+          266,
+          267
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+    "matched_code_lines": 243,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpupig.h",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "matched_code_lines": 420,
+    "possible_missing_ancestor_lines": 10,
+    "ancestors": [
+      {
+        "condition": "ifdef CCPU else",
+        "matched_lines": 5,
+        "example_original_local": [
+          2137,
+          1507
+        ]
+      },
+      {
+        "condition": "ifdef PROD else",
+        "matched_lines": 5,
+        "example_original_local": [
+          2137,
+          1507
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+    "matched_code_lines": 702,
+    "possible_missing_ancestor_lines": 2,
+    "ancestors": [
+      {
+        "condition": "ifdef FIFO_ON first",
+        "matched_lines": 2,
+        "example_original_local": [
+          627,
+          593
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+    "matched_code_lines": 197,
+    "possible_missing_ancestor_lines": 1,
+    "ancestors": [
+      {
+        "condition": "if defined(NTVDM) && defined(MONITOR) else",
+        "matched_lines": 1,
+        "example_original_local": [
+          311,
+          292
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+    "matched_code_lines": 60,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/debuggng.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/ega_dump.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/pigyoda.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+    "matched_code_lines": 106,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+    "matched_code_lines": 3,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+    "matched_code_lines": 383,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+    "matched_code_lines": 77,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/disks/gfi_test.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+    "matched_code_lines": 583,
+    "possible_missing_ancestor_lines": 87,
+    "ancestors": [
+      {
+        "condition": "ifndef NTVDM first",
+        "matched_lines": 87,
+        "example_original_local": [
+          1907,
+          1709
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+    "matched_code_lines": 112,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+    "matched_code_lines": 239,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+    "matched_code_lines": 10,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+    "matched_code_lines": 61,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/dsktrace.h",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+    "matched_code_lines": 209,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/equip.h",
+    "matched_code_lines": 12,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/flexlmif.h",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/gisp_sas.h",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/hunter.h",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/hwvga.h",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+    "matched_code_lines": 53,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+    "matched_code_lines": 61,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/quick_ev.h",
+    "matched_code_lines": 11,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+    "matched_code_lines": 75,
+    "possible_missing_ancestor_lines": 8,
+    "ancestors": [
+      {
+        "condition": "ifdef BIT_ORDER1 first",
+        "matched_lines": 7,
+        "example_original_local": [
+          58,
+          73
+        ]
+      },
+      {
+        "condition": "ifdef BIGEND first",
+        "matched_lines": 1,
+        "example_original_local": [
+          42,
+          33
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+    "matched_code_lines": 68,
+    "possible_missing_ancestor_lines": 14,
+    "ancestors": [
+      {
+        "condition": "ifdef BACK_M first",
+        "matched_lines": 7,
+        "example_original_local": [
+          1034,
+          799
+        ]
+      },
+      {
+        "condition": "ifdef BIGEND first",
+        "matched_lines": 7,
+        "example_original_local": [
+          1034,
+          799
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/vgaports.h",
+    "matched_code_lines": 422,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+    "matched_code_lines": 20,
+    "possible_missing_ancestor_lines": 1,
+    "ancestors": [
+      {
+        "condition": "ifdef CPU_30_STYLE else",
+        "matched_lines": 1,
+        "example_original_local": [
+          106,
+          80
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+    "matched_code_lines": 3,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+    "matched_code_lines": 998,
+    "possible_missing_ancestor_lines": 3,
+    "ancestors": [
+      {
+        "condition": "ifdef NTVDM else",
+        "matched_lines": 2,
+        "example_original_local": [
+          2607,
+          2401
+        ]
+      },
+      {
+        "condition": "ifdef CPU_30_STYLE first",
+        "matched_lines": 1,
+        "example_original_local": [
+          2567,
+          2365
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+    "matched_code_lines": 2085,
+    "possible_missing_ancestor_lines": 68,
+    "ancestors": [
+      {
+        "condition": "ifndef NTVDM first",
+        "matched_lines": 67,
+        "example_original_local": [
+          2646,
+          2270
+        ]
+      },
+      {
+        "condition": "ifdef CPU_30_STYLE first",
+        "matched_lines": 1,
+        "example_original_local": [
+          6626,
+          5903
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+    "matched_code_lines": 245,
+    "possible_missing_ancestor_lines": 12,
+    "ancestors": [
+      {
+        "condition": "if defined(NTVDM) && defined(MONITOR) first",
+        "matched_lines": 12,
+        "example_original_local": [
+          419,
+          404
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/main.c",
+    "matched_code_lines": 40,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+    "matched_code_lines": 92,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+    "matched_code_lines": 17,
+    "possible_missing_ancestor_lines": 1,
+    "ancestors": [
+      {
+        "condition": "if !defined(MAC_LIKE) && !defined(CPU_30_STYLE) first",
+        "matched_lines": 1,
+        "example_original_local": [
+          348,
+          115
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+    "matched_code_lines": 375,
+    "possible_missing_ancestor_lines": 3,
+    "ancestors": [
+      {
+        "condition": "ifdef MONITOR first",
+        "matched_lines": 2,
+        "example_original_local": [
+          1771,
+          1569
+        ]
+      },
+      {
+        "condition": "ifdef CPU_40_STYLE else",
+        "matched_lines": 1,
+        "example_original_local": [
+          1888,
+          1642
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+    "matched_code_lines": 56,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+    "matched_code_lines": 31,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+    "matched_code_lines": 138,
+    "possible_missing_ancestor_lines": 7,
+    "ancestors": [
+      {
+        "condition": "if !defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) ) first",
+        "matched_lines": 5,
+        "example_original_local": [
+          296,
+          280
+        ]
+      },
+      {
+        "condition": "if !defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) ) else",
+        "matched_lines": 2,
+        "example_original_local": [
+          338,
+          312
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "matched_code_lines": 830,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+    "matched_code_lines": 14,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+    "matched_code_lines": 440,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+    "matched_code_lines": 1100,
+    "possible_missing_ancestor_lines": 1,
+    "ancestors": [
+      {
+        "condition": "ifdef VGG else",
+        "matched_lines": 1,
+        "example_original_local": [
+          2325,
+          1792
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "matched_code_lines": 183,
+    "possible_missing_ancestor_lines": 3,
+    "ancestors": [
+      {
+        "condition": "ifdef A3CPU first",
+        "matched_lines": 3,
+        "example_original_local": [
+          661,
+          578
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+    "matched_code_lines": 186,
+    "possible_missing_ancestor_lines": 8,
+    "ancestors": [
+      {
+        "condition": "ifdef A3CPU first",
+        "matched_lines": 8,
+        "example_original_local": [
+          390,
+          233
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+    "matched_code_lines": 283,
+    "possible_missing_ancestor_lines": 42,
+    "ancestors": [
+      {
+        "condition": "ifdef A_VID else",
+        "matched_lines": 26,
+        "example_original_local": [
+          268,
+          247
+        ]
+      },
+      {
+        "condition": "ifdef A_VID first",
+        "matched_lines": 16,
+        "example_original_local": [
+          210,
+          212
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+    "matched_code_lines": 245,
+    "possible_missing_ancestor_lines": 28,
+    "ancestors": [
+      {
+        "condition": "ifdef A_VID else",
+        "matched_lines": 22,
+        "example_original_local": [
+          216,
+          190
+        ]
+      },
+      {
+        "condition": "ifdef A_VID first",
+        "matched_lines": 6,
+        "example_original_local": [
+          157,
+          160
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+    "matched_code_lines": 1725,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+    "matched_code_lines": 1173,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/video/video.c",
+    "matched_code_lines": 925,
+    "possible_missing_ancestor_lines": 12,
+    "ancestors": [
+      {
+        "condition": "if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA ) else",
+        "matched_lines": 6,
+        "example_original_local": [
+          1583,
+          1580
+        ]
+      },
+      {
+        "condition": "if ( defined(NTVDM) && defined(MONITOR) ) || defined(GISP_SVGA) else",
+        "matched_lines": 3,
+        "example_original_local": [
+          1515,
+          1512
+        ]
+      },
+      {
+        "condition": "if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA ) first",
+        "matched_lines": 2,
+        "example_original_local": [
+          1580,
+          1577
+        ]
+      },
+      {
+        "condition": "if ( defined(NTVDM) && defined(MONITOR) ) || defined(GISP_SVGA) first",
+        "matched_lines": 1,
+        "example_original_local": [
+          1512,
+          1509
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+    "matched_code_lines": 9,
+    "possible_missing_ancestor_lines": 27,
+    "ancestors": [
+      {
+        "condition": "ifdef CPU_30_STYLE first",
+        "matched_lines": 9,
+        "example_original_local": [
+          50,
+          28
+        ]
+      },
+      {
+        "condition": "ifndef _HOST_CPU_H first",
+        "matched_lines": 9,
+        "example_original_local": [
+          50,
+          28
+        ]
+      },
+      {
+        "condition": "ifdef BIGEND first",
+        "matched_lines": 9,
+        "example_original_local": [
+          50,
+          28
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/config.c",
+    "matched_code_lines": 380,
+    "possible_missing_ancestor_lines": 6,
+    "ancestors": [
+      {
+        "condition": "ifdef i386 else",
+        "matched_lines": 5,
+        "example_original_local": [
+          510,
+          464
+        ]
+      },
+      {
+        "condition": "ifdef i386 first",
+        "matched_lines": 1,
+        "example_original_local": [
+          508,
+          462
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+    "matched_code_lines": 54,
+    "possible_missing_ancestor_lines": 2,
+    "ancestors": [
+      {
+        "condition": "if 0 first",
+        "matched_lines": 2,
+        "example_original_local": [
+          116,
+          96
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "matched_code_lines": 223,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+    "matched_code_lines": 381,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+    "matched_code_lines": 856,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
+    "matched_code_lines": 168,
+    "possible_missing_ancestor_lines": 65,
+    "ancestors": [
+      {
+        "condition": "ifdef CPU_30_STYLE first",
+        "matched_lines": 65,
+        "example_original_local": [
+          161,
+          169
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+    "matched_code_lines": 67,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+    "matched_code_lines": 111,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+    "matched_code_lines": 569,
+    "possible_missing_ancestor_lines": 2,
+    "ancestors": [
+      {
+        "condition": "ifdef X86GFX first",
+        "matched_lines": 2,
+        "example_original_local": [
+          1410,
+          1244
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+    "matched_code_lines": 861,
+    "possible_missing_ancestor_lines": 9,
+    "ancestors": [
+      {
+        "condition": "ifdef MONITOR first",
+        "matched_lines": 8,
+        "example_original_local": [
+          293,
+          248
+        ]
+      },
+      {
+        "condition": "ifndef X86GFX first",
+        "matched_lines": 1,
+        "example_original_local": [
+          761,
+          692
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+    "matched_code_lines": 488,
+    "possible_missing_ancestor_lines": 2,
+    "ancestors": [
+      {
+        "condition": "ifndef i386 first",
+        "matched_lines": 1,
+        "example_original_local": [
+          124,
+          141
+        ]
+      },
+      {
+        "condition": "ifndef i386 else",
+        "matched_lines": 1,
+        "example_original_local": [
+          126,
+          143
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_sec.c",
+    "matched_code_lines": 25,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+    "matched_code_lines": 233,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+    "matched_code_lines": 212,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+    "matched_code_lines": 222,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+    "matched_code_lines": 1,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+    "matched_code_lines": 127,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrdebug.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/vdmredir/vrdisp.c",
+    "matched_code_lines": 66,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmmedia1.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmmedia2.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmmstru1.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmmstru2.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/wow32/wmmstruc.c",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/wow32/wow32.c",
+    "matched_code_lines": 810,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/xms.486/xmsa20.c",
+    "matched_code_lines": 21,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/mvdm-host/xms.486/xmsblock.c",
+    "matched_code_lines": 58,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/base/ntos/ex/probe.c",
+    "matched_code_lines": 15,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/base/win32/client/vdm.c",
+    "matched_code_lines": 905,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/ntexapi.h",
+    "matched_code_lines": 4,
+    "possible_missing_ancestor_lines": 6,
+    "ancestors": [
+      {
+        "condition": "ifndef _NTEXAPI_ first",
+        "matched_lines": 4,
+        "example_original_local": [
+          622,
+          22
+        ]
+      },
+      {
+        "condition": "if defined(USER_SHARED_DATA) first",
+        "matched_lines": 1,
+        "example_original_local": [
+          1609,
+          30
+        ]
+      },
+      {
+        "condition": "if defined(_M_IX86) && !defined(_CROSS_PLATFORM_) && !defined(MIDL_PASS) first",
+        "matched_lines": 1,
+        "example_original_local": [
+          1609,
+          30
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/ntpsapi.h",
+    "matched_code_lines": 2,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/ntregapi.h",
+    "matched_code_lines": 13,
+    "possible_missing_ancestor_lines": 13,
+    "ancestors": [
+      {
+        "condition": "ifndef _NTREGAPI_ first",
+        "matched_lines": 13,
+        "example_original_local": [
+          233,
+          6
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+    "matched_code_lines": 18,
+    "possible_missing_ancestor_lines": 18,
+    "ancestors": [
+      {
+        "condition": "ifndef _NTRTL_ first",
+        "matched_lines": 18,
+        "example_original_local": [
+          57,
+          14
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+    "matched_code_lines": 6,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+    "matched_code_lines": 37,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+    "matched_code_lines": 167,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+    "matched_code_lines": 174,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+    "matched_code_lines": 298,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",
+    "matched_code_lines": 2,
+    "possible_missing_ancestor_lines": 2,
+    "ancestors": [
+      {
+        "condition": "ifndef _GLOBALS_ first",
+        "matched_lines": 2,
+        "example_original_local": [
+          43,
+          9
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+    "matched_code_lines": 7,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+    "matched_code_lines": 78,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+    "matched_code_lines": 308,
+    "possible_missing_ancestor_lines": 308,
+    "ancestors": [
+      {
+        "condition": "ifndef _USERCLI_ first",
+        "matched_lines": 308,
+        "example_original_local": [
+          305,
+          76
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+    "matched_code_lines": 7,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+    "matched_code_lines": 130,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/inc/user.h",
+    "matched_code_lines": 98,
+    "possible_missing_ancestor_lines": 98,
+    "ancestors": [
+      {
+        "condition": "ifndef _USER_ first",
+        "matched_lines": 98,
+        "example_original_local": [
+          266,
+          144
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+    "matched_code_lines": 69,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+    "matched_code_lines": 20,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+    "matched_code_lines": 56,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+    "matched_code_lines": 15,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+    "matched_code_lines": 68,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+    "matched_code_lines": 49,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+    "matched_code_lines": 9,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+    "matched_code_lines": 45,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+    "matched_code_lines": 124,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+    "matched_code_lines": 11,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+    "matched_code_lines": 325,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+    "matched_code_lines": 15,
+    "possible_missing_ancestor_lines": 15,
+    "ancestors": [
+      {
+        "condition": "ifndef _USERK_ first",
+        "matched_lines": 15,
+        "example_original_local": [
+          3991,
+          15
+        ]
+      }
+    ]
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+    "matched_code_lines": 81,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+    "matched_code_lines": 63,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+    "matched_code_lines": 50,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/userrtl.h",
+    "matched_code_lines": 0,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  },
+  {
+    "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+    "matched_code_lines": 27,
+    "possible_missing_ancestor_lines": 0,
+    "ancestors": []
+  }
+]

@@ -577,8 +577,8 @@ typedef struct _TDI_REQUEST_SET_EVENT {
 //
 
 #if 0
-#define TDI_RECEIVE_TRUNCATED           0x00000001 // received TSDU was truncated.
-#define TDI_RECEIVE_FRAGMENT            0x00000002 // received TSDU was fragmented.
+#error Excluded unsupported original disabled branch
+
 #endif
 #define TDI_RECEIVE_BROADCAST           0x00000004 // received TSDU was broadcast.
 #define TDI_RECEIVE_MULTICAST           0x00000008 // received TSDU was multicast.
@@ -830,38 +830,38 @@ typedef struct _TDI_PROVIDER_STATISTICS {
 } TDI_PROVIDER_STATISTICS, *PTDI_PROVIDER_STATISTICS;
 
 #if 0
+#error Excluded unsupported original disabled branch
 
-typedef struct _TDI_NETMAN_INFO {
-    OFFSET VariableName;                // name of variable (a FLAT_STRING).
-    OFFSET VariableValue;               // value of variable (a TDI_NETMAN_VARIABLE).
-} TDI_NETMAN_INFO, *PTDI_NETMAN_INFO;
 
-typedef struct _TDI_NETMAN_VARIABLE {
-    ULONG VariableType;                 // selector for union, below.
-    union {
-        ULONG LongValue;
-        HARDWARE_ADDRESS HardwareAddressValue;
-        FLAT_STRING StringValue;
-    } Value;
-} TDI_NETMAN_VARIABLE, *PTDI_NETMAN_VARIABLE;
 
-#define NETMAN_VARTYPE_ULONG            0       // type is a ULONG.
-#define NETMAN_VARTYPE_HARDWARE_ADDRESS 1       // type is a HARDWARE_ADDRESS.
-#define NETMAN_VARTYPE_STRING           2       // type is a FLAT_STRING.
 
-typedef union _TDI_INFO_BUFFER {
-    TDI_ENDPOINT_INFO EndpointInfo;
-    TDI_CONNECTION_INFO ConnectionInfo;
-    TDI_ADDRESS_INFO AddressInfo;
-    TDI_PROVIDER_INFO ProviderInfo;
-    TDI_NETMAN_INFO NetmanVariable;
-} TDI_INFO_BUFFER, *PTDI_INFO_BUFFER;
 
-#define TDI_INFO_CLASS_ENDPOINT         0       // endpoint information class.
-#define TDI_INFO_CLASS_CONNECTION       1       // connection information class.
-#define TDI_INFO_CLASS_ADDRESS          2       // address information class.
-#define TDI_INFO_CLASS_PROVIDER         3       // provider information class.
-#define TDI_INFO_CLASS_NETMAN           4       // network management info class.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif
 
@@ -883,25 +883,25 @@ TdiOpenNetbiosAddress (
 //
 
 #if 0
+#error Excluded unsupported original disabled branch
 
-//
-// These are the old definitions
-//
 
-typedef struct _TDI_REQUEST_USER_ASSOCIATE {
-    HANDLE AddressHandle;
-} TDI_REQUEST_USER_ASSOCIATE, *PTDI_REQUEST_USER_ASSOCIATE;
 
-typedef struct _TDI_REQUEST_USER_CONNECT {
-    TDI_CONNECTION_INFORMATION CallInformation;
-    //CHAR UserData[CallInformation.UserDataLength];
-    //CHAR Options[CallInformation.OptionsLength];
-    //CHAR RemoteAddress[CallInformation.RemoteAddressLength];
-} TDI_REQUEST_USER_CONNECT, *PTDI_REQUEST_USER_CONNECT;
 
-typedef struct _TDI_REQUEST_USER_QUERY_INFO {
-    LONG QueryType;
-} TDI_REQUEST_USER_QUERY_INFO, *PTDI_REQUEST_USER_QUERY_INFO;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #else
 

@@ -1,0 +1,15 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_sec.c",
+  "current_sha256": "19497d281ee0e139f7feb314578786eb208af2c782073debf3d678c4880a59fe",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_sec.c",
+  "original_sha256": "2ba1facf8d0c0a00c71f78dfb1fc8e2d001b699e2659465044a94738b637c9bd",
+  "original_top_level": {
+    "line": 115,
+    "end_line": 158,
+    "condition": "#ifdef X86GFX"
+  },
+  "current_top_level_match": "absent",
+  "observation": "file not witnessed in collected successful contexts; X86GFX is selected in other source files, so global macro absence cannot prove this branch excluded",
+  "disposition": "pending: establish source-file role and all supported inclusion/build contexts before restoring shell or rejecting arm; do not restore removed hardware-V86 implementation",
+  "scope": "depth-one boundary only"
+}

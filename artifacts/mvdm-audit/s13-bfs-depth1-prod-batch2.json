@@ -1,0 +1,3237 @@
+{
+  "scope": "40 x86 SoftPC source units, actual worker and reference compiler commands select PROD without include-chain redefinition",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "db5481c11626d9b5f13cfedd51b005c8bd3a33450a8e85282aff2fb8fd84c072",
+      "includes": 174,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "74d040039f92671ef0da05ba7d98b8ed652af4483f18dd982df06d8c227c4c5d",
+      "includes": 209,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "135ca24ff83d7fca210b108953a34e9b7a8da2cea563c4c0bf3ab1c6511a214d",
+      "includes": 194,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
+      "includes": 171,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "includes": 188,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "includes": 181,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
+      "includes": 165,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "4bf68cad6816d1707b9338dec64012d28d377e9f7ba30729abff82b0d8b0d8c8",
+      "includes": 179,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
+      "includes": 182,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "includes": 187,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "includes": 185,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "89112dc9a067b3a2e80bb450b7b392003b4379beaac961992ec90325e355114c",
+      "includes": 184,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "5908873bd5f6391511efc733b04537bd56007df973b95d0cd1124ab84ff283d4",
+      "includes": 183,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "244b5bbcc258a737c240fc7803aba9c9f2ad80eed24371e8065498fe734d9a9b",
+      "includes": 181,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "includes": 182,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "includes": 180,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_test.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "5213723a877ad7c6241e8891f8ee8157ecc3fd7d3e982d3f0c78f16f7fd965dc",
+      "includes": 160,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "6ea5365b039b059a4b16dbe2c8d0f630c4db670105159644fcfd7d84630038c6",
+      "includes": 173,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "includes": 185,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+      "includes": 194,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "includes": 180,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/debuggng.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "c682aff394697e28f8f12ee13976dedfb625261dfb8340c5ef0941b04fb4223a",
+      "includes": 156,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "92372fa13f5b16fa698b91839fe5e8e92b64abad3d973e1f2e65df0f40f1d131",
+      "includes": 171,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "3915714ff36cd1adadcfc8399cb759305ba2817ca4e9db9b95b0ccbb0eb2a7a8",
+      "includes": 174,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "97faea60eb6e496a092b1e892c980a87a4888802927d9f7ffc2b7abf20e8549a",
+      "includes": 156,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "includes": 211,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "includes": 166,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "7cda05518a3473d52c7383620cd000f936b93219a1e746461c26116cc0531565",
+      "includes": 206,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4",
+      "includes": 196,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "a0b2e375ad714bb2c840f108368358bee33538bf2daa75f3421db07babc17b9d",
+      "includes": 213,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "776859017c17fbf478ee3b391e401f59e7ecc33a92ec437a6cafb9312a31fb74",
+      "includes": 173,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "01506dc2f6685a35770060fa3d9d860d418130aafed00bcb240cd8ab1d1e2db0",
+      "includes": 179,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "cde2f17ba7f8d725d31a70e4697ed25d9ba7fd4d33c3d7ee4e496dedb874f3c2",
+      "includes": 187,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "ae87a5bf7ecfd807b59081e9fda485c92e0059c2bf647be6c28347c826adbff5",
+      "includes": 181,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "includes": 192,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "includes": 204,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "3c6df963fed846249fd8c14e2d54a1bf7aa344a9a88d4efdb9b87d0589c1fa01",
+      "includes": 178,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "3d2ed5781ebd7644c4f52e98bd522c1541be6998905b81c53879824182aa1ce9",
+      "includes": 197,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "efe65dc779005a9f387e8d10fadd64570922571e55aeec348071c65a4ec68338",
+      "includes": 159,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa",
+      "includes": 168,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "db5481c11626d9b5f13cfedd51b005c8bd3a33450a8e85282aff2fb8fd84c072",
+      "includes": 174,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "74d040039f92671ef0da05ba7d98b8ed652af4483f18dd982df06d8c227c4c5d",
+      "includes": 209,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "135ca24ff83d7fca210b108953a34e9b7a8da2cea563c4c0bf3ab1c6511a214d",
+      "includes": 194,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
+      "includes": 171,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "includes": 188,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "includes": 181,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
+      "includes": 165,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "4bf68cad6816d1707b9338dec64012d28d377e9f7ba30729abff82b0d8b0d8c8",
+      "includes": 179,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
+      "includes": 182,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "includes": 187,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "includes": 185,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "89112dc9a067b3a2e80bb450b7b392003b4379beaac961992ec90325e355114c",
+      "includes": 184,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "5908873bd5f6391511efc733b04537bd56007df973b95d0cd1124ab84ff283d4",
+      "includes": 183,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "244b5bbcc258a737c240fc7803aba9c9f2ad80eed24371e8065498fe734d9a9b",
+      "includes": 181,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "includes": 182,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "includes": 180,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_test.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "5213723a877ad7c6241e8891f8ee8157ecc3fd7d3e982d3f0c78f16f7fd965dc",
+      "includes": 160,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "6ea5365b039b059a4b16dbe2c8d0f630c4db670105159644fcfd7d84630038c6",
+      "includes": 173,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "includes": 185,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+      "includes": 194,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "includes": 180,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/debuggng.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "c682aff394697e28f8f12ee13976dedfb625261dfb8340c5ef0941b04fb4223a",
+      "includes": 156,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "92372fa13f5b16fa698b91839fe5e8e92b64abad3d973e1f2e65df0f40f1d131",
+      "includes": 171,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "3915714ff36cd1adadcfc8399cb759305ba2817ca4e9db9b95b0ccbb0eb2a7a8",
+      "includes": 174,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "97faea60eb6e496a092b1e892c980a87a4888802927d9f7ffc2b7abf20e8549a",
+      "includes": 156,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "includes": 211,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "includes": 166,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "7cda05518a3473d52c7383620cd000f936b93219a1e746461c26116cc0531565",
+      "includes": 206,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4",
+      "includes": 196,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "a0b2e375ad714bb2c840f108368358bee33538bf2daa75f3421db07babc17b9d",
+      "includes": 213,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "776859017c17fbf478ee3b391e401f59e7ecc33a92ec437a6cafb9312a31fb74",
+      "includes": 173,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "01506dc2f6685a35770060fa3d9d860d418130aafed00bcb240cd8ab1d1e2db0",
+      "includes": 179,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "cde2f17ba7f8d725d31a70e4697ed25d9ba7fd4d33c3d7ee4e496dedb874f3c2",
+      "includes": 187,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "ae87a5bf7ecfd807b59081e9fda485c92e0059c2bf647be6c28347c826adbff5",
+      "includes": 181,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "includes": 192,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "includes": 204,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "3c6df963fed846249fd8c14e2d54a1bf7aa344a9a88d4efdb9b87d0589c1fa01",
+      "includes": 178,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "3d2ed5781ebd7644c4f52e98bd522c1541be6998905b81c53879824182aa1ce9",
+      "includes": 197,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "efe65dc779005a9f387e8d10fadd64570922571e55aeec348071c65a4ec68338",
+      "includes": 159,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa",
+      "includes": 168,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    }
+  ],
+  "existing_exclusions": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "current_sha256": "db5481c11626d9b5f13cfedd51b005c8bd3a33450a8e85282aff2fb8fd84c072",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\bios.c",
+      "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b",
+      "local_line": 106,
+      "local_end": 108,
+      "original_line": 109,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "#ifdef NTVDM",
+        "void rtc_int(void);",
+        "#endif"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "current_sha256": "db5481c11626d9b5f13cfedd51b005c8bd3a33450a8e85282aff2fb8fd84c072",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\bios.c",
+      "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b",
+      "local_line": 704,
+      "local_end": 706,
+      "original_line": 681,
+      "preceding_anchor": [
+        "#endif /* MAC_LIKE */",
+        "};",
+        "we only have a byte quantity */"
+      ],
+      "following_anchor": [],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "current_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\ill_bop.c",
+      "original_sha256": "89df5a6fa3fc27def18b904fcd83f6c872778fec33dfc58634c9f73449165799",
+      "local_line": 48,
+      "local_end": 50,
+      "original_line": 48,
+      "preceding_anchor": [
+        "#include \"debug.h\"",
+        "#include CpuH",
+        "#include \"sas.h\""
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "current_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\ill_bop.c",
+      "original_sha256": "89df5a6fa3fc27def18b904fcd83f6c872778fec33dfc58634c9f73449165799",
+      "local_line": 58,
+      "local_end": 60,
+      "original_line": 64,
+      "preceding_anchor": [
+        "{",
+        "void illegal_bop()",
+        "#endif"
+      ],
+      "following_anchor": [
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "current_sha256": "135ca24ff83d7fca210b108953a34e9b7a8da2cea563c4c0bf3ab1c6511a214d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\tape_io.c",
+      "original_sha256": "3aa86f1faf07f68937629f1d6e410eb41f498e17dc6d747647c7d6e5697c80aa",
+      "local_line": 300,
+      "local_end": 302,
+      "original_line": 303,
+      "preceding_anchor": [
+        "default:",
+        "#endif\t/* SPC486 */",
+        "break;"
+      ],
+      "following_anchor": [
+        "case INT15_JOYSTICK:",
+        "case 0x24: /* A20 wrapping control */",
+        "case 0xd8: /* EISA device access */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "current_sha256": "92372fa13f5b16fa698b91839fe5e8e92b64abad3d973e1f2e65df0f40f1d131",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\btrace.c",
+      "original_sha256": "5a19a8cf73bd5c06c47bf3292189c8989bc970933bb4968336580f4be0028e3f",
+      "local_line": 46,
+      "local_end": 48,
+      "original_line": 46,
+      "preceding_anchor": [
+        "#include \"trace.h\"",
+        "#include \"sas.h\"",
+        "#include CpuH"
+      ],
+      "following_anchor": [],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+      "current_sha256": "97faea60eb6e496a092b1e892c980a87a4888802927d9f7ffc2b7abf20e8549a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\dasm.c",
+      "original_sha256": "6f90249d51eee69af65f59de138f915dc05af3a67b7bb529ea33596c04888b9b",
+      "local_line": 34,
+      "local_end": 36,
+      "original_line": 34,
+      "preceding_anchor": null,
+      "following_anchor": [],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-502: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/debuggng.c",
+      "current_sha256": "c682aff394697e28f8f12ee13976dedfb625261dfb8340c5ef0941b04fb4223a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\debuggng.c",
+      "original_sha256": "c483e5ef755f537c7197fc7ce929ed3837b1227f57f6b874b5c8ab46b15045ad",
+      "local_line": 9,
+      "local_end": 11,
+      "original_line": 9,
+      "preceding_anchor": [
+        "#include \"host_def.h\"",
+        "#include \"insignia.h\""
+      ],
+      "following_anchor": [],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "current_sha256": "3915714ff36cd1adadcfc8399cb759305ba2817ca4e9db9b95b0ccbb0eb2a7a8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\trace.c",
+      "original_sha256": "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3",
+      "local_line": 59,
+      "local_end": 61,
+      "original_line": 59,
+      "preceding_anchor": [
+        "FILE *trace_file;",
+        "#endif",
+        "FORWARD IU32 get_287_sp IPT0();"
+      ],
+      "following_anchor": [
+        "static int trace_start = 0;",
+        "GLOBAL IU32 io_verbose = 0;",
+        "GLOBAL IU32 sub_io_verbose = 0;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "current_sha256": "3915714ff36cd1adadcfc8399cb759305ba2817ca4e9db9b95b0ccbb0eb2a7a8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\trace.c",
+      "original_sha256": "b776bec19f7c7c615684711b915c7c7d1c56a124d37e14fc30a575681c83b2e3",
+      "local_line": 308,
+      "local_end": 310,
+      "original_line": 496,
+      "preceding_anchor": [
+        "}",
+        "#endif /* !PROD || HUNTER */",
+        "}"
+      ],
+      "following_anchor": [],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "current_sha256": "89112dc9a067b3a2e80bb450b7b392003b4379beaac961992ec90325e355114c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\diskbios.c",
+      "original_sha256": "d05908d6199675e65ebcf0f2b2c864169e80276639fb8de25b007c5e66751cdc",
+      "local_line": 108,
+      "local_end": 110,
+      "original_line": 108,
+      "preceding_anchor": [
+        "LOCAL int tfstatus;",
+        "LOCAL int maxsectors, maxoffset;",
+        "LOCAL dpb_block dpb[2];"
+      ],
+      "following_anchor": [
+        "LOCAL int drive1notwiredup;",
+        "void disk_post IPT0();",
+        "LOCAL void hd_reset IPT2(int, drive, int, diag);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "current_sha256": "89112dc9a067b3a2e80bb450b7b392003b4379beaac961992ec90325e355114c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\diskbios.c",
+      "original_sha256": "d05908d6199675e65ebcf0f2b2c864169e80276639fb8de25b007c5e66751cdc",
+      "local_line": 362,
+      "local_end": 364,
+      "original_line": 365,
+      "preceding_anchor": [
+        "}",
+        "wcmos (CMOS_DIAG, diag | HF_FAIL);",
+        "if (getCF () && !drive)"
+      ],
+      "following_anchor": [
+        "#ifdef ANSI",
+        "LOCAL void (*disk_func[]) (void) =",
+        "#else"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "current_sha256": "89112dc9a067b3a2e80bb450b7b392003b4379beaac961992ec90325e355114c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\diskbios.c",
+      "original_sha256": "d05908d6199675e65ebcf0f2b2c864169e80276639fb8de25b007c5e66751cdc",
+      "local_line": 402,
+      "local_end": 404,
+      "original_line": 598,
+      "preceding_anchor": [
+        "};",
+        "read_dasd,\t\t/* 0x15 */",
+        "diagnostics,\t\t/* 0x14 */"
+      ],
+      "following_anchor": [
+        "void disk_io IFN0()",
+        "{",
+        "register int BIOS_command;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "current_sha256": "89112dc9a067b3a2e80bb450b7b392003b4379beaac961992ec90325e355114c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\diskbios.c",
+      "original_sha256": "d05908d6199675e65ebcf0f2b2c864169e80276639fb8de25b007c5e66751cdc",
+      "local_line": 410,
+      "local_end": 412,
+      "original_line": 630,
+      "preceding_anchor": [
+        "register int BIOS_command;",
+        "{",
+        "void disk_io IFN0()"
+      ],
+      "following_anchor": [
+        "IDLE_disk();",
+        "BIOS_command = getAH ();",
+        "#ifndef PROD"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "current_sha256": "89112dc9a067b3a2e80bb450b7b392003b4379beaac961992ec90325e355114c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\diskbios.c",
+      "original_sha256": "d05908d6199675e65ebcf0f2b2c864169e80276639fb8de25b007c5e66751cdc",
+      "local_line": 422,
+      "local_end": 424,
+      "original_line": 642,
+      "preceding_anchor": [
+        "BIOS_command = getAH ();",
+        "IDLE_disk();",
+        "#endif"
+      ],
+      "following_anchor": [
+        "if (BIOS_command != 0x01)",
+        "wstatus (STATUS_CLEAR);",
+        "com.drive = getDL () & 0x7f;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "current_sha256": "89112dc9a067b3a2e80bb450b7b392003b4379beaac961992ec90325e355114c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\diskbios.c",
+      "original_sha256": "d05908d6199675e65ebcf0f2b2c864169e80276639fb8de25b007c5e66751cdc",
+      "local_line": 477,
+      "local_end": 479,
+      "original_line": 711,
+      "preceding_anchor": [
+        "{",
+        "if (rstatus ())",
+        "setAH (rstatus ());"
+      ],
+      "following_anchor": [
+        "setCF (1);\t/* cmd fails */",
+        "}",
+        "else"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "current_sha256": "5908873bd5f6391511efc733b04537bd56007df973b95d0cd1124ab84ff283d4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fdisk.c",
+      "original_sha256": "f95a9a26a9ef201e9552f2459a6ba85080e17fb8ccae3fb6280c63eb2fa78607",
+      "local_line": 1500,
+      "local_end": 1502,
+      "original_line": 1500,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "break;",
+        "default:",
+        "dt1(DHW | PORTIO, 0, \"inb on port %x(hex)\\n\", port)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "current_sha256": "5908873bd5f6391511efc733b04537bd56007df973b95d0cd1124ab84ff283d4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fdisk.c",
+      "original_sha256": "f95a9a26a9ef201e9552f2459a6ba85080e17fb8ccae3fb6280c63eb2fa78607",
+      "local_line": 1563,
+      "local_end": 1565,
+      "original_line": 1582,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "break;",
+        "case TFPCMP:",
+        "dt2(DHW | PORTIO, 0, \"outb to port %x(hex),val %x(hex)\\n\","
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "current_sha256": "244b5bbcc258a737c240fc7803aba9c9f2ad80eed24371e8065498fe734d9a9b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fla.c",
+      "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+      "local_line": 425,
+      "local_end": 427,
+      "original_line": 436,
+      "preceding_anchor": [
+        "}",
+        "break;",
+        "always_trace0( \"ERROR: Bad drive type.\" );"
+      ],
+      "following_anchor": [
+        "}",
+        "else",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "current_sha256": "244b5bbcc258a737c240fc7803aba9c9f2ad80eed24371e8065498fe734d9a9b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fla.c",
+      "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+      "local_line": 697,
+      "local_end": 699,
+      "original_line": 712,
+      "preceding_anchor": [
+        "}",
+        "}",
+        "dor.all = new_dor.all;"
+      ],
+      "following_anchor": [
+        "fla_busy = FALSE;",
+        "}",
+        "void trap_ndma IFN0()"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "local_line": 860,
+      "local_end": 862,
+      "original_line": 861,
+      "preceding_anchor": [
+        "setCF(0);",
+        "}",
+        "setAH(DRIVE_IQ_UNKNOWN);"
+      ],
+      "following_anchor": [
+        "}",
+        "void fl_disk_change IFN1(int, drive)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "local_line": 2358,
+      "local_end": 2360,
+      "original_line": 2444,
+      "preceding_anchor": [
+        "sas_load(effective_addr(segment, offset+index), &value);",
+        "sas_loadw(DISK_POINTER_ADDR + 2, &segment);",
+        "sas_loadw(DISK_POINTER_ADDR, &offset);"
+      ],
+      "following_anchor": [
+        "return(value);",
+        "}",
+        "LOCAL void motor_on IFN1(int, drive)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "current_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "local_line": 66,
+      "local_end": 68,
+      "original_line": 66,
+      "preceding_anchor": [
+        "#endif\t/* NTVDM */",
+        "extern UTINY number_of_floppy;",
+        "#ifdef NTVDM"
+      ],
+      "following_anchor": [
+        "void diskette_io()",
+        "{",
+        "half_word diskette_status;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "current_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "local_line": 84,
+      "local_end": 86,
+      "original_line": 308,
+      "preceding_anchor": [
+        "int op = getAH(), drive = getDL();",
+        "half_word diskette_status;",
+        "{"
+      ],
+      "following_anchor": [
+        "#ifndef\tJOKER",
+        "setIF(1);",
+        "#endif\t/* JOKER */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "current_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "local_line": 134,
+      "local_end": 136,
+      "original_line": 359,
+      "preceding_anchor": [
+        "(*fl_fnc_tab[op])(drive);",
+        "sas_store(FLOPPY_STATUS, FS_OK);",
+        "setAH(diskette_status);"
+      ],
+      "following_anchor": [
+        "}",
+        "#ifndef\tJOKER\t\t/* Floppies handled v. weirdly on JOKER */",
+        "void diskette_int()"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "local_line": 155,
+      "local_end": 157,
+      "original_line": 155,
+      "preceding_anchor": [
+        "int ret_stat = SUCCESS;",
+        "int i;",
+        "{"
+      ],
+      "following_anchor": [
+        "if (get_type_cmd(command_block) == FDC_SPECIFY)",
+        "{",
+        "for (i = 0; i < MAX_DISKETTES; i++)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "local_line": 186,
+      "local_end": 188,
+      "original_line": 187,
+      "preceding_anchor": [
+        "{",
+        "GLOBAL SHORT gfi_drive_on IFN1(UTINY,drive)",
+        "}"
+      ],
+      "following_anchor": [
+        "return((*gfi_function_table[drive].drive_on_fn)(drive));",
+        "}",
+        "GLOBAL SHORT gfi_drive_off IFN1(UTINY,drive)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "local_line": 199,
+      "local_end": 201,
+      "original_line": 201,
+      "preceding_anchor": [
+        "{",
+        "GLOBAL SHORT gfi_drive_off IFN1(UTINY,drive)",
+        "}"
+      ],
+      "following_anchor": [
+        "return((*gfi_function_table[drive].drive_off_fn)(drive));",
+        "}",
+        "GLOBAL SHORT gfi_reset IFN2(FDC_RESULT_BLOCK *,result_block, UTINY, drive)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "local_line": 217,
+      "local_end": 219,
+      "original_line": 220,
+      "preceding_anchor": [
+        "{",
+        "GLOBAL SHORT gfi_reset IFN2(FDC_RESULT_BLOCK *,result_block, UTINY, drive)",
+        "}"
+      ],
+      "following_anchor": [
+        "(*gfi_function_table[drive].reset_fn)(result_block, drive);",
+        "put_r3_ST0(result_block, 0);",
+        "put_r1_ST0_int_code(result_block, 3);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "local_line": 244,
+      "local_end": 246,
+      "original_line": 248,
+      "preceding_anchor": [
+        "{",
+        "GLOBAL SHORT gfi_high IFN2(UTINY,drive,half_word,datarate)",
+        "}"
+      ],
+      "following_anchor": [
+        "return((*gfi_function_table[drive].high_fn)(drive,datarate));",
+        "}",
+        "GLOBAL SHORT gfi_drive_type IFN1(UTINY,drive)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "local_line": 258,
+      "local_end": 260,
+      "original_line": 263,
+      "preceding_anchor": [
+        "{",
+        "GLOBAL SHORT gfi_drive_type IFN1(UTINY,drive)",
+        "}"
+      ],
+      "following_anchor": [
+        "return((*gfi_function_table[drive].drive_type_fn)(drive));",
+        "}",
+        "GLOBAL SHORT gfi_change IFN1(UTINY,drive)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "current_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi.c",
+      "original_sha256": "0b332182c606cfef8b0788b50866b9e13acd389445a52f60f3cb65caf8f916e6",
+      "local_line": 271,
+      "local_end": 273,
+      "original_line": 277,
+      "preceding_anchor": [
+        "{",
+        "GLOBAL SHORT gfi_change IFN1(UTINY,drive)",
+        "}"
+      ],
+      "following_anchor": [
+        "return((*gfi_function_table[drive].change_fn)(drive));",
+        "}",
+        "GLOBAL SHORT"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "local_line": 152,
+      "local_end": 154,
+      "original_line": 152,
+      "preceding_anchor": [
+        "case FDC_READ_DATA:",
+        "{",
+        "switch (get_type_cmd (command_block))"
+      ],
+      "following_anchor": [
+        "break;",
+        "case FDC_WRITE_DATA:",
+        "#ifndef\tPROD"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "local_line": 158,
+      "local_end": 160,
+      "original_line": 159,
+      "preceding_anchor": [
+        "case FDC_WRITE_DATA:",
+        "break;",
+        "#endif"
+      ],
+      "following_anchor": [
+        "break;",
+        "case FDC_READ_TRACK:",
+        "#ifndef\tPROD"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "local_line": 164,
+      "local_end": 166,
+      "original_line": 166,
+      "preceding_anchor": [
+        "case FDC_READ_TRACK:",
+        "break;",
+        "#endif"
+      ],
+      "following_anchor": [
+        "break;",
+        "case FDC_SPECIFY:",
+        "#ifndef\tPROD"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "local_line": 170,
+      "local_end": 172,
+      "original_line": 173,
+      "preceding_anchor": [
+        "case FDC_SPECIFY:",
+        "break;",
+        "#endif"
+      ],
+      "following_anchor": [
+        "break;",
+        "case FDC_READ_ID:",
+        "#ifndef PROD"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "local_line": 176,
+      "local_end": 178,
+      "original_line": 180,
+      "preceding_anchor": [
+        "case FDC_READ_ID:",
+        "break;",
+        "#endif"
+      ],
+      "following_anchor": [
+        "break;",
+        "case FDC_RECALIBRATE:",
+        "#ifndef\tPROD"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "local_line": 182,
+      "local_end": 184,
+      "original_line": 187,
+      "preceding_anchor": [
+        "case FDC_RECALIBRATE:",
+        "break;",
+        "#endif"
+      ],
+      "following_anchor": [
+        "but fails, so we set Equipment Check */",
+        "D = get_c5_drive(command_block);",
+        "put_r1_ST0_unit(result_block, D);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "local_line": 196,
+      "local_end": 198,
+      "original_line": 202,
+      "preceding_anchor": [
+        "case FDC_SENSE_DRIVE_STATUS:",
+        "break;",
+        "ret_stat = SUCCESS;"
+      ],
+      "following_anchor": [
+        "break;",
+        "case FDC_SEEK:",
+        "#ifndef\tPROD"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "local_line": 202,
+      "local_end": 204,
+      "original_line": 209,
+      "preceding_anchor": [
+        "case FDC_SEEK:",
+        "break;",
+        "#endif"
+      ],
+      "following_anchor": [
+        "break;",
+        "case FDC_FORMAT_TRACK:",
+        "#ifndef\tPROD"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "local_line": 208,
+      "local_end": 210,
+      "original_line": 216,
+      "preceding_anchor": [
+        "case FDC_FORMAT_TRACK:",
+        "break;",
+        "#endif"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "current_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "local_line": 213,
+      "local_end": 215,
+      "original_line": 222,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "}",
+        "return (ret_stat);",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_test.c",
+      "current_sha256": "5213723a877ad7c6241e8891f8ee8157ecc3fd7d3e982d3f0c78f16f7fd965dc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_test.c",
+      "original_sha256": "cfba520508d5e274ac23d471af6656b7bc41af1a8b0606b3b7020570ab2e2210",
+      "local_line": 3,
+      "local_end": 5,
+      "original_line": 3,
+      "preceding_anchor": [
+        "#include \"host_def.h\"",
+        "#include \"insignia.h\""
+      ],
+      "following_anchor": [
+        "#include <stdio.h>",
+        "#include TypesH",
+        "#ifndef PROD"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_test.c",
+      "current_sha256": "5213723a877ad7c6241e8891f8ee8157ecc3fd7d3e982d3f0c78f16f7fd965dc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_test.c",
+      "original_sha256": "cfba520508d5e274ac23d471af6656b7bc41af1a8b0606b3b7020570ab2e2210",
+      "local_line": 9,
+      "local_end": 11,
+      "original_line": 42,
+      "preceding_anchor": [
+        "#include TypesH",
+        "#include <stdio.h>",
+        "#endif /* not PROD */"
+      ],
+      "following_anchor": [],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "local_line": 84,
+      "local_end": 86,
+      "original_line": 84,
+      "preceding_anchor": [
+        "#include \"ica.h\"",
+        "#include \"keyba.h\"",
+        "#include \"timer.h\""
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "local_line": 76,
+      "local_end": 78,
+      "original_line": 76,
+      "preceding_anchor": [
+        "int delta_x = 0, delta_y = 0;\t/* Current mouse delta moves */",
+        "int button_right = 0;\t/* Current state of right button */",
+        "int button_left  = 0;\t/* Current state of left button */"
+      ],
+      "following_anchor": [
+        "static half_word data1_reg = 0,",
+        "data2_reg = 0,",
+        "mouse_status_reg = 0;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "local_line": 121,
+      "local_end": 123,
+      "original_line": 121,
+      "preceding_anchor": [
+        "default :",
+        "break;",
+        "case 0x07 : /* mode register */"
+      ],
+      "following_anchor": [
+        "break;",
+        "}",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "local_line": 142,
+      "local_end": 144,
+      "original_line": 145,
+      "preceding_anchor": [
+        "}",
+        "else",
+        "if (mouse_inb_toggle = 1 - mouse_inb_toggle)"
+      ],
+      "following_anchor": [
+        "}",
+        "void mouse_outb IFN2(io_addr, port, half_word, value)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "local_line": 150,
+      "local_end": 152,
+      "original_line": 156,
+      "preceding_anchor": [
+        "{",
+        "void mouse_outb IFN2(io_addr, port, half_word, value)",
+        "}"
+      ],
+      "following_anchor": [
+        "if (port == MOUSE_PORT_1) {\t/* data register */",
+        "if ( (address_reg & 0x07) == INTERNAL_MODE_REG) {",
+        "if ((value & 0x20) && ((mouse_mode_reg & 0x20) == 0)) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "local_line": 174,
+      "local_end": 176,
+      "original_line": 188,
+      "preceding_anchor": [
+        "if ((value & 0x20) && ((mouse_mode_reg & 0x20) == 0)) {",
+        "if ( (address_reg & 0x07) == INTERNAL_MODE_REG) {",
+        "if (port == MOUSE_PORT_1) {\t/* data register */"
+      ],
+      "following_anchor": [
+        "ica_clear_int(AT_CPU_MOUSE_ADAPTER, AT_CPU_MOUSE_INT);",
+        "data1_reg = delta_x;",
+        "data2_reg = delta_y;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "local_line": 205,
+      "local_end": 207,
+      "original_line": 222,
+      "preceding_anchor": [
+        "else if ((mouse_mode_reg & 0x20) && ((value & 0x20)==0)){",
+        "}",
+        "delta_x = delta_y = 0;"
+      ],
+      "following_anchor": [
+        "}",
+        "switch (value & 0x7) {",
+        "case 0x0 :\t\t/* 0 Hz INTR low */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "local_line": 215,
+      "local_end": 217,
+      "original_line": 235,
+      "preceding_anchor": [
+        "case 0x0 :\t\t/* 0 Hz INTR low */",
+        "switch (value & 0x7) {",
+        "}"
+      ],
+      "following_anchor": [
+        "ica_clear_int(AT_CPU_MOUSE_ADAPTER, AT_CPU_MOUSE_INT);",
+        "break;",
+        "Windows 1.02 needs the burst of interrupts to occur even when mouse_mode_reg != 0,"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "local_line": 245,
+      "local_end": 247,
+      "original_line": 267,
+      "preceding_anchor": [
+        "loadsainterrupts--;",
+        "{",
+        "if( (value & 0x10) && loadsainterrupts > 0)"
+      ],
+      "following_anchor": [
+        "ica_hw_interrupt(AT_CPU_MOUSE_ADAPTER,AT_CPU_MOUSE_INT,100);",
+        "}",
+        "break;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "local_line": 258,
+      "local_end": 260,
+      "original_line": 282,
+      "preceding_anchor": [
+        "case 0x5: /* reserved */",
+        "break;",
+        "}"
+      ],
+      "following_anchor": [
+        "break;",
+        "case 0x6 :\t\t/* 0 Hz INTR hi */",
+        "#ifndef PROD"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "local_line": 263,
+      "local_end": 265,
+      "original_line": 289,
+      "preceding_anchor": [
+        "case 0x6 :\t\t/* 0 Hz INTR hi */",
+        "break;",
+        "#endif"
+      ],
+      "following_anchor": [
+        "ica_hw_interrupt(AT_CPU_MOUSE_ADAPTER,AT_CPU_MOUSE_INT,1);",
+        "break;",
+        "case 0x7: /* externally controlled */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "local_line": 271,
+      "local_end": 273,
+      "original_line": 299,
+      "preceding_anchor": [
+        "default:",
+        "break;",
+        "case 0x7: /* externally controlled */"
+      ],
+      "following_anchor": [
+        "break;",
+        "}",
+        "mouse_mode_reg = value;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "local_line": 285,
+      "local_end": 287,
+      "original_line": 316,
+      "preceding_anchor": [
+        "if ((address_reg & 0x07) == INTERFACE_CONTROL_REG){",
+        "else",
+        "}"
+      ],
+      "following_anchor": [
+        "}",
+        "}",
+        "else if(port == MOUSE_PORT_0)\t/* address pointer register */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "local_line": 355,
+      "local_end": 357,
+      "original_line": 389,
+      "preceding_anchor": [
+        "int p;",
+        "{",
+        "void mouse_init IFN0()"
+      ],
+      "following_anchor": [
+        "mouse_inb_toggle = 0;",
+        "io_define_inb(MOUSE_ADAPTOR, mouse_inb);",
+        "io_define_outb(MOUSE_ADAPTOR, mouse_outb);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "current_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "local_line": 374,
+      "local_end": 376,
+      "original_line": 411,
+      "preceding_anchor": [
+        "#endif",
+        "#endif",
+        "ica_iret_hook_control(AT_CPU_MOUSE_ADAPTER, AT_CPU_MOUSE_INT, TRUE);"
+      ],
+      "following_anchor": [
+        "}",
+        "host_deinstall_host_mouse();",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "current_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\ppi.c",
+      "original_sha256": "367cceaa88345e16b2e138faef9addd441da2cd39f95ea3ab6c359651bd8ebf5",
+      "local_line": 43,
+      "local_end": 45,
+      "original_line": 43,
+      "preceding_anchor": [
+        "#include \"timer.h\"",
+        "#include \"ppi.h\"",
+        "#include \"ios.h\""
+      ],
+      "following_anchor": [
+        "#include \"debug.h\"",
+        "static half_word ppi_register;",
+        "#define PPI_BIT_MASK\t0x3F1"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "current_sha256": "6ea5365b039b059a4b16dbe2c8d0f630c4db670105159644fcfd7d84630038c6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\ios.c",
+      "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+      "local_line": 74,
+      "local_end": 76,
+      "original_line": 75,
+      "preceding_anchor": [
+        "#endif\t/* MAC68K */",
+        "GLOBAL char\tIos_out_adapter_table[PC_IO_MEM_SIZE];",
+        "GLOBAL char\tIos_in_adapter_table[PC_IO_MEM_SIZE];"
+      ],
+      "following_anchor": [
+        "typedef\tvoid (*IOS_FUNC_INB)\tIPT2(io_addr, io_address, half_word *, value);",
+        "typedef\tvoid (*IOS_FUNC_INW)\tIPT2(io_addr, io_address, word *, value);",
+        "typedef\tvoid (*IOS_FUNC_INSB)\tIPT3(io_addr, io_address, half_word *, valarray, word, count);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "current_sha256": "6ea5365b039b059a4b16dbe2c8d0f630c4db670105159644fcfd7d84630038c6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\ios.c",
+      "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+      "local_line": 948,
+      "local_end": 950,
+      "original_line": 984,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "for (i = 0; i < PC_IO_MEM_SIZE; i++){",
+        "Ios_in_adapter_table[i] = EMPTY_ADAPTOR;",
+        "Ios_out_adapter_table[i] = EMPTY_ADAPTOR;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "current_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "local_line": 147,
+      "local_end": 149,
+      "original_line": 140,
+      "preceding_anchor": [
+        "#endif\t/* NTVDM, macintosh, VMS */",
+        "setupEnv(argc,argv);\t/* set up Unix run-time environment */",
+        "#if !defined(NTVDM) && !defined(macintosh) && !defined(VMS)"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "current_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "local_line": 255,
+      "local_end": 257,
+      "original_line": 248,
+      "preceding_anchor": [
+        "cpu_init();",
+        "#endif",
+        "cmos_equip_update();"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "current_sha256": "4bf68cad6816d1707b9338dec64012d28d377e9f7ba30729abff82b0d8b0d8c8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\illegalp.c",
+      "original_sha256": "94f049032a9298802cab09afc61651469dcbf1fec80ab36444e5c2fed2f681ad",
+      "local_line": 47,
+      "local_end": 49,
+      "original_line": 44,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "LOCAL VOID where IFN3(CHAR *, string, word, cs, LIN_ADDR, ip)",
+        "{",
+        "double_word ea = effective_addr(cs, ip);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "current_sha256": "4bf68cad6816d1707b9338dec64012d28d377e9f7ba30729abff82b0d8b0d8c8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\illegalp.c",
+      "original_sha256": "94f049032a9298802cab09afc61651469dcbf1fec80ab36444e5c2fed2f681ad",
+      "local_line": 74,
+      "local_end": 76,
+      "original_line": 71,
+      "preceding_anchor": [
+        "{",
+        "void illegal_op()",
+        "#endif"
+      ],
+      "following_anchor": [
+        "}",
+        "void illegal_op_int()",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "current_sha256": "4bf68cad6816d1707b9338dec64012d28d377e9f7ba30729abff82b0d8b0d8c8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\illegalp.c",
+      "original_sha256": "94f049032a9298802cab09afc61651469dcbf1fec80ab36444e5c2fed2f681ad",
+      "local_line": 151,
+      "local_end": 153,
+      "original_line": 190,
+      "preceding_anchor": null,
+      "following_anchor": [],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "current_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
+      "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+      "local_line": 159,
+      "local_end": 161,
+      "original_line": 161,
+      "preceding_anchor": [
+        "sas_connect_memory(start, start + roundedLength - 1, SAS_RAM);",
+        "roundedLength = (length + 511) & (~511);",
+        "PHY_ADDR indicatedLength;"
+      ],
+      "following_anchor": [
+        "signature = sas_PR16(start);",
+        "if (signature != 0xaa55) {",
+        "always_trace2(\"ROM at 0x%.5lx has an invalid signature 0x%.4x (should be aa55)\", start, signature);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "local_line": 200,
+      "local_end": 202,
+      "original_line": 204,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "break;",
+        "}",
+        "switch (v_adapter) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "current_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "local_line": 310,
+      "local_end": 312,
+      "original_line": 331,
+      "preceding_anchor": [
+        "default:",
+        "break;",
+        "case NO_ADAPTOR: /* Do nothing if video_adaptor not initialised */"
+      ],
+      "following_anchor": [
+        "break;",
+        "}",
+        "#ifdef GORE"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "current_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "local_line": 86,
+      "local_end": 88,
+      "original_line": 86,
+      "preceding_anchor": [
+        "#include \"timer.h\"",
+        "#include \"debug.h\"",
+        "#include \"equip.h\""
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "current_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "local_line": 354,
+      "local_end": 356,
+      "original_line": 345,
+      "preceding_anchor": [
+        "vd_mode_table[current_video_mode].mode_control_val == VD_BAD_MODE) {",
+        "if ((half_word)current_video_mode > VD_MAX_MODE ||",
+        "equip_flag.all = sas_w_at_no_check(EQUIP_FLAG);"
+      ],
+      "following_anchor": [
+        "return;",
+        "}",
+        "if (equip_flag.bits.video_mode == VIDEO_MODE_80X25_BW) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "current_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "local_line": 588,
+      "local_end": 590,
+      "original_line": 582,
+      "preceding_anchor": [
+        "else {\t\t        /* not supported */",
+        "}",
+        "return;"
+      ],
+      "following_anchor": [
+        "}",
+        "}",
+        "GLOBAL void vd_set_active_page IFN0()"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "current_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "local_line": 950,
+      "local_end": 952,
+      "original_line": 946,
+      "preceding_anchor": [
+        "default:",
+        "break;",
+        "source = vd_high_offset(l_col, t_row) + video_pc_low_regen;"
+      ],
+      "following_anchor": [
+        ";",
+        "}",
+        "dest = source;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "current_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "local_line": 1270,
+      "local_end": 1272,
+      "original_line": 1270,
+      "preceding_anchor": [
+        "default:",
+        "break;",
+        "source = vd_high_offset(l_col, t_row)+video_pc_low_regen;"
+      ],
+      "following_anchor": [
+        ";",
+        "}",
+        "dest = source + (rowsdiff-1)*col_incr;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "current_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "local_line": 2453,
+      "local_end": 2455,
+      "original_line": 2485,
+      "preceding_anchor": [
+        "{",
+        "if ( (char_addr = extend_addr(4*BIOS_EXTEND_CHAR)) == 0)",
+        "{   /* must be in user installed extended char set */"
+      ],
+      "following_anchor": [
+        "return;",
+        "}",
+        "else"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "local_line": 478,
+      "local_end": 480,
+      "original_line": 524,
+      "preceding_anchor": [
+        "#endif",
+        "}",
+        "dpmiMemorySize;"
+      ],
+      "following_anchor": [
+        "sas_init(vdmMemorySize*ONEKB);",
+        "#ifdef CPU_40_STYLE",
+        "InitNtCpuInfo();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "local_line": 507,
+      "local_end": 509,
+      "original_line": 560,
+      "preceding_anchor": [
+        "hWndConsole = HWND_DESKTOP;",
+        "if (!hWndConsole) {",
+        "} while (!hWndConsole && i--);"
+      ],
+      "following_anchor": [
+        "}",
+        "}",
+        "if (*Title)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "local_line": 758,
+      "local_end": 760,
+      "original_line": 859,
+      "preceding_anchor": [
+        "default:",
+        "return (runtime_status.sound_on);",
+        "case C_SOUND_ON:"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "local_line": 779,
+      "local_end": 781,
+      "original_line": 880,
+      "preceding_anchor": [
+        "default:",
+        "break;",
+        "runtime_status.sound_on = val;"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "current_sha256": "efe65dc779005a9f387e8d10fadd64570922571e55aeec348071c65a4ec68338",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\fprt.c",
+      "original_sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
+      "local_line": 14,
+      "local_end": 16,
+      "original_line": 14,
+      "preceding_anchor": [
+        "{",
+        "int _CRTAPI1 printf(const char *str, ...)",
+        "void OutputString(char *);"
+      ],
+      "following_anchor": [
+        "return(0);",
+        "}",
+        "static HANDLE pipe=NULL;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "current_sha256": "efe65dc779005a9f387e8d10fadd64570922571e55aeec348071c65a4ec68338",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\fprt.c",
+      "original_sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
+      "local_line": 26,
+      "local_end": 28,
+      "original_line": 32,
+      "preceding_anchor": [
+        "{",
+        "void OutputString(char *str)",
+        "static HANDLE pipe=NULL;"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "current_sha256": "efe65dc779005a9f387e8d10fadd64570922571e55aeec348071c65a4ec68338",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\fprt.c",
+      "original_sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
+      "local_line": 41,
+      "local_end": 43,
+      "original_line": 78,
+      "preceding_anchor": [
+        "{",
+        "VOID InputString(char *str, int len)",
+        "#define INPUT_API_SIG\t0xdefaced"
+      ],
+      "following_anchor": [
+        "}",
+        "int _CRTAPI2 fprintf(FILE *tf, const char *str, ...)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "current_sha256": "efe65dc779005a9f387e8d10fadd64570922571e55aeec348071c65a4ec68338",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\fprt.c",
+      "original_sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
+      "local_line": 50,
+      "local_end": 52,
+      "original_line": 146,
+      "preceding_anchor": [
+        "{",
+        "int _CRTAPI2 fprintf(FILE *tf, const char *str, ...)",
+        "}"
+      ],
+      "following_anchor": [
+        "return(0);",
+        "}",
+        "char *nt_fgets(char *buffer, int len, void *input_stream)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "current_sha256": "ae87a5bf7ecfd807b59081e9fda485c92e0059c2bf647be6c28347c826adbff5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cpu.c",
+      "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
+      "local_line": 72,
+      "local_end": 74,
+      "original_line": 60,
+      "preceding_anchor": [
+        "#define setLIMIT(limit, value) limit = value",
+        "#define setBASE(base, value) base = (0xff000000 | (value & 0xffffff))",
+        "#endif"
+      ],
+      "following_anchor": [
+        "Host_start_cpu: This function starts up the cpu emulation if",
+        "we are running a software emulation, or if a 486 is present,",
+        "starts up this emulation."
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "current_sha256": "3d2ed5781ebd7644c4f52e98bd522c1541be6998905b81c53879824182aa1ce9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_det.c",
+      "original_sha256": "c58d15d58672440bf94e015f61a10b43311e601ae150dae5b1559f2399f9dadc",
+      "local_line": 145,
+      "local_end": 147,
+      "original_line": 146,
+      "preceding_anchor": [
+        "LOCAL VOID freezeWindow(VOID);",
+        "LOCAL BOOL funnyMode(VOID);",
+        "LOCAL VOID syncVGAEmulationToHardware(VOID);"
+      ],
+      "following_anchor": [
+        "GLOBAL VOID doNullRegister()",
+        "{",
+        "DWORD dummylen;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "current_sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_error.c",
+      "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+      "local_line": 152,
+      "local_end": 154,
+      "original_line": 148,
+      "preceding_anchor": [
+        "UNUSED(ErrorNo);    //Always internal error",
+        "DWORD errno, len;",
+        "char Msg[EHS_MSG_LEN];"
+      ],
+      "following_anchor": [
+        "if (OSErrno & 0xc0000000)",
+        "errno = RtlNtStatusToDosError(OSErrno);",
+        "else"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "current_sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_error.c",
+      "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+      "local_line": 197,
+      "local_end": 199,
+      "original_line": 194,
+      "preceding_anchor": [
+        "}",
+        "strcat(message,extra_char);",
+        "strcat(message,\"\\n\");"
+      ],
+      "following_anchor": [
+        "ErrorDialogBox(message, NULL, RMB_ICON_STOP | RMB_ABORT | RMB_IGNORE);",
+        "return ERR_CONT;",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "current_sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_error.c",
+      "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+      "local_line": 616,
+      "local_end": 618,
+      "original_line": 614,
+      "preceding_anchor": [
+        "else {",
+        "}",
+        "}"
+      ],
+      "following_anchor": [
+        "ResumeTimerThread();",
+        "if (!VDMForWOW)",
+        "TerminateVDM();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "current_sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_error.c",
+      "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+      "local_line": 1159,
+      "local_end": 1161,
+      "original_line": 1157,
+      "preceding_anchor": [
+        "}",
+        "return ulRet;",
+        "ResumeTimerThread();"
+      ],
+      "following_anchor": [
+        "VOID RcErrorBoxPrintf(UINT wId, CHAR *szMsg)",
+        "{",
+        "CHAR message[EHS_MSG_LEN];"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "current_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "local_line": 77,
+      "local_end": 79,
+      "original_line": 77,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "GLOBAL UTINY tempbabymode[] =",
+        "{",
+        "0x50, 0x18, 0x10, 0x00, 0x10, 0x00, 0x03, 0x00, 0x02, 0x67,"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "current_sha256": "a0b2e375ad714bb2c840f108368358bee33538bf2daa75f3421db07babc17b9d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 1909,
+      "local_end": 1911,
+      "original_line": 1891,
+      "preceding_anchor": [
+        "WinSize.Right  = left + w - 1;",
+        "WinSize.Bottom = top  + h - 1;",
+        "WinSize.Left   = left;"
+      ],
+      "following_anchor": [
+        "if( !SetConsoleWindowInfo( sc.OutputHandle, TRUE, &WinSize ) )",
+        "assert3( NO, \"VDM: SetConsoleWindowInfo() w=%d h=%d failed:%#x\",",
+        "w, h, GetLastError() );"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "current_sha256": "a0b2e375ad714bb2c840f108368358bee33538bf2daa75f3421db07babc17b9d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 1929,
+      "local_end": 1931,
+      "original_line": 1911,
+      "preceding_anchor": [
+        "ScrSize.Y = h;",
+        "ScrSize.X = w;",
+        "COORD      ScrSize;"
+      ],
+      "following_anchor": [
+        "if( !SetConsoleScreenBufferSize( sc.OutputHandle, ScrSize ) )",
+        "assert3( NO, \"VDM: SetCons...BufferSize() w=%d h=%d failed:%#x\",",
+        "w, h, GetLastError() );"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "current_sha256": "a0b2e375ad714bb2c840f108368358bee33538bf2daa75f3421db07babc17b9d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 1983,
+      "local_end": 1985,
+      "original_line": 1965,
+      "preceding_anchor": [
+        "oldB    = bufferInfo.dwSize;",
+        "oldW.Y  = bufferInfo.srWindow.Bottom - bufferInfo.srWindow.Top  + 1;",
+        "oldW.X  = bufferInfo.srWindow.Right  - bufferInfo.srWindow.Left + 1;"
+      ],
+      "following_anchor": [
+        "if (    bufferInfo.srWindow.Bottom >= h",
+        "|| bufferInfo.srWindow.Right  >= w ) {",
+        "windowSize( MIN(w,oldW.X), MIN(h,oldW.Y), 0, 0);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "current_sha256": "a0b2e375ad714bb2c840f108368358bee33538bf2daa75f3421db07babc17b9d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 2007,
+      "local_end": 2009,
+      "original_line": 1992,
+      "preceding_anchor": [
+        "GetLastError() );",
+        "assert1( NO, \"VDM: GetConsoleScreenBufferInfo() failed:%#x\",",
+        "if( !GetConsoleScreenBufferInfo( sc.OutputHandle, &bufferInfo) )"
+      ],
+      "following_anchor": [
+        "}",
+        "newLeft = w - bufferInfo.dwMaximumWindowSize.X;",
+        "if ( newLeft > 0 ) {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "current_sha256": "a0b2e375ad714bb2c840f108368358bee33538bf2daa75f3421db07babc17b9d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 2298,
+      "local_end": 2300,
+      "original_line": 2280,
+      "preceding_anchor": [
+        "UNUSED(dummy);",
+        "{",
+        "void nt_mode_select_changed(int dummy)"
+      ],
+      "following_anchor": [
+        "}",
+        "void nt_color_select_changed(int dummy)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "current_sha256": "a0b2e375ad714bb2c840f108368358bee33538bf2daa75f3421db07babc17b9d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "local_line": 2306,
+      "local_end": 2308,
+      "original_line": 2288,
+      "preceding_anchor": [
+        "UNUSED(dummy);",
+        "{",
+        "void nt_color_select_changed(int dummy)"
+      ],
+      "following_anchor": [
+        "}",
+        "void nt_screen_address_changed(int lo, int hi)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "current_sha256": "7cda05518a3473d52c7383620cd000f936b93219a1e746461c26116cc0531565",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_msscs.c",
+      "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+      "local_line": 96,
+      "local_end": 98,
+      "original_line": 86,
+      "preceding_anchor": [
+        "if(!DBGInit (argc,argv)) {",
+        "}",
+        "TerminateVDM();"
+      ],
+      "following_anchor": [
+        "TerminateVDM();",
+        "}",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "current_sha256": "7cda05518a3473d52c7383620cd000f936b93219a1e746461c26116cc0531565",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_msscs.c",
+      "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+      "local_line": 155,
+      "local_end": 157,
+      "original_line": 138,
+      "preceding_anchor": [
+        "TlsDirectError = TlsAlloc();",
+        "io_init();",
+        "sas_storedw((ULONG)FIXED_NTVDMSTATE_LINEAR,fVirtualInt);"
+      ],
+      "following_anchor": [
+        "reset();",
+        "SetupInstallableVDD ();",
+        "the pif file settings tell us if it is necessary to"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "current_sha256": "7cda05518a3473d52c7383620cd000f936b93219a1e746461c26116cc0531565",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_msscs.c",
+      "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+      "local_line": 207,
+      "local_end": 209,
+      "original_line": 189,
+      "preceding_anchor": [
+        "{",
+        "BytesRead )",
+        "!(FileSize = GetFileSize(hFile, &BytesRead)) ||"
+      ],
+      "following_anchor": [
+        "host_error(EG_SYS_MISSING_FILE, ERR_QUIT, buffer);",
+        "if (hFile != INVALID_HANDLE_VALUE) {",
+        "CloseHandle(hFile);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "current_sha256": "7cda05518a3473d52c7383620cd000f936b93219a1e746461c26116cc0531565",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_msscs.c",
+      "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+      "local_line": 224,
+      "local_end": 226,
+      "original_line": 206,
+      "preceding_anchor": [
+        "{",
+        "FileSize != BytesRead)",
+        "if (!ReadFile(hFile, pDOSAddr, FileSize, &BytesRead, NULL) ||"
+      ],
+      "following_anchor": [
+        "host_error(EG_SYS_MISSING_FILE, ERR_QUIT, buffer);",
+        "CloseHandle(hFile);",
+        "return (-1);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "local_line": 122,
+      "local_end": 124,
+      "original_line": 122,
+      "preceding_anchor": [
+        "nxt = nxt->NxtStatusBlock;  // Next element to process",
+        "remove = nxt;               // Element to remove",
+        "{"
+      ],
+      "following_anchor": [
+        "free(remove);               // Deallocate element",
+        "}",
+        "if(!nxt)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "local_line": 177,
+      "local_end": 179,
+      "original_line": 194,
+      "preceding_anchor": [
+        "{",
+        "(PVOID) &ioctl, sizeof(ioctl), NULL, 0)))",
+        "IOCTL_SERIAL_SET_QUEUE_SIZE,"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "local_line": 190,
+      "local_end": 192,
+      "original_line": 208,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "return(ioStatusBlock.Status == STATUS_SUCCESS ? TRUE : FALSE);",
+        "}",
+        "int FastSetCommMask("
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "local_line": 218,
+      "local_end": 220,
+      "original_line": 237,
+      "preceding_anchor": [
+        "{",
+        "(PVOID) &CommMask, sizeof(CommMask), NULL, 0)))",
+        "IOCTL_SERIAL_SET_WAIT_MASK,"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "local_line": 231,
+      "local_end": 233,
+      "original_line": 251,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "return(ioStatusBlock.Status == STATUS_SUCCESS ? TRUE : FALSE);",
+        "}",
+        "int FastGetCommModemStatus("
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "local_line": 260,
+      "local_end": 262,
+      "original_line": 281,
+      "preceding_anchor": [
+        "{",
+        "(PVOID) ModemStatus, sizeof(ModemStatus))))",
+        "NULL, 0,"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "local_line": 273,
+      "local_end": 275,
+      "original_line": 295,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "return(ioStatusBlock.Status == STATUS_SUCCESS ? TRUE : FALSE);",
+        "}",
+        "BOOL FastWaitCommsOrCpuEvent("
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "local_line": 325,
+      "local_end": 327,
+      "original_line": 348,
+      "preceding_anchor": [
+        "{",
+        "sizeof(ULONG))) )",
+        "EvtMask,"
+      ],
+      "following_anchor": [
+        "SETUPLASTERROR(rtn);",
+        "return(FALSE);",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "local_line": 395,
+      "local_end": 397,
+      "original_line": 419,
+      "preceding_anchor": [
+        "{",
+        "&EscapeChar, sizeof(unsigned char),NULL,0)))",
+        "IOCTL_SERIAL_LSRMST_INSERT,"
+      ],
+      "following_anchor": [
+        "return(FALSE);",
+        "}",
+        "if (rtn == STATUS_PENDING)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "current_sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "local_line": 409,
+      "local_end": 411,
+      "original_line": 434,
+      "preceding_anchor": [
+        "NtWaitForSingleObject(Event, FALSE, NULL);",
+        "if (rtn == STATUS_PENDING)",
+        "}"
+      ],
+      "following_anchor": [
+        "return(ioStatusBlock.Status == STATUS_SUCCESS ? TRUE : FALSE);",
+        "}",
+        "BOOL FastCommSetBaudRate(HANDLE FileHandle, int BaudRate)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "current_sha256": "776859017c17fbf478ee3b391e401f59e7ecc33a92ec437a6cafb9312a31fb74",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_sound.c",
+      "original_sha256": "19e602c67a87241daf66e8613f4897d632acc7c6765f74c2b1eb09cf080e53f6",
+      "local_line": 144,
+      "local_end": 146,
+      "original_line": 138,
+      "preceding_anchor": [
+        "if (!NT_SUCCESS( Status )) {",
+        ");",
+        "0"
+      ],
+      "following_anchor": [
+        "hBeep = INVALID_HANDLE_VALUE;",
+        "}",
+        "return hBeep;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "current_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
+      "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+      "local_line": 162,
+      "local_end": 164,
+      "original_line": 162,
+      "preceding_anchor": [
+        "#include \"debug.h\"",
+        "#include \"idetect.h\"",
+        "#include \"nt_uis.h\""
+      ],
+      "following_anchor": [
+        "#include \"ica.h\"",
+        "#include \"nt_uis.h\"",
+        "#include \"nt_thred.h\""
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "current_sha256": "cde2f17ba7f8d725d31a70e4697ed25d9ba7fd4d33c3d7ee4e496dedb874f3c2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_unix.c",
+      "original_sha256": "f2ab1f40420a0928884cf524305a9b87b8c65b0c3440ab97367aa1cbce6417a7",
+      "local_line": 95,
+      "local_end": 97,
+      "original_line": 96,
+      "preceding_anchor": [
+        "IdleEvent = CreateEvent((LPSECURITY_ATTRIBUTES) NULL, FALSE, FALSE, NULL);",
+        "MainThreadId = GetCurrentThreadId();",
+        "return;         //Called already"
+      ],
+      "following_anchor": [
+        "}",
+        "void WaitIfIdle(void)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "current_sha256": "3c6df963fed846249fd8c14e2d54a1bf7aa344a9a88d4efdb9b87d0589c1fa01",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vdd.c",
+      "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3",
+      "local_line": 81,
+      "local_end": 83,
+      "original_line": 81,
+      "preceding_anchor": [
+        "{",
+        "LOCAL void ms_not_a_bop()",
+        "}"
+      ],
+      "following_anchor": [
+        "}",
+        "GLOBAL half_word get_ms_bop_index (void (*func)())",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "current_sha256": "01506dc2f6685a35770060fa3d9d860d418130aafed00bcb240cd8ab1d1e2db0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_wcom.c",
+      "original_sha256": "18c709bc88c37de4d9323101d528af0ec23a5e7e7b6942a1d2a1a9e7ded111a8",
+      "local_line": 45,
+      "local_end": 47,
+      "original_line": 45,
+      "preceding_anchor": [
+        "GCSfn GetCommShadowMSR;",
+        "GCHfn GetCommHandle;",
+        "#include <stdio.h>"
+      ],
+      "following_anchor": [
+        "BOOL SetupBaudRate(HANDLE FileHandle, DIVISOR_LATCH divisor_latch);",
+        "BOOL SetupLCRData(HANDLE FileHandle, LINE_CONTROL_REG LCR_reg);",
+        "BOOL SyncLineSettings(HANDLE FileHandle, DCB *pdcb,"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "current_sha256": "01506dc2f6685a35770060fa3d9d860d418130aafed00bcb240cd8ab1d1e2db0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_wcom.c",
+      "original_sha256": "18c709bc88c37de4d9323101d528af0ec23a5e7e7b6942a1d2a1a9e7ded111a8",
+      "local_line": 160,
+      "local_end": 162,
+      "original_line": 161,
+      "preceding_anchor": [
+        "}",
+        "break;",
+        "case RS232_SCRATCH:"
+      ],
+      "following_anchor": [
+        "}",
+        "void wow_com_outb(io_addr port, half_word value)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "current_sha256": "01506dc2f6685a35770060fa3d9d860d418130aafed00bcb240cd8ab1d1e2db0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_wcom.c",
+      "original_sha256": "18c709bc88c37de4d9323101d528af0ec23a5e7e7b6942a1d2a1a9e7ded111a8",
+      "local_line": 247,
+      "local_end": 249,
+      "original_line": 250,
+      "preceding_anchor": [
+        "}",
+        "break;",
+        "asp->scratch = value;"
+      ],
+      "following_anchor": [
+        "}",
+        "BOOL SyncLineSettings(HANDLE FileHandle,",
+        "DCB *pdcb,"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "current_sha256": "01506dc2f6685a35770060fa3d9d860d418130aafed00bcb240cd8ab1d1e2db0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_wcom.c",
+      "original_sha256": "18c709bc88c37de4d9323101d528af0ec23a5e7e7b6942a1d2a1a9e7ded111a8",
+      "local_line": 396,
+      "local_end": 398,
+      "original_line": 400,
+      "preceding_anchor": [
+        "}",
+        "return(TRUE);",
+        "}"
+      ],
+      "following_anchor": [],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "current_sha256": "ba5902276a1e7c96589c7fa6ee49bd04fe67640661fed297fa9927d49ccc8daa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.c",
+      "original_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a",
+      "local_line": 134,
+      "local_end": 136,
+      "original_line": 115,
+      "preceding_anchor": [
+        "if (!NT_SUCCESS(dw) || MyDebugPort == NULL)  {",
+        "NULL );",
+        "sizeof(MyDebugPort),"
+      ],
+      "following_anchor": [
+        "return;",
+        "}",
+        "DebugBreak();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register."
+    }
+  ],
+  "excluded_from_batch": [
+    "nt_event.c and nt_com.c have direct-source test fixtures",
+    "nt_rflop.c has an old syntax-test graph with different flags",
+    "four requested units absent from generated compilation graphs"
+  ],
+  "limitations": "No source rewrite; direct-source fixtures and unavailable build graphs not decided. Anchors identify original outer groups only."
+}

@@ -69,48 +69,9 @@ LPFNUNTHUNKMSG16 apfnUnThunkMsg16[] = {
 
 
 #ifdef DEBUG
-
-//
-// This function returns a pointer to a static buffer containing a generated
-// string.  If the function is called twice and generates a string in both
-// cases, the second call will overwrite the buffer of the first call.  If
-// this becomes a problem for us it would be easy to use an array of N
-// static buffers which are cycled through.
-//
-
-PSZ GetWMMsgName(UINT uMsg)
-{
-    static char szStaticBuf[128];
-    PSZ pszMsgName;
-
-    uMsg = LOWORD(uMsg);
-
-    pszMsgName = (uMsg < (unsigned)iMsgMax) ? aw32Msg[uMsg].lpszW32 : NULL;
-
-    if (!pszMsgName) {
-
-        if (uMsg < WM_USER) {
-            sprintf(szStaticBuf, "(Unknown 0x%x)", uMsg);
-        } else if (uMsg < 0xc000) {
-            sprintf(szStaticBuf, "(WM_USER+0x%x)", uMsg - WM_USER);
-        } else {
-            char szAtomName[100];
-
-            if ( ! GlobalGetAtomName((ATOM)uMsg, szAtomName, sizeof szAtomName) &&
-                 !       GetAtomName((ATOM)uMsg, szAtomName, sizeof szAtomName) ) {
-                szAtomName[0] = 0;
-            }
-
-            sprintf(szStaticBuf, "(Atom 0x%x '%s')", uMsg, szAtomName);
-        }
-
-        pszMsgName = szStaticBuf;
-    }
-
-    return pszMsgName;
-}
-
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 114
 
 
 // WARNING: This function may cause 16-bit memory movement, invalidating
@@ -263,10 +224,12 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         // DaveHart/ChandanC 9-Nov-93
         //
 #ifdef DEBUG
-        GETVDMPTR(lParam, (wParam == 0x7fff) ? 0 : wParam, (LPSZ)*plParamNew);
+#error Excluded unsupported DEBUG WOW profile
 #else
+#line 268
         GETVDMPTR(lParam, wParam,                          (LPSZ)*plParamNew);
 #endif
+#line 270
         break;
 
     case WM_GETMINMAXINFO:  // 024h, <SLPre,SLPost,LS>,MINMAXINFOSTRUCT

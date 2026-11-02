@@ -487,15 +487,15 @@ BOOL FindSymbol(
                             break;
                         case V86_MODE:
 #if 0
-                            mod_addr = mod_offset + (ULONG)(seg_num << 4) + this_offset;
-                            switch( direction ) {
-                                case BEFORE:
-                                    this_dist = v86_addr - mod_addr;
-                                    break;
-                                case AFTER:
-                                    this_dist = mod_addr - v86_addr;
-                                    break;
-                            }
+#error Excluded unsupported original disabled branch
+
+
+
+
+
+
+
+
 #endif
                             break;
                     }
@@ -735,11 +735,11 @@ BOOL FindAddress(
                                 _lclose( iFile );
                                 return( TRUE );
 #if 0
-                            case V86_MODE:
-                                *selector = se[nEntry].selector + seg_num;
-                                *offset   = this_offset;
-                                _lclose( iFile );
-                                return( TRUE );
+#error Excluded unsupported original disabled branch
+
+
+
+
 #endif
                         }
                     }
@@ -757,11 +757,11 @@ BOOL FindAddress(
                                     PRINTF("%04X:%04X = %s\n", *selector, *offset, name_buff );
                                     break;
 #if 0
-                                case V86_MODE:
-                                    *selector = se[nEntry].selector + seg_num;
-                                    *offset   = this_offset;
-                                    PRINTF("%04X:%04X = %s\n", *selector, *offset, name_buff );
-                                    break;
+#error Excluded unsupported original disabled branch
+
+
+
+
 #endif
                             }
                         }

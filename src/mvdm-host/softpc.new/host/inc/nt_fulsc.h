@@ -179,7 +179,5 @@ IMPORT int  getModeType(VOID);
 
 
 #ifdef X86GFX
-VOID locateNativeBIOSfonts(VOID);
-VOID LoseRegenMemory(VOID);
-VOID RegainRegenMemory(VOID);
+#error DIVERGENCE MVDM-HOST-DIV-584: hardware X86GFX declarations are not selected
 #endif

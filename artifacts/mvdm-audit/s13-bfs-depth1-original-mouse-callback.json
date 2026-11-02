@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+  "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+  "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+  "original_line": 6625,
+  "current_line": 5897,
+  "register": "MVDM-HOST-DIV-222",
+  "boundary": "original CPU30 direct callback offset selected for CPU40 via admitted local adaptation",
+  "limits": "current alternative remains pending; no runtime equivalence claim"
+}

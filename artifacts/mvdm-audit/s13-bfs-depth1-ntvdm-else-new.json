@@ -1,0 +1,122 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+    "before_sha256": "2344df6d17aafae3ebcc3ca2ddfcef18acc19ef298b92664334bec85f04ef0e1",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+    "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+    "local_group_before": 1950,
+    "local_else_before": 2077,
+    "local_end_before": 2148,
+    "original_group": 2184,
+    "original_else": 2287,
+    "original_end": 2360,
+    "removed_body_sha256": "d954a4c82cd9aebf1b3bf5c4430972a8f2dddd3f06d33899fb404a85c767291f",
+    "original_body_sha256": "bbfb387f588acdb0d28484d3379d06366a9ee3c5a0f21cb8ea47e7fb79baff56",
+    "removed_body_lines": 70,
+    "subsumed_markers": {
+      "MVDM-HOST-DIV-531": 1
+    },
+    "following_line": 2149,
+    "status": "actual x86 selected preprocessing equal ignoring blank lines; x86 object and x86/x64 guard/line controls pass; PIC and keyboard controller fixtures pass; full product/runtime remains pending",
+    "registration": "MVDM-HOST-DIV-574",
+    "current_group_line": 1950,
+    "current_else_line": 2077,
+    "after_sha256": "ffa1d65dac15a2b396e4febe9d1ae3c1ba4f04ab2856c85b943d1e3d8f66d28e"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+    "before_sha256": "2344df6d17aafae3ebcc3ca2ddfcef18acc19ef298b92664334bec85f04ef0e1",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+    "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+    "local_group_before": 2599,
+    "local_else_before": 2625,
+    "local_end_before": 2691,
+    "original_group": 2848,
+    "original_else": 2865,
+    "original_end": 2931,
+    "removed_body_sha256": "8f47e2ec1a2e7926c90d8a19f9ae875bd654c801968d15d8abbcfa5d2d28ea62",
+    "original_body_sha256": "7ff4ecbe0f06a068c0c58a534632189b4626948b005df59014668a77742d3183",
+    "removed_body_lines": 65,
+    "subsumed_markers": {
+      "MVDM-HOST-DIV-531": 1
+    },
+    "following_line": 2692,
+    "status": "actual x86 selected preprocessing equal ignoring blank lines; x86 object and x86/x64 guard/line controls pass; PIC and keyboard controller fixtures pass; full product/runtime remains pending",
+    "registration": "MVDM-HOST-DIV-574",
+    "current_group_line": 2531,
+    "current_else_line": 2557,
+    "after_sha256": "ffa1d65dac15a2b396e4febe9d1ae3c1ba4f04ab2856c85b943d1e3d8f66d28e"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+    "before_sha256": "52adadbff06e69b3d685bc7634511212c15dfe196463f00c683aad4ab6dd9634",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+    "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+    "local_group_before": 148,
+    "local_else_before": 159,
+    "local_end_before": 185,
+    "original_group": 152,
+    "original_else": 163,
+    "original_end": 205,
+    "removed_body_sha256": "bc7f98a774836d22207d8d5daa927b454042ef61abe84838b1c1aed89d0e474e",
+    "original_body_sha256": "9c5c2d3cadb419055e5947214ea1c17a98753e8146bde61efa06aca8eb2a4738",
+    "removed_body_lines": 25,
+    "subsumed_markers": {
+      "MVDM-HOST-DIV-500": 2
+    },
+    "following_line": 186,
+    "status": "actual x86 selected preprocessing equal ignoring blank lines; x86 object and x86/x64 guard/line controls pass; PIC and keyboard controller fixtures pass; full product/runtime remains pending",
+    "registration": "MVDM-HOST-DIV-574",
+    "current_group_line": 148,
+    "current_else_line": 159,
+    "after_sha256": "1430887916bcd42c4f7da75cbdff04a8823658a508b823d61e9784489a1e1152"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+    "before_sha256": "6c420934ac348553f9c63f462b3c6fd8c13d6c828b6c94eab9d12ca29be2e739",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+    "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+    "local_group_before": 192,
+    "local_else_before": 267,
+    "local_end_before": 294,
+    "original_group": 201,
+    "original_else": 276,
+    "original_end": 303,
+    "removed_body_sha256": "0d1aa19a22dd7950ea301b8ed527200e4ec93b65f761abb87fc5d13e2731b48c",
+    "original_body_sha256": "a9f546e62d315e2426b07e3c2bbbfafc77a0c273a455f5ce422c2596925fd1cf",
+    "removed_body_lines": 26,
+    "subsumed_markers": {
+      "MVDM-HOST-DIV-503": 1
+    },
+    "following_line": 291,
+    "status": "actual x86 selected preprocessing equal ignoring blank lines; x86 object and x86/x64 guard/line controls pass; PIC and keyboard controller fixtures pass; full product/runtime remains pending",
+    "registration": "MVDM-HOST-DIV-574",
+    "current_group_line": 192,
+    "current_else_line": 267,
+    "after_sha256": "390afff592d3eaa7a016bab804a0ec22cacb3b99bbe07a908b06647a37ac0349"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "before_sha256": "9491a9ad5c9762556ad0540382075566d48fd2fe266762b176ee610d3e3b73a7",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+    "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+    "local_group_before": 1924,
+    "local_else_before": 2025,
+    "local_end_before": 2126,
+    "original_group": 2245,
+    "original_else": 2346,
+    "original_end": 2451,
+    "removed_body_sha256": "ae93f3099f48440434410baa3f637b934f74e4b7f2310bec56188206387959ab",
+    "original_body_sha256": "2f1aa59ce7bba4f1b654a6376444bb173317dd2fcef950fc81d7fb588bbc0ac7",
+    "removed_body_lines": 100,
+    "subsumed_markers": {
+      "MVDM-HOST-DIV-500": 1
+    },
+    "following_line": 2238,
+    "status": "actual x86 selected preprocessing equal ignoring blank lines; x86 object and x86/x64 guard/line controls pass; PIC and keyboard controller fixtures pass; full product/runtime remains pending",
+    "registration": "MVDM-HOST-DIV-574",
+    "current_group_line": 1924,
+    "current_else_line": 2025,
+    "after_sha256": "ba2914eefe3c74ad8beab9c336148eb097fd99612630757ec9c6ae441c0fcf38"
+  }
+]

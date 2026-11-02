@@ -1,0 +1,253 @@
+{
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+  "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+  "current": "src\\non-mvdm\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+  "current_sha256": "e0ed75ed45d52eaf8e8efb124035565299e0fb29bbf20e735133d17ca4bb5dbf",
+  "registered_exceptions": [
+    "OPENNT-HOST-036",
+    "OPENNT-HOST-046",
+    "OPENNT-HOST-139"
+  ],
+  "original_function_ranges": {
+    "GetClassInfo": [
+      111,
+      155
+    ],
+    "StringDuplicate": [
+      578,
+      588
+    ],
+    "InitClsMenuName": [
+      595,
+      632
+    ],
+    "RegisterClassExWOW": [
+      701,
+      844
+    ],
+    "UnregisterClass": [
+      1051,
+      1087
+    ]
+  },
+  "groups": [
+    {
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "start": 14,
+      "end": 22,
+      "disposition": "retained selector"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 38,
+      "end": 64,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "start": 206,
+      "end": 210,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 217,
+      "end": 228,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "start": 243,
+      "end": 247,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 254,
+      "end": 265,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 271,
+      "end": 274,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "start": 293,
+      "end": 301,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 310,
+      "end": 338,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "start": 340,
+      "end": 344,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "start": 353,
+      "end": 358,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "start": 362,
+      "end": 365,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 369,
+      "end": 377,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 395,
+      "end": 402,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 414,
+      "end": 417,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 431,
+      "end": 465,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 514,
+      "end": 523,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 549,
+      "end": 559,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "start": 601,
+      "end": 617,
+      "disposition": "retained selector"
+    },
+    {
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "start": 802,
+      "end": 806,
+      "disposition": "retained selector"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 934,
+      "end": 943,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 976,
+      "end": 985,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "start": 992,
+      "end": 1001,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "start": 1096,
+      "end": 1100,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 1111,
+      "end": 1114,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "start": 1122,
+      "end": 1152,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 1191,
+      "end": 1213,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 1295,
+      "end": 1297,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 1317,
+      "end": 1354,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifdef",
+      "expression": "UNICODE",
+      "start": 1434,
+      "end": 1468,
+      "disposition": "outside retained function subset"
+    },
+    {
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "start": 1505,
+      "end": 1534,
+      "disposition": "outside retained function subset"
+    }
+  ],
+  "scope": "top-level conditional candidates only; other source semantic and inclusion checks remain"
+}

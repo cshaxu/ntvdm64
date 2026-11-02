@@ -1,0 +1,144 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+  "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+  "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+  "contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "includes": 189,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "includes": 189,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "classified": [
+    {
+      "local_line": 617,
+      "original_line": 688,
+      "anchor": [
+        "}",
+        "else",
+        "*value = asp->divisor_latch.byte.LSByte;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register."
+    },
+    {
+      "local_line": 630,
+      "original_line": 716,
+      "anchor": [
+        "*value = asp->int_enable_reg.all;",
+        "else",
+        "*value = asp->divisor_latch.byte.MSByte;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register."
+    },
+    {
+      "local_line": 648,
+      "original_line": 747,
+      "anchor": [
+        "asp->tx_holding_register_empty_interrupt_state = OFF;",
+        "clear_interrupt(asp);",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register."
+    },
+    {
+      "local_line": 670,
+      "original_line": 782,
+      "anchor": [
+        "}",
+        "#endif",
+        "*value = asp->line_control_reg.all;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register."
+    },
+    {
+      "local_line": 680,
+      "original_line": 805,
+      "anchor": [
+        "break;",
+        "case RS232_MCR:",
+        "*value = asp->modem_control_reg.all;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register."
+    },
+    {
+      "local_line": 757,
+      "original_line": 948,
+      "anchor": [
+        "host_com_unlock(adapter);",
+        "}",
+        "#endif /* ifndef NTVDM */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register."
+    },
+    {
+      "local_line": 984,
+      "original_line": 1252,
+      "anchor": [
+        "com_flush_input(adapter);",
+        "set_line_control(adapter, value);",
+        "set_break(adapter);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register."
+    },
+    {
+      "local_line": 993,
+      "original_line": 1274,
+      "anchor": [
+        "#endif",
+        "break;",
+        "case RS232_MCR:"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register."
+    },
+    {
+      "local_line": 1020,
+      "original_line": 1314,
+      "anchor": [
+        "i = asp->line_status_reg.bits.tx_shift_empty;   /* READ ONLY */",
+        "asp->line_status_reg.all = value;",
+        "asp->line_status_reg.bits.tx_shift_empty = i;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register."
+    },
+    {
+      "local_line": 1032,
+      "original_line": 1339,
+      "anchor": [
+        "/*",
+        "* Essentially a READ ONLY register.",
+        "*/"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register."
+    },
+    {
+      "local_line": 1995,
+      "original_line": 2415,
+      "anchor": [
+        "break;",
+        "}",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register."
+    }
+  ],
+  "limitations": [
+    "Only matched sole-error arms and actual worker/reference contexts.",
+    "Unmatched branches and other configurations remain pending."
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+  "before_sha256": "a33505d2e4e8627b925e428fc1044cfd5e110452ae41983f945742eb4c8026d2",
+  "after_sha256": "74d040039f92671ef0da05ba7d98b8ed652af4483f18dd982df06d8c227c4c5d",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+  "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+  "original_arm_lines": [
+    890,
+    984
+  ],
+  "local_arm_lines_before": [
+    821,
+    897
+  ],
+  "removed_body_sha256": "a320782446051f67340e4db35bd4a936f29a1fa1a4c60ea1ae371aedb968cebd",
+  "original_body_sha256": "94e969c957bbb9692eebd8277ebc97560f755a6f7322f6947278cbdd03ec92ab",
+  "removed_body_lines": 75,
+  "subsumed_markers": {
+    "MVDM-HOST-DIV-531": 1,
+    "MVDM-HOST-DIV-500": 1
+  },
+  "following_line": 898,
+  "child_groups_pruned": 2,
+  "status": "real x86 selected preprocessing equal ignoring blank lines; reset.obj compiled; x86/x64 focused positive-negative and line controls pass; full build and runtime pending",
+  "registration": "MVDM-HOST-DIV-572"
+}

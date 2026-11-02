@@ -1,0 +1,21 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+  "current_sha256": "9491a9ad5c9762556ad0540382075566d48fd2fe266762b176ee610d3e3b73a7",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+  "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+  "existing_exclusions": [
+    {
+      "local_line": 520,
+      "original_line": 554,
+      "anchor": "Interrupt routine - called from time_strobe event/signal handler.",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+    },
+    {
+      "local_line": 673,
+      "original_line": 727,
+      "anchor": "Return the current DOS tick value based on Timer 0",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register."
+    }
+  ],
+  "proof": "same distinctive first-depth preceding source comment; NTVDM selected by actual worker profile; existing body is sole #error"
+}

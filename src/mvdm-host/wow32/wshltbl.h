@@ -21,5 +21,5 @@ extern W32 aw32Shell[];
 
 
 #ifdef DEBUG_OR_WOWPROFILE
-extern INT iShellMax;
+#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected
 #endif

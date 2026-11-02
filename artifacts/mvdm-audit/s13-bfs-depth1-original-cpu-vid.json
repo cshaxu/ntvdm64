@@ -1,0 +1,325 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+  "current_sha256": "b022b20b5701714672e02f75e1a426211a09ad0656b9e0a0c3c5c15316d64cab",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu_vid.h",
+  "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+  "original_first_depth_condition": {
+    "line": 90,
+    "condition": "#ifndef NO_STRING_OPERATIONS"
+  },
+  "current_local_adaptation": {
+    "divergence": "MVDM-HOST-DIV-089",
+    "outer_line": 87,
+    "condition": "#if defined(CPU_40_STYLE) && defined(C_VID)",
+    "duplicated_original_condition_lines": [
+      94,
+      101
+    ],
+    "depth": 2
+  },
+  "actual_source_contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "a9f6974e2f7e73ba69415f6de71bd29a23ca9283b1753c17d824f2e1a9a48bc3",
+      "includes": 199,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "1e5e6a48c2338f0a3dc88b54db11e3fd242d2ed21165ee5b1209a50136e75cb7",
+      "includes": 188,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "bdf5bb3433dfa5c83f241af9ee84d47570d4946a3558dfba030137051faf2f5b",
+      "includes": 194,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "bea09443124793e235e99548e987bbc36c7b061516bd6de6ef2fca479c0d6a01",
+      "includes": 188,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "215f8c5d2803f1c19a9a1f47897707bc4bbf9cde294a535424c539aea500548c",
+      "includes": 176,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "26390e94c1a3e9695fbf608c6e44bbdd6254233ea195f59523df7eb9ad87043e",
+      "includes": 175,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "4bffdfa1a595285dd30b6004071ff743aac622054a505f1996dc2efb3536a305",
+      "includes": 175,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "f90a97e3ef559d1cc1a7c587d1cd298bfd8f746aa081bfc0c3d3286cc47e2786",
+      "includes": 174,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "03dc934cf49f60fd176c2605fce3237cba4e88a96ff9e74dc416537abad7f95b",
+      "includes": 193,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "2c7bda7d8caa3ac5599ccfc170c4216a92311dda01694418e4868a7fc488e2e7",
+      "includes": 170,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidfunc.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "8fff7bbc6e43755371d22edc5c4d1d8e5ab793501019bbe74b738e43f006eda6",
+      "includes": 159,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "a9f6974e2f7e73ba69415f6de71bd29a23ca9283b1753c17d824f2e1a9a48bc3",
+      "includes": 199,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "1e5e6a48c2338f0a3dc88b54db11e3fd242d2ed21165ee5b1209a50136e75cb7",
+      "includes": 188,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "bdf5bb3433dfa5c83f241af9ee84d47570d4946a3558dfba030137051faf2f5b",
+      "includes": 194,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "bea09443124793e235e99548e987bbc36c7b061516bd6de6ef2fca479c0d6a01",
+      "includes": 188,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "215f8c5d2803f1c19a9a1f47897707bc4bbf9cde294a535424c539aea500548c",
+      "includes": 176,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "26390e94c1a3e9695fbf608c6e44bbdd6254233ea195f59523df7eb9ad87043e",
+      "includes": 175,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "4bffdfa1a595285dd30b6004071ff743aac622054a505f1996dc2efb3536a305",
+      "includes": 175,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "f90a97e3ef559d1cc1a7c587d1cd298bfd8f746aa081bfc0c3d3286cc47e2786",
+      "includes": 174,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "03dc934cf49f60fd176c2605fce3237cba4e88a96ff9e74dc416537abad7f95b",
+      "includes": 193,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "2c7bda7d8caa3ac5599ccfc170c4216a92311dda01694418e4868a7fc488e2e7",
+      "includes": 170,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evidfunc.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "8fff7bbc6e43755371d22edc5c4d1d8e5ab793501019bbe74b738e43f006eda6",
+      "includes": 159,
+      "macro_definitions": [],
+      "macro_flags": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "errors": ""
+    }
+  ],
+  "finding": "The original first-depth guard was duplicated under both branches of a local type adaptation. It is now restored at depth 1 while both declaration variants and pre-existing logical positions are retained.",
+  "limitations": [
+    "These are historical 22 live contexts collected again from the available release graphs; completeness against supported test paths is still under audit.",
+    "No code change or guest runtime validation in this record."
+  ],
+  "restoration": {
+    "status": "locally-verified",
+    "registration": "MVDM-HOST-DIV-592",
+    "restored_first_depth_line": 98,
+    "original_line": 90,
+    "current_sha256": "1b99f6cda69b874e8e9ac73b2da493cdfde4742fb1f0eb67c647ed82cd374e18",
+    "preprocessing": "22 actual inclusion contexts before/after match ignoring blank lines",
+    "configuration_matrix": "8 extracted declaration combinations byte-identical after preprocessing; all declared and following diagnostic logical positions match",
+    "object_build": "x86 cached worker video, ev_glue and ccpusas4 objects built; existing compiler warnings",
+    "nested_scope": "existing CPU40/C_VID choice re-queued at depth 2 without classification",
+    "limitations": "No full release, full architecture regression or guest runtime acceptance claimed."
+  }
+}

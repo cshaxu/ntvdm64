@@ -17,7 +17,7 @@
 ]*/
 
 #ifdef SCCSID
-static char SccsID[]="@(#)msw_snd.h	1.1 07/13/94";
+#error Excluded unsupported SCCSID configuration
 #endif
 
 /*

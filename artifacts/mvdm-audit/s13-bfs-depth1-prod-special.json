@@ -1,0 +1,260 @@
+{
+  "scope": "nt_com and nt_event actual product/reference and direct-source fixture contexts",
+  "product_contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "bd0e265a4d1a4caae9dc02a17915970e1d66863e42266879b51c204b39923334",
+      "includes": 191,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "includes": 238,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "bd0e265a4d1a4caae9dc02a17915970e1d66863e42266879b51c204b39923334",
+      "includes": 191,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "includes": 238,
+      "prod_definitions": [],
+      "prod_flags": [
+        "/DPROD"
+      ],
+      "errors": ""
+    }
+  ],
+  "event_fixture_contexts": [
+    {
+      "fixture": "tests/observation/nt_event_observed.c",
+      "fixture_sha256": "48786018a381951ff2cf9167e8233a8f538c0e798e1a218c8cd3535dca82ef2a",
+      "exit": 0,
+      "included_count": 254,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "source": [
+        "O:\\repos.hobby\\ntvdm64\\tests\\observation\\..\\..\\src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c"
+      ],
+      "undef_prod": [],
+      "flags_include_prod": true
+    },
+    {
+      "fixture": "tests/observation/nt_event_observed.c",
+      "fixture_sha256": "48786018a381951ff2cf9167e8233a8f538c0e798e1a218c8cd3535dca82ef2a",
+      "exit": 0,
+      "included_count": 254,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "source": [
+        "O:\\repos.hobby\\ntvdm64\\tests\\observation\\..\\..\\src\\mvdm-host\\softpc.new\\host\\src\\nt_event.c"
+      ],
+      "undef_prod": [],
+      "flags_include_prod": true
+    }
+  ],
+  "com_mock_fixture_log_sha256": "6b5da5750c4c826d0eca8468db91aa22ba6cae7a1a2ac6727e415a0a05585223",
+  "com_mock_fixture_result": "T420_S30_NT_COM_MOCK_OPEN_WRITE_READ_CLOSE_OK",
+  "existing_exclusions": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "current_sha256": "bd0e265a4d1a4caae9dc02a17915970e1d66863e42266879b51c204b39923334",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_com.c",
+      "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32",
+      "local_line": 936,
+      "local_end": 938,
+      "original_line": 970,
+      "preceding_anchor": [
+        "}",
+        "if(error) ClearCommError(current->handle,&error,NULL);",
+        "}"
+      ],
+      "following_anchor": [
+        "tx_shift_register_empty(adapter);",
+        "}",
+        "CPU int SendXOFFIoctlToDriver(int adapter)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "current_sha256": "bd0e265a4d1a4caae9dc02a17915970e1d66863e42266879b51c204b39923334",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_com.c",
+      "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32",
+      "local_line": 1714,
+      "local_end": 1716,
+      "original_line": 1745,
+      "preceding_anchor": [
+        "ClearCommError(current->handle, &error, NULL);",
+        "if (error != ERROR_SUCCESS) {",
+        "}"
+      ],
+      "following_anchor": [
+        "}",
+        "tx_shift_register_empty(adapter);",
+        "current->no_tx_chars = 0;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "current_sha256": "bd0e265a4d1a4caae9dc02a17915970e1d66863e42266879b51c204b39923334",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_com.c",
+      "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32",
+      "local_line": 1737,
+      "local_end": 1739,
+      "original_line": 1768,
+      "preceding_anchor": [
+        "}",
+        "error = GetLastError();",
+        "{"
+      ],
+      "following_anchor": [
+        "}",
+        "else",
+        "current->DWOV[current->DWOVInx].hEvent = current->TXEvent[current->DWOVInx];"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "current_sha256": "bd0e265a4d1a4caae9dc02a17915970e1d66863e42266879b51c204b39923334",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_com.c",
+      "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32",
+      "local_line": 1758,
+      "local_end": 1760,
+      "original_line": 1790,
+      "preceding_anchor": [
+        "ClearCommError(current->handle,&error,NULL);",
+        "{",
+        "if(error)"
+      ],
+      "following_anchor": [
+        "}",
+        "}",
+        "if(++current->DWOVInx == MAX_PENDING_WRITES) current->DWOVInx =0;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "current_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "local_line": 643,
+      "local_end": 645,
+      "original_line": 594,
+      "preceding_anchor": [
+        "MouseOutOfFocus();      /* turn off mouse 'attachment' */",
+        "slow = savedScreenState != sc.ScreenState;",
+        "{"
+      ],
+      "following_anchor": [
+        "}",
+        "}",
+        "void nt_process_menu(PMENU_EVENT_RECORD MenuEvent)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "current_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "local_line": 1383,
+      "local_end": 1385,
+      "original_line": 1327,
+      "preceding_anchor": [
+        "case CTRL_SHUTDOWN_EVENT:",
+        "case CTRL_LOGOFF_EVENT:",
+        "case CTRL_CLOSE_EVENT:"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "current_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "local_line": 1407,
+      "local_end": 1409,
+      "original_line": 1348,
+      "preceding_anchor": [
+        "break;",
+        "}",
+        "return FALSE;"
+      ],
+      "following_anchor": [
+        "}",
+        "return TRUE;",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "current_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "local_line": 1580,
+      "local_end": 1582,
+      "original_line": 1493,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "}",
+        "void nt_resume_event_thread(void)",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "current_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076",
+      "local_line": 1625,
+      "local_end": 1627,
+      "original_line": 1534,
+      "preceding_anchor": [
+        "CntrlHandlerState &= ~CNTRL_VDMBLOCKED;",
+        "nt_init_event_thread();  // does nothing if init already",
+        "}"
+      ],
+      "following_anchor": [
+        "SetupConsoleMode();",
+        "EnablePIFKeySetup();",
+        "TlsSetValue(TlsDirectError, 0);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register."
+    }
+  ],
+  "limitations": "No source rewrite; mock serial lifecycle is not physical serial acceptance."
+}

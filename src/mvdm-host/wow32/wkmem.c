@@ -56,34 +56,9 @@ LPVOID FASTCALL WK32VirtualAlloc(PVDMFRAME pFrame)
 #endif // i386
 
 #ifdef i386
-//BUGBUG we need to either get this working on the new emulator, or
-//       fix the problem the "other" way, by letting the app fault and
-//       zap in just enough 'WOW's to avoid the problem.
-    if (lpBaseAddress) {
-        // Virtual alloc Zero's the allocated memory. We un-zero it by
-        // filling in with ' WOW'. This is required for Lotus Improv.
-        // When no printer is installed, Lotus Improv dies with divide
-        // by zero error (while opening the expenses.imp file) because
-        // it doesn't initialize a relevant portion of its data area.
-        //
-        // So we decided that this a convenient place to initialize
-        // the memory to a non-zero value.
-        //                                           - Nanduri
-        //
-        // Dbase 5.0 for windows erroneously loops through (past its valid
-        // data) its data buffer till it finds a '\0' at some location -
-        // Most of the time the loop terminates before it reaches the segment
-        // limit. However if the block that was allocated is a 'fresh' block' ie
-        // the block is filled with ' WOW' it never finds a NULL in the buffer
-        // and thus loops past the segment limit to its death
-        //
-        // So we initialize the buffer with '\0WOW' instead of ' WOW'.
-        //                                            - Nanduri
-
-        WOW32ASSERT((parg16->cbSize % 4) == 0);      // DWORD aligned?
-        RtlFillMemoryUlong(lpBaseAddress, parg16->cbSize, (ULONG)'\0WOW');
-    }
+#error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #endif
+#line 87
 
     FREEARGPTR(parg16);
     return (lpBaseAddress);

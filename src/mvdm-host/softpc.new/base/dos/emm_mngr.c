@@ -64,12 +64,12 @@ AMMENDMENTS	:
 #ifdef LIM
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_LIM.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 
@@ -1476,12 +1476,12 @@ DESCRIPTION	:
 */
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_LIM2.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 #line 1472
 
@@ -1491,12 +1491,12 @@ GLOBAL short get_total_pages IFN0()
 }
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_LIM.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 #line 1486
 

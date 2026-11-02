@@ -1290,17 +1290,9 @@ VOID InitCBFormats ()
     CFOLELinkSrcDescriptor = RegisterClipboardFormat ("Link Source Descriptor");
 
 #ifdef DEBUG
-
-    //
-    // This would assert in LoadLibraryAndGetProcAddresses if the function
-    // or DLL name has changed.
-    //
-
-    if (!(OleStringConversion[WOW_OLE_STRINGCONVERSION].lpfn)) {
-        LoadLibraryAndGetProcAddresses("OLETHK32.DLL", OleStringConversion, WOW_OLESTRINGCONVERSION_COUNT);
-    }
-
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 1304
 
 
 }

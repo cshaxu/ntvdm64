@@ -76,8 +76,9 @@ IFN3(
 
       /* show segment has been accessed (i486 only writes if changed) */
 #ifdef	SPC486
-      if ((entry->AR & ACCESSED) == 0)
+#error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
+#line 81
 	 spr_write_byte(descr_addr+5, (IU8)entry->AR | ACCESSED);
       entry->AR |= ACCESSED;
 
@@ -121,8 +122,9 @@ IFN3(
    {
    /* show segment has been accessed (i486 only writes if changed) */
 #ifdef	SPC486
-   if ((entry->AR & ACCESSED) == 0)
+#error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
+#line 126
       spr_write_byte(descr_addr+5, (IU8)entry->AR | ACCESSED);
    entry->AR |= ACCESSED;
 
@@ -330,8 +332,9 @@ IFN2(
 
 	 /* show segment has been accessed (i486 only writes if changed) */
 #ifdef	SPC486
-	 if ((entry.AR & ACCESSED) == 0)
+#error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
+#line 335
 	    spr_write_byte(descr_addr+5, (IU8)entry.AR | ACCESSED);
 	 entry.AR |= ACCESSED;
 

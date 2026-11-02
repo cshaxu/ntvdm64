@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/inc/nt_fulsc.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_fulsc.h",
+  "original_sha256": "733fe8aaef56e9febc5e2f35ac03057918df2bf75173779870e2b07dc673e1d0",
+  "before_sha256": "1dd3cf6f542480c618a04c2b3a9c71186d466e7cff9939bc28bde5cfeb047d94",
+  "after_sha256": "38a44fc4734566268a2c3e0dff0f72e01b319c80e1b1c2b9cc9f7512c778ec52",
+  "original_group_line": 248,
+  "current_group_line": 181,
+  "original_group_order": [
+    137,
+    156,
+    197,
+    248
+  ],
+  "current_group_order": [
+    119,
+    136,
+    176,
+    181
+  ],
+  "removed_body_sha256": "ba14014f59a829c99b51dc8f35210119bd235799818b3df5f77be5e9e620f3c2",
+  "removed_body_lines": 3,
+  "line_control": "group ends at EOF; no subsequent lines to renumber",
+  "contexts": "s13-bfs-depth1-host-header-contexts.json",
+  "register": "MVDM-HOST-DIV-584",
+  "verification": {
+    "compile": "cached x86 worker nt_graph.obj and nt_com.obj compiled successfully",
+    "preprocess": "nt_com raw output equal; nt_graph raw differs in whitespace but nonblank lines equal, both preprocess successfully using before/after header copies",
+    "guards": "isolated x86 guard passes with X86GFX undefined and emits DIV-584 when defined",
+    "line_control": "original branch ends at EOF; no following source line to preserve",
+    "full_product": "not tested or released as part of local verification"
+  }
+}

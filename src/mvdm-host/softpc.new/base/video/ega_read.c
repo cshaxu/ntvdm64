@@ -151,12 +151,12 @@ IMPORT void setReadPointers IPT1(IUH, readset);
 /* [5.1.1 #DEFINES]							*/
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_EGA.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 #if defined(EGA_DUMP) || defined(EGA_STAT)
@@ -550,12 +550,12 @@ rdm1_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )	/* used to cor
 }
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_GRAPHICS.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 #line 474
 
@@ -602,12 +602,12 @@ Glue_set_vid_rd_ptrs IFN1(READ_POINTERS *, handler )
 #line 505
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_EGA.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 #line 514
 

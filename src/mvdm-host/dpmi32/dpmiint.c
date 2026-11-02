@@ -91,7 +91,12 @@ Routine Description:
                                          Handlers[IntNumber].Eip);
 
 
-
+#ifdef i386
+#ifndef CPU_40_STYLE /* DIVERGENCE(MVDM-HOST-DIV-554) */
+#error Excluded unsupported VdmSetInt21Handler kernel VDM path
+#endif /* !CPU_40_STYLE */
+#endif
+#line 95
     setAX(0);
 }
 

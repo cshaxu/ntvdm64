@@ -39,42 +39,9 @@ MODNAME(wres16.c);
 PRES presFirst;     // pointer to first RES entry
 
 #ifdef DEBUG
-
-typedef struct _RTINFO {    /* rt */
-    LPSTR lpType;       // predefined resource type
-    PSZ   pszName;      // name of type
-} RTINFO, *PRTINFO;
-
-RTINFO artInfo[] = {
-   {RT_CURSOR,      "CURSOR"},
-   {RT_BITMAP,      "BITMAP"},
-   {RT_ICON,        "ICON"},
-   {RT_MENU,        "MENU"},
-   {RT_DIALOG,      "DIALOG"},
-   {RT_STRING,      "STRING"},
-   {RT_FONTDIR,     "FONTDIR"},
-   {RT_FONT,        "FONT"},
-   {RT_ACCELERATOR, "ACCELERATOR"},
-   {RT_RCDATA,      "RCDATA"},
-   {RT_MESSAGETABLE,"MESSAGETABLE"},
-   {RT_GROUP_CURSOR,"CURSOR DIRECTORY"},
-   {RT_GROUP_ICON,  "ICON DIRECTORY"},
-};
-
-PSZ GetResourceType(LPSZ lpszType)
-{
-    INT i;
-    register PRTINFO prt;
-
-    if (HIWORD(lpszType) != 0)
-    return lpszType;
-    for (prt=artInfo,i=NUMEL(artInfo); i>0; i--,prt++)
-    if (prt->lpType == lpszType)
-        return prt->pszName;
-    return "UNKNOWN";
-}
-
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 78
 
 
 /* Resource management functions

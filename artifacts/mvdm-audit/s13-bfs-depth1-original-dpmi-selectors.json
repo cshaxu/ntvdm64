@@ -1,0 +1,47 @@
+{
+  "scope": "first-depth boundary correspondence; no child branches reviewed",
+  "register": "MVDM-HOST-DIV-582",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "current_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "original_line": 859,
+      "current_line": 973,
+      "anchor": "DpmiFaultHandler",
+      "selected_arm_status": "retained-observed"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "current_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "original_line": 1167,
+      "current_line": 1351,
+      "anchor": "VdmInstallHardwareIntHandler",
+      "selected_arm_status": "retained-observed"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "current_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "original_line": 1201,
+      "current_line": 1385,
+      "anchor": "VdmInstallHardwareIntHandler",
+      "selected_arm_status": "retained-observed"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.h",
+      "original_sha256": "245976d103b8dd3b918b008b85e9e94b3ec245fb9119c28b897f936a94b69b5e",
+      "current_sha256": "0c3a6a8710cd798bf39ae084f723f4c1de0480e5f7d7bc45082c19ac82f27886",
+      "original_line": 23,
+      "current_line": 26,
+      "anchor": "GetRegisterByIndex",
+      "selected_arm_status": "retained-observed"
+    }
+  ],
+  "limits": "product preprocessing witnesses selection only, not complete DPMI semantic equivalence"
+}

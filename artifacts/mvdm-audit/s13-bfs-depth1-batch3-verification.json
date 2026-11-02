@@ -1,0 +1,54 @@
+{
+  "selected_preprocessing": {
+    "time_day3": {
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "adb545a22507a96497405e100f863831c7da6c5e85cf15362c6c30618c82f94f"
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "011b210449a9ccc188ee26d24ed2256f1e57cd7b09a859b9d60a3dd87392bc58"
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    "ica3": {
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "8812d86c6996277cc2a2e912bb9196c3c3722d23425e3b5c7ecc26462d27e599"
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "40616dfcdccb4c3a09d3f3c75a98195fb1d2a36a25e70abadd14dd69db2ee7f8"
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    }
+  },
+  "pic_fixture": {
+    "profile": "x86 /MT NTVDM CCPU40",
+    "elapsed_ms": 323,
+    "executable_sha256": "81C539B48935DE6D6A5C9BD4617FA17E35CE519CAA4B0F55C1E2BC662A784F99",
+    "ica_sha256": "6C420934AC348553F9C63F462B3C6FD8C13D6C828B6C94EAB9D12CA29BE2E739",
+    "scope": "actual production PIC reset; controlled EOI callback boundary; no guest mutation"
+  },
+  "keyboard_pic_fixture": {
+    "profile": "x86 /MT NTVDM CCPU40",
+    "elapsed_ms": 251,
+    "executable_sha256": "BC634188C22B0DF077EB455DA515127A246FB257778347D41AF8297266F0070B",
+    "keyba_sha256": "2344DF6D17AAFAE3EBCC3CA2DDFCEF18ACC19EF298B92664334BEC85F04EF0E1",
+    "ica_sha256": "6C420934AC348553F9C63F462B3C6FD8C13D6C828B6C94EAB9D12CA29BE2E739",
+    "controller_reply": "C0 returns input port; 20, AA, AB, D0 and E0 return their response bytes",
+    "scope": "Actual controller/PIC; normal and early EOI slot order, controlled host callbacks, no BIOS ISR/timer acceptance"
+  },
+  "focused_guard_controls": "x86 and x64 pass for all five first-depth arms",
+  "runtime_limits": "Fixture results do not establish complete DOS, WOW or Win3.x product acceptance; full gates pending."
+}

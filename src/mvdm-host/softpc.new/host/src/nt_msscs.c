@@ -140,7 +140,7 @@ InitialiseDosEmulation(int argc, char **argv)
 #ifdef CPU_40_STYLE
     fVirtualInt |= MIPS_BIT_MASK;
 #else
-    fVirtualInt &= ~MIPS_BIT_MASK;
+#error Excluded unsupported non-CPU40 virtual interrupt state
 #endif
     sas_storedw((ULONG)FIXED_NTVDMSTATE_LINEAR,fVirtualInt);
 

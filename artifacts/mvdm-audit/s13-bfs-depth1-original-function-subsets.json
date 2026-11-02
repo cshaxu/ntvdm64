@@ -1,0 +1,89 @@
+{
+  "scope": "original first-depth groups only",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\getset.c",
+      "original_sha256": "f0d22e4285e8b33b873854913a11587c67d78e50e1f5db28ec89ef8b6ff06d3d",
+      "current_sha256": "41b6fe5548fc76c1cfb99027fe7833f25ccadfbc1a57b09a50cebf042691cf38",
+      "expression": "DEBUG",
+      "original_lines": [
+        749,
+        759,
+        776,
+        781
+      ],
+      "retained_function_ranges": [
+        [
+          256,
+          380
+        ]
+      ],
+      "register": "OPENNT-HOST-086 retained xxxSetWindowLong"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\profile.c",
+      "original_sha256": "8ecbb58954eca0fece4ab180bb56a3953b8b4408400d3c7aa01d50b62caaa531",
+      "current_sha256": "fdffc12447832ad019b849c58b20b67c9b1683b95f2f5620ff67058d081729a8",
+      "expression": "DEBUG",
+      "original_lines": [
+        745,
+        827
+      ],
+      "retained_function_ranges": [
+        [
+          444,
+          535
+        ],
+        [
+          548,
+          579
+        ]
+      ],
+      "register": "OPENNT-HOST-055 retained string/integer profile readers"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\profile.c",
+      "original_sha256": "8ecbb58954eca0fece4ab180bb56a3953b8b4408400d3c7aa01d50b62caaa531",
+      "current_sha256": "fdffc12447832ad019b849c58b20b67c9b1683b95f2f5620ff67058d081729a8",
+      "expression": "FE_SB",
+      "original_lines": [
+        68
+      ],
+      "retained_function_ranges": [
+        [
+          444,
+          535
+        ],
+        [
+          548,
+          579
+        ]
+      ],
+      "register": "OPENNT-HOST-055 retained string/integer profile readers; original table omitted in favor of registered compat mappings"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\draw.c",
+      "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+      "current_sha256": "eaaac6553c29be08f4c0fe6295106337a4d433b2a95273acc02c5267c3a657d4",
+      "expression": "WINDOWS_ME",
+      "original_lines": [
+        680
+      ],
+      "retained_function_ranges": [
+        [
+          1004,
+          1059
+        ],
+        [
+          1067,
+          1127
+        ]
+      ],
+      "register": "OPENNT-HOST-077/111 retained DrawPushButton and DrawFrame"
+    }
+  ]
+}

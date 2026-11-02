@@ -24,8 +24,11 @@ function Run-Owned([string]$name,[string]$file,[string]$arguments,[int]$seconds,
 }
 try {
     Run-Owned 'extract-wndproc' 'powershell.exe' ('-NoProfile -ExecutionPolicy Bypass -File "'+$repo+'/tests/observation/extract-wow-wndproc-fixture.ps1" -BuildRoot "'+$root+'"') 30
-    if((Get-Content "$root/extract-wndproc.out" -Raw) -notmatch '^WOW_WNDPROC_MIRROR_BYTE_EXACT_SELECTED_BODY'){throw 'Original WndProc body extraction failed'}
-    $sources=@('src/mvdm-host/wow32/wow32.c','src/mvdm-host/wow32/wmdisp32.c','src/wow32-dll/source/wow_user_thunk_scope.c','tests/adapter-mvdm-host-out/wow/wow_dispatch_exception_fixture.c')
+    if((Get-Content "$root/extract-wndproc.out" -Raw) -notmatch '^WOW_WNDPROC_CURRENT_MIRROR_BYTE_EXACT_BODY'){throw 'Current mirror WndProc body extraction failed'}
+    # The fixture compiles the byte-exact extracted WndProc itself. Linking
+    # wmdisp32.c as well duplicates that symbol and pulls in its unrelated
+    # message-conversion graph, which this bounded test does not exercise.
+    $sources=@('src/mvdm-host/wow32/wow32.c','src/wow32-dll/source/wow_user_thunk_scope.c','tests/adapter-mvdm-host-out/wow/wow_dispatch_exception_fixture.c')
     $objects=@()
     foreach($source in $sources){
         $name=[IO.Path]::GetFileNameWithoutExtension($source)
@@ -64,7 +67,7 @@ try {
         '_mvdm_softpc_fast_bop_callback_offset@0','_W32EmptyClipboard@0',
         '_W32LoadResource@8','_W32EditNextWord@20','_W32DDEFreeGlobalMem32@4',
         '_W32InitDlg@8','_W32LocalAlloc@12','_W32FreeResource@8',
-        '_WK32InitializeHungAppSupport@0','_ntvdm_shadow_reg_close_key@4',
+        '_WK32InitializeHungAppSupport@0','_ntvdm_shadow_reg_close_key@4','_NtvdmAuthorizeExit@4',
         '_UserRegisterWowHandlers@8','_InitParamMap@0')
     $unreachedData=@('_VdmLoadCritSec','_tableoffsets','_TimerList','_vpDebugWOW','_dwWOWBatchLimit')
     $aliases=@($unreached|ForEach-Object {'/alternatename:'+$_+'=_fixture_unreachable_dependency'})+
@@ -90,6 +93,6 @@ try {
         ([regex]::Matches($output,'DISPATCH_EXCEPTION phase=')).Count -ne 8 -or
         ([regex]::Matches($output,'HARD_ERROR_SCOPE mode=')).Count -ne 5){throw 'Missing boundary assertions'}
     @($sources|ForEach-Object {"$repo/$_"}) + @("$repo/src/mvdm-host/wow32/wmdisp32.c","$root/original-wndproc.inc","$ProviderBuildRoot/build.ninja") |
-        Get-FileHash | Select-Object Path,Hash | ConvertTo-Json | Set-Content "$root/inputs.json"
+        ForEach-Object { Get-FileHash -LiteralPath $_ } | Select-Object Path,Hash | ConvertTo-Json | Set-Content "$root/inputs.json"
     '0'|Set-Content "$root/exit.txt"
 }catch{$_|Out-String|Set-Content "$root/error.txt";'1'|Set-Content "$root/exit.txt";throw}

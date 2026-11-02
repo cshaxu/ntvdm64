@@ -1,0 +1,57 @@
+{
+  "path": "src/mvdm-host/wow32/wow32.c",
+  "before_sha256": "21616c23d703e884db46bde24320fc5a5bd690781f09bef5d2dc635a3b5a98f0",
+  "after_sha256": "e8ad1f3cc14f163f656897c276bb7418d1b4bb66b7269873100e0d435d59a110",
+  "contexts": [
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "21616c23d703e884db46bde24320fc5a5bd690781f09bef5d2dc635a3b5a98f0",
+      "includes": 339,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    }
+  ],
+  "branches": [
+    {
+      "start_before": 461,
+      "cut_before": 467,
+      "end_before": 467,
+      "removed_body_sha256": "1a210089cc17a21df28604dbd3fa3e3e85cf86147fe967914e7bc6cca536f7bd",
+      "removed_body_lines": 5,
+      "alternative_logical_line": null,
+      "following_logical_line": 475
+    },
+    {
+      "start_before": 589,
+      "cut_before": 592,
+      "end_before": 596,
+      "removed_body_sha256": "4782b0d272829094e4039440311f273c4d5e38d442d6b8f0ea30c4a37ca69a90",
+      "removed_body_lines": 2,
+      "alternative_logical_line": 600,
+      "following_logical_line": 604
+    },
+    {
+      "start_before": 603,
+      "cut_before": 611,
+      "end_before": 613,
+      "removed_body_sha256": "4b5137ceb208f27b16e8eaf9738d9f90035c92810de01db3aa6f0c344645bedc",
+      "removed_body_lines": 7,
+      "alternative_logical_line": 619,
+      "following_logical_line": 621
+    }
+  ],
+  "status": "locally-verified",
+  "limitations": [
+    "Selected WOW release compiler and its release-flag fixture only; DEBUG-specific builds and full runtime release not claimed."
+  ],
+  "verification": {
+    "preprocessor": "selected WOW compiler output matches before/after with scratch source filename normalization and blank lines ignored",
+    "object": "cached x86 wow32.obj compiled with existing warnings",
+    "guard": "all three isolated DEBUG rejection controls and non-DEBUG controls passed",
+    "fixture": "controlled W32Dispatch/W32Exception fixture exited 0",
+    "diagnostics": "five selected/following logical lines preserved from pre-edit probes"
+  }
+}

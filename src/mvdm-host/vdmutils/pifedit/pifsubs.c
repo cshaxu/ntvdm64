@@ -2056,12 +2056,12 @@ int SavePifFile(PSTR pchFile, int wmcommand)
     int cch;
 
 #if 0
-    // This code is not needed since NTVDM can deal with long names in DAYTONA
-    // 24-Jan-1994 JonPa
-    if (!IsFileName(pchFile)) {
-	Warning(EINVALIDFILE,MB_ICONEXCLAMATION | MB_OK);
-        return(SAVERETRY);
-    }
+#error Excluded unsupported original disabled branch
+
+
+
+
+
 #endif
 
     UpdatePifStruct();

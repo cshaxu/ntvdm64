@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+  "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+  "current_sha256": "a0b2e375ad714bb2c840f108368358bee33538bf2daa75f3421db07babc17b9d",
+  "original_group_line": 760,
+  "original_condition": "ifndef X86GFX",
+  "current_group_line": 690,
+  "current_condition": "!defined(X86GFX) && !defined(CCPU)",
+  "anchor": "nt_clear_screen FULLSCREEN early return",
+  "register": "MVDM-HOST-DIV-322",
+  "disposition": "mapped original boundary to registered local adaptation; reachability not classified"
+}

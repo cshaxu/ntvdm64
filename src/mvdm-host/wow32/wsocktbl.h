@@ -19,7 +19,7 @@ extern W32 aw32Winsock[];
 
 
 #ifdef DEBUG_OR_WOWPROFILE
-extern INT iWinsockMax;
+#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected
 #endif
 
 ULONG FASTCALL WWS32accept(PVDMFRAME pFrame);

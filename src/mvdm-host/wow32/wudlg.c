@@ -35,9 +35,9 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
     BOOL   fMessageNeedsThunking;
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-    extern INT fWMsgProfRT;
-    DWORD dwTics;
+#error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
+#line 41
 
     // If the app has GP Faulted we don't want to pass it any more input
     // This should be removed when USER32 does clean up on task death so
@@ -79,8 +79,9 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
         LOGDEBUG(3,("%04X (%s)\n", CURRENTPTD()->htask16, (aw32Msg[uMsg].lpszW32)));
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-        dwTics = GetWOWTicDiff(0L);
+#error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
+#line 84
 
         wm32mpex.fThunk = THUNKMSG;
         wm32mpex.hwnd = hdlg;
@@ -96,10 +97,9 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
         }
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-        if( !fWMsgProfRT ) {  // only if not round trip profiling
-            aw32Msg[uMsg].cTics += GetWOWTicDiff(dwTics);
-        }
+#error Excluded unsupported WOW profiling configuration
 #endif  // WOWPROFILE
+#line 103
 
     }
     else {
@@ -122,10 +122,9 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
     if (fMessageNeedsThunking) {
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-        if( !fWMsgProfRT ) {  // only if not round trip profiling
-            dwTics = GetWOWTicDiff(0L);
-        }
+#error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
+#line 129
 
 
         //
@@ -146,9 +145,9 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
         (wm32mpex.lpfnM32)(&wm32mpex);
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-        aw32Msg[uMsg].cTics += GetWOWTicDiff(dwTics);
-        aw32Msg[uMsg].cCalls++;   // increment # times message passed
+#error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
+#line 152
 
     }
 

@@ -1,0 +1,128 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+    "before_sha256": "1f3420925d327c21cb1498c35b337b88002df74af813e4fb897bbd97975348f1",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+    "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+    "local_arm_lines_before": [
+      204,
+      208
+    ],
+    "original_arm_lines": [
+      228,
+      232
+    ],
+    "removed_body_sha256": "6d13ecbb947107aaf8c6c2589f72c0da86c7fc7dd9707aa4cac87a7a75b4418d",
+    "original_body_sha256": "7aceb3c6e451eb80de701117c675c6e567b7ff5c00e58c7a68de2b455f554fc3",
+    "removed_body_lines": 3,
+    "subsumed_markers": {
+      "MVDM-HOST-DIV-500": 1
+    },
+    "following_line": 209,
+    "status": "selected x86 preprocessing equal ignoring blank lines; x86 object and x86/x64 guard/line controls pass; PIC and keyboard controller fixtures pass; full product/runtime remains pending",
+    "registration": "MVDM-HOST-DIV-573",
+    "current_start_line": 181,
+    "after_sha256": "52adadbff06e69b3d685bc7634511212c15dfe196463f00c683aad4ab6dd9634"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+    "before_sha256": "1f3420925d327c21cb1498c35b337b88002df74af813e4fb897bbd97975348f1",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+    "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+    "local_arm_lines_before": [
+      219,
+      223
+    ],
+    "original_arm_lines": [
+      243,
+      260
+    ],
+    "removed_body_sha256": "6d13ecbb947107aaf8c6c2589f72c0da86c7fc7dd9707aa4cac87a7a75b4418d",
+    "original_body_sha256": "ee09675036e043831bba0bf6860454434b42e3cafa419dd387e9ca94e682caf0",
+    "removed_body_lines": 3,
+    "subsumed_markers": {
+      "MVDM-HOST-DIV-500": 1
+    },
+    "following_line": 224,
+    "status": "selected x86 preprocessing equal ignoring blank lines; x86 object and x86/x64 guard/line controls pass; PIC and keyboard controller fixtures pass; full product/runtime remains pending",
+    "registration": "MVDM-HOST-DIV-573",
+    "current_start_line": 195,
+    "after_sha256": "52adadbff06e69b3d685bc7634511212c15dfe196463f00c683aad4ab6dd9634"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+    "before_sha256": "1f3420925d327c21cb1498c35b337b88002df74af813e4fb897bbd97975348f1",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+    "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+    "local_arm_lines_before": [
+      248,
+      252
+    ],
+    "original_arm_lines": [
+      285,
+      289
+    ],
+    "removed_body_sha256": "6d13ecbb947107aaf8c6c2589f72c0da86c7fc7dd9707aa4cac87a7a75b4418d",
+    "original_body_sha256": "7aceb3c6e451eb80de701117c675c6e567b7ff5c00e58c7a68de2b455f554fc3",
+    "removed_body_lines": 3,
+    "subsumed_markers": {
+      "MVDM-HOST-DIV-500": 1
+    },
+    "following_line": 253,
+    "status": "selected x86 preprocessing equal ignoring blank lines; x86 object and x86/x64 guard/line controls pass; PIC and keyboard controller fixtures pass; full product/runtime remains pending",
+    "registration": "MVDM-HOST-DIV-573",
+    "current_start_line": 223,
+    "after_sha256": "52adadbff06e69b3d685bc7634511212c15dfe196463f00c683aad4ab6dd9634"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+    "before_sha256": "1f3420925d327c21cb1498c35b337b88002df74af813e4fb897bbd97975348f1",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+    "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+    "local_arm_lines_before": [
+      263,
+      267
+    ],
+    "original_arm_lines": [
+      300,
+      317
+    ],
+    "removed_body_sha256": "6d13ecbb947107aaf8c6c2589f72c0da86c7fc7dd9707aa4cac87a7a75b4418d",
+    "original_body_sha256": "ea497d8845740d79d4992a8b2b06de6e84e9e3aa27ec49f45ca6b23ec9e99d64",
+    "removed_body_lines": 3,
+    "subsumed_markers": {
+      "MVDM-HOST-DIV-500": 1
+    },
+    "following_line": 268,
+    "status": "selected x86 preprocessing equal ignoring blank lines; x86 object and x86/x64 guard/line controls pass; PIC and keyboard controller fixtures pass; full product/runtime remains pending",
+    "registration": "MVDM-HOST-DIV-573",
+    "current_start_line": 237,
+    "after_sha256": "52adadbff06e69b3d685bc7634511212c15dfe196463f00c683aad4ab6dd9634"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+    "before_sha256": "6312ae4290e8d20faf4691bb957117a78af796a74ce93d4693cad8368138ba6a",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+    "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+    "local_arm_lines_before": [
+      1331,
+      1554
+    ],
+    "original_arm_lines": [
+      1530,
+      1760
+    ],
+    "removed_body_sha256": "8be2d224418a8a4565b69244ef712b9f24880fa08cde3116e65bf72d3d646ccd",
+    "original_body_sha256": "9fe082bbc95d683df6a13d77befb8f38ce91279b0c4b2f9d7b2ec0fdd75deead",
+    "removed_body_lines": 222,
+    "subsumed_markers": {
+      "MVDM-HOST-DIV-528": 2,
+      "MVDM-HOST-DIV-500": 2
+    },
+    "following_line": 1539,
+    "status": "selected x86 preprocessing equal ignoring blank lines; x86 object and x86/x64 guard/line controls pass; PIC and keyboard controller fixtures pass; full product/runtime remains pending",
+    "registration": "MVDM-HOST-DIV-573",
+    "current_start_line": 1307,
+    "after_sha256": "6c420934ac348553f9c63f462b3c6fd8c13d6c828b6c94eab9d12ca29be2e739"
+  }
+]

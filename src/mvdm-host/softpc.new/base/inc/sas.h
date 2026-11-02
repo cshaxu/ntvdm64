@@ -157,6 +157,8 @@ extern half_word M[];
  * of 4.0 easier.  We'll leave them in for builds prior to 3.0 though.
  *
  */
+#ifndef CPU_30_STYLE
+#line 160
 #define M_low (long)Start_of_M_area
 #define M_high (long)(Length_of_M_area-1)
 #ifdef BACK_M
@@ -182,6 +184,8 @@ extern void sas_move_bytes_backward IPT3(sys_addr, src, sys_addr, dest,
 	sys_addr, len);
 extern void sas_move_words_backward IPT3(sys_addr, src, sys_addr, dest,
 	sys_addr, len);
+#endif /* !CPU_30_STYLE */
+#line 185
 
 /********************************************************/
 /* function declarations */
@@ -242,6 +246,7 @@ extern void sas_loads_to_transbuf IPT3(sys_addr, src, host_addr, dest, sys_addr,
 extern void sas_stores_from_transbuf IPT3(sys_addr, dest, host_addr, src, sys_addr, len);
 
 #endif /* HOST_SAS */
+#line 245
 
 /*
  * These are the physical memory interfaces introduced in 4.0.  As
@@ -259,6 +264,7 @@ extern void sas_stores_from_transbuf IPT3(sys_addr, dest, host_addr, src, sys_ad
 #define sas_PRS		sas_loads
 
 #endif /* ! CPU_40_STYLE */
+#line 262
 
 /********************************************************/
 /* this marco is used as a replacement for cpu_sw_interrupt */
@@ -766,22 +772,22 @@ extern void sas_stores_from_transbuf IPT3(sys_addr, dest, host_addr, src, sys_ad
 
 /* Union for accessing an entry in the Interrupt Vector table */
 #ifdef BACK_M
+#error Excluded unsupported BACK_M configuration
 
-#ifdef BIGEND
-#error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
-#endif
 
-#ifdef LITTLEND
-typedef union   {
-		double_word all;
-		struct  {
-			half_word hw3;
-			half_word hw2;
-			half_word hw1;
-			half_word hw0;
-	        	} hwords;
-		} IVT_ENTRY;
-#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #else /* BACK_M */
 

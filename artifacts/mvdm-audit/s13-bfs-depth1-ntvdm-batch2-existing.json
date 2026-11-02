@@ -1,0 +1,805 @@
+{
+  "scope": "x86 worker profile, sources not directly included by the observed alternate fixture; keyba and nt_rflop remain excluded from this classification",
+  "product_include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+      "exit": 0,
+      "source_sha256": "80c4caeb665bb756c977f42430ca7f182ffd75d7b2e2e9b15a9ef7de6610d583",
+      "included_files": 166,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "exit": 0,
+      "source_sha256": "b7a1b588e189265f5023a260f8df7118263962de3f87a498e57be997f13631bd",
+      "included_files": 167,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "exit": 0,
+      "source_sha256": "a33505d2e4e8627b925e428fc1044cfd5e110452ae41983f945742eb4c8026d2",
+      "included_files": 209,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "exit": 0,
+      "source_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "included_files": 187,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "exit": 0,
+      "source_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "included_files": 185,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "exit": 0,
+      "source_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "included_files": 188,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "exit": 0,
+      "source_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "included_files": 203,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "exit": 0,
+      "source_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
+      "included_files": 165,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "exit": 0,
+      "source_sha256": "78193f48952dc08e5cb7ad1fd46e0be227a4a70e9fefc7da1f7b2863e4280016",
+      "included_files": 185,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "exit": 0,
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "included_files": 185,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "exit": 0,
+      "source_sha256": "21846776c2f3538e914cd255780d7e252e9381e2a82ed299709046752f320625",
+      "included_files": 180,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "exit": 0,
+      "source_sha256": "1f3420925d327c21cb1498c35b337b88002df74af813e4fb897bbd97975348f1",
+      "included_files": 184,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "exit": 0,
+      "source_sha256": "6312ae4290e8d20faf4691bb957117a78af796a74ce93d4693cad8368138ba6a",
+      "included_files": 175,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "exit": 0,
+      "source_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+      "included_files": 161,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "exit": 0,
+      "source_sha256": "4bf68cad6816d1707b9338dec64012d28d377e9f7ba30729abff82b0d8b0d8c8",
+      "included_files": 179,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "exit": 0,
+      "source_sha256": "9491a9ad5c9762556ad0540382075566d48fd2fe266762b176ee610d3e3b73a7",
+      "included_files": 188,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+      "exit": 0,
+      "source_sha256": "9721d2572acc6749aeb187eddd51a9d57f34e4c5e8c32bd021502d97849cba0f",
+      "included_files": 166,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "undef_ntvdm": [],
+      "flags_include_ntvdm": true,
+      "flag_check": "corrected /D or -D pattern against generated compdb"
+    }
+  ],
+  "host_def_sha256": "0ab22fc80460cbaf4c7b27e69099e44c2832808dad65c5bfe62c5ce3054bbf9d",
+  "existing_exclusions": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+      "current_sha256": "80c4caeb665bb756c977f42430ca7f182ffd75d7b2e2e9b15a9ef7de6610d583",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cmos_bis.c",
+      "original_sha256": "e3b6710db5887ef77c5a38c881ebb4eeff2575db65e86a3468258aaa9293e1bd",
+      "local_line": 55,
+      "original_line": 55,
+      "anchor": [
+        "#include \"rtc_bios.h\"",
+        "#include \"ios.h\"",
+        "#include \"cmosbios.h\""
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "current_sha256": "b7a1b588e189265f5023a260f8df7118263962de3f87a498e57be997f13631bd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cntlbop.c",
+      "original_sha256": "c65121f592f91efbea0db0b3282f3252f4a58a4a87a281570ee3a0e50686cc87",
+      "local_line": 81,
+      "original_line": 81,
+      "anchor": [
+        "#endif /* DUMB_TERMINAL && !NO_SERIAL_UIF */",
+        "2, D_kyhot2,            /* Rock the screen         */",
+        "3, D_kyhot,             /* Flush the COM/LPT ports */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "local_line": 1599,
+      "original_line": 1622,
+      "anchor": [
+        "sas_load(FDD_STATUS+drive, &disk_state);",
+        "{",
+        "if (high_density(drive))"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#else /* NTVDM */",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "current_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "local_line": 1934,
+      "original_line": 2014,
+      "anchor": [
+        "setIF(1);",
+        "outb(DMA_CH2_COUNT, byte_count.byte.high);",
+        "outb(DMA_CH2_COUNT, byte_count.byte.low);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "current_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "local_line": 206,
+      "original_line": 433,
+      "anchor": [
+        "half_word diskette_id_reg, hf_cntrl, interrupt_mask;",
+        "{",
+        "void diskette_post()"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "current_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "local_line": 248,
+      "original_line": 475,
+      "anchor": [
+        "sas_store(DRIVE_CAPABILITY, hf_cntrl);",
+        "hf_cntrl |= DC_DUAL;",
+        "if ((diskette_id_reg & IDR_ID_MASK) == DUAL_CARD_ID)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif  /* NTVDM */",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "local_line": 615,
+      "original_line": 638,
+      "anchor": [
+        "}",
+        "outb(KEYBA_STATUS_CMD, ENA_KBD);",
+        "outb(0x20, 0x20);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#else\t/* NTVDM */",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "local_line": 625,
+      "original_line": 664,
+      "anchor": [
+        "#endif\t/* NTVDM */",
+        "word sp_int15_handler_off = 0;",
+        "word sp_int15_handler_seg = 0;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#else   /* NTVDM */",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "local_line": 659,
+      "original_line": 700,
+      "anchor": [
+        "#endif\t/* NTVDM */",
+        "}",
+        "K26A();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#else   /* NTVDM */",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "local_line": 706,
+      "original_line": 771,
+      "anchor": [
+        "#endif\t/* NTVDM */",
+        "#define PUT_IN_BUFFER(s, v) NtPutInBuffer(s,v); return",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif\t/* !NTVDM */",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "local_line": 717,
+      "original_line": 782,
+      "anchor": [
+        "else {",
+        "}",
+        "exit_from_kbd_int();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#else /* NTVDM */",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "local_line": 764,
+      "original_line": 829,
+      "anchor": [
+        "}",
+        "outb(KEYBA_STATUS_CMD, ENA_KBD);",
+        "setIP(IP_save);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "local_line": 773,
+      "original_line": 838,
+      "anchor": [
+        "{",
+        "LOCAL void exit_from_kbd_int IFN0()",
+        "#endif"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "local_line": 808,
+      "original_line": 875,
+      "anchor": [
+        "#endif",
+        "}",
+        "return;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "local_line": 1108,
+      "original_line": 1178,
+      "anchor": [
+        "{",
+        "if( (sas_hw_at_no_check(kb_flag) & CTL_SHIFT ) && (code == DEL_KEY) )",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#else",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "local_line": 2111,
+      "original_line": 2350,
+      "anchor": [
+        "{",
+        "void mouse_int1()",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#else",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "local_line": 2232,
+      "original_line": 2589,
+      "anchor": [
+        "}",
+        "}",
+        "alt_found = (alt_user_subroutine_call_mask[i] & MOUSE_CALL_MASK_KEY_BITS) == key_mask;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#else   /* NTVDM */",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "local_line": 2292,
+      "original_line": 2670,
+      "anchor": [
+        "note_trace0(MOUSE_VERBOSE, \"mouse_int2:\");",
+        "{",
+        "void mouse_int2()"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "local_line": 3761,
+      "original_line": 4171,
+      "anchor": [
+        "outb(ICA0_PORT_1, interrupt_mask_register);",
+        "interrupt_mask_register &= ~(1 << CPU_MOUSE_INT);",
+        "inb(ICA0_PORT_1, &interrupt_mask_register);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif /* NTVDM */",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "local_line": 3858,
+      "original_line": 4280,
+      "anchor": [
+        "#endif",
+        "#ifdef NTVDM",
+        "UNUSED(m1);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "current_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\ppi.c",
+      "original_sha256": "367cceaa88345e16b2e138faef9addd441da2cd39f95ea3ab6c359651bd8ebf5",
+      "local_line": 69,
+      "original_line": 69,
+      "anchor": [
+        "static boolean gate_2_was_low = TRUE;\t/* state of timer 2 gate */",
+        "#define PPI_BIT_MASK\t0x3F1",
+        "static half_word ppi_register;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "current_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\ppi.c",
+      "original_sha256": "367cceaa88345e16b2e138faef9addd441da2cd39f95ea3ab6c359651bd8ebf5",
+      "local_line": 136,
+      "original_line": 136,
+      "anchor": [
+        "note_trace2(PPI_VERBOSE, \"ppi_outb() - port %x, val %x\", port, value);",
+        "ppi_register = value & 0x0f;",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "current_sha256": "78193f48952dc08e5cb7ad1fd46e0be227a4a70e9fefc7da1f7b2863e4280016",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+      "local_line": 87,
+      "original_line": 88,
+      "anchor": [
+        "IBOOL value;",
+        "char *env;",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "current_sha256": "78193f48952dc08e5cb7ad1fd46e0be227a4a70e9fefc7da1f7b2863e4280016",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+      "local_line": 116,
+      "original_line": 130,
+      "anchor": [
+        "ISM32 value;",
+        "char *env, *ptr;",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "current_sha256": "78193f48952dc08e5cb7ad1fd46e0be227a4a70e9fefc7da1f7b2863e4280016",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+      "local_line": 127,
+      "original_line": 142,
+      "anchor": [
+        "value = default_value;",
+        "if (ptr == env)\t/* cannot do conversion */",
+        "value = strtol(env, &ptr, 0);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "current_sha256": "78193f48952dc08e5cb7ad1fd46e0be227a4a70e9fefc7da1f7b2863e4280016",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+      "local_line": 144,
+      "original_line": 162,
+      "anchor": [
+        "char *value;",
+        "char *env;",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "current_sha256": "78193f48952dc08e5cb7ad1fd46e0be227a4a70e9fefc7da1f7b2863e4280016",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+      "local_line": 153,
+      "original_line": 172,
+      "anchor": [
+        "value = env;",
+        "{",
+        "if (env)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "current_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "local_line": 98,
+      "original_line": 86,
+      "anchor": [
+        "GLOBAL int *pargc;\t/* Pointer to argc\t\t*/",
+        "GLOBAL char **pargv;\t/* Pointer to argv\t\t*/",
+        "#endif /* SOFTWINDOWS */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif /* NTVDM */",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "current_sha256": "21846776c2f3538e914cd255780d7e252e9381e2a82ed299709046752f320625",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\terminat.c",
+      "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+      "local_line": 103,
+      "original_line": 103,
+      "anchor": [
+        "gvi_term();\t/* close down the video adaptor */",
+        "host_fdisk_term();",
+        "cmos_update();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "current_sha256": "1f3420925d327c21cb1498c35b337b88002df74af813e4fb897bbd97975348f1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+      "local_line": 198,
+      "original_line": 218,
+      "anchor": [
+        "sas_store(TIMER_OVFL, 0);",
+        "sas_storew(TIMER_HIGH, getCX());",
+        "sas_storew(TIMER_LOW, getDX());"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "current_sha256": "1f3420925d327c21cb1498c35b337b88002df74af813e4fb897bbd97975348f1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+      "local_line": 359,
+      "original_line": 409,
+      "anchor": [
+        "{",
+        "void time_int()",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif\t/* NTVDM */",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "current_sha256": "1f3420925d327c21cb1498c35b337b88002df74af813e4fb897bbd97975348f1",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+      "local_line": 384,
+      "original_line": 770,
+      "anchor": [
+        "{",
+        "void time_of_day_init()",
+        "#endif  /* ifndef NTVDM */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif  /* NTVDM */",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_sha256": "6312ae4290e8d20faf4691bb957117a78af796a74ce93d4693cad8368138ba6a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "local_line": 1800,
+      "original_line": 2052,
+      "anchor": [
+        "adapter_state[ICA_MASTER].ica_master = TRUE;",
+        "io_connect_port(i, ICA0_ADAPTOR, IO_READ_WRITE);",
+        "for(i = ICA0_PORT_START; i <= ICA0_PORT_END; i++)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif  /* !NTVDM */",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "current_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "local_line": 201,
+      "original_line": 202,
+      "anchor": [
+        "[5.2.1 INTERNAL DATA DEFINITIONS                                     */",
+        "[5.2 LOCAL DEFINITIONS]",
+        "#endif"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#else",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "current_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "local_line": 238,
+      "original_line": 249,
+      "anchor": [
+        "======================================================================",
+        "application polling kybd unsuccessfully.",
+        "PURPOSE         :       called from keyboard BIOS as result of"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif  /* NTVDM */",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "current_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+      "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+      "local_line": 352,
+      "original_line": 434,
+      "anchor": [
+        "{",
+        "int event;",
+        "void idetect (event)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "current_sha256": "4bf68cad6816d1707b9338dec64012d28d377e9f7ba30729abff82b0d8b0d8c8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\illegalp.c",
+      "original_sha256": "94f049032a9298802cab09afc61651469dcbf1fec80ab36444e5c2fed2f681ad",
+      "local_line": 145,
+      "original_line": 140,
+      "anchor": [
+        "{",
+        "void illegal_dvr_bop IFN0()",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "next_outer_directive": "#endif /* ! NTVDM */",
+      "disposition": "existing exclusion confirmed; no rewrite or restoration"
+    }
+  ],
+  "limitations": "Original anchor and selected compiler context do not prove behavior for unadmitted profiles. No runtime test or source rewrite."
+}

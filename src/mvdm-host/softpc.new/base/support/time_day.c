@@ -43,12 +43,12 @@
 #endif
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_BIOS.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 
@@ -157,32 +157,9 @@ void time_of_day()
             sas_store(TIMER_OVFL, 0);   /* Always write zero after read */
 
 #else   /* ! NTVDM */
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-	    /*
-	     * First get the time from the host
-	     */
-
-	    get_host_timestamp(&low, &high, &overflow);
-
-	    /*
-	     * Use it to return the time AND overwrite the BIOS data
-	     */
-
-	    setDX(low);
-	    sas_storew(TIMER_LOW, low);
-
-	    setCX(high);
-	    sas_storew(TIMER_HIGH, high);
-
- 	    setAL(overflow);
-	    sas_store(TIMER_OVFL, 0);	/* Always write zero after read	*/
-
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
+#error Excluded unsupported non-NTVDM alternative
 #endif /* NTVDM */
+#line 186
 
 	    break;
 
@@ -202,10 +179,9 @@ void time_of_day()
 	case 2:	/* read the real time clock	*/
 
 #ifndef NTVDM
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#error Excluded unsupported non-NTVDM time service profile
 #endif
-#endif
+#line 209
 		if( UPDATE_IN_PROGRESS )
 			setCF(1);
 		else
@@ -217,10 +193,9 @@ void time_of_day()
 			setCF(0);
 		}
 #ifndef NTVDM
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#error Excluded unsupported non-NTVDM time service profile
 #endif
-#endif
+#line 224
 		break;
 
 	case 3:	/* Set the real time clock	*/
@@ -246,10 +221,9 @@ void time_of_day()
 	case 4:	/* read the date from the real time clock	*/
 
 #ifndef NTVDM
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#error Excluded unsupported non-NTVDM time service profile
 #endif
-#endif
+#line 253
 		if( UPDATE_IN_PROGRESS )
 			setCF(1);
 		else
@@ -261,10 +235,9 @@ void time_of_day()
 			setCF(0);
 		}
 #ifndef NTVDM
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
+#error Excluded unsupported non-NTVDM time service profile
 #endif
-#endif
+#line 268
 		break;
 
 	case 5:	/* Set the date into the real time clock	*/

@@ -14,12 +14,12 @@
 ]*/
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_ERROR.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 
@@ -103,13 +103,9 @@ void illegal_op_int()
 	where(string, cs, ip);
 
 #ifndef NTVDM
-#ifdef PROD
-	host_error(EG_BAD_OP, ERR_QU_CO_RE, string);
-#else  /* PROD */
-#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
-#endif /* PROD */
-
+#error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected
 #else /* NTVDM */
+#line 113
 #ifdef PROD
 #if define(MONITOR) || define(CPU_40_STYLE)
         host_error(EG_BAD_OP, ERR_QU_CO_RE, string);
@@ -123,6 +119,7 @@ void illegal_op_int()
 #endif /* MONITOR */
 #endif /* PROD */
 #endif /* NTVDM */
+#line 126
 
 
 

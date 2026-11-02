@@ -53,20 +53,20 @@ typedef union {
 #endif
 
 #if defined(NTVDM) && defined(FIFO_ON)
-#ifdef BIT_ORDER2
-typedef union {
-    half_word all;
-    struct {
-         HALF_WORD_BIT_FIELD no_int_pending:1;
-         HALF_WORD_BIT_FIELD interrupt_ID:3;
-         HALF_WORD_BIT_FIELD pad:2;
-         HALF_WORD_BIT_FIELD fifo_enabled:2;
-           } bits;
-      } INT_ID_REG;
-#endif
-#ifdef BIT_ORDER1
-#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
-#endif
+#error Excluded unsupported FIFO_ON configuration
+
+
+
+
+
+
+
+
+
+
+
+
+
 #else   /* NTVDM */
 
 #ifdef BIT_ORDER2
@@ -132,7 +132,7 @@ typedef union {
 		 HALF_WORD_BIT_FIELD tx_holding_empty:1;
 		 HALF_WORD_BIT_FIELD tx_shift_empty:1;
 #if defined(NTVDM) && defined(FIFO_ON)
-		 HALF_WORD_BIT_FIELD fifo_error:1;
+#error Excluded unsupported FIFO_ON configuration
 #else
 		 HALF_WORD_BIT_FIELD pad:1;
 #endif
@@ -166,26 +166,26 @@ typedef union {
 #line 164
 
 #if defined(NTVDM) && defined(FIFO_ON)
-/* refer to NS 16550A data sheet for fifo control register description
-   DMA is not supported because so far there are not such a COMM adapter with
-   DMA channel  out there
-*/
-#ifdef BIT_ORDER2
-typedef union {
-    half_word all;
-    struct {
-         HALF_WORD_BIT_FIELD enabled:1;
-         HALF_WORD_BIT_FIELD rx_reset:1;
-         HALF_WORD_BIT_FIELD tx_reset:1;
-         HALF_WORD_BIT_FIELD dma_mode_selected:1;
-         HALF_WORD_BIT_FIELD pad:2;
-         HALF_WORD_BIT_FIELD trigger_level:2;
-           } bits;
-      } FIFO_CONTROL_REG;
-#endif
-#ifdef BIT_ORDER1
-#error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
-#endif
+#error Excluded unsupported FIFO_ON configuration
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #endif
 #line 188
@@ -196,7 +196,7 @@ typedef union {
 #define RS232_IER	1
 #define RS232_IIR	2
 #if defined(NTVDM) && defined(FIFO_ON)
-#define RS232_FIFO  2
+#error Excluded unsupported FIFO_ON configuration
 #endif
 #line 197
 #define RS232_LCR	3
@@ -217,17 +217,17 @@ typedef union {
 #define NO_GO_LINE  2  /* We can't emulate requested line setup */
 
 #if defined(NTVDM) && defined(FIFO_ON)
-/* fifo size defined in NS16550 data sheet */
-#define FIFO_SIZE   16
-/* the real fifo size in our simulation code. Increase this will get
-   a better performance(# rx interrupts going down and read call count to
-   the serial driver also going down). However, if application is using
-   h/w handshaking, we may still delivery extra chars to it. This may provoke
-   the app. By using 16bytes fifo, we are safe because the application
-   must have logic to handle it.
-*/
+#error Excluded unsupported FIFO_ON configuration
 
-#define FIFO_BUFFER_SIZE    FIFO_SIZE
+
+
+
+
+
+
+
+
+
 #endif
 #line 227
 
@@ -238,7 +238,7 @@ typedef union {
 	((external_state == internal_state) ? LEAVE_ALONE : external_state)
 
 #if defined(NTVDM) && defined(FIFO_ON)
-#define FIFO_INT 6   /* fifo rda time out interrupt ID */
+#error Excluded unsupported FIFO_ON configuration
 #endif
 #line 237
 
@@ -291,10 +291,10 @@ typedef union {
 #line 280
 
 #if defined(NTVDM) && defined(FIFO_ON)
-typedef     struct _FIFORXDATA{
-    half_word   data;
-    half_word   error;
-}FIFORXDATA, *PFIFORXDATA;
+#error Excluded unsupported FIFO_ON configuration
+
+
+
 #endif
 #line 287
 

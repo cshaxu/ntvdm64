@@ -51,12 +51,12 @@
 #endif
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_BIOS.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 
@@ -174,7 +174,7 @@ LOCAL word rcpu_poll_segment = RCPU_POLL_SEGMENT,
 #endif /* GISP_SVGA */
 
 #if defined(IRET_HOOKS) && defined(GISP_CPU)
-IMPORT VOID  HostAllowKbdInt();  /* Allow keybd Ints without an IRET */
+#error Excluded unsupported GISP_CPU configuration
 #endif /* IRET_HOOKS && GISP_CPU */
 
 #ifdef NTVDM
@@ -742,7 +742,7 @@ LOCAL VOID PAUSE IFN0()
 
 	do {
 #if defined(IRET_HOOKS)  && defined(GISP_CPU)
-		HostAllowKbdInt();	/* Allow a keypress to generate an interrupt */ 
+#error Excluded unsupported GISP_CPU configuration
 #endif /* IRET_HOOKS && GISP_CPU */
 
 
@@ -1470,12 +1470,12 @@ void keyboard_io()
 #endif
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_INIT.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 void keyboard_post()

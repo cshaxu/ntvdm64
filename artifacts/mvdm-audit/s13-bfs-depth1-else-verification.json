@@ -1,0 +1,86 @@
+{
+  "selected_preprocessing": {
+    "keyba": {
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "e6175350a6999e3f3ef28d8808be96270141218e6feedb922ed90082bc8c55a0"
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "1aadf9dfe1640cc904dcb08a12bcc236e7545f202f4c0d4f25c4216ee7761abc"
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    "time_day": {
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "011b210449a9ccc188ee26d24ed2256f1e57cd7b09a859b9d60a3dd87392bc58"
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "e14fbf6725d47804e1b52d9ea27f2a7935564c96e691f6a89043f78a3118e1f7"
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    "ica": {
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "40616dfcdccb4c3a09d3f3c75a98195fb1d2a36a25e70abadd14dd69db2ee7f8"
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "f004e7396cbb245100852f6b8be43edfd13e4211278a17e724203ff04cc88848"
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    },
+    "timer": {
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "4938a1c9ea8fdcc4ec2d93ff4667daf34fae5edaf81943fcde7df9cf8e03d15a"
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "3d1e9824d5c51c6bf83294eb65e1d688368e01f41da15bbf0b911081cd30a446"
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    }
+  },
+  "pic_fixture": {
+    "profile": "x86 /MT NTVDM CCPU40",
+    "elapsed_ms": 316,
+    "executable_sha256": "8E266E3D5E84D25B34E46084DD7948A7FEDB4C4089D7EE5F35F2A8989DF1B8A0",
+    "ica_sha256": "390AFFF592D3EAA7A016BAB804A0EC22CACB3B99BBE07A908B06647A37AC0349",
+    "scope": "actual production PIC reset; controlled EOI callback boundary; no guest mutation"
+  },
+  "keyboard_pic_fixture": {
+    "profile": "x86 /MT NTVDM CCPU40",
+    "elapsed_ms": 239,
+    "executable_sha256": "95B321882D006C91993A5A76AB7F78080AE791022002F9BD7A9C63A6521CBEDF",
+    "keyba_sha256": "FFA1D65DAC15A2B396E4FEBE9D1AE3C1BA4F04AB2856C85B943D1E3D8F66D28E",
+    "ica_sha256": "390AFFF592D3EAA7A016BAB804A0EC22CACB3B99BBE07A908B06647A37AC0349",
+    "controller_reply": "C0 returns input port; 20, AA, AB, D0 and E0 return their response bytes",
+    "scope": "Actual controller/PIC; normal and early EOI slot order, controlled host callbacks, no BIOS ISR/timer acceptance"
+  },
+  "focused_guard_controls": "x86 and x64 pass for all five selected/rejected alternatives and logical line controls",
+  "runtime_limits": "Fixtures do not establish complete DOS, WOW or Win3.x acceptance; full gates pending."
+}

@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+  "current_sha256": "6ea5365b039b059a4b16dbe2c8d0f630c4db670105159644fcfd7d84630038c6",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\ios.c",
+  "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+  "original_line": 413,
+  "current_line": 398,
+  "original_condition": "defined(NTVDM) && defined(MONITOR)",
+  "current_condition": "defined(NTVDM) && (defined(MONITOR) || defined(CCPU))",
+  "registration": "MVDM-HOST-DIV-477",
+  "scope": "top-level condition correspondence only; accepted local adaptation, not independent behavioral proof"
+}

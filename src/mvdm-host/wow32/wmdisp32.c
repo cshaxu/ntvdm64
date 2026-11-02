@@ -31,8 +31,9 @@ BOOL fDDEAckFree = FALSE;
 extern WORD msgFINDREPLACE;  // see WCOMMDLG.C
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-INT fWMsgProfRT = 0;
+#error Excluded unsupported WOW profiling configuration
 #endif
+#line 36
 
 LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
     VPWNDPROC vpWndProc16,  // Next WndProc to call or NULL if default
@@ -49,12 +50,14 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
     __try {
     BOOL   fMessageNeedsThunking;
 #ifdef DEBUG
-    CHAR szClassName[80];
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 54
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-    DWORD dwTics;
+#error Excluded unsupported WOW profiling configuration
 #endif
+#line 58
 
     ptd = CURRENTPTD();
 
@@ -145,10 +148,9 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 
     LOGDEBUG(6,("    Thunking window %x message %s\n", hwnd, GetWMMsgName(uMsg)));
 #ifdef DEBUG
-    if((uMsg & WOWPRIVATEMSG) && ((uMsg & ~WOWPRIVATEMSG) < 0x400)) {
-        LOGDEBUG(6,("     -- private WOW bit set for %s\n", GetWMMsgName(uMsg & ~WOWPRIVATEMSG)));
-    }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 152
 
     wm32mpex.Parm16.WndProc.hwnd   = GETHWND16(hwnd);
     wm32mpex.Parm16.WndProc.wMsg   = (WORD)uMsg;
@@ -168,8 +170,9 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
         LOGDEBUG(6,("%04X (%s)\n", ptd->htask16, (aw32Msg[uMsg].lpszW32)));
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-        dwTics = GetWOWTicDiff(0L);
+#error Excluded unsupported WOW profiling configuration
 #endif
+#line 173
         wm32mpex.fThunk = THUNKMSG;
         wm32mpex.hwnd = hwnd;
         wm32mpex.uMsg = uMsg;
@@ -181,10 +184,9 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
         ulReturn = (wm32mpex.lpfnM32)(&wm32mpex);
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-        if( !fWMsgProfRT ) {  // only if not profiling round trip
-            aw32Msg[uMsg].cTics += GetWOWTicDiff(dwTics);
-        }
+#error Excluded unsupported WOW profiling configuration
 #endif
+#line 188
 
         if (!ulReturn) {
             LOGDEBUG(LOG_ALWAYS,("    W32Win16WndProc ERROR: cannot thunk 32-bit message %s (%x)\n", GetWMMsgName(uMsg), uMsg));
@@ -230,26 +232,24 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 
     LOGDEBUG(6,("    UnThunking window %x message %s\n", hwnd, (LPSZ)GetWMMsgName(uMsg)));
 #ifdef DEBUG
-    if((uMsg & WOWPRIVATEMSG) && ((uMsg - WOWPRIVATEMSG) < 0x400)) {
-        LOGDEBUG(6,("     -- private WOW bit set for %s\n", (LPSZ)GetWMMsgName(uMsg)));
-    }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 237
 
     if (fMessageNeedsThunking) {
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-        if( !fWMsgProfRT ) {  // only if not profiling round trip
-            dwTics = GetWOWTicDiff(0L);
-        }
+#error Excluded unsupported WOW profiling configuration
 #endif
+#line 245
 
         wm32mpex.fThunk = UNTHUNKMSG;
         (wm32mpex.lpfnM32)(&wm32mpex);
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
-        aw32Msg[uMsg].cTics += GetWOWTicDiff(dwTics);
-        aw32Msg[uMsg].cCalls++;   // increment # times message passed
+#error Excluded unsupported WOW profiling configuration
 #endif
+#line 253
 
     }
 
@@ -391,25 +391,9 @@ BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX lpwm32mpex)
 }
 
 #ifdef DEBUG         // see the macro WM32UNDOCUMENTED
-
-// These are undocumented messages for Win 3.0 so take a look at the app
-// who is using them.
-
-BOOL FASTCALL WM32Undocumented(LPWM32MSGPARAMEX lpwm32mpex)
-{
-
-    if (lpwm32mpex->fThunk) {
-        LOGDEBUG(3,(" Window %08lX is receiving Undocumented Message %s\n", lpwm32mpex->hwnd, (LPSZ)GetWMMsgName(lpwm32mpex->uMsg), lpwm32mpex->uMsg));
-
-        lpwm32mpex->Parm16.WndProc.wMsg = (WORD)lpwm32mpex->uMsg;
-        lpwm32mpex->Parm16.WndProc.wParam = (WORD)lpwm32mpex->uParam;
-        lpwm32mpex->Parm16.WndProc.lParam = (LONG)lpwm32mpex->lParam;
-    }
-
-    return (TRUE);
-}
-
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 413
 
 // This function thunks the messages,
 //

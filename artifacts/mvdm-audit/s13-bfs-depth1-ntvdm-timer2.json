@@ -1,0 +1,29 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+  "before_sha256": "8bcfec70e88ad230ef3259c4ecccb2f29032ba743f27653c6326994556feca3b",
+  "after_sha256": "9491a9ad5c9762556ad0540382075566d48fd2fe266762b176ee610d3e3b73a7",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+  "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+  "original_arm_lines": [
+    1852,
+    1949
+  ],
+  "local_arm_lines_before": [
+    1699,
+    1772
+  ],
+  "removed_body_sha256": "0c05d07f10815b8dbeca87de02e712fdae92526b60f9d37bfef98664a97d2314",
+  "original_body_sha256": "6c0a4df78483952ebb8a3c376cc9670dc84a852f154fc381b61b0a2a4d464d70",
+  "removed_body_lines": 72,
+  "subsumed_markers": {
+    "MVDM-HOST-DIV-500": 2,
+    "MVDM-HOST-DIV-523": 1
+  },
+  "selected_else_line_directive": 1816,
+  "continuation_line_directive": 1959,
+  "selected_entry_observed_line": 1818,
+  "continuation_observed_line": 1959,
+  "child_groups_pruned": 5,
+  "status": "real x86 selected preprocessing equal ignoring blank lines; timer.obj compiled; x86/x64 focused positive-negative and line controls pass; full build and runtime pending",
+  "registration": "MVDM-HOST-DIV-571"
+}

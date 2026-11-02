@@ -234,7 +234,7 @@ extern IBOOL		hg_set_intn_handler IPT2 (IU32, interrupt_number,
 extern IBOOL		hg_set_fault_handler IPT2 (IU32, exception_number,
 					h_exception_t *, function);
 #ifdef IRET_HOOKS
-extern void		hg_add_comms_cb IPT2(COMMS_CB, next_batch, IUS32, timeout);
+#error Excluded unsupported IRET_HOOKS configuration
 #endif
 
 extern VOID		host_display_win_logo IPT0 ();

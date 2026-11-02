@@ -1,0 +1,55 @@
+{
+  "scope": "first-depth original/current boundary correspondence only",
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+  "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+  "current_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+  "original_condition": "ifndef NTVDM",
+  "current_condition": "!defined(NTVDM) || !defined(MONITOR)",
+  "register": "MVDM-HOST-DIV-318",
+  "records": [
+    {
+      "original_line": 2641,
+      "current_line": 2265,
+      "shared_context_anchor": "If the cursor is currently displayed",
+      "current_arm_status": "retained-observed"
+    },
+    {
+      "original_line": 2950,
+      "current_line": 2572,
+      "shared_context_anchor": "Disable conditional off area",
+      "current_arm_status": "retained-observed"
+    },
+    {
+      "original_line": 2996,
+      "current_line": 2617,
+      "shared_context_anchor": "if (cursor_flag-- == MOUSE_CURSOR_DISPLAYED)",
+      "current_arm_status": "retained-observed"
+    },
+    {
+      "original_line": 3310,
+      "current_line": 2938,
+      "shared_context_anchor": "UNUSED(junk1);",
+      "current_arm_status": "retained-observed"
+    },
+    {
+      "original_line": 5227,
+      "current_line": 4766,
+      "shared_context_anchor": "LOCAL void cursor_update IFN0()",
+      "current_arm_status": "retained-observed"
+    },
+    {
+      "original_line": 5250,
+      "current_line": 4793,
+      "shared_context_anchor": "LOCAL void cursor_display IFN0()",
+      "current_arm_status": "retained-observed"
+    },
+    {
+      "original_line": 5351,
+      "current_line": 4888,
+      "shared_context_anchor": "LOCAL void cursor_undisplay IFN0()",
+      "current_arm_status": "retained-observed"
+    }
+  ],
+  "limits": "not a new finding on selected semantics, and no nested branch classification"
+}

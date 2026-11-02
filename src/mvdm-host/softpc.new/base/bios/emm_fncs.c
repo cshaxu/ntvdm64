@@ -65,12 +65,12 @@ AMMENDMENTS	:
 
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_LIM.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 
@@ -108,7 +108,7 @@ IMPORT void dma_lim_setup IPT0();
 IMPORT void host_get_access_key IPT1(unsigned short *, access_key);
 
 #if defined(A2CPU) && defined(DELTA)
-IMPORT void reset_delta_data_structures IPT0();
+#error Excluded unsupported A2CPU configuration
 #endif /* A2CPU && DELTA */
 
 /*	Local Variables			*/
@@ -275,12 +275,12 @@ GLOBAL void emm_io IFN0()
 }
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_INIT.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 #line 281
 
@@ -361,7 +361,7 @@ GLOBAL void emm_init IFN0()
 	{
 		dma_lim_setup();
 #if defined(A2CPU) && defined(DELTA)
-		reset_delta_data_structures();
+#error Excluded unsupported A2CPU configuration
 #endif /* A2CPU && DELTA */
 #line 356
 	}	
@@ -370,12 +370,12 @@ GLOBAL void emm_init IFN0()
 	
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_LIM.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 #line 369
 

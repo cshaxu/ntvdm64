@@ -893,32 +893,32 @@ BOOL WDGetAPIProfArgs(LPSZ lpszArgStr,
     }
 
 #if 0
-    for(i = 0; i < iThkTblMax; i++) {
-        CHAR  temp[40], *TblEnt[2], szTabName[40];
-        PA32  awThkTbl;
+#error Excluded unsupported original disabled branch
 
-        /* get table name string from thunk tables */
-        READWOW2(awThkTbl,  &ppaThkTbls[i], 0);
-        READWOW2(szTabName, awThkTbl.lpszW32, 0);
 
-        /* get rid of trailing spaces from table name string */
-        strcpy(temp, szTabName);
-        WDParseArgStr(temp, TblEnt, 1);
 
-        /* if we found a table name that matches the 1st arg...*/
-        if( !_stricmp(argv[0], TblEnt[0]) ) {
 
-            strcpy(lpszTab, szTabName);
-            *bTblAll = 0;  // specify dump specific table
 
-            /* if we got a table name match & only one arg, we're done */
-            if( nArgs == 1 ) {
-                *iFunInd = 0; // specify dump all API entries in the table
-                return(0);
-            }
-            break;
-        }
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif
 
     /* if 2 args && the 1st doesn't match a table name above => bad input */
@@ -1089,17 +1089,17 @@ VOID apiprofdmp( ARGLIST )
 
 
 #if 0
-    for(iTab = 0; iTab < iThkTblMax; iTab++) {
-
-        READWOW(awThkTbl, &ppaThkTbls[iTab]);
-        READWOW(szTable,  awThkTbl.lpszW32);
+#error Excluded unsupported original disabled branch
 
 
-        /* if dump all tables || dump this specific table */
 
-       if( bTblAll || !strcmp(szTab, szTable) ) {
 
-            pawAPIEntryTbl = awThkTbl.lpfnA32;
+
+
+
+
+
+
 #endif
     for (i = 0; i < nModNames; i++) {
 

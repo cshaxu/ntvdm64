@@ -84,17 +84,17 @@ extern IU32 GetStackPointer IPT0();
 
 
 #ifdef IRET_HOOKS
-/*
- * The interfaces provided by the CPU so that the ICA can initiate and
- * terminate an iret hook.
- */
+#error Excluded unsupported IRET_HOOKS configuration
 
-extern void Cpu_do_hook IPT2(IUM8, line, IBOOL, is_hooked);
-extern void Cpu_inter_hook_processing IPT1(IUM8, line);
-extern void Cpu_unhook IPT1(IUM8, line_number);
-#ifdef GISP_CPU
-#error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
-#endif
+
+
+
+
+
+
+
+
+
 
 #endif /* IRET_HOOKS */
 

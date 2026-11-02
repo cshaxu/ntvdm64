@@ -65,11 +65,9 @@ MODNAME(wow32.c);
 
 // for logging iloglevel to a file
 #ifdef DEBUG
-CHAR    szLogFile[128];
-int     fLog = 0;
-HANDLE  hfLog = NULL;
-UCHAR   gszAssert[256];
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 73
 
 /*  iloglevel = 16 MAX the world (all 16 bit kernel internal calls
  *  iloglevel = 14 All internal WOW kernel Calls
@@ -79,30 +77,25 @@ UCHAR   gszAssert[256];
  */
 INT     flOptions = 0;           // command line optin
 #ifdef DEBUG
-INT     iLogLevel = 0;           // logging level;  0 implies none
-INT     fDebugWait = 0 ;         // Single Step, 0 = No single step
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 85
 
 HANDLE  hmodWOW32;
 HANDLE  hHostInstance = 0;
 #ifdef DEBUG
-INT     fLogFilter = -1;            // Logging Code Fiters
-WORD    fLogTaskFilter = (WORD)-1;  // Filter Logging for Specific TaskID
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 92
 #ifdef i386
-PX86CONTEXT pIntelRegisters = 0; // x86 Only - Pointer to Intel Register Block
+#error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #endif
+#line 95
 
 #ifdef DEBUG
-BOOL    fSkipLog = 0;           // TRUE to temporarily skip certain logging
-INT     iReqLogLevel = 0;                       // Current Output LogLevel
-INT     iCircBuffer = CIRC_BUFFERS-1;           // Current Buffer
-CHAR    achTmp[CIRC_BUFFERS][TMP_LINE_LEN] = {" "};      // Circular Buffer
-CHAR    *pachTmp = &achTmp[0][0];
-WORD    awfLogFunctionFilter[FILTER_FUNCTION_MAX] = {0xffff,0,0,0,0,0,0,0,0,0}; // Specific Filter API Array
-PWORD   pawfLogFunctionFilter = awfLogFunctionFilter;
-INT     iLogFuncFiltIndex = 0;                  // Index Into Specific Array for Debugger Extensions
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 106
 
 UINT    iW32ExecTaskId = (UINT)-1;    // Base Task ID of Task Being Exec'd
 WORD    iWOWTaskCur = 0;        // pTDB of currently running task ID
@@ -466,12 +459,9 @@ BOOL W32Init(VOID)
 {
     HKEY  WowKey = NULL;
 #ifdef DEBUG
-    CHAR WOWCmdLine[REGISTRY_BUFFER_SIZE];
-    PCHAR pWOWCmdLine;
-    ULONG WOWCmdLineSize = REGISTRY_BUFFER_SIZE;
-    DWORD cb;
-    DWORD dwType;
+#error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
 #endif
+#line 475
     PTD ptd;
     PFNWOWHANDLERSIN pfnIn;
     LPVOID lpSharedTaskMemory;
@@ -594,13 +584,14 @@ BOOL W32Init(VOID)
                &WowKey
              ) != 0) {
 #ifdef DEBUG
-        LOGDEBUG(0,("    W32INIT ERROR: Registry Opening failed\n"));
-        return FALSE;
+#error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
 #else
+#line 600
         /* An absent section denotes the original empty-KnownDLL configuration.
          * The worker-local facade never creates or mutates host state. */
         WowKey = NULL;
 #endif
+#line 604
     }
 
     //
@@ -608,16 +599,12 @@ BOOL W32Init(VOID)
     //
 
 #ifdef DEBUG
-    cb = sizeof(fThunkStrRtns);
-    if (RegQueryValueEx(WowKey,
-            "ThunkNLS",
-            NULL,
-            &dwType,
-            (LPBYTE) &fThunkStrRtns,
-            &cb) || dwType != REG_DWORD) {
+#error DIVERGENCE MVDM-HOST-DIV-595: DEBUG initialization profile is not selected
 #else
+#line 619
     {
 #endif
+#line 621
 
         //
         // Didn't find the registry value or it's the wrong type,
@@ -633,67 +620,9 @@ BOOL W32Init(VOID)
     }
 
 #ifdef DEBUG
-
-    if (RegQueryValueEx (WowKey,
-             "wowcmdline",
-             NULL,
-             &dwType,
-             (LPBYTE)&WOWCmdLine,
-             &WOWCmdLineSize) != 0){
-        RegCloseKey (WowKey);
-        LOGDEBUG(0,("    W32INIT ERROR: WOWCMDLINE not found in registry\n"));
-        return FALSE;
-    }
-
-    pWOWCmdLine = (PCHAR)((PBYTE)WOWCmdLine + WOWCmdLineSize + 1);
-
-    WOWCmdLineSize = REGISTRY_BUFFER_SIZE - WOWCmdLineSize -1;
-
-    if (WOWCmdLineSize < (REGISTRY_BUFFER_SIZE  / 2)){
-        LOGDEBUG(0,("    W32INIT ERROR: Registry Buffer too small\n"));
-        return FALSE;
-    }
-
-    if (ExpandEnvironmentStrings ((LPCSTR)WOWCmdLine, (LPSTR)pWOWCmdLine, WOWCmdLineSize) >
-            WOWCmdLineSize) {
-        LOGDEBUG(0,("    W32INIT ERROR: Registry Buffer too small\n"));
-        return FALSE;
-    }
-
-    // Find Debug Info
-    while (*pWOWCmdLine) {
-        if (*pWOWCmdLine == '-' || *pWOWCmdLine == '/') {
-         //   c = (char)tolower(*++pWOWCmdLine);
-            switch(*++pWOWCmdLine) {
-            case 'd':
-            case 'D':
-                flOptions |= OPT_DEBUG;
-                break;
-            case 'n':
-            case 'N':
-                flOptions |= OPT_BREAKONNEWTASK;
-                break;
-            case 'l':
-            case 'L':
-                iLogLevel = atoi(++pWOWCmdLine);
-                break;
-            default:
-                break;
-            }
-
-        }
-        pWOWCmdLine++;
-    }
-
-    if (iLogLevel > 0) {
-        if (!(flOptions & OPT_DEBUG))
-            if (!(OPENLOG()))
-                iLogLevel = 0;
-    }
-    else
-        iLogLevel = 0;
-
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 697
 
     //
     // Initialize list of known DLLs used by WK32WowIsKnownDLL
@@ -749,24 +678,9 @@ BOOL W32Init(VOID)
     ghProcess = NtCurrentProcess();
 
 #ifdef DEBUG
-
-#ifdef i386
-    if (IsDebuggerAttached()) {
-        if (GetProfileInt("WOWDebug", "debugbreaks", 0))
-            *pNtVDMState |= VDM_BREAK_DEBUGGER;
-
-        if (GetProfileInt("WOWDebug", "exceptions", 0))
-            *pNtVDMState |= VDM_BREAK_EXCEPTIONS;
-    }
+#error Excluded unsupported DEBUG WOW profile
 #endif
-
-
-    if (IsDebuggerAttached() && (flOptions & OPT_BREAKONNEWTASK)) {
-        OutputDebugString("\nW32Init - Initialization Complete, Set any Breakpoints Now, type g to continue\n\n");
-        DbgBreakPoint();
-    }
-
-#endif
+#line 770
 
     // Initialize ClipBoard formats structure.
 
@@ -796,16 +710,14 @@ BOOL W32Init(VOID)
  *
  */
 #ifdef DEBUG_OR_WOWPROFILE
-PA32 awThunkTables[] = {
-    {W32TAB(aw32WOW,     "All     ", cAPIThunks)}
-};
+#error Excluded unsupported WOW profiling configuration
 #endif
+#line 803
 
 #ifdef DEBUG_OR_WOWPROFILE // define symbols for API profiling only (debugger extension)
-INT   iThunkTableMax = NUMEL(awThunkTables);
-PPA32 pawThunkTables = awThunkTables;
-INT   iFuncId = 0;
+#error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
+#line 809
 
 
 /* WOW32UnimplementedAPI - Error Thunk is Not Implemented
@@ -823,76 +735,20 @@ INT   iFuncId = 0;
 ULONG FASTCALL WOW32UnimplementedAPI(PVDMFRAME pFrame)
 {
 #ifdef DEBUG
-    INT  iFun;
-
-    iFun = pFrame->wCallID;
-
-    WOW32ASSERTMSGF (FALSE, ("WOW32 Error - %s: Function %i %s not implemented\n",
-        GetModName(iFun),
-        GetOrdinal(iFun),
-        aw32WOW[iFun].lpszW32
-        ));
-
+#error Excluded unsupported DEBUG WOW profile
 #else
+#line 837
     UNREFERENCED_PARAMETER(pFrame);
 #endif
+#line 839
     return FALSE;
 }
 
 
 #ifdef DEBUG
-
-/* WOW32NopAPI - Thunk to do nothing - checked build only.
- *
- * All Function tables point here for APIs which should do nothing.
- *
- * ENTRY
- *
- * EXIT
- *
- */
-
-ULONG FASTCALL WOW32NopAPI(PVDMFRAME pFrame)
-{
-    INT iFun;
-
-    iFun = pFrame->wCallID;
-
-    LOGDEBUG(4,("%s: Function %i %s is NOP'd\n", GetModName(iFun), GetOrdinal(iFun), aw32WOW[iFun].lpszW32));
-
-    return FALSE;
-}
-
-
-/* WOW32LocalAPI - ERROR Should Have Been Handled in 16 BIT
- *                Checked build only
- *
- * All Function tables point here for Local API Error Messages
- *
- * ENTRY
- *  Module startup registers:
- *
- * EXIT
- *
- *
- */
-
-ULONG FASTCALL WOW32LocalAPI(PVDMFRAME pFrame)
-{
-    INT  iFun;
-
-    iFun = pFrame->wCallID;
-
-    WOW32ASSERTMSGF (FALSE, ("Error - %s: Function %i %s should be handled by 16-bit code\n",
-        GetModName(iFun),
-        GetOrdinal(iFun),
-        aw32WOW[iFun].lpszW32
-        ));
-
-    return FALSE;
-}
-
+#error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
+#line 896
 
 
 LPFNW32 FASTCALL W32PatchCodeWithLpfnw32(PVDMFRAME pFrame , INT iFun )
@@ -902,21 +758,9 @@ LPFNW32 FASTCALL W32PatchCodeWithLpfnw32(PVDMFRAME pFrame , INT iFun )
     LPBYTE lpCode;
 
 #ifdef DEBUG_OR_WOWPROFILE
-    //
-    // On checked builds do not patch calls to the three special
-    // thunks above, since many entries will point to each one,
-    // the routines could not easily distinguish which 16-bit
-    // entrypoint was called.
-    //
-
-    if (flOptions & OPT_DONTPATCHCODE ||
-        aw32WOW[iFun].lpfnW32 == WOW32UnimplementedAPI ||
-        aw32WOW[iFun].lpfnW32 == WOW32NopAPI ||
-        aw32WOW[iFun].lpfnW32 == WOW32LocalAPI ) {
-
-        return aw32WOW[iFun].lpfnW32;
-    }
+#error Excluded unsupported WOW profiling configuration
 #endif
+#line 920
 
     //
     // just return the thunk function if called in real mode
@@ -986,12 +830,14 @@ VOID W32Dispatch()
     register PTD ptd = NULL;
     register PVDMFRAME pFrame;
 #ifdef DEBUG_OR_WOWPROFILE
-    INT iFunT;
+#error Excluded unsupported WOW profiling configuration
 #endif
+#line 991
 
 #ifdef  WOWPROFILE
- DWORD  dwTics;
+#error Excluded unsupported WOW profiling configuration
 #endif
+#line 995
 
     //
     // WARNING: DO NOT ADD ANYTHING TO THIS FUNCTION UNLESS YOU ADD THE SAME
@@ -1024,19 +870,16 @@ VOID W32Dispatch()
         iFun = pFrame->wCallID;
 
 #ifdef DEBUG_OR_WOWPROFILE
-        iFuncId = 0; // initialize 'cause GetFuncId checks for this.
-        iFunT = iFuncId = ISFUNCID(iFun) ?  iFun : GetFuncId(iFun) ;
+#error Excluded unsupported WOW profiling configuration
 #endif
+#line 1030
         iWOWTaskCur = pFrame->wTDB;                     // Record the task's current ID
 
         if (ISFUNCID(iFun)) {
 #ifdef DEBUG
-            if (cAPIThunks && iFunT >= cAPIThunks) {
-                LOGDEBUG(LOG_ALWAYS,("W32Dispatch: Task %04x thunked to function %d, cAPIThunks = %d.\n",
-                         iWOWTaskCur, iFunT, cAPIThunks));
-                WOW32ASSERT(FALSE);
-            }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 1040
             iFun = (INT)W32PatchCodeWithLpfnw32(pFrame, iFun);
         }
 
@@ -1044,8 +887,9 @@ VOID W32Dispatch()
         LOGARGS(3,pFrame);                              // Perform Function Logging
 
 #ifdef WOWPROFILE // For API profiling only (debugger extension)
-        dwTics = GetWOWTicDiff(0L);
+#error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
+#line 1049
 
         //
         // WARNING: DO NOT ADD ANYTHING TO THIS FUNCTION UNLESS YOU ADD THE SAME
@@ -1055,16 +899,14 @@ VOID W32Dispatch()
         ulReturn = wow_user_invoke_thunk((LPFNW32)iFun, pFrame); // DIV-296
 
 #ifdef DEBUG_OR_WOWPROFILE
-        iFuncId = iFunT;
+#error Excluded unsupported WOW profiling configuration
 #endif
+#line 1060
 
 #ifdef WOWPROFILE // For API profiling only (debugger extension)
-        dwTics = GetWOWTicDiff(dwTics);
-        iFun = iFunT;
-        // add time ellapsed for call to total
-        aw32WOW[iFun].cTics += dwTics;
-        aw32WOW[iFun].cCalls++; // inc # times this API called
+#error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
+#line 1068
 
         FREEVDMPTR(pFrame);                                                     // Set the 16-bit return code
         GETFRAMEPTR(ptd->vpStack, pFrame);
@@ -1074,19 +916,9 @@ VOID W32Dispatch()
         pFrame->wDX = HIW(ulReturn);
 
 #ifdef DEBUG
-        // If OPT_DEBUGRETURN is set, diddle the RetID as approp.
-
-        if (flOptions & OPT_DEBUGRETURN) {
-            if (pFrame->wRetID == RET_RETURN) {
-                pFrame->wRetID =  RET_DEBUGRETURN;
-                flOptions &= ~OPT_DEBUGRETURN;
-            }
-        }
-        // Put the current logging level where 16-bit code can get it
-        // Use ROMBIOS Hard DISK information as a safe address
-        *(PBYTE)GetVDMAddr(0x0040,0x0042) = (BYTE)(iLogLevel/10+'0');
-        *(PBYTE)GetVDMAddr(0x0040,0x0043) = (BYTE)(iLogLevel%10+'0');
+#error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
+#line 1090
 
         FREEVDMPTR(pFrame);
 
@@ -1547,129 +1379,9 @@ KillTask:
 
 
 #ifdef DEBUG
-VOID StartDebuggerForWow(VOID)
-/*++
-
-Routine Description:
-
-    This routine checks to see if there's a debugger attached to WOW.  If not,
-    it attempts to spawn one with a command to attach to WOW.  If the system
-    was booted with /DEBUG in boot.ini (kernel debugger enabled), we'll run
-    "ntsd -d" otherwise we'll run "ntsd".
-
-Arguments:
-
-    None.
-
-Return Value:
-
-    None.
-
---*/
-{
-    BOOL fKernelDebuggerEnabled, b;
-    NTSTATUS Status;
-    SYSTEM_KERNEL_DEBUGGER_INFORMATION KernelDebuggerInformation;
-    ULONG ulReturnLength;
-    SECURITY_ATTRIBUTES sa;
-    STARTUPINFO StartupInfo;
-    PROCESS_INFORMATION ProcessInformation;
-    CHAR szCmdLine[256];
-    HANDLE hEvent;
-
-    //
-    // Are we being run under a debugger ?
-    //
-
-    if (IsDebuggerAttached()) {
-
-        //
-        // No need to start one.
-        //
-
-        return;
-    }
-
-
-    //
-    // Is the kernel debugger enabled?
-    //
-
-    Status = NtQuerySystemInformation(
-                 SystemKernelDebuggerInformation,
-                 &KernelDebuggerInformation,
-                 sizeof(KernelDebuggerInformation),
-                 &ulReturnLength
-                 );
-
-    if (NT_SUCCESS(Status) &&
-        (ulReturnLength >= sizeof(KernelDebuggerInformation))) {
-
-        fKernelDebuggerEnabled = KernelDebuggerInformation.KernelDebuggerEnabled;
-
-    } else {
-
-        fKernelDebuggerEnabled = FALSE;
-        LOGDEBUG(0,("StartDebuggerForWow: NtQuerySystemInformation(kdinfo) returns 0x%8.8x, return length 0x%08x.\n",
-                    Status, ulReturnLength));
-
-    }
-
-    //
-    // Create an event for NTSD to signal once it has fully connected
-    // and is ready for the exception.  We force the handle to be inherited.
-    //
-
-    sa.nLength = sizeof(sa);
-    sa.lpSecurityDescriptor = NULL;
-    sa.bInheritHandle = TRUE;
-    hEvent = CreateEvent(&sa, TRUE, FALSE, NULL);
-
-    //
-    // Build debugger command line.
-    //
-
-    wsprintf(szCmdLine, "ntsd %s -p %lu -e %lu -g",
-            fKernelDebuggerEnabled ? "-d" : "",
-            GetCurrentProcessId(),
-            hEvent
-            );
-
-    RtlZeroMemory(&StartupInfo,sizeof(StartupInfo));
-    StartupInfo.cb = sizeof(StartupInfo);
-
-    b = CreateProcess(
-            NULL,
-            szCmdLine,
-            NULL,
-            NULL,
-            TRUE,             // fInheritHandles
-            CREATE_DEFAULT_ERROR_MODE,
-            NULL,
-            NULL,
-            &StartupInfo,
-            &ProcessInformation
-            );
-
-    if (b) {
-        CloseHandle(ProcessInformation.hProcess);
-        CloseHandle(ProcessInformation.hThread);
-
-        if (hEvent) {
-
-            //
-            // Wait for debugger to initialize.
-            //
-
-            WaitForSingleObject(hEvent, INFINITE);
-        }
-    }
-
-    CloseHandle(hEvent);
-
-    return;
-}
+#error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
+#line 1673
 
 
 BOOL IsDebuggerAttached(VOID)
@@ -1783,8 +1495,9 @@ PVOID FASTCALL
 GetPModeVDMPointerAssert(
     DWORD Address
 #ifdef DEBUG
-    ,  DWORD Count
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 1788
     )
 /*++
 
@@ -1804,8 +1517,9 @@ Return Value:
 
 {
 #ifdef DEBUG
-    void *vp;
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 1809
 
     //
     // Check to see if the descriptor is marked present
@@ -1852,42 +1566,12 @@ Return Value:
 
 
 #ifdef DEBUG
-    if (vp = GetPModeVDMPointerMacro(Address, Count)) {
-
-#ifdef _X86_
-        //
-        // Check the selector limit on x86 only and return NULL if
-        // the limit is too small.
-        //
-
-        if (SelectorLimit &&
-            (Address & 0xFFFF) + Count > SelectorLimit[Address >> 19] + 1)
-        {
-            WOW32ASSERTMSGF (FALSE, ("WOW32 limit check assertion: %04x:%04x size %x is beyond limit %x.\n",
-                Address >> 16,
-                Address & 0xFFFF,
-                Count,
-                SelectorLimit[Address >> 19]
-                ));
-
-            return vp;
-        }
-#endif
-
-#if 0 // this code is a paranoid check, only useful when debugging GetPModeVDMPointer.
-#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
-#endif
-
-        return vp;
-
-    } else {
-
-        return NULL;
-
-    }
+#error Excluded unsupported DEBUG WOW profile
 #else
+#line 1889
     return GetPModeVDMPointerMacro(Address, 0);  // No limit check on free build.
 #endif // DEBUG
+#line 1891
 }
 
 
@@ -1955,338 +1639,9 @@ ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )
 
 
 #ifdef DEBUG
-
-/*
- * DoAssert - do an assertion.  called after the expression has been evaluted
- *
- * Input:
- *
- *
- * Note if the requested log level is not what we want we don't output
- *  but we always output to the circular buffer - just in case.
- *
- *
- */
-int DoAssert(PSZ szAssert, PSZ szModule, UINT line, UINT loglevel)
-{
-    INT savefloptions;
-
-    //
-    // Start a debugger for WOW if there isn't already one.
-    //
-    // Until now StartDebuggerForWow was started by
-    // the exception filter, which meant asserts on a
-    // checked build got the debugger but the user didn't see
-    // the assertion text on the debugger screen because
-    // logprintf was called before the debugger attached.
-    // -- DaveHart 31-Jan-95
-    //
-
-    StartDebuggerForWow();
-
-    savefloptions = flOptions;
-    flOptions |= OPT_DEBUG;         // *always* print the message
-
-    //
-    // szAssert is NULL for bare-bones WOW32ASSERT()
-    //
-
-    if (szAssert == NULL) {
-        LOGDEBUG(loglevel, ("WOW32 assertion failure: %s line %d\n", szModule, line));
-    } else {
-        LOGDEBUG(loglevel, ("%s", szAssert));
-    }
-
-    flOptions = savefloptions;
-
-    if (IsDebuggerAttached()) {
-
-        DbgBreakPoint();
-
-    } else {
-
-        DWORD dw = SetErrorMode(0);
-
-        RaiseException(EXCEPTION_WOW32_ASSERTION, 0, 0, NULL);
-
-        SetErrorMode(dw);
-
-    }
-
-    return 0;
-}
-
-
-
-/*
- * sprintf_gszAssert
- *
- * Used by WOW32ASSERTMSGF to format the assertion text into
- * a global buffer, gszAssert.  There is probably a better way.
- *
- * DaveHart 15-Jun-95.
- *
- */
-int _cdecl sprintf_gszAssert(PSZ pszFmt, ...)
-{
-    va_list VarArgs;
-
-    va_start(VarArgs, pszFmt);
-
-    return vsprintf(gszAssert, pszFmt, VarArgs);
-}
-
-
-
-/*
- * logprintf - format log print routine
- *
- * Input:
- * iReqLogLevel - Requested Logging Level
- *
- * Note if the requested log level is not what we want we don't output
- *  but we always output to the circular buffer - just in case.
- *
- *
- */
-VOID logprintf(PSZ pszFmt, ...)
-{
-    DWORD   lpBytesWritten;
-    int     len;
-    char    text[1024];
-    va_list arglist;
-
-    va_start(arglist, pszFmt);
-    len = vsprintf(text, pszFmt, arglist);
-
-    // fLog states (set by !wow32.logfile debugger extension):
-    //    0 -> no logging;
-    //    1 -> log to file
-    //    2 -> create log file
-    //    3 -> close log file
-    if(fLog > 1) {
-        if(fLog == 2) {
-            if((hfLog = CreateFile(szLogFile,
-                                   GENERIC_WRITE,
-                                   FILE_SHARE_WRITE,
-                                   NULL,
-                                   CREATE_ALWAYS,
-                                   FILE_ATTRIBUTE_NORMAL,
-                                   NULL)) != INVALID_HANDLE_VALUE) {
-                fLog = 1;
-            }
-            else {
-                hfLog = NULL;
-                fLog  = 0;
-                OutputDebugString("Couldn't open log file!\n");
-            }
-        }
-        else {
-            FlushFileBuffers(hfLog);
-            CloseHandle(hfLog);
-            hfLog = NULL;
-            fLog  = 0;
-        }
-    }
-
-    if ( len > TMP_LINE_LEN-1 ) {
-        text[TMP_LINE_LEN-2] = '\n';
-        text[TMP_LINE_LEN-1] = '\0';        /* Truncate to 128 */
-    }
-
-    IFLOG(iReqLogLevel) {
-        // write to file?
-        if (fLog) {
-            WriteFile(hfLog, text, len, &lpBytesWritten, NULL);
-        }
-        // write to terminal?
-        else if (flOptions & OPT_DEBUG) {
-            OutputDebugString(text);
-        }
-    }
-
-    strcpy(&achTmp[iCircBuffer][0], text);
-    if (--iCircBuffer < 0 ) {
-        iCircBuffer = CIRC_BUFFERS-1;
-    }
-}
-
-/*
- *  checkloging - Some Functions we don't want to log
- *
- *  Entry
- *   fLogFilter = Filter for Specific Modules - Kernel, User, GDI etc.
- *   fLogTaskFilter = Filter for specific TaskID
- *
- *  Exit: TRUE - OK to LOG Event
- *        FALSE - Don't Log Event
- *
- */
-BOOL checkloging(register PVDMFRAME pFrame)
-{
-    INT i;
-    BOOL bReturn;
-    INT iFun = GetFuncId(pFrame->wCallID);
-    PTABLEOFFSETS pto = &tableoffsets;
-
-
-    // Filter on Specific Call IDs
-
-    if (awfLogFunctionFilter[0] != 0xffff) {
-        INT nOrdinal;
-
-        nOrdinal = GetOrdinal(iFun);
-
-        bReturn = FALSE;
-        for (i=0; i < FILTER_FUNCTION_MAX ; i++) {
-            if (awfLogFunctionFilter[i] == nOrdinal) {
-                bReturn = TRUE;
-                break;
-            }
-        }
-    } else {
-        bReturn = TRUE;
-    }
-
-    // Do not LOG Internal Kernel Calls below level 20
-    if (iLogLevel < 20 ) {
-        if((iFun == FUN_WOWOUTPUTDEBUGSTRING) ||
-         ((iFun < pto->user) && (iFun >= FUN_WOWINITTASK)))
-
-            bReturn = FALSE;
-    }
-
-    // LOG Only Specific TaskID
-
-    if (fLogTaskFilter != 0xffff) {
-        if (fLogTaskFilter != pFrame->wTDB) {
-            bReturn = FALSE;
-        }
-    }
-
-    // LOG Filter On Modules USER/GDI/Kernel etc.
-
-    switch (ModFromCallID(iFun)) {
-
-    case MOD_KERNEL:
-        if ((fLogFilter & FILTER_KERNEL) == 0 )
-            bReturn = FALSE;
-        break;
-    case MOD_USER:
-        if ((fLogFilter & FILTER_USER) == 0 )
-            bReturn = FALSE;
-        break;
-    case MOD_GDI:
-        if ((fLogFilter & FILTER_GDI) == 0 )
-            bReturn = FALSE;
-        break;
-    case MOD_KEYBOARD:
-        if ((fLogFilter & FILTER_KEYBOARD) == 0 )
-            bReturn = FALSE;
-        break;
-    case MOD_SOUND:
-        if ((fLogFilter & FILTER_SOUND) == 0 )
-            bReturn = FALSE;
-        break;
-    case MOD_MMEDIA:
-        if ((fLogFilter & FILTER_MMEDIA) == 0 )
-            bReturn = FALSE;
-        break;
-    case MOD_WINSOCK:
-        if ((fLogFilter & FILTER_WINSOCK) == 0 )
-            bReturn = FALSE;
-        break;
-    case MOD_COMMDLG:
-        if ((fLogFilter & FILTER_COMMDLG) == 0 ) {
-            bReturn = FALSE;
-        }
-        break;
-    default:
-        break;
-    }
-    return (bReturn);
-}
-
-
-/*
- * Argument Logging For Tracing API Calls
- *
- *
- */
-VOID logargs(INT iLog, register PVDMFRAME pFrame)
-{
-    register PBYTE pbArgs;
-    INT iFun;
-    INT cbArgs;
-
-    if (checkloging(pFrame)) {
-        iFun = GetFuncId(pFrame->wCallID);
-        cbArgs = aw32WOW[iFun].cbArgs; // Get Number of Parameters
-
-        if ((fLogFilter & FILTER_VERBOSE) == 0 ) {
-          LOGDEBUG(iLog,("%s(", aw32WOW[iFun].lpszW32));
-        } else {
-          LOGDEBUG(iLog,("%04X %08X %04X %s:%s(",pFrame->wTDB, pFrame->vpCSIP,pFrame->wAppDS, GetModName(iFun), aw32WOW[iFun].lpszW32));
-        }
-
-        GETARGPTR(pFrame, cbArgs, pbArgs);
-        pbArgs += cbArgs;
-
-        //
-        // Log the function arguments a word at a time.
-        // The first iteration of the while loop is unrolled so
-        // that the main loop doesn't have to figure out whether
-        // or not to print a comma.
-        //
-
-        if (cbArgs > 0) {
-
-            pbArgs -= sizeof(WORD);
-            cbArgs -= sizeof(WORD);
-            LOGDEBUG(iLog,("%04x", *(PWORD16)pbArgs));
-
-            while (cbArgs > 0) {
-
-                pbArgs -= sizeof(WORD);
-                cbArgs -= sizeof(WORD);
-                LOGDEBUG(iLog,(",%04x", *(PWORD16)pbArgs));
-
-            }
-        }
-
-        FREEARGPTR(pbArgs);
-        LOGDEBUG(iLog,(")\n"));
-
-        if (fDebugWait != 0) {
-            DbgPrint("WOWSingle Step\n");
-            DbgBreakPoint();
-        }
-    }
-}
-
-
-/*
- * logreturn - Log Return Values From Call
- *
- * Entry
- *
- * Exit - None
- */
-VOID logreturn(INT iLog, register PVDMFRAME pFrame, ULONG ulReturn)
-{
-    INT iFun;
-
-        if (checkloging(pFrame)) {
-         iFun = GetFuncId(pFrame->wCallID);
-         if ((fLogFilter & FILTER_VERBOSE) == 0 ) {
-           LOGDEBUG(iLog,("%s: %lx\n", aw32WOW[iFun].lpszW32, ulReturn));
-         } else {
-           LOGDEBUG(iLog,("%04X %08X %04X %s:%s: %lx\n", pFrame->wTDB, pFrame->vpCSIP, pFrame->wAppDS, GetModName(iFun), aw32WOW[iFun].lpszW32, ulReturn));
-         }
-        }
-}
-
+#error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
+#line 2290
 
 PVOID FASTCALL malloc_w (ULONG size)
 {
@@ -2369,52 +1724,6 @@ PVOID WOWStartupFailed(VOID)
 
 //****************************************************************************
 #ifdef DEBUG_OR_WOWPROFILE
-DWORD GetWOWTicDiff(DWORD dwPrevCount) {
-/*
- * Returns difference between a previous Tick count & the current tick count
- *
- * NOTE: Tick counts are in unspecified units  (PerfFreq is in MHz)
- */
-    DWORD          dwDiff;
-    LARGE_INTEGER  PerfCount, PerfFreq;
-
-    NtQueryPerformanceCounter(&PerfCount, &PerfFreq);
-
-    /* if ticks carried into high dword (assuming carry was only one) */
-    if( dwPrevCount > PerfCount.LowPart ) {
-        /* (0xFFFFFFFF - (dwPrevCount - LowPart)) + 1L caused compiler to
-           optimize in an arithmetic overflow, so we do it in two steps
-           to fool Mr. compiler
-         */
-        dwDiff = (dwPrevCount - PerfCount.LowPart) - 1L;
-        dwDiff = ((DWORD)0xFFFFFFFF) - dwDiff;
-    }
-    else {
-        dwDiff = PerfCount.LowPart - dwPrevCount;
-    }
-
-    return(dwDiff);
-
-}
-
-INT GetFuncId(DWORD iFun)
-{
-    INT i;
-
-    if (iFuncId == 0) {
-        if (!ISFUNCID(iFun)) {
-            for (i = 0; i < cAPIThunks; i++) {
-                 if (aw32WOW[i].lpfnW32 == (LPFNW32)iFun)  {
-                     iFun = i;
-                     break;
-                 }
-            }
-        }
-    }
-    else {
-        iFun = iFuncId;
-    }
-
-    return iFun;
-}
+#error Excluded unsupported WOW profiling configuration
 #endif  // DEBUG_OR_WOWPROFILE
+#line 2421

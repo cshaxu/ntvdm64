@@ -19,5 +19,5 @@ extern W32 aw32MMED[];
 
 
 #ifdef DEBUG_OR_WOWPROFILE
-extern INT iMMEDMax;
+#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected
 #endif

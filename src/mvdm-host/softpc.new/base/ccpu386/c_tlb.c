@@ -203,27 +203,9 @@ LOCAL IU32 page_address[NR_TLB_SETS * NR_TLB_ENTRIES * NR_ACCESS_MODES];
  */
 
 #ifdef SPC486
-
-/*                      WP reqd avail */
-LOCAL BOOL access_check[2] [4] [4] =
-   {
-      {  /* WP = 0 */
-	 /*  S_R     S_W     U_R     U_W  */
-	 { FALSE, FALSE, FALSE, FALSE },   /* S_R */
-	 { FALSE, FALSE, FALSE, FALSE },   /* S_W */
-	 { TRUE , TRUE , FALSE, FALSE },   /* U_R */
-	 { TRUE , TRUE , TRUE , FALSE }    /* U_W */
-      },
-      {  /* WP = 1 */
-	 /*  S_R     S_W     U_R     U_W  */
-	 { FALSE, FALSE, FALSE, FALSE },   /* S_R */
-	 { FALSE, FALSE, TRUE , FALSE },   /* S_W */
-	 { TRUE , TRUE , FALSE, FALSE },   /* U_R */
-	 { TRUE , TRUE , TRUE , FALSE }    /* U_W */
-      }
-   };
-
+#error Excluded unsupported SPC486 profile
 #else
+#line 227
 
 /*                     reqd avail */
 LOCAL BOOL access_check[4] [4] =
@@ -236,6 +218,7 @@ LOCAL BOOL access_check[4] [4] =
    };
 
 #endif /* SPC486 */
+#line 239
 
 LOCAL void deal_with_pte_cache_hit IPT1(IU32, linearAddress);
 GLOBAL void Pig_NotePDECacheAccess IPT2(IU32, linearAddress, IU32, accessBits);
@@ -273,42 +256,9 @@ flush_tlb()
    }
 
 #ifdef SPC486
-
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-/* Invalidate TLB entry.                                              */
-/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-GLOBAL VOID
-invalidate_tlb_entry
-       	          
-IFN1(
-	IU32, lin	/* Linear Address */
-    )
-
-
-   {
-   ISM32 set, entry;
-   TLB_ENTRY *e;	/* current tlb entry */
-
-   entry = lin >> DIR_TBL_SHIFT & 0x07;   /* isolate bits 14-12 */
-   lin = lin & ~OFFSET_MASK;	/* drop any offset */
-
-   for ( set = 0; set < NR_TLB_SETS; set++ )
-      {
-      e = &tlb[set][entry];
-
-      if ( e->v && e->la == lin )
-	 {
-	 /* Valid entry for given address: Flush it. */
-#ifdef FAST_TLB
-	 /* Remove associated page_index entry */
-	 page_index[e->la >> DIR_TBL_SHIFT] = PI_NOT_VALID;
-#endif /* FAST_TLB */
-	 e->v = FALSE;
-	 }
-      }
-   }
-
+#error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
+#line 312
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* Map linear address to physical address.                            */
@@ -378,10 +328,12 @@ IFN2(
 
 	 /* check access validity */
 #ifdef SPC486
-	 if ( access_check[GET_WP()][access][e->mode] )
+#error Excluded unsupported SPC486 profile
 #else
+#line 383
 	 if ( access_check[access][e->mode] )
 #endif /* SPC486 */
+#line 385
 	    {
 	    /* Protection Failure */
 	    SET_CR(CR_PFLA, lin);
@@ -447,10 +399,12 @@ IFN2(
 
    /* check access validity */
 #ifdef SPC486
-   if ( access_check[GET_WP()][access][comb] )
+#error Excluded unsupported SPC486 profile
 #else
+#line 452
    if ( access_check[access][comb] )
 #endif /* SPC486 */
+#line 454
       {
       /* Protection Failure */
       SET_CR(CR_PFLA, lin);
@@ -732,10 +686,12 @@ xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
 
 	 /* check access validity */
 #ifdef SPC486
-	 if ( access_check[GET_WP()][access][e->mode] )
+#error Excluded unsupported SPC486 profile
 #else
+#line 737
 	 if ( access_check[access][e->mode] )
 #endif /* SPC486 */
+#line 739
 	    {
 	    return cache_only ? -1 : FALSE;
 	    }
@@ -773,10 +729,12 @@ xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
 
    /* check access validity */
 #ifdef SPC486
-   if ( access_check[GET_WP()][access][comb] )
+#error Excluded unsupported SPC486 profile
 #else
+#line 778
    if ( access_check[access][comb] )
 #endif /* SPC486 */
+#line 780
       {
       return FALSE;
       }

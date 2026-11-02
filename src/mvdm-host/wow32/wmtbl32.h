@@ -23,7 +23,7 @@ extern M32 aw32Msg[];
 
 
 #ifdef DEBUG_OR_WOWPROFILE
-extern INT iMsgMax;
+#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected
 #endif
 
 

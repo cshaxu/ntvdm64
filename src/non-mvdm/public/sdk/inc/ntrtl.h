@@ -129,6 +129,8 @@ NTSTATUS NTAPI NtTerminateProcess(HANDLE ProcessHandle, NTSTATUS ExitStatus);
 
 /* DIVERGENCE(OPENNT-HOST-029): original header inline required by BaseSrv's
  * IsClientSystem; retain its body rather than generating a test-only copy. */
+#if !defined(MIDL_PASS)
+#line 132
 __inline LUID
 NTAPI
 RtlConvertLongToLuid(
@@ -144,6 +146,8 @@ RtlConvertLongToLuid(
 
     return TempLuid;
 }
+#endif
+#line 147
 
 #ifdef __cplusplus
 }

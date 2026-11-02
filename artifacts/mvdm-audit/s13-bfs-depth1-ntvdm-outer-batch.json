@@ -1,0 +1,146 @@
+[
+  {
+    "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+    "before_sha256": "78193f48952dc08e5cb7ad1fd46e0be227a4a70e9fefc7da1f7b2863e4280016",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+    "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+    "local_group_before": 42,
+    "local_cut_before": 79,
+    "local_end_before": 79,
+    "original_group": 42,
+    "original_cut": 80,
+    "original_end": 80,
+    "removed_body_sha256": "878a02e2f25a480d080eeaeda9cba1ac9f7379ce2c8a8538231c272ed8f66e01",
+    "original_body_sha256": "11ee873ba624e65cc0da260732d4abd0259a12796d0678681a172757095c7e3f",
+    "removed_body_lines": 36,
+    "subsumed_markers": [
+      "MVDM-HOST-DIV-500",
+      "MVDM-HOST-DIV-503"
+    ],
+    "selected_alternative_line": null,
+    "following_line": 80,
+    "preceding_anchor": [
+      "#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.",
+      "#endif",
+      ""
+    ],
+    "following_anchor": [
+      "",
+      "",
+      "GLOBAL IBOOL IBOOLgetenv IFN2(char *, name, IBOOL, default_value)"
+    ],
+    "status": "locally-verified",
+    "registration": "MVDM-HOST-DIV-591",
+    "current_start_line": 42,
+    "current_cut_line": 44,
+    "current_end_line": 44,
+    "after_sha256": "82599d9f09b128e2109ed8fc8ae7088987c626b20f06ec4836c51edcb74af1ef"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+    "before_sha256": "ffa1d65dac15a2b396e4febe9d1ae3c1ba4f04ab2856c85b943d1e3d8f66d28e",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+    "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+    "local_group_before": 2677,
+    "local_cut_before": 2770,
+    "local_end_before": 2811,
+    "original_group": 3097,
+    "original_cut": 3202,
+    "original_end": 3241,
+    "removed_body_sha256": "466bf4661ae35bff176173bb95999c4920d33da4f0b895ccfa228f20b0f70993",
+    "original_body_sha256": "5f7388684534fe1036725f4d5e1c06777dd1aed65546e10827b47a171931673d",
+    "removed_body_lines": 92,
+    "subsumed_markers": [
+      "MVDM-HOST-DIV-520",
+      "MVDM-HOST-DIV-535"
+    ],
+    "selected_alternative_line": 2902,
+    "following_line": 2943,
+    "preceding_anchor": [
+      "",
+      "#endif /* IRET_HOOKS && GISP_CPU */",
+      ""
+    ],
+    "following_anchor": [
+      ""
+    ],
+    "status": "locally-verified",
+    "registration": "MVDM-HOST-DIV-591",
+    "current_start_line": 2677,
+    "current_cut_line": 2679,
+    "current_end_line": 2721,
+    "after_sha256": "614a25ecb9008e7e39acbf694a8fe96b3511c53c00a7ecd7eb8c6a140ff559df"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+    "before_sha256": "390afff592d3eaa7a016bab804a0ec22cacb3b99bbe07a908b06647a37ac0349",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+    "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+    "local_group_before": 1127,
+    "local_cut_before": 1139,
+    "local_end_before": 1139,
+    "original_group": 1285,
+    "original_cut": 1301,
+    "original_end": 1301,
+    "removed_body_sha256": "43a1dc54ddfe4718827b7ab3528c1b0af47da566f9966bcc7a111af1f4174186",
+    "original_body_sha256": "60b12ff5039f92307625a63a97872bb58cc31255671c3b4aa2c1b75aa1ea4c66",
+    "removed_body_lines": 11,
+    "subsumed_markers": [
+      "MVDM-HOST-DIV-500"
+    ],
+    "selected_alternative_line": null,
+    "following_line": 1154,
+    "preceding_anchor": [
+      "* leaves both primitive & real lock styles intact.",
+      "*/",
+      ""
+    ],
+    "following_anchor": [
+      "",
+      "#if defined (CPU_40_STYLE) && !defined(NTVDM)",
+      "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    ],
+    "status": "locally-verified",
+    "registration": "MVDM-HOST-DIV-591",
+    "current_start_line": 1127,
+    "current_cut_line": 1129,
+    "current_end_line": 1129,
+    "after_sha256": "ad063a5df6d1962c66e6ea02fc1125921fc49f57464d19b7667360aa51b0bb0c"
+  },
+  {
+    "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+    "before_sha256": "4bf68cad6816d1707b9338dec64012d28d377e9f7ba30729abff82b0d8b0d8c8",
+    "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\illegalp.c",
+    "original_sha256": "94f049032a9298802cab09afc61651469dcbf1fec80ab36444e5c2fed2f681ad",
+    "local_group_before": 105,
+    "local_cut_before": 112,
+    "local_end_before": 125,
+    "original_group": 99,
+    "original_cut": 107,
+    "original_end": 120,
+    "removed_body_sha256": "4f9dd9f58cdbfdec05af014f9fcf2360594378e53f4f334f10d755fdd36c1536",
+    "original_body_sha256": "d3cb4ee59eae6a4fb85d568d78cb77a182642d2e29de42807f70d256388d6cd1",
+    "removed_body_lines": 6,
+    "subsumed_markers": [
+      "MVDM-HOST-DIV-503"
+    ],
+    "selected_alternative_line": 113,
+    "following_line": 126,
+    "preceding_anchor": [
+      "",
+      "where(string, cs, ip);",
+      ""
+    ],
+    "following_anchor": [
+      "",
+      "",
+      ""
+    ],
+    "status": "locally-verified",
+    "registration": "MVDM-HOST-DIV-591",
+    "current_start_line": 105,
+    "current_cut_line": 107,
+    "current_end_line": 121,
+    "after_sha256": "c3d5b62cd7de868750cc40e9bc4e203c571b0edb8fa8c7178c1dac30d28d2e44"
+  }
+]

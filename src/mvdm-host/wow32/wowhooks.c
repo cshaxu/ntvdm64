@@ -626,13 +626,9 @@ LONG ThunkCallWndProcHook(INT nCode, LONG wParam, LPCWPSTRUCT lpCwpStruct,
     fCallback = CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&wm32mpex.lReturn); /* DIV-349 */
 
 #ifdef DEBUG
-    GETMISCPTR(vp, pCwpStruct16);
-
-    if (pCwpStruct16->message != wm32mpex.Parm16.WndProc.wMsg)
-        LOGDEBUG(LOG_ALWAYS,("ThunkCallWndProcHook: IN message != OUT message"));
-
-    FREEVDMPTR(pCwpStruct16);
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 636
 
     if (fMessageNeedsThunking) {
 
@@ -1224,10 +1220,9 @@ LONG ThunkJournalHook(INT nCode, LONG wParam, LPEVENTMSG lpEventMsg,
             GetEventMessage16(pEventMsg16, lpEventMsg);
 
 #ifdef  DEBUG
-            if (MessageNeedsThunking(lpEventMsg->message)) {
-                LOGDEBUG(LOG_ALWAYS, ("ThunkJournalHook: Playing back unexpected message 0x%x", lpEventMsg->message));
-            }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 1231
 
         } else {
             WOW32ASSERT(lpHSData->iHook == WH_JOURNALRECORD);

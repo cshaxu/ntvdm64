@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/config.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+  "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+  "frozen_before_sha256": "f2e9525c406f2a4d6559aa83273f2244623588aaf54070ee0224243226a95d72",
+  "after_sha256": "c2f51be50f0d73eb9623b5afa791995e029a1572520340fa160ba1321ab082e4",
+  "original_top_level_group_line": 1194,
+  "removed_duplicate_local_line": 897,
+  "retained_local_line": 892,
+  "registrations": [
+    "MVDM-HOST-DIV-563"
+  ],
+  "preprocess": {
+    "records": [
+      {
+        "name": "before",
+        "exit": 0,
+        "sha256": "77d940e76196c91a7cd06baac554e7a7c7fc09b99913ebd89c8b579b6db5f531"
+      },
+      {
+        "name": "after",
+        "exit": 0,
+        "sha256": "f4ee8463ac6d8ad0a8f7f7705c430206be9b93060d2c3d0defb6249763f323ea"
+      }
+    ],
+    "raw_equal": false,
+    "equal_ignoring_blank_lines": true
+  },
+  "real_x86_object": "passed; diagnostic warning logical lines 757, 898, 945 match earlier build",
+  "guard_tests": "tests/build/test_bfs_depth1_cpu_guards.py: x86/x64 passed",
+  "scope": "depth-one boundary deduplication only",
+  "subsequent_div569_working_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e"
+}

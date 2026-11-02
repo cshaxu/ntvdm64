@@ -167,54 +167,54 @@ void host_cpu_init() {}
 #endif
 
 #ifdef A3CPU
-void host_cpu_init()
-{
-	host_delays.com_delay = 10;
-	host_delays.keyba_delay = 8;
-	host_delays.timer_delay = 7;
-	host_delays.fdisk_delay_1 = 100;
-	host_delays.fdisk_delay_2 = 750;
-	host_delays.fla_delay = 0;
-}
+#error Excluded unsupported A3CPU configuration
 
-void setSTATUS(word flags)
-{
-    setNT((flags >> 14) & 1);
-    setIOPL((flags >> 12) & 3);
-    setOF((flags >> 11) & 1);
-    setDF((flags >> 10) & 1);
-    setIF((flags >> 9) & 1);
-    setTF((flags >> 8) & 1);
-    setSF((flags >> 7) & 1);
-    setZF((flags >> 6) & 1);
-    setAF((flags >> 4) & 1);
-    setPF((flags >> 2) & 1);
-    setCF(flags & 1);
-}
 
-/* 
- * Do the Iret for the benefit of the Iret hooks.
- * Unwind stack for flags, cs & ip.
- * Seems too simple - does the CPU require more cleanup information???
- * or will the unwinding bop sort it out??
- */
-VOID EmulatorEndIretHook()
-{
-    UNALIGNED word *sptr;
 
-    /* Stack points at CS:IP & Flags of interrupted instruction */
-    sptr = (word *)Sim32GetVDMPointer( (getSS() << 16)|getSP(), 2, (UCHAR)(getPE() ? TRUE : FALSE));
-    if (sptr)
-    {
-        setIP(*sptr++);
-        setCS(*sptr++);
-        setSTATUS(*sptr);
-        setSP(getSP()+6);
-    }
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif  /* PROD */
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endif /* A3CPU */
 
 void host_cpu_reset()

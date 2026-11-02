@@ -97,10 +97,9 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
                 WORD UNALIGNED *pwMaxDWPMsg;
                 PBYTE pDWPBits;
 #ifdef DEBUG
-                WORD wMsg;
-                int i;
-                PSZ pszFormat;
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 104
 
                 GETVDMPTR(parg16->pData, sizeof(USERCLIENTGLOBALS), pfinit16);
                 GETVDMPTR(pfinit16->lpwMaxDWPMsg, sizeof(WORD), pwMaxDWPMsg);
@@ -145,30 +144,9 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
                 FLUSHVDMCODEPTR(pfinit16->lpDWPBits, pfinit16->cbDWPBits, pDWPBits);
 
 #ifdef DEBUG
-                LOGDEBUG(LOG_TRACE, ("WU32NotifyWow: got DefWindowProc bits, wMaxDWPMsg = 0x%x.\n", *pwMaxDWPMsg));
-                LOGDEBUG(LOG_TRACE, ("The following messages will be passed on to 32-bit DefWindowProc:\n"));
-
-#define FPASSTODWP32(msg) \
-    (pDWPBits[msg >> 3] & (1 << (msg & 7)))
-
-                wMsg = 0;
-                i = 0;
-
-                while (wMsg <= *pwMaxDWPMsg) {
-                    if (FPASSTODWP32(wMsg)) {
-                        if ( i & 3 ) {
-                            pszFormat = ", %s";
-                        } else {
-                            pszFormat = "\n%s";
-                        }
-                        LOGDEBUG(LOG_TRACE, (pszFormat, aw32Msg[wMsg].lpszW32));
-                        i++;
-                    }
-                    wMsg++;
-                }
-
-                LOGDEBUG(LOG_TRACE, ("\n\n"));
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 172
 
                 //
                 // Return value tells User16 whether to thunk

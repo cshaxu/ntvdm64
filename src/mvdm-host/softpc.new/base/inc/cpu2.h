@@ -61,21 +61,21 @@ extern  half_word       *haddr_of_src_string;
  */
  
 #ifdef BACK_M
-typedef struct
-{
-                half_word FOURTH_BYTE;
-                half_word THIRD_BYTE;
-                half_word SECOND_BYTE;
-                half_word OPCODE;
-}  OPCODE_FRAME;
+#error Excluded unsupported BACK_M configuration
 
-typedef struct
-{
-                signed_char FOURTH_BYTE;
-                signed_char THIRD_BYTE;
-                signed_char SECOND_BYTE;
-                signed_char OPCODE;
-}  SIGNED_OPCODE_FRAME;
+
+
+
+
+
+
+
+
+
+
+
+
+
 #else
 typedef struct
 {
@@ -159,17 +159,17 @@ extern void host_cpu_interrupt	IPT0();
  */
 
 #ifdef BIGEND
+#error Excluded unsupported BIGEND configuration
 
-union sixteenbits
-{
-	word X;
 
-	struct
-	{
-		half_word lower;
-		half_word upper;
-	} word;
-};
+
+
+
+
+
+
+
+
 
 #endif	/* BIGEND */
 

@@ -22,8 +22,8 @@
 //
 
 #if 0
-#include <stdio.h>
-#define DPRINTF(args) printf args
+#error Excluded unsupported original disabled branch
+
 #else
 #define DPRINTF(args)
 #endif

@@ -4848,21 +4848,12 @@ void TakeNpxExceptionInt()
 	NpxFIP = NpxExceptionEIP;
 
 #ifdef	SPC486
-	if (GET_NE() == 0)
-	{
-#ifndef SFELLOW
-		ica_hw_interrupt (ICA_SLAVE, CPU_AT_NPX_INT, 1);
-#else	/* SFELLOW */
-#error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.
-#endif	/* SFELLOW */
-	}
-	else
-	{
-		Int16();
-	}
+#error Excluded unsupported SPC486 profile
 #else	/* SPC486 */
+#line 4864
 	ica_hw_interrupt (ICA_SLAVE, CPU_AT_NPX_INT, 1);
 #endif	/* SPC486 */
+#line 4866
 
 #ifndef SFELLOW
 	/* and immediately dispatch to interrupt */

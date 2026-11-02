@@ -1,0 +1,44 @@
+{
+  "scope": "first-depth original structure only",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\handles.c",
+      "original_sha256": "29742b05ec55182515971ca67b54e3e0c4ad724feecd482fd50ea2e398e9c2f2",
+      "current_sha256": "8b901bc1248821850532d637c65c1e735c90057653b8df698235c96c012c3dac",
+      "original_group_line": 38,
+      "selected_original_range": [
+        293,
+        321
+      ],
+      "register": "OPENNT-HOST-069/070 sole GetFullUserHandle body",
+      "disposition": "outside retained subset; no restoration"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\inctlpan.c",
+      "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+      "current_sha256": "d985c94cf553d28e5a7bb2434076c6c55c426798bd9805b113548f7ce99c2b02",
+      "original_group_line": 101,
+      "selected_original_range": [
+        25,
+        95
+      ],
+      "register": "OPENNT-HOST-113 sole sysBmpStyles table",
+      "disposition": "outside retained subset; no restoration"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\inctlpan.c",
+      "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+      "current_sha256": "d985c94cf553d28e5a7bb2434076c6c55c426798bd9805b113548f7ce99c2b02",
+      "original_group_line": 840,
+      "selected_original_range": [
+        25,
+        95
+      ],
+      "register": "OPENNT-HOST-113 sole sysBmpStyles table",
+      "disposition": "outside retained subset; no restoration"
+    }
+  ]
+}

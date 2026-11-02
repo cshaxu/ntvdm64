@@ -1,0 +1,75 @@
+{
+  "scope": "Current reset and timer sources after first-depth changes; x86 product and reference compile/include chains",
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "74d040039f92671ef0da05ba7d98b8ed652af4483f18dd982df06d8c227c4c5d",
+      "includes": 209,
+      "pig_definitions": [],
+      "pig_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "ba2914eefe3c74ad8beab9c336148eb097fd99612630757ec9c6ae441c0fcf38",
+      "includes": 188,
+      "pig_definitions": [],
+      "pig_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "74d040039f92671ef0da05ba7d98b8ed652af4483f18dd982df06d8c227c4c5d",
+      "includes": 209,
+      "pig_definitions": [],
+      "pig_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "ba2914eefe3c74ad8beab9c336148eb097fd99612630757ec9c6ae441c0fcf38",
+      "includes": 188,
+      "pig_definitions": [],
+      "pig_flags": [],
+      "errors": ""
+    }
+  ],
+  "existing_exclusions": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_sha256": "74d040039f92671ef0da05ba7d98b8ed652af4483f18dd982df06d8c227c4c5d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "local_line": 153,
+      "original_line": 154,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_sha256": "74d040039f92671ef0da05ba7d98b8ed652af4483f18dd982df06d8c227c4c5d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "local_line": 802,
+      "original_line": 870,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "ba2914eefe3c74ad8beab9c336148eb097fd99612630757ec9c6ae441c0fcf38",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_line": 1863,
+      "original_line": 2147,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register."
+    }
+  ],
+  "limitations": "No inference for other files or unobserved compilation profiles; no source change."
+}

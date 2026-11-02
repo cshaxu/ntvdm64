@@ -33,10 +33,9 @@ PVOID FASTCALL malloc_w_small (ULONG size)
     PVOID pv = HeapAlloc(hWOWHeapSmall, 0, size);
 
 #ifdef DEBUG
-    if (pv == (PVOID)NULL) {
-        LOGDEBUG(0, ("malloc_w_small: HeapAlloc failed\n"));
-    }
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 40
     return pv;
 
 }

@@ -1,0 +1,223 @@
+{
+  "scope": "Three DPMI units and their three direct-source fixture wrappers in x86 product and reference contexts",
+  "product_contexts": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "04f8cadf013f3139de78e8a1a4a433a3b0d56fbf453157716d6b163bbe68b6f2",
+      "includes": 158,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "includes": 160,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "includes": 158,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "04f8cadf013f3139de78e8a1a4a433a3b0d56fbf453157716d6b163bbe68b6f2",
+      "includes": 158,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "includes": 160,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "includes": 158,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    }
+  ],
+  "fixture_contexts": [
+    {
+      "fixture": "tests/observation/dpmi_dispatch_trace.c",
+      "provider": "src/mvdm-host/dpmi32/dpmi32.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "fixture_sha256": "4167d7c52b1848b78bb4f2648f429e04c2dc9ba2dcbd7d688cbefe231bed31b3",
+      "provider_included": true,
+      "includes": 162,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "fixture": "tests/observation/dpmi_pm_allocation_failure.c",
+      "provider": "src/mvdm-host/dpmi32/dpmiint.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "fixture_sha256": "1a3da7ef510a2731f7bc9344754ef801fc57c96d01553e2cb14c2dc277a4d1b2",
+      "provider_included": true,
+      "includes": 161,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "fixture": "tests/observation/dpmi_xmem_failure.c",
+      "provider": "src/mvdm-host/dpmi32/xmem.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "fixture_sha256": "35e8d1d35b7def8f3d9fb090f086c12aa29da99e22455ef37d2d44d5e35a2811",
+      "provider_included": true,
+      "includes": 162,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "fixture": "tests/observation/dpmi_dispatch_trace.c",
+      "provider": "src/mvdm-host/dpmi32/dpmi32.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "fixture_sha256": "4167d7c52b1848b78bb4f2648f429e04c2dc9ba2dcbd7d688cbefe231bed31b3",
+      "provider_included": true,
+      "includes": 162,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "fixture": "tests/observation/dpmi_pm_allocation_failure.c",
+      "provider": "src/mvdm-host/dpmi32/dpmiint.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "fixture_sha256": "1a3da7ef510a2731f7bc9344754ef801fc57c96d01553e2cb14c2dc277a4d1b2",
+      "provider_included": true,
+      "includes": 161,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    },
+    {
+      "fixture": "tests/observation/dpmi_xmem_failure.c",
+      "provider": "src/mvdm-host/dpmi32/xmem.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "fixture_sha256": "35e8d1d35b7def8f3d9fb090f086c12aa29da99e22455ef37d2d44d5e35a2811",
+      "provider_included": true,
+      "includes": 162,
+      "dbg_definitions": [],
+      "dbg_flags": [],
+      "errors": ""
+    }
+  ],
+  "existing_exclusions": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "current_sha256": "04f8cadf013f3139de78e8a1a4a433a3b0d56fbf453157716d6b163bbe68b6f2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmi32.c",
+      "original_sha256": "c271daf86bdfa846c9602f74bd2a4059b98c2ad1f12676e966bcfd427ba93dca",
+      "local_line": 109,
+      "local_end": 111,
+      "original_line": 103,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "return;",
+        "}",
+        "(*DpmiDispatchTable[Index])();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "current_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "local_line": 663,
+      "local_end": 665,
+      "original_line": 564,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "}",
+        "DBGTRACE(DPMI_DISPATCH_INT, IntNumber, 0, 0);",
+        "return TRUE;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "current_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "local_line": 92,
+      "local_end": 94,
+      "original_line": 92,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "return;",
+        "}",
+        "XmemBlock = malloc(sizeof(XMEM_BLOCK));"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "current_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "local_line": 161,
+      "local_end": 163,
+      "original_line": 161,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "return;",
+        "}",
+        "DELETE_BLOCK(XmemBlock);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "current_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "local_line": 213,
+      "local_end": 215,
+      "original_line": 212,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "return;",
+        "}",
+        "OldBlock->Address = (PVOID)BlockAddress;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    }
+  ],
+  "variant_note": "DPMI_TRACE_XMEM_FAILURE and DPMI_TRACE_LIFECYCLE_ONLY occur only in the wrapper after source include, not in src; they do not define DBG.",
+  "limitations": "No source rewrite; no claim about other profiles or runtime."
+}

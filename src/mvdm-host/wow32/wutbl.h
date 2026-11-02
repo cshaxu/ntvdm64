@@ -20,5 +20,5 @@ extern W32 aw32User[];
 
 
 #ifdef DEBUG_OR_WOWPROFILE
-extern INT iUserMax;
+#error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected
 #endif

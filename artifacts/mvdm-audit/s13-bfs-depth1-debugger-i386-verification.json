@@ -1,0 +1,478 @@
+{
+  "scope": "35 first-depth historic i386 debugger arms",
+  "contexts": [
+    {
+      "path": "src/mvdm-host/dbg/dbg.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "64414b9833f97d9201db216818638c5bac4e63f02713a06c08dd0f9e5994d7bb",
+      "includes": 161,
+      "i386_definitions": [],
+      "i386_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/dbg/dbg.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "64414b9833f97d9201db216818638c5bac4e63f02713a06c08dd0f9e5994d7bb",
+      "includes": 161,
+      "i386_definitions": [],
+      "i386_flags": [],
+      "errors": ""
+    }
+  ],
+  "preprocess": [
+    {
+      "path": "src/mvdm-host/dbg/dbg.c",
+      "records": [
+        {
+          "name": "before",
+          "exit": 0,
+          "sha256": "ecc276eeda19961e0f521b18c2a5aef1774b0dcc784a8278aa97ebc31eecff56",
+          "error": ""
+        },
+        {
+          "name": "after",
+          "exit": 0,
+          "sha256": "28cc4458d1effb003d83659ba4c3334331d5af8f04ca1c2876af41ed32d57644",
+          "error": ""
+        }
+      ],
+      "raw_equal": false,
+      "equal_ignoring_blank_lines": true
+    }
+  ],
+  "guard_controls": [
+    {
+      "guard": 0,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 0,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 1,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 1,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 2,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 2,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 3,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 3,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 4,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 4,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 5,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 5,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 6,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 6,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 7,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 7,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 8,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 8,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 9,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 9,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 10,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 10,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 11,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 11,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 12,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 12,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 13,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 13,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 14,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 14,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 15,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 15,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 16,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 16,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 17,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 17,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 18,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 18,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 19,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 19,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 20,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 20,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 21,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 21,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 22,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 22,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 23,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 23,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 24,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 24,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 25,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 25,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 26,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 26,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 27,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 27,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 28,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 28,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 29,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 29,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 30,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 30,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 31,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 31,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 32,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 32,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 33,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 33,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    },
+    {
+      "guard": 34,
+      "defined": false,
+      "exit": 0,
+      "ok": true
+    },
+    {
+      "guard": 34,
+      "defined": true,
+      "exit": 2,
+      "ok": true
+    }
+  ],
+  "line_controls": {
+    "baseline_probes": 56,
+    "post_edit_directives_verified": 56
+  },
+  "object": "cached x86 obj/mvdm-debugger/dbg.obj built successfully",
+  "transport_smokes": [
+    "S43_DEBUGGER_EVENT_TRANSPORT_OK",
+    "S43_DEBUGGER_MODULE_EVENT_TRANSPORT_OK"
+  ],
+  "limitations": "transport smokes independently exercise Win32 debugger event layout, not the modified dbg.c body; full DOS/WOW/Win3.x and product release acceptance remain pending"
+}

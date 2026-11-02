@@ -58,7 +58,13 @@
  * host startup provider but hid its declaration, while the NT DOS-emulation
  * and mouse providers have no selected public declaration carrier. Publish
  * their exact existing contracts without changing startup order. */
+#ifndef CPU_40_STYLE
+#error Excluded unsupported non-CPU40 host startup profile
+#else
+#line 61
 extern void host_start_cpu(void);
+#endif
+#line 62
 extern int InitialiseDosEmulation(int argc, char **argv);
 extern void mouse_driver_initialisation(void);
 
@@ -210,12 +216,9 @@ INT      main IFN2(INT, argc, CHAR **, argv)
   config();
 
 #if defined(PROFILE) && !defined(CPU_40_STYLE)
-/*
- * Stick this after config as Gdp must be set up. 4.0 calls ProfileInit from
- * sas_init() to ensure everything included.
- */
-  ProfileInit();
+#error Excluded unsupported non-CPU40 profiling startup
 #endif	/*PROFILE*/
+#line 221
 
 #if defined(NTVDM) || defined(macintosh)
 /* Read the cmos from file to emulate data not being

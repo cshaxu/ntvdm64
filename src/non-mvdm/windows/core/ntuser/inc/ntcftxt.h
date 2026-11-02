@@ -11,6 +11,13 @@
 * 18-Mar-1995 JimA       Ported from cftxt.h
 \**************************************************************************/
 
+#ifdef UNICODE
+#error Excluded unsupported Unicode class-client configuration
+#else
+#define IS_ANSI TRUE
+#undef _UNICODE
+#endif
+#line 14
 /* DIVERGENCE(OPENNT-HOST-036): retain the complete ANSI class client
  * closure: duplication, menu capture, registration and unregistration.
  * Other text APIs and the private USER precompiled environment are cropped.

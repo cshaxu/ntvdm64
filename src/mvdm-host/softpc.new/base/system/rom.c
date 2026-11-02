@@ -100,8 +100,8 @@
 #define MINOR_VER	0x00
 
 #if defined(macintosh) && defined(A2CPU)
-	/* Buffer is temporarily allocted  - no bigger than needed. */
-#define ROM_BUFFER_SIZE 1024*25
+#error Excluded unsupported A2CPU configuration
+
 #else
 	/* Using sas_scratch_buffer - will get 64K anyway. */
 #define ROM_BUFFER_SIZE 1024*64
@@ -275,7 +275,7 @@ GLOBAL void rom_init IFN0()
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else		/* GISP_SVGA */
 #if	defined(macintosh) && defined(A2CPU)
-	/* not macintosh 2.0 cpus - they have sparse M */
+#error Excluded unsupported A2CPU configuration
 #else
 	sas_fills( ROM_START, BAD_OP, PC_MEM_SIZE - ROM_START);
 #endif		/* macintosh && A2CPU */
@@ -328,7 +328,7 @@ LOCAL LONG read_rom IFN2(char *, name, sys_addr, address)
     /* BIOS rom first. 														*/
 	/* Mac on 2.0 cpu doesn't want to use sas scratch buffer. 				*/
 #if defined(macintosh) && defined(A2CPU)
-    tmp = (host_addr)host_malloc(ROM_BUFFER_SIZE);
+#error Excluded unsupported A2CPU configuration
 #else
 	tmp = (host_addr)sas_scratch_address(ROM_BUFFER_SIZE);
 #endif
@@ -346,7 +346,7 @@ LOCAL LONG read_rom IFN2(char *, name, sys_addr, address)
     }
 
 #if defined(macintosh) && defined(A2CPU)
-	host_free((char *)tmp);
+#error Excluded unsupported A2CPU configuration
 #endif
 
     return( size );

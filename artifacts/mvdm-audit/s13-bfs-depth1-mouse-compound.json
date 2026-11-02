@@ -1,0 +1,104 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "source_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
+  "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+  "contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "includes": 203,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "includes": 203,
+      "macro_definitions": [],
+      "macro_flags": [],
+      "errors": ""
+    }
+  ],
+  "classified": [
+    {
+      "local_line": 1537,
+      "original_line": 1759,
+      "unique_preceding_anchor": [
+        "half_word temp_word;\t/* Bit of storage to pass to inb() */",
+        "#endif /* EGG */",
+        "IS32 mouse_video_function = getAH();"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "local_line": 1583,
+      "original_line": 1805,
+      "unique_preceding_anchor": [
+        "*/",
+        "cursor_undisplay();",
+        "cursor_flag = MOUSE_CURSOR_DEFAULT;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "local_line": 1591,
+      "original_line": 1813,
+      "unique_preceding_anchor": [
+        "*\tDeal with the mode change",
+        "*/",
+        "cursor_mode_change(current_video_mode);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "local_line": 1633,
+      "original_line": 1859,
+      "unique_preceding_anchor": [
+        "getAH(), getDL(), getDH(), getBX(), cursor_status.position.y);",
+        "return;",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "local_line": 3316,
+      "original_line": 3714,
+      "unique_preceding_anchor": [
+        "UNUSED(m1);",
+        "UNUSED(m2);",
+        "UNUSED(m3);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "local_line": 3340,
+      "original_line": 3733,
+      "unique_preceding_anchor": [
+        "dest += sizeof(MOUSE_CONTEXT);",
+        "/* Save Checksum */",
+        "sas_store (dest, (byte)(cs & 0xFF));"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    },
+    {
+      "local_line": 3400,
+      "original_line": 3793,
+      "unique_preceding_anchor": [
+        "#ifdef EGG",
+        "mouse_ega_mode (sas_hw_at(vd_video_mode));",
+        "#endif"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register."
+    }
+  ],
+  "limitations": [
+    "Only matched first-depth sole-error arms; remaining compounds need independent boundary proof.",
+    "No product or guest runtime validation implied."
+  ]
+}

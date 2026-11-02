@@ -8,7 +8,11 @@
 #include "host_def.h"
 #include <nt_thred.h>
 
+#ifndef MONITOR
+#line 11
 #include <gdpvar.h>
+#endif
+#line 12
 
 /*          INSIGNIA MODULE SPECIFICATION
             -----------------------------
@@ -740,7 +744,13 @@ void MS_bop_C(void)
 
 void MS_bop_D(void)
 {
+#ifdef MONITOR
+#error Excluded unsupported monitor IRET BOP
+#else
+#line 745
     illegal_bop();
+#endif
+#line 746
 
 }
 
@@ -793,7 +803,13 @@ void MS_bop_F(void)
         ica_restart_interrupts(ICA_MASTER);
     host_ica_unlock();
 
+#ifdef MONITOR
+#error Excluded unsupported monitor keyboard setup carry
+#else
+#line 792
     setCF(0);
+#endif
+#line 793
 }
 
 

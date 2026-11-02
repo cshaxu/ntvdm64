@@ -776,11 +776,11 @@
          */
 
 #if 0 // What do we care?
-         if ((DmaInfo.mask & (1 << SB_DMA_CHANNEL)) ||
-             (DmaInfo.status & (1 << SB_DMA_CHANNEL))) {
-             dprintf2(("Wrong channel"));
-             return (PBYTE)(-1L);
-         }
+#error Excluded unsupported original disabled branch
+
+
+
+
 #endif
 
          Address =  GetVDMPointer(0, 0, 0);

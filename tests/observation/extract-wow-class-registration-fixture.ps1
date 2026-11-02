@@ -30,12 +30,14 @@ if ($lookupStart -lt 0 -or $lookupEnd -le $lookupStart) { throw 'Original class 
 $lookupBody = $lookup.Substring($lookupStart, $lookupEnd + 3 - $lookupStart)
 $lookupMirror = [IO.File]::ReadAllText((Join-Path $root 'src/non-mvdm/windows/core/ntuser/kernel/class.c'))
 $mirrorStart = $lookupMirror.IndexOf('PPCLS _InnerGetClassPtr(')
-if ($mirrorStart -lt 0 -or $lookupMirror.Substring($mirrorStart).TrimEnd([char[]]"`r`n") -cne $lookupBody) {
+$mirrorEnd = $lookupMirror.IndexOf('#endif', $mirrorStart)
+if ($mirrorStart -lt 0 -or $mirrorEnd -lt 0 -or $lookupMirror.Substring($mirrorStart, $mirrorEnd - $mirrorStart).TrimEnd([char[]]"`r`n") -cne $lookupBody) {
     throw 'Original class lookup mirror bodies are not byte-exact.'
 }
 Write-Output 'WOW_ORIGINAL_CLASS_LOOKUP_BYTE_MATCH'
 $mirror = [IO.File]::ReadAllText((Join-Path $root 'src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h'))
-$expected = (Slice $text '#define StringDuplicate TEXT_FN(StringDuplicate)' 'DWORD  APIENTRY SetClassLong') +
+$expected = (Slice $text 'BOOL GetClassInfo(' 'BOOL GetClassInfoEx(') +
+    (Slice $text '#define StringDuplicate TEXT_FN(StringDuplicate)' 'DWORD  APIENTRY SetClassLong') +
     (Slice $text 'ATOM TEXT_FN(RegisterClassExWOW)(' 'UINT RegisterClipboardFormat(') +
     (Slice $text 'BOOL UnregisterClass(' 'SHORT VkKeyScan(')
 # These selected functions have no comment delimiters inside string literals.
@@ -48,7 +50,11 @@ if ($mirror.IndexOf($correction) -lt 0 -or $mirror.IndexOf($correction) -ne $mir
 function Tokens([string]$value) {
     (($value -replace '(?s)/\*.*?\*/', '') -replace '//[^\r\n]*', '') -replace '\s+', ''
 }
-if ((Tokens ($mirror.Replace($correction, ''))) -cne (Tokens $expected)) {
+$shell = "#ifdef UNICODE`n#error Excluded unsupported Unicode class-client configuration`n#else`n#define IS_ANSI TRUE`n#undef _UNICODE`n#endif`n#line 14`n"
+$normalizedMirror = $mirror.Replace("`r`n", "`n")
+if (!$normalizedMirror.Contains($shell)) { throw 'Expected the original ANSI selection and excluded Unicode guard.' }
+$normalizedMirror = $normalizedMirror.Replace($shell, '')
+if ((Tokens ($normalizedMirror.Replace($correction.Replace("`r`n", "`n"), ''))) -cne (Tokens $expected)) {
     throw 'Class mirror differs from its original subset beyond the registered two frees.'
 }
 Write-Output 'WOW_CLASS_MIRROR_SOURCE_MATCH correction=2'

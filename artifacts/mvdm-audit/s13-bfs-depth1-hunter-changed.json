@@ -1,0 +1,350 @@
+{
+  "scope": "Four current x86 source units with actual product/reference compile chains and direct-including keyboard fixtures",
+  "product_contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "74d040039f92671ef0da05ba7d98b8ed652af4483f18dd982df06d8c227c4c5d",
+      "includes": 209,
+      "hunter_definitions": [],
+      "hunter_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "ffa1d65dac15a2b396e4febe9d1ae3c1ba4f04ab2856c85b943d1e3d8f66d28e",
+      "includes": 202,
+      "hunter_definitions": [],
+      "hunter_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "ba2914eefe3c74ad8beab9c336148eb097fd99612630757ec9c6ae441c0fcf38",
+      "includes": 188,
+      "hunter_definitions": [],
+      "hunter_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "source_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "includes": 192,
+      "hunter_definitions": [],
+      "hunter_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "74d040039f92671ef0da05ba7d98b8ed652af4483f18dd982df06d8c227c4c5d",
+      "includes": 209,
+      "hunter_definitions": [],
+      "hunter_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "ffa1d65dac15a2b396e4febe9d1ae3c1ba4f04ab2856c85b943d1e3d8f66d28e",
+      "includes": 202,
+      "hunter_definitions": [],
+      "hunter_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "ba2914eefe3c74ad8beab9c336148eb097fd99612630757ec9c6ae441c0fcf38",
+      "includes": 188,
+      "hunter_definitions": [],
+      "hunter_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "exit": 0,
+      "source_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "includes": 192,
+      "hunter_definitions": [],
+      "hunter_flags": [],
+      "errors": ""
+    }
+  ],
+  "fixture_contexts": [
+    {
+      "fixture": "tests/observation/keyba_observed.c",
+      "fixture_sha256": "c1f8f0137fdf3f222f95d294738c9a4c34a358469ac448a0e1f0718bd7c2d5fa",
+      "exit": 0,
+      "included_count": 203,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "source": [
+        "O:\\repos.hobby\\ntvdm64\\tests\\observation\\..\\..\\src\\mvdm-host\\softpc.new\\base\\keymouse\\keyba.c"
+      ],
+      "undef_hunter": [],
+      "flags_include_hunter": false
+    },
+    {
+      "fixture": "tests/observation/keyba_observed.c",
+      "fixture_sha256": "c1f8f0137fdf3f222f95d294738c9a4c34a358469ac448a0e1f0718bd7c2d5fa",
+      "exit": 0,
+      "included_count": 203,
+      "host_def": [
+        "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h"
+      ],
+      "source": [
+        "O:\\repos.hobby\\ntvdm64\\tests\\observation\\..\\..\\src\\mvdm-host\\softpc.new\\base\\keymouse\\keyba.c"
+      ],
+      "undef_hunter": [],
+      "flags_include_hunter": false
+    }
+  ],
+  "existing_exclusions": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "current_sha256": "74d040039f92671ef0da05ba7d98b8ed652af4483f18dd982df06d8c227c4c5d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "local_line": 865,
+      "local_end": 867,
+      "original_line": 1026,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "#ifdef LIM",
+        "#if !defined(SUN_VA) && !defined(NTVDM)",
+        "Temporary removal of LIM for SUN_VA until this issue is sorted out"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "current_sha256": "ffa1d65dac15a2b396e4febe9d1ae3c1ba4f04ab2856c85b943d1e3d8f66d28e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "local_line": 2398,
+      "local_end": 2400,
+      "original_line": 2668,
+      "preceding_anchor": [
+        "} /* end of translate_6805_8042 */",
+        "return (code);",
+        "}"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "current_sha256": "ffa1d65dac15a2b396e4febe9d1ae3c1ba4f04ab2856c85b943d1e3d8f66d28e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keyba.c",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "local_line": 2407,
+      "local_end": 2411,
+      "original_line": 2714,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "buffer_status_8042 IFN0()",
+        "{",
+        "if (!pending_8042 && !keyboard_interface_disabled && !output_full)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "ba2914eefe3c74ad8beab9c336148eb097fd99612630757ec9c6ae441c0fcf38",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_line": 77,
+      "local_end": 79,
+      "original_line": 77,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "#ifdef NTVDM",
+        "#include \"fla.h\"",
+        "#include \"nt_eoi.h\""
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "ba2914eefe3c74ad8beab9c336148eb097fd99612630757ec9c6ae441c0fcf38",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_line": 121,
+      "local_end": 123,
+      "original_line": 122,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "int timer_int_enabled;\t\t/* Whether Bios timer ints are required */",
+        "#define LATCH\t\t\t0",
+        "#define RL_LSB\t\t\t1"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "ba2914eefe3c74ad8beab9c336148eb097fd99612630757ec9c6ae441c0fcf38",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_line": 1666,
+      "local_end": 1668,
+      "original_line": 1816,
+      "preceding_anchor": [
+        "issueIREQ0(1);",
+        "else",
+        "issueIREQ0((unsigned int)wrap);"
+      ],
+      "following_anchor": [
+        "}",
+        "return;",
+        "case PROG_ONESHOT:"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "current_sha256": "ba2914eefe3c74ad8beab9c336148eb097fd99612630757ec9c6ae441c0fcf38",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "local_line": 1691,
+      "local_end": 1693,
+      "original_line": 1842,
+      "preceding_anchor": [
+        "}",
+        "#endif",
+        "RealTimeCountCounterZero = 0;"
+      ],
+      "following_anchor": [
+        "return;",
+        "}",
+        "}"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "local_line": 56,
+      "local_end": 58,
+      "original_line": 55,
+      "preceding_anchor": [
+        "#include \"pmvdm.h\"",
+        "#include \"oemuni.h\"",
+        "#endif"
+      ],
+      "following_anchor": [
+        "External references",
+        "================================================================*/",
+        "IMPORT SHORT gfi_floppy_active (UTINY hostID, BOOL active, CHAR *err);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "local_line": 67,
+      "local_end": 69,
+      "original_line": 68,
+      "preceding_anchor": [
+        "IMPORT ULONG xmsMemorySize;",
+        "IMPORT SHORT gfi_floppy_active (UTINY hostID, BOOL active, CHAR *err);",
+        "================================================================*/"
+      ],
+      "following_anchor": [
+        "PIF_DATA pfdata; /* data structure for holding all the relavent information",
+        "from the PIF file interrogated */",
+        "USHORT PIFExtendMemSize = 0;\t /* save value of extend mem from PIF file */"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "local_line": 276,
+      "local_end": 278,
+      "original_line": 319,
+      "preceding_anchor": [
+        "ULONG dpmiMemorySize, vdmMemorySize;",
+        "char    achPIF[] = \".pif\";",
+        "DWORD   dw;"
+      ],
+      "following_anchor": [
+        "Title[0] = '\\0';",
+        "if (!VDMForWOW)  {",
+        "if (!DosSessionId && !GetConsoleTitle(Title, MAX_PATH))"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "local_line": 654,
+      "local_end": 656,
+      "original_line": 707,
+      "preceding_anchor": [
+        "return ((VOID *)values->string);",
+        "strcpy(values->string, \"\\\\\\\\.\\\\$VDMLPT3\");",
+        "case C_VDMLPT3_NAME:"
+      ],
+      "following_anchor": [
+        "case C_COM_SYNCWRITE:",
+        "values->index = (short)read_profile_int(PROFILE_COM_SYNCWRITE);",
+        "return ((VOID *)values->index);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "local_line": 788,
+      "local_end": 790,
+      "original_line": 889,
+      "preceding_anchor": [
+        "}",
+        "}",
+        ";"
+      ],
+      "following_anchor": null,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "current_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "local_line": 798,
+      "local_end": 800,
+      "original_line": 978,
+      "preceding_anchor": null,
+      "following_anchor": [
+        "#define APPNAME \"Dos Emulation\"",
+        "struct { char *keyword; int def; } ProfileStrings[] =",
+        "{"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register."
+    }
+  ],
+  "limitations": "Unbuilt sources, unwitnessed headers and future configurations remain pending; no source rewrite."
+}

@@ -1,0 +1,26 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/config.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+  "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+  "original_top_level_start": 506,
+  "original_else_line": 509,
+  "local_start": 460,
+  "local_else_line_before": 463,
+  "before_sha256": "c2f51be50f0d73eb9623b5afa791995e029a1572520340fa160ba1321ab082e4",
+  "after_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+  "removed_body_sha256": "1783acc99ce40279413f481d4628bd95f4297b9daea566b50b40fb0e27f2b8f3",
+  "removed_body_lines": 2,
+  "body_matches_original_after_newline_normalization": true,
+  "condition": "(defined(i386) || defined(_M_IX86)) && !defined(CPU_40_STYLE)",
+  "proof": "selected worker and generated reference use CPU40/CCPU; no direct config.c inclusion in tests/source was found; no supported nonCPU40 worker is admitted",
+  "line_control": "#line 464 preserves the selected else first logical source line",
+  "registration": "MVDM-HOST-DIV-569",
+  "validation": {
+    "selected_x86_preprocess_nonblank_equal": true,
+    "raw_before_sha256": "77d940e76196c91a7cd06baac554e7a7c7fc09b99913ebd89c8b579b6db5f531",
+    "raw_after_sha256": "f4ee8463ac6d8ad0a8f7f7705c430206be9b93060d2c3d0defb6249763f323ea",
+    "x86_x64_guard_controls": "passed, selected line 464, nonCPU40 i386 error",
+    "worker_x86_object": "passed; warning lines 757, 898, 945 unchanged"
+  },
+  "test": "tests/build/test_bfs_depth1_cpu_guards.py"
+}

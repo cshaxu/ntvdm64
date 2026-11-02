@@ -187,10 +187,12 @@ BOOL SendVDMEvent(
  * Hopefully this is OK because it is fast.
  */
 #ifdef i386
-#define PX86    px86
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 192
 #define PX86    0
 #endif
+#line 194
 
 VOID GetNormalContext(
     LPVDMCONTEXT        lpvcContext,
@@ -198,10 +200,12 @@ VOID GetNormalContext(
     LPDWORD             lpdwExceptionParams,
     WORD                wEventType,
 #ifdef i386
-    PX86CONTEXT         px86
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 203
     DWORD               dw
 #endif
+#line 205
 ) {
     //
     // Everything defaults to 0.
@@ -237,32 +241,9 @@ VOID GetNormalContext(
     lpvcContext->EFlags = 0;            // BUGBUG - We need the 16-bit's Flags
 
 #ifdef i386
-    //
-    // On x86 systems, we really might have some data in the FS and GS
-    // registers.  Hopefully the code path through DOSX and KERNEL don't
-    // modify them (I traced it and it didn't seem to).  Here is where
-    // we attempt to recover them.
-    //
-    lpvcContext->SegGs = px86->SegGs;
-    lpvcContext->SegFs = px86->SegFs;
-
-    // On x86 systems, we really might have some data in the high words
-    // of the registers.  Hopefully the code path through DOSX and KERNEL
-    // don't modify them (I trace it and it didn't seem to).  Here is where
-    // we attempt to recover them.
-
-    lpvcContext->Edi    = MAKELONG(getDI(),    HIWORD(px86->Edi   ));
-    lpvcContext->Esi    = MAKELONG(getSI(),    HIWORD(px86->Esi   ));
-    lpvcContext->Ebx    = MAKELONG(getBX(),    HIWORD(px86->Ebx   ));
-    lpvcContext->Edx    = MAKELONG(getDX(),    HIWORD(px86->Edx   ));
-    lpvcContext->Ecx    = MAKELONG(getCX(),    HIWORD(px86->Ecx   ));
-    lpvcContext->Eax    = MAKELONG(getAX(),    HIWORD(px86->Eax   ));
-
-    lpvcContext->Ebp    = MAKELONG(getBP(),    HIWORD(px86->Ebp   ));
-    lpvcContext->Eip    = MAKELONG(getIP(),    HIWORD(px86->Eip   ));
-    lpvcContext->Esp    = MAKELONG(getSP(),    HIWORD(px86->Esp   ));
-
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 266
     // Leave GS & FS zero.
 
     lpvcContext->Edi = (ULONG)getDI();
@@ -282,6 +263,7 @@ VOID GetNormalContext(
 
     // BUGBUG initialize the GDT/LDT stuff for the emulator
 #endif
+#line 285
 }
 
 void SegmentLoad(
@@ -300,11 +282,9 @@ void SegmentLoad(
         SEGMENT_NOTE    se;
         UINT            length;
 #ifdef i386
-        PX86CONTEXT     px86;
-
-        // X86 Only, get pointer to Register Context Block
-        px86 = getIntelRegistersPointer();
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
+#line 308
 
         GetNormalContext( &vcContext, &viInfo, EventParams, DBG_SEGLOAD, PX86 );
 
@@ -345,11 +325,9 @@ void SegmentMove(
         VDMINTERNALINFO viInfo;
         SEGMENT_NOTE    se;
 #ifdef i386
-        PX86CONTEXT     px86;
-
-        // X86 Only, get pointer to Register Context Block
-        px86 = getIntelRegistersPointer();
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
+#line 353
 
         GetNormalContext( &vcContext, &viInfo, EventParams, DBG_SEGMOVE, PX86 );
 
@@ -375,11 +353,9 @@ void SegmentFree(
         VDMINTERNALINFO viInfo;
         SEGMENT_NOTE    se;
 #ifdef i386
-        PX86CONTEXT     px86;
-
-        // X86 Only, get pointer to Register Context Block
-        px86 = getIntelRegistersPointer();
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
+#line 383
 
         GetNormalContext( &vcContext, &viInfo, EventParams, DBG_SEGFREE, PX86 );
 
@@ -408,11 +384,9 @@ void ModuleLoad(
         SEGMENT_NOTE    se;
         UINT            length;
 #ifdef i386
-        PX86CONTEXT     px86;
-
-        // X86 Only, get pointer to Register Context Block
-        px86 = getIntelRegistersPointer();
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
+#line 416
 
         GetNormalContext( &vcContext, &viInfo, EventParams, DBG_MODLOAD, PX86 );
 
@@ -455,11 +429,9 @@ void ModuleSegmentMove(
         SEGMENT_NOTE    se;
         UINT            length;
 #ifdef i386
-        PX86CONTEXT     px86;
-
-        // X86 Only, get pointer to Register Context Block
-        px86 = getIntelRegistersPointer();
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
+#line 463
 
         GetNormalContext( &vcContext, &viInfo, EventParams, DBG_SEGMOVE, PX86 );
 
@@ -500,11 +472,9 @@ void ModuleFree(
         SEGMENT_NOTE    se;
         UINT            length;
 #ifdef i386
-        PX86CONTEXT     px86;
-
-        // X86 Only, get pointer to Register Context Block
-        px86 = getIntelRegistersPointer();
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
+#line 508
 
         GetNormalContext( &vcContext, &viInfo, EventParams, DBG_MODFREE, PX86 );
 
@@ -542,11 +512,9 @@ BOOL SingleStep(
         VDMCONTEXT      vcContext;
         VDMINTERNALINFO viInfo;
 #ifdef i386
-        PX86CONTEXT     px86;
-
-        // X86 Only, get pointer to Register Context Block
-        px86 = getIntelRegistersPointer();
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
+#line 550
 
         GetNormalContext( &vcContext, &viInfo, EventParams, DBG_SINGLESTEP, PX86 );
 
@@ -555,16 +523,9 @@ BOOL SingleStep(
         vcContext.SegSs  = (ULONG)pTFrame->wSS;
 
 #ifdef i386
-        //
-        // On x86 systems, we really might have some data in the high words
-        // of these registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-        // blow them away.  Here is where we attempt to recover them.
-        //
-        vcContext.Eax    = MAKELONG(pTFrame->wAX,   HIWORD(px86->Eax   ));
-        vcContext.Eip    = MAKELONG(pTFrame->wIP,   HIWORD(px86->Eip   ));
-        vcContext.Esp    = MAKELONG(pTFrame->wSP,   HIWORD(px86->Esp   ));
-        vcContext.EFlags = MAKELONG(pTFrame->wFlags,HIWORD(px86->EFlags));
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 568
         vcContext.Eax    = (ULONG)pTFrame->wAX;
 
         vcContext.Eip    = (ULONG)pTFrame->wIP;
@@ -575,20 +536,17 @@ BOOL SingleStep(
             vcContext.EFlags |= V86FLAGS_V86;
         }
 #endif
+#line 578
 
         fResult = SendVDMEvent( EventParams );
 
 #ifdef i386
-        //
-        // On x86 systems, we really might have some data in the FS and GS
-        // registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-        // blow them away.  Here is where we attempt to restore them.
-        //
-        px86->SegGs = vcContext.SegGs;
-        px86->SegFs = vcContext.SegFs;
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 590
         // No need to set FS,GS, they don't exist
 #endif
+#line 592
 
         setES( (WORD)vcContext.SegEs );
         pTFrame->wDS = (WORD)vcContext.SegDs;
@@ -596,31 +554,9 @@ BOOL SingleStep(
         pTFrame->wSS = (WORD)vcContext.SegSs;
 
 #ifdef i386
-        //
-        // On x86 systems, we really might have some data in the high words
-        // of these registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-        // blow them away.  Here is where we attempt to restore them.
-        //
-        setEDI( vcContext.Edi );
-        setESI( vcContext.Esi );
-        setEBX( vcContext.Ebx );
-        setEDX( vcContext.Edx );
-        setECX( vcContext.Ecx );
-
-        pTFrame->wAX = LOWORD(vcContext.Eax);
-        px86->Eax = MAKELONG(LOWORD(px86->Eax),HIWORD(vcContext.Eax));
-
-        setEBP( vcContext.Ebp );
-
-        pTFrame->wIP = LOWORD(vcContext.Eip);
-        px86->Eip = MAKELONG(LOWORD(px86->Eip),HIWORD(vcContext.Eip));
-
-        pTFrame->wFlags = LOWORD(vcContext.EFlags);
-        px86->EFlags = MAKELONG(LOWORD(px86->EFlags),HIWORD(vcContext.EFlags));
-
-        pTFrame->wSP = LOWORD(vcContext.Esp);
-        px86->Esp = MAKELONG(LOWORD(px86->Esp),HIWORD(vcContext.Esp));
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 624
         setDI( (WORD)vcContext.Edi );
         setSI( (WORD)vcContext.Esi );
         setBX( (WORD)vcContext.Ebx );
@@ -634,6 +570,7 @@ BOOL SingleStep(
         pTFrame->wFlags = (WORD)vcContext.EFlags;
         pTFrame->wSP    = (WORD)vcContext.Esp;
 #endif
+#line 637
     }
     return( fResult );
 }
@@ -650,11 +587,9 @@ BOOL Breakpoint(
         VDMCONTEXT      vcContext;
         VDMINTERNALINFO viInfo;
 #ifdef i386
-        PX86CONTEXT     px86;
-
-        // X86 Only, get pointer to Register Context Block
-        px86 = getIntelRegistersPointer();
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
+#line 658
 
         GetNormalContext( &vcContext, &viInfo, EventParams, DBG_BREAK, PX86 );
 
@@ -663,17 +598,9 @@ BOOL Breakpoint(
         vcContext.SegSs  = (ULONG)pTFrame->wSS;
 
 #ifdef i386
-        //
-        // On x86 systems, we really might have some data in the high words
-        // of these registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-        // blow them away.  Here is where we attempt to recover them.
-        //
-        vcContext.Eax    = MAKELONG(pTFrame->wAX,   HIWORD(px86->Eax   ));
-
-        vcContext.Eip    = MAKELONG(pTFrame->wIP,   HIWORD(px86->Eip   ));
-        vcContext.Esp    = MAKELONG(pTFrame->wSP,   HIWORD(px86->Esp   ));
-        vcContext.EFlags = MAKELONG(pTFrame->wFlags,HIWORD(px86->EFlags));
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 677
         vcContext.Eax    = (ULONG)pTFrame->wAX;
 
         vcContext.Ebp    = (ULONG)getBP();
@@ -685,20 +612,17 @@ BOOL Breakpoint(
             vcContext.EFlags |= V86FLAGS_V86;
         }
 #endif
+#line 688
 
         fResult = SendVDMEvent( EventParams );
 
 #ifdef i386
-        //
-        // On x86 systems, we really might have some data in the FS and GS
-        // registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-        // blow them away.  Here is where we attempt to restore them.
-        //
-        px86->SegGs = (WORD)vcContext.SegGs;
-        px86->SegFs = (WORD)vcContext.SegFs;
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 700
         // No need to set FS,GS, they don't exist
 #endif
+#line 702
 
         setES( (WORD)vcContext.SegEs );
         pTFrame->wDS = (WORD)vcContext.SegDs;
@@ -706,31 +630,9 @@ BOOL Breakpoint(
         pTFrame->wSS = (WORD)vcContext.SegSs;
 
 #ifdef i386
-        //
-        // On x86 systems, we really might have some data in the high words
-        // of these registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-        // blow them away.  Here is where we attempt to restore them.
-        //
-        setEDI( vcContext.Edi );
-        setESI( vcContext.Esi );
-        setEBX( vcContext.Ebx );
-        setEDX( vcContext.Edx );
-        setECX( vcContext.Ecx );
-
-        pTFrame->wAX = LOWORD(vcContext.Eax);
-        px86->Eax = MAKELONG(LOWORD(px86->Eax),HIWORD(vcContext.Eax));
-
-        setEBP( vcContext.Ebp );
-
-        pTFrame->wIP = LOWORD(vcContext.Eip);
-        px86->Eip = MAKELONG(LOWORD(px86->Eip),HIWORD(vcContext.Eip));
-
-        pTFrame->wFlags = LOWORD(vcContext.EFlags);
-        px86->EFlags = MAKELONG(LOWORD(px86->EFlags),HIWORD(vcContext.EFlags));
-
-        pTFrame->wSP = LOWORD(vcContext.Esp);
-        px86->Esp = MAKELONG(LOWORD(px86->Esp),HIWORD(vcContext.Esp));
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 734
         setDI( (WORD)vcContext.Edi );
         setSI( (WORD)vcContext.Esi );
         setBX( (WORD)vcContext.Ebx );
@@ -744,6 +646,7 @@ BOOL Breakpoint(
         pTFrame->wFlags = (WORD)vcContext.EFlags;
         pTFrame->wSP    = (WORD)vcContext.Esp;
 #endif
+#line 747
 
     }
 
@@ -758,16 +661,16 @@ BOOL GPFault(
     VDMCONTEXT      vcContext;
     VDMINTERNALINFO viInfo;
 #ifdef i386
-    PX86CONTEXT     px86;
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
+#line 763
 
     fResult = FALSE;        // Default to Event not handled
 
 #ifdef i386
-
-    // X86 Only, get pointer to Register Context Block
-    px86 = getIntelRegistersPointer();
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
+#line 771
 
     GetNormalContext( &vcContext, &viInfo, EventParams, DBG_GPFAULT, PX86 );
 
@@ -777,23 +680,9 @@ BOOL GPFault(
     vcContext.SegSs = (ULONG)pFFrame->wSS;
 
 #ifdef i386
-    //
-    // On x86 systems, we really might have some data in the high words
-    // of these registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-    // blow them away.  Here is where we attempt to recover them.
-    //
-    vcContext.Edi    = MAKELONG(pFFrame->wDI,   HIWORD(px86->Edi   ));
-    vcContext.Esi    = MAKELONG(pFFrame->wSI,   HIWORD(px86->Esi   ));
-    vcContext.Ebx    = MAKELONG(pFFrame->wBX,   HIWORD(px86->Ebx   ));
-    vcContext.Edx    = MAKELONG(pFFrame->wDX,   HIWORD(px86->Edx   ));
-    vcContext.Ecx    = MAKELONG(pFFrame->wCX,   HIWORD(px86->Ecx   ));
-    vcContext.Eax    = MAKELONG(pFFrame->wAX,   HIWORD(px86->Eax   ));
-
-    vcContext.Ebp    = MAKELONG(pFFrame->wBP,   HIWORD(px86->Ebp   ));
-    vcContext.Eip    = MAKELONG(pFFrame->wIP,   HIWORD(px86->Eip   ));
-    vcContext.Esp    = MAKELONG(pFFrame->wSP,   HIWORD(px86->Esp   ));
-    vcContext.EFlags = MAKELONG(pFFrame->wFlags,HIWORD(px86->EFlags));
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 797
     vcContext.Edi    = (ULONG)pFFrame->wDI;
     vcContext.Esi    = (ULONG)pFFrame->wSI;
     vcContext.Ebx    = (ULONG)pFFrame->wBX;
@@ -810,6 +699,7 @@ BOOL GPFault(
         vcContext.EFlags |= V86FLAGS_V86;
     }
 #endif
+#line 813
 
     if ( fDebugged ) {
         fResult = SendVDMEvent( EventParams );
@@ -870,16 +760,12 @@ BOOL GPFault(
     }
 
 #ifdef i386
-    //
-    // On x86 systems, we really might have some data in the FS and GS
-    // registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-    // blow them away.  Here is where we attempt to restore them.
-    //
-    px86->SegGs = (WORD)vcContext.SegGs;
-    px86->SegFs = (WORD)vcContext.SegFs;
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 881
     // No need to set FS,GS, they don't exist
 #endif
+#line 883
 
     pFFrame->wES = (WORD)vcContext.SegEs;
     pFFrame->wDS = (WORD)vcContext.SegDs;
@@ -887,41 +773,9 @@ BOOL GPFault(
     pFFrame->wSS = (WORD)vcContext.SegSs;
 
 #ifdef i386
-    //
-    // On x86 systems, we really might have some data in the high words
-    // of these registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-    // blow them away.  Here is where we attempt to restore them.
-    //
-    pFFrame->wDI = LOWORD(vcContext.Edi);
-    px86->Edi = MAKELONG(LOWORD(px86->Edi),HIWORD(vcContext.Edi));
-
-    pFFrame->wSI = LOWORD(vcContext.Esi);
-    px86->Esi = MAKELONG(LOWORD(px86->Esi),HIWORD(vcContext.Esi));
-
-    pFFrame->wBX = LOWORD(vcContext.Ebx);
-    px86->Ebx = MAKELONG(LOWORD(px86->Ebx),HIWORD(vcContext.Ebx));
-
-    pFFrame->wDX = LOWORD(vcContext.Edx);
-    px86->Edx = MAKELONG(LOWORD(px86->Edx),HIWORD(vcContext.Edx));
-
-    pFFrame->wCX = LOWORD(vcContext.Ecx);
-    px86->Ecx = MAKELONG(LOWORD(px86->Ecx),HIWORD(vcContext.Ecx));
-
-    pFFrame->wAX = LOWORD(vcContext.Eax);
-    px86->Eax = MAKELONG(LOWORD(px86->Eax),HIWORD(vcContext.Eax));
-
-    pFFrame->wBP = LOWORD(vcContext.Ebp);
-    px86->Ebp = MAKELONG(LOWORD(px86->Ebp),HIWORD(vcContext.Ebp));
-
-    pFFrame->wIP = LOWORD(vcContext.Eip);
-    px86->Eip = MAKELONG(LOWORD(px86->Eip),HIWORD(vcContext.Eip));
-
-    pFFrame->wFlags = LOWORD(vcContext.EFlags);
-    px86->EFlags = MAKELONG(LOWORD(px86->EFlags),HIWORD(vcContext.EFlags));
-
-    pFFrame->wSP = LOWORD(vcContext.Esp);
-    px86->Esp = MAKELONG(LOWORD(px86->Esp),HIWORD(vcContext.Esp));
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 925
     pFFrame->wDI = (WORD)vcContext.Edi;
     pFFrame->wSI = (WORD)vcContext.Esi;
     pFFrame->wBX = (WORD)vcContext.Ebx;
@@ -935,6 +789,7 @@ BOOL GPFault(
     pFFrame->wFlags = (WORD)vcContext.EFlags;
     pFFrame->wSP = (WORD)vcContext.Esp;
 #endif
+#line 938
 
     return( fResult );
 }
@@ -951,11 +806,9 @@ BOOL DivOverflow(
         VDMCONTEXT      vcContext;
         VDMINTERNALINFO viInfo;
 #ifdef i386
-        PX86CONTEXT     px86;
-
-        // X86 Only, get pointer to Register Context Block
-        px86 = getIntelRegistersPointer();
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
+#line 959
 
         GetNormalContext( &vcContext, &viInfo, EventParams, DBG_DIVOVERFLOW, PX86 );
 
@@ -964,16 +817,9 @@ BOOL DivOverflow(
         vcContext.SegSs = (ULONG)pTFrame->wSS;
 
 #ifdef i386
-        //
-        // On x86 systems, we really might have some data in the high words
-        // of these registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-        // blow them away.  Here is where we attempt to recover them.
-        //
-        vcContext.Eax    = MAKELONG(pTFrame->wAX,   HIWORD(px86->Eax   ));
-        vcContext.Eip    = MAKELONG(pTFrame->wIP,   HIWORD(px86->Eip   ));
-        vcContext.Esp    = MAKELONG(pTFrame->wSP,   HIWORD(px86->Esp   ));
-        vcContext.EFlags = MAKELONG(pTFrame->wFlags,HIWORD(px86->EFlags));
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 977
         vcContext.Eax    = (ULONG)pTFrame->wAX;
 
         vcContext.Eip    = (ULONG)pTFrame->wIP;
@@ -984,20 +830,17 @@ BOOL DivOverflow(
             vcContext.EFlags |= V86FLAGS_V86;
         }
 #endif
+#line 987
 
         fResult = SendVDMEvent( EventParams );
 
 #ifdef i386
-        //
-        // On x86 systems, we really might have some data in the FS and GS
-        // registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-        // blow them away.  Here is where we attempt to restore them.
-        //
-        px86->SegGs = vcContext.SegGs;
-        px86->SegFs = vcContext.SegFs;
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 999
         // No need to set FS,GS, they don't exist
 #endif
+#line 1001
 
         setES( (WORD)vcContext.SegEs );
         pTFrame->wDS = (WORD)vcContext.SegDs;
@@ -1005,31 +848,9 @@ BOOL DivOverflow(
         pTFrame->wSS = (WORD)vcContext.SegSs;
 
 #ifdef i386
-        //
-        // On x86 systems, we really might have some data in the high words
-        // of these registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-        // blow them away.  Here is where we attempt to restore them.
-        //
-        setEDI( vcContext.Edi );
-        setESI( vcContext.Esi );
-        setEBX( vcContext.Ebx );
-        setEDX( vcContext.Edx );
-        setECX( vcContext.Ecx );
-
-        pTFrame->wAX = LOWORD(vcContext.Eax);
-        px86->Eax = MAKELONG(LOWORD(px86->Eax),HIWORD(vcContext.Eax));
-
-        setEBP( vcContext.Ebp );
-
-        pTFrame->wIP = LOWORD(vcContext.Eip);
-        px86->Eip = MAKELONG(LOWORD(px86->Eip),HIWORD(vcContext.Eip));
-
-        pTFrame->wFlags = LOWORD(vcContext.EFlags);
-        px86->EFlags = MAKELONG(LOWORD(px86->EFlags),HIWORD(vcContext.EFlags));
-
-        pTFrame->wSP = LOWORD(vcContext.Esp);
-        px86->Esp = MAKELONG(LOWORD(px86->Esp),HIWORD(vcContext.Esp));
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 1033
         setDI( (WORD)vcContext.Edi );
         setSI( (WORD)vcContext.Esi );
         setBX( (WORD)vcContext.Ebx );
@@ -1043,6 +864,7 @@ BOOL DivOverflow(
         pTFrame->wFlags = (WORD)vcContext.EFlags;
         pTFrame->wSP    = (WORD)vcContext.Esp;
 #endif
+#line 1046
 
 
     }
@@ -1068,11 +890,9 @@ BOOL DllStart(
         VDMINTERNALINFO viInfo;
         IMAGE_NOTE      im;
 #ifdef i386
-        PX86CONTEXT     px86;
-
-        // X86 Only, get pointer to Register Context Block
-        px86 = getIntelRegistersPointer();
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
+#line 1076
 
         GetNormalContext( &vcContext, &viInfo, EventParams, DBG_DLLSTART, PX86 );
 
@@ -1082,15 +902,9 @@ BOOL DllStart(
         vcContext.SegCs = (ULONG)pNDFrame->wCS;
 
 #ifdef i386
-        //
-        // On x86 systems, we really might have some data in the high words
-        // of these registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-        // blow them away.  Here is where we attempt to recover them.
-        //
-        vcContext.Eax    = MAKELONG(pNDFrame->wAX,   HIWORD(px86->Eax   ));
-        vcContext.Eip    = MAKELONG(pNDFrame->wIP,   HIWORD(px86->Eip   ));
-        vcContext.EFlags = MAKELONG(pNDFrame->wFlags,HIWORD(px86->EFlags));
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 1094
         vcContext.Eax    = (ULONG)pNDFrame->wAX;
         vcContext.Eip    = (ULONG)pNDFrame->wIP;
         vcContext.EFlags = (ULONG)pNDFrame->wFlags;
@@ -1099,6 +913,7 @@ BOOL DllStart(
             vcContext.EFlags |= V86FLAGS_V86;
         }
 #endif
+#line 1102
 
         // The code in TASK.ASM pops the frame off the stack before it IRETs
         vcContext.Esp += sizeof(NDFRAME16);
@@ -1138,16 +953,12 @@ BOOL DllStart(
         vcContext.Esp -= sizeof(NDFRAME16);
 
 #ifdef i386
-        //
-        // On x86 systems, we really might have some data in the FS and GS
-        // registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-        // blow them away.  Here is where we attempt to restore them.
-        //
-        px86->SegGs = vcContext.SegGs;
-        px86->SegFs = vcContext.SegFs;
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 1149
         // No need to set FS,GS, they don't exist
 #endif
+#line 1151
 
         setES( (WORD)vcContext.SegEs );
         pNDFrame->wDS = (WORD)vcContext.SegDs;
@@ -1155,30 +966,9 @@ BOOL DllStart(
         setSS( (WORD)vcContext.SegSs );
 
 #ifdef i386
-        //
-        // On x86 systems, we really might have some data in the high words
-        // of these registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-        // blow them away.  Here is where we attempt to restore them.
-        //
-        setEDI( vcContext.Edi );
-        setESI( vcContext.Esi );
-        setEBX( vcContext.Ebx );
-        setEDX( vcContext.Edx );
-        setECX( vcContext.Ecx );
-
-        pNDFrame->wAX = LOWORD(vcContext.Eax);
-        px86->Eax = MAKELONG(LOWORD(px86->Eax),HIWORD(vcContext.Eax));
-
-        setEBP( vcContext.Ebp );
-
-        pNDFrame->wIP = LOWORD(vcContext.Eip);
-        px86->Eip = MAKELONG(LOWORD(px86->Eip),HIWORD(vcContext.Eip));
-
-        pNDFrame->wFlags = LOWORD(vcContext.EFlags);
-        px86->EFlags = MAKELONG(LOWORD(px86->EFlags),HIWORD(vcContext.EFlags));
-
-        setESP( vcContext.Esp );
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 1182
         setDI( (WORD)vcContext.Edi );
         setSI( (WORD)vcContext.Esi );
         setBX( (WORD)vcContext.Ebx );
@@ -1193,6 +983,7 @@ BOOL DllStart(
 
         setSP( (WORD)vcContext.Esp );
 #endif
+#line 1196
 
 
     }
@@ -1218,11 +1009,9 @@ BOOL TaskStop(
         VDMINTERNALINFO viInfo;
         IMAGE_NOTE      im;
 #ifdef i386
-        PX86CONTEXT     px86;
-
-        // X86 Only, get pointer to Register Context Block
-        px86 = getIntelRegistersPointer();
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
+#line 1226
 
         GetNormalContext( &vcContext, &viInfo, EventParams, DBG_TASKSTOP, PX86 );
 
@@ -1525,11 +1314,9 @@ VOID DBGNotifyNewTask(
         VDMINTERNALINFO viInfo;
         IMAGE_NOTE      im;
 #ifdef i386
-        PX86CONTEXT     px86;
-
-        // X86 Only, get pointer to Register Context Block
-        px86 = getIntelRegistersPointer();
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
+#line 1533
 
         GetNormalContext( &vcContext, &viInfo, EventParams, DBG_TASKSTART, PX86 );
 
@@ -1540,23 +1327,9 @@ VOID DBGNotifyNewTask(
         vcContext.SegCs = (ULONG)pNTFrame->wCS;
 
 #ifdef i386
-        //
-        // On x86 systems, we really might have some data in the high words
-        // of these registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-        // blow them away.  Here is where we attempt to recover them.
-        //
-        vcContext.Edi    = MAKELONG(pNTFrame->wDI,   HIWORD(px86->Edi   ));
-        vcContext.Esi    = MAKELONG(pNTFrame->wSI,   HIWORD(px86->Esi   ));
-        vcContext.Ebx    = MAKELONG(pNTFrame->wBX,   HIWORD(px86->Ebx   ));
-        vcContext.Edx    = MAKELONG(pNTFrame->wDX,   HIWORD(px86->Edx   ));
-        vcContext.Ecx    = MAKELONG(pNTFrame->wCX,   HIWORD(px86->Ecx   ));
-        vcContext.Eax    = MAKELONG(pNTFrame->wAX,   HIWORD(px86->Eax   ));
-
-        vcContext.Ebp    = MAKELONG(pNTFrame->wBP,   HIWORD(px86->Ebp   ));
-        vcContext.Eip    = MAKELONG(pNTFrame->wIP,   HIWORD(px86->Eip   ));
-        vcContext.EFlags = MAKELONG(pNTFrame->wFlags,HIWORD(px86->EFlags));
-
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 1560
         vcContext.Edi    = (ULONG)pNTFrame->wDI;
         vcContext.Esi    = (ULONG)pNTFrame->wSI;
         vcContext.Ebx    = (ULONG)pNTFrame->wBX;
@@ -1572,6 +1345,7 @@ VOID DBGNotifyNewTask(
             vcContext.EFlags |= V86FLAGS_V86;
         }
 #endif
+#line 1575
         // The code in TASKING.ASM does a dec bp before the IRET
         vcContext.Ebp -= 1;
         // The code copies frame off the stack then IRETs
@@ -1613,16 +1387,12 @@ VOID DBGNotifyNewTask(
         vcContext.Esp -= sizeof(NTFRAME16) + uFrameSize;
 
 #ifdef i386
-        //
-        // On x86 systems, we really might have some data in the FS and GS
-        // registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-        // blow them away.  Here is where we attempt to restore them.
-        //
-        px86->SegGs = vcContext.SegGs;
-        px86->SegFs = vcContext.SegFs;
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 1624
         // No need to set FS,GS, they don't exist
 #endif
+#line 1626
 
         pNTFrame->wES = (WORD)vcContext.SegEs;
         pNTFrame->wDS = (WORD)vcContext.SegDs;
@@ -1630,40 +1400,9 @@ VOID DBGNotifyNewTask(
         setSS( (WORD)vcContext.SegSs );
 
 #ifdef i386
-        //
-        // On x86 systems, we really might have some data in the high words
-        // of these registers.  Hopefully DOSX.EXE and KRNL286.EXE don't
-        // blow them away.  Here is where we attempt to restore them.
-        //
-        pNTFrame->wDI = LOWORD(vcContext.Edi);
-        px86->Edi = MAKELONG(LOWORD(px86->Edi),HIWORD(vcContext.Edi));
-
-        pNTFrame->wSI = LOWORD(vcContext.Esi);
-        px86->Esi = MAKELONG(LOWORD(px86->Esi),HIWORD(vcContext.Esi));
-
-        pNTFrame->wBX = LOWORD(vcContext.Ebx);
-        px86->Ebx = MAKELONG(LOWORD(px86->Ebx),HIWORD(vcContext.Ebx));
-
-        pNTFrame->wDX = LOWORD(vcContext.Edx);
-        px86->Edx = MAKELONG(LOWORD(px86->Edx),HIWORD(vcContext.Edx));
-
-        pNTFrame->wCX = LOWORD(vcContext.Ecx);
-        px86->Ecx = MAKELONG(LOWORD(px86->Ecx),HIWORD(vcContext.Ecx));
-
-        pNTFrame->wAX = LOWORD(vcContext.Eax);
-        px86->Eax = MAKELONG(LOWORD(px86->Eax),HIWORD(vcContext.Eax));
-
-        pNTFrame->wBP = LOWORD(vcContext.Ebp);
-        px86->Ebp = MAKELONG(LOWORD(px86->Ebp),HIWORD(vcContext.Ebp));
-
-        pNTFrame->wIP = LOWORD(vcContext.Eip);
-        px86->Eip = MAKELONG(LOWORD(px86->Eip),HIWORD(vcContext.Eip));
-
-        pNTFrame->wFlags = LOWORD(vcContext.EFlags);
-        px86->EFlags = MAKELONG(LOWORD(px86->EFlags),HIWORD(vcContext.EFlags));
-
-        setESP( vcContext.Esp );
+#error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
+#line 1667
         pNTFrame->wDI    = (WORD)vcContext.Edi;
         pNTFrame->wSI    = (WORD)vcContext.Esi;
         pNTFrame->wBX    = (WORD)vcContext.Ebx;
@@ -1678,6 +1417,7 @@ VOID DBGNotifyNewTask(
 
         setSP( (WORD)vcContext.Esp );
 #endif
+#line 1681
 
 
     }

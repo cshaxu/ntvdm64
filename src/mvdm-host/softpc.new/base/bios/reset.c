@@ -19,12 +19,12 @@
 ]*/
 
 #ifdef SEGMENTATION
-/*
- * The following #include specifies the code segment into which this
- * module will by placed by the MPW C compiler on the Mac II running
- * MultiFinder.
- */
-#include "SOFTPC_INIT.seg"
+#error Excluded unsupported SEGMENTATION configuration
+
+
+
+
+
 #endif
 
 
@@ -114,7 +114,7 @@ IMPORT void DPMI_reset IPT0();
 #endif /* GISP_SVGA */
 
 #if	defined(DELTA) && defined(A2CPU)
-extern	void	reset_delta_data_structures();
+#error Excluded unsupported A2CPU configuration
 #endif /* DELTA && A2CPU */
 
 /*
@@ -373,129 +373,9 @@ GLOBAL CHAR *get_copyright IFN0()
 
 
 #ifndef PROD
-LOCAL void announce_variant IFN0()
-{
-	CHAR	buff[4*80], *p;
-
-	strcpy (buff, "Non-PROD build variant:");
-
-#if defined(CPU_30_STYLE) && !defined(CPU_40_STYLE)
-#error Excluded original CPU_30_STYLE branch
-#endif /* CPU_30_STYLE && ! CPU_40_STYLE*/
-#line 382
-
-#ifdef CPU_40_STYLE
-	strcat (buff, " CPU_40_STYLE");
-#endif /* CPU_40_STYLE */
-
-#ifdef CCPU
-	strcat (buff, " CCPU");
-#endif /* CCPU */
-
-#ifdef A2CPU
-#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.
-#endif /* A2CPU */
-
-#ifdef A3CPU
-#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
-#endif /* A3CPU */
-
-#ifdef GISP_CPU
-#error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
-#endif /* GISP_CPU */
-
-#if (defined(SPC386) && !defined(SPC486))
-	strcat( buff , " SPC386" );
-#endif /* SPC386 && !SPC486 */
-
-#ifdef SPC486
-	strcat( buff , " SPC486" );
-#endif /* SPC486 */
-
-#ifdef PIG
-#error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
-#endif /* PIG */
-
-#ifdef A_VID
-#error DIVERGENCE MVDM-HOST-DIV-535: A_VID branch is not selected; see mirror register.
-#endif /* A_VID */
-
-#ifdef C_VID
-	strcat (buff, " C_VID");
-#endif /* C_VID */
-
-#ifdef MSWDVR
-	strcat( buff , " MSWDVR" );
-#endif /* MSWDVR */
-
-#ifdef BACK_M
-#error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
-#endif /* BACK_M */
-
-#ifdef GISP_SVGA
-#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
-#endif /* GISP_SVGA */
-
-#ifdef DPMI
-	strcat( buff , " DPMI" );
-#endif /* DPMI */
-
-#ifdef IRET_HOOKS
-#error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
-#endif /* IRET_HOOKS */
-
-#ifdef SECURE
-#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
-#endif
-
-#ifdef SYNCH_TIMERS
-#error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
-#endif
-
-	p = buff;
-	while (strlen(p) >= 80)
-	{
-		while( *(--p) != ' ' )
-			;
-		*p++ = (char)0xFF;	/* Mark last space on line */
-	}
-	p = buff;
-	while(*p != '\0')
-	{
-		if( (IU8)*p == 0xFF )		/* Marker from above */
-		{
-			setAH( 14 );
-			setAL( VD_CR );
-			bop(BIOS_VIDEO_IO);
-			setAH( 14 );
-			setAL( VD_LF );
-			bop(BIOS_VIDEO_IO);
-		}
-		else
-		{
-			setAH(14);
-			setAL(*p);
-			bop(BIOS_VIDEO_IO);
-		}
-
-		p++;
-	}
-
-	/*
-	 * Set the cursor to the next line
-	 */
-
-	setAH(14);
-	setAL(0xd);
-	bop(BIOS_VIDEO_IO);
-	setAH(14);
-	setAL(0xa);
-	bop(BIOS_VIDEO_IO);
-	setAH(14);
-	setAL(0xa);
-	bop(BIOS_VIDEO_IO);
-}
+#error DIVERGENCE MVDM-HOST-DIV-590: non-PROD branch is not selected
 #endif /* PROD */
+#line 499
 
 void reset()
 {
@@ -603,12 +483,12 @@ void reset()
 				setAX(temp_word);
 				user_stack += 2;
 				sas_loadw(user_stack, &temp_word);
+#ifndef CPU_30_STYLE
 #if !defined(CPU_40_STYLE)
-				/* DIVERGENCE(MVDM-HOST-DIV-265): DOSX built this IRET
-				 * continuation as DXCODE:enrm50.  CPU40 starts at live EIP,
-				 * so it must enter that ordinary guest instruction directly. */
+				/* DIVERGENCE(MVDM-HOST-DIV-265): CPU40 enters DXCODE:enrm50 directly. */
 				temp_word = temp_word + HOST_BOP_IP_FUDGE;
 #endif /* !CPU_40_STYLE */
+#endif /* CPU_30_STYLE */
 				setIP(temp_word);
 				user_stack += 2;
 				sas_loadw(user_stack, &temp_word);
@@ -670,11 +550,11 @@ void reset()
 		
 			    /* fake up jump to indicated point */
 			    sas_loadw(effective_addr(BIOS_VAR_SEGMENT, IO_ROM_INIT), &temp_word);
-#if !defined(CPU_40_STYLE)
-			    /* DIVERGENCE(MVDM-HOST-DIV-265): DOSX stored the direct
-			     * DXCODE:enrm45 jump target.  It is not a BOP address. */
+#ifndef CPU_30_STYLE
+#if !defined(CPU_40_STYLE) /* DIVERGENCE(MVDM-HOST-DIV-265): direct enrm45 */
 			    temp_word = temp_word + HOST_BOP_IP_FUDGE;
 #endif /* !CPU_40_STYLE */
+#endif /* CPU_30_STYLE */
 			    setIP(temp_word);
 			    sas_loadw(effective_addr(BIOS_VAR_SEGMENT, IO_ROM_SEG), &temp_word);
 			    setCS(temp_word);
@@ -819,82 +699,9 @@ void reset()
 #endif /* SWIN_SNDBLST_NULL */
 
 #ifndef NTVDM	/* No signon for NTVDM - transparent integration */
-	if (soft_reset == 0) 
-	{
-		sprintf(temp_str,"%d KB OK", sas_w_at(MEMORY_VAR)
-			+ ((sas_memory_size()/1024) - 1024));
-
-		cp = temp_str;
-		while(*cp != '\0')
-		{
-			setAH(14);
-			setAL(*cp++);
-			bop(BIOS_VIDEO_IO);
-		}
-
-		/* Set the cursor to the next line */
-		setAH(14);
-		setAL(0xd);
-		bop(BIOS_VIDEO_IO);
-		setAH(14);
-		setAL(0xa);
-		bop(BIOS_VIDEO_IO);
-		setAH(14);
-		setAL(0xa);
-		bop(BIOS_VIDEO_IO);
-	}
-
-	/*
-	 * Print Insignia Copyright and Version No.
-	 *
-	 * was in bios as:
-	 *	p = &M[COPYRIGHT_ADDR];
-	 * but this is a pain to change so call host routine that can be easily
-	 * changed. host_get_(Mr)_Copyright()
-	 */
-	cp = get_copyright();
-	while(*cp != '\0')
-	{
-		setAH(14);
-		setAL(*cp++);
-		bop(BIOS_VIDEO_IO);
-	}
-
-	cp = host_get_copyright();
-	if (*cp)
-	{
-		while(*cp != '\0')
-		{
-			setAH(14);
-			setAL(*cp++);
-			bop(BIOS_VIDEO_IO);
-		}
-		setAH(14);
-		setAL(0xd);	/* carriage return feed */
-		bop(BIOS_VIDEO_IO);
-		setAH(14);
-		setAL(0xa);	/* line feed */
-		bop(BIOS_VIDEO_IO);
-	}
-
-#ifdef LICENSING
-#error DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register.
-#endif /* LICENSING */
-
-	/* skip another 1 line */
-	setAH(14);
-	setAL(0xa);	/* line feed */
-	bop(BIOS_VIDEO_IO);
-
-	/*
-	 * Print a line in a non-PROD build to give the developer a clue what
-	 * sort of a SoftPC they are running.
-	 */
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif /* PROD */
-
+#error Excluded unsupported non-NTVDM BIOS signon profile
 #endif	/* NTVDM */
+#line 898
 
 	/* Now search for extra ROM modules */
 	search_for_roms();
@@ -928,7 +735,7 @@ void reset()
 #endif /* PRINTER */
 
 #if	defined(DELTA) && defined(A2CPU)
-	reset_delta_data_structures();
+#error Excluded unsupported A2CPU configuration
 #endif /* DELTA && A2CPU */
 
 #ifdef SOFTWIN_API

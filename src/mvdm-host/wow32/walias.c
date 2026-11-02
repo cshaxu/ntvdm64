@@ -23,8 +23,9 @@ MODNAME(walias.c);
 #endif
 
 #ifdef  DEBUG
-extern  BOOL fSkipLog;          // TRUE to temporarily skip certain logging
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 28
 
 typedef struct _stdclass {
     LPSTR   lpszClassName;
@@ -271,139 +272,9 @@ PWC FindClass16(LPCSTR pszClass, HAND16 hInst)
 
 
 #ifdef DEBUG
-
-INT nAliases;
-INT iLargestListSlot;
-
-PSZ apszHandleClasses[] = {
-    "Unknown",      // WOWCLASS_UNKNOWN
-    "Window",       // WOWCLASS_WIN16
-    "Button",       // WOWCLASS_BUTTON
-    "ComboBox",     // WOWCLASS_COMBOBOX
-    "Edit",         // WOWCLASS_EDIT
-    "ListBox",      // WOWCLASS_LISTBOX
-    "MDIClient",    // WOWCLASS_MDICLIENT
-    "Scrollbar",    // WOWCLASS_SCROLLBAR
-    "Static",       // WOWCLASS_STATIC
-    "Desktop",      // WOWCLASS_DESKTOP
-    "Dialog",       // WOWCLASS_DIALOG
-    "Menu",         // WOWCLASS_MENU
-    "IconTitle",    // WOWCLASS_ICONTITLE
-    "Accel",        // WOWCLASS_ACCEL
-    "Cursor",       // WOWCLASS_CURSOR
-    "Icon",         // WOWCLASS_ICON
-    "DC",           // WOWCLASS_DC
-    "Font",         // WOWCLASS_FONT
-    "MetaFile",     // WOWCLASS_METAFILE
-    "Region",       // WOWCLASS_RGN
-    "Bitmap",       // WOWCLASS_BITMAP
-    "Brush",        // WOWCLASS_BRUSH
-    "Palette",      // WOWCLASS_PALETTE
-    "Pen",          // WOWCLASS_PEN
-    "Object"        // WOWCLASS_OBJECT
-};
-
-
-BOOL MessageNeedsThunking(UINT uMsg)
-{
-    switch (uMsg) {
-        case WM_CREATE:
-        case WM_ACTIVATE:
-        case WM_SETFOCUS:
-        case WM_KILLFOCUS:
-        case WM_SETTEXT:
-        case WM_GETTEXT:
-        case WM_ERASEBKGND:
-        case WM_WININICHANGE:
-        case WM_DEVMODECHANGE:
-        case WM_ACTIVATEAPP:
-        case WM_SETCURSOR:
-        case WM_MOUSEACTIVATE:
-        case WM_GETMINMAXINFO:
-        case WM_ICONERASEBKGND:
-        case WM_NEXTDLGCTL:
-        case WM_DRAWITEM:
-        case WM_MEASUREITEM:
-        case WM_DELETEITEM:
-        case WM_VKEYTOITEM:
-        case WM_CHARTOITEM:
-        case WM_SETFONT:
-        case WM_GETFONT:
-        case WM_QUERYDRAGICON:
-        case WM_COMPAREITEM:
-        case WM_OTHERWINDOWCREATED:
-        case WM_OTHERWINDOWDESTROYED:
-        case WM_COMMNOTIFY:
-        case WM_WINDOWPOSCHANGING:
-        case WM_WINDOWPOSCHANGED:
-        case WM_NCCREATE:
-        case WM_NCCALCSIZE:
-        case WM_COMMAND:
-        case WM_HSCROLL:
-        case WM_VSCROLL:
-        case WM_INITMENU:
-        case WM_INITMENUPOPUP:
-        case WM_MENUSELECT:
-        case WM_MENUCHAR:
-        case WM_ENTERIDLE:
-        case WM_CTLCOLORMSGBOX:
-        case WM_CTLCOLOREDIT:
-        case WM_CTLCOLORLISTBOX:
-        case WM_CTLCOLORBTN:
-        case WM_CTLCOLORDLG:
-        case WM_CTLCOLORSCROLLBAR:
-        case WM_CTLCOLORSTATIC:
-        case WM_PARENTNOTIFY:
-        case WM_MDICREATE:
-        case WM_MDIDESTROY:
-        case WM_MDIACTIVATE:
-        case WM_MDIGETACTIVE:
-        case WM_MDISETMENU:
-        case WM_RENDERFORMAT:
-        case WM_PAINTCLIPBOARD:
-        case WM_VSCROLLCLIPBOARD:
-        case WM_SIZECLIPBOARD:
-        case WM_ASKCBFORMATNAME:
-        case WM_CHANGECBCHAIN:
-        case WM_HSCROLLCLIPBOARD:
-        case WM_PALETTEISCHANGING:
-        case WM_PALETTECHANGED:
-        case MM_JOY1MOVE:
-        case MM_JOY2MOVE:
-        case MM_JOY1ZMOVE:
-        case MM_JOY2ZMOVE:
-        case MM_JOY1BUTTONDOWN:
-        case MM_JOY2BUTTONDOWN:
-        case MM_JOY1BUTTONUP:
-        case MM_JOY2BUTTONUP:
-        case MM_MCINOTIFY:
-        case MM_MCISYSTEM_STRING:
-        case MM_WOM_OPEN:
-        case MM_WOM_CLOSE:
-        case MM_WOM_DONE:
-        case MM_WIM_OPEN:
-        case MM_WIM_CLOSE:
-        case MM_WIM_DATA:
-        case MM_MIM_OPEN:
-        case MM_MIM_CLOSE:
-        case MM_MIM_DATA:
-        case MM_MIM_LONGDATA:
-        case MM_MIM_ERROR:
-        case MM_MIM_LONGERROR:
-        case MM_MOM_OPEN:
-        case MM_MOM_CLOSE:
-        case MM_MOM_DONE:
-            LOGDEBUG(LOG_IMPORTANT,
-                ("MessageNeedsThunking: WM_msg %04x is not thunked\n", uMsg));
-            return TRUE;
-
-        default:
-            return FALSE;
-
-    }
-}
-
+#error Excluded unsupported DEBUG WOW profile
 #endif
+#line 407
 
 
 extern PTD gptdTaskHead;
