@@ -1,0 +1,67 @@
+{
+  "scope": "supported CCPU40 product includes a non-CCPU compilation unit; carrier selection and x86/x64 preprocessor controls, not a new exclusion decision",
+  "accessfn_graph": "build/.ninja/msvc-x86-release/worker/build.ninja",
+  "accessfn_flags_sha256": "f30ebfd295bfac709bc775611e756d0c3174208fec0f30d5f4dcb81c612f166b",
+  "accessfn_actual_sas4gen_dependencies": [
+    "../../../../src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h"
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "file": "src/mvdm-host/softpc.new/base/cvidc/sas4gen.h",
+      "ccpu_defined": false,
+      "last_line": "sas_memory_size()",
+      "returncode": 0
+    },
+    {
+      "arch": "x86",
+      "file": "src/mvdm-host/softpc.new/base/cvidc/sas4gen.h",
+      "ccpu_defined": true,
+      "last_line": "c_sas_memory_size()",
+      "returncode": 0
+    },
+    {
+      "arch": "x86",
+      "file": "src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h",
+      "ccpu_defined": false,
+      "last_line": "sas_memory_size()",
+      "returncode": 0
+    },
+    {
+      "arch": "x86",
+      "file": "src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h",
+      "ccpu_defined": true,
+      "last_line": "c_sas_memory_size()",
+      "returncode": 0
+    },
+    {
+      "arch": "x64",
+      "file": "src/mvdm-host/softpc.new/base/cvidc/sas4gen.h",
+      "ccpu_defined": false,
+      "last_line": "sas_memory_size()",
+      "returncode": 0
+    },
+    {
+      "arch": "x64",
+      "file": "src/mvdm-host/softpc.new/base/cvidc/sas4gen.h",
+      "ccpu_defined": true,
+      "last_line": "c_sas_memory_size()",
+      "returncode": 0
+    },
+    {
+      "arch": "x64",
+      "file": "src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h",
+      "ccpu_defined": false,
+      "last_line": "sas_memory_size()",
+      "returncode": 0
+    },
+    {
+      "arch": "x64",
+      "file": "src/ntvdm-exe/softpc/include/generated/x86/prod/sas4gen.h",
+      "ccpu_defined": true,
+      "last_line": "c_sas_memory_size()",
+      "returncode": 0
+    }
+  ],
+  "conclusion": "CCPU40 runtime selection is not a universal /DCCPU per-translation-unit invariant. The mirror cvidc carrier is not the selected accessfn header; no decision can be made from product absence alone."
+}
