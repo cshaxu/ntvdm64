@@ -1,0 +1,122 @@
+{
+  "scope": "five existing YODA guards in PROD contexts; YODA remains enabled in supported non-PROD/non-MONITOR theoretical selector and is not globally forbidden",
+  "context_summary": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+      "contexts": 28,
+      "all_define_PROD": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "contexts": 2,
+      "all_define_PROD": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "contexts": 2,
+      "all_define_PROD": true
+    }
+  ],
+  "rc_resource_contexts_checked": 6,
+  "host_def_sha256": "0ab22fc80460cbaf4c7b27e69099e44c2832808dad65c5bfe62c5ce3054bbf9d",
+  "manual_heartbeat_graph": "tools/build/New-T310HeartbeatSourceNinja.ps1 /DPROD",
+  "controls": [
+    {
+      "arch": "x86",
+      "definitions": [],
+      "yoda_defined": true
+    },
+    {
+      "arch": "x86",
+      "definitions": [
+        "/DPROD"
+      ],
+      "yoda_defined": false
+    },
+    {
+      "arch": "x86",
+      "definitions": [
+        "/DMONITOR"
+      ],
+      "yoda_defined": false
+    },
+    {
+      "arch": "x86",
+      "definitions": [
+        "/DPROD",
+        "/DMONITOR"
+      ],
+      "yoda_defined": false
+    },
+    {
+      "arch": "x64",
+      "definitions": [],
+      "yoda_defined": true
+    },
+    {
+      "arch": "x64",
+      "definitions": [
+        "/DPROD"
+      ],
+      "yoda_defined": false
+    },
+    {
+      "arch": "x64",
+      "definitions": [
+        "/DMONITOR"
+      ],
+      "yoda_defined": false
+    },
+    {
+      "arch": "x64",
+      "definitions": [
+        "/DPROD",
+        "/DMONITOR"
+      ],
+      "yoda_defined": false
+    }
+  ],
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
+      "current_line": 18,
+      "historical_line": 18,
+      "original_line": 18,
+      "historical_body_sha256": "a01c0eb22a0e0e1189f2ae73980726f7f5173591f02b8c4df8d670c535ad3f41",
+      "original_sha256": "f4353f69708952f3bdc0f0d26db0f667eda34abf04f8694d1af059a649f76969"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "current_line": 116,
+      "historical_line": 116,
+      "original_line": 96,
+      "historical_body_sha256": "e3633269eb6ebcf713509d0d69c915afdc4d0d8bc5e08dfbdb1e9e00d4029f32",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "current_line": 934,
+      "historical_line": 934,
+      "original_line": 885,
+      "historical_body_sha256": "f71935519fd4e62b9a3e70017bdf7f5120ff717f91d99dc1b5732621036fbb3f",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "current_line": 1265,
+      "historical_line": 1265,
+      "original_line": 1209,
+      "historical_body_sha256": "31ffe26f983c466dac31bc6e4d365ebac11055c2b6d5b6485a11c0c85c5b94fa",
+      "original_sha256": "7f555a87ba029627d6811c0f7b96964bb8a96af90c60c89012975a4ac5442076"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "current_line": 430,
+      "historical_line": 418,
+      "original_line": 427,
+      "historical_body_sha256": "a34524e7b529b05ecc12c3fa15dd20a005285ad2414f2be6d7e7f1b9d8dcf9eb",
+      "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33"
+    }
+  ],
+  "held": "yoda.c and nt_yoda.c historical body differs from pinned original; original mapping/patch accounting remains pending"
+}

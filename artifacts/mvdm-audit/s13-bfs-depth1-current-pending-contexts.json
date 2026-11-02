@@ -5861,15 +5861,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
-      "start": 18,
-      "kind": "ifdef",
-      "expression": "YODA",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 28
-    },
-    {
       "path": "src/mvdm-host/softpc.new/host/inc/nt_fulsc.h",
       "start": 77,
       "kind": "ifndef",
@@ -6122,33 +6113,6 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
-      "start": 116,
-      "kind": "ifdef",
-      "expression": "YODA",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
-      "start": 934,
-      "kind": "ifdef",
-      "expression": "YODA",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
-      "start": 1265,
-      "kind": "ifdef",
-      "expression": "YODA",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
       "start": 602,
       "kind": "else",
@@ -6216,15 +6180,6 @@
       "start": 243,
       "kind": "if",
       "expression": "defined(MONITOR) && defined(X86GFX)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
-      "start": 430,
-      "kind": "ifdef",
-      "expression": "YODA",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "current_actual_includers": 2
@@ -8665,7 +8620,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 106
+      "count": 101
     },
     {
       "reason": "file-not-witnessed-in-product",

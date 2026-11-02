@@ -42895,8 +42895,8 @@
       "group_end": 20,
       "kind": "ifdef",
       "expression": "YODA",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "cfd92256997f559dac0bb74bfee789a0a84e5377823a6fd188eb2065665ed2de"
@@ -45703,8 +45703,8 @@
       "group_end": 118,
       "kind": "ifdef",
       "expression": "YODA",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "e7a626a7f35aa5bc734163d6c5e4f8caa62468b9cbccb310497a51259f01e5a2"
@@ -45768,8 +45768,8 @@
       "group_end": 940,
       "kind": "ifdef",
       "expression": "YODA",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 5,
       "source_sha256": "e7a626a7f35aa5bc734163d6c5e4f8caa62468b9cbccb310497a51259f01e5a2"
@@ -45807,8 +45807,8 @@
       "group_end": 1297,
       "kind": "ifdef",
       "expression": "YODA",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 31,
       "source_sha256": "e7a626a7f35aa5bc734163d6c5e4f8caa62468b9cbccb310497a51259f01e5a2"
@@ -48667,8 +48667,8 @@
       "group_end": 432,
       "kind": "ifdef",
       "expression": "YODA",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b"
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 960,
+    "pending": 955,
     "newly-excluded": 615,
-    "already-excluded": 1603,
+    "already-excluded": 1608,
     "retained-observed": 1863,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
     "not-guard": 850,
-    "guard": 110
+    "guard": 105
   }
 }
