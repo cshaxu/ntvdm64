@@ -1,0 +1,353 @@
+{
+  "scope": "first-depth existing guards that require SFELLOW positively; preserve PIG as independently supported",
+  "basis": "SFELLOW is an alternative host CPU product; no in-repository macro definition or build flag, and no supported Ninja compile command sets it. An AND condition with SFELLOW is false regardless of PIG. The source and original identifiers are pinned; no claim is made about unvisited non-SFELLOW branches.",
+  "source_scan_command": [
+    "rg",
+    "-n",
+    "--glob",
+    "!*.md",
+    "--glob",
+    "!*.json",
+    "--glob",
+    "!*.log",
+    "(?i)(^\\s*#\\s*(define|undef)\\s+SFELLOW\\b|(?:/D|-D)SFELLOW\\b)",
+    "src",
+    "tests",
+    "tools",
+    "CMakeLists.txt"
+  ],
+  "source_scan_exit": 1,
+  "graph_commands_checked": 2070,
+  "sfellow_flags_found": 0,
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 212,
+      "kind": "ifdef",
+      "expression": "SFELLOW",
+      "original_line": 208,
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "source_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a",
+      "directive": "#ifdef SFELLOW",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 224,
+      "kind": "ifdef",
+      "expression": "SFELLOW",
+      "original_line": 221,
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "source_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a",
+      "directive": "#ifdef SFELLOW",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 234,
+      "kind": "if",
+      "expression": "defined(SFELLOW)",
+      "original_line": 226,
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "source_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a",
+      "directive": "#if defined(SFELLOW)",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 516,
+      "kind": "ifdef",
+      "expression": "SFELLOW",
+      "original_line": 538,
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "source_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a",
+      "directive": "#ifdef SFELLOW",
+      "guard": "#error Excluded unsupported SFELLOW configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 667,
+      "kind": "if",
+      "expression": "defined(PIG) && defined(SFELLOW)",
+      "original_line": 630,
+      "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
+      "source_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a",
+      "directive": "#if defined(PIG) && defined(SFELLOW)",
+      "guard": "#error Excluded unsupported PIG configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "line": 31,
+      "kind": "ifdef",
+      "expression": "SFELLOW",
+      "original_line": 28,
+      "original_sha256": "3beaf1ec7ca8ac2092bb88de4597a19de8aecdd564fa2b55ccb1a4009041e961",
+      "source_sha256": "49b02acca77b383a63f2cfcafb9b05f2e09f3541629631ee033613510393cfe5",
+      "directive": "#ifdef SFELLOW",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 91,
+      "kind": "ifdef",
+      "expression": "SFELLOW",
+      "original_line": 91,
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "source_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61",
+      "directive": "#ifdef SFELLOW",
+      "guard": "#error Excluded unsupported SFELLOW configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 169,
+      "kind": "if",
+      "expression": "defined(SFELLOW)",
+      "original_line": 169,
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "source_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61",
+      "directive": "#if defined(SFELLOW)",
+      "guard": "#error Excluded unsupported SFELLOW configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 252,
+      "kind": "ifdef",
+      "expression": "SFELLOW",
+      "original_line": 252,
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "source_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61",
+      "directive": "#ifdef SFELLOW",
+      "guard": "#error Excluded unsupported SFELLOW configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 277,
+      "kind": "ifdef",
+      "expression": "SFELLOW",
+      "original_line": 277,
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "source_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61",
+      "directive": "#ifdef SFELLOW",
+      "guard": "#error Excluded unsupported SFELLOW configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 371,
+      "kind": "if",
+      "expression": "defined(SFELLOW)",
+      "original_line": 371,
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "source_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61",
+      "directive": "#if defined(SFELLOW)",
+      "guard": "#error Excluded unsupported SFELLOW configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 379,
+      "kind": "if",
+      "expression": "defined(SFELLOW)",
+      "original_line": 379,
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "source_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61",
+      "directive": "#if defined(SFELLOW)",
+      "guard": "#error Excluded unsupported SFELLOW configuration",
+      "prior_status": "pending"
+    }
+  ],
+  "controls": [
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 212,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 224,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 234,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 516,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 667,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "line": 31,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 91,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 169,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 252,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 277,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 371,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 379,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 212,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 224,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 234,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 516,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 667,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "line": 31,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 91,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 169,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 252,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 277,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 371,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 379,
+      "default_exit": 0,
+      "forced_exit": 2
+    }
+  ],
+  "pig_only_controls": [
+    {
+      "architecture": "x86",
+      "PIG_without_SFELLOW_exit": 0
+    },
+    {
+      "architecture": "x64",
+      "PIG_without_SFELLOW_exit": 0
+    }
+  ],
+  "generated_cache_macro_definition_scan": {
+    "scope": "build/.ninja/**/*.c and *.h",
+    "pattern": "#define or #undef sfellow",
+    "matches": 0
+  }
+}

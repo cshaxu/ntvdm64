@@ -1,0 +1,14 @@
+{
+  "scope": "first-depth retention classification only; no inner-branch audit",
+  "path": "src/mvdm-host/dos/command/cmd.h",
+  "retained": [
+    "FLAT_32",
+    "WIN",
+    "WIN_32"
+  ],
+  "evidence": [
+    "s13-bfs-depth1-command-t324-marker-control.json",
+    "s13-bfs-depth1-command-xms-t324-actual-compile.json",
+    "s13-bfs-depth1-command-xms-t324-x64-actual-compile.json"
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "scope": "first-depth existing guards requiring macintosh; A2CPU alone is not rejected by the conjunction",
+  "basis": "macintosh is an unsupported host platform; no in-repository macro definition or build flag, and no supported Ninja compile command sets it. An AND condition with macintosh is false regardless of A2CPU. The source and original identifiers are pinned; OR expressions involving macintosh are not classified here.",
+  "source_scan_command": [
+    "rg",
+    "-n",
+    "--glob",
+    "!*.md",
+    "--glob",
+    "!*.json",
+    "--glob",
+    "!*.log",
+    "(?i)(^\\s*#\\s*(define|undef)\\s+macintosh\\b|(?:/D|-D)macintosh\\b)",
+    "src",
+    "tests",
+    "tools",
+    "CMakeLists.txt"
+  ],
+  "source_scan_exit": 1,
+  "graph_commands_checked": 2070,
+  "macintosh_flags_found": 0,
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
+      "line": 251,
+      "kind": "ifdef",
+      "expression": "macintosh",
+      "original_line": 251,
+      "original_sha256": "9da2a1531ac1eb2e0d2d9b57ec7e85328fd6402a83a3e562494b175f27101569",
+      "source_sha256": "91b3626df851097f6d3361f7c0714ef8f0f07598ae59c103b28e174cf5b58926",
+      "directive": "#ifdef\tmacintosh",
+      "guard": "#error Excluded unsupported macintosh configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 83,
+      "kind": "ifdef",
+      "expression": "macintosh",
+      "original_line": 83,
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "source_sha256": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a",
+      "directive": "#ifdef macintosh",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 370,
+      "kind": "ifdef",
+      "expression": "macintosh",
+      "original_line": 370,
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "source_sha256": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a",
+      "directive": "#ifdef macintosh",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 810,
+      "kind": "ifdef",
+      "expression": "macintosh",
+      "original_line": 997,
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "source_sha256": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a",
+      "directive": "#ifdef macintosh",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "line": 102,
+      "kind": "if",
+      "expression": "defined(macintosh) && defined(A2CPU)",
+      "original_line": 104,
+      "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550",
+      "directive": "#if defined(macintosh) && defined(A2CPU)",
+      "guard": "#error Excluded unsupported A2CPU configuration",
+      "prior_status": "pending"
+    }
+  ],
+  "controls": [
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
+      "line": 251,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 83,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 370,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 810,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "line": 102,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
+      "line": 251,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 83,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 370,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 810,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "line": 102,
+      "default_exit": 0,
+      "forced_exit": 2
+    }
+  ],
+  "a2cpu_only_controls": [
+    {
+      "architecture": "x86",
+      "A2CPU_without_macintosh_exit": 0
+    },
+    {
+      "architecture": "x64",
+      "A2CPU_without_macintosh_exit": 0
+    }
+  ],
+  "generated_cache_macro_definition_scan": {
+    "scope": "build/.ninja/**/*.c and *.h",
+    "pattern": "#define or #undef macintosh",
+    "matches": 0
+  }
+}

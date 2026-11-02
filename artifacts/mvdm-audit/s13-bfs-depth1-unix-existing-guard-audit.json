@@ -1,0 +1,161 @@
+{
+  "scope": "first-depth existing guards selected by BSD4_2 or RUNUX; no other platform expressions classified",
+  "basis": "BSD4_2 and RUNUX select unsupported Unix hosts; no in-repository macro definition or build flag and no supported Ninja compile command sets either. Fixed-original condition identity and x86/x64 forced-selector controls were checked.",
+  "source_scan_command": [
+    "rg",
+    "-n",
+    "--glob",
+    "!*.md",
+    "--glob",
+    "!*.json",
+    "--glob",
+    "!*.log",
+    "(?i)(^\\s*#\\s*(define|undef)\\s+(BSD4_2|RUNUX)\\b|(?:/D|-D)(BSD4_2|RUNUX)\\b)",
+    "src",
+    "tests",
+    "tools",
+    "CMakeLists.txt"
+  ],
+  "source_scan_exit": 1,
+  "graph_commands_checked": 2070,
+  "unix_flags_found": 0,
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "line": 57,
+      "kind": "if",
+      "expression": "defined(RUNUX)",
+      "original_line": 57,
+      "original_sha256": "c65121f592f91efbea0db0b3282f3252f4a58a4a87a281570ee3a0e50686cc87",
+      "source_sha256": "00be947d2e0fedd9f801e2911ffd7ef2362a92ccda2aebc7266a15ddf6c38234",
+      "directive": "#if defined(RUNUX)",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-529: RUNUX platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "line": 66,
+      "kind": "if",
+      "expression": "defined(RUNUX)",
+      "original_line": 66,
+      "original_sha256": "c65121f592f91efbea0db0b3282f3252f4a58a4a87a281570ee3a0e50686cc87",
+      "source_sha256": "00be947d2e0fedd9f801e2911ffd7ef2362a92ccda2aebc7266a15ddf6c38234",
+      "directive": "#if defined(RUNUX)",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-529: RUNUX platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 140,
+      "kind": "ifdef",
+      "expression": "BSD4_2",
+      "original_line": 145,
+      "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+      "source_sha256": "2989e844746621d26ada2b8012d55b322095d776f65cd6b955fa09675331a1d2",
+      "directive": "#ifdef BSD4_2",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 267,
+      "kind": "ifdef",
+      "expression": "BSD4_2",
+      "original_line": 345,
+      "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+      "source_sha256": "2989e844746621d26ada2b8012d55b322095d776f65cd6b955fa09675331a1d2",
+      "directive": "#ifdef BSD4_2",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 310,
+      "kind": "ifdef",
+      "expression": "BSD4_2",
+      "original_line": 398,
+      "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+      "source_sha256": "2989e844746621d26ada2b8012d55b322095d776f65cd6b955fa09675331a1d2",
+      "directive": "#ifdef BSD4_2",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    }
+  ],
+  "controls": [
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "line": 57,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "line": 66,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 140,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 267,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 310,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "line": 57,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "line": 66,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 140,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 267,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 310,
+      "default_exit": 0,
+      "forced_exit": 2
+    }
+  ],
+  "generated_cache_macro_definition_scan": {
+    "scope": "build/.ninja/**/*.c and *.h",
+    "pattern": "#define or #undef BSD4_2/RUNUX",
+    "matches": 0
+  }
+}

@@ -1061,8 +1061,8 @@
       "group_end": 54,
       "kind": "ifdef",
       "expression": "WIN_32",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "retained-observed",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
       "source_sha256": "633b9668a804a85b61e6c8f92273984a6026860d71cfa409ae63c8b92a577c90"
@@ -1087,8 +1087,8 @@
       "group_end": 62,
       "kind": "ifdef",
       "expression": "FLAT_32",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "retained-observed",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 5,
       "source_sha256": "633b9668a804a85b61e6c8f92273984a6026860d71cfa409ae63c8b92a577c90"
@@ -1100,8 +1100,8 @@
       "group_end": 67,
       "kind": "ifdef",
       "expression": "WIN",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "retained-observed",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
       "source_sha256": "633b9668a804a85b61e6c8f92273984a6026860d71cfa409ae63c8b92a577c90"
@@ -5403,8 +5403,8 @@
       "group_end": 59,
       "kind": "if",
       "expression": "defined(RUNUX)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "00be947d2e0fedd9f801e2911ffd7ef2362a92ccda2aebc7266a15ddf6c38234"
@@ -5429,8 +5429,8 @@
       "group_end": 68,
       "kind": "if",
       "expression": "defined(RUNUX)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "00be947d2e0fedd9f801e2911ffd7ef2362a92ccda2aebc7266a15ddf6c38234"
@@ -6937,8 +6937,8 @@
       "group_end": 214,
       "kind": "ifdef",
       "expression": "SFELLOW",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a"
@@ -6950,8 +6950,8 @@
       "group_end": 226,
       "kind": "ifdef",
       "expression": "SFELLOW",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a"
@@ -6976,8 +6976,8 @@
       "group_end": 238,
       "kind": "if",
       "expression": "defined(SFELLOW)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a"
@@ -7080,8 +7080,8 @@
       "group_end": 522,
       "kind": "ifdef",
       "expression": "SFELLOW",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 5,
       "source_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a"
@@ -7132,8 +7132,8 @@
       "group_end": 674,
       "kind": "if",
       "expression": "defined(PIG) && defined(SFELLOW)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 6,
       "source_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a"
@@ -10889,8 +10889,8 @@
       "group_end": 33,
       "kind": "ifdef",
       "expression": "SFELLOW",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "49b02acca77b383a63f2cfcafb9b05f2e09f3541629631ee033613510393cfe5"
@@ -23915,8 +23915,8 @@
       "group_end": 255,
       "kind": "ifdef",
       "expression": "macintosh",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "91b3626df851097f6d3361f7c0714ef8f0f07598ae59c103b28e174cf5b58926"
@@ -28504,8 +28504,8 @@
       "group_end": 85,
       "kind": "ifdef",
       "expression": "macintosh",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a"
@@ -28738,8 +28738,8 @@
       "group_end": 690,
       "kind": "ifdef",
       "expression": "macintosh",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a"
@@ -28868,8 +28868,8 @@
       "group_end": 812,
       "kind": "ifdef",
       "expression": "macintosh",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a"
@@ -33340,8 +33340,8 @@
       "group_end": 142,
       "kind": "ifdef",
       "expression": "BSD4_2",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "2989e844746621d26ada2b8012d55b322095d776f65cd6b955fa09675331a1d2"
@@ -33444,8 +33444,8 @@
       "group_end": 269,
       "kind": "ifdef",
       "expression": "BSD4_2",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "2989e844746621d26ada2b8012d55b322095d776f65cd6b955fa09675331a1d2"
@@ -33483,8 +33483,8 @@
       "group_end": 312,
       "kind": "ifdef",
       "expression": "BSD4_2",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "2989e844746621d26ada2b8012d55b322095d776f65cd6b955fa09675331a1d2"
@@ -35966,8 +35966,8 @@
       "group_end": 96,
       "kind": "ifdef",
       "expression": "SFELLOW",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
@@ -36044,8 +36044,8 @@
       "group_end": 177,
       "kind": "if",
       "expression": "defined(SFELLOW)",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 5,
       "source_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
@@ -36148,8 +36148,8 @@
       "group_end": 266,
       "kind": "ifdef",
       "expression": "SFELLOW",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 4,
       "source_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
@@ -36174,8 +36174,8 @@
       "group_end": 291,
       "kind": "ifdef",
       "expression": "SFELLOW",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 11,
       "source_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
@@ -36226,8 +36226,8 @@
       "group_end": 375,
       "kind": "if",
       "expression": "defined(SFELLOW)",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
@@ -36252,8 +36252,8 @@
       "group_end": 383,
       "kind": "if",
       "expression": "defined(SFELLOW)",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61"
@@ -36720,8 +36720,8 @@
       "group_end": 108,
       "kind": "if",
       "expression": "defined(macintosh) && defined(A2CPU)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 2,
       "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
@@ -65654,13 +65654,13 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 1182,
-    "already-excluded": 1470,
+    "pending": 1157,
+    "already-excluded": 1492,
     "newly-excluded": 539,
-    "retained-observed": 1859
+    "retained-observed": 1862
   },
   "pending_by_guard": {
-    "not-guard": 930,
-    "guard": 252
+    "not-guard": 927,
+    "guard": 230
   }
 }

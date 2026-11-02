@@ -2,66 +2,6 @@
   "scope": "remaining first-depth unguarded arms in previously witnessed files; evidence links are not exclusion decisions",
   "records": [
     {
-      "path": "src/mvdm-host/dos/command/cmd.h",
-      "start": 45,
-      "cut": 52,
-      "group_end": 54,
-      "kind": "ifdef",
-      "expression": "WIN_32",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 6,
-      "source_sha256": "633b9668a804a85b61e6c8f92273984a6026860d71cfa409ae63c8b92a577c90",
-      "prior_evidence": [
-        {
-          "family": "header",
-          "artifact": "s13-bfs-depth1-header-profile-summary.json",
-          "original_entry_line": 44
-        }
-      ]
-    },
-    {
-      "path": "src/mvdm-host/dos/command/cmd.h",
-      "start": 56,
-      "cut": 62,
-      "group_end": 62,
-      "kind": "ifdef",
-      "expression": "FLAT_32",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 5,
-      "source_sha256": "633b9668a804a85b61e6c8f92273984a6026860d71cfa409ae63c8b92a577c90",
-      "prior_evidence": [
-        {
-          "family": "header",
-          "artifact": "s13-bfs-depth1-header-profile-summary.json",
-          "original_entry_line": 55
-        }
-      ]
-    },
-    {
-      "path": "src/mvdm-host/dos/command/cmd.h",
-      "start": 64,
-      "cut": 67,
-      "group_end": 67,
-      "kind": "ifdef",
-      "expression": "WIN",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "633b9668a804a85b61e6c8f92273984a6026860d71cfa409ae63c8b92a577c90",
-      "prior_evidence": [
-        {
-          "family": "header",
-          "artifact": "s13-bfs-depth1-header-profile-summary.json",
-          "original_entry_line": 63
-        }
-      ]
-    },
-    {
       "path": "src/mvdm-host/dpmi32/dpmi32.c",
       "start": 253,
       "cut": 258,
@@ -1105,15 +1045,15 @@
   "classification_counts": [
     {
       "families": [
-        "header"
-      ],
-      "count": 29
-    },
-    {
-      "families": [
         "source"
       ],
       "count": 10
+    },
+    {
+      "families": [
+        "header"
+      ],
+      "count": 26
     },
     {
       "families": [
