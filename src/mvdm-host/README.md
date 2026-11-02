@@ -1,5 +1,14 @@
 # mvdm
 
+MVDM-HOST-DIV-628: restore four consecutive original DEBUG/i386 continuation
+positions in `wow32/wow32.c`; the excluded guards and selected code remain
+unchanged. Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-wow32-adjacent-lines.json`.
+
+MVDM-HOST-DIV-627: correct original diagnostic continuations in first-depth
+source spans while retaining their selected code and condition structures.
+The fixed-original anchors and 92 actual graph controls are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-line-first-depth-batch.json`.
+
 MVDM-HOST-DIV-626: correct six original diagnostic continuation mappings in
 unconditional first-depth-or-outer source spans. Their unchanged source
 anchors and actual worker/WOW preprocessing controls are recorded in

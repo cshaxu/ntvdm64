@@ -143,9 +143,11 @@
     "after_sha256": "8bcfec70e88ad230ef3259c4ecccb2f29032ba743f27653c6326994556feca3b",
     "current_start_line": 2032,
     "error_marker": "Excluded unsupported non-NTVDM timer profile",
-    "continuation_line": 2310,
+    "continuation_line": 2534,
     "child_queue_groups_removed": 7,
-    "registration": "MVDM-HOST-DIV-570"
+    "registration": "MVDM-HOST-DIV-570",
+    "prior_continuation_line": 2310,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-first-depth-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/system/timer.c",

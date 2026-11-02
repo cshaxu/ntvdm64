@@ -2478,7 +2478,7 @@ ULONG FASTCALL WU32SetWindowLong(PVDMFRAME pFrame)
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 2486
+#line 2462
 
                 // If the 32 bit set failed, perhaps because its another process,
                 // then we want to fail too

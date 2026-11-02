@@ -391,7 +391,7 @@ GLOBAL CPU int host_com_open(int adapter)
 #ifdef MONITOR
 #error DIVERGENCE MVDM-HOST-DIV-579: hardware monitor IRET hooks are not selected
 #endif
-#line 391
+#line 390
 
 
     /*:::::::::::::::::::::: Create objects used to control comms activity */

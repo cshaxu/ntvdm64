@@ -1,5 +1,9 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-154: correct original diagnostic continuations in two first-depth
+source spans without changing selected preprocessing. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-line-first-depth-batch.json`.
+
 OPENNT-HOST-153: correct original diagnostic continuation mappings in two
 unconditional source spans without changing selected preprocessing. Evidence:
 `../../artifacts/mvdm-audit/s13-bfs-depth1-line-unconditional-batch.json`.

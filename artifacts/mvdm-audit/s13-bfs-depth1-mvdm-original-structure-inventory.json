@@ -161,7 +161,7 @@
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
       "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
-      "working_sha256": "98ddba8fc2c1bc9495a88882f592df042130dbbc0618ff53c03b61eb478c9786",
+      "working_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c",
       "signature": [
         [
           "if",
@@ -231,7 +231,7 @@
       "path": "src/mvdm-host/wow32/wow32.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.c",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
-      "working_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "working_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "signature": [
         [
           "if",

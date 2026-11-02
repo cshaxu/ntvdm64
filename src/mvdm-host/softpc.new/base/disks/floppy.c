@@ -2891,7 +2891,7 @@ LOCAL wait_int IFN0()
 #ifdef FLOPPIES_KEEP_TRYING
 #error Unsupported excluded original configuration
 #endif /* FLOPPIES_KEEP_TRYING */
-#line 2907
+#line 3036
 
 		sas_load(FLOPPY_STATUS, &diskette_status);
 		diskette_status |= FS_TIME_OUT;

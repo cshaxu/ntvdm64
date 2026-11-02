@@ -1745,7 +1745,7 @@ IU16 exp_value;
 		}
 		memPtr->tagvalue |= TAG_ZERO_MASK;
 #endif
-#line 1758
+#line 1777
 	} else {
 		if ((mantissa_hi & 0x80000000) == 0) {
 			memPtr->tagvalue |= TAG_UNSUPPORTED_MASK;

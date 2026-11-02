@@ -201,7 +201,7 @@ GLOBAL VOID nt_init_event_thread(VOID)
 #ifdef X86GFX
 #error Unsupported excluded original configuration
 #endif
-#line 206
+#line 203
             enableUpdates();
     }
     else
@@ -250,7 +250,7 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 #ifdef X86GFX
 #error Unsupported excluded original configuration
 #endif
-#line 542
+#line 536
     {
 	consoleWidth = ConsBufferInfo.srWindow.Right -
 		       ConsBufferInfo.srWindow.Left + 1;
@@ -260,7 +260,7 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
-#line 559
+#line 553
 
     /*
      * Set the display to the nearest VGA text mode size, which is one of
@@ -305,7 +305,7 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 #ifdef X86GFX
 #error Unsupported excluded original configuration
 #endif
-#line 604
+#line 595
     {
         /* The app may have shutdown in a gfx mode - force text mode back */
         if (blocked_in_gfx_mode)
@@ -335,7 +335,7 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 656
+#line 647
     sas_storew_no_check(VID_COLS, 80);   // fixup from 40 char shutdown
     *pCharHeight = charHeight;
     *pVgaHeight  = vgaHeight;
@@ -400,7 +400,7 @@ GLOBAL VOID ConsoleInit(VOID)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif //X86GFX
-#line 760
+#line 751
 
     /*
      * Work out the top line to be displayed in the VGA window, which is line
@@ -473,7 +473,7 @@ GLOBAL VOID ResetConsoleState(VOID)
 #ifdef X86GFX
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
-#line 891
+#line 882
 
 	closeGraphicsBuffer();
 
@@ -896,7 +896,7 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
 #ifdef X86GFX
 #error Unsupported excluded original configuration
 #endif
-#line 2009
+#line 1987
     {
 
 	/* Pass cursor size to video ports. */
@@ -923,7 +923,7 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
 #ifdef X86GFX
 #error Unsupported excluded original configuration
 #endif
-#line 2036
+#line 2011
     {
 
 	/* Send cursor position to video ports. */

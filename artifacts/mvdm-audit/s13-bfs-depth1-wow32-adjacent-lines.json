@@ -1,0 +1,44 @@
+{
+  "path": "src/mvdm-host/wow32/wow32.c",
+  "before_sha256": "b5e3ce1c2c024435e738207c004f0986e6eae4eb431c75acd998fd2e1f585008",
+  "candidate_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
+  "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+  "replacements": [
+    [
+      73,
+      59
+    ],
+    [
+      85,
+      71
+    ],
+    [
+      92,
+      78
+    ],
+    [
+      95,
+      81
+    ]
+  ],
+  "selected_preprocessing_equal": true,
+  "graph": "build/.ninja/msvc-x86-release/wow32",
+  "line_controls": [
+    {
+      "expected_line": 66,
+      "verified": true
+    },
+    {
+      "expected_line": 72,
+      "verified": true
+    },
+    {
+      "expected_line": 78,
+      "verified": true
+    },
+    {
+      "expected_line": 82,
+      "verified": true
+    }
+  ]
+}

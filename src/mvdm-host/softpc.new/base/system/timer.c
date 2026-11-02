@@ -1986,7 +1986,7 @@ unsigned long updateCount(void)
 #ifndef NTVDM
 #error Excluded unsupported non-NTVDM timer profile
 #endif  /* ndef NTVDM */
-#line 2310
+#line 2534
 
 LOCAL unsigned  short bin_to_bcd IFN1(unsigned long, val)
 {
@@ -2179,7 +2179,7 @@ void timer_init IFN0()
 #if !defined(NTVDM)
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* !NTVDM */
-#line 2528
+#line 2829
 }
 
 void	timer_post IFN0()

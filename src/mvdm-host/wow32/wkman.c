@@ -1117,7 +1117,7 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
 #line 1158
     SETVDMSTACK(vpInitialSSSP);
 #endif
-#line 1160
+#line 1128
     pFrame->wRetID = RET_RETURN;
 
 
@@ -1568,7 +1568,7 @@ VOID FASTCALL WK32KillRemoteTask(PVDMFRAME pFrame)
     vcRemote.SegSs = getSS();
     vcRemote.SegCs = getCS();
 #endif
-#line 1627
+#line 1596
 
     W32FreeTask(CURRENTPTD());
 

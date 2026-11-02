@@ -86,7 +86,7 @@ void time_strobe()
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
-#line 88
+#line 98
 
         /*
          * Check to see if the screen is currently enabled.

@@ -375,7 +375,7 @@ INT GetBMI16Size(PVPVOID vpbmi16, WORD fuColorUse, LPDWORD lpdwClrUsed)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 379
+#line 434
 
     // this will never be true for a CORE type DIB
     if(*lpdwClrUsed > (DWORD)nEntries) {

@@ -244,7 +244,7 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
 #ifdef MAPPARAM_EXTRA
 #error Unsupported excluded original configuration
 #endif
-#line 276
+#line 254
 
 //
 //  This should be called from the places we know pointers could get updated
@@ -462,7 +462,7 @@ else { \
 #line 496
 #define LINK_WORKLIST(pc, pNew, pLast)
 #endif
-#line 498
+#line 473
 
 VOID CacheBlockInit(PBLKCACHE pc, DWORD dwCacheSize)
 {

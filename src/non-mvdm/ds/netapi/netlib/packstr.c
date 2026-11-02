@@ -60,7 +60,7 @@ Revision History:
 #if !defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)
 #error Unsupported excluded original configuration
 #endif
-#line 158
+#line 156
 
 
 BOOL

@@ -18,11 +18,13 @@
     "subsumed_markers": {
       "MVDM-HOST-DIV-500": 1
     },
-    "following_line": 209,
+    "following_line": 233,
     "status": "selected x86 preprocessing equal ignoring blank lines; x86 object and x86/x64 guard/line controls pass; PIC and keyboard controller fixtures pass; full product/runtime remains pending",
     "registration": "MVDM-HOST-DIV-573",
     "current_start_line": 181,
-    "after_sha256": "52adadbff06e69b3d685bc7634511212c15dfe196463f00c683aad4ab6dd9634"
+    "after_sha256": "52adadbff06e69b3d685bc7634511212c15dfe196463f00c683aad4ab6dd9634",
+    "prior_following_line": 209,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-first-depth-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
@@ -43,11 +45,13 @@
     "subsumed_markers": {
       "MVDM-HOST-DIV-500": 1
     },
-    "following_line": 224,
+    "following_line": 261,
     "status": "selected x86 preprocessing equal ignoring blank lines; x86 object and x86/x64 guard/line controls pass; PIC and keyboard controller fixtures pass; full product/runtime remains pending",
     "registration": "MVDM-HOST-DIV-573",
     "current_start_line": 195,
-    "after_sha256": "52adadbff06e69b3d685bc7634511212c15dfe196463f00c683aad4ab6dd9634"
+    "after_sha256": "52adadbff06e69b3d685bc7634511212c15dfe196463f00c683aad4ab6dd9634",
+    "prior_following_line": 224,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-first-depth-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
@@ -68,11 +72,13 @@
     "subsumed_markers": {
       "MVDM-HOST-DIV-500": 1
     },
-    "following_line": 253,
+    "following_line": 290,
     "status": "selected x86 preprocessing equal ignoring blank lines; x86 object and x86/x64 guard/line controls pass; PIC and keyboard controller fixtures pass; full product/runtime remains pending",
     "registration": "MVDM-HOST-DIV-573",
     "current_start_line": 223,
-    "after_sha256": "52adadbff06e69b3d685bc7634511212c15dfe196463f00c683aad4ab6dd9634"
+    "after_sha256": "52adadbff06e69b3d685bc7634511212c15dfe196463f00c683aad4ab6dd9634",
+    "prior_following_line": 253,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-first-depth-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/support/time_day.c",

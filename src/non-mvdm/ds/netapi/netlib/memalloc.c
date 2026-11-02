@@ -117,7 +117,7 @@ Return Value:
 #else // ndef WIN32
 #error Unsupported excluded original configuration
 #endif // ndef WIN32
-#line 126
+#line 127
 
     NetpAssert( ROUND_UP_POINTER( NewAddress, ALIGN_WORST) == NewAddress);
     return (NewAddress);

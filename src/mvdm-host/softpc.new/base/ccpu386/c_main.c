@@ -1767,7 +1767,7 @@ TYPE0FAB:
 #line 1840
 	 Int6();
 #endif /* SPC486 */
-#line 1842
+#line 1783
 
 	 break;
 	 } /* end switch ( opcode ) 0F */
@@ -4553,7 +4553,7 @@ LOCAL VOID
 #ifdef SPC486
 #error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
-#line 4627
+#line 4741
       SET_RF(0); SET_VM(0); SET_NT(0); SET_IOPL(0);
       SET_PF(0); SET_CF(0); SET_AF(0); SET_ZF(0); SET_SF(0); SET_OF(0);
       SET_TF(0); SET_IF(0); SET_DF(0);

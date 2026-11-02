@@ -150,7 +150,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 152
+#line 141
 
     wm32mpex.Parm16.WndProc.hwnd   = GETHWND16(hwnd);
     wm32mpex.Parm16.WndProc.wMsg   = (WORD)uMsg;
@@ -172,7 +172,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 173
+#line 162
         wm32mpex.fThunk = THUNKMSG;
         wm32mpex.hwnd = hwnd;
         wm32mpex.uMsg = uMsg;

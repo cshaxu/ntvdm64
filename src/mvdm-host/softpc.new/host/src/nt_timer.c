@@ -208,7 +208,7 @@ void DemHeartBeat(void);
 #line 207
 void quick_tick_recalibrate(void);
 #endif
-#line 208
+#line 206
 
 void rtc_init(void);
 void RtcTick(struct host_timeval *time);
@@ -580,7 +580,7 @@ DWORD HeartBeatThread(PVOID pv)
 #ifdef MONITOR
 #error Excluded unsupported monitor timer lock setup
 #endif
-#line 564
+#line 578
 
 
 

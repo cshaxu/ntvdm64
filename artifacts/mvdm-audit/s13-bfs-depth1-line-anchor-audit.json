@@ -813,21 +813,21 @@
       "observed_anchor_logical_line": 326,
       "candidate_original_target": 332,
       "matches": false,
-      "current_sha256": "ee493343646468729cb84ebd21c8925683e486d14c30f2bd2386fe0cc4c63074",
+      "current_sha256": "409549cb4a046776e2d710c8325d33fa506ab93fc06090afccd8f87cf373a85e",
       "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
       "line_directive": 624,
       "depth": 0,
-      "current_target": 759,
+      "current_target": 815,
       "anchor_current_line": 630,
       "anchor_original_line": 820,
       "anchor": "ppi_get_switches(&low_switches,&high_switches);",
-      "observed_anchor_logical_line": 764,
+      "observed_anchor_logical_line": 820,
       "candidate_original_target": 815,
-      "matches": false,
-      "current_sha256": "ee493343646468729cb84ebd21c8925683e486d14c30f2bd2386fe0cc4c63074",
+      "matches": true,
+      "current_sha256": "409549cb4a046776e2d710c8325d33fa506ab93fc06090afccd8f87cf373a85e",
       "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b"
     },
     {
@@ -841,7 +841,7 @@
       "observed_anchor_logical_line": 772,
       "candidate_original_target": 828,
       "matches": false,
-      "current_sha256": "ee493343646468729cb84ebd21c8925683e486d14c30f2bd2386fe0cc4c63074",
+      "current_sha256": "409549cb4a046776e2d710c8325d33fa506ab93fc06090afccd8f87cf373a85e",
       "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b"
     },
     {
@@ -855,7 +855,7 @@
       "observed_anchor_logical_line": 907,
       "candidate_original_target": 993,
       "matches": false,
-      "current_sha256": "ee493343646468729cb84ebd21c8925683e486d14c30f2bd2386fe0cc4c63074",
+      "current_sha256": "409549cb4a046776e2d710c8325d33fa506ab93fc06090afccd8f87cf373a85e",
       "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b"
     },
     {
@@ -869,7 +869,7 @@
       "observed_anchor_logical_line": 1109,
       "candidate_original_target": 1096,
       "matches": true,
-      "current_sha256": "ee493343646468729cb84ebd21c8925683e486d14c30f2bd2386fe0cc4c63074",
+      "current_sha256": "409549cb4a046776e2d710c8325d33fa506ab93fc06090afccd8f87cf373a85e",
       "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b"
     },
     {
@@ -1023,7 +1023,7 @@
       "observed_anchor_logical_line": 1631,
       "candidate_original_target": 1569,
       "matches": false,
-      "current_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a",
+      "current_sha256": "8913f71c6632f75b745b5061e43cd1d56c6d26208092e606ff0bf5710a8f603c",
       "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
     },
     {
@@ -1037,7 +1037,7 @@
       "observed_anchor_logical_line": 1635,
       "candidate_original_target": 1576,
       "matches": false,
-      "current_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a",
+      "current_sha256": "8913f71c6632f75b745b5061e43cd1d56c6d26208092e606ff0bf5710a8f603c",
       "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
     },
     {
@@ -1051,21 +1051,21 @@
       "observed_anchor_logical_line": 1637,
       "candidate_original_target": 1578,
       "matches": false,
-      "current_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a",
+      "current_sha256": "8913f71c6632f75b745b5061e43cd1d56c6d26208092e606ff0bf5710a8f603c",
       "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
       "line_directive": 1770,
       "depth": 0,
-      "current_target": 1842,
+      "current_target": 1783,
       "anchor_current_line": 1776,
       "anchor_original_line": 1788,
       "anchor": "case 0x10:          instp32328 = ADC;   goto TYPE00;",
-      "observed_anchor_logical_line": 1847,
+      "observed_anchor_logical_line": 1788,
       "candidate_original_target": 1783,
-      "matches": false,
-      "current_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a",
+      "matches": true,
+      "current_sha256": "8913f71c6632f75b745b5061e43cd1d56c6d26208092e606ff0bf5710a8f603c",
       "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
     },
     {
@@ -1079,21 +1079,21 @@
       "observed_anchor_logical_line": 2387,
       "candidate_original_target": 2387,
       "matches": false,
-      "current_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a",
+      "current_sha256": "8913f71c6632f75b745b5061e43cd1d56c6d26208092e606ff0bf5710a8f603c",
       "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
       "line_directive": 4556,
       "depth": 0,
-      "current_target": 4627,
+      "current_target": 4741,
       "anchor_current_line": 4557,
       "anchor_original_line": 4741,
       "anchor": "SET_RF(0); SET_VM(0); SET_NT(0); SET_IOPL(0);",
-      "observed_anchor_logical_line": 4627,
+      "observed_anchor_logical_line": 4741,
       "candidate_original_target": 4741,
-      "matches": false,
-      "current_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a",
+      "matches": true,
+      "current_sha256": "8913f71c6632f75b745b5061e43cd1d56c6d26208092e606ff0bf5710a8f603c",
       "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
     },
     {
@@ -1107,7 +1107,7 @@
       "observed_anchor_logical_line": 4693,
       "candidate_original_target": 4803,
       "matches": false,
-      "current_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a",
+      "current_sha256": "8913f71c6632f75b745b5061e43cd1d56c6d26208092e606ff0bf5710a8f603c",
       "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
     },
     {
@@ -1121,7 +1121,7 @@
       "observed_anchor_logical_line": 4712,
       "candidate_original_target": 4816,
       "matches": false,
-      "current_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a",
+      "current_sha256": "8913f71c6632f75b745b5061e43cd1d56c6d26208092e606ff0bf5710a8f603c",
       "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
     },
     {
@@ -1135,7 +1135,7 @@
       "observed_anchor_logical_line": 4801,
       "candidate_original_target": 4922,
       "matches": false,
-      "current_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a",
+      "current_sha256": "8913f71c6632f75b745b5061e43cd1d56c6d26208092e606ff0bf5710a8f603c",
       "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700"
     },
     {
@@ -1163,21 +1163,21 @@
       "observed_anchor_logical_line": 1260,
       "candidate_original_target": 1252,
       "matches": false,
-      "current_sha256": "9e5c78b142c189b1b56f84527049f4e78214935e3fc7546a542a13f927adcc30",
+      "current_sha256": "dc911e4022b22f76ea6a50b225de93f69176f0a9b4b407c97a1b43db077a350a",
       "original_sha256": "54bac68daf938cc40dc69fb2b4277f7ae535daebea6a8a5a70f3113d30caa48c"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
       "line_directive": 1376,
       "depth": 0,
-      "current_target": 1434,
+      "current_target": 1430,
       "anchor_current_line": 1386,
       "anchor_original_line": 1439,
       "anchor": "return (ISM32)GET_PE();",
-      "observed_anchor_logical_line": 1443,
+      "observed_anchor_logical_line": 1439,
       "candidate_original_target": 1430,
-      "matches": false,
-      "current_sha256": "9e5c78b142c189b1b56f84527049f4e78214935e3fc7546a542a13f927adcc30",
+      "matches": true,
+      "current_sha256": "dc911e4022b22f76ea6a50b225de93f69176f0a9b4b407c97a1b43db077a350a",
       "original_sha256": "54bac68daf938cc40dc69fb2b4277f7ae535daebea6a8a5a70f3113d30caa48c"
     },
     {
@@ -1233,21 +1233,21 @@
       "observed_anchor_logical_line": 311,
       "candidate_original_target": 387,
       "matches": false,
-      "current_sha256": "7f25e27f6bfd36997bba8537be453761b436ccd7914880b867f6950f1b9892cc",
+      "current_sha256": "b18d73d1ad520749f9c72b9cee74ca502a065f69b76021f5cd166fa4098a580d",
       "original_sha256": "a038c8e79688b5e7430e3a9baf0c5e11848c4d2de89584ae71a4209c7ed54292"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
       "line_directive": 381,
       "depth": 0,
-      "current_target": 378,
+      "current_target": 465,
       "anchor_current_line": 384,
       "anchor_original_line": 467,
       "anchor": "bytes = nr_items * 2;",
-      "observed_anchor_logical_line": 380,
+      "observed_anchor_logical_line": 467,
       "candidate_original_target": 465,
-      "matches": false,
-      "current_sha256": "7f25e27f6bfd36997bba8537be453761b436ccd7914880b867f6950f1b9892cc",
+      "matches": true,
+      "current_sha256": "b18d73d1ad520749f9c72b9cee74ca502a065f69b76021f5cd166fa4098a580d",
       "original_sha256": "a038c8e79688b5e7430e3a9baf0c5e11848c4d2de89584ae71a4209c7ed54292"
     },
     {
@@ -1387,21 +1387,21 @@
       "observed_anchor_logical_line": 1752,
       "candidate_original_target": 1770,
       "matches": false,
-      "current_sha256": "5186136ef214b81d91a9955483cceaaa8cdee3f86d8c3baa1555a29c340bd5a1",
+      "current_sha256": "058221a52c6c356f107f07a6943088fd83e06c711e25dad52dcc0b99382caffc",
       "original_sha256": "1309239998f72b64583b184d33623c763c3c98ea185081f8d8b294cd9b8c524f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
       "line_directive": 1748,
       "depth": 0,
-      "current_target": 1758,
+      "current_target": 1777,
       "anchor_current_line": 1753,
       "anchor_original_line": 1781,
       "anchor": "if (exp_value == 32767) {",
-      "observed_anchor_logical_line": 1762,
+      "observed_anchor_logical_line": 1781,
       "candidate_original_target": 1777,
-      "matches": false,
-      "current_sha256": "5186136ef214b81d91a9955483cceaaa8cdee3f86d8c3baa1555a29c340bd5a1",
+      "matches": true,
+      "current_sha256": "058221a52c6c356f107f07a6943088fd83e06c711e25dad52dcc0b99382caffc",
       "original_sha256": "1309239998f72b64583b184d33623c763c3c98ea185081f8d8b294cd9b8c524f"
     },
     {
@@ -1415,7 +1415,7 @@
       "observed_anchor_logical_line": 1869,
       "candidate_original_target": 1886,
       "matches": false,
-      "current_sha256": "5186136ef214b81d91a9955483cceaaa8cdee3f86d8c3baa1555a29c340bd5a1",
+      "current_sha256": "058221a52c6c356f107f07a6943088fd83e06c711e25dad52dcc0b99382caffc",
       "original_sha256": "1309239998f72b64583b184d33623c763c3c98ea185081f8d8b294cd9b8c524f"
     },
     {
@@ -2290,14 +2290,14 @@
       "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
       "line_directive": 2894,
       "depth": 0,
-      "current_target": 2907,
+      "current_target": 3036,
       "anchor_current_line": 2903,
       "anchor_original_line": 3044,
       "anchor": "seek_status &= ~SS_INT_OCCURRED;",
-      "observed_anchor_logical_line": 2915,
+      "observed_anchor_logical_line": 3044,
       "candidate_original_target": 3036,
-      "matches": false,
-      "current_sha256": "1061f78f7602480edc3ad0d0de1370bda8ae1df3f5e1d38ecb2fd0cb8255fb68",
+      "matches": true,
+      "current_sha256": "bb7d1d3c03010d7f2da52a7c26c3a655d9ffd684e27dd16264bbf96e65c2ee1f",
       "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c"
     },
     {
@@ -3095,49 +3095,49 @@
       "observed_anchor_logical_line": 194,
       "candidate_original_target": 206,
       "matches": false,
-      "current_sha256": "2989e844746621d26ada2b8012d55b322095d776f65cd6b955fa09675331a1d2",
+      "current_sha256": "b5e96689f545ac55fb71bf34cde151d45645de30f631a5f53826258c7164aa9e",
       "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
       "line_directive": 183,
       "depth": 0,
-      "current_target": 209,
+      "current_target": 233,
       "anchor_current_line": 188,
       "anchor_original_line": 237,
       "anchor": "setDH( cmos_read( CMOS_SECONDS ) );",
-      "observed_anchor_logical_line": 213,
+      "observed_anchor_logical_line": 237,
       "candidate_original_target": 233,
-      "matches": false,
-      "current_sha256": "2989e844746621d26ada2b8012d55b322095d776f65cd6b955fa09675331a1d2",
+      "matches": true,
+      "current_sha256": "b5e96689f545ac55fb71bf34cde151d45645de30f631a5f53826258c7164aa9e",
       "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
       "line_directive": 197,
       "depth": 0,
-      "current_target": 224,
+      "current_target": 261,
       "anchor_current_line": 210,
       "anchor_original_line": 273,
       "anchor": "cmos_write( CMOS_SECONDS, getDH() );",
-      "observed_anchor_logical_line": 236,
+      "observed_anchor_logical_line": 273,
       "candidate_original_target": 261,
-      "matches": false,
-      "current_sha256": "2989e844746621d26ada2b8012d55b322095d776f65cd6b955fa09675331a1d2",
+      "matches": true,
+      "current_sha256": "b5e96689f545ac55fb71bf34cde151d45645de30f631a5f53826258c7164aa9e",
       "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
       "line_directive": 225,
       "depth": 0,
-      "current_target": 253,
+      "current_target": 290,
       "anchor_current_line": 230,
       "anchor_original_line": 294,
       "anchor": "setDL( cmos_read( CMOS_DAY_MONTH ) );",
-      "observed_anchor_logical_line": 257,
+      "observed_anchor_logical_line": 294,
       "candidate_original_target": 290,
-      "matches": false,
-      "current_sha256": "2989e844746621d26ada2b8012d55b322095d776f65cd6b955fa09675331a1d2",
+      "matches": true,
+      "current_sha256": "b5e96689f545ac55fb71bf34cde151d45645de30f631a5f53826258c7164aa9e",
       "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2"
     },
     {
@@ -3151,7 +3151,7 @@
       "observed_anchor_logical_line": 280,
       "candidate_original_target": 318,
       "matches": false,
-      "current_sha256": "2989e844746621d26ada2b8012d55b322095d776f65cd6b955fa09675331a1d2",
+      "current_sha256": "b5e96689f545ac55fb71bf34cde151d45645de30f631a5f53826258c7164aa9e",
       "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2"
     },
     {
@@ -3165,7 +3165,7 @@
       "observed_anchor_logical_line": 381,
       "candidate_original_target": 766,
       "matches": false,
-      "current_sha256": "2989e844746621d26ada2b8012d55b322095d776f65cd6b955fa09675331a1d2",
+      "current_sha256": "b5e96689f545ac55fb71bf34cde151d45645de30f631a5f53826258c7164aa9e",
       "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2"
     },
     {
@@ -3179,21 +3179,21 @@
       "observed_anchor_logical_line": 811,
       "candidate_original_target": 817,
       "matches": false,
-      "current_sha256": "7d3a07df21b3ad8c6d15085c8e1584db41b9de79afba7f80a7d9bcc64c7527dc",
+      "current_sha256": "5118918c1f2f6607d96b31aa6c13a8a0e4c55c198a7bd7e53aea678978665b01",
       "original_sha256": "4867e3e03e0a5f49066963a37a957d231ec9addbc203789beed42bcf510f3f01"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
       "line_directive": 811,
       "depth": 0,
-      "current_target": 831,
+      "current_target": 843,
       "anchor_current_line": 812,
       "anchor_original_line": 843,
       "anchor": "bwd_dest_copy_to_M((half_word *)hw_buffer, dma_addr, length);",
-      "observed_anchor_logical_line": 831,
+      "observed_anchor_logical_line": 843,
       "candidate_original_target": 843,
-      "matches": false,
-      "current_sha256": "7d3a07df21b3ad8c6d15085c8e1584db41b9de79afba7f80a7d9bcc64c7527dc",
+      "matches": true,
+      "current_sha256": "5118918c1f2f6607d96b31aa6c13a8a0e4c55c198a7bd7e53aea678978665b01",
       "original_sha256": "4867e3e03e0a5f49066963a37a957d231ec9addbc203789beed42bcf510f3f01"
     },
     {
@@ -3256,14 +3256,14 @@
       "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
       "line_directive": 122,
       "depth": 0,
-      "current_target": 126,
+      "current_target": 121,
       "anchor_current_line": 130,
       "anchor_original_line": 128,
       "anchor": "sas_store (stack+2, cs & 0xff);",
-      "observed_anchor_logical_line": 133,
+      "observed_anchor_logical_line": 128,
       "candidate_original_target": 121,
-      "matches": false,
-      "current_sha256": "c3d5b62cd7de868750cc40e9bc4e203c571b0edb8fa8c7178c1dac30d28d2e44",
+      "matches": true,
+      "current_sha256": "e09cbd5648b40e7b5de329344093879438e13f9acc4598a0be635dffa00baeac",
       "original_sha256": "94f049032a9298802cab09afc61651469dcbf1fec80ab36444e5c2fed2f681ad"
     },
     {
@@ -3361,7 +3361,7 @@
       "observed_anchor_logical_line": 471,
       "candidate_original_target": 490,
       "matches": false,
-      "current_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777",
+      "current_sha256": "2bd5af53558e249b1e5a9d308eb6ba5a9c4ace408179ba942be51196121b70a2",
       "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
     },
     {
@@ -3375,7 +3375,7 @@
       "observed_anchor_logical_line": 648,
       "candidate_original_target": 698,
       "matches": false,
-      "current_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777",
+      "current_sha256": "2bd5af53558e249b1e5a9d308eb6ba5a9c4ace408179ba942be51196121b70a2",
       "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
     },
     {
@@ -3389,7 +3389,7 @@
       "observed_anchor_logical_line": 1683,
       "candidate_original_target": 1784,
       "matches": false,
-      "current_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777",
+      "current_sha256": "2bd5af53558e249b1e5a9d308eb6ba5a9c4ace408179ba942be51196121b70a2",
       "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
     },
     {
@@ -3403,7 +3403,7 @@
       "observed_anchor_logical_line": 1822,
       "candidate_original_target": 1950,
       "matches": false,
-      "current_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777",
+      "current_sha256": "2bd5af53558e249b1e5a9d308eb6ba5a9c4ace408179ba942be51196121b70a2",
       "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
     },
     {
@@ -3417,7 +3417,7 @@
       "observed_anchor_logical_line": 1860,
       "candidate_original_target": 1989,
       "matches": false,
-      "current_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777",
+      "current_sha256": "2bd5af53558e249b1e5a9d308eb6ba5a9c4ace408179ba942be51196121b70a2",
       "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
     },
     {
@@ -3431,7 +3431,7 @@
       "observed_anchor_logical_line": 1996,
       "candidate_original_target": 2175,
       "matches": false,
-      "current_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777",
+      "current_sha256": "2bd5af53558e249b1e5a9d308eb6ba5a9c4ace408179ba942be51196121b70a2",
       "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
     },
     {
@@ -3445,7 +3445,7 @@
       "observed_anchor_logical_line": 2004,
       "candidate_original_target": 2186,
       "matches": false,
-      "current_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777",
+      "current_sha256": "2bd5af53558e249b1e5a9d308eb6ba5a9c4ace408179ba942be51196121b70a2",
       "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
     },
     {
@@ -3459,21 +3459,21 @@
       "observed_anchor_logical_line": 2027,
       "candidate_original_target": 2235,
       "matches": false,
-      "current_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777",
+      "current_sha256": "2bd5af53558e249b1e5a9d308eb6ba5a9c4ace408179ba942be51196121b70a2",
       "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/timer.c",
       "line_directive": 1989,
       "depth": 0,
-      "current_target": 2310,
+      "current_target": 2534,
       "anchor_current_line": 1991,
       "anchor_original_line": 2535,
       "anchor": "LOCAL unsigned  short bin_to_bcd IFN1(unsigned long, val)",
-      "observed_anchor_logical_line": 2311,
+      "observed_anchor_logical_line": 2535,
       "candidate_original_target": 2534,
-      "matches": false,
-      "current_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777",
+      "matches": true,
+      "current_sha256": "2bd5af53558e249b1e5a9d308eb6ba5a9c4ace408179ba942be51196121b70a2",
       "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
     },
     {
@@ -3487,7 +3487,7 @@
       "observed_anchor_logical_line": 2428,
       "candidate_original_target": 2648,
       "matches": false,
-      "current_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777",
+      "current_sha256": "2bd5af53558e249b1e5a9d308eb6ba5a9c4ace408179ba942be51196121b70a2",
       "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
     },
     {
@@ -3501,35 +3501,35 @@
       "observed_anchor_logical_line": 2490,
       "candidate_original_target": 2769,
       "matches": false,
-      "current_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777",
+      "current_sha256": "2bd5af53558e249b1e5a9d308eb6ba5a9c4ace408179ba942be51196121b70a2",
       "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/timer.c",
       "line_directive": 2182,
       "depth": 0,
-      "current_target": 2528,
+      "current_target": 2829,
       "anchor_current_line": 2185,
       "anchor_original_line": 2831,
       "anchor": "void\ttimer_post IFN0()",
-      "observed_anchor_logical_line": 2530,
+      "observed_anchor_logical_line": 2831,
       "candidate_original_target": 2829,
-      "matches": false,
-      "current_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777",
+      "matches": true,
+      "current_sha256": "2bd5af53558e249b1e5a9d308eb6ba5a9c4ace408179ba942be51196121b70a2",
       "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
       "line_directive": 89,
       "depth": 0,
-      "current_target": 88,
+      "current_target": 98,
       "anchor_current_line": 94,
       "anchor_original_line": 102,
       "anchor": "if (timer_video_enabled) {",
-      "observed_anchor_logical_line": 92,
+      "observed_anchor_logical_line": 102,
       "candidate_original_target": 98,
-      "matches": false,
-      "current_sha256": "f9681b3fa5d2ab869ab151307ee81b1378b062be5413a3cfdb77c78c29b04a01",
+      "matches": true,
+      "current_sha256": "c10d0f6f66f43309f41bdcdd75206d3b9fcd065fa4f69fa52bddceb190e21533",
       "original_sha256": "e314b1b5e88474ac9d1c978b3db71820fee667f7de3eff23b66e48bf0d3532e7"
     },
     {
@@ -3669,7 +3669,7 @@
       "observed_anchor_logical_line": 319,
       "candidate_original_target": 307,
       "matches": false,
-      "current_sha256": "98ddba8fc2c1bc9495a88882f592df042130dbbc0618ff53c03b61eb478c9786",
+      "current_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c",
       "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31"
     },
     {
@@ -3683,21 +3683,21 @@
       "observed_anchor_logical_line": 334,
       "candidate_original_target": 317,
       "matches": false,
-      "current_sha256": "98ddba8fc2c1bc9495a88882f592df042130dbbc0618ff53c03b61eb478c9786",
+      "current_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c",
       "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
       "line_directive": 1888,
       "depth": 0,
-      "current_target": 1886,
+      "current_target": 1896,
       "anchor_current_line": 1890,
       "anchor_original_line": 1897,
       "anchor": "GLOBAL void vd_write_teletype IFN0()",
-      "observed_anchor_logical_line": 1887,
+      "observed_anchor_logical_line": 1897,
       "candidate_original_target": 1896,
-      "matches": false,
-      "current_sha256": "98ddba8fc2c1bc9495a88882f592df042130dbbc0618ff53c03b61eb478c9786",
+      "matches": true,
+      "current_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c",
       "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31"
     },
     {
@@ -3774,14 +3774,14 @@
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
       "line_directive": 753,
       "depth": 0,
-      "current_target": 746,
+      "current_target": 701,
       "anchor_current_line": 761,
       "anchor_original_line": 708,
       "anchor": "extern  LARGE_INTEGER   CounterStart, FrequenceStart;",
-      "observed_anchor_logical_line": 753,
+      "observed_anchor_logical_line": 708,
       "candidate_original_target": 701,
-      "matches": false,
-      "current_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb",
+      "matches": true,
+      "current_sha256": "f8af567557ab2d3f895c93225ceb56b90d1c7e51cbc485212642e08eebd15462",
       "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66"
     },
     {
@@ -3795,7 +3795,7 @@
       "observed_anchor_logical_line": 788,
       "candidate_original_target": 746,
       "matches": false,
-      "current_sha256": "65abd50872742e33457f97ab7814251e9f7d57ed5b90a9c4e0aa266f7468a9cb",
+      "current_sha256": "f8af567557ab2d3f895c93225ceb56b90d1c7e51cbc485212642e08eebd15462",
       "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66"
     },
     {
@@ -3809,21 +3809,21 @@
       "observed_anchor_logical_line": 63,
       "candidate_original_target": 60,
       "matches": false,
-      "current_sha256": "54404a2250d781e37b918dc5b324fc4845b6cad53bd2adfc3356731e34ad40d1",
+      "current_sha256": "ce733da6e9b91cb8a06d3beb85f6297b151ca33ea21db2ea29ba70af8067d7b8",
       "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
       "line_directive": 394,
       "depth": 0,
-      "current_target": 391,
+      "current_target": 390,
       "anchor_current_line": 399,
       "anchor_original_line": 394,
       "anchor": "current->ModemEvent = CreateEvent(NULL,TRUE,FALSE,NULL);",
-      "observed_anchor_logical_line": 395,
+      "observed_anchor_logical_line": 394,
       "candidate_original_target": 390,
-      "matches": false,
-      "current_sha256": "54404a2250d781e37b918dc5b324fc4845b6cad53bd2adfc3356731e34ad40d1",
+      "matches": true,
+      "current_sha256": "ce733da6e9b91cb8a06d3beb85f6297b151ca33ea21db2ea29ba70af8067d7b8",
       "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32"
     },
     {
@@ -3837,7 +3837,7 @@
       "observed_anchor_logical_line": 715,
       "candidate_original_target": 714,
       "matches": false,
-      "current_sha256": "54404a2250d781e37b918dc5b324fc4845b6cad53bd2adfc3356731e34ad40d1",
+      "current_sha256": "ce733da6e9b91cb8a06d3beb85f6297b151ca33ea21db2ea29ba70af8067d7b8",
       "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32"
     },
     {
@@ -3851,7 +3851,7 @@
       "observed_anchor_logical_line": 980,
       "candidate_original_target": 974,
       "matches": false,
-      "current_sha256": "54404a2250d781e37b918dc5b324fc4845b6cad53bd2adfc3356731e34ad40d1",
+      "current_sha256": "ce733da6e9b91cb8a06d3beb85f6297b151ca33ea21db2ea29ba70af8067d7b8",
       "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32"
     },
     {
@@ -4159,21 +4159,21 @@
       "observed_anchor_logical_line": 77,
       "candidate_original_target": 76,
       "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
       "line_directive": 204,
       "depth": 0,
-      "current_target": 206,
+      "current_target": 203,
       "anchor_current_line": 212,
       "anchor_original_line": 210,
       "anchor": "SyncBiosKbdLedToKbdDevice();",
-      "observed_anchor_logical_line": 213,
+      "observed_anchor_logical_line": 210,
       "candidate_original_target": 203,
-      "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "matches": true,
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
@@ -4187,63 +4187,63 @@
       "observed_anchor_logical_line": 524,
       "candidate_original_target": 511,
       "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
       "line_directive": 253,
       "depth": 0,
-      "current_target": 542,
+      "current_target": 536,
       "anchor_current_line": 255,
       "anchor_original_line": 537,
       "anchor": "consoleWidth = ConsBufferInfo.srWindow.Right -",
-      "observed_anchor_logical_line": 543,
+      "observed_anchor_logical_line": 537,
       "candidate_original_target": 536,
-      "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "matches": true,
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
       "line_directive": 263,
       "depth": 0,
-      "current_target": 559,
+      "current_target": 553,
       "anchor_current_line": 269,
       "anchor_original_line": 558,
       "anchor": "if (consoleHeight <= MID_VAL(VGA_HEIGHT_0, VGA_HEIGHT_1))",
-      "observed_anchor_logical_line": 564,
+      "observed_anchor_logical_line": 558,
       "candidate_original_target": 553,
-      "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "matches": true,
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
       "line_directive": 308,
       "depth": 0,
-      "current_target": 604,
+      "current_target": 595,
       "anchor_current_line": 311,
       "anchor_original_line": 597,
       "anchor": "if (blocked_in_gfx_mode)",
-      "observed_anchor_logical_line": 606,
+      "observed_anchor_logical_line": 597,
       "candidate_original_target": 595,
-      "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "matches": true,
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
       "line_directive": 338,
       "depth": 0,
-      "current_target": 656,
+      "current_target": 647,
       "anchor_current_line": 339,
       "anchor_original_line": 647,
       "anchor": "sas_storew_no_check(VID_COLS, 80);",
-      "observed_anchor_logical_line": 656,
+      "observed_anchor_logical_line": 647,
       "candidate_original_target": 647,
-      "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "matches": true,
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
@@ -4257,7 +4257,7 @@
       "observed_anchor_logical_line": 703,
       "candidate_original_target": 687,
       "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
@@ -4271,21 +4271,21 @@
       "observed_anchor_logical_line": 724,
       "candidate_original_target": 705,
       "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
       "line_directive": 403,
       "depth": 0,
-      "current_target": 760,
+      "current_target": 751,
       "anchor_current_line": 410,
       "anchor_original_line": 757,
       "anchor": "cursorLine = ConsBufferInfo.dwCursorPosition.Y;",
-      "observed_anchor_logical_line": 766,
+      "observed_anchor_logical_line": 757,
       "candidate_original_target": 751,
-      "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "matches": true,
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
@@ -4299,21 +4299,21 @@
       "observed_anchor_logical_line": 885,
       "candidate_original_target": 875,
       "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
       "line_directive": 476,
       "depth": 0,
-      "current_target": 891,
+      "current_target": 882,
       "anchor_current_line": 480,
       "anchor_original_line": 885,
       "anchor": "if (StreamIoSwitchOn && !host_stream_io_enabled) {",
-      "observed_anchor_logical_line": 894,
+      "observed_anchor_logical_line": 885,
       "candidate_original_target": 882,
-      "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "matches": true,
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
@@ -4327,7 +4327,7 @@
       "observed_anchor_logical_line": 1204,
       "candidate_original_target": 1205,
       "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
@@ -4341,7 +4341,7 @@
       "observed_anchor_logical_line": 1427,
       "candidate_original_target": 1397,
       "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
@@ -4355,7 +4355,7 @@
       "observed_anchor_logical_line": 1575,
       "candidate_original_target": 1554,
       "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
@@ -4369,7 +4369,7 @@
       "observed_anchor_logical_line": 1610,
       "candidate_original_target": 1588,
       "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
@@ -4383,35 +4383,35 @@
       "observed_anchor_logical_line": 1868,
       "candidate_original_target": 1846,
       "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
       "line_directive": 899,
       "depth": 0,
-      "current_target": 2009,
+      "current_target": 1987,
       "anchor_current_line": 903,
       "anchor_original_line": 1990,
       "anchor": "port6845 = sas_w_at_no_check(VID_INDEX);",
-      "observed_anchor_logical_line": 2012,
+      "observed_anchor_logical_line": 1990,
       "candidate_original_target": 1987,
-      "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "matches": true,
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
       "line_directive": 926,
       "depth": 0,
-      "current_target": 2036,
+      "current_target": 2011,
       "anchor_current_line": 930,
       "anchor_original_line": 2014,
       "anchor": "outb((io_addr) port6845, R14_CURS_ADDRH);",
-      "observed_anchor_logical_line": 2039,
+      "observed_anchor_logical_line": 2014,
       "candidate_original_target": 2011,
-      "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "matches": true,
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
@@ -4425,7 +4425,7 @@
       "observed_anchor_logical_line": 2380,
       "candidate_original_target": 2362,
       "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
@@ -4439,7 +4439,7 @@
       "observed_anchor_logical_line": 2434,
       "candidate_original_target": 2411,
       "matches": false,
-      "current_sha256": "c912244041f1d128ea3c32766d59ab567a812f56c4cc6b9f52e1a16397f2948c",
+      "current_sha256": "46284cbad8d6535dd07bb9b66a4b64090d24962be4662c11f953bde664f53d7f",
       "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c"
     },
     {
@@ -4453,21 +4453,21 @@
       "observed_anchor_logical_line": 94,
       "candidate_original_target": 80,
       "matches": false,
-      "current_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344",
+      "current_sha256": "0f57d1a99ea71c9258a0e7664db08af1699ac15d0b7a6af5333e5fc4078e26e1",
       "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
       "line_directive": 233,
       "depth": 0,
-      "current_target": 281,
+      "current_target": 265,
       "anchor_current_line": 235,
       "anchor_original_line": 266,
       "anchor": "static INITFUNCS mono_init_funcs =",
-      "observed_anchor_logical_line": 282,
+      "observed_anchor_logical_line": 266,
       "candidate_original_target": 265,
-      "matches": false,
-      "current_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344",
+      "matches": true,
+      "current_sha256": "0f57d1a99ea71c9258a0e7664db08af1699ac15d0b7a6af5333e5fc4078e26e1",
       "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9"
     },
     {
@@ -4481,7 +4481,7 @@
       "observed_anchor_logical_line": 322,
       "candidate_original_target": 303,
       "matches": false,
-      "current_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344",
+      "current_sha256": "0f57d1a99ea71c9258a0e7664db08af1699ac15d0b7a6af5333e5fc4078e26e1",
       "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9"
     },
     {
@@ -4495,7 +4495,7 @@
       "observed_anchor_logical_line": 706,
       "candidate_original_target": 686,
       "matches": false,
-      "current_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344",
+      "current_sha256": "0f57d1a99ea71c9258a0e7664db08af1699ac15d0b7a6af5333e5fc4078e26e1",
       "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9"
     },
     {
@@ -4509,7 +4509,7 @@
       "observed_anchor_logical_line": 918,
       "candidate_original_target": 827,
       "matches": false,
-      "current_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344",
+      "current_sha256": "0f57d1a99ea71c9258a0e7664db08af1699ac15d0b7a6af5333e5fc4078e26e1",
       "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9"
     },
     {
@@ -4523,7 +4523,7 @@
       "observed_anchor_logical_line": 1429,
       "candidate_original_target": 1295,
       "matches": false,
-      "current_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344",
+      "current_sha256": "0f57d1a99ea71c9258a0e7664db08af1699ac15d0b7a6af5333e5fc4078e26e1",
       "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9"
     },
     {
@@ -4537,21 +4537,21 @@
       "observed_anchor_logical_line": 1627,
       "candidate_original_target": 1492,
       "matches": false,
-      "current_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344",
+      "current_sha256": "0f57d1a99ea71c9258a0e7664db08af1699ac15d0b7a6af5333e5fc4078e26e1",
       "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
       "line_directive": 2073,
       "depth": 0,
-      "current_target": 2215,
+      "current_target": 2069,
       "anchor_current_line": 2076,
       "anchor_original_line": 2071,
       "anchor": "closeGraphicsBuffer();",
-      "observed_anchor_logical_line": 2217,
+      "observed_anchor_logical_line": 2071,
       "candidate_original_target": 2069,
-      "matches": false,
-      "current_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344",
+      "matches": true,
+      "current_sha256": "0f57d1a99ea71c9258a0e7664db08af1699ac15d0b7a6af5333e5fc4078e26e1",
       "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9"
     },
     {
@@ -4712,14 +4712,14 @@
       "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
       "line_directive": 107,
       "depth": 0,
-      "current_target": 104,
+      "current_target": 101,
       "anchor_current_line": 108,
       "anchor_original_line": 101,
       "anchor": "if (!(dwCreationFlags & CREATE_SUSPENDED))",
-      "observed_anchor_logical_line": 104,
+      "observed_anchor_logical_line": 101,
       "candidate_original_target": 101,
-      "matches": false,
-      "current_sha256": "729f8cb1148d4acccc2ceddbe50b37c40ed0d3f407a3f37c23b1484ef9abdd86",
+      "matches": true,
+      "current_sha256": "aef52adeafbb76fd705a7d5c58a97c7390df22c30670d3688827950f7731ab78",
       "original_sha256": "776330ea072cfd005ea05968dc676634385d1c9f349bd71ba1667ecd3be68438"
     },
     {
@@ -4733,7 +4733,7 @@
       "observed_anchor_logical_line": 161,
       "candidate_original_target": 161,
       "matches": true,
-      "current_sha256": "729f8cb1148d4acccc2ceddbe50b37c40ed0d3f407a3f37c23b1484ef9abdd86",
+      "current_sha256": "aef52adeafbb76fd705a7d5c58a97c7390df22c30670d3688827950f7731ab78",
       "original_sha256": "776330ea072cfd005ea05968dc676634385d1c9f349bd71ba1667ecd3be68438"
     },
     {
@@ -4747,21 +4747,21 @@
       "observed_anchor_logical_line": 207,
       "candidate_original_target": 204,
       "matches": false,
-      "current_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "current_sha256": "19dc97992c62e02a7d4173bbfb6e73fef2bc0fa797054ac30cafa7e593a03982",
       "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
       "line_directive": 211,
       "depth": 0,
-      "current_target": 208,
+      "current_target": 206,
       "anchor_current_line": 213,
       "anchor_original_line": 207,
       "anchor": "void rtc_init(void);",
-      "observed_anchor_logical_line": 209,
+      "observed_anchor_logical_line": 207,
       "candidate_original_target": 206,
-      "matches": false,
-      "current_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "matches": true,
+      "current_sha256": "19dc97992c62e02a7d4173bbfb6e73fef2bc0fa797054ac30cafa7e593a03982",
       "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33"
     },
     {
@@ -4775,7 +4775,7 @@
       "observed_anchor_logical_line": 250,
       "candidate_original_target": 240,
       "matches": false,
-      "current_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "current_sha256": "19dc97992c62e02a7d4173bbfb6e73fef2bc0fa797054ac30cafa7e593a03982",
       "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33"
     },
     {
@@ -4789,21 +4789,21 @@
       "observed_anchor_logical_line": 414,
       "candidate_original_target": 422,
       "matches": false,
-      "current_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "current_sha256": "19dc97992c62e02a7d4173bbfb6e73fef2bc0fa797054ac30cafa7e593a03982",
       "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
       "line_directive": 583,
       "depth": 0,
-      "current_target": 564,
+      "current_target": 578,
       "anchor_current_line": 596,
       "anchor_original_line": 590,
       "anchor": "SetThreadPriority(ThreadInfo.HeartBeat.Handle,",
-      "observed_anchor_logical_line": 576,
+      "observed_anchor_logical_line": 590,
       "candidate_original_target": 578,
-      "matches": false,
-      "current_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "matches": true,
+      "current_sha256": "19dc97992c62e02a7d4173bbfb6e73fef2bc0fa797054ac30cafa7e593a03982",
       "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33"
     },
     {
@@ -4817,7 +4817,7 @@
       "observed_anchor_logical_line": 587,
       "candidate_original_target": 612,
       "matches": false,
-      "current_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "current_sha256": "19dc97992c62e02a7d4173bbfb6e73fef2bc0fa797054ac30cafa7e593a03982",
       "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33"
     },
     {
@@ -4831,7 +4831,7 @@
       "observed_anchor_logical_line": 762,
       "candidate_original_target": 820,
       "matches": false,
-      "current_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "current_sha256": "19dc97992c62e02a7d4173bbfb6e73fef2bc0fa797054ac30cafa7e593a03982",
       "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33"
     },
     {
@@ -4845,7 +4845,7 @@
       "observed_anchor_logical_line": 784,
       "candidate_original_target": 838,
       "matches": false,
-      "current_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
+      "current_sha256": "19dc97992c62e02a7d4173bbfb6e73fef2bc0fa797054ac30cafa7e593a03982",
       "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33"
     },
     {
@@ -4866,28 +4866,28 @@
       "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
       "line_directive": 271,
       "depth": 0,
-      "current_target": 271,
+      "current_target": 281,
       "anchor_current_line": 278,
       "anchor_original_line": 287,
       "anchor": "if (IsBadCodePtr((FARPROC)pIOFn->inb_handler) ||",
-      "observed_anchor_logical_line": 277,
+      "observed_anchor_logical_line": 287,
       "candidate_original_target": 281,
-      "matches": false,
-      "current_sha256": "96790f71e2571b091a420b071a9fa92541d92d01756d359f76657cbff3613dee",
+      "matches": true,
+      "current_sha256": "724163834f37e7c93231db1a104a6a66bb3c4b4c9649b0fb64ec3e5a35e1612a",
       "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
       "line_directive": 324,
       "depth": 0,
-      "current_target": 320,
+      "current_target": 344,
       "anchor_current_line": 325,
       "anchor_original_line": 344,
       "anchor": "if (!io_connect_port(w, (half_word)wAdapter, IO_READ_WRITE))",
-      "observed_anchor_logical_line": 320,
+      "observed_anchor_logical_line": 344,
       "candidate_original_target": 344,
-      "matches": false,
-      "current_sha256": "96790f71e2571b091a420b071a9fa92541d92d01756d359f76657cbff3613dee",
+      "matches": true,
+      "current_sha256": "724163834f37e7c93231db1a104a6a66bb3c4b4c9649b0fb64ec3e5a35e1612a",
       "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3"
     },
     {
@@ -4901,7 +4901,7 @@
       "observed_anchor_logical_line": 378,
       "candidate_original_target": 413,
       "matches": false,
-      "current_sha256": "96790f71e2571b091a420b071a9fa92541d92d01756d359f76657cbff3613dee",
+      "current_sha256": "724163834f37e7c93231db1a104a6a66bb3c4b4c9649b0fb64ec3e5a35e1612a",
       "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3"
     },
     {
@@ -5125,7 +5125,7 @@
       "observed_anchor_logical_line": 140,
       "candidate_original_target": 126,
       "matches": false,
-      "current_sha256": "5cde18938ad075c820f169553447fd9ae0f0df4dca86da75cc2dd9b3bf9e3c89",
+      "current_sha256": "e299db3bbfe3f1dc87b2b9f23a6eb7432ea51a9519dba6441cca857de3694610",
       "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0"
     },
     {
@@ -5139,7 +5139,7 @@
       "observed_anchor_logical_line": 212,
       "candidate_original_target": 208,
       "matches": false,
-      "current_sha256": "5cde18938ad075c820f169553447fd9ae0f0df4dca86da75cc2dd9b3bf9e3c89",
+      "current_sha256": "e299db3bbfe3f1dc87b2b9f23a6eb7432ea51a9519dba6441cca857de3694610",
       "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0"
     },
     {
@@ -5153,7 +5153,7 @@
       "observed_anchor_logical_line": 557,
       "candidate_original_target": 552,
       "matches": false,
-      "current_sha256": "5cde18938ad075c820f169553447fd9ae0f0df4dca86da75cc2dd9b3bf9e3c89",
+      "current_sha256": "e299db3bbfe3f1dc87b2b9f23a6eb7432ea51a9519dba6441cca857de3694610",
       "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0"
     },
     {
@@ -5167,7 +5167,7 @@
       "observed_anchor_logical_line": 655,
       "candidate_original_target": 648,
       "matches": false,
-      "current_sha256": "5cde18938ad075c820f169553447fd9ae0f0df4dca86da75cc2dd9b3bf9e3c89",
+      "current_sha256": "e299db3bbfe3f1dc87b2b9f23a6eb7432ea51a9519dba6441cca857de3694610",
       "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0"
     },
     {
@@ -5181,21 +5181,21 @@
       "observed_anchor_logical_line": 672,
       "candidate_original_target": 659,
       "matches": false,
-      "current_sha256": "5cde18938ad075c820f169553447fd9ae0f0df4dca86da75cc2dd9b3bf9e3c89",
+      "current_sha256": "e299db3bbfe3f1dc87b2b9f23a6eb7432ea51a9519dba6441cca857de3694610",
       "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0"
     },
     {
       "path": "src/mvdm-host/wow32/wcall16.c",
       "line_directive": 611,
       "depth": 0,
-      "current_target": 720,
+      "current_target": 695,
       "anchor_current_line": 614,
       "anchor_original_line": 697,
       "anchor": "RtlCopyMemory(&pCBFrame->Parm16, pParm16, sizeof(PARM16));",
-      "observed_anchor_logical_line": 722,
+      "observed_anchor_logical_line": 697,
       "candidate_original_target": 695,
-      "matches": false,
-      "current_sha256": "5cde18938ad075c820f169553447fd9ae0f0df4dca86da75cc2dd9b3bf9e3c89",
+      "matches": true,
+      "current_sha256": "e299db3bbfe3f1dc87b2b9f23a6eb7432ea51a9519dba6441cca857de3694610",
       "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0"
     },
     {
@@ -5209,7 +5209,7 @@
       "observed_anchor_logical_line": 787,
       "candidate_original_target": 752,
       "matches": false,
-      "current_sha256": "5cde18938ad075c820f169553447fd9ae0f0df4dca86da75cc2dd9b3bf9e3c89",
+      "current_sha256": "e299db3bbfe3f1dc87b2b9f23a6eb7432ea51a9519dba6441cca857de3694610",
       "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0"
     },
     {
@@ -5223,7 +5223,7 @@
       "observed_anchor_logical_line": 795,
       "candidate_original_target": 766,
       "matches": false,
-      "current_sha256": "5cde18938ad075c820f169553447fd9ae0f0df4dca86da75cc2dd9b3bf9e3c89",
+      "current_sha256": "e299db3bbfe3f1dc87b2b9f23a6eb7432ea51a9519dba6441cca857de3694610",
       "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0"
     },
     {
@@ -5237,7 +5237,7 @@
       "observed_anchor_logical_line": 818,
       "candidate_original_target": 771,
       "matches": false,
-      "current_sha256": "5cde18938ad075c820f169553447fd9ae0f0df4dca86da75cc2dd9b3bf9e3c89",
+      "current_sha256": "e299db3bbfe3f1dc87b2b9f23a6eb7432ea51a9519dba6441cca857de3694610",
       "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0"
     },
     {
@@ -5251,7 +5251,7 @@
       "observed_anchor_logical_line": 829,
       "candidate_original_target": 779,
       "matches": false,
-      "current_sha256": "5cde18938ad075c820f169553447fd9ae0f0df4dca86da75cc2dd9b3bf9e3c89",
+      "current_sha256": "e299db3bbfe3f1dc87b2b9f23a6eb7432ea51a9519dba6441cca857de3694610",
       "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0"
     },
     {
@@ -5370,28 +5370,28 @@
       "path": "src/mvdm-host/wow32/wkfileio.c",
       "line_directive": 43,
       "depth": 0,
-      "current_target": 44,
+      "current_target": 42,
       "anchor_current_line": 45,
       "anchor_original_line": 43,
       "anchor": "BOOL FASTCALL IsModuleSymantecInstall(HAND16 hMod16);",
-      "observed_anchor_logical_line": 45,
+      "observed_anchor_logical_line": 43,
       "candidate_original_target": 42,
-      "matches": false,
-      "current_sha256": "9cd5f2fcdb1a8b5b0ad5cdfb3d9a1190be56389243c6e4d0bb0f7efcd3753e14",
+      "matches": true,
+      "current_sha256": "1ad271e7c85a9d418f2940958317a4911b6fab3092d13cbe5d7cec4fcb522144",
       "original_sha256": "3437d0886ec49109668f09a46f5cf8b533ccfbd08f78ef441cbf71853482a8ad"
     },
     {
       "path": "src/mvdm-host/wow32/wkfileio.c",
       "line_directive": 560,
       "depth": 0,
-      "current_target": 561,
+      "current_target": 559,
       "anchor_current_line": 566,
       "anchor_original_line": 564,
       "anchor": "return (dwBytesRead);",
-      "observed_anchor_logical_line": 566,
+      "observed_anchor_logical_line": 564,
       "candidate_original_target": 559,
-      "matches": false,
-      "current_sha256": "9cd5f2fcdb1a8b5b0ad5cdfb3d9a1190be56389243c6e4d0bb0f7efcd3753e14",
+      "matches": true,
+      "current_sha256": "1ad271e7c85a9d418f2940958317a4911b6fab3092d13cbe5d7cec4fcb522144",
       "original_sha256": "3437d0886ec49109668f09a46f5cf8b533ccfbd08f78ef441cbf71853482a8ad"
     },
     {
@@ -5405,7 +5405,7 @@
       "observed_anchor_logical_line": 859,
       "candidate_original_target": 856,
       "matches": false,
-      "current_sha256": "9cd5f2fcdb1a8b5b0ad5cdfb3d9a1190be56389243c6e4d0bb0f7efcd3753e14",
+      "current_sha256": "1ad271e7c85a9d418f2940958317a4911b6fab3092d13cbe5d7cec4fcb522144",
       "original_sha256": "3437d0886ec49109668f09a46f5cf8b533ccfbd08f78ef441cbf71853482a8ad"
     },
     {
@@ -5587,7 +5587,7 @@
       "observed_anchor_logical_line": 227,
       "candidate_original_target": 203,
       "matches": false,
-      "current_sha256": "6b036bb87f5ae271a4503c14eb3e6e45b51ec565b4e40563f9a8b9f1927749f8",
+      "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5601,7 +5601,7 @@
       "observed_anchor_logical_line": 570,
       "candidate_original_target": 545,
       "matches": false,
-      "current_sha256": "6b036bb87f5ae271a4503c14eb3e6e45b51ec565b4e40563f9a8b9f1927749f8",
+      "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5615,7 +5615,7 @@
       "observed_anchor_logical_line": 623,
       "candidate_original_target": 596,
       "matches": false,
-      "current_sha256": "6b036bb87f5ae271a4503c14eb3e6e45b51ec565b4e40563f9a8b9f1927749f8",
+      "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5629,7 +5629,7 @@
       "observed_anchor_logical_line": 857,
       "candidate_original_target": 827,
       "matches": false,
-      "current_sha256": "6b036bb87f5ae271a4503c14eb3e6e45b51ec565b4e40563f9a8b9f1927749f8",
+      "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5643,21 +5643,21 @@
       "observed_anchor_logical_line": 918,
       "candidate_original_target": 882,
       "matches": false,
-      "current_sha256": "6b036bb87f5ae271a4503c14eb3e6e45b51ec565b4e40563f9a8b9f1927749f8",
+      "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
       "path": "src/mvdm-host/wow32/wkman.c",
       "line_directive": 1120,
       "depth": 0,
-      "current_target": 1160,
+      "current_target": 1128,
       "anchor_current_line": 1128,
       "anchor_original_line": 1135,
       "anchor": "if ( IsDebuggerAttached() ) {",
-      "observed_anchor_logical_line": 1167,
+      "observed_anchor_logical_line": 1135,
       "candidate_original_target": 1128,
-      "matches": false,
-      "current_sha256": "6b036bb87f5ae271a4503c14eb3e6e45b51ec565b4e40563f9a8b9f1927749f8",
+      "matches": true,
+      "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5671,7 +5671,7 @@
       "observed_anchor_logical_line": 1378,
       "candidate_original_target": 1348,
       "matches": false,
-      "current_sha256": "6b036bb87f5ae271a4503c14eb3e6e45b51ec565b4e40563f9a8b9f1927749f8",
+      "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5685,7 +5685,7 @@
       "observed_anchor_logical_line": 1402,
       "candidate_original_target": 1373,
       "matches": false,
-      "current_sha256": "6b036bb87f5ae271a4503c14eb3e6e45b51ec565b4e40563f9a8b9f1927749f8",
+      "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5699,7 +5699,7 @@
       "observed_anchor_logical_line": 1415,
       "candidate_original_target": 1379,
       "matches": false,
-      "current_sha256": "6b036bb87f5ae271a4503c14eb3e6e45b51ec565b4e40563f9a8b9f1927749f8",
+      "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5713,7 +5713,7 @@
       "observed_anchor_logical_line": 1443,
       "candidate_original_target": 1413,
       "matches": false,
-      "current_sha256": "6b036bb87f5ae271a4503c14eb3e6e45b51ec565b4e40563f9a8b9f1927749f8",
+      "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5727,21 +5727,21 @@
       "observed_anchor_logical_line": 1622,
       "candidate_original_target": 1591,
       "matches": false,
-      "current_sha256": "6b036bb87f5ae271a4503c14eb3e6e45b51ec565b4e40563f9a8b9f1927749f8",
+      "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
       "path": "src/mvdm-host/wow32/wkman.c",
       "line_directive": 1571,
       "depth": 0,
-      "current_target": 1627,
+      "current_target": 1596,
       "anchor_current_line": 1573,
       "anchor_original_line": 1597,
       "anchor": "W32FreeTask(CURRENTPTD());",
-      "observed_anchor_logical_line": 1628,
+      "observed_anchor_logical_line": 1597,
       "candidate_original_target": 1596,
-      "matches": false,
-      "current_sha256": "6b036bb87f5ae271a4503c14eb3e6e45b51ec565b4e40563f9a8b9f1927749f8",
+      "matches": true,
+      "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5755,7 +5755,7 @@
       "observed_anchor_logical_line": 1674,
       "candidate_original_target": 1637,
       "matches": false,
-      "current_sha256": "6b036bb87f5ae271a4503c14eb3e6e45b51ec565b4e40563f9a8b9f1927749f8",
+      "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5769,7 +5769,7 @@
       "observed_anchor_logical_line": 4490,
       "candidate_original_target": 4479,
       "matches": true,
-      "current_sha256": "6b036bb87f5ae271a4503c14eb3e6e45b51ec565b4e40563f9a8b9f1927749f8",
+      "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
       "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9"
     },
     {
@@ -5797,7 +5797,7 @@
       "observed_anchor_logical_line": 37,
       "candidate_original_target": 31,
       "matches": false,
-      "current_sha256": "c75908fda4000b814375c8d74b1fa020e4c3c5bb5f8a062730a844bd6d7759b7",
+      "current_sha256": "67d8e664f8db2aff4bb7138869e237ae450100214747a0a0e0ae95582c54158f",
       "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4"
     },
     {
@@ -5811,35 +5811,35 @@
       "observed_anchor_logical_line": 62,
       "candidate_original_target": 48,
       "matches": false,
-      "current_sha256": "c75908fda4000b814375c8d74b1fa020e4c3c5bb5f8a062730a844bd6d7759b7",
+      "current_sha256": "67d8e664f8db2aff4bb7138869e237ae450100214747a0a0e0ae95582c54158f",
       "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4"
     },
     {
       "path": "src/mvdm-host/wow32/wmdisp32.c",
       "line_directive": 153,
       "depth": 0,
-      "current_target": 152,
+      "current_target": 141,
       "anchor_current_line": 155,
       "anchor_original_line": 142,
       "anchor": "wm32mpex.Parm16.WndProc.hwnd   = GETHWND16(hwnd);",
-      "observed_anchor_logical_line": 153,
+      "observed_anchor_logical_line": 142,
       "candidate_original_target": 141,
-      "matches": false,
-      "current_sha256": "c75908fda4000b814375c8d74b1fa020e4c3c5bb5f8a062730a844bd6d7759b7",
+      "matches": true,
+      "current_sha256": "67d8e664f8db2aff4bb7138869e237ae450100214747a0a0e0ae95582c54158f",
       "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4"
     },
     {
       "path": "src/mvdm-host/wow32/wmdisp32.c",
       "line_directive": 175,
       "depth": 0,
-      "current_target": 173,
+      "current_target": 162,
       "anchor_current_line": 176,
       "anchor_original_line": 162,
       "anchor": "wm32mpex.fThunk = THUNKMSG;",
-      "observed_anchor_logical_line": 173,
+      "observed_anchor_logical_line": 162,
       "candidate_original_target": 162,
-      "matches": false,
-      "current_sha256": "c75908fda4000b814375c8d74b1fa020e4c3c5bb5f8a062730a844bd6d7759b7",
+      "matches": true,
+      "current_sha256": "67d8e664f8db2aff4bb7138869e237ae450100214747a0a0e0ae95582c54158f",
       "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4"
     },
     {
@@ -5853,7 +5853,7 @@
       "observed_anchor_logical_line": 190,
       "candidate_original_target": 177,
       "matches": false,
-      "current_sha256": "c75908fda4000b814375c8d74b1fa020e4c3c5bb5f8a062730a844bd6d7759b7",
+      "current_sha256": "67d8e664f8db2aff4bb7138869e237ae450100214747a0a0e0ae95582c54158f",
       "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4"
     },
     {
@@ -5867,7 +5867,7 @@
       "observed_anchor_logical_line": 246,
       "candidate_original_target": 228,
       "matches": false,
-      "current_sha256": "c75908fda4000b814375c8d74b1fa020e4c3c5bb5f8a062730a844bd6d7759b7",
+      "current_sha256": "67d8e664f8db2aff4bb7138869e237ae450100214747a0a0e0ae95582c54158f",
       "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4"
     },
     {
@@ -5881,7 +5881,7 @@
       "observed_anchor_logical_line": 261,
       "candidate_original_target": 235,
       "matches": false,
-      "current_sha256": "c75908fda4000b814375c8d74b1fa020e4c3c5bb5f8a062730a844bd6d7759b7",
+      "current_sha256": "67d8e664f8db2aff4bb7138869e237ae450100214747a0a0e0ae95582c54158f",
       "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4"
     },
     {
@@ -5895,7 +5895,7 @@
       "observed_anchor_logical_line": 420,
       "candidate_original_target": 411,
       "matches": false,
-      "current_sha256": "c75908fda4000b814375c8d74b1fa020e4c3c5bb5f8a062730a844bd6d7759b7",
+      "current_sha256": "67d8e664f8db2aff4bb7138869e237ae450100214747a0a0e0ae95582c54158f",
       "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4"
     },
     {
@@ -6168,42 +6168,42 @@
       "path": "src/mvdm-host/wow32/wow32.c",
       "line_directive": 70,
       "depth": 0,
-      "current_target": 73,
+      "current_target": 59,
       "anchor_current_line": 78,
       "anchor_original_line": 66,
       "anchor": "INT     flOptions = 0;",
-      "observed_anchor_logical_line": 80,
+      "observed_anchor_logical_line": 66,
       "candidate_original_target": 59,
-      "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "matches": true,
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
       "line_directive": 82,
       "depth": 0,
-      "current_target": 85,
+      "current_target": 71,
       "anchor_current_line": 85,
       "anchor_original_line": 73,
       "anchor": "HANDLE  hHostInstance = 0;",
-      "observed_anchor_logical_line": 87,
+      "observed_anchor_logical_line": 73,
       "candidate_original_target": 71,
-      "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "matches": true,
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
       "line_directive": 98,
       "depth": 0,
-      "current_target": 106,
+      "current_target": 92,
       "anchor_current_line": 100,
       "anchor_original_line": 93,
       "anchor": "UINT    iW32ExecTaskId = (UINT)-1;",
-      "observed_anchor_logical_line": 107,
+      "observed_anchor_logical_line": 93,
       "candidate_original_target": 92,
-      "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "matches": true,
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6217,7 +6217,7 @@
       "observed_anchor_logical_line": 197,
       "candidate_original_target": 181,
       "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6231,7 +6231,7 @@
       "observed_anchor_logical_line": 476,
       "candidate_original_target": 470,
       "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6245,7 +6245,7 @@
       "observed_anchor_logical_line": 628,
       "candidate_original_target": 597,
       "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6259,21 +6259,21 @@
       "observed_anchor_logical_line": 703,
       "candidate_original_target": 673,
       "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
       "line_directive": 669,
       "depth": 0,
-      "current_target": 770,
+      "current_target": 745,
       "anchor_current_line": 683,
       "anchor_original_line": 758,
       "anchor": "if (!WK32InitializeHungAppSupport()) {",
-      "observed_anchor_logical_line": 783,
+      "observed_anchor_logical_line": 758,
       "candidate_original_target": 745,
-      "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "matches": true,
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6287,7 +6287,7 @@
       "observed_anchor_logical_line": 823,
       "candidate_original_target": 784,
       "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6301,7 +6301,7 @@
       "observed_anchor_logical_line": 898,
       "candidate_original_target": 871,
       "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6315,7 +6315,7 @@
       "observed_anchor_logical_line": 1030,
       "candidate_original_target": 1001,
       "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6329,35 +6329,35 @@
       "observed_anchor_logical_line": 1040,
       "candidate_original_target": 1011,
       "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
       "line_directive": 895,
       "depth": 0,
-      "current_target": 1068,
+      "current_target": 1039,
       "anchor_current_line": 900,
       "anchor_original_line": 1043,
       "anchor": "LOGRETURN(5,pFrame,ulReturn);",
-      "observed_anchor_logical_line": 1072,
+      "observed_anchor_logical_line": 1043,
       "candidate_original_target": 1039,
-      "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "matches": true,
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",
       "line_directive": 1370,
       "depth": 0,
-      "current_target": 1673,
+      "current_target": 1640,
       "anchor_current_line": 1373,
       "anchor_original_line": 1642,
       "anchor": "BOOL IsDebuggerAttached(VOID)",
-      "observed_anchor_logical_line": 1675,
+      "observed_anchor_logical_line": 1642,
       "candidate_original_target": 1640,
-      "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "matches": true,
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6371,7 +6371,7 @@
       "observed_anchor_logical_line": 1816,
       "candidate_original_target": 1776,
       "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6385,7 +6385,7 @@
       "observed_anchor_logical_line": 1889,
       "candidate_original_target": 1861,
       "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6399,7 +6399,7 @@
       "observed_anchor_logical_line": 1896,
       "candidate_original_target": 1863,
       "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6413,7 +6413,7 @@
       "observed_anchor_logical_line": 1942,
       "candidate_original_target": 1904,
       "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6427,7 +6427,7 @@
       "observed_anchor_logical_line": 2291,
       "candidate_original_target": 2251,
       "matches": false,
-      "current_sha256": "bf5f454f0e8f9375f5b9c8be233fe9ef0c16fa028d6e143a96eb45d100ef2884",
+      "current_sha256": "155bef80623d1ca39054e72830528c53bb4a88aa67b84682af180aa3029dd3ae",
       "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a"
     },
     {
@@ -6497,7 +6497,7 @@
       "observed_anchor_logical_line": 55,
       "candidate_original_target": 53,
       "matches": true,
-      "current_sha256": "ee64fbbf0afac5d52e3dc65e60e7a9cbf5ae15abe80dd3306dba9deb364e2599",
+      "current_sha256": "68f13401e57c14fee940d322f223d9b66a487bd1d1f873e6783b218acfb5aab7",
       "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a"
     },
     {
@@ -6511,21 +6511,21 @@
       "observed_anchor_logical_line": 233,
       "candidate_original_target": 211,
       "matches": false,
-      "current_sha256": "ee64fbbf0afac5d52e3dc65e60e7a9cbf5ae15abe80dd3306dba9deb364e2599",
+      "current_sha256": "68f13401e57c14fee940d322f223d9b66a487bd1d1f873e6783b218acfb5aab7",
       "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a"
     },
     {
       "path": "src/mvdm-host/wow32/wparam.c",
       "line_directive": 247,
       "depth": 0,
-      "current_target": 276,
+      "current_target": 254,
       "anchor_current_line": 253,
       "anchor_original_line": 259,
       "anchor": "PVOID ParamMapUpdateNode(DWORD dwPtr, UINT fMode, VOID* lpNode)",
-      "observed_anchor_logical_line": 281,
+      "observed_anchor_logical_line": 259,
       "candidate_original_target": 254,
-      "matches": false,
-      "current_sha256": "ee64fbbf0afac5d52e3dc65e60e7a9cbf5ae15abe80dd3306dba9deb364e2599",
+      "matches": true,
+      "current_sha256": "68f13401e57c14fee940d322f223d9b66a487bd1d1f873e6783b218acfb5aab7",
       "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a"
     },
     {
@@ -6539,7 +6539,7 @@
       "observed_anchor_logical_line": 317,
       "candidate_original_target": 287,
       "matches": false,
-      "current_sha256": "ee64fbbf0afac5d52e3dc65e60e7a9cbf5ae15abe80dd3306dba9deb364e2599",
+      "current_sha256": "68f13401e57c14fee940d322f223d9b66a487bd1d1f873e6783b218acfb5aab7",
       "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a"
     },
     {
@@ -6553,21 +6553,21 @@
       "observed_anchor_logical_line": 370,
       "candidate_original_target": 341,
       "matches": false,
-      "current_sha256": "ee64fbbf0afac5d52e3dc65e60e7a9cbf5ae15abe80dd3306dba9deb364e2599",
+      "current_sha256": "68f13401e57c14fee940d322f223d9b66a487bd1d1f873e6783b218acfb5aab7",
       "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a"
     },
     {
       "path": "src/mvdm-host/wow32/wparam.c",
       "line_directive": 465,
       "depth": 0,
-      "current_target": 498,
+      "current_target": 473,
       "anchor_current_line": 467,
       "anchor_original_line": 474,
       "anchor": "VOID CacheBlockInit(PBLKCACHE pc, DWORD dwCacheSize)",
-      "observed_anchor_logical_line": 499,
+      "observed_anchor_logical_line": 474,
       "candidate_original_target": 473,
-      "matches": false,
-      "current_sha256": "ee64fbbf0afac5d52e3dc65e60e7a9cbf5ae15abe80dd3306dba9deb364e2599",
+      "matches": true,
+      "current_sha256": "68f13401e57c14fee940d322f223d9b66a487bd1d1f873e6783b218acfb5aab7",
       "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a"
     },
     {
@@ -6581,7 +6581,7 @@
       "observed_anchor_logical_line": 559,
       "candidate_original_target": 534,
       "matches": false,
-      "current_sha256": "ee64fbbf0afac5d52e3dc65e60e7a9cbf5ae15abe80dd3306dba9deb364e2599",
+      "current_sha256": "68f13401e57c14fee940d322f223d9b66a487bd1d1f873e6783b218acfb5aab7",
       "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a"
     },
     {
@@ -6595,7 +6595,7 @@
       "observed_anchor_logical_line": 607,
       "candidate_original_target": 582,
       "matches": false,
-      "current_sha256": "ee64fbbf0afac5d52e3dc65e60e7a9cbf5ae15abe80dd3306dba9deb364e2599",
+      "current_sha256": "68f13401e57c14fee940d322f223d9b66a487bd1d1f873e6783b218acfb5aab7",
       "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a"
     },
     {
@@ -6609,7 +6609,7 @@
       "observed_anchor_logical_line": 588,
       "candidate_original_target": 585,
       "matches": true,
-      "current_sha256": "ee64fbbf0afac5d52e3dc65e60e7a9cbf5ae15abe80dd3306dba9deb364e2599",
+      "current_sha256": "68f13401e57c14fee940d322f223d9b66a487bd1d1f873e6783b218acfb5aab7",
       "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a"
     },
     {
@@ -6651,21 +6651,21 @@
       "observed_anchor_logical_line": 362,
       "candidate_original_target": 360,
       "matches": true,
-      "current_sha256": "9261f63f9af8e4105f570d6a1eb666a8af3597e1effc9de5740f5a2779c81e92",
+      "current_sha256": "ee4cfa4cbb6bbef860f46160c06d40b812ea97aa1222c8d9a9551612cbdb1d5d",
       "original_sha256": "04aa31f76dbb3e683c1f96101b07de006a79ca0d3b49e0a16986166349f3abb3"
     },
     {
       "path": "src/mvdm-host/wow32/wstruc.c",
       "line_directive": 378,
       "depth": 0,
-      "current_target": 379,
+      "current_target": 434,
       "anchor_current_line": 381,
       "anchor_original_line": 436,
       "anchor": "if(*lpdwClrUsed > (DWORD)nEntries) {",
-      "observed_anchor_logical_line": 381,
+      "observed_anchor_logical_line": 436,
       "candidate_original_target": 434,
-      "matches": false,
-      "current_sha256": "9261f63f9af8e4105f570d6a1eb666a8af3597e1effc9de5740f5a2779c81e92",
+      "matches": true,
+      "current_sha256": "ee4cfa4cbb6bbef860f46160c06d40b812ea97aa1222c8d9a9551612cbdb1d5d",
       "original_sha256": "04aa31f76dbb3e683c1f96101b07de006a79ca0d3b49e0a16986166349f3abb3"
     },
     {
@@ -6679,7 +6679,7 @@
       "observed_anchor_logical_line": 689,
       "candidate_original_target": 743,
       "matches": false,
-      "current_sha256": "9261f63f9af8e4105f570d6a1eb666a8af3597e1effc9de5740f5a2779c81e92",
+      "current_sha256": "ee4cfa4cbb6bbef860f46160c06d40b812ea97aa1222c8d9a9551612cbdb1d5d",
       "original_sha256": "04aa31f76dbb3e683c1f96101b07de006a79ca0d3b49e0a16986166349f3abb3"
     },
     {
@@ -6707,21 +6707,21 @@
       "observed_anchor_logical_line": 163,
       "candidate_original_target": 162,
       "matches": true,
-      "current_sha256": "3333e4001fb992e772a0f33ff62c393532e2698b8ac7a0ccf715ea8cca234adc",
+      "current_sha256": "ea32967cc39a7a400a783d4c1862a34b854ddb227bda951e4e62c91aabfa5155",
       "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d"
     },
     {
       "path": "src/mvdm-host/wow32/wuclass.c",
       "line_directive": 751,
       "depth": 0,
-      "current_target": 754,
+      "current_target": 731,
       "anchor_current_line": 752,
       "anchor_original_line": 731,
       "anchor": "SETWC(HWND32(parg16->f1), GCL_WOWvpfnWndProc, 0);",
-      "observed_anchor_logical_line": 754,
+      "observed_anchor_logical_line": 731,
       "candidate_original_target": 731,
-      "matches": false,
-      "current_sha256": "3333e4001fb992e772a0f33ff62c393532e2698b8ac7a0ccf715ea8cca234adc",
+      "matches": true,
+      "current_sha256": "ea32967cc39a7a400a783d4c1862a34b854ddb227bda951e4e62c91aabfa5155",
       "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d"
     },
     {
@@ -6735,7 +6735,7 @@
       "observed_anchor_logical_line": 783,
       "candidate_original_target": 754,
       "matches": false,
-      "current_sha256": "3333e4001fb992e772a0f33ff62c393532e2698b8ac7a0ccf715ea8cca234adc",
+      "current_sha256": "ea32967cc39a7a400a783d4c1862a34b854ddb227bda951e4e62c91aabfa5155",
       "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d"
     },
     {
@@ -6749,7 +6749,7 @@
       "observed_anchor_logical_line": 1081,
       "candidate_original_target": 1043,
       "matches": false,
-      "current_sha256": "3333e4001fb992e772a0f33ff62c393532e2698b8ac7a0ccf715ea8cca234adc",
+      "current_sha256": "ea32967cc39a7a400a783d4c1862a34b854ddb227bda951e4e62c91aabfa5155",
       "original_sha256": "12cdd44dfec6b74a426165977f941da86d90bbad7aa9c59a085010d02528629d"
     },
     {
@@ -6812,14 +6812,14 @@
       "path": "src/mvdm-host/wow32/wudlg.c",
       "line_directive": 40,
       "depth": 0,
-      "current_target": 41,
+      "current_target": 36,
       "anchor_current_line": 46,
       "anchor_original_line": 41,
       "anchor": "if (CURRENTPTD()->dwFlags & TDF_IGNOREINPUT) {",
-      "observed_anchor_logical_line": 46,
+      "observed_anchor_logical_line": 41,
       "candidate_original_target": 36,
-      "matches": false,
-      "current_sha256": "a96e0a54a50c059879185e838fee60369bf94e4ab27f9ef2abc2716fbf774d82",
+      "matches": true,
+      "current_sha256": "c15aa6a307508e07a9258ffeb9cc843a1cd040a4133b3b41ef3594d615ae271f",
       "original_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e"
     },
     {
@@ -6833,35 +6833,35 @@
       "observed_anchor_logical_line": 85,
       "candidate_original_target": 79,
       "matches": false,
-      "current_sha256": "a96e0a54a50c059879185e838fee60369bf94e4ab27f9ef2abc2716fbf774d82",
+      "current_sha256": "c15aa6a307508e07a9258ffeb9cc843a1cd040a4133b3b41ef3594d615ae271f",
       "original_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e"
     },
     {
       "path": "src/mvdm-host/wow32/wudlg.c",
       "line_directive": 102,
       "depth": 0,
-      "current_target": 103,
+      "current_target": 97,
       "anchor_current_line": 106,
       "anchor_original_line": 100,
       "anchor": "LOGDEBUG(6,(\"    No Thunking was required for the 32-bit message %s(%04x)\\n\", (LPSZ)GetWMMsgName(uMsg), uMsg));",
-      "observed_anchor_logical_line": 106,
+      "observed_anchor_logical_line": 100,
       "candidate_original_target": 97,
-      "matches": false,
-      "current_sha256": "a96e0a54a50c059879185e838fee60369bf94e4ab27f9ef2abc2716fbf774d82",
+      "matches": true,
+      "current_sha256": "c15aa6a307508e07a9258ffeb9cc843a1cd040a4133b3b41ef3594d615ae271f",
       "original_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e"
     },
     {
       "path": "src/mvdm-host/wow32/wudlg.c",
       "line_directive": 127,
       "depth": 0,
-      "current_target": 129,
+      "current_target": 123,
       "anchor_current_line": 140,
       "anchor_original_line": 135,
       "anchor": "if (uMsg == WM_GETTEXT  &&  wm32mpex.lReturn != 0) {",
-      "observed_anchor_logical_line": 141,
+      "observed_anchor_logical_line": 135,
       "candidate_original_target": 123,
-      "matches": false,
-      "current_sha256": "a96e0a54a50c059879185e838fee60369bf94e4ab27f9ef2abc2716fbf774d82",
+      "matches": true,
+      "current_sha256": "c15aa6a307508e07a9258ffeb9cc843a1cd040a4133b3b41ef3594d615ae271f",
       "original_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e"
     },
     {
@@ -6875,7 +6875,7 @@
       "observed_anchor_logical_line": 161,
       "candidate_original_target": 145,
       "matches": false,
-      "current_sha256": "a96e0a54a50c059879185e838fee60369bf94e4ab27f9ef2abc2716fbf774d82",
+      "current_sha256": "c15aa6a307508e07a9258ffeb9cc843a1cd040a4133b3b41ef3594d615ae271f",
       "original_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e"
     },
     {
@@ -6910,14 +6910,14 @@
       "path": "src/mvdm-host/wow32/wuser31.c",
       "line_directive": 470,
       "depth": 0,
-      "current_target": 475,
+      "current_target": 465,
       "anchor_current_line": 475,
       "anchor_original_line": 469,
       "anchor": "ul = SystemParametersInfo(",
-      "observed_anchor_logical_line": 479,
+      "observed_anchor_logical_line": 469,
       "candidate_original_target": 465,
-      "matches": false,
-      "current_sha256": "6ca077ab54916b6850e109c0ef55e10e42c270997b274ca7f3aedc97e3baa885",
+      "matches": true,
+      "current_sha256": "788d5c2ef2f877dcc8084902e93238e9fcbe2c9c5873bdf901a390e9f7e9320d",
       "original_sha256": "260237f9fda0013f02bbbcbc94c29ea2069de545043b636f2828c554e55582a4"
     },
     {
@@ -6931,7 +6931,7 @@
       "observed_anchor_logical_line": 766,
       "candidate_original_target": 749,
       "matches": false,
-      "current_sha256": "6ca077ab54916b6850e109c0ef55e10e42c270997b274ca7f3aedc97e3baa885",
+      "current_sha256": "788d5c2ef2f877dcc8084902e93238e9fcbe2c9c5873bdf901a390e9f7e9320d",
       "original_sha256": "260237f9fda0013f02bbbcbc94c29ea2069de545043b636f2828c554e55582a4"
     },
     {
@@ -6959,21 +6959,21 @@
       "observed_anchor_logical_line": 902,
       "candidate_original_target": 898,
       "matches": true,
-      "current_sha256": "705e476f1b07f049cf4557872b856dd158a78c03b336bbfc742a0e9ac37b43df",
+      "current_sha256": "387124886ffa9f6eb4f2c5d73aead8bf4c8a67dbf63a064762dbec175ffc7e0d",
       "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc"
     },
     {
       "path": "src/mvdm-host/wow32/wuwind.c",
       "line_directive": 2481,
       "depth": 0,
-      "current_target": 2486,
+      "current_target": 2462,
       "anchor_current_line": 2488,
       "anchor_original_line": 2468,
       "anchor": "SETWL(HWND32(parg16->f1), GWL_WOWvpfnWndProc, 0 );",
-      "observed_anchor_logical_line": 2492,
+      "observed_anchor_logical_line": 2468,
       "candidate_original_target": 2462,
-      "matches": false,
-      "current_sha256": "705e476f1b07f049cf4557872b856dd158a78c03b336bbfc742a0e9ac37b43df",
+      "matches": true,
+      "current_sha256": "387124886ffa9f6eb4f2c5d73aead8bf4c8a67dbf63a064762dbec175ffc7e0d",
       "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc"
     },
     {
@@ -6987,7 +6987,7 @@
       "observed_anchor_logical_line": 2529,
       "candidate_original_target": 2494,
       "matches": false,
-      "current_sha256": "705e476f1b07f049cf4557872b856dd158a78c03b336bbfc742a0e9ac37b43df",
+      "current_sha256": "387124886ffa9f6eb4f2c5d73aead8bf4c8a67dbf63a064762dbec175ffc7e0d",
       "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc"
     },
     {
@@ -7106,14 +7106,14 @@
       "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
       "line_directive": 120,
       "depth": 0,
-      "current_target": 126,
+      "current_target": 127,
       "anchor_current_line": 130,
       "anchor_original_line": 136,
       "anchor": "IN LPVOID Address OPTIONAL",
-      "observed_anchor_logical_line": 135,
+      "observed_anchor_logical_line": 136,
       "candidate_original_target": 127,
-      "matches": false,
-      "current_sha256": "188a6504e1cae72d744f735918986764bcd8fa1bc6799f67cdd960ebfa4b9d0f",
+      "matches": true,
+      "current_sha256": "f6ee15c1537fe943c35092a93f604ad971295d033a0fcb1a6c1eea266182ae17",
       "original_sha256": "45b70c02c0aeb79f674e68a475669d45e2e5e6fab21f20e9bfcfe229d8958525"
     },
     {
@@ -7127,7 +7127,7 @@
       "observed_anchor_logical_line": 182,
       "candidate_original_target": 179,
       "matches": false,
-      "current_sha256": "188a6504e1cae72d744f735918986764bcd8fa1bc6799f67cdd960ebfa4b9d0f",
+      "current_sha256": "f6ee15c1537fe943c35092a93f604ad971295d033a0fcb1a6c1eea266182ae17",
       "original_sha256": "45b70c02c0aeb79f674e68a475669d45e2e5e6fab21f20e9bfcfe229d8958525"
     },
     {
@@ -7141,21 +7141,21 @@
       "observed_anchor_logical_line": 292,
       "candidate_original_target": 288,
       "matches": true,
-      "current_sha256": "188a6504e1cae72d744f735918986764bcd8fa1bc6799f67cdd960ebfa4b9d0f",
+      "current_sha256": "f6ee15c1537fe943c35092a93f604ad971295d033a0fcb1a6c1eea266182ae17",
       "original_sha256": "45b70c02c0aeb79f674e68a475669d45e2e5e6fab21f20e9bfcfe229d8958525"
     },
     {
       "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
       "line_directive": 63,
       "depth": 0,
-      "current_target": 158,
+      "current_target": 156,
       "anchor_current_line": 67,
       "anchor_original_line": 159,
       "anchor": "NetpCopyStringToBuffer (",
-      "observed_anchor_logical_line": 161,
+      "observed_anchor_logical_line": 159,
       "candidate_original_target": 156,
-      "matches": false,
-      "current_sha256": "87db425e4746c2063732222c435aad493878236bc458c0eeb8ea045c64e66ace",
+      "matches": true,
+      "current_sha256": "85a6e322a46388a1cceb9403f4fdb20670be38d6e8c1482a135b75625d57f0fc",
       "original_sha256": "552ab1d7c2b5de620609312a6c500afa504d22b3852bebb3582eafb524c6c115"
     },
     {

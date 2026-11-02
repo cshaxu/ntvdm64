@@ -230,7 +230,7 @@ static PAINTFUNCS huge_colour_paint_funcs =
 #ifdef MONITOR
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
-#line 281
+#line 265
 
 static INITFUNCS mono_init_funcs =
 {
@@ -2070,7 +2070,7 @@ void graphicsResize(void)
 #ifdef X86GFX
 #error Unsupported excluded original configuration
 #endif
-#line 2215
+#line 2069
 
         /* Destroy previous data. */
 	closeGraphicsBuffer(); /* Tim Oct 92 */

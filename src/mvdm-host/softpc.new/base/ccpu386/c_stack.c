@@ -378,7 +378,7 @@ IFN4(
 #line 376
 #define XX_error_code 0
 #endif
-#line 378
+#line 465
 
    if ( GET_OPERAND_SIZE() == USE16 )
       bytes = nr_items * 2;

@@ -1885,7 +1885,7 @@ GLOBAL void vd_read_dot IFN0()
 #else
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
-#line 1886
+#line 1896
 
 GLOBAL void vd_write_teletype IFN0()
 {

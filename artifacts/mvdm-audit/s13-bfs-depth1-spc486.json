@@ -381,7 +381,7 @@
     "removed_body_lines": 16,
     "subsumed_markers": {},
     "selected_alternative_line": 1840,
-    "following_line": 1842,
+    "following_line": 1783,
     "preceding_anchor": [
       "case  0xcf:",
       "case  0xce:",
@@ -397,7 +397,9 @@
     "current_start_line": 1765,
     "current_cut_line": 1767,
     "current_end_line": 1770,
-    "after_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b"
+    "after_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+    "prior_following_line": 1842,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-first-depth-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
@@ -415,7 +417,7 @@
     "removed_body_lines": 1,
     "subsumed_markers": {},
     "selected_alternative_line": null,
-    "following_line": 4627,
+    "following_line": 4741,
     "preceding_anchor": [
       "IBOOL disableNpx = FALSE;",
       "{",
@@ -431,7 +433,9 @@
     "current_start_line": 4556,
     "current_cut_line": 4558,
     "current_end_line": 4558,
-    "after_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b"
+    "after_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+    "prior_following_line": 4627,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-first-depth-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
@@ -551,7 +555,7 @@
     "removed_body_lines": 11,
     "subsumed_markers": {},
     "selected_alternative_line": null,
-    "following_line": 1434,
+    "following_line": 1430,
     "preceding_anchor": [
       "}",
       "SET_VM(val);",
@@ -567,7 +571,9 @@
     "current_start_line": 1373,
     "current_cut_line": 1375,
     "current_end_line": 1375,
-    "after_sha256": "9e5c78b142c189b1b56f84527049f4e78214935e3fc7546a542a13f927adcc30"
+    "after_sha256": "9e5c78b142c189b1b56f84527049f4e78214935e3fc7546a542a13f927adcc30",
+    "prior_following_line": 1434,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-first-depth-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
@@ -723,7 +729,7 @@
     "removed_body_lines": 1,
     "subsumed_markers": {},
     "selected_alternative_line": 376,
-    "following_line": 378,
+    "following_line": 465,
     "preceding_anchor": [
       "the book says...",
       "experiment is done to show which is the correct behaviour, we'll do what",
@@ -739,7 +745,9 @@
     "current_start_line": 374,
     "current_cut_line": 376,
     "current_end_line": 379,
-    "after_sha256": "b3fd7175fcfe607ac0adfe053abeb6eacf156d694d7e8e37b96e05da23d8d93c"
+    "after_sha256": "b3fd7175fcfe607ac0adfe053abeb6eacf156d694d7e8e37b96e05da23d8d93c",
+    "prior_following_line": 378,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-first-depth-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",

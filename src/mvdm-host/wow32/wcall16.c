@@ -608,7 +608,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 720
+#line 695
 
     if (pParm16)
         RtlCopyMemory(&pCBFrame->Parm16, pParm16, sizeof(PARM16));

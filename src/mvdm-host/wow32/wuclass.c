@@ -748,7 +748,7 @@ ULONG FASTCALL WU32SetClassLong(PVDMFRAME pFrame)
 #else
 #error Unsupported excluded original configuration
 #endif
-#line 754
+#line 731
                     SETWC(HWND32(parg16->f1), GCL_WOWvpfnWndProc, 0);
                 } else {
                     //

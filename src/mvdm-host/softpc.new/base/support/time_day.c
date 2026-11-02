@@ -180,7 +180,7 @@ void time_of_day()
 #ifndef NTVDM
 #error Excluded unsupported non-NTVDM time service profile
 #endif
-#line 209
+#line 233
 		if( UPDATE_IN_PROGRESS )
 			setCF(1);
 		else
@@ -194,7 +194,7 @@ void time_of_day()
 #ifndef NTVDM
 #error Excluded unsupported non-NTVDM time service profile
 #endif
-#line 224
+#line 261
 		break;
 
 	case 3:	/* Set the real time clock	*/
@@ -222,7 +222,7 @@ void time_of_day()
 #ifndef NTVDM
 #error Excluded unsupported non-NTVDM time service profile
 #endif
-#line 253
+#line 290
 		if( UPDATE_IN_PROGRESS )
 			setCF(1);
 		else

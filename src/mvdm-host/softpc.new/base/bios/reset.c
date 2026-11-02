@@ -621,7 +621,7 @@ void reset()
 #ifdef IPC
 #error Unsupported excluded original configuration
 #endif /* IPC */
-#line 759
+#line 815
 
 	cmos_init();
 	cmos_post();

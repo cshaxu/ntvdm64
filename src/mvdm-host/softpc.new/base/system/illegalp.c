@@ -119,7 +119,7 @@ void illegal_op_int()
 #endif /* MONITOR */
 #endif /* PROD */
 #endif /* NTVDM */
-#line 126
+#line 121
 
 
 

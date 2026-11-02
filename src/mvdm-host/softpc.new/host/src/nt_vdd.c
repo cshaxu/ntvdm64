@@ -268,7 +268,7 @@ BOOL VDDInstallIOHook (
 #ifdef MONITOR
 #error Excluded original conditional branch
 #endif
-#line 271
+#line 281
 
 
       // check parameters
@@ -321,7 +321,7 @@ BOOL VDDInstallIOHook (
 #ifdef MONITOR
 #error Excluded original conditional branch
 #endif
-#line 320
+#line 344
               if (!io_connect_port(w, (half_word)wAdapter, IO_READ_WRITE))
                  {
                   // if one of the port connects failed

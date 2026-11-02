@@ -1373,7 +1373,7 @@ IFN1(
 #ifdef	SPC486
 #error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
-#line 1434
+#line 1430
 
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

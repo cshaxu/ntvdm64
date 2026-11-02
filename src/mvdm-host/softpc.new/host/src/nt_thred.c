@@ -104,7 +104,7 @@ Return Value:
 #ifdef MONITOR
 #error Excluded original conditional branch
 #endif
-#line 104
+#line 101
         if (!(dwCreationFlags & CREATE_SUSPENDED))
             ResumeThread(Thread);
 

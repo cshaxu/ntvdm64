@@ -40,7 +40,7 @@ DWORD dwTotalCacheAccess = 0;
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 44
+#line 42
 
 BOOL FASTCALL IsModuleSymantecInstall(HAND16 hMod16);
 
@@ -557,7 +557,7 @@ ULONG FASTCALL WK32FileRead (PVDMFRAME pFrame)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 561
+#line 559
     }
 
     FREEVDMPTR(pDst);

@@ -67,7 +67,7 @@ MODNAME(wow32.c);
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 73
+#line 59
 
 /*  iloglevel = 16 MAX the world (all 16 bit kernel internal calls
  *  iloglevel = 14 All internal WOW kernel Calls
@@ -79,23 +79,23 @@ INT     flOptions = 0;           // command line optin
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 85
+#line 71
 
 HANDLE  hmodWOW32;
 HANDLE  hHostInstance = 0;
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 92
+#line 78
 #ifdef i386
 #error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #endif
-#line 95
+#line 81
 
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 106
+#line 92
 
 UINT    iW32ExecTaskId = (UINT)-1;    // Base Task ID of Task Being Exec'd
 WORD    iWOWTaskCur = 0;        // pTDB of currently running task ID
@@ -666,7 +666,7 @@ BOOL W32Init(VOID)
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
-#line 770
+#line 745
 
     // Initialize ClipBoard formats structure.
 
@@ -892,7 +892,7 @@ VOID W32Dispatch()
 #ifdef WOWPROFILE // For API profiling only (debugger extension)
 #error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
-#line 1068
+#line 1039
 
         FREEVDMPTR(pFrame);                                                     // Set the 16-bit return code
         GETFRAMEPTR(ptd->vpStack, pFrame);
@@ -1367,7 +1367,7 @@ KillTask:
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
-#line 1673
+#line 1640
 
 
 BOOL IsDebuggerAttached(VOID)

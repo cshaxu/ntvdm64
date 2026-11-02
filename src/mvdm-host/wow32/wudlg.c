@@ -37,7 +37,7 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
 #error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
-#line 41
+#line 36
 
     // If the app has GP Faulted we don't want to pass it any more input
     // This should be removed when USER32 does clean up on task death so
@@ -99,7 +99,7 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
 #error Excluded unsupported WOW profiling configuration
 #endif  // WOWPROFILE
-#line 103
+#line 97
 
     }
     else {
@@ -124,7 +124,7 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
 #error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
-#line 129
+#line 123
 
 
         //

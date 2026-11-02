@@ -245,7 +245,7 @@
     "removed_body_lines": 2,
     "subsumed_markers": {},
     "selected_alternative_line": null,
-    "following_line": 44,
+    "following_line": 42,
     "preceding_anchor": [
       "DWORD dwTotalCacheAccess = 0;",
       "DWORD dwTotalCacheBytes = 0;",
@@ -261,7 +261,9 @@
     "current_start_line": 40,
     "current_cut_line": 42,
     "current_end_line": 42,
-    "after_sha256": "838d9acb172fc6fa431ce561c1049121e505bf08b24d0211b0d5ebc76c961dbf"
+    "after_sha256": "838d9acb172fc6fa431ce561c1049121e505bf08b24d0211b0d5ebc76c961dbf",
+    "prior_following_line": 44,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-first-depth-batch.json"
   },
   {
     "path": "src/mvdm-host/wow32/wkfileio.c",
@@ -279,7 +281,7 @@
     "removed_body_lines": 2,
     "subsumed_markers": {},
     "selected_alternative_line": null,
-    "following_line": 561,
+    "following_line": 559,
     "preceding_anchor": [
       "FLUSHVDMCODEPTR(parg16->lpBuf, (WORD)dwBytesRead, pDst);",
       "if ((dwBytesRead & 0xffff0000) != 0xffff0000) {",
@@ -295,7 +297,9 @@
     "current_start_line": 557,
     "current_cut_line": 559,
     "current_end_line": 559,
-    "after_sha256": "838d9acb172fc6fa431ce561c1049121e505bf08b24d0211b0d5ebc76c961dbf"
+    "after_sha256": "838d9acb172fc6fa431ce561c1049121e505bf08b24d0211b0d5ebc76c961dbf",
+    "prior_following_line": 561,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-first-depth-batch.json"
   },
   {
     "path": "src/mvdm-host/wow32/wmdisp32.c",
@@ -343,7 +347,7 @@
     "removed_body_lines": 3,
     "subsumed_markers": {},
     "selected_alternative_line": null,
-    "following_line": 152,
+    "following_line": 141,
     "preceding_anchor": [
       "LOGDEBUG(6,(\"    Thunking window %x message %s\\n\", hwnd, GetWMMsgName(uMsg)));",
       "}",
@@ -359,7 +363,9 @@
     "current_start_line": 148,
     "current_cut_line": 150,
     "current_end_line": 150,
-    "after_sha256": "c648e970dc15ff09436e0bf38599ba3fb94a444e421314304d802cf649ce16b9"
+    "after_sha256": "c648e970dc15ff09436e0bf38599ba3fb94a444e421314304d802cf649ce16b9",
+    "prior_following_line": 152,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-first-depth-batch.json"
   },
   {
     "path": "src/mvdm-host/wow32/wmdisp32.c",
@@ -913,7 +919,7 @@
     "removed_body_lines": 7,
     "subsumed_markers": {},
     "selected_alternative_line": 496,
-    "following_line": 498,
+    "following_line": 473,
     "preceding_anchor": [
       "}",
       "pLast->pNext = pNew; \\",
@@ -929,7 +935,9 @@
     "current_start_line": 487,
     "current_cut_line": 489,
     "current_end_line": 492,
-    "after_sha256": "35c648e16f616f91c0083bd5da217ff2b5a3dd0885bcffdff1a276bbc9f85063"
+    "after_sha256": "35c648e16f616f91c0083bd5da217ff2b5a3dd0885bcffdff1a276bbc9f85063",
+    "prior_following_line": 498,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-first-depth-batch.json"
   },
   {
     "path": "src/mvdm-host/wow32/wparam.c",
@@ -1051,7 +1059,7 @@
     "removed_body_lines": 3,
     "subsumed_markers": {},
     "selected_alternative_line": null,
-    "following_line": 379,
+    "following_line": 434,
     "preceding_anchor": [
       "}",
       "nEntries = 0;",
@@ -1067,7 +1075,9 @@
     "current_start_line": 374,
     "current_cut_line": 376,
     "current_end_line": 376,
-    "after_sha256": "f574a2c0a5ce6de4747e1ca33a395e7a7f8a169f17ff05109336a6ab0db22dc0"
+    "after_sha256": "f574a2c0a5ce6de4747e1ca33a395e7a7f8a169f17ff05109336a6ab0db22dc0",
+    "prior_following_line": 379,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-first-depth-batch.json"
   },
   {
     "path": "src/mvdm-host/wow32/wstruc.c",
@@ -1351,7 +1361,7 @@
     "removed_body_lines": 6,
     "subsumed_markers": {},
     "selected_alternative_line": null,
-    "following_line": 475,
+    "following_line": 465,
     "preceding_anchor": [
       "default:",
       "break;",
@@ -1367,7 +1377,9 @@
     "current_start_line": 467,
     "current_cut_line": 469,
     "current_end_line": 469,
-    "after_sha256": "2103d188b5eb0438e6ef8ae1b04e20593d4201b4997479e7f10f7d679cf5d552"
+    "after_sha256": "2103d188b5eb0438e6ef8ae1b04e20593d4201b4997479e7f10f7d679cf5d552",
+    "prior_following_line": 475,
+    "line_mapping_update_evidence": "s13-bfs-depth1-line-first-depth-batch.json"
   },
   {
     "path": "src/mvdm-host/wow32/wuser31.c",

@@ -50,7 +50,7 @@ def find_guard(lines, condition, marker, following, selected, label):
             elif depth == 1 and kind == 'else':
                 alternative = end
     if len(matches) != 1:
-        raise SystemExit(f'{label}: expected one matching guard, found {len(matches)}')
+        raise SystemExit(f'{label}: expected one matching guard for following={following}, selected={selected}; found {matches}')
     return matches[0]
 
 
