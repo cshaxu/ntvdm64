@@ -58,12 +58,12 @@
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
       "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
-      "working_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550",
+      "working_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318",
       "original_lines": [
         282
       ],
       "missing_signature_occurrences": 1,
-      "disposition": "not yet reconciled; original anchors and retained selected bodies require review"
+      "disposition": "resolved: exact original selector restored and unused MVDM_SOFTPC_RECOVER_ROM_RESIDENCY flag removed; selected original ROM resource loading remains unchanged"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",

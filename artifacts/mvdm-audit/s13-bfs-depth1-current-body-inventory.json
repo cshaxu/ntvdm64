@@ -36581,7 +36581,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36594,7 +36594,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 5,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36607,7 +36607,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36620,7 +36620,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 5,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36633,7 +36633,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36646,7 +36646,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36659,7 +36659,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36672,7 +36672,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36685,7 +36685,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36698,7 +36698,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36711,7 +36711,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36724,7 +36724,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36737,7 +36737,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 2,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36750,7 +36750,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36763,7 +36763,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36776,7 +36776,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36789,7 +36789,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36802,7 +36802,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -36815,150 +36815,150 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 46,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
       "start": 261,
-      "cut": 305,
-      "group_end": 307,
+      "cut": 299,
+      "group_end": 301,
       "kind": "if",
-      "expression": "!defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) ) || defined(MVDM_SOFTPC_RECOVER_ROM_RESIDENCY)",
+      "expression": "!defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) )",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
-      "body_lines": 43,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "body_lines": 37,
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
-      "start": 305,
-      "cut": 307,
-      "group_end": 307,
+      "start": 299,
+      "cut": 301,
+      "group_end": 301,
       "kind": "else",
       "expression": "",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
-      "start": 315,
-      "cut": 345,
-      "group_end": 347,
+      "start": 309,
+      "cut": 339,
+      "group_end": 341,
       "kind": "if",
       "expression": "!(defined(NTVDM) && defined(MONITOR))",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 29,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
-      "start": 345,
-      "cut": 347,
-      "group_end": 347,
+      "start": 339,
+      "cut": 341,
+      "group_end": 341,
       "kind": "else",
       "expression": "",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
-      "start": 408,
-      "cut": 422,
-      "group_end": 422,
+      "start": 402,
+      "cut": 416,
+      "group_end": 416,
       "kind": "if",
       "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX))",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 13,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
-      "start": 428,
-      "cut": 431,
-      "group_end": 431,
+      "start": 422,
+      "cut": 425,
+      "group_end": 425,
       "kind": "if",
       "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
-      "start": 436,
-      "cut": 506,
-      "group_end": 506,
+      "start": 430,
+      "cut": 500,
+      "group_end": 500,
       "kind": "if",
       "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 69,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
-      "start": 510,
-      "cut": 529,
-      "group_end": 529,
+      "start": 504,
+      "cut": 523,
+      "group_end": 523,
       "kind": "ifndef",
       "expression": "GISP_SVGA",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 18,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
-      "start": 535,
-      "cut": 537,
-      "group_end": 539,
+      "start": 529,
+      "cut": 531,
+      "group_end": 533,
       "kind": "ifndef",
       "expression": "GISP_SVGA",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
-      "start": 537,
-      "cut": 539,
-      "group_end": 539,
+      "start": 531,
+      "cut": 533,
+      "group_end": 533,
       "kind": "else",
       "expression": "",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
-      "start": 543,
-      "cut": 616,
-      "group_end": 616,
+      "start": 537,
+      "cut": 610,
+      "group_end": 610,
       "kind": "if",
       "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 72,
-      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+      "source_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/timer.c",

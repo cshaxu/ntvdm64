@@ -943,15 +943,6 @@ $keymouseObjects = foreach ($name in $keymouseNames) {
 $systemObjects = foreach ($name in $systemNames) {
     $object = 'obj/system/' + [IO.Path]::GetFileNameWithoutExtension($name) + '.obj'
 $graph.Add('build ' + $object + ': cc ' + (NinjaPath (Join-Path $systemRoot $name)))
-    if ($name -eq 'rom.c') {
-        # `rom.c` is the explicit kernel-product boundary within the original
-        # x86 profile: X86GFX excludes its generic ROM scratch implementation
-        # in favour of the kernel VDM's pre-resident-ROM shell.  That shell is
-        # not a finite standalone ABI, so retain the selected original
-        # resource/SAS-copy route.  The NTIO handoff is selected only in its
-        # direct consumers, not by reviving the retired monitor product shell.
-        $graph.Add('  cflags = ' + $baseFlags + ' /DMVDM_SOFTPC_RECOVER_ROM_RESIDENCY')
-    }
     $object
 }
 $disksObjects = foreach ($name in $disksNames) {

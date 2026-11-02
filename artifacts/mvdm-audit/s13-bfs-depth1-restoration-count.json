@@ -143,9 +143,14 @@
       "file": "src/mvdm-host/wow32/wow32.c",
       "original_condition": "#if FASTBOPPING / #else (original line 1910)",
       "evidence": "s13-bfs-depth1-fastwow-original-outers.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "original_condition": "#if !defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) ) (original line 282)",
+      "evidence": "s13-bfs-depth1-rom-original-selector.json"
     }
   ],
-  "derived_total": 69,
-  "derived_current_bfs_total": 36,
+  "derived_total": 70,
+  "derived_current_bfs_total": 37,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

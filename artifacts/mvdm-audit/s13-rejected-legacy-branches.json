@@ -294,41 +294,41 @@
   {
     "path": "src/mvdm-host/softpc.new/base/system/rom.c",
     "macro": "A2CPU",
-    "line": 340,
-    "body_end": 341,
+    "line": 334,
+    "body_end": 335,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
     "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
     "local_sha256": "b04cea60a3a8005cafe464ecd5918d21c12bb3924956012614fd90911e9e2050",
     "removed_body_sha256": "41fe5600a79c2d48bc138be23f834226694aaa9f6fe9157be114831153bf749c",
     "removed_body_lines": 1,
     "after_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
-    "final_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+    "final_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/system/rom.c",
     "macro": "A2CPU",
-    "line": 322,
-    "body_end": 323,
+    "line": 316,
+    "body_end": 317,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
     "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
     "local_sha256": "b04cea60a3a8005cafe464ecd5918d21c12bb3924956012614fd90911e9e2050",
     "removed_body_sha256": "5c864aec6a173f85a5283cc2f033c101c7561fde7b4f20b42d84594117f6e424",
     "removed_body_lines": 1,
     "after_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
-    "final_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+    "final_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/system/rom.c",
     "macro": "A2CPU",
-    "line": 278,
-    "body_end": 279,
+    "line": 272,
+    "body_end": 273,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
     "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
     "local_sha256": "b04cea60a3a8005cafe464ecd5918d21c12bb3924956012614fd90911e9e2050",
     "removed_body_sha256": "6bbbb6aa39b4181d0271721ffa5320782ebcace28ca317931aa7325eec107624",
     "removed_body_lines": 1,
     "after_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
-    "final_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+    "final_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -341,7 +341,7 @@
     "removed_body_sha256": "b4be99b65fe849634b71ec4dce4d75d8b2f8d2489a5591bf8d1b94e6aa868781",
     "removed_body_lines": 2,
     "after_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
-    "final_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550"
+    "final_sha256": "b2351bc2e9f89581fe5a9ea39cf297f9a7ba224364eb45f1ff704eff1a7d8318"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/com.c",

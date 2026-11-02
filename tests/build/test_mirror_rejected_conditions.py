@@ -382,3 +382,15 @@ rejected = subprocess.run(base[:-1] + ['/DFASTBOPPING=1'] + base[-1:], capture_o
 if allowed.returncode or not rejected.returncode or 'Excluded unsupported FASTBOPPING host profile' not in rejected.stdout + rejected.stderr:
     raise SystemExit('FASTBOPPING guard failed')
 print('PASS original FASTBOPPING outer guards and selected profile')
+
+# The ROM generic-loader selector is the original OpenNT expression.
+rom = (repo / 'src/mvdm-host/softpc.new/base/system/rom.c').read_text(encoding='latin1')
+selector = '#if !defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) )'
+if sum(line.strip() == selector for line in rom.splitlines()) != 1:
+    raise SystemExit('original ROM selector missing or changed')
+probe.write_text(selector + '\n#else\n#error unsupported ROM profile\n#endif\n', encoding='ascii')
+allowed = subprocess.run(base[:-1] + ['/DNTVDM'] + base[-1:], capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base[:-1] + ['/DNTVDM', '/DX86GFX'] + base[-1:], capture_output=True, text=True, errors='replace')
+if allowed.returncode or not rejected.returncode or 'unsupported ROM profile' not in rejected.stdout + rejected.stderr:
+    raise SystemExit('ROM selector control failed')
+print('PASS original ROM selector and excluded X86GFX profile')
