@@ -494,3 +494,18 @@ rejected = subprocess.run(base[:-1] + ['/Di386'] + base[-1:], capture_output=Tru
 if allowed.returncode or not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
     raise SystemExit('kernel VDM stack publication rejection failed')
 print('PASS kernel VDM stack publication exclusion')
+
+# Original SOFTPC i386 branches refer to the unavailable kernel VDM.
+softpc = (repo / 'src/mvdm-host/inc/softpc.h').read_text(encoding='latin1')
+for marker in ('Excluded unsupported i386 kernel VDM declarations',
+               'Excluded unsupported i386 kernel VDM register interface'):
+    if '#ifdef i386\n#error ' + marker not in softpc:
+        raise SystemExit('SOFTPC i386 exclusion missing: ' + marker)
+    probe.write_text('#ifdef i386\n#error ' + marker + '\n#endif\n', encoding='ascii')
+    allowed = subprocess.run(base[:-1] + ['/Ui386'] + base[-1:], capture_output=True, text=True, errors='replace')
+    rejected = subprocess.run(base[:-1] + ['/Di386'] + base[-1:], capture_output=True, text=True, errors='replace')
+    if allowed.returncode or not rejected.returncode or marker not in rejected.stdout + rejected.stderr:
+        raise SystemExit('SOFTPC i386 exclusion control failed: ' + marker)
+if 'extern USHORT __cdecl getAX(VOID);' not in softpc:
+    raise SystemExit('selected CPU40 cdecl declaration was removed')
+print('PASS SOFTPC i386 kernel exclusions and retained CPU40 cdecl')

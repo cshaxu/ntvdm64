@@ -4,15 +4,15 @@
   "depth1_arms": 5070,
   "depth1_status": {
     "unselected-file": 766,
-    "newly-excluded": 668,
+    "newly-excluded": 670,
     "already-excluded": 1699,
-    "pending": 54,
+    "pending": 52,
     "retained-observed": 1874,
     "retained-original-assertion": 9
   },
   "depth2_parent_status_counts": {
     "retained-observed": 1407,
-    "pending": 37,
+    "pending": 36,
     "unselected-file": 1594
   },
   "restored_original_groups_relative_to_fixed_head": 80,

@@ -3583,37 +3583,37 @@
       "group_end": 35,
       "kind": "ifdef",
       "expression": "i386",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "04dad85bea7e01954c337fe3a3dc700e8bd7407b60f01eb2393f6055a2bdf8f3"
+      "source_sha256": "a8aa811416df11ed064afff7ac556e0d2c9c3c1d3840e0b8b53bbc4d2d54395e"
     },
     {
       "path": "src/mvdm-host/inc/softpc.h",
       "start": 230,
-      "cut": 531,
-      "group_end": 656,
+      "cut": 232,
+      "group_end": 358,
       "kind": "ifdef",
       "expression": "i386",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 300,
-      "source_sha256": "04dad85bea7e01954c337fe3a3dc700e8bd7407b60f01eb2393f6055a2bdf8f3"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "a8aa811416df11ed064afff7ac556e0d2c9c3c1d3840e0b8b53bbc4d2d54395e"
     },
     {
       "path": "src/mvdm-host/inc/softpc.h",
-      "start": 531,
-      "cut": 656,
-      "group_end": 656,
+      "start": 232,
+      "cut": 358,
+      "group_end": 358,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
-      "body_lines": 124,
-      "source_sha256": "04dad85bea7e01954c337fe3a3dc700e8bd7407b60f01eb2393f6055a2bdf8f3"
+      "body_lines": 125,
+      "source_sha256": "a8aa811416df11ed064afff7ac556e0d2c9c3c1d3840e0b8b53bbc4d2d54395e"
     },
     {
       "path": "src/mvdm-host/inc/suballoc.h",
@@ -65915,14 +65915,14 @@
   "errors": [],
   "status_counts": {
     "unselected-file": 766,
-    "newly-excluded": 668,
+    "newly-excluded": 670,
     "already-excluded": 1699,
-    "pending": 54,
+    "pending": 52,
     "retained-observed": 1874,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
-    "not-guard": 52,
+    "not-guard": 50,
     "guard": 2
   }
 }

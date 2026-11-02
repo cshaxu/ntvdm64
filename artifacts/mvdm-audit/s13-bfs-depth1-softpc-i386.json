@@ -1,0 +1,26 @@
+{
+  "path": "src/mvdm-host/inc/softpc.h",
+  "before_sha256": "04dad85bea7e01954c337fe3a3dc700e8bd7407b60f01eb2393f6055a2bdf8f3",
+  "after_sha256": "a8aa811416df11ed064afff7ac556e0d2c9c3c1d3840e0b8b53bbc4d2d54395e",
+  "original_sha256": "1e6fbd5f67aa04749d7896bd0109fe45daa22e691839d1261bbc3f039924bd9b",
+  "original_body_sha256": [
+    "8dee93897bebf1db8ab3c23322195ccc1008fa99eaf2616aa3a45ab3f0e1314d",
+    "e6fa088273edc64d2e92612aaa4011bc1feea1af4fd259cb6335f33d9a7251ee"
+  ],
+  "removed_body_sha256": [
+    "8dee93897bebf1db8ab3c23322195ccc1008fa99eaf2616aa3a45ab3f0e1314d",
+    "ebd43a4cde8cd66c02130aa4e1d4ac9d64fef6b48c6e85d2af7220b70ea0211e"
+  ],
+  "discarded_nested_group_count": 1,
+  "local_divergence": "DIV-294 cdecl changes removed inside excluded i386 branch only; selected non-i386 cdecl declarations and registry retained",
+  "contexts": 202,
+  "context_files_checked": 723,
+  "selected_diagnostic_line": 540,
+  "selected_preprocessing": "3 representative real graphs match before/after; 202 actual include contexts and 723 source/include files checked",
+  "build": "actual x86 worker, x64-reference worker and WOW32 targets passed",
+  "tests": "rejected-condition suite passed; independent OEM PIF fixture compiled but failed line 70, identically with original and candidate header in separate fresh working dirs",
+  "oem_pif_baseline_sha256": "2ff1623c63d946d4a589ad61537b560dc18b141069827d7807d1cff07c5381f5",
+  "oem_pif_candidate_sha256": "2ff1623c63d946d4a589ad61537b560dc18b141069827d7807d1cff07c5381f5",
+  "package": "six byte-identical and four PE timestamp-only; existing full-tested release retained",
+  "limitations": "PIF fixture line 70 cause not identified; matching old/new header failure is not a passing result. No guest was built or modified. Wider original reconciliation and standalone page-domain linking remain open."
+}

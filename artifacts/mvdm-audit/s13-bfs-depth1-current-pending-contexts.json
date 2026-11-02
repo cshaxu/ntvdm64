@@ -38,24 +38,6 @@
       "current_actual_includers": 160
     },
     {
-      "path": "src/mvdm-host/inc/softpc.h",
-      "start": 33,
-      "kind": "ifdef",
-      "expression": "i386",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 202
-    },
-    {
-      "path": "src/mvdm-host/inc/softpc.h",
-      "start": 230,
-      "kind": "ifdef",
-      "expression": "i386",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 202
-    },
-    {
       "path": "src/mvdm-host/inc/suballoc.h",
       "start": 33,
       "kind": "ifdef",
@@ -499,7 +481,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 8
+      "count": 6
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",
