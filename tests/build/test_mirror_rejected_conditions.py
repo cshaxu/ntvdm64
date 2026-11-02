@@ -189,12 +189,14 @@ if allowed.returncode or not rejected.returncode or marker not in rejected.stdou
     raise SystemExit('nt_bop i386 rejection control failed: ' + allowed.stderr + rejected.stderr)
 print('PASS CCPU excludes original hardware-host FPU save path')
 
-for path, macro, expected_count in (
-    ('src/mvdm-host/softpc.new/base/bios/bootstra.c', 'SECURE', 4),
-    ('src/mvdm-host/softpc.new/base/inc/cpu2.h', 'EGATEST', 1),
+for path, macro, expected_count, divergence in (
+    ('src/mvdm-host/softpc.new/base/bios/bootstra.c', 'SECURE', 4, '602'),
+    ('src/mvdm-host/softpc.new/base/inc/cpu2.h', 'EGATEST', 1, '602'),
+    ('src/mvdm-host/wow32/wkglobal.c', 'API16', 8, '603'),
+    ('src/mvdm-host/wow32/wklocal.c', 'API16', 2, '603'),
 ):
     lines = (repo / path).read_text(encoding='latin1').splitlines()
-    marker = 'MVDM-HOST-DIV-602: unsupported ' + macro + ' profile'
+    marker = 'MVDM-HOST-DIV-' + divergence + ': unsupported ' + macro + ' profile'
     positions = [i for i, line in enumerate(lines) if marker in line]
     if len(positions) != expected_count:
         raise SystemExit('incorrect excluded profile guard count: ' + path)
@@ -207,4 +209,4 @@ for path, macro, expected_count in (
                                   capture_output=True, text=True, errors='replace')
         if allowed.returncode or not rejected.returncode or marker not in rejected.stdout + rejected.stderr:
             raise SystemExit('excluded profile selection failed: ' + path)
-print('PASS original SECURE and EGATEST profile guards')
+print('PASS original SECURE, EGATEST and API16 profile guards')

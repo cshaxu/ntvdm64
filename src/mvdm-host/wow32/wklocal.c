@@ -107,14 +107,12 @@ ULONG FASTCALL WK32LocalInit(PVDMFRAME pFrame)
     GETARGPTR(pFrame, sizeof(LOCALINIT16), parg16);
 
 #ifdef API16
-    ul = GETBOOL16(LocalInit(
-	WORD32(parg16->f1),
-	WORD32(parg16->f2),
-	WORD32(parg16->f3)
-    ));
+#error DIVERGENCE MVDM-HOST-DIV-603: unsupported API16 profile
 #else
+#line 116
     ul = 0;
 #endif
+#line 118
 
     FREEARGPTR(parg16);
     RETURN(ul);
@@ -145,12 +143,12 @@ ULONG FASTCALL WK32LocalNotify(PVDMFRAME pFrame)
     GETARGPTR(pFrame, sizeof(LOCALNOTIFY16), parg16);
 
 #ifdef API16
-    ul = GETPROC16(LocalNotify(
-	PROC32(parg16->f1)
-    ));
+#error DIVERGENCE MVDM-HOST-DIV-603: unsupported API16 profile
 #else
+#line 152
     ul = 0;
 #endif
+#line 154
 
     FREEARGPTR(parg16);
     RETURN(ul);

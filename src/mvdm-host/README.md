@@ -1,5 +1,9 @@
 # mvdm
 
+MVDM-HOST-DIV-603: preserve the original API16 WOW32 thunk selectors while rejecting unsupported arms.  Source and SDK macro
+scans and x86/x64 selected/forced controls are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-api16-batch.json`.
+
 MVDM-HOST-DIV-602: preserve the original SECURE BIOS bootstrap and EGATEST
 CPU header selectors while rejecting unsupported arms.  Source and SDK macro
 scans and x86/x64 selected/forced controls are recorded in

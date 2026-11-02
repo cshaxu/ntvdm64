@@ -44,12 +44,12 @@ ULONG FASTCALL WK32GlobalCompact(PVDMFRAME pFrame)
     GETARGPTR(pFrame, sizeof(GLOBALCOMPACT16), parg16);
 
 #ifdef API16
-    ul = GETDWORD16(GlobalCompact(
-	DWORD32(parg16->f1)
-    ));
+#error DIVERGENCE MVDM-HOST-DIV-603: unsupported API16 profile
 #else
+#line 51
     ul = 0;
 #endif
+#line 53
 
     FREEARGPTR(parg16);
     RETURN(ul);
@@ -63,10 +63,9 @@ ULONG FASTCALL WK32GlobalFix(PVDMFRAME pFrame)
     GETARGPTR(pFrame, sizeof(GLOBALFIX16), parg16);
 
 #ifdef API16
-    GlobalFix(
-	HGLOBAL32(parg16->f1)
-    );
+#error DIVERGENCE MVDM-HOST-DIV-603: unsupported API16 profile
 #endif
+#line 70
 
     FREEARGPTR(parg16);
     RETURN(0);
@@ -113,12 +112,12 @@ ULONG FASTCALL WK32GlobalHandle(PVDMFRAME pFrame)
     GETARGPTR(pFrame, sizeof(GLOBALHANDLE16), parg16);
 
 #ifdef API16
-    ul = GETDWORD16(GlobalHandle(
-	WORD32(parg16->f1)
-    ));
+#error DIVERGENCE MVDM-HOST-DIV-603: unsupported API16 profile
 #else
+#line 120
     ul = 0;
 #endif
+#line 122
 
     FREEARGPTR(parg16);
     RETURN(ul);
@@ -199,12 +198,12 @@ ULONG FASTCALL WK32GlobalPageLock(PVDMFRAME pFrame)
     GETARGPTR(pFrame, sizeof(GLOBALPAGELOCK16), parg16);
 
 #ifdef API16
-    ul = GETWORD16(GlobalPageLock(
-	HGLOBAL32(parg16->f1)
-    ));
+#error DIVERGENCE MVDM-HOST-DIV-603: unsupported API16 profile
 #else
+#line 206
     ul = 0;
 #endif
+#line 208
 
     FREEARGPTR(parg16);
     RETURN(ul);
@@ -219,12 +218,12 @@ ULONG FASTCALL WK32GlobalPageUnlock(PVDMFRAME pFrame)
     GETARGPTR(pFrame, sizeof(GLOBALPAGEUNLOCK16), parg16);
 
 #ifdef API16
-    ul = GETWORD16(GlobalPageUnlock(
-	HGLOBAL32(parg16->f1)
-    ));
+#error DIVERGENCE MVDM-HOST-DIV-603: unsupported API16 profile
 #else
+#line 226
     ul = 0;
 #endif
+#line 228
 
     FREEARGPTR(parg16);
     RETURN(ul);
@@ -273,12 +272,12 @@ ULONG FASTCALL WK32GlobalUnWire(PVDMFRAME pFrame)
     GETARGPTR(pFrame, sizeof(GLOBALUNWIRE16), parg16);
 
 #ifdef API16
-    ul = GETBOOL16(GlobalUnWire(
-	HGLOBAL32(parg16->f1)
-    ));
+#error DIVERGENCE MVDM-HOST-DIV-603: unsupported API16 profile
 #else
+#line 280
     ul = 0;
 #endif
+#line 282
 
     FREEARGPTR(parg16);
     RETURN(ul);
@@ -293,12 +292,12 @@ ULONG FASTCALL WK32GlobalUnfix(PVDMFRAME pFrame)
     GETARGPTR(pFrame, sizeof(GLOBALUNFIX16), parg16);
 
 #ifdef API16
-    ul = GETBOOL16(GlobalUnfix(
-	HGLOBAL32(parg16->f1)
-    ));
+#error DIVERGENCE MVDM-HOST-DIV-603: unsupported API16 profile
 #else
+#line 300
     ul = 0;
 #endif
+#line 302
 
     FREEARGPTR(parg16);
     RETURN(ul);
@@ -329,12 +328,12 @@ ULONG FASTCALL WK32GlobalWire(PVDMFRAME pFrame)
     GETARGPTR(pFrame, sizeof(GLOBALWIRE16), parg16);
 
 #ifdef API16
-    ul = GETLPSTRBOGUS(GlobalWire(
-	HGLOBAL32(parg16->f1)
-    ));
+#error DIVERGENCE MVDM-HOST-DIV-603: unsupported API16 profile
 #else
+#line 336
     ul = 0;
 #endif
+#line 338
 
     FREEARGPTR(parg16);
     RETURN(ul);

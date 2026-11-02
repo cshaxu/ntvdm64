@@ -1,0 +1,271 @@
+{
+  "scope": "ten first-depth arms, original bodies matched, selected branch unchanged, unsupported macro rejects",
+  "macro_evidence": {
+    "compile_commands_checked": 2070,
+    "jobs_sha256": "623d1067dca46b9fabf571db17d6567d8f03e04047245ca9ac11fcda71c725ea",
+    "command_API16_WIN_16_definitions_found": 0,
+    "sole_project_definition": {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "sha256": "9c1da082e2f4556e5823aebd923f57ab00561ac1152fa6dc78428206cf19b5c7",
+      "condition": "#ifdef WIN_16"
+    },
+    "WIN_16_definition_found": 0,
+    "sdk_generated_other_API16_definitions_found": 0,
+    "scope": "src, tests, tools, generated Ninja trees and eight SDK include roots",
+    "controls": "20 x86/x64 isolated selected-preprocessor comparisons plus forced-selector rejections"
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "macro": "API16",
+      "original_start": 46,
+      "original_end": 52,
+      "original_boundary": 50,
+      "old_body_sha256": "d527e99d4bafa7b843c0a2934bdf4975db419112c1edf8a3f1edd8a8c4bf98f9"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "macro": "API16",
+      "original_start": 65,
+      "original_end": 69,
+      "original_boundary": 69,
+      "old_body_sha256": "f251d4780eddc43d3d065ab2740f30976e6219477b9c222715d05a279f9495ea"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "macro": "API16",
+      "original_start": 115,
+      "original_end": 121,
+      "original_boundary": 119,
+      "old_body_sha256": "d29082ca17fa16aad0d3e1087226913ba89626c87d5f702a437f8115a256f518"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "macro": "API16",
+      "original_start": 201,
+      "original_end": 207,
+      "original_boundary": 205,
+      "old_body_sha256": "8fb87ee79ac8a580e3ea9d2dfc5754d4ff97d8149bd01b4d41e61902b95881d4"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "macro": "API16",
+      "original_start": 221,
+      "original_end": 227,
+      "original_boundary": 225,
+      "old_body_sha256": "638074f4d761fff42868982fd1d9b3c8672d593cf324bc87b487e4ca2f1d5819"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "macro": "API16",
+      "original_start": 275,
+      "original_end": 281,
+      "original_boundary": 279,
+      "old_body_sha256": "504b71484487030f5f17c113499f31e2cc3cf79d6e3e2c39fa171546b3b0a099"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "macro": "API16",
+      "original_start": 295,
+      "original_end": 301,
+      "original_boundary": 299,
+      "old_body_sha256": "c61a67ec9006c453e684cc5601184c16ab6970d751772047b5e0b15d312075a4"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "macro": "API16",
+      "original_start": 331,
+      "original_end": 337,
+      "original_boundary": 335,
+      "old_body_sha256": "7ac1a37f1706ce9899f81e8851753b7103c04e0ea03671257adcd8362833b83e"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wklocal.c",
+      "macro": "API16",
+      "original_start": 109,
+      "original_end": 117,
+      "original_boundary": 115,
+      "old_body_sha256": "686562120716fb5f2ab24e88b6e32090eb400fc691c915ca05ae28c443da16e2"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wklocal.c",
+      "macro": "API16",
+      "original_start": 147,
+      "original_end": 153,
+      "original_boundary": 151,
+      "old_body_sha256": "23bf9b93f246e437d5a1417d304e81c8fa808e1a55d61b36cb496e4751fbe3b0"
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 46,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 65,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 115,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 201,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 221,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 275,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 295,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 331,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/wow32/wklocal.c",
+      "start": 109,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/wow32/wklocal.c",
+      "start": 147,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 46,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 65,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 115,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 201,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 221,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 275,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 295,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "start": 331,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/wow32/wklocal.c",
+      "start": 109,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/wow32/wklocal.c",
+      "start": 147,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    }
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "before": "7b7e81edae26d68f6577a4928274ff7244637807805b268e62d4ee3ce3e7a1e9",
+      "after": "3f3bc18c49ec99406c656f8cffc005df039ffa5b15315de0da145c350d07dea1"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wklocal.c",
+      "before": "88faeb38403ed790ff538383125b7bf1481a125d1f3f9c69f79bc1e6e1ef6ecb",
+      "after": "25f8a4a609a588a6b9ac17c184c37ec05391ec80e669d427835b04cee6ce34b8"
+    }
+  ],
+  "validation": {
+    "x86_cached_build": "passed; no work",
+    "x64_cached_build": "passed; no work",
+    "guard_gate": "x86 and x64; see progress record",
+    "published_release": "all ten product images byte-identical to accepted prior release at both destinations",
+    "published_images": [
+      "run16.exe",
+      "ntsrv.exe",
+      "ntcon.exe",
+      "ntvdm.exe",
+      "ntvwm.exe",
+      "ntmon.exe",
+      "WOW32.DLL",
+      "VDMREDIR.DLL",
+      "nthook32.dll",
+      "nthook64.dll"
+    ]
+  }
+}

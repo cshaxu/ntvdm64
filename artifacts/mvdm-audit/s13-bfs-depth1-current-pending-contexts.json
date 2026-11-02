@@ -7590,16 +7590,7 @@
     },
     {
       "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 46,
-      "kind": "ifdef",
-      "expression": "API16",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 50,
+      "start": 48,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -7608,25 +7599,7 @@
     },
     {
       "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 65,
-      "kind": "ifdef",
-      "expression": "API16",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 115,
-      "kind": "ifdef",
-      "expression": "API16",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 119,
+      "start": 116,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -7635,16 +7608,7 @@
     },
     {
       "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 201,
-      "kind": "ifdef",
-      "expression": "API16",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 205,
+      "start": 202,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -7653,16 +7617,7 @@
     },
     {
       "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 221,
-      "kind": "ifdef",
-      "expression": "API16",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 225,
+      "start": 222,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -7671,16 +7626,7 @@
     },
     {
       "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 275,
-      "kind": "ifdef",
-      "expression": "API16",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 279,
+      "start": 276,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -7689,16 +7635,7 @@
     },
     {
       "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 295,
-      "kind": "ifdef",
-      "expression": "API16",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 299,
+      "start": 296,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -7707,16 +7644,7 @@
     },
     {
       "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 331,
-      "kind": "ifdef",
-      "expression": "API16",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 335,
+      "start": 332,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -7725,16 +7653,7 @@
     },
     {
       "path": "src/mvdm-host/wow32/wklocal.c",
-      "start": 109,
-      "kind": "ifdef",
-      "expression": "API16",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wklocal.c",
-      "start": 115,
+      "start": 111,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -7744,15 +7663,6 @@
     {
       "path": "src/mvdm-host/wow32/wklocal.c",
       "start": 147,
-      "kind": "ifdef",
-      "expression": "API16",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wklocal.c",
-      "start": 151,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -9355,7 +9265,7 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 870
+      "count": 860
     },
     {
       "reason": "file-not-witnessed-in-product",
