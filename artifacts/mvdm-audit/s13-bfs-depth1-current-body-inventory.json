@@ -2998,8 +2998,8 @@
       "group_end": 56,
       "kind": "if",
       "expression": "DBG",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 18,
       "source_sha256": "8bf9f9f105cebec3635630379aa30d4fffcd7ec5ca3b1616e66a35556e167528"
@@ -3011,8 +3011,8 @@
       "group_end": 44,
       "kind": "if",
       "expression": "DBG",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
       "source_sha256": "8a5fda1efe059a72eb81c82a597e04cae39407483ade2a4f28b3566e529083c6"
@@ -3024,8 +3024,8 @@
       "group_end": 44,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
       "source_sha256": "8a5fda1efe059a72eb81c82a597e04cae39407483ade2a4f28b3566e529083c6"
@@ -3037,8 +3037,8 @@
       "group_end": 179,
       "kind": "if",
       "expression": "DBG",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 159,
       "source_sha256": "ab024a4470f736e9823aca39921e20cfb222b031c2440d039352af0d67aff14c"
@@ -3063,8 +3063,8 @@
       "group_end": 63,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 3,
       "source_sha256": "835ec1943329e1cfc2d63e4a944cfecf90adb68058093db8fa13ed07250ddef2"
@@ -3076,8 +3076,8 @@
       "group_end": 71,
       "kind": "if",
       "expression": "DBG",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
       "source_sha256": "835ec1943329e1cfc2d63e4a944cfecf90adb68058093db8fa13ed07250ddef2"
@@ -3089,8 +3089,8 @@
       "group_end": 71,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
       "source_sha256": "835ec1943329e1cfc2d63e4a944cfecf90adb68058093db8fa13ed07250ddef2"
@@ -3102,8 +3102,8 @@
       "group_end": 164,
       "kind": "if",
       "expression": "DBG",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
       "source_sha256": "835ec1943329e1cfc2d63e4a944cfecf90adb68058093db8fa13ed07250ddef2"
@@ -3115,8 +3115,8 @@
       "group_end": 164,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
       "source_sha256": "835ec1943329e1cfc2d63e4a944cfecf90adb68058093db8fa13ed07250ddef2"
@@ -3128,8 +3128,8 @@
       "group_end": 30,
       "kind": "if",
       "expression": "defined (i386)",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
       "source_sha256": "b51a42924fed07a2e2c796951eea38079d5f57e81fa120bfd5b93f1f3970bde5"
@@ -3141,8 +3141,8 @@
       "group_end": 251,
       "kind": "if",
       "expression": "defined(i386)",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 72,
       "source_sha256": "b51a42924fed07a2e2c796951eea38079d5f57e81fa120bfd5b93f1f3970bde5"
@@ -50279,8 +50279,8 @@
       "group_end": 151,
       "kind": "ifdef",
       "expression": "i386",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 9,
       "source_sha256": "226ea21e3f4b7e8b2a633fd15127e94becfe4d904eea3e9b91bee5c3689fdeef"
@@ -50578,8 +50578,8 @@
       "group_end": 551,
       "kind": "ifdef",
       "expression": "VERBOSE",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
       "source_sha256": "7c8b982e39e0425a8e90f2ead7865fe06619990bee0bc61714f5c2a4e311bb17"
@@ -65680,15 +65680,15 @@
   ],
   "errors": [],
   "status_counts": {
-    "unselected-file": 742,
+    "unselected-file": 755,
     "newly-excluded": 643,
     "already-excluded": 1691,
-    "pending": 98,
+    "pending": 85,
     "retained-observed": 1869,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
-    "not-guard": 82,
+    "not-guard": 69,
     "guard": 16
   }
 }

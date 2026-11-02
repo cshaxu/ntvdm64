@@ -65,105 +65,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/fax/wowfax/wowfax.c",
-      "start": 37,
-      "kind": "if",
-      "expression": "DBG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/fax/wowfax/wowfaxdd.h",
-      "start": 40,
-      "kind": "if",
-      "expression": "DBG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/fax/wowfax/wowfaxdd.h",
-      "start": 42,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/fax/wowfaxui/wfhelper.c",
-      "start": 19,
-      "kind": "if",
-      "expression": "DBG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
-      "start": 59,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
-      "start": 66,
-      "kind": "if",
-      "expression": "DBG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
-      "start": 69,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
-      "start": 160,
-      "kind": "if",
-      "expression": "DBG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
-      "start": 162,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/ieuvddex/ieuvddex.h",
-      "start": 28,
-      "kind": "if",
-      "expression": "defined (i386)",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/ieuvddex/ieuvddex.h",
-      "start": 178,
-      "kind": "if",
-      "expression": "defined(i386)",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/inc/mvdm.h",
       "start": 64,
       "kind": "ifdef",
@@ -641,24 +542,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/vdmexts/help.c",
-      "start": 141,
-      "kind": "ifdef",
-      "expression": "i386",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdmexts/sym.c",
-      "start": 549,
-      "kind": "ifdef",
-      "expression": "VERBOSE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/vdmutils/win/win.c",
       "start": 27,
       "kind": "else",
@@ -919,7 +802,7 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 59
+      "count": 46
     },
     {
       "reason": "file-not-witnessed-in-product",

@@ -1,0 +1,170 @@
+{
+  "scope": "7 historical fax and debugger source/header files, file disposition only; no inferred macro truth values or source edits",
+  "graphs_checked": [
+    "build/.ninja/console-observers-x64/build.ninja",
+    "build/.ninja/msvc-x64-formal-release/build.ninja",
+    "build/.ninja/msvc-x64-release/build.ninja",
+    "build/.ninja/msvc-x86-formal-release/build.ninja",
+    "build/.ninja/msvc-x86-redir-contract/build.ninja",
+    "build/.ninja/msvc-x86-release/build.ninja",
+    "build/.ninja/msvc-x86-suballoc-audit/build.ninja",
+    "build/.ninja/observations-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x86/build.ninja",
+    "build/.ninja/t463-s2-dialog-end-boundary/build.ninja",
+    "build/.ninja/t463-s2-dialog-procedure/build.ninja",
+    "build/.ninja/t473-s8-control-boundaries/build.ninja",
+    "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x86/wow32/build.ninja",
+    "build/.ninja/pkg-uuid-x64/frontend/build.ninja",
+    "build/.ninja/pkg-uuid-x64/hook/build.ninja",
+    "build/.ninja/pkg-uuid-x64/launcher/build.ninja",
+    "build/.ninja/pkg-uuid-x64/monitor/build.ninja",
+    "build/.ninja/pkg-uuid-x64/service/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+    "build/.ninja/msvc-x86-release/call-boundaries/build.ninja",
+    "build/.ninja/msvc-x86-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x86-release/worker/build.ninja",
+    "build/.ninja/msvc-x86-release/wow32/build.ninja",
+    "build/.ninja/msvc-x64-release/frontend/build.ninja",
+    "build/.ninja/msvc-x64-release/hook/build.ninja",
+    "build/.ninja/msvc-x64-release/launcher/build.ninja",
+    "build/.ninja/msvc-x64-release/monitor/build.ninja",
+    "build/.ninja/msvc-x64-release/observation/build.ninja",
+    "build/.ninja/msvc-x64-release/service/build.ninja",
+    "build/.ninja/msvc-x64-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x64-release/worker/build.ninja",
+    "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja"
+  ],
+  "method": "Current build jobs, 35 Ninja graphs and dependencies, explicit full-path tests/tools references checked: marker-only tests and governance ledger tools; pinned original and current hashes verified.",
+  "limitation": "Reopen entire branch queues if supported build or direct test begins using these files. No claim about individual condition values or unbuilt scenarios.",
+  "direct_test_and_tool_references": [
+    "tests\\build\\test_mirror_rejected_conditions.py:287:    ('src/mvdm-host/fax/wowfaxui/wowfaxui.h', 'NOLOG', 1, 'MVDM-HOST-DIV-610'),",
+    "tests\\build\\test_mirror_rejected_conditions.py:293:    ('src/mvdm-host/vdmexts/sym.c', 'NEED_ABSOLUTES', 1, 'MVDM-HOST-DIV-610'),",
+    "tests\\build\\test_mirror_rejected_conditions.py:294:    ('src/mvdm-host/vdmexts/sym.c', 'NEED_INDICES', 4, 'MVDM-HOST-DIV-610'),",
+    "tools\\governance\\Audit-T276S23FaxDisposition.ps1:11:    if ($path -eq 'fax/wowfax/wowfax.c') {",
+    "tools\\governance\\Set-T276S25FaxFinalDisposition.ps1:11:$uiBodies = @('fax/wowfaxui/wfhelper.c', 'fax/wowfaxui/wfsheets.c', 'fax/wowfaxui/wfupgrad.c', 'fax/wowfaxui/wowfaxui.c')",
+    "tools\\governance\\Set-T276S25FaxFinalDisposition.ps1:12:$declarations = @('fax/faxcomm.h', 'fax/wowfax/wowfaxdd.h', 'fax/wowfaxui/wfsheets.h', 'fax/wowfaxui/wowfaxui.h')",
+    "tools\\governance\\Set-T276S25FaxFinalDisposition.ps1:34:        if ($row.source_path -eq 'fax/wowfax/wowfax.c') {",
+    "tools\\governance\\Verify-T276S18IeuvddexDisposition.ps1:11:if (@($rows | Where-Object { $_.source_path -eq 'ieuvddex/ieuvddex.h' -and $_.required_boundary_owner -like 'adapter-mvdm-host-out/debugger*' }).Count -ne 1) { throw 'IEUVDDEx declarations must be assigned to adapter-mvdm-host-out/debugger.' }",
+    "tools\\governance\\Verify-T276S25FaxFinalDisposition.ps1:10:$uiBodies = @('fax/wowfaxui/wfhelper.c', 'fax/wowfaxui/wfsheets.c', 'fax/wowfaxui/wfupgrad.c', 'fax/wowfaxui/wowfaxui.c')",
+    "tools\\governance\\Verify-T276S25FaxFinalDisposition.ps1:12:if (@($rows | Where-Object {$_.source_path -eq 'fax/wowfax/wowfax.c' -and $_.final_disposition -ne 'not-host-runtime'}).Count) { throw 'The private historical GDI driver must remain out of the final host graph.' }"
+  ],
+  "records": [
+    {
+      "path": "src/mvdm-host/fax/wowfax/wowfax.c",
+      "current_sha256": "8bf9f9f105cebec3635630379aa30d4fffcd7ec5ca3b1616e66a35556e167528",
+      "original_sha256": "cf77ad0a7fad02c80a872c388ebf5b38d59e69cca2b84c36d316734c095381d4",
+      "arms": [
+        {
+          "line": 37,
+          "kind": "if",
+          "expression": "DBG"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfax/wowfaxdd.h",
+      "current_sha256": "8a5fda1efe059a72eb81c82a597e04cae39407483ade2a4f28b3566e529083c6",
+      "original_sha256": "b198e348fad62c416d8451ddd24e25f76132786a1cc8aed6a9c4b481f7518129",
+      "arms": [
+        {
+          "line": 40,
+          "kind": "if",
+          "expression": "DBG"
+        },
+        {
+          "line": 42,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wfhelper.c",
+      "current_sha256": "ab024a4470f736e9823aca39921e20cfb222b031c2440d039352af0d67aff14c",
+      "original_sha256": "bf8cd7fe0a51e9339b98c1ced13a7d295a25a0f49dc08be83d7c07e1b6785bec",
+      "arms": [
+        {
+          "line": 19,
+          "kind": "if",
+          "expression": "DBG"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
+      "current_sha256": "835ec1943329e1cfc2d63e4a944cfecf90adb68058093db8fa13ed07250ddef2",
+      "original_sha256": "88d90b14cec1ebf6cb08d142f8ccc19b9dcb246cf9fab6c63124b468284cdf51",
+      "arms": [
+        {
+          "line": 59,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 66,
+          "kind": "if",
+          "expression": "DBG"
+        },
+        {
+          "line": 69,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 160,
+          "kind": "if",
+          "expression": "DBG"
+        },
+        {
+          "line": 162,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/ieuvddex/ieuvddex.h",
+      "current_sha256": "b51a42924fed07a2e2c796951eea38079d5f57e81fa120bfd5b93f1f3970bde5",
+      "original_sha256": "17257eb303d196b6cd7449a7f2f63ff0d3f865df550c9d760f9d536b17bbcc37",
+      "arms": [
+        {
+          "line": 28,
+          "kind": "if",
+          "expression": "defined (i386)"
+        },
+        {
+          "line": 178,
+          "kind": "if",
+          "expression": "defined(i386)"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/help.c",
+      "current_sha256": "226ea21e3f4b7e8b2a633fd15127e94becfe4d904eea3e9b91bee5c3689fdeef",
+      "original_sha256": "d1d776c6733c3f692a4e72ddf8f7b983187a7c2a960ef3a1f505a8741f4d9942",
+      "arms": [
+        {
+          "line": 141,
+          "kind": "ifdef",
+          "expression": "i386"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "current_sha256": "7c8b982e39e0425a8e90f2ead7865fe06619990bee0bc61714f5c2a4e311bb17",
+      "original_sha256": "469c9612de293034fdbc7a74e1d2bd479222fe1cd3e1350f1f90c0737c2d701e",
+      "arms": [
+        {
+          "line": 549,
+          "kind": "ifdef",
+          "expression": "VERBOSE"
+        }
+      ]
+    }
+  ]
+}
