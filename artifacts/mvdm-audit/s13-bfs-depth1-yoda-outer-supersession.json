@@ -1,0 +1,48 @@
+{
+  "scope": "two unique first-depth YODA selectors; old inner differences are historical evidence superseded by existing outer #error, not a claim of body identity",
+  "related_context_evidence": "s13-bfs-depth1-yoda-prod-context.json",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "current_line": 65,
+      "historical_line": 65,
+      "original_line": 74,
+      "actual_contexts": 2,
+      "all_define_PROD": true,
+      "original_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817",
+      "original_body_sha256": "99ffaa27511966d19dea336a4d2c16a0ae478afdbae18f6dffceed33c0320985",
+      "historical_body_sha256": "f33ef919c57734f7489ef06483471146b2180ac4753ddb09e1b9df108dc056d1",
+      "historical_inner_markers_subsumed_by_outer_guard": {
+        "MVDM-HOST-DIV-536": 3,
+        "MVDM-HOST-DIV-522": 13,
+        "MVDM-HOST-DIV-515": 8,
+        "MVDM-HOST-DIV-520": 32,
+        "MVDM-HOST-DIV-505": 4,
+        "MVDM-HOST-DIV-521": 1,
+        "MVDM-HOST-DIV-539": 13,
+        "MVDM-HOST-DIV-528": 2,
+        "MVDM-HOST-DIV-525": 3,
+        "MVDM-HOST-DIV-513": 4,
+        "MVDM-HOST-DIV-527": 2,
+        "MVDM-HOST-DIV-498": 3,
+        "MVDM-HOST-DIV-531": 2,
+        "MVDM-HOST-DIV-529": 6,
+        "MVDM-HOST-DIV-496": 2
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "current_line": 39,
+      "historical_line": 39,
+      "original_line": 39,
+      "actual_contexts": 2,
+      "all_define_PROD": true,
+      "original_sha256": "2ec898da6746f0992020845bde73a30edaf7cdd5c744559501eb9cbaa000df0a",
+      "original_body_sha256": "89d43351421b918b71878b52071449a7b56ee0ed5375ef489c086a98ca95dad0",
+      "historical_body_sha256": "25ab9bd996f35d6596c0aac1eb0488c1b0bfc27381ce5550403caa2272113a87",
+      "historical_inner_markers_subsumed_by_outer_guard": {
+        "MVDM-HOST-DIV-500": 1
+      }
+    }
+  ]
+}

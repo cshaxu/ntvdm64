@@ -1,5 +1,10 @@
 # mvdm
 
+Historical inner subset records under the excluded outer YODA guards in
+`softpc.new/base/debug/yoda.c` and `softpc.new/host/src/nt_yoda.c` are
+superseded by those outer guards and are not additional live diffs. Their
+original evidence remains archived; see `../../artifacts/mvdm-audit/s13-bfs-depth1-yoda-outer-supersession.json`.
+
 MVDM-HOST-DIV-612: preserve the original FLOPPY_B selector in the unselected
 CMOS implementation and reject its unsupported profile. This does not change
 the selected disk implementation. See `../../artifacts/mvdm-audit/s13-bfs-depth1-floppy-b-batch.json`.

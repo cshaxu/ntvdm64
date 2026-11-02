@@ -21757,8 +21757,8 @@
       "group_end": 67,
       "kind": "ifdef",
       "expression": "YODA",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "83b24e36f133cc750c886aba6a43e5746c1ae69d015b47174a2324a814ca58e0"
@@ -49499,8 +49499,8 @@
       "group_end": 274,
       "kind": "ifdef",
       "expression": "YODA",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 234,
       "source_sha256": "00953ea06ef57d3e4fe534cfa8e83781656c6de77a2b0e6e63ae341fbac5822f"
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 955,
+    "pending": 953,
     "newly-excluded": 615,
-    "already-excluded": 1608,
+    "already-excluded": 1610,
     "retained-observed": 1863,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
     "not-guard": 850,
-    "guard": 105
+    "guard": 103
   }
 }

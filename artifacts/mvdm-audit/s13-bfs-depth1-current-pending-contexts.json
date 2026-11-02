@@ -2801,15 +2801,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
-      "start": 65,
-      "kind": "ifdef",
-      "expression": "YODA",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
       "start": 802,
       "kind": "else",
@@ -6257,15 +6248,6 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
-      "start": 39,
-      "kind": "ifdef",
-      "expression": "YODA",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
       "start": 48,
       "kind": "if",
@@ -8620,7 +8602,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 101
+      "count": 99
     },
     {
       "reason": "file-not-witnessed-in-product",
