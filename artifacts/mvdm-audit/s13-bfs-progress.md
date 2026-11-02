@@ -1979,3 +1979,11 @@ Recorded that guest WOWEXEC test sources name wowfax.h/wowinfo.h, explicitly def
 ### Restore original RTL time kernel pragma outer condition
 
 Restored the fixed OpenNT kernel pragma condition at its original first-depth position, replacing its unsupported body with #error and retaining line mapping. Both actual standalone worker preprocessing outputs and selected diagnostic line 66 match before/after. Both worker targets and the rejection suite, including either operand alone, passed. Six staged images are identical and four differ only at verified PE timestamps; the existing full-tested release remains. Restored groups: 80 total, 47 in this BFS pass. Current status: {'unselected-file': 766, 'newly-excluded': 664, 'already-excluded': 1699, 'pending': 58, 'retained-observed': 1874, 'retained-original-assertion': 9}; children: {'retained-observed': 1407, 'pending': 37, 'unselected-file': 1594}. One resolved original candidate was removed from the separate unresolved inventory; other candidates and standalone page-domain link remain open. Evidence: `s13-bfs-depth1-rtl-time-original-outer.json`, `s13-bfs-depth1-rtl-time-original-package-compare.json`; queue: `s13-bfs-depth1-working-queue-195r100.zip`.
+
+### Map seven original selectors to selected local owners
+
+Mapped seven original VDM classifier, DefWindowProc, dialog and USER table selectors to their unchanged condition lines and three exact surrounding anchors under currently selected local first-depth owner wrappers. These are existing depth-2 work, not missing root structures; no child bodies were audited and no source was changed. Removed seven resolved multiplicity leads from the separate unresolved inventory; 24 leads remain there. Evidence: `s13-bfs-depth1-nested-original-owner-map.json`.
+
+### Map twelve further original selectors to selected local owners
+
+Matched twelve additional original conditional lines to current depth-2 structures using exact preceding three nonempty source anchors and retained parent ownership. No nested bodies were audited or changed. The separate original multiplicity inventory now has 21 candidate records; partially resolved records keep their remaining count and mapped original line numbers. Evidence: `s13-bfs-depth1-nested-original-owner-map.json`.

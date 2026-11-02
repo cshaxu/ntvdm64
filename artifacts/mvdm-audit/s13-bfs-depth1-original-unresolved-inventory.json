@@ -2,52 +2,12 @@
   "scope": "all unresolved first-depth baseline multiplicity candidates; nested positions are structural only, not audited",
   "records": [
     {
-      "path": "src/non-mvdm/base/win32/client/vdm.c",
-      "original": "O:\\repos.external\\OpenNT\\base\\win32\\client\\vdm.c",
-      "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
-      "directive": "ifdef",
-      "expression": "_X86_",
-      "unpaired_count": 1,
-      "all_original_first_depth_lines": [
-        205
-      ],
-      "all_current_first_depth_lines": [],
-      "current_nested_structural_locations_only": [
-        {
-          "line": 2211,
-          "depth": 2
-        }
-      ],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
-    },
-    {
-      "path": "src/non-mvdm/base/win32/client/vdm.c",
-      "original": "O:\\repos.external\\OpenNT\\base\\win32\\client\\vdm.c",
-      "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
-      "directive": "ifdef",
-      "expression": "_MIPS_",
-      "unpaired_count": 1,
-      "all_original_first_depth_lines": [
-        259
-      ],
-      "all_current_first_depth_lines": [],
-      "current_nested_structural_locations_only": [
-        {
-          "line": 2265,
-          "depth": 2
-        }
-      ],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
-    },
-    {
       "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
       "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
       "directive": "ifdef",
       "expression": "DEBUG",
-      "unpaired_count": 2,
+      "unpaired_count": 1,
       "all_original_first_depth_lines": [
         23,
         572,
@@ -65,48 +25,10 @@
         }
       ],
       "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
-    },
-    {
-      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
-      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
-      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
-      "directive": "ifdef",
-      "expression": "FE_IME",
-      "unpaired_count": 1,
-      "all_original_first_depth_lines": [
-        327,
-        566
-      ],
-      "all_current_first_depth_lines": [],
-      "current_nested_structural_locations_only": [
-        {
-          "line": 52,
-          "depth": 2
-        }
-      ],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
-    },
-    {
-      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
-      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
-      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
-      "directive": "if",
-      "expression": "defined(FE_IME)",
-      "unpaired_count": 1,
-      "all_original_first_depth_lines": [
-        905
-      ],
-      "all_current_first_depth_lines": [],
-      "current_nested_structural_locations_only": [
-        {
-          "line": 392,
-          "depth": 2
-        }
-      ],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
+      "reason": "unreviewed; multiplicity mismatch only",
+      "resolved_nested_original_lines": [
+        1214
+      ]
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
@@ -130,7 +52,7 @@
       "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
       "directive": "if",
       "expression": "0",
-      "unpaired_count": 7,
+      "unpaired_count": 6,
       "all_original_first_depth_lines": [
         1480,
         1674,
@@ -148,7 +70,10 @@
         }
       ],
       "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
+      "reason": "unreviewed; multiplicity mismatch only",
+      "resolved_nested_original_lines": [
+        1674
+      ]
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
@@ -162,91 +87,6 @@
       ],
       "all_current_first_depth_lines": [],
       "current_nested_structural_locations_only": [],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
-    },
-    {
-      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
-      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr2.c",
-      "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
-      "directive": "ifdef",
-      "expression": "FE_SB",
-      "unpaired_count": 1,
-      "all_original_first_depth_lines": [
-        221
-      ],
-      "all_current_first_depth_lines": [],
-      "current_nested_structural_locations_only": [
-        {
-          "line": 245,
-          "depth": 2
-        }
-      ],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
-    },
-    {
-      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
-      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr2.c",
-      "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
-      "directive": "ifdef",
-      "expression": "FE_IME",
-      "unpaired_count": 1,
-      "all_original_first_depth_lines": [
-        240
-      ],
-      "all_current_first_depth_lines": [],
-      "current_nested_structural_locations_only": [
-        {
-          "line": 256,
-          "depth": 2
-        }
-      ],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
-    },
-    {
-      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
-      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgr2.c",
-      "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
-      "directive": "ifdef",
-      "expression": "LATER",
-      "unpaired_count": 1,
-      "all_original_first_depth_lines": [
-        281
-      ],
-      "all_current_first_depth_lines": [],
-      "current_nested_structural_locations_only": [
-        {
-          "line": 297,
-          "depth": 2
-        }
-      ],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
-    },
-    {
-      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
-      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\mngrayc.c",
-      "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
-      "directive": "if",
-      "expression": "0",
-      "unpaired_count": 2,
-      "all_original_first_depth_lines": [
-        209,
-        251
-      ],
-      "all_current_first_depth_lines": [],
-      "current_nested_structural_locations_only": [
-        {
-          "line": 147,
-          "depth": 2
-        },
-        {
-          "line": 183,
-          "depth": 2
-        }
-      ],
       "disposition": "pending-boundary-proof",
       "reason": "unreviewed; multiplicity mismatch only"
     },
@@ -338,7 +178,7 @@
       "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
       "directive": "ifdef",
       "expression": "DEBUG",
-      "unpaired_count": 3,
+      "unpaired_count": 1,
       "all_original_first_depth_lines": [
         953,
         965,
@@ -356,42 +196,11 @@
         }
       ],
       "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
-    },
-    {
-      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
-      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\rtlinit.c",
-      "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
-      "directive": "if",
-      "expression": "DBG",
-      "unpaired_count": 4,
-      "all_original_first_depth_lines": [
-        319,
-        326,
-        349,
-        361
-      ],
-      "all_current_first_depth_lines": [],
-      "current_nested_structural_locations_only": [
-        {
-          "line": 189,
-          "depth": 2
-        },
-        {
-          "line": 196,
-          "depth": 2
-        },
-        {
-          "line": 215,
-          "depth": 2
-        },
-        {
-          "line": 227,
-          "depth": 2
-        }
-      ],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
+      "reason": "unreviewed; multiplicity mismatch only",
+      "resolved_nested_original_lines": [
+        953,
+        965
+      ]
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
@@ -466,7 +275,7 @@
       "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
       "directive": "ifdef",
       "expression": "FE_IME",
-      "unpaired_count": 7,
+      "unpaired_count": 6,
       "all_original_first_depth_lines": [
         53,
         481,
@@ -484,27 +293,10 @@
         }
       ],
       "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
-    },
-    {
-      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
-      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
-      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
-      "directive": "if",
-      "expression": "0",
-      "unpaired_count": 1,
-      "all_original_first_depth_lines": [
-        461
-      ],
-      "all_current_first_depth_lines": [],
-      "current_nested_structural_locations_only": [
-        {
-          "line": 278,
-          "depth": 2
-        }
-      ],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
+      "reason": "unreviewed; multiplicity mismatch only",
+      "resolved_nested_original_lines": [
+        583
+      ]
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",

@@ -1,0 +1,329 @@
+{
+  "scope": "nineteen original first-depth selectors now nested under retained local source-owner wrappers; structural anchors only",
+  "records": [
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "expression": "_X86_",
+      "original_line": 205,
+      "current_line": 2211,
+      "current_parent_line": 2095,
+      "parent_expression": "defined(OPENNT_BASE_CLIENT_CLASSIFIER)",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "SectionHandle = NULL;",
+        "switch (Status) {",
+        "case STATUS_INVALID_IMAGE_NE_FORMAT:"
+      ],
+      "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
+      "working_sha256": "9eb4b0dd076219c6ad22f2c03da350354119bb6956487241d5bc6ac3634a8b25",
+      "disposition": "original structure present beneath selected local first-depth owner; nested branch remains unreviewed in next-depth queue"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "expression": "_MIPS_",
+      "original_line": 259,
+      "current_line": 2265,
+      "current_parent_line": 2095,
+      "parent_expression": "defined(OPENNT_BASE_CLIENT_CLASSIFIER)",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "}",
+        "if (ImageInformation.Machine !=",
+        "RtlImageNtHeader(NtCurrentPeb()->ImageBaseAddress)->FileHeader.Machine) {"
+      ],
+      "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",
+      "working_sha256": "9eb4b0dd076219c6ad22f2c03da350354119bb6956487241d5bc6ac3634a8b25",
+      "disposition": "original structure present beneath selected local first-depth owner; nested branch remains unreviewed in next-depth queue"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "expression": "defined(FE_IME)",
+      "original_line": 905,
+      "current_line": 396,
+      "current_parent_line": 40,
+      "parent_expression": "defined(WOW_ORIGINAL_DEFAULT_WINDOW)",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "if (lParam == NF_QUERY)",
+        "return(TestWF(pwnd, WFANSICREATOR) ? NFR_ANSI : NFR_UNICODE);",
+        "break;"
+      ],
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "working_sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c",
+      "disposition": "original structure present beneath selected local first-depth owner; nested branch remains unreviewed in next-depth queue"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "expression": "FE_SB",
+      "original_line": 221,
+      "current_line": 245,
+      "current_parent_line": 236,
+      "parent_expression": "WOW_ORIGINAL_DIALOG_KEYBOARD",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "WPARAM wParamSaved = lpmsg->wParam;",
+        "BOOL bRet;",
+        "switch (lpmsg->message) {"
+      ],
+      "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
+      "working_sha256": "249991fd20d874ece85ca9fbae411c96a6d883aaa5f9990cf2e75d221e95add9",
+      "disposition": "original structure present beneath selected local first-depth owner; nested branch remains unreviewed in next-depth queue"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "expression": "FE_IME",
+      "original_line": 240,
+      "current_line": 256,
+      "current_parent_line": 236,
+      "parent_expression": "WOW_ORIGINAL_DIALOG_KEYBOARD",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "case WM_SYSCHAR:",
+        "case WM_SYSDEADCHAR:",
+        "case WM_MENUCHAR:"
+      ],
+      "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
+      "working_sha256": "249991fd20d874ece85ca9fbae411c96a6d883aaa5f9990cf2e75d221e95add9",
+      "disposition": "original structure present beneath selected local first-depth owner; nested branch remains unreviewed in next-depth queue"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "expression": "LATER",
+      "original_line": 281,
+      "current_line": 297,
+      "current_parent_line": 236,
+      "parent_expression": "WOW_ORIGINAL_DIALOG_KEYBOARD",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "return FALSE;",
+        "}",
+        "CheckLock(pwndDlg);"
+      ],
+      "original_sha256": "a3e9286c40e4e11ec872fd9b2d7b23cba640f09fb4840c4e6130e301d5277b9e",
+      "working_sha256": "249991fd20d874ece85ca9fbae411c96a6d883aaa5f9990cf2e75d221e95add9",
+      "disposition": "original structure present beneath selected local first-depth owner; nested branch remains unreviewed in next-depth queue"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "expression": "0",
+      "original_line": 461,
+      "current_line": 283,
+      "current_parent_line": 3,
+      "parent_expression": "defined(WOW_ORIGINAL_DEFAULT_MESSAGES)",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "WM_RBUTTONDOWN,",
+        "WM_RBUTTONUP,",
+        "WM_FINALDESTROY,"
+      ],
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "working_sha256": "3740c3789f3069fb0957cacbb83758fc157027c1205097400139a5b89edbc679",
+      "disposition": "original structure present beneath selected local first-depth owner; nested branch remains unreviewed in next-depth queue"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "expression": "DEBUG",
+      "original_line": 1214,
+      "current_line": 404,
+      "current_parent_line": 40,
+      "parent_expression": "defined(WOW_ORIGINAL_DEFAULT_WINDOW)",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "#endif",
+        "}",
+        "return 0;"
+      ],
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "working_sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c",
+      "disposition": "original condition line present beneath selected local owner; nested branch remains unreviewed"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "expression": "FE_IME",
+      "original_line": 566,
+      "current_line": 56,
+      "current_parent_line": 40,
+      "parent_expression": "defined(WOW_ORIGINAL_DEFAULT_WINDOW)",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "int icolBack;",
+        "int icolFore;",
+        "PWND pwndParent;"
+      ],
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "working_sha256": "b18629e01f8b6f00e5667753b12b1498b821f40adb11e562cb1ab7e9226af52c",
+      "disposition": "original condition line present beneath selected local owner; nested branch remains unreviewed"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "expression": "0",
+      "original_line": 1674,
+      "current_line": 671,
+      "current_parent_line": 14,
+      "parent_expression": "",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "hbm = CreateCompatibleBitmap(hdcScreen, cx, cy);",
+        "} else {",
+        "dib4Vga.bi.biBitCount = planes * bpp ? planes * bpp : oemInfo.BitCount;"
+      ],
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "working_sha256": "0a60d195722d68331e296a72b9713747c9e29717b1c7f321bc22308f7c00ff4a",
+      "disposition": "original condition line present beneath selected local owner; nested branch remains unreviewed"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "expression": "0",
+      "original_line": 209,
+      "current_line": 147,
+      "current_parent_line": 7,
+      "parent_expression": "WOW_ORIGINAL_STATE_DRAWING",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "* Now, pretend we're complex if qfnCallBack is supplied AND",
+        "* we're supporting GrayString().",
+        "*/"
+      ],
+      "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+      "working_sha256": "08cae4b34614eaaed41bdadd27c6f92d6161164ff787ef95cf72ccf22bde982a",
+      "disposition": "original condition line present beneath selected local owner; nested branch remains unreviewed"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "expression": "0",
+      "original_line": 251,
+      "current_line": 183,
+      "current_parent_line": 7,
+      "parent_expression": "WOW_ORIGINAL_STATE_DRAWING",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "cy += (2 * SYSMET(CYBORDER));",
+        "break;",
+        "case DST_COMPLEX:"
+      ],
+      "original_sha256": "171ef0b7cd668cf51db86d9ae2fea4269cc002f0aba17033bf968d84c10f0f3d",
+      "working_sha256": "08cae4b34614eaaed41bdadd27c6f92d6161164ff787ef95cf72ccf22bde982a",
+      "disposition": "original condition line present beneath selected local owner; nested branch remains unreviewed"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "expression": "DEBUG",
+      "original_line": 953,
+      "current_line": 214,
+      "current_parent_line": 2,
+      "parent_expression": "defined(WOW_ORIGINAL_DIALOG_GETSET)",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "GETFNID(pwnd) == FNID_LISTBOX &&",
+        "((PLBWND)pwnd)->pLBIV != NULL &&",
+        "(!TestWindowProcess(pwnd) || ((PLBWND)pwnd)->pLBIV->fInitialized)) {"
+      ],
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "working_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474",
+      "disposition": "original condition line present beneath selected local owner; nested branch remains unreviewed"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "expression": "DEBUG",
+      "original_line": 965,
+      "current_line": 226,
+      "current_parent_line": 2,
+      "parent_expression": "defined(WOW_ORIGINAL_DIALOG_GETSET)",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "dwNewLong |= pwnd->style & (LBS_OWNERDRAWFIXED |",
+        "LBS_OWNERDRAWVARIABLE |",
+        "LBS_HASSTRINGS);"
+      ],
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "working_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474",
+      "disposition": "original condition line present beneath selected local owner; nested branch remains unreviewed"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "expression": "DBG",
+      "original_line": 319,
+      "current_line": 189,
+      "current_parent_line": 14,
+      "parent_expression": "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "/*",
+        "* Allocate a local structure.",
+        "*/"
+      ],
+      "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+      "working_sha256": "8e6b12e4b7b7b1106c80c9fe1bfaacd16434633e6feb39714cafc3bb56c99610",
+      "disposition": "original condition line present beneath selected local owner; nested branch remains unreviewed"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "expression": "DBG",
+      "original_line": 326,
+      "current_line": 196,
+      "current_parent_line": 14,
+      "parent_expression": "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "return NULL;",
+        "}",
+        "RtlZeroMemory(pEntry, pla->EntrySize);"
+      ],
+      "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+      "working_sha256": "8e6b12e4b7b7b1106c80c9fe1bfaacd16434633e6feb39714cafc3bb56c99610",
+      "disposition": "original condition line present beneath selected local owner; nested branch remains unreviewed"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "expression": "DBG",
+      "original_line": 349,
+      "current_line": 215,
+      "current_parent_line": 14,
+      "parent_expression": "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "PLOOKASIDE pla,",
+        "PVOID pEntry)",
+        "{"
+      ],
+      "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+      "working_sha256": "8e6b12e4b7b7b1106c80c9fe1bfaacd16434633e6feb39714cafc3bb56c99610",
+      "disposition": "original condition line present beneath selected local owner; nested branch remains unreviewed"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "expression": "DBG",
+      "original_line": 361,
+      "current_line": 227,
+      "current_parent_line": 14,
+      "parent_expression": "defined(WOW_ORIGINAL_EDIT_LOOKASIDE)",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "FreeToZone(&pla->LookasideZone,pEntry);",
+        "RtlLeaveCriticalSection(&gcsLookaside);",
+        "} else {"
+      ],
+      "original_sha256": "d8841bd2f13e5825a84f670ec7cc60923977bf80618d737cbac2208f94c6523c",
+      "working_sha256": "8e6b12e4b7b7b1106c80c9fe1bfaacd16434633e6feb39714cafc3bb56c99610",
+      "disposition": "original condition line present beneath selected local owner; nested branch remains unreviewed"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "expression": "FE_IME",
+      "original_line": 583,
+      "current_line": 382,
+      "current_parent_line": 3,
+      "parent_expression": "defined(WOW_ORIGINAL_DEFAULT_MESSAGES)",
+      "parent_status": "retained-observed",
+      "preceding_anchors": [
+        "WM_DEVICECHANGE,",
+        "WM_POWERBROADCAST,",
+        "WM_MOUSEWHEEL,"
+      ],
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "working_sha256": "3740c3789f3069fb0957cacbb83758fc157027c1205097400139a5b89edbc679",
+      "disposition": "original condition line present beneath selected local owner; nested branch remains unreviewed"
+    }
+  ],
+  "limits": "Does not audit nested bodies or assert future support. Other original multiplicity candidates remain."
+}
