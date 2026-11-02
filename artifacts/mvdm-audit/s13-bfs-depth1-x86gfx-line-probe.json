@@ -1,0 +1,59 @@
+{
+  "scope": "scratch marker before host X86GFX first-depth conditional in actual x86 worker",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": 192,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_directive_line": 192,
+      "stderr": "",
+      "source_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "line": 240,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_directive_line": 256,
+      "stderr": "",
+      "source_sha256": "3d2ed5781ebd7644c4f52e98bd522c1541be6998905b81c53879824182aa1ce9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 222,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_directive_line": 223,
+      "stderr": "",
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 654,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_directive_line": 684,
+      "stderr": "",
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 811,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_directive_line": 983,
+      "stderr": "",
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 1039,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_directive_line": 1211,
+      "stderr": "",
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7"
+    }
+  ]
+}

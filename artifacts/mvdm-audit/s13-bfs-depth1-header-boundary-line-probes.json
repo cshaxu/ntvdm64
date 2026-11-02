@@ -1,0 +1,45 @@
+{
+  "scope": "scratch header/precomp/source copies using actual WOW compiler profile",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "after_physical_line": 18,
+      "consumer": "src/mvdm-host/wow32/wkman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "logical_next_line": 19,
+      "source_sha256": "ce5979551316cc8e304af2be521b4ed921fe42936e8d5523e3046294d87f3b69",
+      "stderr": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "after_physical_line": 22,
+      "consumer": "src/mvdm-host/wow32/wkman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "logical_next_line": 23,
+      "source_sha256": "ce5979551316cc8e304af2be521b4ed921fe42936e8d5523e3046294d87f3b69",
+      "stderr": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "after_physical_line": 28,
+      "consumer": "src/mvdm-host/wow32/wkman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "logical_next_line": 29,
+      "source_sha256": "ce5979551316cc8e304af2be521b4ed921fe42936e8d5523e3046294d87f3b69",
+      "stderr": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "after_physical_line": 38,
+      "consumer": "src/mvdm-host/wow32/wkman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "logical_next_line": 39,
+      "source_sha256": "ce5979551316cc8e304af2be521b4ed921fe42936e8d5523e3046294d87f3b69",
+      "stderr": ""
+    }
+  ]
+}

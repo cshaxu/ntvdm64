@@ -1,0 +1,279 @@
+{
+  "scope": "first-depth historical X86GFX/MONITOR branches with actual per-file worker contexts and uniquely matched original outer boundaries",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "macro": "X86GFX",
+      "start": 192,
+      "cut": 234,
+      "end": 234,
+      "has_else": false,
+      "source_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_sha256": "2a87d13d633e62b7bda2d982127feea19b20b5a779ff1e384966c2eb3ce6ddfa",
+      "original_start": 235,
+      "anchors": [
+        [
+          "before",
+          235,
+          [
+            "IdleDisabledFromPIF = FALSE;",
+            "else",
+            "IdleDisabledFromPIF = TRUE;"
+          ]
+        ],
+        [
+          "after",
+          235,
+          [
+            "}",
+            "void DisablePIFKeySetup(void)",
+            "{"
+          ]
+        ]
+      ],
+      "removed_body_sha256": "b044aca676c07743f2bea8cd0a3c0c544587dfc8c6387c58f04a271233edb84c",
+      "local_patch_markers": [
+        "MVDM-HOST-DIV-500"
+      ],
+      "nested_groups_to_subsume": 2,
+      "status": "candidate-context-and-patch-audit-required"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "macro": "X86GFX",
+      "start": 240,
+      "cut": 1367,
+      "end": 1367,
+      "has_else": false,
+      "source_sha256": "3d2ed5781ebd7644c4f52e98bd522c1541be6998905b81c53879824182aa1ce9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_det.c",
+      "original_sha256": "c58d15d58672440bf94e015f61a10b43311e601ae150dae5b1559f2399f9dadc",
+      "original_start": 256,
+      "anchors": [
+        [
+          "after",
+          256,
+          [
+            "#ifdef PLANEDUMPER",
+            "extern half_word *vidpl16;",
+            "void planedumper()"
+          ]
+        ]
+      ],
+      "removed_body_sha256": "d5a9fca1c267df6303bad0efa50174fb10269777f21c9219460e9d9fe7a2c2bb",
+      "local_patch_markers": [
+        "MVDM-HOST-DIV-500"
+      ],
+      "nested_groups_to_subsume": 11,
+      "status": "candidate-context-and-patch-audit-required"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "start": 222,
+      "cut": 512,
+      "end": 512,
+      "has_else": false,
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "original_start": 220,
+      "anchors": [
+        [
+          "before",
+          220,
+          [
+            "}",
+            "KbdResume();",
+            "}"
+          ]
+        ],
+        [
+          "after",
+          220,
+          [
+            "GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )",
+            "{",
+            "USHORT   consoleWidth,"
+          ]
+        ]
+      ],
+      "removed_body_sha256": "bdeb154b90f4d4ea50f10d31dc89fffd98a3bd2ffd8514dcc27d611290094fa6",
+      "local_patch_markers": [],
+      "nested_groups_to_subsume": 0,
+      "status": "candidate-context-and-patch-audit-required"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "start": 654,
+      "cut": 665,
+      "end": 665,
+      "has_else": false,
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "original_start": 675,
+      "anchors": [
+        [
+          "before",
+          675,
+          [
+            "{",
+            "USHORT   charHeight, vgaHeight, cursorLine, topLine;",
+            "note_entrance0(\"ConsoleInit\");"
+          ]
+        ],
+        [
+          "after",
+          675,
+          [
+            "initTextSection();",
+            "sc.Focus = TRUE;",
+            "sc.FocusEvent = CreateEvent((LPSECURITY_ATTRIBUTES) NULL,"
+          ]
+        ]
+      ],
+      "removed_body_sha256": "ecc9fd8e84a21e8e346f8b5506c6d625af83f368d63422a02c0f5b187a398dc0",
+      "local_patch_markers": [],
+      "nested_groups_to_subsume": 0,
+      "status": "candidate-context-and-patch-audit-required"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "start": 811,
+      "cut": 1029,
+      "end": 1029,
+      "has_else": false,
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "original_start": 974,
+      "anchors": [
+        [
+          "before",
+          974,
+          [
+            "#endif",
+            "getVDMCursorPosition();",
+            "doNullRegister();"
+          ]
+        ],
+        [
+          "after",
+          974,
+          [
+            "SetConsoleCursorInfo(sc.OutputHandle, &StartupCursor);",
+            "resetWindowParams();",
+            "}"
+          ]
+        ]
+      ],
+      "removed_body_sha256": "2fa2c1999e74e00aed377f33f0de2e4b72d51a9ddcc56b76e4b8039a9d42bc05",
+      "local_patch_markers": [
+        "MVDM-HOST-DIV-497",
+        "MVDM-HOST-DIV-501"
+      ],
+      "nested_groups_to_subsume": 3,
+      "status": "candidate-context-and-patch-audit-required"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "start": 1039,
+      "cut": 1229,
+      "end": 1229,
+      "has_else": false,
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_sha256": "e7dc683be45a04b63d783ae91263f55d50bf41aac480d7bac1a302f19205934c",
+      "original_start": 1214,
+      "anchors": [
+        [
+          "before",
+          1214,
+          [
+            "SetConsoleCursorInfo(sc.OutputHandle, &StartupCursor);",
+            "resetWindowParams();",
+            "}"
+          ]
+        ]
+      ],
+      "removed_body_sha256": "a61774d4296ba01985d666c637a384f3e7e354138116fd6d80e5815a80aa0b60",
+      "local_patch_markers": [
+        "MVDM-HOST-DIV-497",
+        "MVDM-HOST-DIV-501"
+      ],
+      "nested_groups_to_subsume": 3,
+      "status": "candidate-context-and-patch-audit-required"
+    }
+  ],
+  "unmatched": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": 1479,
+      "macro": "X86GFX",
+      "reason": "original boundary not uniquely anchored"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "line": 1508,
+      "macro": "X86GFX",
+      "reason": "original boundary not uniquely anchored"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 201,
+      "macro": "X86GFX",
+      "reason": "original boundary not uniquely anchored"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 537,
+      "macro": "X86GFX",
+      "reason": "original boundary not uniquely anchored"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 592,
+      "macro": "X86GFX",
+      "reason": "original boundary not uniquely anchored"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 1593,
+      "macro": "X86GFX",
+      "reason": "original boundary not uniquely anchored"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 1620,
+      "macro": "X86GFX",
+      "reason": "original boundary not uniquely anchored"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 1637,
+      "macro": "X86GFX",
+      "reason": "original boundary not uniquely anchored"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 1751,
+      "macro": "X86GFX",
+      "reason": "original boundary not uniquely anchored"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "line": 2081,
+      "macro": "X86GFX",
+      "reason": "original boundary not uniquely anchored"
+    }
+  ],
+  "limitations": [
+    "Not an exclusion decision: assess direct fixture and all supported contexts, exception registration and selected alternatives before editing.",
+    "No child branch decisions."
+  ]
+}

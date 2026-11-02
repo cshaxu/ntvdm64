@@ -1,0 +1,707 @@
+{
+  "base": "c97d4ee2c",
+  "include_additions": 0,
+  "include_removals": 175,
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "change": "-#include \"BIOS_SUPPORT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+      "change": "-#include \"SOFTPC_CMOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "change": "-#include \"AT_STUFF.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "change": "-#include \"SOFTPC_LIM.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "change": "-#include \"SOFTPC_LIM.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "change": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "change": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
+      "change": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+      "change": "-#include \"SOFTPC_SUPPORT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+      "change": "-#include \"AT_STUFF.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "change": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "change": "-#include <SOFTPC_SUPPORT.seg>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "change": "-#include \"SOFTPC_COMMS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "change": "-#include \"SOFTPC_PRINTER.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "change": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "change": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "change": "-#include \"SOFTPC_ERROR.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+      "change": "-#include \"DASM1.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "change": "-#include \"SOFTPC_ERROR.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"YODA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include <stdlib.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include <stdio.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include TypesH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include StringH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include <ctype.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include <signal.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"xt.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include CpuH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"trace.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"sas.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"bios.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"ios.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"error.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"config.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"gfi.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"gmi.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"gvi.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"video.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"dsktrace.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"idetect.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"cmos.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"quick_ev.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"gfx_upd.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"host_gfx.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"host_hfx.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"hfx.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"timeval.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include \"egagraph.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "change": "-#include <dasm.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "change": "-#include \"AT_STUFF.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "change": "-#include \"SOFTPC_HDA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "change": "-#include \"SOFTPC_FLOPPY.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "change": "-#include \"SOFTPC_FLOPPY.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "change": "-#include \"SOFTPC_FLOPPY.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "change": "-#include \"SOFTPC_FLOPPY.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "change": "-#include <stdio.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "change": "-#include TypesH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "change": "-#include \"xt.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "change": "-#include \"config.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "change": "-#include \"gfi.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "change": "-#include \"gfisflop.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "change": "-#include \"host.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "change": "-#include \"error.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "change": "-#include \"trace.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "change": "-#include \"fla.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "change": "-#include \"debug.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "change": "-#include \"SLAVE_FLOPPY.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "change": "-#include \"SOFTPC_FLOPPY.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include <stdio.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include TypesH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include TimeH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include \"xt.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include \"bios.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include \"timeval.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include \"config.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include \"timer.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include \"dma.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include \"gfi.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include \"gfisflop.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include \"host.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include \"error.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include \"trace.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include \"fla.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include \"debug.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "change": "-#include \"SLAVE_FLOPPY.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "change": "-#include \"SOFTPC_LIM.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "change": "-#include \"SOFTPC_LIM2.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "change": "-#include \"SOFTPC_LIM.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "change": "-#include \"host_cpu.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "change": "-#include \"SOFTPC_PPI.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "change": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "change": "-#include \"SOFTPC_MOUSE.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "change": "-#include \"SOFTPC_INPUT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "change": "-#include \"SOFTPC_MOUSE.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "change": "-#include \"SOFTPC_SUPPORT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "change": "-#include \"SOFTPC_IOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "change": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "change": "-#include \"AT_STUFF.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "change": "-#include \"SOFTPC_CMOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/dummy_nt.c",
+      "change": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "change": "-#include \"SOFTPC_ICA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "change": "-#include \"SOFTPC_ERROR.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "change": "-#include \"SOFTPC_QUICKEV.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "change": "-#include \"malloc.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "change": "-#include \"SOFTPC_SUPPORT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+      "change": "-#include \"SOFTPC_SUPPORT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/unexp_nt.c",
+      "change": "-#include \"SOFTPC_ERROR.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "change": "-#include \"SOFTPC_CGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "change": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "change": "-#include \"VIDEO_BIOS_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "change": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "change": "-#include \"SOFTPC_EGA_CHN.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "change": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "change": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+      "change": "-#include \"SOFTPC_VGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "change": "-#include \"VIDEO_BIOS_VGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "change": "-#include \"SOFTPC_VGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "change": "-#include \"SOFTPC_VGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+      "change": "-#include \"VIDEO_BIOS_VGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "change": "-#include \"VIDEO_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "change": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video_io.c",
+      "change": "-#include \"VIDEO_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hunt.c",
+      "change": "-#include \"hunter.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_term.c",
+      "change": "-#include \"nt_hunt.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "change": "-#include <stdio.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "change": "-#include \"xt.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "change": "-#include CpuH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "change": "-#include \"hunter.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "change": "-#include \"nt_getXX.h\""
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/win/win.c",
+      "change": "-#include <stdio.h>"
+    }
+  ]
+}

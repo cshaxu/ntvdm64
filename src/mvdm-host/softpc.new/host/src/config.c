@@ -190,48 +190,9 @@ VOID process_pif_exe (char *PifName)
     else
 	IdleDisabledFromPIF = TRUE;
 #ifdef X86GFX
-    if (DosSessionId)    /* Only check screen state if we are in a NEW_CONSOLE */
-    {
-        /* Check to see if we are currently running windowed or full-screen. */
-        if (!GetConsoleDisplayMode(&flags))
-	    ErrorExit();
-
-        /* If PIF is telling us to switch to a different state, do so. */
-        if (flags & CONSOLE_FULLSCREEN_HARDWARE)
-        {
-	    if (pfdata.fullorwin == PF_WINDOWED)
-	    {
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif /* PROD */
-	        if (!SetConsoleDisplayMode(sc.OutputHandle,
-				           CONSOLE_WINDOWED_MODE,
-				           &scrSize))
-		    ErrorExit();
-	    }
-        }
-        else /* WINDOWED */
-        {
-	    if (pfdata.fullorwin == PF_FULLSCREEN)
-	    {
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif /* PROD */
-	        if (!SetConsoleDisplayMode(sc.OutputHandle,
-				           CONSOLE_FULLSCREEN_MODE,
-                                           &scrSize))
-                  {
-                   if (GetLastError() == ERROR_INVALID_PARAMETER)  {
-                       RcErrorDialogBox(ED_INITFSCREEN, NULL, NULL);
-                       }
-                   else {
-                       ErrorExit();
-                       }
-                   }
-            }
-        }
-    }
+#error Unsupported excluded original configuration
 #endif  /* X86GFX */
+#line 235
 
 }
 

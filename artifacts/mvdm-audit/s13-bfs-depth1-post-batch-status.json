@@ -1,0 +1,30 @@
+{
+  "scope": "post-consolidated current first-depth queue, no nested classification",
+  "baseline": "c97d4ee2c8be6d71f32272a674a3b0d76bb71a6c",
+  "counts": {
+    "pending": 1382,
+    "already-excluded": 1470,
+    "newly-excluded": 344,
+    "retained-observed": 1854
+  },
+  "pending_reasons": {
+    "file-not-witnessed-in-product": 911,
+    "arm-not-witnessed-with-ancestors-seen": 471
+  },
+  "current_groups": 4074,
+  "queue_sha256": "309b1f680d5050f7d759641291827abca0e07fc7f03cbe971268aca4c11df98d",
+  "compiler_contexts": 2099,
+  "current_c_source_preprocessor_comparison": {
+    "sources": 51,
+    "matching": 51,
+    "evidence": "s13-bfs-depth1-consolidated-preprocess.json"
+  },
+  "original_structural_restoration": {
+    "clmsg_first_depth": 1,
+    "remaining_multiplicity_candidates": "see original-unresolved inventory; some belong to omitted owners or next depth"
+  },
+  "limitations": [
+    "Observed inclusion is not proof of excluded arms; standalone test profiles are not exhaustively verified.",
+    "All current mirror first-depth boundaries were inventoried; not all baseline structural mismatches were conclusively reconciled."
+  ]
+}

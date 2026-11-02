@@ -1,0 +1,53 @@
+{
+  "scope": "literal test and build-script references for candidate source paths",
+  "sources": {
+    "src/mvdm-host/softpc.new/base/ccpu386/bound.c": [],
+    "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c": [],
+    "src/mvdm-host/softpc.new/base/ccpu386/c_main.c": [
+      "tests\\observation\\verify-ccpu-notification.ps1:9:$source=Join-Path $repo 'src/mvdm-host/softpc.new/base/ccpu386/c_main.c'",
+      "tests\\observation\\verify-decode-diagnostics.ps1:23:$source=Join-Path $repo 'src/mvdm-host/softpc.new/base/ccpu386/c_main.c'",
+      "tests\\observation\\verify-decode-diagnostics.ps1:25:$prior=(& git -C $repo show '68e860553:src/mvdm-host/softpc.new/base/ccpu386/c_main.c') -join \"`n\"",
+      "tests\\observation\\verify-wow-callback-abort-ccpu.ps1:25: \"$repo/src/mvdm-host/softpc.new/base/ccpu386/c_main.c\",\"$repo/src/mvdm-host/softpc.new/base/ccpu386/ntthread.c\",",
+      "tests\\observation\\verify-wow-callback-abort-ccpu.ps1:40: $cpuSource=\"$repo/src/mvdm-host/softpc.new/base/ccpu386/c_main.c\";$fixtureExtra=''"
+    ],
+    "src/mvdm-host/softpc.new/base/ccpu386/call.c": [],
+    "src/mvdm-host/softpc.new/base/ccpu386/jmp.c": [],
+    "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c": [],
+    "src/mvdm-host/softpc.new/base/ccpu386/lidt.c": [],
+    "src/mvdm-host/softpc.new/base/ccpu386/lldt.c": [],
+    "src/mvdm-host/softpc.new/base/ccpu386/lxs.c": [],
+    "src/mvdm-host/softpc.new/base/ccpu386/sgdt.c": [],
+    "src/mvdm-host/softpc.new/base/ccpu386/sidt.c": [],
+    "src/mvdm-host/softpc.new/base/comms/com.c": [],
+    "src/mvdm-host/softpc.new/base/disks/diskbios.c": [],
+    "src/mvdm-host/softpc.new/base/disks/fdisk.c": [],
+    "src/mvdm-host/softpc.new/base/support/ios.c": [
+      "tests\\observation\\verify-softpc-object-contract.ps1:28:    $extraSources = @('src/mvdm-host/softpc.new/base/support/ios.c','src/mvdm-host/softpc.new/base/ccpu386/in.c','src/mvdm-host/softpc.new/base/ccpu386/out.c') | ForEach-Object { Join-Path $repo $_ }",
+      "tests\\observation\\verify-softpc-object-contract.ps1:76:    $original = Join-Path $repo 'src/mvdm-host/softpc.new/base/support/ios.c'"
+    ],
+    "src/mvdm-host/softpc.new/base/support/main.c": [
+      "tests\\build\\test_bfs_depth1_cpu_guards.py:241:lines = (repo / 'src/mvdm-host/softpc.new/base/support/main.c').read_text(",
+      "tests\\build\\test_bfs_depth1_cpu_guards.py:293:lines = (repo / 'src/mvdm-host/softpc.new/base/support/main.c').read_text("
+    ],
+    "src/mvdm-host/softpc.new/base/support/time_day.c": [],
+    "src/mvdm-host/softpc.new/base/system/rom.c": [],
+    "src/mvdm-host/softpc.new/base/video/video.c": [],
+    "src/mvdm-host/softpc.new/host/src/nt_graph.c": [
+      "tests\\observation\\verify-blocked-video-tick.ps1:9:$source=Get-Content \"$repo/src/mvdm-host/softpc.new/host/src/nt_graph.c\" -Raw",
+      "tests\\observation\\verify-blocked-video-tick.ps1:22:@(\"$repo/src/mvdm-host/softpc.new/host/src/nt_graph.c\",\"$repo/tests/component-integration/blocked_video_tick_test.c\") | ForEach-Object {",
+      "tests\\observation\\verify-dos-video-source-contract.ps1:19:$graph=ReadCode 'src/mvdm-host/softpc.new/host/src/nt_graph.c'"
+    ],
+    "src/mvdm-host/softpc.new/host/src/nt_vdd.c": [
+      "tests\\observation\\verify-softpc-object-contract.ps1:24:    $original = Join-Path $repo 'src/mvdm-host/softpc.new/host/src/nt_vdd.c'"
+    ],
+    "src/mvdm-host/wow32/wdib.c": [],
+    "src/mvdm-host/wow32/wmmalias.c": [],
+    "src/non-mvdm/ds/netapi/netlib/memalloc.c": [],
+    "src/non-mvdm/ds/netapi/xactsrv/apimsg.c": [],
+    "src/non-mvdm/ds/netapi/xactsrv/apisvc.c": []
+  },
+  "limitations": [
+    "Constructed or indirect paths may not be represented.",
+    "Each direct test or historical graph must be classified before exclusion."
+  ]
+}

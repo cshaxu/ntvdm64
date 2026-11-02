@@ -1,0 +1,2481 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "arm_line": 796,
+      "current_after_boundary": 824,
+      "original_after_boundary": 717,
+      "following_context_exact": true,
+      "following_current": [
+        "if (EndUseLockedPMStack()) {",
+        "ULONG NewEIP, NewEFLAGS, NewCS;",
+        "NewEIP    = getEIP();",
+        "NewCS     = (ULONG) *(PWORD16)(VdmStackPointer+2);",
+        "NewEFLAGS = (getEFLAGS()&0xffff0000) | *(PWORD16)(VdmStackPointer+4);"
+      ],
+      "following_original": [
+        "if (EndUseLockedPMStack()) {",
+        "ULONG NewEIP, NewEFLAGS, NewCS;",
+        "NewEIP    = getEIP();",
+        "NewCS     = (ULONG) *(PWORD16)(VdmStackPointer+2);",
+        "NewEFLAGS = (getEFLAGS()&0xffff0000) | *(PWORD16)(VdmStackPointer+4);"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "arm_line": 909,
+      "current_after_boundary": 933,
+      "original_after_boundary": 822,
+      "following_context_exact": true,
+      "following_current": [
+        "if (EndUseLockedPMStack()) {",
+        "ULONG NewEIP, NewCS, NewEFLAGS;",
+        "NewEIP    = getEIP();",
+        "NewCS     = *(PDWORD16)(VdmStackPointer+4);",
+        "NewEFLAGS = *(PDWORD16)(VdmStackPointer+8);"
+      ],
+      "following_original": [
+        "if (EndUseLockedPMStack()) {",
+        "ULONG NewEIP, NewCS, NewEFLAGS;",
+        "NewEIP    = getEIP();",
+        "NewCS     = *(PDWORD16)(VdmStackPointer+4);",
+        "NewEFLAGS = *(PDWORD16)(VdmStackPointer+8);"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "arm_line": 305,
+      "current_after_boundary": 310,
+      "original_after_boundary": 169,
+      "following_context_exact": true,
+      "following_current": [
+        "setAX(0);"
+      ],
+      "following_original": [
+        "setAX(0);"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "arm_line": 135,
+      "current_after_boundary": 138,
+      "original_after_boundary": 138,
+      "following_context_exact": true,
+      "following_current": [
+        "NotSupportedBetter             , // 63h - Hangool call"
+      ],
+      "following_original": [
+        "NotSupportedBetter             , // 63h - Hangool call"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "arm_line": 205,
+      "current_after_boundary": 214,
+      "original_after_boundary": 210,
+      "following_context_exact": true,
+      "following_current": [
+        "}",
+        "VOID",
+        "NoTranslation(",
+        "VOID",
+        ")"
+      ],
+      "following_original": [
+        "}",
+        "VOID",
+        "NoTranslation(",
+        "VOID",
+        ")"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "arm_line": 1456,
+      "current_after_boundary": 1474,
+      "original_after_boundary": 1471,
+      "following_context_exact": true,
+      "following_current": [
+        "}",
+        "VOID",
+        "FreeMemoryBlock(",
+        "VOID",
+        ")"
+      ],
+      "following_original": [
+        "}",
+        "VOID",
+        "FreeMemoryBlock(",
+        "VOID",
+        ")"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "arm_line": 1496,
+      "current_after_boundary": 1518,
+      "original_after_boundary": 1515,
+      "following_context_exact": true,
+      "following_current": [
+        "}",
+        "VOID",
+        "ResizeMemoryBlock(",
+        "VOID",
+        ")"
+      ],
+      "following_original": [
+        "}",
+        "VOID",
+        "ResizeMemoryBlock(",
+        "VOID",
+        ")"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "arm_line": 1541,
+      "current_after_boundary": 1564,
+      "original_after_boundary": 1561,
+      "following_context_exact": true,
+      "following_current": [
+        "}",
+        "VOID",
+        "LoadExec(",
+        "VOID",
+        ")"
+      ],
+      "following_original": [
+        "}",
+        "VOID",
+        "LoadExec(",
+        "VOID",
+        ")"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "arm_line": 84,
+      "current_after_boundary": 88,
+      "original_after_boundary": 88,
+      "following_context_exact": true,
+      "following_current": [
+        "LOCAL void v_mouse_EM_callback\tIFN0() { SWAP_INSTANCE; mouse_EM_callback(); }"
+      ],
+      "following_original": [
+        "LOCAL void v_mouse_EM_callback\tIFN0() { SWAP_INSTANCE; mouse_EM_callback(); }"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "arm_line": 108,
+      "current_after_boundary": 111,
+      "original_after_boundary": 111,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "arm_line": 313,
+      "current_after_boundary": 320,
+      "original_after_boundary": 330,
+      "following_context_exact": true,
+      "following_current": [
+        "high_switches |= (PPI_ONE_DRIVE);"
+      ],
+      "following_original": [
+        "high_switches |= (PPI_ONE_DRIVE);"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "arm_line": 636,
+      "current_after_boundary": 639,
+      "original_after_boundary": 815,
+      "following_context_exact": true,
+      "following_current": [
+        "cmos_init();",
+        "cmos_post();",
+        "ppi_init();",
+        "ppi_get_switches(&low_switches,&high_switches);",
+        "equip_flag.all = (low_switches & 0xE) | (high_switches<<4);"
+      ],
+      "following_original": [
+        "cmos_init();",
+        "cmos_post();",
+        "ppi_init();",
+        "ppi_get_switches(&low_switches,&high_switches);",
+        "equip_flag.all = (low_switches & 0xE) | (high_switches<<4);"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "arm_line": 811,
+      "current_after_boundary": 814,
+      "original_after_boundary": 1096,
+      "following_context_exact": true,
+      "following_current": [
+        "}",
+        "/*(",
+        "================================ reset_bios_flags =============================",
+        "PURPOSE: To ensure that we reset \"cleanly\"",
+        "-- clear out the keyboard flags and the CMOS shutdown byte."
+      ],
+      "following_original": [
+        "}",
+        "/*(",
+        "================================ reset_bios_flags =============================",
+        "PURPOSE: To ensure that we reset \"cleanly\"",
+        "-- clear out the keyboard flags and the CMOS shutdown byte."
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
+      "arm_line": 226,
+      "current_after_boundary": 238,
+      "original_after_boundary": 238,
+      "following_context_exact": true,
+      "following_current": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "following_original": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "arm_line": 166,
+      "current_after_boundary": 174,
+      "original_after_boundary": 163,
+      "following_context_exact": true,
+      "following_current": [
+        "#define FIX_BT_BUG\t/* Of course we want the bug fixed! */",
+        "#define SYNCH_BOTH_WAYS\t/* Do a PIG_SYNCH() on not-taken conditionals as well */",
+        "/*",
+        "Types and constants local to this module.",
+        "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+      ],
+      "following_original": [
+        "#define FIX_BT_BUG\t/* Of course we want the bug fixed! */",
+        "#define SYNCH_BOTH_WAYS\t/* Do a PIG_SYNCH() on not-taken conditionals as well */",
+        "/*",
+        "Types and constants local to this module.",
+        "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "arm_line": 145,
+      "current_after_boundary": 151,
+      "original_after_boundary": 149,
+      "following_context_exact": true,
+      "following_current": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "following_original": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "arm_line": 140,
+      "current_after_boundary": 147,
+      "original_after_boundary": 95,
+      "following_context_exact": true,
+      "following_current": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "following_original": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "arm_line": 306,
+      "current_after_boundary": 312,
+      "original_after_boundary": 263,
+      "following_context_exact": true,
+      "following_current": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "following_original": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "arm_line": 369,
+      "current_after_boundary": 375,
+      "original_after_boundary": 326,
+      "following_context_exact": true,
+      "following_current": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "following_original": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "arm_line": 104,
+      "current_after_boundary": 111,
+      "original_after_boundary": 111,
+      "following_context_exact": true,
+      "following_current": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "following_original": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "arm_line": 70,
+      "current_after_boundary": 81,
+      "original_after_boundary": 81,
+      "following_context_exact": true,
+      "following_current": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "following_original": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "arm_line": 148,
+      "current_after_boundary": 154,
+      "original_after_boundary": 154,
+      "following_context_exact": true,
+      "following_current": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "following_original": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+      "arm_line": 86,
+      "current_after_boundary": 93,
+      "original_after_boundary": 93,
+      "following_context_exact": true,
+      "following_current": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "following_original": [
+        "/* The Soft486 EDL CPU does not take Real Mode limit failures.",
+        "* Since the Ccpu486 is used as a \"reference\" cpu we wish it",
+        "* to behave a C version of the EDL Cpu rather than as a C",
+        "* version of a i486.",
+        "*/"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "arm_line": 2891,
+      "current_after_boundary": 2907,
+      "original_after_boundary": 3036,
+      "following_context_exact": true,
+      "following_current": [
+        "sas_load(FLOPPY_STATUS, &diskette_status);",
+        "diskette_status |= FS_TIME_OUT;",
+        "sas_store(FLOPPY_STATUS, diskette_status);",
+        "return(FAILURE);",
+        "}"
+      ],
+      "following_original": [
+        "sas_load(FLOPPY_STATUS, &diskette_status);",
+        "diskette_status |= FS_TIME_OUT;",
+        "sas_store(FLOPPY_STATUS, diskette_status);",
+        "return(FAILURE);",
+        "}"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "arm_line": 367,
+      "current_after_boundary": 373,
+      "original_after_boundary": 410,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "arm_line": 288,
+      "current_after_boundary": 291,
+      "original_after_boundary": 299,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "arm_line": 327,
+      "current_after_boundary": 330,
+      "original_after_boundary": 338,
+      "following_context_exact": true,
+      "following_current": [
+        "mouse_driver_initialisation();",
+        "}"
+      ],
+      "following_original": [
+        "mouse_driver_initialisation();",
+        "}"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "arm_line": 73,
+      "current_after_boundary": 76,
+      "original_after_boundary": 72,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "arm_line": 112,
+      "current_after_boundary": 115,
+      "original_after_boundary": 115,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "arm_line": 89,
+      "current_after_boundary": 92,
+      "original_after_boundary": 92,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "arm_line": 300,
+      "current_after_boundary": 315,
+      "original_after_boundary": 392,
+      "following_context_exact": true,
+      "following_current": [
+        "default:",
+        "; /* Do nothing */"
+      ],
+      "following_original": [
+        "default:",
+        "; /* Do nothing */"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+      "arm_line": 462,
+      "current_after_boundary": 467,
+      "original_after_boundary": 473,
+      "following_context_exact": true,
+      "following_current": [
+        "}",
+        "if (num_flops == 2)",
+        "*equip |= TWO_DRIVES;",
+        "if (num_flops)",
+        "*equip |= DISKETTE_PRESENT;"
+      ],
+      "following_original": [
+        "}",
+        "if (num_flops == 2)",
+        "*equip |= TWO_DRIVES;",
+        "if (num_flops)",
+        "*equip |= DISKETTE_PRESENT;"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "arm_line": 272,
+      "current_after_boundary": 277,
+      "original_after_boundary": 310,
+      "following_context_exact": true,
+      "following_current": [
+        "/*",
+        "* ============================================================================",
+        "* Local defines",
+        "* ============================================================================",
+        "*/"
+      ],
+      "following_original": [
+        "/*",
+        "* ============================================================================",
+        "* Local defines",
+        "* ============================================================================",
+        "*/"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "arm_line": 334,
+      "current_after_boundary": 337,
+      "original_after_boundary": 370,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "arm_line": 1880,
+      "current_after_boundary": 1884,
+      "original_after_boundary": 2192,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "arm_line": 161,
+      "current_after_boundary": 164,
+      "original_after_boundary": 189,
+      "following_context_exact": true,
+      "following_current": [
+        "#define\tSET_VGLOBS_MARK_STRING(func)\tsetVideomark_string(func);"
+      ],
+      "following_original": [
+        "#define\tSET_VGLOBS_MARK_STRING(func)\tsetVideomark_string(func);"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "arm_line": 60,
+      "current_after_boundary": 68,
+      "original_after_boundary": 56,
+      "following_context_exact": true,
+      "following_current": [
+        "#define setBASE(base, value) base = (0xff000000 | (value & 0xffffff))",
+        "#define setLIMIT(limit, value) limit = value"
+      ],
+      "following_original": [
+        "#define setBASE(base, value) base = (0xff000000 | (value & 0xffffff))",
+        "#define setLIMIT(limit, value) limit = value"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "arm_line": 102,
+      "current_after_boundary": 117,
+      "original_after_boundary": 101,
+      "following_context_exact": false,
+      "following_current": [
+        "cpu_simulate ();",
+        "ASSERT(IcaLock.OwningThread != NtCurrentTeb()->ClientId.UniqueThread);",
+        "}",
+        "/* DIVERGENCE(MVDM-HOST-DIV-153): BIOS BOP FE keeps the historical",
+        "* host_unsimulate public entry.  The selected CCPU40 implementation is the"
+      ],
+      "following_original": [
+        "cpu_simulate ();",
+        "ASSERT(IcaLock.OwningThread != NtCurrentTeb()->ClientId.UniqueThread);",
+        "}",
+        "/*",
+        "Host_set_hw_int: Cause a hardware interrupt to be generated. For"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "arm_line": 1369,
+      "current_after_boundary": 1421,
+      "original_after_boundary": 1612,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "arm_line": 229,
+      "current_after_boundary": 232,
+      "original_after_boundary": 250,
+      "following_context_exact": true,
+      "following_current": [
+        "/********************************************************/",
+        "/* STATIC GLOBALS */",
+        "FL floppy_data[MAX_FLOPPY];",
+        "struct flop_struct floppy_tksc [6] =",
+        "{"
+      ],
+      "following_original": [
+        "/********************************************************/",
+        "/* STATIC GLOBALS */",
+        "FL floppy_data[MAX_FLOPPY];",
+        "struct flop_struct floppy_tksc [6] =",
+        "{"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "arm_line": 341,
+      "current_after_boundary": 344,
+      "original_after_boundary": 396,
+      "following_context_exact": true,
+      "following_current": [
+        "nt_gfi_rdiskette_term(flp);\t/*  shutdown process */",
+        "gfi_empty_active(hostID,TRUE,err);  /* Tell gfi 'empty' is now active */",
+        "return(C_CONFIG_OP_OK);",
+        "}",
+        "}"
+      ],
+      "following_original": [
+        "nt_gfi_rdiskette_term(flp);\t/*  shutdown process */",
+        "gfi_empty_active(hostID,TRUE,err);  /* Tell gfi 'empty' is now active */",
+        "return(C_CONFIG_OP_OK);",
+        "}",
+        "}"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "arm_line": 382,
+      "current_after_boundary": 418,
+      "original_after_boundary": 504,
+      "following_context_exact": true,
+      "following_current": [
+        "/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/",
+        "/*:::::::::::::::::: FLOPPY heart beat call ::::::::::::::::::::::::::::::::::::*/",
+        "/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/",
+        "GLOBAL void host_flpy_heart_beat(void)",
+        "{"
+      ],
+      "following_original": [
+        "/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/",
+        "/*:::::::::::::::::: FLOPPY heart beat call ::::::::::::::::::::::::::::::::::::*/",
+        "/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/",
+        "GLOBAL void host_flpy_heart_beat(void)",
+        "{"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "arm_line": 324,
+      "current_after_boundary": 350,
+      "original_after_boundary": 343,
+      "following_context_exact": true,
+      "following_current": [
+        "/*",
+        "* Host-specific equivalent of the Unix function time().",
+        "*/",
+        "long host_time(tloc)",
+        "long *tloc;"
+      ],
+      "following_original": [
+        "/*",
+        "* Host-specific equivalent of the Unix function time().",
+        "*/",
+        "long host_time(tloc)",
+        "long *tloc;"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "arm_line": 230,
+      "current_after_boundary": 242,
+      "original_after_boundary": 460,
+      "following_context_exact": true,
+      "following_current": [
+        "int host_timer_2_frig_factor = 20;",
+        "host_check_read_only_drive()",
+        "{",
+        "assert0(NO,\"host_check_read_only_drive stubbed\\n\");",
+        "return(0);"
+      ],
+      "following_original": [
+        "int host_timer_2_frig_factor = 20;",
+        "host_check_read_only_drive()",
+        "{",
+        "assert0(NO,\"host_check_read_only_drive stubbed\\n\");",
+        "return(0);"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "arm_line": 115,
+      "current_after_boundary": 118,
+      "original_after_boundary": 118,
+      "following_context_exact": true,
+      "following_current": [
+        "#define VR_BREAKPOINT()"
+      ],
+      "following_original": [
+        "#define VR_BREAKPOINT()"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "arm_line": 277,
+      "current_after_boundary": 281,
+      "original_after_boundary": 281,
+      "following_context_exact": true,
+      "following_current": [
+        "GETVDMPTR(vp, 1, lpMetaData);",
+        "if (IsValidMetaFile16(lpMetaData)) {",
+        "GlobalUnlockFree16(vp);",
+        "ul = TRUE;",
+        "}"
+      ],
+      "following_original": [
+        "GETVDMPTR(vp, 1, lpMetaData);",
+        "if (IsValidMetaFile16(lpMetaData)) {",
+        "GlobalUnlockFree16(vp);",
+        "ul = TRUE;",
+        "}"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "arm_line": 333,
+      "current_after_boundary": 338,
+      "original_after_boundary": 318,
+      "following_context_exact": true,
+      "following_current": [
+        "}",
+        "if (n >= nLenDef) {",
+        "char szBuf[512];",
+        "//",
+        "// The returned string is the same as the default string"
+      ],
+      "following_original": [
+        "}",
+        "if (n >= nLenDef) {",
+        "char szBuf[512];",
+        "//",
+        "// The returned string is the same as the default string"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "arm_line": 506,
+      "current_after_boundary": 511,
+      "original_after_boundary": 509,
+      "following_context_exact": true,
+      "following_current": [
+        "}",
+        "if (n >= nLenDef) {",
+        "char szBuf[512];",
+        "//",
+        "// The returned string is the same as the default string"
+      ],
+      "following_original": [
+        "}",
+        "if (n >= nLenDef) {",
+        "char szBuf[512];",
+        "//",
+        "// The returned string is the same as the default string"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "arm_line": 209,
+      "current_after_boundary": 222,
+      "original_after_boundary": 220,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "arm_line": 248,
+      "current_after_boundary": 251,
+      "original_after_boundary": 251,
+      "following_context_exact": true,
+      "following_current": [
+        "phm->h32 = h32;",
+        "phm->htask16 = FETCHWORD(CURRENTPTD()->htask16);",
+        "phm->iClass = iClass;",
+        "phm->dwStyle = 0;",
+        "phm->vpfnWndProc = 0;"
+      ],
+      "following_original": [
+        "phm->h32 = h32;",
+        "phm->htask16 = FETCHWORD(CURRENTPTD()->htask16);",
+        "phm->iClass = iClass;",
+        "phm->dwStyle = 0;",
+        "phm->vpfnWndProc = 0;"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "arm_line": 289,
+      "current_after_boundary": 303,
+      "original_after_boundary": 303,
+      "following_context_exact": true,
+      "following_current": [
+        "iHash = h16 & HASH_MASK;",
+        "iList = (h16 & LIST_MASK) >> HASH_BITS;",
+        "phm = (PHMAP)(phi->pphmHash + iHash);",
+        "i = iList;",
+        "while (i-- && phm) {"
+      ],
+      "following_original": [
+        "iHash = h16 & HASH_MASK;",
+        "iList = (h16 & LIST_MASK) >> HASH_BITS;",
+        "phm = (PHMAP)(phi->pphmHash + iHash);",
+        "i = iList;",
+        "while (i-- && phm) {"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "arm_line": 349,
+      "current_after_boundary": 362,
+      "original_after_boundary": 364,
+      "following_context_exact": true,
+      "following_current": [
+        "return;",
+        "}",
+        "LOGDEBUG(1,(\"    FreeHMap16: handle alias %04x not found\\n\"));",
+        "}",
+        "PSZ GetHMapNameM(PHINFO phi, INT iClass)"
+      ],
+      "following_original": [
+        "return;",
+        "}",
+        "LOGDEBUG(1,(\"    FreeHMap16: handle alias %04x not found\\n\"));",
+        "}",
+        "PSZ GetHMapNameM(PHINFO phi, INT iClass)"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "arm_line": 957,
+      "current_after_boundary": 962,
+      "original_after_boundary": 965,
+      "following_context_exact": true,
+      "following_current": [
+        "}",
+        "else {",
+        "LOGDEBUG(0,(\"InstallWowFaxPrinter, AddPrinterDriver failed: 0x%X\\n\", GetLastError()));",
+        "}",
+        "free_w(DriverInfo.pDataFile);"
+      ],
+      "following_original": [
+        "}",
+        "else {",
+        "LOGDEBUG(0,(\"InstallWowFaxPrinter, AddPrinterDriver failed: 0x%X\\n\", GetLastError()));",
+        "}",
+        "free_w(DriverInfo.pDataFile);"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "arm_line": 50,
+      "current_after_boundary": 53,
+      "original_after_boundary": 53,
+      "following_context_exact": true,
+      "following_current": [
+        "DWORD nAliasCount;  // index for an alias array",
+        "DWORD rgdwAlias[MAXNODEALIAS];",
+        "// word sized member of the struct -- alignment alert",
+        "HAND16 htask16;    // this is HAND16 really - keep simple and aligned",
+        "} PARAMNODE, *LPPARAMNODE;"
+      ],
+      "following_original": [
+        "DWORD nAliasCount;  // index for an alias array",
+        "DWORD rgdwAlias[MAXNODEALIAS];",
+        "// word sized member of the struct -- alignment alert",
+        "HAND16 htask16;    // this is HAND16 really - keep simple and aligned",
+        "} PARAMNODE, *LPPARAMNODE;"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "arm_line": 230,
+      "current_after_boundary": 233,
+      "original_after_boundary": 211,
+      "following_context_exact": true,
+      "following_current": [
+        "lpn->nAliasCount = 0;",
+        "lpn->htask16 = CURRENTPTD()->htask16;",
+        "gParamMap.pHead = lpn;",
+        "}",
+        "}"
+      ],
+      "following_original": [
+        "lpn->nAliasCount = 0;",
+        "lpn->htask16 = CURRENTPTD()->htask16;",
+        "gParamMap.pHead = lpn;",
+        "}",
+        "}"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "arm_line": 242,
+      "current_after_boundary": 276,
+      "original_after_boundary": 254,
+      "following_context_exact": true,
+      "following_current": [
+        "//",
+        "//  This should be called from the places we know pointers could get updated",
+        "//",
+        "//",
+        "PVOID ParamMapUpdateNode(DWORD dwPtr, UINT fMode, VOID* lpNode)"
+      ],
+      "following_original": [
+        "//",
+        "//  This should be called from the places we know pointers could get updated",
+        "//",
+        "//",
+        "PVOID ParamMapUpdateNode(DWORD dwPtr, UINT fMode, VOID* lpNode)"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "arm_line": 306,
+      "current_after_boundary": 312,
+      "original_after_boundary": 290,
+      "following_context_exact": false,
+      "following_current": [
+        "/* DIVERGENCE(MVDM-HOST-DIV-347): failed refresh must not publish NULL. */",
+        "if (!pv) return NULL;",
+        "if (lpn->nAliasCount < ARRAYCOUNT(lpn->rgdwAlias)) {",
+        "lpn->rgdwAlias[lpn->nAliasCount++] = lpn->dwPtr32;",
+        "}"
+      ],
+      "following_original": [
+        "if (lpn->nAliasCount < ARRAYCOUNT(lpn->rgdwAlias)) {",
+        "lpn->rgdwAlias[lpn->nAliasCount++] = lpn->dwPtr32;",
+        "}",
+        "else {",
+        "WOW32ASSERTMSG(FALSE, (\"WOW:AddParamMap is out of alias space\\n\"));"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "arm_line": 361,
+      "current_after_boundary": 364,
+      "original_after_boundary": 339,
+      "following_context_exact": true,
+      "following_current": [
+        "*pfFreePtr = FALSE;"
+      ],
+      "following_original": [
+        "*pfFreePtr = FALSE;"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsubcls.c",
+      "arm_line": 20,
+      "current_after_boundary": 225,
+      "original_after_boundary": 225,
+      "following_context_exact": true,
+      "following_current": [
+        "BOOL ConstructThunkWindowProc(",
+        "LPTWPLIST   lptwp,",
+        "VPVOID      vptwp",
+        ") {",
+        "/*"
+      ],
+      "following_original": [
+        "BOOL ConstructThunkWindowProc(",
+        "LPTWPLIST   lptwp,",
+        "VPVOID      vptwp",
+        ") {",
+        "/*"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "arm_line": 154,
+      "current_after_boundary": 162,
+      "original_after_boundary": 162,
+      "following_context_exact": true,
+      "following_current": [
+        "STORESHORT(pwc16->cbWndExtra,    t3.cbWndExtra);",
+        "// Win3.1 copies the hInst passed in by the app into the WNDCLASS struct",
+        "// unless hInst == NULL, in which case they copy user's hInst",
+        "if((!parg16->f1) || (t3.hInstance == ghInstanceUser32)) {",
+        "w = gUser16hInstance;"
+      ],
+      "following_original": [
+        "STORESHORT(pwc16->cbWndExtra,    t3.cbWndExtra);",
+        "// Win3.1 copies the hInst passed in by the app into the WNDCLASS struct",
+        "// unless hInst == NULL, in which case they copy user's hInst",
+        "if((!parg16->f1) || (t3.hInstance == ghInstanceUser32)) {",
+        "w = gUser16hInstance;"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "arm_line": 1076,
+      "current_after_boundary": 1080,
+      "original_after_boundary": 1043,
+      "following_context_exact": true,
+      "following_current": [
+        "ul = GETBOOL16(UnregisterClass(",
+        "pszClass,",
+        "HMODINST32(parg16->hInstance)",
+        "));",
+        "FREEPSZPTR(psz1);"
+      ],
+      "following_original": [
+        "ul = GETBOOL16(UnregisterClass(",
+        "pszClass,",
+        "HMODINST32(parg16->hInstance)",
+        "));",
+        "FREEPSZPTR(psz1);"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "arm_line": 2003,
+      "current_after_boundary": 2014,
+      "original_after_boundary": 1919,
+      "following_context_exact": true,
+      "following_current": [
+        "UNREFERENCED_PARAMETER(pFrame);",
+        "return TRUE;    // WIN32 doesn't have sizeable message queues"
+      ],
+      "following_original": [
+        "UNREFERENCED_PARAMETER(pFrame);",
+        "return TRUE;    // WIN32 doesn't have sizeable message queues"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "arm_line": 534,
+      "current_after_boundary": 547,
+      "original_after_boundary": 544,
+      "following_context_exact": true,
+      "following_current": [
+        "UNREFERENCED_PARAMETER(pFrame);",
+        "return TRUE;"
+      ],
+      "following_original": [
+        "UNREFERENCED_PARAMETER(pFrame);",
+        "return TRUE;"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "arm_line": 1912,
+      "current_after_boundary": 1923,
+      "original_after_boundary": 1918,
+      "following_context_exact": true,
+      "following_current": [
+        "ul = GETBOOL16(GrayString(hdc,",
+        "HBRUSH32(parg16->f2),",
+        "NULL,",
+        "(DWORD)psz2,",
+        "n,"
+      ],
+      "following_original": [
+        "ul = GETBOOL16(GrayString(hdc,",
+        "HBRUSH32(parg16->f2),",
+        "NULL,",
+        "(DWORD)psz2,",
+        "n,"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "arm_line": 3002,
+      "current_after_boundary": 3031,
+      "original_after_boundary": 3003,
+      "following_context_exact": true,
+      "following_current": [
+        "/*++",
+        "void ShowOwnedPopups(<hwnd>, <fShow>)",
+        "The %ShowOwnedPopups% function shows or hides all pop-up windows that are",
+        "associated with the <hwnd> parameter. If the <fShow> parameter is TRUE,",
+        "all hidden pop-up windows are shown; if <fShow> is FALSE, all visible pop-up"
+      ],
+      "following_original": [
+        "/*++",
+        "void ShowOwnedPopups(<hwnd>, <fShow>)",
+        "The %ShowOwnedPopups% function shows or hides all pop-up windows that are",
+        "associated with the <hwnd> parameter. If the <fShow> parameter is TRUE,",
+        "all hidden pop-up windows are shown; if <fShow> is FALSE, all visible pop-up"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "arm_line": 740,
+      "current_after_boundary": 747,
+      "original_after_boundary": 745,
+      "following_context_exact": true,
+      "following_current": [
+        "ul = 90;"
+      ],
+      "following_original": [
+        "ul = 90;"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-source-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bound.c",
+      "arm_line": 43,
+      "current_after_boundary": 49,
+      "original_after_boundary": 49,
+      "following_context_exact": true,
+      "following_current": [
+        "{",
+        "IS32 value;",
+        "IS32 lower;",
+        "IS32 upper;",
+        "/* transfer to local signed variables */"
+      ],
+      "following_original": [
+        "{",
+        "IS32 value;",
+        "IS32 lower;",
+        "IS32 upper;",
+        "/* transfer to local signed variables */"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "arm_line": 306,
+      "current_after_boundary": 309,
+      "original_after_boundary": 308,
+      "following_context_exact": true,
+      "following_current": [
+        "return TRUE;",
+        "*descr_addr = GET_LDT_BASE() + offset;",
+        "}",
+        "return FALSE;",
+        "}"
+      ],
+      "following_original": [
+        "return TRUE;",
+        "*descr_addr = GET_LDT_BASE() + offset;",
+        "}",
+        "return FALSE;",
+        "}"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "arm_line": 54,
+      "current_after_boundary": 58,
+      "original_after_boundary": 50,
+      "following_context_exact": true,
+      "following_current": [
+        "{",
+        "IU16  new_cs;\t/* The destination */",
+        "IU32 new_ip;",
+        "IU32 cs_descr_addr;\t\t/* code segment descriptor address */",
+        "CPU_DESCR cs_entry;\t\t/* code segment descriptor entry */"
+      ],
+      "following_original": [
+        "{",
+        "IU16  new_cs;\t/* The destination */",
+        "IU32 new_ip;",
+        "IU32 cs_descr_addr;\t\t/* code segment descriptor address */",
+        "CPU_DESCR cs_entry;\t\t/* code segment descriptor entry */"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "arm_line": 49,
+      "current_after_boundary": 53,
+      "original_after_boundary": 53,
+      "following_context_exact": true,
+      "following_current": [
+        "{",
+        "IU16  new_cs;\t/* The destination */",
+        "IU32 new_ip;",
+        "IU32 descr_addr;\t/* cs descriptor address and entry */",
+        "CPU_DESCR entry;"
+      ],
+      "following_original": [
+        "{",
+        "IU16  new_cs;\t/* The destination */",
+        "IU32 new_ip;",
+        "IU32 descr_addr;\t/* cs descriptor address and entry */",
+        "CPU_DESCR entry;"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+      "arm_line": 53,
+      "current_after_boundary": 56,
+      "original_after_boundary": 56,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "arm_line": 438,
+      "current_after_boundary": 442,
+      "original_after_boundary": 452,
+      "following_context_exact": true,
+      "following_current": [
+        "}",
+        "}",
+        "static void clear_interrupt IFN1(struct ADAPTER_STATE *, asp)",
+        "{",
+        "/*"
+      ],
+      "following_original": [
+        "}",
+        "}",
+        "static void clear_interrupt IFN1(struct ADAPTER_STATE *, asp)",
+        "{",
+        "/*"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "arm_line": 373,
+      "current_after_boundary": 376,
+      "original_after_boundary": 572,
+      "following_context_exact": true,
+      "following_current": [
+        "{",
+        "disk_reset,\t\t/* 0x00 */",
+        "return_status,\t\t/* 0x01 */",
+        "disk_read,\t\t/* 0x02 */",
+        "disk_write,\t\t/* 0x03 */"
+      ],
+      "following_original": [
+        "{",
+        "disk_reset,\t\t/* 0x00 */",
+        "return_status,\t\t/* 0x01 */",
+        "disk_read,\t\t/* 0x02 */",
+        "disk_write,\t\t/* 0x03 */"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "arm_line": 381,
+      "current_after_boundary": 398,
+      "original_after_boundary": 398,
+      "following_context_exact": true,
+      "following_current": [
+        "/*",
+        "* -----------------------------------------------------------------------",
+        "* [5.2 LOCAL DEFINITIONS]",
+        "*",
+        "* [5.2.1 INTERNAL DATA DEFINITIONS"
+      ],
+      "following_original": [
+        "/*",
+        "* -----------------------------------------------------------------------",
+        "* [5.2 LOCAL DEFINITIONS]",
+        "*",
+        "* [5.2.1 INTERNAL DATA DEFINITIONS"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "arm_line": 675,
+      "current_after_boundary": 680,
+      "original_after_boundary": 699,
+      "following_context_exact": true,
+      "following_current": [
+        "{",
+        "Ios_inb_function[adapter]  = FAST_FUNC_ADDR(func);",
+        "Ios_inw_function[adapter]  = FAST_FUNC_ADDR(generic_inw);",
+        "Ios_insb_function[adapter] = generic_insb;",
+        "Ios_insw_function[adapter] = generic_insw;"
+      ],
+      "following_original": [
+        "{",
+        "Ios_inb_function[adapter]  = FAST_FUNC_ADDR(func);",
+        "Ios_inw_function[adapter]  = FAST_FUNC_ADDR(generic_inw);",
+        "Ios_insb_function[adapter] = generic_insb;",
+        "Ios_insw_function[adapter] = generic_insw;"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "arm_line": 78,
+      "current_after_boundary": 81,
+      "original_after_boundary": 68,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "arm_line": 109,
+      "current_after_boundary": 115,
+      "original_after_boundary": 119,
+      "following_context_exact": true,
+      "following_current": [
+        "#define TICKS_PER_HOUR      65543L",
+        "#define TICKS_PER_MIN       1092L",
+        "#define TICKS_PER_SEC       18L",
+        "/*",
+        "* ============================================================================"
+      ],
+      "following_original": [
+        "#define TICKS_PER_HOUR      65543L",
+        "#define TICKS_PER_MIN       1092L",
+        "#define TICKS_PER_SEC       18L",
+        "/*",
+        "* ============================================================================"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "arm_line": 115,
+      "current_after_boundary": 118,
+      "original_after_boundary": 120,
+      "following_context_exact": true,
+      "following_current": [
+        "/*(",
+        "*=========================== patchCheckSum ================================",
+        "* patchCheckSum",
+        "*",
+        "* Purpose"
+      ],
+      "following_original": [
+        "/*(",
+        "*=========================== patchCheckSum ================================",
+        "* patchCheckSum",
+        "*",
+        "* Purpose"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "arm_line": 1908,
+      "current_after_boundary": 1911,
+      "original_after_boundary": 1920,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "arm_line": 40,
+      "current_after_boundary": 51,
+      "original_after_boundary": 51,
+      "following_context_exact": true,
+      "following_current": [
+        "/*::::::::::::::::::::::::::::::::::::::::::::::::::::: Local data structures */",
+        "#define MAX_SLOTS (10)",
+        "LOCAL void (*MS_bop_tab[MAX_SLOTS])();\t\t/* MS bop table */",
+        "/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/",
+        "/* Microsoft BOP vectoring code references MS_bop_tab above and calls function"
+      ],
+      "following_original": [
+        "/*::::::::::::::::::::::::::::::::::::::::::::::::::::: Local data structures */",
+        "#define MAX_SLOTS (10)",
+        "LOCAL void (*MS_bop_tab[MAX_SLOTS])();\t\t/* MS bop table */",
+        "/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/",
+        "/* Microsoft BOP vectoring code references MS_bop_tab above and calls function"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "arm_line": 151,
+      "current_after_boundary": 202,
+      "original_after_boundary": 200,
+      "following_context_exact": true,
+      "following_current": [
+        "phm = malloc_w(sizeof(HMAP));",
+        "if (!phm) {",
+        "LOGDEBUG(0,(\"    FindHMap32 ERROR: cannot allocate new list entry\\n\"));",
+        "return NULL;",
+        "}"
+      ],
+      "following_original": [
+        "phm = malloc_w(sizeof(HMAP));",
+        "if (!phm) {",
+        "LOGDEBUG(0,(\"    FindHMap32 ERROR: cannot allocate new list entry\\n\"));",
+        "return NULL;",
+        "}"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "arm_line": 55,
+      "current_after_boundary": 61,
+      "original_after_boundary": 113,
+      "following_context_exact": true,
+      "following_current": [
+        "status = NetMessageBufferSend(",
+        "NULL,",
+        "nativeRecipient,",
+        "NULL,",
+        "nativeBuffer,"
+      ],
+      "following_original": [
+        "status = NetMessageBufferSend(",
+        "NULL,",
+        "nativeRecipient,",
+        "NULL,",
+        "nativeBuffer,"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "arm_line": 870,
+      "current_after_boundary": 873,
+      "original_after_boundary": 873,
+      "following_context_exact": true,
+      "following_current": [
+        "}",
+        "//",
+        "// Go through buffer, filling in argv vector, and optionally converting",
+        "// to Unicode.",
+        "//"
+      ],
+      "following_original": [
+        "}",
+        "//",
+        "// Go through buffer, filling in argv vector, and optionally converting",
+        "// to Unicode.",
+        "//"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-else-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "arm_line": 253,
+      "current_after_boundary": 259,
+      "original_after_boundary": 253,
+      "following_context_exact": true,
+      "following_current": [
+        "DpmiInitRegisterSize();",
+        "CurrentDta = Sim32GetVDMPointer(",
+        "*(PDWORD16)(Data),",
+        "1,",
+        "TRUE"
+      ],
+      "following_original": [
+        "DpmiInitRegisterSize();",
+        "CurrentDta = Sim32GetVDMPointer(",
+        "*(PDWORD16)(Data),",
+        "1,",
+        "TRUE"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "arm_line": 206,
+      "current_after_boundary": 210,
+      "original_after_boundary": 53,
+      "following_context_exact": true,
+      "following_current": [
+        "PWORD16 Data;",
+        "Data = (PWORD16)Sim32GetVDMPointer(",
+        "((ULONG)DosxRmCodeSegment << 16) | 4,",
+        "1,",
+        "FALSE"
+      ],
+      "following_original": [
+        "PWORD16 Data;",
+        "Data = (PWORD16)Sim32GetVDMPointer(",
+        "((ULONG)DosxRmCodeSegment << 16) | 4,",
+        "1,",
+        "FALSE"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "arm_line": 278,
+      "current_after_boundary": 282,
+      "original_after_boundary": 101,
+      "following_context_exact": true,
+      "following_current": [
+        "PWORD16 Data;",
+        "Data = (PWORD16)Sim32GetVDMPointer(",
+        "((ULONG)DosxRmCodeSegment << 16) | 4,",
+        "1,",
+        "FALSE"
+      ],
+      "following_original": [
+        "PWORD16 Data;",
+        "Data = (PWORD16)Sim32GetVDMPointer(",
+        "((ULONG)DosxRmCodeSegment << 16) | 4,",
+        "1,",
+        "FALSE"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "arm_line": 710,
+      "current_after_boundary": 713,
+      "original_after_boundary": 993,
+      "following_context_exact": true,
+      "following_current": [
+        "for (adapter = 0; adapter < NUM_SERIAL_PORTS; adapter++)",
+        "{",
+        "com_init(adapter);",
+        "com_post(adapter);",
+        "}"
+      ],
+      "following_original": [
+        "for (adapter = 0; adapter < NUM_SERIAL_PORTS; adapter++)",
+        "{",
+        "com_init(adapter);",
+        "com_post(adapter);",
+        "}"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "arm_line": 4333,
+      "current_after_boundary": 4339,
+      "original_after_boundary": 4498,
+      "following_context_exact": true,
+      "following_current": [
+        "/* Reset default mode */",
+        "SET_OPERAND_SIZE(GET_CS_AR_X());",
+        "SET_ADDRESS_SIZE(GET_CS_AR_X());",
+        "took_relative_jump = FALSE;",
+        "took_absolute_toc = FALSE;"
+      ],
+      "following_original": [
+        "/* Reset default mode */",
+        "SET_OPERAND_SIZE(GET_CS_AR_X());",
+        "SET_ADDRESS_SIZE(GET_CS_AR_X());",
+        "took_relative_jump = FALSE;",
+        "took_absolute_toc = FALSE;"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "arm_line": 4637,
+      "current_after_boundary": 4641,
+      "original_after_boundary": 4816,
+      "following_context_exact": true,
+      "following_current": [
+        "if ( disableNpx )",
+        "SET_ET(0);",
+        "else",
+        "SET_ET(1);",
+        "InitNpx(disableNpx);"
+      ],
+      "following_original": [
+        "if ( disableNpx )",
+        "SET_ET(0);",
+        "else",
+        "SET_ET(1);",
+        "InitNpx(disableNpx);"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "arm_line": 236,
+      "current_after_boundary": 239,
+      "original_after_boundary": 248,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "arm_line": 1530,
+      "current_after_boundary": 1554,
+      "original_after_boundary": 1950,
+      "following_context_exact": true,
+      "following_current": [
+        "static word speeds[] =",
+        "{",
+        "HOST_COM_B115200,",
+        "HOST_COM_B57600,",
+        "HOST_COM_B38400,"
+      ],
+      "following_original": [
+        "static word speeds[] =",
+        "{",
+        "HOST_COM_B115200,",
+        "HOST_COM_B57600,",
+        "HOST_COM_B38400,"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "arm_line": 50,
+      "current_after_boundary": 53,
+      "original_after_boundary": 52,
+      "following_context_exact": true,
+      "following_current": [
+        "static io_addr port;"
+      ],
+      "following_original": [
+        "static io_addr port;"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "arm_line": 82,
+      "current_after_boundary": 234,
+      "original_after_boundary": 243,
+      "following_context_exact": true,
+      "following_current": [
+        "void trace(error_msg, dump_info)",
+        "char *error_msg;",
+        "int  dump_info;",
+        "{"
+      ],
+      "following_original": [
+        "void trace(error_msg, dump_info)",
+        "char *error_msg;",
+        "int  dump_info;",
+        "{"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "arm_line": 280,
+      "current_after_boundary": 305,
+      "original_after_boundary": 493,
+      "following_context_exact": true,
+      "following_current": [
+        "}",
+        "/* Get the code for 4.0 style CPUs */"
+      ],
+      "following_original": [
+        "}",
+        "/* Get the code for 4.0 style CPUs */"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "arm_line": 125,
+      "current_after_boundary": 130,
+      "original_after_boundary": 123,
+      "following_context_exact": true,
+      "following_current": [
+        "/***********************************************************************",
+        "*\t\t\t\t\t\t\t\t       *",
+        "* Set up the global pointers to argc and argv for lower functions.    *",
+        "* These must be saved as soon as possible as they are required for    *",
+        "* displaying the error panel for the HP port.  Giving a null pointer  *"
+      ],
+      "following_original": [
+        "/***********************************************************************",
+        "*\t\t\t\t\t\t\t\t       *",
+        "* Set up the global pointers to argc and argv for lower functions.    *",
+        "* These must be saved as soon as possible as they are required for    *",
+        "* displaying the error panel for the HP port.  Giving a null pointer  *"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "arm_line": 231,
+      "current_after_boundary": 246,
+      "original_after_boundary": 241,
+      "following_context_exact": true,
+      "following_current": [
+        "/*",
+        "* initialise the cpu",
+        "*----------------------*/",
+        "cpu_init();"
+      ],
+      "following_original": [
+        "/*",
+        "* initialise the cpu",
+        "*----------------------*/",
+        "cpu_init();"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+      "arm_line": 59,
+      "current_after_boundary": 63,
+      "original_after_boundary": 63,
+      "following_context_exact": true,
+      "following_current": [
+        "void nt_kb_light_on(UCHAR);",
+        "void nt_kb_init(void);",
+        "void nt_kb_shutdown(void);",
+        "// the keyb functions table",
+        "KEYBDFUNCS nt_keybd_funcs = {nt_kb_prepare,   // not implemented"
+      ],
+      "following_original": [
+        "void nt_kb_light_on(UCHAR);",
+        "void nt_kb_init(void);",
+        "void nt_kb_shutdown(void);",
+        "// the keyb functions table",
+        "KEYBDFUNCS nt_keybd_funcs = {nt_kb_prepare,   // not implemented"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "arm_line": 27,
+      "current_after_boundary": 34,
+      "original_after_boundary": 33,
+      "following_context_exact": true,
+      "following_current": [
+        "NTSTATUS",
+        "RtlCreateEnvironment(",
+        "IN BOOLEAN CloneCurrentEnvironment OPTIONAL,",
+        "OUT PVOID *Environment",
+        ")"
+      ],
+      "following_original": [
+        "NTSTATUS",
+        "RtlCreateEnvironment(",
+        "IN BOOLEAN CloneCurrentEnvironment OPTIONAL,",
+        "OUT PVOID *Environment",
+        ")"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "arm_line": 26,
+      "current_after_boundary": 29,
+      "original_after_boundary": 29,
+      "following_context_exact": true,
+      "following_current": [
+        "//",
+        "// Ensure that the Registry ERROR_SUCCESS error code and the",
+        "// NO_ERROR error code remain equal and zero.",
+        "//"
+      ],
+      "following_original": [
+        "//",
+        "// Ensure that the Registry ERROR_SUCCESS error code and the",
+        "// NO_ERROR error code remain equal and zero.",
+        "//"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "arm_line": 2626,
+      "current_after_boundary": 2629,
+      "original_after_boundary": 2606,
+      "following_context_exact": true,
+      "following_current": [
+        "return;",
+        "}",
+        "WOWHead->SequenceNumber = VDMSequenceNumber;",
+        "return;",
+        "}"
+      ],
+      "following_original": [
+        "return;",
+        "}",
+        "WOWHead->SequenceNumber = VDMSequenceNumber;",
+        "return;",
+        "}"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "arm_line": 2644,
+      "current_after_boundary": 2647,
+      "original_after_boundary": 2624,
+      "following_context_exact": true,
+      "following_current": [
+        "RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );",
+        "return;",
+        "}",
+        "pConsoleRecord->SequenceNumber = VDMSequenceNumber;",
+        "RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );"
+      ],
+      "following_original": [
+        "RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );",
+        "return;",
+        "}",
+        "pConsoleRecord->SequenceNumber = VDMSequenceNumber;",
+        "RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );"
+      ],
+      "source_audit": "s13-bfs-depth1-wide-expression-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "arm_line": 1456,
+      "current_after_boundary": 1459,
+      "original_after_boundary": 1406,
+      "following_context_exact": true,
+      "following_current": [
+        "modRM = GET_INST_BYTE(p);",
+        "if ( GET_OPERAND_SIZE() == USE16 )",
+        "{",
+        "BT_OPSw(RO0, PG_R);",
+        "(*inst32328)(ops[0].sng, ops[1].sng, 16);"
+      ],
+      "following_original": [
+        "modRM = GET_INST_BYTE(p);",
+        "if ( GET_OPERAND_SIZE() == USE16 )",
+        "{",
+        "BT_OPSw(RO0, PG_R);",
+        "(*inst32328)(ops[0].sng, ops[1].sng, 16);"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "arm_line": 1528,
+      "current_after_boundary": 1531,
+      "original_after_boundary": 1478,
+      "following_context_exact": true,
+      "following_current": [
+        "TYPE0FAB:",
+        "modRM = GET_INST_BYTE(p);",
+        "if ( GET_OPERAND_SIZE() == USE16 )",
+        "{",
+        "BT_OPSw(RW0, PG_W);"
+      ],
+      "following_original": [
+        "TYPE0FAB:",
+        "modRM = GET_INST_BYTE(p);",
+        "if ( GET_OPERAND_SIZE() == USE16 )",
+        "{",
+        "BT_OPSw(RW0, PG_W);"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "arm_line": 1602,
+      "current_after_boundary": 1605,
+      "original_after_boundary": 1576,
+      "following_context_exact": true,
+      "following_current": [
+        "case  0xb3:   /* T5 BTR Ev Gv */   instp32328 = BTR;   goto TYPE0FAB;"
+      ],
+      "following_original": [
+        "case  0xb3:   /* T5 BTR Ev Gv */   instp32328 = BTR;   goto TYPE0FAB;"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "arm_line": 1672,
+      "current_after_boundary": 1675,
+      "original_after_boundary": 1646,
+      "following_context_exact": true,
+      "following_current": [
+        "goto TYPE0FAB;"
+      ],
+      "following_original": [
+        "goto TYPE0FAB;"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "arm_line": 14,
+      "current_after_boundary": 19,
+      "original_after_boundary": 19,
+      "following_context_exact": true,
+      "following_current": [
+        "#define FASTBOPPING     0"
+      ],
+      "following_original": [
+        "#define FASTBOPPING     0"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "arm_line": 24,
+      "current_after_boundary": 29,
+      "original_after_boundary": 29,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "arm_line": 30,
+      "current_after_boundary": 39,
+      "original_after_boundary": 39,
+      "following_context_exact": true,
+      "following_current": [
+        "//#if FASTBOPPING",
+        "//",
+        "// Used to put lock prefixes in appropriate places for MP machines",
+        "//",
+        "extern VOID FastWowFirstCode(VOID);"
+      ],
+      "following_original": [
+        "//#if FASTBOPPING",
+        "//",
+        "// Used to put lock prefixes in appropriate places for MP machines",
+        "//",
+        "extern VOID FastWowFirstCode(VOID);"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "arm_line": 583,
+      "current_after_boundary": 585,
+      "original_after_boundary": 654,
+      "following_context_exact": true,
+      "following_current": [
+        "USHORT SaveIp;"
+      ],
+      "following_original": [
+        "USHORT SaveIp;"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "arm_line": 679,
+      "current_after_boundary": 682,
+      "original_after_boundary": 766,
+      "following_context_exact": true,
+      "following_current": [
+        "SETVDMSTACK(ptd->vpCBStack);"
+      ],
+      "following_original": [
+        "SETVDMSTACK(ptd->vpCBStack);"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "arm_line": 689,
+      "current_after_boundary": 694,
+      "original_after_boundary": 778,
+      "following_context_exact": false,
+      "following_current": [
+        "// Time to get the IEU running task-time code again",
+        "SaveIp = getIP();",
+        "/* DIVERGENCE(MVDM-HOST-DIV-304): default-off witness after the original",
+        "* stack selection and before the original CCPU reentry.  It copies no",
+        "* guest state and does not alter the callback protocol. */"
+      ],
+      "following_original": [
+        "// Time to get the IEU running task-time code again",
+        "SaveIp = getIP();",
+        "host_simulate();",
+        "setIP(SaveIp);",
+        "ptd->vpStack = VDMSTACK();"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "arm_line": 525,
+      "current_after_boundary": 528,
+      "original_after_boundary": 543,
+      "following_context_exact": true,
+      "following_current": [
+        "vpStack = VDMSTACK();"
+      ],
+      "following_original": [
+        "vpStack = VDMSTACK();"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "arm_line": 800,
+      "current_after_boundary": 802,
+      "original_after_boundary": 825,
+      "following_context_exact": true,
+      "following_current": [
+        "USHORT SaveIp;"
+      ],
+      "following_original": [
+        "USHORT SaveIp;"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "arm_line": 839,
+      "current_after_boundary": 842,
+      "original_after_boundary": 865,
+      "following_context_exact": true,
+      "following_current": [
+        "vpStack = VDMSTACK();"
+      ],
+      "following_original": [
+        "vpStack = VDMSTACK();"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "arm_line": 851,
+      "current_after_boundary": 855,
+      "original_after_boundary": 878,
+      "following_context_exact": true,
+      "following_current": [
+        "SaveIp = getIP();",
+        "host_simulate();",
+        "setIP(SaveIp);"
+      ],
+      "following_original": [
+        "SaveIp = getIP();",
+        "host_simulate();",
+        "setIP(SaveIp);"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "arm_line": 1106,
+      "current_after_boundary": 1109,
+      "original_after_boundary": 1126,
+      "following_context_exact": true,
+      "following_current": [
+        "SETVDMSTACK(vpInitialSSSP);"
+      ],
+      "following_original": [
+        "SETVDMSTACK(vpInitialSSSP);"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "arm_line": 1154,
+      "current_after_boundary": 1158,
+      "original_after_boundary": 1183,
+      "following_context_exact": true,
+      "following_current": [
+        "SaveIp = getIP();",
+        "host_simulate();",
+        "setIP(SaveIp);"
+      ],
+      "following_original": [
+        "SaveIp = getIP();",
+        "host_simulate();",
+        "setIP(SaveIp);"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "arm_line": 1315,
+      "current_after_boundary": 1322,
+      "original_after_boundary": 1348,
+      "following_context_exact": true,
+      "following_current": [
+        "wPrevTDB = *pCurTDB;",
+        "td.dwFlags = TDF_INITCALLBACKSTACK;",
+        "//",
+        "// Now prepare for the callback.  Set the registers such that it looks",
+        "// like we are returning from the WOWKillRemoteTask call."
+      ],
+      "following_original": [
+        "wPrevTDB = *pCurTDB;",
+        "td.dwFlags = TDF_INITCALLBACKSTACK;",
+        "//",
+        "// Now prepare for the callback.  Set the registers such that it looks",
+        "// like we are returning from the WOWKillRemoteTask call."
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "arm_line": 1340,
+      "current_after_boundary": 1347,
+      "original_after_boundary": 1373,
+      "following_context_exact": true,
+      "following_current": [
+        "setIP( (WORD)vcRemote.Eip );",
+        "setSP( (WORD)vcRemote.Esp );",
+        "setSS( (WORD)vcRemote.SegSs );",
+        "setCS( (WORD)vcRemote.SegCs );",
+        "vpStack = VDMSTACK();"
+      ],
+      "following_original": [
+        "setIP( (WORD)vcRemote.Eip );",
+        "setSP( (WORD)vcRemote.Esp );",
+        "setSS( (WORD)vcRemote.SegSs );",
+        "setCS( (WORD)vcRemote.SegCs );",
+        "vpStack = VDMSTACK();"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "arm_line": 1383,
+      "current_after_boundary": 1387,
+      "original_after_boundary": 1413,
+      "following_context_exact": true,
+      "following_current": [
+        "host_simulate();",
+        "setIP((WORD)vcSave.Eip);"
+      ],
+      "following_original": [
+        "host_simulate();",
+        "setIP((WORD)vcSave.Eip);"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "arm_line": 1555,
+      "current_after_boundary": 1569,
+      "original_after_boundary": 1591,
+      "following_context_exact": true,
+      "following_current": [
+        "vcRemote.Eip   = getIP();",
+        "vcRemote.Esp   = getSP();",
+        "vcRemote.SegSs = getSS();",
+        "vcRemote.SegCs = getCS();"
+      ],
+      "following_original": [
+        "vcRemote.Eip   = getIP();",
+        "vcRemote.Esp   = getSP();",
+        "vcRemote.SegSs = getSS();",
+        "vcRemote.SegCs = getCS();"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "arm_line": 1608,
+      "current_after_boundary": 1615,
+      "original_after_boundary": 1637,
+      "following_context_exact": true,
+      "following_current": [
+        "} else {",
+        "//",
+        "// Decrement the count of 16-bit tasks so that the last one,",
+        "// excluding the remote handler (WOWDEB.EXE) will remember to",
+        "// call ExitKernel when done."
+      ],
+      "following_original": [
+        "} else {",
+        "//",
+        "// Decrement the count of 16-bit tasks so that the last one,",
+        "// excluding the remote handler (WOWDEB.EXE) will remember to",
+        "// call ExitKernel when done."
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.h",
+      "arm_line": 84,
+      "current_after_boundary": 89,
+      "original_after_boundary": 89,
+      "following_context_exact": true,
+      "following_current": [
+        "} HINFO, *PHINFO, **PPHINFO;",
+        "PHMAP FindHMap32(HAND32 h32, PHINFO phi, INT iClass);",
+        "PHMAP FindHMap16(HAND16 h16, PHINFO phi);",
+        "VOID FreeHMap16(HAND16 h16, PHINFO phi);",
+        "PSZ GetHMapNameM(PHINFO phi, INT iClass);"
+      ],
+      "following_original": [
+        "} HINFO, *PHINFO, **PPHINFO;",
+        "PHMAP FindHMap32(HAND32 h32, PHINFO phi, INT iClass);",
+        "PHMAP FindHMap16(HAND16 h16, PHINFO phi);",
+        "VOID FreeHMap16(HAND16 h16, PHINFO phi);",
+        "PSZ GetHMapNameM(PHINFO phi, INT iClass);"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "arm_line": 1619,
+      "current_after_boundary": 1622,
+      "original_after_boundary": 1904,
+      "following_context_exact": true,
+      "following_current": [
+        "return 1;",
+        "}",
+        "ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )",
+        "{"
+      ],
+      "following_original": [
+        "return 1;",
+        "}",
+        "ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )",
+        "{"
+      ],
+      "source_audit": "s13-bfs-depth1-optional-profile-audit.json",
+      "classification": "structural candidate only; selection and effective line mapping remain to prove"
+    }
+  ],
+  "line_splitting": "LF physical line splitting; form-feed remains content",
+  "reclassification_due_to_line_splitting": [
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "line": 55,
+      "old": false,
+      "new": true
+    }
+  ]
+}

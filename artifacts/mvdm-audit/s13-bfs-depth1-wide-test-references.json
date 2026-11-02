@@ -1,0 +1,123 @@
+{
+  "scope": "literal full-path references in tests and build scripts for per-source candidate set",
+  "sources": {
+    "src/mvdm-host/dpmi32/dpmiint.c": [
+      "tests\\build\\test_mirror_rejected_conditions.py:108:dpmi = (repo / 'src/mvdm-host/dpmi32/dpmiint.c').read_text(encoding='latin1').split('\\n')",
+      "tools/build\\New-T289S5DpmiInterruptAuditNinja.ps1:25:    'src/mvdm-host/dpmi32/stack.c', 'src/mvdm-host/dpmi32/dpmiint.c',",
+      "tests\\observation\\dpmi_pm_allocation_failure.c:4:#include \"../../src/mvdm-host/dpmi32/dpmiint.c\"",
+      "tests\\observation\\verify-dpmi-swint-diagnostic-source.py:9:path = root / 'src/mvdm-host/dpmi32/dpmiint.c'",
+      "tests\\observation\\verify-dpmi-swint-selected.ps1:13:$source = \"$repo/src/mvdm-host/dpmi32/dpmiint.c\""
+    ],
+    "src/mvdm-host/dpmi32/dpmiselr.c": [],
+    "src/mvdm-host/dpmi32/int21map.c": [
+      "tests\\observation\\dpmi_ioctl_boundary.c:7:#include \"../../src/mvdm-host/dpmi32/int21map.c\"",
+      "tests\\observation\\dpmi_pointer_trace.c:5:#include \"../../src/mvdm-host/dpmi32/int21map.c\""
+    ],
+    "src/mvdm-host/softpc.new/base/bios/bios.c": [],
+    "src/mvdm-host/softpc.new/base/bios/reset.c": [
+      "tests\\build\\test_bfs_depth1_cpu_guards.py:111:reset = (repo / 'src/mvdm-host/softpc.new/base/bios/reset.c').read_text(encoding='latin1').split('\\n')"
+    ],
+    "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c": [],
+    "src/mvdm-host/softpc.new/base/ccpu386/c_main.c": [
+      "tests\\observation\\verify-ccpu-notification.ps1:9:$source=Join-Path $repo 'src/mvdm-host/softpc.new/base/ccpu386/c_main.c'",
+      "tests\\observation\\verify-decode-diagnostics.ps1:23:$source=Join-Path $repo 'src/mvdm-host/softpc.new/base/ccpu386/c_main.c'",
+      "tests\\observation\\verify-decode-diagnostics.ps1:25:$prior=(& git -C $repo show '68e860553:src/mvdm-host/softpc.new/base/ccpu386/c_main.c') -join \"`n\"",
+      "tests\\observation\\verify-wow-callback-abort-ccpu.ps1:25: \"$repo/src/mvdm-host/softpc.new/base/ccpu386/c_main.c\",\"$repo/src/mvdm-host/softpc.new/base/ccpu386/ntthread.c\",",
+      "tests\\observation\\verify-wow-callback-abort-ccpu.ps1:40: $cpuSource=\"$repo/src/mvdm-host/softpc.new/base/ccpu386/c_main.c\";$fixtureExtra=''"
+    ],
+    "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c": [],
+    "src/mvdm-host/softpc.new/base/ccpu386/call.c": [],
+    "src/mvdm-host/softpc.new/base/ccpu386/iret.c": [],
+    "src/mvdm-host/softpc.new/base/ccpu386/jmp.c": [],
+    "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c": [],
+    "src/mvdm-host/softpc.new/base/ccpu386/ret.c": [],
+    "src/mvdm-host/softpc.new/base/debug/profile.c": [],
+    "src/mvdm-host/softpc.new/base/disks/diskbios.c": [],
+    "src/mvdm-host/softpc.new/base/disks/floppy.c": [],
+    "src/mvdm-host/softpc.new/base/keymouse/mouse.c": [],
+    "src/mvdm-host/softpc.new/base/support/main.c": [
+      "tests\\build\\test_bfs_depth1_cpu_guards.py:241:lines = (repo / 'src/mvdm-host/softpc.new/base/support/main.c').read_text(",
+      "tests\\build\\test_bfs_depth1_cpu_guards.py:293:lines = (repo / 'src/mvdm-host/softpc.new/base/support/main.c').read_text("
+    ],
+    "src/mvdm-host/softpc.new/base/support/terminat.c": [],
+    "src/mvdm-host/softpc.new/base/support/time_day.c": [],
+    "src/mvdm-host/softpc.new/base/system/cmosnt.c": [],
+    "src/mvdm-host/softpc.new/base/system/ica.c": [
+      "tests\\build\\test_mirror_rejected_conditions.py:33:    ('src/mvdm-host/softpc.new/base/system/ica.c', 'Excluded unsupported monitor PIC interrupt ownership', 'MONITOR'),",
+      "tests\\build\\test_mirror_rejected_conditions.py:34:    ('src/mvdm-host/softpc.new/base/system/ica.c', 'Excluded unsupported monitor PIC IRET address', 'MONITOR'),",
+      "tests\\build\\test_mirror_rejected_conditions.py:35:    ('src/mvdm-host/softpc.new/base/system/ica.c', 'Excluded unsupported monitor PIC IRET hook', 'MONITOR'),",
+      "tests\\observation\\verify-keyboard-controller-pic.ps1:58:        ica_sha256 = (Get-FileHash (Join-Path $root 'src/mvdm-host/softpc.new/base/system/ica.c')).Hash",
+      "tests\\observation\\verify-pic-reset-eoi.ps1:58:        ica_sha256 = (Get-FileHash (Join-Path $root 'src/mvdm-host/softpc.new/base/system/ica.c')).Hash"
+    ],
+    "src/mvdm-host/softpc.new/base/system/timer.c": [
+      "tests\\build\\test_bfs_depth1_cpu_guards.py:93:timer = (repo / 'src/mvdm-host/softpc.new/base/system/timer.c').read_text(encoding='latin1').split('\\n')"
+    ],
+    "src/mvdm-host/softpc.new/base/video/gfx_updt.c": [],
+    "src/mvdm-host/softpc.new/host/src/config.c": [
+      "tests\\build\\test_mirror_rejected_conditions.py:40:    ('src/mvdm-host/softpc.new/host/src/config.c', 'Excluded unsupported monitor floating-point status', 'MONITOR'),",
+      "tests\\build\\test_bfs_depth1_cpu_guards.py:317:lines = (repo / 'src/mvdm-host/softpc.new/host/src/config.c').read_text("
+    ],
+    "src/mvdm-host/softpc.new/host/src/nt_bop.c": [
+      "tests\\build\\test_mirror_rejected_conditions.py:36:    ('src/mvdm-host/softpc.new/host/src/nt_bop.c', 'Excluded unsupported monitor IRET BOP', 'MONITOR'),",
+      "tests\\build\\test_mirror_rejected_conditions.py:37:    ('src/mvdm-host/softpc.new/host/src/nt_bop.c', 'Excluded unsupported monitor keyboard setup carry', 'MONITOR'),",
+      "tools/build\\New-T281OriginalBopDispatchNinja.ps1:67:build obj/nt_bop.obj: cc `$root/src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "tests\\observation\\verify-diagnostic-stack-source.py:7:     'src/mvdm-host/softpc.new/host/src/nt_bop.c',"
+    ],
+    "src/mvdm-host/softpc.new/host/src/nt_cpu.c": [],
+    "src/mvdm-host/softpc.new/host/src/nt_det.c": [],
+    "src/mvdm-host/softpc.new/host/src/nt_event.c": [
+      "tests\\observation\\nt_event_observed.c:5:#include \"../../src/mvdm-host/softpc.new/host/src/nt_event.c\"",
+      "tests\\observation\\verify-dos-frontend-handoff-source.ps1:27:$events = Read-Source 'src/mvdm-host/softpc.new/host/src/nt_event.c'",
+      "tests\\observation\\verify-dos-video-source-contract.ps1:28:$event=ReadCode 'src/mvdm-host/softpc.new/host/src/nt_event.c'",
+      "tests\\observation\\verify-keyboard-buffer-count.ps1:17:    $eventText=[IO.File]::ReadAllText((Join-Path $root 'src/mvdm-host/softpc.new/host/src/nt_event.c'))",
+      "tests\\observation\\verify-keyboard-buffer-count.ps1:36:    $eventSource=Join-Path $root 'src/mvdm-host/softpc.new/host/src/nt_event.c'",
+      "tests\\observation\\verify-keyboard-buffer-count.ps1:48:    $eventSource=Join-Path $root 'src/mvdm-host/softpc.new/host/src/nt_event.c'",
+      "tests\\observation\\verify-unused-key-return.ps1:9:$source=Join-Path $root 'src/mvdm-host/softpc.new/host/src/nt_event.c'"
+    ],
+    "src/mvdm-host/softpc.new/host/src/nt_fulsc.c": [],
+    "src/mvdm-host/softpc.new/host/src/nt_graph.c": [
+      "tests\\observation\\verify-blocked-video-tick.ps1:9:$source=Get-Content \"$repo/src/mvdm-host/softpc.new/host/src/nt_graph.c\" -Raw",
+      "tests\\observation\\verify-blocked-video-tick.ps1:22:@(\"$repo/src/mvdm-host/softpc.new/host/src/nt_graph.c\",\"$repo/tests/component-integration/blocked_video_tick_test.c\") | ForEach-Object {",
+      "tests\\observation\\verify-dos-video-source-contract.ps1:19:$graph=ReadCode 'src/mvdm-host/softpc.new/host/src/nt_graph.c'"
+    ],
+    "src/mvdm-host/softpc.new/host/src/nt_reset.c": [
+      "tests\\build\\test_mirror_rejected_conditions.py:38:    ('src/mvdm-host/softpc.new/host/src/nt_reset.c', 'Excluded unsupported monitor IVT declarations', 'MONITOR'),",
+      "tests\\build\\test_mirror_rejected_conditions.py:39:    ('src/mvdm-host/softpc.new/host/src/nt_reset.c', 'Excluded unsupported monitor ICA initialization wait', 'MONITOR'),"
+    ],
+    "src/mvdm-host/softpc.new/host/src/nt_rflop.c": [
+      "tools/build\\New-T280S20PdbSyntaxNinja.ps1:28:build nt_rflop: syntax `$root/src/mvdm-host/softpc.new/host/src/nt_rflop.c"
+    ],
+    "src/mvdm-host/softpc.new/host/src/nt_sas.c": [],
+    "src/mvdm-host/softpc.new/host/src/nt_unix.c": [],
+    "src/mvdm-host/softpc.new/host/src/stubs.c": [],
+    "src/mvdm-host/vdmredir/vrmslot.c": [
+      "tools/build\\New-T324S2LocalRedirectorNinja.ps1:64:build obj/vrmslot.obj: cc `$root/src/mvdm-host/vdmredir/vrmslot.c"
+    ],
+    "src/mvdm-host/wow32/wgmeta.c": [],
+    "src/mvdm-host/wow32/wkernel.c": [],
+    "src/mvdm-host/wow32/wmmalias.c": [],
+    "src/mvdm-host/wow32/wow32fax.c": [],
+    "src/mvdm-host/wow32/wparam.c": [
+      "tests\\observation\\verify-wow-message-construction.ps1:47: Get-FileHash \"$repo/src/mvdm-host/inc/wow.h\",\"$repo/src/mvdm-host/wow32/wmdisp32.c\",\"$repo/src/mvdm-host/wow32/wmdisp32.h\",\"$repo/src/mvdm-host/wow32/wmsg16.c\",\"$repo/src/mvdm-host/wow32/wparam.c\",\"$repo/src/mvdm-host/wow32/walias.h\",\"$repo/src/wow32-dll/include/wow_message_lifetime.h\",$fixture,$PSCommandPath,$CompilerDriver|Export-Csv -NoTypeInformation \"$root/source-inputs.csv\"",
+      "tests\\observation\\verify-wow-message-construction.ps1:55:  $map=Read-Source 'src/mvdm-host/wow32/wparam.c' $old",
+      "tests\\observation\\verify-wow-parameter-map.ps1:25: $paths=@('src/mvdm-host/inc/wow.h','src/mvdm-host/inc/wowusr.h','src/mvdm-host/inc/wowcmpat.h','src/mvdm-host/wow32/walias.h','src/mvdm-host/wow32/wmdisp32.h','src/mvdm-host/wow32/wparam.h','src/mvdm-host/wow32/wparam.c','src/mvdm-host/wow32/wmsg16.c','src/mvdm-host/wow32/wmsgcb.c','src/mvdm-host/wow32/wmdisp32.c','src/mvdm-host/wow32/wcntl32.c','src/mvdm-host/wow32/wuwind.c','src/wow32-dll/source/wow_message_lifetime.c','src/wow32-dll/include/wow_message_lifetime.h','tests/observation/wow_parameter_map_fixture.c','tests/observation/verify-wow-parameter-map.ps1')",
+      "tests\\observation\\verify-wow-parameter-map.ps1:38:  $map=Read 'src/mvdm-host/wow32/wparam.c' $old"
+    ],
+    "src/mvdm-host/wow32/wsubcls.c": [],
+    "src/mvdm-host/wow32/wuclass.c": [
+      "tests\\observation\\extract-wow-subclass-fixture.ps1:26:$classMirror = Join-Path $root 'src/mvdm-host/wow32/wuclass.c'"
+    ],
+    "src/mvdm-host/wow32/wumsg.c": [
+      "tests\\observation\\verify-wow-dde-alias.ps1:86:    $inputs = @('src/mvdm-host/wow32/wdde.c', 'src/mvdm-host/wow32/wdde.h', 'src/mvdm-host/wow32/wmdisp32.c', 'src/mvdm-host/wow32/wumsg.c') |",
+      "tests\\observation\\verify-wow-dde-alias.ps1:126:            $bodies += Select-Body (Read-Input 'src/mvdm-host/wow32/wumsg.c' $false) 'W32CancelDDEPost' $variant"
+    ],
+    "src/mvdm-host/wow32/wuser.c": [
+      "tests\\observation\\extract-wow-bitmap-call-fixture.ps1:8:$source = Join-Path $root 'src/mvdm-host/wow32/wuser.c'"
+    ],
+    "src/mvdm-host/wow32/wuser31.c": []
+  },
+  "limitations": [
+    "Absence of literal path does not prove absence of constructed or indirect test sources.",
+    "References include read-only consumers and must be classified before treating as compile contexts."
+  ]
+}

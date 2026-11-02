@@ -1,0 +1,519 @@
+{
+  "scope": "pending first-depth source #if arms with conservative three-valued macro evaluation",
+  "trace_path": "build/t473-s13/bfs-depth1-wide-expr-audit/include-trace.json",
+  "trace_records": 48,
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "expression": "defined(i386)",
+      "start": 253,
+      "cut": 258,
+      "end": 258,
+      "source_sha256": "04f8cadf013f3139de78e8a1a4a433a3b0d56fbf453157716d6b163bbe68b6f2",
+      "body_sha256": "2b6f9abf9e0b801fe28e4933bf5da8e2e92acae12ede4d4e1d96620844ca391a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmi32.c",
+      "original_exact_body_matches": [
+        247
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "expression": "defined(i386)",
+      "start": 206,
+      "cut": 209,
+      "end": 219,
+      "source_sha256": "9d19900e7f87ed5c96a6682f825aa1839d3c3313364f6089d3b057d87e0019de",
+      "body_sha256": "ac97fafd2d1e30dce148810070800a19d5b87d4e0a454df3140022f22b66d6ed",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\modesw.c",
+      "original_exact_body_matches": [
+        49
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "expression": "defined(i386)",
+      "start": 278,
+      "cut": 281,
+      "end": 291,
+      "source_sha256": "9d19900e7f87ed5c96a6682f825aa1839d3c3313364f6089d3b057d87e0019de",
+      "body_sha256": "5cbf94c32c7296841e4e8e68f42915cd919e6e38752db0c7dcdfce0c5fc37ad0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\modesw.c",
+      "original_exact_body_matches": [
+        97
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "expression": "defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)",
+      "start": 69,
+      "cut": 80,
+      "end": 80,
+      "source_sha256": "b7a1b588e189265f5023a260f8df7118263962de3f87a498e57be997f13631bd",
+      "body_sha256": "919230598f07cf67df482aa8707f4c311b549c0ef0adf7e7307f2a62f47fd2e9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cntlbop.c",
+      "original_exact_body_matches": [],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "expression": "defined (GEN_DRVR) || defined (CDROM)",
+      "start": 710,
+      "cut": 712,
+      "end": 712,
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe",
+      "body_sha256": "5ba464e7f9c30fb81cbcc687a031df3177f68447b08c8fb29460fb45ea159183",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_exact_body_matches": [
+        990
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "expression": "defined(NTVDM) && defined(MVDM_CCPU_DECODE_DIAGNOSTICS)",
+      "start": 867,
+      "cut": 888,
+      "end": 888,
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+      "body_sha256": "d4d8baa22dd5a69be3549c155c077470d54ac01464f9e44422d5c02c982f7442",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_exact_body_matches": [],
+      "contexts": 2,
+      "status": "protected-supported-diagnostic-test-profile",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation.",
+        "Explicit documented diagnostic test selects this branch; do not replace with #error."
+      ],
+      "profile_evidence": "s13-bfs-depth1-diagnostic-profile-evidence.json"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "expression": "defined(SFELLOW) && !defined(PROD)",
+      "start": 4333,
+      "cut": 4338,
+      "end": 4338,
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+      "body_sha256": "db0125b34a78ac23122cd9d9a926a75f1e26f9bd7af99780ca1a1677613396a8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_exact_body_matches": [
+        4492
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "expression": "defined(SWITCHNPX)",
+      "start": 4637,
+      "cut": 4640,
+      "end": 4640,
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+      "body_sha256": "09bb28a84627d249b12761cde5013b9dfaa215bb0cf969b8ce129beeb5caf3f5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_exact_body_matches": [
+        4812
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "expression": "!defined(PROD) || defined(SHORT_TRACE)",
+      "start": 236,
+      "cut": 238,
+      "end": 238,
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "body_sha256": "51c59d7b452d1e5df73e27004def9867f0c3d0470933e4d4ea61691492fc7840",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_exact_body_matches": [
+        245
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "expression": "!defined(PROD) || defined(IRET_HOOKS)",
+      "start": 1530,
+      "cut": 1553,
+      "end": 1553,
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "body_sha256": "ee7270426533dd229fdd7cb918d11381eeafe4a3fd186756de1347effa66d080",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_exact_body_matches": [
+        1926
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "expression": "defined(IP32) || defined(TK43) || defined(macintosh)",
+      "start": 50,
+      "cut": 52,
+      "end": 54,
+      "source_sha256": "062cd0820acc962588146bec0cfa02d7bd65ee7d831ecb5a341a6651b9ab7476",
+      "body_sha256": "d770c3b99654bd8c82cc086e5e3ceebc686c2ae9724a07fd522c3f54ee6e1af6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\rs232_io.c",
+      "original_exact_body_matches": [
+        49
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "expression": "!defined(PROD) && defined(SPC386)",
+      "start": 82,
+      "cut": 233,
+      "end": 233,
+      "source_sha256": "3915714ff36cd1adadcfc8399cb759305ba2817ca4e9db9b95b0ccbb0eb2a7a8",
+      "body_sha256": "e3805d444447c381c30b16a415ac5ce7e14e3b08044c5bf0f1d9c8b7afc4ceac",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\trace.c",
+      "original_exact_body_matches": [
+        91
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "expression": "!defined(PROD) || defined(HUNTER)",
+      "start": 280,
+      "cut": 304,
+      "end": 304,
+      "source_sha256": "3915714ff36cd1adadcfc8399cb759305ba2817ca4e9db9b95b0ccbb0eb2a7a8",
+      "body_sha256": "30325592d226424a08be813c1e957fd2edcb9d937e7c729420fb7fd343341444",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\trace.c",
+      "original_exact_body_matches": [
+        468
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "expression": "!defined(PROD) || defined(HUNTER)",
+      "start": 125,
+      "cut": 129,
+      "end": 129,
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "body_sha256": "6a373f503275e15fef93d1a7b488c04650b1ed681f64342178e5babd7656cb69",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+      "original_exact_body_matches": [
+        118
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "expression": "!defined(PROD) || defined(HUNTER)",
+      "start": 231,
+      "cut": 245,
+      "end": 245,
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "body_sha256": "208bc82a5e3706ab73d9aaa3f1250ba21fc76612f64c8ea5f295d5b68f04b0c8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+      "original_exact_body_matches": [
+        226
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "expression": "!defined(EGG) && !defined(C_VID) && !defined(A_VID)",
+      "start": 313,
+      "cut": 315,
+      "end": 315,
+      "source_sha256": "bdf5bb3433dfa5c83f241af9ee84d47570d4946a3558dfba030137051faf2f5b",
+      "body_sha256": "314d90540fb83e5d2d72272a67bd786f0496448889530e9a59203f72788a3a1f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_exact_body_matches": [
+        304,
+        314
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "expression": "!defined(EGG) && !defined(C_VID) && !defined(A_VID)",
+      "start": 323,
+      "cut": 325,
+      "end": 325,
+      "source_sha256": "bdf5bb3433dfa5c83f241af9ee84d47570d4946a3558dfba030137051faf2f5b",
+      "body_sha256": "314d90540fb83e5d2d72272a67bd786f0496448889530e9a59203f72788a3a1f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_exact_body_matches": [
+        304,
+        314
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "expression": "defined(CCPU) && defined(X86GFX)",
+      "start": 739,
+      "cut": 752,
+      "end": 752,
+      "source_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "body_sha256": "74fc3279158522b20b40ce99c167905da6f865e079cd2e97203fe9c7c9559e82",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_exact_body_matches": [],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "expression": "!defined(CCPU) || defined(X86GFX)",
+      "start": 819,
+      "cut": 826,
+      "end": 826,
+      "source_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "body_sha256": "29c21d1251346b3c889aa9a77e7c4c0877a8fd910b60a3b1142bdc74489383dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_exact_body_matches": [],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+      "expression": "NOTUSEDNOTUSED",
+      "start": 59,
+      "cut": 62,
+      "end": 62,
+      "source_sha256": "93cca81de84332b75efd4b07fbb808d8a4fe6bdfffaa9b0acf02bc2a4856e39e",
+      "body_sha256": "871ca195aba5deb42bc23dbbf8870f6e94bb0bbb2b684b04113069815d31149b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_input.c",
+      "original_exact_body_matches": [
+        59
+      ],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "expression": "defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)",
+      "start": 27,
+      "cut": 33,
+      "end": 33,
+      "source_sha256": "b6dea35bc24ba7baf538b6a0e99be17dd8c73509953b5959a6aca4f5c9e44b22",
+      "body_sha256": "7f5bddf7c1eccce4d6c22ea0b322b164338c45b9732b5e27d1060c900727f028",
+      "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\environ.c",
+      "original_exact_body_matches": [
+        26
+      ],
+      "contexts": 3,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "expression": "defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)",
+      "start": 26,
+      "cut": 28,
+      "end": 28,
+      "source_sha256": "cda496c598082dbed3a593169db9527ee5fef2aeb808829aba468f4a91f0016b",
+      "body_sha256": "2e03089701750f969f1c95766d5925b21bb69474d60884c4d77afe02193177b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\error.c",
+      "original_exact_body_matches": [
+        26
+      ],
+      "contexts": 6,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "expression": "DEVL",
+      "start": 2626,
+      "cut": 2628,
+      "end": 2628,
+      "source_sha256": "f819d815ff94fc7465b4b5bbd5f3cbc975b7671db6f8f11465b99a91730dbe68",
+      "body_sha256": "4837a6b51e366a4ffbac485aca88d00603de57be6e7d78945f908ea66828bcdd",
+      "original": "O:\\repos.external\\OpenNT\\base\\win32\\server\\srvvdm.c",
+      "original_exact_body_matches": [
+        2603
+      ],
+      "contexts": 3,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "expression": "DEVL",
+      "start": 2644,
+      "cut": 2646,
+      "end": 2646,
+      "source_sha256": "f819d815ff94fc7465b4b5bbd5f3cbc975b7671db6f8f11465b99a91730dbe68",
+      "body_sha256": "94e8dce0c965b9f645f15bf429db97e93e4d1d19bfc7952ec623b9ee5049484a",
+      "original": "O:\\repos.external\\OpenNT\\base\\win32\\server\\srvvdm.c",
+      "original_exact_body_matches": [
+        2621
+      ],
+      "contexts": 3,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "expression": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+      "start": 60,
+      "cut": 157,
+      "end": 157,
+      "source_sha256": "d0a538fa12c6f512c480ab199f1b122752efddeaf9e9d2b7caf1f760ede06f9e",
+      "body_sha256": "3139f75e9996fbfdb3e9cd466b53cf44a3d09bee64e436956a43085f3f66a234",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\netlib\\packstr.c",
+      "original_exact_body_matches": [],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "expression": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+      "start": 288,
+      "cut": 410,
+      "end": 410,
+      "source_sha256": "d0a538fa12c6f512c480ab199f1b122752efddeaf9e9d2b7caf1f760ede06f9e",
+      "body_sha256": "d6853043226a9eef4aeb844f136ad2af1b55492396fe7939ac6b0c7be84d21eb",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\netlib\\packstr.c",
+      "original_exact_body_matches": [],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "expression": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+      "start": 413,
+      "cut": 674,
+      "end": 674,
+      "source_sha256": "d0a538fa12c6f512c480ab199f1b122752efddeaf9e9d2b7caf1f760ede06f9e",
+      "body_sha256": "7989118f21648e545d2165e8f1c033d76a77628d19aa224c7b552f993371a86f",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\netlib\\packstr.c",
+      "original_exact_body_matches": [],
+      "contexts": 2,
+      "status": "symbolic-source-profile-exclusion-candidate",
+      "limitations": [
+        "Selected macros conservatively modelled as unknown if defined or undefined in an include closure.",
+        "Direct or standalone tests require separate validation."
+      ]
+    }
+  ],
+  "noncandidates": {
+    "not-provably-false": 30,
+    "already-error": 3
+  },
+  "limitations": [
+    "Unsupported operators or unknown macro values yield unknown, never false.",
+    "Header-only, uncompiled, direct test and additional contexts remain separately audited.",
+    "Macro tests are case-sensitive and two default MSVC profiles were sampled."
+  ]
+}

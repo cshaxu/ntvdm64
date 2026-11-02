@@ -224,17 +224,9 @@ IFN4(
       new_cs = phy_read_word(ivt_addr+2);
 
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
-	/*
-	 * In real mode, there is still an IP limit check.  The new IP is
-	 * compared against the last CS limit from when the program was last
-	 * in protected mode (or 64K if it never was).  For us, this is stored
-	 * in the CS limit field. (cf i486PRM page 22-4)
-	 */
-
-      if ( new_ip > GET_CS_LIMIT() )
-	 GP((IU16)0, FAULT_INTR_RM_CS_LIMIT);
-
+#error Unsupported excluded original configuration
 #else	/* TAKE_REAL_MODE_LIMIT_FAULT */
+#line 238
 
       /* The Soft486 EDL CPU does not take Real Mode limit failures.
        * Since the Ccpu486 is used as a "reference" cpu we wish it
@@ -243,6 +235,7 @@ IFN4(
        */
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
+#line 246
    
       /* ALL SYSTEMS GO */
 

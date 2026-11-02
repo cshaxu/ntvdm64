@@ -1,0 +1,45 @@
+{
+  "scope": "scratch-only first-depth original DEBUG structure restoration; actual source consumer commands",
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/default-client.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_preprocessed_equal": true,
+      "debug_negative_exit": 2,
+      "debug_guard_seen": true,
+      "source_sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/client-callproc.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_preprocessed_equal": true,
+      "debug_negative_exit": 2,
+      "debug_guard_seen": true,
+      "source_sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/getset_callproc.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_preprocessed_equal": true,
+      "debug_negative_exit": 2,
+      "debug_guard_seen": true,
+      "source_sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_default.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_preprocessed_equal": true,
+      "debug_negative_exit": 2,
+      "debug_guard_seen": true,
+      "source_sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797"
+    }
+  ]
+}

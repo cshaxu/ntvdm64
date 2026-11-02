@@ -1,0 +1,757 @@
+{
+  "scope": "pending first-depth #else arms under simple ifdef/ifndef in currently traced source TUs",
+  "trace_path": "build/t473-s13/bfs-depth1-wide-else-audit/include-trace.json",
+  "trace_records": 103,
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bound.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 37,
+      "else_line": 43,
+      "end": 48,
+      "source_sha256": "a19c2e79908de1756c4dfdb510ea193b5842bb7c59560485dc41dbcd738ef207",
+      "body_sha256": "d8deb3df9df2fb1751255bd81e6087493141b8858cc7eb2811217b6156e9a97d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\bound.c",
+      "original_exact_body_matches": [
+        37
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "macro": "DONT_CLEAR_LDTR_ON_INVALID",
+      "opening": "ifndef",
+      "group_start": 304,
+      "else_line": 306,
+      "end": 308,
+      "source_sha256": "c007421d99f13ee57174e9b653d4d95f1aea1e3e28db9efd11c3c7f087bc6bb7",
+      "body_sha256": "9aff634ce3cd39977e5831266cb7d21aead5b57e7eb706c82751a1dd479f14da",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_bsic.c",
+      "original_exact_body_matches": [
+        303
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "macro": "NTVDM",
+      "opening": "ifdef",
+      "group_start": 4708,
+      "else_line": 4710,
+      "end": 4724,
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+      "body_sha256": "31be17014fcf937d031c9895827f2e9dc186443b12b7fb82110abd81d1e7fd76",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_exact_body_matches": [],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 50,
+      "else_line": 54,
+      "end": 57,
+      "source_sha256": "ea0e61f2eb649a8c4109611091db3cf5d98e0600a425b31784591e9316ae2b0c",
+      "body_sha256": "af60035f109df50b2d5d0c31178152d5f9132954115576c657b666e1115991a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\call.c",
+      "original_exact_body_matches": [
+        42
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 45,
+      "else_line": 49,
+      "end": 52,
+      "source_sha256": "470889ec4ca8311980f1b700e56d028009fc459c47eb484e1451a799ac7feb87",
+      "body_sha256": "af60035f109df50b2d5d0c31178152d5f9132954115576c657b666e1115991a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\jmp.c",
+      "original_exact_body_matches": [
+        45
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 36,
+      "else_line": 40,
+      "end": 43,
+      "source_sha256": "b54f96092ac6d18e780a73c9833c35e26ac6871284e025801059bd4f3333e507",
+      "body_sha256": "af60035f109df50b2d5d0c31178152d5f9132954115576c657b666e1115991a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lgdt.c",
+      "original_exact_body_matches": [
+        36,
+        54
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 54,
+      "else_line": 58,
+      "end": 61,
+      "source_sha256": "b54f96092ac6d18e780a73c9833c35e26ac6871284e025801059bd4f3333e507",
+      "body_sha256": "af60035f109df50b2d5d0c31178152d5f9132954115576c657b666e1115991a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lgdt.c",
+      "original_exact_body_matches": [
+        36,
+        54
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lidt.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 37,
+      "else_line": 41,
+      "end": 44,
+      "source_sha256": "d7dc714a8fb7208e9957d41fedacbe531b2beb3f7c847e89cfda898869bf170b",
+      "body_sha256": "af60035f109df50b2d5d0c31178152d5f9132954115576c657b666e1115991a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lidt.c",
+      "original_exact_body_matches": [
+        37,
+        52
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lidt.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 52,
+      "else_line": 56,
+      "end": 59,
+      "source_sha256": "d7dc714a8fb7208e9957d41fedacbe531b2beb3f7c847e89cfda898869bf170b",
+      "body_sha256": "af60035f109df50b2d5d0c31178152d5f9132954115576c657b666e1115991a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lidt.c",
+      "original_exact_body_matches": [
+        37,
+        52
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+      "macro": "DONT_CLEAR_LDTR_ON_INVALID",
+      "opening": "ifndef",
+      "group_start": 51,
+      "else_line": 53,
+      "end": 55,
+      "source_sha256": "1ce9e3590a5afc8159301055acc48d3320faaaf4961e8ec6136a3f67edf07992",
+      "body_sha256": "e17451067eaf3704e052bc46e7f6f24fb722edb6b5ea7c35ae6d4affd040bb00",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lldt.c",
+      "original_exact_body_matches": [
+        51
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 41,
+      "else_line": 46,
+      "end": 50,
+      "source_sha256": "b86dc7bfef5a3761d251a717e03726725087f4bed7516adb6ece8f8741f38ba1",
+      "body_sha256": "65c1a3c64cb69b92b265de13b8178e1c022277236ccf91492a881462e0dfb0c0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lxs.c",
+      "original_exact_body_matches": [
+        41,
+        64,
+        87,
+        110,
+        133
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 64,
+      "else_line": 69,
+      "end": 73,
+      "source_sha256": "b86dc7bfef5a3761d251a717e03726725087f4bed7516adb6ece8f8741f38ba1",
+      "body_sha256": "65c1a3c64cb69b92b265de13b8178e1c022277236ccf91492a881462e0dfb0c0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lxs.c",
+      "original_exact_body_matches": [
+        41,
+        64,
+        87,
+        110,
+        133
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 87,
+      "else_line": 92,
+      "end": 96,
+      "source_sha256": "b86dc7bfef5a3761d251a717e03726725087f4bed7516adb6ece8f8741f38ba1",
+      "body_sha256": "65c1a3c64cb69b92b265de13b8178e1c022277236ccf91492a881462e0dfb0c0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lxs.c",
+      "original_exact_body_matches": [
+        41,
+        64,
+        87,
+        110,
+        133
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 110,
+      "else_line": 115,
+      "end": 119,
+      "source_sha256": "b86dc7bfef5a3761d251a717e03726725087f4bed7516adb6ece8f8741f38ba1",
+      "body_sha256": "65c1a3c64cb69b92b265de13b8178e1c022277236ccf91492a881462e0dfb0c0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lxs.c",
+      "original_exact_body_matches": [
+        41,
+        64,
+        87,
+        110,
+        133
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 133,
+      "else_line": 138,
+      "end": 142,
+      "source_sha256": "b86dc7bfef5a3761d251a717e03726725087f4bed7516adb6ece8f8741f38ba1",
+      "body_sha256": "65c1a3c64cb69b92b265de13b8178e1c022277236ccf91492a881462e0dfb0c0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lxs.c",
+      "original_exact_body_matches": [
+        41,
+        64,
+        87,
+        110,
+        133
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sgdt.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 37,
+      "else_line": 41,
+      "end": 44,
+      "source_sha256": "5cf95b051e7a0a9d968a63e94f7f1414599fa1ff48b776ecc1ac14f2c9443cb4",
+      "body_sha256": "af60035f109df50b2d5d0c31178152d5f9132954115576c657b666e1115991a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\sgdt.c",
+      "original_exact_body_matches": [
+        37,
+        59
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sgdt.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 59,
+      "else_line": 63,
+      "end": 66,
+      "source_sha256": "5cf95b051e7a0a9d968a63e94f7f1414599fa1ff48b776ecc1ac14f2c9443cb4",
+      "body_sha256": "af60035f109df50b2d5d0c31178152d5f9132954115576c657b666e1115991a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\sgdt.c",
+      "original_exact_body_matches": [
+        37,
+        59
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sidt.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 37,
+      "else_line": 41,
+      "end": 44,
+      "source_sha256": "4691858c041431e74076caede3d17719a5d1f36eb3456c017ae0b55996f03445",
+      "body_sha256": "af60035f109df50b2d5d0c31178152d5f9132954115576c657b666e1115991a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\sidt.c",
+      "original_exact_body_matches": [
+        37,
+        60
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sidt.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 60,
+      "else_line": 64,
+      "end": 67,
+      "source_sha256": "4691858c041431e74076caede3d17719a5d1f36eb3456c017ae0b55996f03445",
+      "body_sha256": "af60035f109df50b2d5d0c31178152d5f9132954115576c657b666e1115991a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\sidt.c",
+      "original_exact_body_matches": [
+        37,
+        60
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "macro": "DELAYED_INTS",
+      "opening": "ifndef",
+      "group_start": 436,
+      "else_line": 438,
+      "end": 441,
+      "source_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+      "body_sha256": "8d13a211210130eaf6bef17447cacf4076430e9915db38054a9bfdcf96c058b0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "original_exact_body_matches": [
+        446
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 371,
+      "else_line": 373,
+      "end": 375,
+      "source_sha256": "89112dc9a067b3a2e80bb450b7b392003b4379beaac961992ec90325e355114c",
+      "body_sha256": "1c47f7589a83defd9839d217dce8218415d888f39954cb1aeacf7d89475ac29d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\diskbios.c",
+      "original_exact_body_matches": [
+        567
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 365,
+      "else_line": 381,
+      "end": 397,
+      "source_sha256": "5908873bd5f6391511efc733b04537bd56007df973b95d0cd1124ab84ff283d4",
+      "body_sha256": "b50f1cae3a0eb63b23f20e8070d6fdaa20925e71a7da77d8e37438f31ef65d1e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fdisk.c",
+      "original_exact_body_matches": [
+        365
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 672,
+      "else_line": 675,
+      "end": 679,
+      "source_sha256": "6ea5365b039b059a4b16dbe2c8d0f630c4db670105159644fcfd7d84630038c6",
+      "body_sha256": "0bdc899efb4d3bd4749d27339830dcdab308f924785940a26c386de5eb3ffa1a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\ios.c",
+      "original_exact_body_matches": [
+        691
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 76,
+      "else_line": 78,
+      "end": 80,
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "body_sha256": "d9d8cb77f3afae97c413bc387132eaf9495736060ba19ddf8b5255601776003b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+      "original_exact_body_matches": [
+        63
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 104,
+      "else_line": 109,
+      "end": 114,
+      "source_sha256": "1430887916bcd42c4f7da75cbdff04a8823658a508b823d61e9784489a1e1152",
+      "body_sha256": "7e0c0b1d95ca52b3abe3c52245914f3cd2604360d3229ae2729f010eaf8cbf91",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "original_exact_body_matches": [
+        108
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 113,
+      "else_line": 115,
+      "end": 117,
+      "source_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
+      "body_sha256": "943b09cd8f9ee2a9de1bd534f459da0fb5669c9c6ab75d2662cae73998cc40fe",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
+      "original_exact_body_matches": [
+        115
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 1906,
+      "else_line": 1908,
+      "end": 1910,
+      "source_sha256": "bdf5bb3433dfa5c83f241af9ee84d47570d4946a3558dfba030137051faf2f5b",
+      "body_sha256": "15db54e69eb5bcdd7aa776beaa683850198c08ef68b38a79ff3a7e54745ab3a0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
+      "original_exact_body_matches": [
+        1915
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "macro": "V7VGA",
+      "opening": "ifdef",
+      "group_start": 87,
+      "else_line": 90,
+      "end": 92,
+      "source_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "body_sha256": "be1323625b951ce6245e42689f6c7ccb16157e8d15838741687d979009e48c91",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_exact_body_matches": [],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "macro": "ANSI",
+      "opening": "ifdef",
+      "group_start": 29,
+      "else_line": 40,
+      "end": 50,
+      "source_sha256": "3c6df963fed846249fd8c14e2d54a1bf7aa344a9a88d4efdb9b87d0589c1fa01",
+      "body_sha256": "d5478f343867b9b987eabf40aff6782f458b26fe5fa2a803af3119b05d888d16",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vdd.c",
+      "original_exact_body_matches": [
+        29
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "macro": "i386",
+      "opening": "ifndef",
+      "group_start": 298,
+      "else_line": 319,
+      "end": 321,
+      "source_sha256": "1a5c054f8765757f0924c6e25fbd146f19d08c5bf08d171406efe776f4cbc3b9",
+      "body_sha256": "3fb89cfc152787eb270f7675dbff2f41128844b28e9d6b2cafa2a3e2cf200f56",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wdib.c",
+      "original_exact_body_matches": [
+        298,
+        656
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "macro": "i386",
+      "opening": "ifndef",
+      "group_start": 656,
+      "else_line": 664,
+      "end": 666,
+      "source_sha256": "1a5c054f8765757f0924c6e25fbd146f19d08c5bf08d171406efe776f4cbc3b9",
+      "body_sha256": "3fb89cfc152787eb270f7675dbff2f41128844b28e9d6b2cafa2a3e2cf200f56",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wdib.c",
+      "original_exact_body_matches": [
+        298,
+        656
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "macro": "NEWALIAS",
+      "opening": "ifndef",
+      "group_start": 146,
+      "else_line": 151,
+      "end": 201,
+      "source_sha256": "d51d31c0368a0488325207ec0807c80d55c94dd2170b5e2ecf83c6e9fe544095",
+      "body_sha256": "eadba4776452f4797c0767b1f1274c58c2a93bc313e5f855b2ef72f02f1c215e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmalias.c",
+      "original_exact_body_matches": [
+        144
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "macro": "WIN32",
+      "opening": "ifdef",
+      "group_start": 109,
+      "else_line": 117,
+      "end": 125,
+      "source_sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7",
+      "body_sha256": "417a1e9a9001570b9f7a6aa5fcb93f97e90daf5b5b4f5530551f9b6caf159084",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\netlib\\memalloc.c",
+      "original_exact_body_matches": [],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "macro": "WIN32",
+      "opening": "ifdef",
+      "group_start": 159,
+      "else_line": 166,
+      "end": 177,
+      "source_sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7",
+      "body_sha256": "39668281bda4697ffa2a2e4671923fbf0e00e8a9f8f0a870ea0b8ca0b9fe792b",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\netlib\\memalloc.c",
+      "original_exact_body_matches": [],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "macro": "UNICODE",
+      "opening": "ifdef",
+      "group_start": 36,
+      "else_line": 55,
+      "end": 60,
+      "source_sha256": "0acc7ea4dd544b5f8b4ef40f748a20e74f4d4bed5bd5d286ba544fcc930fd42d",
+      "body_sha256": "8e99713d840bb7a6a070c0e59f6ae15894bb7fd8ada8fd10f7ea5b8c012bf0e3",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\apimsg.c",
+      "original_exact_body_matches": [
+        89
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "macro": "UNICODE",
+      "opening": "ifdef",
+      "group_start": 863,
+      "else_line": 870,
+      "end": 872,
+      "source_sha256": "5aba39b2ff30af6f22fb0c002c07aa581d58a1e96d9f3b6ec4d4abdf417b3acb",
+      "body_sha256": "ae9dfcc67ff85ee4bc95c16a31027d695dfb1847c421f2325ac8eaf47e1fcf00",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\apisvc.c",
+      "original_exact_body_matches": [
+        863
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct/standalone test contexts need separate audit.",
+        "Original boundary must be uniquely mapped before edit."
+      ]
+    }
+  ],
+  "noncandidates": {
+    "already-error": 45,
+    "defined-state-not-proved": 24
+  },
+  "limitations": [
+    "Explicit macro flags and all source/header define/undef sightings checked conservatively; default builtins sampled for x86/x64.",
+    "Direct fixtures, original boundary, uncompiled units, headers, and complex conditions require separate audit."
+  ]
+}

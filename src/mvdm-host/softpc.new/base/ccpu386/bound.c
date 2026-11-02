@@ -41,11 +41,9 @@ BOUND
    IUM8 op_sz		/* 16 or 32-bit */
    )
 #else
-   (op1, op2, op_sz)
-   IU32 op1;
-   IU32 op2[2];
-   IUM8 op_sz;
+#error Unsupported excluded original configuration
 #endif
+#line 49
    {
    IS32 value;
    IS32 lower;

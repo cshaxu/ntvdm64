@@ -1,0 +1,730 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "original_line": 50,
+      "directive": "if",
+      "expression": "defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "original_line": 205,
+      "directive": "ifdef",
+      "expression": "_X86_",
+      "matching_current_outer_anchors": [
+        {
+          "line": 2211,
+          "depth": 2
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "original_line": 259,
+      "directive": "ifdef",
+      "expression": "_MIPS_",
+      "matching_current_outer_anchors": [
+        {
+          "line": 2265,
+          "depth": 2
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 23,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 572,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 1214,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 327,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 566,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "matching_current_outer_anchors": [
+        {
+          "line": 52,
+          "depth": 2
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 905,
+      "directive": "if",
+      "expression": "defined(FE_IME)",
+      "matching_current_outer_anchors": [
+        {
+          "line": 392,
+          "depth": 2
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 881,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 3901,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 1480,
+      "directive": "if",
+      "expression": "0",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 1674,
+      "directive": "if",
+      "expression": "0",
+      "matching_current_outer_anchors": [
+        {
+          "line": 671,
+          "depth": 2
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 2298,
+      "directive": "if",
+      "expression": "0",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 2624,
+      "directive": "if",
+      "expression": "0",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 3751,
+      "directive": "if",
+      "expression": "0",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 4516,
+      "directive": "if",
+      "expression": "0",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 4574,
+      "directive": "if",
+      "expression": "0",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 2640,
+      "directive": "ifdef",
+      "expression": "LATER",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "original_line": 221,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "matching_current_outer_anchors": [
+        {
+          "line": 245,
+          "depth": 2
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "original_line": 240,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "original_line": 281,
+      "directive": "ifdef",
+      "expression": "LATER",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "original_line": 209,
+      "directive": "if",
+      "expression": "0",
+      "matching_current_outer_anchors": [
+        {
+          "line": 147,
+          "depth": 2
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "original_line": 251,
+      "directive": "if",
+      "expression": "0",
+      "matching_current_outer_anchors": [
+        {
+          "line": 183,
+          "depth": 2
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 77,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 717,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 1020,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 358,
+      "directive": "ifdef",
+      "expression": "LATER",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 380,
+      "directive": "ifdef",
+      "expression": "MEMPHIS_MENUS",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 500,
+      "directive": "ifdef",
+      "expression": "MEMPHIS_MENU_WATERMARKS",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 693,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 753,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 769,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 784,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 797,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 1611,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 953,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "matching_current_outer_anchors": [
+        {
+          "line": 214,
+          "depth": 2
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 965,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "matching_current_outer_anchors": [
+        {
+          "line": 226,
+          "depth": 2
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 2204,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "original_line": 319,
+      "directive": "if",
+      "expression": "DBG",
+      "matching_current_outer_anchors": [
+        {
+          "line": 189,
+          "depth": 2
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "original_line": 326,
+      "directive": "if",
+      "expression": "DBG",
+      "matching_current_outer_anchors": [
+        {
+          "line": 196,
+          "depth": 2
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "original_line": 349,
+      "directive": "if",
+      "expression": "DBG",
+      "matching_current_outer_anchors": [
+        {
+          "line": 215,
+          "depth": 2
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "original_line": 361,
+      "directive": "if",
+      "expression": "DBG",
+      "matching_current_outer_anchors": [
+        {
+          "line": 227,
+          "depth": 2
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 15,
+      "directive": "ifndef",
+      "expression": "_USERCLI_",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2307,
+      "directive": "if",
+      "expression": "DBG",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2320,
+      "directive": "if",
+      "expression": "DBG",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2342,
+      "directive": "if",
+      "expression": "HANDLE_FIXUP",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2358,
+      "directive": "if",
+      "expression": "HANDLE_FIXUP",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2374,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 53,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 481,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 583,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 833,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 990,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1054,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1861,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 461,
+      "directive": "if",
+      "expression": "0",
+      "matching_current_outer_anchors": [
+        {
+          "line": 278,
+          "depth": 2
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 850,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 934,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1002,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1163,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1822,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1257,
+      "directive": "ifndef",
+      "expression": "PAGE_SIZE",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1703,
+      "directive": "ifdef",
+      "expression": "ANDREVA_DBG",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 17,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 59,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "matching_current_outer_anchors": [
+        {
+          "line": 168,
+          "depth": 1
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 146,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "matching_current_outer_anchors": [
+        {
+          "line": 255,
+          "depth": 1
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 270,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "matching_current_outer_anchors": [
+        {
+          "line": 362,
+          "depth": 1
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 378,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 515,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "matching_current_outer_anchors": [
+        {
+          "line": 63,
+          "depth": 1
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 326,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 351,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 393,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 446,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "matching_current_outer_anchors": [
+        {
+          "line": 32,
+          "depth": 1
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 457,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "matching_current_outer_anchors": [
+        {
+          "line": 42,
+          "depth": 1
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 530,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "matching_current_outer_anchors": [
+        {
+          "line": 76,
+          "depth": 1
+        }
+      ],
+      "classification": "structural anchor only; no branch eligibility decision"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 337,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "matching_current_outer_anchors": [],
+      "classification": "structural anchor only; no branch eligibility decision"
+    }
+  ]
+}

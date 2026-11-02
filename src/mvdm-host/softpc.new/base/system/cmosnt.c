@@ -460,10 +460,9 @@ int verify_equip_byte IFN1(half_word *, equip)
 			(*(CHAR *) config_inquire(C_FLOPPY_A_DEVICE, NULL))
 			? 1:0;
 #ifdef FLOPPY_B
-		num_flops +=
-			(*(CHAR *) config_inquire(C_FLOPPY_B_DEVICE, NULL))
-			? 1:0;
+#error Unsupported excluded original configuration
 #endif
+#line 467
 	}
 
 	if (num_flops == 2)

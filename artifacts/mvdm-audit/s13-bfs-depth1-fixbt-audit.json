@@ -1,0 +1,85 @@
+{
+  "basis": "FIX_BT_BUG is unconditionally defined at c_main.c line 175; repository scan found no undef",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1456,
+      "original_start": 1403,
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+      "current_logical_after": 1465,
+      "original_after": 1406,
+      "following_context_exact": true,
+      "current_following": [
+        "modRM = GET_INST_BYTE(p);",
+        "if ( GET_OPERAND_SIZE() == USE16 )",
+        "{",
+        "BT_OPSw(RO0, PG_R);",
+        "(*inst32328)(ops[0].sng, ops[1].sng, 16);"
+      ],
+      "original_following": [
+        "modRM = GET_INST_BYTE(p);",
+        "if ( GET_OPERAND_SIZE() == USE16 )",
+        "{",
+        "BT_OPSw(RO0, PG_R);",
+        "(*inst32328)(ops[0].sng, ops[1].sng, 16);"
+      ],
+      "status": "candidate; verify test profiles and branch placement before batch"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1528,
+      "original_start": 1475,
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+      "current_logical_after": 1537,
+      "original_after": 1478,
+      "following_context_exact": true,
+      "current_following": [
+        "TYPE0FAB:",
+        "modRM = GET_INST_BYTE(p);",
+        "if ( GET_OPERAND_SIZE() == USE16 )",
+        "{",
+        "BT_OPSw(RW0, PG_W);"
+      ],
+      "original_following": [
+        "TYPE0FAB:",
+        "modRM = GET_INST_BYTE(p);",
+        "if ( GET_OPERAND_SIZE() == USE16 )",
+        "{",
+        "BT_OPSw(RW0, PG_W);"
+      ],
+      "status": "candidate; verify test profiles and branch placement before batch"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1602,
+      "original_start": 1573,
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+      "current_logical_after": 1635,
+      "original_after": 1576,
+      "following_context_exact": true,
+      "current_following": [
+        "case  0xb3:   /* T5 BTR Ev Gv */   instp32328 = BTR;   goto TYPE0FAB;"
+      ],
+      "original_following": [
+        "case  0xb3:   /* T5 BTR Ev Gv */   instp32328 = BTR;   goto TYPE0FAB;"
+      ],
+      "status": "candidate; verify test profiles and branch placement before batch"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1672,
+      "original_start": 1643,
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+      "current_logical_after": 1705,
+      "original_after": 1646,
+      "following_context_exact": true,
+      "current_following": [
+        "goto TYPE0FAB;"
+      ],
+      "original_following": [
+        "goto TYPE0FAB;"
+      ],
+      "status": "candidate; verify test profiles and branch placement before batch"
+    }
+  ]
+}

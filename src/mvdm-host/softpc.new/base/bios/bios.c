@@ -82,9 +82,9 @@ LOCAL void v_host_mouse_install1 IFN0() {SWAP_INSTANCE; host_mouse_install1(); }
 LOCAL void v_host_mouse_install2 IFN0() {SWAP_INSTANCE; host_mouse_install2(); }
 #endif /* XWINDOW || NTVDM */
 #ifdef HFX
-LOCAL void v_test_for_us	IFN0() { SWAP_INSTANCE; test_for_us(); }
-LOCAL void v_redirector		IFN0() { SWAP_INSTANCE; redirector(); }
+#error Unsupported excluded original configuration
 #endif	/* HFX */
+#line 88
 LOCAL void v_mouse_EM_callback	IFN0() { SWAP_INSTANCE; mouse_EM_callback(); }
 
 #ifdef PROFILE

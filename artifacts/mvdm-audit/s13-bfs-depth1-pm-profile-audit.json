@@ -1,0 +1,111 @@
+{
+  "scope": "first-depth PM conditionals in tape_io.c, keyba.c and at_dma.c",
+  "candidates": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "line": 143,
+      "directive": "else",
+      "original_exact_matches": [
+        {
+          "group_line": 121,
+          "arm_line": 128,
+          "cut": 130
+        }
+      ],
+      "outside_anchors": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "line": 199,
+      "directive": "else",
+      "original_exact_matches": [
+        {
+          "group_line": 133,
+          "arm_line": 201,
+          "cut": 204
+        },
+        {
+          "group_line": 209,
+          "arm_line": 266,
+          "cut": 269
+        }
+      ],
+      "outside_anchors": [
+        {
+          "original_group_line": 133,
+          "original_group_end": 204
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "line": 264,
+      "directive": "else",
+      "original_exact_matches": [
+        {
+          "group_line": 133,
+          "arm_line": 201,
+          "cut": 204
+        },
+        {
+          "group_line": 209,
+          "arm_line": 266,
+          "cut": 269
+        }
+      ],
+      "outside_anchors": [
+        {
+          "original_group_line": 209,
+          "original_group_end": 269
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 2179,
+      "directive": "else",
+      "original_exact_matches": [
+        {
+          "group_line": 2457,
+          "arm_line": 2459,
+          "cut": 2461
+        }
+      ],
+      "outside_anchors": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "line": 798,
+      "directive": "ifndef",
+      "original_exact_matches": [],
+      "outside_anchors": [
+        {
+          "original_group_line": 798,
+          "original_group_end": 816
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "line": 817,
+      "directive": "ifndef",
+      "original_exact_matches": [],
+      "outside_anchors": [
+        {
+          "original_group_line": 823,
+          "original_group_end": 842
+        }
+      ]
+    }
+  ],
+  "basis": [
+    "all three source files include host_def.h at line 2",
+    "host_def.h line 162 defines PM at first preprocessing depth, not inside a conditional",
+    "six actual product include closures contain this definition and contain no PM undef",
+    "repository scan found no PM undef or command-line PM override"
+  ],
+  "limitations": [
+    "standalone test header resolution and original selected continuation/line controls still require verification",
+    "actual product context probe does not prove dynamically assembled external test flags"
+  ]
+}

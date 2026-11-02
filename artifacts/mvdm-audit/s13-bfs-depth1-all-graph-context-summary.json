@@ -1,0 +1,15 @@
+{
+  "scope": "current supported graph include witnesses, excluding guest compilation; 2070 graph contexts and 29 generated-source contexts",
+  "graph_contexts": 2070,
+  "generated_contexts": 29,
+  "failed_contexts": 0,
+  "sources_sha256": {
+    "build\\t473-s13\\bfs-depth1-all-graph-includes\\contexts.json": "82c0386c0b75e3e6ef8f09444610b5500d4c7a578bd4eb8f66c5b82ffba2b5d5",
+    "build\\t473-s13\\bfs-depth1-generated-tu-contexts\\contexts.json": "872500ddb22796c4be52daecb2623486678135ae81f8aca1d793ba8ccd3a8eb1"
+  },
+  "archive_sha256": "ab23e4d19063eb88742bfa40b3fa938e01e113c288f567c875191b7474f77ea5",
+  "limitations": [
+    "Standalone test scripts outside these build graphs require separate profile analysis.",
+    "An unobserved arm is not proof of exclusion."
+  ]
+}

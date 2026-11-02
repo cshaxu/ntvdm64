@@ -1,0 +1,14 @@
+{
+  "x86": {
+    "exit": 0,
+    "defined": [
+      "_M_IX86"
+    ],
+    "error": ""
+  },
+  "x64": {
+    "exit": 0,
+    "defined": [],
+    "error": ""
+  }
+}

@@ -87,8 +87,9 @@
 
 
 #ifdef XTSFD
-#    define DAY_COUNT	BIOS_VAR_START + 0xCE
+#error Unsupported excluded original configuration
 #endif
+#line 92
 
 
 #ifdef NTVDM
@@ -107,11 +108,9 @@ LOCAL void write_host_timestamp(int, int);
 LOCAL void TimeToTicks(int, int, int, word *, word *);
 LOCAL void get_host_time(int *, int *, int *);
 #else
-LOCAL void get_host_timestamp();
-LOCAL void write_host_timestamp();
-LOCAL void TimeToTicks();
-LOCAL void get_host_time();
+#error Unsupported excluded original configuration
 #endif /* ANSI */
+#line 115
 
 #define TICKS_PER_HOUR      65543L
 #define TICKS_PER_MIN       1092L
@@ -298,23 +297,13 @@ void time_of_day()
 
 
 #ifdef XTSFD
-	case 0x0A:
-	{
-	    word count;
-
-	    sas_loadw(DAY_COUNT, &count);
-	    setCX( count );
-	    break;
-	}
-	case 0x0B:
-  	    sas_storew(DAY_COUNT, getCX() );
-	    break;
-	default:
-	    setCF( 1 );
+#error Unsupported excluded original configuration
 #else
+#line 342
         default:
             ; /* Do nothing */
 #endif
+#line 345
     }
     setAH( 0 );
 

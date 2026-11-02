@@ -1,0 +1,160 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": 192,
+      "current_group_end": 234,
+      "original_start": 235,
+      "original_group_end": 277,
+      "current_logical_after": 235,
+      "original_after": 278,
+      "following_context_exact": true,
+      "following_current": [
+        "}",
+        "/* Turn off the PIF reserved & shortcut keys - on block and quit */",
+        "void DisablePIFKeySetup(void)",
+        "{",
+        "/* only doing this if the application was launched from a new console */"
+      ],
+      "following_original": [
+        "}",
+        "/* Turn off the PIF reserved & shortcut keys - on block and quit */",
+        "void DisablePIFKeySetup(void)",
+        "{",
+        "/* only doing this if the application was launched from a new console */"
+      ],
+      "local_patch_markers": [
+        "MVDM-HOST-DIV-500"
+      ],
+      "status": "candidate: verify inclusion contexts, patch ledger, and continuation directives"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "line": 240,
+      "current_group_end": 1367,
+      "original_start": 256,
+      "original_group_end": 1558,
+      "current_logical_after": 1384,
+      "original_after": 1559,
+      "following_context_exact": false,
+      "following_current": [],
+      "following_original": [],
+      "local_patch_markers": [
+        "MVDM-HOST-DIV-500"
+      ],
+      "status": "candidate: verify inclusion contexts, patch ledger, and continuation directives",
+      "following_outer_directive_match": "#ifdef PLANEDUMPER",
+      "structural_conclusion": "first following same-depth directive matches pinned original; its body is not classified at this depth"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 222,
+      "current_group_end": 512,
+      "original_start": 220,
+      "original_group_end": 510,
+      "current_logical_after": 514,
+      "original_after": 511,
+      "following_context_exact": true,
+      "following_current": [
+        "/*",
+        "***************************************************************************",
+        "** calcScreenParams(), setup our screen screen parameters as determined",
+        "** by current Console state.",
+        "** Called from ConsoleInit() and DoFullScreenResume()."
+      ],
+      "following_original": [
+        "/*",
+        "***************************************************************************",
+        "** calcScreenParams(), setup our screen screen parameters as determined",
+        "** by current Console state.",
+        "** Called from ConsoleInit() and DoFullScreenResume()."
+      ],
+      "local_patch_markers": [],
+      "status": "candidate: verify inclusion contexts, patch ledger, and continuation directives"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 654,
+      "current_group_end": 665,
+      "original_start": 675,
+      "original_group_end": 686,
+      "current_logical_after": 696,
+      "original_after": 687,
+      "following_context_exact": true,
+      "following_current": [
+        "initTextSection();",
+        "/*",
+        "* Set up input focus details (we do it here as the fullscreen stuff",
+        "* is what is really interested in it).",
+        "*/"
+      ],
+      "following_original": [
+        "initTextSection();",
+        "/*",
+        "* Set up input focus details (we do it here as the fullscreen stuff",
+        "* is what is really interested in it).",
+        "*/"
+      ],
+      "local_patch_markers": [],
+      "status": "candidate: verify inclusion contexts, patch ledger, and continuation directives"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 811,
+      "current_group_end": 1029,
+      "original_start": 974,
+      "original_group_end": 1204,
+      "current_logical_after": 1202,
+      "original_after": 1205,
+      "following_context_exact": true,
+      "following_current": [
+        "/*Put console's cursor back to the shape it was on startup.*/",
+        "SetConsoleCursorInfo(sc.OutputHandle, &StartupCursor);",
+        "/* reset the current_* variables in nt_graph.c */",
+        "resetWindowParams();",
+        "}"
+      ],
+      "following_original": [
+        "/*Put console's cursor back to the shape it was on startup.*/",
+        "SetConsoleCursorInfo(sc.OutputHandle, &StartupCursor);",
+        "/* reset the current_* variables in nt_graph.c */",
+        "resetWindowParams();",
+        "}"
+      ],
+      "local_patch_markers": [
+        "MVDM-HOST-DIV-497",
+        "MVDM-HOST-DIV-501"
+      ],
+      "status": "candidate: verify inclusion contexts, patch ledger, and continuation directives"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 1039,
+      "current_group_end": 1229,
+      "original_start": 1214,
+      "original_group_end": 1464,
+      "current_logical_after": 1402,
+      "original_after": 1465,
+      "following_context_exact": false,
+      "following_current": [
+        "/*",
+        "***************************************************************************",
+        "** getNtScreenState() - return 0 for windowed, 1 for full-screen.",
+        "***************************************************************************",
+        "** Tim July 92."
+      ],
+      "following_original": [
+        "/***************************************************************************",
+        "* Function:\t\t\t\t\t\t\t\t   *",
+        "*\tDoFullScreenResume\t\t\t\t\t\t   *",
+        "*\t\t\t\t\t\t\t\t\t   *",
+        "* Description: \t\t\t\t\t\t\t   *"
+      ],
+      "local_patch_markers": [
+        "MVDM-HOST-DIV-497",
+        "MVDM-HOST-DIV-501"
+      ],
+      "status": "candidate: verify inclusion contexts, patch ledger, and continuation directives"
+    }
+  ]
+}

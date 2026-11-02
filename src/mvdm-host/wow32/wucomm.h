@@ -254,34 +254,16 @@ typedef struct _PORTTAB {
 //+++ DEBUG SUPPORT
 
 #ifdef DEBUG
-
-#define COMMDEBUG(lpszformat) LOGDEBUG(1, lpszformat)
-
-// for watching the modem events
-#define DEBUGWATCHMODEMEVENTS(dwE, dwM, dwS, pcE16, pcM16) {    \
-    if(dwS) {                                                   \
-        if((dwE != (DWORD)pcE16) || (dwM != (DWORD)pcM16)) {    \
-            dwE = (DWORD)pcE16;                                 \
-            dwM = (DWORD)pcM16;                                 \
-            COMMDEBUG(("\nEvt:0x%4X  MSR:0x%2X\n", dwE, dwM));  \
-        }                                                       \
-        else {                                                  \
-         COMMDEBUG(("."));                                      \
-        }                                                       \
-    }                                                           \
-}
-
-// prototype for real-time debug output
-void CommIODebug(ULONG fhCommIO, HANDLE hCommIO, LPSZ lpsz, ULONG cb, LPSZ lpszFile);
-
-
+#error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected
 #else  // endif DEBUG
+#line 279
 
 #define COMMDEBUG(lpszFormat) 
 #define DEBUGWATCHMODEMEVENTS(dwE, dwM, dwS, pcE16, pcM16) 
 #define CommIODebug(fhCommIO, hCommIO, lpsz, cb, lpszFile)
 
 #endif // endif !DEBUG
+#line 285
 
 //--- DEBUG SUPPORT
 

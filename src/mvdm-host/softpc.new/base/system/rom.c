@@ -113,8 +113,9 @@ LOCAL	half_word	do_rom_checksum IPT1(sys_addr, addr);
 #ifdef ANSI
 extern long host_read_resource (int, char *, host_addr, int ,int);
 #else
-extern long host_read_resource ();
+#error Unsupported excluded original configuration
 #endif
+#line 118
 
 /*(
  *=========================== patchCheckSum ================================

@@ -1,0 +1,1133 @@
+{
+  "scope": "lexical macro define/undef and compiler-flag inventory; matches include comments and do not establish reachability",
+  "file_count": 4781,
+  "macro_count": 75,
+  "macros": {
+    "ALLOC_PRAGMA": [],
+    "ANSI": [
+      {
+        "file": "src/mvdm-host/softpc.new/obj.vdm/cdefine.inc",
+        "line": 69,
+        "text": "C_DEFINES= $(SPC_VAR) $(SPC_MC_DEF) -DANSI"
+      },
+      {
+        "file": "src/mvdm-host/softpc.new/host/src/stubs.c",
+        "line": 1,
+        "text": "#undef ANSI     // until file tidied or better still, lost"
+      },
+      {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/ccpudefs.inc",
+        "line": 1,
+        "text": "C_DEFINES= -DCPU_40_STYLE -DNEW_CPU -DCCPU -DSPC386 -DANSI -DNTVDM"
+      },
+      {
+        "file": "src/mvdm-host/softpc.new/base/cvidc/ccpudefs.inc",
+        "line": 1,
+        "text": "C_DEFINES= -DCPU_40_STYLE -DNEW_CPU -DCCPU -DSPC386 -DANSI -DNTVDM -DC_VID"
+      },
+      {
+        "file": "tests/observation/build-worker-performance.ps1",
+        "line": 31,
+        "text": "'/DCCPU','/DC_VID','/DSPC386','/DSIM32','/DV7VGA','/DANSI','/DPROD',"
+      },
+      {
+        "file": "tests/observation/verify-ccpu-leaf-declarations.ps1",
+        "line": 18,
+        "text": "if($flags -notmatch '/DANSI\\b' -or $flags -match '/G[zr]\\b'){throw 'Expected selected ANSI/cdecl CPU profile'}"
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 30,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /DPROD /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" /I\"' + (Join-Path $rep"
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 43,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /DCPU_40_STYLE /DCCPU /DPROD /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" "
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 65,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" '"
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 74,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" '"
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 82,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" '"
+      },
+      {
+        "file": "tools/audit/Verify-T420S30ComMock.ps1",
+        "line": 38,
+        "text": "'cl.exe /nologo /TC /MT /W4 /Gy /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD',"
+      },
+      {
+        "file": "tools/build/New-T281OriginalBopDispatchNinja.ps1",
+        "line": 42,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DPROD /DMONITOR /DC_VID /DX86GFX /DANSI ' +"
+      },
+      {
+        "file": "tools/build/New-T310HeartbeatSourceNinja.ps1",
+        "line": 60,
+        "text": "$cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + $nt + '\" /FI \"' + $"
+      },
+      {
+        "file": "tools/build/New-T310IcaNinja.ps1",
+        "line": 60,
+        "text": "$cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + $nt + '\" /FI \"' + $ntexapi + '\" ' + ($includes -join"
+      },
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 784,
+        "text": "$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_C"
+      },
+      {
+        "file": "tools/build/New-T313CcpuLifecycleNinja.ps1",
+        "line": 55,
+        "text": "$cflags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) "
+      },
+      {
+        "file": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "line": 398,
+        "text": "$cflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $in"
+      },
+      {
+        "file": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "line": 411,
+        "text": "$ninja.Add('control_user_flags = /UANSI /DUNICODE')"
+      }
+    ],
+    "APRIL15": [],
+    "A_VID": [],
+    "CCPU": [
+      {
+        "file": "src/mvdm-host/softpc.new/obj.vdm/cdefine.inc",
+        "line": 46,
+        "text": "CPU_DEFS=     -DCPU_40_STYLE  -DCCPU -DC_VID"
+      },
+      {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/ccpudefs.inc",
+        "line": 1,
+        "text": "C_DEFINES= -DCPU_40_STYLE -DNEW_CPU -DCCPU -DSPC386 -DANSI -DNTVDM"
+      },
+      {
+        "file": "src/mvdm-host/softpc.new/base/cvidc/ccpudefs.inc",
+        "line": 1,
+        "text": "C_DEFINES= -DCPU_40_STYLE -DNEW_CPU -DCCPU -DSPC386 -DANSI -DNTVDM -DC_VID"
+      },
+      {
+        "file": "src/mvdm-host/softpc.new/base/dasm386/dasm386.c",
+        "line": 40,
+        "text": "* We #undef CCPU to avoid this problem sogul \"sas_xxx\" be added"
+      },
+      {
+        "file": "tests/build/test_mirror_rejected_conditions.py",
+        "line": 138,
+        "text": "fixture = subprocess.run(base[:-1] + ['/DNTVDM', '/DCCPU', '/DCPU_40_STYLE'] + base[-1:],"
+      },
+      {
+        "file": "tests/component-integration/blocked_video_tick_test.c",
+        "line": 5,
+        "text": "#define CCPU 1"
+      },
+      {
+        "file": "tests/observation/build-worker-performance.ps1",
+        "line": 31,
+        "text": "'/DCCPU','/DC_VID','/DSPC386','/DSIM32','/DV7VGA','/DANSI','/DPROD',"
+      },
+      {
+        "file": "tests/observation/verify-dpmi-swint-selected.ps1",
+        "line": 60,
+        "text": "$nonCcpuCommand = $command.Replace('/DCCPU', '/UCCPU').Replace('dpmiint.obj\"', 'dpmiint-nonccpu.obj\"')"
+      },
+      {
+        "file": "tests/observation/verify-dpmi-swint-selected.ps1",
+        "line": 60,
+        "text": "$nonCcpuCommand = $command.Replace('/DCCPU', '/UCCPU').Replace('dpmiint.obj\"', 'dpmiint-nonccpu.obj\"')"
+      },
+      {
+        "file": "tests/observation/verify-dpmi-swint-selected.ps1",
+        "line": 61,
+        "text": "if ($nonCcpuCommand -eq $command -or !$nonCcpuCommand.Contains('/UCCPU') -or !$nonCcpuCommand.Contains('dpmiint-nonccpu.obj')) {"
+      },
+      {
+        "file": "tests/observation/verify-redirector-async-publication.ps1",
+        "line": 25,
+        "text": "& $wrapper cl /nologo /TC /c /MT /W4 /DWIN_32 /DVDMREDIR_DLL /DNTVDM /DCPU_40_STYLE /DCCPU \"/I$root/src\" \"/I$root/src/ntvdm-exe/redir/include\" \"/I$root/src/ntvdm-exe/softpc/include\" \"/Fo$object\" (Join"
+      },
+      {
+        "file": "tests/observation/verify-redirector-oem-capacity.ps1",
+        "line": 28,
+        "text": "& $wrapper cl /nologo /TC /c /MT /W4 /DNTVDM /DCPU_40_STYLE /DCCPU /DWIN_32 /DVDMREDIR_DLL \"/I$root/src\" \"/I$root/src/vdmredir-dll/include\" \"/I$root/src/ntvdm-exe/redir/include\" \"/I$root/src/ntvdm-exe"
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 43,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /DCPU_40_STYLE /DCCPU /DPROD /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" "
+      },
+      {
+        "file": "tests/observation/verify-wow-module-alias-bounds.ps1",
+        "line": 62,
+        "text": "$compile[0] -notmatch '/DCCPU' -or $compile[0] -notmatch '/MT' -or"
+      },
+      {
+        "file": "tests/observation/verify-wow-thunk-trace.ps1",
+        "line": 38,
+        "text": "$command[0] -notmatch '/DCCPU' -or $command[0] -notmatch '/MT' -or"
+      },
+      {
+        "file": "tools/audit/Verify-T420S30ComMock.ps1",
+        "line": 38,
+        "text": "'cl.exe /nologo /TC /MT /W4 /Gy /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD',"
+      },
+      {
+        "file": "tools/build/New-T310HeartbeatSourceNinja.ps1",
+        "line": 60,
+        "text": "$cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + $nt + '\" /FI \"' + $"
+      },
+      {
+        "file": "tools/build/New-T310IcaNinja.ps1",
+        "line": 60,
+        "text": "$cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + $nt + '\" /FI \"' + $ntexapi + '\" ' + ($includes -join"
+      },
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 784,
+        "text": "$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_C"
+      },
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 824,
+        "text": "$cvidcAccessFlags = $cvidcRuleFlags.Replace('/DCCPU ', '').Replace('/DPROD ', '')"
+      },
+      {
+        "file": "tools/build/New-T313CcpuLifecycleNinja.ps1",
+        "line": 55,
+        "text": "$cflags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) "
+      },
+      {
+        "file": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "line": 398,
+        "text": "$cflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $in"
+      }
+    ],
+    "CDROM": [],
+    "CPU_486": [],
+    "C_VID": [
+      {
+        "file": "src/mvdm-host/softpc.new/obj.vdm/cdefine.inc",
+        "line": 37,
+        "text": "-DC_VID   \\"
+      },
+      {
+        "file": "src/mvdm-host/softpc.new/obj.vdm/cdefine.inc",
+        "line": 46,
+        "text": "CPU_DEFS=     -DCPU_40_STYLE  -DCCPU -DC_VID"
+      },
+      {
+        "file": "src/mvdm-host/softpc.new/base/cvidc/ccpudefs.inc",
+        "line": 1,
+        "text": "C_DEFINES= -DCPU_40_STYLE -DNEW_CPU -DCCPU -DSPC386 -DANSI -DNTVDM -DC_VID"
+      },
+      {
+        "file": "tests/observation/build-worker-performance.ps1",
+        "line": 31,
+        "text": "'/DCCPU','/DC_VID','/DSPC386','/DSIM32','/DV7VGA','/DANSI','/DPROD',"
+      },
+      {
+        "file": "tools/audit/Verify-ConsoleTextCellContract.mjs",
+        "line": 10,
+        "text": "assert(flags?.includes('/DCPU_40_STYLE') && flags.includes('/DC_VID'));"
+      },
+      {
+        "file": "tools/audit/Verify-T420S30ComMock.ps1",
+        "line": 38,
+        "text": "'cl.exe /nologo /TC /MT /W4 /Gy /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD',"
+      },
+      {
+        "file": "tools/build/New-T281OriginalBopDispatchNinja.ps1",
+        "line": 42,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DPROD /DMONITOR /DC_VID /DX86GFX /DANSI ' +"
+      },
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 784,
+        "text": "$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_C"
+      },
+      {
+        "file": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "line": 398,
+        "text": "$cflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $in"
+      }
+    ],
+    "DBCS": [
+      {
+        "file": "src/mvdm-guest/dos/v86/h/version.h",
+        "line": 44,
+        "text": "ex.\t\tset CL=-DDBCS"
+      },
+      {
+        "file": "src/mvdm-guest/dos/v86/inc/version.inc",
+        "line": 95,
+        "text": ";\tex.\t\tset MASM=-DDBCS"
+      }
+    ],
+    "DBG": [
+      {
+        "file": "src/non-mvdm/public/internal/base/inc/csr.h",
+        "line": 39,
+        "text": "#define DBG 0"
+      },
+      {
+        "file": "src/non-mvdm/base/win32/inc/base.h",
+        "line": 39,
+        "text": "#define DBG 0"
+      },
+      {
+        "file": "tests/observation/verify-dpmi-swint-diagnostic-source.py",
+        "line": 33,
+        "text": "#define DBG 0"
+      },
+      {
+        "file": "tests/adapter-mvdm-host-out/wow/wow_accelerator_call_fixture.c",
+        "line": 16,
+        "text": "#define DBG 0"
+      }
+    ],
+    "DEBUG_OR_WOWPROFILE": [
+      {
+        "file": "src/mvdm-host/vdmexts/dib.c",
+        "line": 19,
+        "text": "#define DEBUG_OR_WOWPROFILE 1"
+      },
+      {
+        "file": "src/mvdm-host/vdmexts/wow.c",
+        "line": 22,
+        "text": "#define DEBUG_OR_WOWPROFILE 1"
+      },
+      {
+        "file": "src/mvdm-host/vdmexts/wowprof.c",
+        "line": 22,
+        "text": "#define DEBUG_OR_WOWPROFILE 1"
+      },
+      {
+        "file": "src/mvdm-host/wow32/wow32.h",
+        "line": 103,
+        "text": "#define DEBUG_OR_WOWPROFILE"
+      }
+    ],
+    "DELAYED_INTS": [],
+    "DEVL": [
+      {
+        "file": "tools/build/Generate-T371XmsStartupNinja.mjs",
+        "line": 42,
+        "text": "\"/DWIN32\", \"/DWINNT\", \"/DWIN_32\", \"/DCPU_40_STYLE\", \"/DDEVL\","
+      },
+      {
+        "file": "tools/build/New-T280S11NtioapiFacadeNinja.ps1",
+        "line": 15,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /DWIN_32 /DDEVL=1 /showIncludes /I ' + $root + '/src /I ' + $root + '/src/compat/include /I ' + $root + '/src/ntvdm-exe/softpc/include /I ' + $root + '/src/mvdm-hos"
+      },
+      {
+        "file": "tools/build/New-T280S12DemObjectObservationNinja.ps1",
+        "line": 15,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /DWIN_32 /DDEVL=1 /Zs /showIncludes /I ' + $root + '/src /I ' + $root + '/src/ntvdm-exe/monitor/include /I ' + $root + '/src/compat/include /I ' + $root + '/src/ntv"
+      },
+      {
+        "file": "tools/build/New-T280S20PdbSyntaxNinja.ps1",
+        "line": 15,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /DWIN_32 /DDEVL=1 /Zs /showIncludes /I ' + $root + '/src /I ' + $root + '/src/ntvdm-exe/softpc/include /I ' + $root + '/src/ntvdm-exe/monitor/include /I ' + $root +"
+      },
+      {
+        "file": "tools/build/New-T280S9DemDeclarationNinja.ps1",
+        "line": 15,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /DWIN_32 /DDEVL=1 /I ' + $root + '/src /I ' + $root + '/src/ntvdm-exe/softpc/include /I ' + $root + '/src/compat/include /I ' + $root + '/src/mvdm-host/dos/dem /I '"
+      },
+      {
+        "file": "tools/build/New-T281OriginalDemCommonControlNinja.ps1",
+        "line": 23,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL ' +"
+      },
+      {
+        "file": "tools/build/New-T281OriginalDemPackageNinja.ps1",
+        "line": 37,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL ' +"
+      },
+      {
+        "file": "tools/build/New-T281OriginalDemProvidersNinja.ps1",
+        "line": 23,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL ' +"
+      },
+      {
+        "file": "tools/build/New-T282OriginalCommandInitializationNinja.ps1",
+        "line": 18,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +"
+      },
+      {
+        "file": "tools/build/New-T282OriginalCommandSurfaceNinja.ps1",
+        "line": 19,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +"
+      },
+      {
+        "file": "tools/build/New-T283PlatformAbiCarrierNinja.ps1",
+        "line": 19,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +"
+      },
+      {
+        "file": "tools/build/New-T287OriginalXmsStaticNinja.ps1",
+        "line": 54,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DCPU_40_STYLE ' +"
+      },
+      {
+        "file": "tools/build/New-T289S5DpmiInterruptAuditNinja.ps1",
+        "line": 47,
+        "text": "$flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /Di386 /DDEVL ' +"
+      },
+      {
+        "file": "tools/build/New-T309OriginalDispatcherNinja.ps1",
+        "line": 63,
+        "text": "$flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /Di386 /DNTVDM ' +"
+      },
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 1031,
+        "text": "$graph.Add('  cflags = ' + $baseFlags + ' /DWIN_32 /DDEVL')"
+      }
+    ],
+    "DOCUMENTATION": [],
+    "DOESNT_USER_DO_THIS": [],
+    "DONT_CLEAR_LDTR_ON_INVALID": [],
+    "DOUBLE_CPU": [],
+    "DPMI": [],
+    "DUMB_TERMINAL": [],
+    "EGG": [
+      {
+        "file": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+        "line": 26,
+        "text": "#define EGG"
+      },
+      {
+        "file": "tests/component-integration/blocked_video_tick_test.c",
+        "line": 6,
+        "text": "#define EGG 1"
+      }
+    ],
+    "EJECT_FLOPPY": [],
+    "FASTBOPPING": [
+      {
+        "file": "src/mvdm-host/wow32/fastwow.h",
+        "line": 16,
+        "text": "#define FASTBOPPING     1"
+      },
+      {
+        "file": "src/mvdm-host/wow32/fastwow.h",
+        "line": 20,
+        "text": "#define FASTBOPPING     0"
+      }
+    ],
+    "FIX_BT_BUG": [
+      {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "line": 175,
+        "text": "#define FIX_BT_BUG\t/* Of course we want the bug fixed! */"
+      }
+    ],
+    "FLOPPIES_KEEP_TRYING": [],
+    "FLOPPY_B": [],
+    "GEN_DRVR": [],
+    "HFX": [],
+    "HOOKED_IRETS": [
+      {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+        "line": 18,
+        "text": "#define HOOKED_IRETS"
+      }
+    ],
+    "HOST_SAS": [],
+    "HUNTER": [
+      {
+        "file": "src/mvdm-host/softpc.new/obj.vdm/cdefine.inc",
+        "line": 17,
+        "text": "SPC_VAR=-DHUNTER"
+      }
+    ],
+    "I286": [],
+    "IP32": [],
+    "IPC": [],
+    "IRET_HOOKS": [],
+    "KIPPER": [],
+    "MAPPARAM_EXTRA": [
+      {
+        "file": "src/mvdm-host/wow32/wparam.c",
+        "line": 36,
+        "text": "// #define MAPPARAM_EXTRA"
+      }
+    ],
+    "MSWDVR": [],
+    "MVDM_CCPU_DECODE_DIAGNOSTICS": [
+      {
+        "file": "tests/observation/verify-decode-diagnostics.ps1",
+        "line": 33,
+        "text": "& $environmentPath cl.exe @arguments /DMVDM_CCPU_DECODE_DIAGNOSTICS \"/Fo$diagnostic\" $source *> (Join-Path $root 'diagnostic-build.txt')"
+      }
+    ],
+    "MVDM_XACTSRV_PACKSTR_COPY_ONLY": [
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 1256,
+        "text": "$graph.Add('  cflags = ' + $baseFlags + ' /DMVDM_XACTSRV_PACKSTR_COPY_ONLY')"
+      }
+    ],
+    "NEVER": [],
+    "NEWALIAS": [],
+    "NOTUSEDNOTUSED": [],
+    "NOT_IN_USE": [],
+    "NO_LONGER_USED": [],
+    "NO_SERIAL_UIF": [],
+    "NO_STRING_OPERATIONS": [],
+    "NTOS_KERNEL_RUNTIME": [
+      {
+        "file": "tools/build/New-NativeHook64Ninja.ps1",
+        "line": 66,
+        "text": "$graph.Add('  cflags = $cflags /DNTOS_KERNEL_RUNTIME')"
+      },
+      {
+        "file": "tools/build/New-NativeWorkerNinja.ps1",
+        "line": 163,
+        "text": "if($target -in @('obj/opennt-rtl/error.obj','obj/opennt-rtl/environ.obj')){$flags+=' /DNTOS_KERNEL_RUNTIME'}"
+      },
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 1229,
+        "text": "$graph.Add('  rtl_cflags = ' + $baseFlags + ' /Gz /DNTOS_KERNEL_RUNTIME')"
+      }
+    ],
+    "NTVDM": [
+      {
+        "file": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+        "line": 154,
+        "text": "#define NTVDM\t// To enable NT specific base code."
+      },
+      {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/ccpudefs.inc",
+        "line": 1,
+        "text": "C_DEFINES= -DCPU_40_STYLE -DNEW_CPU -DCCPU -DSPC386 -DANSI -DNTVDM"
+      },
+      {
+        "file": "src/mvdm-host/softpc.new/base/cvidc/ccpudefs.inc",
+        "line": 1,
+        "text": "C_DEFINES= -DCPU_40_STYLE -DNEW_CPU -DCCPU -DSPC386 -DANSI -DNTVDM -DC_VID"
+      },
+      {
+        "file": "tests/app/keyboard_history_boundary_test.c",
+        "line": 13,
+        "text": "#define NTVDM"
+      },
+      {
+        "file": "tests/app/keyboard_origin_device_test.c",
+        "line": 8,
+        "text": "#define NTVDM"
+      },
+      {
+        "file": "tests/build/test_bfs_depth1_cpu_guards.py",
+        "line": 85,
+        "text": "selected = subprocess.run(base + ['/DNTVDM', str(probe)], capture_output=True, text=True, errors='replace')"
+      },
+      {
+        "file": "tests/build/test_bfs_depth1_cpu_guards.py",
+        "line": 103,
+        "text": "selected = subprocess.run(base + ['/DNTVDM', str(probe)], capture_output=True, text=True, errors='replace')"
+      },
+      {
+        "file": "tests/build/test_bfs_depth1_cpu_guards.py",
+        "line": 118,
+        "text": "selected = subprocess.run(base + ['/DNTVDM', str(probe)], capture_output=True, text=True, errors='replace')"
+      },
+      {
+        "file": "tests/build/test_bfs_depth1_cpu_guards.py",
+        "line": 144,
+        "text": "selected = subprocess.run(base + ['/DNTVDM', str(probe)], capture_output=True, text=True, errors='replace')"
+      },
+      {
+        "file": "tests/build/test_bfs_depth1_cpu_guards.py",
+        "line": 176,
+        "text": "selected = subprocess.run(base + ['/DNTVDM', str(probe)], capture_output=True, text=True, errors='replace')"
+      },
+      {
+        "file": "tests/build/test_mirror_rejected_conditions.py",
+        "line": 138,
+        "text": "fixture = subprocess.run(base[:-1] + ['/DNTVDM', '/DCCPU', '/DCPU_40_STYLE'] + base[-1:],"
+      },
+      {
+        "file": "tests/observation/build-worker-performance.ps1",
+        "line": 30,
+        "text": "'/DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION','/DNTVDM','/DCPU_40_STYLE','/DNEW_CPU',"
+      },
+      {
+        "file": "tests/observation/verify-keyboard-controller-pic.ps1",
+        "line": 26,
+        "text": "if ($graph -notmatch '/DNTVDM\\b' -or $graph -notmatch '/DCPU_40_STYLE\\b' -or"
+      },
+      {
+        "file": "tests/observation/verify-pic-reset-eoi.ps1",
+        "line": 31,
+        "text": "if ($graph -notmatch '/DNTVDM\\b' -or $graph -notmatch '/DCPU_40_STYLE\\b' -or"
+      },
+      {
+        "file": "tests/observation/verify-redirector-async-publication.ps1",
+        "line": 25,
+        "text": "& $wrapper cl /nologo /TC /c /MT /W4 /DWIN_32 /DVDMREDIR_DLL /DNTVDM /DCPU_40_STYLE /DCCPU \"/I$root/src\" \"/I$root/src/ntvdm-exe/redir/include\" \"/I$root/src/ntvdm-exe/softpc/include\" \"/Fo$object\" (Join"
+      },
+      {
+        "file": "tests/observation/verify-redirector-oem-capacity.ps1",
+        "line": 28,
+        "text": "& $wrapper cl /nologo /TC /c /MT /W4 /DNTVDM /DCPU_40_STYLE /DCCPU /DWIN_32 /DVDMREDIR_DLL \"/I$root/src\" \"/I$root/src/vdmredir-dll/include\" \"/I$root/src/ntvdm-exe/redir/include\" \"/I$root/src/ntvdm-exe"
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 30,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /DPROD /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" /I\"' + (Join-Path $rep"
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 43,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /DCPU_40_STYLE /DCCPU /DPROD /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" "
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 65,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" '"
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 74,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" '"
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 82,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" '"
+      },
+      {
+        "file": "tools/audit/BuildCcpuExceptionProfile.mjs",
+        "line": 45,
+        "text": "#define NTVDM 1"
+      },
+      {
+        "file": "tools/audit/Verify-SoftpcConventionalDeviceCohort.mjs",
+        "line": 23,
+        "text": "requireText(graph, '/DNTVDM', 'selected CPU40 graph');"
+      },
+      {
+        "file": "tools/audit/Verify-T420S30ComMock.ps1",
+        "line": 38,
+        "text": "'cl.exe /nologo /TC /MT /W4 /Gy /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD',"
+      },
+      {
+        "file": "tools/build/New-T282OriginalCommandInitializationNinja.ps1",
+        "line": 18,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +"
+      },
+      {
+        "file": "tools/build/New-T282OriginalCommandSurfaceNinja.ps1",
+        "line": 19,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +"
+      },
+      {
+        "file": "tools/build/New-T283PlatformAbiCarrierNinja.ps1",
+        "line": 19,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +"
+      },
+      {
+        "file": "tools/build/New-T309OriginalDispatcherNinja.ps1",
+        "line": 63,
+        "text": "$flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /Di386 /DNTVDM ' +"
+      },
+      {
+        "file": "tools/build/New-T310HeartbeatSourceNinja.ps1",
+        "line": 60,
+        "text": "$cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + $nt + '\" /FI \"' + $"
+      },
+      {
+        "file": "tools/build/New-T310IcaNinja.ps1",
+        "line": 60,
+        "text": "$cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + $nt + '\" /FI \"' + $ntexapi + '\" ' + ($includes -join"
+      },
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 784,
+        "text": "$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_C"
+      },
+      {
+        "file": "tools/build/New-T313CcpuLifecycleNinja.ps1",
+        "line": 55,
+        "text": "$cflags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) "
+      },
+      {
+        "file": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "line": 398,
+        "text": "$cflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $in"
+      }
+    ],
+    "NT_ALLOC_DOS_MEM": [],
+    "OLD_SUBCLASS_STUFF": [],
+    "OLD_WAY": [],
+    "ONLY_API16": [],
+    "PARAMETER_VALIDATION_16_RE_ENABLED": [],
+    "PLANEDUMPER": [],
+    "PROD": [
+      {
+        "file": "src/mvdm-host/softpc.new/obj.vdm/cdefine.inc",
+        "line": 5,
+        "text": "SPC_VAR=-DPROD"
+      },
+      {
+        "file": "tests/observation/build-worker-performance.ps1",
+        "line": 31,
+        "text": "'/DCCPU','/DC_VID','/DSPC386','/DSIM32','/DV7VGA','/DANSI','/DPROD',"
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 30,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /DPROD /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" /I\"' + (Join-Path $rep"
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 43,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /DCPU_40_STYLE /DCCPU /DPROD /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" "
+      },
+      {
+        "file": "tools/audit/BuildCcpuExceptionProfile.mjs",
+        "line": 160,
+        "text": "prelude+'\\n#define PROD 1\\n'+current.replace(/^#include[^\\n]*\\n/gm,'')+prodHarness);"
+      },
+      {
+        "file": "tools/audit/Verify-T420S30ComMock.ps1",
+        "line": 38,
+        "text": "'cl.exe /nologo /TC /MT /W4 /Gy /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD',"
+      },
+      {
+        "file": "tools/build/New-T281OriginalBopDispatchNinja.ps1",
+        "line": 42,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DPROD /DMONITOR /DC_VID /DX86GFX /DANSI ' +"
+      },
+      {
+        "file": "tools/build/New-T310HeartbeatSourceNinja.ps1",
+        "line": 60,
+        "text": "$cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + $nt + '\" /FI \"' + $"
+      },
+      {
+        "file": "tools/build/New-T310IcaNinja.ps1",
+        "line": 60,
+        "text": "$cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + $nt + '\" /FI \"' + $ntexapi + '\" ' + ($includes -join"
+      },
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 784,
+        "text": "$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_C"
+      },
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 824,
+        "text": "$cvidcAccessFlags = $cvidcRuleFlags.Replace('/DCCPU ', '').Replace('/DPROD ', '')"
+      },
+      {
+        "file": "tools/build/New-T313CcpuLifecycleNinja.ps1",
+        "line": 55,
+        "text": "$cflags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) "
+      },
+      {
+        "file": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "line": 398,
+        "text": "$cflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $in"
+      }
+    ],
+    "PROFILE": [
+      {
+        "file": "tests/build/test_bfs_depth1_cpu_guards.py",
+        "line": 306,
+        "text": "for defines in (['/DCPU_40_STYLE', '/DPROFILE'], []):"
+      },
+      {
+        "file": "tests/build/test_bfs_depth1_cpu_guards.py",
+        "line": 311,
+        "text": "excluded = subprocess.run(base + ['/DPROFILE', str(probe)], capture_output=True,"
+      }
+    ],
+    "SECURE": [],
+    "SFELLOW": [],
+    "SHORT_TRACE": [],
+    "SPC386": [
+      {
+        "file": "src/mvdm-host/softpc.new/obj.vdm/cdefine.inc",
+        "line": 51,
+        "text": "-DSPC386 \\"
+      },
+      {
+        "file": "src/mvdm-host/softpc.new/base/ccpu386/ccpudefs.inc",
+        "line": 1,
+        "text": "C_DEFINES= -DCPU_40_STYLE -DNEW_CPU -DCCPU -DSPC386 -DANSI -DNTVDM"
+      },
+      {
+        "file": "src/mvdm-host/softpc.new/base/cvidc/ccpudefs.inc",
+        "line": 1,
+        "text": "C_DEFINES= -DCPU_40_STYLE -DNEW_CPU -DCCPU -DSPC386 -DANSI -DNTVDM -DC_VID"
+      },
+      {
+        "file": "tests/observation/build-worker-performance.ps1",
+        "line": 31,
+        "text": "'/DCCPU','/DC_VID','/DSPC386','/DSIM32','/DV7VGA','/DANSI','/DPROD',"
+      },
+      {
+        "file": "tests/observation/observe-ccpu-header-selection.ps1",
+        "line": 34,
+        "text": "if($command.Count -ne 1 -or $command[0] -notmatch '/DCPU_40_STYLE\\b' -or $command[0] -notmatch '/DSPC386\\b'){throw 'Wrong selected source/profile command'}"
+      },
+      {
+        "file": "tests/observation/verify-ccpu-neg64.ps1",
+        "line": 18,
+        "text": "if($flags -notmatch '/DCPU_40_STYLE\\b' -or $flags -notmatch '/DSPC386\\b' -or $flags -match '/G[zr]\\b'){throw 'Wrong selected CPU/ABI profile'}"
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 30,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /DPROD /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" /I\"' + (Join-Path $rep"
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 43,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /DCPU_40_STYLE /DCCPU /DPROD /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" "
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 65,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" '"
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 74,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" '"
+      },
+      {
+        "file": "tests/observation/verify-softpc-object-contract.ps1",
+        "line": 82,
+        "text": "$extraFlags = '/DNTVDM /DSPC386 /DANSI /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/host/inc') + '\" /I\"' + (Join-Path $repo 'src/mvdm-host/softpc.new/base/inc') + '\" '"
+      },
+      {
+        "file": "tools/audit/Verify-T420S30ComMock.ps1",
+        "line": 38,
+        "text": "'cl.exe /nologo /TC /MT /W4 /Gy /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD',"
+      },
+      {
+        "file": "tools/build/New-T310HeartbeatSourceNinja.ps1",
+        "line": 60,
+        "text": "$cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + $nt + '\" /FI \"' + $"
+      },
+      {
+        "file": "tools/build/New-T310IcaNinja.ps1",
+        "line": 60,
+        "text": "$cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + $nt + '\" /FI \"' + $ntexapi + '\" ' + ($includes -join"
+      },
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 784,
+        "text": "$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_C"
+      },
+      {
+        "file": "tools/build/New-T313CcpuLifecycleNinja.ps1",
+        "line": 55,
+        "text": "$cflags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) "
+      },
+      {
+        "file": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "line": 398,
+        "text": "$cflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $in"
+      }
+    ],
+    "SWITCHNPX": [],
+    "TAKE_REAL_MODE_LIMIT_FAULT": [],
+    "TK43": [],
+    "UNICODE": [
+      {
+        "file": "src/non-mvdm/base/win32/client/basedll.h",
+        "line": 25,
+        "text": "#undef UNICODE"
+      },
+      {
+        "file": "src/mvdm-host/vdmutils/forcedos/forcedos.c",
+        "line": 33,
+        "text": "#define UNICODE     1"
+      },
+      {
+        "file": "tests/build/test_mirror_rejected_conditions.py",
+        "line": 128,
+        "text": "(['/DUNICODE'], 'RtlInitUnicodeString', 'RtlCaptureAnsiString'),"
+      },
+      {
+        "file": "tests/observation/Build-MixedBatchProbes.ps1",
+        "line": 18,
+        "text": "& $wrapper cl.exe /nologo /MT /W4 /we4013 /we4311 /we4302 /DUNICODE /D_UNICODE $source \"/Fo$out/$stem.obj\" \"/Fe$out/$stem.exe\" @link *> \"$out/$stem.log\""
+      },
+      {
+        "file": "tests/adapter-mvdm-host-out/wow/wow_original_create_entry_fixture.c",
+        "line": 1,
+        "text": "#define UNICODE"
+      },
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 800,
+        "text": "$xactSrvFlags = $baseFlags + ' /DUNICODE /D_UNICODE'"
+      },
+      {
+        "file": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "line": 411,
+        "text": "$ninja.Add('control_user_flags = /UANSI /DUNICODE')"
+      },
+      {
+        "file": "tools/build/New-T447S3CallBoundaryNinja.ps1",
+        "line": 188,
+        "text": "$lines.Add('cflags = /nologo /TC /MT /O2 /W4 /Gz /DSTD_CALL /DUNICODE /D_UNICODE /showIncludes ' + ($includes -join ' '))"
+      },
+      {
+        "file": "tools/historical/pre-t260/build/New-T235S1RunnerNinjaGraph.ps1",
+        "line": 69,
+        "text": "$graph.Add('  command = cmd.exe /d /s /c call ' + $envNinja + ' cl.exe /nologo /TC /c /std:c11 /W4 /WX /MT /DUNICODE /D_UNICODE /DWIN32_LEAN_AND_MEAN /D_CRT_SECURE_NO_WARNINGS ' + $include + ' /Fo$out"
+      }
+    ],
+    "V7VGA": [
+      {
+        "file": "src/mvdm-host/softpc.new/obj.vdm/cdefine.inc",
+        "line": 53,
+        "text": "-DV7VGA"
+      },
+      {
+        "file": "tests/observation/build-worker-performance.ps1",
+        "line": 31,
+        "text": "'/DCCPU','/DC_VID','/DSPC386','/DSIM32','/DV7VGA','/DANSI','/DPROD',"
+      },
+      {
+        "file": "tests/observation/verify-planar-painter-object-contract.ps1",
+        "line": 14,
+        "text": "if(!$flags.Contains('/DCPU_40_STYLE') -or !$flags.Contains('/DV7VGA')){throw 'Wrong original object profile'}"
+      },
+      {
+        "file": "tests/observation/verify-video7-packed-painter.ps1",
+        "line": 16,
+        "text": "if(!$flags.Contains('/DCPU_40_STYLE') -or !$flags.Contains('/DV7VGA')){throw 'Expected actual production x86 Video7 profile'}"
+      },
+      {
+        "file": "tools/audit/Verify-T420S30ComMock.ps1",
+        "line": 38,
+        "text": "'cl.exe /nologo /TC /MT /W4 /Gy /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD',"
+      },
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 784,
+        "text": "$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_C"
+      },
+      {
+        "file": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "line": 398,
+        "text": "$cflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $in"
+      }
+    ],
+    "VR_BREAK": [],
+    "Verbose": [
+      {
+        "file": "src/mvdm-host/dpmi32/int21map.c",
+        "line": 30,
+        "text": "//#define Verbose 1"
+      }
+    ],
+    "WDCTRL_BOP": [],
+    "WIN32": [
+      {
+        "file": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+        "line": 3,
+        "text": "#define WIN32"
+      },
+      {
+        "file": "src/mvdm-guest/wow16/gdi/gdi16.h",
+        "line": 23,
+        "text": "#define WIN32"
+      },
+      {
+        "file": "tests/observation/build-worker-performance.ps1",
+        "line": 29,
+        "text": "'/D_NO_CRT_STDIO_INLINE','/DWIN32','/DWINNT','/DOPENNT_ADAPTER_NT_ALERT_THREAD',"
+      },
+      {
+        "file": "tests/observation/verify-wow-hard-error-decoder.ps1",
+        "line": 19,
+        "text": "$flags='/nologo /TC /W4 /WX /MT /DWIN32 /I\"'+$repo+'/src/compat/include\" /I\"'+$repo+'/src/ntvdm-exe/win32\"'"
+      },
+      {
+        "file": "tools/audit/Verify-T420S30ComMock.ps1",
+        "line": 38,
+        "text": "'cl.exe /nologo /TC /MT /W4 /Gy /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD',"
+      },
+      {
+        "file": "tools/build/Generate-T371XmsStartupNinja.mjs",
+        "line": 42,
+        "text": "\"/DWIN32\", \"/DWINNT\", \"/DWIN_32\", \"/DCPU_40_STYLE\", \"/DDEVL\","
+      },
+      {
+        "file": "tools/build/Generate-T420S16SuballocNinja.mjs",
+        "line": 14,
+        "text": "\"/nologo\", \"/TC\", \"/c\", \"/MT\", \"/W4\", \"/DWIN32\", \"/DWINNT\","
+      },
+      {
+        "file": "tools/build/Generate-T420S17OemUniNinja.mjs",
+        "line": 36,
+        "text": "\"/nologo\", \"/TC\", \"/c\", \"/MT\", \"/W4\", \"/showIncludes\", \"/DWIN32\", \"/DWINNT\","
+      },
+      {
+        "file": "tools/build/New-T282CommandOemSupportNinja.ps1",
+        "line": 15,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /DWIN32 /showIncludes /I ' + $root +"
+      },
+      {
+        "file": "tools/build/New-T310HeartbeatSourceNinja.ps1",
+        "line": 60,
+        "text": "$cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + $nt + '\" /FI \"' + $"
+      },
+      {
+        "file": "tools/build/New-T310IcaNinja.ps1",
+        "line": 60,
+        "text": "$cflags = '/nologo /TC /c /MT /Gy /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + $nt + '\" /FI \"' + $ntexapi + '\" ' + ($includes -join"
+      },
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 784,
+        "text": "$baseCommonFlags = '/nologo /TC /c /MT /W4 /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DOPENNT_ADAPTER_NT_ALERT_THREAD /DMVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION /DNTVDM /DCPU_40_STYLE /DNEW_C"
+      },
+      {
+        "file": "tools/build/New-T313CcpuLifecycleNinja.ps1",
+        "line": 55,
+        "text": "$cflags = '/nologo /TC /c /MT /W4 /showIncludes /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DSPC386 /DSIM32 /DANSI /DPROD /FI \"' + (NinjaPath (Join-Path $root 'src/compat/include/nt.h')) "
+      },
+      {
+        "file": "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "line": 398,
+        "text": "$cflags = '/nologo /TC /c /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD ' + $force + ' ' + $in"
+      },
+      {
+        "file": "tools/historical/t225-s7/New-T225S7NinjaGraph.ps1",
+        "line": 71,
+        "text": "('  command = cmd.exe /d /s /c call ' + $envNinja + ' cl.exe /nologo /TC /c /std:c11 /W4 /WX /MT /DWIN32 /D_CRT_SECURE_NO_WARNINGS /showIncludes ' + $includeArgs + ' /Fo$out $in'),"
+      },
+      {
+        "file": "tools/historical/pre-t260/build/New-T182S2FiniteSequenceEngineDerivative.ps1",
+        "line": 96,
+        "text": "$make += \"`tcl.exe /nologo /c /MT /W3 /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /Iadapter /Icli /Fo$object $source\""
+      },
+      {
+        "file": "tools/historical/pre-t260/build/New-T190S3CommandBootstrapDerivative.ps1",
+        "line": 37,
+        "text": "\"`tcl.exe /nologo /c /MT /W3 /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /Iadapter /Icli /Foadapter\\bx_ntvdm_adapter_runtime.obj adapter\\bx_ntvdm_adapter_runtime.c\", '',"
+      },
+      {
+        "file": "tools/historical/pre-t260/build/New-T190S3CommandBootstrapDerivative.ps1",
+        "line": 39,
+        "text": "\"`tcl.exe /nologo /c /MT /W3 /DWIN32 /D_WINDOWS /D_CRT_SECURE_NO_WARNINGS /Iadapter /Icli /Foadapter\\bx_ntvdm_cmd_comspec_bootstrap_service.obj adapter\\bx_ntvdm_cmd_comspec_bootstrap_service.c\", '',"
+      },
+      {
+        "file": "tools/historical/pre-t260/probe/Invoke-T95S6StartupSessionMsvcObjectAudit.ps1",
+        "line": 61,
+        "text": "$lines += \"cl.exe /nologo /c /MT /W3 /DWIN32 /Iadapter /Icli /Fo$($source.Folder)\\$object $($source.Folder)\\$($source.Name)\""
+      },
+      {
+        "file": "tools/historical/pre-t260/probe/Invoke-T95S6StartupSessionMsvcObjectAudit.ps1",
+        "line": 78,
+        "text": "compilerCommand = 'BuildTools VsDevCmd x86 then cl /nologo /c /MT /W3 /DWIN32 /Iadapter /Icli'"
+      }
+    ],
+    "WOWEDIT": [],
+    "X86GFX": [
+      {
+        "file": "src/mvdm-host/softpc.new/obj.vdm/cdefine.inc",
+        "line": 38,
+        "text": "-DX86GFX"
+      },
+      {
+        "file": "tools/audit/Verify-T420S23GraphicsDisposition.mjs",
+        "line": 28,
+        "text": "mustContain(graph, '/DMONITOR /DX86GFX /DMVDM_STANDALONE_SAS_VIDEO',"
+      },
+      {
+        "file": "tools/build/New-T281OriginalBopDispatchNinja.ps1",
+        "line": 42,
+        "text": "$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DPROD /DMONITOR /DC_VID /DX86GFX /DANSI ' +"
+      },
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 982,
+        "text": "$graph.Add('  cvidc_rule_cflags = ' + $cvidcRuleFlags + ' /DMONITOR /DX86GFX /DMVDM_STANDALONE_SAS_VIDEO')"
+      }
+    ],
+    "XTSFD": [],
+    "_ALPHA_": [],
+    "i386": [
+      {
+        "file": "tests/build/test_bfs_depth1_cpu_guards.py",
+        "line": 351,
+        "text": "selected = subprocess.run(base + ['/DCPU_40_STYLE', '/Di386', str(probe)],"
+      },
+      {
+        "file": "tests/build/test_bfs_depth1_cpu_guards.py",
+        "line": 353,
+        "text": "excluded = subprocess.run(base + ['/Di386', str(probe)], capture_output=True,"
+      },
+      {
+        "file": "tests/build/test_mirror_rejected_conditions.py",
+        "line": 118,
+        "text": "allowed = subprocess.run(base[:-1] + ['/Di386', '/DCPU_40_STYLE'] + base[-1:], capture_output=True, text=True, errors='replace')"
+      },
+      {
+        "file": "tests/build/test_mirror_rejected_conditions.py",
+        "line": 119,
+        "text": "rejected = subprocess.run(base[:-1] + ['/Di386'] + base[-1:], capture_output=True, text=True, errors='replace')"
+      },
+      {
+        "file": "tools/build/New-T279SupportLibraryNinja.ps1",
+        "line": 22,
+        "text": "suballoc_defines = /Di386"
+      },
+      {
+        "file": "tools/build/New-T288S2MonitorDeclarationNinja.ps1",
+        "line": 40,
+        "text": "$flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /Di386 ' + ($includes -join ' ')"
+      },
+      {
+        "file": "tools/build/New-T289S5DpmiInterruptAuditNinja.ps1",
+        "line": 47,
+        "text": "$flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /Di386 /DDEVL ' +"
+      },
+      {
+        "file": "tools/build/New-T309OriginalDispatcherNinja.ps1",
+        "line": 63,
+        "text": "$flags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /Di386 /DNTVDM ' +"
+      },
+      {
+        "file": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "line": 446,
+        "text": "& cmd.exe /d /s /c ('call \"' + $vs + '\" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /P /Fi\"' + $preprocessedExportDefinition + '\" /Di386 /DCPU_40_STYLE \"' + $hostExportDefinition + '\"')"
+      },
+      {
+        "file": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+        "line": 3212,
+        "text": "target_compile_options(runner-opennt-contained-oemuni-demdir-fixture PRIVATE /Ui386)"
+      },
+      {
+        "file": "tools/historical/pre-t260/governance/Test-T257S3DpmiDescriptorBoundary.ps1",
+        "line": 37,
+        "text": "Require ($source -match '(?m)^#define i386 1$') 'Selected 486 source branch is not explicit.'"
+      }
+    ],
+    "macintosh": []
+  }
+}

@@ -1199,3 +1199,102 @@ First-depth snapshot: 4,073 groups / 5,049 arms; 1,854 observed retained,
 1,470 existing exclusions, 232 newly excluded, 1,493 pending. Restored
 first-depth groups remain 41 relative to fixed HEAD, eight in this BFS pass.
 Sixty-seven original multiplicity candidates remain. First-depth gate open.
+
+Owner resumed S13 with a two-phase gate at each depth: prioritize proven
+excluded arms, then build/publish/test/commit/push that exclusion phase, and
+only afterward audit selected arms and enqueue the next depth. Unknown
+contexts cannot be classified as excluded; earlier mixed-pass records remain
+as historical evidence.
+
+DIV-596 replaces seven first-depth DEBUG bodies in six WOW host headers
+with #error; all removed bodies match pinned originals. Eighty-eight actual
+WOW source contexts exclude DEBUG; original VDMEXTS is outside the admitted
+product closure. A representative actual selected WOW preprocessor output
+matched before/after; x86 wow32.obj compiled, seven normal/rejected controls
+and their #line checks passed, and the existing 235-guard suite passed. The
+direct wparam fixture passed 54 current scenarios and its baseline negative
+controls, with identical selected original cache preprocessing. Its stale
+baseline path mapping, pre-existing reverse-record size expectation (DIV-363
+adds eight bytes), and raw DEBUG-body comparison were corrected, with
+unchanged-checkpoint comparisons documented in
+`s13-bfs-depth1-wow-header-debug.json`. Guest-associated wowfax.h remains
+pending; no guest runtime or full-layer release acceptance is claimed.
+
+First-depth snapshot: 4,073 groups / 5,049 arms; 1,854 observed retained,
+1,470 existing exclusions, 239 newly excluded, 1,486 pending. Restored
+first-depth groups remain 41 relative to fixed HEAD, eight in the BFS pass.
+The working inventory contains 3,143 depth-2 groups (5,304 arms); their
+dispositions remain unreviewed and their final eligibility depends on the
+first-depth retained-arm audit. Sixty-seven original multiplicity candidates
+remain. The exclusion-phase delivery gate is still open.
+
+The owner requested a single complete first-depth exclusion audit and one
+batch before compilation. The structural inventory covers 5,049 current
+arms and checks all 1,636 pinned mirror files without hash mismatch. Current
+preprocessing completed for 829 header-consumer contexts without failure;
+no textual include additions were found since the queue baseline, while 175
+include removals require conservative treatment. Candidate source scans and
+original multiplicity hints are recorded in the depth1 audit JSON files.
+The CPU decode diagnostics test selects a branch omitted by default product
+builds, proving default compilation alone is insufficient. A source-and-flag
+cross-check also found six further candidate profile intersections; their
+actual support and selection remain to be verified. The 67 original
+multiplicity mismatches remain candidates, not proven missing structures.
+No post-inventory source batch or full build has been performed.
+The complete first-depth source candidate inventory now deduplicates 180
+branch arms; 60 have literal test/build references. Of the 34 simple header
+candidates, 31 match the pinned original by normalized lines; 24 are included
+by an instrumented test context and 23 have additional possible direct test
+or guest inclusions. Six original groups are byte-equivalent modulo line
+endings at already-present nested positions. The current video controller
+also explicitly enables X86GFX, so its value cannot be treated as global.
+These observations are audit evidence only, not final exclusion decisions.
+Compiler commands and the 829-context header trace have been archived and the
+archive integrity checked. No additional product source batch or build has
+been performed since the owner requested a single combined batch.
+Correction: physical line verification must split on LF, not text splitlines,
+because some pinned files contain form-feed. All 5,049 current first-depth
+arm directives and 4,219 original first-depth group directives were checked
+against LF line numbers with zero mismatches. Recomputing original adjacent
+contexts changed one candidate from unknown to matching; 106 of 124 uniquely
+mapped candidates now match. The scratch compiler probes use byte LF lines
+and were not affected. A server.c FE_IME table framework absent beneath its
+file-wide selector was identified for the next depth only; the current depth
+does not mutate or classify that nested arm. Parallel QUEUE.md and proposal
+changes appeared during this audit and remain untouched.
+First-depth original branch work found a concrete missing FE_IME framework in
+server.c inside the existing file-wide WOW selector. It is recorded as a
+next-depth structural candidate and was not edited at this depth. Product
+preprocessor boundary probes succeeded for 141 source boundaries and four
+FAST header boundaries. The earlier text-splitting line issue has been
+corrected in the source-context artifact; one context classification changed.
+The 121 observed-file unguarded arms not covered by initial candidate scans
+are inventoried explicitly; their 503 product contexts are being captured with
+68 exact macro names and exact compiler-flag tokens. No source batch/build,
+release, commit or push has occurred in this resumed audit phase.
+
+The later complete graph include collection covered 2,070 actual host compiler
+contexts and 29 generated-source contexts, all successfully preprocessed. Ten
+generated-source contexts include mirror headers. All 1,636 tracked mirror
+file hashes still matched the captured working snapshot immediately before the
+batch. Evidence: `s13-bfs-depth1-all-graph-context-summary.json` and its ZIP.
+
+The consolidated batch replaced 104 first-depth excluded arms in 52 files,
+preserving their original outer conditions and selected-path logical lines;
+17 unreviewed inner groups were subsumed. One previously removed original
+first-depth `DEBUG` group in clmsg.c was restored and its body rejected.
+All 104 resulting bodies and line-restoration placements passed structural
+checks. See `s13-bfs-depth1-consolidated-batch.json` and the clmsg preflight.
+The current queue has 4,074 first-depth groups / 5,050 arms: 1,854 observed
+retained, 1,470 previously excluded, 344 newly excluded and 1,382 pending.
+Those pending arms and missing-original-structure candidates are not claimed
+as resolved. The cached x86 worker/WOW32 and x64 native component builds
+completed successfully; build success is not proof for untested profiles.
+The staged ten-image candidate passed all 16 Full product gates, four
+Windows 3.1 Standard/Enhanced and DOSONLY combinations, and the isolated
+DOS4GW/NESticle graphics-startup witness. Six checked guest system files
+matched their original hashes after the matrix. The ten candidate hashes were
+published and verified at both release destinations. See
+`s13-bfs-depth1-consolidated-full-test.json` and
+`s13-bfs-depth1-consolidated-win31.json`; the DOS4GW witness does not assert
+gameplay. This is a progress baseline, not completion of the first layer.

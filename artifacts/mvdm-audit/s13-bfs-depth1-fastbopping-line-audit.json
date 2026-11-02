@@ -1,0 +1,503 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "line": 14,
+      "expression": "defined(i386) && !defined(DEBUG_OR_WOWPROFILE)",
+      "source_sha256": "ce5979551316cc8e304af2be521b4ed921fe42936e8d5523e3046294d87f3b69",
+      "original_start": 14,
+      "closure": "#else",
+      "prior_line_directives": [],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 14,
+      "current_logical_after": 19,
+      "original_after": 19,
+      "following_context_exact": true,
+      "current_following": [
+        "#define FASTBOPPING     0"
+      ],
+      "original_following": [
+        "#define FASTBOPPING     0"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "line": 24,
+      "expression": "FASTBOPPING",
+      "source_sha256": "ce5979551316cc8e304af2be521b4ed921fe42936e8d5523e3046294d87f3b69",
+      "original_start": 24,
+      "closure": "#endif",
+      "prior_line_directives": [],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 24,
+      "current_logical_after": 29,
+      "original_after": 29,
+      "following_context_exact": false,
+      "current_following": [],
+      "original_following": [],
+      "following_outer_token_current": "#if FASTBOPPING",
+      "following_outer_token_original": "#if FASTBOPPING",
+      "following_outer_directive_exact": true
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "line": 30,
+      "expression": "FASTBOPPING",
+      "source_sha256": "ce5979551316cc8e304af2be521b4ed921fe42936e8d5523e3046294d87f3b69",
+      "original_start": 30,
+      "closure": "#endif",
+      "prior_line_directives": [],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 30,
+      "current_logical_after": 39,
+      "original_after": 39,
+      "following_context_exact": true,
+      "current_following": [
+        "//#if FASTBOPPING",
+        "//",
+        "// Used to put lock prefixes in appropriate places for MP machines",
+        "//",
+        "extern VOID FastWowFirstCode(VOID);"
+      ],
+      "original_following": [
+        "//#if FASTBOPPING",
+        "//",
+        "// Used to put lock prefixes in appropriate places for MP machines",
+        "//",
+        "extern VOID FastWowFirstCode(VOID);"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "line": 583,
+      "expression": "FASTBOPPING",
+      "source_sha256": "3cedff5ab428d452a5f607fd84914924968d21192870b375dff634851f45fa37",
+      "original_start": 652,
+      "closure": "#else",
+      "prior_line_directives": [
+        [
+          573,
+          "#line 654"
+        ]
+      ],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 663,
+      "current_logical_after": 665,
+      "original_after": 654,
+      "following_context_exact": true,
+      "current_following": [
+        "USHORT SaveIp;"
+      ],
+      "original_following": [
+        "USHORT SaveIp;"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "line": 679,
+      "expression": "FASTBOPPING",
+      "source_sha256": "3cedff5ab428d452a5f607fd84914924968d21192870b375dff634851f45fa37",
+      "original_start": 763,
+      "closure": "#else",
+      "prior_line_directives": [
+        [
+          667,
+          "#line 781"
+        ]
+      ],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 792,
+      "current_logical_after": 795,
+      "original_after": 766,
+      "following_context_exact": true,
+      "current_following": [
+        "SETVDMSTACK(ptd->vpCBStack);"
+      ],
+      "original_following": [
+        "SETVDMSTACK(ptd->vpCBStack);"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "line": 689,
+      "expression": "FASTBOPPING",
+      "source_sha256": "3cedff5ab428d452a5f607fd84914924968d21192870b375dff634851f45fa37",
+      "original_start": 773,
+      "closure": "#else",
+      "prior_line_directives": [
+        [
+          667,
+          "#line 781"
+        ]
+      ],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 802,
+      "current_logical_after": 807,
+      "original_after": 778,
+      "following_context_exact": false,
+      "current_following": [
+        "// Time to get the IEU running task-time code again",
+        "SaveIp = getIP();",
+        "/* DIVERGENCE(MVDM-HOST-DIV-304): default-off witness after the original",
+        "* stack selection and before the original CCPU reentry.  It copies no",
+        "* guest state and does not alter the callback protocol. */"
+      ],
+      "original_following": [
+        "// Time to get the IEU running task-time code again",
+        "SaveIp = getIP();",
+        "host_simulate();",
+        "setIP(SaveIp);",
+        "ptd->vpStack = VDMSTACK();"
+      ],
+      "following_outer_token_current": "SaveIp = getIP();",
+      "following_outer_token_original": "SaveIp = getIP();",
+      "following_outer_directive_exact": false
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 525,
+      "expression": "FASTBOPPING",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17",
+      "original_start": 540,
+      "closure": "#else",
+      "prior_line_directives": [
+        [
+          184,
+          "#line 223"
+        ]
+      ],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 563,
+      "current_logical_after": 566,
+      "original_after": 543,
+      "following_context_exact": true,
+      "current_following": [
+        "vpStack = VDMSTACK();"
+      ],
+      "original_following": [
+        "vpStack = VDMSTACK();"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 800,
+      "expression": "FASTBOPPING",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17",
+      "original_start": 823,
+      "closure": "#else",
+      "prior_line_directives": [
+        [
+          572,
+          "#line 622"
+        ]
+      ],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 849,
+      "current_logical_after": 851,
+      "original_after": 825,
+      "following_context_exact": true,
+      "current_following": [
+        "USHORT SaveIp;"
+      ],
+      "original_following": [
+        "USHORT SaveIp;"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 839,
+      "expression": "FASTBOPPING",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17",
+      "original_start": 862,
+      "closure": "#else",
+      "prior_line_directives": [
+        [
+          572,
+          "#line 622"
+        ]
+      ],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 888,
+      "current_logical_after": 891,
+      "original_after": 865,
+      "following_context_exact": true,
+      "current_following": [
+        "vpStack = VDMSTACK();"
+      ],
+      "original_following": [
+        "vpStack = VDMSTACK();"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 851,
+      "expression": "FASTBOPPING",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17",
+      "original_start": 874,
+      "closure": "#else",
+      "prior_line_directives": [
+        [
+          572,
+          "#line 622"
+        ]
+      ],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 900,
+      "current_logical_after": 904,
+      "original_after": 878,
+      "following_context_exact": true,
+      "current_following": [
+        "SaveIp = getIP();",
+        "host_simulate();",
+        "setIP(SaveIp);"
+      ],
+      "original_following": [
+        "SaveIp = getIP();",
+        "host_simulate();",
+        "setIP(SaveIp);"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1106,
+      "expression": "FASTBOPPING",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17",
+      "original_start": 1123,
+      "closure": "#else",
+      "prior_line_directives": [
+        [
+          572,
+          "#line 622"
+        ]
+      ],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 1155,
+      "current_logical_after": 1158,
+      "original_after": 1126,
+      "following_context_exact": true,
+      "current_following": [
+        "SETVDMSTACK(vpInitialSSSP);"
+      ],
+      "original_following": [
+        "SETVDMSTACK(vpInitialSSSP);"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1154,
+      "expression": "FASTBOPPING",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17",
+      "original_start": 1179,
+      "closure": "#else",
+      "prior_line_directives": [
+        [
+          1146,
+          "#line 1204"
+        ]
+      ],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 1211,
+      "current_logical_after": 1215,
+      "original_after": 1183,
+      "following_context_exact": true,
+      "current_following": [
+        "SaveIp = getIP();",
+        "host_simulate();",
+        "setIP(SaveIp);"
+      ],
+      "original_following": [
+        "SaveIp = getIP();",
+        "host_simulate();",
+        "setIP(SaveIp);"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1315,
+      "expression": "FASTBOPPING",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17",
+      "original_start": 1341,
+      "closure": "#endif",
+      "prior_line_directives": [
+        [
+          1180,
+          "#line 1236"
+        ]
+      ],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 1370,
+      "current_logical_after": 1377,
+      "original_after": 1348,
+      "following_context_exact": true,
+      "current_following": [
+        "wPrevTDB = *pCurTDB;",
+        "td.dwFlags = TDF_INITCALLBACKSTACK;",
+        "//",
+        "// Now prepare for the callback.  Set the registers such that it looks",
+        "// like we are returning from the WOWKillRemoteTask call."
+      ],
+      "original_following": [
+        "wPrevTDB = *pCurTDB;",
+        "td.dwFlags = TDF_INITCALLBACKSTACK;",
+        "//",
+        "// Now prepare for the callback.  Set the registers such that it looks",
+        "// like we are returning from the WOWKillRemoteTask call."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1340,
+      "expression": "FASTBOPPING",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17",
+      "original_start": 1366,
+      "closure": "#else",
+      "prior_line_directives": [
+        [
+          1180,
+          "#line 1236"
+        ]
+      ],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 1395,
+      "current_logical_after": 1402,
+      "original_after": 1373,
+      "following_context_exact": true,
+      "current_following": [
+        "setIP( (WORD)vcRemote.Eip );",
+        "setSP( (WORD)vcRemote.Esp );",
+        "setSS( (WORD)vcRemote.SegSs );",
+        "setCS( (WORD)vcRemote.SegCs );",
+        "vpStack = VDMSTACK();"
+      ],
+      "original_following": [
+        "setIP( (WORD)vcRemote.Eip );",
+        "setSP( (WORD)vcRemote.Esp );",
+        "setSS( (WORD)vcRemote.SegSs );",
+        "setCS( (WORD)vcRemote.SegCs );",
+        "vpStack = VDMSTACK();"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1383,
+      "expression": "FASTBOPPING",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17",
+      "original_start": 1409,
+      "closure": "#else",
+      "prior_line_directives": [
+        [
+          1180,
+          "#line 1236"
+        ]
+      ],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 1438,
+      "current_logical_after": 1442,
+      "original_after": 1413,
+      "following_context_exact": true,
+      "current_following": [
+        "host_simulate();",
+        "setIP((WORD)vcSave.Eip);"
+      ],
+      "original_following": [
+        "host_simulate();",
+        "setIP((WORD)vcSave.Eip);"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1555,
+      "expression": "FASTBOPPING",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17",
+      "original_start": 1577,
+      "closure": "#else",
+      "prior_line_directives": [
+        [
+          1404,
+          "#line 1458"
+        ]
+      ],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 1608,
+      "current_logical_after": 1622,
+      "original_after": 1591,
+      "following_context_exact": true,
+      "current_following": [
+        "vcRemote.Eip   = getIP();",
+        "vcRemote.Esp   = getSP();",
+        "vcRemote.SegSs = getSS();",
+        "vcRemote.SegCs = getCS();"
+      ],
+      "original_following": [
+        "vcRemote.Eip   = getIP();",
+        "vcRemote.Esp   = getSP();",
+        "vcRemote.SegSs = getSS();",
+        "vcRemote.SegCs = getCS();"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1608,
+      "expression": "FASTBOPPING",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17",
+      "original_start": 1630,
+      "closure": "#endif",
+      "prior_line_directives": [
+        [
+          1404,
+          "#line 1458"
+        ]
+      ],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 1661,
+      "current_logical_after": 1668,
+      "original_after": 1637,
+      "following_context_exact": true,
+      "current_following": [
+        "} else {",
+        "//",
+        "// Decrement the count of 16-bit tasks so that the last one,",
+        "// excluding the remote handler (WOWDEB.EXE) will remember to",
+        "// call ExitKernel when done."
+      ],
+      "original_following": [
+        "} else {",
+        "//",
+        "// Decrement the count of 16-bit tasks so that the last one,",
+        "// excluding the remote handler (WOWDEB.EXE) will remember to",
+        "// call ExitKernel when done."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 1619,
+      "expression": "FASTBOPPING",
+      "source_sha256": "e8ad1f3cc14f163f656897c276bb7418d1b4bb66b7269873100e0d435d59a110",
+      "original_start": 1901,
+      "closure": "#endif",
+      "prior_line_directives": [
+        [
+          1574,
+          "#line 1891"
+        ]
+      ],
+      "status": "candidate: effective logical line and test context remain to verify",
+      "current_logical_arm": 1935,
+      "current_logical_after": 1938,
+      "original_after": 1904,
+      "following_context_exact": true,
+      "current_following": [
+        "return 1;",
+        "}",
+        "ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )",
+        "{"
+      ],
+      "original_following": [
+        "return 1;",
+        "}",
+        "ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )",
+        "{"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "scope": "scratch marker before FIX_BT_BUG first-depth conditional in actual x86 worker",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1456,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_directive_line": 1462,
+      "stderr": "",
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1528,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_directive_line": 1534,
+      "stderr": "",
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1602,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_directive_line": 1632,
+      "stderr": "",
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1672,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_directive_line": 1702,
+      "stderr": "",
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b"
+    }
+  ]
+}

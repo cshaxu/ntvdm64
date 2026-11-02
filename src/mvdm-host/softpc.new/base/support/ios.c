@@ -673,10 +673,9 @@ GLOBAL void
 io_define_inb(half_word adapter,
 	void (*func) IPT2(io_addr, io_address, half_word *, value))
 #else
-io_define_inb(adapter, func)
-half_word       adapter;
-void            (*func) ();
+#error Unsupported excluded original configuration
 #endif	/* ANSI */
+#line 680
 {
 	Ios_inb_function[adapter]  = FAST_FUNC_ADDR(func);
 	Ios_inw_function[adapter]  = FAST_FUNC_ADDR(generic_inw);

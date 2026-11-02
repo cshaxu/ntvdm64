@@ -1,0 +1,112 @@
+{
+  "scope": "staged ten-image product full selected gates",
+  "gates": [
+    {
+      "Gate": "guest-media",
+      "ElapsedMs": 1098,
+      "CleanupMs": 581,
+      "Passed": true
+    },
+    {
+      "Gate": "ntvdm-export-ordinals",
+      "ElapsedMs": 215,
+      "CleanupMs": 575,
+      "Passed": true
+    },
+    {
+      "Gate": "wow-frontiers",
+      "ElapsedMs": 66401,
+      "CleanupMs": 494,
+      "Passed": true
+    },
+    {
+      "Gate": "Console-17",
+      "ElapsedMs": 44025,
+      "CleanupMs": 495,
+      "Passed": true
+    },
+    {
+      "Gate": "Window-17",
+      "ElapsedMs": 43274,
+      "CleanupMs": 431,
+      "Passed": true
+    },
+    {
+      "Gate": "rpc",
+      "ElapsedMs": 14256,
+      "CleanupMs": 568,
+      "Passed": true
+    },
+    {
+      "Gate": "native-gui",
+      "ElapsedMs": 12246,
+      "CleanupMs": 657,
+      "Passed": true
+    },
+    {
+      "Gate": "version-negatives",
+      "ElapsedMs": 58326,
+      "CleanupMs": 537,
+      "Passed": true
+    },
+    {
+      "Gate": "strict-dir",
+      "ElapsedMs": 12701,
+      "CleanupMs": 540,
+      "Passed": true
+    },
+    {
+      "Gate": "modern-edit-return",
+      "ElapsedMs": 28204,
+      "CleanupMs": 449,
+      "Passed": true
+    },
+    {
+      "Gate": "cooked-return",
+      "ElapsedMs": 30368,
+      "CleanupMs": 694,
+      "Passed": true
+    },
+    {
+      "Gate": "rapid-relaunch",
+      "ElapsedMs": 7052,
+      "CleanupMs": 704,
+      "Passed": true
+    },
+    {
+      "Gate": "interactive-relaunch",
+      "ElapsedMs": 9117,
+      "CleanupMs": 514,
+      "Passed": true
+    },
+    {
+      "Gate": "session-isolation",
+      "ElapsedMs": 9749,
+      "CleanupMs": 500,
+      "Passed": true
+    },
+    {
+      "Gate": "retirement-wiring",
+      "ElapsedMs": 4740,
+      "CleanupMs": 517,
+      "Passed": true
+    },
+    {
+      "Gate": "nested-window-handoff",
+      "ElapsedMs": 6831,
+      "CleanupMs": 454,
+      "Passed": true
+    }
+  ],
+  "all_passed": true,
+  "elapsed_ms": 361991,
+  "candidate_manifest_sha256": "be7e807a21d75ed119143902bfa98e5817af1422d2e4ebc9cf5b2e51e454f8bd",
+  "limitations": [
+    "Optional DOS4GW/NESticle fixture not supplied.",
+    "WOW frontier observations are startup/window witnesses, not gameplay."
+  ],
+  "historical_test_setup_corrections": [
+    "First attempt used the wrong observer executable and produced no observation.",
+    "Second attempt passed first seven gates but used an incomplete cache for generated RPC headers; rerun points OPENNT_BROKER_PRODUCT_BUILD to the real NTSRV graph."
+  ]
+}

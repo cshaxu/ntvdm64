@@ -1,0 +1,1130 @@
+{
+  "scope": "ctags-assisted function ownership hints for every unresolved original first-depth multiplicity entry",
+  "records": [
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "directive": "if",
+      "expression": "defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 50,
+          "candidate_enclosing_functions": []
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 74,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "directive": "ifdef",
+      "expression": "_X86_",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 205,
+          "candidate_enclosing_functions": [
+            {
+              "name": "GetBinaryTypeW",
+              "start": 93,
+              "end": 301,
+              "name_present_current": true
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 2211,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "directive": "ifdef",
+      "expression": "_MIPS_",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 259,
+          "candidate_enclosing_functions": [
+            {
+              "name": "GetBinaryTypeW",
+              "start": 93,
+              "end": 301,
+              "name_present_current": true
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 2265,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "unpaired_count": 2,
+      "original_groups": [
+        {
+          "line": 23,
+          "candidate_enclosing_functions": []
+        },
+        {
+          "line": 572,
+          "candidate_enclosing_functions": [
+            {
+              "name": "DefWindowProcWorker",
+              "start": 555,
+              "end": 1217,
+              "name_present_current": true
+            }
+          ]
+        },
+        {
+          "line": 1214,
+          "candidate_enclosing_functions": [
+            {
+              "name": "DefWindowProcWorker",
+              "start": 555,
+              "end": 1217,
+              "name_present_current": true
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 56,
+          "depth": 2
+        },
+        {
+          "line": 400,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 327,
+          "candidate_enclosing_functions": [
+            {
+              "name": "SendMessageWorker",
+              "start": 258,
+              "end": 470,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 566,
+          "candidate_enclosing_functions": [
+            {
+              "name": "DefWindowProcWorker",
+              "start": 555,
+              "end": 1217,
+              "name_present_current": true
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 52,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "directive": "if",
+      "expression": "defined(FE_IME)",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 905,
+          "candidate_enclosing_functions": [
+            {
+              "name": "DefWindowProcWorker",
+              "start": 555,
+              "end": 1217,
+              "name_present_current": true
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 392,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "unpaired_count": 2,
+      "original_groups": [
+        {
+          "line": 881,
+          "candidate_enclosing_functions": [
+            {
+              "name": "CreateIcoCur",
+              "start": 868,
+              "end": 904,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 3901,
+          "candidate_enclosing_functions": [
+            {
+              "name": "GetIcoCurBpp",
+              "start": 3896,
+              "end": 3913,
+              "name_present_current": false
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "directive": "if",
+      "expression": "0",
+      "unpaired_count": 7,
+      "original_groups": [
+        {
+          "line": 1480,
+          "candidate_enclosing_functions": [
+            {
+              "name": "CreateIconFromResourceEx",
+              "start": 1455,
+              "end": 1497,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 1674,
+          "candidate_enclosing_functions": [
+            {
+              "name": "CreateScreenBitmap",
+              "start": 1565,
+              "end": 1719,
+              "name_present_current": true
+            }
+          ]
+        },
+        {
+          "line": 2298,
+          "candidate_enclosing_functions": [
+            {
+              "name": "LoadImageW",
+              "start": 2278,
+              "end": 2327,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 2624,
+          "candidate_enclosing_functions": [
+            {
+              "name": "LoadIcoCur",
+              "start": 2492,
+              "end": 2680,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 3751,
+          "candidate_enclosing_functions": [
+            {
+              "name": "MatchImage",
+              "start": 3703,
+              "end": 3763,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 4516,
+          "candidate_enclosing_functions": [
+            {
+              "name": "InternalCopyImage",
+              "start": 4497,
+              "end": 4536,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 4574,
+          "candidate_enclosing_functions": [
+            {
+              "name": "RtlGetIdFromDirectory",
+              "start": 4546,
+              "end": 4597,
+              "name_present_current": false
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 671,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "directive": "ifdef",
+      "expression": "LATER",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 2640,
+          "candidate_enclosing_functions": [
+            {
+              "name": "LoadIcoCur",
+              "start": 2492,
+              "end": 2680,
+              "name_present_current": false
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 221,
+          "candidate_enclosing_functions": [
+            {
+              "name": "IsDialogMessageA",
+              "start": 213,
+              "end": 255,
+              "name_present_current": true
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 245,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 240,
+          "candidate_enclosing_functions": [
+            {
+              "name": "IsDialogMessageA",
+              "start": 213,
+              "end": 255,
+              "name_present_current": true
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 256,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "directive": "ifdef",
+      "expression": "LATER",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 281,
+          "candidate_enclosing_functions": [
+            {
+              "name": "IsDialogMessageW",
+              "start": 257,
+              "end": 634,
+              "name_present_current": true
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 297,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "directive": "if",
+      "expression": "0",
+      "unpaired_count": 2,
+      "original_groups": [
+        {
+          "line": 209,
+          "candidate_enclosing_functions": [
+            {
+              "name": "ClientDrawState",
+              "start": 73,
+              "end": 490,
+              "name_present_current": true
+            }
+          ]
+        },
+        {
+          "line": 251,
+          "candidate_enclosing_functions": [
+            {
+              "name": "ClientDrawState",
+              "start": 73,
+              "end": 490,
+              "name_present_current": true
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 147,
+          "depth": 2
+        },
+        {
+          "line": 183,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "unpaired_count": 3,
+      "original_groups": [
+        {
+          "line": 77,
+          "candidate_enclosing_functions": [
+            {
+              "name": "UpdatePerUserSystemParameters",
+              "start": 65,
+              "end": 99,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 717,
+          "candidate_enclosing_functions": [
+            {
+              "name": "_PeekMessage",
+              "start": 680,
+              "end": 803,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 1020,
+          "candidate_enclosing_functions": [
+            {
+              "name": "TranslateMessage",
+              "start": 1017,
+              "end": 1035,
+              "name_present_current": false
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "LATER",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 358,
+          "candidate_enclosing_functions": [
+            {
+              "name": "GetWindowPlacement",
+              "start": 354,
+              "end": 378,
+              "name_present_current": false
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "MEMPHIS_MENUS",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 380,
+          "candidate_enclosing_functions": []
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "MEMPHIS_MENU_WATERMARKS",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 500,
+          "candidate_enclosing_functions": []
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "unpaired_count": 6,
+      "original_groups": [
+        {
+          "line": 693,
+          "candidate_enclosing_functions": [
+            {
+              "name": "_PeekMessage",
+              "start": 680,
+              "end": 803,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 753,
+          "candidate_enclosing_functions": [
+            {
+              "name": "_PeekMessage",
+              "start": 680,
+              "end": 803,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 769,
+          "candidate_enclosing_functions": [
+            {
+              "name": "_PeekMessage",
+              "start": 680,
+              "end": 803,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 784,
+          "candidate_enclosing_functions": [
+            {
+              "name": "_PeekMessage",
+              "start": 680,
+              "end": 803,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 797,
+          "candidate_enclosing_functions": [
+            {
+              "name": "_PeekMessage",
+              "start": 680,
+              "end": 803,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 1611,
+          "candidate_enclosing_functions": []
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "unpaired_count": 3,
+      "original_groups": [
+        {
+          "line": 953,
+          "candidate_enclosing_functions": [
+            {
+              "name": "_SetWindowLong",
+              "start": 827,
+              "end": 981,
+              "name_present_current": true
+            }
+          ]
+        },
+        {
+          "line": 965,
+          "candidate_enclosing_functions": [
+            {
+              "name": "_SetWindowLong",
+              "start": 827,
+              "end": 981,
+              "name_present_current": true
+            }
+          ]
+        },
+        {
+          "line": 2204,
+          "candidate_enclosing_functions": [
+            {
+              "name": "BroadcastSystemMessageWorker",
+              "start": 2160,
+              "end": 2261,
+              "name_present_current": false
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 214,
+          "depth": 2
+        },
+        {
+          "line": 226,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "directive": "if",
+      "expression": "DBG",
+      "unpaired_count": 4,
+      "original_groups": [
+        {
+          "line": 319,
+          "candidate_enclosing_functions": [
+            {
+              "name": "AllocLookasideEntry",
+              "start": 300,
+              "end": 335,
+              "name_present_current": true
+            }
+          ]
+        },
+        {
+          "line": 326,
+          "candidate_enclosing_functions": [
+            {
+              "name": "AllocLookasideEntry",
+              "start": 300,
+              "end": 335,
+              "name_present_current": true
+            }
+          ]
+        },
+        {
+          "line": 349,
+          "candidate_enclosing_functions": [
+            {
+              "name": "FreeLookasideEntry",
+              "start": 345,
+              "end": 366,
+              "name_present_current": true
+            }
+          ]
+        },
+        {
+          "line": 361,
+          "candidate_enclosing_functions": [
+            {
+              "name": "FreeLookasideEntry",
+              "start": 345,
+              "end": 366,
+              "name_present_current": true
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 189,
+          "depth": 2
+        },
+        {
+          "line": 196,
+          "depth": 2
+        },
+        {
+          "line": 215,
+          "depth": 2
+        },
+        {
+          "line": 227,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "directive": "ifndef",
+      "expression": "_USERCLI_",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 15,
+          "candidate_enclosing_functions": []
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "directive": "if",
+      "expression": "DBG",
+      "unpaired_count": 2,
+      "original_groups": [
+        {
+          "line": 2307,
+          "candidate_enclosing_functions": []
+        },
+        {
+          "line": 2320,
+          "candidate_enclosing_functions": []
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 81,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "directive": "if",
+      "expression": "HANDLE_FIXUP",
+      "unpaired_count": 2,
+      "original_groups": [
+        {
+          "line": 2342,
+          "candidate_enclosing_functions": []
+        },
+        {
+          "line": 2358,
+          "candidate_enclosing_functions": []
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 2374,
+          "candidate_enclosing_functions": []
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "unpaired_count": 7,
+      "original_groups": [
+        {
+          "line": 53,
+          "candidate_enclosing_functions": []
+        },
+        {
+          "line": 481,
+          "candidate_enclosing_functions": []
+        },
+        {
+          "line": 583,
+          "candidate_enclosing_functions": []
+        },
+        {
+          "line": 833,
+          "candidate_enclosing_functions": [
+            {
+              "name": "InitSyncOnlyMessages",
+              "start": 730,
+              "end": 878,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 990,
+          "candidate_enclosing_functions": [
+            {
+              "name": "InitFunctionTables",
+              "start": 928,
+              "end": 1021,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 1054,
+          "candidate_enclosing_functions": [
+            {
+              "name": "InitMessageTables",
+              "start": 1032,
+              "end": 1057,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 1861,
+          "candidate_enclosing_functions": [
+            {
+              "name": "UserInitialize",
+              "start": 1691,
+              "end": 1934,
+              "name_present_current": false
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 377,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "if",
+      "expression": "0",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 461,
+          "candidate_enclosing_functions": []
+        }
+      ],
+      "current_nested_structural_locations_only": [
+        {
+          "line": 278,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "unpaired_count": 5,
+      "original_groups": [
+        {
+          "line": 850,
+          "candidate_enclosing_functions": [
+            {
+              "name": "InitSyncOnlyMessages",
+              "start": 730,
+              "end": 878,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 934,
+          "candidate_enclosing_functions": [
+            {
+              "name": "InitFunctionTables",
+              "start": 928,
+              "end": 1021,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 1002,
+          "candidate_enclosing_functions": [
+            {
+              "name": "InitFunctionTables",
+              "start": 928,
+              "end": 1021,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 1163,
+          "candidate_enclosing_functions": [
+            {
+              "name": "InitGlobalRIPFlags",
+              "start": 1160,
+              "end": 1211,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 1822,
+          "candidate_enclosing_functions": [
+            {
+              "name": "UserInitialize",
+              "start": 1691,
+              "end": 1934,
+              "name_present_current": false
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifndef",
+      "expression": "PAGE_SIZE",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 1257,
+          "candidate_enclosing_functions": []
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "ANDREVA_DBG",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 1703,
+          "candidate_enclosing_functions": [
+            {
+              "name": "UserInitialize",
+              "start": 1691,
+              "end": 1934,
+              "name_present_current": false
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 17,
+          "candidate_enclosing_functions": []
+        },
+        {
+          "line": 59,
+          "candidate_enclosing_functions": [
+            {
+              "name": "WCSToMBEx",
+              "start": 50,
+              "end": 186,
+              "name_present_current": true
+            }
+          ]
+        },
+        {
+          "line": 146,
+          "candidate_enclosing_functions": [
+            {
+              "name": "WCSToMBEx",
+              "start": 50,
+              "end": 186,
+              "name_present_current": true
+            }
+          ]
+        },
+        {
+          "line": 270,
+          "candidate_enclosing_functions": [
+            {
+              "name": "MBToWCSEx",
+              "start": 190,
+              "end": 311,
+              "name_present_current": true
+            }
+          ]
+        },
+        {
+          "line": 378,
+          "candidate_enclosing_functions": [
+            {
+              "name": "RtlWCSMessageWParamCharToMB",
+              "start": 323,
+              "end": 429,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 515,
+          "candidate_enclosing_functions": [
+            {
+              "name": "RtlMBMessageWParamCharToWCS",
+              "start": 442,
+              "end": 548,
+              "name_present_current": true
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "unpaired_count": 3,
+      "original_groups": [
+        {
+          "line": 326,
+          "candidate_enclosing_functions": [
+            {
+              "name": "RtlWCSMessageWParamCharToMB",
+              "start": 323,
+              "end": 429,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 351,
+          "candidate_enclosing_functions": [
+            {
+              "name": "RtlWCSMessageWParamCharToMB",
+              "start": 323,
+              "end": 429,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 393,
+          "candidate_enclosing_functions": [
+            {
+              "name": "RtlWCSMessageWParamCharToMB",
+              "start": 323,
+              "end": 429,
+              "name_present_current": false
+            }
+          ]
+        },
+        {
+          "line": 446,
+          "candidate_enclosing_functions": [
+            {
+              "name": "RtlMBMessageWParamCharToWCS",
+              "start": 442,
+              "end": 548,
+              "name_present_current": true
+            }
+          ]
+        },
+        {
+          "line": 457,
+          "candidate_enclosing_functions": [
+            {
+              "name": "RtlMBMessageWParamCharToWCS",
+              "start": 442,
+              "end": 548,
+              "name_present_current": true
+            }
+          ]
+        },
+        {
+          "line": 530,
+          "candidate_enclosing_functions": [
+            {
+              "name": "RtlMBMessageWParamCharToWCS",
+              "start": 442,
+              "end": 548,
+              "name_present_current": true
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "unpaired_count": 1,
+      "original_groups": [
+        {
+          "line": 337,
+          "candidate_enclosing_functions": [
+            {
+              "name": "RtlWCSMessageWParamCharToMB",
+              "start": 323,
+              "end": 429,
+              "name_present_current": false
+            }
+          ]
+        }
+      ],
+      "current_nested_structural_locations_only": []
+    }
+  ],
+  "limitations": [
+    "Ctags is heuristic and only suggests function ownership; unpaired group selection and physical source ranges require explicit proof.",
+    "A function absent from the current tag list may be hidden by macros or parsing; do not delete or resolve solely from this output.",
+    "No child branch semantics were inspected."
+  ]
+}

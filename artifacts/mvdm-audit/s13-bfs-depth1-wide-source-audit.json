@@ -1,0 +1,2202 @@
+{
+  "scope": "all pending first-depth #ifdef source-file arms with actual compiler include closures and default-macro probes",
+  "trace_path": "build/t473-s13/bfs-depth1-wide-macro-audit/include-trace.json",
+  "trace_records": 105,
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "macro": "i386",
+      "start": 94,
+      "cut": 98,
+      "end": 98,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "body_sha256": "05bd14ebc66fe0049a353282e3ab92c0023c41afaae1f50eafcb646aaeb98837",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "macro": "i386",
+      "start": 422,
+      "cut": 428,
+      "end": 428,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "body_sha256": "fb2a62acbafeaca0999b326da82107900280acc4d02299113eb5dfce9ef38c51",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "macro": "i386",
+      "start": 796,
+      "cut": 823,
+      "end": 868,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_exact_body_matches": [
+        689
+      ],
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "body_sha256": "0ab4c9148d3e958000d9cbac33e34f884e9d5f7fe22b71a1d4fd267d925f2156",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "macro": "i386",
+      "start": 909,
+      "cut": 932,
+      "end": 965,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_exact_body_matches": [
+        798
+      ],
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "body_sha256": "28472b3bc4ee4964e974722a4eb4887d54ada6004098ac9d141c4d5335988ab3",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "macro": "i386",
+      "start": 305,
+      "cut": 309,
+      "end": 309,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiselr.c",
+      "original_exact_body_matches": [
+        164
+      ],
+      "source_sha256": "bbd70c5fe50084e64704fde231206ea4999f3ea3442a67719b3c2db1e86f8b24",
+      "body_sha256": "ed8a053263ddae9da5ba51dba1086d69a9377754890f539d5d01675de6a16241",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "macro": "DBCS",
+      "start": 135,
+      "cut": 137,
+      "end": 139,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "original_exact_body_matches": [
+        135
+      ],
+      "source_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "body_sha256": "e11d822337703e561993994971ed1d7e8fe6d40cf566c88d0d06357ebe4fb992",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "macro": "Verbose",
+      "start": 205,
+      "cut": 213,
+      "end": 213,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "original_exact_body_matches": [
+        201
+      ],
+      "source_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "body_sha256": "1e7a7348ccb05c079fd696d449bc7244de9a12f825679585614d29c08286e98b",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "macro": "NT_ALLOC_DOS_MEM",
+      "start": 1456,
+      "cut": 1473,
+      "end": 1473,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "original_exact_body_matches": [
+        1453
+      ],
+      "source_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "body_sha256": "039125450bd1f9ee1d3a8abc762a73ffd0560e542c0ed692afcea2dbfc529648",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "macro": "NT_ALLOC_DOS_MEM",
+      "start": 1496,
+      "cut": 1517,
+      "end": 1517,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "original_exact_body_matches": [
+        1493
+      ],
+      "source_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "body_sha256": "88dab1d5e4cda10c10d4515085766ff7425c46179fe9d2cdd76c55117b539b0d",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "macro": "NT_ALLOC_DOS_MEM",
+      "start": 1541,
+      "cut": 1563,
+      "end": 1563,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "original_exact_body_matches": [
+        1538
+      ],
+      "source_sha256": "77ba3da8029e3ee88c7842efdb9ea996636f1ea941cae15fb4ba56c0273a8db9",
+      "body_sha256": "6cf089db36fa2f2ee6a8b917659320d6897f40768b2710b635e0789c56bdfbbb",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "macro": "HFX",
+      "start": 84,
+      "cut": 87,
+      "end": 87,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\bios.c",
+      "original_exact_body_matches": [
+        84
+      ],
+      "source_sha256": "db5481c11626d9b5f13cfedd51b005c8bd3a33450a8e85282aff2fb8fd84c072",
+      "body_sha256": "01c989a882cf28b38132b31f32ec03927b291b8ed34f2b11a80c6b0544e3a799",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "macro": "DPMI",
+      "start": 108,
+      "cut": 110,
+      "end": 110,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_exact_body_matches": [
+        108
+      ],
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe",
+      "body_sha256": "549414526ad992a8c3ecde18b0c62caec169f7530938e169d18cbb2a802eac06",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "macro": "FLOPPY_B",
+      "start": 313,
+      "cut": 319,
+      "end": 321,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_exact_body_matches": [
+        323
+      ],
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe",
+      "body_sha256": "6c7c4858ba44b8f0b69291b360d97964d277cc94e14ed750f75ff80c543f7793",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "macro": "IPC",
+      "start": 636,
+      "cut": 638,
+      "end": 638,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_exact_body_matches": [
+        812
+      ],
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe",
+      "body_sha256": "c3020c18b10537115a9f644d8d6f67fe130f53a1c1f15efaee9f013ef5e892b2",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "macro": "HFX",
+      "start": 811,
+      "cut": 813,
+      "end": 813,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
+      "original_exact_body_matches": [
+        1093
+      ],
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe",
+      "body_sha256": "efb005dc1c38715bfd2aa976b5862aee04dbaa85072175be578bea48de35fcba",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "start": 226,
+      "cut": 237,
+      "end": 245,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_intr.c",
+      "original_exact_body_matches": [
+        226
+      ],
+      "source_sha256": "099596740c9523768c5d3d3afed2a3d5139ee6db1a083b6ec812e6fd93ae5988",
+      "body_sha256": "99d1c7a7bd0518b9b34bdd7323d08d3cde34a74a9cb310e2a9d43ca338c4c95e",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "macro": "CPU_486",
+      "start": 166,
+      "cut": 173,
+      "end": 173,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
+      "original_exact_body_matches": [
+        155
+      ],
+      "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+      "body_sha256": "710dca6cf17a263fae99e33c401b16a444063f79a9ee22df62bef4733a550aa8",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "start": 145,
+      "cut": 150,
+      "end": 177,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xfer.c",
+      "original_exact_body_matches": [
+        143
+      ],
+      "source_sha256": "638d1977b8f588eca74a01f81d1f34372d1c67646da3f0a697a00c92c59e5ae9",
+      "body_sha256": "90e541f090f686e9cfcfe57c3481a0ae65f6a4be11eda99f4b5012be45af1042",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "start": 140,
+      "cut": 146,
+      "end": 154,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\call.c",
+      "original_exact_body_matches": [
+        88
+      ],
+      "source_sha256": "ea0e61f2eb649a8c4109611091db3cf5d98e0600a425b31784591e9316ae2b0c",
+      "body_sha256": "db05de255da06904d87b78e59b094a53b7dad30d7921f410ef514136332f3449",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "start": 306,
+      "cut": 311,
+      "end": 338,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\call.c",
+      "original_exact_body_matches": [
+        257
+      ],
+      "source_sha256": "ea0e61f2eb649a8c4109611091db3cf5d98e0600a425b31784591e9316ae2b0c",
+      "body_sha256": "a70206e7829469bbf11d3d10cca4809686617ba896bca163d6b09ed57793f3a4",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "start": 369,
+      "cut": 374,
+      "end": 401,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\call.c",
+      "original_exact_body_matches": [
+        320
+      ],
+      "source_sha256": "ea0e61f2eb649a8c4109611091db3cf5d98e0600a425b31784591e9316ae2b0c",
+      "body_sha256": "bbbb9b7ef6a45614dad0ada831d3519e343a6a6acbfdbf08236145b0bff64636",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "start": 104,
+      "cut": 110,
+      "end": 118,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\iret.c",
+      "original_exact_body_matches": [
+        104
+      ],
+      "source_sha256": "c9e2e694604d71064ae87351b9e23c76b0e0835a274e600b3d98b2818d5160b3",
+      "body_sha256": "a1b8ab7f321b261dc35a4580ba5b0720881879638619af4648115c7219f403d8",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "start": 70,
+      "cut": 80,
+      "end": 88,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\jmp.c",
+      "original_exact_body_matches": [
+        70
+      ],
+      "source_sha256": "470889ec4ca8311980f1b700e56d028009fc459c47eb484e1451a799ac7feb87",
+      "body_sha256": "0699ea93827f1f2d5da7986190ee62dbec03004d1234a53e0b0978da5eb980fb",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "start": 148,
+      "cut": 153,
+      "end": 180,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\jmp.c",
+      "original_exact_body_matches": [
+        148
+      ],
+      "source_sha256": "470889ec4ca8311980f1b700e56d028009fc459c47eb484e1451a799ac7feb87",
+      "body_sha256": "9b51f3ad84113f2b769deb17b67c61b92a41c666e3b9ca450328d1417367be16",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "macro": "DOUBLE_CPU",
+      "start": 47,
+      "cut": 49,
+      "end": 49,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lgdt.c",
+      "original_exact_body_matches": [
+        47,
+        65
+      ],
+      "source_sha256": "b54f96092ac6d18e780a73c9833c35e26ac6871284e025801059bd4f3333e507",
+      "body_sha256": "8be116d1b71bed4b7b6ab88a8721d1d22b38021c807635334ecc774d8227dbb7",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "macro": "DOUBLE_CPU",
+      "start": 65,
+      "cut": 67,
+      "end": 67,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lgdt.c",
+      "original_exact_body_matches": [
+        47,
+        65
+      ],
+      "source_sha256": "b54f96092ac6d18e780a73c9833c35e26ac6871284e025801059bd4f3333e507",
+      "body_sha256": "8be116d1b71bed4b7b6ab88a8721d1d22b38021c807635334ecc774d8227dbb7",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "start": 86,
+      "cut": 92,
+      "end": 100,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ret.c",
+      "original_exact_body_matches": [
+        86
+      ],
+      "source_sha256": "62aa2efe949ffc7afcfc1dff6b5ef96d749b06b4db362122cea861822d179df1",
+      "body_sha256": "89fb9ec1fa0a4639e32bc1f9c7ce8b56c3c38f8d93a674ff2d13ea38e602762d",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "macro": "PROFILE",
+      "start": 41,
+      "cut": 3297,
+      "end": 3301,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\profile.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "9070fd972a92da845354cfcbb0ee8b58569dc9ea1b5319f22f76edb2a346f3e7",
+      "body_sha256": "e7369ae3424afe2451562f7bb8f04cb83a2b9b562d53665f6842b27d12666780",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "macro": "WDCTRL_BOP",
+      "start": 1007,
+      "cut": 1195,
+      "end": 1195,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\diskbios.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "89112dc9a067b3a2e80bb450b7b392003b4379beaac961992ec90325e355114c",
+      "body_sha256": "4ee4904b749db9ea9c01bdf5afb08bf12605ff930f26e460d33ba5fe5dc593c4",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "macro": "FLOPPIES_KEEP_TRYING",
+      "start": 2891,
+      "cut": 2906,
+      "end": 2906,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "original_exact_body_matches": [
+        3020
+      ],
+      "source_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
+      "body_sha256": "f75e95bb0df94b999ee28bea3d717db88052cb2d988df28ffa26d22f1fa4a86f",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "macro": "KIPPER",
+      "start": 367,
+      "cut": 372,
+      "end": 372,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "original_exact_body_matches": [
+        404
+      ],
+      "source_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
+      "body_sha256": "e6731d4894c6c3acd596c5943c4899b4dbe5df096fa589eeca6ed19b8d4d2152",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "macro": "SECURE",
+      "start": 160,
+      "cut": 173,
+      "end": 173,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "body_sha256": "ea78abd16b654faa55f5b6f8ab85c5196df578cc94a979d6ebe59dbc1c24e801",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "macro": "IPC",
+      "start": 288,
+      "cut": 290,
+      "end": 290,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+      "original_exact_body_matches": [
+        296
+      ],
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "body_sha256": "b3e5a659c33a0db1a0d768ddf27381d70c1fda52fd4f6e89489441305384b8d1",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "macro": "HFX",
+      "start": 327,
+      "cut": 329,
+      "end": 329,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\main.c",
+      "original_exact_body_matches": [
+        335
+      ],
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679",
+      "body_sha256": "9a6b918ae0b076c8915193662bf2747aae637da2af57e0b26675e71c13328107",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "macro": "MSWDVR",
+      "start": 73,
+      "cut": 75,
+      "end": 75,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\terminat.c",
+      "original_exact_body_matches": [
+        69
+      ],
+      "source_sha256": "21846776c2f3538e914cd255780d7e252e9381e2a82ed299709046752f320625",
+      "body_sha256": "e99e18b42442949475f6d3139487937b76268514e124838bafea4f214e249469",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "macro": "FLOPPY_B",
+      "start": 112,
+      "cut": 114,
+      "end": 114,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\terminat.c",
+      "original_exact_body_matches": [
+        112
+      ],
+      "source_sha256": "21846776c2f3538e914cd255780d7e252e9381e2a82ed299709046752f320625",
+      "body_sha256": "39b2cacb1307198bd73a095d6370874e9eca734362375524f1a96a7d0d27f5bb",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "macro": "XTSFD",
+      "start": 89,
+      "cut": 91,
+      "end": 91,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "original_exact_body_matches": [
+        89
+      ],
+      "source_sha256": "1430887916bcd42c4f7da75cbdff04a8823658a508b823d61e9784489a1e1152",
+      "body_sha256": "e5b2fbafd8c54ecbb506d7fe5cb8c7a8e5249985cc23c3e262327ddae1af0686",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "macro": "XTSFD",
+      "start": 300,
+      "cut": 314,
+      "end": 317,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "original_exact_body_matches": [
+        377
+      ],
+      "source_sha256": "1430887916bcd42c4f7da75cbdff04a8823658a508b823d61e9784489a1e1152",
+      "body_sha256": "ebe30b8932d9907861a4029d02ef1070970f3ba440e3ebd669a9a5c8f173bf2a",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+      "macro": "FLOPPY_B",
+      "start": 462,
+      "cut": 466,
+      "end": 466,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\cmosnt.c",
+      "original_exact_body_matches": [
+        468
+      ],
+      "source_sha256": "15b7a31b1c60a63d566a14a2cafa2524e528b9dc4f38e7c0d2b6b6c4df49a0fb",
+      "body_sha256": "99416dc8961f081bb001d5513dd841c1217de2b905db5bcc9d17dec3f6d25fb4",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "macro": "HOOKED_IRETS",
+      "start": 272,
+      "cut": 276,
+      "end": 276,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "original_exact_body_matches": [
+        305
+      ],
+      "source_sha256": "ad063a5df6d1962c66e6ea02fc1125921fc49f57464d19b7667360aa51b0bb0c",
+      "body_sha256": "b9d9a7ac8b62adaece5cc833ac82b72ecbb630274013c9bf0c86d625bea6820a",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "macro": "HOOKED_IRETS",
+      "start": 334,
+      "cut": 336,
+      "end": 336,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "original_exact_body_matches": [
+        367
+      ],
+      "source_sha256": "ad063a5df6d1962c66e6ea02fc1125921fc49f57464d19b7667360aa51b0bb0c",
+      "body_sha256": "3512cd3e914597284393343b45d78a11ba555dfdcbdcbff463d9beaa194f5c2a",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "macro": "HOOKED_IRETS",
+      "start": 1327,
+      "cut": 1493,
+      "end": 1493,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\ica.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "ad063a5df6d1962c66e6ea02fc1125921fc49f57464d19b7667360aa51b0bb0c",
+      "body_sha256": "f1f4600c1e52238d35524a8e7c04ce0fbcf1301296483a16d27ba1426ce91623",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "macro": "DELAYED_INTS",
+      "start": 1880,
+      "cut": 1883,
+      "end": 1898,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_exact_body_matches": [
+        2188
+      ],
+      "source_sha256": "86936aef29e5d5d3a02166375586bffdcdf4afb48c5d9f50532947516cbbfa51",
+      "body_sha256": "6cca0c83e0554a70ceb97eee8f72918046288946f5ebffba8a8f8147cda61c49",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "macro": "DOCUMENTATION",
+      "start": 2235,
+      "cut": 2239,
+      "end": 2239,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "86936aef29e5d5d3a02166375586bffdcdf4afb48c5d9f50532947516cbbfa51",
+      "body_sha256": "ca24f42ad698282f72d5475aae26edfffbb37a9ffb6f60dfaa8cb55900644eb6",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "macro": "NO_STRING_OPERATIONS",
+      "start": 161,
+      "cut": 163,
+      "end": 165,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
+      "original_exact_body_matches": [
+        186
+      ],
+      "source_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
+      "body_sha256": "0b45f7cfa8ebb0b2a1360f6c2bfa9ced8d3f5f896d2323c6580c23f18ff5ef99",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "macro": "X86GFX",
+      "start": 192,
+      "cut": 234,
+      "end": 234,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\config.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "2f3eb38b7e7870906f54f38385ac9ec46ce07f64ce984f575ace81e1e51f901e",
+      "body_sha256": "b044aca676c07743f2bea8cd0a3c0c544587dfc8c6387c58f04a271233edb84c",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "macro": "i386",
+      "start": 980,
+      "cut": 1013,
+      "end": 1013,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "b15645093ecca3a50b49f007e9f9abbd64fff651ea240e266e72776a700b4ba0",
+      "body_sha256": "9bf4ed1862082d755297cb80a1a565cf129f8918d7c3df57f0cfb802938ea0e8",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "macro": "I286",
+      "start": 60,
+      "cut": 67,
+      "end": 67,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cpu.c",
+      "original_exact_body_matches": [
+        48
+      ],
+      "source_sha256": "ae87a5bf7ecfd807b59081e9fda485c92e0059c2bf647be6c28347c826adbff5",
+      "body_sha256": "8f54e8741c2fd33da03b3fab6eb3747822670c3a1513cc2dc652a51b6e653528",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "macro": "_ALPHA_",
+      "start": 102,
+      "cut": 116,
+      "end": 116,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cpu.c",
+      "original_exact_body_matches": [
+        86
+      ],
+      "source_sha256": "ae87a5bf7ecfd807b59081e9fda485c92e0059c2bf647be6c28347c826adbff5",
+      "body_sha256": "565b675d0a084d01f21e58b12bf6985b0dc9268a5ec522c39cc90d9264394f31",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "macro": "X86GFX",
+      "start": 240,
+      "cut": 1367,
+      "end": 1367,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_det.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "3d2ed5781ebd7644c4f52e98bd522c1541be6998905b81c53879824182aa1ce9",
+      "body_sha256": "d5a9fca1c267df6303bad0efa50174fb10269777f21c9219460e9d9fe7a2c2bb",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "macro": "PLANEDUMPER",
+      "start": 1369,
+      "cut": 1420,
+      "end": 1420,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_det.c",
+      "original_exact_body_matches": [
+        1560
+      ],
+      "source_sha256": "3d2ed5781ebd7644c4f52e98bd522c1541be6998905b81c53879824182aa1ce9",
+      "body_sha256": "419b6f3e08090714d97a3b22a597cde75e47b423b8766fed2ae7b9be88c37175",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "macro": "X86GFX",
+      "start": 1479,
+      "cut": 1481,
+      "end": 1481,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "body_sha256": "4544864edd001c0b0dfd6113dec86e94b897cd4308d2160b081f70b25223db2e",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "macro": "X86GFX",
+      "start": 1508,
+      "cut": 1514,
+      "end": 1514,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_event.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "body_sha256": "15aefc24598616880f57b950ab50923b3a1e6f3923e668aeee4c78e5f533fcd7",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "start": 201,
+      "cut": 204,
+      "end": 204,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "body_sha256": "3ebfe6d6f368080f52c1604250d7084b1a68a335c153c60e4eff841dde3c1049",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "start": 222,
+      "cut": 512,
+      "end": 512,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "body_sha256": "bdeb154b90f4d4ea50f10d31dc89fffd98a3bd2ffd8514dcc27d611290094fa6",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "start": 537,
+      "cut": 540,
+      "end": 540,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "body_sha256": "f480a6c1126c7e9b7508b902d7ee8269de73ac2fc7e814c6db25af2dad8fc71b",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "start": 592,
+      "cut": 595,
+      "end": 595,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "body_sha256": "ecfbe6918247567a2e8625d35b5e8ccf5cfbeea301dc59eb15a6d356bab86db4",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "start": 654,
+      "cut": 665,
+      "end": 665,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "body_sha256": "ecc9fd8e84a21e8e346f8b5506c6d625af83f368d63422a02c0f5b187a398dc0",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "start": 811,
+      "cut": 1029,
+      "end": 1029,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "body_sha256": "2fa2c1999e74e00aed377f33f0de2e4b72d51a9ddcc56b76e4b8039a9d42bc05",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "start": 1039,
+      "cut": 1229,
+      "end": 1229,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "body_sha256": "a61774d4296ba01985d666c637a384f3e7e354138116fd6d80e5815a80aa0b60",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "start": 1593,
+      "cut": 1596,
+      "end": 1596,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "body_sha256": "91ce8f7b67c060846f393ff4647b7c541322d9c8666b5d1b48c2706133a61f0b",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "start": 1620,
+      "cut": 1623,
+      "end": 1623,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "body_sha256": "e6b425eb10874693054aeb80a2281d933482a871366c2e4e61258bf189c278f7",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "start": 1637,
+      "cut": 1640,
+      "end": 1640,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "body_sha256": "27142e2326c6391b805752a48114e7f1347f79039632f2af4b048b975f8f5ec1",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "macro": "X86GFX",
+      "start": 1751,
+      "cut": 1754,
+      "end": 1754,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_fulsc.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "564261e0ba2fbdc644c7d6221278ebcfcc62663df794c1567e0043a999ec00e7",
+      "body_sha256": "c6b3b1f107308b83660bdea44f841e0f9cdacd94fae9bb8d576dc4bdd825217b",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "macro": "X86GFX",
+      "start": 2081,
+      "cut": 2085,
+      "end": 2085,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_graph.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "body_sha256": "6b1242dc8ec73b7ba5b72a19dd41b53ef87af86b1ff770333bbc83b99d779f6e",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "macro": "NOTUSEDNOTUSED",
+      "start": 382,
+      "cut": 427,
+      "end": 427,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "0b5d06d2a7a3f714a6f1a607ac9476fb5c0ae490832a8e45d43acc58fd3b505f",
+      "body_sha256": "9e7f40b5afad57a1ac73e53e1b04e48d23d286f6f3fa1663e7b483d5bfaf6615",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "macro": "EJECT_FLOPPY",
+      "start": 229,
+      "cut": 231,
+      "end": 231,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
+      "original_exact_body_matches": [
+        247
+      ],
+      "source_sha256": "cced3337564ac40552044a79b0eaf0bc858266a8241c6c4f5df19600a4f5931c",
+      "body_sha256": "04643aa8abf5b385bfcb5a635b73f869e0d8d0bf3a9074a1797ccc3c88e95b69",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "macro": "EJECT_FLOPPY",
+      "start": 341,
+      "cut": 343,
+      "end": 343,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
+      "original_exact_body_matches": [
+        393
+      ],
+      "source_sha256": "cced3337564ac40552044a79b0eaf0bc858266a8241c6c4f5df19600a4f5931c",
+      "body_sha256": "d219b4f4343f5d24207e54bb56a4b8cbd522d07e7beb45090e2f19a90257967e",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "macro": "EJECT_FLOPPY",
+      "start": 382,
+      "cut": 417,
+      "end": 417,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
+      "original_exact_body_matches": [
+        468
+      ],
+      "source_sha256": "cced3337564ac40552044a79b0eaf0bc858266a8241c6c4f5df19600a4f5931c",
+      "body_sha256": "aa5bc9dba1f1bcc28d9b704c1440ae90d8523d6f42d929cf9a3ecdd3554d6ff0",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sas.c",
+      "macro": "HOST_SAS",
+      "start": 32,
+      "cut": 117,
+      "end": 117,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_sas.c",
+      "original_exact_body_matches": [],
+      "source_sha256": "acc0798371852cf6c2600047957551381ed1fbe279ab366b0b206105a199790c",
+      "body_sha256": "7d9220bfb83a2916cd54f7cb5ccc712886b3e920b86a6a2618107d811ae82a4d",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "macro": "NO_LONGER_USED",
+      "start": 324,
+      "cut": 349,
+      "end": 349,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_unix.c",
+      "original_exact_body_matches": [
+        317
+      ],
+      "source_sha256": "cde2f17ba7f8d725d31a70e4697ed25d9ba7fd4d33c3d7ee4e496dedb874f3c2",
+      "body_sha256": "7c9d594efb80fb1020825a9c319433096f5df1bde635578cf45902d9d71a06a0",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "macro": "NOT_IN_USE",
+      "start": 230,
+      "cut": 241,
+      "end": 241,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\stubs.c",
+      "original_exact_body_matches": [
+        448
+      ],
+      "source_sha256": "64060de9d519c32f00fec53b7ad701e70e44adf1a0dfd418d7d8a90c01d0e628",
+      "body_sha256": "eb5d488ae7e7a812686d016386ef8f132a37d269486221ae70ae5a6c29f1029a",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "macro": "VR_BREAK",
+      "start": 115,
+      "cut": 117,
+      "end": 119,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "original_exact_body_matches": [
+        115
+      ],
+      "source_sha256": "8a510e5a4e60a179c76c1ef915fc00a53ad378a6defd0a13668e78def07891c3",
+      "body_sha256": "3e1a6c09d2b3ce92f2af2fc573662453e3c2eaad995dc364cb085aba4e677332",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/worker",
+        "build/.ninja/msvc-x64-release/worker-reference-x86"
+      ],
+      "context_count": 2,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "macro": "PARAMETER_VALIDATION_16_RE_ENABLED",
+      "start": 277,
+      "cut": 280,
+      "end": 289,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgmeta.c",
+      "original_exact_body_matches": [
+        277
+      ],
+      "source_sha256": "be4e6ec6215bbf79afcfe2dc58cecf0516c814e6d88d94c7d03e59794807d7cd",
+      "body_sha256": "072089e1ce71c30191323aec26e752fbad5b7a660e0444ba130d7236bf2d703e",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "macro": "DBCS",
+      "start": 333,
+      "cut": 337,
+      "end": 337,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkernel.c",
+      "original_exact_body_matches": [
+        313
+      ],
+      "source_sha256": "cda62e3b5807782c7088626ce95b9fddd5fc5db5f65896700df547a822364745",
+      "body_sha256": "14a1c020793c1775673e87350d58abd78f4ca4be8ac6cf7b0c1f8defa66f7e05",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "macro": "DBCS",
+      "start": 506,
+      "cut": 510,
+      "end": 510,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkernel.c",
+      "original_exact_body_matches": [
+        504
+      ],
+      "source_sha256": "cda62e3b5807782c7088626ce95b9fddd5fc5db5f65896700df547a822364745",
+      "body_sha256": "62f90ec0e1c2bb5c7a4e5970b28789e06bca1c0f4ddefa3717ba189ebf20f101",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "macro": "NEWALIAS",
+      "start": 209,
+      "cut": 221,
+      "end": 236,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmalias.c",
+      "original_exact_body_matches": [
+        207
+      ],
+      "source_sha256": "d51d31c0368a0488325207ec0807c80d55c94dd2170b5e2ecf83c6e9fe544095",
+      "body_sha256": "513860cf0eebcf322354ed86da086af8c4139dc1ee76bc37164cdcb0638b3431",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "macro": "NEWALIAS",
+      "start": 248,
+      "cut": 250,
+      "end": 250,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmalias.c",
+      "original_exact_body_matches": [
+        248
+      ],
+      "source_sha256": "d51d31c0368a0488325207ec0807c80d55c94dd2170b5e2ecf83c6e9fe544095",
+      "body_sha256": "06479994b188b82fe377e4ea1a9e9494af68579fe22c367bdfdca776c78ec9db",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "macro": "NEWALIAS",
+      "start": 289,
+      "cut": 302,
+      "end": 312,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmalias.c",
+      "original_exact_body_matches": [
+        289
+      ],
+      "source_sha256": "d51d31c0368a0488325207ec0807c80d55c94dd2170b5e2ecf83c6e9fe544095",
+      "body_sha256": "e97dae8d1c8d5133992d7febef36aa0d465297d4c22ef5523b7714b070a5ce5e",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "macro": "NEWALIAS",
+      "start": 349,
+      "cut": 361,
+      "end": 361,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmalias.c",
+      "original_exact_body_matches": [
+        351
+      ],
+      "source_sha256": "d51d31c0368a0488325207ec0807c80d55c94dd2170b5e2ecf83c6e9fe544095",
+      "body_sha256": "1d6f65e2d14fbf57c6a6ce955a8d884cb0c60e75317ce58a3ff21eb2d1b93c7e",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "macro": "DBG",
+      "start": 957,
+      "cut": 961,
+      "end": 961,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32fax.c",
+      "original_exact_body_matches": [
+        960
+      ],
+      "source_sha256": "aa71d6fdcc135bd8aa717223b5024fbe79cb9a03b532151c045f3736c2967d97",
+      "body_sha256": "735e42f370f3a9aaf7936a63164ef6194eee3d496f7bdb7e8234be4cdf395273",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "macro": "MAPPARAM_EXTRA",
+      "start": 50,
+      "cut": 52,
+      "end": 52,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+      "original_exact_body_matches": [
+        50
+      ],
+      "source_sha256": "35c648e16f616f91c0083bd5da217ff2b5a3dd0885bcffdff1a276bbc9f85063",
+      "body_sha256": "a84e7f1e0fa3a0b7341f98e3233563987cd68f52bcd68b870dfa6ea2fc58176c",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "macro": "MAPPARAM_EXTRA",
+      "start": 230,
+      "cut": 232,
+      "end": 232,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+      "original_exact_body_matches": [
+        208
+      ],
+      "source_sha256": "35c648e16f616f91c0083bd5da217ff2b5a3dd0885bcffdff1a276bbc9f85063",
+      "body_sha256": "be6e4f6a3b64e8a8d3cca82cc1a20350086a0d448f77dafcdde4bae27b6b5984",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "macro": "MAPPARAM_EXTRA",
+      "start": 242,
+      "cut": 275,
+      "end": 275,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+      "original_exact_body_matches": [
+        220
+      ],
+      "source_sha256": "35c648e16f616f91c0083bd5da217ff2b5a3dd0885bcffdff1a276bbc9f85063",
+      "body_sha256": "b39afbca83e2b930468f047379026c0ca959402ec92ef5a77bf80e7a7c05ce34",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "macro": "MAPPARAM_EXTRA",
+      "start": 306,
+      "cut": 311,
+      "end": 311,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+      "original_exact_body_matches": [
+        284
+      ],
+      "source_sha256": "35c648e16f616f91c0083bd5da217ff2b5a3dd0885bcffdff1a276bbc9f85063",
+      "body_sha256": "0842ea91c99f52f8e89a89819ce3d155d84d17eca455fd58db6de0d89022ffcd",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "macro": "MAPPARAM_EXTRA",
+      "start": 361,
+      "cut": 363,
+      "end": 365,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+      "original_exact_body_matches": [
+        336
+      ],
+      "source_sha256": "35c648e16f616f91c0083bd5da217ff2b5a3dd0885bcffdff1a276bbc9f85063",
+      "body_sha256": "158291db273a08c96ba5bbdf144fb1b0d4f9356b206db3612deb3a8620958818",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsubcls.c",
+      "macro": "OLD_SUBCLASS_STUFF",
+      "start": 20,
+      "cut": 224,
+      "end": 224,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wsubcls.c",
+      "original_exact_body_matches": [
+        20
+      ],
+      "source_sha256": "4b464a3f1f2fb6825fbef3801ca4fc3626cf5acd5c0423bea5136611c236703f",
+      "body_sha256": "d0d33dc552a8aa8f02e335b676b9a94d38322910160a84f349e9bd681ba3a191",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "macro": "OLD_WAY",
+      "start": 154,
+      "cut": 161,
+      "end": 161,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+      "original_exact_body_matches": [
+        154
+      ],
+      "source_sha256": "8c26553cb7cfd8fe128ee75b534ed93005588808d7f51d5ac84ec06b250d2d76",
+      "body_sha256": "1584cc60092d310cc7fd17e5858779ec3717ed118a4e4fde84e523b712d7e025",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "macro": "WOWEDIT",
+      "start": 1076,
+      "cut": 1079,
+      "end": 1079,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclass.c",
+      "original_exact_body_matches": [
+        1039
+      ],
+      "source_sha256": "8c26553cb7cfd8fe128ee75b534ed93005588808d7f51d5ac84ec06b250d2d76",
+      "body_sha256": "07220a88b6e9c869caf8a178118f1299c7911906274683763ba482e72347c723",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "macro": "ONLY_API16",
+      "start": 2003,
+      "cut": 2013,
+      "end": 2017,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wumsg.c",
+      "original_exact_body_matches": [
+        1908
+      ],
+      "source_sha256": "b65d0d8a3edc29d04bdcb488e33a6ee5a18b080fe2a098c8cdabd690eadd41e7",
+      "body_sha256": "58f6e2a175ab517f2aa85bb8be191cc941da5e8d59882497e01fcdfc33103b3d",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "macro": "ONLY_API16",
+      "start": 534,
+      "cut": 546,
+      "end": 550,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuser.c",
+      "original_exact_body_matches": [
+        531
+      ],
+      "source_sha256": "430402f9938e9791d662b731b29282368d11d52a8a9db15b95efbf38f126d86f",
+      "body_sha256": "66aef9cfedb581a86803c00d88e69183d675e5a045222379eeada7cfeb85fb43",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "macro": "DOESNT_USER_DO_THIS",
+      "start": 1912,
+      "cut": 1922,
+      "end": 1922,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuser.c",
+      "original_exact_body_matches": [
+        1907
+      ],
+      "source_sha256": "430402f9938e9791d662b731b29282368d11d52a8a9db15b95efbf38f126d86f",
+      "body_sha256": "c41ec96c78263fdc0f0d3e919153cdd004e24ab19d102c152495b74b21f19636",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "macro": "NEVER",
+      "start": 3002,
+      "cut": 3030,
+      "end": 3030,
+      "has_else": false,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuser.c",
+      "original_exact_body_matches": [
+        2974
+      ],
+      "source_sha256": "430402f9938e9791d662b731b29282368d11d52a8a9db15b95efbf38f126d86f",
+      "body_sha256": "4bc956428eb436cbf6ce4bbc811c5c96331c55c74fab9cc8e0f30d05404a7165",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "macro": "APRIL15",
+      "start": 740,
+      "cut": 746,
+      "end": 750,
+      "has_else": true,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuser31.c",
+      "original_exact_body_matches": [
+        738
+      ],
+      "source_sha256": "2103d188b5eb0438e6ef8ae1b04e20593d4201b4997479e7f10f7d679cf5d552",
+      "body_sha256": "39d2cbb8588be0af26ae0ffc322bce42f5b11f3141d0adf7501373fd9da88fc6",
+      "trace_graphs": [
+        "build/.ninja/msvc-x86-release/wow32"
+      ],
+      "context_count": 1,
+      "status": "source-profile-exclusion-candidate",
+      "limitations": [
+        "Direct source inclusion fixtures and tests outside generated graphs need explicit check.",
+        "Original boundary must be uniquely proven before edit."
+      ]
+    }
+  ],
+  "noncandidates": {
+    "no-generated-context": 48,
+    "macro-defined-or-undefined-in-source-closure": 5,
+    "already-error": 7
+  },
+  "limitations": [
+    "No independent direct-include fixture has been assumed covered.",
+    "All #else, complex expressions, header-only, uncompiled and original-missing cases require separate audit.",
+    "Preprocessor include tracing is evidence, not a release build."
+  ]
+}

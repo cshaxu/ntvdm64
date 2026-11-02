@@ -371,8 +371,9 @@ LOCAL void hd_reset IFN2(int, drive, int, diag)
 #ifdef ANSI
 LOCAL void (*disk_func[]) (void) =
 #else
-LOCAL void (*disk_func[]) () =
+#error Unsupported excluded original configuration
 #endif
+#line 375
 {
 	disk_reset,		/* 0x00 */
 	return_status,		/* 0x01 */

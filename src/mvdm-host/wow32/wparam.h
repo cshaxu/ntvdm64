@@ -67,8 +67,9 @@ typedef struct tagBlkHeader {
 typedef struct tagBlkCache {
 	LPBYTE pCache;
 #ifdef DEBUG
-	PBLKHEADER pCacheHead;
+#error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected
 #endif
+#line 72
 	PBLKHEADER pCacheFree;
 	DWORD dwCacheSize;
 	DWORD dwFlags;

@@ -1,0 +1,108 @@
+{
+  "scope": "all current x86 worker, WOW and worker-reference compiler commands, including graph tests; exact output-specific commands",
+  "contexts": 1652,
+  "failure_count": 0,
+  "retry_count": 21,
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "arm_line": 154,
+      "macro": "VGG",
+      "current_compiler_contexts_with_header": 70,
+      "proven_primary_true": 70,
+      "unknown_contexts": [],
+      "failed_contexts": [],
+      "conclusion": "current x86 graph only; other supported targets, standalone tests, guest and original boundary require review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "arm_line": 251,
+      "macro": "VGG",
+      "current_compiler_contexts_with_header": 70,
+      "proven_primary_true": 70,
+      "unknown_contexts": [],
+      "failed_contexts": [],
+      "conclusion": "current x86 graph only; other supported targets, standalone tests, guest and original boundary require review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "arm_line": 134,
+      "macro": "NTVDM",
+      "current_compiler_contexts_with_header": 80,
+      "proven_primary_true": 80,
+      "unknown_contexts": [],
+      "failed_contexts": [],
+      "conclusion": "current x86 graph only; other supported targets, standalone tests, guest and original boundary require review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "arm_line": 25,
+      "macro": "NTVDM",
+      "current_compiler_contexts_with_header": 108,
+      "proven_primary_true": 108,
+      "unknown_contexts": [],
+      "failed_contexts": [],
+      "conclusion": "current x86 graph only; other supported targets, standalone tests, guest and original boundary require review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "arm_line": 255,
+      "macro": "EGG",
+      "current_compiler_contexts_with_header": 18,
+      "proven_primary_true": 18,
+      "unknown_contexts": [],
+      "failed_contexts": [],
+      "conclusion": "current x86 graph only; other supported targets, standalone tests, guest and original boundary require review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "arm_line": 790,
+      "macro": "NTVDM",
+      "current_compiler_contexts_with_header": 18,
+      "proven_primary_true": 18,
+      "unknown_contexts": [],
+      "failed_contexts": [],
+      "conclusion": "current x86 graph only; other supported targets, standalone tests, guest and original boundary require review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "arm_line": 74,
+      "macro": "EGG",
+      "current_compiler_contexts_with_header": 44,
+      "proven_primary_true": 44,
+      "unknown_contexts": [],
+      "failed_contexts": [],
+      "conclusion": "current x86 graph only; other supported targets, standalone tests, guest and original boundary require review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "arm_line": 138,
+      "macro": "VGG",
+      "current_compiler_contexts_with_header": 44,
+      "proven_primary_true": 44,
+      "unknown_contexts": [],
+      "failed_contexts": [],
+      "conclusion": "current x86 graph only; other supported targets, standalone tests, guest and original boundary require review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+      "arm_line": 37,
+      "macro": "LITTLEND",
+      "current_compiler_contexts_with_header": 172,
+      "proven_primary_true": 172,
+      "unknown_contexts": [],
+      "failed_contexts": [],
+      "conclusion": "current x86 graph only; other supported targets, standalone tests, guest and original boundary require review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "arm_line": 115,
+      "macro": "BIGWIN",
+      "current_compiler_contexts_with_header": 36,
+      "proven_primary_true": 36,
+      "unknown_contexts": [],
+      "failed_contexts": [],
+      "conclusion": "current x86 graph only; other supported targets, standalone tests, guest and original boundary require review"
+    }
+  ]
+}

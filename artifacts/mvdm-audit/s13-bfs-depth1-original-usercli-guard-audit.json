@@ -1,0 +1,27 @@
+{
+  "original_condition": "#ifndef _USERCLI_",
+  "source": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+  "finding": "current selected subset deliberately has two independent guards and supports declaration-only first inclusion followed by full EDIT-state inclusion",
+  "call_chain": [
+    "wow_edit_state_bindings.h:3 includes wow_edit_lookaside_bindings.h",
+    "wow_edit_lookaside_bindings.h:20-22 defines WOW_EDIT_LOOKASIDE_DECLARATIONS_ONLY around first usercli.h inclusion",
+    "wow_edit_state_bindings.h:6 includes usercli.h again to expose EDIT state"
+  ],
+  "consequence": "restoring one original whole-file guard without changing the selected include architecture would suppress the second selected subset",
+  "disposition": "do not mechanically restore original whole-file guard; selected local conditional structure remains a necessary compatibility boundary until an equivalent design is independently proven",
+  "files": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "sha256": "67c7b84bfcf07bc25419e797f9a5f9e500ab1ce9f658cdc06614df3027af7c39"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_edit_state_bindings.h",
+      "sha256": "1f142dcf71744bfcab3b8f5fef99f3ce25c8e7da4ad4ed482bc44a5e96512911"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_edit_lookaside_bindings.h",
+      "sha256": "353af4d5f10a7998e0b694ca4a587bd846972cb0b7f1ae35556cb199dcc2ddf3"
+    }
+  ],
+  "limitation": "this audit does not propose or perform a broader code-structure refactor"
+}

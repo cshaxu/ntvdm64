@@ -1,0 +1,24 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+  "source_sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+  "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+  "original_group_line": 23,
+  "original_condition": "#ifdef DEBUG",
+  "original_deleted_body": "BOOL gfTurboDWP = TRUE;",
+  "original_group_end": 25,
+  "current_insertion_before_physical_line": 11,
+  "proposed_structure": [
+    "#ifdef DEBUG",
+    "#error Unsupported original DEBUG branch",
+    "#endif",
+    "#line 11"
+  ],
+  "line_rationale": "current following project-owned selector starts at physical/logical line 11; restore that mapping rather than assigning a fictitious original location to a local selector",
+  "profile_evidence": "s13-bfs-depth1-clmsg-debug-restore-contexts.json",
+  "profile_result": "four distinct current WOW32 and call-boundaries commands: all preprocess successfully, no DEBUG flag or DEBUG definition in include closures",
+  "reference_scan": "only New-T404S5Wow32ProviderNinja.ps1 and New-T447S3CallBoundaryNinja.ps1 compile this source in tests/tools; neither supplies DEBUG",
+  "status": "first-depth restoration candidate verified in scratch; not yet applied or full-built",
+  "preflight": "s13-bfs-depth1-clmsg-debug-restore-preflight.json",
+  "preflight_result": "all four actual consumer commands have equal selected preprocessed output; all four DEBUG-negative controls reject at restored guard"
+}

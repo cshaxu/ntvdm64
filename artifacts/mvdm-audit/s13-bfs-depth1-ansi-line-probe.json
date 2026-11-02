@@ -1,0 +1,38 @@
+{
+  "scope": "scratch marker before #else in actual x86 product profile",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "line": 373,
+      "macro": "ANSI",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "marker": 374,
+      "logical_directive_line": 372,
+      "stderr": "",
+      "source_sha256": "89112dc9a067b3a2e80bb450b7b392003b4379beaac961992ec90325e355114c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 78,
+      "macro": "ANSI",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "marker": 74,
+      "logical_directive_line": 72,
+      "stderr": "",
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "line": 1908,
+      "macro": "ANSI",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "marker": 1909,
+      "logical_directive_line": 1907,
+      "stderr": "",
+      "source_sha256": "bdf5bb3433dfa5c83f241af9ee84d47570d4946a3558dfba030137051faf2f5b"
+    }
+  ]
+}

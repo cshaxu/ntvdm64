@@ -1,0 +1,60 @@
+{
+  "scope": "first-depth candidate audit: concrete source+macro co-occurrences in tests and build generators",
+  "method": "searched tests and tools/build files which mention both an exact source path and a corresponding define or undef flag; candidates only until actual invocation is verified",
+  "conflicts": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "condition": "i386",
+      "reference": "tools/build/New-T289S5DpmiInterruptAuditNinja.ps1",
+      "current_generator_usable": false,
+      "evidence": "generator requires src/mvdm-host-overlay/dpmi32/dpmi_interrupt_registration.c and src/mvdm-support/inc, both absent",
+      "conclusion": "historical generator cannot by itself establish a currently supported profile; other fixtures remain to check"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "condition": "i386",
+      "reference": "tools/build/New-T289S5DpmiInterruptAuditNinja.ps1",
+      "current_generator_usable": false,
+      "evidence": "generator requires src/mvdm-host-overlay/dpmi32/dpmi_interrupt_registration.c and src/mvdm-support/inc, both absent",
+      "conclusion": "historical generator cannot by itself establish a currently supported profile; other fixtures remain to check"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "condition": "MVDM_CCPU_DECODE_DIAGNOSTICS",
+      "reference": "tests/observation/verify-decode-diagnostics.ps1",
+      "verified_selected": true
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "condition": "NTOS_KERNEL_RUNTIME",
+      "reference": "tools/build/New-NativeHook64Ninja.ps1"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "condition": "DEVL",
+      "reference": "tools/build/New-T310OriginalSoftpcNinja.ps1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "condition": "ANSI",
+      "reference": "tests/observation/verify-softpc-object-contract.ps1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "condition": "ANSI",
+      "reference": "tests/observation/verify-softpc-object-contract.ps1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "condition": "X86GFX",
+      "reference": "tools/build/New-T310OriginalSoftpcNinja.ps1:982",
+      "verified_selected": true,
+      "conclusion": "X86GFX is enabled for the video controller translation unit; exclusions must be proved per source and include context, not globally."
+    }
+  ],
+  "limitations": [
+    "text co-occurrence alone does not prove target is still supported or branch is selected",
+    "direct inclusion, generated source lists and transitive header dependencies require additional review",
+    "no branch mutation authorized solely by this scan"
+  ]
+}

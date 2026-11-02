@@ -1,0 +1,207 @@
+{
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "file": "generated/cvidc_vector_provider_stubs.c",
+      "output": "obj/tests/cvidc_vector_provider_stubs.obj",
+      "exists": false,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\generated\\cvidc_vector_provider_stubs.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "file": "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/worker/generated/base_vdm_config.c",
+      "output": "obj/opennt-base-bindings/config-command.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\generated\\base_vdm_config.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "file": "obj/basesrv/rpc_management_c.c",
+      "output": "obj/common/rpc_management_stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\basesrv\\rpc_management_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "file": "obj/basesrv/service_c.c",
+      "output": "obj/run16/stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\basesrv\\service_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "file": "obj/basesrv/service_s.c",
+      "output": "obj/basesrv/stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\basesrv\\service_s.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "file": "obj/basesrv/service_c.c",
+      "output": "obj/worker/stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\basesrv\\service_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "file": "obj/basesrv/service_c.c",
+      "output": "obj/monitor/stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\worker\\obj\\basesrv\\service_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "file": "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-system-import-abi-aliases.c",
+      "output": "obj/wow32-system-import-abi-aliases.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32-system-import-abi-aliases.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "file": "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-parent-import-abi-aliases.c",
+      "output": "obj/wow32-parent-import-abi-aliases.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32-parent-import-abi-aliases.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "file": "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x86-release/wow32/wow32-dll-entry-bridge.c",
+      "output": "obj/wow32-dll-entry-bridge.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x86-release\\wow32\\wow32-dll-entry-bridge.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/frontend",
+      "file": "obj/basesrv/service_c.c",
+      "output": "obj/run16/stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\frontend\\obj\\basesrv\\service_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/frontend",
+      "file": "obj/basesrv/rpc_management_c.c",
+      "output": "obj/common/rpc_management_stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\frontend\\obj\\basesrv\\rpc_management_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/hook",
+      "file": "obj/basesrv/service_c.c",
+      "output": "observation-stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\hook\\obj\\basesrv\\service_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/launcher",
+      "file": "obj/basesrv/service_c.c",
+      "output": "obj/run16/stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\launcher\\obj\\basesrv\\service_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/launcher",
+      "file": "obj/basesrv/rpc_management_c.c",
+      "output": "obj/common/rpc_management_stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\launcher\\obj\\basesrv\\rpc_management_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/monitor",
+      "file": "obj/basesrv/service_c.c",
+      "output": "obj/monitor/stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\monitor\\obj\\basesrv\\service_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/monitor",
+      "file": "obj/basesrv/rpc_management_c.c",
+      "output": "obj/common/rpc_management_stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\monitor\\obj\\basesrv\\rpc_management_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/service",
+      "file": "obj/basesrv/service_s.c",
+      "output": "obj/basesrv/stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\service\\obj\\basesrv\\service_s.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/service",
+      "file": "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/service/generated/base_vdm_config.c",
+      "output": "obj/opennt-base-bindings/config-command.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\service\\generated\\base_vdm_config.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/service",
+      "file": "obj/basesrv/rpc_management_c.c",
+      "output": "obj/common/rpc_management_stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\service\\obj\\basesrv\\rpc_management_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker",
+      "file": "obj/basesrv/service_c.c",
+      "output": "obj/run16/stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker\\obj\\basesrv\\service_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker",
+      "file": "obj/basesrv/rpc_management_c.c",
+      "output": "obj/common/rpc_management_stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker\\obj\\basesrv\\rpc_management_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "file": "generated/cvidc_vector_provider_stubs.c",
+      "output": "obj/tests/cvidc_vector_provider_stubs.obj",
+      "exists": false,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86\\generated\\cvidc_vector_provider_stubs.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "file": "O:/repos.hobby/ntvdm64/build/.ninja/msvc-x64-release/worker-reference-x86/generated/base_vdm_config.c",
+      "output": "obj/opennt-base-bindings/config-command.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86\\generated\\base_vdm_config.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "file": "obj/basesrv/rpc_management_c.c",
+      "output": "obj/common/rpc_management_stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\basesrv\\rpc_management_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "file": "obj/basesrv/service_c.c",
+      "output": "obj/run16/stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\basesrv\\service_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "file": "obj/basesrv/service_s.c",
+      "output": "obj/basesrv/stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\basesrv\\service_s.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "file": "obj/basesrv/service_c.c",
+      "output": "obj/worker/stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\basesrv\\service_c.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "file": "obj/basesrv/service_c.c",
+      "output": "obj/monitor/stub.obj",
+      "exists": true,
+      "resolved": "O:\\repos.hobby\\ntvdm64\\build\\.ninja\\msvc-x64-release\\worker-reference-x86\\obj\\basesrv\\service_c.c"
+    }
+  ]
+}

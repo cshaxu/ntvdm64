@@ -38,9 +38,9 @@ LGDT16
    IU32 op1[2]	/* src(limit:base pair) operand */
    )
 #else
-   (op1)
-   IU32 op1[2];
+#error Unsupported excluded original configuration
 #endif
+#line 44
    {
    SET_STAR_LIMIT(GDT_REG, op1[0]);
    SET_STAR_BASE(GDT_REG, op1[1] & 0xffffff);   /* store 24-bit base */
@@ -56,9 +56,9 @@ LGDT32
    IU32 op1[2]	/* src(limit:base pair) operand */
    )
 #else
-   (op1)
-   IU32 op1[2];
+#error Unsupported excluded original configuration
 #endif
+#line 62
    {
    SET_STAR_LIMIT(GDT_REG, op1[0]);
    SET_STAR_BASE(GDT_REG, op1[1]);

@@ -1906,8 +1906,9 @@ GLOBAL void vd_write_teletype IFN0()
 #ifdef ANSI
      IMPORT VOID (**get_outb_ptr(io_addr))(io_addr address, half_word value);
 #else
-     IMPORT VOID (**get_outb_ptr())();
+#error Unsupported excluded original configuration
 #endif
+#line 1910
 #ifdef NTVDM
      void (** hack)(io_addr address, half_word value);
 #endif

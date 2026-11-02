@@ -12,30 +12,24 @@
 --*/
 
 #if defined(i386) && !defined(DEBUG_OR_WOWPROFILE)
-
-#define FASTBOPPING     1
-
+#error Unsupported excluded original configuration
 #else
+#line 19
 
 #define FASTBOPPING     0
 
 #endif
+#line 23
 
 #if FASTBOPPING
-extern BYTE fKernelCSIPFixed;
-// Used by the monitor to dispatch interupts. Updated for callbacks and bops
-extern DECLSPEC_IMPORT PVOID CurrentMonitorTeb;
+#error Unsupported excluded original configuration
 #endif
+#line 29
 
 #if FASTBOPPING
-VOID    WOWBopEntry(VOID);
-VPVOID  FastBopVDMStack(void);
-VOID    FastBopSetVDMStack(VPVOID vp);
-VOID    FastWOWCallbackCall(VOID);
-VOID    FastWOWCallbackRet(VOID);
-#define FASTVDMSTACK()      FastBopVDMStack()
-#define SETFASTVDMSTACK(vp) FastBopSetVDMStack(vp)
+#error Unsupported excluded original configuration
 #endif
+#line 39
 
 //#if FASTBOPPING
 //

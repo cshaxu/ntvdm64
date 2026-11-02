@@ -8,7 +8,7 @@ if(!$root.StartsWith($repo+'\build\',[StringComparison]::OrdinalIgnoreCase) -or
  $root.StartsWith($repo+'\build\.ccache\',[StringComparison]::OrdinalIgnoreCase) -or (Test-Path $root)){throw 'Fresh disposable evidence required'}
 $null=New-Item -ItemType Directory $root
 $baseline='18d0ec060024912e6b03aec69bdded6c9181af03';$selections=@();$steps=@()
-function Read($path,$old){if($old){$s=(& git -C $repo show "${baseline}:$path") -join "`n";if($LASTEXITCODE){throw 'Missing baseline'};return $s};[IO.File]::ReadAllText("$repo/$path").Replace("`r`n","`n")}
+function Read($path,$old){if($old){$baselinePath=$path -replace '^src/mvdm-host/','src/mvdm/';$s=(& git -C $repo show "${baseline}:$baselinePath") -join "`n";if($LASTEXITCODE){throw 'Missing baseline'};return $s};[IO.File]::ReadAllText("$repo/$path").Replace("`r`n","`n")}
 function Region($s,$begin,$end,$name){$a=$s.IndexOf($begin,[StringComparison]::Ordinal);$b=if($a -ge 0){$s.IndexOf($end,$a,[StringComparison]::Ordinal)}else{-1};if($a -lt 0 -or $b -lt 0){throw "Missing $name"};$length=$b+$end.Length-$a;$script:selections+=@{name=$name;offset=$a;length=$length};$s.Substring($a,$length)}
 function Body($s,$name){
  $m=[regex]::Matches($s,'(?m)^(?:static\s+)?(?:BOOL|VOID|DWORD|PVOID|ULONG|void)\s+(?:(?:FASTCALL|WINAPI)\s+)?'+[regex]::Escape($name)+'\s*\([^;{}]*\)\s*\{')
@@ -64,10 +64,21 @@ try{
  }
  $negative=Get-Content "$root/body-baseline.stdout.log" -Raw
  foreach($name in @('NULL_PAIR','NULL_LOOKUP','UPDATE_FALSE_ROLLBACK','UPDATE_SEH_ROLLBACK','REVERSE_TEXT_OPTIONAL','REVERSE_CB_OPTIONAL','FORWARD_TEXT_ABORT','FORWARD_CB_ABORT','HEAP_COPY_ABORT','STACK_COPY_ABORT','REVERSE_TEXT_ABORT','REVERSE_CB_ABORT','API_OPTIONAL','API_ABORT','REVERSE_TEXT_MUTATION','REVERSE_CB_MUTATION','REVERSE_CB_ABORT_MUTATION')){if($negative -notmatch "(?m)^FAIL $name\r?`$"){throw "Missing exact-source negative $name"}}
- if((Get-Content "$root/body-candidate.stdout.log" -Raw) -notmatch 'PARAMETER_MAP failures=0 scenarios=\d+ reverse=140 buffer=84 forward=72'){throw 'Incomplete current result/layout'}
- if((Get-FileHash "$root/baseline/parameter_cache.h").Hash -ne (Get-FileHash "$root/candidate/parameter_cache.h").Hash){throw 'Original cache was changed'}
+ # DIV-363 adds a pointer and BOOL to the x86 reverse-message record. The
+ # unchanged checkpoint header also yields 148 bytes rather than 140.
+ if((Get-Content "$root/body-candidate.stdout.log" -Raw) -notmatch 'PARAMETER_MAP failures=0 scenarios=\d+ reverse=148 buffer=84 forward=72'){throw 'Incomplete current result/layout'}
+ # Compare the selected release cache body: unsupported DEBUG bodies may have
+ # been replaced by #error while the compiled original path must remain exact.
+ foreach($kind in @('baseline','candidate')){
+  $dir="$root/$kind"
+  [IO.File]::WriteAllText("$dir/cache-preprocess.cmd","@echo off`r`ncall `"$CompilerDriver`" cl.exe /nologo /EP /TC `"$dir/parameter_cache.h`"`r`nexit /b %errorlevel%`r`n")
+  Run "cache-pre-$kind" cmd.exe @('/d','/c',"`"$dir/cache-preprocess.cmd`"") 0 180
+ }
+ $originalSelected=@(Get-Content "$root/cache-pre-baseline.stdout.log" | Where-Object {$_.Trim().Length}) -join "`n"
+ $candidateSelected=@(Get-Content "$root/cache-pre-candidate.stdout.log" | Where-Object {$_.Trim().Length}) -join "`n"
+ if($originalSelected -cne $candidateSelected){throw 'Selected original cache was changed'}
  foreach($row in Import-Csv "$root/inputs.csv"){if((Get-FileHash $row.Path).Hash -ne $row.Hash){throw 'Input changed during cohort'}}
  foreach($row in Import-Csv "$root/control-abi-input.csv"){if((Get-FileHash $row.Path).Hash -ne $row.Hash){throw 'Control ABI input changed'}}
  $selections|ConvertTo-Json|Set-Content "$root/selections.json"
- @{passed=$true;baseline=$baseline;scope='exact original source/cache and actual finalizer; lower services doubled, not actual guest';end=[DateTime]::UtcNow.ToString('o')}|ConvertTo-Json|Set-Content "$root/result.json"
+ @{passed=$true;baseline=$baseline;scope='selected original release cache and exact extracted bodies with actual finalizer; lower services doubled, not actual guest';end=[DateTime]::UtcNow.ToString('o')}|ConvertTo-Json|Set-Content "$root/result.json"
 }catch{$_|Out-String|Set-Content "$root/failure.txt";exit 1}

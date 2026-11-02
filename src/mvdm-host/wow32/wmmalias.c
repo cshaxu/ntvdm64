@@ -149,56 +149,9 @@ PHMAP FindHMap32(HAND32 h32, PHINFO phi, INT iClass)
             return NULL;
         }
 #else
-        // If we don't have an alias table yet, allocate one
-
-        if (!phi->pphmAlias) {
-            if (!(phi->pphmAlias = malloc_w(ALIAS_SLOTS*sizeof(PHMAP)))) {
-                LOGDEBUG(0,("    FindHMap32 ERROR: cannot allocate alias table\n"));
-                return NULL;
-            }
-            RtlZeroMemory(phi->pphmAlias, ALIAS_SLOTS*sizeof(PHMAP));
-            phi->nAliasEntries = ALIAS_SLOTS;
-        }
-
-        // If the current hint is in use, then look for the next free one
-
-        if (phi->pphmAlias[phi->iAliasHint] &&
-            !((INT)phi->pphmAlias[phi->iAliasHint]&1)) {
-
-            INT i;
-            LOGDEBUG(13,("    FindHMap32: alias hint failed, scanning...\n"));
-            for (i=phi->iAliasHint+1; i<phi->nAliasEntries; i++) {
-                if (!phi->pphmAlias[i] || ((INT)phi->pphmAlias[i]&1))
-                    goto Break;
-            }
-            for (i=0; i<phi->iAliasHint; i++) {
-                if (!phi->pphmAlias[i] || ((INT)phi->pphmAlias[i]&1))
-                    goto Break;
-            }
-          Break:
-            phi->iAliasHint = i;
-
-            // If we've exhausted all the slots in the existing table, grow it
-
-            if (phi->pphmAlias[i] && !((INT)phi->pphmAlias[i]&1)) {
-                PPHMAP p;
-
-                if (phi->nAliasEntries >= (1<<(16-RES_BITS))) {
-                    LOGDEBUG(0,("    FindHMap32 ERROR: at 16-bit handle limit\n"));
-                    return NULL;
-                }
-                LOGDEBUG(1,("    FindHMap32: growing handle alias array\n"));
-                if (!(p = realloc(phi->pphmAlias, (phi->nAliasEntries+ALIAS_SLOTS)*sizeof(PHMAP)))) {
-                    LOGDEBUG(0,("    FindHMap32 ERROR: cannot grow alias table\n"));
-                    return NULL;
-                }
-                phi->pphmAlias = p;
-                RtlZeroMemory(phi->pphmAlias+phi->nAliasEntries, ALIAS_SLOTS*sizeof(PHMAP));
-                phi->iAliasHint = phi->nAliasEntries;
-                phi->nAliasEntries += ALIAS_SLOTS;
-            }
-        }
+#error Unsupported excluded original configuration
 #endif
+#line 200
         phm = malloc_w(sizeof(HMAP));
         if (!phm) {
             LOGDEBUG(0,("    FindHMap32 ERROR: cannot allocate new list entry\n"));
@@ -207,18 +160,9 @@ PHMAP FindHMap32(HAND32 h32, PHINFO phi, INT iClass)
         phm->h32 = NULL;
 
 #ifdef NEWALIAS
-        // Record the new list entry in the alias table
-
-        phm->h16 = (HAND16)(++phi->iAliasHint << RES_BITS);
-        if (phi->iAliasHint >= phi->nAliasEntries)
-            phi->iAliasHint = 0;
-
-        // New entries can simply be inserted at the head of the list,
-        // because their position in the list has no relationship to the aliases
-
-        phm->phmNext = phi->pphmHash[iHash];
-        phi->pphmHash[iHash] = phm;
+#error Unsupported excluded original configuration
 #else
+#line 220
 #ifdef DEBUG
         nAliases++;
         if (iList > iLargestListSlot) {
@@ -234,6 +178,7 @@ PHMAP FindHMap32(HAND32 h32, PHINFO phi, INT iClass)
         phm->phmNext = NULL;
         phmPrev->phmNext = phm;
 #endif
+#line 235
     }
 
     // If this a new entry, initialize it
@@ -246,8 +191,9 @@ PHMAP FindHMap32(HAND32 h32, PHINFO phi, INT iClass)
 
         // Insure that the alias pointer is valid
 #ifdef NEWALIAS
-        phi->pphmAlias[(phm->h16>>RES_BITS)-1] = phm;
+#error Unsupported excluded original configuration
 #endif
+#line 251
         phm->h32 = h32;
         phm->htask16 = FETCHWORD(CURRENTPTD()->htask16);
         phm->iClass = iClass;
@@ -287,19 +233,9 @@ PHMAP FindHMap16(HAND16 h16, PHINFO phi)
     h16 >>= RES_BITS;
 
 #ifdef NEWALIAS
-    // Verify the handle is within range
-    WOW32ASSERT((INT)h16 <= phi->nAliasEntries);
-
-    // This can happen if we haven't allocated any aliases yet
-    if (!phi->pphmAlias)
-        return NULL;
-
-    phm = phi->pphmAlias[h16-1];
-    if ((INT)phm & 1) {
-        (INT)phm &= ~1;
-        LOGDEBUG(0,("    FindHMap16 WARNING: defunct alias %04x reused\n", h16<<RES_BITS));
-            }
+#error Unsupported excluded original configuration
 #else
+#line 303
     iHash = h16 & HASH_MASK;
     iList = (h16 & LIST_MASK) >> HASH_BITS;
 
@@ -310,6 +246,7 @@ PHMAP FindHMap16(HAND16 h16, PHINFO phi)
     phm = phm->phmNext;
         }
 #endif
+#line 313
     if (!phm) {
         LOGDEBUG(0,("    FindHMap16 ERROR: could not find %04x\n", h16<<RES_BITS));
         return NULL;
@@ -347,18 +284,9 @@ VOID FreeHMap16(HAND16 h16, PHINFO phi)
         phm->h32 = NULL;
 
 #ifdef NEWALIAS
-        // We don't want to totally zap the alias' hmap pointer yet, because
-        // if we're dealing with an app that is using cached handles after
-        // it has technically freed them, we want to try to reassociate their
-        // handle with a new 32-bit handle.  So we'll just set the low bit
-        // of the alias hmap pointer and leave the hint index alone;  we will
-        // still try to reuse entries with the low bit set however.
-        //
-        // phi->iAliasHint = (h16>>RES_BITS)-1;
-        // phi->pphmAlias[phi->iAliasHint] = NULL;
-
-        (INT)phi->pphmAlias[(h16>>RES_BITS)-1] |= 1;
+#error Unsupported excluded original configuration
 #endif
+#line 364
         return;
     }
     LOGDEBUG(1,("    FreeHMap16: handle alias %04x not found\n"));

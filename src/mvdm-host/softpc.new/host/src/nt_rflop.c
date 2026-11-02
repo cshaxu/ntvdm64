@@ -227,8 +227,9 @@ static BOOL nt_rflop_current_pdb(PUSHORT currentPdb)
 }
 
 #ifdef EJECT_FLOPPY
-GLOBAL void host_floppy_eject IFN1(UTINY, drive)
+#error Unsupported excluded original configuration
 #endif
+#line 232
 
 
 /********************************************************/
@@ -339,8 +340,9 @@ host_gfi_rdiskette_active IFN3(UTINY, hostID, BOOL, active, CHAR *, err)
 	else
 	{
 #ifdef  EJECT_FLOPPY
-		host_floppy_eject(drive);
+#error Unsupported excluded original configuration
 #endif  /* EJECT_FLOPPY */
+#line 344
 		nt_gfi_rdiskette_term(flp);	/*  shutdown process */
 		gfi_empty_active(hostID,TRUE,err);  /* Tell gfi 'empty' is now active */
 		return(C_CONFIG_OP_OK);
@@ -380,41 +382,9 @@ host_gfi_rdiskette_change IFN2(UTINY, hostID, BOOL, apply)
 /********************************************************/
 
 #ifdef EJECT_FLOPPY
-GLOBAL void host_floppy_eject IFN1(UTINY, drive)
-{
-	CHAR           *ebuf;
-	FLP             flp = &floppy_data[drive];
-	BOOL            device_was_closed = FALSE;
-
-	/* open the device */
-	if (flp->diskette_fd == INVALID_HANDLE_VALUE)
-	{
-		device_was_closed = TRUE;
-		(void) nt_rdiskette_open_drive(drive);
-	}
-
-	/* Do the ioctl, put your ioctl here 
-
-	if (ioctl(flp->diskette_fd, SMFDEJECT) < 0)
-	{
-		ebuf = host_strerror(errno);
-		assert1(NO, "host_eject_floppy: %s", ebuf);
-	}*/
-
-	/* Close the device if it wasn't open */
-
-	if (device_was_closed)
-	{
-		nt_gfi_rdiskette_term(flp);
-	}
-	else
-	{
-		/* Line change ONLY if device was actively open */
-		flp->change_line_state = TRUE;
-	}
-}
-
+#error Unsupported excluded original configuration
 #endif                          /* EJECT_FLOPPY */
+#line 418
 
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/

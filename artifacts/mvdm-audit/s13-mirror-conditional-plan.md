@@ -41,7 +41,15 @@ including fixture profiles, are evidence; a single observed configuration is
 not proof of universal exclusion. Report per-depth group and arm counts,
 decisions, unreviewed work, next-depth groups, parser exceptions, and original
 reconciliation separately. The BFS queue is task-local evidence, not QUEUE.md.
-The owner additionally requires each completed depth to pass the applicable
-build, full publication, tests, commit and push before starting review of the
-next depth. Do not treat an initial routing pass with pending arms as depth
-completion.
+The owner now requires a two-phase gate at each depth. First prioritize all
+arms demonstrably excluded in every supported actual context, restore their
+required outer frameworks, and replace their bodies with #error and necessary
+#line. After this exclusion phase is complete, run the applicable cached build,
+full publication, tests, commit and push. Then audit the arms that may be
+selected and enqueue their child groups for the next depth; do not decide a
+child at the current depth. Unknown contexts are never treated as exclusions,
+and known but unimplemented exclusions keep the first phase open. Record the
+exclusion delivery separately from depth completion. Finish the retained-arm
+audit and next-depth queue before advancing; report unresolved boundaries
+honestly. The 7f2bb2924 checkpoint preserved earlier mixed-pass work without
+claiming either phase complete.

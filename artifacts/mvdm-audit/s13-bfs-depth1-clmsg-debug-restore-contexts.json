@@ -1,0 +1,41 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/default-client.obj",
+      "exit": 0,
+      "flags": [],
+      "debug_directives": [],
+      "sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797",
+      "error": ""
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/client-callproc.obj",
+      "exit": 0,
+      "flags": [],
+      "debug_directives": [],
+      "sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797",
+      "error": ""
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/getset_callproc.obj",
+      "exit": 0,
+      "flags": [],
+      "debug_directives": [],
+      "sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797",
+      "error": ""
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_default.obj",
+      "exit": 0,
+      "flags": [],
+      "debug_directives": [],
+      "sha256": "d8b600211f11aa74498cf0264fa867adf6e2fd190377cb3f42ddf49c67668797",
+      "error": ""
+    }
+  ]
+}

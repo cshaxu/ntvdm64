@@ -64,18 +64,16 @@
 #define MODNAME(module)
 
 #ifdef  DEBUG
-#define STATIC
-#define INT3()      _asm int 3
-#define IFDEBUG(f)  if (f)
-#define ELSEDEBUG   else
-#define LOGDEBUG(l,args) LOG(l,args)
+#error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected
 #else
+#line 73
 #define STATIC static
 #define INT3()
 #define IFDEBUG(f)
 #define ELSEDEBUG
 #define LOGDEBUG(l,args)
 #endif
+#line 79
 /* XLATON */
 
 

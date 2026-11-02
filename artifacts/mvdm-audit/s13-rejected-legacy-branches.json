@@ -2,15 +2,15 @@
   {
     "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
     "macro": "SFELLOW",
-    "line": 523,
-    "body_end": 528,
+    "line": 519,
+    "body_end": 524,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
     "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
     "local_sha256": "f9075215f536b9fb9ee949e4eec3b6c69d1dfb3641bb1383be9e556e752a5618",
     "removed_body_sha256": "78361e86e0a70e8b7f93067aca3879590858f675ccc219f52ab8ed838c8f7eab",
     "removed_body_lines": 5,
     "after_sha256": "1457142659bbf5b0e9ad74dd03307d552f163c22c2eb2f07ab79743cc8d35503",
-    "final_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b"
+    "final_sha256": "761cd97a34ad552491e38efd9e5aa7ba683c23a7b02bfbcd675fd281c8195152"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/dasm386/dasm386.c",
@@ -103,7 +103,7 @@
     "removed_body_sha256": "1b1f5e75894a90f2fb624c0bb8b23aa2890c054e007f45e19fb92eb15b1f938f",
     "removed_body_lines": 1,
     "after_sha256": "32573c2b22216f544f790c2f4c5aa37bdcc7d547877277d982483d906e2702ac",
-    "final_sha256": "db5481c11626d9b5f13cfedd51b005c8bd3a33450a8e85282aff2fb8fd84c072"
+    "final_sha256": "0caae2986bd5256ecdee046d9961c5176a3d5178426a198b5f42fb3eb0bef369"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
@@ -142,33 +142,33 @@
     "removed_body_sha256": "14fb822c8a6ddb0f6a2d36c4ec6f2862a3975a2e45910c4ff9fd1043cd4e6689",
     "removed_body_lines": 1,
     "after_sha256": "59c98534ba27a897537b787d3f9e5f8ca66e069a5bebb373f5dec764c233f2bc",
-    "final_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe"
+    "final_sha256": "7485467a6802013b69a2425ef5d8aa416647b96746be17c303260d487fa66fe8"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
     "macro": "A2CPU",
-    "line": 116,
-    "body_end": 117,
+    "line": 117,
+    "body_end": 118,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
     "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
     "local_sha256": "c69a9c47ea907760d34561e00cf24f519bb804fd2548d38e115e58d327391cc2",
     "removed_body_sha256": "a7f1d323ea7b1b5eb28c6e2678f11da9a7c90cdaa5e8a06a4a97c524c27074d3",
     "removed_body_lines": 1,
     "after_sha256": "59c98534ba27a897537b787d3f9e5f8ca66e069a5bebb373f5dec764c233f2bc",
-    "final_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe"
+    "final_sha256": "7485467a6802013b69a2425ef5d8aa416647b96746be17c303260d487fa66fe8"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
     "macro": "PIG",
-    "line": 674,
-    "body_end": 680,
+    "line": 670,
+    "body_end": 676,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.c",
     "original_sha256": "f6cd45a30b6575d38ef95083601594f1403a34ebef1278dbb8362c19f4a14700",
     "local_sha256": "1457142659bbf5b0e9ad74dd03307d552f163c22c2eb2f07ab79743cc8d35503",
     "removed_body_sha256": "4dd63b9f049936e0691307c6bb35a5a5de449c7ef2e494afed2bb5d3b74c27b4",
     "removed_body_lines": 6,
     "after_sha256": "370774b364135049441137ac7e6205597f53f7a35acb348a1ab9cb4caedbcea2",
-    "final_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b"
+    "final_sha256": "761cd97a34ad552491e38efd9e5aa7ba683c23a7b02bfbcd675fd281c8195152"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
@@ -294,41 +294,41 @@
   {
     "path": "src/mvdm-host/softpc.new/base/system/rom.c",
     "macro": "A2CPU",
-    "line": 348,
-    "body_end": 349,
+    "line": 349,
+    "body_end": 350,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
     "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
     "local_sha256": "b04cea60a3a8005cafe464ecd5918d21c12bb3924956012614fd90911e9e2050",
     "removed_body_sha256": "41fe5600a79c2d48bc138be23f834226694aaa9f6fe9157be114831153bf749c",
     "removed_body_lines": 1,
     "after_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
-    "final_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e"
+    "final_sha256": "e5ab070ec285e3823b8342f82e0f38eb7eb6ab64cff3c426536646800f252e17"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/system/rom.c",
     "macro": "A2CPU",
-    "line": 330,
-    "body_end": 331,
+    "line": 331,
+    "body_end": 332,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
     "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
     "local_sha256": "b04cea60a3a8005cafe464ecd5918d21c12bb3924956012614fd90911e9e2050",
     "removed_body_sha256": "5c864aec6a173f85a5283cc2f033c101c7561fde7b4f20b42d84594117f6e424",
     "removed_body_lines": 1,
     "after_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
-    "final_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e"
+    "final_sha256": "e5ab070ec285e3823b8342f82e0f38eb7eb6ab64cff3c426536646800f252e17"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/system/rom.c",
     "macro": "A2CPU",
-    "line": 277,
-    "body_end": 278,
+    "line": 278,
+    "body_end": 279,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
     "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
     "local_sha256": "b04cea60a3a8005cafe464ecd5918d21c12bb3924956012614fd90911e9e2050",
     "removed_body_sha256": "6bbbb6aa39b4181d0271721ffa5320782ebcace28ca317931aa7325eec107624",
     "removed_body_lines": 1,
     "after_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
-    "final_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e"
+    "final_sha256": "e5ab070ec285e3823b8342f82e0f38eb7eb6ab64cff3c426536646800f252e17"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -341,7 +341,7 @@
     "removed_body_sha256": "b4be99b65fe849634b71ec4dce4d75d8b2f8d2489a5591bf8d1b94e6aa868781",
     "removed_body_lines": 2,
     "after_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
-    "final_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e"
+    "final_sha256": "e5ab070ec285e3823b8342f82e0f38eb7eb6ab64cff3c426536646800f252e17"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/com.c",
@@ -354,7 +354,7 @@
     "removed_body_sha256": "67133962a328d5b3c3788456afceff86cd58ee082ed61a21c79faa246fe836b7",
     "removed_body_lines": 7,
     "after_sha256": "420b95451f433339b702c5283a2382e0c4f68bd32201506637e164f9cd95fa62",
-    "final_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+    "final_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
     "pre_depth1_ntvdm_line": 2152,
     "pre_depth1_ntvdm_body_end": 2159
   },
@@ -369,7 +369,7 @@
     "removed_body_sha256": "9900fb12ff5e7610393025d341dd4e61b51898fce3766c7b231fba5caeaeeb7f",
     "removed_body_lines": 112,
     "after_sha256": "420b95451f433339b702c5283a2382e0c4f68bd32201506637e164f9cd95fa62",
-    "final_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+    "final_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
     "pre_depth1_ntvdm_line": 1100,
     "pre_depth1_ntvdm_body_end": 1212
   },
@@ -384,7 +384,7 @@
     "removed_body_sha256": "2ab52359fa22e8db58fc3f6e4d83fb07c474c7cd2c03140c6ca8a7b2b6ce0647",
     "removed_body_lines": 27,
     "after_sha256": "420b95451f433339b702c5283a2382e0c4f68bd32201506637e164f9cd95fa62",
-    "final_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+    "final_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
     "pre_depth1_ntvdm_line": 944,
     "pre_depth1_ntvdm_body_end": 971
   },
@@ -399,7 +399,7 @@
     "removed_body_sha256": "9d27d5bd3f523be52831228f2689c2a9cece1b5a5795145da9014cddfbfc9eaa",
     "removed_body_lines": 1,
     "after_sha256": "420b95451f433339b702c5283a2382e0c4f68bd32201506637e164f9cd95fa62",
-    "final_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+    "final_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
     "pre_depth1_ntvdm_line": 725,
     "pre_depth1_ntvdm_body_end": 726
   },
@@ -414,7 +414,7 @@
     "removed_body_sha256": "dd4a052b10589ad415ad7a302d9055a2dbc0ce234e7136b7b9d30e997b769985",
     "removed_body_lines": 15,
     "after_sha256": "420b95451f433339b702c5283a2382e0c4f68bd32201506637e164f9cd95fa62",
-    "final_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+    "final_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
     "pre_depth1_ntvdm_line": 600,
     "disposition": "subsumed-depth1-NTVDM"
   },
@@ -429,7 +429,7 @@
     "removed_body_sha256": "3d601a2dd10627943e038c7e88322ff4bc5f21a59e7d2a245ef2997a9089985c",
     "removed_body_lines": 19,
     "after_sha256": "420b95451f433339b702c5283a2382e0c4f68bd32201506637e164f9cd95fa62",
-    "final_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+    "final_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
     "pre_depth1_ntvdm_line": 463,
     "pre_depth1_ntvdm_body_end": 482
   },
@@ -444,7 +444,7 @@
     "removed_body_sha256": "7109e19db499f79eb8b080f3efd320d1da57a70a2ea65d6ab4d80fc61f54d485",
     "removed_body_lines": 1,
     "after_sha256": "420b95451f433339b702c5283a2382e0c4f68bd32201506637e164f9cd95fa62",
-    "final_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+    "final_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
     "pre_depth1_ntvdm_line": 455,
     "pre_depth1_ntvdm_body_end": 456
   },
@@ -459,7 +459,7 @@
     "removed_body_sha256": "c0324ba43752ce751a484492678f532cbe6c4afad92c98fca5333c3b64aebebd",
     "removed_body_lines": 1,
     "after_sha256": "420b95451f433339b702c5283a2382e0c4f68bd32201506637e164f9cd95fa62",
-    "final_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+    "final_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
     "pre_depth1_ntvdm_line": 431,
     "pre_depth1_ntvdm_body_end": 432
   },
@@ -474,7 +474,7 @@
     "removed_body_sha256": "d99dbabb8188ad6a3f4d9980973a678dc525274eeb38ca562f0c68f17974591a",
     "removed_body_lines": 5,
     "after_sha256": "420b95451f433339b702c5283a2382e0c4f68bd32201506637e164f9cd95fa62",
-    "final_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+    "final_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
     "pre_depth1_ntvdm_line": 396,
     "pre_depth1_ntvdm_body_end": 401
   },
@@ -489,7 +489,7 @@
     "removed_body_sha256": "c008e4da6420dec1c55af230f47786c04edfe76348f69733cd6dd952fbcdfbe0",
     "removed_body_lines": 1,
     "after_sha256": "420b95451f433339b702c5283a2382e0c4f68bd32201506637e164f9cd95fa62",
-    "final_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+    "final_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
     "pre_depth1_ntvdm_line": 158,
     "pre_depth1_ntvdm_body_end": 159
   },
@@ -504,7 +504,7 @@
     "removed_body_sha256": "3233e26d601f05761b7cc6a6bcc7b943ee131168e1906094c4f48f2fe0aa56d3",
     "removed_body_lines": 6,
     "after_sha256": "420b95451f433339b702c5283a2382e0c4f68bd32201506637e164f9cd95fa62",
-    "final_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+    "final_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
     "pre_depth1_ntvdm_line": 90,
     "pre_depth1_ntvdm_body_end": 96
   },
@@ -1046,15 +1046,15 @@
   {
     "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
     "macro": "A3CPU",
-    "line": 169,
-    "body_end": 217,
+    "line": 165,
+    "body_end": 213,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cpu.c",
     "original_sha256": "3f77f06e497854b00f58acde8bfe7b5e67af7c5e67174deb579cd76e13f5830f",
     "local_sha256": "7d0eeac927d2e0992f17950500335d4190ad827646afa09112424bd09682ddcc",
     "removed_body_sha256": "24587d20098049ceaedf917b9faaa638b2efb1eea17acaacb9aad28bc8abb876",
     "removed_body_lines": 48,
     "after_sha256": "ae87a5bf7ecfd807b59081e9fda485c92e0059c2bf647be6c28347c826adbff5",
-    "final_sha256": "ae87a5bf7ecfd807b59081e9fda485c92e0059c2bf647be6c28347c826adbff5"
+    "final_sha256": "e0b3099b5e7e25ad60f4219d706926a9f905771521e63f2a0fee7d17e4cc48ea"
   },
   {
     "path": "src/mvdm-host/softpc.new/host/src/nt_hunt.c",
@@ -1184,7 +1184,7 @@
     "removed_body_sha256": "e0576812e512c480b9af254029dfa2c016acd20180a4a2220f6fb7a8a75827d2",
     "removed_body_lines": 6,
     "after_sha256": "9fc3c42fee2250d91f772d6451a36cb20cd05911dea3a29397342d59ccaa3fe2",
-    "final_sha256": "db5481c11626d9b5f13cfedd51b005c8bd3a33450a8e85282aff2fb8fd84c072"
+    "final_sha256": "0caae2986bd5256ecdee046d9961c5176a3d5178426a198b5f42fb3eb0bef369"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
@@ -1314,7 +1314,7 @@
     "removed_body_sha256": "85981201678d1786d6e8229c7febb7b65cd0737f9d82f18b6aa50af2a212424d",
     "removed_body_lines": 6,
     "after_sha256": "a33505d2e4e8627b925e428fc1044cfd5e110452ae41983f945742eb4c8026d2",
-    "final_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe"
+    "final_sha256": "7485467a6802013b69a2425ef5d8aa416647b96746be17c303260d487fa66fe8"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
@@ -1379,7 +1379,7 @@
     "removed_body_sha256": "85981201678d1786d6e8229c7febb7b65cd0737f9d82f18b6aa50af2a212424d",
     "removed_body_lines": 6,
     "after_sha256": "1e257c03f0c9ba553bf8d6883b6da91fd1645092e46a2340e32ac27630597f43",
-    "final_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+    "final_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
     "pre_depth1_ntvdm_line": 2074,
     "pre_depth1_ntvdm_body_end": 2080
   },
@@ -1394,7 +1394,7 @@
     "removed_body_sha256": "d95f6545db59ec9d5fb03227f22af5f82b52a1b5a28035ae2f3f1973517fb1df",
     "removed_body_lines": 6,
     "after_sha256": "1e257c03f0c9ba553bf8d6883b6da91fd1645092e46a2340e32ac27630597f43",
-    "final_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
+    "final_sha256": "5c7d75d52567c673ad462ca57d8543ea9ea2da684c3da974b029f8ace6c3082c",
     "pre_depth1_ntvdm_line": 19,
     "pre_depth1_ntvdm_body_end": 25
   },
@@ -1513,7 +1513,7 @@
     "removed_body_sha256": "50a152f20adf7bed95f3489f665b11d73df31e8b3941e2d7c3a4c097305b5dda",
     "removed_body_lines": 6,
     "after_sha256": "89112dc9a067b3a2e80bb450b7b392003b4379beaac961992ec90325e355114c",
-    "final_sha256": "89112dc9a067b3a2e80bb450b7b392003b4379beaac961992ec90325e355114c"
+    "final_sha256": "060b545602902d90e0ad5d1ed0804a9d0b0d27dcfc8bd4650b721c2a27cb24c9"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
@@ -1526,7 +1526,7 @@
     "removed_body_sha256": "ad7d806ac75bc76719717ef02d5f97f35c2c09293a733f0fca27adcdc94751ae",
     "removed_body_lines": 6,
     "after_sha256": "5908873bd5f6391511efc733b04537bd56007df973b95d0cd1124ab84ff283d4",
-    "final_sha256": "5908873bd5f6391511efc733b04537bd56007df973b95d0cd1124ab84ff283d4"
+    "final_sha256": "453798cd8f6f46277dc74f27db2a764933605f4461df45e417724f3210ae44c4"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
@@ -1557,15 +1557,15 @@
   {
     "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
     "macro": "SEGMENTATION",
-    "line": 3106,
-    "body_end": 3112,
+    "line": 3094,
+    "body_end": 3100,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
     "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
     "local_sha256": "6243e8880ead63dd1b5d8fe427cefdc1298af9cf9a2b7d790193a080bfd3bd40",
     "removed_body_sha256": "85981201678d1786d6e8229c7febb7b65cd0737f9d82f18b6aa50af2a212424d",
     "removed_body_lines": 6,
     "after_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
-    "final_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc"
+    "final_sha256": "1061f78f7602480edc3ad0d0de1370bda8ae1df3f5e1d38ecb2fd0cb8255fb68"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
@@ -1578,7 +1578,7 @@
     "removed_body_sha256": "5536f543792e7892195eba6128b8ce156fc8d4ff0f1c4bf00fe0a43c7a35809c",
     "removed_body_lines": 6,
     "after_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
-    "final_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc"
+    "final_sha256": "1061f78f7602480edc3ad0d0de1370bda8ae1df3f5e1d38ecb2fd0cb8255fb68"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
@@ -1747,7 +1747,7 @@
     "removed_body_sha256": "c102ef1c65d43a4603d28a53fd19f574dd3a4f66a8758f1da7ac2593c3cbffe1",
     "removed_body_lines": 6,
     "after_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
-    "final_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee"
+    "final_sha256": "bf1f7a8f0f59cd05d2d709e633e8ec781c2e57edea2629f439bb926343b6371e"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
@@ -1760,7 +1760,7 @@
     "removed_body_sha256": "78d696af3e263aa822e1546f1b2e679cd717f6248a13e58071701125cc619f17",
     "removed_body_lines": 6,
     "after_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
-    "final_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee"
+    "final_sha256": "bf1f7a8f0f59cd05d2d709e633e8ec781c2e57edea2629f439bb926343b6371e"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
@@ -1773,7 +1773,7 @@
     "removed_body_sha256": "1cf9ac977fbcce7f8c1fbf1ef8d2a1673e553ab2152b1eb5df447f6b784276c5",
     "removed_body_lines": 6,
     "after_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee",
-    "final_sha256": "ec666e1b7433abe5ece90f2614a226489b6492ca1b10bbfaa392852cd384ffee"
+    "final_sha256": "bf1f7a8f0f59cd05d2d709e633e8ec781c2e57edea2629f439bb926343b6371e"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -1817,15 +1817,15 @@
   {
     "path": "src/mvdm-host/softpc.new/base/support/ios.c",
     "macro": "SEGMENTATION",
-    "line": 916,
-    "body_end": 922,
+    "line": 915,
+    "body_end": 921,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\ios.c",
     "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
     "local_sha256": "94058c27cdf37af10ee5a80ffede4b04180f6651f161702bd38ce9458386b7e4",
     "removed_body_sha256": "f5f2b01d7e493e56051c882a6e1a1a4b0ecc3e535e8c931f0d6bb7ff93502704",
     "removed_body_lines": 6,
     "after_sha256": "6ea5365b039b059a4b16dbe2c8d0f630c4db670105159644fcfd7d84630038c6",
-    "final_sha256": "6ea5365b039b059a4b16dbe2c8d0f630c4db670105159644fcfd7d84630038c6"
+    "final_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -1838,7 +1838,7 @@
     "removed_body_sha256": "d08ac2fd043b1ab10ca67d93cfb769693a8115f3a9dc9c0af909027782d15b4e",
     "removed_body_lines": 6,
     "after_sha256": "6ea5365b039b059a4b16dbe2c8d0f630c4db670105159644fcfd7d84630038c6",
-    "final_sha256": "6ea5365b039b059a4b16dbe2c8d0f630c4db670105159644fcfd7d84630038c6"
+    "final_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
@@ -1851,7 +1851,7 @@
     "removed_body_sha256": "c102ef1c65d43a4603d28a53fd19f574dd3a4f66a8758f1da7ac2593c3cbffe1",
     "removed_body_lines": 6,
     "after_sha256": "21846776c2f3538e914cd255780d7e252e9381e2a82ed299709046752f320625",
-    "final_sha256": "21846776c2f3538e914cd255780d7e252e9381e2a82ed299709046752f320625"
+    "final_sha256": "cb6328db687f1156bd4bec1b69c6f4921ade18baeccd8237125d5d78b2cb336b"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
@@ -1864,7 +1864,7 @@
     "removed_body_sha256": "7ecd3e1a3425e8950ed7040d50637d49bc0b19ca17dd1cbc42b81858d2f90eb4",
     "removed_body_lines": 6,
     "after_sha256": "1f3420925d327c21cb1498c35b337b88002df74af813e4fb897bbd97975348f1",
-    "final_sha256": "1430887916bcd42c4f7da75cbdff04a8823658a508b823d61e9784489a1e1152"
+    "final_sha256": "2989e844746621d26ada2b8012d55b322095d776f65cd6b955fa09675331a1d2"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
@@ -1988,15 +1988,15 @@
   {
     "path": "src/mvdm-host/softpc.new/base/system/timer.c",
     "macro": "SEGMENTATION",
-    "line": 2123,
-    "body_end": 2129,
+    "line": 2124,
+    "body_end": 2130,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timer.c",
     "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
     "local_sha256": "83cfcdf32d4f0f04d7c8af62cd879ba24620457a27e3f55194fbb1a4ac4c8730",
     "removed_body_sha256": "c102ef1c65d43a4603d28a53fd19f574dd3a4f66a8758f1da7ac2593c3cbffe1",
     "removed_body_lines": 6,
     "after_sha256": "0088ec167676cd6472c9b59113eb76de9d48fb11e65ad94b9e2796053fdaa53a",
-    "final_sha256": "86936aef29e5d5d3a02166375586bffdcdf4afb48c5d9f50532947516cbbfa51",
+    "final_sha256": "4d06d007979fa0c85b3083b00f4a67086b39dbbff21d4a5cd5bbbb817919eb38",
     "pre_depth1_ntvdm_line": 2447,
     "pre_depth1_ntvdm_body_end": 2453
   },
@@ -2011,7 +2011,7 @@
     "removed_body_sha256": "019f0bb79d2bf2c4fe3eecc4e7ee0f147e4da8c2a0a0037492f362f76b2ff624",
     "removed_body_lines": 6,
     "after_sha256": "0088ec167676cd6472c9b59113eb76de9d48fb11e65ad94b9e2796053fdaa53a",
-    "final_sha256": "86936aef29e5d5d3a02166375586bffdcdf4afb48c5d9f50532947516cbbfa51",
+    "final_sha256": "4d06d007979fa0c85b3083b00f4a67086b39dbbff21d4a5cd5bbbb817919eb38",
     "pre_depth1_ntvdm_line": 38,
     "pre_depth1_ntvdm_body_end": 44
   },
@@ -2239,184 +2239,184 @@
   {
     "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
     "macro": "SEGMENTATION",
-    "line": 3767,
-    "body_end": 3768,
+    "line": 3769,
+    "body_end": 3770,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
     "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
     "local_sha256": "57519785d2bdf6020d0587a987713e397b0de01ef23f954981e27856df22c88e",
     "removed_body_sha256": "4f0e86ea5dcce7118c3ef77c688a3fc92d9fe35371ab2ff1d0822dad6d753a91",
     "removed_body_lines": 1,
     "after_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
-    "final_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    "final_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
     "macro": "SEGMENTATION",
-    "line": 3681,
-    "body_end": 3682,
+    "line": 3683,
+    "body_end": 3684,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
     "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
     "local_sha256": "57519785d2bdf6020d0587a987713e397b0de01ef23f954981e27856df22c88e",
     "removed_body_sha256": "2ab20b4c8b10e8ad7c1a549010313feb9bc23c82947a11d862f74aa9a313f593",
     "removed_body_lines": 1,
     "after_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
-    "final_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    "final_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
     "macro": "SEGMENTATION",
-    "line": 3571,
-    "body_end": 3572,
+    "line": 3573,
+    "body_end": 3574,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
     "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
     "local_sha256": "57519785d2bdf6020d0587a987713e397b0de01ef23f954981e27856df22c88e",
     "removed_body_sha256": "4f0e86ea5dcce7118c3ef77c688a3fc92d9fe35371ab2ff1d0822dad6d753a91",
     "removed_body_lines": 1,
     "after_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
-    "final_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    "final_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
     "macro": "SEGMENTATION",
-    "line": 3470,
-    "body_end": 3471,
+    "line": 3472,
+    "body_end": 3473,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
     "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
     "local_sha256": "57519785d2bdf6020d0587a987713e397b0de01ef23f954981e27856df22c88e",
     "removed_body_sha256": "2ab20b4c8b10e8ad7c1a549010313feb9bc23c82947a11d862f74aa9a313f593",
     "removed_body_lines": 1,
     "after_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
-    "final_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    "final_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
     "macro": "SEGMENTATION",
-    "line": 3446,
-    "body_end": 3447,
+    "line": 3448,
+    "body_end": 3449,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
     "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
     "local_sha256": "57519785d2bdf6020d0587a987713e397b0de01ef23f954981e27856df22c88e",
     "removed_body_sha256": "4f0e86ea5dcce7118c3ef77c688a3fc92d9fe35371ab2ff1d0822dad6d753a91",
     "removed_body_lines": 1,
     "after_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
-    "final_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    "final_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
     "macro": "SEGMENTATION",
-    "line": 3355,
-    "body_end": 3356,
+    "line": 3357,
+    "body_end": 3358,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
     "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
     "local_sha256": "57519785d2bdf6020d0587a987713e397b0de01ef23f954981e27856df22c88e",
     "removed_body_sha256": "2ab20b4c8b10e8ad7c1a549010313feb9bc23c82947a11d862f74aa9a313f593",
     "removed_body_lines": 1,
     "after_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
-    "final_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    "final_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
     "macro": "SEGMENTATION",
-    "line": 3278,
-    "body_end": 3279,
+    "line": 3280,
+    "body_end": 3281,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
     "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
     "local_sha256": "57519785d2bdf6020d0587a987713e397b0de01ef23f954981e27856df22c88e",
     "removed_body_sha256": "4f0e86ea5dcce7118c3ef77c688a3fc92d9fe35371ab2ff1d0822dad6d753a91",
     "removed_body_lines": 1,
     "after_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
-    "final_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    "final_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
     "macro": "SEGMENTATION",
-    "line": 3211,
-    "body_end": 3217,
+    "line": 3213,
+    "body_end": 3219,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
     "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
     "local_sha256": "57519785d2bdf6020d0587a987713e397b0de01ef23f954981e27856df22c88e",
     "removed_body_sha256": "99662fc84fb80e73ebaadca6aee50ea624c57522427c0da81494beee43882da5",
     "removed_body_lines": 6,
     "after_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
-    "final_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    "final_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
     "macro": "SEGMENTATION",
-    "line": 2262,
-    "body_end": 2263,
+    "line": 2264,
+    "body_end": 2265,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
     "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
     "local_sha256": "57519785d2bdf6020d0587a987713e397b0de01ef23f954981e27856df22c88e",
     "removed_body_sha256": "4f0e86ea5dcce7118c3ef77c688a3fc92d9fe35371ab2ff1d0822dad6d753a91",
     "removed_body_lines": 1,
     "after_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
-    "final_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    "final_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
     "macro": "SEGMENTATION",
-    "line": 1759,
-    "body_end": 1760,
+    "line": 1761,
+    "body_end": 1762,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
     "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
     "local_sha256": "57519785d2bdf6020d0587a987713e397b0de01ef23f954981e27856df22c88e",
     "removed_body_sha256": "2ab20b4c8b10e8ad7c1a549010313feb9bc23c82947a11d862f74aa9a313f593",
     "removed_body_lines": 1,
     "after_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
-    "final_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    "final_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
     "macro": "SEGMENTATION",
-    "line": 1146,
-    "body_end": 1147,
+    "line": 1148,
+    "body_end": 1149,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
     "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
     "local_sha256": "57519785d2bdf6020d0587a987713e397b0de01ef23f954981e27856df22c88e",
     "removed_body_sha256": "4f0e86ea5dcce7118c3ef77c688a3fc92d9fe35371ab2ff1d0822dad6d753a91",
     "removed_body_lines": 1,
     "after_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
-    "final_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    "final_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
     "macro": "SEGMENTATION",
-    "line": 710,
-    "body_end": 711,
+    "line": 712,
+    "body_end": 713,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
     "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
     "local_sha256": "57519785d2bdf6020d0587a987713e397b0de01ef23f954981e27856df22c88e",
     "removed_body_sha256": "2ab20b4c8b10e8ad7c1a549010313feb9bc23c82947a11d862f74aa9a313f593",
     "removed_body_lines": 1,
     "after_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
-    "final_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    "final_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
     "macro": "SEGMENTATION",
-    "line": 577,
-    "body_end": 578,
+    "line": 579,
+    "body_end": 580,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
     "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
     "local_sha256": "57519785d2bdf6020d0587a987713e397b0de01ef23f954981e27856df22c88e",
     "removed_body_sha256": "4f0e86ea5dcce7118c3ef77c688a3fc92d9fe35371ab2ff1d0822dad6d753a91",
     "removed_body_lines": 1,
     "after_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
-    "final_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    "final_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
     "macro": "SEGMENTATION",
-    "line": 499,
-    "body_end": 500,
+    "line": 501,
+    "body_end": 502,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gfx_updt.c",
     "original_sha256": "02677d929c9d6e1f7c3157b2925f7099ecf3261bd8d26370d6f1fd738129e987",
     "local_sha256": "57519785d2bdf6020d0587a987713e397b0de01ef23f954981e27856df22c88e",
     "removed_body_sha256": "2ab20b4c8b10e8ad7c1a549010313feb9bc23c82947a11d862f74aa9a313f593",
     "removed_body_lines": 1,
     "after_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
-    "final_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    "final_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
@@ -2429,7 +2429,7 @@
     "removed_body_sha256": "c104df9715cdd01a6308d4ece0ec32e11b3cc211b3887585b23d6e674005a201",
     "removed_body_lines": 6,
     "after_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15",
-    "final_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    "final_sha256": "73fae31f62a6893cdb7c40fe43d736054e55a2071bf775eb5d540f2404d39c3c"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
@@ -2525,15 +2525,15 @@
   {
     "path": "src/mvdm-host/softpc.new/base/video/video.c",
     "macro": "SEGMENTATION",
-    "line": 2579,
-    "body_end": 2585,
+    "line": 2580,
+    "body_end": 2586,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
     "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
     "local_sha256": "383fc76d6991847b37fb95025eeb33a2b4294c89774cf80f62d89c03c3f3437d",
     "removed_body_sha256": "c102ef1c65d43a4603d28a53fd19f574dd3a4f66a8758f1da7ac2593c3cbffe1",
     "removed_body_lines": 6,
     "after_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
-    "final_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60"
+    "final_sha256": "ad5273149aca246d05cd043be4f367041273ec1eab969e316094977ea045fdb6"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -2546,7 +2546,7 @@
     "removed_body_sha256": "6390ff747038cdd252e108f5d21f28da88f1eef48cbbc31d50f1f9feb224b646",
     "removed_body_lines": 6,
     "after_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
-    "final_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60"
+    "final_sha256": "ad5273149aca246d05cd043be4f367041273ec1eab969e316094977ea045fdb6"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/video_io.c",
@@ -3006,6 +3006,6 @@
       652,
       656
     ],
-    "final_sha256": "db5481c11626d9b5f13cfedd51b005c8bd3a33450a8e85282aff2fb8fd84c072"
+    "final_sha256": "0caae2986bd5256ecdee046d9961c5176a3d5178426a198b5f42fb3eb0bef369"
   }
 ]

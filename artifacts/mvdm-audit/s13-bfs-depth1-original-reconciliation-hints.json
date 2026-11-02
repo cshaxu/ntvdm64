@@ -1,0 +1,1470 @@
+{
+  "scope": "first-depth original condition groups in multiplicity mismatch entries",
+  "counts": {
+    "no_function_match": 17,
+    "function_name_present": 25,
+    "function_name_absent": 35
+  },
+  "records": [
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "directive": "if",
+      "expression": "defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)",
+      "original_line": 50,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [
+        {
+          "line": 74,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "directive": "ifdef",
+      "expression": "_X86_",
+      "original_line": 205,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "GetBinaryTypeW",
+          "start": 93,
+          "end": 301,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 2211,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "directive": "ifdef",
+      "expression": "_MIPS_",
+      "original_line": 259,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "GetBinaryTypeW",
+          "start": 93,
+          "end": 301,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 2265,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "original_line": 23,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [
+        {
+          "line": 56,
+          "depth": 2
+        },
+        {
+          "line": 400,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "original_line": 572,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "DefWindowProcWorker",
+          "start": 555,
+          "end": 1217,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 56,
+          "depth": 2
+        },
+        {
+          "line": 400,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "original_line": 1214,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "DefWindowProcWorker",
+          "start": 555,
+          "end": 1217,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 56,
+          "depth": 2
+        },
+        {
+          "line": 400,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "original_line": 327,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "SendMessageWorker",
+          "start": 258,
+          "end": 470,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 52,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "original_line": 566,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "DefWindowProcWorker",
+          "start": 555,
+          "end": 1217,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 52,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "directive": "if",
+      "expression": "defined(FE_IME)",
+      "original_line": 905,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "DefWindowProcWorker",
+          "start": 555,
+          "end": 1217,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 392,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "original_line": 881,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "CreateIcoCur",
+          "start": 868,
+          "end": 904,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "original_line": 3901,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "GetIcoCurBpp",
+          "start": 3896,
+          "end": 3913,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "directive": "if",
+      "expression": "0",
+      "original_line": 1480,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "CreateIconFromResourceEx",
+          "start": 1455,
+          "end": 1497,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 671,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "directive": "if",
+      "expression": "0",
+      "original_line": 1674,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "CreateScreenBitmap",
+          "start": 1565,
+          "end": 1719,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 671,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "directive": "if",
+      "expression": "0",
+      "original_line": 2298,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "LoadImageW",
+          "start": 2278,
+          "end": 2327,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 671,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "directive": "if",
+      "expression": "0",
+      "original_line": 2624,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "LoadIcoCur",
+          "start": 2492,
+          "end": 2680,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 671,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "directive": "if",
+      "expression": "0",
+      "original_line": 3751,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "MatchImage",
+          "start": 3703,
+          "end": 3763,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 671,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "directive": "if",
+      "expression": "0",
+      "original_line": 4516,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "InternalCopyImage",
+          "start": 4497,
+          "end": 4536,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 671,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "directive": "if",
+      "expression": "0",
+      "original_line": 4574,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "RtlGetIdFromDirectory",
+          "start": 4546,
+          "end": 4597,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 671,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "directive": "ifdef",
+      "expression": "LATER",
+      "original_line": 2640,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "LoadIcoCur",
+          "start": 2492,
+          "end": 2680,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "original_line": 221,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "IsDialogMessageA",
+          "start": 213,
+          "end": 255,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 245,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "original_line": 240,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "IsDialogMessageA",
+          "start": 213,
+          "end": 255,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 256,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "directive": "ifdef",
+      "expression": "LATER",
+      "original_line": 281,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "IsDialogMessageW",
+          "start": 257,
+          "end": 634,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 297,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "directive": "if",
+      "expression": "0",
+      "original_line": 209,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "ClientDrawState",
+          "start": 73,
+          "end": 490,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 147,
+          "depth": 2
+        },
+        {
+          "line": 183,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "directive": "if",
+      "expression": "0",
+      "original_line": 251,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "ClientDrawState",
+          "start": 73,
+          "end": 490,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 147,
+          "depth": 2
+        },
+        {
+          "line": 183,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "original_line": 77,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "UpdatePerUserSystemParameters",
+          "start": 65,
+          "end": 99,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "original_line": 717,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "_PeekMessage",
+          "start": 680,
+          "end": 803,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "original_line": 1020,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "TranslateMessage",
+          "start": 1017,
+          "end": 1035,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "LATER",
+      "original_line": 358,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "GetWindowPlacement",
+          "start": 354,
+          "end": 378,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "MEMPHIS_MENUS",
+      "original_line": 380,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "MEMPHIS_MENU_WATERMARKS",
+      "original_line": 500,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "original_line": 693,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "_PeekMessage",
+          "start": 680,
+          "end": 803,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "original_line": 753,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "_PeekMessage",
+          "start": 680,
+          "end": 803,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "original_line": 769,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "_PeekMessage",
+          "start": 680,
+          "end": 803,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "original_line": 784,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "_PeekMessage",
+          "start": 680,
+          "end": 803,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "original_line": 797,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "_PeekMessage",
+          "start": 680,
+          "end": 803,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "original_line": 1611,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "original_line": 953,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "_SetWindowLong",
+          "start": 827,
+          "end": 981,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 214,
+          "depth": 2
+        },
+        {
+          "line": 226,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "original_line": 965,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "_SetWindowLong",
+          "start": 827,
+          "end": 981,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 214,
+          "depth": 2
+        },
+        {
+          "line": 226,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "original_line": 2204,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "BroadcastSystemMessageWorker",
+          "start": 2160,
+          "end": 2261,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 214,
+          "depth": 2
+        },
+        {
+          "line": 226,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "directive": "if",
+      "expression": "DBG",
+      "original_line": 319,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "AllocLookasideEntry",
+          "start": 300,
+          "end": 335,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 189,
+          "depth": 2
+        },
+        {
+          "line": 196,
+          "depth": 2
+        },
+        {
+          "line": 215,
+          "depth": 2
+        },
+        {
+          "line": 227,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "directive": "if",
+      "expression": "DBG",
+      "original_line": 326,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "AllocLookasideEntry",
+          "start": 300,
+          "end": 335,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 189,
+          "depth": 2
+        },
+        {
+          "line": 196,
+          "depth": 2
+        },
+        {
+          "line": 215,
+          "depth": 2
+        },
+        {
+          "line": 227,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "directive": "if",
+      "expression": "DBG",
+      "original_line": 349,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "FreeLookasideEntry",
+          "start": 345,
+          "end": 366,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 189,
+          "depth": 2
+        },
+        {
+          "line": 196,
+          "depth": 2
+        },
+        {
+          "line": 215,
+          "depth": 2
+        },
+        {
+          "line": 227,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "directive": "if",
+      "expression": "DBG",
+      "original_line": 361,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "FreeLookasideEntry",
+          "start": 345,
+          "end": 366,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 189,
+          "depth": 2
+        },
+        {
+          "line": 196,
+          "depth": 2
+        },
+        {
+          "line": 215,
+          "depth": 2
+        },
+        {
+          "line": 227,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "directive": "ifndef",
+      "expression": "_USERCLI_",
+      "original_line": 15,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "directive": "if",
+      "expression": "DBG",
+      "original_line": 2307,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [
+        {
+          "line": 81,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "directive": "if",
+      "expression": "DBG",
+      "original_line": 2320,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [
+        {
+          "line": 81,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "directive": "if",
+      "expression": "HANDLE_FIXUP",
+      "original_line": 2342,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "directive": "if",
+      "expression": "HANDLE_FIXUP",
+      "original_line": 2358,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "original_line": 2374,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "original_line": 53,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [
+        {
+          "line": 377,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "original_line": 481,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [
+        {
+          "line": 377,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "original_line": 583,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [
+        {
+          "line": 377,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "original_line": 833,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "InitSyncOnlyMessages",
+          "start": 730,
+          "end": 878,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 377,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "original_line": 990,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "InitFunctionTables",
+          "start": 928,
+          "end": 1021,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 377,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "original_line": 1054,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "InitMessageTables",
+          "start": 1032,
+          "end": 1057,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 377,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "original_line": 1861,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "UserInitialize",
+          "start": 1691,
+          "end": 1934,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [
+        {
+          "line": 377,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "if",
+      "expression": "0",
+      "original_line": 461,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [
+        {
+          "line": 278,
+          "depth": 2
+        }
+      ],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "original_line": 850,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "InitSyncOnlyMessages",
+          "start": 730,
+          "end": 878,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "original_line": 934,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "InitFunctionTables",
+          "start": 928,
+          "end": 1021,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "original_line": 1002,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "InitFunctionTables",
+          "start": 928,
+          "end": 1021,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "original_line": 1163,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "InitGlobalRIPFlags",
+          "start": 1160,
+          "end": 1211,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "original_line": 1822,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "UserInitialize",
+          "start": 1691,
+          "end": 1934,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifndef",
+      "expression": "PAGE_SIZE",
+      "original_line": 1257,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "directive": "ifdef",
+      "expression": "ANDREVA_DBG",
+      "original_line": 1703,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "UserInitialize",
+          "start": 1691,
+          "end": 1934,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "original_line": 17,
+      "ownership_hint": "no_function_match",
+      "functions": [],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "original_line": 59,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "WCSToMBEx",
+          "start": 50,
+          "end": 186,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "original_line": 146,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "WCSToMBEx",
+          "start": 50,
+          "end": 186,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "original_line": 270,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "MBToWCSEx",
+          "start": 190,
+          "end": 311,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "original_line": 378,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "RtlWCSMessageWParamCharToMB",
+          "start": 323,
+          "end": 429,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "original_line": 515,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "RtlMBMessageWParamCharToWCS",
+          "start": 442,
+          "end": 548,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "original_line": 326,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "RtlWCSMessageWParamCharToMB",
+          "start": 323,
+          "end": 429,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "original_line": 351,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "RtlWCSMessageWParamCharToMB",
+          "start": 323,
+          "end": 429,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "original_line": 393,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "RtlWCSMessageWParamCharToMB",
+          "start": 323,
+          "end": 429,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "original_line": 446,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "RtlMBMessageWParamCharToWCS",
+          "start": 442,
+          "end": 548,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "original_line": 457,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "RtlMBMessageWParamCharToWCS",
+          "start": 442,
+          "end": 548,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "original_line": 530,
+      "ownership_hint": "function_name_present",
+      "functions": [
+        {
+          "name": "RtlMBMessageWParamCharToWCS",
+          "start": 442,
+          "end": 548,
+          "name_present_current": true
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "original_line": 337,
+      "ownership_hint": "function_name_absent",
+      "functions": [
+        {
+          "name": "RtlWCSMessageWParamCharToMB",
+          "start": 323,
+          "end": 429,
+          "name_present_current": false
+        }
+      ],
+      "matching_current_nested_locations": [],
+      "conclusion": "unverified hint only; no deletion or restoration follows from function-name matching"
+    }
+  ]
+}

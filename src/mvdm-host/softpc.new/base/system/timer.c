@@ -1878,9 +1878,9 @@ LOCAL void issueIREQ0 IFN1(unsigned int, n)
 		if (timer_int_enabled)
 		{
 #ifdef DELAYED_INTS
-			ica_hw_interrupt_delay(ICA_MASTER,CPU_TIMER_INT, n,
-				HOST_TIMER_INT_DELAY);
+#error Unsupported excluded original configuration
 #else /* !DELAYED_INTS */
+#line 2010
 
 #ifdef NTVDM
 			if (n > 0)
@@ -1896,6 +1896,7 @@ LOCAL void issueIREQ0 IFN1(unsigned int, n)
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* !NTVDM */
 #endif /* !DELAYED_INTS */
+#line 2025
 		}
     }
     else if (ticks_blocked > 0)

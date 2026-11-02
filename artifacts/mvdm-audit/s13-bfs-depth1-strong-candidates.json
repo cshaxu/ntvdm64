@@ -1,0 +1,1170 @@
+{
+  "scope": "first depth uniquely matched, no scanned literal macro definitions and no same-file test-driver macro intersection",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "line": 1456,
+      "macro": "NT_ALLOC_DOS_MEM",
+      "original_start": 1453,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/observation/dpmi_ioctl_boundary.c",
+        "tests/observation/dpmi_pointer_trace.c"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": [
+        "tests/observation/dpmi_ioctl_boundary.c",
+        "tests/observation/dpmi_pointer_trace.c"
+      ],
+      "fixture_context_audit": {
+        "drivers": "tools/build/Build-T420S35EnvironmentTrace.ps1:40",
+        "basis": "both fixtures include owner before any headers, introduce only named symbol aliases, and driver inherits exact dpmi owner flags plus DPMI_TRACE_LOG",
+        "additional_macro_definitions": [
+          "DPMI_TRACE_LOG"
+        ],
+        "conclusion": "these two fixtures add no NT_ALLOC_DOS_MEM definition"
+      }
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "line": 1496,
+      "macro": "NT_ALLOC_DOS_MEM",
+      "original_start": 1493,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/observation/dpmi_ioctl_boundary.c",
+        "tests/observation/dpmi_pointer_trace.c"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": [
+        "tests/observation/dpmi_ioctl_boundary.c",
+        "tests/observation/dpmi_pointer_trace.c"
+      ],
+      "fixture_context_audit": {
+        "drivers": "tools/build/Build-T420S35EnvironmentTrace.ps1:40",
+        "basis": "both fixtures include owner before any headers, introduce only named symbol aliases, and driver inherits exact dpmi owner flags plus DPMI_TRACE_LOG",
+        "additional_macro_definitions": [
+          "DPMI_TRACE_LOG"
+        ],
+        "conclusion": "these two fixtures add no NT_ALLOC_DOS_MEM definition"
+      }
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "line": 1541,
+      "macro": "NT_ALLOC_DOS_MEM",
+      "original_start": 1538,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/observation/dpmi_ioctl_boundary.c",
+        "tests/observation/dpmi_pointer_trace.c"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": [
+        "tests/observation/dpmi_ioctl_boundary.c",
+        "tests/observation/dpmi_pointer_trace.c"
+      ],
+      "fixture_context_audit": {
+        "drivers": "tools/build/Build-T420S35EnvironmentTrace.ps1:40",
+        "basis": "both fixtures include owner before any headers, introduce only named symbol aliases, and driver inherits exact dpmi owner flags plus DPMI_TRACE_LOG",
+        "additional_macro_definitions": [
+          "DPMI_TRACE_LOG"
+        ],
+        "conclusion": "these two fixtures add no NT_ALLOC_DOS_MEM definition"
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "line": 84,
+      "macro": "HFX",
+      "original_start": 84,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 108,
+      "macro": "DPMI",
+      "original_start": 108,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/build/test_bfs_depth1_cpu_guards.py",
+        "tests/build/test_mirror_rejected_conditions.py",
+        "tests/observation/verify-dem-pressure.ps1",
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 313,
+      "macro": "FLOPPY_B",
+      "original_start": 323,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/build/test_bfs_depth1_cpu_guards.py",
+        "tests/build/test_mirror_rejected_conditions.py",
+        "tests/observation/verify-dem-pressure.ps1",
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 636,
+      "macro": "IPC",
+      "original_start": 812,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/build/test_bfs_depth1_cpu_guards.py",
+        "tests/build/test_mirror_rejected_conditions.py",
+        "tests/observation/verify-dem-pressure.ps1",
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 1,
+      "last_prior_line_directive_hint": {
+        "line": 378,
+        "directive": "#line 499"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 811,
+      "macro": "HFX",
+      "original_start": 1093,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/build/test_bfs_depth1_cpu_guards.py",
+        "tests/build/test_mirror_rejected_conditions.py",
+        "tests/observation/verify-dem-pressure.ps1",
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 2,
+      "last_prior_line_directive_hint": {
+        "line": 704,
+        "directive": "#line 898"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
+      "line": 226,
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "original_start": 226,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 166,
+      "macro": "CPU_486",
+      "original_start": 155,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+        "tests/observation/verify-ccpu-notification.ps1",
+        "tests/observation/verify-decode-diagnostics.ps1",
+        "tests/observation/verify-wow-callback-abort-ccpu.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "line": 145,
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "original_start": 143,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "line": 140,
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "original_start": 88,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/adapter-basesrv/base_service_reservation_test.c",
+        "tests/observation/wow_message_transaction_provider.c",
+        "tests/component-integration/fixtures/t230_s10_demdisp_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s2_demhndl_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s3_demfile_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s5_demsrch_fcb_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s7_demdasd_ioctl_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s8_demerror_lock_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s9_demmisc_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t231_s2_command_misc_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t231_s3_command_misc_registration_fixture.c",
+        "tests/component-integration/fixtures/t231_s4_command_console_keyboard_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s5_command_config_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s5_command_init_environment_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s5_command_start_info_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s7_command_get_next_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s8_command_lifecycle_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s9_command_exit_direct_fixture.c",
+        "tests/component-integration/fixtures/t236_s1_command_local_child_fixture.c"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "line": 306,
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "original_start": 257,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/adapter-basesrv/base_service_reservation_test.c",
+        "tests/observation/wow_message_transaction_provider.c",
+        "tests/component-integration/fixtures/t230_s10_demdisp_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s2_demhndl_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s3_demfile_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s5_demsrch_fcb_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s7_demdasd_ioctl_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s8_demerror_lock_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s9_demmisc_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t231_s2_command_misc_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t231_s3_command_misc_registration_fixture.c",
+        "tests/component-integration/fixtures/t231_s4_command_console_keyboard_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s5_command_config_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s5_command_init_environment_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s5_command_start_info_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s7_command_get_next_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s8_command_lifecycle_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s9_command_exit_direct_fixture.c",
+        "tests/component-integration/fixtures/t236_s1_command_local_child_fixture.c"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "line": 369,
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "original_start": 320,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/adapter-basesrv/base_service_reservation_test.c",
+        "tests/observation/wow_message_transaction_provider.c",
+        "tests/component-integration/fixtures/t230_s10_demdisp_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s2_demhndl_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s3_demfile_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s5_demsrch_fcb_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s7_demdasd_ioctl_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s8_demerror_lock_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t230_s9_demmisc_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t231_s2_command_misc_direct_import_fixture.c",
+        "tests/component-integration/fixtures/t231_s3_command_misc_registration_fixture.c",
+        "tests/component-integration/fixtures/t231_s4_command_console_keyboard_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s5_command_config_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s5_command_init_environment_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s5_command_start_info_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s7_command_get_next_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s8_command_lifecycle_direct_fixture.c",
+        "tests/component-integration/fixtures/t231_s9_command_exit_direct_fixture.c",
+        "tests/component-integration/fixtures/t236_s1_command_local_child_fixture.c"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "line": 104,
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "original_start": 104,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "line": 70,
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "original_start": 70,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "line": 148,
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "original_start": 148,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+      "line": 86,
+      "macro": "TAKE_REAL_MODE_LIMIT_FAULT",
+      "original_start": 86,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "line": 2891,
+      "macro": "FLOPPIES_KEEP_TRYING",
+      "original_start": 3020,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "line": 367,
+      "macro": "KIPPER",
+      "original_start": 404,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/app/console_frontend_test.c",
+        "tests/component-integration/original_mouse_coordinates_test.c",
+        "tests/observation/verify-wow32-client-view-gap.ps1",
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 288,
+      "macro": "IPC",
+      "original_start": 296,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/app/ntvwm_carrier_order_test.c",
+        "tests/app/ntvwm_close_priority_test.c",
+        "tests/app/run16_package_observed.c",
+        "tests/app/wow_console_startup_test.mjs",
+        "tests/broker/ntsrv_idle_test.c",
+        "tests/build/test_bfs_depth1_cpu_guards.py",
+        "tests/component-integration/verify-frontend-link-ownership.ps1",
+        "tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+        "tests/mvdm-host/wow_dialog_page_faults.c",
+        "tests/mvdm-host/wow_page_domain_reclaim_fixture.c",
+        "tests/observation/build-native-observation-faults.ps1",
+        "tests/observation/build-observation-fault-services.mjs",
+        "tests/observation/launcher_receipt_probe.c",
+        "tests/observation/monitor_layout_test.c",
+        "tests/observation/monitor_live_view_test.c",
+        "tests/observation/verify-ccpu-notification.ps1",
+        "tests/observation/verify-decode-diagnostics.ps1",
+        "tests/observation/verify-native-acquisition-interval.ps1",
+        "tests/observation/verify-wow-callback-abort-ccpu.ps1",
+        "tests/observation/verify-wow-client-view-translation-contract.ps1",
+        "tests/observation/verify-wow-owned-view-read.ps1",
+        "tests/observation/verify-wow-page-cost.ps1",
+        "tests/observation/verify-wow-projection-return-unwind.ps1",
+        "tests/observation/verify-wow32-client-view-gap.ps1",
+        "tests/observation/wow_class_copy_unwind_fixture.c",
+        "tests/legacy/opennt/trace/fixtures/config_prefix_trace_fixture.c",
+        "tests/legacy/opennt/trace/fixtures/host_main_prefix_trace_fixture.c",
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 4,
+      "last_prior_line_directive_hint": {
+        "line": 221,
+        "directive": "#line 221"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": [
+        "tests/app/ntvwm_carrier_order_test.c",
+        "tests/app/ntvwm_close_priority_test.c",
+        "tests/app/run16_package_observed.c",
+        "tests/broker/ntsrv_idle_test.c",
+        "tests/observation/launcher_receipt_probe.c",
+        "tests/observation/monitor_layout_test.c",
+        "tests/observation/monitor_live_view_test.c"
+      ],
+      "fixture_context_audit": {
+        "basis": "basename-only main.c references; listed tests include their own unrelated components",
+        "conclusion": "all seven quoted main.c include paths resolve to ntvwm-exe, run16-exe, ntsrv-exe or ntmon-exe, not this mirror source"
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 327,
+      "macro": "HFX",
+      "original_start": 335,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/app/ntvwm_carrier_order_test.c",
+        "tests/app/ntvwm_close_priority_test.c",
+        "tests/app/run16_package_observed.c",
+        "tests/app/wow_console_startup_test.mjs",
+        "tests/broker/ntsrv_idle_test.c",
+        "tests/build/test_bfs_depth1_cpu_guards.py",
+        "tests/component-integration/verify-frontend-link-ownership.ps1",
+        "tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+        "tests/mvdm-host/wow_dialog_page_faults.c",
+        "tests/mvdm-host/wow_page_domain_reclaim_fixture.c",
+        "tests/observation/build-native-observation-faults.ps1",
+        "tests/observation/build-observation-fault-services.mjs",
+        "tests/observation/launcher_receipt_probe.c",
+        "tests/observation/monitor_layout_test.c",
+        "tests/observation/monitor_live_view_test.c",
+        "tests/observation/verify-ccpu-notification.ps1",
+        "tests/observation/verify-decode-diagnostics.ps1",
+        "tests/observation/verify-native-acquisition-interval.ps1",
+        "tests/observation/verify-wow-callback-abort-ccpu.ps1",
+        "tests/observation/verify-wow-client-view-translation-contract.ps1",
+        "tests/observation/verify-wow-owned-view-read.ps1",
+        "tests/observation/verify-wow-page-cost.ps1",
+        "tests/observation/verify-wow-projection-return-unwind.ps1",
+        "tests/observation/verify-wow32-client-view-gap.ps1",
+        "tests/observation/wow_class_copy_unwind_fixture.c",
+        "tests/legacy/opennt/trace/fixtures/config_prefix_trace_fixture.c",
+        "tests/legacy/opennt/trace/fixtures/host_main_prefix_trace_fixture.c",
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 4,
+      "last_prior_line_directive_hint": {
+        "line": 221,
+        "directive": "#line 221"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": [
+        "tests/app/ntvwm_carrier_order_test.c",
+        "tests/app/ntvwm_close_priority_test.c",
+        "tests/app/run16_package_observed.c",
+        "tests/broker/ntsrv_idle_test.c",
+        "tests/observation/launcher_receipt_probe.c",
+        "tests/observation/monitor_layout_test.c",
+        "tests/observation/monitor_live_view_test.c"
+      ],
+      "fixture_context_audit": {
+        "basis": "basename-only main.c references; listed tests include their own unrelated components",
+        "conclusion": "all seven quoted main.c include paths resolve to ntvwm-exe, run16-exe, ntsrv-exe or ntmon-exe, not this mirror source"
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 73,
+      "macro": "MSWDVR",
+      "original_start": 69,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 112,
+      "macro": "FLOPPY_B",
+      "original_start": 112,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 89,
+      "macro": "XTSFD",
+      "original_start": 89,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/build/test_bfs_depth1_cpu_guards.py"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 300,
+      "macro": "XTSFD",
+      "original_start": 377,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/build/test_bfs_depth1_cpu_guards.py"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 5,
+      "last_prior_line_directive_hint": {
+        "line": 240,
+        "directive": "#line 268"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+      "line": 462,
+      "macro": "FLOPPY_B",
+      "original_start": 468,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1880,
+      "macro": "DELAYED_INTS",
+      "original_start": 2188,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/build/test_bfs_depth1_cpu_guards.py",
+        "tests/build/test_mirror_rejected_conditions.py",
+        "tests/mvdm-host/softpc_delay_heartbeat_fixture.c",
+        "tests/legacy/opennt/trace/fixtures/original_perf_counter_fixture.c",
+        "tools/build/New-T310HeartbeatSourceNinja.ps1",
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 8,
+      "last_prior_line_directive_hint": {
+        "line": 1877,
+        "directive": "#line 2004"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": 161,
+      "macro": "NO_STRING_OPERATIONS",
+      "original_start": 186,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 1,
+      "last_prior_line_directive_hint": {
+        "line": 153,
+        "directive": "#line 153"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": 60,
+      "macro": "I286",
+      "original_start": 48,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/mvdm-host/ccpu_bounded_execution_fixture_seams.c",
+        "tests/mvdm-host/t335_s3_original_callback_ccpu_fixture.c",
+        "tests/legacy/opennt/archived/legacy-adapters/ccpu_host_simulate_bridge.c",
+        "tools/build/New-T313CcpuLifecycleNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": 102,
+      "macro": "_ALPHA_",
+      "original_start": 86,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/mvdm-host/ccpu_bounded_execution_fixture_seams.c",
+        "tests/mvdm-host/t335_s3_original_callback_ccpu_fixture.c",
+        "tests/legacy/opennt/archived/legacy-adapters/ccpu_host_simulate_bridge.c",
+        "tools/build/New-T313CcpuLifecycleNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "line": 1369,
+      "macro": "PLANEDUMPER",
+      "original_start": 1560,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 5,
+      "last_prior_line_directive_hint": {
+        "line": 236,
+        "directive": "#line 253"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "line": 229,
+      "macro": "EJECT_FLOPPY",
+      "original_start": 247,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tools/build/New-T280S20PdbSyntaxNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "line": 341,
+      "macro": "EJECT_FLOPPY",
+      "original_start": 393,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tools/build/New-T280S20PdbSyntaxNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "line": 382,
+      "macro": "EJECT_FLOPPY",
+      "original_start": 468,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tools/build/New-T280S20PdbSyntaxNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "line": 324,
+      "macro": "NO_LONGER_USED",
+      "original_start": 317,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": 230,
+      "macro": "NOT_IN_USE",
+      "original_start": 448,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/observation/extract-wow-create-entry-fixture.ps1",
+        "tests/observation/verify-console-input-batch.ps1",
+        "tests/adapter-mvdm-host-out/softpc/xms_mapped_memory_fixture.c",
+        "tests/adapter-mvdm-host-out/wow/wow_edit_state_fixture.c",
+        "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "tools/build/New-T313CcpuLifecycleNinja.ps1",
+        "tools/build/New-T359S2SasStoreNinja.ps1",
+        "tools/build/New-T404S5Wow32ProviderNinja.ps1",
+        "tools/build/New-T447S3CallBoundaryNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 1,
+      "last_prior_line_directive_hint": {
+        "line": 42,
+        "directive": "#line 42"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 115,
+      "macro": "VR_BREAK",
+      "original_start": 115,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tools/build/New-T324S2LocalRedirectorNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "line": 277,
+      "macro": "PARAMETER_VALIDATION_16_RE_ENABLED",
+      "original_start": 277,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/adapter-mvdm-host-out/wow/wow_metafile_host_fixture.c"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "line": 209,
+      "macro": "NEWALIAS",
+      "original_start": 207,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json",
+        "s13-bfs-depth1-optional-profile-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 2,
+      "last_prior_line_directive_hint": {
+        "line": 36,
+        "directive": "#line 35"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "line": 248,
+      "macro": "NEWALIAS",
+      "original_start": 248,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json",
+        "s13-bfs-depth1-optional-profile-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 3,
+      "last_prior_line_directive_hint": {
+        "line": 245,
+        "directive": "#line 246"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "line": 289,
+      "macro": "NEWALIAS",
+      "original_start": 289,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json",
+        "s13-bfs-depth1-optional-profile-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 3,
+      "last_prior_line_directive_hint": {
+        "line": 245,
+        "directive": "#line 246"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "line": 349,
+      "macro": "NEWALIAS",
+      "original_start": 351,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json",
+        "s13-bfs-depth1-optional-profile-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 4,
+      "last_prior_line_directive_hint": {
+        "line": 327,
+        "directive": "#line 330"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsubcls.c",
+      "line": 20,
+      "macro": "OLD_SUBCLASS_STUFF",
+      "original_start": 20,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "line": 154,
+      "macro": "OLD_WAY",
+      "original_start": 154,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/observation/extract-wow-subclass-fixture.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "line": 1076,
+      "macro": "WOWEDIT",
+      "original_start": 1039,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/observation/extract-wow-subclass-fixture.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "line": 2003,
+      "macro": "ONLY_API16",
+      "original_start": 1908,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/observation/verify-wow-copydata-lifetime.ps1",
+        "tests/observation/verify-wow-dde-alias.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 2,
+      "last_prior_line_directive_hint": {
+        "line": 1184,
+        "directive": "#line 1187"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "line": 534,
+      "macro": "ONLY_API16",
+      "original_start": 531,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/observation/extract-wow-bitmap-call-fixture.ps1",
+        "tests/observation/extract-wow-cursor-call-fixture.ps1",
+        "tests/observation/verify-wow32-client-view-gap.ps1",
+        "tools/build/New-T404S5Wow32ProviderNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "line": 1912,
+      "macro": "DOESNT_USER_DO_THIS",
+      "original_start": 1907,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/observation/extract-wow-bitmap-call-fixture.ps1",
+        "tests/observation/extract-wow-cursor-call-fixture.ps1",
+        "tests/observation/verify-wow32-client-view-gap.ps1",
+        "tools/build/New-T404S5Wow32ProviderNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "line": 3002,
+      "macro": "NEVER",
+      "original_start": 2974,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/observation/extract-wow-bitmap-call-fixture.ps1",
+        "tests/observation/extract-wow-cursor-call-fixture.ps1",
+        "tests/observation/verify-wow32-client-view-gap.ps1",
+        "tools/build/New-T404S5Wow32ProviderNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "line": 740,
+      "macro": "APRIL15",
+      "original_start": 738,
+      "source_audits": [
+        "s13-bfs-depth1-wide-source-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tools/build/New-T404S5Wow32ProviderNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 2,
+      "last_prior_line_directive_hint": {
+        "line": 672,
+        "directive": "#line 681"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "line": 306,
+      "macro": "DONT_CLEAR_LDTR_ON_INVALID",
+      "original_start": 303,
+      "source_audits": [
+        "s13-bfs-depth1-wide-else-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 1,
+      "last_prior_line_directive_hint": {
+        "line": 139,
+        "directive": "#line 139"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+      "line": 53,
+      "macro": "DONT_CLEAR_LDTR_ON_INVALID",
+      "original_start": 51,
+      "source_audits": [
+        "s13-bfs-depth1-wide-else-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 438,
+      "macro": "DELAYED_INTS",
+      "original_start": 446,
+      "source_audits": [
+        "s13-bfs-depth1-wide-else-audit.json"
+      ],
+      "test_build_basename_references": [
+        "tests/mvdm-host/nt_com_mock_fixture.c",
+        "tests/adapter-mvdm-host-out/win32/serial-endpoint-unavailable-fixture.c",
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 0,
+      "last_prior_line_directive_hint": null,
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "line": 151,
+      "macro": "NEWALIAS",
+      "original_start": 144,
+      "source_audits": [
+        "s13-bfs-depth1-wide-else-audit.json"
+      ],
+      "test_build_basename_references": [],
+      "status": "strong candidate only; explicit supported-test context and logical line mapping remain to prove",
+      "prior_line_directive_count": 2,
+      "last_prior_line_directive_hint": {
+        "line": 36,
+        "directive": "#line 35"
+      },
+      "line_mapping_status": "requires effective preprocessor-context verification; lexical last directive is only a hint",
+      "potential_direct_c_includes": []
+    }
+  ]
+}

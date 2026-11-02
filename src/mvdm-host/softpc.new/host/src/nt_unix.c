@@ -322,31 +322,9 @@ memset(addr, val, size);
 
 
 #ifdef NO_LONGER_USED
-/*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
- * Host-specific equivalent of the Unix function localtime().
- ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
-
-struct host_tm *host_localtime(clock)
-long *clock;
-{
-    SYSTEMTIME now;
-    SAVED struct host_tm host_now;
-
-    UNUSED(clock);
-    GetLocalTime(&now);
-    host_now.tm_sec = (int) now.wSecond;
-    host_now.tm_min = (int) now.wMinute;
-    host_now.tm_hour = (int) now.wHour;
-    host_now.tm_mday = (int) now.wDay;
-    host_now.tm_mon = (int) now.wMonth - 1;    // Unix has 0 based months,NT 1
-    host_now.tm_year = (int) now.wYear;
-    host_now.tm_wday = (int) now.wDayOfWeek;
-
-    host_now.tm_yday = (int) 0;     // the base doesn't require these.
-    host_now.tm_isdst = (int) 0;
-    return(&host_now);
-}
+#error Unsupported excluded original configuration
 #endif
+#line 350
 
 /*
  * Host-specific equivalent of the Unix function time().

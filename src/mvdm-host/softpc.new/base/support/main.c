@@ -76,8 +76,9 @@ IMPORT void setup_vga_globals IPT0();
 #ifdef ANSI
 extern void host_applInit(int argc, char *argv[]);
 #else
-extern void host_applInit();
+#error Unsupported excluded original configuration
 #endif	/* ANSI */
+#line 75
 
 #ifdef REAL_VGA
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
@@ -286,8 +287,9 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 #endif /* REAL_VGA */
 
 #ifdef IPC
-  host_susp_q_init();
+#error Unsupported excluded original configuration
 #endif
+#line 290
 
 #ifdef NTVDM
 /*
@@ -325,7 +327,8 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 GLOBAL void init_virtual_drivers IFN0()
 {
 #ifdef HFX
-	hfx_driver_initialisation();
+#error Unsupported excluded original configuration
 #endif
+#line 329
 	mouse_driver_initialisation();
 }

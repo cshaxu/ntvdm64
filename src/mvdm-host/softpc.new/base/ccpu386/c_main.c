@@ -164,13 +164,9 @@ extern void EDL_fast_bop(ULONG immed);
 #include  <zfrsrvd.h>	/*     ...     */
 
 #ifdef CPU_486
-#include  <bswap.h>	/*     ...     */
-#include  <cmpxchg.h>	/*     ...     */
-#include  <invd.h>	/*     ...     */
-#include  <invlpg.h>	/*     ...     */
-#include  <wbinvd.h>	/*     ...     */
-#include  <xadd.h>	/*     ...     */
+#error Unsupported excluded original configuration
 #endif /* CPU_486 */
+#line 174
 
 #define FIX_BT_BUG	/* Of course we want the bug fixed! */
 
@@ -1454,8 +1450,9 @@ TYPE0F90:
       case  0xa3:   /* T6 BT Ev Gv */
 	 inst32328 = BT;
 #ifndef FIX_BT_BUG
-	goto TYPE39;
+#error Unsupported excluded original configuration
 #endif
+#line 1465
 	 modRM = GET_INST_BYTE(p);
 	 if ( GET_OPERAND_SIZE() == USE16 )
 	    {
@@ -1526,8 +1523,9 @@ TYPE0FA5:
       case  0xab:   /* T5 BTS Ev Gv */
 	 instp32328 = BTS;
 #ifndef FIX_BT_BUG
-	goto TYPE01;
+#error Unsupported excluded original configuration
 #endif
+#line 1537
 TYPE0FAB:
 	 modRM = GET_INST_BYTE(p);
 	 if ( GET_OPERAND_SIZE() == USE16 )
@@ -1600,10 +1598,12 @@ TYPE0FAB:
 
       case  0xb2:   /* T4 LSS Gv Mp */   instp32p32 = LSS;   goto TYPEC4;
 #ifndef FIX_BT_BUG
-      case  0xb3:   /* T5 BTR Ev Gv */   instp32328 = BTR;   goto TYPE01;
+#error Unsupported excluded original configuration
 #else
+#line 1635
       case  0xb3:   /* T5 BTR Ev Gv */   instp32328 = BTR;   goto TYPE0FAB;
 #endif
+#line 1637
       case  0xb4:   /* T4 LFS Gv Mp */   instp32p32 = LFS;   goto TYPEC4;
       case  0xb5:   /* T4 LGS Gv Mp */   instp32p32 = LGS;   goto TYPEC4;
 
@@ -1670,10 +1670,12 @@ TYPE0FAB:
       case  0xbb:   /* T5 BTC Ev Gv */
 	 instp32328 = BTC;
 #ifndef FIX_BT_BUG
-	 goto TYPE01;
+#error Unsupported excluded original configuration
 #else
+#line 1705
 	 goto TYPE0FAB;
 #endif
+#line 1707
       case  0xbc:   /* T5 BSF Gv Ev */
 	 modRM = GET_INST_BYTE(p);
 	 if ( GET_OPERAND_SIZE() == USE16 )

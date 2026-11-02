@@ -1,0 +1,1342 @@
+{
+  "scope": "fixed-original first-depth mismatch occurrence triage; hints are not exclusion proof",
+  "records": [
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "original_line": 50,
+      "directive": "if",
+      "expression": "defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)",
+      "classification": "already-present-nested-byte-equivalent",
+      "original_owners": [],
+      "exact_current_nested": [
+        74
+      ],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "original_line": 205,
+      "directive": "ifdef",
+      "expression": "_X86_",
+      "classification": "already-present-nested-byte-equivalent",
+      "original_owners": [
+        {
+          "name": "GetBinaryTypeW",
+          "start": 93,
+          "end": 301,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [
+        2211
+      ],
+      "current_anchors": [
+        {
+          "line": 2211,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "original_line": 259,
+      "directive": "ifdef",
+      "expression": "_MIPS_",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "GetBinaryTypeW",
+          "start": 93,
+          "end": 301,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 2265,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 23,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "classification": "restored-first-depth",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 572,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "classification": "already-present-nested-byte-equivalent",
+      "original_owners": [
+        {
+          "name": "DefWindowProcWorker",
+          "start": 555,
+          "end": 1217,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [
+        56
+      ],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 1214,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "classification": "already-present-nested-byte-equivalent",
+      "original_owners": [
+        {
+          "name": "DefWindowProcWorker",
+          "start": 555,
+          "end": 1217,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [
+        400
+      ],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 327,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "SendMessageWorker",
+          "start": 258,
+          "end": 470,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 566,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "DefWindowProcWorker",
+          "start": 555,
+          "end": 1217,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 52,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 905,
+      "directive": "if",
+      "expression": "defined(FE_IME)",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "DefWindowProcWorker",
+          "start": 555,
+          "end": 1217,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 392,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 881,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "CreateIcoCur",
+          "start": 868,
+          "end": 904,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 3901,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "GetIcoCurBpp",
+          "start": 3896,
+          "end": 3913,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 1480,
+      "directive": "if",
+      "expression": "0",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "CreateIconFromResourceEx",
+          "start": 1455,
+          "end": 1497,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 1674,
+      "directive": "if",
+      "expression": "0",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "CreateScreenBitmap",
+          "start": 1565,
+          "end": 1719,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 671,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 2298,
+      "directive": "if",
+      "expression": "0",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "LoadImageW",
+          "start": 2278,
+          "end": 2327,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 2624,
+      "directive": "if",
+      "expression": "0",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "LoadIcoCur",
+          "start": 2492,
+          "end": 2680,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 3751,
+      "directive": "if",
+      "expression": "0",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "MatchImage",
+          "start": 3703,
+          "end": 3763,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 4516,
+      "directive": "if",
+      "expression": "0",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "InternalCopyImage",
+          "start": 4497,
+          "end": 4536,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 4574,
+      "directive": "if",
+      "expression": "0",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "RtlGetIdFromDirectory",
+          "start": 4546,
+          "end": 4597,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 2640,
+      "directive": "ifdef",
+      "expression": "LATER",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "LoadIcoCur",
+          "start": 2492,
+          "end": 2680,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "original_line": 221,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "IsDialogMessageA",
+          "start": 213,
+          "end": 255,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 245,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "original_line": 240,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "classification": "already-present-nested-guard",
+      "original_owners": [
+        {
+          "name": "IsDialogMessageA",
+          "start": 213,
+          "end": 255,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [],
+      "current_line": 256,
+      "additional_evidence": "manual exact owner and current selector inspection; compare registered exclusions"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "original_line": 281,
+      "directive": "ifdef",
+      "expression": "LATER",
+      "classification": "already-present-nested-guard",
+      "original_owners": [
+        {
+          "name": "IsDialogMessageW",
+          "start": 257,
+          "end": 634,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [],
+      "current_line": 297,
+      "additional_evidence": "manual exact owner and current selector inspection; compare registered exclusions"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "original_line": 209,
+      "directive": "if",
+      "expression": "0",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "ClientDrawState",
+          "start": 73,
+          "end": 490,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 147,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "original_line": 251,
+      "directive": "if",
+      "expression": "0",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "ClientDrawState",
+          "start": 73,
+          "end": 490,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 183,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 77,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "UpdatePerUserSystemParameters",
+          "start": 65,
+          "end": 99,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 717,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "_PeekMessage",
+          "start": 680,
+          "end": 803,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 1020,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "TranslateMessage",
+          "start": 1017,
+          "end": 1035,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 358,
+      "directive": "ifdef",
+      "expression": "LATER",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "GetWindowPlacement",
+          "start": 354,
+          "end": 378,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 380,
+      "directive": "ifdef",
+      "expression": "MEMPHIS_MENUS",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 500,
+      "directive": "ifdef",
+      "expression": "MEMPHIS_MENU_WATERMARKS",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 693,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "_PeekMessage",
+          "start": 680,
+          "end": 803,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 753,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "_PeekMessage",
+          "start": 680,
+          "end": 803,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 769,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "_PeekMessage",
+          "start": 680,
+          "end": 803,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 784,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "_PeekMessage",
+          "start": 680,
+          "end": 803,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 797,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "_PeekMessage",
+          "start": 680,
+          "end": 803,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 1611,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 953,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "classification": "already-present-nested-byte-equivalent",
+      "original_owners": [
+        {
+          "name": "_SetWindowLong",
+          "start": 827,
+          "end": 981,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [
+        214
+      ],
+      "current_anchors": [
+        {
+          "line": 214,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 965,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "classification": "already-present-nested-byte-equivalent",
+      "original_owners": [
+        {
+          "name": "_SetWindowLong",
+          "start": 827,
+          "end": 981,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [
+        226
+      ],
+      "current_anchors": [
+        {
+          "line": 226,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 2204,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "BroadcastSystemMessageWorker",
+          "start": 2160,
+          "end": 2261,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "original_line": 319,
+      "directive": "if",
+      "expression": "DBG",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "AllocLookasideEntry",
+          "start": 300,
+          "end": 335,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 189,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "original_line": 326,
+      "directive": "if",
+      "expression": "DBG",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "AllocLookasideEntry",
+          "start": 300,
+          "end": 335,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 196,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "original_line": 349,
+      "directive": "if",
+      "expression": "DBG",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "FreeLookasideEntry",
+          "start": 345,
+          "end": 366,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 215,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "original_line": 361,
+      "directive": "if",
+      "expression": "DBG",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "FreeLookasideEntry",
+          "start": 345,
+          "end": 366,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 227,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 15,
+      "directive": "ifndef",
+      "expression": "_USERCLI_",
+      "classification": "original-whole-file-guard-incompatible-with-current-two-stage-include",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": [],
+      "current_line": null,
+      "additional_evidence": "s13-bfs-depth1-original-usercli-guard-audit.json"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2307,
+      "directive": "if",
+      "expression": "DBG",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2320,
+      "directive": "if",
+      "expression": "DBG",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2342,
+      "directive": "if",
+      "expression": "HANDLE_FIXUP",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2358,
+      "directive": "if",
+      "expression": "HANDLE_FIXUP",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2374,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 53,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 481,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "classification": "missing-within-retained-outer-selector-next-depth",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 583,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "classification": "already-present-nested-guard",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": [],
+      "current_line": 377,
+      "additional_evidence": "manual exact owner and current selector inspection; compare registered exclusions"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 833,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "InitSyncOnlyMessages",
+          "start": 730,
+          "end": 878,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 990,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "InitFunctionTables",
+          "start": 928,
+          "end": 1021,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1054,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "InitMessageTables",
+          "start": 1032,
+          "end": 1057,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1861,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "UserInitialize",
+          "start": 1691,
+          "end": 1934,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 461,
+      "directive": "if",
+      "expression": "0",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 278,
+          "depth": 2
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 850,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "InitSyncOnlyMessages",
+          "start": 730,
+          "end": 878,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 934,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "InitFunctionTables",
+          "start": 928,
+          "end": 1021,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1002,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "InitFunctionTables",
+          "start": 928,
+          "end": 1021,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1163,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "InitGlobalRIPFlags",
+          "start": 1160,
+          "end": 1211,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1822,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "UserInitialize",
+          "start": 1691,
+          "end": 1934,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1257,
+      "directive": "ifndef",
+      "expression": "PAGE_SIZE",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1703,
+      "directive": "ifdef",
+      "expression": "ANDREVA_DBG",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "UserInitialize",
+          "start": 1691,
+          "end": 1934,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 17,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "classification": "already-present-first-depth-guard",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": [],
+      "current_line": 18,
+      "additional_evidence": "manual exact owner and current selector inspection; compare registered exclusions"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 59,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "WCSToMBEx",
+          "start": 50,
+          "end": 186,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 168,
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 146,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "WCSToMBEx",
+          "start": 50,
+          "end": 186,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 255,
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 270,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "MBToWCSEx",
+          "start": 190,
+          "end": 311,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 362,
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 378,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "RtlWCSMessageWParamCharToMB",
+          "start": 323,
+          "end": 429,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 515,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "RtlMBMessageWParamCharToWCS",
+          "start": 442,
+          "end": 548,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 63,
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 326,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "RtlWCSMessageWParamCharToMB",
+          "start": 323,
+          "end": 429,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 351,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "RtlWCSMessageWParamCharToMB",
+          "start": 323,
+          "end": 429,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 393,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "RtlWCSMessageWParamCharToMB",
+          "start": 323,
+          "end": 429,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 446,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "RtlMBMessageWParamCharToWCS",
+          "start": 442,
+          "end": 548,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 32,
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 457,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "RtlMBMessageWParamCharToWCS",
+          "start": 442,
+          "end": 548,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 42,
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 530,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "matched-surrounding-anchors-structural-only",
+      "original_owners": [
+        {
+          "name": "RtlMBMessageWParamCharToWCS",
+          "start": 442,
+          "end": 548,
+          "name_present_current": true
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": [
+        {
+          "line": 76,
+          "depth": 1
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 337,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "classification": "original-owner-not-present-hint-only",
+      "original_owners": [
+        {
+          "name": "RtlWCSMessageWParamCharToMB",
+          "start": 323,
+          "end": 429,
+          "name_present_current": false
+        }
+      ],
+      "exact_current_nested": [],
+      "current_anchors": []
+    }
+  ],
+  "counts": {
+    "already-present-nested-byte-equivalent": 6,
+    "matched-surrounding-anchors-structural-only": 19,
+    "restored-first-depth": 1,
+    "original-owner-not-present-hint-only": 35,
+    "already-present-nested-guard": 3,
+    "unresolved": 10,
+    "original-whole-file-guard-incompatible-with-current-two-stage-include": 1,
+    "missing-within-retained-outer-selector-next-depth": 1,
+    "already-present-first-depth-guard": 1
+  },
+  "limitations": [
+    "Presence of a name is only a function ownership hint, not a reachability proof.",
+    "Nested content is deferred until its parent depth is classified."
+  ]
+}

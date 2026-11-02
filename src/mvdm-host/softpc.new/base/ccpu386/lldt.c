@@ -51,8 +51,9 @@ IFN1(
 #ifndef DONT_CLEAR_LDTR_ON_INVALID
       SET_LDT_SELECTOR(selector);
 #else
-      SET_LDT_SELECTOR(0);   /* just invalidate LDT */
+#error Unsupported excluded original configuration
 #endif /* DONT_CLEAR_LDTR_ON_INVALID */
+#line 56
 #ifndef DONT_CLEAR_LDT_BL_ON_INVALID
       /* Make the C-CPU behave like the assembler CPU with respect
        * to LDT base and limit when the selector is set to NULL 

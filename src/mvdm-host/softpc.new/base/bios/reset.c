@@ -106,8 +106,9 @@ IMPORT void initialise_npx IPT0();
 #endif	/* NPX */
 
 #ifdef DPMI
-IMPORT void DPMI_reset IPT0();
+#error Unsupported excluded original configuration
 #endif /* DPMI */
+#line 111
 
 #ifdef GISP_SVGA
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
@@ -311,14 +312,12 @@ half_word *low, *high;
 #endif
 
 #ifdef FLOPPY_B
-	/* only indicate two floppies if a second is configured */
-	if (strlen(config_inquire(C_FLOPPY_B_DEVICE, NULL)))
-		high_switches |= (PPI_TWO_DRIVES);
-	else
-		high_switches |= (PPI_ONE_DRIVE);
+#error Unsupported excluded original configuration
 #else
+#line 320
 	high_switches |= (PPI_ONE_DRIVE);
 #endif
+#line 322
 
 
     /* set the value of the high switches from the config settings */
@@ -634,8 +633,9 @@ void reset()
 	 * an 8087 floating point chip.
 	 */
 #ifdef IPC
-	init_subprocs();
+#error Unsupported excluded original configuration
 #endif /* IPC */
+#line 759
 
 	cmos_init();
 	cmos_post();
@@ -809,8 +809,9 @@ void reset()
 
 	/* Now perform any other initialisation of DOS Drivers */
 #ifdef HFX
-	hfx_init();
+#error Unsupported excluded original configuration
 #endif
+#line 1007
 }
 
 /*(

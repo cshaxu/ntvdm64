@@ -39,9 +39,9 @@ SIDT16
    IU32 op1[2]	/* dst (limit:base pair) operand */
    )
 #else
-   (op1)
-   IU32 op1[2];
+#error Unsupported excluded original configuration
 #endif
+#line 45
    {
    /*
       NB. The Intel manual says the top 8-bits will be stored as zero's,
@@ -62,9 +62,9 @@ SIDT32
    IU32 op1[2]	/* dst (limit:base pair) operand */
    )
 #else
-   (op1)
-   IU32 op1[2];
+#error Unsupported excluded original configuration
 #endif
+#line 68
    {
    op1[0] = GET_STAR_LIMIT(IDT_REG);
    op1[1] = GET_STAR_BASE(IDT_REG);

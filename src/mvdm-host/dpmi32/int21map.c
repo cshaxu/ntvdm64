@@ -1454,23 +1454,9 @@ Return Value:
 --*/
 {
 #ifdef NT_ALLOC_DOS_MEM
-    USHORT Selector;
-
-    DebugBreak(); // debugbug
-
-    DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
-    DPMI_EXEC_INT(0x21);
-    DpmiSwitchToProtectedMode();
-
-    if (!getCF()) {
-        Selector = DpmiSegmentToSelector(getAX());
-        setAX(Selector);
-    }
-
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+#error Unsupported excluded original configuration
 #endif
+#line 1474
 }
 
 VOID
@@ -1494,27 +1480,9 @@ Return Value:
 --*/
 {
 #ifdef NT_ALLOC_DOS_MEM
-    ULONG Segment;
-
-    DebugBreak(); // debugbug
-
-    DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
-
-    Segment = SELECTOR_TO_INTEL_LINEAR_ADDRESS(getES);
-
-    if (Segment > ONE_MB) {
-        setCF(1);
-        setAX(9);
-    } else {
-        setES((USHORT)(Segment >> 4));
-        DPMI_EXEC_INT(0x21);
-    }
-
-    DpmiSwitchToProtectedMode();
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
+#error Unsupported excluded original configuration
 #endif
+#line 1518
 
 }
 
@@ -1539,28 +1507,9 @@ Return Value:
 --*/
 {
 #ifdef NT_ALLOC_DOS_MEM
-    ULONG Segment;
-
-    DebugBreak(); // debugbug
-
-    DpmiSwitchToRealMode();
-    DpmiSaveSegmentsAndStack(&State);
-
-    Segment = SELECTOR_TO_INTEL_LINEAR_ADDRESS(getES);
-
-    if (Segment > ONE_MB) {
-        setCF(1);
-        setAX(9);
-    } else {
-        setES((USHORT)(Segment >> 4));
-        DPMI_EXEC_INT(0x21);
-    }
-
-    DpmiSwitchToProtectedMode();
-    DpmiRestoreSegmentsAndStack();
-    DpmiSimulateIretCF();
-
+#error Unsupported excluded original configuration
 #endif
+#line 1564
 }
 
 VOID

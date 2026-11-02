@@ -436,9 +436,9 @@ static void raise_interrupt IFN1(struct ADAPTER_STATE *, asp)
 #ifndef DELAYED_INTS
 		ica_hw_interrupt(0, asp->hw_interrupt_priority, 1);
 #else
-		ica_hw_interrupt_delay(0, asp->hw_interrupt_priority, 1,
-			HOST_COM_INT_DELAY);
+#error Unsupported excluded original configuration
 #endif
+#line 442
 	}
 }
 

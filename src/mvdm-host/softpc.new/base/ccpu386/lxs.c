@@ -44,10 +44,9 @@ LDS
    IU32 op2[2]	/* src(offset:selector pair) operand */
    )
 #else
-   (pop1, op2)
-   IU32 *pop1;
-   IU32 op2[2];
+#error Unsupported excluded original configuration
 #endif
+#line 51
    {
    /* load segment selector first */
    MOV_SR((IU32)DS_REG, op2[1]);
@@ -67,10 +66,9 @@ LES
    IU32 op2[2]	/* src(offset:selector pair) operand */
    )
 #else
-   (pop1, op2)
-   IU32 *pop1;
-   IU32 op2[2];
+#error Unsupported excluded original configuration
 #endif
+#line 74
    {
    /* load segment selector first */
    MOV_SR((IU32)ES_REG, op2[1]);
@@ -90,10 +88,9 @@ LFS
    IU32 op2[2]	/* src(offset:selector pair) operand */
    )
 #else
-   (pop1, op2)
-   IU32 *pop1;
-   IU32 op2[2];
+#error Unsupported excluded original configuration
 #endif
+#line 97
    {
    /* load segment selector first */
    MOV_SR((IU32)FS_REG, op2[1]);
@@ -113,10 +110,9 @@ LGS
    IU32 op2[2]	/* src(offset:selector pair) operand */
    )
 #else
-   (pop1, op2)
-   IU32 *pop1;
-   IU32 op2[2];
+#error Unsupported excluded original configuration
 #endif
+#line 120
    {
    /* load segment selector first */
    MOV_SR((IU32)GS_REG, op2[1]);
@@ -136,10 +132,9 @@ LSS
    IU32 op2[2]	/* src(offset:selector pair) operand */
    )
 #else
-   (pop1, op2)
-   IU32 *pop1;
-   IU32 op2[2];
+#error Unsupported excluded original configuration
 #endif
+#line 143
    {
    /* load segment selector first */
    MOV_SR((IU32)SS_REG, op2[1]);

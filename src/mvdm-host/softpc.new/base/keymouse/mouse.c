@@ -365,11 +365,9 @@ void mouse_init IFN0()
 	io_connect_port(p, MOUSE_ADAPTOR, IO_READ_WRITE);
 
 #ifdef KIPPER
-#ifdef CPU_40_STYLE
-  /* Enable iret hooks on mouse interrupts */
-  ica_iret_hook_control(AT_CPU_MOUSE_ADAPTER, AT_CPU_MOUSE_INT, TRUE);
+#error Unsupported excluded original configuration
 #endif
-#endif
+#line 373
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.

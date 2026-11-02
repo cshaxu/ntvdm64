@@ -581,9 +581,12 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     DWORD callerInit, error;
     wow_callback_control control = {0};
 #if FASTBOPPING
+#error Unsupported excluded original configuration
 #else
+#line 665
     USHORT SaveIp;
 #endif
+#line 667
 #ifdef DEBUG
 #error Excluded unsupported DEBUG WOW profile
 #endif
@@ -677,10 +680,12 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     // Set up to use the right 16-bit stack for this thread
 
 #if FASTBOPPING
-    SETFASTVDMSTACK(ptd->vpCBStack);
+#error Unsupported excluded original configuration
 #else
+#line 795
     SETVDMSTACK(ptd->vpCBStack);
 #endif
+#line 797
 
     //
     // do the callback!

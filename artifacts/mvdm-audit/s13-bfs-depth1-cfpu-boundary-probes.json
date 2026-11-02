@@ -1,0 +1,203 @@
+{
+  "scope": "scratch cfpu_def.h copies in real two CCPU consumers and x87 fixture using actual worker command flags",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 25,
+      "after_physical_line": 29,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 30,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 25,
+      "after_physical_line": 29,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 30,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 25,
+      "after_physical_line": 29,
+      "consumer": "tests/mvdm-host/x87_layout_fixture.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 30,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 37,
+      "after_physical_line": 41,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 42,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 37,
+      "after_physical_line": 41,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 42,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 37,
+      "after_physical_line": 41,
+      "consumer": "tests/mvdm-host/x87_layout_fixture.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 42,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 48,
+      "after_physical_line": 51,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 52,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 48,
+      "after_physical_line": 51,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 52,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 48,
+      "after_physical_line": 51,
+      "consumer": "tests/mvdm-host/x87_layout_fixture.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 52,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 60,
+      "after_physical_line": 63,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 64,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 60,
+      "after_physical_line": 63,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 64,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 60,
+      "after_physical_line": 63,
+      "consumer": "tests/mvdm-host/x87_layout_fixture.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 64,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 72,
+      "after_physical_line": 75,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 76,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 72,
+      "after_physical_line": 75,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 76,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 72,
+      "after_physical_line": 75,
+      "consumer": "tests/mvdm-host/x87_layout_fixture.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 76,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 88,
+      "after_physical_line": 91,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 92,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 88,
+      "after_physical_line": 91,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 92,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm_line": 88,
+      "after_physical_line": 91,
+      "consumer": "tests/mvdm-host/x87_layout_fixture.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 92,
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "error": ""
+    }
+  ]
+}

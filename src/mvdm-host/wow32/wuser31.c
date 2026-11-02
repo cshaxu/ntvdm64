@@ -738,16 +738,14 @@ ULONG FASTCALL WU32GetFreeSystemResources(PVDMFRAME pFrame)
 
 
 #ifdef APRIL15  // Win32 doesn't have GetFreeSystemResources
-
-    ul = GETUINT16(GetFreeSystemResources(
-    WORD32(parg16->f1)
-    ));
-
+#error Unsupported excluded original configuration
 #else
+#line 755
 
     ul = 90;
 
 #endif
+#line 759
 
     FREEARGPTR(parg16);
 

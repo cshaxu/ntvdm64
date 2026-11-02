@@ -228,17 +228,9 @@ getsdosunit()
 }
 
 #ifdef NOT_IN_USE
-host_check_using_host_mouse()
-{
-        assert0(NO,"host_check_using_host_mouse stubbed\n");
-        return(1);
-}
-host_deinstall_host_mouse()
-{
-        assert0(NO,"host_deinstall_host_mouse stubbed\n");
-        return(1);
-}
+#error Unsupported excluded original configuration
 #endif
+#line 241
 
 int host_timer_2_frig_factor = 20;
 

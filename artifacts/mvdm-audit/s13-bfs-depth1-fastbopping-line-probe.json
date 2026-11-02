@@ -1,0 +1,170 @@
+{
+  "scope": "scratch marker before first-depth FAST conditional in actual x86 WOW profile",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "line": 583,
+      "macro": "FASTBOPPING",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 665,
+      "logical_directive_line": 663,
+      "stderr": "",
+      "source_sha256": "3cedff5ab428d452a5f607fd84914924968d21192870b375dff634851f45fa37"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "line": 679,
+      "macro": "FASTBOPPING",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 794,
+      "logical_directive_line": 792,
+      "stderr": "",
+      "source_sha256": "3cedff5ab428d452a5f607fd84914924968d21192870b375dff634851f45fa37"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "line": 689,
+      "macro": "FASTBOPPING",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 804,
+      "logical_directive_line": 802,
+      "stderr": "",
+      "source_sha256": "3cedff5ab428d452a5f607fd84914924968d21192870b375dff634851f45fa37"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 525,
+      "macro": "FASTBOPPING",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 565,
+      "logical_directive_line": 563,
+      "stderr": "",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 800,
+      "macro": "FASTBOPPING",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 851,
+      "logical_directive_line": 849,
+      "stderr": "",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 839,
+      "macro": "FASTBOPPING",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 890,
+      "logical_directive_line": 888,
+      "stderr": "",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 851,
+      "macro": "FASTBOPPING",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 902,
+      "logical_directive_line": 900,
+      "stderr": "",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1106,
+      "macro": "FASTBOPPING",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 1157,
+      "logical_directive_line": 1155,
+      "stderr": "",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1154,
+      "macro": "FASTBOPPING",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 1213,
+      "logical_directive_line": 1211,
+      "stderr": "",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1315,
+      "macro": "FASTBOPPING",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 1372,
+      "logical_directive_line": 1370,
+      "stderr": "",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1340,
+      "macro": "FASTBOPPING",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 1397,
+      "logical_directive_line": 1395,
+      "stderr": "",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1383,
+      "macro": "FASTBOPPING",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 1440,
+      "logical_directive_line": 1438,
+      "stderr": "",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1555,
+      "macro": "FASTBOPPING",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 1610,
+      "logical_directive_line": 1608,
+      "stderr": "",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1608,
+      "macro": "FASTBOPPING",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 1663,
+      "logical_directive_line": 1661,
+      "stderr": "",
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 1619,
+      "macro": "FASTBOPPING",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 1937,
+      "logical_directive_line": 1935,
+      "stderr": "",
+      "source_sha256": "e8ad1f3cc14f163f656897c276bb7418d1b4bb66b7269873100e0d435d59a110"
+    }
+  ]
+}

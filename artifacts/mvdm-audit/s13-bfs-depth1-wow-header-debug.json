@@ -1,0 +1,1011 @@
+{
+  "scope": "six WOW host headers; first-depth DEBUG branches only",
+  "baseline_commit": "7f2bb292467358db26e41e262be4df2e88872429",
+  "contexts": [
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "a58b5663135b9ca0f40b9148f35158671efbf7ff8920c95ecbc9d1518ea8dddd",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "e8ad1f3cc14f163f656897c276bb7418d1b4bb66b7269873100e0d435d59a110",
+      "includes": 339,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtbl.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "d6f1591c35edb2ff74195037e983c4a766966c237f50824096da1571148be741",
+      "includes": 332,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "d60192f0ff6d97f3852174956c55913c9931734f85c86b5a60eaded6f957278c",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "f574a2c0a5ce6de4747e1ca33a395e7a7f8a169f17ff05109336a6ab0db22dc0",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "3cedff5ab428d452a5f607fd84914924968d21192870b375dff634851f45fa37",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "9c6e8c767cfc4a1d91ba8e33eeb9917fe31185be0936c4cd9d050bec2231680b",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcntl32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "48408feef986365b459c7e973d7b92964f139b4879278325b0eb370634f38c81",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdde.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "2662e6a99ee1f03a9c42d2e9f3ab1e3f3dc71b58965de7a721140b16e53b26c0",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wres16.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "92d8af2bc8a3852927e03df5f4a35caa994b898571a65aadea4b6fdc3e8730d7",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wres32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "18854a97f91ff3681826cf740dcef7f190078a4ed65644ed5784e097ee377e4b",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "0a9463f2f58240e0a7076d76f9f503806d4478c8dada55784706a9fe4938ee7d",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "c75908fda4000b814375c8d74b1fa020e4c3c5bb5f8a062730a844bd6d7759b7",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgbm.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "3fab29825b0286f2161a027baec0fb544d67d32fd30050bdc41d7600295c03f0",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgcb.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "4dcb2ac3f2e432377b95b16e110ca83c6afc6df85556661c1045332aa9f1f53b",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgem.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "9f817a204324b2009d532cfe840efb73e4921c5b45b08629f83d5033508e0e3e",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsglb.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "f2c6b2599619bf183f4467135ad1675b55d66bb531a17d358a1da6d12c816ddb",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgsbm.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "115e399e00668b3a5592168bf27a1e3887d5ee83079f13adc51e7dfbe3d70ca3",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "8dbb8e6828c8f0ff3286bf917b40964eb859d1091ec0757c801c9422ed2fb7b3",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi31.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "7e0459011a0a94edb6f86a797bd0daf34c08a16acf4e6c39f61fcf4ec598c805",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "28010df45c7e3ce5f4f017f268071a768b0f565d50b7c2f6af357b093eeeeb41",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "68c1dfd602362817c88de3174dd2938b70a8725675332972cdf49a3824239620",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgfont.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "383a2aecb42c3b96aee822559f9c9d331c1ed7bcdc7e089d018defc33c3fc969",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "be4e6ec6215bbf79afcfe2dc58cecf0516c814e6d88d94c7d03e59794807d7cd",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgpal.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "a3f1a748ee1c5566384193b819f7923c26bb05e00c9fbbf5230348666708b652",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgprnset.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "a3161d7dee5b1d55882a616b76564c1303b3132323f9db6e525d3af0fca791ab",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgtext.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "3b827c365adedfe57e12565a3e0f77727b0d385a46ed1f10a23780678ade8194",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkbman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "4e29abb55568684374154bcd3bad6805cc8a6ce52b9fb01e2ff4ddbc6a65f709",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "4f85ce1ee97aead0ba718e647f73a6a20791afe51eee8dde8d61fb3da90ebf6c",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkgthunk.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "944a64432a388ba94beb404f0ec4612e974dac5cb9a435e0acc4870b699630a1",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "277ecd569025bf77add2cd73bc07c694826bd9d15ebc60abde1df9e36df84d17",
+      "includes": 332,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "838d9acb172fc6fa431ce561c1049121e505bf08b24d0211b0d5ebc76c961dbf",
+      "includes": 329,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "cda62e3b5807782c7088626ce95b9fddd5fc5db5f65896700df547a822364745",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "aa71d6fdcc135bd8aa717223b5024fbe79cb9a03b532151c045f3736c2967d97",
+      "includes": 331,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "7f918f0c015380fe8404083498e00839744abfbe9386d215a634ec79b6005d94",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wshell.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "b5b20ee8ac0e9f6e7323d8efa9890590c18ad5f677a5bc84a0a7730a044d93dd",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "2103d188b5eb0438e6ef8ae1b04e20593d4201b4997479e7f10f7d679cf5d552",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "43f5789e8b7dbed40e625918c7ff7f9e12da37cfb53cb25069e4c6493556ea65",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucaret.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "f0f238e0e8c6848b2fccb69b4d67cb738eddac07be38678a84d22e3a1b3f4cb1",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "8c26553cb7cfd8fe128ee75b534ed93005588808d7f51d5ac84ec06b250d2d76",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "53cd661fdce36b3eba38e51a6142512c9236233d185059067028e538e5c12313",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "f53c39ae01386587bed787518ccd64e3042ecb3c271cee886ad35a8190f9c9fa",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucursor.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "a8c495bc2720411472074dd3776ab3e6d44f9319b5cc944e575714bab70aa14c",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "a96e0a54a50c059879185e838fee60369bf94e4ab27f9ef2abc2716fbf774d82",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuhook.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "3b7072d6376d762c46fb65e872d08936595390f2d42fbf5cf922c820e404a599",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wulang.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "46ddef8f7c7f7aa0ac96308bb33b0e765a7e13eafcb8915ed1a9e4657ea7cfd5",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumenu.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "8e85d8e546aa15b42a86c43b2d47eec74a5638d556a3a43e0a909a9fa45ac53e",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "b65d0d8a3edc29d04bdcb488e33a6ee5a18b080fe2a098c8cdabd690eadd41e7",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "430402f9938e9791d662b731b29282368d11d52a8a9db15b95efbf38f126d86f",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutext.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "76329a0baa94e38959ac5d1277633248845d60a2d208e3a1bb09f7f36ee12af7",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutmr.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "1a02209de52cc0bbabf47ff2133289ac6dbe6ab197ddbfbffb72a4e4e29464a5",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "3f160a1833a71488d7e4b3e48dbcadf0aeaa7351751e636232121cbdd5a1433c",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "befeccf5051b72af4ef59973cd22d1a8e5781bae34d089b709fa1ebf7ce4037a",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdos.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "eba2dc3f794efa0be511b88dcc1158ea5e8abb66f9cc01feaded3a8d07b46b7a",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wreldc.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "712130d7f2ef32ba1a48a187c700895f31c7698274a8669aba7a154f73c1285c",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcuricon.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "e4d41f2b149828ade377acbfdbbef78f85bd9c08de6c04341af9b8b1812e14e5",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsubcls.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "4b464a3f1f2fb6825fbef3801ca4fc3626cf5acd5c0423bea5136611c236703f",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "50884419da7dd6817b9d023256cb36073dc5d4f915aa509f5d6f3c1813ecde20",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia1.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "dd5cad9f5a23547e196b3e4620f39d66c2758fa3ba612edaa80a833867adc2ee",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia2.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "e6678013c97019c4480600d927f32800c02a5d2f45c3ab75764e0b5f93652c22",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstruc.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "53bfd5dd3800a1bba918866eb28825b88172f313118a81d6760ec5146857cea3",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstru1.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "a556d7cef7e6c49363a17fc78dfd2d591000a455c3fa3535b9cdcdf0c298531b",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstru2.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "02dd8128945c68c8bf7e631736f6f075ab464f736c47ccd7d72ff6a71cfebc52",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "d51d31c0368a0488325207ec0807c80d55c94dd2170b5e2ecf83c6e9fe544095",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/walloc16.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "3369c62e899a075b66cc6bcf81014f06261ae0ba6b748f59608d96025d669fc5",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/waccel.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "b84e4821bb550209081cc9782e9f9c01b1bb9d5754a7be99c6eea9fa739b50b0",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsdata.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "5f37abc01127d62858970b7021fc9ed2b9213e9b81cb4c12122abdadf64bda8e",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsext.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "62e2390f9ec198c09384dc1b18110b25fcba0cfedc189da3e3effba9653cac14",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsraw.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "0d511f187bb4f46e20289073d9a17b5dc713fec609d9d9e6202637d3db73e22b",
+      "includes": 323,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wthman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "109470b426c74865dc6fff04f8113c35a9be1716ad12937cf801b0b158af002f",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "a72c354d1d05b1e2cf9f4fd70727bf227944a5556dee0ef0426ad4ee22593121",
+      "includes": 328,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wheap.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "4ec931d109fc9f13980c801341b2c73f207f7e8f16939a3e2a6aa5b87c96f79c",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wspool.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "b18a49fc5627649b9ada9f5dd1076cc5edd00ffa4e8dc3efef09eb0405a1217e",
+      "includes": 324,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "ffe2cdfbdf899032e18965bce35b22d503fc3a47466bfe1a4a66cb361bffeaed",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "1a5c054f8765757f0924c6e25fbd146f19d08c5bf08d171406efe776f4cbc3b9",
+      "includes": 325,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wole2.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "889ef5e6e3d2c2b5f501e5e59c51b0afef023ad5754f30110b5399859ec3ef5a",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "35c648e16f616f91c0083bd5da217ff2b5a3dd0885bcffdff1a276bbc9f85063",
+      "includes": 322,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/wow32-dll/source/wow_task_termination.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "d0f90042ea602744330086cb86210c375c91af7e5d57fadc5f89f5a7b1808d2a",
+      "includes": 328,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/wow32-dll/source/wow_launch_identity.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "6a1ae7d6a5f1a339448b631efd10464044bce0dddfb68f543168c3ad7309853a",
+      "includes": 316,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/wow32-dll/source/wow_hook_callback.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "809525b885cca6b0f077355f1481c8e09dbffea90216a88da98949bf98350d97",
+      "includes": 330,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/wow32-dll/source/wow_idle_hook_binding.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "0458e0cdb21c2dca361d10f52c061ec88ff2df4bd6311bb3a7f2b79be185bbc1",
+      "includes": 325,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/wow32-dll/source/wow_shell_callback.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "255792a7d691bafb4eae847035edf0d2f372984d1cb9f5a8d0545d3d2e68e8f4",
+      "includes": 317,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/wow32-dll/source/wow_registry_binding.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "d2cd247800dbaaacec597130e5f6637c914f57a55376934bfc144a9e31dfd8de",
+      "includes": 317,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/wow32-dll/source/wow_task_cleanup_entry.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "e7765ba127291a7aac0bc6f781ac3f4955471a1ff0762da6b019079e385b8a74",
+      "includes": 319,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/wow32-dll/source/wow_common_dialog_calls.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "4373dd6bad1f4b3a1a517f450c327d997c5169d66ecad9f157e5c2417b52c702",
+      "includes": 321,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/wow32-dll/source/wow_message_lifetime.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "be18f3ed2de3ee8602a22d08f37605b4015d560ea3c681fd70c8a8c795d704b6",
+      "includes": 317,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_thunk_scope.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "1d821f2953c4aabe9caa6a4efa3b3ffbc5a03347bc858e3a64da23739ecdb6e4",
+      "includes": 326,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    },
+    {
+      "path": "src/wow32-dll/source/wow_user_native_extension.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "source_sha256": "93d840a9ece0be6fe0afc6fa0597e23cfc2182359ce2ba4be6e4848d97b6fa54",
+      "includes": 320,
+      "debug_definitions": [],
+      "debug_flags": [],
+      "errors": ""
+    }
+  ],
+  "branches": [
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "before_sha256": "4f3382c86853a91790f475fc14a7d9b47e9fd7ba765aac26b55bca88324085f2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wow.h",
+      "original_sha256": "64663c13abaefccd99533352e08fb28efc66032c94a1780bff73be4f4cdbf70b",
+      "local_start": 66,
+      "local_cut": 72,
+      "local_end": 78,
+      "original_start": 67,
+      "removed_body_sha256": "4e9e4aaf263e8cb4d121890d0296c095de5d916147a77c2a88b35d948f41e129",
+      "removed_body_lines": 5,
+      "selected_line": 73,
+      "following_line": 79
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.h",
+      "before_sha256": "82eaa15be034f7c56c8030c8033d523a0a5bddd26c54a9e08c3a0fa170311612",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\walias.h",
+      "original_sha256": "c87ae2f07b48f09276d205e2236d97f084f75f21706c524cb27734a3e36001cc",
+      "local_start": 110,
+      "local_cut": 126,
+      "local_end": 130,
+      "original_start": 108,
+      "removed_body_sha256": "ee753bc92af77e360b20e5099614c4593209c756344572c0d546286b4dc974d8",
+      "removed_body_lines": 15,
+      "selected_line": 127,
+      "following_line": 131
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.h",
+      "before_sha256": "5be82d02a3a1728b5e20c5892fcebae150c5c290e5ec77e8643bd91c6e6fb1ee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsg16.h",
+      "original_sha256": "a4322e35e9eaf992598c9de133074fb5d69e649d9729e37565c90156c55f6f98",
+      "local_start": 24,
+      "local_cut": 29,
+      "local_end": 29,
+      "original_start": 24,
+      "removed_body_sha256": "f0b831595fc805b4bd52127040e2dfed3e42fb2eeee6b724c285765dc989de6a",
+      "removed_body_lines": 4,
+      "selected_line": null,
+      "following_line": 30
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.h",
+      "before_sha256": "5be82d02a3a1728b5e20c5892fcebae150c5c290e5ec77e8643bd91c6e6fb1ee",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsg16.h",
+      "original_sha256": "a4322e35e9eaf992598c9de133074fb5d69e649d9729e37565c90156c55f6f98",
+      "local_start": 34,
+      "local_cut": 36,
+      "local_end": 36,
+      "original_start": 34,
+      "removed_body_sha256": "d826f60546d0ad1939aca019854b2a89f5c7044e312a71fdcc3f008ad27d9025",
+      "removed_body_lines": 1,
+      "selected_line": null,
+      "following_line": 37
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.h",
+      "before_sha256": "bc17285fd2a86bf64706c1fcff80db50a5e7ef2eba275850c578876e7ca0ffd5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmtbl32.h",
+      "original_sha256": "c64cfbdd5b28db353fd24edd971044fe8f086d86b40aaffd648ffcfe4c653afb",
+      "local_start": 30,
+      "local_cut": 32,
+      "local_end": 34,
+      "original_start": 30,
+      "removed_body_sha256": "663d837c697261a9201fa32539c522cce6a3bc9a0576eae4dc51e8ae8982ab4c",
+      "removed_body_lines": 1,
+      "selected_line": 33,
+      "following_line": 35
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.h",
+      "before_sha256": "d5d4197861dbd114b02f8c6545268986270115498b0ec2c746d8fb04a95d4d28",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.h",
+      "original_sha256": "3861f621ac54295bc90b357a66a6d36ecba10878c4a1b5fcd49d37f95ae8351f",
+      "local_start": 69,
+      "local_cut": 71,
+      "local_end": 71,
+      "original_start": 69,
+      "removed_body_sha256": "220a72885d59c49b0c0315927e5abebeb726ff197683321e08dd955b0c18e46b",
+      "removed_body_lines": 1,
+      "selected_line": null,
+      "following_line": 72
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.h",
+      "before_sha256": "551fb74d46757012c8d0960e58df9bf8823f9407c88d1d167334d673805861a7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wucomm.h",
+      "original_sha256": "43d3f49fe9abb8fbbbe1a93e7725f7a368676dfadd764c8f0497a4218b23f77b",
+      "local_start": 256,
+      "local_cut": 278,
+      "local_end": 284,
+      "original_start": 256,
+      "removed_body_sha256": "a1a9c033b5c90d563e4d97c06a1906e05633b71bae7049e0333e49fe581a4989",
+      "removed_body_lines": 21,
+      "selected_line": 279,
+      "following_line": 285
+    }
+  ],
+  "status": "locally-verified",
+  "limitations": [
+    "88 current WOW contexts; historical VDMEXTS is outside current admitted product closure.",
+    "Direct wparam fixture was separately verified.",
+    "Guest-associated wowfax.h excluded and remains pending.",
+    "No complete first-depth, product release, guest runtime, or all-configuration acceptance claimed."
+  ],
+  "after_sha256": {
+    "src/mvdm-host/inc/wow.h": "8e863faec45e6df3f09b6a78e9e0a1b7e841d6818e6197dd36e1f70ec2e828bf",
+    "src/mvdm-host/wow32/walias.h": "52673510121f9e2ea2b95019785687ed05c11dcf077c82ad611bd89f25e6c1f3",
+    "src/mvdm-host/wow32/wmsg16.h": "e1f9de50cd5eb7b6098b0ebc66591abf64562dbe2074d0f4fdbc0585e6022096",
+    "src/mvdm-host/wow32/wmtbl32.h": "8e33d139191cdffca0fd8743d0e8227a1da532ddf07dbbf5e346c0e2736017ec",
+    "src/mvdm-host/wow32/wparam.h": "25d5a90c517a6c000fb941d21f5ecba5f8e920b2c797fc8f1facff8b7f75f9dc",
+    "src/mvdm-host/wow32/wucomm.h": "e9700d41ad771f3799e3d96f2a537abb56253aba77d881da3156fb34ecd15afc"
+  },
+  "verification": {
+    "preprocessor": "actual x86 WOW TU selected output matches before/after ignoring blank lines: build/t473-s13/bfs-wow-header-debug-preprocess/after.json",
+    "context": "88 actual WOW TU compiler/include traces succeeded with no DEBUG definition or flag",
+    "guard": "seven selected/rejected isolated controls and selected/following line probes passed: build/t473-s13/wow-header-debug-guard-results.json",
+    "object": "cached x86 wow32.obj built with existing warnings",
+    "parameter_map": "54 candidate scenarios passed with zero failures and 17 baseline negative controls; selected original cache preprocessing matched; result build/t473-s13/wow-header-debug-param-proof/result.json",
+    "mirror_guards": "235 existing guards and associated profile checks passed",
+    "queue": "24 affected header directives match remapped queue",
+    "test_repair": "historical 18d0ec baseline paths map src/mvdm-host to src/mvdm; DIV-363 added two x86 fields so the verified 148-byte reverse record replaces stale 140 expectation. Cache comparison now compares preprocessed selected release body, preserving detection of any selected-body change. Initial attempts and unchanged-checkpoint baseline are retained under build/t473-s13/wow-header-debug-param*."
+  }
+}

@@ -1,0 +1,1330 @@
+{
+  "scope": "21 first-depth product-only exclusion candidates not covered by prior simple/source scans",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 346,
+      "end": 352,
+      "group_end": 353,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "89513d2f41e7cdf6ee617b399adb3846e53fefcf8ddf2d232086efcd8274f63d",
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 339,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 339
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 346
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 82,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 82,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": [
+        {
+          "file": "tests/mvdm-host/gfi_object_contract_fixture.c",
+          "line": 7,
+          "text": "#include \"bios.h\""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 358,
+      "end": 360,
+      "group_end": 361,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "ea7be9801dfca1438082c7c67893e506d722734d08dac51e2430bfad5379066a",
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 355,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 355
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 358
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 82,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 82,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 372,
+          "arm_line": 375,
+          "cut": 378
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": [
+        {
+          "file": "tests/mvdm-host/gfi_object_contract_fixture.c",
+          "line": 7,
+          "text": "#include \"bios.h\""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "start": 22,
+      "end": 24,
+      "group_end": 25,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "514565682fb9731db9248ed2a6b35f332fbede22e99eaf3ba24c825a58410132",
+      "source_sha256": "700dbb3d5d343ae6664a808d5233f3d86c02798f54a1e2bdbd5fff40b6df1cf2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\debug.h",
+      "original_sha256": "59246b3c18bf6dfcd79b4e61bf961bc0382800deb4d968c198ceb415c284f21b",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 19,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "PROD",
+          "line": 19
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 22
+        }
+      ],
+      "product_macro": "PROD",
+      "product_context_count": 156,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 156,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 19,
+          "arm_line": 22,
+          "cut": 25
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": [
+        {
+          "file": "src/mvdm-guest/wow16/mmsystem/mixer.c",
+          "line": 47,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/cache.c",
+          "line": 57,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/chngwin.c",
+          "line": 23,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/clipbord.c",
+          "line": 35,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/clipbrd2.c",
+          "line": 58,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/clipdisp.c",
+          "line": 30,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/cmd.c",
+          "line": 39,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/curskeys.c",
+          "line": 35,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/diaalert.c",
+          "line": 50,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/disp.c",
+          "line": 30,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/d_disp.c",
+          "line": 38,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/d_form1.c",
+          "line": 46,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/edit.c",
+          "line": 45,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/editftn.c",
+          "line": 51,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/editpgtb.c",
+          "line": 49,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/editsect.c",
+          "line": 52,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/file.c",
+          "line": 57,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/fileres.c",
+          "line": 52,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/fileutil.c",
+          "line": 26,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/fontutil.c",
+          "line": 45,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/form1.c",
+          "line": 46,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/insert.c",
+          "line": 50,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/insert2.c",
+          "line": 51,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/mdoc.c",
+          "line": 21,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/mmw.c",
+          "line": 44,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/print.c",
+          "line": 48,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/print2.c",
+          "line": 43,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/print3.c",
+          "line": 41,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/quit.c",
+          "line": 62,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/trans2.c",
+          "line": 49,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/trans3.c",
+          "line": 50,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/trans4.c",
+          "line": 55,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/transfer.c",
+          "line": 20,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/util.c",
+          "line": 30,
+          "text": "#include \"debug.h\""
+        },
+        {
+          "file": "src/mvdm-guest/wow16/write/util2.c",
+          "line": 26,
+          "text": "#include \"debug.h\""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egaread.h",
+      "start": 8,
+      "end": 12,
+      "group_end": 13,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "7ad5f53f6de162b0000310b9ae3b91e5978303628a6e69d3a21d32bb63bb898c",
+      "source_sha256": "e84f967733ed9e18df9e372a4a2bbf942d4984a685cf12b3410eca07ba973097",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egaread.h",
+      "original_sha256": "d7a32e28259b5c25146a9e83feeae102be6815d937209a23c5ccf292aa1c0dac",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 3,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 3
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 8
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 12,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 12,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 3,
+          "arm_line": 8,
+          "cut": 13
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "start": 94,
+      "end": 97,
+      "group_end": 98,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "0ce3d182d884791bc6f16431125ac2aab66d74cf666c54e6a4b0836f2cb49494",
+      "source_sha256": "dea92c3d4b4445d5f077f24ea209e5f3744a572faec423806ae1d0f899813253",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egavideo.h",
+      "original_sha256": "5b47f5e3566927332de3c3f9474ba3595151758c0a8ff8fd6c9cc860f2f8e6cd",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 90,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 90
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 94
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 12,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 12,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 97,
+          "arm_line": 101,
+          "cut": 105
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "start": 183,
+      "end": 184,
+      "group_end": 185,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "9cca9b8e9fc55c1dc42ed1f7f9f056abad1faf8fe960c1f3f932965b430f3023",
+      "source_sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\emm.h",
+      "original_sha256": "d92cc144f50e60de5042f76c67574a3fdc22b0ad38411d92d1459d4a02b17789",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 179,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 179
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 183
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 18,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 18,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 180,
+          "arm_line": 184,
+          "cut": 186
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "start": 478,
+      "end": 481,
+      "group_end": 482,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "8a8c507b9a7c59e713de61e922c5b95202d5d7cc643a8342d06e9124c6972391",
+      "source_sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\floppy.h",
+      "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 474,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 474
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 478
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 10,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 10,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 474,
+          "arm_line": 478,
+          "cut": 482
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "start": 502,
+      "end": 515,
+      "group_end": 516,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "5e12f182506e4d4be03347137261cb0921162c8dfd7d3e58022183573c7f9d8b",
+      "source_sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\floppy.h",
+      "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 488,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 488
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 502
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 10,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 10,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 488,
+          "arm_line": 502,
+          "cut": 516
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "start": 527,
+      "end": 530,
+      "group_end": 531,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "868a12dc432dca3c32a2d8e4a578d38e927fcc70fa7adbb9e9b8150ea4df7559",
+      "source_sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\floppy.h",
+      "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 523,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 523
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 527
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 10,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 10,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 523,
+          "arm_line": 527,
+          "cut": 531
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "start": 543,
+      "end": 548,
+      "group_end": 549,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "50651d70b658081bf5e90467d9aa5b4eef88e9f7b4fea896d47b48c0edbb35d8",
+      "source_sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\floppy.h",
+      "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 537,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 537
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 543
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 10,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 10,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 537,
+          "arm_line": 543,
+          "cut": 549
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/lock.h",
+      "start": 31,
+      "end": 37,
+      "group_end": 38,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "d86f9a94242ed6c62b3c1dbf59e36b927c202f442d645ea53dbde0661a539e73",
+      "source_sha256": "e285b5590e9c53ffb839d03e90c93da4fdcc0019671d23374188917f47300d15",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\lock.h",
+      "original_sha256": "bfca88d9c901515a44ea12290d10da19bdbcfb66227cc497aaf78d93950a022d",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 24,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 24
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 31
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 2,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 2,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 24,
+          "arm_line": 31,
+          "cut": 38
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ppi.h",
+      "start": 33,
+      "end": 36,
+      "group_end": 37,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "80d99d0b5a058bec03b410761de7872ccf0c93425bd226baa554b6a82d283b49",
+      "source_sha256": "f4e0c66e1dd7ab4e6976fde1c5a996613d18a6430ec1718147ce0d9b226844dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ppi.h",
+      "original_sha256": "7967ae65e76cb00e58f350e87cd115b6ed7a97c81ff96e3b528f9740d3378612",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 29,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 29
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 33
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 8,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 8,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 29,
+          "arm_line": 33,
+          "cut": 37
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": []
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "start": 106,
+      "end": 265,
+      "group_end": 266,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "dc6817de6310b24378635c4f1583541ae38162b3494a1a77279e17f9de4343ac",
+      "source_sha256": "655c332ff639ab73f6b37043db11357d154ada60c11c3493e2b210f04eaf9cc0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\sas.h",
+      "original_sha256": "63832958d3a6b9ef2f9f209e5ada4af8067fab3b5cdb6f317c5663cbd2b5f2ef",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 64,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "CPU_40_STYLE",
+          "line": 64
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 106
+        }
+      ],
+      "product_macro": "CPU_40_STYLE",
+      "product_context_count": 168,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 168,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": [
+        {
+          "file": "tests/component-integration/softpc_relative_mouse_guest_test.c",
+          "line": 7,
+          "text": "#include <sas.h>"
+        },
+        {
+          "file": "tests/mvdm-host/ccpu_bit_fault_fixture.c",
+          "line": 10,
+          "text": "#include <sas.h>"
+        },
+        {
+          "file": "tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+          "line": 19,
+          "text": "#include \"sas.h\""
+        },
+        {
+          "file": "tests/mvdm-host/ccpu_far_exception_fixture.c",
+          "line": 8,
+          "text": "#include <sas.h>"
+        },
+        {
+          "file": "tests/mvdm-host/ccpu_port_privilege_fixture.c",
+          "line": 10,
+          "text": "#include <sas.h>"
+        },
+        {
+          "file": "tests/mvdm-host/ccpu_stack_transition_test.c",
+          "line": 9,
+          "text": "#include <sas.h>"
+        },
+        {
+          "file": "tests/mvdm-host/ccpu_x87_page_fixture.c",
+          "line": 9,
+          "text": "#include <sas.h>"
+        },
+        {
+          "file": "tests/mvdm-host/ccpu_x87_span_fixture.c",
+          "line": 9,
+          "text": "#include <sas.h>"
+        },
+        {
+          "file": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+          "line": 11,
+          "text": "#include \"sas.h\""
+        },
+        {
+          "file": "tests/mvdm-host/keyboard_controller_pic_test.c",
+          "line": 7,
+          "text": "#include <sas.h>"
+        },
+        {
+          "file": "tests/mvdm-host/pic_reset_eoi_test.c",
+          "line": 9,
+          "text": "#include <sas.h>"
+        },
+        {
+          "file": "tests/mvdm-host/t335_s3_original_callback_ccpu_fixture.c",
+          "line": 19,
+          "text": "#include \"sas.h\""
+        },
+        {
+          "file": "tests/mvdm-host/umb_object_contract_fixture.c",
+          "line": 9,
+          "text": "#include <sas.h>"
+        },
+        {
+          "file": "tests/legacy/opennt/archived/legacy-adapters/ccpu_vidc_global_storage.c",
+          "line": 21,
+          "text": "#include \"sas.h\""
+        },
+        {
+          "file": "tests/adapter-mvdm-host-out/softpc/sas_memory_fixture.c",
+          "line": 1,
+          "text": "#include \"ntvdm-exe/softpc/include/mvdm_sas.h\""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "start": 181,
+      "end": 182,
+      "group_end": 183,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "ec2c4df3c02d1ecbe74a9a258a367541f75c0d2f5314958ea5593c1e969c2a73",
+      "source_sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\video.h",
+      "original_sha256": "3e701855e34a3ba9834c84ab39da5350ff375195aacea0d79692fba24e2b1059",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 179,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "V7VGA",
+          "line": 179
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 181
+        }
+      ],
+      "product_macro": "V7VGA",
+      "product_context_count": 42,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 42,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 179,
+          "arm_line": 181,
+          "cut": 183
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": [
+        {
+          "file": "tests/app/console_input_batch_stubs.c",
+          "line": 5,
+          "text": "#include \"ntvdm-exe/softpc/include/mvdm_softpc_text_video.h\""
+        },
+        {
+          "file": "tests/component-integration/console_graphics_publication_test.c",
+          "line": 3,
+          "text": "#include \"common/protocol/console_video.h\""
+        },
+        {
+          "file": "tests/component-integration/console_text_producer_test.c",
+          "line": 5,
+          "text": "#include \"ntvdm-exe/softpc/include/mvdm_softpc_text_video.h\""
+        },
+        {
+          "file": "tests/component-integration/softpc_text_video_test.c",
+          "line": 15,
+          "text": "#include \"mvdm_softpc_text_video.h\""
+        },
+        {
+          "file": "tests/component-integration/software_video_publisher_test.c",
+          "line": 2,
+          "text": "#include \"common/protocol/console_video.h\""
+        },
+        {
+          "file": "tests/observation/console_text_measured.c",
+          "line": 6,
+          "text": "#include \"ntvdm-exe/softpc/include/mvdm_softpc_text_video.h\""
+        },
+        {
+          "file": "tests/observation/measure-worker-primitives.c",
+          "line": 4,
+          "text": "#include \"common/protocol/console_video.h\""
+        },
+        {
+          "file": "tests/observation/ntvwm_presentation_test.c",
+          "line": 3,
+          "text": "#include \"ntcon-exe/console_video.h\""
+        },
+        {
+          "file": "tests/observation/ntvwm_text_frame_test.c",
+          "line": 2,
+          "text": "#include \"ntcon-exe/console_video.h\""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "start": 239,
+      "end": 240,
+      "group_end": 241,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "cf8627ab67ca4de35dfdf1efdcff22895965fc321486169b9448aa06c7615f38",
+      "source_sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\video.h",
+      "original_sha256": "3e701855e34a3ba9834c84ab39da5350ff375195aacea0d79692fba24e2b1059",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 237,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "V7VGA",
+          "line": 237
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 239
+        }
+      ],
+      "product_macro": "V7VGA",
+      "product_context_count": 42,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 42,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 237,
+          "arm_line": 239,
+          "cut": 241
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": [
+        {
+          "file": "tests/app/console_input_batch_stubs.c",
+          "line": 5,
+          "text": "#include \"ntvdm-exe/softpc/include/mvdm_softpc_text_video.h\""
+        },
+        {
+          "file": "tests/component-integration/console_graphics_publication_test.c",
+          "line": 3,
+          "text": "#include \"common/protocol/console_video.h\""
+        },
+        {
+          "file": "tests/component-integration/console_text_producer_test.c",
+          "line": 5,
+          "text": "#include \"ntvdm-exe/softpc/include/mvdm_softpc_text_video.h\""
+        },
+        {
+          "file": "tests/component-integration/softpc_text_video_test.c",
+          "line": 15,
+          "text": "#include \"mvdm_softpc_text_video.h\""
+        },
+        {
+          "file": "tests/component-integration/software_video_publisher_test.c",
+          "line": 2,
+          "text": "#include \"common/protocol/console_video.h\""
+        },
+        {
+          "file": "tests/observation/console_text_measured.c",
+          "line": 6,
+          "text": "#include \"ntvdm-exe/softpc/include/mvdm_softpc_text_video.h\""
+        },
+        {
+          "file": "tests/observation/measure-worker-primitives.c",
+          "line": 4,
+          "text": "#include \"common/protocol/console_video.h\""
+        },
+        {
+          "file": "tests/observation/ntvwm_presentation_test.c",
+          "line": 3,
+          "text": "#include \"ntcon-exe/console_video.h\""
+        },
+        {
+          "file": "tests/observation/ntvwm_text_frame_test.c",
+          "line": 2,
+          "text": "#include \"ntcon-exe/console_video.h\""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+      "start": 42,
+      "end": 45,
+      "group_end": 46,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "e8f3e71717d42c878fc1252cc877189767010879627102b3f0bb9f15a21709f7",
+      "source_sha256": "5beb4870dc05919164d389988b04a403e9ae526a6c59b0f14e780b31c9532c3d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\yoda.h",
+      "original_sha256": "9488860e836e9b4fb17ec69558bc65ce1a8afb99286f62e6092759c959569fc1",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 38,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "PROD",
+          "line": 38
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 42
+        }
+      ],
+      "product_macro": "PROD",
+      "product_context_count": 22,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 22,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 38,
+          "arm_line": 42,
+          "cut": 46
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": []
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstruc.h",
+      "start": 112,
+      "end": 123,
+      "group_end": 124,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "7fb758c933270ce2f6b96719a5d687e99e4f606596fe487899dbd7b6b5755605",
+      "source_sha256": "f991da66791e191238227cbe93b264cba7def8b5b6eb93e812eb9013039cc47b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmstruc.h",
+      "original_sha256": "8c8c764f500c47689f5d97c485e8d81c6361130c6ce744a3dbe8d2d26c1eaf5b",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 100,
+      "group_arms": [
+        {
+          "kind": "ifndef",
+          "expression": "DEBUG",
+          "line": 100
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 112
+        }
+      ],
+      "product_macro": "DEBUG",
+      "product_context_count": 88,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 88,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 100,
+          "arm_line": 112,
+          "cut": 124
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": []
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "start": 175,
+      "end": 183,
+      "group_end": 184,
+      "directive": "ifndef",
+      "expression": "NTOS_KERNEL_RUNTIME",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "a3026e3bb75f92e1d5cd8b565337aadb8f2559bc00a8e0ace7c5465780de833d",
+      "source_sha256": "cda496c598082dbed3a593169db9527ee5fef2aeb808829aba468f4a91f0016b",
+      "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\error.c",
+      "original_sha256": "88bf09ab98778e0ca58d9d232d3b7aba6115223f43eddf981f6e06b786e77e48",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 175,
+      "group_arms": [
+        {
+          "kind": "ifndef",
+          "expression": "NTOS_KERNEL_RUNTIME",
+          "line": 175
+        }
+      ],
+      "product_macro": "NTOS_KERNEL_RUNTIME",
+      "product_context_count": 6,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 6,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "start": 891,
+      "end": 892,
+      "group_end": 893,
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "be62fdb420d5efa5ff0a1141ed61946690a73393e02873482c24f57f9d16edad",
+      "source_sha256": "16f697a80b636de08a20bb0fecda0d8a7e660eba1147ebf7461b299f41414a60",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\lboxctl3.c",
+      "original_sha256": "c20aedad6b3ec2a596f7423ebceb0d130a56b2f978a3988c4de0e15b49bb8989",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 891,
+      "group_arms": [
+        {
+          "kind": "ifndef",
+          "expression": "UNICODE",
+          "line": 891
+        }
+      ],
+      "product_macro": "UNICODE",
+      "product_context_count": 1,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 1,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 896,
+          "arm_line": 896,
+          "cut": 898
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "start": 1139,
+      "end": 1140,
+      "group_end": 1141,
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "e2f6448e042a6ea2648d014481d1d90034d2bf8044aaaed29921c459068084db",
+      "source_sha256": "16f697a80b636de08a20bb0fecda0d8a7e660eba1147ebf7461b299f41414a60",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\lboxctl3.c",
+      "original_sha256": "c20aedad6b3ec2a596f7423ebceb0d130a56b2f978a3988c4de0e15b49bb8989",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 1139,
+      "group_arms": [
+        {
+          "kind": "ifndef",
+          "expression": "UNICODE",
+          "line": 1139
+        }
+      ],
+      "product_macro": "UNICODE",
+      "product_context_count": 1,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 1,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 1144,
+          "arm_line": 1144,
+          "cut": 1146
+        }
+      ],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": []
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "start": 161,
+      "end": 162,
+      "group_end": 163,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "6427fca918454191814c2bd05639447adfe994db2212d1cf4f154504b662ef8a",
+      "source_sha256": "ce6287365d6d44fb89cbcafe728c5d8af5d97a99fed52a0fbd3d8b01e1f88c69",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\getset.c",
+      "original_sha256": "4a2cb2067f5dd776676d7f808f40f6468082db018e16bcf9a77daf00bddb34c9",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 154,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "WOW_ORIGINAL_PRIVATE_WORD_GETTER",
+          "line": 154
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 161
+        }
+      ],
+      "product_macro": "WOW_ORIGINAL_PRIVATE_WORD_GETTER",
+      "product_context_count": 1,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 1,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "candidate only: check exact include guards, other test/guest profiles, line witnesses and original boundary uniqueness",
+      "potential_direct_test_guest_includes": []
+    }
+  ]
+}

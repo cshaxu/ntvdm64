@@ -2889,21 +2889,9 @@ LOCAL wait_int IFN0()
 	{
 
 #ifdef FLOPPIES_KEEP_TRYING
-		extern IBOOL fdc_interrupt_pending;
-
-		/* If the CPU is very slow, or interrupt emulation
-		 * has changed for the worst, then the low-priority
-		 * floppy interrupt may not get through in the execution
-	 	 * of the instructions allotted. This code looks at a
-		 * global variable maintained by fla.c, which says whether
-		 * or not the ICA has an un-processed diskette interrupt
-		 * pending.
-		 */
-		if (fdc_interrupt_pending) {
-			always_trace0("fdc_interrupt_pending, so try again");
-			goto try_again;
-		}
+#error Unsupported excluded original configuration
 #endif /* FLOPPIES_KEEP_TRYING */
+#line 2907
 
 		sas_load(FLOPPY_STATUS, &diskette_status);
 		diskette_status |= FS_TIME_OUT;

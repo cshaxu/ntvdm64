@@ -1,0 +1,6407 @@
+{
+  "baseline": "c97d4ee2c",
+  "counts": [
+    {
+      "change": "added",
+      "directive": "define",
+      "count": 6
+    },
+    {
+      "change": "added",
+      "directive": "else",
+      "count": 18
+    },
+    {
+      "change": "added",
+      "directive": "endif",
+      "count": 58
+    },
+    {
+      "change": "added",
+      "directive": "if",
+      "count": 8
+    },
+    {
+      "change": "added",
+      "directive": "ifdef",
+      "count": 25
+    },
+    {
+      "change": "added",
+      "directive": "ifndef",
+      "count": 26
+    },
+    {
+      "change": "added",
+      "directive": "undef",
+      "count": 1
+    },
+    {
+      "change": "removed",
+      "directive": "define",
+      "count": 467
+    },
+    {
+      "change": "removed",
+      "directive": "else",
+      "count": 80
+    },
+    {
+      "change": "removed",
+      "directive": "endif",
+      "count": 356
+    },
+    {
+      "change": "removed",
+      "directive": "if",
+      "count": 45
+    },
+    {
+      "change": "removed",
+      "directive": "ifdef",
+      "count": 238
+    },
+    {
+      "change": "removed",
+      "directive": "ifndef",
+      "count": 74
+    },
+    {
+      "change": "removed",
+      "directive": "include",
+      "count": 175
+    },
+    {
+      "change": "removed",
+      "directive": "undef",
+      "count": 4
+    }
+  ],
+  "records": [
+    {
+      "path": "src/mvdm-host/dbg/dbg.c",
+      "line": "-#define PX86    px86"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "line": "+#ifdef i386"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "line": "+#ifndef CPU_40_STYLE /* DIVERGENCE(MVDM-HOST-DIV-554) */"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "line": "+#endif /* !CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "line": "-#define STATIC"
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "line": "-#define INT3()      _asm int 3"
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "line": "-#define IFDEBUG(f)  if (f)"
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "line": "-#define ELSEDEBUG   else"
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "line": "-#define LOGDEBUG(l,args) LOG(l,args)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "line": "-#include \"BIOS_SUPPORT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "line": "-#if !defined(LDBIOS)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "line": "+#if !defined(LDBIOS) && !defined(CPU_30_STYLE)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "line": "-#if defined(NTVDM) && defined(MONITOR)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "line": "-#endif\t/* NTVDM && MONITOR */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "line": "-#endif\t/* !LDBIOS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "line": "+#endif\t/* !LDBIOS && !CPU_30_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+      "line": "-#include \"SOFTPC_CMOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "line": "-#include \"AT_STUFF.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "line": "-#include \"SOFTPC_LIM.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "line": "-#include \"SOFTPC_LIM.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "line": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "line": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
+      "line": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#if defined(CPU_30_STYLE) && !defined(CPU_40_STYLE)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* CPU_30_STYLE && ! CPU_40_STYLE*/"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef CPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef CCPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef A2CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* A2CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef A3CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* A3CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef GISP_CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* GISP_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#if (defined(SPC386) && !defined(SPC486))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* SPC386 && !SPC486 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef SPC486"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* SPC486 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef PIG"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* PIG */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef A_VID"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* A_VID */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef C_VID"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* C_VID */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef MSWDVR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* MSWDVR */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef BACK_M"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* BACK_M */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef GISP_SVGA"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* GISP_SVGA */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef DPMI"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* DPMI */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef IRET_HOOKS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* IRET_HOOKS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef SECURE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef SYNCH_TIMERS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#if !defined(CPU_40_STYLE)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "+#ifndef CPU_30_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "+#if !defined(CPU_40_STYLE)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "+#endif /* CPU_30_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#if !defined(CPU_40_STYLE)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "+#ifndef CPU_30_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "+#if !defined(CPU_40_STYLE) /* DIVERGENCE(MVDM-HOST-DIV-265): direct enrm45 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "+#endif /* CPU_30_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifdef LICENSING"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* LICENSING */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": "-#endif /* PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+      "line": "-#include \"SOFTPC_SUPPORT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+      "line": "-#include \"AT_STUFF.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "line": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "line": "+#ifndef CPU_30_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "line": "+#endif /* not CPU_30_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "line": "+#if (!defined(PROD) || !defined(CPU_30_STYLE))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "line": "+#ifdef CPU_30_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "line": "+#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "line": "+#endif /* CPU_30_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": "-#if !defined(PROD)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": "-#endif\t/* !PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "line": "-#define XX_error_code stack_sel"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "line": "-#ifdef FAST_TLB"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "line": "-#endif /* FAST_TLB */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "line": "-#include <SOFTPC_SUPPORT.seg>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/mov.c",
+      "line": "-#define CR0_VALID_BITS 0xe005003f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/mov.c",
+      "line": "-#define CR3_VALID_BITS 0xfffff018"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "line": "-#ifndef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "line": "-#else\t/* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "line": "-#endif\t/* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#include \"SOFTPC_COMMS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#ifdef IRET_HOOKS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#ifdef GISP_CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#else /* IRET_HOOKS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#ifdef DELAYED_INTS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#endif /* DELAYED_INTS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#endif /* IRET_HOOKS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#ifdef GISP_CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#ifdef IRET_HOOKS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#endif /* IRET_HOOKS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "line": "-#include \"SOFTPC_PRINTER.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "line": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "line": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dasm386/dasm386.c",
+      "line": "-#undef\tCCPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "line": "-#include \"SOFTPC_ERROR.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+      "line": "-#include \"DASM1.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "line": "-#include \"SOFTPC_ERROR.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"YODA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include <stdlib.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include <stdio.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include TypesH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include StringH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include <ctype.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(BSD4_2) || defined(SYSTEMV)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include <signal.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* BSD4_2 or SYSTEMV */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"xt.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define CPU_PRIVATE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include CpuH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"trace.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"sas.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"bios.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"ios.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"error.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"config.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"gfi.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"gmi.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"gvi.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"video.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"dsktrace.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"idetect.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"cmos.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"quick_ev.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"gfx_upd.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifndef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"host_gfx.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef NEXT /* until someone sorts out the host_timeval interface */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* ifdef NEXT */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"host_hfx.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"hfx.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"timeval.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* ifdef NEXT else */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* !SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define NUM_BR_ENTRIES 40"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(SYSTEMV) || defined(POSIX_SIGNALS)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define MUST_BLOCK_TIMERS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef MUST_BLOCK_TIMERS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* MUST_BLOCK_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tEGG"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include \"egagraph.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* EGG */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define CPU_YODA_INT 0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define\tsizeoftable(tab)\t(sizeof(tab)/sizeof(tab[0]))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifndef host_tolower"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define host_tolower(x) tolower(x)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* host_tolower */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define YODA_LEN_UNSPECIFIED\t(~(LIN_ADDR)0 >> 1)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef GISP_SVGA"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* GISP_SVGA */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(A3CPU) && !defined(GISP_CPU)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* A3CPU && !GISP_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(CPU_40_STYLE) && !defined(CCPU)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* CPU_40_STYLE && !CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if\tdefined(A2CPU) || defined(GISP_CPU)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* A2CPU || GISP_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef DELTA"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* DELTA */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define MAX_TABLE 0x100"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define MAX_TABLE_BREAK_WORDS 10"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef macintosh"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define MAX_BREAK_WORD_RANGE 0xFFF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define INTEL_OPCODES 256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define INSIGNIA_OPCODES 2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define NR_ADDRS 256"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define INST_MIX_LENGTH ((INTEL_OPCODES+INSIGNIA_OPCODES)*NR_ADDRS)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifndef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef DELTA"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* DELTA */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tCPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifndef\tCCPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define PLA_SIZE\t(64*1024)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifndef\tmacintosh"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tCPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* !macintosh */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* macintosh */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tCPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tCPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tCPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tCPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tCPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define MAX_REG_BKPT 5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if\tdefined(GENERIC_NPX) && !defined(CPU_40_STYLE)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define\tMAX_NPX_OPCODE\t(sizeoftable(NPXOpcodes))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* GENERIC_NPX && !CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef PM"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* PM */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define DASM_INTERNAL"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#include <dasm.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef DPMI"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* DPMI */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifndef GISP_CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef A3CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* GISP_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef ANSI"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef NPX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else\t/* ANSI */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef NPX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef GISP_SVGA"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* GISP_SVGA */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if\tdefined(GENERIC_NPX) && !defined(CPU_40_STYLE)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* GENERIC_NPX && !CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef PM"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tLIM"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* LIM */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */\t\t\t\t\t\t\t "
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef MUST_BLOCK_TIMERS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* MUST_BLOCK_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef BSD4_2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* BSD4_2 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(CPU_40_STYLE) && !defined (SFELLOW) && !defined (NTVDM)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE && !SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef GISP_CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* GISP_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef A3CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* A3CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef DELTA"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* DELTA */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tNPX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* NPX */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifndef macintosh"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SUNOS50"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SUNOS50 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* !macintosh */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef macintosh"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* macintosh else */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if !defined(REAL_VGA) && !defined(SFELLOW)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tEGG"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* EGG */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* not REAL_VGA and not SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef DPMI"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* DPMI */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(HERC)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef WDCTRL_BOP"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* WDCTRL */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef HFX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* HFX */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef HFX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* HFX */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* HFX */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef CPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SYNCH_TIMERS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else\t/* !SYNCH_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SYNCH_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef CPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef CPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef CPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef CPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tSPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tSPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tSPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tSPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tSPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tSPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tSPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tSPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tSPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tSPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tSPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tCPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(SWIN_CPU_OPTS) || defined(CPU_40_STYLE)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SWIN_CPU_OPTS or CPU_40_STYLE*/"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tCPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else\t/* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tCPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tCPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tEGA_DUMP"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* EGA_DUMP */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifndef GISP_CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef A3CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* GISP_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if\tdefined(CPU_40_STYLE) && !defined(CCPU)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE && !CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef PIG"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SYNCH_TIMERS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SYNCH_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef PROFILE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* PROFILE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef CPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define N_DATA_BREAKPOINTS\t4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef MUST_BLOCK_TIMERS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* MUST_BLOCK_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef BSD4_2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* BSD4_2 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tDELTA"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* DELTA */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tNPX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* NPX */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if !defined(REAL_VGA) && !defined(SFELLOW)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tEGG"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* EGG */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* !REAL_VGA && !SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef CPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tSPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tSPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tEGA_DUMP"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* EGA_DUMP */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef GISP_CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* GISP_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SYNCH_TIMERS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef A3CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* A3CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef PM"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tLIM"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* :IM */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef CPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(CPU_40_STYLE) && !defined (SFELLOW) && !defined(NTVDM)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE && !SFELLOW && !NTVDM*/"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifndef GISP_CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef A3CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* GISP_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if\tdefined(CPU_40_STYLE) && !defined(CCPU)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE && !CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef PIG"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if\tdefined(GENERIC_NPX) && !defined(CPU_40_STYLE)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* GENERIC_NPX && !CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef MSWDVR_DEBUG"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* MSWDVR_DEBUG */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef GISP_SVGA"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t\t/* GISP_SVGA */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef PROFILE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* PROFILE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef PCLABS_STATS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef CCPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else  /* !CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* !CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC 386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef CCPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else  /* !CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* !CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tCPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tPIG"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* PIG */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(CPU_40_STYLE) && !defined(CCPU)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else\t/* CPU_40_STYLE && !CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* CPU_40_STYLE && !CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef PCLABS_STATS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef \tGISP_SVGA"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* GISP_SVGA */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if\tdefined(CPU_40_STYLE) && !defined(CCPU)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else\t/* CPU_40_STYLE && !CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* CPU_40_STYLE && !CCPU  */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if !defined(macintosh) && !defined(SFELLOW)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* !macintosh && !SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(SPC386) && !defined(GISP_CPU)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 & !GISP_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef A3CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* A3CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef MUST_BLOCK_TIMERS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* MUST_BLOCK_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef MUST_BLOCK_TIMERS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* MUST_BLOCK_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(CPU_40_STYLE) && !defined(CCPU)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE && !CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef PM"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* PM */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef DOCUMENTATION"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* DOCUMENTATION */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifndef\tCCPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef CPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tCPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tCPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\tCPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef CPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef DOCUMENTATION"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* DOCUMENTATION */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef DOCUMENTATION"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* DOCUMENTATION */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(CPU_40_STYLE) && defined(SYNCH_TIMERS)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef CCPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define GLOBAL_PigSynchCount\tPigSynchCount"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* !CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE && SYNCH_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(CPU_40_STYLE) && defined(SYNCH_TIMERS)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE && SYNCH_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(CPU_40_STYLE) && defined(SYNCH_TIMERS)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define test4(name)\t\t\t\t\\"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define test8(name)\t\t\t\t\\"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE && SYNCH_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define MAX_REGS ('`' - '@')"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(CPU_40_STYLE) && defined(SYNCH_TIMERS)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE && SYNCH_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(CPU_40_STYLE) && defined(SYNCH_TIMERS)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE && SYNCH_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(CPU_40_STYLE) && defined(SYNCH_TIMERS)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE && SYNCH_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define ACCESS8 ((opcode32 & 0xff00) >> 8)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(CPU_40_STYLE) && defined(SYNCH_TIMERS)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* CPU_40_STYLE && SYNCH_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef PCLABS_STATS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef NPX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* NPX */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef MUST_BLOCK_TIMERS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* MUST_BLOCK_TIMERS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if defined(A2CPU) || defined(GISP_CPU)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef DELTA"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* DELTA */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifndef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* !SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef DELTA"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* DELTA */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef DELTA"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* DELTA */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if\tdefined(CPU_40_STYLE) && !defined(CCPU)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* CPU_40_STYLE && !CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifndef SFELLOW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* !SFELLOW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if\tdefined(CPU_40_STYLE) && !defined(CCPU)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* CPU_40_STYLE && !CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef NPX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef SPC386"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* SPC386 */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif\t/* NPX */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* nPROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef PCLABS_STATS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define N 0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define Y 1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define RANGE\t1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define LOCK\t2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define REPNZ\t3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define REP\t4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define SELMEM\t5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define SELREG\t6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define POINT\t7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define ALLMEM\t8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define ALLREG\t9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define ALL\t10"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define SEL5\t11"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define ES_PREFIX \t12"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define CS_PREFIX \t13"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define SS_PREFIX \t14"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define DS_PREFIX \t15"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define USE_NORMAL\t16"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define USE_ZEROF\t17"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define SELALL\t\t18"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#define FPINVALID\t19"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if 0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#if 0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif /* PCLABS STATS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef host_suspend_filter_process"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\thost_resume_filter_process"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#ifdef\thost_kill_filter_process"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "line": "-#include \"AT_STUFF.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "line": "-#include \"SOFTPC_HDA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "line": "-#include \"SOFTPC_FLOPPY.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "line": "-#include \"SOFTPC_FLOPPY.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "line": "-#include \"SOFTPC_FLOPPY.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "line": "-#include \"SOFTPC_FLOPPY.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#define MEGAPKTPLUS 1040"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#include <stdio.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#include TypesH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#include \"xt.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#include \"config.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#include \"gfi.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#include \"gfisflop.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#include \"host.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#include \"error.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#include \"trace.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#include \"fla.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#include \"debug.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#ifdef SEGMENTATION"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#include \"SLAVE_FLOPPY.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#ifdef SCCSID"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#ifdef\tBIGEND"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#ifdef\tBIGEND"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#ifdef\tBIGEND"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "line": "-#include \"SOFTPC_FLOPPY.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#define MEGAPKTPLUS 1040"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include <stdio.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include TypesH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include TimeH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include \"xt.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include \"bios.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include \"timeval.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include \"config.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include \"timer.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include \"dma.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include \"gfi.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include \"gfisflop.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include \"host.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include \"error.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include \"trace.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include \"fla.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include \"debug.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#ifdef SEGMENTATION"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#include \"SLAVE_FLOPPY.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#undef  NO"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#define DMA_DISKETTE_CHANNEL\t2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#define NO\t                2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#define MRD                     1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#define MWT\t                0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#define\tMAX_FDC_CMD\tsizeof(fdc_cmd_info)/sizeof(fdc_cmd_info[0])"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#endif /* !PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#define failure(i)\talways_trace0( \"failed\" ); return( i );"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#ifndef\tPROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "line": "-#include \"SOFTPC_LIM.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "line": "-#include \"SOFTPC_LIM2.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "line": "-#include \"SOFTPC_LIM.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
+      "line": "-#define UNKNOWN_DRIVE_NUMBER\t('?' - 'A')"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#include \"host_cpu.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#ifdef EGATEST"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#endif /* EGATEST */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#ifdef BACK_M"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#endif /* BACK_M */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CPU_HW_INT\t\t0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CPU_HW_INT_MASK\t\t(1 << CPU_HW_INT)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CPU_SW_INT              8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CPU_SW_INT_MASK         (1 << CPU_SW_INT)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#ifndef\thost_simulate"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#endif\t/* host_simulate */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#ifndef\thost_cpu_reset"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#endif\t/* host_cpu_reset */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#ifndef\thost_cpu_init"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#endif\t/* host_cpu_init */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#ifndef\thost_cpu_interrupt"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#endif\t/* host_cpu_interrupt */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#ifdef BIGEND"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#endif\t/* BIGEND */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#ifdef LITTLEND"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#endif\t/* LITTLEND */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CPU_SIGALRM_EXCEPTION           15              /* SIGALRM signal"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CPU_SIGALRM_EXCEPTION_MASK      (1 << CPU_SIGALRM_EXCEPTION)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CPU_TRAP_EXCEPTION              11              /* TRAP FLAG"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CPU_TRAP_EXCEPTION_MASK         (1 << CPU_TRAP_EXCEPTION)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CPU_YODA_EXCEPTION              13              /* YODA FLAG"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CPU_YODA_EXCEPTION_MASK         (1 << CPU_YODA_EXCEPTION)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CPU_SIGIO_EXCEPTION             14              /* SIGIO FLAG"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CPU_SIGIO_EXCEPTION_MASK        (1 << CPU_SIGIO_EXCEPTION)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CPU_RESET_EXCEPTION             12              /* RESET FLAG"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CPU_RESET_EXCEPTION_MASK        (1 << CPU_RESET_EXCEPTION)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#ifdef CCPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define INVALID\t\t\t\t0x00"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define AVAILABLE_TSS\t\t\t0x01"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define LDT_SEGMENT\t\t\t0x02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define BUSY_TSS\t\t\t0x03"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CALL_GATE\t\t\t0x04"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define TASK_GATE\t\t\t0x05"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define INTERRUPT_GATE\t\t\t0x06"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define TRAP_GATE\t\t\t0x07"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define EXPANDUP_READONLY_DATA\t\t0x11"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define EXPANDUP_WRITEABLE_DATA\t\t0x13"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define EXPANDDOWN_READONLY_DATA\t0x15"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define EXPANDDOWN_WRITEABLE_DATA\t0x17"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define NONCONFORM_NOREAD_CODE\t\t0x19"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define NONCONFORM_READABLE_CODE\t0x1b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CONFORM_NOREAD_CODE\t\t0x1d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define CONFORM_READABLE_CODE\t\t0x1f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define X_REAL 0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define C_UPRO 1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define C_DNRO 6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define C_PROT 2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define C_UPRW 7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define C_DNRW 8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define S_UP   3"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define S_DOWN 4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define S_BAD  5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define D_CODE 1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define D_UPRO 1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define D_DNRO 6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define D_UPRW 7"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define D_DNRW 8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define D_BAD  2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getCS_SELECTOR()\tCS.X"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getDS_SELECTOR()\tDS.X"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getSS_SELECTOR()\tSS.X"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getES_SELECTOR()\tES.X"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getCS_AR()\t\tCS_AR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getDS_AR()\t\tDS_AR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getSS_AR()\t\tSS_AR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getES_AR()\t\tES_AR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getCS_BASE()\t\tCS_base"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getDS_BASE()\t\tDS_base"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getSS_BASE()\t\tSS_base"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getES_BASE()\t\tES_base"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getCS_LIMIT()\t\tCS_limit"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getDS_LIMIT()\t\tDS_limit"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getSS_LIMIT()\t\tSS_limit"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getES_LIMIT()\t\tES_limit"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getLDT_BASE()\t\tLDTR_base"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getLDT_LIMIT()\t\tLDTR_limit"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getTR_BASE()\t        TR_base"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getTR_LIMIT()\t        TR_limit"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setCS_SELECTOR(val)\tCS.X     = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setDS_SELECTOR(val)\tDS.X     = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setSS_SELECTOR(val)\tSS.X     = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setES_SELECTOR(val)\tES.X     = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setCS_AR(val)\t\tCS_AR    = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setDS_AR(val)\t\tDS_AR    = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setSS_AR(val)\t\tSS_AR    = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setES_AR(val)\t\tES_AR    = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setCS_BASE(val)\t\tCS_base  = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setDS_BASE(val)\t\tDS_base  = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setSS_BASE(val)\t\tSS_base  = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setES_BASE(val)\t\tES_base  = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setCS_LIMIT(val)\tCS_limit = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setDS_LIMIT(val)\tDS_limit = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setSS_LIMIT(val)\tSS_limit = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setES_LIMIT(val)\tES_limit = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setLDT_BASE(val)\tLDTR_base  = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setLDT_LIMIT(val)\tLDTR_limit = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setTR_BASE(val)\t\tTR_base  = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setTR_LIMIT(val)\tTR_limit = val"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#ifndef\tgetAX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define  getAX()\t(A.X)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getAH()\t(A.byte.high)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getAL()\t(A.byte.low)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getBX()\t(B.X)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getBH()\t(B.byte.high)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getBL()\t(B.byte.low)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getCX()\t(C.X)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getCH()\t(C.byte.high)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getCL()\t(C.byte.low)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getDX()\t(D.X)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getDH()\t(D.byte.high)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getDL()\t(D.byte.low)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getSP()\t(SP.X)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getBP()\t(BP.X)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getSI()\t(SI.X)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getDI()\t(DI.X)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getIP()\t(IP.X)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getCS()\t(CS.X)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getDS()\t(DS.X)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getES()\t(ES.X)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getSS()\t(SS.X)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getMSW()\t(m_s_w)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getDF()\t(STATUS_DF)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getIF()\t(STATUS_IF)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getTF()\t(STATUS_TF)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getPF()\t(STATUS_PF)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getAF()\t(STATUS_AF)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getSF()\t(STATUS_SF)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getZF()\t(STATUS_ZF)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getOF()\t(STATUS_OF)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getCF()    \t(STATUS_CF)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getCPL()\t\t(CPL)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getGDT_BASE()\t\t(GDTR_base)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getGDT_LIMIT()\t\t(GDTR_limit)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getIDT_BASE()\t\t(IDTR_base)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getIDT_LIMIT()\t\t(IDTR_limit)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getLDT_SELECTOR()\t\t(LDTR.X)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getTR_SELECTOR()\t\t\t(TR.X)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getMSW_reserved()\t(MSW.reserved)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getTS()\t\t(MSW.TS)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getEM()\t\t(MSW.EM)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getMP()\t\t(MSW.MP)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getPE()\t\t(MSW.PE)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getNT()\t\t(STATUS_NT)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define getIOPL()\t(STATUS_IOPL)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t getSTATUS() \t(getCF()        |\t\\"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define  setAX(val)\t(A.X = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setAH(val)\t(A.byte.high = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setAL(val)\t(A.byte.low = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setBX(val)\t(B.X = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setBH(val)\t(B.byte.high = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setBL(val)\t(B.byte.low = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setCX(val)\t(C.X = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setCH(val)\t(C.byte.high = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setCL(val)\t(C.byte.low = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setDX(val)\t(D.X = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setDH(val)\t(D.byte.high = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setDL(val)\t(D.byte.low = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setSP(val)\t(SP.X = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setBP(val)\t(BP.X = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setSI(val)\t(SI.X = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setDI(val)\t(DI.X = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setIP(val)\t(IP.X = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setCS(val)\text_load_CS (val)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setDS(val)\text_load_DS (val)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setES(val)\text_load_ES (val)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setSS(val)\text_load_SS (val)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setMSW(val)\t(m_s_w = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setDF(val)\t(STATUS_DF = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setIF(val)\t(STATUS_IF = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setTF(val)\t(STATUS_TF = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setPF(val)\t(STATUS_PF = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setAF(val)\t(STATUS_AF = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setSF(val)\t(STATUS_SF = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setZF(val)\t(STATUS_ZF = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setOF(val)\t(STATUS_OF = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define\t setCF(val)\t(STATUS_CF = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setCPL(val)\t\t(CPL = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setGDT_BASE(val)\t(GDTR_base = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setGDT_LIMIT(val)\t(GDTR_limit = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setIDT_BASE(val)\t(IDTR_base = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setIDT_LIMIT(val)\t(IDTR_limit = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setLDT_SELECTOR(val)\t\t(LDTR.X = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setTR_SELECTOR(val)\t\t(TR.X = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setMSW_reserved(val)\t(MSW.reserved = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setTS(val)\t\t(MSW.TS = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setEM(val)\t\t(MSW.EM = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setMP(val)\t\t(MSW.MP = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setPE(val)\t\t(MSW.PE = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setNT(val)\t\t(STATUS_NT = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#define setIOPL(val)\t(STATUS_IOPL = (val))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#endif\t/* getAX - default CCPU register access macros */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "line": "-#endif /* CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#ifdef SWITCHED_CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#ifndef SWITCHED_CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#ifdef CPU_PRIVATE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#endif /* CPU_PRIVATE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#endif /* SWITCHED_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define cpu_init\t\ta3_cpu_init"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define cpu_simulate\t\t_asm_simulate"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define\thost_q_ev_set_count\ta3_cpu_q_ev_set_count"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define\thost_q_ev_get_count\ta3_cpu_q_ev_get_count"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#ifndef host_calc_q_ev_inst_for_time"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define\thost_calc_q_ev_inst_for_time\ta3_cpu_calc_q_ev_inst_for_time"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#endif /* host_calc_q_ev_inst_for_time */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define cpu_EOA_hook\t\ta3_cpu_EOA_hook"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define cpu_terminate\t\ta3_cpu_terminate"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#ifndef getAX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define cpu_interrupt\t\ta3_cpu_interrupt"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getAL\t\ta3_getAL"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getBL\t\ta3_getBL"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getCL\t\ta3_getCL"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getDL\t\ta3_getDL"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getAH\t\ta3_getAH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getBH\t\ta3_getBH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getCH\t\ta3_getCH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getDH\t\ta3_getDH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getAX\t\ta3_getAX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getBX\t\ta3_getBX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getCX\t\ta3_getCX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getDX\t\ta3_getDX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getSP\t\ta3_getSP"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getBP\t\ta3_getBP"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getSI\t\ta3_getSI"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getDI\t\ta3_getDI"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getIP\t\ta3_getIP"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getCS\t\ta3_getCS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getDS\t\ta3_getDS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getES\t\ta3_getES"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getSS\t\ta3_getSS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getAF\t\ta3_getAF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getCF\t\ta3_getCF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getDF\t\ta3_getDF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getIF\t\ta3_getIF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getIOPL\t\ta3_getIOPL"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getNT\t\ta3_getNT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getOF\t\ta3_getOF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getPF\t\ta3_getPF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getSF\t\ta3_getSF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getTF\t\ta3_getTF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getZF\t\ta3_getZF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getSTATUS\ta3_getSTATUS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getEM\t\ta3_getEM"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getMP\t\ta3_getMP"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getPE\t\ta3_getPE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getTS\t\ta3_getTS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getMSW\t\ta3_getMSW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getGDT_BASE\ta3_getGDT_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getGDT_LIMIT\ta3_getGDT_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getIDT_BASE\ta3_getIDT_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getIDT_LIMIT\ta3_getIDT_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getLDT_BASE\ta3_getLDT_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getLDT_LIMIT\ta3_getLDT_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getLDT_SELECTOR\ta3_getLDT_SELECTOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getTR_BASE\ta3_getTR_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getTR_LIMIT\ta3_getTR_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getTR_SELECTOR\ta3_getTR_SELECTOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setAL\t\ta3_setAL"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setCL\t\ta3_setCL"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setDL\t\ta3_setDL"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setBL\t\ta3_setBL"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setAH\t\ta3_setAH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setCH\t\ta3_setCH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setDH\t\ta3_setDH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setBH\t\ta3_setBH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setAX\t\ta3_setAX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setCX\t\ta3_setCX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setDX\t\ta3_setDX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setBX\t\ta3_setBX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setSP\t\ta3_setSP"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setBP\t\ta3_setBP"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setSI\t\ta3_setSI"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setDI\t\ta3_setDI"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setIP\t\ta3_setIP"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setES\t\ta3_setES"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setCS\t\ta3_setCS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setSS\t\ta3_setSS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setDS\t\ta3_setDS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setCF\t\ta3_setCF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setPF\t\ta3_setPF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setAF\t\ta3_setAF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setZF\t\ta3_setZF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setSF\t\ta3_setSF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setTF\t\ta3_setTF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setIF\t\ta3_setIF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setDF\t\ta3_setDF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setOF\t\ta3_setOF"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setIOPL\t\ta3_setIOPL"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setNT\t\ta3_setNT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#endif /* getAX */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#ifdef CPU_PRIVATE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getCPL\t\ta3_p_getCPL"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getES_SELECTOR\ta3_p_getES_SELECTOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getCS_SELECTOR\ta3_p_getCS_SELECTOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getSS_SELECTOR\ta3_p_getSS_SELECTOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getDS_SELECTOR\ta3_p_getDS_SELECTOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getES_BASE\ta3_p_getES_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getCS_BASE\ta3_p_getCS_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getDS_BASE\ta3_p_getDS_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getSS_BASE\ta3_p_getSS_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getES_LIMIT\ta3_p_getES_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getCS_LIMIT\ta3_p_getCS_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getDS_LIMIT\ta3_p_getDS_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getSS_LIMIT\ta3_p_getSS_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getES_AR\ta3_p_getES_AR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getCS_AR\ta3_p_getCS_AR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getDS_AR\ta3_p_getDS_AR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define getSS_AR\ta3_p_getSS_AR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setES_SELECTOR\ta3_p_setES_SELECTOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setCS_SELECTOR\ta3_p_setCS_SELECTOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setSS_SELECTOR\ta3_p_setSS_SELECTOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setDS_SELECTOR\ta3_p_setDS_SELECTOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setES_BASE\ta3_p_setES_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setCS_BASE\ta3_p_setCS_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setDS_BASE\ta3_p_setDS_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setSS_BASE\ta3_p_setSS_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setES_LIMIT\ta3_p_setES_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setCS_LIMIT\ta3_p_setCS_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setDS_LIMIT\ta3_p_setDS_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setSS_LIMIT\ta3_p_setSS_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setES_AR\ta3_p_setES_AR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setCS_AR\ta3_p_setCS_AR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setDS_AR\ta3_p_setDS_AR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setSS_AR\ta3_p_setSS_AR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setPE\t\ta3_p_setPE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setMP\t\ta3_p_setMP"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setEM\t\ta3_p_setEM"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setTS\t\ta3_p_setTS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setMSW\t\ta3_p_setMSW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setCPL\t\ta3_p_setCPL"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setGDT_BASE\ta3_p_setGDT_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setGDT_LIMIT\ta3_p_setGDT_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setIDT_BASE\ta3_p_setIDT_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setIDT_LIMIT\ta3_p_setIDT_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setLDT_SELECTOR\ta3_p_setLDT_SELECTOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setLDT_BASE\ta3_p_setLDT_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setLDT_LIMIT\ta3_p_setLDT_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setTR_SELECTOR\ta3_p_setTR_SELECTOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setTR_BASE\ta3_p_setTR_BASE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define setTR_LIMIT\ta3_p_setTR_LIMIT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#endif /* CPU_PRIVATE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#ifdef CCPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define  Cpu_set_hook_selector         c_Cpu_set_hook_selector"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#define  Cpu_set_hook_selector         a3_Cpu_set_hook_selector"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#ifdef GISP_CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "line": "-#ifdef GISP_CPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "line": "-#ifndef\tNO_STRING_OPERATIONS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "line": "-#endif\t/* NO_STRING_OPERATIONS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "line": "+#if defined(CPU_40_STYLE) && defined(C_VID)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "line": "+#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "line": "-#endif\t/* NO_STRING_OPERATIONS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "line": "+#endif\t/* NO_STRING_OPERATIONS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/flexlmif.h",
+      "line": "-#ifdef SOFTWINDOWS_AND_SOFTPC\t/* Needed when we have SoftPC and SoftWindows */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/flexlmif.h",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": "-#ifdef NTVDM"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": "-#define\tRB_MODE\t\t\"rb\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": "-#define\tWB_MODE\t\t\"wb\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": "-#define\tAB_MODE\t\t\"ab\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": "-#define\tRB_MODE\t\t\"r\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": "-#define\tWB_MODE\t\t\"w\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": "-#define\tAB_MODE\t\t\"a\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": "-#define host_conv_x_to_PC(mode, x)\tx_host_to_PC(mode, x)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": "-#define host_conv_y_to_PC(mode, y)\ty_host_to_PC(mode, y)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": "-#define host_conv_PC_to_x(mode, x)\tx_PC_to_host(mode, x)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": "-#define host_conv_PC_to_y(mode, y)\ty_PC_to_host(mode, y)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "line": "+#ifndef CPU_30_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "line": "+#endif /* CPU_30_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "line": "-#ifdef BIT_ORDER2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "line": "-#ifdef BIT_ORDER1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "line": "-#ifdef BIT_ORDER2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "line": "-#ifdef BIT_ORDER1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "line": "-#define RS232_FIFO  2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "line": "-#define FIFO_SIZE   16"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "line": "-#define FIFO_BUFFER_SIZE    FIFO_SIZE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
+      "line": "-#define FIFO_INT 6   /* fifo rda time out interrupt ID */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": "+#ifndef CPU_30_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": "+#endif /* !CPU_30_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": "-#ifdef BIGEND"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": "-#ifdef LITTLEND"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "line": "-#ifndef SYSTEM_CONFIG"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "line": "-#define SYSTEM_CONFIG\t\"$SPCHOME/trap.spcconfig\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "line": "-#endif /* SYSTEM_CONFIG */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "line": "-#ifdef ANSI"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "line": "-#else /* ANSI */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "line": "-#endif /* ANSI */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define FILE_CREATE\t0x3c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define FILE_OPEN\t0x3d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define\tFILE_CLOSE\t0x3e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define FILE_READ\t0x3f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define\tFILE_WRITE\t0x40"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define FILE_DEL\t0x41"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define FILE_LSEEK\t0x42"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define FILE_DUPH\t0x45"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define FILE_FDUPH\t0x46"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define CREATE_CHILD_PSP\t0x55"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define FILE_DATETIME\t0x57"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define FILE_LOCKUNLOCK\t0x5c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define FILE_COMMIT\t0x68"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define FILE_EXOPEN\t0x6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define NO_INHERIT 0x80"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define F_SEEK_START\t0x0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define\tF_SEEK_REL\t\t0x1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": "-#define F_SEEK_END\t\t0x2\t\t"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "+#ifndef CPU_30_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/xt.h",
+      "line": "+#endif /* CPU_30_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#include \"SOFTPC_PPI.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#if defined(IRET_HOOKS) && defined(GISP_CPU)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#else /* !IRET_HOOKS || !GISP_CPU */ "
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#ifdef DELAYED_INTS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#endif\t/* DELAYED_INTS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#endif /* IRET_HOOKS && GISP_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#ifndef REAL_KBD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#ifdef JOKER"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#ifdef JOKER"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#endif\t/* JOKER */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#endif /* IRET_HOOKS && GISP_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#ifndef NTVDM"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#if defined(IRET_HOOKS) && defined(GISP_CPU)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#endif /* IRET_HOOKS && GISP_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#ifdef\tmacintosh"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#endif\t/* macintosh */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#ifdef REAL_KBD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#ifndef REAL_KBD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#ifdef PM"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#ifndef REAL_KBD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "+#endif /* IRET_HOOKS && GISP_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": "+#ifndef NTVDM"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "line": "-#include \"SOFTPC_MOUSE.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "line": "-#include \"SOFTPC_INPUT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": "-#include \"SOFTPC_MOUSE.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": "-#endif /* PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": "-#endif /* PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": "-#endif /* PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": "-#endif /* PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "line": "-#include \"SOFTPC_SUPPORT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "line": "-#ifdef\tPROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "line": "-#else\t/* PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "line": "-#endif\t/* PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "line": "-#ifndef\tPROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "line": "-#endif\t/* PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "line": "-#include \"SOFTPC_IOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": "+#ifndef CPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": "+#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "line": "-#include \"AT_STUFF.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "line": "-#include \"SOFTPC_CMOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/dummy_nt.c",
+      "line": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#include \"SOFTPC_ICA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#ifdef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#define host_valid_iret_hook()\t(TRUE)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#else\t\t/* allow disabling of iret hooks whilst debugging */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#define host_bop_style_iret_hooks()\t(FALSE)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#define host_iret_bop_table_addr(line)\t(0)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#define host_ica_lock()"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#define host_ica_unlock()"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#define host_ica_real_locks() (FALSE)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#define ica_lock_set(x) ica_lock = x"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#define\tica_lock_inc()\tica_lock++"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#define ica_lock_dec()  ica_lock--"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "+#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "+#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#ifdef CPU_40_STYLE"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#define ICA_IMPOSSIBLE_LINE\t100"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#ifdef NOVELL"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#endif /* NOVELL */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#ifdef SWIN_HAW"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#endif /* SWIN_HAW */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#ifdef ASPI"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#endif /* ASPI */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#endif /* !PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#endif\t/* PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#endif  /* CPU_40_STYLE */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "+#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "-#include \"SOFTPC_ERROR.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "-#ifdef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "-#else  /* PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "line": "-#endif /* PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "line": "+#ifndef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "line": "+#ifndef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "line": "+#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "line": "+#ifndef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "line": "+#ifndef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "line": "+#ifndef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": "-#include \"SOFTPC_QUICKEV.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": "-#include \"malloc.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": "-#define\ttic_free_list_head\tq_free_list_head"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "line": "-#define ROM_BUFFER_SIZE 1024*25"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#include \"SOFTPC_SUPPORT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#ifndef DELAYED_INTS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#if !(defined(GISP_CPU) || defined(CPU_40_STYLE))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#endif\t/* ! (GISP_CPU||CPU_40_STYLE) */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#ifndef GISP_CPU "
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#else /* GISP_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#endif /* GISP_CPU */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#endif /* DELAYED_INTS */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#ifdef PIG"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#ifdef PIG"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#ifndef\tPROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+      "line": "-#include \"SOFTPC_SUPPORT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/unexp_nt.c",
+      "line": "-#include \"SOFTPC_ERROR.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "line": "-#include \"SOFTPC_CGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "line": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "line": "-#include \"VIDEO_BIOS_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "line": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "line": "-#ifdef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "line": "-#ifdef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "line": "-#include \"SOFTPC_EGA_CHN.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#if\t\tdefined(JOKER) && !defined(PROD)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#undef\tSEGMENTATION\t\t/* HeeHee! */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#endif\t/* DEV JOKER variants */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_EGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": "-#include \"SOFTPC_GRAPHICS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "line": "-#include \"SOFTPC_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+      "line": "-#include \"SOFTPC_VGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "line": "-#include \"VIDEO_BIOS_VGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "line": "-#include \"SOFTPC_VGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "line": "-#include \"SOFTPC_VGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+      "line": "-#include \"VIDEO_BIOS_VGA.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "line": "-#include \"VIDEO_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "line": "-#include \"SOFTPC_INIT.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video_io.c",
+      "line": "-#include \"VIDEO_BIOS.seg\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/hostgrph.h",
+      "line": "-#define HOST_HERC_PAINT_OFFSET(row)\t(row)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "+#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_aorc.c",
+      "line": "-#undef setFLAGS"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": "+#ifndef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": "+#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": "+#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": "-#endif  /* PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#ifndef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#ifndef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#ifndef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#ifndef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hunt.c",
+      "line": "-#include \"hunter.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "+#ifndef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "+#ifndef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sec.c",
+      "line": "+#ifdef X86GFX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sec.c",
+      "line": "+#endif //X86GFX"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_term.c",
+      "line": "-#include \"nt_hunt.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "line": "+#ifndef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "line": "+#if defined(MONITOR) && defined(X86GFX)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "line": "+#ifndef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "line": "+#ifndef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "line": "+#ifdef MONITOR"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "line": "+#else"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#include <stdio.h>"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#include \"xt.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#include CpuH"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#include \"hunter.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#include \"nt_getXX.h\""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define EXPORT"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define sizeoftable(tab)\t(sizeof(tab)/sizeof(tab[0]))"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define CT_IMM\t0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define CT_EA\t1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define CT_REG\t2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define MR_BX\t0x01"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define MR_BP\t0x02"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define MR_SI\t0x04"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define MR_DI\t0x08"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define MR_D8\t0x10"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define MR_D16\t0x20"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define NO_OVERRIDE\t(-1)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define SEG_ES\t\t(0)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define SEG_CS\t\t(1)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define SEG_SS\t\t(2)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define SEG_DS\t\t(3)"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#define MAX_CALL_STACK\t128"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "line": "-#endif /* ndef PROD */"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
+      "line": "-#ifndef CCPU"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
+      "line": "-#ifndef PROD"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
+      "line": "-#endif /* CCPU */"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/win/win.c",
+      "line": "-#include <stdio.h>"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/win/win.c",
+      "line": "-#define DPRINTF(args) printf args"
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.h",
+      "line": "-#define THREADID32(htask16)                                                   \\"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.h",
+      "line": "-#define WM32UNDOCUMENTED WM32Undocumented"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": "-#ifdef i386"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": "-#ifdef _X86_"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": "-#if 0 // this code is a paranoid check, only useful when debugging GetPModeVDMPointer."
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": "-#endif"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "line": "-#define LINK_WORKLIST(pc, pNew, pLast) \\"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.h",
+      "line": "-#define COMMDEBUG(lpszformat) LOGDEBUG(1, lpszformat)"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.h",
+      "line": "-#define DEBUGWATCHMODEMEVENTS(dwE, dwM, dwS, pcE16, pcM16) {    \\"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "line": "-#define FPASSTODWP32(msg) \\"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "line": "+#ifdef i386"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "line": "+#else"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "line": "+#if defined(ALLOC_PRAGMA)"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdi.h",
+      "line": "-#define TDI_RECEIVE_TRUNCATED           0x00000001 // received TSDU was truncated."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdi.h",
+      "line": "-#define TDI_RECEIVE_FRAGMENT            0x00000002 // received TSDU was fragmented."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdi.h",
+      "line": "-#define NETMAN_VARTYPE_ULONG            0       // type is a ULONG."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdi.h",
+      "line": "-#define NETMAN_VARTYPE_HARDWARE_ADDRESS 1       // type is a HARDWARE_ADDRESS."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdi.h",
+      "line": "-#define NETMAN_VARTYPE_STRING           2       // type is a FLAT_STRING."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdi.h",
+      "line": "-#define TDI_INFO_CLASS_ENDPOINT         0       // endpoint information class."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdi.h",
+      "line": "-#define TDI_INFO_CLASS_CONNECTION       1       // connection information class."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdi.h",
+      "line": "-#define TDI_INFO_CLASS_ADDRESS          2       // address information class."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdi.h",
+      "line": "-#define TDI_INFO_CLASS_PROVIDER         3       // provider information class."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/tdi.h",
+      "line": "-#define TDI_INFO_CLASS_NETMAN           4       // network management info class."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/icanon.h",
+      "line": "-#define I_NetPathType           NetpPathType"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/icanon.h",
+      "line": "-#define I_NetPathCanonicalize   NetpPathCanonicalize"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/icanon.h",
+      "line": "-#define I_NetPathCompare        NetpPathCompare"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/icanon.h",
+      "line": "-#define I_NetNameValidate       NetpNameValidate"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/icanon.h",
+      "line": "-#define I_NetNameCanonicalize   NetpNameCanonicalize"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/icanon.h",
+      "line": "-#define I_NetNameCompare        NetpNameCompare"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/icanon.h",
+      "line": "-#define I_NetListCanonicalize   NetpListCanonicalize"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/icanon.h",
+      "line": "-#define I_NetListTraverse       NetpListTraverse"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "line": "+#if !defined(MIDL_PASS)"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntrtl.h",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "line": "+#ifdef UNICODE"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "line": "+#else"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "line": "+#define IS_ANSI TRUE"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "line": "+#undef _UNICODE"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "line": "+#define COPYLPWSTRID(pinstr, psz) \\"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "line": "+#define CLEANUPLPWSTR(instr)"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "line": "+#ifdef UNICODE"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "line": "+#define COPYLPTSTRID                COPYLPWSTRID"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "line": "+#define FIRSTCOPYLPTSTRID           COPYLPWSTRID"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "line": "+#define CLEANUPLPTSTR               CLEANUPLPWSTR"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "line": "+#else"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntsend.h",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "line": "+#ifndef MSDWP"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "line": "+#ifndef MSDWP"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
+      "line": "+#endif"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "+#ifdef _USERK_"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "+#else"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "line": "+#endif // _USERK_"
+    },
+    {
+      "path": "src/wow32-dll/include/wow_class_client_bindings.h",
+      "line": "-#define IS_ANSI TRUE"
+    }
+  ],
+  "limitation": "textual changes do not by themselves prove altered effective include paths"
+}

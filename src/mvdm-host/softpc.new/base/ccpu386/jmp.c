@@ -47,9 +47,9 @@ JMPF
    IU32 op1[2]       /* offset:segment pointer */
    )
 #else
-   (op1)
-   IU32 op1[2];
+#error Unsupported excluded original configuration
 #endif
+#line 53
    {
    IU16  new_cs;	/* The destination */
    IU32 new_ip;
@@ -68,16 +68,9 @@ JMPF
       /* Real Mode or V86 Mode */
 
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
-
-      /*
-	 Although the 386 book says a 16-bit operand should be AND'ed
-	 with 0x0000ffff, a 16-bit operand is never fetched with the
-	 top bits dirty anyway, so we don't AND here.
-       */
-      if ( new_ip > GET_CS_LIMIT() )
-	 GP((IU16)0, FAULT_JMPF_RM_CS_LIMIT);
-
+#error Unsupported excluded original configuration
 #else	/* TAKE_REAL_MODE_LIMIT_FAULT */
+#line 81
 
       /* The Soft486 EDL CPU does not take Real Mode limit failures.
        * Since the Ccpu486 is used as a "reference" cpu we wish it
@@ -86,6 +79,7 @@ JMPF
        */
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
+#line 89
 
       load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);
       SET_EIP(new_ip);
@@ -146,11 +140,9 @@ IFN1(
 
    /* do ip limit check */
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
-
-   if ( offset > GET_CS_LIMIT() )
-      GP((IU16)0, FAULT_JMPN_RM_CS_LIMIT);
-
+#error Unsupported excluded original configuration
 #else /* TAKE_REAL_MODE_LIMIT_FAULT */
+#line 154
 
       /* The Soft486 EDL CPU does not take Real Mode limit failures.
        * Since the Ccpu486 is used as a "reference" cpu we wish it
@@ -178,6 +170,7 @@ IFN1(
        */
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
+#line 181
 
    SET_EIP(offset);
    }

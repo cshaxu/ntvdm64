@@ -1,0 +1,133 @@
+{
+  "scope": "first-depth alternate-endian branches in cfpu_def.h",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": 25,
+      "group_start": 21,
+      "original_unguarded_body_start": 19,
+      "original_body_matches": [
+        19
+      ],
+      "original_line_after_body": 22,
+      "current_next_line": "} FP32;",
+      "original_next_line": "} FP32;",
+      "following_selected_line_matches": true,
+      "status": "product and x87 fixture boundary witnessed; selected local little-endian layout must remain; reconcile selected adaptation registration before applying exclusion",
+      "selected_context_logical_next_lines": [
+        30
+      ],
+      "boundary_probe_context_count": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": 37,
+      "group_start": 33,
+      "original_unguarded_body_start": 25,
+      "original_body_matches": [
+        25
+      ],
+      "original_line_after_body": 28,
+      "current_next_line": "} FP64HI;",
+      "original_next_line": "} FP64HI;",
+      "following_selected_line_matches": true,
+      "status": "product and x87 fixture boundary witnessed; selected local little-endian layout must remain; reconcile selected adaptation registration before applying exclusion",
+      "selected_context_logical_next_lines": [
+        42
+      ],
+      "boundary_probe_context_count": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": 48,
+      "group_start": 45,
+      "original_unguarded_body_start": 31,
+      "original_body_matches": [
+        31
+      ],
+      "original_line_after_body": 33,
+      "current_next_line": "} FP80SE;",
+      "original_next_line": "} FP80SE;",
+      "following_selected_line_matches": true,
+      "status": "product and x87 fixture boundary witnessed; selected local little-endian layout must remain; reconcile selected adaptation registration before applying exclusion",
+      "selected_context_logical_next_lines": [
+        52
+      ],
+      "boundary_probe_context_count": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": 60,
+      "group_start": 57,
+      "original_unguarded_body_start": 38,
+      "original_body_matches": [
+        38
+      ],
+      "original_line_after_body": 40,
+      "current_next_line": "} FP64;",
+      "original_next_line": "} FP64;",
+      "following_selected_line_matches": true,
+      "status": "product and x87 fixture boundary witnessed; selected local little-endian layout must remain; reconcile selected adaptation registration before applying exclusion",
+      "selected_context_logical_next_lines": [
+        64
+      ],
+      "boundary_probe_context_count": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": 72,
+      "group_start": 68,
+      "original_unguarded_body_start": 44,
+      "original_body_matches": [
+        44
+      ],
+      "original_line_after_body": 46,
+      "current_next_line": "} FPU_I64;",
+      "original_next_line": "} FPU_I64;",
+      "following_selected_line_matches": true,
+      "status": "product and x87 fixture boundary witnessed; selected local little-endian layout must remain; reconcile selected adaptation registration before applying exclusion",
+      "selected_context_logical_next_lines": [
+        76
+      ],
+      "boundary_probe_context_count": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "line": 88,
+      "group_start": 85,
+      "original_unguarded_body_start": 55,
+      "original_body_matches": [
+        55
+      ],
+      "original_line_after_body": 57,
+      "current_next_line": "FP80SE\tsign_exp;",
+      "original_next_line": "FP80SE\tsign_exp;",
+      "following_selected_line_matches": true,
+      "status": "product and x87 fixture boundary witnessed; selected local little-endian layout must remain; reconcile selected adaptation registration before applying exclusion",
+      "selected_context_logical_next_lines": [
+        92
+      ],
+      "boundary_probe_context_count": 3
+    }
+  ],
+  "evidence": [
+    "host_def.h line 21 unconditionally defines LITTLEND",
+    "product direct include sites fpu.c and zfrsrvd.c include host_def.h before cfpu_def.h",
+    "the standalone x87_layout_fixture.c also includes host_def.h first",
+    "repository lexical scan finds no LITTLEND undef or command-line override",
+    "current MSVC/Windows SDK header scan finds no LITTLEND undef",
+    "instrumented product inclusion map contains exactly four contexts: fpu.c and zfrsrvd.c in each of two x86 worker graphs"
+  ],
+  "limitations": [
+    "verify exact original conditional structure, remaining indirect inclusion contexts and compiler flags before classifying",
+    "host_cpu.h is outside this narrow direct-consumer proof"
+  ],
+  "original_comparison": {
+    "finding": "the six LITTLEND condition groups are not present in pinned OpenNT cfpu_def.h; the original contains the opposite bitfield layout directly",
+    "active_arm": "selected little-endian declarations are a product compatibility adaptation and must remain",
+    "provenance": "docs/etc/evidence/m0-t419-s1-x87-audit.md records recovery from SoftPC T59",
+    "registration_check": "README explicitly records DIV-270 for a separate fenv change and s12-endian records BIGEND; a dedicated registration for this layout was not located in the checked ledger and must be reconciled before any edit",
+    "conclusion": "do not restore an invented original conditional as though it were original; if these locally added #else arms are excluded, retain the selected local little-endian adaptation and register its provenance"
+  },
+  "boundary_probe": "s13-bfs-depth1-cfpu-boundary-probes.json"
+}

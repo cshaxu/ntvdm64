@@ -102,12 +102,9 @@ IRET()
       new_flags = tpop(STACK_ITEM_3, NULL_BYTE_OFFSET);
 
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
-
-      /* do ip limit check */
-      if ( new_ip > GET_CS_LIMIT() )
-	 GP((IU16)0, FAULT_IRET_RM_CS_LIMIT);
-
+#error Unsupported excluded original configuration
 #else	/* TAKE_REAL_MODE_LIMIT_FAULT */
+#line 111
 
       /* The Soft486 EDL CPU does not take Real Mode limit failures.
        * Since the Ccpu486 is used as a "reference" cpu we wish it
@@ -116,6 +113,7 @@ IRET()
        */
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
+#line 119
 
       /* ALL SYSTEMS GO */
 

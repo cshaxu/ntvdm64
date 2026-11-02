@@ -1,0 +1,2336 @@
+{
+  "scope": "outer condition group ending and following selected-context anchors; no nested semantic audit",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "line": 1456,
+      "family": "strong",
+      "current_group_end": 1473,
+      "original_group_end": 1470,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "}",
+        "VOID",
+        "FreeMemoryBlock(",
+        "VOID"
+      ],
+      "after_group_original": [
+        "}",
+        "VOID",
+        "FreeMemoryBlock(",
+        "VOID"
+      ],
+      "current_logical_after_group": 1474,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "line": 1496,
+      "family": "strong",
+      "current_group_end": 1517,
+      "original_group_end": 1514,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "}",
+        "VOID",
+        "ResizeMemoryBlock(",
+        "VOID"
+      ],
+      "after_group_original": [
+        "}",
+        "VOID",
+        "ResizeMemoryBlock(",
+        "VOID"
+      ],
+      "current_logical_after_group": 1518,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "line": 1541,
+      "family": "strong",
+      "current_group_end": 1563,
+      "original_group_end": 1560,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "}",
+        "VOID",
+        "LoadExec(",
+        "VOID"
+      ],
+      "after_group_original": [
+        "}",
+        "VOID",
+        "LoadExec(",
+        "VOID"
+      ],
+      "current_logical_after_group": 1564,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "line": 84,
+      "family": "strong",
+      "current_group_end": 87,
+      "original_group_end": 87,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "LOCAL void v_mouse_EM_callback\tIFN0() { SWAP_INSTANCE; mouse_EM_callback(); }",
+        "#ifdef PROFILE"
+      ],
+      "after_group_original": [
+        "LOCAL void v_mouse_EM_callback\tIFN0() { SWAP_INSTANCE; mouse_EM_callback(); }",
+        "#ifdef PROFILE"
+      ],
+      "current_logical_after_group": 88,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 108,
+      "family": "strong",
+      "current_group_end": 110,
+      "original_group_end": 110,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#ifdef GISP_SVGA"
+      ],
+      "after_group_original": [
+        "#ifdef GISP_SVGA"
+      ],
+      "current_logical_after_group": 111,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 313,
+      "family": "strong",
+      "current_group_end": 321,
+      "original_group_end": 331,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "switch((ULONG)config_inquire(C_GFX_ADAPTER, NULL))",
+        "{",
+        "case CGA:",
+        "#ifdef CGAMONO"
+      ],
+      "after_group_original": [
+        "switch((ULONG)config_inquire(C_GFX_ADAPTER, NULL))",
+        "{",
+        "case CGA:",
+        "#ifdef CGAMONO"
+      ],
+      "current_logical_after_group": 322,
+      "current_logical_after_cut": 320,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 636,
+      "family": "strong",
+      "current_group_end": 638,
+      "original_group_end": 814,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "cmos_init();",
+        "cmos_post();",
+        "ppi_init();",
+        "ppi_get_switches(&low_switches,&high_switches);"
+      ],
+      "after_group_original": [
+        "cmos_init();",
+        "cmos_post();",
+        "ppi_init();",
+        "ppi_get_switches(&low_switches,&high_switches);"
+      ],
+      "current_logical_after_group": 759,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 811,
+      "family": "strong",
+      "current_group_end": 813,
+      "original_group_end": 1095,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "}",
+        "================================ reset_bios_flags =============================",
+        "PURPOSE: To ensure that we reset \"cleanly\"",
+        "-- clear out the keyboard flags and the CMOS shutdown byte."
+      ],
+      "after_group_original": [
+        "}",
+        "================================ reset_bios_flags =============================",
+        "PURPOSE: To ensure that we reset \"cleanly\"",
+        "-- clear out the keyboard flags and the CMOS shutdown byte."
+      ],
+      "current_logical_after_group": 1007,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
+      "line": 226,
+      "family": "strong",
+      "current_group_end": 245,
+      "original_group_end": 245,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "flags = c_getEFLAGS();",
+        "if ( doing_fault )",
+        "{",
+        "#ifdef PIG"
+      ],
+      "after_group_original": [
+        "flags = c_getEFLAGS();",
+        "if ( doing_fault )",
+        "{",
+        "#ifdef PIG"
+      ],
+      "current_logical_after_group": 246,
+      "current_logical_after_cut": 238,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 166,
+      "family": "strong",
+      "current_group_end": 173,
+      "original_group_end": 162,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#define FIX_BT_BUG\t/* Of course we want the bug fixed! */",
+        "#define SYNCH_BOTH_WAYS\t/* Do a PIG_SYNCH() on not-taken conditionals as well */",
+        "Types and constants local to this module.",
+        "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+      ],
+      "after_group_original": [
+        "#define FIX_BT_BUG\t/* Of course we want the bug fixed! */",
+        "#define SYNCH_BOTH_WAYS\t/* Do a PIG_SYNCH() on not-taken conditionals as well */",
+        "Types and constants local to this module.",
+        "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+      ],
+      "current_logical_after_group": 174,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "line": 145,
+      "family": "strong",
+      "current_group_end": 177,
+      "original_group_end": 175,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "SET_EIP(new_dest);",
+        "took_relative_jump = TRUE;",
+        "}",
+        "GLOBAL VOID"
+      ],
+      "after_group_original": [
+        "SET_EIP(new_dest);",
+        "took_relative_jump = TRUE;",
+        "}",
+        "GLOBAL VOID"
+      ],
+      "current_logical_after_group": 178,
+      "current_logical_after_cut": 151,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "line": 140,
+      "family": "strong",
+      "current_group_end": 154,
+      "original_group_end": 102,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "spush16((IU32)GET_CS_SELECTOR());",
+        "spush((IU32)GET_EIP());",
+        "load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);",
+        "SET_EIP(new_ip);"
+      ],
+      "after_group_original": [
+        "spush16((IU32)GET_CS_SELECTOR());",
+        "spush((IU32)GET_EIP());",
+        "load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);",
+        "SET_EIP(new_ip);"
+      ],
+      "current_logical_after_group": 155,
+      "current_logical_after_cut": 147,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "line": 306,
+      "family": "strong",
+      "current_group_end": 338,
+      "original_group_end": 289,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "spush((IU32)GET_EIP());",
+        "SET_EIP(offset);",
+        "}",
+        "GLOBAL VOID"
+      ],
+      "after_group_original": [
+        "spush((IU32)GET_EIP());",
+        "SET_EIP(offset);",
+        "}",
+        "GLOBAL VOID"
+      ],
+      "current_logical_after_group": 339,
+      "current_logical_after_cut": 312,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "line": 369,
+      "family": "strong",
+      "current_group_end": 401,
+      "original_group_end": 352,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "spush((IU32)GET_EIP());",
+        "SET_EIP(new_dest);",
+        "}"
+      ],
+      "after_group_original": [
+        "spush((IU32)GET_EIP());",
+        "SET_EIP(new_dest);",
+        "}"
+      ],
+      "current_logical_after_group": 402,
+      "current_logical_after_cut": 375,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "line": 104,
+      "family": "strong",
+      "current_group_end": 118,
+      "original_group_end": 118,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);",
+        "SET_EIP(new_ip);",
+        "change_SP((IS32)NR_ITEMS_3);",
+        "set_current_FLAGS(new_flags);"
+      ],
+      "after_group_original": [
+        "load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);",
+        "SET_EIP(new_ip);",
+        "change_SP((IS32)NR_ITEMS_3);",
+        "set_current_FLAGS(new_flags);"
+      ],
+      "current_logical_after_group": 119,
+      "current_logical_after_cut": 111,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "line": 70,
+      "family": "strong",
+      "current_group_end": 88,
+      "original_group_end": 88,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);",
+        "SET_EIP(new_ip);",
+        "}",
+        "else"
+      ],
+      "after_group_original": [
+        "load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);",
+        "SET_EIP(new_ip);",
+        "}",
+        "else"
+      ],
+      "current_logical_after_group": 89,
+      "current_logical_after_cut": 81,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "line": 148,
+      "family": "strong",
+      "current_group_end": 180,
+      "original_group_end": 180,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "SET_EIP(offset);",
+        "}",
+        "GLOBAL VOID",
+        "JMPR"
+      ],
+      "after_group_original": [
+        "SET_EIP(offset);",
+        "}",
+        "GLOBAL VOID",
+        "JMPR"
+      ],
+      "current_logical_after_group": 181,
+      "current_logical_after_cut": 154,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+      "line": 86,
+      "family": "strong",
+      "current_group_end": 100,
+      "original_group_end": 100,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);",
+        "SET_EIP(new_ip);",
+        "stk_inc = NR_ITEMS_2;   /* allow for CS:(E)IP */",
+        "}"
+      ],
+      "after_group_original": [
+        "load_CS_cache(new_cs, (IU32)0, (CPU_DESCR *)0);",
+        "SET_EIP(new_ip);",
+        "stk_inc = NR_ITEMS_2;   /* allow for CS:(E)IP */",
+        "}"
+      ],
+      "current_logical_after_group": 101,
+      "current_logical_after_cut": 93,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "line": 2891,
+      "family": "strong",
+      "current_group_end": 2906,
+      "original_group_end": 3035,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "sas_load(FLOPPY_STATUS, &diskette_status);",
+        "diskette_status |= FS_TIME_OUT;",
+        "sas_store(FLOPPY_STATUS, diskette_status);",
+        "return(FAILURE);"
+      ],
+      "after_group_original": [
+        "sas_load(FLOPPY_STATUS, &diskette_status);",
+        "diskette_status |= FS_TIME_OUT;",
+        "sas_store(FLOPPY_STATUS, diskette_status);",
+        "return(FAILURE);"
+      ],
+      "current_logical_after_group": 2907,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "line": 367,
+      "family": "strong",
+      "current_group_end": 372,
+      "original_group_end": 409,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#ifndef PROD"
+      ],
+      "after_group_original": [
+        "#ifndef PROD"
+      ],
+      "current_logical_after_group": 373,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 288,
+      "family": "strong",
+      "current_group_end": 290,
+      "original_group_end": 298,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#ifdef NTVDM"
+      ],
+      "after_group_original": [
+        "#ifdef NTVDM"
+      ],
+      "current_logical_after_group": 290,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 327,
+      "family": "strong",
+      "current_group_end": 329,
+      "original_group_end": 337,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "mouse_driver_initialisation();",
+        "}"
+      ],
+      "after_group_original": [
+        "mouse_driver_initialisation();",
+        "}"
+      ],
+      "current_logical_after_group": 329,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 73,
+      "family": "strong",
+      "current_group_end": 75,
+      "original_group_end": 71,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#ifdef SWIN_SNDBLST_NULL"
+      ],
+      "after_group_original": [
+        "#ifdef SWIN_SNDBLST_NULL"
+      ],
+      "current_logical_after_group": 76,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 112,
+      "family": "strong",
+      "current_group_end": 114,
+      "original_group_end": 114,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#ifdef SLAVEPC"
+      ],
+      "after_group_original": [
+        "#ifdef SLAVEPC"
+      ],
+      "current_logical_after_group": 115,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 89,
+      "family": "strong",
+      "current_group_end": 91,
+      "original_group_end": 91,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#ifdef NTVDM"
+      ],
+      "after_group_original": [
+        "#ifdef NTVDM"
+      ],
+      "current_logical_after_group": 92,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 300,
+      "family": "strong",
+      "current_group_end": 317,
+      "original_group_end": 394,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "}",
+        "setAH( 0 );",
+        "#ifdef BSD4_2"
+      ],
+      "after_group_original": [
+        "}",
+        "setAH( 0 );",
+        "#ifdef BSD4_2"
+      ],
+      "current_logical_after_group": 345,
+      "current_logical_after_cut": 342,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+      "line": 462,
+      "family": "strong",
+      "current_group_end": 466,
+      "original_group_end": 472,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "}",
+        "if (num_flops == 2)",
+        "if (num_flops)",
+        "equip_err = (*equip ^ cmos[CMOS_EQUIP]);"
+      ],
+      "after_group_original": [
+        "}",
+        "if (num_flops == 2)",
+        "if (num_flops)",
+        "equip_err = (*equip ^ cmos[CMOS_EQUIP]);"
+      ],
+      "current_logical_after_group": 467,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1880,
+      "family": "strong",
+      "current_group_end": 1898,
+      "original_group_end": 2234,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "}",
+        "}",
+        "else if (ticks_blocked > 0)",
+        "{"
+      ],
+      "after_group_original": [
+        "}",
+        "}",
+        "else if (ticks_blocked > 0)",
+        "{"
+      ],
+      "current_logical_after_group": 2025,
+      "current_logical_after_cut": 2010,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": 161,
+      "family": "strong",
+      "current_group_end": 165,
+      "original_group_end": 190,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "a 4-byte boundary. This macro makes this true and reports if it wasn't. */",
+        "#ifdef PROD"
+      ],
+      "after_group_original": [
+        "a 4-byte boundary. This macro makes this true and reports if it wasn't. */",
+        "#ifdef PROD"
+      ],
+      "current_logical_after_group": 165,
+      "current_logical_after_cut": 163,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": 60,
+      "family": "strong",
+      "current_group_end": 67,
+      "original_group_end": 55,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#define setBASE(base, value) base = (0xff000000 | (value & 0xffffff))",
+        "#define setLIMIT(limit, value) limit = value",
+        "#ifndef PROD"
+      ],
+      "after_group_original": [
+        "#define setBASE(base, value) base = (0xff000000 | (value & 0xffffff))",
+        "#define setLIMIT(limit, value) limit = value",
+        "#ifndef PROD"
+      ],
+      "current_logical_after_group": 68,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "line": 102,
+      "family": "strong",
+      "current_group_end": 116,
+      "original_group_end": 100,
+      "after_group_anchor_matches": false,
+      "after_group_current": [
+        "cpu_simulate ();",
+        "ASSERT(IcaLock.OwningThread != NtCurrentTeb()->ClientId.UniqueThread);",
+        "}",
+        "#ifdef CCPU"
+      ],
+      "after_group_original": [
+        "cpu_simulate ();",
+        "ASSERT(IcaLock.OwningThread != NtCurrentTeb()->ClientId.UniqueThread);",
+        "}",
+        "Host_set_hw_int: Cause a hardware interrupt to be generated. For"
+      ],
+      "current_logical_after_group": 117,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "line": 1369,
+      "family": "strong",
+      "current_group_end": 1420,
+      "original_group_end": 1611,
+      "after_group_anchor_matches": true,
+      "after_group_current": [],
+      "after_group_original": [],
+      "current_logical_after_group": 1437,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "line": 229,
+      "family": "strong",
+      "current_group_end": 231,
+      "original_group_end": 249,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "FL floppy_data[MAX_FLOPPY];",
+        "struct flop_struct floppy_tksc [6] =",
+        "{",
+        "{0, 0},\t\t/* GFI_DRIVE_TYPE_NULL */"
+      ],
+      "after_group_original": [
+        "FL floppy_data[MAX_FLOPPY];",
+        "struct flop_struct floppy_tksc [6] =",
+        "{",
+        "{0, 0},\t\t/* GFI_DRIVE_TYPE_NULL */"
+      ],
+      "current_logical_after_group": 232,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "line": 341,
+      "family": "strong",
+      "current_group_end": 343,
+      "original_group_end": 395,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "nt_gfi_rdiskette_term(flp);\t/*  shutdown process */",
+        "gfi_empty_active(hostID,TRUE,err);  /* Tell gfi 'empty' is now active */",
+        "return(C_CONFIG_OP_OK);",
+        "}"
+      ],
+      "after_group_original": [
+        "nt_gfi_rdiskette_term(flp);\t/*  shutdown process */",
+        "gfi_empty_active(hostID,TRUE,err);  /* Tell gfi 'empty' is now active */",
+        "return(C_CONFIG_OP_OK);",
+        "}"
+      ],
+      "current_logical_after_group": 344,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "line": 382,
+      "family": "strong",
+      "current_group_end": 417,
+      "original_group_end": 503,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "GLOBAL void host_flpy_heart_beat(void)",
+        "{",
+        "UTINY drive;",
+        "FLP   flp;"
+      ],
+      "after_group_original": [
+        "GLOBAL void host_flpy_heart_beat(void)",
+        "{",
+        "UTINY drive;",
+        "FLP   flp;"
+      ],
+      "current_logical_after_group": 418,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "line": 324,
+      "family": "strong",
+      "current_group_end": 349,
+      "original_group_end": 342,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "long host_time(tloc)",
+        "long *tloc;",
+        "{",
+        "UNUSED(tloc);"
+      ],
+      "after_group_original": [
+        "long host_time(tloc)",
+        "long *tloc;",
+        "{",
+        "UNUSED(tloc);"
+      ],
+      "current_logical_after_group": 350,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": 230,
+      "family": "strong",
+      "current_group_end": 241,
+      "original_group_end": 459,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "int host_timer_2_frig_factor = 20;",
+        "host_check_read_only_drive()",
+        "{",
+        "assert0(NO,\"host_check_read_only_drive stubbed\\n\");"
+      ],
+      "after_group_original": [
+        "int host_timer_2_frig_factor = 20;",
+        "host_check_read_only_drive()",
+        "{",
+        "assert0(NO,\"host_check_read_only_drive stubbed\\n\");"
+      ],
+      "current_logical_after_group": 241,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "line": 115,
+      "family": "strong",
+      "current_group_end": 119,
+      "original_group_end": 119,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "PRIVATE",
+        "BOOL",
+        "VrpIsMailslotName(",
+        "IN LPSTR Name"
+      ],
+      "after_group_original": [
+        "PRIVATE",
+        "BOOL",
+        "VrpIsMailslotName(",
+        "IN LPSTR Name"
+      ],
+      "current_logical_after_group": 120,
+      "current_logical_after_cut": 118,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "line": 277,
+      "family": "strong",
+      "current_group_end": 289,
+      "original_group_end": 289,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "}",
+        "W32DdeFreeHandle16 (parg16->f1);",
+        "FREEARGPTR(parg16);",
+        "RETURN(ul);"
+      ],
+      "after_group_original": [
+        "}",
+        "W32DdeFreeHandle16 (parg16->f1);",
+        "FREEARGPTR(parg16);",
+        "RETURN(ul);"
+      ],
+      "current_logical_after_group": 290,
+      "current_logical_after_cut": 281,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "line": 209,
+      "family": "strong",
+      "current_group_end": 236,
+      "original_group_end": 234,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "}",
+        "if (!phm->h32) {",
+        "#ifdef DEBUG"
+      ],
+      "after_group_original": [
+        "}",
+        "if (!phm->h32) {",
+        "#ifdef DEBUG"
+      ],
+      "current_logical_after_group": 235,
+      "current_logical_after_cut": 220,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "line": 248,
+      "family": "strong",
+      "current_group_end": 250,
+      "original_group_end": 250,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "phm->h32 = h32;",
+        "phm->htask16 = FETCHWORD(CURRENTPTD()->htask16);",
+        "phm->iClass = iClass;",
+        "phm->dwStyle = 0;"
+      ],
+      "after_group_original": [
+        "phm->h32 = h32;",
+        "phm->htask16 = FETCHWORD(CURRENTPTD()->htask16);",
+        "phm->iClass = iClass;",
+        "phm->dwStyle = 0;"
+      ],
+      "current_logical_after_group": 251,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "line": 289,
+      "family": "strong",
+      "current_group_end": 312,
+      "original_group_end": 312,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "if (!phm) {",
+        "LOGDEBUG(0,(\"    FindHMap16 ERROR: could not find %04x\\n\", h16<<RES_BITS));",
+        "return NULL;",
+        "}"
+      ],
+      "after_group_original": [
+        "if (!phm) {",
+        "LOGDEBUG(0,(\"    FindHMap16 ERROR: could not find %04x\\n\", h16<<RES_BITS));",
+        "return NULL;",
+        "}"
+      ],
+      "current_logical_after_group": 313,
+      "current_logical_after_cut": 303,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "line": 349,
+      "family": "strong",
+      "current_group_end": 361,
+      "original_group_end": 363,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "return;",
+        "}",
+        "LOGDEBUG(1,(\"    FreeHMap16: handle alias %04x not found\\n\"));",
+        "}"
+      ],
+      "after_group_original": [
+        "return;",
+        "}",
+        "LOGDEBUG(1,(\"    FreeHMap16: handle alias %04x not found\\n\"));",
+        "}"
+      ],
+      "current_logical_after_group": 364,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsubcls.c",
+      "line": 20,
+      "family": "strong",
+      "current_group_end": 224,
+      "original_group_end": 224,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "BOOL ConstructThunkWindowProc(",
+        "LPTWPLIST   lptwp,",
+        "VPVOID      vptwp",
+        ") {"
+      ],
+      "after_group_original": [
+        "BOOL ConstructThunkWindowProc(",
+        "LPTWPLIST   lptwp,",
+        "VPVOID      vptwp",
+        ") {"
+      ],
+      "current_logical_after_group": 225,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "line": 154,
+      "family": "strong",
+      "current_group_end": 161,
+      "original_group_end": 161,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "STORESHORT(pwc16->cbWndExtra,    t3.cbWndExtra);",
+        "if((!parg16->f1) || (t3.hInstance == ghInstanceUser32)) {",
+        "w = gUser16hInstance;",
+        "} else {"
+      ],
+      "after_group_original": [
+        "STORESHORT(pwc16->cbWndExtra,    t3.cbWndExtra);",
+        "if((!parg16->f1) || (t3.hInstance == ghInstanceUser32)) {",
+        "w = gUser16hInstance;",
+        "} else {"
+      ],
+      "current_logical_after_group": 162,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "line": 1076,
+      "family": "strong",
+      "current_group_end": 1079,
+      "original_group_end": 1042,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "ul = GETBOOL16(UnregisterClass(",
+        "pszClass,",
+        "HMODINST32(parg16->hInstance)",
+        "));"
+      ],
+      "after_group_original": [
+        "ul = GETBOOL16(UnregisterClass(",
+        "pszClass,",
+        "HMODINST32(parg16->hInstance)",
+        "));"
+      ],
+      "current_logical_after_group": 1080,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "line": 2003,
+      "family": "strong",
+      "current_group_end": 2017,
+      "original_group_end": 1922,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "}",
+        "int TranslateAccelerator(<hwnd>, <hAccTable>, <lpMsg>)",
+        "The %TranslateAccelerator% function processes keyboard accelerators for menu",
+        "commands. The %TranslateAccelerator% function translates WM_KEYUP and"
+      ],
+      "after_group_original": [
+        "}",
+        "int TranslateAccelerator(<hwnd>, <hAccTable>, <lpMsg>)",
+        "The %TranslateAccelerator% function processes keyboard accelerators for menu",
+        "commands. The %TranslateAccelerator% function translates WM_KEYUP and"
+      ],
+      "current_logical_after_group": 2020,
+      "current_logical_after_cut": 2016,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "line": 534,
+      "family": "strong",
+      "current_group_end": 550,
+      "original_group_end": 547,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "}",
+        "void EndPaint(<hwnd>, <lpPaint>)",
+        "HWND <hwnd>;",
+        "LPPAINTSTRUCT <lpPaint>;"
+      ],
+      "after_group_original": [
+        "}",
+        "void EndPaint(<hwnd>, <lpPaint>)",
+        "HWND <hwnd>;",
+        "LPPAINTSTRUCT <lpPaint>;"
+      ],
+      "current_logical_after_group": 551,
+      "current_logical_after_cut": 547,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "line": 1912,
+      "family": "strong",
+      "current_group_end": 1922,
+      "original_group_end": 1917,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "ul = GETBOOL16(GrayString(hdc,",
+        "HBRUSH32(parg16->f2),",
+        "NULL,",
+        "(DWORD)psz2,"
+      ],
+      "after_group_original": [
+        "ul = GETBOOL16(GrayString(hdc,",
+        "HBRUSH32(parg16->f2),",
+        "NULL,",
+        "(DWORD)psz2,"
+      ],
+      "current_logical_after_group": 1923,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "line": 3002,
+      "family": "strong",
+      "current_group_end": 3030,
+      "original_group_end": 3002,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "void ShowOwnedPopups(<hwnd>, <fShow>)",
+        "The %ShowOwnedPopups% function shows or hides all pop-up windows that are",
+        "associated with the <hwnd> parameter. If the <fShow> parameter is TRUE,",
+        "all hidden pop-up windows are shown; if <fShow> is FALSE, all visible pop-up"
+      ],
+      "after_group_original": [
+        "void ShowOwnedPopups(<hwnd>, <fShow>)",
+        "The %ShowOwnedPopups% function shows or hides all pop-up windows that are",
+        "associated with the <hwnd> parameter. If the <fShow> parameter is TRUE,",
+        "all hidden pop-up windows are shown; if <fShow> is FALSE, all visible pop-up"
+      ],
+      "current_logical_after_group": 3031,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "line": 740,
+      "family": "strong",
+      "current_group_end": 750,
+      "original_group_end": 748,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "FREEARGPTR(parg16);",
+        "RETURN (ul);",
+        "}",
+        "ULONG FASTCALL WU32GetQueueStatus(PVDMFRAME pFrame)"
+      ],
+      "after_group_original": [
+        "FREEARGPTR(parg16);",
+        "RETURN (ul);",
+        "}",
+        "ULONG FASTCALL WU32GetQueueStatus(PVDMFRAME pFrame)"
+      ],
+      "current_logical_after_group": 759,
+      "current_logical_after_cut": 755,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "line": 306,
+      "family": "strong",
+      "current_group_end": 308,
+      "original_group_end": 307,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "return TRUE;",
+        "}",
+        "return FALSE;",
+        "}"
+      ],
+      "after_group_original": [
+        "return TRUE;",
+        "}",
+        "return FALSE;",
+        "}"
+      ],
+      "current_logical_after_group": 308,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+      "line": 53,
+      "family": "strong",
+      "current_group_end": 55,
+      "original_group_end": 55,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#ifndef DONT_CLEAR_LDT_BL_ON_INVALID"
+      ],
+      "after_group_original": [
+        "#ifndef DONT_CLEAR_LDT_BL_ON_INVALID"
+      ],
+      "current_logical_after_group": 56,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 438,
+      "family": "strong",
+      "current_group_end": 441,
+      "original_group_end": 451,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "}",
+        "}",
+        "static void clear_interrupt IFN1(struct ADAPTER_STATE *, asp)",
+        "{"
+      ],
+      "after_group_original": [
+        "}",
+        "}",
+        "static void clear_interrupt IFN1(struct ADAPTER_STATE *, asp)",
+        "{"
+      ],
+      "current_logical_after_group": 442,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "line": 151,
+      "family": "strong",
+      "current_group_end": 201,
+      "original_group_end": 199,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "phm = malloc_w(sizeof(HMAP));",
+        "if (!phm) {",
+        "LOGDEBUG(0,(\"    FindHMap32 ERROR: cannot allocate new list entry\\n\"));",
+        "return NULL;"
+      ],
+      "after_group_original": [
+        "phm = malloc_w(sizeof(HMAP));",
+        "if (!phm) {",
+        "LOGDEBUG(0,(\"    FindHMap32 ERROR: cannot allocate new list entry\\n\"));",
+        "return NULL;"
+      ],
+      "current_logical_after_group": 200,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bound.c",
+      "line": 43,
+      "family": "ansi",
+      "current_group_end": 48,
+      "original_group_end": 48,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "IS32 value;",
+        "IS32 lower;",
+        "IS32 upper;"
+      ],
+      "after_group_original": [
+        "{",
+        "IS32 value;",
+        "IS32 lower;",
+        "IS32 upper;"
+      ],
+      "current_logical_after_group": 49,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "line": 54,
+      "family": "ansi",
+      "current_group_end": 57,
+      "original_group_end": 49,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "IU16  new_cs;\t/* The destination */",
+        "IU32 new_ip;",
+        "IU32 cs_descr_addr;\t\t/* code segment descriptor address */"
+      ],
+      "after_group_original": [
+        "{",
+        "IU16  new_cs;\t/* The destination */",
+        "IU32 new_ip;",
+        "IU32 cs_descr_addr;\t\t/* code segment descriptor address */"
+      ],
+      "current_logical_after_group": 58,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "line": 49,
+      "family": "ansi",
+      "current_group_end": 52,
+      "original_group_end": 52,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "IU16  new_cs;\t/* The destination */",
+        "IU32 new_ip;",
+        "IU32 descr_addr;\t/* cs descriptor address and entry */"
+      ],
+      "after_group_original": [
+        "{",
+        "IU16  new_cs;\t/* The destination */",
+        "IU32 new_ip;",
+        "IU32 descr_addr;\t/* cs descriptor address and entry */"
+      ],
+      "current_logical_after_group": 53,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "line": 40,
+      "family": "ansi",
+      "current_group_end": 43,
+      "original_group_end": 43,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "SET_STAR_LIMIT(GDT_REG, op1[0]);",
+        "SET_STAR_BASE(GDT_REG, op1[1] & 0xffffff);   /* store 24-bit base */",
+        "#ifdef DOUBLE_CPU"
+      ],
+      "after_group_original": [
+        "{",
+        "SET_STAR_LIMIT(GDT_REG, op1[0]);",
+        "SET_STAR_BASE(GDT_REG, op1[1] & 0xffffff);   /* store 24-bit base */",
+        "#ifdef DOUBLE_CPU"
+      ],
+      "current_logical_after_group": 44,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "line": 58,
+      "family": "ansi",
+      "current_group_end": 61,
+      "original_group_end": 61,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "SET_STAR_LIMIT(GDT_REG, op1[0]);",
+        "SET_STAR_BASE(GDT_REG, op1[1]);",
+        "#ifdef DOUBLE_CPU"
+      ],
+      "after_group_original": [
+        "{",
+        "SET_STAR_LIMIT(GDT_REG, op1[0]);",
+        "SET_STAR_BASE(GDT_REG, op1[1]);",
+        "#ifdef DOUBLE_CPU"
+      ],
+      "current_logical_after_group": 62,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lidt.c",
+      "line": 41,
+      "family": "ansi",
+      "current_group_end": 44,
+      "original_group_end": 44,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "SET_STAR_LIMIT(IDT_REG, op1[0]);",
+        "SET_STAR_BASE(IDT_REG, op1[1] & 0xffffff);   /* store 24-bit base */",
+        "}"
+      ],
+      "after_group_original": [
+        "{",
+        "SET_STAR_LIMIT(IDT_REG, op1[0]);",
+        "SET_STAR_BASE(IDT_REG, op1[1] & 0xffffff);   /* store 24-bit base */",
+        "}"
+      ],
+      "current_logical_after_group": 45,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lidt.c",
+      "line": 56,
+      "family": "ansi",
+      "current_group_end": 59,
+      "original_group_end": 59,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "SET_STAR_LIMIT(IDT_REG, op1[0]);",
+        "SET_STAR_BASE(IDT_REG, op1[1]);",
+        "}"
+      ],
+      "after_group_original": [
+        "{",
+        "SET_STAR_LIMIT(IDT_REG, op1[0]);",
+        "SET_STAR_BASE(IDT_REG, op1[1]);",
+        "}"
+      ],
+      "current_logical_after_group": 60,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "line": 46,
+      "family": "ansi",
+      "current_group_end": 50,
+      "original_group_end": 50,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "MOV_SR((IU32)DS_REG, op2[1]);",
+        "}",
+        "GLOBAL VOID"
+      ],
+      "after_group_original": [
+        "{",
+        "MOV_SR((IU32)DS_REG, op2[1]);",
+        "}",
+        "GLOBAL VOID"
+      ],
+      "current_logical_after_group": 51,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "line": 69,
+      "family": "ansi",
+      "current_group_end": 73,
+      "original_group_end": 73,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "MOV_SR((IU32)ES_REG, op2[1]);",
+        "}",
+        "GLOBAL VOID"
+      ],
+      "after_group_original": [
+        "{",
+        "MOV_SR((IU32)ES_REG, op2[1]);",
+        "}",
+        "GLOBAL VOID"
+      ],
+      "current_logical_after_group": 74,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "line": 92,
+      "family": "ansi",
+      "current_group_end": 96,
+      "original_group_end": 96,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "MOV_SR((IU32)FS_REG, op2[1]);",
+        "}",
+        "GLOBAL VOID"
+      ],
+      "after_group_original": [
+        "{",
+        "MOV_SR((IU32)FS_REG, op2[1]);",
+        "}",
+        "GLOBAL VOID"
+      ],
+      "current_logical_after_group": 97,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "line": 115,
+      "family": "ansi",
+      "current_group_end": 119,
+      "original_group_end": 119,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "MOV_SR((IU32)GS_REG, op2[1]);",
+        "}",
+        "GLOBAL VOID"
+      ],
+      "after_group_original": [
+        "{",
+        "MOV_SR((IU32)GS_REG, op2[1]);",
+        "}",
+        "GLOBAL VOID"
+      ],
+      "current_logical_after_group": 120,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "line": 138,
+      "family": "ansi",
+      "current_group_end": 142,
+      "original_group_end": 142,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "MOV_SR((IU32)SS_REG, op2[1]);",
+        "}"
+      ],
+      "after_group_original": [
+        "{",
+        "MOV_SR((IU32)SS_REG, op2[1]);",
+        "}"
+      ],
+      "current_logical_after_group": 143,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sgdt.c",
+      "line": 41,
+      "family": "ansi",
+      "current_group_end": 44,
+      "original_group_end": 44,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "NB. The Intel manual says the top 8-bits will be stored as zero's,",
+        "I think they mean this only if it was loaded with a 24-bit (286",
+        "like) value. Otherwise it just stores what was loaded."
+      ],
+      "after_group_original": [
+        "{",
+        "NB. The Intel manual says the top 8-bits will be stored as zero's,",
+        "I think they mean this only if it was loaded with a 24-bit (286",
+        "like) value. Otherwise it just stores what was loaded."
+      ],
+      "current_logical_after_group": 45,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sgdt.c",
+      "line": 63,
+      "family": "ansi",
+      "current_group_end": 66,
+      "original_group_end": 66,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "op1[0] = GET_STAR_LIMIT(GDT_REG);",
+        "op1[1] = GET_STAR_BASE(GDT_REG);",
+        "}"
+      ],
+      "after_group_original": [
+        "{",
+        "op1[0] = GET_STAR_LIMIT(GDT_REG);",
+        "op1[1] = GET_STAR_BASE(GDT_REG);",
+        "}"
+      ],
+      "current_logical_after_group": 67,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sidt.c",
+      "line": 41,
+      "family": "ansi",
+      "current_group_end": 44,
+      "original_group_end": 44,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "NB. The Intel manual says the top 8-bits will be stored as zero's,",
+        "I think they mean this only if it was loaded with a 24-bit (286",
+        "like) value. Otherwise it just stores what was loaded."
+      ],
+      "after_group_original": [
+        "{",
+        "NB. The Intel manual says the top 8-bits will be stored as zero's,",
+        "I think they mean this only if it was loaded with a 24-bit (286",
+        "like) value. Otherwise it just stores what was loaded."
+      ],
+      "current_logical_after_group": 45,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sidt.c",
+      "line": 64,
+      "family": "ansi",
+      "current_group_end": 67,
+      "original_group_end": 67,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "op1[0] = GET_STAR_LIMIT(IDT_REG);",
+        "op1[1] = GET_STAR_BASE(IDT_REG);",
+        "}"
+      ],
+      "after_group_original": [
+        "{",
+        "op1[0] = GET_STAR_LIMIT(IDT_REG);",
+        "op1[1] = GET_STAR_BASE(IDT_REG);",
+        "}"
+      ],
+      "current_logical_after_group": 68,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "line": 373,
+      "family": "ansi",
+      "current_group_end": 375,
+      "original_group_end": 571,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "disk_reset,\t\t/* 0x00 */",
+        "return_status,\t\t/* 0x01 */",
+        "disk_read,\t\t/* 0x02 */"
+      ],
+      "after_group_original": [
+        "{",
+        "disk_reset,\t\t/* 0x00 */",
+        "return_status,\t\t/* 0x01 */",
+        "disk_read,\t\t/* 0x02 */"
+      ],
+      "current_logical_after_group": 375,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "line": 381,
+      "family": "ansi",
+      "current_group_end": 397,
+      "original_group_end": 397,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "static drvinfo_ drives[2];",
+        "static drvinfo_ *pseldrv;",
+        "static unsigned char fixeddiskreg;",
+        "static unsigned char digipreg;"
+      ],
+      "after_group_original": [
+        "static drvinfo_ drives[2];",
+        "static drvinfo_ *pseldrv;",
+        "static unsigned char fixeddiskreg;",
+        "static unsigned char digipreg;"
+      ],
+      "current_logical_after_group": 398,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "line": 675,
+      "family": "ansi",
+      "current_group_end": 679,
+      "original_group_end": 698,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "{",
+        "Ios_inb_function[adapter]  = FAST_FUNC_ADDR(func);",
+        "Ios_inw_function[adapter]  = FAST_FUNC_ADDR(generic_inw);",
+        "Ios_insb_function[adapter] = generic_insb;"
+      ],
+      "after_group_original": [
+        "{",
+        "Ios_inb_function[adapter]  = FAST_FUNC_ADDR(func);",
+        "Ios_inw_function[adapter]  = FAST_FUNC_ADDR(generic_inw);",
+        "Ios_insb_function[adapter] = generic_insb;"
+      ],
+      "current_logical_after_group": 680,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 78,
+      "family": "ansi",
+      "current_group_end": 80,
+      "original_group_end": 67,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#ifdef REAL_VGA"
+      ],
+      "after_group_original": [
+        "#ifdef REAL_VGA"
+      ],
+      "current_logical_after_group": 75,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 109,
+      "family": "ansi",
+      "current_group_end": 114,
+      "original_group_end": 118,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#define TICKS_PER_HOUR      65543L",
+        "#define TICKS_PER_MIN       1092L",
+        "#define TICKS_PER_SEC       18L",
+        "void time_of_day()"
+      ],
+      "after_group_original": [
+        "#define TICKS_PER_HOUR      65543L",
+        "#define TICKS_PER_MIN       1092L",
+        "#define TICKS_PER_SEC       18L",
+        "void time_of_day()"
+      ],
+      "current_logical_after_group": 115,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "line": 115,
+      "family": "ansi",
+      "current_group_end": 117,
+      "original_group_end": 119,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        ")*/",
+        "LOCAL void",
+        "patchCheckSum IFN3(PHY_ADDR, start, PHY_ADDR, length, PHY_ADDR, offset)",
+        "{"
+      ],
+      "after_group_original": [
+        ")*/",
+        "LOCAL void",
+        "patchCheckSum IFN3(PHY_ADDR, start, PHY_ADDR, length, PHY_ADDR, offset)",
+        "{"
+      ],
+      "current_logical_after_group": 118,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "line": 1908,
+      "family": "ansi",
+      "current_group_end": 1910,
+      "original_group_end": 1919,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#ifdef NTVDM"
+      ],
+      "after_group_original": [
+        "#ifdef NTVDM"
+      ],
+      "current_logical_after_group": 1910,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "line": 40,
+      "family": "ansi",
+      "current_group_end": 50,
+      "original_group_end": 50,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#define MAX_SLOTS (10)",
+        "LOCAL void (*MS_bop_tab[MAX_SLOTS])();\t\t/* MS bop table */",
+        "GLOBAL void ms_bop ()\t\t    /* called from MS_bop_5 ie bop 0x55 */",
+        "{"
+      ],
+      "after_group_original": [
+        "#define MAX_SLOTS (10)",
+        "LOCAL void (*MS_bop_tab[MAX_SLOTS])();\t\t/* MS bop table */",
+        "GLOBAL void ms_bop ()\t\t    /* called from MS_bop_5 ie bop 0x55 */",
+        "{"
+      ],
+      "current_logical_after_group": 51,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "line": 14,
+      "family": "fast",
+      "current_group_end": 22,
+      "original_group_end": 22,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#if FASTBOPPING"
+      ],
+      "after_group_original": [
+        "#if FASTBOPPING"
+      ],
+      "current_logical_after_group": null,
+      "current_logical_after_cut": null,
+      "error": "header requires includer probe"
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "line": 24,
+      "family": "fast",
+      "current_group_end": 28,
+      "original_group_end": 28,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#if FASTBOPPING"
+      ],
+      "after_group_original": [
+        "#if FASTBOPPING"
+      ],
+      "current_logical_after_group": null,
+      "current_logical_after_cut": null,
+      "error": "header requires includer probe"
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "line": 30,
+      "family": "fast",
+      "current_group_end": 38,
+      "original_group_end": 38,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "extern VOID FastWowFirstCode(VOID);",
+        "extern VOID FixLocks(VOID);",
+        "#if 0"
+      ],
+      "after_group_original": [
+        "extern VOID FastWowFirstCode(VOID);",
+        "extern VOID FixLocks(VOID);",
+        "#if 0"
+      ],
+      "current_logical_after_group": null,
+      "current_logical_after_cut": null,
+      "error": "header requires includer probe"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "line": 583,
+      "family": "fast",
+      "current_group_end": 586,
+      "original_group_end": 655,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#ifdef DEBUG"
+      ],
+      "after_group_original": [
+        "#ifdef DEBUG"
+      ],
+      "current_logical_after_group": 667,
+      "current_logical_after_cut": 665,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "line": 679,
+      "family": "fast",
+      "current_group_end": 683,
+      "original_group_end": 767,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#if FASTBOPPING"
+      ],
+      "after_group_original": [
+        "#if FASTBOPPING"
+      ],
+      "current_logical_after_group": 797,
+      "current_logical_after_cut": 795,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "line": 689,
+      "family": "fast",
+      "current_group_end": 706,
+      "original_group_end": 783,
+      "after_group_anchor_matches": false,
+      "after_group_current": [
+        "wow_callback_frame_trace(\"after\", (DWORD)iRetID, ptd->vpStack,",
+        "ptd->vpCBStack, 0, ptd->htask16, (DWORD)vpfnProc,",
+        "pParm16 ? pParm16->WndProc.wMsg : 0,",
+        "pParm16 ? pParm16->WndProc.lParam : 0);"
+      ],
+      "after_group_original": [
+        "WOW32ASSERT(ptd->vpStack == vpCBStackT);",
+        "ptd->vpCBStack = ptd->vpStack;",
+        "GETFRAMEPTR(ptd->vpCBStack, (PVDMFRAME)pCBFrame);",
+        "WOW32ASSERT((pCBFrame->wTDB == ptd->htask16) ||"
+      ],
+      "current_logical_after_group": 820,
+      "current_logical_after_cut": 807,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 525,
+      "family": "fast",
+      "current_group_end": 529,
+      "original_group_end": 544,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "pFrame->wRetID = RET_TASKSTARTED;",
+        "if (nWOWTasks != 1)",
+        "SuspendTimerThread();       // turns timer thread off",
+        "if (fBoot) {"
+      ],
+      "after_group_original": [
+        "pFrame->wRetID = RET_TASKSTARTED;",
+        "if (nWOWTasks != 1)",
+        "SuspendTimerThread();       // turns timer thread off",
+        "if (fBoot) {"
+      ],
+      "current_logical_after_group": 568,
+      "current_logical_after_cut": 566,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 800,
+      "family": "fast",
+      "current_group_end": 803,
+      "original_group_end": 826,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "td.hThread = NULL;",
+        "if (gptdShell == NULL) {",
+        "free_w( (PVOID) CURRENTPTD() );",
+        "gptdShell = &td;"
+      ],
+      "after_group_original": [
+        "td.hThread = NULL;",
+        "if (gptdShell == NULL) {",
+        "free_w( (PVOID) CURRENTPTD() );",
+        "gptdShell = &td;"
+      ],
+      "current_logical_after_group": 853,
+      "current_logical_after_cut": 851,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 839,
+      "family": "fast",
+      "current_group_end": 843,
+      "original_group_end": 866,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "GETFRAMEPTR(vpStack, pFrame);",
+        "pFrame->wAX = 1;",
+        "}",
+        "#if FASTBOPPING"
+      ],
+      "after_group_original": [
+        "GETFRAMEPTR(vpStack, pFrame);",
+        "pFrame->wAX = 1;",
+        "}",
+        "#if FASTBOPPING"
+      ],
+      "current_logical_after_group": 893,
+      "current_logical_after_cut": 891,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 851,
+      "family": "fast",
+      "current_group_end": 858,
+      "original_group_end": 881,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "}",
+        "GETFRAMEPTR((VPVOID)vpInitialSSSP, pFrame);",
+        "td.htask16 = pFrame->wTDB;",
+        "ptdb = (PTDB)SEGPTR(td.htask16,0);"
+      ],
+      "after_group_original": [
+        "}",
+        "GETFRAMEPTR((VPVOID)vpInitialSSSP, pFrame);",
+        "td.htask16 = pFrame->wTDB;",
+        "ptdb = (PTDB)SEGPTR(td.htask16,0);"
+      ],
+      "current_logical_after_group": 908,
+      "current_logical_after_cut": 904,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1106,
+      "family": "fast",
+      "current_group_end": 1110,
+      "original_group_end": 1127,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "pFrame->wRetID = RET_RETURN;",
+        "if ( IsDebuggerAttached() ) {",
+        "GETARGPTR(pFrame, sizeof(WOWINITTASK16), pArg16);",
+        "DBGNotifyNewTask((LPVOID)pArg16, OFFSETOF(VDMFRAME,bArgs) );"
+      ],
+      "after_group_original": [
+        "pFrame->wRetID = RET_RETURN;",
+        "if ( IsDebuggerAttached() ) {",
+        "GETARGPTR(pFrame, sizeof(WOWINITTASK16), pArg16);",
+        "DBGNotifyNewTask((LPVOID)pArg16, OFFSETOF(VDMFRAME,bArgs) );"
+      ],
+      "current_logical_after_group": 1160,
+      "current_logical_after_cut": 1158,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1154,
+      "family": "fast",
+      "current_group_end": 1161,
+      "original_group_end": 1186,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#if NO_W32TRYCALL"
+      ],
+      "after_group_original": [
+        "#if NO_W32TRYCALL"
+      ],
+      "current_logical_after_group": 1219,
+      "current_logical_after_cut": 1215,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1315,
+      "family": "fast",
+      "current_group_end": 1321,
+      "original_group_end": 1347,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "wPrevTDB = *pCurTDB;",
+        "td.dwFlags = TDF_INITCALLBACKSTACK;",
+        "setDS( (WORD)vcRemote.SegDs );",
+        "setES( (WORD)vcRemote.SegEs );"
+      ],
+      "after_group_original": [
+        "wPrevTDB = *pCurTDB;",
+        "td.dwFlags = TDF_INITCALLBACKSTACK;",
+        "setDS( (WORD)vcRemote.SegDs );",
+        "setES( (WORD)vcRemote.SegEs );"
+      ],
+      "current_logical_after_group": 1377,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1340,
+      "family": "fast",
+      "current_group_end": 1352,
+      "original_group_end": 1378,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "GETFRAMEPTR(vpStack, pFrame);",
+        "td.htask16 = pFrame->wTDB;",
+        "td.VDMInfoiTaskID = -1;",
+        "td.vpStack = vpStack;"
+      ],
+      "after_group_original": [
+        "GETFRAMEPTR(vpStack, pFrame);",
+        "td.htask16 = pFrame->wTDB;",
+        "td.VDMInfoiTaskID = -1;",
+        "td.vpStack = vpStack;"
+      ],
+      "current_logical_after_group": 1408,
+      "current_logical_after_cut": 1402,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1383,
+      "family": "fast",
+      "current_group_end": 1389,
+      "original_group_end": 1415,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#ifdef DEBUG"
+      ],
+      "after_group_original": [
+        "#ifdef DEBUG"
+      ],
+      "current_logical_after_group": 1445,
+      "current_logical_after_cut": 1442,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1555,
+      "family": "fast",
+      "current_group_end": 1573,
+      "original_group_end": 1595,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "W32FreeTask(CURRENTPTD());",
+        "if ( vpRemoteBlock ) {",
+        "wSavedTDB = ptd->htask16;",
+        "ptd->htask16 = wPrevTDB;"
+      ],
+      "after_group_original": [
+        "W32FreeTask(CURRENTPTD());",
+        "if ( vpRemoteBlock ) {",
+        "wSavedTDB = ptd->htask16;",
+        "ptd->htask16 = wPrevTDB;"
+      ],
+      "current_logical_after_group": 1627,
+      "current_logical_after_cut": 1622,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "line": 1608,
+      "family": "fast",
+      "current_group_end": 1614,
+      "original_group_end": 1636,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "} else {",
+        "GETVDMPTR(vpnum_tasks, 1, lpNum_Tasks);",
+        "FREEVDMPTR(lpNum_Tasks);",
+        "WK32DeleteTask( CURRENTPTD() );"
+      ],
+      "after_group_original": [
+        "} else {",
+        "GETVDMPTR(vpnum_tasks, 1, lpNum_Tasks);",
+        "FREEVDMPTR(lpNum_Tasks);",
+        "WK32DeleteTask( CURRENTPTD() );"
+      ],
+      "current_logical_after_group": 1668,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "line": 1619,
+      "family": "fast",
+      "current_group_end": 1621,
+      "original_group_end": 1903,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "return 1;",
+        "}",
+        "ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )",
+        "{"
+      ],
+      "after_group_original": [
+        "return 1;",
+        "}",
+        "ULONG FASTCALL W32GetFlatAddressArray( PVDMFRAME pFrame )",
+        "{"
+      ],
+      "current_logical_after_group": 1938,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1456,
+      "family": "fixbt",
+      "current_group_end": 1458,
+      "original_group_end": 1405,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "modRM = GET_INST_BYTE(p);",
+        "if ( GET_OPERAND_SIZE() == USE16 )",
+        "{",
+        "BT_OPSw(RO0, PG_R);"
+      ],
+      "after_group_original": [
+        "modRM = GET_INST_BYTE(p);",
+        "if ( GET_OPERAND_SIZE() == USE16 )",
+        "{",
+        "BT_OPSw(RO0, PG_R);"
+      ],
+      "current_logical_after_group": 1465,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1528,
+      "family": "fixbt",
+      "current_group_end": 1530,
+      "original_group_end": 1477,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "TYPE0FAB:",
+        "modRM = GET_INST_BYTE(p);",
+        "if ( GET_OPERAND_SIZE() == USE16 )",
+        "{"
+      ],
+      "after_group_original": [
+        "TYPE0FAB:",
+        "modRM = GET_INST_BYTE(p);",
+        "if ( GET_OPERAND_SIZE() == USE16 )",
+        "{"
+      ],
+      "current_logical_after_group": 1537,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1602,
+      "family": "fixbt",
+      "current_group_end": 1606,
+      "original_group_end": 1577,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "case  0xb4:   /* T4 LFS Gv Mp */   instp32p32 = LFS;   goto TYPEC4;",
+        "case  0xb5:   /* T4 LGS Gv Mp */   instp32p32 = LGS;   goto TYPEC4;",
+        "case  0xb6:   /* T4 MOVZX Gv Eb */",
+        "modRM = GET_INST_BYTE(p);"
+      ],
+      "after_group_original": [
+        "case  0xb4:   /* T4 LFS Gv Mp */   instp32p32 = LFS;   goto TYPEC4;",
+        "case  0xb5:   /* T4 LGS Gv Mp */   instp32p32 = LGS;   goto TYPEC4;",
+        "case  0xb6:   /* T4 MOVZX Gv Eb */",
+        "modRM = GET_INST_BYTE(p);"
+      ],
+      "current_logical_after_group": 1637,
+      "current_logical_after_cut": 1635,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 1672,
+      "family": "fixbt",
+      "current_group_end": 1676,
+      "original_group_end": 1647,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "case  0xbc:   /* T5 BSF Gv Ev */",
+        "modRM = GET_INST_BYTE(p);",
+        "if ( GET_OPERAND_SIZE() == USE16 )",
+        "{"
+      ],
+      "after_group_original": [
+        "case  0xbc:   /* T5 BSF Gv Ev */",
+        "modRM = GET_INST_BYTE(p);",
+        "if ( GET_OPERAND_SIZE() == USE16 )",
+        "{"
+      ],
+      "current_logical_after_group": 1707,
+      "current_logical_after_cut": 1705,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "line": 192,
+      "family": "x86gfx",
+      "current_group_end": 234,
+      "original_group_end": 277,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "}",
+        "void DisablePIFKeySetup(void)",
+        "{",
+        "if (ReserveKey || nShortKeys)"
+      ],
+      "after_group_original": [
+        "}",
+        "void DisablePIFKeySetup(void)",
+        "{",
+        "if (ReserveKey || nShortKeys)"
+      ],
+      "current_logical_after_group": 235,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "line": 240,
+      "family": "x86gfx",
+      "current_group_end": 1367,
+      "original_group_end": 1558,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "#ifdef PLANEDUMPER"
+      ],
+      "after_group_original": [
+        "#ifdef PLANEDUMPER"
+      ],
+      "current_logical_after_group": 1384,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 222,
+      "family": "x86gfx",
+      "current_group_end": 512,
+      "original_group_end": 510,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )",
+        "{",
+        "USHORT   consoleWidth,",
+        "consoleHeight,"
+      ],
+      "after_group_original": [
+        "GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )",
+        "{",
+        "USHORT   consoleWidth,",
+        "consoleHeight,"
+      ],
+      "current_logical_after_group": 514,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 654,
+      "family": "x86gfx",
+      "current_group_end": 665,
+      "original_group_end": 686,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "initTextSection();",
+        "sc.Focus = TRUE;",
+        "sc.FocusEvent = CreateEvent((LPSECURITY_ATTRIBUTES) NULL,",
+        "FALSE,"
+      ],
+      "after_group_original": [
+        "initTextSection();",
+        "sc.Focus = TRUE;",
+        "sc.FocusEvent = CreateEvent((LPSECURITY_ATTRIBUTES) NULL,",
+        "FALSE,"
+      ],
+      "current_logical_after_group": 696,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 811,
+      "family": "x86gfx",
+      "current_group_end": 1029,
+      "original_group_end": 1204,
+      "after_group_anchor_matches": true,
+      "after_group_current": [
+        "SetConsoleCursorInfo(sc.OutputHandle, &StartupCursor);",
+        "resetWindowParams();",
+        "}",
+        "#ifdef X86GFX"
+      ],
+      "after_group_original": [
+        "SetConsoleCursorInfo(sc.OutputHandle, &StartupCursor);",
+        "resetWindowParams();",
+        "}",
+        "#ifdef X86GFX"
+      ],
+      "current_logical_after_group": 1202,
+      "current_logical_after_cut": null,
+      "error": null
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "line": 1039,
+      "family": "x86gfx",
+      "current_group_end": 1229,
+      "original_group_end": 1464,
+      "after_group_anchor_matches": false,
+      "after_group_current": [
+        "GLOBAL UTINY getNtScreenState IFN0()",
+        "{",
+        "return( (UTINY) sc.ScreenState );",
+        "}"
+      ],
+      "after_group_original": [
+        "GLOBAL VOID DoFullScreenResume(VOID)",
+        "{",
+        "USHORT vgaHeight, height;",
+        "#ifndef X86GFX"
+      ],
+      "current_logical_after_group": 1402,
+      "current_logical_after_cut": null,
+      "error": null
+    }
+  ]
+}

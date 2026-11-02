@@ -1,0 +1,185 @@
+{
+  "scope": "working full breadth-first depth-1 exclusion audit; no bulk mutation yet",
+  "current_inventory": "s13-bfs-depth1-complete-inventory.json",
+  "original_unresolved": "s13-bfs-depth1-original-unresolved-inventory.json",
+  "original_owner_hints": "s13-bfs-depth1-original-owner-hints.json",
+  "candidate_sources": [
+    "s13-bfs-depth1-wide-source-audit.json",
+    "s13-bfs-depth1-wide-else-audit.json",
+    "s13-bfs-depth1-wide-expression-audit.json",
+    "s13-bfs-depth1-optional-profile-audit.json",
+    "s13-bfs-depth1-local-patch-candidates.json"
+  ],
+  "candidate_rows": 195,
+  "unique_candidate_keys": 180,
+  "known_profile_conflict": "s13-bfs-depth1-diagnostic-profile-evidence.json",
+  "header_context_trace": "build/t473-s13/bfs-depth1-wide-header-audit/include-trace.json",
+  "pinned_original_files": 1636,
+  "pinned_original_hash_mismatches": 0,
+  "rules": [
+    "Candidate does not mean authorized exclusion; each supported test profile, original boundary, selected alternative and local patch must be resolved first.",
+    "No nested condition is evaluated for the current-depth audit.",
+    "No release until exclusion batch is complete and passes its required gate."
+  ],
+  "status": "in-progress: candidate/profile classification and original-structure reconciliation remain",
+  "header_context_trace_summary": {
+    "contexts": 829,
+    "failures": 0,
+    "graphs": {
+      "build/.ninja/msvc-x86-release/call-boundaries": 2,
+      "build/.ninja/msvc-x86-release/worker": 367,
+      "build/.ninja/msvc-x86-release/wow32": 93,
+      "build/.ninja/msvc-x64-release/worker-reference-x86": 367
+    },
+    "note": "Each definition list is conservative text evidence, not a macro-state proof; flags require exact compdb parsing."
+  },
+  "include_delta": {
+    "evidence": "s13-bfs-depth1-include-delta.json",
+    "additions": 0,
+    "removals": 175,
+    "limitation": "No textual additions since pinned queue baseline; removed includes are not proof of reachability."
+  },
+  "header_profile_summary": {
+    "evidence": "s13-bfs-depth1-header-profile-summary.json",
+    "simple_header_arms": 88,
+    "witnessed": 59,
+    "without_witness": 29,
+    "witnessed_with_no_relevant_flags_or_directives": 34,
+    "limitation": "Flag/directive absence is only a candidate; original boundary, all supported test profiles, macro changes and applicability still require proof."
+  },
+  "profile_conflicts": "s13-bfs-depth1-profile-conflicts.json",
+  "original_reconciliation_hints": "s13-bfs-depth1-original-reconciliation-hints.json",
+  "header_original_matches": {
+    "evidence": "s13-bfs-depth1-header-original-match.json",
+    "candidate_arms": 34,
+    "unique_original_line_matches_ignoring_eol": 31,
+    "note": "The normalized match establishes body identity, not configuration exclusion; source bytes remain unchanged."
+  },
+  "header_test_guest_direct_includes": {
+    "evidence": "s13-bfs-depth1-header-direct-fixtures.json",
+    "potential_basename_only_includes": 35,
+    "affected_headers": 8,
+    "limitation": "basename resolution and effective macro state remain to be validated"
+  },
+  "original_exact_nested_structure": {
+    "evidence": "s13-bfs-depth1-original-structural-matches.json",
+    "original_entries_examined": 77,
+    "exact_already_present_at_nested_location": 6,
+    "note": "77 includes all original occurrences of 32 mismatch categories and is not the count of unmatched groups; do not subtract from 67."
+  },
+  "header_test_contexts": {
+    "evidence": "s13-bfs-depth1-header-original-match.json",
+    "arms_with_instrumented_test_contexts": 24,
+    "arms_with_potential_additional_direct_include": 23
+  },
+  "header_context_archive": "s13-bfs-depth1-header-context-evidence.zip",
+  "macro_definition_inventory": {
+    "evidence": "s13-bfs-depth1-macro-definition-inventory.json",
+    "files_scanned": 4781,
+    "names_scanned": 75,
+    "no_literal_definition_or_flag": 49,
+    "limitation": "lexical absence is supporting evidence only; system includes, generated flags, expression polarity and supported fixtures require verification"
+  },
+  "line_probe": {
+    "evidence": "s13-bfs-depth1-line-probe.json",
+    "actual_x86_product_contexts": 17,
+    "successful": 17,
+    "limitation": "scratch source with marker, x86 product contexts only"
+  },
+  "line_preview": {
+    "evidence": "s13-bfs-depth1-line-restoration-preview.json",
+    "arms": 55,
+    "exact_following_original_context": 44,
+    "unknown_following_context": 11,
+    "current_logical_equals_original_boundary": 20,
+    "current_logical_differs_from_original_boundary": 35,
+    "limitation": "current logical and original physical mapping differences require individual selected-code review"
+  },
+  "wide_original_context": {
+    "evidence": "s13-bfs-depth1-wide-original-context.json",
+    "unique_original_group_matches": 124,
+    "exact_adjacent_context": 106
+  },
+  "original_chartran_reconciliation": "s13-bfs-depth1-original-chartran-reconciliation.json",
+  "original_missing_next_depth_note": "s13-bfs-depth1-original-server-structural-note.json",
+  "strong_candidate_test_details": "s13-bfs-depth1-strong-candidates.json",
+  "sdk_macro_scan": "s13-bfs-depth1-external-sdk-macro-hits.json",
+  "duplicate_else_group_anchor_audit": {
+    "evidence": "s13-bfs-depth1-else-anchor-audit.json",
+    "previously_ambiguous": 15,
+    "unique_following_anchor_with_comment_aware_boundary": 15,
+    "limitation": "source/profile selection and line mapping still require review"
+  },
+  "ansi_audit": {
+    "evidence": "s13-bfs-depth1-ansi-audit.json",
+    "arms": 24,
+    "original_group_unique": 24,
+    "exact_adjacent_selected_context": 22,
+    "effective_line_marker_probe": "s13-bfs-depth1-ansi-line-probe.json"
+  },
+  "fastbopping_audit": {
+    "evidence": "s13-bfs-depth1-fastbopping-line-audit.json",
+    "arms": 18,
+    "exact_adjacent_selected_context": 16,
+    "effective_line_marker_probe": "s13-bfs-depth1-fastbopping-line-probe.json"
+  },
+  "fixbt_audit": {
+    "evidence": "s13-bfs-depth1-fixbt-audit.json",
+    "arms": 4,
+    "exact_adjacent_selected_context": 4,
+    "effective_line_marker_probe": "s13-bfs-depth1-fixbt-line-probe.json"
+  },
+  "line_evidence_archive": "s13-bfs-depth1-line-evidence.zip",
+  "x86gfx_audit": {
+    "evidence": "s13-bfs-depth1-x86gfx-line-audit.json",
+    "actual_x86_line_probes": "s13-bfs-depth1-x86gfx-line-probe.json",
+    "arms": 6,
+    "following_original_context_exact": 4,
+    "following_outer_directive_exact": 1,
+    "remaining_nonmatching_context": 1,
+    "ledger_occurrences": "s13-bfs-depth1-x86gfx-ledger-occurrences.json",
+    "limitation": "video controller separately enables X86GFX; decisions are per source and profile"
+  },
+  "physical_line_correction": {
+    "evidence": "s13-bfs-depth1-wide-original-context.json",
+    "reason": "original files can contain form-feed/vertical-tab; logical physical line counting splits on LF only",
+    "affected_candidate_source_files": 5,
+    "affected_pinned_original_files": 6,
+    "changed_context_classifications": 1,
+    "limitation": "all other generated evidence that used Python text splitlines must be audited before editing"
+  },
+  "additional_observed_arm_audit": {
+    "evidence": "s13-bfs-depth1-unresolved-observed-arms.json",
+    "arms": 121,
+    "product_contexts": 503,
+    "contexts_succeeded": 503,
+    "product_exclusion_candidates": 121,
+    "product_unknown_or_unsupported": 0,
+    "direct_source_expression_probe": "s13-bfs-depth1-actual-expression-probes.json",
+    "source_probe_arms": 49,
+    "source_probe_contexts": 79,
+    "source_probe_successes": 79,
+    "original_body_matching_evidence": "s13-bfs-depth1-unresolved-121-candidates.json",
+    "unique_original_body_matches": 81,
+    "context_archive": "s13-bfs-depth1-unresolved-context-evidence.zip",
+    "limitation": "product exclusion is not final until standalone test/guest transitive includes and effective #line mappings are verified",
+    "unique_original_sibling_structure_matches": 70,
+    "original_after_group_anchor_matches": 69,
+    "test_reference_evidence": "s13-bfs-depth1-unresolved-103-test-includes.json",
+    "note": "all 121 historically observed-product arms now have product-context exclusion evidence; current full graph inclusion and independent tests remain to be verified"
+  },
+  "boundary_probes": {
+    "source_evidence": "s13-bfs-depth1-boundary-line-probes.json",
+    "source_boundary_probes": 141,
+    "source_successes": 141,
+    "header_evidence": "s13-bfs-depth1-header-boundary-line-probes.json",
+    "header_boundary_probes": 4,
+    "header_successes": 4
+  },
+  "current_original_line_identity": "s13-bfs-depth1-line-identity-validation.json",
+  "original_include_guard_exception": "s13-bfs-depth1-original-usercli-guard-audit.json",
+  "little_endian_local_adaptation": "s13-bfs-depth1-littlend-header-audit.json",
+  "pm_product_context": "s13-bfs-depth1-pm-profile-audit.json",
+  "original_root_restoration_candidate": "s13-bfs-depth1-clmsg-debug-restoration.json",
+  "header_current_graph_capture": "build/t473-s13/bfs-depth1-current-x86-full-includes/include-summary.json (running)"
+}

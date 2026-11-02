@@ -1,5 +1,16 @@
 # mvdm
 
+MVDM-HOST-DIV-597: replace 104 first-depth bodies excluded by the audited
+host build profiles with `#error`, retaining the original outer selectors and
+preserving selected-path logical lines. Five X86GFX arms also subsume local
+DIV-497/500/501 marker occurrences; those shared registrations remain for
+their surviving occurrences. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-consolidated-batch.json`.
+
+MVDM-HOST-DIV-596: replace seven first-depth DEBUG bodies across six WOW
+headers with #error, preserving the selected alternatives and original logical
+positions. Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-wow-header-debug.json`.
+
 MVDM-HOST-DIV-595: reject three unselected DEBUG initialization branches in
 `wow32/wow32.c`, retaining their existing conditions, selected registry
 adaptation, and logical diagnostic positions. The excluded local DEBUG

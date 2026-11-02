@@ -159,10 +159,12 @@ int terminal_type = TERMINAL_TYPE_DEFAULT;
 #define clear_dirty()		{setVideodirty_total(0);setVideodirty_low(0x80001);setVideodirty_high(-1);}
 
 #ifdef	NO_STRING_OPERATIONS
-#define	SET_VGLOBS_MARK_STRING(func)		/*nothing*/
+#error Unsupported excluded original configuration
 #else
+#line 163
 #define	SET_VGLOBS_MARK_STRING(func)	setVideomark_string(func);
 #endif	/* NO_STRING_OPERATIONS */
+#line 165
 
 
 /* Parts of update and paint routines assume start of screen memory is on

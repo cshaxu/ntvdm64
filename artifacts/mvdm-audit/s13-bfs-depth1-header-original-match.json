@@ -1,0 +1,662 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "line": 20,
+      "macro": "DOS",
+      "original_exact_arm_starts": [],
+      "body_lines": 1,
+      "context_count": 24,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        20
+      ],
+      "observed_instrumented_test_contexts": [],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/command_initialization_fixture.c",
+        "tests/mvdm-host/dos/command/t290_s3_cmdredir_fixture.c",
+        "tests/mvdm/oemuni/oemuni_pif_caller_fixture.c",
+        "tests/legacy/opennt/trace/fixtures/original_cmdsetinfo_trace_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "line": 39,
+      "macro": "WIN_16",
+      "original_exact_arm_starts": [],
+      "body_lines": 2,
+      "context_count": 24,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        41
+      ],
+      "observed_instrumented_test_contexts": [],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/command_initialization_fixture.c",
+        "tests/mvdm-host/dos/command/t290_s3_cmdredir_fixture.c",
+        "tests/mvdm/oemuni/oemuni_pif_caller_fixture.c",
+        "tests/legacy/opennt/trace/fixtures/original_cmdsetinfo_trace_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmd.h",
+      "line": 44,
+      "macro": "WIN_32",
+      "original_exact_arm_starts": [],
+      "body_lines": 6,
+      "context_count": 24,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        46
+      ],
+      "observed_instrumented_test_contexts": [],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/command_initialization_fixture.c",
+        "tests/mvdm-host/dos/command/t290_s3_cmdredir_fixture.c",
+        "tests/mvdm/oemuni/oemuni_pif_caller_fixture.c",
+        "tests/legacy/opennt/trace/fixtures/original_cmdsetinfo_trace_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "line": 52,
+      "macro": "i386",
+      "original_exact_arm_starts": [],
+      "body_lines": 4,
+      "context_count": 34,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        53
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c"
+      ],
+      "potential_other_direct_test_guest_includes": [],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "line": 31,
+      "macro": "i386",
+      "original_exact_arm_starts": [
+        31
+      ],
+      "body_lines": 12,
+      "context_count": 34,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        31
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/dpmi/cpu40_descriptor_domain_fixture.c"
+      ],
+      "potential_other_direct_test_guest_includes": [],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/inc/softpc.h",
+      "line": 33,
+      "macro": "i386",
+      "original_exact_arm_starts": [],
+      "body_lines": 1,
+      "context_count": 200,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        30
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/build/wow_thunk_macro_boundary.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm/oemuni/oemuni_pif_caller_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/inc/softpc.h",
+      "line": 230,
+      "macro": "i386",
+      "original_exact_arm_starts": [],
+      "body_lines": 300,
+      "context_count": 200,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/build/wow_thunk_macro_boundary.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm/oemuni/oemuni_pif_caller_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "line": 29,
+      "macro": "i386",
+      "original_exact_arm_starts": [],
+      "body_lines": 9,
+      "context_count": 88,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        29
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/build/wow_thunk_macro_boundary.c"
+      ],
+      "potential_other_direct_test_guest_includes": [],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "line": 37,
+      "macro": "DEBUG",
+      "original_exact_arm_starts": [],
+      "body_lines": 25,
+      "context_count": 2,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        37
+      ],
+      "observed_instrumented_test_contexts": [],
+      "potential_other_direct_test_guest_includes": [
+        "src/mvdm-guest/wow16/test/shell/wowexfax.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "line": 209,
+      "macro": "DOUBLE_CPU",
+      "original_exact_arm_starts": [],
+      "body_lines": 6,
+      "context_count": 252,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        218
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_far_exception_fixture.c",
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_stack_transition_test.c",
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/debug_register_binding_test.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/ccpu_far_exception_fixture.c",
+        "tests/mvdm-host/ccpu_stack_transition_test.c",
+        "tests/mvdm-host/t335_s3_original_callback_ccpu_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 185,
+      "macro": "PTY",
+      "original_exact_arm_starts": [],
+      "body_lines": 1,
+      "context_count": 82,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        185
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/nt_event_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/gfi_object_contract_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 189,
+      "macro": "GEN_DRVR",
+      "original_exact_arm_starts": [],
+      "body_lines": 1,
+      "context_count": 82,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        189
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/nt_event_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/gfi_object_contract_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 199,
+      "macro": "SUSPEND",
+      "original_exact_arm_starts": [],
+      "body_lines": 1,
+      "context_count": 82,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        199
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/nt_event_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/gfi_object_contract_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 203,
+      "macro": "CDROM",
+      "original_exact_arm_starts": [],
+      "body_lines": 3,
+      "context_count": 82,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        203
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/nt_event_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/gfi_object_contract_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 215,
+      "macro": "DPMI",
+      "original_exact_arm_starts": [],
+      "body_lines": 7,
+      "context_count": 82,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        215
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/nt_event_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/gfi_object_contract_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 251,
+      "macro": "WIN_VTD",
+      "original_exact_arm_starts": [],
+      "body_lines": 1,
+      "context_count": 82,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        251
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/nt_event_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/gfi_object_contract_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 299,
+      "macro": "MSWDVR",
+      "original_exact_arm_starts": [],
+      "body_lines": 5,
+      "context_count": 82,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        314
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/nt_event_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/gfi_object_contract_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 307,
+      "macro": "NOVELL_IPX",
+      "original_exact_arm_starts": [],
+      "body_lines": 3,
+      "context_count": 82,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        322
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/nt_event_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/gfi_object_contract_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 313,
+      "macro": "NOVELL_TCPIP",
+      "original_exact_arm_starts": [],
+      "body_lines": 2,
+      "context_count": 82,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        328
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/nt_event_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/gfi_object_contract_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 318,
+      "macro": "WINSOCK",
+      "original_exact_arm_starts": [],
+      "body_lines": 1,
+      "context_count": 82,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        333
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/nt_event_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/gfi_object_contract_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "line": 380,
+      "macro": "HFX",
+      "original_exact_arm_starts": [],
+      "body_lines": 1,
+      "context_count": 82,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        397
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/nt_event_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/gfi_object_contract_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "line": 100,
+      "macro": "MSWDVR",
+      "original_exact_arm_starts": [],
+      "body_lines": 1,
+      "context_count": 12,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        107
+      ],
+      "observed_instrumented_test_contexts": [],
+      "potential_other_direct_test_guest_includes": [],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gendrvr.h",
+      "line": 25,
+      "macro": "GEN_DRVR",
+      "original_exact_arm_starts": [],
+      "body_lines": 1,
+      "context_count": 2,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        25
+      ],
+      "observed_instrumented_test_contexts": [],
+      "potential_other_direct_test_guest_includes": [],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hfx.h",
+      "line": 17,
+      "macro": "HFX",
+      "original_exact_arm_starts": [],
+      "body_lines": 692,
+      "context_count": 2,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [],
+      "observed_instrumented_test_contexts": [],
+      "potential_other_direct_test_guest_includes": [],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "line": 46,
+      "macro": "SUSPEND",
+      "original_exact_arm_starts": [],
+      "body_lines": 1,
+      "context_count": 36,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        46
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/nt_event_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "line": 90,
+      "macro": "SWIN_MOUSE_OPTS",
+      "original_exact_arm_starts": [],
+      "body_lines": 2,
+      "context_count": 56,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        90
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/keyba_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "line": 240,
+      "macro": "i386",
+      "original_exact_arm_starts": [],
+      "body_lines": 1,
+      "context_count": 592,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        220
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/component-integration/softpc_text_video_test.c",
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_bit_fault_fixture.c",
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_far_exception_fixture.c",
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_monitor_boundary_fixture.c",
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_stack_transition_test.c",
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_x87_page_fixture.c",
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/ccpu_x87_span_fixture.c",
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/cvidc_vector_binding_fixture.c",
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/debug_register_binding_test.c",
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/keyboard_controller_pic_test.c",
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/pic_reset_eoi_test.c",
+        "O:/repos.hobby/ntvdm64/tests/mvdm-host/x87_layout_fixture.c",
+        "O:/repos.hobby/ntvdm64/tests/observation/keyba_observed.c",
+        "O:/repos.hobby/ntvdm64/tests/observation/nt_event_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/component-integration/softpc_relative_mouse_guest_test.c",
+        "tests/component-integration/softpc_text_video_test.c",
+        "tests/mvdm-host/ccpu_bit_fault_fixture.c",
+        "tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+        "tests/mvdm-host/ccpu_far_exception_fixture.c",
+        "tests/mvdm-host/ccpu_leaf_declarations.c",
+        "tests/mvdm-host/ccpu_monitor_boundary_fixture.c",
+        "tests/mvdm-host/ccpu_neg64_test.c",
+        "tests/mvdm-host/ccpu_port_privilege_fixture.c",
+        "tests/mvdm-host/ccpu_stack_transition_test.c",
+        "tests/mvdm-host/ccpu_x87_page_fixture.c",
+        "tests/mvdm-host/ccpu_x87_span_fixture.c",
+        "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+        "tests/mvdm-host/keyboard_controller_pic_test.c",
+        "tests/mvdm-host/pic_reset_eoi_test.c",
+        "tests/mvdm-host/planar_painter_object_fixture.c",
+        "tests/mvdm-host/t335_s3_original_callback_ccpu_fixture.c",
+        "tests/mvdm-host/umb_object_contract_fixture.c",
+        "tests/mvdm-host/vdd_object_contract_fixture.c",
+        "tests/mvdm-host/video7_packed_painter_test.c",
+        "tests/mvdm-host/x87_layout_fixture.c",
+        "tests/legacy/opennt/archived/legacy-adapters/ccpu_vidc_global_storage.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_hfx.h",
+      "line": 19,
+      "macro": "HFX",
+      "original_exact_arm_starts": [],
+      "body_lines": 122,
+      "context_count": 8,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/nt_event_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.h",
+      "line": 84,
+      "macro": "NEWALIAS",
+      "original_exact_arm_starts": [],
+      "body_lines": 3,
+      "context_count": 1,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        84
+      ],
+      "observed_instrumented_test_contexts": [],
+      "potential_other_direct_test_guest_includes": [],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wspool.h",
+      "line": 59,
+      "macro": "i386",
+      "original_exact_arm_starts": [],
+      "body_lines": 1,
+      "context_count": 88,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        59
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/build/wow_thunk_macro_boundary.c"
+      ],
+      "potential_other_direct_test_guest_includes": [],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": 22,
+      "macro": "DOS",
+      "original_exact_arm_starts": [
+        22
+      ],
+      "body_lines": 1,
+      "context_count": 20,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        22
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/keyba_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/xms/xms_init_fixture.c",
+        "tests/adapter-mvdm-host-out/softpc/xms_mapped_memory_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.h",
+      "line": 41,
+      "macro": "WIN_16",
+      "original_exact_arm_starts": [
+        43
+      ],
+      "body_lines": 2,
+      "context_count": 20,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        43
+      ],
+      "observed_instrumented_test_contexts": [
+        "O:/repos.hobby/ntvdm64/tests/observation/keyba_observed.c"
+      ],
+      "potential_other_direct_test_guest_includes": [
+        "tests/mvdm-host/xms/xms_init_fixture.c",
+        "tests/adapter-mvdm-host-out/softpc/xms_mapped_memory_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "line": 104,
+      "macro": "UNICODE",
+      "original_exact_arm_starts": [
+        601
+      ],
+      "body_lines": 7,
+      "context_count": 1,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        601
+      ],
+      "observed_instrumented_test_contexts": [],
+      "potential_other_direct_test_guest_includes": [
+        "tests/adapter-mvdm-host-out/wow/wow_class_registration_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "line": 248,
+      "macro": "UNICODE",
+      "original_exact_arm_starts": [
+        802
+      ],
+      "body_lines": 1,
+      "context_count": 1,
+      "classification": "candidate only; fixture/profile audit required",
+      "original_line_content_matches_ignoring_eol": [
+        802
+      ],
+      "observed_instrumented_test_contexts": [],
+      "potential_other_direct_test_guest_includes": [
+        "tests/adapter-mvdm-host-out/wow/wow_class_registration_fixture.c"
+      ],
+      "disposition": "no mutation: preserve until all test and guest include contexts and original branch boundary are proven"
+    }
+  ]
+}

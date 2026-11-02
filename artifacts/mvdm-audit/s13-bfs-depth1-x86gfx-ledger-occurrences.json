@@ -1,0 +1,32 @@
+{
+  "scope": "marker references in source excluding README; candidate bodies not yet deleted",
+  "counts": {
+    "MVDM-HOST-DIV-497": {
+      "outside_candidate": 8,
+      "inside_candidate": 4
+    },
+    "MVDM-HOST-DIV-500": {
+      "outside_candidate": 285,
+      "inside_candidate": 11
+    },
+    "MVDM-HOST-DIV-501": {
+      "outside_candidate": 27,
+      "inside_candidate": 2
+    }
+  },
+  "outside_examples": {
+    "MVDM-HOST-DIV-497": {
+      "path": "src/mvdm-host/suballoc/suballcp.h",
+      "line": 49
+    },
+    "MVDM-HOST-DIV-500": {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "line": 135
+    },
+    "MVDM-HOST-DIV-501": {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "line": 945
+    }
+  },
+  "limitation": "marker occurrences are not sufficient to prove semantic scope; inspect ledger text before editing"
+}

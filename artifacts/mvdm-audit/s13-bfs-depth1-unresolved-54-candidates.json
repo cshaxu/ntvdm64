@@ -1,0 +1,2376 @@
+{
+  "scope": "54 product-only first-depth exclusion candidates from remaining observed-file arms",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "start": 619,
+      "end": 621,
+      "group_end": 622,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "bac700650b93d873e4aa238d1ccae7a0f2ee2af0c980c853d9a9c0eef1deeccd",
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 613,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "line": 613
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 619
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 2,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 2,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "start": 629,
+      "end": 630,
+      "group_end": 631,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "fad954efe2d93eecc83bec1f9956589e6d4a7801909c42eb9597cecd7d89b061",
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 626,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "line": 626
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 629
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 2,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 2,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "start": 652,
+      "end": 659,
+      "group_end": 660,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "d84707929310df08e6919e96a336fb4f02329d55ebd21891d79d5d7b295b5546",
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 649,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(CPU_40_STYLE)",
+          "line": 649
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 652
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 2,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 2,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.h",
+      "start": 42,
+      "end": 47,
+      "group_end": 48,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "b3401cb1d2636f649a71c5629ee8bb148f704520c1fcdfee1f91145c0876c440",
+      "source_sha256": "0c3a6a8710cd798bf39ae084f723f4c1de0480e5f7d7bc45082c19ac82f27886",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.h",
+      "original_sha256": "245976d103b8dd3b918b008b85e9e94b3ec245fb9119c28b897f936a94b69b5e",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 26,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "!defined(i386) || defined(CPU_40_STYLE)",
+          "line": 26
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 42
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 2,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 2,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "start": 68,
+      "end": 72,
+      "group_end": 73,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "b7a9e9fa2c75dffdb553c651bcc230c3a7454dce49913182c5cec0e583668e55",
+      "source_sha256": "58d53501684b75ce32ad94dff6c04add52a435dbac28832ac7dc84652315e99a",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\mvdm.h",
+      "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 63,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(i386) || defined(_M_IX86)",
+          "line": 63
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 68
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 156,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 156,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/inc/suballoc.h",
+      "start": 35,
+      "end": 36,
+      "group_end": 37,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "089bae5b453b27aaf29dfcc68ca48e1fd581a023069662762edb9c2184699b0b",
+      "source_sha256": "23d2e7a2eb84686905b1898a7c69b016967caa37290aa84e09c6ad7f2e54dce9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\suballoc.h",
+      "original_sha256": "98263eed4c261650c4b9c9b23f09f2ef19b31a0b1eb5c805d4c672ee85ded85c",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 33,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(i386) || defined(_M_IX86)",
+          "line": 33
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 35
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 24,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 24,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/inc/wowfax.h",
+      "start": 76,
+      "end": 100,
+      "group_end": 101,
+      "directive": "if",
+      "expression": "defined(_WOWFAX16_)",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "e11c2cb3bd4c74cae946b80f22c66b17c0a3dbbd5d94b0851098c3d57325fa9e",
+      "source_sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowfax.h",
+      "original_sha256": "97c6c40dc2d0565a21dc1be4112fe24f138b10ddbb55fbd29e55da972a2a2c84",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 76,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(_WOWFAX16_)",
+          "line": 76
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 2,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 2,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 76,
+          "arm_line": 76,
+          "cut": 101
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 326,
+      "end": 328,
+      "group_end": 329,
+      "directive": "if",
+      "expression": "defined(SOFTWIN_API) || defined(SWIN_HFX)",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "24f849063f082441b7c895acf8536d73289a42638cd07d179c190330679688d8",
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 326,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(SOFTWIN_API) || defined(SWIN_HFX)",
+          "line": 326
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 82,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 82,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 343,
+          "arm_line": 343,
+          "cut": 346
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 346,
+      "end": 352,
+      "group_end": 353,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "89513d2f41e7cdf6ee617b399adb3846e53fefcf8ddf2d232086efcd8274f63d",
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 339,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 339
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 346
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 82,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 82,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 358,
+      "end": 360,
+      "group_end": 361,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "ea7be9801dfca1438082c7c67893e506d722734d08dac51e2430bfad5379066a",
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 355,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 355
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 358
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 82,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 82,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 372,
+          "arm_line": 375,
+          "cut": 378
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "start": 390,
+      "end": 391,
+      "group_end": 392,
+      "directive": "if",
+      "expression": "defined(SPC386) && defined(WDCTRL_BOP)",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "42ee6e15395763910ff8fdcefe9cb3a56974e9f0c3e5fc096f65271c4b87f3dc",
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\bios.h",
+      "original_sha256": "a181e9ddddf9cbeeff03b63f733d282455b2f21b578c6c9cf772bf726b41d064",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 390,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(SPC386) && defined(WDCTRL_BOP)",
+          "line": 390
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 82,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 82,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 407,
+          "arm_line": 407,
+          "cut": 409
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "start": 84,
+      "end": 95,
+      "group_end": 96,
+      "directive": "if",
+      "expression": "!defined(EGG) && !defined(A_VID) && !defined(C_VID)",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "0d5560ce5b93b4ee33aac096aadf2b0cd2f7ae46d8c00786a9e30929c6ff0847",
+      "source_sha256": "78eaaf259d3976d772e3b72d3f75678a9350793ffd2f6c6e843efba5ab17538c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cga.h",
+      "original_sha256": "683848966f4b5cb5667b9ae0ae140d9e08adcb62060bc77695db844c34b71b0b",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 84,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "!defined(EGG) && !defined(A_VID) && !defined(C_VID)",
+          "line": 84
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 14,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 14,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 100,
+          "arm_line": 100,
+          "cut": 112
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cntlbop.h",
+      "start": 72,
+      "end": 78,
+      "group_end": 79,
+      "directive": "if",
+      "expression": "defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "63a4c4db6f4c0aa834367b813abb48004407cc1f077b4377d7967519f82d0718",
+      "source_sha256": "6ef8ba49296ccca57924c0232484fd38542d34c98f41998b7294ce635b8b0cda",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cntlbop.h",
+      "original_sha256": "b14316fbd29fee3d582cd88c0b869e46ea01c41964fc1a4bfca87742db2a09cb",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 72,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)",
+          "line": 72
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 6,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 6,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 72,
+          "arm_line": 72,
+          "cut": 79
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "start": 93,
+      "end": 96,
+      "group_end": 97,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "174586825e5eefece30c0f05876bf93e1ba750a8df5d26983d3446fd4c68633d",
+      "source_sha256": "1b99f6cda69b874e8e9ac73b2da493cdfde4742fb1f0eb67c647ed82cd374e18",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu_vid.h",
+      "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 87,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(CPU_40_STYLE) && defined(C_VID)",
+          "line": 87
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 93
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 22,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 22,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "start": 22,
+      "end": 24,
+      "group_end": 25,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "514565682fb9731db9248ed2a6b35f332fbede22e99eaf3ba24c825a58410132",
+      "source_sha256": "700dbb3d5d343ae6664a808d5233f3d86c02798f54a1e2bdbd5fff40b6df1cf2",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\debug.h",
+      "original_sha256": "59246b3c18bf6dfcd79b4e61bf961bc0382800deb4d968c198ceb415c284f21b",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 19,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "PROD",
+          "line": 19
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 22
+        }
+      ],
+      "product_macro": "PROD",
+      "product_context_count": 156,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 156,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 19,
+          "arm_line": 22,
+          "cut": 25
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egaports.h",
+      "start": 73,
+      "end": 80,
+      "group_end": 81,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "84bf90cabd0ca5423b0cab1461a39284508ea8c1ff8a37a4fcb0fc2f4285fd4f",
+      "source_sha256": "face41b8a7fd360e0f99b9f779a87b11ddf4bf0b43b6c9f2ffd6133782cbb129",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egaports.h",
+      "original_sha256": "9258473bc4f8c375852c51ea8d7eb71a0163e503bd371f779b78eeb6227146af",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 66,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(C_VID) || defined(A2CPU)",
+          "line": 66
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 73
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 42,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 42,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 68,
+          "arm_line": 75,
+          "cut": 83
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egaread.h",
+      "start": 8,
+      "end": 12,
+      "group_end": 13,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "7ad5f53f6de162b0000310b9ae3b91e5978303628a6e69d3a21d32bb63bb898c",
+      "source_sha256": "e84f967733ed9e18df9e372a4a2bbf942d4984a685cf12b3410eca07ba973097",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egaread.h",
+      "original_sha256": "d7a32e28259b5c25146a9e83feeae102be6815d937209a23c5ccf292aa1c0dac",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 3,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 3
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 8
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 12,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 12,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 3,
+          "arm_line": 8,
+          "cut": 13
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "start": 94,
+      "end": 97,
+      "group_end": 98,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "0ce3d182d884791bc6f16431125ac2aab66d74cf666c54e6a4b0836f2cb49494",
+      "source_sha256": "dea92c3d4b4445d5f077f24ea209e5f3744a572faec423806ae1d0f899813253",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egavideo.h",
+      "original_sha256": "5b47f5e3566927332de3c3f9474ba3595151758c0a8ff8fd6c9cc860f2f8e6cd",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 90,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 90
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 94
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 12,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 12,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 97,
+          "arm_line": 101,
+          "cut": 105
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "start": 40,
+      "end": 44,
+      "group_end": 45,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "1bd4fb0dab753e819ed1c99d6f817bef1adca669f99c095548d7b02afcff2eef",
+      "source_sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\emm.h",
+      "original_sha256": "d92cc144f50e60de5042f76c67574a3fdc22b0ad38411d92d1459d4a02b17789",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 24,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "line": 24
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 40
+        }
+      ],
+      "product_macro": "NTVDM",
+      "product_context_count": 18,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 18,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 24,
+          "arm_line": 40,
+          "cut": 45
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "start": 183,
+      "end": 184,
+      "group_end": 185,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "9cca9b8e9fc55c1dc42ed1f7f9f056abad1faf8fe960c1f3f932965b430f3023",
+      "source_sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\emm.h",
+      "original_sha256": "d92cc144f50e60de5042f76c67574a3fdc22b0ad38411d92d1459d4a02b17789",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 179,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 179
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 183
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 18,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 18,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 180,
+          "arm_line": 184,
+          "cut": 186
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "start": 292,
+      "end": 301,
+      "group_end": 309,
+      "directive": "if",
+      "expression": "defined(X86GFX) && defined(NTVDM)",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "49bf598a9c87dc3e7d4337ad9783d0e683538293a628b68f973ab445c3a4afdd",
+      "source_sha256": "cbcb905c9c3a0b073597c2c9e150b64b8841017146be2a2af7ec113a1feb6183",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\emm.h",
+      "original_sha256": "d92cc144f50e60de5042f76c67574a3fdc22b0ad38411d92d1459d4a02b17789",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 292,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(X86GFX) && defined(NTVDM)",
+          "line": 292
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 302
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 18,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 18,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 294,
+          "arm_line": 294,
+          "cut": 304
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/error.h",
+      "start": 4,
+      "end": 417,
+      "group_end": 418,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "fc8845bee8908202a5e1b2d5bb241063de2a3bd365ca360122838fc4ffc859f5",
+      "source_sha256": "52d05ba2f86186203242c67472ff8b849209af3ff49e975ce3b5b6c897daf53f",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\error.h",
+      "original_sha256": "1adf0532f1ef298d7491e01714624e394ea795a308695bc1b05376a9b16ca7a3",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 1,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "line": 1
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 4
+        }
+      ],
+      "product_macro": "NTVDM",
+      "product_context_count": 144,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 144,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "start": 192,
+      "end": 195,
+      "group_end": 196,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "9fa64fd9887848bf9b3ec626502b57f8cbdfd45b592abc4b34d5338a5046ccaa",
+      "source_sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\floppy.h",
+      "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 187,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "line": 187
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 192
+        }
+      ],
+      "product_macro": "NTVDM",
+      "product_context_count": 10,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 10,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 187,
+          "arm_line": 192,
+          "cut": 196
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "start": 478,
+      "end": 481,
+      "group_end": 482,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "8a8c507b9a7c59e713de61e922c5b95202d5d7cc643a8342d06e9124c6972391",
+      "source_sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\floppy.h",
+      "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 474,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 474
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 478
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 10,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 10,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 474,
+          "arm_line": 478,
+          "cut": 482
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "start": 502,
+      "end": 515,
+      "group_end": 516,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "5e12f182506e4d4be03347137261cb0921162c8dfd7d3e58022183573c7f9d8b",
+      "source_sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\floppy.h",
+      "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 488,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 488
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 502
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 10,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 10,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 488,
+          "arm_line": 502,
+          "cut": 516
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "start": 527,
+      "end": 530,
+      "group_end": 531,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "868a12dc432dca3c32a2d8e4a578d38e927fcc70fa7adbb9e9b8150ea4df7559",
+      "source_sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\floppy.h",
+      "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 523,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 523
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 527
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 10,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 10,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 523,
+          "arm_line": 527,
+          "cut": 531
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+      "start": 543,
+      "end": 548,
+      "group_end": 549,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "50651d70b658081bf5e90467d9aa5b4eef88e9f7b4fea896d47b48c0edbb35d8",
+      "source_sha256": "99ef565cb6143966b0a91548e860b2d4eff4f0a37826563ef692c36a207936d9",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\floppy.h",
+      "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 537,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 537
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 543
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 10,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 10,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 537,
+          "arm_line": 543,
+          "cut": 549
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gendrvr.h",
+      "start": 21,
+      "end": 22,
+      "group_end": 23,
+      "directive": "if",
+      "expression": "defined (GEN_DRVR) || defined (CDROM)",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "eef3c5889c15ca98cc8de01c05fe12ca4f3fa9f2014610d69d631b786df41529",
+      "source_sha256": "013b5d77b7d28a921f52eecdd2d00ae687576d3419e007901050d37bd7b5e599",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gendrvr.h",
+      "original_sha256": "f6750f0da3fab360f5348981440747be5dc612ce81eabec6913557f59b5f0185",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 21,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined (GEN_DRVR) || defined (CDROM)",
+          "line": 21
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 2,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 2,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 21,
+          "arm_line": 21,
+          "cut": 23
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "start": 28,
+      "end": 35,
+      "group_end": 36,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "92f0fd07641f6717b7d16860cce58350a9800be837e7efd176f685074b26c4ef",
+      "source_sha256": "36e2874c485836e78fec5df42832b5353d0c15cc6aee1ef38a2ad2b33dad490b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gmi.h",
+      "original_sha256": "828d5e4399c5cc396367373e96c4d6785ac0026f50467176f30a977afe01919a",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 19,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(CPU_40_STYLE) && defined(C_VID)",
+          "line": 19
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 28
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 78,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 78,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_nls.h",
+      "start": 76,
+      "end": 79,
+      "group_end": 80,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "9cd72559fc5403c0e3f9eff132ef01ee3c04937980030cb218a4e7e699ccad33",
+      "source_sha256": "2f435d96cc54753dd5184a51d45adda120f8a7fad613b3b21fbfd44d7f55e5a3",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host_nls.h",
+      "original_sha256": "59a01bea1d8b7960f22093a61b4e0b1554393406b339dd182ef5dff5b9e88bfc",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 74,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "line": 74
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 76
+        }
+      ],
+      "product_macro": "NTVDM",
+      "product_context_count": 12,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 12,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 74,
+          "arm_line": 76,
+          "cut": 80
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_sas.h",
+      "start": 20,
+      "end": 65,
+      "group_end": 66,
+      "directive": "if",
+      "expression": "defined(BASE_SAS) && defined(HOST_SAS)",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "231e8deb8c093880ed2681adde17b074876caf6be31208fefb035cea136877b3",
+      "source_sha256": "00c5ab25083ff6a19ce2ad461c43bb37adbd2aeb241865cc9b3a2c4847ea8d2e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host_sas.h",
+      "original_sha256": "42f3e8b6a7ad9f4628ae35cd133b6747a19b840c0d3ead23d2d1567874c4e717",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 20,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(BASE_SAS) && defined(HOST_SAS)",
+          "line": 20
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 168,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 168,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 20,
+          "arm_line": 20,
+          "cut": 66
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "start": 62,
+      "end": 63,
+      "group_end": 64,
+      "directive": "if",
+      "expression": "defined (NOVELL) || defined (NOVELL_IPX)",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "ded7fe8ca23e2f56bc6b8b211359f7506a7ddb71bef7bb453995a60e64c741c5",
+      "source_sha256": "c8706a9599ba62d19ac54deb99e125c78b59bf5cd4f1ad4eea25ea883095c9f4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ica.h",
+      "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 62,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined (NOVELL) || defined (NOVELL_IPX)",
+          "line": 62
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 68,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 68,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 62,
+          "arm_line": 62,
+          "cut": 64
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "start": 70,
+      "end": 71,
+      "group_end": 72,
+      "directive": "if",
+      "expression": "defined (ASPI)",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "8eb931e554a47d95091afc690a4871cad581647fdcfc3240d295a279ccb74f65",
+      "source_sha256": "c8706a9599ba62d19ac54deb99e125c78b59bf5cd4f1ad4eea25ea883095c9f4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ica.h",
+      "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 70,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined (ASPI)",
+          "line": 70
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 68,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 68,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 70,
+          "arm_line": 70,
+          "cut": 72
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/idetect.h",
+      "start": 43,
+      "end": 46,
+      "group_end": 47,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "dec8c21d85783124c1bedeb95f5f24e83e4cb80f523c10c8dad2496974c217fb",
+      "source_sha256": "5af404ec517e927063bf526603e8dd07a9a88e846a31811b7104244273c7a344",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\idetect.h",
+      "original_sha256": "204aa44f2d86e2a38eccbfc0bfbcf838252b101b2b085992cc9fbf744d41b799",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 25,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "line": 25
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 43
+        }
+      ],
+      "product_macro": "NTVDM",
+      "product_context_count": 46,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 46,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 27,
+          "arm_line": 45,
+          "cut": 49
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "start": 498,
+      "end": 500,
+      "group_end": 501,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "5280e09c2fa2e295aaa34e74ba3dc54d7e67207fce6a7773f623cbfdcc819df6",
+      "source_sha256": "4a87e916507f79d136c47e4b87815bffc3fc181c6f7e456ad21f2e48816e80ac",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ios.h",
+      "original_sha256": "ae58169de7aa969000f7cf4374d3d850b55d352c3d4c6edcf52dec0e985620a4",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 495,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "line": 495
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 498
+        }
+      ],
+      "product_macro": "NTVDM",
+      "product_context_count": 100,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 100,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 552,
+          "arm_line": 555,
+          "cut": 558
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/lock.h",
+      "start": 31,
+      "end": 37,
+      "group_end": 38,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "d86f9a94242ed6c62b3c1dbf59e36b927c202f442d645ea53dbde0661a539e73",
+      "source_sha256": "e285b5590e9c53ffb839d03e90c93da4fdcc0019671d23374188917f47300d15",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\lock.h",
+      "original_sha256": "bfca88d9c901515a44ea12290d10da19bdbcfb66227cc497aaf78d93950a022d",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 24,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 24
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 31
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 2,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 2,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 24,
+          "arm_line": 31,
+          "cut": 38
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ppi.h",
+      "start": 33,
+      "end": 36,
+      "group_end": 37,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "80d99d0b5a058bec03b410761de7872ccf0c93425bd226baa554b6a82d283b49",
+      "source_sha256": "f4e0c66e1dd7ab4e6976fde1c5a996613d18a6430ec1718147ce0d9b226844dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ppi.h",
+      "original_sha256": "7967ae65e76cb00e58f350e87cd115b6ed7a97c81ff96e3b528f9740d3378612",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 29,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "ANSI",
+          "line": 29
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 33
+        }
+      ],
+      "product_macro": "ANSI",
+      "product_context_count": 8,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 8,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 29,
+          "arm_line": 33,
+          "cut": 37
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/profile.h",
+      "start": 245,
+      "end": 247,
+      "group_end": 248,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "4c9b1854beda2ad9daccf1fd0d74e61b26665870f3a0e4c138ea9ae404346492",
+      "source_sha256": "375bec6bbcf23682a3c22f07a0a59c77462b5810100f02e961c5040692dffdd8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\profile.h",
+      "original_sha256": "67a8fc100d29da9b908f2fb4f8b437963bb64193732279a6c31751895e86d14d",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 242,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "line": 242
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 245
+        }
+      ],
+      "product_macro": "NTVDM",
+      "product_context_count": 2,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 2,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 242,
+          "arm_line": 245,
+          "cut": 248
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "start": 106,
+      "end": 265,
+      "group_end": 266,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "dc6817de6310b24378635c4f1583541ae38162b3494a1a77279e17f9de4343ac",
+      "source_sha256": "655c332ff639ab73f6b37043db11357d154ada60c11c3493e2b210f04eaf9cc0",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\sas.h",
+      "original_sha256": "63832958d3a6b9ef2f9f209e5ada4af8067fab3b5cdb6f317c5663cbd2b5f2ef",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 64,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "CPU_40_STYLE",
+          "line": 64
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 106
+        }
+      ],
+      "product_macro": "CPU_40_STYLE",
+      "product_context_count": 168,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 168,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "start": 79,
+      "end": 81,
+      "group_end": 82,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "17cb7c17402f1a22b606477605e38c8f0ecb28c87427c36d074bef37db38a9ce",
+      "source_sha256": "d33e302d37db7fd87664f8b71b7f7829c6c3b935edcc1e000ddda54668e7be79",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\timer.h",
+      "original_sha256": "b5704cc3ec76cd4dc010eeecc07e4c78ff76428266f6719cf34a65c9dd4b1f2d",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 77,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "line": 77
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 79
+        }
+      ],
+      "product_macro": "NTVDM",
+      "product_context_count": 56,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 56,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 77,
+          "arm_line": 79,
+          "cut": 82
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "start": 181,
+      "end": 182,
+      "group_end": 183,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "ec2c4df3c02d1ecbe74a9a258a367541f75c0d2f5314958ea5593c1e969c2a73",
+      "source_sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\video.h",
+      "original_sha256": "3e701855e34a3ba9834c84ab39da5350ff375195aacea0d79692fba24e2b1059",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 179,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "V7VGA",
+          "line": 179
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 181
+        }
+      ],
+      "product_macro": "V7VGA",
+      "product_context_count": 42,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 42,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 179,
+          "arm_line": 181,
+          "cut": 183
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "start": 239,
+      "end": 240,
+      "group_end": 241,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "cf8627ab67ca4de35dfdf1efdcff22895965fc321486169b9448aa06c7615f38",
+      "source_sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\video.h",
+      "original_sha256": "3e701855e34a3ba9834c84ab39da5350ff375195aacea0d79692fba24e2b1059",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 237,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "V7VGA",
+          "line": 237
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 239
+        }
+      ],
+      "product_macro": "V7VGA",
+      "product_context_count": 42,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 42,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 237,
+          "arm_line": 239,
+          "cut": 241
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+      "start": 42,
+      "end": 45,
+      "group_end": 46,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "e8f3e71717d42c878fc1252cc877189767010879627102b3f0bb9f15a21709f7",
+      "source_sha256": "5beb4870dc05919164d389988b04a403e9ae526a6c59b0f14e780b31c9532c3d",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\yoda.h",
+      "original_sha256": "9488860e836e9b4fb17ec69558bc65ce1a8afb99286f62e6092759c959569fc1",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 38,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "PROD",
+          "line": 38
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 42
+        }
+      ],
+      "product_macro": "PROD",
+      "product_context_count": 22,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 22,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 38,
+          "arm_line": 42,
+          "cut": 46
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "start": 304,
+      "end": 315,
+      "group_end": 316,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "af16602f85e76d0f395d45b67a6b1c454c404435db3930623b27551969cf7a1f",
+      "source_sha256": "20bcc98e9e012dc2dda6126be218aed39472ef95b652681e6e21f97f07becc2e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
+      "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 260,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "!defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) ) || defined(MVDM_SOFTPC_RECOVER_ROM_RESIDENCY)",
+          "line": 260
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 304
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 2,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 2,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "start": 196,
+      "end": 208,
+      "group_end": 209,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "8ba58f02223e078979a7d5178802528de50153fb298c2f53577a3c6eed90bb61",
+      "source_sha256": "130d6d84035b4eb0b049bef62a62cb404816262c8b3c642b934cc11d226fd5ae",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\cfpu_def.h",
+      "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 135,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "line": 135
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 196
+        }
+      ],
+      "product_macro": "NTVDM",
+      "product_context_count": 4,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 4,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 125,
+          "arm_line": 186,
+          "cut": 199
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_pif.h",
+      "start": 97,
+      "end": 99,
+      "group_end": 100,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "d2ba2c85962ca9f37c87f6eae270e6ee566190785503b98ee8618808c5c2c1bb",
+      "source_sha256": "0e970eb7fb050158cc2038f348e5d4de1d1ffd0d40f6babb7f15c64230eb9133",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_pif.h",
+      "original_sha256": "a8069d676141812cddc35adb0b29ea58e58bba0a7f29dcf287468108188b8d09",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 89,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "NTVDM",
+          "line": 89
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 97
+        }
+      ],
+      "product_macro": "NTVDM",
+      "product_context_count": 18,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 18,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 89,
+          "arm_line": 97,
+          "cut": 100
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "start": 285,
+      "end": 338,
+      "group_end": 339,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "266f79cd5045eb5afa76aea0b3fe04e6e9c61f9d1cf95d45a758a011fbcc315b",
+      "source_sha256": "7cda05518a3473d52c7383620cd000f936b93219a1e746461c26116cc0531565",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_msscs.c",
+      "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 278,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(MVDM_SOFTPC_NO_HOST_BOOT_FILE_MUTATION)",
+          "line": 278
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 285
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 2,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 2,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstruc.h",
+      "start": 112,
+      "end": 123,
+      "group_end": 124,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "7fb758c933270ce2f6b96719a5d687e99e4f606596fe487899dbd7b6b5755605",
+      "source_sha256": "f991da66791e191238227cbe93b264cba7def8b5b6eb93e812eb9013039cc47b",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmstruc.h",
+      "original_sha256": "8c8c764f500c47689f5d97c485e8d81c6361130c6ce744a3dbe8d2d26c1eaf5b",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 100,
+      "group_arms": [
+        {
+          "kind": "ifndef",
+          "expression": "DEBUG",
+          "line": 100
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 112
+        }
+      ],
+      "product_macro": "DEBUG",
+      "product_context_count": 88,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 88,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 100,
+          "arm_line": 112,
+          "cut": 124
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "start": 175,
+      "end": 183,
+      "group_end": 184,
+      "directive": "ifndef",
+      "expression": "NTOS_KERNEL_RUNTIME",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "a3026e3bb75f92e1d5cd8b565337aadb8f2559bc00a8e0ace7c5465780de833d",
+      "source_sha256": "cda496c598082dbed3a593169db9527ee5fef2aeb808829aba468f4a91f0016b",
+      "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\error.c",
+      "original_sha256": "88bf09ab98778e0ca58d9d232d3b7aba6115223f43eddf981f6e06b786e77e48",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 175,
+      "group_arms": [
+        {
+          "kind": "ifndef",
+          "expression": "NTOS_KERNEL_RUNTIME",
+          "line": 175
+        }
+      ],
+      "product_macro": "NTOS_KERNEL_RUNTIME",
+      "product_context_count": 6,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 6,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "start": 72,
+      "end": 1357,
+      "group_end": 1358,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "bb8d22c365c24afdf67979e9f9a194a486684fdde749177b284e3cbc80df1500",
+      "source_sha256": "2d28a402941948bfcf61c366fcfc74b9c6c27ef02b14d2df7719d302bc2e2477",
+      "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\time.c",
+      "original_sha256": "ac422e072432aff83c17b03c2127a80d067e801170eba9216ab86d2520767d40",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 56,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "defined(MVDM_STANDALONE_TIME1970_ONLY)",
+          "line": 56
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 72
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 2,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 2,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "start": 231,
+      "end": 232,
+      "group_end": 233,
+      "directive": "if",
+      "expression": "!defined(OPENNT_BASE_VDM_SERVER)",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "78c7bb300292e5f0add96b171da81871a1473f4b9cdb5b6400d43b328644ce3c",
+      "source_sha256": "5016d623cb8295cda7e9788cbde1fa6d52c3f52a98bea3dc63fc8a54067fe414",
+      "original": "O:\\repos.external\\OpenNT\\base\\win32\\server\\basesrv.h",
+      "original_sha256": "a6863d6360830149e0b4895423f3d0f8a8e13326d784821d88b433ff849f3e31",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "not included in completed simple/source/else candidate proofs; full supported inclusion context and conditional expression require review",
+      "test_selected_unchanged_hash": [],
+      "group_start": 231,
+      "group_arms": [
+        {
+          "kind": "if",
+          "expression": "!defined(OPENNT_BASE_VDM_SERVER)",
+          "line": 231
+        }
+      ],
+      "product_macro_classification": "complex-or-numeric-unresolved",
+      "product_expression_context_count": 48,
+      "product_expression_unknown_count": 0,
+      "product_expression_false_count": 48,
+      "product_expression_true_count": 0,
+      "product_expression_missing_count": 0,
+      "product_expression_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "start": 891,
+      "end": 892,
+      "group_end": 893,
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "be62fdb420d5efa5ff0a1141ed61946690a73393e02873482c24f57f9d16edad",
+      "source_sha256": "16f697a80b636de08a20bb0fecda0d8a7e660eba1147ebf7461b299f41414a60",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\lboxctl3.c",
+      "original_sha256": "c20aedad6b3ec2a596f7423ebceb0d130a56b2f978a3988c4de0e15b49bb8989",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 891,
+      "group_arms": [
+        {
+          "kind": "ifndef",
+          "expression": "UNICODE",
+          "line": 891
+        }
+      ],
+      "product_macro": "UNICODE",
+      "product_context_count": 1,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 1,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 896,
+          "arm_line": 896,
+          "cut": 898
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "start": 1139,
+      "end": 1140,
+      "group_end": 1141,
+      "directive": "ifndef",
+      "expression": "UNICODE",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "e2f6448e042a6ea2648d014481d1d90034d2bf8044aaaed29921c459068084db",
+      "source_sha256": "16f697a80b636de08a20bb0fecda0d8a7e660eba1147ebf7461b299f41414a60",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\lboxctl3.c",
+      "original_sha256": "c20aedad6b3ec2a596f7423ebceb0d130a56b2f978a3988c4de0e15b49bb8989",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 1139,
+      "group_arms": [
+        {
+          "kind": "ifndef",
+          "expression": "UNICODE",
+          "line": 1139
+        }
+      ],
+      "product_macro": "UNICODE",
+      "product_context_count": 1,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 1,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [
+        {
+          "group_line": 1144,
+          "arm_line": 1144,
+          "cut": 1146
+        }
+      ],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "start": 161,
+      "end": 162,
+      "group_end": 163,
+      "directive": "else",
+      "expression": "",
+      "status": "pending",
+      "category": "pending-unwitnessed-arm",
+      "guard": false,
+      "body_sha256": "6427fca918454191814c2bd05639447adfe994db2212d1cf4f154504b662ef8a",
+      "source_sha256": "ce6287365d6d44fb89cbcafe728c5d8af5d97a99fed52a0fbd3d8b01e1f88c69",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\getset.c",
+      "original_sha256": "4a2cb2067f5dd776676d7f808f40f6468082db018e16bcf9a77daf00bddb34c9",
+      "evidence": "not positively witnessed in the 981 product dependency contexts; other supported include/test contexts and original boundary not yet established",
+      "audit_disposition": "unresolved; no safe exclusion decision",
+      "reason": "Product macro classification is conservative; standalone tests, original anchors, include guards and selected line semantics are not yet established.",
+      "test_selected_unchanged_hash": [],
+      "group_start": 154,
+      "group_arms": [
+        {
+          "kind": "ifdef",
+          "expression": "WOW_ORIGINAL_PRIVATE_WORD_GETTER",
+          "line": 154
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "line": 161
+        }
+      ],
+      "product_macro": "WOW_ORIGINAL_PRIVATE_WORD_GETTER",
+      "product_context_count": 1,
+      "product_missing_context_count": 0,
+      "product_true_context_count": 0,
+      "product_false_context_count": 1,
+      "product_unknown_context_count": 0,
+      "product_macro_classification": "product-exclusion-candidate-only",
+      "exact_original_body_matches": [],
+      "next_audit": "product profile candidate only; standalone test/guest contexts, original anchor uniqueness, include guards and line witnesses remain"
+    }
+  ]
+}

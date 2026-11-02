@@ -1,0 +1,73 @@
+{
+  "source": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+  "condition": "!defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)",
+  "first_depth_arms": [
+    60,
+    288,
+    413
+  ],
+  "product_compile_ownership": "tools/build/New-T310OriginalSoftpcNinja.ps1:1253-1256 applies /DMVDM_XACTSRV_PACKSTR_COPY_ONLY to packstr.c",
+  "repository_profile_scan": "Only the source and generator refer to this selector; exact literal search was performed across src, tests and tools/build.",
+  "public_names": "NetpPackString and NetpAllocateEnumBuffer are declared in netlib.h; no repository use outside declarations and excluded source bodies was found.",
+  "classification": "all three are same-selector product-profile exclusions with source owner and surrounding boundary identified; independent supported test contexts and selected line semantics remain to be verified",
+  "limitations": [
+    "absence of source callers does not prove no external linkage requirement",
+    "do not delete function declarations",
+    "logical and original line mappings remain to be checked"
+  ],
+  "boundary_anchors": [
+    {
+      "line": 60,
+      "closing": 157,
+      "current_adjacent": [
+        [
+          160,
+          "BOOL"
+        ],
+        [
+          161,
+          "NetpCopyStringToBuffer ("
+        ],
+        [
+          162,
+          "IN LPTSTR String OPTIONAL,"
+        ]
+      ],
+      "original_anchor_candidates": [
+        158
+      ],
+      "source_sha256": "d0a538fa12c6f512c480ab199f1b122752efddeaf9e9d2b7caf1f760ede06f9e",
+      "anchor_interpretation": "selected BOOL NetpCopyStringToBuffer begins at current physical 160 and original physical 158; same three nonblank lines, unique original anchor"
+    },
+    {
+      "line": 288,
+      "closing": 410,
+      "current_adjacent": [
+        [
+          413,
+          "#if !defined(MVDM_XACTSRV_PACKSTR_COPY_ONLY)"
+        ],
+        [
+          414,
+          "NET_API_STATUS"
+        ],
+        [
+          415,
+          "NetpAllocateEnumBuffer("
+        ]
+      ],
+      "original_anchor_candidates": [],
+      "source_sha256": "d0a538fa12c6f512c480ab199f1b122752efddeaf9e9d2b7caf1f760ede06f9e",
+      "anchor_interpretation": "next same-depth condition starts at current physical 413; its whole body is excluded under the same selector, so no selected C code intervenes"
+    },
+    {
+      "line": 413,
+      "closing": 674,
+      "current_adjacent": [],
+      "original_anchor_candidates": [],
+      "source_sha256": "d0a538fa12c6f512c480ab199f1b122752efddeaf9e9d2b7caf1f760ede06f9e",
+      "anchor_interpretation": "only blank lines follow the matching #endif to end of current file; no subsequent selected C code to map"
+    }
+  ],
+  "line_splitting": "LF physical lines; CR stripped per line; form-feed is content, not a newline"
+}

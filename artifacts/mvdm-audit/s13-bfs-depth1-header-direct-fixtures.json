@@ -1,0 +1,486 @@
+{
+  "records": [
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/component-integration/softpc_relative_mouse_guest_test.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/component-integration/softpc_text_video_test.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": [
+        {
+          "macro": "i386",
+          "driver": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 446,
+          "text": "& cmd.exe /d /s /c ('call \"' + $vs + '\" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /P /Fi\"' + $preprocessedExportDefinition + '\" /Di386 /DCPU_40_STYLE \"' + $hostExportDefinition + '\"')",
+          "classification": "not a fixture TU flag: this command only preprocesses ntvdm.src export template; see generator lines 430-447"
+        }
+      ]
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/ccpu_bit_fault_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tests/observation/verify-ccpu-port-privilege.py",
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": [
+        {
+          "macro": "i386",
+          "driver": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 446,
+          "text": "& cmd.exe /d /s /c ('call \"' + $vs + '\" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /P /Fi\"' + $preprocessedExportDefinition + '\" /Di386 /DCPU_40_STYLE \"' + $hostExportDefinition + '\"')",
+          "classification": "not a fixture TU flag: this command only preprocesses ntvdm.src export template; see generator lines 430-447"
+        }
+      ]
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/ccpu_bounded_execution_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tests/observation/verify-ccpu-callf-trace.ps1",
+        "tools/build/New-T310OriginalSoftpcNinja.ps1",
+        "tools/build/New-T313CcpuLifecycleNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": [
+        {
+          "macro": "i386",
+          "driver": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 446,
+          "text": "& cmd.exe /d /s /c ('call \"' + $vs + '\" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /P /Fi\"' + $preprocessedExportDefinition + '\" /Di386 /DCPU_40_STYLE \"' + $hostExportDefinition + '\"')",
+          "classification": "not a fixture TU flag: this command only preprocesses ntvdm.src export template; see generator lines 430-447"
+        }
+      ]
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "source": "tests/mvdm-host/ccpu_far_exception_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/ccpu_far_exception_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": [
+        {
+          "macro": "i386",
+          "driver": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 446,
+          "text": "& cmd.exe /d /s /c ('call \"' + $vs + '\" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /P /Fi\"' + $preprocessedExportDefinition + '\" /Di386 /DCPU_40_STYLE \"' + $hostExportDefinition + '\"')",
+          "classification": "not a fixture TU flag: this command only preprocesses ntvdm.src export template; see generator lines 430-447"
+        }
+      ]
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/ccpu_leaf_declarations.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tests/observation/verify-ccpu-leaf-declarations.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/ccpu_monitor_boundary_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": [
+        {
+          "macro": "i386",
+          "driver": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 446,
+          "text": "& cmd.exe /d /s /c ('call \"' + $vs + '\" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /P /Fi\"' + $preprocessedExportDefinition + '\" /Di386 /DCPU_40_STYLE \"' + $hostExportDefinition + '\"')",
+          "classification": "not a fixture TU flag: this command only preprocesses ntvdm.src export template; see generator lines 430-447"
+        }
+      ]
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/ccpu_neg64_test.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tests/observation/verify-ccpu-neg64.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/ccpu_port_privilege_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tests/observation/verify-ccpu-port-privilege.py"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "source": "tests/mvdm-host/ccpu_stack_transition_test.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/ccpu_stack_transition_test.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": [
+        {
+          "macro": "i386",
+          "driver": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 446,
+          "text": "& cmd.exe /d /s /c ('call \"' + $vs + '\" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /P /Fi\"' + $preprocessedExportDefinition + '\" /Di386 /DCPU_40_STYLE \"' + $hostExportDefinition + '\"')",
+          "classification": "not a fixture TU flag: this command only preprocesses ntvdm.src export template; see generator lines 430-447"
+        }
+      ]
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/ccpu_x87_page_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": [
+        {
+          "macro": "i386",
+          "driver": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 446,
+          "text": "& cmd.exe /d /s /c ('call \"' + $vs + '\" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /P /Fi\"' + $preprocessedExportDefinition + '\" /Di386 /DCPU_40_STYLE \"' + $hostExportDefinition + '\"')",
+          "classification": "not a fixture TU flag: this command only preprocesses ntvdm.src export template; see generator lines 430-447"
+        }
+      ]
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/ccpu_x87_span_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": [
+        {
+          "macro": "i386",
+          "driver": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 446,
+          "text": "& cmd.exe /d /s /c ('call \"' + $vs + '\" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /P /Fi\"' + $preprocessedExportDefinition + '\" /Di386 /DCPU_40_STYLE \"' + $hostExportDefinition + '\"')",
+          "classification": "not a fixture TU flag: this command only preprocesses ntvdm.src export template; see generator lines 430-447"
+        }
+      ]
+    },
+    {
+      "header": "src/mvdm-host/dos/command/cmd.h",
+      "source": "tests/mvdm-host/command_initialization_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/New-T282OriginalCommandInitializationNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": [
+        {
+          "macro": "WIN_32",
+          "driver": "tools/build/New-T282OriginalCommandInitializationNinja.ps1",
+          "line": 18,
+          "text": "$cflags = '/nologo /std:c11 /MT /W4 /showIncludes /DWIN_32 /DDEVL /DNTVDM ' +"
+        }
+      ]
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": [
+        {
+          "macro": "i386",
+          "driver": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 446,
+          "text": "& cmd.exe /d /s /c ('call \"' + $vs + '\" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /P /Fi\"' + $preprocessedExportDefinition + '\" /Di386 /DCPU_40_STYLE \"' + $hostExportDefinition + '\"')",
+          "classification": "not a fixture TU flag: this command only preprocesses ntvdm.src export template; see generator lines 430-447"
+        }
+      ]
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "source": "tests/mvdm-host/gfi_object_contract_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/keyboard_controller_pic_test.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": [
+        {
+          "macro": "i386",
+          "driver": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 446,
+          "text": "& cmd.exe /d /s /c ('call \"' + $vs + '\" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /P /Fi\"' + $preprocessedExportDefinition + '\" /Di386 /DCPU_40_STYLE \"' + $hostExportDefinition + '\"')",
+          "classification": "not a fixture TU flag: this command only preprocesses ntvdm.src export template; see generator lines 430-447"
+        }
+      ]
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/pic_reset_eoi_test.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": [
+        {
+          "macro": "i386",
+          "driver": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 446,
+          "text": "& cmd.exe /d /s /c ('call \"' + $vs + '\" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /P /Fi\"' + $preprocessedExportDefinition + '\" /Di386 /DCPU_40_STYLE \"' + $hostExportDefinition + '\"')",
+          "classification": "not a fixture TU flag: this command only preprocesses ntvdm.src export template; see generator lines 430-447"
+        }
+      ]
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/planar_painter_object_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tests/observation/verify-planar-painter-object-contract.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "source": "tests/mvdm-host/t335_s3_original_callback_ccpu_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/Generate-T335S3WowCallbackCcpuNinja.mjs"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/t335_s3_original_callback_ccpu_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/Generate-T335S3WowCallbackCcpuNinja.mjs"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/umb_object_contract_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/vdd_object_contract_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/video7_packed_painter_test.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tests/observation/verify-video7-packed-painter.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/mvdm-host/x87_layout_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/New-T310OriginalSoftpcNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": [
+        {
+          "macro": "i386",
+          "driver": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 446,
+          "text": "& cmd.exe /d /s /c ('call \"' + $vs + '\" -arch=x86 -host_arch=x64 >nul && cl.exe /nologo /TC /P /Fi\"' + $preprocessedExportDefinition + '\" /Di386 /DCPU_40_STYLE \"' + $hostExportDefinition + '\"')",
+          "classification": "not a fixture TU flag: this command only preprocesses ntvdm.src export template; see generator lines 430-447"
+        }
+      ]
+    },
+    {
+      "header": "src/mvdm-host/xms.486/xms.h",
+      "source": "tests/mvdm-host/xms/xms_init_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/Generate-T371XmsStartupNinja.mjs"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/dos/command/cmd.h",
+      "source": "tests/mvdm-host/dos/command/t290_s3_cmdredir_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/New-T290S3CmdRedirNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": [
+        {
+          "macro": "WIN_32",
+          "driver": "tools/build/New-T290S3CmdRedirNinja.ps1",
+          "line": 27,
+          "text": "$cflags = '/nologo /TC /c /std:c11 /MT /W4 /showIncludes /DWIN_32 ' + ($includes -join ' ')"
+        }
+      ]
+    },
+    {
+      "header": "src/mvdm-host/dos/command/cmd.h",
+      "source": "tests/mvdm/oemuni/oemuni_pif_caller_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/Generate-T420S17OemUniNinja.mjs"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/inc/softpc.h",
+      "source": "tests/mvdm/oemuni/oemuni_pif_caller_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/Generate-T420S17OemUniNinja.mjs"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/dos/command/cmd.h",
+      "source": "tests/legacy/opennt/trace/fixtures/original_cmdsetinfo_trace_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/softpc.new/host/inc/host_def.h",
+      "source": "tests/legacy/opennt/archived/legacy-adapters/ccpu_vidc_global_storage.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/xms.486/xms.h",
+      "source": "tests/adapter-mvdm-host-out/softpc/xms_mapped_memory_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [
+        "tools/build/New-T322XmsMappedMemoryFixtureNinja.ps1"
+      ],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "source": "tests/adapter-mvdm-host-out/wow/wow_class_registration_fixture.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    },
+    {
+      "header": "src/mvdm-host/inc/wowfax.h",
+      "source": "src/mvdm-guest/wow16/test/shell/wowexfax.c",
+      "reason": "basename-only include; resolution and macro state require verification",
+      "possible_drivers": [],
+      "represented_in_historical_product_graph": false,
+      "disposition": "check driver macro profile and source inclusion before classifying header",
+      "possible_macro_conflicts": []
+    }
+  ]
+}

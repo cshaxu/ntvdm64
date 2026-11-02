@@ -58,13 +58,9 @@ GLOBAL	quick_event_delays	host_delays;
 #endif
 
 #ifdef I286
-extern word	m_s_w;
-word		protected_mode;
-word		gdt_limit;
-long		gdt_base;
-word		idt_limit;
-long		idt_base;
+#error Unsupported excluded original configuration
 #endif
+#line 68
 
 #define setBASE(base, value) base = (0xff000000 | (value & 0xffffff))
 #define setLIMIT(limit, value) limit = value

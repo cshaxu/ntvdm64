@@ -1,0 +1,21 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+  "source_sha256": "0eaea2b292afa80b69ef8f10a65e478777caad0397c5a6b47896ac726337d98b",
+  "source_test": "tests/observation/verify-decode-diagnostics.ps1 explicitly compiles diagnostic macro",
+  "historical_test": "docs/etc/evidence/m0-t429-s2-release-decode-diagnostics.md",
+  "results": [
+    {
+      "profile": "normal",
+      "exit": 0,
+      "observer_occurrences": 1,
+      "preprocessor_sha256": "e949897be4f5e2590708bba6acdf1f308075a4e18961d610ebab7df720761b76"
+    },
+    {
+      "profile": "diagnostic",
+      "exit": 0,
+      "observer_occurrences": 2,
+      "preprocessor_sha256": "b851ec65c7adb2869dc3b5106fac05756a0f5e150731b1df538dd1ff413697bd"
+    }
+  ],
+  "scope": "actual current worker command preprocessing; no object or guest runtime claim"
+}

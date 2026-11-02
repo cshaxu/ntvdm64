@@ -1,0 +1,19 @@
+{
+  "source": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+  "source_sha256": "56a86be8d684bf829ca3171137ca457fa7369f3fb7f7971d4a97659e7113c5ae",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+  "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+  "finding": "original first-depth #ifdef FE_IME at line 481 encloses the complete gawImeWndProc table; current selected subset retains adjacent gawEditWndProc and gawDefWindowMsgs but does not contain this group",
+  "current_ancestor": "file-wide #if defined(WOW_ORIGINAL_DEFAULT_MESSAGES), current depth 1",
+  "possible_restoration_position": "between the retained gawEditWndProc and gawDefWindowMsgs arrays, after verifying anchors and supported macro contexts",
+  "disposition": "structural note for next depth; do not mutate or classify child branch during current depth",
+  "limitation": "current owner OPENNT-HOST-090 and all applicable inclusion contexts still require review before restoration",
+  "already_present": {
+    "original_group_line": 583,
+    "current_group_line": 377,
+    "condition": "#ifdef FE_IME",
+    "container": "gawDefWindowSpecMsgs",
+    "anchors": "WM_MOUSEWHEEL immediately precedes the group; table terminator 0 follows the group",
+    "current_body": "already #error; eligibility and nested work stay in next depth"
+  }
+}

@@ -2001,20 +2001,14 @@ ULONG FASTCALL WU32SendMessage(PVDMFRAME pFrame)
 ULONG FASTCALL WU32SetMessageQueue(PVDMFRAME pFrame)
 {
 #ifdef ONLY_API16
-    ULONG ul;
-    register PSETMESSAGEQUEUE16 parg16;
-
-    GETARGPTR(pFrame, sizeof(SETMESSAGEQUEUE16), parg16);
-
-    ul = GETBOOL16(SetMessageQueue(INT32(parg16->f1)));
-
-    FREEARGPTR(parg16);
-    RETURN(ul);
+#error Unsupported excluded original configuration
 #else
+#line 2016
     UNREFERENCED_PARAMETER(pFrame);
 
     return TRUE;    // WIN32 doesn't have sizeable message queues
 #endif
+#line 2020
 }
 
 

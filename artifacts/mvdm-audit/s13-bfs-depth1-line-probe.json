@@ -1,0 +1,192 @@
+{
+  "scope": "scratch-only marker before first-depth conditional, actual supported product preprocessor context; no source mutation",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 636,
+      "macro": "IPC",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "marker": 758,
+      "logical_directive_line": 756,
+      "stderr": "",
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 811,
+      "macro": "HFX",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "marker": 1006,
+      "logical_directive_line": 1004,
+      "stderr": "",
+      "source_sha256": "890ce8fb4ad1cc0698eb5b5793634a57e800c703a08a27e0c4102dfd51213bbe"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 288,
+      "macro": "IPC",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "marker": 289,
+      "logical_directive_line": 287,
+      "stderr": "",
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 327,
+      "macro": "HFX",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "marker": 328,
+      "logical_directive_line": 326,
+      "stderr": "",
+      "source_sha256": "042b7609e357fad7bc22c5930c68fe30be8af8b2d53908c9d00d350551ace679"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "line": 300,
+      "macro": "XTSFD",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "marker": 329,
+      "logical_directive_line": 327,
+      "stderr": "",
+      "source_sha256": "1430887916bcd42c4f7da75cbdff04a8823658a508b823d61e9784489a1e1152"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1880,
+      "macro": "DELAYED_INTS",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "marker": 2008,
+      "logical_directive_line": 2006,
+      "stderr": "",
+      "source_sha256": "86936aef29e5d5d3a02166375586bffdcdf4afb48c5d9f50532947516cbbfa51"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "line": 161,
+      "macro": "NO_STRING_OPERATIONS",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "marker": 162,
+      "logical_directive_line": 160,
+      "stderr": "",
+      "source_sha256": "976bae1bceec407fa2929729f4f2a55867231f634a14be82a74cc2f927f4de15"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "line": 1369,
+      "macro": "PLANEDUMPER",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "marker": 1387,
+      "logical_directive_line": 1385,
+      "stderr": "",
+      "source_sha256": "3d2ed5781ebd7644c4f52e98bd522c1541be6998905b81c53879824182aa1ce9"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "line": 230,
+      "macro": "NOT_IN_USE",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "marker": 231,
+      "logical_directive_line": 229,
+      "stderr": "",
+      "source_sha256": "64060de9d519c32f00fec53b7ad701e70e44adf1a0dfd418d7d8a90c01d0e628"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "line": 209,
+      "macro": "NEWALIAS",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 209,
+      "logical_directive_line": 207,
+      "stderr": "",
+      "source_sha256": "d51d31c0368a0488325207ec0807c80d55c94dd2170b5e2ecf83c6e9fe544095"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "line": 248,
+      "macro": "NEWALIAS",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 250,
+      "logical_directive_line": 248,
+      "stderr": "",
+      "source_sha256": "d51d31c0368a0488325207ec0807c80d55c94dd2170b5e2ecf83c6e9fe544095"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "line": 289,
+      "macro": "NEWALIAS",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 291,
+      "logical_directive_line": 289,
+      "stderr": "",
+      "source_sha256": "d51d31c0368a0488325207ec0807c80d55c94dd2170b5e2ecf83c6e9fe544095"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "line": 349,
+      "macro": "NEWALIAS",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 353,
+      "logical_directive_line": 351,
+      "stderr": "",
+      "source_sha256": "d51d31c0368a0488325207ec0807c80d55c94dd2170b5e2ecf83c6e9fe544095"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "line": 2003,
+      "macro": "ONLY_API16",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 2007,
+      "logical_directive_line": 2005,
+      "stderr": "",
+      "source_sha256": "b65d0d8a3edc29d04bdcb488e33a6ee5a18b080fe2a098c8cdabd690eadd41e7"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "line": 740,
+      "macro": "APRIL15",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 750,
+      "logical_directive_line": 748,
+      "stderr": "",
+      "source_sha256": "2103d188b5eb0438e6ef8ae1b04e20593d4201b4997479e7f10f7d679cf5d552"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "line": 306,
+      "macro": "DONT_CLEAR_LDTR_ON_INVALID",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "marker": 307,
+      "logical_directive_line": 305,
+      "stderr": "",
+      "source_sha256": "c007421d99f13ee57174e9b653d4d95f1aea1e3e28db9efd11c3c7f087bc6bb7"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "line": 151,
+      "macro": "NEWALIAS",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "marker": 151,
+      "logical_directive_line": 149,
+      "stderr": "",
+      "source_sha256": "d51d31c0368a0488325207ec0807c80d55c94dd2170b5e2ecf83c6e9fe544095"
+    }
+  ]
+}

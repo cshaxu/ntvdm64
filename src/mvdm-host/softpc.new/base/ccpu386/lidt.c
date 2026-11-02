@@ -39,9 +39,9 @@ LIDT16
    IU32 op1[2]	/* src(limit:base pair) operand */
    )
 #else
-   (op1)
-   IU32 op1[2];
+#error Unsupported excluded original configuration
 #endif
+#line 45
    {
    SET_STAR_LIMIT(IDT_REG, op1[0]);
    SET_STAR_BASE(IDT_REG, op1[1] & 0xffffff);   /* store 24-bit base */
@@ -54,9 +54,9 @@ LIDT32
    IU32 op1[2]	/* src(limit:base pair) operand */
    )
 #else
-   (op1)
-   IU32 op1[2];
+#error Unsupported excluded original configuration
 #endif
+#line 60
    {
    SET_STAR_LIMIT(IDT_REG, op1[0]);
    SET_STAR_BASE(IDT_REG, op1[1]);

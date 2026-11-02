@@ -38,16 +38,9 @@ LOCAL void ms_not_a_bop (void);
 GLOBAL half_word io_get_spare_slot (void);
 GLOBAL void io_release_spare_slot (half_word);
 #else
-/* MS bop grabbing stuff */
-GLOBAL half_word get_MS_bop_index ();
-GLOBAL void free_MS_bop_index ();
-GLOBAL void ms_bop ();
-LOCAL void ms_not_a_bop ();
-
-/* IO slot grabbers */
-GLOBAL half_word io_get_spare_slot ();
-GLOBAL void io_release_spare_slot ();
+#error Unsupported excluded original configuration
 #endif
+#line 51
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::: Local data structures */
 

@@ -152,13 +152,9 @@ ULONG FASTCALL WU32GetClassInfo(PVDMFRAME pFrame)
         }
 
 #ifdef OLD_WAY
-        if (parg16->f1 ||
-            !(pwc16->vpfnWndProc = GetThunkWindowProc((DWORD)t3.lpfnWndProc, pszClass, NULL, NULL))) {
-
-            pwc = FindClass16(pszClass, (HINST16)parg16->f1);
-            STOREDWORD(pwc16->vpfnWndProc,   pwc->vpfnWndProc);
-        }
+#error Unsupported excluded original configuration
 #endif
+#line 162
 
         STORESHORT(pwc16->cbWndExtra,    t3.cbWndExtra);
 
@@ -1074,9 +1070,9 @@ ULONG FASTCALL WU32UnregisterClass(PVDMFRAME pFrame)
     }
 
 #ifdef WOWEDIT
-    if (!_stricmp(pszClass, "Edit"))
-    pszClass = "WOWEdit";
+#error Unsupported excluded original configuration
 #endif
+#line 1080
 
     ul = GETBOOL16(UnregisterClass(
                     pszClass,

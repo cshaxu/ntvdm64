@@ -1,0 +1,709 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "original_line": 50,
+      "directive": "if",
+      "expression": "defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)",
+      "exact_current_nested_matches": [
+        74
+      ],
+      "original_group_sha256_normalized": "cec607c8fecb0c58187f9519c75fab3c4f3fc1deb5488433bea374ab6064dccf",
+      "conclusion": "exact structure already present at nested location"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "original_line": 205,
+      "directive": "ifdef",
+      "expression": "_X86_",
+      "exact_current_nested_matches": [
+        2211
+      ],
+      "original_group_sha256_normalized": "d15977c54847d4bfac4e43c4235280fee06da3cab627aa0e544caebfac24db58",
+      "conclusion": "exact structure already present at nested location"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/client/vdm.c",
+      "original_line": 259,
+      "directive": "ifdef",
+      "expression": "_MIPS_",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "34f1b8be78e51db7df33639f4305aa9f24ffe2755ae1c8ac888838e63bcb4e9b",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 23,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "9c7f72f3a57bacb463a7379d6f1f695a35335cecf707ebda12458375ceac650e",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 572,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "exact_current_nested_matches": [
+        56
+      ],
+      "original_group_sha256_normalized": "34edd97e8f61fa49c81763116f0495f61969c362728226f3ff998164253bc13d",
+      "conclusion": "exact structure already present at nested location"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 1214,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "exact_current_nested_matches": [
+        400
+      ],
+      "original_group_sha256_normalized": "a1403d6b05584c21be1b4489d7b83838ee41d50528e2868043742cacf6f13b0a",
+      "conclusion": "exact structure already present at nested location"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 327,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "f36402f768ed3aa0e1dba720b7052f0d900226c5d5ba5afdb16d14b0277123a3",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 566,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "f32676e42c3cedcc2868b0c2909afd76ad5570a02b9cd2f78a9470ff4e81ef89",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_line": 905,
+      "directive": "if",
+      "expression": "defined(FE_IME)",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "cbff2c8a1d3c379628ee36d9e9f616a55cb4662214843e6b9bb1f0694f4f7d09",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 881,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "49cd6f2f892b8152d4303dcb7431dc36e3a1cba22a056e240aeff0682ce68c83",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 3901,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "817cdfb22bd04950adc8c2d1b78c077611e50db2067c267864e881849cb8d85c",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 1480,
+      "directive": "if",
+      "expression": "0",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "559a0a1e48467cc38a26a336a2fafaaa3368949bf528bedbfa09fd765dcb9c4a",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 1674,
+      "directive": "if",
+      "expression": "0",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "7a2b9e3c8d30132479387eb0426b919b294c6373d96a1f705ec42281c56a0ae7",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 2298,
+      "directive": "if",
+      "expression": "0",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "bd5bfa4314eda84e87231d3d9b43538c62fd02fdfe796ef08518041bc7f163af",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 2624,
+      "directive": "if",
+      "expression": "0",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "c1892b453542e3920ad5773d46bba3734c220df7901bba94dd16a8f63f5abb24",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 3751,
+      "directive": "if",
+      "expression": "0",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "fe6cd02252212857b1dfd386827ed4061d53de5226e0b3a3f362610a2e1d9060",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 4516,
+      "directive": "if",
+      "expression": "0",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "79f5c905a0790c69adf039edc0a5a0dcdf3c090e6ffc1cf12398da9b86f50f23",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 4574,
+      "directive": "if",
+      "expression": "0",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "559a0a1e48467cc38a26a336a2fafaaa3368949bf528bedbfa09fd765dcb9c4a",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "original_line": 2640,
+      "directive": "ifdef",
+      "expression": "LATER",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "3029049eac9589c626e5c3a710a278dc5bf32f296ccd118a2732bf21d6b88b5d",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "original_line": 221,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "9b0e1c31a804b294f7deabcb4d90068e964299ed8159c813c082e04436f33678",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "original_line": 240,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "3f704fd4d785a3c6b0c6c0a1c43e3155e1697fd1072fbca42289304df99fe47d",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "original_line": 281,
+      "directive": "ifdef",
+      "expression": "LATER",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "880a7d440244d54100e8716ada884df44d69f680ecce2793da154cae71b9d965",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "original_line": 209,
+      "directive": "if",
+      "expression": "0",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "92ffc547c646d89cfcd8a59b6a242ef302a1e27213e600a8e849d9f8793970cc",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "original_line": 251,
+      "directive": "if",
+      "expression": "0",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "44b690707d4cd3824c240ec0d70b5bad1d17c0516c9b540eed5dc1216b7b3603",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 77,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "7046a7cea41212fc266ce9c88eeea178cf1c3e14922c1251c87a77550a1bdcff",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 717,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "4dc8166e52287572454e845834b7a95af806b480aba98632210f8a9f00ec1018",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 1020,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "c3e328354d371bd51af2fa78ce9e6ad1665febb2f3dfad4ccc0ddc2c9a99650c",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 358,
+      "directive": "ifdef",
+      "expression": "LATER",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "aff56a424da59f5477ae057ebbcdff93912d1a03f89b93afbaf318ac7e260256",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 380,
+      "directive": "ifdef",
+      "expression": "MEMPHIS_MENUS",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "a47c8cbd6e64db01d886a62c779a226b39ba5193748a41e2e197b6249ebcf255",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 500,
+      "directive": "ifdef",
+      "expression": "MEMPHIS_MENU_WATERMARKS",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "f869c2bbab8c167354c5d9dc50fa17e09a1c2800f76baf43c33aea52d3a9a649",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 693,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "e4742f4692741c850cf8392995ab6c8a34ab91ffc8d8778bc84f60020ff48689",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 753,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "0eb033be7efa93e1a78b7dcbf2b0e8d65c693d9076ba4c04ee1801bf605bbe90",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 769,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "88ccda1e73e2afb808c2f833cef9459178210465b703d9e5126e85bf14f57595",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 784,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "5fe44928cbc76e53552cd6b0384cbf491130b7e252788baa42df6149e23a47c5",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 797,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "98d1746eeff13c16a529a202e19a1ca2cc1fb099870809ce96e8249433570cf8",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 1611,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "93dcc3da902d7605294a347b929d014d0feb5b57c1586c43de28216af7763ec5",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 953,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "exact_current_nested_matches": [
+        214
+      ],
+      "original_group_sha256_normalized": "1e186814d821115bfb671ce659d4389f30c8311b78e2cedad86034b2c50e4ed9",
+      "conclusion": "exact structure already present at nested location"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 965,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "exact_current_nested_matches": [
+        226
+      ],
+      "original_group_sha256_normalized": "5a4d46d777288197311884ca69150583bbffb59ca461bd7e3d97d8b91c18ff20",
+      "conclusion": "exact structure already present at nested location"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 2204,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "ced3c3f623c885203a2d83caa872325ab793d8f59346539913aceb0b91ca0733",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "original_line": 319,
+      "directive": "if",
+      "expression": "DBG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "7c070860ca118caaa9fa76c252d4415f61a33503b2df35898c8e04b9f0c9d523",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "original_line": 326,
+      "directive": "if",
+      "expression": "DBG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "1b743fc1e87dbe973a3cc4798be5847e54ab881fc7dec40f80ecbba319472895",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "original_line": 349,
+      "directive": "if",
+      "expression": "DBG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "4067e6419b486d9b3b7bb654a3d5967548222cfb50628feb5ed98988f9093383",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "original_line": 361,
+      "directive": "if",
+      "expression": "DBG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "5793dc4452c111d64c7b4dd8cdbe8f37733365d5554961d85ba05e4b4a06d4f7",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 15,
+      "directive": "ifndef",
+      "expression": "_USERCLI_",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "aabf7b5377919136d74aa30446e85596b651284ae13d84486f6e9db103cdb5b9",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2307,
+      "directive": "if",
+      "expression": "DBG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "eb69e2ae1abf1b1fd9690cef0e77a4fdcc472242420d990bfd19b294aa9d48f7",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2320,
+      "directive": "if",
+      "expression": "DBG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "d973c83b10a47c4b5443ad4e21fa8f2cc85ed38a3d5ac6eb2129918d36531d8e",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2342,
+      "directive": "if",
+      "expression": "HANDLE_FIXUP",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "06cac1ebae546becf1cabdd2912474d139c79bb97f2ddf863c01db783654cefe",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2358,
+      "directive": "if",
+      "expression": "HANDLE_FIXUP",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "4e1c09231b31ff2035ccece56cdead4e6d8d7a204b7c8478a566845c2f7482f7",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2374,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "2b6a9062d5a5e2920ee71104480f74736a256663ddec03f36d9eaf7f451ddaf2",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 53,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "3676e17a4b3fa834db313fd4790a695ab10a6a64a10cdd2237a401eadc67a65c",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 481,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "e1eedc7df75b299f3d48c053e6ebb899f5964771cb5f04e3932eb0b97897b6f7",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 583,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "e06aa855d80860e0cb350a2f0e05e690a3c8b6e80f8aa965519f3ac2dcaeb3b0",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 833,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "6ff0419a48cf1907507ba9bdc50630cf545c9b17d95fd88469ecd028b725c0c6",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 990,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "4d258607e91ec4400a59938eabdf0a4b0a63f45ee254316b3388945d92689400",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1054,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "23e234f30e0a38b6e70a1fd0b3ddd8eac39e967a548726f33f1bbec071bb0831",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1861,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "58f1d33f005b0b57c485d86c433cec055bf19e5258463a30a71536f2a06ddb0b",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 461,
+      "directive": "if",
+      "expression": "0",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "5886b617f775369fb8ffd1fe7bebf79bf9ceb685041da47375f39eca9bba3b50",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 850,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "f6daca538e15b03b2f56f58263969df4f8d72371200f27c386f3c66440061083",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 934,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "06f19629d0e83beea7729c6f5728946d2c1cdd6d4abaa91163014e9308c0468d",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1002,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "2d6abc10c0d2469b9818030884e17bf95e9cb20048ae0019245bda97aff4a0e3",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1163,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "f62675f02992852627b98eb03927fcb3d436282d0cfd4a96f0c3da47cb903c57",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1822,
+      "directive": "ifdef",
+      "expression": "DEBUG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "c9c24419404d80c62a8bec4a71e3990bbba4da9c1ea552740366312736358c07",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1257,
+      "directive": "ifndef",
+      "expression": "PAGE_SIZE",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "d6c8e9fc223ec342d0bd5cfbe0b934274e4631e27baef93123633346064adf37",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1703,
+      "directive": "ifdef",
+      "expression": "ANDREVA_DBG",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "a9fec9f0675bf97e6d8260a144f1eed4e41a70c29cad89392119ea57ebb59693",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 17,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "e787f1d21109f081e1c0811920213bdce2b246976f50bfc9faa92f3b0dc87dba",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 59,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "694c11f75e8ea061257584dbbe0c5a0fedf14ffc5e3afdeb5b1cd53dfac7bdd3",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 146,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "010a4bd6bdd74333d6103870c30e170ffe6a7500cc49e2962b672154b28695b9",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 270,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "141532c86d1d9fbe4e222b0739bb3b540da5549333561849146afdede2239eba",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 378,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "50540d04a643fc975d603878409f14835b62352f181f36e6fbc902c72555cb09",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 515,
+      "directive": "ifdef",
+      "expression": "_USERK_",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "1af21f415cea911f0e1c7479ab2b9687a24289dc4d99543a46b169f14132511a",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 326,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "f7d28d78b14c77c675aa2ce2c1ab5abe4e0a4ae60f2f3eefe3b64ba8dd927acf",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 351,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "65b96da2aa06fc88c4249a236c7739cf0dc01170cf3cd7a86d96d2165493d076",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 393,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "fc9b440dab9500b27b6f10b875a62de54081a35d8e2f20a8b750bce9057beb0f",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 446,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "4736388758f54bf8115bb7223c6b17958d8e55dd1af0fbc6b1260638108b60ec",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 457,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "a4a7e0bd33a5e252c1c53abcdbb498aafed62c1d04f1e9ba103782b2511aa1b9",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 530,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "fe25d75cb3c5b5ce5399fba08be55ce0e3f0ed8ac5aebcb83e741b84e5e773d2",
+      "conclusion": "unknown; original body or owner must be traced"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "original_line": 337,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "exact_current_nested_matches": [],
+      "original_group_sha256_normalized": "9900dbba43cdee07e5e971b38edf6d22a352e4aa222ff630ab71ded7f718d452",
+      "conclusion": "unknown; original body or owner must be traced"
+    }
+  ]
+}

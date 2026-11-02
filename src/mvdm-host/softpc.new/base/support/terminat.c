@@ -71,8 +71,9 @@ void terminate()
 		already_called_terminate = TRUE;
 
 #ifdef MSWDVR
-	WinTerm();
+#error Unsupported excluded original configuration
 #endif
+#line 76
 
 #ifdef SWIN_SNDBLST_NULL
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register.
@@ -110,8 +111,9 @@ void terminate()
 
 	config_activate(C_FLOPPY_A_DEVICE, FALSE);
 #ifdef FLOPPY_B
-	config_activate(C_FLOPPY_B_DEVICE, FALSE);
+#error Unsupported excluded original configuration
 #endif /* FLOPPY_B */
+#line 115
 #ifdef SLAVEPC
 #error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */

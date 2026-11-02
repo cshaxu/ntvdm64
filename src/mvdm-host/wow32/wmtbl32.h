@@ -28,7 +28,9 @@ extern M32 aw32Msg[];
 
 
 #ifdef DEBUG
-#define WM32UNDOCUMENTED WM32Undocumented
+#error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected
 #else
+#line 33
 #define WM32UNDOCUMENTED WM32NoThunking
 #endif
+#line 35

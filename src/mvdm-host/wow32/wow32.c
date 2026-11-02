@@ -1617,8 +1617,9 @@ ULONG FASTCALL W32GetTableOffsets( PVDMFRAME pFrame )
     FREEARGPTR(parg16);
 
 #if FASTBOPPING
-    fKernelCSIPFixed = TRUE;
+#error Unsupported excluded original configuration
 #endif
+#line 1938
 
     return 1;
 }

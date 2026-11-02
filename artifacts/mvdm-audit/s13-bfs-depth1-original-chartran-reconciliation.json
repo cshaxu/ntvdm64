@@ -1,0 +1,47 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+  "fixed_original": "O:/repos.external/OpenNT/windows/core/ntuser/rtl/chartran.c",
+  "scope": "first-depth multiplicity mismatch only",
+  "conclusions": [
+    {
+      "condition": "FE_SB",
+      "original_current_function_groups": [
+        446,
+        457,
+        530
+      ],
+      "current_groups": [
+        32,
+        42,
+        76
+      ],
+      "original_omitted_function_groups": [
+        326,
+        351,
+        393
+      ],
+      "omitted_function": "RtlWCSMessageWParamCharToMB",
+      "reason": "three retained-function condition frameworks are already present; the other three belong to an absent whole original function, not a deleted branch inside a retained function"
+    },
+    {
+      "condition": "FE_IME",
+      "original_omitted_function_groups": [
+        337
+      ],
+      "omitted_function": "RtlWCSMessageWParamCharToMB",
+      "reason": "the enclosing original function is absent from this mirror subset"
+    },
+    {
+      "condition": "_USERK_",
+      "original_omitted_function_groups": [
+        378
+      ],
+      "omitted_function": "RtlWCSMessageWParamCharToMB",
+      "reason": "the other five original first-depth groups have five current first-depth counterparts; the extra original group belongs to the omitted function"
+    }
+  ],
+  "limitations": [
+    "positional/function-owner reconciliation does not establish whether independently omitted function should be admitted as functional code",
+    "no selected or excluded code modified by this audit"
+  ]
+}

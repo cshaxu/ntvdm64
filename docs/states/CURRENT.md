@@ -4,7 +4,7 @@
 
 **Active: M0 T473 S13**
 
-The mirror-condition BFS work is paused at an owner-requested [working checkpoint](../../artifacts/mvdm-audit/s13-checkpoint/README.md). First depth, full verification and stage closure remain incomplete.
+Mirror-condition BFS: [first-depth progress](../../artifacts/mvdm-audit/s13-bfs-progress.md); exclusion and stage closure remain incomplete.
 
 Prior owner-approved delivery: restore the four MVDM ANSI-profile files changed
 by MVDM-HOST-DIV-479, preserving authored build boundaries; verify actual

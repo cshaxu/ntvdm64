@@ -8,6 +8,10 @@
 * 04-11-91 ScottLu Created.
 \***************************************************************************/
 
+#ifdef DEBUG
+#error Unsupported original DEBUG branch
+#endif
+#line 11
 /* DIVERGENCE(OPENNT-HOST-120): complete original GetCPD, separate selection.
  * Remaining clmsg bodies outside admitted default/GetCPD slices are omitted. */
 #if defined(WOW_ORIGINAL_CLIENT_CPD)

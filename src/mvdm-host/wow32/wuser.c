@@ -532,22 +532,14 @@ ULONG FASTCALL WU32DrawText(PVDMFRAME pFrame)
 ULONG FASTCALL WU32EnableHardwareInput(PVDMFRAME pFrame)
 {
 #ifdef ONLY_API16
-    ULONG ul;
-    register PENABLEHARDWAREINPUT16 parg16;
-
-    GETARGPTR(pFrame, sizeof(ENABLEHARDWAREINPUT16), parg16);
-
-    ul = GETBOOL16(EnableHardwareInput(
-    BOOL32(parg16->f1)
-    ));
-
-    FREEARGPTR(parg16);
-    RETURN(ul);
+#error Unsupported excluded original configuration
 #else
+#line 547
     UNREFERENCED_PARAMETER(pFrame);
 
     return TRUE;
 #endif
+#line 551
 
 }
 
@@ -1910,16 +1902,9 @@ ULONG FASTCALL WU32GrayString(PVDMFRAME pFrame)
        GETPSZPTR(vpstr, psz2);
 
 #ifdef DOESNT_USER_DO_THIS
-        if( n==0 ) {
-            n=strlen(psz2);
-        }
-        if( ((wid == 0) || (hgt == 0)) ) {
-            GetTextExtentPoint(hdc,psz2,n,&sz);
-
-            wid=sz.cx;
-            hgt=sz.cy;
-        }
+#error Unsupported excluded original configuration
 #endif
+#line 1923
         ul = GETBOOL16(GrayString(hdc,
                                   HBRUSH32(parg16->f2),
                                   NULL,
@@ -3000,34 +2985,9 @@ ULONG FASTCALL WU32SetSysColors(PVDMFRAME pFrame)
 }
 
 #ifdef NEVER
-// this is implemented locally now
-
-/*++
-    HWND SetSysModalWindow(<hwnd>)
-    HWND <hwnd>;
-
-    The %SetSysModalWindow% function makes the specified window a system-modal
-    window.
-
-    <hwnd>
-        Identifies the window to be made system modal.
-
-    The return value identifies the window that was previously the system-modal
-    window.
-
-    If another window is made the active window (for example, the system-modal
-    window creates a dialog box that becomes the active window), the active
-    window becomes the system-modal window. When the original window becomes
-    active again, it is system modal. To end the system-modal state, destroy the
-    system-modal window.
---*/
-
-ULONG FASTCALL WU32SetSysModalWindow(PVDMFRAME pFrame)
-{
-    RETURN(0);
-}
-
+#error Unsupported excluded original configuration
 #endif // NEVER
+#line 3031
 
 /*++
     void ShowOwnedPopups(<hwnd>, <fShow>)

@@ -275,9 +275,9 @@ ULONG FASTCALL WG32DeleteMetaFile(PVDMFRAME pFrame)
 
     if (vp = GlobalLock16(parg16->f1,NULL)) {
 #ifdef PARAMETER_VALIDATION_16_RE_ENABLED
-        GlobalUnlockFree16(vp);
-        ul = TRUE;
+#error Unsupported excluded original configuration
 #else
+#line 281
         GETVDMPTR(vp, 1, lpMetaData);
 
         if (IsValidMetaFile16(lpMetaData)) {
@@ -287,6 +287,7 @@ ULONG FASTCALL WG32DeleteMetaFile(PVDMFRAME pFrame)
 
         FREEVDMPTR(lpMetaData);
 #endif
+#line 290
     }
 
 

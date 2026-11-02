@@ -304,8 +304,9 @@ IFN2(
 #ifndef DONT_CLEAR_LDTR_ON_INVALID
       if ( GET_LDT_SELECTOR() <= 3 || offset + 7 > GET_LDT_LIMIT() )
 #else
-      if ( GET_LDT_SELECTOR() == 0 || offset + 7 > GET_LDT_LIMIT() )
+#error Unsupported excluded original configuration
 #endif /* DONT_CLEAR_LDTR_ON_INVALID */
+#line 308
 	 return TRUE;
       *descr_addr = GET_LDT_BASE() + offset;
       }

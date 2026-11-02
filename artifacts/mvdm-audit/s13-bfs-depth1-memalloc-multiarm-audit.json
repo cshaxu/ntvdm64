@@ -1,0 +1,27 @@
+{
+  "source": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+  "source_sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7",
+  "current_group_line": 232,
+  "original_group_line": 233,
+  "arms": [
+    {
+      "kind": "elif",
+      "current_line": 255,
+      "original_line": 256,
+      "body_matches_original": true
+    },
+    {
+      "kind": "else",
+      "current_line": 281,
+      "original_line": 282,
+      "body_matches_original": true
+    }
+  ],
+  "product_evidence": [
+    "both actual product contexts explicitly compile /DWIN32",
+    "their actual include closures contain no #undef WIN32",
+    "only source-build reference found is the product netlib source list"
+  ],
+  "disposition": "two product-only exclusion candidates in the same first-depth group; standalone test profiles, original selected continuation and effective #line remain to be checked",
+  "limitation": "do not assume the #elif and #else are independent groups or emit duplicate group-end #line controls"
+}

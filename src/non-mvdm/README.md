@@ -1,5 +1,10 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-147: restore the original `clmsg.c` first-depth `DEBUG` selector
+and reject its unsupported body. Preserve the existing selected client slice
+and its logical line mapping. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-clmsg-debug-restore-preflight.json`.
+
 OPENNT-HOST-146: replace eight first-depth DEBUG USER bodies with #error,
 retaining original conditions, selected alternatives and measured diagnostic
 lines. Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-user-debug.json`.

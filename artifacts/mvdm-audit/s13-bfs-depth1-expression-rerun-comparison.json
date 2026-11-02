@@ -1,0 +1,7 @@
+{
+  "old_count": 79,
+  "new_count": 79,
+  "same_keys": true,
+  "changed": [],
+  "note": "rerun uses graph-specific scratch filenames to avoid concurrent overwrites"
+}

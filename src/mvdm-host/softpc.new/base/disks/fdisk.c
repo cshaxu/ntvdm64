@@ -379,22 +379,9 @@ static void     doseek(void);
 static int      disktobuffer(long);
 static int      buffertodisk(long);
 #else
-static void     restore();
-static void     seek();
-static void     rsector();
-static void     wsector();
-static void     format();
-static void     rverify();
-static void     diagnose();
-static void     setparams();
-static void     bad();
-static void     irq();
-static void     rmac();
-static long     dosearchid();
-static void     doseek();
-static int      disktobuffer();
-static int      buffertodisk();
+#error Unsupported excluded original configuration
 #endif				/* ANSI */
+#line 398
 
 /*
  * -----------------------------------------------------------------------

@@ -523,10 +523,12 @@ ULONG FASTCALL WK32WOWInitTask(PVDMFRAME pFrame)
     HANDLE hThread;
 
 #if FASTBOPPING
-    vpStack = FASTVDMSTACK();
+#error Unsupported excluded original configuration
 #else
+#line 566
     vpStack = VDMSTACK();
 #endif
+#line 568
 
 
     pFrame->wRetID = RET_TASKSTARTED;
@@ -798,9 +800,12 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
     PWOWINITTASK16 pArg16;
     PTDB     ptdb;
 #if FASTBOPPING
+#error Unsupported excluded original configuration
 #else
+#line 851
     USHORT SaveIp;
 #endif
+#line 853
 
     td.hThread = NULL;
 
@@ -837,10 +842,12 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
             VPVOID vpStack;
 
 #if FASTBOPPING
-            vpStack = FASTVDMSTACK();
+#error Unsupported excluded original configuration
 #else
+#line 891
             vpStack = VDMSTACK();
 #endif
+#line 893
 
             GETFRAMEPTR(vpStack, pFrame);
 
@@ -849,13 +856,14 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
         }
 
 #if FASTBOPPING
-        CurrentMonitorTeb = NtCurrentTeb();
-        FastWOWCallbackCall();
+#error Unsupported excluded original configuration
 #else
+#line 904
         SaveIp = getIP();
         host_simulate();
         setIP(SaveIp);
 #endif
+#line 908
 
     }
 
@@ -1104,10 +1112,12 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
     WOW32ASSERT(pFrame->wTDB == td.htask16);
 
 #if FASTBOPPING
-    SETFASTVDMSTACK((VPVOID)vpInitialSSSP);
+#error Unsupported excluded original configuration
 #else
+#line 1158
     SETVDMSTACK(vpInitialSSSP);
 #endif
+#line 1160
     pFrame->wRetID = RET_RETURN;
 
 
@@ -1152,13 +1162,14 @@ DWORD W32Thread(LPVOID vpInitialSSSP)
     try {
 #endif
 #if FASTBOPPING
-        CurrentMonitorTeb = NtCurrentTeb();
-        FastWOWCallbackCall();
+#error Unsupported excluded original configuration
 #else
+#line 1215
         SaveIp = getIP();
         host_simulate();
         setIP(SaveIp);
 #endif
+#line 1219
 #if NO_W32TRYCALL
     } except (W32FilterException(GetExceptionCode(),
                                  GetExceptionInformation())) {
@@ -1313,12 +1324,9 @@ DWORD W32RemoteThread(VOID)
     vcSave.Eip   = getIP();
     vcSave.Esp   = getSP();
 #if FASTBOPPING
-    {
-        extern DWORD    saveebp32;
-
-        dwPrevEBP = saveebp32;
-    }
+#error Unsupported excluded original configuration
 #endif
+#line 1377
 
     wPrevTDB = *pCurTDB;
 
@@ -1338,18 +1346,16 @@ DWORD W32RemoteThread(VOID)
     setDI( (WORD)vcRemote.Edi );
     setBP( (WORD)vcRemote.Ebp );
 #if FASTBOPPING
-
-    vpStack = MAKELONG( LOWORD(vcRemote.Esp), LOWORD(vcRemote.SegSs) );
-
-    SETFASTVDMSTACK( vpStack );
-
+#error Unsupported excluded original configuration
 #else
+#line 1402
     setIP( (WORD)vcRemote.Eip );
     setSP( (WORD)vcRemote.Esp );
     setSS( (WORD)vcRemote.SegSs );
     setCS( (WORD)vcRemote.SegCs );
     vpStack = VDMSTACK();
 #endif
+#line 1408
 
     //
     // Initialize Per Task Data
@@ -1381,12 +1387,13 @@ DWORD W32RemoteThread(VOID)
     //   Start Callback
     //
 #if FASTBOPPING
-    CurrentMonitorTeb = NtCurrentTeb();
-    FastWOWCallbackCall();
+#error Unsupported excluded original configuration
 #else
+#line 1442
     host_simulate();
     setIP((WORD)vcSave.Eip);
 #endif
+#line 1445
 
     //
     //  We should Never Come Here, an app should get terminated via calling wk32killtask thunk
@@ -1553,24 +1560,15 @@ VOID FASTCALL WK32KillRemoteTask(PVDMFRAME pFrame)
     vcRemote.Edi   = getDI();
     vcRemote.Ebp   = getBP();
 #if FASTBOPPING
-    {
-        extern DWORD saveip16;
-        extern DWORD savecs16;
-        VPVOID       vpStack;
-
-        vcRemote.Eip   = saveip16;
-        vcRemote.SegCs = savecs16;
-        vpStack = FASTVDMSTACK();
-
-        vcRemote.SegSs = HIWORD(vpStack);
-        vcRemote.Esp   = LOWORD(vpStack);
-    }
+#error Unsupported excluded original configuration
 #else
+#line 1622
     vcRemote.Eip   = getIP();
     vcRemote.Esp   = getSP();
     vcRemote.SegSs = getSS();
     vcRemote.SegCs = getCS();
 #endif
+#line 1627
 
     W32FreeTask(CURRENTPTD());
 
@@ -1606,12 +1604,9 @@ VOID FASTCALL WK32KillRemoteTask(PVDMFRAME pFrame)
         setIP( (WORD)vcSave.Eip );
         setSP( (WORD)vcSave.Esp );
 #if FASTBOPPING
-        {
-            extern DWORD    saveebp32;
-
-            saveebp32 = dwPrevEBP;
-        }
+#error Unsupported excluded original configuration
 #endif
+#line 1668
     } else {
         //
         // Decrement the count of 16-bit tasks so that the last one,

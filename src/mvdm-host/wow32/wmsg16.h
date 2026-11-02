@@ -22,18 +22,17 @@
 /* Message number/name association (for debug output only)
  */
 #ifdef DEBUG
-typedef struct _MSGINFO {   /* mi */
-    UINT uMsg;                  // 0x0001 in the high word means "undocumented"
-    PSZ  pszMsgName;            // 0x0002 in the high word means "win32-specific"
-} MSGINFO, *PMSGINFO;
+#error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected
 #endif
+#line 30
 
 
 /* Function prototypes
  */
 #ifdef DEBUG
-PSZ     GetWMMsgName(UINT uMsg);
+#error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected
 #endif
+#line 37
 
 HWND FASTCALL ThunkMsg16(LPMSGPARAMEX lpmpex);
 VOID FASTCALL UnThunkMsg16(LPMSGPARAMEX lpmpex);

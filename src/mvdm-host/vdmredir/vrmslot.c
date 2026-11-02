@@ -113,10 +113,12 @@ Revision History:
 #define VrpAllocateMailslotStructure(n) ((PVR_MAILSLOT_INFO)LocalAlloc(LMEM_FIXED, sizeof(VR_MAILSLOT_INFO) + (n)))
 #define VrpFreeMailslotStructure(ptr)   ((void)LocalFree(ptr))
 #ifdef VR_BREAK
-#define VR_BREAKPOINT()                 DbgBreakPoint()
+#error Unsupported excluded original configuration
 #else
+#line 118
 #define VR_BREAKPOINT()
 #endif
+#line 120
 
 
 //

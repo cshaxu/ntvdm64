@@ -1,0 +1,612 @@
+{
+  "scope": "ANSI else arms in actual product TUs",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bound.c",
+      "else_line": 43,
+      "original_group": 37,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 43,
+      "current_logical_after": 49,
+      "original_after": 49,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "IS32 value;",
+        "IS32 lower;",
+        "IS32 upper;",
+        "/* transfer to local signed variables */"
+      ],
+      "original_following": [
+        "{",
+        "IS32 value;",
+        "IS32 lower;",
+        "IS32 upper;",
+        "/* transfer to local signed variables */"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "else_line": 54,
+      "original_group": 42,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 54,
+      "current_logical_after": 58,
+      "original_after": 50,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "IU16  new_cs;\t/* The destination */",
+        "IU32 new_ip;",
+        "IU32 cs_descr_addr;\t\t/* code segment descriptor address */",
+        "CPU_DESCR cs_entry;\t\t/* code segment descriptor entry */"
+      ],
+      "original_following": [
+        "{",
+        "IU16  new_cs;\t/* The destination */",
+        "IU32 new_ip;",
+        "IU32 cs_descr_addr;\t\t/* code segment descriptor address */",
+        "CPU_DESCR cs_entry;\t\t/* code segment descriptor entry */"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "else_line": 49,
+      "original_group": 45,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 49,
+      "current_logical_after": 53,
+      "original_after": 53,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "IU16  new_cs;\t/* The destination */",
+        "IU32 new_ip;",
+        "IU32 descr_addr;\t/* cs descriptor address and entry */",
+        "CPU_DESCR entry;"
+      ],
+      "original_following": [
+        "{",
+        "IU16  new_cs;\t/* The destination */",
+        "IU32 new_ip;",
+        "IU32 descr_addr;\t/* cs descriptor address and entry */",
+        "CPU_DESCR entry;"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "else_line": 40,
+      "original_group": 36,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 40,
+      "current_logical_after": 44,
+      "original_after": 44,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "SET_STAR_LIMIT(GDT_REG, op1[0]);",
+        "SET_STAR_BASE(GDT_REG, op1[1] & 0xffffff);   /* store 24-bit base */"
+      ],
+      "original_following": [
+        "{",
+        "SET_STAR_LIMIT(GDT_REG, op1[0]);",
+        "SET_STAR_BASE(GDT_REG, op1[1] & 0xffffff);   /* store 24-bit base */"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "else_line": 58,
+      "original_group": 54,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 58,
+      "current_logical_after": 62,
+      "original_after": 62,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "SET_STAR_LIMIT(GDT_REG, op1[0]);",
+        "SET_STAR_BASE(GDT_REG, op1[1]);"
+      ],
+      "original_following": [
+        "{",
+        "SET_STAR_LIMIT(GDT_REG, op1[0]);",
+        "SET_STAR_BASE(GDT_REG, op1[1]);"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lidt.c",
+      "else_line": 41,
+      "original_group": 37,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 41,
+      "current_logical_after": 45,
+      "original_after": 45,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "SET_STAR_LIMIT(IDT_REG, op1[0]);",
+        "SET_STAR_BASE(IDT_REG, op1[1] & 0xffffff);   /* store 24-bit base */",
+        "}",
+        "GLOBAL VOID"
+      ],
+      "original_following": [
+        "{",
+        "SET_STAR_LIMIT(IDT_REG, op1[0]);",
+        "SET_STAR_BASE(IDT_REG, op1[1] & 0xffffff);   /* store 24-bit base */",
+        "}",
+        "GLOBAL VOID"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lidt.c",
+      "else_line": 56,
+      "original_group": 52,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 56,
+      "current_logical_after": 60,
+      "original_after": 60,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "SET_STAR_LIMIT(IDT_REG, op1[0]);",
+        "SET_STAR_BASE(IDT_REG, op1[1]);",
+        "}"
+      ],
+      "original_following": [
+        "{",
+        "SET_STAR_LIMIT(IDT_REG, op1[0]);",
+        "SET_STAR_BASE(IDT_REG, op1[1]);",
+        "}"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "else_line": 46,
+      "original_group": 41,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 46,
+      "current_logical_after": 51,
+      "original_after": 51,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "/* load segment selector first */",
+        "MOV_SR((IU32)DS_REG, op2[1]);",
+        "/* then (if it works) load offset */",
+        "*pop1 = op2[0];"
+      ],
+      "original_following": [
+        "{",
+        "/* load segment selector first */",
+        "MOV_SR((IU32)DS_REG, op2[1]);",
+        "/* then (if it works) load offset */",
+        "*pop1 = op2[0];"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "else_line": 69,
+      "original_group": 64,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 69,
+      "current_logical_after": 74,
+      "original_after": 74,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "/* load segment selector first */",
+        "MOV_SR((IU32)ES_REG, op2[1]);",
+        "/* then (if it works) load offset */",
+        "*pop1 = op2[0];"
+      ],
+      "original_following": [
+        "{",
+        "/* load segment selector first */",
+        "MOV_SR((IU32)ES_REG, op2[1]);",
+        "/* then (if it works) load offset */",
+        "*pop1 = op2[0];"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "else_line": 92,
+      "original_group": 87,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 92,
+      "current_logical_after": 97,
+      "original_after": 97,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "/* load segment selector first */",
+        "MOV_SR((IU32)FS_REG, op2[1]);",
+        "/* then (if it works) load offset */",
+        "*pop1 = op2[0];"
+      ],
+      "original_following": [
+        "{",
+        "/* load segment selector first */",
+        "MOV_SR((IU32)FS_REG, op2[1]);",
+        "/* then (if it works) load offset */",
+        "*pop1 = op2[0];"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "else_line": 115,
+      "original_group": 110,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 115,
+      "current_logical_after": 120,
+      "original_after": 120,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "/* load segment selector first */",
+        "MOV_SR((IU32)GS_REG, op2[1]);",
+        "/* then (if it works) load offset */",
+        "*pop1 = op2[0];"
+      ],
+      "original_following": [
+        "{",
+        "/* load segment selector first */",
+        "MOV_SR((IU32)GS_REG, op2[1]);",
+        "/* then (if it works) load offset */",
+        "*pop1 = op2[0];"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "else_line": 138,
+      "original_group": 133,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 138,
+      "current_logical_after": 143,
+      "original_after": 143,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "/* load segment selector first */",
+        "MOV_SR((IU32)SS_REG, op2[1]);",
+        "/* then (if it works) load offset */",
+        "*pop1 = op2[0];"
+      ],
+      "original_following": [
+        "{",
+        "/* load segment selector first */",
+        "MOV_SR((IU32)SS_REG, op2[1]);",
+        "/* then (if it works) load offset */",
+        "*pop1 = op2[0];"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sgdt.c",
+      "else_line": 41,
+      "original_group": 37,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 41,
+      "current_logical_after": 45,
+      "original_after": 45,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "/*",
+        "NB. The Intel manual says the top 8-bits will be stored as zero's,",
+        "I think they mean this only if it was loaded with a 24-bit (286",
+        "like) value. Otherwise it just stores what was loaded."
+      ],
+      "original_following": [
+        "{",
+        "/*",
+        "NB. The Intel manual says the top 8-bits will be stored as zero's,",
+        "I think they mean this only if it was loaded with a 24-bit (286",
+        "like) value. Otherwise it just stores what was loaded."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sgdt.c",
+      "else_line": 63,
+      "original_group": 59,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 63,
+      "current_logical_after": 67,
+      "original_after": 67,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "op1[0] = GET_STAR_LIMIT(GDT_REG);",
+        "op1[1] = GET_STAR_BASE(GDT_REG);",
+        "}"
+      ],
+      "original_following": [
+        "{",
+        "op1[0] = GET_STAR_LIMIT(GDT_REG);",
+        "op1[1] = GET_STAR_BASE(GDT_REG);",
+        "}"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sidt.c",
+      "else_line": 41,
+      "original_group": 37,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 41,
+      "current_logical_after": 45,
+      "original_after": 45,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "/*",
+        "NB. The Intel manual says the top 8-bits will be stored as zero's,",
+        "I think they mean this only if it was loaded with a 24-bit (286",
+        "like) value. Otherwise it just stores what was loaded."
+      ],
+      "original_following": [
+        "{",
+        "/*",
+        "NB. The Intel manual says the top 8-bits will be stored as zero's,",
+        "I think they mean this only if it was loaded with a 24-bit (286",
+        "like) value. Otherwise it just stores what was loaded."
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sidt.c",
+      "else_line": 64,
+      "original_group": 60,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 64,
+      "current_logical_after": 68,
+      "original_after": 68,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "op1[0] = GET_STAR_LIMIT(IDT_REG);",
+        "op1[1] = GET_STAR_BASE(IDT_REG);",
+        "}"
+      ],
+      "original_following": [
+        "{",
+        "op1[0] = GET_STAR_LIMIT(IDT_REG);",
+        "op1[1] = GET_STAR_BASE(IDT_REG);",
+        "}"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "else_line": 373,
+      "original_group": 567,
+      "context_count": 2,
+      "prior_line_directives": [
+        {
+          "line": 365,
+          "directive": "#line 365"
+        }
+      ],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 372,
+      "current_logical_after": 375,
+      "original_after": 572,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "disk_reset,\t\t/* 0x00 */",
+        "return_status,\t\t/* 0x01 */",
+        "disk_read,\t\t/* 0x02 */",
+        "disk_write,\t\t/* 0x03 */"
+      ],
+      "original_following": [
+        "{",
+        "disk_reset,\t\t/* 0x00 */",
+        "return_status,\t\t/* 0x01 */",
+        "disk_read,\t\t/* 0x02 */",
+        "disk_write,\t\t/* 0x03 */"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "else_line": 381,
+      "original_group": 365,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 381,
+      "current_logical_after": 398,
+      "original_after": 398,
+      "following_context_exact": true,
+      "current_following": [
+        "/*",
+        "* -----------------------------------------------------------------------",
+        "* [5.2 LOCAL DEFINITIONS]",
+        "*",
+        "* [5.2.1 INTERNAL DATA DEFINITIONS"
+      ],
+      "original_following": [
+        "/*",
+        "* -----------------------------------------------------------------------",
+        "* [5.2 LOCAL DEFINITIONS]",
+        "*",
+        "* [5.2.1 INTERNAL DATA DEFINITIONS"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "else_line": 675,
+      "original_group": 691,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 675,
+      "current_logical_after": 680,
+      "original_after": 699,
+      "following_context_exact": true,
+      "current_following": [
+        "{",
+        "Ios_inb_function[adapter]  = FAST_FUNC_ADDR(func);",
+        "Ios_inw_function[adapter]  = FAST_FUNC_ADDR(generic_inw);",
+        "Ios_insb_function[adapter] = generic_insb;",
+        "Ios_insw_function[adapter] = generic_insw;"
+      ],
+      "original_following": [
+        "{",
+        "Ios_inb_function[adapter]  = FAST_FUNC_ADDR(func);",
+        "Ios_inw_function[adapter]  = FAST_FUNC_ADDR(generic_inw);",
+        "Ios_insb_function[adapter] = generic_insb;",
+        "Ios_insw_function[adapter] = generic_insw;"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "else_line": 78,
+      "original_group": 63,
+      "context_count": 2,
+      "prior_line_directives": [
+        {
+          "line": 67,
+          "directive": "#line 62"
+        }
+      ],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 72,
+      "current_logical_after": 75,
+      "original_after": 68,
+      "following_context_exact": false,
+      "current_following": [],
+      "original_following": [],
+      "following_outer_token_current": "#ifdef REAL_VGA",
+      "following_outer_token_original": "#ifdef REAL_VGA",
+      "following_outer_directive_exact": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "else_line": 109,
+      "original_group": 108,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 109,
+      "current_logical_after": 115,
+      "original_after": 119,
+      "following_context_exact": true,
+      "current_following": [
+        "#define TICKS_PER_HOUR      65543L",
+        "#define TICKS_PER_MIN       1092L",
+        "#define TICKS_PER_SEC       18L",
+        "/*",
+        "* ============================================================================"
+      ],
+      "original_following": [
+        "#define TICKS_PER_HOUR      65543L",
+        "#define TICKS_PER_MIN       1092L",
+        "#define TICKS_PER_SEC       18L",
+        "/*",
+        "* ============================================================================"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "else_line": 115,
+      "original_group": 115,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 115,
+      "current_logical_after": 118,
+      "original_after": 120,
+      "following_context_exact": true,
+      "current_following": [
+        "/*(",
+        "*=========================== patchCheckSum ================================",
+        "* patchCheckSum",
+        "*",
+        "* Purpose"
+      ],
+      "original_following": [
+        "/*(",
+        "*=========================== patchCheckSum ================================",
+        "* patchCheckSum",
+        "*",
+        "* Purpose"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "else_line": 1908,
+      "original_group": 1915,
+      "context_count": 2,
+      "prior_line_directives": [
+        {
+          "line": 1886,
+          "directive": "#line 1886"
+        }
+      ],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 1907,
+      "current_logical_after": 1910,
+      "original_after": 1920,
+      "following_context_exact": false,
+      "current_following": [],
+      "original_following": [],
+      "following_outer_token_current": "#ifdef NTVDM",
+      "following_outer_token_original": "#ifdef NTVDM",
+      "following_outer_directive_exact": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "else_line": 40,
+      "original_group": 29,
+      "context_count": 2,
+      "prior_line_directives": [],
+      "status": "candidate: trace supported test flags and effective logical line before mutation",
+      "current_logical_else": 40,
+      "current_logical_after": 51,
+      "original_after": 51,
+      "following_context_exact": true,
+      "current_following": [
+        "/*::::::::::::::::::::::::::::::::::::::::::::::::::::: Local data structures */",
+        "#define MAX_SLOTS (10)",
+        "LOCAL void (*MS_bop_tab[MAX_SLOTS])();\t\t/* MS bop table */",
+        "/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/",
+        "/* Microsoft BOP vectoring code references MS_bop_tab above and calls function"
+      ],
+      "original_following": [
+        "/*::::::::::::::::::::::::::::::::::::::::::::::::::::: Local data structures */",
+        "#define MAX_SLOTS (10)",
+        "LOCAL void (*MS_bop_tab[MAX_SLOTS])();\t\t/* MS bop table */",
+        "/*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/",
+        "/* Microsoft BOP vectoring code references MS_bop_tab above and calls function"
+      ]
+    }
+  ]
+}

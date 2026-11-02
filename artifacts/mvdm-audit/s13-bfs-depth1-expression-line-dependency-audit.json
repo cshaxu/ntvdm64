@@ -1,0 +1,4 @@
+{
+  "records": [],
+  "limitation": "indirect macro expansion chains may still require source analysis"
+}
