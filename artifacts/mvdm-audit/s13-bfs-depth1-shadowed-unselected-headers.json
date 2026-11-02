@@ -1,0 +1,103 @@
+{
+  "scope": "4 original headers with alternate or inactive include paths, file disposition only; no inferred macro truth values or source edits",
+  "graphs_checked": [
+    "build/.ninja/console-observers-x64/build.ninja",
+    "build/.ninja/msvc-x64-formal-release/build.ninja",
+    "build/.ninja/msvc-x64-release/build.ninja",
+    "build/.ninja/msvc-x86-formal-release/build.ninja",
+    "build/.ninja/msvc-x86-redir-contract/build.ninja",
+    "build/.ninja/msvc-x86-release/build.ninja",
+    "build/.ninja/msvc-x86-suballoc-audit/build.ninja",
+    "build/.ninja/observations-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x86/build.ninja",
+    "build/.ninja/t463-s2-dialog-end-boundary/build.ninja",
+    "build/.ninja/t463-s2-dialog-procedure/build.ninja",
+    "build/.ninja/t473-s8-control-boundaries/build.ninja",
+    "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x86/wow32/build.ninja",
+    "build/.ninja/pkg-uuid-x64/frontend/build.ninja",
+    "build/.ninja/pkg-uuid-x64/hook/build.ninja",
+    "build/.ninja/pkg-uuid-x64/launcher/build.ninja",
+    "build/.ninja/pkg-uuid-x64/monitor/build.ninja",
+    "build/.ninja/pkg-uuid-x64/service/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+    "build/.ninja/msvc-x86-release/call-boundaries/build.ninja",
+    "build/.ninja/msvc-x86-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x86-release/worker/build.ninja",
+    "build/.ninja/msvc-x86-release/wow32/build.ninja",
+    "build/.ninja/msvc-x64-release/frontend/build.ninja",
+    "build/.ninja/msvc-x64-release/hook/build.ninja",
+    "build/.ninja/msvc-x64-release/launcher/build.ninja",
+    "build/.ninja/msvc-x64-release/monitor/build.ninja",
+    "build/.ninja/msvc-x64-release/observation/build.ninja",
+    "build/.ninja/msvc-x64-release/service/build.ninja",
+    "build/.ninja/msvc-x64-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x64-release/worker/build.ninja",
+    "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja"
+  ],
+  "method": "Current build jobs, 35 Ninja graphs and dependencies, include resolutions and direct test references individually reviewed; pinned original and current hashes verified.",
+  "limitation": "Reopen entire branch queues if supported build or direct test begins using these files. No claim about individual condition values or unbuilt scenarios.",
+  "direct_test_and_tool_references": [
+    "ntioapi.h and winuserp.h: observed includes resolve to src/compat/include",
+    "vdmtib.h: referenced in unselected LINKED_INTO_MONITOR branch of softpc.h",
+    "ntddstor.h: referenced by ntdddisk.h/ntddcdrm.h, not witnessed in selected dependency output",
+    "tests refer to ntioapi facade and winuserp historical values, not direct original header builds"
+  ],
+  "records": [
+    {
+      "path": "src/mvdm-host/inc/vdmtib.h",
+      "current_sha256": "a5ce8099cc9f560ef1b4ab9c0ab9b338021d928b977545a09212e1e67a6703aa",
+      "original_sha256": "a5ce8099cc9f560ef1b4ab9c0ab9b338021d928b977545a09212e1e67a6703aa",
+      "arms": [
+        {
+          "line": 24,
+          "kind": "ifndef",
+          "expression": "_VDMTIB_H_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddstor.h",
+      "current_sha256": "862cf41979ee15c4f2fcc35b8350fa8b00729a10dd8fecc277992f9c10d8cb09",
+      "original_sha256": "78056c337304e2d4e2885c5780f44279c74d39a7c8a261cad39b539652bd316a",
+      "arms": [
+        {
+          "line": 31,
+          "kind": "ifdef",
+          "expression": "DEFINE_GUID"
+        },
+        {
+          "line": 59,
+          "kind": "ifndef",
+          "expression": "_NTDDSTOR_H_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntioapi.h",
+      "current_sha256": "17a3a95add0ae2e2d76e98355dc2cd5431432640cb75cc2bf2ef4426d2219b9e",
+      "original_sha256": "fd7980ccd70169ce052baa8aa43388df2d8689f3bed43028a940093c52f9f6ee",
+      "arms": [
+        {
+          "line": 23,
+          "kind": "ifndef",
+          "expression": "_NTIOAPI_"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/winuserp.h",
+      "current_sha256": "0d7e6bba5eaa815fe1cc281e9b4aa4d448ba92147958ae2e92f7406cab38500d",
+      "original_sha256": "b2838ae608353a14659b85c2be290034a6bb02dee9ac078e82c298f2f9b9b513",
+      "arms": [
+        {
+          "line": 16,
+          "kind": "ifndef",
+          "expression": "_WINUSERP_"
+        }
+      ]
+    }
+  ]
+}

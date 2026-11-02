@@ -3661,8 +3661,8 @@
       "group_end": 35,
       "kind": "ifndef",
       "expression": "_VDMTIB_H_",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 10,
       "source_sha256": "a5ce8099cc9f560ef1b4ab9c0ab9b338021d928b977545a09212e1e67a6703aa"
@@ -60510,8 +60510,8 @@
       "group_end": 55,
       "kind": "ifdef",
       "expression": "DEFINE_GUID",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 23,
       "source_sha256": "862cf41979ee15c4f2fcc35b8350fa8b00729a10dd8fecc277992f9c10d8cb09"
@@ -60523,8 +60523,8 @@
       "group_end": 620,
       "kind": "ifndef",
       "expression": "_NTDDSTOR_H_",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 560,
       "source_sha256": "862cf41979ee15c4f2fcc35b8350fa8b00729a10dd8fecc277992f9c10d8cb09"
@@ -62733,8 +62733,8 @@
       "group_end": 1542,
       "kind": "ifndef",
       "expression": "_WINUSERP_",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 1525,
       "source_sha256": "0d7e6bba5eaa815fe1cc281e9b4aa4d448ba92147958ae2e92f7406cab38500d"
@@ -62876,8 +62876,8 @@
       "group_end": 2338,
       "kind": "ifndef",
       "expression": "_NTIOAPI_",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 2314,
       "source_sha256": "17a3a95add0ae2e2d76e98355dc2cd5431432640cb75cc2bf2ef4426d2219b9e"
@@ -65680,15 +65680,15 @@
   ],
   "errors": [],
   "status_counts": {
-    "unselected-file": 755,
+    "unselected-file": 760,
     "newly-excluded": 643,
     "already-excluded": 1696,
-    "pending": 80,
+    "pending": 75,
     "retained-observed": 1869,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
-    "not-guard": 69,
+    "not-guard": 64,
     "guard": 11
   }
 }

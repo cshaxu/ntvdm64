@@ -101,15 +101,6 @@
       "current_actual_includers": 26
     },
     {
-      "path": "src/mvdm-host/inc/vdmtib.h",
-      "start": 24,
-      "kind": "ifndef",
-      "expression": "_VDMTIB_H_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/inc/wowfax.h",
       "start": 37,
       "kind": "ifdef",
@@ -560,24 +551,6 @@
       "current_actual_includers": 34
     },
     {
-      "path": "src/non-mvdm/public/ddk/inc/ntddstor.h",
-      "start": 31,
-      "kind": "ifdef",
-      "expression": "DEFINE_GUID",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/non-mvdm/public/ddk/inc/ntddstor.h",
-      "start": 59,
-      "kind": "ifndef",
-      "expression": "_NTDDSTOR_H_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/non-mvdm/public/internal/base/inc/isnkrnl.h",
       "start": 40,
       "kind": "else",
@@ -641,15 +614,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/non-mvdm/public/internal/windows/inc/winuserp.h",
-      "start": 16,
-      "kind": "ifndef",
-      "expression": "_WINUSERP_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/non-mvdm/public/sdk/inc/nt.h",
       "start": 27,
       "kind": "ifndef",
@@ -666,15 +630,6 @@
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "current_actual_includers": 2
-    },
-    {
-      "path": "src/non-mvdm/public/sdk/inc/ntioapi.h",
-      "start": 23,
-      "kind": "ifndef",
-      "expression": "_NTIOAPI_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
     },
     {
       "path": "src/non-mvdm/public/sdk/inc/wownt32.h",
@@ -757,7 +712,7 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 46
+      "count": 41
     },
     {
       "reason": "file-not-witnessed-in-product",

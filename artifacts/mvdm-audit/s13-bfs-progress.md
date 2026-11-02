@@ -105,7 +105,7 @@ errors. It is not a count of proven missing boundaries. Candidate rows and the
 per-arm current queue are under the task scratch directory `build/t473-s13/bfs`.
 Of these, 73 original depth-one groups in kernel `ntstubs.c` have been
 classified separately: the registered OPENNT-HOST-076 subset retains only
-the complete `NtUserSetWindowFNID` body (original lines 6170â€“6188), which has
+the complete `NtUserSetWindowFNID` body (original lines 6170Ã¢â‚¬â€œ6188), which has
 no enclosing conditional; all 73 candidate groups lie outside that retained
 body. This is an omitted-whole-function subset disposition, not a claim that
 the other original functions were restored. One additional candidate in
@@ -119,11 +119,11 @@ the guard closes at the end of the file. This disposition does not certify
 the corresponding current inclusion behavior. `_USERCLI_` is not included
 in this group because the original file also has content after its guard.
 For `ntcftxt.h`, the registered OPENNT-HOST-036/046 subset retains five
-original functions: `GetClassInfo` (111â€“155), `StringDuplicate` (578â€“588),
-`InitClsMenuName` (595â€“632), `RegisterClassExWOW` (701â€“844), and
-`UnregisterClass` (1051â€“1087). The original has eleven top-level `#ifdef
+original functions: `GetClassInfo` (111Ã¢â‚¬â€œ155), `StringDuplicate` (578Ã¢â‚¬â€œ588),
+`InitClsMenuName` (595Ã¢â‚¬â€œ632), `RegisterClassExWOW` (701Ã¢â‚¬â€œ844), and
+`UnregisterClass` (1051Ã¢â‚¬â€œ1087). The original has eleven top-level `#ifdef
 UNICODE` groups; the initial selector and the two groups intersecting retained
-functions (601â€“617 and 802â€“806) correspond to the three current groups. Its
+functions (601Ã¢â‚¬â€œ617 and 802Ã¢â‚¬â€œ806) correspond to the three current groups. Its
 eighteen `#ifndef UNICODE` groups and two `#ifdef FE_SB` groups do not
 intersect any of those five function ranges. The 28 excess original groups
 are therefore classified as outside this registered function subset, without
@@ -131,7 +131,7 @@ asserting that other text APIs were restored or that all local semantics have
 been independently reviewed. Original group interval and retained-line
 comparisons were checked against the frozen original and current sources.
 For `handtabl.c`, OPENNT-HOST-063 retains only the original ownership table
-at lines 39â€“59; of 28 original depth-one groups, only the `FE_IME` group at
+at lines 39Ã¢â‚¬â€œ59; of 28 original depth-one groups, only the `FE_IME` group at
 line 56 intersects that table. The 27 other groups lie outside the retained
 table subset. Their source identities and locations are recorded in
 `s13-bfs-depth1-handtabl.json`; this does not decide whether the retained
@@ -161,7 +161,7 @@ of the string-I/O consumers; source hashes and exact expressions are in
 candidates are unreviewed.
 
 One of those candidates, `nt_sec.c`, is now specifically identified rather
-than treated as a generic text mismatch: original lines 115â€“158 form a
+than treated as a generic text mismatch: original lines 115Ã¢â‚¬â€œ158 form a
 top-level `#ifdef X86GFX` absent from the local file. This file was not
 witnessed in the collected contexts, while X86GFX is used elsewhere. The
 file's supported role and all applicable profiles must therefore be established
@@ -1907,3 +1907,7 @@ Verified five existing SPC386, CCPU and source-specific MONITOR rejection arms i
 ### First-depth original server FE_IME guard restoration
 
 Restored the pinned original line 53 FE_IME global condition before the first retained Button table in the selected server.c owner, replacing its excluded body with #error and anchoring both original guard line 53 and first retained declaration line 191. The local WOW owner selector remains intact. WOW32 rebuilt; x86/x64 selected/forced-rejection line controls, cached builds and rejection suites passed. Seven same-identity candidate images match the Full-tested release exactly; three differ only in PE timestamps. First-depth status {'unselected-file': 755, 'newly-excluded': 643, 'already-excluded': 1696, 'pending': 80, 'retained-observed': 1869, 'retained-original-assertion': 9}; child categories {'retained-observed': 1411, 'pending': 80, 'unselected-file': 1551}. Original restored total 57, 24 in the current BFS pass; nine unresolved original boundary records remain. Evidence: `s13-bfs-depth1-server-fe-ime.json`, `s13-bfs-depth1-server-fe-ime-package-compare.json`; queue: `s13-bfs-depth1-working-queue-195r84.zip`.
+
+### First-depth shadowed and inactive original headers
+
+Classified 5 pending outer arms in 4 original headers with alternate or inactive include paths as unselected-file after checking current jobs, 35 Ninja graphs/dependency records and actual include resolution and independent facade/test usage. Current and pinned original hashes checked. No source changed and no assertion made that individual conditions are false; reopen on future admission. Status: {'unselected-file': 760, 'newly-excluded': 643, 'already-excluded': 1696, 'pending': 75, 'retained-observed': 1869, 'retained-original-assertion': 9}; child parent categories: {'retained-observed': 1411, 'pending': 41, 'unselected-file': 1590}. Evidence: `s13-bfs-depth1-shadowed-unselected-headers.json`; queue: `s13-bfs-depth1-working-queue-195r85.zip`.
