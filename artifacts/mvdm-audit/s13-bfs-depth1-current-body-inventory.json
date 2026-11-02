@@ -5169,8 +5169,8 @@
       "group_end": 100,
       "kind": "if",
       "expression": "!defined(PROD) && defined(CPU_40_STYLE)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "0caae2986bd5256ecdee046d9961c5176a3d5178426a198b5f42fb3eb0bef369"
@@ -5182,8 +5182,8 @@
       "group_end": 104,
       "kind": "if",
       "expression": "defined(CPU_40_STYLE) && !defined(NTVDM)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "0caae2986bd5256ecdee046d9961c5176a3d5178426a198b5f42fb3eb0bef369"
@@ -29934,8 +29934,8 @@
       "group_end": 1499,
       "kind": "if",
       "expression": "defined(CPU_40_STYLE) && !defined (NTVDM)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "477641c1c77365f962e1be2e7d5d83295d9a05c0d557fc39c07890411425e317"
@@ -32807,8 +32807,8 @@
       "group_end": 168,
       "kind": "if",
       "expression": "defined(CPU_40_STYLE) && !defined(CCPU)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea"
@@ -34536,8 +34536,8 @@
       "group_end": 556,
       "kind": "if",
       "expression": "defined(CPU_40_STYLE) && !defined (NTVDM)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a"
@@ -35108,8 +35108,8 @@
       "group_end": 1134,
       "kind": "if",
       "expression": "defined (CPU_40_STYLE) && !defined(NTVDM)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a"
@@ -35199,8 +35199,8 @@
       "group_end": 1260,
       "kind": "if",
       "expression": "defined(CPU_40_STYLE) && !defined(NTVDM)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a"
@@ -35212,8 +35212,8 @@
       "group_end": 1271,
       "kind": "if",
       "expression": "defined(CPU_40_STYLE) &&  !defined(NTVDM)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a"
@@ -35433,8 +35433,8 @@
       "group_end": 1442,
       "kind": "if",
       "expression": "defined(CPU_40_STYLE) && !defined(NTVDM)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a"
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 930,
+    "pending": 921,
     "newly-excluded": 615,
-    "already-excluded": 1633,
+    "already-excluded": 1642,
     "retained-observed": 1863,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
     "not-guard": 850,
-    "guard": 80
+    "guard": 71
   }
 }

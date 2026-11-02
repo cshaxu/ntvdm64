@@ -1,0 +1,240 @@
+{
+  "scope": "nine existing compound guards in specific product source contexts, not a global macro invariant",
+  "contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "contexts": 2,
+      "all_define": [
+        "CPU_40_STYLE",
+        "NTVDM",
+        "CCPU",
+        "PROD"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "contexts": 2,
+      "all_define": [
+        "CPU_40_STYLE",
+        "NTVDM",
+        "CCPU",
+        "PROD"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "contexts": 2,
+      "all_define": [
+        "CPU_40_STYLE",
+        "NTVDM",
+        "CCPU",
+        "PROD"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "contexts": 2,
+      "all_define": [
+        "CPU_40_STYLE",
+        "NTVDM",
+        "CCPU",
+        "PROD"
+      ]
+    }
+  ],
+  "resource_contexts_checked": 6,
+  "controls": [
+    {
+      "arch": "x86",
+      "expression": "!defined(PROD) && defined(CPU_40_STYLE)",
+      "omitted": null,
+      "rejected": false
+    },
+    {
+      "arch": "x86",
+      "expression": "!defined(PROD) && defined(CPU_40_STYLE)",
+      "omitted": "PROD",
+      "rejected": true
+    },
+    {
+      "arch": "x86",
+      "expression": "!defined(PROD) && defined(CPU_40_STYLE)",
+      "omitted": "CPU_40_STYLE",
+      "rejected": false
+    },
+    {
+      "arch": "x86",
+      "expression": "defined(CPU_40_STYLE) && !defined(NTVDM)",
+      "omitted": null,
+      "rejected": false
+    },
+    {
+      "arch": "x86",
+      "expression": "defined(CPU_40_STYLE) && !defined(NTVDM)",
+      "omitted": "NTVDM",
+      "rejected": true
+    },
+    {
+      "arch": "x86",
+      "expression": "defined(CPU_40_STYLE) && !defined(NTVDM)",
+      "omitted": "CPU_40_STYLE",
+      "rejected": false
+    },
+    {
+      "arch": "x86",
+      "expression": "defined(CPU_40_STYLE) && !defined(CCPU)",
+      "omitted": null,
+      "rejected": false
+    },
+    {
+      "arch": "x86",
+      "expression": "defined(CPU_40_STYLE) && !defined(CCPU)",
+      "omitted": "CCPU",
+      "rejected": true
+    },
+    {
+      "arch": "x86",
+      "expression": "defined(CPU_40_STYLE) && !defined(CCPU)",
+      "omitted": "CPU_40_STYLE",
+      "rejected": false
+    },
+    {
+      "arch": "x64",
+      "expression": "!defined(PROD) && defined(CPU_40_STYLE)",
+      "omitted": null,
+      "rejected": false
+    },
+    {
+      "arch": "x64",
+      "expression": "!defined(PROD) && defined(CPU_40_STYLE)",
+      "omitted": "PROD",
+      "rejected": true
+    },
+    {
+      "arch": "x64",
+      "expression": "!defined(PROD) && defined(CPU_40_STYLE)",
+      "omitted": "CPU_40_STYLE",
+      "rejected": false
+    },
+    {
+      "arch": "x64",
+      "expression": "defined(CPU_40_STYLE) && !defined(NTVDM)",
+      "omitted": null,
+      "rejected": false
+    },
+    {
+      "arch": "x64",
+      "expression": "defined(CPU_40_STYLE) && !defined(NTVDM)",
+      "omitted": "NTVDM",
+      "rejected": true
+    },
+    {
+      "arch": "x64",
+      "expression": "defined(CPU_40_STYLE) && !defined(NTVDM)",
+      "omitted": "CPU_40_STYLE",
+      "rejected": false
+    },
+    {
+      "arch": "x64",
+      "expression": "defined(CPU_40_STYLE) && !defined(CCPU)",
+      "omitted": null,
+      "rejected": false
+    },
+    {
+      "arch": "x64",
+      "expression": "defined(CPU_40_STYLE) && !defined(CCPU)",
+      "omitted": "CCPU",
+      "rejected": true
+    },
+    {
+      "arch": "x64",
+      "expression": "defined(CPU_40_STYLE) && !defined(CCPU)",
+      "omitted": "CPU_40_STYLE",
+      "rejected": false
+    }
+  ],
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "current_line": 98,
+      "original_line": 101,
+      "expression": "!defined(PROD) && defined(CPU_40_STYLE)",
+      "historical_start": 101,
+      "historical_body_sha256": "2916076997544d1152ec9b388b347efe69cabe3b6380d5f796d8a2d62b6eca45",
+      "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "current_line": 102,
+      "original_line": 105,
+      "expression": "defined(CPU_40_STYLE) && !defined(NTVDM)",
+      "historical_start": 102,
+      "historical_body_sha256": "fa21812dfe55b40a2e80cb88610f8355ee79134d18cba019a3db801785ff465c",
+      "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "current_line": 1497,
+      "original_line": 1889,
+      "expression": "defined(CPU_40_STYLE) && !defined (NTVDM)",
+      "historical_start": 1518,
+      "historical_body_sha256": "9040f4636dd39f8171c8d2fcd9bba890edc21ab29c46ba85938d52a8639b555f",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "current_line": 166,
+      "original_line": 167,
+      "expression": "defined(CPU_40_STYLE) && !defined(CCPU)",
+      "historical_start": 177,
+      "historical_body_sha256": "13d94baeeba3ffd5de06da57b854538c01586aed32b9a8669b011e78167952d1",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_line": 554,
+      "original_line": 600,
+      "expression": "defined(CPU_40_STYLE) && !defined (NTVDM)",
+      "historical_start": 568,
+      "historical_body_sha256": "e456da367ecf37d4d59d18ece8fd0ecbf45c04f3904d26711cd11664a26681e7",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_line": 1132,
+      "original_line": 1303,
+      "expression": "defined (CPU_40_STYLE) && !defined(NTVDM)",
+      "historical_start": 1163,
+      "historical_body_sha256": "700a4fcc04b0a166e812484d68c9ad2d10e5abd4b493b5d10f9869e99bd17e44",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_line": 1258,
+      "original_line": 1449,
+      "expression": "defined(CPU_40_STYLE) && !defined(NTVDM)",
+      "historical_start": 1305,
+      "historical_body_sha256": "7ce86c0dc21f08b1de0621fb49a19269321564193fe876db5310802fe670aef2",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_line": 1269,
+      "original_line": 1470,
+      "expression": "defined(CPU_40_STYLE) &&  !defined(NTVDM)",
+      "historical_start": 1326,
+      "historical_body_sha256": "6647b4f8730469f60ac45a585298988dcd6c8782772d198f972e2d21890f639c",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_line": 1440,
+      "original_line": 2126,
+      "expression": "defined(CPU_40_STYLE) && !defined(NTVDM)",
+      "historical_start": 1877,
+      "historical_body_sha256": "d3eca09ce6fcbfae0220c4c0978d4ff1f7f204c82b58c939c30451f449509656",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075"
+    }
+  ],
+  "held": "support/xt.c outer selector has no matching original root conditional"
+}
