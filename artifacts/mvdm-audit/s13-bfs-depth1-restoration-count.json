@@ -68,9 +68,14 @@
       "file": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
       "original_condition": "#ifdef CPU_30_STYLE / #else",
       "evidence": "s13-bfs-depth1-hostcpu-outer.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "original_condition": "#if defined(NTVDM) && defined(MONITOR)",
+      "evidence": "s13-bfs-depth1-ios-monitor-outer.json"
     }
   ],
-  "derived_total": 54,
-  "derived_current_bfs_total": 21,
+  "derived_total": 55,
+  "derived_current_bfs_total": 22,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

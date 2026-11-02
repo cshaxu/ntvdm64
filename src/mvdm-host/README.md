@@ -2257,3 +2257,9 @@ DPMI interrupt-hook enable and disable while retaining the existing CPU40
 selection in each i386 alternative. Original bodies and continuation lines
 are preserved; the added inner selectors remain for next-depth review. See
 `../../artifacts/mvdm-audit/s13-bfs-depth1-dpmi-hook-outers.json`.
+
+MVDM-HOST-DIV-636: restore the original MONITOR outer condition for the
+string-I/O carrier in `softpc.new/base/support/ios.c`. The earlier guard in
+that file already rejects MONITOR; the original carrier is retained for CCPU
+in the selected alternative. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-ios-monitor-outer.json`.

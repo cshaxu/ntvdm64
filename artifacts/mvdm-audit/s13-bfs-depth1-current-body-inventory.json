@@ -31927,7 +31927,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 6,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -31940,7 +31940,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -31953,7 +31953,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -31966,7 +31966,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -31979,7 +31979,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -31992,7 +31992,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -32005,7 +32005,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -32018,7 +32018,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -32031,7 +32031,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -32044,7 +32044,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -32057,7 +32057,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -32070,7 +32070,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -32083,7 +32083,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -32096,7 +32096,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -32109,7 +32109,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -32122,7 +32122,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 24,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -32135,7 +32135,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 20,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -32148,7 +32148,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -32161,7 +32161,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 16,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -32174,397 +32174,410 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 16,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
       "start": 398,
-      "cut": 428,
-      "group_end": 428,
+      "cut": 400,
+      "group_end": 433,
       "kind": "if",
-      "expression": "defined(NTVDM) && (defined(MONITOR) || defined(CCPU))",
-      "status": "retained-observed",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "status": "newly-excluded",
       "pending_reason": null,
-      "guard_only": false,
-      "body_lines": 29,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 454,
-      "cut": 456,
-      "group_end": 456,
+      "start": 400,
+      "cut": 433,
+      "group_end": 433,
+      "kind": "else",
+      "expression": "",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 32,
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "start": 460,
+      "cut": 462,
+      "group_end": 462,
       "kind": "ifdef",
       "expression": "VIRTUALISATION",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 458,
-      "cut": 460,
-      "group_end": 460,
+      "start": 464,
+      "cut": 466,
+      "group_end": 466,
       "kind": "ifdef",
       "expression": "EGA_DUMP",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 462,
-      "cut": 473,
-      "group_end": 473,
+      "start": 468,
+      "cut": 479,
+      "group_end": 479,
       "kind": "ifdef",
       "expression": "VIRTUALISATION",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 10,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 494,
-      "cut": 496,
-      "group_end": 496,
+      "start": 500,
+      "cut": 502,
+      "group_end": 502,
       "kind": "ifdef",
       "expression": "VIRTUALISATION",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 498,
-      "cut": 500,
-      "group_end": 500,
-      "kind": "ifdef",
-      "expression": "EGA_DUMP",
-      "status": "already-excluded",
-      "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
       "start": 504,
-      "cut": 510,
-      "group_end": 510,
-      "kind": "ifdef",
-      "expression": "VIRTUALISATION",
-      "status": "retained-observed",
-      "pending_reason": null,
-      "guard_only": false,
-      "body_lines": 5,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 530,
-      "cut": 532,
-      "group_end": 532,
-      "kind": "ifdef",
-      "expression": "VIRTUALISATION",
-      "status": "retained-observed",
-      "pending_reason": null,
-      "guard_only": false,
-      "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 534,
-      "cut": 536,
-      "group_end": 536,
+      "cut": 506,
+      "group_end": 506,
       "kind": "ifdef",
       "expression": "EGA_DUMP",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 538,
-      "cut": 549,
-      "group_end": 549,
+      "start": 510,
+      "cut": 516,
+      "group_end": 516,
+      "kind": "ifdef",
+      "expression": "VIRTUALISATION",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 5,
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "start": 536,
+      "cut": 538,
+      "group_end": 538,
+      "kind": "ifdef",
+      "expression": "VIRTUALISATION",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "start": 540,
+      "cut": 542,
+      "group_end": 542,
+      "kind": "ifdef",
+      "expression": "EGA_DUMP",
+      "status": "already-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "start": 544,
+      "cut": 555,
+      "group_end": 555,
       "kind": "ifdef",
       "expression": "VIRTUALISATION",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 10,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 569,
-      "cut": 571,
-      "group_end": 571,
+      "start": 575,
+      "cut": 577,
+      "group_end": 577,
       "kind": "ifdef",
       "expression": "VIRTUALISATION",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 573,
-      "cut": 575,
-      "group_end": 575,
+      "start": 579,
+      "cut": 581,
+      "group_end": 581,
       "kind": "ifdef",
       "expression": "EGA_DUMP",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 579,
-      "cut": 585,
-      "group_end": 585,
+      "start": 585,
+      "cut": 591,
+      "group_end": 591,
       "kind": "ifdef",
       "expression": "VIRTUALISATION",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 5,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 593,
-      "cut": 662,
-      "group_end": 662,
+      "start": 599,
+      "cut": 668,
+      "group_end": 668,
       "kind": "ifdef",
       "expression": "SPC386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 68,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 672,
-      "cut": 675,
-      "group_end": 677,
+      "start": 678,
+      "cut": 681,
+      "group_end": 683,
       "kind": "ifdef",
       "expression": "ANSI",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 675,
-      "cut": 677,
-      "group_end": 677,
+      "start": 681,
+      "cut": 683,
+      "group_end": 683,
       "kind": "else",
       "expression": "",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 684,
-      "cut": 687,
-      "group_end": 687,
+      "start": 690,
+      "cut": 693,
+      "group_end": 693,
       "kind": "ifdef",
       "expression": "SPC386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 710,
-      "cut": 713,
-      "group_end": 713,
+      "start": 716,
+      "cut": 719,
+      "group_end": 719,
       "kind": "ifdef",
       "expression": "SPC386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 738,
-      "cut": 741,
-      "group_end": 741,
+      "start": 744,
+      "cut": 747,
+      "group_end": 747,
       "kind": "ifdef",
       "expression": "SPC386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 765,
-      "cut": 768,
-      "group_end": 768,
+      "start": 771,
+      "cut": 774,
+      "group_end": 774,
       "kind": "ifdef",
       "expression": "SPC386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 779,
-      "cut": 807,
-      "group_end": 807,
+      "start": 785,
+      "cut": 813,
+      "group_end": 813,
       "kind": "ifdef",
       "expression": "SPC386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 27,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 809,
-      "cut": 837,
-      "group_end": 837,
+      "start": 815,
+      "cut": 843,
+      "group_end": 843,
       "kind": "ifdef",
       "expression": "SPC386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 27,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 847,
-      "cut": 859,
-      "group_end": 861,
+      "start": 853,
+      "cut": 865,
+      "group_end": 867,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 11,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 859,
-      "cut": 861,
-      "group_end": 861,
+      "start": 865,
+      "cut": 867,
+      "group_end": 867,
       "kind": "else",
       "expression": "",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 872,
-      "cut": 884,
-      "group_end": 886,
+      "start": 878,
+      "cut": 890,
+      "group_end": 892,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 11,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 884,
-      "cut": 886,
-      "group_end": 886,
+      "start": 890,
+      "cut": 892,
+      "group_end": 892,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 915,
-      "cut": 922,
-      "group_end": 922,
+      "start": 921,
+      "cut": 928,
+      "group_end": 928,
       "kind": "ifdef",
       "expression": "SEGMENTATION",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 6,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 943,
-      "cut": 945,
-      "group_end": 945,
+      "start": 949,
+      "cut": 951,
+      "group_end": 951,
       "kind": "ifdef",
       "expression": "MAC68K",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 947,
-      "cut": 949,
-      "group_end": 949,
+      "start": 953,
+      "cut": 955,
+      "group_end": 955,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 958,
-      "cut": 974,
-      "group_end": 974,
+      "start": 964,
+      "cut": 980,
+      "group_end": 980,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 15,
-      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+      "source_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/main.c",
@@ -65668,7 +65681,7 @@
   "errors": [],
   "status_counts": {
     "pending": 871,
-    "newly-excluded": 634,
+    "newly-excluded": 635,
     "already-excluded": 1669,
     "retained-observed": 1868,
     "retained-original-assertion": 9

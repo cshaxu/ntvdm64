@@ -589,3 +589,27 @@ if selected.returncode or 'typedef union' not in selected.stdout or not re.searc
 if not rejected.returncode or 'Excluded original conditional branch' not in rejected.stdout + rejected.stderr:
     raise SystemExit('host_cpu CPU30 selection did not reject')
 print('PASS host_cpu original CPU30 outer and selected CPU40 union')
+
+ios_lines = (repo / 'src/mvdm-host/softpc.new/base/support/ios.c').read_text(encoding='latin1').splitlines()
+ios_marker = '#error Excluded unsupported monitor IOS carrier'
+indices = [i for i, line in enumerate(ios_lines) if line.strip() == ios_marker]
+if len(indices) != 1:
+    raise SystemExit('IOS original monitor guard missing')
+i = indices[0]
+if ([x.strip() for x in ios_lines[i - 1:i + 4]] !=
+        ['#if defined(NTVDM) && defined(MONITOR)', ios_marker, '#else', '#if defined(NTVDM) && defined(CCPU)', '#line 414']):
+    raise SystemExit('IOS outer condition or CCPU alternative changed')
+end = next(j for j in range(i + 4, len(ios_lines)) if ios_lines[j].strip() == '#endif')
+if ios_lines[end + 1].strip() != '#endif /* NTVDM & MONITOR */' or ios_lines[end + 2].strip() != '#line 444':
+    raise SystemExit('IOS original continuation changed')
+body = ios_lines[i + 4:end]
+snippet = ['#if defined(NTVDM) && defined(MONITOR)', ios_marker, '#else', '#if defined(NTVDM) && defined(CCPU)', '#line 414'] + body + ['#endif', '#endif', '#line 444', 'int after_ios = __LINE__;']
+probe.write_text('\n'.join(snippet) + '\n', encoding='ascii')
+for defines, carrier in ((['/DNTVDM', '/DCCPU'], True), (['/DNTVDM'], False), (['/DCCPU'], False)):
+    result = subprocess.run(base + defines + [str(probe)], capture_output=True, text=True, errors='replace')
+    if result.returncode or ('VOID insb' in result.stdout) != carrier or not re.search(r'int\s+after_ios\s*=\s*444\s*;', result.stdout):
+        raise SystemExit('IOS supported selection or line failed: ' + result.stderr)
+rejected = subprocess.run(base + ['/DNTVDM', '/DMONITOR', str(probe)], capture_output=True, text=True, errors='replace')
+if not rejected.returncode or ios_marker[7:] not in rejected.stdout + rejected.stderr:
+    raise SystemExit('IOS monitor profile did not reject')
+print('PASS IOS original MONITOR outer and preserved CCPU selection')

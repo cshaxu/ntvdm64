@@ -71,7 +71,7 @@
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\ios.c",
       "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
-      "working_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757",
+      "working_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e",
       "signature": [
         [
           "if",
