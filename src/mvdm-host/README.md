@@ -2249,3 +2249,9 @@ MVDM-HOST-DIV-634: restore the original `#ifndef i386` outer selector in
 and preserve the unsupported non-CPU40 rejection. Both branches retain the
 same selected original definitions and original diagnostic continuation.
 Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-dpmiint-header-restoration.json`.
+
+MVDM-HOST-DIV-635: restore original `#ifndef i386` outer selectors for
+DPMI interrupt-hook enable and disable while retaining the existing CPU40
+selection in each i386 alternative. Original bodies and continuation lines
+are preserved; the added inner selectors remain for next-depth review. See
+`../../artifacts/mvdm-audit/s13-bfs-depth1-dpmi-hook-outers.json`.

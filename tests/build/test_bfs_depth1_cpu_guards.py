@@ -548,3 +548,32 @@ excluded = subprocess.run(base + ['/Di386', str(probe)], capture_output=True, te
 if not excluded.returncode or 'Unsupported excluded original configuration' not in excluded.stdout + excluded.stderr:
     raise SystemExit('DPMI unsupported non-CPU40 profile did not fail')
 print('PASS original DPMI outer condition, CPU40 carrier and continuation')
+
+hook_lines = (repo / 'src/mvdm-host/dpmi32/dpmiint.c').read_text(encoding='latin1').splitlines()
+for field, original_body_line, continuation in (('fDpmiHookInts', 1168, 1175), ('fDpmiIntsHaveBeenHooked', 1202, 1209)):
+    marker = '    if (' + field + ') {'
+    instances = [i for i, line in enumerate(hook_lines) if line == marker]
+    if len(instances) != 2:
+        raise SystemExit('DPMI hook carrier count differs: ' + field)
+    first, second = instances
+    if (hook_lines[first - 2].strip() != '#ifndef i386' or
+            hook_lines[first - 1].strip() != '#line ' + str(original_body_line) or
+            [x.strip() for x in hook_lines[second - 3:second]] !=
+            ['#else', '#if defined(CPU_40_STYLE)', '#line ' + str(original_body_line)]):
+        raise SystemExit('DPMI hook selector differs: ' + field)
+    first_body = hook_lines[first:second - 3]
+    second_end = next(i for i in range(second, len(hook_lines)) if hook_lines[i].strip() == '#endif')
+    second_body = hook_lines[second:second_end]
+    if first_body != second_body or hook_lines[second_end + 1].strip() != '#endif // i386' or hook_lines[second_end + 2].strip() != '#line ' + str(continuation):
+        raise SystemExit('DPMI hook body or continuation differs: ' + field)
+    snippet = ['#ifndef i386', '#line ' + str(original_body_line)] + first_body + ['#else', '#if defined(CPU_40_STYLE)', '#line ' + str(original_body_line)] + second_body + ['#endif', '#endif', '#line ' + str(continuation), 'int after_hook = __LINE__;']
+    probe.write_text('\n'.join(snippet) + '\n', encoding='ascii')
+    outputs = []
+    for defines in ([], ['/DCPU_40_STYLE'], ['/Di386', '/DCPU_40_STYLE'], ['/Di386']):
+        result = subprocess.run(base + defines + [str(probe)], capture_output=True, text=True, errors='replace')
+        if result.returncode or not re.search(r'int\s+after_hook\s*=\s*' + str(continuation) + r'\s*;', result.stdout):
+            raise SystemExit('DPMI hook profile failed: ' + field + result.stderr)
+        outputs.append('\n'.join(line for line in result.stdout.splitlines() if line.strip()))
+    if not (outputs[0] == outputs[1] == outputs[2]) or marker.strip() in outputs[3]:
+        raise SystemExit('DPMI hook selection changed: ' + field)
+print('PASS original DPMI hook selectors and four profiles')

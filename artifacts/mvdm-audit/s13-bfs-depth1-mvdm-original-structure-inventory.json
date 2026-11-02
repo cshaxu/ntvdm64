@@ -10,7 +10,7 @@
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.c",
       "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
-      "working_sha256": "21319196302ee1a5bd2750b7fef9c71b07dca7ce589f9da9e5f6fbb887deb7fc",
+      "working_sha256": "72c97f3f54207b29caf41135a6627508b37fab7c2b3c74a08c24bec55225a9e0",
       "signature": [
         [
           "ifndef",
@@ -24,7 +24,7 @@
         1237
       ],
       "current_root_lines": [
-        1417
+        1441
       ],
       "current_nested_lines": [],
       "missing_multiplicity": 3,

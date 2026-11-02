@@ -53,9 +53,19 @@
       "file": "src/mvdm-host/dpmi32/dpmiint.h",
       "original_condition": "#ifndef i386",
       "evidence": "s13-bfs-depth1-dpmiint-header-restoration.json"
+    },
+    {
+      "file": "src/mvdm-host/dpmi32/dpmiint.c",
+      "original_condition": "#ifndef i386 (EnableIntHooks)",
+      "evidence": "s13-bfs-depth1-dpmi-hook-outers.json"
+    },
+    {
+      "file": "src/mvdm-host/dpmi32/dpmiint.c",
+      "original_condition": "#ifndef i386 (DisableIntHooks)",
+      "evidence": "s13-bfs-depth1-dpmi-hook-outers.json"
     }
   ],
-  "derived_total": 51,
-  "derived_current_bfs_total": 18,
+  "derived_total": 53,
+  "derived_current_bfs_total": 20,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

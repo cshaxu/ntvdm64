@@ -1,7 +1,7 @@
 {
   "scope": "first-depth-or-outer #line directives with a unique unchanged code anchor before the next conditional/directive; lexical leads only, require semantic and preprocessor verification; no nested branch audit",
   "stats": {
-    "line_directives_at_depth_0_or_1": 1365
+    "line_directives_at_depth_0_or_1": 1369
   },
   "records": [
     {
@@ -589,7 +589,7 @@
       "observed_anchor_logical_line": 99,
       "candidate_original_target": 108,
       "matches": false,
-      "current_sha256": "21319196302ee1a5bd2750b7fef9c71b07dca7ce589f9da9e5f6fbb887deb7fc",
+      "current_sha256": "72c97f3f54207b29caf41135a6627508b37fab7c2b3c74a08c24bec55225a9e0",
       "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa"
     },
     {
@@ -603,7 +603,7 @@
       "observed_anchor_logical_line": 629,
       "candidate_original_target": 544,
       "matches": false,
-      "current_sha256": "21319196302ee1a5bd2750b7fef9c71b07dca7ce589f9da9e5f6fbb887deb7fc",
+      "current_sha256": "72c97f3f54207b29caf41135a6627508b37fab7c2b3c74a08c24bec55225a9e0",
       "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa"
     },
     {

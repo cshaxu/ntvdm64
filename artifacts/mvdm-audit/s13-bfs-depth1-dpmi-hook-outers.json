@@ -1,0 +1,45 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmiint.c",
+  "before_sha256": "21319196302ee1a5bd2750b7fef9c71b07dca7ce589f9da9e5f6fbb887deb7fc",
+  "candidate_sha256": "72c97f3f54207b29caf41135a6627508b37fab7c2b3c74a08c24bec55225a9e0",
+  "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+  "groups": [
+    {
+      "field": "fDpmiHookInts",
+      "old_group": 1347,
+      "old_end": 1354,
+      "original_group": 1167,
+      "original_end": 1174,
+      "body_hash": "6c5dc33502476661fc66e1e2927934990b00d38eb82b04c931363e53cbd2527f",
+      "delta": 12
+    },
+    {
+      "field": "fDpmiIntsHaveBeenHooked",
+      "old_group": 1381,
+      "old_end": 1388,
+      "original_group": 1201,
+      "original_end": 1208,
+      "body_hash": "a2ee5234fdc0830c18ceeb90338a01178de628faabbc52276b09a268f5ce93c2",
+      "delta": 12
+    }
+  ],
+  "controls": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "selected_preprocessing_equal": true,
+      "before_sha256": "fbfead078a8e4cc4698ba436d0a133237246061215409fa5d1ce0064a1474b42",
+      "after_sha256": "fbfead078a8e4cc4698ba436d0a133237246061215409fa5d1ce0064a1474b42"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "selected_preprocessing_equal": true,
+      "before_sha256": "fbfead078a8e4cc4698ba436d0a133237246061215409fa5d1ce0064a1474b42",
+      "after_sha256": "fbfead078a8e4cc4698ba436d0a133237246061215409fa5d1ce0064a1474b42"
+    }
+  ],
+  "profiles": "x86/x64 forced i386/no-i386 and CPU40/no-CPU40 direct controls pass; actual worker preprocessing unchanged; originals body hashes match",
+  "line_controls": "Original body/continuation 1168/1175 and 1202/1209 verified",
+  "mvdm_signature_inventory": "The signature-only inventory still reports the original ifndef-only groups because the necessary added i386 CPU40 alternatives add an else; they are restored with a documented adaptation, not missing.",
+  "package": "s13-bfs-depth1-dpmi-hook-outers-package-compare.json; 8 exact 2 timestamp-only",
+  "known_fixture_limit": "selected DPMI object cases pass; full fixture retains previously documented non-CCPU DIV-515 negative compile failure"
+}

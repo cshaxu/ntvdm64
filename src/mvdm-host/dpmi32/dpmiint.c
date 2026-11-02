@@ -1344,14 +1344,26 @@ Return Value:
 --*/
 
 {
-#if !defined(i386) || defined(CPU_40_STYLE)
+#ifndef i386
+#line 1168
     if (fDpmiHookInts) {
         VdmInstallHardwareIntHandler(DpmiHwIntHandler);
         VdmInstallSoftwareIntHandler(DpmiSwIntHandler);
         VdmInstallFaultHandler(DpmiFaultHandler);
         fDpmiIntsHaveBeenHooked = TRUE;
     }
-#endif // !i386 || CPU_40_STYLE
+#else
+#if defined(CPU_40_STYLE)
+#line 1168
+    if (fDpmiHookInts) {
+        VdmInstallHardwareIntHandler(DpmiHwIntHandler);
+        VdmInstallSoftwareIntHandler(DpmiSwIntHandler);
+        VdmInstallFaultHandler(DpmiFaultHandler);
+        fDpmiIntsHaveBeenHooked = TRUE;
+    }
+#endif
+#endif // i386
+#line 1175
 }
 
 
@@ -1378,14 +1390,26 @@ Return Value:
 --*/
 
 {
-#if !defined(i386) || defined(CPU_40_STYLE)
+#ifndef i386
+#line 1202
     if (fDpmiIntsHaveBeenHooked) {
         VdmInstallHardwareIntHandler(NULL);
         VdmInstallSoftwareIntHandler(NULL);
         VdmInstallFaultHandler(NULL);
         fDpmiIntsHaveBeenHooked = FALSE;
     }
-#endif // !i386 || CPU_40_STYLE
+#else
+#if defined(CPU_40_STYLE)
+#line 1202
+    if (fDpmiIntsHaveBeenHooked) {
+        VdmInstallHardwareIntHandler(NULL);
+        VdmInstallSoftwareIntHandler(NULL);
+        VdmInstallFaultHandler(NULL);
+        fDpmiIntsHaveBeenHooked = FALSE;
+    }
+#endif
+#endif // i386
+#line 1209
 }
 
 
