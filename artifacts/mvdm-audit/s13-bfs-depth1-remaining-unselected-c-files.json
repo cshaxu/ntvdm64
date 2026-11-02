@@ -1,0 +1,346 @@
+{
+  "scope": "nine unselected whole WOW, host, VDD sample and historical tool C translation units; file disposition only, no inferred macro truth values",
+  "graphs_checked": [
+    "build/.ninja/console-observers-x64/build.ninja",
+    "build/.ninja/msvc-x64-formal-release/build.ninja",
+    "build/.ninja/msvc-x64-release/build.ninja",
+    "build/.ninja/msvc-x86-formal-release/build.ninja",
+    "build/.ninja/msvc-x86-release/build.ninja",
+    "build/.ninja/msvc-x86-suballoc-audit/build.ninja",
+    "build/.ninja/observations-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x64/build.ninja",
+    "build/.ninja/pkg-uuid-x86/build.ninja",
+    "build/.ninja/t463-s2-dialog-end-boundary/build.ninja",
+    "build/.ninja/t463-s2-dialog-procedure/build.ninja",
+    "build/.ninja/t473-s8-control-boundaries/build.ninja",
+    "build/.ninja/pkg-uuid-x86/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x86/wow32/build.ninja",
+    "build/.ninja/pkg-uuid-x64/frontend/build.ninja",
+    "build/.ninja/pkg-uuid-x64/hook/build.ninja",
+    "build/.ninja/pkg-uuid-x64/launcher/build.ninja",
+    "build/.ninja/pkg-uuid-x64/monitor/build.ninja",
+    "build/.ninja/pkg-uuid-x64/service/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker/build.ninja",
+    "build/.ninja/pkg-uuid-x64/worker-reference-x86/build.ninja",
+    "build/.ninja/msvc-x86-release/call-boundaries/build.ninja",
+    "build/.ninja/msvc-x86-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x86-release/worker/build.ninja",
+    "build/.ninja/msvc-x86-release/wow32/build.ninja",
+    "build/.ninja/msvc-x64-release/frontend/build.ninja",
+    "build/.ninja/msvc-x64-release/hook/build.ninja",
+    "build/.ninja/msvc-x64-release/launcher/build.ninja",
+    "build/.ninja/msvc-x64-release/monitor/build.ninja",
+    "build/.ninja/msvc-x64-release/observation/build.ninja",
+    "build/.ninja/msvc-x64-release/service/build.ninja",
+    "build/.ninja/msvc-x64-release/style-fixtures/build.ninja",
+    "build/.ninja/msvc-x64-release/worker/build.ninja",
+    "build/.ninja/msvc-x64-release/worker-reference-x86/build.ninja"
+  ],
+  "same_basename_selected_different_source": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c"
+    }
+  ],
+  "test_references": "wkglobal, wklocal and stf_conf are read by tests/build/test_mirror_rejected_conditions.py as unsupported-profile marker sources; no current direct full-source compile test references found. Legacy source manifests may still list their historic target.",
+  "method": "Current selected full graph job list, 34 Ninja graph/dependency databases and tracked CMake, build scripts and test source references inspected. Paths compared in full, not only by basename.",
+  "limitation": "Reopen the entire conditional queue for any file if a later supported build or independent compile test admits it. No assertion about hypothetical configurations.",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wddeml32.c",
+      "current_sha256": "7c07e86cf9c8abbc6ba97a43102db2fd6ce3be175ae005f4bfbdc6e4277e2859",
+      "original_sha256": "13db1e133cbb9be8037fe9a57b1cf637f744ef23c9277697c096486bde3a8c2c",
+      "reclassified_pending_arms": 13,
+      "arms": [
+        {
+          "line": 30,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        },
+        {
+          "line": 37,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 41,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        },
+        {
+          "line": 45,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 170,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        },
+        {
+          "line": 197,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        },
+        {
+          "line": 226,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        },
+        {
+          "line": 253,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        },
+        {
+          "line": 348,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        },
+        {
+          "line": 436,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        },
+        {
+          "line": 463,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        },
+        {
+          "line": 516,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        },
+        {
+          "line": 562,
+          "kind": "ifdef",
+          "expression": "DEBUG"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkglobal.c",
+      "current_sha256": "3f3bc18c49ec99406c656f8cffc005df039ffa5b15315de0da145c350d07dea1",
+      "original_sha256": "7b7e81edae26d68f6577a4928274ff7244637807805b268e62d4ee3ce3e7a1e9",
+      "reclassified_pending_arms": 7,
+      "arms": [
+        {
+          "line": 48,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 116,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 202,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 222,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 276,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 296,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 332,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wklocal.c",
+      "current_sha256": "25f8a4a609a588a6b9ac17c184c37ec05391ec80e669d427835b04cee6ce34b8",
+      "original_sha256": "88faeb38403ed790ff538383125b7bf1481a125d1f3f9c69f79bc1e6e1ef6ecb",
+      "reclassified_pending_arms": 2,
+      "arms": [
+        {
+          "line": 111,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 147,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "current_sha256": "9c7aa38b23d293155f80c89eaf87332e0c2372edf3dc608b851f80dd526ef76f",
+      "original_sha256": "dd83e6774b349f81b02abb625df4fdcfe943647144bf054422f9f671d1bf05f4",
+      "reclassified_pending_arms": 5,
+      "arms": [
+        {
+          "line": 48,
+          "kind": "if",
+          "expression": "(NUM_PARALLEL_PORTS>2)"
+        },
+        {
+          "line": 63,
+          "kind": "if",
+          "expression": "(NUM_PARALLEL_PORTS>2)"
+        },
+        {
+          "line": 497,
+          "kind": "ifdef",
+          "expression": "NPX"
+        },
+        {
+          "line": 499,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 503,
+          "kind": "ifndef",
+          "expression": "PROD"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
+      "current_sha256": "336d13bbf226733aae42135e0eae16a95f10d35c961223dc1fb4ec2ca53b66a8",
+      "original_sha256": "cbf9ee8a199d48ee74171b2e23d55bb1e5d019710fdea2a917762739d6a49044",
+      "reclassified_pending_arms": 3,
+      "arms": [
+        {
+          "line": 31,
+          "kind": "ifdef",
+          "expression": "CCPU"
+        },
+        {
+          "line": 84,
+          "kind": "ifdef",
+          "expression": "CCPU"
+        },
+        {
+          "line": 164,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/ev_glue.c",
+      "current_sha256": "4780d56d29e6a07dbc623c64bef6dde12054415d92564037a983f51e670959cc",
+      "original_sha256": "6bd49962ea383cc53b11db3091c3c97874adf9ea0c3a76c0d8165ef6ece21032",
+      "reclassified_pending_arms": 3,
+      "arms": [
+        {
+          "line": 20,
+          "kind": "ifdef",
+          "expression": "CCPU"
+        },
+        {
+          "line": 48,
+          "kind": "ifdef",
+          "expression": "CCPU"
+        },
+        {
+          "line": 54,
+          "kind": "ifdef",
+          "expression": "C_VID"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/adlibvdd/vdd.c",
+      "current_sha256": "1b27306b591b2ea4265e0a4251a8ac2f72c9dbbb8363ed4fc861995362098c32",
+      "original_sha256": "13520d81890f84d34c49aea49466e17bb652ef3a841a2a7254e4c1b332f1e70c",
+      "reclassified_pending_arms": 4,
+      "arms": [
+        {
+          "line": 34,
+          "kind": "if",
+          "expression": "DBG"
+        },
+        {
+          "line": 67,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 320,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 331,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/vsbd/vdd.c",
+      "current_sha256": "d4f9b43c5bf1e1b212cace1529730b8b1672dff8e63a2379be4654648a044cba",
+      "original_sha256": "fcf0e4817f2f69d7264754ef8a2ba498380e0b6b1199c93cf0f16ba036580a20",
+      "reclassified_pending_arms": 3,
+      "arms": [
+        {
+          "line": 19,
+          "kind": "if",
+          "expression": "DBG"
+        },
+        {
+          "line": 57,
+          "kind": "else",
+          "expression": ""
+        },
+        {
+          "line": 925,
+          "kind": "if",
+          "expression": "DBG"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/forcedos.c",
+      "current_sha256": "17b21584c4eeb3f5758af12161261c04e52b7c39aa8286f41cc6ce8d166168b0",
+      "original_sha256": "27aaa61a441cd754fb8373c3df0ebb3ff49a098926c1aec0151ac9deb5927f44",
+      "reclassified_pending_arms": 4,
+      "arms": [
+        {
+          "line": 57,
+          "kind": "if",
+          "expression": "DBG"
+        },
+        {
+          "line": 178,
+          "kind": "if",
+          "expression": "DBG"
+        },
+        {
+          "line": 233,
+          "kind": "if",
+          "expression": "DBG"
+        },
+        {
+          "line": 257,
+          "kind": "if",
+          "expression": "DBG"
+        }
+      ]
+    }
+  ]
+}

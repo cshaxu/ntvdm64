@@ -425,33 +425,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/ev_glue.c",
-      "start": 20,
-      "kind": "ifdef",
-      "expression": "CCPU",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/ev_glue.c",
-      "start": 48,
-      "kind": "ifdef",
-      "expression": "CCPU",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/ev_glue.c",
-      "start": 54,
-      "kind": "ifdef",
-      "expression": "C_VID",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/cvidc/access_c.h",
       "start": 1,
       "kind": "ifndef",
@@ -3179,33 +3152,6 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
-      "start": 31,
-      "kind": "ifdef",
-      "expression": "CCPU",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
-      "start": 84,
-      "kind": "ifdef",
-      "expression": "CCPU",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
-      "start": 164,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
       "start": 53,
       "kind": "ifndef",
@@ -3287,91 +3233,10 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
-      "start": 48,
-      "kind": "if",
-      "expression": "(NUM_PARALLEL_PORTS>2)",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
-      "start": 63,
-      "kind": "if",
-      "expression": "(NUM_PARALLEL_PORTS>2)",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
-      "start": 497,
-      "kind": "ifdef",
-      "expression": "NPX",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
-      "start": 499,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
-      "start": 503,
-      "kind": "ifndef",
-      "expression": "PROD",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
       "start": 1,
       "kind": "ifndef",
       "expression": "MONITOR",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdd/samples/adlibvdd/vdd.c",
-      "start": 34,
-      "kind": "if",
-      "expression": "DBG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdd/samples/adlibvdd/vdd.c",
-      "start": 67,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdd/samples/adlibvdd/vdd.c",
-      "start": 320,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdd/samples/adlibvdd/vdd.c",
-      "start": 331,
-      "kind": "else",
-      "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -3422,33 +3287,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/vdd/samples/vsbd/vdd.c",
-      "start": 19,
-      "kind": "if",
-      "expression": "DBG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdd/samples/vsbd/vdd.c",
-      "start": 57,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdd/samples/vsbd/vdd.c",
-      "start": 925,
-      "kind": "if",
-      "expression": "DBG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/vdmexts/help.c",
       "start": 141,
       "kind": "ifdef",
@@ -3476,42 +3314,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/vdmutils/forcedos/forcedos.c",
-      "start": 57,
-      "kind": "if",
-      "expression": "DBG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdmutils/forcedos/forcedos.c",
-      "start": 178,
-      "kind": "if",
-      "expression": "DBG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdmutils/forcedos/forcedos.c",
-      "start": 233,
-      "kind": "if",
-      "expression": "DBG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdmutils/forcedos/forcedos.c",
-      "start": 257,
-      "kind": "if",
-      "expression": "DBG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/vdmutils/win/win.c",
       "start": 27,
       "kind": "else",
@@ -3530,208 +3332,10 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/wow32/wddeml32.c",
-      "start": 30,
-      "kind": "ifdef",
-      "expression": "DEBUG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wddeml32.c",
-      "start": 37,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wddeml32.c",
-      "start": 41,
-      "kind": "ifdef",
-      "expression": "DEBUG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wddeml32.c",
-      "start": 45,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wddeml32.c",
-      "start": 170,
-      "kind": "ifdef",
-      "expression": "DEBUG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wddeml32.c",
-      "start": 197,
-      "kind": "ifdef",
-      "expression": "DEBUG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wddeml32.c",
-      "start": 226,
-      "kind": "ifdef",
-      "expression": "DEBUG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wddeml32.c",
-      "start": 253,
-      "kind": "ifdef",
-      "expression": "DEBUG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wddeml32.c",
-      "start": 348,
-      "kind": "ifdef",
-      "expression": "DEBUG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wddeml32.c",
-      "start": 436,
-      "kind": "ifdef",
-      "expression": "DEBUG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wddeml32.c",
-      "start": 463,
-      "kind": "ifdef",
-      "expression": "DEBUG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wddeml32.c",
-      "start": 516,
-      "kind": "ifdef",
-      "expression": "DEBUG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wddeml32.c",
-      "start": 562,
-      "kind": "ifdef",
-      "expression": "DEBUG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/wow32/witbl.h",
       "start": 21,
       "kind": "ifdef",
       "expression": "DEBUG_OR_WOWPROFILE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 48,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 116,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 202,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 222,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 276,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 296,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wkglobal.c",
-      "start": 332,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wklocal.c",
-      "start": 111,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/wklocal.c",
-      "start": 147,
-      "kind": "else",
-      "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -5221,7 +4825,7 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 505
+      "count": 461
     },
     {
       "reason": "file-not-witnessed-in-product",
