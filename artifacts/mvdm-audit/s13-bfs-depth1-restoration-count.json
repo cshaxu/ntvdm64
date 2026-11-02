@@ -158,9 +158,44 @@
       "file": "src/mvdm-host/softpc.new/base/video/video.c",
       "original_condition": "#if (NTVDM && MONITOR) || GISP_SVGA / #else (original line 2042)",
       "evidence": "s13-bfs-depth1-video-original-outers.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "original_condition": "#ifndef NTVDM (original line 2641)",
+      "evidence": "s13-bfs-depth1-mouse-original-outers.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "original_condition": "#ifndef NTVDM (original line 2950)",
+      "evidence": "s13-bfs-depth1-mouse-original-outers.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "original_condition": "#ifndef NTVDM (original line 2996)",
+      "evidence": "s13-bfs-depth1-mouse-original-outers.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "original_condition": "#ifndef NTVDM (original line 3310)",
+      "evidence": "s13-bfs-depth1-mouse-original-outers.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "original_condition": "#ifndef NTVDM (original line 5227)",
+      "evidence": "s13-bfs-depth1-mouse-original-outers.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "original_condition": "#ifndef NTVDM (original line 5250)",
+      "evidence": "s13-bfs-depth1-mouse-original-outers.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "original_condition": "#ifndef NTVDM (original line 5351)",
+      "evidence": "s13-bfs-depth1-mouse-original-outers.json"
     }
   ],
-  "derived_total": 72,
-  "derived_current_bfs_total": 39,
+  "derived_total": 79,
+  "derived_current_bfs_total": 46,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

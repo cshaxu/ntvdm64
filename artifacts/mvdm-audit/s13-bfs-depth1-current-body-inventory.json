@@ -30211,7 +30211,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 6,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30224,7 +30224,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30237,7 +30237,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 20,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30250,7 +30250,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30263,7 +30263,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30276,7 +30276,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30289,7 +30289,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30302,7 +30302,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30315,7 +30315,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30328,7 +30328,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 9,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30341,7 +30341,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30354,7 +30354,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 22,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30367,7 +30367,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 9,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30380,7 +30380,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30393,7 +30393,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 22,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30406,7 +30406,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30419,7 +30419,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30432,7 +30432,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30445,7 +30445,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30458,7 +30458,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30471,7 +30471,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30484,7 +30484,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30497,7 +30497,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30510,7 +30510,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 33,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30523,7 +30523,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30536,7 +30536,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30549,7 +30549,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30562,7 +30562,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30575,7 +30575,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30588,7 +30588,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30601,7 +30601,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30614,7 +30614,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30627,7 +30627,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30640,7 +30640,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 203,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30653,7 +30653,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30666,7 +30666,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30679,7 +30679,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30692,7 +30692,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30705,7 +30705,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30718,7 +30718,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30731,7 +30731,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30744,7 +30744,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30757,7 +30757,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30770,7 +30770,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30783,7 +30783,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30796,7 +30796,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30809,7 +30809,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 279,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30822,7 +30822,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 16,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30835,7 +30835,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 27,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30848,7 +30848,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30861,7 +30861,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30874,7 +30874,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30887,7 +30887,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30900,7 +30900,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30913,7 +30913,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 78,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30926,7 +30926,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30939,7 +30939,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -30952,280 +30952,319 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 21,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
       "start": 2265,
-      "cut": 2278,
-      "group_end": 2278,
-      "kind": "if",
-      "expression": "!defined(NTVDM) || !defined(MONITOR)",
-      "status": "retained-observed",
+      "cut": 2267,
+      "group_end": 2283,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "status": "newly-excluded",
       "pending_reason": null,
-      "guard_only": false,
-      "body_lines": 12,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2292,
-      "cut": 2294,
-      "group_end": 2294,
+      "start": 2267,
+      "cut": 2283,
+      "group_end": 2283,
+      "kind": "else",
+      "expression": "",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 15,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "start": 2298,
+      "cut": 2300,
+      "group_end": 2300,
       "kind": "ifndef",
       "expression": "NTVDM",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2313,
-      "cut": 2315,
-      "group_end": 2315,
+      "start": 2319,
+      "cut": 2321,
+      "group_end": 2321,
       "kind": "ifdef",
       "expression": "MOUSE_16_BIT",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2330,
-      "cut": 2332,
-      "group_end": 2332,
+      "start": 2336,
+      "cut": 2338,
+      "group_end": 2338,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2428,
-      "cut": 2430,
-      "group_end": 2430,
+      "start": 2434,
+      "cut": 2436,
+      "group_end": 2436,
       "kind": "if",
       "expression": "defined(MONITOR) && defined(NTVDM)",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2437,
-      "cut": 2442,
-      "group_end": 2442,
+      "start": 2443,
+      "cut": 2448,
+      "group_end": 2448,
       "kind": "if",
       "expression": "!defined(NTVDM) || (defined(NTVDM) && defined(V7VGA))",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2511,
-      "cut": 2513,
-      "group_end": 2513,
+      "start": 2517,
+      "cut": 2519,
+      "group_end": 2519,
       "kind": "if",
       "expression": "defined(MONITOR) && defined(NTVDM)",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2572,
-      "cut": 2589,
-      "group_end": 2589,
-      "kind": "if",
-      "expression": "!defined(NTVDM) || !defined(MONITOR)",
+      "start": 2578,
+      "cut": 2580,
+      "group_end": 2600,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "start": 2580,
+      "cut": 2600,
+      "group_end": 2600,
+      "kind": "else",
+      "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
-      "body_lines": 16,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "body_lines": 19,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2591,
-      "cut": 2593,
-      "group_end": 2593,
+      "start": 2603,
+      "cut": 2605,
+      "group_end": 2605,
       "kind": "if",
       "expression": "defined(NTVDM) && defined(X86GFX)",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2617,
-      "cut": 2625,
-      "group_end": 2625,
-      "kind": "if",
-      "expression": "!defined(NTVDM) || !defined(MONITOR)",
+      "start": 2629,
+      "cut": 2631,
+      "group_end": 2642,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "start": 2631,
+      "cut": 2642,
+      "group_end": 2642,
+      "kind": "else",
+      "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
-      "body_lines": 7,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "body_lines": 10,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2626,
-      "cut": 2628,
-      "group_end": 2628,
+      "start": 2644,
+      "cut": 2646,
+      "group_end": 2646,
       "kind": "if",
       "expression": "defined(NTVDM) && defined(X86GFX)",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2671,
-      "cut": 2705,
-      "group_end": 2705,
+      "start": 2689,
+      "cut": 2723,
+      "group_end": 2723,
       "kind": "if",
       "expression": "defined(NTVDM)",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 33,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2813,
-      "cut": 2822,
-      "group_end": 2822,
+      "start": 2831,
+      "cut": 2840,
+      "group_end": 2840,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 8,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2862,
-      "cut": 2871,
-      "group_end": 2871,
+      "start": 2880,
+      "cut": 2889,
+      "group_end": 2889,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 8,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 2938,
-      "cut": 2997,
-      "group_end": 2997,
-      "kind": "if",
-      "expression": "!defined(NTVDM) || !defined(MONITOR)",
+      "start": 2956,
+      "cut": 2958,
+      "group_end": 3020,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "start": 2958,
+      "cut": 3020,
+      "group_end": 3020,
+      "kind": "else",
+      "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
-      "body_lines": 58,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "body_lines": 61,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3015,
-      "cut": 3017,
-      "group_end": 3017,
+      "start": 3039,
+      "cut": 3041,
+      "group_end": 3041,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3027,
-      "cut": 3042,
-      "group_end": 3042,
+      "start": 3051,
+      "cut": 3066,
+      "group_end": 3066,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 14,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3260,
-      "cut": 3262,
-      "group_end": 3262,
+      "start": 3284,
+      "cut": 3286,
+      "group_end": 3286,
       "kind": "ifdef",
       "expression": "MOUSE_16_BIT",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3267,
-      "cut": 3269,
-      "group_end": 3269,
+      "start": 3291,
+      "cut": 3293,
+      "group_end": 3293,
       "kind": "if",
       "expression": "defined (NTVDM) && defined(MONITOR)",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3308,
-      "cut": 3310,
-      "group_end": 3310,
+      "start": 3332,
+      "cut": 3334,
+      "group_end": 3334,
       "kind": "if",
       "expression": "defined(NTVDM) && defined(MONITOR)",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3316,
-      "cut": 3318,
-      "group_end": 3318,
-      "kind": "if",
-      "expression": "defined(NTVDM) && defined(MONITOR)",
-      "status": "already-excluded",
-      "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -31238,410 +31277,462 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3397,
-      "cut": 3399,
-      "group_end": 3399,
-      "kind": "ifdef",
-      "expression": "EGG",
-      "status": "retained-observed",
-      "pending_reason": null,
-      "guard_only": false,
-      "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3400,
-      "cut": 3402,
-      "group_end": 3402,
+      "start": 3364,
+      "cut": 3366,
+      "group_end": 3366,
       "kind": "if",
       "expression": "defined(NTVDM) && defined(MONITOR)",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3408,
-      "cut": 3410,
-      "group_end": 3410,
+      "start": 3421,
+      "cut": 3423,
+      "group_end": 3423,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "start": 3424,
+      "cut": 3426,
+      "group_end": 3426,
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(MONITOR)",
+      "status": "already-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "start": 3432,
+      "cut": 3434,
+      "group_end": 3434,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3619,
-      "cut": 3621,
-      "group_end": 3621,
+      "start": 3643,
+      "cut": 3645,
+      "group_end": 3645,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3651,
-      "cut": 3653,
-      "group_end": 3655,
+      "start": 3675,
+      "cut": 3677,
+      "group_end": 3679,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3653,
-      "cut": 3655,
-      "group_end": 3655,
+      "start": 3677,
+      "cut": 3679,
+      "group_end": 3679,
       "kind": "else",
       "expression": "",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3664,
-      "cut": 3669,
-      "group_end": 3671,
+      "start": 3688,
+      "cut": 3693,
+      "group_end": 3695,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3669,
-      "cut": 3671,
-      "group_end": 3671,
+      "start": 3693,
+      "cut": 3695,
+      "group_end": 3695,
       "kind": "else",
       "expression": "",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3687,
-      "cut": 3690,
-      "group_end": 3692,
+      "start": 3711,
+      "cut": 3714,
+      "group_end": 3716,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3690,
-      "cut": 3692,
-      "group_end": 3692,
+      "start": 3714,
+      "cut": 3716,
+      "group_end": 3716,
       "kind": "else",
       "expression": "",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3738,
-      "cut": 3743,
-      "group_end": 3745,
+      "start": 3762,
+      "cut": 3767,
+      "group_end": 3769,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3743,
-      "cut": 3745,
-      "group_end": 3745,
+      "start": 3767,
+      "cut": 3769,
+      "group_end": 3769,
       "kind": "else",
       "expression": "",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3761,
-      "cut": 3763,
-      "group_end": 3763,
+      "start": 3785,
+      "cut": 3787,
+      "group_end": 3787,
       "kind": "ifndef",
       "expression": "NTVDM",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3845,
-      "cut": 3847,
-      "group_end": 3847,
+      "start": 3869,
+      "cut": 3871,
+      "group_end": 3871,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3851,
-      "cut": 3854,
-      "group_end": 3854,
+      "start": 3875,
+      "cut": 3878,
+      "group_end": 3878,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3858,
-      "cut": 3860,
-      "group_end": 3860,
+      "start": 3882,
+      "cut": 3884,
+      "group_end": 3884,
       "kind": "ifndef",
       "expression": "NTVDM",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 3951,
-      "cut": 3953,
-      "group_end": 3953,
+      "start": 3975,
+      "cut": 3977,
+      "group_end": 3977,
       "kind": "ifdef",
       "expression": "MOUSE_16_BIT",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 4624,
-      "cut": 4626,
-      "group_end": 4631,
+      "start": 4648,
+      "cut": 4650,
+      "group_end": 4655,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 4626,
-      "cut": 4631,
-      "group_end": 4631,
+      "start": 4650,
+      "cut": 4655,
+      "group_end": 4655,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 4721,
-      "cut": 4723,
-      "group_end": 4723,
+      "start": 4745,
+      "cut": 4747,
+      "group_end": 4747,
       "kind": "ifdef",
       "expression": "HERC",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 4737,
-      "cut": 4741,
-      "group_end": 4741,
+      "start": 4761,
+      "cut": 4765,
+      "group_end": 4765,
       "kind": "ifdef",
       "expression": "V7VGA",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 4766,
-      "cut": 4784,
-      "group_end": 4784,
-      "kind": "if",
-      "expression": "!defined(NTVDM) || !defined(MONITOR)",
+      "start": 4790,
+      "cut": 4792,
+      "group_end": 4813,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "start": 4792,
+      "cut": 4813,
+      "group_end": 4813,
+      "kind": "else",
+      "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
-      "body_lines": 17,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "body_lines": 20,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 4793,
-      "cut": 4878,
-      "group_end": 4878,
-      "kind": "if",
-      "expression": "!defined(NTVDM) || !defined(MONITOR)",
+      "start": 4823,
+      "cut": 4825,
+      "group_end": 4913,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "start": 4825,
+      "cut": 4913,
+      "group_end": 4913,
+      "kind": "else",
+      "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
-      "body_lines": 84,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "body_lines": 87,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 4888,
-      "cut": 4961,
-      "group_end": 4961,
-      "kind": "if",
-      "expression": "!defined(NTVDM) || !defined(MONITOR)",
+      "start": 4924,
+      "cut": 4926,
+      "group_end": 5002,
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "start": 4926,
+      "cut": 5002,
+      "group_end": 5002,
+      "kind": "else",
+      "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
-      "body_lines": 72,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "body_lines": 75,
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 4982,
-      "cut": 4995,
-      "group_end": 4995,
+      "start": 5024,
+      "cut": 5037,
+      "group_end": 5037,
       "kind": "ifdef",
       "expression": "V7VGA",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 12,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 5140,
-      "cut": 5410,
-      "group_end": 5410,
+      "start": 5182,
+      "cut": 5452,
+      "group_end": 5452,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 269,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 5413,
-      "cut": 5549,
-      "group_end": 5549,
+      "start": 5455,
+      "cut": 5591,
+      "group_end": 5591,
       "kind": "ifdef",
       "expression": "VGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 135,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 5694,
-      "cut": 5696,
-      "group_end": 5696,
+      "start": 5736,
+      "cut": 5738,
+      "group_end": 5738,
       "kind": "ifdef",
       "expression": "HERC",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 5803,
-      "cut": 5805,
-      "group_end": 5805,
+      "start": 5845,
+      "cut": 5847,
+      "group_end": 5847,
       "kind": "ifdef",
       "expression": "HERC",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 5897,
-      "cut": 5899,
-      "group_end": 5910,
+      "start": 5939,
+      "cut": 5941,
+      "group_end": 5952,
       "kind": "ifdef",
       "expression": "CPU_30_STYLE",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 5899,
-      "cut": 5910,
-      "group_end": 5910,
+      "start": 5941,
+      "cut": 5952,
+      "group_end": 5952,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 10,
-      "source_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7"
+      "source_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
@@ -65811,7 +65902,7 @@
   "errors": [],
   "status_counts": {
     "unselected-file": 760,
-    "newly-excluded": 656,
+    "newly-excluded": 663,
     "already-excluded": 1699,
     "pending": 64,
     "retained-observed": 1874,

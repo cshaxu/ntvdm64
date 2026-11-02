@@ -34,7 +34,7 @@
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
       "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
-      "working_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7",
+      "working_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f",
       "signature": [
         [
           "ifndef",
@@ -54,15 +54,15 @@
         5351
       ],
       "current_root_lines": [
-        2292,
-        3761,
-        3858
+        2298,
+        3785,
+        3882
       ],
       "current_nested_lines": [
-        2944,
-        4780,
-        4846,
-        4906
+        2966,
+        4808,
+        4880,
+        4946
       ],
       "missing_multiplicity": 7,
       "classification": "nested-signature-needs-owner-check"

@@ -2262,7 +2262,11 @@ outb(ICA0_PORT_0, END_INTERRUPT);
 /*@ACW*/
 
 /* DIVERGENCE(MVDM-HOST-DIV-318): non-MONITOR cursor_display is route-gated. */
-#if !defined(NTVDM) || !defined(MONITOR)
+#ifndef NTVDM
+#error Excluded unsupported non-NTVDM mouse profile
+#else
+#if !defined(MONITOR)
+#line 2263
 	/*
 	 *	If the cursor is currently displayed, move it to the new
 	 *	position
@@ -2275,7 +2279,9 @@ outb(ICA0_PORT_0, END_INTERRUPT);
 			{
 			cursor_display();
 			}
-#endif /*NTVDM*/
+#endif
+#endif
+#line 2276
 }
 
 
@@ -2569,7 +2575,11 @@ LOCAL void mouse_show_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 
 /* DIVERGENCE(MVDM-HOST-DIV-318): CCPU ROM BOP BD does not maintain a
    guest show count; retain the original C owner without MONITOR. */
-#if !defined(NTVDM) || !defined(MONITOR)
+#ifndef NTVDM
+#error Excluded unsupported non-NTVDM mouse profile
+#else
+#if !defined(MONITOR)
+#line 2570
 	/*
 	 *	Disable conditional off area
 	 */
@@ -2586,7 +2596,9 @@ LOCAL void mouse_show_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 			{
 			cursor_display();
 			}
-#endif /* NTVDM */
+#endif
+#endif
+#line 2587
 
 #if defined(NTVDM) && defined(X86GFX)
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
@@ -2614,7 +2626,11 @@ LOCAL void mouse_hide_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 	
 	note_trace0(MOUSE_VERBOSE, "mouse_io:hide_cursor()");
 /* DIVERGENCE(MVDM-HOST-DIV-318): pair the non-MONITOR C-owned show count. */
-#if !defined(NTVDM) || !defined(MONITOR)
+#ifndef NTVDM
+#error Excluded unsupported non-NTVDM mouse profile
+#else
+#if !defined(MONITOR)
+#line 2615
 	if (cursor_flag-- == MOUSE_CURSOR_DISPLAYED)
 #ifdef	MOUSE_16_BIT
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
@@ -2623,6 +2639,8 @@ LOCAL void mouse_hide_cursor IFN4(word *,junk1,word *,junk2,word *,junk3,word *,
 		cursor_undisplay();
 		}
 #endif
+#endif
+#line 2623
 #if defined(NTVDM) && defined(X86GFX)
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif
@@ -2935,7 +2953,11 @@ LOCAL void mouse_set_graphics IFN4(word *,junk1,MOUSE_SCALAR *,hot_spot_x_ptr,MO
 	UNUSED(junk1);
 
 /* DIVERGENCE(MVDM-HOST-DIV-318): retain shape even before Window selection. */
-#if !defined(NTVDM) || !defined(MONITOR)
+#ifndef NTVDM
+#error Excluded unsupported non-NTVDM mouse profile
+#else
+#if !defined(MONITOR)
+#line 2936
 	
 #ifdef MOUSE_16_BIT
 #error DIVERGENCE MVDM-HOST-DIV-532: MOUSE_16_BIT branch is not selected; see mirror register.
@@ -2994,7 +3016,9 @@ LOCAL void mouse_set_graphics IFN4(word *,junk1,MOUSE_SCALAR *,hot_spot_x_ptr,MO
 
 	}
 #endif /* MOUSE_16_BIT */
-#endif /* NTVDM */
+#endif
+#endif
+#line 2995
 	/*
 	 *	Redisplay cursor if necessary
 	 */
@@ -4763,7 +4787,11 @@ LOCAL MOUSE_BIT_ADDRESS ega_point_as_graphics_cell_address IFN1(MOUSE_POINT *,po
 LOCAL void cursor_update IFN0()
 {
 /* DIVERGENCE(MVDM-HOST-DIV-318): restore original geometry only for Window. */
-#if !defined(NTVDM) || !defined(MONITOR)
+#ifndef NTVDM
+#error Excluded unsupported non-NTVDM mouse profile
+#else
+#if !defined(MONITOR)
+#line 4764
 #ifdef NTVDM
     if (!mvdm_softpc_mouse_route_active()) return;
 #endif
@@ -4782,6 +4810,8 @@ LOCAL void cursor_update IFN0()
 #endif
 
 #endif
+#endif
+#line 4782
 }
 
 
@@ -4790,7 +4820,11 @@ LOCAL void cursor_update IFN0()
 LOCAL void cursor_display IFN0()
 {
 /* DIVERGENCE(MVDM-HOST-DIV-318): original software painter for Window only. */
-#if !defined(NTVDM) || !defined(MONITOR)
+#ifndef NTVDM
+#error Excluded unsupported non-NTVDM mouse profile
+#else
+#if !defined(MONITOR)
+#line 4791
 	UTINY v_mode;
 #ifdef NTVDM
     if (!mvdm_softpc_mouse_route_active()) return;
@@ -4875,7 +4909,9 @@ LOCAL void cursor_display IFN0()
 	 *	don't automatically update the screen regularly
 	 */
 	host_flush_screen();
-#endif /* !NTVDM */
+#endif
+#endif
+#line 4876
 }
 
 
@@ -4885,7 +4921,11 @@ LOCAL void cursor_undisplay IFN0()
 {
 /* DIVERGENCE(MVDM-HOST-DIV-318): erase saved guest pixels even after route
    retirement; Console has no save area unless Window drew one. */
-#if !defined(NTVDM) || !defined(MONITOR)
+#ifndef NTVDM
+#error Excluded unsupported non-NTVDM mouse profile
+#else
+#if !defined(MONITOR)
+#line 4886
 	UTINY v_mode;
 
 	/* Check if Enhanced Mode wants to "see" cursor */
@@ -4958,7 +4998,9 @@ LOCAL void cursor_undisplay IFN0()
 			}
 		}
 	}
-#endif /* !NTVDM */
+#endif
+#endif
+#line 4959
 }
 
 

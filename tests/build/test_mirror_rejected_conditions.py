@@ -406,3 +406,15 @@ rejected = subprocess.run(base[:-1] + ['/DNTVDM', '/UMONITOR', '/UGISP_SVGA'] + 
 if allowed.returncode or not rejected.returncode or 'unsupported non-monitor video profile' not in rejected.stdout + rejected.stderr:
     raise SystemExit('original video selector control failed')
 print('PASS original video selectors and non-monitor rejection')
+
+# Original mouse NTVDM outer guards must reject unsupported host profiles.
+mouse = (repo / 'src/mvdm-host/softpc.new/base/keymouse/mouse_io.c').read_text(encoding='latin1')
+pattern = r'(?m)^#ifndef NTVDM\s*\n#error Excluded unsupported non-NTVDM mouse profile\s*$'
+if len(re.findall(pattern, mouse)) != 7:
+    raise SystemExit('seven original mouse NTVDM outer guards not restored')
+probe.write_text('#ifndef NTVDM\n#error Excluded unsupported non-NTVDM mouse profile\n#endif\n', encoding='ascii')
+allowed = subprocess.run(base[:-1] + ['/DNTVDM'] + base[-1:], capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base[:-1] + ['/UNTVDM'] + base[-1:], capture_output=True, text=True, errors='replace')
+if allowed.returncode or not rejected.returncode or 'Excluded unsupported non-NTVDM mouse profile' not in rejected.stdout + rejected.stderr:
+    raise SystemExit('mouse NTVDM original guard failed')
+print('PASS seven original mouse NTVDM outer guards')

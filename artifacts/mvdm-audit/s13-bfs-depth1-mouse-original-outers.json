@@ -1,0 +1,66 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "before_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7",
+  "candidate_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f",
+  "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+  "entries": [
+    [
+      2265,
+      2278,
+      2641
+    ],
+    [
+      2572,
+      2589,
+      2950
+    ],
+    [
+      2617,
+      2625,
+      2996
+    ],
+    [
+      2938,
+      2997,
+      3310
+    ],
+    [
+      4766,
+      4784,
+      5227
+    ],
+    [
+      4793,
+      4878,
+      5250
+    ],
+    [
+      4888,
+      4961,
+      5351
+    ]
+  ],
+  "checks": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "selected_preprocessed_sha256": "98d6868b9e9b051b368d2d9bd7c6dc28f0134bbafda3ab4fcac4134504ce4d26"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "selected_preprocessed_sha256": "98d6868b9e9b051b368d2d9bd7c6dc28f0134bbafda3ab4fcac4134504ce4d26"
+    }
+  ],
+  "selected_line_controls": [
+    2267,
+    2573,
+    2615,
+    2944,
+    4765,
+    4791,
+    4886
+  ],
+  "build": "both x86 worker and x64-reference worker passed",
+  "tests": "rejected-branches suite and isolated original text cursor drawing test passed",
+  "package": "six byte-identical and four PE timestamp-only, full-tested release retained",
+  "limitation": "no physical mouse or full runtime regression in this batch; no guest was modified; original-wide reconciliation and standalone page-domain linking remain open"
+}

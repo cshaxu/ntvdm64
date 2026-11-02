@@ -929,54 +929,54 @@
   {
     "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
     "macro": "REAL_VGA",
-    "line": 5502,
-    "body_end": 5505,
+    "line": 5544,
+    "body_end": 5547,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
     "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
     "local_sha256": "245aadb279631990847ef0e7cf8757ecd94d971e9312f8a42df34933d8880b83",
     "removed_body_sha256": "dfb7ed2e1072dc05e04a1758698aa49bd07b644aab78796bc367729698e0084b",
     "removed_body_lines": 3,
     "after_sha256": "85ae12f477a2bf4c30dcbd6dab34ce0a44094ba6b65c96174de476815842f2be",
-    "final_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57"
+    "final_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
     "macro": "REAL_VGA",
-    "line": 5416,
-    "body_end": 5419,
+    "line": 5458,
+    "body_end": 5461,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
     "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
     "local_sha256": "245aadb279631990847ef0e7cf8757ecd94d971e9312f8a42df34933d8880b83",
     "removed_body_sha256": "dfb7ed2e1072dc05e04a1758698aa49bd07b644aab78796bc367729698e0084b",
     "removed_body_lines": 3,
     "after_sha256": "85ae12f477a2bf4c30dcbd6dab34ce0a44094ba6b65c96174de476815842f2be",
-    "final_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57"
+    "final_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
     "macro": "REAL_VGA",
-    "line": 5334,
-    "body_end": 5337,
+    "line": 5376,
+    "body_end": 5379,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
     "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
     "local_sha256": "245aadb279631990847ef0e7cf8757ecd94d971e9312f8a42df34933d8880b83",
     "removed_body_sha256": "dfb7ed2e1072dc05e04a1758698aa49bd07b644aab78796bc367729698e0084b",
     "removed_body_lines": 3,
     "after_sha256": "85ae12f477a2bf4c30dcbd6dab34ce0a44094ba6b65c96174de476815842f2be",
-    "final_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57"
+    "final_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
     "macro": "REAL_VGA",
-    "line": 5144,
-    "body_end": 5147,
+    "line": 5186,
+    "body_end": 5189,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse_io.c",
     "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
     "local_sha256": "245aadb279631990847ef0e7cf8757ecd94d971e9312f8a42df34933d8880b83",
     "removed_body_sha256": "dfb7ed2e1072dc05e04a1758698aa49bd07b644aab78796bc367729698e0084b",
     "removed_body_lines": 3,
     "after_sha256": "85ae12f477a2bf4c30dcbd6dab34ce0a44094ba6b65c96174de476815842f2be",
-    "final_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57"
+    "final_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
@@ -1786,7 +1786,7 @@
     "removed_body_sha256": "f3b3f5873fc39b4da94a1ee72ddc1a15113635507036672f420e507fe5c21663",
     "removed_body_lines": 6,
     "after_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
-    "final_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57"
+    "final_sha256": "9410908a7ce7ecb8942e8a7babf6c2f54f0483517508059510b6f8ec1be5a95f"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
