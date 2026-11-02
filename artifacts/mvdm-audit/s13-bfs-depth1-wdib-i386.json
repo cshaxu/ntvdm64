@@ -1,0 +1,34 @@
+{
+  "path": "src/mvdm-host/wow32/wdib.c",
+  "original_sha256": "d0bd4f9cb7bba0dc5e977a8c096337df0830e3804ef6aeb8759cf979176dd910",
+  "before_sha256": "1a5c054f8765757f0924c6e25fbd146f19d08c5bf08d171406efe776f4cbc3b9",
+  "candidate_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc",
+  "graph": "build/.ninja/msvc-x86-release/wow32",
+  "records": [
+    {
+      "current_group": 298,
+      "current_cut": 319,
+      "current_end": 321,
+      "original_group": 298,
+      "original_cut": 319,
+      "original_end": 321,
+      "removed_body_sha256": "3fb89cfc152787eb270f7675dbff2f41128844b28e9d6b2cafa2a3e2cf200f56"
+    },
+    {
+      "current_group": 656,
+      "current_cut": 664,
+      "current_end": 666,
+      "original_group": 656,
+      "original_cut": 664,
+      "original_end": 666,
+      "removed_body_sha256": "3fb89cfc152787eb270f7675dbff2f41128844b28e9d6b2cafa2a3e2cf200f56"
+    }
+  ],
+  "actual_selected_i386_undefined_markers": 2,
+  "selected_preprocessing_equal": true,
+  "scope": "two i386 alternatives in wdib.c only; not a global i386 exclusion",
+  "tests": "selected preprocessor equal, actual source markers reached, x86/x64 selected and forced guard tests, WOW32 and cached x86/x64 builds passed",
+  "direct_test_entry_search": "no wdib.c source compilation test entry found under tests/tools; actual WOW source graph was tested",
+  "package": "s13-bfs-depth1-wdib-package-compare.json: 8 exact, 2 timestamp-only; prior fully tested publication retained",
+  "limitation": "No claim about unselected i386 semantics or unobserved builds; prior x87 and non-CCPU DPMI fixture gaps remain"
+}

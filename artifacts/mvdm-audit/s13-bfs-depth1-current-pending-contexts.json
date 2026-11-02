@@ -6311,24 +6311,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/wow32/wdib.c",
-      "start": 319,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 1
-    },
-    {
-      "path": "src/mvdm-host/wow32/wdib.c",
-      "start": 664,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 1
-    },
-    {
       "path": "src/mvdm-host/wow32/witbl.h",
       "start": 21,
       "kind": "ifdef",
@@ -7888,7 +7870,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 31
+      "count": 29
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",

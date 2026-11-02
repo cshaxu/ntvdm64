@@ -54911,7 +54911,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 20,
-      "source_sha256": "1a5c054f8765757f0924c6e25fbd146f19d08c5bf08d171406efe776f4cbc3b9"
+      "source_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc"
     },
     {
       "path": "src/mvdm-host/wow32/wdib.c",
@@ -54920,102 +54920,102 @@
       "group_end": 321,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "1a5c054f8765757f0924c6e25fbd146f19d08c5bf08d171406efe776f4cbc3b9"
+      "source_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc"
     },
     {
       "path": "src/mvdm-host/wow32/wdib.c",
-      "start": 423,
-      "cut": 425,
-      "group_end": 425,
+      "start": 424,
+      "cut": 426,
+      "group_end": 426,
       "kind": "ifndef",
       "expression": "i386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "1a5c054f8765757f0924c6e25fbd146f19d08c5bf08d171406efe776f4cbc3b9"
+      "source_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc"
     },
     {
       "path": "src/mvdm-host/wow32/wdib.c",
-      "start": 656,
-      "cut": 664,
-      "group_end": 666,
+      "start": 657,
+      "cut": 665,
+      "group_end": 667,
       "kind": "ifndef",
       "expression": "i386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 7,
-      "source_sha256": "1a5c054f8765757f0924c6e25fbd146f19d08c5bf08d171406efe776f4cbc3b9"
+      "source_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc"
     },
     {
       "path": "src/mvdm-host/wow32/wdib.c",
-      "start": 664,
-      "cut": 666,
-      "group_end": 666,
+      "start": 665,
+      "cut": 667,
+      "group_end": 667,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "1a5c054f8765757f0924c6e25fbd146f19d08c5bf08d171406efe776f4cbc3b9"
+      "source_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc"
     },
     {
       "path": "src/mvdm-host/wow32/wdib.c",
-      "start": 690,
-      "cut": 700,
-      "group_end": 700,
+      "start": 692,
+      "cut": 702,
+      "group_end": 702,
       "kind": "ifndef",
       "expression": "i386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 9,
-      "source_sha256": "1a5c054f8765757f0924c6e25fbd146f19d08c5bf08d171406efe776f4cbc3b9"
+      "source_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc"
     },
     {
       "path": "src/mvdm-host/wow32/wdib.c",
-      "start": 712,
-      "cut": 714,
-      "group_end": 714,
+      "start": 714,
+      "cut": 716,
+      "group_end": 716,
       "kind": "ifndef",
       "expression": "i386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "1a5c054f8765757f0924c6e25fbd146f19d08c5bf08d171406efe776f4cbc3b9"
+      "source_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc"
     },
     {
       "path": "src/mvdm-host/wow32/wdib.c",
-      "start": 737,
-      "cut": 739,
-      "group_end": 739,
+      "start": 739,
+      "cut": 741,
+      "group_end": 741,
       "kind": "ifndef",
       "expression": "i386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "1a5c054f8765757f0924c6e25fbd146f19d08c5bf08d171406efe776f4cbc3b9"
+      "source_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc"
     },
     {
       "path": "src/mvdm-host/wow32/wdib.c",
-      "start": 837,
-      "cut": 839,
-      "group_end": 839,
+      "start": 839,
+      "cut": 841,
+      "group_end": 841,
       "kind": "ifndef",
       "expression": "i386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "1a5c054f8765757f0924c6e25fbd146f19d08c5bf08d171406efe776f4cbc3b9"
+      "source_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc"
     },
     {
       "path": "src/mvdm-host/wow32/wdos.c",
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 875,
-    "newly-excluded": 632,
+    "pending": 873,
+    "newly-excluded": 634,
     "already-excluded": 1669,
     "retained-observed": 1865,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
-    "not-guard": 835,
+    "not-guard": 833,
     "guard": 40
   }
 }

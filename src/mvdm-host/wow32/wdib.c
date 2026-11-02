@@ -317,8 +317,9 @@ HDC W32HandleDibDrv (PVPVOID vpbmi16)
         }
 
 #else
-        pvIntelBits = pvBits;
+#error Excluded unsupported i386 WOW DIB profile
 #endif
+#line 322
 
         // Finally set the selectors to the new DIB
         Parm16.WndProc.wParam = HIWORD(vpbmi16);
@@ -662,8 +663,9 @@ ULONG FASTCALL WG32CreateDIBSection(PVDMFRAME pFrame)
         }
 
 #else
-        pvIntelBits = pvBits;
+#error Excluded unsupported i386 WOW DIB profile
 #endif
+#line 667
 
         // Create a selector array for the bits backed by pvIntelBits
 

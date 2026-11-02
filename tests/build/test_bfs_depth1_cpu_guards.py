@@ -482,3 +482,24 @@ for path, following, selected_line in (
     if not rejected.returncode or trycall_marker[7:] not in rejected.stdout + rejected.stderr:
         raise SystemExit('unsupported WOW try-call profile did not fail: ' + path)
 print('PASS three scoped WOW try-call exclusions and original line mappings')
+
+wdib_marker = '#error Excluded unsupported i386 WOW DIB profile'
+wdib_lines = (repo / 'src/mvdm-host/wow32/wdib.c').read_text(encoding='latin1').split('\n')
+for following in (322, 667):
+    matches = [i for i, line in enumerate(wdib_lines) if line.strip() == wdib_marker
+               and i > 0 and wdib_lines[i - 1].strip() == '#else'
+               and wdib_lines[i + 1].strip() == '#endif'
+               and wdib_lines[i + 2].strip() == '#line ' + str(following)]
+    if len(matches) != 1:
+        raise SystemExit('WOW DIB guard or line mapping missing')
+    end = matches[0] + 1
+    snippet = ['#ifndef i386', 'int selected = 1;', '#else', wdib_marker,
+               '#endif', wdib_lines[end + 1].strip(), 'int following_line = __LINE__;']
+    probe.write_text('\n'.join(snippet) + '\n', encoding='ascii')
+    selected = subprocess.run(base + [str(probe)], capture_output=True, text=True, errors='replace')
+    rejected = subprocess.run(base + ['/Di386', str(probe)], capture_output=True, text=True, errors='replace')
+    if selected.returncode or not re.search(r'int\s+following_line\s*=\s*' + str(following) + r'\s*;', selected.stdout):
+        raise SystemExit('WOW DIB selected mapping failed: ' + selected.stderr)
+    if not rejected.returncode or wdib_marker[7:] not in rejected.stdout + rejected.stderr:
+        raise SystemExit('unsupported WOW DIB i386 profile did not fail')
+print('PASS scoped WOW DIB exclusions and original continuation lines')

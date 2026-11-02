@@ -1,7 +1,7 @@
 {
   "scope": "first-depth-or-outer #line directives with a unique unchanged code anchor before the next conditional/directive; lexical leads only, require semantic and preprocessor verification; no nested branch audit",
   "stats": {
-    "line_directives_at_depth_0_or_1": 1361
+    "line_directives_at_depth_0_or_1": 1363
   },
   "records": [
     {
@@ -5253,6 +5253,34 @@
       "matches": false,
       "current_sha256": "51fc0ddeed8481a96b1934e500ecacf0ef2570fdf0ec90d46c8d4fd0d1a20288",
       "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "line_directive": 322,
+      "depth": 0,
+      "current_target": 322,
+      "anchor_current_line": 326,
+      "anchor_original_line": 325,
+      "anchor": "Parm16.WndProc.lParam = (LONG)pvIntelBits;",
+      "observed_anchor_logical_line": 325,
+      "candidate_original_target": 322,
+      "matches": true,
+      "current_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc",
+      "original_sha256": "d0bd4f9cb7bba0dc5e977a8c096337df0830e3804ef6aeb8759cf979176dd910"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "line_directive": 668,
+      "depth": 0,
+      "current_target": 667,
+      "anchor_current_line": 673,
+      "anchor_original_line": 671,
+      "anchor": "Parm16.WndProc.lParam = (LONG) pvIntelBits;",
+      "observed_anchor_logical_line": 671,
+      "candidate_original_target": 667,
+      "matches": true,
+      "current_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc",
+      "original_sha256": "d0bd4f9cb7bba0dc5e977a8c096337df0830e3804ef6aeb8759cf979176dd910"
     },
     {
       "path": "src/mvdm-host/wow32/wgdi31.c",
