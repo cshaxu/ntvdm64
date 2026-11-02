@@ -14,8 +14,22 @@
       ],
       "all_current_first_depth_lines": [],
       "current_nested_structural_locations_only": [],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
+      "disposition": "pending-unselected-function-boundary",
+      "reason": "Identified original conditional(s) within functions absent from this current mirror subset; source ownership is established but required original-subset treatment remains open.",
+      "identified_absent_owner_conditions": [
+        {
+          "line": 881,
+          "function": "CreateIcoCur",
+          "original_function_start": 868,
+          "original_function_end": 904
+        },
+        {
+          "line": 3901,
+          "function": "GetIcoCurBpp",
+          "original_function_start": 3896,
+          "original_function_end": 3913
+        }
+      ]
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
@@ -40,10 +54,48 @@
           "depth": 2
         }
       ],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only",
+      "disposition": "pending-unselected-function-boundary",
+      "reason": "Identified original conditional(s) within functions absent from this current mirror subset; source ownership is established but required original-subset treatment remains open.",
       "resolved_nested_original_lines": [
         1674
+      ],
+      "identified_absent_owner_conditions": [
+        {
+          "line": 1480,
+          "function": "CreateIconFromResourceEx",
+          "original_function_start": 1455,
+          "original_function_end": 1497
+        },
+        {
+          "line": 2298,
+          "function": "LoadImageW",
+          "original_function_start": 2278,
+          "original_function_end": 2327
+        },
+        {
+          "line": 2624,
+          "function": "LoadIcoCur",
+          "original_function_start": 2492,
+          "original_function_end": 2680
+        },
+        {
+          "line": 3751,
+          "function": "MatchImage",
+          "original_function_start": 3703,
+          "original_function_end": 3763
+        },
+        {
+          "line": 4516,
+          "function": "InternalCopyImage",
+          "original_function_start": 4497,
+          "original_function_end": 4536
+        },
+        {
+          "line": 4574,
+          "function": "RtlGetIdFromDirectory",
+          "original_function_start": 4546,
+          "original_function_end": 4597
+        }
       ]
     },
     {
@@ -58,8 +110,16 @@
       ],
       "all_current_first_depth_lines": [],
       "current_nested_structural_locations_only": [],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
+      "disposition": "pending-unselected-function-boundary",
+      "reason": "Identified original conditional(s) within functions absent from this current mirror subset; source ownership is established but required original-subset treatment remains open.",
+      "identified_absent_owner_conditions": [
+        {
+          "line": 2640,
+          "function": "LoadIcoCur",
+          "original_function_start": 2492,
+          "original_function_end": 2680
+        }
+      ]
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
@@ -75,8 +135,28 @@
       ],
       "all_current_first_depth_lines": [],
       "current_nested_structural_locations_only": [],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
+      "disposition": "pending-unselected-function-boundary",
+      "reason": "Identified original conditional(s) within functions absent from this current mirror subset; source ownership is established but required original-subset treatment remains open.",
+      "identified_absent_owner_conditions": [
+        {
+          "line": 77,
+          "function": "UpdatePerUserSystemParameters",
+          "original_function_start": 65,
+          "original_function_end": 99
+        },
+        {
+          "line": 717,
+          "function": "_PeekMessage",
+          "original_function_start": 680,
+          "original_function_end": 803
+        },
+        {
+          "line": 1020,
+          "function": "TranslateMessage",
+          "original_function_start": 1017,
+          "original_function_end": 1035
+        }
+      ]
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
@@ -90,8 +170,16 @@
       ],
       "all_current_first_depth_lines": [],
       "current_nested_structural_locations_only": [],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
+      "disposition": "pending-unselected-function-boundary",
+      "reason": "Identified original conditional(s) within functions absent from this current mirror subset; source ownership is established but required original-subset treatment remains open.",
+      "identified_absent_owner_conditions": [
+        {
+          "line": 358,
+          "function": "GetWindowPlacement",
+          "original_function_start": 354,
+          "original_function_end": 378
+        }
+      ]
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
@@ -110,10 +198,42 @@
       ],
       "all_current_first_depth_lines": [],
       "current_nested_structural_locations_only": [],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only",
+      "disposition": "pending-unselected-function-boundary",
+      "reason": "Identified original conditional(s) within functions absent from this current mirror subset; source ownership is established but required original-subset treatment remains open.",
       "resolved_root_original_lines": [
         1611
+      ],
+      "identified_absent_owner_conditions": [
+        {
+          "line": 693,
+          "function": "_PeekMessage",
+          "original_function_start": 680,
+          "original_function_end": 803
+        },
+        {
+          "line": 753,
+          "function": "_PeekMessage",
+          "original_function_start": 680,
+          "original_function_end": 803
+        },
+        {
+          "line": 769,
+          "function": "_PeekMessage",
+          "original_function_start": 680,
+          "original_function_end": 803
+        },
+        {
+          "line": 784,
+          "function": "_PeekMessage",
+          "original_function_start": 680,
+          "original_function_end": 803
+        },
+        {
+          "line": 797,
+          "function": "_PeekMessage",
+          "original_function_start": 680,
+          "original_function_end": 803
+        }
       ]
     },
     {
@@ -139,11 +259,19 @@
           "depth": 2
         }
       ],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only",
+      "disposition": "pending-unselected-function-boundary",
+      "reason": "Identified original conditional(s) within functions absent from this current mirror subset; source ownership is established but required original-subset treatment remains open.",
       "resolved_nested_original_lines": [
         953,
         965
+      ],
+      "identified_absent_owner_conditions": [
+        {
+          "line": 2204,
+          "function": "BroadcastSystemMessageWorker",
+          "original_function_start": 2160,
+          "original_function_end": 2261
+        }
       ]
     },
     {
@@ -184,10 +312,36 @@
           "depth": 2
         }
       ],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only",
+      "disposition": "pending-unselected-function-boundary",
+      "reason": "Identified original conditional(s) within functions absent from this current mirror subset; source ownership is established but required original-subset treatment remains open.",
       "resolved_nested_original_lines": [
         583
+      ],
+      "identified_absent_owner_conditions": [
+        {
+          "line": 833,
+          "function": "InitSyncOnlyMessages",
+          "original_function_start": 730,
+          "original_function_end": 878
+        },
+        {
+          "line": 990,
+          "function": "InitFunctionTables",
+          "original_function_start": 928,
+          "original_function_end": 1021
+        },
+        {
+          "line": 1054,
+          "function": "InitMessageTables",
+          "original_function_start": 1032,
+          "original_function_end": 1057
+        },
+        {
+          "line": 1861,
+          "function": "UserInitialize",
+          "original_function_start": 1691,
+          "original_function_end": 1934
+        }
       ]
     },
     {
@@ -206,8 +360,40 @@
       ],
       "all_current_first_depth_lines": [],
       "current_nested_structural_locations_only": [],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
+      "disposition": "pending-unselected-function-boundary",
+      "reason": "Identified original conditional(s) within functions absent from this current mirror subset; source ownership is established but required original-subset treatment remains open.",
+      "identified_absent_owner_conditions": [
+        {
+          "line": 850,
+          "function": "InitSyncOnlyMessages",
+          "original_function_start": 730,
+          "original_function_end": 878
+        },
+        {
+          "line": 934,
+          "function": "InitFunctionTables",
+          "original_function_start": 928,
+          "original_function_end": 1021
+        },
+        {
+          "line": 1002,
+          "function": "InitFunctionTables",
+          "original_function_start": 928,
+          "original_function_end": 1021
+        },
+        {
+          "line": 1163,
+          "function": "InitGlobalRIPFlags",
+          "original_function_start": 1160,
+          "original_function_end": 1211
+        },
+        {
+          "line": 1822,
+          "function": "UserInitialize",
+          "original_function_start": 1691,
+          "original_function_end": 1934
+        }
+      ]
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
@@ -221,8 +407,16 @@
       ],
       "all_current_first_depth_lines": [],
       "current_nested_structural_locations_only": [],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
+      "disposition": "pending-unselected-function-boundary",
+      "reason": "Identified original conditional(s) within functions absent from this current mirror subset; source ownership is established but required original-subset treatment remains open.",
+      "identified_absent_owner_conditions": [
+        {
+          "line": 1703,
+          "function": "UserInitialize",
+          "original_function_start": 1691,
+          "original_function_end": 1934
+        }
+      ]
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
@@ -248,7 +442,15 @@
       ],
       "current_nested_structural_locations_only": [],
       "disposition": "pending-unselected-function-boundary",
-      "reason": "Remaining signature occurrences lie within original RtlWCSMessageWParamCharToMB, a function absent from the current chartran.c subset. Do not relocate its preprocessor directives outside the removed function or infer a selected body; original-subset treatment remains open."
+      "reason": "Identified original conditional(s) within functions absent from this current mirror subset; source ownership is established but required original-subset treatment remains open.",
+      "identified_absent_owner_conditions": [
+        {
+          "line": 378,
+          "function": "RtlWCSMessageWParamCharToMB",
+          "original_function_start": 323,
+          "original_function_end": 429
+        }
+      ]
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
@@ -272,7 +474,27 @@
       ],
       "current_nested_structural_locations_only": [],
       "disposition": "pending-unselected-function-boundary",
-      "reason": "Remaining signature occurrences lie within original RtlWCSMessageWParamCharToMB, a function absent from the current chartran.c subset. Do not relocate its preprocessor directives outside the removed function or infer a selected body; original-subset treatment remains open."
+      "reason": "Identified original conditional(s) within functions absent from this current mirror subset; source ownership is established but required original-subset treatment remains open.",
+      "identified_absent_owner_conditions": [
+        {
+          "line": 326,
+          "function": "RtlWCSMessageWParamCharToMB",
+          "original_function_start": 323,
+          "original_function_end": 429
+        },
+        {
+          "line": 351,
+          "function": "RtlWCSMessageWParamCharToMB",
+          "original_function_start": 323,
+          "original_function_end": 429
+        },
+        {
+          "line": 393,
+          "function": "RtlWCSMessageWParamCharToMB",
+          "original_function_start": 323,
+          "original_function_end": 429
+        }
+      ]
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
@@ -287,7 +509,15 @@
       "all_current_first_depth_lines": [],
       "current_nested_structural_locations_only": [],
       "disposition": "pending-unselected-function-boundary",
-      "reason": "Remaining signature occurrences lie within original RtlWCSMessageWParamCharToMB, a function absent from the current chartran.c subset. Do not relocate its preprocessor directives outside the removed function or infer a selected body; original-subset treatment remains open."
+      "reason": "Identified original conditional(s) within functions absent from this current mirror subset; source ownership is established but required original-subset treatment remains open.",
+      "identified_absent_owner_conditions": [
+        {
+          "line": 337,
+          "function": "RtlWCSMessageWParamCharToMB",
+          "original_function_start": 323,
+          "original_function_end": 429
+        }
+      ]
     }
   ],
   "limitations": [

@@ -1999,3 +1999,7 @@ Confirmed two NTSTUBS Memphis guards, its FE_SB fnINWPARAMDBCSCHAR guard, and th
 ### Trace original character-conversion conditions to function owners
 
 Mapped eight current first-depth USERK/FE_SB selectors to their pinned original locations. The five remaining original selectors belong to the original `RtlWCSMessageWParamCharToMB`, which is absent from the current chartran subset. They remain open as an original-subset boundary; moving their directives into unrelated current functions would misrepresent original structure. No source changed. Evidence: `s13-bfs-depth1-chartran-original-owners.json`.
+
+### Identify original conditions inside omitted function owners
+
+Mapped 34 remaining original first-depth condition occurrences to unique original functions absent from the corresponding current mirror subset, using pinned-file hashes and fresh Universal Ctags line ranges. These are still open original-subset treatment items; no selectors or functions were moved, no child conditions inspected, and no runtime support claim was made. Two USER server global conditions and the original USERCLI whole-file guard require separate handling. Evidence: `s13-bfs-depth1-omitted-function-owner-map.json`.

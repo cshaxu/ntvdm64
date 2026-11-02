@@ -1,0 +1,329 @@
+{
+  "scope": "unresolved original first-depth candidates with exactly identified enclosing original function absent from current file",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "expression": "DEBUG",
+      "unpaired_count": 2,
+      "identified": [
+        {
+          "line": 881,
+          "function": "CreateIcoCur",
+          "original_function_start": 868,
+          "original_function_end": 904
+        },
+        {
+          "line": 3901,
+          "function": "GetIcoCurBpp",
+          "original_function_start": 3896,
+          "original_function_end": 3913
+        }
+      ],
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "current_sha256": "0a60d195722d68331e296a72b9713747c9e29717b1c7f321bc22308f7c00ff4a"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "expression": "0",
+      "unpaired_count": 6,
+      "identified": [
+        {
+          "line": 1480,
+          "function": "CreateIconFromResourceEx",
+          "original_function_start": 1455,
+          "original_function_end": 1497
+        },
+        {
+          "line": 2298,
+          "function": "LoadImageW",
+          "original_function_start": 2278,
+          "original_function_end": 2327
+        },
+        {
+          "line": 2624,
+          "function": "LoadIcoCur",
+          "original_function_start": 2492,
+          "original_function_end": 2680
+        },
+        {
+          "line": 3751,
+          "function": "MatchImage",
+          "original_function_start": 3703,
+          "original_function_end": 3763
+        },
+        {
+          "line": 4516,
+          "function": "InternalCopyImage",
+          "original_function_start": 4497,
+          "original_function_end": 4536
+        },
+        {
+          "line": 4574,
+          "function": "RtlGetIdFromDirectory",
+          "original_function_start": 4546,
+          "original_function_end": 4597
+        }
+      ],
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "current_sha256": "0a60d195722d68331e296a72b9713747c9e29717b1c7f321bc22308f7c00ff4a"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "expression": "LATER",
+      "unpaired_count": 1,
+      "identified": [
+        {
+          "line": 2640,
+          "function": "LoadIcoCur",
+          "original_function_start": 2492,
+          "original_function_end": 2680
+        }
+      ],
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "current_sha256": "0a60d195722d68331e296a72b9713747c9e29717b1c7f321bc22308f7c00ff4a"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "expression": "FE_IME",
+      "unpaired_count": 3,
+      "identified": [
+        {
+          "line": 77,
+          "function": "UpdatePerUserSystemParameters",
+          "original_function_start": 65,
+          "original_function_end": 99
+        },
+        {
+          "line": 717,
+          "function": "_PeekMessage",
+          "original_function_start": 680,
+          "original_function_end": 803
+        },
+        {
+          "line": 1020,
+          "function": "TranslateMessage",
+          "original_function_start": 1017,
+          "original_function_end": 1035
+        }
+      ],
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "current_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "expression": "LATER",
+      "unpaired_count": 1,
+      "identified": [
+        {
+          "line": 358,
+          "function": "GetWindowPlacement",
+          "original_function_start": 354,
+          "original_function_end": 378
+        }
+      ],
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "current_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "expression": "FE_SB",
+      "unpaired_count": 5,
+      "identified": [
+        {
+          "line": 693,
+          "function": "_PeekMessage",
+          "original_function_start": 680,
+          "original_function_end": 803
+        },
+        {
+          "line": 753,
+          "function": "_PeekMessage",
+          "original_function_start": 680,
+          "original_function_end": 803
+        },
+        {
+          "line": 769,
+          "function": "_PeekMessage",
+          "original_function_start": 680,
+          "original_function_end": 803
+        },
+        {
+          "line": 784,
+          "function": "_PeekMessage",
+          "original_function_start": 680,
+          "original_function_end": 803
+        },
+        {
+          "line": 797,
+          "function": "_PeekMessage",
+          "original_function_start": 680,
+          "original_function_end": 803
+        }
+      ],
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "current_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "expression": "DEBUG",
+      "unpaired_count": 1,
+      "identified": [
+        {
+          "line": 2204,
+          "function": "BroadcastSystemMessageWorker",
+          "original_function_start": 2160,
+          "original_function_end": 2261
+        }
+      ],
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "current_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "expression": "FE_IME",
+      "unpaired_count": 6,
+      "identified": [
+        {
+          "line": 833,
+          "function": "InitSyncOnlyMessages",
+          "original_function_start": 730,
+          "original_function_end": 878
+        },
+        {
+          "line": 990,
+          "function": "InitFunctionTables",
+          "original_function_start": 928,
+          "original_function_end": 1021
+        },
+        {
+          "line": 1054,
+          "function": "InitMessageTables",
+          "original_function_start": 1032,
+          "original_function_end": 1057
+        },
+        {
+          "line": 1861,
+          "function": "UserInitialize",
+          "original_function_start": 1691,
+          "original_function_end": 1934
+        }
+      ],
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "current_sha256": "3740c3789f3069fb0957cacbb83758fc157027c1205097400139a5b89edbc679"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "expression": "DEBUG",
+      "unpaired_count": 5,
+      "identified": [
+        {
+          "line": 850,
+          "function": "InitSyncOnlyMessages",
+          "original_function_start": 730,
+          "original_function_end": 878
+        },
+        {
+          "line": 934,
+          "function": "InitFunctionTables",
+          "original_function_start": 928,
+          "original_function_end": 1021
+        },
+        {
+          "line": 1002,
+          "function": "InitFunctionTables",
+          "original_function_start": 928,
+          "original_function_end": 1021
+        },
+        {
+          "line": 1163,
+          "function": "InitGlobalRIPFlags",
+          "original_function_start": 1160,
+          "original_function_end": 1211
+        },
+        {
+          "line": 1822,
+          "function": "UserInitialize",
+          "original_function_start": 1691,
+          "original_function_end": 1934
+        }
+      ],
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "current_sha256": "3740c3789f3069fb0957cacbb83758fc157027c1205097400139a5b89edbc679"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "expression": "ANDREVA_DBG",
+      "unpaired_count": 1,
+      "identified": [
+        {
+          "line": 1703,
+          "function": "UserInitialize",
+          "original_function_start": 1691,
+          "original_function_end": 1934
+        }
+      ],
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "current_sha256": "3740c3789f3069fb0957cacbb83758fc157027c1205097400139a5b89edbc679"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "expression": "_USERK_",
+      "unpaired_count": 1,
+      "identified": [
+        {
+          "line": 378,
+          "function": "RtlWCSMessageWParamCharToMB",
+          "original_function_start": 323,
+          "original_function_end": 429
+        }
+      ],
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "current_sha256": "e2cd5d6a924328db5528a16d413ab34a34e393bf11f971aa69bbdf527d0b8f7c"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "expression": "FE_SB",
+      "unpaired_count": 3,
+      "identified": [
+        {
+          "line": 326,
+          "function": "RtlWCSMessageWParamCharToMB",
+          "original_function_start": 323,
+          "original_function_end": 429
+        },
+        {
+          "line": 351,
+          "function": "RtlWCSMessageWParamCharToMB",
+          "original_function_start": 323,
+          "original_function_end": 429
+        },
+        {
+          "line": 393,
+          "function": "RtlWCSMessageWParamCharToMB",
+          "original_function_start": 323,
+          "original_function_end": 429
+        }
+      ],
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "current_sha256": "e2cd5d6a924328db5528a16d413ab34a34e393bf11f971aa69bbdf527d0b8f7c"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "expression": "FE_IME",
+      "unpaired_count": 1,
+      "identified": [
+        {
+          "line": 337,
+          "function": "RtlWCSMessageWParamCharToMB",
+          "original_function_start": 323,
+          "original_function_end": 429
+        }
+      ],
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "current_sha256": "e2cd5d6a924328db5528a16d413ab34a34e393bf11f971aa69bbdf527d0b8f7c"
+    }
+  ],
+  "count": 34,
+  "method": "Universal Ctags function line/end ranges on pinned originals and current files; only unique enclosing functions and missing current function definitions accepted.",
+  "limits": "Identification is not permission to delete or move conditional structure, not proof a symbol is absent from the entire project, and not proof of runtime semantics. All such candidates remain open."
+}
