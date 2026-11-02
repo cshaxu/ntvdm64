@@ -531,3 +531,20 @@ for path, continuation, has_else in (
     if not bad.returncode or header_marker[7:] not in bad.stdout + bad.stderr:
         raise SystemExit('WOW header i386 rejection failed: ' + path)
 print('PASS two scoped WOW i386 header guards and original continuation lines')
+
+dpmi_header = (repo / 'src/mvdm-host/dpmi32/dpmiint.h').read_text(encoding='latin1')
+outer, tail = dpmi_header.split('#ifndef i386\n', 1)
+first, tail = tail.split('\n#else\n#if defined(CPU_40_STYLE)\n', 1)
+second, tail = tail.split('\n#else\n#error Unsupported excluded original configuration\n#endif\n#endif // i386\n#line 46\n', 1)
+if first != second or not first.startswith('#line 24\n'):
+    raise SystemExit('DPMI original outer selector or CPU40 carrier differs')
+for defines in ([], ['/DCPU_40_STYLE'], ['/Di386', '/DCPU_40_STYLE']):
+    probe.write_text('#ifndef i386\n' + first + '\n#else\n#if defined(CPU_40_STYLE)\n' + second +
+                     '\n#else\n#error Unsupported excluded original configuration\n#endif\n#endif\n#line 46\nint after_dpmi = __LINE__;\n', encoding='ascii')
+    selected = subprocess.run(base + defines + [str(probe)], capture_output=True, text=True, errors='replace')
+    if selected.returncode or not re.search(r'int\s+after_dpmi\s*=\s*46\s*;', selected.stdout):
+        raise SystemExit('DPMI selected selector or original line failed: ' + selected.stderr)
+excluded = subprocess.run(base + ['/Di386', str(probe)], capture_output=True, text=True, errors='replace')
+if not excluded.returncode or 'Unsupported excluded original configuration' not in excluded.stdout + excluded.stderr:
+    raise SystemExit('DPMI unsupported non-CPU40 profile did not fail')
+print('PASS original DPMI outer condition, CPU40 carrier and continuation')

@@ -23,7 +23,26 @@ Revision History:
 /* The original i386 branch delegates these carriers to the kernel VDM
  * monitor. CPU40 is a software executor even when hosted by an x86 build,
  * so it retains the original non-monitor carrier ownership. */
-#if !defined(i386) || defined(CPU_40_STYLE)
+#ifndef i386
+#line 24
+
+GETREGISTERFUNCTION GetRegisterByIndex[8] = {getEAX, getECX, getEDX, getECX,
+                                             getESP, getEBP, getESI, getEDI};
+SETREGISTERFUNCTION SetRegisterByIndex[8] = {setEAX, setECX, setEDX, setECX,
+                                             setESP, setEBP, setESI, setEDI};
+
+VDM_INTERRUPTHANDLER DpmiInterruptHandlers[256] = {0};
+VDM_FAULTHANDLER DpmiFaultHandlers[32] = {0};
+BOOL fDpmiHookInts = TRUE;
+BOOL fDpmiIntsHaveBeenHooked = FALSE;
+
+#define VDM_INT_INT_GATE 1
+#define EFLAGS_TF_MASK 0x100
+#define VDM_INT_32 2
+
+#else
+#if defined(CPU_40_STYLE)
+#line 24
 
 GETREGISTERFUNCTION GetRegisterByIndex[8] = {getEAX, getECX, getEDX, getECX,
                                              getESP, getEBP, getESI, getEDI};
@@ -41,8 +60,9 @@ BOOL fDpmiIntsHaveBeenHooked = FALSE;
 
 #else
 #error Unsupported excluded original configuration
-#endif // !i386 || CPU_40_STYLE
-#line 49
+#endif
+#endif // i386
+#line 46
 
 #define EFLAGS_INTERRUPT_MASK 0x200
 #define LockedPMStackOffset 0x1000

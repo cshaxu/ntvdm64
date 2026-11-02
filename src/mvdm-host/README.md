@@ -2243,3 +2243,9 @@ MVDM-HOST-DIV-633: preserve the original `i386` outer conditions in
 bodies with `#error`. The original WOW non-i386 spool selection remains;
 this does not exclude i386 in other source contexts. See
 `../../artifacts/mvdm-audit/s13-bfs-depth1-wow-i386-headers.json`.
+
+MVDM-HOST-DIV-634: restore the original `#ifndef i386` outer selector in
+`dpmi32/dpmiint.h`; keep the existing CPU40 carrier in the i386 alternative
+and preserve the unsupported non-CPU40 rejection. Both branches retain the
+same selected original definitions and original diagnostic continuation.
+Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-dpmiint-header-restoration.json`.

@@ -48,9 +48,14 @@
       "file": "src/mvdm-host/inc/suballoc.h",
       "original_condition": "#ifdef i386",
       "evidence": "s13-bfs-depth1-i386-headers-restoration.json"
+    },
+    {
+      "file": "src/mvdm-host/dpmi32/dpmiint.h",
+      "original_condition": "#ifndef i386",
+      "evidence": "s13-bfs-depth1-dpmiint-header-restoration.json"
     }
   ],
-  "derived_total": 50,
-  "derived_current_bfs_total": 17,
+  "derived_total": 51,
+  "derived_current_bfs_total": 18,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

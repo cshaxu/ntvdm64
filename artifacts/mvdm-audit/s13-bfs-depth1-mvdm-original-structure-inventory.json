@@ -2,8 +2,8 @@
   "scope": "all fixed-baseline MVDM-host first-depth original signature multiplicities against current first-depth structures; nested signatures recorded only, no inner branch inspection or automatic restoration",
   "files_checked": 1321,
   "counts": {
-    "root_signature_multiplicity_satisfied": 3557,
-    "missing_root_occurrences": 21
+    "root_signature_multiplicity_satisfied": 3558,
+    "missing_root_occurrences": 20
   },
   "records": [
     {
@@ -28,29 +28,6 @@
       ],
       "current_nested_lines": [],
       "missing_multiplicity": 3,
-      "classification": "missing-signature-needs-owner-check"
-    },
-    {
-      "path": "src/mvdm-host/dpmi32/dpmiint.h",
-      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\dpmiint.h",
-      "original_sha256": "245976d103b8dd3b918b008b85e9e94b3ec245fb9119c28b897f936a94b69b5e",
-      "working_sha256": "883641ea972a0db135433e9afd8bd6ddaf07ba7fdb9f258f1270c318d132f037",
-      "signature": [
-        [
-          "ifndef",
-          "i386"
-        ],
-        [
-          "else",
-          ""
-        ]
-      ],
-      "original_lines": [
-        23
-      ],
-      "current_root_lines": [],
-      "current_nested_lines": [],
-      "missing_multiplicity": 1,
       "classification": "missing-signature-needs-owner-check"
     },
     {

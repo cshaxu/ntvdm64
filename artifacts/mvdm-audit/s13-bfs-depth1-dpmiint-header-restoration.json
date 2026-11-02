@@ -1,0 +1,67 @@
+{
+  "plan": {
+    "path": "src/mvdm-host/dpmi32/dpmiint.h",
+    "before_sha256": "883641ea972a0db135433e9afd8bd6ddaf07ba7fdb9f258f1270c318d132f037",
+    "after_sha256": "2f6c8f88fccaad6847b903d9c25d28bbd65494541eda7b9c9e3679e5b2e27eaf",
+    "original_sha256": "245976d103b8dd3b918b008b85e9e94b3ec245fb9119c28b897f936a94b69b5e",
+    "original_outer_line": 23,
+    "original_end": 45,
+    "original_selected_body_sha256": "4f3de0c44042083aac91459414229ac2da0966a3d0ca53d7a44287677b155360",
+    "before_group": 26,
+    "before_else": 42,
+    "before_end": 44,
+    "new_group": 26,
+    "new_else": 43,
+    "source_line_delta": 20,
+    "supported_contract": "non-i386 or CPU40 selects exact same original non-monitor carrier; i386 without CPU40 rejects",
+    "original_continuation_line": 46
+  },
+  "actual_worker_preprocessing": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "unchanged": true,
+      "sha256": "fbfead078a8e4cc4698ba436d0a133237246061215409fa5d1ce0064a1474b42"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "unchanged": true,
+      "sha256": "fbfead078a8e4cc4698ba436d0a133237246061215409fa5d1ce0064a1474b42"
+    }
+  ],
+  "macro_profile_controls": [
+    {
+      "flags": [],
+      "before_exit": 0,
+      "after_exit": 0,
+      "equal_selected": true
+    },
+    {
+      "flags": [
+        "/DCPU_40_STYLE"
+      ],
+      "before_exit": 0,
+      "after_exit": 0,
+      "equal_selected": true
+    },
+    {
+      "flags": [
+        "/Di386",
+        "/DCPU_40_STYLE"
+      ],
+      "before_exit": 0,
+      "after_exit": 0,
+      "equal_selected": true
+    },
+    {
+      "flags": [
+        "/Di386"
+      ],
+      "before_exit": 2,
+      "after_exit": 2,
+      "equal_selected": false
+    }
+  ],
+  "verification": "Both worker builds and x86/x64 cached builds and guard suites passed; selected DPMI object frame, return and failure cases passed. Whole selected fixture failed its later non-CCPU compile at prior DIV-515 guard; this is not a complete fixture pass. First attempt used nonexistent worker compiler-driver path, rerun used known WOW32 driver.",
+  "publication": "s13-bfs-depth1-dpmiint-header-package-compare.json: eight identical, two timestamp-only; keep previously full-tested release",
+  "limitations": "Restored outer original only; new nested CPU40 adaptation queued for next depth. Existing exception and x87 test boundaries remain."
+}

@@ -2342,32 +2342,6 @@
       "source_sha256": "21319196302ee1a5bd2750b7fef9c71b07dca7ce589f9da9e5f6fbb887deb7fc"
     },
     {
-      "path": "src/mvdm-host/dpmi32/dpmiint.h",
-      "start": 26,
-      "cut": 42,
-      "group_end": 44,
-      "kind": "if",
-      "expression": "!defined(i386) || defined(CPU_40_STYLE)",
-      "status": "retained-observed",
-      "pending_reason": null,
-      "guard_only": false,
-      "body_lines": 15,
-      "source_sha256": "883641ea972a0db135433e9afd8bd6ddaf07ba7fdb9f258f1270c318d132f037"
-    },
-    {
-      "path": "src/mvdm-host/dpmi32/dpmiint.h",
-      "start": 42,
-      "cut": 44,
-      "group_end": 44,
-      "kind": "else",
-      "expression": "",
-      "status": "newly-excluded",
-      "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 1,
-      "source_sha256": "883641ea972a0db135433e9afd8bd6ddaf07ba7fdb9f258f1270c318d132f037"
-    },
-    {
       "path": "src/mvdm-host/dpmi32/dpmimemr.c",
       "start": 64,
       "cut": 72,
@@ -65650,14 +65624,40 @@
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "d90adbadd7b0d9937302509c577e5f846a05ba4562ccf02f7d6ddfb346e17f82"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.h",
+      "start": 26,
+      "cut": 43,
+      "group_end": 64,
+      "kind": "ifndef",
+      "expression": "i386",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 16,
+      "source_sha256": "2f6c8f88fccaad6847b903d9c25d28bbd65494541eda7b9c9e3679e5b2e27eaf"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.h",
+      "start": 43,
+      "cut": 64,
+      "group_end": 64,
+      "kind": "else",
+      "expression": "",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 20,
+      "source_sha256": "2f6c8f88fccaad6847b903d9c25d28bbd65494541eda7b9c9e3679e5b2e27eaf"
     }
   ],
   "errors": [],
   "status_counts": {
     "pending": 871,
-    "newly-excluded": 636,
+    "newly-excluded": 635,
     "already-excluded": 1669,
-    "retained-observed": 1865,
+    "retained-observed": 1866,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
