@@ -5243,15 +5243,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
       "start": 3,
-      "cut": 6,
-      "group_end": 6,
+      "cut": 5,
+      "group_end": 5,
       "kind": "ifdef",
       "expression": "SECURE",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "33ef9bdd2dafe75a2ec3b5b0e82d9fd47efb76b2c6ee0ca444bcaafc2aa119a3"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "3197686d47e0b2203a913b2ba93e5c178d73f058a0471786dc0305730e0294f4"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
@@ -5264,7 +5264,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "33ef9bdd2dafe75a2ec3b5b0e82d9fd47efb76b2c6ee0ca444bcaafc2aa119a3"
+      "source_sha256": "3197686d47e0b2203a913b2ba93e5c178d73f058a0471786dc0305730e0294f4"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
@@ -5277,59 +5277,59 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 6,
-      "source_sha256": "33ef9bdd2dafe75a2ec3b5b0e82d9fd47efb76b2c6ee0ca444bcaafc2aa119a3"
+      "source_sha256": "3197686d47e0b2203a913b2ba93e5c178d73f058a0471786dc0305730e0294f4"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
       "start": 74,
-      "cut": 84,
-      "group_end": 84,
+      "cut": 76,
+      "group_end": 76,
       "kind": "ifdef",
       "expression": "SECURE",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 9,
-      "source_sha256": "33ef9bdd2dafe75a2ec3b5b0e82d9fd47efb76b2c6ee0ca444bcaafc2aa119a3"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
-      "start": 98,
-      "cut": 100,
-      "group_end": 100,
-      "kind": "ifdef",
-      "expression": "SECURE",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "33ef9bdd2dafe75a2ec3b5b0e82d9fd47efb76b2c6ee0ca444bcaafc2aa119a3"
+      "source_sha256": "3197686d47e0b2203a913b2ba93e5c178d73f058a0471786dc0305730e0294f4"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
-      "start": 113,
-      "cut": 123,
-      "group_end": 125,
+      "start": 91,
+      "cut": 93,
+      "group_end": 93,
       "kind": "ifdef",
       "expression": "SECURE",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 9,
-      "source_sha256": "33ef9bdd2dafe75a2ec3b5b0e82d9fd47efb76b2c6ee0ca444bcaafc2aa119a3"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "3197686d47e0b2203a913b2ba93e5c178d73f058a0471786dc0305730e0294f4"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
-      "start": 123,
-      "cut": 125,
-      "group_end": 125,
+      "start": 107,
+      "cut": 109,
+      "group_end": 112,
+      "kind": "ifdef",
+      "expression": "SECURE",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "3197686d47e0b2203a913b2ba93e5c178d73f058a0471786dc0305730e0294f4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "start": 109,
+      "cut": 112,
+      "group_end": 112,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
-      "body_lines": 1,
-      "source_sha256": "33ef9bdd2dafe75a2ec3b5b0e82d9fd47efb76b2c6ee0ca444bcaafc2aa119a3"
+      "body_lines": 2,
+      "source_sha256": "3197686d47e0b2203a913b2ba93e5c178d73f058a0471786dc0305730e0294f4"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
@@ -24080,171 +24080,171 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
       "start": 42,
-      "cut": 47,
-      "group_end": 50,
+      "cut": 44,
+      "group_end": 48,
       "kind": "ifdef",
       "expression": "EGATEST",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 4,
-      "source_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 47,
-      "cut": 50,
-      "group_end": 50,
+      "start": 44,
+      "cut": 48,
+      "group_end": 48,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb"
+      "body_lines": 3,
+      "source_sha256": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 63,
-      "cut": 79,
-      "group_end": 95,
+      "start": 62,
+      "cut": 78,
+      "group_end": 94,
       "kind": "ifdef",
       "expression": "BACK_M",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 15,
-      "source_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb"
+      "source_sha256": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 79,
-      "cut": 95,
-      "group_end": 95,
+      "start": 78,
+      "cut": 94,
+      "group_end": 94,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 15,
-      "source_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb"
+      "source_sha256": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 141,
-      "cut": 143,
-      "group_end": 143,
+      "start": 140,
+      "cut": 142,
+      "group_end": 142,
       "kind": "ifndef",
       "expression": "host_simulate",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb"
+      "source_sha256": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 145,
-      "cut": 147,
-      "group_end": 147,
+      "start": 144,
+      "cut": 146,
+      "group_end": 146,
       "kind": "ifndef",
       "expression": "host_cpu_reset",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb"
+      "source_sha256": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 149,
-      "cut": 151,
-      "group_end": 151,
+      "start": 148,
+      "cut": 150,
+      "group_end": 150,
       "kind": "ifndef",
       "expression": "host_cpu_init",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb"
+      "source_sha256": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 153,
-      "cut": 155,
-      "group_end": 155,
+      "start": 152,
+      "cut": 154,
+      "group_end": 154,
       "kind": "ifndef",
       "expression": "host_cpu_interrupt",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb"
+      "source_sha256": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 161,
-      "cut": 174,
-      "group_end": 174,
+      "start": 160,
+      "cut": 173,
+      "group_end": 173,
       "kind": "ifdef",
       "expression": "BIGEND",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 12,
-      "source_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb"
+      "source_sha256": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 176,
-      "cut": 189,
-      "group_end": 189,
+      "start": 175,
+      "cut": 188,
+      "group_end": 188,
       "kind": "ifdef",
       "expression": "LITTLEND",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 12,
-      "source_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb"
+      "source_sha256": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 218,
-      "cut": 525,
-      "group_end": 525,
+      "start": 217,
+      "cut": 524,
+      "group_end": 524,
       "kind": "ifdef",
       "expression": "CCPU",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 306,
-      "source_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb"
+      "source_sha256": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 534,
-      "cut": 538,
-      "group_end": 538,
+      "start": 533,
+      "cut": 537,
+      "group_end": 537,
       "kind": "ifndef",
       "expression": "SPC386",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb"
+      "source_sha256": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 540,
-      "cut": 557,
-      "group_end": 557,
+      "start": 539,
+      "cut": 556,
+      "group_end": 556,
       "kind": "ifdef",
       "expression": "CPU_PRIVATE",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 16,
-      "source_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb"
+      "source_sha256": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 1041,
+    "pending": 1036,
     "already-excluded": 1603,
-    "newly-excluded": 539,
+    "newly-excluded": 544,
     "retained-observed": 1863,
     "retained-original-assertion": 4
   },
   "pending_by_guard": {
-    "not-guard": 926,
+    "not-guard": 921,
     "guard": 115
   }
 }

@@ -1,0 +1,143 @@
+{
+  "scope": "five first-depth arms, original bodies matched, selected branch unchanged, unsupported macro rejects",
+  "macro_evidence": {
+    "compile_commands_checked": 2070,
+    "jobs_sha256": "623d1067dca46b9fabf571db17d6567d8f03e04047245ca9ac11fcda71c725ea",
+    "command_macro_definitions_found": 0,
+    "source_generated_sdk_definitions_found": 0,
+    "scope": "src, tests, tools, generated Ninja trees and eight SDK include roots",
+    "controls": "10 actual x86/x64 isolated original vs candidate preprocessing comparisons plus forced-selector rejections"
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "macro": "SECURE",
+      "original_start": 3,
+      "original_end": 6,
+      "original_boundary": 6,
+      "old_body_sha256": "a0f1851bbba7d1901972aad9767c3563e2cc546f7aabdc90f90596c630dc427f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "macro": "SECURE",
+      "original_start": 74,
+      "original_end": 84,
+      "original_boundary": 84,
+      "old_body_sha256": "7abe1fc4312029da23d8b0f250224d1702468976116fe9464a1c7370a6a6de90"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "macro": "SECURE",
+      "original_start": 98,
+      "original_end": 100,
+      "original_boundary": 100,
+      "old_body_sha256": "838ca7f4ee116e987ae6ce7eaab067fa11e58927aac2b38d3f41bed303d25778"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "macro": "SECURE",
+      "original_start": 113,
+      "original_end": 125,
+      "original_boundary": 123,
+      "old_body_sha256": "1b4363da71a343d3b42853bd5102f34320ff8ea25023bde3f033376595b9a16f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
+      "macro": "EGATEST",
+      "original_start": 42,
+      "original_end": 50,
+      "original_boundary": 47,
+      "old_body_sha256": "7cb4917150a0c6f118dc116f247a94aae00c6881e8f77830fe150df90509a6f4"
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "start": 3,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "start": 74,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "start": 98,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "start": 113,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
+      "start": 42,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "start": 3,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "start": 74,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "start": 98,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "start": 113,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
+      "start": 42,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    }
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "before": "33ef9bdd2dafe75a2ec3b5b0e82d9fd47efb76b2c6ee0ca444bcaafc2aa119a3",
+      "after": "3197686d47e0b2203a913b2ba93e5c178d73f058a0471786dc0305730e0294f4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
+      "before": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb",
+      "after": "80e5021522b0ccf723a402b10e605634d1c2fd162dc26f9fad4e64ff4fe51d35"
+    }
+  ],
+  "validation": {
+    "x86_cached_build": "passed; no work",
+    "x64_cached_build": "passed; no work",
+    "published_release": "10 product image hashes match the already-accepted release at both destinations; no replacement needed",
+    "guard_gate": "x86 and x64; see progress record"
+  }
+}

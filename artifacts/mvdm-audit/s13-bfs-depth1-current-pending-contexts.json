@@ -822,43 +822,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
-      "start": 3,
-      "kind": "ifdef",
-      "expression": "SECURE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
-      "start": 74,
-      "kind": "ifdef",
-      "expression": "SECURE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
-      "start": 98,
-      "kind": "ifdef",
-      "expression": "SECURE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
-      "start": 113,
-      "kind": "ifdef",
-      "expression": "SECURE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
-      "start": 123,
+      "start": 109,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3162,16 +3126,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 42,
-      "kind": "ifdef",
-      "expression": "EGATEST",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 47,
+      "start": 44,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3180,7 +3135,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 79,
+      "start": 78,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3189,7 +3144,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 141,
+      "start": 140,
       "kind": "ifndef",
       "expression": "host_simulate",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3198,7 +3153,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 145,
+      "start": 144,
       "kind": "ifndef",
       "expression": "host_cpu_reset",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3207,7 +3162,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 149,
+      "start": 148,
       "kind": "ifndef",
       "expression": "host_cpu_init",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3216,7 +3171,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 153,
+      "start": 152,
       "kind": "ifndef",
       "expression": "host_cpu_interrupt",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3225,7 +3180,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 176,
+      "start": 175,
       "kind": "ifdef",
       "expression": "LITTLEND",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3234,7 +3189,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 218,
+      "start": 217,
       "kind": "ifdef",
       "expression": "CCPU",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3243,7 +3198,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 534,
+      "start": 533,
       "kind": "ifndef",
       "expression": "SPC386",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3252,7 +3207,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
-      "start": 540,
+      "start": 539,
       "kind": "ifdef",
       "expression": "CPU_PRIVATE",
       "pending_reason": "file-not-witnessed-in-product",
@@ -9400,7 +9355,7 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 875
+      "count": 870
     },
     {
       "reason": "file-not-witnessed-in-product",

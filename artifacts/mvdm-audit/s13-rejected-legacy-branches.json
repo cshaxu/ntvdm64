@@ -655,7 +655,7 @@
   {
     "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
     "macro": "BIGEND",
-    "line": 161,
+    "line": 160,
     "body_end": 173,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu2.h",
     "original_sha256": "7e9cb73f825974421128e93c90a0096ad10518b6f48e47824e4b5d140638d216",
@@ -668,7 +668,7 @@
   {
     "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
     "macro": "BACK_M",
-    "line": 63,
+    "line": 62,
     "body_end": 78,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu2.h",
     "original_sha256": "7e9cb73f825974421128e93c90a0096ad10518b6f48e47824e4b5d140638d216",

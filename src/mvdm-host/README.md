@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-602: preserve the original SECURE BIOS bootstrap and EGATEST
+CPU header selectors while rejecting unsupported arms.  Source and SDK macro
+scans and x86/x64 selected/forced controls are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-secure-egatest-batch.json`.
+
 MVDM-HOST-DIV-601: retain the original i386 condition and reject its
 hardware-host FPU save/load path in nt_bop.c. The excluded function was
 the sole mirror location of DIV-323; the active CCPU path and separately

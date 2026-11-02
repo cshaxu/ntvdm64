@@ -40,14 +40,13 @@ extern  void            (*(w_write_ptrs[]))();
 extern  void            (*(b_fill_ptrs[]))();
 extern  void            (*(w_fill_ptrs[]))();
 #ifdef EGATEST
-extern  void            (*(b_fwd_move_ptrs[]))();
-extern  void            (*(w_fwd_move_ptrs[]))();
-extern  void            (*(b_bwd_move_ptrs[]))();
-extern  void            (*(w_bwd_move_ptrs[]))();
+#error DIVERGENCE MVDM-HOST-DIV-602: unsupported EGATEST profile
 #else
+#line 48
 extern  void            (*(b_move_ptrs[]))();
 extern  void            (*(w_move_ptrs[]))();
 #endif /* EGATEST */
+#line 51
 extern  half_word       *haddr_of_src_string;
  
 /*

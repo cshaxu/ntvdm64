@@ -188,3 +188,23 @@ rejected = subprocess.run(base[:-1] + ['/Di386'] + base[-1:], capture_output=Tru
 if allowed.returncode or not rejected.returncode or marker not in rejected.stdout + rejected.stderr:
     raise SystemExit('nt_bop i386 rejection control failed: ' + allowed.stderr + rejected.stderr)
 print('PASS CCPU excludes original hardware-host FPU save path')
+
+for path, macro, expected_count in (
+    ('src/mvdm-host/softpc.new/base/bios/bootstra.c', 'SECURE', 4),
+    ('src/mvdm-host/softpc.new/base/inc/cpu2.h', 'EGATEST', 1),
+):
+    lines = (repo / path).read_text(encoding='latin1').splitlines()
+    marker = 'MVDM-HOST-DIV-602: unsupported ' + macro + ' profile'
+    positions = [i for i, line in enumerate(lines) if marker in line]
+    if len(positions) != expected_count:
+        raise SystemExit('incorrect excluded profile guard count: ' + path)
+    for i in positions:
+        if lines[i-1].strip() != '#ifdef ' + macro:
+            raise SystemExit('excluded profile lost original selector: ' + path)
+        probe.write_text('\n'.join(lines[i-1:i+1] + ['#endif']) + '\n', encoding='ascii')
+        allowed = subprocess.run(base, capture_output=True, text=True, errors='replace')
+        rejected = subprocess.run(base[:-1] + ['/D' + macro] + base[-1:],
+                                  capture_output=True, text=True, errors='replace')
+        if allowed.returncode or not rejected.returncode or marker not in rejected.stdout + rejected.stderr:
+            raise SystemExit('excluded profile selection failed: ' + path)
+print('PASS original SECURE and EGATEST profile guards')
