@@ -1,0 +1,261 @@
+{
+  "scope": "first-depth else arms of #ifndef selectors proven absent; structural mapping only",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 511,
+      "group_line": 492,
+      "macro": "SFELLOW",
+      "original_group_line": 472,
+      "method": "ambiguous",
+      "current_anchors": [
+        "IMPORT VOID dispatch_q_event();",
+        "static BOOL debug_context_resume_check;"
+      ],
+      "original_anchors": [
+        "IMPORT VOID dispatch_q_event();",
+        "extern int ica_intack IPT0();"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 4301,
+      "group_line": 4266,
+      "macro": "SFELLOW",
+      "original_group_line": 4402,
+      "method": "ambiguous",
+      "current_anchors": [
+        "Int1_f();",
+        "NEXT_INST:"
+      ],
+      "original_anchors": [
+        "if (took_absolute_toc || took_relative_jump)",
+        "if ( pig_synch_required )"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "line": 1286,
+      "group_line": 1284,
+      "macro": "SFELLOW",
+      "original_group_line": 1302,
+      "method": "unique",
+      "current_anchors": [
+        "if (first)",
+        "first = FALSE;"
+      ],
+      "original_anchors": [
+        "if (first)",
+        "first = FALSE;"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "line": 409,
+      "group_line": 323,
+      "macro": "SFELLOW",
+      "original_group_line": 326,
+      "method": "unique",
+      "current_anchors": [
+        "} ExtIoEntry, *PExtIoEntry;",
+        "IMPORT void\tinb IPT2(io_addr, io_address, half_word *, value);"
+      ],
+      "original_anchors": [
+        "} ExtIoEntry, *PExtIoEntry;",
+        "IMPORT void\tinb IPT2(io_addr, io_address, half_word *, value);"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": 365,
+      "group_line": 363,
+      "macro": "GISP_SVGA",
+      "original_group_line": 368,
+      "method": "ambiguous",
+      "current_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "(sys_addr)BIOS_START_OFFSET"
+      ],
+      "original_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "(sys_addr)BIOS_START_OFFSET"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": 455,
+      "group_line": 453,
+      "macro": "GISP_SVGA",
+      "original_group_line": 459,
+      "method": "ambiguous",
+      "current_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "(sys_addr)BIOS_START_OFFSET"
+      ],
+      "original_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "(sys_addr)BIOS_START_OFFSET"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": 724,
+      "group_line": 474,
+      "macro": "GISP_SVGA",
+      "original_group_line": 480,
+      "method": "anchor",
+      "current_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "typedef union   {"
+      ],
+      "original_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "typedef union   {"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 269,
+      "group_line": 267,
+      "macro": "macintosh",
+      "original_group_line": 253,
+      "method": "ambiguous",
+      "current_anchors": [
+        "GLOBAL VOID ( *host_key_up_fn_ptr )();",
+        "static int buff_6805_in_ptr,buff_6805_out_ptr;"
+      ],
+      "original_anchors": [
+        "GLOBAL VOID ( *do_key_repeats_fn_ptr )();",
+        "static int buff_6805_in_ptr,buff_6805_out_ptr;"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 324,
+      "group_line": 306,
+      "macro": "macintosh",
+      "original_group_line": 292,
+      "method": "anchor",
+      "current_anchors": [
+        "LOCAL\tBOOL\tsent_overrun=FALSE;",
+        "half_word *anomalous_array;"
+      ],
+      "original_anchors": [
+        "LOCAL\tBOOL\tsent_overrun=FALSE;",
+        "half_word *anomalous_array;"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 1904,
+      "group_line": 1813,
+      "macro": "REAL_KBD",
+      "original_group_line": 2046,
+      "method": "ambiguous",
+      "current_anchors": [
+        "calc_buff_6805_left();",
+        "if (scanning_discontinued && !waiting_for_next_code)"
+      ],
+      "original_anchors": [
+        "calc_buff_6805_left();",
+        "waiting_for_next_code=FALSE;"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 1910,
+      "group_line": 1908,
+      "macro": "REAL_KBD",
+      "original_group_line": 2145,
+      "method": "ambiguous",
+      "current_anchors": [
+        "AddTo6805BuffImm(RESEND_CODE);",
+        "if (scanning_discontinued && !waiting_for_next_code)"
+      ],
+      "original_anchors": [
+        "send_to_real_kbd(cmd_code);",
+        "if (scanning_discontinued && !waiting_for_next_code)"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 172,
+      "group_line": 157,
+      "macro": "GISP_SVGA",
+      "original_group_line": 153,
+      "method": "ambiguous",
+      "current_anchors": [
+        "static sys_addr alt_table;",
+        "GLOBAL word wait_int_seg = RCPU_WAIT_INT_SEGMENT;"
+      ],
+      "original_anchors": [
+        "static sys_addr alt_table;",
+        "IMPORT VOID  HostAllowKbdInt();"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 241,
+      "group_line": 235,
+      "macro": "GISP_SVGA",
+      "original_group_line": 245,
+      "method": "anchor",
+      "current_anchors": [
+        "extern sys_addr stream_io_bios_busy_sysaddr;",
+        "GLOBAL word dummy_int_seg = 0;"
+      ],
+      "original_anchors": [
+        "extern sys_addr stream_io_bios_busy_sysaddr;",
+        "GLOBAL word dummy_int_seg = 0;"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 255,
+      "group_line": 253,
+      "macro": "GISP_SVGA",
+      "original_group_line": 279,
+      "method": "unique",
+      "current_anchors": [
+        "(VOID) setup_global_data_ptr();",
+        "host_init_screen();"
+      ],
+      "original_anchors": [
+        "(VOID) setup_global_data_ptr();",
+        "if (screen_init == 0)"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "line": 537,
+      "group_line": 535,
+      "macro": "GISP_SVGA",
+      "original_group_line": 615,
+      "method": "unique",
+      "current_anchors": [
+        "GLOBAL void copyROM IFN0()",
+        "GLOBAL void display_string IFN1(char *, string_ptr)"
+      ],
+      "original_anchors": [
+        "GLOBAL void copyROM IFN0()",
+        "GLOBAL void display_string IFN1(char *, string_ptr)"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/hostgrph.h",
+      "line": 38,
+      "group_line": 36,
+      "macro": "SUN_VA",
+      "original_group_line": 36,
+      "method": "ledger",
+      "current_anchors": [
+        "extern int terminal_type;",
+        null
+      ],
+      "original_anchors": [
+        "extern int terminal_type;",
+        null
+      ]
+    }
+  ]
+}

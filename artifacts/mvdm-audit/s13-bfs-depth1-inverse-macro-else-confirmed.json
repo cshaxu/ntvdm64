@@ -1,0 +1,425 @@
+{
+  "scope": "eight existing first-depth else guards reached only when proven-absent macro is defined; no source edits",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "line": 1286,
+      "group_line": 1284,
+      "macro": "SFELLOW",
+      "original_group_line": 1302,
+      "method": "unique",
+      "current_anchors": [
+        "if (first)",
+        "first = FALSE;"
+      ],
+      "original_anchors": [
+        "if (first)",
+        "first = FALSE;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.",
+      "source_sha256": "5186136ef214b81d91a9955483cceaaa8cdee3f86d8c3baa1555a29c340bd5a1",
+      "original_sha256": "1309239998f72b64583b184d33623c763c3c98ea185081f8d8b294cd9b8c524f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "line": 409,
+      "group_line": 323,
+      "macro": "SFELLOW",
+      "original_group_line": 326,
+      "method": "unique",
+      "current_anchors": [
+        "} ExtIoEntry, *PExtIoEntry;",
+        "IMPORT void\tinb IPT2(io_addr, io_address, half_word *, value);"
+      ],
+      "original_anchors": [
+        "} ExtIoEntry, *PExtIoEntry;",
+        "IMPORT void\tinb IPT2(io_addr, io_address, half_word *, value);"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-521: SFELLOW alternative is not selected; see mirror register.",
+      "source_sha256": "ab2f4af08702de82f4207ea7a93d723009f200fc159d540e13adf14a33764fec",
+      "original_sha256": "ae58169de7aa969000f7cf4374d3d850b55d352c3d4c6edcf52dec0e985620a4"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": 724,
+      "group_line": 474,
+      "macro": "GISP_SVGA",
+      "original_group_line": 480,
+      "method": "anchor",
+      "current_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "typedef union   {"
+      ],
+      "original_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "typedef union   {"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.",
+      "source_sha256": "655c332ff639ab73f6b37043db11357d154ada60c11c3493e2b210f04eaf9cc0",
+      "original_sha256": "63832958d3a6b9ef2f9f209e5ada4af8067fab3b5cdb6f317c5663cbd2b5f2ef"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 324,
+      "group_line": 306,
+      "macro": "macintosh",
+      "original_group_line": 292,
+      "method": "anchor",
+      "current_anchors": [
+        "LOCAL\tBOOL\tsent_overrun=FALSE;",
+        "half_word *anomalous_array;"
+      ],
+      "original_anchors": [
+        "LOCAL\tBOOL\tsent_overrun=FALSE;",
+        "half_word *anomalous_array;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-521: macintosh alternative is not selected; see mirror register.",
+      "source_sha256": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 241,
+      "group_line": 235,
+      "macro": "GISP_SVGA",
+      "original_group_line": 245,
+      "method": "anchor",
+      "current_anchors": [
+        "extern sys_addr stream_io_bios_busy_sysaddr;",
+        "GLOBAL word dummy_int_seg = 0;"
+      ],
+      "original_anchors": [
+        "extern sys_addr stream_io_bios_busy_sysaddr;",
+        "GLOBAL word dummy_int_seg = 0;"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.",
+      "source_sha256": "477641c1c77365f962e1be2e7d5d83295d9a05c0d557fc39c07890411425e317",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 255,
+      "group_line": 253,
+      "macro": "GISP_SVGA",
+      "original_group_line": 279,
+      "method": "unique",
+      "current_anchors": [
+        "(VOID) setup_global_data_ptr();",
+        "host_init_screen();"
+      ],
+      "original_anchors": [
+        "(VOID) setup_global_data_ptr();",
+        "if (screen_init == 0)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.",
+      "source_sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "line": 537,
+      "group_line": 535,
+      "macro": "GISP_SVGA",
+      "original_group_line": 615,
+      "method": "unique",
+      "current_anchors": [
+        "GLOBAL void copyROM IFN0()",
+        "GLOBAL void display_string IFN1(char *, string_ptr)"
+      ],
+      "original_anchors": [
+        "GLOBAL void copyROM IFN0()",
+        "GLOBAL void display_string IFN1(char *, string_ptr)"
+      ],
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.",
+      "source_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550",
+      "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/hostgrph.h",
+      "line": 38,
+      "group_line": 36,
+      "macro": "SUN_VA",
+      "original_group_line": 36,
+      "method": "ledger",
+      "current_anchors": [
+        "extern int terminal_type;",
+        null
+      ],
+      "original_anchors": [
+        "extern int terminal_type;",
+        null
+      ],
+      "guard": "#error Excluded unsupported SUN_VA configuration",
+      "source_sha256": "81a5d44ca57274fe0e2f897866736ed2d3cbef8cf8a238cc51f80ca015e2ac4b",
+      "original_sha256": "de614afaf98aba14ba184f6ce8381b17c20a244f9f96f823ea60b713861b26e4"
+    }
+  ],
+  "controls": [
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "line": 1286,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "line": 409,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": 724,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 324,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 241,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 255,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "line": 537,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/host/inc/hostgrph.h",
+      "line": 38,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "line": 1286,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "line": 409,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": 724,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 324,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 241,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 255,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "line": 537,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/host/inc/hostgrph.h",
+      "line": 38,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    }
+  ],
+  "deferred": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 511,
+      "group_line": 492,
+      "macro": "SFELLOW",
+      "original_group_line": 472,
+      "method": "ambiguous",
+      "current_anchors": [
+        "IMPORT VOID dispatch_q_event();",
+        "static BOOL debug_context_resume_check;"
+      ],
+      "original_anchors": [
+        "IMPORT VOID dispatch_q_event();",
+        "extern int ica_intack IPT0();"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 4301,
+      "group_line": 4266,
+      "macro": "SFELLOW",
+      "original_group_line": 4402,
+      "method": "ambiguous",
+      "current_anchors": [
+        "Int1_f();",
+        "NEXT_INST:"
+      ],
+      "original_anchors": [
+        "if (took_absolute_toc || took_relative_jump)",
+        "if ( pig_synch_required )"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": 365,
+      "group_line": 363,
+      "macro": "GISP_SVGA",
+      "original_group_line": 368,
+      "method": "ambiguous",
+      "current_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "(sys_addr)BIOS_START_OFFSET"
+      ],
+      "original_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "(sys_addr)BIOS_START_OFFSET"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": 455,
+      "group_line": 453,
+      "macro": "GISP_SVGA",
+      "original_group_line": 459,
+      "method": "ambiguous",
+      "current_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "(sys_addr)BIOS_START_OFFSET"
+      ],
+      "original_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "(sys_addr)BIOS_START_OFFSET"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 269,
+      "group_line": 267,
+      "macro": "macintosh",
+      "original_group_line": 253,
+      "method": "ambiguous",
+      "current_anchors": [
+        "GLOBAL VOID ( *host_key_up_fn_ptr )();",
+        "static int buff_6805_in_ptr,buff_6805_out_ptr;"
+      ],
+      "original_anchors": [
+        "GLOBAL VOID ( *do_key_repeats_fn_ptr )();",
+        "static int buff_6805_in_ptr,buff_6805_out_ptr;"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 1904,
+      "group_line": 1813,
+      "macro": "REAL_KBD",
+      "original_group_line": 2046,
+      "method": "ambiguous",
+      "current_anchors": [
+        "calc_buff_6805_left();",
+        "if (scanning_discontinued && !waiting_for_next_code)"
+      ],
+      "original_anchors": [
+        "calc_buff_6805_left();",
+        "waiting_for_next_code=FALSE;"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 1910,
+      "group_line": 1908,
+      "macro": "REAL_KBD",
+      "original_group_line": 2145,
+      "method": "ambiguous",
+      "current_anchors": [
+        "AddTo6805BuffImm(RESEND_CODE);",
+        "if (scanning_discontinued && !waiting_for_next_code)"
+      ],
+      "original_anchors": [
+        "send_to_real_kbd(cmd_code);",
+        "if (scanning_discontinued && !waiting_for_next_code)"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 172,
+      "group_line": 157,
+      "macro": "GISP_SVGA",
+      "original_group_line": 153,
+      "method": "ambiguous",
+      "current_anchors": [
+        "static sys_addr alt_table;",
+        "GLOBAL word wait_int_seg = RCPU_WAIT_INT_SEGMENT;"
+      ],
+      "original_anchors": [
+        "static sys_addr alt_table;",
+        "IMPORT VOID  HostAllowKbdInt();"
+      ]
+    }
+  ],
+  "macro_evidence": [
+    "s13-bfs-depth1-sfellow-existing-guard-audit.json",
+    "s13-bfs-depth1-gisp-svga-existing-guard-audit.json",
+    "s13-bfs-depth1-macintosh-existing-guard-audit.json",
+    "s13-bfs-depth1-pending-guard-macro-origins.json",
+    "s13-bfs-depth1-pending-guard-sdk-scan.json",
+    "s13-bfs-depth1-pending-guard-continuation-scan.json"
+  ]
+}

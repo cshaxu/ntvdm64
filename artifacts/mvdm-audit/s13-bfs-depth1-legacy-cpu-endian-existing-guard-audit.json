@@ -1,0 +1,83 @@
+{
+  "scope": "first-depth existing guards requiring BIGEND or A2CPU only",
+  "basis": "BIGEND selects the opposite-endian CPU representation and A2CPU selects an alternate CPU interrupt backend; supported MSVC x86/x64 CCPU40 configurations select neither. All observed commands, repository definitions and generated headers were checked; original selectors and both architecture controls were verified.",
+  "source_scan_command": [
+    "rg",
+    "-n",
+    "--glob",
+    "!*.md",
+    "--glob",
+    "!*.json",
+    "--glob",
+    "!*.log",
+    "(?i)(^\\s*#\\s*(define|undef)\\s+(BIGEND|A2CPU)\\b|(?:/D|-D)(BIGEND|A2CPU)\\b)",
+    "src",
+    "tests",
+    "tools",
+    "CMakeLists.txt"
+  ],
+  "source_scan_exit": 1,
+  "graph_commands_checked": 2070,
+  "legacy_cpu_endian_flags_found": 0,
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
+      "line": 161,
+      "kind": "ifdef",
+      "expression": "BIGEND",
+      "original_line": 161,
+      "original_sha256": "7e9cb73f825974421128e93c90a0096ad10518b6f48e47824e4b5d140638d216",
+      "source_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb",
+      "directive": "#ifdef BIGEND",
+      "guard": "#error Excluded unsupported BIGEND configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": 632,
+      "kind": "ifdef",
+      "expression": "A2CPU",
+      "original_line": 698,
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "source_sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a",
+      "directive": "#ifdef A2CPU",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-520: A2CPU platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    }
+  ],
+  "controls": [
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
+      "line": 161,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": 632,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
+      "line": 161,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": 632,
+      "default_exit": 0,
+      "forced_exit": 2
+    }
+  ],
+  "generated_cache_macro_definition_scan": {
+    "scope": "build/.ninja/**/*.c and *.h",
+    "pattern": "#define or #undef BIGEND/A2CPU",
+    "matches": 0
+  }
+}

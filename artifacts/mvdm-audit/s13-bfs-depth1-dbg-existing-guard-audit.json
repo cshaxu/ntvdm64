@@ -1,0 +1,358 @@
+{
+  "scope": "first-depth #if DBG guards with unique original selector and current supported release/fixture context; no global ban on DBG",
+  "graph_commands_checked": 2070,
+  "graph_dbg_flags": 0,
+  "sdk_scan_command": [
+    "rg",
+    "-n",
+    "--glob",
+    "*.h",
+    "--glob",
+    "*.hpp",
+    "--glob",
+    "*.inc",
+    "--glob",
+    "*.inl",
+    "^\\s*#\\s*(?:define|undef)\\s+DBG\\b",
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.43.34808\\include",
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Auxiliary\\VS\\include",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\include\\10.0.22621.0\\ucrt",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\um",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\shared",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\winrt",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\cppwinrt",
+    "C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.7\\include\\um"
+  ],
+  "sdk_dbg_definition_matches": [],
+  "known_definitions": "current csr.h/base.h and two fixtures define DBG as 0; legacy vdmutils source manifests and immutable guest makefiles contain DBG=1 but have no selected host Ninja consumers",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "line": 25,
+      "original_line": 25,
+      "original_sha256": "c5734d7842c34ae436cd12a5b52ad76d4fab88940a64f3af7e5fdc6fbc92e4a9",
+      "current_sha256": "c37cbc2e860fdfcb38793020e283b5babc55c46324a753aa0220aba8f67902b4",
+      "directive": "#if DBG",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "line": 211,
+      "original_line": 196,
+      "original_sha256": "f9772482513601c2e316e097a92485864557af77010e77285d725d903a0fd7b2",
+      "current_sha256": "0358654ff6aeca9a35762914a7d3665ddbdb4246e6436243469bcdc21764e8d5",
+      "directive": "#if DBG",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/inc/dpmi.h",
+      "line": 68,
+      "original_line": 68,
+      "original_sha256": "3425f64b805b8bab8086523288c8afe86eee8f183208aa863b49bb8fb962a154",
+      "current_sha256": "9c451f52c1656ac213ac6ea974c582d36edce97bc3669e10ed87e06c18a43f3c",
+      "directive": "#if DBG",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/inc/vrnmpipe.h",
+      "line": 271,
+      "original_line": 267,
+      "original_sha256": "06e77e0e94ff590b0aef18577f53eda9987c6dc2331ac6e8c185cfd10fe79da6",
+      "current_sha256": "5ab62f01e3fd2628ed1b5fab8d1456387128a92467c29d14d099bed978850443",
+      "directive": "#if DBG",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc.h",
+      "line": 981,
+      "original_line": 981,
+      "original_sha256": "85ea2d8288f4bee6162f5475bbae5c40f4470d8521b4360f4a77a130a14df8a8",
+      "current_sha256": "f089c22995d409ca4c8ce89f02cd42e6ef0a66fbd6c519f9d4ef072edc061cca",
+      "directive": "#if DBG",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.h",
+      "line": 179,
+      "original_line": 179,
+      "original_sha256": "2adbd4b0705a98bbb399c9b333551afa8999af1b27a008029b9fb871f787ff8c",
+      "current_sha256": "89fdaa230a2327a053e51f90a02f124b23abaf2f7cfde9b3745199025b1981ba",
+      "directive": "#if DBG",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia.h",
+      "line": 238,
+      "original_line": 238,
+      "original_sha256": "7b2e07ac7da3864922a65586539c19945344ed04df1d53d26e38119102a69801",
+      "current_sha256": "5650cb890b74f64d6d269fe1a1a2153e37d2c1d7f54aeaad41fbccf557a712ed",
+      "directive": "#if DBG",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/non-mvdm/base/win32/inc/base.h",
+      "line": 48,
+      "original_line": 48,
+      "original_sha256": "2df61cf7f17123235a340b6e802c4a998889db112cfd15399cec3cd107911cf7",
+      "current_sha256": "db688148ff7fb55e379d5d2ac120272ae6b73860e7a5f087079b18bc82469961",
+      "directive": "#if DBG",
+      "guard": "#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register."
+    }
+  ],
+  "ambiguous_deferred": [
+    {
+      "path": "src/mvdm-host/suballoc/suballcp.h",
+      "line": 57,
+      "current_occurrences": [
+        57,
+        126
+      ],
+      "original_occurrences": [
+        57,
+        130
+      ]
+    },
+    {
+      "path": "src/mvdm-host/suballoc/suballcp.h",
+      "line": 126,
+      "current_occurrences": [
+        57,
+        126
+      ],
+      "original_occurrences": [
+        57,
+        130
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.h",
+      "line": 70,
+      "current_occurrences": [
+        70,
+        561
+      ],
+      "original_occurrences": [
+        70,
+        580
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.h",
+      "line": 561,
+      "current_occurrences": [
+        70,
+        561
+      ],
+      "original_occurrences": [
+        70,
+        580
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "line": 25,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "line": 211,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/inc/dpmi.h",
+      "line": 68,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/inc/vrnmpipe.h",
+      "line": 271,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/vdmredir/vrdlc.h",
+      "line": 981,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.h",
+      "line": 179,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/wow32/wmmedia.h",
+      "line": 238,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/non-mvdm/base/win32/inc/base.h",
+      "line": 48,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "line": 25,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "line": 211,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/inc/dpmi.h",
+      "line": 68,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/inc/vrnmpipe.h",
+      "line": 271,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/vdmredir/vrdlc.h",
+      "line": 981,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.h",
+      "line": 179,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/wow32/wmmedia.h",
+      "line": 238,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/non-mvdm/base/win32/inc/base.h",
+      "line": 48,
+      "undefined_exit": 0,
+      "zero_exit": 0,
+      "one_exit": 2,
+      "ok": true
+    }
+  ],
+  "continuation_aware_source_scan": {
+    "command": [
+      "rg",
+      "-n",
+      "-U",
+      "--hidden",
+      "--glob",
+      "*.h",
+      "--glob",
+      "*.hpp",
+      "--glob",
+      "*.c",
+      "--glob",
+      "*.cpp",
+      "--glob",
+      "*.inc",
+      "--glob",
+      "*.inl",
+      "--glob",
+      "*.rc",
+      "--glob",
+      "*.py",
+      "(?m)^(?:[ \\t]|\\\\\\r?\\n)*#(?:[ \\t]|\\\\\\r?\\n)*(?:define|undef)(?:[ \\t]|\\\\\\r?\\n)+DBG\\b",
+      "src",
+      "tests",
+      "tools",
+      "build/.ninja"
+    ],
+    "matches": [
+      "tests\\adapter-mvdm-host-out\\wow\\wow_accelerator_call_fixture.c:16:#define DBG 0",
+      "tests\\observation\\verify-dpmi-swint-diagnostic-source.py:33:#define DBG 0",
+      "src\\non-mvdm\\public\\internal\\base\\inc\\csr.h:39:#define DBG 0",
+      "src\\non-mvdm\\base\\win32\\inc\\base.h:39:#define DBG 0"
+    ]
+  },
+  "continuation_aware_sdk_scan": {
+    "command": [
+      "rg",
+      "-n",
+      "-U",
+      "--glob",
+      "*.h",
+      "--glob",
+      "*.hpp",
+      "--glob",
+      "*.inc",
+      "--glob",
+      "*.inl",
+      "(?m)^(?:[ \\t]|\\\\\\r?\\n)*#(?:[ \\t]|\\\\\\r?\\n)*(?:define|undef)(?:[ \\t]|\\\\\\r?\\n)+DBG\\b",
+      "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.43.34808\\include",
+      "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Auxiliary\\VS\\include",
+      "C:\\Program Files (x86)\\Windows Kits\\10\\include\\10.0.22621.0\\ucrt",
+      "C:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\um",
+      "C:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\shared",
+      "C:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\winrt",
+      "C:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\cppwinrt",
+      "C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.7\\include\\um"
+    ],
+    "matches": []
+  }
+}

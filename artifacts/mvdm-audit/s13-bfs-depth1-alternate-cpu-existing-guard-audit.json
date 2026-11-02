@@ -1,0 +1,289 @@
+{
+  "scope": "first-depth existing guards requiring alternate CPU selectors; only positive A3CPU/GISP_CPU selectors are classified",
+  "basis": "A3CPU and GISP_CPU are alternate CPU backends outside the selected CCPU40 build; repository and generated-header scans found no definition and no supported Ninja compile command sets either. The IRET_HOOKS conjunction is false without GISP_CPU; IRET_HOOKS alone is separately tested. OR conditions remain unclassified.",
+  "source_scan_command": [
+    "rg",
+    "-n",
+    "--glob",
+    "!*.md",
+    "--glob",
+    "!*.json",
+    "--glob",
+    "!*.log",
+    "(?i)(^\\s*#\\s*(define|undef)\\s+(A3CPU|GISP_CPU)\\b|(?:/D|-D)(A3CPU|GISP_CPU)\\b)",
+    "src",
+    "tests",
+    "tools",
+    "CMakeLists.txt"
+  ],
+  "source_scan_exit": 1,
+  "graph_commands_checked": 2070,
+  "alternate_cpu_flags_found": 0,
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 58,
+      "kind": "ifdef",
+      "expression": "GISP_CPU",
+      "original_line": 58,
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "source_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
+      "directive": "#ifdef GISP_CPU",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": 460,
+      "kind": "ifdef",
+      "expression": "A3CPU",
+      "original_line": 460,
+      "original_sha256": "ad167e9ff54476da9bc31c724d284073fb5c8796aa4417c66524aecb9e33bc0a",
+      "source_sha256": "c711c104e058563c8f247032366ae4424967e8a09592a073bdf5e379e7f21f95",
+      "directive": "#ifdef A3CPU",
+      "guard": "#error Excluded unsupported A3CPU configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "line": 78,
+      "kind": "ifdef",
+      "expression": "GISP_CPU",
+      "original_line": 83,
+      "original_sha256": "c1296168c866527a931bfa4b7cefe21f54acc96a6f242b0a60d6cdba4cdba725",
+      "source_sha256": "cbf57be356f8c69dbe92bf77767177efa547965b2d878590876e7baf55f20227",
+      "directive": "#ifdef GISP_CPU",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 281,
+      "kind": "if",
+      "expression": "defined(IRET_HOOKS) && defined(GISP_CPU)",
+      "original_line": 267,
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "source_sha256": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a",
+      "directive": "#if defined(IRET_HOOKS) && defined(GISP_CPU)",
+      "guard": "#error Excluded unsupported GISP_CPU configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 2636,
+      "kind": "if",
+      "expression": "defined(IRET_HOOKS) && defined(GISP_CPU)",
+      "original_line": 3055,
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "source_sha256": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a",
+      "directive": "#if defined(IRET_HOOKS) && defined(GISP_CPU)",
+      "guard": "#error Excluded unsupported GISP_CPU configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 176,
+      "kind": "if",
+      "expression": "defined(IRET_HOOKS) && defined(GISP_CPU)",
+      "original_line": 186,
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "source_sha256": "477641c1c77365f962e1be2e7d5d83295d9a05c0d557fc39c07890411425e317",
+      "directive": "#if defined(IRET_HOOKS) && defined(GISP_CPU)",
+      "guard": "#error Excluded unsupported GISP_CPU configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 723,
+      "kind": "if",
+      "expression": "defined(IRET_HOOKS)  && defined(GISP_CPU)",
+      "original_line": 809,
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "source_sha256": "477641c1c77365f962e1be2e7d5d83295d9a05c0d557fc39c07890411425e317",
+      "directive": "#if defined(IRET_HOOKS)  && defined(GISP_CPU)",
+      "guard": "#error Excluded unsupported GISP_CPU configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
+      "line": 97,
+      "kind": "ifdef",
+      "expression": "A3CPU",
+      "original_line": 97,
+      "original_sha256": "cbf9ee8a199d48ee74171b2e23d55bb1e5d019710fdea2a917762739d6a49044",
+      "source_sha256": "48c46f5ac657fb9c3755fd0d90d350200b20b76d0b71db86404ca0849293e554",
+      "directive": "#ifdef A3CPU",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    }
+  ],
+  "controls": [
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 58,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": 460,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "line": 78,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 281,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 2636,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 176,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 723,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
+      "line": 97,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 58,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": 460,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+      "line": 78,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 281,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 2636,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 176,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 723,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
+      "line": 97,
+      "default_exit": 0,
+      "forced_exit": 2
+    }
+  ],
+  "iret_only_controls": [
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 281,
+      "iret_without_gisp_exit": 0
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 2636,
+      "iret_without_gisp_exit": 0
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 176,
+      "iret_without_gisp_exit": 0
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 723,
+      "iret_without_gisp_exit": 0
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 281,
+      "iret_without_gisp_exit": 0
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 2636,
+      "iret_without_gisp_exit": 0
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 176,
+      "iret_without_gisp_exit": 0
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 723,
+      "iret_without_gisp_exit": 0
+    }
+  ],
+  "generated_cache_macro_definition_scan": {
+    "scope": "build/.ninja/**/*.c and *.h",
+    "pattern": "#define or #undef A3CPU/GISP_CPU",
+    "matches": 0
+  }
+}

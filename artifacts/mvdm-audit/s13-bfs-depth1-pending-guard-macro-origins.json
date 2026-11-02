@@ -1,0 +1,428 @@
+{
+  "scope": "first-depth pending positive-ifdef guards; macro-origin overapproximation, no disposition decisions",
+  "graph_commands": 2070,
+  "distinct_observed_include_files": 1656,
+  "include_read_failures": [],
+  "repository_scan": [
+    "rg",
+    "-n",
+    "--no-heading",
+    "--glob",
+    "!*.md",
+    "--glob",
+    "!*.json",
+    "--glob",
+    "!*.log",
+    "(?i)(^\\s*#\\s*(define|undef)\\s+(BACK_M|CGAMONO|DUMB_TERMINAL|EGA_DUMP|HERC|HUNTER|IRET_HOOKS|LATER|LICENSING|MONITOR|NOTUSED|NOVELL|PIG|PIG_DONT_CHECK_OTHER_WORD_ON_STACK|PS_FLUSHING|REAL_KBD|REAL_VGA|SECURE|SEGMENTATION|SETUID_ROOT|SHORT_TRACE|SIGNAL_PROFILING|SLAVEPC|SOFTWINDOWS|SOFTWIN_API|SUN_VA|SWIN_HFX|SWIN_SNDBLST_NULL|SYNCH_TIMERS|SYSMODALWINDOWS|UNICODE|X86GFX|YODA)\\b|(?:/D|-D)\\s*(BACK_M|CGAMONO|DUMB_TERMINAL|EGA_DUMP|HERC|HUNTER|IRET_HOOKS|LATER|LICENSING|MONITOR|NOTUSED|NOVELL|PIG|PIG_DONT_CHECK_OTHER_WORD_ON_STACK|PS_FLUSHING|REAL_KBD|REAL_VGA|SECURE|SEGMENTATION|SETUID_ROOT|SHORT_TRACE|SIGNAL_PROFILING|SLAVEPC|SOFTWINDOWS|SOFTWIN_API|SUN_VA|SWIN_HFX|SWIN_SNDBLST_NULL|SYNCH_TIMERS|SYSMODALWINDOWS|UNICODE|X86GFX|YODA)\\b)",
+    "src",
+    "tests",
+    "tools",
+    "CMakeLists.txt",
+    "CMakePresets.json"
+  ],
+  "repository_scan_returncode": 0,
+  "records": [
+    {
+      "macro": "BACK_M",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "CGAMONO",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "DUMB_TERMINAL",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "EGA_DUMP",
+      "pending_guard_count": 2,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "HERC",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "HUNTER",
+      "pending_guard_count": 6,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "IRET_HOOKS",
+      "pending_guard_count": 2,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "LATER",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "LICENSING",
+      "pending_guard_count": 3,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "MONITOR",
+      "pending_guard_count": 1,
+      "graph_flag_count": 10,
+      "graph_flag_examples": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/bios/bios.obj"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/keymouse/keybd_io.obj"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/video/video.obj"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/comms/printer.obj"
+        }
+      ],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "NOTUSED",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "NOVELL",
+      "pending_guard_count": 4,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "PIG",
+      "pending_guard_count": 2,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [
+        "src\\mvdm-host\\softpc.new\\host\\inc\\mips\\prod\\pigger_c.h:3:#define Pig (0)",
+        "src\\mvdm-host\\softpc.new\\base\\cvidc\\cpu_c.h:92:#define Pig (1)",
+        "src\\mvdm-host\\softpc.new\\base\\ccpu386\\pigger_c.h:3:#define Pig (1)"
+      ],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "PIG_DONT_CHECK_OTHER_WORD_ON_STACK",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "PS_FLUSHING",
+      "pending_guard_count": 4,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "REAL_KBD",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "REAL_VGA",
+      "pending_guard_count": 3,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "SECURE",
+      "pending_guard_count": 3,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "SEGMENTATION",
+      "pending_guard_count": 6,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "SETUID_ROOT",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "SHORT_TRACE",
+      "pending_guard_count": 3,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "SIGNAL_PROFILING",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "SLAVEPC",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "SOFTWINDOWS",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "SOFTWIN_API",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "SUN_VA",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "SWIN_HFX",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "SWIN_SNDBLST_NULL",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "SYNCH_TIMERS",
+      "pending_guard_count": 2,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "SYSMODALWINDOWS",
+      "pending_guard_count": 1,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "UNICODE",
+      "pending_guard_count": 1,
+      "graph_flag_count": 205,
+      "graph_flag_examples": [
+        {
+          "path": "tests/adapter-mvdm-host-out/wow/wow_dialog_native_owner_probe.c",
+          "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+          "output": "obj/dialog_native_owner_probe.obj"
+        },
+        {
+          "path": "src/wow32-dll/source/wow_dialog_procedure_bindings.c",
+          "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+          "output": "obj/dialog_procedure_adapter.obj"
+        },
+        {
+          "path": "tests/adapter-mvdm-host-out/wow/wow_dialog_initialization_fixture.c",
+          "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+          "output": "obj/dialog_initialization_fixture.obj"
+        },
+        {
+          "path": "src/wow32-dll/source/wow_dialog_procedure_bindings.c",
+          "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+          "output": "obj/dialog_initialization_adapter.obj"
+        }
+      ],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [
+        "tests\\adapter-mvdm-host-out\\wow\\wow_original_create_entry_fixture.c:1:#define UNICODE",
+        "src\\mvdm-host\\vdmutils\\forcedos\\forcedos.c:33:#define UNICODE     1",
+        "src\\non-mvdm\\base\\win32\\client\\basedll.h:25:#undef UNICODE"
+      ],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "X86GFX",
+      "pending_guard_count": 2,
+      "graph_flag_count": 2,
+      "graph_flag_examples": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "graph": "build/.ninja/msvc-x86-release/worker",
+          "output": "obj/video/video.obj"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+          "output": "obj/video/video.obj"
+        }
+      ],
+      "observed_include_definition_count": 0,
+      "observed_include_definition_examples": [],
+      "repo_definition_or_flag_matches": [],
+      "compiler_predefined_in": []
+    },
+    {
+      "macro": "YODA",
+      "pending_guard_count": 7,
+      "graph_flag_count": 0,
+      "graph_flag_examples": [],
+      "observed_include_definition_count": 2,
+      "observed_include_definition_examples": [
+        {
+          "path": "O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\\host_def.h",
+          "logical_scan_line": 162
+        },
+        {
+          "path": "O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h",
+          "logical_scan_line": 162
+        }
+      ],
+      "repo_definition_or_flag_matches": [
+        "src\\mvdm-host\\softpc.new\\host\\inc\\host_def.h:165:#define YODA                           //ie YODA in non x86 checked only"
+      ],
+      "compiler_predefined_in": []
+    }
+  ]
+}

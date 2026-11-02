@@ -1,0 +1,93 @@
+{
+  "scope": "first-depth surrounding anchor comparison only",
+  "records": [
+    {
+      "path": "src/mvdm-host/suballoc/suballcp.h",
+      "line": 57,
+      "original_line": 57,
+      "current_anchors": [
+        null,
+        "((p[(i)/(sizeof(UCHAR) * 8)] >> ((i) % (sizeof(UCHAR) * 8))) & 1)"
+      ],
+      "original_anchors": [
+        null,
+        "((p[(i)/(sizeof(UCHAR) * 8)] >> ((i) % (sizeof(UCHAR) * 8))) & 1)"
+      ],
+      "matches": {
+        "current": [
+          57
+        ],
+        "original": [
+          57
+        ]
+      },
+      "unique_pair": false
+    },
+    {
+      "path": "src/mvdm-host/suballoc/suballcp.h",
+      "line": 126,
+      "original_line": 130,
+      "current_anchors": [
+        "typedef struct _SubAllocation {",
+        "PSACOMMITROUTINE CommitRoutine;"
+      ],
+      "original_anchors": [
+        "typedef struct _SubAllocation {",
+        "PSACOMMITROUTINE CommitRoutine;"
+      ],
+      "matches": {
+        "current": [
+          126
+        ],
+        "original": [
+          130
+        ]
+      },
+      "unique_pair": true
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.h",
+      "line": 70,
+      "original_line": 70,
+      "current_anchors": [
+        null,
+        "typedef enum {"
+      ],
+      "original_anchors": [
+        null,
+        "typedef enum {"
+      ],
+      "matches": {
+        "current": [
+          70
+        ],
+        "original": [
+          70
+        ]
+      },
+      "unique_pair": false
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.h",
+      "line": 561,
+      "original_line": 580,
+      "current_anchors": [
+        "IN  WORD    Offset",
+        null
+      ],
+      "original_anchors": [
+        "IN  WORD    Offset",
+        null
+      ],
+      "matches": {
+        "current": [
+          561
+        ],
+        "original": [
+          580
+        ]
+      },
+      "unique_pair": false
+    }
+  ]
+}

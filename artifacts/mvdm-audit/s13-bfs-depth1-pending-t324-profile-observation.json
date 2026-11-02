@@ -1,0 +1,59 @@
+{
+  "scope": "T324 exact compiler flags with disposable shadow first-depth sentinels; observed arms only",
+  "records": [
+    {
+      "architecture": "x86",
+      "exit": 0,
+      "positive": [
+        {
+          "path": "src/mvdm-host/dos/command/cmd.h",
+          "start": 64,
+          "kind": "ifdef",
+          "expression": "WIN"
+        },
+        {
+          "path": "src/mvdm-host/dos/command/cmd.h",
+          "start": 56,
+          "kind": "ifdef",
+          "expression": "FLAT_32"
+        },
+        {
+          "path": "src/mvdm-host/dos/command/cmd.h",
+          "start": 45,
+          "kind": "ifdef",
+          "expression": "WIN_32"
+        }
+      ]
+    },
+    {
+      "architecture": "x64",
+      "exit": 0,
+      "positive": [
+        {
+          "path": "src/mvdm-host/dos/command/cmd.h",
+          "start": 64,
+          "kind": "ifdef",
+          "expression": "WIN"
+        },
+        {
+          "path": "src/mvdm-host/dos/command/cmd.h",
+          "start": 56,
+          "kind": "ifdef",
+          "expression": "FLAT_32"
+        },
+        {
+          "path": "src/mvdm-host/dos/command/cmd.h",
+          "start": 45,
+          "kind": "ifdef",
+          "expression": "WIN_32"
+        },
+        {
+          "path": "src/mvdm-host/inc/mvdm.h",
+          "start": 68,
+          "kind": "else",
+          "expression": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1339 @@
+{
+  "scope": "existing first-depth #ifdef guards with macro origin proofs and unique or registered original mapping; no source edits",
+  "basis": "No selected graph command, repository/generated source definition, build-script flag, compiler built-in, or x86/x64 SDK header defines these labels. This does not forbid MONITOR, PIG, X86GFX, YODA or other excluded-from-candidate labels.",
+  "inputs": [
+    "s13-bfs-depth1-pending-guard-macro-origins.json",
+    "s13-bfs-depth1-pending-guard-sdk-scan.json",
+    "s13-bfs-depth1-pending-guard-generated-scan.json",
+    "s13-bfs-depth1-pending-guard-continuation-scan.json"
+  ],
+  "build_script_word_scan": {
+    "command": [
+      "rg",
+      "-n",
+      "--glob",
+      "CMakeLists.txt",
+      "--glob",
+      "*.cmake",
+      "--glob",
+      "*.mjs",
+      "--glob",
+      "*.ps1",
+      "--glob",
+      "*.py",
+      "\\b(?:BACK_M|CGAMONO|DUMB_TERMINAL|EGA_DUMP|HERC|HUNTER|IRET_HOOKS|LATER|LICENSING|NOTUSED|NOVELL|PIG_DONT_CHECK_OTHER_WORD_ON_STACK|PS_FLUSHING|REAL_KBD|REAL_VGA|SECURE|SEGMENTATION|SETUID_ROOT|SHORT_TRACE|SIGNAL_PROFILING|SLAVEPC|SOFTWINDOWS|SOFTWIN_API|SUN_VA|SWIN_HFX|SWIN_SNDBLST_NULL|SYNCH_TIMERS|SYSMODALWINDOWS)\\b",
+      "src",
+      "tools",
+      "tests",
+      "CMakeLists.txt",
+      "CMakePresets.json"
+    ],
+    "matches": [
+      "tools\\audit\\Export-T310WholeTreeCompilerWarningLedger.mjs:43:    ['softpc.new/base/inc/hunter.h', 'SPC-HUNTER-UNSELECTED'],",
+      "tools\\audit\\Export-T310WholeTreeAbiInventory.mjs:64:    ['softpc.new/base/inc/hunter.h', 'SPC-HUNTER-UNSELECTED'],",
+      "tools\\audit\\Export-T310WholeTreeAbiInventory.mjs:85:  if (cluster === 'SPC-HUNTER-UNSELECTED' || cluster === 'SPC-DEBUG-UNSELECTED') return 'unselected-debug-profile';"
+    ],
+    "presets_macro_names_found": false
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "line": 94,
+      "macro": "SIGNAL_PROFILING",
+      "original_line": 95,
+      "mapping": "unique-original-condition",
+      "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b",
+      "current_sha256": "0caae2986bd5256ecdee046d9961c5176a3d5178426a198b5f42fb3eb0bef369",
+      "directive": "#ifdef SIGNAL_PROFILING",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-529: SIGNAL_PROFILING platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "line": 49,
+      "macro": "SEGMENTATION",
+      "original_line": 49,
+      "mapping": "existing-ledger",
+      "original_sha256": "656c7feada15fda95476beb8f099453c79edfe75b75c49b3aadbf23a89ef3f05",
+      "current_sha256": "33ef9bdd2dafe75a2ec3b5b0e82d9fd47efb76b2c6ee0ca444bcaafc2aa119a3",
+      "directive": "#ifdef SEGMENTATION",
+      "guard": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 86,
+      "macro": "LICENSING",
+      "original_line": 86,
+      "mapping": "unique-original-condition",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "current_sha256": "0a758c8287148763f594b2ceb983d3217585e77a878eccf9baebe5dc731d4da5",
+      "directive": "#ifdef LICENSING",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 314,
+      "macro": "CGAMONO",
+      "original_line": 339,
+      "mapping": "unique-original-condition",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "current_sha256": "0a758c8287148763f594b2ceb983d3217585e77a878eccf9baebe5dc731d4da5",
+      "directive": "#ifdef CGAMONO",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-531: CGAMONO branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 331,
+      "macro": "HERC",
+      "original_line": 356,
+      "mapping": "unique-original-condition",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "current_sha256": "0a758c8287148763f594b2ceb983d3217585e77a878eccf9baebe5dc731d4da5",
+      "directive": "#ifdef HERC",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 684,
+      "macro": "SWIN_SNDBLST_NULL",
+      "original_line": 886,
+      "mapping": "unique-original-condition",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "current_sha256": "0a758c8287148763f594b2ceb983d3217585e77a878eccf9baebe5dc731d4da5",
+      "directive": "#ifdef SWIN_SNDBLST_NULL",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-528: SWIN_SNDBLST_NULL platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 730,
+      "macro": "SOFTWIN_API",
+      "original_line": 1021,
+      "mapping": "unique-original-condition",
+      "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
+      "current_sha256": "0a758c8287148763f594b2ceb983d3217585e77a878eccf9baebe5dc731d4da5",
+      "directive": "#ifdef SOFTWIN_API",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "line": 291,
+      "macro": "PIG_DONT_CHECK_OTHER_WORD_ON_STACK",
+      "original_line": 341,
+      "mapping": "unique-original-condition",
+      "original_sha256": "a038c8e79688b5e7430e3a9baf0c5e11848c4d2de89584ae71a4209c7ed54292",
+      "current_sha256": "b3fd7175fcfe607ac0adfe053abeb6eacf156d694d7e8e37b96e05da23d8d93c",
+      "directive": "#ifdef\tPIG_DONT_CHECK_OTHER_WORD_ON_STACK",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-536: PIG_DONT_CHECK_OTHER_WORD_ON_STACK branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
+      "line": 63,
+      "macro": "BACK_M",
+      "original_line": 63,
+      "mapping": "existing-ledger",
+      "original_sha256": "7e9cb73f825974421128e93c90a0096ad10518b6f48e47824e4b5d140638d216",
+      "current_sha256": "04291b7269e743746990c4ed2d2bfb4924d19aa38ba4c04f6960aa55606467cb",
+      "directive": "#ifdef BACK_M",
+      "guard": "#error Excluded unsupported BACK_M configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": 1168,
+      "macro": "IRET_HOOKS",
+      "original_line": 1168,
+      "mapping": "existing-ledger",
+      "original_sha256": "ad167e9ff54476da9bc31c724d284073fb5c8796aa4417c66524aecb9e33bc0a",
+      "current_sha256": "c711c104e058563c8f247032366ae4424967e8a09592a073bdf5e379e7f21f95",
+      "directive": "#ifdef IRET_HOOKS",
+      "guard": "#error Excluded unsupported IRET_HOOKS configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/flexlmif.h",
+      "line": 21,
+      "macro": "LICENSING",
+      "original_line": 21,
+      "mapping": "existing-ledger",
+      "original_sha256": "ba27db4f84cc7707fe35cf96c3c8f0d99ad22adb99dfc755f5ddfe750b34d0e6",
+      "current_sha256": "0c4f62bfaeec39f468a80aa4607482c87774aca9dadec6a68577cfa3d345c99c",
+      "directive": "#ifdef LICENSING",
+      "guard": "#error Excluded unsupported LICENSING configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hg_cpu.h",
+      "line": 236,
+      "macro": "IRET_HOOKS",
+      "original_line": 236,
+      "mapping": "existing-ledger",
+      "original_sha256": "81ae1604f915ac0d7ca8e0ad9a07b0ae280f7b0029edd2260c6cba142276b7a0",
+      "current_sha256": "d04da67ee5ee4ff974868ad8fefcc43f6a8049f584f9613b5042136dfc28477b",
+      "directive": "#ifdef IRET_HOOKS",
+      "guard": "#error Excluded unsupported IRET_HOOKS configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": 14,
+      "macro": "HUNTER",
+      "original_line": 14,
+      "mapping": "existing-ledger",
+      "original_sha256": "2af5ffe292725c250f8ce2df821b4c8b9996d89958f144dcacd8d405ca633fe2",
+      "current_sha256": "f78cea4fd0994ade4a4f754742f96c12e0f8c3423897d17333ca9d733ed4a469",
+      "directive": "#ifdef\tHUNTER",
+      "guard": "#error Excluded unsupported HUNTER configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "line": 34,
+      "macro": "HUNTER",
+      "original_line": 34,
+      "mapping": "existing-ledger",
+      "original_sha256": "1db2d689864893264a6c40445525840a6047213caea4945a646fc59cc41d9019",
+      "current_sha256": "d911a78990e1fcb794b3061ce58afc38c0e5a3ca1ebfa64792d377f5680aabb9",
+      "directive": "#ifdef HUNTER",
+      "guard": "#error Excluded unsupported HUNTER configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "line": 48,
+      "macro": "HUNTER",
+      "original_line": 48,
+      "mapping": "existing-ledger",
+      "original_sha256": "1db2d689864893264a6c40445525840a6047213caea4945a646fc59cc41d9019",
+      "current_sha256": "d911a78990e1fcb794b3061ce58afc38c0e5a3ca1ebfa64792d377f5680aabb9",
+      "directive": "#ifdef HUNTER",
+      "guard": "#error Excluded unsupported HUNTER configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": 8,
+      "macro": "SWIN_HFX",
+      "original_line": 8,
+      "mapping": "existing-ledger",
+      "original_sha256": "f307fc3f4039b70639a9403ff07bfc8c44a1d14baac5df8f51ce7ab69d27a4b7",
+      "current_sha256": "735561202e6c2714f5fe0f835fed3819a1df13e76e1f081cdd5d9ad0dc274c82",
+      "directive": "#ifdef SWIN_HFX",
+      "guard": "#error Excluded unsupported SWIN_HFX configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 205,
+      "macro": "REAL_KBD",
+      "original_line": 188,
+      "mapping": "unique-original-condition",
+      "original_sha256": "d3326210be154866924ca99f1e44e0a76e9a912e15975305804f6b59c4cf7953",
+      "current_sha256": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a",
+      "directive": "#ifdef REAL_KBD",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-535: REAL_KBD branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 89,
+      "macro": "SOFTWINDOWS",
+      "original_line": 75,
+      "mapping": "unique-original-condition",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "current_sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea",
+      "directive": "#ifdef SOFTWINDOWS",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-529: SOFTWINDOWS platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 123,
+      "macro": "SETUID_ROOT",
+      "original_line": 111,
+      "mapping": "unique-original-condition",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "current_sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea",
+      "directive": "#ifdef\tSETUID_ROOT",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-529: SETUID_ROOT platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 43,
+      "macro": "SEGMENTATION",
+      "original_line": 44,
+      "mapping": "existing-ledger",
+      "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+      "current_sha256": "cb6328db687f1156bd4bec1b69c6f4921ade18baeccd8237125d5d78b2cb336b",
+      "directive": "#ifdef SEGMENTATION",
+      "guard": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "line": 14,
+      "macro": "SEGMENTATION",
+      "original_line": 14,
+      "mapping": "existing-ledger",
+      "original_sha256": "c993b3e020ddd2f25524e20bef0b7651bcdf52a7d222e90fd643f828b788ac1e",
+      "current_sha256": "550f77df4e43b76047a6bc6c9afe43fab6bafc05c135379e8c75da58377860ea",
+      "directive": "#ifdef SEGMENTATION",
+      "guard": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "line": 350,
+      "macro": "SLAVEPC",
+      "original_line": 350,
+      "mapping": "existing-ledger",
+      "original_sha256": "c993b3e020ddd2f25524e20bef0b7651bcdf52a7d222e90fd643f828b788ac1e",
+      "current_sha256": "550f77df4e43b76047a6bc6c9afe43fab6bafc05c135379e8c75da58377860ea",
+      "directive": "#ifdef SLAVEPC",
+      "guard": "#error Excluded unsupported SLAVEPC configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "line": 818,
+      "macro": "SEGMENTATION",
+      "original_line": 818,
+      "mapping": "existing-ledger",
+      "original_sha256": "c993b3e020ddd2f25524e20bef0b7651bcdf52a7d222e90fd643f828b788ac1e",
+      "current_sha256": "550f77df4e43b76047a6bc6c9afe43fab6bafc05c135379e8c75da58377860ea",
+      "directive": "#ifdef SEGMENTATION",
+      "guard": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": 136,
+      "macro": "SEGMENTATION",
+      "original_line": 136,
+      "mapping": "existing-ledger",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "current_sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a",
+      "directive": "#ifdef SEGMENTATION",
+      "guard": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": 164,
+      "macro": "NOVELL",
+      "original_line": 166,
+      "mapping": "unique-original-condition",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075",
+      "current_sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a",
+      "directive": "#ifdef NOVELL",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 63,
+      "macro": "SEGMENTATION",
+      "original_line": 63,
+      "mapping": "existing-ledger",
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "current_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61",
+      "directive": "#ifdef SEGMENTATION",
+      "guard": "#error Excluded unsupported SEGMENTATION configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
+      "line": 492,
+      "macro": "SUN_VA",
+      "original_line": 1787,
+      "mapping": "unique-original-condition",
+      "original_sha256": "cbf9ee8a199d48ee74171b2e23d55bb1e5d019710fdea2a917762739d6a49044",
+      "current_sha256": "48c46f5ac657fb9c3755fd0d90d350200b20b76d0b71db86404ca0849293e554",
+      "directive": "#ifdef SUN_VA",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hunt.c",
+      "line": 36,
+      "macro": "HUNTER",
+      "original_line": 36,
+      "mapping": "existing-ledger",
+      "original_sha256": "6aeb2ba2efad017d65184d3fc32c09e0587bd02def267cc4fecfeca1c1715ad7",
+      "current_sha256": "af1c5d422be95674e5ec04ffd9de05881a8baf4a16fcf134b6bf2cbe41cb223d",
+      "directive": "#ifdef HUNTER",
+      "guard": "#error Excluded unsupported HUNTER configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_term.c",
+      "line": 22,
+      "macro": "HUNTER",
+      "original_line": 22,
+      "mapping": "existing-ledger",
+      "original_sha256": "ad5c8c0d28944ea163df5738ed03ca7e19415cca02884083ed69fa98667149be",
+      "current_sha256": "3036fcbdcdb5fc3cb922c263773181fefac9de520c0730af02b5282ac581012c",
+      "directive": "#ifdef HUNTER",
+      "guard": "#error Excluded unsupported HUNTER configuration"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_term.c",
+      "line": 56,
+      "macro": "HUNTER",
+      "original_line": 56,
+      "mapping": "existing-ledger",
+      "original_sha256": "ad5c8c0d28944ea163df5738ed03ca7e19415cca02884083ed69fa98667149be",
+      "current_sha256": "3036fcbdcdb5fc3cb922c263773181fefac9de520c0730af02b5282ac581012c",
+      "directive": "#ifdef HUNTER",
+      "guard": "#error Excluded unsupported HUNTER configuration"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "line": 302,
+      "macro": "NOTUSED",
+      "original_line": 302,
+      "mapping": "unique-original-condition",
+      "original_sha256": "04aa31f76dbb3e683c1f96101b07de006a79ca0d3b49e0a16986166349f3abb3",
+      "current_sha256": "f574a2c0a5ce6de4747e1ca33a395e7a7f8a169f17ff05109336a6ab0db22dc0",
+      "directive": "#ifdef NOTUSED",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-529: NOTUSED platform branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": 94,
+      "macro": "SYSMODALWINDOWS",
+      "original_line": 1056,
+      "mapping": "unique-original-condition",
+      "original_sha256": "8e2383f52e4e3f65f656bd492143d7a8ed5d0a2526ad8e6af10d242465ff8d7a",
+      "current_sha256": "2fbd567b9a4c88db59aca25ce63d4d4e94639daf3d2a1352798a9441af79d345",
+      "directive": "#ifdef SYSMODALWINDOWS",
+      "guard": "#error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "line": 313,
+      "macro": "LATER",
+      "original_line": 279,
+      "mapping": "unique-original-condition",
+      "original_sha256": "638efc31ffd622ba31e16672d1418291c3e1291b6d0c57f31d08c32d45fa1720",
+      "current_sha256": "ad7266b1739515f398a14761cb19ec0ccb304598963f4f61f579ef12f18f5ff1",
+      "directive": "#ifdef LATER",
+      "guard": "#error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register."
+    }
+  ],
+  "ambiguous_deferred": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "line": 53,
+      "macro": "SECURE",
+      "current_occurrences": [
+        53,
+        63
+      ],
+      "original_occurrences": [
+        53,
+        63
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 75,
+      "macro": "NOVELL",
+      "current_occurrences": [
+        75,
+        585
+      ],
+      "original_occurrences": [
+        75,
+        769
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 585,
+      "macro": "NOVELL",
+      "current_occurrences": [
+        75,
+        585
+      ],
+      "original_occurrences": [
+        75,
+        769
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 4195,
+      "macro": "SYNCH_TIMERS",
+      "current_occurrences": [
+        812,
+        4195,
+        4201,
+        4221,
+        4263
+      ],
+      "original_occurrences": [
+        775,
+        4329,
+        4335,
+        4353,
+        4399
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 241,
+      "macro": "PS_FLUSHING",
+      "current_occurrences": [
+        241,
+        816,
+        826,
+        2279
+      ],
+      "original_occurrences": [
+        249,
+        1034,
+        1056,
+        2755
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 702,
+      "macro": "SHORT_TRACE",
+      "current_occurrences": [
+        618,
+        631,
+        649,
+        671,
+        681,
+        702,
+        758,
+        845,
+        905,
+        981,
+        990,
+        1017,
+        1029,
+        1972
+      ],
+      "original_occurrences": [
+        688,
+        716,
+        747,
+        782,
+        805,
+        839,
+        948,
+        1075,
+        1150,
+        1252,
+        1274,
+        1314,
+        1339,
+        2415
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 816,
+      "macro": "PS_FLUSHING",
+      "current_occurrences": [
+        241,
+        816,
+        826,
+        2279
+      ],
+      "original_occurrences": [
+        249,
+        1034,
+        1056,
+        2755
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 826,
+      "macro": "PS_FLUSHING",
+      "current_occurrences": [
+        241,
+        816,
+        826,
+        2279
+      ],
+      "original_occurrences": [
+        249,
+        1034,
+        1056,
+        2755
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 845,
+      "macro": "SHORT_TRACE",
+      "current_occurrences": [
+        618,
+        631,
+        649,
+        671,
+        681,
+        702,
+        758,
+        845,
+        905,
+        981,
+        990,
+        1017,
+        1029,
+        1972
+      ],
+      "original_occurrences": [
+        688,
+        716,
+        747,
+        782,
+        805,
+        839,
+        948,
+        1075,
+        1150,
+        1252,
+        1274,
+        1314,
+        1339,
+        2415
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 905,
+      "macro": "SHORT_TRACE",
+      "current_occurrences": [
+        618,
+        631,
+        649,
+        671,
+        681,
+        702,
+        758,
+        845,
+        905,
+        981,
+        990,
+        1017,
+        1029,
+        1972
+      ],
+      "original_occurrences": [
+        688,
+        716,
+        747,
+        782,
+        805,
+        839,
+        948,
+        1075,
+        1150,
+        1252,
+        1274,
+        1314,
+        1339,
+        2415
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 2279,
+      "macro": "PS_FLUSHING",
+      "current_occurrences": [
+        241,
+        816,
+        826,
+        2279
+      ],
+      "original_occurrences": [
+        249,
+        1034,
+        1056,
+        2755
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "line": 458,
+      "macro": "EGA_DUMP",
+      "current_occurrences": [
+        458,
+        498,
+        534,
+        573
+      ],
+      "original_occurrences": [
+        473,
+        514,
+        551,
+        591
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "line": 534,
+      "macro": "EGA_DUMP",
+      "current_occurrences": [
+        458,
+        498,
+        534,
+        573
+      ],
+      "original_occurrences": [
+        473,
+        514,
+        551,
+        591
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 83,
+      "macro": "REAL_VGA",
+      "current_occurrences": [
+        83,
+        259,
+        265
+      ],
+      "original_occurrences": [
+        69,
+        285,
+        292
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 119,
+      "macro": "SECURE",
+      "current_occurrences": [
+        43,
+        119,
+        153,
+        162
+      ],
+      "original_occurrences": [
+        43,
+        106,
+        144,
+        153
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 153,
+      "macro": "SECURE",
+      "current_occurrences": [
+        43,
+        119,
+        153,
+        162
+      ],
+      "original_occurrences": [
+        43,
+        106,
+        144,
+        153
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 259,
+      "macro": "REAL_VGA",
+      "current_occurrences": [
+        83,
+        259,
+        265
+      ],
+      "original_occurrences": [
+        69,
+        285,
+        292
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 265,
+      "macro": "REAL_VGA",
+      "current_occurrences": [
+        83,
+        259,
+        265
+      ],
+      "original_occurrences": [
+        69,
+        285,
+        292
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 38,
+      "macro": "LICENSING",
+      "current_occurrences": [
+        38,
+        133
+      ],
+      "original_occurrences": [
+        39,
+        130
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 129,
+      "macro": "NOVELL",
+      "current_occurrences": [
+        32,
+        129
+      ],
+      "original_occurrences": [
+        32,
+        126
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 2101,
+      "macro": "SYNCH_TIMERS",
+      "current_occurrences": [
+        375,
+        2101
+      ],
+      "original_occurrences": [
+        383,
+        2679
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "line": 245,
+      "macro": "DUMB_TERMINAL",
+      "current_occurrences": [
+        177,
+        245,
+        285
+      ],
+      "original_occurrences": [
+        177,
+        258,
+        302
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "line": 94,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "line": 49,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 86,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 314,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 331,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 684,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 730,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "line": 291,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
+      "line": 63,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": 1168,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/flexlmif.h",
+      "line": 21,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/hg_cpu.h",
+      "line": 236,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": 14,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "line": 34,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "line": 48,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": 8,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 205,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 89,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 123,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 43,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "line": 14,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "line": 350,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "line": 818,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": 136,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": 164,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 63,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
+      "line": 492,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hunt.c",
+      "line": 36,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_term.c",
+      "line": 22,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_term.c",
+      "line": 56,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "line": 302,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": 94,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "line": 313,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "line": 94,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "line": 49,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 86,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 314,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 331,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 684,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 730,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "line": 291,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu2.h",
+      "line": 63,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu3.h",
+      "line": 1168,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/flexlmif.h",
+      "line": 21,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/hg_cpu.h",
+      "line": 236,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/hosthunt.h",
+      "line": 14,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "line": 34,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/unix_cnf.h",
+      "line": 48,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/winfiles.h",
+      "line": 8,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 205,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 89,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 123,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 43,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "line": 14,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "line": 350,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/cmos.c",
+      "line": 818,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": 136,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "line": 164,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 63,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
+      "line": 492,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hunt.c",
+      "line": 36,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_term.c",
+      "line": 22,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_term.c",
+      "line": 56,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "line": 302,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "line": 94,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
+      "line": 313,
+      "default_exit": 0,
+      "forced_exit": 2,
+      "ok": true
+    }
+  ]
+}

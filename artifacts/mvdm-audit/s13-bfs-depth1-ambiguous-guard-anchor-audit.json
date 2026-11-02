@@ -1,0 +1,401 @@
+{
+  "scope": "first-depth surrounding anchors only; no nested conditional branch disposition",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "line": 53,
+      "macro": "SECURE",
+      "original_line": 53,
+      "current_group_end": 55,
+      "original_group_end": 55,
+      "before": [
+        null,
+        "static char SccsID[] = \"@(#)cntlbop.c\t1.12 05/15/95 Copyright Insignia Solutions Ltd.\";"
+      ],
+      "after": [
+        "static control_bop_array base_bop_table[] =",
+        "IMPORT void runux IPT0();"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 75,
+      "macro": "NOVELL",
+      "original_line": 75,
+      "current_group_end": 77,
+      "original_group_end": 77,
+      "before": [
+        null,
+        null
+      ],
+      "after": [
+        "VIDEOFUNCS\t*working_video_funcs;",
+        "VIDEOFUNCS\t*working_video_funcs;"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 585,
+      "macro": "NOVELL",
+      "original_line": 769,
+      "current_group_end": 587,
+      "original_group_end": 771,
+      "before": [
+        "(half_word) gfi_drive_type(0) << 4 | gfi_drive_type(1));",
+        "host_terminate();"
+      ],
+      "after": [
+        "msw_smcpy_term();",
+        "msw_smcpy_term();"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 4195,
+      "macro": "SYNCH_TIMERS",
+      "original_line": 4329,
+      "current_group_end": 4197,
+      "original_group_end": 4331,
+      "before": [
+        "goto DO_INST;",
+        "goto DO_INST;"
+      ],
+      "after": [
+        "quick_mode = FALSE;",
+        "quick_mode = FALSE;"
+      ],
+      "both_match": true,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 241,
+      "macro": "PS_FLUSHING",
+      "original_line": 249,
+      "current_group_end": 243,
+      "original_group_end": 252,
+      "before": [
+        "unsigned long TX_delay[] =",
+        "static char buf[80];"
+      ],
+      "after": [
+        "IBOOL tx_pacing_enabled = FALSE;",
+        "IBOOL tx_pacing_enabled = FALSE;"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 702,
+      "macro": "SHORT_TRACE",
+      "original_line": 839,
+      "current_group_end": 704,
+      "original_group_end": 851,
+      "before": [
+        "clear_interrupt(asp);",
+        "asp->fifo_timeout_interrupt_state = OFF;"
+      ],
+      "after": [
+        "case RS232_MSR:",
+        "if (com_trace_fd)"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 816,
+      "macro": "PS_FLUSHING",
+      "original_line": 1034,
+      "current_group_end": 818,
+      "original_group_end": 1044,
+      "before": [
+        "if ( asp->loopback_state == OFF )",
+        "if ( asp->loopback_state == OFF )"
+      ],
+      "after": [
+        "host_com_write(adapter, asp->tx_buffer);",
+        "host_com_write(adapter, asp->tx_buffer);"
+      ],
+      "both_match": true,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 826,
+      "macro": "PS_FLUSHING",
+      "original_line": 1056,
+      "current_group_end": 828,
+      "original_group_end": 1058,
+      "before": [
+        "set_xmit_char_status(asp);",
+        "do_wait_on_send(adapter);"
+      ],
+      "after": [
+        "asp->rx_buffer = asp->tx_buffer & selectBits[asp->line_control_reg.bits.word_length] ;",
+        "asp->rx_buffer = asp->tx_buffer & selectBits[asp->line_control_reg.bits.word_length] ;"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 845,
+      "macro": "SHORT_TRACE",
+      "original_line": 1075,
+      "current_group_end": 847,
+      "original_group_end": 1083,
+      "before": [
+        "asp->divisor_latch.byte.LSByte = value;",
+        "set_baud_rate(adapter);"
+      ],
+      "after": [
+        "case RS232_IER:",
+        "if (com_trace_fd)"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 905,
+      "macro": "SHORT_TRACE",
+      "original_line": 1150,
+      "current_group_end": 907,
+      "original_group_end": 1157,
+      "before": [
+        "asp->divisor_latch.byte.MSByte = value;",
+        "set_baud_rate(adapter);"
+      ],
+      "after": [
+        "case RS232_IIR:",
+        "if (com_trace_fd)"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 2279,
+      "macro": "PS_FLUSHING",
+      "original_line": 2755,
+      "current_group_end": 2281,
+      "original_group_end": 2790,
+      "before": [
+        "*line = (int) asp->hw_interrupt_priority;",
+        "*line = (int) asp->hw_interrupt_priority;"
+      ],
+      "after": [
+        null,
+        "int       srxcount = 0, stxcount = 0;"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "line": 458,
+      "macro": "EGA_DUMP",
+      "original_line": 473,
+      "current_group_end": 460,
+      "original_group_end": 476,
+      "before": [
+        "IU32 value32;",
+        "IU32 value32;"
+      ],
+      "after": [
+        "if (IOVirtualised(io_address, &value32, BIOS_INB_OFFSET, (sizeof(IU8))))",
+        "value32 = 0;"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "line": 534,
+      "macro": "EGA_DUMP",
+      "original_line": 551,
+      "current_group_end": 536,
+      "original_group_end": 554,
+      "before": [
+        "IU32 value32;",
+        "IU32 value32;"
+      ],
+      "after": [
+        "if (IOVirtualised(io_address, &value32, BIOS_INW_OFFSET, (sizeof(IU16))))",
+        "value32 = 0;"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 83,
+      "macro": "REAL_VGA",
+      "original_line": 69,
+      "current_group_end": 85,
+      "original_group_end": 71,
+      "before": [
+        "extern void host_applInit(int argc, char *argv[]);",
+        "extern void host_applInit();"
+      ],
+      "after": [
+        "GLOBAL IBOOL Running_SoftWindows = FALSE;",
+        "GLOBAL IBOOL Running_SoftWindows = TRUE;"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 119,
+      "macro": "SECURE",
+      "original_line": 106,
+      "current_group_end": 121,
+      "original_group_end": 109,
+      "before": [
+        "IMPORT ULONG setup_global_data_ptr();",
+        "IMPORT ULONG Gdp;"
+      ],
+      "after": [
+        "pargc = &argc;",
+        "host_init_uid ();"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 153,
+      "macro": "SECURE",
+      "original_line": 144,
+      "current_group_end": 155,
+      "original_group_end": 146,
+      "before": [
+        "pargv = argv;",
+        "host_set_yoda_ints();"
+      ],
+      "after": [
+        "host_applInit(argc,argv);",
+        "ProcCommonCommLineArgs(argc,argv);"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 259,
+      "macro": "REAL_VGA",
+      "original_line": 285,
+      "current_group_end": 261,
+      "original_group_end": 288,
+      "before": [
+        "setup_vga_globals();",
+        "setupHwVGAGlobals( );"
+      ],
+      "after": [
+        "host_init_screen();",
+        "host_init_screen();"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 265,
+      "macro": "REAL_VGA",
+      "original_line": 292,
+      "current_group_end": 267,
+      "original_group_end": 294,
+      "before": [
+        "host_init_screen();",
+        "host_init_screen();"
+      ],
+      "after": [
+        "InitialiseDosEmulation(argc, argv);",
+        "host_susp_q_init();"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 38,
+      "macro": "LICENSING",
+      "original_line": 39,
+      "current_group_end": 40,
+      "original_group_end": 41,
+      "before": [
+        null,
+        null
+      ],
+      "after": [
+        "IMPORT VOID host_applClose IPT0();",
+        "IMPORT VOID host_applClose IPT0();"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 129,
+      "macro": "NOVELL",
+      "original_line": 126,
+      "current_group_end": 131,
+      "original_group_end": 128,
+      "before": [
+        "config_activate(C_FLOPPY_A_DEVICE, FALSE);",
+        "cpu_terminate();"
+      ],
+      "after": [
+        "host_applClose();",
+        "(*license_exit)();"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 2101,
+      "macro": "SYNCH_TIMERS",
+      "original_line": 2679,
+      "current_group_end": 2109,
+      "original_group_end": 2694,
+      "before": [
+        "ticks_blocked = ticks;",
+        "ticks_blocked = ticks;"
+      ],
+      "after": [
+        "LOCAL void Timer_init IFN0()",
+        "getHostSysTime(&idealtime);"
+      ],
+      "both_match": false,
+      "anchors_unique": false
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "line": 245,
+      "macro": "DUMB_TERMINAL",
+      "original_line": 258,
+      "current_group_end": 247,
+      "original_group_end": 262,
+      "before": [
+        "switch (video_adapter) {",
+        "switch (video_adapter) {"
+      ],
+      "after": [
+        "case CGA:",
+        "case CGA:"
+      ],
+      "both_match": true,
+      "anchors_unique": false
+    }
+  ]
+}

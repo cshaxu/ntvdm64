@@ -1,0 +1,81 @@
+{
+  "scope": "two existing guards with unique original/current surrounding anchor pairs and globally absent selector sources",
+  "inputs": [
+    "s13-bfs-depth1-ambiguous-guard-anchor-pairs.json",
+    "s13-bfs-depth1-pending-guard-macro-origins.json",
+    "s13-bfs-depth1-pending-guard-sdk-scan.json",
+    "s13-bfs-depth1-pending-guard-continuation-scan.json"
+  ],
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 4195,
+      "macro": "SYNCH_TIMERS",
+      "original_line": 4329,
+      "anchor_pair": [
+        "goto DO_INST;",
+        "quick_mode = FALSE;"
+      ],
+      "matching_groups": {
+        "current": [
+          4195
+        ],
+        "original": [
+          4329
+        ]
+      },
+      "unique_pair": true,
+      "source_sha256": "ef57e0f3fcf1118638fa7a587f774aafdb031fdec54ec9ba117200af19ec1f9a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 816,
+      "macro": "PS_FLUSHING",
+      "original_line": 1034,
+      "anchor_pair": [
+        "if ( asp->loopback_state == OFF )",
+        "host_com_write(adapter, asp->tx_buffer);"
+      ],
+      "matching_groups": {
+        "current": [
+          816
+        ],
+        "original": [
+          1034
+        ]
+      },
+      "unique_pair": true,
+      "source_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64"
+    }
+  ],
+  "controls": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 4195,
+      "architecture": "x86",
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 4195,
+      "architecture": "x64",
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 816,
+      "architecture": "x86",
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 816,
+      "architecture": "x64",
+      "default_exit": 0,
+      "forced_exit": 2
+    }
+  ]
+}

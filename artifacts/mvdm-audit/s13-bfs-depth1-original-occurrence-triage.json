@@ -1,5 +1,5 @@
 {
-  "scope": "fixed-original first-depth mismatch occurrence triage; hints are not exclusion proof",
+  "scope": "fixed-original first-depth mismatch occurrence triage; anchor reconciliations do not assert full original-boundary completion",
   "records": [
     {
       "path": "src/non-mvdm/base/ntos/rtl/time.c",
@@ -1089,7 +1089,7 @@
       "original_line": 59,
       "directive": "ifdef",
       "expression": "_USERK_",
-      "classification": "matched-surrounding-anchors-structural-only",
+      "classification": "matched-current-first-depth-guard",
       "original_owners": [
         {
           "name": "WCSToMBEx",
@@ -1104,14 +1104,15 @@
           "line": 168,
           "depth": 1
         }
-      ]
+      ],
+      "evidence": "s13-bfs-depth1-original-chartran-reconciliation.json; pinned original and current first-depth directives rechecked"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
       "original_line": 146,
       "directive": "ifdef",
       "expression": "_USERK_",
-      "classification": "matched-surrounding-anchors-structural-only",
+      "classification": "matched-current-first-depth-guard",
       "original_owners": [
         {
           "name": "WCSToMBEx",
@@ -1126,14 +1127,15 @@
           "line": 255,
           "depth": 1
         }
-      ]
+      ],
+      "evidence": "s13-bfs-depth1-original-chartran-reconciliation.json; pinned original and current first-depth directives rechecked"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
       "original_line": 270,
       "directive": "ifdef",
       "expression": "_USERK_",
-      "classification": "matched-surrounding-anchors-structural-only",
+      "classification": "matched-current-first-depth-guard",
       "original_owners": [
         {
           "name": "MBToWCSEx",
@@ -1148,7 +1150,8 @@
           "line": 362,
           "depth": 1
         }
-      ]
+      ],
+      "evidence": "s13-bfs-depth1-original-chartran-reconciliation.json; pinned original and current first-depth directives rechecked"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
@@ -1172,7 +1175,7 @@
       "original_line": 515,
       "directive": "ifdef",
       "expression": "_USERK_",
-      "classification": "matched-surrounding-anchors-structural-only",
+      "classification": "matched-current-first-depth-guard",
       "original_owners": [
         {
           "name": "RtlMBMessageWParamCharToWCS",
@@ -1187,7 +1190,8 @@
           "line": 63,
           "depth": 1
         }
-      ]
+      ],
+      "evidence": "s13-bfs-depth1-original-chartran-reconciliation.json; pinned original and current first-depth directives rechecked"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
@@ -1245,7 +1249,7 @@
       "original_line": 446,
       "directive": "ifdef",
       "expression": "FE_SB",
-      "classification": "matched-surrounding-anchors-structural-only",
+      "classification": "matched-current-first-depth-guard",
       "original_owners": [
         {
           "name": "RtlMBMessageWParamCharToWCS",
@@ -1260,14 +1264,15 @@
           "line": 32,
           "depth": 1
         }
-      ]
+      ],
+      "evidence": "s13-bfs-depth1-original-chartran-reconciliation.json; pinned original and current first-depth directives rechecked"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
       "original_line": 457,
       "directive": "ifdef",
       "expression": "FE_SB",
-      "classification": "matched-surrounding-anchors-structural-only",
+      "classification": "matched-current-first-depth-guard",
       "original_owners": [
         {
           "name": "RtlMBMessageWParamCharToWCS",
@@ -1282,14 +1287,15 @@
           "line": 42,
           "depth": 1
         }
-      ]
+      ],
+      "evidence": "s13-bfs-depth1-original-chartran-reconciliation.json; pinned original and current first-depth directives rechecked"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
       "original_line": 530,
       "directive": "ifdef",
       "expression": "FE_SB",
-      "classification": "matched-surrounding-anchors-structural-only",
+      "classification": "matched-current-first-depth-guard",
       "original_owners": [
         {
           "name": "RtlMBMessageWParamCharToWCS",
@@ -1304,7 +1310,8 @@
           "line": 76,
           "depth": 1
         }
-      ]
+      ],
+      "evidence": "s13-bfs-depth1-original-chartran-reconciliation.json; pinned original and current first-depth directives rechecked"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
@@ -1338,5 +1345,17 @@
   "limitations": [
     "Presence of a name is only a function ownership hint, not a reachability proof.",
     "Nested content is deferred until its parent depth is classified."
-  ]
+  ],
+  "classification_counts": {
+    "already-present-nested-byte-equivalent": 6,
+    "matched-surrounding-anchors-structural-only": 12,
+    "restored-first-depth": 1,
+    "original-owner-not-present-hint-only": 35,
+    "already-present-nested-guard": 3,
+    "unresolved": 10,
+    "original-whole-file-guard-incompatible-with-current-two-stage-include": 1,
+    "missing-within-retained-outer-selector-next-depth": 1,
+    "already-present-first-depth-guard": 1,
+    "matched-current-first-depth-guard": 7
+  }
 }

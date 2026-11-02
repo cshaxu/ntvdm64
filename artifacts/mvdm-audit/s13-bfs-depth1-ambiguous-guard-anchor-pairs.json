@@ -1,0 +1,66 @@
+{
+  "scope": "match of surrounding first-depth condition anchors only",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 4195,
+      "macro": "SYNCH_TIMERS",
+      "original_line": 4329,
+      "anchor_pair": [
+        "goto DO_INST;",
+        "quick_mode = FALSE;"
+      ],
+      "matching_groups": {
+        "current": [
+          4195
+        ],
+        "original": [
+          4329
+        ]
+      },
+      "unique_pair": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 816,
+      "macro": "PS_FLUSHING",
+      "original_line": 1034,
+      "anchor_pair": [
+        "if ( asp->loopback_state == OFF )",
+        "host_com_write(adapter, asp->tx_buffer);"
+      ],
+      "matching_groups": {
+        "current": [
+          816
+        ],
+        "original": [
+          1034
+        ]
+      },
+      "unique_pair": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "line": 245,
+      "macro": "DUMB_TERMINAL",
+      "original_line": 258,
+      "anchor_pair": [
+        "switch (video_adapter) {",
+        "case CGA:"
+      ],
+      "matching_groups": {
+        "current": [
+          177,
+          245,
+          285
+        ],
+        "original": [
+          177,
+          258,
+          302
+        ]
+      },
+      "unique_pair": false
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "scope": "first-depth original conditional groups restored relative to the fixed HEAD used by S13; not a count of restored branch bodies",
+  "prior_checkpoint_count": 41,
+  "prior_checkpoint_current_bfs_count": 8,
+  "prior_evidence": "s13-bfs-progress.md OPENNT-HOST-145 checkpoint",
+  "subsequent_restored_groups": [
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "original_condition": "#ifdef DEBUG",
+      "evidence": "s13-bfs-depth1-clmsg-debug-restoration.json and s13-bfs-depth1-consolidated-batch.json"
+    }
+  ],
+  "derived_total": 42,
+  "derived_current_bfs_total": 9,
+  "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
+}

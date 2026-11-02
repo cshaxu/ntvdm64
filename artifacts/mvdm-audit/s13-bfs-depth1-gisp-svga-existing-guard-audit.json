@@ -1,0 +1,135 @@
+{
+  "scope": "first-depth existing guards requiring GISP_SVGA only; V7VGA and other video profiles are not classified",
+  "basis": "The fixed original hwvga.h identifies GISP_SVGA as hardware VGA integration. No supported Ninja command or repository/generated header defines it. Preserve selected V7VGA and software mouse paths; exact original selectors and x86/x64 forced controls were checked.",
+  "source_scan_command": [
+    "rg",
+    "-n",
+    "--glob",
+    "!*.md",
+    "--glob",
+    "!*.json",
+    "--glob",
+    "!*.log",
+    "(?i)(^\\s*#\\s*(define|undef)\\s+(GISP_SVGA)\\b|(?:/D|-D)(GISP_SVGA)\\b)",
+    "src",
+    "tests",
+    "tools",
+    "CMakeLists.txt"
+  ],
+  "source_scan_exit": 1,
+  "graph_commands_checked": 2070,
+  "gisp_svga_flags_found": 0,
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hwvga.h",
+      "line": 25,
+      "kind": "ifdef",
+      "expression": "GISP_SVGA",
+      "original_line": 25,
+      "original_sha256": "5230bef1d6b5773f92fa6fe1f4c9d7b19e05c171be1491e9cab52016ab820b72",
+      "source_sha256": "e2c7549ee8f4694b9d4a3318f578d4056082dc43bfec2f30fc908d7436d91490",
+      "directive": "#ifdef GISP_SVGA",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-534: unreferenced GISP hardware VGA interface is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": 1995,
+      "kind": "ifdef",
+      "expression": "GISP_SVGA",
+      "original_line": 2232,
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "source_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+      "directive": "#ifdef GISP_SVGA",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 35,
+      "kind": "ifdef",
+      "expression": "GISP_SVGA",
+      "original_line": 35,
+      "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+      "source_sha256": "cb6328db687f1156bd4bec1b69c6f4921ade18baeccd8237125d5d78b2cb336b",
+      "directive": "#ifdef GISP_SVGA",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 82,
+      "kind": "ifdef",
+      "expression": "GISP_SVGA",
+      "original_line": 77,
+      "original_sha256": "b085166424614a154a41f794bf3505f50a77a2ea60338bcefcb845be8e092e53",
+      "source_sha256": "cb6328db687f1156bd4bec1b69c6f4921ade18baeccd8237125d5d78b2cb336b",
+      "directive": "#ifdef GISP_SVGA",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    }
+  ],
+  "controls": [
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/hwvga.h",
+      "line": 25,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": 1995,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 35,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 82,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/hwvga.h",
+      "line": 25,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "line": 1995,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 35,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 82,
+      "default_exit": 0,
+      "forced_exit": 2
+    }
+  ],
+  "generated_cache_macro_definition_scan": {
+    "scope": "build/.ninja/**/*.c and *.h",
+    "pattern": "#define or #undef GISP_SVGA",
+    "matches": 0
+  }
+}

@@ -222,26 +222,6 @@
       ]
     },
     {
-      "path": "src/mvdm-host/inc/mvdm.h",
-      "start": 68,
-      "cut": 73,
-      "group_end": 73,
-      "kind": "else",
-      "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 4,
-      "source_sha256": "58d53501684b75ce32ad94dff6c04add52a435dbac28832ac7dc84652315e99a",
-      "prior_evidence": [
-        {
-          "family": "remaining",
-          "artifact": "s13-bfs-depth1-unresolved-121-candidates.json",
-          "original_entry_line": 68
-        }
-      ]
-    },
-    {
       "path": "src/mvdm-host/inc/softpc.h",
       "start": 33,
       "cut": 35,
@@ -1059,7 +1039,7 @@
       "families": [
         "remaining"
       ],
-      "count": 16
+      "count": 15
     }
   ],
   "unlinked": 0

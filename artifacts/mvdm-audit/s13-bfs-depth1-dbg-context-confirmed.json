@@ -1,0 +1,146 @@
+{
+  "scope": "three DBG guards mapped by unique surrounding original/current text, keeping historical DBG=1 outside current supported profile",
+  "records": [
+    {
+      "path": "src/mvdm-host/suballoc/suballcp.h",
+      "line": 57,
+      "original_line": 57,
+      "matched_context": [
+        [
+          "#else",
+          "#define ASSERT_STEPTHROUGH",
+          "#endif"
+        ],
+        [
+          "#define GET_BIT_FROM_CHAR_ARRAY(p, i) \\",
+          "((p[(i)/(sizeof(UCHAR) * 8)] >> ((i) % (sizeof(UCHAR) * 8))) & 1)"
+        ]
+      ],
+      "matches": {
+        "current": [
+          57
+        ],
+        "original": [
+          57
+        ]
+      },
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "source_sha256": "b61d76968522d8888a389fc96c81629d60c23481dec3ccccad79ce1ba2a1c53c"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.h",
+      "line": 70,
+      "original_line": 70,
+      "matched_context": [
+        [
+          "#define DEBUG_BREAKPOINT    0x80000000L",
+          "#define DEBUG_DOS_CCB       (DEBUG_DOS_CCB_IN | DEBUG_DOS_CCB_OUT)",
+          "#define VRDEBUG_FILE        \"VRDEBUG.LOG\""
+        ],
+        [
+          "#define DEFAULT_STACK_DUMP  32"
+        ]
+      ],
+      "matches": {
+        "current": [
+          70
+        ],
+        "original": [
+          70
+        ]
+      },
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "source_sha256": "d30a9bf9c34c9f1631ddcd1daf4b0c6121b67f90228ab4d82b14586f2edec5a2"
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.h",
+      "line": 561,
+      "original_line": 580,
+      "matched_context": [
+        [
+          "#define VrDumpDosStack(Depth)   VrDumpDosMemory('W', Depth, getSS(), getSP())"
+        ],
+        []
+      ],
+      "matches": {
+        "current": [
+          561
+        ],
+        "original": [
+          580
+        ]
+      },
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.",
+      "source_sha256": "d30a9bf9c34c9f1631ddcd1daf4b0c6121b67f90228ab4d82b14586f2edec5a2"
+    }
+  ],
+  "controls": [
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/suballoc/suballcp.h",
+      "line": 57,
+      "codes": [
+        0,
+        0,
+        2
+      ],
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/vdmredir/vrdebug.h",
+      "line": 70,
+      "codes": [
+        0,
+        0,
+        2
+      ],
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/vdmredir/vrdebug.h",
+      "line": 561,
+      "codes": [
+        0,
+        0,
+        2
+      ],
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/suballoc/suballcp.h",
+      "line": 57,
+      "codes": [
+        0,
+        0,
+        2
+      ],
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/vdmredir/vrdebug.h",
+      "line": 70,
+      "codes": [
+        0,
+        0,
+        2
+      ],
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/vdmredir/vrdebug.h",
+      "line": 561,
+      "codes": [
+        0,
+        0,
+        2
+      ],
+      "ok": true
+    }
+  ],
+  "macro_evidence": "s13-bfs-depth1-dbg-existing-guard-audit.json"
+}

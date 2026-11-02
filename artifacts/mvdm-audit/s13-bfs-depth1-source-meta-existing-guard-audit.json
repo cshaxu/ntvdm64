@@ -1,0 +1,239 @@
+{
+  "scope": "first-depth existing guards requiring SCCSID or DOCUMENTATION only",
+  "basis": "These selectors gate original source-identification strings or optional documentation/trace code. No selected Ninja command, repository build declaration, or generated header defines them. Original selectors and x86/x64 forced controls were checked; unrelated debug selectors are not classified.",
+  "source_scan_command": [
+    "rg",
+    "-n",
+    "--glob",
+    "!*.md",
+    "--glob",
+    "!*.json",
+    "--glob",
+    "!*.log",
+    "(?i)(^\\s*#\\s*(define|undef)\\s+(SCCSID|DOCUMENTATION)\\b|(?:/D|-D)(SCCSID|DOCUMENTATION)\\b)",
+    "src",
+    "tests",
+    "tools",
+    "CMakeLists.txt"
+  ],
+  "source_scan_exit": 1,
+  "graph_commands_checked": 2070,
+  "source_meta_flags_found": 0,
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "line": 45,
+      "kind": "ifdef",
+      "expression": "SCCSID",
+      "original_line": 45,
+      "original_sha256": "656c7feada15fda95476beb8f099453c79edfe75b75c49b3aadbf23a89ef3f05",
+      "source_sha256": "33ef9bdd2dafe75a2ec3b5b0e82d9fd47efb76b2c6ee0ca444bcaafc2aa119a3",
+      "directive": "#ifdef SCCSID",
+      "guard": "#error Excluded unsupported SCCSID configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 1262,
+      "kind": "ifdef",
+      "expression": "DOCUMENTATION",
+      "original_line": 1637,
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "source_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
+      "directive": "#ifdef DOCUMENTATION",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/haw.h",
+      "line": 20,
+      "kind": "ifdef",
+      "expression": "SCCSID",
+      "original_line": 20,
+      "original_sha256": "e1efd15347a661c2aa26c60c9d125ab6916e931af39faa7f5ef22ec9440a7c5c",
+      "source_sha256": "75175e21a24c272abb8d9d720d87b92c03f52442ea1d0ee004002ae63a199417",
+      "directive": "#ifdef SCCSID",
+      "guard": "#error Excluded unsupported SCCSID configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/msw_snd.h",
+      "line": 19,
+      "kind": "ifdef",
+      "expression": "SCCSID",
+      "original_line": 19,
+      "original_sha256": "3cb956d90427a1212e64c08bee246cf11c261545d5ac2d7f5764a8d7d27fb7dc",
+      "source_sha256": "d2cd03c8892944f577f9c0a70c78812320bdb052f782b37a5e2e28827ac7c8b1",
+      "directive": "#ifdef SCCSID",
+      "guard": "#error Excluded unsupported SCCSID configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 59,
+      "kind": "ifdef",
+      "expression": "SCCSID",
+      "original_line": 59,
+      "original_sha256": "fe23e0ef2fb79aebadc5c0404a2369a694ac6d82347bcae5f2a7bca74b807111",
+      "source_sha256": "bb24b3c5f20f3646047e860c820ab162491c31125f0fb85f90a72e1440106e61",
+      "directive": "#ifdef SCCSID",
+      "guard": "#error Excluded unsupported SCCSID configuration",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1167,
+      "kind": "ifdef",
+      "expression": "DOCUMENTATION",
+      "original_line": 1285,
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "source_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777",
+      "directive": "#ifdef DOCUMENTATION",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1182,
+      "kind": "ifdef",
+      "expression": "DOCUMENTATION",
+      "original_line": 1300,
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "source_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777",
+      "directive": "#ifdef DOCUMENTATION",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1518,
+      "kind": "ifdef",
+      "expression": "DOCUMENTATION",
+      "original_line": 1646,
+      "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+      "source_sha256": "84d57e9f089acf202979e910052e6ba02ac52daa8ce214ce17b025bc8c9ab777",
+      "directive": "#ifdef DOCUMENTATION",
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-529: DOCUMENTATION platform branch is not selected; see mirror register.",
+      "prior_status": "pending"
+    }
+  ],
+  "controls": [
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "line": 45,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 1262,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/haw.h",
+      "line": 20,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/msw_snd.h",
+      "line": 19,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 59,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1167,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1182,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1518,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/bios/bootstra.c",
+      "line": 45,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 1262,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/haw.h",
+      "line": 20,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/msw_snd.h",
+      "line": 19,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/quick_ev.c",
+      "line": 59,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1167,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1182,
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 1518,
+      "default_exit": 0,
+      "forced_exit": 2
+    }
+  ],
+  "generated_cache_macro_definition_scan": {
+    "scope": "build/.ninja/**/*.c and *.h",
+    "pattern": "#define or #undef SCCSID/DOCUMENTATION",
+    "matches": 0
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "scope": "one existing DBG guard with unique original/current surrounding anchor pair",
+  "record": {
+    "path": "src/mvdm-host/suballoc/suballcp.h",
+    "line": 126,
+    "original_line": 130,
+    "current_anchors": [
+      "typedef struct _SubAllocation {",
+      "PSACOMMITROUTINE CommitRoutine;"
+    ],
+    "original_anchors": [
+      "typedef struct _SubAllocation {",
+      "PSACOMMITROUTINE CommitRoutine;"
+    ],
+    "matches": {
+      "current": [
+        126
+      ],
+      "original": [
+        130
+      ]
+    },
+    "unique_pair": true
+  },
+  "controls": [
+    {
+      "architecture": "x86",
+      "undefined": 0,
+      "zero": 0,
+      "one": 2
+    },
+    {
+      "architecture": "x64",
+      "undefined": 0,
+      "zero": 0,
+      "one": 2
+    }
+  ],
+  "macro_evidence": "s13-bfs-depth1-dbg-existing-guard-audit.json"
+}
