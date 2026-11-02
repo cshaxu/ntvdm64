@@ -18,9 +18,14 @@
       "file": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
       "original_condition": "#ifndef i386",
       "evidence": "s13-bfs-depth1-msscs-outer-restoration.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "original_condition": "#ifdef CPU_30_STYLE",
+      "evidence": "s13-bfs-depth1-mouse-outer-restoration.json"
     }
   ],
-  "derived_total": 44,
-  "derived_current_bfs_total": 11,
+  "derived_total": 45,
+  "derived_current_bfs_total": 12,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

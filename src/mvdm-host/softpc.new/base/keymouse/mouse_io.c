@@ -5894,6 +5894,9 @@ LOCAL void jump_to_user_subroutine IFN3(MOUSE_CALL_MASK,condition_mask,word,segm
 
 	/* Set CS:IP to the registered user subroutine. */
 	setCS(segment);
+#ifdef CPU_30_STYLE
+#error Excluded unsupported original CPU30 mouse callback
+#else /* !CPU_30_STYLE */
 #if defined(CPU_40_STYLE)
 	/* DIVERGENCE(MVDM-HOST-DIV-222): CPU40's CCPU starts at live EIP.
 	 * An INT 33h callback registered by EDIT points at ordinary guest code,
@@ -5904,6 +5907,8 @@ LOCAL void jump_to_user_subroutine IFN3(MOUSE_CALL_MASK,condition_mask,word,segm
 #else
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif
+#endif /* !CPU_30_STYLE */
+#line 6630
 
 	/*
 	 *	Put parameters into the registers, saving the previous contents

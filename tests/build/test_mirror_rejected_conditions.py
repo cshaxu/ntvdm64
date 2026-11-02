@@ -185,6 +185,17 @@ if allowed.returncode or not rejected.returncode or 'Excluded unsupported origin
     raise SystemExit('original i386 virtual interrupt boundary failed: ' + allowed.stderr + rejected.stderr)
 print('PASS original i386 virtual interrupt boundary')
 
+mouse = (repo / 'src/mvdm-host/softpc.new/base/keymouse/mouse_io.c').read_text(encoding='latin1')
+mouse = mouse[mouse.index('LOCAL void jump_to_user_subroutine IFN3'):]
+start = mouse.index('#ifdef CPU_30_STYLE')
+end = mouse.index('#endif /* !CPU_30_STYLE */', start) + len('#endif /* !CPU_30_STYLE */')
+probe.write_text(mouse[start:end] + '\n', encoding='ascii')
+allowed = subprocess.run(base[:-1] + ['/DCPU_40_STYLE'] + base[-1:], capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base[:-1] + ['/DCPU_40_STYLE', '/DCPU_30_STYLE'] + base[-1:], capture_output=True, text=True, errors='replace')
+if allowed.returncode or 'setIP(offset);' not in allowed.stdout or not rejected.returncode or 'Excluded unsupported original CPU30 mouse callback' not in rejected.stdout + rejected.stderr:
+    raise SystemExit('original mouse CPU30 outer boundary failed: ' + allowed.stderr + rejected.stderr)
+print('PASS original mouse CPU30 boundary and selected CPU40 callback')
+
 nt_bop = (repo / 'src/mvdm-host/softpc.new/host/src/nt_bop.c').read_text(encoding='latin1').splitlines()
 marker = 'unsupported hardware-host FPU save path'
 positions = [i for i, line in enumerate(nt_bop) if marker in line]

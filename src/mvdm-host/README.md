@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-615: restore the original `CPU_30_STYLE` outer selector around
+the DIV-222 CPU40 mouse callback adaptation; the original CPU30 arm is
+excluded and the adapted non-CPU30 arm is retained for the next BFS depth.
+See `../../artifacts/mvdm-audit/s13-bfs-depth1-mouse-outer-restoration.json`.
+
 MVDM-HOST-DIV-614: restore the original `i386` outer selector around the
 DIV-039 software-CPU virtual interrupt state adaptation in `nt_msscs.c`.
 The original i386 hardware-monitor alternative is rejected; the existing

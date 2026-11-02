@@ -1,0 +1,23 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+  "before_sha256": "36bcc403bb6adda95657e2132ed01d8e9997de6b238029f2d9fd20499a827f57",
+  "candidate_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7",
+  "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+  "original_selector_line": 6625,
+  "original_following_line": 6630,
+  "diagnostic_line": 6636,
+  "controls": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "selected_output_equal_ignoring_blank_lines": true,
+      "sha256": "98d6868b9e9b051b368d2d9bd7c6dc28f0134bbafda3ab4fcac4134504ce4d26"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "selected_output_equal_ignoring_blank_lines": true,
+      "sha256": "98d6868b9e9b051b368d2d9bd7c6dc28f0134bbafda3ab4fcac4134504ce4d26"
+    }
+  ],
+  "scope": "restore fixed OpenNT first-depth CPU30 selector; DIV-222 CPU40 callback condition remains unreviewed at next depth",
+  "restored_first_depth_groups": 1
+}

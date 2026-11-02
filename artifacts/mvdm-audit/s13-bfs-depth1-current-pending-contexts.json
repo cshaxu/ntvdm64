@@ -3458,15 +3458,6 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
-      "start": 5904,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
       "start": 884,
       "kind": "else",
@@ -8170,7 +8161,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 51
+      "count": 50
     },
     {
       "reason": "file-not-witnessed-in-product",
