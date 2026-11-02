@@ -50,11 +50,9 @@ Revision History:
 
 
 #ifdef i386
-#define setEFLAGS(value) {              \
-    VdmTib.VdmContext.EFlags = value;   \
-    }
-#define getEFLAGS() VdmTib.VdmContext.EFlags 
+#error DIVERGENCE MVDM-HOST-DIV-619: unsupported i386 kernel VDM host path
 #endif
+#line 59
 
 
 #define SEGMENT_IS_BIG(sel) (Ldt[(sel & ~0x7)/sizeof(LDT_ENTRY)].HighWord.Bits.Default_Big)

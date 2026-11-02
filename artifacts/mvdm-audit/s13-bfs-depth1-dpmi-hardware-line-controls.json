@@ -1,0 +1,65 @@
+{
+  "scope": "original continuation diagnostic line controls for five DPMI alternatives",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "architecture": "x86",
+      "line": 101,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "architecture": "x64",
+      "line": 101,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "architecture": "x86",
+      "line": 53,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "architecture": "x64",
+      "line": 53,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "architecture": "x86",
+      "line": 169,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "architecture": "x64",
+      "line": 169,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "architecture": "x86",
+      "line": 59,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "architecture": "x64",
+      "line": 59,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "architecture": "x86",
+      "line": 253,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "architecture": "x64",
+      "line": 253,
+      "exit": 2
+    }
+  ]
+}

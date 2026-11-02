@@ -303,10 +303,9 @@ Return Value:
     }
 
 #ifdef i386
-    if (!DpmiSetX86Descriptor(Descriptors, registerAX, registerCX)) {
-        return;
-    }
+#error DIVERGENCE MVDM-HOST-DIV-619: unsupported i386 kernel VDM host path
 #endif
+#line 169
 
     setAX(0);
     

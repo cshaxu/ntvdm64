@@ -1793,33 +1793,33 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "04f8cadf013f3139de78e8a1a4a433a3b0d56fbf453157716d6b163bbe68b6f2"
+      "source_sha256": "b4dd027207c44e812228f58bd1fdd801605e00697ce1e3035d4b0c2b552f2d70"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmi32.c",
       "start": 253,
-      "cut": 258,
-      "group_end": 258,
+      "cut": 255,
+      "group_end": 255,
       "kind": "if",
       "expression": "defined(i386)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 4,
-      "source_sha256": "04f8cadf013f3139de78e8a1a4a433a3b0d56fbf453157716d6b163bbe68b6f2"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "b4dd027207c44e812228f58bd1fdd801605e00697ce1e3035d4b0c2b552f2d70"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmi32.c",
-      "start": 302,
-      "cut": 342,
-      "group_end": 342,
+      "start": 300,
+      "cut": 340,
+      "group_end": 340,
       "kind": "if",
       "expression": "defined(CPU_40_STYLE)",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 39,
-      "source_sha256": "04f8cadf013f3139de78e8a1a4a433a3b0d56fbf453157716d6b163bbe68b6f2"
+      "source_sha256": "b4dd027207c44e812228f58bd1fdd801605e00697ce1e3035d4b0c2b552f2d70"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmi32p.h",
@@ -1832,7 +1832,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "c37cbc2e860fdfcb38793020e283b5babc55c46324a753aa0220aba8f67902b4"
+      "source_sha256": "229b9eeffd4e77ff7b32134d2f57f1e13615f22c0bd1f4a36db05ba93fcd91de"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmi32p.h",
@@ -1845,33 +1845,33 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 21,
-      "source_sha256": "c37cbc2e860fdfcb38793020e283b5babc55c46324a753aa0220aba8f67902b4"
+      "source_sha256": "229b9eeffd4e77ff7b32134d2f57f1e13615f22c0bd1f4a36db05ba93fcd91de"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmi32p.h",
       "start": 52,
-      "cut": 57,
-      "group_end": 57,
+      "cut": 54,
+      "group_end": 54,
       "kind": "ifdef",
       "expression": "i386",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 4,
-      "source_sha256": "c37cbc2e860fdfcb38793020e283b5babc55c46324a753aa0220aba8f67902b4"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "229b9eeffd4e77ff7b32134d2f57f1e13615f22c0bd1f4a36db05ba93fcd91de"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmi32p.h",
-      "start": 108,
-      "cut": 136,
-      "group_end": 136,
+      "start": 106,
+      "cut": 134,
+      "group_end": 134,
       "kind": "ifndef",
       "expression": "i386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 27,
-      "source_sha256": "c37cbc2e860fdfcb38793020e283b5babc55c46324a753aa0220aba8f67902b4"
+      "source_sha256": "229b9eeffd4e77ff7b32134d2f57f1e13615f22c0bd1f4a36db05ba93fcd91de"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmidata.h",
@@ -2443,7 +2443,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "bbd70c5fe50084e64704fde231206ea4999f3ea3442a67719b3c2db1e86f8b24"
+      "source_sha256": "fc740728c4fd1d269f9dc787a520e7f557f7f9a9fd795087d729f90e70530c60"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmiselr.c",
@@ -2456,7 +2456,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 16,
-      "source_sha256": "bbd70c5fe50084e64704fde231206ea4999f3ea3442a67719b3c2db1e86f8b24"
+      "source_sha256": "fc740728c4fd1d269f9dc787a520e7f557f7f9a9fd795087d729f90e70530c60"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmiselr.c",
@@ -2469,7 +2469,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "bbd70c5fe50084e64704fde231206ea4999f3ea3442a67719b3c2db1e86f8b24"
+      "source_sha256": "fc740728c4fd1d269f9dc787a520e7f557f7f9a9fd795087d729f90e70530c60"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmiselr.c",
@@ -2482,7 +2482,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 7,
-      "source_sha256": "bbd70c5fe50084e64704fde231206ea4999f3ea3442a67719b3c2db1e86f8b24"
+      "source_sha256": "fc740728c4fd1d269f9dc787a520e7f557f7f9a9fd795087d729f90e70530c60"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmiselr.c",
@@ -2495,7 +2495,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "bbd70c5fe50084e64704fde231206ea4999f3ea3442a67719b3c2db1e86f8b24"
+      "source_sha256": "fc740728c4fd1d269f9dc787a520e7f557f7f9a9fd795087d729f90e70530c60"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmiselr.c",
@@ -2508,46 +2508,46 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 41,
-      "source_sha256": "bbd70c5fe50084e64704fde231206ea4999f3ea3442a67719b3c2db1e86f8b24"
+      "source_sha256": "fc740728c4fd1d269f9dc787a520e7f557f7f9a9fd795087d729f90e70530c60"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmiselr.c",
       "start": 305,
-      "cut": 309,
-      "group_end": 309,
+      "cut": 307,
+      "group_end": 307,
       "kind": "ifdef",
       "expression": "i386",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 3,
-      "source_sha256": "bbd70c5fe50084e64704fde231206ea4999f3ea3442a67719b3c2db1e86f8b24"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "fc740728c4fd1d269f9dc787a520e7f557f7f9a9fd795087d729f90e70530c60"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmiselr.c",
-      "start": 313,
-      "cut": 317,
-      "group_end": 317,
+      "start": 312,
+      "cut": 316,
+      "group_end": 316,
       "kind": "ifndef",
       "expression": "i386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "bbd70c5fe50084e64704fde231206ea4999f3ea3442a67719b3c2db1e86f8b24"
+      "source_sha256": "fc740728c4fd1d269f9dc787a520e7f557f7f9a9fd795087d729f90e70530c60"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmiselr.c",
-      "start": 321,
-      "cut": 448,
-      "group_end": 448,
+      "start": 320,
+      "cut": 447,
+      "group_end": 447,
       "kind": "ifndef",
       "expression": "i386",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 126,
-      "source_sha256": "bbd70c5fe50084e64704fde231206ea4999f3ea3442a67719b3c2db1e86f8b24"
+      "source_sha256": "fc740728c4fd1d269f9dc787a520e7f557f7f9a9fd795087d729f90e70530c60"
     },
     {
       "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
@@ -2820,24 +2820,24 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "9d19900e7f87ed5c96a6682f825aa1839d3c3313364f6089d3b057d87e0019de"
+      "source_sha256": "5c45cbb888e2f32b099c165cb9db74019892ea98f4ad1998238dfe3a1f72bff0"
     },
     {
       "path": "src/mvdm-host/dpmi32/modesw.c",
       "start": 206,
-      "cut": 209,
+      "cut": 208,
       "group_end": 219,
       "kind": "if",
       "expression": "defined(i386)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "9d19900e7f87ed5c96a6682f825aa1839d3c3313364f6089d3b057d87e0019de"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "5c45cbb888e2f32b099c165cb9db74019892ea98f4ad1998238dfe3a1f72bff0"
     },
     {
       "path": "src/mvdm-host/dpmi32/modesw.c",
-      "start": 209,
+      "start": 208,
       "cut": 219,
       "group_end": 219,
       "kind": "else",
@@ -2845,8 +2845,8 @@
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
-      "body_lines": 9,
-      "source_sha256": "9d19900e7f87ed5c96a6682f825aa1839d3c3313364f6089d3b057d87e0019de"
+      "body_lines": 10,
+      "source_sha256": "5c45cbb888e2f32b099c165cb9db74019892ea98f4ad1998238dfe3a1f72bff0"
     },
     {
       "path": "src/mvdm-host/dpmi32/modesw.c",
@@ -2859,7 +2859,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "9d19900e7f87ed5c96a6682f825aa1839d3c3313364f6089d3b057d87e0019de"
+      "source_sha256": "5c45cbb888e2f32b099c165cb9db74019892ea98f4ad1998238dfe3a1f72bff0"
     },
     {
       "path": "src/mvdm-host/dpmi32/modesw.c",
@@ -2872,24 +2872,24 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 12,
-      "source_sha256": "9d19900e7f87ed5c96a6682f825aa1839d3c3313364f6089d3b057d87e0019de"
+      "source_sha256": "5c45cbb888e2f32b099c165cb9db74019892ea98f4ad1998238dfe3a1f72bff0"
     },
     {
       "path": "src/mvdm-host/dpmi32/modesw.c",
       "start": 278,
-      "cut": 281,
+      "cut": 280,
       "group_end": 291,
       "kind": "if",
       "expression": "defined(i386)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "9d19900e7f87ed5c96a6682f825aa1839d3c3313364f6089d3b057d87e0019de"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "5c45cbb888e2f32b099c165cb9db74019892ea98f4ad1998238dfe3a1f72bff0"
     },
     {
       "path": "src/mvdm-host/dpmi32/modesw.c",
-      "start": 281,
+      "start": 280,
       "cut": 291,
       "group_end": 291,
       "kind": "else",
@@ -2897,8 +2897,8 @@
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
-      "body_lines": 9,
-      "source_sha256": "9d19900e7f87ed5c96a6682f825aa1839d3c3313364f6089d3b057d87e0019de"
+      "body_lines": 10,
+      "source_sha256": "5c45cbb888e2f32b099c165cb9db74019892ea98f4ad1998238dfe3a1f72bff0"
     },
     {
       "path": "src/mvdm-host/dpmi32/modesw.c",
@@ -2911,7 +2911,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 18,
-      "source_sha256": "9d19900e7f87ed5c96a6682f825aa1839d3c3313364f6089d3b057d87e0019de"
+      "source_sha256": "5c45cbb888e2f32b099c165cb9db74019892ea98f4ad1998238dfe3a1f72bff0"
     },
     {
       "path": "src/mvdm-host/dpmi32/savestat.c",
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 895,
-    "newly-excluded": 624,
+    "pending": 890,
+    "newly-excluded": 629,
     "already-excluded": 1658,
     "retained-observed": 1864,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
-    "not-guard": 843,
+    "not-guard": 838,
     "guard": 52
   }
 }

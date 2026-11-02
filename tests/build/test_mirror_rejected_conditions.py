@@ -236,6 +236,19 @@ for name in ('cpu_vid.h', 'gmi.h'):
             raise SystemExit('generic callback profile boundary failed: ' + name)
 print('PASS local CPU40/C-VID callback carrier boundaries')
 
+for name, count in (('dpmi32.c', 1), ('dpmi32p.h', 1), ('dpmiselr.c', 1), ('modesw.c', 2)):
+    header = (repo / 'src/mvdm-host/dpmi32' / name).read_text(encoding='latin1').splitlines()
+    positions = [i for i, line in enumerate(header) if 'unsupported i386 kernel VDM host path' in line]
+    if len(positions) != count:
+        raise SystemExit('missing original DPMI i386 guard in ' + name)
+    for i in positions:
+        probe.write_text(header[i-1] + '\n' + header[i] + '\n#endif\n', encoding='ascii')
+        allowed = subprocess.run(base, capture_output=True, text=True, errors='replace')
+        rejected = subprocess.run(base[:-1] + ['/Di386'] + base[-1:], capture_output=True, text=True, errors='replace')
+        if allowed.returncode or not rejected.returncode or 'unsupported i386 kernel VDM host path' not in rejected.stdout + rejected.stderr:
+            raise SystemExit('original DPMI i386 boundary failed: ' + name)
+print('PASS original DPMI i386 kernel VDM boundaries')
+
 nt_bop = (repo / 'src/mvdm-host/softpc.new/host/src/nt_bop.c').read_text(encoding='latin1').splitlines()
 marker = 'unsupported hardware-host FPU save path'
 positions = [i for i, line in enumerate(nt_bop) if marker in line]

@@ -251,11 +251,9 @@ Notes:
     // Only 1 bit defined in dpmi
     CurrentAppFlags = getAX() & DPMI_32BIT;
 #if defined(i386)
-    VdmTib.PmStackInfo.Flags = CurrentAppFlags;
-    if (CurrentAppFlags & DPMI_32BIT) {
-        *pNtVDMState |= VDM_32BIT_APP;
-    }
+#error DIVERGENCE MVDM-HOST-DIV-619: unsupported i386 kernel VDM host path
 #endif
+#line 253
 
     DpmiInitRegisterSize();
 

@@ -1,0 +1,155 @@
+{
+  "scope": "candidate original NT kernel VDM host paths; no classification until source ownership and supported context controls are complete",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "line": 253,
+      "original_body_matches": [
+        {
+          "line": 247,
+          "cut": 252,
+          "end": 252
+        }
+      ],
+      "body_sha256": "64f86408e2d1bda274e7ed16a3a99b0f23b1269f85b8fd216c9ff1720ea2d9d0",
+      "body_lines": 4,
+      "contexts": 2,
+      "context_summary": {
+        "i386_flags": 0,
+        "cpu40_flags": 2
+      },
+      "local_markers": [],
+      "has_else": false
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
+      "line": 52,
+      "original_body_matches": [
+        {
+          "line": 53,
+          "cut": 58,
+          "end": 58
+        }
+      ],
+      "body_sha256": "f58812fab3b0f21c6312f5d2895e3b60170ca1275f9ac711611c9592b0e8cb95",
+      "body_lines": 4,
+      "contexts": 36,
+      "context_summary": {
+        "i386_flags": 0,
+        "cpu40_flags": 34
+      },
+      "local_markers": [],
+      "has_else": false
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmidata.h",
+      "line": 31,
+      "original_body_matches": [
+        {
+          "line": 31,
+          "cut": 44,
+          "end": 93
+        }
+      ],
+      "body_sha256": "28e90d3e61e45791dd29136fba210ae2cad260fa52f48312b1f613560a8fd22d",
+      "body_lines": 10,
+      "contexts": 36,
+      "context_summary": {
+        "i386_flags": 0,
+        "cpu40_flags": 34
+      },
+      "local_markers": [],
+      "has_else": true
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "line": 94,
+      "original_body_matches": [],
+      "body_sha256": "05bd14ebc66fe0049a353282e3ab92c0023c41afaae1f50eafcb646aaeb98837",
+      "body_lines": 3,
+      "contexts": 2,
+      "context_summary": {
+        "i386_flags": 0,
+        "cpu40_flags": 2
+      },
+      "local_markers": [
+        "MVDM-HOST-DIV-554"
+      ],
+      "has_else": false
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "line": 422,
+      "original_body_matches": [],
+      "body_sha256": "ad389aa105e6cf6195e6cd94fd09a6a334a5a128e0a759b9cb1d82662385d8cc",
+      "body_lines": 5,
+      "contexts": 2,
+      "context_summary": {
+        "i386_flags": 0,
+        "cpu40_flags": 2
+      },
+      "local_markers": [],
+      "has_else": false
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "line": 305,
+      "original_body_matches": [
+        {
+          "line": 164,
+          "cut": 168,
+          "end": 168
+        }
+      ],
+      "body_sha256": "26d23f43d46d69c1a535bb7410935f1ce6e2e3123d18dc94e268f10814ded9a4",
+      "body_lines": 3,
+      "contexts": 2,
+      "context_summary": {
+        "i386_flags": 0,
+        "cpu40_flags": 2
+      },
+      "local_markers": [],
+      "has_else": false
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "line": 206,
+      "original_body_matches": [
+        {
+          "line": 49,
+          "cut": 52,
+          "end": 62
+        }
+      ],
+      "body_sha256": "c9f728c1a034aa1b13e94f9ff095c6a3bf052eee57e99d93d875bcf99690c638",
+      "body_lines": 2,
+      "contexts": 2,
+      "context_summary": {
+        "i386_flags": 0,
+        "cpu40_flags": 2
+      },
+      "local_markers": [],
+      "has_else": true
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "line": 278,
+      "original_body_matches": [
+        {
+          "line": 97,
+          "cut": 100,
+          "end": 110
+        }
+      ],
+      "body_sha256": "630b3d115d2ba6713d8256a58793b7eb490b5b909420c5c05d22532a047bf4ea",
+      "body_lines": 2,
+      "contexts": 2,
+      "context_summary": {
+        "i386_flags": 0,
+        "cpu40_flags": 2
+      },
+      "local_markers": [],
+      "has_else": true
+    }
+  ]
+}

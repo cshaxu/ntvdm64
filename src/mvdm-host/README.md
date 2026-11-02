@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-619: preserve five original DPMI `i386` selectors while
+rejecting their NT kernel VDM host-context, native LDT or direct-mapping
+alternatives. The selected software-emulation branches remain unchanged;
+this does not classify WOW32's separate x86 calling-convention paths.
+Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-dpmi-hardware-alternatives.json`.
+
 MVDM-HOST-DIV-618: reject the unsupported generic video callback carriers
 within the existing DIV-088/089 CPU40/C-VID adaptation. The fixed OpenNT
 source has unconditional generic declarations; the selected typed adapter is

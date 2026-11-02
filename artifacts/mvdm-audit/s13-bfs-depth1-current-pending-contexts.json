@@ -119,24 +119,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/dpmi32/dpmi32.c",
-      "start": 253,
-      "kind": "if",
-      "expression": "defined(i386)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/dpmi32/dpmi32p.h",
-      "start": 52,
-      "kind": "ifdef",
-      "expression": "i386",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 36
-    },
-    {
       "path": "src/mvdm-host/dpmi32/dpmidata.h",
       "start": 31,
       "kind": "ifdef",
@@ -218,15 +200,6 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
-      "start": 305,
-      "kind": "ifdef",
-      "expression": "i386",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
       "start": 74,
       "kind": "else",
@@ -243,24 +216,6 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/dpmi32/modesw.c",
-      "start": 206,
-      "kind": "if",
-      "expression": "defined(i386)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/dpmi32/modesw.c",
-      "start": 278,
-      "kind": "if",
-      "expression": "defined(i386)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 2
     },
     {
       "path": "src/mvdm-host/fax/wowfax/wowfax.c",
@@ -8068,7 +8023,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 42
+      "count": 37
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",

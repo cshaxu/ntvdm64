@@ -204,9 +204,9 @@ Return Value:
 {
 
 #if defined(i386)
-    // bugbug hack hack
-    *((PUSHORT)(DosxRmCodeSegment << 4) + 2) = DosxStackSegment;
+#error DIVERGENCE MVDM-HOST-DIV-619: unsupported i386 kernel VDM host path
 #else
+#line 53
     PWORD16 Data;
 
     Data = (PWORD16)Sim32GetVDMPointer(
@@ -276,9 +276,9 @@ Return Value:
 --*/
 {
 #if defined(i386)
-    // bugbug hack hack
-    *((PUSHORT)(DosxRmCodeSegment << 4) + 2) = 0xb7;
+#error DIVERGENCE MVDM-HOST-DIV-619: unsupported i386 kernel VDM host path
 #else
+#line 101
     PWORD16 Data;
 
     Data = (PWORD16)Sim32GetVDMPointer(
