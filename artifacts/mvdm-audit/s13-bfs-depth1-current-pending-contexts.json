@@ -6788,42 +6788,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
-      "start": 844,
-      "kind": "ifdef",
-      "expression": "STUBBED",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
-      "start": 856,
-      "kind": "ifdef",
-      "expression": "STUBBED",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
-      "start": 868,
-      "kind": "ifdef",
-      "expression": "STUBBED",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
-      "start": 880,
-      "kind": "ifdef",
-      "expression": "STUBBED",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
       "start": 320,
       "kind": "else",
@@ -9265,7 +9229,7 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 860
+      "count": 856
     },
     {
       "reason": "file-not-witnessed-in-product",

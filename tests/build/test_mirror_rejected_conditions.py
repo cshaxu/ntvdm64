@@ -194,6 +194,7 @@ for path, macro, expected_count, divergence in (
     ('src/mvdm-host/softpc.new/base/inc/cpu2.h', 'EGATEST', 1, '602'),
     ('src/mvdm-host/wow32/wkglobal.c', 'API16', 8, '603'),
     ('src/mvdm-host/wow32/wklocal.c', 'API16', 2, '603'),
+    ('src/mvdm-host/softpc.new/host/src/stf_conf.c', 'STUBBED', 4, '604'),
 ):
     lines = (repo / path).read_text(encoding='latin1').splitlines()
     marker = 'MVDM-HOST-DIV-' + divergence + ': unsupported ' + macro + ' profile'
@@ -209,4 +210,4 @@ for path, macro, expected_count, divergence in (
                                   capture_output=True, text=True, errors='replace')
         if allowed.returncode or not rejected.returncode or marker not in rejected.stdout + rejected.stderr:
             raise SystemExit('excluded profile selection failed: ' + path)
-print('PASS original SECURE, EGATEST and API16 profile guards')
+print('PASS original SECURE, EGATEST, API16 and STUBBED profile guards')

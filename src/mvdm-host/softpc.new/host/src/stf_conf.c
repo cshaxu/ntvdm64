@@ -842,9 +842,9 @@ config_values	*value;
 char			*buf;
 {
 #ifdef STUBBED
-        	host_lpt_close(0);
-	return (host_lpt_open(0, value->string, buf));
+#error DIVERGENCE MVDM-HOST-DIV-604: unsupported STUBBED profile
 #endif /*STUBBED*/
+#line 848
 /* cheat on validation for moment as this will change	*/
 	return(C_CONFIG_OP_OK);
 }
@@ -854,9 +854,9 @@ config_values	*value;
 char			*buf;
 {
 #ifdef STUBBED
-        	host_lpt_close(1);
-	return (host_lpt_open(1, value->string, buf));
+#error DIVERGENCE MVDM-HOST-DIV-604: unsupported STUBBED profile
 #endif /*STUBBED*/
+#line 860
 /* cheat on validation for moment as this will change	*/
 	return(C_CONFIG_OP_OK);
 }
@@ -866,9 +866,9 @@ config_values	*value;
 char			*buf;
 {
 #ifdef STUBBED
-	host_com_close(0);
-	return (host_com_open(0, value->string, buf));
+#error DIVERGENCE MVDM-HOST-DIV-604: unsupported STUBBED profile
 #endif /*STUBBED*/
+#line 872
 /* cheat on validation for moment as this will change	*/
 	return(C_CONFIG_OP_OK);
 }
@@ -878,9 +878,9 @@ config_values	*value;
 char			*buf;
 {
 #ifdef STUBBED
-        	host_com_close(1);
-	return (host_com_open(1, value->string, buf));
+#error DIVERGENCE MVDM-HOST-DIV-604: unsupported STUBBED profile
 #endif /*STUBBED*/
+#line 884
 /* cheat on validation for moment as this will change	*/
 	return(C_CONFIG_OP_OK);
 }

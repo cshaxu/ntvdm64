@@ -1,0 +1,133 @@
+{
+  "scope": "four first-depth arms, original bodies matched, selected branch unchanged, unsupported macro rejects",
+  "macro_evidence": {
+    "compile_commands_checked": 2070,
+    "jobs_sha256": "623d1067dca46b9fabf571db17d6567d8f03e04047245ca9ac11fcda71c725ea",
+    "command_STUBBED_definitions_found": 0,
+    "sole_project_definition": {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "sha256": "e51bb0d18247f51723a1fd28f3f5c2cc24dc291a4d708f2eaebf8ba047fdf0fa",
+      "scope": "file-local definition in separate translation unit, with no source inclusion of this C file"
+    },
+    "sdk_generated_other_definitions_found": 0,
+    "scope": "src, tests, tools, generated Ninja trees and eight SDK include roots",
+    "controls": "8 x86/x64 isolated selected-preprocessor comparisons plus forced-selector rejections"
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "macro": "STUBBED",
+      "original_start": 844,
+      "original_end": 847,
+      "original_boundary": 847,
+      "old_body_sha256": "cc9bdcb6f153fdc2015ddfd0f5508851da3f6940950df28536dbdc75431965ab"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "macro": "STUBBED",
+      "original_start": 856,
+      "original_end": 859,
+      "original_boundary": 859,
+      "old_body_sha256": "1a708698ea1c172171c1c4fd10d99c8a7f77b0255eaaffe6842dd854fd2ad1f1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "macro": "STUBBED",
+      "original_start": 868,
+      "original_end": 871,
+      "original_boundary": 871,
+      "old_body_sha256": "35bb364db1aa266536d4bc5540e433701f43d02e3f72eaf32c48ffdb4ba680ac"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "macro": "STUBBED",
+      "original_start": 880,
+      "original_end": 883,
+      "original_boundary": 883,
+      "old_body_sha256": "a2bbb443f84aa2502a2aca58f69fa439408acf42d424c25ed8264bc411e997e3"
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "start": 844,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "start": 856,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "start": 868,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "start": 880,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "start": 844,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "start": 856,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "start": 868,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "start": 880,
+      "selected_preprocess_equal": true,
+      "forced_rejected": true
+    }
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
+      "before": "dad77a84105a2390c33191481367002c91d732b69dd730a61357f40b1c895264",
+      "after": "9c7aa38b23d293155f80c89eaf87332e0c2372edf3dc608b851f80dd526ef76f"
+    }
+  ],
+  "validation": {
+    "x86_cached_build": "passed; no work",
+    "x64_cached_build": "passed; no work",
+    "guard_gate": "x86 and x64; see progress record",
+    "published_release": "all ten product images byte-identical to accepted prior release at both destinations",
+    "published_images": [
+      "run16.exe",
+      "ntsrv.exe",
+      "ntcon.exe",
+      "ntvdm.exe",
+      "ntvwm.exe",
+      "ntmon.exe",
+      "WOW32.DLL",
+      "VDMREDIR.DLL",
+      "nthook32.dll",
+      "nthook64.dll"
+    ]
+  }
+}

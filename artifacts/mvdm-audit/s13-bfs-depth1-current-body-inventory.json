@@ -49529,7 +49529,7 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "dad77a84105a2390c33191481367002c91d732b69dd730a61357f40b1c895264"
+      "source_sha256": "9c7aa38b23d293155f80c89eaf87332e0c2372edf3dc608b851f80dd526ef76f"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
@@ -49542,7 +49542,7 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "dad77a84105a2390c33191481367002c91d732b69dd730a61357f40b1c895264"
+      "source_sha256": "9c7aa38b23d293155f80c89eaf87332e0c2372edf3dc608b851f80dd526ef76f"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
@@ -49555,7 +49555,7 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "dad77a84105a2390c33191481367002c91d732b69dd730a61357f40b1c895264"
+      "source_sha256": "9c7aa38b23d293155f80c89eaf87332e0c2372edf3dc608b851f80dd526ef76f"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
@@ -49568,7 +49568,7 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "dad77a84105a2390c33191481367002c91d732b69dd730a61357f40b1c895264"
+      "source_sha256": "9c7aa38b23d293155f80c89eaf87332e0c2372edf3dc608b851f80dd526ef76f"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
@@ -49581,59 +49581,59 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "dad77a84105a2390c33191481367002c91d732b69dd730a61357f40b1c895264"
+      "source_sha256": "9c7aa38b23d293155f80c89eaf87332e0c2372edf3dc608b851f80dd526ef76f"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
       "start": 844,
-      "cut": 847,
-      "group_end": 847,
+      "cut": 846,
+      "group_end": 846,
       "kind": "ifdef",
       "expression": "STUBBED",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "dad77a84105a2390c33191481367002c91d732b69dd730a61357f40b1c895264"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "9c7aa38b23d293155f80c89eaf87332e0c2372edf3dc608b851f80dd526ef76f"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
       "start": 856,
-      "cut": 859,
-      "group_end": 859,
+      "cut": 858,
+      "group_end": 858,
       "kind": "ifdef",
       "expression": "STUBBED",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "dad77a84105a2390c33191481367002c91d732b69dd730a61357f40b1c895264"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "9c7aa38b23d293155f80c89eaf87332e0c2372edf3dc608b851f80dd526ef76f"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
       "start": 868,
-      "cut": 871,
-      "group_end": 871,
+      "cut": 870,
+      "group_end": 870,
       "kind": "ifdef",
       "expression": "STUBBED",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "dad77a84105a2390c33191481367002c91d732b69dd730a61357f40b1c895264"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "9c7aa38b23d293155f80c89eaf87332e0c2372edf3dc608b851f80dd526ef76f"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/stf_conf.c",
       "start": 880,
-      "cut": 883,
-      "group_end": 883,
+      "cut": 882,
+      "group_end": 882,
       "kind": "ifdef",
       "expression": "STUBBED",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "dad77a84105a2390c33191481367002c91d732b69dd730a61357f40b1c895264"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "9c7aa38b23d293155f80c89eaf87332e0c2372edf3dc608b851f80dd526ef76f"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 1026,
+    "pending": 1022,
     "already-excluded": 1603,
-    "newly-excluded": 554,
+    "newly-excluded": 558,
     "retained-observed": 1863,
     "retained-original-assertion": 4
   },
   "pending_by_guard": {
-    "not-guard": 911,
+    "not-guard": 907,
     "guard": 115
   }
 }
