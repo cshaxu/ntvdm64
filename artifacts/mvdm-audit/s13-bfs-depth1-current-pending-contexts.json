@@ -335,87 +335,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
-      "start": 1402,
-      "kind": "elif",
-      "expression": "ASPI",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
-      "start": 345,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
-      "start": 133,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
-      "start": 150,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 99,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 192,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1435,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1944,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2010,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
       "start": 240,
       "kind": "ifdef",
@@ -686,12 +605,6 @@
       "guard_only": true,
       "has_current_includer": false,
       "count": 1
-    },
-    {
-      "reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "has_current_includer": true,
-      "count": 9
     },
     {
       "reason": "combined-i386-cpu40-supported-context-unresolved",
