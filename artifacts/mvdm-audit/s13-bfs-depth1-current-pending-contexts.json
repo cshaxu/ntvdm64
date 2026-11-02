@@ -866,37 +866,10 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
-      "start": 53,
-      "kind": "ifdef",
-      "expression": "SECURE",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
-      "start": 75,
-      "kind": "ifdef",
-      "expression": "NOVELL",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
       "start": 118,
       "kind": "if",
       "expression": "defined(DELTA) && defined(A2CPU)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
-      "start": 585,
-      "kind": "ifdef",
-      "expression": "NOVELL",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "current_actual_includers": 2
@@ -921,25 +894,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
-      "start": 511,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
       "start": 808,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
-      "start": 4301,
       "kind": "else",
       "expression": "",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
@@ -1008,60 +963,6 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
-      "start": 241,
-      "kind": "ifdef",
-      "expression": "PS_FLUSHING",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
-      "start": 702,
-      "kind": "ifdef",
-      "expression": "SHORT_TRACE",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
-      "start": 826,
-      "kind": "ifdef",
-      "expression": "PS_FLUSHING",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
-      "start": 845,
-      "kind": "ifdef",
-      "expression": "SHORT_TRACE",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
-      "start": 905,
-      "kind": "ifdef",
-      "expression": "SHORT_TRACE",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
-      "start": 2279,
-      "kind": "ifdef",
-      "expression": "PS_FLUSHING",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
     },
     {
       "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/ev_glue.c",
@@ -3962,24 +3863,6 @@
       "current_actual_includers": 192
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
-      "start": 365,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 192
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
-      "start": 455,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 192
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/smeg_hea.h",
       "start": 15,
       "kind": "ifdef",
@@ -4151,42 +4034,6 @@
       "current_actual_includers": 24
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
-      "start": 269,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
-      "start": 1904,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
-      "start": 1910,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
-      "start": 172,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
       "start": 1497,
       "kind": "if",
@@ -4287,24 +4134,6 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 458,
-      "kind": "ifdef",
-      "expression": "EGA_DUMP",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
-      "start": 534,
-      "kind": "ifdef",
-      "expression": "EGA_DUMP",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
       "start": 859,
       "kind": "else",
       "expression": "",
@@ -4323,15 +4152,6 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/main.c",
-      "start": 83,
-      "kind": "ifdef",
-      "expression": "REAL_VGA",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/main.c",
       "start": 115,
       "kind": "ifndef",
       "expression": "CPU_40_STYLE",
@@ -4341,63 +4161,9 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/main.c",
-      "start": 119,
-      "kind": "ifdef",
-      "expression": "SECURE",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/main.c",
-      "start": 153,
-      "kind": "ifdef",
-      "expression": "SECURE",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/main.c",
       "start": 166,
       "kind": "if",
       "expression": "defined(CPU_40_STYLE) && !defined(CCPU)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/main.c",
-      "start": 259,
-      "kind": "ifdef",
-      "expression": "REAL_VGA",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/main.c",
-      "start": 265,
-      "kind": "ifdef",
-      "expression": "REAL_VGA",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
-      "start": 38,
-      "kind": "ifdef",
-      "expression": "LICENSING",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
-      "start": 129,
-      "kind": "ifdef",
-      "expression": "NOVELL",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "current_actual_includers": 2
@@ -5286,15 +5052,6 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/timer.c",
-      "start": 2101,
-      "kind": "ifdef",
-      "expression": "SYNCH_TIMERS",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
       "start": 2139,
       "kind": "if",
       "expression": "!defined (NTVDM)",
@@ -5343,15 +5100,6 @@
       "start": 174,
       "kind": "else",
       "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
-      "start": 245,
-      "kind": "ifdef",
-      "expression": "DUMB_TERMINAL",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "current_actual_includers": 2
@@ -8210,42 +7958,6 @@
       "current_actual_includers": 90
     },
     {
-      "path": "src/mvdm-host/wow32/wuwind.c",
-      "start": 1639,
-      "kind": "if",
-      "expression": "(GWL_WNDPROC != (-4) || GWL_STYLE != (-16) || GWL_EXSTYLE != (-20))",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 1
-    },
-    {
-      "path": "src/mvdm-host/wow32/wuwind.c",
-      "start": 1998,
-      "kind": "if",
-      "expression": "(GWL_HINSTANCE != (-6) || GWL_HWNDPARENT != (-8) || GWL_ID != (-12))",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 1
-    },
-    {
-      "path": "src/mvdm-host/wow32/wuwind.c",
-      "start": 2445,
-      "kind": "if",
-      "expression": "(GWL_WNDPROC != (-4) || GWL_STYLE != (-16) || GWL_EXSTYLE != (-20))",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 1
-    },
-    {
-      "path": "src/mvdm-host/wow32/wuwind.c",
-      "start": 2852,
-      "kind": "if",
-      "expression": "(GWL_HINSTANCE != (-6) || GWL_HWNDPARENT != (-8) || GWL_ID != (-12))",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 1
-    },
-    {
       "path": "src/mvdm-host/xms.486/xmsmemr.c",
       "start": 151,
       "kind": "else",
@@ -9736,7 +9448,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 149
+      "count": 117
     },
     {
       "reason": "file-not-witnessed-in-product",

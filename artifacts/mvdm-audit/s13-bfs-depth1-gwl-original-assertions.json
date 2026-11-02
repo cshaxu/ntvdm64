@@ -1,0 +1,113 @@
+{
+  "scope": "four original x86 WOW32 compile-time GWL assertions; synthetic x64 SDK controls fail and are not supported WOW32 builds; no source or runtime change",
+  "source_sha256": "705e476f1b07f049cf4557872b856dd158a78c03b336bbfc742a0e9ac37b43df",
+  "original_sha256": "ab270e2669cfd383da4baac471bb63e7c9c603581f4f7592ad447e8a783953dc",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": 1639,
+      "original_line": 1643,
+      "expression": "(GWL_WNDPROC != (-4) || GWL_STYLE != (-16) || GWL_EXSTYLE != (-20))",
+      "macro_to_perturb": "GWL_WNDPROC",
+      "guard": "#error Win16/Win32 GWL constants differ"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": 1998,
+      "original_line": 1987,
+      "expression": "(GWL_HINSTANCE != (-6) || GWL_HWNDPARENT != (-8) || GWL_ID != (-12))",
+      "macro_to_perturb": "GWL_HINSTANCE",
+      "guard": "#error Win16/Win32 window-word constants differ"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": 2445,
+      "original_line": 2434,
+      "expression": "(GWL_WNDPROC != (-4) || GWL_STYLE != (-16) || GWL_EXSTYLE != (-20))",
+      "macro_to_perturb": "GWL_WNDPROC",
+      "guard": "#error Win16/Win32 GWL constants differ"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "line": 2852,
+      "original_line": 2812,
+      "expression": "(GWL_HINSTANCE != (-6) || GWL_HWNDPARENT != (-8) || GWL_ID != (-12))",
+      "macro_to_perturb": "GWL_HINSTANCE",
+      "guard": "#error Win16/Win32 window-word constants differ"
+    }
+  ],
+  "controls": [
+    {
+      "architecture": "x86",
+      "line": 1639,
+      "good_exit": 0,
+      "negative_exit": 2,
+      "supported_context": true,
+      "synthetic_default_diagnostic": "",
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "line": 1998,
+      "good_exit": 0,
+      "negative_exit": 2,
+      "supported_context": true,
+      "synthetic_default_diagnostic": "",
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "line": 2445,
+      "good_exit": 0,
+      "negative_exit": 2,
+      "supported_context": true,
+      "synthetic_default_diagnostic": "",
+      "ok": true
+    },
+    {
+      "architecture": "x86",
+      "line": 2852,
+      "good_exit": 0,
+      "negative_exit": 2,
+      "supported_context": true,
+      "synthetic_default_diagnostic": "",
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "line": 1639,
+      "good_exit": 2,
+      "negative_exit": 2,
+      "supported_context": false,
+      "synthetic_default_diagnostic": "x64-0.c\r\nO:\\repos.hobby\\ntvdm64\\build\\t473-s13\\gwl-original-assertion-controls\\x64-0.c(7): fatal error C1189: #error:  Win16/Win32 GWL constants differ\r\n",
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "line": 1998,
+      "good_exit": 2,
+      "negative_exit": 2,
+      "supported_context": false,
+      "synthetic_default_diagnostic": "x64-1.c\r\nO:\\repos.hobby\\ntvdm64\\build\\t473-s13\\gwl-original-assertion-controls\\x64-1.c(7): fatal error C1189: #error:  Win16/Win32 window-word constants differ\r\n",
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "line": 2445,
+      "good_exit": 2,
+      "negative_exit": 2,
+      "supported_context": false,
+      "synthetic_default_diagnostic": "x64-2.c\r\nO:\\repos.hobby\\ntvdm64\\build\\t473-s13\\gwl-original-assertion-controls\\x64-2.c(7): fatal error C1189: #error:  Win16/Win32 GWL constants differ\r\n",
+      "ok": true
+    },
+    {
+      "architecture": "x64",
+      "line": 2852,
+      "good_exit": 2,
+      "negative_exit": 2,
+      "supported_context": false,
+      "synthetic_default_diagnostic": "x64-3.c\r\nO:\\repos.hobby\\ntvdm64\\build\\t473-s13\\gwl-original-assertion-controls\\x64-3.c(7): fatal error C1189: #error:  Win16/Win32 window-word constants differ\r\n",
+      "ok": true
+    }
+  ]
+}

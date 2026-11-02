@@ -1,0 +1,213 @@
+{
+  "scope": "first-depth inverse guard prior removal hash and original else-body comparison; no nested dispositions",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 511,
+      "group_line": 492,
+      "macro": "SFELLOW",
+      "original_group_line": 472,
+      "method": "ambiguous",
+      "current_anchors": [
+        "IMPORT VOID dispatch_q_event();",
+        "static BOOL debug_context_resume_check;"
+      ],
+      "original_anchors": [
+        "IMPORT VOID dispatch_q_event();",
+        "extern int ica_intack IPT0();"
+      ],
+      "classification": "historical-body-matches-original",
+      "original_else_line": 512,
+      "original_end": 536,
+      "baseline_else": 539,
+      "baseline_end": 563,
+      "baseline": "590d11b1d",
+      "ledger": "s12-platforms-else.jsonl",
+      "recorded_body_sha256": "62f4e9300a8b17cc377dba0fa1fc7929a623f9e179237b41d574a8a6a4890331",
+      "original_body_sha256": "62f4e9300a8b17cc377dba0fa1fc7929a623f9e179237b41d574a8a6a4890331",
+      "normalized_body_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "line": 4301,
+      "group_line": 4266,
+      "macro": "SFELLOW",
+      "original_group_line": 4402,
+      "method": "ambiguous",
+      "current_anchors": [
+        "Int1_f();",
+        "NEXT_INST:"
+      ],
+      "original_anchors": [
+        "if (took_absolute_toc || took_relative_jump)",
+        "if ( pig_synch_required )"
+      ],
+      "classification": "historical-body-matches-original",
+      "original_else_line": 4420,
+      "original_end": 4442,
+      "baseline_else": 4423,
+      "baseline_end": 4445,
+      "baseline": "590d11b1d",
+      "ledger": "s12-platforms-else.jsonl",
+      "recorded_body_sha256": "2524a92041b07fca1d3362b12eb9d15e2221d88c4b10198eddcff33a98787e37",
+      "original_body_sha256": "2524a92041b07fca1d3362b12eb9d15e2221d88c4b10198eddcff33a98787e37",
+      "normalized_body_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": 365,
+      "group_line": 363,
+      "macro": "GISP_SVGA",
+      "original_group_line": 368,
+      "method": "ambiguous",
+      "current_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "(sys_addr)BIOS_START_OFFSET"
+      ],
+      "original_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "(sys_addr)BIOS_START_OFFSET"
+      ],
+      "classification": "historical-body-matches-original",
+      "original_else_line": 370,
+      "original_end": 373,
+      "baseline_else": 364,
+      "baseline_end": 367,
+      "baseline": "bcb6636df",
+      "ledger": "s12-legacy-engines-else.jsonl",
+      "recorded_body_sha256": "43b3a1bf716c30481b52cb6f52f55a9f38a3424c980a8d3158f3c19349994669",
+      "original_body_sha256": "d8741dacca111ff8ada3357c8315959a80688bb44006be67960dda8cab9c8091",
+      "normalized_body_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "line": 455,
+      "group_line": 453,
+      "macro": "GISP_SVGA",
+      "original_group_line": 459,
+      "method": "ambiguous",
+      "current_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "(sys_addr)BIOS_START_OFFSET"
+      ],
+      "original_anchors": [
+        "setCS(cs); setIP(ip);\t\\",
+        "(sys_addr)BIOS_START_OFFSET"
+      ],
+      "classification": "historical-body-matches-original",
+      "original_else_line": 461,
+      "original_end": 463,
+      "baseline_else": 455,
+      "baseline_end": 457,
+      "baseline": "bcb6636df",
+      "ledger": "s12-legacy-engines-else.jsonl",
+      "recorded_body_sha256": "2fcba70389d635174185af72d70cdc96c180f4ee419a129cca87ae21790155b8",
+      "original_body_sha256": "691e05218d4ac96cd9b10bc4dd25d860ab0a8108402cf0ccbc31882d0e39a85f",
+      "normalized_body_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 269,
+      "group_line": 267,
+      "macro": "macintosh",
+      "original_group_line": 253,
+      "method": "ambiguous",
+      "current_anchors": [
+        "GLOBAL VOID ( *host_key_up_fn_ptr )();",
+        "static int buff_6805_in_ptr,buff_6805_out_ptr;"
+      ],
+      "original_anchors": [
+        "GLOBAL VOID ( *do_key_repeats_fn_ptr )();",
+        "static int buff_6805_in_ptr,buff_6805_out_ptr;"
+      ],
+      "classification": "historical-body-matches-original",
+      "original_else_line": 255,
+      "original_end": 257,
+      "baseline_else": 272,
+      "baseline_end": 274,
+      "baseline": "590d11b1d",
+      "ledger": "s12-platforms-else.jsonl",
+      "recorded_body_sha256": "6c36984d1c68535d0ca90d0e2f6acc3b5e50f125542ea230d4b4e2dcd3b68389",
+      "original_body_sha256": "239626d225edd3bce8a79fa9631b98280eeb854785e6bba867a6bf8416701397",
+      "normalized_body_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 1904,
+      "group_line": 1813,
+      "macro": "REAL_KBD",
+      "original_group_line": 2046,
+      "method": "ambiguous",
+      "current_anchors": [
+        "calc_buff_6805_left();",
+        "if (scanning_discontinued && !waiting_for_next_code)"
+      ],
+      "original_anchors": [
+        "calc_buff_6805_left();",
+        "waiting_for_next_code=FALSE;"
+      ],
+      "classification": "historical-body-matches-original",
+      "original_else_line": 2139,
+      "original_end": 2143,
+      "baseline_else": 1948,
+      "baseline_end": 1952,
+      "baseline": "3ea7b4ef3",
+      "ledger": "s12-hardware-legacy.jsonl",
+      "recorded_body_sha256": "100c6a21ccacb011837a743022d24205d62d1df4081332a735b1bf32c355ea04",
+      "original_body_sha256": "aa7d431d62d343b675f3c8c65608be91c903dcedea94124f57d4edf21dc984da",
+      "normalized_body_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "line": 1910,
+      "group_line": 1908,
+      "macro": "REAL_KBD",
+      "original_group_line": 2145,
+      "method": "ambiguous",
+      "current_anchors": [
+        "AddTo6805BuffImm(RESEND_CODE);",
+        "if (scanning_discontinued && !waiting_for_next_code)"
+      ],
+      "original_anchors": [
+        "send_to_real_kbd(cmd_code);",
+        "if (scanning_discontinued && !waiting_for_next_code)"
+      ],
+      "classification": "historical-body-matches-original",
+      "original_else_line": 2147,
+      "original_end": 2149,
+      "baseline_else": 1956,
+      "baseline_end": 1958,
+      "baseline": "3ea7b4ef3",
+      "ledger": "s12-hardware-legacy.jsonl",
+      "recorded_body_sha256": "392d33ad714153193f57543e8e9e4a7b84f6ce167693a0da19589fb89a769205",
+      "original_body_sha256": "5af420896093fa4ee3d17617cef5b2e8c6397e49031098f6450a0d27b486ecc4",
+      "normalized_body_equal": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "line": 172,
+      "group_line": 157,
+      "macro": "GISP_SVGA",
+      "original_group_line": 153,
+      "method": "ambiguous",
+      "current_anchors": [
+        "static sys_addr alt_table;",
+        "GLOBAL word wait_int_seg = RCPU_WAIT_INT_SEGMENT;"
+      ],
+      "original_anchors": [
+        "static sys_addr alt_table;",
+        "IMPORT VOID  HostAllowKbdInt();"
+      ],
+      "classification": "historical-body-matches-original",
+      "original_else_line": 168,
+      "original_end": 184,
+      "baseline_else": 172,
+      "baseline_end": 188,
+      "baseline": "bcb6636df",
+      "ledger": "s12-legacy-engines-else.jsonl",
+      "recorded_body_sha256": "5066af45e4801d85b0f08b7039cb50a50493ed2fe6fadb9b717844efef080857",
+      "original_body_sha256": "157fb769dbdca6f499bd3a55f5a67518175477e0a957a5ce63abf377d728b1c7",
+      "normalized_body_equal": true
+    }
+  ]
+}

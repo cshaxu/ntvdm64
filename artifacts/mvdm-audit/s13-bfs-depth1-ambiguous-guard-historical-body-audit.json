@@ -1,0 +1,613 @@
+{
+  "scope": "first-depth original group and earlier recorded removed-body matching; no source edits",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "line": 53,
+      "macro": "SECURE",
+      "current_occurrences": [
+        53,
+        63
+      ],
+      "original_occurrences": [
+        53,
+        63
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 53,
+      "original_end": 55,
+      "baseline_start": 53,
+      "baseline_end": 55,
+      "baseline": "816ce695f",
+      "ledger": "s12-print-secure.jsonl",
+      "recorded_body_sha256": "b45f1acf287b91d58a0c1e6ce00cd1d82aeeaa22070cff0b7fd321726e77201f",
+      "original_body_sha256": "a5486a4a9cedcf660c1f26de8b3c420db2f0e5c30a0c921311c2cb5b3e2a7dc6",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.",
+      "source_sha256": "00be947d2e0fedd9f801e2911ffd7ef2362a92ccda2aebc7266a15ddf6c38234"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 75,
+      "macro": "NOVELL",
+      "current_occurrences": [
+        75,
+        585
+      ],
+      "original_occurrences": [
+        75,
+        769
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 75,
+      "original_end": 77,
+      "baseline_start": 75,
+      "baseline_end": 77,
+      "baseline": "504bd6007",
+      "ledger": "s12-host-platforms.jsonl",
+      "recorded_body_sha256": "3bcb80fe955e9d4a654e32730b6f592844c96331b5aad82cc1b6bddef4638d95",
+      "original_body_sha256": "3bcb80fe955e9d4a654e32730b6f592844c96331b5aad82cc1b6bddef4638d95",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.",
+      "source_sha256": "0a758c8287148763f594b2ceb983d3217585e77a878eccf9baebe5dc731d4da5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "line": 585,
+      "macro": "NOVELL",
+      "current_occurrences": [
+        75,
+        585
+      ],
+      "original_occurrences": [
+        75,
+        769
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 769,
+      "original_end": 771,
+      "baseline_start": 761,
+      "baseline_end": 763,
+      "baseline": "504bd6007",
+      "ledger": "s12-host-platforms.jsonl",
+      "recorded_body_sha256": "992b9124f76c0270992334a57523c201c26337398df6f50a977ea770088a36e7",
+      "original_body_sha256": "992b9124f76c0270992334a57523c201c26337398df6f50a977ea770088a36e7",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.",
+      "source_sha256": "0a758c8287148763f594b2ceb983d3217585e77a878eccf9baebe5dc731d4da5"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 241,
+      "macro": "PS_FLUSHING",
+      "current_occurrences": [
+        241,
+        816,
+        826,
+        2279
+      ],
+      "original_occurrences": [
+        249,
+        1034,
+        1056,
+        2755
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 249,
+      "original_end": 252,
+      "baseline_start": 240,
+      "baseline_end": 243,
+      "baseline": "816ce695f",
+      "ledger": "s12-print-secure.jsonl",
+      "recorded_body_sha256": "0c7c1c9617f075a2f69da85d5a1bb6b983ad60bf3a8f8808d31d9e274be7d642",
+      "original_body_sha256": "0c7c1c9617f075a2f69da85d5a1bb6b983ad60bf3a8f8808d31d9e274be7d642",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.",
+      "source_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 702,
+      "macro": "SHORT_TRACE",
+      "current_occurrences": [
+        618,
+        631,
+        649,
+        671,
+        681,
+        702,
+        758,
+        845,
+        905,
+        981,
+        990,
+        1017,
+        1029,
+        1972
+      ],
+      "original_occurrences": [
+        688,
+        716,
+        747,
+        782,
+        805,
+        839,
+        948,
+        1075,
+        1150,
+        1252,
+        1274,
+        1314,
+        1339,
+        2415
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 839,
+      "original_end": 851,
+      "baseline_start": 768,
+      "baseline_end": 780,
+      "baseline": "3b3b01297",
+      "ledger": "s12-diagnostic.jsonl",
+      "recorded_body_sha256": "2f315e7fc4b1593e0bf899d4b8cb7b5b69291ce8f555dd01037264dfca5742c0",
+      "original_body_sha256": "2f315e7fc4b1593e0bf899d4b8cb7b5b69291ce8f555dd01037264dfca5742c0",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.",
+      "source_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 826,
+      "macro": "PS_FLUSHING",
+      "current_occurrences": [
+        241,
+        816,
+        826,
+        2279
+      ],
+      "original_occurrences": [
+        249,
+        1034,
+        1056,
+        2755
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 1056,
+      "original_end": 1058,
+      "baseline_start": 897,
+      "baseline_end": 899,
+      "baseline": "816ce695f",
+      "ledger": "s12-print-secure.jsonl",
+      "recorded_body_sha256": "7aaa529d5dc8c5e9e681dbf02580e6f0a263f5969faace2ebdeac114ce779e78",
+      "original_body_sha256": "7aaa529d5dc8c5e9e681dbf02580e6f0a263f5969faace2ebdeac114ce779e78",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.",
+      "source_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 845,
+      "macro": "SHORT_TRACE",
+      "current_occurrences": [
+        618,
+        631,
+        649,
+        671,
+        681,
+        702,
+        758,
+        845,
+        905,
+        981,
+        990,
+        1017,
+        1029,
+        1972
+      ],
+      "original_occurrences": [
+        688,
+        716,
+        747,
+        782,
+        805,
+        839,
+        948,
+        1075,
+        1150,
+        1252,
+        1274,
+        1314,
+        1339,
+        2415
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 1075,
+      "original_end": 1083,
+      "baseline_start": 957,
+      "baseline_end": 965,
+      "baseline": "3b3b01297",
+      "ledger": "s12-diagnostic.jsonl",
+      "recorded_body_sha256": "fc121df583b5006856337a0c12abd2ad76a5cd13495cced51f01fa7a89a8ad28",
+      "original_body_sha256": "fc121df583b5006856337a0c12abd2ad76a5cd13495cced51f01fa7a89a8ad28",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.",
+      "source_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 905,
+      "macro": "SHORT_TRACE",
+      "current_occurrences": [
+        618,
+        631,
+        649,
+        671,
+        681,
+        702,
+        758,
+        845,
+        905,
+        981,
+        990,
+        1017,
+        1029,
+        1972
+      ],
+      "original_occurrences": [
+        688,
+        716,
+        747,
+        782,
+        805,
+        839,
+        948,
+        1075,
+        1150,
+        1252,
+        1274,
+        1314,
+        1339,
+        2415
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 1150,
+      "original_end": 1157,
+      "baseline_start": 1023,
+      "baseline_end": 1030,
+      "baseline": "3b3b01297",
+      "ledger": "s12-diagnostic.jsonl",
+      "recorded_body_sha256": "24fd7d987652235896b920b9c0174d8f38b95ca77608c5a917f90696bcc8418e",
+      "original_body_sha256": "24fd7d987652235896b920b9c0174d8f38b95ca77608c5a917f90696bcc8418e",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.",
+      "source_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "line": 2279,
+      "macro": "PS_FLUSHING",
+      "current_occurrences": [
+        241,
+        816,
+        826,
+        2279
+      ],
+      "original_occurrences": [
+        249,
+        1034,
+        1056,
+        2755
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 2755,
+      "original_end": 2790,
+      "baseline_start": 2400,
+      "baseline_end": 2435,
+      "baseline": "816ce695f",
+      "ledger": "s12-print-secure.jsonl",
+      "recorded_body_sha256": "d449a74b2c8e4a274f3ba9d136bf314b799f01059eea010b483fed97738d7052",
+      "original_body_sha256": "d449a74b2c8e4a274f3ba9d136bf314b799f01059eea010b483fed97738d7052",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.",
+      "source_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "line": 458,
+      "macro": "EGA_DUMP",
+      "current_occurrences": [
+        458,
+        498,
+        534,
+        573
+      ],
+      "original_occurrences": [
+        473,
+        514,
+        551,
+        591
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 473,
+      "original_end": 476,
+      "baseline_start": 460,
+      "baseline_end": 463,
+      "baseline": "3b3b01297",
+      "ledger": "s12-diagnostic.jsonl",
+      "recorded_body_sha256": "f98d6858672a891e1c84b269ba3785aaba3ba40501b3edcd5741e149d5c91760",
+      "original_body_sha256": "5c90f1c7d3375494e0564ddbcbb36ef07f249c212a0d700068367b7124d556b2",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.",
+      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "line": 534,
+      "macro": "EGA_DUMP",
+      "current_occurrences": [
+        458,
+        498,
+        534,
+        573
+      ],
+      "original_occurrences": [
+        473,
+        514,
+        551,
+        591
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 551,
+      "original_end": 554,
+      "baseline_start": 538,
+      "baseline_end": 541,
+      "baseline": "3b3b01297",
+      "ledger": "s12-diagnostic.jsonl",
+      "recorded_body_sha256": "2de259a53250c9473e9b012eacd982c9252cf92dd8a8a60916b9425ba4bab748",
+      "original_body_sha256": "9d66c264bd881c283c3be21b720d54c14cd752b00253269a1c16645711b04b88",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: EGA_DUMP branch is not selected; see mirror register.",
+      "source_sha256": "45922764b32186cb253c836a77e7b5e1d666ce6cb09e0c4ab135e8f4ba839757"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 83,
+      "macro": "REAL_VGA",
+      "current_occurrences": [
+        83,
+        259,
+        265
+      ],
+      "original_occurrences": [
+        69,
+        285,
+        292
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 69,
+      "original_end": 71,
+      "baseline_start": 79,
+      "baseline_end": 81,
+      "baseline": "001a3f272",
+      "ledger": "s12-legacy-devices.jsonl",
+      "recorded_body_sha256": "12fd1e7487dc80382b6caaa90a1477443fff2c6c9e9ab7e9aa3c8c930b780b99",
+      "original_body_sha256": "47432f9b8254ea0ec63f0ebe4d5b6f9a732790769e129b2195cd1b0a6ddcaa5f",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.",
+      "source_sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 119,
+      "macro": "SECURE",
+      "current_occurrences": [
+        43,
+        119,
+        153,
+        162
+      ],
+      "original_occurrences": [
+        43,
+        106,
+        144,
+        153
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 106,
+      "original_end": 109,
+      "baseline_start": 115,
+      "baseline_end": 118,
+      "baseline": "816ce695f",
+      "ledger": "s12-print-secure.jsonl",
+      "recorded_body_sha256": "9c1fdf327f5c5ccd01c646c9d197a994f59bb35e2ddabe139998f8bc5c363271",
+      "original_body_sha256": "27e41cc60862cc2c0da9e4553a4864b4e5b717d53f0c6dda71dd2feb38b02f1e",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.",
+      "source_sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 153,
+      "macro": "SECURE",
+      "current_occurrences": [
+        43,
+        119,
+        153,
+        162
+      ],
+      "original_occurrences": [
+        43,
+        106,
+        144,
+        153
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 144,
+      "original_end": 146,
+      "baseline_start": 150,
+      "baseline_end": 152,
+      "baseline": "816ce695f",
+      "ledger": "s12-print-secure.jsonl",
+      "recorded_body_sha256": "bf97d5807a6f18a1d27f23f02273ed749396fc87b62f504cbb7536147f0b7ed5",
+      "original_body_sha256": "40f6a5e264ba9d0d7d65b14bdbbf17c0e9189836a77f514b2d37cdd520697c14",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.",
+      "source_sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 259,
+      "macro": "REAL_VGA",
+      "current_occurrences": [
+        83,
+        259,
+        265
+      ],
+      "original_occurrences": [
+        69,
+        285,
+        292
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 285,
+      "original_end": 288,
+      "baseline_start": 292,
+      "baseline_end": 295,
+      "baseline": "001a3f272",
+      "ledger": "s12-legacy-devices.jsonl",
+      "recorded_body_sha256": "cbef7b1f5c867e17c948ed3a1d292f877c9245df384bec151dec96813c2fa88f",
+      "original_body_sha256": "65bd8573d93a5af74d38d502cf5d6bd05a00638d446aef2c3425356a5c3b8e3d",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.",
+      "source_sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "line": 265,
+      "macro": "REAL_VGA",
+      "current_occurrences": [
+        83,
+        259,
+        265
+      ],
+      "original_occurrences": [
+        69,
+        285,
+        292
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 292,
+      "original_end": 294,
+      "baseline_start": 299,
+      "baseline_end": 301,
+      "baseline": "001a3f272",
+      "ledger": "s12-legacy-devices.jsonl",
+      "recorded_body_sha256": "67cda82da606238e05e62399569c5ee03993419648ae5d43a2bf8cd6347f8263",
+      "original_body_sha256": "93d14ab0aa51f130f1e76e20ba20e4d737db0626e566f8b50a8b0c940a169793",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.",
+      "source_sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 38,
+      "macro": "LICENSING",
+      "current_occurrences": [
+        38,
+        133
+      ],
+      "original_occurrences": [
+        39,
+        130
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 39,
+      "original_end": 41,
+      "baseline_start": 38,
+      "baseline_end": 40,
+      "baseline": "069825a93",
+      "ledger": "s12-legacy-misc.jsonl",
+      "recorded_body_sha256": "3b081478b9c5596ea2064c1390582642880d9ad74aad502a675d9d695d33ddf7",
+      "original_body_sha256": "cd64af75893a9f2e7fbb329b971e742f6fb9932f7e12c5eac3bafb2b773c3204",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-531: LICENSING branch is not selected; see mirror register.",
+      "source_sha256": "cb6328db687f1156bd4bec1b69c6f4921ade18baeccd8237125d5d78b2cb336b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "line": 129,
+      "macro": "NOVELL",
+      "current_occurrences": [
+        32,
+        129
+      ],
+      "original_occurrences": [
+        32,
+        126
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 126,
+      "original_end": 128,
+      "baseline_start": 125,
+      "baseline_end": 127,
+      "baseline": "504bd6007",
+      "ledger": "s12-host-platforms.jsonl",
+      "recorded_body_sha256": "78e484ab3de57731bc8cd63eb69a30e2f784c494b42a1202166e471eed1a8488",
+      "original_body_sha256": "3682d3184ebb4d06f233ab90b3878e6c7e564c1408dfe770bef92778171de9ca",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.",
+      "source_sha256": "cb6328db687f1156bd4bec1b69c6f4921ade18baeccd8237125d5d78b2cb336b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "line": 245,
+      "macro": "DUMB_TERMINAL",
+      "current_occurrences": [
+        177,
+        245,
+        285
+      ],
+      "original_occurrences": [
+        177,
+        258,
+        302
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 258,
+      "original_end": 262,
+      "baseline_start": 247,
+      "baseline_end": 251,
+      "baseline": "3b3b01297",
+      "ledger": "s12-diagnostic.jsonl",
+      "recorded_body_sha256": "544b964db657cc4f762eea70addb1d1043c8d62b431d0795f1471f3abbfc4bc6",
+      "original_body_sha256": "0ada8d3743f07ba67bdd112f034a2075897a954644a22df778587603bc246175",
+      "normalized_body_equal": true,
+      "guard": "#error DIVERGENCE MVDM-HOST-DIV-527: DUMB_TERMINAL branch is not selected; see mirror register.",
+      "source_sha256": "56105733a0bf01d7e067bd2d85196864338d19e5fa992b2932e900de04e18877"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "line": 2101,
+      "macro": "SYNCH_TIMERS",
+      "current_occurrences": [
+        375,
+        2101
+      ],
+      "original_occurrences": [
+        383,
+        2679
+      ],
+      "classification": "historical-body-matches-original",
+      "original_line": 2679,
+      "original_end": 2694,
+      "original_arm_cut": 2688,
+      "baseline_start": 2599,
+      "baseline_end": 2608,
+      "baseline": "001a3f272",
+      "ledger": "s12-legacy-devices.jsonl",
+      "recorded_body_sha256": "003db7c642c7c146e748217ebcf71fd23b7b4634484bb9c84bb17ed3b945f436",
+      "original_body_sha256": "ce54f77368639756345f9dbd9f2a485c75019851e32d3640218245e1da4eb623",
+      "normalized_body_equal": true
+    }
+  ],
+  "correction": "SYNCH_TIMERS original group contains else; compare only original first-arm body."
+}

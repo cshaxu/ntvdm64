@@ -1,0 +1,40 @@
+{
+  "scope": "corrected original first-arm boundary and two selector controls",
+  "record": {
+    "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+    "line": 2101,
+    "macro": "SYNCH_TIMERS",
+    "current_occurrences": [
+      375,
+      2101
+    ],
+    "original_occurrences": [
+      383,
+      2679
+    ],
+    "classification": "historical-body-matches-original",
+    "original_line": 2679,
+    "original_end": 2694,
+    "original_arm_cut": 2688,
+    "baseline_start": 2599,
+    "baseline_end": 2608,
+    "baseline": "001a3f272",
+    "ledger": "s12-legacy-devices.jsonl",
+    "recorded_body_sha256": "003db7c642c7c146e748217ebcf71fd23b7b4634484bb9c84bb17ed3b945f436",
+    "original_body_sha256": "ce54f77368639756345f9dbd9f2a485c75019851e32d3640218245e1da4eb623",
+    "normalized_body_equal": true
+  },
+  "controls": [
+    {
+      "architecture": "x86",
+      "default_exit": 0,
+      "forced_exit": 2
+    },
+    {
+      "architecture": "x64",
+      "default_exit": 0,
+      "forced_exit": 2
+    }
+  ],
+  "macro_evidence": "s13-bfs-depth1-simple-macro-existing-guard-audit.json"
+}
