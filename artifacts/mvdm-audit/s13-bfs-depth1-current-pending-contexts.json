@@ -713,15 +713,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/non-mvdm/private/inc/dlcio.h",
-      "start": 470,
-      "kind": "ifndef",
-      "expression": "MAX_PATH",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 10
-    },
-    {
       "path": "src/non-mvdm/public/ddk/inc/ntdddisk.h",
       "start": 18,
       "kind": "ifndef",
@@ -904,7 +895,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 19
+      "count": 18
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",

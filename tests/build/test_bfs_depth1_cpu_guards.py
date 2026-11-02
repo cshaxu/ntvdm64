@@ -711,3 +711,18 @@ for macro, original_line in (('TRUE', 46), ('FALSE', 50)):
     if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
         raise SystemExit('missing base Boolean provider did not reject: ' + macro)
 print('PASS base Boolean fallback guards and original lines')
+
+source = (repo / 'src/non-mvdm/private/inc/dlcio.h').read_text(encoding='latin1').splitlines()
+marker = '#error Excluded unsupported missing MAX_PATH SDK profile'
+matches = [i for i, line in enumerate(source) if line.startswith('#ifndef    MAX_PATH') and source[i + 1].strip() == marker and source[i + 2].strip() == '#endif']
+if len(matches) != 1 or matches[0] + 1 != 470:
+    raise SystemExit('DLCIO MAX_PATH guard or original line missing')
+i = matches[0]
+probe.write_text('\n'.join(['#line 470'] + source[i:i + 3] + ['int after_dlcio = __LINE__;']) + '\n', encoding='ascii')
+selected = subprocess.run(base + ['/DMAX_PATH=260', str(probe)], capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base + ['/UMAX_PATH', str(probe)], capture_output=True, text=True, errors='replace')
+if selected.returncode or not re.search(r'int\s+after_dlcio\s*=\s*473\s*;', selected.stdout):
+    raise SystemExit('DLCIO selected provider or line failed: ' + selected.stderr)
+if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
+    raise SystemExit('DLCIO missing provider did not reject')
+print('PASS DLCIO SDK MAX_PATH guard and original lines')

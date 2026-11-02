@@ -1,0 +1,15 @@
+{
+  "path": "src/non-mvdm/private/inc/dlcio.h",
+  "source_origin": "OpenNT 4.5, pinned source-policy exception",
+  "original_sha256": "5059d127630e19906e973266e34ffe8b648181b0962900551964147e527602de",
+  "before_sha256": "52eccef61e7776db4361d0cb8f0ceac099fbbb9e7808d55994c4d7d0025d5f2b",
+  "after_sha256": "67e9cc1fe445559f4503bcc515d37ee6998f6b0e0b0023b098bc854ac999c300",
+  "original_guard_line": 470,
+  "current_guard_line": 470,
+  "removed_body_sha256": "d513955ceeef6b8dba3369e1040f334dad965f43fc71d8c56a2defd39e7617c8",
+  "scope": "one original first-depth fallback arm; pinned OpenNT 4.5 source",
+  "selection_proof": "Five selected redirector translation units include windows.h before dlcio.h; ten actual worker compile contexts, and independent T324 vrdisp graph; no guest includes found.",
+  "validation": "Both worker VDMREDIR.dll targets rebuilt, independent T324 vrdisp object compiled and no-op incremental repeated, x86/x64 selected/missing provider and logical line checks pass, cached product builds and rejection suites pass.",
+  "package": "s13-bfs-depth1-dlcio-max-path-package-compare.json: seven byte-identical, three differ only in verified PE timestamps; previous Full-tested publication retained.",
+  "limitations": "Old unsupported SDK / standalone direct include not supported; other independently compiled sources outside the named graph not claimed. Existing unrelated non-CCPU DPMI and x87 fixture gaps remain."
+}

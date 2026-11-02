@@ -60380,11 +60380,11 @@
       "group_end": 472,
       "kind": "ifndef",
       "expression": "MAX_PATH",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "52eccef61e7776db4361d0cb8f0ceac099fbbb9e7808d55994c4d7d0025d5f2b"
+      "source_sha256": "67e9cc1fe445559f4503bcc515d37ee6998f6b0e0b0023b098bc854ac999c300"
     },
     {
       "path": "src/non-mvdm/private/inc/dlcio.h",
@@ -60397,7 +60397,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "52eccef61e7776db4361d0cb8f0ceac099fbbb9e7808d55994c4d7d0025d5f2b"
+      "source_sha256": "67e9cc1fe445559f4503bcc515d37ee6998f6b0e0b0023b098bc854ac999c300"
     },
     {
       "path": "src/non-mvdm/private/inc/dlcio.h",
@@ -60410,7 +60410,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "52eccef61e7776db4361d0cb8f0ceac099fbbb9e7808d55994c4d7d0025d5f2b"
+      "source_sha256": "67e9cc1fe445559f4503bcc515d37ee6998f6b0e0b0023b098bc854ac999c300"
     },
     {
       "path": "src/non-mvdm/private/windows/inc/pmvdm.h",
@@ -65681,14 +65681,14 @@
   "errors": [],
   "status_counts": {
     "unselected-file": 742,
-    "newly-excluded": 642,
+    "newly-excluded": 643,
     "already-excluded": 1691,
-    "pending": 99,
+    "pending": 98,
     "retained-observed": 1869,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
-    "not-guard": 83,
+    "not-guard": 82,
     "guard": 16
   }
 }

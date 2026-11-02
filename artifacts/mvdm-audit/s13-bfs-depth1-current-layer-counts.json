@@ -4,9 +4,9 @@
   "depth1_arms": 5052,
   "depth1_status": {
     "unselected-file": 742,
-    "newly-excluded": 642,
+    "newly-excluded": 643,
     "already-excluded": 1691,
-    "pending": 99,
+    "pending": 98,
     "retained-observed": 1869,
     "retained-original-assertion": 9
   },
