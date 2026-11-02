@@ -55,12 +55,13 @@
 
 #undef  LOG
 #ifdef  NOLOG
-#define LOG(l,args)
-#define SETREQLOG(l)
+#error DIVERGENCE MVDM-HOST-DIV-610: unsupported NOLOG profile
 #else
+#line 61
 #define SETREQLOG(l) iReqFaxLogLevel = l
 #define LOG(l,args)  {SETREQLOG(l) ; faxlogprintf args;}
 #endif
+#line 64
 
 #if  DBG
 extern INT iReqFaxLogLevel;

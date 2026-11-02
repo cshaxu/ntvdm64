@@ -20,51 +20,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/bde/bdesym.c",
-      "start": 276,
-      "kind": "ifdef",
-      "expression": "NEED_INDICES",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/bde/bdesym.c",
-      "start": 378,
-      "kind": "ifdef",
-      "expression": "NEED_ABSOLUTES",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/bde/bdesym.c",
-      "start": 509,
-      "kind": "ifdef",
-      "expression": "NEED_INDICES",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/bde/bdesym.c",
-      "start": 547,
-      "kind": "ifdef",
-      "expression": "NEED_INDICES",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/bde/bdesym.c",
-      "start": 652,
-      "kind": "ifdef",
-      "expression": "NEED_INDICES",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/bde/bdeutil.c",
       "start": 39,
       "kind": "ifndef",
@@ -354,16 +309,7 @@
     },
     {
       "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
-      "start": 57,
-      "kind": "ifdef",
-      "expression": "NOLOG",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
-      "start": 60,
+      "start": 59,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -372,7 +318,7 @@
     },
     {
       "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
-      "start": 65,
+      "start": 66,
       "kind": "if",
       "expression": "DBG",
       "pending_reason": "file-not-witnessed-in-product",
@@ -381,7 +327,7 @@
     },
     {
       "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
-      "start": 68,
+      "start": 69,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -390,7 +336,7 @@
     },
     {
       "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
-      "start": 159,
+      "start": 160,
       "kind": "if",
       "expression": "DBG",
       "pending_reason": "file-not-witnessed-in-product",
@@ -399,7 +345,7 @@
     },
     {
       "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
-      "start": 161,
+      "start": 162,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -780,15 +726,6 @@
       "start": 82,
       "kind": "else",
       "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/sim32/sim32.h",
-      "start": 90,
-      "kind": "ifdef",
-      "expression": "SIM_32",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -3368,24 +3305,6 @@
       "current_actual_includers": 50
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/jformate.h",
-      "start": 679,
-      "kind": "ifdef",
-      "expression": "JLD_PRIVATE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/lm_attr.h",
-      "start": 68,
-      "kind": "ifdef",
-      "expression": "VMS",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/lm_clien.h",
       "start": 29,
       "kind": "ifndef",
@@ -3453,15 +3372,6 @@
       "start": 26,
       "kind": "ifndef",
       "expression": "_MOUSE_16B_H_",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/ms_windo.h",
-      "start": 25,
-      "kind": "ifdef",
-      "expression": "MSWDVR",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -3558,16 +3468,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/spc_icon.h",
-      "start": 13,
-      "kind": "ifdef",
-      "expression": "SOFTWINDOWS",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/spc_icon.h",
-      "start": 101,
+      "start": 15,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -6888,54 +6789,9 @@
     },
     {
       "path": "src/mvdm-host/vdmexts/sym.c",
-      "start": 530,
-      "kind": "ifdef",
-      "expression": "NEED_INDICES",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdmexts/sym.c",
-      "start": 550,
+      "start": 549,
       "kind": "ifdef",
       "expression": "VERBOSE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdmexts/sym.c",
-      "start": 617,
-      "kind": "ifdef",
-      "expression": "NEED_ABSOLUTES",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdmexts/sym.c",
-      "start": 760,
-      "kind": "ifdef",
-      "expression": "NEED_INDICES",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdmexts/sym.c",
-      "start": 825,
-      "kind": "ifdef",
-      "expression": "NEED_INDICES",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/vdmexts/sym.c",
-      "start": 921,
-      "kind": "ifdef",
-      "expression": "NEED_INDICES",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -8887,7 +8743,7 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 818
+      "count": 802
     },
     {
       "reason": "file-not-witnessed-in-product",

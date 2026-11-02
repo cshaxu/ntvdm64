@@ -195,6 +195,16 @@ for path, macro, expected_count, divergence in (
     ('src/mvdm-host/wow32/wkglobal.c', 'API16', 8, 'MVDM-HOST-DIV-603'),
     ('src/mvdm-host/wow32/wklocal.c', 'API16', 2, 'MVDM-HOST-DIV-603'),
     ('src/mvdm-host/softpc.new/host/src/stf_conf.c', 'STUBBED', 4, 'MVDM-HOST-DIV-604'),
+    ('src/mvdm-host/bde/bdesym.c', 'NEED_ABSOLUTES', 1, 'MVDM-HOST-DIV-610'),
+    ('src/mvdm-host/bde/bdesym.c', 'NEED_INDICES', 4, 'MVDM-HOST-DIV-610'),
+    ('src/mvdm-host/fax/wowfaxui/wowfaxui.h', 'NOLOG', 1, 'MVDM-HOST-DIV-610'),
+    ('src/mvdm-host/sim32/sim32.h', 'SIM_32', 1, 'MVDM-HOST-DIV-610'),
+    ('src/mvdm-host/softpc.new/base/inc/jformate.h', 'JLD_PRIVATE', 1, 'MVDM-HOST-DIV-610'),
+    ('src/mvdm-host/softpc.new/base/inc/lm_attr.h', 'VMS', 1, 'MVDM-HOST-DIV-610'),
+    ('src/mvdm-host/softpc.new/base/inc/ms_windo.h', 'MSWDVR', 1, 'MVDM-HOST-DIV-610'),
+    ('src/mvdm-host/softpc.new/base/inc/spc_icon.h', 'SOFTWINDOWS', 1, 'MVDM-HOST-DIV-610'),
+    ('src/mvdm-host/vdmexts/sym.c', 'NEED_ABSOLUTES', 1, 'MVDM-HOST-DIV-610'),
+    ('src/mvdm-host/vdmexts/sym.c', 'NEED_INDICES', 4, 'MVDM-HOST-DIV-610'),
     ('src/mvdm-host/softpc.new/dat2obj/dat2obj.c', '_MIPS_', 1, 'MVDM-HOST-DIV-609'),
     ('src/mvdm-host/softpc.new/dat2obj/dat2obj.c', '_PPC_', 1, 'MVDM-HOST-DIV-609'),
     ('src/mvdm-host/softpc.new/dat2obj/dat2obj.c', 'ALPHA', 1, 'MVDM-HOST-DIV-609'),
@@ -223,7 +233,7 @@ for path, macro, expected_count, divergence in (
     if len(positions) != expected_count:
         raise SystemExit('incorrect excluded profile guard count: ' + path)
     for i in positions:
-        if not re.match(r'^\s*#\s*ifdef\s+' + re.escape(macro) + r'\s*$', lines[i-1]):
+        if not re.match(r'^\s*#\s*ifdef\s+' + re.escape(macro) + r'\s*(?:(?:/\*.*\*/|//.*)\s*)?$', lines[i-1]):
             raise SystemExit('excluded profile lost original selector: ' + path)
         probe.write_text('\n'.join(lines[i-1:i+1] + ['#endif']) + '\n', encoding='ascii')
         allowed = subprocess.run(base, capture_output=True, text=True, errors='replace')

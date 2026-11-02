@@ -88,11 +88,9 @@ USHORT Xceive(IN USHORT, IN USHORT);
 
 
 #ifdef SIM_32			// BUGBUG -- Use the macros in nt header files
-#undef FIRSTBYTE
-#undef SECONDBYTE
-#undef THIRDBYTE
-#undef FOURTHBYTE
+#error DIVERGENCE MVDM-HOST-DIV-610: unsupported SIM_32 profile
 #endif
+#line 96
 
 #define FIRSTBYTE(VALUE)  (VALUE & LO_MASK)
 #define SECONDBYTE(VALUE) ((VALUE >> 8) & LO_MASK)

@@ -1,0 +1,444 @@
+{
+  "scope": "16 first-depth arms, original bodies matched; nested source and queue entries inside excluded arms removed without deeper audit",
+  "macro_evidence": {
+    "compile_commands_checked": 2070,
+    "jobs_sha256": "623d1067dca46b9fabf571db17d6567d8f03e04047245ca9ac11fcda71c725ea",
+    "command_macro_definitions_found": 0,
+    "source_generated_sdk_definitions_found": 0,
+    "scope": "src, tests, tools, generated Ninja trees and eight SDK include roots",
+    "controls": "32 x86/x64 isolated selector checks; original removed bodies matched after line-ending normalization; selected branches retained verbatim"
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "macro": "NEED_INDICES",
+      "original_start": 276,
+      "original_cut": 280,
+      "original_end": 280,
+      "removed_body_sha256": "f34118f3b4289ad33b3fced1f4191cf99db148271cbca70a870b43b062689484",
+      "removed_lines": 3
+    },
+    {
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "macro": "NEED_ABSOLUTES",
+      "original_start": 378,
+      "original_cut": 411,
+      "original_end": 411,
+      "removed_body_sha256": "fe45e1c1e899ba0eea4843f073669b435bce886a1cb519a56600d68872415cae",
+      "removed_lines": 32
+    },
+    {
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "macro": "NEED_INDICES",
+      "original_start": 509,
+      "original_cut": 520,
+      "original_end": 520,
+      "removed_body_sha256": "85492dc3ff342cff1f1e179135479b1809ff5c687b9c3b8a9b78c170e5ad2cae",
+      "removed_lines": 10
+    },
+    {
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "macro": "NEED_INDICES",
+      "original_start": 547,
+      "original_cut": 549,
+      "original_end": 549,
+      "removed_body_sha256": "8575e51e1b80a08826501dd9049becfe9dd816e612a12852e6df5956d196b982",
+      "removed_lines": 1
+    },
+    {
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "macro": "NEED_INDICES",
+      "original_start": 652,
+      "original_cut": 664,
+      "original_end": 664,
+      "removed_body_sha256": "a4debbf8df2d60b97a7360653da52d5f08503b6fb325f7c202dcf7dd0d97ce4e",
+      "removed_lines": 11
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
+      "macro": "NOLOG",
+      "original_start": 57,
+      "original_cut": 60,
+      "original_end": 63,
+      "removed_body_sha256": "8a421b9641b61a93d69ebbf46fd3d8fdf532ee1a1beaee946c9c54be599ae218",
+      "removed_lines": 2
+    },
+    {
+      "path": "src/mvdm-host/sim32/sim32.h",
+      "macro": "SIM_32",
+      "original_start": 90,
+      "original_cut": 95,
+      "original_end": 95,
+      "removed_body_sha256": "4b0670a0896eac61a6f587f87d8c5d2af0c41b5cf44d4b9233c51e391890b0ca",
+      "removed_lines": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/jformate.h",
+      "macro": "JLD_PRIVATE",
+      "original_start": 679,
+      "original_cut": 774,
+      "original_end": 774,
+      "removed_body_sha256": "a2df77a84972d329692a8b9eeba1e546266ec48ee6bef79b025a91042609e5f0",
+      "removed_lines": 94
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/lm_attr.h",
+      "macro": "VMS",
+      "original_start": 68,
+      "original_cut": 72,
+      "original_end": 72,
+      "removed_body_sha256": "3bb3d51820bddfaf455833e8978d3a5de81b95bdd79c4d0ee4004cf64c227d54",
+      "removed_lines": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ms_windo.h",
+      "macro": "MSWDVR",
+      "original_start": 25,
+      "original_cut": 1203,
+      "original_end": 1203,
+      "removed_body_sha256": "171152855d315ffbb53b66179306870a3556a4a9cc739e5f81cbbcdac794f0f8",
+      "removed_lines": 1177
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/spc_icon.h",
+      "macro": "SOFTWINDOWS",
+      "original_start": 13,
+      "original_cut": 101,
+      "original_end": 129,
+      "removed_body_sha256": "45b3f9b4cb0ffe3cfcc757c1fc1010e303c3c1a402a7138288f8635e7f57b23f",
+      "removed_lines": 87
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "macro": "NEED_INDICES",
+      "original_start": 530,
+      "original_cut": 534,
+      "original_end": 534,
+      "removed_body_sha256": "f34118f3b4289ad33b3fced1f4191cf99db148271cbca70a870b43b062689484",
+      "removed_lines": 3
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "macro": "NEED_ABSOLUTES",
+      "original_start": 617,
+      "original_cut": 650,
+      "original_end": 650,
+      "removed_body_sha256": "02832f12f4bb6dafd71bbd90da0b8189f8cd6a1652f1a956f6776ffe29d4d14c",
+      "removed_lines": 32
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "macro": "NEED_INDICES",
+      "original_start": 760,
+      "original_cut": 771,
+      "original_end": 771,
+      "removed_body_sha256": "71cac5eca0440d8e24a353ad8d614da09a98c8aa87c59abb3797926d532a0ed3",
+      "removed_lines": 10
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "macro": "NEED_INDICES",
+      "original_start": 825,
+      "original_cut": 827,
+      "original_end": 827,
+      "removed_body_sha256": "8575e51e1b80a08826501dd9049becfe9dd816e612a12852e6df5956d196b982",
+      "removed_lines": 1
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "macro": "NEED_INDICES",
+      "original_start": 921,
+      "original_cut": 933,
+      "original_end": 933,
+      "removed_body_sha256": "db3ecbd7abc09b155f3ed22499cd3fde8224a7301b1c50383e2eb554588a2504",
+      "removed_lines": 11
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "start": 276,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "start": 378,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "start": 509,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "start": 547,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "start": 652,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
+      "start": 57,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/sim32/sim32.h",
+      "start": 90,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/jformate.h",
+      "start": 679,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/lm_attr.h",
+      "start": 68,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/ms_windo.h",
+      "start": 25,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/spc_icon.h",
+      "start": 13,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "start": 530,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "start": 617,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "start": 760,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "start": 825,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "start": 921,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "start": 276,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "start": 378,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "start": 509,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "start": 547,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "start": 652,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
+      "start": 57,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/sim32/sim32.h",
+      "start": 90,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/jformate.h",
+      "start": 679,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/lm_attr.h",
+      "start": 68,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/ms_windo.h",
+      "start": 25,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/spc_icon.h",
+      "start": 13,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "start": 530,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "start": 617,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "start": 760,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "start": 825,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "start": 921,
+      "normal_pass": true,
+      "forced_rejected": true
+    }
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/bde/bdesym.c",
+      "before": "92b2869ce80fa78c6844423abdfc4a2aebbf4699be07eb2f294b0f3e5381185e",
+      "after": "620198eddb0667696e1b3eb6cfc2248208b4d453d91c0d3339f971f86c6563b4"
+    },
+    {
+      "path": "src/mvdm-host/fax/wowfaxui/wowfaxui.h",
+      "before": "445322af41d9e7e5d4a29200f7de7472d89d72ac189aa9a8d186d71e2c666cd2",
+      "after": "835ec1943329e1cfc2d63e4a944cfecf90adb68058093db8fa13ed07250ddef2"
+    },
+    {
+      "path": "src/mvdm-host/sim32/sim32.h",
+      "before": "c26dacff13e0e5b894e3abdad629693dbff3fd89a566820133987b1f0cee1488",
+      "after": "c1b31b7f476eb9b3076de940850ae0e98722abc1eb1fcdc657922a80231533ff"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/jformate.h",
+      "before": "67776250950978d5eb2e2dc0655f596f6d73fa291833729c25f347243e2e7489",
+      "after": "d7e6e2cb071c61df62c50fc8ad9e1b88ff3493fb5ed76b5008e869746bb8a4ce"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/lm_attr.h",
+      "before": "bcf7f41bb85e7864c9fc713ca94b1c6dea042b8572ab45d693db4531792e5a2b",
+      "after": "97a9ca05079ec5e4d51419b93adb22f90597a51968326b441c9ecab5d99fc9e6"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ms_windo.h",
+      "before": "99f3b54e20995de313e508b248049cf350f97c4a17c30c3fd2cce76271b8aedf",
+      "after": "7982b12041ef9e9f17071f09c821ffba45ab6b38036fef2079190d5122b52bfc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/spc_icon.h",
+      "before": "a4451ea345ebd505838b6052eae06669d5f1666ea4144e19194b4ed88ddd6be1",
+      "after": "f090f3d6c7839c66af6f757d582b6641a5931f2fc6686771832502fd347544ce"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/sym.c",
+      "before": "408503899b12b887fde5394e31990bf106a605bed1654d1324df46450d583f97",
+      "after": "7c8b982e39e0425a8e90f2ead7865fe06619990bee0bc61714f5c2a4e311bb17"
+    }
+  ],
+  "removed_inner_group_count": 19,
+  "validation": {
+    "x86_cached_build": "passed; no work",
+    "x64_cached_build": "passed; no work",
+    "guard_gate": "x86 and x64; see progress record",
+    "published_release": "all ten product images byte-identical to accepted prior release at both destinations",
+    "published_images": [
+      "run16.exe",
+      "ntsrv.exe",
+      "ntcon.exe",
+      "ntvdm.exe",
+      "ntvwm.exe",
+      "ntmon.exe",
+      "WOW32.DLL",
+      "VDMREDIR.DLL",
+      "nthook32.dll",
+      "nthook64.dll"
+    ]
+  }
+}

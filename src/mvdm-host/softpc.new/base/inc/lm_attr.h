@@ -66,7 +66,6 @@
 					/*				data */
 
 #ifdef VMS
-#define LM_A_EF_1		1001	/* (int) */
-#define LM_A_EF_2		1002	/* (int) */
-#define LM_A_EF_3		1003	/* (int) */
+#error DIVERGENCE MVDM-HOST-DIV-610: unsupported VMS profile
 #endif
+#line 73

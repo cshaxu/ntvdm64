@@ -274,10 +274,9 @@ BOOL FindSymbol(
     WORD        w4;
     WORD        next_off;
 #ifdef NEED_INDICES
-    WORD        index;
-    char        c2;
-    int         nSubEtry;
+#error DIVERGENCE MVDM-HOST-DIV-610: unsupported NEED_INDICES profile
 #endif
+#line 281
     char        c1;
     int         rc;
     int         cnt;
@@ -376,39 +375,9 @@ BOOL FindSymbol(
             read_name( iFile, name_buff );
 
 #ifdef NEED_ABSOLUTES
-#ifdef NEED_SYM4
-            rc = _lread( iFile, (LPSTR)&c2, sizeof(c2) );
-            if ( rc != sizeof(c2) ) {
-                PRINTF("Could not read c2\n");
-                _lclose( iFile );
-                return( FALSE );
-            }
+#error DIVERGENCE MVDM-HOST-DIV-610: unsupported NEED_ABSOLUTES profile
 #endif
-
-            cnt = num_syms;
-            while ( cnt ) {
-                length = read_symbol( lpOutputRoutine, iFile, name_buff, &
-                                      this_offset );
-                if ( length == 0 ) {
-                    PRINTF("Error access symbols in file %s\n", filename );
-                    break;
-                }
-                --cnt;
-            }
-#ifdef NEED_INDICES
-            cnt = num_syms;
-            while ( cnt ) {
-                rc = _lread( iFile, (LPSTR)&index, sizeof(index) );
-                if ( rc != sizeof(index) ) {
-                    PRINTF("Could not read index table entry\n");
-                    _lclose( iFile );
-                    return( FALSE );
-                }
-                PRINTF("Index: %04X\n", index );
-                --cnt;
-            }
-#endif
-#endif
+#line 412
 
             position = start_position;
             do {
@@ -507,17 +476,9 @@ BOOL FindSymbol(
                     --cnt;
                 }
 #ifdef NEED_INDICES
-                cnt = num_syms;
-                while ( cnt ) {
-                    rc = _lread( iFile, (LPSTR)&index, sizeof(index) );
-                    if ( rc != sizeof(index) ) {
-                        PRINTF("Could not read index table entry\n");
-                        _lclose( iFile );
-                        return( FALSE );
-                    }
-                    --cnt;
-                }
+#error DIVERGENCE MVDM-HOST-DIV-610: unsupported NEED_INDICES profile
 #endif
+#line 521
             } while ( position != start_position && position != 0 );
 
             _lclose( iFile );
@@ -545,8 +506,9 @@ BOOL FindAddress(
     WORD        w4;
     WORD        next_off;
 #ifdef NEED_INDICES
-    WORD        index;
+#error DIVERGENCE MVDM-HOST-DIV-610: unsupported NEED_INDICES profile
 #endif
+#line 550
     char        c1;
     char        c2;
     int         rc;
@@ -650,18 +612,9 @@ BOOL FindAddress(
                 --cnt;
             }
 #ifdef NEED_INDICES
-            cnt = num_syms;
-            while ( cnt ) {
-                rc = _lread( iFile, (LPSTR)&index, sizeof(index) );
-                if ( rc != sizeof(index) ) {
-                    PRINTF("Could not read index table entry\n");
-                    _lclose( iFile );
-                    return( FALSE );
-                }
-                PRINTF("Index: %04X\n", index );
-                --cnt;
-            }
+#error DIVERGENCE MVDM-HOST-DIV-610: unsupported NEED_INDICES profile
 #endif
+#line 665
 
             position = start_position;
             do {

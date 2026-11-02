@@ -2564,7 +2564,7 @@
   {
     "path": "src/mvdm-host/bde/bdesym.c",
     "macro": "0",
-    "line": 759,
+    "line": 712,
     "body_end": 764,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\bde\\bdesym.c",
     "original_sha256": "c885aea477f81e03faf75c1f6fad6af2782660f005ddb597ba45059b3037c096",
@@ -2577,7 +2577,7 @@
   {
     "path": "src/mvdm-host/bde/bdesym.c",
     "macro": "0",
-    "line": 737,
+    "line": 690,
     "body_end": 742,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\bde\\bdesym.c",
     "original_sha256": "c885aea477f81e03faf75c1f6fad6af2782660f005ddb597ba45059b3037c096",
@@ -2590,7 +2590,7 @@
   {
     "path": "src/mvdm-host/bde/bdesym.c",
     "macro": "0",
-    "line": 489,
+    "line": 458,
     "body_end": 498,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\bde\\bdesym.c",
     "original_sha256": "c885aea477f81e03faf75c1f6fad6af2782660f005ddb597ba45059b3037c096",
@@ -2694,7 +2694,7 @@
   {
     "path": "src/mvdm-host/vdmexts/sym.c",
     "macro": "0",
-    "line": 727,
+    "line": 696,
     "body_end": 740,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmexts\\sym.c",
     "original_sha256": "469c9612de293034fdbc7a74e1d2bd479222fe1cd3e1350f1f90c0737c2d701e",
