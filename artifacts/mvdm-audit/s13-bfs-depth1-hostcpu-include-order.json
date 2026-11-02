@@ -1,0 +1,1381 @@
+{
+  "scope": "observed host_cpu and host_def include order; this alone does not prove macro state",
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "host_cpu_index": 170,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "host_cpu_index": 167,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "host_cpu_index": 162,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "host_cpu_index": 159,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/popf.c",
+      "host_cpu_index": 162,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/sasCdef.c",
+      "host_cpu_index": 182,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "host_cpu_index": 164,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "host_cpu_index": 160,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "host_cpu_index": 168,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "host_cpu_index": 167,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "host_cpu_index": 159,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/build_id.c",
+      "host_cpu_index": 159,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "host_cpu_index": 165,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "host_cpu_index": 165,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "host_cpu_index": 168,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "host_cpu_index": 168,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "host_cpu_index": 165,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "host_cpu_index": 167,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "host_cpu_index": 165,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/system/unexp_nt.c",
+      "host_cpu_index": 160,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "host_cpu_index": 165,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "host_cpu_index": 164,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "host_cpu_index": 175,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "host_cpu_index": 169,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "host_cpu_index": 162,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/support/main.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "host_cpu_index": 159,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "host_cpu_index": 164,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/video/video.c",
+      "host_cpu_index": 168,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/video/video_io.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "host_cpu_index": 177,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "host_cpu_index": 159,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+      "host_cpu_index": 164,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "host_cpu_index": 159,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "host_cpu_index": 164,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "host_cpu_index": 160,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "host_cpu_index": 164,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+      "host_cpu_index": 182,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c",
+      "host_cpu_index": 157,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "host_cpu_index": 165,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "host_cpu_index": 160,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "host_cpu_index": 175,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "host_cpu_index": 170,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "host_cpu_index": 174,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "host_cpu_index": 171,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+      "host_cpu_index": 186,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "host_cpu_index": 161,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "host_cpu_index": 168,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "host_cpu_index": 172,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "host_cpu_index": 175,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "host_cpu_index": 165,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "host_cpu_index": 162,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "host_cpu_index": 161,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "host_cpu_index": 172,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "host_cpu_index": 159,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "host_cpu_index": 183,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "host_cpu_index": 170,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "host_cpu_index": 167,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "host_cpu_index": 162,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "host_cpu_index": 159,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/popf.c",
+      "host_cpu_index": 162,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/ccpu386/sasCdef.c",
+      "host_cpu_index": 182,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "host_cpu_index": 164,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "host_cpu_index": 160,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "host_cpu_index": 168,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "host_cpu_index": 167,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "host_cpu_index": 159,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/build_id.c",
+      "host_cpu_index": 159,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "host_cpu_index": 165,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "host_cpu_index": 165,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "host_cpu_index": 168,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "host_cpu_index": 168,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "host_cpu_index": 165,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "host_cpu_index": 167,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "host_cpu_index": 165,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/system/unexp_nt.c",
+      "host_cpu_index": 160,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "host_cpu_index": 165,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "host_cpu_index": 164,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/disks/gfi.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/support/terminat.c",
+      "host_cpu_index": 175,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "host_cpu_index": 169,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "host_cpu_index": 162,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/support/main.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "host_cpu_index": 159,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "host_cpu_index": 164,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/video/video.c",
+      "host_cpu_index": 168,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/video/video_io.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "host_cpu_index": 177,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "host_cpu_index": 159,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+      "host_cpu_index": 164,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "host_cpu_index": 159,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "host_cpu_index": 164,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "host_cpu_index": 160,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "host_cpu_index": 164,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+      "host_cpu_index": 182,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/ntvdm-exe/softpc/mvdm_cvidc_vector_binding.c",
+      "host_cpu_index": 157,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "host_cpu_index": 165,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "host_cpu_index": 160,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "host_cpu_index": 175,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "host_cpu_index": 170,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "host_cpu_index": 174,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "host_cpu_index": 171,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+      "host_cpu_index": 186,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "host_cpu_index": 161,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "host_cpu_index": 168,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+      "host_cpu_index": 172,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "host_cpu_index": 175,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "host_cpu_index": 165,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "host_cpu_index": 163,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "host_cpu_index": 162,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "host_cpu_index": 161,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "host_cpu_index": 172,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "host_cpu_index": 159,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "host_cpu_index": 183,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+      "host_cpu_index": 162,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "tests/observation/keyba_observed.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "tests/observation/nt_event_observed.c",
+      "host_cpu_index": 176,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+      "host_cpu_index": 162,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "tests/observation/keyba_observed.c",
+      "host_cpu_index": 166,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "tests/observation/nt_event_observed.c",
+      "host_cpu_index": 176,
+      "host_def_before": true,
+      "host_def_seen": true,
+      "exit": 0
+    }
+  ]
+}

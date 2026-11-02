@@ -41176,27 +41176,27 @@
       "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
       "start": 34,
       "cut": 37,
-      "group_end": 40,
+      "group_end": 39,
       "kind": "ifdef",
       "expression": "LITTLEND",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "08af5c8467aea265179de2f8d6980533d337ef5357190a92ee099d828d98e070"
+      "source_sha256": "5ebc1fcbee5c270e59c2e572a8b5082724068e4328c9b2040b6f9e5bc812c6c9"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
       "start": 37,
-      "cut": 40,
-      "group_end": 40,
+      "cut": 39,
+      "group_end": 39,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "08af5c8467aea265179de2f8d6980533d337ef5357190a92ee099d828d98e070"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "5ebc1fcbee5c270e59c2e572a8b5082724068e4328c9b2040b6f9e5bc812c6c9"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
@@ -41209,7 +41209,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "08af5c8467aea265179de2f8d6980533d337ef5357190a92ee099d828d98e070"
+      "source_sha256": "5ebc1fcbee5c270e59c2e572a8b5082724068e4328c9b2040b6f9e5bc812c6c9"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 891,
-    "newly-excluded": 628,
+    "pending": 890,
+    "newly-excluded": 629,
     "already-excluded": 1658,
     "retained-observed": 1864,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
-    "not-guard": 839,
+    "not-guard": 838,
     "guard": 52
   }
 }

@@ -35,9 +35,9 @@ typedef union
         half_word low;
         half_word high;
 #else
-        half_word high;
-        half_word low;
+#error DIVERGENCE MVDM-HOST-DIV-620: unsupported non-little-endian host register layout
 #endif
+#line 131
         word pad;
         } byte;
     struct

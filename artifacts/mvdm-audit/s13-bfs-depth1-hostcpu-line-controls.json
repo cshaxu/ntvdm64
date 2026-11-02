@@ -1,0 +1,15 @@
+{
+  "scope": "diagnostic injected at actual retained register-union continuation",
+  "records": [
+    {
+      "architecture": "x86",
+      "line": 131,
+      "exit": 2
+    },
+    {
+      "architecture": "x64",
+      "line": 131,
+      "exit": 2
+    }
+  ]
+}

@@ -4304,15 +4304,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
-      "start": 37,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 172
-    },
-    {
       "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
       "start": 240,
       "kind": "ifdef",
@@ -8032,7 +8023,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 37
+      "count": 36
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",
