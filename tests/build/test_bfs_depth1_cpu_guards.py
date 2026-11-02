@@ -743,3 +743,18 @@ if selected.returncode or not re.search(r'int\s+retained_line\s*=\s*191\s*;', se
 if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
     raise SystemExit('unsupported FE_IME server global did not reject')
 print('PASS restored server FE_IME guard and original line')
+
+source = (repo / 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c').read_text(encoding='latin1').splitlines()
+marker = '#error Excluded unsupported FE_SB client message owner'
+matches = [i for i, line in enumerate(source) if line.strip() == '#ifdef FE_SB // fnINWPARAMDBCSCHAR()' and source[i+1].strip() == marker and source[i+2].strip() == '#endif // FE_SB']
+if len(matches) != 1 or source[matches[0]-1].strip() != '#line 1611':
+    raise SystemExit('restored original ntstubs FE_SB guard or line missing')
+i = matches[0]
+probe.write_text('\n'.join(source[i-1:i+3] + ['int after_ntstubs_guard = __LINE__;']) + '\n', encoding='ascii')
+selected = subprocess.run(base + ['/UFE_SB', str(probe)], capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base + ['/DFE_SB', str(probe)], capture_output=True, text=True, errors='replace')
+if selected.returncode or not re.search(r'int\s+after_ntstubs_guard\s*=\s*1614\s*;', selected.stdout):
+    raise SystemExit('ntstubs FE_SB selected guard or line failed: ' + selected.stderr)
+if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
+    raise SystemExit('unsupported FE_SB client message owner did not reject')
+print('PASS restored ntstubs FE_SB guard and original line')

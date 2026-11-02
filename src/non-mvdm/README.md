@@ -1852,3 +1852,8 @@ OPENNT-HOST-157: restore the original FE_IME global condition in the retained
 server.c message-table owner, replacing its unsupported body with #error.
 The first retained Button table is anchored to original line 191; selected
 WOW32 behavior is unchanged. Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-server-fe-ime.json.
+
+OPENNT-HOST-158: restore the original ntstubs.c FE_SB client-message
+condition, marking its unsupported original body with #error. All current
+ntstubs owners omit FE_SB. The original guard retains diagnostic line 1611.
+Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-ntstubs-fe-sb.json.

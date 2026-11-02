@@ -83,9 +83,14 @@
       "file": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
       "original_condition": "#ifdef FE_IME (original global, line 53)",
       "evidence": "s13-bfs-depth1-server-fe-ime.json"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_condition": "#ifdef FE_SB (fnINWPARAMDBCSCHAR, original line 1611)",
+      "evidence": "s13-bfs-depth1-ntstubs-fe-sb.json"
     }
   ],
-  "derived_total": 57,
-  "derived_current_bfs_total": 24,
+  "derived_total": 58,
+  "derived_current_bfs_total": 25,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

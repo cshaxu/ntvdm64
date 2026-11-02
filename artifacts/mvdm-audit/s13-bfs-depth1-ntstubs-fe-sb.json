@@ -1,0 +1,16 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+  "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+  "before_sha256": "6aa2d4bc93df73b9d6d5e2e301eeec9f9fb113aefc5e5bea4e4d83b4e17497d3",
+  "after_sha256": "a3b1744e26cf1f7fbcdaa4c10627a069d9947f03bbc8450506c39ac4220d8c2c",
+  "original_guard_line": 1611,
+  "original_endif_line": 1645,
+  "current_guard_line": 293,
+  "omitted_original_body_sha256": "0d8f8fe02d239985367e430db28c0a4325bc512c4a8f21f020367c91e2358859",
+  "scope": "one original first-depth FE_SB client-message function guard restored globally",
+  "original_structure": "Pinned original guard and closing directive at logical lines 1611 and 1645 restored after currently retained source owners; original excluded body is replaced by #error. Original guard is outside all local owner-selection wrappers.",
+  "selection_proof": "All nine real ntstubs.c source jobs omit FE_SB; no FE_SB definition found in project USER, compat, tests and build scripts. Independent call-boundary source-owner jobs were compiled directly.",
+  "validation": "Five WOW32 original source objects and DLL rebuilt; four independent call-boundary objects rebuilt; x86/x64 forced FE_SB negative and selected logical line controls, cached builds and rejection suites pass.",
+  "package": "s13-bfs-depth1-ntstubs-fe-sb-package-compare.json: seven exact and three PE timestamp-only; prior Full-tested publication retained.",
+  "limits": "This addresses only the original FE_SB guard at line 1611. Eight original first-depth missing-boundary records remain; no full original-structure completion claimed."
+}

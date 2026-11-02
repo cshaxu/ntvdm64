@@ -289,3 +289,7 @@ LONG GetClassWOWWords(
     ENDCALL(LONG);
 }
 #endif /* WOW_ORIGINAL_DIALOG_GETSET */
+#line 1611
+#ifdef FE_SB // fnINWPARAMDBCSCHAR()
+#error Excluded unsupported FE_SB client message owner
+#endif // FE_SB

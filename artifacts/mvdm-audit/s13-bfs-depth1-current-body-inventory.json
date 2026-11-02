@@ -64583,7 +64583,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 30,
-      "source_sha256": "6aa2d4bc93df73b9d6d5e2e301eeec9f9fb113aefc5e5bea4e4d83b4e17497d3"
+      "source_sha256": "a3b1744e26cf1f7fbcdaa4c10627a069d9947f03bbc8450506c39ac4220d8c2c"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
@@ -64596,7 +64596,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 45,
-      "source_sha256": "6aa2d4bc93df73b9d6d5e2e301eeec9f9fb113aefc5e5bea4e4d83b4e17497d3"
+      "source_sha256": "a3b1744e26cf1f7fbcdaa4c10627a069d9947f03bbc8450506c39ac4220d8c2c"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
@@ -64609,7 +64609,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 163,
-      "source_sha256": "6aa2d4bc93df73b9d6d5e2e301eeec9f9fb113aefc5e5bea4e4d83b4e17497d3"
+      "source_sha256": "a3b1744e26cf1f7fbcdaa4c10627a069d9947f03bbc8450506c39ac4220d8c2c"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
@@ -64622,7 +64622,20 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 47,
-      "source_sha256": "6aa2d4bc93df73b9d6d5e2e301eeec9f9fb113aefc5e5bea4e4d83b4e17497d3"
+      "source_sha256": "a3b1744e26cf1f7fbcdaa4c10627a069d9947f03bbc8450506c39ac4220d8c2c"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "start": 293,
+      "cut": 295,
+      "group_end": 295,
+      "kind": "ifdef",
+      "expression": "FE_SB",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "a3b1744e26cf1f7fbcdaa4c10627a069d9947f03bbc8450506c39ac4220d8c2c"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
@@ -65681,7 +65694,7 @@
   "errors": [],
   "status_counts": {
     "unselected-file": 760,
-    "newly-excluded": 643,
+    "newly-excluded": 644,
     "already-excluded": 1696,
     "pending": 75,
     "retained-observed": 1869,
