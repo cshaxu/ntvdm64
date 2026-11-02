@@ -3026,15 +3026,6 @@
       "current_actual_includers": 24
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
-      "start": 127,
-      "kind": "ifndef",
-      "expression": "CPU_40_STYLE",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 24
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/dasm.h",
       "start": 21,
       "kind": "ifdef",
@@ -3060,15 +3051,6 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
-      "start": 134,
-      "kind": "ifndef",
-      "expression": "CPU_40_STYLE",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 56
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
@@ -3321,15 +3303,6 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/quick_ev.h",
-      "start": 34,
-      "kind": "ifndef",
-      "expression": "CPU_40_STYLE",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 26
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/rommap.h",
@@ -3606,15 +3579,6 @@
       "start": 884,
       "kind": "else",
       "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/support/main.c",
-      "start": 115,
-      "kind": "ifndef",
-      "expression": "CPU_40_STYLE",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "current_actual_includers": 2
@@ -3975,15 +3939,6 @@
       "start": 554,
       "kind": "if",
       "expression": "defined(CPU_40_STYLE) && !defined (NTVDM)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
-      "start": 626,
-      "kind": "ifndef",
-      "expression": "CPU_40_STYLE",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "current_actual_includers": 2
@@ -8440,7 +8395,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 81
+      "count": 76
     },
     {
       "reason": "file-not-witnessed-in-product",

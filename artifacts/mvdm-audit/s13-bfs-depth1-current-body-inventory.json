@@ -24526,8 +24526,8 @@
       "group_end": 129,
       "kind": "ifndef",
       "expression": "CPU_40_STYLE",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "1b99f6cda69b874e8e9ac73b2da493cdfde4742fb1f0eb67c647ed82cd374e18"
@@ -24877,8 +24877,8 @@
       "group_end": 237,
       "kind": "ifndef",
       "expression": "CPU_40_STYLE",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 6,
       "source_sha256": "08c38f4d5967454cb09983cf3b93e35b2829cae04c6a00da653501fd0c9afad1"
@@ -27438,8 +27438,8 @@
       "group_end": 48,
       "kind": "ifndef",
       "expression": "CPU_40_STYLE",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 7,
       "source_sha256": "1435e2e98f54c312f277c9d319c95a9ebcb48af547b563cef1ed59d935b46dee"
@@ -32690,8 +32690,8 @@
       "group_end": 117,
       "kind": "ifndef",
       "expression": "CPU_40_STYLE",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea"
@@ -34588,8 +34588,8 @@
       "group_end": 628,
       "kind": "ifndef",
       "expression": "CPU_40_STYLE",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "b9527bc864083fe7783e9836bde7a1bc3784d18b838c439455ca7e57c001ee2a"
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 935,
+    "pending": 930,
     "newly-excluded": 615,
-    "already-excluded": 1628,
+    "already-excluded": 1633,
     "retained-observed": 1863,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
     "not-guard": 850,
-    "guard": 85
+    "guard": 80
   }
 }

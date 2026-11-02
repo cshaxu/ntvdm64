@@ -1,0 +1,97 @@
+{
+  "scope": "five existing CPU40 source/header guards; no modification of the disallowed 486 path",
+  "context_summary": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "contexts": 24,
+      "all_define_CPU_40_STYLE": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "contexts": 56,
+      "all_define_CPU_40_STYLE": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/quick_ev.h",
+      "contexts": 26,
+      "all_define_CPU_40_STYLE": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "contexts": 2,
+      "all_define_CPU_40_STYLE": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "contexts": 2,
+      "all_define_CPU_40_STYLE": true
+    }
+  ],
+  "resource_contexts_checked": 6,
+  "manual_video_tests": "verify-video7-packed-painter.ps1 and verify-planar-painter-object-contract.ps1 derive production flags and explicitly assert /DCPU_40_STYLE",
+  "controls": [
+    {
+      "arch": "x86",
+      "cpu40_defined": true,
+      "returncode": 0
+    },
+    {
+      "arch": "x86",
+      "cpu40_defined": false,
+      "returncode": 2
+    },
+    {
+      "arch": "x64",
+      "cpu40_defined": true,
+      "returncode": 0
+    },
+    {
+      "arch": "x64",
+      "cpu40_defined": false,
+      "returncode": 2
+    }
+  ],
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "current_line": 127,
+      "original_line": 112,
+      "historical_start": 124,
+      "historical_body_sha256": "2d48468e5407aa302338693e5ace5e66e83aec6202c1d548464d4d5a4c965755",
+      "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egacpu.h",
+      "current_line": 134,
+      "original_line": 149,
+      "historical_start": 161,
+      "historical_body_sha256": "45ace675a7f80f8b7a941e891022c6388c50d1717b834f6ac16451a57a551d48",
+      "original_sha256": "4a53a9d1c7fb984deb2c5b0fd629442ee8a35272ad90323624d55daa65886194"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/quick_ev.h",
+      "current_line": 34,
+      "original_line": 34,
+      "historical_start": 34,
+      "historical_body_sha256": "60a9d38e236b7c1ee27599a7fec3c89308c1ddb1651e67a73c9ca60c62b9ef2a",
+      "original_sha256": "c59fec315058b2cc03394d02d9c3756350357f7eb8cb48a541e56aae1b7939a2"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "current_line": 115,
+      "original_line": 102,
+      "historical_start": 112,
+      "historical_body_sha256": "34d7f3a5a9ca5d8ae40bf127f7fa0832983c39237fbeefb7a057b9caacadf376",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "current_line": 626,
+      "original_line": 692,
+      "historical_start": 668,
+      "historical_body_sha256": "d96c3bd3fa884ffc66a4696ab7f2c6bb2c4ee644772215811288ad985eb8ed63",
+      "original_sha256": "3874e59a27410e56c2d8c28b576c528d82acd2f04e64c50664d1ecda9a846075"
+    }
+  ],
+  "held": "dpmiint.c local non-CPU40 guard does not have a matching original root selector; original structure still requires separate audit"
+}
