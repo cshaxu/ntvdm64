@@ -1,0 +1,40 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/video.c",
+  "before_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c",
+  "candidate_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113",
+  "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+  "entries": [
+    [
+      1578,
+      1591,
+      1579,
+      1590,
+      1579
+    ],
+    [
+      2033,
+      2046,
+      2032,
+      2043,
+      2042
+    ]
+  ],
+  "checks": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "selected_preprocessed_sha256": "7d0197fe66984f3a7a7a811c6765635acaa75c1e35a20a4031216a9dec8d2ba2"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "selected_preprocessed_sha256": "7d0197fe66984f3a7a7a811c6765635acaa75c1e35a20a4031216a9dec8d2ba2"
+    }
+  ],
+  "selected_line_controls": [
+    1585,
+    2038
+  ],
+  "selected_context": "both actual video builds define NTVDM, MONITOR, and MVDM_STANDALONE_SAS_VIDEO; GISP_SVGA is absent",
+  "test": "rejected-branches suite passed, both worker targets built",
+  "package": "six images identical, four PE timestamps only, existing full-tested release retained",
+  "limitations": "unsupported non-monitor outer path now rejects; that path is absent from both actual video compilation contexts. No guest changes. First-depth original-wide reconciliation and page-domain link still open."
+}

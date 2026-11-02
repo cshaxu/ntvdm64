@@ -2,8 +2,8 @@
   "scope": "all fixed-baseline MVDM-host first-depth original signature multiplicities against current first-depth structures; nested signatures recorded only, no inner branch inspection or automatic restoration",
   "files_checked": 1321,
   "counts": {
-    "root_signature_multiplicity_satisfied": 3564,
-    "missing_root_occurrences": 14
+    "root_signature_multiplicity_satisfied": 3566,
+    "missing_root_occurrences": 12
   },
   "records": [
     {
@@ -109,30 +109,6 @@
       ],
       "current_nested_lines": [],
       "missing_multiplicity": 1,
-      "classification": "missing-signature-needs-owner-check"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
-      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
-      "working_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c",
-      "signature": [
-        [
-          "if",
-          "(defined(NTVDM)&&defined(MONITOR))||defined(GISP_SVGA)"
-        ],
-        [
-          "else",
-          ""
-        ]
-      ],
-      "original_lines": [
-        1579,
-        2042
-      ],
-      "current_root_lines": [],
-      "current_nested_lines": [],
-      "missing_multiplicity": 2,
       "classification": "missing-signature-needs-owner-check"
     }
   ],

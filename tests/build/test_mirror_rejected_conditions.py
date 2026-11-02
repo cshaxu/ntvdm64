@@ -394,3 +394,15 @@ rejected = subprocess.run(base[:-1] + ['/DNTVDM', '/DX86GFX'] + base[-1:], captu
 if allowed.returncode or not rejected.returncode or 'unsupported ROM profile' not in rejected.stdout + rejected.stderr:
     raise SystemExit('ROM selector control failed')
 print('PASS original ROM selector and excluded X86GFX profile')
+
+# Both restored original video selectors retain the standalone SAS body.
+video = (repo / 'src/mvdm-host/softpc.new/base/video/video.c').read_text(encoding='latin1')
+selector = '#if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )'
+if sum(line.strip() == selector for line in video.splitlines()) != 2:
+    raise SystemExit('two original video outer selectors not restored')
+probe.write_text(selector + '\n#else\n#error unsupported non-monitor video profile\n#endif\n', encoding='ascii')
+allowed = subprocess.run(base[:-1] + ['/DNTVDM', '/DMONITOR', '/DMVDM_STANDALONE_SAS_VIDEO'] + base[-1:], capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base[:-1] + ['/DNTVDM', '/UMONITOR', '/UGISP_SVGA'] + base[-1:], capture_output=True, text=True, errors='replace')
+if allowed.returncode or not rejected.returncode or 'unsupported non-monitor video profile' not in rejected.stdout + rejected.stderr:
+    raise SystemExit('original video selector control failed')
+print('PASS original video selectors and non-monitor rejection')

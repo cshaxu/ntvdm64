@@ -39077,7 +39077,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 6,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39090,7 +39090,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39103,7 +39103,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39116,7 +39116,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39129,7 +39129,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39142,7 +39142,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 9,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39155,7 +39155,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39168,7 +39168,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39181,7 +39181,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39194,7 +39194,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39207,7 +39207,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39220,7 +39220,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39233,7 +39233,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 21,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39246,7 +39246,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39259,7 +39259,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39272,7 +39272,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39285,7 +39285,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39298,7 +39298,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39311,7 +39311,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39324,7 +39324,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39337,7 +39337,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39350,7 +39350,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39363,7 +39363,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39376,7 +39376,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 14,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39389,7 +39389,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 7,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39402,7 +39402,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39415,7 +39415,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39428,7 +39428,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39441,7 +39441,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39454,7 +39454,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39467,7 +39467,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39480,7 +39480,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39493,7 +39493,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39506,7 +39506,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39519,7 +39519,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39532,7 +39532,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39545,7 +39545,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39558,7 +39558,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39571,7 +39571,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39584,7 +39584,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39597,7 +39597,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39610,7 +39610,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39623,7 +39623,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39636,7 +39636,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39649,7 +39649,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39662,7 +39662,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39675,7 +39675,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39688,7 +39688,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39701,7 +39701,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 7,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39714,7 +39714,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39727,7 +39727,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39740,7 +39740,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39753,7 +39753,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39766,7 +39766,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39779,7 +39779,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39792,7 +39792,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39805,7 +39805,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39818,7 +39818,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39831,7 +39831,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39844,7 +39844,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39857,7 +39857,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39870,7 +39870,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39883,7 +39883,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39896,7 +39896,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39909,7 +39909,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39922,7 +39922,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39935,7 +39935,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39948,7 +39948,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39961,7 +39961,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39974,7 +39974,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -39987,7 +39987,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -40000,7 +40000,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -40013,7 +40013,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -40026,7 +40026,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -40039,7 +40039,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -40052,7 +40052,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -40065,7 +40065,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 18,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -40078,527 +40078,527 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
       "start": 1578,
-      "cut": 1580,
-      "group_end": 1591,
+      "cut": 1594,
+      "group_end": 1596,
       "kind": "if",
-      "expression": "( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined( GISP_SVGA )",
+      "expression": "( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 15,
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "start": 1594,
+      "cut": 1596,
+      "group_end": 1596,
+      "kind": "else",
+      "expression": "",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1580,
-      "cut": 1591,
-      "group_end": 1591,
-      "kind": "else",
-      "expression": "",
-      "status": "retained-observed",
-      "pending_reason": null,
-      "guard_only": false,
-      "body_lines": 10,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1603,
-      "cut": 1610,
-      "group_end": 1610,
+      "start": 1609,
+      "cut": 1616,
+      "group_end": 1616,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1662,
-      "cut": 1675,
-      "group_end": 1675,
+      "start": 1668,
+      "cut": 1681,
+      "group_end": 1681,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 12,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1700,
-      "cut": 1708,
-      "group_end": 1708,
+      "start": 1706,
+      "cut": 1714,
+      "group_end": 1714,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 7,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1718,
-      "cut": 1729,
-      "group_end": 1729,
+      "start": 1724,
+      "cut": 1735,
+      "group_end": 1735,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 10,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1738,
-      "cut": 1750,
-      "group_end": 1750,
+      "start": 1744,
+      "cut": 1756,
+      "group_end": 1756,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 11,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1768,
-      "cut": 1776,
-      "group_end": 1776,
+      "start": 1774,
+      "cut": 1782,
+      "group_end": 1782,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 7,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1786,
-      "cut": 1793,
-      "group_end": 1793,
+      "start": 1792,
+      "cut": 1799,
+      "group_end": 1799,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1802,
-      "cut": 1810,
-      "group_end": 1810,
+      "start": 1808,
+      "cut": 1816,
+      "group_end": 1816,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 7,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1836,
-      "cut": 1849,
-      "group_end": 1849,
+      "start": 1842,
+      "cut": 1855,
+      "group_end": 1855,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 12,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1880,
-      "cut": 1885,
-      "group_end": 1887,
+      "start": 1886,
+      "cut": 1891,
+      "group_end": 1893,
       "kind": "ifdef",
       "expression": "CPU_40_STYLE",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1885,
-      "cut": 1887,
-      "group_end": 1887,
+      "start": 1891,
+      "cut": 1893,
+      "group_end": 1893,
       "kind": "else",
       "expression": "",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1908,
-      "cut": 1910,
-      "group_end": 1912,
+      "start": 1914,
+      "cut": 1916,
+      "group_end": 1918,
       "kind": "ifdef",
       "expression": "ANSI",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1910,
-      "cut": 1912,
-      "group_end": 1912,
+      "start": 1916,
+      "cut": 1918,
+      "group_end": 1918,
       "kind": "else",
       "expression": "",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1914,
-      "cut": 1916,
-      "group_end": 1916,
+      "start": 1920,
+      "cut": 1922,
+      "group_end": 1922,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1934,
-      "cut": 1944,
-      "group_end": 1946,
+      "start": 1940,
+      "cut": 1950,
+      "group_end": 1952,
       "kind": "if",
       "expression": "defined(NTVDM) && defined(MONITOR)",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 9,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 1944,
-      "cut": 1946,
-      "group_end": 1946,
+      "start": 1950,
+      "cut": 1952,
+      "group_end": 1952,
       "kind": "else",
       "expression": "",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2000,
-      "cut": 2010,
-      "group_end": 2012,
+      "start": 2006,
+      "cut": 2016,
+      "group_end": 2018,
       "kind": "if",
       "expression": "defined(NTVDM) && defined(X86GFX)",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 9,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2010,
-      "cut": 2012,
-      "group_end": 2012,
+      "start": 2016,
+      "cut": 2018,
+      "group_end": 2018,
       "kind": "else",
       "expression": "",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2033,
-      "cut": 2035,
-      "group_end": 2046,
+      "start": 2039,
+      "cut": 2055,
+      "group_end": 2057,
       "kind": "if",
-      "expression": "( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined( GISP_SVGA )",
+      "expression": "( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 15,
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "start": 2055,
+      "cut": 2057,
+      "group_end": 2057,
+      "kind": "else",
+      "expression": "",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2035,
-      "cut": 2046,
-      "group_end": 2046,
-      "kind": "else",
-      "expression": "",
-      "status": "retained-observed",
-      "pending_reason": null,
-      "guard_only": false,
-      "body_lines": 10,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2049,
-      "cut": 2056,
-      "group_end": 2056,
+      "start": 2061,
+      "cut": 2068,
+      "group_end": 2068,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2095,
-      "cut": 2097,
-      "group_end": 2159,
+      "start": 2107,
+      "cut": 2109,
+      "group_end": 2171,
       "kind": "ifdef",
       "expression": "REAL_VGA",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2097,
-      "cut": 2159,
-      "group_end": 2159,
+      "start": 2109,
+      "cut": 2171,
+      "group_end": 2171,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 61,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2176,
-      "cut": 2178,
-      "group_end": 2180,
+      "start": 2188,
+      "cut": 2190,
+      "group_end": 2192,
       "kind": "ifdef",
       "expression": "A2CPU",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2178,
-      "cut": 2180,
-      "group_end": 2180,
+      "start": 2190,
+      "cut": 2192,
+      "group_end": 2192,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2185,
-      "cut": 2192,
-      "group_end": 2192,
+      "start": 2197,
+      "cut": 2204,
+      "group_end": 2204,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2197,
-      "cut": 2199,
-      "group_end": 2199,
+      "start": 2209,
+      "cut": 2211,
+      "group_end": 2211,
       "kind": "ifdef",
       "expression": "EGA_DUMP",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2224,
-      "cut": 2226,
-      "group_end": 2226,
+      "start": 2236,
+      "cut": 2238,
+      "group_end": 2238,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2230,
-      "cut": 2293,
-      "group_end": 2293,
+      "start": 2242,
+      "cut": 2305,
+      "group_end": 2305,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 62,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2456,
-      "cut": 2458,
-      "group_end": 2458,
+      "start": 2468,
+      "cut": 2470,
+      "group_end": 2470,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2464,
-      "cut": 2467,
-      "group_end": 2467,
+      "start": 2476,
+      "cut": 2479,
+      "group_end": 2479,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2578,
-      "cut": 2580,
-      "group_end": 2580,
+      "start": 2590,
+      "cut": 2592,
+      "group_end": 2592,
       "kind": "ifdef",
       "expression": "REAL_VGA",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2582,
-      "cut": 2589,
-      "group_end": 2589,
+      "start": 2594,
+      "cut": 2601,
+      "group_end": 2601,
       "kind": "ifdef",
       "expression": "SEGMENTATION",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 6,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2596,
-      "cut": 2598,
-      "group_end": 2598,
+      "start": 2608,
+      "cut": 2610,
+      "group_end": 2610,
       "kind": "ifdef",
       "expression": "HERC",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2615,
-      "cut": 2617,
-      "group_end": 2617,
+      "start": 2627,
+      "cut": 2629,
+      "group_end": 2629,
       "kind": "ifdef",
       "expression": "HERC",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2618,
-      "cut": 2630,
-      "group_end": 2630,
+      "start": 2630,
+      "cut": 2642,
+      "group_end": 2642,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 11,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2648,
-      "cut": 2650,
-      "group_end": 2650,
+      "start": 2660,
+      "cut": 2662,
+      "group_end": 2662,
       "kind": "ifdef",
       "expression": "HERC",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
-      "start": 2653,
-      "cut": 2683,
-      "group_end": 2683,
+      "start": 2665,
+      "cut": 2695,
+      "group_end": 2695,
       "kind": "ifdef",
       "expression": "NTVDM",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 29,
-      "source_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c"
+      "source_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video_io.c",

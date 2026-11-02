@@ -15,8 +15,8 @@
     "pending": 41,
     "unselected-file": 1590
   },
-  "restored_original_groups_relative_to_fixed_head": 70,
-  "restored_in_current_bfs_pass": 37,
+  "restored_original_groups_relative_to_fixed_head": 72,
+  "restored_in_current_bfs_pass": 39,
   "restoration_count_evidence": "s13-bfs-depth1-restoration-count.json",
   "original_missing_structures": "separate s13-bfs-depth1-original-unresolved-boundaries.json; not claimed complete"
 }

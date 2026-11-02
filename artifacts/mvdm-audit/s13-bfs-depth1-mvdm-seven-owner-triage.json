@@ -68,13 +68,13 @@
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
       "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
-      "working_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c",
+      "working_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113",
       "original_lines": [
         1579,
         2042
       ],
       "missing_signature_occurrences": 2,
-      "disposition": "original group expression was extended for standalone SAS video; retaining exact standalone semantics requires separate owner-context reconciliation"
+      "disposition": "resolved two root signature mismatches: original selectors restored, selected SAS bodies preserved beneath them; nested adaptation queued"
     },
     {
       "path": "src/mvdm-host/wow32/wow32.c",

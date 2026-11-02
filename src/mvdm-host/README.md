@@ -327,11 +327,11 @@ it does not establish complete DPMI fault semantics. Original/current
 boundary evidence is in
 `../../artifacts/mvdm-audit/s13-bfs-depth1-original-dpmi-selectors.json`.
 
-MVDM-HOST-DIV-581: register the existing standalone-SAS selector adaptation
-on two first-depth video write conditions and replace their unselected direct
-host-pointer write bodies with `#error`. The selected SAS path is unchanged.
-Original boundaries and actual compile contexts are recorded in
-`../../artifacts/mvdm-audit/s13-bfs-depth1-video-sas.json`.
+MVDM-HOST-DIV-581: retain the standalone-SAS video write adaptation within
+the restored original outer conditions; unsupported direct host-pointer writes
+remain rejected. The selected SAS path is unchanged. Original boundaries and
+actual compile contexts are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-video-original-outers.json`.
 
 MVDM-HOST-DIV-580: replace the unsupported non-CCPU, non-X86GFX branch in
 `softpc.new/host/src/nt_graph.c` with `#error`, retaining the existing DIV-322

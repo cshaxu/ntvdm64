@@ -2530,15 +2530,15 @@
   {
     "path": "src/mvdm-host/softpc.new/base/video/video.c",
     "macro": "SEGMENTATION",
-    "line": 2582,
-    "body_end": 2588,
+    "line": 2594,
+    "body_end": 2600,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video.c",
     "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
     "local_sha256": "383fc76d6991847b37fb95025eeb33a2b4294c89774cf80f62d89c03c3f3437d",
     "removed_body_sha256": "c102ef1c65d43a4603d28a53fd19f574dd3a4f66a8758f1da7ac2593c3cbffe1",
     "removed_body_lines": 6,
     "after_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
-    "final_sha256": "98ddba8fc2c1bc9495a88882f592df042130dbbc0618ff53c03b61eb478c9786"
+    "final_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -2551,7 +2551,7 @@
     "removed_body_sha256": "6390ff747038cdd252e108f5d21f28da88f1eef48cbbc31d50f1f9feb224b646",
     "removed_body_lines": 6,
     "after_sha256": "f74fde00bd9425e4c84769fbc8d33e19e437316c63f4cc0f6882826a77a39b60",
-    "final_sha256": "98ddba8fc2c1bc9495a88882f592df042130dbbc0618ff53c03b61eb478c9786"
+    "final_sha256": "3a6697d5bb9be2d05e8c5c6f3bd090eb7616a8648a6ff11258f1187627ad6113"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/video_io.c",

@@ -148,9 +148,19 @@
       "file": "src/mvdm-host/softpc.new/base/system/rom.c",
       "original_condition": "#if !defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) ) (original line 282)",
       "evidence": "s13-bfs-depth1-rom-original-selector.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/video/video.c",
+      "original_condition": "#if (NTVDM && MONITOR) || GISP_SVGA / #else (original line 1579)",
+      "evidence": "s13-bfs-depth1-video-original-outers.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/video/video.c",
+      "original_condition": "#if (NTVDM && MONITOR) || GISP_SVGA / #else (original line 2042)",
+      "evidence": "s13-bfs-depth1-video-original-outers.json"
     }
   ],
-  "derived_total": 70,
-  "derived_current_bfs_total": 37,
+  "derived_total": 72,
+  "derived_current_bfs_total": 39,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

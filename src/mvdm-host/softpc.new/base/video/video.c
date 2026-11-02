@@ -1575,9 +1575,9 @@ GLOBAL void vd_write_char IFN0()
 
 		for(i = 0; i < getCX(); i++)
 		{
-#if ( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined( GISP_SVGA )
-#error DIVERGENCE MVDM-HOST-DIV-581: standalone SAS excludes direct video memory writes
-#else
+#if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )
+#if defined(MVDM_STANDALONE_SAS_VIDEO)
+#line 1579
 #ifdef	EGG
 			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
 #ifdef CPU_40_STYLE
@@ -1588,7 +1588,13 @@ GLOBAL void vd_write_char IFN0()
 			else
 #endif	/* EGG */
 				(*bios_ch2_byte_wrt_fn)( getAL(), cpos );
-#endif	/* NTVDM & MONITOR */
+#else
+#error DIVERGENCE MVDM-HOST-DIV-581: standalone SAS excludes direct video memory writes
+#endif
+#else
+#error Excluded unsupported non-monitor video profile
+#endif
+#line 1590
 			cpos += 2;
 		}
 	}
@@ -2030,9 +2036,9 @@ GLOBAL void vd_write_teletype IFN0()
 		 *	around in SAS.
 		 */
 
-#if ( defined(NTVDM) && defined(MONITOR) && !defined(MVDM_STANDALONE_SAS_VIDEO) ) || defined( GISP_SVGA )
-#error DIVERGENCE MVDM-HOST-DIV-581: standalone SAS excludes direct video memory writes
-#else
+#if ( defined(NTVDM) && defined(MONITOR) ) || defined( GISP_SVGA )
+#if defined(MVDM_STANDALONE_SAS_VIDEO)
+#line 2032
 #ifdef	EGG
 			if ( ( (video_adapter != CGA) && (EGA_CPU.chain != CHAIN2) )
 #ifdef CPU_40_STYLE
@@ -2043,7 +2049,13 @@ GLOBAL void vd_write_teletype IFN0()
 			else
 #endif	/* EGG */
 				(*bios_ch2_byte_wrt_fn)( ch, ch_addr );
-#endif	/* ( NTVDM & MONITOR ) | GISP_SVGA */
+#else
+#error DIVERGENCE MVDM-HOST-DIV-581: standalone SAS excludes direct video memory writes
+#endif
+#else
+#error Excluded unsupported non-monitor video profile
+#endif
+#line 2043
 	    }
 	}
 #ifdef EGG
