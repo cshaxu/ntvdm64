@@ -208,11 +208,13 @@ static BOOL sbFirstCall = TRUE;
         if (SelListTemp == NULL)
             return FALSE;
         try {
+#line 229
 #if defined(_X86_)
             ProbeForRead(SelList, nSel * sizeof(*SelList), sizeof(BYTE));
 #else
-            ProbeForRead(SelList, nSel * sizeof(*SelList), sizeof(WORD));
+#error Excluded unsupported non-x86 WOW cleanup probe alignment
 #endif
+#line 234
             *(LPWORD)SelListTemp = (WORD)nSel;
             pw = (LPWORD)SelListTemp + 1;
             while (nSel--) {

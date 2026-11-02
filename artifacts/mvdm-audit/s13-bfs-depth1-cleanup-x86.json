@@ -1,0 +1,34 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+  "original_sha256": "dfb0fb8d81afeb555b3631adc5456f4ceb13142f2e954a6f2b22631c49142e5c",
+  "before_sha256": "bf930830d7d6a1096c13039e5dd3219cef927c262677c63c81c3a612978d4a79",
+  "after_sha256": "119275295a294b7ace4f7577d5bcb66f043729a368ee261e3e4952c7f8f093a6",
+  "original_guard_line": 229,
+  "current_guard_line": 212,
+  "removed_body_sha256": "387300d44186b0a080642c45d7fc8bb6f391780eb8c899cb69ddb56e7d0821cd",
+  "scope": "one original first-depth non-x86 branch in WOW cleanup owner",
+  "selection_proof": "Actual WOW32 cleanup and two worker-reference cleanup objects compile as x86; all three rebuilt with non-x86 branch rejecting. Existing x86 source condition remains.",
+  "validation": "WOW32 and both worker cleanup objects rebuilt, x86/x64 selected/forced-rejection logical-line controls, source comparison with registered exclusions and cached/rejection suites pass.",
+  "test_repair": "Source comparison now explicitly normalizes and validates previously registered OPENNT-HOST-132 FE_IME exclusions, OPENNT-HOST-122 comments and this exact x86 exclusion before comparing all remaining original code. Pre-change test failed on historical FE_IME table divergence; updated test passes.",
+  "behavioral_test_gap": {
+    "test": "wow-page-domain-test.exe",
+    "results": "both x86 worker and x86 worker-reference graphs failed to compile unchanged fixture on undeclared callback_failure_kind, native_failure_signal and wow_user_borrow_scope",
+    "fixture_normalized_sha256": "51663fcc2735b574f68d277ae2ee23819922243097118f27130c6324d057ec44",
+    "fixture_matches_before_usercli_fixup": true,
+    "dependency_observation": "previous Ninja dependency record for fixture object contains neither cleanup.c nor usercli.h nor wow_user_borrow_scope.h; build flags do not define WOW_WINDOW_BORROW_FIXTURE",
+    "logs": [
+      {
+        "arch": "x86",
+        "sha256": "3d104983b48609259e8055171eb82000705f60de1e673b141a98bf41ce355d0f",
+        "first_failure": "wow_page_domain_fixture.c: callback_failure_kind undeclared; native_failure_signal and wow_user_borrow_scope also undeclared"
+      },
+      {
+        "arch": "x64",
+        "sha256": "71db67fa0b6da207b8d98b29b4f90c696eb460349578f31dfba53864d6297c44",
+        "first_failure": "wow_page_domain_fixture.c: callback_failure_kind undeclared; native_failure_signal and wow_user_borrow_scope also undeclared"
+      }
+    ]
+  },
+  "package": "s13-bfs-depth1-cleanup-x86-package-compare.json: seven exact and three PE timestamp-only; prior Full-tested publication retained.",
+  "limits": "The page-domain integration fixture did not run. Broader original-boundary reconciliation and all later levels remain incomplete."
+}

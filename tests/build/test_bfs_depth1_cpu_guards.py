@@ -819,3 +819,20 @@ for macro, name, original_line, selected_line, end_line in (('DBG', 'HANDLE_WARN
     if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr or ('(' + str(original_line+1) + ')') not in rejected.stdout + rejected.stderr:
         raise SystemExit('unsupported fixup profile or error line not rejected: ' + name)
 print('PASS original retail fixup guards and logical lines')
+
+source = (repo / 'src/non-mvdm/windows/core/ntuser/kernel/cleanup.c').read_text(encoding='latin1').splitlines()
+marker = '#error Excluded unsupported non-x86 WOW cleanup probe alignment'
+matches = [i for i, line in enumerate(source) if line.strip() == marker]
+if len(matches) != 1:
+    raise SystemExit('cleanup x86 guard missing')
+i = matches[0]
+if source[i-4].strip() != '#line 229' or source[i-3].strip() != '#if defined(_X86_)' or source[i-1].strip() != '#else' or source[i+1].strip() != '#endif' or source[i+2].strip() != '#line 234':
+    raise SystemExit('cleanup original selector or line anchors missing')
+probe.write_text('\n'.join(source[i-4:i+3] + ['int cleanup_after = __LINE__;']) + '\n', encoding='ascii')
+selected = subprocess.run(base + ['/D_X86_=1', str(probe)], capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base + ['/U_X86_', str(probe)], capture_output=True, text=True, errors='replace')
+if selected.returncode or 'sizeof(BYTE)' not in selected.stdout or not re.search(r'int\s+cleanup_after\s*=\s*234\s*;', selected.stdout):
+    raise SystemExit('cleanup x86 selected branch or line failed')
+if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr or '(232)' not in rejected.stdout + rejected.stderr:
+    raise SystemExit('cleanup non-x86 branch or original error line not rejected')
+print('PASS original cleanup x86 branch and lines')

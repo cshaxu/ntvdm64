@@ -65172,29 +65172,29 @@
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
-      "start": 211,
-      "cut": 213,
-      "group_end": 215,
+      "start": 212,
+      "cut": 214,
+      "group_end": 216,
       "kind": "if",
       "expression": "defined(_X86_)",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "bf930830d7d6a1096c13039e5dd3219cef927c262677c63c81c3a612978d4a79"
+      "source_sha256": "119275295a294b7ace4f7577d5bcb66f043729a368ee261e3e4952c7f8f093a6"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
-      "start": 213,
-      "cut": 215,
-      "group_end": 215,
+      "start": 214,
+      "cut": 216,
+      "group_end": 216,
       "kind": "else",
       "expression": "",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "bf930830d7d6a1096c13039e5dd3219cef927c262677c63c81c3a612978d4a79"
+      "source_sha256": "119275295a294b7ace4f7577d5bcb66f043729a368ee261e3e4952c7f8f093a6"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
@@ -65850,14 +65850,14 @@
   "errors": [],
   "status_counts": {
     "unselected-file": 760,
-    "newly-excluded": 651,
+    "newly-excluded": 652,
     "already-excluded": 1696,
-    "pending": 75,
+    "pending": 74,
     "retained-observed": 1874,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
-    "not-guard": 64,
+    "not-guard": 63,
     "guard": 11
   }
 }

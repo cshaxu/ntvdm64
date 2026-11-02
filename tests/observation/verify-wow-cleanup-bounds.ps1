@@ -18,14 +18,23 @@ $handleSource=Read-ObjectSource $handlePath 'F0B56314A93423599F06645D17104391F19
 $tablePattern='(?s)CONST BYTE gabObjectCreateFlags\[TYPE_CTYPES\] = \{.*?\n\};'
 $originalTable=[regex]::Match($handleSource,$tablePattern).Value
 $mirrorTable=[regex]::Match((Read-ObjectMirror $handlePath),$tablePattern).Value
+# OPENNT-HOST-132 keeps the FE_IME selector while rejecting its unsupported body.
+$imeMarker = '#error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.'
+$imeOriginal = '    OCF_THREADOWNED | OCF_MARKTHREAD,                   /* input context */'
+if (([regex]::Matches($mirrorTable, [regex]::Escape($imeMarker))).Count -ne 1 -or
+    ([regex]::Matches($originalTable, [regex]::Escape($imeOriginal))).Count -ne 1) { throw 'Unexpected FE_IME table exclusion' }
+$mirrorTable = $mirrorTable.Replace($imeMarker, $imeOriginal)
 if (!$originalTable -or $originalTable -cne $mirrorTable) { throw 'Object ownership table differs from OpenNT' }
 $typesPath='windows/core/ntuser/inc/user.h'
 $typesSource=Read-ObjectSource $typesPath 'ADCF0AC89C4779D9B7908610976F4A47D2385403EDC37496C8AB004B016CF6C1'
 $typesPattern='(?ms)^#define TYPE_FREE.*?^#define TYPE_GENERIC[^\n]*'
-if ([regex]::Match($typesSource,$typesPattern).Value -cne
-    [regex]::Match((Read-ObjectMirror $typesPath),$typesPattern).Value) {
-    throw 'Object type declarations differ from OpenNT'
-}
+$originalTypes = [regex]::Match($typesSource,$typesPattern).Value
+$mirrorTypes = [regex]::Match((Read-ObjectMirror $typesPath),$typesPattern).Value
+$imeOriginalTypes = "#define TYPE_INPUTCONTEXT   16          // Input Context info structure`n#define TYPE_CTYPES         17          // Count of TYPEs; Must be LAST + 1"
+if (([regex]::Matches($mirrorTypes, [regex]::Escape($imeMarker))).Count -ne 1 -or
+    ([regex]::Matches($originalTypes, [regex]::Escape($imeOriginalTypes))).Count -ne 1) { throw 'Unexpected FE_IME type exclusion' }
+$mirrorTypes = $mirrorTypes.Replace($imeMarker, $imeOriginalTypes)
+if ($originalTypes -cne $mirrorTypes) { throw 'Object type declarations differ from OpenNT' }
 $flagsPath='windows/core/ntuser/kernel/userk.h'
 $flagsSource=Read-ObjectSource $flagsPath '9260E0BA3CC89974E10B3804ED66D18B9864F4AE7D1175CCE6DDE8EE79D66E8C'
 $flagsPattern='(?m)^#define OCF_[^\n]+'
@@ -76,6 +85,11 @@ $original = $source.Replace("`r`n","`n")
 $mirror = [IO.File]::ReadAllText((Join-Path $RepositoryRoot 'src/non-mvdm/windows/core/ntuser/kernel/cleanup.c'))
 if ([regex]::IsMatch($mirror,'(?<!\r)\n')) { throw 'Cleanup mirror must retain CRLF' }
 $body = $mirror.Replace("`r`n","`n")
+$expectedExcluded = "#line 229`n#if defined(_X86_)`n            ProbeForRead(SelList, nSel * sizeof(*SelList), sizeof(BYTE));`n#else`n#error Excluded unsupported non-x86 WOW cleanup probe alignment`n#endif`n#line 234"
+$originalAlternative = "#if defined(_X86_)`n            ProbeForRead(SelList, nSel * sizeof(*SelList), sizeof(BYTE));`n#else`n            ProbeForRead(SelList, nSel * sizeof(*SelList), sizeof(WORD));`n#endif"
+if (([regex]::Matches($body, [regex]::Escape($expectedExcluded))).Count -ne 1) { throw 'Expected original cleanup x86 selector and exclusion missing' }
+$body = $body.Replace($expectedExcluded, $originalAlternative)
+
 $body = $body.Substring($body.IndexOf($marker)).TrimEnd()
 $cleanupBody = $body.Substring($body.IndexOf('BOOL _WOWCleanup('))
 if ([regex]::Matches($cleanupBody,'return FALSE;').Count -ne 4 -or
@@ -96,6 +110,14 @@ $classWrites = [regex]::Matches($body, 'wow_cleanup_set_class_procedure\(\*ppcls
 $guestGuards = [regex]::Matches($body, 'pwnd->procedure_is_guest && ')
 if ($windowWrites.Count -ne 3 -or $classWrites.Count -ne 2 -or $guestGuards.Count -ne 1) {
     throw 'OPENNT-HOST-122 storage seam inventory changed'
+}
+foreach ($registeredComment in @(
+    @{ text = '/* DIVERGENCE(OPENNT-HOST-122): actual native procedure slot. */'; count = 3 },
+    @{ text = '/* DIVERGENCE(OPENNT-HOST-122): a native CPD is not a guest selector. */'; count = 1 },
+    @{ text = '/* DIVERGENCE(OPENNT-HOST-122): original CLS storage owner. */'; count = 2 })) {
+    $pattern = '(?m)^[ \t]*' + [regex]::Escape($registeredComment.text) + '\n'
+    if (([regex]::Matches($body, $pattern)).Count -ne $registeredComment.count) { throw 'Registered cleanup storage comments changed' }
+    $body = [regex]::Replace($body, $pattern, '')
 }
 $body = [regex]::Replace($body, 'wow_cleanup_set_window_procedure\(context, pwnd, ([^\n]+)\);', 'pwnd->lpfnWndProc = $1;')
 $body = [regex]::Replace($body, 'wow_cleanup_set_class_procedure\(\*ppcls, ([^\n]+)\);', '(*ppcls)->lpfnWndProc = $1;')

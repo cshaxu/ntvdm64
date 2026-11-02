@@ -666,15 +666,6 @@
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "current_actual_includers": 0
-    },
-    {
-      "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
-      "start": 213,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 3
     }
   ],
   "counts": [
@@ -688,7 +679,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 18
+      "count": 17
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",

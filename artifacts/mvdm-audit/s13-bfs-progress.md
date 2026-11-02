@@ -105,7 +105,7 @@ errors. It is not a count of proven missing boundaries. Candidate rows and the
 per-arm current queue are under the task scratch directory `build/t473-s13/bfs`.
 Of these, 73 original depth-one groups in kernel `ntstubs.c` have been
 classified separately: the registered OPENNT-HOST-076 subset retains only
-the complete `NtUserSetWindowFNID` body (original lines 6170Ã¢â‚¬â€œ6188), which has
+the complete `NtUserSetWindowFNID` body (original lines 6170ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“6188), which has
 no enclosing conditional; all 73 candidate groups lie outside that retained
 body. This is an omitted-whole-function subset disposition, not a claim that
 the other original functions were restored. One additional candidate in
@@ -119,11 +119,11 @@ the guard closes at the end of the file. This disposition does not certify
 the corresponding current inclusion behavior. `_USERCLI_` is not included
 in this group because the original file also has content after its guard.
 For `ntcftxt.h`, the registered OPENNT-HOST-036/046 subset retains five
-original functions: `GetClassInfo` (111Ã¢â‚¬â€œ155), `StringDuplicate` (578Ã¢â‚¬â€œ588),
-`InitClsMenuName` (595Ã¢â‚¬â€œ632), `RegisterClassExWOW` (701Ã¢â‚¬â€œ844), and
-`UnregisterClass` (1051Ã¢â‚¬â€œ1087). The original has eleven top-level `#ifdef
+original functions: `GetClassInfo` (111ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“155), `StringDuplicate` (578ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“588),
+`InitClsMenuName` (595ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“632), `RegisterClassExWOW` (701ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“844), and
+`UnregisterClass` (1051ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“1087). The original has eleven top-level `#ifdef
 UNICODE` groups; the initial selector and the two groups intersecting retained
-functions (601Ã¢â‚¬â€œ617 and 802Ã¢â‚¬â€œ806) correspond to the three current groups. Its
+functions (601ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“617 and 802ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“806) correspond to the three current groups. Its
 eighteen `#ifndef UNICODE` groups and two `#ifdef FE_SB` groups do not
 intersect any of those five function ranges. The 28 excess original groups
 are therefore classified as outside this registered function subset, without
@@ -131,7 +131,7 @@ asserting that other text APIs were restored or that all local semantics have
 been independently reviewed. Original group interval and retained-line
 comparisons were checked against the frozen original and current sources.
 For `handtabl.c`, OPENNT-HOST-063 retains only the original ownership table
-at lines 39Ã¢â‚¬â€œ59; of 28 original depth-one groups, only the `FE_IME` group at
+at lines 39ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“59; of 28 original depth-one groups, only the `FE_IME` group at
 line 56 intersects that table. The 27 other groups lie outside the retained
 table subset. Their source identities and locations are recorded in
 `s13-bfs-depth1-handtabl.json`; this does not decide whether the retained
@@ -161,7 +161,7 @@ of the string-I/O consumers; source hashes and exact expressions are in
 candidates are unreviewed.
 
 One of those candidates, `nt_sec.c`, is now specifically identified rather
-than treated as a generic text mismatch: original lines 115Ã¢â‚¬â€œ158 form a
+than treated as a generic text mismatch: original lines 115ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Å“158 form a
 top-level `#ifdef X86GFX` absent from the local file. This file was not
 witnessed in the collected contexts, while X86GFX is used elsewhere. The
 file's supported role and all applicable profiles must therefore be established
@@ -1862,15 +1862,15 @@ Classified 85 pending outer arms in 85 whole CVIDC header files as unselected-fi
 
 ### First-depth MIPS/PPC unselected headers
 
-Classified 85 pending outer arms in 123 whole MIPS/PPC host generated header files as unselected-file after checking current jobs, 34 Ninja graphs/dependency records and direct tests/tools architecture include-root references. Current and pinned original hashes checked. No source changed and no assertion made that individual conditions are false; reopen on future admission. Status: {'pending': 266, 'newly-excluded': 642, 'already-excluded': 1669, 'unselected-file': 597, 'retained-observed': 1869, 'retained-original-assertion': 9}; child parent categories: {'retained-observed': 1410, 'pending': 335, 'unselected-file': 1296}. Evidence: `s13-bfs-depth1-mips-ppc-unselected-headers.json`; queue: `s13-bfs-depth1-working-queue-195r73.zip`.
+Classified 123 pending outer arms in 123 whole MIPS/PPC host generated header files as unselected-file after checking current jobs, 34 Ninja graphs/dependency records and direct tests/tools architecture include-root references. Current and pinned original hashes checked. No source changed and no assertion made that individual conditions are false; reopen on future admission. Status: {'pending': 266, 'newly-excluded': 642, 'already-excluded': 1669, 'unselected-file': 597, 'retained-observed': 1869, 'retained-original-assertion': 9}; child parent categories: {'retained-observed': 1410, 'pending': 335, 'unselected-file': 1296}. Evidence: `s13-bfs-depth1-mips-ppc-unselected-headers.json`; queue: `s13-bfs-depth1-working-queue-195r73.zip`.
 
 ### First-depth public internal unselected headers
 
-Classified 85 pending outer arms in 86 whole original public internal header files as unselected-file after checking current jobs, 34 Ninja graphs/dependency records and direct tests/tools basename references. Current and pinned original hashes checked. No source changed and no assertion made that individual conditions are false; reopen on future admission. Status: {'pending': 171, 'newly-excluded': 642, 'already-excluded': 1669, 'unselected-file': 692, 'retained-observed': 1869, 'retained-original-assertion': 9}; child parent categories: {'retained-observed': 1410, 'pending': 121, 'unselected-file': 1510}. Evidence: `s13-bfs-depth1-public-unselected-headers.json`; queue: `s13-bfs-depth1-working-queue-195r74.zip`.
+Classified 95 pending outer arms in 86 whole original public internal header files as unselected-file after checking current jobs, 34 Ninja graphs/dependency records and direct tests/tools basename references. Current and pinned original hashes checked. No source changed and no assertion made that individual conditions are false; reopen on future admission. Status: {'pending': 171, 'newly-excluded': 642, 'already-excluded': 1669, 'unselected-file': 692, 'retained-observed': 1869, 'retained-original-assertion': 9}; child parent categories: {'retained-observed': 1410, 'pending': 121, 'unselected-file': 1510}. Evidence: `s13-bfs-depth1-public-unselected-headers.json`; queue: `s13-bfs-depth1-working-queue-195r74.zip`.
 
 ### First-depth additional unselected files
 
-Classified 85 pending outer arms in 36 whole other historical source/header files as unselected-file after checking current jobs, 34 Ninja graphs/dependency records and direct tests/tools basename references. Current and pinned original hashes checked. No source changed and no assertion made that individual conditions are false; reopen on future admission. Status: {'unselected-file': 742, 'newly-excluded': 642, 'already-excluded': 1669, 'pending': 121, 'retained-observed': 1869, 'retained-original-assertion': 9}; child parent categories: {'retained-observed': 1410, 'pending': 80, 'unselected-file': 1551}. Evidence: `s13-bfs-depth1-other-unselected-files.json`; queue: `s13-bfs-depth1-working-queue-195r75.zip`.
+Classified 50 pending outer arms in 36 whole other historical source/header files as unselected-file after checking current jobs, 34 Ninja graphs/dependency records and direct tests/tools basename references. Current and pinned original hashes checked. No source changed and no assertion made that individual conditions are false; reopen on future admission. Status: {'unselected-file': 742, 'newly-excluded': 642, 'already-excluded': 1669, 'pending': 121, 'retained-observed': 1869, 'retained-original-assertion': 9}; child parent categories: {'retained-observed': 1410, 'pending': 80, 'unselected-file': 1551}. Evidence: `s13-bfs-depth1-other-unselected-files.json`; queue: `s13-bfs-depth1-working-queue-195r75.zip`.
 
 ### First-depth existing non-NTVDM guards
 
@@ -1898,7 +1898,7 @@ Replaced the selected OpenNT 4.5 dlcio.h missing-MAX_PATH fallback with #error, 
 
 ### First-depth fax and debugger unselected files
 
-Classified 85 pending outer arms in 7 historical fax and debugger source/header files as unselected-file after checking current jobs, 35 Ninja graphs/dependency records and explicit tests/tools references and the existing fax disposition evidence. Current and pinned original hashes checked. No source changed and no assertion made that individual conditions are false; reopen on future admission. Status: {'unselected-file': 755, 'newly-excluded': 643, 'already-excluded': 1691, 'pending': 85, 'retained-observed': 1869, 'retained-original-assertion': 9}; child parent categories: {'retained-observed': 1410, 'pending': 80, 'unselected-file': 1551}. Evidence: `s13-bfs-depth1-fax-debugger-unselected-files.json`; queue: `s13-bfs-depth1-working-queue-195r82.zip`.
+Classified 13 pending outer arms in 7 historical fax and debugger source/header files as unselected-file after checking current jobs, 35 Ninja graphs/dependency records and explicit tests/tools references and the existing fax disposition evidence. Current and pinned original hashes checked. No source changed and no assertion made that individual conditions are false; reopen on future admission. Status: {'unselected-file': 755, 'newly-excluded': 643, 'already-excluded': 1691, 'pending': 85, 'retained-observed': 1869, 'retained-original-assertion': 9}; child parent categories: {'retained-observed': 1410, 'pending': 80, 'unselected-file': 1551}. Evidence: `s13-bfs-depth1-fax-debugger-unselected-files.json`; queue: `s13-bfs-depth1-working-queue-195r82.zip`.
 
 ### First-depth existing host profile guards
 
@@ -1931,3 +1931,7 @@ Restored the original global PAGE_SIZE guard and original 0x1000 definition at l
 ### First-depth original usercli retail fixup guards
 
 Restored four original global DBG and HANDLE_FIXUP condition groups, retained their original retail #else definitions exactly and replaced unselected bodies by #error. Selector and selected-body original line numbers are anchored. The two equivalent adapter macros remain for color-only consumers that do not include this header. 46 WOW32 and 56 call-boundary objects rebuilt without macro-redefinition warnings; all 102 object hashes differ and were not individually attributed. Five linked call-boundary fixtures passed, as did x86/x64 selected/forced rejection line checks, cached builds and rejection suites. Seven same-identity candidate images match the Full-tested release exactly; three differ only in PE timestamps. First-depth status {'unselected-file': 760, 'newly-excluded': 651, 'already-excluded': 1696, 'pending': 75, 'retained-observed': 1874, 'retained-original-assertion': 9}; child categories {'retained-observed': 1411, 'pending': 41, 'unselected-file': 1590}. Original restored total 66, 33 in current BFS pass; 0 records in the previously known unresolved original boundary list; broader original reconciliation remains open. Evidence: `s13-bfs-depth1-usercli-fixup.json`, `s13-bfs-depth1-usercli-fixup-object-hashes.json`, `s13-bfs-depth1-usercli-fixup-package-compare.json`; queue: `s13-bfs-depth1-working-queue-195r90.zip`.
+
+### First-depth WOW cleanup non-x86 guard
+
+Replaced the original non-x86 cleanup alignment alternative with #error while retaining the x86 branch and original line 229/234 anchors. Both worker cleanup objects and WOW32 rebuilt; x86/x64 forced rejection and line controls and original-source comparison pass. The source comparator was repaired to recognize exact previously registered FE_IME exclusions and storage adaptation comments; its original version failed before this change on the historical FE_IME table. Both expanded wow-page-domain test builds failed on undeclared fixture symbols; the fixture source matches the pre-fixup baseline after newline normalization, its prior dependency record includes neither modified cleanup.c nor usercli.h, and the test did not run. Seven same-identity candidate images match the Full-tested release exactly; three differ only in PE timestamps. First-depth status {'unselected-file': 760, 'newly-excluded': 652, 'already-excluded': 1696, 'pending': 74, 'retained-observed': 1874, 'retained-original-assertion': 9}; child categories {'retained-observed': 1411, 'pending': 41, 'unselected-file': 1590}. Evidence: `s13-bfs-depth1-cleanup-x86.json`, `s13-bfs-depth1-cleanup-x86-package-compare.json`; queue: `s13-bfs-depth1-working-queue-195r91.zip`.

@@ -1880,3 +1880,8 @@ branches use #error. Existing color-only adapter macros remain because those
 consumers do not include usercli.h; equivalent duplicate definitions are
 validated. Original selector and selected-body line numbers are anchored.
 Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-usercli-fixup.json.
+
+OPENNT-HOST-163: preserve the original x86 WOW cleanup probe alignment and
+replace only its unselected non-x86 alternative by #error; selected owner and
+test contexts are x86. Original selector and continuation lines 229/234 are
+anchored. Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-cleanup-x86.json.
