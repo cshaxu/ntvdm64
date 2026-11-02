@@ -789,3 +789,15 @@ if selected.returncode or not re.search(r'int\s+after_usercli_guard\s*=\s*2377\s
 if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
     raise SystemExit('unsupported FE_SB client messaging macros did not reject')
 print('PASS restored usercli FE_SB guard and original line')
+
+source = (repo / 'src/non-mvdm/windows/core/ntuser/kernel/server.c').read_text(encoding='latin1').splitlines()
+matches = [i for i, line in enumerate(source) if line.strip() == '#ifndef PAGE_SIZE' and source[i+1].strip() == '#define PAGE_SIZE 0x1000' and source[i+2].strip() == '#endif']
+if len(matches) != 1 or source[matches[0]-1].strip() != '#line 1257':
+    raise SystemExit('original server PAGE_SIZE fallback or line missing')
+i = matches[0]
+probe.write_text('\n'.join(source[i-1:i+3] + ['int page_value = PAGE_SIZE;', 'int after_page_guard = __LINE__;']) + '\n', encoding='ascii')
+default = subprocess.run(base + ['/UPAGE_SIZE', str(probe)], capture_output=True, text=True, errors='replace')
+provided = subprocess.run(base + ['/DPAGE_SIZE=8192', str(probe)], capture_output=True, text=True, errors='replace')
+if default.returncode or provided.returncode or not re.search(r'int\s+page_value\s*=\s*0x1000\s*;', default.stdout) or not re.search(r'int\s+page_value\s*=\s*8192\s*;', provided.stdout) or not re.search(r'int\s+after_page_guard\s*=\s*1261\s*;', default.stdout):
+    raise SystemExit('server PAGE_SIZE selected or provided branch failed')
+print('PASS original server PAGE_SIZE fallback and original line')

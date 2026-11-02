@@ -48,18 +48,6 @@
       "current_anchors": [],
       "boundary_review": "Second original HANDLE_FIXUP group also has a selected alternative; do not synthesize a global error.",
       "disposition": "pending; no unconditional restoration or rejection"
-    },
-    {
-      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
-      "original_line": 1257,
-      "directive": "ifndef",
-      "expression": "PAGE_SIZE",
-      "classification": "unresolved",
-      "original_owners": [],
-      "exact_current_nested": [],
-      "current_anchors": [],
-      "boundary_review": "Original PAGE_SIZE condition is a fallback definition in removed server initialization; a blind #error can reject a valid undefined-PAGE_SIZE context.",
-      "disposition": "pending; no unconditional restoration or rejection"
     }
   ]
 }

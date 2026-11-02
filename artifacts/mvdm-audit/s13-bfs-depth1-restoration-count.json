@@ -103,9 +103,14 @@
       "file": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
       "original_condition": "#ifdef FE_SB (global client messaging macros, original line 2374)",
       "evidence": "s13-bfs-depth1-usercli-fe-sb.json"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_condition": "#ifndef PAGE_SIZE (original line 1257, selected fallback retained)",
+      "evidence": "s13-bfs-depth1-server-page-size.json"
     }
   ],
-  "derived_total": 61,
-  "derived_current_bfs_total": 28,
+  "derived_total": 62,
+  "derived_current_bfs_total": 29,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

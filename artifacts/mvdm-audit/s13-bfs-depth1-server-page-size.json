@@ -1,0 +1,23 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+  "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+  "before_sha256": "8c1494a3f4990097bd184ba58fe18f65f6814b6110df709d3dcce984b742bd4a",
+  "after_sha256": "3740c3789f3069fb0957cacbb83758fc157027c1205097400139a5b89edbc679",
+  "original_guard_line": 1257,
+  "original_endif_line": 1259,
+  "current_guard_line": 413,
+  "scope": "one original first-depth selected PAGE_SIZE fallback condition restored",
+  "original_structure": "Original global #ifndef PAGE_SIZE and #define PAGE_SIZE 0x1000 restored at end of retained owner, with original logical line 1257. Original shared-section implementation remains omitted; no new runtime implementation.",
+  "selection_proof": "Actual WOW32 server compile command with identical flags preprocessing the source before restoration observed PAGE_SIZE undefined after its includes; source-scoped fallback is selected.",
+  "validation": "WOW32 server object and DLL rebuilt; x86/x64 default and externally supplied macro controls and logical line checks, cached builds and rejection suites pass.",
+  "package": "s13-bfs-depth1-server-page-size-package-compare.json: seven byte-identical and three PE timestamp-only; prior Full-tested publication retained.",
+  "limits": "Original shared-section implementation remains omitted. Four other original first-depth missing-boundary records remain; no completion claim.",
+  "pre_restoration_observation": {
+    "returncode": 0,
+    "sentinel": [
+      "int observed_page_defined=0;"
+    ],
+    "command": "\"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.MSVCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin/cmake.exe\" \"-E\" \"env\" \"CCACHE_DIR=O:/repos.hobby/ntvdm64/build/.ccache\" \"CCACHE_TEMPDIR=O:/repos.hobby/ntvdm64/build/.ccache/tmp\" \"CCACHE_MAXSIZE=5G\" \"C:/Users/neko/AppData/Local/Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw32/bin/ccache.exe\" cl.exe /nologo /TC /EP /MT /W3 /Gz /showIncludes /D_NO_CRT_STDIO_INLINE /DWIN32 /DWINNT /DNTVDM /DCPU_40_STYLE /DNEW_CPU /DCCPU /DC_VID /DSPC386 /DSIM32 /DV7VGA /DANSI /DPROD /FI \"O:/repos.hobby/ntvdm64/src/compat/include/nt.h\" /I \"O:/repos.hobby/ntvdm64/src\" /I \"O:/repos.hobby/ntvdm64/src/compat/include\" /I \"O:/repos.hobby/ntvdm64/src/wow32-dll/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/wow/include\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/wow32\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/sdk/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/shell/inc\" /I \"O:/repos.hobby/ntvdm64/src/non-mvdm/private/windows/inc\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/softpc/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/command/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/monitor/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/vdd/include\" /I \"O:/repos.hobby/ntvdm64/src/ntvdm-exe/session\" /UANSI /DUNICODE /DWOW_ORIGINAL_DEFAULT_MESSAGES /O2 O:/repos.hobby/ntvdm64/build/t473-s13/page-size-observation.c",
+    "probe_sha256": "7dca6933c09b31640c3e106ebe0bdc104b87570617346be5b91ea43450b67d60"
+  }
+}

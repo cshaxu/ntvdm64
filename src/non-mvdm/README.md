@@ -1868,3 +1868,8 @@ OPENNT-HOST-160: restore the original global FE_SB client messaging condition
 in usercli.h; unsupported body is #error. It remains outside the local
 subset guards, matching the original global header placement. Original logical
 line 2374 is retained. Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-usercli-fe-sb.json.
+
+OPENNT-HOST-161: restore the original server.c PAGE_SIZE fallback condition
+and its selected original definition, which current source-owner preprocessing
+observes as needed; the omitted shared-section implementation stays omitted.
+Original logical line 1257 is anchored. Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-server-page-size.json.

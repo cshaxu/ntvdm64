@@ -65181,7 +65181,20 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 407,
-      "source_sha256": "8c1494a3f4990097bd184ba58fe18f65f6814b6110df709d3dcce984b742bd4a"
+      "source_sha256": "3740c3789f3069fb0957cacbb83758fc157027c1205097400139a5b89edbc679"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "start": 413,
+      "cut": 415,
+      "group_end": 415,
+      "kind": "ifndef",
+      "expression": "PAGE_SIZE",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 1,
+      "source_sha256": "3740c3789f3069fb0957cacbb83758fc157027c1205097400139a5b89edbc679"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",
@@ -65736,7 +65749,7 @@
     "newly-excluded": 647,
     "already-excluded": 1696,
     "pending": 75,
-    "retained-observed": 1869,
+    "retained-observed": 1870,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
