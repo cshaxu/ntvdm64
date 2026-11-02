@@ -93,7 +93,7 @@ HANDLE LocalReAlloc16(HANDLE hMem, INT cb, WORD wFlags)
 #ifndef WOWFASTEDIT
 #error Unsupported excluded original configuration
 #else
-#line 128
+#line 126
 
 VPVOID LocalLock16(HANDLE hMem)
 {

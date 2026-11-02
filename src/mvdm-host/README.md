@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-630: correct original diagnostic mappings inside selected
+first-depth branches and their continuations without changing selected
+preprocessing. Original anchors and both diagnostic controls per actual graph
+are recorded in `../../artifacts/mvdm-audit/s13-bfs-depth1-selected-line-batch.json`.
+
 MVDM-HOST-DIV-629: correct three original diagnostic continuations in
 `host/src/nt_eoi.c` and `host/src/nt_fulsc.c`. This deliberately changes only
 the line-number arguments reported on error, including the local replacement

@@ -1583,7 +1583,7 @@ static void set_baud_rate IFN1(int, adapter)
 #ifndef NTVDM
 #error Excluded unsupported non-NTVDM serial profile
 #else /* NTVDM */
-#line 1655
+#line 2031
     //The host is not limited in the baud rates that it supports
 
     if(asp->divisor_latch.all)

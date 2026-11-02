@@ -108,7 +108,7 @@ BlockWOWIdle(
 
 
 #ifndef MONITOR
-#line 98
+#line 112
        if (BlockTime.QuadPart &&
            (CurrHeartBeat.QuadPart >= BlockTime.QuadPart + SYSTEM_TICK_INTV/2))
           {
@@ -319,7 +319,7 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
  *
  */
 #ifndef MONITOR
-#line 293
+#line 337
 void DelayIrqQuickEvent(long param)
 {
    ULONG IrqLineNum = param;

@@ -1,0 +1,2738 @@
+{
+  "scope": "first-depth selected-arm spans with no nested condition; unique baseline anchors and actual graph preprocessing",
+  "plans": [
+    {
+      "lead": {
+        "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+        "line_directive": 46,
+        "depth": 1,
+        "current_target": 46,
+        "anchor_current_line": 54,
+        "anchor_original_line": 71,
+        "anchor": "half_word       regC_value,",
+        "observed_anchor_logical_line": 53,
+        "candidate_original_target": 64,
+        "matches": false,
+        "current_sha256": "0e9521ef671a730e2e5499391f8ad44b92bf9ca22000c5ade89d052233c1f0bd",
+        "original_sha256": "bc5e3a66a552e293ae1ec9653205f8432867b4290e3d4ecad6ae5cd1ccab4cb6",
+        "matching_code_lines_before_next_directive": 42,
+        "matched_lines": [
+          {
+            "current": 51,
+            "original": 68
+          },
+          {
+            "current": 54,
+            "original": 71
+          },
+          {
+            "current": 55,
+            "original": 72
+          },
+          {
+            "current": 56,
+            "original": 73
+          },
+          {
+            "current": 57,
+            "original": 74
+          },
+          {
+            "current": 58,
+            "original": 75
+          },
+          {
+            "current": 59,
+            "original": 76
+          },
+          {
+            "current": 60,
+            "original": 77
+          },
+          {
+            "current": 61,
+            "original": 78
+          },
+          {
+            "current": 62,
+            "original": 79
+          },
+          {
+            "current": 64,
+            "original": 81
+          },
+          {
+            "current": 65,
+            "original": 82
+          },
+          {
+            "current": 67,
+            "original": 84
+          },
+          {
+            "current": 68,
+            "original": 85
+          },
+          {
+            "current": 70,
+            "original": 87
+          },
+          {
+            "current": 72,
+            "original": 89
+          },
+          {
+            "current": 74,
+            "original": 91
+          },
+          {
+            "current": 77,
+            "original": 94
+          },
+          {
+            "current": 78,
+            "original": 95
+          },
+          {
+            "current": 79,
+            "original": 96
+          },
+          {
+            "current": 80,
+            "original": 97
+          },
+          {
+            "current": 81,
+            "original": 98
+          },
+          {
+            "current": 82,
+            "original": 99
+          },
+          {
+            "current": 85,
+            "original": 102
+          },
+          {
+            "current": 89,
+            "original": 106
+          },
+          {
+            "current": 90,
+            "original": 107
+          },
+          {
+            "current": 91,
+            "original": 108
+          },
+          {
+            "current": 92,
+            "original": 109
+          },
+          {
+            "current": 95,
+            "original": 112
+          },
+          {
+            "current": 96,
+            "original": 113
+          },
+          {
+            "current": 97,
+            "original": 114
+          },
+          {
+            "current": 100,
+            "original": 117
+          },
+          {
+            "current": 101,
+            "original": 118
+          },
+          {
+            "current": 103,
+            "original": 120
+          },
+          {
+            "current": 112,
+            "original": 129
+          },
+          {
+            "current": 113,
+            "original": 130
+          },
+          {
+            "current": 114,
+            "original": 131
+          },
+          {
+            "current": 115,
+            "original": 132
+          },
+          {
+            "current": 116,
+            "original": 133
+          },
+          {
+            "current": 117,
+            "original": 134
+          },
+          {
+            "current": 118,
+            "original": 135
+          },
+          {
+            "current": 119,
+            "original": 136
+          }
+        ],
+        "span_end_current_line": 137,
+        "span_unique_anchors": 35,
+        "span_anchors": [
+          {
+            "current": 54,
+            "original": 71,
+            "logical_candidate": 71,
+            "anchor": "half_word       regC_value,             /* value read from cmos register C      */"
+          },
+          {
+            "current": 55,
+            "original": 72,
+            "logical_candidate": 72,
+            "anchor": "regB_value,             /* value read from cmos register B      */"
+          },
+          {
+            "current": 56,
+            "original": 73,
+            "logical_candidate": 73,
+            "anchor": "regB_value2;            /* 2nd value read from register B       */"
+          },
+          {
+            "current": 57,
+            "original": 74,
+            "logical_candidate": 74,
+            "anchor": "DOUBLE_TIME     time_count;             /* timer count in microseconds          */"
+          },
+          {
+            "current": 58,
+            "original": 75,
+            "logical_candidate": 75,
+            "anchor": "double_word     orig_time_count;        /* timer count before decrement         */"
+          },
+          {
+            "current": 59,
+            "original": 76,
+            "logical_candidate": 76,
+            "anchor": "word            flag_seg,               /* segment address of users flag        */"
+          },
+          {
+            "current": 60,
+            "original": 77,
+            "logical_candidate": 77,
+            "anchor": "flag_off,               /* offset address of users flag         */"
+          },
+          {
+            "current": 61,
+            "original": 78,
+            "logical_candidate": 78,
+            "anchor": "CS_saved,               /* CS before calling re-entrant CPU     */"
+          },
+          {
+            "current": 62,
+            "original": 79,
+            "logical_candidate": 79,
+            "anchor": "IP_saved;               /* IP before calling re-entrant CPU     */"
+          },
+          {
+            "current": 64,
+            "original": 81,
+            "logical_candidate": 81,
+            "anchor": "outb( CMOS_PORT, (CMOS_REG_C + NMI_DISABLE) );"
+          },
+          {
+            "current": 65,
+            "original": 82,
+            "logical_candidate": 82,
+            "anchor": "inb( CMOS_DATA, &regC_value );          /* read register C      */"
+          },
+          {
+            "current": 68,
+            "original": 85,
+            "logical_candidate": 85,
+            "anchor": "inb( CMOS_DATA, &regB_value );          /* read register B      */"
+          },
+          {
+            "current": 70,
+            "original": 87,
+            "logical_candidate": 87,
+            "anchor": "outb( CMOS_PORT, CMOS_SHUT_DOWN );"
+          },
+          {
+            "current": 72,
+            "original": 89,
+            "logical_candidate": 89,
+            "anchor": "regB_value &= regC_value;"
+          },
+          {
+            "current": 74,
+            "original": 91,
+            "logical_candidate": 91,
+            "anchor": "if  (regB_value & PIE)"
+          },
+          {
+            "current": 77,
+            "original": 94,
+            "logical_candidate": 94,
+            "anchor": "sas_loadw( RTC_LOW, &time_count.half.low );"
+          },
+          {
+            "current": 78,
+            "original": 95,
+            "logical_candidate": 95,
+            "anchor": "sas_loadw( RTC_HIGH, &time_count.half.high );"
+          },
+          {
+            "current": 79,
+            "original": 96,
+            "logical_candidate": 96,
+            "anchor": "orig_time_count = time_count.total;"
+          },
+          {
+            "current": 80,
+            "original": 97,
+            "logical_candidate": 97,
+            "anchor": "time_count.total -= TIME_DEC;"
+          },
+          {
+            "current": 81,
+            "original": 98,
+            "logical_candidate": 98,
+            "anchor": "sas_storew( RTC_LOW, time_count.half.low );"
+          },
+          {
+            "current": 82,
+            "original": 99,
+            "logical_candidate": 99,
+            "anchor": "sas_storew( RTC_HIGH, time_count.half.high );"
+          },
+          {
+            "current": 85,
+            "original": 102,
+            "logical_candidate": 102,
+            "anchor": "if ( time_count.total > orig_time_count )       /* time_count < 0 ?     */"
+          },
+          {
+            "current": 90,
+            "original": 107,
+            "logical_candidate": 107,
+            "anchor": "inb( CMOS_DATA, &regB_value2 );"
+          },
+          {
+            "current": 92,
+            "original": 109,
+            "logical_candidate": 109,
+            "anchor": "outb( CMOS_DATA, (regB_value2 & 0xbf) );"
+          },
+          {
+            "current": 95,
+            "original": 112,
+            "logical_candidate": 112,
+            "anchor": "sas_loadw( USER_FLAG_SEG, &flag_seg );"
+          },
+          {
+            "current": 96,
+            "original": 113,
+            "logical_candidate": 113,
+            "anchor": "sas_loadw( USER_FLAG, &flag_off );"
+          },
+          {
+            "current": 97,
+            "original": 114,
+            "logical_candidate": 114,
+            "anchor": "sas_store( effective_addr(flag_seg, flag_off), 0x80 );"
+          },
+          {
+            "current": 100,
+            "original": 117,
+            "logical_candidate": 117,
+            "anchor": "if( sas_hw_at(rtc_wait_flag) & 2 )"
+          },
+          {
+            "current": 101,
+            "original": 118,
+            "logical_candidate": 118,
+            "anchor": "sas_store (rtc_wait_flag, 0x83);"
+          },
+          {
+            "current": 103,
+            "original": 120,
+            "logical_candidate": 120,
+            "anchor": "sas_store (rtc_wait_flag, 0);"
+          },
+          {
+            "current": 112,
+            "original": 129,
+            "logical_candidate": 129,
+            "anchor": "if (regB_value & AIE)  {"
+          },
+          {
+            "current": 115,
+            "original": 132,
+            "logical_candidate": 132,
+            "anchor": "setCS( RCPU_INT4A_SEGMENT );"
+          },
+          {
+            "current": 116,
+            "original": 133,
+            "logical_candidate": 133,
+            "anchor": "setIP( RCPU_INT4A_OFFSET );"
+          },
+          {
+            "current": 127,
+            "original": 144,
+            "logical_candidate": 144,
+            "anchor": "outb( ICA1_PORT_0, 0x20 );"
+          },
+          {
+            "current": 128,
+            "original": 145,
+            "logical_candidate": 145,
+            "anchor": "outb( ICA0_PORT_0, 0x20 );"
+          }
+        ]
+      },
+      "before_sha256": "0e9521ef671a730e2e5499391f8ad44b92bf9ca22000c5ade89d052233c1f0bd",
+      "candidate_sha256": "62547d56b1dc75af8cc84936e4047a38c50e02c72f7fc6019f945eb4c5fdff67"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+        "line_directive": 1586,
+        "depth": 1,
+        "current_target": 1655,
+        "anchor_current_line": 1589,
+        "anchor_original_line": 2033,
+        "anchor": "if(asp->divisor_latch.all)",
+        "observed_anchor_logical_line": 1657,
+        "candidate_original_target": 2031,
+        "matches": false,
+        "current_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
+        "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+        "matching_code_lines_before_next_directive": 3,
+        "matched_lines": [
+          {
+            "current": 1589,
+            "original": 2033
+          },
+          {
+            "current": 1591,
+            "original": 2035
+          },
+          {
+            "current": 1593,
+            "original": 2037
+          }
+        ],
+        "span_end_current_line": 1595,
+        "span_unique_anchors": 3,
+        "span_anchors": [
+          {
+            "current": 1589,
+            "original": 2033,
+            "logical_candidate": 2033,
+            "anchor": "if(asp->divisor_latch.all)"
+          },
+          {
+            "current": 1591,
+            "original": 2035,
+            "logical_candidate": 2035,
+            "anchor": "frequency as 1.8432 MHZ"
+          },
+          {
+            "current": 1593,
+            "original": 2037,
+            "logical_candidate": 2037,
+            "anchor": "host_com_ioctl(adapter,HOST_COM_BAUD,115200/asp->divisor_latch.all);"
+          }
+        ]
+      },
+      "before_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
+      "candidate_sha256": "ea0ebad8ee2746d2bd9c52481d4ebf2d61d0e9e02bd77a90d57108391cf5d58c"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+        "line_directive": 44,
+        "depth": 1,
+        "current_target": 3298,
+        "anchor_current_line": 45,
+        "anchor_original_line": 3325,
+        "anchor": "GLOBAL void EnableAllEOIs IFN0() { ; }",
+        "observed_anchor_logical_line": 3298,
+        "candidate_original_target": 3325,
+        "matches": false,
+        "current_sha256": "0f70c09c1691c999741dd4fad877bb0ebba8640e90b47c60d994da66e49540b5",
+        "original_sha256": "93a1891b0a27b336ccecd99a4b198e1d26f769fe31ed83023df52178e3364a51",
+        "matching_code_lines_before_next_directive": 3,
+        "matched_lines": [
+          {
+            "current": 45,
+            "original": 3325
+          },
+          {
+            "current": 46,
+            "original": 3326
+          },
+          {
+            "current": 47,
+            "original": 3327
+          }
+        ],
+        "span_end_current_line": 49,
+        "span_unique_anchors": 3,
+        "span_anchors": [
+          {
+            "current": 45,
+            "original": 3325,
+            "logical_candidate": 3325,
+            "anchor": "GLOBAL void EnableAllEOIs IFN0() { ; }"
+          },
+          {
+            "current": 46,
+            "original": 3326,
+            "logical_candidate": 3326,
+            "anchor": "GLOBAL void DisableAllEOIs IFN0() { ; }"
+          },
+          {
+            "current": 47,
+            "original": 3327,
+            "logical_candidate": 3327,
+            "anchor": "GLOBAL void ProcessProfBuffer IFN0() { ; }"
+          }
+        ]
+      },
+      "before_sha256": "0f70c09c1691c999741dd4fad877bb0ebba8640e90b47c60d994da66e49540b5",
+      "candidate_sha256": "b0a38ade3b23fdf4f91b2a10be4c2dd6c0a49de71aa111604bc7892293f8aa34"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+        "line_directive": 150,
+        "depth": 1,
+        "current_target": 145,
+        "anchor_current_line": 153,
+        "anchor_original_line": 153,
+        "anchor": "PLARGE_INTEGER CurrTime",
+        "observed_anchor_logical_line": 147,
+        "candidate_original_target": 151,
+        "matches": false,
+        "current_sha256": "5b1ab8254b4df45f8d4b4d97bb99e25cb43018b709dba85b92db20a9813404c9",
+        "original_sha256": "3e0d97d17bcc4c107b5173bf38868c79ab68d3042d29472a1a7259364da2947c",
+        "matching_code_lines_before_next_directive": 17,
+        "matched_lines": [
+          {
+            "current": 152,
+            "original": 152
+          },
+          {
+            "current": 153,
+            "original": 153
+          },
+          {
+            "current": 156,
+            "original": 156
+          },
+          {
+            "current": 157,
+            "original": 157
+          },
+          {
+            "current": 158,
+            "original": 158
+          },
+          {
+            "current": 160,
+            "original": 160
+          },
+          {
+            "current": 161,
+            "original": 161
+          },
+          {
+            "current": 162,
+            "original": 162
+          },
+          {
+            "current": 166,
+            "original": 166
+          },
+          {
+            "current": 167,
+            "original": 167
+          },
+          {
+            "current": 168,
+            "original": 168
+          },
+          {
+            "current": 171,
+            "original": 171
+          },
+          {
+            "current": 178,
+            "original": 178
+          },
+          {
+            "current": 179,
+            "original": 179
+          },
+          {
+            "current": 182,
+            "original": 182
+          },
+          {
+            "current": 185,
+            "original": 185
+          },
+          {
+            "current": 186,
+            "original": 186
+          }
+        ],
+        "span_end_current_line": 189,
+        "span_unique_anchors": 8,
+        "span_anchors": [
+          {
+            "current": 153,
+            "original": 153,
+            "logical_candidate": 153,
+            "anchor": "PLARGE_INTEGER CurrTime"
+          },
+          {
+            "current": 156,
+            "original": 156,
+            "logical_candidate": 156,
+            "anchor": "LARGE_INTEGER DiffTime;"
+          },
+          {
+            "current": 171,
+            "original": 171,
+            "logical_candidate": 171,
+            "anchor": "DiffTime.QuadPart = pqevEntry->DueTimeStamp.QuadPart - CurrTime->QuadPart;"
+          },
+          {
+            "current": 178,
+            "original": 178,
+            "logical_candidate": 178,
+            "anchor": "if (DiffTime.QuadPart < 0) {"
+          },
+          {
+            "current": 179,
+            "original": 179,
+            "logical_candidate": 179,
+            "anchor": "DelayTime = (pqevEntry->DelayTime >> 1) + 1;"
+          },
+          {
+            "current": 182,
+            "original": 182,
+            "logical_candidate": 182,
+            "anchor": "DelayTime = DiffTime.LowPart;    /* ignore overflow! */"
+          },
+          {
+            "current": 185,
+            "original": 185,
+            "logical_candidate": 185,
+            "anchor": "qevNextDueTime.QuadPart = CurrTime->QuadPart + DelayTime;"
+          },
+          {
+            "current": 186,
+            "original": 186,
+            "logical_candidate": 186,
+            "anchor": "host_q_ev_set_count(host_calc_q_ev_inst_for_time(DelayTime));"
+          }
+        ]
+      },
+      "before_sha256": "5b1ab8254b4df45f8d4b4d97bb99e25cb43018b709dba85b92db20a9813404c9",
+      "candidate_sha256": "7b52be89284333ae9f6d322798fa065c144cc9bb33fa434eacab9f510c4226cf"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+        "line_directive": 209,
+        "depth": 1,
+        "current_target": 198,
+        "anchor_current_line": 214,
+        "anchor_original_line": 221,
+        "anchor": "PQEV_ENTRY  NewEntry;",
+        "observed_anchor_logical_line": 202,
+        "candidate_original_target": 217,
+        "matches": false,
+        "current_sha256": "5b1ab8254b4df45f8d4b4d97bb99e25cb43018b709dba85b92db20a9813404c9",
+        "original_sha256": "3e0d97d17bcc4c107b5173bf38868c79ab68d3042d29472a1a7259364da2947c",
+        "matching_code_lines_before_next_directive": 43,
+        "matched_lines": [
+          {
+            "current": 212,
+            "original": 219
+          },
+          {
+            "current": 213,
+            "original": 220
+          },
+          {
+            "current": 214,
+            "original": 221
+          },
+          {
+            "current": 215,
+            "original": 222
+          },
+          {
+            "current": 216,
+            "original": 223
+          },
+          {
+            "current": 217,
+            "original": 224
+          },
+          {
+            "current": 220,
+            "original": 227
+          },
+          {
+            "current": 222,
+            "original": 229
+          },
+          {
+            "current": 223,
+            "original": 230
+          },
+          {
+            "current": 224,
+            "original": 231
+          },
+          {
+            "current": 225,
+            "original": 232
+          },
+          {
+            "current": 228,
+            "original": 235
+          },
+          {
+            "current": 230,
+            "original": 237
+          },
+          {
+            "current": 231,
+            "original": 238
+          },
+          {
+            "current": 232,
+            "original": 239
+          },
+          {
+            "current": 233,
+            "original": 240
+          },
+          {
+            "current": 234,
+            "original": 241
+          },
+          {
+            "current": 240,
+            "original": 247
+          },
+          {
+            "current": 241,
+            "original": 248
+          },
+          {
+            "current": 242,
+            "original": 249
+          },
+          {
+            "current": 243,
+            "original": 250
+          },
+          {
+            "current": 244,
+            "original": 251
+          },
+          {
+            "current": 245,
+            "original": 252
+          },
+          {
+            "current": 247,
+            "original": 254
+          },
+          {
+            "current": 250,
+            "original": 257
+          },
+          {
+            "current": 257,
+            "original": 264
+          },
+          {
+            "current": 258,
+            "original": 265
+          },
+          {
+            "current": 259,
+            "original": 266
+          },
+          {
+            "current": 260,
+            "original": 267
+          },
+          {
+            "current": 261,
+            "original": 268
+          },
+          {
+            "current": 262,
+            "original": 269
+          },
+          {
+            "current": 263,
+            "original": 270
+          },
+          {
+            "current": 265,
+            "original": 272
+          },
+          {
+            "current": 266,
+            "original": 273
+          },
+          {
+            "current": 269,
+            "original": 276
+          },
+          {
+            "current": 270,
+            "original": 277
+          },
+          {
+            "current": 271,
+            "original": 278
+          },
+          {
+            "current": 272,
+            "original": 279
+          },
+          {
+            "current": 281,
+            "original": 288
+          },
+          {
+            "current": 282,
+            "original": 289
+          },
+          {
+            "current": 283,
+            "original": 290
+          },
+          {
+            "current": 286,
+            "original": 293
+          },
+          {
+            "current": 288,
+            "original": 295
+          }
+        ],
+        "span_end_current_line": 292,
+        "span_unique_anchors": 27,
+        "span_anchors": [
+          {
+            "current": 214,
+            "original": 221,
+            "logical_candidate": 221,
+            "anchor": "PQEV_ENTRY  NewEntry;"
+          },
+          {
+            "current": 215,
+            "original": 222,
+            "logical_candidate": 222,
+            "anchor": "PQEV_ENTRY  EarlierEntry;"
+          },
+          {
+            "current": 222,
+            "original": 229,
+            "logical_candidate": 229,
+            "anchor": "NewEntry = qevHandle.pvQuickEvent = malloc(sizeof(QEV_ENTRY));"
+          },
+          {
+            "current": 230,
+            "original": 237,
+            "logical_candidate": 237,
+            "anchor": "NewEntry->DueTimeStamp.QuadPart = CurrTime.QuadPart + Time;"
+          },
+          {
+            "current": 231,
+            "original": 238,
+            "logical_candidate": 238,
+            "anchor": "NewEntry->qevCallBack = func;"
+          },
+          {
+            "current": 232,
+            "original": 239,
+            "logical_candidate": 239,
+            "anchor": "NewEntry->Param = param;"
+          },
+          {
+            "current": 233,
+            "original": 240,
+            "logical_candidate": 240,
+            "anchor": "NewEntry->QuickEventId = qevNextHandleId++;"
+          },
+          {
+            "current": 234,
+            "original": 241,
+            "logical_candidate": 241,
+            "anchor": "qevHandle.QuickEventId = NewEntry->QuickEventId;"
+          },
+          {
+            "current": 240,
+            "original": 247,
+            "logical_candidate": 247,
+            "anchor": "EarlierEntry = NULL;"
+          },
+          {
+            "current": 241,
+            "original": 248,
+            "logical_candidate": 248,
+            "anchor": "Next = QuickEventListHead.Blink;"
+          },
+          {
+            "current": 244,
+            "original": 251,
+            "logical_candidate": 251,
+            "anchor": "if (NewEntry->DueTimeStamp.QuadPart >"
+          },
+          {
+            "current": 245,
+            "original": 252,
+            "logical_candidate": 252,
+            "anchor": "pqevEntry->DueTimeStamp.QuadPart)"
+          },
+          {
+            "current": 247,
+            "original": 254,
+            "logical_candidate": 254,
+            "anchor": "EarlierEntry = pqevEntry;"
+          },
+          {
+            "current": 258,
+            "original": 265,
+            "logical_candidate": 265,
+            "anchor": "Next = EarlierEntry->qevListEntry.Flink;"
+          },
+          {
+            "current": 259,
+            "original": 266,
+            "logical_candidate": 266,
+            "anchor": "NewEntry->qevListEntry.Flink = Next;"
+          },
+          {
+            "current": 260,
+            "original": 267,
+            "logical_candidate": 267,
+            "anchor": "NewEntry->qevListEntry.Blink = &EarlierEntry->qevListEntry;"
+          },
+          {
+            "current": 261,
+            "original": 268,
+            "logical_candidate": 268,
+            "anchor": "EarlierEntry->qevListEntry.Flink = &NewEntry->qevListEntry;"
+          },
+          {
+            "current": 262,
+            "original": 269,
+            "logical_candidate": 269,
+            "anchor": "NewEntry->DelayTime = (ULONG)(NewEntry->DueTimeStamp.QuadPart -"
+          },
+          {
+            "current": 263,
+            "original": 270,
+            "logical_candidate": 270,
+            "anchor": "EarlierEntry->DueTimeStamp.QuadPart);"
+          },
+          {
+            "current": 265,
+            "original": 272,
+            "logical_candidate": 272,
+            "anchor": "if (Next == &QuickEventListHead) {"
+          },
+          {
+            "current": 266,
+            "original": 273,
+            "logical_candidate": 273,
+            "anchor": "QuickEventListHead.Blink = &NewEntry->qevListEntry;"
+          },
+          {
+            "current": 270,
+            "original": 277,
+            "logical_candidate": 277,
+            "anchor": "pqevEntry->qevListEntry.Blink = &NewEntry->qevListEntry;"
+          },
+          {
+            "current": 271,
+            "original": 278,
+            "logical_candidate": 278,
+            "anchor": "pqevEntry->DelayTime = (ULONG)(pqevEntry->DueTimeStamp.QuadPart -"
+          },
+          {
+            "current": 272,
+            "original": 279,
+            "logical_candidate": 279,
+            "anchor": "NewEntry->DueTimeStamp.QuadPart);"
+          },
+          {
+            "current": 281,
+            "original": 288,
+            "logical_candidate": 288,
+            "anchor": "InsertHeadList(&QuickEventListHead, &NewEntry->qevListEntry);"
+          },
+          {
+            "current": 282,
+            "original": 289,
+            "logical_candidate": 289,
+            "anchor": "NewEntry->DelayTime = Time;"
+          },
+          {
+            "current": 288,
+            "original": 295,
+            "logical_candidate": 295,
+            "anchor": "return qevHandle.Handle;"
+          }
+        ]
+      },
+      "before_sha256": "5b1ab8254b4df45f8d4b4d97bb99e25cb43018b709dba85b92db20a9813404c9",
+      "candidate_sha256": "5b63a3e724e16893c6e448ac93ea4b322c667bdc37857ed6ec0c406634b79edb"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+        "line_directive": 325,
+        "depth": 1,
+        "current_target": 310,
+        "anchor_current_line": 328,
+        "anchor_original_line": 333,
+        "anchor": "Q_CALLBACK_FN qevCallBack = NULL;",
+        "observed_anchor_logical_line": 312,
+        "candidate_original_target": 331,
+        "matches": false,
+        "current_sha256": "5b1ab8254b4df45f8d4b4d97bb99e25cb43018b709dba85b92db20a9813404c9",
+        "original_sha256": "3e0d97d17bcc4c107b5173bf38868c79ab68d3042d29472a1a7259364da2947c",
+        "matching_code_lines_before_next_directive": 21,
+        "matched_lines": [
+          {
+            "current": 326,
+            "original": 331
+          },
+          {
+            "current": 327,
+            "original": 332
+          },
+          {
+            "current": 328,
+            "original": 333
+          },
+          {
+            "current": 329,
+            "original": 334
+          },
+          {
+            "current": 332,
+            "original": 337
+          },
+          {
+            "current": 334,
+            "original": 339
+          },
+          {
+            "current": 335,
+            "original": 340
+          },
+          {
+            "current": 336,
+            "original": 341
+          },
+          {
+            "current": 337,
+            "original": 342
+          },
+          {
+            "current": 340,
+            "original": 345
+          },
+          {
+            "current": 341,
+            "original": 346
+          },
+          {
+            "current": 343,
+            "original": 348
+          },
+          {
+            "current": 344,
+            "original": 349
+          },
+          {
+            "current": 347,
+            "original": 352
+          },
+          {
+            "current": 348,
+            "original": 353
+          },
+          {
+            "current": 349,
+            "original": 354
+          },
+          {
+            "current": 352,
+            "original": 357
+          },
+          {
+            "current": 353,
+            "original": 358
+          },
+          {
+            "current": 356,
+            "original": 361
+          },
+          {
+            "current": 358,
+            "original": 363
+          },
+          {
+            "current": 359,
+            "original": 364
+          }
+        ],
+        "span_end_current_line": 362,
+        "span_unique_anchors": 6,
+        "span_anchors": [
+          {
+            "current": 328,
+            "original": 333,
+            "logical_candidate": 333,
+            "anchor": "Q_CALLBACK_FN qevCallBack = NULL;"
+          },
+          {
+            "current": 334,
+            "original": 339,
+            "logical_candidate": 339,
+            "anchor": "if (!IsListEmpty(&QuickEventListHead)) {"
+          },
+          {
+            "current": 340,
+            "original": 345,
+            "logical_candidate": 345,
+            "anchor": "qevCallBack = pqevEntry->qevCallBack;"
+          },
+          {
+            "current": 341,
+            "original": 346,
+            "logical_candidate": 346,
+            "anchor": "Param       = pqevEntry->Param;"
+          },
+          {
+            "current": 343,
+            "original": 348,
+            "logical_candidate": 348,
+            "anchor": "RemoveEntryList(&pqevEntry->qevListEntry);"
+          },
+          {
+            "current": 359,
+            "original": 364,
+            "logical_candidate": 364,
+            "anchor": "(*qevCallBack)(Param);"
+          }
+        ]
+      },
+      "before_sha256": "5b1ab8254b4df45f8d4b4d97bb99e25cb43018b709dba85b92db20a9813404c9",
+      "candidate_sha256": "a39dd8efd29d5428a3e0beab91f0f4fd9828d11b1b56df70b59b4c6d227a840e"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+        "line_directive": 372,
+        "depth": 1,
+        "current_target": 353,
+        "anchor_current_line": 377,
+        "anchor_original_line": 380,
+        "anchor": "PQEV_ENTRY EntryFound;",
+        "observed_anchor_logical_line": 357,
+        "candidate_original_target": 376,
+        "matches": false,
+        "current_sha256": "5b1ab8254b4df45f8d4b4d97bb99e25cb43018b709dba85b92db20a9813404c9",
+        "original_sha256": "3e0d97d17bcc4c107b5173bf38868c79ab68d3042d29472a1a7259364da2947c",
+        "matching_code_lines_before_next_directive": 28,
+        "matched_lines": [
+          {
+            "current": 373,
+            "original": 376
+          },
+          {
+            "current": 374,
+            "original": 377
+          },
+          {
+            "current": 375,
+            "original": 378
+          },
+          {
+            "current": 376,
+            "original": 379
+          },
+          {
+            "current": 377,
+            "original": 380
+          },
+          {
+            "current": 380,
+            "original": 383
+          },
+          {
+            "current": 382,
+            "original": 385
+          },
+          {
+            "current": 388,
+            "original": 391
+          },
+          {
+            "current": 389,
+            "original": 392
+          },
+          {
+            "current": 390,
+            "original": 393
+          },
+          {
+            "current": 391,
+            "original": 394
+          },
+          {
+            "current": 392,
+            "original": 395
+          },
+          {
+            "current": 393,
+            "original": 396
+          },
+          {
+            "current": 394,
+            "original": 397
+          },
+          {
+            "current": 396,
+            "original": 399
+          },
+          {
+            "current": 401,
+            "original": 404
+          },
+          {
+            "current": 402,
+            "original": 405
+          },
+          {
+            "current": 409,
+            "original": 412
+          },
+          {
+            "current": 410,
+            "original": 413
+          },
+          {
+            "current": 411,
+            "original": 414
+          },
+          {
+            "current": 418,
+            "original": 421
+          },
+          {
+            "current": 419,
+            "original": 422
+          },
+          {
+            "current": 422,
+            "original": 425
+          },
+          {
+            "current": 429,
+            "original": 432
+          },
+          {
+            "current": 430,
+            "original": 433
+          },
+          {
+            "current": 435,
+            "original": 438
+          },
+          {
+            "current": 436,
+            "original": 439
+          },
+          {
+            "current": 440,
+            "original": 443
+          }
+        ],
+        "span_end_current_line": 442,
+        "span_unique_anchors": 12,
+        "span_anchors": [
+          {
+            "current": 377,
+            "original": 380,
+            "logical_candidate": 380,
+            "anchor": "PQEV_ENTRY EntryFound;"
+          },
+          {
+            "current": 380,
+            "original": 383,
+            "logical_candidate": 383,
+            "anchor": "qevHandle.Handle = Handle;"
+          },
+          {
+            "current": 389,
+            "original": 392,
+            "logical_candidate": 392,
+            "anchor": "Next = QuickEventListHead.Flink;"
+          },
+          {
+            "current": 393,
+            "original": 396,
+            "logical_candidate": 396,
+            "anchor": "if (pqevEntry == qevHandle.pvQuickEvent &&"
+          },
+          {
+            "current": 394,
+            "original": 397,
+            "logical_candidate": 397,
+            "anchor": "pqevEntry->QuickEventId == qevHandle.QuickEventId)"
+          },
+          {
+            "current": 396,
+            "original": 399,
+            "logical_candidate": 399,
+            "anchor": "EntryFound = pqevEntry;"
+          },
+          {
+            "current": 409,
+            "original": 412,
+            "logical_candidate": 412,
+            "anchor": "if (Next != &QuickEventListHead) {"
+          },
+          {
+            "current": 411,
+            "original": 414,
+            "logical_candidate": 414,
+            "anchor": "pqevEntry->DelayTime += EntryFound->DelayTime;"
+          },
+          {
+            "current": 418,
+            "original": 421,
+            "logical_candidate": 421,
+            "anchor": "if (EntryFound->qevListEntry.Blink == &QuickEventListHead) {"
+          },
+          {
+            "current": 422,
+            "original": 425,
+            "logical_candidate": 425,
+            "anchor": "CurrTime.QuadPart = 0;"
+          },
+          {
+            "current": 429,
+            "original": 432,
+            "logical_candidate": 432,
+            "anchor": "RemoveEntryList(&EntryFound->qevListEntry);"
+          },
+          {
+            "current": 435,
+            "original": 438,
+            "logical_candidate": 438,
+            "anchor": "if (CurrTime.QuadPart) {"
+          }
+        ]
+      },
+      "before_sha256": "5b1ab8254b4df45f8d4b4d97bb99e25cb43018b709dba85b92db20a9813404c9",
+      "candidate_sha256": "1b5d11658c64dbb00cc33f3775741631c2b13331e1f1f32382468b703e0f174a"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+        "line_directive": 1710,
+        "depth": 1,
+        "current_target": 1855,
+        "anchor_current_line": 1716,
+        "anchor_original_line": 1994,
+        "anchor": "void timer_generate_int (void)",
+        "observed_anchor_logical_line": 1860,
+        "candidate_original_target": 1989,
+        "matches": false,
+        "current_sha256": "2bd5af53558e249b1e5a9d308eb6ba5a9c4ace408179ba942be51196121b70a2",
+        "original_sha256": "0e2efd46f011009e1512eb309c330626984f1590ba637b8ad9dae9c968699f55",
+        "matching_code_lines_before_next_directive": 23,
+        "matched_lines": [
+          {
+            "current": 1716,
+            "original": 1994
+          },
+          {
+            "current": 1718,
+            "original": 1996
+          },
+          {
+            "current": 1733,
+            "original": 2011
+          },
+          {
+            "current": 1734,
+            "original": 2012
+          },
+          {
+            "current": 1735,
+            "original": 2013
+          },
+          {
+            "current": 1736,
+            "original": 2014
+          },
+          {
+            "current": 1740,
+            "original": 2018
+          },
+          {
+            "current": 1742,
+            "original": 2020
+          },
+          {
+            "current": 1743,
+            "original": 2021
+          },
+          {
+            "current": 1746,
+            "original": 2024
+          },
+          {
+            "current": 1754,
+            "original": 2032
+          },
+          {
+            "current": 1757,
+            "original": 2035
+          },
+          {
+            "current": 1760,
+            "original": 2038
+          },
+          {
+            "current": 1763,
+            "original": 2041
+          },
+          {
+            "current": 1764,
+            "original": 2042
+          },
+          {
+            "current": 1779,
+            "original": 2057
+          },
+          {
+            "current": 1781,
+            "original": 2059
+          },
+          {
+            "current": 1782,
+            "original": 2060
+          },
+          {
+            "current": 1784,
+            "original": 2062
+          },
+          {
+            "current": 1785,
+            "original": 2063
+          },
+          {
+            "current": 1786,
+            "original": 2064
+          },
+          {
+            "current": 1788,
+            "original": 2066
+          },
+          {
+            "current": 1789,
+            "original": 2067
+          }
+        ],
+        "span_end_current_line": 1815,
+        "span_unique_anchors": 19,
+        "span_anchors": [
+          {
+            "current": 1716,
+            "original": 1994,
+            "logical_candidate": 1994,
+            "anchor": "void timer_generate_int (void)"
+          },
+          {
+            "current": 1733,
+            "original": 2011,
+            "logical_candidate": 2011,
+            "anchor": "hi = * (word *)(Start_of_M_area+0x1c*4+2);"
+          },
+          {
+            "current": 1734,
+            "original": 2012,
+            "logical_candidate": 2012,
+            "anchor": "lo = * (word *)(Start_of_M_area+0x1c*4);"
+          },
+          {
+            "current": 1735,
+            "original": 2013,
+            "logical_candidate": 2013,
+            "anchor": "wrap = (word) *(half_word *)(Start_of_M_area + ((ULONG)hi << 4) + lo);"
+          },
+          {
+            "current": 1736,
+            "original": 2014,
+            "logical_candidate": 2014,
+            "anchor": "if (!getIF() || ((hi != TimerInt1CSeg || lo != TimerInt1COff) && wrap != 0xcf) ||"
+          },
+          {
+            "current": 1740,
+            "original": 2018,
+            "logical_candidate": 2018,
+            "anchor": "TimerGenerateMultipleInterrupts(1);"
+          },
+          {
+            "current": 1742,
+            "original": 2020,
+            "logical_candidate": 2020,
+            "anchor": "else {  /* update Bios Data Area directly */"
+          },
+          {
+            "current": 1743,
+            "original": 2021,
+            "logical_candidate": 2021,
+            "anchor": "++(*(double_word *)(Start_of_M_area + TIMER_LOW));"
+          },
+          {
+            "current": 1746,
+            "original": 2024,
+            "logical_candidate": 2024,
+            "anchor": "if (*(double_word *)(Start_of_M_area + TIMER_LOW) == 0x1800b0)"
+          },
+          {
+            "current": 1754,
+            "original": 2032,
+            "logical_candidate": 2032,
+            "anchor": "--(*(half_word *)(Start_of_M_area + MOTOR_COUNT));"
+          },
+          {
+            "current": 1757,
+            "original": 2035,
+            "logical_candidate": 2035,
+            "anchor": "if (!*(half_word *)(Start_of_M_area + MOTOR_COUNT))"
+          },
+          {
+            "current": 1760,
+            "original": 2038,
+            "logical_candidate": 2038,
+            "anchor": "fla_outb(DISKETTE_DOR_REG, 0x0C);"
+          },
+          {
+            "current": 1779,
+            "original": 2057,
+            "logical_candidate": 2057,
+            "anchor": "void TimerEoiHook(int IrqLine, int CallCount)"
+          },
+          {
+            "current": 1784,
+            "original": 2062,
+            "logical_candidate": 2062,
+            "anchor": "if (CallCount < 0) {       // interrupts were canceled"
+          },
+          {
+            "current": 1788,
+            "original": 2066,
+            "logical_candidate": 2066,
+            "anchor": "else if (CallCount) {"
+          },
+          {
+            "current": 1790,
+            "original": 2068,
+            "logical_candidate": 2068,
+            "anchor": "host_DelayHwInterrupt(CPU_TIMER_INT,"
+          },
+          {
+            "current": 1795,
+            "original": 2073,
+            "logical_candidate": 2073,
+            "anchor": "else if (EoiIntsPending) {"
+          },
+          {
+            "current": 1797,
+            "original": 2075,
+            "logical_candidate": 2075,
+            "anchor": "if (host_DelayHwInterrupt(CPU_TIMER_INT,"
+          },
+          {
+            "current": 1802,
+            "original": 2080,
+            "logical_candidate": 2080,
+            "anchor": "EoiPending = EoiIntsPending;"
+          }
+        ]
+      },
+      "before_sha256": "2bd5af53558e249b1e5a9d308eb6ba5a9c4ace408179ba942be51196121b70a2",
+      "candidate_sha256": "4e2728687508b9c240c56e65fc4ca8e93a557e2ffdeaf61f761775b11d0a0d6b"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+        "line_directive": 111,
+        "depth": 1,
+        "current_target": 98,
+        "anchor_current_line": 112,
+        "anchor_original_line": 112,
+        "anchor": "if (BlockTime.QuadPart &&",
+        "observed_anchor_logical_line": 98,
+        "candidate_original_target": 112,
+        "matches": false,
+        "current_sha256": "901d259b7d57dcb8decf035e1c5598456b46e80c0cfee5ec9ae39c829b788db8",
+        "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+        "matching_code_lines_before_next_directive": 5,
+        "matched_lines": [
+          {
+            "current": 112,
+            "original": 112
+          },
+          {
+            "current": 113,
+            "original": 113
+          },
+          {
+            "current": 115,
+            "original": 115
+          },
+          {
+            "current": 116,
+            "original": 116
+          },
+          {
+            "current": 118,
+            "original": 118
+          }
+        ],
+        "span_end_current_line": 122,
+        "span_unique_anchors": 4,
+        "span_anchors": [
+          {
+            "current": 112,
+            "original": 112,
+            "logical_candidate": 112,
+            "anchor": "if (BlockTime.QuadPart &&"
+          },
+          {
+            "current": 113,
+            "original": 113,
+            "logical_candidate": 113,
+            "anchor": "(CurrHeartBeat.QuadPart >= BlockTime.QuadPart + SYSTEM_TICK_INTV/2))"
+          },
+          {
+            "current": 115,
+            "original": 115,
+            "logical_candidate": 115,
+            "anchor": "BlockTime.QuadPart = 0;"
+          },
+          {
+            "current": 118,
+            "original": 118,
+            "logical_candidate": 118,
+            "anchor": "ActivityCheckAfterTimeSlice();"
+          }
+        ]
+      },
+      "before_sha256": "901d259b7d57dcb8decf035e1c5598456b46e80c0cfee5ec9ae39c829b788db8",
+      "candidate_sha256": "5907a0876bdd04df41b0432ae9d688a86e992cd298165c9790282c0556a7872f"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+        "line_directive": 322,
+        "depth": 1,
+        "current_target": 293,
+        "anchor_current_line": 323,
+        "anchor_original_line": 337,
+        "anchor": "void DelayIrqQuickEvent(long param)",
+        "observed_anchor_logical_line": 293,
+        "candidate_original_target": 337,
+        "matches": false,
+        "current_sha256": "901d259b7d57dcb8decf035e1c5598456b46e80c0cfee5ec9ae39c829b788db8",
+        "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+        "matching_code_lines_before_next_directive": 6,
+        "matched_lines": [
+          {
+            "current": 323,
+            "original": 337
+          },
+          {
+            "current": 325,
+            "original": 339
+          },
+          {
+            "current": 327,
+            "original": 341
+          },
+          {
+            "current": 329,
+            "original": 343
+          },
+          {
+            "current": 330,
+            "original": 344
+          },
+          {
+            "current": 332,
+            "original": 346
+          }
+        ],
+        "span_end_current_line": 336,
+        "span_unique_anchors": 3,
+        "span_anchors": [
+          {
+            "current": 323,
+            "original": 337,
+            "logical_candidate": 337,
+            "anchor": "void DelayIrqQuickEvent(long param)"
+          },
+          {
+            "current": 325,
+            "original": 339,
+            "logical_candidate": 339,
+            "anchor": "ULONG IrqLineNum = param;"
+          },
+          {
+            "current": 330,
+            "original": 344,
+            "logical_candidate": 344,
+            "anchor": "ica_RestartInterrupts(1 << IrqLineNum);"
+          }
+        ]
+      },
+      "before_sha256": "901d259b7d57dcb8decf035e1c5598456b46e80c0cfee5ec9ae39c829b788db8",
+      "candidate_sha256": "de699ec4316c3db1b9b81693f73bf889709460ed0c73068201aa73a5a89f26ca"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+        "line_directive": 767,
+        "depth": 1,
+        "current_target": 757,
+        "anchor_current_line": 773,
+        "anchor_original_line": 825,
+        "anchor": "status = NtWaitForSingleObject(hHBSuspendEvent,",
+        "observed_anchor_logical_line": 762,
+        "candidate_original_target": 820,
+        "matches": false,
+        "current_sha256": "19dc97992c62e02a7d4173bbfb6e73fef2bc0fa797054ac30cafa7e593a03982",
+        "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+        "matching_code_lines_before_next_directive": 8,
+        "matched_lines": [
+          {
+            "current": 773,
+            "original": 825
+          },
+          {
+            "current": 775,
+            "original": 827
+          },
+          {
+            "current": 777,
+            "original": 829
+          },
+          {
+            "current": 778,
+            "original": 830
+          },
+          {
+            "current": 781,
+            "original": 833
+          },
+          {
+            "current": 782,
+            "original": 834
+          },
+          {
+            "current": 783,
+            "original": 835
+          },
+          {
+            "current": 784,
+            "original": 836
+          }
+        ],
+        "span_end_current_line": 790,
+        "span_unique_anchors": 4,
+        "span_anchors": [
+          {
+            "current": 773,
+            "original": 825,
+            "logical_candidate": 825,
+            "anchor": "status = NtWaitForSingleObject(hHBSuspendEvent,"
+          },
+          {
+            "current": 781,
+            "original": 833,
+            "logical_candidate": 833,
+            "anchor": "if (status == STATUS_SUCCESS) {  // suspend event"
+          },
+          {
+            "current": 782,
+            "original": 834,
+            "logical_candidate": 834,
+            "anchor": "status = NtWaitForSingleObject(hHBResumeEvent, TRUE, NULL);"
+          },
+          {
+            "current": 783,
+            "original": 835,
+            "logical_candidate": 835,
+            "anchor": "if (status == STATUS_SUCCESS) {"
+          }
+        ]
+      },
+      "before_sha256": "19dc97992c62e02a7d4173bbfb6e73fef2bc0fa797054ac30cafa7e593a03982",
+      "candidate_sha256": "ad20d7cb91742cb365f5f7775db2738c8513843810f202ea232431066efdf3a1"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/wow32/wcall16.c",
+        "line_directive": 96,
+        "depth": 1,
+        "current_target": 128,
+        "anchor_current_line": 109,
+        "anchor_original_line": 138,
+        "anchor": "retval = (VPVOID)hMem;",
+        "observed_anchor_logical_line": 140,
+        "candidate_original_target": 126,
+        "matches": false,
+        "current_sha256": "e299db3bbfe3f1dc87b2b9f23a6eb7432ea51a9519dba6441cca857de3694610",
+        "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+        "matching_code_lines_before_next_directive": 45,
+        "matched_lines": [
+          {
+            "current": 98,
+            "original": 127
+          },
+          {
+            "current": 100,
+            "original": 129
+          },
+          {
+            "current": 101,
+            "original": 130
+          },
+          {
+            "current": 103,
+            "original": 132
+          },
+          {
+            "current": 104,
+            "original": 133
+          },
+          {
+            "current": 105,
+            "original": 134
+          },
+          {
+            "current": 108,
+            "original": 137
+          },
+          {
+            "current": 109,
+            "original": 138
+          },
+          {
+            "current": 111,
+            "original": 140
+          },
+          {
+            "current": 112,
+            "original": 141
+          },
+          {
+            "current": 114,
+            "original": 143
+          },
+          {
+            "current": 116,
+            "original": 145
+          },
+          {
+            "current": 117,
+            "original": 146
+          },
+          {
+            "current": 120,
+            "original": 149
+          },
+          {
+            "current": 121,
+            "original": 150
+          },
+          {
+            "current": 122,
+            "original": 151
+          },
+          {
+            "current": 125,
+            "original": 154
+          },
+          {
+            "current": 126,
+            "original": 155
+          },
+          {
+            "current": 127,
+            "original": 156
+          },
+          {
+            "current": 130,
+            "original": 159
+          },
+          {
+            "current": 131,
+            "original": 160
+          },
+          {
+            "current": 133,
+            "original": 162
+          },
+          {
+            "current": 136,
+            "original": 165
+          },
+          {
+            "current": 138,
+            "original": 167
+          },
+          {
+            "current": 139,
+            "original": 168
+          },
+          {
+            "current": 140,
+            "original": 169
+          },
+          {
+            "current": 141,
+            "original": 170
+          },
+          {
+            "current": 143,
+            "original": 172
+          },
+          {
+            "current": 144,
+            "original": 173
+          },
+          {
+            "current": 145,
+            "original": 174
+          },
+          {
+            "current": 148,
+            "original": 177
+          },
+          {
+            "current": 149,
+            "original": 178
+          },
+          {
+            "current": 151,
+            "original": 180
+          },
+          {
+            "current": 152,
+            "original": 181
+          },
+          {
+            "current": 155,
+            "original": 184
+          },
+          {
+            "current": 157,
+            "original": 186
+          },
+          {
+            "current": 158,
+            "original": 187
+          },
+          {
+            "current": 160,
+            "original": 189
+          },
+          {
+            "current": 163,
+            "original": 192
+          },
+          {
+            "current": 164,
+            "original": 193
+          },
+          {
+            "current": 166,
+            "original": 195
+          },
+          {
+            "current": 167,
+            "original": 196
+          },
+          {
+            "current": 169,
+            "original": 198
+          },
+          {
+            "current": 172,
+            "original": 201
+          },
+          {
+            "current": 175,
+            "original": 204
+          }
+        ],
+        "span_end_current_line": 179,
+        "span_unique_anchors": 12,
+        "span_anchors": [
+          {
+            "current": 109,
+            "original": 138,
+            "logical_candidate": 138,
+            "anchor": "retval = (VPVOID)hMem;"
+          },
+          {
+            "current": 111,
+            "original": 140,
+            "logical_candidate": 140,
+            "anchor": "if (h16 & LA_MOVEABLE) {"
+          },
+          {
+            "current": 116,
+            "original": 145,
+            "logical_candidate": 145,
+            "anchor": "if (plhe->lhe_flags & LHE_DISCARDED) {"
+          },
+          {
+            "current": 121,
+            "original": 150,
+            "logical_candidate": 150,
+            "anchor": "if (!plhe->lhe_count)"
+          },
+          {
+            "current": 125,
+            "original": 154,
+            "logical_candidate": 154,
+            "anchor": "LOW(retval) = plhe->lhe_address;"
+          },
+          {
+            "current": 130,
+            "original": 159,
+            "logical_candidate": 159,
+            "anchor": "if (LOWORD(retval) == 0)"
+          },
+          {
+            "current": 151,
+            "original": 180,
+            "logical_candidate": 180,
+            "anchor": "if (!(h16 & LA_MOVEABLE)) {"
+          },
+          {
+            "current": 157,
+            "original": 186,
+            "logical_candidate": 186,
+            "anchor": "if (plhe->lhe_flags & LHE_DISCARDED)"
+          },
+          {
+            "current": 160,
+            "original": 189,
+            "logical_candidate": 189,
+            "anchor": "count = plhe->lhe_count;"
+          },
+          {
+            "current": 163,
+            "original": 192,
+            "logical_candidate": 192,
+            "anchor": "if (count >= (BYTE)(0xff-1))"
+          },
+          {
+            "current": 166,
+            "original": 195,
+            "logical_candidate": 195,
+            "anchor": "plhe->lhe_count = count;"
+          },
+          {
+            "current": 167,
+            "original": 196,
+            "logical_candidate": 196,
+            "anchor": "rc = (BOOL)((SHORT)count);"
+          }
+        ]
+      },
+      "before_sha256": "e299db3bbfe3f1dc87b2b9f23a6eb7432ea51a9519dba6441cca857de3694610",
+      "candidate_sha256": "51fc0ddeed8481a96b1934e500ecacf0ef2570fdf0ec90d46c8d4fd0d1a20288"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/wow32/wkman.c",
+        "line_directive": 1351,
+        "depth": 1,
+        "current_target": 1402,
+        "anchor_current_line": 1352,
+        "anchor_original_line": 1373,
+        "anchor": "setIP( (WORD)vcRemote.Eip );",
+        "observed_anchor_logical_line": 1402,
+        "candidate_original_target": 1373,
+        "matches": false,
+        "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
+        "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+        "matching_code_lines_before_next_directive": 5,
+        "matched_lines": [
+          {
+            "current": 1352,
+            "original": 1373
+          },
+          {
+            "current": 1353,
+            "original": 1374
+          },
+          {
+            "current": 1354,
+            "original": 1375
+          },
+          {
+            "current": 1355,
+            "original": 1376
+          },
+          {
+            "current": 1356,
+            "original": 1377
+          }
+        ],
+        "span_end_current_line": 1358,
+        "span_unique_anchors": 4,
+        "span_anchors": [
+          {
+            "current": 1352,
+            "original": 1373,
+            "logical_candidate": 1373,
+            "anchor": "setIP( (WORD)vcRemote.Eip );"
+          },
+          {
+            "current": 1353,
+            "original": 1374,
+            "logical_candidate": 1374,
+            "anchor": "setSP( (WORD)vcRemote.Esp );"
+          },
+          {
+            "current": 1354,
+            "original": 1375,
+            "logical_candidate": 1375,
+            "anchor": "setSS( (WORD)vcRemote.SegSs );"
+          },
+          {
+            "current": 1355,
+            "original": 1376,
+            "logical_candidate": 1376,
+            "anchor": "setCS( (WORD)vcRemote.SegCs );"
+          }
+        ]
+      },
+      "before_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
+      "candidate_sha256": "c515f1300cd0146d3c9aa7c2b01defc717123859add6fde0ba9fb0fb86ec533a"
+    },
+    {
+      "lead": {
+        "path": "src/mvdm-host/wow32/wkman.c",
+        "line_directive": 1565,
+        "depth": 1,
+        "current_target": 1622,
+        "anchor_current_line": 1566,
+        "anchor_original_line": 1591,
+        "anchor": "vcRemote.Eip   = getIP();",
+        "observed_anchor_logical_line": 1622,
+        "candidate_original_target": 1591,
+        "matches": false,
+        "current_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
+        "original_sha256": "56be1989f2bc3acaffcfa6345b20e38f5e7312badf03af04d4565f8f4a489ac9",
+        "matching_code_lines_before_next_directive": 4,
+        "matched_lines": [
+          {
+            "current": 1566,
+            "original": 1591
+          },
+          {
+            "current": 1567,
+            "original": 1592
+          },
+          {
+            "current": 1568,
+            "original": 1593
+          },
+          {
+            "current": 1569,
+            "original": 1594
+          }
+        ],
+        "span_end_current_line": 1571,
+        "span_unique_anchors": 4,
+        "span_anchors": [
+          {
+            "current": 1566,
+            "original": 1591,
+            "logical_candidate": 1591,
+            "anchor": "vcRemote.Eip   = getIP();"
+          },
+          {
+            "current": 1567,
+            "original": 1592,
+            "logical_candidate": 1592,
+            "anchor": "vcRemote.Esp   = getSP();"
+          },
+          {
+            "current": 1568,
+            "original": 1593,
+            "logical_candidate": 1593,
+            "anchor": "vcRemote.SegSs = getSS();"
+          },
+          {
+            "current": 1569,
+            "original": 1594,
+            "logical_candidate": 1594,
+            "anchor": "vcRemote.SegCs = getCS();"
+          }
+        ]
+      },
+      "before_sha256": "015a3eab2cd3ce83ac333e6374cff751df32e412b2a88486610e8483513897be",
+      "candidate_sha256": "3473a16714dcc1616042cdbb77a8a1eca79eed7d42d089ecd0ba25d0f90f2413"
+    }
+  ],
+  "controls": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "85a748465e83892913ac0436e579be4ebcef90a73bd0cc65778805f6f3e9f868"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "85a748465e83892913ac0436e579be4ebcef90a73bd0cc65778805f6f3e9f868"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "73e6c9bcaedf1d0f0a5d578f19a7153653b7db229ee96256c77e3caa97ee9142"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "73e6c9bcaedf1d0f0a5d578f19a7153653b7db229ee96256c77e3caa97ee9142"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "9160280d3eaf6dd5f8109042484ba16993c4aaf16426e112784ce53d6dd4e47c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "9160280d3eaf6dd5f8109042484ba16993c4aaf16426e112784ce53d6dd4e47c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "6b497c8d633bc4bea8dcafb3b390b83584d3d577609c0558b4b5069634c202d5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "6b497c8d633bc4bea8dcafb3b390b83584d3d577609c0558b4b5069634c202d5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "6b497c8d633bc4bea8dcafb3b390b83584d3d577609c0558b4b5069634c202d5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "6b497c8d633bc4bea8dcafb3b390b83584d3d577609c0558b4b5069634c202d5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "6b497c8d633bc4bea8dcafb3b390b83584d3d577609c0558b4b5069634c202d5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "6b497c8d633bc4bea8dcafb3b390b83584d3d577609c0558b4b5069634c202d5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "6b497c8d633bc4bea8dcafb3b390b83584d3d577609c0558b4b5069634c202d5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "6b497c8d633bc4bea8dcafb3b390b83584d3d577609c0558b4b5069634c202d5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "770cd722fb3cbc99f4e978afe2944af86df182db794d9fad0f0134b817d918ee"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "770cd722fb3cbc99f4e978afe2944af86df182db794d9fad0f0134b817d918ee"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "e88a7c1256e5f2c693465ef1f8bb0f7bccc1d7e091964018e4dac98d3aa3edbc"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "e88a7c1256e5f2c693465ef1f8bb0f7bccc1d7e091964018e4dac98d3aa3edbc"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "e88a7c1256e5f2c693465ef1f8bb0f7bccc1d7e091964018e4dac98d3aa3edbc"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "e88a7c1256e5f2c693465ef1f8bb0f7bccc1d7e091964018e4dac98d3aa3edbc"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "77a395345e5500ec71cbe63c890eb9a95b154004334ea6e955d82479f386218f"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "source": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "77a395345e5500ec71cbe63c890eb9a95b154004334ea6e955d82479f386218f"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "source": "src/mvdm-host/wow32/wcall16.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "49493768ffced186d8b2dc2873ba1b26417dc159a948d336746357d9367055a8"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "source": "src/mvdm-host/wow32/wkman.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "b44c9b7b5891050da8238d8d7844bacea51d39d6877eb2d5c12681c1fa47b40c"
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "source": "src/mvdm-host/wow32/wkman.c",
+      "selected_preprocessing_equal": true,
+      "sha256": "b44c9b7b5891050da8238d8d7844bacea51d39d6877eb2d5c12681c1fa47b40c"
+    }
+  ],
+  "first_anchor_diagnostic_controls": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 71,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 71,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 2033,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 2033,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 3325,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 3325,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 153,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 153,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 221,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 221,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 333,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 333,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 380,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 380,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 1994,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 1994,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 112,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 112,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 337,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 337,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 825,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 825,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "expected_line": 138,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "expected_line": 1373,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "expected_line": 1591,
+      "verified": true,
+      "error": ""
+    }
+  ],
+  "last_anchor_diagnostic_controls": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 145,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 145,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 2037,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 2037,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 3327,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 3327,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 186,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 186,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 295,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 295,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 364,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 364,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 438,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 438,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 2080,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 2080,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 118,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 118,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 344,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 344,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "expected_line": 835,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "expected_line": 835,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "expected_line": 196,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "expected_line": 1376,
+      "verified": true,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "expected_line": 1594,
+      "verified": true,
+      "error": ""
+    }
+  ],
+  "limitations": "Only selected first-depth spans without nested conditional entries were changed. The lexical anchor inventory still contains unresolved leads; non-CCPU DPMI and x87 fixture failures remain documented."
+}

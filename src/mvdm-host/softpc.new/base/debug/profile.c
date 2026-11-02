@@ -41,7 +41,7 @@
 #ifdef PROFILE		/* Don't want this all the time */
 #error Unsupported excluded original configuration
 #else /* PROFILE */
-#line 3298
+#line 3325
 GLOBAL void EnableAllEOIs IFN0() { ; }
 GLOBAL void DisableAllEOIs IFN0() { ; }
 GLOBAL void ProcessProfBuffer IFN0() { ; }

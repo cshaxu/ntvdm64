@@ -1707,7 +1707,7 @@ void TimerGenerateMultipleInterrupts(long n)
 #define getIF() (GLOBAL_EFLAGS & 0x200)
 
 #endif /* !MONITOR */
-#line 1855
+#line 1989
 
 
 /*  timer_generate_int NTVDM

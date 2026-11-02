@@ -147,7 +147,7 @@ q_event_init(
  *  Caller must hold ica lock
  */
 #ifndef MONITOR
-#line 145
+#line 151
 void
 ResetCpuQevCount(
      PLARGE_INTEGER CurrTime
@@ -206,7 +206,7 @@ add_q_event_t(
 #ifdef MONITOR
 #error Excluded unsupported quick-event hardware monitor path
 #else
-#line 198
+#line 217
 
 
         QEVHANDLE   qevHandle;
@@ -322,7 +322,7 @@ dispatch_q_event(
     )
 {
 #ifndef MONITOR
-#line 310
+#line 331
         PQEV_ENTRY  pqevEntry;
         LARGE_INTEGER CurrTime;
         Q_CALLBACK_FN qevCallBack = NULL;
@@ -369,7 +369,7 @@ delete_q_event(
         )
 {
 #ifndef MONITOR
-#line 353
+#line 376
         QEVHANDLE   qevHandle;
         PLIST_ENTRY Next;
         LARGE_INTEGER CurrTime;

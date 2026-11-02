@@ -53,9 +53,11 @@
     "after_sha256": "0bc8c7aef3997c9d566c312d9fc607a5842b6f5a4fc4427558a1fc68874a11b8",
     "current_start_line": 1606,
     "error_marker": "Excluded unsupported non-NTVDM serial profile",
-    "continuation_line": 1655,
+    "continuation_line": 2031,
     "child_queue_groups_removed": 3,
-    "registration": "MVDM-HOST-DIV-570"
+    "registration": "MVDM-HOST-DIV-570",
+    "prior_continuation_line": 1655,
+    "line_mapping_update_evidence": "s13-bfs-depth1-selected-line-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/system/timer.c",

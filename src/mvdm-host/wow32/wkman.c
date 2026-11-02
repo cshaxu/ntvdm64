@@ -1348,7 +1348,7 @@ DWORD W32RemoteThread(VOID)
 #if FASTBOPPING
 #error Unsupported excluded original configuration
 #else
-#line 1402
+#line 1373
     setIP( (WORD)vcRemote.Eip );
     setSP( (WORD)vcRemote.Esp );
     setSS( (WORD)vcRemote.SegSs );
@@ -1562,7 +1562,7 @@ VOID FASTCALL WK32KillRemoteTask(PVDMFRAME pFrame)
 #if FASTBOPPING
 #error Unsupported excluded original configuration
 #else
-#line 1622
+#line 1591
     vcRemote.Eip   = getIP();
     vcRemote.Esp   = getSP();
     vcRemote.SegSs = getSS();

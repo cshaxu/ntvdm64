@@ -764,7 +764,7 @@ NTSTATUS DelayHeartBeat(LONG Delay)
 #ifdef MONITOR
 #error Excluded unsupported monitor heartbeat wait
 #else
-#line 757
+#line 820
 //
 // On Risc platforms we only have to deal with the
 // HeartBeat Resume\Suspend objects so things are much simpler
