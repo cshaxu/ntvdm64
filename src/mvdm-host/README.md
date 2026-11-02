@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-611: preserve original first-depth selectors for unsupported
+SIM32 ALLOCA macro profile, rejecting their bodies. Source and
+SDK macro scans and x86/x64 controls are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-sim32-alloca-batch.json`.
+
 MVDM-HOST-DIV-610: preserve original first-depth selectors for unsupported
 legacy host-interface and debugger profiles, rejecting their bodies. Source and
 SDK macro scans and x86/x64 controls are recorded in

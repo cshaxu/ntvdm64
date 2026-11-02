@@ -36,27 +36,9 @@ Revision History:
 //
 
 #ifdef	_PNP_POWER
-
-typedef	struct _NIC_HANDLE {
-	USHORT	NicId;
-
-#ifdef  _PNP_LATER
-	ULONG	Version;
-	CSHORT	Signature;
-#endif  _PNP_LATER
-
-} NIC_HANDLE, *PNIC_HANDLE;
-
-
-typedef struct _IPX_LOCAL_TARGET {
-    union {
-        USHORT      NicId;
-    	NIC_HANDLE	NicHandle;
-    };
-    UCHAR MacAddress[6];
-} IPX_LOCAL_TARGET, *PIPX_LOCAL_TARGET;
-
+#error DIVERGENCE OPENNT-HOST-151: unsupported _PNP_POWER profile
 #else
+#line 60
 
 typedef USHORT  NIC_HANDLE;
 typedef PUSHORT PNIC_HANDLE;
@@ -67,6 +49,7 @@ typedef struct _IPX_LOCAL_TARGET {
 } IPX_LOCAL_TARGET, *PIPX_LOCAL_TARGET;
 
 #endif	_PNP_POWER
+#line 70
 
 //
 // Definition of the options on a TDI datagram. These

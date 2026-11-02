@@ -1,0 +1,64 @@
+{
+  "scope": "one first-depth arm, original bodies matched; nested source and queue entries inside excluded arms removed without deeper audit",
+  "macro_evidence": {
+    "compile_commands_checked": 2070,
+    "jobs_sha256": "623d1067dca46b9fabf571db17d6567d8f03e04047245ca9ac11fcda71c725ea",
+    "command_macro_definitions_found": 0,
+    "source_generated_sdk_case_sensitive_definitions_found": 0,
+    "scope": "src, tests, tools, generated Ninja trees and eight SDK include roots",
+    "controls": "x86/x64 normal/forced selector controls; original body matched after line-ending normalization; lowercase alloca independently accepted"
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/sim32/sim32.h",
+      "macro": "ALLOCA",
+      "original_start": 40,
+      "original_cut": 55,
+      "original_end": 74,
+      "removed_body_sha256": "61fa198fdb6caf78977787260a932eb54e6404dcbe5d65aaec00cb6391c521a1",
+      "removed_lines": 14
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/sim32/sim32.h",
+      "start": 40,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/sim32/sim32.h",
+      "start": 40,
+      "normal_pass": true,
+      "forced_rejected": true
+    }
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/sim32/sim32.h",
+      "before": "c1b31b7f476eb9b3076de940850ae0e98722abc1eb1fcdc657922a80231533ff",
+      "after": "a4573c3f55d72387cdffcb60fd5468a6f9649dc19a5b3fedab199b5d2f20aa52"
+    }
+  ],
+  "removed_inner_group_count": 1,
+  "validation": {
+    "x86_cached_build": "passed; no work",
+    "x64_cached_build": "passed; no work",
+    "guard_gate": "x86 and x64; see progress record",
+    "published_release": "all ten product images byte-identical to accepted prior release at both destinations",
+    "published_images": [
+      "run16.exe",
+      "ntsrv.exe",
+      "ntcon.exe",
+      "ntvdm.exe",
+      "ntvwm.exe",
+      "ntmon.exe",
+      "WOW32.DLL",
+      "VDMREDIR.DLL",
+      "nthook32.dll",
+      "nthook64.dll"
+    ]
+  }
+}

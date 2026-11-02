@@ -195,6 +195,8 @@ for path, macro, expected_count, divergence in (
     ('src/mvdm-host/wow32/wkglobal.c', 'API16', 8, 'MVDM-HOST-DIV-603'),
     ('src/mvdm-host/wow32/wklocal.c', 'API16', 2, 'MVDM-HOST-DIV-603'),
     ('src/mvdm-host/softpc.new/host/src/stf_conf.c', 'STUBBED', 4, 'MVDM-HOST-DIV-604'),
+    ('src/mvdm-host/sim32/sim32.h', 'ALLOCA', 1, 'MVDM-HOST-DIV-611'),
+    ('src/non-mvdm/public/internal/base/inc/isnkrnl.h', '_PNP_POWER', 1, 'OPENNT-HOST-151'),
     ('src/mvdm-host/bde/bdesym.c', 'NEED_ABSOLUTES', 1, 'MVDM-HOST-DIV-610'),
     ('src/mvdm-host/bde/bdesym.c', 'NEED_INDICES', 4, 'MVDM-HOST-DIV-610'),
     ('src/mvdm-host/fax/wowfaxui/wowfaxui.h', 'NOLOG', 1, 'MVDM-HOST-DIV-610'),
@@ -267,3 +269,9 @@ for path, expression, marker, definitions in (
             if single.returncode:
                 raise SystemExit('single compound operand rejected: ' + path)
 print('PASS original compound profile guards and individual operands')
+
+probe.write_text('#ifdef ALLOCA\n#error uppercase-only selector\n#endif\n', encoding='ascii')
+result = subprocess.run(base[:-1] + ['/Dalloca=_alloca'] + base[-1:], capture_output=True, text=True, errors='replace')
+if result.returncode:
+    raise SystemExit('lowercase alloca incorrectly rejected: ' + result.stderr)
+print('PASS lowercase alloca remains distinct from ALLOCA profile')

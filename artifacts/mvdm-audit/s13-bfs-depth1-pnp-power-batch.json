@@ -1,0 +1,64 @@
+{
+  "scope": "one first-depth arm, original bodies matched; nested source and queue entries inside excluded arms removed without deeper audit",
+  "macro_evidence": {
+    "compile_commands_checked": 2070,
+    "jobs_sha256": "623d1067dca46b9fabf571db17d6567d8f03e04047245ca9ac11fcda71c725ea",
+    "command_macro_definitions_found": 0,
+    "source_generated_sdk_case_sensitive_definitions_found": 0,
+    "scope": "src, tests, tools, generated Ninja trees and eight SDK include roots",
+    "controls": "x86/x64 normal/forced selector controls; original body matched after line-ending normalization; lowercase alloca independently accepted"
+  },
+  "records": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/isnkrnl.h",
+      "macro": "_PNP_POWER",
+      "original_start": 38,
+      "original_cut": 59,
+      "original_end": 69,
+      "removed_body_sha256": "9d42de5d2727b2be8c204583b92c37907e172778f9b9841c315c37cd942e2734",
+      "removed_lines": 20
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "path": "src/non-mvdm/public/internal/base/inc/isnkrnl.h",
+      "start": 38,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/non-mvdm/public/internal/base/inc/isnkrnl.h",
+      "start": 38,
+      "normal_pass": true,
+      "forced_rejected": true
+    }
+  ],
+  "files": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/isnkrnl.h",
+      "before": "3b839abdf095129a716c51c12799e2567cb5238ea9c965fabe88163d5cec4faf",
+      "after": "e04a83a66738498793e8b43a4eafbeee58498aec6565f7cbb94214d2c074ed42"
+    }
+  ],
+  "removed_inner_group_count": 1,
+  "validation": {
+    "x86_cached_build": "passed; no work",
+    "x64_cached_build": "passed; no work",
+    "guard_gate": "x86 and x64; see progress record",
+    "published_release": "all ten product images byte-identical to accepted prior release at both destinations",
+    "published_images": [
+      "run16.exe",
+      "ntsrv.exe",
+      "ntcon.exe",
+      "ntvdm.exe",
+      "ntvwm.exe",
+      "ntmon.exe",
+      "WOW32.DLL",
+      "VDMREDIR.DLL",
+      "nthook32.dll",
+      "nthook64.dll"
+    ]
+  }
+}

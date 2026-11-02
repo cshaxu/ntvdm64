@@ -1,5 +1,10 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-151: preserve original first-depth selectors for unsupported
+historical _PNP_POWER profile, rejecting their bodies. Source and
+SDK macro scans and x86/x64 controls are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-pnp-power-batch.json`.
+
 OPENNT-HOST-150: preserve original first-depth selectors for unsupported
 historical WX86 and DOS3 profiles, rejecting their bodies. Source and
 SDK macro scans and x86/x64 controls are recorded in

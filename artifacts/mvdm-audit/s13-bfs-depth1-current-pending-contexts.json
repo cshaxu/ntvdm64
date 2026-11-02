@@ -696,16 +696,7 @@
     },
     {
       "path": "src/mvdm-host/sim32/sim32.h",
-      "start": 40,
-      "kind": "ifdef",
-      "expression": "ALLOCA",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/sim32/sim32.h",
-      "start": 55,
+      "start": 42,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -714,7 +705,7 @@
     },
     {
       "path": "src/mvdm-host/sim32/sim32.h",
-      "start": 80,
+      "start": 69,
       "kind": "ifndef",
       "expression": "DEBUG",
       "pending_reason": "file-not-witnessed-in-product",
@@ -723,7 +714,7 @@
     },
     {
       "path": "src/mvdm-host/sim32/sim32.h",
-      "start": 82,
+      "start": 71,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -7473,16 +7464,7 @@
     },
     {
       "path": "src/non-mvdm/public/internal/base/inc/isnkrnl.h",
-      "start": 38,
-      "kind": "ifdef",
-      "expression": "_PNP_POWER",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/non-mvdm/public/internal/base/inc/isnkrnl.h",
-      "start": 59,
+      "start": 40,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -8743,7 +8725,7 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 802
+      "count": 800
     },
     {
       "reason": "file-not-witnessed-in-product",

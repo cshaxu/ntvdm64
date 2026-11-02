@@ -38,21 +38,9 @@ USHORT Xceive(IN USHORT, IN USHORT);
 #define RECEIVEVDM(pvp) 	Sim32SendSim16(pvp)
 
 #ifdef	ALLOCA
-#define GETPTR(vp,cb,p) 	((p=alloca(cb))?Sim32GetVDMMemory(vp, (USHORT)(cb), p):FALSE)
-#define GETARGPTR(vp,cb,p)	if (p=alloca(cb)) { Sim32GetVDMMemory(vp+OFFSETOF(VDMFRAME,bArgs), (USHORT)(cb), p)
-#ifdef	WIN_16
-#define EQNULL
-#define GETPSZPTR(vp,pcb,p)	if (vp) if (p=alloca(*pcb=128)) Sim32GetVDMMemory(vp, (USHORT)*pcb, p); else goto Error
-#define FREEPSZPTR(p)
+#error DIVERGENCE MVDM-HOST-DIV-611: unsupported ALLOCA profile
 #else
-#define EQNULL	= NULL
-#define GETPSZPTR(vp,pcb,p)	if (vp) if (!(p=Sim32GetVDMPSZPointer(vp))) goto Error
-#define FREEPSZPTR(p)		if (p) Sim32FreeVDMPointer(p)
-#endif
-#define FLUSHPTR(vp,cb,p)	Sim32SetVDMMemory(vp, (USHORT)(cb), p)
-#define FREEPTR(p)
-#define FREEARGPTR(p)		;}
-#else
+#line 56
 #define EQNULL	= NULL
 #define GETPTR(vp,cb,p) 	((p=malloc(cb))?Sim32GetVDMMemory(vp, (USHORT)(cb), p):FALSE)
 #define GETARGPTR(vp,cb,p)	if (p=malloc(cb)) { Sim32GetVDMMemory(vp+OFFSETOF(VDMFRAME,bArgs), (USHORT)(cb), p)
@@ -72,6 +60,7 @@ USHORT Xceive(IN USHORT, IN USHORT);
 #define FREEARGPTR(p)		free(p); p=NULL;}
 #endif
 #endif
+#line 75
 
 #define GETOPTPTR(vp,cb,p)	if (vp) if (p=malloc(cb)) Sim32GetVDMMemory(vp, (USHORT)(cb), p); else goto Error
 #define GETVDMPTR(vp,cb,p)	if (p=malloc(cb)) Sim32GetVDMMemory(vp, (USHORT)(cb), p); else goto Error

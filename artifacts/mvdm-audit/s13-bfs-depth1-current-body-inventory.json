@@ -4939,7 +4939,7 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "c1b31b7f476eb9b3076de940850ae0e98722abc1eb1fcdc657922a80231533ff"
+      "source_sha256": "a4573c3f55d72387cdffcb60fd5468a6f9649dc19a5b3fedab199b5d2f20aa52"
     },
     {
       "path": "src/mvdm-host/sim32/sim32.h",
@@ -4952,72 +4952,72 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "c1b31b7f476eb9b3076de940850ae0e98722abc1eb1fcdc657922a80231533ff"
+      "source_sha256": "a4573c3f55d72387cdffcb60fd5468a6f9649dc19a5b3fedab199b5d2f20aa52"
     },
     {
       "path": "src/mvdm-host/sim32/sim32.h",
       "start": 40,
-      "cut": 55,
-      "group_end": 74,
+      "cut": 42,
+      "group_end": 62,
       "kind": "ifdef",
       "expression": "ALLOCA",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 14,
-      "source_sha256": "c1b31b7f476eb9b3076de940850ae0e98722abc1eb1fcdc657922a80231533ff"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "a4573c3f55d72387cdffcb60fd5468a6f9649dc19a5b3fedab199b5d2f20aa52"
     },
     {
       "path": "src/mvdm-host/sim32/sim32.h",
-      "start": 55,
-      "cut": 74,
-      "group_end": 74,
+      "start": 42,
+      "cut": 62,
+      "group_end": 62,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
-      "body_lines": 18,
-      "source_sha256": "c1b31b7f476eb9b3076de940850ae0e98722abc1eb1fcdc657922a80231533ff"
+      "body_lines": 19,
+      "source_sha256": "a4573c3f55d72387cdffcb60fd5468a6f9649dc19a5b3fedab199b5d2f20aa52"
     },
     {
       "path": "src/mvdm-host/sim32/sim32.h",
-      "start": 80,
-      "cut": 82,
-      "group_end": 84,
+      "start": 69,
+      "cut": 71,
+      "group_end": 73,
       "kind": "ifndef",
       "expression": "DEBUG",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "c1b31b7f476eb9b3076de940850ae0e98722abc1eb1fcdc657922a80231533ff"
+      "source_sha256": "a4573c3f55d72387cdffcb60fd5468a6f9649dc19a5b3fedab199b5d2f20aa52"
     },
     {
       "path": "src/mvdm-host/sim32/sim32.h",
-      "start": 82,
-      "cut": 84,
-      "group_end": 84,
+      "start": 71,
+      "cut": 73,
+      "group_end": 73,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "c1b31b7f476eb9b3076de940850ae0e98722abc1eb1fcdc657922a80231533ff"
+      "source_sha256": "a4573c3f55d72387cdffcb60fd5468a6f9649dc19a5b3fedab199b5d2f20aa52"
     },
     {
       "path": "src/mvdm-host/sim32/sim32.h",
-      "start": 90,
-      "cut": 92,
-      "group_end": 92,
+      "start": 79,
+      "cut": 81,
+      "group_end": 81,
       "kind": "ifdef",
       "expression": "SIM_32",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "c1b31b7f476eb9b3076de940850ae0e98722abc1eb1fcdc657922a80231533ff"
+      "source_sha256": "a4573c3f55d72387cdffcb60fd5468a6f9649dc19a5b3fedab199b5d2f20aa52"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
@@ -60740,28 +60740,28 @@
     {
       "path": "src/non-mvdm/public/internal/base/inc/isnkrnl.h",
       "start": 38,
-      "cut": 59,
-      "group_end": 69,
+      "cut": 40,
+      "group_end": 51,
       "kind": "ifdef",
       "expression": "_PNP_POWER",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 20,
-      "source_sha256": "3b839abdf095129a716c51c12799e2567cb5238ea9c965fabe88163d5cec4faf"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "e04a83a66738498793e8b43a4eafbeee58498aec6565f7cbb94214d2c074ed42"
     },
     {
       "path": "src/non-mvdm/public/internal/base/inc/isnkrnl.h",
-      "start": 59,
-      "cut": 69,
-      "group_end": 69,
+      "start": 40,
+      "cut": 51,
+      "group_end": 51,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
-      "body_lines": 9,
-      "source_sha256": "3b839abdf095129a716c51c12799e2567cb5238ea9c965fabe88163d5cec4faf"
+      "body_lines": 10,
+      "source_sha256": "e04a83a66738498793e8b43a4eafbeee58498aec6565f7cbb94214d2c074ed42"
     },
     {
       "path": "src/non-mvdm/public/internal/base/inc/nbtioctl.h",
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 968,
-    "newly-excluded": 612,
+    "pending": 966,
+    "newly-excluded": 614,
     "already-excluded": 1603,
     "retained-observed": 1863,
     "retained-original-assertion": 4
   },
   "pending_by_guard": {
-    "not-guard": 853,
+    "not-guard": 851,
     "guard": 115
   }
 }
