@@ -224,6 +224,18 @@ for name, condition, defines in (
         raise SystemExit('original alternate profile boundary failed: ' + name)
 print('PASS original host header alternate profile boundaries')
 
+for name in ('cpu_vid.h', 'gmi.h'):
+    header = (repo / 'src/mvdm-host/softpc.new/base/inc' / name).read_text(encoding='latin1').splitlines()
+    errors = [line for line in header if 'unsupported generic video callback profile' in line]
+    if len(errors) != 1:
+        raise SystemExit('missing rejected generic callback carrier in ' + name)
+    probe.write_text('#if defined(CPU_40_STYLE) && defined(C_VID)\n#else\n' + errors[0] + '\n#endif\n', encoding='ascii')
+    for defines, success in ((['/DCPU_40_STYLE', '/DC_VID'], True), (['/DCPU_40_STYLE'], False), (['/DC_VID'], False), ([], False)):
+        result = subprocess.run(base[:-1] + defines + base[-1:], capture_output=True, text=True, errors='replace')
+        if (result.returncode == 0) != success:
+            raise SystemExit('generic callback profile boundary failed: ' + name)
+print('PASS local CPU40/C-VID callback carrier boundaries')
+
 nt_bop = (repo / 'src/mvdm-host/softpc.new/host/src/nt_bop.c').read_text(encoding='latin1').splitlines()
 marker = 'unsupported hardware-host FPU save path'
 positions = [i for i, line in enumerate(nt_bop) if marker in line]

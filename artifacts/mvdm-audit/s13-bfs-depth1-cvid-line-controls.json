@@ -1,0 +1,29 @@
+{
+  "scope": "diagnostic #line controls for both local carrier alternatives",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "architecture": "x86",
+      "line": 90,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "architecture": "x64",
+      "line": 90,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "architecture": "x86",
+      "line": 26,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "architecture": "x64",
+      "line": 26,
+      "exit": 2
+    }
+  ]
+}

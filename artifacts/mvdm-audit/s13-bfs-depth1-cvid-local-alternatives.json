@@ -1,0 +1,93 @@
+{
+  "scope": "two local CCPU40/C-VID typed carrier alternatives; fixed original declarations retained as recorded evidence, unsupported generic bodies excluded",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "group": 87,
+      "else": 93,
+      "end": 97,
+      "original_line_after": 90,
+      "removed_lines": 3,
+      "removed_sha256": "5917d406117db157c6bb9a3c8c3f2819590e5cb940d36d851d033d9fcd62bf66",
+      "original_sha256": "f7b5efebebd8bf8c6ad5c56adb74c8217490b2b92f113b1e850401fd5f029500",
+      "before_sha256": "1b99f6cda69b874e8e9ac73b2da493cdfde4742fb1f0eb67c647ed82cd374e18",
+      "after_sha256": "fa6208cee585d5d9151b05892858cb457a07fe8f49e3df7090b03d6bac834a51",
+      "actual_contexts": 24,
+      "include_files_scanned": 306,
+      "original_structure": "original carrier declarations are unconditional; selected CPU40/C-VID conditional is local DIV-088/089 adaptation"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "group": 19,
+      "else": 28,
+      "end": 36,
+      "original_line_after": 26,
+      "removed_lines": 7,
+      "removed_sha256": "afe891b3ff4db55440e388c5f2562071e6f03664b091f56253dbca855c3fd16e",
+      "original_sha256": "828d5e4399c5cc396367373e96c4d6785ac0026f50467176f30a977afe01919a",
+      "before_sha256": "36e2874c485836e78fec5df42832b5353d0c15cc6aee1ef38a2ad2b33dad490b",
+      "after_sha256": "59179457a9156c69b73a89d9648b6be0c251445cd3878346ea48431a43271cf0",
+      "actual_contexts": 82,
+      "include_files_scanned": 489,
+      "original_structure": "original carrier declarations are unconditional; selected CPU40/C-VID conditional is local DIV-088/089 adaptation"
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "defines": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "exit": 0
+    },
+    {
+      "arch": "x86",
+      "defines": [
+        "/DCPU_40_STYLE"
+      ],
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "defines": [
+        "/DC_VID"
+      ],
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "defines": [],
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "defines": [
+        "/DCPU_40_STYLE",
+        "/DC_VID"
+      ],
+      "exit": 0
+    },
+    {
+      "arch": "x64",
+      "defines": [
+        "/DCPU_40_STYLE"
+      ],
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "defines": [
+        "/DC_VID"
+      ],
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "defines": [],
+      "exit": 2
+    }
+  ],
+  "resource_contexts_checked": 6,
+  "standalone_tests": "video7 and planar painter fixtures derive production CCPU40/C_VID flags"
+}

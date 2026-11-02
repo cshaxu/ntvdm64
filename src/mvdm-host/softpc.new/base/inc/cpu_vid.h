@@ -91,10 +91,9 @@ typedef struct
 	IU32 (*b_read) IPT1(IU32, eaOff);
 	IU32 (*w_read) IPT1(IU32, eaOff);
 #else
-#line 98
-	IU32 (*b_read) IPT1(ULONG, offset);
-	IU32 (*w_read) IPT1(ULONG, offset);
+#error DIVERGENCE MVDM-HOST-DIV-618: unsupported generic video callback profile
 #endif
+#line 90
 #ifndef	NO_STRING_OPERATIONS
 #if defined(CPU_40_STYLE) && defined(C_VID)
 #line 95

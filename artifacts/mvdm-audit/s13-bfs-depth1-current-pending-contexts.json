@@ -2954,15 +2954,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
-      "start": 93,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 24
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/dasm.h",
       "start": 21,
       "kind": "ifdef",
@@ -3006,15 +2997,6 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
-      "start": 28,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 82
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/gore.h",
@@ -8086,7 +8068,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 44
+      "count": 42
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",

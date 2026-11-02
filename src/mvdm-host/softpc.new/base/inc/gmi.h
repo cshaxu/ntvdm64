@@ -26,14 +26,9 @@ typedef struct
 	VOID	(*w_move)IPT4(IU32, eaOff, IHPE, fromOff, IU32, count,
 		 IBOOL, srcInRAM);
 #else
-	VOID	(*b_write)();
-	VOID	(*w_write)();
-	VOID	(*b_fill)();
-	VOID	(*w_fill)();
-	VOID	(*b_move)IPT4(UTINY *, laddr, UTINY *, haddr, UTINY *, src,
-		 UTINY, src_type);
-	VOID	(*w_move)();
+#error DIVERGENCE MVDM-HOST-DIV-618: unsupported generic video callback profile
 #endif
+#line 26
 } MEM_HANDLERS;
 
 #ifndef UNIVERSAL	/* These are in host_cpu.h during a UNIVERSAL build. */
