@@ -308,33 +308,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/standard.h",
-      "start": 15,
-      "kind": "ifndef",
-      "expression": "FILE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/standard.h",
-      "start": 23,
-      "kind": "ifndef",
-      "expression": "TRUE",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/tcpip.h",
-      "start": 151,
-      "kind": "ifndef",
-      "expression": "PROD",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/softpc.new/host/inc/host_def.h",
       "start": 240,
       "kind": "ifdef",
@@ -389,37 +362,10 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_term.c",
-      "start": 36,
-      "kind": "ifdef",
-      "expression": "X86GFX",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
-      "start": 1,
-      "kind": "ifndef",
-      "expression": "MONITOR",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
       "path": "src/mvdm-host/vdmutils/win/win.c",
       "start": 27,
       "kind": "else",
       "expression": "",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/wow32/debug.c",
-      "start": 66,
-      "kind": "ifdef",
-      "expression": "DEBUG_OR_WOWPROFILE",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
@@ -607,7 +553,7 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 41
+      "count": 35
     },
     {
       "reason": "file-not-witnessed-in-product",

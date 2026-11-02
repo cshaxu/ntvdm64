@@ -12,7 +12,7 @@
         1237
       ],
       "missing_signature_occurrences": 3,
-      "disposition": "not yet reconciled; original anchors and retained selected bodies require review"
+      "disposition": "Original #ifndef i386 at lines 1167 and 1201 are already restored, with added else preserving CPU40+i386; original line 1237 matches existing #ifndef at current line 1441. Original line 859 remains a genuine outer-expression mismatch: current !i386 || CPU40 additionally retains CPU40+i386 DPMI fault handling; restoration must preserve both profiles without duplicating or silently dropping it."
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",

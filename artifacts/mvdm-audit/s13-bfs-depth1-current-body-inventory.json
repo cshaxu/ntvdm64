@@ -27763,8 +27763,8 @@
       "group_end": 17,
       "kind": "ifndef",
       "expression": "FILE",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
       "source_sha256": "8cece7a06f3a9493bcf78474d9b9c9f7c9ab957758ccf31a3e7a14a2ebd5fe2c"
@@ -27776,8 +27776,8 @@
       "group_end": 26,
       "kind": "ifndef",
       "expression": "TRUE",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
       "source_sha256": "8cece7a06f3a9493bcf78474d9b9c9f7c9ab957758ccf31a3e7a14a2ebd5fe2c"
@@ -27802,8 +27802,8 @@
       "group_end": 153,
       "kind": "ifndef",
       "expression": "PROD",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
       "source_sha256": "277ec1e518be76b2d08e6d5133d1abdbe583c7cf53a74b1e932a4e1510c8a2c1"
@@ -48576,8 +48576,8 @@
       "group_end": 39,
       "kind": "ifdef",
       "expression": "X86GFX",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
       "source_sha256": "3036fcbdcdb5fc3cb922c263773181fefac9de520c0730af02b5282ac581012c"
@@ -49863,8 +49863,8 @@
       "group_end": 16,
       "kind": "ifndef",
       "expression": "MONITOR",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 14,
       "source_sha256": "03ceaa2a570d371bf4eb87320f4700b2572dc0800394a3c4fad1dce84b250d67"
@@ -54283,8 +54283,8 @@
       "group_end": 2063,
       "kind": "ifdef",
       "expression": "DEBUG_OR_WOWPROFILE",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
+      "status": "unselected-file",
+      "pending_reason": null,
       "guard_only": false,
       "body_lines": 1996,
       "source_sha256": "cc9321735d095d34389933c1fa1cf3a0d01b0a3f74e4917c6b79ffc7e8d442d1"
@@ -65901,15 +65901,15 @@
   ],
   "errors": [],
   "status_counts": {
-    "unselected-file": 760,
+    "unselected-file": 766,
     "newly-excluded": 663,
     "already-excluded": 1699,
-    "pending": 64,
+    "pending": 58,
     "retained-observed": 1874,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
-    "not-guard": 62,
+    "not-guard": 56,
     "guard": 2
   }
 }

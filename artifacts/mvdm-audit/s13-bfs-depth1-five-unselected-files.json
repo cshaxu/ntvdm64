@@ -1,0 +1,57 @@
+{
+  "scope": "five entire files without supported product or directly named test/build contexts; no source changes or macro truth inference",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/standard.h",
+      "sha256": "8cece7a06f3a9493bcf78474d9b9c9f7c9ab957758ccf31a3e7a14a2ebd5fe2c",
+      "original_sha256": "576b4d5683e7801ecfa16643436a993e97d8855b4473a79b59700dbc28996335",
+      "no_product_context": true,
+      "case_insensitive_test_build_reference_count": 0,
+      "reclassified_arms": [
+        15,
+        23
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/tcpip.h",
+      "sha256": "277ec1e518be76b2d08e6d5133d1abdbe583c7cf53a74b1e932a4e1510c8a2c1",
+      "original_sha256": "240f9fbcc78213f7e3dc458013a096a4c2f0768e05d8f34808e5610a7e38bfb1",
+      "no_product_context": true,
+      "case_insensitive_test_build_reference_count": 0,
+      "reclassified_arms": [
+        151
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_term.c",
+      "sha256": "3036fcbdcdb5fc3cb922c263773181fefac9de520c0730af02b5282ac581012c",
+      "original_sha256": "ad5c8c0d28944ea163df5738ed03ca7e19415cca02884083ed69fa98667149be",
+      "no_product_context": true,
+      "case_insensitive_test_build_reference_count": 0,
+      "reclassified_arms": [
+        36
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/c_regs.c",
+      "sha256": "03ceaa2a570d371bf4eb87320f4700b2572dc0800394a3c4fad1dce84b250d67",
+      "original_sha256": "9ab5185cd9d8a3ca163bf4654321c31c73adcf3127bc574a3a4574cc1366de95",
+      "no_product_context": true,
+      "case_insensitive_test_build_reference_count": 0,
+      "reclassified_arms": [
+        1
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/debug.c",
+      "sha256": "cc9321735d095d34389933c1fa1cf3a0d01b0a3f74e4917c6b79ffc7e8d442d1",
+      "original_sha256": "0b78331bee5bd87ca5f786d162f345a46a04c255fdea1bc6733fb2f171ad02a2",
+      "no_product_context": true,
+      "case_insensitive_test_build_reference_count": 0,
+      "reclassified_arms": [
+        66
+      ]
+    }
+  ],
+  "boundary": "Does not assert possible future callers, and does not delete or replace any file content."
+}
