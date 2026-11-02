@@ -1,0 +1,93 @@
+{
+  "scope": "seven MVDM first-depth original signature mismatch families; no nested-condition audit",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+      "working_sha256": "72c97f3f54207b29caf41135a6627508b37fab7c2b3c74a08c24bec55225a9e0",
+      "original_lines": [
+        859,
+        1167,
+        1201,
+        1237
+      ],
+      "missing_signature_occurrences": 3,
+      "disposition": "not yet reconciled; original anchors and retained selected bodies require review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "original_sha256": "1aa3cbd915eb31fa37d4a0b7e0310f77612d39c45d3f552b78ca68b3ce9a3439",
+      "working_sha256": "12854099337591985a7e12fc624ec839088f5db9d8d4ac9f3695a98e09f12de7",
+      "original_lines": [
+        2641,
+        2670,
+        2950,
+        2996,
+        3310,
+        4171,
+        4280,
+        5227,
+        5250,
+        5351
+      ],
+      "missing_signature_occurrences": 7,
+      "disposition": "not yet reconciled; original anchors and retained selected bodies require review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "original_sha256": "e4f39908ff9534adde52e46def732a93790ac48f2bb481590622c537c2f3b205",
+      "working_sha256": "8a224f5f78359a40ae02a66743308c7488a069b83814514e021ceeb6b7ac1a4e",
+      "original_lines": [
+        308,
+        413
+      ],
+      "missing_signature_occurrences": 1,
+      "disposition": "outer condition present with added else for DIV-477 CPU40 adaptation; signature-only false positive"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "working_sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea",
+      "original_lines": [
+        54,
+        102
+      ],
+      "missing_signature_occurrences": 1,
+      "disposition": "outer condition present with added else for approved CPU40 declaration; signature-only false positive"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+      "working_sha256": "483641c443a5df4213bdc270cb9ea80232e1b336c2fc218630d1ce8a94182550",
+      "original_lines": [
+        282
+      ],
+      "missing_signature_occurrences": 1,
+      "disposition": "not yet reconciled; original anchors and retained selected bodies require review"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "working_sha256": "471947b7454045c18a5dcd7ece22efa5c718c5212d9ea6a30fdec2bf9421902c",
+      "original_lines": [
+        1579,
+        2042
+      ],
+      "missing_signature_occurrences": 2,
+      "disposition": "original group expression was extended for standalone SAS video; retaining exact standalone semantics requires separate owner-context reconciliation"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "original_sha256": "1dfe9900e6da3bf0e2984c3df42bdd155b177cfe7707bb24e1324037147d292a",
+      "working_sha256": "f728f363f92574e309562af9104aad1f1a9777a193c8c8855f9456884021d7ce",
+      "original_lines": [
+        1870,
+        1879,
+        1910
+      ],
+      "missing_signature_occurrences": 3,
+      "disposition": "three original #if FASTBOPPING groups currently expressed as elif under CPU40; outer structure requires restoration while preserving selected CPU40 behavior"
+    }
+  ],
+  "limitations": "Signature mismatch counts are leads, not counts of proven missing structures. All other original mirrors still require independent reconciliation."
+}
