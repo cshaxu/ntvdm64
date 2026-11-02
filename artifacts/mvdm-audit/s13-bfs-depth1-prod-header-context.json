@@ -1,0 +1,111 @@
+{
+  "scope": "seven existing non-PROD header guards in supported PROD include contexts; PROD is not a global invariant",
+  "contexts": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "contexts": 160,
+      "all_define_PROD": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dsktrace.h",
+      "contexts": 4,
+      "all_define_PROD": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "contexts": 18,
+      "all_define_PROD": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+      "contexts": 24,
+      "all_define_PROD": true
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fulsc.h",
+      "contexts": 20,
+      "all_define_PROD": true
+    }
+  ],
+  "resource_contexts_checked": 6,
+  "controls": [
+    {
+      "arch": "x86",
+      "prod_defined": true,
+      "returncode": 0
+    },
+    {
+      "arch": "x86",
+      "prod_defined": false,
+      "returncode": 2
+    },
+    {
+      "arch": "x64",
+      "prod_defined": true,
+      "returncode": 0
+    },
+    {
+      "arch": "x64",
+      "prod_defined": false,
+      "returncode": 2
+    }
+  ],
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "current_line": 27,
+      "original_line": 27,
+      "historical_baseline": "3bd343b30",
+      "historical_body_sha256": "5b450f87661f399c7d4ee0a580c45450dbc7c5f5d728ff6f22506b6aa05ab6a2",
+      "original_sha256": "59246b3c18bf6dfcd79b4e61bf961bc0382800deb4d968c198ceb415c284f21b"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dsktrace.h",
+      "current_line": 87,
+      "original_line": 87,
+      "historical_baseline": "3bd343b30",
+      "historical_body_sha256": "be324fe67658766d79be9bcc05d3379428bcacb7edc00f91c494ba202e475fb4",
+      "original_sha256": "f5e99686a7c84d8a1b1b25db57c35d459c88c1b6dec395c332f027647474d082"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dsktrace.h",
+      "current_line": 98,
+      "original_line": 109,
+      "historical_baseline": "3bd343b30",
+      "historical_body_sha256": "8494095f12f3fe52712113a51389be6f378339435d7ad01d34b987937d11876b",
+      "original_sha256": "f5e99686a7c84d8a1b1b25db57c35d459c88c1b6dec395c332f027647474d082"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
+      "current_line": 46,
+      "original_line": 48,
+      "historical_baseline": "3bd343b30",
+      "historical_body_sha256": "fb1cb9a15faf9c9520e54ac937f692217389bff296f62d0fb82ce4c6fe271ba6",
+      "original_sha256": "d92cc144f50e60de5042f76c67574a3fdc22b0ad38411d92d1459d4a02b17789"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+      "current_line": 52,
+      "original_line": 52,
+      "historical_baseline": "3bd343b30",
+      "historical_body_sha256": "8e168788c8e06eaa55763990bc4ef62d3207ad9e155733aa97c5dcb94097d881",
+      "original_sha256": "9488860e836e9b4fb17ec69558bc65ce1a8afb99286f62e6092759c959569fc1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fulsc.h",
+      "current_line": 77,
+      "original_line": 77,
+      "historical_baseline": "3bd343b30",
+      "historical_body_sha256": "bef5b1aafe83a4add92ae4cb349e8738e5b53d5182fc1538923ae50d07e17a87",
+      "original_sha256": "733fe8aaef56e9febc5e2f35ac03057918df2bf75173779870e2b07dc673e1d0"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fulsc.h",
+      "current_line": 129,
+      "original_line": 149,
+      "historical_baseline": "3bd343b30",
+      "historical_body_sha256": "bf52adb331544a5b4a9ab1ff5e4af74c8a75fa4257bcf1046ed5ae49cf8bccb5",
+      "original_sha256": "733fe8aaef56e9febc5e2f35ac03057918df2bf75173779870e2b07dc673e1d0"
+    }
+  ]
+}
