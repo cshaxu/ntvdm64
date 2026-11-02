@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-623: restore the original `#ifndef X86GFX` outer selector in
+`host/src/nt_graph.c`, retain the existing CCPU software-display adaptation
+inside it, and restore the following original diagnostic line. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-ntgraph-outer-restoration.json`.
+
 MVDM-HOST-DIV-622: restore the original first-depth parity-table selector in
 `base/support/xt.c` and the original constant-false selector in
 `host/src/copy_fnc.c`. Preserve the selected DIV-155 and DIV-064 adaptations,

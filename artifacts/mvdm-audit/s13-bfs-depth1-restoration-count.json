@@ -33,9 +33,14 @@
       "file": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
       "original_condition": "#if 0",
       "evidence": "s13-bfs-depth1-two-original-outers.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "original_condition": "#ifndef X86GFX",
+      "evidence": "s13-bfs-depth1-ntgraph-outer-restoration.json"
     }
   ],
-  "derived_total": 47,
-  "derived_current_bfs_total": 14,
+  "derived_total": 48,
+  "derived_current_bfs_total": 15,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

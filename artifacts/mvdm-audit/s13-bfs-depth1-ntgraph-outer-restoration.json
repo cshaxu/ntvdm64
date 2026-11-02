@@ -1,0 +1,23 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+  "before_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0",
+  "candidate_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344",
+  "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+  "original_group_line": 760,
+  "original_group_end": 763,
+  "controls": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "selected_preprocessing_equal_ignoring_blank_lines": true,
+      "sha256": "d362ad1f37cd693f8bb66b9adfc8c5cdcd396606cc4ac8262713bc624cf69de3",
+      "original_line_765_diagnostic_verified": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "selected_preprocessing_equal_ignoring_blank_lines": true,
+      "sha256": "d362ad1f37cd693f8bb66b9adfc8c5cdcd396606cc4ac8262713bc624cf69de3",
+      "original_line_765_diagnostic_verified": true
+    }
+  ],
+  "limitations": "The original signature inventory leaves 23 unmatched first-depth occurrences across 12 records; these are leads rather than proof of missing structure. The separate non-CCPU DPMI negative-object fixture remains failed."
+}

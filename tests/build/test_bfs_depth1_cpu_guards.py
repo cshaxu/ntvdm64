@@ -387,3 +387,27 @@ line_matches = [i for i, line in enumerate(lines) if line.strip() == '#line 340'
 if len(line_matches) != 1 or lines[line_matches[0]-1].strip() != '#endif /* CPU_30_STYLE */':
     raise SystemExit('xt.c original post-CPU30 logical line mapping changed')
 print('PASS xt.c original outer selector, existing adaptation and line mappings')
+
+lines = (repo / 'src/mvdm-host/softpc.new/host/src/nt_graph.c').read_text(
+    encoding='latin1').split('\n')
+outer = '#ifndef X86GFX'
+inner = '#if !defined(X86GFX) && !defined(CCPU)'
+matches = [i for i, line in enumerate(lines) if line.strip() == inner]
+if len(matches) != 1:
+    raise SystemExit('missing unique nt_graph CCPU display selector')
+i = matches[0]
+expected = [outer, inner,
+            '#error DIVERGENCE MVDM-HOST-DIV-580: non-CCPU non-X86GFX display branch is not selected',
+            '#endif', '#endif /* !X86GFX */', '#line 764']
+if [line.strip() for line in lines[i-1:i+5]] != expected:
+    raise SystemExit('nt_graph original selector or existing adaptation changed')
+probe.write_text('\n'.join(expected + ['int after_outer = __LINE__;']) + '\n', encoding='ascii')
+for defines in (['/DCCPU'], ['/DX86GFX']):
+    selected = subprocess.run(base + defines + [str(probe)], capture_output=True,
+                              text=True, errors='replace')
+    if selected.returncode or not re.search(r'int\s+after_outer\s*=\s*764\s*;', selected.stdout):
+        raise SystemExit('nt_graph original selector or line mapping failed: ' + selected.stderr)
+excluded = subprocess.run(base + [str(probe)], capture_output=True, text=True, errors='replace')
+if not excluded.returncode or 'MVDM-HOST-DIV-580' not in excluded.stdout + excluded.stderr:
+    raise SystemExit('nt_graph existing non-CCPU adaptation no longer rejects')
+print('PASS nt_graph original outer selector, existing adaptation and line mapping')

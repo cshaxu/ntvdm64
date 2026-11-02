@@ -688,10 +688,12 @@ void nt_clear_screen(void)
 
     if(sc.ScreenBufHandle) return;
 
+#ifndef X86GFX
 #if !defined(X86GFX) && !defined(CCPU)
 #error DIVERGENCE MVDM-HOST-DIV-580: non-CCPU non-X86GFX display branch is not selected
 #endif
-#line 781
+#endif /* !X86GFX */
+#line 764
 
     /*::::::::::::::::::::::::::::: Get information on current screen size */
 

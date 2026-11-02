@@ -46461,7 +46461,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46474,7 +46474,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46487,7 +46487,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46500,7 +46500,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46513,7 +46513,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46526,7 +46526,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46539,7 +46539,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46552,7 +46552,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46565,7 +46565,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46578,7 +46578,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46591,7 +46591,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46604,7 +46604,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46617,7 +46617,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46630,7 +46630,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 56,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46643,7 +46643,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46656,7 +46656,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46669,7 +46669,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46682,7 +46682,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46695,7 +46695,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46708,7 +46708,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46721,7 +46721,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
@@ -46734,345 +46734,345 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 691,
-      "cut": 693,
-      "group_end": 693,
-      "kind": "if",
-      "expression": "!defined(X86GFX) && !defined(CCPU)",
-      "status": "newly-excluded",
-      "pending_reason": null,
-      "guard_only": true,
-      "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 713,
-      "cut": 715,
-      "group_end": 715,
+      "start": 715,
+      "cut": 717,
+      "group_end": 717,
       "kind": "ifdef",
       "expression": "MONITOR",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 740,
-      "cut": 742,
-      "group_end": 742,
+      "start": 742,
+      "cut": 744,
+      "group_end": 744,
       "kind": "if",
       "expression": "defined(CCPU) && defined(X86GFX)",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 745,
-      "cut": 762,
-      "group_end": 762,
+      "start": 747,
+      "cut": 764,
+      "group_end": 764,
       "kind": "if",
       "expression": "defined(CCPU) && !defined(X86GFX)",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 16,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 766,
-      "cut": 768,
-      "group_end": 768,
+      "start": 768,
+      "cut": 770,
+      "group_end": 770,
       "kind": "ifdef",
       "expression": "X86GFX",
       "status": "pending",
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 797,
-      "cut": 807,
-      "group_end": 807,
+      "start": 799,
+      "cut": 809,
+      "group_end": 809,
       "kind": "if",
       "expression": "defined(CCPU) && !defined(X86GFX)",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 9,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 810,
-      "cut": 812,
-      "group_end": 812,
+      "start": 812,
+      "cut": 814,
+      "group_end": 814,
       "kind": "if",
       "expression": "!defined(CCPU) || defined(X86GFX)",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 826,
-      "cut": 887,
-      "group_end": 887,
+      "start": 828,
+      "cut": 889,
+      "group_end": 889,
       "kind": "ifdef",
       "expression": "EGG",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 60,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 896,
-      "cut": 898,
-      "group_end": 898,
+      "start": 898,
+      "cut": 900,
+      "group_end": 900,
       "kind": "ifdef",
       "expression": "X86GFX",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 933,
-      "cut": 940,
-      "group_end": 940,
+      "start": 935,
+      "cut": 942,
+      "group_end": 942,
       "kind": "ifdef",
       "expression": "V7VGA",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 967,
-      "cut": 975,
-      "group_end": 975,
+      "start": 969,
+      "cut": 977,
+      "group_end": 977,
       "kind": "ifdef",
       "expression": "BIGWIN",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 7,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 1040,
-      "cut": 1048,
-      "group_end": 1048,
+      "start": 1042,
+      "cut": 1050,
+      "group_end": 1050,
       "kind": "ifdef",
       "expression": "BIGWIN",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 7,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 1302,
-      "cut": 1309,
-      "group_end": 1309,
+      "start": 1304,
+      "cut": 1311,
+      "group_end": 1311,
       "kind": "ifdef",
       "expression": "V7VGA",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 1313,
-      "cut": 1315,
-      "group_end": 1315,
+      "start": 1315,
+      "cut": 1317,
+      "group_end": 1317,
       "kind": "ifdef",
       "expression": "MONITOR",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 1366,
-      "cut": 1368,
-      "group_end": 1372,
+      "start": 1368,
+      "cut": 1370,
+      "group_end": 1374,
       "kind": "ifdef",
       "expression": "X86GFX",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 1368,
-      "cut": 1372,
-      "group_end": 1372,
+      "start": 1370,
+      "cut": 1374,
+      "group_end": 1374,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 3,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 1376,
-      "cut": 1436,
-      "group_end": 1436,
+      "start": 1378,
+      "cut": 1438,
+      "group_end": 1438,
       "kind": "ifdef",
       "expression": "BIGWIN",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 59,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 1476,
-      "cut": 1478,
-      "group_end": 1478,
+      "start": 1478,
+      "cut": 1480,
+      "group_end": 1480,
       "kind": "ifdef",
       "expression": "MONITOR",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 1563,
-      "cut": 1568,
-      "group_end": 1568,
+      "start": 1565,
+      "cut": 1570,
+      "group_end": 1570,
       "kind": "ifdef",
       "expression": "V7VGA",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 4,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 1895,
-      "cut": 1897,
-      "group_end": 1897,
+      "start": 1897,
+      "cut": 1899,
+      "group_end": 1899,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 1915,
-      "cut": 1917,
-      "group_end": 1917,
+      "start": 1917,
+      "cut": 1919,
+      "group_end": 1919,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 1969,
-      "cut": 1971,
-      "group_end": 1971,
+      "start": 1971,
+      "cut": 1973,
+      "group_end": 1973,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 1993,
-      "cut": 1995,
-      "group_end": 1995,
+      "start": 1995,
+      "cut": 1997,
+      "group_end": 1997,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 2068,
-      "cut": 2070,
-      "group_end": 2070,
+      "start": 2070,
+      "cut": 2072,
+      "group_end": 2072,
       "kind": "ifdef",
       "expression": "X86GFX",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 2283,
-      "cut": 2285,
-      "group_end": 2285,
+      "start": 2285,
+      "cut": 2287,
+      "group_end": 2287,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
-      "start": 2291,
-      "cut": 2293,
-      "group_end": 2293,
+      "start": 2293,
+      "cut": 2295,
+      "group_end": 2295,
       "kind": "ifndef",
       "expression": "PROD",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0"
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "start": 691,
+      "cut": 695,
+      "group_end": 695,
+      "kind": "ifndef",
+      "expression": "X86GFX",
+      "status": "retained-observed",
+      "pending_reason": null,
+      "guard_only": false,
+      "body_lines": 3,
+      "source_sha256": "c1c1dca0163b96893672028f7a0fecb185b9cba39b7c497831f0ca638e59e344"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
@@ -65655,9 +65655,9 @@
   "errors": [],
   "status_counts": {
     "pending": 886,
-    "newly-excluded": 630,
+    "newly-excluded": 629,
     "already-excluded": 1660,
-    "retained-observed": 1865,
+    "retained-observed": 1866,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
