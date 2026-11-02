@@ -1,0 +1,41 @@
+{
+  "scope": "diagnostic #line controls for preserved original positions",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "architecture": "x86",
+      "expected_line": 26,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "architecture": "x64",
+      "expected_line": 26,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+      "architecture": "x86",
+      "expected_line": 47,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+      "architecture": "x64",
+      "expected_line": 47,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/error.h",
+      "architecture": "x86",
+      "expected_line": 1,
+      "exit": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/error.h",
+      "architecture": "x64",
+      "expected_line": 1,
+      "exit": 2
+    }
+  ]
+}

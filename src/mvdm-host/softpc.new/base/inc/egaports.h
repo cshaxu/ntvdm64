@@ -71,11 +71,5 @@
 
 #define Cpu_define_outb( port, func )
 #else
-/* Declare as Import to remove warnings */
-#ifdef ANSI
-IMPORT VOID Cpu_define_outb(IU16 adapterID, VOID (*asmFunc) IPT2(io_addr, port, half_word, value));
-#else
-IMPORT VOID Cpu_define_outb IPT2(IU16, adapterID, VOID (*)(), asmFunc);
-#endif /* ANSI */
- 
+#error DIVERGENCE MVDM-HOST-DIV-617: unsupported alternate host profile
 #endif /* C_VID || A2CPU */

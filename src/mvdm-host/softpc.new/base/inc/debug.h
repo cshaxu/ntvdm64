@@ -20,9 +20,9 @@
 #define	NON_PROD(x)
 #define	PROD_ONLY(x)	x
 #else
-#define	NON_PROD(x)	x
-#define	PROD_ONLY(x)
+#error DIVERGENCE MVDM-HOST-DIV-617: unsupported alternate host profile
 #endif
+#line 26
 
 #ifndef	PROD
 #error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.

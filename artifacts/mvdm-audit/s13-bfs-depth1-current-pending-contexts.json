@@ -2972,15 +2972,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
-      "start": 22,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 160
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/decode.h",
       "start": 12,
       "kind": "ifndef",
@@ -2990,15 +2981,6 @@
       "current_actual_includers": 0
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/egaports.h",
-      "start": 73,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 44
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
       "start": 291,
       "kind": "if",
@@ -3006,15 +2988,6 @@
       "pending_reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "current_actual_includers": 18
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/error.h",
-      "start": 4,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 148
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/gfiempty.h",
@@ -3366,15 +3339,6 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
-      "start": 42,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 24
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
@@ -8122,7 +8086,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 48
+      "count": 44
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",

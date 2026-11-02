@@ -207,6 +207,23 @@ if allowed.returncode or not rejected.returncode or 'unsupported non-CPU40 SAS i
     raise SystemExit('SAS CPU40 original boundary failed: ' + allowed.stderr + rejected.stderr)
 print('PASS original SAS CPU40 boundary')
 
+for name, condition, defines in (
+    ('debug.h', '#ifdef PROD', ['/DPROD']),
+    ('yoda.h', '#ifdef PROD', ['/DPROD']),
+    ('egaports.h', '#if defined(C_VID) || defined(A2CPU)', ['/DC_VID']),
+    ('error.h', '#ifdef NTVDM', ['/DNTVDM']),
+):
+    header = (repo / 'src/mvdm-host/softpc.new/base/inc' / name).read_text(encoding='latin1').splitlines()
+    errors = [line for line in header if 'unsupported alternate host profile' in line]
+    if len(errors) != 1:
+        raise SystemExit('missing unique rejected alternate in ' + name)
+    probe.write_text(condition + '\n#else\n' + errors[0] + '\n#endif\n', encoding='ascii')
+    allowed = subprocess.run(base[:-1] + defines + base[-1:], capture_output=True, text=True, errors='replace')
+    rejected = subprocess.run(base, capture_output=True, text=True, errors='replace')
+    if allowed.returncode or not rejected.returncode or 'unsupported alternate host profile' not in rejected.stdout + rejected.stderr:
+        raise SystemExit('original alternate profile boundary failed: ' + name)
+print('PASS original host header alternate profile boundaries')
+
 nt_bop = (repo / 'src/mvdm-host/softpc.new/host/src/nt_bop.c').read_text(encoding='latin1').splitlines()
 marker = 'unsupported hardware-host FPU save path'
 positions = [i for i, line in enumerate(nt_bop) if marker in line]

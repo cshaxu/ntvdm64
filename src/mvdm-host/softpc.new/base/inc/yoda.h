@@ -40,10 +40,9 @@
 #define check_D(address, value) /*address, value*/
 #define force_yoda() 		/*	*/
 #else
-extern void check_I();
-extern void check_D();
-extern void force_yoda();
+#error DIVERGENCE MVDM-HOST-DIV-617: unsupported alternate host profile
 #endif
+#line 47
 
 /*
  * Interface definitions and enums - non-prod only.

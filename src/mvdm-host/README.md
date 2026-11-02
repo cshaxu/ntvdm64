@@ -1,5 +1,12 @@
 # mvdm
 
+MVDM-HOST-DIV-617: retain the original first-depth selectors in `debug.h`,
+`yoda.h`, `egaports.h` and `error.h`, rejecting their unsupported outer
+alternatives. The original Insignia copyright notice remains outside the
+excluded `error.h` arm. Nested DIV-528/530/531 markers are superseded only
+at this location; their registrations remain where other occurrences exist.
+Evidence: `../../artifacts/mvdm-audit/s13-bfs-depth1-four-header-exclusion.json`.
+
 MVDM-HOST-DIV-616: preserve the original CPU40 SAS interface selector and
 replace the complete unsupported non-CPU40 alternate with `#error`.
 Its inner DIV-522, DIV-525 and DIV-527 markers are superseded at this

@@ -1,0 +1,141 @@
+{
+  "scope": "first-depth alternative group plan only; internal conditionals not classified",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/debug.h",
+      "macro": "PROD",
+      "condition": "PROD",
+      "group": 19,
+      "else": 22,
+      "end": 25,
+      "original_group": 19,
+      "original_end": 25,
+      "body_lines": 2,
+      "body_sha256": "2e721b001c9decd9065cdd07a7028d6a9f6733d71060d584efcf53b49df9b6b4",
+      "before_sha256": "700dbb3d5d343ae6664a808d5233f3d86c02798f54a1e2bdbd5fff40b6df1cf2",
+      "original_sha256": "59246b3c18bf6dfcd79b4e61bf961bc0382800deb4d968c198ceb415c284f21b",
+      "actual_contexts": 160,
+      "include_files_scanned": 691,
+      "undefinitions": [],
+      "markers": [],
+      "copyright_lines": [],
+      "continuation_match": [
+        true,
+        true,
+        false,
+        false,
+        true
+      ],
+      "following_current": "",
+      "removed_inner_groups_by_depth": {},
+      "candidate_sha256": "6390ab7418beea23f1333aa32043851a5a68f5ee7fdfe6791984bf7a15565515",
+      "new_line_mapping": 26,
+      "preserved_copyright_at_file_start": false,
+      "line_shift_after_group": 0,
+      "prefix_line_shift": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+      "macro": "PROD",
+      "condition": "PROD",
+      "group": 38,
+      "else": 42,
+      "end": 46,
+      "original_group": 38,
+      "original_end": 46,
+      "body_lines": 3,
+      "body_sha256": "7eecb95b96cfa9b9740beb1ab315ce8c99bce14c7202eaf3c33bf577e560d7e2",
+      "before_sha256": "5beb4870dc05919164d389988b04a403e9ae526a6c59b0f14e780b31c9532c3d",
+      "original_sha256": "9488860e836e9b4fb17ec69558bc65ce1a8afb99286f62e6092759c959569fc1",
+      "actual_contexts": 24,
+      "include_files_scanned": 425,
+      "undefinitions": [],
+      "markers": [],
+      "copyright_lines": [],
+      "continuation_match": [
+        true,
+        true,
+        true,
+        true,
+        true
+      ],
+      "following_current": "",
+      "removed_inner_groups_by_depth": {},
+      "candidate_sha256": "c9cc75970b8c2d158e8d388a55217ebe004b10ad8d2073cb0a4d43fa964070a5",
+      "new_line_mapping": 47,
+      "preserved_copyright_at_file_start": false,
+      "line_shift_after_group": -1,
+      "prefix_line_shift": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egaports.h",
+      "macro": "C_VID",
+      "condition": "defined(C_VID) || defined(A2CPU)",
+      "group": 66,
+      "else": 73,
+      "end": 81,
+      "original_group": 68,
+      "original_end": 83,
+      "body_lines": 7,
+      "body_sha256": "75f52c85f27a9c381a4bb5093c2638f57501c7f1d1a8db003988b14ed74bc7d0",
+      "before_sha256": "face41b8a7fd360e0f99b9f779a87b11ddf4bf0b43b6c9f2ffd6133782cbb129",
+      "original_sha256": "9258473bc4f8c375852c51ea8d7eb71a0163e503bd371f779b78eeb6227146af",
+      "actual_contexts": 44,
+      "include_files_scanned": 322,
+      "undefinitions": [],
+      "markers": [],
+      "copyright_lines": [],
+      "continuation_match": [
+        true
+      ],
+      "following_current": "",
+      "removed_inner_groups_by_depth": {
+        "2": 1
+      },
+      "candidate_sha256": "34809d684e12808e6a20e204f5dac448041f6ad329ef8a315e3b926793807aca",
+      "new_line_mapping": null,
+      "preserved_copyright_at_file_start": false,
+      "line_shift_after_group": -6,
+      "prefix_line_shift": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/error.h",
+      "macro": "NTVDM",
+      "condition": "NTVDM",
+      "group": 1,
+      "else": 4,
+      "end": 418,
+      "original_group": 1,
+      "original_end": 420,
+      "body_lines": 413,
+      "body_sha256": "a4a39b958755c51bcb521fb578747396f100999cdb5e7aa630a343ae56d5452d",
+      "before_sha256": "52d05ba2f86186203242c67472ff8b849209af3ff49e975ce3b5b6c897daf53f",
+      "original_sha256": "1adf0532f1ef298d7491e01714624e394ea795a308695bc1b05376a9b16ca7a3",
+      "actual_contexts": 148,
+      "include_files_scanned": 708,
+      "undefinitions": [],
+      "markers": [
+        "MVDM-HOST-DIV-528",
+        "MVDM-HOST-DIV-530",
+        "MVDM-HOST-DIV-531"
+      ],
+      "copyright_lines": [
+        "(c)Copyright Insignia Solutions Ltd., 1990. All rights reserved."
+      ],
+      "continuation_match": [
+        true
+      ],
+      "following_current": "",
+      "removed_inner_groups_by_depth": {
+        "2": 1,
+        "3": 5
+      },
+      "candidate_sha256": "486cac6c2be9f081f8b7ae4bf40c6974d4a3894ecd79c272d2b6af2b9402b667",
+      "new_line_mapping": null,
+      "preserved_copyright_at_file_start": true,
+      "line_shift_after_group": -410,
+      "prefix_line_shift": 2
+    }
+  ],
+  "resource_contexts_checked": 6
+}
