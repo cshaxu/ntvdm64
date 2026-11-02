@@ -23885,19 +23885,19 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
       "start": 239,
-      "cut": 242,
+      "cut": 241,
       "group_end": 245,
       "kind": "if",
       "expression": "defined(GEN_DRVR)",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "91b3626df851097f6d3361f7c0714ef8f0f07598ae59c103b28e174cf5b58926"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "10c365e6bfb93746f652f61d8bf2b60505444dd1c2d3475b9aadf025584b16fd"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
-      "start": 242,
+      "start": 241,
       "cut": 245,
       "group_end": 245,
       "kind": "else",
@@ -23905,34 +23905,34 @@
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
-      "body_lines": 2,
-      "source_sha256": "91b3626df851097f6d3361f7c0714ef8f0f07598ae59c103b28e174cf5b58926"
+      "body_lines": 3,
+      "source_sha256": "10c365e6bfb93746f652f61d8bf2b60505444dd1c2d3475b9aadf025584b16fd"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
-      "start": 251,
-      "cut": 253,
-      "group_end": 255,
+      "start": 252,
+      "cut": 254,
+      "group_end": 256,
       "kind": "ifdef",
       "expression": "macintosh",
       "status": "already-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "91b3626df851097f6d3361f7c0714ef8f0f07598ae59c103b28e174cf5b58926"
+      "source_sha256": "10c365e6bfb93746f652f61d8bf2b60505444dd1c2d3475b9aadf025584b16fd"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
-      "start": 253,
-      "cut": 255,
-      "group_end": 255,
+      "start": 254,
+      "cut": 256,
+      "group_end": 256,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "91b3626df851097f6d3361f7c0714ef8f0f07598ae59c103b28e174cf5b58926"
+      "source_sha256": "10c365e6bfb93746f652f61d8bf2b60505444dd1c2d3475b9aadf025584b16fd"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
@@ -26238,54 +26238,54 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
       "start": 21,
-      "cut": 456,
-      "group_end": 456,
+      "cut": 23,
+      "group_end": 23,
       "kind": "if",
       "expression": "defined(MSWDVR) && defined(XWINDOW)",
-      "status": "pending",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "body_lines": 434,
-      "source_sha256": "320ed3fc7b12f3ea5072c1f4a645edf167ba214d773f0850da828ac8de77e034"
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "9830f02bce4462039743553af19876a6f05a041c5359f6fcbda03a76ef003719"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
-      "start": 464,
-      "cut": 507,
-      "group_end": 507,
+      "start": 32,
+      "cut": 75,
+      "group_end": 75,
       "kind": "if",
       "expression": "!(defined(MSWDVR_DEBUG) && defined(MSWDVR_MAIN))",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 42,
-      "source_sha256": "320ed3fc7b12f3ea5072c1f4a645edf167ba214d773f0850da828ac8de77e034"
+      "source_sha256": "9830f02bce4462039743553af19876a6f05a041c5359f6fcbda03a76ef003719"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
-      "start": 526,
-      "cut": 528,
-      "group_end": 575,
+      "start": 94,
+      "cut": 96,
+      "group_end": 143,
       "kind": "ifdef",
       "expression": "MSWDVR_DEBUG",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "320ed3fc7b12f3ea5072c1f4a645edf167ba214d773f0850da828ac8de77e034"
+      "source_sha256": "9830f02bce4462039743553af19876a6f05a041c5359f6fcbda03a76ef003719"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
-      "start": 528,
-      "cut": 575,
-      "group_end": 575,
+      "start": 96,
+      "cut": 143,
+      "group_end": 143,
       "kind": "else",
       "expression": "",
       "status": "pending",
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "body_lines": 46,
-      "source_sha256": "320ed3fc7b12f3ea5072c1f4a645edf167ba214d773f0850da828ac8de77e034"
+      "source_sha256": "9830f02bce4462039743553af19876a6f05a041c5359f6fcbda03a76ef003719"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/host_nls.h",
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 1004,
+    "pending": 1002,
     "already-excluded": 1603,
-    "newly-excluded": 576,
+    "newly-excluded": 578,
     "retained-observed": 1863,
     "retained-original-assertion": 4
   },
   "pending_by_guard": {
-    "not-guard": 889,
+    "not-guard": 887,
     "guard": 115
   }
 }

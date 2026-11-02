@@ -3036,16 +3036,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
-      "start": 239,
-      "kind": "if",
-      "expression": "defined(GEN_DRVR)",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
-      "start": 242,
+      "start": 241,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3054,7 +3045,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
-      "start": 253,
+      "start": 254,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3432,16 +3423,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
-      "start": 21,
-      "kind": "if",
-      "expression": "defined(MSWDVR) && defined(XWINDOW)",
-      "pending_reason": "file-not-witnessed-in-product",
-      "guard_only": false,
-      "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
-      "start": 464,
+      "start": 32,
       "kind": "if",
       "expression": "!(defined(MSWDVR_DEBUG) && defined(MSWDVR_MAIN))",
       "pending_reason": "file-not-witnessed-in-product",
@@ -3450,7 +3432,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
-      "start": 528,
+      "start": 96,
       "kind": "else",
       "expression": "",
       "pending_reason": "file-not-witnessed-in-product",
@@ -9067,7 +9049,7 @@
       "reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "has_current_includer": false,
-      "count": 838
+      "count": 836
     },
     {
       "reason": "file-not-witnessed-in-product",

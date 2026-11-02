@@ -237,12 +237,13 @@ IMPORT VOID term_cdrom IPT1( IU8, drive_num);
 IMPORT VOID init_bcd_driver IPT0();
 
 #if defined(GEN_DRVR)
-#define MAX_DRIVER	10
-#define CD_ROM_DRIVER_NUM	8
+#error DIVERGENCE MVDM-HOST-DIV-606: unsupported GEN_DRVR profile
 #else
+#line 243
 #define MAX_DRIVER	1
 #define CD_ROM_DRIVER_NUM	0
 #endif /* GEN_DRVR */
+#line 246
 
 /*
  *	Used by get_cdrom_drive().

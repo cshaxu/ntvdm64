@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-606: preserve original first-depth selectors for unsupported
+GEN_DRVR and MSWDVR/XWINDOW profiles, rejecting their bodies. Source and
+SDK macro scans and x86/x64 controls are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-compound2-batch.json`.
+
 MVDM-HOST-DIV-605: preserve original first-depth selectors for unsupported
 legacy platform and diagnostic profiles, rejecting their bodies. Source and
 SDK macro scans and x86/x64 controls are recorded in

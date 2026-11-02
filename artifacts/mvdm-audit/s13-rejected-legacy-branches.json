@@ -642,7 +642,7 @@
   {
     "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
     "macro": "macintosh",
-    "line": 251,
+    "line": 252,
     "body_end": 252,
     "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cdrom.h",
     "original_sha256": "9da2a1531ac1eb2e0d2d9b57ec7e85328fd6402a83a3e562494b175f27101569",

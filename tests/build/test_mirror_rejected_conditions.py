@@ -227,3 +227,28 @@ for path, macro, expected_count, divergence in (
         if allowed.returncode or not rejected.returncode or marker not in rejected.stdout + rejected.stderr:
             raise SystemExit('excluded profile selection failed: ' + path)
 print('PASS original excluded host and WOW profile guards')
+
+for path, expression, marker, definitions in (
+    ('src/mvdm-host/softpc.new/base/inc/cdrom.h', 'defined(GEN_DRVR)',
+     'unsupported GEN_DRVR profile', ['GEN_DRVR']),
+    ('src/mvdm-host/softpc.new/base/inc/host_msw.h', 'defined(MSWDVR) && defined(XWINDOW)',
+     'unsupported MSWDVR_XWINDOW profile', ['MSWDVR', 'XWINDOW']),
+):
+    lines = (repo / path).read_text(encoding='latin1').splitlines()
+    positions = [i for i, line in enumerate(lines) if marker in line]
+    if len(positions) != 1 or lines[positions[0]-1].strip() != '#if ' + expression:
+        raise SystemExit('compound profile lost original selector: ' + path)
+    i = positions[0]
+    probe.write_text('\n'.join(lines[i-1:i+1] + ['#endif']) + '\n', encoding='ascii')
+    allowed = subprocess.run(base, capture_output=True, text=True, errors='replace')
+    rejected = subprocess.run(base[:-1] + ['/D' + d for d in definitions] + base[-1:],
+                              capture_output=True, text=True, errors='replace')
+    if allowed.returncode or not rejected.returncode or marker not in rejected.stdout + rejected.stderr:
+        raise SystemExit('compound profile selection failed: ' + path)
+    if len(definitions) > 1:
+        for definition in definitions:
+            single = subprocess.run(base[:-1] + ['/D' + definition] + base[-1:],
+                                    capture_output=True, text=True, errors='replace')
+            if single.returncode:
+                raise SystemExit('single compound operand rejected: ' + path)
+print('PASS original compound profile guards and individual operands')

@@ -1,0 +1,94 @@
+{
+  "scope": "two first-depth arms, original bodies matched; nested source and queue entries inside excluded arms removed without deeper audit",
+  "macro_evidence": {
+    "compile_commands_checked": 2070,
+    "jobs_sha256": "623d1067dca46b9fabf571db17d6567d8f03e04047245ca9ac11fcda71c725ea",
+    "command_macro_definitions_found": 0,
+    "source_generated_sdk_definitions_found": 0,
+    "scope": "src, tests, tools, generated Ninja trees and eight SDK include roots",
+    "controls": "x86/x64 selector checks with each conjunction operand alone and both together; original removed body matched after line-ending normalization; selected bodies retained verbatim"
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
+      "macro": "GEN_DRVR",
+      "expression": "defined(GEN_DRVR)",
+      "original_start": 239,
+      "original_cut": 242,
+      "original_end": 245,
+      "removed_body_sha256": "7c9779122896f46e7a537d4f7658d2bcb5bf6ede8f162cfc6db4917bae674d6a",
+      "removed_lines": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
+      "macro": "MSWDVR_XWINDOW",
+      "expression": "defined(MSWDVR) && defined(XWINDOW)",
+      "original_start": 21,
+      "original_cut": 456,
+      "original_end": 456,
+      "removed_body_sha256": "3248c8b696aae4fb41dded4e648dd38db05a0377c3fe4dde1e22daca17af4041",
+      "removed_lines": 434
+    }
+  ],
+  "controls": [
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
+      "start": 21,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
+      "start": 21,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
+      "start": 21,
+      "normal_pass": true,
+      "forced_rejected": true
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
+      "start": 21,
+      "normal_pass": true,
+      "forced_rejected": true
+    }
+  ],
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cdrom.h",
+      "before": "91b3626df851097f6d3361f7c0714ef8f0f07598ae59c103b28e174cf5b58926",
+      "after": "10c365e6bfb93746f652f61d8bf2b60505444dd1c2d3475b9aadf025584b16fd"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_msw.h",
+      "before": "320ed3fc7b12f3ea5072c1f4a645edf167ba214d773f0850da828ac8de77e034",
+      "after": "9830f02bce4462039743553af19876a6f05a041c5359f6fcbda03a76ef003719"
+    }
+  ],
+  "removed_inner_group_count": 17,
+  "validation": {
+    "x86_cached_build": "passed; no work",
+    "x64_cached_build": "passed; no work",
+    "guard_gate": "x86 and x64; see progress record",
+    "published_release": "all ten product images byte-identical to accepted prior release at both destinations",
+    "published_images": [
+      "run16.exe",
+      "ntsrv.exe",
+      "ntcon.exe",
+      "ntvdm.exe",
+      "ntvwm.exe",
+      "ntmon.exe",
+      "WOW32.DLL",
+      "VDMREDIR.DLL",
+      "nthook32.dll",
+      "nthook64.dll"
+    ]
+  }
+}
