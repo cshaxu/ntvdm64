@@ -1,5 +1,9 @@
 # mvdm
 
+The `dpmi32/dpmiint.c` non-CPU40 guard in `DpmiSwIntHandler` is a local
+DIV-481 failure-state adaptation, not an original OpenNT conditional. It
+defers flag updates until frame validation; see `../../artifacts/mvdm-audit/s13-bfs-depth1-dpmi-local-guard-origin.json`.
+
 Historical inner subset records under the excluded outer YODA guards in
 `softpc.new/base/debug/yoda.c` and `softpc.new/host/src/nt_yoda.c` are
 superseded by those outer guards and are not additional live diffs. Their

@@ -1997,8 +1997,8 @@
       "group_end": 599,
       "kind": "if",
       "expression": "!defined(CPU_40_STYLE)",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "status": "already-excluded",
+      "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
       "source_sha256": "21319196302ee1a5bd2750b7fef9c71b07dca7ce589f9da9e5f6fbb887deb7fc"
@@ -65654,14 +65654,14 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 920,
+    "pending": 919,
     "newly-excluded": 615,
-    "already-excluded": 1642,
+    "already-excluded": 1643,
     "retained-observed": 1864,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
     "not-guard": 850,
-    "guard": 70
+    "guard": 69
   }
 }

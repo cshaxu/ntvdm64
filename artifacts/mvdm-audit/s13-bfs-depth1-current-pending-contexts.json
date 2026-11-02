@@ -165,15 +165,6 @@
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmiint.c",
-      "start": 597,
-      "kind": "if",
-      "expression": "!defined(CPU_40_STYLE)",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
-      "path": "src/mvdm-host/dpmi32/dpmiint.c",
       "start": 639,
       "kind": "else",
       "expression": "",
@@ -8305,7 +8296,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 66
+      "count": 65
     },
     {
       "reason": "file-not-witnessed-in-product",

@@ -1,0 +1,17 @@
+{
+  "scope": "first-depth local adaptation selector, not a restored OpenNT selector; preserve existing behavior",
+  "path": "src/mvdm-host/dpmi32/dpmiint.c",
+  "current_line": 597,
+  "fixed_original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+  "original_unconditional_seteflags_line": 529,
+  "local_adaptation_commit": "f1a641bd725c9ae1e936aee3b393a2b4f7865c01",
+  "registered_reason": "MVDM-HOST-DIV-481 defers flag changes until protected-mode frame validation succeeds",
+  "original_removed_statement_ledger_sha256": "972736c2d959edfb026d2a8e62c7f8147740091442de1766a7c1721c61738423",
+  "actual_cpu40_graphs": [
+    "build/.ninja/msvc-x86-release/worker",
+    "build/.ninja/msvc-x64-release/worker-reference-x86"
+  ],
+  "failure_fixture": "tests/mvdm-host/dpmi_swint_selected_fixture.c",
+  "prior_fixture_result": "artifacts/mvdm-audit/s11-swint-frame-evidence/final-fixture-results.txt",
+  "limitation": "prior controlled fixture evidence only; no claim of complete DPMI exception semantics"
+}
