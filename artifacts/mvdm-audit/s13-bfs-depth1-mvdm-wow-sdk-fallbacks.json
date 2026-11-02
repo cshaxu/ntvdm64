@@ -1,0 +1,44 @@
+{
+  "scope": "two first-depth original host SDK fallback arms; not a change to guest or a claim for other SDK configurations",
+  "records": [
+    {
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "macro": "MAKEWORD",
+      "original_sha256": "9f450f2eb6ee684763f7f9e27ee43c80e7e24d1e5a87ff254fbd7da4fcd1cdb7",
+      "before_sha256": "98275b6dd2f676c45f237c2e5e2ff6c3ef6d57bfcda576655617685462a65164",
+      "after_sha256": "f393dfa40f9066016586353cadce7f6fae2b71661be81e793ce631dfbb0e5386",
+      "original_group": 68,
+      "removed_original_body_sha256": "7f43149f7a77b7c5670ca969f9f082733725d876c464bc5151aa1858919169d4",
+      "physical_delta": 0,
+      "actual_include_contexts": 160,
+      "provider": "Windows SDK minwindef.h"
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "macro": "WM_USER",
+      "original_sha256": "64663c13abaefccd99533352e08fb28efc66032c94a1780bff73be4f4cdbf70b",
+      "before_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85",
+      "after_sha256": "2ca98f706f9562bd29f536a460452db35c6c4bd4ccafe2b594b7ac8b6356c777",
+      "original_group": 1212,
+      "removed_original_body_sha256": "6b82951d2ace32549af3c256925f2b2a19efbdde0837d71873198a2fe3f7ccab",
+      "physical_delta": 1,
+      "actual_include_contexts": 90,
+      "provider": "Windows SDK winuser.h"
+    }
+  ],
+  "sdk_providers": [
+    {
+      "path": "C:\\Program Files (x86)\\Windows Kits\\10\\include\\10.0.22621.0\\shared\\minwindef.h",
+      "sha256": "a9cf08be8407a196104124d5ade2308e204e47d3252bcd2ad20d0f2137843d62"
+    },
+    {
+      "path": "C:\\Program Files (x86)\\Windows Kits\\10\\include\\10.0.22621.0\\um\\winuser.h",
+      "sha256": "a0ef5ea3f5f2587aa6b84fb6c845b3ce866a0f09fa0a5898ed1b153072a09c0b"
+    }
+  ],
+  "contexts": "MAKEWORD header occurs in 160 actual WOW/worker compilation contexts; WM_USER header in 90 WOW contexts. Actual dependencies provide MAKEWORD in minwindef.h and WM_USER in winuser.h; all dependent objects rebuilt successfully.",
+  "test_context": "No direct guest source include of these headers found; WOW observation scripts use the selected WOW graph or extract other ranges. Defined/missing macro controls exercised on x86/x64; original logical group/continuation lines checked.",
+  "validation": "Both worker graphs and WOW32 rebuilt, cached x86/x64 builds and guard suites passed; WOW dispatch exception fixture passed.",
+  "package": "s13-bfs-depth1-mvdm-wow-sdk-fallbacks-package-compare.json: eight identical, two PE timestamp-only; current Full-tested release retained.",
+  "limits": "Old SDK or alternate unsupported standalone host configurations are not claimed; previous DPMI and x87 fixture issues remain."
+}

@@ -1199,8 +1199,9 @@ typedef VPVOID VPOLDCURSORICONRESOURCE16;
 
 /* Old window messages (changed from Win 3.x)
  */
+#line 1212
 #ifndef WM_USER
-#define WM_USER 0x0400
+#error Excluded unsupported missing WM_USER SDK profile
 #endif
 
 #define OLDEM_GETSEL            (WM_USER+0)

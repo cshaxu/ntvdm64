@@ -655,3 +655,27 @@ for path, macro, continuation in (
     if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
         raise SystemExit('WOW missing SDK provider did not reject: ' + path)
 print('PASS scoped WOW SDK fallbacks and original continuation')
+
+for path, macro, original_line in (
+    ('src/mvdm-host/inc/mvdm.h', 'MAKEWORD', 68),
+    ('src/mvdm-host/inc/wow.h', 'WM_USER', 1212),
+):
+    source = (repo / path).read_text(encoding='latin1').splitlines()
+    marker = '#error Excluded unsupported missing ' + macro + ' SDK profile'
+    matches = [i for i, line in enumerate(source) if line.strip() == '#ifndef ' + macro
+               and source[i + 1].strip() == marker and source[i + 2].strip() == '#endif']
+    if len(matches) != 1:
+        raise SystemExit('SDK provider guard missing: ' + path)
+    i = matches[0]
+    preceding = [(j, re.match(r'^\s*#\s*line\s+(\d+)', line)) for j, line in enumerate(source[:i])]
+    j, line_directive = [(j, match) for j, match in preceding if match][-1]
+    if int(line_directive.group(1)) + (i - j - 1) != original_line:
+        raise SystemExit('SDK guard original logical line changed: ' + path)
+    probe.write_text('\n'.join(['#line ' + str(original_line)] + source[i:i + 3] + ['int after_sdk = __LINE__;']) + '\n', encoding='ascii')
+    selected = subprocess.run(base + ['/D' + macro, str(probe)], capture_output=True, text=True, errors='replace')
+    rejected = subprocess.run(base + ['/U' + macro, str(probe)], capture_output=True, text=True, errors='replace')
+    if selected.returncode or not re.search(r'int\s+after_sdk\s*=\s*' + str(original_line + 3) + r'\s*;', selected.stdout):
+        raise SystemExit('SDK selected guard or original continuation failed: ' + path)
+    if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
+        raise SystemExit('missing SDK provider did not reject: ' + path)
+print('PASS MAKEWORD and WM_USER SDK guards and original lines')

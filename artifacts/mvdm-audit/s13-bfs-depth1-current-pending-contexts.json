@@ -201,15 +201,6 @@
     },
     {
       "path": "src/mvdm-host/inc/mvdm.h",
-      "start": 58,
-      "kind": "ifndef",
-      "expression": "MAKEWORD",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 160
-    },
-    {
-      "path": "src/mvdm-host/inc/mvdm.h",
       "start": 64,
       "kind": "ifdef",
       "expression": "i386",
@@ -252,15 +243,6 @@
       "pending_reason": "file-not-witnessed-in-product",
       "guard_only": false,
       "current_actual_includers": 0
-    },
-    {
-      "path": "src/mvdm-host/inc/wow.h",
-      "start": 1202,
-      "kind": "ifndef",
-      "expression": "WM_USER",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
-      "current_actual_includers": 90
     },
     {
       "path": "src/mvdm-host/inc/wowfax.h",
@@ -4333,7 +4315,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": false,
       "has_current_includer": true,
-      "count": 25
+      "count": 23
     },
     {
       "reason": "arm-not-witnessed-with-ancestors-seen",

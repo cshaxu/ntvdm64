@@ -2275,3 +2275,9 @@ MVDM-HOST-DIV-638: preserve the original SDK fallback selectors for
 unsupported missing-SDK bodies rejected. The selected WOW32 precomp path
 uses the host SDK providers. Evidence:
 `../../artifacts/mvdm-audit/s13-bfs-depth1-wow-sdk-fallbacks.json`.
+
+MVDM-HOST-DIV-639: preserve the original SDK fallback conditions for
+`MAKEWORD` in `inc/mvdm.h` and `WM_USER` in `inc/wow.h`, rejecting their
+unsupported missing-SDK bodies. The selected worker/WOW contexts receive
+these definitions from the host SDK; see
+`../../artifacts/mvdm-audit/s13-bfs-depth1-mvdm-wow-sdk-fallbacks.json`.

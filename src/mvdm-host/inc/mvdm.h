@@ -56,7 +56,7 @@ typedef DWORD UNALIGNED *PDWORD16;
 #define INTOF(i,n)	(((PINT)&(i))[n])
 #define UINTOF(i,n)	(((PUINT)&(i))[n])
 #ifndef MAKEWORD
-#define MAKEWORD(l,h)	((WORD)((BYTE)(l)|((BYTE)(h)<<8)))
+#error Excluded unsupported missing MAKEWORD SDK profile
 #endif
 #define MAKEDWORD(l0,h0,l1,h1)	((DWORD)MAKEWORD(l0,h0)|((DWORD)MAKEWORD(l1,h1)<<16))
 #define GETBYTE(p)	*((PBYTE)p)++

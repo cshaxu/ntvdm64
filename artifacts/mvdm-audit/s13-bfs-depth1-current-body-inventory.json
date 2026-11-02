@@ -3509,7 +3509,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "98275b6dd2f676c45f237c2e5e2ff6c3ef6d57bfcda576655617685462a65164"
+      "source_sha256": "f393dfa40f9066016586353cadce7f6fae2b71661be81e793ce631dfbb0e5386"
     },
     {
       "path": "src/mvdm-host/inc/mvdm.h",
@@ -3518,11 +3518,11 @@
       "group_end": 60,
       "kind": "ifndef",
       "expression": "MAKEWORD",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "98275b6dd2f676c45f237c2e5e2ff6c3ef6d57bfcda576655617685462a65164"
+      "source_sha256": "f393dfa40f9066016586353cadce7f6fae2b71661be81e793ce631dfbb0e5386"
     },
     {
       "path": "src/mvdm-host/inc/mvdm.h",
@@ -3535,7 +3535,7 @@
       "pending_reason": "original-i386-arm-needs-supported-context-witness",
       "guard_only": false,
       "body_lines": 5,
-      "source_sha256": "98275b6dd2f676c45f237c2e5e2ff6c3ef6d57bfcda576655617685462a65164"
+      "source_sha256": "f393dfa40f9066016586353cadce7f6fae2b71661be81e793ce631dfbb0e5386"
     },
     {
       "path": "src/mvdm-host/inc/mvdm.h",
@@ -3548,7 +3548,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 13,
-      "source_sha256": "98275b6dd2f676c45f237c2e5e2ff6c3ef6d57bfcda576655617685462a65164"
+      "source_sha256": "f393dfa40f9066016586353cadce7f6fae2b71661be81e793ce631dfbb0e5386"
     },
     {
       "path": "src/mvdm-host/inc/sharewow.h",
@@ -3743,7 +3743,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 1,
-      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
+      "source_sha256": "2ca98f706f9562bd29f536a460452db35c6c4bd4ccafe2b594b7ac8b6356c777"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
@@ -3756,7 +3756,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
+      "source_sha256": "2ca98f706f9562bd29f536a460452db35c6c4bd4ccafe2b594b7ac8b6356c777"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
@@ -3769,7 +3769,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
+      "source_sha256": "2ca98f706f9562bd29f536a460452db35c6c4bd4ccafe2b594b7ac8b6356c777"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
@@ -3782,7 +3782,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 2,
-      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
+      "source_sha256": "2ca98f706f9562bd29f536a460452db35c6c4bd4ccafe2b594b7ac8b6356c777"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
@@ -3795,7 +3795,7 @@
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
+      "source_sha256": "2ca98f706f9562bd29f536a460452db35c6c4bd4ccafe2b594b7ac8b6356c777"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
@@ -3808,98 +3808,98 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 6,
-      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
+      "source_sha256": "2ca98f706f9562bd29f536a460452db35c6c4bd4ccafe2b594b7ac8b6356c777"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 1202,
-      "cut": 1204,
-      "group_end": 1204,
+      "start": 1203,
+      "cut": 1205,
+      "group_end": 1205,
       "kind": "ifndef",
       "expression": "WM_USER",
-      "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": false,
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
+      "source_sha256": "2ca98f706f9562bd29f536a460452db35c6c4bd4ccafe2b594b7ac8b6356c777"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 1233,
-      "cut": 1235,
-      "group_end": 1243,
+      "start": 1234,
+      "cut": 1236,
+      "group_end": 1244,
       "kind": "ifndef",
       "expression": "WIN31",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
+      "source_sha256": "2ca98f706f9562bd29f536a460452db35c6c4bd4ccafe2b594b7ac8b6356c777"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 1235,
-      "cut": 1243,
-      "group_end": 1243,
+      "start": 1236,
+      "cut": 1244,
+      "group_end": 1244,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 7,
-      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
+      "source_sha256": "2ca98f706f9562bd29f536a460452db35c6c4bd4ccafe2b594b7ac8b6356c777"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 1271,
-      "cut": 1273,
-      "group_end": 1284,
+      "start": 1272,
+      "cut": 1274,
+      "group_end": 1285,
       "kind": "ifndef",
       "expression": "WIN31",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
+      "source_sha256": "2ca98f706f9562bd29f536a460452db35c6c4bd4ccafe2b594b7ac8b6356c777"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 1273,
-      "cut": 1284,
-      "group_end": 1284,
+      "start": 1274,
+      "cut": 1285,
+      "group_end": 1285,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 10,
-      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
+      "source_sha256": "2ca98f706f9562bd29f536a460452db35c6c4bd4ccafe2b594b7ac8b6356c777"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 1316,
-      "cut": 1318,
-      "group_end": 1328,
+      "start": 1317,
+      "cut": 1319,
+      "group_end": 1329,
       "kind": "ifndef",
       "expression": "WIN31",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
+      "source_sha256": "2ca98f706f9562bd29f536a460452db35c6c4bd4ccafe2b594b7ac8b6356c777"
     },
     {
       "path": "src/mvdm-host/inc/wow.h",
-      "start": 1318,
-      "cut": 1328,
-      "group_end": 1328,
+      "start": 1319,
+      "cut": 1329,
+      "group_end": 1329,
       "kind": "else",
       "expression": "",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 9,
-      "source_sha256": "426a9f02b2998ef40db15f920a1d6ab9d171085224e05dfde9145237b8c97c85"
+      "source_sha256": "2ca98f706f9562bd29f536a460452db35c6c4bd4ccafe2b594b7ac8b6356c777"
     },
     {
       "path": "src/mvdm-host/inc/wowcomm.h",
@@ -65680,15 +65680,15 @@
   ],
   "errors": [],
   "status_counts": {
-    "pending": 480,
-    "newly-excluded": 636,
+    "pending": 478,
+    "newly-excluded": 638,
     "already-excluded": 1669,
     "unselected-file": 389,
     "retained-observed": 1869,
     "retained-original-assertion": 9
   },
   "pending_by_guard": {
-    "not-guard": 441,
+    "not-guard": 439,
     "guard": 39
   }
 }
