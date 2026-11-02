@@ -5717,15 +5717,6 @@
       "current_actual_includers": 2
     },
     {
-      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
-      "start": 142,
-      "kind": "else",
-      "expression": "",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
-      "guard_only": true,
-      "current_actual_includers": 2
-    },
-    {
       "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
       "start": 138,
       "kind": "ifdef",
@@ -8179,7 +8170,7 @@
       "reason": "arm-not-witnessed-with-ancestors-seen",
       "guard_only": true,
       "has_current_includer": true,
-      "count": 52
+      "count": 51
     },
     {
       "reason": "file-not-witnessed-in-product",

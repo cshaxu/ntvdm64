@@ -13,9 +13,14 @@
       "file": "src/mvdm-host/softpc.new/base/support/xt.c",
       "original_condition": "#if defined(CCPU) && !defined(CPU_30_STYLE)",
       "evidence": "s13-bfs-depth1-xt-outer-restoration.json"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "original_condition": "#ifndef i386",
+      "evidence": "s13-bfs-depth1-msscs-outer-restoration.json"
     }
   ],
-  "derived_total": 43,
-  "derived_current_bfs_total": 10,
+  "derived_total": 44,
+  "derived_current_bfs_total": 11,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

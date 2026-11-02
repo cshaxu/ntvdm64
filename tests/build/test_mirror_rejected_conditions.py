@@ -176,6 +176,15 @@ if allowed.returncode or not rejected.returncode or 'Excluded unsupported non-CP
     raise SystemExit('virtual interrupt state CPU40 selection failed: ' + allowed.stderr + rejected.stderr)
 print('PASS CPU40 virtual interrupt state; unsupported hardware-monitor alternative rejected')
 
+if virtual_state[i-2].strip() != '#ifndef i386' or virtual_state[i+4].strip() != '#else' or virtual_state[i+6].strip() != '#endif /* i386 */':
+    raise SystemExit('virtual interrupt state lost original i386 outer boundary')
+probe.write_text('\n'.join(virtual_state[i-2:i+7]) + '\n', encoding='ascii')
+allowed = subprocess.run(base[:-1] + ['/DCPU_40_STYLE'] + base[-1:], capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base[:-1] + ['/DCPU_40_STYLE', '/Di386'] + base[-1:], capture_output=True, text=True, errors='replace')
+if allowed.returncode or not rejected.returncode or 'Excluded unsupported original i386 host monitor virtual interrupt state' not in rejected.stdout + rejected.stderr:
+    raise SystemExit('original i386 virtual interrupt boundary failed: ' + allowed.stderr + rejected.stderr)
+print('PASS original i386 virtual interrupt boundary')
+
 nt_bop = (repo / 'src/mvdm-host/softpc.new/host/src/nt_bop.c').read_text(encoding='latin1').splitlines()
 marker = 'unsupported hardware-host FPU save path'
 positions = [i for i, line in enumerate(nt_bop) if marker in line]

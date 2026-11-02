@@ -137,11 +137,16 @@ InitialiseDosEmulation(int argc, char **argv)
      * the historical FSTI/FCLI fallback selector; it does not enable MIPS
      * guest code or a second CPU.
      */
+#ifndef i386
 #ifdef CPU_40_STYLE
     fVirtualInt |= MIPS_BIT_MASK;
 #else
 #error Excluded unsupported non-CPU40 virtual interrupt state
 #endif
+#else
+#error Excluded unsupported original i386 host monitor virtual interrupt state
+#endif /* i386 */
+#line 128
     sas_storedw((ULONG)FIXED_NTVDMSTATE_LINEAR,fVirtualInt);
 
     io_init();

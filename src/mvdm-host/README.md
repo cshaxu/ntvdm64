@@ -1,5 +1,11 @@
 # mvdm
 
+MVDM-HOST-DIV-614: restore the original `i386` outer selector around the
+DIV-039 software-CPU virtual interrupt state adaptation in `nt_msscs.c`.
+The original i386 hardware-monitor alternative is rejected; the existing
+CPU40 ownership condition remains inside the selected original branch.
+See `../../artifacts/mvdm-audit/s13-bfs-depth1-msscs-outer-restoration.json`.
+
 MVDM-HOST-DIV-613: restore original diagnostic positions following 17
 excluded first-depth branches. Each original prefix and selected continuation
 was matched before inserting the corresponding `#line`; see
