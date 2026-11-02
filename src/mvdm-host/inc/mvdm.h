@@ -22,6 +22,7 @@
 #ifdef H2INC
 #error DIVERGENCE MVDM-HOST-DIV-536: H2INC branch is not selected; see mirror register.
 #endif
+#line 36
 
 // typedef int INT;
 // typedef DWORD UINT;

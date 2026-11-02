@@ -1,5 +1,9 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-152: restore original diagnostic positions after two excluded
+first-depth branches, preserving their selected continuations. See
+`../../artifacts/mvdm-audit/s13-bfs-depth1-original-line-batch.json`.
+
 OPENNT-HOST-151: preserve original first-depth selectors for unsupported
 historical _PNP_POWER profile, rejecting their bodies. Source and
 SDK macro scans and x86/x64 controls are recorded in

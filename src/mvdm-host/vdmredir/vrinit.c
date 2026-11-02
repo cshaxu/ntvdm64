@@ -182,6 +182,7 @@ Return Value:
 #if DBG
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 188
 
     //
     // if we are already initialized return TRUE. Not sure if this should

@@ -199,6 +199,7 @@ IPT3(
 #ifdef	PIG
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
+#line 224
 
 extern void vir_write_bytes IPT4(LIN_ADDR, lin_addr,PHY_ADDR, phy_addr, IU8 *, data, IU32, num_bytes);
 extern void vir_read_bytes IPT4(IU8 *, destbuff, LIN_ADDR, lin_addr, PHY_ADDR, phy_addr, IU32, num_bytes);

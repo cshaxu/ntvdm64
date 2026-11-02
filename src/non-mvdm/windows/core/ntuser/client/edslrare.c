@@ -52,6 +52,7 @@ LONG SLCreate(
 #ifdef SUPPORT_LPK
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 56
 
     /*
      * Set the default font to be the system font.

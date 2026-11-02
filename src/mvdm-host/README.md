@@ -1,5 +1,10 @@
 # mvdm
 
+MVDM-HOST-DIV-613: restore original diagnostic positions following 17
+excluded first-depth branches. Each original prefix and selected continuation
+was matched before inserting the corresponding `#line`; see
+`../../artifacts/mvdm-audit/s13-bfs-depth1-original-line-batch.json`.
+
 The original PIG selectors in `c_getset.c` and `c_stack.c` are retained;
 their supported CPU40 worker contexts exclude the comparison profile. The
 `c_stack.c` DIV-515 subset restores original diagnostic line 37 after the

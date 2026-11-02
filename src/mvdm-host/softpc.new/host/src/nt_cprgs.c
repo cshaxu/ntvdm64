@@ -97,6 +97,7 @@ GLOBAL INT		(*getIOPL_func ) ();
 #ifdef A3CPU
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 #endif
+#line 109
 
 GLOBAL word		(*getSTATUS_func) ();
 

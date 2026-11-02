@@ -302,6 +302,7 @@ VOID putdrawitem16(VPDRAWITEMSTRUCT16 vpDI16, LPDRAWITEMSTRUCT lpDI)
 #ifdef NOTUSED
 #error DIVERGENCE MVDM-HOST-DIV-529: NOTUSED platform branch is not selected; see mirror register.
 #endif
+#line 360
 
 
 INT GetBMI16Size(PVPVOID vpbmi16, WORD fuColorUse, LPDWORD lpdwClrUsed)

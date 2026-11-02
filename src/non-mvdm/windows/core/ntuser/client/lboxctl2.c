@@ -1148,6 +1148,7 @@ void xxxNotifyOwner(
 #ifdef NEVER
 #error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register.
 #endif
+#line 1160
 
     ThreadLock(plb->spwndParent, &tlpwndParent);
     SendMessage(HW(plb->spwndParent), WM_COMMAND,

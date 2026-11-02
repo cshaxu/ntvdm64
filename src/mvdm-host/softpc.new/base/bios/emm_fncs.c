@@ -4,6 +4,7 @@
 #ifdef	SUN_VA
 #error DIVERGENCE MVDM-HOST-DIV-527: SUN_VA branch is not selected; see mirror register.
 #endif
+#line 10
 
 /*			INSIGNIA MODULE SPECIFICATION
 			-----------------------------

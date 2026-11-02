@@ -57,6 +57,7 @@ typedef ANSITOOEMBUFF16 UNALIGNED *PANSITOOEMBUFF16;
 #ifdef NULLSTRUCT
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 62
 
 typedef struct _GETKEYBOARDTYPE16 {     /* kb130 */
     SHORT f1;

@@ -64,6 +64,7 @@
 #ifdef HERC
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif	/* HERC */
+#line 92
 
 /*
  * ============================================================================

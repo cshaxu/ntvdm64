@@ -11,6 +11,7 @@
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 16
 
 void    idetect();
 void    idle_set();

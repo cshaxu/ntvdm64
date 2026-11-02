@@ -1,0 +1,233 @@
+{
+  "scope": "MSVC diagnostic line controls for each inserted directive",
+  "records": [
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/dos/command/cmddisp.c",
+      "logical_line": 53,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/dos/dem/demioctl.c",
+      "logical_line": 74,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/dpmi32/savestat.c",
+      "logical_line": 126,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "logical_line": 36,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/inc/wowkbd.h",
+      "logical_line": 62,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "logical_line": 10,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.h",
+      "logical_line": 224,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "logical_line": 92,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/inc/idetect.h",
+      "logical_line": 16,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+      "logical_line": 464,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
+      "logical_line": 109,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/suballoc/suballoc.c",
+      "logical_line": 337,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/vdmredir/vrdlc.h",
+      "logical_line": 989,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "logical_line": 188,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/wow32/wgdi31.c",
+      "logical_line": 828,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "logical_line": 360,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "logical_line": 56,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+      "logical_line": 56,
+      "exit": 2
+    },
+    {
+      "arch": "x86",
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+      "logical_line": 1160,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/dos/command/cmddisp.c",
+      "logical_line": 53,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/dos/dem/demioctl.c",
+      "logical_line": 74,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/dpmi32/savestat.c",
+      "logical_line": 126,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/inc/mvdm.h",
+      "logical_line": 36,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/inc/wowkbd.h",
+      "logical_line": 62,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "logical_line": 10,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.h",
+      "logical_line": 224,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "logical_line": 92,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/inc/idetect.h",
+      "logical_line": 16,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+      "logical_line": 464,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cprgs.c",
+      "logical_line": 109,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/suballoc/suballoc.c",
+      "logical_line": 337,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/vdmredir/vrdlc.h",
+      "logical_line": 989,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "logical_line": 188,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/wow32/wgdi31.c",
+      "logical_line": 828,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "logical_line": 360,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "logical_line": 56,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
+      "logical_line": 56,
+      "exit": 2
+    },
+    {
+      "arch": "x64",
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+      "logical_line": 1160,
+      "exit": 2
+    }
+  ]
+}
