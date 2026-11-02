@@ -3922,7 +3922,7 @@
       "kind": "ifdef",
       "expression": "DEBUG",
       "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "pending_reason": "shared-original-guest-source-context-not-built",
       "guard_only": false,
       "body_lines": 25,
       "source_sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e"
@@ -3935,7 +3935,7 @@
       "kind": "if",
       "expression": "defined(_WOWFAX16_)",
       "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "pending_reason": "shared-original-guest-source-context-not-built",
       "guard_only": false,
       "body_lines": 24,
       "source_sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e"
@@ -3948,7 +3948,7 @@
       "kind": "ifndef",
       "expression": "_DEF_WOW32_",
       "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "pending_reason": "shared-original-guest-source-context-not-built",
       "guard_only": false,
       "body_lines": 1,
       "source_sha256": "96d4925f0fc2019cbed210fc6209b7215f3ae32e8bbcb2cef88c5b08c83f505e"
@@ -3987,7 +3987,7 @@
       "kind": "ifndef",
       "expression": "UNALIGNED",
       "status": "pending",
-      "pending_reason": "arm-not-witnessed-with-ancestors-seen",
+      "pending_reason": "shared-original-guest-source-context-not-built",
       "guard_only": false,
       "body_lines": 7,
       "source_sha256": "9d93877c7253d3c5f90eba3e72d554d6534fc25b4b78624a8281eaaef89c79e5"

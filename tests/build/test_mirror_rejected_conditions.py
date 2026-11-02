@@ -418,3 +418,28 @@ rejected = subprocess.run(base[:-1] + ['/UNTVDM'] + base[-1:], capture_output=Tr
 if allowed.returncode or not rejected.returncode or 'Excluded unsupported non-NTVDM mouse profile' not in rejected.stdout + rejected.stderr:
     raise SystemExit('mouse NTVDM original guard failed')
 print('PASS seven original mouse NTVDM outer guards')
+
+# These shared host headers are also referenced by original guest sources.
+# This is a source-protection check; it does not build or validate the guest.
+fax_guest = (repo / 'src/mvdm-guest/wow16/test/shell/wowexfax.c').read_text(encoding='latin1')
+exec_guest = (repo / 'src/mvdm-guest/wow16/test/shell/wowexec.c').read_text(encoding='latin1')
+guest_make = (repo / 'src/mvdm-guest/wow16/test/shell/makefile').read_text(encoding='latin1')
+fax = (repo / 'src/mvdm-host/inc/wowfax.h').read_text(encoding='latin1')
+info = (repo / 'src/mvdm-host/inc/wowinfo.h').read_text(encoding='latin1')
+for text, pattern in ((fax_guest, r'(?m)^#define\s+_WOWFAX16_\b'),
+                      (fax_guest, r'(?m)^#include\s+"wowfax\.h"'),
+                      (exec_guest, r'(?m)^#include\s+"wowinfo\.h"'),
+                      (guest_make, r'(?m)^COBJ\s*=.*-DDEBUG'),
+                      (fax, r'(?m)^#if\s+defined\(_WOWFAX16_\)'),
+                      (fax, r'(?m)^#ifdef\s+DEBUG'),
+                      (fax, r'(?m)^#ifndef\s+_DEF_WOW32_'),
+                      (info, r'(?m)^#ifndef\s+UNALIGNED')):
+    if not re.search(pattern, text):
+        raise SystemExit('shared guest-header protection check failed: ' + pattern)
+for text, selector in ((fax, r'#if\s+defined\(_WOWFAX16_\)'),
+                       (fax, r'#ifdef\s+DEBUG'),
+                       (fax, r'#ifndef\s+_DEF_WOW32_'),
+                       (info, r'#ifndef\s+UNALIGNED')):
+    if re.search(r'(?m)^' + selector + r'[^\n]*\n\s*#error\b', text):
+        raise SystemExit('shared guest-header body was replaced: ' + selector)
+print('PASS original guest source references and shared header guards retained')

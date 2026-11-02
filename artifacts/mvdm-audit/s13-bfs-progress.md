@@ -1971,3 +1971,7 @@ Restored seven pinned-OpenNT `#ifndef NTVDM` outer selectors in mouse_io.c. The 
 ### First-depth files with no active compile or named test context
 
 Classified six pending arms in standard.h, tcpip.h, nt_term.c, c_regs.c and WOW debug.c as belonging to whole files without product compile/include contexts or case-insensitive test/build filename references. The files and their bodies remain intact; no macro value or future configuration is inferred. Source and binaries are unchanged. Status: {'unselected-file': 766, 'newly-excluded': 663, 'already-excluded': 1699, 'pending': 58, 'retained-observed': 1874, 'retained-original-assertion': 9}; children: {'retained-observed': 1407, 'pending': 37, 'unselected-file': 1594}. Evidence: `s13-bfs-depth1-five-unselected-files.json`; queue: `s13-bfs-depth1-working-queue-195r98.zip`. Wider original-boundary reconciliation and the page-domain link failure remain open.
+
+### Preserve original guest source shared-header boundaries
+
+Recorded that guest WOWEXEC test sources name wowfax.h/wowinfo.h, explicitly define _WOWFAX16_, and have an original DEBUG makefile configuration. Added a source-only regression guard against accidentally removing these shared selectors; guest was not built or modified. Four arms remain pending because original guest sources are not proof of a supported actual build or observed macro state. No product binary changed. Evidence: `s13-bfs-depth1-shared-guest-headers.json`; queue: `s13-bfs-depth1-working-queue-195r99.zip`.
