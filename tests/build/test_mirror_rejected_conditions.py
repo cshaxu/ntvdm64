@@ -482,3 +482,15 @@ rejected = subprocess.run(base[:-1] + ['/Di386'] + base[-1:], capture_output=Tru
 if allowed.returncode or not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
     raise SystemExit('i386 IRET rejection failed')
 print('PASS original i386 IRET guards')
+
+# Retired VDM_TIB pointer publication is unavailable in the CCPU worker.
+dpmi = (repo / 'src/mvdm-host/dpmi32/dpmiint.c').read_text(encoding='latin1')
+marker = '#error Excluded unsupported i386 kernel VDM stack publication'
+if dpmi.count(marker) != 1 or '#ifdef i386\n' + marker not in dpmi:
+    raise SystemExit('kernel VDM stack publication guard missing')
+probe.write_text('#ifdef i386\n' + marker + '\n#endif\n', encoding='ascii')
+allowed = subprocess.run(base[:-1] + ['/Ui386', '/DCPU_40_STYLE'] + base[-1:], capture_output=True, text=True, errors='replace')
+rejected = subprocess.run(base[:-1] + ['/Di386'] + base[-1:], capture_output=True, text=True, errors='replace')
+if allowed.returncode or not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
+    raise SystemExit('kernel VDM stack publication rejection failed')
+print('PASS kernel VDM stack publication exclusion')

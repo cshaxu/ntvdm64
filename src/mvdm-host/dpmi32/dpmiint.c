@@ -420,12 +420,9 @@ Notes:
 #endif
 
 #ifdef i386
-    {
-        VdmTib.PmStackInfo.Flags = CurrentAppFlags;
-        setCX(HIWORD((ULONG)&VdmTib.PmStackInfo));
-        setDX(LOWORD((ULONG)&VdmTib.PmStackInfo));
-    }
+#error Excluded unsupported i386 kernel VDM stack publication
 #endif
+#line 424
 }
 
 VOID

@@ -1,0 +1,28 @@
+{
+  "path": "src/mvdm-host/dpmi32/dpmiint.c",
+  "before_sha256": "0c1a2ea3058e4563fcdfb01cde37f0a3a90d8ee1e0cb9313d2bad71c67f2f794",
+  "candidate_sha256": "07cdba736041854ca2f1f7bf7574df5efd15c702ceb367854670d4da5d955646",
+  "original_sha256": "d0607f266b8c6ee0556af13ff9260c7c07df8c0dc05ab25b37567430fb28a4aa",
+  "current_group_line": 422,
+  "current_end": 428,
+  "original_group_line": 387,
+  "original_end": 396,
+  "removed_local_body_sha256": "fb2a62acbafeaca0999b326da82107900280acc4d02299113eb5dfce9ef38c51",
+  "original_body_sha256": "0db3ed7095cf5e1c91a022cd9794889acfb2f50d31b8008e311bbfee33fb37d3",
+  "removed_divergence": "MVDM-HOST-DIV-018",
+  "checks": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "sha256": "fbfead078a8e4cc4698ba436d0a133237246061215409fa5d1ce0064a1474b42"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "sha256": "fbfead078a8e4cc4698ba436d0a133237246061215409fa5d1ce0064a1474b42"
+    }
+  ],
+  "selected_line_control": 424,
+  "tests": "both worker targets, rejected-conditions suite, CPU guard suite and complete selected DPMI software-interrupt/fault/IRET fixture passed",
+  "selected_test_sha256": "e189420c0917a35f494448891eae65d9f57b6c79706e82080937ec942d390eeb",
+  "package": "six byte-identical and four PE timestamp-only; existing full-tested release retained",
+  "limitations": "No standalone runtime test of the CPU40 stack-publication path was performed in this batch; its selected preprocessing and ten-image hashes show no product binary semantic change. Guest and unsupported kernel VDM are not run."
+}
