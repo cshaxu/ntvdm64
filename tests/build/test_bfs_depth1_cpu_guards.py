@@ -758,3 +758,19 @@ if selected.returncode or not re.search(r'int\s+after_ntstubs_guard\s*=\s*1614\s
 if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
     raise SystemExit('unsupported FE_SB client message owner did not reject')
 print('PASS restored ntstubs FE_SB guard and original line')
+
+source = (repo / 'src/non-mvdm/windows/core/ntuser/client/ntstubs.c').read_text(encoding='latin1').splitlines()
+for macro, original_line in (('MEMPHIS_MENUS', 380), ('MEMPHIS_MENU_WATERMARKS', 500)):
+    marker = '#error Excluded unsupported ' + macro + ' client owner'
+    matches = [i for i, line in enumerate(source) if line.strip() == '#ifdef ' + macro and source[i+1].strip() == marker and source[i+2].strip() == '#endif // ' + macro]
+    if len(matches) != 1 or source[matches[0]-1].strip() != '#line ' + str(original_line):
+        raise SystemExit('restored ntstubs menu guard or line missing: ' + macro)
+    i = matches[0]
+    probe.write_text('\n'.join(source[i-1:i+3] + ['int after_menu_guard = __LINE__;']) + '\n', encoding='ascii')
+    selected = subprocess.run(base + ['/U' + macro, str(probe)], capture_output=True, text=True, errors='replace')
+    rejected = subprocess.run(base + ['/D' + macro, str(probe)], capture_output=True, text=True, errors='replace')
+    if selected.returncode or not re.search(r'int\s+after_menu_guard\s*=\s*' + str(original_line + 3) + r'\s*;', selected.stdout):
+        raise SystemExit('ntstubs menu selected guard or line failed: ' + macro + selected.stderr)
+    if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
+        raise SystemExit('unsupported ntstubs menu owner did not reject: ' + macro)
+print('PASS restored ntstubs menu guards and original lines')

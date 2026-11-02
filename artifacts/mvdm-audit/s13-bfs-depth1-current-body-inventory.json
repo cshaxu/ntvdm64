@@ -64583,7 +64583,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 30,
-      "source_sha256": "a3b1744e26cf1f7fbcdaa4c10627a069d9947f03bbc8450506c39ac4220d8c2c"
+      "source_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
@@ -64596,7 +64596,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 45,
-      "source_sha256": "a3b1744e26cf1f7fbcdaa4c10627a069d9947f03bbc8450506c39ac4220d8c2c"
+      "source_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
@@ -64609,7 +64609,7 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 163,
-      "source_sha256": "a3b1744e26cf1f7fbcdaa4c10627a069d9947f03bbc8450506c39ac4220d8c2c"
+      "source_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
@@ -64622,7 +64622,20 @@
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 47,
-      "source_sha256": "a3b1744e26cf1f7fbcdaa4c10627a069d9947f03bbc8450506c39ac4220d8c2c"
+      "source_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "start": 301,
+      "cut": 303,
+      "group_end": 303,
+      "kind": "ifdef",
+      "expression": "FE_SB",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
@@ -64630,12 +64643,25 @@
       "cut": 295,
       "group_end": 295,
       "kind": "ifdef",
-      "expression": "FE_SB",
+      "expression": "MEMPHIS_MENUS",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "a3b1744e26cf1f7fbcdaa4c10627a069d9947f03bbc8450506c39ac4220d8c2c"
+      "source_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "start": 297,
+      "cut": 299,
+      "group_end": 299,
+      "kind": "ifdef",
+      "expression": "MEMPHIS_MENU_WATERMARKS",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "f4122df4a940d2493116297bf4760695aa38ea4c0235e170ea6967bc3c5f0474"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
@@ -65694,7 +65720,7 @@
   "errors": [],
   "status_counts": {
     "unselected-file": 760,
-    "newly-excluded": 644,
+    "newly-excluded": 646,
     "already-excluded": 1696,
     "pending": 75,
     "retained-observed": 1869,

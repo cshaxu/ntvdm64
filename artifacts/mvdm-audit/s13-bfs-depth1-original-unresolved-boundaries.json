@@ -2,30 +2,6 @@
   "scope": "original first-depth missing structure triage, no deeper audit",
   "records": [
     {
-      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
-      "original_line": 380,
-      "directive": "ifdef",
-      "expression": "MEMPHIS_MENUS",
-      "classification": "unresolved",
-      "original_owners": [],
-      "exact_current_nested": [],
-      "current_anchors": [],
-      "boundary_review": "Original conditional belongs to the removed gap between _DefSetText and GetControlBrush; no unique active insertion point or supported context established.",
-      "disposition": "pending; no unconditional restoration or rejection"
-    },
-    {
-      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
-      "original_line": 500,
-      "directive": "ifdef",
-      "expression": "MEMPHIS_MENU_WATERMARKS",
-      "classification": "unresolved",
-      "original_owners": [],
-      "exact_current_nested": [],
-      "current_anchors": [],
-      "boundary_review": "Original conditional belongs to the same omitted routine range; do not insert a global rejection without an ownership/context proof.",
-      "disposition": "pending; no unconditional restoration or rejection"
-    },
-    {
       "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
       "original_line": 2307,
       "directive": "if",

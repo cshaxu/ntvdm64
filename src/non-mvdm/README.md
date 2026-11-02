@@ -1857,3 +1857,9 @@ OPENNT-HOST-158: restore the original ntstubs.c FE_SB client-message
 condition, marking its unsupported original body with #error. All current
 ntstubs owners omit FE_SB. The original guard retains diagnostic line 1611.
 Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-ntstubs-fe-sb.json.
+
+OPENNT-HOST-159: restore original ntstubs.c global MEMPHIS_MENUS and
+MEMPHIS_MENU_WATERMARKS condition shells; unsupported bodies are #error.
+Retained local owners are reordered relative to OpenNT; both original shells
+are global and precede the restored FE_SB shell. Logical lines 380/500 are
+anchored. Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-ntstubs-memphis.json.

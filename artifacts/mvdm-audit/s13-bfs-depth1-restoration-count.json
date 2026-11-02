@@ -88,9 +88,19 @@
       "file": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
       "original_condition": "#ifdef FE_SB (fnINWPARAMDBCSCHAR, original line 1611)",
       "evidence": "s13-bfs-depth1-ntstubs-fe-sb.json"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_condition": "#ifdef MEMPHIS_MENUS (original line 380)",
+      "evidence": "s13-bfs-depth1-ntstubs-memphis.json"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_condition": "#ifdef MEMPHIS_MENU_WATERMARKS (original line 500)",
+      "evidence": "s13-bfs-depth1-ntstubs-memphis.json"
     }
   ],
-  "derived_total": 58,
-  "derived_current_bfs_total": 25,
+  "derived_total": 60,
+  "derived_current_bfs_total": 27,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

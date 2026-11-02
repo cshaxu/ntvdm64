@@ -289,6 +289,14 @@ LONG GetClassWOWWords(
     ENDCALL(LONG);
 }
 #endif /* WOW_ORIGINAL_DIALOG_GETSET */
+#line 380
+#ifdef MEMPHIS_MENUS
+#error Excluded unsupported MEMPHIS_MENUS client owner
+#endif // MEMPHIS_MENUS
+#line 500
+#ifdef MEMPHIS_MENU_WATERMARKS
+#error Excluded unsupported MEMPHIS_MENU_WATERMARKS client owner
+#endif // MEMPHIS_MENU_WATERMARKS
 #line 1611
 #ifdef FE_SB // fnINWPARAMDBCSCHAR()
 #error Excluded unsupported FE_SB client message owner

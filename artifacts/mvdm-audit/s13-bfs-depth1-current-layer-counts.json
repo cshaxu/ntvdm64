@@ -1,10 +1,10 @@
 {
   "scope": "current-source first-depth disposition and child group counts; no child content audit",
-  "depth1_groups": 4074,
-  "depth1_arms": 5053,
+  "depth1_groups": 4076,
+  "depth1_arms": 5055,
   "depth1_status": {
     "unselected-file": 760,
-    "newly-excluded": 644,
+    "newly-excluded": 646,
     "already-excluded": 1696,
     "pending": 75,
     "retained-observed": 1869,
@@ -15,8 +15,8 @@
     "pending": 41,
     "unselected-file": 1590
   },
-  "restored_original_groups_relative_to_fixed_head": 58,
-  "restored_in_current_bfs_pass": 25,
+  "restored_original_groups_relative_to_fixed_head": 60,
+  "restored_in_current_bfs_pass": 27,
   "restoration_count_evidence": "s13-bfs-depth1-restoration-count.json",
   "original_missing_structures": "separate s13-bfs-depth1-original-unresolved-boundaries.json; not claimed complete"
 }
