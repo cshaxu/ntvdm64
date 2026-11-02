@@ -229,5 +229,6 @@ ULONG BaseSrvTag;
 #include "basevdm.h"
 #include <stdio.h>
 #if !defined(OPENNT_BASE_VDM_SERVER)
-#include <ntdddfs.h>
+#error Unsupported excluded original configuration
 #endif
+#line 234

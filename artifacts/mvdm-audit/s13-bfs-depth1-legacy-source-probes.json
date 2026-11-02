@@ -1,0 +1,71 @@
+{
+  "scope": "scratch first-depth selected logical-line boundaries, standalone NTVDM flag review separate",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "arm": 69,
+      "cut": 80,
+      "end": 80,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 81,
+      "source_sha256": "b7a1b588e189265f5023a260f8df7118263962de3f87a498e57be997f13631bd",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "arm": 1008,
+      "cut": 1196,
+      "end": 1196,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 1195,
+      "source_sha256": "060b545602902d90e0ad5d1ed0804a9d0b0d27dcfc8bd4650b721c2a27cb24c9",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "arm": 160,
+      "cut": 173,
+      "end": 173,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 170,
+      "source_sha256": "97376ee807202ae38d513b88f8789d21760e50d49571d4b4c2ca10c390c0e312",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "arm": 333,
+      "cut": 335,
+      "end": 335,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 357,
+      "source_sha256": "a06a5767ba04a8b77bc6d89349116c59bd88768375eb1a5ba73ebd2af5cf16db",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "arm": 1326,
+      "cut": 1492,
+      "end": 1492,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 1725,
+      "source_sha256": "a06a5767ba04a8b77bc6d89349116c59bd88768375eb1a5ba73ebd2af5cf16db",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sas.c",
+      "arm": 32,
+      "cut": 117,
+      "end": 117,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 118,
+      "source_sha256": "acc0798371852cf6c2600047957551381ed1fbe279ab366b0b206105a199790c",
+      "error": ""
+    }
+  ]
+}

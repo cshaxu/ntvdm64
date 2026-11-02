@@ -1,0 +1,78 @@
+{
+  "scope": "scratch-only all current x86 graph contexts for 4 NTVDM alternatives",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/host/nt_graph.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "323fbe793637310790fddd8dd01d9977df8e9a16d9514c567e47763aa2ddad1b",
+      "after_sha256": "7682aba8b068757365be471c6acbee4b6e288f6e61cd10f87b8e38de26aee77a",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/host/nt_event.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "3fb1d9e39b644b2594132f20aa2ba63ee73430c9fb7eaa7f25b5c1544d4edc44",
+      "after_sha256": "190dd00599cbb0beba12b6318a9523920dec77779191326f578deb8405aaff5e",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/host/nt_fulsc.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "a129f2d2770a10c52d4d6d029b49334120a0e958e57ab4d2e01992ee0f77bc29",
+      "after_sha256": "591177760cf6cec19018e7d9a8424f2f3d3dcc0cb9ec9c4cec915cf9d440ff88",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/host/nt_graph.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "323fbe793637310790fddd8dd01d9977df8e9a16d9514c567e47763aa2ddad1b",
+      "after_sha256": "7682aba8b068757365be471c6acbee4b6e288f6e61cd10f87b8e38de26aee77a",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/host/nt_event.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "3fb1d9e39b644b2594132f20aa2ba63ee73430c9fb7eaa7f25b5c1544d4edc44",
+      "after_sha256": "190dd00599cbb0beba12b6318a9523920dec77779191326f578deb8405aaff5e",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/host/nt_fulsc.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "a129f2d2770a10c52d4d6d029b49334120a0e958e57ab4d2e01992ee0f77bc29",
+      "after_sha256": "591177760cf6cec19018e7d9a8424f2f3d3dcc0cb9ec9c4cec915cf9d440ff88",
+      "error_before": "",
+      "error_after": ""
+    }
+  ],
+  "failures": []
+}

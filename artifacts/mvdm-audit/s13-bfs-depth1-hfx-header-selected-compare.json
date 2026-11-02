@@ -1,0 +1,126 @@
+{
+  "scope": "scratch-only selected preprocessing for all 80 current ICA header consumers",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/bios/bios.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "eee09228b9f3f9171f78a38b50e5903d783ac2b992c91f558ef9bc0cab173cb1",
+      "after_sha256": "1fa52abf3c400014fe1ef1600caa08fefe94c07b8b178aba5f1f1aff3adfe6e9",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/system/qevnt.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "a401423c82b6694c30b10cbbc86a4e98b15287c1ce1645735298cafd8146c697",
+      "after_sha256": "eb86fae5e244212b26c41710eb88f1d725956608c5f1d989950e392c57590788",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/host/nt_input.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "1d5caafa0dd09d043ed66a7b69751a80cf46f43ed0d8c10d53e93635f6a1e1fa",
+      "after_sha256": "18efdbddc48572be783535010b4e7df4bdced6a98e85b4308101f7f8a65951fe",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/host/nt_event.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "5d6512f0657a6ae9a7c104501254ec982dbb7946ebd05db17c9d3de3aa9595f5",
+      "after_sha256": "ca1e076408ede86be74bad59e2813567179df10715936236d352438a395f7272",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "tests/observation/nt_event_observed.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/tests/nt_event_observed.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "8479b08b6a024b0be3de5e4626283a2d8fcec17030713df64cb90e7c3326125b",
+      "after_sha256": "ae43564d9ed178af23fa4c0e67eb73a4f92ac7eaec6386212ebf2fd31446c31a",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/bios/bios.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "eee09228b9f3f9171f78a38b50e5903d783ac2b992c91f558ef9bc0cab173cb1",
+      "after_sha256": "1fa52abf3c400014fe1ef1600caa08fefe94c07b8b178aba5f1f1aff3adfe6e9",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/system/qevnt.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "a401423c82b6694c30b10cbbc86a4e98b15287c1ce1645735298cafd8146c697",
+      "after_sha256": "eb86fae5e244212b26c41710eb88f1d725956608c5f1d989950e392c57590788",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/host/nt_input.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "1d5caafa0dd09d043ed66a7b69751a80cf46f43ed0d8c10d53e93635f6a1e1fa",
+      "after_sha256": "18efdbddc48572be783535010b4e7df4bdced6a98e85b4308101f7f8a65951fe",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/host/nt_event.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "5d6512f0657a6ae9a7c104501254ec982dbb7946ebd05db17c9d3de3aa9595f5",
+      "after_sha256": "ca1e076408ede86be74bad59e2813567179df10715936236d352438a395f7272",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "tests/observation/nt_event_observed.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/tests/nt_event_observed.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "8479b08b6a024b0be3de5e4626283a2d8fcec17030713df64cb90e7c3326125b",
+      "after_sha256": "ae43564d9ed178af23fa4c0e67eb73a4f92ac7eaec6386212ebf2fd31446c31a",
+      "error_before": "",
+      "error_after": ""
+    }
+  ],
+  "failures": []
+}

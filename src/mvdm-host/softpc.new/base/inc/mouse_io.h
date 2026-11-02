@@ -253,8 +253,9 @@
 #define	MOUSE_VIDEO_MODE_MAXIMUM	0x11	
 #endif /* VGG */
 #else
-#define	MOUSE_VIDEO_MODE_MAXIMUM	8	
+#error Unsupported excluded original configuration
 #endif
+#line 258
 
 
 /*
@@ -788,28 +789,9 @@ IMPORT HOSTMOUSEFUNCS	*working_mouse_funcs;
 	(working_mouse_funcs->cursor_mode_change)()
 	
 #else	/* HOST_MOUSE */
-
-#define host_mouse_restore_cursor()
-
-#define host_deinstall_host_mouse()
-
-#define host_mouse_installed()	FALSE
-
-#define host_mouse_in_use()	FALSE
-
-#define host_mouse_reset()
-
-#define host_mouse_set_position(x,y)
-
-#define host_mouse_set_graphics(x,y,z)
-
-#define host_mouse_cursor_display()
-
-#define host_mouse_cursor_undisplay()
-
-#define host_mouse_cursor_mode_change()
-	
+#error Unsupported excluded original configuration
 #endif	/* HOST_MOUSE */
+#line 813
 
 #ifdef NTVDM
 VOID host_enable_delta_motion IPT0();

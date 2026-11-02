@@ -1,0 +1,20 @@
+{
+  "scope": "scratch real consumer for nine first-depth header boundary candidates; no disposition decision",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm": 194,
+      "cut": 207,
+      "end": 207,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        210
+      ],
+      "source_sha256": "8888b824520cb6cf7eefdbfcfa5ab2cf845b5602fb375424ecf42828f02c1865",
+      "error": ""
+    }
+  ],
+  "failures": []
+}

@@ -95,9 +95,9 @@ with no file open to edit; thus taken as default.
 */
 #define DEFAULTXMSLMT        0xffff
 #else
-#define DEFAULTXMSLMT	     0	      /* kilobytes ; ntvdm will choose it
-					 intelligently. sudeepb 26-Sep-1992*/
+#error Unsupported excluded original configuration
 #endif
+#line 101
 
 #define DEFAULTVIDMEM        TEXTMODE
 #define DEFAULTDISPUS        PF_WINDOWED

@@ -1,0 +1,40 @@
+{
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "arch": "x86",
+      "exit": 0,
+      "line": 185
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/hook",
+      "arch": "x64",
+      "exit": 0,
+      "line": 185
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/launcher",
+      "arch": "x64",
+      "exit": 0,
+      "line": 185
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/service",
+      "arch": "x64",
+      "exit": 0,
+      "line": 185
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker",
+      "arch": "x64",
+      "exit": 0,
+      "line": 185
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "arch": "x86",
+      "exit": 0,
+      "line": 185
+    }
+  ]
+}

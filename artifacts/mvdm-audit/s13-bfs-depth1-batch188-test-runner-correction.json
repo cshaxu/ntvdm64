@@ -1,0 +1,9 @@
+{
+  "candidate": "build/t473-s13/batch188-package",
+  "first_attempt": "Windows PowerShell 5.1: failed in verify-s7-rpc-fixtures.ps1 on null ProcessStartInfo.ArgumentList",
+  "control": "PowerShell 5.1 returns null for ProcessStartInfo.ArgumentList; PowerShell 7.6.5 provides it",
+  "disposition": "runner configuration failure, not a product pass or product failure; rerun complete Full suite under PowerShell 7 with fresh output root",
+  "first_log": "build/t473-s13/batch188-full-runner.log",
+  "existing_rule": "docs/rules/EXECUTION.md, Private-desktop test token: use modern pwsh, do not substitute legacy Windows PowerShell",
+  "cause": "agent launched the test using a prohibited legacy host despite the existing rule"
+}

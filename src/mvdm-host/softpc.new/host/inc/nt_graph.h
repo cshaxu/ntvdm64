@@ -113,12 +113,9 @@ typedef struct
 #define MAX_SCALE(value) ((value) << 1)
 
 #else   /* BIGWIN */
-
-#define SCALE(value) (value)
-#define UNSCALE(value) (value)
-#define MAX_SCALE(value) (value)
-
+#error Unsupported excluded original configuration
 #endif /* BIGWIN */
+#line 122
 
 /*@ACW=======================================================================
 Define to access the Console Window handle from VDMConsoleOperation.

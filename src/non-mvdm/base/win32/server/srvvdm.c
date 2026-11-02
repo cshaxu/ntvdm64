@@ -2624,8 +2624,9 @@ BaseSrvUpdateVDMSequenceNumber (
     if (hVDM == (HANDLE) -1) {
         if (WOWHead == NULL || WOWHead->SequenceNumber != 0) {
 #if DEVL
-            DbgPrint( "BASESRV: WOW is in inconsistent state. Contact DOS Team\n");
+#error Unsupported excluded original configuration
 #endif
+#line 2629
             return;
         }
         WOWHead->SequenceNumber = VDMSequenceNumber;
@@ -2642,8 +2643,9 @@ BaseSrvUpdateVDMSequenceNumber (
 
         if (!NT_SUCCESS (Status) || pConsoleRecord->SequenceNumber != 0) {
 #if DEVL
-            DbgPrint( "BASESRV: DOS is in inconsistent state. Contact DOS Team\n");
+#error Unsupported excluded original configuration
 #endif
+#line 2647
             RtlLeaveCriticalSection( &BaseSrvDOSCriticalSection );
             return;
         }

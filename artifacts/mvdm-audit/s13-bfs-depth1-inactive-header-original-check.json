@@ -1,0 +1,59 @@
+{
+  "scope": "first-depth branch original selector through endif with line ending normalized only for comparison",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "arm": 209,
+      "original_occurrences": 1,
+      "snippet_sha256_lf": "4bb3b237a6e4e69684b19381e3a283368a4a3190ed332efdae7920c1839eea82"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 185,
+      "original_occurrences": 1,
+      "snippet_sha256_lf": "1dabce72dd2e6e5f2f87e5feb2be7f66898840e312f9580f419cc58f95165d6c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 199,
+      "original_occurrences": 1,
+      "snippet_sha256_lf": "80ba39827a765cddef7312139298b4dd6c3dd3b0ffd5be6492681d56beb59bef"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 299,
+      "original_occurrences": 1,
+      "snippet_sha256_lf": "cb1cc94f65726fe20134593d55e5789004f5d8c847eda4387621abbffcc46724"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 307,
+      "original_occurrences": 1,
+      "snippet_sha256_lf": "b74500e1762395a7269ee4fa1a0a984917fe94cf8bc981890a47e7e9bc8071d1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 313,
+      "original_occurrences": 1,
+      "snippet_sha256_lf": "f634e25f15a7320fbaf88e55f64c307f221db2924d7db05ee2ff492415c55ed8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "arm": 99,
+      "original_occurrences": 1,
+      "snippet_sha256_lf": "f6549fcdbc0cc627f30234333da97f5b56c46396053f47f8a56c23b8420f979d"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "arm": 46,
+      "original_occurrences": 1,
+      "snippet_sha256_lf": "c1b871f4470d5fe9f0be9d1006794d129bef291ec8cae1bc27abe0f6be1b4782"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.h",
+      "arm": 84,
+      "original_occurrences": 1,
+      "snippet_sha256_lf": "dbaebb6aba7a008ca78400c7ff07814110babbd6f82a2047e81dc70483b64ab1"
+    }
+  ]
+}

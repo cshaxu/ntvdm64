@@ -1,0 +1,25 @@
+{
+  "scope": "two standalone painter fixtures with actual V7VGA host flags",
+  "records": [
+    {
+      "fixture": "video7_packed_painter_test.c",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal": true,
+      "before_sha256": "b56835f2ea60d9004469e8d20eb449e75a5059a91f36d947bbca4a7bd3b9ee42",
+      "after_sha256": "b56835f2ea60d9004469e8d20eb449e75a5059a91f36d947bbca4a7bd3b9ee42",
+      "before_error": "",
+      "after_error": ""
+    },
+    {
+      "fixture": "planar_painter_object_fixture.c",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal": true,
+      "before_sha256": "c16d7057ca75c1e85f979d2a3bee073304d01744d21499cd7ad65c80ed8948e3",
+      "after_sha256": "c16d7057ca75c1e85f979d2a3bee073304d01744d21499cd7ad65c80ed8948e3",
+      "before_error": "",
+      "after_error": ""
+    }
+  ]
+}

@@ -190,10 +190,9 @@
 			(rate == RS_500 ? RS_250: \
 			(rate == RS_250 ? RS_300: RS_500)))
 #else
-#define	next_rate(rate)	(rate == RS_500 ? RS_250: \
-			(rate == RS_250 ? RS_300: \
-			(rate == RS_300 ? RS_1000: RS_500)))
+#error Unsupported excluded original configuration
 #endif
+#line 197
 
 /*
  *	Unused high density floppy variables
@@ -476,10 +475,9 @@ extern void diskette_io(void);
 extern void diskette_int(void);
 extern void diskette_post(void);
 #else
-extern void diskette_io();
-extern void diskette_int();
-extern void diskette_post();
+#error Unsupported excluded original configuration
 #endif /* ANSI */
+#line 483
 
 /*
  *	Secondary external functions
@@ -500,20 +498,9 @@ extern void fl_format_set(int);
 extern void fl_set_media(int);
 extern void fl_diskette_setup(void);
 #else
-extern void fl_disk_reset();
-extern void fl_disk_status();
-extern void fl_disk_read();
-extern void fl_disk_write();
-extern void fl_disk_verify();
-extern void fl_disk_format();
-extern void fl_fnc_err();
-extern void fl_disk_parms();
-extern void fl_disk_type();
-extern void fl_disk_change();
-extern void fl_format_set();
-extern void fl_set_media();
-extern void fl_diskette_setup();
+#error Unsupported excluded original configuration
 #endif /* ANSI */
+#line 517
 
 
 /*
@@ -525,10 +512,9 @@ extern void drive_detect(int);
 extern void translate_old(int);
 extern void GetFormatParams(int *, int *, int *, int *);
 #else
-extern void drive_detect();
-extern void translate_old();
-extern void GetFormatParams();
+#error Unsupported excluded original configuration
 #endif /* ANSI */
+#line 532
 
 
 /*
@@ -541,12 +527,9 @@ extern void host_attach_floppies (void);
 extern void host_detach_floppies (void);
 extern void host_flip_real_floppy_ind (void);
 #else
-extern void host_floppy_init();
-extern void host_floppy_term();
-extern void host_attach_floppies ();
-extern void host_detach_floppies ();
-extern void host_flip_real_floppy_ind ();
+#error Unsupported excluded original configuration
 #endif /* ANSI */
+#line 550
 
 /*
  *	Secondary function jump table definitions

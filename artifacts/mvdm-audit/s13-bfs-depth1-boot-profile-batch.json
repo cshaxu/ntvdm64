@@ -1,0 +1,28 @@
+{
+  "scope": "first-depth original-boundary finalists; unsupported profiles held; selected lines retained",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "arm": 285,
+      "cut": 339,
+      "end": 339,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 340,
+      "source_sha256": "7cda05518a3473d52c7383620cd000f936b93219a1e746461c26116cc0531565",
+      "error": "",
+      "before_sha256": "7cda05518a3473d52c7383620cd000f936b93219a1e746461c26116cc0531565",
+      "after_sha256": "7cdd98e4a260a2c282dc564af2d213f8b6bef2d67bcc843e1dc18c88c3f2d398",
+      "original_sha256": "96ee0fb677da9f35811f9dc1715d583474ce72bba9fa91f5eb2d5f6ab242b0c3",
+      "body_sha256": "266f79cd5045eb5afa76aea0b3fe04e6e9c61f9d1cf95d45a758a011fbcc315b",
+      "body_lines": 53,
+      "scratch_key": "061ddf72d52e5240",
+      "current_start_line": 285,
+      "current_cut_line": 287,
+      "current_end_line": 287,
+      "registration": "MVDM-HOST-DIV-598"
+    }
+  ],
+  "subsumed_nested_groups": 0,
+  "subsumed_ledger_entries": 0
+}

@@ -955,10 +955,9 @@ BOOL InstallWowFaxPrinter(PSZ szSection, PSZ szKey, PSZ szString)
                     bRetVal = (GetLastError() == ERROR_PRINTER_ALREADY_EXISTS);
                 }
 #ifdef DBG
-                if (!bRetVal) {
-                    LOGDEBUG(0,("InstallWowFaxPrinter, AddPrinter failed: 0x%X\n", GetLastError()));
-                }
+#error Unsupported excluded original configuration
 #endif
+#line 965
             }
             else {
                 LOGDEBUG(0,("InstallWowFaxPrinter, AddPrinterDriver failed: 0x%X\n", GetLastError()));

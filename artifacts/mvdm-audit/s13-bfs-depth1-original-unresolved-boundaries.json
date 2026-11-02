@@ -1,0 +1,125 @@
+{
+  "scope": "original first-depth missing structure triage, no deeper audit",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 380,
+      "directive": "ifdef",
+      "expression": "MEMPHIS_MENUS",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": [],
+      "boundary_review": "Original conditional belongs to the removed gap between _DefSetText and GetControlBrush; no unique active insertion point or supported context established.",
+      "disposition": "pending; no unconditional restoration or rejection"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 500,
+      "directive": "ifdef",
+      "expression": "MEMPHIS_MENU_WATERMARKS",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": [],
+      "boundary_review": "Original conditional belongs to the same omitted routine range; do not insert a global rejection without an ownership/context proof.",
+      "disposition": "pending; no unconditional restoration or rejection"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "original_line": 1611,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": [],
+      "boundary_review": "Original conditional occurs after the final retained original routine; no corresponding current code or unique insertion context.",
+      "disposition": "pending; no unconditional restoration or rejection"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2307,
+      "directive": "if",
+      "expression": "DBG",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": [],
+      "boundary_review": "Original group lies after the original whole-file guard and has an else defining a release macro; current header is a deliberate two-phase subset. Restoring only an error would discard a potentially selected alternative.",
+      "disposition": "pending; no unconditional restoration or rejection"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2320,
+      "directive": "if",
+      "expression": "DBG",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": [],
+      "boundary_review": "Original group has a release else and is outside the original guard; current two-phase subset omits the surrounding handle-fixup API.",
+      "disposition": "pending; no unconditional restoration or rejection"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2342,
+      "directive": "if",
+      "expression": "HANDLE_FIXUP",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": [],
+      "boundary_review": "Original HANDLE_FIXUP group has an else defining a macro; active subset omits this API, and selection in independent include contexts is unproven.",
+      "disposition": "pending; no unconditional restoration or rejection"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2358,
+      "directive": "if",
+      "expression": "HANDLE_FIXUP",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": [],
+      "boundary_review": "Second original HANDLE_FIXUP group also has a selected alternative; do not synthesize a global error.",
+      "disposition": "pending; no unconditional restoration or rejection"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h",
+      "original_line": 2374,
+      "directive": "ifdef",
+      "expression": "FE_SB",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": [],
+      "boundary_review": "Original FE_SB block occurs after the removed handle-fixup region and outside the original guard; insertion into the two-phase subset requires a proven owner/context.",
+      "disposition": "pending; no unconditional restoration or rejection"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 53,
+      "directive": "ifdef",
+      "expression": "FE_IME",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": [],
+      "boundary_review": "Original FE_IME guarded global occurs in an entirely omitted global declaration block before the retained message-table subset; no corresponding current owner has been established.",
+      "disposition": "pending; no unconditional restoration or rejection"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_line": 1257,
+      "directive": "ifndef",
+      "expression": "PAGE_SIZE",
+      "classification": "unresolved",
+      "original_owners": [],
+      "exact_current_nested": [],
+      "current_anchors": [],
+      "boundary_review": "Original PAGE_SIZE condition is a fallback definition in removed server initialization; a blind #error can reject a valid undefined-PAGE_SIZE context.",
+      "disposition": "pending; no unconditional restoration or rejection"
+    }
+  ]
+}

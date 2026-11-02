@@ -1,0 +1,18 @@
+{
+  "scope": "scratch-only all current x86 graph contexts for 4 NTVDM alternatives",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/wmtbl32.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "04bed4b76e8c4332bb11f58388c57abf57c2b7ea49903eef17d44582a2dc8cd3",
+      "after_sha256": "04bed4b76e8c4332bb11f58388c57abf57c2b7ea49903eef17d44582a2dc8cd3",
+      "error_before": "",
+      "error_after": ""
+    }
+  ],
+  "failures": []
+}

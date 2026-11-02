@@ -533,30 +533,9 @@ LOCAL VOID check_indicators IFN1(IBOOL, eoi)
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif	/* GISP_CPU */
 #else	/* not NTVDM nor GISP_CPU */
-
-			send_data(LED_CMD);
-
-			/* set kb flag up with new status	*/
-			var_kb_flag_2 = (sas_hw_at_no_check(kb_flag_2) & 0xf8) | indicators;
-			sas_store_no_check(kb_flag_2, var_kb_flag_2);
-
-			/* check error from previous send_data()	*/
-			if( (var_kb_flag_2 & KB_ERR) == 0)
-			{
-				/* No error	*/
-				send_data(indicators);
-
-				/* test for error	*/
-				if(sas_hw_at_no_check(kb_flag_2) & KB_ERR) {
-					/* error!	*/
-					note_trace0(BIOS_KB_VERBOSE,"got error sending change LEDs command");
-					send_data(KB_ENABLE);
-				}
-			}
-			else
-				/* error!	*/
-				send_data(KB_ENABLE);
+#error Unsupported excluded original configuration
 #endif	/* NTVDM or GISP_CPU */
+#line 560
 
 			/* turn off update indicator and error flag	*/
 			sas_store_no_check (kb_flag_2, sas_hw_at_no_check(kb_flag_2) & ~(KB_PR_LED + KB_ERR));

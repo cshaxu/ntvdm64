@@ -283,60 +283,9 @@ void AddSystemFiles(void)
     * disposition; the original source body remains below as mirror evidence. */
    mvdm_softpc_prepare_system_file_compatibility();
 #else
-   HANDLE hFile, hFind;
-   WIN32_FIND_DATA wfd;
-   char *pchIOSYS    ="C:\\IO.SYS";
-   char *pchMSDOSSYS ="C:\\MSDOS.SYS";
-
-
-   hFind = FindFirstFile(pchMSDOSSYS, &wfd);
-   if (hFind == INVALID_HANDLE_VALUE) {
-       hFind = FindFirstFile("C:\\IBMDOS.SYS", &wfd);
-       }
-
-   if (hFind != INVALID_HANDLE_VALUE) {
-       FindClose(hFind);
-       }
-   else {
-       hFile = CreateFile(pchMSDOSSYS,
-                          0,
-                          FILE_SHARE_READ | FILE_SHARE_WRITE,
-                          NULL,
-                          CREATE_NEW,
-                          FILE_ATTRIBUTE_HIDDEN |
-                          FILE_ATTRIBUTE_SYSTEM |
-                          FILE_ATTRIBUTE_READONLY,
-                          0);
-       if (hFile != INVALID_HANDLE_VALUE) { // not much we can do if fails
-           CloseHandle(hFile);
-           }
-
-       }
-
-   hFind = FindFirstFile(pchIOSYS, &wfd);
-   if (hFind == INVALID_HANDLE_VALUE) {
-       hFind = FindFirstFile("C:\\IBMBIO.SYS", &wfd);
-       }
-
-   if (hFind != INVALID_HANDLE_VALUE) {
-       FindClose(hFind);
-       }
-   else {
-       hFile = CreateFile(pchIOSYS,
-                          0,
-                          FILE_SHARE_READ | FILE_SHARE_WRITE,
-                          NULL,
-                          CREATE_NEW,
-                          FILE_ATTRIBUTE_HIDDEN |
-                          FILE_ATTRIBUTE_SYSTEM |
-                          FILE_ATTRIBUTE_READONLY,
-                          0);
-       if (hFile != INVALID_HANDLE_VALUE) { // not much we can do if fails
-           CloseHandle(hFile);
-           }
-
-       }
+#error Unsupported excluded original configuration
 #endif
+#line 340
 }
 
 

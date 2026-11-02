@@ -1,0 +1,31 @@
+{
+  "candidates": [
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "arm": 93,
+      "cut": 127,
+      "end": 209,
+      "source_sha256": "92f3ce07b9978acdcc702c95166d5151b7c57488076b3b21322885311fa30264",
+      "cut_logical": 128,
+      "end_logical": 210
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "arm": 694,
+      "cut": 698,
+      "end": 711,
+      "source_sha256": "92f3ce07b9978acdcc702c95166d5151b7c57488076b3b21322885311fa30264",
+      "cut_logical": 807,
+      "end_logical": 820
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "arm": 278,
+      "cut": 283,
+      "end": 283,
+      "source_sha256": "6b73084323a9d7f008437be0a8a4262c80808b45ecba7f0427ad55ddeb337737",
+      "cut_logical": 312,
+      "end_logical": 312
+    }
+  ]
+}

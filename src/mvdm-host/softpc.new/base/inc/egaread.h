@@ -6,11 +6,9 @@ extern void ega_read_term(void);
 extern void ega_read_routines_update(void);
 extern boolean ega_need_read_op(int);
 #else /* ANSI */
-extern void ega_read_init();
-extern void ega_read_term();
-extern void ega_read_routines_update();
-extern boolean ega_need_read_op();
+#error Unsupported excluded original configuration
 #endif /* ANSI */
+#line 14
 
 typedef struct
 {

@@ -1,0 +1,20 @@
+{
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "before_exit": 0,
+      "after_exit": 0,
+      "equal_output": true,
+      "before_error": "event-before.c\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\\host_def.h(154): warning C4005: 'NTVDM': macro redefinition\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\\host_def.h(154): note: 'NTVDM' previously declared on the command line\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\\gvi.h(47): warning C4005: 'TEXT': macro redefinition\r\nC:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\um\\winnt.h(620): note: see previous definition of 'TEXT'\r\n",
+      "after_error": "event-after.c\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\\host_def.h(154): warning C4005: 'NTVDM': macro redefinition\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\\host_def.h(154): note: 'NTVDM' previously declared on the command line\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\\gvi.h(47): warning C4005: 'TEXT': macro redefinition\r\nC:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\um\\winnt.h(620): note: see previous definition of 'TEXT'\r\n"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "before_exit": 0,
+      "after_exit": 0,
+      "equal_output": true,
+      "before_error": "event-before.c\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\\host_def.h(154): warning C4005: 'NTVDM': macro redefinition\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\\host_def.h(154): note: 'NTVDM' previously declared on the command line\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\\gvi.h(47): warning C4005: 'TEXT': macro redefinition\r\nC:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\um\\winnt.h(620): note: see previous definition of 'TEXT'\r\n",
+      "after_error": "event-after.c\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\\host_def.h(154): warning C4005: 'NTVDM': macro redefinition\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\\host_def.h(154): note: 'NTVDM' previously declared on the command line\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/base/inc\\gvi.h(47): warning C4005: 'TEXT': macro redefinition\r\nC:\\Program Files (x86)\\Windows Kits\\10\\\\include\\10.0.22621.0\\\\um\\winnt.h(620): note: see previous definition of 'TEXT'\r\n"
+    }
+  ]
+}

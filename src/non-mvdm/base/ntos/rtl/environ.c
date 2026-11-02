@@ -25,12 +25,9 @@ Revision History:
 #include <string.h>
 
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
-#pragma alloc_text(INIT,RtlCreateEnvironment          )
-#pragma alloc_text(INIT,RtlDestroyEnvironment         )
-#pragma alloc_text(INIT,RtlSetCurrentEnvironment      )
-#pragma alloc_text(INIT,RtlQueryEnvironmentVariable_U )
-#pragma alloc_text(INIT,RtlSetEnvironmentVariable     )
+#error Unsupported excluded original configuration
 #endif
+#line 34
 
 NTSTATUS
 RtlCreateEnvironment(

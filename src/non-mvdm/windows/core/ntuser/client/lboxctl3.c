@@ -889,8 +889,9 @@ INT xxxLbDir(
     result = -1;
 
 #ifndef UNICODE
-    CharToOem(lhszFileSpec, lhszFileSpec);
+#error Unsupported excluded original configuration
 #endif
+#line 894
 
     if (fWasVisible = IsLBoxVisible(plb)) {
         SendMessage(HWq(plb->spwnd), WM_SETREDRAW, FALSE, 0);
@@ -1137,8 +1138,9 @@ void LB_CreateLBLine(
     *lpch = TEXT('\0');
 
 #ifndef UNICODE
-    OemToChar(lpBuffer, lpBuffer);
+#error Unsupported excluded original configuration
 #endif
+#line 1142
 
 /*
  * This call is not in Win95.  FritzS

@@ -38,11 +38,9 @@ AMMENDMENTS	:
 	(segment / PAGE_PARA_RATIO)
 
 #else
-#define MAX_NO_PAGES		32	/* max. no of locations for	*/
-					/* mapping pages, (24 between	*/
-					/* 256KB and 640KB and 8 between*/
-					/* EM_start and EM_end		*/
+#error Unsupported excluded original configuration
 #endif
+#line 46
 
 #define MIN_FUNC_NO		0x40	/* Lowest function code		*/
 #ifndef PROD
@@ -181,8 +179,9 @@ extern int		restore_map(short handle_no, unsigned short segment,
 				    unsigned short offset,
 				    short pages_out[], short pages_in[]);
 #else /* ANSI */
-extern int		restore_map();
+#error Unsupported excluded original configuration
 #endif /* ANSI */
+#line 186
 
 IMPORT VOID LIM_b_write   IPT1(sys_addr, intel_addr);
 IMPORT VOID LIM_str_write IPT2(sys_addr, intel_addr, ULONG, length);

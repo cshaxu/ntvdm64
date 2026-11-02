@@ -270,10 +270,9 @@ void
 #line 291
 
 #ifdef HOOKED_IRETS		/* iret hook related variables */
-LOCAL IBOOL  iretHooksEnabled = FALSE;
-LOCAL IU16 iretHookMask = 0;    /* No interrupts hooked by default */
-LOCAL IU16 iretHookActive = 0;
+#error Unsupported excluded original configuration
 #endif /* HOOKED_IRETS */
+#line 297
 
 
 /*
@@ -332,8 +331,9 @@ LOCAL IU16 iretHookActive = 0;
 IS32 ica_accept IPT1(IU32, adapter);
 
 #ifdef HOOKED_IRETS
-extern IU32 ica_iret_hook_needed IPT1(IU32, line);
+#error Unsupported excluded original configuration
 #endif
+#line 357
 
 #if !defined (NTVDM)
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
@@ -1206,9 +1206,9 @@ void ica_hw_interrupt_cancel IFN2(IU32, adapter, IU32, line_no)
 GLOBAL IS32
 ica_intack IFN1(IU32 *, hook_address)
 #else
-GLOBAL IS32
-ica_intack IFN0()
+#error Unsupported excluded original configuration
 #endif	/* HOOKED_IRETS */
+#line 1235
 {
     /*
      * This routine is called by the CPU when it wishes to acknowledge
@@ -1325,172 +1325,9 @@ ica_iret_hook_called IFN1(IU32, abs_line)
 
 
 #ifdef HOOKED_IRETS
-#ifndef  GISP_CPU           /* GISP has own version of this routine */
-
-GLOBAL IU32 ica_iret_hook_needed IFN1(IU32, line)
-{
-	IU16 ireq_mask = 1 << line;
-
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-
-	/* does this line require iret hooks */
-	if (!(iretHookMask & ireq_mask))
-		/* Line not hooked. */
-		return 0;
-
-	/* if iret hooks implemented via bops, check bop table addresses ok */ 
-        if (host_bop_style_iret_hooks()) {
-            iretHookActive |= ireq_mask;
-            return(host_iret_bop_table_addr(line));
-            }
-        else  {
-            return(line + 1);
-            }
-}
-#endif	/* GISP_CPU */
-
-GLOBAL void
-ica_iret_hook_control IFN3(IU32, adapter, IU32, line, IBOOL, enable)
-{
-	int mask = 1 << (line + (adapter << 3));
-
-	if (enable)
-		iretHookMask |= mask;
-	else
-		iretHookMask &= ~mask;
-}
-
-
-GLOBAL void
-ica_iret_hook_called IFN1(IU32, abs_line)
-{
-	ADAPTER_STATE *asp;
-	IU32 adapter = abs_line >> 3;
-	IU32 line = abs_line - (adapter <<3);
-	IU8 i;
-
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-
-#ifdef CPU_40_STYLE
-	asp = &adapter_state[adapter];
-	asp->isr_time_decay[line][asp->isr_depth[line]] = 0;
-	asp->isr_depth[line]--;
-
-	/* back to base stack level so restart first level recursion counter */
-	if (asp->isr_depth[line] == 0)
-		asp->isr_progress[line][1] = 0;
-
-	/* enable interrupts on this line */
-	if (asp->isr_depth[line] < MAX_ISR_DEPTH)
-		iretHookActive &= ~(1 << abs_line);
-#else
-#error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
-#endif	/* CPU_40_STYLE */
-
-
-	if ((i = ica_scan_irr(adapter)) & 0x80)
-		ica_interrupt_cpu(adapter, i & 0x07);
-}
-
-
-#if defined(CPU_40_STYLE)
-#define HOWOFTEN	18	/* approx once per second */
-#define MAXAGE		8	/* passes before purge */
-GLOBAL void
-ica_check_stale_iret_hook IFN0()
-{
-	SAVED int howoften = 18;
-	int line, depth, loop;
-	ADAPTER_STATE *asp;
-	IS32 *cpdelay;
-
-	howoften --;
-	if (howoften == 0)
-	{
-		howoften = 18;
-
-		host_ica_lock();
-		asp = &adapter_state[0];
-		for (line = 0; line < 8; line++)
-		{
-		    if (iretHookMask & (1 << line))
-		    {
-			for (depth = 0; depth < asp->isr_depth[line]; depth++)
-			{
-				asp->isr_time_decay[line][depth]++;
-				if (asp->isr_time_decay[line][depth] == MAXAGE)
-				{
-					asp->isr_time_decay[line][depth] = 0;
-					if (depth == 0 && asp->ica_count[line] == 0)
-						continue;	/* line idle */
-
-					cpdelay = &asp->isr_time_decay[line][depth];
-					/* lose hook data for this depth */
-					loop = depth;
-					while(loop <= asp->isr_depth[line])
-					{
-						loop ++;
-						*cpdelay = *(cpdelay + 1);
-						cpdelay++;
-					}
-					asp->isr_depth[line]--;
-
-					/* fix cpu side */
-					PurgeLostIretHookLine(line + 1, depth);
-
-					/* permit intrs on this line */
-					iretHookActive &= ~(1 << line);
-
-					break;	/* one hook at a time */
-				}
-			}
-		    }
-		}
-		asp = &adapter_state[1];
-		for (line = 0; line < 8; line++)
-		{
-		    if (iretHookMask & (0x10 << line))
-		    {
-			for (depth = 0; depth < asp->isr_depth[line]; depth++)
-			{
-				asp->isr_time_decay[line][depth]++;
-				if (asp->isr_time_decay[line][depth] == MAXAGE)
-				{
-					asp->isr_time_decay[line][depth] = 0;
-					if (depth == 0 && asp->ica_count[line] == 0)
-						continue;	/* line idle */
-
-					cpdelay = &asp->isr_time_decay[line][depth];
-					/* lose hook data for this depth */
-					loop = depth;
-					while(loop <= asp->isr_depth[line])
-					{
-						loop ++;
-						*cpdelay = *(cpdelay + 1);
-						cpdelay++;
-					}
-					asp->isr_depth[line]--;
-
-					/* fix cpu side */
-					PurgeLostIretHookLine(line + 9, depth);
-
-					/* permit intrs on this line */
-					iretHookActive &= ~(1 << (8 + line));
-
-					break;	/* one hook at a time */
-				}
-			}
-		    }
-		}
-		host_ica_unlock();
-	}
-}
-#endif  /* CPU_40_STYLE */
+#error Unsupported excluded original configuration
 #endif	/* HOOKED_IRETS */
+#line 1725
 
 
 #ifdef SEGMENTATION

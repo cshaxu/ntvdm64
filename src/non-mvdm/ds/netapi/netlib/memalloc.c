@@ -115,14 +115,9 @@ Return Value:
         NewAddress = (LPVOID) hMem;
     }
 #else // ndef WIN32
-#ifndef CDEBUG
-    NewAddress = RtlAllocateHeap(
-                RtlProcessHeap( ), 0,              // heap handle
-                Size ));                        // bytes wanted
-#else // def CDEBUG
-#error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
-#endif // def CDEBUG
+#error Unsupported excluded original configuration
 #endif // ndef WIN32
+#line 126
 
     NetpAssert( ROUND_UP_POINTER( NewAddress, ALIGN_WORST) == NewAddress);
     return (NewAddress);
@@ -164,17 +159,9 @@ Return Value:
         NetpAssert(FALSE);
     }
 #else // ndef WIN32
-#ifndef CDEBUG
-    if (Address == NULL) {
-        return;
-    }
-    RtlFreeHeap(
-                RtlProcessHeap( ), 0,              // heap handle
-                Address);                       // addr of alloc'ed space.
-#else // def CDEBUG
-#error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
-#endif // def CDEBUG
+#error Unsupported excluded original configuration
 #endif // ndef WIN32
+#line 178
 } // NetpMemoryFree
 
 
@@ -253,37 +240,11 @@ Return Value:
         NewAddress = (LPVOID) hNewMem;
 
 #elif !defined(CDEBUG)  // not WIN32 or CDEBUG, must be NT
-
-        DWORD OldSize;
-
-        // Need size of old area to continue...
-        OldSize = RtlSizeHeap(
-                RtlProcessHeap( ), 0,              // heap handle
-                OldAddress);                    // "base" address
-        if (OldSize == NewSize) {
-            NewAddress = OldAddress;            // Another special case.
-        } else {
-
-            // Normal case (something into something else).  Alloc new area.
-            NewAddress = NetpMemoryAllocate(NewSize);
-            if (NewAddress != NULL) {
-
-                // Copy lesser of old and new sizes.
-                NetpMoveMemory(
-                        NewAddress,             // dest
-                        OldAddress,             // src
-                        (NewSize < OldSize) ? NewSize : OldSize);   // len
-
-                NetpMemoryFree(OldAddress);
-            }
-        }
-
+#error Unsupported excluded original configuration
 #else // must be CDEBUG
-
-        NetpAssert(NewSize == (DWORD)(size_t)NewSize);
-        NewAddress = realloc( OldAddress, NewSize );
-
+#error Unsupported excluded original configuration
 #endif // CDEBUG
+#line 287
 
     } // must be realloc of something to something else
 

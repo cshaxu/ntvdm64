@@ -1,0 +1,54 @@
+{
+  "scope": "actual current x87 span fixture, comparing old original-source baseline; not a success verdict",
+  "fixture_sha256": "4707967dbae81ccc6dbf699d2f561458d9d91bf434eb3e976466136e1234887a",
+  "cases": [
+    {
+      "case": 0,
+      "exit": 1,
+      "stderr": "case=0 bits=16 restore=0 short=0 vector=13 error=0 ip=8002",
+      "matches_historical_original_control": true
+    },
+    {
+      "case": 1,
+      "exit": 0,
+      "stderr": "case=1 bits=32 restore=0 short=0 vector=-1 error=0 ip=0000",
+      "matches_historical_original_control": true
+    },
+    {
+      "case": 2,
+      "exit": 1,
+      "stderr": "case=2 bits=16 restore=1 short=0 vector=13 error=0 ip=8002",
+      "matches_historical_original_control": true
+    },
+    {
+      "case": 3,
+      "exit": 0,
+      "stderr": "case=3 bits=32 restore=1 short=0 vector=-1 error=0 ip=0000",
+      "matches_historical_original_control": true
+    },
+    {
+      "case": 4,
+      "exit": 0,
+      "stderr": "case=4 bits=16 restore=0 short=1 vector=13 error=0 ip=8002",
+      "matches_historical_original_control": true
+    },
+    {
+      "case": 5,
+      "exit": 1,
+      "stderr": "case=5 bits=32 restore=0 short=1 vector=-1 error=0 ip=0000",
+      "matches_historical_original_control": true
+    },
+    {
+      "case": 6,
+      "exit": 0,
+      "stderr": "case=6 bits=16 restore=1 short=1 vector=13 error=0 ip=8002",
+      "matches_historical_original_control": true
+    },
+    {
+      "case": 7,
+      "exit": 1,
+      "stderr": "case=7 bits=32 restore=1 short=1 vector=-1 error=0 ip=0000",
+      "matches_historical_original_control": true
+    }
+  ]
+}

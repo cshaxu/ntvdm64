@@ -51,8 +51,9 @@ AMENDMENTS      :
  */
 
 #ifndef CMOS_FILE_NAME
-#define CMOS_FILE_NAME "cmos.ram"
+#error Unsupported excluded original configuration
 #endif
+#line 56
 
 long host_read_resource(int type, char *name, byte *addr, int maxsize, int display_error)
 /* int type;                     Unused */

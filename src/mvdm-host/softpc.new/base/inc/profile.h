@@ -243,9 +243,9 @@ extern EOI_BUFFER_FORMAT **GdpProfileUpdate IPT2 (EOI_BUFFER_FORMAT, *rawDataBuf
 extern void HostEnterProfCritSec IPT0();
 extern void HostLeaveProfCritSec IPT0();
 #else
-#define HostEnterProfCritSec()	/* Nothing */
-#define HostLeaveProfCritSec()	/* Nothing */
+#error Unsupported excluded original configuration
 #endif
+#line 249
 extern PROF_TIMEPTR HostTimestampDiff IPT2(PROF_TIMEPTR, tbegin, PROF_TIMEPTR, tend);
 extern void HostAddTimestamps IPT2(PROF_TIMEPTR, tbase, PROF_TIMEPTR, taddn);
 extern void HostSlipTimestamp IPT2(PROF_TIMEPTR, tbase, PROF_TIMEPTR, tdelta);

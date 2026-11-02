@@ -74,8 +74,9 @@ void time_strobe()
     static   boolean   video_off   = FALSE;
 
 #if !defined(REAL_TIMER) && !defined(NTVDM)
-	time_tick();
+#error Unsupported excluded original configuration
 #endif
+#line 79
 
 #ifdef HUNTER
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.

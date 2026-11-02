@@ -1,0 +1,21 @@
+{
+  "scope": "supported DPMI non-CCPU negative object profile: product command with /DCCPU replaced by /UCCPU",
+  "exit": 2,
+  "positive_arms": [],
+  "error": "'EFLAGS_TF_MASK': macro redefinition\r\nO:/repos.hobby/ntvdm64/build/t473-s13/bfs-depth1-pending-graph-markers/shadow/src/non-mvdm/public/internal/base/inc\\vdm.h(178): note: see previous definition of 'EFLAGS_TF_MASK'\r\nO:/repos.hobby/ntvdm64/build/t473-s13/bfs-depth1-pending-graph-markers/shadow/src/mvdm-host/dpmi32\\dpmiint.h(40): warning C4005: 'VDM_INT_32': macro redefinition\r\nO:/repos.hobby/ntvdm64/build/t473-s13/bfs-depth1-pending-graph-markers/shadow/src/non-mvdm/public/internal/base/inc\\vdm.h(326): note: see previous definition of 'VDM_INT_32'\r\nO:/repos.hobby/ntvdm64/build/t473-s13/bfs-depth1-pending-graph-markers/shadow/src/mvdm-host/dpmi32/dpmiint.c(1513): fatal error C1189: #error:  DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.\r\n",
+  "unmodified_source_result": "preprocessing with exact product flags except /DCCPU replaced by /UCCPU fails at MVDM-HOST-DIV-515",
+  "prior_baseline": "7f2bb2924 already contains the same guard; not introduced by the latest batch",
+  "test_owner": "tests/observation/verify-dpmi-swint-selected.ps1 explicitly requires a non-CCPU negative object to compile and checks its symbols",
+  "first_depth_owner": {
+    "path": "src/mvdm-host/dpmi32/dpmiint.c",
+    "line": 1421,
+    "condition": "#ifndef i386",
+    "status": "retained-observed"
+  },
+  "nested_boundary": {
+    "line": 1495,
+    "depth": 2,
+    "status": "defer to next-depth S; no current-depth mutation"
+  },
+  "compatibility_note": "Do not infer that the test-only non-CCPU compile is a product CPU or hardware V86 monitor; original code and user-approved exclusions must be traced at its own depth."
+}

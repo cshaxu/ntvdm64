@@ -1,0 +1,5 @@
+{
+  "exit": 2,
+  "expected_rejection": true,
+  "diagnostic": "161140980c4d34bb.after\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\\host_def.h(154): warning C4005: 'NTVDM': macro redefinition\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/softpc.new/host/inc\\host_def.h(154): note: 'NTVDM' previously declared on the command line\r\nO:/repos.hobby/ntvdm64/build/t473-s13/bfs-depth1-prepared-profile/161140980c4d34bb.after(42): fatal error C1189: #error:  Unsupported excluded original configuration\r\n"
+}

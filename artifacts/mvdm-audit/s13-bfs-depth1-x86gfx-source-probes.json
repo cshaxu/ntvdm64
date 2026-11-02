@@ -1,0 +1,148 @@
+{
+  "scope": "scratch first-depth selected logical-line boundaries, standalone NTVDM flag review separate",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "arm": 1479,
+      "cut": 1481,
+      "end": 1481,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 1484,
+      "source_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "arm": 1508,
+      "cut": 1514,
+      "end": 1514,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 1517,
+      "source_sha256": "46aaaf6306f6dc5ef370184248b721e184c49d02ebd01c4819f05efe4d00765d",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 201,
+      "cut": 204,
+      "end": 204,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 206,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 250,
+      "cut": 253,
+      "end": 253,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 542,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 305,
+      "cut": 308,
+      "end": 308,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 604,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 529,
+      "cut": 719,
+      "end": 719,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 1402,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 1083,
+      "cut": 1086,
+      "end": 1086,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 2009,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 1110,
+      "cut": 1113,
+      "end": 1113,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 2036,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 1127,
+      "cut": 1130,
+      "end": 1130,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 2053,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 1241,
+      "cut": 1244,
+      "end": 1244,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 2431,
+      "source_sha256": "87df728852c0d7a2384b1521adabb1335f579e05d9c1f24d733ede5f4eafc205",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "arm": 739,
+      "cut": 752,
+      "end": 752,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 844,
+      "source_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "arm": 819,
+      "cut": 826,
+      "end": 826,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 918,
+      "source_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "arm": 2081,
+      "cut": 2085,
+      "end": 2085,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 2215,
+      "source_sha256": "221057fde8c5e2835d293483ec4105e364eb563e5250514964e68b6adbf630cd",
+      "error": ""
+    }
+  ]
+}

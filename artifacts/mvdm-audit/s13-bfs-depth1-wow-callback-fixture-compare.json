@@ -1,0 +1,8 @@
+{
+  "fixture": "tests/observation/wow_callback_abort_provider.c",
+  "before_exit": 0,
+  "after_exit": 0,
+  "equal_output": true,
+  "before_error": "callback-before.c\r\n",
+  "after_error": "callback-after.c\r\n"
+}

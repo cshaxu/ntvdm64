@@ -1477,8 +1477,9 @@ BOOL CntrlHandler(ULONG CtrlType)
 	    }
 	else {
 #ifdef X86GFX
-            if (sc.ScreenState != FULLSCREEN)
+#error Unsupported excluded original configuration
 #endif
+#line 1484
             { /* DIVERGENCE(MVDM-HOST-DIV-322): always extract software VGA. */
                 /* DIVERGENCE(MVDM-HOST-DIV-311): this stopped-guest
                  * handoff must finish the original pending mode selection
@@ -1506,12 +1507,9 @@ BOOL CntrlHandler(ULONG CtrlType)
 	    /* If keeping window open when exiting and fullscreen, return to desktop */
 	    /* Transition made simple as VDM de-registered from console */
 #ifdef X86GFX
-            /* DIVERGENCE(MVDM-HOST-DIV-322): not a hardware desktop switch. */
-            if (BlockFlags == 1 && sc.ScreenState == FULLSCREEN)
-	    {
-		SetConsoleDisplayMode(sc.OutputHandle, CONSOLE_WINDOWED_MODE, &scrSize);
-	    }
+#error Unsupported excluded original configuration
 #endif
+#line 1517
 	}
 
         // Turn off PIF Reserved & ShortCut Keys

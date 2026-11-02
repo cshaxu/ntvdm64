@@ -31,7 +31,6 @@ extern void ppi_init(void);
 extern void ppi_inb(io_addr,half_word *);
 extern void ppi_outb(io_addr,half_word);
 #else
-extern void ppi_init();
-extern void ppi_inb();
-extern void ppi_outb();
+#error Unsupported excluded original configuration
 #endif
+#line 38

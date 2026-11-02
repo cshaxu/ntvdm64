@@ -1,0 +1,30 @@
+{
+  "scope": "scratch-only all current x86 graph contexts for 46 finalists",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/base-debug/profile.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "10323e17984e95d6fc2425cd69c9d3bb5fb18283295d03e63add4c7247c4b4fe",
+      "after_sha256": "8ee7631d3cb4b35ecb49520486644dd34dedd4dfa1d6eb3c2db4402cc6d72981",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/base-debug/profile.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "10323e17984e95d6fc2425cd69c9d3bb5fb18283295d03e63add4c7247c4b4fe",
+      "after_sha256": "8ee7631d3cb4b35ecb49520486644dd34dedd4dfa1d6eb3c2db4402cc6d72981",
+      "error_before": "",
+      "error_after": ""
+    }
+  ],
+  "failures": []
+}

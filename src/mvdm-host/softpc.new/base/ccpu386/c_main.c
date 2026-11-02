@@ -202,12 +202,9 @@ typedef union
 #define X_OFF 0
 
 #else /* BIGEND */
-
-#define L_OFF 3
-#define H_OFF 2
-#define X_OFF 2
-
+#error Unsupported excluded original configuration
 #endif /* LITTLEND */
+#line 215
 
 /* CPU hardware interrupt definitions */
 #define CPU_HW_INT_MASK         (1 << 0)
@@ -4333,11 +4330,9 @@ NEXT_INST:
 #endif
 
 #if defined(SFELLOW) && !defined(PROD)
-	if (sf_debug_char_waiting())
-	{
-	   force_yoda();
-	}
+#error Unsupported excluded original configuration
 #endif	/* SFELLOW && !PROD */
+#line 4407
 
    /* Reset default mode */
    SET_OPERAND_SIZE(GET_CS_AR_X());
@@ -4637,9 +4632,9 @@ LOCAL VOID
 
 
 #if defined(SWITCHNPX)
-      if (!config_inquire(C_SWITCHNPX, NULL))
-	      disableNpx = TRUE;
+#error Unsupported excluded original configuration
 #endif	/* SWITCHNPX */
+#line 4706
 
       if ( disableNpx )
 	 SET_ET(0);
@@ -4710,20 +4705,9 @@ LOCAL VOID
 #ifdef NTVDM
       ccpu386Unsimulate();
 #else
-      if (simulate_level == 0)
-         {
-	 fprintf(stderr, "host_unsimulate() - already at base of stack!\n");
-#ifndef	PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif	/* PROD */	 
-	 }
-      else
-	 {
-	 /* Return to previous context */
-	 in_C = 1;
-	 longjmp(longjmp_env_stack[--simulate_level], 1);
-	 }
+#error Unsupported excluded original configuration
 #endif
+#line 4790
       }
 
 #ifdef	PIG

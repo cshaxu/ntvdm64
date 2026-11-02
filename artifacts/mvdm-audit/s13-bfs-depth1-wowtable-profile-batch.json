@@ -1,0 +1,28 @@
+{
+  "scope": "first-depth original-boundary finalists; unsupported profiles held; selected lines retained",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.c",
+      "arm": 1320,
+      "cut": 1323,
+      "end": 1323,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "end_logical": 1324,
+      "source_sha256": "8dbb8e6828c8f0ff3286bf917b40964eb859d1091ec0757c801c9422ed2fb7b3",
+      "error": "",
+      "before_sha256": "8dbb8e6828c8f0ff3286bf917b40964eb859d1091ec0757c801c9422ed2fb7b3",
+      "after_sha256": "0ae7c14afada67d1e9ff25388892967fbbb74b40c570d7b7bc9fa9c68b90ff0f",
+      "original_sha256": "8fb4f02963ceb0772e69749d703868273f942978fa6baf162e039065dd957bd6",
+      "body_sha256": "666af5b056b75feafed8c43baf7229ccaae1e0c77d943d337e72d776292eb9d1",
+      "body_lines": 2,
+      "scratch_key": "a41b0ba70ce26230",
+      "current_start_line": 1320,
+      "current_cut_line": 1322,
+      "current_end_line": 1322,
+      "registration": "MVDM-HOST-DIV-598"
+    }
+  ],
+  "subsumed_nested_groups": 0,
+  "subsumed_ledger_entries": 0
+}

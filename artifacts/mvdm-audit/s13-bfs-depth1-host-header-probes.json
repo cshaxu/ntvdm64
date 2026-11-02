@@ -1,0 +1,141 @@
+{
+  "scope": "scratch real consumer for nine first-depth header boundary candidates; no disposition decision",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "arm": 154,
+      "cut": 156,
+      "end": 156,
+      "old_line": 154,
+      "consumer": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        157
+      ],
+      "source_sha256": "20163ca8a5e16e008e8297f0247406a94bc44cd73b0bd93c708254ffe693f356",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gvi.h",
+      "arm": 251,
+      "cut": 253,
+      "end": 253,
+      "old_line": 251,
+      "consumer": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        254
+      ],
+      "source_sha256": "20163ca8a5e16e008e8297f0247406a94bc44cd73b0bd93c708254ffe693f356",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "arm": 134,
+      "cut": 199,
+      "end": 199,
+      "old_line": 134,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        200
+      ],
+      "source_sha256": "c8706a9599ba62d19ac54deb99e125c78b59bf5cd4f1ad4eea25ea883095c9f4",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "arm": 25,
+      "cut": 27,
+      "end": 27,
+      "old_line": 25,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/in.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        28
+      ],
+      "source_sha256": "4a87e916507f79d136c47e4b87815bffc3fc181c6f7e456ad21f2e48816e80ac",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "arm": 255,
+      "cut": 257,
+      "end": 257,
+      "old_line": 255,
+      "consumer": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        258
+      ],
+      "source_sha256": "b1d787529ed23b6cdd8c2e0592f1ba40275a136852af4519ae270690cb186631",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/mouse_io.h",
+      "arm": 790,
+      "cut": 812,
+      "end": 812,
+      "old_line": 790,
+      "consumer": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        813
+      ],
+      "source_sha256": "b1d787529ed23b6cdd8c2e0592f1ba40275a136852af4519ae270690cb186631",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "arm": 74,
+      "cut": 76,
+      "end": 76,
+      "old_line": 74,
+      "consumer": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        77
+      ],
+      "source_sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "arm": 138,
+      "cut": 140,
+      "end": 140,
+      "old_line": 138,
+      "consumer": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        141
+      ],
+      "source_sha256": "c4ccc2ea5dbbf78e0556a377e060c0577c6b5c4cec1de300c0e052c21478e928",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
+      "arm": 115,
+      "cut": 121,
+      "end": 121,
+      "old_line": 115,
+      "consumer": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        122
+      ],
+      "source_sha256": "11558a25a208b90d6f2995a9dbdec4cd87f910ad8c38d72f931d9b6dc2a3b535",
+      "error": ""
+    }
+  ],
+  "failures": []
+}

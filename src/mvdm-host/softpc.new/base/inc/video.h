@@ -72,8 +72,9 @@
 #ifdef EGG
 #define vd_rows_on_screen 0x484
 #else
-#define vd_rows_on_screen  24        /* Never changes */
+#error Unsupported excluded original configuration
 #endif
+#line 77
 
 extern IU8 Video_mode;	/* Shadow copy of BIOS video mode */
 
@@ -136,8 +137,9 @@ IMPORT void vga_int_1C IPT0();
 #ifdef VGG
 #define EGA_FUNC_SIZE	0x1D
 #else
-#define EGA_FUNC_SIZE	0x14
+#error Unsupported excluded original configuration
 #endif
+#line 141
 #define CGA_FUNC_SIZE	0x14
 
 #define SET_MODE 0
@@ -179,8 +181,9 @@ IMPORT MODE_ENTRY vd_ext_graph_table[];
 #ifdef V7VGA
 #define VD_MAX_MODE	0x69
 #else
-#define VD_MAX_MODE	(sizeof(vd_mode_table)/sizeof(MODE_ENTRY))
+#error Unsupported excluded original configuration
 #endif
+#line 184
 
 /*
  * Mode macros to distinguish between alphanumeric & graphics video modes
@@ -237,8 +240,9 @@ IMPORT unsigned char	valid_modes[];
 #ifdef V7VGA
 #define is_v7vga_mode(nm)	((nm >= 0x40 && nm <= 0x45) || (nm >= 0x60 && nm <= 0x69))
 #else
-#define is_v7vga_mode(nm)	(FALSE)
+#error Unsupported excluded original configuration
 #endif /* V7VGA */
+#line 242
 
 IMPORT VOID (*bios_ch2_byte_wrt_fn) IPT2(ULONG, ch_attr, ULONG, ch_addr);
 IMPORT VOID (*bios_ch2_word_wrt_fn) IPT2(ULONG, ch_attr, ULONG, ch_addr);

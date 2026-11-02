@@ -48,8 +48,9 @@ typedef struct tagParamNode {
   DWORD dwRefCount; // reference count
 
 #ifdef MAPPARAM_EXTRA
-  DWORD cbExtra;     // buffer size
+#error Unsupported excluded original configuration
 #endif
+#line 53
 
   DWORD nAliasCount;  // index for an alias array
   DWORD rgdwAlias[MAXNODEALIAS];
@@ -228,8 +229,9 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
             lpn->pNext   = gParamMap.pHead;
             lpn->dwRefCount = 1;
 #ifdef MAPPARAM_EXTRA
-            lpn->cbExtra = 0;
+#error Unsupported excluded original configuration
 #endif
+#line 233
             lpn->nAliasCount = 0;
             lpn->htask16 = CURRENTPTD()->htask16;
             gParamMap.pHead = lpn;
@@ -240,39 +242,9 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
 }
 
 #ifdef MAPPARAM_EXTRA
-
-PVOID AddParamMapEx(DWORD dwPtr16, DWORD cbExtra)
-{
-    LPPARAMNODE lpn;
-    FINDPARAM fp;
-
-    // see if it's there already
-    if (FindParamMap(&fp, dwPtr16, PARAM_16)) {
-        lpn = fp.lpNode;
-        if (lpn->cbExtra == cbExtra) {
-            ++lpn->dwRefCount;
-        }
-        else {
-            WOW32ASSERTMSG(FALSE, ("\nWOW32: AddParamEx misused. Please contact VadimB or DOSWOW alias\n"));
-            lpn = NULL;
-        }
-    }
-    else { 
-        if (NULL != (lpn = CacheBlockAllocate(&gParamMap.blkCache, sizeof(*lpn) + cbExtra))) {
-            lpn->dwPtr32 = (DWORD)(PVOID)(lpn+1);
-            lpn->dwPtr16 = dwPtr16;
-            lpn->pNext   = gParamMap.pHead;
-            lpn->dwRefCount = 1;
-            lpn->cbExtra = cbExtra;
-            lpn->htask16 = CURRENTPTD()->htask16;
-            gParamMap.pHead = lpn;
-        }
-    }
-
-    return lpn ? (PVOID)lpn->dwPtr32 : NULL;
-}
-
+#error Unsupported excluded original configuration
 #endif
+#line 276
 
 //
 //  This should be called from the places we know pointers could get updated
@@ -304,11 +276,9 @@ PVOID ParamMapUpdateNode(DWORD dwPtr, UINT fMode, VOID* lpNode)
         return pv; // up-to-date
     }
 #ifdef MAPPARAM_EXTRA
-    else 
-    if (0 < lpn->cbExtra) {
-        return (PVOID)lpn->dwPtr32;
-    }
+#error Unsupported excluded original configuration
 #endif
+#line 312
 
 
     /* DIVERGENCE(MVDM-HOST-DIV-347): failed refresh must not publish NULL. */
@@ -359,10 +329,12 @@ BOOL DeleteParamMap(DWORD lParam, UINT fMode, BOOL* pfFreePtr)
 
             if (NULL != pfFreePtr) {
 #ifdef MAPPARAM_EXTRA
-                *pfFreePtr = !!lpn->cbExtra;
+#error Unsupported excluded original configuration
 #else
+#line 364
                 *pfFreePtr = FALSE;
 #endif
+#line 366
             }
             CacheBlockFree(&gParamMap.blkCache, lpn);
         }

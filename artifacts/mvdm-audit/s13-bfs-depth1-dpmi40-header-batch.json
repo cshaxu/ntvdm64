@@ -1,0 +1,32 @@
+{
+  "scope": "first-depth original-boundary finalists; unsupported profiles held; selected lines retained",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.h",
+      "arm": 42,
+      "cut": 48,
+      "end": 48,
+      "consumer": "src/mvdm-host/dpmi32/dpmiint.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        49
+      ],
+      "source_sha256": "0c3a6a8710cd798bf39ae084f723f4c1de0480e5f7d7bc45082c19ac82f27886",
+      "error": "",
+      "before_sha256": "0c3a6a8710cd798bf39ae084f723f4c1de0480e5f7d7bc45082c19ac82f27886",
+      "original_sha256": "245976d103b8dd3b918b008b85e9e94b3ec245fb9119c28b897f936a94b69b5e",
+      "body_sha256": "b3401cb1d2636f649a71c5629ee8bb148f704520c1fcdfee1f91145c0876c440",
+      "body_lines": 5,
+      "end_logical": 49,
+      "cut_logical": 49,
+      "after_sha256": "883641ea972a0db135433e9afd8bd6ddaf07ba7fdb9f258f1270c318d132f037",
+      "current_start_line": 42,
+      "current_cut_line": 44,
+      "current_end_line": 44,
+      "registration": "MVDM-HOST-DIV-598"
+    }
+  ],
+  "subsumed_nested_groups": 0,
+  "subsumed_ledger_entries": 0
+}

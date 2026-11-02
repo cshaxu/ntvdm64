@@ -77,9 +77,9 @@ extern void host_timer2_waveform IPT5(unsigned int, a, unsigned long, b,
 #ifdef NTVDM
 void HostPpiState(half_word);
 #else
-extern void host_enable_timer2_sound IPT0();
-extern void host_disable_timer2_sound IPT0();
+#error Unsupported excluded original configuration
 #endif
+#line 83
 extern void host_ring_bell IPT1(long, a);
 extern void host_alarm IPT1(long, a);
 extern unsigned long host_idealAlarm IPT0();
@@ -88,12 +88,13 @@ extern IU32 host_speed IPT1( IU32, ControlMachineNumber );
 
 extern void host_timer_init IPT0();
 #ifdef SWIN_MOUSE_OPTS
-extern void host_timer_setup IPT1(BOOL, fast_timer);
-extern void generic_timer_setup IPT1(BOOL, fast_timer);
+#error Unsupported excluded original configuration
 #else
+#line 94
 extern void host_timer_setup IPT0();
 extern void generic_timer_setup IPT0();
 #endif /* SWIN_MOUSE_OPTS */
+#line 97
 extern void host_timer_shutdown IPT0();
 extern void host_timer_event IPT0();
 extern void generic_timer_event IPT0();

@@ -1,0 +1,23 @@
+{
+  "scope": "scratch DPMI direct-include fixtures; owner flags and trace flag",
+  "records": [
+    {
+      "fixture": "dpmi_ioctl_boundary.c",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal": true,
+      "before_sha256": "2a29f40c0d926447575c33bf1ceba8413a2deadb4866fbf5a85aae922e4f297c",
+      "after_sha256": "508c201c860e478a8ac13c8f20482b00692e4c6c6997602ad9ec4fe2e6243a77",
+      "error": ""
+    },
+    {
+      "fixture": "dpmi_pointer_trace.c",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal": true,
+      "before_sha256": "e07ca33bfafcb1390af76dbdb60be53f71d9cdea0fa56996f3caf621c31d6352",
+      "after_sha256": "d4cd8222f3610802ad8678e5bf8c9c3554f8ba52bf5f4f44d0b3bb19650c7437",
+      "error": ""
+    }
+  ]
+}

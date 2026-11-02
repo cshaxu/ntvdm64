@@ -1,0 +1,82 @@
+{
+  "scope": "first-depth original-boundary finalists; unsupported profiles held; selected lines retained",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "arm": 90,
+      "cut": 93,
+      "end": 96,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        97
+      ],
+      "source_sha256": "8a9efac5bc104c75e955016b3816e9568ee79bf88b2e18a9ea9aa476fa58bba8",
+      "error": "",
+      "before_sha256": "8a9efac5bc104c75e955016b3816e9568ee79bf88b2e18a9ea9aa476fa58bba8",
+      "original_sha256": "b5704cc3ec76cd4dc010eeecc07e4c78ff76428266f6719cf34a65c9dd4b1f2d",
+      "body_sha256": "f6a9f628b77022c6060323468a0fbcc7ecc045b89e7d2f16e3ab454472f577f5",
+      "body_lines": 2,
+      "end_logical": 97,
+      "cut_logical": 94,
+      "after_sha256": "5ff040bd2feaa8b773408fe4188a002b6fa4a6ce0ec4fdeb66d3b82950d23af0",
+      "current_start_line": 90,
+      "current_cut_line": 92,
+      "current_end_line": 96,
+      "registration": "MVDM-HOST-DIV-598"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "arm": 38,
+      "cut": 50,
+      "end": 50,
+      "consumer": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        51
+      ],
+      "source_sha256": "922d7adf54ebcf87b331481a58be008f3651d474f04211abdfe018d2d79cdb0f",
+      "error": "",
+      "before_sha256": "922d7adf54ebcf87b331481a58be008f3651d474f04211abdfe018d2d79cdb0f",
+      "original_sha256": "49ab8b88c971a9da3d0cadc974f04f6c329aef23c25efd8bfd7e3d50b1a8dfc0",
+      "body_sha256": "a4b5a478dbc9838090d1fde2a6e98a525236eb9e536f830e5476d7b1a983ced1",
+      "body_lines": 11,
+      "end_logical": 51,
+      "cut_logical": 51,
+      "after_sha256": "2e6ae1d746913274dbd89ed135907e1cb75f19415968967480f9de5f1a2fa1a2",
+      "current_start_line": 38,
+      "current_cut_line": 40,
+      "current_end_line": 40,
+      "registration": "MVDM-HOST-DIV-598"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "arm": 60,
+      "cut": 63,
+      "end": 66,
+      "consumer": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        67
+      ],
+      "source_sha256": "922d7adf54ebcf87b331481a58be008f3651d474f04211abdfe018d2d79cdb0f",
+      "error": "",
+      "before_sha256": "922d7adf54ebcf87b331481a58be008f3651d474f04211abdfe018d2d79cdb0f",
+      "original_sha256": "49ab8b88c971a9da3d0cadc974f04f6c329aef23c25efd8bfd7e3d50b1a8dfc0",
+      "body_sha256": "cdabe44a2e171ed588c775946a51359298a8ccea2c0cdb576d1bcd9542680cc3",
+      "body_lines": 2,
+      "end_logical": 67,
+      "cut_logical": 64,
+      "after_sha256": "2e6ae1d746913274dbd89ed135907e1cb75f19415968967480f9de5f1a2fa1a2",
+      "current_start_line": 51,
+      "current_cut_line": 53,
+      "current_end_line": 57,
+      "registration": "MVDM-HOST-DIV-598"
+    }
+  ],
+  "subsumed_nested_groups": 0,
+  "subsumed_ledger_entries": 0
+}

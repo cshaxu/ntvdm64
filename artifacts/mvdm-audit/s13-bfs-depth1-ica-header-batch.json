@@ -1,0 +1,33 @@
+{
+  "scope": "first-depth original-boundary finalists; unsupported profiles held; selected lines retained",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "arm": 134,
+      "cut": 199,
+      "end": 199,
+      "old_line": 134,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        200
+      ],
+      "source_sha256": "c8706a9599ba62d19ac54deb99e125c78b59bf5cd4f1ad4eea25ea883095c9f4",
+      "error": "",
+      "before_sha256": "c8706a9599ba62d19ac54deb99e125c78b59bf5cd4f1ad4eea25ea883095c9f4",
+      "original_sha256": "21109fa7e6b8d6a8ecfe8e733a16805829560e218be11e46e5a33dac28820316",
+      "body_sha256": "acbbda52df9b4026bc28bafcacb5552ad72bbd42486cf2736a77207dfd453c9d",
+      "body_lines": 64,
+      "end_logical": 200,
+      "cut_logical": 200,
+      "after_sha256": "e256ecb716edf0b1b966d78de6cafadf956ca8da62b825fe558a058df9994de9",
+      "current_start_line": 134,
+      "current_cut_line": 136,
+      "current_end_line": 136,
+      "registration": "MVDM-HOST-DIV-598"
+    }
+  ],
+  "subsumed_nested_groups": 3,
+  "subsumed_ledger_entries": 0
+}

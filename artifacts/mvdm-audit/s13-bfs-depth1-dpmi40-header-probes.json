@@ -1,0 +1,20 @@
+{
+  "scope": "scratch real consumer for nine first-depth header boundary candidates; no disposition decision",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.h",
+      "arm": 42,
+      "cut": 48,
+      "end": 48,
+      "consumer": "src/mvdm-host/dpmi32/dpmiint.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        49
+      ],
+      "source_sha256": "0c3a6a8710cd798bf39ae084f723f4c1de0480e5f7d7bc45082c19ac82f27886",
+      "error": ""
+    }
+  ],
+  "failures": []
+}

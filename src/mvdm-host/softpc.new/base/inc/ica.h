@@ -60,16 +60,18 @@
 #define CPU_RTC_INT		0
 
 #if defined (NOVELL) || defined (NOVELL_IPX)
-#define NETWORK_INT		2
+#error Unsupported excluded original configuration
 #endif
+#line 65
 
 #if defined (SWIN_HAW) 
 #error DIVERGENCE MVDM-HOST-DIV-528: SWIN_HAW platform branch is not selected; see mirror register.
 #endif
 
 #if defined (ASPI)
-#define ASPI_INT		4
+#error Unsupported excluded original configuration
 #endif
+#line 73
 
 #define CPU_AT_NPX_INT		5	/* NPX exception */
 #define CPU_AT_DISK_INT		6
@@ -132,71 +134,9 @@ extern void ica_hw_interrupt(IU32 adapter, IU32 line_no, IS32 call_count);
 extern VDMVIRTUALICA VirtualIca[];
 
 #else   /* ndef NTVDM */
-
-extern void SWPIC_clear_int IPT2(IU32, adapter, IU32, line_no);
-extern void SWPIC_init_funcptrs IPT0();
-extern void SWPIC_inb IPT2(io_addr, port, IU8 *, value);
-extern void SWPIC_outb IPT2(io_addr, port, IU8, value);
-extern void SWPIC_hw_interrupt IPT3(IU32, adapter, IU32, line_no,
-	IS32, call_count);
-
-#ifdef HOOKED_IRETS
-extern IS32 ica_intack IPT1(IU32 *, hook_addr);
-extern void ica_iret_hook_called IPT1(IU32, line);
-extern void ica_enable_iret_hooks IPT0();
-extern void ica_disable_iret_hooks IPT0();
-extern void ica_iret_hook_control IPT3(IU32, adapter, IU32, line, IBOOL, enable);
-#else	/* !HOOKED_IRETS */
-extern IS32 ica_intack IPT0();
-#endif	/* !HOOKED_IRETS */
-
-#ifdef CPU_40_STYLE
-typedef void (*ICA_CALLBACK) IPT1(IU32, parm);
-extern IBOOL action_interrupt IPT4(IU32, adapter, IU32, line, ICA_CALLBACK, func, IU32, parm);
-extern void cancel_action_interrupt IPT2(IU32, adapter, IU32, line);
-extern void ica_async_hw_interrupt IPT3(IU32, adapter, IU32, line_no,
-        IS32, call_count);
-
-extern void ica_check_stale_iret_hook IPT0();
-#define MAX_ISR_DEPTH   3   /* max recursion level of ISR before ints blocked */
-#define MAX_INTR_DELTA_FOR_LOST_HOOK	85
-#endif /* CPU_40_STYLE */
-
-typedef struct {
-        IBOOL	ica_master;   /* TRUE = Master; FALSE = Slave		*/
-
-	IU8	ica_irr;	/* Interrupt Request Register		*/
-	IU8	ica_isr;	/* In Service Register			*/
-	IU8	ica_imr;	/* Interrupt Mask Register		*/
-	IU8	ica_ssr;	/* Slave Select Register		*/
-
-	IU16	ica_base;	/* Interrupt base address for cpu	*/
-	IU16	ica_hipri;	/* Line no. of highest priority line	*/
-	IU16	ica_mode;	/* Various single-bit modes		*/
-
-	IS32	ica_count[8];	/* This is an extension of ica_irr for	*/
-				/* our frig. Contains HOW MANY of each	*/
-				/* interrupt is required		*/
-	IU32	ica_int_line;	/* Current pending interrupt		*/
-				/* being counted down by the CPU	*/
-
-	IU32	ica_cpu_int;	/* The state of the INT line to the CPU	*/
-
-#ifdef CPU_40_STYLE             /* callback structure for action_interrupt() */
-        IU32    callback_parm[8];       /* callback parameter */
-	ICA_CALLBACK callback_fn[8];	/* callback fn */
-	IS32	isr_depth[8];	/* iret hook recursion level */
-	IS32	isr_progress[8][MAX_ISR_DEPTH + 1];	/* isr aging by int */
-	IS32	isr_time_decay[8][MAX_ISR_DEPTH];	/* isr aging by time */
-#endif
-
-} ADAPTER_STATE;
-
-
-/* 'no callback' define for action_interrupt callbacks */
-#define NO_ICA_CALLBACK ((ICA_CALLBACK) 0L)
-
+#error Unsupported excluded original configuration
 #endif  /* NTVDM */
+#line 200
 
 
 #if !defined(NTVDM)

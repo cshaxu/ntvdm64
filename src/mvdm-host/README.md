@@ -1,5 +1,49 @@
 # mvdm
 
+MVDM-HOST-DIV-599: retain the established little-endian x87 bitfield layout
+and reject the six unused alternate-endian bodies in `cfpu_def.h`. The layout
+adaptation and its original-source comparison were recorded in
+`../../docs/etc/evidence/m0-t419-s1-x87-audit.md`; current inclusion and fixture
+evidence is `../../artifacts/mvdm-audit/s13-bfs-depth1-cfpu-batch.json`.
+
+MVDM-HOST-DIV-598: replace audited first-depth source and header arms with
+`#error`, retaining original selectors and selected-path logical lines. The
+candidate was compared against current graph and standalone fixture contexts;
+unsupported or ambiguous profiles remain untouched. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-finalists-batch.json` and
+`../../artifacts/mvdm-audit/s13-bfs-depth1-ntvdm-alternatives-batch.json`;
+`../../artifacts/mvdm-audit/s13-bfs-depth1-host-headers-batch.json` records
+the additional host-header macro alternatives. The independently reconciled
+ICA header boundary is in `../../artifacts/mvdm-audit/s13-bfs-depth1-ica-header-batch.json`.
+Video header alternatives use the verified Video7 build profile; see
+`../../artifacts/mvdm-audit/s13-bfs-depth1-video-header-batch.json`.
+PM-disabled alternatives and other inactive macro arms are recorded in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-pm-batch.json` and
+`../../artifacts/mvdm-audit/s13-bfs-depth1-inactive-batch.json`. Additional
+header arms are in `../../artifacts/mvdm-audit/s13-bfs-depth1-inactive-header-batch.json`
+and `../../artifacts/mvdm-audit/s13-bfs-depth1-compound-header-batch.json` and
+`../../artifacts/mvdm-audit/s13-bfs-depth1-legacy-header-batch.json`; HFX
+outer groups are in `../../artifacts/mvdm-audit/s13-bfs-depth1-hfx-header-batch.json`;
+BIOS alternatives are in `../../artifacts/mvdm-audit/s13-bfs-depth1-bios-ansi-batch.json`;
+WOW callback arms are in `../../artifacts/mvdm-audit/s13-bfs-depth1-wow-extra-batch.json`;
+platform alternatives are in `../../artifacts/mvdm-audit/s13-bfs-depth1-platform-batch.json`;
+timing headers are in `../../artifacts/mvdm-audit/s13-bfs-depth1-timing-header-batch.json`;
+WOW header arms are in `../../artifacts/mvdm-audit/s13-bfs-depth1-wow-header-batch.json`.
+Host video alternatives (not the separate cvidc profile) are in
+`../../artifacts/mvdm-audit/s13-bfs-depth1-x86gfx-source-batch.json`; the
+SoftPC profiler source arm is in `../../artifacts/mvdm-audit/s13-bfs-depth1-profile-batch.json`;
+other host arms are in `../../artifacts/mvdm-audit/s13-bfs-depth1-legacy-source-batch.json`;
+WOW thunk redirect alternatives are in `../../artifacts/mvdm-audit/s13-bfs-depth1-wowredirect-batch.json`;
+original C_VID alternatives are in `../../artifacts/mvdm-audit/s13-bfs-depth1-video-source-batch.json`;
+the boot-profile alternative is in `../../artifacts/mvdm-audit/s13-bfs-depth1-boot-profile-batch.json`;
+additional NTVDM alternatives are in `../../artifacts/mvdm-audit/s13-bfs-depth1-ntvdm-extra-source-batch.json`
+and `../../artifacts/mvdm-audit/s13-bfs-depth1-cfpu-ntvdm-batch.json`;
+DPMI non-CPU40 arms are in `../../artifacts/mvdm-audit/s13-bfs-depth1-dpmi40-source-batch.json`
+and `../../artifacts/mvdm-audit/s13-bfs-depth1-dpmi40-header-batch.json`;
+source-local host profiles are in `../../artifacts/mvdm-audit/s13-bfs-depth1-host-profile-batch.json`;
+NTVDM headers are in `../../artifacts/mvdm-audit/s13-bfs-depth1-ntvdm-header-batch.json`;
+the WOW message-table profile is in `../../artifacts/mvdm-audit/s13-bfs-depth1-wowtable-profile-batch.json`.
+
 MVDM-HOST-DIV-597: replace 104 first-depth bodies excluded by the audited
 host build profiles with `#error`, retaining the original outer selectors and
 preserving selected-path logical lines. Five X86GFX arms also subsume local
@@ -1939,7 +1983,7 @@ firmware include are removed; original retry/failure order is unchanged.
 | MVDM-HOST-DIV-130 | Preserve bounded FPU stack-index arithmetic across host widths. | Subtracting two native pointers produces a host-width `ptrdiff_t`, while the original FPU register index is fixed-width `IU32`. | Preserve the original eight-entry FPU stack and `IU32` register computation; state that the bounded private stack offset is converted before addition and is neither a guest address nor host identity. | `softpc.new/base/ccpu386/fpu.c` |
 | MVDM-HOST-DIV-131 | Publish the original reserved-NPX dispatch input ABI. | `ZFRSRVD` used a K&R declaration that hides its fixed-width instruction argument from modern C call checking. | Retain the original `IU32` parameter, instruction table and prologue order; express the same signature with a modern prototype. | `softpc.new/base/ccpu386/zfrsrvd.c` |
 | MVDM-HOST-DIV-133 | Keep the original resource-write retry inside the app-selected firmware root. | After `host_find_file` had resolved an existing resource, the NT4 retry used only the bare name and could create/write a same-named file in the process current directory. The current product's app/session contract owns resource roots and must not silently escape them. | Preserve the original lookup, first open, retry/create attempt and `host_error` ordering; retry using the same resolved `hff_ret` path rather than bare `name`. No resource bytes, guest state or component ABI changes. | `softpc.new/host/src/nt_rez.c` |
-| MVDM-HOST-DIV-134 | Create zero-length `C:\\MSDOS.SYS` and `C:\\IO.SYS` placeholders during a first session for a historical Brief installer probe. | These are installation-only faux boot markers. The selected product may project real host drives but must never mutate a real host boot root merely to satisfy this probe. | Retain the original `scs_init → AddSystemFiles` order and void contract. A selected-profile macro transfers only this side effect to the same-shaped adapter disposition; the complete original body remains in the mirror under the alternate compile branch. | `softpc.new/host/src/nt_msscs.c`; `../ntvdm/softpc/{include/mvdm_softpc_firmware.h,mvdm_softpc_firmware.c}` |
+| MVDM-HOST-DIV-134 | Create zero-length `C:\\MSDOS.SYS` and `C:\\IO.SYS` placeholders during a first session for a historical Brief installer probe. | These are installation-only faux boot markers. The selected product may project real host drives but must never mutate a real host boot root merely to satisfy this probe. | Retain the original `scs_init → AddSystemFiles` order and void contract. A selected-profile macro transfers only this side effect to the same-shaped adapter disposition; the excluded original alternate body is replaced with #error under the retained branch (DIV-598). | `softpc.new/host/src/nt_msscs.c`; `../ntvdm/softpc/{include/mvdm_softpc_firmware.h,mvdm_softpc_firmware.c}` |
 | MVDM-HOST-DIV-119 | Retain the packed original SCS/standard-handle guest ABI while storing COMMAND pipe, thread, critical-section and redirection records as native host allocations. | The original `#pragma pack(1)` remained active past the guest records. x86 tolerated unaligned host fields; x64 reports each address passed to a Win32 synchronization API and the layout is not a guest-visible contract. | Close the packing scope immediately after `STD_HANDLES`; preserve the byte-exact guest structures and leave the later host-only structs naturally aligned. No source algorithm, BOP field, mapping identity, or handle route changes. | `dos/command/cmd.h` |
 | MVDM-HOST-DIV-120 | Start original COMMAND pipe workers through the modern `CreateThread` callback contract. | `cmdPipeInThread` and `cmdPipeOutThread` are cdecl `void(LPVOID)` bodies, but the NT4 source force-casts them to `LPTHREAD_START_ROUTINE`; this is ABI-unsafe on x86 and loses the creator session binding. | Keep both original worker bodies and call ordering. A same-shaped adapter captures the current session, calls the cdecl worker through a WINAPI thunk, carries a bounded source spelling only for default-off disposal attribution, then returns `DWORD 0` only at the Win32 boundary. | `dos/command/cmdredir.c`; `../adapter-mvdm-host-out/win32/{include/thread_start_compat.h,source/thread_start_compat.c}` |
 | MVDM-HOST-DIV-121 | Declare the selected generated C-video mark rules with their real native host-word ABI. | `evidfunc.h` declared 17 generated `S_*Mark*` definitions with implicit `int` returns and obsolete table-facing argument lists. The generated rule definitions actually take four `IUH` words and return `IUH`; this is a call ABI error even in the selected x86 profile. | Retain the original generated rule names, tables and bodies. Correct only the mirror declarations to the exact existing four-word `IUH` contract, so the original `evidfunc.c` table definitions compile directly. | `softpc.new/base/cvidc/evidfunc.h` |

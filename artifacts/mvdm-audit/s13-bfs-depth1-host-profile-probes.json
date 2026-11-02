@@ -1,0 +1,27 @@
+{
+  "scope": "scratch first-depth selected logical-line boundaries, standalone NTVDM flag review separate",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "arm": 144,
+      "cut": 146,
+      "end": 146,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 142,
+      "source_sha256": "4afd89f7648476d68df65ea3ccc06c5e10ee35b38f823828495ab5c30879b86c",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "arm": 90,
+      "cut": 92,
+      "end": 92,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 93,
+      "source_sha256": "cd05cf31a5a333ebacb93018664c40f968dd55e096694c7febda7a30068d01da",
+      "error": ""
+    }
+  ]
+}

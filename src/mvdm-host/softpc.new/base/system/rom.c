@@ -303,18 +303,9 @@ GLOBAL void rom_init IFN0()
 #endif		/* GISP_SVGA */
 
 #else	/* !NTVDM | (NTVDM & !X86GFX) */
-
-	/*
-	 * Now tell the CPU what it's not allowed to write over...
-	 *
-	 * These used to be done for everyone, but now they're only done for NT
-	 * as everyone else should have done it inside read_rom.
-	 */
-	sas_connect_memory (BIOS_START, 0xFFFFFL, SAS_ROM);
-#ifdef EGG
-	sas_connect_memory (EGA_ROM_START, EGA_ROM_END-1, SAS_ROM);
-#endif
+#error Unsupported excluded original configuration
 #endif /* !NTVDM | (NTVDM & !X86GFX) */
+#line 317
 
 	host_rom_init();
 }

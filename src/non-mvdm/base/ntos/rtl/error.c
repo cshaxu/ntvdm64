@@ -24,8 +24,9 @@ Revision History:
 #include "error.h"
 
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
-#pragma alloc_text(PAGE, RtlNtStatusToDosError)
+#error Unsupported excluded original configuration
 #endif
+#line 29
 
 //
 // Ensure that the Registry ERROR_SUCCESS error code and the
@@ -173,15 +174,9 @@ Return Value:
     }
 
 #ifndef NTOS_KERNEL_RUNTIME
-    DbgPrint("RTL: RtlNtStatusToDosError(0x%lx): No Valid Win32 Error Mapping\n",Status);
-    DbgPrint("RTL: Edit ntos\\rtl\\generr.c to correct the problem\n");
-    DbgPrint("RTL: ERROR_MR_MID_NOT_FOUND is being returned\n");
-
-#if DBG
-#error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
-#endif // DBG
-
+#error Unsupported excluded original configuration
 #endif // NTOS_KERNEL_RUNTIME
+#line 185
 
     return ERROR_MR_MID_NOT_FOUND;
 }

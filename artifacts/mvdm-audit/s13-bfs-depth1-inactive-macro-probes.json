@@ -1,0 +1,49 @@
+{
+  "scope": "scratch first-depth selected logical-line boundaries, standalone NTVDM flag review separate",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "arm": 47,
+      "cut": 49,
+      "end": 49,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 50,
+      "source_sha256": "41929686f0a078ff58d7b4af3248cb2c2c06c84ebf72330d9330148fc65cbad6",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "arm": 65,
+      "cut": 67,
+      "end": 67,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 68,
+      "source_sha256": "41929686f0a078ff58d7b4af3248cb2c2c06c84ebf72330d9330148fc65cbad6",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "arm": 2237,
+      "cut": 2241,
+      "end": 2241,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 2554,
+      "source_sha256": "49c6962214b104ae1d3778984bf54780e0d649cf5c6d1a2215131b135a478f03",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "arm": 382,
+      "cut": 427,
+      "end": 427,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 408,
+      "source_sha256": "0b5d06d2a7a3f714a6f1a607ac9476fb5c0ae490832a8e45d43acc58fd3b505f",
+      "error": ""
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "scope": "scratch real consumer for two Video7 first-depth header boundary candidates; no disposition decision",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "arm": 183,
+      "cut": 185,
+      "end": 185,
+      "old_line": 181,
+      "consumer": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        184
+      ],
+      "source_sha256": "24ddf6c49d33fdd7cb97389d8326b90a49f282e60ca4813806fcc04e0368a626",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/video.h",
+      "arm": 241,
+      "cut": 243,
+      "end": 243,
+      "old_line": 239,
+      "consumer": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        242
+      ],
+      "source_sha256": "24ddf6c49d33fdd7cb97389d8326b90a49f282e60ca4813806fcc04e0368a626",
+      "error": ""
+    }
+  ],
+  "failures": []
+}

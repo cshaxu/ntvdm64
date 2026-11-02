@@ -1,0 +1,32 @@
+{
+  "scope": "actual owner DPMI flags plus fixture alias and defined trace flag; scratch-only positive branch witnesses",
+  "records": [
+    {
+      "owner": "src/mvdm-host/dpmi32/dpmiint.c",
+      "fixture": "tests/observation/dpmi_pm_allocation_failure.c",
+      "fixture_sha256": "1a3da7ef510a2731f7bc9344754ef801fc57c96d01553e2cb14c2dc277a4d1b2",
+      "exit": 0,
+      "marks": [],
+      "error": ""
+    },
+    {
+      "owner": "src/mvdm-host/dpmi32/int21map.c",
+      "fixture": "tests/observation/dpmi_ioctl_boundary.c",
+      "fixture_sha256": "b078d3c053bf9fee58d7b209f5963ce39a80ec8dc2a889c63356b31b02216bc0",
+      "exit": 0,
+      "marks": [],
+      "error": ""
+    },
+    {
+      "owner": "src/mvdm-host/dpmi32/int21map.c",
+      "fixture": "tests/observation/dpmi_pointer_trace.c",
+      "fixture_sha256": "c840258f1a60908e244b4ed53488f71477e4b5b3f33ccd914c3a98b1edfd7be0",
+      "exit": 0,
+      "marks": [],
+      "error": ""
+    }
+  ],
+  "limitations": [
+    "A missing marker is not by itself proof of unsupported profiles."
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "scope": "first-depth original-boundary finalists; unsupported profiles held; selected lines retained",
+  "records": [
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "arm": 1240,
+      "cut": 1242,
+      "end": 1249,
+      "consumer": "src/mvdm-host/wow32/wow32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "logical_next_lines": [
+        1252
+      ],
+      "source_sha256": "8e863faec45e6df3f09b6a78e9e0a1b7e841d6818e6197dd36e1f70ec2e828bf",
+      "error": "",
+      "before_sha256": "8e863faec45e6df3f09b6a78e9e0a1b7e841d6818e6197dd36e1f70ec2e828bf",
+      "original_sha256": "64663c13abaefccd99533352e08fb28efc66032c94a1780bff73be4f4cdbf70b",
+      "body_sha256": "14767608338c60ba90217ab9fb37a977770eaf40a1d9fcdb9e9ac81a90207088",
+      "body_lines": 1,
+      "end_logical": 1252,
+      "cut_logical": 1245,
+      "after_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba",
+      "current_start_line": 1240,
+      "current_cut_line": 1242,
+      "current_end_line": 1250,
+      "registration": "MVDM-HOST-DIV-598"
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "arm": 1276,
+      "cut": 1278,
+      "end": 1288,
+      "consumer": "src/mvdm-host/wow32/wow32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "logical_next_lines": [
+        1291
+      ],
+      "source_sha256": "8e863faec45e6df3f09b6a78e9e0a1b7e841d6818e6197dd36e1f70ec2e828bf",
+      "error": "",
+      "before_sha256": "8e863faec45e6df3f09b6a78e9e0a1b7e841d6818e6197dd36e1f70ec2e828bf",
+      "original_sha256": "64663c13abaefccd99533352e08fb28efc66032c94a1780bff73be4f4cdbf70b",
+      "body_sha256": "0711da8b99f4621a70150365821ee3eb20051389ce14be2252f9f1cde0d95719",
+      "body_lines": 1,
+      "end_logical": 1291,
+      "cut_logical": 1281,
+      "after_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba",
+      "current_start_line": 1278,
+      "current_cut_line": 1280,
+      "current_end_line": 1291,
+      "registration": "MVDM-HOST-DIV-598"
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "arm": 1319,
+      "cut": 1321,
+      "end": 1330,
+      "consumer": "src/mvdm-host/wow32/wow32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "logical_next_lines": [
+        1333
+      ],
+      "source_sha256": "8e863faec45e6df3f09b6a78e9e0a1b7e841d6818e6197dd36e1f70ec2e828bf",
+      "error": "",
+      "before_sha256": "8e863faec45e6df3f09b6a78e9e0a1b7e841d6818e6197dd36e1f70ec2e828bf",
+      "original_sha256": "64663c13abaefccd99533352e08fb28efc66032c94a1780bff73be4f4cdbf70b",
+      "body_sha256": "2e3304d83b23a965f929ff453c3284ef4572223f79bb594d24c7c7e2c828ce56",
+      "body_lines": 1,
+      "end_logical": 1333,
+      "cut_logical": 1324,
+      "after_sha256": "10d1fdb1cdbf766a81a34f38b5fb0ee4bab6eca350977abbdc44e6b9fedf47ba",
+      "current_start_line": 1323,
+      "current_cut_line": 1325,
+      "current_end_line": 1335,
+      "registration": "MVDM-HOST-DIV-598"
+    }
+  ],
+  "subsumed_nested_groups": 0,
+  "subsumed_ledger_entries": 0
+}

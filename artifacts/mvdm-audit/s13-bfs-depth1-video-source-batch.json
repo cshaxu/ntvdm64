@@ -1,0 +1,49 @@
+{
+  "scope": "first-depth original-boundary finalists; unsupported profiles held; selected lines retained",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "arm": 313,
+      "cut": 315,
+      "end": 315,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 316,
+      "source_sha256": "ad5273149aca246d05cd043be4f367041273ec1eab969e316094977ea045fdb6",
+      "error": "",
+      "before_sha256": "ad5273149aca246d05cd043be4f367041273ec1eab969e316094977ea045fdb6",
+      "after_sha256": "98ddba8fc2c1bc9495a88882f592df042130dbbc0618ff53c03b61eb478c9786",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "body_sha256": "314d90540fb83e5d2d72272a67bd786f0496448889530e9a59203f72788a3a1f",
+      "body_lines": 1,
+      "scratch_key": "83fb2ab435159c7a",
+      "current_start_line": 313,
+      "current_cut_line": 315,
+      "current_end_line": 315,
+      "registration": "MVDM-HOST-DIV-598"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "arm": 323,
+      "cut": 325,
+      "end": 325,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 326,
+      "source_sha256": "ad5273149aca246d05cd043be4f367041273ec1eab969e316094977ea045fdb6",
+      "error": "",
+      "before_sha256": "ad5273149aca246d05cd043be4f367041273ec1eab969e316094977ea045fdb6",
+      "after_sha256": "98ddba8fc2c1bc9495a88882f592df042130dbbc0618ff53c03b61eb478c9786",
+      "original_sha256": "664f399f40c4fafcd850e2cbc166fa632be5ddf7cc1f0d6bbcfaa017bec4ed31",
+      "body_sha256": "314d90540fb83e5d2d72272a67bd786f0496448889530e9a59203f72788a3a1f",
+      "body_lines": 1,
+      "scratch_key": "83fb2ab435159c7a",
+      "current_start_line": 324,
+      "current_cut_line": 326,
+      "current_end_line": 326,
+      "registration": "MVDM-HOST-DIV-598"
+    }
+  ],
+  "subsumed_nested_groups": 0,
+  "subsumed_ledger_entries": 0
+}

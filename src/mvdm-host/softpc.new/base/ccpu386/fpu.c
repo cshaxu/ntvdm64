@@ -157,8 +157,9 @@ GLOBAL void setNpxStackRegs IPT1(FPSTACKENTRY *, loadPtr);
 
 /* DEFINED values */
 #ifndef NULL
-#define NULL ((VOID *)0)
+#error Unsupported excluded original configuration
 #endif
+#line 162
 #define TAG_NEGATIVE_MASK 1
 #define TAG_ZERO_MASK 2
 #define TAG_INFINITY_MASK 4
@@ -1734,20 +1735,9 @@ IU16 exp_value;
 		   nothing except set the thing to zero.
 		*/
 #if (HOST_BIAS >= 16383)
-		if ((mantissa_hi | mantissa_lo) == 0)  {
-			/* It's zero */
-			 memPtr->tagvalue |= TAG_ZERO_MASK;
-		} else {
-			/* It's a denormal */
-			/* First, check it isn't a pseudodenorm */
-			if ((mantissa_hi & 0x80000000) != 0) {
-				memPtr->tagvalue |= TAG_UNSUPPORTED_MASK;
-			} else {
-				memPtr->tagvalue |= TAG_DENORMAL_MASK;
-				CVTR80FPH(memPtr, FPUpload);
-			}
-		}
+#error Unsupported excluded original configuration
 #else
+#line 1751
 		/* It's zero either way */
 		if ((mantissa_hi | mantissa_lo) != 0)  {
 			/* It's a denormal */
@@ -1755,6 +1745,7 @@ IU16 exp_value;
 		}
 		memPtr->tagvalue |= TAG_ZERO_MASK;
 #endif
+#line 1758
 	} else {
 		if ((mantissa_hi & 0x80000000) == 0) {
 			memPtr->tagvalue |= TAG_UNSUPPORTED_MASK;
@@ -1860,10 +1851,9 @@ LOCAL VOID CalcTagword IFN1(FPSTACKENTRY *, FPPtr)
 			/* It's a zero */
 			tagword |= TAG_ZERO_MASK;
 #if (HOST_BIAS >= 16383)
-		} else {
-			/* It's a denorm */
-			tagword |= TAG_DENORMAL_MASK;
+#error Unsupported excluded original configuration
 #endif
+#line 1867
 		}
 	} else {
 		if (((FPHOST *)&(FPPtr->fpvalue))->hiword.exp == HOST_MAX_EXP) {

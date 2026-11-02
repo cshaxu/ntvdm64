@@ -1,0 +1,60 @@
+{
+  "scope": "scratch first-depth selected logical-line boundaries, standalone NTVDM flag review separate",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "arm": 200,
+      "cut": 203,
+      "end": 203,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 188,
+      "source_sha256": "58a0358eafdfb875c14206230240a706ffb09d735f0c1842b6315c08118a06dc",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "arm": 265,
+      "cut": 268,
+      "end": 268,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 253,
+      "source_sha256": "58a0358eafdfb875c14206230240a706ffb09d735f0c1842b6315c08118a06dc",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "arm": 2179,
+      "cut": 2181,
+      "end": 2181,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 2250,
+      "source_sha256": "614a25ecb9008e7e39acbf694a8fe96b3511c53c00a7ecd7eb8c6a140ff559df",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "arm": 798,
+      "cut": 810,
+      "end": 810,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 811,
+      "source_sha256": "f1b2879dd3df7c3d3c37765cd528a742172a5ce4978a2c1dfb07ff2e98b0e098",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "arm": 817,
+      "cut": 830,
+      "end": 830,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 831,
+      "source_sha256": "f1b2879dd3df7c3d3c37765cd528a742172a5ce4978a2c1dfb07ff2e98b0e098",
+      "error": ""
+    }
+  ]
+}

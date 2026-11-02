@@ -1,0 +1,132 @@
+{
+  "scope": "scratch real consumer for nine first-depth header boundary candidates; no disposition decision",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "arm": 209,
+      "cut": 216,
+      "end": 216,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        217
+      ],
+      "source_sha256": "8e1adef9f8390073e237516d367267681604b0b3486cc7c2ee71808e6de32e12",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 185,
+      "cut": 187,
+      "end": 187,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        188
+      ],
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 199,
+      "cut": 201,
+      "end": 201,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        202
+      ],
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 299,
+      "cut": 305,
+      "end": 305,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        305
+      ],
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 307,
+      "cut": 311,
+      "end": 311,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        311
+      ],
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 313,
+      "cut": 316,
+      "end": 316,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        316
+      ],
+      "source_sha256": "7c2dacf673c6a752fff18f7232907a19f2f01a105477a9c4302ef693acb60bf4",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "arm": 99,
+      "cut": 101,
+      "end": 101,
+      "consumer": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        103
+      ],
+      "source_sha256": "ca83b96a848ec76f69ad0f6318098ef08a15d9349711147a2bab0f989a6408b5",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+      "arm": 46,
+      "cut": 48,
+      "end": 48,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        49
+      ],
+      "source_sha256": "74e554fee6d9008fe59882301bfa07e300d810c66b7559e42afa3fb35c64bc00",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.h",
+      "arm": 84,
+      "cut": 88,
+      "end": 88,
+      "consumer": "src/mvdm-host/wow32/wmmalias.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "logical_next_lines": [
+        89
+      ],
+      "source_sha256": "7246e9756d481ce5bb6b64058951cbc2c949c86b580082eb4b6ba7a465fa106d",
+      "error": ""
+    }
+  ],
+  "failures": []
+}

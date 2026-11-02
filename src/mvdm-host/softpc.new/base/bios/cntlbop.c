@@ -67,17 +67,9 @@ static control_bop_array base_bop_table[] =
 #error DIVERGENCE MVDM-HOST-DIV-529: RUNUX platform branch is not selected; see mirror register.
 #endif
 #if defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)
-     7, flatog,
-#ifdef FLOPPY_B
-     6, flbtog,
-#endif /* FLOPPY_B */
-#ifdef SLAVEPC
-#error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
-#endif /* SLAVEPC */
-     4, comtog,
-     3, D_kyhot,             /* Flush the COM/LPT ports */
-     2, D_kyhot2,            /* Rock the screen         */
+#error Unsupported excluded original configuration
 #endif /* DUMB_TERMINAL && !NO_SERIAL_UIF */
+#line 81
 #ifndef NTVDM
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif

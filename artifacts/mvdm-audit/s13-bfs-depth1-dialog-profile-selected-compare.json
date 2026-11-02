@@ -1,0 +1,30 @@
+{
+  "scope": "scratch-only all current x86 graph contexts for 4 NTVDM alternatives",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "output": "obj/original_dlgbegin.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "607eac639515190cda1a01c5d8525f5958382f63ae2a58f042ed541e0a2b788a",
+      "after_sha256": "7b4d2368370157e0f4c2a213bd33a87d2f04033023a693793d2b389a08a024c3",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/opennt-user/control-body-dlgbegin.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "759332f46856e66ba9ce7e9711e349af73487baf0ae60fb79dc25ab1777a3487",
+      "after_sha256": "9efece8a723fb611dc2f7692b1b261151e9e179919fde9b3f1de45ababad968f",
+      "error_before": "",
+      "error_after": ""
+    }
+  ],
+  "failures": []
+}

@@ -1,0 +1,19 @@
+{
+  "records": [
+    {
+      "flags": [
+        "/Di386",
+        "/DCPU_40_STYLE"
+      ],
+      "exit": 0,
+      "diagnostic": "dpmi40-header-control.c\r\n"
+    },
+    {
+      "flags": [
+        "/Di386"
+      ],
+      "exit": 2,
+      "diagnostic": "dpmi40-header-control.c\r\nO:\\repos.hobby\\ntvdm64\\build\\t473-s13\\dpmi40-header-control.c(4): fatal error C1189: #error:  Unsupported excluded original configuration\r\n"
+    }
+  ]
+}

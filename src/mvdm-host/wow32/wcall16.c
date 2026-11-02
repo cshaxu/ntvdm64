@@ -91,40 +91,9 @@ HANDLE LocalReAlloc16(HANDLE hMem, INT cb, WORD wFlags)
 }
 
 #ifndef WOWFASTEDIT
-
-VPVOID LocalLock16(HANDLE hMem)
-{
-    PARM16 Parm16;
-    VPVOID vp = 0;
-
-    if (HIWORD(hMem) == 0) {
-        WOW32ASSERT(HIWORD(hMem) != 0);
-        return (VPVOID)0;
-    }
-
-    Parm16.WndProc.lParam = (LONG)hMem;
-    CallBack16(RET_LOCALLOCK, &Parm16, 0, &vp);
-
-    return vp;
-}
-
-BOOL LocalUnlock16(HANDLE hMem)
-{
-    PARM16 Parm16;
-    VPVOID vp = FALSE;
-
-    if (HIWORD(hMem) == 0) {
-        WOW32ASSERT(HIWORD(hMem));
-        return FALSE;
-    }
-
-    Parm16.WndProc.lParam = (LONG)hMem;
-    CallBack16(RET_LOCALUNLOCK, &Parm16, 0, &vp);
-
-    return (BOOL)vp;
-}
-
+#error Unsupported excluded original configuration
 #else
+#line 128
 
 VPVOID LocalLock16(HANDLE hMem)
 {
@@ -207,6 +176,7 @@ UNLOCK2:
 }
 
 #endif  // WOWFASTEDIT
+#line 210
 
 
 WORD LocalSize16(HANDLE hMem)
@@ -692,10 +662,9 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     //
 
 #if FASTBOPPING
-    CurrentMonitorTeb = NtCurrentTeb();
-    FastWOWCallbackCall();
-    // fastbop code refreshes ptd->vpStack
+#error Unsupported excluded original configuration
 #else
+#line 807
     // Time to get the IEU running task-time code again
     SaveIp = getIP();
     /* DIVERGENCE(MVDM-HOST-DIV-304): default-off witness after the original
@@ -709,6 +678,7 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     setIP(SaveIp);
     ptd->vpStack = VDMSTACK();
 #endif
+#line 820
 
     // after return from callback ptd->vpStack will point to PCBVDMFRAME
 

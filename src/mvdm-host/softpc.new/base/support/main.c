@@ -106,8 +106,9 @@ GLOBAL int *pargc;	/* Pointer to argc		*/
 #if defined(NTVDM) || defined(host_main)
 INT host_main IFN2(INT, argc, CHAR **, argv)
 #else   /* host_main */
-INT      main IFN2(INT, argc, CHAR **, argv)
+#error Unsupported excluded original configuration
 #endif  /* host_main */
+#line 106
 {
   IMPORT ULONG setup_global_data_ptr();
 
@@ -124,10 +125,9 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 #endif	/* SETUID_ROOT */
 
 #if !defined(PROD) || defined(HUNTER)
-
-	trace_init();		/* set up the trace file */
-
+#error Unsupported excluded original configuration
 #endif /* !PROD || HUNTER */
+#line 126
 
 /***********************************************************************
  *								       *
@@ -142,8 +142,9 @@ INT      main IFN2(INT, argc, CHAR **, argv)
   pargv = argv;
 
 #if !defined(NTVDM) && !defined(macintosh) && !defined(VMS)
-  setupEnv(argc,argv);	/* set up Unix run-time environment */
+#error Unsupported excluded original configuration
 #endif	/* NTVDM, macintosh, VMS */
+#line 142
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
@@ -159,19 +160,9 @@ INT      main IFN2(INT, argc, CHAR **, argv)
   host_applInit(argc,argv);	/* recommended home is host/xxxx_reset.c */
 
 #ifdef SECURE
-  /* Now that error panels are available, Validate SoftWindows Integrity. */
-  sys_config_filename = host_expand_environment_vars(SYSTEM_CONFIG);
-  if (!host_validate_swin_integrity(sys_config_filename))
-  {
-#ifdef PROD
-    err_data.string_3 = sys_config_filename;
-    (VOID) host_error_ext(EG_SYS_INSECURE, ERR_QUIT, &err_data);
-    exit(1);
-#else
-#error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
+#error Unsupported excluded original configuration
 #endif
-  }
-#endif
+#line 170
 #if defined(CPU_40_STYLE) && !defined(CCPU)
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #endif /* assembler 4.0 cpu */
@@ -230,20 +221,9 @@ INT      main IFN2(INT, argc, CHAR **, argv)
 #endif	/* defined(NTVDM) || defined(macintosh) */
 
 #if !defined(PROD) || defined(HUNTER)
-
-/******************************************************************
- *								  *
- * Bit of a liberty being taken here.				  *
- * Hunter and noProd versions can set NPX and GFX adapter from	  *
- * environment vars, this can cause the old cmos to disagree	  *
- * with the new config structure.				  *
- * This function call updates the cmos.				  *
- *								  *
- ******************************************************************/
-
-  cmos_equip_update();
-
+#error Unsupported excluded original configuration
 #endif
+#line 245
 
 /*
  * initialise the cpu

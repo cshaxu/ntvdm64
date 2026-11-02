@@ -1,0 +1,34 @@
+{
+  "scope": "scratch effective logical-line witnesses for candidate first-depth C arms; profile and original proofs still required",
+  "items": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "arm": 41,
+      "cut": 3297,
+      "end": 3301
+    }
+  ],
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "arm": 41,
+      "after_physical_line": 3297,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 3298,
+      "source_sha256": "9070fd972a92da845354cfcbb0ee8b58569dc9ea1b5319f22f76edb2a346f3e7",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "arm": 41,
+      "after_physical_line": 3301,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_line": 3302,
+      "source_sha256": "9070fd972a92da845354cfcbb0ee8b58569dc9ea1b5319f22f76edb2a346f3e7",
+      "error": ""
+    }
+  ],
+  "failures": []
+}

@@ -96,20 +96,9 @@ void	host_simulate()
     ASSERT(IcaLock.OwningThread != NtCurrentTeb()->ClientId.UniqueThread);
 
 #ifdef _ALPHA_
-    //
-    // For Alpha AXP, set the arithmetic trap ignore bit since the code
-    // generators are incapable of generating proper Alpha instructions
-    // that follow trap shadow rules.
-    //
-    // N.B. In this mode all floating point arithmetic traps are ignored.
-    //      Imprecise exceptions are not converted to precise exceptions
-    //      and correct IEEE results are not stored in the destination
-    //      registers of trapping instructions. Only the hardware FPCR
-    //      status bits can be used to determine if any traps occurred.
-    //
-
-    ((PSW_FPCR)&(NtCurrentTeb()->FpSoftwareStatusRegister))->ArithmeticTrapIgnore = 1;
+#error Unsupported excluded original configuration
 #endif
+#line 117
 
     cpu_simulate ();
 

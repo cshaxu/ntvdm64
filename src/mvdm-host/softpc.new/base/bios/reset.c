@@ -102,8 +102,9 @@ HOSTMOUSEFUNCS	*working_mouse_funcs;
 
 /* Imports */
 #ifdef NPX
-IMPORT void initialise_npx IPT0();
+#error Unsupported excluded original configuration
 #endif	/* NPX */
+#line 107
 
 #ifdef DPMI
 #error Unsupported excluded original configuration
@@ -289,27 +290,12 @@ half_word *low, *high;
 	half_word low_switches = 0, high_switches = 0;
 
 #ifdef	NPX
-	/*
-	** Switchable NPX
-	*/
-
-	if (host_runtime_inquire(C_NPX_ENABLED))
-	{
-#ifdef SWITCHNPX
-		Npx_enabled = 1;
-#endif
-		low_switches |= (RAM_256KB | PPI_CO_PROCESSOR_PRESENT | NO_LOOP_ON_POST);
-	}
-	else
-	{
-#ifdef SWITCHNPX
-		Npx_enabled = 0;
-#endif
-		low_switches |= (RAM_256KB | PPI_CO_PROCESSOR_NOT_PRESENT | NO_LOOP_ON_POST);
-	}
+#error Unsupported excluded original configuration
 #else
+#line 310
 	low_switches |= (RAM_256KB | PPI_CO_PROCESSOR_NOT_PRESENT | NO_LOOP_ON_POST);
 #endif
+#line 312
 
 #ifdef FLOPPY_B
 #error Unsupported excluded original configuration
@@ -647,8 +633,9 @@ void reset()
 #ifdef PRINTER
 	equip_flag.bits.printer_count = NUM_PARALLEL_PORTS;
 #else /* PRINTER */
-	equip_flag.bits.printer_count = 0;
+#error Unsupported excluded original configuration
 #endif /* PRINTER */
+#line 772
 	equip_flag.bits.game_io_present = FALSE;
 	equip_flag.bits.rs232_count = NUM_SERIAL_PORTS;
 	equip_flag.bits.ram_size = 0;
@@ -708,8 +695,9 @@ void reset()
 
 	/* Now initialise the other BIOS handlers */
 #if defined (GEN_DRVR) || defined (CDROM)
-	init_gen_drivers();
+#error Unsupported excluded original configuration
 #endif /* GEN_DRVR || CDROM */
+#line 906
 
 	for (adapter = 0; adapter < NUM_SERIAL_PORTS; adapter++)
 	{
@@ -718,8 +706,9 @@ void reset()
 	}
 
 #ifdef NPX
-	initialise_npx();
+#error Unsupported excluded original configuration
 #endif
+#line 916
 	dma_init();
 	dma_post();
 	fla_init();

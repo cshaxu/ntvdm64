@@ -1,0 +1,405 @@
+{
+  "scope": "correct one-line displacement caused by a two-line scratch marker; no selected source body changes",
+  "single_line_control": "demhndl original boundary 445 versus prior two-line probe 446",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "directive_line": 443,
+      "before": 446,
+      "after": 445,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "directive_line": 138,
+      "before": 139,
+      "after": 138,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "directive_line": 141,
+      "before": 141,
+      "after": 140,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "directive_line": 210,
+      "before": 215,
+      "after": 214,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "directive_line": 107,
+      "before": 108,
+      "after": 107,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "directive_line": 295,
+      "before": 311,
+      "after": 310,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "directive_line": 298,
+      "before": 313,
+      "after": 312,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "directive_line": 638,
+      "before": 773,
+      "after": 772,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "directive_line": 700,
+      "before": 907,
+      "after": 906,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "directive_line": 711,
+      "before": 917,
+      "after": 916,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "directive_line": 146,
+      "before": 132,
+      "after": 131,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "directive_line": 207,
+      "before": 216,
+      "after": 215,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "directive_line": 4335,
+      "before": 4408,
+      "after": 4407,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "directive_line": 4637,
+      "before": 4707,
+      "after": 4706,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "directive_line": 162,
+      "before": 163,
+      "after": 162,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "directive_line": 1740,
+      "before": 1752,
+      "after": 1751,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "directive_line": 1748,
+      "before": 1759,
+      "after": 1758,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "directive_line": 1856,
+      "before": 1868,
+      "after": 1867,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shld.c",
+      "directive_line": 117,
+      "before": 118,
+      "after": 117,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shrd.c",
+      "directive_line": 119,
+      "before": 120,
+      "after": 119,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "directive_line": 1529,
+      "before": 1583,
+      "after": 1582,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "directive_line": 2118,
+      "before": 2187,
+      "after": 2186,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "directive_line": 2122,
+      "before": 2190,
+      "after": 2189,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "directive_line": 824,
+      "before": 858,
+      "after": 857,
+      "family": "ntvdm"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "directive_line": 53,
+      "before": 54,
+      "after": 53,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "directive_line": 56,
+      "before": 56,
+      "after": 55,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "directive_line": 85,
+      "before": 234,
+      "after": 233,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "directive_line": 135,
+      "before": 274,
+      "after": 273,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "directive_line": 129,
+      "before": 127,
+      "after": 126,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "directive_line": 234,
+      "before": 246,
+      "after": 245,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "directive_line": 275,
+      "before": 298,
+      "after": 297,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "directive_line": 1210,
+      "before": 1236,
+      "after": 1235,
+      "family": "ntvdm"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+      "directive_line": 79,
+      "before": 80,
+      "after": 79,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+      "directive_line": 62,
+      "before": 64,
+      "after": 63,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+      "directive_line": 56,
+      "before": 57,
+      "after": 56,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "directive_line": 336,
+      "before": 339,
+      "after": 338,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "directive_line": 508,
+      "before": 535,
+      "after": 534,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "directive_line": 856,
+      "before": 859,
+      "after": 858,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "directive_line": 169,
+      "before": 193,
+      "after": 192,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "directive_line": 456,
+      "before": 482,
+      "after": 481,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "directive_line": 960,
+      "before": 966,
+      "after": 965,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "directive_line": 53,
+      "before": 54,
+      "after": 53,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "directive_line": 234,
+      "before": 234,
+      "after": 233,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "directive_line": 247,
+      "before": 277,
+      "after": 276,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "directive_line": 336,
+      "before": 365,
+      "after": 364,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "directive_line": 339,
+      "before": 367,
+      "after": 366,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.c",
+      "directive_line": 705,
+      "before": 706,
+      "after": 705,
+      "family": "finalists"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "directive_line": 30,
+      "before": 35,
+      "after": 34,
+      "family": "finalists"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "directive_line": 29,
+      "before": 30,
+      "after": 29,
+      "family": "finalists"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "directive_line": 58,
+      "before": 62,
+      "after": 61,
+      "family": "finalists"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "directive_line": 873,
+      "before": 874,
+      "after": 873,
+      "family": "finalists"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "directive_line": 894,
+      "before": 895,
+      "after": 894,
+      "family": "finalists"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "directive_line": 1143,
+      "before": 1143,
+      "after": 1142,
+      "family": "finalists"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "directive_line": 538,
+      "before": 561,
+      "after": 560,
+      "family": "ntvdm"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "directive_line": 648,
+      "before": 648,
+      "after": 647,
+      "family": "ntvdm"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "directive_line": 2629,
+      "before": 2630,
+      "after": 2629,
+      "family": "devl"
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "directive_line": 2648,
+      "before": 2648,
+      "after": 2647,
+      "family": "devl"
+    }
+  ]
+}

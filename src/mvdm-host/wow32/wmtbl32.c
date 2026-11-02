@@ -1318,7 +1318,7 @@ M32 aw32Msg[] = {
 
 
 #ifdef DEBUG_OR_WOWPROFILE
-INT  iMsgMax  = NUMEL(aw32Msg);
-PM32 paw32Msg = aw32Msg;
+#error Unsupported excluded original configuration
 #endif
+#line 1324
 

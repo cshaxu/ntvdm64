@@ -92,14 +92,14 @@ extern int get_scanlines(void);
 extern sys_addr find_mode_table(int,sys_addr *);
 extern sys_addr follow_ptr(sys_addr);
 #else
-extern int get_scanlines();
-extern sys_addr find_mode_table();
-extern sys_addr follow_ptr();
+#error Unsupported excluded original configuration
 #endif /* ANSI */
+#line 99
 
 #ifdef MSWDVR
-IMPORT VOID host_mswin_disable IPT0();
+#error Unsupported excluded original configuration
 #endif
+#line 103
 
 #ifdef V7VGA
 IMPORT VOID v7vga_extended_set_mode IPT0();

@@ -851,10 +851,9 @@ PHMAPPEDFILEALIAS pCache;
 register PFILEIOLSEEK16 parg16;
 
 #if (FILE_BEGIN != 0 || FILE_CURRENT != 1 || FILE_END !=2)
-    #error "Win32 values not DOS compatible"
-#
-
+#error Unsupported excluded original configuration
 #endif
+#line 858
 
     GETARGPTR(pFrame, sizeof(FILEIOLSEEK16), parg16);
 

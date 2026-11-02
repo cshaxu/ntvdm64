@@ -1,0 +1,10 @@
+{
+  "scope": "scratch source comparison with explicitly supported diagnostic macro enabled and corrected logical lines",
+  "exits": [
+    0,
+    0
+  ],
+  "selected_equal": true,
+  "before_sha256": "a40cb9dbc75024548d878312ebeb116bdc55153728a55b49d6b1533a21ed77b1",
+  "after_sha256": "5b5d618fb6dd1317c4368315693c71b8b5a6b65f610bce17d59e461f003c3db8"
+}

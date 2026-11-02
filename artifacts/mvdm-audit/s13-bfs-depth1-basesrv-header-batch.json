@@ -1,0 +1,32 @@
+{
+  "scope": "first-depth original-boundary finalists; unsupported profiles held; selected lines retained",
+  "records": [
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "arm": 231,
+      "cut": 233,
+      "end": 233,
+      "consumer": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        234
+      ],
+      "source_sha256": "5016d623cb8295cda7e9788cbde1fa6d52c3f52a98bea3dc63fc8a54067fe414",
+      "error": "",
+      "before_sha256": "5016d623cb8295cda7e9788cbde1fa6d52c3f52a98bea3dc63fc8a54067fe414",
+      "original_sha256": "a6863d6360830149e0b4895423f3d0f8a8e13326d784821d88b433ff849f3e31",
+      "body_sha256": "78c7bb300292e5f0add96b171da81871a1473f4b9cdb5b6400d43b328644ce3c",
+      "body_lines": 1,
+      "end_logical": 234,
+      "cut_logical": 234,
+      "after_sha256": "3483fd51434edb16a1e09aa5793a8ef23f651870113462f2419816e6a468df96",
+      "current_start_line": 231,
+      "current_cut_line": 233,
+      "current_end_line": 233,
+      "registration": "OPENNT-HOST-148"
+    }
+  ],
+  "subsumed_nested_groups": 0,
+  "subsumed_ledger_entries": 0
+}

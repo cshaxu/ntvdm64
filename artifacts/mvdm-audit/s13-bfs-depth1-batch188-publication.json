@@ -1,0 +1,59 @@
+{
+  "packageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+  "images": [
+    {
+      "name": "run16.exe",
+      "sha256": "9813B7123F3FFADB83FBCAEE14399695698037E2FECC2202EB471A2A1D852872",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "ntsrv.exe",
+      "sha256": "4F7247A9CBACA944697518DB2D59665C34FC35477E8737B8EE3A56B85E8F7B92",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "ntcon.exe",
+      "sha256": "5CB2BA21844CD873F7E87EC2D0B9E225FB19B18EDA92A28BA22D745C14CB81CE",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "ntvdm.exe",
+      "sha256": "2771D2BBD5DA24AE58E4AB55CAC6B6CF1D1D19F599C71F489C6D889282673F39",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "ntvwm.exe",
+      "sha256": "684B501E1B025F4E8DC54E6AE837A71FDBA4A2DCD3CF8F2909B788A206A9532E",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "ntmon.exe",
+      "sha256": "4DF75031A7D19A6C853B680476D0C3FBD7A200FD60D85A1DCE1E96F099F8C345",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "WOW32.DLL",
+      "sha256": "D1A684704AEA26C808B7D2F1F9A68612F628CBC742E68F2C1C983025D35D24F7",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "sha256": "5F9D982C7E9E789C11A8006F177245A0CD2ED3429BC61F46D14471060EB9FB61",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "nthook32.dll",
+      "sha256": "20035DF646BFB5017D88EB2DA68D52E0F7EDE031F368740C3A00AF5B3D466678",
+      "bothDestinationsMatch": true
+    },
+    {
+      "name": "nthook64.dll",
+      "sha256": "19360DF7CFD568416020926F955CEF964C8D232DF898E71A24B3BFAF32662407",
+      "bothDestinationsMatch": true
+    }
+  ],
+  "fullGatesPassed": 17,
+  "win31ModesPassed": 4,
+  "wowParameterScenarios": 54,
+  "note": "Intermediate first-depth checkpoint, not S13 completion."
+}

@@ -1,0 +1,26 @@
+{
+  "scope": "first-depth original-boundary finalists; unsupported profiles held; selected lines retained",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "arm": 41,
+      "cut": 3297,
+      "end": 3301,
+      "source_sha256": "9070fd972a92da845354cfcbb0ee8b58569dc9ea1b5319f22f76edb2a346f3e7",
+      "cut_logical": 3298,
+      "end_logical": 3302,
+      "before_sha256": "9070fd972a92da845354cfcbb0ee8b58569dc9ea1b5319f22f76edb2a346f3e7",
+      "original_sha256": "93a1891b0a27b336ccecd99a4b198e1d26f769fe31ed83023df52178e3364a51",
+      "body_sha256": "e7369ae3424afe2451562f7bb8f04cb83a2b9b562d53665f6842b27d12666780",
+      "body_lines": 3255,
+      "scratch_key": "161140980c4d34bb",
+      "after_sha256": "0f70c09c1691c999741dd4fad877bb0ebba8640e90b47c60d994da66e49540b5",
+      "current_start_line": 41,
+      "current_cut_line": 43,
+      "current_end_line": 48,
+      "registration": "MVDM-HOST-DIV-598"
+    }
+  ],
+  "subsumed_nested_groups": 8,
+  "subsumed_ledger_entries": 0
+}

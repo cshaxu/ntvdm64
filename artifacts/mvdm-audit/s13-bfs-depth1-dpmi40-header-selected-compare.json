@@ -1,0 +1,30 @@
+{
+  "scope": "scratch-only selected preprocessing for all 80 current ICA header consumers",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/dpmi/dpmiint.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "d636bcf926583b8f7a0c0c8150f105e25e44a4b6cd9c211f667643bd53a96e50",
+      "after_sha256": "63c6daa76012500b798123705c32b21508a0c95cc7be219c837f8009c0219f98",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/dpmi/dpmiint.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "d636bcf926583b8f7a0c0c8150f105e25e44a4b6cd9c211f667643bd53a96e50",
+      "after_sha256": "63c6daa76012500b798123705c32b21508a0c95cc7be219c837f8009c0219f98",
+      "error_before": "",
+      "error_after": ""
+    }
+  ],
+  "failures": []
+}

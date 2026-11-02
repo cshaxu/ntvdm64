@@ -1,0 +1,48 @@
+{
+  "scope": "scratch real consumer for nine first-depth header boundary candidates; no disposition decision",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timer.h",
+      "arm": 90,
+      "cut": 93,
+      "end": 96,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        97
+      ],
+      "source_sha256": "8a9efac5bc104c75e955016b3816e9568ee79bf88b2e18a9ea9aa476fa58bba8",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "arm": 38,
+      "cut": 50,
+      "end": 50,
+      "consumer": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        51
+      ],
+      "source_sha256": "922d7adf54ebcf87b331481a58be008f3651d474f04211abdfe018d2d79cdb0f",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "arm": 60,
+      "cut": 63,
+      "end": 66,
+      "consumer": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        67
+      ],
+      "source_sha256": "922d7adf54ebcf87b331481a58be008f3651d474f04211abdfe018d2d79cdb0f",
+      "error": ""
+    }
+  ],
+  "failures": []
+}

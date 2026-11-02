@@ -1,0 +1,49 @@
+{
+  "scope": "first-depth original-boundary finalists; unsupported profiles held; selected lines retained",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "arm": 626,
+      "cut": 628,
+      "end": 628,
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "exit": 0,
+      "end_logical": 630,
+      "source_sha256": "413c772f4234542bc44278dd4a25a27dac25d618c12de8d97757f409d224d436",
+      "error": "",
+      "before_sha256": "413c772f4234542bc44278dd4a25a27dac25d618c12de8d97757f409d224d436",
+      "after_sha256": "e49a9208159ee73d5289faaf19041c94ecfcfd0579c0a8b5a9efb501fe260157",
+      "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+      "body_sha256": "82ce815ff7177f9949c6545a561d6fd078712b4cc78c7dde2f048db778403aa5",
+      "body_lines": 1,
+      "scratch_key": "7182590915082705",
+      "current_start_line": 626,
+      "current_cut_line": 628,
+      "current_end_line": 628,
+      "registration": "OPENNT-HOST-148"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "arm": 635,
+      "cut": 638,
+      "end": 638,
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "exit": 0,
+      "end_logical": 640,
+      "source_sha256": "413c772f4234542bc44278dd4a25a27dac25d618c12de8d97757f409d224d436",
+      "error": "",
+      "before_sha256": "413c772f4234542bc44278dd4a25a27dac25d618c12de8d97757f409d224d436",
+      "after_sha256": "e49a9208159ee73d5289faaf19041c94ecfcfd0579c0a8b5a9efb501fe260157",
+      "original_sha256": "c3df77a2987e97df8872c3dab8f6e7c10a08850c5ebcb439c0ec1dc88b0cdc44",
+      "body_sha256": "a638940778ee480e9630041d6a7b00d6e8c844823efb39751401cb1236dca900",
+      "body_lines": 2,
+      "scratch_key": "7182590915082705",
+      "current_start_line": 636,
+      "current_cut_line": 638,
+      "current_end_line": 638,
+      "registration": "OPENNT-HOST-148"
+    }
+  ],
+  "subsumed_nested_groups": 0,
+  "subsumed_ledger_entries": 0
+}

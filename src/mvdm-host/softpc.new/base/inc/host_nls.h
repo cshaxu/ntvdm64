@@ -74,10 +74,9 @@ extern void  host_nls_get_msg 		IPT3(int,msg_num,
 #ifdef NTVDM
 #define host_nls_get_msg_no_check host_nls_get_msg
 #else
-extern void  host_nls_get_msg_no_check 	IPT3(int,msg_num,
-						CHAR *,msg_buff,int,buff_len);
-extern int nls_init IPT0();
+#error Unsupported excluded original configuration
 #endif
+#line 81
 
 /* In order to stabilise the numbers used in the NLS catalogues,
  * we now fix the C_* defines in config.h. The config_message

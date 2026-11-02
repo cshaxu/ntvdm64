@@ -1,0 +1,78 @@
+{
+  "scope": "scratch-only all current x86 graph contexts for 4 NTVDM alternatives",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/ccpu/lgdt.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "781cb8ac9e08451d13446677b32522878059256b092b89ca6f4ed1bb17dd72af",
+      "after_sha256": "de3621b888eea84a14a6393b91b371aee8b737a6efcff3fd17e291b937bb0ab6",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/system/timer.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "7e9f727a934ab253df19237f480792f9f4050f4e78a5aad5bca33f254476c778",
+      "after_sha256": "6ee3d4ba466c3feb170b9bfdd9b4de3e86cff64bc78d4984c8b240c378a95d79",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/host/nt_reset.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "7735ae4dc94eceac725834f9e0787a521f3993b875e7e2d3f9dedbe85d65d4ca",
+      "after_sha256": "87bd973b05626813b65e8dd8a47e26948853c40044ed904ce069cde3c0527d55",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/ccpu/lgdt.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "781cb8ac9e08451d13446677b32522878059256b092b89ca6f4ed1bb17dd72af",
+      "after_sha256": "de3621b888eea84a14a6393b91b371aee8b737a6efcff3fd17e291b937bb0ab6",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/system/timer.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "7e9f727a934ab253df19237f480792f9f4050f4e78a5aad5bca33f254476c778",
+      "after_sha256": "6ee3d4ba466c3feb170b9bfdd9b4de3e86cff64bc78d4984c8b240c378a95d79",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/host/nt_reset.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "7735ae4dc94eceac725834f9e0787a521f3993b875e7e2d3f9dedbe85d65d4ca",
+      "after_sha256": "87bd973b05626813b65e8dd8a47e26948853c40044ed904ce069cde3c0527d55",
+      "error_before": "",
+      "error_after": ""
+    }
+  ],
+  "failures": []
+}

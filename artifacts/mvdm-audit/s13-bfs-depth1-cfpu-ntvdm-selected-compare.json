@@ -1,0 +1,78 @@
+{
+  "scope": "scratch-only selected preprocessing for all 80 current ICA header consumers",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/ccpu/fpu.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "c656e32ff18253e7b4eaef83e10cd123b6b9cf57d05adb9fe67f1d0acee21b35",
+      "after_sha256": "06f582e33e005eaa1e3cf6d68da00202e3179bfcd67ae0c8c5741bed2eec19a9",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/ccpu/zfrsrvd.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "3632ace8dc65cf64c53edfdc299c40029d0cb6285fe1c5a0977c0a38e75e2c74",
+      "after_sha256": "d3e813674edfbdcf73c399006c022b4579e555c3a93f68eea8f0d911ea33d03c",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "tests/mvdm-host/x87_layout_fixture.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/tests/x87_layout_fixture.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "1054fdcf916580757ad5cd087e587a8d56e8791b19c855ceb4b3683956ab0596",
+      "after_sha256": "c81e5dd8d3c901ce1c531f778915339e1588bb6422cb9545d77c301611c958e6",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/ccpu/fpu.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "c656e32ff18253e7b4eaef83e10cd123b6b9cf57d05adb9fe67f1d0acee21b35",
+      "after_sha256": "06f582e33e005eaa1e3cf6d68da00202e3179bfcd67ae0c8c5741bed2eec19a9",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/ccpu/zfrsrvd.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "3632ace8dc65cf64c53edfdc299c40029d0cb6285fe1c5a0977c0a38e75e2c74",
+      "after_sha256": "d3e813674edfbdcf73c399006c022b4579e555c3a93f68eea8f0d911ea33d03c",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "tests/mvdm-host/x87_layout_fixture.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/tests/x87_layout_fixture.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "1054fdcf916580757ad5cd087e587a8d56e8791b19c855ceb4b3683956ab0596",
+      "after_sha256": "c81e5dd8d3c901ce1c531f778915339e1588bb6422cb9545d77c301611c958e6",
+      "error_before": "",
+      "error_after": ""
+    }
+  ],
+  "failures": []
+}

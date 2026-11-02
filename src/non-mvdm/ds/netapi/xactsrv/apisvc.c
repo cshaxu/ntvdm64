@@ -868,8 +868,9 @@ Return Value:
         }
         srcBuffer = (LPSTR)SmbGetUlong( &parameters->RcvBuffer );
 #else
-        nativeRcvBuffer = (LPTSTR)SmbGetUlong( &parameters->RcvBuffer );
+#error Unsupported excluded original configuration
 #endif
+#line 873
 
     }
 

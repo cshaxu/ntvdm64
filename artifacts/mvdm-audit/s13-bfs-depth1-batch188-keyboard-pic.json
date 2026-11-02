@@ -1,0 +1,9 @@
+{
+  "profile": "x86 /MT NTVDM CCPU40",
+  "elapsed_ms": 250,
+  "executable_sha256": "F49F598C6CD2D0B717FFC667B44F16DA732856850F12F99ADA97E34F9349B13D",
+  "keyba_sha256": "796CC0E4C0698BE1ABAEBF9728490A36497DE9818AE1F4E4C37719328576DF9A",
+  "ica_sha256": "B9527BC864083FE7783E9836BDE7A1BC3784D18B838C439455CA7E57C001EE2A",
+  "controller_reply": "C0 returns input port; 20, AA, AB, D0 and E0 return their response bytes",
+  "scope": "Actual controller/PIC; normal and early EOI slot order, controlled host callbacks, no BIOS ISR/timer acceptance"
+}

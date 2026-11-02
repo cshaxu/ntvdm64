@@ -1,0 +1,27 @@
+{
+  "scope": "scratch first-depth selected logical-line boundaries, standalone NTVDM flag review separate",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "arm": 626,
+      "cut": 628,
+      "end": 628,
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "exit": 0,
+      "end_logical": 630,
+      "source_sha256": "413c772f4234542bc44278dd4a25a27dac25d618c12de8d97757f409d224d436",
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "arm": 635,
+      "cut": 638,
+      "end": 638,
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "exit": 0,
+      "end_logical": 640,
+      "source_sha256": "413c772f4234542bc44278dd4a25a27dac25d618c12de8d97757f409d224d436",
+      "error": ""
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "scope": "scratch first-depth selected logical-line boundaries, standalone NTVDM flag review separate",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.c",
+      "arm": 1320,
+      "cut": 1323,
+      "end": 1323,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "end_logical": 1324,
+      "source_sha256": "8dbb8e6828c8f0ff3286bf917b40964eb859d1091ec0757c801c9422ed2fb7b3",
+      "error": ""
+    }
+  ]
+}

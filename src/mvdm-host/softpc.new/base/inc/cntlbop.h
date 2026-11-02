@@ -70,10 +70,6 @@ extern void control_bop();
 extern control_bop_array host_bop_table[];
 
 #if defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)
-extern void flatog   IPT0();
-extern void flbtog   IPT0();
-extern void slvtog   IPT0();
-extern void comtog   IPT0();
-extern void D_kyhot  IPT0();
-extern void D_kyhot2 IPT0();
+#error Unsupported excluded original configuration
 #endif /* DUMB_TERMINAL && !SERIAL_UIF */
+#line 80

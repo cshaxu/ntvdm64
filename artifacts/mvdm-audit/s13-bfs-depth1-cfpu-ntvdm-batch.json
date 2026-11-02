@@ -1,0 +1,32 @@
+{
+  "scope": "first-depth original-boundary finalists; unsupported profiles held; selected lines retained",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
+      "arm": 194,
+      "cut": 207,
+      "end": 207,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        210
+      ],
+      "source_sha256": "8888b824520cb6cf7eefdbfcfa5ab2cf845b5602fb375424ecf42828f02c1865",
+      "error": "",
+      "before_sha256": "8888b824520cb6cf7eefdbfcfa5ab2cf845b5602fb375424ecf42828f02c1865",
+      "original_sha256": "fe3bb4a06759e1cbef74bff327661f9649c92fb2490cdc751bc625a8170d3d4f",
+      "body_sha256": "8ba58f02223e078979a7d5178802528de50153fb298c2f53577a3c6eed90bb61",
+      "body_lines": 12,
+      "end_logical": 210,
+      "cut_logical": 210,
+      "after_sha256": "d8eaff343a384821909e173ec6502583a8cd8aca3cd65c91ce144284fd4e9735",
+      "current_start_line": 194,
+      "current_cut_line": 196,
+      "current_end_line": 196,
+      "registration": "MVDM-HOST-DIV-598"
+    }
+  ],
+  "subsumed_nested_groups": 0,
+  "subsumed_ledger_entries": 0
+}

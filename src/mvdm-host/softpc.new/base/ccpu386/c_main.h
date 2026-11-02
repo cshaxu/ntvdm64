@@ -207,11 +207,7 @@ IMPORT VOID c_cpu_unsimulate IPT0();
 #define SZ2MASK(x) ((IU32)0xffffffff >> 32 - x )
 
 #ifdef DOUBLE_CPU
-
-#define HARD_CPU        0
-#define SOFT_CPU        1
-
-IMPORT VOID double_switch_to IPT1(IU8, cpu_type);
-
+#error Unsupported excluded original configuration
 #endif
+#line 217
 

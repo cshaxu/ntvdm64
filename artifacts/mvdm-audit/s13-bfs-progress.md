@@ -1319,3 +1319,251 @@ Current status: 1,859 observed retained, 1,470 previously excluded, 344
 newly excluded and 1,377 pending; of the pending arms, 252 already contain
 only `#error` and 1,125 still require a disposition. The corrected latest
 queue is `s13-bfs-depth1-current-queue.zip`.
+
+An independent DPMI fixture requires an additional `/UCCPU` object profile.
+Its uninstrumented preprocessing currently fails at an already-existing
+DIV-515 guard (present before the consolidated batch) nested at depth 2 under
+the retained `#ifndef i386` arm. It is an explicit next-depth review item,
+not a demonstrated first-depth exclusion, and has not been changed here.
+The test-only compile profile is not evidence that hardware V86 monitor or a
+non-CCPU product is supported. See `s13-bfs-depth1-dpmi-nonccpu-profile.json`.
+
+Eight standalone SoftPC object-contract fixtures were also run: six passed;
+GFI's non-PROD fixture fails at an existing depth-2 DIV-504 header guard,
+and NIDDB reproduces the separately recorded inactive-child retirement
+counterexample. Both are recorded in
+`s13-bfs-depth1-independent-contracts.json`; neither is counted as a passing
+fixture or silently repaired outside the current depth.
+
+The next uncommitted depth-1 group has replaced 188 further arms (46 source,
+20 header, four NTVDM alternatives, two BaseSrv DEVL arms, six x87
+alternate-endian arms, eight host-header alternatives, one ICA header arm,
+two Video7 header arms, and two non-WIN32 memalloc alternatives, five PM-disabled alternatives, and four unselected DOUBLE_CPU, DOCUMENTATION
+and NOTUSEDNOTUSED arms, nine further header arms, four compound-condition header arms, seven legacy BIOS/driver arms, two HFX header arms, two BIOS ANSI alternatives, three WOW callback/parameter arms, three platform alternatives, three timing-header alternatives, two additional non-WIN32 allocator arms, three WOW header arms, thirteen host video source alternatives, one RTL alternative, the excluded SoftPC PROFILE body, six legacy host-source arms, six WOW redirect alternatives, two C_VID source alternatives, three non-NTVDM source alternatives, one x87 header alternative, four unsupported DPMI CPU40 alternatives, one unsupported boot-profile arm, one RTL time-unit alternative, three packstr alternatives, two host-profile alternatives, two NTVDM header alternatives, two dialog-owner alternatives, one WOW table profiling arm, and one BaseSrv header alternative). Selected preprocessing was
+compared in 48 source and 316 header graph contexts, plus eight standalone
+header fixtures, two DPMI direct-include fixtures, the enabled CCPU decode
+diagnostic profile, and all three BaseSrv x86/x64 contexts. The two
+pre-existing standalone failures remain failures.
+The current physical inventory has 5,050 arms, with 1,859 observed retained,
+1,470 previously excluded, 532 newly excluded and 1,189 pending. This group
+has not yet been built, tested, published or committed; the published
+ten-image package remains the earlier 104-arm baseline.
+The first header comparison initially missed ten contexts because include
+paths used mixed slash styles. Normalizing both forms and checking only the
+ten missing contexts completed the 316-context comparison without a mismatch.
+An initial two-line marker displaced 57 calculated `#line` values by one;
+the values were corrected and all 57 independently checked with single-line
+markers. See `s13-bfs-depth1-single-line-controls.json`.
+
+The later ICA, Video7 and memalloc alternatives also have selected-context
+preprocessing comparisons in their respective batch evidence. The two
+memalloc alternatives share one original condition group and one #line.
+Pending includes 875 arms in files without a current build-context witness,
+62 unguarded arms in witnessed files, and 252 existing #error arms whose
+supported-profile exclusion is not yet established. Absence of a witness
+is not treated as proof of exclusion.
+
+Five PM-disabled alternatives in tape I/O, keyboard and DMA were checked
+against the original boundaries and the unconditional selected host definition.
+All six actual product-graph preprocessing contexts matched before/after;
+controller, DMA and runtime behavior have not yet been revalidated on this
+unbuilt batch. See s13-bfs-depth1-pm-batch.json and the scratch comparison.
+
+Four first-depth DOUBLE_CPU, DOCUMENTATION and NOTUSEDNOTUSED arms have no
+definition in project sources, tests or build scripts; six actual graph
+contexts produced the same selected preprocessing output after replacement.
+This does not substitute for the pending runtime tests. See
+s13-bfs-depth1-inactive-batch.json and s13-bfs-depth1-inactive-selected-compare.json.
+
+The current 100-arm working batch passed the standalone first-depth CPU
+guard script and the retained-guard script (235 guards plus DPMI, ANSI,
+CPU40 and USER controls) in the x86 build environment. These source guard
+checks are not a substitute for compiling and running the candidate.
+
+Nine additional header alternatives match the fixed original branch bytes
+(after normalizing line endings for comparison), have no project definition
+of their selected-off macro, and produced identical selected preprocessing in
+355 actual contexts and ten standalone fixtures; GFI fails before and after.
+See s13-bfs-depth1-inactive-header-batch.json and its comparison evidence.
+
+Four more original BIOS/ICA compound conditions were checked against all
+known definitions and fixed-original boundaries. Selected preprocessing
+matched in 130 actual graph contexts and ten standalone fixtures; GFI
+remains the same pre-existing failure. See s13-bfs-depth1-compound-header-batch.json.
+
+Seven further BIOS/driver arms have unique exact branch matches in the
+fixed original, no corresponding project definitions, and selected output
+unchanged in 84 graph contexts and ten standalone fixtures. See
+s13-bfs-depth1-legacy-header-batch.json and its comparison evidence.
+
+Two HFX outer branches subsume 11 unselected nested groups and prior
+DIV-504/518/528 occurrences; those shared registrations remain because
+they still have other uses. HFX has no project or test definition, and
+selected preprocessing matched in ten graph contexts and ten standalone
+fixtures (the GFI failure remains pre-existing). See
+s13-bfs-depth1-hfx-header-batch.json and its comparison evidence.
+
+Two BIOS non-ANSI alternatives are excluded only for this header: all 84
+actual consumers specify ANSI; the separate stubs.c undefines ANSI but is
+not a BIOS-header consumer. The non-ANSI WOW control compiles a different
+translation unit. Selected output matched those 84 graph contexts and ten
+standalone fixtures. See s13-bfs-depth1-bios-ansi-batch.json.
+
+Three WOW arms were excluded after tracing WOWFASTEDIT, FASTBOPPING and
+MAPPARAM_EXTRA in their own translation units; the retained local callback
+patch is unchanged. Product preprocessing and the direct-include abort
+fixture matched before/after. Runtime callback and parameter tests remain
+required. See s13-bfs-depth1-wow-extra-batch.json and callback comparison.
+
+Three original platform alternatives in COM, ROM and host CPU were checked
+against their actual translation-unit flags and original branch bodies.
+All six product-graph preprocessing contexts matched; runtime verification
+remains pending. See s13-bfs-depth1-platform-batch.json.
+
+Three timing header arms match fixed-original branches and retain both
+selected-sibling and end logical line mappings. Their selected preprocessing
+matched 62 graph contexts and ten standalone fixtures. See
+s13-bfs-depth1-timing-header-batch.json.
+
+Current 188-arm working queue is snapshotted in
+s13-bfs-depth1-working-queue-188.zip and checked against all recorded
+working-file hashes. Physical inventory: 5,050 first-depth arms, zero
+queue/directive mismatches; all 532 newly excluded arms are guard-only.
+This working state is not a built or published candidate.
+
+Two additional allocator non-WIN32 branches belong to the same verified
+translation-unit profile as the previous allocator batch. Their original
+outer selectors are present; selected output matched both graph contexts.
+See s13-bfs-depth1-memalloc-extra-batch.json.
+
+Three non-WIN31 alternatives in wow.h are excluded by that same header's
+unconditional WIN31 definition. Their fixed-original branches matched and
+selected preprocessing was unchanged in 90 graph contexts plus the direct
+callback fixture. See s13-bfs-depth1-wow-header-batch.json.
+
+Thirteen X86GFX/non-CCPU alternatives were rejected only in the three
+verified host video/event translation units; X86GFX is not globally
+forbidden and its cvidc test profile remains intact. These arms include
+local DIV-322 adaptations, not exact original branch bodies. Selected
+preprocessing matched six graph contexts and both direct-include event
+fixtures; the video source-contract check passed. Graphics runtime and
+the complete build remain pending. See s13-bfs-depth1-x86gfx-source-batch.json.
+
+The RTL NTOS_KERNEL_RUNTIME alternative was checked in all six actual
+x86/x64 compilation contexts: each selects the kernel-runtime form and
+produced matching selected preprocessing and logical-line markers. See
+s13-bfs-depth1-rtl-batch.json and s13-bfs-depth1-rtl-profile-probes.json.
+
+The original SoftPC debug/profile.c PROFILE arm is not selected by its
+two supported graph contexts; its 3,255-line body and eight inner groups
+were replaced at the original first-depth boundary. The selected else
+preprocessing and line mapping matched both contexts; a forced PROFILE
+compile reached the expected #error. PROFILE is not globally forbidden:
+the independent CPU guard test uses it for a different file. See
+s13-bfs-depth1-profile-batch.json and profile-negative-control.json.
+
+Six original or locally adapted host-source conditions were removed only
+from five validated translation units; ten actual graph contexts retained
+identical selected preprocessing. HOOKED_IRETS is defined separately in
+zfrsrvd.c and is not globally forbidden. Fourteen inner groups are
+subsumed; shared older diff registrations remain used elsewhere. See
+s13-bfs-depth1-legacy-source-batch.json.
+
+Six WOW thunk-only private-redirect alternatives were rejected only in
+wuclass.c/wuwind.c; both actual source compile contexts kept identical
+selected output. The private redirect remains selected, and the independent
+precompiled-header selection test is not treated as a source-file profile.
+See s13-bfs-depth1-wowredirect-batch.json. Runtime tests remain pending.
+
+Two original video.c branches requiring neither EGG, C_VID nor A_VID
+were rejected in the verified C_VID source profile. Both actual contexts
+retain their X86GFX configuration and identical selected preprocessing.
+See s13-bfs-depth1-video-source-batch.json.
+
+Three additional non-NTVDM source alternatives are excluded in the
+verified NTVDM translation units. Six actual contexts and two explicitly
+enabled CCPU decode-diagnostic contexts preserved selected preprocessing.
+See s13-bfs-depth1-ntvdm-extra-source-batch.json and its diagnostic comparison.
+
+The x87 header non-NTVDM arm matched the fixed original, and its selected
+output matched all six consumers, including both real x87 layout fixtures.
+This is a header-selection check; the compiled x87 tests remain pending.
+See s13-bfs-depth1-cfpu-ntvdm-batch.json.
+
+Four DPMI alternatives require the unsupported non-CPU40 path; the
+selected CPU40 source/header preprocessing matched, including both x86
+contexts. i386 with CPU40 is accepted and i386 without CPU40 hits #error.
+The independent /UCCPU fixture still fails at the pre-existing depth-2
+DIV-515 guard both before and after; it is not counted as a pass. See
+s13-bfs-depth1-dpmi40-source-batch.json and dpmi40-header-batch.json.
+
+Six remaining common-header alternatives were instrumented in eight
+standalone fixture contexts; no successful fixture positively selected
+them, while GFI remains a pre-existing failed context. This observation
+alone does not establish exclusion, so those alternatives remain pending.
+See s13-bfs-depth1-standalone-positive-marker-audit.json.
+
+The unselected host boot-file mutation arm is now #error; the selected
+no-host-mutation adapter and its original call ordering are unchanged.
+Both actual x86 graph contexts matched, and DIV-134 registration now states
+the removed original alternate body. Runtime startup remains to be tested.
+See s13-bfs-depth1-boot-profile-batch.json.
+
+The standalone RTL time unit retains its selected original 1970-time
+conversion and rejects the unselected full-unit alternative at its existing
+outer selector (1,285 lines). Both actual x86 contexts have matching
+selected preprocessing; the redirector runtime remains to be tested.
+See s13-bfs-depth1-rtl-time-batch.json.
+
+The three original packstr bodies are excluded only by the existing
+COPY_ONLY build profile; each body matched the fixed original and the two
+actual graph contexts retained identical selected preprocessing. The
+selected copy path stays intact. See s13-bfs-depth1-packstr-batch.json.
+
+Two additional source-local alternatives were excluded: non-NTVDM
+Unix setup in main.c, and the non-V7 build fallback in nt_graph.c. The
+selected V7-enabled build can still run ordinary VGA modes; no video-mode
+branch was removed. Four actual source contexts matched before/after.
+Runtime graphics validation remains pending. See
+s13-bfs-depth1-host-profile-batch.json.
+
+Two non-NTVDM header alternatives matched the fixed original and retained
+identical selected output in 124 graph contexts, eight standalone fixture
+contexts, two painter fixtures, and the direct PIF-caller fixture. GFI
+remains the pre-existing failure. See s13-bfs-depth1-ntvdm-header-batch.json.
+
+The two dialog source alternatives without the native dialog owner are
+excluded only in dlgbegin.c. Both supported compile contexts preserve the
+selected owner behavior and logical lines; dialog runtime tests are still
+required. See s13-bfs-depth1-dialog-profile-batch.json.
+
+The WOW message-table profiling arm was matched to the original and
+rejected in the one selected release translation unit; profiling macros
+are not globally forbidden in unrelated components. See
+s13-bfs-depth1-wowtable-profile-batch.json.
+
+The BaseSrv header alternative without OPENNT_BASE_VDM_SERVER is
+rejected only in this header. All 63 actual x86/x64 include contexts use
+the selected server profile and produced identical preprocessing; older
+broker audit drivers also specify that profile. See
+s13-bfs-depth1-basesrv-header-batch.json. Runtime tests remain pending.
+
+Batch 188 cached x86/x64 builds completed successfully and was staged as
+a coherent ten-image candidate. The first Full attempt failed at the RPC
+fixture because it was mistakenly launched with Windows PowerShell 5.1,
+contrary to the existing modern-pwsh execution rule. A fresh Full run under
+PowerShell 7 is in progress; the first attempt is not a product pass. See
+s13-bfs-depth1-batch188-build-results.json and batch188-test-runner-correction.json.
+
+Batch 188 x87 boundary fixture does not pass the aspirational corrected
+contract: its eight actual results exactly match the previously recorded
+original-source baseline (four failing cases), while the earlier passing
+fix was expressly held unpublished and outside this scope. All 48 current
+paging-fixture results also match the historical source-derived baseline
+after removing its later-added first_supervisor=0 output field. These are
+non-regression comparisons, not x87 correctness passes; guest-level
+incidence remains unproved and the existing recovery worklist retains them.
+See s13-bfs-depth1-batch188-x87-historical-control.json and
+s13-bfs-depth1-batch188-x87-pages-control.json.
+
+Batch 188 checkpoint: x86/x64 cached builds and the 17/17 Full gates passed under modern PowerShell. Win3.1 Standard/386 x DOSONLY 0/1, Winmine and SOL interaction probes, keyboard/PIC 86/86, PIC reset 24/24, x87 layout, the 235-condition guard suite, and 54 WOW parameter-map scenarios passed. The ten candidate images were installed and hash-verified in both release destinations. See s13-bfs-depth1-batch188-runtime-results.json and batch188-publication.json. The first WOW map attempt used an invalid relative compiler path; the absolute-path rerun passed. This is an intermediate release, not S13 closure: 1,189 current first-depth arms and original-baseline boundaries remain to be established. Known x87 baseline failures and independent fixture limitations remain as documented above.

@@ -1,0 +1,13 @@
+{
+  "candidates": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
+      "arm": 41,
+      "cut": 3297,
+      "end": 3301,
+      "source_sha256": "9070fd972a92da845354cfcbb0ee8b58569dc9ea1b5319f22f76edb2a346f3e7",
+      "cut_logical": 3298,
+      "end_logical": 3302
+    }
+  ]
+}

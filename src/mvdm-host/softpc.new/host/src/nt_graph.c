@@ -88,8 +88,9 @@ extern int  ega_int_enable;
 /* DIVERGENCE(VIDEO7-DAC-WIDTH): SoftPC selects 6- or 8-bit DAC components. */
 extern int DAC_data_bits;
 #else
-#define DAC_data_bits 6
+#error Unsupported excluded original configuration
 #endif
+#line 93
 
 extern byte  *video_copy;
 
@@ -737,19 +738,9 @@ void nt_flush_screen(void)
 
 
 #if defined(CCPU) && defined(X86GFX)
-    /* The original X86GFX FULLSCREEN path writes its active graphics DIB
-     * directly to the physical Console, so it deliberately performs no
-     * calc_update here.  This product keeps the same software VGA state but
-     * presents it through NTKVM; preserve the original completion boundary by
-     * asking the copied-DIB publisher to capture the already-painted frame.
-     * No guest pixels, cursor shape, timer cadence, or damage rectangle is
-     * fabricated at this boundary. */
-    if (sc.ScreenState == FULLSCREEN && sc.ModeType == GRAPHICS) {
-        if (ntvdm_console_graphics_flush() < 0)
-            DisplayErrorTerm(EHS_FUNC_FAILED, GetLastError(), __FILE__, __LINE__);
-        return;
-    }
+#error Unsupported excluded original configuration
 #endif
+#line 844
 
 #if defined(CCPU) && !defined(X86GFX)
     /* DIVERGENCE(MVDM-HOST-DIV-326): local painter, copied async delivery. */
@@ -817,13 +808,9 @@ void nt_graphics_tick(void)
     /* DIVERGENCE(MVDM-HOST-DIV-314): retain the original stream-to-video
        transition; a separate frontend cannot render stream-only VGA state. */
 #if !defined(CCPU) || defined(X86GFX)
-    if (sc.ScreenState == STREAM_IO) {
-        BOOL requested;
-        if (!NtvdmConsoleTextRequested(&requested))
-            DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
-        if (requested) disable_stream_io();
-    }
+#error Unsupported excluded original configuration
 #endif
+#line 918
     if (sc.ScreenState == STREAM_IO) {
 	if (++flush_count == TICKS_PER_FLUSH){
 	    stream_io_update();
@@ -2079,10 +2066,9 @@ void graphicsResize(void)
         LPBITMAPINFO     infoStructPtr;
 
 #ifdef X86GFX
-        /* DIVERGENCE(MVDM-HOST-DIV-322): CCPU requires software DIB backing. */
-        if (sc.ScreenState == FULLSCREEN)
-            return;
+#error Unsupported excluded original configuration
 #endif
+#line 2215
 
         /* Destroy previous data. */
 	closeGraphicsBuffer(); /* Tim Oct 92 */

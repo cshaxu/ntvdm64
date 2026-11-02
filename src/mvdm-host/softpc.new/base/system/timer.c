@@ -417,42 +417,9 @@ word TimerInt1COff;
 
 
 #else
-
-static int timelock;		/* locks out time_tick if set */
-static int needtick;		/* causes time_tick() to be called if set */
-
-/*
- * Data for the hack to make sure that windows in standard mode doesn't get two timer
- * ticks too close together.
- */
-
-LOCAL BOOL	hack_active=FALSE;			/* This boolean indicates that we are spacing
-							   timer interrupts out by discarding timer ticks.
-							   It is set when we see a protected mode tick */
-LOCAL BOOL	too_soon_after_previous=FALSE;		/* This boolean is set on when an interrupt is
-							   generated... a quick event is requested to
-							   clear it again after a "fixed" number of
-							   instructions */
-LOCAL BOOL	ticks_lost_this_time=FALSE;		/* This boolean is set if any interrupts were
-							   required to be generated while too_soon_after_previous
-							   was TRUE - if it's TRUE when too_soon_after_previous
-							   is being set to FALSE, we generate an immediate
-							   interrupt to get the best responsiveness */
-LOCAL ULONG	real_mode_ticks_in_a_row = 0;		/* A count of the number of real mode ticks in a row...
-							   this is used to disable the hack again when we have
-							   left protected mode for a good while */
-LOCAL ULONG	instrs_per_tick = 37000;		/* Nominal (as timed on the reference machine - a SPARC 1+) */
-LOCAL ULONG	adj_instrs_per_tick = 0;		/* The estimated number of Intel instructions being emulated
-							   each 20th of a second */
-LOCAL ULONG	n_rm_instrs_before_full_speed = 3000000;/* Nominal number of instructions to be emulated in real mode
-							   before we're convinced that we're staying back in real mode */
-LOCAL ULONG	adj_n_real_mode_ticks_before_full_speed = 0;/* The value which real_mode_ticks_in_a_row must reach
-							   before the hack is disabled */
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-
+#error Unsupported excluded original configuration
 #endif /* NTVDM */
+#line 456
 
 #ifndef PROD	/* Specific Timer change tracing that isn't timer_verbose */
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
@@ -643,8 +610,9 @@ void SWTMR_outb IFN2(io_addr, port, half_word, value)
     host_ica_lock();
 #endif
 #else
-    timelock = LOCKED;
+#error Unsupported excluded original configuration
 #endif
+#line 647
 
     port = port & TIMER_BIT_MASK;
 	if(port == 0x43)
@@ -2234,7 +2202,6 @@ void	timer_post IFN0()
 }
 
 #ifdef DOCUMENTATION
-#ifndef	PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif /* nPROD */
+#error Unsupported excluded original configuration
 #endif /* DOCUMENTATION */
+#line 2554

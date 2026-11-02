@@ -1,0 +1,64 @@
+{
+  "scope": "standalone object-contract fixture contexts, scratch-only markers",
+  "records": [
+    {
+      "contract": "qevnt",
+      "exit": 0,
+      "video_header_seen": false,
+      "positive_alternatives": [],
+      "error": ""
+    },
+    {
+      "contract": "ios",
+      "exit": 0,
+      "video_header_seen": false,
+      "positive_alternatives": [],
+      "error": ""
+    },
+    {
+      "contract": "gfi",
+      "exit": 2,
+      "video_header_seen": false,
+      "positive_alternatives": [],
+      "error": "ared-cfpu\\shadow\\src\\mvdm-host\\softpc.new\\base\\inc\\..\\..\\host\\inc\\error.h(311): fatal error C1189: #error:  DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.\r\n"
+    },
+    {
+      "contract": "keycode",
+      "exit": 0,
+      "video_header_seen": false,
+      "positive_alternatives": [],
+      "error": ""
+    },
+    {
+      "contract": "nls",
+      "exit": 0,
+      "video_header_seen": false,
+      "positive_alternatives": [],
+      "error": ""
+    },
+    {
+      "contract": "umb",
+      "exit": 0,
+      "video_header_seen": false,
+      "positive_alternatives": [],
+      "error": ""
+    },
+    {
+      "contract": "vdd",
+      "exit": 0,
+      "video_header_seen": false,
+      "positive_alternatives": [],
+      "error": ""
+    },
+    {
+      "contract": "niddb",
+      "exit": 0,
+      "video_header_seen": false,
+      "positive_alternatives": [],
+      "error": ""
+    }
+  ],
+  "limitations": [
+    "A fixture failing before reaching video.h provides no evidence for later includes."
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "scope": "scratch-only all current x86 graph contexts for 4 NTVDM alternatives",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/keymouse/keybd_io.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "a680039476af7a2c1bbb4343ad90190fd8486de7f35493fe1bce8795070011fb",
+      "after_sha256": "a00a8f42f4e19c6a4e7712b9826549853b3b3df2d23ad94eed7f9f9467e8ebbd",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/system/ica.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "15bf297b3ef33dc32bd1764dde000cbcab24f8ab8adb6be3d4b2cb7c27c83d74",
+      "after_sha256": "15bf297b3ef33dc32bd1764dde000cbcab24f8ab8adb6be3d4b2cb7c27c83d74",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/system/timer.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "0e53e79d9d8f27ac2241668e521c211daa4f754a26526dae6596aab7952ba78b",
+      "after_sha256": "aac09ae254d30aecd51ac9d01bf5f082210dcb1f49b90bac7879db9c9a615538",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/comms/com.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "79d6e32a1bf831f7b1e6e8b0c0b89a91ed03a7eee3b3fd516b8def34feb19ff0",
+      "after_sha256": "e91851100c7386bca18a2c4d923a9494916b5a30947425c6d190d6856daeff7e",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/keymouse/keybd_io.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "a680039476af7a2c1bbb4343ad90190fd8486de7f35493fe1bce8795070011fb",
+      "after_sha256": "a00a8f42f4e19c6a4e7712b9826549853b3b3df2d23ad94eed7f9f9467e8ebbd",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/system/ica.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "15bf297b3ef33dc32bd1764dde000cbcab24f8ab8adb6be3d4b2cb7c27c83d74",
+      "after_sha256": "15bf297b3ef33dc32bd1764dde000cbcab24f8ab8adb6be3d4b2cb7c27c83d74",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/system/timer.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "0e53e79d9d8f27ac2241668e521c211daa4f754a26526dae6596aab7952ba78b",
+      "after_sha256": "aac09ae254d30aecd51ac9d01bf5f082210dcb1f49b90bac7879db9c9a615538",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/comms/com.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "79d6e32a1bf831f7b1e6e8b0c0b89a91ed03a7eee3b3fd516b8def34feb19ff0",
+      "after_sha256": "e91851100c7386bca18a2c4d923a9494916b5a30947425c6d190d6856daeff7e",
+      "error_before": "",
+      "error_after": ""
+    }
+  ],
+  "failures": []
+}

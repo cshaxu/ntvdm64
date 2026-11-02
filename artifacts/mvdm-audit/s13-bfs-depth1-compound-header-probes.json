@@ -1,0 +1,62 @@
+{
+  "scope": "scratch real consumer for nine first-depth header boundary candidates; no disposition decision",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 324,
+      "cut": 327,
+      "end": 327,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        329
+      ],
+      "source_sha256": "5d5ef2af99879b461f4b90fdce8e26fe4a3a5524f137052ae3d2665d01b6300d",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 388,
+      "cut": 390,
+      "end": 390,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        392
+      ],
+      "source_sha256": "5d5ef2af99879b461f4b90fdce8e26fe4a3a5524f137052ae3d2665d01b6300d",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "arm": 62,
+      "cut": 64,
+      "end": 64,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        65
+      ],
+      "source_sha256": "e256ecb716edf0b1b966d78de6cafadf956ca8da62b825fe558a058df9994de9",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "arm": 70,
+      "cut": 72,
+      "end": 72,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        73
+      ],
+      "source_sha256": "e256ecb716edf0b1b966d78de6cafadf956ca8da62b825fe558a058df9994de9",
+      "error": ""
+    }
+  ],
+  "failures": []
+}

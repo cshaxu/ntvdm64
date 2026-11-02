@@ -1,0 +1,30 @@
+{
+  "scope": "scratch-only all current x86 graph contexts for 4 NTVDM alternatives",
+  "records": [
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/opennt-rtl/time.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "5bce008ca219e434a44ff23d3bab0324f95e26a39f8cb33f2e023de0fad00255",
+      "after_sha256": "88e76c451a089ada9fc20a0e77318d67c708aa51074655f497fd21be78fe21f6",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/opennt-rtl/time.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "5bce008ca219e434a44ff23d3bab0324f95e26a39f8cb33f2e023de0fad00255",
+      "after_sha256": "88e76c451a089ada9fc20a0e77318d67c708aa51074655f497fd21be78fe21f6",
+      "error_before": "",
+      "error_after": ""
+    }
+  ],
+  "failures": []
+}

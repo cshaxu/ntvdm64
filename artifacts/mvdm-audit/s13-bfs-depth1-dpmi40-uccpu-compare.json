@@ -1,0 +1,8 @@
+{
+  "before_exit": 2,
+  "after_exit": 2,
+  "equal_output": true,
+  "both_reach_preexisting_div515": true,
+  "before_error": "39): warning C4005: 'EFLAGS_TF_MASK': macro redefinition\r\nO:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\\vdm.h(178): note: see previous definition of 'EFLAGS_TF_MASK'\r\nO:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dpmi32\\dpmiint.h(40): warning C4005: 'VDM_INT_32': macro redefinition\r\nO:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\\vdm.h(326): note: see previous definition of 'VDM_INT_32'\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmiint.c(1493): fatal error C1189: #error:  DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.\r\n",
+  "after_error": "39): warning C4005: 'EFLAGS_TF_MASK': macro redefinition\r\nO:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\\vdm.h(178): note: see previous definition of 'EFLAGS_TF_MASK'\r\nO:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\dpmi32\\dpmiint.h(40): warning C4005: 'VDM_INT_32': macro redefinition\r\nO:/repos.hobby/ntvdm64/src/non-mvdm/public/internal/base/inc\\vdm.h(326): note: see previous definition of 'VDM_INT_32'\r\nO:/repos.hobby/ntvdm64/src/mvdm-host/dpmi32/dpmiint.c(1493): fatal error C1189: #error:  DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.\r\n"
+}

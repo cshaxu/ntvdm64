@@ -380,48 +380,6 @@ VOID TerminateVDM(void)
 
 
 #ifdef NOTUSEDNOTUSED
-void
-manager_files_init()
-{
-
-	assert0(NO,"manager_files_init stubbed\n");
-}
-
-
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif				/* nPROD */
-
-
-void
-host_supply_dfa_filename IFN1(char *, filename)
-
-{
-}
-
-static BOOL bool_dummy_func() {}
-static SHORT short_dummy_func() {}
-static VOID void_dummy_func() {}
-
-
-ERRORFUNCS dummy_error_funcs =
-{
-
-        short_dummy_func,
-        short_dummy_func,
-        short_dummy_func
-
-};
-
-KEYBDFUNCS dummy_keybd_funcs =
-{
-
-        void_dummy_func,
-        void_dummy_func,
-        void_dummy_func,
-        void_dummy_func,
-        void_dummy_func,
-        void_dummy_func
-
-};
+#error Unsupported excluded original configuration
 #endif
+#line 408

@@ -624,8 +624,9 @@ DeleteFontAndMenuAndFail:
         goto DeleteFontAndMenuAndFail;
     }
 #else
-    PDLG(pwnd)->lpfnDlg = lpfnDialog;
+#error Unsupported excluded original configuration
 #endif
+#line 630
     PDLG(pwnd)->fEnd = FALSE;
     PDLG(pwnd)->result = IDOK;
 
@@ -633,9 +634,9 @@ DeleteFontAndMenuAndFail:
      * Need to remember Unicode status.
      */
 #ifndef WOW_NATIVE_DIALOG_PROCEDURE_OWNER
-    if (fSCDLGFlags & SCDLG_ANSI)
-        PDLG(pwnd)->flags |= DLGF_ANSI;
+#error Unsupported excluded original configuration
 #endif
+#line 640
 
     /*
      * Time to lock pwnd so it doesn't go away while we're calling back.

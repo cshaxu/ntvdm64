@@ -1,0 +1,30 @@
+{
+  "scope": "scratch-only all current x86 graph contexts for 4 NTVDM alternatives",
+  "records": [
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/opennt-netlib/memalloc.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "7e8a512e904f23d8541877adc95ee84bdac40a6c9bed739887acb600adc1997a",
+      "after_sha256": "0f4a787407bfca4e01d828a7ac8b09099eb83e34a7fbd73441d8767c5f600e44",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/opennt-netlib/memalloc.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "7e8a512e904f23d8541877adc95ee84bdac40a6c9bed739887acb600adc1997a",
+      "after_sha256": "0f4a787407bfca4e01d828a7ac8b09099eb83e34a7fbd73441d8767c5f600e44",
+      "error_before": "",
+      "error_after": ""
+    }
+  ],
+  "failures": []
+}

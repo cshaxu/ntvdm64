@@ -1,0 +1,38 @@
+{
+  "scope": "scratch first-depth selected logical-line boundaries, standalone NTVDM flag review separate",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "arm": 619,
+      "cut": 622,
+      "end": 622,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 618,
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "arm": 629,
+      "cut": 631,
+      "end": 631,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 627,
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "arm": 652,
+      "cut": 660,
+      "end": 660,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 656,
+      "source_sha256": "e1853190af5a43bbb37411dd00d8f270160a5cb01afdc23d3ee3c4cc5e847b02",
+      "error": ""
+    }
+  ]
+}

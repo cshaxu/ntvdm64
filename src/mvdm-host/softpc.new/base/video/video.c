@@ -311,8 +311,9 @@ simple_bios_byte_wrt IFN2(ULONG, ch, ULONG, ch_addr)
 {
 	*(IU8 *)(getVideoscreen_ptr() + ch_addr) = (UTINY)ch;
 #if !defined(EGG) && !defined(C_VID) && !defined(A_VID)
-	setVideodirty_total(getVideodirty_total() + 1);
+#error Unsupported excluded original configuration
 #endif	/* not EGG or C_VID or A_VID */
+#line 316
 }
 
 GLOBAL VOID
@@ -321,8 +322,9 @@ simple_bios_word_wrt IFN2(ULONG, ch_attr, ULONG, ch_addr)
 	*(IU8 *)(getVideoscreen_ptr() + ch_addr) = (UTINY)ch_attr;
 	*(IU8 *)(getVideoscreen_ptr() + ch_addr + 1) = (UTINY)(ch_attr >> 8);
 #if !defined(EGG) && !defined(C_VID) && !defined(A_VID)
-	setVideodirty_total(getVideodirty_total() + 1);
+#error Unsupported excluded original configuration
 #endif	/* not EGG or C_VID or A_VID */
+#line 326
 }
 
 /*

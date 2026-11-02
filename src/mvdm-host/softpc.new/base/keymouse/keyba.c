@@ -2177,8 +2177,9 @@ if (waiting_for_next_8042_code)
 #ifdef PM
 				op_port_remembered_bits=cmd_code & 0x2e;
 #else
-				op_port_remembered_bits=cmd_code & 0x2c;
+#error Unsupported excluded original configuration
 #endif /* PM */
+#line 2250
 				}
 			else
 				{

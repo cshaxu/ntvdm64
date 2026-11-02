@@ -1130,5 +1130,6 @@
       "error": ""
     }
   ],
-  "failures": []
+  "failures": [],
+  "line_marker_correction": "The original marker had two physical lines; logical_next_line/end_logical is one greater than the source logical next line. Applied source directives were corrected and checked by s13-bfs-depth1-single-line-controls.json."
 }

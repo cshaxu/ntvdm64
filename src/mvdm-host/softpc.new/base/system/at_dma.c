@@ -796,18 +796,9 @@ LOCAL void do_transfer	IFN6(int, type, int, decrement,
 		if (!decrement)
 		{
 #ifndef PM
-#ifdef LIM
-			if( !get_lim_setup() ){
-				if( dma_addr >= ROM_START ){
-					if( dma_addr >= ROM_START )
-						break;
-					length = ROM_START - dma_addr - 1;
-				}
-			}
-#else
-#error DIVERGENCE MVDM-HOST-DIV-540: non-LIM branch is not selected; see mirror register.
-#endif /* LIM */
+#error Unsupported excluded original configuration
 #endif /* nPM */
+#line 811
 			sas_PWS(dma_addr, (host_addr) hw_buffer, length);
 
 		}
@@ -815,19 +806,9 @@ LOCAL void do_transfer	IFN6(int, type, int, decrement,
 		{
 			/*  decrement case - check for writing to ROM */
 #ifndef PM
-#ifdef LIM
-			if( !get_lim_setup() ){
-				if (dma_addr >= ROM_START) {
-					if (dma_addr-length >= ROM_START)
-						break;
-					length = dma_addr-ROM_START+length-1;
-					dma_addr = ROM_START - 1;
-				}
-			}
-#else
-#error DIVERGENCE MVDM-HOST-DIV-540: non-LIM branch is not selected; see mirror register.
-#endif /* LIM */
+#error Unsupported excluded original configuration
 #endif /* nPM */
+#line 831
 			bwd_dest_copy_to_M((half_word *)hw_buffer, dma_addr, length);
 
 		}

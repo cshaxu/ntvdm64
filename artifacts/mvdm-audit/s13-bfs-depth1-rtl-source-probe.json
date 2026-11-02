@@ -1,0 +1,12 @@
+{
+  "records": [
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "arm": 176,
+      "cut": 185,
+      "end": 185,
+      "end_logical": 185,
+      "source_sha256": "b9fe990f5a51afb64b796b914874375ca9a0f034c625d3488038e554deb0ed69"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 324,
+      "original_occurrences": 1,
+      "snippet_sha256_lf": "b2f5f2e6ea0913bcfd88906d5a48590606da19b53de15f2b418cec7c6954080a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 388,
+      "original_occurrences": 1,
+      "snippet_sha256_lf": "645df29b33c10b1d8ff573c59f550a5c173951c4e6909836d59dccc8570250c1"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "arm": 62,
+      "original_occurrences": 1,
+      "snippet_sha256_lf": "bb0256131081c28395e8b0fb60bb27ac7f9acc046891e8bbe3595b37f939701a"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
+      "arm": 70,
+      "original_occurrences": 1,
+      "snippet_sha256_lf": "a09705584eff46b569b9d73fef2d4da9b668677d0cedb6a3de6956494a11b89d"
+    }
+  ]
+}

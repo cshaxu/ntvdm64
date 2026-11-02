@@ -1,0 +1,30 @@
+{
+  "scope": "scratch-only all current x86 graph contexts for 46 finalists",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/wcall16.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "b3842f70c5084872850e61c407c3ac004c1069529b478e26f1eadaef1d6e7880",
+      "after_sha256": "ca523e7a11f97d7c699e6de4e6a47b3affd6f37d85aac9ee2aea7356d66612b6",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/wparam.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "e39c0ebbbc986d6c079464e5da1a69e4569df321680dc12594307e64a952f646",
+      "after_sha256": "a9f30c3ba93dcb05e74a15805f0de0ec948a779ea9bac603869adc086422a984",
+      "error_before": "",
+      "error_after": ""
+    }
+  ],
+  "failures": []
+}

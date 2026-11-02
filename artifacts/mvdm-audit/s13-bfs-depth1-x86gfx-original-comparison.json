@@ -1,0 +1,82 @@
+{
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "arm": 1479,
+      "original_exact_complete_arm_occurrences": 0,
+      "disposition": "locally adapted existing selector; selected CCPU path retained; do not claim exact original body"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "arm": 1508,
+      "original_exact_complete_arm_occurrences": 0,
+      "disposition": "locally adapted existing selector; selected CCPU path retained; do not claim exact original body"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 201,
+      "original_exact_complete_arm_occurrences": 0,
+      "disposition": "locally adapted existing selector; selected CCPU path retained; do not claim exact original body"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 250,
+      "original_exact_complete_arm_occurrences": 0,
+      "disposition": "locally adapted existing selector; selected CCPU path retained; do not claim exact original body"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 305,
+      "original_exact_complete_arm_occurrences": 0,
+      "disposition": "locally adapted existing selector; selected CCPU path retained; do not claim exact original body"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 529,
+      "original_exact_complete_arm_occurrences": 0,
+      "disposition": "locally adapted existing selector; selected CCPU path retained; do not claim exact original body"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 1083,
+      "original_exact_complete_arm_occurrences": 0,
+      "disposition": "locally adapted existing selector; selected CCPU path retained; do not claim exact original body"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 1110,
+      "original_exact_complete_arm_occurrences": 0,
+      "disposition": "locally adapted existing selector; selected CCPU path retained; do not claim exact original body"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 1127,
+      "original_exact_complete_arm_occurrences": 0,
+      "disposition": "locally adapted existing selector; selected CCPU path retained; do not claim exact original body"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "arm": 1241,
+      "original_exact_complete_arm_occurrences": 0,
+      "disposition": "locally adapted existing selector; selected CCPU path retained; do not claim exact original body"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "arm": 739,
+      "original_exact_complete_arm_occurrences": 0,
+      "disposition": "locally adapted existing selector; selected CCPU path retained; do not claim exact original body"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "arm": 819,
+      "original_exact_complete_arm_occurrences": 0,
+      "disposition": "locally adapted existing selector; selected CCPU path retained; do not claim exact original body"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "arm": 2081,
+      "original_exact_complete_arm_occurrences": 0,
+      "disposition": "locally adapted existing selector; selected CCPU path retained; do not claim exact original body"
+    }
+  ]
+}

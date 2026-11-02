@@ -1,0 +1,30 @@
+{
+  "scope": "scratch-only all current x86 graph contexts for 4 NTVDM alternatives",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/wuclass.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "f22d2d9b2e744916763d709db8f480fec3befbefb3b565edcaf574c72f9aaa9a",
+      "after_sha256": "45f4064d643dcea032377bdc47a03149aaa25e09a58052fd76f03261e828ec1d",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "output": "obj/wuwind.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "ff0f06969efb7ca2120b6db5a77381309664b945d9e136da1044ce7de24a6111",
+      "after_sha256": "60b07f4a54e9c2fc57858cfeb65a013618be9bc51740bce692765856bbe7136f",
+      "error_before": "",
+      "error_after": ""
+    }
+  ],
+  "failures": []
+}

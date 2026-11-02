@@ -1,0 +1,48 @@
+{
+  "scope": "scratch real consumer for nine first-depth header boundary candidates; no disposition decision",
+  "records": [
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "arm": 1240,
+      "cut": 1242,
+      "end": 1249,
+      "consumer": "src/mvdm-host/wow32/wow32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "logical_next_lines": [
+        1252
+      ],
+      "source_sha256": "8e863faec45e6df3f09b6a78e9e0a1b7e841d6818e6197dd36e1f70ec2e828bf",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "arm": 1276,
+      "cut": 1278,
+      "end": 1288,
+      "consumer": "src/mvdm-host/wow32/wow32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "logical_next_lines": [
+        1291
+      ],
+      "source_sha256": "8e863faec45e6df3f09b6a78e9e0a1b7e841d6818e6197dd36e1f70ec2e828bf",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/inc/wow.h",
+      "arm": 1319,
+      "cut": 1321,
+      "end": 1330,
+      "consumer": "src/mvdm-host/wow32/wow32.c",
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "logical_next_lines": [
+        1333
+      ],
+      "source_sha256": "8e863faec45e6df3f09b6a78e9e0a1b7e841d6818e6197dd36e1f70ec2e828bf",
+      "error": ""
+    }
+  ],
+  "failures": []
+}

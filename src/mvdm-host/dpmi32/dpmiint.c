@@ -617,9 +617,9 @@ Return Value:
         BOOL WideFrame = (Handlers[IntNumber].Flags & VDM_INT_32) != 0;
         if (!BuildStackFrameWithWidth(3, WideFrame, TRUE, &VdmStackPointer, &NewSP)) {
 #else
-        BOOL WideFrame;
-        if (!BuildStackFrame(3, &VdmStackPointer, &NewSP)) {
+#error Unsupported excluded original configuration
 #endif
+#line 618
             return FALSE;
         }
 
@@ -627,8 +627,9 @@ Return Value:
         /* A rejected frame does not commit the monitor's flag updates. */
         setEFLAGS(SaveEFLAGS & ~EFLAGS_TF_MASK);
 #else
-        WideFrame = Frame32;
+#error Unsupported excluded original configuration
 #endif
+#line 627
         if (WideFrame) {
 
             *(PDWORD16)(VdmStackPointer-4) =  SaveEFLAGS;
@@ -650,14 +651,9 @@ Return Value:
         setEIP(Handlers[IntNumber].Eip);
         setESP(NewSP);
 #else
-        if (WideFrame) {
-            setEIP(Handlers[IntNumber].Eip);
-            setESP(NewSP);
-        } else {
-            setEIP((DWORD)LOWORD(Handlers[IntNumber].Eip));
-            setSP((WORD)NewSP);
-        }
+#error Unsupported excluded original configuration
 #endif
+#line 656
         setCS(Handlers[IntNumber].CsSelector);
 
 #if DBG

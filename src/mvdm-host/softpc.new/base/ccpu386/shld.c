@@ -112,8 +112,9 @@ IFN4(
       new_of = ((result ^ *pop1) & SZ2MSB(op_sz)) != 0;
       SET_OF(new_of);
 #else /* SET_UNDEFINED_SHxD_FLAG */
-      do_multiple_shiftrot_of(new_of);
+#error Unsupported excluded original configuration
 #endif /* SET_UNDEFINED_SHxD_FLAG */
+#line 117
       }
 
    /* Set undefined flag(s) */

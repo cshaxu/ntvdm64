@@ -1,0 +1,25 @@
+{
+  "scope": "first-depth original-boundary finalists; unsupported profiles held; selected lines retained",
+  "records": [
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "arm": 176,
+      "cut": 185,
+      "end": 185,
+      "end_logical": 185,
+      "source_sha256": "b9fe990f5a51afb64b796b914874375ca9a0f034c625d3488038e554deb0ed69",
+      "before_sha256": "b9fe990f5a51afb64b796b914874375ca9a0f034c625d3488038e554deb0ed69",
+      "after_sha256": "356ebf6b2235e08b1493569ec6a7c37be0cb095802e723736878cf2b25b94b5f",
+      "original_sha256": "88bf09ab98778e0ca58d9d232d3b7aba6115223f43eddf981f6e06b786e77e48",
+      "body_sha256": "a3026e3bb75f92e1d5cd8b565337aadb8f2559bc00a8e0ace7c5465780de833d",
+      "body_lines": 8,
+      "scratch_key": "f0b0177f297bba70",
+      "current_start_line": 176,
+      "current_cut_line": 178,
+      "current_end_line": 178,
+      "registration": "OPENNT-HOST-148"
+    }
+  ],
+  "subsumed_nested_groups": 1,
+  "subsumed_ledger_entries": 0
+}

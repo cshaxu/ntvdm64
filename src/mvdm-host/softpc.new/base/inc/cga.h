@@ -82,15 +82,6 @@ extern	CGA_GLOBS	CGA_GLOBALS;
 #define	get_cga_colormask()		(CGA_GLOBALS.colormask)
 
 #if !defined(EGG) && !defined(A_VID) && !defined(C_VID)
-/* This structure is defined solely so that we don't have to ifdef every
-** reference to VGLOBS->dirty_flag and VGLOBS->screen_ptr in the base/host
-** for a CGA-only build.
-*/
-typedef	struct
-{
-	ULONG dirty_flag;
-	UTINY *screen_ptr;
-} CGA_ONLY_GLOBS;
-
-IMPORT CGA_ONLY_GLOBS *VGLOBS;
+#error Unsupported excluded original configuration
 #endif	/* !EGG */
+#line 97

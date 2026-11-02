@@ -1,0 +1,7 @@
+{
+  "exit_code": 0,
+  "stdout": "PASS source: monochrome bitmap is one-bit\nPASS source: CGA host bitmap is eight-bit indexed\nPASS source: EGA host bitmap is eight-bit indexed\nPASS source: VGA host bitmap is eight-bit indexed\nPASS source: original DIB has top-down height\nPASS source: uncompressed original host DIB\nPASS source: palette table entries are WORD indices, not RGB bytes\nPASS source: original graphics buffer ABI remains selected\nPASS source: palette publication uses original buffer and palette\nPASS source: Video7 packed painter retains byte-per-pixel width contract\nPASS source: Video7 packed painter bounds dirty region to the actual DIB\nPASS source: final handoff settles original pending mode before original paint with its original finite bound\nPASS source: bitmap write completes before dirty-region publication\nPASS source: dirty rectangle has inclusive right edge\nPASS source: dirty rectangle has inclusive bottom edge\nPASS source: existing guest witness returns from mode 13h to text\nSOURCE ONLY: no graphics-buffer allocation, pixel transport, palette rendering or Window acceptance inferred.\n",
+  "stderr": "",
+  "script_sha256": "76a6056d78f090bcfe0078a765c548b20ab7079f112da63e85b4db50c76b8d19",
+  "scope": "source contract only, not graphics runtime"
+}

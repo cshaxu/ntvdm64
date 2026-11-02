@@ -331,10 +331,9 @@ ULONG FASTCALL WK32GetProfileString(PVDMFRAME pFrame)
                 }
 
 #ifdef DBCS
-                if (IsDBCSLeadByte(pszDefault[n]) {
-                    n++;
-                }
+#error Unsupported excluded original configuration
 #endif
+#line 338
             }
 
             if (n >= nLenDef) {
@@ -504,10 +503,9 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
                     }
 
 #ifdef DBCS
-                    if (IsDBCSLeadByte(pszDefault[n]) {
-                        n++;
-                    }
+#error Unsupported excluded original configuration
 #endif
+#line 534
                 }
 
                 if (n >= nLenDef) {

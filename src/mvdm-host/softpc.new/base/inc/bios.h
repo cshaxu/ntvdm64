@@ -183,12 +183,14 @@ extern void (*BIOS[])();
 #endif /* bop */
 
 #ifdef PTY
-extern void com_bop_pty();
+#error Unsupported excluded original configuration
 #endif
+#line 188
 
 #ifdef GEN_DRVR
-extern void gen_driver_io();
+#error Unsupported excluded original configuration
 #endif
+#line 192
 
 #ifdef LIM
 extern void emm_init();
@@ -197,14 +199,14 @@ extern void return_from_call();
 #endif
 
 #ifdef SUSPEND
-extern void send_script();
+#error Unsupported excluded original configuration
 #endif
+#line 202
 
 #ifdef CDROM 
-extern void cdrom_ord_fns();
-extern void cdrom_ext_fns();
-extern void bcdrom_io();
+#error Unsupported excluded original configuration
 #endif /* CDROM */
+#line 208
 
 extern void worm_init();
 extern void worm_io();
@@ -213,14 +215,9 @@ extern void cmd_install();
 extern void cmd_load();
 
 #ifdef DPMI
-extern void DPMI_2F();
-extern void DPMI_31();
-extern void DPMI_general();
-extern void DPMI_int();
-extern void DPMI_r0_int();
-extern void DPMI_exc();
-extern void DPMI_4B();
+#error Unsupported excluded original configuration
 #endif
+#line 224
 
 extern void reset();
 extern void illegal_bop();
@@ -249,8 +246,9 @@ extern void unexpected_int();
 extern void Get_build_id();
 
 #ifdef WIN_VTD 
-extern void VtdTickSync IPT0();
+#error Unsupported excluded original configuration
 #endif /* WIN_VTD */
+#line 254
 
 #ifdef EGG
 extern void ega_video_io();
@@ -297,36 +295,33 @@ extern void bootstrap3();
 #line 297
 
 #ifdef	MSWDVR
-extern void ms_windows();
-extern void msw_mouse();
-extern void msw_copy();
-extern void msw_copyInit();
-extern void msw_keybd();
+#error Unsupported excluded original configuration
 #endif
+#line 305
 
 #ifdef	NOVELL_IPX
-extern void IPXResInit ();
-extern void IPXResEntry ();
-extern void IPXResInterrupt ();
+#error Unsupported excluded original configuration
 #endif
+#line 311
 
 #ifdef	NOVELL_TCPIP
-extern void TCPResInit ();
-extern void TCPResEntry ();
+#error Unsupported excluded original configuration
 #endif
+#line 316
 
 #ifdef WINSOCK
-extern void ISWSEntry();
+#error Unsupported excluded original configuration
 #endif /* WINSOCK */
+#line 320
 
 #ifdef SWINAPI
 #error DIVERGENCE MVDM-HOST-DIV-529: SWINAPI platform branch is not selected; see mirror register.
 #endif /* SWINAPI */
 
 #if	defined(SOFTWIN_API) || defined(SWIN_HFX)
-extern void SoftWindowsInit IPT0();
-extern void SoftWindowsTerm IPT0();
+#error Unsupported excluded original configuration
 #endif	/* SOFTWIN_API or SWIN_HFX */
+#line 329
 
 #if	defined(SOFTWIN_API)
 #error DIVERGENCE MVDM-HOST-DIV-528: SOFTWIN_API platform branch is not selected; see mirror register.
@@ -344,21 +339,17 @@ extern void host_reset(void);
 extern void display_string(char *);
 extern void clear_string(void);
 #else
-extern void host_reset();
-#ifndef NTVDM
-#error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
-#endif /* ! NTVDM */
-extern void display_string();
-extern void clear_string();
+#error Unsupported excluded original configuration
 #endif /* ANSI */
+#line 353
 
 #ifdef ANSI
 extern void smeg_collect_data(void);
 extern void smeg_freeze_data(void);
 #else
-extern void smeg_collect_data();
-extern void smeg_freeze_data();
+#error Unsupported excluded original configuration
 #endif /* ANSI */
+#line 361
 
 extern void softpc_version IPT0();
 
@@ -378,8 +369,9 @@ extern void switch_to_real_mode(void);
 #endif	/* GISP_CPU */
 
 #ifdef HFX
-extern void test_for_us IPT0();
+#error Unsupported excluded original configuration
 #endif /* HFX */
+#line 382
 
 #ifdef DOS_APP_LIC
 #error DIVERGENCE MVDM-HOST-DIV-531: DOS_APP_LIC branch is not selected; see mirror register.
@@ -388,5 +380,6 @@ extern void test_for_us IPT0();
 IMPORT int soft_reset;
 
 #if	defined(SPC386) && defined(WDCTRL_BOP)
-extern void wdctrl_bop IPT0();
+#error Unsupported excluded original configuration
 #endif	/* SPC386 && WDCTRL_BOP */
+#line 392

@@ -700,8 +700,9 @@ ULONG FASTCALL WU32GetKeyboardState(PVDMFRAME pFrame)
         GetKeyboardState( pb1 );
     }
 #else
-        GetKeyboardState( pb1 );
+#error Unsupported excluded original configuration
 #endif
+#line 705
 
     FLUSHVDMPTR(parg16->f1, 256, pb1);
     FREEVDMPTR(pb1);

@@ -44,8 +44,9 @@ extern boolean         host_validate_pathname();
 extern boolean         host_check_rd_wt_access();
 extern boolean         host_check_read_access();
 #ifdef SUSPEND
-extern void	       suspend_softpc();
+#error Unsupported excluded original configuration
 #endif
+#line 49
 #ifndef REAL_VGA
 /* DIVERGENCE MVDM-HOST-DIV-090: bind the exact original host_def.h provider
  * carrier; `ULONG *` only happened to match `unsigned int *` on NT4. */

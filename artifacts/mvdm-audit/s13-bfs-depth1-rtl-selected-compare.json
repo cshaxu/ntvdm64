@@ -1,0 +1,47 @@
+{
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "arch": "x86",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/hook",
+      "arch": "x64",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/launcher",
+      "arch": "x64",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/service",
+      "arch": "x64",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker",
+      "arch": "x64",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "arch": "x86",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true
+    }
+  ],
+  "failures": []
+}

@@ -53,11 +53,9 @@ XsNetMessageBufferSend (
     }
 
 #else
-
-    nativeBuffer = (LPBYTE)SmbGetUlong( &parameters->Buffer );
-    nativeBufLen = (DWORD)SmbGetUshort( &parameters->BufLen );
-
+#error Unsupported excluded original configuration
 #endif // def UNICODE
+#line 61
 
     status = NetMessageBufferSend(
                  NULL,

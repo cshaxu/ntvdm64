@@ -133,10 +133,12 @@ APIXLATFUNCTION ApiXlatTable[MAX_SUPPORTED_DOS_CALL] = {
     NoTranslation                  , // 61h - UNUSED
     GetPSP                         , // 62h - Get PSP Address
 #ifdef DBCS
-    ReturnDSSI                     , // 63h - Get DBCS Vector
+#error Unsupported excluded original configuration
 #else
+#line 138
     NotSupportedBetter             , // 63h - Hangool call
 #endif
+#line 140
     NotSupportedBad                , // 64h - Set Prn Flag
     GetExtendedCountryInfo         , // 65h - Get Extended Country Info
     NoTranslation                  , // 66h - Get/Set Global Code Page
@@ -203,14 +205,9 @@ Return Value:
     DpmiFreeAllBuffers();
 
 #ifdef Verbose
-    {
-        char szFormat[] = "NTVDM Int21 %.4X Ret: ax=%.4X, at %.4x:%.8x, ss:esp=%.4x:%.8x\n";
-        char szMsg[sizeof(szFormat)+30];
-
-        wsprintf(szMsg, szFormat, DosMajorCode, getAX(), getCS(), getEIP(), getSS(), getESP());
-        OutputDebugString(szMsg);
-    }
+#error Unsupported excluded original configuration
 #endif
+#line 214
 
 }
 

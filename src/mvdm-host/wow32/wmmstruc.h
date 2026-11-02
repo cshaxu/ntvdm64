@@ -110,18 +110,9 @@
 #define FREEJOYCAPS(p)
 #define FREEJOYINFO(p)
 #else
-#define FREEMMTIME(p)       p=NULL
-#define FREEWAVEHDR(p)      p=NULL
-#define FREEWAVEOUTCAPS(p)  p=NULL
-#define FREEWAVEINCAPS(p)   p=NULL
-#define FREEMIDIHDR(p)      p=NULL
-#define FREEAUXCAPS(p)      p=NULL
-#define FREETIMECAPS(p)     p=NULL
-#define FREEMIDIINCAPS(p)   p=NULL
-#define FREEMIDIOUTCAPS(p)  p=NULL
-#define FREEJOYCAPS(p)      p=NULL
-#define FREEJOYINFO(p)      p=NULL
+#error Unsupported excluded original configuration
 #endif
+#line 125
 
 /*++
 

@@ -199,9 +199,9 @@ GLOBAL VOID nt_init_event_thread(VOID)
 					&ConsBufferInfo.dwCursorPosition);
                       
 #ifdef X86GFX
-        /* DIVERGENCE(MVDM-HOST-DIV-322): CCPU updates in both routes. */
-        if (sc.ScreenState == WINDOWED)
+#error Unsupported excluded original configuration
 #endif
+#line 206
             enableUpdates();
     }
     else
@@ -248,9 +248,9 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
 
     /* Now sync the SoftPC screen to the console. */
 #ifdef X86GFX
-    /* DIVERGENCE(MVDM-HOST-DIV-322): software fullscreen uses this VGA body. */
-    if (sc.ScreenState == WINDOWED)
+#error Unsupported excluded original configuration
 #endif
+#line 542
     {
 	consoleWidth = ConsBufferInfo.srWindow.Right -
 		       ConsBufferInfo.srWindow.Left + 1;
@@ -303,9 +303,9 @@ GLOBAL VOID calcScreenParams IFN2( USHORT *, pCharHeight, USHORT *, pVgaHeight )
     }
 
 #ifdef X86GFX
-    /* DIVERGENCE(MVDM-HOST-DIV-322): retain CCPU scan/font/BIOS configuration. */
-    if (sc.ScreenState == WINDOWED)
+#error Unsupported excluded original configuration
 #endif
+#line 604
     {
         /* The app may have shutdown in a gfx mode - force text mode back */
         if (blocked_in_gfx_mode)
@@ -527,196 +527,9 @@ GLOBAL VOID ResetConsoleState(VOID)
 
 
 #ifdef X86GFX
-
-/***************************************************************************
- * Function:								   *
- *	TextToGraphics							   *
- *									   *
- * Description: 							   *
- *	Handles transitions from text to graphics modes when running	   *
- *	windowed. Waits until the window has input focus and then requests *
- *	a transition to full-screen operation as graphics modes cannot be  *
- *	run in a window.						   *
- *									   *
- * Parameters:								   *
- *	None.								   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
- ***************************************************************************/
-GLOBAL VOID TextToGraphics(VOID)
-{
-    DWORD    flags;
-    SAVED COORD    scrSize;
-
-    /* Freeze until the window receives input focus. */
-    //if (! sc.Focus )  //awaiting console fix.
-    if (GetForegroundWindow() != hWndConsole)
-    {
-
-	FreezeWinTitle(); 	/* Add `-FROZEN' to the console title. */
-
-	/* Now wait until input focus is received. */
-	waitForInputFocus();
-
-	UnFreezeWinTitle(); /* Remove frozen message */
-    }
-
-    /*
-     * We are about to go full-screen but there will be a delay while the
-     * detection thread does its hand-shaking. So disable screen writes before
-     * we switch to prevent inadvertent updates while running full-screen.
-     */
-    disableUpdates();
-
-    /*
-     * Sanity Check for stress problem where forced fullscreen after INT 10
-     * mode change has already started so can apparently go fullscreen twice.
-     */
-    if (!GetConsoleDisplayMode(&flags))
-	ErrorExit();
-
-    /* make sure we haven't been taken back fullscreen */
-    if ((flags & CONSOLE_FULLSCREEN_HARDWARE) == CONSOLE_FULLSCREEN_HARDWARE)
-    {
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
-#endif
-	return;
-    }
-
-    /* check for iconified FS console. Only under extreme conditions (stress) */
-    if ((flags & CONSOLE_FULLSCREEN) == CONSOLE_FULLSCREEN)
-    {
-        SetForegroundWindow(hWndConsole);    /* focus will send us back FS */
-    }
-    else    /* desktop window */
-    {
-        /* The window now has input focus so request to go full-screen. */
-	BiosModeChange = TRUE;
-        if (!SetConsoleDisplayMode(sc.OutputHandle,
-			       CONSOLE_FULLSCREEN_MODE,
-                               &scrSize))
-	{
-            if (GetLastError() == ERROR_INVALID_PARAMETER)
-	    {
-                RcErrorDialogBox(ED_INITFSCREEN, NULL, NULL);
-            }
-            else
-            {
-                ErrorExit();
-            }
-	}
-	BiosModeChange = FALSE;
-    }
-}
-
-/***************************************************************************
- * Function:								   *
- *	CheckForFullscreenSwitch					   *
- *									   *
- * Description: 							   *
- *	Checks to see if there has been a transition between windowed and  *
- *	fullscreen and does any console calls necessary. This is called    *
- *	on a timer tick before the graphics tick code.			   *
- *									   *
- * Parameters:								   *
- *	None.								   *
- *									   *
- * Return value:							   *
- *	VOID								   *
- *									   *
- ***************************************************************************/
-GLOBAL VOID CheckForFullscreenSwitch(VOID)
-{
-    half_word mode,
-	      lines;
-
-    if (sc.ScreenState == STREAM_IO)
-	return;
-
-    /*
-     * Do any console calls relating to screen state changes. They have to be
-     * done now as they cannot be done on the same thread as the screen switch
-     * hand-shaking.
-     */
-    if (sc.ScreenState != savedScreenState)
-    {
-	if (sc.ScreenState == WINDOWED)
-	{
-	    if (sc.ModeType == TEXT)
-	    {
-
-		/* Remove frozen window indicator if necessary. */
-		UnFreezeWinTitle();
-
-#if 0  //STF removed with new mouse stuff??
-#error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
-#endif //STF
-#line 1352
-
-		/* Get Window to correct shape */
-		textResize();
-
-		/* Enable screen updates. */
-		enableUpdates();
-
-		/*
-		 * Now get the image on the screen (timer updates currently
-		 * disabled).
-		 */
-		(void)(*update_alg.calc_update)();
-		
-	    }
-	}
-	else /* FULLSCREEN */
-	{
-	    int cnt = 0; /* Counter to break out of the cursor off loop. */
-
-	    /* Disable screen updates*/
-	    disableUpdates();
-
-            /* Disable mouse 'attached'ness if enabled */
-             if (bPointerOff)
-             {
-                 PointerAttachedWindowed = TRUE;
-                 MouseDisplay();
-             }
-
-#if 0 //STF removed with new mouse stuff
-#error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
-#endif
-#line 1385
-
-	    /* Do mouse scaling */
-	     mode = sas_hw_at_no_check(vd_video_mode);
-	     lines = sas_hw_at_no_check(vd_rows_on_screen) + 1;
-	     SelectMouseBuffer(mode, lines);
-
-             /* force mouse */
-             ica_hw_interrupt(AT_CPU_MOUSE_ADAPTER, AT_CPU_MOUSE_INT, 1);
-
-	    /*
-	     * Now turn off console cursor - otherwise can ruin screen trying to
-	     * draw system's cursor. The VDM will have to worry about the mouse
-	     * image.
-	     */
-	  //  while(ShowConsoleCursor(sc.OutputHandle, FALSE) >=0 && cnt++ < 200);
-	} /* FULLSCREEN */
-
-	/* Update saved variable. */
-	savedScreenState = sc.ScreenState;
-    }
-    /* Delayed Client Rect query */
-    if (DelayedReattachMouse)
-    {
-        DelayedReattachMouse = FALSE;
-	MovePointerToWindowCentre();
-    }
-}
-
+#error Unsupported excluded original configuration
 #endif /* X86GFX */
+#line 1402
 #line 1414
 
 /*
@@ -1081,9 +894,9 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
     cursorEnd = height - 1;
 
 #ifdef X86GFX
-    /* DIVERGENCE(MVDM-HOST-DIV-322): simulated CRTC still owns the cursor. */
-    if (sc.ScreenState == WINDOWED)
+#error Unsupported excluded original configuration
 #endif
+#line 2009
     {
 
 	/* Pass cursor size to video ports. */
@@ -1108,9 +921,9 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
     cursorWord = (currentPage * videoLen + pageOffset) / 2;
 
 #ifdef X86GFX
-    /* DIVERGENCE(MVDM-HOST-DIV-322): software fullscreen has emulated ports. */
-    if (sc.ScreenState == WINDOWED)
+#error Unsupported excluded original configuration
 #endif
+#line 2036
     {
 
 	/* Send cursor position to video ports. */
@@ -1125,9 +938,9 @@ VOID setVDMCursorPosition(UTINY height, PCOORD cursorPos)
 			(word) ((cursorPos->Y << 8) | (cursorPos->X & 0xff)));
 
 #ifdef X86GFX
-    /* DIVERGENCE(MVDM-HOST-DIV-322): notify the software cursor owner. */
-    if (sc.ScreenState == WINDOWED)
+#error Unsupported excluded original configuration
 #endif
+#line 2053
     {
 #ifdef MONITOR
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
@@ -1239,9 +1052,9 @@ void host_disable_stream_io(void)
 				&ConsBufferInfo.dwCursorPosition);
 
 #ifdef X86GFX
-    /* DIVERGENCE(MVDM-HOST-DIV-322): stream-to-software-VGA keeps updates. */
-    if (sc.ScreenState == WINDOWED)
+#error Unsupported excluded original configuration
 #endif
+#line 2431
         enableUpdates();
 
     MouseAttachMenuItem(sc.ActiveOutputBufferHandle);

@@ -152,8 +152,9 @@ typedef	struct {
 #ifdef VGG
 	_10_BITS screen_height;		/* Height in pc scanlines of screen	    */
 #else
-	_9_BITS	screen_height;		/* Height in pc scanlines of screen	    */
+#error Unsupported excluded original configuration
 #endif
+#line 157
 	half_word *screen_ptr;		/* pointer to start of regen buffer	    */
 	int screen_length;		/* Number of bytes in one screenfull        */
 	int display_disabled;		/* 0 if it's OK to do screen output.        */
@@ -249,8 +250,9 @@ extern	DISPLAY_GLOBS	PCDisplay;
 #define get_screen_height()             ((video_adapter == VGA) ? ((PCDisplay.screen_height.as_word+1)<<EGA_GRAPH.multiply_vert_by_two) : \
 							((PCDisplay.screen_height.as_word+1)*get_pc_pix_height()))
 #else
-#define get_screen_height()             ((PCDisplay.screen_height.as_word+1)*get_pc_pix_height())
+#error Unsupported excluded original configuration
 #endif /* VGG */
+#line 254
 #define get_screen_height_lo()          (PCDisplay.screen_height.as_bfld.low_byte)
 #define get_screen_height_hi()          (PCDisplay.screen_height.as_bfld.top_bit)
 #define	get_screen_end()		(get_screen_start() + get_screen_length() + gvi_pc_low_regen)

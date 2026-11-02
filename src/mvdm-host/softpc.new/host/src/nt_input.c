@@ -57,9 +57,9 @@ void nt_kb_prepare(void) {}
 
 
 #if NOTUSEDNOTUSED
-void nt_kb_light_off IFN1(half_word, kyLight) {}
-void nt_kb_restore(void) {}
+#error Unsupported excluded original configuration
 #endif
+#line 63
 
 void nt_kb_light_on(UCHAR);
 void nt_kb_init(void);

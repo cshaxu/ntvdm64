@@ -1,0 +1,49 @@
+{
+  "scope": "first-depth original-boundary finalists; unsupported profiles held; selected lines retained",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "arm": 144,
+      "cut": 146,
+      "end": 146,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 142,
+      "source_sha256": "4afd89f7648476d68df65ea3ccc06c5e10ee35b38f823828495ab5c30879b86c",
+      "error": "",
+      "before_sha256": "4afd89f7648476d68df65ea3ccc06c5e10ee35b38f823828495ab5c30879b86c",
+      "after_sha256": "e470c985eebea0e46578d24b9de80ed03d89b06c1c0f8997ecb3d8cab1074eea",
+      "original_sha256": "5dfdca835f1ca6fddf07826f2b4aa9e25f4c8bd0ceef21b2dce9884de721376c",
+      "body_sha256": "aaa7ed447d541fd183f7372b15091a20654a4caf3426bcc5957f8b032bc14fa7",
+      "body_lines": 1,
+      "scratch_key": "c440f18a9f4a1b1d",
+      "current_start_line": 144,
+      "current_cut_line": 146,
+      "current_end_line": 146,
+      "registration": "MVDM-HOST-DIV-598"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "arm": 90,
+      "cut": 92,
+      "end": 92,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 93,
+      "source_sha256": "cd05cf31a5a333ebacb93018664c40f968dd55e096694c7febda7a30068d01da",
+      "error": "",
+      "before_sha256": "cd05cf31a5a333ebacb93018664c40f968dd55e096694c7febda7a30068d01da",
+      "after_sha256": "8fbecaa4db196b017686b210aa511adeefcb709b1c5ef0a6a425c5411103dcb0",
+      "original_sha256": "e08e6414c0261656b67a97f839256ee4ba6565f84ce6799197f92b98436131d9",
+      "body_sha256": "be1323625b951ce6245e42689f6c7ccb16157e8d15838741687d979009e48c91",
+      "body_lines": 1,
+      "scratch_key": "1d4384430828020e",
+      "current_start_line": 90,
+      "current_cut_line": 92,
+      "current_end_line": 92,
+      "registration": "MVDM-HOST-DIV-598"
+    }
+  ],
+  "subsumed_nested_groups": 0,
+  "subsumed_ledger_entries": 0
+}

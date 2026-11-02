@@ -1,0 +1,20 @@
+{
+  "scope": "x64 service branch boundary probes",
+  "records": [
+    {
+      "after_physical_line": 2628,
+      "exit": 0,
+      "logical_next_line": 2630,
+      "source_sha256": "f819d815ff94fc7465b4b5bbd5f3cbc975b7671db6f8f11465b99a91730dbe68",
+      "error": ""
+    },
+    {
+      "after_physical_line": 2646,
+      "exit": 0,
+      "logical_next_line": 2648,
+      "source_sha256": "f819d815ff94fc7465b4b5bbd5f3cbc975b7671db6f8f11465b99a91730dbe68",
+      "error": ""
+    }
+  ],
+  "line_marker_correction": "The original marker had two physical lines; logical_next_line/end_logical is one greater than the source logical next line. Applied source directives were corrected and checked by s13-bfs-depth1-single-line-controls.json."
+}

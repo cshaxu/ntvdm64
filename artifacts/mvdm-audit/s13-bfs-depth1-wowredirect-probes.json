@@ -1,0 +1,71 @@
+{
+  "scope": "scratch first-depth selected logical-line boundaries, standalone NTVDM flag review separate",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "arm": 272,
+      "cut": 274,
+      "end": 274,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "end_logical": 279,
+      "source_sha256": "238effebef4d05a04b29889c94f9049fd40fc6ad860761c33edcb4069bf44b47",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "arm": 747,
+      "cut": 749,
+      "end": 749,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "end_logical": 754,
+      "source_sha256": "238effebef4d05a04b29889c94f9049fd40fc6ad860761c33edcb4069bf44b47",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "arm": 776,
+      "cut": 778,
+      "end": 778,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "end_logical": 783,
+      "source_sha256": "238effebef4d05a04b29889c94f9049fd40fc6ad860761c33edcb4069bf44b47",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "arm": 1704,
+      "cut": 1706,
+      "end": 1706,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "end_logical": 1713,
+      "source_sha256": "3f160a1833a71488d7e4b3e48dbcadf0aeaa7351751e636232121cbdd5a1433c",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "arm": 2477,
+      "cut": 2479,
+      "end": 2479,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "end_logical": 2486,
+      "source_sha256": "3f160a1833a71488d7e4b3e48dbcadf0aeaa7351751e636232121cbdd5a1433c",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "arm": 2514,
+      "cut": 2516,
+      "end": 2516,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "end_logical": 2523,
+      "source_sha256": "3f160a1833a71488d7e4b3e48dbcadf0aeaa7351751e636232121cbdd5a1433c",
+      "error": ""
+    }
+  ]
+}

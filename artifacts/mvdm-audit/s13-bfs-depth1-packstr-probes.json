@@ -1,0 +1,38 @@
+{
+  "scope": "scratch first-depth selected logical-line boundaries, standalone NTVDM flag review separate",
+  "records": [
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "arm": 60,
+      "cut": 157,
+      "end": 157,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 158,
+      "source_sha256": "d0a538fa12c6f512c480ab199f1b122752efddeaf9e9d2b7caf1f760ede06f9e",
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "arm": 288,
+      "cut": 410,
+      "end": 410,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 411,
+      "source_sha256": "d0a538fa12c6f512c480ab199f1b122752efddeaf9e9d2b7caf1f760ede06f9e",
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "arm": 413,
+      "cut": 674,
+      "end": 674,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 675,
+      "source_sha256": "d0a538fa12c6f512c480ab199f1b122752efddeaf9e9d2b7caf1f760ede06f9e",
+      "error": ""
+    }
+  ]
+}

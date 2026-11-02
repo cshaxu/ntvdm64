@@ -1,0 +1,9 @@
+{
+  "fixture": "oemuni_pif_caller_fixture.c",
+  "flags": "actual command owner flags plus fixture include path",
+  "before_exit": 0,
+  "after_exit": 0,
+  "equal_output": true,
+  "error_before": "oemuni_pif_caller_fixture.c\r\n",
+  "error_after": "oemuni_pif_caller_fixture.c\r\n"
+}

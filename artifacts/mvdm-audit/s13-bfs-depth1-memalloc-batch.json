@@ -1,0 +1,38 @@
+{
+  "scope": "WIN32 group: two rejected alternatives; one preserved group-end diagnostic line",
+  "records": [
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "arm": 255,
+      "cut": 281,
+      "end": 286,
+      "scratch_key": "00b7b5b35c4c0718",
+      "before_sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7",
+      "after_sha256": "b9973828f9b1ed0a65b888cee96202763caf1e968f2d8399da741d54d42055ba",
+      "original_sha256": "45b70c02c0aeb79f674e68a475669d45e2e5e6fab21f20e9bfcfe229d8958525",
+      "body_sha256": "dfed9968a9cd13559c2b5ad9936e963e7ff96351e0864a443447ea22f9f1b5ae",
+      "body_lines": 25,
+      "end_logical": 287,
+      "current_start_line": 255,
+      "current_cut_line": 257,
+      "current_end_line": 259
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "arm": 281,
+      "cut": 286,
+      "end": 286,
+      "scratch_key": "00b7b5b35c4c0718",
+      "before_sha256": "16af38bb1667f54938b3284ba81c5b9ebf247f346d2d17ba689aef3cf202e6e7",
+      "after_sha256": "b9973828f9b1ed0a65b888cee96202763caf1e968f2d8399da741d54d42055ba",
+      "original_sha256": "45b70c02c0aeb79f674e68a475669d45e2e5e6fab21f20e9bfcfe229d8958525",
+      "body_sha256": "664ad78b41cc043e11068abbaa067020119e41049f72137aa4e4911a381ee4f5",
+      "body_lines": 4,
+      "end_logical": 287,
+      "current_start_line": 257,
+      "current_cut_line": 259,
+      "current_end_line": 259
+    }
+  ],
+  "subsumed_nested_groups": 0
+}

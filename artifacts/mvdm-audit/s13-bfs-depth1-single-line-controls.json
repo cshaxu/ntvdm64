@@ -1,0 +1,519 @@
+{
+  "scope": "single-line preprocessor control at each corrected source boundary",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "after_original_physical_line": 444,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 445,
+      "observed": 445,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "after_original_physical_line": 137,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 138,
+      "observed": 138,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "after_original_physical_line": 139,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 140,
+      "observed": 140,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "after_original_physical_line": 213,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 214,
+      "observed": 214,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "after_original_physical_line": 106,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 107,
+      "observed": 107,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "after_original_physical_line": 310,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 310,
+      "observed": 310,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "after_original_physical_line": 312,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 312,
+      "observed": 312,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "after_original_physical_line": 651,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 772,
+      "observed": 772,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "after_original_physical_line": 712,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 906,
+      "observed": 906,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "after_original_physical_line": 722,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 916,
+      "observed": 916,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "after_original_physical_line": 145,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 131,
+      "observed": 131,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "after_original_physical_line": 210,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 215,
+      "observed": 215,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "after_original_physical_line": 4340,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 4407,
+      "observed": 4407,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "after_original_physical_line": 4642,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 4706,
+      "observed": 4706,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "after_original_physical_line": 161,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 162,
+      "observed": 162,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "after_original_physical_line": 1750,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 1751,
+      "observed": 1751,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "after_original_physical_line": 1757,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 1758,
+      "observed": 1758,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "after_original_physical_line": 1866,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 1867,
+      "observed": 1867,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shld.c",
+      "after_original_physical_line": 116,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 117,
+      "observed": 117,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shrd.c",
+      "after_original_physical_line": 118,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 119,
+      "observed": 119,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "after_original_physical_line": 1553,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 1582,
+      "observed": 1582,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "after_original_physical_line": 2141,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 2186,
+      "observed": 2186,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "after_original_physical_line": 2144,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 2189,
+      "observed": 2189,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "after_original_physical_line": 52,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 53,
+      "observed": 53,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "after_original_physical_line": 54,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 55,
+      "observed": 55,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "after_original_physical_line": 233,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 233,
+      "observed": 233,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "after_original_physical_line": 304,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 273,
+      "observed": 273,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "after_original_physical_line": 130,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 126,
+      "observed": 126,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "after_original_physical_line": 246,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 245,
+      "observed": 245,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "after_original_physical_line": 276,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 297,
+      "observed": 297,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+      "after_original_physical_line": 78,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 79,
+      "observed": 79,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+      "after_original_physical_line": 62,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 63,
+      "observed": 63,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
+      "after_original_physical_line": 55,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 56,
+      "observed": 56,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "after_original_physical_line": 337,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "expected": 338,
+      "observed": 338,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "after_original_physical_line": 510,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "expected": 534,
+      "observed": 534,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "after_original_physical_line": 857,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "expected": 858,
+      "observed": 858,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "after_original_physical_line": 184,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "expected": 192,
+      "observed": 192,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "after_original_physical_line": 470,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "expected": 481,
+      "observed": 481,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "after_original_physical_line": 961,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "expected": 965,
+      "observed": 965,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "after_original_physical_line": 52,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "expected": 53,
+      "observed": 53,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "after_original_physical_line": 232,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "expected": 233,
+      "observed": 233,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "after_original_physical_line": 275,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "expected": 276,
+      "observed": 276,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "after_original_physical_line": 363,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "expected": 364,
+      "observed": 364,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "after_original_physical_line": 365,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "expected": 366,
+      "observed": 366,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.c",
+      "after_original_physical_line": 704,
+      "graph": "build/.ninja/msvc-x86-release/wow32",
+      "exit": 0,
+      "expected": 705,
+      "observed": 705,
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "after_original_physical_line": 33,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 34,
+      "observed": 34,
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "after_original_physical_line": 28,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 29,
+      "observed": 29,
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "after_original_physical_line": 60,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 61,
+      "observed": 61,
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+      "after_original_physical_line": 872,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 873,
+      "observed": 873,
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "after_original_physical_line": 893,
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "exit": 0,
+      "expected": 894,
+      "observed": 894,
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "after_original_physical_line": 1141,
+      "graph": "build/.ninja/msvc-x86-release/call-boundaries",
+      "exit": 0,
+      "expected": 1142,
+      "observed": 1142,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "after_original_physical_line": 828,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 857,
+      "observed": 857,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "after_original_physical_line": 559,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 560,
+      "observed": 560,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "after_original_physical_line": 1210,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 1235,
+      "observed": 1235,
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "after_original_physical_line": 647,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 647,
+      "observed": 647,
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "after_original_physical_line": 2628,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 2629,
+      "observed": 2629,
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "after_original_physical_line": 2646,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "expected": 2647,
+      "observed": 2647,
+      "error": ""
+    }
+  ],
+  "failures": []
+}

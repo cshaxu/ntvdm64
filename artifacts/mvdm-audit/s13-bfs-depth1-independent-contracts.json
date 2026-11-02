@@ -1,0 +1,56 @@
+{
+  "scope": "independent SoftPC object-contract fixtures; nonproduct test profiles included",
+  "records": [
+    {
+      "contract": "qevnt",
+      "result": "pass",
+      "checks": 37,
+      "error": null
+    },
+    {
+      "contract": "ios",
+      "result": "pass",
+      "checks": 70,
+      "error": null
+    },
+    {
+      "contract": "gfi",
+      "result": "fail",
+      "checks": null,
+      "error": "Fixture build failed: 2"
+    },
+    {
+      "contract": "keycode",
+      "result": "pass",
+      "checks": 268322,
+      "error": null
+    },
+    {
+      "contract": "nls",
+      "result": "pass",
+      "checks": 3645,
+      "error": null
+    },
+    {
+      "contract": "umb",
+      "result": "pass",
+      "checks": 4240,
+      "error": null
+    },
+    {
+      "contract": "vdd",
+      "result": "pass",
+      "checks": 305,
+      "error": null
+    },
+    {
+      "contract": "niddb",
+      "result": "fail",
+      "checks": null,
+      "error": "Original-object contract failed"
+    }
+  ],
+  "gfi_failure": "non-PROD fixture selects pre-existing DIV-504 guard in error.h depth 2, already present in 7f2bb2924; do not classify it as first-depth exclusion",
+  "niddb_failure": "known original-source inactive-child retirement mismatch, independently recorded in artifacts/mvdm-audit/niddb-vmm-retirement-contract.md; no evidence it was introduced by this batch",
+  "next_depth": "defer only the depth-2 header profile conflict to next S; NIDDB belongs to the already queued foundation recovery"
+}

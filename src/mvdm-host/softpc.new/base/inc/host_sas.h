@@ -18,52 +18,9 @@
  *
 ]*/
 #if defined(BASE_SAS) && defined(HOST_SAS)
-
-#ifndef SAS_PREFIX
-#define SAS_PREFIX()	sas_
-#endif /* SAS_PREFIX */
-
-#define IDENT(a)	a
-#define CAT(a,b)	IDENT(a)b
-#define sas_term			CAT(SAS_PREFIX(),term)
-#define sas_init			CAT(SAS_PREFIX(),init)
-#define sas_memory_size			CAT(SAS_PREFIX(),memory_size)
-#define sas_memory_type			CAT(SAS_PREFIX(),memory_type)
-#define sas_blockop			CAT(SAS_PREFIX(),blockop)
-#define sas_load			CAT(SAS_PREFIX(),load)
-#define sas_loadw			CAT(SAS_PREFIX(),loadw)
-#define sas_store			CAT(SAS_PREFIX(),store)
-#define sas_storew			CAT(SAS_PREFIX(),storew)
-#define sas_storedw			CAT(SAS_PREFIX(),storedw)
-#define sas_store_no_check		CAT(SAS_PREFIX(),store_no_check)
-#define sas_storew_no_check		CAT(SAS_PREFIX(),storew_no_check)
-#define sas_storedw_no_check		CAT(SAS_PREFIX(),storedw_no_check)
-#define sas_fills			CAT(SAS_PREFIX(),fills)
-#define sas_fillsw			CAT(SAS_PREFIX(),fillsw)
-#define sas_hw_at			CAT(SAS_PREFIX(),hw_at)
-#define sas_w_at			CAT(SAS_PREFIX(),w_at)
-#define sas_dw_at			CAT(SAS_PREFIX(),dw_at)
-#define sas_hw_at_no_check		CAT(SAS_PREFIX(),hw_at_no_check)
-#define sas_w_at_no_check		CAT(SAS_PREFIX(),w_at_no_check)
-#define sas_dw_at_no_check		CAT(SAS_PREFIX(),dw_at_no_check)
-#define sas_loads			CAT(SAS_PREFIX(),loads)
-#define sas_stores			CAT(SAS_PREFIX(),stores)
-#define sas_loads_no_check		CAT(SAS_PREFIX(),loads_no_check)
-#define sas_stores_no_check		CAT(SAS_PREFIX(),stores_no_check)
-#define sas_move_bytes_forward		CAT(SAS_PREFIX(),move_bytes_forward)
-#define sas_move_words_forward		CAT(SAS_PREFIX(),move_words_forward)
-#define sas_move_bytes_backward		CAT(SAS_PREFIX(),move_bytes_backward)
-#define sas_move_words_backward		CAT(SAS_PREFIX(),move_words_backward)
-#define sas_enable_20_bit_wrapping	CAT(SAS_PREFIX(),enable_20_bit_wrapping)
-#define sas_disable_20_bit_wrapping	CAT(SAS_PREFIX(),disable_20_bit_wrapping)
-#define sas_twenty_bit_wrapping_enabled	CAT(SAS_PREFIX(),twenty_bit_wrapping_enabled)
-#define sas_part_enable_20_bit_wrap	CAT(SAS_PREFIX(),part_enable_20_bit_wrap)
-#define sas_part_disable_20_bit_wrap	CAT(SAS_PREFIX(),part_disable_20_bit_wrap)
-#define sas_scratch_address		CAT(SAS_PREFIX(),scratch_address)
-#define sas_connect_memory		CAT(SAS_PREFIX(),connect_memory)
-#define sas_overwrite_memory		CAT(SAS_PREFIX(),overwrite_memory)
-
+#error Unsupported excluded original configuration
 #endif /* BASE_SAS && HOST_SAS */
+#line 67
 
 #ifndef BASE_SAS
 

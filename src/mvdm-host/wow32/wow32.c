@@ -164,24 +164,9 @@ extern CRITICAL_SECTION VdmLoadCritSec;
 extern LIST_ENTRY TimerList;
 
 #if defined (_X86_)
-
-extern PVOID WowpLockPrefixTable;
-
-IMAGE_LOAD_CONFIG_DIRECTORY _load_config_used = {
-    0,                          // Reserved
-    0,                          // Reserved
-    0,                          // Reserved
-    0,                          // Reserved
-    0,                          // GlobalFlagsClear
-    0,                          // GlobalFlagsSet
-    0,                          // CriticalSectionTimeout (milliseconds)
-    0,                          // DeCommitFreeBlockThreshold
-    0,                          // DeCommitTotalFreeThreshold
-    &WowpLockPrefixTable,       // LockPrefixTable, defined in FASTWOW.ASM
-    0, 0, 0, 0, 0, 0, 0         // Reserved
-};
-
+#error Unsupported excluded original configuration
 #endif
+#line 192
 
 BOOLEAN
 W32DllInitialize(
@@ -466,8 +451,9 @@ BOOL W32Init(VOID)
     PFNWOWHANDLERSIN pfnIn;
     LPVOID lpSharedTaskMemory;
 #ifdef _X86_
-    pIntelRegisters = getIntelRegistersPointer();  // X86 Only, get pointer to Register Context Block
+#error Unsupported excluded original configuration
 #endif                                             // UP.
+#line 481
 
 #ifndef _X86_
     //

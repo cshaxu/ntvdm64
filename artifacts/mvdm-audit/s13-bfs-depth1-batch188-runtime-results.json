@@ -1,0 +1,335 @@
+{
+  "full": {
+    "Suite": "Full",
+    "ElapsedMs": 371127,
+    "InputPolicy": "Observed",
+    "WindowOwnedConsole": false,
+    "PreparationMs": 14879,
+    "Gates": [
+      {
+        "Gate": "guest-media",
+        "ElapsedMs": 940,
+        "CleanupMs": 548,
+        "Passed": true
+      },
+      {
+        "Gate": "ntvdm-export-ordinals",
+        "ElapsedMs": 202,
+        "CleanupMs": 511,
+        "Passed": true
+      },
+      {
+        "Gate": "wow-frontiers",
+        "ElapsedMs": 66050,
+        "CleanupMs": 420,
+        "Passed": true
+      },
+      {
+        "Gate": "Console-17",
+        "ElapsedMs": 41906,
+        "CleanupMs": 505,
+        "Passed": true
+      },
+      {
+        "Gate": "Window-17",
+        "ElapsedMs": 41073,
+        "CleanupMs": 433,
+        "Passed": true
+      },
+      {
+        "Gate": "rpc",
+        "ElapsedMs": 14276,
+        "CleanupMs": 448,
+        "Passed": true
+      },
+      {
+        "Gate": "native-gui",
+        "ElapsedMs": 10111,
+        "CleanupMs": 428,
+        "Passed": true
+      },
+      {
+        "Gate": "version-negatives",
+        "ElapsedMs": 50475,
+        "CleanupMs": 454,
+        "Passed": true
+      },
+      {
+        "Gate": "strict-dir",
+        "ElapsedMs": 12497,
+        "CleanupMs": 429,
+        "Passed": true
+      },
+      {
+        "Gate": "modern-edit-return",
+        "ElapsedMs": 28045,
+        "CleanupMs": 423,
+        "Passed": true
+      },
+      {
+        "Gate": "cooked-return",
+        "ElapsedMs": 30179,
+        "CleanupMs": 482,
+        "Passed": true
+      },
+      {
+        "Gate": "rapid-relaunch",
+        "ElapsedMs": 3429,
+        "CleanupMs": 440,
+        "Passed": true
+      },
+      {
+        "Gate": "interactive-relaunch",
+        "ElapsedMs": 7441,
+        "CleanupMs": 503,
+        "Passed": true
+      },
+      {
+        "Gate": "session-isolation",
+        "ElapsedMs": 9821,
+        "CleanupMs": 425,
+        "Passed": true
+      },
+      {
+        "Gate": "retirement-wiring",
+        "ElapsedMs": 4129,
+        "CleanupMs": 477,
+        "Passed": true
+      },
+      {
+        "Gate": "nested-window-handoff",
+        "ElapsedMs": 6311,
+        "CleanupMs": 429,
+        "Passed": true
+      },
+      {
+        "Gate": "dos4gw-nesticle",
+        "ElapsedMs": 20001,
+        "CleanupMs": 425,
+        "Passed": true
+      }
+    ]
+  },
+  "windows_31_matrix": [
+    {
+      "case": "std-dosonly0",
+      "dosonly": false,
+      "enhanced": false,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 21,
+      "hwnd": 4456,
+      "observedDosOnly": 0,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\batch188-win31-retargeted-matrix\\std-dosonly0.observer.txt"
+    },
+    {
+      "case": "std-dosonly1",
+      "dosonly": true,
+      "enhanced": false,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 21,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\batch188-win31-retargeted-matrix\\std-dosonly1.observer.txt"
+    },
+    {
+      "case": "386-dosonly0",
+      "dosonly": false,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 0,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\batch188-win31-retargeted-matrix\\386-dosonly0.observer.txt"
+    },
+    {
+      "case": "386-dosonly1",
+      "dosonly": true,
+      "enhanced": true,
+      "probeStarted": true,
+      "progmanAndMode": true,
+      "flags": 2085,
+      "hwnd": 4456,
+      "observedDosOnly": 1,
+      "normalExit": true,
+      "passed": true,
+      "error": null,
+      "observer": "O:\\repos.hobby\\ntvdm64\\build\\t473-s13\\batch188-win31-retargeted-matrix\\386-dosonly1.observer.txt"
+    }
+  ],
+  "games": [
+    {
+      "application": "mine",
+      "result": "PASS flag/counter, reset, open cell, WM_CLOSE and run16 completion",
+      "probe_excerpt": "window-ready elapsed=735 inherited-desktop=0\nowned-window=002A1132 pid=29364\nPASS unchanged title and native frame=1\nboard-ready elapsed=93 cell=3cc8733b counter=47d384f2\ncapture=before ok=1\nphase=flag elapsed=32 cell=62c0567b reference=3cc8733b\ncapture=flag ok=1\ncounter-before=47d384f2 counter-flag=8caf84f2\nphase=reset elapsed=93 cell=3cc8733b reference=3cc8733b\ncapture=reset ok=1\nphase=open elapsed=47 cell=c7639615 reference=3cc8733b\ncapture=open ok=1\nPASS flag changed cell+counter, F2 restored covered cell, left click changed cell\nPASS owned game window closed after WM_CLOSE\n",
+      "inputs": [
+        {
+          "File": "WINMINE.EXE",
+          "SHA256": "633C1328922B4092351E0019B1BA1C6D56C0F0FEA83824CC8B7E2E731B15E80B"
+        },
+        {
+          "File": "system32\\ntvdm.exe",
+          "SHA256": "2771D2BBD5DA24AE58E4AB55CAC6B6CF1D1D19F599C71F489C6D889282673F39"
+        },
+        {
+          "File": "system32\\WOW32.DLL",
+          "SHA256": "D1A684704AEA26C808B7D2F1F9A68612F628CBC742E68F2C1C983025D35D24F7"
+        },
+        {
+          "File": "system32\\run16.exe",
+          "SHA256": "9813B7123F3FFADB83FBCAEE14399695698037E2FECC2202EB471A2A1D852872"
+        }
+      ]
+    },
+    {
+      "application": "sol",
+      "result": "PASS SOL deal, stock draw, WM_CLOSE and run16 completion",
+      "probe_excerpt": "owned-window=023E119E pid=26064 client=585x384\ngeometry phase=before client_ok=1 client=585x384 outer_ok=1 outer=130,130,731,573 style=16cf0000 exstyle=00000100\ngeometry-context observer_awareness=0 target_awareness=0 equal=1 target_dpi=96 screen=1280x720 maxtrack=1300x740 monitor_ok=1 monitor=0,0,1280,720 work=0,0,1280,672\ndeal-menu-state=0 enabled=1\nphase=ready pixels=0681fd4f reference=00000000\ncapture=before ok=1\nphase=pre-deal-draw pixels=dd043240 reference=65174fed\ncapture=pre-deal-draw ok=1\nphase=deal-waste-cleared pixels=65174fed expected=65174fed\nphase=deal pixels=edec4908 reference=00000000\ncapture=deal ok=1\ndeal-tableau same=0 old=0681fd4f new=edec4908 not_a_randomness_assertion=1\nphase=draw-stock pixels=42de0606 reference=65174fed\ncapture=draw ok=1\nPASS SOL stock draw, Deal cleared nonempty waste, redealt tableau present, second stock draw and normal owned window close\n",
+      "inputs": [
+        {
+          "File": "SOL.EXE",
+          "SHA256": "68B196C6FD496BAC0E2F30F162EE0B4B4D6EB5BFEC1AF086C8EA759222211F31"
+        },
+        {
+          "File": "system32\\run16.exe",
+          "SHA256": "9813B7123F3FFADB83FBCAEE14399695698037E2FECC2202EB471A2A1D852872"
+        },
+        {
+          "File": "system32\\ntsrv.exe",
+          "SHA256": "4F7247A9CBACA944697518DB2D59665C34FC35477E8737B8EE3A56B85E8F7B92"
+        },
+        {
+          "File": "system32\\ntcon.exe",
+          "SHA256": "5CB2BA21844CD873F7E87EC2D0B9E225FB19B18EDA92A28BA22D745C14CB81CE"
+        },
+        {
+          "File": "system32\\ntvdm.exe",
+          "SHA256": "2771D2BBD5DA24AE58E4AB55CAC6B6CF1D1D19F599C71F489C6D889282673F39"
+        },
+        {
+          "File": "system32\\ntvwm.exe",
+          "SHA256": "684B501E1B025F4E8DC54E6AE837A71FDBA4A2DCD3CF8F2909B788A206A9532E"
+        },
+        {
+          "File": "system32\\ntmon.exe",
+          "SHA256": "4DF75031A7D19A6C853B680476D0C3FBD7A200FD60D85A1DCE1E96F099F8C345"
+        },
+        {
+          "File": "system32\\WOW32.DLL",
+          "SHA256": "D1A684704AEA26C808B7D2F1F9A68612F628CBC742E68F2C1C983025D35D24F7"
+        },
+        {
+          "File": "system32\\VDMREDIR.DLL",
+          "SHA256": "5F9D982C7E9E789C11A8006F177245A0CD2ED3429BC61F46D14471060EB9FB61"
+        },
+        {
+          "File": "system32\\nthook32.dll",
+          "SHA256": "20035DF646BFB5017D88EB2DA68D52E0F7EDE031F368740C3A00AF5B3D466678"
+        },
+        {
+          "File": "system32\\nthook64.dll",
+          "SHA256": "19360DF7CFD568416020926F955CEF964C8D232DF898E71A24B3BFAF32662407"
+        }
+      ]
+    }
+  ],
+  "package_manifest": [
+    {
+      "Name": "run16.exe",
+      "RelativePath": "system32\\run16.exe",
+      "Sha256": "9813B7123F3FFADB83FBCAEE14399695698037E2FECC2202EB471A2A1D852872",
+      "Machine": 34404,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "5000C3C06C4C25FC24447713776D4534916178C75D68B6299F3AA1B5482FD177"
+    },
+    {
+      "Name": "ntsrv.exe",
+      "RelativePath": "system32\\ntsrv.exe",
+      "Sha256": "4F7247A9CBACA944697518DB2D59665C34FC35477E8737B8EE3A56B85E8F7B92",
+      "Machine": 34404,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "1149CC4710F1FF0735C940CC3946170BBC8191A8F02B6B477825B75AC93DE887"
+    },
+    {
+      "Name": "ntcon.exe",
+      "RelativePath": "system32\\ntcon.exe",
+      "Sha256": "5CB2BA21844CD873F7E87EC2D0B9E225FB19B18EDA92A28BA22D745C14CB81CE",
+      "Machine": 34404,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "11FD9E051906DCDCE6F903E633CCB2E1DFFD46832E29CE619AC8A94A6B65F800"
+    },
+    {
+      "Name": "ntvdm.exe",
+      "RelativePath": "system32\\ntvdm.exe",
+      "Sha256": "2771D2BBD5DA24AE58E4AB55CAC6B6CF1D1D19F599C71F489C6D889282673F39",
+      "Machine": 332,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "19178427FBC5A72552F376C43D27744D3951DD51FDDEA0F39C642BB917C32ABC"
+    },
+    {
+      "Name": "ntvwm.exe",
+      "RelativePath": "system32\\ntvwm.exe",
+      "Sha256": "684B501E1B025F4E8DC54E6AE837A71FDBA4A2DCD3CF8F2909B788A206A9532E",
+      "Machine": 34404,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "7DFB846C322FC7075F2A5621E0817A0BA623F78953C0DB2C919E1562F963E530"
+    },
+    {
+      "Name": "ntmon.exe",
+      "RelativePath": "system32\\ntmon.exe",
+      "Sha256": "4DF75031A7D19A6C853B680476D0C3FBD7A200FD60D85A1DCE1E96F099F8C345",
+      "Machine": 34404,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "B6B88EBDC852E9FCCDC1BBF6A26F98701A8984C7C6C1DC06C403497322D3D5D1"
+    },
+    {
+      "Name": "WOW32.DLL",
+      "RelativePath": "system32\\WOW32.DLL",
+      "Sha256": "D1A684704AEA26C808B7D2F1F9A68612F628CBC742E68F2C1C983025D35D24F7",
+      "Machine": 332,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "164E6C11869D9CFD76DC6021C5A486ACF8BF9618492EDD92340EDDAB5BB7D1F0"
+    },
+    {
+      "Name": "VDMREDIR.DLL",
+      "RelativePath": "system32\\VDMREDIR.DLL",
+      "Sha256": "5F9D982C7E9E789C11A8006F177245A0CD2ED3429BC61F46D14471060EB9FB61",
+      "Machine": 332,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "46D3E7D08218BC3F9E076603AB3DC6C9F98758E0E2D7980ED65059D6826CBD3C"
+    },
+    {
+      "Name": "nthook32.dll",
+      "RelativePath": "system32\\nthook32.dll",
+      "Sha256": "20035DF646BFB5017D88EB2DA68D52E0F7EDE031F368740C3A00AF5B3D466678",
+      "Machine": 332,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "6151287D7C1DA35DAF6DA7A500DA77230857E517DBD95CF59FAF631CB98AD7AD"
+    },
+    {
+      "Name": "nthook64.dll",
+      "RelativePath": "system32\\nthook64.dll",
+      "Sha256": "19360DF7CFD568416020926F955CEF964C8D232DF898E71A24B3BFAF32662407",
+      "Machine": 34404,
+      "PackageId": "ee3df81e-ca78-4406-a273-9a757530d1b3",
+      "InputSha256": "FF3D4A88E3A28F800B879C8053497766560BEB979A8582B5F7EFA635771117B6"
+    }
+  ],
+  "limitations": [
+    "DOS4GW witness checks visible graphics startup, not gameplay or pixels",
+    "x87 original behavior is a known failing boundary; see dedicated control artifacts",
+    "GFI and non-CCPU DPMI standalone fixture failures were pre-existing and remain open"
+  ],
+  "first_attempt": "s13-bfs-depth1-batch188-test-runner-correction.json"
+}

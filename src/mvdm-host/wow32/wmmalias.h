@@ -82,10 +82,9 @@ typedef struct _HMAP {      /* hm */
 typedef struct _HINFO {         /* hi */
     PPHMAP  pphmHash;           // address of hash table
 #ifdef NEWALIAS
-    PPHMAP  pphmAlias;          // address of alias table
-    INT     nAliasEntries;      // size of alias table, in entries
-    INT     iAliasHint;         // next (possibly) free slot in alias table
+#error Unsupported excluded original configuration
 #endif
+#line 89
 } HINFO, *PHINFO, **PPHINFO;
 
 

@@ -1,0 +1,30 @@
+{
+  "scope": "scratch-only all current x86 graph contexts for 4 NTVDM alternatives",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/video/video.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "8cd3d2a98cdc8101cf137dfc87f8ff8cb1cddd39a47aee2535c9e41dabd1665f",
+      "after_sha256": "e9217847f5588a64e3a69f5b355888eee0a44120b22cc04de313da45ff4cf9b5",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/video/video.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "8cd3d2a98cdc8101cf137dfc87f8ff8cb1cddd39a47aee2535c9e41dabd1665f",
+      "after_sha256": "e9217847f5588a64e3a69f5b355888eee0a44120b22cc04de313da45ff4cf9b5",
+      "error_before": "",
+      "error_after": ""
+    }
+  ],
+  "failures": []
+}

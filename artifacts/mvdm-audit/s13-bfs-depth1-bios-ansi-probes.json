@@ -1,0 +1,34 @@
+{
+  "scope": "scratch real consumer for nine first-depth header boundary candidates; no disposition decision",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 341,
+      "cut": 348,
+      "end": 348,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        353
+      ],
+      "source_sha256": "8b53f4547150fd4d141ae575709ae611efd6e04bf6a38c7084910424aee2045d",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/bios.h",
+      "arm": 353,
+      "cut": 356,
+      "end": 356,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        361
+      ],
+      "source_sha256": "8b53f4547150fd4d141ae575709ae611efd6e04bf6a38c7084910424aee2045d",
+      "error": ""
+    }
+  ],
+  "failures": []
+}

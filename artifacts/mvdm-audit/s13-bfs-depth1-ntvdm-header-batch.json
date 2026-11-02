@@ -1,0 +1,57 @@
+{
+  "scope": "first-depth original-boundary finalists; unsupported profiles held; selected lines retained",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "arm": 499,
+      "cut": 502,
+      "end": 502,
+      "consumer": "src/mvdm-host/softpc.new/base/ccpu386/in.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        500
+      ],
+      "source_sha256": "31a51bc032e45a1bb37a18df819266aed2080c8c7fc4f07f13749dff5da17543",
+      "error": "",
+      "before_sha256": "31a51bc032e45a1bb37a18df819266aed2080c8c7fc4f07f13749dff5da17543",
+      "original_sha256": "ae58169de7aa969000f7cf4374d3d850b55d352c3d4c6edcf52dec0e985620a4",
+      "body_sha256": "5280e09c2fa2e295aaa34e74ba3dc54d7e67207fce6a7773f623cbfdcc819df6",
+      "body_lines": 2,
+      "end_logical": 500,
+      "cut_logical": 500,
+      "after_sha256": "ab2f4af08702de82f4207ea7a93d723009f200fc159d540e13adf14a33764fec",
+      "current_start_line": 499,
+      "current_cut_line": 501,
+      "current_end_line": 501,
+      "registration": "MVDM-HOST-DIV-598"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_pif.h",
+      "arm": 97,
+      "cut": 100,
+      "end": 100,
+      "consumer": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        101
+      ],
+      "source_sha256": "0e970eb7fb050158cc2038f348e5d4de1d1ffd0d40f6babb7f15c64230eb9133",
+      "error": "",
+      "before_sha256": "0e970eb7fb050158cc2038f348e5d4de1d1ffd0d40f6babb7f15c64230eb9133",
+      "original_sha256": "a8069d676141812cddc35adb0b29ea58e58bba0a7f29dcf287468108188b8d09",
+      "body_sha256": "d2ba2c85962ca9f37c87f6eae270e6ee566190785503b98ee8618808c5c2c1bb",
+      "body_lines": 2,
+      "end_logical": 101,
+      "cut_logical": 101,
+      "after_sha256": "6518289f8cdb543f6f93f7ee85057274b30af59130c081f2fb0b196c186d29d5",
+      "current_start_line": 97,
+      "current_cut_line": 99,
+      "current_end_line": 99,
+      "registration": "MVDM-HOST-DIV-598"
+    }
+  ],
+  "subsumed_nested_groups": 0,
+  "subsumed_ledger_entries": 0
+}

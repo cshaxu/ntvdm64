@@ -40,12 +40,9 @@ BOOL fDpmiIntsHaveBeenHooked = FALSE;
 #define VDM_INT_32 2
 
 #else
-
-#define DpmiInterruptHandlers ((PVDM_TIB)(NtCurrentTeb()->Vdm))->VdmInterruptHandlers
-#define DpmiFaultHandlers ((PVDM_TIB)(NtCurrentTeb()->Vdm))->VdmFaultHandlers
-
-
+#error Unsupported excluded original configuration
 #endif // !i386 || CPU_40_STYLE
+#line 49
 
 #define EFLAGS_INTERRUPT_MASK 0x200
 #define LockedPMStackOffset 0x1000

@@ -1,0 +1,335 @@
+{
+  "scope": "standalone fixture witnesses; failing preprocessing is not proof of a supported selected branch",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h",
+      "arm": 93,
+      "source_sha256": "1b99f6cda69b874e8e9ac73b2da493cdfde4742fb1f0eb67c647ed82cd374e18",
+      "observations": [
+        {
+          "fixture": "qevnt",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "ios",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "gfi",
+          "exit": 2,
+          "marker_present": false,
+          "diagnostic_tail": "\\mvdm-host\\softpc.new\\base\\inc\\..\\..\\host\\inc\\error.h(311): fatal error C1189: #error:  DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.\r\n"
+        },
+        {
+          "fixture": "keycode",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "nls",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "umb",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "vdd",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "niddb",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egaports.h",
+      "arm": 73,
+      "source_sha256": "face41b8a7fd360e0f99b9f779a87b11ddf4bf0b43b6c9f2ffd6133782cbb129",
+      "observations": [
+        {
+          "fixture": "qevnt",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "ios",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "gfi",
+          "exit": 2,
+          "marker_present": false,
+          "diagnostic_tail": "\\mvdm-host\\softpc.new\\base\\inc\\..\\..\\host\\inc\\error.h(311): fatal error C1189: #error:  DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.\r\n"
+        },
+        {
+          "fixture": "keycode",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "nls",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "umb",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "vdd",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "niddb",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
+      "arm": 28,
+      "source_sha256": "36e2874c485836e78fec5df42832b5353d0c15cc6aee1ef38a2ad2b33dad490b",
+      "observations": [
+        {
+          "fixture": "qevnt",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "ios",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "gfi",
+          "exit": 2,
+          "marker_present": false,
+          "diagnostic_tail": "\\mvdm-host\\softpc.new\\base\\inc\\..\\..\\host\\inc\\error.h(311): fatal error C1189: #error:  DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.\r\n"
+        },
+        {
+          "fixture": "keycode",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "nls",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "umb",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "vdd",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "niddb",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ios.h",
+      "arm": 499,
+      "source_sha256": "31a51bc032e45a1bb37a18df819266aed2080c8c7fc4f07f13749dff5da17543",
+      "observations": [
+        {
+          "fixture": "qevnt",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "ios",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "gfi",
+          "exit": 2,
+          "marker_present": false,
+          "diagnostic_tail": "\\mvdm-host\\softpc.new\\base\\inc\\..\\..\\host\\inc\\error.h(311): fatal error C1189: #error:  DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.\r\n"
+        },
+        {
+          "fixture": "keycode",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "nls",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "umb",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "vdd",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "niddb",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/sas.h",
+      "arm": 106,
+      "source_sha256": "655c332ff639ab73f6b37043db11357d154ada60c11c3493e2b210f04eaf9cc0",
+      "observations": [
+        {
+          "fixture": "qevnt",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "ios",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "gfi",
+          "exit": 2,
+          "marker_present": false,
+          "diagnostic_tail": "\\mvdm-host\\softpc.new\\base\\inc\\..\\..\\host\\inc\\error.h(311): fatal error C1189: #error:  DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.\r\n"
+        },
+        {
+          "fixture": "keycode",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "nls",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "umb",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "vdd",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "niddb",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_pif.h",
+      "arm": 97,
+      "source_sha256": "0e970eb7fb050158cc2038f348e5d4de1d1ffd0d40f6babb7f15c64230eb9133",
+      "observations": [
+        {
+          "fixture": "qevnt",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "ios",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "gfi",
+          "exit": 2,
+          "marker_present": false,
+          "diagnostic_tail": "\\mvdm-host\\softpc.new\\base\\inc\\..\\..\\host\\inc\\error.h(311): fatal error C1189: #error:  DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.\r\n"
+        },
+        {
+          "fixture": "keycode",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "nls",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "umb",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "vdd",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        },
+        {
+          "fixture": "niddb",
+          "exit": 0,
+          "marker_present": false,
+          "diagnostic_tail": ""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "scope": "scratch real consumer for nine first-depth header boundary candidates; no disposition decision",
+  "records": [
+    {
+      "path": "src/non-mvdm/base/win32/server/basesrv.h",
+      "arm": 231,
+      "cut": 233,
+      "end": 233,
+      "consumer": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "logical_next_lines": [
+        234
+      ],
+      "source_sha256": "5016d623cb8295cda7e9788cbde1fa6d52c3f52a98bea3dc63fc8a54067fe414",
+      "error": ""
+    }
+  ],
+  "failures": []
+}

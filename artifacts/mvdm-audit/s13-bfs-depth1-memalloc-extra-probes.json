@@ -1,0 +1,27 @@
+{
+  "scope": "scratch first-depth selected logical-line boundaries, standalone NTVDM flag review separate",
+  "records": [
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "arm": 117,
+      "cut": 125,
+      "end": 125,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 126,
+      "source_sha256": "b9973828f9b1ed0a65b888cee96202763caf1e968f2d8399da741d54d42055ba",
+      "error": ""
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "arm": 166,
+      "cut": 177,
+      "end": 177,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 178,
+      "source_sha256": "b9973828f9b1ed0a65b888cee96202763caf1e968f2d8399da741d54d42055ba",
+      "error": ""
+    }
+  ]
+}

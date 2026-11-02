@@ -1,0 +1,49 @@
+{
+  "scope": "first-depth original-boundary finalists; unsupported profiles held; selected lines retained",
+  "records": [
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "arm": 117,
+      "cut": 125,
+      "end": 125,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 126,
+      "source_sha256": "b9973828f9b1ed0a65b888cee96202763caf1e968f2d8399da741d54d42055ba",
+      "error": "",
+      "before_sha256": "b9973828f9b1ed0a65b888cee96202763caf1e968f2d8399da741d54d42055ba",
+      "after_sha256": "1702274975c93d95f711e490d1148d84dfcb94c94354f9d92d99588355d56f6e",
+      "original_sha256": "45b70c02c0aeb79f674e68a475669d45e2e5e6fab21f20e9bfcfe229d8958525",
+      "body_sha256": "417a1e9a9001570b9f7a6aa5fcb93f97e90daf5b5b4f5530551f9b6caf159084",
+      "body_lines": 7,
+      "scratch_key": "00b7b5b35c4c0718",
+      "current_start_line": 117,
+      "current_cut_line": 119,
+      "current_end_line": 119,
+      "registration": "OPENNT-HOST-149"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "arm": 166,
+      "cut": 177,
+      "end": 177,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 178,
+      "source_sha256": "b9973828f9b1ed0a65b888cee96202763caf1e968f2d8399da741d54d42055ba",
+      "error": "",
+      "before_sha256": "b9973828f9b1ed0a65b888cee96202763caf1e968f2d8399da741d54d42055ba",
+      "after_sha256": "1702274975c93d95f711e490d1148d84dfcb94c94354f9d92d99588355d56f6e",
+      "original_sha256": "45b70c02c0aeb79f674e68a475669d45e2e5e6fab21f20e9bfcfe229d8958525",
+      "body_sha256": "39668281bda4697ffa2a2e4671923fbf0e00e8a9f8f0a870ea0b8ca0b9fe792b",
+      "body_lines": 10,
+      "scratch_key": "00b7b5b35c4c0718",
+      "current_start_line": 161,
+      "current_cut_line": 163,
+      "current_end_line": 163,
+      "registration": "OPENNT-HOST-149"
+    }
+  ],
+  "subsumed_nested_groups": 2,
+  "subsumed_ledger_entries": 0
+}

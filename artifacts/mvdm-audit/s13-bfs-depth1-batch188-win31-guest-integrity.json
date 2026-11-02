@@ -1,0 +1,36 @@
+{
+  "scope": "six guest binaries unchanged in original and isolated copy after four-mode matrix",
+  "records": [
+    {
+      "name": "WIN.COM",
+      "sha256": "0E34B06601B2C9056186C937E2BAA8ADF14BD572FD15BC72B8B7FFF679AA2E47",
+      "original_and_copy_unchanged": true
+    },
+    {
+      "name": "SYSTEM\\KRNL386.EXE",
+      "sha256": "75E931AE000FB7C70CF686DA6F7D3FCB032FDC0E0A4E3187ED68179B85E2CD4A",
+      "original_and_copy_unchanged": true
+    },
+    {
+      "name": "SYSTEM\\USER.EXE",
+      "sha256": "98036967F8396B387DA431699A9D3BE95EB56FCD0118F529E1FC2F25105EFAC6",
+      "original_and_copy_unchanged": true
+    },
+    {
+      "name": "SYSTEM\\GDI.EXE",
+      "sha256": "6D28146961AB4733E167B1657289206CE16A856E431F843E4EE3D504836DFB6F",
+      "original_and_copy_unchanged": true
+    },
+    {
+      "name": "SYSTEM\\V7VGA.DRV",
+      "sha256": "83032A1386558FF6B4869876ECB7F13824805A6AD987B3E2F10CE49A7CE95A8C",
+      "original_and_copy_unchanged": true
+    },
+    {
+      "name": "SYSTEM\\MOUSE.DRV",
+      "sha256": "F4A4C4F742161AAF7E83441C5440ACEA7C20B73BA6B4EEC0EFF1D5A8F214A36E",
+      "original_and_copy_unchanged": true
+    }
+  ],
+  "matrix_log": "build/t473-s13/batch188-win31-runner.log"
+}

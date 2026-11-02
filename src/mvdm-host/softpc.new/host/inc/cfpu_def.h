@@ -23,10 +23,9 @@ IU32	mant:23;
 IU32	exp:8;
 IU32	sign:1;
 #else
-IU32	sign:1;
-IU32	exp:8;
-IU32	mant:23;
+#error Unsupported excluded original configuration
 #endif
+#line 30
 } FP32;
 
 typedef struct {
@@ -35,10 +34,9 @@ IU32	mant_hi:20;
 IU32	exp:11;
 IU32	sign:1;
 #else
-IU32 	sign:1;
-IU32	exp:11;
-IU32	mant_hi:20;
+#error Unsupported excluded original configuration
 #endif
+#line 42
 } FP64HI;
 
 typedef struct {
@@ -46,9 +44,9 @@ typedef struct {
 IU16	exp:15;
 IU16	sign:1;
 #else
-IU16	sign:1;
-IU16	exp:15;
+#error Unsupported excluded original configuration
 #endif
+#line 52
 } FP80SE;
 
 //#ifdef BIGEND
@@ -58,9 +56,9 @@ typedef struct {
 IU32	mant_lo;
 FP64HI	hiword;
 #else
-FP64HI	hiword;
-IU32	mant_lo;
+#error Unsupported excluded original configuration
 #endif
+#line 64
 } FP64;
 
 
@@ -70,9 +68,9 @@ typedef struct {
 IU32 low_word;
 IS32 high_word;
 #else
-IS32 high_word;
-IU32 low_word;
+#error Unsupported excluded original configuration
 #endif
+#line 76
 } FPU_I64;
 
 /*
@@ -86,9 +84,9 @@ typedef struct {
 IU32	mant_lo;
 IU32	mant_hi;
 #else
-IU32	mant_hi;
-IU32	mant_lo;
+#error Unsupported excluded original configuration
 #endif
+#line 92
 FP80SE	sign_exp;
 } FP80;
 
@@ -194,19 +192,9 @@ FP80SE	sign_exp;
 #define INV_CUBRTHUGE  1.7718548704178434e-103
 
 #else	/* !NTVDM */
-
-#define HostGetOverflowException()      (fpgetsticky() & FP_X_OFL)
-#define HostGetUnderflowException()     (fpgetsticky() & FP_X_UFL)
-#define HostGetPrecisionException()     (fpgetsticky() & FP_X_IMP)
-
-#define HostClearExceptions()           ((VOID)fpsetsticky(FP_X_CLEAR))
-
-#define HostSetRoundToNearest()         ((VOID)fpsetround(FP_RN))
-#define HostSetRoundDown()              ((VOID)fpsetround(FP_RM))
-#define HostSetRoundUp()                ((VOID)fpsetround(FP_RP))
-#define HostSetRoundToZero()            ((VOID)fpsetround(FP_RZ))
-
+#error Unsupported excluded original configuration
 #endif	/* !NTVDM */
+#line 210
 
 #ifndef _Fpu_c_h
 

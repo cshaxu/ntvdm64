@@ -1,0 +1,16 @@
+{
+  "scope": "scratch first-depth selected logical-line boundaries, standalone NTVDM flag review separate",
+  "records": [
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "arm": 72,
+      "cut": 1358,
+      "end": 1358,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 1359,
+      "source_sha256": "2d28a402941948bfcf61c366fcfc74b9c6c27ef02b14d2df7719d302bc2e2477",
+      "error": ""
+    }
+  ]
+}

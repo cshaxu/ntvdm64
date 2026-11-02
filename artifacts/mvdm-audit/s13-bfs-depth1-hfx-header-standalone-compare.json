@@ -1,0 +1,85 @@
+{
+  "scope": "scratch-only independent fixture preprocessing, same existing failures not treated as passes",
+  "records": [
+    {
+      "contract": "qevnt",
+      "before_exit": 0,
+      "after_exit": 0,
+      "equal_output": true,
+      "before_sha256": "74224efc693d90d5181e8fba39f98da4c7110dacee07cfc717291985d5b3e3bb",
+      "after_sha256": "74224efc693d90d5181e8fba39f98da4c7110dacee07cfc717291985d5b3e3bb",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "contract": "ios",
+      "before_exit": 0,
+      "after_exit": 0,
+      "equal_output": true,
+      "before_sha256": "480066cf103424879e0748a900e4dc32c0a665d3381a3793d9d1ccf660e6c584",
+      "after_sha256": "480066cf103424879e0748a900e4dc32c0a665d3381a3793d9d1ccf660e6c584",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "contract": "gfi",
+      "before_exit": 2,
+      "after_exit": 2,
+      "equal_output": true,
+      "before_sha256": "09399059df5b468a4be3d437b0a5cd98e11a5ae603f3ea0dc8aca9dad6e9ffe9",
+      "after_sha256": "09399059df5b468a4be3d437b0a5cd98e11a5ae603f3ea0dc8aca9dad6e9ffe9",
+      "error_before": "ding file:   O:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\inc\\..\\..\\host\\inc\\error.h\r\nO:\\repos.hobby\\ntvdm64\\src\\mvdm-host\\softpc.new\\base\\inc\\..\\..\\host\\inc\\error.h(311): fatal error C1189: #error:  DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.\r\n",
+      "error_after": ".new\\base\\inc\\..\\..\\host\\inc\\error.h\r\nO:\\repos.hobby\\ntvdm64\\build\\t473-s13\\bfs-depth1-inactive-header-probes\\shadow\\src\\mvdm-host\\softpc.new\\base\\inc\\..\\..\\host\\inc\\error.h(311): fatal error C1189: #error:  DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.\r\n"
+    },
+    {
+      "contract": "keycode",
+      "before_exit": 0,
+      "after_exit": 0,
+      "equal_output": true,
+      "before_sha256": "8be9a2ad36a65ce66fb224fcaee23765d29898c53f94e9c1d67605f0a95c45fe",
+      "after_sha256": "8be9a2ad36a65ce66fb224fcaee23765d29898c53f94e9c1d67605f0a95c45fe",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "contract": "nls",
+      "before_exit": 0,
+      "after_exit": 0,
+      "equal_output": true,
+      "before_sha256": "c2378019b55c355658d49040ce22852ec0c1295141bbecb9dafc0c1b5b5446b6",
+      "after_sha256": "c2378019b55c355658d49040ce22852ec0c1295141bbecb9dafc0c1b5b5446b6",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "contract": "umb",
+      "before_exit": 0,
+      "after_exit": 0,
+      "equal_output": true,
+      "before_sha256": "4a510312745db3d7f33f4db7fafd0da058b351abbe75c371e0489f89223d19c9",
+      "after_sha256": "4a510312745db3d7f33f4db7fafd0da058b351abbe75c371e0489f89223d19c9",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "contract": "vdd",
+      "before_exit": 0,
+      "after_exit": 0,
+      "equal_output": true,
+      "before_sha256": "ced8ffdcddefecd2ca5b98792ef3a4a55bb141d7d3f8582ff85c8d633651e452",
+      "after_sha256": "ced8ffdcddefecd2ca5b98792ef3a4a55bb141d7d3f8582ff85c8d633651e452",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "contract": "niddb",
+      "before_exit": 0,
+      "after_exit": 0,
+      "equal_output": true,
+      "before_sha256": "d866017b1052ea0acd9ef63e7697c2a1b7355b7a8130b35a3a0b8d45796a34d3",
+      "after_sha256": "d866017b1052ea0acd9ef63e7697c2a1b7355b7a8130b35a3a0b8d45796a34d3",
+      "error_before": "",
+      "error_after": ""
+    }
+  ]
+}

@@ -1,5 +1,21 @@
 # non-mvdm original OpenNT sources
 
+OPENNT-HOST-148: reject audited first-depth RTL/client alternatives while
+retaining the original selector and selected-path logical lines. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-finalists-batch.json` and
+`../../artifacts/mvdm-audit/s13-bfs-depth1-devl-batch.json`; the kernel-runtime
+RTL arm is in `../../artifacts/mvdm-audit/s13-bfs-depth1-rtl-batch.json`;
+the standalone time-unit alternative is in `../../artifacts/mvdm-audit/s13-bfs-depth1-rtl-time-batch.json`,
+packstr copy-only alternatives are in `../../artifacts/mvdm-audit/s13-bfs-depth1-packstr-batch.json`,
+dialog-owner alternatives are in `../../artifacts/mvdm-audit/s13-bfs-depth1-dialog-profile-batch.json`,
+and the BaseSrv profile arm is in `../../artifacts/mvdm-audit/s13-bfs-depth1-basesrv-header-batch.json`.
+
+OPENNT-HOST-149: reject both non-WIN32 alternatives of the original
+`memalloc.c` conditional group, preserving its WIN32 arm and one group-end
+logical-line control. Evidence:
+`../../artifacts/mvdm-audit/s13-bfs-depth1-memalloc-batch.json`; two other
+non-WIN32 groups are in `../../artifacts/mvdm-audit/s13-bfs-depth1-memalloc-extra-batch.json`.
+
 OPENNT-HOST-147: restore the original `clmsg.c` first-depth `DEBUG` selector
 and reject its unsupported body. Preserve the existing selected client slice
 and its logical line mapping. Evidence:

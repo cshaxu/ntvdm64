@@ -1,0 +1,78 @@
+{
+  "scope": "scratch-only all current x86 graph contexts for 4 NTVDM alternatives",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/bios/tape_io.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "ad9b105b2862301f2170130e89f78136f6576af963ec2270f40220019ba6e676",
+      "after_sha256": "ad9b105b2862301f2170130e89f78136f6576af963ec2270f40220019ba6e676",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/keymouse/keyba.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "ec12da67cd874a71dc2c3ea1c865aaf58da2937f81556d92dc622736e39833f7",
+      "after_sha256": "c1e92e2ed5f5c691738dbb72f4fd92539387c6f429a63730252a549354a60530",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "output": "obj/system/at_dma.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "a523827f7fea7c55219f7675fad4a1778e1053710884f3e0cd7ec7f99b87e17e",
+      "after_sha256": "ab18de501c57a0e4152bf7275abdb55213d7870128eadf08a44ce1e575c91eae",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/bios/tape_io.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "ad9b105b2862301f2170130e89f78136f6576af963ec2270f40220019ba6e676",
+      "after_sha256": "ad9b105b2862301f2170130e89f78136f6576af963ec2270f40220019ba6e676",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/keymouse/keyba.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "ec12da67cd874a71dc2c3ea1c865aaf58da2937f81556d92dc622736e39833f7",
+      "after_sha256": "c1e92e2ed5f5c691738dbb72f4fd92539387c6f429a63730252a549354a60530",
+      "error_before": "",
+      "error_after": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "output": "obj/system/at_dma.obj",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal_ignoring_blank_lines": true,
+      "before_sha256": "a523827f7fea7c55219f7675fad4a1778e1053710884f3e0cd7ec7f99b87e17e",
+      "after_sha256": "ab18de501c57a0e4152bf7275abdb55213d7870128eadf08a44ce1e575c91eae",
+      "error_before": "",
+      "error_after": ""
+    }
+  ],
+  "failures": []
+}

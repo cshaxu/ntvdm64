@@ -23,8 +23,9 @@
 #if defined( NTVDM ) || defined ( GISP_SVGA ) || defined ( SFELLOW )
 #define PC_IO_MEM_SIZE 	0x10000	/* Must be a power of two! */
 #else
-#define PC_IO_MEM_SIZE 	0x400	/* Must be a power of two! */
+#error Unsupported excluded original configuration
 #endif
+#line 28
 
 #ifdef NTVDM
 typedef struct _extioentry {
@@ -496,9 +497,9 @@ IMPORT void	io_define_out_routines
 IMPORT IBOOL	io_connect_port IPT3(io_addr, io_address, half_word, adapter,
 	half_word, mode);
 #else
-IMPORT void	io_connect_port IPT3(io_addr, io_address, half_word, adapter,
-	half_word, mode);
+#error Unsupported excluded original configuration
 #endif	/* NTVDM */
+#line 500
 
 IMPORT void	io_disconnect_port IPT2(io_addr, io_address, half_word, adapter);
 IMPORT void	io_init IPT0();

@@ -438,10 +438,9 @@ LONG    lLoc;
 DWORD   dwLoc;
 
 #if (FILE_BEGIN != 0 || FILE_CURRENT != 1 || FILE_END !=2)
-    #error "Win32 values not DOS compatible"
-#
-
+#error Unsupported excluded original configuration
 #endif
+#line 445
     hFile =  GETHANDLE (getAX(),getBP());
     lLoc  = (LONG)((((int)getCX()) << 16) + (int)getDX());
 

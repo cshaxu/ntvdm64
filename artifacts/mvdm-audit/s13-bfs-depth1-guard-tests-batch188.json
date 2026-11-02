@@ -1,0 +1,14 @@
+{
+  "records": [
+    {
+      "test": "test_bfs_depth1_cpu_guards",
+      "exit": 0,
+      "output": "PASS six NTVDM root guards, selected lines, and rejected profiles\nPASS timer NTVDM alternative and both logical line controls\nPASS BIOS signon NTVDM guard and logical line control\nPASS five NTVDM time/PIC guards and logical line controls\nPASS five NTVDM alternatives and logical line controls\nPASS WOW DEBUG guards, alternatives and line controls\nPASS SPC486 guards, alternatives and line controls\nPASS CPU40 declaration, line mapping, and unsupported non-CPU40 rejection\nPASS parity-table conjunction, line mapping, and unsupported arm rejection\nPASS profiling conjunction, line mapping, and unsupported arm rejection\nPASS single monitor backfill guard, line mapping, and unsupported arm rejection\nPASS CPU40 memory-size selection, line mapping, and unsupported arm rejection\n"
+    },
+    {
+      "test": "test_mirror_rejected_conditions",
+      "exit": 0,
+      "output": "PASS 235 retained guards: normal selection and rejected profiles (x86)\nPASS DPMI i386 with CPU40 accepted; legacy kernel path rejected\nPASS original ntsend ANSI and Unicode capture selections\nPASS CCPU fixture includes cpu.h without selecting the excluded monitor profile\nPASS original userk MSDWP function selection\nPASS original ntrtl MIDL_PASS inline selection\nPASS CPU40 virtual interrupt state; unsupported hardware-monitor alternative rejected\n"
+    }
+  ]
+}

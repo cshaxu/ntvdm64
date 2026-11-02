@@ -1,0 +1,28 @@
+{
+  "scope": "original WIN32 multi-arm condition scratch guard control",
+  "cases": [
+    {
+      "defines": [
+        "WIN32"
+      ],
+      "exit": 0
+    },
+    {
+      "defines": [],
+      "undefines": [
+        "WIN32"
+      ],
+      "exit": 2
+    },
+    {
+      "defines": [
+        "CDEBUG"
+      ],
+      "undefines": [
+        "WIN32"
+      ],
+      "exit": 2
+    }
+  ],
+  "note": "The synthetic guard validates condition selection only; the two real product context comparisons are separate."
+}

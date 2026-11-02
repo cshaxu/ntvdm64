@@ -1,0 +1,32 @@
+{
+  "scope": "x86 worker, x86 reference and x64 service scratch before/after",
+  "records": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "arch": "x86",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal": true,
+      "before_sha256": "65d966d9e1fa049d1ca096959f2d504f37ae41e7cb2c7721d89a3902f1afa3ae",
+      "after_sha256": "f1365d77f1b04e502d732b1eae94c830347f36a6afe45d5ffa5dddad77591441"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/service",
+      "arch": "x64",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal": true,
+      "before_sha256": "ed75081ae418a506732fb33c409b43318167ae3cf3181ace76e6c2af98e93440",
+      "after_sha256": "145d9b930c82a3efebe1846ab7cfc97cd6447e2238857335d94b4684760913f5"
+    },
+    {
+      "graph": "build/.ninja/msvc-x64-release/worker-reference-x86",
+      "arch": "x86",
+      "before_exit": 0,
+      "after_exit": 0,
+      "selected_equal": true,
+      "before_sha256": "65d966d9e1fa049d1ca096959f2d504f37ae41e7cb2c7721d89a3902f1afa3ae",
+      "after_sha256": "f1365d77f1b04e502d732b1eae94c830347f36a6afe45d5ffa5dddad77591441"
+    }
+  ]
+}

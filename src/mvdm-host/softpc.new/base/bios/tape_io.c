@@ -141,8 +141,9 @@ half_word target_AR;
                 setAH(cmos_u_m_s_hi);
                 setAL(cmos_u_m_s_lo);
 #else
-                setAX ( 0 );
+#error Unsupported excluded original configuration
 #endif /* PM */
+#line 131
 		break;
         case INT15_MOVE_BLOCK:
 #ifdef PM
@@ -197,9 +198,9 @@ half_word target_AR;
 		setZF(1);
 		setIF(1);
 #else
-		setCF(1);
-		setAH(INT15_INVALID);
+#error Unsupported excluded original configuration
 #endif
+#line 188
 		break;
 
         case INT15_VIRTUAL_MODE:
@@ -262,9 +263,9 @@ half_word target_AR;
 		setDS(getES());
 
 #else
-		setCF(1);
-		setAH(INT15_INVALID);
+#error Unsupported excluded original configuration
 #endif	/* PM */
+#line 253
                 break;
 
 	case INT15_INTERRUPT_COMPLETE:

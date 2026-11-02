@@ -234,8 +234,9 @@ unsigned long TX_delay[] =
  */
 
 #if !defined(PROD) || defined(SHORT_TRACE)
-static char buf[80];    /* Buffer for diagnostic prints */
+#error Unsupported excluded original configuration
 #endif /* !PROD || SHORT_TRACE */
+#line 239
 
 #ifdef PS_FLUSHING
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
@@ -819,13 +820,9 @@ void com_outb IFN2(io_addr, port, half_word, value)
 #if defined (DELAYED_INTS) || defined (NTVDM)
 				set_xmit_char_status(asp);
 #else
-					if(tx_pacing_enabled) 
-						add_q_event_t(do_wait_on_send,
-					            TX_delay[asp->com_baud_ind], adapter);
-					else
-						do_wait_on_send(adapter);
-
+#error Unsupported excluded original configuration
 #endif /* DELAYED_INTS || NTVDM */
+#line 857
 #ifdef PS_FLUSHING
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
@@ -1528,29 +1525,9 @@ static word valid_latches[] =
 };
 
 #if !defined(PROD) || defined(IRET_HOOKS)
-static IUM32 bauds[] =
-{
-	115200, /* 115200 baud */
-	57600, /* 57600 baud */
-	38400, /* 38400 baud */
-	19200, /* 19200 baud */
-	9600, /* 9600 baud */
-	7200, /* 7200 baud */
-	4800, /* 4800 baud */
-	3600, /* 3600 baud */
-	2400, /* 2400 baud */
-	2000, /* 2000 baud */
-	1800, /* 1800 baud */
-	1200, /* 1200 baud */
-	600, /* 600 baud */
-	300, /* 300 baud */
-	150, /* 150 baud */
-	134, /* 134 baud */
-	110, /* 110 baud */
-	75, /* 75 baud */
-	50  /* 50 baud */
-};
+#error Unsupported excluded original configuration
 #endif /* !PROD or IRET_HOOKS*/
+#line 1582
 
 static word speeds[] =
 { 
@@ -2137,11 +2114,13 @@ static void com_reset IFN1(int, adapter)
 }
 
 #ifndef COM3_ADAPTOR
-#define COM3_ADAPTOR 0
+#error Unsupported excluded original configuration
 #endif
+#line 2186
 #ifndef COM4_ADAPTOR
-#define COM4_ADAPTOR 0
+#error Unsupported excluded original configuration
 #endif
+#line 2189
 
 static int com_adaptor[4] = {COM1_ADAPTOR,COM2_ADAPTOR,
                              COM3_ADAPTOR,COM4_ADAPTOR};

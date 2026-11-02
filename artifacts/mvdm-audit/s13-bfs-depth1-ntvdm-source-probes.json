@@ -1,0 +1,54 @@
+{
+  "scope": "scratch first-depth selected logical-line boundaries, standalone NTVDM flag review separate",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "arm": 821,
+      "cut": 828,
+      "end": 828,
+      "old_line": 821,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 858,
+      "source_sha256": "acc65a6964f568db5be301692c33897bc8a8dfc24e95400da9d86f41ff977b00",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "arm": 535,
+      "cut": 559,
+      "end": 559,
+      "old_line": 535,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 561,
+      "source_sha256": "ad0937be56412b02cfe2822af99994e50c3364e7b7c51189b5097a756d874aaa",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "arm": 1207,
+      "cut": 1210,
+      "end": 1210,
+      "old_line": 1208,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 1236,
+      "source_sha256": "3ba218ef19a49d04f5ad28a0146342a7228cb304a464125bb8d7c2a780dc2331",
+      "error": ""
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "arm": 645,
+      "cut": 647,
+      "end": 647,
+      "old_line": 645,
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "exit": 0,
+      "end_logical": 648,
+      "source_sha256": "4d06d007979fa0c85b3083b00f4a67086b39dbbff21d4a5cd5bbbb817919eb38",
+      "error": ""
+    }
+  ],
+  "line_marker_correction": "The original marker had two physical lines; logical_next_line/end_logical is one greater than the source logical next line. Applied source directives were corrected and checked by s13-bfs-depth1-single-line-controls.json."
+}
