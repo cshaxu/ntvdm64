@@ -20,7 +20,8 @@
           "selected_preprocessing_equal_ignoring_blank_lines": true,
           "sha256": "db727f628b2dcdec002a83b814f0133dc6fa7f2471ea5edbcadb2b38d7cd5798"
         }
-      ]
+      ],
+      "final_sha256": "dad2719a6fe379b5629b1c6d7fbb475e5f22bd5816fbd3b2ee6d75898faee00c"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
@@ -41,7 +42,9 @@
           "selected_preprocessing_equal_ignoring_blank_lines": true,
           "sha256": "67a244cb0707f1ebeaf893acf1807b44ebadf0965455f8cd939ba22ca3b2acae"
         }
-      ]
+      ],
+      "final_sha256": "e5e2c712cfd7307481be688a894065e0b3dfc03e28f946bb374689a9fdf1c7bc",
+      "final_difference_from_preprocessing_candidate": "Only the text of the excluded #error was aligned with the existing guard-test convention; selected preprocessing is unaffected."
     }
   ],
   "line_controls": [
