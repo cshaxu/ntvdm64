@@ -78,9 +78,14 @@
       "file": "src/mvdm-host/softpc.new/host/src/config.c",
       "original_condition": "#ifdef i386",
       "evidence": "s13-bfs-depth1-config-i386-outer.json"
+    },
+    {
+      "file": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "original_condition": "#ifdef FE_IME (original global, line 53)",
+      "evidence": "s13-bfs-depth1-server-fe-ime.json"
     }
   ],
-  "derived_total": 56,
-  "derived_current_bfs_total": 23,
+  "derived_total": 57,
+  "derived_current_bfs_total": 24,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

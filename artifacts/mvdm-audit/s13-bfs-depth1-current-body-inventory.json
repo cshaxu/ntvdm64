@@ -65121,15 +65121,15 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
       "start": 3,
-      "cut": 406,
-      "group_end": 406,
+      "cut": 411,
+      "group_end": 411,
       "kind": "if",
       "expression": "defined(WOW_ORIGINAL_DEFAULT_MESSAGES)",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
-      "body_lines": 402,
-      "source_sha256": "56a86be8d684bf829ca3171137ca457fa7369f3fb7f7971d4a97659e7113c5ae"
+      "body_lines": 407,
+      "source_sha256": "8c1494a3f4990097bd184ba58fe18f65f6814b6110df709d3dcce984b742bd4a"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/userk.h",

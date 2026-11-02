@@ -1,0 +1,16 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+  "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+  "before_sha256": "56a86be8d684bf829ca3171137ca457fa7369f3fb7f7971d4a97659e7113c5ae",
+  "after_sha256": "8c1494a3f4990097bd184ba58fe18f65f6814b6110df709d3dcce984b742bd4a",
+  "original_guard_line": 53,
+  "current_guard_line": 8,
+  "first_retained_original_line": 191,
+  "parent_line": 3,
+  "scope": "one original first-depth FE_IME guard restored within the project-added WOW source-owner selector",
+  "original_structure": "The pinned global conditional at original line 53 precedes the first retained original Button message table at line 191; that order and both logical anchors are restored. The original global body is excluded, not implemented.",
+  "selection_proof": "One actual WOW32 production object selects WOW_ORIGINAL_DEFAULT_MESSAGES; no FE_IME definition was found in its current source/build/test scope. The restored guard is inside that owner selector, avoiding a new global rejection in unrelated source-owner configurations.",
+  "validation": "WOW32 object and DLL rebuild, x86/x64 selected and forced FE_IME rejection with original line check, both cached product builds and negative guard suites pass.",
+  "package": "s13-bfs-depth1-server-fe-ime-package-compare.json: seven exact and three PE timestamp-only; Full-tested published package retained.",
+  "limits": "This proves this original depth-one guard and named profile only. Nine original first-depth missing-boundary records remain; not a complete original-structure audit."
+}

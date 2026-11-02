@@ -99,18 +99,6 @@
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
-      "original_line": 53,
-      "directive": "ifdef",
-      "expression": "FE_IME",
-      "classification": "unresolved",
-      "original_owners": [],
-      "exact_current_nested": [],
-      "current_anchors": [],
-      "boundary_review": "Original FE_IME guarded global occurs in an entirely omitted global declaration block before the retained message-table subset; no corresponding current owner has been established.",
-      "disposition": "pending; no unconditional restoration or rejection"
-    },
-    {
-      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
       "original_line": 1257,
       "directive": "ifndef",
       "expression": "PAGE_SIZE",

@@ -1847,3 +1847,8 @@ OPENNT-HOST-156: replace the original OpenNT 4.5 dlcio.h MAX_PATH fallback
 with an exclusion marker. Selected Redirector consumers include Windows headers
 first; the supported profile therefore obtains MAX_PATH from the SDK. Original
 selector and diagnostic lines remain. Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-dlcio-max-path.json.
+
+OPENNT-HOST-157: restore the original FE_IME global condition in the retained
+server.c message-table owner, replacing its unsupported body with #error.
+The first retained Button table is anchored to original line 191; selected
+WOW32 behavior is unchanged. Evidence: ../../artifacts/mvdm-audit/s13-bfs-depth1-server-fe-ime.json.

@@ -11,12 +11,12 @@
     "retained-original-assertion": 9
   },
   "depth2_parent_status_counts": {
-    "retained-observed": 1410,
+    "retained-observed": 1411,
     "pending": 80,
     "unselected-file": 1551
   },
-  "restored_original_groups_relative_to_fixed_head": 56,
-  "restored_in_current_bfs_pass": 23,
+  "restored_original_groups_relative_to_fixed_head": 57,
+  "restored_in_current_bfs_pass": 24,
   "restoration_count_evidence": "s13-bfs-depth1-restoration-count.json",
   "original_missing_structures": "separate s13-bfs-depth1-original-unresolved-boundaries.json; not claimed complete"
 }

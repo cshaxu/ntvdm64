@@ -4,6 +4,11 @@
 #include "wow_default_message_bindings.h"
 #define SharedAlloc(bytes) HeapAlloc(GetProcessHeap(), HEAP_GENERATE_EXCEPTIONS, (bytes))
 
+#line 53
+#ifdef FE_IME
+#error Excluded unsupported FE_IME server global
+#endif
+#line 190
 /* DIVERGENCE(OPENNT-HOST-117): unchanged original Button dispatch membership. */
 CONST WORD gawButtonWndProc[] = {
     WM_NCHITTEST,
