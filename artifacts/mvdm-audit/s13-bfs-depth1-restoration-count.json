@@ -193,9 +193,14 @@
       "file": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
       "original_condition": "#ifndef NTVDM (original line 5351)",
       "evidence": "s13-bfs-depth1-mouse-original-outers.json"
+    },
+    {
+      "file": "src/non-mvdm/base/ntos/rtl/time.c",
+      "original_condition": "#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME) (original line 50)",
+      "evidence": "s13-bfs-depth1-rtl-time-original-outer.json"
     }
   ],
-  "derived_total": 79,
-  "derived_current_bfs_total": 46,
+  "derived_total": 80,
+  "derived_current_bfs_total": 47,
   "limitation": "derived from recorded checkpoint and subsequent restoration; complete original-boundary reconciliation remains open"
 }

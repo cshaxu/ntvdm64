@@ -2,26 +2,6 @@
   "scope": "all unresolved first-depth baseline multiplicity candidates; nested positions are structural only, not audited",
   "records": [
     {
-      "path": "src/non-mvdm/base/ntos/rtl/time.c",
-      "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\time.c",
-      "original_sha256": "ac422e072432aff83c17b03c2127a80d067e801170eba9216ab86d2520767d40",
-      "directive": "if",
-      "expression": "defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)",
-      "unpaired_count": 1,
-      "all_original_first_depth_lines": [
-        50
-      ],
-      "all_current_first_depth_lines": [],
-      "current_nested_structural_locations_only": [
-        {
-          "line": 74,
-          "depth": 2
-        }
-      ],
-      "disposition": "pending-boundary-proof",
-      "reason": "unreviewed; multiplicity mismatch only"
-    },
-    {
       "path": "src/non-mvdm/base/win32/client/vdm.c",
       "original": "O:\\repos.external\\OpenNT\\base\\win32\\client\\vdm.c",
       "original_sha256": "3f03d0dbb08e0163f2d9cf415daad0981e42e1b1855f6f48a3b59022b7374173",

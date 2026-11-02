@@ -59582,29 +59582,42 @@
     },
     {
       "path": "src/non-mvdm/base/ntos/rtl/time.c",
-      "start": 56,
-      "cut": 72,
-      "group_end": 74,
+      "start": 61,
+      "cut": 77,
+      "group_end": 79,
       "kind": "if",
       "expression": "defined(MVDM_STANDALONE_TIME1970_ONLY)",
       "status": "retained-observed",
       "pending_reason": null,
       "guard_only": false,
       "body_lines": 15,
-      "source_sha256": "78232b8a636f4d7408a8010bee72df2365cddb9e00d026329b4e377a1cf3d927"
+      "source_sha256": "0f2f0270c5343db8f4bd5db9074199e8c27fbea7c45cbb373e69cac1259fa6f3"
     },
     {
       "path": "src/non-mvdm/base/ntos/rtl/time.c",
-      "start": 72,
-      "cut": 74,
-      "group_end": 74,
+      "start": 77,
+      "cut": 79,
+      "group_end": 79,
       "kind": "else",
       "expression": "",
       "status": "newly-excluded",
       "pending_reason": null,
       "guard_only": true,
       "body_lines": 1,
-      "source_sha256": "78232b8a636f4d7408a8010bee72df2365cddb9e00d026329b4e377a1cf3d927"
+      "source_sha256": "0f2f0270c5343db8f4bd5db9074199e8c27fbea7c45cbb373e69cac1259fa6f3"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/time.c",
+      "start": 50,
+      "cut": 52,
+      "group_end": 52,
+      "kind": "if",
+      "expression": "defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)",
+      "status": "newly-excluded",
+      "pending_reason": null,
+      "guard_only": true,
+      "body_lines": 1,
+      "source_sha256": "0f2f0270c5343db8f4bd5db9074199e8c27fbea7c45cbb373e69cac1259fa6f3"
     },
     {
       "path": "src/non-mvdm/base/win32/client/basedll.h",
@@ -65902,7 +65915,7 @@
   "errors": [],
   "status_counts": {
     "unselected-file": 766,
-    "newly-excluded": 663,
+    "newly-excluded": 664,
     "already-excluded": 1699,
     "pending": 58,
     "retained-observed": 1874,

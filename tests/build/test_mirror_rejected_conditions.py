@@ -443,3 +443,18 @@ for text, selector in ((fax, r'#if\s+defined\(_WOWFAX16_\)'),
     if re.search(r'(?m)^' + selector + r'[^\n]*\n\s*#error\b', text):
         raise SystemExit('shared guest-header body was replaced: ' + selector)
 print('PASS original guest source references and shared header guards retained')
+
+# Original kernel-only RTL time pragma condition must stay excluded.
+time_source = (repo / 'src/non-mvdm/base/ntos/rtl/time.c').read_text(encoding='latin1')
+selector = '#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)'
+marker = '#error Excluded unsupported kernel RTL time allocation profile'
+if selector + '\n' + marker not in time_source:
+    raise SystemExit('original RTL time selector not restored')
+probe.write_text(selector + '\n' + marker + '\n#endif\n', encoding='ascii')
+for defs in ([], ['/DALLOC_PRAGMA'], ['/DNTOS_KERNEL_RUNTIME']):
+    if subprocess.run(base[:-1] + defs + base[-1:], capture_output=True).returncode:
+        raise SystemExit('single RTL time selector operand incorrectly rejected')
+rejected = subprocess.run(base[:-1] + ['/DALLOC_PRAGMA', '/DNTOS_KERNEL_RUNTIME'] + base[-1:], capture_output=True, text=True, errors='replace')
+if not rejected.returncode or marker[7:] not in rejected.stdout + rejected.stderr:
+    raise SystemExit('kernel RTL time selector not rejected')
+print('PASS original RTL time selector and both operands')
