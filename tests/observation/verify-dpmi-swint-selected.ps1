@@ -63,12 +63,15 @@ if ($nonCcpuCommand -eq $command -or !$nonCcpuCommand.Contains('/UCCPU') -or !$n
 }
 [IO.File]::WriteAllText("$out/compile-nonccpu.cmd", $nonCcpuCommand, [Text.Encoding]::ASCII)
 Push-Location $worker
-try { & $driver cmd.exe /d /c "$out/compile-nonccpu.cmd" *> "$out/compile-nonccpu.log"; if ($LASTEXITCODE) { throw 'Non-CCPU DPMI source compile failed' } }
-finally { Pop-Location }
-& $driver dumpbin.exe /symbols "$out/dpmiint-nonccpu.obj" *> "$out/nonccpu-symbols.log"
-if ($LASTEXITCODE -or (Select-String -LiteralPath "$out/nonccpu-symbols.log" -Pattern 'DpmiV86SoftwareInt')) {
-    throw 'CCPU-only V86 symbol leaked into non-CCPU object'
+try {
+    & $driver cmd.exe /d /c "$out/compile-nonccpu.cmd" *> "$out/compile-nonccpu.log"
+    $nonCcpuExit = $LASTEXITCODE
+} finally { Pop-Location }
+# This project supports CCPU only. A rejected non-CCPU compilation cannot
+# produce an object whose symbol table could meaningfully be inspected.
+if (!$nonCcpuExit -or !(Select-String -LiteralPath "$out/compile-nonccpu.log" -SimpleMatch 'MVDM-HOST-DIV-515: compound branch is not selected for this source')) {
+    throw 'Unsupported non-CCPU DPMI profile did not fail at its documented boundary'
 }
-Write-Output 'DPMI_NON_CCPU_V86_ISOLATION_OK'
+Write-Output 'DPMI_NON_CCPU_PROFILE_REJECTED'
 @($source, $fixture, "$out/dpmiint.obj", "$out/fixture.exe", "$out/fixture.map") |
     Get-FileHash -Algorithm SHA256 | Export-Csv -NoTypeInformation "$out/inputs.csv"

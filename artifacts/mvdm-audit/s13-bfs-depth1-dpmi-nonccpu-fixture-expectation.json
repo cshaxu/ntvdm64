@@ -1,0 +1,10 @@
+{
+  "scope": "DPMI software-interrupt selected fixture expectation for deliberately unsupported non-CCPU compile",
+  "test_sha256": "bb0fc074e212587c004c7241492042ab366f5e5ea36b3b5d4c29fea1038a02eb",
+  "result": "complete script passed; selected CCPU software interrupt, fault and return checks passed; non-CCPU compile failed specifically at the documented DIV-515 exclusion as required",
+  "output_sha256": "e189420c0917a35f494448891eae65d9f57b6c79706e82080937ec942d390eeb",
+  "negative_log_sha256": "90e8277d3eeeeaebed552b86c4d98bd1d986ffabe78f5d688538311192ef4102",
+  "prior_negative_log_sha256": "277446cefcd8fc7ce75dd4c277795f51b85cd343cd7ae37f773ef4992561b211",
+  "nonccpu_object_exists": false,
+  "boundary": "No non-CCPU object or symbol isolation is claimed. The earlier test result remains a valid record of the old incompatible expectation. Product source and binaries unchanged."
+}
