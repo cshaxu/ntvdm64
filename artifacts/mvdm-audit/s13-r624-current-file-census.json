@@ -6346,8 +6346,8 @@
       "sha256": "c45dbd8c001d13882a357c717a336b923bf4b7a8b22c53b605379b58342e5980",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-witnessed-condition-tree",
+      "additional_evidence": "s13-r676-witnessed-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_com.c",
       "original_candidate_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32"
     },
@@ -6376,8 +6376,8 @@
       "sha256": "641961895f5a9ec88fb2e122dd16006d96687195b06c91df3f91e449cf4211f4",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-witnessed-condition-tree",
+      "additional_evidence": "s13-r676-witnessed-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ega.c",
       "original_candidate_sha256": "ebc58583cec7e257a997185a1ab83f3284dbd1efe6e06c99f680bcce93dca695"
     },
@@ -6636,8 +6636,8 @@
       "sha256": "1209152c9bd74c9c42829f92cc1918c98b3a86643ecc5fa8e98852ae956313e4",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-witnessed-condition-tree",
+      "additional_evidence": "s13-r676-witnessed-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_thred.c",
       "original_candidate_sha256": "776330ea072cfd005ea05968dc676634385d1c9f349bd71ba1667ecd3be68438"
     },

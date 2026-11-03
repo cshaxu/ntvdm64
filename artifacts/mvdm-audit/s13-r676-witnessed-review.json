@@ -1,0 +1,1109 @@
+{
+  "method": "Recursive original/current condition comparison; every retained arm must have a marker observed in at least one of two actual worker compiler contexts. Excluded arms remain error-only and nested original structure is pruned. For each completed file, original and instrumented compilation include traces were compared in order and matched in both graphs.",
+  "limits": "Temporary markers and source location may still affect constructs such as __FILE__ or __LINE__; include resolution was verified. These observations prove selected paths only in the two tested graphs; complete supported-context enumeration remains open.",
+  "finished": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ega.c",
+      "sha256": "641961895f5a9ec88fb2e122dd16006d96687195b06c91df3f91e449cf4211f4",
+      "original_sha256": "ebc58583cec7e257a997185a1ab83f3284dbd1efe6e06c99f680bcce93dca695",
+      "groups": {
+        "excluded": 7,
+        "groups": 7,
+        "retained": 17,
+        "observed_retained_only": 17
+      },
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+        "source_sha256": "641961895f5a9ec88fb2e122dd16006d96687195b06c91df3f91e449cf4211f4",
+        "object": "host/nt_ega",
+        "arms": [
+          {
+            "label": "codex_r676_arm_0000",
+            "line": 43,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          },
+          {
+            "label": "codex_r676_arm_0001",
+            "line": 68,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0002",
+            "line": 130,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0003",
+            "line": 166,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0004",
+            "line": 192,
+            "kind": "ifdef",
+            "expression": "BIGEND",
+            "error_only": true
+          },
+          {
+            "label": "codex_r676_arm_0005",
+            "line": 198,
+            "kind": "ifdef",
+            "expression": "LITTLEND",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0006",
+            "line": 229,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0007",
+            "line": 230,
+            "kind": "ifdef",
+            "expression": "BIGEND",
+            "error_only": true
+          },
+          {
+            "label": "codex_r676_arm_0008",
+            "line": 236,
+            "kind": "ifdef",
+            "expression": "LITTLEND",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0009",
+            "line": 369,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0010",
+            "line": 401,
+            "kind": "ifdef",
+            "expression": "BIGEND",
+            "error_only": true
+          },
+          {
+            "label": "codex_r676_arm_0011",
+            "line": 407,
+            "kind": "ifdef",
+            "expression": "LITTLEND",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0012",
+            "line": 424,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0013",
+            "line": 425,
+            "kind": "ifdef",
+            "expression": "BIGEND",
+            "error_only": true
+          },
+          {
+            "label": "codex_r676_arm_0014",
+            "line": 431,
+            "kind": "ifdef",
+            "expression": "LITTLEND",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0015",
+            "line": 452,
+            "kind": "ifdef",
+            "expression": "BIGEND",
+            "error_only": true
+          },
+          {
+            "label": "codex_r676_arm_0016",
+            "line": 458,
+            "kind": "ifdef",
+            "expression": "LITTLEND",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0017",
+            "line": 681,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0018",
+            "line": 830,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0019",
+            "line": 1086,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0020",
+            "line": 1163,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0021",
+            "line": 1316,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0022",
+            "line": 1440,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0023",
+            "line": 1645,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "34bb18925f85dbf2aa2cdba28c836507fdfffbbf1737bac6ac504c8ffe428a38",
+            "hit": [
+              "codex_r676_arm_0001",
+              "codex_r676_arm_0002",
+              "codex_r676_arm_0003",
+              "codex_r676_arm_0005",
+              "codex_r676_arm_0006",
+              "codex_r676_arm_0008",
+              "codex_r676_arm_0009",
+              "codex_r676_arm_0011",
+              "codex_r676_arm_0012",
+              "codex_r676_arm_0014",
+              "codex_r676_arm_0016",
+              "codex_r676_arm_0017",
+              "codex_r676_arm_0018",
+              "codex_r676_arm_0019",
+              "codex_r676_arm_0020",
+              "codex_r676_arm_0021",
+              "codex_r676_arm_0022"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "34bb18925f85dbf2aa2cdba28c836507fdfffbbf1737bac6ac504c8ffe428a38",
+            "hit": [
+              "codex_r676_arm_0001",
+              "codex_r676_arm_0002",
+              "codex_r676_arm_0003",
+              "codex_r676_arm_0005",
+              "codex_r676_arm_0006",
+              "codex_r676_arm_0008",
+              "codex_r676_arm_0009",
+              "codex_r676_arm_0011",
+              "codex_r676_arm_0012",
+              "codex_r676_arm_0014",
+              "codex_r676_arm_0016",
+              "codex_r676_arm_0017",
+              "codex_r676_arm_0018",
+              "codex_r676_arm_0019",
+              "codex_r676_arm_0020",
+              "codex_r676_arm_0021",
+              "codex_r676_arm_0022"
+            ]
+          }
+        ]
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 46,
+          "current_endif": 46,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 43,
+              "current_line": 43,
+              "disposition": "excluded-error",
+              "selected_in": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 125,
+          "current_endif": 126,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "BIGWIN",
+              "original_line": 67,
+              "current_line": 68,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 133,
+          "current_endif": 134,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "BIGWIN",
+              "original_line": 129,
+              "current_line": 130,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 170,
+          "current_endif": 171,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "BIGWIN",
+              "original_line": 165,
+              "current_line": 166,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 200,
+          "current_endif": 195,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "BIGEND",
+              "original_line": 191,
+              "current_line": 192,
+              "disposition": "excluded-error",
+              "selected_in": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 211,
+          "current_endif": 207,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "LITTLEND",
+              "original_line": 202,
+              "current_line": 198,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 355,
+          "current_endif": 340,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "BIGWIN",
+              "original_line": 233,
+              "current_line": 229,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": [
+                {
+                  "original_endif": 249,
+                  "current_endif": 233,
+                  "arms": [
+                    {
+                      "kind": "ifdef",
+                      "expression": "BIGEND",
+                      "original_line": 234,
+                      "current_line": 230,
+                      "disposition": "excluded-error",
+                      "selected_in": [],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "original_endif": 266,
+                  "current_endif": 251,
+                  "arms": [
+                    {
+                      "kind": "ifdef",
+                      "expression": "LITTLEND",
+                      "original_line": 251,
+                      "current_line": 236,
+                      "disposition": "retained",
+                      "selected_in": [
+                        "msvc-x86-release",
+                        "msvc-x64-release"
+                      ],
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "original_endif": 396,
+          "current_endif": 381,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "BIGWIN",
+              "original_line": 384,
+              "current_line": 369,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 421,
+          "current_endif": 404,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "BIGEND",
+              "original_line": 416,
+              "current_line": 401,
+              "disposition": "excluded-error",
+              "selected_in": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 428,
+          "current_endif": 412,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "LITTLEND",
+              "original_line": 423,
+              "current_line": 407,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 508,
+          "current_endif": 487,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "BIGWIN",
+              "original_line": 440,
+              "current_line": 424,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": [
+                {
+                  "original_endif": 447,
+                  "current_endif": 428,
+                  "arms": [
+                    {
+                      "kind": "ifdef",
+                      "expression": "BIGEND",
+                      "original_line": 441,
+                      "current_line": 425,
+                      "disposition": "excluded-error",
+                      "selected_in": [],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "original_endif": 455,
+                  "current_endif": 437,
+                  "arms": [
+                    {
+                      "kind": "ifdef",
+                      "expression": "LITTLEND",
+                      "original_line": 449,
+                      "current_line": 431,
+                      "disposition": "retained",
+                      "selected_in": [
+                        "msvc-x86-release",
+                        "msvc-x64-release"
+                      ],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "original_endif": 477,
+                  "current_endif": 455,
+                  "arms": [
+                    {
+                      "kind": "ifdef",
+                      "expression": "BIGEND",
+                      "original_line": 470,
+                      "current_line": 452,
+                      "disposition": "excluded-error",
+                      "selected_in": [],
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "original_endif": 486,
+                  "current_endif": 465,
+                  "arms": [
+                    {
+                      "kind": "ifdef",
+                      "expression": "LITTLEND",
+                      "original_line": 479,
+                      "current_line": 458,
+                      "disposition": "retained",
+                      "selected_in": [
+                        "msvc-x86-release",
+                        "msvc-x64-release"
+                      ],
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "original_endif": 841,
+          "current_endif": 820,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "BIGWIN",
+              "original_line": 702,
+              "current_line": 681,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1017,
+          "current_endif": 996,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "BIGWIN",
+              "original_line": 851,
+              "current_line": 830,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1174,
+          "current_endif": 1153,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "BIGWIN",
+              "original_line": 1107,
+              "current_line": 1086,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1251,
+          "current_endif": 1230,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "BIGWIN",
+              "original_line": 1184,
+              "current_line": 1163,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1451,
+          "current_endif": 1430,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "BIGWIN",
+              "original_line": 1337,
+              "current_line": 1316,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1530,
+          "current_endif": 1509,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "BIGWIN",
+              "original_line": 1461,
+              "current_line": 1440,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 2144,
+          "current_endif": 1648,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 1666,
+              "current_line": 1645,
+              "disposition": "excluded-error",
+              "selected_in": [],
+              "children": []
+            }
+          ]
+        }
+      ],
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 182,
+          "identical": true,
+          "include_trace_sha256": "629cda781375e64314246d883b786eebcc1fbf6d3e3b4a60021d1c6d0db26367"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 182,
+          "identical": true,
+          "include_trace_sha256": "629cda781375e64314246d883b786eebcc1fbf6d3e3b4a60021d1c6d0db26367"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_com.c",
+      "sha256": "c45dbd8c001d13882a357c717a336b923bf4b7a8b22c53b605379b58342e5980",
+      "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32",
+      "groups": {
+        "excluded": 9,
+        "groups": 9,
+        "retained": 1,
+        "observed_retained_only": 1
+      },
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+        "source_sha256": "c45dbd8c001d13882a357c717a336b923bf4b7a8b22c53b605379b58342e5980",
+        "object": "host/nt_com",
+        "arms": [
+          {
+            "label": "codex_r676_arm_0000",
+            "line": 57,
+            "kind": "if",
+            "expression": "0",
+            "error_only": true
+          },
+          {
+            "label": "codex_r676_arm_0001",
+            "line": 297,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0002",
+            "line": 392,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          },
+          {
+            "label": "codex_r676_arm_0003",
+            "line": 718,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          },
+          {
+            "label": "codex_r676_arm_0004",
+            "line": 753,
+            "kind": "ifdef",
+            "expression": "FIFO_ON",
+            "error_only": true
+          },
+          {
+            "label": "codex_r676_arm_0005",
+            "line": 950,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r676_arm_0006",
+            "line": 1730,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r676_arm_0007",
+            "line": 1755,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r676_arm_0008",
+            "line": 1778,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r676_arm_0009",
+            "line": 2160,
+            "kind": "if",
+            "expression": "0",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "43c07347d3ef71611f9fed45fbb85a01d9eb1525a099e758fb2117f13d1bddd8",
+            "hit": [
+              "codex_r676_arm_0001"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "43c07347d3ef71611f9fed45fbb85a01d9eb1525a099e758fb2117f13d1bddd8",
+            "hit": [
+              "codex_r676_arm_0001"
+            ]
+          }
+        ]
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 59,
+          "current_endif": 60,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "0",
+              "original_line": 56,
+              "current_line": 57,
+              "disposition": "excluded-error",
+              "selected_in": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 302,
+          "current_endif": 304,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "NTVDM",
+              "original_line": 295,
+              "current_line": 297,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 390,
+          "current_endif": 395,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 388,
+              "current_line": 392,
+              "disposition": "excluded-error",
+              "selected_in": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 714,
+          "current_endif": 721,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 712,
+              "current_line": 718,
+              "disposition": "excluded-error",
+              "selected_in": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 777,
+          "current_endif": 756,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "FIFO_ON",
+              "original_line": 743,
+              "current_line": 753,
+              "disposition": "excluded-error",
+              "selected_in": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 973,
+          "current_endif": 953,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 970,
+              "current_line": 950,
+              "disposition": "excluded-error",
+              "selected_in": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1747,
+          "current_endif": 1733,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 1745,
+              "current_line": 1730,
+              "disposition": "excluded-error",
+              "selected_in": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1771,
+          "current_endif": 1758,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 1768,
+              "current_line": 1755,
+              "disposition": "excluded-error",
+              "selected_in": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1793,
+          "current_endif": 1781,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 1790,
+              "current_line": 1778,
+              "disposition": "excluded-error",
+              "selected_in": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 2206,
+          "current_endif": 2163,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "0",
+              "original_line": 2171,
+              "current_line": 2160,
+              "disposition": "excluded-error",
+              "selected_in": [],
+              "children": []
+            }
+          ]
+        }
+      ],
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 191,
+          "identical": true,
+          "include_trace_sha256": "0f34ef0cf3c1f919c6cd9410c1b1e29e47fa20bc0f93bdd3932e90d2e41d3e62"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 191,
+          "identical": true,
+          "include_trace_sha256": "0f34ef0cf3c1f919c6cd9410c1b1e29e47fa20bc0f93bdd3932e90d2e41d3e62"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_thred.c",
+      "sha256": "1209152c9bd74c9c42829f92cc1918c98b3a86643ecc5fa8e98852ae956313e4",
+      "original_sha256": "776330ea072cfd005ea05968dc676634385d1c9f349bd71ba1667ecd3be68438",
+      "groups": {
+        "retained": 2,
+        "observed_retained_only": 2,
+        "excluded": 2,
+        "groups": 2
+      },
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+        "source_sha256": "1209152c9bd74c9c42829f92cc1918c98b3a86643ecc5fa8e98852ae956313e4",
+        "object": "host/nt_thred",
+        "arms": [
+          {
+            "label": "codex_r676_arm_0000",
+            "line": 100,
+            "kind": "if",
+            "expression": "defined(CCPU) || defined(PIG)",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0001",
+            "line": 104,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          },
+          {
+            "label": "codex_r676_arm_0002",
+            "line": 162,
+            "kind": "if",
+            "expression": "defined(CCPU) || defined(PIG)",
+            "error_only": false
+          },
+          {
+            "label": "codex_r676_arm_0003",
+            "line": 166,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "6c64c7b8319dff7062f645d0845afb8dd01a943c53cd7e69098d15b61ce36d73",
+            "hit": [
+              "codex_r676_arm_0000",
+              "codex_r676_arm_0002"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "6c64c7b8319dff7062f645d0845afb8dd01a943c53cd7e69098d15b61ce36d73",
+            "hit": [
+              "codex_r676_arm_0000",
+              "codex_r676_arm_0002"
+            ]
+          }
+        ]
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 96,
+          "current_endif": 102,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(CCPU) || defined(PIG)",
+              "original_line": 94,
+              "current_line": 100,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 100,
+          "current_endif": 107,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 98,
+              "current_line": 104,
+              "disposition": "excluded-error",
+              "selected_in": [],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 156,
+          "current_endif": 164,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(CCPU) || defined(PIG)",
+              "original_line": 154,
+              "current_line": 162,
+              "disposition": "retained",
+              "selected_in": [
+                "msvc-x86-release",
+                "msvc-x64-release"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 160,
+          "current_endif": 169,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 158,
+              "current_line": 166,
+              "disposition": "excluded-error",
+              "selected_in": [],
+              "children": []
+            }
+          ]
+        }
+      ],
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 158,
+          "identical": true,
+          "include_trace_sha256": "858f3775784e9d8ac304974fb2e52e780be29dbb34cabc500a5d2f3fa0925167"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 158,
+          "identical": true,
+          "include_trace_sha256": "858f3775784e9d8ac304974fb2e52e780be29dbb34cabc500a5d2f3fa0925167"
+        }
+      ]
+    }
+  ],
+  "held": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "reason": "excluded error line missing"
+    }
+  ]
+}
