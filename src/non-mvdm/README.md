@@ -2424,3 +2424,7 @@ Evidence: ../../artifacts/mvdm-audit/s13-r662-guard-line-audit.json.
 OPENNT-HOST-240: restore original diagnostic line mappings for existing
 literal-disabled EDIT arms in two sources. Other conditions remain under
 review. Evidence: ../../artifacts/mvdm-audit/s13-r665-guard-line-audit.json.
+
+OPENNT-HOST-241: restore original diagnostic line mappings for existing
+excluded DEVL arms in BaseSrv. Other conditions remain under review. Evidence:
+../../artifacts/mvdm-audit/s13-r666-guard-line-audit.json.

@@ -47,12 +47,13 @@ static word divisors[] = { 1047,768, 384, 192, 96, 48, 24, 12, 6 };
 
 /* workaround for IP32 and Tek43xx compiler bug follows: */
 #if  defined(IP32) || defined(TK43) || defined(macintosh)
+#line 50
 #error Unsupported excluded original configuration
 #else
-#line 53
+#line 52
 static io_addr port;
 #endif
-#line 55
+#line 54
 
 static half_word value;
 

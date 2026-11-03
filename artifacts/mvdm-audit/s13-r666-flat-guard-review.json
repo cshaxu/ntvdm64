@@ -1,0 +1,132 @@
+{
+  "scope": "Four product-observed files whose original condition groups are flat and all have existing excluded error-only first arms.",
+  "method": "Compare original selectors, group boundaries, else presence and retained else text. Check physical error, selected and following line mappings; conservatively screen comments and conditional continuations. Reject directive after continued physical line.",
+  "context": "Prior product release builds and 181 retained-guard controls; selector forced on reaches error, so builds using these files cannot silently select these arms.",
+  "limits": "Reviews conditional structure and alternatives, not unrelated adaptations; the complete inventory of all supported contexts remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gendrvr.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gendrvr.h",
+      "sha256": "0b2dc7885e54f445f4950e324f9b51def42b0037d5c72b1c589693ca94683e2e",
+      "original_sha256": "f6750f0da3fab360f5348981440747be5dc612ce81eabec6913557f59b5f0185",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "if",
+          "defined (GEN_DRVR) || defined (CDROM)"
+        ],
+        [
+          "ifdef",
+          "GEN_DRVR"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
+      "sha256": "14a734378272bf6cf08aafe072a427bf63cdde2eb7face818509ad07cfe6adf8",
+      "original_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/fastwow.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\fastwow.h",
+      "sha256": "8a1d959854751dcba6a8b9f624e28d92b41836ded4b406968de34f9a18852608",
+      "original_sha256": "0a59ccbb6b0bf66982352bfefda5c08867ec44dd9ff55731d2b701035d684520",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "if",
+          "defined(i386) && !defined(DEBUG_OR_WOWPROFILE)"
+        ],
+        [
+          "if",
+          "FASTBOPPING"
+        ],
+        [
+          "if",
+          "FASTBOPPING"
+        ],
+        [
+          "if",
+          "0"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/server/srvvdm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\win32\\server\\srvvdm.c",
+      "sha256": "8c6190c43404c7f3a2b2e3b9c668306f63e4cdf7d00629d753ddc142309677d7",
+      "original_sha256": "c1e2177c6c00679d85cfa475f620841f6736b0e56d8dbf790b71afe33e1ed80b",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\service\\build.ninja:source",
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "NOT_NEEDED"
+        ],
+        [
+          "if",
+          "DEVL"
+        ],
+        [
+          "if",
+          "DEVL"
+        ]
+      ]
+    }
+  ]
+}

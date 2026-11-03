@@ -12,6 +12,7 @@
 --*/
 
 #if defined(i386) && !defined(DEBUG_OR_WOWPROFILE)
+#line 15
 #error Unsupported excluded original configuration
 #else
 #line 19
@@ -22,11 +23,13 @@
 #line 23
 
 #if FASTBOPPING
+#line 25
 #error Unsupported excluded original configuration
 #endif
 #line 29
 
 #if FASTBOPPING
+#line 31
 #error Unsupported excluded original configuration
 #endif
 #line 39

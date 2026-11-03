@@ -1744,9 +1744,10 @@ IU16 exp_value;
 		   nothing except set the thing to zero.
 		*/
 #if (HOST_BIAS >= 16383)
+#line 1756
 #error Unsupported excluded original configuration
 #else
-#line 1751
+#line 1770
 		/* It's zero either way */
 		if ((mantissa_hi | mantissa_lo) != 0)  {
 			/* It's a denormal */

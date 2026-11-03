@@ -62,8 +62,10 @@
 #include "debug.h"
 
 #ifndef PROD
+#line 68
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 70
 
 #include "host_gfx.h"
 
@@ -642,8 +644,10 @@ void vga_disp_func()
 	byte temp,mode_reg, video_mode;
 
 #if defined(NTVDM) && defined(X86GFX)
+#line 670
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* NTVDM & X86GFX */
+#line 672
 
 	/* check that we really are a VGA */
 #ifndef HERC 
@@ -675,11 +679,14 @@ void vga_disp_func()
  * x86 it has to live in ntio.sys.
  */
 #if defined(NTVDM) && defined(X86GFX)
+#line 702
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #else
+#line 705
 	sas_storew(buf,INT10_1B_DATA);
 	sas_storew(buf+2,EGA_SEG);
 #endif	/* NTVDM & X86GFX */
+#line 708
 
 	sas_store(buf+0x4, video_mode);	/* Current video mode */
 	sas_storew(buf+5,sas_w_at_no_check(VID_COLS)); /* Cols on screen */

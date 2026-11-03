@@ -2393,7 +2393,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
-      "sha256": "99a550f4a1dda88dfae231da61328485fb29209ee6a4c29534bf35e4bf6733e6",
+      "sha256": "82e5bae3413740ce3172df64a85405ce17cbab54b0cdb607d67596b5d988240d",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -3963,7 +3963,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
-      "sha256": "1d7beeaed8e1e0d8d73b5de48accdc56eee3db576d6722ecbd6abb5ead8b47e8",
+      "sha256": "9e278e687e076626b56a77c97ab1e387a5877e30a154774710de7618d2d04916",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -4913,7 +4913,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/emm.h",
-      "sha256": "9c4945766321568f5fe19edb64fea6cb4f5624fd9f046434e476c92218a0d815",
+      "sha256": "cd639df0139c9e8577c16415c95ca88aea14701a9c47a170c99fbbcedeee9131",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -4993,11 +4993,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/gendrvr.h",
-      "sha256": "029f02de7df34ed10d1d8859ccdad30a51c91d3313a8c078c0a650269f5de8c8",
+      "sha256": "0b2dc7885e54f445f4950e324f9b51def42b0037d5c72b1c589693ca94683e2e",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-flat-excluded-guards",
+      "additional_evidence": "s13-r666-flat-guard-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gendrvr.h",
       "original_candidate_sha256": "f6750f0da3fab360f5348981440747be5dc612ce81eabec6913557f59b5f0185"
     },
@@ -5113,7 +5113,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
-      "sha256": "64fa51a25507dfd50f3d19eeee2544530a4686ea5aee2604689becfdd523a0db",
+      "sha256": "de187a1c80e136c77379bbce1cc9afda8d41e4f72605990ea7c91bdc987be6f1",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -5873,7 +5873,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
-      "sha256": "63e9f965341b048cb806634f1b774d3d5d6d1919b77f54f8275bd3fdb96d5431",
+      "sha256": "ba085c8680f3f30cc36956b5fd9249b9c7539d8f92e245fe50a6b0a8d9f00d19",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6553,11 +6553,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_ntfun.c",
-      "sha256": "07e5929db0ac96e15d3efbcb44416d8b1a2ae210e57ebef2f1443bd34ed993d9",
+      "sha256": "14a734378272bf6cf08aafe072a427bf63cdde2eb7face818509ad07cfe6adf8",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-flat-excluded-guards",
+      "additional_evidence": "s13-r666-flat-guard-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ntfun.c",
       "original_candidate_sha256": "c2beca20761b59db5f8aede5f80e48d15ffd05cc0c81d1e0e5e017041ae01e63"
     },
@@ -6983,11 +6983,11 @@
     },
     {
       "path": "src/mvdm-host/wow32/fastwow.h",
-      "sha256": "f00c21a5d9bb3b0cef2b05a767b12dea1f3f948f78326e39754026838f411d31",
+      "sha256": "8a1d959854751dcba6a8b9f624e28d92b41836ded4b406968de34f9a18852608",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-flat-excluded-guards",
+      "additional_evidence": "s13-r666-flat-guard-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\fastwow.h",
       "original_candidate_sha256": "0a59ccbb6b0bf66982352bfefda5c08867ec44dd9ff55731d2b701035d684520"
     },
@@ -7093,7 +7093,7 @@
     },
     {
       "path": "src/mvdm-host/wow32/wcall16.c",
-      "sha256": "91d466999c9142b537003e5ace68d7cc52932b14d3a66ff8a8408b7f7f165740",
+      "sha256": "b7c6bf2791015c552e1b1ac46fdaedc60bf3fef72c14ebfaf60670a6fb9ff0c0",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -8883,11 +8883,11 @@
     },
     {
       "path": "src/non-mvdm/base/win32/server/srvvdm.c",
-      "sha256": "587b5024747b6c814faa662a7681e2ce395a5a7f10109dd5e7f2236020d53877",
+      "sha256": "8c6190c43404c7f3a2b2e3b9c668306f63e4cdf7d00629d753ddc142309677d7",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-flat-excluded-guards",
+      "additional_evidence": "s13-r666-flat-guard-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\win32\\server\\srvvdm.c",
       "original_candidate_sha256": "c1e2177c6c00679d85cfa475f620841f6736b0e56d8dbf790b71afe33e1ed80b"
     },

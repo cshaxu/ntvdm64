@@ -2627,9 +2627,10 @@ BaseSrvUpdateVDMSequenceNumber (
     if (hVDM == (HANDLE) -1) {
         if (WOWHead == NULL || WOWHead->SequenceNumber != 0) {
 #if DEVL
+#line 2604
 #error Unsupported excluded original configuration
 #endif
-#line 2629
+#line 2606
             return;
         }
         WOWHead->SequenceNumber = VDMSequenceNumber;
@@ -2646,6 +2647,7 @@ BaseSrvUpdateVDMSequenceNumber (
 
         if (!NT_SUCCESS (Status) || pConsoleRecord->SequenceNumber != 0) {
 #if DEVL
+#line 2622
 #error Unsupported excluded original configuration
 #endif
 #line 2624

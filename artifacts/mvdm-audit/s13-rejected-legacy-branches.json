@@ -600,7 +600,7 @@
     "after_sha256": "aa8c5d0bc8ab80ce6e4e86678cc5cb79e257d9ceff8d1efdc8e3da3e05e08ead",
     "final_sha256": "aa8c5d0bc8ab80ce6e4e86678cc5cb79e257d9ceff8d1efdc8e3da3e05e08ead",
     "current_line": 190,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r656-guard-line-audit.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r666-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/inc/rs232.h",
@@ -779,8 +779,8 @@
     "removed_body_lines": 16,
     "after_sha256": "f82268e121ffe4fb3dce1a48e7a00ede04ad41ce22bc4f2ab0c2225718befafb",
     "final_sha256": "4bd683527c85495b8f802b337e45adb87ca1e3cf7be7add9cd698feda8d67a51",
-    "current_line": 319,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r653-platform-guard-lines.json"
+    "current_line": 321,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r666-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
@@ -1111,7 +1111,7 @@
     "after_sha256": "062cd0820acc962588146bec0cfa02d7bd65ee7d831ecb5a341a6651b9ab7476",
     "final_sha256": "fa95f011e8ac1cdd9a90fd7a47b18df8c1bd530b490eacb4391746fb15c8caa7",
     "current_line": 20,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r636-basic-guard-lines.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r666-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
@@ -2207,7 +2207,7 @@
     "after_sha256": "4bd683527c85495b8f802b337e45adb87ca1e3cf7be7add9cd698feda8d67a51",
     "final_sha256": "4bd683527c85495b8f802b337e45adb87ca1e3cf7be7add9cd698feda8d67a51",
     "current_line": 25,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r653-platform-guard-lines.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r666-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/video.c",

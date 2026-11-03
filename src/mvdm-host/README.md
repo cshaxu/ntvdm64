@@ -2739,3 +2739,7 @@ observable value change and complete regression are recorded in
 MVDM-HOST-DIV-746: restore original diagnostic line mappings for existing
 literal-disabled arms in eight sources; other conditions remain under review.
 Evidence: ../../artifacts/mvdm-audit/s13-r665-guard-line-audit.json.
+
+MVDM-HOST-DIV-747: restore original diagnostic line mappings for existing
+excluded compound and profile arms in nine sources. Other conditions remain
+under review. Evidence: ../../artifacts/mvdm-audit/s13-r666-guard-line-audit.json.

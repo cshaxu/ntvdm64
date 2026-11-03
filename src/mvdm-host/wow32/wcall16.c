@@ -91,6 +91,7 @@ HANDLE LocalReAlloc16(HANDLE hMem, INT cb, WORD wFlags)
 }
 
 #ifndef WOWFASTEDIT
+#line 92
 #error Unsupported excluded original configuration
 #else
 #line 126
@@ -176,7 +177,7 @@ UNLOCK2:
 }
 
 #endif  // WOWFASTEDIT
-#line 210
+#line 208
 
 
 WORD LocalSize16(HANDLE hMem)
@@ -555,9 +556,10 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     DWORD callerInit, error;
     wow_callback_control control = {0};
 #if FASTBOPPING
+#line 653
 #error Unsupported excluded original configuration
 #else
-#line 665
+#line 654
     USHORT SaveIp;
 #endif
 #line 656
@@ -659,9 +661,10 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     // Set up to use the right 16-bit stack for this thread
 
 #if FASTBOPPING
+#line 764
 #error Unsupported excluded original configuration
 #else
-#line 795
+#line 766
     SETVDMSTACK(ptd->vpCBStack);
 #endif
 #line 768
@@ -671,9 +674,10 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     //
 
 #if FASTBOPPING
+#line 774
 #error Unsupported excluded original configuration
 #else
-#line 807
+#line 778
     // Time to get the IEU running task-time code again
     SaveIp = getIP();
     /* DIVERGENCE(MVDM-HOST-DIV-304): default-off witness after the original

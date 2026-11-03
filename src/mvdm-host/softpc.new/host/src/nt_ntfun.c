@@ -120,8 +120,10 @@ int RemoveCompletedIOCTLs(void **firstBlock, void **lastBlock)
         nxt = nxt->NxtStatusBlock;  // Next element to process
 
 #ifndef PROD
+#line 123
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 142
 
         free(remove);               // Deallocate element
     }
@@ -175,8 +177,10 @@ int OutputQueueSize)
     {
 	// Should display an error here
 #ifndef PROD
+#line 195
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 198
 	return(FALSE);
     }
 
@@ -188,8 +192,10 @@ int OutputQueueSize)
     /*............................................ Check completion status */
 
 #ifndef PROD
+#line 209
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 212
 
     return(ioStatusBlock.Status == STATUS_SUCCESS ? TRUE : FALSE);
 }
@@ -216,8 +222,10 @@ ULONG  CommMask)
     {
 	// Should display an error here
 #ifndef PROD
+#line 238
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 241
 	return(FALSE);
     }
 
@@ -229,8 +237,10 @@ ULONG  CommMask)
     /*............................................ Check completion status */
 
 #ifndef PROD
+#line 252
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 255
 
     return(ioStatusBlock.Status == STATUS_SUCCESS ? TRUE : FALSE);
 }
@@ -258,8 +268,10 @@ PULONG ModemStatus)
     {
 	// Should display an error here
 #ifndef PROD
+#line 282
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 285
 	return(FALSE);
     }
 
@@ -271,8 +283,10 @@ PULONG ModemStatus)
     /*............................................ Check completion status */
 
 #ifndef PROD
+#line 296
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 299
 
     return(ioStatusBlock.Status == STATUS_SUCCESS ? TRUE : FALSE);
 }
@@ -323,8 +337,10 @@ PULONG SignalledObj)
 	{
 	    // Should display an error here
 #ifndef PROD
+#line 349
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 352
 	    SETUPLASTERROR(rtn);
 	    return(FALSE);
 	}
@@ -393,8 +409,10 @@ unsigned char EscapeChar)
 				&EscapeChar, sizeof(unsigned char),NULL,0)))
     {
 #ifndef PROD
+#line 420
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 423
 	return(FALSE);
     }
 
@@ -407,8 +425,10 @@ unsigned char EscapeChar)
     /*............................................ Check completion status */
 
 #ifndef PROD
+#line 435
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 439
 
     return(ioStatusBlock.Status == STATUS_SUCCESS ? TRUE : FALSE);
 }
