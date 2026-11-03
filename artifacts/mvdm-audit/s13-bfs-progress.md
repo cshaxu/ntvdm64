@@ -4002,3 +4002,10 @@ images are identical and two timestamp-only, so prior Full 17/17 is reused.
 Both release destinations were verified. Existing census: 1077 C/H, including
 157 byte-identical reviewed, 444 differing reviewed and 476 pending. Net
 deleted C/H since S13 admission: 559. Evidence: s13-r628-delivery.md.
+
+- r630 delivers ten unselected utility/video/debug C/H deletions and four
+obsolete build-input removals. Cached builds pass; eight images are identical
+and two timestamp-only, so prior Full 17/17 is reused. Both destinations are
+verified. Five retained host EXE/DLL/COM files match ZIP contents byte-for-byte.
+Existing census: 1067 C/H, 157 identical reviewed, 444 differing reviewed,
+466 pending; net deleted C/H: 569. Evidence: s13-r630-delivery.md.

@@ -2656,3 +2656,8 @@ MVDM-HOST-DIV-728: remove eight unselected legacy alternate C/H files; product
 include paths and generator inputs resolve to separately retained files. The
 test-only j_c_lang.h alternate was removed; its fixture uses the product header
 and passed. Evidence: ../../artifacts/mvdm-audit/s13-r627-unobserved-alternates.json.
+
+MVDM-HOST-DIV-729: remove ten unselected C/H files from historical standalone
+utility, video-stub and empty-debug source paths, with obsolete build inputs.
+The existing utility binary and independent resources remain. Evidence:
+../../artifacts/mvdm-audit/s13-r629-unbuilt-tool-sources.json.

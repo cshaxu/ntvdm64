@@ -1,12 +1,12 @@
 {
   "scope": "All currently present .c and .h files under src/mvdm-host and src/non-mvdm, regardless of compilation or provenance.",
-  "filesystem_total": 1077,
+  "filesystem_total": 1067,
   "by_root": {
-    "mvdm-host": 894,
+    "mvdm-host": 884,
     "non-mvdm": 183
   },
   "observed_graph_inventory": 1057,
-  "not_in_observed_graph_inventory": 20,
+  "not_in_observed_graph_inventory": 10,
   "independently_confirmed_generator_inputs": 1,
   "untracked": 0,
   "limits": "Candidate original path is provisional until provenance is established. The 1057 graph inventory is an observation and may be incomplete or stale. Neither non-observation nor pathname alone proves a file is unused. Deleted files are separate.",
@@ -3992,16 +3992,6 @@
       "original_candidate_sha256": "534f7058f657be386f25950d5e1750a4f5017f67e4890201983fbbb3d74f379f"
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/ev_stubs.c",
-      "sha256": "d51cc407c560c3a65a883e03ddae3dfbde3a94858cadb1fe01abef14440d3153",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cpu\\src\\evid\\ev_stubs.c",
-      "original_candidate_sha256": "b289023dddb237935d44129c5968e2b225a86e95f0ca84274e132fd9b41735bd"
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c",
       "sha256": "e695a9807285703119cffb0c3bc8a3aa6433ede43efa499f21a6e736f94395d8",
       "tracked": true,
@@ -6842,16 +6832,6 @@
       "original_candidate_sha256": "7064e2516d6a43ba9a35badc45d09e16524b22f70362110f9a3526be028501e7"
     },
     {
-      "path": "src/mvdm-host/suballoc/debug.c",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\suballoc\\debug.c",
-      "original_candidate_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
       "path": "src/mvdm-host/suballoc/suballcp.h",
       "sha256": "02943e6b12c658a0ee71c97578889ad86e08204676d2738d48df135a02a4d8ca",
       "tracked": true,
@@ -7080,86 +7060,6 @@
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
       "original_candidate_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8"
-    },
-    {
-      "path": "src/mvdm-host/vdmutils/graftabl/graftabl.c",
-      "sha256": "5511fba3687607661924098e9648c96e7d60c8ef42bdb9aa04e0d4ede63d40b5",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\graftabl\\graftabl.c",
-      "original_candidate_sha256": "25af644f4f196b707fd0f2619fe7f1947cabdc73ab7e6436db4fa1e044bfc88b"
-    },
-    {
-      "path": "src/mvdm-host/vdmutils/graftabl/graftabl.h",
-      "sha256": "423d0309d90cb2dcc15b044e0c18bc7811ef343d345845bc29423f3dafc260d5",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\graftabl\\graftabl.h",
-      "original_candidate_sha256": "55ed64f98b6587a5b2dd6a7beb2e5fce11c2851ae4830d535b345c99163b2008"
-    },
-    {
-      "path": "src/mvdm-host/vdmutils/pifedit/mods.c",
-      "sha256": "7353ccddbe90c52342b12e32a9f5afed7d50db8ccb3ca1dccf67413563ff18b4",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\mods.c",
-      "original_candidate_sha256": "3fb2be0aad425335f1ca612d9979b8f59f4a0b541b690f495c9bf1d7e0c881e5"
-    },
-    {
-      "path": "src/mvdm-host/vdmutils/pifedit/mods.h",
-      "sha256": "16a8740a1655ac8097e6c9da0b9533285554d1128a8bc211eb90c6e474350bbc",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\mods.h",
-      "original_candidate_sha256": "426786918b039cd80abc234f002354a89907e040b52a61d184b963e7d3a2d174"
-    },
-    {
-      "path": "src/mvdm-host/vdmutils/pifedit/pifedit.c",
-      "sha256": "727e2c5075849d6658f1f7405c50826d6b1a83e970a2ae07151312a49e4854dd",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\pifedit.c",
-      "original_candidate_sha256": "fe2330596f35c493bc5ffb6bb8daeea9eb97a557f788ed9b3650f6f8ffa7e278"
-    },
-    {
-      "path": "src/mvdm-host/vdmutils/pifedit/pifedit.h",
-      "sha256": "5bea832e9d00fb0abebb21f5809eebf04c5dbc0ea13f82b801ee14386f0c0f66",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\pifedit.h",
-      "original_candidate_sha256": "56789c7ec827ae3a929e9f4cca1c8ba12758437febf4c1eaeba1f60b9b252673"
-    },
-    {
-      "path": "src/mvdm-host/vdmutils/pifedit/pifhelp.h",
-      "sha256": "b8ca8e0ebbc3674e1d48e797f9653241dcba571286dd886dd6778eed8ca1cd87",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\pifhelp.h",
-      "original_candidate_sha256": "057eea902d8e249e50e525d04f06ce0232b6787f022498f6d7207d06fee12e4c"
-    },
-    {
-      "path": "src/mvdm-host/vdmutils/pifedit/pifsubs.c",
-      "sha256": "7e350e858223574afadef263666527e4686bf39f03398121301dbf088f0f34ae",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\pifsubs.c",
-      "original_candidate_sha256": "4077c27c5ae06830d19c94014dcd327ca51e93c5acd3dc04bf1fa83ff6484ea2"
     },
     {
       "path": "src/mvdm-host/wow32/fastwow.h",

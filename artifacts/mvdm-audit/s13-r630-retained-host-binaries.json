@@ -1,0 +1,31 @@
+{
+  "scope": "All existing EXE, DLL and COM files under src/mvdm-host, checked against exact content hashes in assets/winnt.zip.",
+  "limitations": "This is byte-preservation evidence, not execution or provenance proof. Guest-root binaries are unchanged and outside this host-only check.",
+  "records": [
+    {
+      "path": "src/mvdm-host/vdmutils/win/obj/i386/win.com",
+      "sha256": "5eb085d36b58b1b2ca57e07beffc341860d451265d2f913f4de799c0235f05cf",
+      "archive_entry": "WINNT/SYSTEM32/WIN.COM"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/graftabl/obj/i386/graftabl.com",
+      "sha256": "bc241d49e73a10471500bcfcda8302ef72fd7411f7b8dea92289b4244ea2c87e",
+      "archive_entry": "WINNT/SYSTEM32/GRAFTABL.COM"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/forcedos/obj/i386/forcedos.exe",
+      "sha256": "5e93e8b89865d611391b25c6bf451cfa63f07d6643bb422da36542e2e554d320",
+      "archive_entry": "WINNT/SYSTEM32/FORCEDOS.EXE"
+    },
+    {
+      "path": "src/mvdm-host/vdmexts/obj/i386/vdmexts.dll",
+      "sha256": "5ad8d07da714e9d9c4391da5fbb75c6e5150c244d570fbbcd89171083b340170",
+      "archive_entry": "WINNT/SYSTEM32/VDMEXTS.DLL"
+    },
+    {
+      "path": "src/mvdm-host/vdd/samples/mscdex/vdd/obj/i386/vcdex.dll",
+      "sha256": "3679db6245b7717d3e58c19b19097c8031d6c5a94df773b5c01e5ca7ed98ebde",
+      "archive_entry": "WINNT/SYSTEM32/VCDEX.DLL"
+    }
+  ]
+}

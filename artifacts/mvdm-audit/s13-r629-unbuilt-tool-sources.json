@@ -1,0 +1,86 @@
+{
+  "scope": "Ten C/H files: two unselected legacy utility source groups, one unselected generated-video stub and an empty debug file.",
+  "selection": "No current product Ninja input/dependency or active tools/build/test source reference. Original UMAPPL sources are outside product runtime; original utility binary is retained byte-for-byte in assets/winnt.zip.",
+  "resources": "Tracked GRAFTABL.COM, PIFEDIT.HLP, icons, binary files and other resources retained. Removed two obsolete build manifests and two resource compiler inputs, which depended on removed headers.",
+  "limits": "Historical source recipes are not runnable after deletion; utility runtime and binary provenance are not asserted. Build and publication are recorded in s13-r630-delivery.md.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/ev_stubs.c",
+      "sha256": "d51cc407c560c3a65a883e03ddae3dfbde3a94858cadb1fe01abef14440d3153",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cpu\\src\\evid\\ev_stubs.c",
+      "original_sha256": "b289023dddb237935d44129c5968e2b225a86e95f0ca84274e132fd9b41735bd"
+    },
+    {
+      "path": "src/mvdm-host/suballoc/debug.c",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\suballoc\\debug.c",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/graftabl/graftabl.c",
+      "sha256": "5511fba3687607661924098e9648c96e7d60c8ef42bdb9aa04e0d4ede63d40b5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\graftabl\\graftabl.c",
+      "original_sha256": "25af644f4f196b707fd0f2619fe7f1947cabdc73ab7e6436db4fa1e044bfc88b"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/graftabl/graftabl.h",
+      "sha256": "423d0309d90cb2dcc15b044e0c18bc7811ef343d345845bc29423f3dafc260d5",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\graftabl\\graftabl.h",
+      "original_sha256": "55ed64f98b6587a5b2dd6a7beb2e5fce11c2851ae4830d535b345c99163b2008"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/mods.c",
+      "sha256": "7353ccddbe90c52342b12e32a9f5afed7d50db8ccb3ca1dccf67413563ff18b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\mods.c",
+      "original_sha256": "3fb2be0aad425335f1ca612d9979b8f59f4a0b541b690f495c9bf1d7e0c881e5"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/mods.h",
+      "sha256": "16a8740a1655ac8097e6c9da0b9533285554d1128a8bc211eb90c6e474350bbc",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\mods.h",
+      "original_sha256": "426786918b039cd80abc234f002354a89907e040b52a61d184b963e7d3a2d174"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/pifedit.c",
+      "sha256": "727e2c5075849d6658f1f7405c50826d6b1a83e970a2ae07151312a49e4854dd",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\pifedit.c",
+      "original_sha256": "fe2330596f35c493bc5ffb6bb8daeea9eb97a557f788ed9b3650f6f8ffa7e278"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/pifedit.h",
+      "sha256": "5bea832e9d00fb0abebb21f5809eebf04c5dbc0ea13f82b801ee14386f0c0f66",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\pifedit.h",
+      "original_sha256": "56789c7ec827ae3a929e9f4cca1c8ba12758437febf4c1eaeba1f60b9b252673"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/pifhelp.h",
+      "sha256": "b8ca8e0ebbc3674e1d48e797f9653241dcba571286dd886dd6778eed8ca1cd87",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\pifhelp.h",
+      "original_sha256": "057eea902d8e249e50e525d04f06ce0232b6787f022498f6d7207d06fee12e4c"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/pifsubs.c",
+      "sha256": "7e350e858223574afadef263666527e4686bf39f03398121301dbf088f0f34ae",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmutils\\pifedit\\pifsubs.c",
+      "original_sha256": "4077c27c5ae06830d19c94014dcd327ca51e93c5acd3dc04bf1fa83ff6484ea2"
+    }
+  ],
+  "removed_build_metadata": [
+    {
+      "path": "src/mvdm-host/vdmutils/graftabl/sources",
+      "sha256": "d077802c6f53ce054d4619d626de6f594d400412971aafdfc6a58eecd4338b4d"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/graftabl/graftabl.rc",
+      "sha256": "87ce094bce61a4d5316c2c5106751d1c9aebeefe80d48250b5c36841b81ed25b"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/sources",
+      "sha256": "55489afea9a546c1084c3a74dc1039e2806a791f9d5a866332b85bd20f0fd7f3"
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/pifedit.rc",
+      "sha256": "1c4d17a251b3d420ebb983450946e5029621da8e7a3cf9ce639e967a2df8d289"
+    }
+  ]
+}
