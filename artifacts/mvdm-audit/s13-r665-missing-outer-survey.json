@@ -1,0 +1,9 @@
+{
+  "scope": "Top-level missing no-alternative groups only, conservative selector and unique source anchors; candidates need manual contextual review.",
+  "stats": {
+    "weak": 58,
+    "anchor_missing_or_ambiguous": 507,
+    "complex": 65
+  },
+  "candidates": []
+}

@@ -343,8 +343,10 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
     case WM_VSCROLL:
         *plParamNew = (LONG) HWND32(HIWORD(lParam));
 #if 0
+#line 359
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #else
+#line 364
 
         //
         // Ventura Publisher v4.1 setup program uses nPos on messages other
@@ -358,6 +360,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
 
         } else {
 #endif
+#line 377
 
         // implies wParam is NOT an SB_* scrollbar code.
         // this could be EM_GETTHUMB or EM_LINESCROLL

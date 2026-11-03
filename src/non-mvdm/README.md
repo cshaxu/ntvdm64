@@ -2420,3 +2420,7 @@ for existing excluded DBG arms in Base and NetAPI headers. Evidence:
 OPENNT-HOST-239: restore original diagnostic line mappings for existing
 excluded NetAPI, DLC, PIF and USER arms; other groups remain under review.
 Evidence: ../../artifacts/mvdm-audit/s13-r662-guard-line-audit.json.
+
+OPENNT-HOST-240: restore original diagnostic line mappings for existing
+literal-disabled EDIT arms in two sources. Other conditions remain under
+review. Evidence: ../../artifacts/mvdm-audit/s13-r665-guard-line-audit.json.

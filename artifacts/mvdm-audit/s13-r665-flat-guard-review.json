@@ -1,0 +1,202 @@
+{
+  "scope": "Four product-observed files whose original condition groups are flat and all have existing excluded error-only first arms.",
+  "method": "Compare original selectors, group boundaries, else presence and retained else text. Check physical error, selected and following line mappings; conservatively screen comments and conditional continuations. Reject directive after continued physical line.",
+  "context": "Prior product release builds and 181 retained-guard controls; selector forced on reaches error, so builds using these files cannot silently select these arms.",
+  "limits": "Reviews conditional structure and alternatives, not unrelated adaptations; the complete inventory of all supported contexts remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wgdi.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgdi.c",
+      "sha256": "dee0a0ecf5f73c013dc97d2cbaf12b85a56257038d3ce98e4a31ac11363bfa75",
+      "original_sha256": "4c28e5166b294ac2a17982b3ff6e6559f369b8a8a2dd766aa18e16c8f74379d6",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "if",
+          "0"
+        ],
+        [
+          "if",
+          "0"
+        ],
+        [
+          "if",
+          "0"
+        ],
+        [
+          "if",
+          "0"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsg16.c",
+      "sha256": "7cd0956a19f2082a1cd604d0dea59761cbecca1679d0abe86ea3fc8ec5e9314e",
+      "original_sha256": "eb7b726626232ad95f1ff766004f8bea6fca3d25111124dd5c18e8512c1dbe44",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "if",
+          "0"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "sha256": "82aa1c7145f0c7857c22f06a0c8102e0141886c39647dfce7d9ff91c9e556bec",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "if",
+          "0"
+        ],
+        [
+          "if",
+          "0"
+        ],
+        [
+          "ifdef",
+          "UNDO_CLEANUP           // #ifdef Added in Chicago  - johnl"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "if",
+          "0"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "sha256": "39b651554ffcc5a763fe7870a7a81cba99ae3f6b6066f3812df419a76372330f",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "if",
+          "0"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "if",
+          "0"
+        ]
+      ]
+    }
+  ]
+}

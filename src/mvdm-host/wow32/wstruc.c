@@ -903,8 +903,10 @@ VOID getlogfont16(VPLOGFONT16 vplf, LPLOGFONT lplf)
     lplf->lfPitchAndFamily = plf16->lfPitchAndFamily;
 
 #if 0
+#line 956
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #else
+#line 967
 
 #if (LF_FACESIZE != 32)
 #error Win16/Win32 LF_FACESIZE constants differ
@@ -913,6 +915,7 @@ VOID getlogfont16(VPLOGFONT16 vplf, LPLOGFONT lplf)
     strncpy(lplf->lfFaceName, (const char *)plf16->lfFaceName, LF_FACESIZE);
 
 #endif
+#line 975
 
 
 //  if (*p2) {

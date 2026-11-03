@@ -2735,3 +2735,7 @@ remain under review. Evidence:
 The serial error-report `__LINE__` is restored to original line 1465; the
 observable value change and complete regression are recorded in
 ../../artifacts/mvdm-audit/s13-r664-delivery.md.
+
+MVDM-HOST-DIV-746: restore original diagnostic line mappings for existing
+literal-disabled arms in eight sources; other conditions remain under review.
+Evidence: ../../artifacts/mvdm-audit/s13-r665-guard-line-audit.json.

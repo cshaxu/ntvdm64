@@ -1480,8 +1480,10 @@ void MLBuildchLines(
             }
         }
 #if 0
+#line 1482
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 1489
         while (AWCOMPARECHAR(ped,ptext + ichLineEnd * ped->cbChar, ' ') ||
                 AWCOMPARECHAR(ped,ptext + ichLineEnd * ped->cbChar, VK_TAB)) {
             /*
@@ -1739,8 +1741,10 @@ void MLKeyDown(
              * Fix for Bug #4123 -- 02/07/91 -- SANKAR --
              */
 #if 0
+#line 1746
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 1748
 
                 /*
                  * User hit ESC...Send a close message (which in turn sends a
@@ -2830,8 +2834,10 @@ void MLSetFocus(
         ECReleaseEditDC(ped, hdc, TRUE);
     }
 #if 0
+#line 2846
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 2848
 
     /*
      * Notify parent we have the focus

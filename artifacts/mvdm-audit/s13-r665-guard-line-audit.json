@@ -1,0 +1,217 @@
+{
+  "scope": "Ten MVDM and non-MVDM sources with previously excluded original conditional alternatives.",
+  "method": "Original directive sequence compared; error arms contain no retained executable code. Original selected alternatives are preserved with restored diagnostic line mappings.",
+  "limits": "Other condition groups remain pending; cached build and targeted checks await this ten-file batch.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fdisk.c",
+      "before_sha256": "9513e9143f3ffb9fa088b1d6e8e44d7664104e44abb4a2f27836cdbdd6844edc",
+      "after_sha256": "aa27cf44088c5331ebc5ab5f40254920cbfb321c10482bc024b289a9dd2a3412",
+      "original_sha256": "f95a9a26a9ef201e9552f2459a6ba85080e17fb8ccae3fb6280c63eb2fa78607",
+      "guards": [
+        {
+          "macro": "0",
+          "original_error_line": 1555,
+          "original_selected_line": 1557,
+          "original_following_line": 1559
+        },
+        {
+          "macro": "0",
+          "original_error_line": 1648,
+          "original_selected_line": 1651,
+          "original_following_line": 1654
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\copy_fnc.c",
+      "before_sha256": "c17007364931547f380bb7a96be3ada9a69ad022d9cf38fc3cfbdd0aa41e5e79",
+      "after_sha256": "59174912de6b5be66e6a7d3832cf14f728adbb5a9be5f2bf5ccf19ccb74c112f",
+      "original_sha256": "320d697e9969cf146d5b0f94813aa62b501b0eefeff31806b22d463912965518",
+      "guards": [
+        {
+          "macro": "0",
+          "original_error_line": 19,
+          "original_selected_line": 24,
+          "original_following_line": 30
+        },
+        {
+          "macro": "0",
+          "original_error_line": 116,
+          "original_selected_line": 119,
+          "original_following_line": 124
+        },
+        {
+          "macro": "0",
+          "original_error_line": 181,
+          "original_selected_line": 186,
+          "original_following_line": 195
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_com.c",
+      "before_sha256": "79181dcc9e0fb107f65abcf7d25e4511e86ccffe2b616ab76b9fd1823be2a8ca",
+      "after_sha256": "c45dbd8c001d13882a357c717a336b923bf4b7a8b22c53b605379b58342e5980",
+      "original_sha256": "56d39e89f2e077350ad07b77651224a0162314fced5abb498279b486f35afb32",
+      "guards": [
+        {
+          "macro": "0",
+          "original_error_line": 57,
+          "original_selected_line": null,
+          "original_following_line": 60
+        },
+        {
+          "macro": "0",
+          "original_error_line": 2172,
+          "original_selected_line": null,
+          "original_following_line": 2207
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_rflop.c",
+      "before_sha256": "fd26e1f6db98e26444d0ed2250bfe1d88cb5b253600d22919a511f84bbbeca50",
+      "after_sha256": "54b7350c8a6a9d00ed2ced4f327ea191b9a0a396628f32039be550144ba7f2b7",
+      "original_sha256": "22c82627bf993ac4fd072ad1bb7d4f62000b60889e6955e83f5f676ac5bd7a29",
+      "guards": [
+        {
+          "macro": "0",
+          "original_error_line": 1263,
+          "original_selected_line": null,
+          "original_following_line": 1300
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgdi.c",
+      "before_sha256": "68c1dfd602362817c88de3174dd2938b70a8725675332972cdf49a3824239620",
+      "after_sha256": "dee0a0ecf5f73c013dc97d2cbaf12b85a56257038d3ce98e4a31ac11363bfa75",
+      "original_sha256": "4c28e5166b294ac2a17982b3ff6e6559f369b8a8a2dd766aa18e16c8f74379d6",
+      "guards": [
+        {
+          "macro": "0",
+          "original_error_line": 703,
+          "original_selected_line": null,
+          "original_following_line": 705
+        },
+        {
+          "macro": "0",
+          "original_error_line": 708,
+          "original_selected_line": null,
+          "original_following_line": 712
+        },
+        {
+          "macro": "0",
+          "original_error_line": 2043,
+          "original_selected_line": null,
+          "original_following_line": 2053
+        },
+        {
+          "macro": "0",
+          "original_error_line": 3989,
+          "original_selected_line": null,
+          "original_following_line": 4003
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsg16.c",
+      "before_sha256": "66470a04cd583aef6af69438db6f72c9fe844cb82dda9b5e32fdef37fab3b595",
+      "after_sha256": "7cd0956a19f2082a1cd604d0dea59761cbecca1679d0abe86ea3fc8ec5e9314e",
+      "original_sha256": "eb7b726626232ad95f1ff766004f8bea6fca3d25111124dd5c18e8512c1dbe44",
+      "guards": [
+        {
+          "macro": "0",
+          "original_error_line": 359,
+          "original_selected_line": 364,
+          "original_following_line": 377
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wstruc.c",
+      "before_sha256": "46b7509bfaf87f2533d043625adf90d5e46af24481d2d1925a669b7f82ec6c0d",
+      "after_sha256": "e5068c09f7c067cd79d936c06d572c261d3a53070201b597bae602e591d3db63",
+      "original_sha256": "04aa31f76dbb3e683c1f96101b07de006a79ca0d3b49e0a16986166349f3abb3",
+      "guards": [
+        {
+          "macro": "0",
+          "original_error_line": 956,
+          "original_selected_line": 967,
+          "original_following_line": 975
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuser31.c",
+      "before_sha256": "d2122bd762a7c8cd4a7aa08edf6f898fb41cbb14fcb40158ed256a83df139038",
+      "after_sha256": "822e57351b7f0264397979150ded05ec036e24da0a754d6688fd2415c8edb123",
+      "original_sha256": "260237f9fda0013f02bbbcbc94c29ea2069de545043b636f2828c554e55582a4",
+      "guards": [
+        {
+          "macro": "0",
+          "original_error_line": 761,
+          "original_selected_line": 765,
+          "original_following_line": 773
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "before_sha256": "b610777f475f44960a7470dfc35e136ad45e962c5ed2b25c559911321840c1ba",
+      "after_sha256": "82aa1c7145f0c7857c22f06a0c8102e0141886c39647dfce7d9ff91c9e556bec",
+      "original_sha256": "5f65e9aff922918240243c3d91aeec4c0317010c80a01af43626f828b0f95dec",
+      "guards": [
+        {
+          "macro": "0",
+          "original_error_line": 1482,
+          "original_selected_line": null,
+          "original_following_line": 1489
+        },
+        {
+          "macro": "0",
+          "original_error_line": 1746,
+          "original_selected_line": null,
+          "original_following_line": 1748
+        },
+        {
+          "macro": "0",
+          "original_error_line": 2846,
+          "original_selected_line": null,
+          "original_following_line": 2848
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "before_sha256": "457e31f41bcb981b53aa6d5d5f3bcc050dd213682af52706396fd8a62b7a8180",
+      "after_sha256": "39b651554ffcc5a763fe7870a7a81cba99ae3f6b6066f3812df419a76372330f",
+      "original_sha256": "5d730399ce35740c88e7d5f98f1a4c4882802a6e66a830d11b3d8e4bfad9eb1c",
+      "guards": [
+        {
+          "macro": "0",
+          "original_error_line": 2021,
+          "original_selected_line": null,
+          "original_following_line": 2023
+        },
+        {
+          "macro": "0",
+          "original_error_line": 2485,
+          "original_selected_line": null,
+          "original_following_line": 2509
+        }
+      ]
+    }
+  ]
+}

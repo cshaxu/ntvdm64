@@ -1176,8 +1176,10 @@ nt_rflop_rate IFN2(UTINY, drive, half_word, rate)
 // only one FDC(and mutiple drive).
 
 #if 0
+#line 1263
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 1300
 #ifndef PROD
 #line 1301
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.

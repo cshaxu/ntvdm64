@@ -1526,10 +1526,13 @@ GLOBAL VOID fdisk_inw IFN2(io_addr, port, USHORT *, value)
 #line 1553
 
 #if 0
+#line 1555
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #else
+#line 1557
 		dt1(DHW | PORTIO, INW_TRACE_HNDL, "inw on sector buffer", *value)
 #endif
+#line 1559
 			break;
 	default:
 		/*
@@ -1624,11 +1627,14 @@ GLOBAL VOID fdisk_outw IFN2(io_addr, port, USHORT, value)
 	{
 	case TFBASE:
 #if 0
+#line 1648
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #else
+#line 1651
 		dt1(DHW | PORTIO, OUTW_TRACE_HNDL, "outw to sector buffer",
 		    (unsigned) value)
 #endif
+#line 1654
 
 #ifdef LITTLEND
 			rmac(&value, IOWRITE);

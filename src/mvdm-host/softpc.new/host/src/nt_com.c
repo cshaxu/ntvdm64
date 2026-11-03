@@ -55,9 +55,10 @@ GLOBAL void host_com_unlock(int adapter);
 GLOBAL int host_com_open(int);
 
 #if 0
+#line 57
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
-#line 61
+#line 60
 
 /* autoflush stub */
 GLOBAL void host_setup_aflush (int);
@@ -2157,5 +2158,7 @@ void CPU EmptyRXBuffer(int adapter)
 
 
 #if 0
+#line 2172
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 2207

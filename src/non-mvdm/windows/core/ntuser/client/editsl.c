@@ -2025,8 +2025,10 @@ void SLKillFocus(
         if (!ped->fNoHideSel && (ped->ichMinSel != ped->ichMaxSel)) {
             NtUserInvalidateRect(ped->hwnd, NULL, FALSE);
 #if 0
+#line 2021
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 2023
         }
     }
 
@@ -2471,8 +2473,10 @@ foo:
         break;
 
 #if 0
+#line 2485
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 2509
 
     default:
 PassToDefaultWindowProc:

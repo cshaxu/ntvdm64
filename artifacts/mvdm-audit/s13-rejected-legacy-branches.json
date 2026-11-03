@@ -1191,7 +1191,7 @@
     "after_sha256": "5908873bd5f6391511efc733b04537bd56007df973b95d0cd1124ab84ff283d4",
     "final_sha256": "453798cd8f6f46277dc74f27db2a764933605f4461df45e417724f3210ae44c4",
     "current_line": 217,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r664-guard-line-audit.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r665-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
@@ -2441,8 +2441,8 @@
     "after_sha256": "9401c9aab0929d9c57b4b73c66905aaaca1fb256c7138035412d0fc80e245182",
     "final_sha256": "e5e2c712cfd7307481be688a894065e0b3dfc03e28f946bb374689a9fdf1c7bc",
     "selection_scope": "Fixed original #if 0 restored; selected DIV-064 loop retained in else.",
-    "current_line": 98,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r372-depth1-anchor-batch.json"
+    "current_line": 101,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r665-guard-line-audit.json"
   },
   {
     "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
