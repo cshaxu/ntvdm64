@@ -363,11 +363,11 @@
     },
     {
       "path": "src/mvdm-host/dpmi32/data.c",
-      "sha256": "3bbb25431211d762d91e6edb52646fb550d0ea7d1142bb0aaccb2d3253c0c07e",
+      "sha256": "fa77262578ebef876e292dfc6d9b43f6cb64662a85f0a8679b89675d69625cd2",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "additional_evidence": "s13-r690-dpmi-data-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\data.c",
       "original_candidate_sha256": "fa3b44b0f6a5ea6165063bae35fe66063e23e518dad8c0cdf3de16d353c54cde"
     },
@@ -2783,11 +2783,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
-      "sha256": "12a7f0857e64884f3b8d069076b5005ccab12a1cde6e698c322c14935b183adc",
+      "sha256": "f7c791af8bda2ca0ce231a68555f0f18840fc28b3245732e569d9aea01d26f2a",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-witnessed-condition-tree",
+      "additional_evidence": "s13-r691-batch-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lldt.c",
       "original_candidate_sha256": "9b0077be47d4bb3f75e8f521a9db907ec42199c57ab59226e56d6b8013dfe6c6"
     },
@@ -5583,11 +5583,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
-      "sha256": "00bc52ffb3faa922ddf5bdd7b0bb88b9605c4ca83fcc1d9f2c1de1662487bca0",
+      "sha256": "469d7f498f27e70dcfd04b2e7596e7f7bbda69cdc94ca401a4716544d453a385",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-witnessed-condition-tree",
+      "additional_evidence": "s13-r691-batch-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
       "original_candidate_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2"
     },
@@ -5603,11 +5603,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
-      "sha256": "f51346082abab3ebfe9931b0947f699e9184d69ddb59f9fb3af74aed0db35870",
+      "sha256": "a9752b272d2c089e4a2e5bd256f8e9f7dcdc08a93e310ec85635c2bc636f3d0f",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-witnessed-condition-tree",
+      "additional_evidence": "s13-r691-batch-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\at_dma.c",
       "original_candidate_sha256": "4867e3e03e0a5f49066963a37a957d231ec9addbc203789beed42bcf510f3f01"
     },
@@ -5673,11 +5673,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
-      "sha256": "d9b99fa1f691dae52e7042f960d776a972a885f2893261e7b200605b877d2d1d",
+      "sha256": "85413fb1b67bc42c3846eea19a617883e4074ddc75fdd009167780028819f1c6",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-witnessed-condition-tree",
+      "additional_evidence": "s13-r691-batch-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
       "original_candidate_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f"
     },
@@ -5873,11 +5873,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
-      "sha256": "ba085c8680f3f30cc36956b5fd9249b9c7539d8f92e245fe50a6b0a8d9f00d19",
+      "sha256": "9935aa8c68acf42cafc96a7a46403bcb015f347509b25780b7f56920d11756c3",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-witnessed-condition-tree",
+      "additional_evidence": "s13-r691-batch-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_vide.c",
       "original_candidate_sha256": "3d0159b8bd4d1bcc3448bc61fb90f5b1c34c09099bba49187fe4573354ccc89d"
     },
@@ -6333,11 +6333,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
-      "sha256": "699de0d85b7f2e9a5ca1e2d07308e174ddafd398f2d92fa95809c39c85dffcaf",
+      "sha256": "bda105ceefe9983e991553d9ce3b73e766b78770d9b6941f95d2476e981672c9",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-witnessed-condition-tree",
+      "additional_evidence": "s13-r691-batch-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
       "original_candidate_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7"
     },
@@ -6733,11 +6733,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
-      "sha256": "baab03e2f20d7a4e33ba87df317cb732d1c2927a55f228796ed7472754ac9f1d",
+      "sha256": "9846af750733fcd2b736ab3f95fe0e3e9ae3446e212592f7366b8bfddcef0fac",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-witnessed-condition-tree",
+      "additional_evidence": "s13-r691-batch-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\x86_emm.c",
       "original_candidate_sha256": "117d119314787e09b853e05de0e35bb6935fb2d763f4fec7eef6b1d804e3d189"
     },
@@ -6803,11 +6803,11 @@
     },
     {
       "path": "src/mvdm-host/vdmredir/vrdisp.c",
-      "sha256": "c447b517e3efbde64db538a1d02bc695728cc3cfaf76361061cc5bbf67d2b944",
+      "sha256": "ace77f81f45586b2700d5ce16149e8f791d88c8bc6b43e891423394a1f770c97",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-witnessed-condition-tree",
+      "additional_evidence": "s13-r691-batch-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdisp.c",
       "original_candidate_sha256": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389"
     },
@@ -7223,11 +7223,11 @@
     },
     {
       "path": "src/mvdm-host/wow32/wdib.c",
-      "sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc",
+      "sha256": "88ba7a3bbbd31154db9a509bf8b221eafc2d92af5417d0400ba8432387596942",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-witnessed-condition-tree",
+      "additional_evidence": "s13-r691-batch-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wdib.c",
       "original_candidate_sha256": "d0bd4f9cb7bba0dc5e977a8c096337df0830e3804ef6aeb8759cf979176dd910"
     },

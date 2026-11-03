@@ -135,6 +135,7 @@ Return Value:
 
 {
 #if 0
+#line 138
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #line 144

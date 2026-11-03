@@ -1,0 +1,84 @@
+{
+  "path": "src/mvdm-host/dpmi32/data.c",
+  "original": "O:/repos.external/OpenNT/base/mvdm/dpmi32/data.c",
+  "before_sha256": "3bbb25431211d762d91e6edb52646fb550d0ea7d1142bb0aaccb2d3253c0c07e",
+  "after_sha256": "fa77262578ebef876e292dfc6d9b43f6cb64662a85f0a8679b89675d69625cd2",
+  "original_sha256": "fa3b44b0f6a5ea6165063bae35fe66063e23e518dad8c0cdf3de16d353c54cde",
+  "scope": "Original DBG branch and continuation; retained nested CPU40 local adapter left unchanged",
+  "witness": {
+    "path": "src/mvdm-host/dpmi32/data.c",
+    "source_sha256": "3bbb25431211d762d91e6edb52646fb550d0ea7d1142bb0aaccb2d3253c0c07e",
+    "object": "dpmi/data",
+    "arms": [
+      {
+        "label": "codex_r688_arm_0000",
+        "line": 110,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r688_arm_0001",
+        "line": 112,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r688_arm_0002",
+        "line": 125,
+        "kind": "ifndef",
+        "expression": "i386",
+        "error_only": false
+      },
+      {
+        "label": "codex_r688_arm_0003",
+        "line": 136,
+        "kind": "if",
+        "expression": "defined(CPU_40_STYLE)",
+        "error_only": false
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "54916eb144e988516d0fc0d712f00ecde68a854c4264ce932fece91aea5d7ecc",
+        "hit": [
+          "codex_r688_arm_0001",
+          "codex_r688_arm_0002",
+          "codex_r688_arm_0003"
+        ]
+      },
+      {
+        "graph": "msvc-x64-release",
+        "exit": 0,
+        "preprocessed_sha256": "54916eb144e988516d0fc0d712f00ecde68a854c4264ce932fece91aea5d7ecc",
+        "hit": [
+          "codex_r688_arm_0001",
+          "codex_r688_arm_0002",
+          "codex_r688_arm_0003"
+        ]
+      }
+    ]
+  },
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 155,
+      "identical": true,
+      "include_trace_sha256": "d74d9b892a067350dd94df36493764f8b9371bfc9f4634f1e461ed59b1dd1217",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 155,
+      "identical": true,
+      "include_trace_sha256": "d74d9b892a067350dd94df36493764f8b9371bfc9f4634f1e461ed59b1dd1217",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "limit": "Observed two product graphs; broader supported contexts remain to verify"
+}

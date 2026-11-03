@@ -1,0 +1,105 @@
+{
+  "scope": "Preliminary original-tree comparisons; held files remain pending, candidate edits require full batch verification",
+  "results": {
+    "687": [
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/config.c",
+        "status": "held",
+        "reason": "retained arm not observed 421"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+        "status": "held",
+        "reason": "retained leaf"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+        "status": "held",
+        "reason": "retained leaf"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+        "status": "held",
+        "reason": "retained arm not observed 129"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+        "status": "candidate",
+        "edits": 2,
+        "excluded_groups": 1,
+        "source_sha256": "baab03e2f20d7a4e33ba87df317cb732d1c2927a55f228796ed7472754ac9f1d"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+        "status": "held",
+        "reason": "retained leaf"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+        "status": "candidate",
+        "edits": 1,
+        "excluded_groups": 1,
+        "source_sha256": "12a7f0857e64884f3b8d069076b5005ccab12a1cde6e698c322c14935b183adc"
+      }
+    ],
+    "688": [
+      {
+        "path": "src/mvdm-host/dpmi32/data.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/dpmi32/dpmi32.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/dpmi32/dpmiint.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/dpmi32/modesw.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/vdmredir/vrdisp.c",
+        "status": "candidate",
+        "edits": 1,
+        "excluded_groups": 2,
+        "source_sha256": "c447b517e3efbde64db538a1d02bc695728cc3cfaf76361061cc5bbf67d2b944"
+      }
+    ]
+  }
+}

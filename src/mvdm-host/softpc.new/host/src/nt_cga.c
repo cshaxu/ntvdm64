@@ -40,8 +40,10 @@
 #include "nt_det.h"
 
 #ifdef MONITOR
+#line 43
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
+#line 46
 
 /* Externs */
 
@@ -74,10 +76,13 @@ static unsigned int cga_med_graph_lut1_huge[256];
 // for risc we have 4 bytes per character because of vga interleaving
 //
 #ifdef MONITOR
+#line 78
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #else
+#line 80
 #define TEXT_INCVAL 4
 #endif
+#line 82
 
 
 
@@ -97,13 +102,17 @@ void nt_init_text()
     sub_note_trace0(HERC_HOST_VERBOSE, "nt_init_text");
 
 #ifdef X86GFX
+#line 101
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif	//X86GFX
+#line 103
     closeGraphicsBuffer(); /* Tim Oct 92 */
 
 #ifdef MONITOR
+#line 106
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif  //MONITOR
+#line 112
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -935,5 +944,7 @@ void nt_cga_colour_hi_graph_huge(int offset, int screen_x, int screen_y,
 }
 
 #ifdef MONITOR
+#line 972
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
+#line 1194

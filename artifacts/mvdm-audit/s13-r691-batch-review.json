@@ -1,0 +1,2391 @@
+{
+  "scope": "Nine source files from witnessed line-mapping batches r683-r688 and r691.",
+  "method": "Original/current conditional trees checked; retained arms observed in observed worker or WOW32 compile graphs; original and instrumented include traces compared; old/current source differs only in #line directives. Conditional source line positions remapped after edits.",
+  "limits": "Instrumented preprocessing can affect __FILE__/__LINE__; compile product comparisons and any required Full regression are separate. Complete supported-context enumeration remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "before_sha256": "00bc52ffb3faa922ddf5bdd7b0bb88b9605c4ca83fcc1d9f2c1de1662487bca0",
+      "after_sha256": "469d7f498f27e70dcfd04b2e7596e7f7bbda69cdc94ca401a4716544d453a385",
+      "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SCCSID",
+          "original_line": 41,
+          "error_line": 42,
+          "end_line": 44
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 45,
+          "error_line": 46,
+          "end_line": 53
+        },
+        {
+          "kind": "ifdef",
+          "expression": "XTSFD",
+          "original_line": 89,
+          "error_line": 90,
+          "end_line": 92
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 100,
+          "error_line": 101,
+          "end_line": 107
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 113,
+          "error_line": 114,
+          "end_line": 119
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BSD4_2",
+          "original_line": 145,
+          "error_line": 146,
+          "end_line": 148
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 163,
+          "error_line": 164,
+          "end_line": 206
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 218,
+          "error_line": 219,
+          "end_line": 225
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 228,
+          "error_line": 229,
+          "end_line": 233
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 243,
+          "error_line": 244,
+          "end_line": 261
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 285,
+          "error_line": 286,
+          "end_line": 290
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 300,
+          "error_line": 301,
+          "end_line": 318
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BSD4_2",
+          "original_line": 345,
+          "error_line": 346,
+          "end_line": 348
+        },
+        {
+          "kind": "ifdef",
+          "expression": "XTSFD",
+          "original_line": 377,
+          "error_line": 378,
+          "end_line": 395
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BSD4_2",
+          "original_line": 398,
+          "error_line": 399,
+          "end_line": 401
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 409,
+          "error_line": 410,
+          "end_line": 493
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 507,
+          "error_line": 508,
+          "end_line": 766
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 770,
+          "error_line": 771,
+          "end_line": 802
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+        "source_sha256": "00bc52ffb3faa922ddf5bdd7b0bb88b9605c4ca83fcc1d9f2c1de1662487bca0",
+        "object": "support/time_day",
+        "arms": [
+          {
+            "label": "codex_r683_arm_0000",
+            "line": 41,
+            "kind": "ifdef",
+            "expression": "SCCSID",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0001",
+            "line": 45,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0002",
+            "line": 90,
+            "kind": "ifdef",
+            "expression": "XTSFD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0003",
+            "line": 97,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0004",
+            "line": 103,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0005",
+            "line": 107,
+            "kind": "ifdef",
+            "expression": "ANSI",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0006",
+            "line": 112,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0007",
+            "line": 142,
+            "kind": "ifdef",
+            "expression": "BSD4_2",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0008",
+            "line": 149,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0009",
+            "line": 160,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0010",
+            "line": 176,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0011",
+            "line": 182,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0012",
+            "line": 196,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0013",
+            "line": 224,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0014",
+            "line": 238,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0015",
+            "line": 269,
+            "kind": "ifdef",
+            "expression": "BSD4_2",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0016",
+            "line": 301,
+            "kind": "ifdef",
+            "expression": "XTSFD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0017",
+            "line": 303,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0018",
+            "line": 312,
+            "kind": "ifdef",
+            "expression": "BSD4_2",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0019",
+            "line": 323,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0020",
+            "line": 340,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0021",
+            "line": 348,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0022",
+            "line": 355,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "da05d1ecd4ad2ee95375276b35292d4dae890d8ce7e78134e3b7f502524e2518",
+            "hit": [
+              "codex_r683_arm_0003",
+              "codex_r683_arm_0005",
+              "codex_r683_arm_0008",
+              "codex_r683_arm_0017",
+              "codex_r683_arm_0022"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "da05d1ecd4ad2ee95375276b35292d4dae890d8ce7e78134e3b7f502524e2518",
+            "hit": [
+              "codex_r683_arm_0003",
+              "codex_r683_arm_0005",
+              "codex_r683_arm_0008",
+              "codex_r683_arm_0017",
+              "codex_r683_arm_0022"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 184,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 184,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 18,
+      "marker_line_mapping": {
+        "41": 41,
+        "43": 44,
+        "45": 47,
+        "52": 55,
+        "90": 94,
+        "93": 97,
+        "97": 101,
+        "103": 107,
+        "105": 110,
+        "107": 113,
+        "112": 118,
+        "114": 121,
+        "142": 149,
+        "144": 152,
+        "149": 158,
+        "160": 169,
+        "162": 172,
+        "176": 186,
+        "178": 189,
+        "182": 194,
+        "184": 197,
+        "196": 209,
+        "198": 212,
+        "224": 238,
+        "226": 241,
+        "238": 253,
+        "240": 256,
+        "269": 285,
+        "271": 288,
+        "301": 319,
+        "303": 322,
+        "307": 326,
+        "312": 331,
+        "314": 334,
+        "323": 344,
+        "325": 347,
+        "340": 363,
+        "342": 366,
+        "348": 372,
+        "350": 375,
+        "355": 381,
+        "377": 403
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\at_dma.c",
+      "before_sha256": "f51346082abab3ebfe9931b0947f699e9184d69ddb59f9fb3af74aed0db35870",
+      "after_sha256": "a9752b272d2c089e4a2e5bd256f8e9f7dcdc08a93e310ec85635c2bc636f3d0f",
+      "original_sha256": "4867e3e03e0a5f49066963a37a957d231ec9addbc203789beed42bcf510f3f01",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 23,
+          "error_line": 24,
+          "end_line": 31
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PM",
+          "original_line": 798,
+          "error_line": 799,
+          "end_line": 817
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PM",
+          "original_line": 823,
+          "error_line": 824,
+          "end_line": 843
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 885,
+          "error_line": 886,
+          "end_line": 893
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+        "source_sha256": "f51346082abab3ebfe9931b0947f699e9184d69ddb59f9fb3af74aed0db35870",
+        "object": "system/at_dma",
+        "arms": [
+          {
+            "label": "codex_r683_arm_0000",
+            "line": 23,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0001",
+            "line": 70,
+            "kind": "ifdef",
+            "expression": "LIM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0002",
+            "line": 81,
+            "kind": "ifdef",
+            "expression": "LIM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0003",
+            "line": 93,
+            "kind": "ifdef",
+            "expression": "LIM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0004",
+            "line": 737,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0005",
+            "line": 798,
+            "kind": "ifndef",
+            "expression": "PM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0006",
+            "line": 808,
+            "kind": "ifndef",
+            "expression": "PM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0007",
+            "line": 854,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0008",
+            "line": 869,
+            "kind": "ifdef",
+            "expression": "LIM",
+            "error_only": false
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "d0b427f5a40762eb12b050fb436034d356f82b1727796c1e4c471249f7f7d910",
+            "hit": [
+              "codex_r683_arm_0001",
+              "codex_r683_arm_0002",
+              "codex_r683_arm_0003",
+              "codex_r683_arm_0004",
+              "codex_r683_arm_0008"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "d0b427f5a40762eb12b050fb436034d356f82b1727796c1e4c471249f7f7d910",
+            "hit": [
+              "codex_r683_arm_0001",
+              "codex_r683_arm_0002",
+              "codex_r683_arm_0003",
+              "codex_r683_arm_0004",
+              "codex_r683_arm_0008"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 175,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 175,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 4,
+      "marker_line_mapping": {
+        "23": 23,
+        "30": 31,
+        "70": 72,
+        "72": 74,
+        "81": 83,
+        "91": 93,
+        "93": 95,
+        "101": 103,
+        "737": 739,
+        "751": 753,
+        "798": 800,
+        "800": 803,
+        "808": 811,
+        "810": 814,
+        "854": 858,
+        "861": 866,
+        "869": 875,
+        "871": 877
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_vide.c",
+      "before_sha256": "ba085c8680f3f30cc36956b5fd9249b9c7539d8f92e245fe50a6b0a8d9f00d19",
+      "after_sha256": "9935aa8c68acf42cafc96a7a46403bcb015f347509b25780b7f56920d11756c3",
+      "original_sha256": "3d0159b8bd4d1bcc3448bc61fb90f5b1c34c09099bba49187fe4573354ccc89d",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 25,
+          "error_line": 26,
+          "end_line": 33
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 67,
+          "error_line": 68,
+          "end_line": 70
+        },
+        {
+          "kind": "ifdef",
+          "expression": "macintosh",
+          "original_line": 145,
+          "error_line": 146,
+          "end_line": 172
+        },
+        {
+          "kind": "ifdef",
+          "expression": "macintosh",
+          "original_line": 180,
+          "error_line": 181,
+          "end_line": 186
+        },
+        {
+          "kind": "ifdef",
+          "expression": "REAL_VGA",
+          "original_line": 251,
+          "error_line": 252,
+          "end_line": 270
+        },
+        {
+          "kind": "ifdef",
+          "expression": "REAL_VGA",
+          "original_line": 285,
+          "error_line": 286,
+          "end_line": 323
+        },
+        {
+          "kind": "ifdef",
+          "expression": "REAL_VGA",
+          "original_line": 338,
+          "error_line": 339,
+          "end_line": 378
+        },
+        {
+          "kind": "ifdef",
+          "expression": "REAL_VGA",
+          "original_line": 394,
+          "error_line": 395,
+          "end_line": 399
+        },
+        {
+          "kind": "ifdef",
+          "expression": "REAL_VGA",
+          "original_line": 421,
+          "error_line": 422,
+          "end_line": 426
+        },
+        {
+          "kind": "if",
+          "expression": "defined(NTVDM) && defined(X86GFX)",
+          "original_line": 669,
+          "error_line": 670,
+          "end_line": 672
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 676,
+          "error_line": 677,
+          "end_line": 679
+        },
+        {
+          "kind": "ifdef",
+          "expression": "HERC",
+          "original_line": 685,
+          "error_line": 686,
+          "end_line": 689
+        },
+        {
+          "kind": "if",
+          "expression": "defined(NTVDM) && defined(X86GFX)",
+          "original_line": 701,
+          "error_line": 702,
+          "end_line": 708
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 739,
+          "error_line": 740,
+          "end_line": 743
+        },
+        {
+          "kind": "ifdef",
+          "expression": "HERC",
+          "original_line": 766,
+          "error_line": 767,
+          "end_line": 805
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+        "source_sha256": "ba085c8680f3f30cc36956b5fd9249b9c7539d8f92e245fe50a6b0a8d9f00d19",
+        "object": "video/vga_vide",
+        "arms": [
+          {
+            "label": "codex_r684_arm_0000",
+            "line": 23,
+            "kind": "ifdef",
+            "expression": "VGG",
+            "error_only": false
+          },
+          {
+            "label": "codex_r684_arm_0001",
+            "line": 25,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r684_arm_0002",
+            "line": 64,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r684_arm_0003",
+            "line": 144,
+            "kind": "ifdef",
+            "expression": "macintosh",
+            "error_only": true
+          },
+          {
+            "label": "codex_r684_arm_0004",
+            "line": 147,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r684_arm_0005",
+            "line": 175,
+            "kind": "ifdef",
+            "expression": "macintosh",
+            "error_only": true
+          },
+          {
+            "label": "codex_r684_arm_0006",
+            "line": 245,
+            "kind": "ifdef",
+            "expression": "REAL_VGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r684_arm_0007",
+            "line": 248,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r684_arm_0008",
+            "line": 279,
+            "kind": "ifdef",
+            "expression": "REAL_VGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r684_arm_0009",
+            "line": 282,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r684_arm_0010",
+            "line": 321,
+            "kind": "ifdef",
+            "expression": "REAL_VGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r684_arm_0011",
+            "line": 324,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r684_arm_0012",
+            "line": 365,
+            "kind": "ifdef",
+            "expression": "REAL_VGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r684_arm_0013",
+            "line": 368,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r684_arm_0014",
+            "line": 395,
+            "kind": "ifdef",
+            "expression": "REAL_VGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r684_arm_0015",
+            "line": 398,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r684_arm_0016",
+            "line": 646,
+            "kind": "if",
+            "expression": "defined(NTVDM) && defined(X86GFX)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r684_arm_0017",
+            "line": 653,
+            "kind": "ifndef",
+            "expression": "HERC",
+            "error_only": false
+          },
+          {
+            "label": "codex_r684_arm_0018",
+            "line": 655,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r684_arm_0019",
+            "line": 664,
+            "kind": "ifdef",
+            "expression": "HERC",
+            "error_only": true
+          },
+          {
+            "label": "codex_r684_arm_0020",
+            "line": 670,
+            "kind": "ifdef",
+            "expression": "V7VGA",
+            "error_only": false
+          },
+          {
+            "label": "codex_r684_arm_0021",
+            "line": 681,
+            "kind": "if",
+            "expression": "defined(NTVDM) && defined(X86GFX)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r684_arm_0022",
+            "line": 684,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r684_arm_0023",
+            "line": 705,
+            "kind": "ifdef",
+            "expression": "V7VGA",
+            "error_only": false
+          },
+          {
+            "label": "codex_r684_arm_0024",
+            "line": 721,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r684_arm_0025",
+            "line": 747,
+            "kind": "ifdef",
+            "expression": "HERC",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "fdb2ed44a9bb07e4d27272e15cfdbe333fdde4afdfae4427cee5da9680de8f50",
+            "hit": [
+              "codex_r684_arm_0000",
+              "codex_r684_arm_0004",
+              "codex_r684_arm_0007",
+              "codex_r684_arm_0009",
+              "codex_r684_arm_0011",
+              "codex_r684_arm_0013",
+              "codex_r684_arm_0015",
+              "codex_r684_arm_0017",
+              "codex_r684_arm_0020",
+              "codex_r684_arm_0022",
+              "codex_r684_arm_0023"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "fdb2ed44a9bb07e4d27272e15cfdbe333fdde4afdfae4427cee5da9680de8f50",
+            "hit": [
+              "codex_r684_arm_0000",
+              "codex_r684_arm_0004",
+              "codex_r684_arm_0007",
+              "codex_r684_arm_0009",
+              "codex_r684_arm_0011",
+              "codex_r684_arm_0013",
+              "codex_r684_arm_0015",
+              "codex_r684_arm_0017",
+              "codex_r684_arm_0020",
+              "codex_r684_arm_0022",
+              "codex_r684_arm_0023"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 194,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 194,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 15,
+      "marker_line_mapping": {
+        "23": 23,
+        "25": 25,
+        "28": 28,
+        "64": 64,
+        "67": 67,
+        "144": 144,
+        "147": 147,
+        "165": 165,
+        "175": 175,
+        "178": 178,
+        "245": 245,
+        "248": 248,
+        "262": 262,
+        "279": 279,
+        "282": 282,
+        "304": 304,
+        "321": 321,
+        "324": 324,
+        "347": 347,
+        "365": 365,
+        "368": 368,
+        "371": 371,
+        "395": 395,
+        "398": 398,
+        "401": 401,
+        "646": 646,
+        "649": 649,
+        "653": 653,
+        "655": 655,
+        "657": 658,
+        "664": 666,
+        "667": 669,
+        "670": 672,
+        "675": 677,
+        "681": 683,
+        "684": 686,
+        "688": 690,
+        "705": 707,
+        "721": 723,
+        "723": 726,
+        "747": 751,
+        "750": 754,
+        "965": 969
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+      "before_sha256": "699de0d85b7f2e9a5ca1e2d07308e174ddafd398f2d92fa95809c39c85dffcaf",
+      "after_sha256": "bda105ceefe9983e991553d9ce3b73e766b78770d9b6941f95d2476e981672c9",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "original_line": 42,
+          "error_line": 43,
+          "end_line": 46
+        },
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "original_line": 77,
+          "error_line": 78,
+          "end_line": 82
+        },
+        {
+          "kind": "ifdef",
+          "expression": "X86GFX",
+          "original_line": 100,
+          "error_line": 101,
+          "end_line": 103
+        },
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "original_line": 105,
+          "error_line": 106,
+          "end_line": 112
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BIGEND",
+          "original_line": 152,
+          "error_line": 153,
+          "end_line": 188
+        },
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "original_line": 971,
+          "error_line": 972,
+          "end_line": 1194
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+        "source_sha256": "699de0d85b7f2e9a5ca1e2d07308e174ddafd398f2d92fa95809c39c85dffcaf",
+        "object": "host/nt_cga",
+        "arms": [
+          {
+            "label": "codex_r685_arm_0000",
+            "line": 42,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          },
+          {
+            "label": "codex_r685_arm_0001",
+            "line": 55,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0002",
+            "line": 76,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          },
+          {
+            "label": "codex_r685_arm_0003",
+            "line": 78,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0004",
+            "line": 99,
+            "kind": "ifdef",
+            "expression": "X86GFX",
+            "error_only": true
+          },
+          {
+            "label": "codex_r685_arm_0005",
+            "line": 104,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          },
+          {
+            "label": "codex_r685_arm_0006",
+            "line": 148,
+            "kind": "ifdef",
+            "expression": "BIGEND",
+            "error_only": true
+          },
+          {
+            "label": "codex_r685_arm_0007",
+            "line": 155,
+            "kind": "ifdef",
+            "expression": "LITTLEND",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0008",
+            "line": 163,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0009",
+            "line": 235,
+            "kind": "ifndef",
+            "expression": "MONITOR",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0010",
+            "line": 508,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0011",
+            "line": 606,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0012",
+            "line": 787,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0013",
+            "line": 873,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0014",
+            "line": 937,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "de50a8f28b086e3bd1529d63527b980e4419abbeb6d51a2415781d2e55e371af",
+            "hit": [
+              "codex_r685_arm_0001",
+              "codex_r685_arm_0003",
+              "codex_r685_arm_0007",
+              "codex_r685_arm_0008",
+              "codex_r685_arm_0009",
+              "codex_r685_arm_0010",
+              "codex_r685_arm_0011",
+              "codex_r685_arm_0012",
+              "codex_r685_arm_0013"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "de50a8f28b086e3bd1529d63527b980e4419abbeb6d51a2415781d2e55e371af",
+            "hit": [
+              "codex_r685_arm_0001",
+              "codex_r685_arm_0003",
+              "codex_r685_arm_0007",
+              "codex_r685_arm_0008",
+              "codex_r685_arm_0009",
+              "codex_r685_arm_0010",
+              "codex_r685_arm_0011",
+              "codex_r685_arm_0012",
+              "codex_r685_arm_0013"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 182,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 182,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 6,
+      "marker_line_mapping": {
+        "42": 42,
+        "44": 45,
+        "55": 57,
+        "64": 66,
+        "76": 78,
+        "78": 81,
+        "80": 84,
+        "99": 104,
+        "101": 107,
+        "104": 111,
+        "106": 114,
+        "148": 157,
+        "151": 160,
+        "155": 164,
+        "163": 172,
+        "189": 198,
+        "190": 199,
+        "235": 244,
+        "239": 248,
+        "508": 517,
+        "596": 605,
+        "606": 615,
+        "700": 709,
+        "787": 796,
+        "863": 872,
+        "873": 882,
+        "934": 943,
+        "937": 946,
+        "939": 949
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
+      "before_sha256": "d9b99fa1f691dae52e7042f960d776a972a885f2893261e7b200605b877d2d1d",
+      "after_sha256": "85413fb1b67bc42c3846eea19a617883e4074ddc75fdd009167780028819f1c6",
+      "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+      "guards": [
+        {
+          "kind": "if",
+          "expression": "defined(NTVDM) && defined(MONITOR)",
+          "original_line": 19,
+          "error_line": 20,
+          "end_line": 22
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 43,
+          "error_line": 44,
+          "end_line": 46
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 55,
+          "error_line": 56,
+          "end_line": 58
+        },
+        {
+          "kind": "ifdef",
+          "expression": "GISP_SVGA",
+          "original_line": 72,
+          "error_line": 73,
+          "end_line": 77
+        },
+        {
+          "kind": "if",
+          "expression": "defined(macintosh) && defined(A2CPU)",
+          "original_line": 104,
+          "error_line": 105,
+          "end_line": 111
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 117,
+          "error_line": 118,
+          "end_line": 120
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 161,
+          "error_line": 162,
+          "end_line": 178
+        },
+        {
+          "kind": "ifdef",
+          "expression": "REAL_VGA",
+          "original_line": 222,
+          "error_line": 223,
+          "end_line": 278
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 234,
+          "error_line": 235,
+          "end_line": 237
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 250,
+          "error_line": 251,
+          "end_line": 259
+        },
+        {
+          "kind": "ifdef",
+          "expression": "GISP_SVGA",
+          "original_line": 290,
+          "error_line": 291,
+          "end_line": 299
+        },
+        {
+          "kind": "if",
+          "expression": "defined(macintosh) && defined(A2CPU)",
+          "original_line": 293,
+          "error_line": 294,
+          "end_line": 298
+        },
+        {
+          "kind": "ifdef",
+          "expression": "GISP_SVGA",
+          "original_line": 311,
+          "error_line": 312,
+          "end_line": 329
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 330,
+          "error_line": 331,
+          "end_line": 343
+        },
+        {
+          "kind": "if",
+          "expression": "defined(macintosh) && defined(A2CPU)",
+          "original_line": 356,
+          "error_line": 357,
+          "end_line": 361
+        },
+        {
+          "kind": "if",
+          "expression": "defined(macintosh) && defined(A2CPU)",
+          "original_line": 374,
+          "error_line": 375,
+          "end_line": 377
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 379,
+          "error_line": 380,
+          "end_line": 382
+        },
+        {
+          "kind": "ifdef",
+          "expression": "macintosh",
+          "original_line": 489,
+          "error_line": 490,
+          "end_line": 504
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 547,
+          "error_line": 548,
+          "end_line": 586
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 617,
+          "error_line": 618,
+          "end_line": 621
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 667,
+          "error_line": 668,
+          "end_line": 670
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 694,
+          "error_line": 695,
+          "end_line": 705
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+        "source_sha256": "d9b99fa1f691dae52e7042f960d776a972a885f2893261e7b200605b877d2d1d",
+        "object": "system/rom",
+        "arms": [
+          {
+            "label": "codex_r686_arm_0000",
+            "line": 20,
+            "kind": "if",
+            "expression": "defined(NTVDM) && defined(MONITOR)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0001",
+            "line": 43,
+            "kind": "ifdef",
+            "expression": "CPU_40_STYLE",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0002",
+            "line": 44,
+            "kind": "ifdef",
+            "expression": "CCPU",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0003",
+            "line": 46,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0004",
+            "line": 51,
+            "kind": "ifndef",
+            "expression": "BIOS1ROM_FILENAME",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0005",
+            "line": 55,
+            "kind": "ifndef",
+            "expression": "BIOS2ROM_FILENAME",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0006",
+            "line": 56,
+            "kind": "ifdef",
+            "expression": "CPU_40_STYLE",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0007",
+            "line": 58,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0008",
+            "line": 63,
+            "kind": "ifndef",
+            "expression": "EGAROM_FILENAME",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0009",
+            "line": 67,
+            "kind": "ifndef",
+            "expression": "VGAROM_FILENAME",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0010",
+            "line": 71,
+            "kind": "ifndef",
+            "expression": "V7VGAROM_FILENAME",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0011",
+            "line": 76,
+            "kind": "ifdef",
+            "expression": "GISP_SVGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0012",
+            "line": 82,
+            "kind": "ifndef",
+            "expression": "ADAPTOR_ROM_START",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0013",
+            "line": 86,
+            "kind": "ifndef",
+            "expression": "ADAPTOR_ROM_END",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0014",
+            "line": 92,
+            "kind": "ifndef",
+            "expression": "EXPANSION_ROM_START",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0015",
+            "line": 96,
+            "kind": "ifndef",
+            "expression": "EXPANSION_ROM_END",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0016",
+            "line": 108,
+            "kind": "if",
+            "expression": "defined(macintosh) && defined(A2CPU)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0017",
+            "line": 111,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0018",
+            "line": 119,
+            "kind": "ifdef",
+            "expression": "ANSI",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0019",
+            "line": 121,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0020",
+            "line": 167,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0021",
+            "line": 216,
+            "kind": "ifdef",
+            "expression": "REAL_VGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0022",
+            "line": 218,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0023",
+            "line": 223,
+            "kind": "ifndef",
+            "expression": "GISP_SVGA",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0024",
+            "line": 224,
+            "kind": "ifdef",
+            "expression": "VGG",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0025",
+            "line": 226,
+            "kind": "ifdef",
+            "expression": "V7VGA",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0026",
+            "line": 228,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0027",
+            "line": 234,
+            "kind": "ifdef",
+            "expression": "EGG",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0028",
+            "line": 244,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0029",
+            "line": 270,
+            "kind": "if",
+            "expression": "!defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) )",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0030",
+            "line": 278,
+            "kind": "ifdef",
+            "expression": "GISP_SVGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0031",
+            "line": 280,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0032",
+            "line": 281,
+            "kind": "if",
+            "expression": "defined(macintosh) && defined(A2CPU)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0033",
+            "line": 283,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0034",
+            "line": 291,
+            "kind": "if",
+            "expression": "defined(SPC386) && !defined(GISP_CPU)",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0035",
+            "line": 299,
+            "kind": "ifdef",
+            "expression": "GISP_SVGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0036",
+            "line": 301,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0037",
+            "line": 308,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0038",
+            "line": 318,
+            "kind": "if",
+            "expression": "!(defined(NTVDM) && defined(MONITOR))",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0039",
+            "line": 325,
+            "kind": "if",
+            "expression": "defined(macintosh) && defined(A2CPU)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0040",
+            "line": 327,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0041",
+            "line": 343,
+            "kind": "if",
+            "expression": "defined(macintosh) && defined(A2CPU)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0042",
+            "line": 348,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0043",
+            "line": 411,
+            "kind": "if",
+            "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX))",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0044",
+            "line": 412,
+            "kind": "ifndef",
+            "expression": "GISP_SVGA",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0045",
+            "line": 431,
+            "kind": "if",
+            "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0046",
+            "line": 439,
+            "kind": "if",
+            "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0047",
+            "line": 447,
+            "kind": "ifdef",
+            "expression": "CPU_40_STYLE",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0048",
+            "line": 458,
+            "kind": "ifdef",
+            "expression": "macintosh",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0049",
+            "line": 490,
+            "kind": "ifndef",
+            "expression": "GISP_SVGA",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0050",
+            "line": 504,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0051",
+            "line": 513,
+            "kind": "ifndef",
+            "expression": "GISP_SVGA",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0052",
+            "line": 521,
+            "kind": "if",
+            "expression": "!(defined(NTVDM) & defined(MONITOR))",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0053",
+            "line": 538,
+            "kind": "ifndef",
+            "expression": "GISP_SVGA",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0054",
+            "line": 540,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0055",
+            "line": 546,
+            "kind": "if",
+            "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0056",
+            "line": 553,
+            "kind": "ifdef",
+            "expression": "CPU_40_STYLE",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0057",
+            "line": 589,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0058",
+            "line": 616,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "757e93a6acf2a1744a3495097b2e13187fd79b571876aa080c1d0baf3efeae29",
+            "hit": [
+              "codex_r686_arm_0001",
+              "codex_r686_arm_0002",
+              "codex_r686_arm_0004",
+              "codex_r686_arm_0005",
+              "codex_r686_arm_0006",
+              "codex_r686_arm_0008",
+              "codex_r686_arm_0009",
+              "codex_r686_arm_0010",
+              "codex_r686_arm_0012",
+              "codex_r686_arm_0013",
+              "codex_r686_arm_0014",
+              "codex_r686_arm_0015",
+              "codex_r686_arm_0017",
+              "codex_r686_arm_0018",
+              "codex_r686_arm_0022",
+              "codex_r686_arm_0023",
+              "codex_r686_arm_0024",
+              "codex_r686_arm_0025",
+              "codex_r686_arm_0027",
+              "codex_r686_arm_0029",
+              "codex_r686_arm_0031",
+              "codex_r686_arm_0033",
+              "codex_r686_arm_0034",
+              "codex_r686_arm_0036",
+              "codex_r686_arm_0038",
+              "codex_r686_arm_0040",
+              "codex_r686_arm_0043",
+              "codex_r686_arm_0044",
+              "codex_r686_arm_0045",
+              "codex_r686_arm_0046",
+              "codex_r686_arm_0047",
+              "codex_r686_arm_0049",
+              "codex_r686_arm_0051",
+              "codex_r686_arm_0052",
+              "codex_r686_arm_0053",
+              "codex_r686_arm_0055",
+              "codex_r686_arm_0056"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "757e93a6acf2a1744a3495097b2e13187fd79b571876aa080c1d0baf3efeae29",
+            "hit": [
+              "codex_r686_arm_0001",
+              "codex_r686_arm_0002",
+              "codex_r686_arm_0004",
+              "codex_r686_arm_0005",
+              "codex_r686_arm_0006",
+              "codex_r686_arm_0008",
+              "codex_r686_arm_0009",
+              "codex_r686_arm_0010",
+              "codex_r686_arm_0012",
+              "codex_r686_arm_0013",
+              "codex_r686_arm_0014",
+              "codex_r686_arm_0015",
+              "codex_r686_arm_0017",
+              "codex_r686_arm_0018",
+              "codex_r686_arm_0022",
+              "codex_r686_arm_0023",
+              "codex_r686_arm_0024",
+              "codex_r686_arm_0025",
+              "codex_r686_arm_0027",
+              "codex_r686_arm_0029",
+              "codex_r686_arm_0031",
+              "codex_r686_arm_0033",
+              "codex_r686_arm_0034",
+              "codex_r686_arm_0036",
+              "codex_r686_arm_0038",
+              "codex_r686_arm_0040",
+              "codex_r686_arm_0043",
+              "codex_r686_arm_0044",
+              "codex_r686_arm_0045",
+              "codex_r686_arm_0046",
+              "codex_r686_arm_0047",
+              "codex_r686_arm_0049",
+              "codex_r686_arm_0051",
+              "codex_r686_arm_0052",
+              "codex_r686_arm_0053",
+              "codex_r686_arm_0055",
+              "codex_r686_arm_0056"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 182,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 182,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 22,
+      "marker_line_mapping": {
+        "20": 20,
+        "23": 23,
+        "43": 43,
+        "44": 44,
+        "46": 46,
+        "48": 49,
+        "49": 51,
+        "51": 53,
+        "53": 55,
+        "55": 57,
+        "56": 58,
+        "58": 60,
+        "60": 63,
+        "61": 65,
+        "63": 67,
+        "65": 69,
+        "67": 71,
+        "69": 73,
+        "71": 75,
+        "73": 77,
+        "76": 80,
+        "79": 83,
+        "82": 86,
+        "84": 88,
+        "86": 90,
+        "88": 92,
+        "92": 96,
+        "94": 98,
+        "96": 100,
+        "98": 102,
+        "108": 112,
+        "111": 116,
+        "114": 120,
+        "119": 126,
+        "121": 128,
+        "123": 131,
+        "167": 175,
+        "170": 178,
+        "216": 224,
+        "218": 227,
+        "223": 233,
+        "224": 234,
+        "226": 236,
+        "228": 238,
+        "230": 241,
+        "232": 244,
+        "234": 246,
+        "238": 250,
+        "244": 256,
+        "246": 259,
+        "265": 279,
+        "270": 285,
+        "278": 293,
+        "280": 296,
+        "281": 298,
+        "283": 301,
+        "285": 304,
+        "286": 306,
+        "291": 312,
+        "293": 314,
+        "299": 320,
+        "301": 323,
+        "306": 329,
+        "308": 332,
+        "310": 335,
+        "318": 343,
+        "325": 350,
+        "327": 353,
+        "329": 356,
+        "343": 371,
+        "345": 374,
+        "348": 378,
+        "350": 381,
+        "411": 443,
+        "412": 444,
+        "424": 456,
+        "425": 457,
+        "431": 463,
+        "434": 466,
+        "439": 471,
+        "447": 479,
+        "458": 490,
+        "460": 493,
+        "490": 524,
+        "502": 536,
+        "504": 538,
+        "506": 541,
+        "509": 544,
+        "513": 548,
+        "521": 556,
+        "526": 561,
+        "532": 567,
+        "538": 573,
+        "540": 575,
+        "542": 578,
+        "546": 583,
+        "553": 590,
+        "589": 626,
+        "591": 629,
+        "616": 655,
+        "618": 658,
+        "619": 660
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\x86_emm.c",
+      "before_sha256": "baab03e2f20d7a4e33ba87df317cb732d1c2927a55f228796ed7472754ac9f1d",
+      "after_sha256": "9846af750733fcd2b736ab3f95fe0e3e9ae3446e212592f7366b8bfddcef0fac",
+      "original_sha256": "117d119314787e09b853e05de0e35bb6935fb2d763f4fec7eef6b1d804e3d189",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "original_line": 49,
+          "error_line": 50,
+          "end_line": 948
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+        "source_sha256": "baab03e2f20d7a4e33ba87df317cb732d1c2927a55f228796ed7472754ac9f1d",
+        "object": "host/x86_emm",
+        "arms": [
+          {
+            "label": "codex_r687_arm_0000",
+            "line": 48,
+            "kind": "ifdef",
+            "expression": "LIM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r687_arm_0001",
+            "line": 49,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "6efbc470921a2977324fe42258faa83f0ea9917d5705701eaf471bca65964ea3",
+            "hit": [
+              "codex_r687_arm_0000"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "6efbc470921a2977324fe42258faa83f0ea9917d5705701eaf471bca65964ea3",
+            "hit": [
+              "codex_r687_arm_0000"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 158,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 158,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 1,
+      "marker_line_mapping": {
+        "48": 48,
+        "49": 49,
+        "51": 52,
+        "53": 54
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lldt.c",
+      "before_sha256": "12a7f0857e64884f3b8d069076b5005ccab12a1cde6e698c322c14935b183adc",
+      "after_sha256": "f7c791af8bda2ca0ce231a68555f0f18840fc28b3245732e569d9aea01d26f2a",
+      "original_sha256": "9b0077be47d4bb3f75e8f521a9db907ec42199c57ab59226e56d6b8013dfe6c6",
+      "guards": [
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 53,
+          "error_line": 54,
+          "end_line": 56
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+        "source_sha256": "12a7f0857e64884f3b8d069076b5005ccab12a1cde6e698c322c14935b183adc",
+        "object": "ccpu/lldt",
+        "arms": [
+          {
+            "label": "codex_r687_arm_0000",
+            "line": 51,
+            "kind": "ifndef",
+            "expression": "DONT_CLEAR_LDTR_ON_INVALID",
+            "error_only": false
+          },
+          {
+            "label": "codex_r687_arm_0001",
+            "line": 53,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r687_arm_0002",
+            "line": 57,
+            "kind": "ifndef",
+            "expression": "DONT_CLEAR_LDT_BL_ON_INVALID",
+            "error_only": false
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "327ef93d6c4f994dbdfe79d3056b480a3c573196dc1598f38a80bb6abed931f5",
+            "hit": [
+              "codex_r687_arm_0000",
+              "codex_r687_arm_0002"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "327ef93d6c4f994dbdfe79d3056b480a3c573196dc1598f38a80bb6abed931f5",
+            "hit": [
+              "codex_r687_arm_0000",
+              "codex_r687_arm_0002"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 168,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 168,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 1,
+      "marker_line_mapping": {
+        "51": 51,
+        "53": 53,
+        "55": 56,
+        "57": 58,
+        "65": 66
+      }
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdisp.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdisp.c",
+      "before_sha256": "c447b517e3efbde64db538a1d02bc695728cc3cfaf76361061cc5bbf67d2b944",
+      "after_sha256": "ace77f81f45586b2700d5ce16149e8f791d88c8bc6b43e891423394a1f770c97",
+      "original_sha256": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389",
+      "guards": [
+        {
+          "kind": "if",
+          "expression": "0",
+          "original_line": 137,
+          "error_line": 138,
+          "end_line": 144
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 146,
+          "error_line": 147,
+          "end_line": 150
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/vdmredir/vrdisp.c",
+        "source_sha256": "c447b517e3efbde64db538a1d02bc695728cc3cfaf76361061cc5bbf67d2b944",
+        "object": "redir/vrdisp",
+        "arms": [
+          {
+            "label": "codex_r688_arm_0000",
+            "line": 137,
+            "kind": "if",
+            "expression": "0",
+            "error_only": true
+          },
+          {
+            "label": "codex_r688_arm_0001",
+            "line": 144,
+            "kind": "if",
+            "expression": "DBG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r688_arm_0002",
+            "line": 159,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "335fbbe381d8c5194686c77147a7886309bc8c802065ce63baee9bda27cc0a94",
+            "hit": [
+              "codex_r688_arm_0002"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "335fbbe381d8c5194686c77147a7886309bc8c802065ce63baee9bda27cc0a94",
+            "hit": [
+              "codex_r688_arm_0002"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/vdmredir/vrdisp.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 176,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/vdmredir/vrdisp.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 176,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 2,
+      "marker_line_mapping": {
+        "137": 137,
+        "139": 140,
+        "144": 145,
+        "147": 148,
+        "159": 160,
+        "177": 178
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wdib.c",
+      "before_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc",
+      "after_sha256": "88ba7a3bbbd31154db9a509bf8b221eafc2d92af5417d0400ba8432387596942",
+      "original_sha256": "d0bd4f9cb7bba0dc5e977a8c096337df0830e3804ef6aeb8759cf979176dd910",
+      "guards": [
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 319,
+          "error_line": 320,
+          "end_line": 322
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 664,
+          "error_line": 665,
+          "end_line": 667
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/wow32/wdib.c",
+        "source_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc",
+        "object": "wdib",
+        "arms": [
+          {
+            "label": "codex_r691_arm_0000",
+            "line": 298,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0001",
+            "line": 319,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0002",
+            "line": 424,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0003",
+            "line": 657,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0004",
+            "line": 665,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0005",
+            "line": 692,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0006",
+            "line": 714,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0007",
+            "line": 739,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0008",
+            "line": 839,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "c6d90b2c210d4b2917ea863efd186fa2108d9b42ad2a561af156d16acfcd0671",
+            "hit": [
+              "codex_r691_arm_0000",
+              "codex_r691_arm_0002",
+              "codex_r691_arm_0003",
+              "codex_r691_arm_0005",
+              "codex_r691_arm_0006",
+              "codex_r691_arm_0007",
+              "codex_r691_arm_0008"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/wow32/wdib.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 325,
+          "identical": true,
+          "include_trace_sha256": "54cf56650557de7d24aa477efb4e98dcdeaf9652d096e1addcd95a6fb85a38b1",
+          "method": "temporary sibling file; original search order"
+        }
+      ],
+      "after_conditional_groups": 2,
+      "marker_line_mapping": {
+        "298": 298,
+        "319": 319,
+        "321": 322,
+        "424": 425,
+        "426": 427,
+        "657": 658,
+        "665": 666,
+        "667": 669,
+        "692": 694,
+        "702": 704,
+        "714": 716,
+        "716": 718,
+        "739": 741,
+        "741": 743,
+        "839": 841,
+        "841": 843
+      }
+    }
+  ]
+}

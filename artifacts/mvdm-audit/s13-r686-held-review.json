@@ -1,0 +1,223 @@
+{
+  "scope": "Preliminary original-tree comparisons; held files remain pending, candidate edits require full batch verification",
+  "results": {
+    "683": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+        "status": "held",
+        "reason": "retained arm not observed 125"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+        "status": "held",
+        "reason": "retained arm not observed 221"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+        "status": "held",
+        "reason": "retained leaf"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+        "status": "held",
+        "reason": "retained leaf"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+        "status": "held",
+        "reason": "selectors"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/support/main.c",
+        "status": "held",
+        "reason": "selectors"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+        "status": "candidate",
+        "edits": 29,
+        "excluded_groups": 18,
+        "source_sha256": "00bc52ffb3faa922ddf5bdd7b0bb88b9605c4ca83fcc1d9f2c1de1662487bca0"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+        "status": "candidate",
+        "edits": 6,
+        "excluded_groups": 4,
+        "source_sha256": "f51346082abab3ebfe9931b0947f699e9184d69ddb59f9fb3af74aed0db35870"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+        "status": "held",
+        "reason": "retained leaf"
+      }
+    ],
+    "684": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+        "status": "held",
+        "reason": "retained arm not observed 1123"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+        "status": "held",
+        "reason": "retained arm not observed 540"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+        "status": "held",
+        "reason": "retained arm not observed 162"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+        "status": "held",
+        "reason": "retained arm not observed 156"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+        "status": "held",
+        "reason": "retained arm not observed 61"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+        "status": "held",
+        "reason": "retained arm not observed 2198"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+        "status": "candidate",
+        "edits": 4,
+        "excluded_groups": 15,
+        "source_sha256": "ba085c8680f3f30cc36956b5fd9249b9c7539d8f92e245fe50a6b0a8d9f00d19"
+      }
+    ],
+    "685": [
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+        "status": "held",
+        "reason": "retained leaf"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+        "status": "candidate",
+        "edits": 11,
+        "excluded_groups": 6,
+        "source_sha256": "699de0d85b7f2e9a5ca1e2d07308e174ddafd398f2d92fa95809c39c85dffcaf"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+        "status": "held",
+        "reason": "retained leaf"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+        "status": "held",
+        "reason": "retained arm not observed 108"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+        "status": "held",
+        "reason": "retained arm not observed 27"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+        "status": "held",
+        "reason": "group count"
+      }
+    ],
+    "686": [
+      {
+        "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+        "status": "held",
+        "reason": "retained arm not observed 355"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+        "status": "held",
+        "reason": "retained arm not observed 119"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+        "status": "held",
+        "reason": "retained arm not observed 1182"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+        "status": "held",
+        "reason": "retained leaf"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+        "status": "candidate",
+        "edits": 43,
+        "excluded_groups": 22,
+        "source_sha256": "d9b99fa1f691dae52e7042f960d776a972a885f2893261e7b200605b877d2d1d"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+        "status": "held",
+        "reason": "retained arm not observed 2457"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+        "status": "held",
+        "reason": "group count"
+      },
+      {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+        "status": "held",
+        "reason": "group count"
+      }
+    ]
+  }
+}

@@ -1,0 +1,497 @@
+{
+  "scope": "Two original condition trees with previously missing diagnostic anchors; all retained arms witnessed in actual worker preprocess contexts.",
+  "method": "Original/current recursive tree preflight; selected-arm markers and ordered include traces checked before edits; resulting tree and line anchors rechecked.",
+  "limits": "Two of ten allowed source edits in current build batch; complete supported-context enumeration remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\time_day.c",
+      "before_sha256": "00bc52ffb3faa922ddf5bdd7b0bb88b9605c4ca83fcc1d9f2c1de1662487bca0",
+      "after_sha256": "469d7f498f27e70dcfd04b2e7596e7f7bbda69cdc94ca401a4716544d453a385",
+      "original_sha256": "af7a3d2b6dd80dec1f72910ae627f2ed87906fe8986e8c7c930ae6fbf35bd1b2",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SCCSID",
+          "original_line": 41,
+          "error_line": 42,
+          "end_line": 44
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 45,
+          "error_line": 46,
+          "end_line": 53
+        },
+        {
+          "kind": "ifdef",
+          "expression": "XTSFD",
+          "original_line": 89,
+          "error_line": 90,
+          "end_line": 92
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 100,
+          "error_line": 101,
+          "end_line": 107
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 113,
+          "error_line": 114,
+          "end_line": 119
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BSD4_2",
+          "original_line": 145,
+          "error_line": 146,
+          "end_line": 148
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 163,
+          "error_line": 164,
+          "end_line": 206
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 218,
+          "error_line": 219,
+          "end_line": 225
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 228,
+          "error_line": 229,
+          "end_line": 233
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 243,
+          "error_line": 244,
+          "end_line": 261
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 285,
+          "error_line": 286,
+          "end_line": 290
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 300,
+          "error_line": 301,
+          "end_line": 318
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BSD4_2",
+          "original_line": 345,
+          "error_line": 346,
+          "end_line": 348
+        },
+        {
+          "kind": "ifdef",
+          "expression": "XTSFD",
+          "original_line": 377,
+          "error_line": 378,
+          "end_line": 395
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BSD4_2",
+          "original_line": 398,
+          "error_line": 399,
+          "end_line": 401
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 409,
+          "error_line": 410,
+          "end_line": 493
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 507,
+          "error_line": 508,
+          "end_line": 766
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 770,
+          "error_line": 771,
+          "end_line": 802
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+        "source_sha256": "00bc52ffb3faa922ddf5bdd7b0bb88b9605c4ca83fcc1d9f2c1de1662487bca0",
+        "object": "support/time_day",
+        "arms": [
+          {
+            "label": "codex_r683_arm_0000",
+            "line": 41,
+            "kind": "ifdef",
+            "expression": "SCCSID",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0001",
+            "line": 45,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0002",
+            "line": 90,
+            "kind": "ifdef",
+            "expression": "XTSFD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0003",
+            "line": 97,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0004",
+            "line": 103,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0005",
+            "line": 107,
+            "kind": "ifdef",
+            "expression": "ANSI",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0006",
+            "line": 112,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0007",
+            "line": 142,
+            "kind": "ifdef",
+            "expression": "BSD4_2",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0008",
+            "line": 149,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0009",
+            "line": 160,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0010",
+            "line": 176,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0011",
+            "line": 182,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0012",
+            "line": 196,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0013",
+            "line": 224,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0014",
+            "line": 238,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0015",
+            "line": 269,
+            "kind": "ifdef",
+            "expression": "BSD4_2",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0016",
+            "line": 301,
+            "kind": "ifdef",
+            "expression": "XTSFD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0017",
+            "line": 303,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0018",
+            "line": 312,
+            "kind": "ifdef",
+            "expression": "BSD4_2",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0019",
+            "line": 323,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0020",
+            "line": 340,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0021",
+            "line": 348,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0022",
+            "line": 355,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "da05d1ecd4ad2ee95375276b35292d4dae890d8ce7e78134e3b7f502524e2518",
+            "hit": [
+              "codex_r683_arm_0003",
+              "codex_r683_arm_0005",
+              "codex_r683_arm_0008",
+              "codex_r683_arm_0017",
+              "codex_r683_arm_0022"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "da05d1ecd4ad2ee95375276b35292d4dae890d8ce7e78134e3b7f502524e2518",
+            "hit": [
+              "codex_r683_arm_0003",
+              "codex_r683_arm_0005",
+              "codex_r683_arm_0008",
+              "codex_r683_arm_0017",
+              "codex_r683_arm_0022"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 184,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 184,
+          "identical": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\at_dma.c",
+      "before_sha256": "f51346082abab3ebfe9931b0947f699e9184d69ddb59f9fb3af74aed0db35870",
+      "after_sha256": "a9752b272d2c089e4a2e5bd256f8e9f7dcdc08a93e310ec85635c2bc636f3d0f",
+      "original_sha256": "4867e3e03e0a5f49066963a37a957d231ec9addbc203789beed42bcf510f3f01",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 23,
+          "error_line": 24,
+          "end_line": 31
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PM",
+          "original_line": 798,
+          "error_line": 799,
+          "end_line": 817
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PM",
+          "original_line": 823,
+          "error_line": 824,
+          "end_line": 843
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 885,
+          "error_line": 886,
+          "end_line": 893
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+        "source_sha256": "f51346082abab3ebfe9931b0947f699e9184d69ddb59f9fb3af74aed0db35870",
+        "object": "system/at_dma",
+        "arms": [
+          {
+            "label": "codex_r683_arm_0000",
+            "line": 23,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0001",
+            "line": 70,
+            "kind": "ifdef",
+            "expression": "LIM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0002",
+            "line": 81,
+            "kind": "ifdef",
+            "expression": "LIM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0003",
+            "line": 93,
+            "kind": "ifdef",
+            "expression": "LIM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0004",
+            "line": 737,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r683_arm_0005",
+            "line": 798,
+            "kind": "ifndef",
+            "expression": "PM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0006",
+            "line": 808,
+            "kind": "ifndef",
+            "expression": "PM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0007",
+            "line": 854,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r683_arm_0008",
+            "line": 869,
+            "kind": "ifdef",
+            "expression": "LIM",
+            "error_only": false
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "d0b427f5a40762eb12b050fb436034d356f82b1727796c1e4c471249f7f7d910",
+            "hit": [
+              "codex_r683_arm_0001",
+              "codex_r683_arm_0002",
+              "codex_r683_arm_0003",
+              "codex_r683_arm_0004",
+              "codex_r683_arm_0008"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "d0b427f5a40762eb12b050fb436034d356f82b1727796c1e4c471249f7f7d910",
+            "hit": [
+              "codex_r683_arm_0001",
+              "codex_r683_arm_0002",
+              "codex_r683_arm_0003",
+              "codex_r683_arm_0004",
+              "codex_r683_arm_0008"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 175,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/system/at_dma.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 175,
+          "identical": true
+        }
+      ]
+    }
+  ]
+}

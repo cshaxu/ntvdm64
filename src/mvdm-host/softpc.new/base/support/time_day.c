@@ -39,10 +39,13 @@
  */
 
 #ifdef SCCSID
+#line 42
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
+#line 44
 
 #ifdef SEGMENTATION
+#line 46
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -50,6 +53,7 @@
 
 
 #endif
+#line 53
 
 
 /*
@@ -101,8 +105,10 @@ BOOL UpDateInProgress(void);
 IMPORT VOID host_init_bda_timer(void);
 
 #else
+#line 101
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 107
 
 #ifdef ANSI
 LOCAL void get_host_timestamp(word *, word *, half_word *);
@@ -110,9 +116,10 @@ LOCAL void write_host_timestamp(int, int);
 LOCAL void TimeToTicks(int, int, int, word *, word *);
 LOCAL void get_host_time(int *, int *, int *);
 #else
+#line 114
 #error Unsupported excluded original configuration
 #endif /* ANSI */
-#line 115
+#line 119
 
 #define TICKS_PER_HOUR      65543L
 #define TICKS_PER_MIN       1092L
@@ -140,8 +147,10 @@ void time_of_day()
      */
 
 #ifdef BSD4_2
+#line 146
 #error DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register.
 #endif
+#line 148
 
     switch (getAH()) {
 	case 0x00:			/* Get time	*/
@@ -158,6 +167,7 @@ void time_of_day()
             sas_store(TIMER_OVFL, 0);   /* Always write zero after read */
 
 #else   /* ! NTVDM */
+#line 164
 #error Excluded unsupported non-NTVDM alternative
 #endif /* NTVDM */
 #line 206
@@ -174,12 +184,15 @@ void time_of_day()
 	    sas_store(TIMER_OVFL, 0);
 
 #ifndef NTVDM
+#line 219
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 225
 	    break;
 	case 2:	/* read the real time clock	*/
 
 #ifndef NTVDM
+#line 229
 #error Excluded unsupported non-NTVDM time service profile
 #endif
 #line 233
@@ -194,6 +207,7 @@ void time_of_day()
 			setCF(0);
 		}
 #ifndef NTVDM
+#line 244
 #error Excluded unsupported non-NTVDM time service profile
 #endif
 #line 261
@@ -222,6 +236,7 @@ void time_of_day()
 	case 4:	/* read the date from the real time clock	*/
 
 #ifndef NTVDM
+#line 286
 #error Excluded unsupported non-NTVDM time service profile
 #endif
 #line 290
@@ -236,6 +251,7 @@ void time_of_day()
 			setCF(0);
 		}
 #ifndef NTVDM
+#line 301
 #error Excluded unsupported non-NTVDM time service profile
 #endif
 #line 318
@@ -267,8 +283,10 @@ void time_of_day()
 		{
 			setCF(1);
 #ifdef BSD4_2
+#line 346
 #error DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register.
 #endif
+#line 348
 			return;
 		}
 		if( UPDATE_IN_PROGRESS )
@@ -299,9 +317,10 @@ void time_of_day()
 
 
 #ifdef XTSFD
+#line 378
 #error Unsupported excluded original configuration
 #else
-#line 342
+#line 392
         default:
             ; /* Do nothing */
 #endif
@@ -310,8 +329,10 @@ void time_of_day()
     setAH( 0 );
 
 #ifdef BSD4_2
+#line 399
 #error DIVERGENCE MVDM-HOST-DIV-528: BSD4_2 platform branch is not selected; see mirror register.
 #endif
+#line 401
 }
 
 
@@ -321,8 +342,10 @@ void time_int()
      * NT port does everything in 16 bit int08 handler
      */
 #ifndef NTVDM
+#line 410
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
+#line 493
 }
 
 /*
@@ -338,16 +361,19 @@ void time_int()
  *  to the time of day stuff is not needed
  */
 #ifndef NTVDM
+#line 508
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* ifndef NTVDM */
-#line 379
+#line 766
 
 
 void time_of_day_init()
 {
 #ifndef NTVDM
+#line 771
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
+#line 802
 }
 
 

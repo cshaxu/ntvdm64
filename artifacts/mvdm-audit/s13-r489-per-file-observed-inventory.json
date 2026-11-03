@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 814,
+  "completed_files": 823,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -3180,7 +3180,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r691-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.h",
@@ -6369,7 +6370,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r691-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/xt.c",
@@ -6391,7 +6393,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r691-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
@@ -6471,7 +6474,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r691-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/timer.c",
@@ -6707,8 +6711,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r666-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r666-guard-line-audit.json",
+      "evidence": "s13-r691-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -7231,7 +7236,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r691-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
@@ -7718,7 +7724,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r691-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
@@ -7801,7 +7808,8 @@
         "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r691-batch-review.json"
     },
     {
       "path": "src/mvdm-host/vdmredir/vrdlc.h",
@@ -8275,7 +8283,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r691-batch-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wdib.h",

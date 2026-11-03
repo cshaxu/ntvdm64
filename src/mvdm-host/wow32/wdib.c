@@ -317,6 +317,7 @@ HDC W32HandleDibDrv (PVPVOID vpbmi16)
         }
 
 #else
+#line 320
 #error Excluded unsupported i386 WOW DIB profile
 #endif
 #line 322
@@ -663,6 +664,7 @@ ULONG FASTCALL WG32CreateDIBSection(PVDMFRAME pFrame)
         }
 
 #else
+#line 665
 #error Excluded unsupported i386 WOW DIB profile
 #endif
 #line 667

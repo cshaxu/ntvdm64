@@ -21,6 +21,7 @@
 
 
 #ifdef SEGMENTATION
+#line 24
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -28,6 +29,7 @@
 
 
 #endif
+#line 31
 
 /*
  *	System include files
@@ -796,6 +798,7 @@ LOCAL void do_transfer	IFN6(int, type, int, decrement,
 		if (!decrement)
 		{
 #ifndef PM
+#line 799
 #error Unsupported excluded original configuration
 #endif /* nPM */
 #line 817
@@ -806,6 +809,7 @@ LOCAL void do_transfer	IFN6(int, type, int, decrement,
 		{
 			/*  decrement case - check for writing to ROM */
 #ifndef PM
+#line 824
 #error Unsupported excluded original configuration
 #endif /* nPM */
 #line 843
@@ -852,6 +856,7 @@ LOCAL	void	bwd_dest_copy_from_M	IFN3(sys_addr, s, host_addr, d,
 }
 
 #ifdef SEGMENTATION
+#line 886
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -859,6 +864,7 @@ LOCAL	void	bwd_dest_copy_from_M	IFN3(sys_addr, s, host_addr, d,
 
 
 #endif
+#line 893
 
 GLOBAL	void dma_init	IFN0()
 {

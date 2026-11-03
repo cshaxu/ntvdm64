@@ -1,0 +1,126 @@
+{
+  "scope": "One WOW32 original condition tree with previously missing diagnostic anchors; all retained arms witnessed in actual WOW32 x86 preprocess context.",
+  "method": "Original/current recursive tree preflight; selected-arm markers and ordered include traces checked before edits; resulting tree and line anchors rechecked.",
+  "limits": "Ten of ten allowed source edits in current build batch; complete supported-context enumeration remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wdib.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wdib.c",
+      "before_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc",
+      "after_sha256": "88ba7a3bbbd31154db9a509bf8b221eafc2d92af5417d0400ba8432387596942",
+      "original_sha256": "d0bd4f9cb7bba0dc5e977a8c096337df0830e3804ef6aeb8759cf979176dd910",
+      "guards": [
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 319,
+          "error_line": 320,
+          "end_line": 322
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 664,
+          "error_line": 665,
+          "end_line": 667
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/wow32/wdib.c",
+        "source_sha256": "775c2dd258f15e0a3f86665a4c0ed95a759e70e89333b6d5b4336a519a1269fc",
+        "object": "wdib",
+        "arms": [
+          {
+            "label": "codex_r691_arm_0000",
+            "line": 298,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0001",
+            "line": 319,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0002",
+            "line": 424,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0003",
+            "line": 657,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0004",
+            "line": 665,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0005",
+            "line": 692,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0006",
+            "line": 714,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0007",
+            "line": 739,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0008",
+            "line": 839,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "c6d90b2c210d4b2917ea863efd186fa2108d9b42ad2a561af156d16acfcd0671",
+            "hit": [
+              "codex_r691_arm_0000",
+              "codex_r691_arm_0002",
+              "codex_r691_arm_0003",
+              "codex_r691_arm_0005",
+              "codex_r691_arm_0006",
+              "codex_r691_arm_0007",
+              "codex_r691_arm_0008"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/wow32/wdib.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 325,
+          "identical": true,
+          "include_trace_sha256": "54cf56650557de7d24aa477efb4e98dcdeaf9652d096e1addcd95a6fb85a38b1",
+          "method": "temporary sibling file; original search order"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,154 @@
+{
+  "scope": "Two original condition trees with previously missing diagnostic anchors; all retained arms witnessed in actual worker preprocess contexts.",
+  "method": "Original/current recursive tree preflight; selected-arm markers and ordered include traces checked before edits; resulting tree and line anchors rechecked.",
+  "limits": "Seven of ten allowed source edits in current build batch; complete supported-context enumeration remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\x86_emm.c",
+      "before_sha256": "baab03e2f20d7a4e33ba87df317cb732d1c2927a55f228796ed7472754ac9f1d",
+      "after_sha256": "9846af750733fcd2b736ab3f95fe0e3e9ae3446e212592f7366b8bfddcef0fac",
+      "original_sha256": "117d119314787e09b853e05de0e35bb6935fb2d763f4fec7eef6b1d804e3d189",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "original_line": 49,
+          "error_line": 50,
+          "end_line": 948
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+        "source_sha256": "baab03e2f20d7a4e33ba87df317cb732d1c2927a55f228796ed7472754ac9f1d",
+        "object": "host/x86_emm",
+        "arms": [
+          {
+            "label": "codex_r687_arm_0000",
+            "line": 48,
+            "kind": "ifdef",
+            "expression": "LIM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r687_arm_0001",
+            "line": 49,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "6efbc470921a2977324fe42258faa83f0ea9917d5705701eaf471bca65964ea3",
+            "hit": [
+              "codex_r687_arm_0000"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "6efbc470921a2977324fe42258faa83f0ea9917d5705701eaf471bca65964ea3",
+            "hit": [
+              "codex_r687_arm_0000"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 158,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/x86_emm.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 158,
+          "identical": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lldt.c",
+      "before_sha256": "12a7f0857e64884f3b8d069076b5005ccab12a1cde6e698c322c14935b183adc",
+      "after_sha256": "f7c791af8bda2ca0ce231a68555f0f18840fc28b3245732e569d9aea01d26f2a",
+      "original_sha256": "9b0077be47d4bb3f75e8f521a9db907ec42199c57ab59226e56d6b8013dfe6c6",
+      "guards": [
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 53,
+          "error_line": 54,
+          "end_line": 56
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+        "source_sha256": "12a7f0857e64884f3b8d069076b5005ccab12a1cde6e698c322c14935b183adc",
+        "object": "ccpu/lldt",
+        "arms": [
+          {
+            "label": "codex_r687_arm_0000",
+            "line": 51,
+            "kind": "ifndef",
+            "expression": "DONT_CLEAR_LDTR_ON_INVALID",
+            "error_only": false
+          },
+          {
+            "label": "codex_r687_arm_0001",
+            "line": 53,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r687_arm_0002",
+            "line": 57,
+            "kind": "ifndef",
+            "expression": "DONT_CLEAR_LDT_BL_ON_INVALID",
+            "error_only": false
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "327ef93d6c4f994dbdfe79d3056b480a3c573196dc1598f38a80bb6abed931f5",
+            "hit": [
+              "codex_r687_arm_0000",
+              "codex_r687_arm_0002"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "327ef93d6c4f994dbdfe79d3056b480a3c573196dc1598f38a80bb6abed931f5",
+            "hit": [
+              "codex_r687_arm_0000",
+              "codex_r687_arm_0002"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 168,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/lldt.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 168,
+          "identical": true
+        }
+      ]
+    }
+  ]
+}

@@ -653,8 +653,10 @@ void vga_disp_func()
 #ifndef HERC 
 	if (video_adapter != VGA)
 #else
+#line 677
 #error DIVERGENCE MVDM-HOST-DIV-523: HERC alternative is not selected; see mirror register.
 #endif	/* HERC */
+#line 679
 	{
 		/* we are not -so this function is not implemented */
 		not_imp();
@@ -719,8 +721,10 @@ void vga_disp_func()
 		sas_store(buf+0x29, vd_mode_table[video_mode].npages);
 	}
 #else
+#line 740
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif /* V7VGA */
+#line 743
 	sas_store(buf+0x2A, get_scanlines());
 
 	outb(EGA_SEQ_INDEX,3);

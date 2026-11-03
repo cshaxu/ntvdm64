@@ -1,0 +1,694 @@
+{
+  "scope": "One original condition tree with previously missing diagnostic anchors; all retained arms witnessed in actual worker preprocess contexts.",
+  "method": "Original/current recursive tree preflight; selected-arm markers and ordered include traces checked before edits; resulting tree and line anchors rechecked.",
+  "limits": "Three of ten allowed source edits in current build batch; complete supported-context enumeration remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\rom.c",
+      "before_sha256": "d9b99fa1f691dae52e7042f960d776a972a885f2893261e7b200605b877d2d1d",
+      "after_sha256": "85413fb1b67bc42c3846eea19a617883e4074ddc75fdd009167780028819f1c6",
+      "original_sha256": "947f9fc49dbffad48b2d1668548d63e8d26197a35d72fd4c26e7ce1e4c96af6f",
+      "guards": [
+        {
+          "kind": "if",
+          "expression": "defined(NTVDM) && defined(MONITOR)",
+          "original_line": 19,
+          "error_line": 20,
+          "end_line": 22
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 43,
+          "error_line": 44,
+          "end_line": 46
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 55,
+          "error_line": 56,
+          "end_line": 58
+        },
+        {
+          "kind": "ifdef",
+          "expression": "GISP_SVGA",
+          "original_line": 72,
+          "error_line": 73,
+          "end_line": 77
+        },
+        {
+          "kind": "if",
+          "expression": "defined(macintosh) && defined(A2CPU)",
+          "original_line": 104,
+          "error_line": 105,
+          "end_line": 111
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 117,
+          "error_line": 118,
+          "end_line": 120
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 161,
+          "error_line": 162,
+          "end_line": 178
+        },
+        {
+          "kind": "ifdef",
+          "expression": "REAL_VGA",
+          "original_line": 222,
+          "error_line": 223,
+          "end_line": 278
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 234,
+          "error_line": 235,
+          "end_line": 237
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 250,
+          "error_line": 251,
+          "end_line": 259
+        },
+        {
+          "kind": "ifdef",
+          "expression": "GISP_SVGA",
+          "original_line": 290,
+          "error_line": 291,
+          "end_line": 299
+        },
+        {
+          "kind": "if",
+          "expression": "defined(macintosh) && defined(A2CPU)",
+          "original_line": 293,
+          "error_line": 294,
+          "end_line": 298
+        },
+        {
+          "kind": "ifdef",
+          "expression": "GISP_SVGA",
+          "original_line": 311,
+          "error_line": 312,
+          "end_line": 329
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 330,
+          "error_line": 331,
+          "end_line": 343
+        },
+        {
+          "kind": "if",
+          "expression": "defined(macintosh) && defined(A2CPU)",
+          "original_line": 356,
+          "error_line": 357,
+          "end_line": 361
+        },
+        {
+          "kind": "if",
+          "expression": "defined(macintosh) && defined(A2CPU)",
+          "original_line": 374,
+          "error_line": 375,
+          "end_line": 377
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 379,
+          "error_line": 380,
+          "end_line": 382
+        },
+        {
+          "kind": "ifdef",
+          "expression": "macintosh",
+          "original_line": 489,
+          "error_line": 490,
+          "end_line": 504
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 547,
+          "error_line": 548,
+          "end_line": 586
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 617,
+          "error_line": 618,
+          "end_line": 621
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 667,
+          "error_line": 668,
+          "end_line": 670
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 694,
+          "error_line": 695,
+          "end_line": 705
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+        "source_sha256": "d9b99fa1f691dae52e7042f960d776a972a885f2893261e7b200605b877d2d1d",
+        "object": "system/rom",
+        "arms": [
+          {
+            "label": "codex_r686_arm_0000",
+            "line": 20,
+            "kind": "if",
+            "expression": "defined(NTVDM) && defined(MONITOR)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0001",
+            "line": 43,
+            "kind": "ifdef",
+            "expression": "CPU_40_STYLE",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0002",
+            "line": 44,
+            "kind": "ifdef",
+            "expression": "CCPU",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0003",
+            "line": 46,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0004",
+            "line": 51,
+            "kind": "ifndef",
+            "expression": "BIOS1ROM_FILENAME",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0005",
+            "line": 55,
+            "kind": "ifndef",
+            "expression": "BIOS2ROM_FILENAME",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0006",
+            "line": 56,
+            "kind": "ifdef",
+            "expression": "CPU_40_STYLE",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0007",
+            "line": 58,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0008",
+            "line": 63,
+            "kind": "ifndef",
+            "expression": "EGAROM_FILENAME",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0009",
+            "line": 67,
+            "kind": "ifndef",
+            "expression": "VGAROM_FILENAME",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0010",
+            "line": 71,
+            "kind": "ifndef",
+            "expression": "V7VGAROM_FILENAME",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0011",
+            "line": 76,
+            "kind": "ifdef",
+            "expression": "GISP_SVGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0012",
+            "line": 82,
+            "kind": "ifndef",
+            "expression": "ADAPTOR_ROM_START",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0013",
+            "line": 86,
+            "kind": "ifndef",
+            "expression": "ADAPTOR_ROM_END",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0014",
+            "line": 92,
+            "kind": "ifndef",
+            "expression": "EXPANSION_ROM_START",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0015",
+            "line": 96,
+            "kind": "ifndef",
+            "expression": "EXPANSION_ROM_END",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0016",
+            "line": 108,
+            "kind": "if",
+            "expression": "defined(macintosh) && defined(A2CPU)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0017",
+            "line": 111,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0018",
+            "line": 119,
+            "kind": "ifdef",
+            "expression": "ANSI",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0019",
+            "line": 121,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0020",
+            "line": 167,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0021",
+            "line": 216,
+            "kind": "ifdef",
+            "expression": "REAL_VGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0022",
+            "line": 218,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0023",
+            "line": 223,
+            "kind": "ifndef",
+            "expression": "GISP_SVGA",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0024",
+            "line": 224,
+            "kind": "ifdef",
+            "expression": "VGG",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0025",
+            "line": 226,
+            "kind": "ifdef",
+            "expression": "V7VGA",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0026",
+            "line": 228,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0027",
+            "line": 234,
+            "kind": "ifdef",
+            "expression": "EGG",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0028",
+            "line": 244,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0029",
+            "line": 270,
+            "kind": "if",
+            "expression": "!defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) )",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0030",
+            "line": 278,
+            "kind": "ifdef",
+            "expression": "GISP_SVGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0031",
+            "line": 280,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0032",
+            "line": 281,
+            "kind": "if",
+            "expression": "defined(macintosh) && defined(A2CPU)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0033",
+            "line": 283,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0034",
+            "line": 291,
+            "kind": "if",
+            "expression": "defined(SPC386) && !defined(GISP_CPU)",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0035",
+            "line": 299,
+            "kind": "ifdef",
+            "expression": "GISP_SVGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0036",
+            "line": 301,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0037",
+            "line": 308,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0038",
+            "line": 318,
+            "kind": "if",
+            "expression": "!(defined(NTVDM) && defined(MONITOR))",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0039",
+            "line": 325,
+            "kind": "if",
+            "expression": "defined(macintosh) && defined(A2CPU)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0040",
+            "line": 327,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0041",
+            "line": 343,
+            "kind": "if",
+            "expression": "defined(macintosh) && defined(A2CPU)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0042",
+            "line": 348,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0043",
+            "line": 411,
+            "kind": "if",
+            "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX))",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0044",
+            "line": 412,
+            "kind": "ifndef",
+            "expression": "GISP_SVGA",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0045",
+            "line": 431,
+            "kind": "if",
+            "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0046",
+            "line": 439,
+            "kind": "if",
+            "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0047",
+            "line": 447,
+            "kind": "ifdef",
+            "expression": "CPU_40_STYLE",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0048",
+            "line": 458,
+            "kind": "ifdef",
+            "expression": "macintosh",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0049",
+            "line": 490,
+            "kind": "ifndef",
+            "expression": "GISP_SVGA",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0050",
+            "line": 504,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0051",
+            "line": 513,
+            "kind": "ifndef",
+            "expression": "GISP_SVGA",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0052",
+            "line": 521,
+            "kind": "if",
+            "expression": "!(defined(NTVDM) & defined(MONITOR))",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0053",
+            "line": 538,
+            "kind": "ifndef",
+            "expression": "GISP_SVGA",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0054",
+            "line": 540,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0055",
+            "line": 546,
+            "kind": "if",
+            "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0056",
+            "line": 553,
+            "kind": "ifdef",
+            "expression": "CPU_40_STYLE",
+            "error_only": false
+          },
+          {
+            "label": "codex_r686_arm_0057",
+            "line": 589,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r686_arm_0058",
+            "line": 616,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "757e93a6acf2a1744a3495097b2e13187fd79b571876aa080c1d0baf3efeae29",
+            "hit": [
+              "codex_r686_arm_0001",
+              "codex_r686_arm_0002",
+              "codex_r686_arm_0004",
+              "codex_r686_arm_0005",
+              "codex_r686_arm_0006",
+              "codex_r686_arm_0008",
+              "codex_r686_arm_0009",
+              "codex_r686_arm_0010",
+              "codex_r686_arm_0012",
+              "codex_r686_arm_0013",
+              "codex_r686_arm_0014",
+              "codex_r686_arm_0015",
+              "codex_r686_arm_0017",
+              "codex_r686_arm_0018",
+              "codex_r686_arm_0022",
+              "codex_r686_arm_0023",
+              "codex_r686_arm_0024",
+              "codex_r686_arm_0025",
+              "codex_r686_arm_0027",
+              "codex_r686_arm_0029",
+              "codex_r686_arm_0031",
+              "codex_r686_arm_0033",
+              "codex_r686_arm_0034",
+              "codex_r686_arm_0036",
+              "codex_r686_arm_0038",
+              "codex_r686_arm_0040",
+              "codex_r686_arm_0043",
+              "codex_r686_arm_0044",
+              "codex_r686_arm_0045",
+              "codex_r686_arm_0046",
+              "codex_r686_arm_0047",
+              "codex_r686_arm_0049",
+              "codex_r686_arm_0051",
+              "codex_r686_arm_0052",
+              "codex_r686_arm_0053",
+              "codex_r686_arm_0055",
+              "codex_r686_arm_0056"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "757e93a6acf2a1744a3495097b2e13187fd79b571876aa080c1d0baf3efeae29",
+            "hit": [
+              "codex_r686_arm_0001",
+              "codex_r686_arm_0002",
+              "codex_r686_arm_0004",
+              "codex_r686_arm_0005",
+              "codex_r686_arm_0006",
+              "codex_r686_arm_0008",
+              "codex_r686_arm_0009",
+              "codex_r686_arm_0010",
+              "codex_r686_arm_0012",
+              "codex_r686_arm_0013",
+              "codex_r686_arm_0014",
+              "codex_r686_arm_0015",
+              "codex_r686_arm_0017",
+              "codex_r686_arm_0018",
+              "codex_r686_arm_0022",
+              "codex_r686_arm_0023",
+              "codex_r686_arm_0024",
+              "codex_r686_arm_0025",
+              "codex_r686_arm_0027",
+              "codex_r686_arm_0029",
+              "codex_r686_arm_0031",
+              "codex_r686_arm_0033",
+              "codex_r686_arm_0034",
+              "codex_r686_arm_0036",
+              "codex_r686_arm_0038",
+              "codex_r686_arm_0040",
+              "codex_r686_arm_0043",
+              "codex_r686_arm_0044",
+              "codex_r686_arm_0045",
+              "codex_r686_arm_0046",
+              "codex_r686_arm_0047",
+              "codex_r686_arm_0049",
+              "codex_r686_arm_0051",
+              "codex_r686_arm_0052",
+              "codex_r686_arm_0053",
+              "codex_r686_arm_0055",
+              "codex_r686_arm_0056"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 182,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/system/rom.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 182,
+          "identical": true
+        }
+      ]
+    }
+  ]
+}

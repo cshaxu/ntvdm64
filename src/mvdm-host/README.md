@@ -2782,3 +2782,41 @@ actual selected-arm witnesses. Evidence:
 MVDM-HOST-DIV-756: restore the original diagnostic mapping for the RTC BIOS
 excluded monitor arm after condition-tree and selected-arm context checks.
 Evidence: ../../artifacts/mvdm-audit/s13-r682-witnessed-anchor-batch.json.
+
+MVDM-HOST-DIV-757: restore original diagnostic and continuation mappings for
+support/time_day.c and system/at_dma.c after recursive condition-tree comparison,
+selected-arm witnessing and include-path checks. Evidence:
+../../artifacts/mvdm-audit/s13-r683-witnessed-anchor-batch.json.
+
+MVDM-HOST-DIV-758: restore original diagnostic and continuation mappings for
+video/vga_vide.c after condition-tree comparison, selected-arm witnessing and
+include-path checks. Evidence:
+../../artifacts/mvdm-audit/s13-r684-witnessed-anchor-batch.json.
+
+MVDM-HOST-DIV-759: restore original diagnostic and continuation mappings for
+host/src/nt_cga.c after condition-tree comparison, selected-arm witnessing and
+include-path checks. Evidence:
+../../artifacts/mvdm-audit/s13-r685-witnessed-anchor-batch.json.
+
+MVDM-HOST-DIV-760: restore original diagnostic and continuation mappings for
+system/rom.c after condition-tree comparison, selected-arm witnessing and
+include-path checks. Evidence:
+../../artifacts/mvdm-audit/s13-r686-witnessed-anchor-batch.json.
+
+MVDM-HOST-DIV-761: restore original diagnostic and continuation mappings for
+host/src/x86_emm.c and base/ccpu386/lldt.c after condition-tree comparison,
+selected-arm witnessing and include-path checks. Evidence:
+../../artifacts/mvdm-audit/s13-r687-witnessed-anchor-batch.json.
+
+MVDM-HOST-DIV-762: restore original diagnostic mapping for vdmredir/vrdisp.c
+following original-tree, selected-arm and include-path checks. Evidence:
+../../artifacts/mvdm-audit/s13-r688-witnessed-anchor-batch.json.
+
+MVDM-HOST-DIV-763: restore original diagnostic and continuation mappings for
+DPmi32/data.c DBG while retaining the selected CPU40 adapter. Evidence:
+../../artifacts/mvdm-audit/s13-r690-dpmi-data-review.json.
+
+MVDM-HOST-DIV-764: restore original diagnostic and continuation mappings for
+WOW32/wdib.c after original-tree comparison, selected-arm witnessing and
+same-directory include-path checks. Evidence:
+../../artifacts/mvdm-audit/s13-r691-witnessed-anchor-batch.json.

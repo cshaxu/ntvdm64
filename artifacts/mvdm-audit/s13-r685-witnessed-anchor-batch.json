@@ -1,0 +1,218 @@
+{
+  "scope": "One original condition tree with previously missing diagnostic anchors; all retained arms witnessed in actual worker preprocess contexts.",
+  "method": "Original/current recursive tree preflight; selected-arm markers and ordered include traces checked before edits; resulting tree and line anchors rechecked.",
+  "limits": "Three of ten allowed source edits in current build batch; complete supported-context enumeration remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_cga.c",
+      "before_sha256": "699de0d85b7f2e9a5ca1e2d07308e174ddafd398f2d92fa95809c39c85dffcaf",
+      "after_sha256": "bda105ceefe9983e991553d9ce3b73e766b78770d9b6941f95d2476e981672c9",
+      "original_sha256": "ef84222253b20092ab43505ea3232b3c1174833166ebb4880cb378880a967cc7",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "original_line": 42,
+          "error_line": 43,
+          "end_line": 46
+        },
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "original_line": 77,
+          "error_line": 78,
+          "end_line": 82
+        },
+        {
+          "kind": "ifdef",
+          "expression": "X86GFX",
+          "original_line": 100,
+          "error_line": 101,
+          "end_line": 103
+        },
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "original_line": 105,
+          "error_line": 106,
+          "end_line": 112
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BIGEND",
+          "original_line": 152,
+          "error_line": 153,
+          "end_line": 188
+        },
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "original_line": 971,
+          "error_line": 972,
+          "end_line": 1194
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+        "source_sha256": "699de0d85b7f2e9a5ca1e2d07308e174ddafd398f2d92fa95809c39c85dffcaf",
+        "object": "host/nt_cga",
+        "arms": [
+          {
+            "label": "codex_r685_arm_0000",
+            "line": 42,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          },
+          {
+            "label": "codex_r685_arm_0001",
+            "line": 55,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0002",
+            "line": 76,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          },
+          {
+            "label": "codex_r685_arm_0003",
+            "line": 78,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0004",
+            "line": 99,
+            "kind": "ifdef",
+            "expression": "X86GFX",
+            "error_only": true
+          },
+          {
+            "label": "codex_r685_arm_0005",
+            "line": 104,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          },
+          {
+            "label": "codex_r685_arm_0006",
+            "line": 148,
+            "kind": "ifdef",
+            "expression": "BIGEND",
+            "error_only": true
+          },
+          {
+            "label": "codex_r685_arm_0007",
+            "line": 155,
+            "kind": "ifdef",
+            "expression": "LITTLEND",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0008",
+            "line": 163,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0009",
+            "line": 235,
+            "kind": "ifndef",
+            "expression": "MONITOR",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0010",
+            "line": 508,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0011",
+            "line": 606,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0012",
+            "line": 787,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0013",
+            "line": 873,
+            "kind": "ifdef",
+            "expression": "BIGWIN",
+            "error_only": false
+          },
+          {
+            "label": "codex_r685_arm_0014",
+            "line": 937,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "de50a8f28b086e3bd1529d63527b980e4419abbeb6d51a2415781d2e55e371af",
+            "hit": [
+              "codex_r685_arm_0001",
+              "codex_r685_arm_0003",
+              "codex_r685_arm_0007",
+              "codex_r685_arm_0008",
+              "codex_r685_arm_0009",
+              "codex_r685_arm_0010",
+              "codex_r685_arm_0011",
+              "codex_r685_arm_0012",
+              "codex_r685_arm_0013"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "de50a8f28b086e3bd1529d63527b980e4419abbeb6d51a2415781d2e55e371af",
+            "hit": [
+              "codex_r685_arm_0001",
+              "codex_r685_arm_0003",
+              "codex_r685_arm_0007",
+              "codex_r685_arm_0008",
+              "codex_r685_arm_0009",
+              "codex_r685_arm_0010",
+              "codex_r685_arm_0011",
+              "codex_r685_arm_0012",
+              "codex_r685_arm_0013"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 182,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 182,
+          "identical": true
+        }
+      ]
+    }
+  ]
+}

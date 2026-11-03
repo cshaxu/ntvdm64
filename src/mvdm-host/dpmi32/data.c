@@ -108,10 +108,13 @@ USHORT CurrentDtaOffset;
 // Selector limits
 //
 #if DBG
+#line 111
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
+#line 114
 PULONG ExpSelectorLimit = NULL;
 #endif
+#line 116
 
 //
 // Start of intel address space in process memory

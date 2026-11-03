@@ -51,6 +51,7 @@ IFN1(
 #ifndef DONT_CLEAR_LDTR_ON_INVALID
       SET_LDT_SELECTOR(selector);
 #else
+#line 54
 #error Unsupported excluded original configuration
 #endif /* DONT_CLEAR_LDTR_ON_INVALID */
 #line 56

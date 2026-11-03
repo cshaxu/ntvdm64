@@ -1,0 +1,90 @@
+{
+  "scope": "One original condition tree with previously missing diagnostic anchors; all retained arms witnessed in actual worker preprocess contexts.",
+  "method": "Original/current recursive tree preflight; selected-arm markers and ordered include traces checked before edits; resulting tree and line anchors rechecked.",
+  "limits": "Three of ten allowed source edits in current build batch; complete supported-context enumeration remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/vdmredir/vrdisp.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdisp.c",
+      "before_sha256": "c447b517e3efbde64db538a1d02bc695728cc3cfaf76361061cc5bbf67d2b944",
+      "after_sha256": "ace77f81f45586b2700d5ce16149e8f791d88c8bc6b43e891423394a1f770c97",
+      "original_sha256": "030a3a2f2baaeb36bb58eb459cc91a0f6bf15bfdec777fc2998e3c3d69b2a389",
+      "guards": [
+        {
+          "kind": "if",
+          "expression": "0",
+          "original_line": 137,
+          "error_line": 138,
+          "end_line": 144
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 146,
+          "error_line": 147,
+          "end_line": 150
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/vdmredir/vrdisp.c",
+        "source_sha256": "c447b517e3efbde64db538a1d02bc695728cc3cfaf76361061cc5bbf67d2b944",
+        "object": "redir/vrdisp",
+        "arms": [
+          {
+            "label": "codex_r688_arm_0000",
+            "line": 137,
+            "kind": "if",
+            "expression": "0",
+            "error_only": true
+          },
+          {
+            "label": "codex_r688_arm_0001",
+            "line": 144,
+            "kind": "if",
+            "expression": "DBG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r688_arm_0002",
+            "line": 159,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "335fbbe381d8c5194686c77147a7886309bc8c802065ce63baee9bda27cc0a94",
+            "hit": [
+              "codex_r688_arm_0002"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "335fbbe381d8c5194686c77147a7886309bc8c802065ce63baee9bda27cc0a94",
+            "hit": [
+              "codex_r688_arm_0002"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/vdmredir/vrdisp.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 176,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/vdmredir/vrdisp.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 176,
+          "identical": true
+        }
+      ]
+    }
+  ]
+}

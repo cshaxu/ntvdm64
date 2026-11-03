@@ -44,8 +44,10 @@
 #ifdef CCPU
 #include "ccpusas4.h"
 #else	/* ! CCPU */
+#line 44
 #error DIVERGENCE MVDM-HOST-DIV-505: non-CCPU host branch is not selected; see mirror register.
 #endif	/* ! CCPU */
+#line 46
 #endif	/* CPU_40_STYLE */
 
 #ifndef BIOS1ROM_FILENAME
@@ -56,8 +58,10 @@
 #ifdef	CPU_40_STYLE
 #define	BIOS2ROM_FILENAME	"bios4.rom"
 #else	/* CPU_40_STYLE */
+#line 56
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
+#line 58
 #endif /* BIOS2ROM_FILENAME */
 
 #ifndef EGAROM_FILENAME
@@ -106,12 +110,15 @@
 #define MINOR_VER	0x00
 
 #if defined(macintosh) && defined(A2CPU)
+#line 105
 #error Excluded unsupported A2CPU configuration
 
 #else
+#line 108
 	/* Using sas_scratch_buffer - will get 64K anyway. */
 #define ROM_BUFFER_SIZE 1024*64
 #endif
+#line 111
 
 LOCAL LONG read_rom IPT2(char *, name, sys_addr, address);
 LOCAL	half_word	do_rom_checksum IPT1(sys_addr, addr);
@@ -119,9 +126,10 @@ LOCAL	half_word	do_rom_checksum IPT1(sys_addr, addr);
 #ifdef ANSI
 extern long host_read_resource (int, char *, host_addr, int ,int);
 #else
+#line 118
 #error Unsupported excluded original configuration
 #endif
-#line 118
+#line 120
 
 /*(
  *=========================== patchCheckSum ================================
@@ -214,8 +222,10 @@ OUTPUT:		None.
 GLOBAL void read_video_rom IFN0()
 {
 #ifdef REAL_VGA
+#line 223
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else /* REAL_VGA */
+#line 225
 	PHY_ADDR romLength = 0;
 
 	switch ((ULONG) config_inquire(C_GFX_ADAPTER, NULL))
@@ -226,8 +236,10 @@ GLOBAL void read_video_rom IFN0()
 #ifdef V7VGA
 		romLength = read_rom (V7VGAROM_FILENAME, EGA_ROM_START);
 #else	/* V7VGA */
+#line 235
 #error DIVERGENCE MVDM-HOST-DIV-538: non-V7VGA branch is not selected; see mirror register.
 #endif  /* V7VGA */
+#line 237
 		break;
 #endif	/* VGG */
 
@@ -242,8 +254,10 @@ GLOBAL void read_video_rom IFN0()
 		break;
 
 #else			/* GISP_SVGA */
+#line 251
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA */	
+#line 259
 
 	}
 
@@ -263,6 +277,7 @@ GLOBAL void read_video_rom IFN0()
 		patchCheckSum(EGA_ROM_START, romLength, 5);
 	}
 #endif	/* not REAL_VGA */
+#line 278
 }
 
 GLOBAL void rom_init IFN0()
@@ -276,14 +291,20 @@ GLOBAL void rom_init IFN0()
      */
 
 #ifdef GISP_SVGA
+#line 291
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else		/* GISP_SVGA */
+#line 293
 #if	defined(macintosh) && defined(A2CPU)
+#line 294
 #error Excluded unsupported A2CPU configuration
 #else
+#line 296
 	sas_fills( ROM_START, BAD_OP, PC_MEM_SIZE - ROM_START);
 #endif		/* macintosh && A2CPU */
+#line 298
 #endif		/* GISP_SVGA */
+#line 299
 
 	/*
 	 * emm386 needs a hole to put it's page frame in.
@@ -297,15 +318,19 @@ GLOBAL void rom_init IFN0()
     
 	/* load the rom bios */
 #ifdef GISP_SVGA
+#line 312
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #else		/* GISP_SVGA */
+#line 324
 
 	read_rom (BIOS1ROM_FILENAME, BIOS_START);
 	read_rom (BIOS2ROM_FILENAME, BIOS2_START);
 
 #endif		/* GISP_SVGA */
+#line 329
 
 #else	/* !NTVDM | (NTVDM & !X86GFX) */
+#line 331
 #error Unsupported excluded original configuration
 #endif /* !NTVDM | (NTVDM & !X86GFX) */
 #line 343
@@ -323,10 +348,13 @@ LOCAL LONG read_rom IFN2(char *, name, sys_addr, address)
     /* BIOS rom first. 														*/
 	/* Mac on 2.0 cpu doesn't want to use sas scratch buffer. 				*/
 #if defined(macintosh) && defined(A2CPU)
+#line 357
 #error Excluded unsupported A2CPU configuration
 #else
+#line 359
 	tmp = (host_addr)sas_scratch_address(ROM_BUFFER_SIZE);
 #endif
+#line 361
 
     if (!tmp)
     {
@@ -341,13 +369,17 @@ LOCAL LONG read_rom IFN2(char *, name, sys_addr, address)
     }
 
 #if defined(macintosh) && defined(A2CPU)
+#line 375
 #error Excluded unsupported A2CPU configuration
 #endif
+#line 377
 
     return( size );
 #else
+#line 380
 #error DIVERGENCE MVDM-HOST-DIV-541: unselected compound host branch; see mirror register.
 #endif	/* !(NTVDM && MONITOR) */
+#line 382
 }
 
 LOCAL	half_word	do_rom_checksum IFN1(sys_addr, addr)
@@ -456,8 +488,10 @@ GLOBAL VOID patch_rom IFN2(sys_addr, addr, half_word, val)
 	 */
 
 #ifdef macintosh
+#line 490
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #endif /* macintosh */
+#line 504
  
 	/* The page might not be present (Arrggghhhh!!!!!)
 	** so we can't do anything sensible and must give
@@ -502,9 +536,10 @@ GLOBAL VOID patch_rom IFN2(sys_addr, addr, half_word, val)
 #endif /* GISP_SVGA */
 
 #else	/* CPU_40_STYLE */
+#line 548
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 512
+#line 586
 
 #endif	/* !NTVDM | (NTVDM & !X86GFX) */
 #line 514
@@ -538,8 +573,10 @@ GLOBAL void copyROM IFN0()
 #ifndef GISP_SVGA
 LOCAL sys_addr  cur_loc = DOS_SCRATCH_PAD;
 #else		/* GISP_SVGA */
+#line 618
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif		/* GISP_SVGA */
+#line 621
 
 GLOBAL void display_string IFN1(char *, string_ptr)
 {
@@ -587,8 +624,10 @@ GLOBAL void display_string IFN1(char *, string_ptr)
 	if (((endLinAddr ^ DOS_SCRATCH_PAD) > 0xfff) || (endLinAddr > DOS_SCRATCH_PAD_END))
 	{
 #ifndef PROD
+#line 668
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 670
 		if ((DOS_SCRATCH_PAD_END ^ DOS_SCRATCH_PAD) > 0xfff)
 		{
 			/* The defined DOS scratch pad crosses a page
@@ -614,8 +653,10 @@ GLOBAL void display_string IFN1(char *, string_ptr)
 	*IncCpuPtrLS8(hostPtr) = '$';
 	*IncCpuPtrLS8(hostPtr) = '\0';
 #else /* CPU_40_STYLE */
+#line 695
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif /* CPU_40_STYLE */
+#line 705
 #endif	/* !NTVDM | !MONITOR */
 	cur_loc+=strlen(string_ptr);
 }
