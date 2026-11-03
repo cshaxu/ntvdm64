@@ -89,11 +89,15 @@ LPBYTE MenuLoadWinTemplates(
 
         RtlZeroMemory(&mii, sizeof(mii));
         mii.cbSize = sizeof(MENUITEMINFO);
+#line 98
 #ifdef MEMPHIS_MENUS
+#line 99
 #error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
 #else
+#line 103
         mii.fMask = MIIM_TYPE | MIIM_ID | MIIM_STATE;
 #endif // MEMPHIS_MENUS
+#line 105
         if (menuFlags & MF_POPUP) {
             mii.fMask |= MIIM_SUBMENU;
             lpMenuTemplate = MenuLoadWinTemplates(lpMenuTemplate,
@@ -131,9 +135,12 @@ LPBYTE MenuLoadWinTemplates(
         mii.dwTypeData = (LPWSTR) lpmenuText;
         mii.cch = (UINT)-1;
         mii.wID = menuId;
+#line 142
 #ifdef MEMPHIS_MENUS
+#line 143
 #error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
 #endif // MEMPHIS_MENUS
+#line 145
         if (!NtUserThunkedMenuItemInfo(hMenu, MFMWFP_NOITEM, TRUE, TRUE,
                     &mii, lpmenuText ? &str : NULL, FALSE)) {
             if (menuFlags & MF_POPUP)
@@ -197,11 +204,15 @@ PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates(
 
         RtlZeroMemory(&mii, sizeof(mii));
         mii.cbSize = sizeof(MENUITEMINFO);
+#line 208
 #ifdef MEMPHIS_MENUS
+#line 209
 #error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
 #else
+#line 211
         mii.fMask = MIIM_TYPE | MIIM_ID | MIIM_STATE;
 #endif // MEMPHIS_MENUS
+#line 213
 
         mii.fType = lpMenuTemplate->fType;
         if (mii.fType & ~MFT_MASK) {
@@ -224,12 +235,16 @@ PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates(
         if (dwHelpID) {
             NtUserSetMenuContextHelpId(hMenu,dwHelpID);
         }
+#line 235
 #ifdef MEMPHIS_MENUS
+#line 236
 #error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
 #else
+#line 242
         lpmenuText = lpMenuTemplate->mtString[0] ?
                 lpMenuTemplate->mtString : NULL;
 #endif // MEMPHIS_MENUS
+#line 245
         RtlInitUnicodeString(&str, lpmenuText);
 
         mii.dwTypeData = (LPWSTR) lpmenuText;
@@ -268,9 +283,12 @@ PMENUITEMTEMPLATE2 MenuLoadChicagoTemplates(
 
         mii.cch = (UINT)-1;
         mii.wID = menuId;
+#line 283
 #ifdef MEMPHIS_MENUS
+#line 284
 #error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
 #endif // MEMPHIS_MENUS
+#line 286
         if (!NtUserThunkedMenuItemInfo(hMenu, MFMWFP_NOITEM, TRUE, TRUE,
                     &mii, &str, FALSE)) {
             if (wResInfo & MFR_POPUP)
@@ -395,9 +413,12 @@ HMENU WINAPI LoadMenuW(
         return NULL;
 }
 
+#line 434
 #ifdef MEMPHIS_MENUS
+#line 435
 #error Excluded unsupported Memphis menu conversion profile
-#endif
+#endif // MEMPHIS_MENUS
+#line 675
 
 #line 676
 #ifdef MEMPHIS_MENU_WATERMARKS

@@ -342,11 +342,15 @@ CONST BOOLEAN gabThunkMessage[] = {
     FALSE,    // empty               0x010C
     FALSE,    // empty               0x010D
     FALSE,    // empty               0x010E
+#line 449
 #ifdef FE_IME // WM_IME_COMPOSITION
+#line 450
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #else
+#line 452
     FALSE,    // empty               0x010F
 #endif // FE_IME
+#line 454
 
     FALSE,    // WM_INITDIALOG       0x0110
     FALSE,    // WM_COMMAND          0x0111
@@ -367,12 +371,16 @@ CONST BOOLEAN gabThunkMessage[] = {
 
     TRUE,     // WM_MENUCHAR         0x0120
     FALSE,    // WM_ENTERIDLE        0x0121
+#line 474
 #ifdef MEMPHIS_MENUS
+#line 475
 #error DIVERGENCE OPENNT-HOST-132: MEMPHIS_MENUS branch is not selected; see mirror register.
 #else
+#line 478
     FALSE,    // 0x0122-0x0127
     FALSE,
 #endif // MEMPHIS_MENUS
+#line 481
     FALSE,
     FALSE,
     FALSE,
@@ -769,11 +777,15 @@ CONST BOOLEAN gabThunkMessage[] = {
     FALSE,
     FALSE,
     FALSE,
+#line 877
 #ifdef FE_IME // WM_IME_CHAR
+#line 878
 #error DIVERGENCE OPENNT-HOST-132: FE_IME branch is not selected; see mirror register.
 #else
+#line 880
     FALSE,
 #endif // FE_IME
+#line 882
     FALSE,
 
     FALSE,    // 0x0288

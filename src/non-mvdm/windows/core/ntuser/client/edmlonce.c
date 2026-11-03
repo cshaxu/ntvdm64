@@ -69,11 +69,15 @@ LONG MLCreate(
     if (TestWF(ped->pwnd, WEFRIGHT) && !ped->format)
         ped->format = ES_RIGHT;
 
+#line 72
 #ifdef SUPPORT_LPK
+#line 73
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #else
+#line 78
     if (ped->format != ES_LEFT)
 #endif
+#line 80
     {
         /*
          * If user wants right or center justified text, then we turn off

@@ -1,0 +1,248 @@
+{
+  "scope": "Four USER edit source files; add original physical-line anchors to existing excluded SUPPORT_LPK arms; selected statements unchanged. Original nested groups under excluded DBG are not restored.",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edecrare.c",
+      "before_sha256": "35045a97d88544222ddcf33a8985319bbb3e9f3466ceb4987c506bd70ed2056e",
+      "after_sha256": "f0f15a39cc233b6cbfb25b891af2e858f8e68eca735a5bcedf0e7396ecd7b9eb",
+      "guards": [
+        {
+          "if": 22,
+          "following": 59,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 317,
+          "following": 322,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 374,
+          "following": 379,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 424,
+          "following": 428,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 749,
+          "following": 771,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editec.c",
+      "before_sha256": "fb801a1eabc14a5b65a8946f6829911f6f0d23464b67362c8657fb8e2618fb28",
+      "after_sha256": "cdeea4a75536e75887f395d9d8e9f20e43ee42e9f23445250e1c71f3ab707488",
+      "guards": [
+        {
+          "if": 309,
+          "following": 313,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 350,
+          "following": 356,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1684,
+          "following": 1689,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1957,
+          "following": 1961,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 2330,
+          "following": 2341,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 2345,
+          "following": 2356,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 2358,
+          "following": 2363,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editml.c",
+      "before_sha256": "05f7feb6406582a9c1bb57ab4bf34e508c58c98f6b24b7173a150bb5c5828104",
+      "after_sha256": "b610777f475f44960a7470dfc35e136ad45e962c5ed2b25c559911321840c1ba",
+      "guards": [
+        {
+          "if": 32,
+          "following": 38,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 517,
+          "following": 523,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 531,
+          "following": 534,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 571,
+          "following": 576,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1392,
+          "following": 1401,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 2752,
+          "following": 2763,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 2823,
+          "following": 2828,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 2897,
+          "following": 2902,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 3117,
+          "following": 3140,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 3147,
+          "following": 3155,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 3164,
+          "following": 3172,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 3597,
+          "following": 3606,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "before_sha256": "a4faa2adc7c9da7eec34d941f9b053ab8bb6f039d7930094c2f0a68a53d57127",
+      "after_sha256": "457e31f41bcb981b53aa6d5d5f3bcc050dd213682af52706396fd8a62b7a8180",
+      "guards": [
+        {
+          "if": 87,
+          "following": 91,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 207,
+          "following": 214,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 388,
+          "following": 395,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 581,
+          "following": 588,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 757,
+          "following": 762,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 806,
+          "following": 809,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1614,
+          "following": 1618,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1940,
+          "following": 1945,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1996,
+          "following": 2001,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 2218,
+          "following": 2226,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 2388,
+          "following": 2395,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        }
+      ]
+    }
+  ],
+  "status": "r603 cached product build passed; full per-file condition review remains partial."
+}

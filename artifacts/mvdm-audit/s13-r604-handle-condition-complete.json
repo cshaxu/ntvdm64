@@ -1,0 +1,11 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\handles.c",
+  "current_sha256": "188cf5ee53e4c32e591fac8e4aea93b09de736789328ed921423e590e8763e17",
+  "original_sha256": "29742b05ec55182515971ca67b54e3e0c4ad724feecd482fd50ea2e398e9c2f2",
+  "evidence": "The only original TESTING group and its selected else macro are retained. Its excluded body is error-only and the original #endif label is restored. The following #line 293 intentionally anchors the next retained definition after original functions omitted by the existing subset.",
+  "observed_in": [
+    "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+  ],
+  "limitations": "No claim that omitted original functions or nonconditional product adaptation were recovered."
+}

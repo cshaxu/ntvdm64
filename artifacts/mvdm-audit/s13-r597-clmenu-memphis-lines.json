@@ -1,0 +1,46 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmenu.c",
+  "before_sha256": "2f41bd9397108a71c3e217cb7969dfe15742e5e2d382dc8d840694f95c9fb87e",
+  "after_sha256": "f3660a8248a7f118f8443b1667e4e39d747e33da1d2291ca954f4720c30544b9",
+  "groups": [
+    {
+      "if": 98,
+      "else": [
+        102
+      ],
+      "endif": 104
+    },
+    {
+      "if": 142,
+      "else": [],
+      "endif": 144
+    },
+    {
+      "if": 208,
+      "else": [
+        210
+      ],
+      "endif": 212
+    },
+    {
+      "if": 235,
+      "else": [
+        241
+      ],
+      "endif": 244
+    },
+    {
+      "if": 283,
+      "else": [],
+      "endif": 285
+    },
+    {
+      "if": 434,
+      "else": [],
+      "endif": 674
+    }
+  ],
+  "evidence": "Six original guards aligned by their source context. Original selected #else bodies are byte-line identical; original nested conditions inside the final excluded branch remain subsumed.",
+  "status": "r603 cached product build passed; other clmenu.c condition groups remain under review."
+}

@@ -1,0 +1,13 @@
+{
+  "path": "src/non-mvdm/base/ntos/rtl/time.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\time.c",
+  "current_sha256": "3cdcd7e87ffa65c0d5bd2e1cb4e39f63b38087605918859d55950aa6b71bcf11",
+  "original_sha256": "ac422e072432aff83c17b03c2127a80d067e801170eba9216ab86d2520767d40",
+  "original_condition": "Kernel allocation pragma guarded by ALLOC_PRAGMA && NTOS_KERNEL_RUNTIME; excluded in the observed standalone time object contexts.",
+  "local_condition": "MVDM_STANDALONE_TIME1970_ONLY selected by both observed object-specific flags; unsupported alternative is #error.",
+  "limits": "The selected conversion body is an existing narrowed adaptation; this condition audit does not assert byte or algorithm equivalence with the full original RTL file.",
+  "observed_in": [
+    "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+    "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+  ]
+}

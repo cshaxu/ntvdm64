@@ -3971,3 +3971,11 @@ Queue r366 restores original input.c first-depth NEVER exclusion at file scope (
 - r594: completed per-file conditional review for dlgend.c, btnctl.c, dlgmgrc.c, dmmnem.c and edslrare.c: all original conditional directives and anchors match, excluded bodies are error-only, and selected else bodies match original. Nonconditional adapter differences remain separately registered. Evidence: s13-r594-user-condition-complete.json.
 
 - r593 delivery: all x86, x86-extra and x64 cached build steps passed. Complete ten-image package staged and published to both release and O:/winnt/system32 with candidate hashes verified. Six images are byte-identical and four differ only in independently parsed PE/debug timestamps versus the previously published package, so prior Full 17/17 was reused under owner instruction. Evidence: s13-r593-build-image-compare.json and s13-r593-publication.json.
+
+- r596: completed condition review of RTL time.c. The original kernel pragma is excluded by the actual object-specific product flags; the local standalone conversion selector is enabled in both observed graphs and its alternative is #error. Existing narrowed conversion logic is not claimed equivalent to the full original RTL file. Evidence: s13-r596-rtl-time-conditions.json.
+
+- r604: completed the original TESTING condition review for handles.c: selected original macro, original endif label and line anchors match; the retained next definition remains at original line 293. Evidence: s13-r604-handle-condition-complete.json.
+
+- r605: completed per-file conditional review for edmlonce.c and edmlrare.c: all original conditional directives and anchors match, excluded bodies are error-only, and selected else bodies match original. Nonconditional adapter differences remain separately registered. Evidence: s13-r605-edit-condition-complete.json.
+
+- r603 delivery: all x86, x86-extra and x64 cached build steps passed. Complete ten-image package staged and published to both release and O:/winnt/system32 with candidate hashes verified. Seven images are byte-identical and three differ only in independently parsed PE/debug timestamps versus the previously published package, so prior Full 17/17 was reused under owner instruction. Evidence: s13-r603-build-image-compare.json and s13-r603-publication.json.

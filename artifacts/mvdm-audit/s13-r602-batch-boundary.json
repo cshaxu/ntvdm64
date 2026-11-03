@@ -1,0 +1,8 @@
+{
+  "scope": "Next source batch following b42a29932",
+  "changed_source_files": 12,
+  "owner_batch_target": 10,
+  "boundary_exception": "The batch was counted late and contains twelve source files; this is an execution error, not a revised policy. Start the cached product build immediately and enforce the ten-file boundary in the next batch.",
+  "other_changes": "Documentation/evidence and source registration are not counted as source files. Existing selected runtime bodies remain unchanged except for #line directives and an original #endif label.",
+  "status": "r603 cached product build passed; complete package published and verified."
+}

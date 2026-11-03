@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 581,
+  "completed_files": 585,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -9604,13 +9604,14 @@
     {
       "path": "src/non-mvdm/base/ntos/rtl/time.c",
       "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\time.c",
-      "current_sha256": "0f2f0270c5343db8f4bd5db9074199e8c27fbea7c45cbb373e69cac1259fa6f3",
+      "current_sha256": "3cdcd7e87ffa65c0d5bd2e1cb4e39f63b38087605918859d55950aa6b71bcf11",
       "original_sha256": "ac422e072432aff83c17b03c2127a80d067e801170eba9216ab86d2520767d40",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-rtl-condition-and-local-subset",
+      "evidence": "s13-r596-rtl-time-conditions.json"
     },
     {
       "path": "src/non-mvdm/base/win32/client/vdm.c",
@@ -11112,24 +11113,26 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edmlonce.c",
-      "current_sha256": "20fcfff84bc7ac88d51822df0ba212b5e66603d7beb8abf899a6a389354a9b78",
+      "current_sha256": "82c8d05db575da9d6e3ede1464b61a06a4f8f6aa17ecc9f1af87f605761e9ab9",
       "original_sha256": "ac63e8b953b97c91fe4f0c7813919cf1fa482ea253e2edfd3ef7cf606e5940a2",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-user-conditions",
+      "evidence": "s13-r605-edit-condition-complete.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edmlrare.c",
-      "current_sha256": "fcf472a1b30bff5eab25cbad029f9fc78edabfd4de5dcb81643244e5b086ccd9",
+      "current_sha256": "6f580cc7ab234048548f5afb2829a519a5249c40eb6c418a6f1cec5b9e739274",
       "original_sha256": "fb9dd31919b7b90db2f713daa83684f1231558e7653ae72cd72458f1212000f1",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-user-conditions",
+      "evidence": "s13-r605-edit-condition-complete.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
@@ -11157,12 +11160,13 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\handles.c",
-      "current_sha256": "491a88042122f40bffe7580933bf542ab79f075d2ca502200bf53114e070f49e",
+      "current_sha256": "188cf5ee53e4c32e591fac8e4aea93b09de736789328ed921423e590e8763e17",
       "original_sha256": "29742b05ec55182515971ca67b54e3e0c4ad724feecd482fd50ea2e398e9c2f2",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-handle-conditional",
+      "evidence": "s13-r604-handle-condition-complete.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/hdata.c",

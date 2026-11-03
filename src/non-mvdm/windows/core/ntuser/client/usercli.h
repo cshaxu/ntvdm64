@@ -78,9 +78,12 @@ typedef struct _LOOKASIDE {
     PVOID LookasideBounds;
     ZONE_HEADER LookasideZone;
     DWORD EntrySize;
+#line 310
 #if DBG
+#line 311
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #endif // DBG
+#line 317
 } LOOKASIDE, *PLOOKASIDE;
 
 NTSTATUS InitLookaside(PLOOKASIDE pla, DWORD cbEntry, DWORD cEntries);
@@ -1081,6 +1084,7 @@ typedef struct tagMDIWND {
 #endif
 #line 2307
 #if DBG
+#line 2308
 #error Excluded unsupported DBG HANDLE_WARNING profile
 #else
 #line 2317
@@ -1088,6 +1092,7 @@ typedef struct tagMDIWND {
 #endif
 #line 2320
 #if DBG
+#line 2321
 #error Excluded unsupported DBG CHECK_HANDLE_WARNING profile
 #else
 #line 2337
@@ -1095,6 +1100,7 @@ typedef struct tagMDIWND {
 #endif
 #line 2342
 #if HANDLE_FIXUP
+#line 2343
 #error Excluded unsupported HANDLE_FIXUP FIXUP_HANDLE profile
 #else
 #line 2352
@@ -1105,6 +1111,7 @@ typedef struct tagMDIWND {
 #endif
 #line 2358
 #if HANDLE_FIXUP
+#line 2359
 #error Excluded unsupported HANDLE_FIXUP FIXUP_HANDLEZ profile
 #else
 #line 2368

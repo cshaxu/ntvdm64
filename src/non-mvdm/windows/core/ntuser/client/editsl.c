@@ -84,9 +84,12 @@ int SLIchToLeftXPos(
     else if (cchDiff < -1000)
         return (-30000);
 
+#line 87
 #ifdef SUPPORT_LPK
+#line 88
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 91
 
     if (ped->fNonPropFont)
         return (ped->rcFmt.left + cchDiff*ped->aveCharWidth);
@@ -203,9 +206,12 @@ void   SLGetClipRect(
     int    iStCount;
     PSTR   pText;
 
+#line 207
 #ifdef SUPPORT_LPK
+#line 208
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 214
 
     CopyRect(lpClipRect, &ped->rcFmt);
 
@@ -380,9 +386,12 @@ void SLDrawLine(
     if (xClipStPos >= xClipEndPos || !_IsWindowVisible(ped->pwnd) )
         return;
 
+#line 388
 #ifdef SUPPORT_LPK
+#line 389
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 395
 
     // Reset ichStart to take care of the negative C widths
     ichNewStart = max((int)(ichStart - ped->wMaxNegCcharPos), 0);
@@ -569,9 +578,12 @@ void SLDrawText(
     if (!_IsWindowVisible(ped->pwnd))
         return;
 
+#line 581
 #ifdef SUPPORT_LPK
+#line 582
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 588
 
     if (ichStart < ped->ichScreenStart )
         ichStart = ped->ichScreenStart;
@@ -741,9 +753,12 @@ BOOL SLScrollText(
     if (!ped->fAutoHScroll)
         return (FALSE);
 
+#line 757
 #ifdef SUPPORT_LPK
+#line 758
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 762
         /*
          * Calculate the new starting screen position
          */
@@ -788,9 +803,12 @@ BOOL SLScrollText(
 
             ECUnlock(ped);
         }
+#line 806
 #ifdef SUPPORT_LPK
+#line 807
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 809
 
     if (ped->ichScreenStart != newScreenStartX) {
         // Check if we have to wipe out the left margin
@@ -1596,9 +1614,12 @@ ICH SLMouseToIch(
     ICH cchLo, cchHi;
     LPSTR lpText;
 
+#line 1614
 #ifdef SUPPORT_LPK
+#line 1615
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 1618
 
     if (width <= ped->rcFmt.left) {
 
@@ -1921,9 +1942,12 @@ void SLSetFocus(
          */
         hdc = ECGetEditDC(ped, TRUE);
 
+#line 1940
 #ifdef SUPPORT_LPK
+#line 1941
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 1945
         {
             bDoCaret = TRUE;
         }
@@ -1975,9 +1999,12 @@ void SLKillFocus(
         /*
          * Destroy the caret (Win31/Chicago hides it first)
          */
+#line 1996
 #ifdef SUPPORT_LPK
+#line 1997
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 2001
               bKillCaret = TRUE;
 
         if (bKillCaret) {
@@ -2180,9 +2207,12 @@ LONG SLEditWndProc(
          * wParam - virt keycode of the given key
          * lParam - modifiers such as repeat count etc. (not used)
          */
+#line 2218
 #ifdef SUPPORT_LPK
+#line 2219
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 2226
         SLKeyDown(ped, wParam, 0);
         break;
 
@@ -2345,9 +2375,12 @@ foo:
             break;
         }
         else
+#line 2388
 #ifdef SUPPORT_LPK
+#line 2389
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 2395
         goto PassToDefaultWindowProc;
         break;
 

@@ -1,0 +1,9 @@
+{
+  "scope": "Align original physical diagnostic lines while preserving current product adapters and selected branches.",
+  "files": [
+    { "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c", "original_if_lines": [449, 474, 877], "selectors": ["FE_IME", "MEMPHIS_MENUS", "FE_IME"], "original_else_lines": [451, 477, 879], "original_endif_lines": [453, 480, 881] },
+    { "path": "src/non-mvdm/windows/core/ntuser/client/usercli.h", "original_if_lines": [310, 2307, 2320, 2342, 2358], "selectors": ["DBG", "DBG", "DBG", "HANDLE_FIXUP", "HANDLE_FIXUP"] },
+    { "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c", "original_if_lines": [17, 515, 146, 270], "selector": "_USERK_", "note": "Selected conversion routines are ordered as in the retained local subset, not in original-file order; original selected operations and local adapters are not modified." }
+  ],
+  "status": "r603 cached product build passed; full per-file condition audits remain partial."
+}

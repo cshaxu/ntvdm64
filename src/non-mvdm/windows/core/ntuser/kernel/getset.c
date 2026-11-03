@@ -28,7 +28,9 @@ DWORD xxxSetWindowLong(
     /*
      * Hide the window proc from other processes
      */
+#line 268
 #ifdef DEBUG
+#line 269
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
 #line 273

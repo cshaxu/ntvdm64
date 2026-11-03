@@ -1,0 +1,54 @@
+{
+  "scope": "Two USER edit files: original conditions and diagnostic positions match; excluded arms are error-only; selected else bodies match original byte-lines ignoring inserted #line directives.",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlonce.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edmlonce.c",
+      "current_sha256": "82c8d05db575da9d6e3ede1464b61a06a4f8f6aa17ecc9f1af87f605761e9ab9",
+      "original_sha256": "ac63e8b953b97c91fe4f0c7813919cf1fa482ea253e2edfd3ef7cf606e5940a2",
+      "original_directives": [
+        {
+          "line": 72,
+          "text": "#ifdef SUPPORT_LPK"
+        },
+        {
+          "line": 77,
+          "text": "#else"
+        },
+        {
+          "line": 79,
+          "text": "#endif"
+        }
+      ],
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edmlrare.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edmlrare.c",
+      "current_sha256": "6f580cc7ab234048548f5afb2829a519a5249c40eb6c418a6f1cec5b9e739274",
+      "original_sha256": "fb9dd31919b7b90db2f713daa83684f1231558e7653ae72cd72458f1212000f1",
+      "original_directives": [
+        {
+          "line": 399,
+          "text": "#ifdef KOREA"
+        },
+        {
+          "line": 404,
+          "text": "#else"
+        },
+        {
+          "line": 407,
+          "text": "#endif"
+        }
+      ],
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    }
+  ],
+  "limits": "No claim that nonconditional sections or preexisting registered adapters are identical to original; unsupported and unobserved configurations remain outside this evidence."
+}

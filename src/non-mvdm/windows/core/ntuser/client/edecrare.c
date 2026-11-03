@@ -19,9 +19,12 @@ extern LOOKASIDE EditLookaside;
 typedef BOOL (*PFNABCWIDTHS)(HDC, UINT, UINT, LPABC);
 typedef BOOL (*PFNCHARWIDTH)(HDC, UINT, UINT, LPINT);
 
+#line 22
 #ifdef SUPPORT_LPK
+#line 23
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
+#line 59
 
 int ECGetCaretWidth(BOOL fMultiLine)
 {
@@ -280,9 +283,12 @@ BOOL ECCreate(
     ped->hkl = GetKeyboardLayout(0);
     ECReleaseEditDC(ped, hdc, TRUE);
 
+#line 317
 #ifdef SUPPORT_LPK
+#line 318
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
+#line 322
     return TRUE;
 }
 
@@ -335,9 +341,12 @@ void ECNcDestroyHandler(
         if (ped->charWidthBuffer)
             UserLocalFree(ped->charWidthBuffer);
 
+#line 374
 #ifdef SUPPORT_LPK
+#line 375
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
+#line 379
 
         /*
          * Last but not least, free the ped
@@ -383,9 +392,12 @@ void ECSetPasswordChar(
         ped->cPasswordCharWidth = max(size.cx, 1);
         ECReleaseEditDC(ped, hdc, TRUE);
     }
+#line 424
 #ifdef SUPPORT_LPK
+#line 425
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
+#line 428
 
     if (pwchar)
         SetWindowState(ped->pwnd, EFPASSWORD);
@@ -708,9 +720,12 @@ void   ECSetFont(
 
 
 
+#line 749
 #ifdef SUPPORT_LPK
+#line 750
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
+#line 771
 
     if (!hfont) {
         //

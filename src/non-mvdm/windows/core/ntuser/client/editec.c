@@ -306,9 +306,12 @@ void  ECMenu(
     if ((ped->ichMinSel == 0) && (ped->ichMaxSel == ped->cch))
         EnableMenuItem(hMenu, EM_SETSEL, MF_BYCOMMAND | MFS_GRAYED);
 
+#line 309
 #ifdef SUPPORT_LPK
+#line 310
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
+#line 313
 
     // BOGUS
     // We position the menu below & to the right of the point clicked on.
@@ -346,9 +349,12 @@ void  ECMenu(
     NtUserDestroyMenu(hMenu);
 
     if (cmd && (cmd != -1)) {
+#line 350
 #ifdef SUPPORT_LPK
+#line 351
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
+#line 356
 
         SendMessage(hwnd, cmd, 0, (cmd == EM_SETSEL) ? 0xFFFFFFFF : 0L );
     }
@@ -1673,9 +1679,12 @@ BOOL ECInsertText(
      * Set dirty bit
      */
     ped->fDirty = TRUE;
+#line 1684
 #ifdef SUPPORT_LPK
+#line 1685
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
+#line 1689
 
     return TRUE;
 }
@@ -1944,9 +1953,12 @@ void   ECResetTextInfo(PED ped)
 
     ECEmptyUndo(Pundo(ped));
 
+#line 1957
 #ifdef SUPPORT_LPK
+#line 1958
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
+#line 1961
     if (ped->fSingle) {
         if (!ped->listboxHwnd)
             ECNotifyParent(ped, EN_UPDATE);
@@ -2312,21 +2324,30 @@ LONG EditWndProc(
      * edit controls.
      */
 
+#line 2330
 #ifdef SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]
+#line 2331
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
+#line 2341
             goto HandleEditMsg;
 
         break;
 
+#line 2345
 #ifdef SUPPORT_LPK
+#line 2346
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
+#line 2356
 
     case WM_INPUTLANGCHANGE:
+#line 2358
 #ifdef SUPPORT_LPK
+#line 2359
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif // SUPPORT_LPK
+#line 2363
         goto HandleEditMsg;
 
     case WM_COPY:

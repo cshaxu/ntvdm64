@@ -29,9 +29,12 @@
 \***************************************************************************/
 UINT MLGetLineWidth(HDC hdc, LPSTR lpstr, int nCnt, PED ped)
 {
+#line 32
 #ifdef SUPPORT_LPK
+#line 33
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 38
     return(ECTabTheTextOut(hdc, 0, 0, 0, 0, lpstr, nCnt, 0, ped, 0, ECT_CALC, NULL));
 }
 
@@ -511,9 +514,12 @@ void MLIchToXYPos(
     /*
      * Find out how many pixels we indent the line for funny formats
      */
+#line 517
 #ifdef SUPPORT_LPK
+#line 518
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 523
         if (ped->format != ES_LEFT) {
             xOffset = MLCalcXOffset(ped, hdc, iline);
         } else {
@@ -522,9 +528,12 @@ void MLIchToXYPos(
 
         xPosition = ped->rcFmt.left + xOffset +
                 MLGetLineWidth(hdc, pLineStart, cch, ped);
+#line 531
 #ifdef SUPPORT_LPK
+#line 532
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 534
 
     ECUnlock(ped);
     ppt->x = xPosition;
@@ -562,9 +571,12 @@ ICH MLMouseToIch(
     int iOldTextWidth;
     int iCurWidth;
 
+#line 571
 #ifdef SUPPORT_LPK
+#line 572
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 576
 
     /*
      * First determine which line the mouse is pointing to.
@@ -1381,9 +1393,12 @@ void MLBuildchLines(
              */
             if(ped->rcFmt.right > ped->rcFmt.left) {
 
+#line 1392
 #ifdef SUPPORT_LPK
+#line 1393
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 1401
                 {
                     /*
                      * Find the end of the line based solely on text extents
@@ -2725,9 +2740,12 @@ AddDelta:
         if (ped->hFont)
             SelectObject(hdc, ped->hFont);
 
+#line 2752
 #ifdef SUPPORT_LPK
+#line 2753
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 2763
             fUp = TRUE;
 
         if (fUp)
@@ -2788,9 +2806,12 @@ void MLSetFocus(
          * hidden edit control window. If we don't create the caret etc, it will
          * never end up showing properly.
          */
+#line 2823
 #ifdef SUPPORT_LPK
+#line 2824
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 2828
             bDoCaret = TRUE;
 
         if (bDoCaret)
@@ -2860,9 +2881,12 @@ void MLKillFocus(
         /*
          * Destroy the caret
          */
+#line 2897
 #ifdef SUPPORT_LPK
+#line 2898
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 2902
             bKillCaret = TRUE;
 
         if(bKillCaret) {
@@ -3078,9 +3102,12 @@ LONG MLEditWndProc(
 
         break;
 
+#line 3117
 #ifdef SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]
+#line 3118
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 3140
 
     case WM_KEYDOWN:
 
@@ -3088,9 +3115,12 @@ LONG MLEditWndProc(
          * wParam - virt keycode of the given key
          * lParam - modifiers such as repeat count etc. (not used)
          */
+#line 3147
 #ifdef SUPPORT_LPK
+#line 3148
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 3155
         MLKeyDown(ped, (UINT)wParam, 0);
         break;
 
@@ -3100,9 +3130,12 @@ LONG MLEditWndProc(
          * wParam - handle of the window that receives the input focus
          * lParam - not used
          */
+#line 3164
 #ifdef SUPPORT_LPK
+#line 3165
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 3172
         MLKillFocus(ped);
         break;
 
@@ -3528,9 +3561,12 @@ void MLDrawText(
         return;
     }
 
+#line 3597
 #ifdef SUPPORT_LPK
+#line 3598
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 3606
 
     // If it is either centered or right-justified, then draw the whole lines.
     if (ped->format != ES_LEFT) {

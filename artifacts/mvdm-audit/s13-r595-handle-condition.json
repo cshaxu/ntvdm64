@@ -1,0 +1,10 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/handles.c",
+  "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/handles.c",
+  "original_if": 38,
+  "original_else": 59,
+  "original_endif": 61,
+  "retained_next_original_definition": 293,
+  "change": "Restore the original #endif label and error diagnostic line; keep the selected original CheckHandleTable macro and the existing #line 293 anchor for the next retained definition. No omitted original functions are claimed recovered.",
+  "status": "r603 cached product build passed; full conditional review recorded in s13-r604-handle-condition-complete.json."
+}

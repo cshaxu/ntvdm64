@@ -17,6 +17,7 @@
 /* DIVERGENCE(OPENNT-HOST-119): current layout input, no native CLIENTINFO cast. */
 #line 17
 #ifdef _USERK_
+#line 18
 #error DIVERGENCE OPENNT-HOST-145: kernel USER profile is not selected
 #else
 #line 20
@@ -71,6 +72,7 @@ BOOL RtlMBMessageWParamCharToWCS(DWORD msg, PDWORD pWParam)
             int cwch;
 #line 515
 #ifdef _USERK_
+#line 516
 #error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
 #else
 #line 520
@@ -270,9 +272,12 @@ WCSToMBEx(
 
     } else {
 
+#line 146
 #ifdef _USERK_
+#line 147
 #error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
 #else
+#line 166
         /*
          * Call NLS API (Kernel32) to convert string to Unicode. (User mode)
          */
@@ -284,6 +289,7 @@ WCSToMBEx(
                                  nAnsiChar,
                                  NULL, NULL);
 #endif // _USERK_
+#line 177
 
         if (nCharsInAnsiString == 0) {
             if (bAllocateMem) {
@@ -377,9 +383,12 @@ int MBToWCSEx(
          */
         ULONG nCharsInUnicodeString;
 
+#line 270
 #ifdef _USERK_
+#line 271
 #error DIVERGENCE OPENNT-HOST-136: _USERK_ branch is not selected; see mirror register.
 #else
+#line 291
         /*
          * Call NLS API (Kernel32) to convert string to Unicode. (User mode)
          */
@@ -390,6 +399,7 @@ int MBToWCSEx(
                                     (LPWSTR)*ppUnicodeString,
                                     (int)cchUnicodeString);
 #endif // _USERK_
+#line 301
 
         if (nCharsInUnicodeString == 0) {
             if (bAllocateMem) {
