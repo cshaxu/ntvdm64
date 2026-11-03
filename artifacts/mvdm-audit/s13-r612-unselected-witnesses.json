@@ -52,5 +52,5 @@
     }
   ],
   "limits": "No executable or runtime media is removed. Original implementations remain available in their pinned source baseline for any future explicitly admitted product feature.",
-  "status": "Unbuilt next batch."
+  "status": "Built and published as r613; see s13-r613-delivery.md."
 }

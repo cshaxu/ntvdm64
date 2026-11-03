@@ -20,5 +20,5 @@
     "tools/governance/Verify-T280S3HostStaticDataBuild.ps1"
   ],
   "limits": "Historical evidence is retained. The separate current error_abi.h remains because other independent build tools reference it. No executable or runtime media removed.",
-  "status": "Unbuilt next batch."
+  "status": "Built and published as r613; see s13-r613-delivery.md."
 }
