@@ -1,0 +1,20 @@
+{
+  "path": "src/mvdm-host/wow32/wmsg16.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsg16.h",
+  "current_sha256": "fea2358d3826640f1edfb17f24f3bbf39df713fbd0fe3208f03c184896a81b09",
+  "original_sha256": "a4322e35e9eaf992598c9de133074fb5d69e649d9729e37565c90156c55f6f98",
+  "guards": [
+    {
+      "if": 24,
+      "endif": 29
+    },
+    {
+      "if": 34,
+      "endif": 36
+    }
+  ],
+  "observed_in": [
+    "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+  ],
+  "scope": "Both original DEBUG groups retained with error-only excluded bodies and original line anchors. This is conditional review, not whole-source equivalence."
+}

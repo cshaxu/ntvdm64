@@ -464,7 +464,9 @@ ULONG FASTCALL WU32SystemParametersInfo(PVDMFRAME pFrame)
 
 
     default:
+#line 457
 #ifdef DEBUG
+#line 458
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 465
@@ -666,7 +668,9 @@ ULONG FASTCALL WU32SystemParametersInfo(PVDMFRAME pFrame)
 
 
     default:
+#line 663
 #ifdef DEBUG
+#line 664
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 671

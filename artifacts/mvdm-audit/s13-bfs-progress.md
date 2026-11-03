@@ -3963,3 +3963,7 @@ Queue r366 restores original input.c first-depth NEVER exclusion at file scope (
 - r582: completed conditional review of vrnmpipe.h: both original VDMREDIR_DLL groups and both branches are byte-line-identical, the DBG arm is correctly excluded and anchored, and adjacent DIV-167 is preserved. Counts: 150 identical / 425 differing reviewed / 1057 observed. Evidence: s13-r582-vrnmpipe-complete.json.
 
 - r581 delivery: all x86, x86-extra and x64 cached build steps passed. Complete ten-image package staged and published to both release and O:/winnt/system32 with candidate hashes verified. Six images are byte-identical and four differ only in independently parsed PE/debug timestamps versus the previously published package, so prior Full 17/17 was reused under owner instruction. Evidence: s13-r581-build-image-compare.json and s13-r581-publication.json.
+
+- r587: completed the wmsg16.h conditional review: both original DEBUG guards and diagnostic anchors match, with unsupported bodies excluded. Evidence: s13-r587-wmsg16-complete.json.
+
+- r586 delivery: all x86, x86-extra and x64 cached build steps passed. Complete ten-image package staged and published to both release and O:/winnt/system32 with candidate hashes verified. Seven images are byte-identical and three differ only in independently parsed PE/debug timestamps versus the previously published package, so prior Full 17/17 was reused under owner instruction. Evidence: s13-r586-build-image-compare.json and s13-r586-publication.json.

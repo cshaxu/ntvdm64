@@ -1,0 +1,136 @@
+{
+  "scope": "Two WOW headers; add original physical-line anchors to existing excluded NULLSTRUCT arms; selected statements unchanged. Original nested groups under excluded DBG are not restored.",
+  "records": [
+    {
+      "path": "src/mvdm-host/inc/wowkrn.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
+      "before_sha256": "0e172fc74921ae84831ed646b0432320dd565cace21182ce5a8b1deac340c3d1",
+      "after_sha256": "e4f70c604034b6352a0ca1a4866bc72690f3dbb216554cdf038f832762dbb3b6",
+      "guards": [
+        {
+          "if": 327,
+          "following": 332,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 408,
+          "following": 413,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 414,
+          "following": 419,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 420,
+          "following": 425,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 460,
+          "following": 465,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 525,
+          "following": 530,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 542,
+          "following": 547,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 646,
+          "following": 651,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 818,
+          "following": 823,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 842,
+          "following": 847,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 848,
+          "following": 853,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 880,
+          "following": 885,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wowsnd.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowsnd.h",
+      "before_sha256": "00d8cd7ba8f60e24583794c1911ffa1609c8d9172a473d7f85172ca247eae713",
+      "after_sha256": "551d5b47d4fbc2f02fb1499cefc1bb6a6a515acf43949b2648d23dc04a159223",
+      "guards": [
+        {
+          "if": 42,
+          "following": 47,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 53,
+          "following": 58,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 59,
+          "following": 64,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 65,
+          "following": 70,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 120,
+          "following": 125,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 126,
+          "following": 131,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 132,
+          "following": 137,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        }
+      ]
+    }
+  ],
+  "status": "r586 cached product builds passed; full per-file condition review remains partial."
+}

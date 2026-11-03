@@ -39,26 +39,38 @@
 #pragma pack(2)
 /* XLATON */
 
+#line 42
 #ifdef NULLSTRUCT
+#line 43
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 47
 
 typedef struct _COUNTVOICENOTES16 {		/* s13 */
     SHORT f1;
 } COUNTVOICENOTES16;
 typedef COUNTVOICENOTES16 UNALIGNED *PCOUNTVOICENOTES16;
 
+#line 53
 #ifdef NULLSTRUCT
+#line 54
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 58
 
+#line 59
 #ifdef NULLSTRUCT
+#line 60
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 64
 
+#line 65
 #ifdef NULLSTRUCT
+#line 66
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 70
 
 typedef struct _SETSOUNDNOISE16 {		/* s7 */
     SHORT f1;
@@ -109,17 +121,26 @@ typedef struct _SETVOICETHRESHOLD16 {		/* s16 */
 } SETVOICETHRESHOLD16;
 typedef SETVOICETHRESHOLD16 UNALIGNED *PSETVOICETHRESHOLD16;
 
+#line 120
 #ifdef NULLSTRUCT
+#line 121
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 125
 
+#line 126
 #ifdef NULLSTRUCT
+#line 127
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 131
 
+#line 132
 #ifdef NULLSTRUCT
+#line 133
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 137
 
 typedef struct _WAITSOUNDSTATE16 {		/* s11 */
     SHORT f1;

@@ -324,9 +324,12 @@ typedef struct _CATCH16 {           /* k55 */
 } CATCH16;
 typedef CATCH16 UNALIGNED *PCATCH16;
 
+#line 327
 #ifdef NULLSTRUCT
+#line 328
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 332
 
 typedef struct _DELETEATOM16 {          /* k71 */
     ATOM f1;
@@ -403,17 +406,26 @@ typedef struct _GETCODEINFO16 {         /* k104 */
 } GETCODEINFO16;
 typedef GETCODEINFO16 UNALIGNED *PGETCODEINFO16;
 
+#line 408
 #ifdef NULLSTRUCT
+#line 409
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 413
 
+#line 414
 #ifdef NULLSTRUCT
+#line 415
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 419
 
+#line 420
 #ifdef NULLSTRUCT
+#line 421
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 425
 
 typedef struct _GETDRIVETYPE16 {        /* k136 */
     SHORT f1;
@@ -449,9 +461,12 @@ typedef struct _GETMODULEUSAGE16 {      /* k48 */
 } GETMODULEUSAGE16;
 typedef GETMODULEUSAGE16 UNALIGNED *PGETMODULEUSAGE16;
 
+#line 460
 #ifdef NULLSTRUCT
+#line 461
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 465
 
 typedef struct _GETPRIVATEPROFILEINT16 {    /* k127 */
     VPSTR f4;
@@ -512,9 +527,12 @@ typedef struct _GETTEMPFILENAME16 {     /* k97 */
 } GETTEMPFILENAME16;
 typedef GETTEMPFILENAME16 UNALIGNED *PGETTEMPFILENAME16;
 
+#line 525
 #ifdef NULLSTRUCT
+#line 526
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 530
 
 typedef struct _GETVERSIONEX16 {          /* k149 */
     VPVOID lpVersionInfo;
@@ -527,9 +545,12 @@ typedef struct _GETWINDOWSDIRECTORY16 {     /* k134 */
 } GETWINDOWSDIRECTORY16;
 typedef GETWINDOWSDIRECTORY16 UNALIGNED *PGETWINDOWSDIRECTORY16;
 
+#line 542
 #ifdef NULLSTRUCT
+#line 543
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 547
 
 typedef struct _GLOBALALLOC16 {         /* k15 */
     DWORD f2;
@@ -629,9 +650,12 @@ typedef struct _INITATOMTABLE16 {       /* k68 */
 } INITATOMTABLE16;
 typedef INITATOMTABLE16 UNALIGNED *PINITATOMTABLE16;
 
+#line 646
 #ifdef NULLSTRUCT
+#line 647
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 651
 
 typedef struct _LIMITEMSPAGES16 {       /* k156 */
     DWORD f1;
@@ -799,9 +823,12 @@ typedef struct _SWAPRECORDING16 {       /* k204 */
 } SWAPRECORDING16;
 typedef SWAPRECORDING16 UNALIGNED *PSWAPRECORDING16;
 
+#line 818
 #ifdef NULLSTRUCT
+#line 819
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 823
 
 typedef struct _SWITCHSTACKTO16 {       /* k108 */
     WORD f3;
@@ -821,13 +848,19 @@ typedef struct _UNLOCKSEGMENT16 {       /* k24 */
 } UNLOCKSEGMENT16;
 typedef UNLOCKSEGMENT16 UNALIGNED *PUNLOCKSEGMENT16;
 
+#line 842
 #ifdef NULLSTRUCT
+#line 843
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 847
 
+#line 848
 #ifdef NULLSTRUCT
+#line 849
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 853
 
 typedef struct _WAITEVENT16 {           /* k30 */
     WORD    wTaskID;
@@ -855,9 +888,12 @@ typedef struct _WRITEPROFILESTRING16 {      /* k59 */
 } WRITEPROFILESTRING16;
 typedef WRITEPROFILESTRING16 UNALIGNED *PWRITEPROFILESTRING16;
 
+#line 880
 #ifdef NULLSTRUCT
+#line 881
 #error DIVERGENCE MVDM-HOST-DIV-525: NULLSTRUCT platform branch is not selected; see mirror register.
 #endif
+#line 885
 
 typedef struct __LCLOSE16 {         /* k81 */
     SHORT f1;

@@ -500,7 +500,9 @@ BOOL WOWCallback16Ex(
          PDWORD pdwRetCode
          )
 {
+#line 529
 #ifdef DEBUG
+#line 530
 #error Excluded unsupported DEBUG WOW profile
 #endif // DEBUG
 #line 552
@@ -537,7 +539,9 @@ BOOL WOWCallback16Ex(
  * keep same-unit callers on the public-shaped entry and this body intact. */
 BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVOID pvpReturn)
 {
+#line 583
 #ifdef DEBUG
+#line 584
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 648
@@ -556,8 +560,9 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
 #line 665
     USHORT SaveIp;
 #endif
-#line 667
+#line 656
 #ifdef DEBUG
+#line 657
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 659
@@ -605,7 +610,9 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
     pCBFrame->wTDB       = pFrame->wTDB;
     pCBFrame->wLocalBP   = pFrame->wLocalBP;
 
+#line 689
 #ifdef DEBUG
+#line 690
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 695
@@ -634,7 +641,9 @@ BOOL wow_original_CallBack16(INT iRetID, PPARM16 pParm16, VPPROC vpfnProc, PVPVO
         pCBFrame->wGenUse1 = (WORD)(DWORD)*pvpReturn;
     }
 
+#line 720
 #ifdef DEBUG
+#line 721
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 756

@@ -21,7 +21,9 @@
 
 /* Message number/name association (for debug output only)
  */
+#line 24
 #ifdef DEBUG
+#line 25
 #error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected
 #endif
 #line 30
@@ -29,7 +31,9 @@
 
 /* Function prototypes
  */
+#line 34
 #ifdef DEBUG
+#line 35
 #error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected
 #endif
 #line 37

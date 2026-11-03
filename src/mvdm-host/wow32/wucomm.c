@@ -1697,7 +1697,9 @@ BOOL DeletePortTabEntry(PWOWPORT pWOWPort)
         fTimeOut = (WaitForSingleObject(pWOWPort->hWriteThread, 5000) ==
                     WAIT_TIMEOUT);
 
+#line 1700
 #ifdef DEBUG
+#line 1701
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 1707
@@ -2526,7 +2528,9 @@ CleanupAfterWriteComplete:
             // The following is a sanity check on our buffer manipulations.
             //
 
+#line 2532
 #ifdef DEBUG
+#line 2533
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 2537

@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 575,
+  "completed_files": 576,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -8549,12 +8549,13 @@
     {
       "path": "src/mvdm-host/wow32/wmsg16.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsg16.h",
-      "current_sha256": "e1f9de50cd5eb7b6098b0ebc66591abf64562dbe2074d0f4fdbc0585e6022096",
+      "current_sha256": "fea2358d3826640f1edfb17f24f3bbf39df713fbd0fe3208f03c184896a81b09",
       "original_sha256": "a4322e35e9eaf992598c9de133074fb5d69e649d9729e37565c90156c55f6f98",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-wow-debug-guards",
+      "evidence": "s13-r587-wmsg16-complete.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmsgbm.c",

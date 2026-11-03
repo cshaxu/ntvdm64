@@ -96,7 +96,9 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
                 PUSERCLIENTGLOBALS pfinit16;
                 WORD UNALIGNED *pwMaxDWPMsg;
                 PBYTE pDWPBits;
+#line 99
 #ifdef DEBUG
+#line 100
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 104
@@ -143,7 +145,9 @@ ULONG FASTCALL WU32NotifyWow(PVDMFRAME pFrame)
                 FLUSHVDMCODEPTR(pfinit16->lpwMaxDWPMsg, sizeof(WORD), pwMaxDWPMsg);
                 FLUSHVDMCODEPTR(pfinit16->lpDWPBits, pfinit16->cbDWPBits, pDWPBits);
 
+#line 145
 #ifdef DEBUG
+#line 146
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 170

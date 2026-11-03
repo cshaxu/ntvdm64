@@ -49,7 +49,9 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
     wow_message_stack_enter(&stack);
     __try {
     BOOL   fMessageNeedsThunking;
+#line 42
 #ifdef DEBUG
+#line 43
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 45
@@ -147,7 +149,9 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
     // Thunk this 32 bit message to 16 bit message
 
     LOGDEBUG(6,("    Thunking window %x message %s\n", hwnd, GetWMMsgName(uMsg)));
+#line 136
 #ifdef DEBUG
+#line 137
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 141
@@ -231,7 +235,9 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
     // UnThunk this 32 bit message
 
     LOGDEBUG(6,("    UnThunking window %x message %s\n", hwnd, (LPSZ)GetWMMsgName(uMsg)));
+#line 215
 #ifdef DEBUG
+#line 216
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 220
@@ -393,7 +399,9 @@ BOOL FASTCALL WM32NoThunking(LPWM32MSGPARAMEX lpwm32mpex)
     return FALSE;
 }
 
+#line 391
 #ifdef DEBUG         // see the macro WM32UNDOCUMENTED
+#line 392
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 411

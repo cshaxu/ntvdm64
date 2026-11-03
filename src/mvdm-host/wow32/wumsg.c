@@ -877,7 +877,9 @@ get_next_dde_message:
     FREEVDMPTR(pFrame);
 
 
+#line 847
 #ifdef DEBUG
+#line 848
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 852
@@ -1178,7 +1180,9 @@ get_next_dde_message:
     FREEARGPTR(parg16);
     FREEVDMPTR(pFrame);
 
+#line 1143
 #ifdef DEBUG
+#line 1144
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 1148

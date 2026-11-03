@@ -22,7 +22,9 @@ MODNAME(walias.c);
     #define MM_MCISYSTEM_STRING 0x3CA
 #endif
 
+#line 25
 #ifdef  DEBUG
+#line 26
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 28
@@ -271,7 +273,9 @@ PWC FindClass16(LPCSTR pszClass, HAND16 hInst)
 
 
 
+#line 273
 #ifdef DEBUG
+#line 274
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 407

@@ -1,0 +1,196 @@
+{
+  "scope": "Eight WOW source files; add original physical-line anchors to existing excluded DEBUG arms; selected statements unchanged. Original nested groups under excluded DBG are not restored.",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\walias.c",
+      "before_sha256": "d60192f0ff6d97f3852174956c55913c9931734f85c86b5a60eaded6f957278c",
+      "after_sha256": "ed1f93ee396d432f1f398b29a1fb6261ec07a425fc8630ba99d38355da7c49e8",
+      "guards": [
+        {
+          "if": 25,
+          "following": 28,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 273,
+          "following": 407,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+      "before_sha256": "9fc75103ab86ba9286e3e472e854b4006cada8cdcf8533c2275b3d603a42f70c",
+      "after_sha256": "91d466999c9142b537003e5ace68d7cc52932b14d3a66ff8a8408b7f7f165740",
+      "guards": [
+        {
+          "if": 529,
+          "following": 552,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 583,
+          "following": 648,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 656,
+          "following": 659,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": true
+        },
+        {
+          "if": 689,
+          "following": 695,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 720,
+          "following": 756,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.c",
+      "before_sha256": "2fe1b09915e4aa6379715b393308986ebf6edc81006a5a5b2b21ae4499be16c3",
+      "after_sha256": "0d1105e777f458c7bf4fc5fc5cb5fa81c8738ad7b0ea7c7a5fc17d75dbdb0794",
+      "guards": [
+        {
+          "if": 42,
+          "following": 45,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 136,
+          "following": 141,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 215,
+          "following": 220,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 391,
+          "following": 411,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsg16.h",
+      "before_sha256": "e1f9de50cd5eb7b6098b0ebc66591abf64562dbe2074d0f4fdbc0585e6022096",
+      "after_sha256": "fea2358d3826640f1edfb17f24f3bbf39df713fbd0fe3208f03c184896a81b09",
+      "guards": [
+        {
+          "if": 24,
+          "following": 30,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 34,
+          "following": 37,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wucomm.c",
+      "before_sha256": "f53c39ae01386587bed787518ccd64e3042ecb3c271cee886ad35a8190f9c9fa",
+      "after_sha256": "db0b755c83fccedc8a5c935e72ba12569d723df99f05986ed171e5dffe4214f2",
+      "guards": [
+        {
+          "if": 1700,
+          "following": 1707,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 2532,
+          "following": 2537,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuman.c",
+      "before_sha256": "f90c2aff3bb2c00929a6f014c84091d130e6ba3bd92b2f966c2d9afa8f73de60",
+      "after_sha256": "bed96ab51ec7fbf0324718277f74336115f2506df10d300084d8773b3e8ca28a",
+      "guards": [
+        {
+          "if": 99,
+          "following": 104,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 145,
+          "following": 170,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wumsg.c",
+      "before_sha256": "e2cd60a76c15f9c85cdc64bca6aee99d0fc2d33d250fbd4bf9d862428164497f",
+      "after_sha256": "a0402a4b04f29cc2eff7aae2be03ab428dea54d94432a8ec842cd2ece80e044b",
+      "guards": [
+        {
+          "if": 847,
+          "following": 852,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1143,
+          "following": 1148,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuser31.c",
+      "before_sha256": "54a78687036b61162b5452b24ad2f76982848023fdf01f10cd5ec8fce5ed6150",
+      "after_sha256": "f5b998b72b349791fe6d55c5b6dd442bc3d483a329403e19ce04ce578ca865c9",
+      "guards": [
+        {
+          "if": 457,
+          "following": 465,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 663,
+          "following": 671,
+          "replaced_existing_following_anchor": true,
+          "replaced_existing_prior_anchor": false
+        }
+      ]
+    }
+  ],
+  "status": "r586 cached product builds passed; wmsg16.h condition review is complete in s13-r587-wmsg16-complete.json; remaining files remain partial."
+}
