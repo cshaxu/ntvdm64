@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 544,
+  "completed_files": 568,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -68,7 +68,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-simple-excluded",
+      "evidence": "s13-r556-simple-guards-complete.json"
     },
     {
       "path": "src/mvdm-host/dos/command/cmdenv.c",
@@ -134,7 +135,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-simple-excluded",
+      "evidence": "s13-r556-simple-guards-complete.json"
     },
     {
       "path": "src/mvdm-host/dos/command/cmdpif.c",
@@ -300,7 +302,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-simple-excluded",
+      "evidence": "s13-r556-simple-guards-complete.json"
     },
     {
       "path": "src/mvdm-host/dos/dem/demlabel.c",
@@ -344,7 +347,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-simple-excluded",
+      "evidence": "s13-r556-simple-guards-complete.json"
     },
     {
       "path": "src/mvdm-host/dos/dem/demmsg.h",
@@ -410,7 +414,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-simple-excluded",
+      "evidence": "s13-r556-simple-guards-complete.json"
     },
     {
       "path": "src/mvdm-host/dpmi32/dpmi32.c",
@@ -1229,7 +1234,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-single-excluded",
+      "evidence": "s13-r554-single-exclusions-complete.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
@@ -1638,7 +1644,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-single-excluded",
+      "evidence": "s13-r554-single-exclusions-complete.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/bswap.h",
@@ -1836,7 +1843,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-single-excluded",
+      "evidence": "s13-r554-single-exclusions-complete.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
@@ -1970,7 +1978,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-single-excluded",
+      "evidence": "s13-r554-single-exclusions-complete.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_prot.c",
@@ -2225,18 +2234,20 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-single-excluded",
+      "evidence": "s13-r554-single-exclusions-complete.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpupig.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpupig.h",
-      "current_sha256": "7160da96c78db562a06f72fd76d242105620d946ba4f138c807c98725ec0d06b",
+      "current_sha256": "8983ef54b45a03ebffef1bb78661d3a81c33ce4819e138be263eae66feddd225",
       "original_sha256": "73b2e7ceda4cb3ba83343b1fe07a428dccab76a196b2d7c3951c37962be1e1db",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-outer-excluded",
+      "evidence": "s13-r559-outer-exclusions-complete.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
@@ -2424,7 +2435,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-single-excluded",
+      "evidence": "s13-r554-single-exclusions-complete.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/cmpxchg.h",
@@ -2809,8 +2821,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "pending_change": "r541 remove duplicate equivalent original line anchor; build pending"
+      "status": "completed-original-spc486-excluded",
+      "pending_change": "r541 remove duplicate equivalent original line anchor; build pending",
+      "evidence": "s13-r553-spc486-files-complete.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/invd.h",
@@ -2832,8 +2845,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "pending_change": "r541 remove duplicate equivalent original line anchor; build pending"
+      "status": "completed-original-spc486-excluded",
+      "pending_change": "r541 remove duplicate equivalent original line anchor; build pending",
+      "evidence": "s13-r553-spc486-files-complete.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/invlpg.h",
@@ -4197,8 +4211,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "pending_change": "r541 remove duplicate equivalent original line anchor; build pending"
+      "status": "completed-original-spc486-excluded",
+      "pending_change": "r541 remove duplicate equivalent original line anchor; build pending",
+      "evidence": "s13-r553-spc486-files-complete.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/wbinvd.h",
@@ -4214,13 +4229,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/xadd.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\xadd.c",
-      "current_sha256": "932a244913b6c77c07ab7a073e27a668ac2d1511141552054541c1a1cdce7d46",
+      "current_sha256": "35b58fb6e017ed57d710db9bcb925c39d0a1fa5d22ea7536dfb592da7d469046",
       "original_sha256": "80d97ce7d9b57b24c6b498b72def5e847ca39642545bd841f0fbae5725c702e2",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-outer-excluded",
+      "evidence": "s13-r559-outer-exclusions-complete.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/xadd.h",
@@ -5004,13 +5020,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/debug/pigyoda.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\pigyoda.c",
-      "current_sha256": "f46ccb5138f9ebc5eb15a063c2edfec7b200da99c3f1081438bb6627ed641795",
+      "current_sha256": "f351453f515087eec402ce1fbcf028526c158a7f472fe6c530165331c57f831f",
       "original_sha256": "ede413a201fc0d4115b5bb0cd50aad3dd34d93a61dc734df49bfd464132ee7f2",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-outer-excluded",
+      "evidence": "s13-r559-outer-exclusions-complete.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/debug/profile.c",
@@ -5558,13 +5575,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/gisp_sas.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gisp_sas.h",
-      "current_sha256": "c0e9edb65b48a37c6d19d29ad1c8d07b42d1dec38b8e10743cfc268c7b609e02",
+      "current_sha256": "8a6e9ee2a17b879c88b829f1555b32ab4444d19d548047329b95e2e97afa0a23",
       "original_sha256": "2413fd0f1b4a4d9cb0238a4c811d088d2d0d1b0c0eaa423956400bd8256558e3",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-outer-excluded",
+      "evidence": "s13-r559-outer-exclusions-complete.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/gispsvga.h",
@@ -5690,13 +5708,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/hunter.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\hunter.h",
-      "current_sha256": "972bad578985e96d4da928420805f9878ff0f60b63ef9d160e968f7e896e5a4b",
+      "current_sha256": "3ffb9e2b20d8632ef6c57787f9e99ddba1a9b33505e344f9ec1b2b9908001b64",
       "original_sha256": "92958f20ad0e03e8423eb190f0793813e02a752b1820e94aff01049573475edf",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-outer-excluded",
+      "evidence": "s13-r559-outer-exclusions-complete.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/ica.h",
@@ -7130,7 +7149,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-simple-excluded",
+      "evidence": "s13-r556-simple-guards-complete.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
@@ -7523,7 +7543,8 @@
         "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-simple-excluded",
+      "evidence": "s13-r556-simple-guards-complete.json"
     },
     {
       "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
@@ -7556,7 +7577,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-simple-excluded",
+      "evidence": "s13-r556-simple-guards-complete.json"
     },
     {
       "path": "src/mvdm-host/vdmredir/vrdlcdbg.h",
@@ -7611,7 +7633,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-simple-excluded",
+      "evidence": "s13-r556-simple-guards-complete.json"
     },
     {
       "path": "src/mvdm-host/vdmredir/vrmisc.c",
@@ -8013,7 +8036,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-simple-excluded",
+      "evidence": "s13-r556-simple-guards-complete.json"
     },
     {
       "path": "src/mvdm-host/wow32/wgdi31.h",

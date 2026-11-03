@@ -1,0 +1,17 @@
+{
+  "scope": "Remove consecutive identical #line directives; retain the last effective original diagnostic line.",
+  "files": [
+    { "path": "src/mvdm-host/softpc.new/base/ccpu386/xadd.c", "line": 60 },
+    { "path": "src/mvdm-host/softpc.new/base/inc/cpu_vid.h", "line": 127 },
+    { "path": "src/mvdm-host/wow32/wow32.h", "line": 280 },
+    { "path": "src/mvdm-host/softpc.new/base/debug/pigyoda.c", "line": 356, "removed_superseding_line": 33 },
+    { "path": "src/mvdm-host/softpc.new/base/inc/gisp_sas.h", "line": 60, "removed_superseding_line": 24 },
+    { "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpupig.h", "line": 168, "removed_superseding_line": 15 },
+    { "path": "src/mvdm-host/softpc.new/base/inc/hunter.h", "line": 615, "removed_superseding_line": 20 },
+    { "path": "src/mvdm-host/softpc.new/base/inc/cga.h", "line": 113, "removed_superseding_line": 97 },
+    { "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h", "line": 39, "removed_superseding_line": 32 },
+    { "path": "src/mvdm-host/softpc.new/base/inc/hwvga.h", "disposition": "Deleted after confirming no product or test include reference; it was absent from observed build graphs. MVDM-HOST-DIV-534 updated." }
+  ],
+  "status": "The r558 cached product build passed and the complete ten-image package was published; five per-file conditional audits were completed in r559. hwvga.h was removed after the build after verifying it was not in observed product graphs and had no product or test include reference.",
+  "reason": "Three pairs of identical consecutive directives are redundant. In five retained files, obsolete following directives overwrote correct original post-endif EOF anchors; nt_eoi.h also had an obsolete directive overwriting the original post-endif position before remaining declarations. The unreferenced hwvga.h was removed under the product-reachability rule. No selected code is removed."
+}

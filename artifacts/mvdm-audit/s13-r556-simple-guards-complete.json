@@ -1,0 +1,137 @@
+{
+  "scope": "Ten single original condition groups: error-only excluded bodies, exact original conditional text and anchored original diagnostic lines.",
+  "evidence": "Observed release worker/redirection/WOW graphs; DBG has no enabling flag in those product contexts (base.h defines it as zero where applicable); source and build scans found no enabling definition for CHECK_IT_LATER or NOTUSEDNOTUSED. The original literal #if 0 is unconditionally false. Other unrelated or historical test contexts are not treated as product contexts.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/command/cmddisp.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmddisp.c",
+      "selector": "DBG",
+      "original_if_line": 46,
+      "original_endif_line": 52,
+      "current_sha256": "91e321e7d4bf19527ef7a0371d1c6137ec056f37c2da85bc8f59d009b12c0a94",
+      "original_sha256": "2a906e7100da9db6f16bab91c767b149f28e63a0db2803297812a8e86d2b19d6",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdmisc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdmisc.c",
+      "selector": "CHECK_IT_LATER",
+      "original_if_line": 656,
+      "original_endif_line": 713,
+      "current_sha256": "9d6e609d830e31b2bf69608c9659c410905efc5eecfb33b179577ed42d901468",
+      "original_sha256": "1ca036932368a0d0bf1848b078cc80cd66e67a4cc46ad26a0c1b236fe40f4281",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demioctl.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demioctl.c",
+      "selector": "DBG",
+      "original_if_line": 67,
+      "original_endif_line": 73,
+      "current_sha256": "6c0db6e312ca2800614fb9b9068a9c39a6ffca7531e1aaab00d64f95b35c4ddd",
+      "original_sha256": "6f480bf758d071b1fd2f76a137f892b77d1ea8d2d8ffb4690d395aedf5f733fa",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demmsg.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demmsg.c",
+      "selector": "DBG",
+      "original_if_line": 7,
+      "original_endif_line": 48,
+      "current_sha256": "adcb4b21a626d5d7429e65d3fea69b19196b70a450d7dd379abbf52e5965e0ac",
+      "original_sha256": "1414099a0a5ad421440f101bbc6c669285141ab53bd9403b9ead4a6e4d9db2c8",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/debug.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\debug.c",
+      "selector": "DBG",
+      "original_if_line": 24,
+      "original_endif_line": 82,
+      "current_sha256": "ef8e04f3ea91d4c9ca87fbb034d745a28739ed1656a7dfebc1290b6e195e6b5d",
+      "original_sha256": "88a0fb538d88f8bee711bd2aa5390602394abe1fc1a577090f15183a3bfd1fb1",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_input.c",
+      "selector": "NOTUSEDNOTUSED",
+      "original_if_line": 59,
+      "original_endif_line": 62,
+      "current_sha256": "e5116de0bc34641a431956bbb3dfaf06b7d5ba21ea8675715af0a425be639e23",
+      "original_sha256": "9f54d1ed5c7074ba753b31daf28a42231598107e9a779381e94b91a25218e8f7",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlc.h",
+      "selector": "DBG",
+      "original_if_line": 981,
+      "original_endif_line": 988,
+      "current_sha256": "63be1f8951611150544104f986831c8d2a49844c6a064e904661f517ff9b0579",
+      "original_sha256": "85ea2d8288f4bee6162f5475bbae5c40f4470d8521b4360f4a77a130a14df8a8",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcdbg.c",
+      "selector": "DBG",
+      "original_if_line": 87,
+      "original_endif_line": 4024,
+      "current_sha256": "8514683f311603f398605e339e642b592b24e31d60a457e57d4b2fe88d8a907f",
+      "original_sha256": "98e30a6019415eed62efa2aed0d921d4f8b7f4fe5da150e664c925d9e61504c2",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrinit.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrinit.c",
+      "selector": "DBG",
+      "original_if_line": 182,
+      "original_endif_line": 187,
+      "current_sha256": "a2e4878558786715e56bda92357c5e1db94cef2949c1b0879bed44f1e7807866",
+      "original_sha256": "088ecff80459ed358ebf4f7dd291821748475a8fbdccaf27a1ee1df2b6648273",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgdi31.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgdi31.c",
+      "selector": "0",
+      "original_if_line": 820,
+      "original_endif_line": 827,
+      "current_sha256": "10f6dd949339834b89e9347e50be30e6edfa78fae1d97624c3ffd5c5e794b931",
+      "original_sha256": "38d1d570fd1625affdf99eb1ce072e78b26a532abfd5fc9dd32c10b2c46d06e6",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    }
+  ],
+  "limitations": "Not a nonconditional source equivalence review; supported but unobserved build contexts remain to be enumerated."
+}

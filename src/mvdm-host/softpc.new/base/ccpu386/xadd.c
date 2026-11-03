@@ -39,4 +39,3 @@ XADD CPU functions.
 #error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
 #line 60
-#line 60

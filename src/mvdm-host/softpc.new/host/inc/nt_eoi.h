@@ -35,7 +35,6 @@ extern VDMVIRTUALICA VirtualIca[];
 #error Excluded original conditional branch
 #endif
 #line 39
-#line 32
 
 //from base ica.c
 LONG ica_intack(ULONG *hook_addr);

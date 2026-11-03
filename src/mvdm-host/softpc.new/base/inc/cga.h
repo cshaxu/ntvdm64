@@ -90,4 +90,3 @@ extern	CGA_GLOBS	CGA_GLOBALS;
 #error Unsupported excluded original configuration
 #endif	/* !EGG */
 #line 113
-#line 97

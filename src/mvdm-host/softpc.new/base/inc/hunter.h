@@ -20,4 +20,3 @@
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif	/* HUNTER */
 #line 615
-#line 20

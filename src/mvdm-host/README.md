@@ -584,10 +584,11 @@ MVDM-HOST-DIV-535: replace unselected REAL_KBD, REAL_ROM and A_VID branch
 bodies with markers, retaining their original conditionals. Original ranges
 and body hashes are in `../../artifacts/mvdm-audit/s12-hardware-legacy.jsonl`.
 
-MVDM-HOST-DIV-534: replace the unreferenced GISP hardware VGA interface body
-in `hwvga.h` with a marker, retaining the outer conditional and provenance.
-The original file and body hashes are in
-`../../artifacts/mvdm-audit/s12-hwvga.json`; software VGA is unchanged.
+MVDM-HOST-DIV-534: remove the unreferenced GISP hardware VGA interface
+`hwvga.h`; no product or test include reference was found, and it was absent
+from the observed build graphs. The original file and earlier subset hashes
+are in `../../artifacts/mvdm-audit/s12-hwvga.json`;
+software VGA is unchanged.
 
 MVDM-HOST-DIV-533: reduce the original `mouse16b.h` to its retained include
 guard and an exclusion marker after its last unselected implementation

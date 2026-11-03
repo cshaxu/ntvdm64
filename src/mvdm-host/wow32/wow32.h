@@ -296,7 +296,6 @@ extern HANDLE hHostInstance;
 #error DEBUG WOW32 profile is not supported
 #endif
 #line 280
-#line 280
 #ifdef i386
 #line 281
 #error i386 kernel WOW profile is not supported
