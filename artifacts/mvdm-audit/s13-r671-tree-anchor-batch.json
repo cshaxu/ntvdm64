@@ -1,0 +1,557 @@
+{
+  "scope": "Ten fully preflighted per-file conditional trees; only original diagnostic anchors changed.",
+  "method": "Original and current condition trees compared recursively. Error-only arms prune original children; retained leaves match. Anchors generated from original physical lines and resulting tree rechecked.",
+  "limits": "Original local adaptations outside conditional groups and supported-context enumeration remain separate.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_yoda.c",
+      "before_sha256": "00953ea06ef57d3e4fe534cfa8e83781656c6de77a2b0e6e63ae341fbac5822f",
+      "after_sha256": "20ada4729cbe0b891d3621870d826eb7dd0819fda3b4aaf8c17baf9d37f79204",
+      "original_sha256": "2ec898da6746f0992020845bde73a30edaf7cdd5c744559501eb9cbaa000df0a",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "YODA",
+          "original_line": 39,
+          "error_line": 40,
+          "end_line": 1196
+        }
+      ],
+      "tree_counts": {
+        "excluded": 1,
+        "groups": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/suballoc/suballcp.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\suballoc\\suballcp.h",
+      "before_sha256": "8f4430f9f436cadb5e66a25c8771c0d0ea85de72399744610f38e1b4e3fe8fb2",
+      "after_sha256": "a03be40c18d75f3b361b428da8ddbae452898eddd11859154b327e7e238439e2",
+      "original_sha256": "25451aa0c293f3950107e81d81507e692e3db7b089655ceac320e4f3779fadb2",
+      "guards": [
+        {
+          "kind": "if",
+          "expression": "0",
+          "original_line": 48,
+          "error_line": 49,
+          "end_line": 53
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 57,
+          "error_line": 58,
+          "end_line": 67
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 130,
+          "error_line": 131,
+          "end_line": 133
+        }
+      ],
+      "tree_counts": {
+        "excluded": 3,
+        "retained": 2,
+        "groups": 3
+      }
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmslot.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmslot.c",
+      "before_sha256": "5460621376e0b83cbd72341db57ef20ab8f06305dcc87fe33c129eca9b0e9979",
+      "after_sha256": "2c1b2079e410da6fe9950d6046a261a7d6920ebd57a86388866361cbb9fe6bc1",
+      "original_sha256": "70294b72780d3287137310dd4b018b7e572328e1b8bcf9bf4178c32734b95c7c",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "VR_BREAK",
+          "original_line": 115,
+          "error_line": 116,
+          "end_line": 120
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 226,
+          "error_line": 227,
+          "end_line": 232
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 303,
+          "error_line": 304,
+          "end_line": 309
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 380,
+          "error_line": 381,
+          "end_line": 386
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 406,
+          "error_line": 407,
+          "end_line": 411
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 458,
+          "error_line": 459,
+          "end_line": 467
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 476,
+          "error_line": 477,
+          "end_line": 483
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 488,
+          "error_line": 489,
+          "end_line": 493
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 520,
+          "error_line": 521,
+          "end_line": 527
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 576,
+          "error_line": 577,
+          "end_line": 584
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 621,
+          "error_line": 622,
+          "end_line": 627
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 643,
+          "error_line": 644,
+          "end_line": 648
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 659,
+          "error_line": 660,
+          "end_line": 668
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 688,
+          "error_line": 689,
+          "end_line": 693
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 743,
+          "error_line": 744,
+          "end_line": 749
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 752,
+          "error_line": 753,
+          "end_line": 757
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 777,
+          "error_line": 778,
+          "end_line": 782
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 796,
+          "error_line": 797,
+          "end_line": 807
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 817,
+          "error_line": 818,
+          "end_line": 822
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 825,
+          "error_line": 826,
+          "end_line": 833
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 871,
+          "error_line": 872,
+          "end_line": 876
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 916,
+          "error_line": 917,
+          "end_line": 919
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 936,
+          "error_line": 937,
+          "end_line": 941
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 956,
+          "error_line": 957,
+          "end_line": 961
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 967,
+          "error_line": 968,
+          "end_line": 972
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 1015,
+          "error_line": 1016,
+          "end_line": 1020
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 1120,
+          "error_line": 1121,
+          "end_line": 1134
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 1177,
+          "error_line": 1178,
+          "end_line": 1191
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 1233,
+          "error_line": 1234,
+          "end_line": 1244
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 1278,
+          "error_line": 1279,
+          "end_line": 1285
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 1295,
+          "error_line": 1296,
+          "end_line": 1306
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 1309,
+          "error_line": 1310,
+          "end_line": 1320
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 1433,
+          "error_line": 1434,
+          "end_line": 1442
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 1451,
+          "error_line": 1452,
+          "end_line": 1457
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 1497,
+          "error_line": 1498,
+          "end_line": 1505
+        },
+        {
+          "kind": "if",
+          "expression": "DBG",
+          "original_line": 1508,
+          "error_line": 1509,
+          "end_line": 1513
+        }
+      ],
+      "tree_counts": {
+        "excluded": 36,
+        "retained": 1,
+        "groups": 36
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkgthunk.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkgthunk.c",
+      "before_sha256": "944a64432a388ba94beb404f0ec4612e974dac5cb9a435e0acc4870b699630a1",
+      "after_sha256": "68d0b83670589ca41c93aff76b03f7078f41a6aaaabf8a80463ea46d68c816aa",
+      "original_sha256": "787dfd9d5135b71cdff6ca2bcc8145bd3edf5e2ea26b7e9c87b14176f82efeec",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "i386",
+          "original_line": 27,
+          "error_line": 28,
+          "end_line": 36
+        },
+        {
+          "kind": "ifdef",
+          "expression": "i386",
+          "original_line": 50,
+          "error_line": 51,
+          "end_line": 57
+        },
+        {
+          "kind": "ifdef",
+          "expression": "i386",
+          "original_line": 174,
+          "error_line": 175,
+          "end_line": 524
+        }
+      ],
+      "tree_counts": {
+        "excluded": 3,
+        "groups": 3,
+        "retained": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstruc.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmstruc.h",
+      "before_sha256": "7dededbcac44bc77ec395f5f77859f1069f45a43fa6bccaa0e075a3fe88c9ffe",
+      "after_sha256": "7938034986ce5547725f9a1056f211310d3e6d0cca686dc3cf0f2d0a92e8bc15",
+      "original_sha256": "8c8c764f500c47689f5d97c485e8d81c6361130c6ce744a3dbe8d2d26c1eaf5b",
+      "guards": [
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 112,
+          "error_line": 113,
+          "end_line": 125
+        }
+      ],
+      "tree_counts": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstruc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wstruc.c",
+      "before_sha256": "e5068c09f7c067cd79d936c06d572c261d3a53070201b597bae602e591d3db63",
+      "after_sha256": "548be73b4091a3ff5fbfa93d8ddec0894c6c424c2bab7a5154bd545df9a1d704",
+      "original_sha256": "04aa31f76dbb3e683c1f96101b07de006a79ca0d3b49e0a16986166349f3abb3",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "NOTUSED",
+          "original_line": 302,
+          "error_line": 303,
+          "end_line": 360
+        },
+        {
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "original_line": 429,
+          "error_line": 430,
+          "end_line": 434
+        },
+        {
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "original_line": 734,
+          "error_line": 735,
+          "end_line": 743
+        },
+        {
+          "kind": "if",
+          "expression": "0",
+          "original_line": 955,
+          "error_line": 956,
+          "end_line": 975
+        },
+        {
+          "kind": "if",
+          "expression": "(LF_FACESIZE != 32)",
+          "original_line": 968,
+          "error_line": 969,
+          "end_line": 971
+        }
+      ],
+      "tree_counts": {
+        "excluded": 5,
+        "groups": 5,
+        "retained": 1
+      }
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsa20.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsa20.c",
+      "before_sha256": "3d3b82e743c478a307dd06d6d9a2539d0caa3819cf0a3d73025d4e2ef34b16bc",
+      "after_sha256": "7ab0eb6d96560ccf4a7b8b5999d7f35fc301c923df2e6a7c6904dc5b74f6f929",
+      "original_sha256": "7261b7064a089b655b8d41d3e4ef6887be869af2b7b62970389aeee9a8acc94b",
+      "guards": [
+        {
+          "kind": "if",
+          "expression": "0",
+          "original_line": 67,
+          "error_line": 68,
+          "end_line": 81
+        },
+        {
+          "kind": "if",
+          "expression": "0",
+          "original_line": 91,
+          "error_line": 92,
+          "end_line": 105
+        }
+      ],
+      "tree_counts": {
+        "excluded": 2,
+        "groups": 2
+      }
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/error.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\error.c",
+      "before_sha256": "24bd5f27d47644841bcf243f6e16683bfe6191e87f640610120aed9e616aff36",
+      "after_sha256": "1bbed0c19ef908b0e2a3145f8b47e8936597d39e06ed9282bd0058499d75f439",
+      "original_sha256": "88bf09ab98778e0ca58d9d232d3b7aba6115223f43eddf981f6e06b786e77e48",
+      "guards": [
+        {
+          "kind": "if",
+          "expression": "defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)",
+          "original_line": 26,
+          "error_line": 27,
+          "end_line": 29
+        },
+        {
+          "kind": "if",
+          "expression": "ERROR_SUCCESS != 0 || NO_ERROR != 0",
+          "original_line": 35,
+          "error_line": 36,
+          "end_line": 38
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTOS_KERNEL_RUNTIME",
+          "original_line": 175,
+          "error_line": 176,
+          "end_line": 185
+        }
+      ],
+      "tree_counts": {
+        "excluded": 3,
+        "groups": 3
+      }
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\lboxctl3.c",
+      "before_sha256": "895994e4fe38b63cdd1e734fd452f37ce93cc0d4da597cbe612d2951b2db1403",
+      "after_sha256": "54d79ac2804e45da36760642a2d7af0c807cd119a65a228fd41ba23894bad078",
+      "original_sha256": "c20aedad6b3ec2a596f7423ebceb0d130a56b2f978a3988c4de0e15b49bb8989",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "WASWIN31",
+          "original_line": 502,
+          "error_line": 503,
+          "end_line": 516
+        },
+        {
+          "kind": "ifdef",
+          "expression": "WASWIN31",
+          "original_line": 528,
+          "error_line": 529,
+          "end_line": 554
+        },
+        {
+          "kind": "ifndef",
+          "expression": "UNICODE",
+          "original_line": 896,
+          "error_line": 897,
+          "end_line": 899
+        },
+        {
+          "kind": "ifndef",
+          "expression": "UNICODE",
+          "original_line": 1144,
+          "error_line": 1145,
+          "end_line": 1147
+        }
+      ],
+      "tree_counts": {
+        "excluded": 4,
+        "retained": 2,
+        "groups": 4
+      }
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/cleanup.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\cleanup.c",
+      "before_sha256": "119275295a294b7ace4f7577d5bcb66f043729a368ee261e3e4952c7f8f093a6",
+      "after_sha256": "43135fd26751438fc8847bbbe046a6ebc9c7e80c55efb9d8866b52858d6fe218",
+      "original_sha256": "dfb0fb8d81afeb555b3631adc5456f4ceb13142f2e954a6f2b22631c49142e5c",
+      "guards": [
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 231,
+          "error_line": 232,
+          "end_line": 234
+        }
+      ],
+      "tree_counts": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 1
+      }
+    }
+  ]
+}

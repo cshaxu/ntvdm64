@@ -2395,7 +2395,9 @@
     "removed_body_sha256": "ffdfeec6ca0ceec0208ed5f7abde13427dad857f7d49add17c35fca64593c891",
     "removed_body_lines": 234,
     "after_sha256": "00953ea06ef57d3e4fe534cfa8e83781656c6de77a2b0e6e63ae341fbac5822f",
-    "final_sha256": "00953ea06ef57d3e4fe534cfa8e83781656c6de77a2b0e6e63ae341fbac5822f"
+    "final_sha256": "00953ea06ef57d3e4fe534cfa8e83781656c6de77a2b0e6e63ae341fbac5822f",
+    "current_line": 39,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r671-tree-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",

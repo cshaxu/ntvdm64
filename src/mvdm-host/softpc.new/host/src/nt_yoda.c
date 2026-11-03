@@ -37,6 +37,7 @@ AMMENDMENTS     :
 */
 
 #ifdef YODA
+#line 40
 #error Excluded unsupported YODA configuration
 
 
@@ -272,7 +273,7 @@ AMMENDMENTS     :
 
 
 #endif /* YODA */
-#line 274
+#line 1196
 
 /* This stub exported as called from main() */
 void    host_set_yoda_ints()

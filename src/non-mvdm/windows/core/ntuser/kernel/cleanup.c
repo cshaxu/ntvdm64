@@ -212,6 +212,7 @@ static BOOL sbFirstCall = TRUE;
 #if defined(_X86_)
             ProbeForRead(SelList, nSel * sizeof(*SelList), sizeof(BYTE));
 #else
+#line 232
 #error Excluded unsupported non-x86 WOW cleanup probe alignment
 #endif
 #line 234

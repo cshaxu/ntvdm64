@@ -895,6 +895,7 @@ INT xxxLbDir(
     result = -1;
 
 #ifndef UNICODE
+#line 897
 #error Unsupported excluded original configuration
 #endif
 #line 899
@@ -1144,9 +1145,10 @@ void LB_CreateLBLine(
     *lpch = TEXT('\0');
 
 #ifndef UNICODE
+#line 1145
 #error Unsupported excluded original configuration
 #endif
-#line 1142
+#line 1147
 
 /*
  * This call is not in Win95.  FritzS

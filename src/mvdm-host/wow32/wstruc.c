@@ -909,8 +909,10 @@ VOID getlogfont16(VPLOGFONT16 vplf, LPLOGFONT lplf)
 #line 967
 
 #if (LF_FACESIZE != 32)
+#line 969
 #error Win16/Win32 LF_FACESIZE constants differ
 #endif
+#line 971
 
     strncpy(lplf->lfFaceName, (const char *)plf16->lfFaceName, LF_FACESIZE);
 

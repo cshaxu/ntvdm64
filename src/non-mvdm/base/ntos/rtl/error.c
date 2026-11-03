@@ -36,8 +36,10 @@ Revision History:
 //
 
 #if ERROR_SUCCESS != 0 || NO_ERROR != 0
+#line 36
 #error Invalid value for ERROR_SUCCESS.
 #endif
+#line 38
 
 ULONG
 RtlNtStatusToDosError (

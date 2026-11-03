@@ -2428,3 +2428,7 @@ review. Evidence: ../../artifacts/mvdm-audit/s13-r665-guard-line-audit.json.
 OPENNT-HOST-241: restore original diagnostic line mappings for existing
 excluded DEVL arms in BaseSrv. Other conditions remain under review. Evidence:
 ../../artifacts/mvdm-audit/s13-r666-guard-line-audit.json.
+
+OPENNT-HOST-242: restore original diagnostic and continuation mappings in
+three sources after recursive condition-tree comparison. Evidence:
+../../artifacts/mvdm-audit/s13-r671-tree-anchor-batch.json.

@@ -25,6 +25,7 @@ HINSTANCE FASTCALL WK32LoadLibraryEx32(PVDMFRAME pFrame)
     PLOADLIBRARYEX32 parg16;
 
 #ifdef i386
+#line 28
 #error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #endif
 #line 36
@@ -43,6 +44,7 @@ HINSTANCE FASTCALL WK32LoadLibraryEx32(PVDMFRAME pFrame)
     FREEARGPTR(parg16);
 
 #ifdef i386
+#line 51
 #error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #endif
 #line 57
@@ -164,6 +166,7 @@ DWORD FASTCALL WK32ICallProc32(PVDMFRAME pFrame)
 
 
 #ifdef i386
+#line 175
 #error DIVERGENCE MVDM-HOST-DIV-589: historical i386 WOW branch is not selected
 #else
 #line 210

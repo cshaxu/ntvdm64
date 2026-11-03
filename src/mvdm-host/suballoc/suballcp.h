@@ -46,10 +46,13 @@ Revision History:
 // Force code to be stepped through
 //
 #if 0
+#line 49
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #else
+#line 51
 #define ASSERT_STEPTHROUGH
 #endif
+#line 53
 
 //
 // Signature macros for SUBALLOCATION
