@@ -2,114 +2,48 @@
 
 ## Current Work
 
-**Active: M0 T473 S13**
+**Active: M0 T474 S1 — Run16 shared implementation ownership**
 
-Mirror-condition audit: owner revised execution to complete and register each
-compiled mirror file against its original; build each batch of 10 modified code
-files. Process the pending per-file inventory in its existing order; review
-and register files even when no source edit is needed. If binaries have no
-substantive change, reuse test evidence for the P; otherwise run Full before
-publication. [Progress](../../artifacts/mvdm-audit/s13-bfs-progress.md);
-[observed per-file inventory](../../artifacts/mvdm-audit/s13-r489-per-file-observed-inventory.json).
-The current census has 1058 present C/H after the latest delivery: 1057
-in the observed build/dependency inventory and one product-generator input.
-The observed inventory still needs complete supported-context verification.
-See [census](../../artifacts/mvdm-audit/s13-r624-current-file-census.json).
+Owner directs independent work on the shared-ownership branch from the main
+worktree's committed baseline. The earlier main-worktree packet continues
+independently and is not this branch's active work. Review Run16 production
+consumers and extract genuinely shared mechanics into common. Retain component
+policy and original source ownership. This branch is intended for later
+cherry-pick; runtime publication and push to main are not authorized by this
+branch workflow.
 
-Prior owner-approved delivery: restore the four MVDM ANSI-profile files changed
-by MVDM-HOST-DIV-479, preserving authored build boundaries; verify actual
-cached product builds and product verification before delivery. The restoration
-is published; [evidence](../../artifacts/mvdm-audit/condition-inventory/ansi-restoration/README.md).
-
-S11 closed its owner-narrowed non-MVDM compilation-condition audit and
-cleanup; see [closure evidence](../etc/evidence/m0-t473-s11-condition-cleanup-closure.md).
-Unfinished original foundation and later recovery work is transferred to the
-first queued recovery proposal. The NTCON input-source handoff moves to S13;
-its original S12 evidence and scope remain in the handoff document.
-The DOS4GW/NESticle integration case and its unresolved environment-sensitive
-startup issue are recorded in [TODO](TODO.md) and [evidence](../../artifacts/mvdm-audit/dos4gw-nesticle-integration.md).
-
-CPU40 monitor/TLB remain a tested partial baseline; CPU30 removal is published,
-CCPU V86 remains, and physical mouse input is unverified. Unfinished DPMI,
-operand-fault, reentry and NPX/debug work transfers to queued recovery.
-[Results and limits](../../artifacts/mvdm-audit/s11-foundation-evidence/code32-prebuilt-search/review.md).
-
-S10 closed as a source-role audit at its [closure](../etc/evidence/m0-t473-s10-closure.md); this does not assert functional recovery. The revised [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md) preserves the earlier [monitor audit](../../artifacts/mvdm-audit/s11-monitor-minimization.md) as handoff evidence. Preserve unrelated work and immutable guest media.
-
-The published foundation group includes far-transfer ownership and WOW
-entry ABI; the bridge passed controlled loader cycles. S13's [test-failure recheck](../../artifacts/mvdm-audit/s13-test-failure-recheck.md) tracks CPU/NIDDB changes. The current package passed 17 Full gates and was published as a baseline; NIDDB VM semantics and historical T313/T335 tests remain unresolved.
-
-The owner moved further SOL and related WOW multi-window performance work to
-the [queued candidate](../proposals/proposal-wow-multiwindow-performance-recovery-001.md).
-Retain independently justified changes and evidence; do not treat latency as
-a condition-cleanup gate or claim the performance issue fixed.
-
-The installed `O:/winnt` lacks 15 guest-manifest files, including WIN87EM.
-The isolated single-file absence control prevents Calculator startup; adding
-guest files to the installation was rejected by automatic review. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/win87em-install-gap/review.md).
-
-Winmine 5023 has a focused idle-hook candidate. SOL also reproduced a
-`publish-native-return` 1400 fail-fast on the baseline; its failing substage
-remains unknown. See [evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/atomic-task-retire/execution-check/baseline-failfast-trace/review.md)
-and the [performance investigation](../../artifacts/mvdm-audit/s11-dialog-performance/investigation.md).
-
-Restoring the worker-shared idle query passed cross-task, separate-worker,
-common-dialog and Full controls.
-
-Winmine probes previously changed a shared VirtualStore profile without an
-original backup. The owner now explicitly permits restarting Winmine and
-changing its configuration; the authorized Full test ran. See
-[window evidence](../../artifacts/mvdm-audit/s11-dialog-performance/published-winmine-window.md).
-
-Retirement preserves the first cleanup failure; focused probes and the current
-Full gate passed. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/review.md). Intermittent 1400 attribution remains open.
-
-Long-PATH WOW startup reproduces the accepted COMMAND guest EnvSiz overwrite. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/wow-env-attribution/review.md).
-
-The current [ten-component release](../../artifacts/mvdm-audit/s11-swint-frame-recovery.md)
-also restores DPMI software-interrupt frames and stack limits. Full, game, Win3.1 and
-automated mouse witnesses passed; both destinations match. An earlier
-Window-17 timeout remains unlocated. [Win386 mouse](../../artifacts/mvdm-audit/s11-win386-mouse-freeze-investigation.md): prior guard tested; physical input unverified. The prior
-[closure audit](../../artifacts/mvdm-audit/s11-closure-audit.md) lists its
-remaining boundaries.
-
-Host C/H retention checks pass; runtime completion remains open. [Evidence](../../artifacts/mvdm-audit/s11-live-mirror-delta.md).
-
-The published NTVDM export implementation selects the original CPU40 template and
-records released ordinals. Its PE retains all 269 released name/ordinal pairs
-and adds two memory exports; automated ordinal and selected alias/owner checks
-pass. A real-worker VDD witness and the Full suite passed; broader provider
-behavior remains under review. See [export review](../../artifacts/mvdm-audit/export-source-recovery-review.md).
-
-S13 reintroduced DIV-467/468 and CCPU test-failure candidates. The tested
-r477 package is [published](../../artifacts/mvdm-audit/s13-r483-publication.json);
-NIDDB multi-VM semantics remain [unproved](../../artifacts/mvdm-audit/s13-test-failure-recheck.md).
-Earlier versions remain in [held patches](../../artifacts/mvdm-audit/s11-held-cpu/).
+S1 local verification: Hook-specific classification moved from Run16 to the
+Hook owner; NTCON no longer links the launcher client archive and Hook32 no
+longer links Run16 image classification. Run16-specific client and image
+classification remain local. Fresh Hook32, Hook64, NTCON and Run16 builds
+passed; the x64 Hook install fixture passed 118 assertions, the x86 image
+classification fixture passed 227 checks, the x64 frontend argument fixture
+passed 52 checks, and the isolated Console frontend fixture passed. The
+frontend link ownership gate and its negative controls passed. This is local
+verification only; coherent package publication and main integration are
+pending. The independent branch is intended for later owner-controlled
+cherry-pick, not publication into the active main runtime.
 
 ## Active Packet
 
-### M0 T473 S13 â€” NTCON input-source handoff
-
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T473 S13, Ordinary Mode. |
-| Admission And Approval | Owner accepted and closed S12 and admitted S13. [S12 evidence](../../artifacts/mvdm-audit/s12-excluded-branch-errors.md). |
-| Objective | Input handoff; owner adds [mirror conditional reconciliation](../../artifacts/mvdm-audit/s13-mirror-conditional-plan.md). |
-| Delivery State | Handoff published; review active. Ordered audit checkpoint [r896](../../artifacts/mvdm-audit/s13-r896-delivery.md) built and published with timestamp-only or identical image differences; 136 existing C/H entries remain incomplete, including 13 explicit deferred boundaries. Full 16 gates, DOS4GW startup, four Win3.1 modes and synthetic DOS/native three-CAF and Alt+Enter return passed. Physical input and injected handoff failures remain unverified; command output is in TODO. [Compile-branch evidence](../../artifacts/mvdm-audit/compile-branch-selection/README.md). [Evidence](../etc/evidence/m0-t473-s13-input-handoff.md). |
-| Non-goals | Guest modification or rebuilding; DOS-specific shortcut workarounds; unrelated performance work. |
-| Reference Baseline | Published ten-image package at 1d2ddfb18; [handoff scope and prior observations](../etc/operations/m0-t473-s12-ntcon-input-source-handoff.md). |
-| Files And ABI Surface | NTCON frontend session, keyboard and channel; worker input client and original DOS scan-code handling; tests and evidence. |
-| Applicable Rules | Source policy, immutable guest, original input semantics and centrally coordinated lifecycle. |
-| Verification | Baseline and post-fix product probes for DOS and native CUI, source-switch and input ordering controls, Win3.1 Alt+Enter, cached build, Full and coherent publication. |
-| Expected Markers | No stranded delivered keys or duplicate releases across source transitions; faithful input and preserved ordering. |
-| Asset Needs | Existing build caches, isolated test-owned process/desktop and unchanged Win3.1 copy. |
-| Reporting Requirements | Root cause, observed behavior, negative and lifecycle evidence, image hashes and unverified physical-input boundaries. |
-| Stop Conditions | Guest modification or unapproved observable semantic change. |
-| Exit Criteria | Scoped review, regression evidence, coherent publication, commit and push; await owner acceptance. |
-| Original Owner Request | Execute S13 input handoff; comprehensively reconcile mirror conditionals under the adopted rule, then build, test, publish, commit and push. |
-| Similar-Issue Sweep | Console-to-Window and Window-to-Console, DOS and native CUI, modifiers, focus and lifecycle. |
-| Candidate Proposal | [NTCON input handoff](../proposals/proposal-ntcon-input-source-handoff-001.md). |
-| Temporary Evidence | `build/t473-s13`, owner S13, 60-minute phase, 3-GiB size and 10-minute no-progress budget; stable caches retained. |
+| Identifier Mode | M0 T474 S1, Ordinary Mode. |
+| Admission And Approval | Owner directs this branch to start the shared-ownership task at S1. |
+| Objective | Remove production cross-component dependence on Run16-owned implementation by placing shared mechanics in common. |
+| Non-goals | Change runtime behavior, guest media, other component ownership stages, or main worktree. |
+| Reference Baseline | Branch starts at 32396a9ea. |
+| Files And ABI Surface | Run16 shared source and headers, common, production build graphs, focused tests and documentation. |
+| Applicable Rules | Original source provenance, existing ABI and lifecycle, and owner-directed dependency boundaries. |
+| Verification | Review real consumer graphs; run focused build and tests, documentation governance and relative-link checks; inspect diff. |
+| Expected Markers | Other product components do not select Run16-private implementation; unchanged observable behavior. |
+| Asset Needs | Existing compiler, build tools and focused test fixtures where available. |
+| Reporting Requirements | Actual consumers, moved and retained ownership, validation and limitations. |
+| Stop Conditions | Required semantic change, guest modification, or inability to preserve original source boundaries. |
+| Exit Criteria | Reviewed S1 changes and validation committed locally for later cherry-pick; any unavailable delivery gate reported. |
+| Original Owner Request | Start S1 independently; extract Run16 implementation shared by other components into common. |
+| Similar-Issue Sweep | Frontend clients, classification, headers, all production build selections and supported Hook widths. |
+| Temporary Evidence | build/t474-s1, owner S1, 60-minute phase, 3-GiB and 10-minute no-progress budget; stable caches retained. |
 
 ## S12 Closure Record
 
@@ -121,7 +55,7 @@ The [S11 compilation-condition closure](../etc/evidence/m0-t473-s11-condition-cl
 
 ## S10 Closure Record
 
-The [S10 audit](../etc/evidence/m0-t473-s10-closure.md) records bounded source-role decisions and S11â€“S19 handoff.
+The [S10 audit](../etc/evidence/m0-t473-s10-closure.md) records bounded source-role decisions and S11–S19 handoff.
 
 ## T471 Closure Record
 
@@ -248,10 +182,16 @@ T462 and T463 disposable evidence remains under their `build/t462-s1` and
 
 T457's closed-stage evidence is indexed in its [closure](../history/m0-t457-closure.md).
 
-T454 and T451 task build roots are disposable evidence, not shared caches.
-Retain durable evidence and verify ownership and quiescence before cleanup;
-T451 process inventory was denied at closure. See their linked closure records.
-The shared `.ninja` and `.ccache` caches remain reusable.
+T454 may use only declared `build/t454-s1`, `build/t454-s2`, `build/t454-s3`
+and `build/t454-s4` roots for disposable evidence; stable `.ninja` and
+`.ccache` remain reusable caches. Retain durable results before exact-target
+cleanup; never use a task root as a build cache.
+
+`build/M0-T451`, `build/t451-s3`, `build/t451-s4` and `build/t451-s5` remain
+temporary evidence, not reusable caches. Process inventory access was denied
+during closure; deletion requires verified quiescence and the existing
+exact-target ownership checks. Durable results are linked from the closure.
+Stable `.ninja` and `.ccache` caches remain untouched.
 
 T456 S1/S2 disposable evidence uses `build/t456-s1` and `build/t456-s2`.
 

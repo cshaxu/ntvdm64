@@ -198,7 +198,7 @@ mirror change or NTCON-owned worker policy is admitted.
 resource/CreateProcess primitive used by NTVWM and execution fixtures. It
 does not implement broker startup, submission, policy or lifecycle. Run16
 does not link that unused target-creation object.
-NTCON never links target creation. Local startup/client declarations remain
+NTCON does not link the launcher-owned client archive or target creation. Local startup/client declarations remain
 with their implementation owners; copied wire declarations live in common/protocol.
 No private NTCON/NTVWM implementation root is a shared startup source owner.
 

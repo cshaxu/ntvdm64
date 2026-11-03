@@ -3,7 +3,6 @@
 #include <nt.h>
 #include <base_classifier.h>
 #include "nthook32-dll/hook.h"
-#include "image_classification.h"
 #include "common/native_image.h"
 /* Classifier-only composition owns these original suffix descriptors; it
  * does not select run16/main.c or the service/worker implementation. */

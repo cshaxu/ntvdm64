@@ -19,7 +19,7 @@ the old run16 name do not identify their source or final executable owner.
 records from the service/renderer. Both the ordinary run16 link and the
 client-only fixture exclude frontend service, input-pump and renderer objects.
 The launcher-owned client library contains bootstrap_client and
-native_request_client under run16-exe. Common owns protocol declarations,
+native_request_client under run16-exe; NTCON does not link it. Common owns protocol declarations,
 the copied packet codec and pipe transport; no launcher transfer wrapper remains.
 The shared process primitive in common/native_process.c is used by the
 NTVWM target owner, not launcher service bootstrap. Run16 does not link it;
