@@ -1,0 +1,236 @@
+{
+  "scope": "Seven product-observed files whose original condition groups are flat and all have existing excluded error-only first arms.",
+  "method": "Compare original selectors, group boundaries, else presence and retained else text. Check physical error, selected and following line mappings; conservatively screen comments and conditional continuations. Reject directive after continued physical line.",
+  "context": "Prior product release builds and 181 retained-guard controls; selector forced on reaches error, so builds using these files cannot silently select these arms.",
+  "limits": "Reviews conditional structure and alternatives, not unrelated adaptations; the complete inventory of all supported contexts remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
+      "sha256": "e735360bfa73b9a681fd8c7fe84cf790009013f275b67aed72cbcff7bd4b27ee",
+      "original_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "MONITOR"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_nls.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_nls.c",
+      "sha256": "e0147d7a5ac0c5863a24ea061c35c7b74a489d6a906320e1c4b4bbd3f10b42ea",
+      "original_sha256": "6cef4fc4adf6ce81f42cfa4ebfa9c1edb153a3ce651a69321f5b5022a9b6fa06",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "X86GFX"
+        ],
+        [
+          "ifdef",
+          "X86GFX"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
+      "sha256": "57f839a4ae5ecb800af66578f5e7e89e0af1dd986a4c84f06cac10101cf14586",
+      "original_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "VR_DIAGNOSE"
+        ],
+        [
+          "ifdef",
+          "VR_DIAGNOSE"
+        ],
+        [
+          "ifdef",
+          "VR_DIAGNOSE"
+        ],
+        [
+          "if",
+          "DBG"
+        ],
+        [
+          "if",
+          "DBG"
+        ],
+        [
+          "ifdef",
+          "VR_DIAGNOSE"
+        ],
+        [
+          "ifdef",
+          "VR_DIAGNOSE"
+        ],
+        [
+          "ifdef",
+          "VR_DIAGNOSE"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wspool.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wspool.h",
+      "sha256": "ef4c59e0e10a266f72e4bf4080ceb7429b17cf62b33086345d9c981eb761dc37",
+      "original_sha256": "11e570db87246262c46c166a845e514edb08e02f8b0b107dfae1cfa41a375075",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "i386"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wucomm.h",
+      "sha256": "a35cc588a1844c80f5818cc8ddcdde8f6dba64815d13393cb5cb6d6ad66512c2",
+      "original_sha256": "43d3f49fe9abb8fbbbe1a93e7725f7a368676dfadd764c8f0497a4218b23f77b",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wudlg.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wudlg.c",
+      "sha256": "93693b96157c85a47b7fc087366a1358675888aa2d46e1e3e883ac9187c10540",
+      "original_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "WOWPROFILE  // for MSG profiling only (debugger extension)"
+        ],
+        [
+          "ifdef",
+          "WOWPROFILE  // for MSG profiling only (debugger extension)"
+        ],
+        [
+          "ifdef",
+          "WOWPROFILE  // for MSG profiling only (debugger extension)"
+        ],
+        [
+          "ifdef",
+          "WOWPROFILE  // for MSG profiling only (debugger extension)"
+        ],
+        [
+          "ifdef",
+          "WOWPROFILE  // for MSG profiling only (debugger extension)"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wumsg.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wumsg.c",
+      "sha256": "2f194c7f952fc43f06e523f0db2934c17783df349046d005ba84f3dbab607fc4",
+      "original_sha256": "3404569a45421465a6b916975b978d9ede19ba3ee7f2534b20fad304e91bc7ff",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "ifdef",
+          "ONLY_API16"
+        ]
+      ]
+    }
+  ]
+}

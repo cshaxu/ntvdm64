@@ -2005,9 +2005,10 @@ ULONG FASTCALL WU32SendMessage(PVDMFRAME pFrame)
 ULONG FASTCALL WU32SetMessageQueue(PVDMFRAME pFrame)
 {
 #ifdef ONLY_API16
+#line 1909
 #error Unsupported excluded original configuration
 #else
-#line 2016
+#line 1919
     UNREFERENCED_PARAMETER(pFrame);
 
     return TRUE;    // WIN32 doesn't have sizeable message queues

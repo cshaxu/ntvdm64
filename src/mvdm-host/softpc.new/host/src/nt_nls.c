@@ -38,8 +38,10 @@ The following tables and routines are defined:
 char szDoomMsg[MAX_PATH]="";
 char szSysErrMsg[MAX_PATH]="";
 #ifdef X86GFX
+#line 41
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 43
 char szHideMouseMenuStr[64];
 char szDisplayMouseMenuStr[64];
 
@@ -97,8 +99,10 @@ void nls_init(void)
                        NULL
 		       )
 #ifdef X86GFX
+#line 100
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 107
 	 ||
 	!LoadString(GetModuleHandle(NULL),
 		   SM_HIDE_MOUSE,

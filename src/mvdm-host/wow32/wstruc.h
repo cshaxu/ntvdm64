@@ -293,8 +293,10 @@ VOID   puthandletable16(VPWORD vpht, UINT c, LPHANDLETABLE lpht);
 VOID   putkerningpairs16(VPWORD vp, UINT cb, LPKERNINGPAIR lp);
 
 #ifdef NOTUSED
+#line 296
 #error DIVERGENCE MVDM-HOST-DIV-529: NOTUSED platform branch is not selected; see mirror register.
 #endif
+#line 298
 INT    GetBMI16Size(PVPVOID vpbmi16, WORD fuColorUse, LPDWORD lpdwClrUsed);
 INT    GetBMI32Size(LPBITMAPINFO lpbmi32, WORD fuColorUse);
 LPBITMAPINFO       CopyBMI16ToBMI32(PVPVOID vpbmi16, LPBITMAPINFO lpbmi32, WORD fuColorUse);

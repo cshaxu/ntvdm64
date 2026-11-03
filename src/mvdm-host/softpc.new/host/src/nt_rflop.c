@@ -227,6 +227,7 @@ static BOOL nt_rflop_current_pdb(PUSHORT currentPdb)
 }
 
 #ifdef EJECT_FLOPPY
+#line 248
 #error Unsupported excluded original configuration
 #endif
 #line 250
@@ -340,6 +341,7 @@ host_gfi_rdiskette_active IFN3(UTINY, hostID, BOOL, active, CHAR *, err)
 	else
 	{
 #ifdef  EJECT_FLOPPY
+#line 394
 #error Unsupported excluded original configuration
 #endif  /* EJECT_FLOPPY */
 #line 396
@@ -382,6 +384,7 @@ host_gfi_rdiskette_change IFN2(UTINY, hostID, BOOL, apply)
 /********************************************************/
 
 #ifdef EJECT_FLOPPY
+#line 469
 #error Unsupported excluded original configuration
 #endif                          /* EJECT_FLOPPY */
 #line 504

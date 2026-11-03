@@ -503,8 +503,10 @@ Return Value:
             rcv_data_length = (DWORD)SmbGetUshort((LPWORD)parm_ptr);
             rcv_dl_flag = TRUE;
 #ifdef VR_DIAGNOSE
+#line 505
 #error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
+#line 507
             break;
 
         case REM_RCV_BUF_PTR:
@@ -514,8 +516,10 @@ Return Value:
             rcv_data_ptr = LPBYTE_FROM_POINTER(parm_ptr);
             rcv_dp_flag = TRUE;
 #ifdef VR_DIAGNOSE
+#line 516
 #error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
+#line 519
             break;
 
         case REM_SEND_BUF_PTR:
@@ -686,8 +690,10 @@ Return Value:
             }
             serverName = computerName;
 #ifdef VR_DIAGNOSE
+#line 681
 #error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
+#line 683
         }
     }
 
@@ -741,8 +747,10 @@ Return Value:
 
     if (status) {
 #ifdef VR_DIAGNOSE
+#line 734
 #error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
+#line 737
         switch (status) {
         case NERR_BufTooSmall:  /* No data returned from API worker */
             rcv_data_length = 0;
@@ -1104,8 +1112,10 @@ Return Value:
     default:
         remapi_err_flag = NERR_InternalError;
 #ifdef VR_DIAGNOSE
+#line 1098
 #error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
+#line 1100
         ASSERT(FALSE);
         return 0;
     }
@@ -1415,8 +1425,10 @@ Return Value:
                     if (ptr == NULL) {
                         if ((*l_dsc == REM_ASCIZ) && OkToModifyDescriptor) {
 #ifdef VR_DIAGNOSE
+#line 1409
 #error DIVERGENCE MVDM-HOST-DIV-527: VR_DIAGNOSE branch is not selected; see mirror register.
 #endif
+#line 1411
                             *l_dsc = REM_NULL_PTR;
                         }
                         struct_ptr += sizeof(LPBYTE);

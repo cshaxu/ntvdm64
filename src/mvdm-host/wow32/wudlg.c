@@ -35,6 +35,7 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
     BOOL   fMessageNeedsThunking;
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+#line 33
 #error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
 #line 36
@@ -79,9 +80,10 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
         LOGDEBUG(3,("%04X (%s)\n", CURRENTPTD()->htask16, (aw32Msg[uMsg].lpszW32)));
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+#line 77
 #error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
-#line 84
+#line 79
 
         wm32mpex.fThunk = THUNKMSG;
         wm32mpex.hwnd = hdlg;
@@ -97,6 +99,7 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
         }
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+#line 93
 #error Excluded unsupported WOW profiling configuration
 #endif  // WOWPROFILE
 #line 97
@@ -122,6 +125,7 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
     if (fMessageNeedsThunking) {
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+#line 119
 #error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
 #line 123
@@ -145,9 +149,10 @@ LONG W32DialogFunc(HWND hdlg, UINT uMsg, DWORD uParam, LPARAM lParam)
         (wm32mpex.lpfnM32)(&wm32mpex);
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+#line 143
 #error Excluded unsupported WOW profiling configuration
 #endif // WOWPROFILE
-#line 152
+#line 146
 
     }
 

@@ -463,8 +463,10 @@ GLOBAL NTSTATUS VdmAllocateVirtualMemory IFN3(PULONG, INTELAddress,
         ((ULONG) (IHPE)commitAddr) - (ULONG)intelMem);
 
 #ifdef DEBUG_MEM_DUMP
+#line 451
 #error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
 #endif
+#line 453
 #endif
 
     return(STATUS_SUCCESS);
@@ -658,8 +660,10 @@ GLOBAL NTSTATUS VdmFreeVirtualMemory IFN1(ULONG, INTELAddress)
 
 #ifdef DEBUG_MEM
 #ifdef DEBUG_MEM_DUMP
+#line 646
 #error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
 #endif
+#line 648
 #endif
 
     return(STATUS_SUCCESS);
@@ -902,8 +906,10 @@ GLOBAL NTSTATUS VdmReallocateVirtualMemory IFN3(ULONG, INTELOriginalAddress,
 #ifdef DEBUG_MEM
     printf("to %lx\n", *INTELNewAddress);
 #ifdef DEBUG_MEM_DUMP
+#line 890
 #error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
 #endif
+#line 892
 #endif
     /* Success. */
     return(STATUS_SUCCESS);
@@ -991,8 +997,10 @@ GLOBAL NTSTATUS VdmAddVirtualMemory IFN3(ULONG, HostAddress,
 
 #ifdef DEBUG_MEM
 #ifdef DEBUG_MEM_DUMP
+#line 975
 #error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
 #endif
+#line 977
     printf("NTVDM:VdmAddVirtualMemory => *IntelAddress=%lx\n", *IntelAddress);
 #endif
 
@@ -1017,8 +1025,10 @@ GLOBAL NTSTATUS VdmRemoveVirtualMemory IFN1(ULONG, IntelAddress)
 #ifdef DEBUG_MEM
     printf("NTVDM:VdmRemoveVirtualMemory at %lx)\n", IntelAddress);
 #ifdef DEBUG_MEM_DUMP
+#line 1001
 #error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
 #endif
+#line 1003
 #endif
 
     /* Make sure memory system is initialised. */
@@ -1052,8 +1062,10 @@ GLOBAL NTSTATUS VdmRemoveVirtualMemory IFN1(ULONG, IntelAddress)
 
 #ifdef DEBUG_MEM
 #ifdef DEBUG_MEM_DUMP
+#line 1036
 #error DIVERGENCE MVDM-HOST-DIV-529: DEBUG_MEM_DUMP platform branch is not selected; see mirror register.
 #endif
+#line 1038
 #endif
     return VdmFreeVirtualMemory(IntelAddress);
 }

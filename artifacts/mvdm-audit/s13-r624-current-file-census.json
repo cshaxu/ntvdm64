@@ -6503,7 +6503,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
-      "sha256": "dd640e7d36382cb037957c7838db5f06c5cd3a7d80ad81a861dbe404bd38cbb0",
+      "sha256": "df5b998569e641e552c6d31faeced21b399e0b477f201c286b85093b5135191f",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6513,11 +6513,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
-      "sha256": "ab460a088c6bdc2b38130d593516f00e2d5b05c94baeeba5175668984797d80c",
+      "sha256": "e735360bfa73b9a681fd8c7fe84cf790009013f275b67aed72cbcff7bd4b27ee",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-flat-excluded-guards",
+      "additional_evidence": "s13-r661-flat-guard-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mouse.c",
       "original_candidate_sha256": "a73c0572fa1e44326d26b2f4d47c15bff768b031fca16dcfd789a35e65e0e48b"
     },
@@ -6543,11 +6543,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_nls.c",
-      "sha256": "433fdb715abe00f63d28f88ca69fcee0fab4d6898cc63068412594563098a830",
+      "sha256": "e0147d7a5ac0c5863a24ea061c35c7b74a489d6a906320e1c4b4bbd3f10b42ea",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-flat-excluded-guards",
+      "additional_evidence": "s13-r661-flat-guard-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_nls.c",
       "original_candidate_sha256": "6cef4fc4adf6ce81f42cfa4ebfa9c1edb153a3ce651a69321f5b5022a9b6fa06"
     },
@@ -6593,7 +6593,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
-      "sha256": "24da4237b8fe6a48eafe6d662d623854efbcbf0fbdff4e1c76de3b7913432d03",
+      "sha256": "8effdc005aad517502a4928926ed463c4dda6de77d9b637e382d97793c2f0a5f",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6973,11 +6973,11 @@
     },
     {
       "path": "src/mvdm-host/vdmredir/vrremote.c",
-      "sha256": "2faf30ad6541bf1a4973790ee873b5cec3841c8435605fc0aa2a077b70c69c8c",
+      "sha256": "57f839a4ae5ecb800af66578f5e7e89e0af1dd986a4c84f06cac10101cf14586",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-flat-excluded-guards",
+      "additional_evidence": "s13-r661-flat-guard-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
       "original_candidate_sha256": "f75d2984624cee1a77b6f5bf6a18fe4a7f38a059d32b0e711edb97d03a08c9b8"
     },
@@ -8203,11 +8203,11 @@
     },
     {
       "path": "src/mvdm-host/wow32/wspool.h",
-      "sha256": "8ab7945ce7b6bb64dd7ab9a0cd117efb616ec55b99dfc66c93bd3ba685d6695e",
+      "sha256": "ef4c59e0e10a266f72e4bf4080ceb7429b17cf62b33086345d9c981eb761dc37",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-flat-excluded-guards",
+      "additional_evidence": "s13-r661-flat-guard-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wspool.h",
       "original_candidate_sha256": "11e570db87246262c46c166a845e514edb08e02f8b0b107dfae1cfa41a375075"
     },
@@ -8253,7 +8253,7 @@
     },
     {
       "path": "src/mvdm-host/wow32/wstruc.h",
-      "sha256": "8944ad4b43faf7fac2c714f3f2b26bd4d79ab13dae2a43a33000c541466045e9",
+      "sha256": "3ceffb625000f2546954f135cb8c13cb35f2e1a55347ec75cc533a583220f808",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -8393,11 +8393,11 @@
     },
     {
       "path": "src/mvdm-host/wow32/wucomm.h",
-      "sha256": "e9700d41ad771f3799e3d96f2a537abb56253aba77d881da3156fb34ecd15afc",
+      "sha256": "a35cc588a1844c80f5818cc8ddcdde8f6dba64815d13393cb5cb6d6ad66512c2",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-flat-excluded-guards",
+      "additional_evidence": "s13-r661-flat-guard-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wucomm.h",
       "original_candidate_sha256": "43d3f49fe9abb8fbbbe1a93e7725f7a368676dfadd764c8f0497a4218b23f77b"
     },
@@ -8423,11 +8423,11 @@
     },
     {
       "path": "src/mvdm-host/wow32/wudlg.c",
-      "sha256": "c15aa6a307508e07a9258ffeb9cc843a1cd040a4133b3b41ef3594d615ae271f",
+      "sha256": "93693b96157c85a47b7fc087366a1358675888aa2d46e1e3e883ac9187c10540",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-flat-excluded-guards",
+      "additional_evidence": "s13-r661-flat-guard-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wudlg.c",
       "original_candidate_sha256": "8a0dfcb7cbfea232c491fd9249c10048946f9f0d0e0b4120227dccd6ab37109e"
     },
@@ -8523,11 +8523,11 @@
     },
     {
       "path": "src/mvdm-host/wow32/wumsg.c",
-      "sha256": "a0402a4b04f29cc2eff7aae2be03ab428dea54d94432a8ec842cd2ece80e044b",
+      "sha256": "2f194c7f952fc43f06e523f0db2934c17783df349046d005ba84f3dbab607fc4",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-flat-excluded-guards",
+      "additional_evidence": "s13-r661-flat-guard-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wumsg.c",
       "original_candidate_sha256": "3404569a45421465a6b916975b978d9ede19ba3ee7f2534b20fad304e91bc7ff"
     },
