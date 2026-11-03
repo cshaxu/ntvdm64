@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 615,
+  "completed_files": 643,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -619,13 +619,14 @@
     {
       "path": "src/mvdm-host/dpmi32/xmem.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
-      "current_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "current_sha256": "a52cd0952aa18345d07c7584da8e045d63a6da1569a3ff7b68e17b65bfb9a932",
       "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/inc/apistruc.h",
@@ -2687,13 +2688,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\fpu.c",
-      "current_sha256": "0bf8f644a351d5652759c7c99ef0c05cb5fac5de08075669a4bd0fd87ad66fd5",
+      "current_sha256": "99a550f4a1dda88dfae231da61328485fb29209ee6a4c29534bf35e4bf6733e6",
       "original_sha256": "1309239998f72b64583b184d33623c763c3c98ea185081f8d8b294cd9b8c524f",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r653-platform-guard-lines.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu_c.h",
@@ -5147,14 +5149,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fla.c",
-      "current_sha256": "77b989eee69622635c7d8fed328dc9cbf71f647cbf7a2ef2cef75da468e338d2",
+      "current_sha256": "03e9507df666aaac581aca94e34e3c58c6ba9ab2b25de1f0aafb64f7e162303f",
       "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
       "status": "pending-per-file-review",
-      "partial_evidence": "s13-r639-basic-guard-lines.json"
+      "partial_evidence": "s13-r653-platform-guard-lines.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
@@ -5286,13 +5288,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cga.h",
-      "current_sha256": "ad35166c83b26fde434fa7377c893711ebdbf90f336d94916167a5d2911788aa",
+      "current_sha256": "7a23149277449ecf629db3cf8596662938ed80f450b82dffb130bb577f48ed82",
       "original_sha256": "683848966f4b5cb5667b9ae0ae140d9e08adcb62060bc77695db844c34b71b0b",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r653-platform-guard-lines.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/chkmallc.h",
@@ -5325,7 +5328,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "complete-identical-selected-ntvdm-or-include-guard",
+      "evidence": "s13-r652-identical-headers.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/cmosbios.h",
@@ -5396,13 +5400,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\dma.h",
-      "current_sha256": "fbd2e044a9502cf18be0f22fcad10a6b695c9212f316b1560d7ccb8047ef888f",
+      "current_sha256": "3b3c32d5746eb485ac6f0739214f6dfa1b098b698ca567478af0bfb4420dd996",
       "original_sha256": "d69831cddb3de18bebe1532c659608b404686374324b3eeebed5607e15a774e4",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r653-platform-guard-lines.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/dsktrace.h",
@@ -5712,7 +5717,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "complete-identical-selected-ntvdm-or-include-guard",
+      "evidence": "s13-r652-identical-headers.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/host_com.h",
@@ -6148,13 +6154,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
-      "current_sha256": "625219bda162bd93ed17ce235f23e6108c813c83d3cffabbba7b23043d9a943a",
+      "current_sha256": "c6f6be8fe4cf80169fe22d68ec79a9d7112b2d2f456a30ded9d54745f214ba5b",
       "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r653-platform-guard-lines.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
@@ -6568,13 +6575,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_vide.c",
-      "current_sha256": "4bd683527c85495b8f802b337e45adb87ca1e3cf7be7add9cd698feda8d67a51",
+      "current_sha256": "63e9f965341b048cb806634f1b774d3d5d6d1919b77f54f8275bd3fdb96d5431",
       "original_sha256": "3d0159b8bd4d1bcc3448bc61fb90f5b1c34c09099bba49187fe4573354ccc89d",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r653-platform-guard-lines.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/video.c",
@@ -7054,13 +7062,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/fprt.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\fprt.c",
-      "current_sha256": "efe65dc779005a9f387e8d10fadd64570922571e55aeec348071c65a4ec68338",
+      "current_sha256": "56db4713b31042e271e0444f36d6e5d5babbe4027752b2aa209ef71c7ed671a7",
       "original_sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r653-platform-guard-lines.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -7121,14 +7130,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ega.c",
-      "current_sha256": "51b3d2aec88a8f69c14a1fef647eec2fcf9ea31d6b4f45d6053e8161f6f41a8d",
+      "current_sha256": "641961895f5a9ec88fb2e122dd16006d96687195b06c91df3f91e449cf4211f4",
       "original_sha256": "ebc58583cec7e257a997185a1ab83f3284dbd1efe6e06c99f680bcce93dca695",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
       "status": "pending-per-file-review",
-      "partial_evidence": "s13-r642-guard-line-audit.json"
+      "partial_evidence": "s13-r653-platform-guard-lines.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
@@ -7210,13 +7219,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_hosts.c",
-      "current_sha256": "41d26e3e9a959a37918dd12f7544545b826a53b27eafe73ebbfb63cdc9d514e9",
+      "current_sha256": "ed7ff1108d479c6e1a5d2a82482914f7f4cf7c39d0470d72013c9fcee5981fdf",
       "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r653-platform-guard-lines.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_input.c",
@@ -7469,14 +7479,15 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vga.c",
-      "current_sha256": "648c0815f93e8d1a3ce4718bdf8991179618fc337933dcfb5aae6a966c929611",
+      "current_sha256": "f3b8a7972fe2f1c2b86e311fe9e9c8594c427d3583422698cf6a9b5414411409",
       "original_sha256": "81db9f2e415e58c21b0a10110d03d0f16532c2150aba84feb2cab8f74627ee6d",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
       "status": "pending-per-file-review",
-      "pending_change": "r496 original diagnostic anchors; broader per-file conditional audit pending"
+      "pending_change": "r496 original diagnostic anchors; broader per-file conditional audit pending",
+      "partial_evidence": "s13-r653-platform-guard-lines.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
@@ -7645,13 +7656,14 @@
     {
       "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
-      "current_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "current_sha256": "0af68a587ff958e76ab5e0ae139c6e233aca39dfedbfeffcc1fd7ae35a6600da",
       "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/vdmredir/vrdlcdbg.c",
@@ -7687,19 +7699,21 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r648-mixed-debug-guards.json"
+      "status": "completed-original-debug-only-conditions",
+      "partial_evidence": "s13-r648-mixed-debug-guards.json",
+      "evidence": "s13-r650-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/vdmredir/vrdll.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdll.c",
-      "current_sha256": "a704a9141f4f67752a2479bce603519103c6a57316e6efdd0af9f0918d0ff7c5",
+      "current_sha256": "146606d30cf36eae71ee91d194e250b8f3a78ddf3a6b7f81ae87dcde225f9a59",
       "original_sha256": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/vdmredir/vrica.h",
@@ -7727,14 +7741,15 @@
     {
       "path": "src/mvdm-host/vdmredir/vrmisc.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmisc.c",
-      "current_sha256": "ae8f13a5ccbb38f8411c0d387d0abca7dd206cacd219736b8b31e9a5c4e34926",
+      "current_sha256": "e5e3e14c680375918a790dc39f2a42ebcc3a3a1c85170629f1fd46607b9098c1",
       "original_sha256": "1af57aba3be6a1425eb18187a73c579f56619a2593bce3b2c20be8cf67216b6d",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/vdmredir/vrmslot.c",
@@ -7757,19 +7772,21 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r648-mixed-debug-guards.json"
+      "status": "completed-original-debug-only-conditions",
+      "partial_evidence": "s13-r648-mixed-debug-guards.json",
+      "evidence": "s13-r650-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/vdmredir/vrnetb.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetb.c",
-      "current_sha256": "4f70cd3edbf922852f95a8b5453c5ca9589070a79403dfd4c8aef7cb9edf520d",
+      "current_sha256": "5fff5e79500fd5dd734a91ec1f1342c625f50244ce9a8fc0533dd58a45649b6a",
       "original_sha256": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
@@ -7781,8 +7798,9 @@
         "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r648-mixed-debug-guards.json"
+      "status": "completed-original-debug-only-conditions",
+      "partial_evidence": "s13-r648-mixed-debug-guards.json",
+      "evidence": "s13-r650-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/vdmredir/vrputil.c",
@@ -7856,7 +7874,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/mapembed.h",
@@ -7881,12 +7900,13 @@
     {
       "path": "src/mvdm-host/wow32/waccel.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\waccel.c",
-      "current_sha256": "b84e4821bb550209081cc9782e9f9c01b1bb9d5754a7be99c6eea9fa739b50b0",
+      "current_sha256": "b3677ef2ad59ae352ff4cb9fcbc8ef0cf0daa35933773274803c0983ab9d312e",
       "original_sha256": "c78dd24195e1a7d28dc3a9ee535b4104e9859f98ea8869f8f5591bc9c159a8e8",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/waccel.h",
@@ -7916,8 +7936,9 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r648-mixed-debug-guards.json"
+      "status": "completed-original-debug-only-conditions",
+      "partial_evidence": "s13-r648-mixed-debug-guards.json",
+      "evidence": "s13-r650-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/walloc16.c",
@@ -8290,7 +8311,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wheap.h",
@@ -8542,8 +8564,9 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r648-mixed-debug-guards.json"
+      "status": "completed-original-debug-only-conditions",
+      "partial_evidence": "s13-r648-mixed-debug-guards.json",
+      "evidence": "s13-r650-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmmedia1.c",
@@ -8655,7 +8678,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmsgbm.h",
@@ -8675,7 +8699,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmsgcb.h",
@@ -8695,7 +8720,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmsgem.h",
@@ -8715,7 +8741,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmsglb.h",
@@ -8735,7 +8762,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmsgsbm.h",
@@ -8877,7 +8905,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wreldc.c",
@@ -8907,7 +8936,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wres16.h",
@@ -9217,7 +9247,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wuclip.h",
@@ -9232,12 +9263,13 @@
     {
       "path": "src/mvdm-host/wow32/wucomm.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wucomm.c",
-      "current_sha256": "f53c39ae01386587bed787518ccd64e3042ecb3c271cee886ad35a8190f9c9fa",
+      "current_sha256": "db0b755c83fccedc8a5c935e72ba12569d723df99f05986ed171e5dffe4214f2",
       "original_sha256": "c9c8b11d65ac3f2b1ee9216a8102ef56908bff5c5bf4ed2dd2badc30ca8a4284",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wucomm.h",
@@ -9332,12 +9364,13 @@
     {
       "path": "src/mvdm-host/wow32/wuman.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuman.c",
-      "current_sha256": "f90c2aff3bb2c00929a6f014c84091d130e6ba3bd92b2f966c2d9afa8f73de60",
+      "current_sha256": "bed96ab51ec7fbf0324718277f74336115f2506df10d300084d8773b3e8ca28a",
       "original_sha256": "d96fc214141973b12045669ae2a0d21cf4040ab928be1a309ad687456b473698",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wuman.h",
@@ -9592,7 +9625,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/mvdm-host/xms.486/xmsmemr.c",
@@ -9870,7 +9904,8 @@
         "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
@@ -11570,7 +11605,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-debug-only-existing-guards",
+      "evidence": "s13-r651-debug-only-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",

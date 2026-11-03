@@ -26,8 +26,10 @@
 #include "nt_reset.h"
 
 #ifdef HUNTER
+#line 29
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /*HUNTER*/
+#line 31
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::: Global variables */
 
@@ -60,8 +62,10 @@ PSTR String(WORD StrResID);
 void InitScreenDesc(void);
 
 #ifdef HUNTER
+#line 63
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 65
 
 HANDLE   SCS_hStdIn=0;
 HANDLE   SCS_hStdOut=0;
@@ -246,8 +250,10 @@ HANDLE inherited_error;
     SetupConsoleMode();
 
 #ifdef HUNTER
+#line 222
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /*HUNTER*/
+#line 224
 
     /*::::::::::::::::::::::::::: Tell console to post us a closedown event */
 
@@ -319,5 +325,7 @@ the control of Trapper.
 ============================================================================*/
 
 #ifdef HUNTER
+#line 295
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 344

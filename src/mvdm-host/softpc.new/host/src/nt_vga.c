@@ -235,8 +235,10 @@ void nt_vga_graph_big(int offset, int screen_x, int screen_y,
             *(dest_ptr + (2 * shorts_per_scanline) + 1) =
                 *(dest_ptr + shorts_per_scanline + 1) =
 #ifdef BIGEND
+#line 236
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif /* BIGEND */
+#line 238
 #ifdef LITTLEND
                 *(dest_ptr + 1) = (unsigned short) ((temp2 << 8) | temp1);
 #endif /* LITTLEND */

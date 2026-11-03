@@ -1,0 +1,295 @@
+{
+  "scope": "Ten product-observed sources with existing rejected platform, device and debug alternatives.",
+  "method": "Original directive sequence compared; error arms contain no retained executable code. Original selected alternatives are preserved with restored diagnostic line mappings.",
+  "limits": "Other condition groups remain pending; build and targeted checks are recorded in s13-r654-delivery.md.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+      "before_sha256": "625219bda162bd93ed17ce235f23e6108c813c83d3cffabbba7b23043d9a943a",
+      "after_sha256": "c6f6be8fe4cf80169fe22d68ec79a9d7112b2d2f456a30ded9d54745f214ba5b",
+      "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+      "guards": [
+        {
+          "macro": "SCCSID",
+          "original_error_line": 50,
+          "original_selected_line": null,
+          "original_following_line": 52
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_error_line": 54,
+          "original_selected_line": null,
+          "original_following_line": 61
+        },
+        {
+          "macro": "GISP_CPU",
+          "original_error_line": 549,
+          "original_selected_line": null,
+          "original_following_line": 558
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_error_line": 1844,
+          "original_selected_line": null,
+          "original_following_line": 1851
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\vga_vide.c",
+      "before_sha256": "4bd683527c85495b8f802b337e45adb87ca1e3cf7be7add9cd698feda8d67a51",
+      "after_sha256": "63e9f965341b048cb806634f1b774d3d5d6d1919b77f54f8275bd3fdb96d5431",
+      "original_sha256": "3d0159b8bd4d1bcc3448bc61fb90f5b1c34c09099bba49187fe4573354ccc89d",
+      "guards": [
+        {
+          "macro": "SEGMENTATION",
+          "original_error_line": 26,
+          "original_selected_line": null,
+          "original_following_line": 33
+        },
+        {
+          "macro": "macintosh",
+          "original_error_line": 146,
+          "original_selected_line": 155,
+          "original_following_line": 172
+        },
+        {
+          "macro": "macintosh",
+          "original_error_line": 181,
+          "original_selected_line": null,
+          "original_following_line": 186
+        },
+        {
+          "macro": "REAL_VGA",
+          "original_error_line": 252,
+          "original_selected_line": 257,
+          "original_following_line": 270
+        },
+        {
+          "macro": "REAL_VGA",
+          "original_error_line": 286,
+          "original_selected_line": 302,
+          "original_following_line": 323
+        },
+        {
+          "macro": "REAL_VGA",
+          "original_error_line": 339,
+          "original_selected_line": 356,
+          "original_following_line": 378
+        },
+        {
+          "macro": "REAL_VGA",
+          "original_error_line": 395,
+          "original_selected_line": 397,
+          "original_following_line": 399
+        },
+        {
+          "macro": "REAL_VGA",
+          "original_error_line": 422,
+          "original_selected_line": 424,
+          "original_following_line": 426
+        },
+        {
+          "macro": "HERC",
+          "original_error_line": 686,
+          "original_selected_line": null,
+          "original_following_line": 689
+        },
+        {
+          "macro": "HERC",
+          "original_error_line": 767,
+          "original_selected_line": null,
+          "original_following_line": 805
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\fpu.c",
+      "before_sha256": "0bf8f644a351d5652759c7c99ef0c05cb5fac5de08075669a4bd0fd87ad66fd5",
+      "after_sha256": "99a550f4a1dda88dfae231da61328485fb29209ee6a4c29534bf35e4bf6733e6",
+      "original_sha256": "1309239998f72b64583b184d33623c763c3c98ea185081f8d8b294cd9b8c524f",
+      "guards": [
+        {
+          "macro": "BIGEND",
+          "original_error_line": 461,
+          "original_selected_line": 486,
+          "original_following_line": 510
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ega.c",
+      "before_sha256": "51b3d2aec88a8f69c14a1fef647eec2fcf9ea31d6b4f45d6053e8161f6f41a8d",
+      "after_sha256": "641961895f5a9ec88fb2e122dd16006d96687195b06c91df3f91e449cf4211f4",
+      "original_sha256": "ebc58583cec7e257a997185a1ab83f3284dbd1efe6e06c99f680bcce93dca695",
+      "guards": [
+        {
+          "macro": "BIGEND",
+          "original_error_line": 192,
+          "original_selected_line": null,
+          "original_following_line": 201
+        },
+        {
+          "macro": "BIGEND",
+          "original_error_line": 235,
+          "original_selected_line": null,
+          "original_following_line": 250
+        },
+        {
+          "macro": "BIGEND",
+          "original_error_line": 417,
+          "original_selected_line": null,
+          "original_following_line": 422
+        },
+        {
+          "macro": "BIGEND",
+          "original_error_line": 442,
+          "original_selected_line": null,
+          "original_following_line": 448
+        },
+        {
+          "macro": "BIGEND",
+          "original_error_line": 471,
+          "original_selected_line": null,
+          "original_following_line": 478
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vga.c",
+      "before_sha256": "648c0815f93e8d1a3ce4718bdf8991179618fc337933dcfb5aae6a966c929611",
+      "after_sha256": "f3b8a7972fe2f1c2b86e311fe9e9c8594c427d3583422698cf6a9b5414411409",
+      "original_sha256": "81db9f2e415e58c21b0a10110d03d0f16532c2150aba84feb2cab8f74627ee6d",
+      "guards": [
+        {
+          "macro": "BIGEND",
+          "original_error_line": 236,
+          "original_selected_line": null,
+          "original_following_line": 238
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fla.c",
+      "before_sha256": "77b989eee69622635c7d8fed328dc9cbf71f647cbf7a2ef2cef75da468e338d2",
+      "after_sha256": "03e9507df666aaac581aca94e34e3c58c6ba9ab2b25de1f0aafb64f7e162303f",
+      "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+      "guards": [
+        {
+          "macro": "macintosh",
+          "original_error_line": 169,
+          "original_selected_line": 171,
+          "original_following_line": 173
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/fprt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\fprt.c",
+      "before_sha256": "efe65dc779005a9f387e8d10fadd64570922571e55aeec348071c65a4ec68338",
+      "after_sha256": "56db4713b31042e271e0444f36d6e5d5babbe4027752b2aa209ef71c7ed671a7",
+      "original_sha256": "f7918f49be621c55f53c51c9ae6db756ff239768bb886b84fcfe39eeedb65424",
+      "guards": [
+        {
+          "macro": "HUNTER",
+          "original_error_line": 7,
+          "original_selected_line": null,
+          "original_following_line": 9
+        },
+        {
+          "macro": "HUNTER",
+          "original_error_line": 66,
+          "original_selected_line": null,
+          "original_following_line": 69
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_hosts.c",
+      "before_sha256": "41d26e3e9a959a37918dd12f7544545b826a53b27eafe73ebbfb63cdc9d514e9",
+      "after_sha256": "ed7ff1108d479c6e1a5d2a82482914f7f4cf7c39d0470d72013c9fcee5981fdf",
+      "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
+      "guards": [
+        {
+          "macro": "HUNTER",
+          "original_error_line": 29,
+          "original_selected_line": null,
+          "original_following_line": 31
+        },
+        {
+          "macro": "HUNTER",
+          "original_error_line": 63,
+          "original_selected_line": null,
+          "original_following_line": 65
+        },
+        {
+          "macro": "HUNTER",
+          "original_error_line": 222,
+          "original_selected_line": null,
+          "original_following_line": 224
+        },
+        {
+          "macro": "HUNTER",
+          "original_error_line": 295,
+          "original_selected_line": null,
+          "original_following_line": 344
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cga.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cga.h",
+      "before_sha256": "54121c9b22de85ead12d8e5509cb20317d34e3c7b0e570e73deab7f16fde6803",
+      "after_sha256": "7a23149277449ecf629db3cf8596662938ed80f450b82dffb130bb577f48ed82",
+      "original_sha256": "683848966f4b5cb5667b9ae0ae140d9e08adcb62060bc77695db844c34b71b0b",
+      "guards": [
+        {
+          "macro": "HUNTER",
+          "original_error_line": 23,
+          "original_selected_line": null,
+          "original_following_line": 25
+        },
+        {
+          "macro": "HUNTER",
+          "original_error_line": 72,
+          "original_selected_line": null,
+          "original_following_line": 75
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dma.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\dma.h",
+      "before_sha256": "fbd2e044a9502cf18be0f22fcad10a6b695c9212f316b1560d7ccb8047ef888f",
+      "after_sha256": "3b3c32d5746eb485ac6f0739214f6dfa1b098b698ca567478af0bfb4420dd996",
+      "original_sha256": "d69831cddb3de18bebe1532c659608b404686374324b3eeebed5607e15a774e4",
+      "guards": [
+        {
+          "macro": "BIT_ORDER1",
+          "original_error_line": 139,
+          "original_selected_line": null,
+          "original_following_line": 155
+        },
+        {
+          "macro": "BIT_ORDER1",
+          "original_error_line": 175,
+          "original_selected_line": null,
+          "original_following_line": 188
+        },
+        {
+          "macro": "BIT_ORDER1",
+          "original_error_line": 217,
+          "original_selected_line": null,
+          "original_following_line": 227
+        }
+      ]
+    }
+  ]
+}

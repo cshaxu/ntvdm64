@@ -4053,3 +4053,11 @@ mappings for 177 existing rejected DBG/DEBUG arms in ten files. Cached builds,
 two images are identical and eight timestamp-only. Prior Full 17/17 is reused
 and both destinations verified. Census: 1058 C/H, 157 identical reviewed, 459
 differing reviewed, 442 pending; net deleted: 578. Evidence: s13-r649-delivery.md.
+
+- r654 completes 26 DBG/DEBUG-only file reviews and two byte-identical header
+reviews, and delivers original line mappings for 33 existing platform/device
+exclusions in ten further files. Cached builds, 181 guard controls and 33
+isolated line controls passed. Eight images are identical and two timestamp-only;
+prior Full 17/17 is reused and both destinations verified. Census: 1058 C/H,
+159 identical reviewed, 485 differing reviewed, 414 pending; 578 net deleted.
+Evidence: s13-r654-delivery.md and s13-r654-counts.json.

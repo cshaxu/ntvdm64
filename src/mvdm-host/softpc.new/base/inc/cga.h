@@ -20,8 +20,10 @@
  */
 
 #ifdef HUNTER
+#line 23
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
+#line 25
 
 
 #line 27
@@ -57,8 +59,10 @@ typedef union                       /* Template for character attributes     */
  */
 
 #ifdef HUNTER
+#line 72
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif
+#line 75
 
 extern void cga_init	IPT0();
 extern void cga_term	IPT0();

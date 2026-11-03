@@ -136,8 +136,10 @@ typedef	half_word	DMA_WORD[2];
 
 /* a DMA command */
 #ifdef BIT_ORDER1
+#line 139
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
+#line 155
 #ifdef BIT_ORDER2
 typedef union
 {
@@ -158,8 +160,10 @@ typedef union
 
 /* a DMA mode */
 #ifdef BIT_ORDER1
+#line 175
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
+#line 188
 #ifdef BIT_ORDER2
 typedef union
 {
@@ -189,8 +193,10 @@ typedef union
 
 /* a DMA status */
 #ifdef BIT_ORDER1
+#line 217
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #endif
+#line 227
 #ifdef BIT_ORDER2
 typedef union
 {

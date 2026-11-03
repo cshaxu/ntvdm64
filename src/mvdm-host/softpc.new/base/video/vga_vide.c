@@ -23,13 +23,10 @@
 #ifdef VGG
 
 #ifdef SEGMENTATION
+#line 26
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 33
 
 /*
  *    O/S include files.
@@ -143,8 +140,10 @@ int table;	/* Which table to use */
     rgb_struct rgb;
 
 #ifdef	macintosh
+#line 146
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #else	/* macintosh */
+#line 155
 
     switch (table)
     {
@@ -162,6 +161,7 @@ int table;	/* Which table to use */
     }
 
 #endif	/* macintosh */
+#line 172
 
     for(loop = 0; loop < 0x100; loop++) 
 	{
@@ -171,8 +171,10 @@ int table;	/* Which table to use */
     }
 
 #ifdef	macintosh
+#line 181
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #endif	/* macintosh */
+#line 186
 }
 
 /***** Routines to handle VGA 256 colour modes, called from video.c **********/
@@ -239,8 +241,10 @@ GLOBAL VOID vga_write_dot
 	IFN4(LONG, colour, LONG, page, LONG, pixcol, LONG, row)
 {
 #ifdef REAL_VGA
+#line 252
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
+#line 257
 	long screen_offset;
 	UTINY bank;
 	
@@ -254,6 +258,7 @@ GLOBAL VOID vga_write_dot
 	EGA_plane0123[screen_offset] = colour;
 	(*update_alg.mark_byte)(screen_offset);
 #endif	/* REAL_VGA */
+#line 270
 }
 
 GLOBAL VOID vga_sensible_graph_scroll_up 
@@ -270,8 +275,10 @@ GLOBAL VOID vga_sensible_graph_scroll_up
 	rowsdiff *= char_height;
 	lines *= char_height;
 #ifdef REAL_VGA
+#line 286
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
+#line 302
 	dest = sas_w_at_no_check(VID_ADDR)+ row*col_incr*char_height+col;
 	source = dest+lines*col_incr;
 	screen_updated = (col+colsdiff) <= col_incr;  /* Check for silly scroll */
@@ -293,6 +300,7 @@ GLOBAL VOID vga_sensible_graph_scroll_up
 		dest += col_incr;
 	}
 #endif	/* REAL_VGA */
+#line 323
 }
 
 GLOBAL VOID vga_sensible_graph_scroll_down 
@@ -309,23 +317,10 @@ GLOBAL VOID vga_sensible_graph_scroll_down
 	rowsdiff *= char_height;
 	lines *= char_height;
 #ifdef REAL_VGA
+#line 339
 #error Excluded unsupported REAL_VGA configuration
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #else
+#line 356
 	dest = sas_w_at_no_check(VID_ADDR)+ row*col_incr*char_height+col;
 	screen_updated = (col+colsdiff) <= col_incr;  /* Check for silly scroll */
 	if(screen_updated)
@@ -348,6 +343,7 @@ GLOBAL VOID vga_sensible_graph_scroll_down
 		dest -= col_incr;
 	}
 #endif	/* REAL_VGA */
+#line 378
 }
 
 GLOBAL VOID vga_read_attrib_char IFN3(LONG, col, LONG, row, LONG, page)
@@ -365,10 +361,13 @@ GLOBAL VOID vga_read_attrib_char IFN3(LONG, col, LONG, row, LONG, page)
 	col,row,page);*/
 /* VGA 256 colour mode has only one page, so ignore 'page' */
 #ifdef REAL_VGA
+#line 395
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
+#line 397
 	screen = &EGA_plane0123[row*scan_length*char_height+8*col];
 #endif  /* REAL_VGA */
+#line 399
 	for(i=0;i<char_height;i++)
 	{
 		mask = 0x80;
@@ -392,10 +391,13 @@ GLOBAL VOID vga_read_dot IFN3(LONG, page, LONG, pixcol, LONG, row)
 	
 /*printf("vga_read_dot(%d,%d,%d)\n",page,col,row);*/
 #ifdef REAL_VGA
+#line 422
 #error DIVERGENCE MVDM-HOST-DIV-525: REAL_VGA platform branch is not selected; see mirror register.
 #else
+#line 424
 	screen = &EGA_plane0123[8*row*sas_w_at_no_check(VID_COLS)+pixcol];
 #endif  /* REAL_VGA */
+#line 426
 	setAL(*screen) ; /* WOW - that's easy!! */
 }
 
@@ -656,8 +658,10 @@ void vga_disp_func()
 	}
 
 #ifdef HERC 
+#line 686
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif	/* HERC */
+#line 689
 	video_mode = sas_hw_at_no_check(vd_video_mode);
 #ifdef V7VGA
 	if ((video_mode == 1) && extensions_controller.foreground_latch_1)
@@ -734,8 +738,10 @@ void vga_disp_func()
 	sas_store(buf+0x31, 3);		/* 256KB video memory */
 	setAX(0x1B); /* We did it! */
 #ifdef HERC 
+#line 767
 #error DIVERGENCE MVDM-HOST-DIV-522: HERC platform branch is not selected; see mirror register.
 #endif	/* HERC */
+#line 805
 }
 
 void vga_int_1C()

@@ -1,0 +1,33 @@
+{
+  "scope": "Two byte-identical original product headers with one conditional group each.",
+  "evidence": "cmos.h NTVDM alternative is selected in actual MSVC preprocessing of bios/cmos_bis.c; host_cfg.h is an ordinary original include guard seen in worker dependencies. Both worker graph contexts use NTVDM.",
+  "limits": "Conditional review and one actual preprocessing observation; does not prove all runtime CMOS behavior or exhaust supported contexts.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cmos.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cmos.h",
+      "sha256": "ef4dae92c641b3dbeb7aaab67c3f49e1da9d01d2473d2b96fbece0121b235f99",
+      "directives": [
+        "#if defined(NTVDM) || defined(macintosh)",
+        "#endif\t/* defined(NTVDM) || defined(macintosh) */"
+      ],
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/host_cfg.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\host_cfg.h",
+      "sha256": "b51660d37cc8249d10c74800eea996836c807e108ba627bbaf799078ae9098f6",
+      "directives": [
+        "#ifndef _HOST_CONFIG_H\t\t/* ensure we are only included once */",
+        "#endif\t/* _HOST_CONFIG_H */"
+      ],
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ]
+    }
+  ]
+}

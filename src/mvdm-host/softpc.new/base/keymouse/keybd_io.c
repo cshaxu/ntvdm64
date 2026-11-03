@@ -47,17 +47,16 @@
  */
 
 #ifdef SCCSID
+#line 50
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
+#line 52
 
 #ifdef SEGMENTATION
+#line 54
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 61
 
 
 /*
@@ -533,8 +532,10 @@ LOCAL VOID check_indicators IFN1(IBOOL, eoi)
 #endif
 
 #ifdef	GISP_CPU
+#line 549
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_CPU platform branch is not selected; see mirror register.
 #endif	/* GISP_CPU */
+#line 558
 #else	/* not NTVDM nor GISP_CPU */
 #error Unsupported excluded original configuration
 #endif	/* NTVDM or GISP_CPU */
@@ -1455,13 +1456,10 @@ void keyboard_io()
 #endif
 
 #ifdef SEGMENTATION
+#line 1844
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 1851
 
 void keyboard_post()
 {

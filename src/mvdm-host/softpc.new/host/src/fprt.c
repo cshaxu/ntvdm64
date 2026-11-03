@@ -4,8 +4,10 @@
 #include "stdio.h"
 #include "stdarg.h"
 #ifdef HUNTER
+#line 7
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 9
 
 void OutputString(char *);
 
@@ -27,8 +29,10 @@ void OutputString(char *str)
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
 #ifdef HUNTER
+#line 66
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #endif /* HUNTER */
+#line 69
 }
 
 #define WACKY_INPUT	"[BOB&SIMON'SCHEESYINPUT]"

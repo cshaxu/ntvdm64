@@ -466,8 +466,10 @@ INTEL_COMP_NC
 };
 
 #ifdef BIGEND
+#line 461
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else	/* !BIGEND */
+#line 486
 LOCAL FPU_I64 BCDLowNibble[] = {
 {0x6fc10000, 0x002386f2},
 {0x107a4000, 0x00005af3},
@@ -492,6 +494,7 @@ LOCAL FPU_I64 BCDHighNibble[] = {
 {0x0000000a, 0x00000000}
 };
 #endif	/* !BIGEND */
+#line 510
 
 
 LOCAL FPSTACKENTRY *FpatanTable[64];

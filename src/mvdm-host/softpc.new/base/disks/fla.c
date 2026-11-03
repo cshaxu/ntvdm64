@@ -165,10 +165,13 @@ static half_word fdc_result_count;
 /* The following sector buffer is used for non_dma transfers */
 
 #ifdef macintosh
+#line 169
 #error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
 #else
+#line 171
 static char fla_ndma_buffer[8192];
 #endif
+#line 173
 static int fla_ndma_buffer_count;
 static int fla_ndma_sector_size;
 

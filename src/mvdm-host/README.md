@@ -2698,3 +2698,7 @@ and ../../artifacts/mvdm-audit/s13-r645-dpmi-review.json.
 MVDM-HOST-DIV-737: restore original diagnostic and continuation line mappings
 for existing rejected DBG/DEBUG arms in redirector and WOW sources. Evidence:
 ../../artifacts/mvdm-audit/s13-r648-mixed-debug-guards.json.
+
+MVDM-HOST-DIV-738: align original error and continuation line mappings for
+existing excluded legacy platform and device arms in ten selected sources.
+Evidence: ../../artifacts/mvdm-audit/s13-r653-platform-guard-lines.json.

@@ -1,0 +1,207 @@
+{
+  "scope": "21 product-observed files with only original DBG/DEBUG conditional groups.",
+  "method": "Original and current guard kinds, structure, error-only excluded arms, original physical CR/LF diagnostic lines, and retained else text compared; comments and continuation lines checked conservatively.",
+  "context": "Four supported CMake release presets and original existing rejection guards; actual product builds pass without enabling these debug-only profiles. Test-only negative profiles are not additional product configurations.",
+  "limits": "Conditional source audit only; unrelated local adaptations and complete supported-context enumeration remain open. Previous r649 build evidence applies; no product source was changed.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
+      "current_sha256": "a52cd0952aa18345d07c7584da8e045d63a6da1569a3ff7b68e17b65bfb9a932",
+      "original_sha256": "50babb31bcd739318e189e88567ed27d6c89af908b8b590bbeb3e8f1377d13d5",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "current_sha256": "0af68a587ff958e76ab5e0ae139c6e233aca39dfedbfeffcc1fd7ae35a6600da",
+      "original_sha256": "90e6dc8f5625c371c8c14a2a111c3403d0f4b24597eacce8549049138f5721a6",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdll.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdll.c",
+      "current_sha256": "146606d30cf36eae71ee91d194e250b8f3a78ddf3a6b7f81ae87dcde225f9a59",
+      "original_sha256": "234946e3dc0bda5851de48f05ddb2dc921f76f7c717772cb2f69d4eab5d8ec10",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmisc.c",
+      "current_sha256": "e5e3e14c680375918a790dc39f2a42ebcc3a3a1c85170629f1fd46607b9098c1",
+      "original_sha256": "1af57aba3be6a1425eb18187a73c579f56619a2593bce3b2c20be8cf67216b6d",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetb.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetb.c",
+      "current_sha256": "5fff5e79500fd5dd734a91ec1f1342c625f50244ce9a8fc0533dd58a45649b6a",
+      "original_sha256": "1de0507a7a4649253b63fc4a42da9c54a9670c8a2883bbe3b19b27f132e94157",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/mapembed.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\mapembed.c",
+      "current_sha256": "21e5b1811d8be25289c87c4934edcb6738315049dae15a974daa6a6a8f0a8381",
+      "original_sha256": "55c13643489f5bcc9419ce0341accb284f946d8d75352527a3b9181dfeb4a385",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/waccel.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\waccel.c",
+      "current_sha256": "b3677ef2ad59ae352ff4cb9fcbc8ef0cf0daa35933773274803c0983ab9d312e",
+      "original_sha256": "c78dd24195e1a7d28dc3a9ee535b4104e9859f98ea8869f8f5591bc9c159a8e8",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wheap.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wheap.c",
+      "current_sha256": "087f929d0cbaa781849d4021ca6d9ed5afa5c0711b85b1c162102252108806cd",
+      "original_sha256": "be3af89da01d5a6f296a47b7e505e2d6598b4c4e1a5cb35e76dab3ac839848de",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgbm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgbm.c",
+      "current_sha256": "52fd5d7707b47d7d9ad99343c65f167d70e4fd15b0701a659ecbdf223d353356",
+      "original_sha256": "d7ef837d592221481c988ccb2e164faff9d7a0b6349b59e1bbc3841323a98692",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgcb.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgcb.c",
+      "current_sha256": "8e36711983a637e6dbd318e1a8afe3268e9b5737c1c03c261c1a76dd42ede03b",
+      "original_sha256": "ca644a033b4ed5974f70fad75615ef18c80466f3ed6d987554ce031cacab1e13",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgem.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgem.c",
+      "current_sha256": "b583aaeb9dc4dbedaf14b7d074cbbf7d0c3091f547db8aaf42016066977923ed",
+      "original_sha256": "88d05e4770453621472704e90edcefd6ad18b618528b4166da3a9ba1ea1a3619",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsglb.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsglb.c",
+      "current_sha256": "63f67da6a7c8fd6299aef036c71cd6656109a16103d18e15f00f8e3d5f414047",
+      "original_sha256": "5e1a7dd4140ae6538d4e728ca869013e8cd00d06d5339ee5682319d5ff4bf26e",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgsbm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgsbm.c",
+      "current_sha256": "7932d60818f79517f1de608ba021dd4d6d2aa2c9d1ef748ca30a7cf972b402af",
+      "original_sha256": "cf1ea646693339e8c2b03875dad6c7b4a92576fc80f330407e60231e2689b18e",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.h",
+      "current_sha256": "b667bafe7e4af4c42cd0d9d4113d1836f4c0bf7b0bf18bb930868d504750979c",
+      "original_sha256": "3861f621ac54295bc90b357a66a6d36ecba10878c4a1b5fcd49d37f95ae8351f",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wres16.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wres16.c",
+      "current_sha256": "822f6a9f232eadee4a6f8d3b12a3bc49f43e5c85d85c2574a328ec97f5ad1f9f",
+      "original_sha256": "24324d4b95b7c5ac102e9751872af1db779efc0cff223b32aa066034cb874ae9",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclip.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuclip.c",
+      "current_sha256": "3d1a652f49d5f5505867dbc97834fef5ab57c3811e5176d814591821e3ce968c",
+      "original_sha256": "c386af38376945cb4fd141d878bca8ef5140b15dccc9695a0adcb0941fbb0083",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wucomm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wucomm.c",
+      "current_sha256": "db0b755c83fccedc8a5c935e72ba12569d723df99f05986ed171e5dffe4214f2",
+      "original_sha256": "c9c8b11d65ac3f2b1ee9216a8102ef56908bff5c5bf4ed2dd2badc30ca8a4284",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuman.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuman.c",
+      "current_sha256": "bed96ab51ec7fbf0324718277f74336115f2506df10d300084d8773b3e8ca28a",
+      "original_sha256": "d96fc214141973b12045669ae2a0d21cf4040ab928be1a309ad687456b473698",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsdisp.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsdisp.c",
+      "current_sha256": "f44b2c9cc2b4730f385e75694e83f0106a69cf399eac010da406fb0273d2212d",
+      "original_sha256": "24b0fa2fe32bd7a94606d424a10b0961a9911190cb2684456af04034e04bff01",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/ntstatus.c",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\netlib\\ntstatus.c",
+      "current_sha256": "a07a7fd2127ca6068ccdc31c9c079e1a0208d703eee6d5524a9416923750ede9",
+      "original_sha256": "3db640c6cdc48e0835cc6a54c69bd12196245fba3feeb486a79e45a7c9abbf86",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/random.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\random.c",
+      "current_sha256": "d3a8cce8e3ab19a55c6f9eb5ebdff0c484dd683a214134c22e964f43ff92a949",
+      "original_sha256": "b3ed1082041c1c600c92487b45ff0c4750a50456e5ba7ea14a3ec8ef83a1f9cd",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    }
+  ]
+}
