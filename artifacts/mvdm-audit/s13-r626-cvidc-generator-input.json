@@ -1,0 +1,10 @@
+{
+  "path": "src\\mvdm-host\\softpc.new\\base\\cvidc\\c2cpusad.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\c2cpusad.h",
+  "current_sha256": "7b70935efed5a821be90905a48b282d60872ac1f2e1a441df04b1e4ed275902b",
+  "original_sha256": "6f73c73102647669a8db411c8a6a2ac6412fe2ccbb3daa6331b7b8fd2717260b",
+  "difference": "Byte difference is CRLF versus LF only; normalized content is identical.",
+  "conditions": "No conditional directives in either current or original file.",
+  "product_role": "CMake configure depends on this file; GenerateCvidcCpuBinding.mjs reads it to generate CCPU-to-C-VID binding.",
+  "limits": "Generator-input role and conditional content established; does not prove all runtime behavior."
+}

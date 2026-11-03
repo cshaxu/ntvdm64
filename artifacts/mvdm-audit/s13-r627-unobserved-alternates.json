@@ -1,0 +1,63 @@
+{
+  "scope": "Eight product-unselected alternate source/header files from the 30-file unobserved census.",
+  "evidence": "Current product Ninja dependency databases, build graph, exact path/reference and include-order checks. Test-only j_c_lang.h was confirmed by actual fixture MSVC preprocessing.",
+  "limitation": "Product cached build and affected fixture passed; see s13-r628-delivery.md. No executable, asset or guest file removed.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host.h",
+      "sha256": "10801b826f2438763d70217c1a5883cdfb9bb25f080bea61bda3857c088dc1d0",
+      "original_sha256": "0192cafb4e0e9a42a83a409503f12e3f0e9f7abfe8619eb4ce7dfec36e938b94",
+      "reason": "product resolves base/inc/host.h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/monregs.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\monregs.h",
+      "sha256": "21ca0069d71627bae01020712269ba835c4e28d6b2ebb3b5503fe144a9ae77e1",
+      "original_sha256": "af51be97b6926835f02d78143bd54463500e94710e088e4be15e9ab5d81690ba",
+      "reason": "product resolves mvdm-host/inc/monregs.h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/xmsexp.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\xmsexp.h",
+      "sha256": "0dcde3ba7b0c366a0e4476e0e02a0d6d95b1df703f02bca986ef2d8f3be8e72f",
+      "original_sha256": "4aee7f4219c89043dfd1e5d3c139999524806cefa6e507ebffecd63d9a543072",
+      "reason": "product resolves mvdm-host/inc/xmsexp.h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/link/nt_uis.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\link\\nt_uis.h",
+      "sha256": "9841c9c1d437eef5d0b825248b7fc5bbe15dc73c671a3280f8bfc14e6d60c2ab",
+      "original_sha256": "f35de41a225039fa430ef18fc8e311093aea4236b72f65e448d02a35643e426b",
+      "reason": "product resolves host/inc/nt_uis.h; historical ledger tools only name the old path"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dpmi.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\dpmi.h",
+      "sha256": "9f8060cf8d5b852c2a98afc86496fd7a7c7bb477c055dcc77436a16d11b1f854",
+      "original_sha256": "147472a572fe13d6a11307c28ef023b79b495087290b1c8124367b04f4891b46",
+      "reason": "product resolves mvdm-host/inc/dpmi.h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/j_c_lang.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\j_c_lang.h",
+      "sha256": "c3ec72c56cfc29053fb6d98b0617af9610950d4067f05a82ee146103315f59d3",
+      "original_sha256": "1c0727f420986a3cde9992af5cf3c4c7b084029f3a3a4c04ad7549e7b01235a4",
+      "reason": "fixture-only alternate; product resolves cvidc/j_c_lang.h; fixture must be revalidated after removal"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/evidfunc.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\evidfunc.h",
+      "sha256": "aae3274c531b74df6358d213970fd0d0f43a121ba42b8ef44d7f2c47c44c8cbe",
+      "original_sha256": "69ff2429a6fb7b0e6ffa690e101c2b0695a89cc3fa186a789ded9c27d81d7bc7",
+      "reason": "product and fixture resolve cvidc/evidfunc.h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_stubs.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\ev_stubs.c",
+      "sha256": "d51cc407c560c3a65a883e03ddae3dfbde3a94858cadb1fe01abef14440d3153",
+      "original_sha256": "b289023dddb237935d44129c5968e2b225a86e95f0ca84274e132fd9b41735bd",
+      "reason": "no active source or generated graph input; only archived historical build reference"
+    }
+  ]
+}

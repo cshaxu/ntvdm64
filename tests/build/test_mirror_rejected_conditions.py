@@ -314,49 +314,6 @@ if (allowed.returncode or not rejected.returncode
     raise SystemExit('nt_bop i386 rejection control failed: ' + allowed.stderr + rejected.stderr)
 print('PASS CCPU excludes original hardware-host FPU save path')
 
-for path, macro, expected_count, divergence in (
-    ('src/mvdm-host/softpc.new/base/inc/winhelp.h', 'HOST_HELP', 1, 'MVDM-HOST-DIV-605'),
-):
-    lines = (repo / path).read_text(encoding='latin1').splitlines()
-    marker = divergence + ': unsupported ' + macro + ' profile'
-    positions = [i for i, line in enumerate(lines) if marker in line]
-    if len(positions) != expected_count:
-        raise SystemExit('incorrect excluded profile guard count: ' + path)
-    for i in positions:
-        guard = i - 1
-        while guard >= 0 and re.match(r'^\s*#\s*line\b', lines[guard]):
-            guard -= 1
-        if guard < 0 or not re.match(r'^\s*#\s*ifdef\s+' + re.escape(macro) + r'\s*(?:(?:/\*.*\*/|//.*)\s*)?$', lines[guard]):
-            raise SystemExit('excluded profile lost original selector: ' + path)
-        probe.write_text('\n'.join(lines[guard:i+1] + ['#endif']) + '\n', encoding='ascii')
-        allowed = subprocess.run(base, capture_output=True, text=True, errors='replace')
-        rejected = subprocess.run(base[:-1] + ['/D' + macro] + base[-1:],
-                                  capture_output=True, text=True, errors='replace')
-        if allowed.returncode or not rejected.returncode or marker not in rejected.stdout + rejected.stderr:
-            raise SystemExit('excluded profile selection failed: ' + path)
-print('PASS original excluded host and WOW profile guards')
-
-for path, expression, marker, definitions in (
-):
-    lines = (repo / path).read_text(encoding='latin1').splitlines()
-    positions = [i for i, line in enumerate(lines) if marker in line]
-    if len(positions) != 1 or lines[positions[0]-1].strip() != '#if ' + expression:
-        raise SystemExit('compound profile lost original selector: ' + path)
-    i = positions[0]
-    probe.write_text('\n'.join(lines[i-1:i+1] + ['#endif']) + '\n', encoding='ascii')
-    allowed = subprocess.run(base, capture_output=True, text=True, errors='replace')
-    rejected = subprocess.run(base[:-1] + ['/D' + d for d in definitions] + base[-1:],
-                              capture_output=True, text=True, errors='replace')
-    if allowed.returncode or not rejected.returncode or marker not in rejected.stdout + rejected.stderr:
-        raise SystemExit('compound profile selection failed: ' + path)
-    if len(definitions) > 1:
-        for definition in definitions:
-            single = subprocess.run(base[:-1] + ['/D' + definition] + base[-1:],
-                                    capture_output=True, text=True, errors='replace')
-            if single.returncode:
-                raise SystemExit('single compound operand rejected: ' + path)
-print('PASS original compound profile guards and individual operands')
-
 probe.write_text('#ifdef ALLOCA\n#error uppercase-only selector\n#endif\n', encoding='ascii')
 result = subprocess.run(base[:-1] + ['/Dalloca=_alloca'] + base[-1:], capture_output=True, text=True, errors='replace')
 if result.returncode:

@@ -1,0 +1,11 @@
+{
+  "source": "src\\mvdm-host\\vdmutils\\graftabl\\obj\\i386\\graftabl.com",
+  "archive": "assets\\winnt.zip",
+  "archive_entry": "WINNT/SYSTEM32/GRAFTABL.COM",
+  "bytes": 51200,
+  "sha256": "bc241d49e73a10471500bcfcda8302ef72fd7411f7b8dea92289b4244ea2c87e",
+  "prior_archive_sha256": "b79dfb38d99335f59688966d2d13688bd4b8d19af44760d2d68ce5c72a6076e7",
+  "new_archive_sha256": "92714715fc0fce4cb33268f534e9e7d7d45ae612937249a2c2b2e2e013099947",
+  "verification": "ZIP CRC test passes; hashes of every pre-existing non-directory entry are unchanged; added entry matches existing tracked file.",
+  "provenance": "Existing tracked binary; original provenance and execution were not established; no guest source or binary recompiled or modified."
+}

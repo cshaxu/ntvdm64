@@ -2404,3 +2404,7 @@ OPENNT-HOST-235: remove public/ddk/inc/ntddtx.h after the observed product
 build/dependency inventory and current source, build and test reference scan
 found no consumer. Current and original hashes and scope are recorded in
 ../../artifacts/mvdm-audit/s13-r607-unreferenced-headers.json.
+
+OPENNT-HOST-236: remove public/internal/base/inc/atom.h after current source,
+tool, test and observed product-graph searches found no include or build use.
+Identity and scope: ../../artifacts/mvdm-audit/s13-r625-unobserved-deletions.json.

@@ -1,0 +1,20 @@
+{
+  "scope": "Two mirror headers in the 30 unobserved files; no independently useful executable, resource, or guest file removed.",
+  "status": "Built, targeted guard test passed and published as r628; see s13-r628-delivery.md.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winhelp.h",
+      "original": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/inc/winhelp.h",
+      "before_sha256": "f89763309d2b3feab698bcca98ded001c4d9d63741fc7501058759cdd737bd70",
+      "original_sha256": "8ef3d5e1f7848239ea7c45eea43098088a78a632d7803ca86c299cd553ae81d6",
+      "reason": "Only current consumer is an isolated guard test. Case-insensitive source/tools/tests search found no include or product build reference; no observed Ninja source or dependency."
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/atom.h",
+      "original": "O:/repos.external/OpenNT/public/internal/base/inc/atom.h",
+      "before_sha256": "73df53151a29a5d3c11e43bceaacaedd12a6f117aeb080cc6d7788bdd2d01753",
+      "original_sha256": "3f229c9358a4413248453eaacf3f5341814b365bb75e1d6cf626ed79f406b74a",
+      "reason": "No actual filename/include reference in current source/tools/tests or observed Ninja graph. A lexical atom.h substring is a C member access, not an include."
+    }
+  ]
+}

@@ -2647,3 +2647,12 @@ softpc.new/host/src/nt_vflop.c, dpmi32/i386/dpmimisc.c and
 xms.486/i386/xmsmem86.c. Removed their obsolete non-product manifest or
 exclusion-test references. Original and prior local hashes and scope are in
 ../../artifacts/mvdm-audit/s13-r612-unselected-witnesses.json.
+
+MVDM-HOST-DIV-727: remove the unselected HOST_HELP-only winhelp.h, whose
+sole remaining consumer was a guard test. Source identity and reference
+evidence: ../../artifacts/mvdm-audit/s13-r625-unobserved-deletions.json.
+
+MVDM-HOST-DIV-728: remove eight unselected legacy alternate C/H files; product
+include paths and generator inputs resolve to separately retained files. The
+test-only j_c_lang.h alternate was removed; its fixture uses the product header
+and passed. Evidence: ../../artifacts/mvdm-audit/s13-r627-unobserved-alternates.json.

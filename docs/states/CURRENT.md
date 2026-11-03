@@ -9,10 +9,10 @@ compiled mirror file against its original; build each batch of 10 modified code
 files. If binaries have no substantive change, reuse test evidence for the P;
 otherwise run Full before publication. [Progress](../../artifacts/mvdm-audit/s13-bfs-progress.md);
 [observed per-file inventory](../../artifacts/mvdm-audit/s13-r489-per-file-observed-inventory.json).
-The corrected filesystem census has 1087 present C/H files across both mirror
-roots: 1057 in the existing observed build/dependency inventory and 30 not in
-that inventory. The latter need individual build, tool, inclusion and
-provenance disposition; absence from one inventory is not deletion proof.
+The current census has 1077 present C/H files across both mirror roots after
+the latest delivery: 1057 in the existing build/dependency inventory and 20
+outside it, including one confirmed product-generator input. Remaining files
+need individual disposition; absence from one inventory is not deletion proof.
 See [census](../../artifacts/mvdm-audit/s13-r624-current-file-census.json).
 
 Prior owner-approved delivery: restore the four MVDM ANSI-profile files changed

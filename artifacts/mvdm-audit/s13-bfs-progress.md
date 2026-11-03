@@ -3993,3 +3993,12 @@ Queue r366 restores original input.c first-depth NEVER exclusion at file scope (
 - r619–r620 reviewed five byte-identical CCPU arithmetic/address files and their selected original conditions. The current observed inventory contains 157 identical reviewed, 443 differing reviewed and 457 pending, totaling 1057 existing files. Separately, the rename-aware net Git comparison from S13 admission `c97d4ee2c` through `a3799d4ec` records 549 deleted mirror C/H files; none are in the 1057 existing-file inventory. Neither count proves complete supported-context enumeration. No product source changed or product build was run in this review. Evidence: s13-r619-ccpu-arithmetic-conditions.json, s13-r620-caddr-selected-condition.json and s13-r620-deletion-counts.json.
 
 - r623 delivers ten original diagnostic-line corrections. Cached builds and thirteen isolated MSVC diagnostic witnesses pass; eight images are identical and two are timestamp-only. Both destinations were published; prior Full 17/17 is reused. r624 corrects the whole-tree count: 1087 present C/H (903 mvdm-host, 184 non-mvdm), of which 1057 are in the existing graph inventory and 30 need individual disposition. Within the 1057: 157 identical reviewed, 443 differing reviewed, 457 pending; the 30 are additional pending files. Separately, 549 C/H were net deleted since S13 admission. Evidence: s13-r623-delivery.md and s13-r624-current-file-census.json.
+
+- r625–r626: two unobserved, unselected headers are removed pending the ten-file build; one was test-only. The existing GRAFTABL.COM binary was copied unchanged into winnt.zip, with every pre-existing entry hash verified. The product generator's c2cpusad.h is retained and its condition audit completed; normalized original text matches, while bytes differ by line endings. Current worktree: 1085 existing C/H, 157 byte-identical reviewed, 444 differing reviewed, 484 pending; 551 net deleted since S13 admission including two uncommitted deletions. Evidence: s13-r625-unobserved-deletions.json, s13-r625-graftabl-archive.json and s13-r626-cvidc-generator-input.json.
+
+- r628 delivers the ten-file unselected-source batch. Cached product builds,
+the modified 184-guard test and the affected C-VID fixture passed; eight product
+images are identical and two timestamp-only, so prior Full 17/17 is reused.
+Both release destinations were verified. Existing census: 1077 C/H, including
+157 byte-identical reviewed, 444 differing reviewed and 476 pending. Net
+deleted C/H since S13 admission: 559. Evidence: s13-r628-delivery.md.
