@@ -2466,8 +2466,8 @@
       "sha256": "21e9496ff93586b7f696bad8a6015027dcc2592a09e8d38b4abedb76a4e6aa72",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-nonpig-io-tree",
+      "additional_evidence": "s13-r672-pig-io-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\in.c",
       "original_candidate_sha256": "5a6cb5699c84e6a25fc984aa9c5a4ee50cb22d4408ba3df57cd0cd95e41f23b0"
     },
@@ -3086,8 +3086,8 @@
       "sha256": "6ea2193496697fda3b7206759306dd1e333d7a9eb098a66f7fcef4507e10116e",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-nonpig-io-tree",
+      "additional_evidence": "s13-r672-pig-io-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\out.c",
       "original_candidate_sha256": "520bdebe72dcb263bf2a8312ec543b0414a0456e07959891bddb7d083b52b91b"
     },

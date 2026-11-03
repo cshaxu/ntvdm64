@@ -1,0 +1,213 @@
+{
+  "scope": "Original conditions in CCPU in.c and out.c, including nested excluded SFELLOW alternative.",
+  "method": "Recursive original/current selector and retained-leaf comparison; actual Ninja commands preprocessed in x86 worker and x64 reference-x86 worker graphs, witnessing IN8/16/32 and OUT8/16/32 selected bodies.",
+  "limits": "Preprocessing witnesses selected bodies in these graphs; unenumerated unsupported contexts are not proven. Local code outside conditional groups is separately tracked.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/in.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\in.c",
+      "sha256": "21e9496ff93586b7f696bad8a6015027dcc2592a09e8d38b4abedb76a4e6aa72",
+      "original_sha256": "5a6cb5699c84e6a25fc984aa9c5a4ee50cb22d4408ba3df57cd0cd95e41f23b0",
+      "conditions": {
+        "retained": 4,
+        "observed_nonpig": 3,
+        "excluded": 1,
+        "groups": 1
+      },
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "preprocess": [
+        {
+          "graph": "r672-preprocessed",
+          "preprocessed_sha256": "afe03aef2c7a1648d8873ca2d3dfa4ef4ae82b6a587446dc062203f4abdd9a77",
+          "witnesses": [
+            "Ios_inb_function",
+            "Ios_inw_function",
+            "IN16(&temp"
+          ]
+        },
+        {
+          "graph": "r672-preprocessed-xref",
+          "preprocessed_sha256": "afe03aef2c7a1648d8873ca2d3dfa4ef4ae82b6a587446dc062203f4abdd9a77",
+          "witnesses": [
+            "Ios_inb_function",
+            "Ios_inw_function",
+            "IN16(&temp"
+          ]
+        }
+      ],
+      "conditional_tree": [
+        {
+          "original_endif": 58,
+          "current_endif": 58,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PIG",
+              "original_line": 52,
+              "current_line": 52,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 77,
+          "current_endif": 77,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PIG",
+              "original_line": 71,
+              "current_line": 71,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 100,
+          "current_endif": 100,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PIG",
+              "original_line": 86,
+              "current_line": 86,
+              "disposition": "retained",
+              "children": [
+                {
+                  "original_endif": 99,
+                  "current_endif": 98,
+                  "arms": [
+                    {
+                      "kind": "ifdef",
+                      "expression": "SFELLOW",
+                      "original_line": 89,
+                      "current_line": 89,
+                      "disposition": "excluded-error",
+                      "children": []
+                    },
+                    {
+                      "kind": "else",
+                      "expression": "",
+                      "original_line": 94,
+                      "current_line": 92,
+                      "disposition": "retained",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/out.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\out.c",
+      "sha256": "6ea2193496697fda3b7206759306dd1e333d7a9eb098a66f7fcef4507e10116e",
+      "original_sha256": "520bdebe72dcb263bf2a8312ec543b0414a0456e07959891bddb7d083b52b91b",
+      "conditions": {
+        "retained": 4,
+        "observed_nonpig": 3,
+        "excluded": 1,
+        "groups": 1
+      },
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "preprocess": [
+        {
+          "graph": "r672-preprocessed",
+          "preprocessed_sha256": "1f6f89f2eb1b0a06907c8a6947dcac2fe81c02e03f54ffe85bd2e186762a4f85",
+          "witnesses": [
+            "Ios_outb_function",
+            "Ios_outw_function",
+            "OUT16(op1"
+          ]
+        },
+        {
+          "graph": "r672-preprocessed-xref",
+          "preprocessed_sha256": "1f6f89f2eb1b0a06907c8a6947dcac2fe81c02e03f54ffe85bd2e186762a4f85",
+          "witnesses": [
+            "Ios_outb_function",
+            "Ios_outw_function",
+            "OUT16(op1"
+          ]
+        }
+      ],
+      "conditional_tree": [
+        {
+          "original_endif": 55,
+          "current_endif": 55,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PIG",
+              "original_line": 51,
+              "current_line": 51,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 72,
+          "current_endif": 72,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PIG",
+              "original_line": 68,
+              "current_line": 68,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 90,
+          "current_endif": 91,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PIG",
+              "original_line": 81,
+              "current_line": 81,
+              "disposition": "retained",
+              "children": [
+                {
+                  "original_endif": 89,
+                  "current_endif": 89,
+                  "arms": [
+                    {
+                      "kind": "ifdef",
+                      "expression": "SFELLOW",
+                      "original_line": 82,
+                      "current_line": 82,
+                      "disposition": "excluded-error",
+                      "children": []
+                    },
+                    {
+                      "kind": "else",
+                      "expression": "",
+                      "original_line": 86,
+                      "current_line": 85,
+                      "disposition": "retained",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

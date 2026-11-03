@@ -1,0 +1,343 @@
+{
+  "retained-only:[('ifdef', 'DOS')]": [
+    "src/mvdm-host/dos/dem/dem.h"
+  ],
+  "retained-only:[('if', 'DEVL')]": [
+    "src/mvdm-host/dos/dem/demdasd.c",
+    "src/mvdm-host/dos/dem/demmisc.c"
+  ],
+  "retained-only:[('ifdef', 'UNALIGNED_VDM_POINTERS'), ('else', '')]": [
+    "src/mvdm-host/inc/vdmredir.h"
+  ],
+  "retained-only:[('ifndef', 'NOEXTERNS')]": [
+    "src/mvdm-host/inc/wow.h"
+  ],
+  "retained-only:[('ifndef', 'UNALIGNED')]": [
+    "src/mvdm-host/inc/wowcomm.h",
+    "src/mvdm-host/inc/wowmmcb.h"
+  ],
+  "retained-only:[('ifdef', 'DEFINE_DDRV_DEBUG_STRINGS')]": [
+    "src/mvdm-host/inc/wowfax.h"
+  ],
+  "retained-only:[('if', 'defined(MIPS) || defined(_ALPHA_)'), ('else', '')]": [
+    "src/mvdm-host/inc/wowinfo.h"
+  ],
+  "retained-only:[('ifdef', 'CPU_40_STYLE')]": [
+    "src/mvdm-host/softpc.new/base/bios/virtual.c",
+    "src/mvdm-host/softpc.new/base/video/v7_ports.c"
+  ],
+  "retained-only:[('ifndef', 'DOUBLE_CPU')]": [
+    "src/mvdm-host/softpc.new/base/ccpu386/c_main.h"
+  ],
+  "retained-only:[('ifdef', 'FAST_TLB')]": [
+    "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c"
+  ],
+  "retained-only:[('ifndef', 'EGATEST')]": [
+    "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c"
+  ],
+  "retained-only:[('ifdef', 'CPU_PRIVATE'), ('else', '')]": [
+    "src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h",
+    "src/mvdm-host/softpc.new/base/cvidc/cpu4gen.h"
+  ],
+  "retained-only:[('ifndef', 'host_log2')]": [
+    "src/mvdm-host/softpc.new/base/ccpu386/fpu.c"
+  ],
+  "retained-only:[('ifndef', 'PIG')]": [
+    "src/mvdm-host/softpc.new/base/ccpu386/in.c",
+    "src/mvdm-host/softpc.new/base/ccpu386/out.c"
+  ],
+  "retained-only:[('ifdef', 'TAKE_PROT_MODE_LIMIT_FAULT')]": [
+    "src/mvdm-host/softpc.new/base/ccpu386/jmp.c"
+  ],
+  "retained-only:[('ifndef', 'TAKE_REAL_MODE_LIMIT_FAULT')]": [
+    "src/mvdm-host/softpc.new/base/ccpu386/ret.c"
+  ],
+  "retained-only:[('ifndef', 'SFELLOW')]": [
+    "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c"
+  ],
+  "retained-only:[('ifdef', 'BIT_ORDER2')]": [
+    "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+    "src/mvdm-host/softpc.new/base/disks/fla.c",
+    "src/mvdm-host/softpc.new/base/inc/cga.h",
+    "src/mvdm-host/softpc.new/base/inc/dma.h"
+  ],
+  "retained-only:[('ifndef', 'PROD')]": [
+    "src/mvdm-host/softpc.new/base/cvidc/accessfn.c"
+  ],
+  "retained-only:[('ifndef', 'SWAPPED_M')]": [
+    "src/mvdm-host/softpc.new/base/cvidc/cpu_c.h"
+  ],
+  "retained-only:[('ifdef', 'CCPU')]": [
+    "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+    "src/mvdm-host/softpc.new/host/inc/nt_inthk.h"
+  ],
+  "retained-only:[('ifdef', 'LITTLEND')]": [
+    "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+    "src/mvdm-host/softpc.new/base/inc/rs232.h",
+    "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+    "src/mvdm-host/softpc.new/host/src/nt_vga.c"
+  ],
+  "retained-only:[('ifndef', 'JOKER')]": [
+    "src/mvdm-host/softpc.new/base/disks/fdisk.c"
+  ],
+  "retained-only:[('ifdef', 'NTVDM')]": [
+    "src/mvdm-host/softpc.new/base/disks/floppy.c",
+    "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+    "src/mvdm-host/softpc.new/base/inc/gfi.h",
+    "src/mvdm-host/softpc.new/base/inc/host_com.h",
+    "src/mvdm-host/softpc.new/base/system/idetect.c",
+    "src/mvdm-host/softpc.new/host/src/nt_com.c"
+  ],
+  "retained-only:[('ifdef', 'PROD')]": [
+    "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+    "src/mvdm-host/softpc.new/base/keymouse/ppi.c"
+  ],
+  "retained-only:[('ifndef', 'bop')]": [
+    "src/mvdm-host/softpc.new/base/inc/bios.h"
+  ],
+  "retained-only:[('ifndef', '_INS_ERROR_H')]": [
+    "src/mvdm-host/softpc.new/base/inc/config.h"
+  ],
+  "retained-only:[('ifdef', 'CPU_PRIVATE')]": [
+    "src/mvdm-host/softpc.new/base/inc/cpu4.h"
+  ],
+  "retained-only:[('ifndef', 'YES')]": [
+    "src/mvdm-host/softpc.new/base/inc/debug.h"
+  ],
+  "retained-only:[('ifdef', 'BIT_ORDER2'), ('else', '')]": [
+    "src/mvdm-host/softpc.new/base/inc/egagraph.h"
+  ],
+  "retained-only:[('ifdef', 'V7VGA'), ('else', '')]": [
+    "src/mvdm-host/softpc.new/base/inc/egaports.h"
+  ],
+  "retained-only:[('ifdef', 'VGG')]": [
+    "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+    "src/mvdm-host/softpc.new/base/inc/gfx_upd.h"
+  ],
+  "retained-only:[('ifdef', 'VGG'), ('else', '')]": [
+    "src/mvdm-host/softpc.new/base/inc/gvi.h"
+  ],
+  "retained-only:[('ifndef', 'host_memset')]": [
+    "src/mvdm-host/softpc.new/base/inc/host.h"
+  ],
+  "retained-only:[('if', 'defined(NTVDM)')]": [
+    "src/mvdm-host/softpc.new/base/inc/host_lpt.h"
+  ],
+  "retained-only:[('ifdef', 'HOST_SAS')]": [
+    "src/mvdm-host/softpc.new/base/inc/host_sas.h"
+  ],
+  "retained-only:[('ifndef', 'HOST_CPU_MOUSE_INT')]": [
+    "src/mvdm-host/softpc.new/base/inc/ica.h"
+  ],
+  "retained-only:[('ifndef', 'REAL_KBD')]": [
+    "src/mvdm-host/softpc.new/base/inc/keyba.h"
+  ],
+  "retained-only:[('ifdef', 'V7VGA')]": [
+    "src/mvdm-host/softpc.new/base/inc/mouse_io.h"
+  ],
+  "retained-only:[('ifdef', 'ANSI'), ('else', '')]": [
+    "src/mvdm-host/softpc.new/base/inc/printer.h",
+    "src/mvdm-host/softpc.new/host/inc/error.h"
+  ],
+  "retained-only:[('ifndef', 'host_block_timer')]": [
+    "src/mvdm-host/softpc.new/base/inc/timer.h"
+  ],
+  "retained-only:[('ifndef', 'DWORD')]": [
+    "src/mvdm-host/softpc.new/base/inc/umb.h"
+  ],
+  "retained-only:[('if', 'defined(NTVDM) && defined(LOCAL)')]": [
+    "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c"
+  ],
+  "retained-only:[('ifdef', 'LOCAL')]": [
+    "src/mvdm-host/softpc.new/base/support/get_env.c"
+  ],
+  "retained-only:[('ifdef', 'LIM')]": [
+    "src/mvdm-host/softpc.new/base/support/terminat.c",
+    "src/mvdm-host/softpc.new/host/src/config.c"
+  ],
+  "retained-only:[('ifndef', 'MONITOR')]": [
+    "src/mvdm-host/softpc.new/base/system/qevnt.c",
+    "src/mvdm-host/softpc.new/host/inc/host_def.h",
+    "src/mvdm-host/softpc.new/host/src/cpucstbs.c",
+    "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+    "src/mvdm-host/softpc.new/host/src/nt_unix.c",
+    "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c"
+  ],
+  "retained-only:[('ifdef', 'EGG')]": [
+    "src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+    "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+    "src/mvdm-host/softpc.new/base/video/gvi.c"
+  ],
+  "retained-only:[('ifndef', 'NTVDM')]": [
+    "src/mvdm-host/softpc.new/base/video/ega_mode.c"
+  ],
+  "retained-only:[('if', '!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )')]": [
+    "src/mvdm-host/softpc.new/base/video/ega_trcr.c"
+  ],
+  "retained-only:[('if', 'defined(EGA_DUMP) || defined(EGA_STAT)')]": [
+    "src/mvdm-host/softpc.new/base/video/ega_writ.c"
+  ],
+  "retained-only:[('if', 'defined(NTVDM) && !defined(X86GFX)')]": [
+    "src/mvdm-host/softpc.new/base/video/video_io.c"
+  ],
+  "retained-only:[('ifdef', 'ULONG')]": [
+    "src/mvdm-host/softpc.new/host/inc/host_inc.h"
+  ],
+  "retained-only:[('ifndef', '_HOST_ERROR_H')]": [
+    "src/mvdm-host/softpc.new/host/inc/host_rrr.h"
+  ],
+  "retained-only:[('ifndef', 'NT_INCLUDED')]": [
+    "src/mvdm-host/softpc.new/host/inc/insignia.h"
+  ],
+  "retained-only:[('ifdef', '_RS232_H')]": [
+    "src/mvdm-host/softpc.new/host/inc/nt_com.h"
+  ],
+  "retained-only:[('ifndef', 'X86GFX')]": [
+    "src/mvdm-host/softpc.new/host/inc/nt_event.h"
+  ],
+  "retained-only:[('ifdef', 'leave')]": [
+    "src/mvdm-host/softpc.new/host/inc/nt_extra.h"
+  ],
+  "retained-only:[('ifndef', 'WINDOWED')]": [
+    "src/mvdm-host/softpc.new/host/inc/nt_graph.h"
+  ],
+  "retained-only:[('ifndef', 'HUNTER')]": [
+    "src/mvdm-host/softpc.new/host/src/fprt.c"
+  ],
+  "retained-only:[('ifdef', 'BIGWIN')]": [
+    "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+    "src/mvdm-host/softpc.new/host/src/nt_munge.c"
+  ],
+  "retained-only:[('ifdef', 'host_error_ext')]": [
+    "src/mvdm-host/softpc.new/host/src/nt_error.c"
+  ],
+  "retained-only:[('ifdef', 'MONITOR')]": [
+    "src/mvdm-host/softpc.new/host/src/nt_lpt.c"
+  ],
+  "retained-only:[('if', 'defined(DBG)')]": [
+    "src/mvdm-host/softpc.new/host/src/nt_mem.c"
+  ],
+  "retained-only:[('ifdef', 'DELTA')]": [
+    "src/mvdm-host/softpc.new/host/src/nt_rez.c"
+  ],
+  "retained-only:[('ifdef', 'min')]": [
+    "src/mvdm-host/softpc.new/host/src/nt_rflop.c"
+  ],
+  "retained-only:[('if', 'defined(CCPU) || defined(PIG)')]": [
+    "src/mvdm-host/softpc.new/host/src/nt_thred.c"
+  ],
+  "retained-only:[('ifndef', 'WOW32_C')]": [
+    "src/mvdm-host/wow32/isz.h"
+  ],
+  "retained-only:[('ifndef', 'MM_MCISYSTEM_STRING')]": [
+    "src/mvdm-host/wow32/walias.c"
+  ],
+  "retained-only:[('ifdef', 'WOWFASTEDIT')]": [
+    "src/mvdm-host/wow32/wcall16.c"
+  ],
+  "retained-only:[('if', '!defined(i386)')]": [
+    "src/mvdm-host/wow32/wcall32.c"
+  ],
+  "retained-only:[('ifndef', 'PARAMETER_VALIDATION_16_RE_ENABLED')]": [
+    "src/mvdm-host/wow32/wgmeta.c"
+  ],
+  "retained-only:[('ifndef', 'i386')]": [
+    "src/mvdm-host/wow32/wkmem.c",
+    "src/mvdm-host/wow32/wuser.c",
+    "src/mvdm-host/xms.486/xms.c"
+  ],
+  "retained-only:[('ifdef', 'XTALKHACK')]": [
+    "src/mvdm-host/wow32/wmdisp32.c"
+  ],
+  "retained-only:[('ifndef', 'NEWALIAS')]": [
+    "src/mvdm-host/wow32/wmmalias.c"
+  ],
+  "retained-only:[('ifndef', '_X86_')]": [
+    "src/mvdm-host/wow32/wow32.h",
+    "src/mvdm-host/wow32/wuser31.c"
+  ],
+  "retained-only:[('ifndef', 'WIN16_HKEY_CLASSES_ROOT')]": [
+    "src/mvdm-host/wow32/wshell.c"
+  ],
+  "retained-only:[('ifndef', '_DEF_WSTRUC_')]": [
+    "src/mvdm-host/wow32/wstruc.h"
+  ],
+  "retained-only:[('ifndef', 'PMODE32')]": [
+    "src/mvdm-host/wow32/wusercli.c"
+  ],
+  "retained-only:[('ifndef', 'RC_INVOKED')]": [
+    "src/non-mvdm/base/win32/inc/base.h",
+    "src/non-mvdm/public/internal/windows/inc/pif.h"
+  ],
+  "retained-only:[('ifndef', 'WIN32')]": [
+    "src/non-mvdm/ds/netapi/netlib/memalloc.c"
+  ],
+  "retained-only:[('ifdef', 'UNICODE')]": [
+    "src/non-mvdm/ds/netapi/xactsrv/apimsg.c"
+  ],
+  "retained-only:[('ifndef', '_XSUNICOD_')]": [
+    "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h"
+  ],
+  "retained-only:[('if', '_MSC_VER > 1000')]": [
+    "src/non-mvdm/public/ddk/inc/ntddbeep.h",
+    "src/non-mvdm/public/ddk/inc/ntdddisk.h",
+    "src/non-mvdm/public/ddk/inc/ntddkbd.h",
+    "src/non-mvdm/public/ddk/inc/ntddvdeo.h",
+    "src/non-mvdm/public/sdk/inc/ntdbg.h",
+    "src/non-mvdm/public/sdk/inc/ntlpcapi.h"
+  ],
+  "retained-only:[('ifdef', '_WIN32'), ('else', '')]": [
+    "src/non-mvdm/public/ddk/inc/ntddser.h"
+  ],
+  "retained-only:[('ifndef', 'UNICODE'), ('else', '')]": [
+    "src/non-mvdm/public/internal/base/inc/debugfmt.h"
+  ],
+  "retained-only:[('if', '( _MSC_VER >= 800 )')]": [
+    "src/non-mvdm/public/internal/base/inc/packoff.h",
+    "src/non-mvdm/public/internal/base/inc/packon.h"
+  ],
+  "retained-only:[('ifndef', 'NO_PACKING'), ('else', '')]": [
+    "src/non-mvdm/public/internal/base/inc/smbmacro.h"
+  ],
+  "retained-only:[('ifdef', '__cplusplus')]": [
+    "src/non-mvdm/public/internal/base/inc/tstr.h",
+    "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+    "src/non-mvdm/public/internal/ds/inc/netlib.h",
+    "src/non-mvdm/public/internal/ds/inc/netlibnt.h",
+    "src/non-mvdm/public/internal/windows/inc/winconp.h",
+    "src/non-mvdm/public/internal/windows/inc/wingdip.h",
+    "src/non-mvdm/public/sdk/inc/dlcapi.h",
+    "src/non-mvdm/public/sdk/inc/vdmdbg.h"
+  ],
+  "retained-only:[('if', 'defined (_NTDEF_)')]": [
+    "src/non-mvdm/public/internal/base/inc/vdm.h"
+  ],
+  "retained-only:[('ifndef', 'RPC_NO_WINDOWS_H')]": [
+    "src/non-mvdm/public/internal/ds/inc/crypt.h"
+  ],
+  "retained-only:[('ifndef', '_DEBUGLIB_')]": [
+    "src/non-mvdm/public/internal/ds/inc/debuglib.h"
+  ],
+  "retained-only:[('ifndef', 'DESC_CHAR_UNICODE'), ('else', '')]": [
+    "src/non-mvdm/public/internal/ds/inc/rap.h"
+  ],
+  "retained-only:[('ifdef', 'NT_INCLUDED')]": [
+    "src/non-mvdm/public/internal/ds/inc/timelib.h"
+  ],
+  "retained-only:[('if', 'SRVDBG2')]": [
+    "src/non-mvdm/public/internal/ds/inc/xstypes.h"
+  ],
+  "retained-only:[('ifdef', 'UNICODE'), ('else', '')]": [
+    "src/non-mvdm/public/internal/net/inc/tstring.h"
+  ],
+  "retained-only:[('ifdef', '_X86_'), ('else', '')]": [
+    "src/non-mvdm/public/internal/windows/inc/winddi.h"
+  ],
+  "retained-only:[('ifndef', '_WALIAS_')]": [
+    "src/non-mvdm/public/internal/windows/inc/wowuserp.h"
+  ],
+  "retained-only:[('if', '!defined(_CSRSRV_)'), ('else', '')]": [
+    "src/non-mvdm/public/sdk/inc/ntcsrsrv.h"
+  ]
+}
