@@ -2,111 +2,48 @@
 
 ## Current Work
 
-**Active: M0 T476 S1** — integrate the shared-ownership worktree commit range.
+**Active: M0 T474 S1 — Run16 shared implementation ownership**
 
-S13 is closed by owner direction with its unfinished mirror-condition work
-transferred to the [queued complete-file audit](../proposals/proposal-mirror-conditional-file-audit-001.md).
-The [T473 closure](../history/m0-t473-closure.md) and [S13 debt record](../history/m0-t473-s13-closure.md) preserve
-the actual evidence, boundaries and outstanding input-handoff risks. No next
-S is admitted.
+Owner directs independent work on the shared-ownership branch from the main
+worktree's committed baseline. The earlier main-worktree packet continues
+independently and is not this branch's active work. Review Run16 production
+consumers and extract genuinely shared mechanics into common. Retain component
+policy and original source ownership. This branch is intended for later
+cherry-pick; runtime publication and push to main are not authorized by this
+branch workflow.
 
-Prior owner-approved delivery: restore the four MVDM ANSI-profile files changed
-by MVDM-HOST-DIV-479, preserving authored build boundaries; verify actual
-cached product builds and product verification before delivery. The restoration
-is published; [evidence](../../artifacts/mvdm-audit/condition-inventory/ansi-restoration/README.md).
-
-S11 closed its owner-narrowed non-MVDM compilation-condition audit and
-cleanup; see [closure evidence](../etc/evidence/m0-t473-s11-condition-cleanup-closure.md).
-Unfinished original foundation and later recovery work is transferred to the
-first queued recovery proposal. The NTCON input-source handoff was handled in S13;
-its original S12 evidence and scope remain in the handoff document.
-The DOS4GW/NESticle integration case and its unresolved environment-sensitive
-startup issue are recorded in [TODO](TODO.md) and [evidence](../../artifacts/mvdm-audit/dos4gw-nesticle-integration.md).
-
-CPU40 monitor/TLB remain a tested partial baseline; CPU30 removal is published,
-CCPU V86 remains, and physical mouse input is unverified. Unfinished DPMI,
-operand-fault, reentry and NPX/debug work transfers to queued recovery.
-[Results and limits](../../artifacts/mvdm-audit/s11-foundation-evidence/code32-prebuilt-search/review.md).
-
-S10 closed as a source-role audit at its [closure](../etc/evidence/m0-t473-s10-closure.md); this does not assert functional recovery. The revised [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md) preserves the earlier [monitor audit](../../artifacts/mvdm-audit/s11-monitor-minimization.md) as handoff evidence. Preserve unrelated work and immutable guest media.
-
-The published foundation group includes far-transfer ownership and WOW
-entry ABI; the bridge passed controlled loader cycles. S13's [test-failure recheck](../../artifacts/mvdm-audit/s13-test-failure-recheck.md) tracks CPU/NIDDB changes. The current package passed 17 Full gates and was published as a baseline; NIDDB VM semantics and historical T313/T335 tests remain unresolved.
-
-The owner moved further SOL and related WOW multi-window performance work to
-the [queued candidate](../proposals/proposal-wow-multiwindow-performance-recovery-001.md).
-Retain independently justified changes and evidence; do not treat latency as
-a condition-cleanup gate or claim the performance issue fixed.
-
-The installed `O:/winnt` lacks 15 guest-manifest files, including WIN87EM.
-The isolated single-file absence control prevents Calculator startup; adding
-guest files to the installation was rejected by automatic review. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/win87em-install-gap/review.md).
-
-Winmine 5023 has a focused idle-hook candidate. SOL also reproduced a
-`publish-native-return` 1400 fail-fast on the baseline; its failing substage
-remains unknown. See [evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/atomic-task-retire/execution-check/baseline-failfast-trace/review.md)
-and the [performance investigation](../../artifacts/mvdm-audit/s11-dialog-performance/investigation.md).
-
-Restoring the worker-shared idle query passed cross-task, separate-worker,
-common-dialog and Full controls.
-
-Winmine probes previously changed a shared VirtualStore profile without an
-original backup. The owner now explicitly permits restarting Winmine and
-changing its configuration; the authorized Full test ran. See
-[window evidence](../../artifacts/mvdm-audit/s11-dialog-performance/published-winmine-window.md).
-
-Retirement preserves the first cleanup failure; focused probes and the current
-Full gate passed. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/review.md). Intermittent 1400 attribution remains open.
-
-Long-PATH WOW startup reproduces the accepted COMMAND guest EnvSiz overwrite. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/idle-comment-integrated/wow-env-attribution/review.md).
-
-The current [ten-component release](../../artifacts/mvdm-audit/s11-swint-frame-recovery.md)
-also restores DPMI software-interrupt frames and stack limits. Full, game, Win3.1 and
-automated mouse witnesses passed; both destinations match. An earlier
-Window-17 timeout remains unlocated. [Win386 mouse](../../artifacts/mvdm-audit/s11-win386-mouse-freeze-investigation.md): prior guard tested; physical input unverified. The prior
-[closure audit](../../artifacts/mvdm-audit/s11-closure-audit.md) lists its
-remaining boundaries.
-
-Host C/H retention checks pass; runtime completion remains open. [Evidence](../../artifacts/mvdm-audit/s11-live-mirror-delta.md).
-
-The published NTVDM export implementation selects the original CPU40 template and
-records released ordinals. Its PE retains all 269 released name/ordinal pairs
-and adds two memory exports; automated ordinal and selected alias/owner checks
-pass. A real-worker VDD witness and the Full suite passed; broader provider
-behavior remains under review. See [export review](../../artifacts/mvdm-audit/export-source-recovery-review.md).
-
-S13 reintroduced DIV-467/468 and CCPU test-failure candidates. The tested
-r477 package is [published](../../artifacts/mvdm-audit/s13-r483-publication.json);
-NIDDB multi-VM semantics remain [unproved](../../artifacts/mvdm-audit/s13-test-failure-recheck.md).
-Earlier versions remain in [held patches](../../artifacts/mvdm-audit/s11-held-cpu/).
+S1 local verification: Hook-specific classification moved from Run16 to the
+Hook owner; NTCON no longer links the launcher client archive and Hook32 no
+longer links Run16 image classification. Run16-specific client and image
+classification remain local. Fresh Hook32, Hook64, NTCON and Run16 builds
+passed; the x64 Hook install fixture passed 118 assertions, the x86 image
+classification fixture passed 227 checks, the x64 frontend argument fixture
+passed 52 checks, and the isolated Console frontend fixture passed. The
+frontend link ownership gate and its negative controls passed. This is local
+verification only; coherent package publication and main integration are
+pending. The independent branch is intended for later owner-controlled
+cherry-pick, not publication into the active main runtime.
 
 ## Active Packet
 
-### M0 T476 S1 — shared-ownership commit integration
-
 | Field | Record |
 | --- | --- |
-| Identifier Mode | M0 T476 S1, Ordinary Mode. |
-| Admission And Approval | Owner directed admission after T473 closure and requested the entire sibling commit range with history preserved. |
-| Objective | Apply all commits after common ancestor `09b58f5c646cbcbf797748c45f32833a28a48b1d` through sibling head `5ccff9f0d216295ad390b795e4c43c5db7f7b0c1` onto the latest main baseline. |
-| Non-goals | No guest source or image modification or rebuilding; do not silently drop commits. |
-| Reference Baseline | T473 closure `5ed4e560d`; sibling `review/shared-ownership` clean at the head above. |
-| Files And ABI Surface | Shared libraries, component boundaries, build/test infrastructure and source files in the sibling commit range. |
-| Applicable Rules | Source policy, minimal guest diff, preserve unrelated work, owner conflict directions. |
-| Verification | Review every conflict and applied range; verify build and affected checks after integration as appropriate. |
-| Expected Markers | All 51 commits accounted for; commit ordering and provenance retained. |
-| Asset Needs | Existing local repository and shared-ownership worktree. |
-| Reporting Requirements | Report common ancestor, imported commits, resolutions and verification. |
-| Stop Conditions | Guest changes, unrecoverable conflict or an actual incompatible requirement. |
-| Exit Criteria | Complete range integration, review, verification and normal delivery. |
-| Original Owner Request | Integrate the whole post-ancestor range in one operation, keep history; keep current assets on conflicts and choose sibling current documentation on conflicts, resolve source conflicts independently. |
-| Similar-Issue Sweep | Check all conflict categories and preserve the newly queued mirror audit. |
-
-## S13 Closure Record
-
-Owner stopped the condition audit and transferred it to the queued future T.
-The [closure](../history/m0-t473-s13-closure.md) records the published baseline,
-incomplete per-file verification and remaining input-handoff limits. T473 is closed; the next active packet is T476 S1.
+| Identifier Mode | M0 T474 S1, Ordinary Mode. |
+| Admission And Approval | Owner directs this branch to start the shared-ownership task at S1. |
+| Objective | Remove production cross-component dependence on Run16-owned implementation by placing shared mechanics in common. |
+| Non-goals | Change runtime behavior, guest media, other component ownership stages, or main worktree. |
+| Reference Baseline | Branch starts at 32396a9ea. |
+| Files And ABI Surface | Run16 shared source and headers, common, production build graphs, focused tests and documentation. |
+| Applicable Rules | Original source provenance, existing ABI and lifecycle, and owner-directed dependency boundaries. |
+| Verification | Review real consumer graphs; run focused build and tests, documentation governance and relative-link checks; inspect diff. |
+| Expected Markers | Other product components do not select Run16-private implementation; unchanged observable behavior. |
+| Asset Needs | Existing compiler, build tools and focused test fixtures where available. |
+| Reporting Requirements | Actual consumers, moved and retained ownership, validation and limitations. |
+| Stop Conditions | Required semantic change, guest modification, or inability to preserve original source boundaries. |
+| Exit Criteria | Reviewed S1 changes and validation committed locally for later cherry-pick; any unavailable delivery gate reported. |
+| Original Owner Request | Start S1 independently; extract Run16 implementation shared by other components into common. |
+| Similar-Issue Sweep | Frontend clients, classification, headers, all production build selections and supported Hook widths. |
+| Temporary Evidence | build/t474-s1, owner S1, 60-minute phase, 3-GiB and 10-minute no-progress budget; stable caches retained. |
 
 ## S12 Closure Record
 
@@ -245,10 +182,16 @@ T462 and T463 disposable evidence remains under their `build/t462-s1` and
 
 T457's closed-stage evidence is indexed in its [closure](../history/m0-t457-closure.md).
 
-T454 and T451 task build roots are disposable evidence, not shared caches.
-Retain durable evidence and verify ownership and quiescence before cleanup;
-T451 process inventory was denied at closure. See their linked closure records.
-The shared `.ninja` and `.ccache` caches remain reusable.
+T454 may use only declared `build/t454-s1`, `build/t454-s2`, `build/t454-s3`
+and `build/t454-s4` roots for disposable evidence; stable `.ninja` and
+`.ccache` remain reusable caches. Retain durable results before exact-target
+cleanup; never use a task root as a build cache.
+
+`build/M0-T451`, `build/t451-s3`, `build/t451-s4` and `build/t451-s5` remain
+temporary evidence, not reusable caches. Process inventory access was denied
+during closure; deletion requires verified quiescence and the existing
+exact-target ownership checks. Durable results are linked from the closure.
+Stable `.ninja` and `.ccache` caches remain untouched.
 
 T456 S1/S2 disposable evidence uses `build/t456-s1` and `build/t456-s2`.
 

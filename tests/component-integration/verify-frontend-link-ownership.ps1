@@ -130,6 +130,9 @@ function Assert-FrontendOwnership([string[]]$Lines) {
     if(@(Compare-Object @('base_service_reservation_test.c','base_service_fixture.c') $fixtureSources).Count) {
         throw 'Service fixture must select its private hooks and reservation test'
     }
+    if(@(Get-FrontendSources 'nthook32.dll' 'run16-exe').Count) {
+        throw 'Hook32 must not compile or link Run16-private implementation'
+    }
     $client = @('bootstrap_client.c',
         'native_request_client.c') | Sort-Object
     foreach ($target in @('frontend-client.lib', 'run16.exe')) {
@@ -159,8 +162,12 @@ function Assert-FrontendOwnership([string[]]$Lines) {
         if('native_process.c' -in @(Get-FrontendSources $target 'common')) {
             throw "$target must not contain target creation"
         }
-        foreach($required in $client) {
-            if($required -notin $actual){throw "$target omits shared startup client $required"}
+        if($target -eq 'frontend-client.lib') {
+            foreach($required in $client) {
+                if($required -notin $actual){throw "$target omits launcher startup client $required"}
+            }
+        } elseif($actual.Count) {
+            throw "ntcon.exe must not depend on Run16-private implementation: $actual"
         }
     }
     $launcherNative=@(Get-FrontendSources 'run16.exe' 'ntvwm-exe')
@@ -270,6 +277,20 @@ foreach($target in @('run16.exe','ntsrv.exe','ntvdm.exe','ntvwm.exe','ntcon.exe'
     try {Assert-FrontendOwnership $mutated} catch {$rejected=$true}
     if(!$rejected){throw "Service fixture contamination accepted: $target"}
 }
+# Reject a direct Run16 object on the Hook32 product link.
+$hookMutated=@($graph | ForEach-Object {
+    if($_ -match '^build nthook32\.dll:') { $_ -replace ': (\S+) ', ': $1 obj/run16/image_classification.obj ' } else { $_ }
+})
+$hookRejected=$false
+try { Assert-FrontendOwnership $hookMutated } catch { $hookRejected=$true }
+if(!$hookRejected){throw 'Hook32 Run16 dependency accepted'}
+# NTCON must reject a Run16 archive even when the linker would discard it.
+$mutated=@($graph | ForEach-Object {
+    if($_ -match '^build ntcon\.exe:') { $_ -replace ': (\S+) ', ': $1 frontend-client.lib ' } else { $_ }
+})
+$rejected=$false
+try { Assert-FrontendOwnership $mutated } catch { $rejected=$true }
+if(!$rejected){throw 'NTCON Run16 client dependency accepted'}
 # Neutral code must be selected once, not copied into private archives.
 foreach($archive in @('frontend-client.lib','opennt-base-bindings.lib','worker-base.lib')) {
     $mutated=@($graph | ForEach-Object {
