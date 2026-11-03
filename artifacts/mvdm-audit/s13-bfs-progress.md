@@ -4009,3 +4009,11 @@ and two timestamp-only, so prior Full 17/17 is reused. Both destinations are
 verified. Five retained host EXE/DLL/COM files match ZIP contents byte-for-byte.
 Existing census: 1067 C/H, 157 identical reviewed, 444 differing reviewed,
 466 pending; net deleted C/H: 569. Evidence: s13-r630-delivery.md.
+
+- r634 delivers nine unselected C/H deletions and four original line anchors
+in a tenth source. The modified CPU callback fixture, guard test and audit
+tools passed; checked-in guest include bytes are unchanged. Cached builds
+pass; eight images are identical and two timestamp-only, so Full 17/17 is
+reused; both destinations are verified. Census: 1058 existing C/H, 157
+identical reviewed, 444 differing reviewed, 457 pending; net deleted: 578.
+Evidence: s13-r634-delivery.md and s13-r634-counts.json.

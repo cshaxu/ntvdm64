@@ -1,0 +1,22 @@
+{
+  "scope": "Two product-unselected headers; no guest source or binary is modified.",
+  "guest_include_sha256": "960090c863f96cb6e3613e825bc015ad54d6d2af4fd2070ab3e8b535c02a70c0",
+  "audit_tool": "Export-T310CcpuAccessTableLedger uses the existing pinned upstream baseline and returned 62 rows.",
+  "limits": "Original guest header-generation recipe is no longer offered. CCPU callback fixture, batch build and publication passed; see s13-r634-delivery.md.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu.h",
+      "before_sha256": "3af278f743d5f35eaacd38e53434049344a32e9b2caf77f1783c4e3837f513a7",
+      "original_sha256": "c368cceafa5739f4592ecc1e62e4f6d02b788b0772dbd0a8f7e09c8c7c1cecbe",
+      "reason": "Only targeted test and historical ABI audit read this CCPU header; product uses CpuH=cpu4.h. Fixture now uses CpuH and audit reads pinned original."
+    },
+    {
+      "path": "src/mvdm-host/inc/enumapis.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\enumapis.h",
+      "before_sha256": "e943d01a90b6d33acaaf54e6cb8830d1eaf2ef404dd8734691c4a061f0b4cdf6",
+      "original_sha256": "864c27f32fc218fdbc29cd137111253686af65f6dbf77de365fef95eee8f33db",
+      "reason": "Only old host makefile generates enumapis.inc; the checked-in guest enumapis.inc remains unchanged and guest is not rebuilt."
+    }
+  ]
+}

@@ -148,7 +148,7 @@ if (sourceHash !== 'cbf9ee8a199d48ee74171b2e23d55bb1e5d019710fdea2a917762739d6a4
   fail('Historical nt_cprgs.c does not match the pinned OpenNT source.');
 }
 const generatedPath = path.join(root, 'src/mvdm-host/softpc.new/base/ccpu386/cpu4gen.h');
-const publicPath = path.join(root, 'src/mvdm-host/softpc.new/base/inc/cpu.h');
+const publicPath = 'O:/repos.external/OpenNT/base/mvdm/softpc.new/base/inc/cpu.h';
 const sourceLines = readLines(sourcePath);
 const slots = declarations(sourceLines, selectedCcpuLines(sourceLines));
 const selectedBody = findFunctionBody(sourceLines, 'load_sw_cpu_access_functions');

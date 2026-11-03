@@ -5521,13 +5521,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\floppy.h",
-      "current_sha256": "9c494f90625e16e67ae44966764682737b5e7b7d538993322a007f25f7e47ad3",
+      "current_sha256": "579d9db47476bbf0bbfb6e1f5b340e229b59340cf1edf94ae9032921cfa28171",
       "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r633-floppy-ansi-lines.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/ga_defs.h",

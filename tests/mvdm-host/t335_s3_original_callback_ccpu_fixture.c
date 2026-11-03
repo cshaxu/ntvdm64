@@ -18,7 +18,7 @@
 #include "host_def.h"
 #include "xt.h"
 #include "sas.h"
-#include "cpu.h"
+#include CpuH
 #include "c_main.h"
 #include "ntvdm-exe/session/session.h"
 #include "ntvdm-exe/softpc/include/mvdm_softpc_guest_memory.h"

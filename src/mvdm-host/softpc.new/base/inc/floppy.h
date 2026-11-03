@@ -475,6 +475,7 @@ extern void diskette_io(void);
 extern void diskette_int(void);
 extern void diskette_post(void);
 #else
+#line 479
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 483
@@ -498,6 +499,7 @@ extern void fl_format_set(int);
 extern void fl_set_media(int);
 extern void fl_diskette_setup(void);
 #else
+#line 503
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 517
@@ -512,6 +514,7 @@ extern void drive_detect(int);
 extern void translate_old(int);
 extern void GetFormatParams(int *, int *, int *, int *);
 #else
+#line 528
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 532
@@ -527,6 +530,7 @@ extern void host_attach_floppies (void);
 extern void host_detach_floppies (void);
 extern void host_flip_real_floppy_ind (void);
 #else
+#line 544
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 550

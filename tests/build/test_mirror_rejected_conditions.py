@@ -164,14 +164,6 @@ for defines, expected, forbidden in (
         raise SystemExit('ntsend text-width selection failed: ' + result.stderr)
 print('PASS original ntsend ANSI and Unicode capture selections')
 
-cpu_header = (repo / 'src/mvdm-host/softpc.new/base/inc/cpu.h').as_posix()
-probe.write_text(f'#include "{cpu_header}"\n', encoding='ascii')
-fixture = subprocess.run(base[:-1] + ['/DNTVDM', '/DCCPU', '/DCPU_40_STYLE'] + base[-1:],
-                         capture_output=True, text=True, errors='replace')
-if fixture.returncode:
-    raise SystemExit('CCPU fixture header inclusion failed: ' + fixture.stderr)
-print('PASS CCPU fixture includes cpu.h without selecting the excluded monitor profile')
-
 userk_header = (repo / 'src/non-mvdm/windows/core/ntuser/kernel/userk.h').as_posix()
 probe.write_text(f'#include "{userk_header}"\n', encoding='ascii')
 for defines, present in (([], True), (['/DMSDWP'], False)):

@@ -1,0 +1,68 @@
+{
+  "scope": "Seven unselected mirror C/H files and four obsolete standalone-tool build inputs.",
+  "evidence": "Current product Ninja sources/dependencies, selected include path, generator references and source/test/build searches. Real original C-VID accessor stays at base/cpu/src/evid/vglob.c; modern zwapi carrier stays under src/compat/include.",
+  "tool_change": "Historical C-VID comparison now explicitly hashes the upstream CCPU file instead of an unselected project copy.",
+  "limits": "Removed standalone source recipes no longer build. No independently useful executable, asset, or guest file removed. Build and publication: s13-r634-delivery.md.",
+  "records": [
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/zwapi.h",
+      "sha256": "e4f489205af1b57d43b14ae11c9a0a8e267d1a9c0193b9dd9c89b6f2595ba550",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\zwapi.h",
+      "original_sha256": "f5ebc9bd22d2f12393e47f1c201f214f0239f541ce55975d4ad2a256b050daba"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/vglob.c",
+      "sha256": "3aed97d21cd1e0f7eaf6f94a54b7a2724b500e2b74d771f475f127cbbca1fa66",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\vglob.c",
+      "original_sha256": "e695a9807285703119cffb0c3bc8a3aa6433ede43efa499f21a6e736f94395d8"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/vglob.c",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\vglob.c",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sascdef.c",
+      "sha256": "8a3e63e7692047212164d55ef8222634b1ca57267514a1d9a327e115ff367f41",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sascdef.c",
+      "original_sha256": "84ee9572f45ad66ad2a23a9dca01407e6e0d4fc25fdd2474a1bde8a53cbe8474"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/convert/convert.c",
+      "sha256": "54e93b75367bfcbe1be6141f9cb1fdcb2e82b9caa69e9c6af76a5fdda9408399",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\convert\\convert.c",
+      "original_sha256": "ecb6460000a0b4c7a498a963ac4eeb8dd6b77ccab6bc631940e9e7536a4fd0bc"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/debugger/vdmdebug.c",
+      "sha256": "3f79d2a593cd99cea17575842a525d1fd00d857ec4104f2cac5844b5a67f58b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\debugger\\vdmdebug.c",
+      "original_sha256": "38a25fa9784c466c56ee7024b33dfb7e3a419e6e415aedbb92af32f61fa24c77"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/rename/rename.c",
+      "sha256": "ce3da99ea302a58f1d57a6857293a9a751fdee31bdf4e5e5b46954963b8743b4",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\rename\\rename.c",
+      "original_sha256": "7064e2516d6a43ba9a35badc45d09e16524b22f70362110f9a3526be028501e7"
+    }
+  ],
+  "removed_build_metadata": [
+    {
+      "path": "src/mvdm-host/softpc.new/convert/sources",
+      "sha256": "72e8c20ab177e43b35e301554e7be615c1fb090a317ab61198760c48bb986f90"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/debugger/sources",
+      "sha256": "800fb60d66ebb138fdd0dcacfaae63e0b9fe2897b9c318531970722019898d96"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/debugger/makefile",
+      "sha256": "0098e99b810e8b08eb2d763fb6687e8d99dd408ab8f7bb534b483aa0ce138e70"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/rename/sources",
+      "sha256": "6d664b4178943dc5e45833239da253f5b00b2ca5ac254099ec2d5254383e3b83"
+    }
+  ]
+}

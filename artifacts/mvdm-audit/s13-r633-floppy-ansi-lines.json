@@ -1,0 +1,15 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\floppy.h",
+  "before_sha256": "9c494f90625e16e67ae44966764682737b5e7b7d538993322a007f25f7e47ad3",
+  "after_sha256": "579d9db47476bbf0bbfb6e1f5b340e229b59340cf1edf94ae9032921cfa28171",
+  "original_sha256": "500e1a6e48950dc2c184a70c39b9606723133c6ab06affac898da89e24fbaca8",
+  "original_error_lines": [
+    479,
+    503,
+    528,
+    544
+  ],
+  "scope": "Four previously excluded non-ANSI arms receive original diagnostic lines; selected bodies remain unchanged.",
+  "limits": "Other condition groups remain pending audit; batch build and publication are recorded in s13-r634-delivery.md."
+}

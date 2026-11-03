@@ -44,7 +44,7 @@ const overlays=[];
 const diagnosticRestore=['c_xfer.c','call.c','intx.c','iret.c','jmp.c','ret.c','sti.c'];
 const report={baseline:git(['rev-parse','HEAD']).trim(),upstream,census,pairs,overlays,
  diagnosticRestore:census.ccpu386.rows.filter(x=>diagnosticRestore.includes(x.file)),
- originalAccessor:{source,lines:text.trimEnd().split('\n').length,sha256:hash(source),upstreamSha256:hash(`${upstream}/base/cpu/src/evid/vglob.c`),ccpuSha256:hash(`${mirror}/base/ccpu386/vglob.c`)}};
+ originalAccessor:{source,lines:text.trimEnd().split('\n').length,sha256:hash(source),upstreamSha256:hash(`${upstream}/base/cpu/src/evid/vglob.c`),upstreamCcpuSha256:hash(`${upstream}/base/ccpu386/vglob.c`)}};
 fs.writeFileSync(path.join(out,'audit.json'),JSON.stringify(report,null,2));
 const regs=Array.from({length:32},(_,i)=>'r'+i);
 let fixture=`#include "insignia.h"\n#include "host_def.h"\n#include "Evid_c.h"\n#include "gdpvar.h"\n#include <stdio.h>\n#include <string.h>\n#include <stddef.h>\nIHP Gdp;\nIUH ${regs.join(',')};\nstatic unsigned char arena[65536],expected[65536];\n#define CHECK(x) do{if(!(x)){printf("FAIL %d\\n",__LINE__);return 1;}}while(0)\n`;

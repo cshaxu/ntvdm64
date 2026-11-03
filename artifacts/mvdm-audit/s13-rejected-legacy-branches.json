@@ -2226,7 +2226,9 @@
     "removed_body_sha256": "c20c468cb0c8618b8dfaaeef03053f9ce42f7bea898c84786e71fcd20cc18b33",
     "removed_body_lines": 13,
     "after_sha256": "6239ec85c99e59273023bda8a90058f8d4b4cf641ad61e8d66cfae3c0adfc79e",
-    "final_sha256": "727e2c5075849d6658f1f7405c50826d6b1a83e970a2ae07151312a49e4854dd"
+    "final_sha256": "727e2c5075849d6658f1f7405c50826d6b1a83e970a2ae07151312a49e4854dd",
+    "disposition": "withdrawn-uncompiled-file",
+    "disposition_evidence": "artifacts/mvdm-audit/s13-r629-unbuilt-tool-sources.json"
   },
   {
     "path": "src/mvdm-host/vdmutils/pifedit/pifsubs.c",
@@ -2239,7 +2241,9 @@
     "removed_body_sha256": "0806596a4a70315c8533d966da16701c503255635268f98b3a1d1aab7cfc9c9b",
     "removed_body_lines": 6,
     "after_sha256": "7d6dc84d453b6e163e2c5ac8e97147267d34347dc049cc85ff4f82418603fadc",
-    "final_sha256": "7e350e858223574afadef263666527e4686bf39f03398121301dbf088f0f34ae"
+    "final_sha256": "7e350e858223574afadef263666527e4686bf39f03398121301dbf088f0f34ae",
+    "disposition": "withdrawn-uncompiled-file",
+    "disposition_evidence": "artifacts/mvdm-audit/s13-r629-unbuilt-tool-sources.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
@@ -2337,7 +2341,9 @@
     "final_sha256": "8dd599127dcd260ef7eafe9b330c368ec425d22a26609ce1eb19825011f7c07b",
     "selection_scope": "CpuH maps to cpu4.h; sole direct fixture defines NTVDM/CCPU/CPU40 but not MONITOR",
     "current_line": 20,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r358-depth1-anchor-batch.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r358-depth1-anchor-batch.json",
+    "disposition": "withdrawn-uncompiled-file",
+    "disposition_evidence": "artifacts/mvdm-audit/s13-r632-unselected-headers.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",

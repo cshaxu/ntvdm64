@@ -1,12 +1,12 @@
 {
   "scope": "All currently present .c and .h files under src/mvdm-host and src/non-mvdm, regardless of compilation or provenance.",
-  "filesystem_total": 1067,
+  "filesystem_total": 1058,
   "by_root": {
-    "mvdm-host": 884,
-    "non-mvdm": 183
+    "mvdm-host": 876,
+    "non-mvdm": 182
   },
   "observed_graph_inventory": 1057,
-  "not_in_observed_graph_inventory": 10,
+  "not_in_observed_graph_inventory": 1,
   "independently_confirmed_generator_inputs": 1,
   "untracked": 0,
   "limits": "Candidate original path is provisional until provenance is established. The 1057 graph inventory is an observation and may be incomplete or stale. Neither non-observation nor pathname alone proves a file is unused. Deleted files are separate.",
@@ -670,16 +670,6 @@
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\dpmi.h",
       "original_candidate_sha256": "3425f64b805b8bab8086523288c8afe86eee8f183208aa863b49bb8fb962a154"
-    },
-    {
-      "path": "src/mvdm-host/inc/enumapis.h",
-      "sha256": "e943d01a90b6d33acaaf54e6cb8830d1eaf2ef404dd8734691c4a061f0b4cdf6",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\enumapis.h",
-      "original_candidate_sha256": "864c27f32fc218fdbc29cd137111253686af65f6dbf77de365fef95eee8f33db"
     },
     {
       "path": "src/mvdm-host/inc/exterr.h",
@@ -3792,16 +3782,6 @@
       "original_candidate_sha256": "2d3c94afa13eab4093d4fc971b177c178b238378b23dd74eec6a1fd2f2eeda37"
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/ccpu386/vglob.c",
-      "sha256": "3aed97d21cd1e0f7eaf6f94a54b7a2724b500e2b74d771f475f127cbbca1fa66",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\vglob.c",
-      "original_candidate_sha256": "e695a9807285703119cffb0c3bc8a3aa6433ede43efa499f21a6e736f94395d8"
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/wait.c",
       "sha256": "26dcda8641eff26a1d23f14e204caaafc17bb06ee9e04e8ac0acf676d8586991",
       "tracked": true,
@@ -4160,16 +4140,6 @@
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\pigger_c.h",
       "original_candidate_sha256": "61c86d668bddaf998101a0da469115325ad822f751d4b964dcaad35ea4e7de9f"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/base/cvidc/sascdef.c",
-      "sha256": "8a3e63e7692047212164d55ef8222634b1ca57267514a1d9a327e115ff367f41",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\sascdef.c",
-      "original_candidate_sha256": "84ee9572f45ad66ad2a23a9dca01407e6e0d4fc25fdd2474a1bde8a53cbe8474"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
@@ -4532,16 +4502,6 @@
       "original_candidate_sha256": "22385f8a0f196c79b2f27b89ee33f7ae9d955304385d226522e2c06fa8726805"
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/cvidc/vglob.c",
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\vglob.c",
-      "original_candidate_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
       "sha256": "642b66e245dce864a26b712ac6a7296a6a9d732a1d4466c26bfe225c4ed1254f",
       "tracked": true,
@@ -4832,16 +4792,6 @@
       "original_candidate_sha256": "6c12b5c1bd7102c46d3e5b86795dcce8610e7b9adaead907ba031e9f9bf40034"
     },
     {
-      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
-      "sha256": "3af278f743d5f35eaacd38e53434049344a32e9b2caf77f1783c4e3837f513a7",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cpu.h",
-      "original_candidate_sha256": "c368cceafa5739f4592ecc1e62e4f6d02b788b0772dbd0a8f7e09c8c7c1cecbe"
-    },
-    {
       "path": "src/mvdm-host/softpc.new/base/inc/cpu4.h",
       "sha256": "cbf57be356f8c69dbe92bf77767177efa547965b2d878590876e7baf55f20227",
       "tracked": true,
@@ -5013,7 +4963,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/floppy.h",
-      "sha256": "9c494f90625e16e67ae44966764682737b5e7b7d538993322a007f25f7e47ad3",
+      "sha256": "579d9db47476bbf0bbfb6e1f5b340e229b59340cf1edf94ae9032921cfa28171",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -5952,26 +5902,6 @@
       "original_candidate_sha256": "92680ac402633dd5dd52bbccfff55f41a65a1485dc2736666a9da45b7ea6bf86"
     },
     {
-      "path": "src/mvdm-host/softpc.new/convert/convert.c",
-      "sha256": "54e93b75367bfcbe1be6141f9cb1fdcb2e82b9caa69e9c6af76a5fdda9408399",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\convert\\convert.c",
-      "original_candidate_sha256": "ecb6460000a0b4c7a498a963ac4eeb8dd6b77ccab6bc631940e9e7536a4fd0bc"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/debugger/vdmdebug.c",
-      "sha256": "3f79d2a593cd99cea17575842a525d1fd00d857ec4104f2cac5844b5a67f58b4",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\debugger\\vdmdebug.c",
-      "original_candidate_sha256": "38a25fa9784c466c56ee7024b33dfb7e3a419e6e415aedbb92af32f61fa24c77"
-    },
-    {
       "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
       "sha256": "8f85f7e53939a0e75e97f190d7277deaa7cbb5f7caeb122a26c80cc3de00aad0",
       "tracked": true,
@@ -6820,16 +6750,6 @@
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\obj.vdm\\ntvdm.c",
       "original_candidate_sha256": "693a169cf1e91435c326ee05a17c928e85af10982c2c3bb95a5631ae76415a0a"
-    },
-    {
-      "path": "src/mvdm-host/softpc.new/rename/rename.c",
-      "sha256": "ce3da99ea302a58f1d57a6857293a9a751fdee31bdf4e5e5b46954963b8743b4",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\rename\\rename.c",
-      "original_candidate_sha256": "7064e2516d6a43ba9a35badc45d09e16524b22f70362110f9a3526be028501e7"
     },
     {
       "path": "src/mvdm-host/suballoc/suballcp.h",
@@ -9520,16 +9440,6 @@
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\winss.h",
       "original_candidate_sha256": "3e6308c51d093958c8698e47612ba65f59278bae3f05276dffb02d9232f08d48"
-    },
-    {
-      "path": "src/non-mvdm/public/internal/base/inc/zwapi.h",
-      "sha256": "e4f489205af1b57d43b14ae11c9a0a8e267d1a9c0193b9dd9c89b6f2595ba550",
-      "tracked": true,
-      "observed_in_existing_graph_inventory": false,
-      "review_status": "unobserved-needs-build-and-provenance-audit",
-      "additional_evidence": null,
-      "original_candidate": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\zwapi.h",
-      "original_candidate_sha256": "f5ebc9bd22d2f12393e47f1c201f214f0239f541ce55975d4ad2a256b050daba"
     },
     {
       "path": "src/non-mvdm/public/internal/ds/inc/apinums.h",

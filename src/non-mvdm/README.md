@@ -1286,8 +1286,8 @@ Length/count and wire fields remain32. The standalone provider still ignores
 capture rebasing metadata; no original CSR transport is restored. Tests and
 exact mirror accounting belong to the S5 native launcher evidence.
 
-OPENNT-HOST-067 corrects only the existing standalone zwapi.h declaration
-carrier under base/ntos/rtl: modern local NT VM API lengths and region pointers
+OPENNT-HOST-067 corrects only the standalone `src/compat/include/zwapi.h`
+declaration carrier: modern local NT VM API lengths and region pointers
 use SIZE_T/PSIZE_T, and ZeroBits uses ULONG_PTR. The original environ.c body
 is unchanged. x86 declarations retain their original widths. Native mutable
 environment/clone/error tests exercise the selected original implementations.
@@ -2408,3 +2408,7 @@ found no consumer. Current and original hashes and scope are recorded in
 OPENNT-HOST-236: remove public/internal/base/inc/atom.h after current source,
 tool, test and observed product-graph searches found no include or build use.
 Identity and scope: ../../artifacts/mvdm-audit/s13-r625-unobserved-deletions.json.
+
+OPENNT-HOST-237: remove the unselected original `public/internal/base/inc/zwapi.h`;
+the actual environment provider includes the retained `src/compat/include/zwapi.h`.
+Identity and context: ../../artifacts/mvdm-audit/s13-r631-unselected-legacy-sources.json.
