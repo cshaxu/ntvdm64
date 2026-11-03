@@ -8,9 +8,8 @@ Owner directs independent work on the shared-ownership branch from the main
 worktree's committed baseline. The earlier main-worktree packet continues
 independently and is not this branch's active work. Review Run16 production
 consumers and extract genuinely shared mechanics into common. Retain component
-policy and original source ownership. This branch is intended for later
-cherry-pick; runtime publication and push to main are not authorized by this
-branch workflow.
+policy and original source ownership. The owner directs local publication to this worktree's assets/release and
+local commits for later cherry-pick; no push or main-worktree publication.
 
 S1 local verification: Hook-specific classification moved from Run16 to the
 Hook owner; NTCON no longer links the launcher client archive and Hook32 no
@@ -19,10 +18,12 @@ classification remain local. Fresh Hook32, Hook64, NTCON and Run16 builds
 passed; the x64 Hook install fixture passed 118 assertions, the x86 image
 classification fixture passed 227 checks, the x64 frontend argument fixture
 passed 52 checks, and the isolated Console frontend fixture passed. The
-frontend link ownership gate and its negative controls passed. This is local
-verification only; coherent package publication and main integration are
-pending. The independent branch is intended for later owner-controlled
-cherry-pick, not publication into the active main runtime.
+frontend link ownership gate and its negative controls passed. The ten-image
+package was locally published to assets/release with package identity
+4249ef52-c3d3-4954-bfe9-c375ef046e1f; all ten published hashes match its
+manifest. NTCON and both Hooks are newly built; the seven unaffected images
+were reused from the hash-verified branch baseline. Full product integration
+and publication to the main runtime remain pending.
 
 ## Active Packet
 
@@ -40,7 +41,7 @@ cherry-pick, not publication into the active main runtime.
 | Asset Needs | Existing compiler, build tools and focused test fixtures where available. |
 | Reporting Requirements | Actual consumers, moved and retained ownership, validation and limitations. |
 | Stop Conditions | Required semantic change, guest modification, or inability to preserve original source boundaries. |
-| Exit Criteria | Reviewed S1 changes and validation committed locally for later cherry-pick; any unavailable delivery gate reported. |
+| Exit Criteria | Local assets/release publication and verification committed for later cherry-pick; no push. Full integration and main runtime publication remain pending. |
 | Original Owner Request | Start S1 independently; extract Run16 implementation shared by other components into common. |
 | Similar-Issue Sweep | Frontend clients, classification, headers, all production build selections and supported Hook widths. |
 | Temporary Evidence | build/t474-s1, owner S1, 60-minute phase, 3-GiB and 10-minute no-progress budget; stable caches retained. |
