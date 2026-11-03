@@ -1,0 +1,35 @@
+{
+  "scope": "Two selected CCPU shifts: original conditional structures and selected bodies compared byte-for-text; previously rejected alternatives retain error and gain original line anchors.",
+  "selection": "Both macros are unconditionally defined by their included c_main.h in the selected worker; no local undefinition. Product graph is previously observed for both translation units.",
+  "limits": "Build and binary comparison are recorded in s13-r637-delivery.md; this does not prove all supported profiles.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shld.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\shld.c",
+      "before_sha256": "ad861a8501a210f788e622971ad7db7d6f2b3ef9e6f58b5275769f1b1e53ea2b",
+      "after_sha256": "90ba81b32ef32db13b347cead10479129f32fee68d42c68eed65574ae9977730",
+      "original_sha256": "0454f3a15e286a17a61cd6d4ad8cc0ec42267e2cb50624b366b136962e3f855e",
+      "conditional_directives": [
+        "#ifdef SET_UNDEFINED_SHxD_FLAG",
+        "#else /* SET_UNDEFINED_SHxD_FLAG */",
+        "#endif /* SET_UNDEFINED_SHxD_FLAG */",
+        "#ifdef SET_UNDEFINED_FLAG",
+        "#endif"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/shrd.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\shrd.c",
+      "before_sha256": "9beb489dc7ccc7ff49a15a12d3b4394b32b94c0201127ba2c106ae64973071e0",
+      "after_sha256": "cbdd6cf16eedcd56132f4a8b353dc0a93143786e5cc0f3ee55ef2b4278f3fdcd",
+      "original_sha256": "2d3351d8d4920d4691fd4035d6db11b97ab5ea3d15d10b0cac1403e68f9212cd",
+      "conditional_directives": [
+        "#ifdef SET_UNDEFINED_SHxD_FLAG",
+        "#else /* SET_UNDEFINED_SHxD_FLAG */",
+        "#endif /* SET_UNDEFINED_SHxD_FLAG */",
+        "#ifdef SET_UNDEFINED_FLAG",
+        "#endif"
+      ]
+    }
+  ]
+}

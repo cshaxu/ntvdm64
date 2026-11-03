@@ -40,13 +40,10 @@
 
 
 #ifdef SEGMENTATION
+#line 43
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 50
 
 
 IMPORT	byte	crtc_0_7_protect;

@@ -4017,3 +4017,11 @@ pass; eight images are identical and two timestamp-only, so Full 17/17 is
 reused; both destinations are verified. Census: 1058 existing C/H, 157
 identical reviewed, 444 differing reviewed, 457 pending; net deleted: 578.
 Evidence: s13-r634-delivery.md and s13-r634-counts.json.
+
+- r637 delivers ten original diagnostic-line reconciliations. Cached builds,
+181 retained guard controls and 16 isolated line controls passed; eight images
+are identical and two timestamp-only. Both destinations were published and
+prior Full 17/17 reused. Census: 1058 existing C/H, 157 identical reviewed,
+446 differing reviewed, 455 pending; net deleted: 578. The eight basic-guard
+files retain pending condition groups. Evidence: s13-r637-delivery.md and
+s13-r637-counts.json.

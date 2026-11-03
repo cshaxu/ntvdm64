@@ -31,17 +31,16 @@ AMMENDMENTS	:
 */
 
 #ifdef SCCSID
+#line 34
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
+#line 36
 
 #ifdef SEGMENTATION
+#line 38
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 45
 
 #include "xt.h"
 #include "ios.h"

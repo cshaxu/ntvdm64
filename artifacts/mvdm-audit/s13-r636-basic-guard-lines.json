@@ -1,0 +1,163 @@
+{
+  "scope": "Eight selected product files: original SCCSID and SEGMENTATION excluded arms receive original error and following-line mappings.",
+  "selection": "These are previously rejected profiles; no new configuration exclusion is introduced.",
+  "limits": "Other groups in each file remain pending review; cached build and image comparison are recorded in s13-r637-delivery.md.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\mem_size.c",
+      "before_sha256": "d498fee0e5045ad07813556a3afa5e920e8568307c3de4525c7540b1592f364e",
+      "after_sha256": "58c3c6151854ed5cc1a49e448a21db7959bdfab349b4497e06965a1ffb58e267",
+      "original_sha256": "2e8937e8fc10fbc69425692fb8b127b20e786fae37fd453049b62dd0472c9e8f",
+      "guards": [
+        {
+          "macro": "SCCSID",
+          "original_guard_line": 16,
+          "original_body_line": 17,
+          "original_following_line": 19
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 20,
+          "original_body_line": 21,
+          "original_following_line": 28
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\slave_bs.c",
+      "before_sha256": "86e6b73c7d98d74ec4b679eb54ec98c583aeb92823972993a8fa28199c6ed209",
+      "after_sha256": "e737a62549a1c7c3a990b4de840b791506c8fdf4a245179efe9cb6304f5ef520",
+      "original_sha256": "22079cb4c1e033f1d33246da6f60f8d5e1bba5c925ee3e9e5ea3c3fd756c7368",
+      "guards": [
+        {
+          "macro": "SCCSID",
+          "original_guard_line": 33,
+          "original_body_line": 34,
+          "original_following_line": 36
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 37,
+          "original_body_line": 38,
+          "original_following_line": 45
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/rs232_io.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\rs232_io.c",
+      "before_sha256": "462eb63c8ac9c8736080f51a4e1a5e9e30d6a53dcd7e070da146e6f609e9ae6a",
+      "after_sha256": "1d7beeaed8e1e0d8d73b5de48accdc56eee3db576d6722ecbd6abb5ead8b47e8",
+      "original_sha256": "534f7058f657be386f25950d5e1750a4f5017f67e4890201983fbbb3d74f379f",
+      "guards": [
+        {
+          "macro": "SCCSID",
+          "original_guard_line": 14,
+          "original_body_line": 15,
+          "original_following_line": 17
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 18,
+          "original_body_line": 19,
+          "original_following_line": 26
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "before_sha256": "14a972888b2ed902d6165d7ea009ee761c0b95f59e5725884cec6bc5836a7284",
+      "after_sha256": "aead505267969ca043c2126c7784ada0e4a9753f39c2b4869a6fd8c54d5b9a36",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "guards": [
+        {
+          "macro": "SCCSID",
+          "original_guard_line": 23,
+          "original_body_line": 24,
+          "original_following_line": 26
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 27,
+          "original_body_line": 28,
+          "original_following_line": 35
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/dummy_nt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\dummy_nt.c",
+      "before_sha256": "ee773fb807240be4573520fe85b51c83de3843e2661f6c186b75cf918339f4d1",
+      "after_sha256": "0b3bed6358f116366f2a0f25b76f2a53b3d7fe6053142c0f4f52b10300512a1e",
+      "original_sha256": "ce1b03e11f45eb795dfbfdde1e3ac4ebc2022d77dfa5f4dd30453ba6eebdb233",
+      "guards": [
+        {
+          "macro": "SCCSID",
+          "original_guard_line": 16,
+          "original_body_line": 17,
+          "original_following_line": 19
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 20,
+          "original_body_line": 21,
+          "original_following_line": 28
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/unexp_nt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\unexp_nt.c",
+      "before_sha256": "1b3d0b8d0816842c0c5a87c956da415e19403fa8399bd28c2149b5a868ceac93",
+      "after_sha256": "e5ad6ab2ba6b642c9e1648f2533c0ca06d9fbdbae07db0f299dd4087dd956ecd",
+      "original_sha256": "a96ba5effe9b1cec5d78545f9656486a8e7b692e829c1c06634653bb8c905f0e",
+      "guards": [
+        {
+          "macro": "SCCSID",
+          "original_guard_line": 17,
+          "original_body_line": 18,
+          "original_following_line": 20
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 21,
+          "original_body_line": 22,
+          "original_following_line": 29
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\v7_ports.c",
+      "before_sha256": "21fbadd9685c2a82425d30731ad01f78205a8f57c18b40460cfacc990a323e26",
+      "after_sha256": "5c3750d196e9342048bb1d1bdac4dd4bcaa5e6e883eb66ef0f75999bedf89636",
+      "original_sha256": "d02575bd0594f9ccc3a23ad7ed0eb208ec7c1414eeffd558dd1ce6b648f1991b",
+      "guards": [
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 42,
+          "original_body_line": 43,
+          "original_following_line": 50
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video_io.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\video_io.c",
+      "before_sha256": "8cc434196ece9db3d25981b8b2b5aa5d2d2ad3ac244998257a5e675cb5ee6dd4",
+      "after_sha256": "aec73147e8fb5112ff538409ae1d319c4b58294eea436fcd365f0c5a444ba913",
+      "original_sha256": "92680ac402633dd5dd52bbccfff55f41a65a1485dc2736666a9da45b7ea6bf86",
+      "guards": [
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 19,
+          "original_body_line": 20,
+          "original_following_line": 27
+        }
+      ]
+    }
+  ]
+}

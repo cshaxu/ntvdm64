@@ -2672,3 +2672,11 @@ product CCPU uses CpuH, and the checked-in guest include remains unchanged.
 Restore four original diagnostic line anchors in floppy.h. Evidence:
 ../../artifacts/mvdm-audit/s13-r632-unselected-headers.json and
 ../../artifacts/mvdm-audit/s13-r633-floppy-ansi-lines.json.
+
+MVDM-HOST-DIV-732: retain the selected original CCPU shift branches and restore
+original diagnostic line anchors for their previously excluded alternatives.
+Evidence: ../../artifacts/mvdm-audit/s13-r635-ccpu-shift-review.json.
+
+MVDM-HOST-DIV-733: restore original diagnostic and continuation lines for
+previously excluded SCCSID and SEGMENTATION arms in eight selected sources.
+Evidence: ../../artifacts/mvdm-audit/s13-r636-basic-guard-lines.json.
