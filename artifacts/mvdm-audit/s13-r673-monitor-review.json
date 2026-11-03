@@ -1,0 +1,30 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/cpucstbs.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\cpucstbs.c",
+  "current_sha256": "9c5da3266f1f8729ed3dd80bfc74e748e28b23852372390385f399540abd45a7",
+  "original_sha256": "0e114c6368a616dc87cdf4311aff19d50283e38a51b3f0e3301cbc45487ddaeb",
+  "observed_in": [
+    "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+    "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+  ],
+  "conditions": {
+    "retained": 1,
+    "excluded": 1,
+    "groups": 1,
+    "observed_nonmonitor": 1
+  },
+  "outer": "#ifndef MONITOR",
+  "nested": "#ifdef A3CPU, error-only",
+  "method": "Actual x86 and x64-reference Ninja compiler commands applied to temporary source copy with a marker inserted immediately within the original outer guard; marker appeared in both preprocessed outputs. Current and original condition trees and anchors compared.",
+  "preprocess": [
+    {
+      "graph": "msvc-x86-release",
+      "instrumented_preprocessed_sha256": "ccfc6e3f64241dad2faf7decf313fd8b21f91e0a4e4b15208e2a7474c8ac2ad6"
+    },
+    {
+      "graph": "msvc-x64-release",
+      "instrumented_preprocessed_sha256": "ccfc6e3f64241dad2faf7decf313fd8b21f91e0a4e4b15208e2a7474c8ac2ad6"
+    }
+  ],
+  "limits": "Instrumented copy is a selected-path witness, not a product source modification; other files and complete supported-context enumeration remain open."
+}

@@ -1,0 +1,33 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_munge.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_munge.c",
+  "sha256": "3d4d9557f0c055db81d54e320150898f93addc5808c9562e4f7ebd94f9c51061",
+  "observed_in": [
+    "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+    "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+  ],
+  "conditions": [
+    "#ifdef BIGWIN",
+    "#endif"
+  ],
+  "method": "Byte-identical original with one conditional group; actual x86 and x64-reference Ninja compile commands preprocessed and both BIGWIN function definitions observed.",
+  "preprocess": [
+    {
+      "graph": "msvc-x86-release",
+      "preprocessed_sha256": "4a3821c5609ef18f71acb1b58ddbf2ceff911a7e6977d86f0427465f2d1019d4",
+      "witnesses": [
+        "ega_colour_hi_munge_big definition",
+        "ega_colour_hi_munge_huge definition"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "preprocessed_sha256": "4a3821c5609ef18f71acb1b58ddbf2ceff911a7e6977d86f0427465f2d1019d4",
+      "witnesses": [
+        "ega_colour_hi_munge_big definition",
+        "ega_colour_hi_munge_huge definition"
+      ]
+    }
+  ],
+  "limits": "Actual observed graphs only; global supported-context enumeration remains open."
+}

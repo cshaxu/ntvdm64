@@ -6306,8 +6306,8 @@
       "sha256": "9c5da3266f1f8729ed3dd80bfc74e748e28b23852372390385f399540abd45a7",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-selected-nonmonitor-tree",
+      "additional_evidence": "s13-r673-monitor-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\cpucstbs.c",
       "original_candidate_sha256": "0e114c6368a616dc87cdf4311aff19d50283e38a51b3f0e3301cbc45487ddaeb"
     },
@@ -6536,8 +6536,8 @@
       "sha256": "3d4d9557f0c055db81d54e320150898f93addc5808c9562e4f7ebd94f9c51061",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-identical-original-selected-bigwin",
+      "additional_evidence": "s13-r673-bigwin-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_munge.c",
       "original_candidate_sha256": "3d4d9557f0c055db81d54e320150898f93addc5808c9562e4f7ebd94f9c51061"
     },
