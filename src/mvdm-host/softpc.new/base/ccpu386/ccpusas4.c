@@ -251,17 +251,14 @@ GLOBAL IBOOL c_SasRegisterVirtualSelectors IFN2(IU16, sel1, IU16, sel2)
  *	Actually a macro that is nothing if CHECK_ACCESS isn't defined.
 )*/
 
+#line 246
 #ifndef CHECK_ACCESS
 #define checkAccess(addr)
 #else
-GLOBAL PHY_ADDR lowCheckAccess = 0;
-GLOBAL PHY_ADDR highCheckAccess = 0;
-#define checkAccess(addr) \
-	if ((addr < highCheckAccess) && (addr >= lowCheckAccess)) { \
-		always_trace1("Write access break point - addres 0x%.8x", \
-				 addr); \
-	}
+#line 249
+#error CCPU access-breakpoint profile is not supported
 #endif /* !CHECK_ACCESS else */
+#line 257
 
 #ifndef PROD
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.

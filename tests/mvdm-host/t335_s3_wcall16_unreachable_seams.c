@@ -1,13 +1,14 @@
 /*
- * Link seams for unrelated exports that share wcall16.c with CallBack16.
+ * Link seams for the bounded CallBack16 transaction in wcall16.c.
  *
  * The fixture calls only CallBack16.  LocalLock16/GetExePtr16 are not
  * reachable from that transaction but the historical translation unit keeps
- * them adjacent.  These seams deliberately fail fast if that assumption is
- * ever violated; they are not product providers.
+ * them adjacent.  The pointer seam below serves only the fixture's explicit
+ * real-mode memory domain and is not a product selector provider.
  */
 #include "precomp.h"
 #include "wow32.h"
+#include <stdlib.h>
 
 BOOL fWowMode = FALSE;
 HMODCACHE ghModCache[CHMODCACHE] = { 0 };
@@ -28,10 +29,13 @@ GetPModeVDMPointerAssert(DWORD Address
 #endif
                          )
 {
-    UNREFERENCED_PARAMETER(Address);
+    extern unsigned char *Start_of_M_area;
 #ifdef DEBUG
     UNREFERENCED_PARAMETER(Count);
 #endif
-    DebugBreak();
-    return NULL;
+    /* This bounded fixture deliberately uses selector zero and a real-mode
+     * 64 KiB stack.  It does not exercise the product's protected selector
+     * translation; reject any address outside that explicit test boundary. */
+    if (Address > 0xffffu || Start_of_M_area == NULL) abort();
+    return Start_of_M_area + Address;
 }

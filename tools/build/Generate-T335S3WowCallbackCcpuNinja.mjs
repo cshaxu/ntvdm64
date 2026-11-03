@@ -28,6 +28,11 @@ const environment = ninjaPath(join(base, 'msvc-x86.cmd'));
 const source = path => ninjaPath(join(root, path));
 const local = path => ninjaPath(join(out, path));
 const baseFile = path => ninjaPath(join(base, path));
+// The removed test-only nt_aorc.c forwarded these names directly to CCPU.
+// Alias the exact register entries instead of linking a non-product mirror.
+const registerAliases = ['getCS', 'getIP', 'getSS', 'getSP', 'getAX', 'getBX',
+  'getBP', 'getSI', 'getDI', 'setSP', 'setIP', 'setSS']
+  .map(name => `/alternatename:_${name}=_c_${name}`).join(' ');
 
 const lines = [
   'ninja_required_version = 1.10',
@@ -41,15 +46,16 @@ const lines = [
   'rule lib',
   `  command = cmd.exe /d /s /c call ${environment} lib.exe /nologo /out:$out $in`,
   'rule link',
-  `  command = cmd.exe /d /s /c call ${environment} link.exe /nologo /out:$out $in kernel32.lib user32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib`,
+  `  command = cmd.exe /d /s /c call ${environment} link.exe /nologo ${registerAliases} /out:$out $in kernel32.lib user32.lib advapi32.lib ntdll.lib legacy_stdio_definitions.lib`,
   '',
   `build ${local('fixture.obj')}: cc ${source('tests/mvdm-host/t335_s3_original_callback_ccpu_fixture.c')}`,
   `build ${local('seams.obj')}: cc ${source('tests/mvdm-host/t335_s3_wcall16_unreachable_seams.c')}`,
+  `build ${local('boundary.obj')}: cc ${source('tests/mvdm-host/t335_s3_callback_test_boundary.c')}`,
+  `build ${local('ccpu-wait.obj')}: cc ${source('src/ntvdm-exe/softpc/mvdm_softpc_ccpu_wait.c')}`,
   `build ${local('lease.obj')}: cc ${source('src/wow32-dll/source/wow_callback_frame_lease.c')}`,
-  `build ${local('nt-aorc.obj')}: cc ${source('src/mvdm-host/softpc.new/host/src/nt_aorc.c')}`,
   `build ${local('wcall16.obj')}: cc ${source('src/mvdm-host/wow32/wcall16.c')}`,
   `build ${local('original-wcall16.lib')}: lib ${local('wcall16.obj')}`,
-  `build ${local('original-callback-ccpu-x86.exe')}: link ${local('fixture.obj')} ${local('seams.obj')} ${local('lease.obj')} ${local('nt-aorc.obj')} ${local('original-wcall16.lib')} ${baseFile('obj/test/ccpu_bounded_execution_fixture_seams.obj')} ${baseFile('obj/controller/at_dma.obj')} ${baseFile('obj/controller/ica.obj')} ${baseFile('obj/support/ios.obj')} ${baseFile('obj/patch/fmstubs_vector_defaults.obj')} ${baseFile('original-ccpu40.lib')} ${baseFile('original-host-lifecycle.lib')} ${baseFile('lifecycle-adapter.lib')}`,
+  `build ${local('original-callback-ccpu-x86.exe')}: link ${local('fixture.obj')} ${local('seams.obj')} ${local('boundary.obj')} ${local('ccpu-wait.obj')} ${local('lease.obj')} ${local('original-wcall16.lib')} ${baseFile('obj/test/ccpu_bounded_execution_fixture_seams.obj')} ${baseFile('obj/controller/at_dma.obj')} ${baseFile('obj/controller/ica.obj')} ${baseFile('obj/support/ios.obj')} ${baseFile('obj/patch/fmstubs_vector_defaults.obj')} ${baseFile('original-ccpu40.lib')} ${baseFile('original-host-lifecycle.lib')} ${baseFile('lifecycle-adapter.lib')}`,
   `build original-callback-ccpu: phony ${local('original-callback-ccpu-x86.exe')}`,
   'default original-callback-ccpu',
   ''

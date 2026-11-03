@@ -1,0 +1,10 @@
+{
+  "file": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
+  "before": "96f6bf3ef751fa866f5cf7d89cf953602a8a0bb4ff00f3a5ce335e2fb7f39ca7",
+  "after": "6cc4032705392183a1c5d38756b09dd70a3088fef421140f9ae3d26a7afe9867",
+  "original_if_line": 46,
+  "original_else_line": 65,
+  "original_next_line": 84,
+  "context": "Six x86 and six x64-reference observed consumer commands define UNICODE; no #undef UNICODE found in xactsrv/compat sources. The selected original Unicode body is unchanged.",
+  "status": "build pending; unobserved contexts remain to be checked"
+}

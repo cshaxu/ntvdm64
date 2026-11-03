@@ -1,0 +1,2300 @@
+{
+  "scope": "Text-only first pass across current src, tools and tests for 53 queue files absent from observed build/deps inventory. Basenames can be ambiguous; absence is not proof of non-selection. Guest, historical, generated, dynamic and indirect paths require separate review.",
+  "rg_exit": 0,
+  "rows": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdpif.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/historical/pre-t260/import/Sync-OpenNtCommandMirror.ps1",
+          "line": 15,
+          "category": "historical",
+          "text": "    'cmdpif.c', 'cmdpif.h', 'cmdredir.c'"
+        }
+      ],
+      "total_textual_refs": 1
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmimisc.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 1629,
+          "category": "historical",
+          "text": "    base/mvdm/dpmi32/i386/dpmimisc.c)"
+        },
+        {
+          "path": "tools/governance/Audit-T276S20Dpmi32Disposition.ps1",
+          "line": 3,
+          "category": "other",
+          "text": "$x86=@('dpmi32/debug.c','dpmi32/dpmi32.c','dpmi32/dpmiint.c','dpmi32/dpmiselr.c','dpmi32/buffer.c','dpmi32/data.c','dpmi32/int21map.c','dpmi32/modesw.c','dpmi32/register.c','dpmi32/savestat.c','dpmi32"
+        },
+        {
+          "path": "tools/governance/Set-T276S25Dpmi32FinalDisposition.ps1",
+          "line": 15,
+          "category": "other",
+          "text": "    'dpmi32/i386/dpmimem.c', 'dpmi32/i386/dpmimisc.c', 'dpmi32/int21map.c',"
+        },
+        {
+          "path": "tools/governance/Test-T289S7DpmiMirrorAudit.ps1",
+          "line": 20,
+          "category": "other",
+          "text": "    'i386\\dpmi386.c', 'i386\\dpmimem.c', 'i386\\dpmimisc.c', 'int21map.c',"
+        },
+        {
+          "path": "tools/governance/Verify-T276S25Dpmi32FinalDisposition.ps1",
+          "line": 13,
+          "category": "other",
+          "text": "    'dpmi32/i386/dpmimem.c', 'dpmi32/i386/dpmimisc.c', 'dpmi32/int21map.c',"
+        },
+        {
+          "path": "src/mvdm-host/dpmi32/sources",
+          "line": 56,
+          "category": "other",
+          "text": "i386_SOURCES=i386\\dpmi386.c i386\\dpmimisc.c"
+        }
+      ],
+      "total_textual_refs": 6
+    },
+    {
+      "path": "src/mvdm-host/inc/enumapis.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "src/mvdm-guest/dos/v86/redir/enumapis.inc",
+          "line": 5,
+          "category": "other",
+          "text": ";***    enumapis.h"
+        },
+        {
+          "path": "src/mvdm-host/inc/makefile",
+          "line": 113,
+          "category": "other",
+          "text": "enumapis.inc: enumapis.h"
+        }
+      ],
+      "total_textual_refs": 2
+    },
+    {
+      "path": "src/mvdm-host/inc/wowddeml.h",
+      "name_collision": false,
+      "refs": [],
+      "total_textual_refs": 0
+    },
+    {
+      "path": "src/mvdm-host/oemuni/toemuni.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/governance/Audit-T276S11W0W1Disposition.ps1",
+          "line": 34,
+          "category": "other",
+          "text": "    if ($Path -eq 'oemuni/toemuni.c') {"
+        },
+        {
+          "path": "tools/governance/Audit-T276S11W0W1Disposition.ps1",
+          "line": 88,
+          "category": "other",
+          "text": "    @{ path='oemuni/toemuni.c'; family='original console test program'; symbols='CreateDirectoryOem;CreateFileOem;DeleteFileOem;GetCurrentDirectory;GetEnvironmentVariableOem;GetSystemDirectory;GetTemp"
+        },
+        {
+          "path": "tools/governance/Set-T276S25W0W1FinalDisposition.ps1",
+          "line": 52,
+          "category": "other",
+          "text": "        'oemuni/toemuni.c' {"
+        },
+        {
+          "path": "tools/governance/Set-T276S25W0W1FinalDisposition.ps1",
+          "line": 58,
+          "category": "other",
+          "text": "            $row.final_evidence = 'T276 S11: oemuni/sources identifies toemuni.c as UMTEST, not an oemuni library member'"
+        },
+        {
+          "path": "tools/build/Generate-T420S17OemUniNinja.mjs",
+          "line": 63,
+          "category": "active-build-tool",
+          "text": "  \"build obj/toemuni.obj: cc $root/src/mvdm-host/oemuni/toemuni.c\","
+        }
+      ],
+      "total_textual_refs": 5
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/evidfunc.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+          "line": 17,
+          "category": "test",
+          "text": "#include \"evidfunc.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+          "line": 30,
+          "category": "other",
+          "text": "#include \"evidfunc.h\"\t/* generated by build process */"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/evidfunc.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include \"evidfunc.h\""
+        }
+      ],
+      "total_textual_refs": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/vglob.c",
+      "name_collision": true,
+      "refs": [
+        {
+          "path": "CMakeLists.txt",
+          "line": 69,
+          "category": "other",
+          "text": "  \"${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c\""
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 17,
+          "category": "historical",
+          "text": "# that source closure intact: localfm.c and vglob.c were not in the archived"
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 25,
+          "category": "historical",
+          "text": "    \"${CMAKE_CURRENT_SOURCE_DIR}/base/mvdm/softpc.new/base/ccpu386/vglob.c\""
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 57,
+          "category": "historical",
+          "text": "    \"${CMAKE_CURRENT_SOURCE_DIR}/base/mvdm/softpc.new/base/cvidc/vglob.c\")"
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 1435,
+          "category": "historical",
+          "text": "# sascdef.c; vglob.c accesses VIDC state through CCPU's Gdp workspace layout."
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 1438,
+          "category": "historical",
+          "text": "    base/mvdm/softpc.new/base/ccpu386/vglob.c)"
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 1440,
+          "category": "historical",
+          "text": "# Keep vglob.c separately selectable so that this live caller can be tested"
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 1444,
+          "category": "historical",
+          "text": "    base/mvdm/softpc.new/base/ccpu386/vglob.c)"
+        },
+        {
+          "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 984,
+          "category": "active-build-tool",
+          "text": "$cvidcAccessorSource = Join-Path $root 'src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c'"
+        },
+        {
+          "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 2179,
+          "category": "active-build-tool",
+          "text": "        path = 'src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c'"
+        },
+        {
+          "path": "tools/audit/AuditCvidAccessorProfile.mjs",
+          "line": 32,
+          "category": "other",
+          "text": "const source=`${mirror}/base/cpu/src/evid/vglob.c`,text=read(source);"
+        },
+        {
+          "path": "tools/audit/AuditCvidAccessorProfile.mjs",
+          "line": 47,
+          "category": "other",
+          "text": " originalAccessor:{source,lines:text.trimEnd().split('\\n').length,sha256:hash(source),upstreamSha256:hash(`${upstream}/base/cpu/src/evid/vglob.c`),ccpuSha256:hash(`${mirror}/base/ccpu386/vglob.c`)}};"
+        },
+        {
+          "path": "tools/build/GenerateCvidcCpuBinding.mjs",
+          "line": 41,
+          "category": "active-build-tool",
+          "text": "const accessorSource = fs.readFileSync(path.join(sourceRoot, 'cpu', 'src', 'evid', 'vglob.c'), 'utf8');"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c",
+          "line": 4,
+          "category": "other",
+          "text": "\tName:\t\tVglob.c"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c",
+          "line": 8,
+          "category": "other",
+          "text": "\tSccs ID:\t@(#)Vglob.c\t1.1 10/24/94"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+          "line": 95,
+          "category": "other",
+          "text": " * direct vglob.c accessors. Keep the full C-VID latch/table layout, but do"
+        }
+      ],
+      "total_textual_refs": 16
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/ev_stubs.c",
+      "name_collision": true,
+      "refs": [
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 55,
+          "category": "historical",
+          "text": "    \"${CMAKE_CURRENT_SOURCE_DIR}/base/mvdm/softpc.new/base/cvidc/ev_stubs.c\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/ev_stubs.c",
+          "line": 4,
+          "category": "other",
+          "text": " *  Name:\tev_stubs.c"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/ev_stubs.c",
+          "line": 5,
+          "category": "other",
+          "text": " *  SCCS ID:\t@(#)ev_stubs.c\t1.1 07/22/94"
+        }
+      ],
+      "total_textual_refs": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/c2cpusad.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "CMakeLists.txt",
+          "line": 63,
+          "category": "other",
+          "text": "  \"${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cvidc/c2cpusad.h\""
+        },
+        {
+          "path": "tools/audit/Verify-T411CvidcVectorContract.mjs",
+          "line": 14,
+          "category": "other",
+          "text": "  if (!match) throw new Error(`c2cpusad.h: missing ${name}`);"
+        },
+        {
+          "path": "tools/audit/Verify-T411CvidcVectorContract.mjs",
+          "line": 21,
+          "category": "other",
+          "text": "  'src/mvdm-host/softpc.new/base/cvidc/c2cpusad.h', /CpuVectorNames/);"
+        },
+        {
+          "path": "tools/build/GenerateCvidcCpuBinding.mjs",
+          "line": 7,
+          "category": "active-build-tool",
+          "text": "const metadata = fs.readFileSync(path.join(sourceRoot, 'cvidc', 'c2cpusad.h'), 'utf8');"
+        },
+        {
+          "path": "tools/build/GenerateCvidcCpuBinding.mjs",
+          "line": 56,
+          "category": "active-build-tool",
+          "text": "  '/* Generated from original cvidc/c2cpusad.h. Do not edit. */\\n',"
+        }
+      ],
+      "total_textual_refs": 5
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_stubs.c",
+      "name_collision": true,
+      "refs": [
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 55,
+          "category": "historical",
+          "text": "    \"${CMAKE_CURRENT_SOURCE_DIR}/base/mvdm/softpc.new/base/cvidc/ev_stubs.c\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/ev_stubs.c",
+          "line": 4,
+          "category": "other",
+          "text": " *  Name:\tev_stubs.c"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/ev_stubs.c",
+          "line": 5,
+          "category": "other",
+          "text": " *  SCCS ID:\t@(#)ev_stubs.c\t1.1 07/22/94"
+        }
+      ],
+      "total_textual_refs": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/sascdef.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 56,
+          "category": "historical",
+          "text": "    \"${CMAKE_CURRENT_SOURCE_DIR}/base/mvdm/softpc.new/base/cvidc/sascdef.c\""
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 1435,
+          "category": "historical",
+          "text": "# sascdef.c; vglob.c accesses VIDC state through CCPU's Gdp workspace layout."
+        },
+        {
+          "path": "tools/audit/AuditCvidAccessorProfile.mjs",
+          "line": 74,
+          "category": "other",
+          "text": "const shortConsumers=['base/keymouse/mouse_io.c','base/debug/trace.c','base/ccpu386/sascdef.c',...['nt_ega','nt_vga','nt_graph','nt_mouse','nt_fulsc','nt_det'].map(n=>'host/src/'+n+'.c')];"
+        },
+        {
+          "path": "tests/legacy/opennt/archived/legacy-adapters/ccpu_vidc_global_storage.c",
+          "line": 8,
+          "category": "test",
+          "text": " * in sascdef.c. That archive already owns Sas, so it is deliberately omitted"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/sascdef.c",
+          "line": 2,
+          "category": "other",
+          "text": " * Generated File: sasCdef.c"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/sources",
+          "line": 176,
+          "category": "other",
+          "text": "    sasCdef.c \\"
+        }
+      ],
+      "total_textual_refs": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/vglob.c",
+      "name_collision": true,
+      "refs": [
+        {
+          "path": "CMakeLists.txt",
+          "line": 69,
+          "category": "other",
+          "text": "  \"${CMAKE_SOURCE_DIR}/src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c\""
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 17,
+          "category": "historical",
+          "text": "# that source closure intact: localfm.c and vglob.c were not in the archived"
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 25,
+          "category": "historical",
+          "text": "    \"${CMAKE_CURRENT_SOURCE_DIR}/base/mvdm/softpc.new/base/ccpu386/vglob.c\""
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 57,
+          "category": "historical",
+          "text": "    \"${CMAKE_CURRENT_SOURCE_DIR}/base/mvdm/softpc.new/base/cvidc/vglob.c\")"
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 1435,
+          "category": "historical",
+          "text": "# sascdef.c; vglob.c accesses VIDC state through CCPU's Gdp workspace layout."
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 1438,
+          "category": "historical",
+          "text": "    base/mvdm/softpc.new/base/ccpu386/vglob.c)"
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 1440,
+          "category": "historical",
+          "text": "# Keep vglob.c separately selectable so that this live caller can be tested"
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 1444,
+          "category": "historical",
+          "text": "    base/mvdm/softpc.new/base/ccpu386/vglob.c)"
+        },
+        {
+          "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 984,
+          "category": "active-build-tool",
+          "text": "$cvidcAccessorSource = Join-Path $root 'src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c'"
+        },
+        {
+          "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 2179,
+          "category": "active-build-tool",
+          "text": "        path = 'src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c'"
+        },
+        {
+          "path": "tools/audit/AuditCvidAccessorProfile.mjs",
+          "line": 32,
+          "category": "other",
+          "text": "const source=`${mirror}/base/cpu/src/evid/vglob.c`,text=read(source);"
+        },
+        {
+          "path": "tools/audit/AuditCvidAccessorProfile.mjs",
+          "line": 47,
+          "category": "other",
+          "text": " originalAccessor:{source,lines:text.trimEnd().split('\\n').length,sha256:hash(source),upstreamSha256:hash(`${upstream}/base/cpu/src/evid/vglob.c`),ccpuSha256:hash(`${mirror}/base/ccpu386/vglob.c`)}};"
+        },
+        {
+          "path": "tools/build/GenerateCvidcCpuBinding.mjs",
+          "line": 41,
+          "category": "active-build-tool",
+          "text": "const accessorSource = fs.readFileSync(path.join(sourceRoot, 'cpu', 'src', 'evid', 'vglob.c'), 'utf8');"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c",
+          "line": 4,
+          "category": "other",
+          "text": "\tName:\t\tVglob.c"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c",
+          "line": 8,
+          "category": "other",
+          "text": "\tSccs ID:\t@(#)Vglob.c\t1.1 10/24/94"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/evidgen.h",
+          "line": 95,
+          "category": "other",
+          "text": " * direct vglob.c accessors. Keep the full C-VID latch/table layout, but do"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/vglob.c",
+          "line": 4,
+          "category": "other",
+          "text": "\tName:\t\tVglob.c"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/vglob.c",
+          "line": 8,
+          "category": "other",
+          "text": "\tSccs ID:\t@(#)Vglob.c\t1.1 10/24/94"
+        }
+      ],
+      "total_textual_refs": 18
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cpu.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tests/component-integration/softpc_text_video_test.c",
+          "line": 10,
+          "category": "test",
+          "text": "#include <egacpu.h>"
+        },
+        {
+          "path": "tests/build/test_mirror_rejected_conditions.py",
+          "line": 167,
+          "category": "test",
+          "text": "cpu_header = (repo / 'src/mvdm-host/softpc.new/base/inc/cpu.h').as_posix()"
+        },
+        {
+          "path": "tests/build/test_mirror_rejected_conditions.py",
+          "line": 173,
+          "category": "test",
+          "text": "print('PASS CCPU fixture includes cpu.h without selecting the excluded monitor profile')"
+        },
+        {
+          "path": "tests/build/test_bfs_depth1_cpu_guards.py",
+          "line": 663,
+          "category": "test",
+          "text": "host_cpu = (repo / 'src/mvdm-host/softpc.new/host/inc/host_cpu.h').read_text(encoding='latin1')"
+        },
+        {
+          "path": "tests/build/host_cpu_endian_fixture.c",
+          "line": 4,
+          "category": "test",
+          "text": "#include \"../../src/mvdm-host/softpc.new/host/inc/host_cpu.h\""
+        },
+        {
+          "path": "tests/mvdm-host/video7_packed_painter_test.c",
+          "line": 11,
+          "category": "test",
+          "text": "#include <egacpu.h>"
+        },
+        {
+          "path": "tests/mvdm-host/t335_s3_original_callback_ccpu_fixture.c",
+          "line": 20,
+          "category": "test",
+          "text": "#include \"cpu.h\""
+        },
+        {
+          "path": "tests/mvdm-host/planar_painter_object_fixture.c",
+          "line": 11,
+          "category": "test",
+          "text": "#include <egacpu.h>"
+        },
+        {
+          "path": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+          "line": 8,
+          "category": "test",
+          "text": "#include \"egacpu.h\""
+        },
+        {
+          "path": "tools/governance/Set-T277S4DosFamilyDisposition.ps1",
+          "line": 27,
+          "category": "other",
+          "text": "        'host_simulate' { return 'softpc.new/host/inc/host_cpu.h publishes original host_simulate; S3 records its Bochs-only executor disposition' }"
+        },
+        {
+          "path": "tools/governance/Set-T277S3MachineFamilyDisposition.ps1",
+          "line": 26,
+          "category": "other",
+          "text": "        'host_simulate' { return 'softpc.new/host/inc/host_cpu.h exposes a host_simulate function pointer; no CCPU loop may be linked' }"
+        },
+        {
+          "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 753,
+          "category": "active-build-tool",
+          "text": "# `base/inc/egacpu.h` deliberately includes one of two original generated"
+        },
+        {
+          "path": "tools/audit/Verify-T411CvidcVectorContract.mjs",
+          "line": 48,
+          "category": "other",
+          "text": "requireText(root, 'src/mvdm-host/softpc.new/base/inc/egacpu.h',"
+        },
+        {
+          "path": "tools/audit/Export-T310WholeTreeCompilerWarningLedger.mjs",
+          "line": 41,
+          "category": "other",
+          "text": "    ['softpc.new/host/inc/host_cpu.h', 'SPC-CCPU-ACCESS-TABLE'],"
+        },
+        {
+          "path": "tools/audit/Export-T310WholeTreeAbiInventory.mjs",
+          "line": 62,
+          "category": "other",
+          "text": "    ['softpc.new/host/inc/host_cpu.h', 'SPC-CCPU-ACCESS-TABLE'],"
+        },
+        {
+          "path": "tools/audit/Export-T310CcpuAccessTableLedger.mjs",
+          "line": 151,
+          "category": "other",
+          "text": "const publicPath = path.join(root, 'src/mvdm-host/softpc.new/base/inc/cpu.h');"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+          "line": 29,
+          "category": "other",
+          "text": "#include \"egacpu.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+          "line": 10,
+          "category": "other",
+          "text": "#include \"egacpu.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+          "line": 44,
+          "category": "other",
+          "text": "#include \"egacpu.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+          "line": 40,
+          "category": "other",
+          "text": "#include \"egacpu.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
+          "line": 34,
+          "category": "other",
+          "text": "#include \"egacpu.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+          "line": 39,
+          "category": "other",
+          "text": "#include \"egacpu.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+          "line": 11,
+          "category": "other",
+          "text": " * Notes        : This file is included by cpu.h and should NOT"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/inc/host_cpu.h",
+          "line": 15,
+          "category": "other",
+          "text": "/* SccsID[]=\"@(#)host_cpu.h     1.22 4/15/91 Copyright Insignia Solutions Ltd.\"; */"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "line": 80,
+          "category": "other",
+          "text": "#include \"egacpu.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+          "line": 56,
+          "category": "other",
+          "text": "#include \"egacpu.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+          "line": 354,
+          "category": "other",
+          "text": "#include\t\"egacpu.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+          "line": 108,
+          "category": "other",
+          "text": "#include\t\"egacpu.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+          "line": 41,
+          "category": "other",
+          "text": "#include \"egacpu.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
+          "line": 35,
+          "category": "other",
+          "text": "#include \"egacpu.h\""
+        }
+      ],
+      "total_textual_refs": 56
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/d_inst.h",
+      "name_collision": false,
+      "refs": [],
+      "total_textual_refs": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/d_oper.h",
+      "name_collision": false,
+      "refs": [],
+      "total_textual_refs": 0
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dpmi.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/governance/Export-OpenNtBopInventory.ps1",
+          "line": 120,
+          "category": "other",
+          "text": "    dpmi = Join-Path $openNt 'base\\mvdm\\inc\\dpmi.h'"
+        },
+        {
+          "path": "src/ntvdm-exe/softpc/mvdm_softpc_fast_bop.c",
+          "line": 7,
+          "category": "other",
+          "text": "#include \"mvdm-host/inc/dpmi.h\""
+        },
+        {
+          "path": "src/mvdm-host/inc/makefile",
+          "line": 107,
+          "category": "other",
+          "text": "dpmi.inc: dpmi.h bop.inc"
+        },
+        {
+          "path": "src/mvdm-host/inc/dpmi.h",
+          "line": 7,
+          "category": "other",
+          "text": "    dpmi.h"
+        },
+        {
+          "path": "src/mvdm-host/dpmi32/precomp.h",
+          "line": 21,
+          "category": "other",
+          "text": "#include <dpmi.h>"
+        },
+        {
+          "path": "src/mvdm-guest/dpmi/makefile",
+          "line": 217,
+          "category": "other",
+          "text": "..\\inc\\dpmi.inc : ..\\inc\\dpmi.h"
+        }
+      ],
+      "total_textual_refs": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hwvga.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/inc/gispsvga.h",
+          "line": 15,
+          "category": "other",
+          "text": " *\tdefined in HostHwVgaH.  Those prototypes that do are in hwvga.h."
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/inc/gispsvga.h",
+          "line": 18,
+          "category": "other",
+          "text": " *\tare actually stil in hwvga.h, but should move here eventually!"
+        }
+      ],
+      "total_textual_refs": 2
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/j_c_lang.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tests/mvdm-host/cvidc_vector_binding_fixture.c",
+          "line": 14,
+          "category": "test",
+          "text": "#include \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid006.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid019.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid005.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid018.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid004.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid017.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sinit013.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sinit012.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sinit011.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid003.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid016.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid030.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid002.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid015.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid029.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid001.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid014.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid028.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid000.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid027.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid013.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid026.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+          "line": 2,
+          "category": "other",
+          "text": " *      Name:           j_c_lang.h"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/j_c_lang.h",
+          "line": 8,
+          "category": "other",
+          "text": " *      SccsID:         @(#)j_c_lang.h\t1.2 06/17/94"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid012.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid025.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid011.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid024.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/cvidc/sevid010.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include  \"j_c_lang.h\""
+        }
+      ],
+      "total_textual_refs": 39
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/winhelp.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tests/build/test_mirror_rejected_conditions.py",
+          "line": 318,
+          "category": "test",
+          "text": "    ('src/mvdm-host/softpc.new/base/inc/winhelp.h', 'HOST_HELP', 1, 'MVDM-HOST-DIV-605'),"
+        }
+      ],
+      "total_textual_refs": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/convert/convert.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 283,
+          "category": "active-build-tool",
+          "text": "$openntXactSrvNames = @('apiwksta.c', 'apiuse.c', 'apimsg.c', 'apisvc.c', 'xssubs.c', 'strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.c', 'xsunicod.c', 'auxdata.c', 'parmnum.c')"
+        },
+        {
+          "path": "tools/build/New-T310OriginalSoftpcNinja.ps1",
+          "line": 284,
+          "category": "active-build-tool",
+          "text": "$openntRapNames = @('strucsiz.c', 'examine.c', 'ascii.c', 'pointer.c', 'convert.c', 'auxdata.c', 'parmnum.c')"
+        },
+        {
+          "path": "src/non-mvdm/ds/netapi/rap/convert.c",
+          "line": 7,
+          "category": "other",
+          "text": "    Convert.c"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/convert/sources",
+          "line": 44,
+          "category": "other",
+          "text": "SOURCES=convert.c"
+        }
+      ],
+      "total_textual_refs": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/debugger/vdmdebug.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/governance/Set-T276S25SoftpcToolSourceFinalDisposition.ps1",
+          "line": 11,
+          "category": "other",
+          "text": "    ($_.source_path -like 'softpc.new/base/dasm386/*' -or $_.source_path -like 'softpc.new/base/debug/*' -or $_.source_path -eq 'softpc.new/debugger/vdmdebug.c')"
+        },
+        {
+          "path": "tools/governance/Verify-T276S25SoftpcToolSourceFinalDisposition.ps1",
+          "line": 7,
+          "category": "other",
+          "text": "    $_.file_kind -eq 'source' -and ($_.source_path -like 'softpc.new/base/dasm386/*' -or $_.source_path -like 'softpc.new/base/debug/*' -or $_.source_path -eq 'softpc.new/debugger/vdmdebug.c')"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/debugger/sources",
+          "line": 46,
+          "category": "other",
+          "text": "SOURCES=vdmdebug.c"
+        }
+      ],
+      "total_textual_refs": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+          "line": 37,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+          "line": 44,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+          "line": 47,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+          "line": 72,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/video.c",
+          "line": 76,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/vga_vide.c",
+          "line": 55,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+          "line": 117,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+          "line": 148,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+          "line": 85,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+          "line": 66,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/system/ica.old",
+          "line": 159,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+          "line": 160,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
+          "line": 72,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/support/main.c",
+          "line": 41,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+          "line": 4,
+          "category": "other",
+          "text": " * Title\t: host.h"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/inc/host.h",
+          "line": 14,
+          "category": "other",
+          "text": "/* SccsID[]=\"@(#)host.h\t1.6 09/14/93 Copyright Insignia Solutions Ltd.\"; */"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+          "line": 45,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+          "line": 45,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+          "line": 20,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+          "line": 37,
+          "category": "other",
+          "text": "#include \"host.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "line": 65,
+          "category": "other",
+          "text": "#include <host.h>"
+        }
+      ],
+      "total_textual_refs": 21
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/monregs.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
+          "line": 27,
+          "category": "other",
+          "text": "#include \"monregs.h\""
+        }
+      ],
+      "total_textual_refs": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_smenu.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_smenu.c",
+          "line": 9,
+          "category": "other",
+          "text": "#include \"nt_smenu.h\""
+        }
+      ],
+      "total_textual_refs": 1
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/xmsexp.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "src/mvdm-host/xms.486/xmsdisp.c",
+          "line": 12,
+          "category": "other",
+          "text": "#include <xmsexp.h>"
+        },
+        {
+          "path": "src/mvdm-host/xms.486/xms.h",
+          "line": 81,
+          "category": "other",
+          "text": "#include <xmsexp.h>"
+        },
+        {
+          "path": "src/mvdm-host/inc/xmsexp.h",
+          "line": 7,
+          "category": "other",
+          "text": " *  XMSEXP.H"
+        },
+        {
+          "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+          "line": 34,
+          "category": "other",
+          "text": "#include <xmsexp.h>"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+          "line": 79,
+          "category": "other",
+          "text": "#include \"xmsexp.h\""
+        }
+      ],
+      "total_textual_refs": 5
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/link/nt_uis.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tests/component-integration/softpc_text_video_test.c",
+          "line": 14,
+          "category": "test",
+          "text": "#include <nt_uis.h>"
+        },
+        {
+          "path": "tests/mvdm-host/nls_object_contract_fixture.c",
+          "line": 8,
+          "category": "test",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "tools/governance/Set-T276S25SoftpcDeclarationFinalDisposition.ps1",
+          "line": 12,
+          "category": "other",
+          "text": "    $_.source_path -in @('softpc.new/host/link/nt_uis.h', 'softpc.new/host/src/makefile.inc', 'softpc.new/obj.vdm/cdefine.inc')"
+        },
+        {
+          "path": "src/ntvdm-exe/softpc/mvdm_softpc_mouse_guest.c",
+          "line": 8,
+          "category": "other",
+          "text": "#include <nt_uis.h>"
+        },
+        {
+          "path": "src/ntvdm-exe/softpc/mvdm_softpc_text_video.c",
+          "line": 10,
+          "category": "other",
+          "text": "#include <nt_uis.h>"
+        },
+        {
+          "path": "tools/governance/Verify-T276S25SoftpcDeclarationFinalDisposition.ps1",
+          "line": 9,
+          "category": "other",
+          "text": "    $_.source_path -in @('softpc.new/host/link/nt_uis.h', 'softpc.new/host/src/makefile.inc', 'softpc.new/obj.vdm/cdefine.inc')"
+        },
+        {
+          "path": "src/mvdm-host/inc/softpc.h",
+          "line": 88,
+          "category": "other",
+          "text": "// in host\\inc\\error.h and host\\inc\\nt_uis.h. this stuff needs"
+        },
+        {
+          "path": "tests/observation/verify-softpc-object-contract.ps1",
+          "line": 51,
+          "category": "test",
+          "text": "    $headers = @('src/mvdm-host/softpc.new/host/inc/host_rrr.h','src/mvdm-host/softpc.new/host/inc/nt_uis.h','src/mvdm-host/softpc.new/obj.vdm/resource.rc') | ForEach-Object { Join-Path $repo $_ }"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/obj.vdm/resource.rc",
+          "line": 20,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+          "line": 31,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+          "line": 158,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+          "line": 170,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_sec.c",
+          "line": 19,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
+          "line": 56,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+          "line": 48,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_nls.c",
+          "line": 36,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+          "line": 28,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_mouse.c",
+          "line": 27,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_input.c",
+          "line": 33,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_hunt.c",
+          "line": 30,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+          "line": 25,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+          "line": 68,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+          "line": 56,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_fdisk.c",
+          "line": 38,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+          "line": 47,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+          "line": 79,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+          "line": 48,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+          "line": 35,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+          "line": 50,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+          "line": 274,
+          "category": "other",
+          "text": "#include \"nt_uis.h\""
+        }
+      ],
+      "total_textual_refs": 34
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_aorc.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 237,
+          "category": "historical",
+          "text": "# R1.3 uses the original nt_aorc.c forwarding implementation. It is distinct"
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 1640,
+          "category": "historical",
+          "text": "    base/mvdm/softpc.new/host/src/nt_aorc.c)"
+        },
+        {
+          "path": "tools/governance/Audit-T276S12HostSrcDisposition.ps1",
+          "line": 28,
+          "category": "other",
+          "text": "    'literal-build-unobserved-auxiliary' = @('nt_aorc.c','nt_cprgs.c','nt_ertbl.c','nt_hfx.c','nt_hunt.c','nt_mess.c','nt_smenu.c','nt_term.c','nt_vflop.c','stf_conf.c')"
+        },
+        {
+          "path": "tools/governance/Set-T276S25SoftpcControlSourceFinalDisposition.ps1",
+          "line": 15,
+          "category": "other",
+          "text": "    'softpc.new/host/src/cpucstbs.c', 'softpc.new/host/src/nt_aorc.c',"
+        },
+        {
+          "path": "tools/governance/Set-T276S25SoftpcControlSourceFinalDisposition.ps1",
+          "line": 23,
+          "category": "other",
+          "text": "    'softpc.new/host/src/nt_aorc.c', 'softpc.new/host/src/nt_bop.c',"
+        },
+        {
+          "path": "tools/governance/Set-T277S5SoftpcHostControlDisposition.ps1",
+          "line": 35,
+          "category": "other",
+          "text": "        'machine-CPU-SAS-PIC-facade' { return 'softpc.new/host/src/nt_aorc.c, nt_cpu.c and sim32.c expose historical CPU/SAS facade forms; base/ccpu386, cvidc, system and video bodies are Bochs-replac"
+        },
+        {
+          "path": "tools/governance/Set-T277S3MachineFamilyDisposition.ps1",
+          "line": 25,
+          "category": "other",
+          "text": "        'sas_overwrite_memory' { return 'softpc.new/host/src/nt_aorc.c:858 is the historical SAS function-table facade; CCPU/SAS executor remains Bochs-replaced' }"
+        },
+        {
+          "path": "tools/governance/Set-T277S3MachineFamilyDisposition.ps1",
+          "line": 30,
+          "category": "other",
+          "text": "        default { return 'softpc.new/host/src/nt_aorc.c plus CCPU/CVIDC alternative CPU-private providers; parallel executor is excluded' }"
+        },
+        {
+          "path": "tools/governance/Verify-T276S12BuildUnobservedInterfaces.ps1",
+          "line": 14,
+          "category": "other",
+          "text": "foreach ($source in @('nt_aorc.c','nt_cprgs.c','nt_ertbl.c','nt_hfx.c','nt_hunt.c','nt_mess.c','nt_smenu.c','nt_term.c','nt_vflop.c','stf_conf.c')) { if (@($rows | Where-Object source_path -eq \"softpc"
+        },
+        {
+          "path": "tools/governance/Verify-T276S12BuildUnobservedInterfaces.ps1",
+          "line": 15,
+          "category": "other",
+          "text": "foreach ($source in @('nt_aorc.c','nt_cprgs.c','nt_vflop.c')) { if (@($rows | Where-Object source_path -eq \"softpc.new/host/src/$source\" | Where-Object provisional_disposition -notmatch 'Bochs-replace"
+        },
+        {
+          "path": "tests/legacy/opennt/trace/fixtures/original_register_bridge_fixture.c",
+          "line": 2,
+          "category": "test",
+          "text": " * R1.3 bounded proof of the original nt_aorc.c register forwarding layer."
+        },
+        {
+          "path": "tests/legacy/opennt/trace/fixtures/original_demerror_register_fixture.c",
+          "line": 3,
+          "category": "test",
+          "text": " * path would update AX/CF through nt_aorc.c without entering an SVC/device"
+        },
+        {
+          "path": "tools/audit/Export-T310WholeTreeCompilerWarningLedger.mjs",
+          "line": 24,
+          "category": "other",
+          "text": "    ['nt_ega.c', 'SPC-HOST-VIDEO-BINDINGS'], ['nt_vga.c', 'SPC-HOST-VIDEO-BINDINGS'], ['nt_cga.c', 'SPC-HOST-VIDEO-BINDINGS'], ['nt_graph.c', 'SPC-HOST-VIDEO-BINDINGS'], ['nt_aorc.c', 'SPC-HOST-VIDEO-"
+        },
+        {
+          "path": "tools/audit/Export-T310WholeTreeAbiInventory.mjs",
+          "line": 44,
+          "category": "other",
+          "text": "    ['nt_ega.c', 'SPC-HOST-VIDEO-BINDINGS'], ['nt_vga.c', 'SPC-HOST-VIDEO-BINDINGS'], ['nt_cga.c', 'SPC-HOST-VIDEO-BINDINGS'], ['nt_graph.c', 'SPC-HOST-VIDEO-BINDINGS'], ['nt_aorc.c', 'SPC-HOST-VIDEO-"
+        },
+        {
+          "path": "tools/build/Generate-T335S3WowCallbackCcpuNinja.mjs",
+          "line": 49,
+          "category": "active-build-tool",
+          "text": "  `build ${local('nt-aorc.obj')}: cc ${source('src/mvdm-host/softpc.new/host/src/nt_aorc.c')}`,"
+        },
+        {
+          "path": "tools/governance/Verify-T280S2IngressMachineFacade.ps1",
+          "line": 33,
+          "category": "other",
+          "text": "        throw \"$id must retain nt_aorc.c as not-host-runtime evidence, not an importable provider body.\""
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/sources",
+          "line": 101,
+          "category": "other",
+          "text": "PPC_SOURCES=nt_aorc.c"
+        }
+      ],
+      "total_textual_refs": 17
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ertbl.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/governance/Audit-T276S12HostSrcDisposition.ps1",
+          "line": 28,
+          "category": "other",
+          "text": "    'literal-build-unobserved-auxiliary' = @('nt_aorc.c','nt_cprgs.c','nt_ertbl.c','nt_hfx.c','nt_hunt.c','nt_mess.c','nt_smenu.c','nt_term.c','nt_vflop.c','stf_conf.c')"
+        },
+        {
+          "path": "tools/governance/Set-T276S25SoftpcControlSourceFinalDisposition.ps1",
+          "line": 26,
+          "category": "other",
+          "text": "    'softpc.new/host/src/nt_error.c', 'softpc.new/host/src/nt_ertbl.c',"
+        },
+        {
+          "path": "tools/governance/Verify-T276S12BuildUnobservedInterfaces.ps1",
+          "line": 14,
+          "category": "other",
+          "text": "foreach ($source in @('nt_aorc.c','nt_cprgs.c','nt_ertbl.c','nt_hfx.c','nt_hunt.c','nt_mess.c','nt_smenu.c','nt_term.c','nt_vflop.c','stf_conf.c')) { if (@($rows | Where-Object source_path -eq \"softpc"
+        },
+        {
+          "path": "src/ntvdm-exe/softpc/include/error_abi.h",
+          "line": 7,
+          "category": "other",
+          "text": " * such as nt_ertbl.c require those declarations while preserving their source"
+        },
+        {
+          "path": "tools/build/New-T280HostStaticDataNinja.ps1",
+          "line": 30,
+          "category": "active-build-tool",
+          "text": "build obj/nt_ertbl.obj: cc `$root/src/mvdm-host/softpc.new/host/src/nt_ertbl.c"
+        },
+        {
+          "path": "tools/governance/Verify-T280S3HostStaticDataBuild.ps1",
+          "line": 13,
+          "category": "other",
+          "text": "    'src/mvdm-host/softpc.new/host/src/nt_ertbl.c',"
+        },
+        {
+          "path": "tools/governance/Verify-T280S3HostStaticDataBuild.ps1",
+          "line": 33,
+          "category": "other",
+          "text": "foreach ($token in @('deps = msvc', '/MT', '/W4', 'nt_ertbl.c', 'nt_mess.c', 'error_abi.h')) {"
+        }
+      ],
+      "total_textual_refs": 7
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hfx.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/governance/Audit-T276S12HostSrcDisposition.ps1",
+          "line": 28,
+          "category": "other",
+          "text": "    'literal-build-unobserved-auxiliary' = @('nt_aorc.c','nt_cprgs.c','nt_ertbl.c','nt_hfx.c','nt_hunt.c','nt_mess.c','nt_smenu.c','nt_term.c','nt_vflop.c','stf_conf.c')"
+        },
+        {
+          "path": "tools/governance/Set-T276S25SoftpcControlSourceFinalDisposition.ps1",
+          "line": 16,
+          "category": "other",
+          "text": "    'softpc.new/host/src/nt_cprgs.c', 'softpc.new/host/src/nt_hfx.c',"
+        },
+        {
+          "path": "tools/governance/Set-T276S25SoftpcControlSourceFinalDisposition.ps1",
+          "line": 27,
+          "category": "other",
+          "text": "    'softpc.new/host/src/nt_event.c', 'softpc.new/host/src/nt_hfx.c',"
+        },
+        {
+          "path": "tools/governance/Verify-T276S12BuildUnobservedInterfaces.ps1",
+          "line": 14,
+          "category": "other",
+          "text": "foreach ($source in @('nt_aorc.c','nt_cprgs.c','nt_ertbl.c','nt_hfx.c','nt_hunt.c','nt_mess.c','nt_smenu.c','nt_term.c','nt_vflop.c','stf_conf.c')) { if (@($rows | Where-Object source_path -eq \"softpc"
+        }
+      ],
+      "total_textual_refs": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hunt.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/governance/Audit-T276S12HostSrcDisposition.ps1",
+          "line": 28,
+          "category": "other",
+          "text": "    'literal-build-unobserved-auxiliary' = @('nt_aorc.c','nt_cprgs.c','nt_ertbl.c','nt_hfx.c','nt_hunt.c','nt_mess.c','nt_smenu.c','nt_term.c','nt_vflop.c','stf_conf.c')"
+        },
+        {
+          "path": "tools/governance/Set-T276S25SoftpcControlSourceFinalDisposition.ps1",
+          "line": 17,
+          "category": "other",
+          "text": "    'softpc.new/host/src/nt_hunt.c', 'softpc.new/host/src/nt_vflop.c',"
+        },
+        {
+          "path": "tools/governance/Set-T276S25SoftpcControlSourceFinalDisposition.ps1",
+          "line": 28,
+          "category": "other",
+          "text": "    'softpc.new/host/src/nt_hunt.c', 'softpc.new/host/src/nt_inthk.c',"
+        },
+        {
+          "path": "tools/governance/Verify-T276S12BuildUnobservedInterfaces.ps1",
+          "line": 14,
+          "category": "other",
+          "text": "foreach ($source in @('nt_aorc.c','nt_cprgs.c','nt_ertbl.c','nt_hfx.c','nt_hunt.c','nt_mess.c','nt_smenu.c','nt_term.c','nt_vflop.c','stf_conf.c')) { if (@($rows | Where-Object source_path -eq \"softpc"
+        }
+      ],
+      "total_textual_refs": 4
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mess.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/governance/Audit-T276S12HostSrcDisposition.ps1",
+          "line": 28,
+          "category": "other",
+          "text": "    'literal-build-unobserved-auxiliary' = @('nt_aorc.c','nt_cprgs.c','nt_ertbl.c','nt_hfx.c','nt_hunt.c','nt_mess.c','nt_smenu.c','nt_term.c','nt_vflop.c','stf_conf.c')"
+        },
+        {
+          "path": "tools/governance/Set-T276S25SoftpcControlSourceFinalDisposition.ps1",
+          "line": 30,
+          "category": "other",
+          "text": "    'softpc.new/host/src/nt_mess.c', 'softpc.new/host/src/nt_msscs.c',"
+        },
+        {
+          "path": "tools/governance/Verify-T276S12BuildUnobservedInterfaces.ps1",
+          "line": 14,
+          "category": "other",
+          "text": "foreach ($source in @('nt_aorc.c','nt_cprgs.c','nt_ertbl.c','nt_hfx.c','nt_hunt.c','nt_mess.c','nt_smenu.c','nt_term.c','nt_vflop.c','stf_conf.c')) { if (@($rows | Where-Object source_path -eq \"softpc"
+        },
+        {
+          "path": "tools/build/New-T280HostStaticDataNinja.ps1",
+          "line": 31,
+          "category": "active-build-tool",
+          "text": "build obj/nt_mess.obj: cc `$root/src/mvdm-host/softpc.new/host/src/nt_mess.c"
+        },
+        {
+          "path": "tools/governance/Verify-T280S3HostStaticDataBuild.ps1",
+          "line": 14,
+          "category": "other",
+          "text": "    'src/mvdm-host/softpc.new/host/src/nt_mess.c',"
+        },
+        {
+          "path": "tools/governance/Verify-T280S3HostStaticDataBuild.ps1",
+          "line": 33,
+          "category": "other",
+          "text": "foreach ($token in @('deps = msvc', '/MT', '/W4', 'nt_ertbl.c', 'nt_mess.c', 'error_abi.h')) {"
+        }
+      ],
+      "total_textual_refs": 6
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_smenu.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/governance/Audit-T276S12HostSrcDisposition.ps1",
+          "line": 28,
+          "category": "other",
+          "text": "    'literal-build-unobserved-auxiliary' = @('nt_aorc.c','nt_cprgs.c','nt_ertbl.c','nt_hfx.c','nt_hunt.c','nt_mess.c','nt_smenu.c','nt_term.c','nt_vflop.c','stf_conf.c')"
+        },
+        {
+          "path": "tools/governance/Set-T276S25SoftpcControlSourceFinalDisposition.ps1",
+          "line": 34,
+          "category": "other",
+          "text": "    'softpc.new/host/src/nt_smenu.c', 'softpc.new/host/src/nt_term.c',"
+        },
+        {
+          "path": "tools/governance/Verify-T276S12BuildUnobservedInterfaces.ps1",
+          "line": 14,
+          "category": "other",
+          "text": "foreach ($source in @('nt_aorc.c','nt_cprgs.c','nt_ertbl.c','nt_hfx.c','nt_hunt.c','nt_mess.c','nt_smenu.c','nt_term.c','nt_vflop.c','stf_conf.c')) { if (@($rows | Where-Object source_path -eq \"softpc"
+        }
+      ],
+      "total_textual_refs": 3
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vflop.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tests/build/test_mirror_rejected_conditions.py",
+          "line": 319,
+          "category": "test",
+          "text": "    ('src/mvdm-host/softpc.new/host/src/nt_vflop.c', 'VFLOPPY', 1, 'MVDM-HOST-DIV-605'),"
+        },
+        {
+          "path": "tools/governance/Audit-T276S12HostSrcDisposition.ps1",
+          "line": 28,
+          "category": "other",
+          "text": "    'literal-build-unobserved-auxiliary' = @('nt_aorc.c','nt_cprgs.c','nt_ertbl.c','nt_hfx.c','nt_hunt.c','nt_mess.c','nt_smenu.c','nt_term.c','nt_vflop.c','stf_conf.c')"
+        },
+        {
+          "path": "tools/governance/Set-T276S25SoftpcControlSourceFinalDisposition.ps1",
+          "line": 17,
+          "category": "other",
+          "text": "    'softpc.new/host/src/nt_hunt.c', 'softpc.new/host/src/nt_vflop.c',"
+        },
+        {
+          "path": "tools/governance/Set-T276S25SoftpcControlSourceFinalDisposition.ps1",
+          "line": 37,
+          "category": "other",
+          "text": "    'softpc.new/host/src/nt_vflop.c', 'softpc.new/host/src/nt_yoda.c',"
+        },
+        {
+          "path": "tools/governance/Verify-T276S12BuildUnobservedInterfaces.ps1",
+          "line": 14,
+          "category": "other",
+          "text": "foreach ($source in @('nt_aorc.c','nt_cprgs.c','nt_ertbl.c','nt_hfx.c','nt_hunt.c','nt_mess.c','nt_smenu.c','nt_term.c','nt_vflop.c','stf_conf.c')) { if (@($rows | Where-Object source_path -eq \"softpc"
+        },
+        {
+          "path": "tools/governance/Verify-T276S12BuildUnobservedInterfaces.ps1",
+          "line": 15,
+          "category": "other",
+          "text": "foreach ($source in @('nt_aorc.c','nt_cprgs.c','nt_vflop.c')) { if (@($rows | Where-Object source_path -eq \"softpc.new/host/src/$source\" | Where-Object provisional_disposition -notmatch 'Bochs-replace"
+        },
+        {
+          "path": "tools/audit/Export-T310WholeTreeCompilerWarningLedger.mjs",
+          "line": 26,
+          "category": "other",
+          "text": "    ['nt_fdisk.c', 'SPC-HOST-STORAGE-BINDINGS'], ['nt_rflop.c', 'SPC-HOST-STORAGE-BINDINGS'], ['nt_vflop.c', 'SPC-HOST-STORAGE-BINDINGS'],"
+        },
+        {
+          "path": "tools/audit/Export-T310WholeTreeAbiInventory.mjs",
+          "line": 46,
+          "category": "other",
+          "text": "    ['nt_fdisk.c', 'SPC-HOST-STORAGE-BINDINGS'], ['nt_rflop.c', 'SPC-HOST-STORAGE-BINDINGS'], ['nt_vflop.c', 'SPC-HOST-STORAGE-BINDINGS'],"
+        }
+      ],
+      "total_textual_refs": 8
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/rename/rename.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "src/mvdm-host/softpc.new/rename/sources",
+          "line": 44,
+          "category": "other",
+          "text": "SOURCES=rename.c"
+        }
+      ],
+      "total_textual_refs": 1
+    },
+    {
+      "path": "src/mvdm-host/suballoc/debug.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/historical/pre-t260/import/Sync-OpenNtDpmiStartupMirror.ps1",
+          "line": 12,
+          "category": "historical",
+          "text": "    'data.c', 'debug.c', 'dpmi32.c', 'dpmiselr.c', 'dpmidata.h',"
+        },
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 1614,
+          "category": "historical",
+          "text": "    base/mvdm/dpmi32/debug.c"
+        },
+        {
+          "path": "tools/governance/Audit-T276S11W0W1Disposition.ps1",
+          "line": 46,
+          "category": "other",
+          "text": "    if ($Path -eq 'suballoc/debug.c') {"
+        },
+        {
+          "path": "tools/governance/Audit-T276S11W0W1Disposition.ps1",
+          "line": 91,
+          "category": "other",
+          "text": "    @{ path='suballoc/debug.c'; family='empty/debug-only source carrier'; symbols='none'; owner='none'; state='profile-excluded'; reason='not listed in original SOURCES or UMTEST membership' },"
+        },
+        {
+          "path": "tools/governance/Audit-T276S20Dpmi32Disposition.ps1",
+          "line": 3,
+          "category": "other",
+          "text": "$x86=@('dpmi32/debug.c','dpmi32/dpmi32.c','dpmi32/dpmiint.c','dpmi32/dpmiselr.c','dpmi32/buffer.c','dpmi32/data.c','dpmi32/int21map.c','dpmi32/modesw.c','dpmi32/register.c','dpmi32/savestat.c','dpmi32"
+        },
+        {
+          "path": "tools/governance/Audit-T276S21VdmredirDisposition.ps1",
+          "line": 3,
+          "category": "other",
+          "text": "$b=@('vdmredir/vrmslot.c','vdmredir/vrnmpipe.c','vdmredir/vrdisp.c','vdmredir/vrinit.c','vdmredir/vrmisc.c','vdmredir/vrnetapi.c','vdmredir/vrnetb.c','vdmredir/vrputil.c','vdmredir/vrremote.c','vdmred"
+        },
+        {
+          "path": "tools/governance/Set-T276S25Dpmi32FinalDisposition.ps1",
+          "line": 13,
+          "category": "other",
+          "text": "    'dpmi32/buffer.c', 'dpmi32/data.c', 'dpmi32/debug.c', 'dpmi32/dpmi32.c',"
+        },
+        {
+          "path": "tools/governance/Set-T276S25IeuvddexFinalDisposition.ps1",
+          "line": 9,
+          "category": "other",
+          "text": "if ($debug.Count -ne 23) { throw \"Expected 23 IEUVDDEx rows, found $($debug.Count).\" }"
+        },
+        {
+          "path": "tools/governance/Set-T276S25SoftpcToolSourceFinalDisposition.ps1",
+          "line": 11,
+          "category": "other",
+          "text": "    ($_.source_path -like 'softpc.new/base/dasm386/*' -or $_.source_path -like 'softpc.new/base/debug/*' -or $_.source_path -eq 'softpc.new/debugger/vdmdebug.c')"
+        },
+        {
+          "path": "tools/governance/Set-T276S25Wow32CarrierFinalDisposition.ps1",
+          "line": 10,
+          "category": "other",
+          "text": "$excluded = @($rows | Where-Object {$_.package_root -eq 'wow32' -and $_.final_disposition -eq 'unresolved' -and ($_.file_kind -eq 'resource-or-other' -or $_.source_path -in @('wow32/debug.c','wow32/i3"
+        },
+        {
+          "path": "tools/governance/Set-T276S25W0W1FinalDisposition.ps1",
+          "line": 61,
+          "category": "other",
+          "text": "        'suballoc/debug.c' {"
+        },
+        {
+          "path": "tools/governance/Set-T276S25W0W1FinalDisposition.ps1",
+          "line": 67,
+          "category": "other",
+          "text": "            $row.final_evidence = 'T276 S11: debug.c is not a library member and tsa.c is the original UMTEST program'"
+        },
+        {
+          "path": "tools/governance/Set-T276S25W0W1FinalDisposition.ps1",
+          "line": 76,
+          "category": "other",
+          "text": "            $row.final_evidence = 'T276 S11: debug.c is not a library member and tsa.c is the original UMTEST program'"
+        },
+        {
+          "path": "tools/governance/Set-T277S6RedirWowDisposition.ps1",
+          "line": 20,
+          "category": "other",
+          "text": " 'Redirector-CRT'{'original Redirector CRT getenv callers in vdmredir/vrdebug.c and vrdll.c; standard.h is the declaration carrier'}"
+        },
+        {
+          "path": "tools/governance/Test-T289S7DpmiMirrorAudit.ps1",
+          "line": 18,
+          "category": "other",
+          "text": "    'buffer.c', 'data.c', 'debug.c', 'dpmi32.c', 'dpmi32p.h', 'dpmidata.h',"
+        },
+        {
+          "path": "tools/governance/Verify-T276S25Dpmi32FinalDisposition.ps1",
+          "line": 11,
+          "category": "other",
+          "text": "    'dpmi32/buffer.c', 'dpmi32/data.c', 'dpmi32/debug.c', 'dpmi32/dpmi32.c',"
+        },
+        {
+          "path": "tools/governance/Verify-T276S25SoftpcToolSourceFinalDisposition.ps1",
+          "line": 7,
+          "category": "other",
+          "text": "    $_.file_kind -eq 'source' -and ($_.source_path -like 'softpc.new/base/dasm386/*' -or $_.source_path -like 'softpc.new/base/debug/*' -or $_.source_path -eq 'softpc.new/debugger/vdmdebug.c')"
+        },
+        {
+          "path": "src/mvdm-host/vdmredir/vrdebug.h",
+          "line": 462,
+          "category": "other",
+          "text": "// data (defined in vrdebug.c)"
+        },
+        {
+          "path": "src/mvdm-host/vdmredir/vrdebug.h",
+          "line": 478,
+          "category": "other",
+          "text": "// prototypes (in vrdebug.c)"
+        },
+        {
+          "path": "src/mvdm-host/vdmredir/vrdebug.c",
+          "line": 7,
+          "category": "other",
+          "text": "    vrdebug.c"
+        },
+        {
+          "path": "src/mvdm-host/vdmredir/sources",
+          "line": 75,
+          "category": "other",
+          "text": "        vrdebug.c   \\"
+        },
+        {
+          "path": "src/mvdm-host/vdmdbg/vdmdbg.txt",
+          "line": 48,
+          "category": "other",
+          "text": "    as DEBUG.COM) can install themselves ahead of these small stubs."
+        },
+        {
+          "path": "src/mvdm-host/dpmi32/sources",
+          "line": 42,
+          "category": "other",
+          "text": "SOURCES=debug.c     \\"
+        },
+        {
+          "path": "src/mvdm-host/dpmi32/debug.c",
+          "line": 7,
+          "category": "other",
+          "text": "    debug.c"
+        },
+        {
+          "path": "src/mvdm-guest/wow16/write/tags",
+          "line": 72,
+          "category": "other",
+          "text": "CheckPctb\tc:debug.c\t?^CheckPctb()$?"
+        },
+        {
+          "path": "src/mvdm-guest/wow16/write/tags",
+          "line": 105,
+          "category": "other",
+          "text": "CommSz\tc:debug.c\t?^void CommSz( psz )$?"
+        },
+        {
+          "path": "src/mvdm-guest/wow16/write/tags",
+          "line": 106,
+          "category": "other",
+          "text": "CommSzNum\tc:debug.c\t?^CommSzNum( sz, num )$?"
+        },
+        {
+          "path": "src/mvdm-guest/wow16/write/tags",
+          "line": 107,
+          "category": "other",
+          "text": "CommSzNumNum\tc:debug.c\t?^CommSzNumNum( sz, num, num2 )$?"
+        },
+        {
+          "path": "src/mvdm-guest/wow16/write/tags",
+          "line": 108,
+          "category": "other",
+          "text": "CommSzRgNum\tc:debug.c\t?^CommSzRgNum( sz, rgw, cw)$?"
+        },
+        {
+          "path": "src/mvdm-guest/wow16/write/tags",
+          "line": 109,
+          "category": "other",
+          "text": "CommSzSz\tc:debug.c\t?^CommSzSz( sz1, sz2 )$?"
+        }
+      ],
+      "total_textual_refs": 66
+    },
+    {
+      "path": "src/mvdm-host/suballoc/tsa.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/governance/Audit-T276S11W0W1Disposition.ps1",
+          "line": 43,
+          "category": "other",
+          "text": "    if ($Path -eq 'suballoc/tsa.c') {"
+        },
+        {
+          "path": "tools/governance/Audit-T276S11W0W1Disposition.ps1",
+          "line": 90,
+          "category": "other",
+          "text": "    @{ path='suballoc/tsa.c'; family='original suballoc stress-test native virtual-memory APIs'; symbols='NtAllocateVirtualMemory;NtCurrentProcess;NtFreeVirtualMemory;RtlMoveMemory;malloc;free;printf'"
+        },
+        {
+          "path": "tools/governance/Set-T276S25W0W1FinalDisposition.ps1",
+          "line": 67,
+          "category": "other",
+          "text": "            $row.final_evidence = 'T276 S11: debug.c is not a library member and tsa.c is the original UMTEST program'"
+        },
+        {
+          "path": "tools/governance/Set-T276S25W0W1FinalDisposition.ps1",
+          "line": 70,
+          "category": "other",
+          "text": "        'suballoc/tsa.c' {"
+        },
+        {
+          "path": "tools/governance/Set-T276S25W0W1FinalDisposition.ps1",
+          "line": 76,
+          "category": "other",
+          "text": "            $row.final_evidence = 'T276 S11: debug.c is not a library member and tsa.c is the original UMTEST program'"
+        }
+      ],
+      "total_textual_refs": 5
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/graftabl/graftabl.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/governance/Audit-T276S11W0W1Disposition.ps1",
+          "line": 93,
+          "category": "other",
+          "text": "    @{ path='vdmutils/graftabl/graftabl.c'; family='standalone GRAFTABL console/code-page utility'; symbols='CharToOem;GetConsoleOutputCP;SetConsoleOutputCP;LoadString;console CRT'; owner='none'; stat"
+        },
+        {
+          "path": "src/mvdm-host/vdmutils/graftabl/sources",
+          "line": 32,
+          "category": "other",
+          "text": "SOURCES=graftabl.c graftabl.rc"
+        }
+      ],
+      "total_textual_refs": 2
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/graftabl/graftabl.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "src/mvdm-host/vdmutils/graftabl/graftabl.rc",
+          "line": 3,
+          "category": "other",
+          "text": "#include \"graftabl.h\""
+        },
+        {
+          "path": "src/mvdm-host/vdmutils/graftabl/graftabl.c",
+          "line": 6,
+          "category": "other",
+          "text": "#include \"graftabl.h\""
+        }
+      ],
+      "total_textual_refs": 2
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/mods.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/governance/Audit-T276S11W0W1Disposition.ps1",
+          "line": 94,
+          "category": "other",
+          "text": "    @{ path='vdmutils/pifedit/mods.c'; family='PIFEDIT GUI support'; symbols='GetTextExtent;GetTextExtentPoint;memcpy;unlink'; owner='none'; state='profile-excluded'; reason='support object of histori"
+        },
+        {
+          "path": "src/mvdm-host/vdmutils/pifedit/sources",
+          "line": 12,
+          "category": "other",
+          "text": "SOURCES= pifedit.c mods.c pifsubs.c pifedit.rc"
+        },
+        {
+          "path": "src/mvdm-host/vdmutils/pifedit/mods.h",
+          "line": 1,
+          "category": "other",
+          "text": "/* MODS.H - function prototypes for MODS.C */"
+        }
+      ],
+      "total_textual_refs": 3
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/mods.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "src/mvdm-host/vdmutils/pifedit/pifedit.c",
+          "line": 8,
+          "category": "other",
+          "text": "#include \"mods.h\""
+        },
+        {
+          "path": "src/mvdm-host/vdmutils/pifedit/mods.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include \"mods.h\""
+        }
+      ],
+      "total_textual_refs": 2
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/pifedit.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/governance/Audit-T276S11W0W1Disposition.ps1",
+          "line": 95,
+          "category": "other",
+          "text": "    @{ path='vdmutils/pifedit/pifedit.c'; family='PIFEDIT GUI, shell and common-dialog product surface'; symbols='User32/GDI32;Shell32;Comdlg32;WinHelp;drag/drop;profile APIs;legacy window/data APIs';"
+        },
+        {
+          "path": "src/mvdm-host/vdmutils/pifedit/sources",
+          "line": 12,
+          "category": "other",
+          "text": "SOURCES= pifedit.c mods.c pifsubs.c pifedit.rc"
+        }
+      ],
+      "total_textual_refs": 2
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/pifedit.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "src/mvdm-host/vdmutils/pifedit/pifsubs.c",
+          "line": 3,
+          "category": "other",
+          "text": "#include \"pifedit.h\""
+        },
+        {
+          "path": "src/mvdm-host/vdmutils/pifedit/pifhelp.h",
+          "line": 1,
+          "category": "other",
+          "text": "#define PIFHELPFILENAME \t\"PIFEDIT.HLP\""
+        },
+        {
+          "path": "src/mvdm-host/vdmutils/pifedit/pifedit.rc",
+          "line": 1,
+          "category": "other",
+          "text": "#include \"pifedit.h\""
+        },
+        {
+          "path": "src/mvdm-host/vdmutils/pifedit/pifedit.c",
+          "line": 5,
+          "category": "other",
+          "text": "#include \"pifedit.h\""
+        }
+      ],
+      "total_textual_refs": 4
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/pifhelp.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "src/mvdm-host/vdmutils/pifedit/pifedit.h",
+          "line": 3,
+          "category": "other",
+          "text": "#include \"pifhelp.h\""
+        }
+      ],
+      "total_textual_refs": 1
+    },
+    {
+      "path": "src/mvdm-host/vdmutils/pifedit/pifsubs.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/governance/Audit-T276S11W0W1Disposition.ps1",
+          "line": 96,
+          "category": "other",
+          "text": "    @{ path='vdmutils/pifedit/pifsubs.c'; family='PIFEDIT file/dialog support'; symbols='OpenFile;_lread;_lwrite;_llseek;_lclose;User32 dialog APIs;GetEnvironmentVariable'; owner='none'; state='profil"
+        },
+        {
+          "path": "src/mvdm-host/vdmutils/pifedit/sources",
+          "line": 12,
+          "category": "other",
+          "text": "SOURCES= pifedit.c mods.c pifsubs.c pifedit.rc"
+        }
+      ],
+      "total_textual_refs": 2
+    },
+    {
+      "path": "src/mvdm-host/wow32/wctlm32.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/governance/Set-T276S25Wow32CarrierFinalDisposition.ps1",
+          "line": 10,
+          "category": "other",
+          "text": "$excluded = @($rows | Where-Object {$_.package_root -eq 'wow32' -and $_.final_disposition -eq 'unresolved' -and ($_.file_kind -eq 'resource-or-other' -or $_.source_path -in @('wow32/debug.c','wow32/i3"
+        }
+      ],
+      "total_textual_refs": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcurcash.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/governance/Set-T276S25Wow32CarrierFinalDisposition.ps1",
+          "line": 10,
+          "category": "other",
+          "text": "$excluded = @($rows | Where-Object {$_.package_root -eq 'wow32' -and $_.final_disposition -eq 'unresolved' -and ($_.file_kind -eq 'resource-or-other' -or $_.source_path -in @('wow32/debug.c','wow32/i3"
+        }
+      ],
+      "total_textual_refs": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcurcash.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "src/mvdm-host/wow32/wcurcash.c",
+          "line": 7,
+          "category": "other",
+          "text": " *  WCURCASH.H"
+        }
+      ],
+      "total_textual_refs": 1
+    },
+    {
+      "path": "src/mvdm-host/wow32/wddeml32.h",
+      "name_collision": false,
+      "refs": [],
+      "total_textual_refs": 0
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkglobal.h",
+      "name_collision": false,
+      "refs": [],
+      "total_textual_refs": 0
+    },
+    {
+      "path": "src/mvdm-host/xms.486/i386/xmsmem86.c",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "tools/historical/opennt-pre-t260/CMakeLists.txt",
+          "line": 2240,
+          "category": "historical",
+          "text": "    base/mvdm/xms.486/i386/xmsmem86.c"
+        },
+        {
+          "path": "tools/governance/Audit-T276S14XmsDisposition.ps1",
+          "line": 24,
+          "category": "other",
+          "text": "    'xms.486/i386/xmsmem86.c' = @('xms-i386-direct-address-memory-routine', 'session guest-memory mapping manager; adapter-mvdm-host-out/softpc; adapter-bochs', 'historical x86 routine passes ULONG va"
+        },
+        {
+          "path": "tools/governance/Audit-T276S14XmsDisposition.ps1",
+          "line": 37,
+          "category": "other",
+          "text": "    if ($File.target_path -eq 'xms.486/i386/xmsmem86.c') { return 'observed-in-original-i386-sources' }"
+        },
+        {
+          "path": "tools/governance/Audit-T276S14XmsDisposition.ps1",
+          "line": 63,
+          "category": "other",
+          "text": "    $buildEvidence = if ($buildRows.Count -eq 1) { $buildRows[0].original_build_description_ids } elseif ($file.target_path -eq 'xms.486/i386/xmsmem86.c') { 'xms.486/i386/sources' } else { 'not-applic"
+        },
+        {
+          "path": "tools/governance/Audit-T276S14XmsInterfaces.ps1",
+          "line": 16,
+          "category": "other",
+          "text": "    [pscustomobject][ordered]@{ interface_id='XMS-IF-06'; interface_family='suballocator support'; source_paths='xms.486/xms.h; xms.486/xms.c; xms.486/xmsblock.c; xms.486/i386/xmsmem86.c; xms.486/xmsm"
+        },
+        {
+          "path": "tools/governance/Audit-T276S14XmsInterfaces.ps1",
+          "line": 17,
+          "category": "other",
+          "text": "    [pscustomobject][ordered]@{ interface_id='XMS-IF-07'; interface_family='historical direct-address memory backend'; source_paths='xms.486/i386/xmsmem86.c; xms.486/xmsmemr.c'; owner='session guest-m"
+        },
+        {
+          "path": "src/mvdm-host/xms.486/i386/sources",
+          "line": 2,
+          "category": "other",
+          "text": "i386_SOURCES=i386\\xmsmem86.c"
+        },
+        {
+          "path": "tools/governance/Set-T276S25XmsFinalDisposition.ps1",
+          "line": 71,
+          "category": "other",
+          "text": "        'xms.486/i386/xmsmem86.c' {"
+        },
+        {
+          "path": "tools/governance/Verify-T276S14XmsDisposition.ps1",
+          "line": 12,
+          "category": "other",
+          "text": "if (@($rows | Where-Object { $_.source_path -eq 'xms.486/i386/xmsmem86.c' -and $_.provisional_disposition -eq 'same-shaped mapping-manager replacement prerequisite' }).Count -ne 1) { throw 'The x86 di"
+        },
+        {
+          "path": "tools/build/New-T287OriginalXmsStaticNinja.ps1",
+          "line": 39,
+          "category": "active-build-tool",
+          "text": "# The i386 xmsmem86.c direct-host-pointer backend is a source witness, not a"
+        },
+        {
+          "path": "tools/governance/Verify-T276S25XmsFinalDisposition.ps1",
+          "line": 11,
+          "category": "other",
+          "text": "if (@($rows | Where-Object {$_.source_path -eq 'xms.486/i386/xmsmem86.c' -and $_.final_disposition -ne 'not-host-runtime'}).Count) { throw 'The direct-address xmsmem86 body must remain out of the fina"
+        }
+      ],
+      "total_textual_refs": 11
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddtx.h",
+      "name_collision": false,
+      "refs": [],
+      "total_textual_refs": 0
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/atom.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "src/wow32-dll/source/wow_standard_class_bindings.c",
+          "line": 104,
+          "category": "other",
+          "text": "            result.native.hInstance != by_atom.hInstance ||"
+        }
+      ],
+      "total_textual_refs": 1
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/zwapi.h",
+      "name_collision": false,
+      "refs": [
+        {
+          "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+          "line": 23,
+          "category": "other",
+          "text": "#include \"zwapi.h\""
+        }
+      ],
+      "total_textual_refs": 1
+    }
+  ],
+  "with_active_build_refs": 10,
+  "with_test_refs": 8,
+  "without_text_refs": 6
+}

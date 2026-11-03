@@ -1,0 +1,11 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/src/nt_aorc.c",
+  "before": "14eab307b01841a0d627ee159c7525fcb5f6007f84f5624988e1e46708be8db8",
+  "after": "7f5149638f81708d0a0ab533662af4a3ad3fa12ce44a284331844a493b15dec8",
+  "original_if_line": 557,
+  "original_next_line": 861,
+  "removed_lines": 302,
+  "context": "T335 explicit source edge inherits T313 base flags /DPROD /DCCPU /DCPU_40_STYLE; no other current nonhistorical build references found. Original excluded group matched exactly.",
+  "limitation": "T335 test applicability and a real test-graph build remain unverified.",
+  "status": "superseded by owner-directed removal of test-only mirror source"
+}

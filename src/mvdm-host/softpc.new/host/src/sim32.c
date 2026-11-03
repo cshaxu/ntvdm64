@@ -265,26 +265,10 @@ GLOBAL sys_addr sim32_effective_addr IFN2(double_word, addr, BOOL, pm)
         return (sys_addr)linear;
     }
 #else
-    else
-    {
-	if ( selector_outside_table(seg, &descr_addr) == 1 )
-	{
-	/*
-	This should not happen, but is a check the real effective_addr
-	includes. Return error -1.
-	*/
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-            return ((sys_addr)-1);
-	}
-	else
-	{
-	    read_descriptor(descr_addr, &entry);
-	    return entry.base + off;
-	}
-    }
+#line 239
+#error Non-CPU40 SIM32 descriptor path is not supported
 #endif /* CPU_40_STYLE */
+#line 259
 }
 
 

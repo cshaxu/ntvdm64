@@ -1,0 +1,10 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+  "before": "a9f6974e2f7e73ba69415f6de71bd29a23ca9283b1753c17d824f2e1a9a48bc3",
+  "after": "8c4747e89a1dab195c05ab2881d47dd9820c97a19229d6ba6acabf32cf489998",
+  "original_if_line": 246,
+  "original_else_line": 248,
+  "original_next_line": 257,
+  "context": "No CHECK_ACCESS definition or command override found in source/build/test scripts; original selected no-op macro is byte-preserved.",
+  "limitation": "Other source conditions and unobserved contexts remain pending."
+}

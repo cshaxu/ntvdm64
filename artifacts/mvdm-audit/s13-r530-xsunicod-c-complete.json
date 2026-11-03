@@ -1,0 +1,7 @@
+{
+  "file": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.c",
+  "current_sha256": "65a0ae3d65923ad5292213cf2c0f84bae48d91daebc6e087462bad42ed73c266",
+  "original_sha256": "2bb7b7a8d86742123d3e246a940d22b2f0448c0afdce6a26204e78dd4a50ecc7",
+  "evidence": "Only conditional group is original #ifdef UNICODE and its entire body is identical line-for-line; x86 and x64-reference source commands both define UNICODE. Product baseline r527 compiled this unchanged source.",
+  "limitation": "Other source differences outside conditional scope remain registered separately; supported-context enumeration continues."
+}

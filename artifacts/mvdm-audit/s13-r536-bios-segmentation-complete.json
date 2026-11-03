@@ -1,0 +1,16 @@
+{
+  "files": [
+    {
+      "file": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
+      "current_sha256": "0bbcf3d6eafb9bf1c3f10e190721cd0062db7614549d28f9363c65afe791f582",
+      "original_sha256": "08b798882c49443b2641ebf091adf07959059d46bc703467d860ab22659f2967"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
+      "current_sha256": "5b03ffa5ba2ecb77f60c7f01d61a6ca96029c838d2b92ffcfba5cf00ee098c87",
+      "original_sha256": "2e6f1783fcb3695443ab0a3a6fcb5dbf2bd3e2e7905217cd61021e031a8a709a"
+    }
+  ],
+  "evidence": "Each file has one original SEGMENTATION conditional; current body is only #error and whitespace, with original physical lines preserved through endif. No SEGMENTATION definition or override found in repository source/build scripts; r527 product build passed with the guard.",
+  "limitation": "Unobserved supported contexts and non-conditional source differences remain outside this audit."
+}

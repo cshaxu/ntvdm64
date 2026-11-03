@@ -98,7 +98,7 @@ SOURCES=                sim32.c         \
                         nt_reset.c      \
 			nt_mem.c
 
-PPC_SOURCES=nt_aorc.c
+PPC_SOURCES=
 
 MIPS_SOURCES=$(PPC_SOURCES)
 

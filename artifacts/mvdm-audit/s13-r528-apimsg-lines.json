@@ -1,0 +1,18 @@
+{
+  "file": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+  "before": "2d820c06c3667fc73fafbcf5ad6324f3542b5d0f4f7018b4a33b5945282f06d7",
+  "after": "ac4490e2810adb728cea80a303fa86d67a93949a429c1b155cd84b1e80c11926",
+  "original_groups": [
+    {
+      "if": 89,
+      "else": 107,
+      "next": 113
+    },
+    {
+      "if": 133,
+      "next": 136
+    }
+  ],
+  "context": "r520 exact apimsg preprocessor command observed Unicode; original selected content and existing excluded arm retained.",
+  "status": "build and full file audit pending"
+}

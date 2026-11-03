@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 538,
+  "completed_files": 544,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -1296,7 +1296,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-segmentation-excluded"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
@@ -1341,7 +1341,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-segmentation-excluded"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
@@ -2129,13 +2129,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xfer.c",
-      "current_sha256": "50c6266a379e14afe7902c4e5f37b82bff2ace52f97848cb73782f49a51f35d8",
+      "current_sha256": "2c7d1d0b106f10fff50d4190b67db4195a02b611c58f66d9ad9c7734669df7ae",
       "original_sha256": "5f730f08b36a3a19cd1c682e080816d21e633b0f1b07f929b08e1d7e06ef4037",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r538 exclude optional relative-jump limit branch; other groups pending"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.h",
@@ -2173,13 +2174,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\call.c",
-      "current_sha256": "461f4fc0dbae7a736ec059b342487ed8ed71fe19d70cec8b2e05c982de28c9ef",
+      "current_sha256": "d0982ab0455e4bc2665a9d5bb1a9fb5d76d5e6c219e2e766a3e700fe1dfe8448",
       "original_sha256": "ce5f56ea27239d0c85243cee23e01de34b1f82d3ba92eced687e2b3bd90a2a94",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r537 exclude unselected optional call limit branches; full audit pending"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/call.h",
@@ -2239,13 +2241,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpusas4.c",
-      "current_sha256": "a9f6974e2f7e73ba69415f6de71bd29a23ca9283b1753c17d824f2e1a9a48bc3",
+      "current_sha256": "8c4747e89a1dab195c05ab2881d47dd9820c97a19229d6ba6acabf32cf489998",
       "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r540 exclude unselected CCPU CHECK_ACCESS debugging alternative; full file audit pending"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h",
@@ -2762,7 +2765,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-ntvdm-selected"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/into.h",
@@ -2784,7 +2787,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-ntvdm-selected"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/intx.h",
@@ -2800,13 +2803,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/invd.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\invd.c",
-      "current_sha256": "c2d6e71e55ec90640fb4e6dc9a85d9ec1b9ca4c4a1f32d5be904ead8bd154787",
+      "current_sha256": "0cb68c9ac8a34815fd07d71fcf7df5fab7c6fdf11701d1efe6f12e19f376324d",
       "original_sha256": "f6e2d5b7a257a13fa91f071c5d740f20fb47654c97e35da744e7dc6ee493895e",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r541 remove duplicate equivalent original line anchor; build pending"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/invd.h",
@@ -2822,13 +2826,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/invlpg.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\invlpg.c",
-      "current_sha256": "353f63d2b5d6f19380ef35e8209cf3c465185fa774577b3ff6111d3f8e4b8284",
+      "current_sha256": "6363edd6b303e581cbc72e0432d059d9e932223849a858e4bee61a2937090f95",
       "original_sha256": "3d948316d66bdd957a2612340f6f653e975aaa99a65c97467b916737ae3394ba",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r541 remove duplicate equivalent original line anchor; build pending"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/invlpg.h",
@@ -4186,13 +4191,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/wbinvd.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\wbinvd.c",
-      "current_sha256": "df9d98e0532774d50d25268c63757335477bc036f3d48c735b36b86f2b406e2d",
+      "current_sha256": "20771f7ca8afcd24dad998d17b0ad8c2113d7bd772f10210a7c730c3521660a0",
       "original_sha256": "61cc2d303ac4935f8dc024ead2c3020201a10d3a5b08403f65f0b130bb2a537d",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r541 remove duplicate equivalent original line anchor; build pending"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/wbinvd.h",
@@ -7397,14 +7403,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\sim32.c",
-      "current_sha256": "756dcec12a29bab853a5fb087abdd8de2fb26de7750007703ee833cac36ba52b",
+      "current_sha256": "89f5fe924f6f99e06f9da1d75addfa204c95f87b9e5f57e280d47665eddb94ee",
       "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
       "status": "pending-per-file-review",
-      "pending_change": "r502 exclude non-CPU40 SIM32 provider; full file audit remains pending"
+      "pending_change": "r533 exclude non-CPU40 SIM32 descriptor fallback; file audit pending"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
@@ -9888,13 +9894,14 @@
     {
       "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
       "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\apimsg.c",
-      "current_sha256": "2d820c06c3667fc73fafbcf5ad6324f3542b5d0f4f7018b4a33b5945282f06d7",
+      "current_sha256": "ac4490e2810adb728cea80a303fa86d67a93949a429c1b155cd84b1e80c11926",
       "original_sha256": "1ed708dee1236ea6424610d2274830b651062ba602d4b2cfa60e49e33de4c186",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r528 original UNICODE conditional diagnostics; final audit and build pending"
     },
     {
       "path": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
@@ -9905,7 +9912,7 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-unicode-selected"
     },
     {
       "path": "src/non-mvdm/ds/netapi/xactsrv/apiuse.c",
@@ -10015,18 +10022,19 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-unicode-selected"
     },
     {
       "path": "src/non-mvdm/ds/netapi/xactsrv/xsunicod.h",
       "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\xactsrv\\xsunicod.h",
-      "current_sha256": "96f6bf3ef751fa866f5cf7d89cf953602a8a0bb4ff00f3a5ce335e2fb7f39ca7",
+      "current_sha256": "6cc4032705392183a1c5d38756b09dd70a3088fef421140f9ae3d26a7afe9867",
       "original_sha256": "9c9f23b07297d1292cbc1e3da1ed05956f767f684977a825fc4eb08bcba5295f",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r529 exclude ANSI xactsrv conversion branch; build pending"
     },
     {
       "path": "src/non-mvdm/private/inc/dlcio.h",
@@ -11594,5 +11602,7 @@
     }
   ],
   "scope": "Union of C/C++ source paths and C/H dependencies observed in 12 stable Ninja graphs; database entries only cover prior builds and may contain historical graph contexts. Compiled C++ is included when mirrored. Completion here only for byte-identical originals with no raw conditional directives in either file. Other files remain pending. This is an observed inventory, not proof that all supported but unbuilt configurations are covered.",
-  "classification_scope": "conditional directives only; not an audit of other source differences; observed graphs, not complete supported-context proof"
+  "classification_scope": "conditional directives only; not an audit of other source differences; observed graphs, not complete supported-context proof",
+  "total_enumerated_files": 1057,
+  "statically_selected_additions": 0
 }

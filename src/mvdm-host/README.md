@@ -2585,3 +2585,35 @@ BOP table and EMS mapping-register provider in base/bios/bios.c and
 base/dos/emm_mngr.c. Both observed worker source commands select NTVDM.
 The original selected code, conditional boundaries and line anchors remain.
 Nested earlier unsupported condition markers are subsumed by the outer arm.
+
+MVDM-HOST-DIV-715: exclude the non-CPU40 descriptor fallback in
+softpc.new/host/src/sim32.c. Both observed worker source commands select
+CPU_40_STYLE; the selected DIV-177 adapter and original following-line
+position are retained.
+
+MVDM-HOST-DIV-716: exclude the optional TAKE_PROT_MODE_LIMIT_FAULT
+arms in base/ccpu386/call.c. This translation unit and observed build
+commands do not define the selector; jmp.c has its own independent local
+definition and is unchanged. Original guards and line anchors remain.
+
+MVDM-HOST-DIV-717: exclude the optional TAKE_PROT_MODE_LIMIT_FAILURE
+arm in base/ccpu386/c_xfer.c. Source and build scans found no definition
+for this selector; its original guard and line anchors are retained.
+
+MVDM-HOST-DIV-719: exclude the optional CHECK_ACCESS breakpoint
+alternative in base/ccpu386/ccpusas4.c. The source and supported build
+scripts do not define CHECK_ACCESS. Preserve the original no-op macro,
+conditional framework and diagnostic line anchors.
+
+MVDM-HOST-DIV-651: remove duplicate equivalent #line anchors following
+the excluded SPC486 arms in ccpu386/invd.c, invlpg.c and wbinvd.c;
+the remaining anchors match the original following line.
+
+MVDM-HOST-DIV-720: remove the test-only, non-product nt_aorc.c mirror and
+its unsupported PPC manifest reference. The bounded T335 fixture calls the
+same CCPU register routines through linker aliases and does not establish
+the product C-VID dispatch or protected-selector behavior.
+
+MVDM-HOST-DIV-721: remove the test-only OEMUNI toemuni.c program and its
+UMTEST manifest entries. The production library remains file.c and process.c;
+the remaining product-library fixtures retain their explicitly stated scope.

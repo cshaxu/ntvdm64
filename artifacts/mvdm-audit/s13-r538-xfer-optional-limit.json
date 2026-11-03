@@ -1,0 +1,9 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+  "before": "50c6266a379e14afe7902c4e5f37b82bff2ace52f97848cb73782f49a51f35d8",
+  "after": "2c7d1d0b106f10fff50d4190b67db4195a02b611c58f66d9ad9c7734669df7ae",
+  "original_if_line": 156,
+  "original_next_line": 174,
+  "context": "No TAKE_PROT_MODE_LIMIT_FAILURE definition or compiler override found in repository source or build/test scripts. Original body matched before exclusion.",
+  "limitation": "Other conditional groups and unobserved compile contexts remain pending."
+}

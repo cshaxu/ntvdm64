@@ -1,0 +1,29 @@
+{
+  "scope": "Explicit source edges in checked-in test generators; whether these historical test targets are currently supported and executed remains unresolved. Added to provisional inventory to prevent silent omission.",
+  "records": [
+    {
+      "path": "src/mvdm-host/oemuni/toemuni.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\oemuni\\toemuni.c",
+      "current_sha256": "398a85d611ab3099c72894b8d4f2e05d42498b8083ec62254ff73b503b6ffae2",
+      "original_sha256": "f10b89fb3e5f2c5c47e87f540c23a63a68275f425ca8abc8191e341f6986d224",
+      "observed_in": [],
+      "statically_selected_in": [
+        "tools/build/Generate-T420S17OemUniNinja.mjs:63"
+      ],
+      "context_status": "test generator source edge; current execution/approval status not established",
+      "status": "completed-no-conditional-directives-in-either-version"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_aorc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_aorc.c",
+      "current_sha256": "14eab307b01841a0d627ee159c7525fcb5f6007f84f5624988e1e46708be8db8",
+      "original_sha256": "7816128fbd968703f2f7b478b0992902f522f9c6853ca166eb69a904cd965061",
+      "observed_in": [],
+      "statically_selected_in": [
+        "tools/build/Generate-T335S3WowCallbackCcpuNinja.mjs:49"
+      ],
+      "context_status": "test generator source edge; current execution/approval status not established",
+      "status": "pending-per-file-review"
+    }
+  ]
+}

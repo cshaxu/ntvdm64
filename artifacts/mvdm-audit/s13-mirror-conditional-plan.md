@@ -64,3 +64,5 @@ cached build, required tests, coherent publication, commit and push, admit the
 next numbered S for depth 2 automatically. Repeat for each nonempty next-depth
 queue. Intermediate P deliveries are progress, not depth or S closure. An
 unproven arm remains explicitly unresolved and is never replaced on that basis.
+
+Owner revision: deliver by complete product-mirror files rather than by an entire depth. Compare each file with its pinned original, review its full conditional structure, register completion, and compile each batch of ten changed code files. If all ten product images have no substantive changes, reuse applicable prior runtime evidence; otherwise run the full applicable tests before delivery. Report identical, reviewed-different and total product-mirror counts after each push. A mirror file with no supported production compilation or inclusion is removed even when a test alone compiles it; prove its disposition against supported contexts, adjust affected test graphs, and report coverage retained or lost. Preserve independent executable tools and useful runtime assets.

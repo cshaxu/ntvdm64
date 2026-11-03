@@ -33,6 +33,7 @@ XsNetMessageBufferSend (
         (LPSTR)SmbGetUlong( &parameters->Recipient )
         );
 
+#line 89
 #ifdef UNICODE
 
     nativeBufLen = SmbGetUshort( &parameters->BufLen ) * sizeof(WCHAR);
@@ -53,6 +54,7 @@ XsNetMessageBufferSend (
     }
 
 #else
+#line 108
 #error Unsupported excluded original configuration
 #endif // def UNICODE
 #line 113
@@ -69,9 +71,11 @@ cleanup:
 
     NetpMemoryFree( nativeRecipient );
 
+#line 133
 #ifdef UNICODE
     NetpMemoryFree( nativeBuffer );
 #endif // def UNICODE
+#line 136
 
     Header->Status = (WORD)status;
 

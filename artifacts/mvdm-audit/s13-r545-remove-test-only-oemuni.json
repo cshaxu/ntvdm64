@@ -1,0 +1,17 @@
+{
+  "removed": "src/mvdm-host/oemuni/toemuni.c",
+  "divergence": "MVDM-HOST-DIV-721",
+  "prior_sha256": "398a85d611ab3099c72894b8d4f2e05d42498b8083ec62254ff73b503b6ffae2",
+  "scope": "Original OEMUNI UMTEST, not a product library translation unit; only non-historical build edge was the T420 test graph.",
+  "actions": [
+    "Removed test-only mirror source and the corresponding UMTEST manifest entries.",
+    "Removed its sole no-pause fixture and switched the T420 graph default to its existing product-library family fixture."
+  ],
+  "validation": {
+    "node_syntax": "passed",
+    "graph_generation": "passed",
+    "default_build": "passed",
+    "default_fixture": "passed: S37_OEM_ENUM_SEARCH_RENAME_DELETE_DIRECTORY_OK; S37_OEM_TEMP_SYSTEM_VOLUME_COMPUTER_NEGATIVE_FONT_OK"
+  },
+  "limits": "The removed original test program was not run; the replacement fixture is not asserted to cover each of its historical cases."
+}

@@ -312,15 +312,12 @@ IFN1(
        * version of a i486.
        */
 
+#line 270
 #ifdef TAKE_PROT_MODE_LIMIT_FAULT
-
-   if ( GET_PE() == 1 && GET_VM() == 0 )
-      {
-      if ( offset > GET_CS_LIMIT() )
-	 GP((IU16)0, FAULT_CALLN_PM_CS_LIMIT);
-      }
-
+#line 271
+#error Optional CCPU protected-mode limit profile is not supported
 #endif /* TAKE_PROT_MODE_LIMIT_FAULT */
+#line 279
 
       /* The Soft486 EDL CPU does not take Protected Mode limit failues
        * for the instructions with relative offsets, Jxx, LOOPxx, JCXZ,
@@ -374,15 +371,12 @@ IFN1(
        * version of a i486.
        */
 
+#line 333
 #ifdef TAKE_PROT_MODE_LIMIT_FAULT
-
-   if ( GET_PE() == 1 && GET_VM() == 0 )
-      {
-      if ( new_dest > GET_CS_LIMIT() )
-	 GP((IU16)0, FAULT_CALLR_PM_CS_LIMIT);
-      }
-
+#line 334
+#error Optional CCPU protected-mode limit profile is not supported
 #endif /* TAKE_PROT_MODE_LIMIT_FAULT */
+#line 342
 
       /* The Soft486 EDL CPU does not take Protected Mode limit failues
        * for the instructions with relative offsets, Jxx, LOOPxx, JCXZ,

@@ -153,24 +153,12 @@ IFN1(
        * version of a i486.
        */
 
+#line 156
 #ifdef TAKE_PROT_MODE_LIMIT_FAILURE
-
-      /* The Soft486 EDL CPU does not take Protected Mode limit failues
-       * for the instructions with relative offsets, Jxx, LOOPxx, JCXZ,
-       * JMP rel and CALL rel, or instructions with near offsets,
-       * JMP near and CALL near.
-       * Since the Ccpu486 is used as a "reference" cpu we wish it
-       * to behave a C version of the EDL Cpu rather than as a C
-       * version of a i486.
-       */
-
-   if ( GET_PE() == 1 && GET_VM() == 0 )
-      {
-      if ( new_dest > GET_CS_LIMIT() )
-	 GP((IU16)0, FAULT_PM_REL_IP_CS_LIMIT);
-      }
-
+#line 157
+#error Optional CCPU relative-jump limit profile is not supported
 #endif /* TAKE_PROT_MODE_LIMIT_FAILURE */
+#line 174
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
 #line 178

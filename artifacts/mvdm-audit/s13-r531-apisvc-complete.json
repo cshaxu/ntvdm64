@@ -1,0 +1,11 @@
+{
+  "file": "src/non-mvdm/ds/netapi/xactsrv/apisvc.c",
+  "current_sha256": "d321412ac340d83d55d034a9daf89e0fd594b1815fdbedecac9f749871cc83d2",
+  "original_sha256": "7a0681e0d01f173edd31afac52c0a35cf7e2fc6711abcb4e224de06f116bdaf8",
+  "evidence": "All seven conditional directives match original. Both observed source commands define UNICODE and original selected branch is kept; non-Unicode else is #error, successfully compiled in r527 product build. No source UNICODE undef.",
+  "graphs": [
+    "build/.ninja/msvc-x86-release/worker",
+    "build/.ninja/msvc-x64-release/worker-reference-x86"
+  ],
+  "limitation": "No statement about other source differences or unobserved supported contexts."
+}

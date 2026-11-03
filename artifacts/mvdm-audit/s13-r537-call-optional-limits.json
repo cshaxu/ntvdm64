@@ -1,0 +1,19 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+  "before": "461f4fc0dbae7a736ec059b342487ed8ed71fe19d70cec8b2e05c982de28c9ef",
+  "after": "d0982ab0455e4bc2665a9d5bb1a9fb5d76d5e6c219e2e766a3e700fe1dfe8448",
+  "context": "Source/build search finds TAKE_PROT_MODE_LIMIT_FAULT defined only inside the separate jmp.c translation unit; call.c and its observed worker commands do not define it. Original branch bodies match before exclusion.",
+  "groups": [
+    {
+      "original_if_line": 270,
+      "original_next_line": 279,
+      "removed_lines": 7
+    },
+    {
+      "original_if_line": 333,
+      "original_next_line": 342,
+      "removed_lines": 7
+    }
+  ],
+  "limitations": "Unobserved supported test contexts remain to be checked; remaining call.c groups need audit."
+}

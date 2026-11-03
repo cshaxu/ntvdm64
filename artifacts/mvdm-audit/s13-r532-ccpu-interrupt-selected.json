@@ -1,0 +1,16 @@
+{
+  "files": [
+    {
+      "file": "src/mvdm-host/softpc.new/base/ccpu386/into.c",
+      "current_sha256": "fbe4dfe731c9d367c0270675c679bbf6acf1a45cf0b4d4548b54e5d2080c74c3",
+      "original_sha256": "fbe4dfe731c9d367c0270675c679bbf6acf1a45cf0b4d4548b54e5d2080c74c3"
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/ccpu386/intx.c",
+      "current_sha256": "544a08aec10dff46968f48b3aa83243fac5bf78ef04d189c7b46518c242907e1",
+      "original_sha256": "544a08aec10dff46968f48b3aa83243fac5bf78ef04d189c7b46518c242907e1"
+    }
+  ],
+  "evidence": "Each original and current file has exactly one #ifdef NTVDM and matching body, no alternate or nested conditions. Both x86 and x64-reference source commands define NTVDM; r527 product build compiled unchanged source.",
+  "limitation": "Other code differences and unobserved contexts remain outside this conditional audit."
+}

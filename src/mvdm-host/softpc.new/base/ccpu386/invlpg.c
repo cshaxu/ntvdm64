@@ -38,4 +38,3 @@ INVLPG CPU Functions.
 #error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
 #line 50
-#line 50

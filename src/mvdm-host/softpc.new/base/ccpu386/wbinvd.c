@@ -37,4 +37,3 @@ WBINVD CPU Functions.
 #error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
 #line 46
-#line 46

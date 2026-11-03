@@ -1,0 +1,18 @@
+{
+  "removed": "src/mvdm-host/softpc.new/host/src/nt_aorc.c",
+  "pre_delete_sha256": "7f5149638f81708d0a0ab533662af4a3ad3fa12ce44a284331844a493b15dec8",
+  "reason": "No production graph selects this source; sole nonhistorical compile edge was T335 test. Owner explicitly requires removal of test-only mirror files.",
+  "former_test": "tools/build/Generate-T335S3WowCallbackCcpuNinja.mjs",
+  "replacement": "The bounded test links its original CCPU register implementations through linker aliases equivalent to the removed wrappers, the actual CCPU wait adapter, and explicit fixture-only boundaries. Its real-mode test pointer mapping is not the product's protected selector provider.",
+  "also_updated": "unsupported PPC manifest source entry removed",
+  "status": "bounded callback execution rebuilt and passed; protected selector translation and WOW lifecycle are outside this fixture",
+  "verification": {
+    "generator_syntax": "node --check passed",
+    "graph_generation": "passed using existing T313 context",
+    "graph_dry_run": "passed",
+    "target_build": "r552 fresh generated graph passed",
+    "execution": "ORIGINAL_CALLBACK16_ACTIVE_CCPU_BOP_ORDER_OK, exit 0",
+    "log": "build/t473-s13/r552-t335.log",
+    "history": "Initial product vector link produced duplicate sas_overwrite_memory and 14 unresolved symbols. A full product-source closure attempt in r549 produced 78 unresolved references. The r550 linked fixture then hit the old test seam breakpoint: the callback actually resolves its frame pointer, contrary to the seam's original assumption. The repaired seam maps only the test's selector-zero 64 KiB real-mode domain and fails fast outside it; it does not claim product protected-selector semantics."
+  }
+}

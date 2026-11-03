@@ -43,6 +43,7 @@ XsDupWStrToStr(
     IN LPWSTR Src
     );
 
+#line 46
 #ifdef UNICODE
 
 #define XsDupStrToTStr( src ) ((LPTSTR)XsDupStrToWStr(( src )))
@@ -63,24 +64,10 @@ XsCopyBufToTBuf(
     );
 
 #else
-
-//
-// XsDupStrToStr - used instead of strdup so that XsDupStrToTStr macros
-//                 end up allocating memory from the same place, which
-//                 can be freed with NetpMemoryFree.
-//
-
-LPSTR
-XsDupStrToStr(
-    IN LPSTR Src
-    );
-
-#define XsDupStrToTStr( src ) (LPTSTR)XsDupStrToStr( src )
-#define XsDupTStrToStr( src ) XsDupStrToStr( (LPSTR)src )
-#define XsCopyTBufToBuf( dest, src, size ) RtlCopyMemory( dest, src, size )
-#define XsCopyBufToTBuf( dest, src, size ) RtlCopyMemory( dest, src, size )
-
+#line 66
+#error ANSI xactsrv conversion profile is not supported
 #endif // def UNICODE
+#line 84
 
 //
 // VOID

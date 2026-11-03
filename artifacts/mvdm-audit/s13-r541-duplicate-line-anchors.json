@@ -1,0 +1,27 @@
+{
+  "files": [
+    {
+      "file": "src/mvdm-host/softpc.new/base/ccpu386/invd.c",
+      "before": "c2d6e71e55ec90640fb4e6dc9a85d9ec1b9ca4c4a1f32d5be904ead8bd154787",
+      "after": "0cb68c9ac8a34815fd07d71fcf7df5fab7c6fdf11701d1efe6f12e19f376324d",
+      "original_if_line": 34,
+      "original_next_line": 46
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/ccpu386/invlpg.c",
+      "before": "353f63d2b5d6f19380ef35e8209cf3c465185fa774577b3ff6111d3f8e4b8284",
+      "after": "6363edd6b303e581cbc72e0432d059d9e932223849a858e4bee61a2937090f95",
+      "original_if_line": 35,
+      "original_next_line": 50
+    },
+    {
+      "file": "src/mvdm-host/softpc.new/base/ccpu386/wbinvd.c",
+      "before": "df9d98e0532774d50d25268c63757335477bc036f3d48c735b36b86f2b406e2d",
+      "after": "20771f7ca8afcd24dad998d17b0ad8c2113d7bd772f10210a7c730c3521660a0",
+      "original_if_line": 34,
+      "original_next_line": 46
+    }
+  ],
+  "evidence": "Two consecutive identical #line directives set the same next logical line; the remaining directive matches the original line after the excluded guard.",
+  "context": "SPC486 not selected by observed worker sources; existing error arm remains."
+}

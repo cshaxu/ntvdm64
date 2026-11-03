@@ -1,0 +1,10 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/src/sim32.c",
+  "before": "756dcec12a29bab853a5fb087abdd8de2fb26de7750007703ee833cac36ba52b",
+  "after": "89f5fe924f6f99e06f9da1d75addfa204c95f87b9e5f57e280d47665eddb94ee",
+  "original_else_body_line": 239,
+  "original_next_line": 259,
+  "removed_lines": 19,
+  "context": "x86 and x64-reference sim32.c source commands define CPU_40_STYLE; the selected DIV-177 adapter body is byte-preserved.",
+  "status": "full file conditional review pending"
+}

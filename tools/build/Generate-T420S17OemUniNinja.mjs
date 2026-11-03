@@ -60,9 +60,6 @@ const lines = [
   "build obj/file.obj: cc $root/src/mvdm-host/oemuni/file.c",
   "build obj/process.obj: cc $root/src/mvdm-host/oemuni/process.c",
   "build obj/firmware-root-stub.obj: cc $root/tests/mvdm/oemuni/oemuni_firmware_root_stub.c",
-  "build obj/toemuni.obj: cc $root/src/mvdm-host/oemuni/toemuni.c",
-  "  cflags = $cflags /Dgetch=oemuni_no_pause",
-  "build obj/pause.obj: cc $root/tests/mvdm/oemuni/oemuni_pause_stub.c",
   "build obj/failure.obj: cc $root/tests/mvdm/oemuni/oemuni_failure_fixture.c",
   "build obj/expand-failure.obj: cc $root/tests/mvdm/oemuni/oemuni_expand_failure_fixture.c",
   "build obj/family.obj: cc $root/tests/mvdm/oemuni/oemuni_family_fixture.c",
@@ -93,9 +90,8 @@ const lines = [
   "build oemuni-dbcs-fixture.exe: link obj/dbcs.obj",
   "build oemuni-family-fixture.exe: link obj/file.obj obj/process.obj obj/family.obj obj/firmware-root-stub.obj",
   "build oemuni-expand-failure-fixture.exe: link obj/expand-failure.obj",
-  "build oemuni-original-test.exe: link obj/file.obj obj/process.obj obj/toemuni.obj obj/pause.obj",
   "build oemuni-failure-fixture.exe: link obj/file.obj obj/process.obj obj/failure.obj obj/firmware-root-stub.obj",
-  "default oemuni-original-test.exe",
+  "default oemuni-family-fixture.exe",
   ""
 ];
 

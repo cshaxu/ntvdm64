@@ -2391,3 +2391,11 @@ the original selected static macro and line anchors remain.
 OPENNT-HOST-130: restore original debug guard diagnostic line positions
 in public/internal/ds/inc/rapdebug.h; the previously excluded DBG arm
 and original selected nondebug macros are unchanged.
+
+OPENNT-HOST-233: restore original Unicode conditional line anchors in
+ds/netapi/xactsrv/apimsg.c; retain the selected Unicode body and existing
+non-Unicode #error. The r520 actual xactsrv preprocessing observed UNICODE.
+
+OPENNT-HOST-234: exclude the ANSI conversion alternative in
+ds/netapi/xactsrv/xsunicod.h; all 12 observed worker consumers define
+UNICODE. Original Unicode declarations, guard and line anchors remain.
