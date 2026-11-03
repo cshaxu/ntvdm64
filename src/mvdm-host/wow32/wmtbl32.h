@@ -23,11 +23,14 @@ extern M32 aw32Msg[];
 
 
 #ifdef DEBUG_OR_WOWPROFILE
+#line 26
 #error DIVERGENCE MVDM-HOST-DIV-587: WOW profiling declarations are not selected
 #endif
+#line 28
 
 
 #ifdef DEBUG
+#line 31
 #error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected
 #else
 #line 33

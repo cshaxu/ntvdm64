@@ -532,14 +532,15 @@ ULONG FASTCALL WU32DrawText(PVDMFRAME pFrame)
 ULONG FASTCALL WU32EnableHardwareInput(PVDMFRAME pFrame)
 {
 #ifdef ONLY_API16
+#line 532
 #error Unsupported excluded original configuration
 #else
-#line 547
+#line 544
     UNREFERENCED_PARAMETER(pFrame);
 
     return TRUE;
 #endif
-#line 551
+#line 548
 
 }
 

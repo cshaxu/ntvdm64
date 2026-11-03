@@ -1,0 +1,271 @@
+{
+  "scope": "Ten WOW32 sources with previously excluded original conditional alternatives.",
+  "method": "Original directive sequence compared; error arms contain no retained executable code. Original selected alternatives are preserved with restored diagnostic line mappings.",
+  "limits": "Other condition groups remain pending; cached build and targeted checks await this ten-file batch.",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgmeta.c",
+      "before_sha256": "11612b3cea5310e70d6b721203a77fe57b1f9231be05d20ca6f1063fbcb0e3e6",
+      "after_sha256": "5612e2444464131427cfa33d6417a4057c099ab5ac0e684fef26f9527b296cf8",
+      "original_sha256": "213b4aa2f1f7a11ac310d7152027da2da0ea804b9efeb6fefc0cf609ce3d5260",
+      "guards": [
+        {
+          "macro": "PARAMETER_VALIDATION_16_RE_ENABLED",
+          "original_error_line": 278,
+          "original_selected_line": 281,
+          "original_following_line": 290
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkernel.c",
+      "before_sha256": "aeeb73ae5acad1d5ca6e69884d9f58fac936eb0f197c77ef7975e12d8c023c20",
+      "after_sha256": "1a99b43c912a95c9b7793faa331042040d0af1f9e67e967e12c53e6a5b728207",
+      "original_sha256": "c07f5e981d65f6911419990292fd3466d487fd79ff52b4819bb9905f808e68bd",
+      "guards": [
+        {
+          "macro": "DBCS",
+          "original_error_line": 314,
+          "original_selected_line": null,
+          "original_following_line": 318
+        },
+        {
+          "macro": "DBCS",
+          "original_error_line": 505,
+          "original_selected_line": null,
+          "original_following_line": 509
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.c",
+      "before_sha256": "0d1105e777f458c7bf4fc5fc5cb5fa81c8738ad7b0ea7c7a5fc17d75dbdb0794",
+      "after_sha256": "5b251213a2f582b25f26a7ead7006b62e7fbadb40a20b919fe0aa67a50521d4e",
+      "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4",
+      "guards": [
+        {
+          "macro": "WOWPROFILE",
+          "original_error_line": 29,
+          "original_selected_line": null,
+          "original_following_line": 31
+        },
+        {
+          "macro": "WOWPROFILE",
+          "original_error_line": 47,
+          "original_selected_line": null,
+          "original_following_line": 49
+        },
+        {
+          "macro": "WOWPROFILE",
+          "original_error_line": 160,
+          "original_selected_line": null,
+          "original_following_line": 162
+        },
+        {
+          "macro": "WOWPROFILE",
+          "original_error_line": 173,
+          "original_selected_line": null,
+          "original_following_line": 177
+        },
+        {
+          "macro": "WOWPROFILE",
+          "original_error_line": 224,
+          "original_selected_line": null,
+          "original_following_line": 228
+        },
+        {
+          "macro": "WOWPROFILE",
+          "original_error_line": 233,
+          "original_selected_line": null,
+          "original_following_line": 236
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmalias.c",
+      "before_sha256": "1b2c03921b483dff763f187c7f26dc4b9b40df6b6ae3ad7478b32087e11ca9f4",
+      "after_sha256": "81fa78f1393a763148155cbd7f97a2a52198ad4515681c776dc2e5e889678e6c",
+      "original_sha256": "d4949206f261d22f80f96e769388aee94037b27092c69c68ec058619f843f4fb",
+      "guards": [
+        {
+          "macro": "NEWALIAS",
+          "original_error_line": 208,
+          "original_selected_line": 220,
+          "original_following_line": 235
+        },
+        {
+          "macro": "NEWALIAS",
+          "original_error_line": 249,
+          "original_selected_line": null,
+          "original_following_line": 251
+        },
+        {
+          "macro": "NEWALIAS",
+          "original_error_line": 290,
+          "original_selected_line": 303,
+          "original_following_line": 313
+        },
+        {
+          "macro": "NEWALIAS",
+          "original_error_line": 352,
+          "original_selected_line": null,
+          "original_following_line": 364
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsg16.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsg16.c",
+      "before_sha256": "ce6aa357c60e3096652a0716a1069032c5d722daa0634627e3ec065b6c486f01",
+      "after_sha256": "66470a04cd583aef6af69438db6f72c9fe844cb82dda9b5e32fdef37fab3b595",
+      "original_sha256": "eb7b726626232ad95f1ff766004f8bea6fca3d25111124dd5c18e8512c1dbe44",
+      "guards": [
+        {
+          "macro": "DEBUG",
+          "original_error_line": 247,
+          "original_selected_line": 249,
+          "original_following_line": 251
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmtbl32.h",
+      "before_sha256": "8e33d139191cdffca0fd8743d0e8227a1da532ddf07dbbf5e346c0e2736017ec",
+      "after_sha256": "f3634dc1bf55e7441f3108f56775a0ff986ed34e5b41197b7dbe68ed9ee6f24d",
+      "original_sha256": "c64cfbdd5b28db353fd24edd971044fe8f086d86b40aaffd648ffcfe4c653afb",
+      "guards": [
+        {
+          "macro": "DEBUG_OR_WOWPROFILE",
+          "original_error_line": 26,
+          "original_selected_line": null,
+          "original_following_line": 28
+        },
+        {
+          "macro": "DEBUG",
+          "original_error_line": 31,
+          "original_selected_line": 33,
+          "original_following_line": 35
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowhooks.c",
+      "before_sha256": "fd371b9ceb4ca1ffdf248bea9979abcc816552fb462f09c05031fa19d336b2c1",
+      "after_sha256": "bff4df2c0d3b190db42bda06eb2f8d28904a33e126889644a09e8ccfc5586d2c",
+      "original_sha256": "345220990242cde0890884f478bef8622c2fc537c9e6200fa9b289145be0cc67",
+      "guards": [
+        {
+          "macro": "DEBUG",
+          "original_error_line": 618,
+          "original_selected_line": null,
+          "original_following_line": 625
+        },
+        {
+          "macro": "DEBUG",
+          "original_error_line": 1160,
+          "original_selected_line": null,
+          "original_following_line": 1164
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtbl.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowtbl.c",
+      "before_sha256": "52fcee8e4ef27fad1a112ce1fd104f2bb055ae6b983d8e7385e1a5dec8f0de92",
+      "after_sha256": "0fedfaf8c7ca77b7e8781717046ea211fc805627dc45bdc8c5f2c7acf524e2db",
+      "original_sha256": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
+      "guards": [
+        {
+          "macro": "DEBUG_OR_WOWPROFILE",
+          "original_error_line": 77,
+          "original_selected_line": null,
+          "original_following_line": 79
+        },
+        {
+          "macro": "DEBUG_OR_WOWPROFILE",
+          "original_error_line": 116,
+          "original_selected_line": null,
+          "original_following_line": 118
+        },
+        {
+          "macro": "DEBUG_OR_WOWPROFILE",
+          "original_error_line": 125,
+          "original_selected_line": null,
+          "original_following_line": 261
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+      "before_sha256": "4799413ff806747d082ccd99de0a8aafe03c1694abadfa21213de848ffa092a3",
+      "after_sha256": "137e82bbd2f5dcf08761115ee1af0b3c9942c9c46a35edc77adf7e0c310b8a0d",
+      "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a",
+      "guards": [
+        {
+          "macro": "MAPPARAM_EXTRA",
+          "original_error_line": 51,
+          "original_selected_line": null,
+          "original_following_line": 53
+        },
+        {
+          "macro": "MAPPARAM_EXTRA",
+          "original_error_line": 209,
+          "original_selected_line": null,
+          "original_following_line": 211
+        },
+        {
+          "macro": "MAPPARAM_EXTRA",
+          "original_error_line": 221,
+          "original_selected_line": null,
+          "original_following_line": 254
+        },
+        {
+          "macro": "MAPPARAM_EXTRA",
+          "original_error_line": 285,
+          "original_selected_line": null,
+          "original_following_line": 290
+        },
+        {
+          "macro": "MAPPARAM_EXTRA",
+          "original_error_line": 337,
+          "original_selected_line": 339,
+          "original_following_line": 341
+        },
+        {
+          "macro": "DEBUG",
+          "original_error_line": 463,
+          "original_selected_line": 471,
+          "original_following_line": 473
+        },
+        {
+          "macro": "DEBUG",
+          "original_error_line": 558,
+          "original_selected_line": 582,
+          "original_following_line": 585
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuser.c",
+      "before_sha256": "30e90282d0b47a933ab21bfa9a2da26d0102d600c8769041645b8649383da15c",
+      "after_sha256": "1d4935e9c44725b1b3ca6c4ded1ecf6a58cbbbdf8e3de9d78b7416126fe25f75",
+      "original_sha256": "ce33e8634d085f9ca27ad331560e5321c3fed2ee8552ce0d00fda25af0a74b62",
+      "guards": [
+        {
+          "macro": "ONLY_API16",
+          "original_error_line": 532,
+          "original_selected_line": 544,
+          "original_following_line": 548
+        }
+      ]
+    }
+  ]
+}

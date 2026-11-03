@@ -2711,3 +2711,7 @@ MVDM-HOST-DIV-740: restore original diagnostic line mappings for existing
 excluded device, platform and graphics branches in ten further sources.
 Other groups remain under review. Evidence:
 ../../artifacts/mvdm-audit/s13-r658-guard-line-audit.json.
+
+MVDM-HOST-DIV-741: restore original diagnostic line mappings for existing
+excluded WOW32 condition arms in ten sources. Other groups remain under
+review. Evidence: ../../artifacts/mvdm-audit/s13-r660-guard-line-audit.json.

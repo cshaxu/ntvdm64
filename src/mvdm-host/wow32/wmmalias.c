@@ -162,6 +162,7 @@ PHMAP FindHMap32(HAND32 h32, PHINFO phi, INT iClass)
         phm->h32 = NULL;
 
 #ifdef NEWALIAS
+#line 208
 #error Unsupported excluded original configuration
 #else
 #line 220
@@ -192,6 +193,7 @@ PHMAP FindHMap32(HAND32 h32, PHINFO phi, INT iClass)
 
         // Insure that the alias pointer is valid
 #ifdef NEWALIAS
+#line 249
 #error Unsupported excluded original configuration
 #endif
 #line 251
@@ -234,6 +236,7 @@ PHMAP FindHMap16(HAND16 h16, PHINFO phi)
     h16 >>= RES_BITS;
 
 #ifdef NEWALIAS
+#line 290
 #error Unsupported excluded original configuration
 #else
 #line 303
@@ -286,6 +289,7 @@ VOID FreeHMap16(HAND16 h16, PHINFO phi)
         phm->h32 = NULL;
 
 #ifdef NEWALIAS
+#line 352
 #error Unsupported excluded original configuration
 #endif
 #line 364

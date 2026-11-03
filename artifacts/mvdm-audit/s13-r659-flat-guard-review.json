@@ -1,0 +1,1025 @@
+{
+  "scope": "42 product-observed files whose original condition groups are flat and all have existing excluded error-only first arms.",
+  "method": "Compare original selectors, group boundaries, else presence and retained else text. Check physical error, selected and following line mappings; conservatively screen comments and conditional continuations. Reject directive after continued physical line.",
+  "context": "Prior product release builds and 181 retained-guard controls; selector forced on reaches error, so builds using these files cannot silently select these arms.",
+  "limits": "Reviews conditional structure and alternatives, not unrelated adaptations; the complete inventory of all supported contexts remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/inc/wowkbd.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkbd.h",
+      "sha256": "86f533eb464f1bae992b8f6410ed6d9789d49d9bb74fa77e7477cef9ac48d6ef",
+      "original_sha256": "ecff4d47c62f462aa0cea48d5cb0c8c0b658e33d89dbb6f47899df2228a414cf",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wowkrn.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
+      "sha256": "e4f70c604034b6352a0ca1a4866bc72690f3dbb216554cdf038f832762dbb3b6",
+      "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wowsnd.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowsnd.h",
+      "sha256": "551d5b47d4fbc2f02fb1499cefc1bb6a6a515acf43949b2648d23dc04a159223",
+      "original_sha256": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wowusr.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "sha256": "ce4f2f8a6d337d962cffc6b4c99aa6e593856e32430335878a6798475e48abd3",
+      "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ],
+        [
+          "ifdef",
+          "NULLSTRUCT"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_page.c",
+      "sha256": "075650e81791a8c27f5b1d48366080ca16bbe04855fedea70752017014a617c6",
+      "original_sha256": "f29e441f3940002924413f3bea791d12e96d65baa3931330e92878e5e71a97ee",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "PIG"
+        ],
+        [
+          "ifdef",
+          "PIG"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_reg.h",
+      "sha256": "361aced5ce9afec12a540cca78099bc5858fcaca96e348eb788b2dd59d3b6a84",
+      "original_sha256": "968a23e991127bf74872c9ca48d37341a64a4732fe9fec397d78464644138a35",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "SFELLOW"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_stack.h",
+      "sha256": "7c210c32a6ca46a4c9f3dbbfd19089d142c77f4b9a257b0361526ffdf7f75fe9",
+      "original_sha256": "323384e4437fa1bba94994f6cd5a762bc74c9d35eb03d6966ac8df235e165f75",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "PIG"
+        ],
+        [
+          "ifdef",
+          "PIG"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tsksw.c",
+      "sha256": "9336a63db3de4e18ef3a93227e4858beb6b14f5437df5be16bdbda20d7a3467e",
+      "original_sha256": "5713c9351942c0c4dddb00d9ef337abf2974d3236e9aea169117d0a38fe0ad49",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "PIG"
+        ],
+        [
+          "ifdef",
+          "PIG"
+        ],
+        [
+          "if",
+          "0"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\iret.c",
+      "sha256": "f4afd2d859ad0f59c4e8fc1bd5105a9e5350a67cd1159fe6d49dc411571af7c1",
+      "original_sha256": "091378ab6583c06e7593b5b34f336531d874e695be633596d652ea42f5446eb3",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "TAKE_REAL_MODE_LIMIT_FAULT"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/mov.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\mov.c",
+      "sha256": "58fe3be87395df048bd97772a752acf75352c026278ad827aaca990888583f9b",
+      "original_sha256": "d274ed1ad9f8114f8c7ff0c0d6d57f08116d70fd8e6b26f0d0051b70ba9f8348",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "SPC486"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/gispsvga.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\gispsvga.h",
+      "sha256": "5afbb02100a36baaf90731d50752fab72ac733092d84e7127688f4bbe42fce12",
+      "original_sha256": "27cf2b856a23d0fb84e1162959043377dade1414d063349acaf952cf741bf60e",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "GISP_SVGA"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/cmosnt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\cmosnt.c",
+      "sha256": "3e94187916877a0ad20baebcd63cdc089034b0b047e3ac97263f4b9a26f39a80",
+      "original_sha256": "00156a734520b5d59442bf9d6127f4e722a7a697f9be33f34feecf4aef06d850",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "SLAVEPC"
+        ],
+        [
+          "ifdef",
+          "FLOPPY_B"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_eoi.h",
+      "sha256": "ca72a8fd68e85a5b7a3b004dc2c04a1d2e825fa3987615a8fcdbfacae16912b8",
+      "original_sha256": "57ae39f20535e93b451e83a0e54e6e45f43512e12d99ae3ffc6a58e4f1ada8e3",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "MONITOR"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_reset.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_reset.h",
+      "sha256": "acdf0c2329ec0b2f63387ead6c988d459765b34a23212570294565b2ee394ef4",
+      "original_sha256": "91e93365fc76a16fea422918dc0bfb32499f27cd9c84998268a9368eb367c7f3",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "X86GFX"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hosts.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_hosts.c",
+      "sha256": "ed7ff1108d479c6e1a5d2a82482914f7f4cf7c39d0470d72013c9fcee5981fdf",
+      "original_sha256": "9840cb53a0298fdf7f9d27ade387c57659e3c57afbe587cfdf63fbdbafe8c41d",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "HUNTER"
+        ],
+        [
+          "ifdef",
+          "HUNTER"
+        ],
+        [
+          "ifdef",
+          "HUNTER"
+        ],
+        [
+          "ifdef",
+          "HUNTER"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sec.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_sec.c",
+      "sha256": "c07036b22cbd67a0aa6d65a9f81a235df5d862f40d87ce6a1b3afba32132db65",
+      "original_sha256": "2ba1facf8d0c0a00c71f78dfb1fc8e2d001b699e2659465044a94738b637c9bd",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "X86GFX"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrputil.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrputil.c",
+      "sha256": "ca92d822cc6626218ae76b957dac963711e9895c36072781a4c691e53c0b91a8",
+      "original_sha256": "1440cd1379dee1bbe65b0a1e6f6a637a3de48765da85cfd94153e8876a66fe16",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "VR_DIAGNOSE"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgprnset.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgprnset.c",
+      "sha256": "ce61c0d318227aa3cc0d9cf453ac5cd88f8b49c7e7caff8eac7508f753113b86",
+      "original_sha256": "7e53074328ace93ae8ce39fb218fa780ff868999b40f7904fdbbff45fbd7b990",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "i386"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgtbl.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgtbl.h",
+      "sha256": "d848bc3fe0048aed0b4136512addd0f35b60322d2b63d7670dadee2b108eb7e9",
+      "original_sha256": "43cc4724b0e6040c0ed6cdf12c4478c40a1e0bcd3b74bf6b32d91b9f77df71a1",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG_OR_WOWPROFILE"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkbtbl.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkbtbl.h",
+      "sha256": "87fc3f1fdb63425861abbeea075a5cec5872b16bf023062a76678543262dabd6",
+      "original_sha256": "416aa19bd74bfdf5b5b4bb7ae849fee56e9ecc378f47eea9f70ed252d8db8cc6",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG_OR_WOWPROFILE"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkfileio.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkfileio.c",
+      "sha256": "1831a9aba0e796bc0034d021f3c17d6d8ab978f0c8bed0874bc00909e05e1372",
+      "original_sha256": "3437d0886ec49109668f09a46f5cf8b533ccfbd08f78ef441cbf71853482a8ad",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "if",
+          "(FILE_BEGIN != 0 || FILE_CURRENT != 1 || FILE_END !=2)"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wktbl.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wktbl.h",
+      "sha256": "292cbefc0c53e70039554d69d2b4ede507cc2c43e65f5cbd93e89537d1e11c0a",
+      "original_sha256": "054dc8c4703bde7388d9131dd84c9d3d64913d42a4f251eb89088587a0c2347f",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG_OR_WOWPROFILE"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmalias.h",
+      "sha256": "7b9696ef8c12eaf2b917d6fd4c187426bdd7fdc258d77acf47f4984351ad42ac",
+      "original_sha256": "48bcee7abcca92bafd6dcea4bcfd9437bae10c170bb9bfee4db587e00e134cc0",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "NEWALIAS"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmtbl.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmtbl.h",
+      "sha256": "dd57825df62f5ff0a0280ec10cacbbed4cf4645cd15f2086d65ab36ef3467f07",
+      "original_sha256": "c35252b376c0f6132df8439f19ef66c780a2cf3bb39720b62c0d1d8b6f2069e4",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG_OR_WOWPROFILE"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmtbl32.c",
+      "sha256": "64c6a20a35d69b9b26b04f72b1174c8440cb41d3ced37d5419e057a5dab454b6",
+      "original_sha256": "8fb4f02963ceb0772e69749d703868273f942978fa6baf162e039065dd957bd6",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG_OR_WOWPROFILE"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32fax.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32fax.c",
+      "sha256": "289bc523ff8074bcf77d29b5404a706024ecfca81fdcdaf43f0673e98aac3a4a",
+      "original_sha256": "855ac6c5d6d6ca97cc78802994784e8612e5eb6197533790466664bf0e892700",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "ifdef",
+          "DBG"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtbl.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowtbl.h",
+      "sha256": "6f0847322a1151fdce4f7dbc9aee24d4130358804259d9b10804ef96bb1c01c3",
+      "original_sha256": "343409d8adc9c2f013fbc3c44c2c1f611556321832c95037ef7f90f7e439fe01",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG_OR_WOWPROFILE"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wshltbl.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wshltbl.h",
+      "sha256": "9c59d43c215d182bcf9edbeebe4f963db44d9d63c43464f25a6e4faf1a365247",
+      "original_sha256": "8f3479c3135087e2b4c12d7c4d32750e8a78024e15e6b453ca09b5081eac6f5d",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG_OR_WOWPROFILE"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsocktbl.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wsocktbl.h",
+      "sha256": "128f2f07c612caf322e7134a77d3f6f6a889e819d664f014f0ffd91511100c9a",
+      "original_sha256": "a16351b3392f882b17a406688cd03b27e3c9e58a358c14a75af925c2ee0923dc",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG_OR_WOWPROFILE"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wstbl.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wstbl.h",
+      "sha256": "8b83f7ee7f034df24996a7bc16874d5371b4186b07daf4daae8e6bac129cc136",
+      "original_sha256": "e05abe8a2fb397e299aba997e1928c3f74e00eecb23277b4c1c60f66480d439a",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG_OR_WOWPROFILE"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wsubcls.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wsubcls.c",
+      "sha256": "e75b7cae0844a4503d1bf281e14393b9552ae495ef069f6c86366f59baa38c2b",
+      "original_sha256": "b37021cb2a0480f3aca685efb8006b32d31b0fe073b6b3fc9b99f05764679e4b",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "OLD_SUBCLASS_STUFF"
+        ],
+        [
+          "if",
+          "0  // Currently unused"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wthtbl.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wthtbl.h",
+      "sha256": "aeb4b3a9af904b6591f8df1955bad4d42dc6b0f4234e6cc5fcde8c541b1dae6a",
+      "original_sha256": "8423dfbab62c8ee94f069502f829317c153ae371702f851b94da12f6a18a4b89",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG_OR_WOWPROFILE"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wutbl.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wutbl.h",
+      "sha256": "cf01d59ab4dd25a74d67d00522ea859e5fa80fa575921671f9845c8e1da656d3",
+      "original_sha256": "22d88170a6047c25a31a5165d1fa079e0d6bf4ecf94f123b2544ee95bdb644f2",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG_OR_WOWPROFILE"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/rtl/environ.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\ntos\\rtl\\environ.c",
+      "sha256": "362411d48bddc4db273725ed7c988de21214538189b1e7bbb531bf1a1d84d1dc",
+      "original_sha256": "6c67b0c09c40e9186ce28a735221634bade1d9402be085d965223092aa7d4f00",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\launcher\\build.ninja:source",
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "if",
+          "defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)"
+        ],
+        [
+          "if",
+          "DBG"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clglobal.c",
+      "sha256": "0fbf20d3a510043ecec29f9df935c20880dc490aebae02be233a1deadcda7742",
+      "original_sha256": "d8fe5a80d5848f2951843d7ba94752cb3223945a48630350835422389cd1da6f",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "if",
+          "DBG"
+        ],
+        [
+          "ifdef",
+          "FE_IME // WM_IME_COMPOSITION"
+        ],
+        [
+          "ifdef",
+          "MEMPHIS_MENUS"
+        ],
+        [
+          "ifdef",
+          "FE_IME // WM_IME_CHAR"
+        ],
+        [
+          "ifdef",
+          "WX86"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/combo.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\combo.c",
+      "sha256": "665d37b64355e9825974ab3b59a7870c7dccb1c93903b8b3a2334d42204451e1",
+      "original_sha256": "360e3c653cc70079f8f9d0db42d37f5580a82881f1ffb9b1fef954d8f1e7463d",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "if",
+          "0"
+        ],
+        [
+          "ifdef",
+          "LATER"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edecrare.c",
+      "sha256": "f0f15a39cc233b6cbfb25b891af2e858f8e68eca735a5bcedf0e7396ecd7b9eb",
+      "original_sha256": "b50e0f8f305f6456b3a952ddd63c815357136f222328c6d83dd0e76e697b5634",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editec.c",
+      "sha256": "cdeea4a75536e75887f395d9d8e9f20e43ee42e9f23445250e1c71f3ab707488",
+      "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "BOGUS"
+        ],
+        [
+          "ifdef",
+          "NEVER"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ],
+        [
+          "ifdef",
+          "SUPPORT_LPK"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl2.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\lboxctl2.c",
+      "sha256": "495380be7c339b629f4eb543e34765c350c75e815b7743d88deff19c02e8da48",
+      "original_sha256": "a99c9ef3b6a7a07b219ddda18ff2fb6a8a11c42f5378e5f77e10e336ad7d1744",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "NEVER"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxrare.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\lboxrare.c",
+      "sha256": "3ef93c58260e4af79cb0e2d3491fffce0fb451cf3f8924d7df71f727e5c4b1cf",
+      "original_sha256": "e8914f4761ade70a1a7357b5dc8c17744ce1bc49379d03a99470f815ef85f64d",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "NEVER"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/profile.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\profile.c",
+      "sha256": "9d284e986a3f1ac3126dafed2fda2fdc5137c08ac44fbccdae46e77531898af6",
+      "original_sha256": "8ecbb58954eca0fece4ab180bb56a3953b8b4408400d3c7aa01d50b62caaa531",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "FE_SB // PMAP_WINLOGON"
+        ],
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/server/exports.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\server\\exports.c",
+      "sha256": "5e2f93eab023c614e1a88fd45fcf39e15b5f75da5ed04332a065598190e45bad",
+      "original_sha256": "dbeb0ad48349bf5887a1333f21b427d8e0fdd3cb226977a9dc786373e961c71f",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\service\\build.ninja:source",
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "LATER"
+        ]
+      ]
+    }
+  ]
+}

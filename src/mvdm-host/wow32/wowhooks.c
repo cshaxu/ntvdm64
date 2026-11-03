@@ -626,6 +626,7 @@ LONG ThunkCallWndProcHook(INT nCode, LONG wParam, LPCWPSTRUCT lpCwpStruct,
     fCallback = CallBack16(RET_HOOKPROC, &Parm16, lpHSData->Proc16, (PVPVOID)&wm32mpex.lReturn); /* DIV-349 */
 
 #ifdef DEBUG
+#line 618
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 625
@@ -1220,6 +1221,7 @@ LONG ThunkJournalHook(INT nCode, LONG wParam, LPEVENTMSG lpEventMsg,
             GetEventMessage16(pEventMsg16, lpEventMsg);
 
 #ifdef  DEBUG
+#line 1160
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 1164

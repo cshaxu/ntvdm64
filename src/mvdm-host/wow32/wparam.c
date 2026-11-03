@@ -48,6 +48,7 @@ typedef struct tagParamNode {
   DWORD dwRefCount; // reference count
 
 #ifdef MAPPARAM_EXTRA
+#line 51
 #error Unsupported excluded original configuration
 #endif
 #line 53
@@ -229,6 +230,7 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
             lpn->pNext   = gParamMap.pHead;
             lpn->dwRefCount = 1;
 #ifdef MAPPARAM_EXTRA
+#line 209
 #error Unsupported excluded original configuration
 #endif
 #line 211
@@ -242,6 +244,7 @@ PVOID AddParamMap(DWORD dwPtr32, DWORD dwPtr16)
 }
 
 #ifdef MAPPARAM_EXTRA
+#line 221
 #error Unsupported excluded original configuration
 #endif
 #line 254
@@ -276,9 +279,10 @@ PVOID ParamMapUpdateNode(DWORD dwPtr, UINT fMode, VOID* lpNode)
         return pv; // up-to-date
     }
 #ifdef MAPPARAM_EXTRA
+#line 285
 #error Unsupported excluded original configuration
 #endif
-#line 312
+#line 290
 
 
     /* DIVERGENCE(MVDM-HOST-DIV-347): failed refresh must not publish NULL. */
@@ -329,9 +333,10 @@ BOOL DeleteParamMap(DWORD lParam, UINT fMode, BOOL* pfFreePtr)
 
             if (NULL != pfFreePtr) {
 #ifdef MAPPARAM_EXTRA
+#line 337
 #error Unsupported excluded original configuration
 #else
-#line 364
+#line 339
                 *pfFreePtr = FALSE;
 #endif
 #line 341
@@ -457,6 +462,7 @@ else { \
 }
 
 #ifdef DEBUG
+#line 463
 #error Excluded unsupported DEBUG WOW profile
 #else 
 #line 471
@@ -550,6 +556,7 @@ VOID CacheBlockFree(PBLKCACHE pc, LPVOID lpv)
         PBLKHEADER pbh = (PBLKHEADER)lpv - 1;
 
 #ifdef DEBUG
+#line 558
 #error Excluded unsupported DEBUG WOW profile
 #else
 #line 582

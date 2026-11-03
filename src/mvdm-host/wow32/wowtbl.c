@@ -74,6 +74,7 @@ W32 aw32WOW[] = {
 TABLEOFFSETS tableoffsets;
 
 #ifdef DEBUG_OR_WOWPROFILE
+#line 77
 #error Excluded unsupported WOW profiling configuration
 #endif
 #line 79
@@ -117,6 +118,7 @@ VOID InitThunkTableOffsets(VOID)
     tableoffsets.commdlg = offsetarray[MOD_COMMDLG / FUN_MASK];
 
 #ifdef DEBUG_OR_WOWPROFILE
+#line 116
 #error Excluded unsupported WOW profiling configuration
 #endif
 #line 118
@@ -127,6 +129,7 @@ VOID InitThunkTableOffsets(VOID)
 
 
 #ifdef DEBUG_OR_WOWPROFILE
+#line 125
 #error Excluded unsupported WOW profiling configuration
 #endif
 #line 261

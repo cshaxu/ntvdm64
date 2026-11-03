@@ -31,6 +31,7 @@ BOOL fDDEAckFree = FALSE;
 extern WORD msgFINDREPLACE;  // see WCOMMDLG.C
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+#line 29
 #error Excluded unsupported WOW profiling configuration
 #endif
 #line 31
@@ -57,9 +58,10 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
 #line 45
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+#line 47
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 58
+#line 49
 
     ptd = CURRENTPTD();
 
@@ -174,6 +176,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
         LOGDEBUG(6,("%04X (%s)\n", ptd->htask16, (aw32Msg[uMsg].lpszW32)));
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+#line 160
 #error Excluded unsupported WOW profiling configuration
 #endif
 #line 162
@@ -188,9 +191,10 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
         ulReturn = (wm32mpex.lpfnM32)(&wm32mpex);
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+#line 173
 #error Excluded unsupported WOW profiling configuration
 #endif
-#line 188
+#line 177
 
         if (!ulReturn) {
             LOGDEBUG(LOG_ALWAYS,("    W32Win16WndProc ERROR: cannot thunk 32-bit message %s (%x)\n", GetWMMsgName(uMsg), uMsg));
@@ -245,6 +249,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
     if (fMessageNeedsThunking) {
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+#line 224
 #error Excluded unsupported WOW profiling configuration
 #endif
 #line 228
@@ -253,6 +258,7 @@ LONG W32Win16WndProcEx(HWND hwnd, UINT uMsg, UINT uParam, LONG lParam,
         (wm32mpex.lpfnM32)(&wm32mpex);
 
 #ifdef WOWPROFILE  // for MSG profiling only (debugger extension)
+#line 233
 #error Excluded unsupported WOW profiling configuration
 #endif
 #line 236

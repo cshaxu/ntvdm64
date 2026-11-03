@@ -226,6 +226,7 @@ BOOL FASTCALL ThunkWMMsg16(LPMSGPARAMEX lpmpex)
         // DaveHart/ChandanC 9-Nov-93
         //
 #ifdef DEBUG
+#line 247
 #error Excluded unsupported DEBUG WOW profile
 #else
 #line 249

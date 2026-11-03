@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 647,
+  "completed_files": 694,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -1119,17 +1119,19 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/inc/wowkrn.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowkrn.h",
-      "current_sha256": "0e172fc74921ae84831ed646b0432320dd565cace21182ce5a8b1deac340c3d1",
+      "current_sha256": "e4f70c604034b6352a0ca1a4866bc72690f3dbb216554cdf038f832762dbb3b6",
       "original_sha256": "8d9fbb2c3b74c21588eaa7541513db0e3181e41caa0d6a38d2395ae27c01b8cf",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/inc/wowmmcb.h",
@@ -1164,12 +1166,13 @@
     {
       "path": "src/mvdm-host/inc/wowsnd.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowsnd.h",
-      "current_sha256": "00d8cd7ba8f60e24583794c1911ffa1609c8d9172a473d7f85172ca247eae713",
+      "current_sha256": "551d5b47d4fbc2f02fb1499cefc1bb6a6a515acf43949b2648d23dc04a159223",
       "original_sha256": "944acedf0708f0fc2176b28a18e07747da57042fd93bfb63a51663e9e2a250e6",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/inc/wowth.h",
@@ -1184,12 +1187,13 @@
     {
       "path": "src/mvdm-host/inc/wowusr.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
-      "current_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "current_sha256": "ce4f2f8a6d337d962cffc6b4c99aa6e593856e32430335878a6798475e48abd3",
       "original_sha256": "02938ac7dd2356cf551044b892658b90d52ea2476a0eed4c974e955e54482469",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/inc/wowwsock.h",
@@ -1997,8 +2001,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "pending_change": "r496 original diagnostic anchors; broader per-file conditional audit pending"
+      "status": "completed-original-flat-excluded-guards",
+      "pending_change": "r496 original diagnostic anchors; broader per-file conditional audit pending",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.h",
@@ -2054,8 +2059,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r656-guard-line-audit.json"
+      "status": "completed-original-flat-excluded-guards",
+      "partial_evidence": "s13-r656-guard-line-audit.json",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
@@ -2100,8 +2106,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r642-guard-line-audit.json"
+      "status": "completed-original-flat-excluded-guards",
+      "partial_evidence": "s13-r642-guard-line-audit.json",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
@@ -2134,8 +2141,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r642-guard-line-audit.json"
+      "status": "completed-original-flat-excluded-guards",
+      "partial_evidence": "s13-r642-guard-line-audit.json",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.h",
@@ -2912,8 +2920,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r621-real-mode-line-review.json"
+      "status": "completed-original-flat-excluded-guards",
+      "partial_evidence": "s13-r621-real-mode-line-review.json",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.h",
@@ -3277,13 +3286,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/mov.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\mov.c",
-      "current_sha256": "c5b14a99fe4c9a2b0cea442a5f70d090cb58ee76152447698592f677b606cda8",
+      "current_sha256": "58fe3be87395df048bd97772a752acf75352c026278ad827aaca990888583f9b",
       "original_sha256": "d274ed1ad9f8114f8c7ff0c0d6d57f08116d70fd8e6b26f0d0051b70ba9f8348",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/mov.h",
@@ -5667,7 +5677,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/gmi.h",
@@ -6298,7 +6309,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/dummy_nt.c",
@@ -6857,13 +6869,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/inc/nt_eoi.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_eoi.h",
-      "current_sha256": "63bc89a7d7e5e31a71aa8bcf411d7ddd1bc2ff362371630c44109742c0bce945",
+      "current_sha256": "ca72a8fd68e85a5b7a3b004dc2c04a1d2e825fa3987615a8fcdbfacae16912b8",
       "original_sha256": "57ae39f20535e93b451e83a0e54e6e45f43512e12d99ae3ffc6a58e4f1ada8e3",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/nt_event.h",
@@ -6974,7 +6987,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/nt_thred.h",
@@ -7242,8 +7256,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r653-platform-guard-lines.json"
+      "status": "completed-original-flat-excluded-guards",
+      "partial_evidence": "s13-r653-platform-guard-lines.json",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_input.c",
@@ -7423,7 +7438,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
@@ -7829,7 +7845,8 @@
         "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/vdmredir/vrputil.h",
@@ -8224,12 +8241,13 @@
     {
       "path": "src/mvdm-host/wow32/wgmeta.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgmeta.c",
-      "current_sha256": "11612b3cea5310e70d6b721203a77fe57b1f9231be05d20ca6f1063fbcb0e3e6",
+      "current_sha256": "5612e2444464131427cfa33d6417a4057c099ab5ac0e684fef26f9527b296cf8",
       "original_sha256": "213b4aa2f1f7a11ac310d7152027da2da0ea804b9efeb6fefc0cf609ce3d5260",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r660-guard-line-audit.json"
     },
     {
       "path": "src/mvdm-host/wow32/wgmeta.h",
@@ -8269,7 +8287,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wgprnset.h",
@@ -8289,7 +8308,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wgtbl2.h",
@@ -8390,17 +8410,20 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wkernel.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkernel.c",
-      "current_sha256": "ba8d49a89324de2c559034d4f443d6e72f17c817aebcdaa4446d38bccffb31af",
+      "current_sha256": "1a99b43c912a95c9b7793faa331042040d0af1f9e67e967e12c53e6a5b728207",
       "original_sha256": "c07f5e981d65f6911419990292fd3466d487fd79ff52b4819bb9905f808e68bd",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "partial_evidence": "s13-r660-guard-line-audit.json",
+      "evidence": "s13-r660-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wkernel.h",
@@ -8415,12 +8438,13 @@
     {
       "path": "src/mvdm-host/wow32/wkfileio.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkfileio.c",
-      "current_sha256": "977a8e14161b5b9a8d4fb743b32b4e9c54a67ccaf8bede274b4fe54f067da6ac",
+      "current_sha256": "1831a9aba0e796bc0034d021f3c17d6d8ab978f0c8bed0874bc00909e05e1372",
       "original_sha256": "3437d0886ec49109668f09a46f5cf8b533ccfbd08f78ef441cbf71853482a8ad",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wkfileio.h",
@@ -8510,7 +8534,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wktbl2.h",
@@ -8525,12 +8550,13 @@
     {
       "path": "src/mvdm-host/wow32/wmdisp32.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.c",
-      "current_sha256": "2fe1b09915e4aa6379715b393308986ebf6edc81006a5a5b2b21ae4499be16c3",
+      "current_sha256": "5b251213a2f582b25f26a7ead7006b62e7fbadb40a20b919fe0aa67a50521d4e",
       "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r660-guard-line-audit.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmdisp32.h",
@@ -8545,14 +8571,14 @@
     {
       "path": "src/mvdm-host/wow32/wmmalias.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmalias.c",
-      "current_sha256": "1b2c03921b483dff763f187c7f26dc4b9b40df6b6ae3ad7478b32087e11ca9f4",
+      "current_sha256": "81fa78f1393a763148155cbd7f97a2a52198ad4515681c776dc2e5e889678e6c",
       "original_sha256": "d4949206f261d22f80f96e769388aee94037b27092c69c68ec058619f843f4fb",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
       "status": "pending-per-file-review",
       "pending_change": "r504 exclude unselected DEBUG alias accounting; file audit pending",
-      "partial_evidence": "s13-r648-mixed-debug-guards.json"
+      "partial_evidence": "s13-r660-guard-line-audit.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmmalias.h",
@@ -8562,7 +8588,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmmedia.c",
@@ -8655,7 +8682,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmmtbl2.h",
@@ -8670,12 +8698,13 @@
     {
       "path": "src/mvdm-host/wow32/wmsg16.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsg16.c",
-      "current_sha256": "ce6aa357c60e3096652a0716a1069032c5d722daa0634627e3ec065b6c486f01",
+      "current_sha256": "66470a04cd583aef6af69438db6f72c9fe844cb82dda9b5e32fdef37fab3b595",
       "original_sha256": "eb7b726626232ad95f1ff766004f8bea6fca3d25111124dd5c18e8512c1dbe44",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r660-guard-line-audit.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmsg16.h",
@@ -8801,17 +8830,20 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmtbl32.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmtbl32.h",
-      "current_sha256": "8e33d139191cdffca0fd8743d0e8227a1da532ddf07dbbf5e346c0e2736017ec",
+      "current_sha256": "f3634dc1bf55e7441f3108f56775a0ff986ed34e5b41197b7dbe68ed9ee6f24d",
       "original_sha256": "c64cfbdd5b28db353fd24edd971044fe8f086d86b40aaffd648ffcfe4c653afb",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "partial_evidence": "s13-r660-guard-line-audit.json",
+      "evidence": "s13-r660-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wole2.c",
@@ -8863,17 +8895,20 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wowhooks.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowhooks.c",
-      "current_sha256": "fd371b9ceb4ca1ffdf248bea9979abcc816552fb462f09c05031fa19d336b2c1",
+      "current_sha256": "bff4df2c0d3b190db42bda06eb2f8d28904a33e126889644a09e8ccfc5586d2c",
       "original_sha256": "345220990242cde0890884f478bef8622c2fc537c9e6200fa9b289145be0cc67",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "partial_evidence": "s13-r660-guard-line-audit.json",
+      "evidence": "s13-r660-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wowhooks.h",
@@ -8888,12 +8923,14 @@
     {
       "path": "src/mvdm-host/wow32/wowtbl.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowtbl.c",
-      "current_sha256": "52fcee8e4ef27fad1a112ce1fd104f2bb055ae6b983d8e7385e1a5dec8f0de92",
+      "current_sha256": "0fedfaf8c7ca77b7e8781717046ea211fc805627dc45bdc8c5f2c7acf524e2db",
       "original_sha256": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "partial_evidence": "s13-r660-guard-line-audit.json",
+      "evidence": "s13-r660-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wowtbl.h",
@@ -8903,17 +8940,20 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wparam.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
-      "current_sha256": "4799413ff806747d082ccd99de0a8aafe03c1694abadfa21213de848ffa092a3",
+      "current_sha256": "137e82bbd2f5dcf08761115ee1af0b3c9942c9c46a35edc77adf7e0c310b8a0d",
       "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "partial_evidence": "s13-r660-guard-line-audit.json",
+      "evidence": "s13-r660-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wparam.h",
@@ -9045,7 +9085,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wshtbl2.h",
@@ -9085,7 +9126,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wspool.c",
@@ -9125,7 +9167,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wstbl2.h",
@@ -9165,7 +9208,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wsubcls.h",
@@ -9205,7 +9249,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wthtbl2.h",
@@ -9443,12 +9488,13 @@
     {
       "path": "src/mvdm-host/wow32/wuser.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuser.c",
-      "current_sha256": "30e90282d0b47a933ab21bfa9a2da26d0102d600c8769041645b8649383da15c",
+      "current_sha256": "1d4935e9c44725b1b3ca6c4ded1ecf6a58cbbbdf8e3de9d78b7416126fe25f75",
       "original_sha256": "ce33e8634d085f9ca27ad331560e5321c3fed2ee8552ce0d00fda25af0a74b62",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r660-guard-line-audit.json"
     },
     {
       "path": "src/mvdm-host/wow32/wuser.h",
@@ -9508,7 +9554,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wutbl2.h",
@@ -9711,7 +9758,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/non-mvdm/base/ntos/rtl/error.c",
@@ -11040,12 +11088,13 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/clglobal.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clglobal.c",
-      "current_sha256": "9f229babdf6e1ec940dbdf3a33ecdd59afc8b0f6467e000d0061a4cced711849",
+      "current_sha256": "0fbf20d3a510043ecec29f9df935c20880dc490aebae02be233a1deadcda7742",
       "original_sha256": "d8fe5a80d5848f2951843d7ba94752cb3223945a48630350835422389cd1da6f",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
@@ -11098,7 +11147,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/combodir.c",
@@ -11215,24 +11265,26 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/edecrare.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edecrare.c",
-      "current_sha256": "35045a97d88544222ddcf33a8985319bbb3e9f3466ceb4987c506bd70ed2056e",
+      "current_sha256": "f0f15a39cc233b6cbfb25b891af2e858f8e68eca735a5bcedf0e7396ecd7b9eb",
       "original_sha256": "b50e0f8f305f6456b3a952ddd63c815357136f222328c6d83dd0e76e697b5634",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/editec.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editec.c",
-      "current_sha256": "fb801a1eabc14a5b65a8946f6829911f6f0d23464b67362c8657fb8e2618fb28",
+      "current_sha256": "cdeea4a75536e75887f395d9d8e9f20e43ee42e9f23445250e1c71f3ab707488",
       "original_sha256": "13e3aa26649c7b21a49a3f3114a73bc06fdfc6472b782663bb10879cabc0ddb6",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/editml.c",
@@ -11356,7 +11408,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
@@ -11389,7 +11442,8 @@
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/lboxvar.c",
@@ -11602,7 +11656,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
@@ -11787,7 +11842,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r659-flat-guard-review.json"
     }
   ],
   "scope": "Union of C/C++ source paths and C/H dependencies observed in 12 stable Ninja graphs; database entries only cover prior builds and may contain historical graph contexts. Compiled C++ is included when mirrored. Completion here only for byte-identical originals with no raw conditional directives in either file. Other files remain pending. This is an observed inventory, not proof that all supported but unbuilt configurations are covered.",

@@ -1,0 +1,147 @@
+{
+  "scope": "Five product-observed files whose original condition groups are flat and all have existing excluded error-only first arms.",
+  "method": "Compare original selectors, group boundaries, else presence and retained else text. Check physical error, selected and following line mappings; conservatively screen comments and conditional continuations. Reject directive after continued physical line.",
+  "context": "Prior product release builds and 181 retained-guard controls; selector forced on reaches error, so builds using these files cannot silently select these arms.",
+  "limits": "Reviews conditional structure and alternatives, not unrelated adaptations; the complete inventory of all supported contexts remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wkernel.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkernel.c",
+      "sha256": "1a99b43c912a95c9b7793faa331042040d0af1f9e67e967e12c53e6a5b728207",
+      "original_sha256": "c07f5e981d65f6911419990292fd3466d487fd79ff52b4819bb9905f808e68bd",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DBCS"
+        ],
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "ifdef",
+          "DBCS"
+        ],
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmtbl32.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmtbl32.h",
+      "sha256": "f3634dc1bf55e7441f3108f56775a0ff986ed34e5b41197b7dbe68ed9ee6f24d",
+      "original_sha256": "c64cfbdd5b28db353fd24edd971044fe8f086d86b40aaffd648ffcfe4c653afb",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG_OR_WOWPROFILE"
+        ],
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowhooks.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowhooks.c",
+      "sha256": "bff4df2c0d3b190db42bda06eb2f8d28904a33e126889644a09e8ccfc5586d2c",
+      "original_sha256": "345220990242cde0890884f478bef8622c2fc537c9e6200fa9b289145be0cc67",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wowtbl.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wowtbl.c",
+      "sha256": "0fedfaf8c7ca77b7e8781717046ea211fc805627dc45bdc8c5f2c7acf524e2db",
+      "original_sha256": "4c053570af6e72b0159d0e1bc7c5e9859ef89d513781bbcd1e767ddaf7695960",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DEBUG_OR_WOWPROFILE"
+        ],
+        [
+          "ifdef",
+          "WOWPROFILE"
+        ],
+        [
+          "ifdef",
+          "DEBUG_OR_WOWPROFILE"
+        ],
+        [
+          "ifdef",
+          "DEBUG_OR_WOWPROFILE"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wparam.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wparam.c",
+      "sha256": "137e82bbd2f5dcf08761115ee1af0b3c9942c9c46a35edc77adf7e0c310b8a0d",
+      "original_sha256": "939785d0aee348459e02136efafdcbdac7aa1d7612f4bfcf8c4f21acf677271a",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "MAPPARAM_EXTRA"
+        ],
+        [
+          "ifdef",
+          "MAPPARAM_EXTRA"
+        ],
+        [
+          "ifdef",
+          "MAPPARAM_EXTRA"
+        ],
+        [
+          "ifdef",
+          "MAPPARAM_EXTRA"
+        ],
+        [
+          "ifdef",
+          "MAPPARAM_EXTRA"
+        ],
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "ifdef",
+          "DEBUG"
+        ],
+        [
+          "ifdef",
+          "DEBUG"
+        ]
+      ]
+    }
+  ]
+}

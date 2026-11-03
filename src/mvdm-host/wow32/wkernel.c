@@ -331,9 +331,10 @@ ULONG FASTCALL WK32GetProfileString(PVDMFRAME pFrame)
                 }
 
 #ifdef DBCS
+#line 314
 #error Unsupported excluded original configuration
 #endif
-#line 338
+#line 318
             }
 
             if (n >= nLenDef) {
@@ -505,9 +506,10 @@ ULONG FASTCALL WK32GetPrivateProfileString(PVDMFRAME pFrame)
                     }
 
 #ifdef DBCS
+#line 505
 #error Unsupported excluded original configuration
 #endif
-#line 534
+#line 509
                 }
 
                 if (n >= nLenDef) {
