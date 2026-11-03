@@ -492,8 +492,10 @@ IFN4(
 #else /* !PIG */
 #line 499
 #ifdef SYNCH_TIMERS
+#line 500
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #endif /* SYNCH_TIMERS */
+#line 506
 #endif /* PIG */
 #line 507
    /* mark successful end to interrupt */

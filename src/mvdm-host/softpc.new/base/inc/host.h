@@ -47,6 +47,7 @@ extern boolean         host_validate_pathname();
 extern boolean         host_check_rd_wt_access();
 extern boolean         host_check_read_access();
 #ifdef SUSPEND
+#line 47
 #error Unsupported excluded original configuration
 #endif
 #line 49

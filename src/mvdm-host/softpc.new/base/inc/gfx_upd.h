@@ -121,8 +121,10 @@ typedef struct
 						arg5,int,arg6);
 	void (*paint_cursor) IPT3(int,arg1, int,arg2, half_word,arg3);
 #ifdef GISP_SVGA 
+#line 120
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
+#line 122
 #ifdef EGG
 	void (*set_paint) IPT2(DISPLAY_MODE,arg1, int,arg2);
 	void (*change_plane_mask) IPT1(int,arg1);
@@ -170,8 +172,10 @@ extern VIDEOFUNCS *working_video_funcs;
 #define host_paint_cursor(x,y,attr)\
 	(working_video_funcs->paint_cursor)(x,y,attr)
 #ifdef GISP_SVGA
+#line 169
 #error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
 #endif		/* GISP_SVGA */
+#line 172
 #ifdef EGG
 #define host_set_paint_routine(mode,ht)\
 	(working_video_funcs->set_paint)(mode,ht)

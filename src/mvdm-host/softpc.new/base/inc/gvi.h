@@ -112,12 +112,15 @@ typedef union {
         struct
         {
 #ifdef  BIT_ORDER1
+#line 137
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #else
+#line 141
                 unsigned        low_byte        : 8,
                                 top_bit         : 1,
                                 unused          : 7;
 #endif
+#line 145
         } as_bfld;
 } _9_BITS;
 
@@ -132,13 +135,16 @@ typedef union {
         struct
         {
 #ifdef  BIT_ORDER1
+#line 159
 #error DIVERGENCE MVDM-HOST-DIV-524: BIT_ORDER1 platform branch is not selected; see mirror register.
 #else
+#line 164
                 unsigned        low_byte        : 8,
 				med_bit		: 1,
                                 top_bit         : 1,
                                 unused          : 6;
 #endif
+#line 169
         } as_bfld;
 } _10_BITS;
 /*

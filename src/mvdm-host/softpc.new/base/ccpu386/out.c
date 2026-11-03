@@ -80,10 +80,13 @@ OUT32 IFN2(
 {
 #ifndef PIG
 #ifdef SFELLOW
+#line 83
 #error DIVERGENCE MVDM-HOST-DIV-520: SFELLOW platform branch is not selected; see mirror register.
 #else
+#line 87
 	OUT16(op1, op2 & 0xffff);
 	OUT16(op1 + 2, op2 >> 16);
 #endif
+#line 90
 #endif /* !PIG */
 }

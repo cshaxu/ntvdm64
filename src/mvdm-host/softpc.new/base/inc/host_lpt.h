@@ -139,8 +139,10 @@ IMPORT	UCHAR		host_read_printer_status_port(int adapter);
 #endif
 
 #ifdef PS_FLUSHING
+#line 142
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
+#line 145
 
 #if defined (NTVDM) && defined(MONITOR)
 IMPORT void host_printer_setup_table(sys_addr table_addr, word nPorts, word * lptStatusPortAddr);

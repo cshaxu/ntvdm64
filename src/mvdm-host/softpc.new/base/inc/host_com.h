@@ -207,8 +207,10 @@ extern void host_com_da_int_change(int adapter, int da_int_state, int da_data_st
 #endif
 
 #ifdef PS_FLUSHING
+#line 210
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
+#line 213
 
 #ifndef macintosh
 IMPORT void host_com_xon_change IPT2(IU8,hostID, IBOOL,apply);

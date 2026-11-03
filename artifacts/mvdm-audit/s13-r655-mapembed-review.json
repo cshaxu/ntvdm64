@@ -1,0 +1,10 @@
+{
+  "path": "src/mvdm-host/wow32/mapembed.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\mapembed.h",
+  "sha256": "90fd350c4770756416917cf3e3318a7926b15760c1b15c32e22d9eb6fd045fd7",
+  "observed_in": [
+    "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+  ],
+  "conclusion": "Byte-identical original file; sole conditional group is the original include guard and has no excluded alternative.",
+  "limits": "Conditional structure review only; graph observation does not prove all supported build contexts."
+}

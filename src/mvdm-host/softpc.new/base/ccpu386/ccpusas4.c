@@ -139,8 +139,10 @@ GLOBAL IU8 *Start_of_M_area = NULL;
 GLOBAL PHY_ADDR Length_of_M_area = 0; /* DIVERGENCE(MVDM-HOST-DIV-055):
                                         guest physical byte count; see sas.h. */
 #ifdef BACK_M
+#line 137
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #endif
+#line 139
 
 void	    (*temp_func) ();
 
@@ -361,10 +363,13 @@ sas_init IFN1(PHY_ADDR, size)
 		IMPORT IU8 *CCPU_M;
 
 #ifdef BACK_M
+#line 385
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
+#line 387
 		CCPU_M = Start_of_M_area;
 #endif				/* BACK_M */
+#line 389
 	}
 
 	/*
@@ -376,8 +381,10 @@ sas_init IFN1(PHY_ADDR, size)
 
 	Length_of_M_area = size;
 #ifdef BACK_M
+#line 400
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #endif
+#line 402
 
 	/* init the ROM (load the bios roms etc) */
 
@@ -1314,10 +1321,13 @@ c_GetPhyAdd IFN1(PHY_ADDR, addr)
 	if (mvdm_softpc_physical_mapping_resolve(addr, &retVal))
 		return(retVal);
 #ifdef BACK_M
+#line 1314
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else 
+#line 1317
 	return((IU8 *)((IHPE)Start_of_M_area + (IHPE)addr));
 #endif
+#line 1319
 }
 
 /*
