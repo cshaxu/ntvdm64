@@ -1,0 +1,36 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/accessfn.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\accessfn.c",
+  "sha256": "326046c10f56b4da4eb4d7fe8b7e2052a46955a229cd94f717ab3ff6b52a1a37",
+  "observed_in": [
+    "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+    "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+  ],
+  "conditions": [
+    "#ifndef PROD",
+    "#endif"
+  ],
+  "method": "Byte-identical original with one conditional group; actual x86 and x64-reference Ninja compile commands preprocessed and three selected function definitions observed.",
+  "compile_rule": "tools/build/New-T310OriginalSoftpcNinja.ps1 cvidcAccessFlags removes /DPROD and /DCCPU specifically for accessfn.c.",
+  "preprocess": [
+    {
+      "graph": "msvc-x86-release",
+      "preprocessed_sha256": "3eb16f692c4af2cd5a341ed2da32fe82219d22ab955fb63d309bb394d238a56b",
+      "witnesses": [
+        "cpu_simulate definition",
+        "cpu_interrupt definition",
+        "host_q_ev_get_count definition"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "preprocessed_sha256": "3eb16f692c4af2cd5a341ed2da32fe82219d22ab955fb63d309bb394d238a56b",
+      "witnesses": [
+        "cpu_simulate definition",
+        "cpu_interrupt definition",
+        "host_q_ev_get_count definition"
+      ]
+    }
+  ],
+  "limits": "Selected in both observed actual graphs; unsupported or unenumerated contexts remain open."
+}

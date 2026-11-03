@@ -3986,8 +3986,8 @@
       "sha256": "326046c10f56b4da4eb4d7fe8b7e2052a46955a229cd94f717ab3ff6b52a1a37",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-identical-original-selected-nonprod",
+      "additional_evidence": "s13-r674-accessfn-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\accessfn.c",
       "original_candidate_sha256": "326046c10f56b4da4eb4d7fe8b7e2052a46955a229cd94f717ab3ff6b52a1a37"
     },
