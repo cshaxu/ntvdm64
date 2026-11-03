@@ -1,0 +1,57 @@
+{
+  "scope": "Six unreferenced mirror headers absent from the observed product graph/dependency inventory and with no textual product/test include or stem references in current sources/build scripts.",
+  "prior_inventory": "s13-r534-unobserved-queue-static-scan.json",
+  "extra_check": "Case-insensitive source, tools/build and test stem searches and build.ninja/.d searches found no consumer; independent binary tools and runtime assets are untouched.",
+  "limitations": "This records supported graph and static-reference evidence, not a claim about hypothetical external projects.",
+  "records": [
+    {
+      "path": "src/mvdm-host/inc/wowddeml.h",
+      "original": "O:/repos.external/OpenNT/base/mvdm/inc/wowddeml.h",
+      "current_sha256": "4feecb69b6f6bf69d5f51c7720a4c7a47cbfa580b987e577f6e475683af9ef25",
+      "original_sha256": "8cd9627dd0af77790fd4c046c69f52c2a04fbf816166c8369033e65ae341e292",
+      "current_size": 7401,
+      "original_size": 7663
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/d_inst.h",
+      "original": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/inc/d_inst.h",
+      "current_sha256": "41936e0fd707b57adff2177f08b09615af7364fc348769e1c7e2b8f0877518a1",
+      "original_sha256": "5c26efcce64e3a2bd0f6d64ca53775e6c6a4f016873e15cbfda98148439edfa3",
+      "current_size": 12514,
+      "original_size": 12939
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/d_oper.h",
+      "original": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/inc/d_oper.h",
+      "current_sha256": "a7ca6b1399f556de3e3617a22b3b2b19a1b678e19acdab089d693577d6368237",
+      "original_sha256": "035d342c10eeed78180ed8881ef14b32477e93a12ce1c2cb35381554f598e90f",
+      "current_size": 14407,
+      "original_size": 14813
+    },
+    {
+      "path": "src/mvdm-host/wow32/wddeml32.h",
+      "original": "O:/repos.external/OpenNT/base/mvdm/wow32/wddeml32.h",
+      "current_sha256": "8c82de84a3f3417a6fad964a9f9c6b9668e4c4fac9c3f8a6e07b1a8fb731f703",
+      "original_sha256": "b74cda34ec90308aa0212142e7282a878dd7c2267a0305c07147543c0b0a0a52",
+      "current_size": 2802,
+      "original_size": 2870
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkglobal.h",
+      "original": "O:/repos.external/OpenNT/base/mvdm/wow32/wkglobal.h",
+      "current_sha256": "afbe05b477a0d914677e7fb49b2ca026600c27c96fe75723ca979be619866b7e",
+      "original_sha256": "3f17fae6a9962af439050e188e139d264bbb33b059de1d450048d904d3b5f3d2",
+      "current_size": 1136,
+      "original_size": 1169
+    },
+    {
+      "path": "src/non-mvdm/public/ddk/inc/ntddtx.h",
+      "original": "O:/repos.external/OpenNT/public/ddk/inc/ntddtx.h",
+      "current_sha256": "f65c5f38e1881924bb6dab1a1187e86525bad5812f33a072d60d65bcb2e77b4d",
+      "original_sha256": "4212a48255ab6e9bc68f06d95cee445d67b8d4a901a98c5d2a149002b3a0f9f7",
+      "current_size": 418,
+      "original_size": 443
+    }
+  ],
+  "status": "r609 cached product builds passed; complete package published and verified."
+}

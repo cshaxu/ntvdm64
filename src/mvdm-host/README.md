@@ -2618,3 +2618,15 @@ the product C-VID dispatch or protected-selector behavior.
 MVDM-HOST-DIV-721: remove the test-only OEMUNI toemuni.c program and its
 UMTEST manifest entries. The production library remains file.c and process.c;
 the remaining product-library fixtures retain their explicitly stated scope.
+
+MVDM-HOST-DIV-722: remove five original headers with no observed product
+build/dependency selection and no current source, build or test reference:
+inc/wowddeml.h, softpc.new/base/inc/d_inst.h and d_oper.h,
+wow32/wddeml32.h and wkglobal.h. Exact current and original hashes and scope
+are recorded in ../../artifacts/mvdm-audit/s13-r607-unreferenced-headers.json.
+
+MVDM-HOST-DIV-723: remove unselected softpc.new/host/src/nt_hfx.c,
+nt_hunt.c, nt_smenu.c and host/inc/nt_smenu.h. No external product or test
+source/build reference was found and the files are absent from observed build
+graphs; the header was referenced only by the removed nt_smenu.c. Hashes and
+scope are in ../../artifacts/mvdm-audit/s13-r608-unreferenced-host-files.json.

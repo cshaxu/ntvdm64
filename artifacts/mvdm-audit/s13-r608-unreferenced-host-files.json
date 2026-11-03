@@ -1,0 +1,40 @@
+{
+  "scope": "Three unselected host translation units and a header referenced only by one of those units.",
+  "evidence": "Absent from observed product graph/dependency inventory; case-insensitive source, tools/build and tests search found no external source, compile or include reference. Historical audit scripts retain their historical records but do not make these product sources.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hfx.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_hfx.c",
+      "current_sha256": "d48fbcf746ae868e1650439d2b2fe35950d0c78acfff877339bfcfddd2641186",
+      "original_sha256": "61514c95e1a9f3a3e491a262aff92c1d2e1f5dfb73dbc607fd1ee29f0359c371",
+      "current_size": 3481,
+      "original_size": 3676
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_hunt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_hunt.c",
+      "current_sha256": "e6e9e09137eba047d6fe724b0a4c198650dc0f457bc67207f847a69ca37630dd",
+      "original_sha256": "6aeb2ba2efad017d65184d3fc32c09e0587bd02def267cc4fecfeca1c1715ad7",
+      "current_size": 712,
+      "original_size": 5476
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_smenu.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_smenu.c",
+      "current_sha256": "17f37f6156b26ae6901ecca874f3e8170afa10bdbaf90aa6087d0210d47c7160",
+      "original_sha256": "1f46c184b1b6eba70da8f35826dbdfd4f67f4baa172b6c0081ea7f2ca3e0d960",
+      "current_size": 2427,
+      "original_size": 2514
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_smenu.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_smenu.h",
+      "current_sha256": "f1853976206012553148b7d798a317d998b8ba3014a16a46ab4dbca8353d9ee9",
+      "original_sha256": "811068f48a8b312a7096c4261a20d09d2629c3b15a00857342c48c2fdc09b9b4",
+      "current_size": 385,
+      "original_size": 400
+    }
+  ],
+  "limitations": "No claim about hypothetical unsupported external build graphs; no executable or guest asset removed.",
+  "status": "r609 cached product builds passed; complete package published and verified."
+}

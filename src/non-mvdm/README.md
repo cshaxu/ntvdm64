@@ -2399,3 +2399,8 @@ non-Unicode #error. The r520 actual xactsrv preprocessing observed UNICODE.
 OPENNT-HOST-234: exclude the ANSI conversion alternative in
 ds/netapi/xactsrv/xsunicod.h; all 12 observed worker consumers define
 UNICODE. Original Unicode declarations, guard and line anchors remain.
+
+OPENNT-HOST-235: remove public/ddk/inc/ntddtx.h after the observed product
+build/dependency inventory and current source, build and test reference scan
+found no consumer. Current and original hashes and scope are recorded in
+../../artifacts/mvdm-audit/s13-r607-unreferenced-headers.json.
