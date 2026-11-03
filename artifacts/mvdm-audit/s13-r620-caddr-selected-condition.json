@@ -1,0 +1,8 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_addr.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_addr.c",
+  "sha256": "c60e097b1ccaf789c1b37098085e337118e765a357acd0950ce01c5a08ab129a",
+  "scope": "The sole original condition is a retained real-mode limit behavior.",
+  "evidence": "Current file and pinned OpenNT are byte-identical; no project definition of TAKE_REAL_MODE_LIMIT_FAULT was found. Actual x86 product TU preprocessing retains the CCPU_CR / CCPU_FLAGS early return immediately before bad_limit handling.",
+  "limits": "One current product preprocessing context observed, no runtime execution inferred."
+}

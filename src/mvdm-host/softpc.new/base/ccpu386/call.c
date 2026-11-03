@@ -139,9 +139,10 @@ CALLF
       validate_stack_space(USE_SP, (ISM32)NR_ITEMS_2);
 
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
+#line 89
 #error Unsupported excluded original configuration
 #else	/* TAKE_REAL_MODE_LIMIT_FAULT */
-#line 147
+#line 95
 
       /* The Soft486 EDL CPU does not take Real Mode limit failures.
        * Since the Ccpu486 is used as a "reference" cpu we wish it
@@ -303,9 +304,10 @@ IFN1(
 
    /* do ip limit check */
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
+#line 258
 #error Unsupported excluded original configuration
 #else /* TAKE_REAL_MODE_LIMIT_FAULT */
-#line 312
+#line 263
 
       /* The Soft486 EDL CPU does not take Real Mode limit failures.
        * Since the Ccpu486 is used as a "reference" cpu we wish it
@@ -362,9 +364,10 @@ IFN1(
 
    /* do ip limit check */
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
+#line 321
 #error Unsupported excluded original configuration
 #else /* TAKE_REAL_MODE_LIMIT_FAULT */
-#line 375
+#line 326
 
       /* The Soft486 EDL CPU does not take Real Mode limit failures.
        * Since the Ccpu486 is used as a "reference" cpu we wish it

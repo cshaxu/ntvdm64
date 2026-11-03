@@ -379,6 +379,7 @@ static void     doseek(void);
 static int      disktobuffer(long);
 static int      buffertodisk(long);
 #else
+#line 382
 #error Unsupported excluded original configuration
 #endif				/* ANSI */
 #line 398

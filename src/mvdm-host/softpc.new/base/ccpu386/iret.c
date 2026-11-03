@@ -102,6 +102,7 @@ IRET()
       new_flags = tpop(STACK_ITEM_3, NULL_BYTE_OFFSET);
 
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
+#line 105
 #error Unsupported excluded original configuration
 #else	/* TAKE_REAL_MODE_LIMIT_FAULT */
 #line 111

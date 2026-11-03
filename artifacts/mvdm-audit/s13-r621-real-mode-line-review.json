@@ -1,0 +1,115 @@
+{
+  "scope": "Six product CCPU files; existing unsupported real-mode-limit arms and retained alternatives, diagnostic lines reconciled to pinned original.",
+  "selection": "TAKE_REAL_MODE_LIMIT_FAULT has no project definition or build flag in supported current graphs; current x86 preprocessing of c_addr shows the corresponding non-fault selection. Existing errors are not new exclusions.",
+  "limitation": "This does not complete review of other groups in each file; cached build, image comparison and publication are recorded in s13-r623-delivery.md.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\call.c",
+      "before_sha256": "34bc1e7ff62725ad32e2ab98acce3c5a6f92a2c4fc9b0dac54454385db6f02e9",
+      "after_sha256": "3d7ea02d982f66d315818c5ebe109e4f086c5ac7ebb44760da0013b41a39c13e",
+      "original_sha256": "ce5f56ea27239d0c85243cee23e01de34b1f82d3ba92eced687e2b3bd90a2a94",
+      "groups": [
+        {
+          "original_guard": 88,
+          "original_error_line": 89,
+          "original_selected_line": 95,
+          "original_following_line": 103
+        },
+        {
+          "original_guard": 257,
+          "original_error_line": 258,
+          "original_selected_line": 263,
+          "original_following_line": 290
+        },
+        {
+          "original_guard": 320,
+          "original_error_line": 321,
+          "original_selected_line": 326,
+          "original_following_line": 353
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\jmp.c",
+      "before_sha256": "e7c25ce04c9dedea6c9b8fb67df49d622b8bc30bca79028f7bb6df32037a1585",
+      "after_sha256": "1c5660ad0dbb88ccb808f155093b3821fbd91816a71d11f3de8e46d8ae2d05f6",
+      "original_sha256": "470889ec4ca8311980f1b700e56d028009fc459c47eb484e1451a799ac7feb87",
+      "groups": [
+        {
+          "original_guard": 70,
+          "original_error_line": 71,
+          "original_selected_line": 81,
+          "original_following_line": 89
+        },
+        {
+          "original_guard": 148,
+          "original_error_line": 149,
+          "original_selected_line": 154,
+          "original_following_line": 181
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\iret.c",
+      "before_sha256": "d702167d288cfd1146ffc78a8c4013e1f40408c39629dd98806df13e54da5652",
+      "after_sha256": "f4afd2d859ad0f59c4e8fc1bd5105a9e5350a67cd1159fe6d49dc411571af7c1",
+      "original_sha256": "091378ab6583c06e7593b5b34f336531d874e695be633596d652ea42f5446eb3",
+      "groups": [
+        {
+          "original_guard": 104,
+          "original_error_line": 105,
+          "original_selected_line": 111,
+          "original_following_line": 119
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ret.c",
+      "before_sha256": "02c0563e316e623c1ccecfab157b71e46f80eb56d506070cceebe2c9b26bfb5c",
+      "after_sha256": "66d26a95cec8b48f185c3295d3a9a69537b1dc927210f42c247204ae33524f6f",
+      "original_sha256": "9531f24ac58029b3a7eb768a49b8e99242b6e9d9fbc5825b6982ae53687688f5",
+      "groups": [
+        {
+          "original_guard": 86,
+          "original_error_line": 87,
+          "original_selected_line": 93,
+          "original_following_line": 101
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_intr.c",
+      "before_sha256": "7901a8740f81e862b08b248bc794e47eceff8c10755ca17e56b1c293ee2dd997",
+      "after_sha256": "f3d6f2facffe6862c1f73b5dfd104ce6648a5bd3086477ccbcd8469140d055c0",
+      "original_sha256": "9e6d69b1e05309ca87db41c66b89eb9d0862f2078c08a16fe20b82669bc46a7a",
+      "groups": [
+        {
+          "original_guard": 226,
+          "original_error_line": 227,
+          "original_selected_line": 238,
+          "original_following_line": 246
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xfer.c",
+      "before_sha256": "2c7d1d0b106f10fff50d4190b67db4195a02b611c58f66d9ad9c7734669df7ae",
+      "after_sha256": "dfd91df988c50aa1323bab51a9108575be682a95b547af549033d9d0c5e03012",
+      "original_sha256": "5f730f08b36a3a19cd1c682e080816d21e633b0f1b07f929b08e1d7e06ef4037",
+      "groups": [
+        {
+          "original_guard": 143,
+          "original_error_line": 144,
+          "original_selected_line": 149,
+          "original_following_line": 176
+        }
+      ]
+    }
+  ]
+}

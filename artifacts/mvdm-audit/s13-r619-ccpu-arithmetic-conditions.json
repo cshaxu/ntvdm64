@@ -1,0 +1,51 @@
+{
+  "scope": "Four byte-identical product CCPU arithmetic translation units and all of their condition groups.",
+  "reason": "Each original and current TU includes c_main.h, which unconditionally defines the respective selected arithmetic flag. Neither TU redefines or undefines it; all conditional bodies are retained and byte-identical to OpenNT.",
+  "evidence": "Pinned original and current SHA-256, source include order, macro declarations, and observed product build graphs. This is static source evidence, not a fresh compilation or runtime test.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/div.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\div.c",
+      "sha256": "e1e9653d0883617e12ed70ff4ab08c96d75c7a8b09ea4eb855b3cd4ab3e73007",
+      "macro": "SET_UNDEFINED_DIV_FLAG",
+      "groups": 3,
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/idiv.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\idiv.c",
+      "sha256": "4e48281278345855d027392dd434e286e92591776b8c0d15a3ffb4bcfbb533a6",
+      "macro": "SET_UNDEFINED_DIV_FLAG",
+      "groups": 3,
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/imul.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\imul.c",
+      "sha256": "9cc48f0ff83909e122e01fc417d909fa93964ba4b5c79b3553810d1a6162adc4",
+      "macro": "SET_UNDEFINED_MUL_FLAG",
+      "groups": 5,
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/mul.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\mul.c",
+      "sha256": "5e7f349937d7302ae969bbb3fbd994cc93c23c1b4838e5243e7cd242ce384973",
+      "macro": "SET_UNDEFINED_MUL_FLAG",
+      "groups": 3,
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    }
+  ]
+}

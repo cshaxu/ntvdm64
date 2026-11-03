@@ -95,6 +95,7 @@ extern int get_scanlines(void);
 extern sys_addr find_mode_table(int,sys_addr *);
 extern sys_addr follow_ptr(sys_addr);
 #else
+#line 102
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 106

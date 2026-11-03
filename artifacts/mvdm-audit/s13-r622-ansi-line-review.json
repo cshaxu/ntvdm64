@@ -1,0 +1,47 @@
+{
+  "scope": "Four product-observed C/H files; prior rejected non-ANSI branches receive original error line anchors.",
+  "evidence": "Original directive sequence and selected product graphs compared; prior #error remains unchanged. Other condition groups in these files remain pending.",
+  "limits": "Other groups remain pending; build, image comparison and publication are recorded in s13-r623-delivery.md.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fdisk.c",
+      "before_sha256": "f4ddd6f2950de8e1fae37e8b92b73725ede6dd4e53c59f82713bcb9ba37be136",
+      "after_sha256": "ccdfef5239fa68392231e2bfd0fc99d6e3f70e65503d6c8a7c039c776a3039c5",
+      "original_sha256": "f95a9a26a9ef201e9552f2459a6ba85080e17fb8ccae3fb6280c63eb2fa78607",
+      "original_error_lines": [
+        382
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egavideo.h",
+      "before_sha256": "7b1ac388bebfe9fd20b2d32fdb4240d2dae416eb6218db3a6683bf6f30a64680",
+      "after_sha256": "9abd53e6feb5145c8b6e300ce1a28deac7f568c71c9c8603e574b67fe124d619",
+      "original_sha256": "5b47f5e3566927332de3c3f9474ba3595151758c0a8ff8fd6c9cc860f2f8e6cd",
+      "original_error_lines": [
+        102
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/lock.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\lock.h",
+      "before_sha256": "005b0eb878400c3deb30d8e053536137768390a7417812365815e324f257a7be",
+      "after_sha256": "22c9f6823505537bb4d01958de71628c8bc3f556c247236196cc6bc587234082",
+      "original_sha256": "bfca88d9c901515a44ea12290d10da19bdbcfb66227cc497aaf78d93950a022d",
+      "original_error_lines": [
+        32
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ppi.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ppi.h",
+      "before_sha256": "8ebb5123fcc75b92f296e5f2b23e427fce33be22d47810f92ac20bd767d35eca",
+      "after_sha256": "e6a3ef4be58abf41e5c3ad4fb37b5368ff3c5a555257d45b37a89f650316c2c6",
+      "original_sha256": "7967ae65e76cb00e58f350e87cd115b6ed7a97c81ff96e3b528f9740d3378612",
+      "original_error_lines": [
+        34
+      ]
+    }
+  ]
+}

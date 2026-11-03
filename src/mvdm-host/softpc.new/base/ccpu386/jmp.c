@@ -69,6 +69,7 @@ JMPF
       /* Real Mode or V86 Mode */
 
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
+#line 71
 #error Unsupported excluded original configuration
 #else	/* TAKE_REAL_MODE_LIMIT_FAULT */
 #line 81
@@ -141,6 +142,7 @@ IFN1(
 
    /* do ip limit check */
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
+#line 149
 #error Unsupported excluded original configuration
 #else /* TAKE_REAL_MODE_LIMIT_FAULT */
 #line 154

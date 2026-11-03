@@ -84,6 +84,7 @@ IFN1(
       /* Real Mode or V86 Mode */
 
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
+#line 87
 #error Unsupported excluded original configuration
 #else	/* TAKE_REAL_MODE_LIMIT_FAULT */
 #line 93

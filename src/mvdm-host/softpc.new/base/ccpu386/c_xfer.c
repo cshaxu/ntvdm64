@@ -143,9 +143,10 @@ IFN1(
       new_dest &= WORD_MASK;
 
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
+#line 144
 #error Unsupported excluded original configuration
 #else	/* TAKE_REAL_MODE_LIMIT_FAULT */
-#line 151
+#line 149
 
       /* The Soft486 EDL CPU does not take Real Mode limit failures.
        * Since the Ccpu486 is used as a "reference" cpu we wish it
@@ -161,7 +162,7 @@ IFN1(
 #line 174
 
 #endif	/* TAKE_REAL_MODE_LIMIT_FAULT */
-#line 178
+#line 176
 
    SET_EIP(new_dest);
    took_relative_jump = TRUE;

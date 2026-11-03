@@ -224,6 +224,7 @@ IFN4(
       new_cs = phy_read_word(ivt_addr+2);
 
 #ifdef	TAKE_REAL_MODE_LIMIT_FAULT
+#line 227
 #error Unsupported excluded original configuration
 #else	/* TAKE_REAL_MODE_LIMIT_FAULT */
 #line 238

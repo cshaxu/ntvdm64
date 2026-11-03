@@ -29,6 +29,7 @@ extern boolean host_place_lock(int, CHAR *);
 extern boolean host_check_for_lock(int);
 extern void host_clear_lock(int);
 #else
+#line 32
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 39

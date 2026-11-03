@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 595,
+  "completed_files": 600,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -1767,7 +1767,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "complete-identical-original-ccpu-real-mode-limit",
+      "evidence": "s13-r620-caddr-selected-condition.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_addr.h",
@@ -1861,13 +1862,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_intr.c",
-      "current_sha256": "7901a8740f81e862b08b248bc794e47eceff8c10755ca17e56b1c293ee2dd997",
+      "current_sha256": "f3d6f2facffe6862c1f73b5dfd104ce6648a5bd3086477ccbcd8469140d055c0",
       "original_sha256": "9e6d69b1e05309ca87db41c66b89eb9d0862f2078c08a16fe20b82669bc46a7a",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r621-real-mode-line-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.h",
@@ -2151,14 +2153,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xfer.c",
-      "current_sha256": "2c7d1d0b106f10fff50d4190b67db4195a02b611c58f66d9ad9c7734669df7ae",
+      "current_sha256": "dfd91df988c50aa1323bab51a9108575be682a95b547af549033d9d0c5e03012",
       "original_sha256": "5f730f08b36a3a19cd1c682e080816d21e633b0f1b07f929b08e1d7e06ef4037",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
       "status": "pending-per-file-review",
-      "pending_change": "r538 exclude optional relative-jump limit branch; other groups pending"
+      "pending_change": "r538 exclude optional relative-jump limit branch; other groups pending",
+      "partial_evidence": "s13-r621-real-mode-line-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.h",
@@ -2196,14 +2199,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\call.c",
-      "current_sha256": "34bc1e7ff62725ad32e2ab98acce3c5a6f92a2c4fc9b0dac54454385db6f02e9",
+      "current_sha256": "3d7ea02d982f66d315818c5ebe109e4f086c5ac7ebb44760da0013b41a39c13e",
       "original_sha256": "ce5f56ea27239d0c85243cee23e01de34b1f82d3ba92eced687e2b3bd90a2a94",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
       "status": "pending-per-file-review",
-      "pending_change": "r537 exclude unselected optional call limit branches; full audit pending"
+      "pending_change": "r537 exclude unselected optional call limit branches; full audit pending",
+      "partial_evidence": "s13-r621-real-mode-line-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/call.h",
@@ -2603,7 +2607,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "complete-identical-original-ccpu-selected-flags",
+      "evidence": "s13-r619-ccpu-arithmetic-conditions.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/div.h",
@@ -2702,7 +2707,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "complete-identical-original-ccpu-selected-flags",
+      "evidence": "s13-r619-ccpu-arithmetic-conditions.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/idiv.h",
@@ -2724,7 +2730,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "complete-identical-original-ccpu-selected-flags",
+      "evidence": "s13-r619-ccpu-arithmetic-conditions.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/imul.h",
@@ -2876,13 +2883,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\iret.c",
-      "current_sha256": "d702167d288cfd1146ffc78a8c4013e1f40408c39629dd98806df13e54da5652",
+      "current_sha256": "f4afd2d859ad0f59c4e8fc1bd5105a9e5350a67cd1159fe6d49dc411571af7c1",
       "original_sha256": "091378ab6583c06e7593b5b34f336531d874e695be633596d652ea42f5446eb3",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r621-real-mode-line-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/iret.h",
@@ -2920,13 +2928,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\jmp.c",
-      "current_sha256": "e7c25ce04c9dedea6c9b8fb67df49d622b8bc30bca79028f7bb6df32037a1585",
+      "current_sha256": "1c5660ad0dbb88ccb808f155093b3821fbd91816a71d11f3de8e46d8ae2d05f6",
       "original_sha256": "470889ec4ca8311980f1b700e56d028009fc459c47eb484e1451a799ac7feb87",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r621-real-mode-line-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.h",
@@ -3295,7 +3304,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "complete-identical-original-ccpu-selected-flags",
+      "evidence": "s13-r619-ccpu-arithmetic-conditions.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/mul.h",
@@ -3641,13 +3651,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ret.c",
-      "current_sha256": "02c0563e316e623c1ccecfab157b71e46f80eb56d506070cceebe2c9b26bfb5c",
+      "current_sha256": "66d26a95cec8b48f185c3295d3a9a69537b1dc927210f42c247204ae33524f6f",
       "original_sha256": "9531f24ac58029b3a7eb768a49b8e99242b6e9d9fbc5825b6982ae53687688f5",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r621-real-mode-line-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.h",
@@ -5100,7 +5111,7 @@
     {
       "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fdisk.c",
-      "current_sha256": "f4ddd6f2950de8e1fae37e8b92b73725ede6dd4e53c59f82713bcb9ba37be136",
+      "current_sha256": "ccdfef5239fa68392231e2bfd0fc99d6e3f70e65503d6c8a7c039c776a3039c5",
       "original_sha256": "f95a9a26a9ef201e9552f2459a6ba85080e17fb8ccae3fb6280c63eb2fa78607",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
@@ -5444,7 +5455,7 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/egavideo.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\egavideo.h",
-      "current_sha256": "7b1ac388bebfe9fd20b2d32fdb4240d2dae416eb6218db3a6683bf6f30a64680",
+      "current_sha256": "9abd53e6feb5145c8b6e300ce1a28deac7f568c71c9c8603e574b67fe124d619",
       "original_sha256": "5b47f5e3566927332de3c3f9474ba3595151758c0a8ff8fd6c9cc860f2f8e6cd",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
@@ -5798,7 +5809,7 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/lock.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\lock.h",
-      "current_sha256": "005b0eb878400c3deb30d8e053536137768390a7417812365815e324f257a7be",
+      "current_sha256": "22c9f6823505537bb4d01958de71628c8bc3f556c247236196cc6bc587234082",
       "original_sha256": "bfca88d9c901515a44ea12290d10da19bdbcfb66227cc497aaf78d93950a022d",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
@@ -5831,7 +5842,7 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/ppi.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ppi.h",
-      "current_sha256": "8ebb5123fcc75b92f296e5f2b23e427fce33be22d47810f92ac20bd767d35eca",
+      "current_sha256": "e6a3ef4be58abf41e5c3ad4fb37b5368ff3c5a555257d45b37a89f650316c2c6",
       "original_sha256": "7967ae65e76cb00e58f350e87cd115b6ed7a97c81ff96e3b528f9740d3378612",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",

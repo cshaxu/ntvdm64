@@ -9,6 +9,11 @@ compiled mirror file against its original; build each batch of 10 modified code
 files. If binaries have no substantive change, reuse test evidence for the P;
 otherwise run Full before publication. [Progress](../../artifacts/mvdm-audit/s13-bfs-progress.md);
 [observed per-file inventory](../../artifacts/mvdm-audit/s13-r489-per-file-observed-inventory.json).
+The corrected filesystem census has 1087 present C/H files across both mirror
+roots: 1057 in the existing observed build/dependency inventory and 30 not in
+that inventory. The latter need individual build, tool, inclusion and
+provenance disposition; absence from one inventory is not deletion proof.
+See [census](../../artifacts/mvdm-audit/s13-r624-current-file-census.json).
 
 Prior owner-approved delivery: restore the four MVDM ANSI-profile files changed
 by MVDM-HOST-DIV-479, preserving authored build boundaries; verify actual
@@ -23,11 +28,10 @@ its original S12 evidence and scope remain in the handoff document.
 The DOS4GW/NESticle integration case and its unresolved environment-sensitive
 startup issue are recorded in [TODO](TODO.md) and [evidence](../../artifacts/mvdm-audit/dos4gw-nesticle-integration.md).
 
-CPU40 monitor/TLB remain a tested partial baseline: Full (16 gates), 93 CCPU cases,
-Winmine/SOL/WRITE, four SOL Options cycles and four Win3.1 modes passed; both
-release destinations matched all ten image hashes. CPU30 source removal published; CCPU V86 stays. Mouse unverified. Unfinished DPMI mapped-code, operand-fault,
-reentry and NPX/debug work transfers to the queued recovery; earlier publication
-does not prove that recovery complete. [Evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/code32-prebuilt-search/review.md).
+CPU40 monitor/TLB remain a tested partial baseline; CPU30 removal is published,
+CCPU V86 remains, and physical mouse input is unverified. Unfinished DPMI,
+operand-fault, reentry and NPX/debug work transfers to queued recovery.
+[Results and limits](../../artifacts/mvdm-audit/s11-foundation-evidence/code32-prebuilt-search/review.md).
 
 S10 closed as a source-role audit at its [closure](../etc/evidence/m0-t473-s10-closure.md); this does not assert functional recovery. The revised [stage plan](../etc/operations/m0-t473-whole-recovery-stage-plan.md) preserves the earlier [monitor audit](../../artifacts/mvdm-audit/s11-monitor-minimization.md) as handoff evidence. Preserve unrelated work and immutable guest media.
 
@@ -48,10 +52,8 @@ Winmine 5023 has a focused idle-hook candidate. SOL also reproduced a
 remains unknown. See [evidence](../../artifacts/mvdm-audit/s11-foundation-evidence/atomic-task-retire/execution-check/baseline-failfast-trace/review.md)
 and the [performance investigation](../../artifacts/mvdm-audit/s11-dialog-performance/investigation.md).
 
-An independent prebuilt Win16 witness found that T460 narrowed the accepted
-worker-shared idle query to the selected thread. Restoring the shared query
-passes same-worker cross-task, separate-worker and common-dialog controls; the
-published candidate also passed the Full suite.
+Restoring the worker-shared idle query passed cross-task, separate-worker,
+common-dialog and Full controls.
 
 Winmine probes previously changed a shared VirtualStore profile without an
 original backup. The owner now explicitly permits restarting Winmine and
