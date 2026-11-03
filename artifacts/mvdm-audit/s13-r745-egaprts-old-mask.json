@@ -1,0 +1,188 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_prts.c",
+  "before_sha256": "1e5e6a48c2338f0a3dc88b54db11e3fd242d2ed21165ee5b1209a50136e75cb7",
+  "after_sha256": "c3e674faec39d4346560d403ff5d96a012f32ede5cd36549a1aba1c791765127",
+  "original_sha256": "1dedadd482f631e9b82a0fde92b84ff74c724faaaac782ae538639e0738e7002",
+  "branches": [
+    {
+      "original_if_line": 3029,
+      "original_else_line": 3031,
+      "original_endif_line": 3036,
+      "witness": {
+        "label": "codex_r686_arm_0055",
+        "line": 2507,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      "selected_witness": {
+        "label": "codex_r686_arm_0054",
+        "line": 2505,
+        "kind": "ifndef",
+        "expression": "USE_OLD_MASK_CODE",
+        "error_only": false
+      },
+      "removed_body_sha256": "334819942d9d9168b827a7acc1d9a67990f2ec537722dc552f3b91680f70c1c2"
+    },
+    {
+      "original_if_line": 2981,
+      "original_else_line": 2983,
+      "original_endif_line": 2988,
+      "witness": {
+        "label": "codex_r686_arm_0050",
+        "line": 2457,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      "selected_witness": {
+        "label": "codex_r686_arm_0049",
+        "line": 2455,
+        "kind": "ifndef",
+        "expression": "USE_OLD_MASK_CODE",
+        "error_only": false
+      },
+      "removed_body_sha256": "6192d61b55f93e0e76eebdd67530522dd1fa399fb2342e257c849f0ef5dafcfa"
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "600cbead7b9f7150ff21f7010607e007710cbae8424e0620c31eabf982f092ac",
+      "hit": [
+        "codex_r686_arm_0000",
+        "codex_r686_arm_0001",
+        "codex_r686_arm_0003",
+        "codex_r686_arm_0006",
+        "codex_r686_arm_0008",
+        "codex_r686_arm_0009",
+        "codex_r686_arm_0010",
+        "codex_r686_arm_0011",
+        "codex_r686_arm_0013",
+        "codex_r686_arm_0016",
+        "codex_r686_arm_0018",
+        "codex_r686_arm_0020",
+        "codex_r686_arm_0022",
+        "codex_r686_arm_0024",
+        "codex_r686_arm_0025",
+        "codex_r686_arm_0026",
+        "codex_r686_arm_0027",
+        "codex_r686_arm_0028",
+        "codex_r686_arm_0029",
+        "codex_r686_arm_0030",
+        "codex_r686_arm_0031",
+        "codex_r686_arm_0033",
+        "codex_r686_arm_0034",
+        "codex_r686_arm_0035",
+        "codex_r686_arm_0036",
+        "codex_r686_arm_0037",
+        "codex_r686_arm_0038",
+        "codex_r686_arm_0039",
+        "codex_r686_arm_0040",
+        "codex_r686_arm_0041",
+        "codex_r686_arm_0042",
+        "codex_r686_arm_0043",
+        "codex_r686_arm_0044",
+        "codex_r686_arm_0046",
+        "codex_r686_arm_0047",
+        "codex_r686_arm_0048",
+        "codex_r686_arm_0049",
+        "codex_r686_arm_0053",
+        "codex_r686_arm_0054",
+        "codex_r686_arm_0058",
+        "codex_r686_arm_0059",
+        "codex_r686_arm_0060",
+        "codex_r686_arm_0061",
+        "codex_r686_arm_0062",
+        "codex_r686_arm_0063"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "600cbead7b9f7150ff21f7010607e007710cbae8424e0620c31eabf982f092ac",
+      "hit": [
+        "codex_r686_arm_0000",
+        "codex_r686_arm_0001",
+        "codex_r686_arm_0003",
+        "codex_r686_arm_0006",
+        "codex_r686_arm_0008",
+        "codex_r686_arm_0009",
+        "codex_r686_arm_0010",
+        "codex_r686_arm_0011",
+        "codex_r686_arm_0013",
+        "codex_r686_arm_0016",
+        "codex_r686_arm_0018",
+        "codex_r686_arm_0020",
+        "codex_r686_arm_0022",
+        "codex_r686_arm_0024",
+        "codex_r686_arm_0025",
+        "codex_r686_arm_0026",
+        "codex_r686_arm_0027",
+        "codex_r686_arm_0028",
+        "codex_r686_arm_0029",
+        "codex_r686_arm_0030",
+        "codex_r686_arm_0031",
+        "codex_r686_arm_0033",
+        "codex_r686_arm_0034",
+        "codex_r686_arm_0035",
+        "codex_r686_arm_0036",
+        "codex_r686_arm_0037",
+        "codex_r686_arm_0038",
+        "codex_r686_arm_0039",
+        "codex_r686_arm_0040",
+        "codex_r686_arm_0041",
+        "codex_r686_arm_0042",
+        "codex_r686_arm_0043",
+        "codex_r686_arm_0044",
+        "codex_r686_arm_0046",
+        "codex_r686_arm_0047",
+        "codex_r686_arm_0048",
+        "codex_r686_arm_0049",
+        "codex_r686_arm_0053",
+        "codex_r686_arm_0054",
+        "codex_r686_arm_0058",
+        "codex_r686_arm_0059",
+        "codex_r686_arm_0060",
+        "codex_r686_arm_0061",
+        "codex_r686_arm_0062",
+        "codex_r686_arm_0063"
+      ]
+    }
+  ],
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 188,
+      "identical": true,
+      "include_trace_sha256": "7fa8f66dad3954df9304874e89610d5ce3c8f823960a18681f9b002529462ae1",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 188,
+      "identical": true,
+      "include_trace_sha256": "7fa8f66dad3954df9304874e89610d5ce3c8f823960a18681f9b002529462ae1",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "contexts": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/ega_prts.obj",
+      "command_sha256": "c2aacb44efe926aeea102635dff3bce12b6b668d0018429516264151e0cd4598"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/ega_prts.obj",
+      "command_sha256": "29464ceb0d8f9ed1ddd18120bc708ba7070b5da1205b18a85a89bab2f2293f28"
+    }
+  ],
+  "limits": "Observed worker release contexts; remaining file conditions and other configurations stay pending."
+}

@@ -1,0 +1,120 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\cga.c",
+  "before_sha256": "03dc934cf49f60fd176c2605fce3237cba4e88a96ff9e74dc416537abad7f95b",
+  "after_sha256": "e15ee249beb2c0ac0379849bb06363b863c13932165d9160eba2b3a31ff29ddd",
+  "original_sha256": "8591c1b0e178f4b8791ed289588d3ed8a06ef514f8bdfca4797a190eb51e2777",
+  "branches": [
+    {
+      "original_if_line": 1470,
+      "original_endif_line": 1489,
+      "current_if_line": 1455,
+      "witness": {
+        "label": "codex_r684_arm_0032",
+        "line": 1455,
+        "kind": "if",
+        "expression": "!defined(EGG) && !defined(C_VID) && !defined(A_VID)",
+        "error_only": false
+      },
+      "removed_body_sha256": "a38a1eeb8e7c984cb293548d0f7e8a73ab85e2399789b4a48a28bd98e9ea0294",
+      "removed_nested_condition_groups": 1
+    },
+    {
+      "original_if_line": 1397,
+      "original_endif_line": 1404,
+      "current_if_line": 1378,
+      "witness": {
+        "label": "codex_r684_arm_0029",
+        "line": 1378,
+        "kind": "if",
+        "expression": "!defined(EGG) && !defined(C_VID) && !defined(A_VID)",
+        "error_only": false
+      },
+      "removed_body_sha256": "d0bcb3c11f25a7b8768227cbb3a5aa5591579dd0ae287abe458f58eed73f029a",
+      "removed_nested_condition_groups": 0
+    },
+    {
+      "original_if_line": 1134,
+      "original_endif_line": 1324,
+      "current_if_line": 1123,
+      "witness": {
+        "label": "codex_r684_arm_0015",
+        "line": 1123,
+        "kind": "if",
+        "expression": "!defined(EGG) && !defined(A3CPU) && !defined(A2CPU) && !defined(C_VID) && !defined(A_VID)",
+        "error_only": false
+      },
+      "removed_body_sha256": "c760e504b06d2c1930a477a79115287d87e4812a8389a98896fce0564da3c9d5",
+      "removed_nested_condition_groups": 2
+    }
+  ],
+  "commands": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "command_sha256": "cc37223fa49aad09fe8825170c1e0b1e532c79c38eda7424e84524c6b70db12b",
+      "c_vid_defined": true
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "command_sha256": "4a7dbf01a151368ea6b0dabbf9a9ec009552d4abf9aab3046edfc5b5f61a830c",
+      "c_vid_defined": true
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "c5b37f331febb2c76d0ccfdfa1fc8f4fcc11d9094f6b9cdc236ba18ee575f97c",
+      "hit": [
+        "codex_r684_arm_0000",
+        "codex_r684_arm_0002",
+        "codex_r684_arm_0004",
+        "codex_r684_arm_0007",
+        "codex_r684_arm_0022",
+        "codex_r684_arm_0024",
+        "codex_r684_arm_0026",
+        "codex_r684_arm_0028",
+        "codex_r684_arm_0030",
+        "codex_r684_arm_0031"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "c5b37f331febb2c76d0ccfdfa1fc8f4fcc11d9094f6b9cdc236ba18ee575f97c",
+      "hit": [
+        "codex_r684_arm_0000",
+        "codex_r684_arm_0002",
+        "codex_r684_arm_0004",
+        "codex_r684_arm_0007",
+        "codex_r684_arm_0022",
+        "codex_r684_arm_0024",
+        "codex_r684_arm_0026",
+        "codex_r684_arm_0028",
+        "codex_r684_arm_0030",
+        "codex_r684_arm_0031"
+      ]
+    }
+  ],
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 193,
+      "identical": true,
+      "include_trace_sha256": "cefe469fccecfade563987a9a8ac9a57247eea06e439b5e6c98439200d873802",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 193,
+      "identical": true,
+      "include_trace_sha256": "cefe469fccecfade563987a9a8ac9a57247eea06e439b5e6c98439200d873802",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "limits": "Observed worker release contexts; remaining file conditions and other configurations stay pending."
+}

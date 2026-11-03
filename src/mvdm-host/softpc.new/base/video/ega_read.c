@@ -151,6 +151,7 @@ IMPORT void setReadPointers IPT1(IUH, readset);
 /* [5.1.1 #DEFINES]							*/
 
 #ifdef SEGMENTATION
+#line 151
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -158,16 +159,23 @@ IMPORT void setReadPointers IPT1(IUH, readset);
 
 
 #endif
+#line 158
 
 #if defined(EGA_DUMP) || defined(EGA_STAT)
-#define	change_read_pointers(ptr)	dump_change_read_pointers(&ptr)
+#line 160
+#error Unsupported excluded EGA diagnostics configuration
 #else
+#line 162
 #ifdef EGATEST
+#line 163
 #error DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register.
 #else
+#line 165
 #define	change_read_pointers(ptr)	read_glue_ptrs = ptr
 #endif /* EGATEST */
+#line 167
 #endif
+#line 168
 
 /* [5.1.2 TYPEDEF, STRUCTURE, ENUM DECLARATIONS]			*/
 
@@ -195,6 +203,7 @@ GLOBAL READ_POINTERS read_pointers;
 
 
 #ifndef CPU_40_STYLE	/* i.e. EVID without introducing an EVID define */
+#line 195
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 
 
@@ -272,7 +281,7 @@ GLOBAL READ_POINTERS read_pointers;
 
 
 #else	/* CPU_40_STYLE - evid */
-#line 200
+#line 379
 
 #ifdef C_VID
 /* C_Evid glue */
@@ -288,8 +297,10 @@ READ_POINTERS Glue_reads =
 	read_str_fwd_ev_glue
 };
 #else
+#line 392
 #error DIVERGENCE MVDM-HOST-DIV-539: non-C_VID branch is not selected; see mirror register.
 #endif /* C_VID */
+#line 394
 READ_POINTERS	simple_reads;
 READ_POINTERS	pointers_mode0_nch;
 READ_POINTERS	pointers_mode1_nch;
@@ -303,7 +314,7 @@ GLOBAL READ_POINTERS A_vid_reads;
 ULONG EasVal;
 IU32 latchval;	/* for get_latch() etc macros */
 #endif	/* CPU_40_STYLE - evid */
-#line 230
+#line 407
 
 READ_STATE read_state;
 
@@ -405,12 +416,13 @@ rdm0_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )
     while( count-- )
     {
 #ifdef BACK_M
+#line 505
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
-#line 330
+#line 507
         *dest++ = *(planes + offset);
 #endif
-#line 332
+#line 509
 		offset += inc;
 		inc ^= 0x2;
     }
@@ -493,13 +505,14 @@ rdm1_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )	/* used to cor
 	ULONG tcount, lsb;
 
 #ifdef BACK_M
+#line 589
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
-#line 414
+#line 592
 #define	PLUS +
 #define	MINUS -
 #endif
-#line 417
+#line 595
 
 	if( getDF() )
 		setVideolatches(*(IU32 *)( EGA_planes + (( offset >> 1 ) << 2 )));
@@ -550,6 +563,7 @@ rdm1_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )	/* used to cor
 }
 
 #ifdef SEGMENTATION
+#line 645
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -557,7 +571,7 @@ rdm1_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )	/* used to cor
 
 
 #endif
-#line 474
+#line 652
 
 #if !(defined(NTVDM) && defined(MONITOR))
 GLOBAL void
@@ -574,6 +588,7 @@ Glue_set_vid_rd_ptrs IFN1(READ_POINTERS *, handler )
 #line 505
 
 #ifdef SEGMENTATION
+#line 697
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -581,7 +596,7 @@ Glue_set_vid_rd_ptrs IFN1(READ_POINTERS *, handler )
 
 
 #endif
-#line 514
+#line 704
 
 GLOBAL void
 update_shift_count IFN0()
@@ -596,12 +611,13 @@ update_shift_count IFN0()
  			 */
 
 #ifdef BIGEND
+#line 718
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #else
-#line 530
+#line 720
  			setVideoread_shift_count(getVideoread_mapped_plane() << 3);
 #endif /* BIGEND */
-#line 532
+#line 722
 
 
 			break;
@@ -647,10 +663,10 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 		SetReadPointers(2);
 #else  /* CPU_40_STYLE */
-#line 576
+#line 766
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif  /* CPU_40_STYLE */
-#line 578
+#line 785
 
 		ram_off = TRUE;	/* prevent recalcs until ram enabled again */
 
@@ -669,20 +685,20 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(0);
 #else  /* CPU_40_STYLE */
-#line 596
+#line 803
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 598
+#line 810
 				break;
 				
 			case CHAIN2:
 #ifdef CPU_40_STYLE
 				SetReadPointers(0);
 #else  /* CPU_40_STYLE */
-#line 604
+#line 816
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 606
+#line 822
 				EGA_CPU.read_mapped_plane_ch2 = EGA_planes +
 							(getVideoread_mapped_plane() & 2)*EGA_PLANE_SIZE;
 				break;
@@ -692,10 +708,10 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(0);
 #else  /* CPU_40_STYLE */
-#line 615
+#line 831
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 617
+#line 839
 				break;
 #endif	/* VGG */
 #line 619
@@ -714,10 +730,10 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(1);
 #else  /* CPU_40_STYLE */
-#line 634
+#line 856
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 636
+#line 863
 				break;
 
 			case CHAIN2:
@@ -734,10 +750,10 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(1);
 #else  /* CPU_40_STYLE */
-#line 652
+#line 879
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 654
+#line 886
 
 				break;
 
@@ -749,10 +765,10 @@ ega_read_routines_update IFN0()
 #ifdef CPU_40_STYLE
 				SetReadPointers(1);
 #else  /* CPU_40_STYLE */
-#line 665
+#line 897
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 667
+#line 904
 				break;
 #endif	/* VGG */
 #line 669
@@ -763,9 +779,10 @@ ega_read_routines_update IFN0()
 	update_banking();
 
 #ifndef CPU_40_STYLE
+#line 913
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 678
+#line 925
 }
 
 void
@@ -779,19 +796,20 @@ ega_read_init IFN0()
 #ifdef CPU_40_STYLE
 	SetReadPointers(2);
 #else  /* CPU_40_STYLE */
-#line 691
+#line 938
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 693
+#line 944
 
 	setVideoread_mapped_plane(0);
 
 	ega_read_routines_update();			/* initialise M */
 
 #if defined(EGA_DUMP) || defined(EGA_STAT)
-	dump_read_pointers_init();
+#line 950
+#error Unsupported excluded EGA diagnostics configuration
 #endif
-#line 701
+#line 952
 
 #if !defined(EGATEST) && !defined(A3CPU)
 	read_pointers = Glue_reads;
@@ -799,9 +817,10 @@ ega_read_init IFN0()
 #line 705
 
 #ifndef CPU_40_STYLE
+#line 958
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 709
+#line 971
 }
 
 void
@@ -815,10 +834,10 @@ ega_read_term IFN0()
 #ifdef CPU_40_STYLE
 		SetReadPointers(3);
 #else  /* CPU_40_STYLE */
-#line 722
+#line 984
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 724
+#line 997
 }
 
 #endif /* REAL_VGA */

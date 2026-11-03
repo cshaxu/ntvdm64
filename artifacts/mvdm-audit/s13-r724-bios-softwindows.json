@@ -1,0 +1,20 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+  "original": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/bios/bios.c",
+  "before_sha256": "4bf066bd14cede7e13a50e8f0bba7cef429be766ad61dfcba96f63480ef59201",
+  "after_sha256": "33a41993045f0cb564154eb9020a00b1d3aba6888bb81bfebb4e388fe5069025",
+  "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b",
+  "original_group_line": 465,
+  "error_line": 466,
+  "else_line": 469,
+  "continuation_line": 472,
+  "witness": {
+    "label": "codex_r719_arm_0070",
+    "line": 452,
+    "kind": "if",
+    "expression": "defined(SOFTWIN_API) || defined(SWIN_HFX)",
+    "error_only": false
+  },
+  "context_evidence": "s13-r720-bios-two-branches.json and build/t473-s13/r719-arm-witness/bios-adjacent-include.json",
+  "limits": "Two observed worker release graphs; remaining BIOS branches remain pending."
+}

@@ -1,0 +1,518 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_writ.c",
+  "before_sha256": "9160fcfd73974f8c21af38c8bde30623f09fd3d13f4951aa497f32a0b519994a",
+  "after_sha256": "f3a601450ac4d3ee7aee5701d659bcc26456dc9b16fb2d4db18f8362859dcd4f",
+  "original_sha256": "42b33f105e30d31a2805d9f835a74d80c47b4d96ee77101c18f096772e60c47a",
+  "guards": [
+    {
+      "kind": "if",
+      "expression": "defined(EGA_DUMP) || defined(EGA_STAT)",
+      "original_line": 61,
+      "error_line": 62,
+      "end_line": 64
+    },
+    {
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "original_line": 74,
+      "error_line": 75,
+      "end_line": 82
+    },
+    {
+      "kind": "ifndef",
+      "expression": "CPU_40_STYLE",
+      "original_line": 90,
+      "error_line": 91,
+      "end_line": 330
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 321,
+      "error_line": 322,
+      "end_line": 325
+    },
+    {
+      "kind": "ifdef",
+      "expression": "BIGEND",
+      "original_line": 351,
+      "error_line": 352,
+      "end_line": 357
+    },
+    {
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "original_line": 371,
+      "error_line": 372,
+      "end_line": 379
+    },
+    {
+      "kind": "ifndef",
+      "expression": "CPU_40_STYLE",
+      "original_line": 385,
+      "error_line": 386,
+      "end_line": 443
+    },
+    {
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "original_line": 446,
+      "error_line": 447,
+      "end_line": 454
+    },
+    {
+      "kind": "ifdef",
+      "expression": "JOKER",
+      "original_line": 478,
+      "error_line": 479,
+      "end_line": 506
+    },
+    {
+      "kind": "if",
+      "expression": "defined(EGA_DUMP) || defined(EGA_STAT)",
+      "original_line": 484,
+      "error_line": 485,
+      "end_line": 505
+    },
+    {
+      "kind": "ifdef",
+      "expression": "EGATEST",
+      "original_line": 487,
+      "error_line": 488,
+      "end_line": 504
+    },
+    {
+      "kind": "ifdef",
+      "expression": "A3CPU",
+      "original_line": 491,
+      "error_line": 492,
+      "end_line": 502
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 541,
+      "error_line": 542,
+      "end_line": 544
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 729,
+      "error_line": 730,
+      "end_line": 732
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 819,
+      "error_line": 820,
+      "end_line": 844
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 845,
+      "error_line": 846,
+      "end_line": 848
+    }
+  ],
+  "retained_leaf_difference": {
+    "original_line": 303,
+    "current_line": 140,
+    "original": [
+      "/* C_Evid glue */",
+      "extern void  write_byte_ev_glue IPT2(IU32, eaOff, IU8, eaVal);",
+      "extern void  write_word_ev_glue IPT2(IU32, eaOff, IU16, eaVal);",
+      "extern void  fill_byte_ev_glue IPT3(IU32, eaOff, IU8, eaVal, IU32, count);",
+      "extern void  fill_word_ev_glue IPT3(IU32, eaOff, IU8, eaVal, IU32, count);",
+      "extern void  move_byte_fwd_ev_glue IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);",
+      "extern void  move_word_fwd_ev_glue IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);",
+      "MEM_HANDLERS Glue_writes =",
+      "{",
+      "write_byte_ev_glue,",
+      "write_word_ev_glue,",
+      "fill_byte_ev_glue,",
+      "fill_word_ev_glue,",
+      "move_byte_fwd_ev_glue,",
+      "move_word_fwd_ev_glue,",
+      "};"
+    ],
+    "current": [
+      "/* C_Evid glue */",
+      "extern void  write_byte_ev_glue IPT2(IU32, eaOff, IU8, eaVal);",
+      "extern void  write_word_ev_glue IPT2(IU32, eaOff, IU16, eaVal);",
+      "extern void  fill_byte_ev_glue IPT3(IU32, eaOff, IU8, eaVal, IU32, count);",
+      "/* DIVERGENCE MVDM-HOST-DIV-074: match the original glue body's IU16 word value. */",
+      "extern void  fill_word_ev_glue IPT3(IU32, eaOff, IU16, eaVal, IU32, count);",
+      "extern void  move_byte_fwd_ev_glue IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);",
+      "extern void  move_word_fwd_ev_glue IPT4(IU32, eaOff, IHPE, fromOff, IU32, count, IBOOL, srcInRAM);",
+      "/* DIVERGENCE MVDM-HOST-DIV-088: use the original C-video selector body's",
+      "* exact no-argument contract rather than an implicit host-int call. */",
+      "extern void setWritePointers IPT0();",
+      "MEM_HANDLERS Glue_writes =",
+      "{",
+      "write_byte_ev_glue,",
+      "write_word_ev_glue,",
+      "fill_byte_ev_glue,",
+      "fill_word_ev_glue,",
+      "move_byte_fwd_ev_glue,",
+      "move_word_fwd_ev_glue,",
+      "};"
+    ]
+  },
+  "difference_registration": "MVDM-HOST-DIV-074",
+  "witness": {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+    "source_sha256": "9160fcfd73974f8c21af38c8bde30623f09fd3d13f4951aa497f32a0b519994a",
+    "object": "video/ega_writ",
+    "arms": [
+      {
+        "label": "codex_r743_arm_0000",
+        "line": 4,
+        "kind": "if",
+        "expression": "!(defined(NTVDM) && defined(MONITOR))",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0001",
+        "line": 48,
+        "kind": "ifdef",
+        "expression": "EGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0002",
+        "line": 61,
+        "kind": "if",
+        "expression": "defined(EGA_DUMP) || defined(EGA_STAT)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0003",
+        "line": 76,
+        "kind": "ifdef",
+        "expression": "SEGMENTATION",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0004",
+        "line": 85,
+        "kind": "ifndef",
+        "expression": "REAL_VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0005",
+        "line": 87,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0006",
+        "line": 92,
+        "kind": "ifndef",
+        "expression": "CPU_40_STYLE",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0007",
+        "line": 137,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0008",
+        "line": 140,
+        "kind": "ifdef",
+        "expression": "C_VID",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0009",
+        "line": 162,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0010",
+        "line": 188,
+        "kind": "ifdef",
+        "expression": "LITTLEND",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0011",
+        "line": 195,
+        "kind": "ifdef",
+        "expression": "BIGEND",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0012",
+        "line": 213,
+        "kind": "ifdef",
+        "expression": "SEGMENTATION",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0013",
+        "line": 223,
+        "kind": "if",
+        "expression": "!(defined(NTVDM) && defined(MONITOR))",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0014",
+        "line": 229,
+        "kind": "ifndef",
+        "expression": "CPU_40_STYLE",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0015",
+        "line": 238,
+        "kind": "ifdef",
+        "expression": "SEGMENTATION",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0016",
+        "line": 266,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0017",
+        "line": 272,
+        "kind": "ifdef",
+        "expression": "JOKER",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0018",
+        "line": 274,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0019",
+        "line": 277,
+        "kind": "if",
+        "expression": "defined(EGA_DUMP) || defined(EGA_STAT)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0020",
+        "line": 280,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0021",
+        "line": 282,
+        "kind": "ifdef",
+        "expression": "EGATEST",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0022",
+        "line": 284,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0023",
+        "line": 286,
+        "kind": "ifndef",
+        "expression": "GISP_CPU",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0024",
+        "line": 287,
+        "kind": "ifdef",
+        "expression": "A3CPU",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0025",
+        "line": 294,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0026",
+        "line": 343,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0027",
+        "line": 484,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0028",
+        "line": 520,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0029",
+        "line": 532,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0030",
+        "line": 534,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0031",
+        "line": 542,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0032",
+        "line": 557,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0033",
+        "line": 587,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0034",
+        "line": 627,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r743_arm_0035",
+        "line": 629,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0036",
+        "line": 635,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r743_arm_0037",
+        "line": 644,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "f8716788354839c8c4b4a281a4a4cb73f5d11eaf867a7fe7cc68026909f01f2c",
+        "hit": [
+          "codex_r743_arm_0000",
+          "codex_r743_arm_0001",
+          "codex_r743_arm_0004",
+          "codex_r743_arm_0005",
+          "codex_r743_arm_0007",
+          "codex_r743_arm_0008",
+          "codex_r743_arm_0010",
+          "codex_r743_arm_0013",
+          "codex_r743_arm_0016",
+          "codex_r743_arm_0018",
+          "codex_r743_arm_0020",
+          "codex_r743_arm_0022",
+          "codex_r743_arm_0023",
+          "codex_r743_arm_0025",
+          "codex_r743_arm_0027",
+          "codex_r743_arm_0028",
+          "codex_r743_arm_0029",
+          "codex_r743_arm_0031",
+          "codex_r743_arm_0032",
+          "codex_r743_arm_0033",
+          "codex_r743_arm_0034",
+          "codex_r743_arm_0037"
+        ]
+      },
+      {
+        "graph": "msvc-x64-release",
+        "exit": 0,
+        "preprocessed_sha256": "f8716788354839c8c4b4a281a4a4cb73f5d11eaf867a7fe7cc68026909f01f2c",
+        "hit": [
+          "codex_r743_arm_0000",
+          "codex_r743_arm_0001",
+          "codex_r743_arm_0004",
+          "codex_r743_arm_0005",
+          "codex_r743_arm_0007",
+          "codex_r743_arm_0008",
+          "codex_r743_arm_0010",
+          "codex_r743_arm_0013",
+          "codex_r743_arm_0016",
+          "codex_r743_arm_0018",
+          "codex_r743_arm_0020",
+          "codex_r743_arm_0022",
+          "codex_r743_arm_0023",
+          "codex_r743_arm_0025",
+          "codex_r743_arm_0027",
+          "codex_r743_arm_0028",
+          "codex_r743_arm_0029",
+          "codex_r743_arm_0031",
+          "codex_r743_arm_0032",
+          "codex_r743_arm_0033",
+          "codex_r743_arm_0034",
+          "codex_r743_arm_0037"
+        ]
+      }
+    ]
+  },
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 175,
+      "identical": true,
+      "include_trace_sha256": "ad343116e7197f527b56a742e655795f28efa03ea2104f2f59352a327bd02c05",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 175,
+      "identical": true,
+      "include_trace_sha256": "ad343116e7197f527b56a742e655795f28efa03ea2104f2f59352a327bd02c05",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "limits": "Observed worker release graphs; Existing DIV-074 and DIV-088 ABI declarations retained; rendering behavior not asserted."
+}

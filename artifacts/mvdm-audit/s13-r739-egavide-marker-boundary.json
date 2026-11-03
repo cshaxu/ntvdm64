@@ -1,0 +1,20 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+  "source_sha256": "8d70e5e6219d24dd00b73e5605d3ca618e38c60306643a5cb8e5db1700d8d6cf",
+  "finding": "A marker inserted after the physical #ifndef line falls inside its multiline comment. This probe inserts the marker after the comment terminator to observe the actual branch.",
+  "observations": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "marker_hit": true,
+      "preprocessed_sha256": "1cebedda7fe6b271ba6ded2728ba80f639694666b8aa990188f3246d28593db1"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "marker_hit": true,
+      "preprocessed_sha256": "1cebedda7fe6b271ba6ded2728ba80f639694666b8aa990188f3246d28593db1"
+    }
+  ],
+  "limits": "Observed worker release graphs only."
+}

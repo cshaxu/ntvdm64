@@ -1,0 +1,76 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+  "original": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/bios/bios.c",
+  "before_sha256": "dcfed48202e27542c038732639ce756ea11511be1cd370ef6acc88af51192679",
+  "after_sha256": "4bf066bd14cede7e13a50e8f0bba7cef429be766ad61dfcba96f63480ef59201",
+  "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b",
+  "branches": [
+    {
+      "macro": "MSWDVR",
+      "original_line": 454,
+      "original_else_line": 459,
+      "original_endif_line": 464,
+      "witness": {
+        "label": "codex_r719_arm_0068",
+        "line": 439,
+        "kind": "ifdef",
+        "expression": "MSWDVR",
+        "error_only": false
+      }
+    },
+    {
+      "macro": "NOVELL_IPX",
+      "original_line": 483,
+      "original_else_line": 488,
+      "original_endif_line": 493,
+      "witness": {
+        "label": "codex_r719_arm_0076",
+        "line": 476,
+        "kind": "ifdef",
+        "expression": "NOVELL_IPX",
+        "error_only": false
+      }
+    },
+    {
+      "macro": "NOVELL_TCPIP",
+      "original_line": 495,
+      "original_else_line": 498,
+      "original_endif_line": 503,
+      "witness": {
+        "label": "codex_r719_arm_0078",
+        "line": 490,
+        "kind": "ifdef",
+        "expression": "NOVELL_TCPIP",
+        "error_only": false
+      }
+    },
+    {
+      "macro": "WINSOCK",
+      "original_line": 505,
+      "original_else_line": 508,
+      "original_endif_line": 511,
+      "witness": {
+        "label": "codex_r719_arm_0080",
+        "line": 502,
+        "kind": "ifdef",
+        "expression": "WINSOCK",
+        "error_only": false
+      }
+    },
+    {
+      "macro": "MSWDVR",
+      "original_line": 524,
+      "original_else_line": 529,
+      "original_endif_line": 534,
+      "witness": {
+        "label": "codex_r719_arm_0084",
+        "line": 523,
+        "kind": "ifdef",
+        "expression": "MSWDVR",
+        "error_only": false
+      }
+    }
+  ],
+  "context_evidence": "s13-r720-bios-two-branches.json and build/t473-s13/r719-arm-witness/bios-adjacent-include.json",
+  "limits": "Only observed worker release graphs; remaining BIOS branches stay pending."
+}

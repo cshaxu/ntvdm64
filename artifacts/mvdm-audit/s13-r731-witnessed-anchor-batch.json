@@ -1,0 +1,413 @@
+{
+  "scope": "One original condition tree with previously missing diagnostic anchors; all retained arms witnessed in actual worker preprocess contexts.",
+  "method": "Original/current recursive tree preflight; selected-arm markers and ordered include traces checked before edits; resulting tree and line anchors rechecked.",
+  "limits": "Four of ten allowed source edits in current build batch; complete supported-context enumeration remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\cga.c",
+      "before_sha256": "e15ee249beb2c0ac0379849bb06363b863c13932165d9160eba2b3a31ff29ddd",
+      "after_sha256": "f54a920671280678d4c7e4881e3788653eddd9a0405b0abdafe12633dd18b046",
+      "original_sha256": "8591c1b0e178f4b8791ed289588d3ed8a06ef514f8bdfca4797a190eb51e2777",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 53,
+          "error_line": 54,
+          "end_line": 61
+        },
+        {
+          "kind": "ifdef",
+          "expression": "REAL_VGA",
+          "original_line": 95,
+          "error_line": 96,
+          "end_line": 100
+        },
+        {
+          "kind": "ifdef",
+          "expression": "HUNTER",
+          "original_line": 120,
+          "error_line": 121,
+          "end_line": 124
+        },
+        {
+          "kind": "ifdef",
+          "expression": "A3CPU",
+          "original_line": 171,
+          "error_line": 172,
+          "end_line": 176
+        },
+        {
+          "kind": "ifdef",
+          "expression": "A2CPU",
+          "original_line": 181,
+          "error_line": 182,
+          "end_line": 205
+        },
+        {
+          "kind": "ifdef",
+          "expression": "HUNTER",
+          "original_line": 426,
+          "error_line": 427,
+          "end_line": 429
+        },
+        {
+          "kind": "ifdef",
+          "expression": "REAL_VGA",
+          "original_line": 624,
+          "error_line": 625,
+          "end_line": 627
+        },
+        {
+          "kind": "ifdef",
+          "expression": "REAL_VGA",
+          "original_line": 635,
+          "error_line": 636,
+          "end_line": 638
+        },
+        {
+          "kind": "ifdef",
+          "expression": "REAL_VGA",
+          "original_line": 657,
+          "error_line": 658,
+          "end_line": 660
+        },
+        {
+          "kind": "ifdef",
+          "expression": "REAL_VGA",
+          "original_line": 674,
+          "error_line": 675,
+          "end_line": 677
+        },
+        {
+          "kind": "ifdef",
+          "expression": "HUNTER",
+          "original_line": 740,
+          "error_line": 741,
+          "end_line": 743
+        },
+        {
+          "kind": "if",
+          "expression": "!defined(EGG) && !defined(A3CPU) && !defined(A2CPU) && !defined(C_VID) && !defined(A_VID)",
+          "original_line": 1134,
+          "error_line": 1135,
+          "end_line": 1325
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 1326,
+          "error_line": 1327,
+          "end_line": 1334
+        },
+        {
+          "kind": "ifdef",
+          "expression": "HUNTER",
+          "original_line": 1342,
+          "error_line": 1343,
+          "end_line": 1346
+        },
+        {
+          "kind": "ifdef",
+          "expression": "JOKER",
+          "original_line": 1373,
+          "error_line": 1374,
+          "end_line": 1409
+        },
+        {
+          "kind": "ifdef",
+          "expression": "A3CPU",
+          "original_line": 1382,
+          "error_line": 1383,
+          "end_line": 1407
+        },
+        {
+          "kind": "ifdef",
+          "expression": "A2CPU",
+          "original_line": 1393,
+          "error_line": 1394,
+          "end_line": 1406
+        },
+        {
+          "kind": "if",
+          "expression": "!defined(EGG) && !defined(C_VID) && !defined(A_VID)",
+          "original_line": 1397,
+          "error_line": 1398,
+          "end_line": 1405
+        },
+        {
+          "kind": "if",
+          "expression": "!defined(EGG) && !defined(C_VID) && !defined(A_VID)",
+          "original_line": 1470,
+          "error_line": 1471,
+          "end_line": 1490
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+        "source_sha256": "e15ee249beb2c0ac0379849bb06363b863c13932165d9160eba2b3a31ff29ddd",
+        "object": "video/cga",
+        "arms": [
+          {
+            "label": "codex_r731_arm_0000",
+            "line": 4,
+            "kind": "if",
+            "expression": "!defined(NTVDM) || (defined(NTVDM) && !defined(X86GFX) )",
+            "error_only": false
+          },
+          {
+            "label": "codex_r731_arm_0001",
+            "line": 53,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0002",
+            "line": 93,
+            "kind": "ifdef",
+            "expression": "EGG",
+            "error_only": false
+          },
+          {
+            "label": "codex_r731_arm_0003",
+            "line": 99,
+            "kind": "ifdef",
+            "expression": "REAL_VGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0004",
+            "line": 101,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r731_arm_0005",
+            "line": 124,
+            "kind": "ifdef",
+            "expression": "HUNTER",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0006",
+            "line": 174,
+            "kind": "ifdef",
+            "expression": "A3CPU",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0007",
+            "line": 176,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r731_arm_0008",
+            "line": 184,
+            "kind": "ifdef",
+            "expression": "A2CPU",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0009",
+            "line": 409,
+            "kind": "ifdef",
+            "expression": "HUNTER",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0010",
+            "line": 608,
+            "kind": "ifdef",
+            "expression": "REAL_VGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0011",
+            "line": 620,
+            "kind": "ifdef",
+            "expression": "REAL_VGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0012",
+            "line": 643,
+            "kind": "ifdef",
+            "expression": "REAL_VGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0013",
+            "line": 661,
+            "kind": "ifdef",
+            "expression": "REAL_VGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0014",
+            "line": 728,
+            "kind": "ifdef",
+            "expression": "HUNTER",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0015",
+            "line": 1123,
+            "kind": "if",
+            "expression": "!defined(EGG) && !defined(A3CPU) && !defined(A2CPU) && !defined(C_VID) && !defined(A_VID)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0016",
+            "line": 1129,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0017",
+            "line": 1146,
+            "kind": "ifdef",
+            "expression": "HUNTER",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0018",
+            "line": 1174,
+            "kind": "ifndef",
+            "expression": "GISP_CPU",
+            "error_only": false
+          },
+          {
+            "label": "codex_r731_arm_0019",
+            "line": 1177,
+            "kind": "ifdef",
+            "expression": "JOKER",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0020",
+            "line": 1179,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r731_arm_0021",
+            "line": 1182,
+            "kind": "ifdef",
+            "expression": "A3CPU",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0022",
+            "line": 1189,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r731_arm_0023",
+            "line": 1191,
+            "kind": "ifdef",
+            "expression": "A2CPU",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0024",
+            "line": 1193,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r731_arm_0025",
+            "line": 1194,
+            "kind": "if",
+            "expression": "!defined(EGG) && !defined(C_VID) && !defined(A_VID)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r731_arm_0026",
+            "line": 1197,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r731_arm_0027",
+            "line": 1214,
+            "kind": "ifdef",
+            "expression": "CPU_40_STYLE",
+            "error_only": false
+          },
+          {
+            "label": "codex_r731_arm_0028",
+            "line": 1274,
+            "kind": "if",
+            "expression": "!defined(EGG) && !defined(C_VID) && !defined(A_VID)",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "fae16dc93adcdbdfa7110311e4c7913909f9f4db5f66e699eaaac7d5f9030632",
+            "hit": [
+              "codex_r731_arm_0000",
+              "codex_r731_arm_0002",
+              "codex_r731_arm_0004",
+              "codex_r731_arm_0007",
+              "codex_r731_arm_0018",
+              "codex_r731_arm_0020",
+              "codex_r731_arm_0022",
+              "codex_r731_arm_0024",
+              "codex_r731_arm_0026",
+              "codex_r731_arm_0027"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "fae16dc93adcdbdfa7110311e4c7913909f9f4db5f66e699eaaac7d5f9030632",
+            "hit": [
+              "codex_r731_arm_0000",
+              "codex_r731_arm_0002",
+              "codex_r731_arm_0004",
+              "codex_r731_arm_0007",
+              "codex_r731_arm_0018",
+              "codex_r731_arm_0020",
+              "codex_r731_arm_0022",
+              "codex_r731_arm_0024",
+              "codex_r731_arm_0026",
+              "codex_r731_arm_0027"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 193,
+          "identical": true,
+          "include_trace_sha256": "cefe469fccecfade563987a9a8ac9a57247eea06e439b5e6c98439200d873802",
+          "method": "temporary sibling file; original search order"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 193,
+          "identical": true,
+          "include_trace_sha256": "cefe469fccecfade563987a9a8ac9a57247eea06e439b5e6c98439200d873802",
+          "method": "temporary sibling file; original search order"
+        }
+      ]
+    }
+  ]
+}

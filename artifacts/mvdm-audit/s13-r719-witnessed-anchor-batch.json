@@ -1,0 +1,433 @@
+{
+  "scope": "One original condition tree with previously missing diagnostic anchors; all retained arms witnessed in actual worker preprocess contexts.",
+  "method": "Original/current recursive tree preflight; selected-arm markers and ordered include traces checked before edits; resulting tree and line anchors rechecked.",
+  "limits": "One of ten allowed source edits in current build batch; complete supported-context enumeration remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\emm_fncs.c",
+      "before_sha256": "25c144c18ec1fd78b2d983bba0108e78663f33fc4b731ce7c17e92f7425c6aa0",
+      "after_sha256": "a71bb18612e61661afc905c71711aaf5cfe37efbd6a5c191a916927819123e37",
+      "original_sha256": "2ffb142bb4ad67958493668e06bec3d81936790497965cdc5ca8a2ac0e142722",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SUN_VA",
+          "original_line": 4,
+          "error_line": 5,
+          "end_line": 10
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 70,
+          "error_line": 71,
+          "end_line": 78
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 95,
+          "error_line": 96,
+          "end_line": 98
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SCCSID",
+          "original_line": 103,
+          "error_line": 104,
+          "end_line": 106
+        },
+        {
+          "kind": "if",
+          "expression": "defined(A2CPU) && defined(DELTA)",
+          "original_line": 113,
+          "error_line": 114,
+          "end_line": 116
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 131,
+          "error_line": 132,
+          "end_line": 137
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 138,
+          "error_line": 139,
+          "end_line": 142
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 178,
+          "error_line": 179,
+          "end_line": 182
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 214,
+          "error_line": 215,
+          "end_line": 218
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 220,
+          "error_line": 221,
+          "end_line": 258
+        },
+        {
+          "kind": "ifndef",
+          "expression": "min",
+          "original_line": 261,
+          "error_line": 262,
+          "end_line": 264
+        },
+        {
+          "kind": "ifdef",
+          "expression": "EMM_DEBUG",
+          "original_line": 293,
+          "error_line": 294,
+          "end_line": 298
+        },
+        {
+          "kind": "ifdef",
+          "expression": "EMM_DEBUG",
+          "original_line": 300,
+          "error_line": 301,
+          "end_line": 305
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 321,
+          "error_line": 322,
+          "end_line": 329
+        },
+        {
+          "kind": "ifdef",
+          "expression": "GISP_SVGA",
+          "original_line": 353,
+          "error_line": 354,
+          "end_line": 366
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SUN_VA",
+          "original_line": 367,
+          "error_line": 368,
+          "end_line": 374
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SUN_VA",
+          "original_line": 382,
+          "error_line": 383,
+          "end_line": 436
+        },
+        {
+          "kind": "if",
+          "expression": "defined(A2CPU) && defined(DELTA)",
+          "original_line": 466,
+          "error_line": 467,
+          "end_line": 469
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 474,
+          "error_line": 475,
+          "end_line": 482
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 2332,
+          "error_line": 2333,
+          "end_line": 2335
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 2566,
+          "error_line": 2567,
+          "end_line": 2665
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 2785,
+          "error_line": 2786,
+          "end_line": 2788
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 2792,
+          "error_line": 2793,
+          "end_line": 2833
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+        "source_sha256": "25c144c18ec1fd78b2d983bba0108e78663f33fc4b731ce7c17e92f7425c6aa0",
+        "object": "bios/emm_fncs",
+        "arms": [
+          {
+            "label": "codex_r719_arm_0000",
+            "line": 5,
+            "kind": "ifdef",
+            "expression": "SUN_VA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0001",
+            "line": 67,
+            "kind": "ifdef",
+            "expression": "LIM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r719_arm_0002",
+            "line": 70,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0003",
+            "line": 89,
+            "kind": "if",
+            "expression": "defined(SUN_VA) || defined(NTVDM)",
+            "error_only": false
+          },
+          {
+            "label": "codex_r719_arm_0004",
+            "line": 95,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0005",
+            "line": 103,
+            "kind": "ifdef",
+            "expression": "SCCSID",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0006",
+            "line": 113,
+            "kind": "if",
+            "expression": "defined(A2CPU) && defined(DELTA)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0007",
+            "line": 131,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0008",
+            "line": 135,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0009",
+            "line": 174,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0010",
+            "line": 209,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0011",
+            "line": 214,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0012",
+            "line": 221,
+            "kind": "ifndef",
+            "expression": "min",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0013",
+            "line": 255,
+            "kind": "ifdef",
+            "expression": "EMM_DEBUG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0014",
+            "line": 261,
+            "kind": "ifdef",
+            "expression": "EMM_DEBUG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0015",
+            "line": 281,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0016",
+            "line": 314,
+            "kind": "ifdef",
+            "expression": "GISP_SVGA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0017",
+            "line": 319,
+            "kind": "ifdef",
+            "expression": "SUN_VA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0018",
+            "line": 324,
+            "kind": "if",
+            "expression": "defined(SUN_VA) || defined(NTVDM)",
+            "error_only": false
+          },
+          {
+            "label": "codex_r719_arm_0019",
+            "line": 332,
+            "kind": "ifdef",
+            "expression": "SUN_VA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0020",
+            "line": 336,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r719_arm_0021",
+            "line": 367,
+            "kind": "if",
+            "expression": "defined(A2CPU) && defined(DELTA)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0022",
+            "line": 376,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0023",
+            "line": 2232,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r719_arm_0024",
+            "line": 2235,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0025",
+            "line": 2352,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r719_arm_0026",
+            "line": 2471,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0027",
+            "line": 2596,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r719_arm_0028",
+            "line": 2604,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "5adaf5cef545a1896f58b57272c89ad04c590be40c53644d8c61099db39bd758",
+            "hit": [
+              "codex_r719_arm_0001",
+              "codex_r719_arm_0003",
+              "codex_r719_arm_0018",
+              "codex_r719_arm_0020",
+              "codex_r719_arm_0023",
+              "codex_r719_arm_0025"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "5adaf5cef545a1896f58b57272c89ad04c590be40c53644d8c61099db39bd758",
+            "hit": [
+              "codex_r719_arm_0001",
+              "codex_r719_arm_0003",
+              "codex_r719_arm_0018",
+              "codex_r719_arm_0020",
+              "codex_r719_arm_0023",
+              "codex_r719_arm_0025"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 182,
+          "identical": true,
+          "include_trace_sha256": "5ae3484c43506d01d27ed6ce50c857596b982842d4c51f331630be5111675b4e",
+          "method": "temporary sibling file; original search order"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 182,
+          "identical": true,
+          "include_trace_sha256": "5ae3484c43506d01d27ed6ce50c857596b982842d4c51f331630be5111675b4e",
+          "method": "temporary sibling file; original search order"
+        }
+      ]
+    }
+  ]
+}

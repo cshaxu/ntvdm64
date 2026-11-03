@@ -2452,16 +2452,14 @@ LOCAL void	ega_gc_mask IFN2(io_addr, port, half_word, value)
 	setVideolatch_xor_mask(EGA_CPU.calc_latch_xor & mask);
 	if( value == 0xff )
 	{
+#line 2981
 #ifndef	USE_OLD_MASK_CODE
 		ega_mask_register_changed(/*bit protection :=*/0);
 #else
-#line 2450
-		write_state.bp = 0;
-		setVideowrstate(EGA_CPU.ega_state.mode_0.lookup);
-		EGA_CPU.fun_or_protection = (graphics_controller.data_rotate.as.abyte != 0);
-		ega_write_routines_update(BIT_PROT);
+#line 2984
+#error Unsupported excluded old EGA mask configuration
 #endif	/* USE_OLD_MASK_CODE */
-#line 2455
+#line 2989
 
 		/* Alter the function table used by ega_gc_index */
 		ega_gc_regs[8] = ega_gc_mask_ff;
@@ -2502,16 +2500,14 @@ void	ega_gc_mask_ff IFN2(io_addr, port, half_word, value)
 		setVideobit_prot_mask(mask);
 		setVideodata_xor_mask(~(EGA_CPU.calc_data_xor & mask));
 		setVideolatch_xor_mask(EGA_CPU.calc_latch_xor & mask);
+#line 3029
 #ifndef	USE_OLD_MASK_CODE
 		ega_mask_register_changed(/*bit protection :=*/1);
 #else
-#line 2495
-		write_state.bp = 1;
-		setVideowrstate(EGA_CPU.ega_state.mode_0.lookup);
-		EGA_CPU.fun_or_protection = TRUE;
-		ega_write_routines_update(BIT_PROT);
+#line 3032
+#error Unsupported excluded old EGA mask configuration
 #endif	/* USE_OLD_MASK_CODE*/
-#line 2500
+#line 3037
 
 		/* Alter the function table used by ega_gc_index */
 		ega_gc_regs[8] = ega_gc_mask;

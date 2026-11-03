@@ -1,0 +1,127 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_writ.c",
+  "before_sha256": "e18353c24a4121f7ef8823f226e1fa515e205a7ede4d1d3614f0e441bbae4376",
+  "after_sha256": "9160fcfd73974f8c21af38c8bde30623f09fd3d13f4951aa497f32a0b519994a",
+  "original_sha256": "42b33f105e30d31a2805d9f835a74d80c47b4d96ee77101c18f096772e60c47a",
+  "branches": [
+    {
+      "original_if_line": 484,
+      "original_endif_line": 504,
+      "witness": {
+        "label": "codex_r684_arm_0019",
+        "line": 275,
+        "kind": "if",
+        "expression": "defined(EGA_DUMP) || defined(EGA_STAT)",
+        "error_only": false
+      },
+      "removed_body_sha256": "b9eabb2b2d83515844a0c353160772d8fc6dccc9b3e1137f012d0eae8474de85"
+    },
+    {
+      "original_if_line": 61,
+      "original_endif_line": 63,
+      "witness": {
+        "label": "codex_r684_arm_0002",
+        "line": 61,
+        "kind": "if",
+        "expression": "defined(EGA_DUMP) || defined(EGA_STAT)",
+        "error_only": false
+      },
+      "removed_body_sha256": "0b4a0f21c54fb3a56532cc6235f8e3c0cfd96716659ad294788961bb05b793fa"
+    }
+  ],
+  "third_original_group": "Original line 821 is within an already excluded CPU40 else and is not restored internally.",
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "a2f3e6b265f0080345201180a0f2562baca6344377f7d4f502c28a1c00552df1",
+      "hit": [
+        "codex_r684_arm_0000",
+        "codex_r684_arm_0001",
+        "codex_r684_arm_0004",
+        "codex_r684_arm_0005",
+        "codex_r684_arm_0007",
+        "codex_r684_arm_0008",
+        "codex_r684_arm_0010",
+        "codex_r684_arm_0013",
+        "codex_r684_arm_0016",
+        "codex_r684_arm_0018",
+        "codex_r684_arm_0020",
+        "codex_r684_arm_0022",
+        "codex_r684_arm_0023",
+        "codex_r684_arm_0025",
+        "codex_r684_arm_0027",
+        "codex_r684_arm_0028",
+        "codex_r684_arm_0029",
+        "codex_r684_arm_0031",
+        "codex_r684_arm_0032",
+        "codex_r684_arm_0033",
+        "codex_r684_arm_0034",
+        "codex_r684_arm_0037"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "a2f3e6b265f0080345201180a0f2562baca6344377f7d4f502c28a1c00552df1",
+      "hit": [
+        "codex_r684_arm_0000",
+        "codex_r684_arm_0001",
+        "codex_r684_arm_0004",
+        "codex_r684_arm_0005",
+        "codex_r684_arm_0007",
+        "codex_r684_arm_0008",
+        "codex_r684_arm_0010",
+        "codex_r684_arm_0013",
+        "codex_r684_arm_0016",
+        "codex_r684_arm_0018",
+        "codex_r684_arm_0020",
+        "codex_r684_arm_0022",
+        "codex_r684_arm_0023",
+        "codex_r684_arm_0025",
+        "codex_r684_arm_0027",
+        "codex_r684_arm_0028",
+        "codex_r684_arm_0029",
+        "codex_r684_arm_0031",
+        "codex_r684_arm_0032",
+        "codex_r684_arm_0033",
+        "codex_r684_arm_0034",
+        "codex_r684_arm_0037"
+      ]
+    }
+  ],
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 175,
+      "identical": true,
+      "include_trace_sha256": "ad343116e7197f527b56a742e655795f28efa03ea2104f2f59352a327bd02c05",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 175,
+      "identical": true,
+      "include_trace_sha256": "ad343116e7197f527b56a742e655795f28efa03ea2104f2f59352a327bd02c05",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "contexts": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/ega_writ.obj",
+      "command_sha256": "2abc6b41d6cce9d5f52749ba9f161555a63809a7cd28c6956b86852118f809d5"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/ega_writ.obj",
+      "command_sha256": "5fd721e8caecd8a6213b2d93ce4ccaa2f7aa514eee11ee59e98c55946e480112"
+    }
+  ],
+  "limits": "Observed worker release contexts; remaining file conditions and other configurations stay pending."
+}

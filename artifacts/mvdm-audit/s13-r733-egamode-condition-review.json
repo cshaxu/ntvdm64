@@ -1,0 +1,109 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+  "source_sha256": "c5ba228930bfe1e4dba970f4735b00041769592aacff4f224c836863e99f7c0c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_mode.c",
+  "original_sha256": "1b73d0bdea339dc2a42f9674e04fd14575400070e8436149a84a2ac5510a057d",
+  "finding": "After the r732 exclusion the original and current conditional trees align with original diagnostic anchors in the observed worker contexts.",
+  "plan": {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+    "status": "candidate",
+    "edits": 0,
+    "excluded_groups": 3,
+    "source_sha256": "c5ba228930bfe1e4dba970f4735b00041769592aacff4f224c836863e99f7c0c"
+  },
+  "witness": {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+    "source_sha256": "c5ba228930bfe1e4dba970f4735b00041769592aacff4f224c836863e99f7c0c",
+    "object": "video/ega_mode",
+    "arms": [
+      {
+        "label": "codex_r733_arm_0000",
+        "line": 89,
+        "kind": "ifndef",
+        "expression": "REAL_VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r733_arm_0001",
+        "line": 90,
+        "kind": "ifdef",
+        "expression": "EGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r733_arm_0002",
+        "line": 107,
+        "kind": "ifdef",
+        "expression": "GORE",
+        "error_only": true
+      },
+      {
+        "label": "codex_r733_arm_0003",
+        "line": 127,
+        "kind": "ifdef",
+        "expression": "SEGMENTATION",
+        "error_only": true
+      },
+      {
+        "label": "codex_r733_arm_0004",
+        "line": 540,
+        "kind": "ifndef",
+        "expression": "NTVDM",
+        "error_only": true
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "62f3fc469e607d3a9726cab52c2ba114d3cb26a59b9934cd510675f2732a5025",
+        "hit": [
+          "codex_r733_arm_0000",
+          "codex_r733_arm_0001"
+        ]
+      },
+      {
+        "graph": "msvc-x64-release",
+        "exit": 0,
+        "preprocessed_sha256": "62f3fc469e607d3a9726cab52c2ba114d3cb26a59b9934cd510675f2732a5025",
+        "hit": [
+          "codex_r733_arm_0000",
+          "codex_r733_arm_0001"
+        ]
+      }
+    ]
+  },
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 174,
+      "identical": true,
+      "include_trace_sha256": "fe9e255a3aa5af43ead798fb6987b76a753a6d6539f4dde0380e96d592e54399",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 174,
+      "identical": true,
+      "include_trace_sha256": "fe9e255a3aa5af43ead798fb6987b76a753a6d6539f4dde0380e96d592e54399",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "contexts": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/ega_mode.obj",
+      "command_sha256": "aaa11424a85d0394ef88a486bf07d99e3eafd735b9114322cb58f980f5a4f05a"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/ega_mode.obj",
+      "command_sha256": "d0378347b456b143bd1ad49b086aba29ca9f61447966f2d7fb2a1e9efa3d4375"
+    }
+  ],
+  "limits": "Observed release build graphs only; configurations outside existing Ninja graphs remain unproven."
+}

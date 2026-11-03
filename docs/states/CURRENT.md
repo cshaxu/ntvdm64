@@ -6,8 +6,10 @@
 
 Mirror-condition audit: owner revised execution to complete and register each
 compiled mirror file against its original; build each batch of 10 modified code
-files. If binaries have no substantive change, reuse test evidence for the P;
-otherwise run Full before publication. [Progress](../../artifacts/mvdm-audit/s13-bfs-progress.md);
+files. Process the pending per-file inventory in its existing order; review
+and register files even when no source edit is needed. If binaries have no
+substantive change, reuse test evidence for the P; otherwise run Full before
+publication. [Progress](../../artifacts/mvdm-audit/s13-bfs-progress.md);
 [observed per-file inventory](../../artifacts/mvdm-audit/s13-r489-per-file-observed-inventory.json).
 The current census has 1058 present C/H after the latest delivery: 1057
 in the observed build/dependency inventory and one product-generator input.

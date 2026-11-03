@@ -1,0 +1,688 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\keybd_io.c",
+  "before_sha256": "5a194c9300a6c6dbe5cc3d26a691c0fe3d02ff3dda34ca5a4079c6aa7af9bb92",
+  "after_sha256": "a40e0f8d68dc969eddaa6762df9142e089a8fac5e478aca38bfe4c4e893410b3",
+  "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+  "guards": [
+    {
+      "kind": "ifdef",
+      "expression": "SCCSID",
+      "original_line": 49,
+      "error_line": 50,
+      "end_line": 52
+    },
+    {
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "original_line": 53,
+      "error_line": 54,
+      "end_line": 61
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 84,
+      "error_line": 85,
+      "end_line": 87
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 168,
+      "error_line": 169,
+      "end_line": 185
+    },
+    {
+      "kind": "if",
+      "expression": "defined(IRET_HOOKS) && defined(GISP_CPU)",
+      "original_line": 186,
+      "error_line": 187,
+      "end_line": 189
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 237,
+      "error_line": 238,
+      "end_line": 240
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 251,
+      "error_line": 252,
+      "end_line": 260
+    },
+    {
+      "kind": "ifdef",
+      "expression": "GISP_CPU",
+      "original_line": 548,
+      "error_line": 549,
+      "end_line": 558
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 558,
+      "error_line": 559,
+      "end_line": 583
+    },
+    {
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "original_line": 638,
+      "error_line": 639,
+      "end_line": 663
+    },
+    {
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "original_line": 664,
+      "error_line": 665,
+      "end_line": 679
+    },
+    {
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "original_line": 700,
+      "error_line": 701,
+      "end_line": 767
+    },
+    {
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "original_line": 771,
+      "error_line": 772,
+      "end_line": 774
+    },
+    {
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "original_line": 782,
+      "error_line": 783,
+      "end_line": 787
+    },
+    {
+      "kind": "if",
+      "expression": "defined(IRET_HOOKS)  && defined(GISP_CPU)",
+      "original_line": 809,
+      "error_line": 810,
+      "end_line": 812
+    },
+    {
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "original_line": 829,
+      "error_line": 830,
+      "end_line": 832
+    },
+    {
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "original_line": 838,
+      "error_line": 839,
+      "end_line": 843
+    },
+    {
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "original_line": 875,
+      "error_line": 876,
+      "end_line": 881
+    },
+    {
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "original_line": 1178,
+      "error_line": 1179,
+      "end_line": 1183
+    },
+    {
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "original_line": 1503,
+      "error_line": 1504,
+      "end_line": 1509
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 1534,
+      "error_line": 1535,
+      "end_line": 1842
+    },
+    {
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "original_line": 1843,
+      "error_line": 1844,
+      "end_line": 1851
+    },
+    {
+      "kind": "if",
+      "expression": "defined(CPU_40_STYLE) && !defined (NTVDM)",
+      "original_line": 1889,
+      "error_line": 1890,
+      "end_line": 1892
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 1996,
+      "error_line": 1997,
+      "end_line": 2001
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 2004,
+      "error_line": 2005,
+      "end_line": 2025
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 2050,
+      "error_line": 2051,
+      "end_line": 2053
+    }
+  ],
+  "retained_leaf_difference": {
+    "original_line": 731,
+    "current_line": 653,
+    "original": [
+      "/* <tur> NT's PutInBuffer seems to be slightly different to PutInBufferFunc above. */",
+      "/* So I'm Not Touching it! (Is this a good expansion of \"NT\"? :-) */",
+      "/* Our code size is too large, change this often used macro",
+      "* to a function, as the call overhead is not justified",
+      "*/",
+      "void NtPutInBuffer(half_word s, half_word v)",
+      "{",
+      "word    buffer_head, buffer_tail, buffer_ptr;",
+      "buffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);",
+      "buffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);",
+      "buffer_ptr = inc_buffer_ptr(/* from: */buffer_tail);",
+      "if (buffer_ptr == buffer_head) {",
+      "BEEP(\"BIOS keyboard buffer overflow\");",
+      "}",
+      "else {",
+      "sas_store_no_check(BIOS_VAR_START + buffer_tail, v);",
+      "sas_store_no_check(BIOS_VAR_START + buffer_tail+1, s);",
+      "sas_storew_no_check(BIOS_KB_BUFFER_TAIL, buffer_ptr);",
+      "setAX(0x9102);",
+      "INT15();",
+      "K26();",
+      "setIF(0);",
+      "}",
+      "exit_from_kbd_int();",
+      "}",
+      "#define PUT_IN_BUFFER(s, v) NtPutInBuffer(s,v); return"
+    ],
+    "current": [
+      "/* <tur> NT's PutInBuffer seems to be slightly different to PutInBufferFunc above. */",
+      "/* So I'm Not Touching it! (Is this a good expansion of \"NT\"? :-) */",
+      "/* Our code size is too large, change this often used macro",
+      "* to a function, as the call overhead is not justified",
+      "*/",
+      "void NtPutInBuffer(half_word s, half_word v)",
+      "{",
+      "word    buffer_head, buffer_tail, buffer_ptr;",
+      "buffer_tail = sas_w_at_no_check(BIOS_KB_BUFFER_TAIL);",
+      "buffer_head = sas_w_at_no_check(BIOS_KB_BUFFER_HEAD);",
+      "buffer_ptr = inc_buffer_ptr(/* from: */buffer_tail);",
+      "if (buffer_ptr == buffer_head) {",
+      "BEEP(\"BIOS keyboard buffer overflow\");",
+      "}",
+      "else {",
+      "sas_store_no_check(BIOS_VAR_START + buffer_tail, v);",
+      "sas_store_no_check(BIOS_VAR_START + buffer_tail+1, s);",
+      "sas_storew_no_check(BIOS_KB_BUFFER_TAIL, buffer_ptr);",
+      "/* DIVERGENCE(MVDM-HOST-DIV-325): only the explicit Win3.1",
+      "* Setup trace records a key after the original BIOS buffer",
+      "* commit.  It cannot affect delivery, ownership or IRQs. */",
+      "mvdm_softpc_report_setup_hardware_probe(\"keyboard-buffer-put\",",
+      "(unsigned long)s, (unsigned long)v);",
+      "setAX(0x9102);",
+      "INT15();",
+      "K26();",
+      "setIF(0);",
+      "}",
+      "exit_from_kbd_int();",
+      "}",
+      "#define PUT_IN_BUFFER(s, v) NtPutInBuffer(s,v); return"
+    ]
+  },
+  "difference_registration": "MVDM-HOST-DIV-325",
+  "witness": {
+    "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+    "source_sha256": "5a194c9300a6c6dbe5cc3d26a691c0fe3d02ff3dda34ca5a4079c6aa7af9bb92",
+    "object": "keymouse/keybd_io",
+    "arms": [
+      {
+        "label": "codex_r728_arm_0000",
+        "line": 49,
+        "kind": "ifdef",
+        "expression": "SCCSID",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0001",
+        "line": 55,
+        "kind": "ifdef",
+        "expression": "SEGMENTATION",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0002",
+        "line": 83,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0003",
+        "line": 150,
+        "kind": "if",
+        "expression": "defined(NTVDM) && defined(LOCAL)",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0004",
+        "line": 158,
+        "kind": "ifndef",
+        "expression": "GISP_SVGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0005",
+        "line": 173,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0006",
+        "line": 178,
+        "kind": "if",
+        "expression": "defined(IRET_HOOKS) && defined(GISP_CPU)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0007",
+        "line": 184,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0008",
+        "line": 231,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0009",
+        "line": 239,
+        "kind": "ifndef",
+        "expression": "GISP_SVGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0010",
+        "line": 245,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0011",
+        "line": 252,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0012",
+        "line": 259,
+        "kind": "if",
+        "expression": "defined(NTVDM) && defined(MONITOR)",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0013",
+        "line": 516,
+        "kind": "if",
+        "expression": "defined(NTVDM) || defined(GISP_CPU)",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0014",
+        "line": 532,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0015",
+        "line": 536,
+        "kind": "ifdef",
+        "expression": "GISP_CPU",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0016",
+        "line": 541,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0017",
+        "line": 600,
+        "kind": "ifndef",
+        "expression": "NTVDM",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0018",
+        "line": 603,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0019",
+        "line": 613,
+        "kind": "ifndef",
+        "expression": "NTVDM",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0020",
+        "line": 616,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0021",
+        "line": 650,
+        "kind": "ifndef",
+        "expression": "NTVDM",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0022",
+        "line": 653,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0023",
+        "line": 700,
+        "kind": "ifndef",
+        "expression": "NTVDM",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0024",
+        "line": 713,
+        "kind": "ifndef",
+        "expression": "NTVDM",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0025",
+        "line": 716,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0026",
+        "line": 744,
+        "kind": "if",
+        "expression": "defined(IRET_HOOKS)  && defined(GISP_CPU)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0027",
+        "line": 751,
+        "kind": "if",
+        "expression": "defined(NTVDM)",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0028",
+        "line": 766,
+        "kind": "ifndef",
+        "expression": "NTVDM",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0029",
+        "line": 777,
+        "kind": "ifndef",
+        "expression": "NTVDM",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0030",
+        "line": 796,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0031",
+        "line": 807,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0032",
+        "line": 814,
+        "kind": "ifndef",
+        "expression": "NTVDM",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0033",
+        "line": 822,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0034",
+        "line": 829,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0035",
+        "line": 1034,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0036",
+        "line": 1116,
+        "kind": "ifndef",
+        "expression": "NTVDM",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0037",
+        "line": 1119,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0038",
+        "line": 1428,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0039",
+        "line": 1447,
+        "kind": "ifndef",
+        "expression": "NTVDM",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0040",
+        "line": 1481,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0041",
+        "line": 1485,
+        "kind": "ifdef",
+        "expression": "SEGMENTATION",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0042",
+        "line": 1529,
+        "kind": "if",
+        "expression": "defined(CPU_40_STYLE) && !defined (NTVDM)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0043",
+        "line": 1538,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0044",
+        "line": 1547,
+        "kind": "if",
+        "expression": "defined(MONITOR)",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0045",
+        "line": 1577,
+        "kind": "if",
+        "expression": "defined(MONITOR)",
+        "error_only": false
+      },
+      {
+        "label": "codex_r728_arm_0046",
+        "line": 1647,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0047",
+        "line": 1655,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r728_arm_0048",
+        "line": 1685,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "32ec7f4f4a84ea48f3452817a3d1c1c907a5858d3c30287740716727c053c35f",
+        "hit": [
+          "codex_r728_arm_0003",
+          "codex_r728_arm_0004",
+          "codex_r728_arm_0007",
+          "codex_r728_arm_0009",
+          "codex_r728_arm_0011",
+          "codex_r728_arm_0012",
+          "codex_r728_arm_0013",
+          "codex_r728_arm_0014",
+          "codex_r728_arm_0018",
+          "codex_r728_arm_0020",
+          "codex_r728_arm_0022",
+          "codex_r728_arm_0025",
+          "codex_r728_arm_0027",
+          "codex_r728_arm_0030",
+          "codex_r728_arm_0031",
+          "codex_r728_arm_0033",
+          "codex_r728_arm_0034",
+          "codex_r728_arm_0035",
+          "codex_r728_arm_0037",
+          "codex_r728_arm_0038",
+          "codex_r728_arm_0043",
+          "codex_r728_arm_0044",
+          "codex_r728_arm_0045"
+        ]
+      },
+      {
+        "graph": "msvc-x64-release",
+        "exit": 0,
+        "preprocessed_sha256": "32ec7f4f4a84ea48f3452817a3d1c1c907a5858d3c30287740716727c053c35f",
+        "hit": [
+          "codex_r728_arm_0003",
+          "codex_r728_arm_0004",
+          "codex_r728_arm_0007",
+          "codex_r728_arm_0009",
+          "codex_r728_arm_0011",
+          "codex_r728_arm_0012",
+          "codex_r728_arm_0013",
+          "codex_r728_arm_0014",
+          "codex_r728_arm_0018",
+          "codex_r728_arm_0020",
+          "codex_r728_arm_0022",
+          "codex_r728_arm_0025",
+          "codex_r728_arm_0027",
+          "codex_r728_arm_0030",
+          "codex_r728_arm_0031",
+          "codex_r728_arm_0033",
+          "codex_r728_arm_0034",
+          "codex_r728_arm_0035",
+          "codex_r728_arm_0037",
+          "codex_r728_arm_0038",
+          "codex_r728_arm_0043",
+          "codex_r728_arm_0044",
+          "codex_r728_arm_0045"
+        ]
+      }
+    ]
+  },
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 188,
+      "identical": true,
+      "include_trace_sha256": "5157878be7f800cc3c31a201a38866b15d898484b8e691bdad79114573734845",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 188,
+      "identical": true,
+      "include_trace_sha256": "5157878be7f800cc3c31a201a38866b15d898484b8e691bdad79114573734845",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "limits": "Observed worker release graphs; Existing opt-in keyboard observation retained; behavior beyond condition tree not asserted."
+}

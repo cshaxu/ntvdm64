@@ -1,0 +1,142 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+  "before_sha256": "1c29adc7890344ac638702e8fd5d9a7f3bfe45bc09865996475f573b628edfbf",
+  "after_sha256": "ff511d90b3e9c23d481cffe43be7b62881f80174a13c325c89e82a6b6ae405d4",
+  "original_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860",
+  "branches": [
+    {
+      "original_if_line": 949,
+      "original_endif_line": 951,
+      "witness": {
+        "label": "codex_r684_arm_0048",
+        "line": 791,
+        "kind": "if",
+        "expression": "defined(EGA_DUMP) || defined(EGA_STAT)",
+        "error_only": false
+      },
+      "removed_body_sha256": "e7bcf060b88cc1253d5b96f79856478c8a57a38596458707abfdd2fb98283e73"
+    },
+    {
+      "original_if_line": 159,
+      "original_endif_line": 167,
+      "witness": {
+        "label": "codex_r684_arm_0003",
+        "line": 162,
+        "kind": "if",
+        "expression": "defined(EGA_DUMP) || defined(EGA_STAT)",
+        "error_only": false
+      },
+      "removed_body_sha256": "9826ad7fe02a1a48a44ce013b469455bcea2abf8e166f547f9ba6f2d2b3beb7b"
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "4924b43bb95c11cc8a380dfdba1299da475f1166a88446b582adf88347c7b32a",
+      "hit": [
+        "codex_r684_arm_0000",
+        "codex_r684_arm_0001",
+        "codex_r684_arm_0004",
+        "codex_r684_arm_0006",
+        "codex_r684_arm_0007",
+        "codex_r684_arm_0008",
+        "codex_r684_arm_0010",
+        "codex_r684_arm_0011",
+        "codex_r684_arm_0013",
+        "codex_r684_arm_0014",
+        "codex_r684_arm_0015",
+        "codex_r684_arm_0017",
+        "codex_r684_arm_0018",
+        "codex_r684_arm_0019",
+        "codex_r684_arm_0021",
+        "codex_r684_arm_0023",
+        "codex_r684_arm_0027",
+        "codex_r684_arm_0028",
+        "codex_r684_arm_0029",
+        "codex_r684_arm_0031",
+        "codex_r684_arm_0033",
+        "codex_r684_arm_0035",
+        "codex_r684_arm_0036",
+        "codex_r684_arm_0038",
+        "codex_r684_arm_0040",
+        "codex_r684_arm_0042",
+        "codex_r684_arm_0043",
+        "codex_r684_arm_0046",
+        "codex_r684_arm_0049",
+        "codex_r684_arm_0051"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "4924b43bb95c11cc8a380dfdba1299da475f1166a88446b582adf88347c7b32a",
+      "hit": [
+        "codex_r684_arm_0000",
+        "codex_r684_arm_0001",
+        "codex_r684_arm_0004",
+        "codex_r684_arm_0006",
+        "codex_r684_arm_0007",
+        "codex_r684_arm_0008",
+        "codex_r684_arm_0010",
+        "codex_r684_arm_0011",
+        "codex_r684_arm_0013",
+        "codex_r684_arm_0014",
+        "codex_r684_arm_0015",
+        "codex_r684_arm_0017",
+        "codex_r684_arm_0018",
+        "codex_r684_arm_0019",
+        "codex_r684_arm_0021",
+        "codex_r684_arm_0023",
+        "codex_r684_arm_0027",
+        "codex_r684_arm_0028",
+        "codex_r684_arm_0029",
+        "codex_r684_arm_0031",
+        "codex_r684_arm_0033",
+        "codex_r684_arm_0035",
+        "codex_r684_arm_0036",
+        "codex_r684_arm_0038",
+        "codex_r684_arm_0040",
+        "codex_r684_arm_0042",
+        "codex_r684_arm_0043",
+        "codex_r684_arm_0046",
+        "codex_r684_arm_0049",
+        "codex_r684_arm_0051"
+      ]
+    }
+  ],
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 176,
+      "identical": true,
+      "include_trace_sha256": "5fb9baa74a06932d2511f43f4d44c52dc7554963e7afaaf4dc4f206c5f8f6c1b",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 176,
+      "identical": true,
+      "include_trace_sha256": "5fb9baa74a06932d2511f43f4d44c52dc7554963e7afaaf4dc4f206c5f8f6c1b",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "contexts": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/ega_read.obj",
+      "command_sha256": "a01e3a8a4da9c90911c3c1db5760cae26e1a67da3a1e417e6cbeb69e2d448c88"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/ega_read.obj",
+      "command_sha256": "170ceac493b1390a07d33d57164b30eb850ae12ca702b4efe0ee22f6222c4dbd"
+    }
+  ],
+  "limits": "Observed worker release contexts; remaining file conditions and other configurations stay pending."
+}

@@ -1,0 +1,76 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+  "original": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/bios/bios.c",
+  "before_sha256": "eb51b0aa7afb03cad6265fc9c3b1e92829dac5a976a9ae84b60c8bcc2b878f85",
+  "after_sha256": "dcfed48202e27542c038732639ce756ea11511be1cd370ef6acc88af51192679",
+  "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b",
+  "branches": [
+    {
+      "macro": "PTY",
+      "original_line": 343,
+      "original_else_line": 345,
+      "original_endif_line": 347,
+      "witness": {
+        "label": "codex_r719_arm_0046",
+        "line": 313,
+        "kind": "ifdef",
+        "expression": "PTY",
+        "error_only": false
+      }
+    },
+    {
+      "macro": "SUSPEND",
+      "original_line": 363,
+      "original_else_line": 366,
+      "original_endif_line": 369,
+      "witness": {
+        "label": "codex_r719_arm_0052",
+        "line": 337,
+        "kind": "ifdef",
+        "expression": "SUSPEND",
+        "error_only": false
+      }
+    },
+    {
+      "macro": "GEN_DRVR",
+      "original_line": 370,
+      "original_else_line": 372,
+      "original_endif_line": 374,
+      "witness": {
+        "label": "codex_r719_arm_0054",
+        "line": 346,
+        "kind": "ifdef",
+        "expression": "GEN_DRVR",
+        "error_only": false
+      }
+    },
+    {
+      "macro": "SUSPEND",
+      "original_line": 375,
+      "original_else_line": 377,
+      "original_endif_line": 379,
+      "witness": {
+        "label": "codex_r719_arm_0056",
+        "line": 353,
+        "kind": "ifdef",
+        "expression": "SUSPEND",
+        "error_only": false
+      }
+    },
+    {
+      "macro": "CDROM",
+      "original_line": 382,
+      "original_else_line": 384,
+      "original_endif_line": 386,
+      "witness": {
+        "label": "codex_r719_arm_0058",
+        "line": 362,
+        "kind": "ifdef",
+        "expression": "CDROM",
+        "error_only": false
+      }
+    }
+  ],
+  "context_evidence": "s13-r720-bios-two-branches.json and build/t473-s13/r719-arm-witness/bios-adjacent-include.json",
+  "limits": "Only observed worker release graphs; remaining BIOS branches stay pending."
+}

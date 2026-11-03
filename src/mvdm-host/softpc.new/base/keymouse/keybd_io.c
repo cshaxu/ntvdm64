@@ -171,8 +171,10 @@ LOCAL word rcpu_nop_segment = RCPU_NOP_SEGMENT,
 LOCAL word rcpu_poll_segment = RCPU_POLL_SEGMENT,
 	   rcpu_poll_offset  = RCPU_POLL_OFFSET;
 #else /* GISP_SVGA */
+#line 169
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif /* GISP_SVGA */
+#line 185
 
 #line 186
 #if defined(IRET_HOOKS) && defined(GISP_CPU)
@@ -229,8 +231,10 @@ extern word stream_io_buffer_size;
 extern sys_addr stream_io_bios_busy_sysaddr;
 
 #else
+#line 238
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
+#line 240
 
 /*
  * Mix in global defined data as well.
@@ -243,8 +247,10 @@ GLOBAL word rcpu_int1C_off = USER_TIMER_INT_OFFSET;
 GLOBAL word rcpu_int4A_seg = RCPU_INT4A_SEGMENT;
 GLOBAL word rcpu_int4A_off = RCPU_INT4A_OFFSET;
 #else /* GISP_SVGA */
+#line 252
 #error DIVERGENCE MVDM-HOST-DIV-523: GISP_SVGA alternative is not selected; see mirror register.
 #endif /* GISP_SVGA */
+#line 260
 
 GLOBAL word dummy_int_seg = 0;
 GLOBAL word dummy_int_off = 0;
@@ -539,6 +545,7 @@ LOCAL VOID check_indicators IFN1(IBOOL, eoi)
 #endif	/* GISP_CPU */
 #line 558
 #else	/* not NTVDM nor GISP_CPU */
+#line 559
 #error Unsupported excluded original configuration
 #endif	/* NTVDM or GISP_CPU */
 #line 583
@@ -1479,8 +1486,10 @@ void keyboard_io()
 }
 
 #else
+#line 1535
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 1842
 
 #ifdef SEGMENTATION
 #line 1844
@@ -1653,26 +1662,10 @@ void kb_setup_vectors(void)
    TimerInt1COff = dummy_int_off;
 
 #else    /* ndef MONITOR */
-
-     /* kbd bios callout optimization */
-    sas_loadw(0x15*4,     &sp_int15_handler_off);
-    sas_loadw(0x15*4 + 2, &sp_int15_handler_seg);
-
-     /* timer hardware interrupt optimizations */
-    sas_loadw(0x08*4,     &TimerInt08Off);
-    sas_loadw(0x08*4 + 2, &TimerInt08Seg);
-    sas_loadw(0x1C*4,     &TimerInt1COff);
-    sas_loadw(0x1C*4 + 2, &TimerInt1CSeg);
-
-    sas_loadw(0x13 * 4, &int13h_vector_off);
-    sas_loadw(0x13 * 4 + 2, &int13h_vector_seg);
-    int13h_caller_seg = KbdSeg;
-    dr_type_seg = KbdSeg;
-    sas_loadw((sys_addr)(phy_base + 27 * sizeof(word)), &int13h_caller_off);
-    sas_loadw((sys_addr)(phy_base + 22 * sizeof(word)), &dr_type_off);
-    dr_type_addr = effective_addr(dr_type_seg, dr_type_off);
-
+#line 2005
+#error Unsupported excluded non-MONITOR keyboard initialization
 #endif /* MONITOR */
+#line 2025
 
     sas_loadw(0x09*4,     &KbdInt09Off);
     sas_loadw(0x09*4 + 2, &KbdInt09Seg);

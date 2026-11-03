@@ -2864,3 +2864,106 @@ mapping are retained. Evidence: ../../artifacts/mvdm-audit/s13-r717-emm-min-revi
 MVDM-HOST-DIV-773: reject the original WDCTRL_BOP entry in base/bios/bios.c
 for observed worker configurations while preserving the original condition and
 selected fallback. Evidence: ../../artifacts/mvdm-audit/s13-r718-bios-wdctrl-review.json.
+
+MVDM-HOST-DIV-774: restore original diagnostic and continuation mappings in
+base/bios/emm_fncs.c after complete original condition-tree and selected-arm
+checks in the observed worker graphs. Evidence:
+../../artifacts/mvdm-audit/s13-r719-witnessed-anchor-batch.json.
+
+MVDM-HOST-DIV-775: reject the original RDCHK/non-PROD and WIN_VTD BIOS table
+branches in observed worker release builds; retain original conditions and
+selected fallback. Evidence: ../../artifacts/mvdm-audit/s13-r720-bios-two-branches.json.
+
+MVDM-HOST-DIV-776: reject unselected HFX and DPMI BIOS table branches while
+preserving original conditions, selected fallback bodies, and diagnostic line
+mappings. Evidence: ../../artifacts/mvdm-audit/s13-r721-bios-hfx-dpmi.json.
+
+MVDM-HOST-DIV-777: reject unselected PTY, SUSPEND, GEN_DRVR and CDROM BIOS
+table branches while retaining original conditions and selected fallbacks.
+Evidence: ../../artifacts/mvdm-audit/s13-r722-bios-platform-branches.json.
+
+MVDM-HOST-DIV-778: reject unselected MSWDVR, NOVELL_IPX, NOVELL_TCPIP and
+WINSOCK BIOS table branches in observed worker builds, retaining original
+conditions and selected fallbacks. Evidence:
+../../artifacts/mvdm-audit/s13-r723-bios-platform-branches.json.
+
+MVDM-HOST-DIV-779: reject the unselected SOFTWIN_API/SWIN_HFX compound BIOS
+table branch while retaining the original condition and selected fallback.
+Evidence: ../../artifacts/mvdm-audit/s13-r724-bios-softwindows.json.
+
+MVDM-HOST-DIV-780: reject the entire unselected outer BIOS host-mouse else
+branch and remove its nested GISP_SVGA structure; preserve the selected host
+mouse entries. Evidence: ../../artifacts/mvdm-audit/s13-r725-bios-mouse-else.json.
+
+MVDM-HOST-DIV-781: restore original diagnostic and continuation mappings in
+base/bios/bios.c after original condition-tree and selected-arm checks in the
+observed worker graphs. Evidence:
+../../artifacts/mvdm-audit/s13-r726-witnessed-anchor-batch.json.
+
+MVDM-HOST-DIV-782: replace the unselected non-MONITOR keyboard initialization
+branch with an error, retaining original conditions and selected initialization.
+Its unreachable local SAS rewrites are removed; remaining DIV-059 adaptations
+stay. Evidence: ../../artifacts/mvdm-audit/s13-r727-keyboard-monitor-else.json.
+
+MVDM-HOST-DIV-783: restore original diagnostic and continuation mappings in
+base/keymouse/keybd_io.c after original tree and selected-arm review, retaining
+DIV-325 observation. Evidence: ../../artifacts/mvdm-audit/s13-r729-keyboard-anchor-review.json.
+
+MVDM-HOST-DIV-784: reject the original CGA-only condition branches in
+base/video/cga.c when the selected worker builds define C_VID. Preserve the
+original condition frameworks and selected path. Evidence:
+../../artifacts/mvdm-audit/s13-r730-cga-only-branches.json.
+
+MVDM-HOST-DIV-785: restore original diagnostic and continuation mappings in
+base/video/cga.c after complete condition-tree and selected-arm checks in the
+observed worker graphs. Evidence:
+../../artifacts/mvdm-audit/s13-r731-witnessed-anchor-batch.json.
+
+MVDM-HOST-DIV-786: replace the excluded non-NTVDM video-update body and its
+nested conditions in base/video/ega_mode.c, retaining the outer framework.
+Evidence: ../../artifacts/mvdm-audit/s13-r732-egamode-ntvdm.json.
+
+MVDM-HOST-DIV-787: reject excluded EGA_DUMP/EGA_STAT branches in
+base/video/ega_read.c under observed worker builds, preserving the original
+conditions and selected paths. Evidence:
+../../artifacts/mvdm-audit/s13-r734-egaread-diagnostics.json.
+
+MVDM-HOST-DIV-788: restore original diagnostic and continuation mappings in
+base/video/ega_read.c, retaining registered DIV-089 video glue declarations.
+Evidence: ../../artifacts/mvdm-audit/s13-r736-egaread-anchor-review.json.
+
+MVDM-HOST-DIV-789: reject unselected non-ANSI declarations in
+base/video/ega_vide.c while preserving original condition and selected ANSI
+branch. Evidence: ../../artifacts/mvdm-audit/s13-r737-egavide-ansi.json.
+
+MVDM-HOST-DIV-790: reject the original USE_CURSOR_END_TABLES branches in
+base/video/ega_vide.c under observed worker builds; retain original conditions
+and selected fallbacks. Evidence:
+../../artifacts/mvdm-audit/s13-r738-egavide-cursor-tables.json.
+
+MVDM-HOST-DIV-791: replace the unselected MSWDVR video branch and its nested
+conditions in base/video/ega_vide.c while retaining its original framework.
+Evidence: ../../artifacts/mvdm-audit/s13-r740-egavide-mswdvr.json.
+
+MVDM-HOST-DIV-792: restore original diagnostic and continuation mappings in
+base/video/ega_vide.c, retaining DIV-090 video fill pointer declarations.
+The selected GISP_SVGA-related branch was witnessed using a marker placed
+outside the directive's multiline comment. Evidence:
+../../artifacts/mvdm-audit/s13-r741-egavide-anchor-review.json.
+
+MVDM-HOST-DIV-793: reject excluded EGA_DUMP/EGA_STAT branches in
+base/video/ega_writ.c for observed worker builds, retaining original
+conditions and selected paths. Evidence:
+../../artifacts/mvdm-audit/s13-r742-egawrit-diagnostics.json.
+
+MVDM-HOST-DIV-794: restore original diagnostic and continuation mappings in
+base/video/ega_writ.c, retaining registered DIV-074 and DIV-088 declarations.
+Evidence: ../../artifacts/mvdm-audit/s13-r744-egawrit-anchor-review.json.
+
+MVDM-HOST-DIV-795: reject two unselected old-mask EGA branches in
+base/video/ega_prts.c while retaining original conditions and selected path.
+Evidence: ../../artifacts/mvdm-audit/s13-r745-egaprts-old-mask.json.
+
+MVDM-HOST-DIV-796: reject the two unselected DELAYED_INTS printer branches
+while preserving original conditions and selected immediate paths. Evidence:
+../../artifacts/mvdm-audit/s13-r746-printer-delayed.json.

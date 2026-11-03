@@ -1,0 +1,176 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+  "original": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/bios/bios.c",
+  "before_sha256": "47d0e26d30fcca2cc5ef5226f8c034654fa36f7f30fa3a2b4eda883c3262d077",
+  "after_sha256": "552d5162d17a646f4d68978122476ffef12b1015f375434b5928c4e719c8d13a",
+  "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b",
+  "branches": [
+    {
+      "condition": "#if  defined(RDCHK) && !defined(PROD)",
+      "original_line": 178,
+      "unselected_witness": {
+        "label": "codex_r719_arm_0026",
+        "line": 177,
+        "kind": "if",
+        "expression": "defined(RDCHK) && !defined(PROD)",
+        "error_only": false
+      }
+    },
+    {
+      "condition": "#ifdef WIN_VTD",
+      "original_line": 184,
+      "unselected_witness": {
+        "label": "codex_r719_arm_0028",
+        "line": 183,
+        "kind": "ifdef",
+        "expression": "WIN_VTD",
+        "error_only": false
+      }
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "dc5b6ff296467b05ba2753eacd46291f2d7c8606c2a2e64f07ac055045836538",
+      "hit": [
+        "codex_r719_arm_0003",
+        "codex_r719_arm_0004",
+        "codex_r719_arm_0007",
+        "codex_r719_arm_0014",
+        "codex_r719_arm_0015",
+        "codex_r719_arm_0017",
+        "codex_r719_arm_0019",
+        "codex_r719_arm_0021",
+        "codex_r719_arm_0022",
+        "codex_r719_arm_0024",
+        "codex_r719_arm_0027",
+        "codex_r719_arm_0029",
+        "codex_r719_arm_0031",
+        "codex_r719_arm_0033",
+        "codex_r719_arm_0035",
+        "codex_r719_arm_0037",
+        "codex_r719_arm_0039",
+        "codex_r719_arm_0040",
+        "codex_r719_arm_0043",
+        "codex_r719_arm_0044",
+        "codex_r719_arm_0047",
+        "codex_r719_arm_0049",
+        "codex_r719_arm_0050",
+        "codex_r719_arm_0053",
+        "codex_r719_arm_0055",
+        "codex_r719_arm_0057",
+        "codex_r719_arm_0059",
+        "codex_r719_arm_0060",
+        "codex_r719_arm_0063",
+        "codex_r719_arm_0064",
+        "codex_r719_arm_0067",
+        "codex_r719_arm_0069",
+        "codex_r719_arm_0071",
+        "codex_r719_arm_0073",
+        "codex_r719_arm_0075",
+        "codex_r719_arm_0077",
+        "codex_r719_arm_0079",
+        "codex_r719_arm_0081",
+        "codex_r719_arm_0083",
+        "codex_r719_arm_0085",
+        "codex_r719_arm_0086",
+        "codex_r719_arm_0088",
+        "codex_r719_arm_0093",
+        "codex_r719_arm_0095",
+        "codex_r719_arm_0097",
+        "codex_r719_arm_0098",
+        "codex_r719_arm_0099",
+        "codex_r719_arm_0101"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "dc5b6ff296467b05ba2753eacd46291f2d7c8606c2a2e64f07ac055045836538",
+      "hit": [
+        "codex_r719_arm_0003",
+        "codex_r719_arm_0004",
+        "codex_r719_arm_0007",
+        "codex_r719_arm_0014",
+        "codex_r719_arm_0015",
+        "codex_r719_arm_0017",
+        "codex_r719_arm_0019",
+        "codex_r719_arm_0021",
+        "codex_r719_arm_0022",
+        "codex_r719_arm_0024",
+        "codex_r719_arm_0027",
+        "codex_r719_arm_0029",
+        "codex_r719_arm_0031",
+        "codex_r719_arm_0033",
+        "codex_r719_arm_0035",
+        "codex_r719_arm_0037",
+        "codex_r719_arm_0039",
+        "codex_r719_arm_0040",
+        "codex_r719_arm_0043",
+        "codex_r719_arm_0044",
+        "codex_r719_arm_0047",
+        "codex_r719_arm_0049",
+        "codex_r719_arm_0050",
+        "codex_r719_arm_0053",
+        "codex_r719_arm_0055",
+        "codex_r719_arm_0057",
+        "codex_r719_arm_0059",
+        "codex_r719_arm_0060",
+        "codex_r719_arm_0063",
+        "codex_r719_arm_0064",
+        "codex_r719_arm_0067",
+        "codex_r719_arm_0069",
+        "codex_r719_arm_0071",
+        "codex_r719_arm_0073",
+        "codex_r719_arm_0075",
+        "codex_r719_arm_0077",
+        "codex_r719_arm_0079",
+        "codex_r719_arm_0081",
+        "codex_r719_arm_0083",
+        "codex_r719_arm_0085",
+        "codex_r719_arm_0086",
+        "codex_r719_arm_0088",
+        "codex_r719_arm_0093",
+        "codex_r719_arm_0095",
+        "codex_r719_arm_0097",
+        "codex_r719_arm_0098",
+        "codex_r719_arm_0099",
+        "codex_r719_arm_0101"
+      ]
+    }
+  ],
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 174,
+      "identical": true,
+      "include_trace_sha256": "5a103ed45039dffb7f466c49796fbb824ec633e7db8620fdde055c804049093f",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 174,
+      "identical": true,
+      "include_trace_sha256": "5a103ed45039dffb7f466c49796fbb824ec633e7db8620fdde055c804049093f",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "contexts": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/bios/bios.obj",
+      "command_sha256": "6c705bd39ca949e654d9a8d79e686e8d47fb8a8ef5fd09a835d5c14dc2f09491"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/bios/bios.obj",
+      "command_sha256": "6c705bd39ca949e654d9a8d79e686e8d47fb8a8ef5fd09a835d5c14dc2f09491"
+    }
+  ],
+  "limits": "Two observed worker release graphs only; remaining original BIOS branches remain pending."
+}

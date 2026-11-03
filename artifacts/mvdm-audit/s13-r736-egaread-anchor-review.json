@@ -1,0 +1,674 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
+  "before_sha256": "ff511d90b3e9c23d481cffe43be7b62881f80174a13c325c89e82a6b6ae405d4",
+  "after_sha256": "0f17eacc388fdc85c5c77e6c9555e5e56fb5c63647561d43c5737e7b425d3ae7",
+  "original_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860",
+  "guards": [
+    {
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "original_line": 150,
+      "error_line": 151,
+      "end_line": 158
+    },
+    {
+      "kind": "if",
+      "expression": "defined(EGA_DUMP) || defined(EGA_STAT)",
+      "original_line": 159,
+      "error_line": 160,
+      "end_line": 168
+    },
+    {
+      "kind": "ifdef",
+      "expression": "EGATEST",
+      "original_line": 162,
+      "error_line": 163,
+      "end_line": 167
+    },
+    {
+      "kind": "ifndef",
+      "expression": "CPU_40_STYLE",
+      "original_line": 194,
+      "error_line": 195,
+      "end_line": 407
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 391,
+      "error_line": 392,
+      "end_line": 394
+    },
+    {
+      "kind": "ifdef",
+      "expression": "BACK_M",
+      "original_line": 504,
+      "error_line": 505,
+      "end_line": 509
+    },
+    {
+      "kind": "ifdef",
+      "expression": "BACK_M",
+      "original_line": 588,
+      "error_line": 589,
+      "end_line": 595
+    },
+    {
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "original_line": 644,
+      "error_line": 645,
+      "end_line": 652
+    },
+    {
+      "kind": "ifndef",
+      "expression": "CPU_40_STYLE",
+      "original_line": 657,
+      "error_line": 658,
+      "end_line": 693
+    },
+    {
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "original_line": 696,
+      "error_line": 697,
+      "end_line": 704
+    },
+    {
+      "kind": "ifdef",
+      "expression": "BIGEND",
+      "original_line": 717,
+      "error_line": 718,
+      "end_line": 722
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 765,
+      "error_line": 766,
+      "end_line": 785
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 802,
+      "error_line": 803,
+      "end_line": 810
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 815,
+      "error_line": 816,
+      "end_line": 822
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 830,
+      "error_line": 831,
+      "end_line": 839
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 855,
+      "error_line": 856,
+      "end_line": 863
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 878,
+      "error_line": 879,
+      "end_line": 886
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 896,
+      "error_line": 897,
+      "end_line": 904
+    },
+    {
+      "kind": "ifndef",
+      "expression": "CPU_40_STYLE",
+      "original_line": 912,
+      "error_line": 913,
+      "end_line": 925
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 937,
+      "error_line": 938,
+      "end_line": 944
+    },
+    {
+      "kind": "if",
+      "expression": "defined(EGA_DUMP) || defined(EGA_STAT)",
+      "original_line": 949,
+      "error_line": 950,
+      "end_line": 952
+    },
+    {
+      "kind": "ifndef",
+      "expression": "CPU_40_STYLE",
+      "original_line": 957,
+      "error_line": 958,
+      "end_line": 971
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 983,
+      "error_line": 984,
+      "end_line": 997
+    }
+  ],
+  "retained_leaf_difference": {
+    "original_line": 380,
+    "current_line": 280,
+    "original": [
+      "/* C_Evid glue */",
+      "extern read_byte_ev_glue IPT1(IU32, eaOff);",
+      "extern read_word_ev_glue IPT1(IU32, eaOff);",
+      "extern read_str_fwd_ev_glue IPT3(IU8 *, dest, IU32, eaOff, IU32, count);",
+      "READ_POINTERS Glue_reads =",
+      "{",
+      "read_byte_ev_glue,",
+      "read_word_ev_glue,",
+      "read_str_fwd_ev_glue",
+      "};"
+    ],
+    "current": [
+      "/* C_Evid glue */",
+      "/* DIVERGENCE MVDM-HOST-DIV-089: retain the concrete original C-video read",
+      "* glue contracts instead of implicit host-int declarations. */",
+      "extern IU32 read_byte_ev_glue IPT1(IU32, eaOff);",
+      "extern IU32 read_word_ev_glue IPT1(IU32, eaOff);",
+      "extern void read_str_fwd_ev_glue IPT3(IU8 *, dest, IU32, eaOff, IU32, count);",
+      "READ_POINTERS Glue_reads =",
+      "{",
+      "read_byte_ev_glue,",
+      "read_word_ev_glue,",
+      "read_str_fwd_ev_glue",
+      "};"
+    ]
+  },
+  "difference_registration": "MVDM-HOST-DIV-089",
+  "witness": {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+    "source_sha256": "ff511d90b3e9c23d481cffe43be7b62881f80174a13c325c89e82a6b6ae405d4",
+    "object": "video/ega_read",
+    "arms": [
+      {
+        "label": "codex_r735_arm_0000",
+        "line": 4,
+        "kind": "if",
+        "expression": "!(defined(NTVDM) && defined(MONITOR))",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0001",
+        "line": 123,
+        "kind": "ifdef",
+        "expression": "EGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0002",
+        "line": 153,
+        "kind": "ifdef",
+        "expression": "SEGMENTATION",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0003",
+        "line": 162,
+        "kind": "if",
+        "expression": "defined(EGA_DUMP) || defined(EGA_STAT)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0004",
+        "line": 165,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0005",
+        "line": 167,
+        "kind": "ifdef",
+        "expression": "EGATEST",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0006",
+        "line": 169,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0007",
+        "line": 190,
+        "kind": "ifndef",
+        "expression": "REAL_VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0008",
+        "line": 195,
+        "kind": "ifndef",
+        "expression": "NO_STRING_OPERATIONS",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0009",
+        "line": 200,
+        "kind": "ifndef",
+        "expression": "CPU_40_STYLE",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0010",
+        "line": 277,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0011",
+        "line": 280,
+        "kind": "ifdef",
+        "expression": "C_VID",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0012",
+        "line": 293,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0013",
+        "line": 313,
+        "kind": "ifndef",
+        "expression": "NO_STRING_OPERATIONS",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0014",
+        "line": 342,
+        "kind": "ifdef",
+        "expression": "C_VID",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0015",
+        "line": 374,
+        "kind": "ifdef",
+        "expression": "C_VID",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0016",
+        "line": 410,
+        "kind": "ifdef",
+        "expression": "BACK_M",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0017",
+        "line": 412,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0018",
+        "line": 446,
+        "kind": "ifdef",
+        "expression": "C_VID",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0019",
+        "line": 485,
+        "kind": "ifdef",
+        "expression": "C_VID",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0020",
+        "line": 498,
+        "kind": "ifdef",
+        "expression": "BACK_M",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0021",
+        "line": 500,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0022",
+        "line": 555,
+        "kind": "ifdef",
+        "expression": "SEGMENTATION",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0023",
+        "line": 565,
+        "kind": "if",
+        "expression": "!(defined(NTVDM) && defined(MONITOR))",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0024",
+        "line": 570,
+        "kind": "ifndef",
+        "expression": "CPU_40_STYLE",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0025",
+        "line": 579,
+        "kind": "ifdef",
+        "expression": "SEGMENTATION",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0026",
+        "line": 601,
+        "kind": "ifdef",
+        "expression": "BIGEND",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0027",
+        "line": 603,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0028",
+        "line": 623,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0029",
+        "line": 650,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0030",
+        "line": 652,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0031",
+        "line": 672,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0032",
+        "line": 674,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0033",
+        "line": 682,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0034",
+        "line": 684,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0035",
+        "line": 693,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0036",
+        "line": 695,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0037",
+        "line": 697,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0038",
+        "line": 717,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0039",
+        "line": 719,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0040",
+        "line": 737,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0041",
+        "line": 739,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0042",
+        "line": 747,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0043",
+        "line": 752,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0044",
+        "line": 754,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0045",
+        "line": 768,
+        "kind": "ifndef",
+        "expression": "CPU_40_STYLE",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0046",
+        "line": 782,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0047",
+        "line": 784,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0048",
+        "line": 794,
+        "kind": "if",
+        "expression": "defined(EGA_DUMP) || defined(EGA_STAT)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0049",
+        "line": 800,
+        "kind": "if",
+        "expression": "!defined(EGATEST) && !defined(A3CPU)",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0050",
+        "line": 805,
+        "kind": "ifndef",
+        "expression": "CPU_40_STYLE",
+        "error_only": true
+      },
+      {
+        "label": "codex_r735_arm_0051",
+        "line": 819,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r735_arm_0052",
+        "line": 821,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "418415d9386e22dd2413113c31d944c2020d074c24ec89a92d6d79e092cec293",
+        "hit": [
+          "codex_r735_arm_0000",
+          "codex_r735_arm_0001",
+          "codex_r735_arm_0004",
+          "codex_r735_arm_0006",
+          "codex_r735_arm_0007",
+          "codex_r735_arm_0008",
+          "codex_r735_arm_0010",
+          "codex_r735_arm_0011",
+          "codex_r735_arm_0013",
+          "codex_r735_arm_0014",
+          "codex_r735_arm_0015",
+          "codex_r735_arm_0017",
+          "codex_r735_arm_0018",
+          "codex_r735_arm_0019",
+          "codex_r735_arm_0021",
+          "codex_r735_arm_0023",
+          "codex_r735_arm_0027",
+          "codex_r735_arm_0028",
+          "codex_r735_arm_0029",
+          "codex_r735_arm_0031",
+          "codex_r735_arm_0033",
+          "codex_r735_arm_0035",
+          "codex_r735_arm_0036",
+          "codex_r735_arm_0038",
+          "codex_r735_arm_0040",
+          "codex_r735_arm_0042",
+          "codex_r735_arm_0043",
+          "codex_r735_arm_0046",
+          "codex_r735_arm_0049",
+          "codex_r735_arm_0051"
+        ]
+      },
+      {
+        "graph": "msvc-x64-release",
+        "exit": 0,
+        "preprocessed_sha256": "418415d9386e22dd2413113c31d944c2020d074c24ec89a92d6d79e092cec293",
+        "hit": [
+          "codex_r735_arm_0000",
+          "codex_r735_arm_0001",
+          "codex_r735_arm_0004",
+          "codex_r735_arm_0006",
+          "codex_r735_arm_0007",
+          "codex_r735_arm_0008",
+          "codex_r735_arm_0010",
+          "codex_r735_arm_0011",
+          "codex_r735_arm_0013",
+          "codex_r735_arm_0014",
+          "codex_r735_arm_0015",
+          "codex_r735_arm_0017",
+          "codex_r735_arm_0018",
+          "codex_r735_arm_0019",
+          "codex_r735_arm_0021",
+          "codex_r735_arm_0023",
+          "codex_r735_arm_0027",
+          "codex_r735_arm_0028",
+          "codex_r735_arm_0029",
+          "codex_r735_arm_0031",
+          "codex_r735_arm_0033",
+          "codex_r735_arm_0035",
+          "codex_r735_arm_0036",
+          "codex_r735_arm_0038",
+          "codex_r735_arm_0040",
+          "codex_r735_arm_0042",
+          "codex_r735_arm_0043",
+          "codex_r735_arm_0046",
+          "codex_r735_arm_0049",
+          "codex_r735_arm_0051"
+        ]
+      }
+    ]
+  },
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 176,
+      "identical": true,
+      "include_trace_sha256": "5fb9baa74a06932d2511f43f4d44c52dc7554963e7afaaf4dc4f206c5f8f6c1b",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 176,
+      "identical": true,
+      "include_trace_sha256": "5fb9baa74a06932d2511f43f4d44c52dc7554963e7afaaf4dc4f206c5f8f6c1b",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "limits": "Observed worker release graphs; Existing DIV-089 concrete C-video glue declarations retained; behavioral equivalence outside condition tree not asserted."
+}

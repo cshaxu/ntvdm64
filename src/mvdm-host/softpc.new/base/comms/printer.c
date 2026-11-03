@@ -349,28 +349,28 @@ static void printer_inb IFN2(io_addr,port, half_word *,value)
 			break;
     	case STATE_OUT:
 			*value = get_status(adapter) | STATUS_REG_MASK;
+#line 365
 #ifndef DELAYED_INTS
 			delete_q_event(handle_for_out_event[adapter]);
                         lpr_state_out_event(adapter);
 #else
-#line 345
-			set_low(status_reg[adapter], ACK);
-                        state[adapter] = STATE_OUTA;
+#line 369
+#error Unsupported excluded delayed printer interrupt configuration
 #endif /* DELAYED INTS */
-#line 348
+#line 372
 			break;
     	case STATE_OUTA:
 			notbusy_check(adapter);		/* <chrisP 11Sep91> */
 			*value = get_status(adapter) | STATUS_REG_MASK;
+#line 376
 #ifndef DELAYED_INTS
 			delete_q_event(handle_for_outa_event[adapter]);
 			lpr_state_outa_event(adapter);
 #else
-#line 356
-			set_high(status_reg[adapter], ACK);
-			state[adapter] = STATE_READY;
+#line 380
+#error Unsupported excluded delayed printer interrupt configuration
 #endif
-#line 359
+#line 383
 			break;
     	default:	
 			note_trace1(PRINTER_VERBOSE, 

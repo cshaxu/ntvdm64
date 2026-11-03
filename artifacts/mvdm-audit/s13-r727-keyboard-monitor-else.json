@@ -1,0 +1,114 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+  "original": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/keymouse/keybd_io.c",
+  "before_sha256": "df21bf74bc2d964341250f47914104af1b03c30762cbdc07cac1877cd529c607",
+  "after_sha256": "5a194c9300a6c6dbe5cc3d26a691c0fe3d02ff3dda34ca5a4079c6aa7af9bb92",
+  "original_sha256": "c17523f12f895eb144b38692f4d91dc97d539106a8d3e4b8cf23bc4338cd4896",
+  "original_else_line": 2004,
+  "error_line": 2005,
+  "original_endif_line": 2024,
+  "removed_body_sha256": "2649fe8354d9b2b1d75ef330927ca76baede02be3b70ecc162210f925227259a",
+  "local_patch_note": "The excluded body included local SAS address rewrites; selected MONITOR body and the remaining DIV-059 adaptation are untouched.",
+  "witness": {
+    "label": "codex_r683_arm_0047",
+    "line": 1655,
+    "kind": "else",
+    "expression": "",
+    "error_only": false
+  },
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "d9d146ef05d76028f477590f93611288bf5b0d107cbb73da2b408fa268c6428b",
+      "hit": [
+        "codex_r683_arm_0003",
+        "codex_r683_arm_0004",
+        "codex_r683_arm_0007",
+        "codex_r683_arm_0009",
+        "codex_r683_arm_0011",
+        "codex_r683_arm_0012",
+        "codex_r683_arm_0013",
+        "codex_r683_arm_0014",
+        "codex_r683_arm_0018",
+        "codex_r683_arm_0020",
+        "codex_r683_arm_0022",
+        "codex_r683_arm_0025",
+        "codex_r683_arm_0027",
+        "codex_r683_arm_0030",
+        "codex_r683_arm_0031",
+        "codex_r683_arm_0033",
+        "codex_r683_arm_0034",
+        "codex_r683_arm_0035",
+        "codex_r683_arm_0037",
+        "codex_r683_arm_0038",
+        "codex_r683_arm_0043",
+        "codex_r683_arm_0044",
+        "codex_r683_arm_0045"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "d9d146ef05d76028f477590f93611288bf5b0d107cbb73da2b408fa268c6428b",
+      "hit": [
+        "codex_r683_arm_0003",
+        "codex_r683_arm_0004",
+        "codex_r683_arm_0007",
+        "codex_r683_arm_0009",
+        "codex_r683_arm_0011",
+        "codex_r683_arm_0012",
+        "codex_r683_arm_0013",
+        "codex_r683_arm_0014",
+        "codex_r683_arm_0018",
+        "codex_r683_arm_0020",
+        "codex_r683_arm_0022",
+        "codex_r683_arm_0025",
+        "codex_r683_arm_0027",
+        "codex_r683_arm_0030",
+        "codex_r683_arm_0031",
+        "codex_r683_arm_0033",
+        "codex_r683_arm_0034",
+        "codex_r683_arm_0035",
+        "codex_r683_arm_0037",
+        "codex_r683_arm_0038",
+        "codex_r683_arm_0043",
+        "codex_r683_arm_0044",
+        "codex_r683_arm_0045"
+      ]
+    }
+  ],
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 188,
+      "identical": true,
+      "include_trace_sha256": "5157878be7f800cc3c31a201a38866b15d898484b8e691bdad79114573734845",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 188,
+      "identical": true,
+      "include_trace_sha256": "5157878be7f800cc3c31a201a38866b15d898484b8e691bdad79114573734845",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "contexts": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/keymouse/keybd_io.obj",
+      "command_sha256": "4b398f637643fdb606a6df68703813204737cf975a7f90951fce074f4e194d18"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/keymouse/keybd_io.obj",
+      "command_sha256": "4b398f637643fdb606a6df68703813204737cf975a7f90951fce074f4e194d18"
+    }
+  ],
+  "limits": "Observed release graphs; remaining file condition tree pending."
+}

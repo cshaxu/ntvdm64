@@ -1,0 +1,1367 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_vide.c",
+  "before_sha256": "f4bda5553cc4c2f642cffdedbd8ca868e37e6de0c9041d4fb08d5d771ae5920c",
+  "after_sha256": "4707df970954edcae73ba0e47f9c46e76405bc7bb6271a24d359f2bd2af0024d",
+  "original_sha256": "049c4ea27ebb73296fdc96f932571598e76be8ebcf5165e5cf5815a5095de20f",
+  "guards": [
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 114,
+      "error_line": 115,
+      "end_line": 117
+    },
+    {
+      "kind": "ifdef",
+      "expression": "GISP_SVGA",
+      "original_line": 119,
+      "error_line": 120,
+      "end_line": 123
+    },
+    {
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(X86GFX)",
+      "original_line": 130,
+      "error_line": 131,
+      "end_line": 134
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 158,
+      "error_line": 159,
+      "end_line": 164
+    },
+    {
+      "kind": "ifdef",
+      "expression": "USE_CURSOR_END_TABLES",
+      "original_line": 250,
+      "error_line": 251,
+      "end_line": 292
+    },
+    {
+      "kind": "ifdef",
+      "expression": "SEGMENTATION",
+      "original_line": 295,
+      "error_line": 296,
+      "end_line": 303
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 457,
+      "error_line": 458,
+      "end_line": 460
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 620,
+      "error_line": 621,
+      "end_line": 624
+    },
+    {
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(X86GFX)",
+      "original_line": 672,
+      "error_line": 673,
+      "end_line": 705
+    },
+    {
+      "kind": "ifdef",
+      "expression": "GISP_SVGA",
+      "original_line": 676,
+      "error_line": 677,
+      "end_line": 704
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 762,
+      "error_line": 763,
+      "end_line": 765
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 929,
+      "error_line": 930,
+      "end_line": 932
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 994,
+      "error_line": 995,
+      "end_line": 997
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 1011,
+      "error_line": 1012,
+      "end_line": 1014
+    },
+    {
+      "kind": "ifdef",
+      "expression": "GISP_SVGA",
+      "original_line": 1015,
+      "error_line": 1016,
+      "end_line": 1042
+    },
+    {
+      "kind": "ifdef",
+      "expression": "MSWDVR",
+      "original_line": 1124,
+      "error_line": 1125,
+      "end_line": 1141
+    },
+    {
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(X86GFX)",
+      "original_line": 1144,
+      "error_line": 1145,
+      "end_line": 1161
+    },
+    {
+      "kind": "ifdef",
+      "expression": "REAL_VGA",
+      "original_line": 1305,
+      "error_line": 1306,
+      "end_line": 1320
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 1332,
+      "error_line": 1333,
+      "end_line": 1335
+    },
+    {
+      "kind": "ifdef",
+      "expression": "USE_CURSOR_END_TABLES",
+      "original_line": 1396,
+      "error_line": 1397,
+      "end_line": 1406
+    },
+    {
+      "kind": "ifdef",
+      "expression": "USE_CURSOR_END_TABLES",
+      "original_line": 1408,
+      "error_line": 1409,
+      "end_line": 1415
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 1590,
+      "error_line": 1591,
+      "end_line": 1594
+    },
+    {
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(X86GFX)",
+      "original_line": 1611,
+      "error_line": 1612,
+      "end_line": 1619
+    },
+    {
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(X86GFX)",
+      "original_line": 1626,
+      "error_line": 1627,
+      "end_line": 1629
+    },
+    {
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(X86GFX)",
+      "original_line": 1636,
+      "error_line": 1637,
+      "end_line": 1639
+    },
+    {
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(X86GFX)",
+      "original_line": 1647,
+      "error_line": 1648,
+      "end_line": 1650
+    },
+    {
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(X86GFX)",
+      "original_line": 1662,
+      "error_line": 1663,
+      "end_line": 1669
+    },
+    {
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(X86GFX)",
+      "original_line": 1672,
+      "error_line": 1673,
+      "end_line": 1679
+    },
+    {
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(X86GFX)",
+      "original_line": 1683,
+      "error_line": 1684,
+      "end_line": 1690
+    },
+    {
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(X86GFX)",
+      "original_line": 1707,
+      "error_line": 1708,
+      "end_line": 1764
+    },
+    {
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(X86GFX)",
+      "original_line": 1847,
+      "error_line": 1848,
+      "end_line": 1860
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 1855,
+      "error_line": 1856,
+      "end_line": 1858
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 1894,
+      "error_line": 1895,
+      "end_line": 1897
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 2003,
+      "error_line": 2004,
+      "end_line": 2006
+    },
+    {
+      "kind": "ifdef",
+      "expression": "REAL_VGA",
+      "original_line": 2021,
+      "error_line": 2022,
+      "end_line": 2051
+    },
+    {
+      "kind": "ifdef",
+      "expression": "REAL_VGA",
+      "original_line": 2065,
+      "error_line": 2066,
+      "end_line": 2098
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 2142,
+      "error_line": 2143,
+      "end_line": 2145
+    },
+    {
+      "kind": "ifdef",
+      "expression": "REAL_VGA",
+      "original_line": 2155,
+      "error_line": 2156,
+      "end_line": 2158
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 2192,
+      "error_line": 2193,
+      "end_line": 2195
+    },
+    {
+      "kind": "if",
+      "expression": "defined(NTVDM) && defined(X86GFX)",
+      "original_line": 2266,
+      "error_line": 2267,
+      "end_line": 2323
+    }
+  ],
+  "retained_leaf_difference": [
+    {
+      "original_line": 2023,
+      "current_line": 1892,
+      "original": [
+        "screen_updated = (col+colsdiff) <= col_incr;  /* Check for silly scroll */",
+        "if(screen_updated)",
+        "screen_updated = (*update_alg.scroll_up)(dest,colsdiff,rowsdiff,attr,lines,0);",
+        "for(i=0;i<rowsdiff-lines;i++)",
+        "{",
+        "memcpy(&EGA_planes[dest<<2],&EGA_planes[source<<2],colsdiff<<2);",
+        "if(!screen_updated)",
+        "(*update_alg.mark_string)(dest, dest+colsdiff-1);",
+        "source += col_incr;",
+        "dest += col_incr;",
+        "}",
+        "attr = sr_lookup[attr & 0xf];",
+        "while(lines--)",
+        "{",
+        "memset4( attr, (ULONG *)&EGA_planes[dest<<2], colsdiff );",
+        "if(!screen_updated)",
+        "(*update_alg.mark_fill)(dest, dest+colsdiff-1);",
+        "dest += col_incr;",
+        "}"
+      ],
+      "current": [
+        "screen_updated = (col+colsdiff) <= col_incr;  /* Check for silly scroll */",
+        "if(screen_updated)",
+        "screen_updated = (*update_alg.scroll_up)(dest,colsdiff,rowsdiff,attr,lines,0);",
+        "for(i=0;i<rowsdiff-lines;i++)",
+        "{",
+        "memcpy(&EGA_planes[dest<<2],&EGA_planes[source<<2],colsdiff<<2);",
+        "if(!screen_updated)",
+        "(*update_alg.mark_string)(dest, dest+colsdiff-1);",
+        "source += col_incr;",
+        "dest += col_incr;",
+        "}",
+        "attr = sr_lookup[attr & 0xf];",
+        "while(lines--)",
+        "{",
+        "memset4( attr, (unsigned int *)&EGA_planes[dest<<2], colsdiff );",
+        "if(!screen_updated)",
+        "(*update_alg.mark_fill)(dest, dest+colsdiff-1);",
+        "dest += col_incr;",
+        "}"
+      ]
+    },
+    {
+      "original_line": 2069,
+      "current_line": 1936,
+      "original": [
+        "screen_updated = (col+colsdiff) <= col_incr;  /* Check for silly scroll */",
+        "if(screen_updated)",
+        "screen_updated = (*update_alg.scroll_down)(dest,colsdiff,rowsdiff,attr,lines,0);",
+        "dest += (rowsdiff-1)*col_incr; /* First byte in last row of dest */",
+        "source = dest-lines*col_incr;",
+        "for(i=0;i<rowsdiff-lines;i++)",
+        "{",
+        "memcpy(&EGA_planes[dest<<2],&EGA_planes[source<<2],colsdiff<<2);",
+        "if(!screen_updated)",
+        "(*update_alg.mark_string)(dest, dest+colsdiff-1);",
+        "source -= col_incr;",
+        "dest -= col_incr;",
+        "}",
+        "attr = sr_lookup[attr & 0xf];",
+        "while(lines--)",
+        "{",
+        "memset4( attr, (ULONG *)&EGA_planes[dest<<2], colsdiff );",
+        "if(!screen_updated)",
+        "(*update_alg.mark_fill)(dest, dest+colsdiff-1);",
+        "dest -= col_incr;",
+        "}"
+      ],
+      "current": [
+        "screen_updated = (col+colsdiff) <= col_incr;  /* Check for silly scroll */",
+        "if(screen_updated)",
+        "screen_updated = (*update_alg.scroll_down)(dest,colsdiff,rowsdiff,attr,lines,0);",
+        "dest += (rowsdiff-1)*col_incr; /* First byte in last row of dest */",
+        "source = dest-lines*col_incr;",
+        "for(i=0;i<rowsdiff-lines;i++)",
+        "{",
+        "memcpy(&EGA_planes[dest<<2],&EGA_planes[source<<2],colsdiff<<2);",
+        "if(!screen_updated)",
+        "(*update_alg.mark_string)(dest, dest+colsdiff-1);",
+        "source -= col_incr;",
+        "dest -= col_incr;",
+        "}",
+        "attr = sr_lookup[attr & 0xf];",
+        "while(lines--)",
+        "{",
+        "memset4( attr, (unsigned int *)&EGA_planes[dest<<2], colsdiff );",
+        "if(!screen_updated)",
+        "(*update_alg.mark_fill)(dest, dest+colsdiff-1);",
+        "dest -= col_incr;",
+        "}"
+      ]
+    }
+  ],
+  "difference_registration": "MVDM-HOST-DIV-090",
+  "witness": {
+    "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+    "source_sha256": "f4bda5553cc4c2f642cffdedbd8ca868e37e6de0c9041d4fb08d5d771ae5920c",
+    "object": "video/ega_vide",
+    "arms": [
+      {
+        "label": "codex_r741_arm_0000",
+        "line": 87,
+        "kind": "ifdef",
+        "expression": "EGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0001",
+        "line": 114,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0002",
+        "line": 119,
+        "kind": "ifdef",
+        "expression": "GISP_SVGA",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0003",
+        "line": 129,
+        "kind": "if",
+        "expression": "defined(NTVDM) && defined(X86GFX)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0004",
+        "line": 133,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0005",
+        "line": 137,
+        "kind": "ifndef",
+        "expression": "X86GFX",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0006",
+        "line": 142,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0007",
+        "line": 151,
+        "kind": "ifdef",
+        "expression": "ANSI",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0008",
+        "line": 156,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0009",
+        "line": 182,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0010",
+        "line": 198,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0011",
+        "line": 247,
+        "kind": "ifdef",
+        "expression": "USE_CURSOR_END_TABLES",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0012",
+        "line": 255,
+        "kind": "ifdef",
+        "expression": "SEGMENTATION",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0013",
+        "line": 365,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0014",
+        "line": 381,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0015",
+        "line": 415,
+        "kind": "ifndef",
+        "expression": "REAL_VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0016",
+        "line": 417,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0017",
+        "line": 458,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0018",
+        "line": 460,
+        "kind": "ifndef",
+        "expression": "GISP_SVGA\t/* Don't want the V7 stuff for GISP",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0019",
+        "line": 556,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0020",
+        "line": 580,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0021",
+        "line": 584,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0022",
+        "line": 618,
+        "kind": "if",
+        "expression": "!(defined(NTVDM) && defined(X86GFX))",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0023",
+        "line": 631,
+        "kind": "if",
+        "expression": "defined(NTVDM) && defined(X86GFX)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0024",
+        "line": 633,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0025",
+        "line": 634,
+        "kind": "ifdef",
+        "expression": "GISP_SVGA",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0026",
+        "line": 636,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0027",
+        "line": 659,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0028",
+        "line": 679,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0029",
+        "line": 684,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0030",
+        "line": 703,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0031",
+        "line": 713,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0032",
+        "line": 726,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0033",
+        "line": 736,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0034",
+        "line": 825,
+        "kind": "ifndef",
+        "expression": "REAL_VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0035",
+        "line": 880,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0036",
+        "line": 892,
+        "kind": "ifndef",
+        "expression": "REAL_VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0037",
+        "line": 945,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0038",
+        "line": 958,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0039",
+        "line": 962,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0040",
+        "line": 966,
+        "kind": "ifdef",
+        "expression": "GISP_SVGA",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0041",
+        "line": 970,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0042",
+        "line": 986,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0043",
+        "line": 1003,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0044",
+        "line": 1043,
+        "kind": "ifdef",
+        "expression": "CPU_40_STYLE",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0045",
+        "line": 1051,
+        "kind": "ifdef",
+        "expression": "MSWDVR",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0046",
+        "line": 1059,
+        "kind": "if",
+        "expression": "defined(NTVDM) && defined(X86GFX)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0047",
+        "line": 1066,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0048",
+        "line": 1070,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0049",
+        "line": 1082,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0050",
+        "line": 1089,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0051",
+        "line": 1101,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0052",
+        "line": 1145,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0053",
+        "line": 1193,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0054",
+        "line": 1198,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0055",
+        "line": 1206,
+        "kind": "ifdef",
+        "expression": "REAL_VGA",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0056",
+        "line": 1208,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0057",
+        "line": 1211,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0058",
+        "line": 1224,
+        "kind": "if",
+        "expression": "defined(NTVDM) && !defined(X86GFX)",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0059",
+        "line": 1232,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0060",
+        "line": 1279,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0061",
+        "line": 1296,
+        "kind": "ifdef",
+        "expression": "USE_CURSOR_END_TABLES",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0062",
+        "line": 1299,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0063",
+        "line": 1311,
+        "kind": "ifdef",
+        "expression": "USE_CURSOR_END_TABLES",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0064",
+        "line": 1314,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0065",
+        "line": 1342,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0066",
+        "line": 1488,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0067",
+        "line": 1496,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0068",
+        "line": 1516,
+        "kind": "if",
+        "expression": "defined(NTVDM) && defined(X86GFX)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0069",
+        "line": 1526,
+        "kind": "if",
+        "expression": "defined(NTVDM) && defined(X86GFX)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0070",
+        "line": 1536,
+        "kind": "if",
+        "expression": "defined(NTVDM) && defined(X86GFX)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0071",
+        "line": 1540,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0072",
+        "line": 1547,
+        "kind": "if",
+        "expression": "defined(NTVDM) && defined(X86GFX)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0073",
+        "line": 1562,
+        "kind": "if",
+        "expression": "defined(NTVDM) && defined(X86GFX)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0074",
+        "line": 1564,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0075",
+        "line": 1571,
+        "kind": "if",
+        "expression": "defined(NTVDM) && defined(X86GFX)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0076",
+        "line": 1573,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0077",
+        "line": 1579,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0078",
+        "line": 1581,
+        "kind": "if",
+        "expression": "defined(NTVDM) && defined(X86GFX)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0079",
+        "line": 1583,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0080",
+        "line": 1604,
+        "kind": "if",
+        "expression": "defined(NTVDM) && defined(X86GFX)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0081",
+        "line": 1606,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0082",
+        "line": 1625,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0083",
+        "line": 1661,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0084",
+        "line": 1701,
+        "kind": "if",
+        "expression": "!defined(NTVDM) || ( defined(NTVDM) && !defined(X86GFX) )",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0085",
+        "line": 1716,
+        "kind": "if",
+        "expression": "defined(NTVDM) && defined(X86GFX)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0086",
+        "line": 1718,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0087",
+        "line": 1719,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0088",
+        "line": 1724,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0089",
+        "line": 1729,
+        "kind": "if",
+        "expression": "!(defined(NTVDM) && defined(X86GFX))",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0090",
+        "line": 1737,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0091",
+        "line": 1749,
+        "kind": "if",
+        "expression": "defined(NTVDM) && !defined(X86GFX)",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0092",
+        "line": 1761,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0093",
+        "line": 1763,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0094",
+        "line": 1772,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0095",
+        "line": 1797,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0096",
+        "line": 1807,
+        "kind": "ifndef",
+        "expression": "REAL_VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0097",
+        "line": 1836,
+        "kind": "ifndef",
+        "expression": "REAL_VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0098",
+        "line": 1843,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0099",
+        "line": 1872,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0100",
+        "line": 1890,
+        "kind": "ifdef",
+        "expression": "REAL_VGA",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0101",
+        "line": 1892,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0102",
+        "line": 1934,
+        "kind": "ifdef",
+        "expression": "REAL_VGA",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0103",
+        "line": 1936,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0104",
+        "line": 2001,
+        "kind": "ifndef",
+        "expression": "REAL_VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0105",
+        "line": 2009,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0106",
+        "line": 2022,
+        "kind": "ifdef",
+        "expression": "REAL_VGA",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0107",
+        "line": 2050,
+        "kind": "ifndef",
+        "expression": "REAL_VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0108",
+        "line": 2059,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r741_arm_0109",
+        "line": 2078,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0110",
+        "line": 2084,
+        "kind": "ifdef",
+        "expression": "VGG",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0111",
+        "line": 2087,
+        "kind": "ifdef",
+        "expression": "V7VGA",
+        "error_only": false
+      },
+      {
+        "label": "codex_r741_arm_0112",
+        "line": 2134,
+        "kind": "if",
+        "expression": "defined(NTVDM) && defined(X86GFX)",
+        "error_only": true
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "a5aea6b97d490ed4d9f41b0135e5ff0af0873e17ec94a027bf81b8c211882a30",
+        "hit": [
+          "codex_r741_arm_0000",
+          "codex_r741_arm_0004",
+          "codex_r741_arm_0005",
+          "codex_r741_arm_0006",
+          "codex_r741_arm_0007",
+          "codex_r741_arm_0009",
+          "codex_r741_arm_0010",
+          "codex_r741_arm_0013",
+          "codex_r741_arm_0014",
+          "codex_r741_arm_0015",
+          "codex_r741_arm_0017",
+          "codex_r741_arm_0018",
+          "codex_r741_arm_0019",
+          "codex_r741_arm_0021",
+          "codex_r741_arm_0022",
+          "codex_r741_arm_0024",
+          "codex_r741_arm_0026",
+          "codex_r741_arm_0027",
+          "codex_r741_arm_0028",
+          "codex_r741_arm_0029",
+          "codex_r741_arm_0030",
+          "codex_r741_arm_0032",
+          "codex_r741_arm_0033",
+          "codex_r741_arm_0034",
+          "codex_r741_arm_0036",
+          "codex_r741_arm_0038",
+          "codex_r741_arm_0041",
+          "codex_r741_arm_0042",
+          "codex_r741_arm_0043",
+          "codex_r741_arm_0044",
+          "codex_r741_arm_0047",
+          "codex_r741_arm_0048",
+          "codex_r741_arm_0049",
+          "codex_r741_arm_0050",
+          "codex_r741_arm_0051",
+          "codex_r741_arm_0052",
+          "codex_r741_arm_0053",
+          "codex_r741_arm_0054",
+          "codex_r741_arm_0056",
+          "codex_r741_arm_0057",
+          "codex_r741_arm_0058",
+          "codex_r741_arm_0060",
+          "codex_r741_arm_0062",
+          "codex_r741_arm_0064",
+          "codex_r741_arm_0065",
+          "codex_r741_arm_0066",
+          "codex_r741_arm_0071",
+          "codex_r741_arm_0074",
+          "codex_r741_arm_0076",
+          "codex_r741_arm_0077",
+          "codex_r741_arm_0079",
+          "codex_r741_arm_0081",
+          "codex_r741_arm_0082",
+          "codex_r741_arm_0083",
+          "codex_r741_arm_0084",
+          "codex_r741_arm_0086",
+          "codex_r741_arm_0087",
+          "codex_r741_arm_0089",
+          "codex_r741_arm_0090",
+          "codex_r741_arm_0091",
+          "codex_r741_arm_0092",
+          "codex_r741_arm_0094",
+          "codex_r741_arm_0095",
+          "codex_r741_arm_0096",
+          "codex_r741_arm_0097",
+          "codex_r741_arm_0098",
+          "codex_r741_arm_0101",
+          "codex_r741_arm_0103",
+          "codex_r741_arm_0104",
+          "codex_r741_arm_0107",
+          "codex_r741_arm_0109",
+          "codex_r741_arm_0110",
+          "codex_r741_arm_0111"
+        ]
+      },
+      {
+        "graph": "msvc-x64-release",
+        "exit": 0,
+        "preprocessed_sha256": "a5aea6b97d490ed4d9f41b0135e5ff0af0873e17ec94a027bf81b8c211882a30",
+        "hit": [
+          "codex_r741_arm_0000",
+          "codex_r741_arm_0004",
+          "codex_r741_arm_0005",
+          "codex_r741_arm_0006",
+          "codex_r741_arm_0007",
+          "codex_r741_arm_0009",
+          "codex_r741_arm_0010",
+          "codex_r741_arm_0013",
+          "codex_r741_arm_0014",
+          "codex_r741_arm_0015",
+          "codex_r741_arm_0017",
+          "codex_r741_arm_0018",
+          "codex_r741_arm_0019",
+          "codex_r741_arm_0021",
+          "codex_r741_arm_0022",
+          "codex_r741_arm_0024",
+          "codex_r741_arm_0026",
+          "codex_r741_arm_0027",
+          "codex_r741_arm_0028",
+          "codex_r741_arm_0029",
+          "codex_r741_arm_0030",
+          "codex_r741_arm_0032",
+          "codex_r741_arm_0033",
+          "codex_r741_arm_0034",
+          "codex_r741_arm_0036",
+          "codex_r741_arm_0038",
+          "codex_r741_arm_0041",
+          "codex_r741_arm_0042",
+          "codex_r741_arm_0043",
+          "codex_r741_arm_0044",
+          "codex_r741_arm_0047",
+          "codex_r741_arm_0048",
+          "codex_r741_arm_0049",
+          "codex_r741_arm_0050",
+          "codex_r741_arm_0051",
+          "codex_r741_arm_0052",
+          "codex_r741_arm_0053",
+          "codex_r741_arm_0054",
+          "codex_r741_arm_0056",
+          "codex_r741_arm_0057",
+          "codex_r741_arm_0058",
+          "codex_r741_arm_0060",
+          "codex_r741_arm_0062",
+          "codex_r741_arm_0064",
+          "codex_r741_arm_0065",
+          "codex_r741_arm_0066",
+          "codex_r741_arm_0071",
+          "codex_r741_arm_0074",
+          "codex_r741_arm_0076",
+          "codex_r741_arm_0077",
+          "codex_r741_arm_0079",
+          "codex_r741_arm_0081",
+          "codex_r741_arm_0082",
+          "codex_r741_arm_0083",
+          "codex_r741_arm_0084",
+          "codex_r741_arm_0086",
+          "codex_r741_arm_0087",
+          "codex_r741_arm_0089",
+          "codex_r741_arm_0090",
+          "codex_r741_arm_0091",
+          "codex_r741_arm_0092",
+          "codex_r741_arm_0094",
+          "codex_r741_arm_0095",
+          "codex_r741_arm_0096",
+          "codex_r741_arm_0097",
+          "codex_r741_arm_0098",
+          "codex_r741_arm_0101",
+          "codex_r741_arm_0103",
+          "codex_r741_arm_0104",
+          "codex_r741_arm_0107",
+          "codex_r741_arm_0109",
+          "codex_r741_arm_0110",
+          "codex_r741_arm_0111"
+        ]
+      }
+    ]
+  },
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 194,
+      "identical": true,
+      "include_trace_sha256": "94977166bf47cfd436338fc9139d23aab4d795660956207a3c55a1e7a06c43a2",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 194,
+      "identical": true,
+      "include_trace_sha256": "94977166bf47cfd436338fc9139d23aab4d795660956207a3c55a1e7a06c43a2",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "limits": "Observed worker release graphs; Existing DIV-090 pointer contract casts retained; rendering behavior not asserted by condition review."
+}

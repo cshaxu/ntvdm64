@@ -1,0 +1,50 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+  "original": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/bios/bios.c",
+  "before_sha256": "552d5162d17a646f4d68978122476ffef12b1015f375434b5928c4e719c8d13a",
+  "after_sha256": "eb51b0aa7afb03cad6265fc9c3b1e92829dac5a976a9ae84b60c8bcc2b878f85",
+  "original_sha256": "a8345e88db25332bdf008bdc730ffa15bdc6110ecf1a6c54ed7e59c95ca7085b",
+  "branches": [
+    {
+      "macro": "HFX",
+      "original_line": 209,
+      "original_else_line": 212,
+      "original_endif_line": 215,
+      "witness": {
+        "label": "codex_r719_arm_0034",
+        "line": 207,
+        "kind": "ifdef",
+        "expression": "HFX",
+        "error_only": false
+      }
+    },
+    {
+      "macro": "DPMI",
+      "original_line": 216,
+      "original_else_line": 221,
+      "original_endif_line": 226,
+      "witness": {
+        "label": "codex_r719_arm_0036",
+        "line": 214,
+        "kind": "ifdef",
+        "expression": "DPMI",
+        "error_only": false
+      }
+    },
+    {
+      "macro": "DPMI",
+      "original_line": 275,
+      "original_else_line": 279,
+      "original_endif_line": 283,
+      "witness": {
+        "label": "codex_r719_arm_0042",
+        "line": 268,
+        "kind": "ifdef",
+        "expression": "DPMI",
+        "error_only": false
+      }
+    }
+  ],
+  "context_evidence": "s13-r720-bios-two-branches.json and build/t473-s13/r719-arm-witness/bios-adjacent-include.json",
+  "limits": "Only observed worker release graphs; remaining BIOS branches stay pending."
+}

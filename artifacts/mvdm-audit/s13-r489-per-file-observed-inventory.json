@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 844,
+  "completed_files": 852,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -1279,8 +1279,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "pending_change": "r523 excluded non-NTVDM outer branch; remaining groups pending"
+      "status": "completed-original-witnessed-condition-tree",
+      "pending_change": "r523 excluded non-NTVDM outer branch; remaining groups pending",
+      "evidence": "s13-r726-witnessed-anchor-batch.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/build_id.c",
@@ -1328,7 +1329,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r719-witnessed-anchor-batch.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/equipmnt.c",
@@ -6275,8 +6277,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r664-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r664-guard-line-audit.json",
+      "evidence": "s13-r729-keyboard-anchor-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
@@ -6527,7 +6530,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r731-witnessed-anchor-batch.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
@@ -6551,8 +6555,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r658-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r658-guard-line-audit.json",
+      "evidence": "s13-r733-egamode-condition-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
@@ -6574,8 +6579,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "pending_change": "r501 exclude non-CPU40 glue; full file audit remains pending"
+      "status": "completed-original-witnessed-condition-tree",
+      "pending_change": "r501 exclude non-CPU40 glue; full file audit remains pending",
+      "evidence": "s13-r736-egaread-anchor-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/ega_trcr.c",
@@ -6599,8 +6605,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "pending_change": "r508 exclude unselected X86GFX mode-table arm; file audit pending"
+      "status": "completed-original-witnessed-condition-tree",
+      "pending_change": "r508 exclude unselected X86GFX mode-table arm; file audit pending",
+      "evidence": "s13-r741-egavide-anchor-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
@@ -6611,8 +6618,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "pending_change": "r501 exclude non-CPU40 glue; full file audit remains pending"
+      "status": "completed-original-witnessed-condition-tree",
+      "pending_change": "r501 exclude non-CPU40 glue; full file audit remains pending",
+      "evidence": "s13-r744-egawrit-anchor-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",

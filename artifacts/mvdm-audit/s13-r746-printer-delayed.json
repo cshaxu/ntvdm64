@@ -1,0 +1,148 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\printer.c",
+  "before_sha256": "6355dc2b09e90574dbb55f5502b0834296d0b68d001700d7608995f3ae6bebee",
+  "after_sha256": "2a744e82cae78d64641e336b4495a956f35bb890c0f276f00a24b2d7ebd65dec",
+  "original_sha256": "b1456dcbc0dc6b4d1fd5d101bfaa6bdc9a4cd5d970c14215f3ae62a173f17ccb",
+  "branches": [
+    {
+      "original_if_line": 376,
+      "original_else_line": 379,
+      "original_endif_line": 382,
+      "witness": {
+        "label": "codex_r686_arm_0017",
+        "line": 368,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      "selected_witness": {
+        "label": "codex_r686_arm_0016",
+        "line": 365,
+        "kind": "ifndef",
+        "expression": "DELAYED_INTS",
+        "error_only": false
+      },
+      "removed_body_sha256": "df29f4fe1664ed012853e36438e7cd25698ab969254f00a84aeb48ddff62380b"
+    },
+    {
+      "original_if_line": 365,
+      "original_else_line": 368,
+      "original_endif_line": 371,
+      "witness": {
+        "label": "codex_r686_arm_0015",
+        "line": 355,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      "selected_witness": {
+        "label": "codex_r686_arm_0014",
+        "line": 352,
+        "kind": "ifndef",
+        "expression": "DELAYED_INTS",
+        "error_only": false
+      },
+      "removed_body_sha256": "adcdcc8b2844ab17db341b0c682c0928b4ba6712dd3ec75891b3782653a4d735"
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "243128c34c0626aead861a71e0aeb30e5a15de025b61b66916b56238ab316fe9",
+      "hit": [
+        "codex_r686_arm_0000",
+        "codex_r686_arm_0005",
+        "codex_r686_arm_0006",
+        "codex_r686_arm_0007",
+        "codex_r686_arm_0009",
+        "codex_r686_arm_0011",
+        "codex_r686_arm_0013",
+        "codex_r686_arm_0014",
+        "codex_r686_arm_0016",
+        "codex_r686_arm_0019",
+        "codex_r686_arm_0021",
+        "codex_r686_arm_0022",
+        "codex_r686_arm_0024",
+        "codex_r686_arm_0025",
+        "codex_r686_arm_0028",
+        "codex_r686_arm_0029",
+        "codex_r686_arm_0031",
+        "codex_r686_arm_0033",
+        "codex_r686_arm_0035",
+        "codex_r686_arm_0038",
+        "codex_r686_arm_0039",
+        "codex_r686_arm_0040",
+        "codex_r686_arm_0041",
+        "codex_r686_arm_0043",
+        "codex_r686_arm_0044"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "243128c34c0626aead861a71e0aeb30e5a15de025b61b66916b56238ab316fe9",
+      "hit": [
+        "codex_r686_arm_0000",
+        "codex_r686_arm_0005",
+        "codex_r686_arm_0006",
+        "codex_r686_arm_0007",
+        "codex_r686_arm_0009",
+        "codex_r686_arm_0011",
+        "codex_r686_arm_0013",
+        "codex_r686_arm_0014",
+        "codex_r686_arm_0016",
+        "codex_r686_arm_0019",
+        "codex_r686_arm_0021",
+        "codex_r686_arm_0022",
+        "codex_r686_arm_0024",
+        "codex_r686_arm_0025",
+        "codex_r686_arm_0028",
+        "codex_r686_arm_0029",
+        "codex_r686_arm_0031",
+        "codex_r686_arm_0033",
+        "codex_r686_arm_0035",
+        "codex_r686_arm_0038",
+        "codex_r686_arm_0039",
+        "codex_r686_arm_0040",
+        "codex_r686_arm_0041",
+        "codex_r686_arm_0043",
+        "codex_r686_arm_0044"
+      ]
+    }
+  ],
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 185,
+      "identical": true,
+      "include_trace_sha256": "b0bb42056359ca3a6d8440a48e2ef6411d3ff3e1efe340ad01ab3ce91585e78e",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 185,
+      "identical": true,
+      "include_trace_sha256": "b0bb42056359ca3a6d8440a48e2ef6411d3ff3e1efe340ad01ab3ce91585e78e",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "contexts": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/comms/printer.obj",
+      "command_sha256": "517bd0ac3d14020582050fcca1f8629735c955bd18dfa4c78cc755eeaa602313"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/comms/printer.obj",
+      "command_sha256": "517bd0ac3d14020582050fcca1f8629735c955bd18dfa4c78cc755eeaa602313"
+    }
+  ],
+  "limits": "Observed worker release contexts; remaining file conditions and other configurations stay pending."
+}

@@ -1,0 +1,87 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+  "original": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/video/ega_mode.c",
+  "before_sha256": "7a1f442ae2f2371fdecff75cd95c824676e1ca20f5b388f66476ce416c1ba99c",
+  "after_sha256": "c5ba228930bfe1e4dba970f4735b00041769592aacff4f224c836863e99f7c0c",
+  "original_sha256": "1b73d0bdea339dc2a42f9674e04fd14575400070e8436149a84a2ac5510a057d",
+  "original_if_line": 541,
+  "original_endif_line": 665,
+  "removed_body_sha256": "10f15888a331a17d3771858a048b9b9050a6547c2b2123186134e50680d7fe9d",
+  "removed_nested_condition_groups": 2,
+  "witness": {
+    "label": "codex_r684_arm_0004",
+    "line": 540,
+    "kind": "ifndef",
+    "expression": "NTVDM",
+    "error_only": false
+  },
+  "selected_parent_arms": [
+    {
+      "label": "codex_r684_arm_0000",
+      "line": 89,
+      "kind": "ifndef",
+      "expression": "REAL_VGA",
+      "error_only": false
+    },
+    {
+      "label": "codex_r684_arm_0001",
+      "line": 90,
+      "kind": "ifdef",
+      "expression": "EGG",
+      "error_only": false
+    }
+  ],
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "137e0fbad29c9163dc8eb2038954c6e0cdf1edf8ffae7e22766c88a5be7c1947",
+      "hit": [
+        "codex_r684_arm_0000",
+        "codex_r684_arm_0001"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "137e0fbad29c9163dc8eb2038954c6e0cdf1edf8ffae7e22766c88a5be7c1947",
+      "hit": [
+        "codex_r684_arm_0000",
+        "codex_r684_arm_0001"
+      ]
+    }
+  ],
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 174,
+      "identical": true,
+      "include_trace_sha256": "fe9e255a3aa5af43ead798fb6987b76a753a6d6539f4dde0380e96d592e54399",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 174,
+      "identical": true,
+      "include_trace_sha256": "fe9e255a3aa5af43ead798fb6987b76a753a6d6539f4dde0380e96d592e54399",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "contexts": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/video/ega_mode.obj",
+      "command_sha256": "aaa11424a85d0394ef88a486bf07d99e3eafd735b9114322cb58f980f5a4f05a"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/video/ega_mode.obj",
+      "command_sha256": "d0378347b456b143bd1ad49b086aba29ca9f61447966f2d7fb2a1e9efa3d4375"
+    }
+  ],
+  "limits": "Observed worker release graphs; remaining file conditions remain pending."
+}

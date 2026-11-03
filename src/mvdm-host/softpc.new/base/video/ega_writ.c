@@ -59,8 +59,10 @@ SccsID = @(#)ega_write.c	1.40 12/15/95 Copyright Insignia Solutions Ltd.
 
 /* [3.1.2 DECLARATIONS]                                                 */
 #if defined(EGA_DUMP) || defined(EGA_STAT)
-extern WRT_POINTERS dump_writes;
+#line 62
+#error Unsupported excluded EGA diagnostics configuration
 #endif
+#line 64
 
 extern WRT_POINTERS mode0_gen_handlers, mode0_copy_handlers;
 extern WRT_POINTERS mode1_handlers, mode2_handlers;
@@ -72,6 +74,7 @@ extern WRT_POINTERS mode1_handlers, mode2_handlers;
 
 [5.1 LOCAL DECLARATIONS]						*/
 #ifdef SEGMENTATION
+#line 75
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -79,6 +82,7 @@ extern WRT_POINTERS mode1_handlers, mode2_handlers;
 
 
 #endif
+#line 82
 
 #ifndef REAL_VGA
 
@@ -88,6 +92,7 @@ GLOBAL UTINY Last_v7_fg_bg;			/* used by {ev}ga_mask_register_changed() */
 #endif
 
 #ifndef CPU_40_STYLE	/* EVID without introducing EVID define */
+#line 91
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 
 
@@ -133,7 +138,7 @@ GLOBAL UTINY Last_v7_fg_bg;			/* used by {ev}ga_mask_register_changed() */
 
 
 #else	/* CPU_40_STYLE - EVID */
-#line 93
+#line 302
 WRT_POINTERS *mode_chain_handler_table[] = { 0 };
 #ifdef C_VID
 
@@ -158,14 +163,16 @@ MEM_HANDLERS Glue_writes =
 	move_word_fwd_ev_glue,
 };
 #else	/* C_VID */
+#line 322
 #error DIVERGENCE MVDM-HOST-DIV-539: non-C_VID branch is not selected; see mirror register.
 #endif	/* CVID */
+#line 325
 WRT_POINTERS dth_md0_writes;
 WRT_POINTERS dth_md2_writes;
 WRT_POINTERS simple_writes;
 WRT_POINTERS dth_md3_writes;
 #endif	/* CPU_40_STYLE - EVID */
-#line 124
+#line 330
 
 /* DIVERGENCE(MVDM-HOST-DIV-136): preserve the original writer table order,
  * with the exact original provider parameter contracts. */
@@ -191,9 +198,10 @@ ULONG sr_lookup[16] =
 #endif
 #line 147
 #ifdef BIGEND
+#line 352
 #error DIVERGENCE MVDM-HOST-DIV-524: BIGEND platform branch is not selected; see mirror register.
 #endif
-#line 150
+#line 357
 };
 
 GLOBAL VOID
@@ -209,6 +217,7 @@ GLOBAL ULONG calc_data_xor;
 GLOBAL ULONG calc_latch_xor;
 
 #ifdef SEGMENTATION
+#line 372
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -216,7 +225,7 @@ GLOBAL ULONG calc_latch_xor;
 
 
 #endif
-#line 172
+#line 379
 
 #if !(defined(NTVDM) && defined(MONITOR))
 GLOBAL VOID
@@ -234,6 +243,7 @@ Glue_set_vid_wrt_ptrs IFN1(WRT_POINTERS *, handler )
 #line 213
 
 #ifdef SEGMENTATION
+#line 447
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -241,7 +251,7 @@ Glue_set_vid_wrt_ptrs IFN1(WRT_POINTERS *, handler )
 
 
 #endif
-#line 222
+#line 454
 
 /*  Initialize the write module */
 
@@ -268,20 +278,24 @@ ega_write_init IFN0()
 #line 245
 
 #ifdef	JOKER
+#line 479
 #error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register.
 #else	/* not JOKER */
-#line 249
+#line 483
 
 #if defined(EGA_DUMP) || defined(EGA_STAT)
-	dump_writes = handler;
+#line 485
+#error Unsupported excluded EGA diagnostics configuration
 #else
-#line 253
+#line 487
 #ifdef EGATEST
+#line 488
 #error DIVERGENCE MVDM-HOST-DIV-529: EGATEST platform branch is not selected; see mirror register.
 #else
-#line 256
+#line 490
 #ifndef GISP_CPU
 #ifdef A3CPU
+#line 492
 #error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
 
 
@@ -289,19 +303,19 @@ ega_write_init IFN0()
 
 
 #else
-#line 260
+#line 499
 	gmi_define_mem(VIDEO,&Glue_writes);
 	Glue_set_vid_wrt_ptrs( handler );
 #endif /* A3CPU */
-#line 263
+#line 502
 #endif /* GISP_CPU */
 #line 264
 #endif /* EGATEST */
-#line 265
+#line 504
 #endif /* EGA_DUMP || EGA_STAT */
-#line 266
+#line 505
 #endif /* JOKER */
-#line 267
+#line 506
 
 	ega_write_routines_update(WRITE_MODE);
 	ega_write_routines_update(RAM_MOVED);
@@ -338,9 +352,10 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 	ULONG mode_and_chain;
 	WRT_POINTERS *handler;
 #ifndef PROD
+#line 542
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 305
+#line 544
 
 	note_entrance1("ega_write_routines_update(%d)",reason);
 
@@ -529,10 +544,10 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 #ifdef VGG
 	mode_and_chain = (EGA_CPU.chain << 2) + EGA_CPU.write_mode;
 #else
-#line 491
+#line 730
 #error DIVERGENCE MVDM-HOST-DIV-540: non-VGG branch is not selected; see mirror register.
 #endif /* VGG */
-#line 493
+#line 732
 
 	if(( EGA_CPU.saved_mode_chain != mode_and_chain ) 
 		|| ( EGA_CPU.saved_state != state )
@@ -624,15 +639,16 @@ ega_write_routines_update IFN1(CHANGE_TYPE, reason )
 #ifdef CPU_40_STYLE
 		SetWritePointers();
 #else  /* CPU_40_STYLE */
-#line 581
+#line 820
 #error DIVERGENCE MVDM-HOST-DIV-513: non-CPU40 branch is not selected; see mirror register.
 #endif	/* CPU_40_STYLE */
-#line 583
+#line 844
 
 #ifndef PROD
+#line 846
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 587
+#line 848
 
 		set_mark_funcs();
 
