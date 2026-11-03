@@ -1,0 +1,21 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "before": "522a83d177101cf9674a8248e7b1b4bba762c5aaa5b02fcdda1fd05ea8ac5879",
+      "after": "1b2b6e4d1326a08b86e53d5c4561a2ce307ccb38a00ddd44616dd6ed84a30bbc",
+      "removed_inner_lines": 5,
+      "original_if_line": 220,
+      "original_next_line": 227
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "before": "2ca8a9635ae6d478c88739e72c9be03c363494a53066e6b4f10a77e5796066fe",
+      "after": "6206c0fb26a0c2660a7839ed69178b044b5aea1246644a11eb2ba4bc285ec600",
+      "removed_inner_lines": 4,
+      "original_body_line": 141,
+      "original_next_line": 144
+    }
+  ],
+  "context": "Observed x86 WOW32 wmmalias command lacks /DDEBUG; x86 and x64 reference nt_reset commands lack /DX86GFX. A search found no definition in these source files. Full per-file and alternate-context audits remain pending."
+}

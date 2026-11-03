@@ -1,0 +1,22 @@
+{
+  "reason": "Both observed worker source commands define CPU_40_STYLE; original non-CPU40 branches are unselected. Existing nested alternate CPU/PIG and #if 0 structure removed along with their enclosing excluded branch.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "before": "215f8c5d2803f1c19a9a1f47897707bc4bbf9cde294a535424c539aea500548c",
+      "after": "1c29adc7890344ac638702e8fd5d9a7f3bfe45bc09865996475f573b628edfbf",
+      "original_if_line": 657,
+      "original_next_line": 693,
+      "removed_inner_lines": 31
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "before": "26390e94c1a3e9695fbf608c6e44bbdd6254233ea195f59523df7eb9ad87043e",
+      "after": "e18353c24a4121f7ef8823f226e1fa515e205a7ede4d1d3614f0e441bbae4376",
+      "original_if_line": 385,
+      "original_next_line": 443,
+      "removed_inner_lines": 35
+    }
+  ],
+  "limitation": "Full per-file branch audit and all supported test contexts remain pending."
+}

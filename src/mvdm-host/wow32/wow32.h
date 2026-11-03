@@ -22,12 +22,15 @@
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
 
+#line 25
 #ifdef i386
-     #define PMODE32
-     #define FASTCALL _fastcall
+#line 26
+#error i386 kernel WOW profile is not supported
 #else
+#line 29
      #define FASTCALL
 #endif
+#line 31
 
 #include <stdarg.h>
 #include <stdio.h>
@@ -92,17 +95,19 @@
 #define WOWVDM          TRUE
 
 /***** ifdef( DEBUG || WOWPROFILE ) *****/
+#line 95
 #ifdef DEBUG
-#ifndef WOWPROFILE
-#define WOWPROFILE   // DEBUG => WOWPROFILE
-#endif // !WOWPROFILE
+#line 96
+#error DEBUG WOW32 profile is not supported
 #endif // DEBUG
+#line 100
 
+#line 101
 #ifdef WOWPROFILE
-#ifndef DEBUG_OR_WOWPROFILE
-#define DEBUG_OR_WOWPROFILE
-#endif
+#line 102
+#error WOW profiling is not supported
 #endif // WOWPROFILE
+#line 106
 
 
 /* Types
@@ -115,12 +120,12 @@ typedef ULONG   (FASTCALL *LPFNW32)(PVDMFRAME);
  */
 typedef struct _W32 {   /* w32 */
     LPFNW32 lpfnW32;    // function address
+#line 118
 #ifdef DEBUG_OR_WOWPROFILE
-    LPSZ    lpszW32;    // function name (DEBUG version only)
-    INT     cbArgs;     // # of bytes of arguments (DEBUG version only)
-    DWORD   cCalls;     // # of times this API called
-    DWORD   cTics;      // sum total # of tics ellapsed for all invocations
+#line 119
+#error WOW profiling is not supported
 #endif // DEBUG_OR_WOWPROFILE
+#line 124
 } W32, *PW32;
 
 
@@ -129,30 +134,39 @@ typedef struct _W32 {   /* w32 */
 */
 typedef struct _PA32 {
     PW32 lpfnA32;       // Array Address
+#line 132
 #ifdef DEBUG_OR_WOWPROFILE
-    LPSZ    lpszW32;    // Table Name (DEBUG version only)
-    INT *lpiFunMax;     // Pointer # of table entries (DEBUG version only)
+#line 133
+#error WOW profiling is not supported
 #endif // DEBUG_OR_WOWPROFILE
+#line 136
 } PA32, *PPA32;
 
 
 
 
+#line 141
 #ifdef DEBUG_OR_WOWPROFILE
-#define  W32FUN(fn,name,mod,size)   fn,name,size,0L,0L
-#define  W32MSGFUN(fn,name)         fn,name,0L,0L
+#line 142
+#error WOW profiling is not supported
 #else              // non-profile RETAIL
+#line 145
 #define  W32FUN(fn,name,mod,size)   fn
 #define  W32MSGFUN(fn,name)         fn
 #endif
+#line 148
 
 
 
+#line 151
 #ifdef DEBUG_OR_WOWPROFILE
-#define W32TAB(fn,name,size)    fn,name,&size
+#line 152
+#error WOW profiling is not supported
 #else  // RETAIL ONLY
+#line 154
 #define W32TAB(fn,name,size)    fn
 #endif
+#line 156
 
 
 /* Per-thread data
@@ -262,32 +276,39 @@ typedef struct _TD {           /* td */
 
 /* Global data
  */
+#line 265
 #ifdef DEBUG
-extern UCHAR  gszAssert[256]; // Buffer for assertion text (could be eliminated with restructuring)
-int _cdecl sprintf_gszAssert(PSZ pszFmt, ...);
-extern HANDLE hfLog;        // log file handle, if any
+#line 266
+#error DEBUG WOW32 profile is not supported
 #endif
+#line 270
 extern INT    flOptions;    // command-line options (see OPT_*)
+#line 271
 #ifdef DEBUG
-extern INT    iLogLevel;    // logging level;  0 implies none
-extern INT    fDebugWait;   // Single Step; 0 = No Single Step
+#line 272
+#error DEBUG WOW32 profile is not supported
 #endif
+#line 275
 extern HANDLE hHostInstance;
+#line 276
 #ifdef DEBUG
-extern INT    fLogFilter;   // Filter Catagories of Functions
-extern WORD   fLogTaskFilter;   // Filter Specific TaskID only
+#line 277
+#error DEBUG WOW32 profile is not supported
 #endif
+#line 280
+#line 280
 #ifdef i386
-extern PX86CONTEXT pIntelRegisters; // x86 Only - Pointer to Intel Register Block
+#line 281
+#error i386 kernel WOW profile is not supported
 #endif
+#line 283
 
+#line 284
 #ifdef DEBUG
-extern INT    iReqLogLevel;         // Current Output LogLevel
-extern INT    iCircBuffer;          // Current Buffer
-extern CHAR   achTmp[CIRC_BUFFERS][TMP_LINE_LEN];    // Circular Buffer
-extern WORD   awfLogFunctionFilter[FILTER_FUNCTION_MAX]; // Specific Filter API Array
-extern INT    iLogFuncFiltIndex;        // Index Into Specific Array for Debugger Extensions
+#line 285
+#error DEBUG WOW32 profile is not supported
 #endif
+#line 291
 
 
 /* WOW global data
@@ -355,66 +376,12 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 
 #define EXCEPTION_WOW32_ASSERTION   0x9898
 
+#line 358
 #ifdef DEBUG
-#undef  MODNAME
-#define MODNAME(module)     static char szModule[] = __FILE__
-
-int DoAssert(PSZ szAssert, PSZ szModule, UINT line, UINT loglevel);
-
-#define WOW32ASSERT(exp)                                                     \
-{                                                                            \
-    if (!(exp))                                                              \
-    {                                                                        \
-        DoAssert(NULL, szModule, __LINE__, LOG_ALWAYS);                      \
-    }                                                                        \
-}
-
-#define WOW32VERIFY(exp)    WOW32ASSERT(exp)
-
-#define WOW32ASSERTMSG(exp,msg)                                              \
-{                                                                            \
-    if (!(exp)) {                                                            \
-        DoAssert(msg, szModule, __LINE__, LOG_ALWAYS);                       \
-    }                                                                        \
-}
-
-#define WOW32ASSERTMSGF(exp, printf_args)                                    \
-(                                                                            \
-    (!(exp)) ? (                                                             \
-        sprintf_gszAssert printf_args,                                       \
-        DoAssert(gszAssert, szModule, __LINE__, LOG_ALWAYS)                  \
-    ) : 0                                                                    \
-)
-
-#define WOW32WARNMSG(exp,msg)                                                \
-{                                                                            \
-    if (!(exp)) {                                                            \
-        LOGDEBUG(LOG_ALWAYS, ("%s", (msg)));                                 \
-    }                                                                        \
-}
-
-#define WOW32WARNMSGF(exp, printf_args)                                      \
-{                                                                            \
-    if (!(exp)) {                                                            \
-        LOGDEBUG(LOG_ALWAYS, printf_args);                                   \
-    }                                                                        \
-}
-
-#define WOW32APIWARN(exp,msg)                                                \
-{                                                                            \
-    if (!(exp)) {                                                            \
-        LOGDEBUG(1,("    WOW32 WARNING: %s failed", (msg)));                 \
-        if (flOptions & OPT_FAKESUCCESS) {                                   \
-            LOGDEBUG(1,(" (but returning fake success)\n"));                 \
-            (ULONG)exp = TRUE;                                               \
-        }                                                                    \
-        else {                                                               \
-            LOGDEBUG(1,("\n"));                                              \
-        }                                                                    \
-    }                                                                        \
-}
-
+#line 359
+#error DEBUG WOW32 profile is not supported
 #else
+#line 418
 #ifndef i386
 #undef  MODNAME
 #define MODNAME(module)     static DWORD no_extra_semicolon_on_mipsfree
@@ -427,18 +394,27 @@ int DoAssert(PSZ szAssert, PSZ szModule, UINT line, UINT loglevel);
 #define WOW32WARNMSGF(exp,msg)
 #define WOW32APIWARN(exp,msg)
 #endif
+#line 430
 
+#line 431
 #ifdef DEBUG
-#define LOGARGS(l,v)    logargs(l,v)
+#line 432
+#error DEBUG WOW32 profile is not supported
 #else
+#line 434
 #define LOGARGS(l,v)
 #endif
+#line 436
 
+#line 437
 #ifdef DEBUG
-#define LOGRETURN(l,v,r)    logreturn(l,v,r)
+#line 438
+#error DEBUG WOW32 profile is not supported
 #else
+#line 440
 #define LOGRETURN(l,v,r)
 #endif
+#line 442
 
 //
 // Macros used to eliminate compiler warning generated when formal
@@ -534,13 +510,16 @@ int DoAssert(PSZ szAssert, PSZ szModule, UINT line, UINT loglevel);
         (void *)(INTEL_MEMORY_BASE + (((Address) & 0xFFFF0000) >> 12) +       \
                  ((Address) & 0xFFFF))
 
+#line 537
 #ifdef DEBUG
-    PVOID FASTCALL GetPModeVDMPointerAssert(DWORD Address, DWORD Count);
-    #define GetPModeVDMPointer(vp, count) GetPModeVDMPointerAssert((vp), (count))
+#line 538
+#error DEBUG WOW32 profile is not supported
 #else
+#line 541
     PVOID FASTCALL GetPModeVDMPointerAssert(DWORD Address);
     #define GetPModeVDMPointer(vp, count) GetPModeVDMPointerAssert((vp))
 #endif
+#line 544
 
 
 #define SEGPTR(seg,off)     GetPModeVDMPointer(((ULONG)seg<<16)|off, 0)
@@ -588,11 +567,12 @@ int DoAssert(PSZ szAssert, PSZ szModule, UINT line, UINT loglevel);
 
 
 #ifndef i386
+#line 591
 #ifdef DEBUG
-static CHAR *pszLogNull = "<null>";
-#undef  GETPSZPTR
-#define GETPSZPTR(vp,p)         {GETOPTPTR(vp,0,p);  LOGDEBUG(11,("        String @%08lx: \"%.80s\"\n",(FETCHDWORD(vp)),p ? p : pszLogNull));}
+#line 592
+#error DEBUG WOW32 profile is not supported
 #endif
+#line 596
 #endif
 
 #ifndef DEBUG
@@ -635,17 +615,19 @@ PTD     Htask16toPTD( HAND16 );
 HTASK16 ThreadID32toHtask16(DWORD ThreadID32);
 PVOID   WOWStartupFailed(VOID);
 
+#line 638
 #ifdef DEBUG
-VOID    logprintf(PSZ psz, ...);
-VOID    logargs(INT iLog, PVDMFRAME pFrame);
-VOID    logreturn(INT iLog, PVDMFRAME pFrame, ULONG ulReturn);
-BOOL    checkloging(register PVDMFRAME pFrame);
+#line 639
+#error DEBUG WOW32 profile is not supported
 #endif
+#line 644
 
+#line 645
 #ifdef DEBUG_OR_WOWPROFILE
-DWORD   GetWOWTicDiff(DWORD dwPrevCount);
-INT     GetFuncId(DWORD iFun);
+#line 646
+#error WOW profiling is not supported
 #endif
+#line 649
 
 BOOL    IsDebuggerAttached(VOID);
 
@@ -655,21 +637,18 @@ BOOL    IsDebuggerAttached(VOID);
 
 ULONG FASTCALL   WOW32UnimplementedAPI(PVDMFRAME pFrame);
 
+#line 658
 #ifdef DEBUG
-    ULONG FASTCALL   WOW32NopAPI(PVDMFRAME pFrame);
-    ULONG FASTCALL   WOW32LocalAPI(PVDMFRAME pFrame);
-    ULONG FASTCALL   WK32WowPartyByNumber(PVDMFRAME pFrame);
-
-    #define LOCALAPI              WOW32LocalAPI
-    #define NOPAPI                WOW32NopAPI
-    #define UNIMPLEMENTEDAPI      WOW32UnimplementedAPI
-    #define WK32WOWPARTYBYNUMBER  WK32WowPartyByNumber
+#line 659
+#error DEBUG WOW32 profile is not supported
 #else
+#line 668
     #define LOCALAPI              WOW32UnimplementedAPI
     #define NOPAPI                WOW32UnimplementedAPI
     #define UNIMPLEMENTEDAPI      WOW32UnimplementedAPI
     #define WK32WOWPARTYBYNUMBER  UNIMPLEMENTEDAPI
 #endif
+#line 673
 
 
 #endif // ifndef _DEF_WOW32_  THIS SHOULD BE THE LAST LINE IN THIS FILE

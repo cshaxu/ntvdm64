@@ -1,0 +1,68 @@
+{
+  "scope": "Two headers; 231 observed WOW32 compiler commands do not define DEBUG, WOWPROFILE or DEBUG_OR_WOWPROFILE; the sole repository definition of DEBUG_OR_WOWPROFILE is conditional on WOWPROFILE.",
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wow32.h",
+      "before": "f30c33550e3339db6490785aa68891a45cc7fa1ca40813abd41f3428ad73848c",
+      "after": "e921a79aee2097018ffeab319c007d84439589579a8b546891404b103a12e70a",
+      "groups": [
+        {
+          "condition": "WOWPROFILE",
+          "original_if_line": 101,
+          "original_next_line": 106,
+          "removed_lines": 3,
+          "alternative": false
+        },
+        {
+          "condition": "DEBUG_OR_WOWPROFILE",
+          "original_if_line": 118,
+          "original_next_line": 124,
+          "removed_lines": 4,
+          "alternative": false
+        },
+        {
+          "condition": "DEBUG_OR_WOWPROFILE",
+          "original_if_line": 132,
+          "original_next_line": 136,
+          "removed_lines": 2,
+          "alternative": false
+        },
+        {
+          "condition": "DEBUG_OR_WOWPROFILE",
+          "original_if_line": 141,
+          "original_next_line": 148,
+          "removed_lines": 2,
+          "alternative": true
+        },
+        {
+          "condition": "DEBUG_OR_WOWPROFILE",
+          "original_if_line": 151,
+          "original_next_line": 156,
+          "removed_lines": 1,
+          "alternative": true
+        },
+        {
+          "condition": "DEBUG_OR_WOWPROFILE",
+          "original_if_line": 645,
+          "original_next_line": 649,
+          "removed_lines": 2,
+          "alternative": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.h",
+      "before": "1060da45256e127d23faa6a44275fa5a88f865a7b74990e092b96d828c6a9243",
+      "after": "33116c4aa3b24505d63bc55c6de35ea1eb7abecdcb43cd6ad6b447fb64ccf5d5",
+      "groups": [
+        {
+          "condition": "DEBUG_OR_WOWPROFILE",
+          "original_if_line": 52,
+          "original_next_line": 57,
+          "removed_lines": 3,
+          "alternative": false
+        }
+      ]
+    }
+  ]
+}

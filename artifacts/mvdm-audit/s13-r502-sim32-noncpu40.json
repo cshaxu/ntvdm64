@@ -1,0 +1,12 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/src/sim32.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\sim32.c",
+  "before": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec",
+  "after": "756dcec12a29bab853a5fb087abdd8de2fb26de7750007703ee833cac36ba52b",
+  "original_if_line": 321,
+  "original_else_line": 421,
+  "original_next_line": 461,
+  "removed_inner_lines": 99,
+  "context": "x86 worker and x64-reference worker expanded commands define CPU_40_STYLE",
+  "status": "full per-file review and other supported contexts remain pending"
+}

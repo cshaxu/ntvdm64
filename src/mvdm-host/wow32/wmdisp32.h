@@ -52,11 +52,12 @@ typedef struct _WM32MSGPARAMEX {
  */
 typedef struct _M32 {   /* w32 */
     LPFNM32 lpfnM32;    // function address
+#line 52
 #ifdef DEBUG_OR_WOWPROFILE
-    LPSZ    lpszW32;    // message name (DEBUG version only)
-    DWORD   cCalls;     // # times the message has been passed
-    DWORD   cTics;      // sum total of thunk tics
+#line 53
+#error WOW profiling is not supported
 #endif
+#line 57
 } M32, *PM32;
 
 /* DIVERGENCE(MVDM-HOST-DIV-344): matches the operation-private TLS owner. */

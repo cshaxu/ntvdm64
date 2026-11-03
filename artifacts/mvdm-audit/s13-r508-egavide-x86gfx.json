@@ -1,0 +1,10 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+  "before": "af577e0d21a2ecd18433472db7728d69e660cf926fd6802d99e05e55d100eecb",
+  "after": "15cf7b18958fc6719cd6393b64250471f60a80ba83094235f2721c0fa8b7eda5",
+  "original_if_line": 2266,
+  "original_next_line": 2323,
+  "removed_inner_lines": 54,
+  "context": "x86 worker and x64-reference worker ega_vide.c commands define NTVDM but not X86GFX; video.c intentionally differs and is unchanged.",
+  "status": "partial file audit"
+}

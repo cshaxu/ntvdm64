@@ -2174,62 +2174,12 @@ sys_addr find_mode_table IFN2(int, mode, sys_addr *, save_addr)
 			params_addr += 19*EGA_PARMS_SIZE;
 	}
 
+#line 2266
 #if defined(NTVDM) && defined(X86GFX)
-	/*
-	* Tim August 92, Microsoft.
-	* Make text modes (0-3) use our mode parameters in KEYBOARD.SYS
-	* Three entries in table: 40x25, 80x25 & 80x25 mono
-	* Make that 4 - add font load mode B. We have to be defensive in
-	* case of dubious values from cards or m/c. (Pro II/EISA, Olivetti MP)
-	* Table order: 40x25, 80x25, mono, font
-	*/
-	{
-		extern word babyModeTable;
-		extern UTINY tempbabymode[];
-
-		if(babyModeTable == 0)    /* ntio not loaded - use temp table */
-		{
-		    if (!soft_reset)       /* be absolutely sure about this */
-		    {
-			/* magic location:good until 16 bit code is running */
-			sas_stores(0x41000, tempbabymode, 2 * EGA_PARMS_SIZE);
-			if (mode == 0xb)
-			    params_addr = 0x41000 + EGA_PARMS_SIZE;
-			else
-			    params_addr = 0x41000;  /* if not mode 3 tough */
-			return params_addr;
-		    }
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-		}
-		if(babyModeTable > 0)
-		{
-		    if (get_VGA_lines() == S350 && mode < 4)
-		    {
-			if (mode < 2)
-			    params_addr = babyModeTable + 4*EGA_PARMS_SIZE;
-			else
-			    params_addr = babyModeTable + 5*EGA_PARMS_SIZE;
-		    }
-		    else
-		    {
-			if (mode < 4)
-			{
-			    mode = mode/2;
-				params_addr = babyModeTable + mode*EGA_PARMS_SIZE;
-			}
-			else
-			{
-			    if (mode == 0xb)
-				params_addr = babyModeTable + 3 * EGA_PARMS_SIZE;
-			    else if (mode == 7)	/* skip first 2 table entries */
-				params_addr = babyModeTable + 2 * EGA_PARMS_SIZE;
-			}
-		    }
-		}
-	}
+#line 2267
+#error X86GFX EGA mode table path is not supported
 #endif	/* NTVDM & X86GFX */
+#line 2323
 
 	return params_addr;
 }

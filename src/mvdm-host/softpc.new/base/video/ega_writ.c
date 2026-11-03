@@ -223,44 +223,12 @@ GLOBAL VOID
 Glue_set_vid_wrt_ptrs IFN1(WRT_POINTERS *, handler )
 {
 
+#line 385
 #ifndef CPU_40_STYLE	/* EVID */
-#ifndef GISP_CPU
-#ifdef A3CPU
-#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
-#else
-#ifdef C_VID
-
-	C_vid_writes.b_write = handler->b_write;
-	C_vid_writes.w_write = handler->w_write;
-
-#ifndef	NO_STRING_OPERATIONS
-
-	C_vid_writes.b_fill = handler->b_fill;
-	C_vid_writes.w_fill = handler->w_fill;
-	C_vid_writes.b_fwd_move = handler->b_fwd_move;
-	C_vid_writes.b_bwd_move = handler->b_bwd_move;
-	C_vid_writes.w_fwd_move = handler->w_fwd_move;
-	C_vid_writes.w_bwd_move = handler->w_bwd_move;
-
-#endif	/* NO_STRING_OPERATIONS */
-
-#else
-
-	A_vid_writes = *handler;
-
-#if	0
-#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
-#endif	/* 0 */
-#line 206
-
-#endif /* C_VID */
-#line 208
-#endif /* A3CPU */
-#line 209
-#endif /* GISP_CPU */ 
-#line 210
+#line 386
+#error Non-CPU40 video glue is not supported
 #endif 	/* CPU_40_STYLE - EVID */
-#line 211
+#line 443
 }
 #endif /* !(NTVDM && MONITOR) */
 #line 213

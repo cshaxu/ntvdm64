@@ -164,12 +164,10 @@ PHMAP FindHMap32(HAND32 h32, PHINFO phi, INT iClass)
 #else
 #line 220
 #ifdef DEBUG
-        nAliases++;
-        if (iList > iLargestListSlot) {
-            iLargestListSlot = iList;
-            LOGDEBUG(1,("    FindHMap32: largest list slot is now %d\n", iLargestListSlot));
-        }
+#line 221
+#error DEBUG WOW alias accounting is not supported
 #endif
+#line 227
         phm->h16 = (HAND16)((iHash | (iList << HASH_BITS)) << RES_BITS);
 
         // New entries must be appended rather than inserted, because

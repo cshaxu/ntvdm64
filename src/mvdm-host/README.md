@@ -2125,7 +2125,7 @@ firmware include are removed; original retry/failure order is unchanged.
 | MVDM-HOST-DIV-470 | [S13 test-failure candidate; product gates pending] Match x87 save/restore segment checks to the original transfer sizes. | The selected CCPU checked 94 bytes for a 108-byte 32-bit operand and 106 for a 94-byte 16-bit operand. Exact-limit and short-limit selected-decoder controls expose both outcomes. | Check 108 or 94 bytes according to the existing operand-size flag; preserve the original transfer and exception path. Guest exception delivery and paging boundaries remain separate acceptance work. | `softpc.new/base/ccpu386/c_oprnd.h`; `tests/mvdm-host/ccpu_x87_span_fixture.c` |
 | MVDM-HOST-DIV-471 | [S13 test-failure candidate; product gates pending] Validate both pages of multi-byte x87 operands. | Original word-only prechecks can bypass the second page's mapping or permissions and write an unrelated physical page. Selected CCPU cross-page tests expose this for 8, 10, 14/28 and 94/108 byte operands. | Precheck the final byte with the original access rights and use the virtual byte path when paging crosses a boundary; preserve the original transfer and fault routines. Real guest delivery and concurrent mapping changes remain unproved. | `softpc.new/base/ccpu386/c_oprnd.h`; `tests/mvdm-host/ccpu_x87_page_fixture.c` |
 | MVDM-HOST-DIV-264 | Observe the selected original native-Console mouse callback sequence. | A Console record and an INT 33 callback registration alone do not prove that the original guest callback transfer returns to `mouse_int2`. | Default-off markers copy already-owned scalar coordinates, condition masks and callback CS:IP immediately beside original code; they neither retain input nor change mouse, PIC, CPU, callback or guest state. | `softpc.new/host/src/nt_mouse.c`, `softpc.new/base/keymouse/mouse_io.c` |
-| MVDM-HOST-DIV-265 | Enter original DOSX CMOS-shutdown continuations at their supplied CPU40 addresses. | The historical non-CPU30 condition subtracts two through a BOP-era convention, but `dxutil.asm` supplies `DXCODE:enrm50` in the code-9 IRET frame and `DXCODE:enrm45` for the code-0Ah far jump; both begin ordinary guest `FCLI` instructions. CPU40 begins execution at live EIP. | Preserve the historical adjustment outside CPU30/CPU40; under CPU40 alone, retain both original addresses unchanged. No BOP bytes, BOP decoding, continuation layout, or non-CPU40 branch changes. | `softpc.new/base/bios/reset.c`; original source `dpmi/dxutil.asm` |
+| MVDM-HOST-DIV-265 | Enter original DOSX CMOS-shutdown continuations at their supplied CPU40 addresses. | The historical non-CPU30 condition subtracts two through a BOP-era convention, but `dxutil.asm` supplies `DXCODE:enrm50` in the code-9 IRET frame and `DXCODE:enrm45` for the code-0Ah far jump; both begin ordinary guest `FCLI` instructions. CPU40 begins execution at live EIP. | Under CPU40 retain both original addresses unchanged; exclude the unsupported non-CPU40 adjustment with #error. No BOP bytes, BOP decoding, or continuation layout changes. | `softpc.new/base/bios/reset.c`; original source `dpmi/dxutil.asm` |
 | MVDM-HOST-DIV-100 | Notify the selected CCPU executor when an original SoftPC application thread starts or exits. | The original `ntthread.h` provider carrier was omitted by the owner-rooted host source, causing implicit `int` calls on both architectures; its unrelated `jmp_buf` declarations require executor-private state not used here. | Add only the two existing original `void` declarations; keep original calls, thread lifetime and failure flow. | `softpc.new/host/src/nt_thred.c`, original declaration evidence `softpc.new/base/ccpu386/ntthread.h` |
 | MVDM-HOST-DIV-102 (unselected vector) | Publish selected CCPU common register-vector contracts. | NT4 common host_cpu.h uses empty parameter lists/default int, while selected c_reg.c providers use precise register, flag, segment and descriptor-result contracts. | Preserve source-named callbacks and dispatch order with explicit selected declarations. | softpc.new/host/inc/host_cpu.h |
 | MVDM-HOST-DIV-107 | Represent the DOS Drive Parameter Block next link in its guest-defined 16:16 form. | The original `struct A_DPB *` is a 32-bit x86 process-pointer coincidence; on x64 it widens the packet and corrupts the following DOS fields. | Keep the original field order and writes, but store `Next` as the guest's four-byte far value; terminal and link values remain `FFFFFFFFh` and `segment:offset`. | `dos/dem/demdasd.h`, `dos/dem/demgset.c` |
@@ -2518,3 +2518,41 @@ selector/base/limit/access fields and restores the caller last-error value.
 The call is an observation adaptation, not original CCPU behavior or proof
 of concurrent mapping semantics. Evidence:
 ../../artifacts/mvdm-audit/s13-r479-unregistered-marker-review.json.
+
+MVDM-HOST-DIV-701: exclude the non-CPU40 video glue inside
+`softpc.new/base/video/ega_read.c` and `ega_writ.c`. Both observed worker
+compile commands define CPU_40_STYLE. Original guards and diagnostic lines
+are retained; nested content in the excluded arms is omitted.
+
+MVDM-HOST-DIV-702: exclude the non-CPU40 SIM32 memory provider in
+`softpc.new/host/src/sim32.c`; both observed worker source commands select
+CPU_40_STYLE. The original alternate CPU40 body, guard and line anchors
+remain in place.
+
+MVDM-HOST-DIV-703: exclude unselected DEBUG alias accounting in
+`wow32/wmmalias.c` and X86GFX idle gating in `host/src/nt_reset.c`.
+The relevant observed WOW32 and worker commands select neither flag.
+The CPU40-selected behavior and original diagnostic locations remain.
+
+MVDM-HOST-DIV-704: retain twelve original DEBUG guards in wow32/wow32.h
+while excluding their unselected DEBUG bodies. The original non-DEBUG
+alternatives and corresponding diagnostic line anchors are retained.
+All 90 observed consumers use WOW32 commands without /DDEBUG.
+
+MVDM-HOST-DIV-705: exclude unselected WOWPROFILE and DEBUG_OR_WOWPROFILE
+arms in wow32/wow32.h and wow32/wmdisp32.h, retaining original alternatives
+and diagnostic positions. Observed WOW32 build commands do not define those
+profiles; DEBUG cannot introduce WOWPROFILE in the supported build.
+
+MVDM-HOST-DIV-706: exclude i386 kernel WOW arms in wow32/wow32.h;
+90 observed WOW32 header consumers and the T335 base flags do not define
+i386. Original non-i386 alternatives and diagnostic anchors remain.
+
+MVDM-HOST-DIV-707: exclude the NTVDM/X86GFX mode-table arm in
+`softpc.new/base/video/ega_vide.c`; both observed source commands omit
+X86GFX. The original guard and diagnostic line anchors remain. This does
+not apply to video.c, which is explicitly compiled with X86GFX.
+
+MVDM-HOST-DIV-536: in base/debug/yoda.c, restore original diagnostic
+line anchors around the existing excluded NONPROD_CPU arm. Both observed
+worker source commands use PROD and do not select NONPROD_CPU.

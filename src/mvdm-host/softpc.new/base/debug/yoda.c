@@ -56,8 +56,10 @@ void force_yoda()
 {
 }
 #ifdef NONPROD_CPU
+#line 56
 #error DIVERGENCE MVDM-HOST-DIV-536: NONPROD_CPU branch is not selected; see mirror register.
 #endif /* NONPROD_CPU */
+#line 67
 #ifdef DELTA
 void delta_check_I()
 {

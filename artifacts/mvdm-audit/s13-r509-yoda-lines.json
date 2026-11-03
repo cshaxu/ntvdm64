@@ -1,0 +1,8 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+  "before": "26cf33baaf3f255691acad11397ab29ef3100bf7a3996c1429663d36114fafcf",
+  "after": "709c0f0b306c7f0b5ee87cb11023965193b54a552b55b917f8303768739a641e",
+  "original_if_line": 55,
+  "original_next_line": 67,
+  "context": "Existing #line 39 makes current #ifdef logically 55; both observed yoda.c commands define PROD and omit NONPROD_CPU. The added end anchor corrects the following DELTA line."
+}

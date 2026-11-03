@@ -479,12 +479,15 @@ void reset()
 				setAX(temp_word);
 				user_stack += 2;
 				sas_loadw(user_stack, &temp_word);
+#line 619
 #ifndef CPU_30_STYLE
 #if !defined(CPU_40_STYLE)
-				/* DIVERGENCE(MVDM-HOST-DIV-265): CPU40 enters DXCODE:enrm50 directly. */
-				temp_word = temp_word + HOST_BOP_IP_FUDGE;
-#endif /* !CPU_40_STYLE */
+#line 620
+#error Non-CPU40 reset continuation adjustment is not supported
+#endif
+#line 621
 #endif /* CPU_30_STYLE */
+#line 622
 				setIP(temp_word);
 				user_stack += 2;
 				sas_loadw(user_stack, &temp_word);
@@ -546,11 +549,15 @@ void reset()
 		
 			    /* fake up jump to indicated point */
 			    sas_loadw(effective_addr(BIOS_VAR_SEGMENT, IO_ROM_INIT), &temp_word);
+#line 683
 #ifndef CPU_30_STYLE
-#if !defined(CPU_40_STYLE) /* DIVERGENCE(MVDM-HOST-DIV-265): direct enrm45 */
-			    temp_word = temp_word + HOST_BOP_IP_FUDGE;
-#endif /* !CPU_40_STYLE */
+#if !defined(CPU_40_STYLE)
+#line 684
+#error Non-CPU40 reset continuation adjustment is not supported
+#endif
+#line 685
 #endif /* CPU_30_STYLE */
+#line 686
 			    setIP(temp_word);
 			    sas_loadw(effective_addr(BIOS_VAR_SEGMENT, IO_ROM_SEG), &temp_word);
 			    setCS(temp_word);

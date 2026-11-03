@@ -1,0 +1,58 @@
+{
+  "headers": [
+    "src/mvdm-host/softpc.new/base/inc/xt.h",
+    "src/mvdm-host/softpc.new/base/inc/cpu4.h",
+    "src/mvdm-host/softpc.new/host/inc/host_def.h"
+  ],
+  "evidence": "Existing Ninja dependency records and expanded commands; no compilation performed. Only observed compiled dependency entries, not proof for all possible graphs.",
+  "graphs": [
+    {
+      "graph": "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja",
+      "objects": 305,
+      "ccpu_objects": 293,
+      "no_ccpu": [
+        "obj/cvidc/accessfn.obj",
+        "obj/cvidc/mvdm_cvidc_vector_binding.obj",
+        "obj/adapter-debugger/dbg_registers.obj",
+        "obj/adapter-softpc/mvdm_softpc_text_video.obj",
+        "obj/adapter-softpc/mvdm_softpc_mouse_guest.obj",
+        "obj/adapter-softpc/mvdm_softpc_descriptor_fields.obj",
+        "obj/adapter-softpc/mvdm_softpc_effective_address.obj"
+      ],
+      "unmatched": [
+        "obj/tests/ccpu_x87_span_fixture.obj",
+        "obj/tests/ccpu_x87_page_fixture.obj",
+        "obj/tests/ccpu_bit_fault_fixture.obj",
+        "obj/tests/ccpu_bit_matrix_fixture.obj",
+        "obj/tests/ccpu_bounded_execution_fixture.obj"
+      ]
+    },
+    {
+      "graph": "build\\.ninja\\msvc-x86-release\\worker\\build.ninja",
+      "objects": 311,
+      "ccpu_objects": 293,
+      "no_ccpu": [
+        "obj/cvidc/accessfn.obj",
+        "obj/cvidc/mvdm_cvidc_vector_binding.obj",
+        "obj/adapter-debugger/dbg_registers.obj",
+        "obj/adapter-softpc/mvdm_softpc_text_video.obj",
+        "obj/adapter-softpc/mvdm_softpc_mouse_guest.obj",
+        "obj/adapter-softpc/mvdm_softpc_descriptor_fields.obj",
+        "obj/adapter-softpc/mvdm_softpc_effective_address.obj"
+      ],
+      "unmatched": [
+        "obj/tests/keyboard_controller_pic_test.obj",
+        "obj/tests/pic_reset_eoi_test.obj",
+        "obj/tests/ccpu_bounded_execution_fixture.obj",
+        "obj/tests/ccpu_bit_matrix_fixture.obj",
+        "obj/tests/ccpu_far_exception_fixture.obj",
+        "obj/tests/ccpu_x87_span_fixture.obj",
+        "obj/tests/ccpu_bit_fault_fixture.obj",
+        "obj/tests/ccpu_x87_page_fixture.obj",
+        "obj/tests/ccpu_monitor_boundary_fixture.obj",
+        "obj/tests/debug_register_binding_test.obj",
+        "obj/tests/x87_layout_fixture.obj"
+      ]
+    }
+  ]
+}

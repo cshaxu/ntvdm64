@@ -1,0 +1,13 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/inc/xt.h",
+  "before_sha256": "0b512707b37f96da171338744879481897fc5257f660a2e4d8de4dbd22a72e8b",
+  "after_sha256": "254d751b753656aa71c4befad0f90f7bf21aaceecef8071d8da54685a0bd8ba3",
+  "original": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/inc/xt.h",
+  "condition": "CCPU",
+  "original_if_line": 113,
+  "original_else_body_line": 119,
+  "original_next_line": 121,
+  "supported_context": "x86 product worker and x64 reference worker both set /DCCPU; owner has specified CCPU is universal. Compile fixtures and alternate configurations still require checking.",
+  "status": "withdrawn: existing product adapter object commands include xt.h without /DCCPU; header definition not found",
+  "context_evidence": "s13-r499-ccpu-header-commands.json"
+}

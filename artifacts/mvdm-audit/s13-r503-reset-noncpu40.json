@@ -1,0 +1,12 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/bios/reset.c",
+  "before": "c562cc490dc18ea14cd2a0de3aa822dea4fe4bfeaa05c38d15ed872889682c1c",
+  "after": "6c9609211a382fef503b616cc7fdbeb2bba3840d58d98b592b63d8a9ab39685a",
+  "original_adjustment_lines": [
+    620,
+    684
+  ],
+  "context": "Both observed worker reset.c commands define CPU_40_STYLE; original CPU30 condition retained.",
+  "divergence": "MVDM-HOST-DIV-265",
+  "status": "partial per-file audit; build pending ten source files"
+}

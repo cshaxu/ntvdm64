@@ -347,107 +347,12 @@ GLOBAL void sas_clear_map()
 
 LOCAL UTINY *reserve_for_sas = NULL;
 
+#line 321
 #ifndef CPU_40_STYLE
-
-LOCAL sys_addr current_sas_size =0;		/* A local Length_of_M_area */
-
-GLOBAL UTINY *host_sas_init IFN1(sys_addr, size)
-{
-	UTINY *rez;
-	DWORD M_plus_type_size;
-
-        /* allocate 16 MEG of virtual memory */
-        if (!reserve_for_sas)
-        {
-                if (!(reserve_for_sas = (UTINY *)VirtualAlloc ((void *)NULL, SIXTEENMEG,
-                        MEM_RESERVE, PAGE_READWRITE)))
-                {
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif
-                        exit (0);
-                }
-        }
-
-	/* now commit to our size */
-	M_plus_type_size = size + NOWRAP_PROTECTION +
-			   ((size + NOWRAP_PROTECTION) >> 12);
-	rez = (UTINY *)VirtualAlloc ((void *) reserve_for_sas,
-				     M_plus_type_size,
-				     MEM_COMMIT,
-				     PAGE_READWRITE);
-	if (rez)
-		Length_of_M_area = current_sas_size = size;
-	return (rez);
-
-}
-
-
-GLOBAL UTINY *host_sas_term()
-{
-        if (!reserve_for_sas)
-                return (NULL);
-
-        /* deallocate the reserves */
-        VirtualFree (reserve_for_sas, SIXTEENMEG, MEM_RELEASE);
-
-        /* null out reserve pointer */
-        reserve_for_sas = NULL;
-
-        Length_of_M_area = current_sas_size = 0;
-
-        return (NULL);
-}
-
-GLOBAL UTINY *sas_alter_size IFN1(sys_addr, new)
-{
-        UTINY *tmp;
-        if (!reserve_for_sas)
-        {
-#ifndef PROD
-#error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
-#endif 
-                return (NULL);
-        }
-
-        /* if we are already at the right size return success */
-        if (new == current_sas_size)
-        {
-                return (reserve_for_sas);
-        }
-
-        if (new > current_sas_size)
-        {
-                /* move to end of current commited area */
-                tmp = reserve_for_sas + current_sas_size;
-                if (!VirtualAlloc ((void *)tmp, (DWORD)(new - current_sas_size), MEM_COMMIT, 
-                        PAGE_READWRITE))
-                {
-                        printf ("NTVDM:Virtual Allocate for resize from %d to %d FAILED!\n",
-                                current_sas_size, new);
-                        return (NULL);
-                }
-        }
-        else
-        {
-                /* move to the place where sas needs to end */
-                tmp = reserve_for_sas + new;
-
-                /* now decommit the unneeded memory */
-                if (!VirtualFree ((void *)tmp, (DWORD)(current_sas_size - new), MEM_DECOMMIT)) 
-                {
-                        printf ("NTVDM:Virtual Allocate for resize from %d to %d FAILED!\n",
-                                current_sas_size, new);
-                        return (NULL);
-                }
-        }
-        Length_of_M_area = current_sas_size = new; 
-        return (reserve_for_sas);
-}
-
-
-
+#line 322
+#error Non-CPU40 SIM32 memory provider is not supported
 #else /* CPU_40_STYLE */
+#line 422
 
 
 // Intel space allocation and deallocation control function for the A4 CPU
@@ -492,5 +397,6 @@ GLOBAL UTINY *host_sas_term()
 }
 
 #endif /* CPU_40_STYLE */
+#line 461
 
 #endif /* SIM32 */

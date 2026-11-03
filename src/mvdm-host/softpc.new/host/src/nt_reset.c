@@ -147,11 +147,10 @@ host_reset()
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
 #else	/* ! ( HUNTER ) */
 #ifdef X86GFX
-    /* DIVERGENCE(MVDM-HOST-DIV-322): software VGA changes remain observable. */
-    if (sc.ScreenState == FULLSCREEN)	// initialised in ConsoleInit()
-	IDLE_ctl(FALSE);
-    else
+#line 141
+#error X86GFX fullscreen idle path is not supported
 #endif
+#line 144
 	IDLE_ctl(TRUE);		// can't idle detect fullscreen
 
     host_idle_init();		// host sleep event creation

@@ -1322,13 +1322,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\reset.c",
-      "current_sha256": "c562cc490dc18ea14cd2a0de3aa822dea4fe4bfeaa05c38d15ed872889682c1c",
+      "current_sha256": "6c9609211a382fef503b616cc7fdbeb2bba3840d58d98b592b63d8a9ab39685a",
       "original_sha256": "46e2507ad47182125ed59206780763c5dadf6ea752a43d4d946451de1024d90b",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r503 exclude non-CPU40 reset BOP adjustment; full file audit pending"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/rom_basc.c",
@@ -5028,13 +5029,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\yoda.c",
-      "current_sha256": "26cf33baaf3f255691acad11397ab29ef3100bf7a3996c1429663d36114fafcf",
+      "current_sha256": "709c0f0b306c7f0b5ee87cb11023965193b54a552b55b917f8303768739a641e",
       "original_sha256": "444f1350d7c50b270652d7b062a375536e327952ebb5ba83937fba090db3c817",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r509 restore original diagnostics after NONPROD_CPU exclusion; file audit pending"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
@@ -6328,13 +6330,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_read.c",
-      "current_sha256": "215f8c5d2803f1c19a9a1f47897707bc4bbf9cde294a535424c539aea500548c",
+      "current_sha256": "1c29adc7890344ac638702e8fd5d9a7f3bfe45bc09865996475f573b628edfbf",
       "original_sha256": "8908c3a4445c788eec0fcfa050cf18cac5f79413e03c5ddbdcca259779bf2860",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r501 exclude non-CPU40 glue; full file audit remains pending"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/ega_trcr.c",
@@ -6350,24 +6353,26 @@
     {
       "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_vide.c",
-      "current_sha256": "af577e0d21a2ecd18433472db7728d69e660cf926fd6802d99e05e55d100eecb",
+      "current_sha256": "15cf7b18958fc6719cd6393b64250471f60a80ba83094235f2721c0fa8b7eda5",
       "original_sha256": "049c4ea27ebb73296fdc96f932571598e76be8ebcf5165e5cf5815a5095de20f",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r508 exclude unselected X86GFX mode-table arm; file audit pending"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_writ.c",
-      "current_sha256": "26390e94c1a3e9695fbf608c6e44bbdd6254233ea195f59523df7eb9ad87043e",
+      "current_sha256": "e18353c24a4121f7ef8823f226e1fa515e205a7ede4d1d3614f0e441bbae4376",
       "original_sha256": "42b33f105e30d31a2805d9f835a74d80c47b4d96ee77101c18f096772e60c47a",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r501 exclude non-CPU40 glue; full file audit remains pending"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
@@ -7231,13 +7236,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_reset.c",
-      "current_sha256": "2ca8a9635ae6d478c88739e72c9be03c363494a53066e6b4f10a77e5796066fe",
+      "current_sha256": "6206c0fb26a0c2660a7839ed69178b044b5aea1246644a11eb2ba4bc285ec600",
       "original_sha256": "9aa8120237ffa104c87318ef39747a0e66c28bf56bfe9af03511bddf13f11b47",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r504 exclude unselected X86GFX idle branch; file audit pending"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_rez.c",
@@ -7387,13 +7393,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\sim32.c",
-      "current_sha256": "2fdd374048faf4ba0b34538f01b4a774f29b5e1114017bb44089bf9abcafb7ec",
+      "current_sha256": "756dcec12a29bab853a5fb087abdd8de2fb26de7750007703ee833cac36ba52b",
       "original_sha256": "1f634b9d6c09d0f767a90ec9e577817800a07dc353cffa433ca2e0268d2cd42f",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r502 exclude non-CPU40 SIM32 provider; full file audit remains pending"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
@@ -8361,22 +8368,24 @@
     {
       "path": "src/mvdm-host/wow32/wmdisp32.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.h",
-      "current_sha256": "1060da45256e127d23faa6a44275fa5a88f865a7b74990e092b96d828c6a9243",
+      "current_sha256": "33116c4aa3b24505d63bc55c6de35ea1eb7abecdcb43cd6ad6b447fb64ccf5d5",
       "original_sha256": "4102d319dbaf7dc0ed6759efbdcec83e2882af708cd7f70c97cacc50cd0e0057",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r505/r506 WOW profile arms excluded; other groups pending"
     },
     {
       "path": "src/mvdm-host/wow32/wmmalias.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmalias.c",
-      "current_sha256": "522a83d177101cf9674a8248e7b1b4bba762c5aaa5b02fcdda1fd05ea8ac5879",
+      "current_sha256": "1b2b6e4d1326a08b86e53d5c4561a2ce307ccb38a00ddd44616dd6ed84a30bbc",
       "original_sha256": "d4949206f261d22f80f96e769388aee94037b27092c69c68ec058619f843f4fb",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r504 exclude unselected DEBUG alias accounting; file audit pending"
     },
     {
       "path": "src/mvdm-host/wow32/wmmalias.h",
@@ -8661,12 +8670,13 @@
     {
       "path": "src/mvdm-host/wow32/wow32.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.h",
-      "current_sha256": "0f9b098627b910ebff6c2b4cc19755cfa1f56077cda7292bb8ca0f9c6b345d22",
+      "current_sha256": "e7ccd8ed888e56112d5bf24412990f9e4bc53a841a19bb469748dd2c42907523",
       "original_sha256": "06148a93a63faf7fc5480e4c9f80c98ddfe6e2a0a782eafe6a6fd1ccdd46de27",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "pending_change": "r505/r506/r507 exclude WOW DEBUG, profile, i386 arms; other groups pending"
     },
     {
       "path": "src/mvdm-host/wow32/wow32fax.c",

@@ -1,0 +1,82 @@
+{
+  "file": "src/mvdm-host/wow32/wow32.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wow32.h",
+  "before": "0f9b098627b910ebff6c2b4cc19755cfa1f56077cda7292bb8ca0f9c6b345d22",
+  "after": "f30c33550e3339db6490785aa68891a45cc7fa1ca40813abd41f3428ad73848c",
+  "consumers": 90,
+  "evidence": "Ninja dependency and expanded command inventory has no /DDEBUG for these consumers; no #define DEBUG found in project WOW32/compat/host source. Other supported or external include contexts remain to be audited.",
+  "groups": [
+    {
+      "original_if_line": 95,
+      "original_next_line": 100,
+      "has_alternative": false,
+      "removed_lines": 3
+    },
+    {
+      "original_if_line": 265,
+      "original_next_line": 270,
+      "has_alternative": false,
+      "removed_lines": 3
+    },
+    {
+      "original_if_line": 271,
+      "original_next_line": 275,
+      "has_alternative": false,
+      "removed_lines": 2
+    },
+    {
+      "original_if_line": 276,
+      "original_next_line": 280,
+      "has_alternative": false,
+      "removed_lines": 2
+    },
+    {
+      "original_if_line": 284,
+      "original_next_line": 291,
+      "has_alternative": false,
+      "removed_lines": 5
+    },
+    {
+      "original_if_line": 358,
+      "original_next_line": 430,
+      "has_alternative": true,
+      "removed_lines": 58
+    },
+    {
+      "original_if_line": 431,
+      "original_next_line": 436,
+      "has_alternative": true,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 437,
+      "original_next_line": 442,
+      "has_alternative": true,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 537,
+      "original_next_line": 544,
+      "has_alternative": true,
+      "removed_lines": 2
+    },
+    {
+      "original_if_line": 591,
+      "original_next_line": 596,
+      "has_alternative": false,
+      "removed_lines": 3
+    },
+    {
+      "original_if_line": 638,
+      "original_next_line": 644,
+      "has_alternative": false,
+      "removed_lines": 4
+    },
+    {
+      "original_if_line": 658,
+      "original_next_line": 673,
+      "has_alternative": true,
+      "removed_lines": 8
+    }
+  ]
+}

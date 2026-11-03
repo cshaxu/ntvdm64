@@ -563,40 +563,12 @@ rdm1_string_ch2 IFN3(UTINY *, dest, ULONG, offset, ULONG, count )	/* used to cor
 GLOBAL void
 Glue_set_vid_rd_ptrs IFN1(READ_POINTERS *, handler )
 {
+#line 657
 #ifndef CPU_40_STYLE	/* EVID */
-#ifdef A3CPU
-#error DIVERGENCE MVDM-HOST-DIV-522: A3CPU platform branch is not selected; see mirror register.
-
-
-
-
-
-#else					/* A3CPU */
-#line 483
-#ifdef C_VID
-
-	C_vid_reads.b_read = handler->b_read;
-	C_vid_reads.w_read = handler->w_read;
-
-#ifndef	NO_STRING_OPERATIONS
-	C_vid_reads.str_read = handler->str_read;
-#endif	/* NO_STRING_OPERATIONS */
-
-#else
-
-	A_vid_reads = *handler;
-
-#if	0
-#error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
-#endif	/* 0 */
-#line 499
-
-#endif	/* C_VID */
-#line 501
-#endif	/* A3CPU */
-#line 502
+#line 658
+#error Non-CPU40 video glue is not supported
 #endif	/* CPU_40_STYLE - EVID */
-#line 503
+#line 693
 }	
 #endif /* !(NTVDM && MONITOR) */
 #line 505

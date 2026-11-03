@@ -1,0 +1,19 @@
+{
+  "file": "src/mvdm-host/wow32/wow32.h",
+  "before": "e921a79aee2097018ffeab319c007d84439589579a8b546891404b103a12e70a",
+  "after": "e7ccd8ed888e56112d5bf24412990f9e4bc53a841a19bb469748dd2c42907523",
+  "groups": [
+    {
+      "original_if_line": 25,
+      "original_next_line": 31,
+      "alternative": true
+    },
+    {
+      "original_if_line": 280,
+      "original_next_line": 283,
+      "alternative": false
+    }
+  ],
+  "context": "231 observed WOW32 compile commands and T335 base flags do not explicitly define i386; source search found no #define i386 in relevant sources.",
+  "limitations": "An SDK or unobserved build context might define it; product compilation remains necessary."
+}
