@@ -4046,3 +4046,10 @@ and 30 isolated line controls passed. Six images are identical and four
 timestamp-only; prior Full 17/17 was reused and both destinations verified.
 Census: 1058 C/H, 157 identical reviewed, 453 differing reviewed, 448 pending;
 578 net deleted. Evidence: s13-r646-delivery.md and s13-r646-counts.json.
+
+- r649 completes six DBG-only conditional reviews and delivers original line
+mappings for 177 existing rejected DBG/DEBUG arms in ten files. Cached builds,
+181 retained guard controls and 177 isolated negative/line controls passed;
+two images are identical and eight timestamp-only. Prior Full 17/17 is reused
+and both destinations verified. Census: 1058 C/H, 157 identical reviewed, 459
+differing reviewed, 442 pending; net deleted: 578. Evidence: s13-r649-delivery.md.

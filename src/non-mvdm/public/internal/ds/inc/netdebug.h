@@ -113,8 +113,10 @@ Revision History:
 #include <debugfmt.h>           // Most FORMAT_ equates.
 
 #if DBG
+#line 116
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else // not DBG
+#line 120
 
 #ifdef CDEBUG
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
@@ -125,6 +127,7 @@ Revision History:
 #endif // ndef CDEBUG
 
 #endif // not DBG
+#line 134
 
 
 #line 136
@@ -166,8 +169,10 @@ extern "C" {
 //
 
 #if DBG
+#line 172
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else // not DBG
+#line 191
 
 #ifdef CDEBUG
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
@@ -179,6 +184,7 @@ extern "C" {
 #endif // ndef CDEBUG
 
 #endif // not DBG
+#line 205
 
 
 // NetpBreakPoint: if this is a debug version of some sort, cause a breakpoint
@@ -192,8 +198,10 @@ extern "C" {
 //
 
 #if DBG
+#line 218
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else // not DBG
+#line 226
 
 #ifdef CDEBUG
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
@@ -205,11 +213,14 @@ extern "C" {
 #endif // ndef CDEBUG
 
 #endif // not DBG
+#line 240
 
 
 #if DBG
+#line 243
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else // not DBG
+#line 538
 
 #define NetpDbgDisplayBool(Tag,Value)         /* nothing */
 #define NetpDbgDisplayConnection(Level,Info)  /* nothing */
@@ -261,6 +272,7 @@ extern "C" {
 #define NetpDbgDisplayWStr(Tag,Value)         /* nothing */
 
 #endif // not DBG
+#line 589
 
 //
 //  NetpKdPrint() & NetpDbgPrint() are net equivalents of
@@ -272,8 +284,10 @@ extern "C" {
 //
 
 #if DBG
+#line 600
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else // not DBG
+#line 616
 
 #ifdef CDEBUG
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
@@ -286,6 +300,7 @@ extern "C" {
 
 #endif // ndef CDEBUG
 #endif // not DBG
+#line 634
 
 
 // NetpDbgHexDump: do a hex dump of some number of bytes to the debug

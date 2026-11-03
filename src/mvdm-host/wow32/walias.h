@@ -108,14 +108,15 @@ typedef struct _HDW {
 //
 
 #ifdef DEBUG
+#line 109
 #error DIVERGENCE MVDM-HOST-DIV-596: DEBUG header profile is not selected
 #else
-#line 127
+#line 125
 #define THREADID32(htask16)  ((htask16)                                       \
                                   ? ((PTDB)SEGPTR((htask16),0))->TDB_ThreadID \
                                   : 0)
 #endif
-#line 131
+#line 129
 
 #define HTASK32(htask16)           (Htask16toThreadID32(htask16))
 #define GETHTASK16(htask32)        (ThreadID32toHtask16((DWORD)htask32))

@@ -2412,3 +2412,7 @@ Identity and scope: ../../artifacts/mvdm-audit/s13-r625-unobserved-deletions.jso
 OPENNT-HOST-237: remove the unselected original `public/internal/base/inc/zwapi.h`;
 the actual environment provider includes the retained `src/compat/include/zwapi.h`.
 Identity and context: ../../artifacts/mvdm-audit/s13-r631-unselected-legacy-sources.json.
+
+OPENNT-HOST-238: restore original diagnostic and continuation line mappings
+for existing excluded DBG arms in Base and NetAPI headers. Evidence:
+../../artifacts/mvdm-audit/s13-r648-mixed-debug-guards.json.

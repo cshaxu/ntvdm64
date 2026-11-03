@@ -46,10 +46,13 @@ Revision History:
 //
 
 #if DBG
+#line 49
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else
+#line 51
 #define IF_DEBUG if (FALSE)
 #endif
+#line 53
 
 //
 // Include Windows Subsystem common definitions

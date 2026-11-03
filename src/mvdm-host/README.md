@@ -2694,3 +2694,7 @@ MVDM-HOST-DIV-736: align original diagnostics and selected-arm continuation
 lines for previously excluded DBG branches in ten DEM, DPMI, redirector and
 WOW sources. Evidence: ../../artifacts/mvdm-audit/s13-r645-dbg-guard-lines.json
 and ../../artifacts/mvdm-audit/s13-r645-dpmi-review.json.
+
+MVDM-HOST-DIV-737: restore original diagnostic and continuation line mappings
+for existing rejected DBG/DEBUG arms in redirector and WOW sources. Evidence:
+../../artifacts/mvdm-audit/s13-r648-mixed-debug-guards.json.

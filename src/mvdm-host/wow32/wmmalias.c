@@ -23,6 +23,7 @@ HINFO   hiMMedia;       // MultiMedia handle alias info - MikeTri 12-May-1992
 HINFO   hiWinsock;      // Winsock handle alias info - DavidTr 4-Oct-1992
 
 #ifdef  DEBUG
+#line 26
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 28
@@ -31,6 +32,7 @@ INT iLargestListSlot;
 extern CRITICAL_SECTION    mmHandleCriticalSection;
 
 #ifdef  DEBUG
+#line 33
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 35
@@ -183,6 +185,7 @@ PHMAP FindHMap32(HAND32 h32, PHINFO phi, INT iClass)
 
     if (!phm->h32) {
 #ifdef DEBUG
+#line 241
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 246
@@ -257,6 +260,7 @@ PHMAP FindHMap16(HAND16 h16, PHINFO phi)
     }
 
 #ifdef DEBUG
+#line 325
 #error Excluded unsupported DEBUG WOW profile
 #endif
 #line 330

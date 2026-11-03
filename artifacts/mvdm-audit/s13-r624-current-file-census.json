@@ -246,7 +246,7 @@
       "sha256": "c22694752b0ec858ddb52d0e7214427c2b6261e70d1f0e654a655f5039deea16",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
+      "review_status": "completed-original-dbg-only-conditions",
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demfile.c",
       "original_candidate_sha256": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620"
@@ -336,7 +336,7 @@
       "sha256": "ce91214a04fa73810525394c8473d6e33fe5d0e03d9420c782da2e068e5aa959",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
+      "review_status": "completed-original-dbg-only-conditions",
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
       "original_candidate_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee"
@@ -6796,7 +6796,7 @@
       "sha256": "08020f482521dd762dc053c9d195febb2096e12c719772521d18e5a553d37e57",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
+      "review_status": "completed-original-dbg-only-conditions",
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdebug.h",
       "original_candidate_sha256": "1cc434fafa90e111f1726aa2444f24a04458da6efd2f218a80d48e03b4f3751b"
@@ -6826,7 +6826,7 @@
       "sha256": "268ba26a93f969ab08bb73668c165eeecfeed5e8dbe98e4f09c8d3c26f375022",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
+      "review_status": "completed-original-dbg-only-conditions",
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlc5c.c",
       "original_candidate_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf"
@@ -6856,14 +6856,14 @@
       "sha256": "205baabd2d10ebeeb49a016c78634b7a4931c4ba961b009cd47cde0c1d53ebff",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
+      "review_status": "completed-original-dbg-only-conditions",
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcdbg.h",
       "original_candidate_sha256": "2adbd4b0705a98bbb399c9b333551afa8999af1b27a008029b9fb871f787ff8c"
     },
     {
       "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
-      "sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "sha256": "dc48bd6f0ade800b1b8387cce259c1da41ae573d6214014fce72480157b674a3",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6923,7 +6923,7 @@
     },
     {
       "path": "src/mvdm-host/vdmredir/vrnetapi.c",
-      "sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "sha256": "5c451467a56fc59cad34150b8716c1a8ac31cbbebfa3648d0291f05a4e3a632a",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6943,7 +6943,7 @@
     },
     {
       "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
-      "sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "sha256": "a4de409e7d4d9e7925d455a8f0fc95f3a2f57655edae0f5beb32bdcc49df514c",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -7073,7 +7073,7 @@
     },
     {
       "path": "src/mvdm-host/wow32/walias.h",
-      "sha256": "52673510121f9e2ea2b95019785687ed05c11dcf077c82ad611bd89f25e6c1f3",
+      "sha256": "efbeb382d45ee94980a2bff98a7c1ce4d01ad53aecb97588d3e85afd7ac9c98e",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -7166,7 +7166,7 @@
       "sha256": "1b27283580d9a560f44076e4f618cfea589afe08f926dd3599c5f4f9c189f339",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
+      "review_status": "completed-original-dbg-only-conditions",
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcommdlg.c",
       "original_candidate_sha256": "01ce83329ae37a3e987971398115b8c7b5d9dcbc3320bdffaaa595244740a7d0"
@@ -7663,7 +7663,7 @@
     },
     {
       "path": "src/mvdm-host/wow32/wmmalias.c",
-      "sha256": "1b2b6e4d1326a08b86e53d5c4561a2ce307ccb38a00ddd44616dd6ed84a30bbc",
+      "sha256": "1b2c03921b483dff763f187c7f26dc4b9b40df6b6ae3ad7478b32087e11ca9f4",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -7693,7 +7693,7 @@
     },
     {
       "path": "src/mvdm-host/wow32/wmmedia.h",
-      "sha256": "5650cb890b74f64d6d269fe1a1a2153e37d2c1d7f54aeaad41fbccf557a712ed",
+      "sha256": "4ae8c257ddae40dbc4be3660a6feed2d40de31c03e4f842b5c3bd4ca9ff52d44",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -8843,7 +8843,7 @@
     },
     {
       "path": "src/non-mvdm/base/win32/inc/base.h",
-      "sha256": "db688148ff7fb55e379d5d2ac120272ae6b73860e7a5f087079b18bc82469961",
+      "sha256": "1ad50440e5ed8638de2a8426599bb524917444362cbe7e09eb6cb08eb8fd6571",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -9413,7 +9413,7 @@
     },
     {
       "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
-      "sha256": "f0f4d2f53865cf2a86b0ea04ce668e8ef6834296794bb0d23d50d612d3d90170",
+      "sha256": "d17e3e384fc4ab9a93d520896375778f2750972a4be8299dcc96de48ddd6ebd5",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -9473,7 +9473,7 @@
     },
     {
       "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
-      "sha256": "b0bdedfcc205b3cf72f54fc8c0c346738d74a75451eb597be7010d8b55411231",
+      "sha256": "9650c3c246f82bc14c769189cc7f59aa702c8327b28da8e17a6825b7709c8914",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -9483,7 +9483,7 @@
     },
     {
       "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
-      "sha256": "1c6ef883460e56c511b730556fd9d34d4b66b74e45c79289268eedadf52fa27e",
+      "sha256": "609b6c691b23ad3dda73adf11b1ea8422427bf359b4e2b64d22a6d93e4ef98c2",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",

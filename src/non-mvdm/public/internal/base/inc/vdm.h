@@ -167,10 +167,13 @@ typedef struct _VdmVirtualIca{
 /* XLATOFF */
 
 #if DBG
+#line 170
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else
+#line 172
 #define INITIAL_VDM_TIB_FLAGS (VDM_USE_DBG_VDMEVENT | VDM_BREAK_DEBUGGER)
 #endif
+#line 174
 
 //
 // bits defined in Eflags

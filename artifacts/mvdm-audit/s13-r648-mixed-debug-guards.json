@@ -1,0 +1,1159 @@
+{
+  "scope": "Ten product-observed MVDM and non-MVDM sources with existing rejected DBG or DEBUG alternatives.",
+  "method": "Original directive sequence compared; error arms contain no retained executable code. Original selected alternatives are preserved with restored diagnostic line mappings.",
+  "limits": "Other condition groups remain pending; build and targeted checks are recorded in s13-r649-delivery.md.",
+  "records": [
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcpst.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcpst.c",
+      "before_sha256": "4d805efd1ace4033058927c071c31dbc8cf12533dfc20e9ae8ece17b9bce92dd",
+      "after_sha256": "dc48bd6f0ade800b1b8387cce259c1da41ae573d6214014fce72480157b674a3",
+      "original_sha256": "ea7ce5c516434bd5b08fddd53881705385f3d925388ff4e439b337faa388cf01",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 405,
+          "original_selected_line": null,
+          "original_following_line": 410
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 610,
+          "original_selected_line": null,
+          "original_following_line": 615
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1166,
+          "original_selected_line": 1187,
+          "original_following_line": 1191
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1200,
+          "original_selected_line": 1225,
+          "original_following_line": 1229
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1258,
+          "original_selected_line": null,
+          "original_following_line": 1274
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1927,
+          "original_selected_line": 1932,
+          "original_following_line": 1937
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2333,
+          "original_selected_line": null,
+          "original_following_line": 2344
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2357,
+          "original_selected_line": null,
+          "original_following_line": 2371
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2577,
+          "original_selected_line": null,
+          "original_following_line": 2581
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2627,
+          "original_selected_line": 2632,
+          "original_following_line": 2637
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3224,
+          "original_selected_line": null,
+          "original_following_line": 3233
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3489,
+          "original_selected_line": null,
+          "original_following_line": 3495
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3633,
+          "original_selected_line": null,
+          "original_following_line": 3635
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3820,
+          "original_selected_line": null,
+          "original_following_line": 3824
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3847,
+          "original_selected_line": null,
+          "original_following_line": 3851
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3876,
+          "original_selected_line": null,
+          "original_following_line": 3886
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3917,
+          "original_selected_line": null,
+          "original_following_line": 3921
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3944,
+          "original_selected_line": null,
+          "original_following_line": 3948
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3962,
+          "original_selected_line": null,
+          "original_following_line": 3972
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetapi.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetapi.c",
+      "before_sha256": "a78f3258652211b45687d66dc8e5f31851b95410522311870c19a13fa33044b0",
+      "after_sha256": "5c451467a56fc59cad34150b8716c1a8ac31cbbebfa3648d0291f05a4e3a632a",
+      "original_sha256": "9074aa1c5d287996c95547c08b7e06dac578a29d90aa3b91278c00bbe7392a70",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 97,
+          "original_selected_line": null,
+          "original_following_line": 105
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 112,
+          "original_selected_line": null,
+          "original_following_line": 120
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 211,
+          "original_selected_line": null,
+          "original_following_line": 218
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 288,
+          "original_selected_line": null,
+          "original_following_line": 302
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 333,
+          "original_selected_line": null,
+          "original_following_line": 337
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 346,
+          "original_selected_line": null,
+          "original_following_line": 350
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 355,
+          "original_selected_line": null,
+          "original_following_line": 359
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 390,
+          "original_selected_line": null,
+          "original_following_line": 397
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 399,
+          "original_selected_line": null,
+          "original_following_line": 403
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 433,
+          "original_selected_line": null,
+          "original_following_line": 440
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 442,
+          "original_selected_line": null,
+          "original_following_line": 446
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 484,
+          "original_selected_line": null,
+          "original_following_line": 491
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 540,
+          "original_selected_line": null,
+          "original_following_line": 547
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 549,
+          "original_selected_line": null,
+          "original_following_line": 553
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 597,
+          "original_selected_line": null,
+          "original_following_line": 604
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 626,
+          "original_selected_line": null,
+          "original_following_line": 630
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 663,
+          "original_selected_line": null,
+          "original_following_line": 670
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 724,
+          "original_selected_line": null,
+          "original_following_line": 735
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1149,
+          "original_selected_line": null,
+          "original_following_line": 1153
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1299,
+          "original_selected_line": null,
+          "original_following_line": 1306
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1368,
+          "original_selected_line": null,
+          "original_following_line": 1372
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1384,
+          "original_selected_line": null,
+          "original_following_line": 1393
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1456,
+          "original_selected_line": null,
+          "original_following_line": 1466
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1528,
+          "original_selected_line": null,
+          "original_following_line": 1539
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1597,
+          "original_selected_line": null,
+          "original_following_line": 1601
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1672,
+          "original_selected_line": null,
+          "original_following_line": 1679
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1729,
+          "original_selected_line": null,
+          "original_following_line": 1736
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1815,
+          "original_selected_line": null,
+          "original_following_line": 1819
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1868,
+          "original_selected_line": null,
+          "original_following_line": 1875
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1952,
+          "original_selected_line": null,
+          "original_following_line": 1959
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2062,
+          "original_selected_line": null,
+          "original_following_line": 2069
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2086,
+          "original_selected_line": null,
+          "original_following_line": 2090
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2094,
+          "original_selected_line": null,
+          "original_following_line": 2098
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2102,
+          "original_selected_line": null,
+          "original_following_line": 2106
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2110,
+          "original_selected_line": null,
+          "original_following_line": 2114
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2119,
+          "original_selected_line": null,
+          "original_following_line": 2123
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2145,
+          "original_selected_line": null,
+          "original_following_line": 2149
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2224,
+          "original_selected_line": null,
+          "original_following_line": 2231
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2250,
+          "original_selected_line": null,
+          "original_following_line": 2257
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2270,
+          "original_selected_line": null,
+          "original_following_line": 2274
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2288,
+          "original_selected_line": null,
+          "original_following_line": 2294
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2319,
+          "original_selected_line": null,
+          "original_following_line": 2327
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2685,
+          "original_selected_line": null,
+          "original_following_line": 2689
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2700,
+          "original_selected_line": null,
+          "original_following_line": 2704
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2733,
+          "original_selected_line": null,
+          "original_following_line": 2745
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2749,
+          "original_selected_line": null,
+          "original_following_line": 2932
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2957,
+          "original_selected_line": null,
+          "original_following_line": 2964
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2966,
+          "original_selected_line": null,
+          "original_following_line": 2970
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3116,
+          "original_selected_line": null,
+          "original_following_line": 3121
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3166,
+          "original_selected_line": null,
+          "original_following_line": 3178
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3229,
+          "original_selected_line": null,
+          "original_following_line": 3237
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3249,
+          "original_selected_line": null,
+          "original_following_line": 3257
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3302,
+          "original_selected_line": null,
+          "original_following_line": 3310
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3322,
+          "original_selected_line": null,
+          "original_following_line": 3328
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3433,
+          "original_selected_line": null,
+          "original_following_line": 3440
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3539,
+          "original_selected_line": null,
+          "original_following_line": 3545
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3558,
+          "original_selected_line": null,
+          "original_following_line": 3562
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3630,
+          "original_selected_line": null,
+          "original_following_line": 3634
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3727,
+          "original_selected_line": null,
+          "original_following_line": 3732
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3736,
+          "original_selected_line": null,
+          "original_following_line": 3740
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3767,
+          "original_selected_line": null,
+          "original_following_line": 3771
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3777,
+          "original_selected_line": null,
+          "original_following_line": 3781
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 4022,
+          "original_selected_line": null,
+          "original_following_line": 4032
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 4093,
+          "original_selected_line": null,
+          "original_following_line": 4214
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnmpipe.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnmpipe.c",
+      "before_sha256": "22db4ae0715a8db76c206a1ce94c8311dacc2ad6dc0d5ba51c8283362be2cec1",
+      "after_sha256": "a4de409e7d4d9e7925d455a8f0fc95f3a2f57655edae0f5beb32bdcc49df514c",
+      "original_sha256": "fbb09851b3b1174e37b8cfa49f67b9667bea4262ad5e60cc9fb1d0917bf60e40",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 246,
+          "original_selected_line": null,
+          "original_following_line": 249
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 309,
+          "original_selected_line": null,
+          "original_following_line": 319
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 386,
+          "original_selected_line": null,
+          "original_following_line": 392
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 397,
+          "original_selected_line": null,
+          "original_following_line": 418
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 466,
+          "original_selected_line": null,
+          "original_following_line": 470
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 550,
+          "original_selected_line": null,
+          "original_following_line": 554
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 581,
+          "original_selected_line": null,
+          "original_following_line": 587
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 638,
+          "original_selected_line": null,
+          "original_following_line": 647
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 693,
+          "original_selected_line": null,
+          "original_following_line": 701
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 706,
+          "original_selected_line": null,
+          "original_following_line": 710
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 772,
+          "original_selected_line": null,
+          "original_following_line": 784
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 818,
+          "original_selected_line": null,
+          "original_following_line": 822
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 833,
+          "original_selected_line": null,
+          "original_following_line": 837
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 856,
+          "original_selected_line": null,
+          "original_following_line": 860
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 868,
+          "original_selected_line": null,
+          "original_following_line": 872
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 936,
+          "original_selected_line": null,
+          "original_following_line": 940
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 953,
+          "original_selected_line": null,
+          "original_following_line": 957
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 963,
+          "original_selected_line": null,
+          "original_following_line": 967
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1012,
+          "original_selected_line": null,
+          "original_following_line": 1019
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1028,
+          "original_selected_line": null,
+          "original_following_line": 1032
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1082,
+          "original_selected_line": null,
+          "original_following_line": 1086
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1168,
+          "original_selected_line": null,
+          "original_following_line": 1173
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1339,
+          "original_selected_line": null,
+          "original_following_line": 1379
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1388,
+          "original_selected_line": null,
+          "original_following_line": 1392
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1409,
+          "original_selected_line": null,
+          "original_following_line": 1415
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1438,
+          "original_selected_line": null,
+          "original_following_line": 1444
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1460,
+          "original_selected_line": null,
+          "original_following_line": 1464
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1484,
+          "original_selected_line": null,
+          "original_following_line": 1488
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1526,
+          "original_selected_line": null,
+          "original_following_line": 1528
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1549,
+          "original_selected_line": null,
+          "original_following_line": 1558
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1568,
+          "original_selected_line": null,
+          "original_following_line": 1577
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1595,
+          "original_selected_line": null,
+          "original_following_line": 1599
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1607,
+          "original_selected_line": null,
+          "original_following_line": 1613
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1618,
+          "original_selected_line": null,
+          "original_following_line": 1622
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1657,
+          "original_selected_line": null,
+          "original_following_line": 1661
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1672,
+          "original_selected_line": null,
+          "original_following_line": 1678
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1709,
+          "original_selected_line": null,
+          "original_following_line": 1719
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1755,
+          "original_selected_line": null,
+          "original_following_line": 1759
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1837,
+          "original_selected_line": null,
+          "original_following_line": 1841
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1861,
+          "original_selected_line": null,
+          "original_following_line": 1865
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1872,
+          "original_selected_line": null,
+          "original_following_line": 1880
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1888,
+          "original_selected_line": null,
+          "original_following_line": 1895
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1899,
+          "original_selected_line": null,
+          "original_following_line": 1905
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1909,
+          "original_selected_line": null,
+          "original_following_line": 1913
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1947,
+          "original_selected_line": null,
+          "original_following_line": 1951
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1962,
+          "original_selected_line": null,
+          "original_following_line": 1966
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2002,
+          "original_selected_line": null,
+          "original_following_line": 2006
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2017,
+          "original_selected_line": null,
+          "original_following_line": 2034
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2074,
+          "original_selected_line": null,
+          "original_following_line": 2080
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2096,
+          "original_selected_line": null,
+          "original_following_line": 2105
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2115,
+          "original_selected_line": 2124,
+          "original_following_line": 2128
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2139,
+          "original_selected_line": null,
+          "original_following_line": 2143
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2175,
+          "original_selected_line": null,
+          "original_following_line": 2179
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2233,
+          "original_selected_line": null,
+          "original_following_line": 2237
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2264,
+          "original_selected_line": null,
+          "original_following_line": 2268
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2303,
+          "original_selected_line": null,
+          "original_following_line": 2307
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2317,
+          "original_selected_line": null,
+          "original_following_line": 2334
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2374,
+          "original_selected_line": null,
+          "original_following_line": 2378
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2382,
+          "original_selected_line": null,
+          "original_following_line": 2386
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2397,
+          "original_selected_line": null,
+          "original_following_line": 2401
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2438,
+          "original_selected_line": 2454,
+          "original_following_line": 2456
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2500,
+          "original_selected_line": null,
+          "original_following_line": 2504
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2540,
+          "original_selected_line": null,
+          "original_following_line": 2544
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2604,
+          "original_selected_line": null,
+          "original_following_line": 2608
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2614,
+          "original_selected_line": null,
+          "original_following_line": 2618
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2667,
+          "original_selected_line": null,
+          "original_following_line": 2671
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2716,
+          "original_selected_line": null,
+          "original_following_line": 2720
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2729,
+          "original_selected_line": null,
+          "original_following_line": 2737
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2790,
+          "original_selected_line": null,
+          "original_following_line": 2792
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2810,
+          "original_selected_line": null,
+          "original_following_line": 2814
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2829,
+          "original_selected_line": null,
+          "original_following_line": 2833
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2848,
+          "original_selected_line": null,
+          "original_following_line": 2852
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2859,
+          "original_selected_line": null,
+          "original_following_line": 2863
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2995,
+          "original_selected_line": null,
+          "original_following_line": 2999
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3075,
+          "original_selected_line": null,
+          "original_following_line": 3079
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3104,
+          "original_selected_line": null,
+          "original_following_line": 3112
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3188,
+          "original_selected_line": null,
+          "original_following_line": 3194
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3207,
+          "original_selected_line": null,
+          "original_following_line": 3215
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3225,
+          "original_selected_line": null,
+          "original_following_line": 3229
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3310,
+          "original_selected_line": null,
+          "original_following_line": 3413
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmedia.h",
+      "before_sha256": "5650cb890b74f64d6d269fe1a1a2153e37d2c1d7f54aeaad41fbccf557a712ed",
+      "after_sha256": "4ae8c257ddae40dbc4be3660a6feed2d40de31c03e4f842b5c3bd4ca9ff52d44",
+      "original_sha256": "7b2e07ac7da3864922a65586539c19945344ed04df1d53d26e38119102a69801",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 239,
+          "original_selected_line": 271,
+          "original_following_line": 286
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/win32/inc/base.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\win32\\inc\\base.h",
+      "before_sha256": "db688148ff7fb55e379d5d2ac120272ae6b73860e7a5f087079b18bc82469961",
+      "after_sha256": "1ad50440e5ed8638de2a8426599bb524917444362cbe7e09eb6cb08eb8fd6571",
+      "original_sha256": "2df61cf7f17123235a340b6e802c4a998889db112cfd15399cec3cd107911cf7",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 49,
+          "original_selected_line": 51,
+          "original_following_line": 53
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\vdm.h",
+      "before_sha256": "f0f4d2f53865cf2a86b0ea04ce668e8ef6834296794bb0d23d50d612d3d90170",
+      "after_sha256": "d17e3e384fc4ab9a93d520896375778f2750972a4be8299dcc96de48ddd6ebd5",
+      "original_sha256": "c614c03a004f974c1eef37f1b29d3a8e1d7cfc33d04e7e7304befcbd6faafd18",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 170,
+          "original_selected_line": 172,
+          "original_following_line": 174
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/debuglib.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\debuglib.h",
+      "before_sha256": "b0bdedfcc205b3cf72f54fc8c0c346738d74a75451eb597be7010d8b55411231",
+      "after_sha256": "9650c3c246f82bc14c769189cc7f59aa702c8327b28da8e17a6825b7709c8914",
+      "original_sha256": "d3f73f4317c039937ba51ef439cff38a721328e5ae7c0a7bccce290e2031ac51",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 144,
+          "original_selected_line": 150,
+          "original_following_line": 157
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\netdebug.h",
+      "before_sha256": "1c6ef883460e56c511b730556fd9d34d4b66b74e45c79289268eedadf52fa27e",
+      "after_sha256": "609b6c691b23ad3dda73adf11b1ea8422427bf359b4e2b64d22a6d93e4ef98c2",
+      "original_sha256": "6e6acf20d4dcf56f6a51f99152c6792e080ea21db74efc37b6c70f2f5e00ec72",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 116,
+          "original_selected_line": 120,
+          "original_following_line": 134
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 172,
+          "original_selected_line": 191,
+          "original_following_line": 205
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 218,
+          "original_selected_line": 226,
+          "original_following_line": 240
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 243,
+          "original_selected_line": 538,
+          "original_following_line": 589
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 600,
+          "original_selected_line": 616,
+          "original_following_line": 634
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\walias.h",
+      "before_sha256": "52673510121f9e2ea2b95019785687ed05c11dcf077c82ad611bd89f25e6c1f3",
+      "after_sha256": "efbeb382d45ee94980a2bff98a7c1ce4d01ad53aecb97588d3e85afd7ac9c98e",
+      "original_sha256": "c87ae2f07b48f09276d205e2236d97f084f75f21706c524cb27734a3e36001cc",
+      "guards": [
+        {
+          "macro": "DEBUG",
+          "original_error_line": 109,
+          "original_selected_line": 125,
+          "original_following_line": 129
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmalias.c",
+      "before_sha256": "1b2b6e4d1326a08b86e53d5c4561a2ce307ccb38a00ddd44616dd6ed84a30bbc",
+      "after_sha256": "1b2c03921b483dff763f187c7f26dc4b9b40df6b6ae3ad7478b32087e11ca9f4",
+      "original_sha256": "d4949206f261d22f80f96e769388aee94037b27092c69c68ec058619f843f4fb",
+      "guards": [
+        {
+          "macro": "DEBUG",
+          "original_error_line": 26,
+          "original_selected_line": null,
+          "original_following_line": 28
+        },
+        {
+          "macro": "DEBUG",
+          "original_error_line": 33,
+          "original_selected_line": null,
+          "original_following_line": 35
+        },
+        {
+          "macro": "DEBUG",
+          "original_error_line": 241,
+          "original_selected_line": null,
+          "original_following_line": 246
+        },
+        {
+          "macro": "DEBUG",
+          "original_error_line": 325,
+          "original_selected_line": null,
+          "original_following_line": 330
+        }
+      ]
+    }
+  ]
+}

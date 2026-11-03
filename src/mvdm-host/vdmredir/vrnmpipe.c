@@ -246,8 +246,10 @@ ForgetPipeIo(
     );
 
 #if DBG
+#line 246
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 249
 
 //
 // global data
@@ -308,8 +310,10 @@ Return Value:
     POPEN_NAMED_PIPE_INFO OpenNamedPipeInfo;
 
 #if DBG
+#line 309
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 319
 
     //
     // bp:bx is 32-bit named pipe handle. Mapped from 8-bit handle in redir
@@ -377,15 +381,19 @@ Return Value:
     } else {
 
 #if DBG
+#line 386
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 392
 
         SET_ERROR(ERROR_INVALID_HANDLE);
     }
 
 #if DBG
+#line 397
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 418
 
 }
 
@@ -434,8 +442,10 @@ Return Value:
     WORD    PipeHandleState;
 
 #if DBG
+#line 466
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 470
 
     Handle = HANDLE_FROM_WORDS(getBP(), getBX());
     Ok =  GetNamedPipeHandleState(Handle,
@@ -516,8 +526,10 @@ Return Value:
 #define ILLEGAL_NMP_SETMODE_BITS    ~(NP_NBLK | NP_RMESG | NP_WMESG)
 
 #if DBG
+#line 550
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 554
 
     //
     // Convert the Dos pipe mode bits to Win32 pipe mode bits. We can only
@@ -545,8 +557,10 @@ Return Value:
     if (!(Ok = SetNamedPipeHandleState(Handle, &WinPipeMode, NULL, NULL))) {
 
 #if DBG
+#line 581
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 587
 
         SET_ERROR(VrpMapLastError());
     } else {
@@ -598,8 +612,10 @@ Return Value:
     BOOL Ok;
 
 #if DBG
+#line 638
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 647
 
     Handle = HANDLE_FROM_WORDS(getBP(), getBX());
     lpBuffer = (LPBYTE)POINTER_FROM_WORDS(getDS(), getSI());
@@ -646,15 +662,19 @@ Return Value:
         setCF(0);
 
 #if DBG
+#line 693
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 701
 
     } else {
         SET_ERROR(VrpMapLastError());
 
 #if DBG
+#line 706
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 710
 
         BytesRead = 0;
     }
@@ -717,8 +737,10 @@ Return Value:
     HANDLE Handle;
 
 #if DBG
+#line 772
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 784
 
     //
     // now that we are opening named pipes with FLAG_FILE_OVERLAPPED, we have
@@ -757,8 +779,10 @@ Return Value:
         if (Error == ERROR_IO_PENDING) {
 
 #if DBG
+#line 818
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 822
 
             Error = WaitForSingleObject(pipeio.Overlapped.hEvent, NAMED_PIPE_TIMEOUT);
         }
@@ -779,8 +803,10 @@ Return Value:
         if (Error == NO_ERROR || Error == ERROR_MORE_DATA) {
 
 #if DBG
+#line 833
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 837
 
             setCX((WORD)BytesRead);
             setAX((WORD)Error);
@@ -800,8 +826,10 @@ Return Value:
             if (Error == WAIT_TIMEOUT) {
 
 #if DBG
+#line 856
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 860
                 CloseHandle(Handle);
                 VrpRemoveOpenNamedPipeInfo(Handle);
             } else {
@@ -810,8 +838,10 @@ Return Value:
             SET_ERROR((WORD)Error);
 
 #if DBG
+#line 868
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 872
         }
 
         //
@@ -876,8 +906,10 @@ Return Value:
     StructurePointer = (PDOS_CALL_NAMED_PIPE_STRUCT)POINTER_FROM_WORDS(getDS(), getSI());
 
 #if DBG
+#line 936
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 940
 
     Ok = CallNamedPipe((LPSTR)READ_FAR_POINTER(&StructurePointer->lpPipeName),
                         READ_FAR_POINTER(&StructurePointer->lpInBuffer),
@@ -891,16 +923,20 @@ Return Value:
         SET_ERROR(VrpMapLastError());
 
 #if DBG
+#line 953
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 957
     } else {
         WRITE_WORD(READ_FAR_POINTER(&StructurePointer->lpBytesRead), (WORD)BytesRead);
         setCX((WORD)BytesRead);
         setCF(0);
 
 #if DBG
+#line 963
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 967
     }
 }
 
@@ -946,8 +982,10 @@ Return Value:
     //
 
 #if DBG
+#line 1012
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1019
 
     Ok = WaitNamedPipe(LPSTR_FROM_WORDS(getDS(), getDX()),
                         DWORD_FROM_WORDS(getBX(), getCX())
@@ -957,8 +995,10 @@ Return Value:
     } else {
 
 #if DBG
+#line 1028
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1032
         setAX(0);
         setCF(0);
     }
@@ -1009,8 +1049,10 @@ Return Value:
     LPVDM_HANDLE_INFO_1 StructurePointer;
 
 #if DBG
+#line 1082
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1086
 
     Handle = HANDLE_FROM_WORDS(getBP(), getBX());
     Level = (DWORD)getSI();
@@ -1093,8 +1135,10 @@ Return Value:
     LPBYTE  Buffer;
 
 #if DBG
+#line 1168
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1173
 
     Handle = HANDLE_FROM_WORDS(getBP(), getBX());
     Level = (DWORD)getSI();
@@ -1251,8 +1295,10 @@ Return Value:
     Type = (DWORD)getAX() & 0xff;   // 0x86, 0x8f, 0x90 or 0x91
 
 #if DBG
+#line 1339
 #error DIVERGENCE MVDM-HOST-DIV-517: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1379
 
     //
     // if we can't find this handle in our list of opened named pipes, return
@@ -1262,8 +1308,10 @@ Return Value:
     if (!pipeInfo) {
 
 #if DBG
+#line 1388
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1392
 
         SET_ERROR(ERROR_INVALID_HANDLE);
         return;
@@ -1281,8 +1329,10 @@ Return Value:
         if (VrpNmpSomethingToDo == NULL) {
 
 #if DBG
+#line 1409
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1415
 
             //
             // return an out-of-resources error
@@ -1306,8 +1356,10 @@ Return Value:
         if (hThread == NULL) {
 
 #if DBG
+#line 1438
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1444
 
             CloseHandle(VrpNmpSomethingToDo);
             SET_ERROR(ERROR_NOT_ENOUGH_MEMORY);
@@ -1324,8 +1376,10 @@ Return Value:
     if (pAsyncInfo == NULL) {
 
 #if DBG
+#line 1460
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1464
 
         SET_ERROR(ERROR_NOT_ENOUGH_MEMORY);
         return;
@@ -1349,8 +1403,10 @@ Return Value:
     if (hEvent == NULL) {
 
 #if DBG
+#line 1484
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1488
 
         LocalFree((HLOCAL)pAsyncInfo);
 
@@ -1379,8 +1435,10 @@ Return Value:
     }
 
 #if DBG
+#line 1526
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1528
 
     //
     // add the completion info structure to the async thread's work queue
@@ -1402,8 +1460,10 @@ Return Value:
                       );
 
 #if DBG
+#line 1549
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1558
 
     } else {
         ok = WriteFile(Handle,
@@ -1414,8 +1474,10 @@ Return Value:
                        );
 
 #if DBG
+#line 1568
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1577
 
     }
     error = ok ? NO_ERROR : GetLastError();
@@ -1434,8 +1496,10 @@ Return Value:
         //
 
 #if DBG
+#line 1595
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1599
 
         VrpDequeueAsyncRequest(pAsyncInfo);
         CloseHandle(hEvent);
@@ -1445,15 +1509,19 @@ Return Value:
     } else {
 
 #if DBG
+#line 1607
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1613
 
         setCF(0);
     }
 
 #if DBG
+#line 1618
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1622
 }
 
 
@@ -1491,8 +1559,10 @@ Return Value:
     mvdm_redirector_async_trace("interrupt-enter");
 
 #if DBG
+#line 1657
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1661
 
 
     //
@@ -1505,8 +1575,10 @@ Return Value:
         mvdm_redirector_async_trace("interrupt-empty");
 
 #if DBG
+#line 1672
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1678
 
         //
         // returning FALSE indicates that the hardware interrupt callback was
@@ -1541,8 +1613,10 @@ Return Value:
         mvdm_redirector_async_trace("interrupt-callback-ready");
 
 #if DBG
+#line 1709
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1719
 
         //
         // returning TRUE indicates that we have accepted a named pipe
@@ -1579,8 +1653,10 @@ Return Value:
 
 {
 #if DBG
+#line 1755
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1759
 
 }
 
@@ -1660,8 +1736,10 @@ Return Value:
     UNREFERENCED_PARAMETER(Parameters);
 
 #if DBG
+#line 1837
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1841
 
     while (TRUE) {
 
@@ -1682,8 +1760,10 @@ Return Value:
         if (index > 0 && index < numberOfHandles) {
 
 #if DBG
+#line 1861
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1865
 
             pRequest = VrpSearchForRequestByEventHandle(eventList[index]);
             if (pRequest != NULL) {
@@ -1691,8 +1771,10 @@ Return Value:
             }
 
 #if DBG
+#line 1872
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1880
 
         } else if (index) {
 
@@ -1701,20 +1783,26 @@ Return Value:
             //
 
 #if DBG
+#line 1888
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1895
 
         }
 
 #if DBG
+#line 1899
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1905
 
     }
 
 #if DBG
+#line 1909
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1913
 
     return 0;   // appease the compiler-god
 }
@@ -1749,8 +1837,10 @@ Return Value:
     PDOS_ASYNC_NAMED_PIPE_INFO ptr;
 
 #if DBG
+#line 1947
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1951
 
     pList[0] = VrpNmpSomethingToDo;
     EnterCriticalSection(&VrNmpRequestQueueCritSec);
@@ -1762,8 +1852,10 @@ Return Value:
     LeaveCriticalSection(&VrNmpRequestQueueCritSec);
 
 #if DBG
+#line 1962
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1966
 
     return count;
 }
@@ -1800,8 +1892,10 @@ Return Value:
     PDOS_ASYNC_NAMED_PIPE_INFO ptr;
 
 #if DBG
+#line 2002
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2006
 
     EnterCriticalSection(&VrNmpRequestQueueCritSec);
     for (ptr = RequestQueueHead; ptr; ptr = ptr->Next) {
@@ -1813,8 +1907,10 @@ Return Value:
     LeaveCriticalSection(&VrNmpRequestQueueCritSec);
 
 #if DBG
+#line 2017
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2034
 
     return ptr;
 }
@@ -1863,8 +1959,10 @@ Return Value:
     }
 
 #if DBG
+#line 2074
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2080
 
     ok = GetOverlappedResult(pAsyncInfo->Handle,
                              &pAsyncInfo->Overlapped,
@@ -1890,8 +1988,10 @@ Return Value:
     }
 
 #if DBG
+#line 2096
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2105
 
     //
     // if there is no ANR then we cannot make a call-back to DOS (error? DOS
@@ -1902,12 +2002,15 @@ Return Value:
     if (!pAsyncInfo->ANR) {
 
 #if DBG
+#line 2115
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
+#line 2124
 
         VrpDequeueAsyncRequest(pAsyncInfo);
 
 #endif
+#line 2128
 
         CloseHandle(pAsyncInfo->Overlapped.hEvent);
         mvdm_redirector_async_completion_end(pAsyncInfo);
@@ -1921,8 +2024,10 @@ Return Value:
         //
 
 #if DBG
+#line 2139
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2143
 
         VrQueueCompletionHandler(VrNmPipeInterrupt);
         mvdm_redirector_async_trace("completion-queued");
@@ -1958,8 +2063,10 @@ Return Value:
 
 {
 #if DBG
+#line 2175
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2179
 
     EnterCriticalSection(&VrNmpRequestQueueCritSec);
     if (!RequestQueueHead) {
@@ -2014,8 +2121,10 @@ Return Value:
     PDOS_ASYNC_NAMED_PIPE_INFO prev = (PDOS_ASYNC_NAMED_PIPE_INFO)&RequestQueueHead;
 
 #if DBG
+#line 2233
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2237
 
     EnterCriticalSection(&VrNmpRequestQueueCritSec);
     for (ptr = RequestQueueHead; ptr; ptr = ptr->Next) {
@@ -2043,8 +2152,10 @@ Return Value:
     LeaveCriticalSection(&VrNmpRequestQueueCritSec);
 
 #if DBG
+#line 2264
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2268
 
     return ptr;
 }
@@ -2080,8 +2191,10 @@ Return Value:
     PDOS_ASYNC_NAMED_PIPE_INFO ptr;
 
 #if DBG
+#line 2303
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2307
 
     EnterCriticalSection(&VrNmpRequestQueueCritSec);
     for (ptr = RequestQueueHead; ptr; ptr = ptr->Next) {
@@ -2092,8 +2205,10 @@ Return Value:
     LeaveCriticalSection(&VrNmpRequestQueueCritSec);
 
 #if DBG
+#line 2317
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2334
 
     return ptr;
 }
@@ -2134,14 +2249,18 @@ Return Value:
     BOOL ok;
 
 #if DBG
+#line 2374
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2378
 
     if (VrIsNamedPipeName(lpFileName)) {
 
 #if DBG
+#line 2382
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2386
 
         //
         // if we can't create the named pipe info structure, or the async
@@ -2153,8 +2272,10 @@ Return Value:
     } else {
 
 #if DBG
+#line 2397
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2401
 
         ok = FALSE;
 
@@ -2192,10 +2313,13 @@ Return Value:
 
 {
 #if DBG
+#line 2438
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
+#line 2454
     VrpRemoveOpenNamedPipeInfo(Handle);
 #endif
+#line 2456
 
     return TRUE;
 }
@@ -2240,8 +2364,10 @@ Return Value:
     DWORD dwBytesRead;
 
 #if DBG
+#line 2500
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2504
 
     //
     // create an event to wait on. This goes in the overlapped structure - it
@@ -2282,8 +2408,10 @@ Return Value:
         } else {
 
 #if DBG
+#line 2540
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2544
 
             //
             // if we got ERROR_MORE_DATA, then this is actually success(!). In this case
@@ -2344,16 +2472,20 @@ Return Value:
     if (!success) {
 
 #if DBG
+#line 2604
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2608
 
         SetLastError(error);
     } else {
         *BytesRead = dwBytesRead;
 
 #if DBG
+#line 2614
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2618
 
     }
 
@@ -2403,8 +2535,10 @@ Return Value:
     DWORD error;
 
 #if DBG
+#line 2667
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2671
 
     //
     // create an event to wait on. This goes in the overlapped structure - it
@@ -2450,8 +2584,10 @@ Return Value:
     if (!success) {
 
 #if DBG
+#line 2716
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2720
 
         SetLastError(error);
         if (error == WAIT_TIMEOUT) {
@@ -2461,8 +2597,10 @@ Return Value:
     }
 
 #if DBG
+#line 2729
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2737
 
     return success;
 }
@@ -2516,8 +2654,10 @@ Return Value:
     int     CharCount;
 
 #if DBG
+#line 2790
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2792
 
     if (IS_ASCII_PATH_SEPARATOR(*Name)) {
         ++Name;
@@ -2536,8 +2676,10 @@ Return Value:
                 //
 
 #if DBG
+#line 2810
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2814
                 return FALSE;
             }
 
@@ -2553,8 +2695,10 @@ Return Value:
         } else {
 
 #if DBG
+#line 2829
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2833
 
             return FALSE;
 
@@ -2570,8 +2714,10 @@ Return Value:
             if (IS_ASCII_PATH_SEPARATOR(*Name)) {
 
 #if DBG
+#line 2848
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2852
 
                 return TRUE;
             }
@@ -2579,8 +2725,10 @@ Return Value:
     }
 
 #if DBG
+#line 2859
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2863
 
     return FALSE;
 }
@@ -2713,8 +2861,10 @@ Return Value:
         } while (pipeName);
 
 #if DBG
+#line 2995
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 2999
 
     }
 
@@ -2791,8 +2941,10 @@ Return Value:
     if (PipeInfo == NULL) {
 
 #if DBG
+#line 3075
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 3079
 
         return FALSE;
     }
@@ -2818,8 +2970,10 @@ Return Value:
     LastOpenNamedPipeInfo = PipeInfo;
 
 #if DBG
+#line 3104
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 3112
 
     return TRUE;
 }
@@ -2896,8 +3050,10 @@ Return Value:
     POPEN_NAMED_PIPE_INFO ptr, prev = NULL;
 
 #if DBG
+#line 3188
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 3194
 
     for (ptr = OpenNamedPipeInfoList; ptr; ) {
         if (ptr->Handle == Handle) {
@@ -2911,8 +3067,10 @@ Return Value:
             }
 
 #if DBG
+#line 3207
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 3215
 
             LocalFree(ptr);
             return TRUE;
@@ -2923,8 +3081,10 @@ Return Value:
     }
 
 #if DBG
+#line 3225
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 3229
 
     return FALSE;
 }
@@ -3006,5 +3166,7 @@ Return Value:
 
 
 #if DBG
+#line 3310
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 3413
