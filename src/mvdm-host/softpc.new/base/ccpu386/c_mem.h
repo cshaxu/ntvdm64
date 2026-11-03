@@ -28,10 +28,13 @@ IMPORT UTINY *pg_end;	/* point up to which host may safely read
 #else	/* !PIG */
 #line 29
 #ifdef BACK_M
+#line 30
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
+#line 32
 #define DIFF_INST_BYTE(n, o) ((n) - (o))
 #endif /* BACK_M */
+#line 34
 #endif	/* PIG */
 #line 35
 
@@ -42,11 +45,14 @@ IMPORT UTINY *pg_end;	/* point up to which host may safely read
 #else	/* !PIG */
 #line 41
 #ifdef BACK_M
+#line 42
 #error DIVERGENCE MVDM-HOST-DIV-525: BACK_M platform branch is not selected; see mirror register.
 #else
+#line 45
 #define GET_INST_BYTE(x) \
    ( (x) >= pg_end ? ccpu_new_code_page(&(x)) : *(x)++ )
 #endif /* BACK_M */
+#line 48
 #endif	/* PIG */
 #line 49
 

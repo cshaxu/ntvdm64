@@ -1,0 +1,1475 @@
+{
+  "scope": "Conservative tree comparison; only rejected bodies may discard nested original groups. All other branches recurse and leaf text must match.",
+  "limits": "Does not resolve alternative compile contexts, source patches outside branch bodies, ambiguous directive syntax or lack of explicit continuation anchors. Retained original branch leaves are compared after trimming boundary whitespace; local adaptations outside conditional groups remain separately tracked. Supported-context enumeration remains open.",
+  "candidates": [
+    {
+      "path": "src/mvdm-host/dbg/dbg.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dbg\\dbg.c",
+      "current_sha256": "f5da99382a421b548c54b2e1796b864a80a2f15e19d4109b3bfa809f889b380f",
+      "original_sha256": "5a3a207eff1570908e270c737d12fb40fe66097895063136d17fe6b971494b90",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 35,
+        "retained": 21,
+        "groups": 35
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 193,
+          "current_endif": 195,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 189,
+              "current_line": 189,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 191,
+              "current_line": 192,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 204,
+          "current_endif": 209,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 200,
+              "current_line": 203,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 202,
+              "current_line": 206,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 284,
+          "current_endif": 268,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 239,
+              "current_line": 245,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 265,
+              "current_line": 248,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 307,
+          "current_endif": 290,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 302,
+              "current_line": 287,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 352,
+          "current_endif": 334,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 347,
+              "current_line": 331,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 382,
+          "current_endif": 363,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 377,
+              "current_line": 360,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 415,
+          "current_endif": 395,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 410,
+              "current_line": 392,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 462,
+          "current_endif": 441,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 457,
+              "current_line": 438,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 507,
+          "current_endif": 485,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 502,
+              "current_line": 482,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 549,
+          "current_endif": 526,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 544,
+              "current_line": 523,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 577,
+          "current_endif": 549,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 557,
+              "current_line": 535,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 567,
+              "current_line": 538,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 591,
+          "current_endif": 560,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 581,
+              "current_line": 554,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 589,
+              "current_line": 557,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 636,
+          "current_endif": 585,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 598,
+              "current_line": 568,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 623,
+              "current_line": 571,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 657,
+          "current_endif": 605,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 652,
+              "current_line": 602,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 687,
+          "current_endif": 629,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 665,
+              "current_line": 614,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 676,
+              "current_line": 617,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 701,
+          "current_endif": 640,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 691,
+              "current_line": 634,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 699,
+              "current_line": 637,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 746,
+          "current_endif": 665,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 708,
+              "current_line": 648,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 733,
+              "current_line": 651,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 762,
+          "current_endif": 683,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 760,
+              "current_line": 680,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 770,
+          "current_endif": 691,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 766,
+              "current_line": 688,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 812,
+          "current_endif": 721,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 779,
+              "current_line": 701,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 796,
+              "current_line": 704,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 882,
+          "current_endif": 788,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 872,
+              "current_line": 782,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 880,
+              "current_line": 785,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 937,
+          "current_endif": 813,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 889,
+              "current_line": 796,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 924,
+              "current_line": 799,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 958,
+          "current_endif": 833,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 953,
+              "current_line": 830,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 986,
+          "current_endif": 856,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 966,
+              "current_line": 842,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 976,
+              "current_line": 845,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1000,
+          "current_endif": 867,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 990,
+              "current_line": 861,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 998,
+              "current_line": 864,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1045,
+          "current_endif": 892,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 1007,
+              "current_line": 875,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 1032,
+              "current_line": 878,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1075,
+          "current_endif": 921,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 1070,
+              "current_line": 918,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1101,
+          "current_endif": 943,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 1084,
+              "current_line": 931,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 1093,
+              "current_line": 934,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1150,
+          "current_endif": 989,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 1140,
+              "current_line": 983,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 1148,
+              "current_line": 986,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1195,
+          "current_endif": 1015,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 1157,
+              "current_line": 997,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 1181,
+              "current_line": 1000,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1225,
+          "current_endif": 1044,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 1220,
+              "current_line": 1041,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1532,
+          "current_endif": 1350,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 1527,
+              "current_line": 1347,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1574,
+          "current_endif": 1380,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 1542,
+              "current_line": 1361,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 1559,
+              "current_line": 1364,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1625,
+          "current_endif": 1428,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 1615,
+              "current_line": 1422,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 1623,
+              "current_line": 1425,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1680,
+          "current_endif": 1454,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "i386",
+              "original_line": 1632,
+              "current_line": 1436,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 1666,
+              "current_line": 1439,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cntlbop.c",
+      "current_sha256": "812e8edc8bf1d70942c47990a3536865a2ca681d0ab5be0bff122d29980550db",
+      "original_sha256": "c65121f592f91efbea0db0b3282f3252f4a58a4a87a281570ee3a0e50686cc87",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 8,
+        "groups": 8
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 40,
+          "current_endif": 41,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SEGMENTATION",
+              "original_line": 33,
+              "current_line": 33,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 51,
+          "current_endif": 54,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SCCSID",
+              "original_line": 49,
+              "current_line": 51,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 55,
+          "current_endif": 60,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SECURE",
+              "original_line": 53,
+              "current_line": 57,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 59,
+          "current_endif": 66,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(RUNUX)",
+              "original_line": 57,
+              "current_line": 63,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 65,
+          "current_endif": 74,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SECURE",
+              "original_line": 63,
+              "current_line": 71,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 68,
+          "current_endif": 79,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(RUNUX)",
+              "original_line": 66,
+              "current_line": 76,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 80,
+          "current_endif": 84,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)",
+              "original_line": 69,
+              "current_line": 81,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 83,
+          "current_endif": 89,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "NTVDM",
+              "original_line": 81,
+              "current_line": 86,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\ill_bop.c",
+      "current_sha256": "6ec95ec46d9c6511b19c4e3338025be57ebdd3f289861f9be050e3cf29e95a0c",
+      "original_sha256": "89df5a6fa3fc27def18b904fcd83f6c872778fec33dfc58634c9f73449165799",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 5,
+        "groups": 5
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 19,
+          "current_endif": 20,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SCCSID",
+              "original_line": 17,
+              "current_line": 17,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 28,
+          "current_endif": 31,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SEGMENTATION",
+              "original_line": 21,
+              "current_line": 23,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 56,
+          "current_endif": 55,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 48,
+              "current_line": 52,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 60,
+          "current_endif": 62,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(NTVDM) && defined(MONITOR)",
+              "original_line": 58,
+              "current_line": 59,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 153,
+          "current_endif": 70,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 64,
+              "current_line": 67,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_bsic.c",
+      "current_sha256": "e5e482a5acfea11e6406060b25f3f2a7630e5d057accc902e80133c44d4340a5",
+      "original_sha256": "f02abb067552707b136e6fa87ac3dd8096a468d3da947699802fd9a1eda29a8b",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 3,
+        "groups": 3,
+        "retained": 1
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 138,
+          "current_endif": 140,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SPC486",
+              "original_line": 136,
+              "current_line": 137,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 307,
+          "current_endif": 311,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "DONT_CLEAR_LDTR_ON_INVALID",
+              "original_line": 303,
+              "current_line": 306,
+              "disposition": "retained",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 305,
+              "current_line": 308,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 336,
+          "current_endif": 343,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SPC486",
+              "original_line": 334,
+              "current_line": 340,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_mem.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_mem.h",
+      "current_sha256": "e9f036f47e780525ca80d0a1af41823f998664b25209dc2d81c5198305fec8f6",
+      "original_sha256": "ed6b66363a1722415a7779879827126bb8ab2fc1df331435c3e587aef5189560",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "groups": {
+        "excluded": 5,
+        "retained": 5,
+        "groups": 5
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 34,
+          "current_endif": 38,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 25,
+              "current_line": 25,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 28,
+              "current_line": 28,
+              "disposition": "retained",
+              "children": [
+                {
+                  "original_endif": 33,
+                  "current_endif": 36,
+                  "arms": [
+                    {
+                      "kind": "ifdef",
+                      "expression": "BACK_M",
+                      "original_line": 29,
+                      "current_line": 30,
+                      "disposition": "excluded-error",
+                      "children": []
+                    },
+                    {
+                      "kind": "else",
+                      "expression": "",
+                      "original_line": 31,
+                      "current_line": 33,
+                      "disposition": "retained",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "original_endif": 48,
+          "current_endif": 56,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 37,
+              "current_line": 42,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 40,
+              "current_line": 45,
+              "disposition": "retained",
+              "children": [
+                {
+                  "original_endif": 47,
+                  "current_endif": 54,
+                  "arms": [
+                    {
+                      "kind": "ifdef",
+                      "expression": "BACK_M",
+                      "original_line": 41,
+                      "current_line": 47,
+                      "disposition": "excluded-error",
+                      "children": []
+                    },
+                    {
+                      "kind": "else",
+                      "expression": "",
+                      "original_line": 44,
+                      "current_line": 50,
+                      "disposition": "retained",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "original_endif": 75,
+          "current_endif": 76,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 53,
+              "current_line": 62,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 65,
+              "current_line": 65,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_oprnd.h",
+      "current_sha256": "74a76416d33546ff0d2fd718eeecf07d5e30c19ef113f0a76678b69cbeb8326a",
+      "original_sha256": "d7b6cf24845a42b42246cb8ae2c41b7bbeda398c0da4cb51cab2620e3938619e",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "groups": {
+        "excluded": 3,
+        "retained": 3,
+        "groups": 3
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 710,
+          "current_endif": 724,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 704,
+              "current_line": 717,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 707,
+              "current_line": 720,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 758,
+          "current_endif": 774,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 752,
+              "current_line": 767,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 755,
+              "current_line": 770,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1060,
+          "current_endif": 1078,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 1054,
+              "current_line": 1071,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 1057,
+              "current_line": 1074,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_reg.c",
+      "current_sha256": "72b3f8a37ccdd92bb7955cec625e10a31d9743d95c8534ff9acf30952f8ac946",
+      "original_sha256": "54bac68daf938cc40dc69fb2b4277f7ae535daebea6a8a5a70f3113d30caa48c",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 4,
+        "retained": 1,
+        "groups": 4
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 53,
+          "current_endif": 49,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 39,
+              "current_line": 43,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 51,
+              "current_line": 46,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1251,
+          "current_endif": 1210,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SPC486",
+              "original_line": 1209,
+              "current_line": 1207,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1429,
+          "current_endif": 1381,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SPC486",
+              "original_line": 1417,
+              "current_line": 1378,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1615,
+          "current_endif": 1512,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SPC486",
+              "original_line": 1555,
+              "current_line": 1509,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_stack.c",
+      "current_sha256": "8460b74a7ff1e6d654c5d5561ab325dfdd46f3eb1cb3bdd572c76fbdcb2f0177",
+      "original_sha256": "a038c8e79688b5e7430e3a9baf0c5e11848c4d2de89584ae71a4209c7ed54292",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 6,
+        "groups": 6,
+        "retained": 1
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 36,
+          "current_endif": 34,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "defined(PIG) && !defined(PROD)",
+              "original_line": 30,
+              "current_line": 31,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 308,
+          "current_endif": 262,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 260,
+              "current_line": 259,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 343,
+          "current_endif": 300,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG_DONT_CHECK_OTHER_WORD_ON_STACK",
+              "original_line": 341,
+              "current_line": 297,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 386,
+          "current_endif": 308,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 347,
+              "current_line": 305,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 464,
+          "current_endif": 390,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SPC486",
+              "original_line": 460,
+              "current_line": 384,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 462,
+              "current_line": 387,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 678,
+          "current_endif": 567,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 637,
+              "current_line": 564,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\btrace.c",
+      "current_sha256": "2c1465908bdefee80bf1394a313efa6168697e14e7cc2f11d8dd05836f473adb",
+      "original_sha256": "5a19a8cf73bd5c06c47bf3292189c8989bc970933bb4968336580f4be0028e3f",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 3,
+        "groups": 3
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 18,
+          "current_endif": 19,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SCCSID",
+              "original_line": 16,
+              "current_line": 16,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 27,
+          "current_endif": 30,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SEGMENTATION",
+              "original_line": 20,
+              "current_line": 22,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 193,
+          "current_endif": 54,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 46,
+              "current_line": 51,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\dasm.c",
+      "current_sha256": "1fbe2c8970dc308d6145dd37de69b7300425bd276eab93dab21946e9bbf1dbb3",
+      "original_sha256": "6f90249d51eee69af65f59de138f915dc05af3a67b7bb529ea33596c04888b9b",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 2,
+        "groups": 2
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 30,
+          "current_endif": 31,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SEGMENTATION",
+              "original_line": 23,
+              "current_line": 23,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 2947,
+          "current_endif": 40,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 34,
+              "current_line": 37,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "held": {
+    "excluded error line missing": 89,
+    "retained-only group needs context proof": 145,
+    "group count differs": 61,
+    "group selector or alternatives differ": 3,
+    "continuation line not explicit": 1,
+    "retained leaf differs": 3
+  },
+  "context": "Product graph observations and existing error-only unsupported arms; diagnostic line anchors changed in this batch, with no intended selected-logic changes."
+}

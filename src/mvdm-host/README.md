@@ -2743,3 +2743,7 @@ Evidence: ../../artifacts/mvdm-audit/s13-r665-guard-line-audit.json.
 MVDM-HOST-DIV-747: restore original diagnostic line mappings for existing
 excluded compound and profile arms in nine sources. Other conditions remain
 under review. Evidence: ../../artifacts/mvdm-audit/s13-r666-guard-line-audit.json.
+
+MVDM-HOST-DIV-748: restore original diagnostic and continuation mappings in
+ten source files after recursive condition-tree comparison. Evidence:
+../../artifacts/mvdm-audit/s13-r668-tree-anchor-batch.json.

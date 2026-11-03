@@ -2,18 +2,20 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 734,
+  "completed_files": 744,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dbg\\dbg.c",
-      "current_sha256": "69514c24b73bc17af7ea3f3499085e929720d5bc3ebce287072ea174018e5110",
+      "current_sha256": "f5da99382a421b548c54b2e1796b864a80a2f15e19d4109b3bfa809f889b380f",
       "original_sha256": "5a3a207eff1570908e270c737d12fb40fe66097895063136d17fe6b971494b90",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "partial_evidence": "s13-r668-tree-anchor-batch.json",
+      "evidence": "s13-r668-tree-review.json"
     },
     {
       "path": "src/mvdm-host/dos/command/cmd.c",
@@ -1304,13 +1306,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/bios/cntlbop.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cntlbop.c",
-      "current_sha256": "00be947d2e0fedd9f801e2911ffd7ef2362a92ccda2aebc7266a15ddf6c38234",
+      "current_sha256": "812e8edc8bf1d70942c47990a3536865a2ca681d0ab5be0bff122d29980550db",
       "original_sha256": "c65121f592f91efbea0db0b3282f3252f4a58a4a87a281570ee3a0e50686cc87",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "partial_evidence": "s13-r668-tree-anchor-batch.json",
+      "evidence": "s13-r668-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
@@ -1337,13 +1341,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/bios/ill_bop.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\ill_bop.c",
-      "current_sha256": "7da13052ec8196f223a13436d148111096c5a1f272ce3e377374e904ce73607d",
+      "current_sha256": "6ec95ec46d9c6511b19c4e3338025be57ebdd3f289861f9be050e3cf29e95a0c",
       "original_sha256": "89df5a6fa3fc27def18b904fcd83f6c872778fec33dfc58634c9f73449165799",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "partial_evidence": "s13-r668-tree-anchor-batch.json",
+      "evidence": "s13-r668-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
@@ -1809,13 +1815,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_bsic.c",
-      "current_sha256": "c8db065db5dc69f0976517ae6c079335214c4f3c801ff805e79582419b334d91",
+      "current_sha256": "e5e482a5acfea11e6406060b25f3f2a7630e5d057accc902e80133c44d4340a5",
       "original_sha256": "f02abb067552707b136e6fa87ac3dd8096a468d3da947699802fd9a1eda29a8b",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "partial_evidence": "s13-r668-tree-anchor-batch.json",
+      "evidence": "s13-r668-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.h",
@@ -1934,14 +1942,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_mem.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_mem.h",
-      "current_sha256": "37e70794f3b41595c8555060cec32aaf57dbc89fc48761a6f72b0bfb833ac6fa",
+      "current_sha256": "e9f036f47e780525ca80d0a1af41823f998664b25209dc2d81c5198305fec8f6",
       "original_sha256": "ed6b66363a1722415a7779879827126bb8ab2fc1df331435c3e587aef5189560",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r642-guard-line-audit.json"
+      "status": "completed-original-conditional-tree",
+      "partial_evidence": "s13-r668-tree-anchor-batch.json",
+      "evidence": "s13-r668-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_mul64.c",
@@ -1990,13 +1999,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_oprnd.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_oprnd.h",
-      "current_sha256": "810a513084253fe8d93f3e23e1c059240a254f0765b984704797756286b20d0b",
+      "current_sha256": "74a76416d33546ff0d2fd718eeecf07d5e30c19ef113f0a76678b69cbeb8326a",
       "original_sha256": "d7b6cf24845a42b42246cb8ae2c41b7bbeda398c0da4cb51cab2620e3938619e",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "partial_evidence": "s13-r668-tree-anchor-batch.json",
+      "evidence": "s13-r668-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
@@ -2048,13 +2059,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_reg.c",
-      "current_sha256": "42050a2cfe35ce35d6a713c1c5de606eebbf436f75a2142381d47a3c0e3fee50",
+      "current_sha256": "72b3f8a37ccdd92bb7955cec625e10a31d9743d95c8534ff9acf30952f8ac946",
       "original_sha256": "54bac68daf938cc40dc69fb2b4277f7ae535daebea6a8a5a70f3113d30caa48c",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "partial_evidence": "s13-r668-tree-anchor-batch.json",
+      "evidence": "s13-r668-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.h",
@@ -2095,13 +2108,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_stack.c",
-      "current_sha256": "a2dca4afd750314d4f79311ca8757a595dcabbd1e3312e27e5b96b292aa1ff20",
+      "current_sha256": "8460b74a7ff1e6d654c5d5561ab325dfdd46f3eb1cb3bdd572c76fbdcb2f0177",
       "original_sha256": "a038c8e79688b5e7430e3a9baf0c5e11848c4d2de89584ae71a4209c7ed54292",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "partial_evidence": "s13-r668-tree-anchor-batch.json",
+      "evidence": "s13-r668-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.h",
@@ -5058,24 +5073,28 @@
     {
       "path": "src/mvdm-host/softpc.new/base/debug/btrace.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\btrace.c",
-      "current_sha256": "642b66e245dce864a26b712ac6a7296a6a9d732a1d4466c26bfe225c4ed1254f",
+      "current_sha256": "2c1465908bdefee80bf1394a313efa6168697e14e7cc2f11d8dd05836f473adb",
       "original_sha256": "5a19a8cf73bd5c06c47bf3292189c8989bc970933bb4968336580f4be0028e3f",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "partial_evidence": "s13-r668-tree-anchor-batch.json",
+      "evidence": "s13-r668-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\dasm.c",
-      "current_sha256": "6a6b5cde9247ba276b58aa684555ef1f0a305f3d68142c313d15701b8d8be2b7",
+      "current_sha256": "1fbe2c8970dc308d6145dd37de69b7300425bd276eab93dab21946e9bbf1dbb3",
       "original_sha256": "6f90249d51eee69af65f59de138f915dc05af3a67b7bb529ea33596c04888b9b",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "partial_evidence": "s13-r668-tree-anchor-batch.json",
+      "evidence": "s13-r668-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/debug/debuggng.c",

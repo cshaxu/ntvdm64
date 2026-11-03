@@ -31,6 +31,7 @@ PURPOSE			: Supply a BOP FF function for implementation
 */
 
 #ifdef SEGMENTATION
+#line 34
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -38,6 +39,7 @@ PURPOSE			: Supply a BOP FF function for implementation
 
 
 #endif
+#line 41
 
 #include TypesH
 #include "xt.h"
@@ -47,32 +49,45 @@ PURPOSE			: Supply a BOP FF function for implementation
 #include "host_bop.h"
 
 #ifdef SCCSID
+#line 50
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
+#line 52
 
 #ifdef SECURE
+#line 54
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
 #endif
+#line 56
 
 #if defined(RUNUX)
+#line 58
 #error DIVERGENCE MVDM-HOST-DIV-529: RUNUX platform branch is not selected; see mirror register.
 #endif
+#line 60
 
 static control_bop_array base_bop_table[] = 
 {
 #ifdef SECURE
+#line 64
 #error DIVERGENCE MVDM-HOST-DIV-530: SECURE platform branch is not selected; see mirror register.
 #endif
+#line 66
 #if defined(RUNUX)
+#line 67
 #error DIVERGENCE MVDM-HOST-DIV-529: RUNUX platform branch is not selected; see mirror register.
 #endif
+#line 69
 #if defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)
+#line 70
 #error Unsupported excluded original configuration
 #endif /* DUMB_TERMINAL && !NO_SERIAL_UIF */
 #line 81
 #ifndef NTVDM
+#line 82
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 84
      0,	NULL
 };
 

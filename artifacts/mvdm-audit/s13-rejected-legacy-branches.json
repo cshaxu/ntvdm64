@@ -868,7 +868,9 @@
     "removed_body_sha256": "50a152f20adf7bed95f3489f665b11d73df31e8b3941e2d7c3a4c097305b5dda",
     "removed_body_lines": 6,
     "after_sha256": "b7a1b588e189265f5023a260f8df7118263962de3f87a498e57be997f13631bd",
-    "final_sha256": "00be947d2e0fedd9f801e2911ffd7ef2362a92ccda2aebc7266a15ddf6c38234"
+    "final_sha256": "00be947d2e0fedd9f801e2911ffd7ef2362a92ccda2aebc7266a15ddf6c38234",
+    "current_line": 33,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r668-tree-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
@@ -939,7 +941,9 @@
     "removed_body_sha256": "7ecd3e1a3425e8950ed7040d50637d49bc0b19ca17dd1cbc42b81858d2f90eb4",
     "removed_body_lines": 6,
     "after_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
-    "final_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06"
+    "final_sha256": "e7ce4347f850fcfb359ec1c5265a9790789e6741cb2e50f5ecd1f88ebd0d9e06",
+    "current_line": 23,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r668-tree-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
@@ -1124,7 +1128,9 @@
     "removed_body_sha256": "ecad3d922d49b60ba9a850f9e7def8ef93a9c5e360c16d17e65d96229fc8008f",
     "removed_body_lines": 6,
     "after_sha256": "92372fa13f5b16fa698b91839fe5e8e92b64abad3d973e1f2e65df0f40f1d131",
-    "final_sha256": "92372fa13f5b16fa698b91839fe5e8e92b64abad3d973e1f2e65df0f40f1d131"
+    "final_sha256": "92372fa13f5b16fa698b91839fe5e8e92b64abad3d973e1f2e65df0f40f1d131",
+    "current_line": 22,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r668-tree-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/debug/dasm.c",
@@ -1137,7 +1143,9 @@
     "removed_body_sha256": "6a615fcb03ac7a7cae28d009ccee79ea6e7048ccf4030e9eb4c64b664248e4d7",
     "removed_body_lines": 6,
     "after_sha256": "97faea60eb6e496a092b1e892c980a87a4888802927d9f7ffc2b7abf20e8549a",
-    "final_sha256": "97faea60eb6e496a092b1e892c980a87a4888802927d9f7ffc2b7abf20e8549a"
+    "final_sha256": "97faea60eb6e496a092b1e892c980a87a4888802927d9f7ffc2b7abf20e8549a",
+    "current_line": 23,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r668-tree-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/debug/trace.c",

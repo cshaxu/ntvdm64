@@ -187,6 +187,7 @@ BOOL SendVDMEvent(
  * Hopefully this is OK because it is fast.
  */
 #ifdef i386
+#line 190
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 192
@@ -200,6 +201,7 @@ VOID GetNormalContext(
     LPDWORD             lpdwExceptionParams,
     WORD                wEventType,
 #ifdef i386
+#line 201
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 203
@@ -241,6 +243,7 @@ VOID GetNormalContext(
     lpvcContext->EFlags = 0;            // BUGBUG - We need the 16-bit's Flags
 
 #ifdef i386
+#line 240
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 266
@@ -282,6 +285,7 @@ void SegmentLoad(
         SEGMENT_NOTE    se;
         UINT            length;
 #ifdef i386
+#line 303
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
 #line 308
@@ -325,6 +329,7 @@ void SegmentMove(
         VDMINTERNALINFO viInfo;
         SEGMENT_NOTE    se;
 #ifdef i386
+#line 348
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
 #line 353
@@ -353,6 +358,7 @@ void SegmentFree(
         VDMINTERNALINFO viInfo;
         SEGMENT_NOTE    se;
 #ifdef i386
+#line 378
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
 #line 383
@@ -384,6 +390,7 @@ void ModuleLoad(
         SEGMENT_NOTE    se;
         UINT            length;
 #ifdef i386
+#line 411
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
 #line 416
@@ -429,6 +436,7 @@ void ModuleSegmentMove(
         SEGMENT_NOTE    se;
         UINT            length;
 #ifdef i386
+#line 458
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
 #line 463
@@ -472,6 +480,7 @@ void ModuleFree(
         SEGMENT_NOTE    se;
         UINT            length;
 #ifdef i386
+#line 503
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
 #line 508
@@ -512,6 +521,7 @@ BOOL SingleStep(
         VDMCONTEXT      vcContext;
         VDMINTERNALINFO viInfo;
 #ifdef i386
+#line 545
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
 #line 550
@@ -523,6 +533,7 @@ BOOL SingleStep(
         vcContext.SegSs  = (ULONG)pTFrame->wSS;
 
 #ifdef i386
+#line 558
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 568
@@ -541,6 +552,7 @@ BOOL SingleStep(
         fResult = SendVDMEvent( EventParams );
 
 #ifdef i386
+#line 582
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 590
@@ -554,6 +566,7 @@ BOOL SingleStep(
         pTFrame->wSS = (WORD)vcContext.SegSs;
 
 #ifdef i386
+#line 599
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 624
@@ -587,6 +600,7 @@ BOOL Breakpoint(
         VDMCONTEXT      vcContext;
         VDMINTERNALINFO viInfo;
 #ifdef i386
+#line 653
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
 #line 658
@@ -598,6 +612,7 @@ BOOL Breakpoint(
         vcContext.SegSs  = (ULONG)pTFrame->wSS;
 
 #ifdef i386
+#line 666
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 677
@@ -617,6 +632,7 @@ BOOL Breakpoint(
         fResult = SendVDMEvent( EventParams );
 
 #ifdef i386
+#line 692
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 700
@@ -630,6 +646,7 @@ BOOL Breakpoint(
         pTFrame->wSS = (WORD)vcContext.SegSs;
 
 #ifdef i386
+#line 709
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 734
@@ -661,6 +678,7 @@ BOOL GPFault(
     VDMCONTEXT      vcContext;
     VDMINTERNALINFO viInfo;
 #ifdef i386
+#line 761
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
 #line 763
@@ -668,6 +686,7 @@ BOOL GPFault(
     fResult = FALSE;        // Default to Event not handled
 
 #ifdef i386
+#line 767
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
 #line 771
@@ -680,6 +699,7 @@ BOOL GPFault(
     vcContext.SegSs = (ULONG)pFFrame->wSS;
 
 #ifdef i386
+#line 780
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 797
@@ -760,6 +780,7 @@ BOOL GPFault(
     }
 
 #ifdef i386
+#line 873
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 881
@@ -773,6 +794,7 @@ BOOL GPFault(
     pFFrame->wSS = (WORD)vcContext.SegSs;
 
 #ifdef i386
+#line 890
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 925
@@ -806,6 +828,7 @@ BOOL DivOverflow(
         VDMCONTEXT      vcContext;
         VDMINTERNALINFO viInfo;
 #ifdef i386
+#line 954
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
 #line 959
@@ -817,6 +840,7 @@ BOOL DivOverflow(
         vcContext.SegSs = (ULONG)pTFrame->wSS;
 
 #ifdef i386
+#line 967
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 977
@@ -835,6 +859,7 @@ BOOL DivOverflow(
         fResult = SendVDMEvent( EventParams );
 
 #ifdef i386
+#line 991
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 999
@@ -848,6 +873,7 @@ BOOL DivOverflow(
         pTFrame->wSS = (WORD)vcContext.SegSs;
 
 #ifdef i386
+#line 1008
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 1033
@@ -890,6 +916,7 @@ BOOL DllStart(
         VDMINTERNALINFO viInfo;
         IMAGE_NOTE      im;
 #ifdef i386
+#line 1071
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
 #line 1076
@@ -902,6 +929,7 @@ BOOL DllStart(
         vcContext.SegCs = (ULONG)pNDFrame->wCS;
 
 #ifdef i386
+#line 1085
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 1094
@@ -953,6 +981,7 @@ BOOL DllStart(
         vcContext.Esp -= sizeof(NDFRAME16);
 
 #ifdef i386
+#line 1141
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 1149
@@ -966,6 +995,7 @@ BOOL DllStart(
         setSS( (WORD)vcContext.SegSs );
 
 #ifdef i386
+#line 1158
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 1182
@@ -1009,6 +1039,7 @@ BOOL TaskStop(
         VDMINTERNALINFO viInfo;
         IMAGE_NOTE      im;
 #ifdef i386
+#line 1221
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
 #line 1226
@@ -1314,6 +1345,7 @@ VOID DBGNotifyNewTask(
         VDMINTERNALINFO viInfo;
         IMAGE_NOTE      im;
 #ifdef i386
+#line 1528
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #endif
 #line 1533
@@ -1327,6 +1359,7 @@ VOID DBGNotifyNewTask(
         vcContext.SegCs = (ULONG)pNTFrame->wCS;
 
 #ifdef i386
+#line 1543
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 1560
@@ -1387,6 +1420,7 @@ VOID DBGNotifyNewTask(
         vcContext.Esp -= sizeof(NTFRAME16) + uFrameSize;
 
 #ifdef i386
+#line 1616
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 1624
@@ -1400,6 +1434,7 @@ VOID DBGNotifyNewTask(
         setSS( (WORD)vcContext.SegSs );
 
 #ifdef i386
+#line 1633
 #error DIVERGENCE MVDM-HOST-DIV-588: historical i386 debugger branch is not selected
 #else
 #line 1667

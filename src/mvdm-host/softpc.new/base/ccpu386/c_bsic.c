@@ -306,6 +306,7 @@ IFN2(
 #ifndef DONT_CLEAR_LDTR_ON_INVALID
       if ( GET_LDT_SELECTOR() <= 3 || offset + 7 > GET_LDT_LIMIT() )
 #else
+#line 306
 #error Unsupported excluded original configuration
 #endif /* DONT_CLEAR_LDTR_ON_INVALID */
 #line 308

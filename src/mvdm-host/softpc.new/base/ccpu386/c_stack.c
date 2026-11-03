@@ -257,8 +257,10 @@ IFN1(
    }
 
 #ifdef PIG
+#line 261
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
+#line 309
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* Push word onto the stack.                                          */
@@ -301,9 +303,10 @@ IFN1(
    }
 
 #ifdef PIG
+#line 348
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
-#line 300
+#line 387
 
 /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 /* Temporary Pop word or double word from the stack.                  */
@@ -559,6 +562,8 @@ IFN2(
    }
 
 #ifdef PIG
+#line 638
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
+#line 679
 

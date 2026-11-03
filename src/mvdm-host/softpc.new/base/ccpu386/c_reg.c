@@ -41,11 +41,13 @@ Provide External Interface to CPU Registers.
  * modern host ABIs check it instead of assuming an `int` call contract. */
 #include <stdio.h>
 #ifdef PIG
+#line 40
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else /* PIG */
-#line 56
+#line 52
 #define	AR_FIXUP
 #endif /* PIG */
+#line 54
 
 /*
    Prototype our internal functions.
