@@ -93,6 +93,7 @@ ShowIt:
 
 #line 1056
 #ifdef SYSMODALWINDOWS
+#line 1057
 #error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
 #endif
 #line 1066

@@ -1,0 +1,11 @@
+{
+  "scope": "Existing excluded USER branches and their selected alternatives; align diagnostics with the pinned original while retaining all product adapters and selected statements.",
+  "files": [
+    { "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c", "original_if_lines": [30, 95, 143], "original_endif_lines": [32, 115, 161], "guard": "SYSMODALWINDOWS" },
+    { "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c", "original_if_lines": [154, 175, 182], "original_endif_lines": [156, 179, 191], "guard": "DEBUG", "note": "Original selected #else begins at line 178; corrected existing stale anchors." },
+    { "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c", "original_if_lines": [245, 295], "original_endif_lines": [248, 298], "guard": "LATER" },
+    { "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c", "original_if_lines": [55, 279], "original_else_lines": [63, 284], "original_endif_lines": [65, 286], "guards": ["KANJI", "LATER"] },
+    { "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c", "original_if_lines": [122, 156], "original_else_lines": [129, 158], "original_endif_lines": [146, 160], "guards": ["NEVER", "KOREA"] }
+  ],
+  "status": "r593 cached product builds passed. The five files' condition review is recorded in s13-r594-user-condition-complete.json."
+}

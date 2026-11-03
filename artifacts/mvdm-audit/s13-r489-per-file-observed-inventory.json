@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 576,
+  "completed_files": 581,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -10870,13 +10870,14 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/btnctl.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\btnctl.c",
-      "current_sha256": "c4b44a31b4b004f93aa05f0aa57c457fe172f018abc9fbd337cc8eff9b8f1e72",
+      "current_sha256": "fa5f23fbd9059f2a023c89532bfd53df0b18e39217c3fea5ebfe8b468eed2b93",
       "original_sha256": "579205cfbd7da6cf97e05235c74b3a221415dd07ae6f73c30649c9bf9e06ef2e",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-user-conditions",
+      "evidence": "s13-r594-user-condition-complete.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
@@ -10987,13 +10988,14 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/dlgend.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgend.c",
-      "current_sha256": "19235c8575eab883c42cea33000e0180043d1d08682fbf9b3afa5aa65ba65efc",
+      "current_sha256": "4d37686b8c767ce4a1dc4e13e0ec011aba566c1e91e3f0febfede5ad2de53ba2",
       "original_sha256": "191c9ce7dce323873f5ef40f74141950940f6723e14d48b5fa09ca5517dde6cd",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-user-conditions",
+      "evidence": "s13-r594-user-condition-complete.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
@@ -11020,24 +11022,26 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgrc.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dlgmgrc.c",
-      "current_sha256": "02526a4443ceeb0340cd5023d48f2d4e68cd65d458b59c994ff6acaef1605383",
+      "current_sha256": "814ab33ca5b237e06d7277c274f304e5ce8298671d2e80505c453d94192f8ad5",
       "original_sha256": "678d2cd4b79a15a79e6c0257b4bd93ad69fa7be95a513b627565490256cb1afc",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-user-conditions",
+      "evidence": "s13-r594-user-condition-complete.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/dmmnem.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\dmmnem.c",
-      "current_sha256": "e07fca4e81695c25309d179e0c711682d2c39078ca7c5112c85eb83bcbfe69cc",
+      "current_sha256": "285b97ea1a8f6e6328b4d251e8c5a2d7936eeea9e01d979d9c471373f949da4f",
       "original_sha256": "638efc31ffd622ba31e16672d1418291c3e1291b6d0c57f31d08c32d45fa1720",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-user-conditions",
+      "evidence": "s13-r594-user-condition-complete.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/draw.c",
@@ -11130,13 +11134,14 @@
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/edslrare.c",
       "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\edslrare.c",
-      "current_sha256": "f4ca5b26d71987f40bcbe9a66d90721780be45f932fc5dc6d8a24b6777a40f7c",
+      "current_sha256": "ad4c7aeb3dd736b89ae9d673057ab9169a41159e3ed4c223d81a96ee950eb2a8",
       "original_sha256": "b33dea4aa66b7713b651b259a37d7f993802f40c042514122b73580baec4f0df",
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\call-boundaries\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-user-conditions",
+      "evidence": "s13-r594-user-condition-complete.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/globals.h",

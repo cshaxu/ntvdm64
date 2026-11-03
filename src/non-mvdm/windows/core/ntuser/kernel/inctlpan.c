@@ -77,6 +77,7 @@ CONST WORD sysBmpStyles[OBI_COUNT][2] = {
 };
 #line 101
 #ifdef LATER
+#line 102
 #error Excluded original unsupported USER control-panel code
 #endif
 #line 273

@@ -1,0 +1,8 @@
+{
+  "path": "src/non-mvdm/base/ntos/rtl/time.c",
+  "original": "O:/repos.external/OpenNT/base/ntos/rtl/time.c",
+  "original_guard": { "if": 50, "first_body": 51, "endif": 53, "following": 54 },
+  "original_selected_function": { "declaration": 1222, "name_line": 1223, "name": "RtlSecondsSince1970ToTime" },
+  "change": "Align the excluded kernel allocation guard, following logical position and retained original conversion declaration with the original physical lines. Preserve the existing standalone RTL selection and body.",
+  "status": "r593 cached product builds passed. Partial file audit; no assertion of equivalence for nonconditional content."
+}

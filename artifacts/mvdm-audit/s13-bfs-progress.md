@@ -3967,3 +3967,7 @@ Queue r366 restores original input.c first-depth NEVER exclusion at file scope (
 - r587: completed the wmsg16.h conditional review: both original DEBUG guards and diagnostic anchors match, with unsupported bodies excluded. Evidence: s13-r587-wmsg16-complete.json.
 
 - r586 delivery: all x86, x86-extra and x64 cached build steps passed. Complete ten-image package staged and published to both release and O:/winnt/system32 with candidate hashes verified. Seven images are byte-identical and three differ only in independently parsed PE/debug timestamps versus the previously published package, so prior Full 17/17 was reused under owner instruction. Evidence: s13-r586-build-image-compare.json and s13-r586-publication.json.
+
+- r594: completed per-file conditional review for dlgend.c, btnctl.c, dlgmgrc.c, dmmnem.c and edslrare.c: all original conditional directives and anchors match, excluded bodies are error-only, and selected else bodies match original. Nonconditional adapter differences remain separately registered. Evidence: s13-r594-user-condition-complete.json.
+
+- r593 delivery: all x86, x86-extra and x64 cached build steps passed. Complete ten-image package staged and published to both release and O:/winnt/system32 with candidate hashes verified. Six images are byte-identical and four differ only in independently parsed PE/debug timestamps versus the previously published package, so prior Full 17/17 was reused under owner instruction. Evidence: s13-r593-build-image-compare.json and s13-r593-publication.json.

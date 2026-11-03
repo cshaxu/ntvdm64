@@ -147,6 +147,7 @@ BOOL ClientDrawState(
 #endif /* WOW_ORIGINAL_STATE_DRAWING */
 #line 209
 #if 0 // This will get turned on if/when we change GrayString to tie
+#line 210
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #ifdef WOW_ORIGINAL_STATE_DRAWING
@@ -187,6 +188,7 @@ BOOL ClientDrawState(
 #endif /* WOW_ORIGINAL_STATE_DRAWING */
 #line 251
 #if 0
+#line 252
 #error DIVERGENCE OPENNT-HOST-128: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
 #ifdef WOW_ORIGINAL_STATE_DRAWING

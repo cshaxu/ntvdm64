@@ -121,9 +121,12 @@ BOOL SLUndo(
         SLSetSelection(ped, ped->ichInsStart, ped->ichInsEnd);
         ped->ichInsStart = ped->ichInsEnd = (ICH)-1;
 
+#line 122
 #ifdef NEVER
+#line 123
 #error DIVERGENCE OPENNT-HOST-131: NEVER branch is not selected; see mirror register.
 #else
+#line 130
 
         /*
          * Delete the selected text and save it in undo buff.
@@ -141,6 +144,7 @@ BOOL SLUndo(
             SLSetSelection(ped, ichDeleted, ichDeleted);
         }
 #endif
+#line 147
     }
 
     if (fDelete) {
@@ -150,11 +154,15 @@ BOOL SLUndo(
          * Insert deleted chars. Set the selection to the inserted text.
          */
         SLSetSelection(ped, ichDeleted, ichDeleted);
+#line 156
 #ifdef KOREA
+#line 157
 #error DIVERGENCE OPENNT-HOST-132: KOREA branch is not selected; see mirror register.
 #else
+#line 159
         SLInsertText(ped, hDeletedText, cchDeleted);
 #endif
+#line 161
         UserGlobalFree(hDeletedText);
         if (!IsWindow(hwndSave))
             return FALSE;

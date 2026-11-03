@@ -1,0 +1,260 @@
+{
+  "scope": "One WOW header; add original physical-line anchors to existing excluded NULLSTRUCT arms; selected statements unchanged. Original nested groups under excluded DBG are not restored.",
+  "records": [
+    {
+      "path": "src/mvdm-host/inc/wowusr.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowusr.h",
+      "before_sha256": "e1b82597a5dc8f8435c067600592eb8b22b39914c8bf6ecc3f2b0428764f9378",
+      "after_sha256": "ce4f2f8a6d337d962cffc6b4c99aa6e593856e32430335878a6798475e48abd3",
+      "guards": [
+        {
+          "if": 529,
+          "following": 534,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 672,
+          "following": 677,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 726,
+          "following": 731,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 805,
+          "following": 810,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 811,
+          "following": 816,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 924,
+          "following": 929,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 986,
+          "following": 991,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1096,
+          "following": 1101,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1123,
+          "following": 1128,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1146,
+          "following": 1151,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1219,
+          "following": 1224,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1240,
+          "following": 1245,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1271,
+          "following": 1276,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1282,
+          "following": 1287,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1288,
+          "following": 1293,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1343,
+          "following": 1348,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1349,
+          "following": 1354,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1380,
+          "following": 1385,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1396,
+          "following": 1401,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1402,
+          "following": 1407,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1408,
+          "following": 1413,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1441,
+          "following": 1446,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1452,
+          "following": 1457,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1464,
+          "following": 1469,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1503,
+          "following": 1508,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1554,
+          "following": 1559,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1560,
+          "following": 1565,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1634,
+          "following": 1639,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1665,
+          "following": 1670,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1671,
+          "following": 1676,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1788,
+          "following": 1793,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1807,
+          "following": 1812,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1825,
+          "following": 1830,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1925,
+          "following": 1930,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 1951,
+          "following": 1956,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 2140,
+          "following": 2145,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 2271,
+          "following": 2276,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 2296,
+          "following": 2301,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 2824,
+          "following": 2829,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 2842,
+          "following": 2847,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        },
+        {
+          "if": 2886,
+          "following": 2891,
+          "replaced_existing_following_anchor": false,
+          "replaced_existing_prior_anchor": false
+        }
+      ]
+    }
+  ],
+  "status": "r593 cached product builds passed; per-file original condition review remains partial."
+}

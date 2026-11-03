@@ -55,11 +55,15 @@ int FindMnemChar(
                 else if (chnext == ch)
                     return 0x01;
                 else {
+#line 55
 #ifdef KANJI
+#line 56
 #error DIVERGENCE OPENNT-HOST-132: KANJI branch is not selected; see mirror register.
 #else
+#line 64
                     return 0x00;
 #endif
+#line 66
                 }
             }
         }
@@ -313,11 +317,15 @@ PWND xxxGotoNextMnem(
                     /*
                      * Delay
                      */
+#line 279
 #ifdef LATER
+#line 280
 #error DIVERGENCE OPENNT-HOST-131: LATER branch is not selected; see mirror register.
 #else
+#line 285
                     Sleep(1);
 #endif
+#line 287
 
                     /*
                      * Un-Flash it.

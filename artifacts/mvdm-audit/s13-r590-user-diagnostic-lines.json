@@ -1,0 +1,9 @@
+{
+  "scope": "Original unsupported USER conditions; retain existing original guards and selected local adapters while locating errors at original physical lines.",
+  "files": [
+    { "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c", "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/dlgmgr.c", "guard": 1056, "error": 1057, "following": 1066 },
+    { "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c", "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/mngrayc.c", "guards": [209, 251], "errors": [210, 252] },
+    { "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c", "original": "O:/repos.external/OpenNT/windows/core/ntuser/kernel/inctlpan.c", "guard": 101, "error": 102, "following": 273 }
+  ],
+  "limits": "r593 cached product builds passed. No assumption that omitted selected original functions have been recovered; per-file condition review remains partial."
+}

@@ -143,7 +143,9 @@ PWND  _GetChildControl(PWND pwndRoot, PWND pwndChild) {
 PWND _NextSibblingOrAncestor (PWND pwndRoot, PWND pwndStart)
 {
     PWND pwndParent;
+#line 154
 #ifdef DEBUG
+#line 155
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
 #line 157
@@ -165,19 +167,23 @@ PWND _NextSibblingOrAncestor (PWND pwndRoot, PWND pwndStart)
     // Otherwise walk up the parent chain looking for the first window with
     // a WS_EX_CONTROLPARENT parent.
 
+#line 175
 #ifdef DEBUG
+#line 176
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #else
-#line 170
+#line 178
     return
 #endif
 #line 180
         _GetChildControl(pwndRoot, pwndParent);
 
+#line 182
 #ifdef DEBUG
+#line 183
 #error DIVERGENCE OPENNT-HOST-146: DEBUG user profile is not selected
 #endif
-#line 184
+#line 192
 }
 
 PWND _NextControl(

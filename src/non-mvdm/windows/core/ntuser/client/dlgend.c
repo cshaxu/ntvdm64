@@ -21,9 +21,12 @@ BOOL EndDialog(
     PWND pwndOwner;
     HWND hwndOwner;
     BOOL fWasActive = FALSE;
+#line 30
 #ifdef SYSMODALWINDOWS
+#line 31
 #error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
 #endif
+#line 33
 
     if ((pwnd = ValidateHwnd(hwnd)) == NULL) {
         return (0L);
@@ -100,9 +103,12 @@ BOOL EndDialog(
     if (TestWF(pwnd, WFDESTROYED) || (pwnd->fnid & FNID_STATUS_BITS))
         return TRUE;
 
+#line 95
 #ifdef SYSMODALWINDOWS
+#line 96
 #error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
 #endif
+#line 116
 
     /*
      * Don't do any activation unless we were previously active.
@@ -130,9 +136,12 @@ BOOL EndDialog(
         }
     }
 
+#line 143
 #ifdef SYSMODALWINDOWS
+#line 144
 #error DIVERGENCE OPENNT-HOST-133: SYSMODALWINDOWS branch is not selected; see mirror register.
 #endif
+#line 162
 
     /*
      * Make sure the dialog loop will wake and destroy the window.

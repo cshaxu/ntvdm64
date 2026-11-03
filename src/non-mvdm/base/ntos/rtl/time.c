@@ -48,9 +48,10 @@ Revision History:
 #include "ntrtlp.h"
 #line 50
 #if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)
+#line 51
 #error Excluded unsupported kernel RTL time allocation profile
 #endif
-#line 49
+#line 54
 
 /*
  * The standalone redirector needs precisely this exported RTL conversion.
@@ -60,6 +61,7 @@ Revision History:
  */
 #if defined(MVDM_STANDALONE_TIME1970_ONLY)
 
+#line 1222
 VOID
 RtlSecondsSince1970ToTime (
     IN ULONG ElapsedSeconds,
