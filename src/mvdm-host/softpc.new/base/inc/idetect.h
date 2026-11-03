@@ -44,9 +44,10 @@ extern word IdleNoActivity;
 extern word ienabled;
 
 #else
+#line 46
 #error Unsupported excluded original configuration
 #endif
-#line 48
+#line 50
 
 #define IDLE_tick()             idetect(IDLE_TIME_TICK)
 #define IDLE_poll()             idetect(IDLE_KYBD_POLL)

@@ -27,10 +27,13 @@
  */
 
 #ifdef SCCSID
+#line 30
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
+#line 32
 
 #ifdef SEGMENTATION
+#line 34
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -38,6 +41,7 @@
 
 
 #endif
+#line 41
 
 
 /*
@@ -153,8 +157,10 @@ IFN2(FDC_CMD_BLOCK *,command_block,FDC_RESULT_BLOCK *,result_block)
     int ret_stat = SUCCESS;
 
 #ifndef PROD
+#line 156
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 159
 
     if (get_type_cmd(command_block) == FDC_SPECIFY)
     {
@@ -184,8 +190,10 @@ IFN2(FDC_CMD_BLOCK *,command_block,FDC_RESULT_BLOCK *,result_block)
 GLOBAL SHORT gfi_drive_on IFN1(UTINY,drive)
 {
 #ifndef PROD
+#line 188
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 191
 
     /*
      * Route to the correct module.
@@ -197,8 +205,10 @@ GLOBAL SHORT gfi_drive_on IFN1(UTINY,drive)
 GLOBAL SHORT gfi_drive_off IFN1(UTINY,drive)
 {
 #ifndef PROD
+#line 202
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 205
 
     /*
      * Route to the correct module.
@@ -215,8 +225,10 @@ GLOBAL SHORT gfi_reset IFN2(FDC_RESULT_BLOCK *,result_block, UTINY, drive)
      */
 
 #ifndef PROD
+#line 221
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 224
 
     /*
      * Reset the appropriate drive.
@@ -242,8 +254,10 @@ GLOBAL SHORT gfi_reset IFN2(FDC_RESULT_BLOCK *,result_block, UTINY, drive)
 GLOBAL SHORT gfi_high IFN2(UTINY,drive,half_word,datarate)
 {
 #ifndef PROD
+#line 249
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 252
 
     /*
      * Route to the correct module.
@@ -256,8 +270,10 @@ GLOBAL SHORT gfi_high IFN2(UTINY,drive,half_word,datarate)
 GLOBAL SHORT gfi_drive_type IFN1(UTINY,drive)
 {
 #ifndef PROD
+#line 264
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 267
  
     /*
      * Route to the correct module.
@@ -269,8 +285,10 @@ GLOBAL SHORT gfi_drive_type IFN1(UTINY,drive)
 GLOBAL SHORT gfi_change IFN1(UTINY,drive)
 {
 #ifndef PROD
+#line 278
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 281
  
     /*
      * Route to the correct module.
@@ -285,8 +303,10 @@ IFN4(UTINY, hostID, ConfigValues *,vals, NameTable *,table, CHAR *,err)
 {
 	UNUSED(table);
 #ifdef SLAVEPC
+#line 295
 #error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */
+#line 299
 
 	return host_gfi_rdiskette_valid(hostID, vals, err);
 }
@@ -295,8 +315,10 @@ GLOBAL VOID
 gfi_floppy_change IFN2(UTINY, hostID, BOOL, apply)
 {
 #ifdef SLAVEPC
+#line 307
 #error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */
+#line 313
 
 	host_gfi_rdiskette_change(hostID, apply);
 }
@@ -305,8 +327,10 @@ GLOBAL SHORT
 gfi_floppy_active IFN3(UTINY, hostID, BOOL, active, CHAR *,err)
 {
 #ifdef SLAVEPC
+#line 321
 #error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */
+#line 324
 
 	return host_gfi_rdiskette_active(hostID, active, err);
 }
@@ -315,6 +339,7 @@ GLOBAL VOID
 gfi_attach_adapter IFN2(UTINY, adapter, BOOL, attach)
 {
 #ifdef SLAVEPC
+#line 332
 #error DIVERGENCE MVDM-HOST-DIV-528: SLAVEPC platform branch is not selected; see mirror register.
 #endif /* SLAVEPC */
 #line 353
@@ -323,6 +348,7 @@ gfi_attach_adapter IFN2(UTINY, adapter, BOOL, attach)
 }
 
 #ifdef SEGMENTATION
+#line 358
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -330,6 +356,7 @@ gfi_attach_adapter IFN2(UTINY, adapter, BOOL, attach)
 
 
 #endif
+#line 365
 
 /*
  * Initialize the GFI module.  Fill the function table with the GFI

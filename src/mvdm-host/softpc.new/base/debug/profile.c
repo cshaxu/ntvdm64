@@ -39,6 +39,7 @@
 #include "profile.h"
 
 #ifdef PROFILE		/* Don't want this all the time */
+#line 42
 #error Unsupported excluded original configuration
 #else /* PROFILE */
 #line 3325
@@ -46,4 +47,4 @@ GLOBAL void EnableAllEOIs IFN0() { ; }
 GLOBAL void DisableAllEOIs IFN0() { ; }
 GLOBAL void ProcessProfBuffer IFN0() { ; }
 #endif /* PROFILE */
-#line 3302
+#line 3329

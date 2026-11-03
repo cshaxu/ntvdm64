@@ -6,6 +6,7 @@ extern void ega_read_term(void);
 extern void ega_read_routines_update(void);
 extern boolean ega_need_read_op(int);
 #else /* ANSI */
+#line 9
 #error Unsupported excluded original configuration
 #endif /* ANSI */
 #line 14

@@ -1302,7 +1302,9 @@
     "removed_body_sha256": "f5f2b01d7e493e56051c882a6e1a1a4b0ecc3e535e8c931f0d6bb7ff93502704",
     "removed_body_lines": 6,
     "after_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
-    "final_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a"
+    "final_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+    "current_line": 350,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r669-tree-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
@@ -1315,7 +1317,9 @@
     "removed_body_sha256": "0f3ebdd2ea5a0e263dadf1cd139d0555674f04876af16beb0c1c8ef78b47629b",
     "removed_body_lines": 6,
     "after_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
-    "final_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a"
+    "final_sha256": "98520c04cd167ef24424ee53bf27cdf5d57d7b26c67be1d365b65d1ded35994a",
+    "current_line": 35,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r669-tree-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",

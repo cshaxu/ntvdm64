@@ -2747,3 +2747,7 @@ under review. Evidence: ../../artifacts/mvdm-audit/s13-r666-guard-line-audit.jso
 MVDM-HOST-DIV-748: restore original diagnostic and continuation mappings in
 ten source files after recursive condition-tree comparison. Evidence:
 ../../artifacts/mvdm-audit/s13-r668-tree-anchor-batch.json.
+
+MVDM-HOST-DIV-749: restore original diagnostic and continuation mappings in
+ten further sources after recursive condition-tree comparison. Evidence:
+../../artifacts/mvdm-audit/s13-r669-tree-anchor-batch.json.

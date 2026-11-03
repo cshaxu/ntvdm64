@@ -243,6 +243,7 @@ extern EOI_BUFFER_FORMAT **GdpProfileUpdate IPT2 (EOI_BUFFER_FORMAT, *rawDataBuf
 extern void HostEnterProfCritSec IPT0();
 extern void HostLeaveProfCritSec IPT0();
 #else
+#line 246
 #error Unsupported excluded original configuration
 #endif
 #line 249

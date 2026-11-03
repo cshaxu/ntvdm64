@@ -74,6 +74,7 @@ extern void  host_nls_get_msg 		IPT3(int,msg_num,
 #ifdef NTVDM
 #define host_nls_get_msg_no_check host_nls_get_msg
 #else
+#line 77
 #error Unsupported excluded original configuration
 #endif
 #line 81
