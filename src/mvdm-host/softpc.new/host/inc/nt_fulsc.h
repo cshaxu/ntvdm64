@@ -75,8 +75,10 @@
 #define AC_MODE_CONTROL_REG	16
 
 #ifndef PROD
+#line 78
 #error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 #else /* !PROD */
+#line 98
 #define FullScreenTrace0(s)
 #define FullScreenTrace1(s ,p0)
 #define FullScreenTrace2(s, p0, p1)
@@ -87,6 +89,7 @@
 #define FullScreenTrace7(s, p0, p1, p2, p3, p4, p5, p6)
 #define FullScreenTrace8(s, p0, p1, p2, p3, p4, p5, p6, p7)
 #endif /* !PROD */
+#line 108
 
 /*
  * ==========================================================================

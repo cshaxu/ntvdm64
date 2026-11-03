@@ -855,8 +855,10 @@ void fl_disk_type IFN1(int, drive)
 	setCF(0);
 
 #ifndef PROD
+#line 862
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 869
 
 }
 
@@ -1594,8 +1596,10 @@ LOCAL void setup_state IFN1(int, drive)
 	{
 		sas_load(FDD_STATUS+drive, &disk_state);
 #ifndef NTVDM
+#line 1623
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else /* NTVDM */
+#line 1682
 
 		if ((disk_state & FS_MEDIA_DET) == 0)
 		{
@@ -1637,6 +1641,7 @@ LOCAL void setup_state IFN1(int, drive)
     }
 
 #endif /* NTVDM */
+#line 1723
 
 			/*
 			 *	Set up disk state with current data
@@ -2356,8 +2361,10 @@ LOCAL half_word get_parm IFN1(int, index)
 	sas_load(effective_addr(segment, offset+index), &value);
 
 #ifndef PROD
+#line 2445
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
+#line 2471
 
 	return(value);
 }

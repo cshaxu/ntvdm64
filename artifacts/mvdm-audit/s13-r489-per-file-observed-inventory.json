@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 704,
+  "completed_files": 709,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -1418,13 +1418,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\virtual.c",
-      "current_sha256": "47632fb821f65ad38a50faa50469f309099c7088a4599f22adc3ab2c154bf5cb",
+      "current_sha256": "2e26691abe87240f268dfe0c3362882e0f4984b689679c3ce02056442aea4a61",
       "original_sha256": "346e2186fe608c318a25796c7d6a35bbc8de6f21c255b212c2ddfc2bc3c89f40",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r663-guard-line-audit.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/aaa.c",
@@ -2300,7 +2301,7 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpusas4.c",
-      "current_sha256": "54992868dd6c8bcf858663b2720cce2dd7ba1da096bb045849556d3e8120ea6d",
+      "current_sha256": "172e8ddde8b267c910117acad724dc84a6ec4f769e0831b605303f8ae9ae18cd",
       "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
@@ -2308,7 +2309,7 @@
       ],
       "status": "pending-per-file-review",
       "pending_change": "r540 exclude unselected CCPU CHECK_ACCESS debugging alternative; full file audit pending",
-      "partial_evidence": "s13-r656-guard-line-audit.json"
+      "partial_evidence": "s13-r663-guard-line-audit.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h",
@@ -4529,13 +4530,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\ev_glue.c",
-      "current_sha256": "2c7bda7d8caa3ac5599ccfc170c4216a92311dda01694418e4868a7fc488e2e7",
+      "current_sha256": "671d15f3908c33ca9a84c904780c81abfc5c8555bf41c6c95658cf7a34e78fd0",
       "original_sha256": "a12ddfd55dbd3b4426ff20075c46a665c6a30c6a955f24f6ab4872fb4895e935",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r663-guard-line-audit.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/cvidc/evid_c.h",
@@ -5177,19 +5179,19 @@
     {
       "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
-      "current_sha256": "109d05b2e7b36c7ec84480101569f97703e172645ae3dee5fbaab8276fecb010",
+      "current_sha256": "a378f462e107397ea0a3be82eae993cc034c57940e5a83aee1d35507eef2d640",
       "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
       "status": "pending-per-file-review",
-      "partial_evidence": "s13-r639-basic-guard-lines.json"
+      "partial_evidence": "s13-r663-guard-line-audit.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
-      "current_sha256": "34139d697902e0e05eaf633a32bd3515dd5d4edb17d43f88c743236fb5bba158",
+      "current_sha256": "c9cee6ca343e90b06370e530e5b67f1fbb3ebe6976f4a0d1a3b93a691896aef1",
       "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
@@ -5197,7 +5199,7 @@
       ],
       "status": "pending-per-file-review",
       "pending_change": "r496 original diagnostic anchors; broader per-file conditional audit pending",
-      "partial_evidence": "s13-r639-basic-guard-lines.json"
+      "partial_evidence": "s13-r663-guard-line-audit.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
@@ -5224,7 +5226,7 @@
     {
       "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
-      "current_sha256": "aead505267969ca043c2126c7784ada0e4a9753f39c2b4869a6fd8c54d5b9a36",
+      "current_sha256": "ea802079d1aac9b702cf73e0bbaa3387d6bf72a4cfd438fc8accae2d3d32033b",
       "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
@@ -5232,7 +5234,7 @@
       ],
       "status": "pending-per-file-review",
       "pending_change": "r496 original diagnostic anchors; broader per-file conditional audit pending",
-      "partial_evidence": "s13-r636-basic-guard-lines.json"
+      "partial_evidence": "s13-r663-guard-line-audit.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
@@ -5367,7 +5369,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r663-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/config.h",
@@ -6059,13 +6062,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\timeval.h",
-      "current_sha256": "f8b21a5f43ab4feaada51e428b14060c72a9107a933d0234ee8a4d61c4549e62",
+      "current_sha256": "ac244b148cb1220a147d08dc4162a8c7747e85a65404d89adcbd11aa3517dfa2",
       "original_sha256": "49ab8b88c971a9da3d0cadc974f04f6c329aef23c25efd8bfd7e3d50b1a8dfc0",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "partial_evidence": "s13-r663-guard-line-audit.json",
+      "evidence": "s13-r663-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/tmstrobe.h",
@@ -6216,14 +6221,14 @@
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\ppi.c",
-      "current_sha256": "1b520411c2dc325fb6473b3f8dbb807538a2ae7cbe087065491ee2de21f15435",
+      "current_sha256": "1abc1fbba8149dc19343b5971f6b3db5cbab1c9c12eb32cdaabe210a2dc1c359",
       "original_sha256": "367cceaa88345e16b2e138faef9addd441da2cd39f95ea3ab6c359651bd8ebf5",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
       "status": "pending-per-file-review",
-      "partial_evidence": "s13-r639-basic-guard-lines.json"
+      "partial_evidence": "s13-r663-guard-line-audit.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
@@ -6917,13 +6922,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/inc/nt_fulsc.h",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_fulsc.h",
-      "current_sha256": "1cadf1b6002aa8fb62f6660d3a39e823e3034efa326cf08348add79a19e10af4",
+      "current_sha256": "896c92ed83ea6b939ecfe4668a8510a5bbc3ba9cd82aeb1150930b932557d168",
       "original_sha256": "733fe8aaef56e9febc5e2f35ac03057918df2bf75173779870e2b07dc673e1d0",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r663-guard-line-audit.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
@@ -7198,13 +7204,14 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_error.c",
-      "current_sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4",
+      "current_sha256": "f5f94c699bf0cc912e4aa21fc4e560719a27f56891cefd51484b27e8e04f2d57",
       "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "pending-per-file-review",
+      "partial_evidence": "s13-r663-guard-line-audit.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
@@ -7458,7 +7465,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r663-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
@@ -8746,7 +8754,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-flat-excluded-guards",
+      "evidence": "s13-r663-flat-guard-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmsgcb.c",
@@ -10295,8 +10304,9 @@
         "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r662-guard-line-audit.json"
+      "status": "completed-original-flat-excluded-guards",
+      "partial_evidence": "s13-r662-guard-line-audit.json",
+      "evidence": "s13-r663-flat-guard-review.json"
     },
     {
       "path": "src/non-mvdm/private/windows/inc/pmvdm.h",

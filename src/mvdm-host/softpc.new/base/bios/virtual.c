@@ -835,8 +835,10 @@ virtual_device_trap IFN0()
       ClearInstanceDataMarking();
 
 #ifndef NTVDM
+#line 794
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* ! NTVDM */
+#line 796
 
       /* Clear our version number in case we are changing disks */
       insignia_386_version = 0;

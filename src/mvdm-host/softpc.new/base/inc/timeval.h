@@ -51,6 +51,7 @@ extern long host_time IPT1(long *, tloc);
 extern struct host_tm *host_localtime IPT1(time_t *, clock);
 
 #ifndef NTVDM
+#line 61
 #error Unsupported excluded original configuration
 #else
 #line 64

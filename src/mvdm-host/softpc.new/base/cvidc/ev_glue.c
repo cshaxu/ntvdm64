@@ -780,8 +780,10 @@ setup_vga_globals IFN0()
         GLOBAL_SubrRingPtr = GLOBAL_SubrRingLowIncl;
 
 #ifndef PROD
+#line 772
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif	/* PROD */
+#line 775
 }
 
 /*(

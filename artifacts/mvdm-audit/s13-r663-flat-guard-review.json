@@ -1,0 +1,104 @@
+{
+  "scope": "Five product-observed files whose original condition groups are flat and all have existing excluded error-only first arms.",
+  "method": "Compare original selectors, group boundaries, else presence and retained else text. Check physical error, selected and following line mappings; conservatively screen comments and conditional continuations. Reject directive after continued physical line.",
+  "context": "Prior product release builds and 181 retained-guard controls; selector forced on reaches error, so builds using these files cannot silently select these arms.",
+  "limits": "Reviews conditional structure and alternatives, not unrelated adaptations; the complete inventory of all supported contexts remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/cntlbop.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\cntlbop.h",
+      "sha256": "6c87e963d683f71bcdd8869a2324a158a94c3c05992d14b726af019ce6559ded",
+      "original_sha256": "b14316fbd29fee3d582cd88c0b869e46ea01c41964fc1a4bfca87742db2a09cb",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifndef",
+          "SUCCESS"
+        ],
+        [
+          "ifndef",
+          "NULL"
+        ],
+        [
+          "if",
+          "defined(DUMB_TERMINAL) && !defined(NO_SERIAL_UIF)"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\timeval.h",
+      "sha256": "ac244b148cb1220a147d08dc4162a8c7747e85a65404d89adcbd11aa3517dfa2",
+      "original_sha256": "49ab8b88c971a9da3d0cadc974f04f6c329aef23c25efd8bfd7e3d50b1a8dfc0",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifndef",
+          "NTVDM"
+        ],
+        [
+          "ifndef",
+          "NTVDM"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sound.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_sound.c",
+      "sha256": "30d4a1c48f653760260a3cc3e9c2f56bddd6c90b3ebd64d44ebfb0d9cc3af1cc",
+      "original_sha256": "19e602c67a87241daf66e8613f4897d632acc7c6765f74c2b1eb09cf080e53f6",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmsgbm.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmsgbm.h",
+      "sha256": "335941f4ec8178aec2a738672a583a9ce90a2bb6473912bcd138dfb9a99f70ef",
+      "original_sha256": "3cc1b146978c625e2850ef427128a7bc84acb5205b4c6901d6310845bf04a6b2",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifndef",
+          "BM_CLICK"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/private/inc/dlcio.h",
+      "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\inc\\dlcio.h",
+      "sha256": "b14a97c6c265598a24f96eb5fbde47853e3da7ad6ab22585cd1d657418347e00",
+      "original_sha256": "5059d127630e19906e973266e34ffe8b648181b0962900551964147e527602de",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-redir-contract\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifndef",
+          "MAX_PATH   // I don't want to include whole windows because of this"
+        ],
+        [
+          "ifdef",
+          "INCLUDE_IO_BUFFER_SIZE_TABLE"
+        ]
+      ]
+    }
+  ]
+}

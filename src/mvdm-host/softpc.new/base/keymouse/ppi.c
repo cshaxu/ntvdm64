@@ -69,8 +69,10 @@ static half_word ppi_register;
 
 static boolean gate_2_was_low = TRUE;	/* state of timer 2 gate */
 #ifndef NTVDM
+#line 70
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 72
 
 /*
  * ============================================================================
@@ -136,8 +138,10 @@ void ppi_outb IFN2(io_addr, port, half_word, value)
 	 */
 
 #ifndef NTVDM
+#line 137
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 149
 
 		/*
 		 * Now gate the ppi signal to the timer.

@@ -61,8 +61,10 @@ extern UTINY number_of_floppy;
 #endif	/* NTVDM */
 
 #ifndef	PROD
+#line 67
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* nPROD */
+#line 293
 
 
 void diskette_io()
@@ -79,8 +81,10 @@ void diskette_io()
 	int op = getAH(), drive = getDL();
 
 #ifndef	PROD
+#line 309
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 312
 
 #ifndef	JOKER
 	/*
@@ -129,8 +133,10 @@ void diskette_io()
 
 
 #ifndef	PROD
+#line 360
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 363
 }
 
 

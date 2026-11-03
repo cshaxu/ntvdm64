@@ -149,26 +149,34 @@ gfi_empty_command
       {
    case FDC_READ_DATA:
 #ifndef	PROD
+#line 153
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 156
       break;
 
    case FDC_WRITE_DATA:
 #ifndef	PROD
+#line 160
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 163
       break;
 
    case FDC_READ_TRACK:
 #ifndef	PROD
+#line 167
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 170
       break;
 
    case FDC_SPECIFY:
 #ifndef	PROD
+#line 174
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 177
       break;
 
    case FDC_READ_ID:
@@ -182,8 +190,10 @@ gfi_empty_command
 
    case FDC_RECALIBRATE:
 #ifndef	PROD
+#line 188
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 191
       /* Controller tries 77 pulses to get drive to head 0,
 	 but fails, so we set Equipment Check */
       D = get_c5_drive(command_block);
@@ -196,25 +206,33 @@ gfi_empty_command
 
    case FDC_SENSE_DRIVE_STATUS:
 #ifndef	PROD
+#line 203
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 206
       break;
 
    case FDC_SEEK:
 #ifndef	PROD
+#line 210
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 213
       break;
 
    case FDC_FORMAT_TRACK:
 #ifndef	PROD
+#line 217
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 220
       break;
 
 #ifndef	PROD
+#line 223
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 228
       }
 
    return (ret_stat);

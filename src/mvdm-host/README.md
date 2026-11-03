@@ -2723,3 +2723,7 @@ under review. Evidence: ../../artifacts/mvdm-audit/s13-r661-guard-line-audit.jso
 MVDM-HOST-DIV-743: restore original diagnostic line mappings for existing
 excluded DPMI, multimedia and WOW32 arms. Other groups remain under review.
 Evidence: ../../artifacts/mvdm-audit/s13-r662-guard-line-audit.json.
+
+MVDM-HOST-DIV-744: restore original diagnostic line mappings for existing
+excluded non-PROD and non-NTVDM arms in ten sources. Other groups remain
+under review. Evidence: ../../artifacts/mvdm-audit/s13-r663-guard-line-audit.json.

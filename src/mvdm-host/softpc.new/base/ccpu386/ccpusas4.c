@@ -260,8 +260,10 @@ GLOBAL IBOOL c_SasRegisterVirtualSelectors IFN2(IU16, sel1, IU16, sel2)
 #line 257
 
 #ifndef PROD
+#line 259
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* ndef PROD */
+#line 284
 
 
 /*********** INIT & ADMIN FUNCS  ***********/
@@ -1278,8 +1280,10 @@ c_GetLinAdd IFN1(PHY_ADDR, linAddr)
 		return(c_GetPhyAdd(phyAddr));
 	else {
 #ifndef	PROD
+#line 1280
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1285
 		return(c_GetPhyAdd(0));	/* as good as anything! */
 	}
 }
@@ -1952,8 +1956,10 @@ LOCAL	void	c_sas_not_used	IFN0()
 {
 	always_trace0("c_sas_not_used called");
 #ifndef	PROD
+#line 1944
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1946
 }
 
 

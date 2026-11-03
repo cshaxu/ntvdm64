@@ -1023,7 +1023,7 @@
     "after_sha256": "a9f6974e2f7e73ba69415f6de71bd29a23ca9283b1753c17d824f2e1a9a48bc3",
     "final_sha256": "a9f6974e2f7e73ba69415f6de71bd29a23ca9283b1753c17d824f2e1a9a48bc3",
     "current_line": 25,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r656-guard-line-audit.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r663-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/com.c",
@@ -1235,8 +1235,8 @@
     "removed_body_lines": 6,
     "after_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
     "final_sha256": "1061f78f7602480edc3ad0d0de1370bda8ae1df3f5e1d38ecb2fd0cb8255fb68",
-    "current_line": 3096,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r639-basic-guard-lines.json"
+    "current_line": 3103,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r663-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
@@ -1251,7 +1251,7 @@
     "after_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
     "final_sha256": "1061f78f7602480edc3ad0d0de1370bda8ae1df3f5e1d38ecb2fd0cb8255fb68",
     "current_line": 102,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r639-basic-guard-lines.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r663-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
@@ -1265,8 +1265,8 @@
     "removed_body_lines": 6,
     "after_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
     "final_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
-    "current_line": 187,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r639-basic-guard-lines.json"
+    "current_line": 193,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r663-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
@@ -1281,7 +1281,7 @@
     "after_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
     "final_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
     "current_line": 33,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r639-basic-guard-lines.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r663-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
@@ -1322,7 +1322,7 @@
     "after_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
     "final_sha256": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
     "current_line": 29,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r636-basic-guard-lines.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r663-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
@@ -1489,8 +1489,8 @@
     "removed_body_lines": 6,
     "after_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
     "final_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
-    "current_line": 173,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r639-basic-guard-lines.json"
+    "current_line": 177,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r663-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
@@ -1505,7 +1505,7 @@
     "after_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
     "final_sha256": "d6a4afd247ff8753e85d8b45217d2fad04ac7dd9ce7c56dc90178a212ca469dd",
     "current_line": 23,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r639-basic-guard-lines.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r663-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/support/ios.c",

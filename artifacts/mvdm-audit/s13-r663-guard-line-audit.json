@@ -1,0 +1,265 @@
+{
+  "scope": "Ten selected sources with existing rejected non-PROD and non-NTVDM alternatives.",
+  "method": "Original directive sequence compared; error arms contain no retained executable code. Original selected alternatives are preserved with restored diagnostic line mappings.",
+  "limits": "Other condition groups remain pending; cached build and targeted checks await this ten-file batch.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/virtual.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\virtual.c",
+      "before_sha256": "47632fb821f65ad38a50faa50469f309099c7088a4599f22adc3ab2c154bf5cb",
+      "after_sha256": "2e26691abe87240f268dfe0c3362882e0f4984b689679c3ce02056442aea4a61",
+      "original_sha256": "346e2186fe608c318a25796c7d6a35bbc8de6f21c255b212c2ddfc2bc3c89f40",
+      "guards": [
+        {
+          "macro": "NTVDM",
+          "original_error_line": 794,
+          "original_selected_line": null,
+          "original_following_line": 796
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpusas4.c",
+      "before_sha256": "54992868dd6c8bcf858663b2720cce2dd7ba1da096bb045849556d3e8120ea6d",
+      "after_sha256": "172e8ddde8b267c910117acad724dc84a6ec4f769e0831b605303f8ae9ae18cd",
+      "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+      "guards": [
+        {
+          "macro": "PROD",
+          "original_error_line": 259,
+          "original_selected_line": null,
+          "original_following_line": 284
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 1280,
+          "original_selected_line": null,
+          "original_following_line": 1285
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 1944,
+          "original_selected_line": null,
+          "original_following_line": 1946
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\ev_glue.c",
+      "before_sha256": "2c7bda7d8caa3ac5599ccfc170c4216a92311dda01694418e4868a7fc488e2e7",
+      "after_sha256": "671d15f3908c33ca9a84c904780c81abfc5c8555bf41c6c95658cf7a34e78fd0",
+      "original_sha256": "a12ddfd55dbd3b4426ff20075c46a665c6a30c6a955f24f6ab4872fb4895e935",
+      "guards": [
+        {
+          "macro": "PROD",
+          "original_error_line": 772,
+          "original_selected_line": null,
+          "original_following_line": 775
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "before_sha256": "109d05b2e7b36c7ec84480101569f97703e172645ae3dee5fbaab8276fecb010",
+      "after_sha256": "a378f462e107397ea0a3be82eae993cc034c57940e5a83aee1d35507eef2d640",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "guards": [
+        {
+          "macro": "PROD",
+          "original_error_line": 862,
+          "original_selected_line": null,
+          "original_following_line": 869
+        },
+        {
+          "macro": "NTVDM",
+          "original_error_line": 1623,
+          "original_selected_line": 1682,
+          "original_following_line": 1723
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 2445,
+          "original_selected_line": null,
+          "original_following_line": 2471
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "before_sha256": "34139d697902e0e05eaf633a32bd3515dd5d4edb17d43f88c743236fb5bba158",
+      "after_sha256": "c9cee6ca343e90b06370e530e5b67f1fbb3ebe6976f4a0d1a3b93a691896aef1",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "guards": [
+        {
+          "macro": "PROD",
+          "original_error_line": 67,
+          "original_selected_line": null,
+          "original_following_line": 293
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 309,
+          "original_selected_line": null,
+          "original_following_line": 312
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 360,
+          "original_selected_line": null,
+          "original_following_line": 363
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "before_sha256": "aead505267969ca043c2126c7784ada0e4a9753f39c2b4869a6fd8c54d5b9a36",
+      "after_sha256": "ea802079d1aac9b702cf73e0bbaa3387d6bf72a4cfd438fc8accae2d3d32033b",
+      "original_sha256": "9e56716b323db2e45afb5d780c0a84693311d7baf33e91518593f754d58843bb",
+      "guards": [
+        {
+          "macro": "PROD",
+          "original_error_line": 153,
+          "original_selected_line": null,
+          "original_following_line": 156
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 160,
+          "original_selected_line": null,
+          "original_following_line": 163
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 167,
+          "original_selected_line": null,
+          "original_following_line": 170
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 174,
+          "original_selected_line": null,
+          "original_following_line": 177
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 188,
+          "original_selected_line": null,
+          "original_following_line": 191
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 203,
+          "original_selected_line": null,
+          "original_following_line": 206
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 210,
+          "original_selected_line": null,
+          "original_following_line": 213
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 217,
+          "original_selected_line": null,
+          "original_following_line": 220
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 223,
+          "original_selected_line": null,
+          "original_following_line": 228
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/timeval.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\timeval.h",
+      "before_sha256": "f8b21a5f43ab4feaada51e428b14060c72a9107a933d0234ee8a4d61c4549e62",
+      "after_sha256": "ac244b148cb1220a147d08dc4162a8c7747e85a65404d89adcbd11aa3517dfa2",
+      "original_sha256": "49ab8b88c971a9da3d0cadc974f04f6c329aef23c25efd8bfd7e3d50b1a8dfc0",
+      "guards": [
+        {
+          "macro": "NTVDM",
+          "original_error_line": 61,
+          "original_selected_line": 64,
+          "original_following_line": 67
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\ppi.c",
+      "before_sha256": "1b520411c2dc325fb6473b3f8dbb807538a2ae7cbe087065491ee2de21f15435",
+      "after_sha256": "1abc1fbba8149dc19343b5971f6b3db5cbab1c9c12eb32cdaabe210a2dc1c359",
+      "original_sha256": "367cceaa88345e16b2e138faef9addd441da2cd39f95ea3ab6c359651bd8ebf5",
+      "guards": [
+        {
+          "macro": "NTVDM",
+          "original_error_line": 70,
+          "original_selected_line": null,
+          "original_following_line": 72
+        },
+        {
+          "macro": "NTVDM",
+          "original_error_line": 137,
+          "original_selected_line": null,
+          "original_following_line": 149
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fulsc.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_fulsc.h",
+      "before_sha256": "1cadf1b6002aa8fb62f6660d3a39e823e3034efa326cf08348add79a19e10af4",
+      "after_sha256": "896c92ed83ea6b939ecfe4668a8510a5bbc3ba9cd82aeb1150930b932557d168",
+      "original_sha256": "733fe8aaef56e9febc5e2f35ac03057918df2bf75173779870e2b07dc673e1d0",
+      "guards": [
+        {
+          "macro": "PROD",
+          "original_error_line": 78,
+          "original_selected_line": 98,
+          "original_following_line": 108
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_error.c",
+      "before_sha256": "501f27c0f3f2e9f830c4fb36bf84bc98ecb5ff09cd94bec722a16cc9dd9780e4",
+      "after_sha256": "f5f94c699bf0cc912e4aa21fc4e560719a27f56891cefd51484b27e8e04f2d57",
+      "original_sha256": "3305eaabac76e039dfe80aa0f2e15c48433edd95a74615e5db55b97d2b393228",
+      "guards": [
+        {
+          "macro": "PROD",
+          "original_error_line": 149,
+          "original_selected_line": null,
+          "original_following_line": 152
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 195,
+          "original_selected_line": null,
+          "original_following_line": 200
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 615,
+          "original_selected_line": null,
+          "original_following_line": 619
+        },
+        {
+          "macro": "PROD",
+          "original_error_line": 1158,
+          "original_selected_line": null,
+          "original_following_line": 1170
+        }
+      ]
+    }
+  ]
+}
