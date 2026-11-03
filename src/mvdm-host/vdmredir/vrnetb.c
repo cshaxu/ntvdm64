@@ -131,9 +131,12 @@ Return Value:
         RtlProcessHeap(), 0,
         sizeof(NCBW));
 
+#line 134
 #if DBG
+#line 135
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 144
 
     if ( pncbw == NULL ) {
         pncb->ncb_retcode = NRC_NORES;
@@ -303,9 +306,12 @@ Return Value:
     PNCBW pncbw = (PNCBW) pncb;
     PNCB pdosNcb = pncbw->ncb_original_ncb;
 
+#line 313
 #if DBG
+#line 314
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 326
 
     if ( READ_DWORD(&pdosNcb->ncb_post) ) {
 
@@ -364,9 +370,12 @@ Return Value:
 
 {
 
+#line 384
 #if DBG
+#line 385
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 389
 
     EnterCriticalSection( &PostCrit );
 
@@ -383,9 +392,12 @@ Return Value:
         pncbw = CONTAINING_RECORD( entry, NCBW, u.ncb_next );
         pncb = pncbw->ncb_original_ncb;
 
+#line 405
 #if DBG
+#line 406
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 415
 
         //  Copy back the fields that might have changed during the call.
         STOREWORD(pncb->ncb_length, pncbw->ncb_length);

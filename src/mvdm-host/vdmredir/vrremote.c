@@ -702,17 +702,23 @@ Return Value:
     ntstatus = RtlAnsiStringToUnicodeString(&uString, &aString, (BOOLEAN)TRUE);
     if (!NT_SUCCESS(ntstatus)) {
 
+#line 697
 #if DBG
+#line 698
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 702
 
         return ERROR_NOT_ENOUGH_MEMORY;
     }
     uncName = uString.Buffer;
 
+#line 707
 #if DBG
+#line 708
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 712
 
     status = RxpTransactSmb((LPTSTR)uncName,
 

@@ -25,9 +25,12 @@ extern VOID	TerminateVDM(VOID);
 
 CHAR demDebugBuffer [256];
 
+#line 27
 #if DBG
+#line 28
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 30
 
 BOOL DemInit (int argc, char *argv[])
 {
@@ -69,10 +72,12 @@ BOOL DemInit (int argc, char *argv[])
     }
 
 
+#line 66
 #if DBG
+#line 67
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
-#line 75
+#line 74
 
     return TRUE;
 }

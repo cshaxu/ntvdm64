@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 572,
+  "completed_files": 574,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -165,13 +165,14 @@
     {
       "path": "src/mvdm-host/dos/dem/dem.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\dem.c",
-      "current_sha256": "ae70ca4b3a2c8ba401afd7597d3863d5483a2f89228abf2f30ad6efef5e885a4",
+      "current_sha256": "d9e31fef11a4a96004e473c82445cc6c42c4f5bbddd114f85a81d81bebd7d18c",
       "original_sha256": "2573da2dbf964c5e75102145b031766113cfc4e914dc00f0d80fdc6d98f5a2de",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-outer-debug-guards",
+      "evidence": "s13-r575-dem-conditional-complete.json"
     },
     {
       "path": "src/mvdm-host/dos/dem/dem.h",
@@ -242,13 +243,14 @@
     {
       "path": "src/mvdm-host/dos/dem/demerror.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demerror.c",
-      "current_sha256": "a688c6210ed975694b57d7b7bc352f57a5809e569dbcc2016f523da01989f70e",
+      "current_sha256": "c7bc55645504700dbf85da5f04b4a90b3fc28f8e28ea0d313446cbfd2ad808e9",
       "original_sha256": "8c266cc5086f5bfb834f7d2054459f0a91b1789e90095e56ff363f77d409b64f",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-outer-debug-guards",
+      "evidence": "s13-r575-dem-conditional-complete.json"
     },
     {
       "path": "src/mvdm-host/dos/dem/demfcb.c",

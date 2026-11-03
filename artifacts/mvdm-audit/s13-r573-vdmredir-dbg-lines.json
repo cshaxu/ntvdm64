@@ -1,0 +1,136 @@
+{
+  "scope": "Five VDMREDIR source files; add original physical-line anchors to existing excluded DBG arms; selected statements unchanged. Original nested groups under excluded DBG are not restored.",
+  "records": [
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcbuf.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcbuf.c",
+      "before_sha256": "bd2cc4bad1327d13cd4f86efb66e587bfc59356ffa99593e6432ea07efb76fb5",
+      "after_sha256": "0af68a587ff958e76ab5e0ae139c6e233aca39dfedbfeffcc1fd7ae35a6600da",
+      "guards": [
+        {
+          "if": 353,
+          "following": 358,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 456,
+          "following": 463,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 563,
+          "following": 568,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 645,
+          "following": 648,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 682,
+          "following": 685,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 705,
+          "following": 714,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 853,
+          "following": 858,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdll.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdll.c",
+      "before_sha256": "a704a9141f4f67752a2479bce603519103c6a57316e6efdd0af9f0918d0ff7c5",
+      "after_sha256": "146606d30cf36eae71ee91d194e250b8f3a78ddf3a6b7f81ae87dcde225f9a59",
+      "guards": [
+        {
+          "if": 26,
+          "following": 32,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 56,
+          "following": 59,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 90,
+          "following": 154,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrmisc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrmisc.c",
+      "before_sha256": "ae8f13a5ccbb38f8411c0d387d0abca7dd206cacd219736b8b31e9a5c4e34926",
+      "after_sha256": "e5e3e14c680375918a790dc39f2a42ebcc3a3a1c85170629f1fd46607b9098c1",
+      "guards": [
+        {
+          "if": 71,
+          "following": 78,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 108,
+          "following": 114,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrnetb.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrnetb.c",
+      "before_sha256": "4f70cd3edbf922852f95a8b5453c5ca9589070a79403dfd4c8aef7cb9edf520d",
+      "after_sha256": "5fff5e79500fd5dd734a91ec1f1342c625f50244ce9a8fc0533dd58a45649b6a",
+      "guards": [
+        {
+          "if": 134,
+          "following": 144,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 313,
+          "following": 326,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 384,
+          "following": 389,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 405,
+          "following": 415,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrremote.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrremote.c",
+      "before_sha256": "26e245025ef37e69f75721b86767c378ac50f274e5a3610ed312cad1d33b493c",
+      "after_sha256": "2faf30ad6541bf1a4973790ee873b5cec3841c8435605fc0aa2a077b70c69c8c",
+      "guards": [
+        {
+          "if": 697,
+          "following": 702,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 707,
+          "following": 712,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    }
+  ],
+  "status": "r574 cached product builds passed; per-file condition review remains partial."
+}

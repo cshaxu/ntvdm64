@@ -23,9 +23,12 @@ Revision History:
 
 --*/
 
+#line 26
 #if DBG
+#line 27
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 32
 
 #include <nt.h>
 #include <ntrtl.h>
@@ -50,9 +53,12 @@ TerminateDlcEmulation(
     );
 
 
+#line 56
 #if DBG
+#line 57
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 59
 
 BOOLEAN
 VrDllInitialize(
@@ -84,9 +90,12 @@ Return Value:
 {
     BOOL ok;
 
+#line 90
 #if DBG
+#line 91
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 154
 
     if (Reason == DLL_PROCESS_ATTACH) {
 

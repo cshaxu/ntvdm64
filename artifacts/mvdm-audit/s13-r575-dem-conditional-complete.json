@@ -1,0 +1,54 @@
+{
+  "scope": "Two DEM files; all original outer DBG groups and matching original line anchors verified. Nested original branches inside a false DBG body are correctly subsumed.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\dem.c",
+      "current_sha256": "d9e31fef11a4a96004e473c82445cc6c42c4f5bbddd114f85a81d81bebd7d18c",
+      "original_sha256": "2573da2dbf964c5e75102145b031766113cfc4e914dc00f0d80fdc6d98f5a2de",
+      "guards": [
+        {
+          "if": 27,
+          "endif": 29
+        },
+        {
+          "if": 66,
+          "endif": 73
+        }
+      ],
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demerror.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demerror.c",
+      "current_sha256": "c7bc55645504700dbf85da5f04b4a90b3fc28f8e28ea0d313446cbfd2ad808e9",
+      "original_sha256": "8c266cc5086f5bfb834f7d2054459f0a91b1789e90095e56ff363f77d409b64f",
+      "guards": [
+        {
+          "if": 57,
+          "endif": 74
+        },
+        {
+          "if": 78,
+          "endif": 87
+        },
+        {
+          "if": 139,
+          "endif": 144
+        },
+        {
+          "if": 167,
+          "endif": 175
+        }
+      ],
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    }
+  ],
+  "limitations": "Product release DBG remains disabled; other nonconditional implementation differences and unsupported build contexts are not asserted equivalent."
+}

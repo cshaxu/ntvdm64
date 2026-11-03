@@ -1,0 +1,166 @@
+{
+  "scope": "Five product-source files; add original physical-line anchors to existing excluded DBG arms; selected statements unchanged. Original nested groups under excluded DBG are not restored.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/dem/dem.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\dem.c",
+      "before_sha256": "ae70ca4b3a2c8ba401afd7597d3863d5483a2f89228abf2f30ad6efef5e885a4",
+      "after_sha256": "d9e31fef11a4a96004e473c82445cc6c42c4f5bbddd114f85a81d81bebd7d18c",
+      "guards": [
+        {
+          "if": 27,
+          "following": 30,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 66,
+          "following": 74,
+          "replaced_existing_following_anchor": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demdasd.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdasd.c",
+      "before_sha256": "20a9b79c1afeb7c1573dca44d1a3b714dff18df2d3eecc24707ce6f7af9597e7",
+      "after_sha256": "81e1557a4e8b6065d17ef557df07b264b89340deb82fdb18df57f2a9fab49cf7",
+      "guards": [
+        {
+          "if": 77,
+          "following": 81,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 110,
+          "following": 114,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 150,
+          "following": 161,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 178,
+          "following": 184,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demerror.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demerror.c",
+      "before_sha256": "a688c6210ed975694b57d7b7bc352f57a5809e569dbcc2016f523da01989f70e",
+      "after_sha256": "c7bc55645504700dbf85da5f04b4a90b3fc28f8e28ea0d313446cbfd2ad808e9",
+      "guards": [
+        {
+          "if": 57,
+          "following": 75,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 78,
+          "following": 88,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 139,
+          "following": 145,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 167,
+          "following": 176,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "before_sha256": "52f72a6eb095843f14db08f54e4db8921792847e6947dfaa707245aa22662e08",
+      "after_sha256": "86f55a30c4f761c2323688f02a4ad21e407451310bed778b8371bf3b7715884b",
+      "guards": [
+        {
+          "if": 426,
+          "following": 440,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 1373,
+          "following": 1376,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 2002,
+          "following": 2005,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 2159,
+          "following": 2162,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 2205,
+          "following": 2208,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 2295,
+          "following": 2298,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 2325,
+          "following": 2330,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 2394,
+          "following": 2400,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 2662,
+          "following": 2665,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/xmem.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\xmem.c",
+      "before_sha256": "f3bff0e0ec2a7c1d1bf48c4fb2762365cf4963e2d6954341a1dee522f8b6a213",
+      "after_sha256": "a52cd0952aa18345d07c7584da8e045d63a6da1569a3ff7b68e17b65bfb9a932",
+      "guards": [
+        {
+          "if": 92,
+          "following": 95,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 161,
+          "following": 164,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 212,
+          "following": 215,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 271,
+          "following": 274,
+          "replaced_existing_following_anchor": false
+        },
+        {
+          "if": 323,
+          "following": 326,
+          "replaced_existing_following_anchor": false
+        }
+      ]
+    }
+  ],
+  "status": "r574 cached product builds passed; dem.c and demerror.c completed per-file condition review in s13-r575-dem-conditional-complete.json; remaining files are partial."
+}
