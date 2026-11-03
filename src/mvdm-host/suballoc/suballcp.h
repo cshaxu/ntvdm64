@@ -55,11 +55,14 @@ Revision History:
 // Signature macros for SUBALLOCATION
 //
 #if DBG
+#line 58
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
+#line 64
 #define INIT_SUBALLOC_SIGNATURE(p)
 #define ASSERT_SUBALLOC(p)
 #endif
+#line 67
 
 //
 // Macro for extracting a bit from a bitfield of type char

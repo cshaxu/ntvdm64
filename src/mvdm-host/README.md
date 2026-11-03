@@ -2689,3 +2689,8 @@ MVDM-HOST-DIV-735: align original line diagnostics and selected-arm continuation
 for existing PIG, hardware MONITOR, CPU30 and segmentation exclusions in ten
 sources. Other branches retain their prior audit status. Evidence:
 ../../artifacts/mvdm-audit/s13-r642-guard-line-audit.json.
+
+MVDM-HOST-DIV-736: align original diagnostics and selected-arm continuation
+lines for previously excluded DBG branches in ten DEM, DPMI, redirector and
+WOW sources. Evidence: ../../artifacts/mvdm-audit/s13-r645-dbg-guard-lines.json
+and ../../artifacts/mvdm-audit/s13-r645-dpmi-review.json.

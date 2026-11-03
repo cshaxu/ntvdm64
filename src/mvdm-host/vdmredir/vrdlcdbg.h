@@ -177,8 +177,11 @@ DumpDosAdapter(
 //
 
 #if DBG
+#line 180
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
+#line 185
 #define CHECK_CCB_COMMAND(pccb)
 #define CHECK_CCB_RETCODE(pccb)
 #endif
+#line 188

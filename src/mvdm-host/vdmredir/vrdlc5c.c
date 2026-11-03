@@ -763,8 +763,10 @@ Return Value:
     setAL((UCHAR)status);
 
 #if DBG
+#line 766
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 803
 }
 
 
@@ -1200,8 +1202,10 @@ Return Value:
         break;
 
 #if DBG
+#line 1238
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1242
 
     }
 
@@ -1947,8 +1951,10 @@ Return Value:
         pNewCcb->ulCompletionFlag = LLC_DOS_SPECIAL_COMMAND;
 
 #if DBG
+#line 1987
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 1996
 
         break;
 
@@ -3201,12 +3207,15 @@ Return Value:
     Adapters[AdapterNumber].AdapterCloseCcb.ulCompletionFlag = VRDLC_COMMAND_COMPLETION;
 
 #if DBG
+#line 3248
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
+#line 3252
 
     lpAcsLan(&Adapters[AdapterNumber].AdapterCloseCcb, NULL);
 
 #endif
+#line 3256
 
     //
     // mark the adapter structure as being closed
@@ -3302,12 +3311,15 @@ Return Value:
     Adapters[AdapterNumber].DirectCloseCcb.ulCompletionFlag = VRDLC_COMMAND_COMPLETION;
 
 #if DBG
+#line 3351
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
+#line 3355
 
     lpAcsLan(&Adapters[AdapterNumber].DirectCloseCcb, NULL);
 
 #endif
+#line 3359
 
     //
     // mark the adapter structure as no longer having the direct station open

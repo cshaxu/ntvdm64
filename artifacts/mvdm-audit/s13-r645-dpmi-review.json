@@ -1,0 +1,9 @@
+{
+  "path": "src/mvdm-host/inc/dpmi.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\dpmi.h",
+  "current_sha256": "a56f3292d2d42a7e3feeb060f8ab106ed119f5674e5a30548c1d36a3d8233008",
+  "original_sha256": "3425f64b805b8bab8086523288c8afe86eee8f183208aa863b49bb8fb962a154",
+  "scope": "The sole original DBG selector, retained nondebug definition, rejected debug body and original line anchors.",
+  "evidence": "Original directive sequence and selected else body match; selected x86 worker release uses DBG false. The pre-existing DBG rejection remains.",
+  "limits": "Build and binary comparison are recorded in s13-r646-delivery.md; this is conditional review, not runtime proof."
+}

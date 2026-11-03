@@ -1,0 +1,9 @@
+{
+  "path": "src/mvdm-host/inc/demexp.h",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\demexp.h",
+  "current_sha256": "91da9c6f6de3b84c672f8cace6c83b2f74e70f0132d46e040c566127dec2141d",
+  "original_sha256": "dfb912ee16a360e36d149bca01592a61ec11ff0f1d1b148edcffb42fda52d5c4",
+  "scope": "The sole original #if DEVL arm has identical content and remains available.",
+  "evidence": "Real MSVC preprocessing: DEM dem.c includes the declaration with per-object /DDEVL; WOW32 wdos.c excludes it. Both build graph contexts are supported.",
+  "limitations": "Other declaration changes remain under MVDM-HOST-DIV-294; no runtime behavior inferred."
+}

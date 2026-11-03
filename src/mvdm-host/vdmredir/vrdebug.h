@@ -68,8 +68,10 @@ Revision History:
 #define VRDEBUG_FILE        "VRDEBUG.LOG"
 
 #if DBG
+#line 71
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
+#line 92
 #define IF_DEBUG(type)      if (0)
 #define DEBUG_BREAK()
 #define DBGPRINT
@@ -82,6 +84,7 @@ Revision History:
 #define CRITDUMP(x)
 #define DUMPCCB
 #endif
+#line 104
 
 //
 // defaults
@@ -559,8 +562,10 @@ VrDumpDosMemoryStructure(
 //
 
 #if DBG
+#line 581
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
+#line 590
 
 //
 // macros used in routines to be diagnosed - don't expand to anything in non-debug
@@ -574,3 +579,4 @@ VrDumpDosMemoryStructure(
 //#define WARN
 //#define ERROR
 #endif
+#line 603

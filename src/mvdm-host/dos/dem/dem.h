@@ -246,12 +246,15 @@ VOID demPipeFileEOF	    (VOID);
 /** Debug Function Prototypes */
 
 #if DBG
+#line 241
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
+#line 245
 
 #define demPrintMsg(x)
 
 #endif
+#line 249
 
 /* Label functions and constants */
 USHORT demDeleteLabel(BYTE Drive);

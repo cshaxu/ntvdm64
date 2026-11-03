@@ -53,10 +53,13 @@ Revision History:
 //
 
 #if DBG
+#line 56
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
+#line 58
 #define PRIVATE static
 #endif
+#line 60
 
 //
 // unaligned data pointer types. These produce exactly the same code as memory

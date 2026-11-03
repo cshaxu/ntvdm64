@@ -33,8 +33,10 @@ MODNAME(wcommdlg.c);
 // Debugging macros
 //
 #if DBG
+#line 35
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
+#line 234
 
 #define WCDDUMPCHOOSECOLORDATA16(p16)
 #define WCDDUMPCHOOSECOLORDATA32(p32)
@@ -48,6 +50,7 @@ MODNAME(wcommdlg.c);
 #define WCDDUMPFINDREPLACE32(p32)
 
 #endif
+#line 247
 
 #define FR_OUTPUTFLAGS (FR_DOWN | FR_WHOLEWORD | FR_MATCHCASE | \
                         FR_FINDNEXT | FR_REPLACE | FR_REPLACEALL | \

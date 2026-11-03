@@ -66,12 +66,15 @@ DPMIBOP macro SubFun
 
 /* XLATOFF */
 #if DBG
+#line 69
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #else
+#line 73
 
 #define DBGTRACE(Type, v1, v2, v3) {}
 
 #endif
+#line 77
 
 /* XLATON */
 

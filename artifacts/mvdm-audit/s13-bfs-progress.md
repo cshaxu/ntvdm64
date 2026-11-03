@@ -4039,3 +4039,10 @@ controls and 27 isolated line controls passed. Six images are identical and
 four timestamp-only; prior Full 17/17 is reused and both destinations verified.
 Census: 1058 existing C/H, 157 identical reviewed, 451 differing reviewed,
 450 pending; net deleted: 578. Evidence: s13-r643-delivery.md and counts.
+
+- r646 completes DEMEXP and DPMI conditional reviews and delivers ten DBG
+diagnostic-line updates. Both DEVL contexts, cached builds, 181 guard controls
+and 30 isolated line controls passed. Six images are identical and four
+timestamp-only; prior Full 17/17 was reused and both destinations verified.
+Census: 1058 C/H, 157 identical reviewed, 453 differing reviewed, 448 pending;
+578 net deleted. Evidence: s13-r646-delivery.md and s13-r646-counts.json.

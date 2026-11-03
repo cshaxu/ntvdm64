@@ -1,0 +1,262 @@
+{
+  "scope": "Nine product sources with existing rejected DBG alternatives.",
+  "method": "Original directive sequence compared; error arms contain no retained executable code. Original selected alternatives are preserved with restored diagnostic line mappings.",
+  "limits": "Other condition groups remain pending; build and targeted checks are recorded in s13-r646-delivery.md.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/dem/dem.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\dem.h",
+      "before_sha256": "9c1da082e2f4556e5823aebd923f57ab00561ac1152fa6dc78428206cf19b5c7",
+      "after_sha256": "f32589f3485db19799555545f872601e43f522d9db044a86d419a0e16c551e00",
+      "original_sha256": "c9c4b4814e1b30ffad29a7716948ec7b6c0ade8f6ab2fbb9fd6998d358706e5a",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 241,
+          "original_selected_line": 245,
+          "original_following_line": 249
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demfile.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demfile.c",
+      "before_sha256": "4935550c7f61101569fae4643c8c70e7ac834cd7ef226dec171a0db5328f196e",
+      "after_sha256": "c22694752b0ec858ddb52d0e7214427c2b6261e70d1f0e654a655f5039deea16",
+      "original_sha256": "701c7ce94b6317f23d73d847c681338ddb522d0216cf6373713e542c34236620",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 167,
+          "original_selected_line": null,
+          "original_following_line": 172
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 421,
+          "original_selected_line": null,
+          "original_following_line": 426
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 470,
+          "original_selected_line": null,
+          "original_following_line": 475
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 533,
+          "original_selected_line": null,
+          "original_following_line": 538
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 627,
+          "original_selected_line": null,
+          "original_following_line": 632
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 807,
+          "original_selected_line": null,
+          "original_following_line": 812
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demsrch.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demsrch.c",
+      "before_sha256": "30eda1da58d338f03f102e88997ea00617c95337c31d3dd4fbf8e9d65356748f",
+      "after_sha256": "ce91214a04fa73810525394c8473d6e33fe5d0e03d9420c782da2e068e5aa959",
+      "original_sha256": "2fb56aad4d35a02dec38e9202d41b94a25076428c3d9eb08211d89f890c896ee",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 283,
+          "original_selected_line": null,
+          "original_following_line": 296
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 448,
+          "original_selected_line": null,
+          "original_following_line": 453
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 521,
+          "original_selected_line": null,
+          "original_following_line": 526
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 622,
+          "original_selected_line": null,
+          "original_following_line": 627
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1120,
+          "original_selected_line": null,
+          "original_following_line": 1130
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1156,
+          "original_selected_line": null,
+          "original_following_line": 1161
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1328,
+          "original_selected_line": null,
+          "original_following_line": 1333
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1444,
+          "original_selected_line": null,
+          "original_following_line": 1449
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1548,
+          "original_selected_line": null,
+          "original_following_line": 1553
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2067,
+          "original_selected_line": null,
+          "original_following_line": 2072
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 2159,
+          "original_selected_line": null,
+          "original_following_line": 2164
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/vdmredir.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\vdmredir.h",
+      "before_sha256": "1a42f115390974358e1cfb8b53a538f1af258dd8bbb6ffd4d65db0cd5bb7373b",
+      "after_sha256": "e47d8d20bfa1835ee500766753aee23bf887a84c837698ce85629c9225aac5cf",
+      "original_sha256": "2462271dd22683738e60b4154bd891a8dfc679d4c34b9f75b23ecf91523add2d",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 56,
+          "original_selected_line": 58,
+          "original_following_line": 60
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/suballoc/suballcp.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\suballoc\\suballcp.h",
+      "before_sha256": "02943e6b12c658a0ee71c97578889ad86e08204676d2738d48df135a02a4d8ca",
+      "after_sha256": "8f4430f9f436cadb5e66a25c8771c0d0ea85de72399744610f38e1b4e3fe8fb2",
+      "original_sha256": "25451aa0c293f3950107e81d81507e692e3db7b089655ceac320e4f3779fadb2",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 58,
+          "original_selected_line": 64,
+          "original_following_line": 67
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdebug.h",
+      "before_sha256": "d30a9bf9c34c9f1631ddcd1daf4b0c6121b67f90228ab4d82b14586f2edec5a2",
+      "after_sha256": "08020f482521dd762dc053c9d195febb2096e12c719772521d18e5a553d37e57",
+      "original_sha256": "1cc434fafa90e111f1726aa2444f24a04458da6efd2f218a80d48e03b4f3751b",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 71,
+          "original_selected_line": 92,
+          "original_following_line": 104
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 581,
+          "original_selected_line": 590,
+          "original_following_line": 603
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlc5c.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlc5c.c",
+      "before_sha256": "10447fb253fa3e6f769bd469769e10a440080256ada4851ad8de2c2e11b4bd04",
+      "after_sha256": "268ba26a93f969ab08bb73668c165eeecfeed5e8dbe98e4f09c8d3c26f375022",
+      "original_sha256": "850f2f1a746eee3610f06ebf489cb662bcd628f556299e445daac7fdd24e9bbf",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 766,
+          "original_selected_line": null,
+          "original_following_line": 803
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1238,
+          "original_selected_line": null,
+          "original_following_line": 1242
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 1987,
+          "original_selected_line": null,
+          "original_following_line": 1996
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3248,
+          "original_selected_line": 3252,
+          "original_following_line": 3256
+        },
+        {
+          "macro": "DBG",
+          "original_error_line": 3351,
+          "original_selected_line": 3355,
+          "original_following_line": 3359
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdlcdbg.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdlcdbg.h",
+      "before_sha256": "89fdaa230a2327a053e51f90a02f124b23abaf2f7cfde9b3745199025b1981ba",
+      "after_sha256": "205baabd2d10ebeeb49a016c78634b7a4931c4ba961b009cd47cde0c1d53ebff",
+      "original_sha256": "2adbd4b0705a98bbb399c9b333551afa8999af1b27a008029b9fb871f787ff8c",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 180,
+          "original_selected_line": 185,
+          "original_following_line": 188
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcommdlg.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcommdlg.c",
+      "before_sha256": "ff5b07a3e4b0d5b4e7ea5c6e5ccbcebade882f0458d569c88e8e855eebb69021",
+      "after_sha256": "1b27283580d9a560f44076e4f618cfea589afe08f926dd3599c5f4f9c189f339",
+      "original_sha256": "01ce83329ae37a3e987971398115b8c7b5d9dcbc3320bdffaaa595244740a7d0",
+      "guards": [
+        {
+          "macro": "DBG",
+          "original_error_line": 35,
+          "original_selected_line": 234,
+          "original_following_line": 247
+        }
+      ]
+    }
+  ]
+}

@@ -204,8 +204,10 @@ mvdm_guest_location fileNameLocation;
     lpFileName = fileName;
 
 #if DBG
+#line 167
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 172
 
     //
     // the DOS filename must be 'canonicalized': forward slashes (/) must be
@@ -455,8 +457,10 @@ LPSTR   lpFileName;
     lpFileName = (LPSTR) GetVDMAddr (getDS(),getDX());
 
 #if DBG
+#line 421
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 426
 
     if (DeleteFileOem (lpFileName) == FALSE){
         demClientError(INVALID_HANDLE_VALUE, *lpFileName);
@@ -501,8 +505,10 @@ DWORD   dwAttr;
     lpFileName = (LPSTR) GetVDMAddr (getDS(),getDX());
 
 #if DBG
+#line 470
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 475
 
 
     if(getAL() == 0){
@@ -561,8 +567,10 @@ LPSTR   lpSrc,lpDst;
     lpDst = (LPSTR) GetVDMAddr (getES(),getDI());
 
 #if DBG
+#line 533
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 538
 
     // DOS rename fails accross drives with 11h error code
     // This following check is OK even for UNC names and SUBST drives.
@@ -666,8 +674,10 @@ DWORD   dwLastError;
 
 
 #if DBG
+#line 627
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 632
 
     dwDesiredAccess = GENERIC_WRITE | GENERIC_READ;
     sa.nLength = sizeof (SECURITY_ATTRIBUTES);
@@ -843,8 +853,10 @@ CHAR    szFileName[MAX_PATH];
     sprintf(szFileName, "%c:%sNUL", cDRV, lpFileName);
 
 #if DBG
+#line 807
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 812
 
 
     // If path exists then we always can open NUL file in this directory,
