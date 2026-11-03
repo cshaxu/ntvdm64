@@ -1,0 +1,179 @@
+{
+  "path": "src/mvdm-host/wow32/wcall16.c",
+  "source_sha256": "b7c6bf2791015c552e1b1ac46fdaedc60bf3fef72c14ebfaf60670a6fb9ff0c0",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall16.c",
+  "original_sha256": "4875844abfb8d22025480c14174481a194779d83759ce3a696e978b68c55a9f0",
+  "finding": "Conditional trees align, all retained leaves match except the registered DIV-304 callback trace in the selected branch; no original algorithm statements were removed in that leaf. Full file behavioral equivalence is not asserted.",
+  "plan": {
+    "path": "src/mvdm-host/wow32/wcall16.c",
+    "status": "candidate",
+    "edits": 0,
+    "excluded_groups": 9,
+    "source_sha256": "b7c6bf2791015c552e1b1ac46fdaedc60bf3fef72c14ebfaf60670a6fb9ff0c0",
+    "retained_leaf_diffs": [
+      {
+        "original_line": 777,
+        "current_line": 679,
+        "original": [
+          "// Time to get the IEU running task-time code again",
+          "SaveIp = getIP();",
+          "host_simulate();",
+          "setIP(SaveIp);",
+          "ptd->vpStack = VDMSTACK();"
+        ],
+        "current": [
+          "// Time to get the IEU running task-time code again",
+          "SaveIp = getIP();",
+          "/* DIVERGENCE(MVDM-HOST-DIV-304): default-off witness after the original",
+          "* stack selection and before the original CCPU reentry.  It copies no",
+          "* guest state and does not alter the callback protocol. */",
+          "wow_callback_frame_trace(\"simulate\", (DWORD)iRetID, ptd->vpStack,",
+          "ptd->vpCBStack, 0, ptd->htask16, (DWORD)vpfnProc,",
+          "pParm16 ? pParm16->WndProc.wMsg : 0,",
+          "pParm16 ? pParm16->WndProc.lParam : 0);",
+          "host_simulate();",
+          "setIP(SaveIp);",
+          "ptd->vpStack = VDMSTACK();"
+        ]
+      }
+    ]
+  },
+  "witness": {
+    "path": "src/mvdm-host/wow32/wcall16.c",
+    "source_sha256": "b7c6bf2791015c552e1b1ac46fdaedc60bf3fef72c14ebfaf60670a6fb9ff0c0",
+    "object": "wcall16",
+    "arms": [
+      {
+        "label": "codex_r691_arm_0000",
+        "line": 26,
+        "kind": "ifdef",
+        "expression": "WOWFASTEDIT",
+        "error_only": false
+      },
+      {
+        "label": "codex_r691_arm_0001",
+        "line": 93,
+        "kind": "ifndef",
+        "expression": "WOWFASTEDIT",
+        "error_only": true
+      },
+      {
+        "label": "codex_r691_arm_0002",
+        "line": 96,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r691_arm_0003",
+        "line": 505,
+        "kind": "ifdef",
+        "expression": "DEBUG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r691_arm_0004",
+        "line": 544,
+        "kind": "ifdef",
+        "expression": "DEBUG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r691_arm_0005",
+        "line": 558,
+        "kind": "if",
+        "expression": "FASTBOPPING",
+        "error_only": true
+      },
+      {
+        "label": "codex_r691_arm_0006",
+        "line": 561,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r691_arm_0007",
+        "line": 566,
+        "kind": "ifdef",
+        "expression": "DEBUG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r691_arm_0008",
+        "line": 616,
+        "kind": "ifdef",
+        "expression": "DEBUG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r691_arm_0009",
+        "line": 647,
+        "kind": "ifdef",
+        "expression": "DEBUG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r691_arm_0010",
+        "line": 663,
+        "kind": "if",
+        "expression": "FASTBOPPING",
+        "error_only": true
+      },
+      {
+        "label": "codex_r691_arm_0011",
+        "line": 666,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r691_arm_0012",
+        "line": 676,
+        "kind": "if",
+        "expression": "FASTBOPPING",
+        "error_only": true
+      },
+      {
+        "label": "codex_r691_arm_0013",
+        "line": 679,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "23c945a77d53bb0916f5f4d5f73dcc2765c2b1fdb06671210ac1da27a0927396",
+        "hit": [
+          "codex_r691_arm_0000",
+          "codex_r691_arm_0002",
+          "codex_r691_arm_0006",
+          "codex_r691_arm_0011",
+          "codex_r691_arm_0013"
+        ]
+      }
+    ]
+  },
+  "include_trace": [
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 324,
+      "identical": true,
+      "include_trace_sha256": "b989c1942c2b7e748fd317cd45017661945d1bab35b8df276951a279fc3291ca",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "contexts": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "wow32",
+      "object": "obj/wcall16.obj",
+      "command_sha256": "5d7b67c2755c967f9f0975855cd499b41831efb19690bf31690079f139b3ee98"
+    }
+  ],
+  "limits": "Observed release build graph only; configurations outside existing Ninja graphs remain unproven."
+}

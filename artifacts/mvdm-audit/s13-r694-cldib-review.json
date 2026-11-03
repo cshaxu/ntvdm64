@@ -1,0 +1,42 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+  "original": "O:/repos.external/OpenNT/windows/core/ntuser/client/cldib.c",
+  "original_sha256": "e16fb36805f44767b45b597510a6c08d1dbc47271783e5d1f8f09273c0f782fb",
+  "source_sha256": "e3863929df1748b35339f694005acf9f02c1280f21e7be4b2678fa4316d8263c",
+  "finding": "Original contains no conditional groups; current sole local guard belongs to bitmap binding and is selected in observed production graph. No source edit.",
+  "witness": {
+    "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+    "source_sha256": "e3863929df1748b35339f694005acf9f02c1280f21e7be4b2678fa4316d8263c",
+    "object": "opennt-user/cldib",
+    "arms": [
+      {
+        "label": "codex_r694_arm_0000",
+        "line": 12,
+        "kind": "ifndef",
+        "expression": "WOW_BITMAP_FIXTURE_BINDINGS",
+        "error_only": false
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "364ad70a12d7b5e2fa7c50077de80da4fe01ea34870cf0990f767707f5e2e748",
+        "hit": [
+          "codex_r694_arm_0000"
+        ]
+      }
+    ]
+  },
+  "include_trace": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 148,
+      "identical": true,
+      "include_trace_sha256": "6b12889d5a328349dda9dfbf86ecd83f3b0135eec22e229c2e9c473d646b4cd7",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "limits": "One observed WOW32 build graph; other contexts not proven"
+}

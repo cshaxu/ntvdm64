@@ -1,0 +1,255 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_eoi.c",
+  "before_sha256": "ae0f136083cea6a811800c65a5f38012a9161fb71bd1f65d90b0fcc36fad1579",
+  "after_sha256": "5feadea155ef7603be29f4ffa497a3e4397bd9923e5140bc0d24aabd7dab60f5",
+  "original_sha256": "f6a898050e894de0a2c17d11ecf502b0d13ed4c2d58766175063ca0246ec2db5",
+  "guards": [
+    {
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "original_line": 51,
+      "error_line": 52,
+      "end_line": 56
+    },
+    {
+      "kind": "if",
+      "expression": "DBG",
+      "original_line": 201,
+      "error_line": 202,
+      "end_line": 204
+    },
+    {
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "original_line": 234,
+      "error_line": 235,
+      "end_line": 240
+    },
+    {
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "original_line": 257,
+      "error_line": 258,
+      "end_line": 311
+    },
+    {
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "original_line": 381,
+      "error_line": 382,
+      "end_line": 405
+    },
+    {
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "original_line": 458,
+      "error_line": 459,
+      "end_line": 461
+    },
+    {
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "original_line": 500,
+      "error_line": 501,
+      "end_line": 519
+    },
+    {
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "original_line": 521,
+      "error_line": 522,
+      "end_line": 546
+    }
+  ],
+  "retained_leaf_difference": {
+    "original_line": 332,
+    "current_line": 324,
+    "original": [
+      "/*",
+      "* QuickEvent call back function",
+      "*",
+      "*/",
+      "void DelayIrqQuickEvent(long param)",
+      "{",
+      "ULONG IrqLineNum = param;",
+      "host_ica_lock();",
+      "DelayHandle[IrqLineNum] = 0;",
+      "ica_RestartInterrupts(1 << IrqLineNum);",
+      "host_ica_unlock();",
+      "}"
+    ],
+    "current": [
+      "void DelayIrqQuickEvent(long param)",
+      "{",
+      "ULONG IrqLineNum = param;",
+      "host_ica_lock();",
+      "DelayHandle[IrqLineNum] = 0;",
+      "ica_RestartInterrupts(1 << IrqLineNum);",
+      "host_ica_unlock();",
+      "}"
+    ]
+  },
+  "difference_registration": "Original QuickEvent comment restored",
+  "witness": {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+    "source_sha256": "ae0f136083cea6a811800c65a5f38012a9161fb71bd1f65d90b0fcc36fad1579",
+    "object": "host/nt_eoi",
+    "arms": [
+      {
+        "label": "codex_r685_arm_0000",
+        "line": 47,
+        "kind": "ifdef",
+        "expression": "MONITOR",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0001",
+        "line": 61,
+        "kind": "ifndef",
+        "expression": "MONITOR",
+        "error_only": false
+      },
+      {
+        "label": "codex_r685_arm_0002",
+        "line": 98,
+        "kind": "ifndef",
+        "expression": "MONITOR",
+        "error_only": false
+      },
+      {
+        "label": "codex_r685_arm_0003",
+        "line": 110,
+        "kind": "ifndef",
+        "expression": "MONITOR",
+        "error_only": false
+      },
+      {
+        "label": "codex_r685_arm_0004",
+        "line": 203,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0005",
+        "line": 238,
+        "kind": "ifdef",
+        "expression": "MONITOR",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0006",
+        "line": 240,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r685_arm_0007",
+        "line": 263,
+        "kind": "ifdef",
+        "expression": "MONITOR",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0008",
+        "line": 265,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r685_arm_0009",
+        "line": 324,
+        "kind": "ifndef",
+        "expression": "MONITOR",
+        "error_only": false
+      },
+      {
+        "label": "codex_r685_arm_0010",
+        "line": 371,
+        "kind": "ifdef",
+        "expression": "MONITOR",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0011",
+        "line": 436,
+        "kind": "ifdef",
+        "expression": "MONITOR",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0012",
+        "line": 479,
+        "kind": "ifdef",
+        "expression": "MONITOR",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0013",
+        "line": 481,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r685_arm_0014",
+        "line": 494,
+        "kind": "ifdef",
+        "expression": "MONITOR",
+        "error_only": true
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "c69d70960b5133751e87011b426772560f1d7aaf3565c48d8944000271ca1f09",
+        "hit": [
+          "codex_r685_arm_0001",
+          "codex_r685_arm_0002",
+          "codex_r685_arm_0003",
+          "codex_r685_arm_0006",
+          "codex_r685_arm_0008",
+          "codex_r685_arm_0009",
+          "codex_r685_arm_0013"
+        ]
+      },
+      {
+        "graph": "msvc-x64-release",
+        "exit": 0,
+        "preprocessed_sha256": "c69d70960b5133751e87011b426772560f1d7aaf3565c48d8944000271ca1f09",
+        "hit": [
+          "codex_r685_arm_0001",
+          "codex_r685_arm_0002",
+          "codex_r685_arm_0003",
+          "codex_r685_arm_0006",
+          "codex_r685_arm_0008",
+          "codex_r685_arm_0009",
+          "codex_r685_arm_0013"
+        ]
+      }
+    ]
+  },
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 182,
+      "identical": true,
+      "include_trace_sha256": "8b150f333903037f025c4f8dea052c7e5d3cc66277aafee6edf2fbb929fbc3e3",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 182,
+      "identical": true,
+      "include_trace_sha256": "8b150f333903037f025c4f8dea052c7e5d3cc66277aafee6edf2fbb929fbc3e3",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "limits": "Observed worker release graphs; Original QuickEvent comment restored; other local differences and supported build configurations remain separate."
+}

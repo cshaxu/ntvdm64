@@ -2820,3 +2820,47 @@ MVDM-HOST-DIV-764: restore original diagnostic and continuation mappings for
 WOW32/wdib.c after original-tree comparison, selected-arm witnessing and
 same-directory include-path checks. Evidence:
 ../../artifacts/mvdm-audit/s13-r691-witnessed-anchor-batch.json.
+
+MVDM-HOST-DIV-765: restore original diagnostic and continuation mappings in
+WOW32/wmmalias.c and wusercli.c after original-tree comparison, selected-arm
+witnessing and same-directory include-path checks. Evidence:
+../../artifacts/mvdm-audit/s13-r692-witnessed-anchor-batch.json.
+
+MVDM-HOST-DIV-766: restore original diagnostic and continuation mappings in
+base/ccpu386/fpu.c, preserving the registered DIV-130 pointer-width cast.
+Evidence: ../../artifacts/mvdm-audit/s13-r704-fpu-anchor-review.json.
+
+MVDM-HOST-DIV-767: restore original diagnostic and continuation mappings in
+base/system/idetect.c, retaining registered DIV-024 include-path adaptation.
+Evidence: ../../artifacts/mvdm-audit/s13-r707-idetect-anchor-review.json.
+
+MVDM-HOST-DIV-768: restore original diagnostic mappings and caller lock-contract
+comment in base/system/qevnt.c after condition-tree and build-context checks.
+Evidence: ../../artifacts/mvdm-audit/s13-r708-qevnt-anchor-review.json.
+
+MVDM-HOST-DIV-769: restore original diagnostic mappings and QuickEvent comment
+in host/src/nt_eoi.c after condition-tree and build-context checks. Evidence:
+../../artifacts/mvdm-audit/s13-r710-nteoi-anchor-review.json.
+
+MVDM-HOST-DIV-770: retain existing optional WOW-stage observation in
+host/src/nt_bop.c, including the dispatch-begin trace in the selected original
+branch. The host helper reads MVDM_S42_WOW_RETURN_REPORT_PATH, appends stage
+and CPU scalars only when configured, and restores the Win32 last-error value.
+Enabled tracing performs file I/O and may change timing; it is not evidence of
+identical timing. Original conditional line mappings are restored. Evidence:
+../../artifacts/mvdm-audit/s13-r711-ntbop-anchor-review.json.
+
+MVDM-HOST-DIV-771: restore original diagnostic mappings in xms.486/xmsblock.c
+while retaining DIV-077 guest-copy adaptation. Also register the existing
+optional XMS move observer: MVDM_WIN31_SETUP_XMS_TRACE_PATH enables bounded
+per-thread file output, preserves Win32 last-error, and can alter timing.
+Evidence: ../../artifacts/mvdm-audit/s13-r712-xmsblock-anchor-review.json.
+
+MVDM-HOST-DIV-772: reject the original fallback min definition in
+base/bios/emm_fncs.c for the observed worker configurations, which already
+receive min from the host SDK. Original branch framework and diagnostic line
+mapping are retained. Evidence: ../../artifacts/mvdm-audit/s13-r717-emm-min-review.json.
+
+MVDM-HOST-DIV-773: reject the original WDCTRL_BOP entry in base/bios/bios.c
+for observed worker configurations while preserving the original condition and
+selected fallback. Evidence: ../../artifacts/mvdm-audit/s13-r718-bios-wdctrl-review.json.

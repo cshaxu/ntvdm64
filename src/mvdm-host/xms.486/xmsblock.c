@@ -211,9 +211,10 @@ ULONG MoveInfoAddress;
     // Yes, we could use memmov for handling the overlapping regions
     // but XMS spec wants memcpy behaviour.
 #ifdef i386
+#line 195
 #error DIVERGENCE MVDM-HOST-DIV-594: historical i386 XMS path is not selected
 #else
-#line 213
+#line 197
     mvdm_softpc_report_xms_move((ULONG)pSrc, (ULONG)pDst, cbTransfer, FALSE);
     if (!mvdm_softpc_guest_memory_copy_forward((ULONG)pDst,
             (ULONG)pSrc, cbTransfer)) {

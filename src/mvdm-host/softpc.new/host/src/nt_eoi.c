@@ -45,6 +45,7 @@ ULONG UndelayIrqLine=0;
 ULONG DelayIrqLine=0xffffffff;  // all ints are blocked until, spckbd loaded
 
 #ifdef MONITOR
+#line 52
 #error Excluded original conditional branch
 #endif
 #line 56
@@ -236,12 +237,13 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
    ULONG  IrqLine;
 
 #ifdef MONITOR
+#line 235
 #error Excluded unsupported delayed-interrupt monitor declarations
 #else
-#line 219
+#line 238
    ULONG TicCount;
 #endif
-#line 220
+#line 240
 
    host_ica_lock();
 
@@ -261,9 +263,10 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
 
 
 #ifdef MONITOR
+#line 258
 #error Excluded unsupported delayed-interrupt monitor dispatch
 #else
-#line 238
+#line 278
         //
         // Cancel delay hw interrupt, delete quick event if any
         //
@@ -292,7 +295,7 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
         //
         WOWIdle(TRUE);
 #endif
-#line 265
+#line 311
 
 
 
@@ -323,6 +326,10 @@ BOOL host_DelayHwInterrupt(int IrqLineNum, int CallCount, ULONG Delay)
  */
 #ifndef MONITOR
 #line 337
+/*
+* QuickEvent call back function
+*
+*/
 void DelayIrqQuickEvent(long param)
 {
    ULONG IrqLineNum = param;
@@ -369,9 +376,10 @@ void InitializeIcaLock(void)
 
 
 #ifdef MONITOR
+#line 382
 #error Excluded original conditional branch
 #endif
-#line 336
+#line 405
 
 
 
@@ -434,9 +442,10 @@ void ica_reset_interrupt_state(void)
     VirtualIca[ICA_SLAVE].ica_cpu_int  = FALSE;
 
 #ifdef MONITOR
+#line 459
 #error Excluded original conditional branch
 #endif
-#line 397
+#line 461
     DelayIrqLine  = 0;
 
     //Tell CPU to remove any pending interrupts
@@ -477,9 +486,10 @@ VOID DisableEmulatorIretHooks(void)
 VOID ica_RestartInterrupts(ULONG IrqLine)
 {
 #ifdef MONITOR
+#line 501
 #error Excluded unsupported monitor interrupt restart
 #else
-#line 436
+#line 511
     host_ica_lock();
 
     DelayIrqLine &= ~IrqLine;
@@ -488,9 +498,11 @@ VOID ica_RestartInterrupts(ULONG IrqLine)
 
     host_ica_unlock();
 #endif
-#line 443
+#line 519
 }
 
 #ifdef MONITOR
+#line 522
 #error Excluded unsupported monitor IRET table
 #endif
+#line 546

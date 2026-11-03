@@ -1,0 +1,1530 @@
+{
+  "scope": "Pending C source compiler commands observed in three existing Ninja graphs; headers and other graphs are not covered; command observation is not evidence of branch reachability",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/data.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/dpmi/data.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/dpmi/data.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmi32.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/dpmi/dpmi32.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/dpmi/dpmi32.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiint.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/dpmi/dpmiint.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/dpmi/dpmiint.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmimemr.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/dpmi/dpmimemr.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/dpmi/dpmimemr.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/dpmiselr.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/dpmi/dpmiselr.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/dpmi/dpmiselr.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmi386.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/dpmi/i386_dpmi386.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/dpmi/i386_dpmi386.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/modesw.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/dpmi/modesw.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/dpmi/modesw.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/bios/bios.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/bios/bios.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/bios/emm_fncs.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/bios/emm_fncs.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/bios/reset.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/bios/reset.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/tape_io.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/bios/tape_io.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/bios/tape_io.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/ccpu/c_main.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/ccpu/c_main.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xcptn.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/ccpu/c_xcptn.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/ccpu/c_xcptn.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/ccpu/fpu.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/ccpu/fpu.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/comms/printer.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/comms/printer.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/printer_.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/comms/printer_.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/comms/printer_.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/ega_dump.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/base-debug/ega_dump.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/base-debug/ega_dump.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/trace.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/base-debug/trace.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/base-debug/trace.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/base-debug/yoda.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/base-debug/yoda.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/dos/emm_mngr.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/dos/emm_mngr.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/keymouse/keyba.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/keymouse/keyba.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/keymouse/keybd_io.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/keymouse/keybd_io.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse_io.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/keymouse/mouse_io.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/keymouse/mouse_io.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/ios.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/support/ios.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/support/ios.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/main.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/support/main.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/support/main.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/xt.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/support/xt.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/support/xt.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/ica.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/system/ica.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/system/ica.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/system/idetect.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/system/idetect.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/system/illegalp.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/system/illegalp.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/system/qevnt.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/system/qevnt.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timer.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/system/timer.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/system/timer.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/cga.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/video/cga.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/video/cga.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/video/ega_mode.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/video/ega_mode.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_prts.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/video/ega_prts.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/video/ega_prts.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/video/ega_read.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/video/ega_read.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/video/ega_vide.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/video/ega_vide.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/video/ega_writ.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/video/ega_writ.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egawrtm0.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/video/egawrtm0.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/video/egawrtm0.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/egwrtm12.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/video/egwrtm12.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/video/egwrtm12.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gfx_updt.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/video/gfx_updt.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/video/gfx_updt.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/video/v7_video.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/video/v7_video.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_mode.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/video/vga_mode.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/video/vga_mode.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/vga_prts.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/video/vga_prts.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/video/vga_prts.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/video.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/video/video.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/video/video.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/config.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/config.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/config.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/copy_fnc.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/copy_fnc.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/nt_bop.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/nt_bop.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_cpu.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/nt_cpu.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/nt_cpu.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_emm.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/nt_emm.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/nt_emm.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_eoi.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/nt_eoi.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/nt_eoi.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/nt_error.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/nt_error.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_event.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/nt_event.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/nt_event.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_fulsc.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/nt_fulsc.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/nt_fulsc.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_graph.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/nt_graph.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/nt_graph.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_inthk.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/nt_inthk.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/nt_inthk.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/nt_mem.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/nt_mem.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_msscs.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/nt_msscs.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/nt_msscs.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_reset.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/nt_reset.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/nt_reset.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/nt_vga.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/nt_vga.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/sim32.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/sim32.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/sim32.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/stubs.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/stubs.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/obj.vdm/ntvdm.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/host/ntvdm_entry.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/host/ntvdm_entry.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/walias.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall16.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wcall16.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall32.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wcall32.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wgmeta.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkman.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wkman.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wkmem.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wmdisp32.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wmmalias.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wow32.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wow32.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wshell.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wshell.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuclass.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wuclass.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wuser.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wuser31.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wusercli.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuwind.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wuwind.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/xms/xms.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/xms/xms.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/xms/xmsblock.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/xms/xmsblock.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsmemr.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/xms/xmsmemr.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/xms/xmsmemr.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/probe.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/memalloc.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/opennt-netlib/memalloc.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/opennt-netlib/memalloc.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/netlib/packstr.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/opennt-netlib/packstr.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/opennt-netlib/packstr.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/apimsg.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "worker",
+          "object": "obj/opennt-xactsrv/apimsg.obj"
+        },
+        {
+          "preset": "msvc-x64-release",
+          "graph": "worker-reference-x86",
+          "object": "obj/opennt-xactsrv/apimsg.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/cldib.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/client.obj"
+        },
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/dialog-memory.obj"
+        },
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-state.obj"
+        },
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/default-window-bits.obj"
+        },
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/class-client.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/default-client.obj"
+        },
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/client-callproc.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/clres.obj"
+        },
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/dialog-template.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-body-dlgbegin.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-body-dlgmgr.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-body-dlgmgr2.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/mngrayc.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-client-mngrayc.obj"
+        },
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/button-blit.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/ntstubs.obj"
+        },
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-text.obj"
+        },
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-color.obj"
+        },
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-brush-client.obj"
+        },
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/private-word-client.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/rtlinit.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/rtlinit.obj"
+        },
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-lookaside.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-body-winmgrc.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-body-wow.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/class-remove.obj"
+        },
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/class-register.obj"
+        },
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/class.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/exitwin.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/private-word-setter.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/handtabl.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/button-atlas-table.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/input.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-fnid.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/queue.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/default-messages.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/adapter-win32/chartran.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-draw.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-text-rtl.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/getset.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/private-word-reader.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/winmgr.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-view-winmgr.obj"
+        },
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/default-borders.obj"
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/opennt-user/control-view-wow.obj"
+        }
+      ]
+    }
+  ]
+}

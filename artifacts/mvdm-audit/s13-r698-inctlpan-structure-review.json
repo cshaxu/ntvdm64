@@ -1,0 +1,13 @@
+{
+  "path": "src/non-mvdm/windows/core/ntuser/kernel/inctlpan.c",
+  "current_sha256": "357ac39804b3c8411c8042fbb2ae9f047e02791120202f5dd7a88bdc5ac2a6e1",
+  "original": "O:/repos.external/OpenNT/windows/core/ntuser/kernel/inctlpan.c",
+  "original_sha256": "0e3999df8610405c990760ee1a417bf312e3b76744f8f9387bbd94583f9d800d",
+  "original_missing_group": {
+    "line": 840,
+    "condition": "#ifndef KOREA",
+    "end_line": 848
+  },
+  "finding": "Group occurs in an original function removed as part of the bounded sysBmpStyles-only local mirror subset. Current observed production object builds the table; the original function has not been shown selected. Adding this original #ifndef directly to the live translation unit with #error would change current compilation whenever KOREA is undefined. Neither absence of its original function nor a single graph proves every supported context excludes the branch.",
+  "disposition": "pending: establish supported-context and original function ownership before structural restoration; preserve original selected table and local patch."
+}

@@ -1,0 +1,326 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\fpu.c",
+  "before_sha256": "82e5bae3413740ce3172df64a85405ce17cbab54b0cdb607d67596b5d988240d",
+  "after_sha256": "105f6260fa8fb1812e2a1fcc25de69886f56996d36ffa70186ed088612b6e098",
+  "original_sha256": "1309239998f72b64583b184d33623c763c3c98ea185081f8d8b294cd9b8c524f",
+  "guards": [
+    {
+      "kind": "ifndef",
+      "expression": "NULL",
+      "original_line": 158,
+      "error_line": 159,
+      "end_line": 161
+    },
+    {
+      "kind": "ifdef",
+      "expression": "SUN4",
+      "original_line": 260,
+      "error_line": 261,
+      "end_line": 263
+    },
+    {
+      "kind": "ifdef",
+      "expression": "BIGEND",
+      "original_line": 460,
+      "error_line": 461,
+      "end_line": 510
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 1304,
+      "error_line": 1305,
+      "end_line": 1307
+    },
+    {
+      "kind": "if",
+      "expression": "(HOST_BIAS >= 16383)",
+      "original_line": 1755,
+      "error_line": 1756,
+      "end_line": 1777
+    },
+    {
+      "kind": "if",
+      "expression": "(HOST_BIAS >= 16383)",
+      "original_line": 1881,
+      "error_line": 1882,
+      "end_line": 1886
+    }
+  ],
+  "retained_leaf_difference": {
+    "original_line": 5796,
+    "current_line": 5782,
+    "original": [
+      "/* copied here from FmNpx.c */",
+      "GLOBAL\tvoid NpxStackRegAsString IFN3(FPSTACKENTRY *, fpStPtr, char *, buf, IU32, prec)",
+      "{",
+      "/* The overwhelmingly most likely option is empty. */",
+      "if ((fpStPtr->tagvalue & TAG_EMPTY_MASK) != 0) {",
+      "strcpy(buf, \"empty\");",
+      "return;",
+      "}",
+      "if ((fpStPtr->tagvalue & ~(TAG_NEGATIVE_MASK | TAG_DENORMAL_MASK)) == 0) {",
+      "sprintf(buf, \"%.*g\", prec, fpStPtr->fpvalue);",
+      "return;",
+      "}",
+      "/* OK, one of the funny bits was set. But which? */",
+      "if ((fpStPtr->tagvalue & TAG_ZERO_MASK) != 0) {",
+      "if ((fpStPtr->tagvalue & TAG_NEGATIVE_MASK) != 0) {",
+      "strcpy(buf, \"-0\");",
+      "} else {",
+      "strcpy(buf, \"0\");",
+      "}",
+      "return;",
+      "}",
+      "if ((fpStPtr->tagvalue & UNEVALMASK) != 0) {",
+      "sprintf(buf, \"%04x %08x%08x\",",
+      "((FP80*)fpStPtr)->sign_exp,",
+      "((FP80*)fpStPtr)->mant_hi,",
+      "((FP80*)fpStPtr)->mant_lo);",
+      "strcat(buf, \" uneval\");",
+      "return;",
+      "}",
+      "if ((fpStPtr->tagvalue & TAG_INFINITY_MASK) != 0) {",
+      "if ((fpStPtr->tagvalue & TAG_NEGATIVE_MASK) != 0) {",
+      "strcpy(buf, \"minus infinity\");",
+      "} else {",
+      "strcpy(buf, \"infinity\");",
+      "}",
+      "return;",
+      "}",
+      "if ((fpStPtr->tagvalue & (TAG_NAN_MASK|TAG_SNAN_MASK)) != 0) {",
+      "if (    ((FP80*)fpStPtr)->mant_lo == 0",
+      "&& ((FP80*)fpStPtr)->mant_hi == 0xC0000000",
+      "&& *(IU16*)&((FP80*)fpStPtr)->sign_exp == 0xFFFF )",
+      "strcpy(buf, \"indefinite\");",
+      "else",
+      "sprintf(buf, \"%08x%08x %s %sNan\",",
+      "((FP80*)fpStPtr)->mant_hi,",
+      "((FP80*)fpStPtr)->mant_lo,",
+      "(fpStPtr->tagvalue & TAG_NEGATIVE_MASK) ? \"negative\" : \"\",",
+      "(fpStPtr->tagvalue & TAG_SNAN_MASK) ? \"S\" : \"\");",
+      "return;",
+      "}",
+      "/* It MUST be unsupported */",
+      "sprintf(buf, \"%04 %08x%08x unsupported\",",
+      "((FP80*)fpStPtr)->sign_exp,",
+      "((FP80*)fpStPtr)->mant_hi,",
+      "((FP80*)fpStPtr)->mant_lo);",
+      "return;",
+      "}",
+      "/* this one is only ever used in trace.c and only if pure CCPU */",
+      "GLOBAL char * getNpxStackReg IFN2(IU32, reg_num, char *, buffer)",
+      "{",
+      "reg_num += TOSPtr - FPUStackBase;",
+      "NpxStackRegAsString (&FPUStackBase[reg_num&7], buffer, 12);",
+      "return buffer;",
+      "}"
+    ],
+    "current": [
+      "/* copied here from FmNpx.c */",
+      "GLOBAL\tvoid NpxStackRegAsString IFN3(FPSTACKENTRY *, fpStPtr, char *, buf, IU32, prec)",
+      "{",
+      "/* The overwhelmingly most likely option is empty. */",
+      "if ((fpStPtr->tagvalue & TAG_EMPTY_MASK) != 0) {",
+      "strcpy(buf, \"empty\");",
+      "return;",
+      "}",
+      "if ((fpStPtr->tagvalue & ~(TAG_NEGATIVE_MASK | TAG_DENORMAL_MASK)) == 0) {",
+      "sprintf(buf, \"%.*g\", prec, fpStPtr->fpvalue);",
+      "return;",
+      "}",
+      "/* OK, one of the funny bits was set. But which? */",
+      "if ((fpStPtr->tagvalue & TAG_ZERO_MASK) != 0) {",
+      "if ((fpStPtr->tagvalue & TAG_NEGATIVE_MASK) != 0) {",
+      "strcpy(buf, \"-0\");",
+      "} else {",
+      "strcpy(buf, \"0\");",
+      "}",
+      "return;",
+      "}",
+      "if ((fpStPtr->tagvalue & UNEVALMASK) != 0) {",
+      "sprintf(buf, \"%04x %08x%08x\",",
+      "((FP80*)fpStPtr)->sign_exp,",
+      "((FP80*)fpStPtr)->mant_hi,",
+      "((FP80*)fpStPtr)->mant_lo);",
+      "strcat(buf, \" uneval\");",
+      "return;",
+      "}",
+      "if ((fpStPtr->tagvalue & TAG_INFINITY_MASK) != 0) {",
+      "if ((fpStPtr->tagvalue & TAG_NEGATIVE_MASK) != 0) {",
+      "strcpy(buf, \"minus infinity\");",
+      "} else {",
+      "strcpy(buf, \"infinity\");",
+      "}",
+      "return;",
+      "}",
+      "if ((fpStPtr->tagvalue & (TAG_NAN_MASK|TAG_SNAN_MASK)) != 0) {",
+      "if (    ((FP80*)fpStPtr)->mant_lo == 0",
+      "&& ((FP80*)fpStPtr)->mant_hi == 0xC0000000",
+      "&& *(IU16*)&((FP80*)fpStPtr)->sign_exp == 0xFFFF )",
+      "strcpy(buf, \"indefinite\");",
+      "else",
+      "sprintf(buf, \"%08x%08x %s %sNan\",",
+      "((FP80*)fpStPtr)->mant_hi,",
+      "((FP80*)fpStPtr)->mant_lo,",
+      "(fpStPtr->tagvalue & TAG_NEGATIVE_MASK) ? \"negative\" : \"\",",
+      "(fpStPtr->tagvalue & TAG_SNAN_MASK) ? \"S\" : \"\");",
+      "return;",
+      "}",
+      "/* It MUST be unsupported */",
+      "sprintf(buf, \"%04 %08x%08x unsupported\",",
+      "((FP80*)fpStPtr)->sign_exp,",
+      "((FP80*)fpStPtr)->mant_hi,",
+      "((FP80*)fpStPtr)->mant_lo);",
+      "return;",
+      "}",
+      "/* this one is only ever used in trace.c and only if pure CCPU */",
+      "GLOBAL char * getNpxStackReg IFN2(IU32, reg_num, char *, buffer)",
+      "{",
+      "reg_num += (IU32)(TOSPtr - FPUStackBase);",
+      "NpxStackRegAsString (&FPUStackBase[reg_num&7], buffer, 12);",
+      "return buffer;",
+      "}"
+    ]
+  },
+  "difference_registration": "MVDM-HOST-DIV-130",
+  "witness": {
+    "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+    "source_sha256": "82e5bae3413740ce3172df64a85405ce17cbab54b0cdb607d67596b5d988240d",
+    "object": "ccpu/fpu",
+    "arms": [
+      {
+        "label": "codex_r687_arm_0000",
+        "line": 160,
+        "kind": "ifndef",
+        "expression": "NULL",
+        "error_only": true
+      },
+      {
+        "label": "codex_r687_arm_0001",
+        "line": 234,
+        "kind": "ifndef",
+        "expression": "host_log2",
+        "error_only": false
+      },
+      {
+        "label": "codex_r687_arm_0002",
+        "line": 238,
+        "kind": "ifndef",
+        "expression": "host_log1p",
+        "error_only": false
+      },
+      {
+        "label": "codex_r687_arm_0003",
+        "line": 266,
+        "kind": "ifdef",
+        "expression": "SUN4",
+        "error_only": true
+      },
+      {
+        "label": "codex_r687_arm_0004",
+        "line": 468,
+        "kind": "ifdef",
+        "expression": "BIGEND",
+        "error_only": true
+      },
+      {
+        "label": "codex_r687_arm_0005",
+        "line": 471,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r687_arm_0006",
+        "line": 1293,
+        "kind": "ifndef",
+        "expression": "SFELLOW",
+        "error_only": false
+      },
+      {
+        "label": "codex_r687_arm_0007",
+        "line": 1295,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r687_arm_0008",
+        "line": 1746,
+        "kind": "if",
+        "expression": "(HOST_BIAS >= 16383)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r687_arm_0009",
+        "line": 1749,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r687_arm_0010",
+        "line": 1864,
+        "kind": "if",
+        "expression": "(HOST_BIAS >= 16383)",
+        "error_only": true
+      },
+      {
+        "label": "codex_r687_arm_0011",
+        "line": 5782,
+        "kind": "ifndef",
+        "expression": "PIG",
+        "error_only": false
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "f2e09a273be2b5fbf86bfe87abe9837906727aa2a4cafa722994fc227fc700b0",
+        "hit": [
+          "codex_r687_arm_0001",
+          "codex_r687_arm_0002",
+          "codex_r687_arm_0005",
+          "codex_r687_arm_0006",
+          "codex_r687_arm_0009",
+          "codex_r687_arm_0011"
+        ]
+      },
+      {
+        "graph": "msvc-x64-release",
+        "exit": 0,
+        "preprocessed_sha256": "f2e09a273be2b5fbf86bfe87abe9837906727aa2a4cafa722994fc227fc700b0",
+        "hit": [
+          "codex_r687_arm_0001",
+          "codex_r687_arm_0002",
+          "codex_r687_arm_0005",
+          "codex_r687_arm_0006",
+          "codex_r687_arm_0009",
+          "codex_r687_arm_0011"
+        ]
+      }
+    ]
+  },
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 167,
+      "identical": true,
+      "include_trace_sha256": "85b134f5b084b44907c3963c04e40c892a8a1020326d443c358bee0d55fb9686",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 167,
+      "identical": true,
+      "include_trace_sha256": "85b134f5b084b44907c3963c04e40c892a8a1020326d443c358bee0d55fb9686",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "limits": "Observed worker release graphs; local pointer-width cast retained without claiming full FPU semantic equivalence."
+}

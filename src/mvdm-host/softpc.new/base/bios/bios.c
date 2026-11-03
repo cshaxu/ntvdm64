@@ -123,10 +123,13 @@ void (*BIOS[])() = {
 			illegal_bop,   	/* BOP 03 */
 #endif	/* DOS_APP_LIC */
 #ifdef WDCTRL_BOP
-			wdctrl_bop,   	/* BOP 04 */
+#line 130
+#error Unsupported excluded WDCTRL_BOP configuration
 #else   /* WDCTRL_BOP */
+#line 132
 			illegal_bop,	/* BOP 04 */
 #endif	/* WDCTRL_BOP */
+#line 134
 #if !defined(PROD) && defined(CPU_40_STYLE)
 #error DIVERGENCE MVDM-HOST-DIV-515: compound branch is not selected for this source; see mirror register.
 #else

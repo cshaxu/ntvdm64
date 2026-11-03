@@ -1,0 +1,100 @@
+{
+  "path": "src/mvdm-host/xms.486/xmsblock.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xmsblock.c",
+  "before_sha256": "d3497e87ba1091ab107bad4582220dce4fa6acb7ecb9e0a03616b68217836efd",
+  "after_sha256": "a54ee860821ba760cdfe8da3bd36e3d56fa337e1b8cf283b90d0af34467e2d65",
+  "original_sha256": "bad1de87b499d3052e757d858b39437232f5653610dc5560c06afcc5e05fd391",
+  "guards": [
+    {
+      "kind": "ifdef",
+      "expression": "i386",
+      "original_line": 194,
+      "error_line": 195,
+      "end_line": 209
+    }
+  ],
+  "retained_leaf_difference": {
+    "original_line": 196,
+    "current_line": 215,
+    "original": [
+      "SoftpcBase = (ULONG) GetVDMAddr (0,0);",
+      "RtlCopyMemory((PVOID)((ULONG)pDst + SoftpcBase),",
+      "(PVOID)((ULONG)pSrc + SoftpcBase),",
+      "cbTransfer);",
+      "// if we touched the intel memory, tell the emulator to flush its cache",
+      "// WARNING!!!! Donot use Sim32FlushVDMPoiner unless you know the exact segment",
+      "// address. In this case, we have no idea what the segment value is, all we",
+      "// know is its \"linear address\".",
+      "// BUGBUG verify whether we can ignore the case with pDst > 0x110000",
+      "sas_overwrite_memory(pDst, cbTransfer);"
+    ],
+    "current": [
+      "mvdm_softpc_report_xms_move((ULONG)pSrc, (ULONG)pDst, cbTransfer, FALSE);",
+      "if (!mvdm_softpc_guest_memory_copy_forward((ULONG)pDst,",
+      "(ULONG)pSrc, cbTransfer)) {",
+      "mvdm_xms_cancel_current_operation();",
+      "return;",
+      "}",
+      "mvdm_softpc_report_xms_move((ULONG)pSrc, (ULONG)pDst, cbTransfer, TRUE);"
+    ]
+  },
+  "difference_registration": "MVDM-HOST-DIV-077",
+  "witness": {
+    "path": "src/mvdm-host/xms.486/xmsblock.c",
+    "source_sha256": "d3497e87ba1091ab107bad4582220dce4fa6acb7ecb9e0a03616b68217836efd",
+    "object": "xms/xmsblock",
+    "arms": [
+      {
+        "label": "codex_r689_arm_0000",
+        "line": 213,
+        "kind": "ifdef",
+        "expression": "i386",
+        "error_only": true
+      },
+      {
+        "label": "codex_r689_arm_0001",
+        "line": 215,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "b1321bb8efe32589a9b4dcc000ef954eb9d9e3608bb38eeb79f1b5ad63091638",
+        "hit": [
+          "codex_r689_arm_0001"
+        ]
+      },
+      {
+        "graph": "msvc-x64-release",
+        "exit": 0,
+        "preprocessed_sha256": "b1321bb8efe32589a9b4dcc000ef954eb9d9e3608bb38eeb79f1b5ad63091638",
+        "hit": [
+          "codex_r689_arm_0001"
+        ]
+      }
+    ]
+  },
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 177,
+      "identical": true,
+      "include_trace_sha256": "329c117f896a2c756f5fb325fbbdfde7d5183c2751cf47de4361aceb4d31a51f",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xmsblock.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 177,
+      "identical": true,
+      "include_trace_sha256": "329c117f896a2c756f5fb325fbbdfde7d5183c2751cf47de4361aceb4d31a51f",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "limits": "Observed worker release graphs; Existing DIV-077 guest memory copy and optional trace retained; full copy behavior not revalidated by condition review."
+}

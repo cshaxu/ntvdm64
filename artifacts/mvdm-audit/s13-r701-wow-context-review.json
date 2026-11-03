@@ -1,0 +1,119 @@
+{
+  "scope": "Eight no-edit WOW32 files cross-checked against all 15 currently present x86/x64 release Ninja graphs",
+  "method": "Original and current conditional-tree plans and same-directory include traces already recorded; source and original hashes revalidated, all observed direct build contexts enumerated.",
+  "limits": "Headers and build configurations outside existing release graphs are not covered; no claim of unobserved runtime branches.",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wshell.c",
+      "source_sha256": "1daa7860c95a0e374566b900d2da01e7459e7b88c0dfbe8e84b23f68bdf3ad40",
+      "original_sha256": "1daa7860c95a0e374566b900d2da01e7459e7b88c0dfbe8e84b23f68bdf3ad40",
+      "review": "s13-r696-wow-noedit-review.json",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wshell.obj",
+          "command_sha256": "1f9e9fdd19d3d02ef278a7ac9133fe5fdbf3783a5c4f3488856270a7af7cc09a"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser.c",
+      "source_sha256": "1d4935e9c44725b1b3ca6c4ded1ecf6a58cbbbdf8e3de9d78b7416126fe25f75",
+      "original_sha256": "ce33e8634d085f9ca27ad331560e5321c3fed2ee8552ce0d00fda25af0a74b62",
+      "review": "s13-r696-wow-noedit-review.json",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wuser.obj",
+          "command_sha256": "294641b2f97e667387f11a80069d0ed50762e727ce5ec9c296856136cb7e9312"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "source_sha256": "822e57351b7f0264397979150ded05ec036e24da0a754d6688fd2415c8edb123",
+      "original_sha256": "260237f9fda0013f02bbbcbc94c29ea2069de545043b636f2828c554e55582a4",
+      "review": "s13-r696-wow-noedit-review.json",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wuser31.obj",
+          "command_sha256": "20a5873e602b0610a44a5c0aefe60b8d8ac167f13fc660983f9b53e007c9758d"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "source_sha256": "ed1f93ee396d432f1f398b29a1fb6261ec07a425fc8630ba99d38355da7c49e8",
+      "original_sha256": "6118b6837c7ed291cc9d70446b7d691699d49c9ef6f2be60d8e0fac478d93b65",
+      "review": "s13-r697-wow-noedit-review.json",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/walias.obj",
+          "command_sha256": "ddab9efe8f833c7b48eff846ec52dbb7afcd2e00534b7f08ab170202f3706102"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall32.c",
+      "source_sha256": "0f72ae39e691f3ef672df4f1aeb3ebb6443e87f091fb6322ef1c13604ab3d571",
+      "original_sha256": "0f72ae39e691f3ef672df4f1aeb3ebb6443e87f091fb6322ef1c13604ab3d571",
+      "review": "s13-r697-wow-noedit-review.json",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wcall32.obj",
+          "command_sha256": "2209a18a173ae558f3c6cb2c27057a61a255d5a4f18e0ba97cdbe3fee4b0594d"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "source_sha256": "5612e2444464131427cfa33d6417a4057c099ab5ac0e684fef26f9527b296cf8",
+      "original_sha256": "213b4aa2f1f7a11ac310d7152027da2da0ea804b9efeb6fefc0cf609ce3d5260",
+      "review": "s13-r697-wow-noedit-review.json",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wgmeta.obj",
+          "command_sha256": "27404de0880eefcefd495ea22883dfe61fcbb702ad7850e3a4bebf3905768c9d"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.c",
+      "source_sha256": "4bbefbadaf423cfca5429b98fbb541fb9c84c6996b3e5c54b002d8c0adf96087",
+      "original_sha256": "9d0fae5e7719398d5d9776602664d5f9a0dd4bdd81e79616ad848035007d4722",
+      "review": "s13-r697-wow-noedit-review.json",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wkmem.obj",
+          "command_sha256": "710f09970192264051c448f093d9c1cecfa74e70e77e65cf1e184f665fa6b28a"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "source_sha256": "5b251213a2f582b25f26a7ead7006b62e7fbadb40a20b919fe0aa67a50521d4e",
+      "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4",
+      "review": "s13-r697-wow-noedit-review.json",
+      "contexts": [
+        {
+          "preset": "msvc-x86-release",
+          "graph": "wow32",
+          "object": "obj/wmdisp32.obj",
+          "command_sha256": "01c5d7a2173c12f3ac19a111cbf705177c4fbe14ef1eded73fe5c3c9ef6f5df4"
+        }
+      ]
+    }
+  ]
+}

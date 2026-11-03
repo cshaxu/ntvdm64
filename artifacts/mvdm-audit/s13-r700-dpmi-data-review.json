@@ -1,0 +1,23 @@
+{
+  "path": "src/mvdm-host/dpmi32/data.c",
+  "source_sha256": "fa77262578ebef876e292dfc6d9b43f6cb64662a85f0a8679b89675d69625cd2",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\data.c",
+  "original_sha256": "fa3b44b0f6a5ea6165063bae35fe66063e23e518dad8c0cdf3de16d353c54cde",
+  "result": "After excluding the single local CPU40 adapter and diagnostic line directives and replacing the original excluded DBG body with its registered error, the current file equals the original byte-for-byte after text newline normalization. Both observed production worker graphs selected the original non-DBG and non-i386 branches and the local CPU40 adapter.",
+  "contexts": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/dpmi/data.obj",
+      "command_sha256": "09cc424f8ff16e0d2454efdb01b3d40dcf4f2f6691b3d91ff25a24af6a7e39e4"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/dpmi/data.obj",
+      "command_sha256": "09cc424f8ff16e0d2454efdb01b3d40dcf4f2f6691b3d91ff25a24af6a7e39e4"
+    }
+  ],
+  "scoped_witness": "s13-r690-dpmi-data-review.json",
+  "limits": "All 15 existing Ninja graphs were surveyed; configurations outside the observed trees are not proven."
+}

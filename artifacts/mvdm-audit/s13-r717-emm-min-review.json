@@ -1,0 +1,73 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+  "original": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/bios/emm_fncs.c",
+  "before_sha256": "8ad0d0437bcbfded709722f374fdca2396ee4c943d7b25e3881f20aa0033e225",
+  "after_sha256": "25c144c18ec1fd78b2d983bba0108e78663f33fc4b731ce7c17e92f7425c6aa0",
+  "original_sha256": "2ffb142bb4ad67958493668e06bec3d81936790497965cdc5ca8a2ac0e142722",
+  "original_group_line": 261,
+  "error_line": 262,
+  "continuation_line": 264,
+  "disposition": "The original fallback min macro is excluded in the observed worker configurations; actual Windows SDK minwindef.h provides min, and same-directory probes did not select the fallback.",
+  "observations": [
+    {
+      "graph": "msvc-x86-release",
+      "exit": 0,
+      "preprocessed_sha256": "140572e017939e62e7f104e9eda3552f7694dc478e07eda05b65256c38a8d2ef",
+      "hit": [
+        "codex_r683_arm_0001",
+        "codex_r683_arm_0003",
+        "codex_r683_arm_0018",
+        "codex_r683_arm_0020",
+        "codex_r683_arm_0023",
+        "codex_r683_arm_0025"
+      ]
+    },
+    {
+      "graph": "msvc-x64-release",
+      "exit": 0,
+      "preprocessed_sha256": "140572e017939e62e7f104e9eda3552f7694dc478e07eda05b65256c38a8d2ef",
+      "hit": [
+        "codex_r683_arm_0001",
+        "codex_r683_arm_0003",
+        "codex_r683_arm_0018",
+        "codex_r683_arm_0020",
+        "codex_r683_arm_0023",
+        "codex_r683_arm_0025"
+      ]
+    }
+  ],
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 182,
+      "identical": true,
+      "include_trace_sha256": "5ae3484c43506d01d27ed6ce50c857596b982842d4c51f331630be5111675b4e",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 182,
+      "identical": true,
+      "include_trace_sha256": "5ae3484c43506d01d27ed6ce50c857596b982842d4c51f331630be5111675b4e",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "contexts": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/bios/emm_fncs.obj",
+      "command_sha256": "905a798dbf817d5d2667b10927565f6e0f5f74020e326a26cdfd1237f4a389b1"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/bios/emm_fncs.obj",
+      "command_sha256": "905a798dbf817d5d2667b10927565f6e0f5f74020e326a26cdfd1237f4a389b1"
+    }
+  ],
+  "limit": "Existing release graphs only; alternate SDK or build profiles outside them remain unproven.",
+  "superseded_stale_continuation_line": 220
+}

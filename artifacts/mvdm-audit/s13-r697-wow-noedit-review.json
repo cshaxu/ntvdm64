@@ -1,0 +1,432 @@
+{
+  "scope": "Five original conditional-tree comparisons in observed WOW32 x86 context; no source edit",
+  "limits": "Other supported build contexts remain unproven; files remain pending",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/walias.c",
+      "source_sha256": "ed1f93ee396d432f1f398b29a1fb6261ec07a425fc8630ba99d38355da7c49e8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\walias.c",
+      "original_sha256": "6118b6837c7ed291cc9d70446b7d691699d49c9ef6f2be60d8e0fac478d93b65",
+      "plan": {
+        "path": "src/mvdm-host/wow32/walias.c",
+        "status": "candidate",
+        "edits": 0,
+        "excluded_groups": 2,
+        "source_sha256": "ed1f93ee396d432f1f398b29a1fb6261ec07a425fc8630ba99d38355da7c49e8"
+      },
+      "witness": {
+        "path": "src/mvdm-host/wow32/walias.c",
+        "source_sha256": "ed1f93ee396d432f1f398b29a1fb6261ec07a425fc8630ba99d38355da7c49e8",
+        "object": "walias",
+        "arms": [
+          {
+            "label": "codex_r691_arm_0000",
+            "line": 21,
+            "kind": "ifndef",
+            "expression": "MM_MCISYSTEM_STRING",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0001",
+            "line": 26,
+            "kind": "ifdef",
+            "expression": "DEBUG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0002",
+            "line": 277,
+            "kind": "ifdef",
+            "expression": "DEBUG",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "9fe6abab3d41d75fc69693d1a90615b0e2a4233a01e022b65c8af945e27aaef8",
+            "hit": [
+              "codex_r691_arm_0000"
+            ]
+          }
+        ]
+      },
+      "include_trace": [
+        {
+          "path": "src/mvdm-host/wow32/walias.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 322,
+          "identical": true,
+          "include_trace_sha256": "791b368e35a19e4f65d76ff95f28382dba8c9b21554b0136de14bc7513b19c91",
+          "method": "temporary sibling file; original search order"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcall32.c",
+      "source_sha256": "0f72ae39e691f3ef672df4f1aeb3ebb6443e87f091fb6322ef1c13604ab3d571",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcall32.c",
+      "original_sha256": "0f72ae39e691f3ef672df4f1aeb3ebb6443e87f091fb6322ef1c13604ab3d571",
+      "plan": {
+        "path": "src/mvdm-host/wow32/wcall32.c",
+        "status": "candidate",
+        "edits": 0,
+        "excluded_groups": 0,
+        "source_sha256": "0f72ae39e691f3ef672df4f1aeb3ebb6443e87f091fb6322ef1c13604ab3d571"
+      },
+      "witness": {
+        "path": "src/mvdm-host/wow32/wcall32.c",
+        "source_sha256": "0f72ae39e691f3ef672df4f1aeb3ebb6443e87f091fb6322ef1c13604ab3d571",
+        "object": "wcall32",
+        "arms": [
+          {
+            "label": "codex_r691_arm_0000",
+            "line": 44,
+            "kind": "if",
+            "expression": "!defined(i386)",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0001",
+            "line": 74,
+            "kind": "if",
+            "expression": "!defined(i386)",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0002",
+            "line": 151,
+            "kind": "if",
+            "expression": "!defined(i386)",
+            "error_only": false
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "12dae3ce93b2b4bca46142ce14f5dd48842f118f52d56aaa49c5e67b64cb02a1",
+            "hit": [
+              "codex_r691_arm_0000",
+              "codex_r691_arm_0001",
+              "codex_r691_arm_0002"
+            ]
+          }
+        ]
+      },
+      "include_trace": [
+        {
+          "path": "src/mvdm-host/wow32/wcall32.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 322,
+          "identical": true,
+          "include_trace_sha256": "791b368e35a19e4f65d76ff95f28382dba8c9b21554b0136de14bc7513b19c91",
+          "method": "temporary sibling file; original search order"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wgmeta.c",
+      "source_sha256": "5612e2444464131427cfa33d6417a4057c099ab5ac0e684fef26f9527b296cf8",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wgmeta.c",
+      "original_sha256": "213b4aa2f1f7a11ac310d7152027da2da0ea804b9efeb6fefc0cf609ce3d5260",
+      "plan": {
+        "path": "src/mvdm-host/wow32/wgmeta.c",
+        "status": "candidate",
+        "edits": 0,
+        "excluded_groups": 2,
+        "source_sha256": "5612e2444464131427cfa33d6417a4057c099ab5ac0e684fef26f9527b296cf8"
+      },
+      "witness": {
+        "path": "src/mvdm-host/wow32/wgmeta.c",
+        "source_sha256": "5612e2444464131427cfa33d6417a4057c099ab5ac0e684fef26f9527b296cf8",
+        "object": "wgmeta",
+        "arms": [
+          {
+            "label": "codex_r691_arm_0000",
+            "line": 244,
+            "kind": "ifndef",
+            "expression": "PARAMETER_VALIDATION_16_RE_ENABLED",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0001",
+            "line": 268,
+            "kind": "ifndef",
+            "expression": "PARAMETER_VALIDATION_16_RE_ENABLED",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0002",
+            "line": 277,
+            "kind": "ifdef",
+            "expression": "PARAMETER_VALIDATION_16_RE_ENABLED",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0003",
+            "line": 280,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0004",
+            "line": 533,
+            "kind": "if",
+            "expression": "0",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "ebacfd78167c97932b31150040ad679263344c4786e414ef0b5f78a5f627502b",
+            "hit": [
+              "codex_r691_arm_0000",
+              "codex_r691_arm_0001",
+              "codex_r691_arm_0003"
+            ]
+          }
+        ]
+      },
+      "include_trace": [
+        {
+          "path": "src/mvdm-host/wow32/wgmeta.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 322,
+          "identical": true,
+          "include_trace_sha256": "791b368e35a19e4f65d76ff95f28382dba8c9b21554b0136de14bc7513b19c91",
+          "method": "temporary sibling file; original search order"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wkmem.c",
+      "source_sha256": "4bbefbadaf423cfca5429b98fbb541fb9c84c6996b3e5c54b002d8c0adf96087",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wkmem.c",
+      "original_sha256": "9d0fae5e7719398d5d9776602664d5f9a0dd4bdd81e79616ad848035007d4722",
+      "plan": {
+        "path": "src/mvdm-host/wow32/wkmem.c",
+        "status": "candidate",
+        "edits": 0,
+        "excluded_groups": 2,
+        "source_sha256": "4bbefbadaf423cfca5429b98fbb541fb9c84c6996b3e5c54b002d8c0adf96087"
+      },
+      "witness": {
+        "path": "src/mvdm-host/wow32/wkmem.c",
+        "source_sha256": "4bbefbadaf423cfca5429b98fbb541fb9c84c6996b3e5c54b002d8c0adf96087",
+        "object": "wkmem",
+        "arms": [
+          {
+            "label": "codex_r691_arm_0000",
+            "line": 26,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0001",
+            "line": 33,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0002",
+            "line": 49,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0003",
+            "line": 59,
+            "kind": "ifdef",
+            "expression": "i386",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0004",
+            "line": 73,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0005",
+            "line": 79,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0006",
+            "line": 91,
+            "kind": "ifndef",
+            "expression": "i386",
+            "error_only": false
+          },
+          {
+            "label": "codex_r691_arm_0007",
+            "line": 101,
+            "kind": "if",
+            "expression": "0",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "89830c8478786595093b04c9ba7cd0dc8b4b6f56f043192d871710b1c6d41b8b",
+            "hit": [
+              "codex_r691_arm_0000",
+              "codex_r691_arm_0001",
+              "codex_r691_arm_0002",
+              "codex_r691_arm_0004",
+              "codex_r691_arm_0005",
+              "codex_r691_arm_0006"
+            ]
+          }
+        ]
+      },
+      "include_trace": [
+        {
+          "path": "src/mvdm-host/wow32/wkmem.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 323,
+          "identical": true,
+          "include_trace_sha256": "12af028e7ba9d162d3c24e1ca132ddbe6b2dc2d3f23d18576e56159e6934b618",
+          "method": "temporary sibling file; original search order"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmdisp32.c",
+      "source_sha256": "5b251213a2f582b25f26a7ead7006b62e7fbadb40a20b919fe0aa67a50521d4e",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmdisp32.c",
+      "original_sha256": "4a9004c1f57af28280d0176afd72cae76a7fbae90ffb758426c287435e5912d4",
+      "plan": {
+        "path": "src/mvdm-host/wow32/wmdisp32.c",
+        "status": "candidate",
+        "edits": 0,
+        "excluded_groups": 11,
+        "source_sha256": "5b251213a2f582b25f26a7ead7006b62e7fbadb40a20b919fe0aa67a50521d4e"
+      },
+      "witness": {
+        "path": "src/mvdm-host/wow32/wmdisp32.c",
+        "source_sha256": "5b251213a2f582b25f26a7ead7006b62e7fbadb40a20b919fe0aa67a50521d4e",
+        "object": "wmdisp32",
+        "arms": [
+          {
+            "label": "codex_r691_arm_0000",
+            "line": 33,
+            "kind": "ifdef",
+            "expression": "WOWPROFILE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0001",
+            "line": 54,
+            "kind": "ifdef",
+            "expression": "DEBUG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0002",
+            "line": 60,
+            "kind": "ifdef",
+            "expression": "WOWPROFILE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0003",
+            "line": 155,
+            "kind": "ifdef",
+            "expression": "DEBUG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0004",
+            "line": 178,
+            "kind": "ifdef",
+            "expression": "WOWPROFILE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0005",
+            "line": 193,
+            "kind": "ifdef",
+            "expression": "WOWPROFILE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0006",
+            "line": 243,
+            "kind": "ifdef",
+            "expression": "DEBUG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0007",
+            "line": 251,
+            "kind": "ifdef",
+            "expression": "WOWPROFILE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0008",
+            "line": 260,
+            "kind": "ifdef",
+            "expression": "WOWPROFILE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0009",
+            "line": 394,
+            "kind": "if",
+            "expression": "0",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0010",
+            "line": 409,
+            "kind": "ifdef",
+            "expression": "DEBUG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r691_arm_0011",
+            "line": 1037,
+            "kind": "ifdef",
+            "expression": "XTALKHACK",
+            "error_only": false
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "34ba4212a0a566dd8a09974db384c2a000cf5e9999cf768685dc9c855b1e0bc1",
+            "hit": [
+              "codex_r691_arm_0011"
+            ]
+          }
+        ]
+      },
+      "include_trace": [
+        {
+          "path": "src/mvdm-host/wow32/wmdisp32.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 324,
+          "identical": true,
+          "include_trace_sha256": "e6351c968cc2389d9c6537704779f99531878f714c34c5891cc2a1aed79ff829",
+          "method": "temporary sibling file; original search order"
+        }
+      ]
+    }
+  ]
+}

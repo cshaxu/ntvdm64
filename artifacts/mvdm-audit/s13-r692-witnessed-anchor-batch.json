@@ -1,0 +1,335 @@
+{
+  "scope": "Two WOW32 original condition trees with previously missing diagnostic anchors; all retained arms witnessed in actual WOW32 x86 preprocess context.",
+  "method": "Original/current recursive tree preflight; selected-arm markers and ordered include traces checked before edits; resulting tree and line anchors rechecked.",
+  "limits": "Two of ten allowed source edits in current build batch; complete supported-context enumeration remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wmmalias.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmalias.c",
+      "before_sha256": "81fa78f1393a763148155cbd7f97a2a52198ad4515681c776dc2e5e889678e6c",
+      "after_sha256": "5b62144e8c93a794f7f64015517aff6d4654e020467a29132ad291a06b6a800f",
+      "original_sha256": "d4949206f261d22f80f96e769388aee94037b27092c69c68ec058619f843f4fb",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "original_line": 25,
+          "error_line": 26,
+          "end_line": 28
+        },
+        {
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "original_line": 32,
+          "error_line": 33,
+          "end_line": 35
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 149,
+          "error_line": 150,
+          "end_line": 200
+        },
+        {
+          "kind": "ifdef",
+          "expression": "NEWALIAS",
+          "original_line": 207,
+          "error_line": 208,
+          "end_line": 235
+        },
+        {
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "original_line": 220,
+          "error_line": 221,
+          "end_line": 227
+        },
+        {
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "original_line": 240,
+          "error_line": 241,
+          "end_line": 246
+        },
+        {
+          "kind": "ifdef",
+          "expression": "NEWALIAS",
+          "original_line": 248,
+          "error_line": 249,
+          "end_line": 251
+        },
+        {
+          "kind": "ifdef",
+          "expression": "NEWALIAS",
+          "original_line": 289,
+          "error_line": 290,
+          "end_line": 313
+        },
+        {
+          "kind": "ifdef",
+          "expression": "DEBUG",
+          "original_line": 324,
+          "error_line": 325,
+          "end_line": 330
+        },
+        {
+          "kind": "ifdef",
+          "expression": "NEWALIAS",
+          "original_line": 351,
+          "error_line": 352,
+          "end_line": 364
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/wow32/wmmalias.c",
+        "source_sha256": "81fa78f1393a763148155cbd7f97a2a52198ad4515681c776dc2e5e889678e6c",
+        "object": "wmmalias",
+        "arms": [
+          {
+            "label": "codex_r692_arm_0000",
+            "line": 25,
+            "kind": "ifdef",
+            "expression": "DEBUG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r692_arm_0001",
+            "line": 34,
+            "kind": "ifdef",
+            "expression": "DEBUG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r692_arm_0002",
+            "line": 88,
+            "kind": "ifndef",
+            "expression": "NEWALIAS",
+            "error_only": false
+          },
+          {
+            "label": "codex_r692_arm_0003",
+            "line": 115,
+            "kind": "ifndef",
+            "expression": "NEWALIAS",
+            "error_only": false
+          },
+          {
+            "label": "codex_r692_arm_0004",
+            "line": 125,
+            "kind": "ifndef",
+            "expression": "NEWALIAS",
+            "error_only": false
+          },
+          {
+            "label": "codex_r692_arm_0005",
+            "line": 130,
+            "kind": "ifndef",
+            "expression": "NEWALIAS",
+            "error_only": false
+          },
+          {
+            "label": "codex_r692_arm_0006",
+            "line": 140,
+            "kind": "ifndef",
+            "expression": "NEWALIAS",
+            "error_only": false
+          },
+          {
+            "label": "codex_r692_arm_0007",
+            "line": 148,
+            "kind": "ifndef",
+            "expression": "NEWALIAS",
+            "error_only": false
+          },
+          {
+            "label": "codex_r692_arm_0008",
+            "line": 153,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r692_arm_0009",
+            "line": 164,
+            "kind": "ifdef",
+            "expression": "NEWALIAS",
+            "error_only": true
+          },
+          {
+            "label": "codex_r692_arm_0010",
+            "line": 167,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r692_arm_0011",
+            "line": 169,
+            "kind": "ifdef",
+            "expression": "DEBUG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r692_arm_0012",
+            "line": 188,
+            "kind": "ifdef",
+            "expression": "DEBUG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r692_arm_0013",
+            "line": 195,
+            "kind": "ifdef",
+            "expression": "NEWALIAS",
+            "error_only": true
+          },
+          {
+            "label": "codex_r692_arm_0014",
+            "line": 214,
+            "kind": "ifndef",
+            "expression": "NEWALIAS",
+            "error_only": false
+          },
+          {
+            "label": "codex_r692_arm_0015",
+            "line": 218,
+            "kind": "ifdef",
+            "expression": "HACK32",
+            "error_only": false
+          },
+          {
+            "label": "codex_r692_arm_0016",
+            "line": 225,
+            "kind": "ifdef",
+            "expression": "HACK32",
+            "error_only": false
+          },
+          {
+            "label": "codex_r692_arm_0017",
+            "line": 238,
+            "kind": "ifdef",
+            "expression": "NEWALIAS",
+            "error_only": true
+          },
+          {
+            "label": "codex_r692_arm_0018",
+            "line": 241,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r692_arm_0019",
+            "line": 265,
+            "kind": "ifdef",
+            "expression": "DEBUG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r692_arm_0020",
+            "line": 291,
+            "kind": "ifdef",
+            "expression": "NEWALIAS",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "6c75c52144071ec2913e5ec584b2d505085fe5023b8977f5d82eb036b242adff",
+            "hit": [
+              "codex_r692_arm_0002",
+              "codex_r692_arm_0003",
+              "codex_r692_arm_0004",
+              "codex_r692_arm_0005",
+              "codex_r692_arm_0006",
+              "codex_r692_arm_0007",
+              "codex_r692_arm_0010",
+              "codex_r692_arm_0014",
+              "codex_r692_arm_0015",
+              "codex_r692_arm_0016",
+              "codex_r692_arm_0018"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/wow32/wmmalias.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 323,
+          "identical": true,
+          "include_trace_sha256": "3b60d06aec888666019c185d50664822e75a6a580cdb54c2b36a158ffeb5e5cc",
+          "method": "temporary sibling file; original search order"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wusercli.c",
+      "before_sha256": "d7fbfdface0a54ab86328659037f4ef4ff6fcc5815c90493828d2b71acf0cabb",
+      "after_sha256": "265db11048df58488afa75b2d352355b1e6077841ab5bd0a8906ee63dcc7dfe9",
+      "original_sha256": "96b363ee882839a61d232dfbe145346d6e4d7ec7bfbaa4c97c4e0500a39b51ed",
+      "guards": [
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 702,
+          "error_line": 703,
+          "end_line": 705
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/wow32/wusercli.c",
+        "source_sha256": "d7fbfdface0a54ab86328659037f4ef4ff6fcc5815c90493828d2b71acf0cabb",
+        "object": "wusercli",
+        "arms": [
+          {
+            "label": "codex_r692_arm_0000",
+            "line": 15,
+            "kind": "ifndef",
+            "expression": "PMODE32",
+            "error_only": false
+          },
+          {
+            "label": "codex_r692_arm_0001",
+            "line": 698,
+            "kind": "ifdef",
+            "expression": "HACK32",
+            "error_only": false
+          },
+          {
+            "label": "codex_r692_arm_0002",
+            "line": 702,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "ec7593142810dc429ac6290c5119c9d36ae467e6a01797f8c0333991c0a5f0a0",
+            "hit": [
+              "codex_r692_arm_0000",
+              "codex_r692_arm_0001"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/wow32/wusercli.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 322,
+          "identical": true,
+          "include_trace_sha256": "791b368e35a19e4f65d76ff95f28382dba8c9b21554b0136de14bc7513b19c91",
+          "method": "temporary sibling file; original search order"
+        }
+      ]
+    }
+  ]
+}

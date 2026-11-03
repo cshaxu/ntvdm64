@@ -1,0 +1,55 @@
+{
+  "scope": "Preliminary original tree comparisons; held files remain pending",
+  "results": [
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "status": "held",
+      "reason": "retained leaf"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/cldib.c",
+      "status": "held",
+      "reason": "group count"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgbegin.c",
+      "status": "held",
+      "reason": "group count"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr.c",
+      "status": "held",
+      "reason": "group count"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/dlgmgr2.c",
+      "status": "held",
+      "reason": "group count"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/winmgrc.c",
+      "status": "held",
+      "reason": "group count"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "status": "held",
+      "reason": "group count"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "status": "held",
+      "reason": "retained leaf"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/getset.c",
+      "status": "held",
+      "reason": "group count"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "status": "held",
+      "reason": "selectors"
+    }
+  ]
+}

@@ -219,9 +219,10 @@ void (*emm_func[]) () = {
 /* Defintion of this is non-standard */
 
 #ifndef min
-#define min(a,b)	(((a)<(b)) ? (a) : (b))
+#line 262
+#error Unsupported configuration: min must be provided by the host headers
 #endif
-#line 220
+#line 264
 
 /*
 ===========================================================================

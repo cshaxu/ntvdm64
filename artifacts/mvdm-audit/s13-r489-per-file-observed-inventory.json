@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 823,
+  "completed_files": 844,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -419,7 +419,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r700-dpmi-data-review.json"
     },
     {
       "path": "src/mvdm-host/dpmi32/debug.c",
@@ -2734,8 +2735,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r666-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r666-guard-line-audit.json",
+      "evidence": "s13-r704-fpu-anchor-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu_c.h",
@@ -6441,7 +6443,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r707-idetect-anchor-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/illegalp.c",
@@ -6463,7 +6466,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r708-qevnt-anchor-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/system/rom.c",
@@ -7187,8 +7191,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r665-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r665-guard-line-audit.json",
+      "evidence": "s13-r703-copy-condition-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/cpucstbs.c",
@@ -7225,7 +7230,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r711-ntbop-anchor-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_cga.c",
@@ -7309,7 +7315,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r710-nteoi-anchor-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_error.c",
@@ -7661,9 +7668,10 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
+      "status": "completed-original-witnessed-condition-tree",
       "pending_change": "r496 original diagnostic anchors; broader per-file conditional audit pending",
-      "partial_evidence": "s13-r653-platform-guard-lines.json"
+      "partial_evidence": "s13-r653-platform-guard-lines.json",
+      "evidence": "s13-r705-ntvga-condition-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
@@ -8118,7 +8126,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r701-wow-context-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/walias.h",
@@ -8150,8 +8159,9 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r666-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r666-guard-line-audit.json",
+      "evidence": "s13-r702-wcall16-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wcall16.h",
@@ -8171,7 +8181,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r701-wow-context-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wcall32.h",
@@ -8407,8 +8418,9 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r660-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r660-guard-line-audit.json",
+      "evidence": "s13-r701-wow-context-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wgmeta.h",
@@ -8677,7 +8689,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r701-wow-context-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wkmem.h",
@@ -8718,8 +8731,9 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r660-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r660-guard-line-audit.json",
+      "evidence": "s13-r701-wow-context-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmdisp32.h",
@@ -8739,9 +8753,10 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
+      "status": "completed-original-witnessed-condition-tree",
       "pending_change": "r504 exclude unselected DEBUG alias accounting; file audit pending",
-      "partial_evidence": "s13-r660-guard-line-audit.json"
+      "partial_evidence": "s13-r660-guard-line-audit.json",
+      "evidence": "s13-r692-witnessed-anchor-batch.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmmalias.h",
@@ -9236,7 +9251,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r701-wow-context-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wshell.h",
@@ -9675,8 +9691,9 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r660-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r660-guard-line-audit.json",
+      "evidence": "s13-r701-wow-context-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wuser.h",
@@ -9696,8 +9713,9 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r665-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r665-guard-line-audit.json",
+      "evidence": "s13-r701-wow-context-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wuser31.h",
@@ -9717,7 +9735,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r692-witnessed-anchor-batch.json"
     },
     {
       "path": "src/mvdm-host/wow32/wusercli.h",
@@ -9831,7 +9850,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r713-xms-condition-review.json"
     },
     {
       "path": "src/mvdm-host/xms.486/xms.h",
@@ -9866,7 +9886,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r712-xmsblock-anchor-review.json"
     },
     {
       "path": "src/mvdm-host/xms.486/xmsdisp.c",

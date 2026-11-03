@@ -1,0 +1,223 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\qevnt.c",
+  "before_sha256": "fcab7cd5440884eb8cadb97263297caeaf5213f8e4e4310c7691e92af08601ef",
+  "after_sha256": "ff5c3e21663c521586a49006c1a9dbe68655db976bb6822c57418a52c9b7e8a3",
+  "original_sha256": "3e0d97d17bcc4c107b5173bf38868c79ab68d3042d29472a1a7259364da2947c",
+  "guards": [
+    {
+      "kind": "if",
+      "expression": "DBG",
+      "original_line": 111,
+      "error_line": 112,
+      "end_line": 117
+    },
+    {
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "original_line": 206,
+      "error_line": 207,
+      "end_line": 299
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 533,
+      "error_line": 534,
+      "end_line": 539
+    }
+  ],
+  "retained_leaf_difference": {
+    "original_line": 146,
+    "current_line": 152,
+    "original": [
+      "/*",
+      "*  Caller must hold ica lock",
+      "*/",
+      "void",
+      "ResetCpuQevCount(",
+      "PLARGE_INTEGER CurrTime",
+      ")",
+      "{",
+      "LARGE_INTEGER DiffTime;",
+      "PQEV_ENTRY  pqevEntry;",
+      "ULONG DelayTime;",
+      "if (IsListEmpty(&QuickEventListHead)) {",
+      "host_q_ev_set_count(0);",
+      "qevNextDueTime.QuadPart = 0;",
+      "return;",
+      "}",
+      "pqevEntry = CONTAINING_RECORD(QuickEventListHead.Flink,",
+      "QEV_ENTRY,",
+      "qevListEntry",
+      ");",
+      "DiffTime.QuadPart = pqevEntry->DueTimeStamp.QuadPart - CurrTime->QuadPart;",
+      "/*",
+      "*  If behind schedule use a reduced delay time to speed up",
+      "*  dispatching of events. Can't go too fast or quick events will",
+      "*  batch up.",
+      "*/",
+      "if (DiffTime.QuadPart < 0) {",
+      "DelayTime = (pqevEntry->DelayTime >> 1) + 1;",
+      "}",
+      "else {",
+      "DelayTime = DiffTime.LowPart;    /* ignore overflow! */",
+      "}",
+      "qevNextDueTime.QuadPart = CurrTime->QuadPart + DelayTime;",
+      "host_q_ev_set_count(host_calc_q_ev_inst_for_time(DelayTime));",
+      "}"
+    ],
+    "current": [
+      "void",
+      "ResetCpuQevCount(",
+      "PLARGE_INTEGER CurrTime",
+      ")",
+      "{",
+      "LARGE_INTEGER DiffTime;",
+      "PQEV_ENTRY  pqevEntry;",
+      "ULONG DelayTime;",
+      "if (IsListEmpty(&QuickEventListHead)) {",
+      "host_q_ev_set_count(0);",
+      "qevNextDueTime.QuadPart = 0;",
+      "return;",
+      "}",
+      "pqevEntry = CONTAINING_RECORD(QuickEventListHead.Flink,",
+      "QEV_ENTRY,",
+      "qevListEntry",
+      ");",
+      "DiffTime.QuadPart = pqevEntry->DueTimeStamp.QuadPart - CurrTime->QuadPart;",
+      "/*",
+      "*  If behind schedule use a reduced delay time to speed up",
+      "*  dispatching of events. Can't go too fast or quick events will",
+      "*  batch up.",
+      "*/",
+      "if (DiffTime.QuadPart < 0) {",
+      "DelayTime = (pqevEntry->DelayTime >> 1) + 1;",
+      "}",
+      "else {",
+      "DelayTime = DiffTime.LowPart;    /* ignore overflow! */",
+      "}",
+      "qevNextDueTime.QuadPart = CurrTime->QuadPart + DelayTime;",
+      "host_q_ev_set_count(host_calc_q_ev_inst_for_time(DelayTime));",
+      "}"
+    ]
+  },
+  "difference_registration": "Original lock-contract comment restored",
+  "witness": {
+    "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+    "source_sha256": "fcab7cd5440884eb8cadb97263297caeaf5213f8e4e4310c7691e92af08601ef",
+    "object": "system/qevnt",
+    "arms": [
+      {
+        "label": "codex_r683_arm_0000",
+        "line": 106,
+        "kind": "ifndef",
+        "expression": "MONITOR",
+        "error_only": false
+      },
+      {
+        "label": "codex_r683_arm_0001",
+        "line": 113,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r683_arm_0002",
+        "line": 152,
+        "kind": "ifndef",
+        "expression": "MONITOR",
+        "error_only": false
+      },
+      {
+        "label": "codex_r683_arm_0003",
+        "line": 209,
+        "kind": "ifdef",
+        "expression": "MONITOR",
+        "error_only": true
+      },
+      {
+        "label": "codex_r683_arm_0004",
+        "line": 211,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r683_arm_0005",
+        "line": 327,
+        "kind": "ifndef",
+        "expression": "MONITOR",
+        "error_only": false
+      },
+      {
+        "label": "codex_r683_arm_0006",
+        "line": 374,
+        "kind": "ifndef",
+        "expression": "MONITOR",
+        "error_only": false
+      },
+      {
+        "label": "codex_r683_arm_0007",
+        "line": 451,
+        "kind": "ifndef",
+        "expression": "MONITOR",
+        "error_only": false
+      },
+      {
+        "label": "codex_r683_arm_0008",
+        "line": 535,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "27af49e3049b05dd4a2cd738cd9c85f83006d7f99189dee8a52d53a6e9869cb0",
+        "hit": [
+          "codex_r683_arm_0000",
+          "codex_r683_arm_0002",
+          "codex_r683_arm_0004",
+          "codex_r683_arm_0005",
+          "codex_r683_arm_0006",
+          "codex_r683_arm_0007"
+        ]
+      },
+      {
+        "graph": "msvc-x64-release",
+        "exit": 0,
+        "preprocessed_sha256": "27af49e3049b05dd4a2cd738cd9c85f83006d7f99189dee8a52d53a6e9869cb0",
+        "hit": [
+          "codex_r683_arm_0000",
+          "codex_r683_arm_0002",
+          "codex_r683_arm_0004",
+          "codex_r683_arm_0005",
+          "codex_r683_arm_0006",
+          "codex_r683_arm_0007"
+        ]
+      }
+    ]
+  },
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 183,
+      "identical": true,
+      "include_trace_sha256": "1891357597baa0c9c333b871da0b1f2a51f1a90027cba9775805dd410b195e62",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/qevnt.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 183,
+      "identical": true,
+      "include_trace_sha256": "1891357597baa0c9c333b871da0b1f2a51f1a90027cba9775805dd410b195e62",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "limits": "Observed worker release graphs; Original lock-contract comment restored; other local differences and supported build configurations remain separate."
+}

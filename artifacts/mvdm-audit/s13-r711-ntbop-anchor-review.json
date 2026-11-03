@@ -1,0 +1,529 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_bop.c",
+  "before_sha256": "c6bf44879cd48ee597ba17afa563a5abd9ed2886485e3dfc84cd5753b499b8f5",
+  "after_sha256": "053ea94ae0d2b2fb19b8effee4aeda88151f8317629e9d5cd8894eb92b4c26bb",
+  "original_sha256": "378a34807645277090bf4b38556ea210502f79a898855b649b39d6c4ccc47f66",
+  "guards": [
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 178,
+      "error_line": 179,
+      "end_line": 181
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 188,
+      "error_line": 189,
+      "end_line": 191
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 198,
+      "error_line": 199,
+      "end_line": 201
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 209,
+      "error_line": 210,
+      "end_line": 212
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 219,
+      "error_line": 220,
+      "end_line": 222
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 232,
+      "error_line": 233,
+      "end_line": 235
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 244,
+      "error_line": 245,
+      "end_line": 247
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 256,
+      "error_line": 257,
+      "end_line": 278
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 295,
+      "error_line": 296,
+      "end_line": 298
+    },
+    {
+      "kind": "if",
+      "expression": "DBG",
+      "original_line": 355,
+      "error_line": 356,
+      "end_line": 382
+    },
+    {
+      "kind": "if",
+      "expression": "DBG",
+      "original_line": 466,
+      "error_line": 467,
+      "end_line": 470
+    },
+    {
+      "kind": "if",
+      "expression": "DBG",
+      "original_line": 489,
+      "error_line": 490,
+      "end_line": 492
+    },
+    {
+      "kind": "if",
+      "expression": "DBG",
+      "original_line": 504,
+      "error_line": 505,
+      "end_line": 507
+    },
+    {
+      "kind": "if",
+      "expression": "DBG",
+      "original_line": 510,
+      "error_line": 511,
+      "end_line": 513
+    },
+    {
+      "kind": "if",
+      "expression": "DBG",
+      "original_line": 516,
+      "error_line": 517,
+      "end_line": 519
+    },
+    {
+      "kind": "if",
+      "expression": "DBG",
+      "original_line": 522,
+      "error_line": 523,
+      "end_line": 525
+    },
+    {
+      "kind": "if",
+      "expression": "DBG",
+      "original_line": 528,
+      "error_line": 529,
+      "end_line": 531
+    },
+    {
+      "kind": "if",
+      "expression": "DBG",
+      "original_line": 534,
+      "error_line": 535,
+      "end_line": 537
+    },
+    {
+      "kind": "if",
+      "expression": "DBG",
+      "original_line": 540,
+      "error_line": 541,
+      "end_line": 543
+    },
+    {
+      "kind": "if",
+      "expression": "DBG",
+      "original_line": 546,
+      "error_line": 547,
+      "end_line": 549
+    },
+    {
+      "kind": "if",
+      "expression": "DBG",
+      "original_line": 552,
+      "error_line": 553,
+      "end_line": 555
+    },
+    {
+      "kind": "if",
+      "expression": "DBG",
+      "original_line": 563,
+      "error_line": 564,
+      "end_line": 566
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 645,
+      "error_line": 646,
+      "end_line": 649
+    },
+    {
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "original_line": 680,
+      "error_line": 681,
+      "end_line": 701
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 720,
+      "error_line": 721,
+      "end_line": 723
+    },
+    {
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "original_line": 735,
+      "error_line": 736,
+      "end_line": 746
+    },
+    {
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "original_line": 760,
+      "error_line": 761,
+      "end_line": 765
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 895,
+      "error_line": 896,
+      "end_line": 898
+    },
+    {
+      "kind": "ifndef",
+      "expression": "PROD",
+      "original_line": 916,
+      "error_line": 917,
+      "end_line": 919
+    },
+    {
+      "kind": "ifdef",
+      "expression": "i386",
+      "original_line": 929,
+      "error_line": 930,
+      "end_line": 961
+    }
+  ],
+  "retained_leaf_difference": {
+    "original_line": 254,
+    "current_line": 322,
+    "original": [
+      "(*WOWDispatchEntry)();"
+    ],
+    "current": [
+      "mvdm_softpc_report_wow_stage(\"dispatch-begin\",",
+      "(unsigned long)getCR0(), (unsigned long)getCR3(), getCS(), getIP());",
+      "(*WOWDispatchEntry)();"
+    ]
+  },
+  "difference_registration": "MVDM-HOST-DIV-770",
+  "witness": {
+    "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+    "source_sha256": "c6bf44879cd48ee597ba17afa563a5abd9ed2886485e3dfc84cd5753b499b8f5",
+    "object": "host/nt_bop",
+    "arms": [
+      {
+        "label": "codex_r685_arm_0000",
+        "line": 11,
+        "kind": "ifndef",
+        "expression": "MONITOR",
+        "error_only": false
+      },
+      {
+        "label": "codex_r685_arm_0001",
+        "line": 218,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0002",
+        "line": 230,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0003",
+        "line": 245,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0004",
+        "line": 258,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0005",
+        "line": 268,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0006",
+        "line": 281,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0007",
+        "line": 295,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0008",
+        "line": 322,
+        "kind": "if",
+        "expression": "!defined(CPU_40_STYLE) || defined(CCPU)",
+        "error_only": false
+      },
+      {
+        "label": "codex_r685_arm_0009",
+        "line": 326,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0010",
+        "line": 353,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0011",
+        "line": 413,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0012",
+        "line": 415,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r685_arm_0013",
+        "line": 511,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0014",
+        "line": 533,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0015",
+        "line": 548,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0016",
+        "line": 554,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0017",
+        "line": 560,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0018",
+        "line": 566,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0019",
+        "line": 572,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0020",
+        "line": 578,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0021",
+        "line": 584,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0022",
+        "line": 590,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0023",
+        "line": 596,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0024",
+        "line": 607,
+        "kind": "if",
+        "expression": "DBG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0025",
+        "line": 713,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0026",
+        "line": 747,
+        "kind": "ifdef",
+        "expression": "MONITOR",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0027",
+        "line": 749,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r685_arm_0028",
+        "line": 773,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0029",
+        "line": 789,
+        "kind": "ifdef",
+        "expression": "MONITOR",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0030",
+        "line": 809,
+        "kind": "ifdef",
+        "expression": "MONITOR",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0031",
+        "line": 811,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r685_arm_0032",
+        "line": 949,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0033",
+        "line": 970,
+        "kind": "ifndef",
+        "expression": "PROD",
+        "error_only": true
+      },
+      {
+        "label": "codex_r685_arm_0034",
+        "line": 984,
+        "kind": "ifdef",
+        "expression": "i386",
+        "error_only": true
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "8ce75a2f5bdf4c829903dd4471e062c338b99150136c4591028d793de887bdb2",
+        "hit": [
+          "codex_r685_arm_0000",
+          "codex_r685_arm_0008",
+          "codex_r685_arm_0012",
+          "codex_r685_arm_0027",
+          "codex_r685_arm_0031"
+        ]
+      },
+      {
+        "graph": "msvc-x64-release",
+        "exit": 0,
+        "preprocessed_sha256": "8ce75a2f5bdf4c829903dd4471e062c338b99150136c4591028d793de887bdb2",
+        "hit": [
+          "codex_r685_arm_0000",
+          "codex_r685_arm_0008",
+          "codex_r685_arm_0012",
+          "codex_r685_arm_0027",
+          "codex_r685_arm_0031"
+        ]
+      }
+    ]
+  },
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 192,
+      "identical": true,
+      "include_trace_sha256": "d8fde2340dfe64011fe84ad592d7a90f0bf601bcdef0d0d0fef8a5a0651c0109",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 192,
+      "identical": true,
+      "include_trace_sha256": "d8fde2340dfe64011fe84ad592d7a90f0bf601bcdef0d0d0fef8a5a0651c0109",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "limits": "Observed worker release graphs; Existing optional WOW-stage trace retained; enabled tracing performs file I/O and changes timing."
+}

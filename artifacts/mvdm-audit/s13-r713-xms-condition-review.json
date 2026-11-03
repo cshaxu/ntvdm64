@@ -1,0 +1,89 @@
+{
+  "path": "src/mvdm-host/xms.486/xms.c",
+  "source_sha256": "592f4a063ad84c21890cdc15e56d4900e6669224c7c34c829c09d25dff9bed75",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\xms.c",
+  "original_sha256": "592f4a063ad84c21890cdc15e56d4900e6669224c7c34c829c09d25dff9bed75",
+  "finding": "Original and current conditional trees align without an edit in observed worker graphs.",
+  "plan": {
+    "path": "src/mvdm-host/xms.486/xms.c",
+    "status": "candidate",
+    "edits": 0,
+    "excluded_groups": 0,
+    "source_sha256": "592f4a063ad84c21890cdc15e56d4900e6669224c7c34c829c09d25dff9bed75",
+    "retained_leaf_diffs": []
+  },
+  "witness": {
+    "path": "src/mvdm-host/xms.486/xms.c",
+    "source_sha256": "592f4a063ad84c21890cdc15e56d4900e6669224c7c34c829c09d25dff9bed75",
+    "object": "xms/xms",
+    "arms": [
+      {
+        "label": "codex_r689_arm_0000",
+        "line": 47,
+        "kind": "ifndef",
+        "expression": "i386",
+        "error_only": false
+      },
+      {
+        "label": "codex_r689_arm_0001",
+        "line": 67,
+        "kind": "ifndef",
+        "expression": "i386",
+        "error_only": false
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "530b95b96261224ee91a121ae437721fb141a0088c079e9616002467fa0fe767",
+        "hit": [
+          "codex_r689_arm_0000",
+          "codex_r689_arm_0001"
+        ]
+      },
+      {
+        "graph": "msvc-x64-release",
+        "exit": 0,
+        "preprocessed_sha256": "530b95b96261224ee91a121ae437721fb141a0088c079e9616002467fa0fe767",
+        "hit": [
+          "codex_r689_arm_0000",
+          "codex_r689_arm_0001"
+        ]
+      }
+    ]
+  },
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/xms.486/xms.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 170,
+      "identical": true,
+      "include_trace_sha256": "43377982b426adc6949167731e95905eb8d61072a7ce452ef6828fa771350322",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/xms.486/xms.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 170,
+      "identical": true,
+      "include_trace_sha256": "43377982b426adc6949167731e95905eb8d61072a7ce452ef6828fa771350322",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "contexts": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/xms/xms.obj",
+      "command_sha256": "d56cb7fb0cb1e5097f6e9c1179ab4d955a26f36226730c1a8ab4cd9ca0575e6d"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/xms/xms.obj",
+      "command_sha256": "d56cb7fb0cb1e5097f6e9c1179ab4d955a26f36226730c1a8ab4cd9ca0575e6d"
+    }
+  ],
+  "limits": "Other build configurations outside existing Ninja graphs remain unproven."
+}

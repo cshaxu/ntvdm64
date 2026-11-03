@@ -1,0 +1,339 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\idetect.c",
+  "before_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+  "after_sha256": "15f7c04de7479ba122b2516c499f59ae01d598931881902a4b042c2ae649b398",
+  "original_sha256": "b93eb0784830446b53eeadb4b4f2dc5506787cd5313b313ecfc1ec14c5b7d160",
+  "guards": [
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 191,
+      "error_line": 192,
+      "end_line": 195
+    },
+    {
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "original_line": 202,
+      "error_line": 203,
+      "end_line": 237
+    },
+    {
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "original_line": 249,
+      "error_line": 250,
+      "end_line": 284
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 318,
+      "error_line": 319,
+      "end_line": 334
+    },
+    {
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "original_line": 356,
+      "error_line": 357,
+      "end_line": 363
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 394,
+      "error_line": 395,
+      "end_line": 420
+    },
+    {
+      "kind": "ifndef",
+      "expression": "NTVDM",
+      "original_line": 434,
+      "error_line": 435,
+      "end_line": 438
+    },
+    {
+      "kind": "ifdef",
+      "expression": "MONITOR",
+      "original_line": 444,
+      "error_line": 445,
+      "end_line": 447
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 450,
+      "error_line": 451,
+      "end_line": 453
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 461,
+      "error_line": 462,
+      "end_line": 466
+    },
+    {
+      "kind": "ifdef",
+      "expression": "PIG",
+      "original_line": 494,
+      "error_line": 495,
+      "end_line": 502
+    },
+    {
+      "kind": "else",
+      "expression": "",
+      "original_line": 502,
+      "error_line": 503,
+      "end_line": 505
+    }
+  ],
+  "retained_leaf_difference": {
+    "original_line": 214,
+    "current_line": 203,
+    "original": [
+      "#include \"..\\..\\..\\..\\inc\\vdm.h\"",
+      "/*  NTVDM",
+      "*  Some of our static global variables are located in 16 bit memory area",
+      "*  so we reference as pointers, inititializaed by kb_setup_vectors",
+      "*/",
+      "word minFailedPolls = 8;",
+      "word ienabled = 0;",
+      "word ShortIdle=0;",
+      "word IdleNoActivity = 0;",
+      "word *pICounter;",
+      "#define i_counter (*pICounter)",
+      "word *pCharPollsPerTick;",
+      "#define nCharPollsPerTick (*pCharPollsPerTick)",
+      "word *pMinConsecutiveTicks;",
+      "#define minConsecutiveTicks (*pMinConsecutiveTicks)"
+    ],
+    "current": [
+      "#include <vdm.h>",
+      "/*  NTVDM",
+      "*  Some of our static global variables are located in 16 bit memory area",
+      "*  so we reference as pointers, inititializaed by kb_setup_vectors",
+      "*/",
+      "word minFailedPolls = 8;",
+      "word ienabled = 0;",
+      "word ShortIdle=0;",
+      "word IdleNoActivity = 0;",
+      "word *pICounter;",
+      "#define i_counter (*pICounter)",
+      "word *pCharPollsPerTick;",
+      "#define nCharPollsPerTick (*pCharPollsPerTick)",
+      "word *pMinConsecutiveTicks;",
+      "#define minConsecutiveTicks (*pMinConsecutiveTicks)"
+    ]
+  },
+  "difference_registration": "MVDM-HOST-DIV-024",
+  "witness": {
+    "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+    "source_sha256": "3a56b6db24cc51b624d853a91489209b5875c83009f6950f8b50f62bf98b75f9",
+    "object": "system/idetect",
+    "arms": [
+      {
+        "label": "codex_r686_arm_0000",
+        "line": 165,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r686_arm_0001",
+        "line": 188,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r686_arm_0002",
+        "line": 191,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r686_arm_0003",
+        "line": 201,
+        "kind": "ifndef",
+        "expression": "NTVDM",
+        "error_only": true
+      },
+      {
+        "label": "codex_r686_arm_0004",
+        "line": 203,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r686_arm_0005",
+        "line": 238,
+        "kind": "ifndef",
+        "expression": "NTVDM",
+        "error_only": true
+      },
+      {
+        "label": "codex_r686_arm_0006",
+        "line": 243,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r686_arm_0007",
+        "line": 276,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r686_arm_0008",
+        "line": 292,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r686_arm_0009",
+        "line": 301,
+        "kind": "ifdef",
+        "expression": "MONITOR",
+        "error_only": true
+      },
+      {
+        "label": "codex_r686_arm_0010",
+        "line": 335,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r686_arm_0011",
+        "line": 352,
+        "kind": "ifndef",
+        "expression": "NTVDM",
+        "error_only": true
+      },
+      {
+        "label": "codex_r686_arm_0012",
+        "line": 360,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r686_arm_0013",
+        "line": 361,
+        "kind": "ifdef",
+        "expression": "MONITOR",
+        "error_only": true
+      },
+      {
+        "label": "codex_r686_arm_0014",
+        "line": 367,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r686_arm_0015",
+        "line": 376,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r686_arm_0016",
+        "line": 378,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      },
+      {
+        "label": "codex_r686_arm_0017",
+        "line": 408,
+        "kind": "ifdef",
+        "expression": "NTVDM",
+        "error_only": false
+      },
+      {
+        "label": "codex_r686_arm_0018",
+        "line": 409,
+        "kind": "ifdef",
+        "expression": "PIG",
+        "error_only": true
+      },
+      {
+        "label": "codex_r686_arm_0019",
+        "line": 411,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r686_arm_0020",
+        "line": 417,
+        "kind": "else",
+        "expression": "",
+        "error_only": true
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "4b12fa00bb990dbac98fcae5523fed3a0d26dc954745b32a2591198c0d20659b",
+        "hit": [
+          "codex_r686_arm_0000",
+          "codex_r686_arm_0001",
+          "codex_r686_arm_0004",
+          "codex_r686_arm_0006",
+          "codex_r686_arm_0008",
+          "codex_r686_arm_0012",
+          "codex_r686_arm_0015",
+          "codex_r686_arm_0017",
+          "codex_r686_arm_0019"
+        ]
+      },
+      {
+        "graph": "msvc-x64-release",
+        "exit": 0,
+        "preprocessed_sha256": "4b12fa00bb990dbac98fcae5523fed3a0d26dc954745b32a2591198c0d20659b",
+        "hit": [
+          "codex_r686_arm_0000",
+          "codex_r686_arm_0001",
+          "codex_r686_arm_0004",
+          "codex_r686_arm_0006",
+          "codex_r686_arm_0008",
+          "codex_r686_arm_0012",
+          "codex_r686_arm_0015",
+          "codex_r686_arm_0017",
+          "codex_r686_arm_0019"
+        ]
+      }
+    ]
+  },
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 161,
+      "identical": true,
+      "include_trace_sha256": "1a513ea50118dd541fc434aa0c1d87057ad4530c27509b475cdc692dfa05bf81",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/idetect.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 161,
+      "identical": true,
+      "include_trace_sha256": "1a513ea50118dd541fc434aa0c1d87057ad4530c27509b475cdc692dfa05bf81",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "limits": "Observed worker release graphs; local include-path adaptation retained; behavior outside condition selection not asserted."
+}

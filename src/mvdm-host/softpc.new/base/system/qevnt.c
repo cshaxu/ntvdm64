@@ -151,6 +151,9 @@ q_event_init(
  */
 #ifndef MONITOR
 #line 151
+/*
+*  Caller must hold ica lock
+*/
 void
 ResetCpuQevCount(
      PLARGE_INTEGER CurrTime
@@ -207,9 +210,10 @@ add_q_event_t(
       )
 {
 #ifdef MONITOR
+#line 207
 #error Excluded unsupported quick-event hardware monitor path
 #else
-#line 217
+#line 218
 
 
         QEVHANDLE   qevHandle;
@@ -292,7 +296,7 @@ add_q_event_t(
 
 
 #endif
-#line 279
+#line 299
 }
 
 
@@ -533,8 +537,10 @@ quick_tick_recalibrate(void)
      ULONG CalibCount;
 
 #ifndef PROD
+#line 534
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 539
 
      host_ica_lock();
 

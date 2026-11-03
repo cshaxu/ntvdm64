@@ -1,0 +1,150 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+  "source_sha256": "59174912de6b5be66e6a7d3832cf14f728adbb5a9be5f2bf5ccf19ccb74c112f",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\copy_fnc.c",
+  "original_sha256": "320d697e9969cf146d5b0f94813aa62b501b0eefeff31806b22d463912965518",
+  "finding": "Conditional trees align, all retained leaves match except the documented DIV-064 fill-loop adaptation; original fill algorithm equivalence is not asserted.",
+  "plan": {
+    "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+    "status": "candidate",
+    "edits": 0,
+    "excluded_groups": 4,
+    "source_sha256": "59174912de6b5be66e6a7d3832cf14f728adbb5a9be5f2bf5ccf19ccb74c112f",
+    "retained_leaf_diffs": [
+      {
+        "original_line": 118,
+        "current_line": 104,
+        "original": [
+          "count = h_addr4 - l_addr4;",
+          "RtlFillMemoryUlong(l_addr4, count, data4);",
+          "l_addr = (unsigned char *)l_addr4;",
+          "l_addr += count;"
+        ],
+        "current": [
+          "do *l_addr4++ = data4; while (h_addr4 > l_addr4);",
+          "l_addr = (unsigned char *)l_addr4;"
+        ]
+      }
+    ]
+  },
+  "witness": {
+    "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+    "source_sha256": "59174912de6b5be66e6a7d3832cf14f728adbb5a9be5f2bf5ccf19ccb74c112f",
+    "object": "host/copy_fnc",
+    "arms": [
+      {
+        "label": "codex_r687_arm_0000",
+        "line": 18,
+        "kind": "if",
+        "expression": "0",
+        "error_only": true
+      },
+      {
+        "label": "codex_r687_arm_0001",
+        "line": 21,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r687_arm_0002",
+        "line": 60,
+        "kind": "if",
+        "expression": "0",
+        "error_only": true
+      },
+      {
+        "label": "codex_r687_arm_0003",
+        "line": 81,
+        "kind": "ifdef",
+        "expression": "LITTLEND",
+        "error_only": false
+      },
+      {
+        "label": "codex_r687_arm_0004",
+        "line": 101,
+        "kind": "if",
+        "expression": "0",
+        "error_only": true
+      },
+      {
+        "label": "codex_r687_arm_0005",
+        "line": 104,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      },
+      {
+        "label": "codex_r687_arm_0006",
+        "line": 166,
+        "kind": "if",
+        "expression": "0",
+        "error_only": true
+      },
+      {
+        "label": "codex_r687_arm_0007",
+        "line": 169,
+        "kind": "else",
+        "expression": "",
+        "error_only": false
+      }
+    ],
+    "observations": [
+      {
+        "graph": "msvc-x86-release",
+        "exit": 0,
+        "preprocessed_sha256": "78af315124fb7da3773d9b3a5ebd2c7fa4b8861eb569691b0ef18cfd972b59d9",
+        "hit": [
+          "codex_r687_arm_0001",
+          "codex_r687_arm_0003",
+          "codex_r687_arm_0005",
+          "codex_r687_arm_0007"
+        ]
+      },
+      {
+        "graph": "msvc-x64-release",
+        "exit": 0,
+        "preprocessed_sha256": "78af315124fb7da3773d9b3a5ebd2c7fa4b8861eb569691b0ef18cfd972b59d9",
+        "hit": [
+          "codex_r687_arm_0001",
+          "codex_r687_arm_0003",
+          "codex_r687_arm_0005",
+          "codex_r687_arm_0007"
+        ]
+      }
+    ]
+  },
+  "include_traces": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "graph": "msvc-x86-release",
+      "include_trace_count": 160,
+      "identical": true,
+      "include_trace_sha256": "a524b179bdd58b4b764f16c72a210d6dc53265b564983d9db6ae61f3220d6cfc",
+      "method": "temporary sibling file; original search order"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",
+      "graph": "msvc-x64-release",
+      "include_trace_count": 160,
+      "identical": true,
+      "include_trace_sha256": "a524b179bdd58b4b764f16c72a210d6dc53265b564983d9db6ae61f3220d6cfc",
+      "method": "temporary sibling file; original search order"
+    }
+  ],
+  "contexts": [
+    {
+      "preset": "msvc-x86-release",
+      "graph": "worker",
+      "object": "obj/host/copy_fnc.obj",
+      "command_sha256": "6f86027a609be3bf70e857ae4fee9a0d343701fc1adc0884631d3ef8b5e7ebd4"
+    },
+    {
+      "preset": "msvc-x64-release",
+      "graph": "worker-reference-x86",
+      "object": "obj/host/copy_fnc.obj",
+      "command_sha256": "6f86027a609be3bf70e857ae4fee9a0d343701fc1adc0884631d3ef8b5e7ebd4"
+    }
+  ],
+  "limits": "Observed release build graphs only; configurations outside existing Ninja graphs remain unproven."
+}

@@ -151,6 +151,7 @@ PHMAP FindHMap32(HAND32 h32, PHINFO phi, INT iClass)
             return NULL;
         }
 #else
+#line 150
 #error Unsupported excluded original configuration
 #endif
 #line 200
