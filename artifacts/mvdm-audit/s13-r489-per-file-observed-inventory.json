@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 783,
+  "completed_files": 814,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -197,7 +197,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r680-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/dos/dem/demdasd.h",
@@ -348,7 +349,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r680-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/dos/dem/demmsg.c",
@@ -1390,13 +1392,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\rtc_bios.c",
-      "current_sha256": "62547d56b1dc75af8cc84936e4047a38c50e02c72f7fc6019f945eb4c5fdff67",
+      "current_sha256": "6bd14417070148d1bea9febad34cc2e229c14cd513138c6cdea8b1a21208f354",
       "original_sha256": "bc5e3a66a552e293ae1ec9653205f8432867b4290e3d4ecad6ae5cd1ccab4cb6",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r682-witnessed-anchor-batch.json",
+      "evidence": "s13-r682-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
@@ -1431,8 +1435,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r663-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r663-guard-line-audit.json",
+      "evidence": "s13-r680-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/aaa.c",
@@ -2134,13 +2139,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tlb.c",
-      "current_sha256": "63601f275852cc347f33c880c4b8d26526b89c9d7aeeb06c32683030c060b5df",
+      "current_sha256": "13f1e34e2e0d242a2b3757990338887e2d55780d0f5dcec0ee7bd5f771a6eaac",
       "original_sha256": "a83a7dd3f7e3fbb83723047aacddbd22d4001591c6d444d4bd6d45dd73e38fd8",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r680-witnessed-anchor-batch.json",
+      "evidence": "s13-r682-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.h",
@@ -2320,15 +2327,16 @@
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpusas4.c",
-      "current_sha256": "172e8ddde8b267c910117acad724dc84a6ec4f769e0831b605303f8ae9ae18cd",
+      "current_sha256": "b460b6d58a89ade4d7336812a0ffc98d884ab6f7132f2ce51728bc95cac01bf6",
       "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
+      "status": "completed-original-witnessed-condition-tree",
       "pending_change": "r540 exclude unselected CCPU CHECK_ACCESS debugging alternative; full file audit pending",
-      "partial_evidence": "s13-r663-guard-line-audit.json"
+      "partial_evidence": "s13-r680-witnessed-anchor-batch.json",
+      "evidence": "s13-r682-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.h",
@@ -2990,8 +2998,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r621-real-mode-line-review.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r621-real-mode-line-review.json",
+      "evidence": "s13-r680-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.h",
@@ -3716,8 +3725,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r621-real-mode-line-review.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r621-real-mode-line-review.json",
+      "evidence": "s13-r680-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ret.h",
@@ -4421,7 +4431,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r680-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.h",
@@ -4437,13 +4448,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/comms/com.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
-      "current_sha256": "953b927de0339ab1c1eb16b437425ccaf68461d40f45b78583fb130909e3cd5a",
+      "current_sha256": "6979afbd90dda9b56a997412165f63dc8c6edc12e96048535016703a8db84823",
       "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r681-witnessed-anchor-batch.json",
+      "evidence": "s13-r682-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
@@ -4488,8 +4501,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r666-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r666-guard-line-audit.json",
+      "evidence": "s13-r679-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/cpu/src/evid/vglob.c",
@@ -5174,13 +5188,15 @@
     {
       "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\diskbios.c",
-      "current_sha256": "6d6608705a81319acf4d9f7a310021f88920b82741606f4bf0c6c8599aa65bae",
+      "current_sha256": "5c7b58e229a4c6f40dc0f3b8e3e4164118d92ae9e642a3417d8af55308f15992",
       "original_sha256": "d05908d6199675e65ebcf0f2b2c864169e80276639fb8de25b007c5e66751cdc",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r681-witnessed-anchor-batch.json",
+      "evidence": "s13-r682-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
@@ -5191,45 +5207,49 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r665-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r665-guard-line-audit.json",
+      "evidence": "s13-r678-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fla.c",
-      "current_sha256": "58d57b262f3df1c3cdf86c63d18357019e0a7302a1afe836a393b117ad8dd4a5",
+      "current_sha256": "d076c39d5566c369dc2cdbec2718d2ef52523898dca2892e0daad1aef23ff63c",
       "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r664-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r679-witnessed-anchor-batch.json",
+      "evidence": "s13-r682-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
-      "current_sha256": "a378f462e107397ea0a3be82eae993cc034c57940e5a83aee1d35507eef2d640",
+      "current_sha256": "d9c57d64cd85cd50b0386fb65ac7988cdaf15c9906527486bfc6c3e40773971f",
       "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r663-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r677-witnessed-anchor-batch.json",
+      "evidence": "s13-r682-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
-      "current_sha256": "c9cee6ca343e90b06370e530e5b67f1fbb3ebe6976f4a0d1a3b93a691896aef1",
+      "current_sha256": "6543253ff7d404cd775969d1fae543ae4179074d1f2d4a43980e1a4fb28f573b",
       "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
+      "status": "completed-original-witnessed-condition-tree",
       "pending_change": "r496 original diagnostic anchors; broader per-file conditional audit pending",
-      "partial_evidence": "s13-r663-guard-line-audit.json"
+      "partial_evidence": "s13-r677-witnessed-anchor-batch.json",
+      "evidence": "s13-r682-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
@@ -5265,9 +5285,10 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
+      "status": "completed-original-witnessed-condition-tree",
       "pending_change": "r496 original diagnostic anchors; broader per-file conditional audit pending",
-      "partial_evidence": "s13-r663-guard-line-audit.json"
+      "partial_evidence": "s13-r663-guard-line-audit.json",
+      "evidence": "s13-r678-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
@@ -6287,19 +6308,22 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r663-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r663-guard-line-audit.json",
+      "evidence": "s13-r678-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
-      "current_sha256": "2b2965c828aaa56c4b52a7da835206e7daf1e65cecaa280e85f6a0da29660f2c",
+      "current_sha256": "06045ffc85cffd259181e785b4efaf984ea56d8d08a854aad0d5c77cbaf5572f",
       "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r679-witnessed-anchor-batch.json",
+      "evidence": "s13-r682-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/ios.c",
@@ -6332,8 +6356,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r658-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r658-guard-line-audit.json",
+      "evidence": "s13-r679-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/time_day.c",
@@ -6505,8 +6530,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r639-basic-guard-lines.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r639-basic-guard-lines.json",
+      "evidence": "s13-r678-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
@@ -6552,8 +6578,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r658-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r658-guard-line-audit.json",
+      "evidence": "s13-r679-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/ega_vide.c",
@@ -6621,8 +6648,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r664-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r664-guard-line-audit.json",
+      "evidence": "s13-r678-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/v7_ports.c",
@@ -6633,8 +6661,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r636-basic-guard-lines.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r636-basic-guard-lines.json",
+      "evidence": "s13-r678-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/v7_video.c",
@@ -6701,8 +6730,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r636-basic-guard-lines.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r636-basic-guard-lines.json",
+      "evidence": "s13-r677-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/cfpu_def.h",
@@ -7177,8 +7207,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r664-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r664-guard-line-audit.json",
+      "evidence": "s13-r678-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_bop.c",
@@ -7386,9 +7417,10 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
+      "status": "completed-original-witnessed-condition-tree",
       "pending_change": "r513 exclude non-MONITOR printer status alternative; other groups pending",
-      "partial_evidence": "s13-r664-guard-line-audit.json"
+      "partial_evidence": "s13-r664-guard-line-audit.json",
+      "evidence": "s13-r677-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
@@ -7496,7 +7528,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r679-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
@@ -7507,8 +7540,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r665-guard-line-audit.json"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r665-guard-line-audit.json",
+      "evidence": "s13-r679-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_sas.c",
@@ -7563,13 +7597,15 @@
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
       "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
-      "current_sha256": "46408a3caaa7987653223d7a6fe131ace0a7636e827aa81c40bf9a9b108e1778",
+      "current_sha256": "12db3744433d62a6045ce06cef037beae179b2a60a7158b72a08603346e3351a",
       "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
       "observed_in": [
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "partial_evidence": "s13-r677-witnessed-anchor-batch.json",
+      "evidence": "s13-r682-batch-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
@@ -7594,7 +7630,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-witnessed-condition-tree",
+      "evidence": "s13-r677-witnessed-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",

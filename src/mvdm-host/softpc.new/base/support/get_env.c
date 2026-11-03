@@ -36,10 +36,13 @@
 #endif
 
 #else
+#line 39
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 41
 
 #ifndef NTVDM
+#line 43
 #error DIVERGENCE MVDM-HOST-DIV-591: non-NTVDM branch is not selected
 #endif
 #line 81
@@ -51,8 +54,10 @@ GLOBAL IBOOL IBOOLgetenv IFN2(char *, name, IBOOL, default_value)
         IBOOL value;
 
 #ifndef NTVDM
+#line 89
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 92
 
 	value = default_value;
 	env = host_getenv(name);
@@ -61,14 +66,18 @@ GLOBAL IBOOL IBOOLgetenv IFN2(char *, name, IBOOL, default_value)
 #ifdef NTVDM
             value = _stricmp(env, "TRUE") == 0;
 #else
+#line 100
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 110
 
         }
 
 #ifndef NTVDM
+#line 114
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 120
 
 	return (value);
 }
@@ -80,8 +89,10 @@ GLOBAL ISM32 ISM32getenv IFN2(char *, name, ISM32, default_value)
         ISM32 value;
 
 #ifndef NTVDM
+#line 131
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 134
 
 	value = default_value;
 	env = host_getenv(name);
@@ -91,13 +102,17 @@ GLOBAL ISM32 ISM32getenv IFN2(char *, name, ISM32, default_value)
 		if (ptr == env)	/* cannot do conversion */
                         value = default_value;
 #ifndef NTVDM
+#line 143
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 145
         }
 
 #ifndef NTVDM
+#line 148
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 153
 	return (value);
 }
 
@@ -108,8 +123,10 @@ GLOBAL char *STRINGgetenv IFN2(char *, name, char *, default_value)
         char *value;
 
 #ifndef NTVDM
+#line 163
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 166
 
 	value = default_value;
 	env = host_getenv(name);
@@ -117,12 +134,16 @@ GLOBAL char *STRINGgetenv IFN2(char *, name, char *, default_value)
 	{
                 value = env;
 #ifndef NTVDM
+#line 173
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 175
         }
 
 #ifndef NTVDM
+#line 178
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 186
 	return (value);
 }

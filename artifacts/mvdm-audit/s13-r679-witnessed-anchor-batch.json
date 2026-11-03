@@ -1,0 +1,419 @@
+{
+  "scope": "Two original condition trees with previously missing diagnostic anchors; all retained arms witnessed in actual worker preprocess contexts.",
+  "method": "Original/current recursive tree preflight; selected-arm markers and ordered include traces checked before edits; resulting tree and line anchors rechecked.",
+  "limits": "Five of ten allowed source edits in current build batch; complete supported-context enumeration remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fla.c",
+      "before_sha256": "58d57b262f3df1c3cdf86c63d18357019e0a7302a1afe836a393b117ad8dd4a5",
+      "after_sha256": "d076c39d5566c369dc2cdbec2718d2ef52523898dca2892e0daad1aef23ff63c",
+      "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SCCSID",
+          "original_line": 46,
+          "error_line": 47,
+          "end_line": 49
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 50,
+          "error_line": 51,
+          "end_line": 58
+        },
+        {
+          "kind": "ifdef",
+          "expression": "macintosh",
+          "original_line": 168,
+          "error_line": 169,
+          "end_line": 173
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BIT_ORDER1",
+          "original_line": 180,
+          "error_line": 181,
+          "end_line": 194
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 436,
+          "error_line": 437,
+          "end_line": 443
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 712,
+          "error_line": 713,
+          "end_line": 716
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 818,
+          "error_line": 819,
+          "end_line": 895
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 1131,
+          "error_line": 1132,
+          "end_line": 1139
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+        "source_sha256": "58d57b262f3df1c3cdf86c63d18357019e0a7302a1afe836a393b117ad8dd4a5",
+        "object": "disks/fla",
+        "arms": [
+          {
+            "label": "codex_r679_arm_0000",
+            "line": 46,
+            "kind": "ifdef",
+            "expression": "SCCSID",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0001",
+            "line": 52,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0002",
+            "line": 167,
+            "kind": "ifdef",
+            "expression": "macintosh",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0003",
+            "line": 170,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r679_arm_0004",
+            "line": 183,
+            "kind": "ifdef",
+            "expression": "BIT_ORDER1",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0005",
+            "line": 189,
+            "kind": "ifdef",
+            "expression": "BIT_ORDER2",
+            "error_only": false
+          },
+          {
+            "label": "codex_r679_arm_0006",
+            "line": 430,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0007",
+            "line": 704,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0008",
+            "line": 738,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r679_arm_0009",
+            "line": 811,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0010",
+            "line": 1050,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "c2afd4b7a82b04fa0e80231c1259d42176bd2689faedd2e36029c10473e59370",
+            "hit": [
+              "codex_r679_arm_0003",
+              "codex_r679_arm_0005",
+              "codex_r679_arm_0008"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "c2afd4b7a82b04fa0e80231c1259d42176bd2689faedd2e36029c10473e59370",
+            "hit": [
+              "codex_r679_arm_0003",
+              "codex_r679_arm_0005",
+              "codex_r679_arm_0008"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 181,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 181,
+          "identical": true
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "before_sha256": "2b2965c828aaa56c4b52a7da835206e7daf1e65cecaa280e85f6a0da29660f2c",
+      "after_sha256": "06045ffc85cffd259181e785b4efaf984ea56d8d08a854aad0d5c77cbaf5572f",
+      "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+      "guards": [
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 38,
+          "error_line": 39,
+          "end_line": 41
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 42,
+          "error_line": 43,
+          "end_line": 81
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 88,
+          "error_line": 89,
+          "end_line": 92
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 99,
+          "error_line": 100,
+          "end_line": 110
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 113,
+          "error_line": 114,
+          "end_line": 120
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 130,
+          "error_line": 131,
+          "end_line": 134
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 142,
+          "error_line": 143,
+          "end_line": 145
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 147,
+          "error_line": 148,
+          "end_line": 153
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 162,
+          "error_line": 163,
+          "end_line": 166
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 172,
+          "error_line": 173,
+          "end_line": 175
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 177,
+          "error_line": 178,
+          "end_line": 186
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+        "source_sha256": "2b2965c828aaa56c4b52a7da835206e7daf1e65cecaa280e85f6a0da29660f2c",
+        "object": "support/get_env",
+        "arms": [
+          {
+            "label": "codex_r679_arm_0000",
+            "line": 32,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r679_arm_0001",
+            "line": 34,
+            "kind": "ifdef",
+            "expression": "LOCAL",
+            "error_only": false
+          },
+          {
+            "label": "codex_r679_arm_0002",
+            "line": 38,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0003",
+            "line": 42,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0004",
+            "line": 53,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0005",
+            "line": 61,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r679_arm_0006",
+            "line": 63,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0007",
+            "line": 69,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0008",
+            "line": 82,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0009",
+            "line": 93,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0010",
+            "line": 98,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0011",
+            "line": 110,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0012",
+            "line": 119,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0013",
+            "line": 124,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "be71d65d3b652a5f14de8e124318ace9ccc88f9929fa918e8bd0118ac9f1cb26",
+            "hit": [
+              "codex_r679_arm_0000",
+              "codex_r679_arm_0001",
+              "codex_r679_arm_0005"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "be71d65d3b652a5f14de8e124318ace9ccc88f9929fa918e8bd0118ac9f1cb26",
+            "hit": [
+              "codex_r679_arm_0000",
+              "codex_r679_arm_0001",
+              "codex_r679_arm_0005"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 185,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 185,
+          "identical": true
+        }
+      ]
+    }
+  ]
+}

@@ -13,10 +13,13 @@
  */
 
 #ifdef SCCSID
+#line 16
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
+#line 18
 
 #ifdef SEGMENTATION
+#line 20
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -24,6 +27,7 @@
 
 
 #endif
+#line 27
 
 /*
  *    O/S include files.
@@ -94,6 +98,7 @@ static struct ADAPTER_STATE
 	LINE_STATUS_REG line_status_reg;
 	MODEM_STATUS_REG modem_status_reg;
 #if defined(NTVDM) && defined(FIFO_ON)
+#line 91
 #error Excluded unsupported FIFO_ON configuration
 
 
@@ -101,6 +106,7 @@ static struct ADAPTER_STATE
 
 
 #endif
+#line 98
 	half_word scratch;      /* scratch register */
 
 	int break_state;        /* either OFF or ON */
@@ -118,8 +124,10 @@ static struct ADAPTER_STATE
 	int com_baud_ind;
 	int had_first_read;
 #ifdef IRET_HOOKS
+#line 115
 #error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
 #endif /* IRET_HOOKS */
+#line 120
 #ifdef NTVDM
     MODEM_STATUS_REG last_modem_status_value;
     int modem_status_changed;
@@ -130,13 +138,17 @@ static struct ADAPTER_STATE
 #ifdef NTVDM
 #define MODEM_STATE_CHANGE()	asp->modem_status_changed = TRUE;
 #else
+#line 130
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 132
 
 
 #ifdef IRET_HOOKS
+#line 135
 #error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
 #endif /* IRET_HOOKS */
+#line 142
 
 /*
  * For synchronisation of adapter input.
@@ -162,8 +174,10 @@ static LINE_CONTROL_REG LCRFlushMask;
  */
 
 #if defined(NTVDM) && defined(FIFO_ON)
+#line 167
 #error Excluded unsupported FIFO_ON configuration
 #endif
+#line 169
 
 /*
  * The delay needed in microseconds between receiving 2 characters
@@ -231,8 +245,10 @@ unsigned long TX_delay[] =
 };
 
 #ifndef PROD
+#line 236
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
+#line 239
 /*
  * =====================================================================
  * Other variables
@@ -240,13 +256,16 @@ unsigned long TX_delay[] =
  */
 
 #if !defined(PROD) || defined(SHORT_TRACE)
+#line 246
 #error Unsupported excluded original configuration
 #endif /* !PROD || SHORT_TRACE */
 #line 248
 
 #ifdef PS_FLUSHING
+#line 250
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
+#line 253
 
 /* Control TX pacing */
 IBOOL tx_pacing_enabled = FALSE;
@@ -266,8 +285,10 @@ static void clear_interrupt IPT1(struct ADAPTER_STATE *, asp);
 static void com_flush_input IPT1(int, adapter);
 static void com_send_not_finished IPT1(int, adapter);
 #ifndef NTVDM
+#line 272
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 274
 void   com_inb IPT2(io_addr, port, half_word *, value);
 void   com_outb IPT2(io_addr, port, half_word, value);
 void   com_recv_char IPT1(int, adapter);
@@ -295,8 +316,10 @@ LOCAL void next_batch IPT1(long, l_adapter);
 #ifdef NTVDM
 static void lsr_change(struct ADAPTER_STATE *asp, unsigned int error);
 #ifdef FIFO_ON
+#line 301
 #error DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register.
 #endif
+#line 303
 #endif
 
 /*
@@ -401,12 +424,14 @@ static void generate_iir IFN1(struct ADAPTER_STATE *, asp)
 		asp->int_id_reg.bits.no_int_pending = 0;
 	}
 #if defined(NTVDM) && defined(FIFO_ON)
+#line 407
 #error Excluded unsupported FIFO_ON configuration
 
 
 
 
 #endif
+#line 413
 	else if ( asp->tx_holding_register_empty_interrupt_state == ON )
 	{
 		asp->int_id_reg.bits.interrupt_ID = THRE_INT;
@@ -436,13 +461,16 @@ static void raise_interrupt IFN1(struct ADAPTER_STATE *, asp)
 	&&   ( asp->tx_holding_register_empty_interrupt_state == OFF )
 	&&   ( asp->modem_status_interrupt_state              == OFF ) 
 #if defined(NTVDM) && defined(FIFO_ON)
+#line 442
 #error Excluded unsupported FIFO_ON configuration
 #endif
+#line 444
        )
 	{
 #ifndef DELAYED_INTS
 		ica_hw_interrupt(0, asp->hw_interrupt_priority, 1);
 #else
+#line 449
 #error Unsupported excluded original configuration
 #endif
 #line 452
@@ -460,14 +488,17 @@ static void clear_interrupt IFN1(struct ADAPTER_STATE *, asp)
 	&&   ( asp->tx_holding_register_empty_interrupt_state == OFF )
 	&&   ( asp->modem_status_interrupt_state              == OFF ) 
 #if defined(NTVDM) && defined(FIFO_ON)
+#line 466
 #error Excluded unsupported FIFO_ON configuration
 #endif
+#line 468
        )
 	{
 		ica_clear_int(0, asp->hw_interrupt_priority);
 	}
 }
 #if defined(NTVDM) && defined(FIFO_ON)
+#line 474
 #error Excluded unsupported FIFO_ON configuration
 
 
@@ -488,6 +519,7 @@ static void clear_interrupt IFN1(struct ADAPTER_STATE *, asp)
 
 
 #endif
+#line 494
 
 
 
@@ -533,8 +565,10 @@ static void com_send_not_finished IFN1(int, adapter)
 
 
 #ifndef NTVDM
+#line 539
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 549
 
 
 void com_inb IFN2(io_addr, port, half_word *, value)
@@ -558,14 +592,17 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 			 * Read of rx buffer
 			 */
 #ifndef NTVDM
+#line 572
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else /* NTVDM is defined */
+#line 578
             //Flushing on first read removes characters from
             //the communications system that are needed !!!!
             //This assumes that the first read from the comms
             //system will return one character only. This is
             //a false assumption under NT windows.
 #endif /* !NTVDM */
+#line 584
 			*value = asp->rx_buffer;
 		
 			adapter_was_critical =
@@ -595,15 +632,19 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 				{
 #ifdef NTVDM
 #ifdef FIFO_ON
+#line 613
 #error DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register.
 #else /* !FIFO_ON */
+#line 631
                     host_com_char_read(adapter,
                     asp->int_enable_reg.bits.data_available
                     );
 #endif /* !FIFO_ON */
+#line 635
 #endif /* NTVDM */
 
 #ifndef NTVDM
+#line 638
 #error Excluded unsupported non-NTVDM serial profile
 #endif /* !NTVDM */
 #line 669
@@ -616,17 +657,23 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 				set_xmit_char_status(asp);
 			}
 #ifdef IRET_HOOKS
+#line 678
 #error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
 #endif /* IRET_HOOKS */
+#line 685
 		}
 		else
 			*value = asp->divisor_latch.byte.LSByte;
 #ifdef SHORT_TRACE
+#line 689
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
+#line 697
 #ifndef PROD
+#line 698
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 709
 		break;
 																		
 	case RS232_IER:
@@ -635,11 +682,15 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		else
 			*value = asp->divisor_latch.byte.MSByte;
 #ifdef SHORT_TRACE
+#line 717
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
+#line 724
 #ifndef PROD
+#line 725
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 735
 		break;
 
 	case RS232_IIR:
@@ -653,11 +704,15 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		}
 
 #ifdef SHORT_TRACE
+#line 748
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
+#line 755
 #ifndef PROD
+#line 756
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 766
 		break;
 	
 	case RS232_LCR:
@@ -675,21 +730,29 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 
 		*value = asp->line_control_reg.all;
 #ifdef SHORT_TRACE
+#line 783
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
+#line 790
 #ifndef PROD
+#line 791
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 801
 		break;
 	
 	case RS232_MCR:
 		*value = asp->modem_control_reg.all;
 #ifdef SHORT_TRACE
+#line 806
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
+#line 813
 #ifndef PROD
+#line 814
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 824
 		break;
 	
 	case RS232_LSR:
@@ -702,22 +765,30 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		asp->receiver_line_status_interrupt_state = OFF;
 		clear_interrupt(asp);
 #if defined(NTVDM) && defined(FIFO_ON)
+#line 836
 #error Excluded unsupported FIFO_ON configuration
 #endif
+#line 838
 	
 #ifdef SHORT_TRACE
+#line 840
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
+#line 852
 #ifndef PROD
+#line 853
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 879
 		break;
 	
 	case RS232_MSR:
 
 #ifndef NTVDM
+#line 884
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else
+#line 905
 		if(!asp->modem_status_changed && asp->loopback_state == OFF)
 		{
 		    *value = asp->last_modem_status_value.all;
@@ -759,14 +830,19 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 		    host_com_unlock(adapter);
 		}
 #endif /* ifndef NTVDM */
+#line 946
 
 
 #ifdef SHORT_TRACE
+#line 949
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
+#line 956
 #ifndef PROD
+#line 957
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 967
 		break;
 
 /*
@@ -779,8 +855,10 @@ void com_inb IFN2(io_addr, port, half_word *, value)
 	}
 
 #ifndef PROD
+#line 979
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 991
 
 #ifdef NTVDM
 	if((port & 0x7) != RS232_MSR) host_com_unlock(adapter);
@@ -800,8 +878,10 @@ void com_outb IFN2(io_addr, port, half_word, value)
 
 
 #ifndef PROD
+#line 1010
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1017
 	
 	switch(port & 0x7)
 	{
@@ -820,18 +900,23 @@ void com_outb IFN2(io_addr, port, half_word, value)
 			if ( asp->loopback_state == OFF )
 			{
 #ifdef PS_FLUSHING
+#line 1035
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
+#line 1045
 				host_com_write(adapter, asp->tx_buffer);
 #if defined (DELAYED_INTS) || defined (NTVDM)
 				set_xmit_char_status(asp);
 #else
+#line 1049
 #error Unsupported excluded original configuration
 #endif /* DELAYED_INTS || NTVDM */
 #line 1056
 #ifdef PS_FLUSHING
+#line 1057
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
+#line 1059
 			}
 			else
 			{	/* Loopback case requires masking off */
@@ -845,15 +930,21 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		{
 			asp->divisor_latch.byte.LSByte = value;
 #ifndef NTVDM
+#line 1072
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 1074
 		}
 #ifdef SHORT_TRACE
+#line 1076
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
+#line 1084
 #ifndef PROD
+#line 1085
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1096
 		break;
 																		
 	case RS232_IER:
@@ -905,18 +996,25 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		{
 			asp->divisor_latch.byte.MSByte = value;
 #ifndef NTVDM
+#line 1147
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 1149
 		}
 #ifdef SHORT_TRACE
+#line 1151
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
+#line 1158
 #ifndef PROD
+#line 1159
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1169
 		break;
 		
 #if defined(NTVDM) && defined(FIFO_ON)
+#line 1172
 #error Excluded unsupported FIFO_ON configuration
 
 
@@ -945,18 +1043,24 @@ void com_outb IFN2(io_addr, port, half_word, value)
 
 
 #else /* !(NTVDM && FIFO_ON) */
+#line 1200
 	case RS232_IIR:
 		/* 
 		 * Essentially a READ ONLY register
 		 */
 #ifdef SHORT_TRACE
+#line 1205
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
+#line 1212
 #ifndef PROD
+#line 1213
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1223
 		break;
 #endif /* NTVDM && FIFO_ON */
+#line 1225
 
 	case RS232_LCR:
 #ifdef NTVDM
@@ -985,17 +1089,23 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		set_line_control(adapter, value);
 		set_break(adapter);
 #ifdef SHORT_TRACE
+#line 1253
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
+#line 1260
 #ifndef PROD
+#line 1261
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1271
 		break;
 		
 	case RS232_MCR:
 #ifdef SHORT_TRACE
+#line 1275
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
+#line 1282
 		/*
 		 * Optimisation - DOS keeps re-writing this register
 		 */
@@ -1012,8 +1122,10 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		set_out1(adapter);
 		set_out2(adapter);
 #ifndef PROD
+#line 1298
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1308
 		break;
 		
 	case RS232_LSR:
@@ -1021,11 +1133,15 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		asp->line_status_reg.all = value;
 		asp->line_status_reg.bits.tx_shift_empty = i;
 #ifdef SHORT_TRACE
+#line 1315
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
+#line 1322
 #ifndef PROD
+#line 1323
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1333
 		break;
 		
 	case RS232_MSR:
@@ -1033,11 +1149,15 @@ void com_outb IFN2(io_addr, port, half_word, value)
 		 * Essentially a READ ONLY register.
 		 */
 #ifdef SHORT_TRACE
+#line 1340
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
+#line 1347
 #ifndef PROD
+#line 1348
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1358
 		/* DrDOS writes to this reg after setting int on MSR change
 		 * and expects to get an interrupt back!!! So we will oblige.
 		 * Writing to this reg only seems to affect the delta bits 
@@ -1073,6 +1193,7 @@ void com_outb IFN2(io_addr, port, half_word, value)
 
 
 #ifdef IRET_HOOKS
+#line 1393
 #error Excluded unsupported IRET_HOOKS configuration
 
 
@@ -1186,6 +1307,7 @@ void com_outb IFN2(io_addr, port, half_word, value)
 
 
 #endif /* of ifdef IRET_HOOKS */
+#line 1508
 
 /*
  * =====================================================================
@@ -1203,8 +1325,10 @@ void com_recv_char(int adapter)
     int error;
 
 #ifdef FIFO_ON
+#line 1525
 #error DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register.
 #endif
+#line 1552
 
     {
     error = 0;
@@ -1218,12 +1342,16 @@ void com_recv_char(int adapter)
     }
 }
 #ifdef FIFO_ON
+#line 1565
 #error DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register.
 #endif
+#line 1578
 
 #else /* NTVDM */
+#line 1580
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 1596
 
 /*
  * BCN 2151 - recv_char must use long param to match add_event function prototype
@@ -1289,13 +1417,16 @@ static void lsr_change(struct ADAPTER_STATE *asp, unsigned int new_lsr)
 */
     if (new_lsr & HOST_COM_FIFO_ERROR)
 #ifdef FIFO_ON
+#line 1677
 #error DIVERGENCE MVDM-HOST-DIV-525: FIFO_ON platform branch is not selected; see mirror register.
 #else
+#line 1684
     if (asp->line_control_reg.bits.parity_enabled == PARITYENABLE_OFF)
         asp->line_status_reg.bits.framing_error = 1;
     else
         asp->line_status_reg.bits.parity_error = 1;
 #endif
+#line 1689
 
 }
 
@@ -1592,6 +1723,7 @@ static void set_baud_rate IFN1(int, adapter)
 	com_flush_input(adapter);
 
 #ifndef NTVDM
+#line 2003
 #error Excluded unsupported non-NTVDM serial profile
 #else /* NTVDM */
 #line 2031
@@ -1638,8 +1770,10 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 	if (newLCR.bits.parity_enabled == PARITYENABLE_OFF)
 #else
+#line 2073
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 2075
 	{
 		newParity = HOST_COM_PARITY_NONE;
 	}
@@ -1648,8 +1782,10 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 		newParity = newLCR.bits.even_parity == EVENPARITY_ODD ?
 #else
+#line 2083
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 2085
 			HOST_COM_PARITY_MARK : HOST_COM_PARITY_SPACE;
 	}
 	else /* regular parity */
@@ -1657,8 +1793,10 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 		newParity = newLCR.bits.even_parity == EVENPARITY_ODD ?
 #else
+#line 2092
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 2094
 			HOST_COM_PARITY_ODD : HOST_COM_PARITY_EVEN;
 	}
 
@@ -1668,8 +1806,10 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 	if (asp->line_control_reg.bits.parity_enabled == PARITYENABLE_OFF)
 #else
+#line 2103
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 2105
 	{
 		parity = HOST_COM_PARITY_NONE;
 	}
@@ -1678,8 +1818,10 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 		parity = asp->line_control_reg.bits.even_parity == EVENPARITY_ODD ?
 #else
+#line 2113
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 2115
 			HOST_COM_PARITY_MARK : HOST_COM_PARITY_SPACE;
 	}
 	else /* regular parity */
@@ -1687,8 +1829,10 @@ static void set_line_control IFN2(int, adapter, int, value)
 #ifdef NTVDM
 		parity = asp->line_control_reg.bits.even_parity == EVENPARITY_ODD ?
 #else
+#line 2122
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 2124
 			HOST_COM_PARITY_ODD : HOST_COM_PARITY_EVEN;
 	}
 
@@ -1981,8 +2125,10 @@ static void set_loopback IFN1(int, adapter)
 }
 
 #ifdef SHORT_TRACE
+#line 2416
 #error DIVERGENCE MVDM-HOST-DIV-527: SHORT_TRACE branch is not selected; see mirror register.
 #endif
+#line 2436
 
 
 void com1_flush_printer IFN0()
@@ -2013,6 +2159,7 @@ void com2_flush_printer IFN0()
 
 
 #ifdef SEGMENTATION
+#line 2466
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -2020,6 +2167,7 @@ void com2_flush_printer IFN0()
 
 
 #endif
+#line 2473
 
 static void com_reset IFN1(int, adapter)
 {
@@ -2091,6 +2239,7 @@ static void com_reset IFN1(int, adapter)
 	asp->out1_state = ON;
 	asp->out2_state = ON;
 #if defined(NTVDM) && defined(FIFO_ON)
+#line 2544
 #error Excluded unsupported FIFO_ON configuration
 
 
@@ -2099,6 +2248,7 @@ static void com_reset IFN1(int, adapter)
 
 
 #endif
+#line 2552
 		
 	/*
 	 * Reset adapter synchronisation
@@ -2120,16 +2270,20 @@ static void com_reset IFN1(int, adapter)
 	set_out2(adapter);
 
 #ifdef IRET_HOOKS
+#line 2573
 #error DIVERGENCE MVDM-HOST-DIV-525: IRET_HOOKS platform branch is not selected; see mirror register.
 #endif /* IRET_HOOKS */
+#line 2588
 }
 
 #line 2590
 #ifndef COM3_ADAPTOR
+#line 2591
 #error Unsupported excluded original configuration
 #endif
 #line 2593
 #ifndef COM4_ADAPTOR
+#line 2594
 #error Unsupported excluded original configuration
 #endif
 #line 2596
@@ -2177,8 +2331,10 @@ GLOBAL VOID com_init IFN1(int, adapter)
             io_define_outb(com_adaptor[adapter],VDMForWOW ? wow_com_outb: com_outb);
         }
 #else
+#line 2640
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 2643
  
 	for(i = port_start[adapter]; i <= port_end[adapter]; i++)
 		io_connect_port(i, com_adaptor[adapter], IO_READ_WRITE);
@@ -2193,11 +2349,14 @@ GLOBAL VOID com_init IFN1(int, adapter)
 	com_reset(adapter);
 
 #ifndef NTVDM
+#line 2657
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else /* not NTVDM */
+#line 2660
 	host_com_disable_open(adapter,FALSE);
 	host_com_unlock(adapter);
 #endif
+#line 2663
 
 	return;
 }
@@ -2216,8 +2375,10 @@ void com_close IFN1(int, adapter)
 #endif
 
 #ifndef PROD
+#line 2681
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 2685
 	/* reset host specific communications channel */
 	config_activate(C_COM1_NAME + adapter, FALSE);
 
@@ -2289,8 +2450,10 @@ GLOBAL void com_int_data(int adapter,int *controller, int *line)
 #endif /* NTVDM */
 
 #ifdef PS_FLUSHING
+#line 2756
 #error DIVERGENCE MVDM-HOST-DIV-530: PS_FLUSHING platform branch is not selected; see mirror register.
 #endif	/* PS_FLUSHING */
+#line 2791
 
 
 
@@ -2300,6 +2463,8 @@ GLOBAL void com_int_data(int adapter,int *controller, int *line)
  * - comdebug - from the yoda command line....
  */
 #ifndef PROD
+#line 2800
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
+#line 3254
 /********************************************************/

@@ -2759,3 +2759,26 @@ ten further sources after recursive condition-tree comparison. Evidence:
 MVDM-HOST-DIV-751: restore original diagnostic and continuation mappings in
 seven sources after recursive condition-tree comparison. Evidence:
 ../../artifacts/mvdm-audit/s13-r671-tree-anchor-batch.json.
+
+MVDM-HOST-DIV-752: restore original diagnostic and continuation mappings for
+three sources after recursive tree comparison and actual selected-arm
+witnesses. Evidence: ../../artifacts/mvdm-audit/s13-r677-witnessed-anchor-batch.json.
+The timer error-report `__LINE__` is restored to original line 852; product
+comparison and Full regression are recorded with the batch delivery.
+
+MVDM-HOST-DIV-753: restore original diagnostic and continuation mappings for
+two further sources after recursive tree comparison and actual selected-arm
+witnesses. Evidence: ../../artifacts/mvdm-audit/s13-r679-witnessed-anchor-batch.json.
+
+MVDM-HOST-DIV-754: restore original diagnostic and continuation mappings for
+two CCPU sources after recursive tree comparison and selected-arm witnesses.
+Evidence: ../../artifacts/mvdm-audit/s13-r680-witnessed-anchor-batch.json.
+
+MVDM-HOST-DIV-755: restore original diagnostic and continuation mappings for
+two disk BIOS and communications sources after recursive tree comparison and
+actual selected-arm witnesses. Evidence:
+../../artifacts/mvdm-audit/s13-r681-witnessed-anchor-batch.json.
+
+MVDM-HOST-DIV-756: restore the original diagnostic mapping for the RTC BIOS
+excluded monitor arm after condition-tree and selected-arm context checks.
+Evidence: ../../artifacts/mvdm-audit/s13-r682-witnessed-anchor-batch.json.

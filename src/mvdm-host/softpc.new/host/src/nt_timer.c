@@ -400,8 +400,10 @@ void host_timer_event()
         unsigned char FgBgPriority;
 
 #ifdef X86GFX
+#line 391
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif /* X86GFX */
+#line 399
 
         host_graphics_tick();               // video graphics stuff
 
@@ -586,9 +588,10 @@ DWORD HeartBeatThread(PVOID pv)
 
    try {
 #ifdef MONITOR
+#line 572
 #error Excluded unsupported monitor timer lock setup
 #endif
-#line 578
+#line 579
 
 
 
@@ -608,14 +611,17 @@ DWORD HeartBeatThread(PVOID pv)
                         );
 
 #ifdef X86GFX
+#line 597
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 607
 
 
 #ifdef MONITOR
+#line 609
 #error Excluded unsupported monitor timer lock release
 #endif
-#line 587
+#line 611
       dwRet = Win32_host_timer();
 
       }
@@ -628,15 +634,19 @@ DWORD HeartBeatThread(PVOID pv)
 
 
 #ifdef PIG
+#line 624
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
+#line 626
 
 DWORD Win32_host_timer(void)
 {
     NTSTATUS      status;
 #ifdef PIG
+#line 631
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
+#line 633
     LONG          DelayPeriod;
     LARGE_INTEGER DiffTime;
     LARGE_INTEGER SystemTickIntv;
@@ -717,11 +727,13 @@ HBresume:
           * Update the VirtualTimerHardware
           */
 #ifdef PIG
+#line 713
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
-#line 708
+#line 719
        time_tick();
 #endif /* PIG */
+#line 721
 
 
           /*
@@ -770,6 +782,7 @@ NTSTATUS DelayHeartBeat(LONG Delay)
      liDelay.QuadPart  = Int32x32To64(Delay, -10);
 
 #ifdef MONITOR
+#line 769
 #error Excluded unsupported monitor heartbeat wait
 #else
 #line 820
@@ -795,7 +808,7 @@ NTSTATUS DelayHeartBeat(LONG Delay)
 
 
 #endif
-#line 778
+#line 841
          // alerted to die
      /* DIVERGENCE: MVDM-HOST-DIV-040. The same-shaped public Win32 adapter
       * wakes this alertable wait through QueueUserAPC.  Modern user-mode
@@ -810,6 +823,7 @@ NTSTATUS DelayHeartBeat(LONG Delay)
 
 
       // Must be an error, announce it to the world
+#line 852
      DisplayErrorTerm(EHS_FUNC_FAILED, status,__FILE__,__LINE__);
      TerminateVDM();
      return status;

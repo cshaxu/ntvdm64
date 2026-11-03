@@ -110,8 +110,10 @@ void diskette_io()
 #ifdef NTVDM
 		if (drive >= number_of_floppy)
 #else
+#line 337
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 339
 			op = FL_FNC_ERR;
 
 
@@ -177,8 +179,10 @@ void diskette_int()
 	setCS(int15_seg);
 	setIP(int15_off);
 #else
+#line 403
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 406
 
 	host_simulate();
 

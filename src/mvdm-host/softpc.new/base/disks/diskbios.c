@@ -16,10 +16,13 @@
 */
 
 #ifdef SCCSID
+#line 19
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
+#line 21
 
 #ifdef SEGMENTATION
+#line 23
 #error Excluded unsupported SEGMENTATION configuration
 
 
@@ -27,6 +30,7 @@
 
 
 #endif
+#line 30
 
 /* includes */
 #include <stdio.h>
@@ -106,8 +110,10 @@ LOCAL int maxsectors, maxoffset;
 LOCAL int tfstatus;
 
 #ifndef PROD
+#line 109
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 114
 
 /*
 * non-zero if drive 1 does not exist
@@ -360,9 +366,10 @@ LOCAL void hd_reset IFN2(int, drive, int, diag)
 }
 
 #ifndef PROD
+#line 366
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif				/* nPROD */
-#line 365
+#line 562
 
 
 /********************************************************/
@@ -371,6 +378,7 @@ LOCAL void hd_reset IFN2(int, drive, int, diag)
 #ifdef ANSI
 LOCAL void (*disk_func[]) (void) =
 #else
+#line 570
 #error Unsupported excluded original configuration
 #endif
 #line 572
@@ -401,16 +409,20 @@ LOCAL void (*disk_func[]) (void) =
 };
 
 #ifndef PROD
+#line 599
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* nPROD */
+#line 625
 
 /* Fixed disk BIOS mainline */
 void disk_io IFN0()
 {
 	register int BIOS_command;
 #ifndef PROD
+#line 631
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 633
 
 
 	IDLE_disk();
@@ -421,8 +433,10 @@ void disk_io IFN0()
 	BIOS_command = getAH ();
 
 #ifndef PROD
+#line 643
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
+#line 659
 
 	/* clear up the status before we kick off */
 	/* but only if this is NOT a read status command */
@@ -476,8 +490,10 @@ void disk_io IFN0()
 		 * of a device.
 		 */
 #ifndef PROD
+#line 712
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* PROD */
+#line 718
 		setCF (1);	/* cmd fails */
 	}
 	else

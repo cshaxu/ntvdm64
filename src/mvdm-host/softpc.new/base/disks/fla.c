@@ -809,8 +809,10 @@ static void fla_atomicxqt IFN0()
 }
 
 #else    /* NTVDM */
+#line 819
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif    /* NTVDM */
+#line 895
 
 
 static void fdc_request_write_data_to_cpu IFN0()

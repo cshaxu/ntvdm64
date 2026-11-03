@@ -1445,8 +1445,10 @@ biosDoInst IFN5(IU16, vCS, LIN_ADDR, vEIP, IU32, vEAX, IU16, vDS, IU32, vEDX)
 #ifdef	PROD
 		host_error(EG_OWNUP, ERR_QUIT, "biosDoInst: Virtualisation sequencing failure");
 #else
+#line 1432
 #error DIVERGENCE MVDM-HOST-DIV-503: non-PROD alternative is not selected; see mirror register.
 #endif
+#line 1435
 	}
 
 	result = getEAX();

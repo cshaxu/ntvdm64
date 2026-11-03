@@ -1,0 +1,4521 @@
+{
+  "scope": "Ten source files from witnessed line-mapping batches r677, r679, r680, r681 and r682.",
+  "method": "Original/current conditional trees checked; retained arms observed in two real worker compile graphs; original and instrumented include traces compared; old/current source differs only in #line directives. Conditional source line positions remapped after edits.",
+  "limits": "Instrumented preprocessing can affect __FILE__/__LINE__; compile product comparisons and any required Full regression are separate. Complete supported-context enumeration remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "before_sha256": "c9cee6ca343e90b06370e530e5b67f1fbb3ebe6976f4a0d1a3b93a691896aef1",
+      "after_sha256": "6543253ff7d404cd775969d1fae543ae4179074d1f2d4a43980e1a4fb28f573b",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 33,
+          "error_line": 34,
+          "end_line": 41
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 66,
+          "error_line": 67,
+          "end_line": 293
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 308,
+          "error_line": 309,
+          "end_line": 312
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 336,
+          "error_line": 337,
+          "end_line": 339
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 359,
+          "error_line": 360,
+          "end_line": 363
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 402,
+          "error_line": 403,
+          "end_line": 406
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 417,
+          "error_line": 418,
+          "end_line": 425
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 433,
+          "error_line": 434,
+          "end_line": 436
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 475,
+          "error_line": 476,
+          "end_line": 495
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+        "source_sha256": "c9cee6ca343e90b06370e530e5b67f1fbb3ebe6976f4a0d1a3b93a691896aef1",
+        "object": "disks/floppy_i",
+        "arms": [
+          {
+            "label": "codex_r677_arm_0000",
+            "line": 33,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0001",
+            "line": 58,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0002",
+            "line": 63,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0003",
+            "line": 83,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0004",
+            "line": 89,
+            "kind": "ifndef",
+            "expression": "JOKER",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0005",
+            "line": 110,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0006",
+            "line": 112,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0007",
+            "line": 135,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0008",
+            "line": 143,
+            "kind": "ifndef",
+            "expression": "JOKER",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0009",
+            "line": 176,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0010",
+            "line": 179,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0011",
+            "line": 193,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0012",
+            "line": 207,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0013",
+            "line": 252,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "50cd1c16a2dcb37b82700e3392aa98ce9e1182af109ed4c1e38ba2b4fc672236",
+            "hit": [
+              "codex_r677_arm_0001",
+              "codex_r677_arm_0004",
+              "codex_r677_arm_0005",
+              "codex_r677_arm_0008",
+              "codex_r677_arm_0009"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "50cd1c16a2dcb37b82700e3392aa98ce9e1182af109ed4c1e38ba2b4fc672236",
+            "hit": [
+              "codex_r677_arm_0001",
+              "codex_r677_arm_0004",
+              "codex_r677_arm_0005",
+              "codex_r677_arm_0008",
+              "codex_r677_arm_0009"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 185,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 185,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 9,
+      "marker_line_mapping": {
+        "33": 33,
+        "36": 36,
+        "58": 58,
+        "61": 61,
+        "63": 63,
+        "66": 66,
+        "83": 83,
+        "86": 86,
+        "89": 89,
+        "95": 95,
+        "110": 110,
+        "112": 112,
+        "114": 115,
+        "135": 137,
+        "138": 140,
+        "143": 145,
+        "176": 178,
+        "179": 181,
+        "181": 184,
+        "190": 194,
+        "193": 197,
+        "196": 200,
+        "207": 211,
+        "210": 214,
+        "252": 256,
+        "255": 259
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "before_sha256": "a378f462e107397ea0a3be82eae993cc034c57940e5a83aee1d35507eef2d640",
+      "after_sha256": "d9c57d64cd85cd50b0386fb65ac7988cdaf15c9906527486bfc6c3e40773971f",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 102,
+          "error_line": 103,
+          "end_line": 110
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 671,
+          "error_line": 672,
+          "end_line": 675
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 861,
+          "error_line": 862,
+          "end_line": 869
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 1053,
+          "error_line": 1054,
+          "end_line": 1057
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 1201,
+          "error_line": 1202,
+          "end_line": 1207
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 1261,
+          "error_line": 1262,
+          "end_line": 1264
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 1301,
+          "error_line": 1302,
+          "end_line": 1304
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 1468,
+          "error_line": 1469,
+          "end_line": 1472
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 1509,
+          "error_line": 1510,
+          "end_line": 1516
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 1531,
+          "error_line": 1532,
+          "end_line": 1538
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 1552,
+          "error_line": 1553,
+          "end_line": 1559
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 1622,
+          "error_line": 1623,
+          "end_line": 1723
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 2014,
+          "error_line": 2015,
+          "end_line": 2023
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 2444,
+          "error_line": 2445,
+          "end_line": 2471
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 2505,
+          "error_line": 2506,
+          "end_line": 2509
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 2561,
+          "error_line": 2562,
+          "end_line": 2565
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 2717,
+          "error_line": 2718,
+          "end_line": 2721
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 2961,
+          "error_line": 2962,
+          "end_line": 2965
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 2983,
+          "error_line": 2984,
+          "end_line": 2987
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 2994,
+          "error_line": 2995,
+          "end_line": 3011
+        },
+        {
+          "kind": "ifdef",
+          "expression": "FLOPPIES_KEEP_TRYING",
+          "original_line": 3020,
+          "error_line": 3021,
+          "end_line": 3036
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 3235,
+          "error_line": 3236,
+          "end_line": 3243
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+        "source_sha256": "a378f462e107397ea0a3be82eae993cc034c57940e5a83aee1d35507eef2d640",
+        "object": "disks/floppy",
+        "arms": [
+          {
+            "label": "codex_r677_arm_0000",
+            "line": 102,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0001",
+            "line": 162,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0002",
+            "line": 665,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0003",
+            "line": 668,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0004",
+            "line": 857,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0005",
+            "line": 1043,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0006",
+            "line": 1046,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0007",
+            "line": 1188,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0008",
+            "line": 1193,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0009",
+            "line": 1248,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0010",
+            "line": 1250,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0011",
+            "line": 1288,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0012",
+            "line": 1290,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0013",
+            "line": 1454,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0014",
+            "line": 1457,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0015",
+            "line": 1490,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0016",
+            "line": 1497,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0017",
+            "line": 1508,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0018",
+            "line": 1515,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0019",
+            "line": 1525,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0020",
+            "line": 1532,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0021",
+            "line": 1598,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0022",
+            "line": 1601,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0023",
+            "line": 1937,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0024",
+            "line": 2363,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0025",
+            "line": 2388,
+            "kind": "ifndef",
+            "expression": "JOKER",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0026",
+            "line": 2399,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0027",
+            "line": 2402,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0028",
+            "line": 2440,
+            "kind": "ifndef",
+            "expression": "JOKER",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0029",
+            "line": 2454,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0030",
+            "line": 2457,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0031",
+            "line": 2556,
+            "kind": "ifndef",
+            "expression": "JOKER",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0032",
+            "line": 2594,
+            "kind": "ifndef",
+            "expression": "JOKER",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0033",
+            "line": 2609,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0034",
+            "line": 2612,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0035",
+            "line": 2827,
+            "kind": "ifndef",
+            "expression": "JOKER",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0036",
+            "line": 2852,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0037",
+            "line": 2855,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0038",
+            "line": 2873,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0039",
+            "line": 2876,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0040",
+            "line": 2886,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0041",
+            "line": 2899,
+            "kind": "ifdef",
+            "expression": "FLOPPIES_KEEP_TRYING",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0042",
+            "line": 3103,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "d4862965375da36b6ab1a03133079b878d0bfa0676fc5c118b462cb403e2b6a2",
+            "hit": [
+              "codex_r677_arm_0001",
+              "codex_r677_arm_0002",
+              "codex_r677_arm_0005",
+              "codex_r677_arm_0007",
+              "codex_r677_arm_0009",
+              "codex_r677_arm_0011",
+              "codex_r677_arm_0013",
+              "codex_r677_arm_0015",
+              "codex_r677_arm_0017",
+              "codex_r677_arm_0019",
+              "codex_r677_arm_0022",
+              "codex_r677_arm_0025",
+              "codex_r677_arm_0026",
+              "codex_r677_arm_0028",
+              "codex_r677_arm_0029",
+              "codex_r677_arm_0031",
+              "codex_r677_arm_0032",
+              "codex_r677_arm_0033",
+              "codex_r677_arm_0035",
+              "codex_r677_arm_0036",
+              "codex_r677_arm_0038"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "d4862965375da36b6ab1a03133079b878d0bfa0676fc5c118b462cb403e2b6a2",
+            "hit": [
+              "codex_r677_arm_0001",
+              "codex_r677_arm_0002",
+              "codex_r677_arm_0005",
+              "codex_r677_arm_0007",
+              "codex_r677_arm_0009",
+              "codex_r677_arm_0011",
+              "codex_r677_arm_0013",
+              "codex_r677_arm_0015",
+              "codex_r677_arm_0017",
+              "codex_r677_arm_0019",
+              "codex_r677_arm_0022",
+              "codex_r677_arm_0025",
+              "codex_r677_arm_0026",
+              "codex_r677_arm_0028",
+              "codex_r677_arm_0029",
+              "codex_r677_arm_0031",
+              "codex_r677_arm_0032",
+              "codex_r677_arm_0033",
+              "codex_r677_arm_0035",
+              "codex_r677_arm_0036",
+              "codex_r677_arm_0038"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 187,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 187,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 22,
+      "marker_line_mapping": {
+        "102": 102,
+        "105": 105,
+        "162": 162,
+        "164": 164,
+        "665": 665,
+        "668": 668,
+        "670": 671,
+        "857": 859,
+        "860": 862,
+        "1043": 1045,
+        "1046": 1048,
+        "1048": 1051,
+        "1188": 1192,
+        "1193": 1197,
+        "1195": 1200,
+        "1248": 1254,
+        "1250": 1256,
+        "1252": 1259,
+        "1288": 1296,
+        "1290": 1298,
+        "1292": 1301,
+        "1454": 1464,
+        "1457": 1467,
+        "1459": 1470,
+        "1490": 1502,
+        "1497": 1509,
+        "1499": 1512,
+        "1508": 1522,
+        "1515": 1529,
+        "1517": 1532,
+        "1525": 1541,
+        "1532": 1548,
+        "1534": 1551,
+        "1598": 1616,
+        "1601": 1619,
+        "1643": 1661,
+        "1937": 1955,
+        "1940": 1958,
+        "2363": 2381,
+        "2366": 2384,
+        "2388": 2406,
+        "2399": 2417,
+        "2402": 2420,
+        "2404": 2423,
+        "2421": 2441,
+        "2440": 2460,
+        "2454": 2474,
+        "2457": 2477,
+        "2459": 2480,
+        "2475": 2497,
+        "2556": 2578,
+        "2558": 2580,
+        "2594": 2616,
+        "2609": 2631,
+        "2612": 2634,
+        "2614": 2637,
+        "2630": 2654,
+        "2827": 2851,
+        "2852": 2876,
+        "2855": 2879,
+        "2857": 2882,
+        "2873": 2899,
+        "2876": 2902,
+        "2878": 2905,
+        "2886": 2914,
+        "2888": 2917,
+        "2899": 2929,
+        "2902": 2932,
+        "3103": 3133,
+        "3106": 3136
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
+      "before_sha256": "46408a3caaa7987653223d7a6fe131ace0a7636e827aa81c40bf9a9b108e1778",
+      "after_sha256": "12db3744433d62a6045ce06cef037beae179b2a60a7158b72a08603346e3351a",
+      "original_sha256": "10ea0d5a6de6466e7e9af8efd89c3a77a78077cd38e05332a416a404b655ab33",
+      "guards": [
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 162,
+          "error_line": 163,
+          "end_line": 166
+        },
+        {
+          "kind": "if",
+          "expression": "defined (MONITOR) && defined (X86GFX)",
+          "original_line": 241,
+          "error_line": 242,
+          "end_line": 244
+        },
+        {
+          "kind": "ifdef",
+          "expression": "X86GFX",
+          "original_line": 390,
+          "error_line": 391,
+          "end_line": 399
+        },
+        {
+          "kind": "ifdef",
+          "expression": "YODA",
+          "original_line": 427,
+          "error_line": 428,
+          "end_line": 430
+        },
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "original_line": 571,
+          "error_line": 572,
+          "end_line": 579
+        },
+        {
+          "kind": "ifdef",
+          "expression": "X86GFX",
+          "original_line": 596,
+          "error_line": 597,
+          "end_line": 607
+        },
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "original_line": 608,
+          "error_line": 609,
+          "end_line": 611
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PIG",
+          "original_line": 623,
+          "error_line": 624,
+          "end_line": 626
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PIG",
+          "original_line": 630,
+          "error_line": 631,
+          "end_line": 633
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PIG",
+          "original_line": 712,
+          "error_line": 713,
+          "end_line": 721
+        },
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "original_line": 768,
+          "error_line": 769,
+          "end_line": 841
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+        "source_sha256": "46408a3caaa7987653223d7a6fe131ace0a7636e827aa81c40bf9a9b108e1778",
+        "object": "host/nt_timer",
+        "arms": [
+          {
+            "label": "codex_r677_arm_0000",
+            "line": 163,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0001",
+            "line": 209,
+            "kind": "ifndef",
+            "expression": "MONITOR",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0002",
+            "line": 246,
+            "kind": "if",
+            "expression": "defined (MONITOR) && defined (X86GFX)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0003",
+            "line": 402,
+            "kind": "ifdef",
+            "expression": "X86GFX",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0004",
+            "line": 409,
+            "kind": "ifndef",
+            "expression": "X86GFX",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0005",
+            "line": 427,
+            "kind": "ifndef",
+            "expression": "MONITOR",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0006",
+            "line": 436,
+            "kind": "ifdef",
+            "expression": "YODA",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0007",
+            "line": 507,
+            "kind": "ifndef",
+            "expression": "MONITOR",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0008",
+            "line": 588,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0009",
+            "line": 610,
+            "kind": "ifdef",
+            "expression": "X86GFX",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0010",
+            "line": 615,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0011",
+            "line": 630,
+            "kind": "ifdef",
+            "expression": "PIG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0012",
+            "line": 637,
+            "kind": "ifdef",
+            "expression": "PIG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0013",
+            "line": 719,
+            "kind": "ifdef",
+            "expression": "PIG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0014",
+            "line": 721,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r677_arm_0015",
+            "line": 772,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          },
+          {
+            "label": "codex_r677_arm_0016",
+            "line": 774,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "e226afe95159bbdaad6a1955251fd882d6693a1cabf363758db44347703ae6e9",
+            "hit": [
+              "codex_r677_arm_0001",
+              "codex_r677_arm_0004",
+              "codex_r677_arm_0005",
+              "codex_r677_arm_0007",
+              "codex_r677_arm_0014",
+              "codex_r677_arm_0016"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "e226afe95159bbdaad6a1955251fd882d6693a1cabf363758db44347703ae6e9",
+            "hit": [
+              "codex_r677_arm_0001",
+              "codex_r677_arm_0004",
+              "codex_r677_arm_0005",
+              "codex_r677_arm_0007",
+              "codex_r677_arm_0014",
+              "codex_r677_arm_0016"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 211,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 211,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 11,
+      "marker_line_mapping": {
+        "163": 163,
+        "166": 166,
+        "209": 209,
+        "212": 212,
+        "246": 246,
+        "249": 249,
+        "402": 402,
+        "404": 405,
+        "409": 411,
+        "412": 414,
+        "427": 429,
+        "430": 432,
+        "436": 438,
+        "439": 441,
+        "507": 509,
+        "510": 512,
+        "588": 590,
+        "590": 593,
+        "610": 613,
+        "612": 616,
+        "615": 620,
+        "617": 623,
+        "630": 636,
+        "632": 639,
+        "637": 645,
+        "639": 648,
+        "719": 729,
+        "721": 732,
+        "724": 735,
+        "772": 784,
+        "774": 787,
+        "797": 810
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fla.c",
+      "before_sha256": "58d57b262f3df1c3cdf86c63d18357019e0a7302a1afe836a393b117ad8dd4a5",
+      "after_sha256": "d076c39d5566c369dc2cdbec2718d2ef52523898dca2892e0daad1aef23ff63c",
+      "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SCCSID",
+          "original_line": 46,
+          "error_line": 47,
+          "end_line": 49
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 50,
+          "error_line": 51,
+          "end_line": 58
+        },
+        {
+          "kind": "ifdef",
+          "expression": "macintosh",
+          "original_line": 168,
+          "error_line": 169,
+          "end_line": 173
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BIT_ORDER1",
+          "original_line": 180,
+          "error_line": 181,
+          "end_line": 194
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 436,
+          "error_line": 437,
+          "end_line": 443
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 712,
+          "error_line": 713,
+          "end_line": 716
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 818,
+          "error_line": 819,
+          "end_line": 895
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 1131,
+          "error_line": 1132,
+          "end_line": 1139
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+        "source_sha256": "58d57b262f3df1c3cdf86c63d18357019e0a7302a1afe836a393b117ad8dd4a5",
+        "object": "disks/fla",
+        "arms": [
+          {
+            "label": "codex_r679_arm_0000",
+            "line": 46,
+            "kind": "ifdef",
+            "expression": "SCCSID",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0001",
+            "line": 52,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0002",
+            "line": 167,
+            "kind": "ifdef",
+            "expression": "macintosh",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0003",
+            "line": 170,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r679_arm_0004",
+            "line": 183,
+            "kind": "ifdef",
+            "expression": "BIT_ORDER1",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0005",
+            "line": 189,
+            "kind": "ifdef",
+            "expression": "BIT_ORDER2",
+            "error_only": false
+          },
+          {
+            "label": "codex_r679_arm_0006",
+            "line": 430,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0007",
+            "line": 704,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0008",
+            "line": 738,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r679_arm_0009",
+            "line": 811,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0010",
+            "line": 1050,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "c2afd4b7a82b04fa0e80231c1259d42176bd2689faedd2e36029c10473e59370",
+            "hit": [
+              "codex_r679_arm_0003",
+              "codex_r679_arm_0005",
+              "codex_r679_arm_0008"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "c2afd4b7a82b04fa0e80231c1259d42176bd2689faedd2e36029c10473e59370",
+            "hit": [
+              "codex_r679_arm_0003",
+              "codex_r679_arm_0005",
+              "codex_r679_arm_0008"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 181,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 181,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 8,
+      "marker_line_mapping": {
+        "46": 46,
+        "49": 49,
+        "52": 52,
+        "55": 55,
+        "167": 167,
+        "170": 170,
+        "173": 173,
+        "183": 183,
+        "186": 186,
+        "189": 189,
+        "202": 202,
+        "430": 430,
+        "433": 433,
+        "704": 704,
+        "707": 707,
+        "738": 738,
+        "811": 811,
+        "813": 814,
+        "1050": 1052,
+        "1053": 1055
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\support\\get_env.c",
+      "before_sha256": "2b2965c828aaa56c4b52a7da835206e7daf1e65cecaa280e85f6a0da29660f2c",
+      "after_sha256": "06045ffc85cffd259181e785b4efaf984ea56d8d08a854aad0d5c77cbaf5572f",
+      "original_sha256": "7e0fc5e63e423a6bfc0f29e871d55c60d95cc1319f621571317b8f5a73433a2f",
+      "guards": [
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 38,
+          "error_line": 39,
+          "end_line": 41
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 42,
+          "error_line": 43,
+          "end_line": 81
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 88,
+          "error_line": 89,
+          "end_line": 92
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 99,
+          "error_line": 100,
+          "end_line": 110
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 113,
+          "error_line": 114,
+          "end_line": 120
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 130,
+          "error_line": 131,
+          "end_line": 134
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 142,
+          "error_line": 143,
+          "end_line": 145
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 147,
+          "error_line": 148,
+          "end_line": 153
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 162,
+          "error_line": 163,
+          "end_line": 166
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 172,
+          "error_line": 173,
+          "end_line": 175
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 177,
+          "error_line": 178,
+          "end_line": 186
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+        "source_sha256": "2b2965c828aaa56c4b52a7da835206e7daf1e65cecaa280e85f6a0da29660f2c",
+        "object": "support/get_env",
+        "arms": [
+          {
+            "label": "codex_r679_arm_0000",
+            "line": 32,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r679_arm_0001",
+            "line": 34,
+            "kind": "ifdef",
+            "expression": "LOCAL",
+            "error_only": false
+          },
+          {
+            "label": "codex_r679_arm_0002",
+            "line": 38,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0003",
+            "line": 42,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0004",
+            "line": 53,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0005",
+            "line": 61,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r679_arm_0006",
+            "line": 63,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0007",
+            "line": 69,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0008",
+            "line": 82,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0009",
+            "line": 93,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0010",
+            "line": 98,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0011",
+            "line": 110,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0012",
+            "line": 119,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r679_arm_0013",
+            "line": 124,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "be71d65d3b652a5f14de8e124318ace9ccc88f9929fa918e8bd0118ac9f1cb26",
+            "hit": [
+              "codex_r679_arm_0000",
+              "codex_r679_arm_0001",
+              "codex_r679_arm_0005"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "be71d65d3b652a5f14de8e124318ace9ccc88f9929fa918e8bd0118ac9f1cb26",
+            "hit": [
+              "codex_r679_arm_0000",
+              "codex_r679_arm_0001",
+              "codex_r679_arm_0005"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 185,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/support/get_env.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 185,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 11,
+      "marker_line_mapping": {
+        "32": 32,
+        "34": 34,
+        "36": 36,
+        "38": 38,
+        "40": 41,
+        "42": 44,
+        "44": 47,
+        "53": 56,
+        "55": 59,
+        "61": 66,
+        "63": 68,
+        "65": 71,
+        "69": 76,
+        "71": 79,
+        "82": 91,
+        "84": 94,
+        "93": 104,
+        "95": 107,
+        "98": 111,
+        "100": 114,
+        "110": 125,
+        "112": 128,
+        "119": 136,
+        "121": 139,
+        "124": 143,
+        "126": 146
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tlb.c",
+      "before_sha256": "4f568e6257bbd192d9b8bd656e7b06c001238c1e1147c4e36be220f751187289",
+      "after_sha256": "13f1e34e2e0d242a2b3757990338887e2d55780d0f5dcec0ee7bd5f771a6eaac",
+      "original_sha256": "a83a7dd3f7e3fbb83723047aacddbd22d4001591c6d444d4bd6d45dd73e38fd8",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SPC486",
+          "original_line": 205,
+          "error_line": 206,
+          "end_line": 239
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SPC486",
+          "original_line": 275,
+          "error_line": 276,
+          "end_line": 312
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SPC486",
+          "original_line": 380,
+          "error_line": 381,
+          "end_line": 385
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SPC486",
+          "original_line": 449,
+          "error_line": 450,
+          "end_line": 454
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PIG",
+          "original_line": 525,
+          "error_line": 526,
+          "end_line": 530
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PIG",
+          "original_line": 535,
+          "error_line": 536,
+          "end_line": 540
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SPC486",
+          "original_line": 722,
+          "error_line": 723,
+          "end_line": 727
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SPC486",
+          "original_line": 762,
+          "error_line": 763,
+          "end_line": 767
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PIG",
+          "original_line": 804,
+          "error_line": 805,
+          "end_line": 809
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PIG",
+          "original_line": 814,
+          "error_line": 815,
+          "end_line": 820
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PIG",
+          "original_line": 858,
+          "error_line": 859,
+          "end_line": 954
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+        "source_sha256": "4f568e6257bbd192d9b8bd656e7b06c001238c1e1147c4e36be220f751187289",
+        "object": "ccpu/c_tlb",
+        "arms": [
+          {
+            "label": "codex_r680_arm_0000",
+            "line": 69,
+            "kind": "ifdef",
+            "expression": "FAST_TLB",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0001",
+            "line": 206,
+            "kind": "ifdef",
+            "expression": "SPC486",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0002",
+            "line": 209,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0003",
+            "line": 249,
+            "kind": "ifdef",
+            "expression": "FAST_TLB",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0004",
+            "line": 261,
+            "kind": "ifdef",
+            "expression": "SPC486",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0005",
+            "line": 298,
+            "kind": "ifdef",
+            "expression": "FAST_TLB",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0006",
+            "line": 335,
+            "kind": "ifdef",
+            "expression": "SPC486",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0007",
+            "line": 338,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0008",
+            "line": 408,
+            "kind": "ifdef",
+            "expression": "SPC486",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0009",
+            "line": 411,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0010",
+            "line": 429,
+            "kind": "ifdef",
+            "expression": "FAST_TLB",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0011",
+            "line": 445,
+            "kind": "ifdef",
+            "expression": "FAST_TLB",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0012",
+            "line": 487,
+            "kind": "ifdef",
+            "expression": "PIG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0013",
+            "line": 495,
+            "kind": "ifdef",
+            "expression": "PIG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0014",
+            "line": 589,
+            "kind": "ifdef",
+            "expression": "FAST_TLB",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0015",
+            "line": 664,
+            "kind": "ifdef",
+            "expression": "FAST_TLB",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0016",
+            "line": 697,
+            "kind": "ifdef",
+            "expression": "SPC486",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0017",
+            "line": 700,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0018",
+            "line": 742,
+            "kind": "ifdef",
+            "expression": "SPC486",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0019",
+            "line": 745,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0020",
+            "line": 787,
+            "kind": "ifdef",
+            "expression": "PIG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0021",
+            "line": 795,
+            "kind": "ifdef",
+            "expression": "PIG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0022",
+            "line": 836,
+            "kind": "ifdef",
+            "expression": "PIG",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "ab4dc5a1f8f273ea5dbf9f9decde718a60cacd5c7fde0977c88e8e1519ab356f",
+            "hit": [
+              "codex_r680_arm_0000",
+              "codex_r680_arm_0002",
+              "codex_r680_arm_0003",
+              "codex_r680_arm_0005",
+              "codex_r680_arm_0007",
+              "codex_r680_arm_0009",
+              "codex_r680_arm_0010",
+              "codex_r680_arm_0011",
+              "codex_r680_arm_0014",
+              "codex_r680_arm_0015",
+              "codex_r680_arm_0017",
+              "codex_r680_arm_0019"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "ab4dc5a1f8f273ea5dbf9f9decde718a60cacd5c7fde0977c88e8e1519ab356f",
+            "hit": [
+              "codex_r680_arm_0000",
+              "codex_r680_arm_0002",
+              "codex_r680_arm_0003",
+              "codex_r680_arm_0005",
+              "codex_r680_arm_0007",
+              "codex_r680_arm_0009",
+              "codex_r680_arm_0010",
+              "codex_r680_arm_0011",
+              "codex_r680_arm_0014",
+              "codex_r680_arm_0015",
+              "codex_r680_arm_0017",
+              "codex_r680_arm_0019"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 175,
+          "identical": true,
+          "include_trace_sha256": "ec82ec285d84c4d857fbbcd0487d218843635bbaab1348767707936680637259",
+          "method": "instrumented copy with verified search resolution"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 175,
+          "identical": true,
+          "include_trace_sha256": "ec82ec285d84c4d857fbbcd0487d218843635bbaab1348767707936680637259",
+          "method": "instrumented copy with verified search resolution"
+        }
+      ],
+      "after_conditional_groups": 11,
+      "marker_line_mapping": {
+        "69": 69,
+        "123": 123,
+        "206": 206,
+        "209": 209,
+        "222": 222,
+        "249": 249,
+        "255": 255,
+        "261": 261,
+        "264": 264,
+        "298": 298,
+        "313": 313,
+        "335": 335,
+        "338": 338,
+        "341": 341,
+        "408": 408,
+        "411": 411,
+        "414": 414,
+        "429": 429,
+        "437": 437,
+        "445": 445,
+        "473": 473,
+        "487": 487,
+        "489": 490,
+        "495": 497,
+        "497": 500,
+        "589": 593,
+        "597": 601,
+        "664": 668,
+        "680": 684,
+        "697": 701,
+        "700": 704,
+        "703": 707,
+        "742": 746,
+        "745": 749,
+        "748": 752,
+        "787": 791,
+        "789": 794,
+        "795": 801,
+        "797": 804,
+        "836": 844,
+        "838": 847
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpusas4.c",
+      "before_sha256": "172e8ddde8b267c910117acad724dc84a6ec4f769e0831b605303f8ae9ae18cd",
+      "after_sha256": "b460b6d58a89ade4d7336812a0ffc98d884ab6f7132f2ce51728bc95cac01bf6",
+      "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 25,
+          "error_line": 26,
+          "end_line": 33
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BACK_M",
+          "original_line": 136,
+          "error_line": 137,
+          "end_line": 139
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 248,
+          "error_line": 249,
+          "end_line": 257
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 258,
+          "error_line": 259,
+          "end_line": 284
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BACK_M",
+          "original_line": 384,
+          "error_line": 385,
+          "end_line": 389
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BACK_M",
+          "original_line": 399,
+          "error_line": 400,
+          "end_line": 402
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 1279,
+          "error_line": 1280,
+          "end_line": 1285
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BACK_M",
+          "original_line": 1313,
+          "error_line": 1314,
+          "end_line": 1319
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 1431,
+          "error_line": 1432,
+          "end_line": 1435
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 1943,
+          "error_line": 1944,
+          "end_line": 1946
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+        "source_sha256": "172e8ddde8b267c910117acad724dc84a6ec4f769e0831b605303f8ae9ae18cd",
+        "object": "ccpu/ccpusas4",
+        "arms": [
+          {
+            "label": "codex_r680_arm_0000",
+            "line": 23,
+            "kind": "ifdef",
+            "expression": "CCPU",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0001",
+            "line": 25,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0002",
+            "line": 141,
+            "kind": "ifdef",
+            "expression": "BACK_M",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0003",
+            "line": 149,
+            "kind": "ifndef",
+            "expression": "EGATEST",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0004",
+            "line": 254,
+            "kind": "ifndef",
+            "expression": "CHECK_ACCESS",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0005",
+            "line": 256,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0006",
+            "line": 262,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0007",
+            "line": 367,
+            "kind": "ifdef",
+            "expression": "BACK_M",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0008",
+            "line": 370,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0009",
+            "line": 385,
+            "kind": "ifdef",
+            "expression": "BACK_M",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0010",
+            "line": 393,
+            "kind": "ifndef",
+            "expression": "EGATEST",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0011",
+            "line": 539,
+            "kind": "ifdef",
+            "expression": "EGG",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0012",
+            "line": 796,
+            "kind": "ifdef",
+            "expression": "LIM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0013",
+            "line": 860,
+            "kind": "ifdef",
+            "expression": "LIM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0014",
+            "line": 1237,
+            "kind": "ifndef",
+            "expression": "EGATEST",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0015",
+            "line": 1282,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0016",
+            "line": 1327,
+            "kind": "ifdef",
+            "expression": "BACK_M",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0017",
+            "line": 1330,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0018",
+            "line": 1445,
+            "kind": "ifdef",
+            "expression": "PROD",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0019",
+            "line": 1447,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0020",
+            "line": 1958,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "daf74e23439871a317c77d2f02514ba113abc7609b52731858453b246f673c96",
+            "hit": [
+              "codex_r680_arm_0000",
+              "codex_r680_arm_0003",
+              "codex_r680_arm_0004",
+              "codex_r680_arm_0008",
+              "codex_r680_arm_0010",
+              "codex_r680_arm_0011",
+              "codex_r680_arm_0012",
+              "codex_r680_arm_0013",
+              "codex_r680_arm_0014",
+              "codex_r680_arm_0017",
+              "codex_r680_arm_0018"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "daf74e23439871a317c77d2f02514ba113abc7609b52731858453b246f673c96",
+            "hit": [
+              "codex_r680_arm_0000",
+              "codex_r680_arm_0003",
+              "codex_r680_arm_0004",
+              "codex_r680_arm_0008",
+              "codex_r680_arm_0010",
+              "codex_r680_arm_0011",
+              "codex_r680_arm_0012",
+              "codex_r680_arm_0013",
+              "codex_r680_arm_0014",
+              "codex_r680_arm_0017",
+              "codex_r680_arm_0018"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 199,
+          "identical": true,
+          "include_trace_sha256": "9a08b30f9a531bf4a9ac5f2fd8a7a7eda25854dd68e2a27330418b6c6fb3de9d",
+          "method": "temporary sibling file; original search order"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 199,
+          "identical": true,
+          "include_trace_sha256": "9a08b30f9a531bf4a9ac5f2fd8a7a7eda25854dd68e2a27330418b6c6fb3de9d",
+          "method": "temporary sibling file; original search order"
+        }
+      ],
+      "after_conditional_groups": 10,
+      "marker_line_mapping": {
+        "23": 23,
+        "25": 25,
+        "28": 28,
+        "141": 141,
+        "144": 144,
+        "149": 149,
+        "190": 190,
+        "254": 254,
+        "256": 256,
+        "259": 259,
+        "262": 262,
+        "265": 265,
+        "367": 367,
+        "370": 370,
+        "373": 373,
+        "385": 385,
+        "388": 388,
+        "393": 393,
+        "395": 395,
+        "539": 539,
+        "543": 543,
+        "796": 796,
+        "801": 801,
+        "860": 860,
+        "865": 865,
+        "1237": 1237,
+        "1252": 1252,
+        "1282": 1282,
+        "1285": 1285,
+        "1327": 1327,
+        "1330": 1330,
+        "1333": 1333,
+        "1445": 1445,
+        "1447": 1447,
+        "1449": 1450,
+        "1958": 1960,
+        "1961": 1963,
+        "1977": 1979
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\diskbios.c",
+      "before_sha256": "6d6608705a81319acf4d9f7a310021f88920b82741606f4bf0c6c8599aa65bae",
+      "after_sha256": "5c7b58e229a4c6f40dc0f3b8e3e4164118d92ae9e642a3417d8af55308f15992",
+      "original_sha256": "d05908d6199675e65ebcf0f2b2c864169e80276639fb8de25b007c5e66751cdc",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SCCSID",
+          "original_line": 18,
+          "error_line": 19,
+          "end_line": 21
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 22,
+          "error_line": 23,
+          "end_line": 30
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 108,
+          "error_line": 109,
+          "end_line": 114
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 365,
+          "error_line": 366,
+          "end_line": 562
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 569,
+          "error_line": 570,
+          "end_line": 572
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 598,
+          "error_line": 599,
+          "end_line": 625
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 630,
+          "error_line": 631,
+          "end_line": 633
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 642,
+          "error_line": 643,
+          "end_line": 659
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 711,
+          "error_line": 712,
+          "end_line": 718
+        },
+        {
+          "kind": "ifdef",
+          "expression": "WDCTRL_BOP",
+          "original_line": 1245,
+          "error_line": 1246,
+          "end_line": 1475
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+        "source_sha256": "6d6608705a81319acf4d9f7a310021f88920b82741606f4bf0c6c8599aa65bae",
+        "object": "disks/diskbios",
+        "arms": [
+          {
+            "label": "codex_r681_arm_0000",
+            "line": 18,
+            "kind": "ifdef",
+            "expression": "SCCSID",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0001",
+            "line": 22,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0002",
+            "line": 108,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0003",
+            "line": 214,
+            "kind": "if",
+            "expression": "!(defined(NTVDM) && defined(MONITOR))",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0004",
+            "line": 225,
+            "kind": "if",
+            "expression": "!(defined(NTVDM) && defined(MONITOR))",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0005",
+            "line": 269,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0006",
+            "line": 362,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0007",
+            "line": 371,
+            "kind": "ifdef",
+            "expression": "ANSI",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0008",
+            "line": 373,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0009",
+            "line": 403,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0010",
+            "line": 411,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0011",
+            "line": 423,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0012",
+            "line": 478,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0013",
+            "line": 525,
+            "kind": "ifdef",
+            "expression": "ERROR",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0014",
+            "line": 1009,
+            "kind": "ifdef",
+            "expression": "WDCTRL_BOP",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "0fbd8e8de9daa6b267a7cc8d4b8a5b71be5179d31483615f384b5e787c57058e",
+            "hit": [
+              "codex_r681_arm_0003",
+              "codex_r681_arm_0004",
+              "codex_r681_arm_0005",
+              "codex_r681_arm_0007",
+              "codex_r681_arm_0013"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "0fbd8e8de9daa6b267a7cc8d4b8a5b71be5179d31483615f384b5e787c57058e",
+            "hit": [
+              "codex_r681_arm_0003",
+              "codex_r681_arm_0004",
+              "codex_r681_arm_0005",
+              "codex_r681_arm_0007",
+              "codex_r681_arm_0013"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 184,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/disks/diskbios.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 184,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 10,
+      "marker_line_mapping": {
+        "18": 18,
+        "20": 21,
+        "22": 24,
+        "29": 32,
+        "108": 112,
+        "110": 115,
+        "214": 220,
+        "217": 223,
+        "225": 231,
+        "267": 273,
+        "269": 275,
+        "279": 285,
+        "362": 368,
+        "364": 371,
+        "371": 378,
+        "373": 380,
+        "375": 383,
+        "403": 411,
+        "405": 414,
+        "411": 421,
+        "413": 424,
+        "423": 435,
+        "425": 438,
+        "478": 492,
+        "480": 495,
+        "525": 541,
+        "527": 543,
+        "1009": 1025,
+        "1012": 1028
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\comms\\com.c",
+      "before_sha256": "953b927de0339ab1c1eb16b437425ccaf68461d40f45b78583fb130909e3cd5a",
+      "after_sha256": "6979afbd90dda9b56a997412165f63dc8c6edc12e96048535016703a8db84823",
+      "original_sha256": "64ea04370f3e5295b9cdc88d34d3badc03b68ec33ce23715c58a29085ba1e4b3",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SCCSID",
+          "original_line": 15,
+          "error_line": 16,
+          "end_line": 18
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 19,
+          "error_line": 20,
+          "end_line": 27
+        },
+        {
+          "kind": "if",
+          "expression": "defined(NTVDM) && defined(MONITOR)",
+          "original_line": 33,
+          "error_line": 34,
+          "end_line": 36
+        },
+        {
+          "kind": "ifdef",
+          "expression": "GISP_CPU",
+          "original_line": 58,
+          "error_line": 59,
+          "end_line": 61
+        },
+        {
+          "kind": "if",
+          "expression": "defined(NTVDM) && defined(FIFO_ON)",
+          "original_line": 90,
+          "error_line": 91,
+          "end_line": 98
+        },
+        {
+          "kind": "ifdef",
+          "expression": "IRET_HOOKS",
+          "original_line": 114,
+          "error_line": 115,
+          "end_line": 120
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 129,
+          "error_line": 130,
+          "end_line": 132
+        },
+        {
+          "kind": "ifdef",
+          "expression": "IRET_HOOKS",
+          "original_line": 134,
+          "error_line": 135,
+          "end_line": 142
+        },
+        {
+          "kind": "if",
+          "expression": "defined(NTVDM) && defined(FIFO_ON)",
+          "original_line": 166,
+          "error_line": 167,
+          "end_line": 169
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 235,
+          "error_line": 236,
+          "end_line": 239
+        },
+        {
+          "kind": "if",
+          "expression": "!defined(PROD) || defined(SHORT_TRACE)",
+          "original_line": 245,
+          "error_line": 246,
+          "end_line": 248
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PS_FLUSHING",
+          "original_line": 249,
+          "error_line": 250,
+          "end_line": 253
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 271,
+          "error_line": 272,
+          "end_line": 274
+        },
+        {
+          "kind": "ifdef",
+          "expression": "FIFO_ON",
+          "original_line": 300,
+          "error_line": 301,
+          "end_line": 303
+        },
+        {
+          "kind": "if",
+          "expression": "defined(NTVDM) && defined(FIFO_ON)",
+          "original_line": 406,
+          "error_line": 407,
+          "end_line": 413
+        },
+        {
+          "kind": "if",
+          "expression": "defined(NTVDM) && defined(FIFO_ON)",
+          "original_line": 441,
+          "error_line": 442,
+          "end_line": 444
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 448,
+          "error_line": 449,
+          "end_line": 452
+        },
+        {
+          "kind": "if",
+          "expression": "defined(NTVDM) && defined(FIFO_ON)",
+          "original_line": 465,
+          "error_line": 466,
+          "end_line": 468
+        },
+        {
+          "kind": "if",
+          "expression": "defined(NTVDM) && defined(FIFO_ON)",
+          "original_line": 473,
+          "error_line": 474,
+          "end_line": 494
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 538,
+          "error_line": 539,
+          "end_line": 549
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 571,
+          "error_line": 572,
+          "end_line": 584
+        },
+        {
+          "kind": "ifdef",
+          "expression": "FIFO_ON",
+          "original_line": 612,
+          "error_line": 613,
+          "end_line": 635
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 637,
+          "error_line": 638,
+          "end_line": 669
+        },
+        {
+          "kind": "ifdef",
+          "expression": "IRET_HOOKS",
+          "original_line": 677,
+          "error_line": 678,
+          "end_line": 685
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SHORT_TRACE",
+          "original_line": 688,
+          "error_line": 689,
+          "end_line": 697
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 697,
+          "error_line": 698,
+          "end_line": 709
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SHORT_TRACE",
+          "original_line": 716,
+          "error_line": 717,
+          "end_line": 724
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 724,
+          "error_line": 725,
+          "end_line": 735
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SHORT_TRACE",
+          "original_line": 747,
+          "error_line": 748,
+          "end_line": 755
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 755,
+          "error_line": 756,
+          "end_line": 766
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SHORT_TRACE",
+          "original_line": 782,
+          "error_line": 783,
+          "end_line": 790
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 790,
+          "error_line": 791,
+          "end_line": 801
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SHORT_TRACE",
+          "original_line": 805,
+          "error_line": 806,
+          "end_line": 813
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 813,
+          "error_line": 814,
+          "end_line": 824
+        },
+        {
+          "kind": "if",
+          "expression": "defined(NTVDM) && defined(FIFO_ON)",
+          "original_line": 835,
+          "error_line": 836,
+          "end_line": 838
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SHORT_TRACE",
+          "original_line": 839,
+          "error_line": 840,
+          "end_line": 852
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 852,
+          "error_line": 853,
+          "end_line": 879
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 883,
+          "error_line": 884,
+          "end_line": 946
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SHORT_TRACE",
+          "original_line": 948,
+          "error_line": 949,
+          "end_line": 956
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 956,
+          "error_line": 957,
+          "end_line": 967
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 978,
+          "error_line": 979,
+          "end_line": 991
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 1009,
+          "error_line": 1010,
+          "end_line": 1017
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PS_FLUSHING",
+          "original_line": 1034,
+          "error_line": 1035,
+          "end_line": 1045
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 1048,
+          "error_line": 1049,
+          "end_line": 1056
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PS_FLUSHING",
+          "original_line": 1056,
+          "error_line": 1057,
+          "end_line": 1059
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 1071,
+          "error_line": 1072,
+          "end_line": 1074
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SHORT_TRACE",
+          "original_line": 1075,
+          "error_line": 1076,
+          "end_line": 1084
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 1084,
+          "error_line": 1085,
+          "end_line": 1096
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 1146,
+          "error_line": 1147,
+          "end_line": 1149
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SHORT_TRACE",
+          "original_line": 1150,
+          "error_line": 1151,
+          "end_line": 1158
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 1158,
+          "error_line": 1159,
+          "end_line": 1169
+        },
+        {
+          "kind": "if",
+          "expression": "defined(NTVDM) && defined(FIFO_ON)",
+          "original_line": 1171,
+          "error_line": 1172,
+          "end_line": 1225
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SHORT_TRACE",
+          "original_line": 1204,
+          "error_line": 1205,
+          "end_line": 1212
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 1212,
+          "error_line": 1213,
+          "end_line": 1223
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SHORT_TRACE",
+          "original_line": 1252,
+          "error_line": 1253,
+          "end_line": 1260
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 1260,
+          "error_line": 1261,
+          "end_line": 1271
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SHORT_TRACE",
+          "original_line": 1274,
+          "error_line": 1275,
+          "end_line": 1282
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 1297,
+          "error_line": 1298,
+          "end_line": 1308
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SHORT_TRACE",
+          "original_line": 1314,
+          "error_line": 1315,
+          "end_line": 1322
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 1322,
+          "error_line": 1323,
+          "end_line": 1333
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SHORT_TRACE",
+          "original_line": 1339,
+          "error_line": 1340,
+          "end_line": 1347
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 1347,
+          "error_line": 1348,
+          "end_line": 1358
+        },
+        {
+          "kind": "ifdef",
+          "expression": "IRET_HOOKS",
+          "original_line": 1392,
+          "error_line": 1393,
+          "end_line": 1508
+        },
+        {
+          "kind": "ifdef",
+          "expression": "FIFO_ON",
+          "original_line": 1524,
+          "error_line": 1525,
+          "end_line": 1552
+        },
+        {
+          "kind": "ifdef",
+          "expression": "FIFO_ON",
+          "original_line": 1564,
+          "error_line": 1565,
+          "end_line": 1578
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 1579,
+          "error_line": 1580,
+          "end_line": 1596
+        },
+        {
+          "kind": "ifdef",
+          "expression": "DOCUMENTATION",
+          "original_line": 1637,
+          "error_line": 1638,
+          "end_line": 1659
+        },
+        {
+          "kind": "ifdef",
+          "expression": "FIFO_ON",
+          "original_line": 1676,
+          "error_line": 1677,
+          "end_line": 1689
+        },
+        {
+          "kind": "if",
+          "expression": "!defined(PROD) || defined(IRET_HOOKS)",
+          "original_line": 1926,
+          "error_line": 1927,
+          "end_line": 1950
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 2002,
+          "error_line": 2003,
+          "end_line": 2039
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 2072,
+          "error_line": 2073,
+          "end_line": 2075
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 2082,
+          "error_line": 2083,
+          "end_line": 2085
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 2091,
+          "error_line": 2092,
+          "end_line": 2094
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 2102,
+          "error_line": 2103,
+          "end_line": 2105
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 2112,
+          "error_line": 2113,
+          "end_line": 2115
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 2121,
+          "error_line": 2122,
+          "end_line": 2124
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SHORT_TRACE",
+          "original_line": 2415,
+          "error_line": 2416,
+          "end_line": 2436
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 2465,
+          "error_line": 2466,
+          "end_line": 2473
+        },
+        {
+          "kind": "if",
+          "expression": "defined(NTVDM) && defined(FIFO_ON)",
+          "original_line": 2543,
+          "error_line": 2544,
+          "end_line": 2552
+        },
+        {
+          "kind": "ifdef",
+          "expression": "IRET_HOOKS",
+          "original_line": 2572,
+          "error_line": 2573,
+          "end_line": 2588
+        },
+        {
+          "kind": "ifndef",
+          "expression": "COM3_ADAPTOR",
+          "original_line": 2590,
+          "error_line": 2591,
+          "end_line": 2593
+        },
+        {
+          "kind": "ifndef",
+          "expression": "COM4_ADAPTOR",
+          "original_line": 2593,
+          "error_line": 2594,
+          "end_line": 2596
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 2639,
+          "error_line": 2640,
+          "end_line": 2643
+        },
+        {
+          "kind": "ifndef",
+          "expression": "NTVDM",
+          "original_line": 2656,
+          "error_line": 2657,
+          "end_line": 2663
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 2680,
+          "error_line": 2681,
+          "end_line": 2685
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PS_FLUSHING",
+          "original_line": 2755,
+          "error_line": 2756,
+          "end_line": 2791
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 2799,
+          "error_line": 2800,
+          "end_line": 3254
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+        "source_sha256": "953b927de0339ab1c1eb16b437425ccaf68461d40f45b78583fb130909e3cd5a",
+        "object": "comms/com",
+        "arms": [
+          {
+            "label": "codex_r681_arm_0000",
+            "line": 15,
+            "kind": "ifdef",
+            "expression": "SCCSID",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0001",
+            "line": 19,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0002",
+            "line": 34,
+            "kind": "if",
+            "expression": "defined(NTVDM) && defined(MONITOR)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0003",
+            "line": 62,
+            "kind": "ifdef",
+            "expression": "GISP_CPU",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0004",
+            "line": 96,
+            "kind": "if",
+            "expression": "defined(NTVDM) && defined(FIFO_ON)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0005",
+            "line": 120,
+            "kind": "ifdef",
+            "expression": "IRET_HOOKS",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0006",
+            "line": 123,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0007",
+            "line": 130,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0008",
+            "line": 132,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0009",
+            "line": 137,
+            "kind": "ifdef",
+            "expression": "IRET_HOOKS",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0010",
+            "line": 164,
+            "kind": "if",
+            "expression": "defined(NTVDM) && defined(FIFO_ON)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0011",
+            "line": 233,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0012",
+            "line": 242,
+            "kind": "if",
+            "expression": "!defined(PROD) || defined(SHORT_TRACE)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0013",
+            "line": 247,
+            "kind": "ifdef",
+            "expression": "PS_FLUSHING",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0014",
+            "line": 268,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0015",
+            "line": 295,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0016",
+            "line": 297,
+            "kind": "ifdef",
+            "expression": "FIFO_ON",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0017",
+            "line": 403,
+            "kind": "if",
+            "expression": "defined(NTVDM) && defined(FIFO_ON)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0018",
+            "line": 438,
+            "kind": "if",
+            "expression": "defined(NTVDM) && defined(FIFO_ON)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0019",
+            "line": 443,
+            "kind": "ifndef",
+            "expression": "DELAYED_INTS",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0020",
+            "line": 445,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0021",
+            "line": 462,
+            "kind": "if",
+            "expression": "defined(NTVDM) && defined(FIFO_ON)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0022",
+            "line": 470,
+            "kind": "if",
+            "expression": "defined(NTVDM) && defined(FIFO_ON)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0023",
+            "line": 535,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0024",
+            "line": 547,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0025",
+            "line": 560,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0026",
+            "line": 562,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0027",
+            "line": 596,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0028",
+            "line": 597,
+            "kind": "ifdef",
+            "expression": "FIFO_ON",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0029",
+            "line": 599,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0030",
+            "line": 606,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0031",
+            "line": 618,
+            "kind": "ifdef",
+            "expression": "IRET_HOOKS",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0032",
+            "line": 624,
+            "kind": "ifdef",
+            "expression": "SHORT_TRACE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0033",
+            "line": 627,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0034",
+            "line": 637,
+            "kind": "ifdef",
+            "expression": "SHORT_TRACE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0035",
+            "line": 640,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0036",
+            "line": 655,
+            "kind": "ifdef",
+            "expression": "SHORT_TRACE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0037",
+            "line": 658,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0038",
+            "line": 664,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0039",
+            "line": 677,
+            "kind": "ifdef",
+            "expression": "SHORT_TRACE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0040",
+            "line": 680,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0041",
+            "line": 687,
+            "kind": "ifdef",
+            "expression": "SHORT_TRACE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0042",
+            "line": 690,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0043",
+            "line": 704,
+            "kind": "if",
+            "expression": "defined(NTVDM) && defined(FIFO_ON)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0044",
+            "line": 708,
+            "kind": "ifdef",
+            "expression": "SHORT_TRACE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0045",
+            "line": 711,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0046",
+            "line": 718,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0047",
+            "line": 720,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0048",
+            "line": 764,
+            "kind": "ifdef",
+            "expression": "SHORT_TRACE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0049",
+            "line": 767,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0050",
+            "line": 781,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0051",
+            "line": 785,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0052",
+            "line": 797,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0053",
+            "line": 802,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0054",
+            "line": 822,
+            "kind": "ifdef",
+            "expression": "PS_FLUSHING",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0055",
+            "line": 826,
+            "kind": "if",
+            "expression": "defined (DELAYED_INTS) || defined (NTVDM)",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0056",
+            "line": 828,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0057",
+            "line": 832,
+            "kind": "ifdef",
+            "expression": "PS_FLUSHING",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0058",
+            "line": 847,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0059",
+            "line": 851,
+            "kind": "ifdef",
+            "expression": "SHORT_TRACE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0060",
+            "line": 854,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0061",
+            "line": 862,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0062",
+            "line": 892,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0063",
+            "line": 907,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0064",
+            "line": 911,
+            "kind": "ifdef",
+            "expression": "SHORT_TRACE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0065",
+            "line": 914,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0066",
+            "line": 919,
+            "kind": "if",
+            "expression": "defined(NTVDM) && defined(FIFO_ON)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0067",
+            "line": 947,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0068",
+            "line": 952,
+            "kind": "ifdef",
+            "expression": "SHORT_TRACE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0069",
+            "line": 955,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0070",
+            "line": 962,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0071",
+            "line": 987,
+            "kind": "ifdef",
+            "expression": "SHORT_TRACE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0072",
+            "line": 990,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0073",
+            "line": 996,
+            "kind": "ifdef",
+            "expression": "SHORT_TRACE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0074",
+            "line": 1014,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0075",
+            "line": 1023,
+            "kind": "ifdef",
+            "expression": "SHORT_TRACE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0076",
+            "line": 1026,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0077",
+            "line": 1035,
+            "kind": "ifdef",
+            "expression": "SHORT_TRACE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0078",
+            "line": 1038,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0079",
+            "line": 1069,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0080",
+            "line": 1075,
+            "kind": "ifdef",
+            "expression": "IRET_HOOKS",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0081",
+            "line": 1196,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0082",
+            "line": 1205,
+            "kind": "ifdef",
+            "expression": "FIFO_ON",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0083",
+            "line": 1220,
+            "kind": "ifdef",
+            "expression": "FIFO_ON",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0084",
+            "line": 1224,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0085",
+            "line": 1269,
+            "kind": "ifdef",
+            "expression": "DOCUMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0086",
+            "line": 1275,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0087",
+            "line": 1291,
+            "kind": "ifdef",
+            "expression": "FIFO_ON",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0088",
+            "line": 1293,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0089",
+            "line": 1478,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0090",
+            "line": 1537,
+            "kind": "if",
+            "expression": "!defined(PROD) || defined(IRET_HOOKS)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0091",
+            "line": 1594,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0092",
+            "line": 1596,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0093",
+            "line": 1638,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0094",
+            "line": 1640,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0095",
+            "line": 1648,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0096",
+            "line": 1650,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0097",
+            "line": 1657,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0098",
+            "line": 1659,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0099",
+            "line": 1668,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0100",
+            "line": 1670,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0101",
+            "line": 1678,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0102",
+            "line": 1680,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0103",
+            "line": 1687,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0104",
+            "line": 1689,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0105",
+            "line": 1698,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0106",
+            "line": 1983,
+            "kind": "ifdef",
+            "expression": "SHORT_TRACE",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0107",
+            "line": 1990,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0108",
+            "line": 1996,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0109",
+            "line": 2003,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0110",
+            "line": 2009,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0111",
+            "line": 2015,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0112",
+            "line": 2048,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0113",
+            "line": 2093,
+            "kind": "if",
+            "expression": "defined(NTVDM) && defined(FIFO_ON)",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0114",
+            "line": 2122,
+            "kind": "ifdef",
+            "expression": "IRET_HOOKS",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0115",
+            "line": 2128,
+            "kind": "ifndef",
+            "expression": "COM3_ADAPTOR",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0116",
+            "line": 2132,
+            "kind": "ifndef",
+            "expression": "COM4_ADAPTOR",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0117",
+            "line": 2161,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0118",
+            "line": 2169,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0119",
+            "line": 2179,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0120",
+            "line": 2195,
+            "kind": "ifndef",
+            "expression": "NTVDM",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0121",
+            "line": 2197,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0122",
+            "line": 2214,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0123",
+            "line": 2218,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0124",
+            "line": 2224,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0125",
+            "line": 2229,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r681_arm_0126",
+            "line": 2291,
+            "kind": "ifdef",
+            "expression": "PS_FLUSHING",
+            "error_only": true
+          },
+          {
+            "label": "codex_r681_arm_0127",
+            "line": 2302,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "ddb11e768c11296f33e38acbc224d808c6426d14970606d614082488a5fa6493",
+            "hit": [
+              "codex_r681_arm_0006",
+              "codex_r681_arm_0007",
+              "codex_r681_arm_0015",
+              "codex_r681_arm_0019",
+              "codex_r681_arm_0024",
+              "codex_r681_arm_0026",
+              "codex_r681_arm_0027",
+              "codex_r681_arm_0029",
+              "codex_r681_arm_0038",
+              "codex_r681_arm_0047",
+              "codex_r681_arm_0051",
+              "codex_r681_arm_0052",
+              "codex_r681_arm_0055",
+              "codex_r681_arm_0061",
+              "codex_r681_arm_0062",
+              "codex_r681_arm_0067",
+              "codex_r681_arm_0070",
+              "codex_r681_arm_0079",
+              "codex_r681_arm_0081",
+              "codex_r681_arm_0086",
+              "codex_r681_arm_0088",
+              "codex_r681_arm_0089",
+              "codex_r681_arm_0092",
+              "codex_r681_arm_0093",
+              "codex_r681_arm_0095",
+              "codex_r681_arm_0097",
+              "codex_r681_arm_0099",
+              "codex_r681_arm_0101",
+              "codex_r681_arm_0103",
+              "codex_r681_arm_0105",
+              "codex_r681_arm_0107",
+              "codex_r681_arm_0108",
+              "codex_r681_arm_0109",
+              "codex_r681_arm_0110",
+              "codex_r681_arm_0112",
+              "codex_r681_arm_0117",
+              "codex_r681_arm_0118",
+              "codex_r681_arm_0121",
+              "codex_r681_arm_0122",
+              "codex_r681_arm_0124",
+              "codex_r681_arm_0125"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "ddb11e768c11296f33e38acbc224d808c6426d14970606d614082488a5fa6493",
+            "hit": [
+              "codex_r681_arm_0006",
+              "codex_r681_arm_0007",
+              "codex_r681_arm_0015",
+              "codex_r681_arm_0019",
+              "codex_r681_arm_0024",
+              "codex_r681_arm_0026",
+              "codex_r681_arm_0027",
+              "codex_r681_arm_0029",
+              "codex_r681_arm_0038",
+              "codex_r681_arm_0047",
+              "codex_r681_arm_0051",
+              "codex_r681_arm_0052",
+              "codex_r681_arm_0055",
+              "codex_r681_arm_0061",
+              "codex_r681_arm_0062",
+              "codex_r681_arm_0067",
+              "codex_r681_arm_0070",
+              "codex_r681_arm_0079",
+              "codex_r681_arm_0081",
+              "codex_r681_arm_0086",
+              "codex_r681_arm_0088",
+              "codex_r681_arm_0089",
+              "codex_r681_arm_0092",
+              "codex_r681_arm_0093",
+              "codex_r681_arm_0095",
+              "codex_r681_arm_0097",
+              "codex_r681_arm_0099",
+              "codex_r681_arm_0101",
+              "codex_r681_arm_0103",
+              "codex_r681_arm_0105",
+              "codex_r681_arm_0107",
+              "codex_r681_arm_0108",
+              "codex_r681_arm_0109",
+              "codex_r681_arm_0110",
+              "codex_r681_arm_0112",
+              "codex_r681_arm_0117",
+              "codex_r681_arm_0118",
+              "codex_r681_arm_0121",
+              "codex_r681_arm_0122",
+              "codex_r681_arm_0124",
+              "codex_r681_arm_0125"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 189,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/comms/com.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 189,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 87,
+      "marker_line_mapping": {
+        "15": 15,
+        "17": 18,
+        "19": 21,
+        "26": 29,
+        "34": 38,
+        "37": 41,
+        "62": 66,
+        "65": 69,
+        "96": 100,
+        "103": 108,
+        "120": 126,
+        "122": 129,
+        "123": 131,
+        "126": 134,
+        "130": 138,
+        "132": 140,
+        "134": 143,
+        "137": 147,
+        "139": 150,
+        "164": 176,
+        "166": 179,
+        "233": 247,
+        "235": 250,
+        "242": 258,
+        "244": 261,
+        "247": 264,
+        "249": 267,
+        "268": 287,
+        "270": 290,
+        "295": 316,
+        "297": 318,
+        "299": 321,
+        "300": 323,
+        "403": 426,
+        "409": 433,
+        "438": 463,
+        "440": 466,
+        "443": 470,
+        "445": 472,
+        "447": 475,
+        "462": 490,
+        "464": 493,
+        "470": 500,
+        "490": 521,
+        "535": 567,
+        "537": 570,
+        "547": 581,
+        "549": 583,
+        "560": 594,
+        "562": 597,
+        "568": 604,
+        "596": 633,
+        "597": 634,
+        "599": 637,
+        "603": 642,
+        "604": 644,
+        "606": 646,
+        "608": 649,
+        "618": 659,
+        "620": 662,
+        "624": 667,
+        "626": 670,
+        "627": 672,
+        "629": 675,
+        "637": 684,
+        "639": 687,
+        "640": 689,
+        "642": 692,
+        "655": 706,
+        "657": 709,
+        "658": 711,
+        "660": 714,
+        "664": 719,
+        "673": 728,
+        "677": 732,
+        "679": 735,
+        "680": 737,
+        "682": 740,
+        "687": 746,
+        "689": 749,
+        "690": 751,
+        "692": 754,
+        "704": 767,
+        "706": 770,
+        "708": 773,
+        "710": 776,
+        "711": 778,
+        "713": 781,
+        "718": 787,
+        "720": 790,
+        "761": 832,
+        "764": 836,
+        "766": 839,
+        "767": 841,
+        "769": 844,
+        "781": 857,
+        "783": 860,
+        "785": 863,
+        "787": 865,
+        "797": 875,
+        "799": 877,
+        "802": 880,
+        "804": 883,
+        "822": 902,
+        "824": 905,
+        "826": 908,
+        "828": 910,
+        "830": 913,
+        "832": 915,
+        "834": 918,
+        "847": 932,
+        "849": 935,
+        "851": 938,
+        "853": 941,
+        "854": 943,
+        "856": 946,
+        "862": 953,
+        "864": 955,
+        "892": 983,
+        "902": 993,
+        "907": 998,
+        "909": 1001,
+        "911": 1004,
+        "913": 1007,
+        "914": 1009,
+        "916": 1012,
+        "919": 1016,
+        "947": 1045,
+        "952": 1051,
+        "954": 1054,
+        "955": 1056,
+        "957": 1059,
+        "959": 1062,
+        "962": 1066,
+        "979": 1083,
+        "987": 1091,
+        "989": 1094,
+        "990": 1096,
+        "992": 1099,
+        "996": 1104,
+        "998": 1107,
+        "1014": 1124,
+        "1016": 1127,
+        "1023": 1135,
+        "1025": 1138,
+        "1026": 1140,
+        "1028": 1143,
+        "1035": 1151,
+        "1037": 1154,
+        "1038": 1156,
+        "1040": 1159,
+        "1069": 1189,
+        "1071": 1191,
+        "1075": 1195,
+        "1188": 1309,
+        "1196": 1318,
+        "1205": 1327,
+        "1207": 1330,
+        "1220": 1344,
+        "1222": 1347,
+        "1224": 1350,
+        "1226": 1353,
+        "1269": 1397,
+        "1272": 1400,
+        "1275": 1403,
+        "1291": 1419,
+        "1293": 1422,
+        "1298": 1428,
+        "1313": 1444,
+        "1478": 1609,
+        "1490": 1621,
+        "1537": 1668,
+        "1540": 1671,
+        "1594": 1725,
+        "1596": 1728,
+        "1605": 1737,
+        "1638": 1770,
+        "1640": 1772,
+        "1642": 1775,
+        "1648": 1782,
+        "1650": 1784,
+        "1652": 1787,
+        "1657": 1793,
+        "1659": 1795,
+        "1661": 1798,
+        "1668": 1806,
+        "1670": 1808,
+        "1672": 1811,
+        "1678": 1818,
+        "1680": 1820,
+        "1682": 1823,
+        "1687": 1829,
+        "1689": 1831,
+        "1691": 1834,
+        "1698": 1842,
+        "1704": 1848,
+        "1983": 2127,
+        "1985": 2130,
+        "1990": 2136,
+        "1992": 2138,
+        "1996": 2142,
+        "1998": 2144,
+        "2003": 2149,
+        "2005": 2151,
+        "2009": 2155,
+        "2011": 2157,
+        "2015": 2161,
+        "2022": 2169,
+        "2048": 2196,
+        "2051": 2199,
+        "2093": 2241,
+        "2101": 2250,
+        "2122": 2272,
+        "2124": 2275,
+        "2128": 2280,
+        "2130": 2283,
+        "2132": 2285,
+        "2134": 2288,
+        "2161": 2315,
+        "2164": 2318,
+        "2169": 2323,
+        "2179": 2333,
+        "2181": 2336,
+        "2195": 2351,
+        "2197": 2354,
+        "2200": 2358,
+        "2214": 2373,
+        "2216": 2375,
+        "2218": 2377,
+        "2220": 2380,
+        "2224": 2385,
+        "2226": 2387,
+        "2229": 2390,
+        "2289": 2450,
+        "2291": 2452,
+        "2293": 2455,
+        "2302": 2465,
+        "2304": 2468
+      }
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\rtc_bios.c",
+      "before_sha256": "62547d56b1dc75af8cc84936e4047a38c50e02c72f7fc6019f945eb4c5fdff67",
+      "after_sha256": "6bd14417070148d1bea9febad34cc2e229c14cd513138c6cdea8b1a21208f354",
+      "original_sha256": "bc5e3a66a552e293ae1ec9653205f8432867b4290e3d4ecad6ae5cd1ccab4cb6",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "original_line": 43,
+          "error_line": 44,
+          "end_line": 64
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+        "source_sha256": "62547d56b1dc75af8cc84936e4047a38c50e02c72f7fc6019f945eb4c5fdff67",
+        "object": "bios/rtc_bios",
+        "arms": [
+          {
+            "label": "codex_r682_arm_0000",
+            "line": 27,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r682_arm_0001",
+            "line": 43,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "2d2b7a1323e67d3d42575e3d2a9d24cccd2598e1ba20b51ec5d6ea5c684ac937",
+            "hit": [
+              "codex_r682_arm_0000"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "2d2b7a1323e67d3d42575e3d2a9d24cccd2598e1ba20b51ec5d6ea5c684ac937",
+            "hit": [
+              "codex_r682_arm_0000"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 171,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 171,
+          "identical": true
+        }
+      ],
+      "after_conditional_groups": 1,
+      "marker_line_mapping": {
+        "27": 27,
+        "43": 43,
+        "45": 46,
+        "136": 137
+      }
+    }
+  ]
+}

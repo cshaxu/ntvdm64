@@ -1,0 +1,76 @@
+{
+  "scope": "One original condition tree with previously missing diagnostic anchors; all retained arms witnessed in actual worker preprocess contexts.",
+  "method": "Original/current recursive tree preflight; selected-arm markers and ordered include traces checked before edits; resulting tree and line anchors rechecked.",
+  "limits": "Ten of ten allowed source edits in current build batch; complete supported-context enumeration remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\rtc_bios.c",
+      "before_sha256": "62547d56b1dc75af8cc84936e4047a38c50e02c72f7fc6019f945eb4c5fdff67",
+      "after_sha256": "6bd14417070148d1bea9febad34cc2e229c14cd513138c6cdea8b1a21208f354",
+      "original_sha256": "bc5e3a66a552e293ae1ec9653205f8432867b4290e3d4ecad6ae5cd1ccab4cb6",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "MONITOR",
+          "original_line": 43,
+          "error_line": 44,
+          "end_line": 64
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+        "source_sha256": "62547d56b1dc75af8cc84936e4047a38c50e02c72f7fc6019f945eb4c5fdff67",
+        "object": "bios/rtc_bios",
+        "arms": [
+          {
+            "label": "codex_r682_arm_0000",
+            "line": 27,
+            "kind": "ifdef",
+            "expression": "NTVDM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r682_arm_0001",
+            "line": 43,
+            "kind": "ifdef",
+            "expression": "MONITOR",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "2d2b7a1323e67d3d42575e3d2a9d24cccd2598e1ba20b51ec5d6ea5c684ac937",
+            "hit": [
+              "codex_r682_arm_0000"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "2d2b7a1323e67d3d42575e3d2a9d24cccd2598e1ba20b51ec5d6ea5c684ac937",
+            "hit": [
+              "codex_r682_arm_0000"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 171,
+          "identical": true
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/bios/rtc_bios.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 171,
+          "identical": true
+        }
+      ]
+    }
+  ]
+}

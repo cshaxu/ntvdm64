@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_timer.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_timer.c",
+  "original_line": 852,
+  "symbol": "_Win32_host_timer",
+  "object": "original-softpc-host-roots:nt_timer.obj",
+  "file_offset": "0x4de5b",
+  "old_embedded_line": 792,
+  "new_embedded_line": 852,
+  "scope": "DisplayErrorTerm line-number argument only; full test required under user rule."
+}

@@ -1,0 +1,194 @@
+{
+  "suite": "Invoke-ProductVerification Full",
+  "candidate": "r682b-phase1-package",
+  "exit_code": 0,
+  "console_and_window": {
+    "Console": {
+      "total": 17,
+      "passed": 17,
+      "summary_sha256": "67e0f377802f5fe3f9745b6baf5bf14fc337ecee838d9618d3cdb903d9250c33",
+      "cases": [
+        {
+          "case": "empty",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "native-zero",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "missing",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "native-seven",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "native-streams",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "native-eof",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "mem",
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "case": "nested-empty",
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "case": "nested-mem",
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "case": "mem-repeat",
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "case": "direct-mem",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "command-c",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "command-c-seven",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "guest-seven",
+          "expected": 7,
+          "actual": 7
+        },
+        {
+          "case": "command-c-mem",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "direct-seven",
+          "expected": 7,
+          "actual": 7
+        },
+        {
+          "case": "edit",
+          "expected": 1,
+          "actual": 1
+        }
+      ]
+    },
+    "Window": {
+      "total": 17,
+      "passed": 17,
+      "summary_sha256": "cc6f0af9e9f98aae19a47c895d7de0fdc051c1f3b8c16557f281c10388ce4feb",
+      "cases": [
+        {
+          "case": "empty",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "native-zero",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "missing",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "native-seven",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "native-streams",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "native-eof",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "mem",
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "case": "nested-empty",
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "case": "nested-mem",
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "case": "mem-repeat",
+          "expected": 1,
+          "actual": 1
+        },
+        {
+          "case": "direct-mem",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "command-c",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "command-c-seven",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "guest-seven",
+          "expected": 7,
+          "actual": 7
+        },
+        {
+          "case": "command-c-mem",
+          "expected": 0,
+          "actual": 0
+        },
+        {
+          "case": "direct-seven",
+          "expected": 7,
+          "actual": 7
+        },
+        {
+          "case": "edit",
+          "expected": 1,
+          "actual": 1
+        }
+      ]
+    }
+  },
+  "full_log_sha256": "7fbe668fcee9a327dd2482535dd354e306e0fc4cf0301c74391c88dc1b9b13f4",
+  "full_result": "PASS Full selected gates; identical 10-file package",
+  "limit": "DOS4GW NESticle witness verifies active graphics window; gameplay and pixels are not asserted."
+}

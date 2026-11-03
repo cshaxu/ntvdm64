@@ -1,0 +1,11 @@
+# S13: witnessed condition trees and original diagnostic lines
+
+This batch completes per-file conditional-tree review for 31 existing C/H files: 21 required no source edit and ten received original diagnostic line mappings. The reviews, original and current source hashes, compiler arm witnesses, and include-resolution comparisons are recorded in the r677-r680 witnessed reviews and [batch review](s13-r682-batch-review.json). Excluded branches remain error-only; 180 isolated error and continuation line controls passed. The x86 guard suite passed 181 controls. The two product graphs use x86 compiler contexts; other supported contexts still require explicit verification.
+
+The r680 temporary-copy probe initially changed header resolution for ccpusas4 and demdasd. Those results were discarded: sibling instrumentation with the actual compiler commands reproduced the original include order and supplied the accepted witnesses. Temporary probes do not prove runtime execution of each arm.
+
+Cached x86, x86-extra and x64 builds passed. The final [ten-image comparison](s13-r682b-build-image-compare.json) identifies one non-timestamp byte in NTVDM: the diagnostic __LINE__ argument changed from 792 to the original OpenNT line 852. [Line evidence](s13-r682b-line-macro-evidence.json) records the source, symbol and offset. This is a real diagnostic-value change and therefore required Full verification.
+
+The first Full attempt used Windows PowerShell 5 and failed in the RPC fixture because ProcessStartInfo.ArgumentList is unavailable. A fresh run using PowerShell 7 passed all selected Full gates; Console and Window each passed 17/17. [Evidence](s13-r682c-full-evidence.json). The DOS4GW NESticle check establishes a visible active graphics window, not gameplay or pixel correctness. All ten exact tested images were published and hash-verified in assets/release and O:/winnt/system32. Guest images were neither modified nor rebuilt.
+
+[Counts](s13-r682-counts.json): 1058 current C/H files in the two source roots (not proof that all are mirror files or included by every supported build); 165 reviewed identical, 650 reviewed different and 243 pending. The 578 net deleted C/H paths are counted separately relative to c97d4ee2c. Supported-context enumeration and original provenance for all files remain open.

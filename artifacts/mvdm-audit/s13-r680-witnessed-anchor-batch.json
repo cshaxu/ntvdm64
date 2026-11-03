@@ -1,0 +1,608 @@
+{
+  "scope": "Two original condition trees with previously missing diagnostic anchors; all retained arms witnessed in actual worker preprocess contexts.",
+  "method": "Original/current recursive tree preflight; selected-arm markers and ordered include traces checked before edits; resulting tree and line anchors rechecked.",
+  "limits": "Seven of ten allowed source edits in current build batch; complete supported-context enumeration remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tlb.c",
+      "before_sha256": "4f568e6257bbd192d9b8bd656e7b06c001238c1e1147c4e36be220f751187289",
+      "after_sha256": "13f1e34e2e0d242a2b3757990338887e2d55780d0f5dcec0ee7bd5f771a6eaac",
+      "original_sha256": "a83a7dd3f7e3fbb83723047aacddbd22d4001591c6d444d4bd6d45dd73e38fd8",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SPC486",
+          "original_line": 205,
+          "error_line": 206,
+          "end_line": 239
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SPC486",
+          "original_line": 275,
+          "error_line": 276,
+          "end_line": 312
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SPC486",
+          "original_line": 380,
+          "error_line": 381,
+          "end_line": 385
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SPC486",
+          "original_line": 449,
+          "error_line": 450,
+          "end_line": 454
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PIG",
+          "original_line": 525,
+          "error_line": 526,
+          "end_line": 530
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PIG",
+          "original_line": 535,
+          "error_line": 536,
+          "end_line": 540
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SPC486",
+          "original_line": 722,
+          "error_line": 723,
+          "end_line": 727
+        },
+        {
+          "kind": "ifdef",
+          "expression": "SPC486",
+          "original_line": 762,
+          "error_line": 763,
+          "end_line": 767
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PIG",
+          "original_line": 804,
+          "error_line": 805,
+          "end_line": 809
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PIG",
+          "original_line": 814,
+          "error_line": 815,
+          "end_line": 820
+        },
+        {
+          "kind": "ifdef",
+          "expression": "PIG",
+          "original_line": 858,
+          "error_line": 859,
+          "end_line": 954
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+        "source_sha256": "4f568e6257bbd192d9b8bd656e7b06c001238c1e1147c4e36be220f751187289",
+        "object": "ccpu/c_tlb",
+        "arms": [
+          {
+            "label": "codex_r680_arm_0000",
+            "line": 69,
+            "kind": "ifdef",
+            "expression": "FAST_TLB",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0001",
+            "line": 206,
+            "kind": "ifdef",
+            "expression": "SPC486",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0002",
+            "line": 209,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0003",
+            "line": 249,
+            "kind": "ifdef",
+            "expression": "FAST_TLB",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0004",
+            "line": 261,
+            "kind": "ifdef",
+            "expression": "SPC486",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0005",
+            "line": 298,
+            "kind": "ifdef",
+            "expression": "FAST_TLB",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0006",
+            "line": 335,
+            "kind": "ifdef",
+            "expression": "SPC486",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0007",
+            "line": 338,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0008",
+            "line": 408,
+            "kind": "ifdef",
+            "expression": "SPC486",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0009",
+            "line": 411,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0010",
+            "line": 429,
+            "kind": "ifdef",
+            "expression": "FAST_TLB",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0011",
+            "line": 445,
+            "kind": "ifdef",
+            "expression": "FAST_TLB",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0012",
+            "line": 487,
+            "kind": "ifdef",
+            "expression": "PIG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0013",
+            "line": 495,
+            "kind": "ifdef",
+            "expression": "PIG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0014",
+            "line": 589,
+            "kind": "ifdef",
+            "expression": "FAST_TLB",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0015",
+            "line": 664,
+            "kind": "ifdef",
+            "expression": "FAST_TLB",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0016",
+            "line": 697,
+            "kind": "ifdef",
+            "expression": "SPC486",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0017",
+            "line": 700,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0018",
+            "line": 742,
+            "kind": "ifdef",
+            "expression": "SPC486",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0019",
+            "line": 745,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0020",
+            "line": 787,
+            "kind": "ifdef",
+            "expression": "PIG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0021",
+            "line": 795,
+            "kind": "ifdef",
+            "expression": "PIG",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0022",
+            "line": 836,
+            "kind": "ifdef",
+            "expression": "PIG",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "ab4dc5a1f8f273ea5dbf9f9decde718a60cacd5c7fde0977c88e8e1519ab356f",
+            "hit": [
+              "codex_r680_arm_0000",
+              "codex_r680_arm_0002",
+              "codex_r680_arm_0003",
+              "codex_r680_arm_0005",
+              "codex_r680_arm_0007",
+              "codex_r680_arm_0009",
+              "codex_r680_arm_0010",
+              "codex_r680_arm_0011",
+              "codex_r680_arm_0014",
+              "codex_r680_arm_0015",
+              "codex_r680_arm_0017",
+              "codex_r680_arm_0019"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "ab4dc5a1f8f273ea5dbf9f9decde718a60cacd5c7fde0977c88e8e1519ab356f",
+            "hit": [
+              "codex_r680_arm_0000",
+              "codex_r680_arm_0002",
+              "codex_r680_arm_0003",
+              "codex_r680_arm_0005",
+              "codex_r680_arm_0007",
+              "codex_r680_arm_0009",
+              "codex_r680_arm_0010",
+              "codex_r680_arm_0011",
+              "codex_r680_arm_0014",
+              "codex_r680_arm_0015",
+              "codex_r680_arm_0017",
+              "codex_r680_arm_0019"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 175,
+          "identical": true,
+          "include_trace_sha256": "ec82ec285d84c4d857fbbcd0487d218843635bbaab1348767707936680637259",
+          "method": "instrumented copy with verified search resolution"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 175,
+          "identical": true,
+          "include_trace_sha256": "ec82ec285d84c4d857fbbcd0487d218843635bbaab1348767707936680637259",
+          "method": "instrumented copy with verified search resolution"
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpusas4.c",
+      "before_sha256": "172e8ddde8b267c910117acad724dc84a6ec4f769e0831b605303f8ae9ae18cd",
+      "after_sha256": "b460b6d58a89ade4d7336812a0ffc98d884ab6f7132f2ce51728bc95cac01bf6",
+      "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+      "guards": [
+        {
+          "kind": "ifdef",
+          "expression": "SEGMENTATION",
+          "original_line": 25,
+          "error_line": 26,
+          "end_line": 33
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BACK_M",
+          "original_line": 136,
+          "error_line": 137,
+          "end_line": 139
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 248,
+          "error_line": 249,
+          "end_line": 257
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 258,
+          "error_line": 259,
+          "end_line": 284
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BACK_M",
+          "original_line": 384,
+          "error_line": 385,
+          "end_line": 389
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BACK_M",
+          "original_line": 399,
+          "error_line": 400,
+          "end_line": 402
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 1279,
+          "error_line": 1280,
+          "end_line": 1285
+        },
+        {
+          "kind": "ifdef",
+          "expression": "BACK_M",
+          "original_line": 1313,
+          "error_line": 1314,
+          "end_line": 1319
+        },
+        {
+          "kind": "else",
+          "expression": "",
+          "original_line": 1431,
+          "error_line": 1432,
+          "end_line": 1435
+        },
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 1943,
+          "error_line": 1944,
+          "end_line": 1946
+        }
+      ],
+      "witness": {
+        "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+        "source_sha256": "172e8ddde8b267c910117acad724dc84a6ec4f769e0831b605303f8ae9ae18cd",
+        "object": "ccpu/ccpusas4",
+        "arms": [
+          {
+            "label": "codex_r680_arm_0000",
+            "line": 23,
+            "kind": "ifdef",
+            "expression": "CCPU",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0001",
+            "line": 25,
+            "kind": "ifdef",
+            "expression": "SEGMENTATION",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0002",
+            "line": 141,
+            "kind": "ifdef",
+            "expression": "BACK_M",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0003",
+            "line": 149,
+            "kind": "ifndef",
+            "expression": "EGATEST",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0004",
+            "line": 254,
+            "kind": "ifndef",
+            "expression": "CHECK_ACCESS",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0005",
+            "line": 256,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0006",
+            "line": 262,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0007",
+            "line": 367,
+            "kind": "ifdef",
+            "expression": "BACK_M",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0008",
+            "line": 370,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0009",
+            "line": 385,
+            "kind": "ifdef",
+            "expression": "BACK_M",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0010",
+            "line": 393,
+            "kind": "ifndef",
+            "expression": "EGATEST",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0011",
+            "line": 539,
+            "kind": "ifdef",
+            "expression": "EGG",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0012",
+            "line": 796,
+            "kind": "ifdef",
+            "expression": "LIM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0013",
+            "line": 860,
+            "kind": "ifdef",
+            "expression": "LIM",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0014",
+            "line": 1237,
+            "kind": "ifndef",
+            "expression": "EGATEST",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0015",
+            "line": 1282,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0016",
+            "line": 1327,
+            "kind": "ifdef",
+            "expression": "BACK_M",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0017",
+            "line": 1330,
+            "kind": "else",
+            "expression": "",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0018",
+            "line": 1445,
+            "kind": "ifdef",
+            "expression": "PROD",
+            "error_only": false
+          },
+          {
+            "label": "codex_r680_arm_0019",
+            "line": 1447,
+            "kind": "else",
+            "expression": "",
+            "error_only": true
+          },
+          {
+            "label": "codex_r680_arm_0020",
+            "line": 1958,
+            "kind": "ifndef",
+            "expression": "PROD",
+            "error_only": true
+          }
+        ],
+        "observations": [
+          {
+            "graph": "msvc-x86-release",
+            "exit": 0,
+            "preprocessed_sha256": "daf74e23439871a317c77d2f02514ba113abc7609b52731858453b246f673c96",
+            "hit": [
+              "codex_r680_arm_0000",
+              "codex_r680_arm_0003",
+              "codex_r680_arm_0004",
+              "codex_r680_arm_0008",
+              "codex_r680_arm_0010",
+              "codex_r680_arm_0011",
+              "codex_r680_arm_0012",
+              "codex_r680_arm_0013",
+              "codex_r680_arm_0014",
+              "codex_r680_arm_0017",
+              "codex_r680_arm_0018"
+            ]
+          },
+          {
+            "graph": "msvc-x64-release",
+            "exit": 0,
+            "preprocessed_sha256": "daf74e23439871a317c77d2f02514ba113abc7609b52731858453b246f673c96",
+            "hit": [
+              "codex_r680_arm_0000",
+              "codex_r680_arm_0003",
+              "codex_r680_arm_0004",
+              "codex_r680_arm_0008",
+              "codex_r680_arm_0010",
+              "codex_r680_arm_0011",
+              "codex_r680_arm_0012",
+              "codex_r680_arm_0013",
+              "codex_r680_arm_0014",
+              "codex_r680_arm_0017",
+              "codex_r680_arm_0018"
+            ]
+          }
+        ]
+      },
+      "include_trace_comparison": [
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "graph": "msvc-x86-release",
+          "include_trace_count": 199,
+          "identical": true,
+          "include_trace_sha256": "9a08b30f9a531bf4a9ac5f2fd8a7a7eda25854dd68e2a27330418b6c6fb3de9d",
+          "method": "temporary sibling file; original search order"
+        },
+        {
+          "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+          "graph": "msvc-x64-release",
+          "include_trace_count": 199,
+          "identical": true,
+          "include_trace_sha256": "9a08b30f9a531bf4a9ac5f2fd8a7a7eda25854dd68e2a27330418b6c6fb3de9d",
+          "method": "temporary sibling file; original search order"
+        }
+      ]
+    }
+  ]
+}

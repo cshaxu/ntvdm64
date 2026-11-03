@@ -268,8 +268,8 @@
     "final_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
     "pre_depth1_ntvdm_line": 2152,
     "pre_depth1_ntvdm_body_end": 2159,
-    "current_line": 2093,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r368-remove-duplicate-lines.json"
+    "current_line": 2241,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r681-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/com.c",
@@ -285,8 +285,8 @@
     "final_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
     "pre_depth1_ntvdm_line": 1100,
     "pre_depth1_ntvdm_body_end": 1212,
-    "current_line": 1075,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r356-depth1-anchor-batch.json"
+    "current_line": 1195,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r681-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/com.c",
@@ -302,8 +302,8 @@
     "final_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
     "pre_depth1_ntvdm_line": 944,
     "pre_depth1_ntvdm_body_end": 971,
-    "current_line": 919,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r356-depth1-anchor-batch.json"
+    "current_line": 1016,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r681-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/com.c",
@@ -319,8 +319,8 @@
     "final_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
     "pre_depth1_ntvdm_line": 725,
     "pre_depth1_ntvdm_body_end": 726,
-    "current_line": 704,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r356-depth1-anchor-batch.json"
+    "current_line": 767,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r681-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/com.c",
@@ -351,8 +351,8 @@
     "final_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
     "pre_depth1_ntvdm_line": 463,
     "pre_depth1_ntvdm_body_end": 482,
-    "current_line": 470,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r356-depth1-anchor-batch.json"
+    "current_line": 500,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r681-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/com.c",
@@ -368,8 +368,8 @@
     "final_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
     "pre_depth1_ntvdm_line": 455,
     "pre_depth1_ntvdm_body_end": 456,
-    "current_line": 462,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r356-depth1-anchor-batch.json"
+    "current_line": 490,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r681-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/com.c",
@@ -385,8 +385,8 @@
     "final_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
     "pre_depth1_ntvdm_line": 431,
     "pre_depth1_ntvdm_body_end": 432,
-    "current_line": 438,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r356-depth1-anchor-batch.json"
+    "current_line": 463,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r681-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/com.c",
@@ -402,8 +402,8 @@
     "final_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
     "pre_depth1_ntvdm_line": 396,
     "pre_depth1_ntvdm_body_end": 401,
-    "current_line": 403,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r356-depth1-anchor-batch.json"
+    "current_line": 426,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r681-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/com.c",
@@ -419,8 +419,8 @@
     "final_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
     "pre_depth1_ntvdm_line": 158,
     "pre_depth1_ntvdm_body_end": 159,
-    "current_line": 164,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r356-depth1-anchor-batch.json"
+    "current_line": 176,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r681-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/com.c",
@@ -436,8 +436,8 @@
     "final_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
     "pre_depth1_ntvdm_line": 90,
     "pre_depth1_ntvdm_body_end": 96,
-    "current_line": 96,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r356-depth1-anchor-batch.json"
+    "current_line": 100,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r681-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
@@ -1027,7 +1027,7 @@
     "after_sha256": "a9f6974e2f7e73ba69415f6de71bd29a23ca9283b1753c17d824f2e1a9a48bc3",
     "final_sha256": "a9f6974e2f7e73ba69415f6de71bd29a23ca9283b1753c17d824f2e1a9a48bc3",
     "current_line": 25,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r663-guard-line-audit.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r680-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/com.c",
@@ -1043,8 +1043,8 @@
     "final_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
     "pre_depth1_ntvdm_line": 2074,
     "pre_depth1_ntvdm_body_end": 2080,
-    "current_line": 2015,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r368-remove-duplicate-lines.json"
+    "current_line": 2161,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r681-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/com.c",
@@ -1059,7 +1059,9 @@
     "after_sha256": "1e257c03f0c9ba553bf8d6883b6da91fd1645092e46a2340e32ac27630597f43",
     "final_sha256": "83175be291f0824ab8d8b17bbf0f7aa1aa513804574d878f8801a5e68811ae64",
     "pre_depth1_ntvdm_line": 19,
-    "pre_depth1_ntvdm_body_end": 25
+    "pre_depth1_ntvdm_body_end": 25,
+    "current_line": 21,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r681-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
@@ -1184,7 +1186,9 @@
     "removed_body_sha256": "50a152f20adf7bed95f3489f665b11d73df31e8b3941e2d7c3a4c097305b5dda",
     "removed_body_lines": 6,
     "after_sha256": "89112dc9a067b3a2e80bb450b7b392003b4379beaac961992ec90325e355114c",
-    "final_sha256": "07fad1da75f88d68c6ae9409b41176ab74652e62eab3ef88c52d208fcd2fea8b"
+    "final_sha256": "07fad1da75f88d68c6ae9409b41176ab74652e62eab3ef88c52d208fcd2fea8b",
+    "current_line": 24,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r681-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
@@ -1213,8 +1217,8 @@
     "removed_body_lines": 6,
     "after_sha256": "244b5bbcc258a737c240fc7803aba9c9f2ad80eed24371e8065498fe734d9a9b",
     "final_sha256": "244b5bbcc258a737c240fc7803aba9c9f2ad80eed24371e8065498fe734d9a9b",
-    "current_line": 1050,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r664-guard-line-audit.json"
+    "current_line": 1052,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r679-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
@@ -1229,7 +1233,7 @@
     "after_sha256": "244b5bbcc258a737c240fc7803aba9c9f2ad80eed24371e8065498fe734d9a9b",
     "final_sha256": "244b5bbcc258a737c240fc7803aba9c9f2ad80eed24371e8065498fe734d9a9b",
     "current_line": 52,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r664-guard-line-audit.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r679-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
@@ -1243,8 +1247,8 @@
     "removed_body_lines": 6,
     "after_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
     "final_sha256": "1061f78f7602480edc3ad0d0de1370bda8ae1df3f5e1d38ecb2fd0cb8255fb68",
-    "current_line": 3103,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r663-guard-line-audit.json"
+    "current_line": 3133,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r677-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
@@ -1259,7 +1263,7 @@
     "after_sha256": "8c89380e24d367845adf3dd3a35d2cfe5e5a95add6fabc0364514f678e550edc",
     "final_sha256": "1061f78f7602480edc3ad0d0de1370bda8ae1df3f5e1d38ecb2fd0cb8255fb68",
     "current_line": 102,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r663-guard-line-audit.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r677-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
@@ -1273,8 +1277,8 @@
     "removed_body_lines": 6,
     "after_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
     "final_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
-    "current_line": 193,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r663-guard-line-audit.json"
+    "current_line": 197,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r677-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
@@ -1289,7 +1293,7 @@
     "after_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
     "final_sha256": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
     "current_line": 33,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r663-guard-line-audit.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r677-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/disks/gfi.c",
@@ -2381,8 +2385,8 @@
     "removed_body_lines": 1,
     "after_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
     "final_sha256": "67e91c50d288e84d63799b2d0d2250bd68f87405e4ca8422a01b19630645622b",
-    "current_line": 436,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r391-depth1-anchor-batch.json"
+    "current_line": 438,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r677-witnessed-anchor-batch.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/host/src/nt_yoda.c",

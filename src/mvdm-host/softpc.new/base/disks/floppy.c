@@ -666,8 +666,10 @@ void fl_disk_parms IFN1(int, drive)
 	if (    (equip_flag.bits.diskette_present == 1)
 	     && (drive < number_of_floppy))
 #else
+#line 672
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 675
 	{
 
 		if (! high_density(drive))
@@ -1044,8 +1046,10 @@ void fl_set_media IFN1(int, drive)
 	sys_addr dt_start = dr_type_addr;
 	sys_addr dt_end = dr_type_addr + DR_CNT * DR_SIZE_OF_ENTRY;
 #else
+#line 1054
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 1057
 	sys_addr md_table;
 
 	translate_new(drive);
@@ -1191,8 +1195,10 @@ LOCAL dr_type_check IFN3(half_word, drive_type, word *, seg_ptr, word *, off_ptr
 	dt_start = dr_type_addr;
 	dt_end = dr_type_addr + DR_CNT * DR_SIZE_OF_ENTRY;
 #else
+#line 1202
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
+#line 1207
 
 	while (dt_start < dt_end)
 	{
@@ -1248,8 +1254,10 @@ LOCAL void translate_new IFN1(int, drive)
 #ifdef NTVDM
 	if (high_density(drive) && (drive < number_of_floppy))
 #else
+#line 1262
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 1264
 	{
 		sas_load(FDD_STATUS+drive, &disk_state);
 		if (disk_state == 0)
@@ -1288,8 +1296,10 @@ void translate_old IFN1(int, drive)
 #ifdef NTVDM
 	if (high_density(drive) && (drive < number_of_floppy) && (disk_state != 0))
 #else
+#line 1302
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
+#line 1304
 
 	{
 		/*
@@ -1455,8 +1465,10 @@ LOCAL void rd_wr_vf IFN3(int, drive, FDC_CMD_BLOCK *, fcbp, half_word, dma_type)
 				dt_start = dr_type_addr;
 				dt_end = dr_type_addr + DR_CNT * DR_SIZE_OF_ENTRY;
 #else
+#line 1469
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 1472
 				while (dt_start < dt_end)
 				{
 					/*
@@ -1495,8 +1507,10 @@ LOCAL void rd_wr_vf IFN3(int, drive, FDC_CMD_BLOCK *, fcbp, half_word, dma_type)
 					else
 						md_offset += MD_TBL3_OFFSET;
 #else
+#line 1510
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
+#line 1516
 						
 				}
 			}
@@ -1513,8 +1527,10 @@ LOCAL void rd_wr_vf IFN3(int, drive, FDC_CMD_BLOCK *, fcbp, half_word, dma_type)
 				else
 					md_offset += MD_TBL3_OFFSET;
 #else
+#line 1532
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* NTVDM */
+#line 1538
 			}
 		}
 		else
@@ -1530,8 +1546,10 @@ LOCAL void rd_wr_vf IFN3(int, drive, FDC_CMD_BLOCK *, fcbp, half_word, dma_type)
 			else
 				md_offset += MD_TBL3_OFFSET;
 #else
+#line 1553
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 1559
 		}
 
 		/*
@@ -2400,8 +2418,10 @@ LOCAL void motor_on IFN1(int, drive)
 		setCS(int15_seg);
 		setIP(int15_off);
 #else
+#line 2506
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 2509
 
 		host_simulate();
 
@@ -2455,8 +2475,10 @@ LOCAL void motor_on IFN1(int, drive)
 		setCS(int15_seg);
 		setIP(int15_off);
 #else
+#line 2562
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 2565
 
 		host_simulate();
 
@@ -2610,8 +2632,10 @@ LOCAL void hd_wait IFN1(int, drive)
 	setCS(int15_seg);
 	setIP(int15_off);
 #else
+#line 2718
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 2721
 
 	host_simulate();
 
@@ -2853,8 +2877,10 @@ LOCAL wait_int IFN0()
 	setCS(int15_seg);
 	setIP(int15_off);
 #else
+#line 2962
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
+#line 2965
 
 	host_simulate();
 
@@ -2874,8 +2900,10 @@ LOCAL wait_int IFN0()
 	setCS(wait_int_seg);
 	setIP(wait_int_off);
 #else
+#line 2984
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 2987
 
 	host_simulate();
 
@@ -2884,8 +2912,10 @@ LOCAL wait_int IFN0()
 
 
 #else	/* JOKER */
+#line 2995
 #error DIVERGENCE MVDM-HOST-DIV-531: JOKER branch is not selected; see mirror register.
 #endif	/* JOKER */
+#line 3011
 
 
 	/*
