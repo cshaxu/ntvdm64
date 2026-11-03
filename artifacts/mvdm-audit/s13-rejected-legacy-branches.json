@@ -25,7 +25,9 @@
     "removed_body_sha256": "1b1f5e75894a90f2fb624c0bb8b23aa2890c054e007f45e19fb92eb15b1f938f",
     "removed_body_lines": 1,
     "after_sha256": "32573c2b22216f544f790c2f4c5aa37bdcc7d547877277d982483d906e2702ac",
-    "final_sha256": "0caae2986bd5256ecdee046d9961c5176a3d5178426a198b5f42fb3eb0bef369"
+    "final_sha256": "0caae2986bd5256ecdee046d9961c5176a3d5178426a198b5f42fb3eb0bef369",
+    "disposition": "subsumed-by-ntvdm-else",
+    "disposition_evidence": "artifacts/mvdm-audit/s13-r614-ledger-reconciliation.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/bios/emm_fncs.c",
@@ -69,8 +71,8 @@
     "removed_body_lines": 1,
     "after_sha256": "59c98534ba27a897537b787d3f9e5f8ca66e069a5bebb373f5dec764c233f2bc",
     "final_sha256": "0a758c8287148763f594b2ceb983d3217585e77a878eccf9baebe5dc731d4da5",
-    "current_line": 741,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r368-remove-duplicate-lines.json"
+    "current_line": 748,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r614-ledger-reconciliation.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/bios/reset.c",
@@ -129,8 +131,8 @@
     "removed_body_lines": 39,
     "after_sha256": "52db6b9cec2e8aff5a7bb030099961a662559282e815d1cae03b753911b6629d",
     "final_sha256": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a",
-    "current_line": 2642,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r366-depth1-anchor-batch.json"
+    "current_line": 2680,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r614-ledger-reconciliation.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
@@ -804,7 +806,9 @@
     "after_sha256": "3e421654910b576eb8259fb5c9ad860f4545f20e066e797b2e4cb0879b7b1205",
     "final_sha256": "af1c5d422be95674e5ec04ffd9de05881a8baf4a16fcf134b6bf2cbe41cb223d",
     "current_line": 37,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r376-depth1-anchor-batch.json"
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r376-depth1-anchor-batch.json",
+    "disposition": "withdrawn-uncompiled-file",
+    "disposition_evidence": "artifacts/mvdm-audit/s13-r614-ledger-reconciliation.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/debug/yoda.c",
@@ -818,8 +822,8 @@
     "removed_body_lines": 9108,
     "final_sha256": "83b24e36f133cc750c886aba6a43e5746c1ae69d015b47174a2324a814ca58e0",
     "selection_scope": "yoda.c PROD compile context; no supported YODA test entry",
-    "current_line": 69,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r358-depth1-anchor-batch.json"
+    "current_line": 71,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r614-ledger-reconciliation.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
@@ -1052,7 +1056,9 @@
     "removed_body_sha256": "c102ef1c65d43a4603d28a53fd19f574dd3a4f66a8758f1da7ac2593c3cbffe1",
     "removed_body_lines": 6,
     "after_sha256": "2453f77768e01b5f4a26200886096aa405f627d3758b98d65413780debe24b85",
-    "final_sha256": "2453f77768e01b5f4a26200886096aa405f627d3758b98d65413780debe24b85"
+    "final_sha256": "2453f77768e01b5f4a26200886096aa405f627d3758b98d65413780debe24b85",
+    "current_line": 661,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r614-ledger-reconciliation.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/comms/printer.c",
@@ -1303,7 +1309,9 @@
     "removed_body_sha256": "4c4b0a9aecf39828e934f5799fca9e19c665a0f06d995438d16054797cf81395",
     "removed_body_lines": 6,
     "after_sha256": "168bd9b845c99f7f6f974d26bdf2885e076a16017bcac0481cc9ce08a07b1227",
-    "final_sha256": "168bd9b845c99f7f6f974d26bdf2885e076a16017bcac0481cc9ce08a07b1227"
+    "final_sha256": "168bd9b845c99f7f6f974d26bdf2885e076a16017bcac0481cc9ce08a07b1227",
+    "current_line": 1461,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r614-ledger-reconciliation.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
@@ -1316,7 +1324,9 @@
     "removed_body_sha256": "9679f9c1bd24872811223d2639fe85297d3f7d1a7027376a8d32fe1decaac07b",
     "removed_body_lines": 6,
     "after_sha256": "168bd9b845c99f7f6f974d26bdf2885e076a16017bcac0481cc9ce08a07b1227",
-    "final_sha256": "168bd9b845c99f7f6f974d26bdf2885e076a16017bcac0481cc9ce08a07b1227"
+    "final_sha256": "168bd9b845c99f7f6f974d26bdf2885e076a16017bcac0481cc9ce08a07b1227",
+    "current_line": 1446,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r614-ledger-reconciliation.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
@@ -1343,8 +1353,8 @@
     "removed_body_lines": 6,
     "after_sha256": "2344df6d17aafae3ebcc3ca2ddfcef18acc19ef298b92664334bec85f04ef0e1",
     "final_sha256": "796cc0e4c0698be1abaebf9728490a36497de9818ae1f4e4c37719328576df9a",
-    "current_line": 2624,
-    "current_line_evidence": "artifacts/mvdm-audit/s13-r366-depth1-anchor-batch.json"
+    "current_line": 2662,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r614-ledger-reconciliation.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
@@ -1742,7 +1752,9 @@
     "removed_body_sha256": "44d2245aa246b82167729698a3dfca8abddb285a1be48d39fdf751492ef99dfc",
     "removed_body_lines": 6,
     "after_sha256": "215f8c5d2803f1c19a9a1f47897707bc4bbf9cde294a535424c539aea500548c",
-    "final_sha256": "215f8c5d2803f1c19a9a1f47897707bc4bbf9cde294a535424c539aea500548c"
+    "final_sha256": "215f8c5d2803f1c19a9a1f47897707bc4bbf9cde294a535424c539aea500548c",
+    "current_line": 576,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r614-ledger-reconciliation.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/ega_read.c",
@@ -1794,7 +1806,9 @@
     "removed_body_sha256": "44d2245aa246b82167729698a3dfca8abddb285a1be48d39fdf751492ef99dfc",
     "removed_body_lines": 6,
     "after_sha256": "26390e94c1a3e9695fbf608c6e44bbdd6254233ea195f59523df7eb9ad87043e",
-    "final_sha256": "26390e94c1a3e9695fbf608c6e44bbdd6254233ea195f59523df7eb9ad87043e"
+    "final_sha256": "26390e94c1a3e9695fbf608c6e44bbdd6254233ea195f59523df7eb9ad87043e",
+    "current_line": 236,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r614-ledger-reconciliation.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/video/ega_writ.c",
@@ -2197,7 +2211,9 @@
     "removed_body_sha256": "fe58cd61747a575e36950a4bb9726979375e57636387f8dbf44b43deab3c918f",
     "removed_body_lines": 6,
     "after_sha256": "f52f6b8c3832123c75235602c20ce1d6bd9a7442bc0f1dffea2a70ecec523f4a",
-    "final_sha256": "14eab307b01841a0d627ee159c7525fcb5f6007f84f5624988e1e46708be8db8"
+    "final_sha256": "14eab307b01841a0d627ee159c7525fcb5f6007f84f5624988e1e46708be8db8",
+    "disposition": "withdrawn-uncompiled-file",
+    "disposition_evidence": "artifacts/mvdm-audit/s13-r614-ledger-reconciliation.json"
   },
   {
     "path": "src/mvdm-host/vdmutils/pifedit/pifedit.c",
@@ -2352,7 +2368,9 @@
       652,
       656
     ],
-    "final_sha256": "0caae2986bd5256ecdee046d9961c5176a3d5178426a198b5f42fb3eb0bef369"
+    "final_sha256": "0caae2986bd5256ecdee046d9961c5176a3d5178426a198b5f42fb3eb0bef369",
+    "current_line": 654,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r614-ledger-reconciliation.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/host/src/copy_fnc.c",

@@ -2630,3 +2630,20 @@ nt_hunt.c, nt_smenu.c and host/inc/nt_smenu.h. No external product or test
 source/build reference was found and the files are absent from observed build
 graphs; the header was referenced only by the removed nt_smenu.c. Hashes and
 scope are in ../../artifacts/mvdm-audit/s13-r608-unreferenced-host-files.json.
+
+MVDM-HOST-DIV-724: remove unreferenced dos/command/cmdpif.h and the
+non-product suballoc/tsa.c UMTEST source and manifest entries. The selected
+suballoc.c library is unchanged. Source identities and scope are recorded in
+../../artifacts/mvdm-audit/s13-r610-unreferenced-command-suballoc.json.
+
+MVDM-HOST-DIV-725: remove test-only softpc.new/host/src/nt_ertbl.c and
+nt_mess.c. Their obsolete isolated static-data generator and verifier were
+retired; the latter referenced a nonexistent declaration path. Exact source
+hashes and retained evidence are in
+../../artifacts/mvdm-audit/s13-r611-test-only-host-static-data.json.
+
+MVDM-HOST-DIV-726: remove unselected WOW wctlm32.c and wcurcash.c/.h,
+softpc.new/host/src/nt_vflop.c, dpmi32/i386/dpmimisc.c and
+xms.486/i386/xmsmem86.c. Removed their obsolete non-product manifest or
+exclusion-test references. Original and prior local hashes and scope are in
+../../artifacts/mvdm-audit/s13-r612-unselected-witnesses.json.

@@ -316,7 +316,6 @@ print('PASS CCPU excludes original hardware-host FPU save path')
 
 for path, macro, expected_count, divergence in (
     ('src/mvdm-host/softpc.new/base/inc/winhelp.h', 'HOST_HELP', 1, 'MVDM-HOST-DIV-605'),
-    ('src/mvdm-host/softpc.new/host/src/nt_vflop.c', 'VFLOPPY', 1, 'MVDM-HOST-DIV-605'),
 ):
     lines = (repo / path).read_text(encoding='latin1').splitlines()
     marker = divergence + ': unsupported ' + macro + ' profile'
@@ -450,7 +449,7 @@ print('PASS original guest source references and shared header guards retained')
 time_source = (repo / 'src/non-mvdm/base/ntos/rtl/time.c').read_text(encoding='latin1')
 selector = '#if defined(ALLOC_PRAGMA) && defined(NTOS_KERNEL_RUNTIME)'
 marker = '#error Excluded unsupported kernel RTL time allocation profile'
-if selector + '\n' + marker not in time_source:
+if not re.search(re.escape(selector) + r'\n(?:\s*#\s*line\s+\d+\s*\n)*' + re.escape(marker), time_source):
     raise SystemExit('original RTL time selector not restored')
 probe.write_text(selector + '\n' + marker + '\n#endif\n', encoding='ascii')
 for defs in ([], ['/DALLOC_PRAGMA'], ['/DNTOS_KERNEL_RUNTIME']):

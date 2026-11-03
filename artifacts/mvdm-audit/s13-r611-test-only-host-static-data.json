@@ -1,0 +1,24 @@
+{
+  "scope": "Two mirror translation units absent from observed product graphs, compiled only by the historical T280 static-data library generator.",
+  "obsolete_test_evidence": "The sole associated verifier requires the nonexistent src/non-mvdm/public/internal/base/inc/error_abi.h and historical archive paths. Current tools/build, tests, active state and rules have no consumer of this generator or verifier beyond their mutual references. The test built an isolated library; it did not execute or demonstrate a current product integration.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_ertbl.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_ertbl.c",
+      "current_sha256": "a5061abc9be46eeb92b4f302c62d76cfb04312db4fc3087add3c8fd7eb2c8565",
+      "original_sha256": "3a41bbce47258534e4375615a960048a97143a2353aa5946de13c8f870dc572f"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_mess.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_mess.c",
+      "current_sha256": "868f0ebf5dc649b2fd0a281cdeb7f5a15411a74e6271568717b723a27413ae21",
+      "original_sha256": "00855ddb83164e8e20d8edc482f48ff403c42d2808d4d951081facb335550a83"
+    }
+  ],
+  "retired_test_tools": [
+    "tools/build/New-T280HostStaticDataNinja.ps1",
+    "tools/governance/Verify-T280S3HostStaticDataBuild.ps1"
+  ],
+  "limits": "Historical evidence is retained. The separate current error_abi.h remains because other independent build tools reference it. No executable or runtime media removed.",
+  "status": "Unbuilt next batch."
+}

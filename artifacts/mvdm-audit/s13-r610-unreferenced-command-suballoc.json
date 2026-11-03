@@ -1,0 +1,23 @@
+{
+  "scope": "A command header with no current source/build/test reference and an original suballocator UMTEST program not selected by any observed product graph.",
+  "evidence": "Case-insensitive current source/build/test reference search found only the obsolete UMTEST=tsa manifest entry; original SUBALLOC library selects only suballoc.c. The original standalone test source is not counted as current product coverage.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdpif.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdpif.h",
+      "current_sha256": "45e9fe10608a62427c31c42dc0a56003c97bcdbe41c9cb09f48aa1fabfaa5c05",
+      "original_sha256": "1c629826eba5a5437c481e8b4827298e5f178fa0eaa9ceaceb517cc80fe2e4c9",
+      "current_size": 1253,
+      "original_size": 1299
+    },
+    {
+      "path": "src/mvdm-host/suballoc/tsa.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\suballoc\\tsa.c",
+      "current_sha256": "802a33c1f810f2c5af2653dd6143682a2b378957513e8d22906d42fe3c2cf817",
+      "original_sha256": "e039bae08563e26670168eb64d332408256e89d9d3e9e2a719a8894a5e57a7e6",
+      "current_size": 15155,
+      "original_size": 16034
+    }
+  ],
+  "status": "Unbuilt next batch."
+}

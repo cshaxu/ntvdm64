@@ -1,0 +1,56 @@
+{
+  "scope": "Six mirror files absent from the observed product graph/dependency inventory and having no current product source/build consumer.",
+  "references": "wcurcash.h is referenced only by removed wcurcash.c; nt_vflop.c is referenced only by an exclusion-test row, which is retired with that file; dpmimisc.c and xmsmem86.c are named only in original nonselected i386 manifest metadata, removed accordingly.",
+  "records": [
+    {
+      "path": "src/mvdm-host/wow32/wctlm32.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wctlm32.c",
+      "current_sha256": "8a570675c780294511d73ac2e90f203f25378ae0fca7a26f2730b884bb8620e2",
+      "original_sha256": "e5c1218929f64a5bb1c2227ab1903e095e0db50e3a1f44dbb4ad4a028579b8ca",
+      "current_size": 12229,
+      "original_size": 12461
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcurcash.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcurcash.c",
+      "current_sha256": "79550de0d44d78f5c9ad78d333ff9c58d35de11545d96fcfb55eb9b4b3db8fed",
+      "original_sha256": "ed9fa5ee3eb6ce9059d58f21dea3a7416b0229678f7f62918de02a2cf78d0e61",
+      "current_size": 4863,
+      "original_size": 5060
+    },
+    {
+      "path": "src/mvdm-host/wow32/wcurcash.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wcurcash.h",
+      "current_sha256": "bdcc041a146fc840723737efe70c8ce0081ba005e99d7fbc8b575e9d6bde478a",
+      "original_sha256": "159b3e0683659f36f567e5c7878bbadb82f6dfbbcc180eaeca1487baef229231",
+      "current_size": 1029,
+      "original_size": 1060
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vflop.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vflop.c",
+      "current_sha256": "eb3fd1f9aebb6387bd492b01ad19c873a027a5e6296701e6e5617327fb42f4f0",
+      "original_sha256": "b2766665ecd787cdc9dbabab3c44f25fcd6185d90b221cdd201a159dd77a339d",
+      "current_size": 203,
+      "original_size": 18554
+    },
+    {
+      "path": "src/mvdm-host/dpmi32/i386/dpmimisc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\i386\\dpmimisc.c",
+      "current_sha256": "3572ea40424246940fd56c26aaca47e0128999d71f1e252e30772725ec9ffb4c",
+      "original_sha256": "c4b46844e5d5cd8a0d26a20f8635e46f58a53cce768aead3a472300d773fb8f5",
+      "current_size": 660,
+      "original_size": 731
+    },
+    {
+      "path": "src/mvdm-host/xms.486/i386/xmsmem86.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\xms.486\\i386\\xmsmem86.c",
+      "current_sha256": "432a5dfc1185e1c5f4f2604f97dbd7b5e73315fbdf71eed341aaff2ddd47c1de",
+      "original_sha256": "10b4128215d7ff9f101f7c517805fd9a6d177b01679bd587eb5747040960485a",
+      "current_size": 2477,
+      "original_size": 2632
+    }
+  ],
+  "limits": "No executable or runtime media is removed. Original implementations remain available in their pinned source baseline for any future explicitly admitted product feature.",
+  "status": "Unbuilt next batch."
+}

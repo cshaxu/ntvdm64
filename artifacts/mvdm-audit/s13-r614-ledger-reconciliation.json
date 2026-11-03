@@ -1,0 +1,11 @@
+{
+  "scope": "Reconcile the retained-guard negative test with current source, without changing product code.",
+  "evidence": {
+    "bios_gisp": "OpenNT bios.c lines 309-321 place the IRET_HOOKS/GISP_CPU arm under the non-NTVDM alternative; the current outer alternative rejects it as a whole.",
+    "deleted_files": "nt_hunt.c and nt_aorc.c were removed as uncompiled files under MVDM-HOST-DIV-723 and MVDM-HOST-DIV-720 respectively.",
+    "retained_guards": "Ten remaining entries use current physical guard lines; the retained macro, surrounding source and error remain subject to the real MSVC negative test.",
+    "rtl_line": "The RTL time selector still rejects the unsupported compound condition; #line 51 now separates the selector from the rejection. The test accepts this diagnostic mapping."
+  },
+  "initial_failure": "Stale physical source offsets and stale records of previously removed files prevented the historical test from reaching its actual preprocessor checks.",
+  "boundary": "These records do not prove all supported compilation contexts; they validate only the explicitly recorded excluded guard witnesses."
+}
