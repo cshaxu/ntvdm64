@@ -1152,7 +1152,9 @@ TYPE0F01_2:
 
 	 case 7:   /* T2 INVLPG Mm */
 
+#line 1097
 #ifdef SPC486
+#line 1098
 #error Excluded unsupported SPC486 profile
 #else
 #line 1106
@@ -1273,7 +1275,9 @@ TYPE0F02:
 
       case  0x08:   /* T0 INVD */
 
+#line 1222
 #ifdef SPC486
+#line 1223
 #error Excluded unsupported SPC486 profile
 #else
 #line 1229
@@ -1285,7 +1289,9 @@ TYPE0F02:
 
       case  0x09:   /* T0 WBINVD */
 
+#line 1236
 #ifdef SPC486
+#line 1237
 #error Excluded unsupported SPC486 profile
 #else
 #line 1243
@@ -1573,7 +1579,9 @@ TYPE0FAB:
 
       case  0xb0:   /* T5 CMPXCHG Eb Gb */
 
+#line 1526
 #ifdef SPC486
+#line 1527
 #error Excluded unsupported SPC486 profile
 #else
 #line 1537
@@ -1585,7 +1593,9 @@ TYPE0FAB:
 
       case  0xb1:   /* T5 CMPXCHG Ev Gv */
 
+#line 1544
 #ifdef SPC486
+#line 1545
 #error Excluded unsupported SPC486 profile
 #else
 #line 1567
@@ -1732,7 +1742,9 @@ TYPE0FAB:
 
       case  0xc0:   /* T8 XADD Eb Gb */
 
+#line 1705
 #ifdef SPC486
+#line 1706
 #error Excluded unsupported SPC486 profile
 #else
 #line 1717
@@ -1744,7 +1756,9 @@ TYPE0FAB:
 
       case  0xc1:   /* T8 XADD Ev Gv */
 
+#line 1724
 #ifdef SPC486
+#line 1725
 #error Excluded unsupported SPC486 profile
 #else
 #line 1749
@@ -1763,7 +1777,9 @@ TYPE0FAB:
       case  0xce:
       case  0xcf:
 
+#line 1763
 #ifdef SPC486
+#line 1764
 #error Excluded unsupported SPC486 profile
 #else
 #line 1781
@@ -4555,7 +4571,9 @@ LOCAL VOID
 
       /* All FLAGS are cleared */
       /* NB. VM MUST BE CLEARED BEFORE SEGMENT REGISTERS ARE LOADED. */
+#line 4738
 #ifdef SPC486
+#line 4739
 #error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
 #line 4741
@@ -4591,7 +4609,9 @@ LOCAL VOID
       load_pseudo_descr(GS_REG);
 
       SET_CR(CR_STAT, 0);
+#line 4773
 #ifdef SPC486
+#line 4774
 #error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
 #line 4777
@@ -4622,7 +4642,9 @@ LOCAL VOID
 
       SET_EAX(0);
       SET_ECX(0);   /* Really Undefined */
+#line 4800
 #ifdef SPC486
+#line 4801
 #error Excluded unsupported SPC486 profile
 #else
 #line 4803

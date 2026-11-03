@@ -377,7 +377,9 @@ IFN4(
    the book says...
  */
 
+#line 460
 #ifdef SPC486
+#line 461
 #error Excluded unsupported SPC486 profile
 #else
 #line 463

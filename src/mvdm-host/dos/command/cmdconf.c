@@ -130,9 +130,12 @@ ErrExit:
 VOID DeleteConfigFiles(VOID)
 {
     if (pchTmpConfigFile)  {
+#line 132
 #if DBG
+#line 133
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 135
         DeleteFile(pchTmpConfigFile);
 
 	free(pchTmpConfigFile);
@@ -140,9 +143,12 @@ VOID DeleteConfigFiles(VOID)
         }
 
     if (pchTmpAutoexecFile) {
+#line 142
 #if DBG
+#line 143
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 145
         DeleteFile(pchTmpAutoexecFile);
 
 	free(pchTmpAutoexecFile);

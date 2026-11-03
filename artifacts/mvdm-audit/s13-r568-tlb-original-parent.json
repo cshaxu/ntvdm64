@@ -1,0 +1,39 @@
+{
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_tlb.c",
+  "guards": [
+    {
+      "line": 205,
+      "parents": []
+    },
+    {
+      "line": 275,
+      "parents": []
+    },
+    {
+      "line": 380,
+      "parents": []
+    },
+    {
+      "line": 449,
+      "parents": []
+    },
+    {
+      "line": 722,
+      "parents": []
+    },
+    {
+      "line": 762,
+      "parents": []
+    },
+    {
+      "line": 906,
+      "parents": [
+        {
+          "line": 858,
+          "directive": "#ifdef PIG"
+        }
+      ]
+    }
+  ],
+  "scope": "Original seventh SPC486 guard is nested under outer PIG and is excluded with that outer body; it must not be reconstructed inside #error."
+}

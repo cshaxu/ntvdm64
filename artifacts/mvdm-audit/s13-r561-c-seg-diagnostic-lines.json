@@ -1,0 +1,12 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+  "original": "O:/repos.external/OpenNT/base/mvdm/softpc.new/base/ccpu386/c_seg.c",
+  "guards": [
+    { "original_if": 77, "original_endif": 79, "following": 80 },
+    { "original_if": 116, "original_endif": 118, "following": 119 },
+    { "original_if": 305, "original_endif": 307, "following": 308 }
+  ],
+  "change": "Restore original logical lines for each retained SPC486 guard and its excluded-body error; existing following anchors remain.",
+  "local_selected_condition": "The separate CPU_40_STYLE branch is the already registered MVDM-HOST-DIV-227 adapter and remains untouched.",
+  "status": "r567 cached x86, x86-extra and x64 builds passed; per-file condition review recorded in s13-r569-reviewed-files.json. SPC486 is not selected in observed product configurations."
+}

@@ -1,0 +1,152 @@
+{
+  "scope": "Seven selected CCPU translation units: add original diagnostic anchors to unselected SPC486 error arms without altering selected branches.",
+  "proof": "Equal guarded contexts and original directive identity checked before all edits. In c_tlb.c the seventh original SPC486 guard belongs to the excluded outer PIG body and is intentionally not entered.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_bsic.c",
+      "before_sha256": "c8db065db5dc69f0976517ae6c079335214c4f3c801ff805e79582419b334d91",
+      "after_sha256": "ba52463dede842e4f8e0fb5c2b9e6ebd90b95ad2679957828267b1fb758ac278",
+      "guards": [
+        {
+          "original_if_line": 136,
+          "original_error_line": 137
+        },
+        {
+          "original_if_line": 334,
+          "original_error_line": 335
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_reg.c",
+      "before_sha256": "42050a2cfe35ce35d6a713c1c5de606eebbf436f75a2142381d47a3c0e3fee50",
+      "after_sha256": "9349fd0750b2a01df23b75ab15d65a5873dddb4834724c3f2f83bb18186972cf",
+      "guards": [
+        {
+          "original_if_line": 1209,
+          "original_error_line": 1210
+        },
+        {
+          "original_if_line": 1417,
+          "original_error_line": 1418
+        },
+        {
+          "original_if_line": 1555,
+          "original_error_line": 1556
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.c",
+      "before_sha256": "a2dca4afd750314d4f79311ca8757a595dcabbd1e3312e27e5b96b292aa1ff20",
+      "after_sha256": "a33a875e03ab6e03b4fbc7d16411adb106785e04647b54125359a81a51a1ee9d",
+      "guards": [
+        {
+          "original_if_line": 460,
+          "original_error_line": 461
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tlb.c",
+      "before_sha256": "63601f275852cc347f33c880c4b8d26526b89c9d7aeeb06c32683030c060b5df",
+      "after_sha256": "4f568e6257bbd192d9b8bd656e7b06c001238c1e1147c4e36be220f751187289",
+      "guards": [
+        {
+          "original_if_line": 205,
+          "original_error_line": 206
+        },
+        {
+          "original_if_line": 380,
+          "original_error_line": 381
+        },
+        {
+          "original_if_line": 449,
+          "original_error_line": 450
+        },
+        {
+          "original_if_line": 722,
+          "original_error_line": 723
+        },
+        {
+          "original_if_line": 762,
+          "original_error_line": 763
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/mov.c",
+      "before_sha256": "c5b14a99fe4c9a2b0cea442a5f70d090cb58ee76152447698592f677b606cda8",
+      "after_sha256": "58fe3be87395df048bd97772a752acf75352c026278ad827aaca990888583f9b",
+      "guards": [
+        {
+          "original_if_line": 93,
+          "original_error_line": 94
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/zfrsrvd.c",
+      "before_sha256": "fc9820e325c72ec491564cc4ae6499089e109dae3c2721cb075aff31042a25c7",
+      "after_sha256": "acb5eada1a872bc2a4be06cb726e50bffa6e596756b78fa7e929fedef42aa36f",
+      "guards": [
+        {
+          "original_if_line": 4844,
+          "original_error_line": 4845
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.c",
+      "before_sha256": "210e99091666ec1fecca9ef95a3c0ca4987e4ee63ee46967b00edfb3c8deef67",
+      "after_sha256": "eaa3efe56b07c490da0e62596ac1d3d6595b4381f444eef70036a05d22eadf2d",
+      "guards": [
+        {
+          "original_if_line": 1097,
+          "original_error_line": 1098
+        },
+        {
+          "original_if_line": 1222,
+          "original_error_line": 1223
+        },
+        {
+          "original_if_line": 1236,
+          "original_error_line": 1237
+        },
+        {
+          "original_if_line": 1526,
+          "original_error_line": 1527
+        },
+        {
+          "original_if_line": 1544,
+          "original_error_line": 1545
+        },
+        {
+          "original_if_line": 1705,
+          "original_error_line": 1706
+        },
+        {
+          "original_if_line": 1724,
+          "original_error_line": 1725
+        },
+        {
+          "original_if_line": 1763,
+          "original_error_line": 1764
+        },
+        {
+          "original_if_line": 4738,
+          "original_error_line": 4739
+        },
+        {
+          "original_if_line": 4773,
+          "original_error_line": 4774
+        },
+        {
+          "original_if_line": 4800,
+          "original_error_line": 4801
+        }
+      ]
+    }
+  ],
+  "status": "r567 cached x86, x86-extra and x64 builds passed; full per-file review of these seven translation units remains pending"
+}

@@ -4850,7 +4850,9 @@ void TakeNpxExceptionInt()
 	NpxIntrNeeded = FALSE;
 	NpxFIP = NpxExceptionEIP;
 
+#line 4844
 #ifdef	SPC486
+#line 4845
 #error Excluded unsupported SPC486 profile
 #else	/* SPC486 */
 #line 4858

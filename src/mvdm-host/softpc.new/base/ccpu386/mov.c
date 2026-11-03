@@ -90,7 +90,9 @@ IFN2(
    }
 
 
+#line 93
 #ifdef SPC486
+#line 94
 #error Excluded unsupported SPC486 profile
 #else
 #line 97

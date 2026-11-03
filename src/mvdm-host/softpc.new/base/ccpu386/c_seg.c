@@ -75,7 +75,9 @@ IFN3(
       /* Protected Mode */
 
       /* show segment has been accessed (i486 only writes if changed) */
+#line 77
 #ifdef	SPC486
+#line 78
 #error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
 #line 80
@@ -121,7 +123,9 @@ IFN3(
 
    {
    /* show segment has been accessed (i486 only writes if changed) */
+#line 116
 #ifdef	SPC486
+#line 117
 #error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
 #line 119
@@ -331,7 +335,9 @@ IFN2(
 	    NP(selector, FAULT_LOADDS_NOTPRESENT);
 
 	 /* show segment has been accessed (i486 only writes if changed) */
+#line 305
 #ifdef	SPC486
+#line 306
 #error Excluded unsupported SPC486 profile
 #endif	/* SPC486 */
 #line 308

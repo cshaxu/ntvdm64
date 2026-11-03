@@ -1,0 +1,90 @@
+{
+  "package": "build/t473-s13/r567-phase1-package",
+  "build": "build/t473-s13/r567-full-build-results.json",
+  "comparison": "artifacts/mvdm-audit/s13-r567-build-image-compare.json",
+  "prior_test_evidence": "artifacts/mvdm-audit/s13-r481-full-verification.json",
+  "test_reuse_reason": "Seven images byte-identical and three differ only at independently parsed PE/debug timestamps versus previous published package, so product runtime testing was not repeated.",
+  "backup": "build/t473-s13/r567-publish-backup",
+  "rows": [
+    {
+      "name": "run16.exe",
+      "sha256": "be39650e0dbec010ed10e7db3252cc58abfbc534ce4dbf752bb3ed107c0c138b",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "ntsrv.exe",
+      "sha256": "37c594c394caaa26711f5596db24b73b775e7da0d0aa8441488487b4a1b45bbd",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "ntcon.exe",
+      "sha256": "d91412c7708efc3e091ad7a9aacdef104702d728f693ff1d9bb3924a4b1b81d5",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "ntvdm.exe",
+      "sha256": "5a6fd30bfc079aaf79c4e5249a676f1dbc0488e3572c6a183e60cb9483acc339",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "ntvwm.exe",
+      "sha256": "cac1f5c67b233be83ab63fb3c979800d5ae8e324e48b3381a8e952629e086378",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "ntmon.exe",
+      "sha256": "4df75031a7d19a6c853b680476d0c3fbd7a200fd60d85a1dce1e96f099f8c345",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "WOW32.DLL",
+      "sha256": "cf89e62f7f103619db26584e47ad8e5c24f5a12064d72fcb89be9ea298e12b83",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "sha256": "7a0886e9d3d4c5c4a5a4bfb29ccea06c8d86576e96231a48b1eef15723aaa155",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "nthook32.dll",
+      "sha256": "4761a907eb157ea62774db53a72276735e9306165565c73cf78d9d8dfe8a9b14",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "nthook64.dll",
+      "sha256": "1b35e28c869be47cb4834efa256efc3676de8b82dcd13fc3ff6a16bae1408464",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    }
+  ]
+}

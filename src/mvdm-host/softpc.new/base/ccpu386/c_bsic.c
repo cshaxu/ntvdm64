@@ -133,7 +133,9 @@ c_getEFLAGS IFN0()
 
    flags = flags | GET_VM() << 17 | GET_RF() << 16;
 
+#line 136
 #ifdef SPC486
+#line 137
 #error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
 #line 139
@@ -333,7 +335,9 @@ IFN1(
    if ( GET_CPL() == 0 )
       SET_VM((flags & BIT17_MASK) != 0);
 
+#line 334
 #ifdef SPC486
+#line 335
 #error Excluded unsupported SPC486 profile
 #endif /* SPC486 */
 #line 337

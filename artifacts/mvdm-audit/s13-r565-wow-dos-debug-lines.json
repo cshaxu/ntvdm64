@@ -1,0 +1,16 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/wow32/wole2.c",
+      "original": "O:/repos.external/OpenNT/base/mvdm/wow32/wole2.c",
+      "guards": [ { "if": 90, "endif": 92, "following": 93 }, { "if": 115, "endif": 118, "following": 119 } ]
+    },
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "original": "O:/repos.external/OpenNT/base/mvdm/dos/command/cmdconf.c",
+      "guards": [ { "if": 132, "endif": 134, "following": 135 }, { "if": 142, "endif": 144, "following": 145 } ]
+    }
+  ],
+  "scope": "Add original logical line positions to existing DBG-disabled error branches and restore original following-line position. Product release command contexts do not enable DBG; no selected statement is changed.",
+  "status": "r567 cached x86, x86-extra and x64 builds passed; per-file condition review recorded in s13-r569-reviewed-files.json."
+}

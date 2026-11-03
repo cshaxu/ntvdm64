@@ -202,7 +202,9 @@ LOCAL IU32 page_address[NR_TLB_SETS * NR_TLB_ENTRIES * NR_ACCESS_MODES];
    Encoded access check matrix, true indicates access failure.
  */
 
+#line 205
 #ifdef SPC486
+#line 206
 #error Excluded unsupported SPC486 profile
 #else
 #line 227
@@ -329,7 +331,9 @@ IFN2(
 	 /* Cache Hit <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< */
 
 	 /* check access validity */
+#line 380
 #ifdef SPC486
+#line 381
 #error Excluded unsupported SPC486 profile
 #else
 #line 383
@@ -400,7 +404,9 @@ IFN2(
 
 
    /* check access validity */
+#line 449
 #ifdef SPC486
+#line 450
 #error Excluded unsupported SPC486 profile
 #else
 #line 452
@@ -687,7 +693,9 @@ xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
 	 /* Cache Hit */
 
 	 /* check access validity */
+#line 722
 #ifdef SPC486
+#line 723
 #error Excluded unsupported SPC486 profile
 #else
 #line 725
@@ -730,7 +738,9 @@ xtrn2phy_core(LIN_ADDR lin, IUM8 access_request, PHY_ADDR *phy, BOOL cache_only)
       comb |= PG_W;   /* both tables allow write */
 
    /* check access validity */
+#line 762
 #ifdef SPC486
+#line 763
 #error Excluded unsupported SPC486 profile
 #else
 #line 765

@@ -1,0 +1,53 @@
+{
+  "scope": "Three original source files; each original single-level excluded guard and physical line anchor checked.",
+  "local_conditions": {
+    "c_seg.c": "CPU_40_STYLE DIV-227 remains selected and unchanged; no nested conditional in the local adapter.",
+    "wole2.c": "STATUS_INFO_LENGTH_MISMATCH header-availability fallback remains unchanged; it defines an SDK constant only when absent.",
+    "cmdconf.c": "No additional condition groups."
+  },
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/command/cmdconf.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\command\\cmdconf.c",
+      "current_sha256": "384e0bbaec0adee87f78ecde75d6f760b1a6dc7ea28d16d310715c47a4b8c782",
+      "original_sha256": "32892c8c489bed9e4be8faed12e1bafbc6c580ba81a509425e8493de1e6ffc0a",
+      "original_guard_lines": [
+        132,
+        142
+      ],
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wole2.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wole2.c",
+      "current_sha256": "f827c3cd91b760fe5f8bff86f4d7375dff6c7293cea105d9f18f6c5c3da43f43",
+      "original_sha256": "85fab0277735cff414d0f339557f110bf1501cbbe0f933dcf95232d9a61fd5e9",
+      "original_guard_lines": [
+        90,
+        115
+      ],
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_seg.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_seg.c",
+      "current_sha256": "83364138700518be33f08250a120200661b3f670d1cb14626a1dc1d6841ea392",
+      "original_sha256": "6e5f4607f259d50abe7ad27741e48d6110737097da88ea46627fa275903135c9",
+      "original_guard_lines": [
+        77,
+        116,
+        305
+      ],
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ]
+    }
+  ],
+  "limitations": "Original conditional structure and recorded local guards reviewed; no claim that all nonconditional source contents are identical."
+}

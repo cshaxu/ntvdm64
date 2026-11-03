@@ -1,0 +1,13 @@
+{
+  "path": "src/mvdm-host/wow32/wmmedia1.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmedia1.c",
+  "original_if_line": 37,
+  "original_endif_line": 553,
+  "current_sha256": "5f05fbe4943789d44b22c05f49f85cd4ca55fbbb340a6226adcc8d2e9a8795c5",
+  "original_sha256": "74b1872bf1afff7a59721564f52b33c4fd74d9d7e329ccdbff33f6bd612778d2",
+  "reason": "The original literal false outer branch is unreachable; its nested original DBG group is correctly removed with its body. The current arm is #error and #line only.",
+  "observed_in": [
+    "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+  ],
+  "limitations": "The original branch is not executable; no claim is made about unrelated multimedia recovery."
+}

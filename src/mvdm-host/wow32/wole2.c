@@ -91,9 +91,12 @@ BOOL GetThreadIDHTASKALIAS(
                 &cid );
 
     if ( !NT_SUCCESS(Status) ) {
+#line 90
 #if DBG
+#line 91
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 93
         return( FALSE );
     }
 
@@ -116,9 +119,12 @@ BOOL GetThreadIDHTASKALIAS(
 
     Status = NtClose( hThread );
     if ( !NT_SUCCESS(Status) ) {
+#line 115
 #if DBG
+#line 116
 #error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
 #endif
+#line 119
         return( FALSE );
     }
     return( TRUE );
