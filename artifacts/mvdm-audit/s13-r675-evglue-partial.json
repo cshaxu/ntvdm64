@@ -1,0 +1,113 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/cvidc/ev_glue.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\ev_glue.c",
+  "current_sha256": "671d15f3908c33ca9a84c904780c81abfc5c8555bf41c6c95658cf7a34e78fd0",
+  "original_sha256": "a12ddfd55dbd3b4426ff20075c46a665c6a30c6a955f24f6ab4872fb4895e935",
+  "observed_in": [
+    "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+    "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+  ],
+  "groups": [
+    {
+      "original_line": 20,
+      "current_line": 22,
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "CCPU",
+          "original_line": 20,
+          "current_line": 22,
+          "disposition": "retained"
+        }
+      ]
+    },
+    {
+      "original_line": 48,
+      "current_line": 54,
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "CCPU",
+          "original_line": 48,
+          "current_line": 54,
+          "disposition": "retained"
+        }
+      ]
+    },
+    {
+      "original_line": 54,
+      "current_line": 64,
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "C_VID",
+          "original_line": 54,
+          "current_line": 64,
+          "disposition": "retained"
+        }
+      ]
+    },
+    {
+      "original_line": 746,
+      "current_line": 756,
+      "arms": [
+        {
+          "kind": "ifdef",
+          "expression": "CCPU",
+          "original_line": 746,
+          "current_line": 756,
+          "disposition": "retained"
+        }
+      ]
+    },
+    {
+      "original_line": 771,
+      "current_line": 782,
+      "arms": [
+        {
+          "kind": "ifndef",
+          "expression": "PROD",
+          "original_line": 771,
+          "current_line": 782,
+          "disposition": "error-only"
+        }
+      ]
+    }
+  ],
+  "retained_leaf_differences": [
+    {
+      "original_line": 48,
+      "current_line": 54,
+      "condition": "CCPU"
+    }
+  ],
+  "known_local_divergences": [
+    "MVDM-HOST-DIV-137",
+    "MVDM-HOST-DIV-156",
+    "MVDM-HOST-DIV-076"
+  ],
+  "excluded_divergence": "MVDM-HOST-DIV-500",
+  "nested_branch_direct_text_note": "MVDM-HOST-DIV-156 adds mvdm_cvidc_bind_vectors() inside the retained CCPU branch containing a nested condition; this direct text was not compared by the leaf-only check.",
+  "method": "Actual x86 and x64-reference Ninja commands preprocess a temporary instrumented source copy with one marker within each retained CCPU or C_VID arm.",
+  "preprocess": [
+    {
+      "graph": "msvc-x86-release",
+      "instrumented_preprocessed_sha256": "0b3680620f1a20126e76fb69d69450d8d30ccc4aeac41556abfc6114b991c15b"
+    },
+    {
+      "graph": "msvc-x64-release",
+      "instrumented_preprocessed_sha256": "0b3680620f1a20126e76fb69d69450d8d30ccc4aeac41556abfc6114b991c15b"
+    }
+  ],
+  "status": "conditional tree completed; retained adaptation differences matched to registered local divergences",
+  "limits": "Preprocessor witnesses selected paths only; original code outside conditional groups and unenumerated contexts remain open.",
+  "full_original_diff_sha256": "77bfbc9fdc69284a7363dc290e064f1fe61c2b2db4794a9a75127bf8813b37ed",
+  "diff_hunk_headers": [
+    "@@ -16,6 +16,8 @@",
+    "@@ -27,6 +29,10 @@",
+    "@@ -48,7 +54,11 @@ extern IU32 gvi_pc_low_regen;",
+    "@@ -762,6 +772,7 @@ OUTPUT: None.",
+    "@@ -769,9 +780,10 @@ setup_vga_globals IFN0()"
+  ],
+  "registry_correction": "MVDM-HOST-DIV-137 scope corrected to include ev_glue.c strong zero-initialized Gdp definition."
+}

@@ -4036,8 +4036,8 @@
       "sha256": "671d15f3908c33ca9a84c904780c81abfc5c8555bf41c6c95658cf7a34e78fd0",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-selected-cvid-tree",
+      "additional_evidence": "s13-r675-evglue-partial.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\cvidc\\ev_glue.c",
       "original_candidate_sha256": "a12ddfd55dbd3b4426ff20075c46a665c6a30c6a955f24f6ab4872fb4895e935"
     },
