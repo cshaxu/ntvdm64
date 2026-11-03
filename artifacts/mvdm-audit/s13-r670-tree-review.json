@@ -1,0 +1,1336 @@
+{
+  "scope": "Conservative tree comparison; only rejected bodies may discard nested original groups. All other branches recurse and leaf text must match.",
+  "limits": "Does not resolve alternative compile contexts, source patches outside branch bodies, ambiguous directive syntax or lack of explicit continuation anchors. Retained original branch leaves are compared after trimming boundary whitespace; local adaptations outside conditional groups remain separately tracked. Supported-context enumeration remains open.",
+  "candidates": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/yoda.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\yoda.h",
+      "current_sha256": "5887ccb0be62271c5d5869ece416c55aafadf4bf75730ca1d9f1ce8b9d4a742e",
+      "original_sha256": "9488860e836e9b4fb17ec69558bc65ce1a8afb99286f62e6092759c959569fc1",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "groups": {
+        "retained": 2,
+        "excluded": 2,
+        "groups": 2
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 46,
+          "current_endif": 45,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PROD",
+              "original_line": 38,
+              "current_line": 38,
+              "disposition": "retained",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 42,
+              "current_line": 42,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 71,
+          "current_endif": 61,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 52,
+              "current_line": 52,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 69,
+              "current_line": 58,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/mouse.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\mouse.c",
+      "current_sha256": "c82031be6b27b472780c58209a474e589387d52e243b78e62a8f14c0e2780232",
+      "original_sha256": "2d196d9f0c1ef860436d8eb47c01820913a1164dd1b32e3bd518226653476785",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 19,
+        "groups": 19
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 32,
+          "current_endif": 33,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SCCSID",
+              "original_line": 30,
+              "current_line": 30,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 41,
+          "current_endif": 44,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SEGMENTATION",
+              "original_line": 34,
+              "current_line": 36,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 78,
+          "current_endif": 83,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 76,
+              "current_line": 80,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 126,
+          "current_endif": 130,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 121,
+              "current_line": 127,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 150,
+          "current_endif": 153,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 145,
+              "current_line": 150,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 166,
+          "current_endif": 163,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 156,
+              "current_line": 160,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 193,
+          "current_endif": 189,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 188,
+              "current_line": 186,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 227,
+          "current_endif": 222,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 222,
+              "current_line": 219,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 239,
+          "current_endif": 234,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 235,
+              "current_line": 231,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 271,
+          "current_endif": 266,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 267,
+              "current_line": 263,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 286,
+          "current_endif": 281,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 282,
+              "current_line": 278,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 293,
+          "current_endif": 288,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 289,
+              "current_line": 285,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 304,
+          "current_endif": 298,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 299,
+              "current_line": 295,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 321,
+          "current_endif": 314,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 316,
+              "current_line": 311,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 346,
+          "current_endif": 341,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SEGMENTATION",
+              "original_line": 339,
+              "current_line": 333,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 382,
+          "current_endif": 379,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SEGMENTATION",
+              "original_line": 375,
+              "current_line": 371,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 394,
+          "current_endif": 390,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 389,
+              "current_line": 387,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 409,
+          "current_endif": 404,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "KIPPER",
+              "original_line": 404,
+              "current_line": 401,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 416,
+          "current_endif": 410,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 411,
+              "current_line": 407,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/timestrb.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\timestrb.c",
+      "current_sha256": "8d3472bba03117e0378be943bdcaaf32403e418e828bc59737c43eb1608d1f39",
+      "original_sha256": "e314b1b5e88474ac9d1c978b3db71820fee667f7de3eff23b66e48bf0d3532e7",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 6,
+        "groups": 6
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 38,
+          "current_endif": 39,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SEGMENTATION",
+              "original_line": 31,
+              "current_line": 31,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 59,
+          "current_endif": 61,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "HUNTER",
+              "original_line": 56,
+              "current_line": 58,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 79,
+          "current_endif": 83,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "!defined(REAL_TIMER) && !defined(NTVDM)",
+              "original_line": 77,
+              "current_line": 80,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 83,
+          "current_endif": 89,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "HUNTER",
+              "original_line": 81,
+              "current_line": 86,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 97,
+          "current_endif": 97,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "NTVDM",
+              "original_line": 86,
+              "current_line": 94,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 118,
+          "current_endif": 121,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "EGA_DUMP",
+              "original_line": 116,
+              "current_line": 118,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/host_hfx.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\host_hfx.h",
+      "current_sha256": "34e8910a1605eb0acc5e9e2a598146b5aa825be46bdaea44c849734d5746de08",
+      "original_sha256": "48a9b2bf6c4439301182aa118fe42afb8aafaa20146b2597021af162f2465f85",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "groups": {
+        "excluded": 2,
+        "groups": 2
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 17,
+          "current_endif": 18,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SCCSID",
+              "original_line": 15,
+              "current_line": 15,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 238,
+          "current_endif": 25,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "HFX",
+              "original_line": 19,
+              "current_line": 22,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_fulsc.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_fulsc.h",
+      "current_sha256": "2da1daa4fa1cc16433a74d8edfa678f89acc7fdaacffc534e453dcc9cab1163c",
+      "original_sha256": "733fe8aaef56e9febc5e2f35ac03057918df2bf75173779870e2b07dc673e1d0",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "groups": {
+        "excluded": 6,
+        "retained": 1,
+        "groups": 6
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 107,
+          "current_endif": 91,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 77,
+              "current_line": 77,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 97,
+              "current_line": 80,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 141,
+          "current_endif": 126,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "X86GFX",
+              "original_line": 137,
+              "current_line": 123,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 151,
+          "current_endif": 139,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 149,
+              "current_line": 136,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 159,
+          "current_endif": 149,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "X86GFX",
+              "original_line": 156,
+              "current_line": 146,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 245,
+          "current_endif": 192,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "X86GFX",
+              "original_line": 197,
+              "current_line": 189,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 253,
+          "current_endif": 200,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "X86GFX",
+              "original_line": 248,
+              "current_line": 197,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/inc/nt_pif.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\inc\\nt_pif.h",
+      "current_sha256": "6ee720b91a5697745e224313655cd514dac4887b1088a5af70ad705f4d0c0206",
+      "original_sha256": "a8069d676141812cddc35adb0b29ea58e58bba0a7f29dcf287468108188b8d09",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "groups": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 1
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 100,
+          "current_endif": 100,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "NTVDM",
+              "original_line": 89,
+              "current_line": 89,
+              "disposition": "retained",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 97,
+              "current_line": 97,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_det.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_det.c",
+      "current_sha256": "070cfee114fdb3c7277f6584bfc449e1d5737ea94aaf279a61f74237af48b86f",
+      "original_sha256": "c58d15d58672440bf94e015f61a10b43311e601ae150dae5b1559f2399f9dadc",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 8,
+        "groups": 8,
+        "retained": 2
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 95,
+          "current_endif": 94,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "X86GFX",
+              "original_line": 91,
+              "current_line": 91,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 149,
+          "current_endif": 150,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 146,
+              "current_line": 147,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 184,
+          "current_endif": 187,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "X86GFX",
+              "original_line": 182,
+              "current_line": 184,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 224,
+          "current_endif": 216,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "X86GFX",
+              "original_line": 206,
+              "current_line": 210,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 222,
+              "current_line": 213,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 234,
+          "current_endif": 228,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "X86GFX",
+              "original_line": 228,
+              "current_line": 221,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 231,
+              "current_line": 224,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 252,
+          "current_endif": 245,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "X86GFX",
+              "original_line": 247,
+              "current_line": 242,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1558,
+          "current_endif": 253,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "X86GFX",
+              "original_line": 256,
+              "current_line": 250,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1611,
+          "current_endif": 260,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PLANEDUMPER",
+              "original_line": 1560,
+              "current_line": 257,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_sas.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_sas.c",
+      "current_sha256": "7a136999330a3fa6c10311bcd6c08f3701585a67bc8925c1510c20ab583b2d7c",
+      "original_sha256": "077663754025071c48ec5f0bfebbcf07e1a6bcc240153b40545ef6f3c59c8344",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 3,
+        "groups": 3
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 31,
+          "current_endif": 31,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SUN_VA",
+              "original_line": 28,
+              "current_line": 28,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 119,
+          "current_endif": 38,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "HOST_SAS",
+              "original_line": 33,
+              "current_line": 35,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 140,
+          "current_endif": 56,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SUN_VA",
+              "original_line": 133,
+              "current_line": 53,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "current_sha256": "16a8b32410aec2db3c9f4a00b109f4d81fa54a158cacfed86c883373e73e95d2",
+      "original_sha256": "2a109f11985507463797e60b8b19fc12441bd18278b1444dde581cc351de72ed",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 18,
+        "groups": 18,
+        "retained": 8
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 100,
+          "current_endif": 101,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 98,
+              "current_line": 98,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 135,
+          "current_endif": 128,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "MONITOR",
+              "original_line": 119,
+              "current_line": 121,
+              "disposition": "retained",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 123,
+              "current_line": 125,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 185,
+          "current_endif": 164,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 167,
+              "current_line": 161,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 254,
+          "current_endif": 200,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "MONITOR",
+              "original_line": 214,
+              "current_line": 194,
+              "disposition": "retained",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 217,
+              "current_line": 197,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 290,
+          "current_endif": 222,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 271,
+              "current_line": 219,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 322,
+          "current_endif": 255,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 319,
+              "current_line": 252,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 364,
+          "current_endif": 288,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "MONITOR",
+              "original_line": 349,
+              "current_line": 283,
+              "disposition": "retained",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 351,
+              "current_line": 285,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 404,
+          "current_endif": 300,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "MONITOR",
+              "original_line": 370,
+              "current_line": 295,
+              "disposition": "retained",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 372,
+              "current_line": 297,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 430,
+          "current_endif": 325,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 425,
+              "current_line": 322,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 502,
+          "current_endif": 349,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "MONITOR",
+              "original_line": 448,
+              "current_line": 344,
+              "disposition": "retained",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 450,
+              "current_line": 346,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 522,
+          "current_endif": 367,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 516,
+              "current_line": 364,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 579,
+          "current_endif": 392,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "MONITOR",
+              "original_line": 541,
+              "current_line": 387,
+              "disposition": "retained",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 543,
+              "current_line": 389,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 615,
+          "current_endif": 415,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 598,
+              "current_line": 412,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 635,
+          "current_endif": 434,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 630,
+              "current_line": 431,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 681,
+          "current_endif": 459,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "MONITOR",
+              "original_line": 654,
+              "current_line": 454,
+              "disposition": "retained",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 656,
+              "current_line": 456,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 700,
+          "current_endif": 478,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 696,
+              "current_line": 475,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 795,
+          "current_endif": 526,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 744,
+              "current_line": 523,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1119,
+          "current_endif": 581,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "MONITOR",
+              "original_line": 802,
+              "current_line": 534,
+              "disposition": "retained",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 846,
+              "current_line": 578,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vdd.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vdd.c",
+      "current_sha256": "dd8d1716f5ba87960158367b2aabe5e9b486a5a50f95ebf6f716207380b3674a",
+      "original_sha256": "cb97f2c233b1062dae7942dfa3b2bc84d9f21b9d6527f6c993a99137c2c845e3",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "retained": 1,
+        "excluded": 9,
+        "groups": 9
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 50,
+          "current_endif": 43,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "ANSI",
+              "original_line": 29,
+              "current_line": 29,
+              "disposition": "retained",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 40,
+              "current_line": 40,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 87,
+          "current_endif": 79,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 81,
+              "current_line": 76,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 221,
+          "current_endif": 215,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 219,
+              "current_line": 212,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 280,
+          "current_endif": 276,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 278,
+              "current_line": 273,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 343,
+          "current_endif": 330,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 330,
+              "current_line": 327,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 381,
+          "current_endif": 363,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 372,
+              "current_line": 360,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 412,
+          "current_endif": 396,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 410,
+              "current_line": 393,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 438,
+          "current_endif": 413,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 425,
+              "current_line": 410,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 453,
+          "current_endif": 423,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MONITOR",
+              "original_line": 444,
+              "current_line": 420,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "held": {
+    "excluded error line missing": 70,
+    "retained-only group needs context proof": 145,
+    "group count differs": 61,
+    "group selector or alternatives differ": 3,
+    "retained leaf differs": 3
+  },
+  "context": "Product graph observations and existing error-only unsupported arms; diagnostic line anchors changed in this batch, with no intended selected-logic changes."
+}

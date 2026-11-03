@@ -40,6 +40,7 @@
 #define check_D(address, value) /*address, value*/
 #define force_yoda() 		/*	*/
 #else
+#line 43
 #error DIVERGENCE MVDM-HOST-DIV-617: unsupported alternate host profile
 #endif
 #line 47
@@ -49,12 +50,13 @@
  */
 
 #ifndef PROD
+#line 53
 #error DIVERGENCE MVDM-HOST-DIV-504: non-PROD header branch is not selected; see mirror register.
 
 
 
 #else /* !PROD */
-#line 55
+#line 70
 
 #endif /* !PROD else*/
-#line 57
+#line 72

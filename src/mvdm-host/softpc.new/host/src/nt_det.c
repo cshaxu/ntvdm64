@@ -89,6 +89,7 @@ GLOBAL WCHAR_STRING videoSection;
 GLOBAL WCHAR_STRING textSection; // Tim Oct 92
 
 #ifdef X86GFX
+#line 92
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 #line 96
@@ -181,8 +182,10 @@ GLOBAL VOID doNullRegister()
 	  )
 		ErrorExit();
 #ifdef X86GFX
+#line 183
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
+#line 185
 
 }
 
@@ -205,21 +208,25 @@ GLOBAL VOID initTextSection(VOID)
     textBufferSize.Y = 50;
 
 #ifdef X86GFX
+#line 207
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #else
 #line 223
     sc.ScreenState = WINDOWED;
 #endif
+#line 225
 
     if( !RegisterConsoleVDM( VDMForWOW ?
                                 CONSOLE_REGISTER_WOW : CONSOLE_REGISTER_VDM,
 #ifdef X86GFX
+#line 229
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #else
 #line 232
 			     NULL,
 			     NULL,
 #endif
+#line 235
                              NULL,            // sectionname no longer used
                              0,               // sectionnamelen no longer used
 	                     &stateLength,
@@ -233,6 +240,7 @@ GLOBAL VOID initTextSection(VOID)
 	ErrorExit();
 
 #ifdef X86GFX
+#line 248
 #error DIVERGENCE MVDM-HOST-DIV-510: X86GFX branch is not selected for this source; see mirror register.
 #endif
 #line 253
@@ -240,9 +248,10 @@ GLOBAL VOID initTextSection(VOID)
 } /* end initTextSection() */
 
 #ifdef X86GFX
+#line 257
 #error Unsupported excluded original configuration
 #endif /* X86GFX */
-#line 1384
+#line 1559
 
 #line 1560
 #ifdef PLANEDUMPER

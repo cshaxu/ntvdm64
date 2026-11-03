@@ -38,6 +38,7 @@ LOCAL void ms_not_a_bop (void);
 GLOBAL half_word io_get_spare_slot (void);
 GLOBAL void io_release_spare_slot (half_word);
 #else
+#line 41
 #error Unsupported excluded original configuration
 #endif
 #line 51
@@ -209,9 +210,10 @@ WORD FreeVddAdapter(HANDLE hVdd)
 }
 
 #ifdef MONITOR
+#line 220
 #error Excluded original conditional branch
 #endif /* MONITOR */
-#line 215
+#line 222
 
 
 /*** VDDInstallIOHook - This service is provided for VDDs to hook the
@@ -269,6 +271,7 @@ BOOL VDDInstallIOHook (
    WORD              wAdapter;
    PVDD_IO_PORTRANGE pPRange;
 #ifdef MONITOR
+#line 279
 #error Excluded original conditional branch
 #endif
 #line 281
@@ -322,6 +325,7 @@ BOOL VDDInstallIOHook (
           for (w = pPRange->First; w <= pPRange->Last; w++)
             {
 #ifdef MONITOR
+#line 331
 #error Excluded original conditional branch
 #endif
 #line 344
@@ -354,9 +358,10 @@ BOOL VDDInstallIOHook (
           }
 
 #ifdef MONITOR
+#line 373
 #error Excluded original conditional branch
 #endif /* MONITOR */
-#line 348
+#line 382
    return TRUE;
 }
 
@@ -386,6 +391,7 @@ VOID VDDDeInstallIOHook (
     WORD w;
     WORD wAdapter;
 #ifdef MONITOR
+#line 411
 #error Excluded original conditional branch
 #endif
 #line 413
@@ -402,18 +408,20 @@ VOID VDDDeInstallIOHook (
           for (w = pPortRange->First; w <= pPortRange->Last; w++)
             {
 #ifdef MONITOR
+#line 426
 #error Excluded original conditional branch
 #endif
-#line 388
+#line 439
               io_disconnect_port(w, (half_word)wAdapter);
               }
           pPortRange++;
 	  }
 
 #ifdef MONITOR
+#line 445
 #error Excluded original conditional branch
 #endif	/* MONITOR */
-#line 393
+#line 454
 }
 
 

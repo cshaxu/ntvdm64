@@ -198,3 +198,4 @@ IMPORT int  getModeType(VOID);
 #line 249
 #error DIVERGENCE MVDM-HOST-DIV-584: hardware X86GFX declarations are not selected
 #endif
+#line 254

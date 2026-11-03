@@ -2751,3 +2751,7 @@ ten source files after recursive condition-tree comparison. Evidence:
 MVDM-HOST-DIV-749: restore original diagnostic and continuation mappings in
 ten further sources after recursive condition-tree comparison. Evidence:
 ../../artifacts/mvdm-audit/s13-r669-tree-anchor-batch.json.
+
+MVDM-HOST-DIV-750: restore original diagnostic and continuation mappings in
+ten further sources after recursive condition-tree comparison. Evidence:
+../../artifacts/mvdm-audit/s13-r670-tree-anchor-batch.json.

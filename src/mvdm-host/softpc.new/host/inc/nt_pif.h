@@ -95,6 +95,7 @@ with no file open to edit; thus taken as default.
 */
 #define DEFAULTXMSLMT        0xffff
 #else
+#line 98
 #error Unsupported excluded original configuration
 #endif
 #line 101
