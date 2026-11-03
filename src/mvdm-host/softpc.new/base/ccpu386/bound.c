@@ -41,6 +41,7 @@ BOUND
    IUM8 op_sz		/* 16 or 32-bit */
    )
 #else
+#line 44
 #error Unsupported excluded original configuration
 #endif
 #line 49

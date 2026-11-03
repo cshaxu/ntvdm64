@@ -1,0 +1,39 @@
+{
+  "scope": "Two original DEM product translation units; original conditional directives and original diagnostic line mapping reconciled.",
+  "excluded_DBG": "The already-excluded DBG bodies remain excluded; historical register MVDM-HOST-DIV-516 and host-dem/demmsg-profile-role-review.md cover the release worker profile. This change does not add a new exclusion.",
+  "original_assertion": "demhndl.c retains the original Win32 file-origin compatibility #error diagnostic.",
+  "validation": "Directive sequence, upstream identity and source line anchors checked; the ten-changed-file batch built and was published as r618.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dos/dem/demdisp.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demdisp.c",
+      "before_sha256": "e9b7447165b02e8ca945e7360eeb5bb1af9904f53eadec88b9055a1a54745713",
+      "after_sha256": "07852265e66e49c2b6466fb74bc6c8eb0a66bc9dc8b753e57f08ce847368beee",
+      "original_sha256": "7ea3a829e3f8aad2dfe644d101cabaff514de25909db937675fc323dfce8fe3c",
+      "conditional_directives": [
+        "#if DBG",
+        "#endif // DBG",
+        "#if DBG",
+        "#endif",
+        "#if DBG",
+        "#endif",
+        "#if DBG",
+        "#endif"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/dos/dem/demhndl.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dos\\dem\\demhndl.c",
+      "before_sha256": "b7eff58c600eae81d54a78f8f45cf5b513be7b5ae9bb3cfc759c7cacef0a57cc",
+      "after_sha256": "b1bb40a4479abc1e2628033f982b7202927f43c70720c2495c122d0a54d9deb4",
+      "original_sha256": "5e951e14d7c88357dc25933b602cb756fbaf4cf47125a46d740135491b4eb958",
+      "conditional_directives": [
+        "#if (FILE_BEGIN != 0 || FILE_CURRENT != 1 || FILE_END !=2)",
+        "#endif",
+        "#if DBG",
+        "#endif"
+      ]
+    }
+  ],
+  "delivery": "s13-r618-delivery.md"
+}

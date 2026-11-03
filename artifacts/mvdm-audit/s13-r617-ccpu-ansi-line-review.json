@@ -1,0 +1,160 @@
+{
+  "scope": "Eight product CCPU source files: preserve original conditional trees and selected code, restore excluded arm diagnostic lines.",
+  "contexts": "Both observed x86 worker graphs use /DANSI and CCPU40; DOUBLE_CPU is excluded by the existing product profile. Existing exclusions were retained, not newly introduced.",
+  "validation": "Original directive sequence, original body line anchors and ANSI-selected text checked; the ten-file batch built and was published as r618.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/bound.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\bound.c",
+      "before_sha256": "6d7ebe78bfe70b5d7594223c5702bb8399d18db596fcbfb892a65fece10a4a5f",
+      "after_sha256": "8ddd9738f9c3240ed9faea1b16c11218047ad0859ca8ab30fde75ad2bf136877",
+      "original_sha256": "c82ea948fafd97bbf2c99bf3ba681d485f9c38bef75493498a465b7f556fc1f2",
+      "original_branch_body_lines": [
+        {
+          "line": 44,
+          "condition": "ANSI"
+        }
+      ],
+      "review": "all original conditions reviewed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\call.c",
+      "before_sha256": "d0982ab0455e4bc2665a9d5bb1a9fb5d76d5e6c219e2e766a3e700fe1dfe8448",
+      "after_sha256": "34bc1e7ff62725ad32e2ab98acce3c5a6f92a2c4fc9b0dac54454385db6f02e9",
+      "original_sha256": "ce5f56ea27239d0c85243cee23e01de34b1f82d3ba92eced687e2b3bd90a2a94",
+      "original_branch_body_lines": [
+        {
+          "line": 47,
+          "condition": "ANSI"
+        }
+      ],
+      "review": "other conditions still pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/jmp.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\jmp.c",
+      "before_sha256": "da944fd6a955d1bbfd18f1050f1f736c9e5602c5f0571e0a03bc19ec2aec948a",
+      "after_sha256": "e7c25ce04c9dedea6c9b8fb67df49d622b8bc30bca79028f7bb6df32037a1585",
+      "original_sha256": "470889ec4ca8311980f1b700e56d028009fc459c47eb484e1451a799ac7feb87",
+      "original_branch_body_lines": [
+        {
+          "line": 50,
+          "condition": "ANSI"
+        }
+      ],
+      "review": "other conditions still pending"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lgdt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lgdt.c",
+      "before_sha256": "85f3cd59d64d417b4e85106b7c2d92b3fb7d5171276d88d2a537359b328be085",
+      "after_sha256": "ebd809c4e812b38567818e46087fa18597ef93b3a1af186d07654e8a5983f778",
+      "original_sha256": "9a5d97d05b20a1c3e6a7e065168c1965bdcdee061fd9ca683f55896d4edf1f2c",
+      "original_branch_body_lines": [
+        {
+          "line": 41,
+          "condition": "ANSI"
+        },
+        {
+          "line": 48,
+          "condition": "DOUBLE_CPU"
+        },
+        {
+          "line": 59,
+          "condition": "ANSI"
+        },
+        {
+          "line": 66,
+          "condition": "DOUBLE_CPU"
+        }
+      ],
+      "review": "all original conditions reviewed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lidt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lidt.c",
+      "before_sha256": "249a5cfe594d7df1323f009be5c136cdfb452af1277903f6e17de5e295f6fd0c",
+      "after_sha256": "81462ebf2073e147232e34ca39a4b2f61a6b1a2a6f6b943c7b8d222ea79c8e66",
+      "original_sha256": "00305675f2235c4211471587a50a2f45c02bc93bc4faebcd857e4a96cc045fcb",
+      "original_branch_body_lines": [
+        {
+          "line": 42,
+          "condition": "ANSI"
+        },
+        {
+          "line": 57,
+          "condition": "ANSI"
+        }
+      ],
+      "review": "all original conditions reviewed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/lxs.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\lxs.c",
+      "before_sha256": "8b48a093f7824eb1ee9d8145970a87e03f97ddbc3b35458811e24f8e1a1cb07d",
+      "after_sha256": "e63ff95995c8fafd6e6fc49768b10ba5781e1c7b8a1f1720ce8682a4f4497c05",
+      "original_sha256": "5e2aab7a7bed12022ba136337f8ce289ba3155f2df7d1ad2c42ca8cd065ccfef",
+      "original_branch_body_lines": [
+        {
+          "line": 47,
+          "condition": "ANSI"
+        },
+        {
+          "line": 70,
+          "condition": "ANSI"
+        },
+        {
+          "line": 93,
+          "condition": "ANSI"
+        },
+        {
+          "line": 116,
+          "condition": "ANSI"
+        },
+        {
+          "line": 139,
+          "condition": "ANSI"
+        }
+      ],
+      "review": "all original conditions reviewed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sgdt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\sgdt.c",
+      "before_sha256": "319e5f75d332664fa70aacad97ccac1a372d31c9b6c43deb22c7166a6df907e3",
+      "after_sha256": "a67b1f8ceabd37a47eee75415555f0e2c2bc6daac3b700037f5268e2bbf6f15f",
+      "original_sha256": "b4af0fcc8d824d8fc3c2e7d40659844e66e45ee5026ffc17b43d150e513d41fc",
+      "original_branch_body_lines": [
+        {
+          "line": 42,
+          "condition": "ANSI"
+        },
+        {
+          "line": 64,
+          "condition": "ANSI"
+        }
+      ],
+      "review": "all original conditions reviewed"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/sidt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\sidt.c",
+      "before_sha256": "d64905ef2b87b602bdf9dd931e51c82a1f2cabd93080f6bd8e2ce7b075bf17d4",
+      "after_sha256": "1afd7acb7e9feee970b068f1770ccc854def8f6745cf919e9bc7606f03a27de2",
+      "original_sha256": "d6882f92a0171ebd6f5137d401e2af4f89c0e854f0349d51650096d755b1a9a0",
+      "original_branch_body_lines": [
+        {
+          "line": 42,
+          "condition": "ANSI"
+        },
+        {
+          "line": 65,
+          "condition": "ANSI"
+        }
+      ],
+      "review": "all original conditions reviewed"
+    }
+  ],
+  "delivery": "s13-r618-delivery.md"
+}

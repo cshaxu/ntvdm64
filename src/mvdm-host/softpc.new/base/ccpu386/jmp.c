@@ -47,6 +47,7 @@ JMPF
    IU32 op1[2]       /* offset:segment pointer */
    )
 #else
+#line 50
 #error Unsupported excluded original configuration
 #endif
 #line 53

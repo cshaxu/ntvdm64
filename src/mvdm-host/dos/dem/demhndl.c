@@ -440,7 +440,7 @@ DWORD   dwLoc;
 #line 369
 #if (FILE_BEGIN != 0 || FILE_CURRENT != 1 || FILE_END !=2)
 #line 370
-#error Unsupported excluded original configuration
+#error "Win32 values not DOS compatible"
 #endif
 #line 374
     hFile =  GETHANDLE (getAX(),getBP());
@@ -600,7 +600,7 @@ VOID demCommit(VOID)
 #line 528
 #if DBG
 #line 529
-#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#error Excluded unsupported DBG profile
 #endif
 #line 548
 

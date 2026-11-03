@@ -1,0 +1,31 @@
+{
+  "scope": "Two byte-identical original headers; all their conditional arms are selected by product translation units.",
+  "evidence_type": "source include order, generated product build graph and fresh MSVC preprocessing of the four actual translation units; no runtime testing",
+  "records": [
+    {
+      "path": "src/mvdm-host/inc/dossvc.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\dossvc.h",
+      "sha256": "82b5135e78bd3010128bd5dd54978b0e00aec0073f0a7e6b547cbe8dff08a91c",
+      "selector": "#ifndef _DEMINCLUDED_",
+      "negative_arm": "src/mvdm-host/vdmredir/vrnmpipe.c includes dossvc.h directly",
+      "positive_arm": "src/mvdm-host/dos/dem/demdisp.c includes dem.h, which defines _DEMINCLUDED_ before dossvc.h",
+      "graph": "build/.ninja/msvc-x86-release/worker/build.ninja: obj/redir/vrnmpipe.obj and obj/dem/demdisp.obj"
+    },
+    {
+      "path": "src/mvdm-host/inc/sharewow.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\sharewow.h",
+      "sha256": "6773774b049eed89820cf10c2354b95537e7d67c8e700566da14658dfa3a84a8",
+      "selector": "#ifndef SHAREWOW_MAIN",
+      "negative_arm": "src/mvdm-host/wow32/wkman.c includes sharewow.h without defining SHAREWOW_MAIN",
+      "positive_arm": "src/mvdm-host/wow32/wow32.c defines SHAREWOW_MAIN immediately before including sharewow.h",
+      "graph": "build/.ninja/msvc-x86-release/wow32/build.ninja: obj/wkman.obj and obj/wow32.obj"
+    }
+  ],
+  "preprocessor_witnesses": {
+    "demdisp": "extern PSYSDEV pDeviceChain;",
+    "vrnmpipe": "extern __declspec(dllimport) PSYSDEV pDeviceChain;",
+    "wow32": "HANDLE hSharedWOWMem = ((void *)0);",
+    "wkman": "extern HANDLE hSharedWOWMem;"
+  },
+  "limitation": "This establishes these two headers only, not complete supported-context enumeration."
+}

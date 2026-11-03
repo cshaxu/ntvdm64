@@ -44,6 +44,7 @@ LDS
    IU32 op2[2]	/* src(offset:selector pair) operand */
    )
 #else
+#line 47
 #error Unsupported excluded original configuration
 #endif
 #line 51
@@ -66,6 +67,7 @@ LES
    IU32 op2[2]	/* src(offset:selector pair) operand */
    )
 #else
+#line 70
 #error Unsupported excluded original configuration
 #endif
 #line 74
@@ -88,6 +90,7 @@ LFS
    IU32 op2[2]	/* src(offset:selector pair) operand */
    )
 #else
+#line 93
 #error Unsupported excluded original configuration
 #endif
 #line 97
@@ -110,6 +113,7 @@ LGS
    IU32 op2[2]	/* src(offset:selector pair) operand */
    )
 #else
+#line 116
 #error Unsupported excluded original configuration
 #endif
 #line 120
@@ -132,6 +136,7 @@ LSS
    IU32 op2[2]	/* src(offset:selector pair) operand */
    )
 #else
+#line 139
 #error Unsupported excluded original configuration
 #endif
 #line 143

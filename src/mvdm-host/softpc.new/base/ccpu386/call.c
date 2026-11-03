@@ -52,6 +52,7 @@ CALLF
    IU32 op1[2]       /* offset:segment pointer */
    )
 #else
+#line 47
 #error Unsupported excluded original configuration
 #endif
 #line 50

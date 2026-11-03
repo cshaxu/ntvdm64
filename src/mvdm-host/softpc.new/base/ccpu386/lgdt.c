@@ -38,6 +38,7 @@ LGDT16
    IU32 op1[2]	/* src(limit:base pair) operand */
    )
 #else
+#line 41
 #error Unsupported excluded original configuration
 #endif
 #line 44
@@ -45,6 +46,7 @@ LGDT16
    SET_STAR_LIMIT(GDT_REG, op1[0]);
    SET_STAR_BASE(GDT_REG, op1[1] & 0xffffff);   /* store 24-bit base */
 #ifdef DOUBLE_CPU
+#line 48
 #error Unsupported excluded original configuration
 #endif
 #line 50
@@ -57,6 +59,7 @@ LGDT32
    IU32 op1[2]	/* src(limit:base pair) operand */
    )
 #else
+#line 59
 #error Unsupported excluded original configuration
 #endif
 #line 62
@@ -64,6 +67,7 @@ LGDT32
    SET_STAR_LIMIT(GDT_REG, op1[0]);
    SET_STAR_BASE(GDT_REG, op1[1]);
 #ifdef DOUBLE_CPU
+#line 66
 #error Unsupported excluded original configuration
 #endif
 #line 68

@@ -12,9 +12,12 @@
 
 static VOID demFastIoUnavailable(VOID);
 
+#line 14
 #if DBG
-#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 15
+#error Excluded unsupported DBG profile
 #endif   // DBG
+#line 93
 
 DWORD  fShowSVCMsg = 0;
 ULONG  CurrentISVC;
@@ -111,14 +114,20 @@ PFNSVC  apfnSVC [] = {
 
 BOOL DemDispatch (ULONG iSvc)
 {
+#line 189
 #if DBG
-#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 190
+#error Excluded unsupported DBG profile
 #endif
+#line 200
 
     if (iSvc >= SVC_DEMLASTSVC){
+#line 202
 #if DBG
-#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 203
+#error Excluded unsupported DBG profile
 #endif
+#line 206
 	setCF(1);
 	return FALSE;
     }
@@ -130,9 +139,12 @@ BOOL DemDispatch (ULONG iSvc)
     (apfnSVC [iSvc])();
 
 
+#line 217
 #if DBG
-#error DIVERGENCE MVDM-HOST-DIV-516: DBG debug branch is not selected; see mirror register.
+#line 218
+#error Excluded unsupported DBG profile
 #endif
+#line 227
     return TRUE;
 }
 
