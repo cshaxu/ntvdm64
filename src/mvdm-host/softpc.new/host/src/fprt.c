@@ -14,8 +14,10 @@ void OutputString(char *);
 int _CRTAPI1 printf(const char *str, ...)
 {
 #ifndef PROD
+#line 15
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 23
     return(0);
 }
 
@@ -26,8 +28,10 @@ static HANDLE pipe=NULL;
 void OutputString(char *str)
 {
 #ifndef PROD
+#line 33
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 65
 #ifdef HUNTER
 #line 66
 #error DIVERGENCE MVDM-HOST-DIV-519: HUNTER platform branch is not selected; see mirror register.
@@ -43,8 +47,10 @@ void OutputString(char *str)
 VOID InputString(char *str, int len)
 {
 #ifndef PROD
+#line 79
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 140
 }
 
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
@@ -52,8 +58,10 @@ VOID InputString(char *str, int len)
 int _CRTAPI2 fprintf(FILE *tf, const char *str, ...)
 {
 #ifndef PROD
+#line 147
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 158
     return(0);
 }
 
@@ -125,8 +133,10 @@ size_t _CRTAPI1 fwrite(const void *buf, size_t size, size_t len, FILE *stream)
 
     tmp_buf[len] = 0;		// Bullshit write into a const ptr!
 #ifndef PROD
+#line 229
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif  /* PROD */
+#line 231
     return(len);
 }
 #endif  /* HUNTER */

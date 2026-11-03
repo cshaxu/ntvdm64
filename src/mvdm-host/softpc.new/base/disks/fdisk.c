@@ -1483,8 +1483,10 @@ GLOBAL VOID fdisk_inb IFN2(io_addr, port, UTINY *,value)
 		 		 * sector buffer must be accessed only in 16 bit quantities
 		 		 */
 #ifndef PROD
+#line 1501
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1503
 				break;
 			default:
 				dt1(DHW | PORTIO, 0, "inb on port %x(hex)\n", port)
@@ -1553,8 +1555,10 @@ GLOBAL VOID fdisk_outb IFN2(io_addr, port, UTINY, value)
 		 * byte access to sector buffer is not a good idea
 		 */
 #ifndef PROD
+#line 1583
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1585
 		break;
 	case TFPCMP:
 		dt2(DHW | PORTIO, 0, "outb to port %x(hex),val %x(hex)\n",

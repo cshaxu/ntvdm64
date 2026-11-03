@@ -1108,8 +1108,10 @@ LOCAL SECTION_HEADER *addHeaderEntry IFN5(SECTION_HEADER *, prevHeader,
     IU32     commitSize;
 
 #ifndef PROD
+#line 1080
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
+#line 1085
 
     /* Commit and zero table header entries if necessary. */
     exclusiveHeaderPages((IHPE) newHeader, (IHPE) prevHeader,
@@ -1376,8 +1378,10 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
             lastPage;               /* Last page that needs committing. */
 
 #ifndef PROD
+#line 1351
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif /* !PROD */
+#line 1358
 
     /*
      * Work out first and last pages of new memory block that need to be

@@ -200,8 +200,10 @@ void gvi_init IFN1(half_word, v_adapter)
 #line 203
         default:
 #ifndef PROD
+#line 205
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 208
 	    break;
         }
 
@@ -331,8 +333,10 @@ void gvi_term IFN0()
 	break;
     default:
 #ifndef PROD
+#line 332
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 335
 	break;
     }
 

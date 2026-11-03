@@ -4593,7 +4593,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
-      "sha256": "a411189acddb5765562919e1cca0e5c6e7c553ee43cdaf621ea27b60a7c3cc9f",
+      "sha256": "9513e9143f3ffb9fa088b1d6e8e44d7664104e44abb4a2f27836cdbdd6844edc",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -4603,7 +4603,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
-      "sha256": "03e9507df666aaac581aca94e34e3c58c6ba9ab2b25de1f0aafb64f7e162303f",
+      "sha256": "58d57b262f3df1c3cdf86c63d18357019e0a7302a1afe836a393b117ad8dd4a5",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -5503,7 +5503,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/keybd_io.c",
-      "sha256": "c6f6be8fe4cf80169fe22d68ec79a9d7112b2d2f456a30ded9d54745f214ba5b",
+      "sha256": "df21bf74bc2d964341250f47914104af1b03c30762cbdc07cac1877cd529c607",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -5823,7 +5823,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
-      "sha256": "17542b3d138f00c7f6f4417663dbcfdfd814e30d1188467c47aa6aac8644c1fb",
+      "sha256": "fde48eaad3255332867c1560cf5a38e8f7f23df3e009691d93b93f870c893d68",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6313,7 +6313,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/fprt.c",
-      "sha256": "56db4713b31042e271e0444f36d6e5d5babbe4027752b2aa209ef71c7ed671a7",
+      "sha256": "7fbbcb04f579717b581c4153e88caa82190b98f4e894af9f9720998561f6e282",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6343,7 +6343,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
-      "sha256": "9ee84ff5092f742f9c0538b1919dbf45663bd93bdb3993b9f9547ef7859781be",
+      "sha256": "79181dcc9e0fb107f65abcf7d25e4511e86ccffe2b616ab76b9fd1823be2a8ca",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6493,7 +6493,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
-      "sha256": "3529434888917478f978862c7b3429b36041a96f54bff8146844f41c1fd3c10d",
+      "sha256": "dc2191f1c3165661667ea4fbf48ff49d893b036d2a8c6e7f7fec2edc68f626d9",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6503,7 +6503,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
-      "sha256": "df5b998569e641e552c6d31faeced21b399e0b477f201c286b85093b5135191f",
+      "sha256": "3638b934cccf38db32a51a63e4efc1c91dd2052d4d9eaeff112ce993fa9c881a",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6593,7 +6593,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_rflop.c",
-      "sha256": "8effdc005aad517502a4928926ed463c4dda6de77d9b637e382d97793c2f0a5f",
+      "sha256": "fd26e1f6db98e26444d0ed2250bfe1d88cb5b253600d22919a511f84bbbeca50",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6693,11 +6693,11 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
-      "sha256": "01506dc2f6685a35770060fa3d9d860d418130aafed00bcb240cd8ab1d1e2db0",
+      "sha256": "460fb69e94a9a3aa81cf2e622118f912c92694736970217c899a947b1758b4a8",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
-      "additional_evidence": null,
+      "review_status": "completed-original-flat-excluded-guards",
+      "additional_evidence": "s13-r664-flat-guard-review.json",
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_wcom.c",
       "original_candidate_sha256": "18c709bc88c37de4d9323101d528af0ec23a5e7e7b6942a1d2a1a9e7ded111a8"
     },

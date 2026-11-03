@@ -428,8 +428,10 @@ void fla_inb IFN2(io_addr, port, half_word *,value)
 			break;
 	}
 #ifndef PROD
+#line 437
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 443
     }
     else
     {
@@ -700,8 +702,10 @@ void fla_outb IFN2(io_addr, port, half_word, value)
     }
 
 #ifndef PROD
+#line 713
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 716
 
     fla_busy = FALSE;
 

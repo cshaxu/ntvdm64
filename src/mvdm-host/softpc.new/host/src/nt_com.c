@@ -947,9 +947,10 @@ void SendDataToDriver(int adapter, char data)
     /*::::::::::::::::::::::::::::::::::::::::::::::::::::::: Display error */
 
 #ifndef PROD
+#line 971
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
-#line 972
+#line 974
     /* tell base that the tx shift register is empty */
     tx_shift_register_empty(adapter);
 
@@ -1444,6 +1445,7 @@ DWORD CPU nt_poll_comms IFN1(DWORD, adapter)
 					&SignalledObj))
 	    {
 		// Error getting comms/CPU thread event ?
+#line 1465
 		DisplayErrorTerm(EHS_FUNC_FAILED,GetLastError(),__FILE__,__LINE__);
 	    }
 	}
@@ -1725,8 +1727,10 @@ void CPU FlushTXBuffer(int adapter, FLUSHTYPE FlushReason)
 	if (error != ERROR_SUCCESS) {
 	    ClearCommError(current->handle, &error, NULL);
 #ifndef PROD
+#line 1746
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1748
 	}
 	tx_shift_register_empty(adapter);
 	current->no_tx_chars = 0;
@@ -1748,8 +1752,10 @@ void CPU FlushTXBuffer(int adapter, FLUSHTYPE FlushReason)
 	}
 
 #ifndef PROD
+#line 1769
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1772
 
     }
     else
@@ -1769,8 +1775,10 @@ void CPU FlushTXBuffer(int adapter, FLUSHTYPE FlushReason)
 	{
 	    ClearCommError(current->handle,&error,NULL);
 #ifndef PROD
+#line 1791
 #error DIVERGENCE MVDM-HOST-DIV-501: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 1794
 	}
     }
 

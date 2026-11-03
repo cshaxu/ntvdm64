@@ -1,0 +1,44 @@
+{
+  "scope": "One product-observed file whose original condition groups are flat and all have existing excluded error-only first arms.",
+  "method": "Compare original selectors, group boundaries, else presence and retained else text. Check physical error, selected and following line mappings; conservatively screen comments and conditional continuations. Reject directive after continued physical line.",
+  "context": "Prior product release builds and 181 retained-guard controls; selector forced on reaches error, so builds using these files cannot silently select these arms.",
+  "limits": "Reviews conditional structure and alternatives, not unrelated adaptations; the complete inventory of all supported contexts remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_wcom.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_wcom.c",
+      "sha256": "460fb69e94a9a3aa81cf2e622118f912c92694736970217c899a947b1758b4a8",
+      "original_sha256": "18c709bc88c37de4d9323101d528af0ec23a5e7e7b6942a1d2a1a9e7ded111a8",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "ifndef",
+          "PROD"
+        ],
+        [
+          "ifndef",
+          "PROD"
+        ]
+      ]
+    }
+  ]
+}

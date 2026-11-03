@@ -81,8 +81,10 @@
 #include "keyba.h"
 #include "ica.h"
 #ifndef PROD
+#line 85
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 87
 
 #include "debug.h"
 #include "idetect.h"
@@ -596,18 +598,23 @@ LOCAL VOID K26 IFN0()
 
 
 #ifndef NTVDM
+#line 639
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else	/* NTVDM */
+#line 657
 
 void INT15(void);
 word sp_int15_handler_seg = 0;
 word sp_int15_handler_off = 0;
 
 #endif	/* NTVDM */
+#line 663
 
 #ifndef NTVDM
+#line 665
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else   /* NTVDM */
+#line 669
 /* NTVDM code size is too large, change this often used macro
  * to a function, as the call overhead is not justified
  */
@@ -618,6 +625,7 @@ void BEEP(char *message)
     K26A();
 }
 #endif	/* NTVDM */
+#line 679
 
 
 
@@ -640,8 +648,10 @@ void BEEP(char *message)
 ** highly speed sensitive!
 */
 #ifndef NTVDM
+#line 701
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else   /* NTVDM */
+#line 732
 
 
 /* <tur> NT's PutInBuffer seems to be slightly different to PutInBufferFunc above. */
@@ -682,13 +692,16 @@ void NtPutInBuffer(half_word s, half_word v)
 
 #define PUT_IN_BUFFER(s, v) NtPutInBuffer(s,v); return
 #endif	/* NTVDM */
+#line 767
 
 
 /* <tur 17-Jun-93> Eurrgh; macros with embedded "return"s! */
 
 #ifndef NTVDM
+#line 772
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif	/* !NTVDM */
+#line 774
 
 LOCAL VOID CheckAndPutInBufferFunc IFN2(half_word, s,half_word, v)
 {
@@ -698,10 +711,13 @@ LOCAL VOID CheckAndPutInBufferFunc IFN2(half_word, s,half_word, v)
 	}
 	else {
 #ifndef NTVDM
+#line 783
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else /* NTVDM */
+#line 785
 		NtPutInBuffer(s, v);
 #endif /* !NTVDM */
+#line 787
 	}
 }
 
@@ -748,8 +764,10 @@ LOCAL VOID PAUSE IFN0()
 }
 
 #ifndef NTVDM
+#line 830
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 832
 
 /*
 ** All exits from keyboard_int() call this first.
@@ -757,8 +775,10 @@ LOCAL VOID PAUSE IFN0()
 LOCAL void exit_from_kbd_int IFN0()
 {
 #ifndef NTVDM
+#line 839
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 843
 	note_trace0( BIOS_KB_VERBOSE, "KBD BIOS - END" );
 	setIF( 0 );
 	FREEKBDHDW();	/* JonLe NTVDM Mod */
@@ -792,8 +812,10 @@ void keyboard_int IFN0()
             }
 #endif
 #ifndef NTVDM
+#line 876
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 881
 	setIF(0);
         note_trace0(BIOS_KB_VERBOSE,"KBD BIOS start");
 
@@ -1092,10 +1114,13 @@ label2:	/* NOT IN HOLD STATE	*/
 		if( (sas_hw_at_no_check(kb_flag) & CTL_SHIFT ) && (code == DEL_KEY) )
                 {
 #ifndef NTVDM
+#line 1179
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #else
+#line 1181
                         K26();
 #endif
+#line 1183
 			exit_from_kbd_int();return;
 		}
 		/* IN ALTERNATE SHIFT, RESET NOT FOUND	*/
@@ -1420,8 +1445,10 @@ void keyboard_io()
      case 0:
        WaitIfIdle();
 #ifndef NTVDM
+#line 1504
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif /* NTVDM */
+#line 1509
        break;
 
            /*
@@ -1618,8 +1645,10 @@ void kb_setup_vectors(void)
         effective_addr(KbdSeg, *pkio_table++));
    stream_io_bios_busy_sysaddr = effective_addr(KbdSeg, *pkio_table++);
 #ifndef PROD
+#line 1997
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 2001
    TimerInt1CSeg = KbdSeg;
    TimerInt1COff = dummy_int_off;
 
@@ -1670,8 +1699,10 @@ void UpdateKbdInt15(word Seg,word Off)
     if(int15Off != sp_int15_handler_off || int15Seg != sp_int15_handler_seg)
       {
 #ifndef PROD
+#line 2051
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 2053
        sp_int15_handler_off = sp_int15_handler_seg = 0;
        return;
        }

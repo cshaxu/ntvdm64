@@ -43,8 +43,10 @@ GCSfn GetCommShadowMSR;
 /*::::::::::::::::::::::::::::::::::::::::::::: Internal function protocols */
 
 #ifndef PROD
+#line 46
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 48
 
 BOOL SetupBaudRate(HANDLE FileHandle, DIVISOR_LATCH divisor_latch);
 BOOL SetupLCRData(HANDLE FileHandle, LINE_CONTROL_REG LCR_reg);
@@ -89,8 +91,10 @@ void wow_com_inb(io_addr port, half_word *value)
 
    FileH = (HANDLE)(*GetCommHandle)((WORD)adapter);
 #ifndef PROD
+#line 92
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 95
 
     /*.................................................... Process port read */
 
@@ -158,8 +162,10 @@ void wow_com_inb(io_addr port, half_word *value)
     /*.......................................... Handle invalid port accesses */
 
 #ifndef PROD
+#line 162
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 165
 
 
 }
@@ -183,8 +189,10 @@ void wow_com_outb(io_addr port, half_word value)
 
     FileH = (HANDLE)(*GetCommHandle)((WORD)adapter);
 #ifndef PROD
+#line 188
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 191
 
     /*.................................................... Process port write */
 
@@ -245,8 +253,10 @@ void wow_com_outb(io_addr port, half_word value)
     /*.......................................... Handle invalid port accesses */
 
 #ifndef PROD
+#line 251
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 254
 
 }
 
@@ -394,5 +404,7 @@ BOOL SetupBaudRate(HANDLE FileHandle, DIVISOR_LATCH divisor_latch)
 
 
 #ifndef PROD
+#line 401
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 439

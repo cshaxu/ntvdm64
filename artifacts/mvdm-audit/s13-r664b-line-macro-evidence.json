@@ -1,0 +1,11 @@
+{
+  "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_com.c",
+  "original_line": 1465,
+  "symbol": "_nt_poll_comms",
+  "object": "original-softpc-host-roots:nt_com.obj",
+  "file_offset": "0x5781d",
+  "old_embedded_line": 1466,
+  "new_embedded_line": 1465,
+  "scope": "DisplayErrorTerm line-number argument only; full test required under user rule."
+}
