@@ -1,0 +1,180 @@
+{
+  "input_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
+  "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+  "current_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e",
+  "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+  "records": [
+    {
+      "original_line": 38,
+      "original_end": 64,
+      "selector": "#ifndef UNICODE",
+      "endif": "#endif",
+      "owner": {
+        "name": "CopyAcceleratorTable",
+        "line": 26
+      },
+      "current_condition_line": 450
+    },
+    {
+      "original_line": 217,
+      "original_end": 228,
+      "selector": "#ifndef UNICODE",
+      "endif": "#endif",
+      "owner": {
+        "name": "GetClipboardFormatName",
+        "line": 197
+      },
+      "current_condition_line": 456
+    },
+    {
+      "original_line": 254,
+      "original_end": 265,
+      "selector": "#ifndef UNICODE",
+      "endif": "#endif",
+      "owner": {
+        "name": "GetKeyNameText",
+        "line": 234
+      },
+      "current_condition_line": 462
+    },
+    {
+      "original_line": 271,
+      "original_end": 274,
+      "selector": "#ifndef UNICODE",
+      "endif": "#endif",
+      "owner": {
+        "name": "GetKeyNameText",
+        "line": 234
+      },
+      "current_condition_line": 468
+    },
+    {
+      "original_line": 369,
+      "original_end": 377,
+      "selector": "#ifndef UNICODE",
+      "endif": "#endif",
+      "owner": {
+        "name": "GetKeyboardLayoutName",
+        "line": 350
+      },
+      "current_condition_line": 474
+    },
+    {
+      "original_line": 395,
+      "original_end": 402,
+      "selector": "#ifndef UNICODE",
+      "endif": "#endif",
+      "owner": {
+        "name": "MapVirtualKey",
+        "line": 383
+      },
+      "current_condition_line": 480
+    },
+    {
+      "original_line": 414,
+      "original_end": 417,
+      "selector": "#ifndef UNICODE",
+      "endif": "#endif",
+      "owner": {
+        "name": "MapVirtualKey",
+        "line": 383
+      },
+      "current_condition_line": 486
+    },
+    {
+      "original_line": 431,
+      "original_end": 465,
+      "selector": "#ifndef UNICODE",
+      "endif": "#endif",
+      "owner": {
+        "name": "MapVirtualKeyEx",
+        "line": 418
+      },
+      "current_condition_line": 492
+    },
+    {
+      "original_line": 514,
+      "original_end": 523,
+      "selector": "#ifndef UNICODE",
+      "endif": "#endif",
+      "owner": {
+        "name": "PostMessage",
+        "line": 471
+      },
+      "current_condition_line": 498
+    },
+    {
+      "original_line": 549,
+      "original_end": 559,
+      "selector": "#ifndef UNICODE",
+      "endif": "#endif",
+      "owner": {
+        "name": "PostThreadMessage",
+        "line": 534
+      },
+      "current_condition_line": 504
+    },
+    {
+      "original_line": 934,
+      "original_end": 943,
+      "selector": "#ifndef UNICODE",
+      "endif": "#endif",
+      "owner": {
+        "name": "SendMessageCallback",
+        "line": 917
+      },
+      "current_condition_line": 510
+    },
+    {
+      "original_line": 976,
+      "original_end": 985,
+      "selector": "#ifndef UNICODE",
+      "endif": "#endif",
+      "owner": {
+        "name": "SendNotifyMessage",
+        "line": 957
+      },
+      "current_condition_line": 516
+    },
+    {
+      "original_line": 1111,
+      "original_end": 1114,
+      "selector": "#ifndef UNICODE",
+      "endif": "#endif",
+      "owner": {
+        "name": "VkKeyScan",
+        "line": 1089
+      },
+      "current_condition_line": 522
+    },
+    {
+      "original_line": 1295,
+      "original_end": 1297,
+      "selector": "#ifndef UNICODE",
+      "endif": "#endif",
+      "owner": {
+        "name": "EnumDisplaySettingsEx",
+        "line": 1239
+      },
+      "current_condition_line": 528
+    },
+    {
+      "original_line": 1505,
+      "original_end": 1534,
+      "selector": "#ifndef UNICODE",
+      "endif": "#endif //!UNICODE",
+      "owner": {
+        "name": "CallMsgFilter",
+        "line": 1480
+      },
+      "current_condition_line": 534
+    }
+  ],
+  "output_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r380.zip",
+  "after_sha256": "f732762a25d0e0edf5cff239bd67c7cb4976ac0a6548bf1b9856be204c644382",
+  "scope": "Original first-depth selected guards restored after retained header subset, with empty bodies because original owners remain absent. No selected C tokens changed. Lexical owner audit does not establish other providers or semantic equivalence.",
+  "verification": "withdrawn: detached empty selected frames do not establish original lexical structure or preserve selected contents under the clarified per-file goal",
+  "superseded_queue": "s13-bfs-depth1-working-queue-195r380.zip",
+  "restored_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e"
+}

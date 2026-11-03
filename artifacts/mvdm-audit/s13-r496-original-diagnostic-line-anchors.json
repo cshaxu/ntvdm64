@@ -1,0 +1,98 @@
+{
+  "description": "Diagnostic line anchors for already-excluded top-level arms, with original condition and following source matched; full per-file review remains pending.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_page.c",
+      "before": "4692673e61932c428754425ebb8831ba409b35c5751a175b617b194b64cd7894",
+      "after": "075650e81791a8c27f5b1d48366080ca16bbe04855fedea70752017014a617c6",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_page.c",
+      "anchors": [
+        {
+          "condition": "#ifdef\tPIG",
+          "original_if_line": 69,
+          "original_next_line": 74
+        },
+        {
+          "condition": "#ifdef PIG",
+          "original_if_line": 677,
+          "original_next_line": 856
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "before": "27eef526811e071ee080aeb20de3f9f6f78600f7343617f2877fc07c9202d0d6",
+      "after": "bb738276ca329005eefcec89fcea777900c8fbc68c184f54bfc8a421a1e9edd7",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "anchors": [
+        {
+          "condition": "#ifndef NTVDM",
+          "original_if_line": 433,
+          "original_next_line": 436
+        },
+        {
+          "condition": "#ifndef NTVDM\t/* prevent floppies showing up in bios data area */",
+          "original_if_line": 475,
+          "original_next_line": 495
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
+      "before": "e27b0c9b6a55a1ce12921aef83e83be03855a746e05daabb8d20ae7f9719bfd6",
+      "after": "14a972888b2ed902d6165d7ea009ee761c0b95f59e5725884cec6bc5836a7284",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_mpty.c",
+      "anchors": [
+        {
+          "condition": "#ifndef PROD",
+          "original_if_line": 180,
+          "original_next_line": 184
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_umb.c",
+      "before": "89d73ca479d6b683b81a2197f9f9fafe4a7c5b0f2318402e3a44fba491e6eac1",
+      "after": "495e20ca67a109394de0f3382d4bc842032fdb6917847d4c08d794a02a948755",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_umb.c",
+      "anchors": [
+        {
+          "condition": "#ifdef\tMONITOR",
+          "original_if_line": 271,
+          "original_next_line": 291
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_vga.c",
+      "before": "7a5d4b0b52af30faacb978c4258ccef3e8b3f6397425eb9ea4abae0df2c5cb1d",
+      "after": "648c0815f93e8d1a3ce4718bdf8991179618fc337933dcfb5aae6a966c929611",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_vga.c",
+      "anchors": [
+        {
+          "condition": "#ifdef MONITOR       ",
+          "original_if_line": 36,
+          "original_next_line": 40
+        },
+        {
+          "condition": "#ifdef MONITOR",
+          "original_if_line": 1638,
+          "original_next_line": 2189
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/editsl.c",
+      "before": "f7c32cc745c21165ce10fd7d18656903b1a2853cc9b05973cd4b93e11367bc34",
+      "after": "a4faa2adc7c9da7eec34d941f9b053ab8bb6f039d7930094c2f0a68a53d57127",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\editsl.c",
+      "anchors": [
+        {
+          "condition": "#ifdef SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]",
+          "original_if_line": 2190,
+          "original_next_line": 2211
+        }
+      ]
+    }
+  ]
+}

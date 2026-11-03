@@ -1,0 +1,152 @@
+{
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/cpuint_c.h",
+      "guard": "_CpuInt_c_h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/evidgen.h",
+      "guard": "_EVIDGEN_H_"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/fpu_c.h",
+      "guard": "_Fpu_c_h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/gdpvar.h",
+      "guard": "_gdpvar_h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/pigger_c.h",
+      "guard": "_Pigger_c_h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/univer_c.h",
+      "guard": "_Univer_c_h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/cpuint_c.h",
+      "guard": "_CpuInt_c_h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/evid_c.h",
+      "guard": "_Evid_c_h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/fm_c.h",
+      "guard": "_Fm_c_h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/fpu_c.h",
+      "guard": "_Fpu_c_h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/gdpvar.h",
+      "guard": "_gdpvar_h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/pigger_c.h",
+      "guard": "_Pigger_c_h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/cvidc/univer_c.h",
+      "guard": "_Univer_c_h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/dterm.h",
+      "guard": "EHS_MSG_LEN"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rpcxlate/apiworke.h",
+      "guard": "_APIWORKE_"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsconst.h",
+      "guard": "_XSCONST_"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsdata.h",
+      "guard": "_XSDATA_"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsdef16.h",
+      "guard": "_XSDEF16_"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsparm16.h",
+      "guard": "_XSPARM16_"
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/xactsrv/xsprocsp.h",
+      "guard": "_XSPROCSP_"
+    },
+    {
+      "path": "src/non-mvdm/private/windows/inc/pmvdm.h",
+      "guard": "_PMVDM_H_"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/nettypes.h",
+      "guard": "_NETTYPES_"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/apiparam.h",
+      "guard": "_APIPARAMS_"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/prefix.h",
+      "guard": "_PREFIX_"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rapgtpt.h",
+      "guard": "_RAPGTPT_"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/remtypes.h",
+      "guard": "_REMTYPES_"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/rxp.h",
+      "guard": "_RXP_"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/strucinf.h",
+      "guard": "_STRUCINF_"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/xsprocs.h",
+      "guard": "_XSPROCS_"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/shell/inc/wowcmndg.h",
+      "guard": "_WOWCMNDG_H_"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/devioctl.h",
+      "guard": "_DEVIOCTL_"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nt_vdd.h",
+      "guard": "_NT_VDD"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrdll.h",
+      "guard": "_NTCSRDLLAPI_"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/ntcsrmsg.h",
+      "guard": "_NTCSRMSG_"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/nturtl.h",
+      "guard": "_NTURTL_"
+    },
+    {
+      "path": "src/non-mvdm/public/sdk/inc/wownt32.h",
+      "guard": "_WOWNT32_"
+    }
+  ],
+  "evidence": "Exactly one textual conditional group in each version, identical #ifndef and matching #define in both, no nested conditions or explicit alternate arm. Some are whole-file include guards; others, including EHS_MSG_LEN, provide a default only when the macro is absent. An already-defined macro is a valid inclusion context, not an unsupported configuration. Source and original hashes verified.",
+  "scope": "Only conditional structure, not other source changes; observed graphs only.",
+  "total_completed": 530,
+  "observed_total": 1057
+}

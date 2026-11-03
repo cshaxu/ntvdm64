@@ -4,8 +4,11 @@
 
 **Active: M0 T473 S13**
 
-Mirror-condition BFS: S13 is depth 1; each following depth is a sequential S,
-admitted automatically after full layer delivery. [Progress](../../artifacts/mvdm-audit/s13-bfs-progress.md).
+Mirror-condition audit: owner revised execution to complete and register each
+compiled mirror file against its original; build each batch of 10 modified code
+files. If binaries have no substantive change, reuse test evidence for the P;
+otherwise run Full before publication. [Progress](../../artifacts/mvdm-audit/s13-bfs-progress.md);
+[observed per-file inventory](../../artifacts/mvdm-audit/s13-r489-per-file-observed-inventory.json).
 
 Prior owner-approved delivery: restore the four MVDM ANSI-profile files changed
 by MVDM-HOST-DIV-479, preserving authored build boundaries; verify actual

@@ -33,9 +33,12 @@
 
 #include "nt_graph.h"
 
+#line 36
 #ifdef MONITOR       
+#line 37
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */ 
+#line 40
 
 IMPORT int DisplayErrorTerm(int, DWORD, char *, int);
 
@@ -1643,6 +1646,9 @@ sub_note_trace5(EGA_HOST_VERBOSE,
 }
 #endif /* V7VGA */
 
+#line 1638
 #ifdef MONITOR
+#line 1639
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
+#line 2189

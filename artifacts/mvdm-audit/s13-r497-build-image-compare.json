@@ -1,0 +1,180 @@
+{
+  "scope": "Compared all ten published PE images against candidate; for each image parsed PE COFF and IMAGE_DEBUG_DIRECTORY timestamp offsets independently in both files and verified matching locations.",
+  "records": [
+    {
+      "name": "run16.exe",
+      "old_size": 316416,
+      "new_size": 316416,
+      "old_sha256": "be39650e0dbec010ed10e7db3252cc58abfbc534ce4dbf752bb3ed107c0c138b",
+      "new_sha256": "be39650e0dbec010ed10e7db3252cc58abfbc534ce4dbf752bb3ed107c0c138b",
+      "changed_byte_count": 0,
+      "outside_prior_timestamp_offsets": 0,
+      "first_outside_offsets": [],
+      "parsed_timestamp_offsets": [
+        264,
+        209524
+      ],
+      "outside_parsed_timestamp_offsets": 0,
+      "first_outside_parsed_offsets": [],
+      "timestamp_only": true
+    },
+    {
+      "name": "ntsrv.exe",
+      "old_size": 398848,
+      "new_size": 398848,
+      "old_sha256": "37c594c394caaa26711f5596db24b73b775e7da0d0aa8441488487b4a1b45bbd",
+      "new_sha256": "37c594c394caaa26711f5596db24b73b775e7da0d0aa8441488487b4a1b45bbd",
+      "changed_byte_count": 0,
+      "outside_prior_timestamp_offsets": 0,
+      "first_outside_offsets": [],
+      "parsed_timestamp_offsets": [
+        256,
+        289428
+      ],
+      "outside_parsed_timestamp_offsets": 0,
+      "first_outside_parsed_offsets": [],
+      "timestamp_only": true
+    },
+    {
+      "name": "ntcon.exe",
+      "old_size": 351744,
+      "new_size": 351744,
+      "old_sha256": "d91412c7708efc3e091ad7a9aacdef104702d728f693ff1d9bb3924a4b1b81d5",
+      "new_sha256": "d91412c7708efc3e091ad7a9aacdef104702d728f693ff1d9bb3924a4b1b81d5",
+      "changed_byte_count": 0,
+      "outside_prior_timestamp_offsets": 0,
+      "first_outside_offsets": [],
+      "parsed_timestamp_offsets": [
+        248,
+        246004
+      ],
+      "outside_parsed_timestamp_offsets": 0,
+      "first_outside_parsed_offsets": [],
+      "timestamp_only": true
+    },
+    {
+      "name": "ntvdm.exe",
+      "old_size": 2103808,
+      "new_size": 2103808,
+      "old_sha256": "b7f82365aeecd6d8e026e5dfdcdbd5d6f9cc91a02a2fa38deb98a00b937790dc",
+      "new_sha256": "a50a0f294558e5c4aa785a5e88df60dc04ee7a0e0696bbac8ce179f0135966a5",
+      "changed_byte_count": 6,
+      "outside_prior_timestamp_offsets": 3,
+      "first_outside_offsets": [
+        1698412,
+        1698413,
+        1698414
+      ],
+      "parsed_timestamp_offsets": [
+        288,
+        1698412
+      ],
+      "outside_parsed_timestamp_offsets": 0,
+      "first_outside_parsed_offsets": [],
+      "timestamp_only": true
+    },
+    {
+      "name": "ntvwm.exe",
+      "old_size": 340480,
+      "new_size": 340480,
+      "old_sha256": "cac1f5c67b233be83ab63fb3c979800d5ae8e324e48b3381a8e952629e086378",
+      "new_sha256": "cac1f5c67b233be83ab63fb3c979800d5ae8e324e48b3381a8e952629e086378",
+      "changed_byte_count": 0,
+      "outside_prior_timestamp_offsets": 0,
+      "first_outside_offsets": [],
+      "parsed_timestamp_offsets": [
+        264,
+        229060
+      ],
+      "outside_parsed_timestamp_offsets": 0,
+      "first_outside_parsed_offsets": [],
+      "timestamp_only": true
+    },
+    {
+      "name": "ntmon.exe",
+      "old_size": 167936,
+      "new_size": 167936,
+      "old_sha256": "4df75031a7d19a6c853b680476d0c3fbd7a200fd60d85a1dce1e96f099f8c345",
+      "new_sha256": "4df75031a7d19a6c853b680476d0c3fbd7a200fd60d85a1dce1e96f099f8c345",
+      "changed_byte_count": 0,
+      "outside_prior_timestamp_offsets": 0,
+      "first_outside_offsets": [],
+      "parsed_timestamp_offsets": [
+        264,
+        146260
+      ],
+      "outside_parsed_timestamp_offsets": 0,
+      "first_outside_parsed_offsets": [],
+      "timestamp_only": true
+    },
+    {
+      "name": "WOW32.DLL",
+      "old_size": 712192,
+      "new_size": 712192,
+      "old_sha256": "90c6f314f29750537b494f19e1259464327c33dd73bf14d9e529ba2d1df779e2",
+      "new_sha256": "27d5100ba87f2a949678f1ce31d63d515497077c8d918a109cc891dccd255798",
+      "changed_byte_count": 6,
+      "outside_prior_timestamp_offsets": 0,
+      "first_outside_offsets": [],
+      "parsed_timestamp_offsets": [
+        280,
+        625412
+      ],
+      "outside_parsed_timestamp_offsets": 0,
+      "first_outside_parsed_offsets": [],
+      "timestamp_only": true
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "old_size": 206848,
+      "new_size": 206848,
+      "old_sha256": "b6005c9a3fce7b531f98a99c30f51f4ea7112a655f3b751567a38c01ac7f5524",
+      "new_sha256": "f930373a8d98567c1bf2320e8b8251f49a01146a6dcf5ced0573149339251ca1",
+      "changed_byte_count": 6,
+      "outside_prior_timestamp_offsets": 0,
+      "first_outside_offsets": [],
+      "parsed_timestamp_offsets": [
+        280,
+        123572
+      ],
+      "outside_parsed_timestamp_offsets": 0,
+      "first_outside_parsed_offsets": [],
+      "timestamp_only": true
+    },
+    {
+      "name": "nthook32.dll",
+      "old_size": 221184,
+      "new_size": 221184,
+      "old_sha256": "4dba1c3e507245812b3569a60a3290066b29873cfa9f447b6d93f361259203e3",
+      "new_sha256": "534ba0d43b3e3890e88d9465ff0e750ea1b6325e69e7423a9cd34c5cad147bd3",
+      "changed_byte_count": 6,
+      "outside_prior_timestamp_offsets": 0,
+      "first_outside_offsets": [],
+      "parsed_timestamp_offsets": [
+        280,
+        133156
+      ],
+      "outside_parsed_timestamp_offsets": 0,
+      "first_outside_parsed_offsets": [],
+      "timestamp_only": true
+    },
+    {
+      "name": "nthook64.dll",
+      "old_size": 270848,
+      "new_size": 270848,
+      "old_sha256": "1b35e28c869be47cb4834efa256efc3676de8b82dcd13fc3ff6a16bae1408464",
+      "new_sha256": "1b35e28c869be47cb4834efa256efc3676de8b82dcd13fc3ff6a16bae1408464",
+      "changed_byte_count": 0,
+      "outside_prior_timestamp_offsets": 0,
+      "first_outside_offsets": [],
+      "parsed_timestamp_offsets": [
+        272,
+        167348
+      ],
+      "outside_parsed_timestamp_offsets": 0,
+      "first_outside_parsed_offsets": [],
+      "timestamp_only": true
+    }
+  ],
+  "all_identical_or_timestamp_only": true
+}

@@ -70,9 +70,12 @@ Paging Support.
 
 #define OFFSET_MASK 0xfff
 
+#line 69
 #ifdef	PIG
+#line 70
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
+#line 74
 
 /*
    =====================================================================
@@ -676,8 +679,11 @@ IFN3(
 
 
 
+#line 677
 #ifdef PIG
+#line 678
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif	/* PIG */
+#line 856
 
 

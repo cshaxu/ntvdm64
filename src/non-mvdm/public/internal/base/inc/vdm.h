@@ -207,9 +207,12 @@ typedef struct _Vdm_FaultHandler {
 #pragma pack(1)
 /* XLATON */
 // ==== CHANGED TO _VdmDpmiInfo
+#line 210
 #if 0
+#line 211
 #error DIVERGENCE OPENNT-HOST-129: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 224
 
 typedef struct _VdmDpmiInfo {        /* VDMTIB */
     USHORT LockCount;

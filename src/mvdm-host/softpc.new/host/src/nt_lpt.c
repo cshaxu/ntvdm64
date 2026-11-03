@@ -586,9 +586,12 @@ GLOBAL void host_lpt_heart_beat(void)
 /*::::::::::::::::::::: Flush the printer port ::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 
+#line 587
 #if 0
+#line 588
 #error DIVERGENCE MVDM-HOST-DIV-496: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif
+#line 595
 
 /*:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::: Reset the printer port ::::::::::::::::::::::::::::::*/

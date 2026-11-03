@@ -1,0 +1,72 @@
+{
+  "input_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r378.zip",
+  "output_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/exitwin.c",
+      "current_sha256": "abdb6793896a0f0da1f7d79d45c4e919cfb50ae0757bbc70e39e9cc40e25b4e2",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\exitwin.c",
+      "original_sha256": "45b92f7236fba49d58e2c3d912126067c3843ec560c28cdd8a20167c62aaef65",
+      "original_line": 134,
+      "current_line": 76,
+      "owner_anchor": {
+        "name": "InitiateShutdown",
+        "line": 68
+      },
+      "current_selected_arm_empty": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_sha256": "86faf087619bcc9d11af866b7e06ef21e1dba335582fe2871521a52a4826195f",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+      "original_line": 594,
+      "current_line": 216,
+      "owner_anchor": {
+        "name": "HMFreeObject",
+        "line": 575
+      },
+      "current_selected_arm_empty": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "original_line": 310,
+      "current_line": 423,
+      "owner_anchor": {
+        "name": "GetMessage",
+        "line": 276
+      },
+      "current_selected_arm_empty": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "original_line": 1191,
+      "current_line": 432,
+      "owner_anchor": {
+        "name": "VkKeyScanEx",
+        "line": 1115
+      },
+      "current_selected_arm_empty": true
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "original_line": 1317,
+      "current_line": 441,
+      "owner_anchor": {
+        "name": "EnumDisplaySettingsEx",
+        "line": 1239
+      },
+      "current_selected_arm_empty": true
+    }
+  ],
+  "scope": "First-depth selected original owners omitted from retained current file; no current child conditions. Nearest lexical owner anchor; not proof of other providers, semantic equivalence or guest behavior."
+}

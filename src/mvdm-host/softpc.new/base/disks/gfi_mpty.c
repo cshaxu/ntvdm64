@@ -173,9 +173,12 @@ gfi_empty_command
       break;
 
    case FDC_READ_ID:
+#line 180
 #ifndef PROD
+#line 181
 #error DIVERGENCE MVDM-HOST-DIV-500: non-PROD debug branch is not selected; see mirror register.
 #endif
+#line 184
       break;
 
    case FDC_RECALIBRATE:

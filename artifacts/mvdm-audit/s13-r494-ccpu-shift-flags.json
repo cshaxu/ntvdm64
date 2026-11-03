@@ -1,0 +1,10 @@
+{
+  "files": [
+    "src/mvdm-host/softpc.new/base/ccpu386/sar.c",
+    "src/mvdm-host/softpc.new/base/ccpu386/shl.c",
+    "src/mvdm-host/softpc.new/base/ccpu386/shr.c"
+  ],
+  "evidence": "Same checks as r491: sole original group and body identical; directly included c_main.h defines SET_UNDEFINED_FLAG; no source undef.",
+  "scope": "Conditional structure only, observed graphs.",
+  "total_completed": 533
+}

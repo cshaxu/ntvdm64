@@ -1,0 +1,37 @@
+{
+  "description": "Original line anchors for existing literal-false excluded arms; these files remain pending full per-file review.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_main.h",
+      "before": "aa57601be833a6c3cee9104517872ced424bdb15fe6c20a0cbb340dd119f1b42",
+      "after": "24d7a95929e1ed4428ec8f749ba1229c91c27e675baf3d8c8ba6c347ba1de68e",
+      "original_if_line": 167,
+      "original_next_line": 179,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_main.h"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+      "before": "fe34232f0e3b7fa4b4dae4a70c7e5369a048e0227184df4d9f8330a562e106e6",
+      "after": "74240c9434afeaec899dcd079f52b14de8a7c4d4d91df1a0a4806a0d7252b967",
+      "original_if_line": 587,
+      "original_next_line": 595,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\nt_lpt.c"
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/host/src/stubs.c",
+      "before": "d0ec538258f5b2bd11f7d9e6a793da58023333a33d9a14336bc36ec47763295a",
+      "after": "f992c727a8414c55994cdc1fb2ccac2b01ace24ca4a385a6848477afb8bee164",
+      "original_if_line": 531,
+      "original_next_line": 545,
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\host\\src\\stubs.c"
+    },
+    {
+      "path": "src/non-mvdm/public/internal/base/inc/vdm.h",
+      "before": "e0e35167de38227b06e6d7384043d414295c49100e30904562dc3d945ff022de",
+      "after": "f0f4d2f53865cf2a86b0ea04ce668e8ef6834296794bb0d23d50d612d3d90170",
+      "original_if_line": 210,
+      "original_next_line": 224,
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\base\\inc\\vdm.h"
+    }
+  ]
+}

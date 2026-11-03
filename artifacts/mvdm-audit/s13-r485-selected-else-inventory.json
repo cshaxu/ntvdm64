@@ -1,0 +1,863 @@
+{
+  "input_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r376.zip",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "10ed3f2be44d0a66ffe952696f7a579aa5d1a2421e71a5a319eeeab9fa654222",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "original_line": 19,
+      "current_line": 9,
+      "current_else_line": 11,
+      "owner_anchor": null,
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "manual-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "10ed3f2be44d0a66ffe952696f7a579aa5d1a2421e71a5a319eeeab9fa654222",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "original_line": 304,
+      "current_line": 47,
+      "current_else_line": 50,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "GetKeyboardState",
+        "line": 301
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "10ed3f2be44d0a66ffe952696f7a579aa5d1a2421e71a5a319eeeab9fa654222",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "original_line": 435,
+      "current_line": 56,
+      "current_else_line": 59,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "IsWindow",
+        "line": 421
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "10ed3f2be44d0a66ffe952696f7a579aa5d1a2421e71a5a319eeeab9fa654222",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "original_line": 719,
+      "current_line": 65,
+      "current_else_line": 68,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "ClientToScreen",
+        "line": 708
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "10ed3f2be44d0a66ffe952696f7a579aa5d1a2421e71a5a319eeeab9fa654222",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "original_line": 776,
+      "current_line": 74,
+      "current_else_line": 77,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "GetWindowRect",
+        "line": 765
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "10ed3f2be44d0a66ffe952696f7a579aa5d1a2421e71a5a319eeeab9fa654222",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "original_line": 795,
+      "current_line": 83,
+      "current_else_line": 86,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "ScreenToClient",
+        "line": 784
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "10ed3f2be44d0a66ffe952696f7a579aa5d1a2421e71a5a319eeeab9fa654222",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "original_line": 835,
+      "current_line": 92,
+      "current_else_line": 95,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "EnableMenuItem",
+        "line": 807
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "10ed3f2be44d0a66ffe952696f7a579aa5d1a2421e71a5a319eeeab9fa654222",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "original_line": 911,
+      "current_line": 101,
+      "current_else_line": 104,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "CallNextHookEx",
+        "line": 879
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "current_sha256": "326081a72f994be4e59e3847e77f03980ebdc8f7830d109dfb07e2d3c0395a34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+      "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+      "original_line": 375,
+      "current_line": 244,
+      "current_else_line": 247,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "InternalRegisterClassEx",
+        "line": 211
+      },
+      "owner_token_lines_after_comment_removal": [
+        27
+      ],
+      "current_selected_arm_empty": true,
+      "classification": "manual-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_sha256": "86faf087619bcc9d11af866b7e06ef21e1dba335582fe2871521a52a4826195f",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+      "original_line": 18,
+      "current_line": 49,
+      "current_else_line": 51,
+      "owner_anchor": null,
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "manual-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_sha256": "86faf087619bcc9d11af866b7e06ef21e1dba335582fe2871521a52a4826195f",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+      "original_line": 1321,
+      "current_line": 93,
+      "current_else_line": 95,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "HMAssignmentUnlock",
+        "line": 1127
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_sha256": "e5cd3f9fc3b9f434b3ec953d06603931b5dce364dd069ed7563ffc22e8d2bcb4",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+      "original_line": 4750,
+      "current_line": 328,
+      "current_else_line": 331,
+      "owner_anchor": null,
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "manual-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/server.c",
+      "current_sha256": "c651893a9b6ba6152fc06dcfa9671816724f997b5d253d6563597b315789d334",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\server.c",
+      "original_sha256": "3c6131efb37173f5a280bd77ec1d887529afb35eef03b6f0248a3c75e7887047",
+      "original_line": 990,
+      "current_line": 457,
+      "current_else_line": 460,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "InitFunctionTables",
+        "line": 928
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_sha256": "426cd27bcfae2ae7bc31626353a97a2da70e4b7fca8a0227e071a6c7ac1ae969",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "original_line": 351,
+      "current_line": 417,
+      "current_else_line": 420,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "RtlWCSMessageWParamCharToMB",
+        "line": 323
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_sha256": "426cd27bcfae2ae7bc31626353a97a2da70e4b7fca8a0227e071a6c7ac1ae969",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "original_line": 378,
+      "current_line": 426,
+      "current_else_line": 429,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "RtlWCSMessageWParamCharToMB",
+        "line": 323
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/chartran.c",
+      "current_sha256": "426cd27bcfae2ae7bc31626353a97a2da70e4b7fca8a0227e071a6c7ac1ae969",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\chartran.c",
+      "original_sha256": "0f9f0b7fde3aaa475492a50f333745508698228c38fdbf9a21cbd4bfbead383b",
+      "original_line": 393,
+      "current_line": 435,
+      "current_else_line": 438,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "RtlWCSMessageWParamCharToMB",
+        "line": 323
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/draw.c",
+      "current_sha256": "2719465cc91f9d173af90ec463d92c3f4bf47996a7aa3cba7b15d9b974506de5",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\draw.c",
+      "original_sha256": "7491e5b3331de8cb7a2189b8efbe91f56076f80a08338bf816d793e80a4faf76",
+      "original_line": 680,
+      "current_line": 134,
+      "current_else_line": 137,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "DrawFrameControl",
+        "line": 652
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_sha256": "fb330c396a31f8b7e30f470197f7f7327972edba787e2286c4d8089e7223a9db",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "original_line": 719,
+      "current_line": 225,
+      "current_else_line": 228,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "GetNextWordbreak",
+        "line": 649
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_sha256": "fb330c396a31f8b7e30f470197f7f7327972edba787e2286c4d8089e7223a9db",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "original_line": 875,
+      "current_line": 234,
+      "current_else_line": 237,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "DT_GetExtentMinusPrefixes",
+        "line": 866
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_sha256": "fb330c396a31f8b7e30f470197f7f7327972edba787e2286c4d8089e7223a9db",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "original_line": 1224,
+      "current_line": 243,
+      "current_else_line": 246,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "DT_GetLineBreak",
+        "line": 1201
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/drawtext.c",
+      "current_sha256": "fb330c396a31f8b7e30f470197f7f7327972edba787e2286c4d8089e7223a9db",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\drawtext.c",
+      "original_sha256": "d94876c3a091278d92030aff49f37151c8f728f86f0b7d3f08c3f1f7199ea746",
+      "original_line": 1657,
+      "current_line": 275,
+      "current_else_line": 278,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "DrawTextExW",
+        "line": 1575
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "e8be318d64cbd2bd6928c0019169473132c97a70ae7fcf26cfa6e97ae4abec77",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "original_line": 15,
+      "current_line": 9,
+      "current_else_line": 11,
+      "owner_anchor": null,
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "manual-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "e8be318d64cbd2bd6928c0019169473132c97a70ae7fcf26cfa6e97ae4abec77",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "original_line": 135,
+      "current_line": 17,
+      "current_else_line": 19,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "WOWlstrlenA",
+        "line": 106
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/base/ntos/ex/probe.c",
+      "current_sha256": "b32dde63fa296acffbf472259792568fcb167c24acb5a8d89d02b6314fd77302",
+      "original": "O:\\repos.external\\OpenNT\\base\\ntos\\ex\\probe.c",
+      "original_sha256": "0d1cae414b609c624e6bdf04fa28ebd84ff38dbb9687a63d8bc9e840c2f2372b",
+      "original_line": 106,
+      "current_line": 87,
+      "current_else_line": 90,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "ProbeForWrite",
+        "line": 35
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_sha256": "f973b4619123a2c31ea9f0734455f2bf4735f17e6f24aa1179c6104f36a96fd9",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "original_line": 2624,
+      "current_line": 1081,
+      "current_else_line": 1084,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "LoadIcoCur",
+        "line": 2492
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clres.c",
+      "current_sha256": "f973b4619123a2c31ea9f0734455f2bf4735f17e6f24aa1179c6104f36a96fd9",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clres.c",
+      "original_sha256": "c11265557b8406d60928032f3caa0c106301b5847930c98e356e8c72372808f5",
+      "original_line": 3751,
+      "current_line": 1090,
+      "current_else_line": 1093,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "MatchImage",
+        "line": 3703
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_sha256": "1e00998921b5acab87b5b059ba9565128c2ad4303dbbc083bc20df0d5670d1f2",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "original_line": 331,
+      "current_line": 451,
+      "current_else_line": 454,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "SendMessageWorker",
+        "line": 258
+      },
+      "owner_token_lines_after_comment_removal": [
+        98,
+        106,
+        126,
+        141,
+        327
+      ],
+      "current_selected_arm_empty": true,
+      "classification": "manual-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_sha256": "1e00998921b5acab87b5b059ba9565128c2ad4303dbbc083bc20df0d5670d1f2",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "original_line": 453,
+      "current_line": 460,
+      "current_else_line": 463,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "SendMessageWorker",
+        "line": 258
+      },
+      "owner_token_lines_after_comment_removal": [
+        98,
+        106,
+        126,
+        141,
+        327
+      ],
+      "current_selected_arm_empty": true,
+      "classification": "manual-review"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_sha256": "1e00998921b5acab87b5b059ba9565128c2ad4303dbbc083bc20df0d5670d1f2",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "original_line": 1777,
+      "current_line": 469,
+      "current_else_line": 472,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "DispatchMessageWorker",
+        "line": 1712
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_sha256": "1e00998921b5acab87b5b059ba9565128c2ad4303dbbc083bc20df0d5670d1f2",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "original_line": 1803,
+      "current_line": 478,
+      "current_else_line": 481,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "DispatchMessageWorker",
+        "line": 1712
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "dcb180b4dedb8e6179f533c029c2b3c5d0d20be17f2650714ef8516b96ec4356",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "original_line": 380,
+      "current_line": 299,
+      "current_else_line": 301,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "GetWindowPlacement",
+        "line": 354
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "dcb180b4dedb8e6179f533c029c2b3c5d0d20be17f2650714ef8516b96ec4356",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "original_line": 717,
+      "current_line": 380,
+      "current_else_line": 383,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "_PeekMessage",
+        "line": 680
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "dcb180b4dedb8e6179f533c029c2b3c5d0d20be17f2650714ef8516b96ec4356",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "original_line": 753,
+      "current_line": 330,
+      "current_else_line": 333,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "_PeekMessage",
+        "line": 680
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "dcb180b4dedb8e6179f533c029c2b3c5d0d20be17f2650714ef8516b96ec4356",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "original_line": 769,
+      "current_line": 339,
+      "current_else_line": 342,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "_PeekMessage",
+        "line": 680
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/ntstubs.c",
+      "current_sha256": "dcb180b4dedb8e6179f533c029c2b3c5d0d20be17f2650714ef8516b96ec4356",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\ntstubs.c",
+      "original_sha256": "7df814a5496ceb8cedaee8b51d9f4d1966629f109f15ebf8622805eb6902eb01",
+      "original_line": 784,
+      "current_line": 348,
+      "current_else_line": 351,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "_PeekMessage",
+        "line": 680
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_sha256": "4b7da2a8130d924151c96254da03b600068b287e888e27a66cfd0beb38675884",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "original_line": 957,
+      "current_line": 501,
+      "current_else_line": 504,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "xxxCreateThreadInfo",
+        "line": 933
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_sha256": "4b7da2a8130d924151c96254da03b600068b287e888e27a66cfd0beb38675884",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "original_line": 963,
+      "current_line": 510,
+      "current_else_line": 513,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "xxxCreateThreadInfo",
+        "line": 933
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/queue.c",
+      "current_sha256": "4b7da2a8130d924151c96254da03b600068b287e888e27a66cfd0beb38675884",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\queue.c",
+      "original_sha256": "0400c034bb5a782e81777e9fd805c07dbcd18d60ec9f1a876cfa67444577e0f8",
+      "original_line": 1203,
+      "current_line": 519,
+      "current_else_line": 522,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "xxxCreateThreadInfo",
+        "line": 933
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "original_line": 206,
+      "current_line": 345,
+      "current_else_line": 348,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "GetClipboardFormatName",
+        "line": 197
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "original_line": 243,
+      "current_line": 354,
+      "current_else_line": 357,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "GetKeyNameText",
+        "line": 234
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "original_line": 353,
+      "current_line": 363,
+      "current_else_line": 366,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "GetKeyboardLayoutName",
+        "line": 350
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "original_line": 992,
+      "current_line": 372,
+      "current_else_line": 375,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "SendNotifyMessage",
+        "line": 957
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "original_line": 1096,
+      "current_line": 381,
+      "current_else_line": 384,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "VkKeyScan",
+        "line": 1089
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "original_line": 1122,
+      "current_line": 390,
+      "current_else_line": 393,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "VkKeyScanEx",
+        "line": 1115
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/inc/ntcftxt.h",
+      "current_sha256": "7a6c475465b988d8b0b48528994a01701014af7dd61a466e4fe228b356bdc10e",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\inc\\ntcftxt.h",
+      "original_sha256": "e7f3d42ce8939bbe0b14ea34bc693107334c19f8b2d7862ec15b75a501d11dab",
+      "original_line": 1434,
+      "current_line": 399,
+      "current_else_line": 402,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "ChangeDisplaySettingsEx",
+        "line": 1403
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "original_line": 2756,
+      "current_line": 603,
+      "current_else_line": 606,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "NtUserDeleteMenu",
+        "line": 2741
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "original_line": 3465,
+      "current_line": 612,
+      "current_else_line": 615,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "NtUserThunkedMenuItemInfo",
+        "line": 3419
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "original_line": 3476,
+      "current_line": 621,
+      "current_else_line": 624,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "NtUserThunkedMenuItemInfo",
+        "line": 3419
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/ntstubs.c",
+      "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+      "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+      "original_line": 4420,
+      "current_line": 630,
+      "current_else_line": 633,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "NtUserRemoveMenu",
+        "line": 4404
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/client.c",
+      "current_sha256": "36e250a159f095037fc69404d9a54d917b8bd26e4f26ba28d1f9cebc5287a4ce",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\client.c",
+      "original_sha256": "787eda33785a87ce9e71202c97b5913e2857f7106fed5bb97103049b1d5e3472",
+      "original_line": 2288,
+      "current_line": 217,
+      "current_else_line": 220,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "UserRegisterWowHandlers",
+        "line": 2256
+      },
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "owner-token-absent"
+    }
+  ],
+  "limits": "Nearest lexical owner anchor within 300 lines; no full C parser. Absence is in this source only, not other providers or project-wide functionality. File-level and owner-token-present cases remain pending.",
+  "classification_update": {
+    "queue_in": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r376.zip",
+    "queue_out": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r377.zip",
+    "original_selected_else_arms": 43,
+    "current_selected_else_arms": 43,
+    "status": "selected-owner-omitted",
+    "manual_review_remaining": 7,
+    "not_claimed": "Original functionality, other providers, complete semantic equivalence, or historical guest execution"
+  }
+}

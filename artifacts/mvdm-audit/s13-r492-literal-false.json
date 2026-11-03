@@ -1,0 +1,12 @@
+{
+  "files": [
+    "src/mvdm-host/dpmi32/savestat.c",
+    "src/mvdm-host/softpc.new/base/ccpu386/c_xtrn.c",
+    "src/mvdm-host/suballoc/suballoc.c",
+    "src/mvdm-host/wow32/wdos.c",
+    "src/mvdm-host/wow32/wkmem.h"
+  ],
+  "evidence": "Both versions contain exactly one conditional group, literal #if 0; the current body contains only #line and #error. Original literal false proves exclusion independently of compilation macros. Verified #line before #error is original #if line plus one, and #line after #endif is the original following line.",
+  "total_completed": 494,
+  "observed_total": 1057
+}

@@ -1,0 +1,14 @@
+{
+  "files": [
+    "src/mvdm-host/softpc.new/base/ccpu386/aaa.c",
+    "src/mvdm-host/softpc.new/base/ccpu386/aad.c",
+    "src/mvdm-host/softpc.new/base/ccpu386/aam.c",
+    "src/mvdm-host/softpc.new/base/ccpu386/aas.c",
+    "src/mvdm-host/softpc.new/base/ccpu386/daa.c",
+    "src/mvdm-host/softpc.new/base/ccpu386/das.c"
+  ],
+  "evidence": "Both original and current contain only one conditional group, #ifdef SET_UNDEFINED_FLAG, with identical body. Each current file directly includes c_main.h, which unconditionally defines the macro; source search found no undef. No nested directives or explicit excluded arm. No runtime semantics changed.",
+  "scope": "Observed build graphs only; no claim about unsupported build configurations.",
+  "total_completed": 489,
+  "observed_total": 1057
+}

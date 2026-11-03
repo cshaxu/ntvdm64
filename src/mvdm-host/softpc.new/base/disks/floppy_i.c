@@ -203,9 +203,12 @@ void diskette_post()
 	 *	functionality in the POST.
 	 */
 	half_word diskette_id_reg, hf_cntrl, interrupt_mask;
+#line 433
 #ifndef NTVDM
+#line 434
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif
+#line 436
 	EQUIPMENT_WORD equip_flag;
 
 	note_trace0(FLOPBIOS_VERBOSE, "diskette_post()");
@@ -245,8 +248,11 @@ void diskette_post()
 			hf_cntrl |= DC_DUAL;
 		sas_store(DRIVE_CAPABILITY, hf_cntrl);
 
+#line 475
 #ifndef NTVDM	/* prevent floppies showing up in bios data area */
+#line 476
 #error DIVERGENCE MVDM-HOST-DIV-537: non-NTVDM branch is not selected; see mirror register.
 #endif  /* NTVDM */
+#line 495
 	}
 }

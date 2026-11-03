@@ -2167,9 +2167,12 @@ LONG SLEditWndProc(
 
         break;
 
+#line 2190
 #ifdef SUPPORT_LPK // must add these msgs to server.c gawEditWndProc[]
+#line 2191
 #error DIVERGENCE OPENNT-HOST-132: SUPPORT_LPK branch is not selected; see mirror register.
 #endif
+#line 2211
 
     case WM_KEYDOWN:
 

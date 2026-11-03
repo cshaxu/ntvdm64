@@ -1,0 +1,581 @@
+{
+  "source": "src\\non-mvdm\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+  "current_sha256": "f6b34c408f5d22dc6774c081088a01a9dfeef489d6cb7b0eb259ef6fc3a2c356",
+  "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\ntstubs.c",
+  "original_sha256": "a5997517b8bbb0b9e69afc973f8bf26d8859b6fb9f4c8c1513553c52e3ee2918",
+  "records": [
+    {
+      "condition_line": 352,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserGetObjectInformation",
+        "line": 337
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 390,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserSetObjectInformation",
+        "line": 378
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 563,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserCreateWindowStation",
+        "line": 522
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 715,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserOpenWindowStation",
+        "line": 696
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 738,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserOpenWindowStation",
+        "line": 696
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 964,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserResolveDesktop",
+        "line": 940
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 1135,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserWOWFindWindow",
+        "line": 1120
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 1229,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserGetIconInfo",
+        "line": 1199
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 1312,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserDrawIconEx",
+        "line": 1285
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 1957,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserSystemParametersInfo",
+        "line": 1880
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 2027,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserSystemParametersInfo",
+        "line": 1880
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 2112,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserSystemParametersInfo",
+        "line": 1880
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 2288,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserGetWOWClass",
+        "line": 2272
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 2369,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserInitTask",
+        "line": 2341
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 2723,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserCreateAcceleratorTable",
+        "line": 2713
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 3107,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserDdeSetQualityOfService",
+        "line": 3085
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 3158,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserDdeGetQualityOfService",
+        "line": 3131
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 3446,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserThunkedMenuItemInfo",
+        "line": 3419
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 3972,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserGetPriorityClipboardFormat",
+        "line": 3962
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 4318,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserSendNotifyMessage",
+        "line": 4302
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 4727,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserSetSysColors",
+        "line": 4715
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 5472,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserInternalGetWindowText",
+        "line": 5455
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 5506,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserToUnicodeEx",
+        "line": 5490
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 5768,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserFindExistingCursorIcon",
+        "line": 5745
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 5823,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserSetCursorIconData",
+        "line": 5800
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 5986,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserDefSetText",
+        "line": 5967
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 6312,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserGetListboxString",
+        "line": 6285
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 6417,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserCreateWindowEx",
+        "line": 6362
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 6689,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserLoadKeyboardLayoutEx",
+        "line": 6667
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 6929,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserCopyAcceleratorTable",
+        "line": 6910
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 6977,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserFindWindowEx",
+        "line": 6950
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 7026,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserGetClassInfo",
+        "line": 7005
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 7071,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserGetClassName",
+        "line": 7053
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 7102,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserGetClipboardFormatName",
+        "line": 7091
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 7131,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserGetKeyNameText",
+        "line": 7120
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 7161,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserGetKeyboardLayoutName",
+        "line": 7149
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 7188,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserGetKeyboardLayoutList",
+        "line": 7176
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 7333,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserRegisterClipboardFormat",
+        "line": 7318
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 7363,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserRegisterWindowMessage",
+        "line": 7348
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 7439,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserUnregisterClass",
+        "line": 7420
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 7917,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserPlayEventSound",
+        "line": 7902
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 8558,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserfnINLPMDICREATESTRUCT",
+        "line": 8528
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 8571,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserfnINLPMDICREATESTRUCT",
+        "line": 8528
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 8687,
+      "owner": {
+        "kind": "messagecall",
+        "name": "INSTRING",
+        "line": 8669
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 8747,
+      "owner": {
+        "kind": "messagecall",
+        "name": "INSTRINGNULL",
+        "line": 8728
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 9237,
+      "owner": {
+        "kind": "messagecall",
+        "name": "OUTSTRING",
+        "line": 9219
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 9303,
+      "owner": {
+        "kind": "messagecall",
+        "name": "INCNTOUTSTRING",
+        "line": 9289
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 9354,
+      "owner": {
+        "kind": "messagecall",
+        "name": "INCNTOUTSTRINGNULL",
+        "line": 9336
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 9395,
+      "owner": {
+        "kind": "messagecall",
+        "name": "POUTLPINT",
+        "line": 9379
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 9435,
+      "owner": {
+        "kind": "messagecall",
+        "name": "POPTINLPUINT",
+        "line": 9419
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    },
+    {
+      "condition_line": 9558,
+      "owner": {
+        "kind": "function",
+        "name": "NtUserfnHkINLPCBTCREATESTRUCT",
+        "line": 9533
+      },
+      "current_owner_token_lines": [],
+      "selected_original_arm": "_X86_",
+      "classification": "owner-token-absent"
+    }
+  ],
+  "unique_owner_count": 47,
+  "method": "Nearest preceding original NtUser definition or MESSAGECALL anchor, with no matching owner token in retained current file; verifies file-local absence, not whole-project reachability.",
+  "limits": "Function owner identification is lexical, not a complete C parser. Does not prove absence of other providers or that the original functionality is unnecessary. Queue status unchanged pending semantic reconciliation.",
+  "classification_update": {
+    "queue_in": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r375.zip",
+    "queue_out": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r376.zip",
+    "original_selected_arms": 51,
+    "current_selected_arms": 51,
+    "status": "selected-owner-omitted",
+    "no_current_child_conditions": true,
+    "not_claimed": "Original functionality, other providers, or behavior equivalence"
+  }
+}

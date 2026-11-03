@@ -167,9 +167,12 @@ IMPORT VOID c_pig_interrupt IPT1(IU8, vector);
 IMPORT VOID c_cpu_unsimulate IPT0();
 
 
+#line 167
 #if 0				/* ROG */
+#line 168
 #error DIVERGENCE MVDM-HOST-DIV-497: original literal #if 0 excludes this legacy branch; see mirror register.
 #endif				/* 0 ROG */
+#line 179
 
 #endif /* !DOUBLE_CPU */
 

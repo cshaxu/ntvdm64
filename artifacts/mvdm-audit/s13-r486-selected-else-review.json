@@ -1,0 +1,184 @@
+{
+  "input": "s13-r485-selected-else-inventory.json",
+  "records": [
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/wow.c",
+      "current_sha256": "10ed3f2be44d0a66ffe952696f7a579aa5d1a2421e71a5a319eeeab9fa654222",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\wow.c",
+      "original_sha256": "1ece9db0e35238434843bb73ece92dd66000a44bc6b1148a08bcabf1329f8d9a",
+      "original_line": 19,
+      "current_line": 9,
+      "current_else_line": 11,
+      "owner_anchor": null,
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "manual-review",
+      "review": "translation-unit",
+      "reviewed_names": [
+        "ClientSharedInfo",
+        "LPPOINTWOW",
+        "NORMALIZEDSHORTVALUE",
+        "WOWlstrlenA",
+        "WOWRtlCopyMemory"
+      ],
+      "reason": "Original selected declarations are unused in retained translation unit; no current child conditions.",
+      "limits": "Does not establish project-wide feature absence, provider equivalence, or historical guest behavior."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/class.c",
+      "current_sha256": "326081a72f994be4e59e3847e77f03980ebdc8f7830d109dfb07e2d3c0395a34",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\class.c",
+      "original_sha256": "82528443bc5f6c227e0e14fe8a9dbc928ba735f98cf3891744c20c8e1604939a",
+      "original_line": 375,
+      "current_line": 244,
+      "current_else_line": 247,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "InternalRegisterClassEx",
+        "line": 211
+      },
+      "owner_token_lines_after_comment_removal": [
+        27
+      ],
+      "current_selected_arm_empty": true,
+      "classification": "manual-review",
+      "review": "omitted-function",
+      "reviewed_names": [
+        "InternalRegisterClassEx"
+      ],
+      "reason": "Original owner definition is absent from retained translation unit; matching call tokens, if any, are not original definitions.",
+      "limits": "Does not establish project-wide feature absence, provider equivalence, or historical guest behavior."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/handtabl.c",
+      "current_sha256": "86faf087619bcc9d11af866b7e06ef21e1dba335582fe2871521a52a4826195f",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\handtabl.c",
+      "original_sha256": "f0b56314a93423599f06645d17104391f19a0ca07c3944853b065d8866493f7c",
+      "original_line": 18,
+      "current_line": 49,
+      "current_else_line": 51,
+      "owner_anchor": null,
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "manual-review",
+      "review": "translation-unit",
+      "reviewed_names": [
+        "gfTrackLocks"
+      ],
+      "reason": "Original selected declarations are unused in retained translation unit; no current child conditions.",
+      "limits": "Does not establish project-wide feature absence, provider equivalence, or historical guest behavior."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/kernel/input.c",
+      "current_sha256": "e5cd3f9fc3b9f434b3ec953d06603931b5dce364dd069ed7563ffc22e8d2bcb4",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\kernel\\input.c",
+      "original_sha256": "b7656bca55e892a42ba825be0324211450ad298c40717e1ae5a889d084467529",
+      "original_line": 4750,
+      "current_line": 328,
+      "current_else_line": 331,
+      "owner_anchor": null,
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "manual-review",
+      "review": "omitted-function",
+      "reviewed_names": [
+        "xxxScanSysQueue"
+      ],
+      "reason": "Original owner definition is absent from retained translation unit; matching call tokens, if any, are not original definitions.",
+      "limits": "Does not establish project-wide feature absence, provider equivalence, or historical guest behavior."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/rtl/wow.c",
+      "current_sha256": "e8be318d64cbd2bd6928c0019169473132c97a70ae7fcf26cfa6e97ae4abec77",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\rtl\\wow.c",
+      "original_sha256": "71e5b523bd44077ab4e86ffc6093544922c815c759bb753c32b4155e3206691d",
+      "original_line": 15,
+      "current_line": 9,
+      "current_else_line": 11,
+      "owner_anchor": null,
+      "owner_token_lines_after_comment_removal": [],
+      "current_selected_arm_empty": true,
+      "classification": "manual-review",
+      "review": "translation-unit",
+      "reviewed_names": [
+        "ClientSharedInfo",
+        "ServerInfo",
+        "LPPOINTWOW",
+        "NORMALIZEDSHORTVALUE",
+        "WOWlstrlenA",
+        "WOWRtlCopyMemory"
+      ],
+      "reason": "Original selected declarations are unused in retained translation unit; no current child conditions.",
+      "limits": "Does not establish project-wide feature absence, provider equivalence, or historical guest behavior."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_sha256": "1e00998921b5acab87b5b059ba9565128c2ad4303dbbc083bc20df0d5670d1f2",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "original_line": 331,
+      "current_line": 451,
+      "current_else_line": 454,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "SendMessageWorker",
+        "line": 258
+      },
+      "owner_token_lines_after_comment_removal": [
+        98,
+        106,
+        126,
+        141,
+        327
+      ],
+      "current_selected_arm_empty": true,
+      "classification": "manual-review",
+      "review": "omitted-function",
+      "reviewed_names": [
+        "SendMessageWorker"
+      ],
+      "reason": "Original owner definition is absent from retained translation unit; matching call tokens, if any, are not original definitions.",
+      "limits": "Does not establish project-wide feature absence, provider equivalence, or historical guest behavior."
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
+      "current_sha256": "1e00998921b5acab87b5b059ba9565128c2ad4303dbbc083bc20df0d5670d1f2",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmsg.c",
+      "original_sha256": "2f87967a05e730e2c95b8ce0b92443d323f76baec97446d3c4f8c9dc163710fd",
+      "original_line": 453,
+      "current_line": 460,
+      "current_else_line": 463,
+      "owner_anchor": {
+        "kind": "function",
+        "name": "SendMessageWorker",
+        "line": 258
+      },
+      "owner_token_lines_after_comment_removal": [
+        98,
+        106,
+        126,
+        141,
+        327
+      ],
+      "current_selected_arm_empty": true,
+      "classification": "manual-review",
+      "review": "omitted-function",
+      "reviewed_names": [
+        "SendMessageWorker"
+      ],
+      "reason": "Original owner definition is absent from retained translation unit; matching call tokens, if any, are not original definitions.",
+      "limits": "Does not establish project-wide feature absence, provider equivalence, or historical guest behavior."
+    }
+  ],
+  "additional_findings": [
+    "InternalRegisterClassEx and SendMessageWorker call sites use explicitly named WOW binding macros; this record does not assess semantic equivalence of those adapters.",
+    "Original xxxScanSysQueue begins at line 3275, more than 300 lines before the relevant guard."
+  ],
+  "classification_update": {
+    "queue_in": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r377.zip",
+    "queue_out": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r378.zip",
+    "declaration_arms": 3,
+    "owner_arms": 4,
+    "not_claimed": "Behavioral recovery, project-wide provider equivalence, or guest support"
+  }
+}

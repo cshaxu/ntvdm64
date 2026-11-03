@@ -207,9 +207,12 @@ DWORD	*Size
 	    if (UMB == NULL) {
 		return FALSE;
 	    }
+#line 271
 #ifdef	MONITOR
+#line 272
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif
+#line 291
 	    UMB->Owner = UMB_OWNER_ROM;
 	    break;
 
