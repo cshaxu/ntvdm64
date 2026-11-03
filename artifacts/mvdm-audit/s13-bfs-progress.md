@@ -4025,3 +4025,10 @@ prior Full 17/17 reused. Census: 1058 existing C/H, 157 identical reviewed,
 446 differing reviewed, 455 pending; net deleted: 578. The eight basic-guard
 files retain pending condition groups. Evidence: s13-r637-delivery.md and
 s13-r637-counts.json.
+
+- r640 completes four excluded-only file reviews and delivers ten more
+diagnostic-line corrections. Cached builds, 181 guard controls and 17 line
+controls passed; eight images are identical and two timestamp-only. Both
+destinations were published, with prior Full 17/17 reused. Census: 1058 C/H,
+157 identical reviewed, 450 differing reviewed, 451 pending; 578 net deleted.
+Evidence: s13-r640-delivery.md and s13-r640-counts.json.

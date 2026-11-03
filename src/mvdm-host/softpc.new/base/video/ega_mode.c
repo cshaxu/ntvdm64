@@ -123,13 +123,10 @@ boolean	(*choose_display_mode)();
 
 /* [5.1.1 #DEFINES]							*/
 #ifdef SEGMENTATION
+#line 126
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 133
 
 /* [5.1.2 TYPEDEF, STRUCTURE, ENUM DECLARATIONS]			*/
 

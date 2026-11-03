@@ -44,17 +44,16 @@
  */
 
 #ifdef SCCSID
+#line 47
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
+#line 49
 
 #ifdef SEGMENTATION
+#line 51
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 58
 
 
 /*
@@ -1042,13 +1041,10 @@ static void fla_ndma_unbump_sectid IFN0()
 }
 
 #ifdef SEGMENTATION
+#line 1132
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 1139
 
 void fla_init IFN0()
 {

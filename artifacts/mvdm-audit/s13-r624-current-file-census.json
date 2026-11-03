@@ -1143,7 +1143,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
-      "sha256": "d2cd0a2af652d7c4110ce29190f34c80a0364044a037528d09542166ffebab3d",
+      "sha256": "8246b718d443d44c4651859a63ef31c9676e30303df54cc6e9eb7f2d3dbb076d",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -1196,7 +1196,7 @@
       "sha256": "58c3c6151854ed5cc1a49e448a21db7959bdfab349b4497e06965a1ffb58e267",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
+      "review_status": "completed-original-excluded-only-profiles",
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\mem_size.c",
       "original_candidate_sha256": "2e8937e8fc10fbc69425692fb8b127b20e786fae37fd453049b62dd0472c9e8f"
@@ -1236,7 +1236,7 @@
       "sha256": "e737a62549a1c7c3a990b4de840b791506c8fdf4a245179efe9cb6304f5ef520",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
+      "review_status": "completed-original-excluded-only-profiles",
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\slave_bs.c",
       "original_candidate_sha256": "22079cb4c1e033f1d33246da6f60f8d5e1bba5c925ee3e9e5ea3c3fd756c7368"
@@ -2033,7 +2033,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
-      "sha256": "8c4747e89a1dab195c05ab2881d47dd9820c97a19229d6ba6acabf32cf489998",
+      "sha256": "533e60cbc46728e0e23c3d2397ecba14d6610a43b6a26e088a24d6d2fc5cfd11",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -4593,7 +4593,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
-      "sha256": "ccdfef5239fa68392231e2bfd0fc99d6e3f70e65503d6c8a7c039c776a3039c5",
+      "sha256": "edca461adde479ac3b2ec5ea906b1c30bbc14dbec365ebb8bb9da86b5bb277ea",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -4603,7 +4603,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
-      "sha256": "66b3d64bcd155e96bf3e8c528ecb8831a1ef172664e4d288bfbde5700fdfaa91",
+      "sha256": "77b989eee69622635c7d8fed328dc9cbf71f647cbf7a2ef2cef75da468e338d2",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -4613,7 +4613,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
-      "sha256": "29ce8dea782f2420282aaea6755c63e741be098599354dd2a3458e446a55e5e6",
+      "sha256": "109d05b2e7b36c7ec84480101569f97703e172645ae3dee5fbaab8276fecb010",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -4623,7 +4623,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
-      "sha256": "bb738276ca329005eefcec89fcea777900c8fbc68c184f54bfc8a421a1e9edd7",
+      "sha256": "34139d697902e0e05eaf633a32bd3515dd5d4edb17d43f88c743236fb5bba158",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -5533,7 +5533,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
-      "sha256": "9d95b89eb8d4bc243ed180b9ca1748eb2cc806782a2611f6ace6b5d2db98e7a4",
+      "sha256": "1b520411c2dc325fb6473b3f8dbb807538a2ae7cbe087065491ee2de21f15435",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -5626,7 +5626,7 @@
       "sha256": "0b3bed6358f116366f2a0f25b76f2a53b3d7fe6053142c0f4f52b10300512a1e",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
+      "review_status": "completed-original-excluded-only-profiles",
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\dummy_nt.c",
       "original_candidate_sha256": "ce1b03e11f45eb795dfbfdde1e3ac4ebc2022d77dfa5f4dd30453ba6eebdb233"
@@ -5706,7 +5706,7 @@
       "sha256": "e5ad6ab2ba6b642c9e1648f2533c0ca06d9fbdbae07db0f299dd4087dd956ecd",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
+      "review_status": "completed-original-excluded-only-profiles",
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\unexp_nt.c",
       "original_candidate_sha256": "a96ba5effe9b1cec5d78545f9656486a8e7b692e829c1c06634653bb8c905f0e"
@@ -5723,7 +5723,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
-      "sha256": "029ca4bcd1ac7b614830b667561f39c69e98b3d4ab62bffbda775b8d9ce05c82",
+      "sha256": "93c6a1d8ea22ce7db09710b570f1856333e7ab4b56c292fac79103732c3e0909",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -5733,7 +5733,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
-      "sha256": "aaa62441ca46226aafcc02d74cdf4b1abcafae0772b7ec24e998c34232cb2e87",
+      "sha256": "56f79c06847720778441c9ff8ef91de019465429a086f1d6dac227311bbfe95c",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -5823,7 +5823,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
-      "sha256": "c9bef79a72d2542a86b9fdccb28c6fd0eede65b3c8b437d3eac23ff834cb0fdd",
+      "sha256": "1313dc6bc5044274f474577797a224ed8c6726f2788aeaff712556745b42560a",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",

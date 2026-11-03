@@ -24,13 +24,10 @@
 #include	"egagraph.h"
 
 #ifdef SEGMENTATION
+#line 27
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 34
 
 /* dummy stuff to keep linker happy */
 #define def_dummy(type,name,res) \

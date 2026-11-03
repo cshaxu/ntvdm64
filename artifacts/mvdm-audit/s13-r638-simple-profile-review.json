@@ -1,0 +1,91 @@
+{
+  "scope": "Four selected product mirror files whose only original conditional groups are SCCSID and SEGMENTATION.",
+  "evidence": "Original and current selected nonconditional lines compare exactly with only the two rejected arms and line directives projected away. Original structures and excluded-arm diagnostic mappings were delivered and tested in r637.",
+  "limits": "Conditional audit only; cached product evidence is from r637 and complete supported-context enumeration remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/mem_size.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\mem_size.c",
+      "before_sha256": "d498fee0e5045ad07813556a3afa5e920e8568307c3de4525c7540b1592f364e",
+      "after_sha256": "58c3c6151854ed5cc1a49e448a21db7959bdfab349b4497e06965a1ffb58e267",
+      "original_sha256": "2e8937e8fc10fbc69425692fb8b127b20e786fae37fd453049b62dd0472c9e8f",
+      "guards": [
+        {
+          "macro": "SCCSID",
+          "original_guard_line": 16,
+          "original_body_line": 17,
+          "original_following_line": 19
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 20,
+          "original_body_line": 21,
+          "original_following_line": 28
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/slave_bs.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\slave_bs.c",
+      "before_sha256": "86e6b73c7d98d74ec4b679eb54ec98c583aeb92823972993a8fa28199c6ed209",
+      "after_sha256": "e737a62549a1c7c3a990b4de840b791506c8fdf4a245179efe9cb6304f5ef520",
+      "original_sha256": "22079cb4c1e033f1d33246da6f60f8d5e1bba5c925ee3e9e5ea3c3fd756c7368",
+      "guards": [
+        {
+          "macro": "SCCSID",
+          "original_guard_line": 33,
+          "original_body_line": 34,
+          "original_following_line": 36
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 37,
+          "original_body_line": 38,
+          "original_following_line": 45
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/dummy_nt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\dummy_nt.c",
+      "before_sha256": "ee773fb807240be4573520fe85b51c83de3843e2661f6c186b75cf918339f4d1",
+      "after_sha256": "0b3bed6358f116366f2a0f25b76f2a53b3d7fe6053142c0f4f52b10300512a1e",
+      "original_sha256": "ce1b03e11f45eb795dfbfdde1e3ac4ebc2022d77dfa5f4dd30453ba6eebdb233",
+      "guards": [
+        {
+          "macro": "SCCSID",
+          "original_guard_line": 16,
+          "original_body_line": 17,
+          "original_following_line": 19
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 20,
+          "original_body_line": 21,
+          "original_following_line": 28
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/system/unexp_nt.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\system\\unexp_nt.c",
+      "before_sha256": "1b3d0b8d0816842c0c5a87c956da415e19403fa8399bd28c2149b5a868ceac93",
+      "after_sha256": "e5ad6ab2ba6b642c9e1648f2533c0ca06d9fbdbae07db0f299dd4087dd956ecd",
+      "original_sha256": "a96ba5effe9b1cec5d78545f9656486a8e7b692e829c1c06634653bb8c905f0e",
+      "guards": [
+        {
+          "macro": "SCCSID",
+          "original_guard_line": 17,
+          "original_body_line": 18,
+          "original_following_line": 20
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 21,
+          "original_body_line": 22,
+          "original_following_line": 29
+        }
+      ]
+    }
+  ]
+}

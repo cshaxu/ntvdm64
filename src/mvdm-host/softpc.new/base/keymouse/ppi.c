@@ -15,17 +15,16 @@
  */
 
 #ifdef SCCSID
+#line 18
 #error DIVERGENCE MVDM-HOST-DIV-518: SCCSID identification strings are not selected; see mirror register.
 #endif
+#line 20
 
 #ifdef SEGMENTATION
+#line 22
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 29
 
 
 /*
@@ -172,13 +171,10 @@ void ppi_outb IFN2(io_addr, port, half_word, value)
 }
 
 #ifdef SEGMENTATION
+#line 182
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 189
 
 void ppi_init IFN0()
 {

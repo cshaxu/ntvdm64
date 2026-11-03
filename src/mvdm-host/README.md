@@ -2680,3 +2680,7 @@ Evidence: ../../artifacts/mvdm-audit/s13-r635-ccpu-shift-review.json.
 MVDM-HOST-DIV-733: restore original diagnostic and continuation lines for
 previously excluded SCCSID and SEGMENTATION arms in eight selected sources.
 Evidence: ../../artifacts/mvdm-audit/s13-r636-basic-guard-lines.json.
+
+MVDM-HOST-DIV-734: restore original error and continuation line anchors for
+previously excluded SCCSID and SEGMENTATION arms in ten device/BIOS sources.
+Evidence: ../../artifacts/mvdm-audit/s13-r639-basic-guard-lines.json.

@@ -39,13 +39,10 @@
 
 
 #ifdef SEGMENTATION
+#line 42
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 49
 
 
 /*
@@ -155,13 +152,10 @@ void	recalc_screen_params IFN0()
 }
 
 #ifdef SEGMENTATION
+#line 158
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 165
 
 void gvi_init IFN1(half_word, v_adapter)
 {

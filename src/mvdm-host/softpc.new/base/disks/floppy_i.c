@@ -31,13 +31,10 @@
 
 
 #ifdef SEGMENTATION
+#line 34
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 41
 
 #include <stdio.h>
 #include TypesH
@@ -188,13 +185,10 @@ void diskette_int()
 
 
 #ifdef SEGMENTATION
+#line 418
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 425
 
 void diskette_post()
 {

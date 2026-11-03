@@ -1,0 +1,199 @@
+{
+  "scope": "Ten selected product files: original SCCSID and SEGMENTATION excluded arms receive original error and following-line mappings.",
+  "selection": "These are previously rejected profiles; no new configuration exclusion is introduced.",
+  "limits": "Other groups in each file remain pending review; build and publication are recorded in s13-r640-delivery.md.",
+  "records": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cmos_bis.c",
+      "before_sha256": "d2cd0a2af652d7c4110ce29190f34c80a0364044a037528d09542166ffebab3d",
+      "after_sha256": "8246b718d443d44c4651859a63ef31c9676e30303df54cc6e9eb7f2d3dbb076d",
+      "original_sha256": "e3b6710db5887ef77c5a38c881ebb4eeff2575db65e86a3468258aaa9293e1bd",
+      "guards": [
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 38,
+          "original_body_line": 39,
+          "original_following_line": 46
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/ccpusas4.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\ccpusas4.c",
+      "before_sha256": "8c4747e89a1dab195c05ab2881d47dd9820c97a19229d6ba6acabf32cf489998",
+      "after_sha256": "533e60cbc46728e0e23c3d2397ecba14d6610a43b6a26e088a24d6d2fc5cfd11",
+      "original_sha256": "2802840ef84106ae0f99c6f17af370da66c9381a1355570f5998039fbb33534e",
+      "guards": [
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 25,
+          "original_body_line": 26,
+          "original_following_line": 33
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fdisk.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fdisk.c",
+      "before_sha256": "ccdfef5239fa68392231e2bfd0fc99d6e3f70e65503d6c8a7c039c776a3039c5",
+      "after_sha256": "edca461adde479ac3b2ec5ea906b1c30bbc14dbec365ebb8bb9da86b5bb277ea",
+      "original_sha256": "f95a9a26a9ef201e9552f2459a6ba85080e17fb8ccae3fb6280c63eb2fa78607",
+      "guards": [
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 217,
+          "original_body_line": 218,
+          "original_following_line": 225
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/fla.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\fla.c",
+      "before_sha256": "66b3d64bcd155e96bf3e8c528ecb8831a1ef172664e4d288bfbde5700fdfaa91",
+      "after_sha256": "77b989eee69622635c7d8fed328dc9cbf71f647cbf7a2ef2cef75da468e338d2",
+      "original_sha256": "b8c5f0420eac7f14f662799b995b37e86d14dc252271b7bf4ae309ba6650fb5d",
+      "guards": [
+        {
+          "macro": "SCCSID",
+          "original_guard_line": 46,
+          "original_body_line": 47,
+          "original_following_line": 49
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 50,
+          "original_body_line": 51,
+          "original_following_line": 58
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 1131,
+          "original_body_line": 1132,
+          "original_following_line": 1139
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy.c",
+      "before_sha256": "29ce8dea782f2420282aaea6755c63e741be098599354dd2a3458e446a55e5e6",
+      "after_sha256": "109d05b2e7b36c7ec84480101569f97703e172645ae3dee5fbaab8276fecb010",
+      "original_sha256": "35efd26857a3f5c7960b0890a6ec3fd778dfde7dc8e74959fd3a8e3d41db424c",
+      "guards": [
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 102,
+          "original_body_line": 103,
+          "original_following_line": 110
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 3235,
+          "original_body_line": 3236,
+          "original_following_line": 3243
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/floppy_i.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\floppy_i.c",
+      "before_sha256": "bb738276ca329005eefcec89fcea777900c8fbc68c184f54bfc8a421a1e9edd7",
+      "after_sha256": "34139d697902e0e05eaf633a32bd3515dd5d4edb17d43f88c743236fb5bba158",
+      "original_sha256": "22b503047688d4d1f2d4b99ffba29e71612a165bbc9069976ce7a8b8d62ba042",
+      "guards": [
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 33,
+          "original_body_line": 34,
+          "original_following_line": 41
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 417,
+          "original_body_line": 418,
+          "original_following_line": 425
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/keymouse/ppi.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\keymouse\\ppi.c",
+      "before_sha256": "9d95b89eb8d4bc243ed180b9ca1748eb2cc806782a2611f6ace6b5d2db98e7a4",
+      "after_sha256": "1b520411c2dc325fb6473b3f8dbb807538a2ae7cbe087065491ee2de21f15435",
+      "original_sha256": "367cceaa88345e16b2e138faef9addd441da2cd39f95ea3ab6c359651bd8ebf5",
+      "guards": [
+        {
+          "macro": "SCCSID",
+          "original_guard_line": 17,
+          "original_body_line": 18,
+          "original_following_line": 20
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 21,
+          "original_body_line": 22,
+          "original_following_line": 29
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 181,
+          "original_body_line": 182,
+          "original_following_line": 189
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_dmmy.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_dmmy.c",
+      "before_sha256": "029ca4bcd1ac7b614830b667561f39c69e98b3d4ab62bffbda775b8d9ce05c82",
+      "after_sha256": "93c6a1d8ea22ce7db09710b570f1856333e7ab4b56c292fac79103732c3e0909",
+      "original_sha256": "4f7aaa63fb26f4fb556ea90183149cee7dfd048b954922ae335e17ae3cafc40d",
+      "guards": [
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 26,
+          "original_body_line": 27,
+          "original_following_line": 34
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/ega_mode.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\ega_mode.c",
+      "before_sha256": "aaa62441ca46226aafcc02d74cdf4b1abcafae0772b7ec24e998c34232cb2e87",
+      "after_sha256": "56f79c06847720778441c9ff8ef91de019465429a086f1d6dac227311bbfe95c",
+      "original_sha256": "1b73d0bdea339dc2a42f9674e04fd14575400070e8436149a84a2ac5510a057d",
+      "guards": [
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 125,
+          "original_body_line": 126,
+          "original_following_line": 133
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/video/gvi.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\video\\gvi.c",
+      "before_sha256": "c9bef79a72d2542a86b9fdccb28c6fd0eede65b3c8b437d3eac23ff834cb0fdd",
+      "after_sha256": "1313dc6bc5044274f474577797a224ed8c6726f2788aeaff712556745b42560a",
+      "original_sha256": "2aeb2f79fd87002ea70bafe745612e9c8131f56863c90ed7ad11127439682b80",
+      "guards": [
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 41,
+          "original_body_line": 42,
+          "original_following_line": 49
+        },
+        {
+          "macro": "SEGMENTATION",
+          "original_guard_line": 157,
+          "original_body_line": 158,
+          "original_following_line": 165
+        }
+      ]
+    }
+  ]
+}

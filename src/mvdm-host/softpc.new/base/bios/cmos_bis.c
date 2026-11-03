@@ -36,13 +36,10 @@ AMENDMENTS	:
 
 
 #ifdef SEGMENTATION
+#line 39
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 46
 
 #include "xt.h"
 #include "bios.h"

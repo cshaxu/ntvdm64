@@ -23,13 +23,10 @@
 #ifdef	CCPU
 
 #ifdef SEGMENTATION
+#line 26
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 33
 
 
 #include <stdio.h>

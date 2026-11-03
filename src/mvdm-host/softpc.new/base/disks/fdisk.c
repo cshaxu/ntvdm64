@@ -215,13 +215,10 @@ IMPORT	int	soft_reset;
 /* [3.1.1 #INCLUDES]                                                    */
 
 #ifdef SEGMENTATION
+#line 218
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 225
 
 #include <stdio.h>
 #include TypesH

@@ -100,13 +100,10 @@
 
 
 #ifdef SEGMENTATION
+#line 103
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 110
 
 #include <stdio.h>
 #include TypesH
@@ -3097,13 +3094,10 @@ LOCAL void waitf IFN1(long, time)
 }
 
 #ifdef SEGMENTATION
+#line 3236
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 3243
 
 void fl_diskette_setup IFN0()
 {
