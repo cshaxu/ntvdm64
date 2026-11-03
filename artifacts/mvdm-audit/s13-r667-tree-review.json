@@ -1,0 +1,1039 @@
+{
+  "scope": "Conservative tree comparison; only rejected bodies may discard nested original groups. All other branches recurse and leaf text must match.",
+  "limits": "Does not resolve alternative compile contexts, source patches outside branch bodies, ambiguous directive syntax or lack of explicit continuation anchors. Retained original branch leaves are compared after trimming boundary whitespace; local adaptations outside conditional groups remain separately tracked. Supported-context enumeration remains open.",
+  "candidates": [
+    {
+      "path": "src/mvdm-host/inc/wowmmed.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowmmed.h",
+      "current_sha256": "cdbdd00ae2096fcc194072629312f105895e2b353ba999c9e276cc24991e095c",
+      "original_sha256": "8416869d9f2a35a41e10187f0f27fa35198b750e5474cc5e281d30ba9f2918b9",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "groups": {
+        "excluded": 9,
+        "groups": 9
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 26,
+          "current_endif": 27,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "_INC_MMSYSTEM",
+              "original_line": 23,
+              "current_line": 24,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 778,
+          "current_endif": 779,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "NULLSTRUCT",
+              "original_line": 774,
+              "current_line": 776,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 815,
+          "current_endif": 816,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "NULLSTRUCT",
+              "original_line": 811,
+              "current_line": 813,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 870,
+          "current_endif": 871,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "NULLSTRUCT",
+              "original_line": 866,
+              "current_line": 868,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 978,
+          "current_endif": 979,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "NULLSTRUCT",
+              "original_line": 974,
+              "current_line": 976,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1062,
+          "current_endif": 1063,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "NULLSTRUCT",
+              "original_line": 1058,
+              "current_line": 1060,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1095,
+          "current_endif": 1096,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "NULLSTRUCT",
+              "original_line": 1091,
+              "current_line": 1093,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1228,
+          "current_endif": 1229,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "NULLSTRUCT",
+              "original_line": 1224,
+              "current_line": 1226,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 1326,
+          "current_endif": 1327,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "NULLSTRUCT",
+              "original_line": 1322,
+              "current_line": 1324,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_intr.c",
+      "current_sha256": "f647f9b957beee5591d0693bcbeb8130f0064d684441c8ed4d28151bed652828",
+      "original_sha256": "9e6d69b1e05309ca87db41c66b89eb9d0862f2078c08a16fe20b82669bc46a7a",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 11,
+        "groups": 11,
+        "retained": 5
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 37,
+          "current_endif": 38,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 35,
+              "current_line": 35,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 245,
+          "current_endif": 240,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "TAKE_REAL_MODE_LIMIT_FAULT",
+              "original_line": 226,
+              "current_line": 228,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 237,
+              "current_line": 231,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 258,
+          "current_endif": 255,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 253,
+              "current_line": 249,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 256,
+              "current_line": 252,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 265,
+          "current_endif": 262,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 261,
+              "current_line": 259,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 330,
+          "current_endif": 329,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 325,
+              "current_line": 323,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 328,
+              "current_line": 326,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 337,
+          "current_endif": 336,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 333,
+              "current_line": 333,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 405,
+          "current_endif": 406,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 400,
+              "current_line": 400,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 403,
+              "current_line": 403,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 460,
+          "current_endif": 461,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 456,
+              "current_line": 458,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 506,
+          "current_endif": 499,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 487,
+              "current_line": 489,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 498,
+              "current_line": 492,
+              "disposition": "retained",
+              "children": [
+                {
+                  "original_endif": 505,
+                  "current_endif": 497,
+                  "arms": [
+                    {
+                      "kind": "ifdef",
+                      "expression": "SYNCH_TIMERS",
+                      "original_line": 499,
+                      "current_line": 494,
+                      "disposition": "excluded-error",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "original_endif": 514,
+          "current_endif": 509,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "PIG",
+              "original_line": 512,
+              "current_line": 506,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\c_xfer.c",
+      "current_sha256": "dfd91df988c50aa1323bab51a9108575be682a95b547af549033d9d0c5e03012",
+      "original_sha256": "5f730f08b36a3a19cd1c682e080816d21e633b0f1b07f929b08e1d7e06ef4037",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 2,
+        "retained": 1,
+        "groups": 2
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 175,
+          "current_endif": 164,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "TAKE_REAL_MODE_LIMIT_FAULT",
+              "original_line": 143,
+              "current_line": 145,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 148,
+              "current_line": 148,
+              "disposition": "retained",
+              "children": [
+                {
+                  "original_endif": 173,
+                  "current_endif": 161,
+                  "arms": [
+                    {
+                      "kind": "ifdef",
+                      "expression": "TAKE_PROT_MODE_LIMIT_FAILURE",
+                      "original_line": 156,
+                      "current_line": 158,
+                      "disposition": "excluded-error",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/ccpu386/call.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\ccpu386\\call.c",
+      "current_sha256": "3d7ea02d982f66d315818c5ebe109e4f086c5ac7ebb44760da0013b41a39c13e",
+      "original_sha256": "ce5f56ea27239d0c85243cee23e01de34b1f82d3ba92eced687e2b3bd90a2a94",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "retained": 4,
+        "excluded": 6,
+        "groups": 6
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 49,
+          "current_endif": 57,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "ANSI",
+              "original_line": 42,
+              "current_line": 50,
+              "disposition": "retained",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 46,
+              "current_line": 54,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 102,
+          "current_endif": 153,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "TAKE_REAL_MODE_LIMIT_FAULT",
+              "original_line": 88,
+              "current_line": 141,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 94,
+              "current_line": 144,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 289,
+          "current_endif": 334,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "TAKE_REAL_MODE_LIMIT_FAULT",
+              "original_line": 257,
+              "current_line": 306,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 262,
+              "current_line": 309,
+              "disposition": "retained",
+              "children": [
+                {
+                  "original_endif": 278,
+                  "current_endif": 322,
+                  "arms": [
+                    {
+                      "kind": "ifdef",
+                      "expression": "TAKE_PROT_MODE_LIMIT_FAULT",
+                      "original_line": 270,
+                      "current_line": 319,
+                      "disposition": "excluded-error",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "original_endif": 352,
+          "current_endif": 394,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "TAKE_REAL_MODE_LIMIT_FAULT",
+              "original_line": 320,
+              "current_line": 366,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 325,
+              "current_line": 369,
+              "disposition": "retained",
+              "children": [
+                {
+                  "original_endif": 341,
+                  "current_endif": 382,
+                  "arms": [
+                    {
+                      "kind": "ifdef",
+                      "expression": "TAKE_PROT_MODE_LIMIT_FAULT",
+                      "original_line": 333,
+                      "current_line": 379,
+                      "disposition": "excluded-error",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/debug/debuggng.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\debug\\debuggng.c",
+      "current_sha256": "c0206ca86ef8659c239c78de9d3f1c9ebf50bc11e3ef5f7df6119f3558c130d8",
+      "original_sha256": "c483e5ef755f537c7197fc7ce929ed3837b1227f57f6b874b5c8ab46b15045ad",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 1,
+        "groups": 1
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 53,
+          "current_endif": 13,
+          "arms": [
+            {
+              "kind": "ifndef",
+              "expression": "PROD",
+              "original_line": 9,
+              "current_line": 10,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_ibm.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_ibm.c",
+      "current_sha256": "c4824481efbd33a6db998ca8e96928820136c86daa0fa4e7b543feb4b7776ff5",
+      "original_sha256": "234d4fdac97c117a01ee642242dbab691e6809d0a3d25e63df4604d5fbbd955f",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 1,
+        "groups": 1
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 530,
+          "current_endif": 7,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SLAVEPC",
+              "original_line": 3,
+              "current_line": 4,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/disks/gfi_sflp.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\disks\\gfi_sflp.c",
+      "current_sha256": "300702c4444d999a399614467b0b19f07f9be9e3553cc03cada6affdae353ab9",
+      "original_sha256": "396c621a6c6abf135fdec730a0be91c8bc5582de51687ed006ca5df97d354dc5",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 1,
+        "groups": 1
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 774,
+          "current_endif": 22,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "SLAVEPC",
+              "original_line": 18,
+              "current_line": 19,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/hfx.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\hfx.h",
+      "current_sha256": "9c66c2992f4504aacda2fbdd19e31a943a96974d81f37fecf804217b26eac2ca",
+      "original_sha256": "88f2ba15861dbb20e502b88b650c37aa3f5a569368665105b24c11e89b6bb758",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "groups": {
+        "excluded": 1,
+        "groups": 1
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 738,
+          "current_endif": 21,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "HFX",
+              "original_line": 17,
+              "current_line": 18,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/lock.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\lock.h",
+      "current_sha256": "22c9f6823505537bb4d01958de71628c8bc3f556c247236196cc6bc587234082",
+      "original_sha256": "bfca88d9c901515a44ea12290d10da19bdbcfb66227cc497aaf78d93950a022d",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "groups": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 1
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 38,
+          "current_endif": 34,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "ANSI",
+              "original_line": 24,
+              "current_line": 24,
+              "disposition": "retained",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 31,
+              "current_line": 31,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/inc/ppi.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\inc\\ppi.h",
+      "current_sha256": "e6a3ef4be58abf41e5c3ad4fb37b5368ff3c5a555257d45b37a89f650316c2c6",
+      "original_sha256": "7967ae65e76cb00e58f350e87cd115b6ed7a97c81ff96e3b528f9740d3378612",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
+      ],
+      "groups": {
+        "retained": 1,
+        "excluded": 1,
+        "groups": 1
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 37,
+          "current_endif": 36,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "ANSI",
+              "original_line": 29,
+              "current_line": 29,
+              "disposition": "retained",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 33,
+              "current_line": 33,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/vdmredir/vrdebug.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\vdmredir\\vrdebug.c",
+      "current_sha256": "a46eab9b3724ff69d9ab345ebd9e303fc4f59b028121561e956982d125ccdb80",
+      "original_sha256": "a857e79085fabc406667f849229100ee7b92cd13107ceeb37fa798aedeba42ea",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 1,
+        "groups": 1
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 2372,
+          "current_endif": 185,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "DBG",
+              "original_line": 181,
+              "current_line": 182,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmedia2.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmedia2.c",
+      "current_sha256": "077191aa635f549fea29d453a9bf83a2bf6a0cf9b336a5d90ea72456f7193b82",
+      "original_sha256": "4a2a6e5e6c6e7172cb3fea4bb9035a18c7c5a292618b9eb507b71ae9f7d76856",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 1,
+        "groups": 1
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 3382,
+          "current_endif": 43,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "0",
+              "original_line": 39,
+              "current_line": 40,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstru1.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmstru1.c",
+      "current_sha256": "d97da12dff4e5c770a140ac68ceb000c8ea4bc14c201010a517c403e098cf525",
+      "original_sha256": "8480eec46ce4371647743d176d19709a9902a749a84452a5743f1a72ab675be9",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 1,
+        "groups": 1
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 1579,
+          "current_endif": 31,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "0",
+              "original_line": 27,
+              "current_line": 28,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstru2.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmstru2.c",
+      "current_sha256": "65e3db557ec21b82111532a0fa239c3802e03d53eefef2acf5ada8b82fdc7dc6",
+      "original_sha256": "f96ae87c3f0290b72c838b174b8efbe82bd727290451ba99650ecc85bf738632",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 1,
+        "groups": 1
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 539,
+          "current_endif": 29,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "0",
+              "original_line": 25,
+              "current_line": 26,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wmmstruc.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wmmstruc.c",
+      "current_sha256": "992629a1e93a0b558b1b5d052b855f96f56367ff138ac40494153ab977881221",
+      "original_sha256": "af5f3e85909f195c283d4c2d275b07b995e44e448e0decb2ee6fb06764fa1cc4",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 1,
+        "groups": 1
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 762,
+          "current_endif": 37,
+          "arms": [
+            {
+              "kind": "if",
+              "expression": "0",
+              "original_line": 33,
+              "current_line": 34,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/clmenu.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\clmenu.c",
+      "current_sha256": "f3660a8248a7f118f8443b1667e4e39d747e33da1d2291ca954f4720c30544b9",
+      "original_sha256": "dee4bdb0c79e58993b25ab65c37eb71cc4cfc9a551a9a0e07b5a2f67eb8461cd",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
+      ],
+      "groups": {
+        "excluded": 7,
+        "retained": 3,
+        "groups": 7
+      },
+      "conditional_tree": [
+        {
+          "original_endif": 104,
+          "current_endif": 99,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "original_line": 98,
+              "current_line": 93,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 102,
+              "current_line": 96,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 144,
+          "current_endif": 142,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "original_line": 142,
+              "current_line": 139,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 212,
+          "current_endif": 214,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "original_line": 208,
+              "current_line": 208,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 210,
+              "current_line": 211,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 244,
+          "current_endif": 246,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "original_line": 235,
+              "current_line": 239,
+              "disposition": "excluded-error",
+              "children": []
+            },
+            {
+              "kind": "else",
+              "expression": "",
+              "original_line": 241,
+              "current_line": 242,
+              "disposition": "retained",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 285,
+          "current_endif": 290,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "original_line": 283,
+              "current_line": 287,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 674,
+          "current_endif": 420,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENUS",
+              "original_line": 434,
+              "current_line": 417,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        },
+        {
+          "original_endif": 754,
+          "current_endif": 427,
+          "arms": [
+            {
+              "kind": "ifdef",
+              "expression": "MEMPHIS_MENU_WATERMARKS",
+              "original_line": 676,
+              "current_line": 424,
+              "disposition": "excluded-error",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "held": {
+    "excluded error line missing": 99,
+    "retained-only group needs context proof": 145,
+    "group count differs": 61,
+    "group selector or alternatives differ": 3,
+    "continuation line not explicit": 1,
+    "retained leaf differs": 3
+  },
+  "context": "Previously built product graph observations and existing error-only unsupported arms; no new production code changed."
+}

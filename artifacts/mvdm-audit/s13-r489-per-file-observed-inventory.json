@@ -2,7 +2,7 @@
   "baseline_queue": "artifacts\\mvdm-audit\\s13-bfs-depth1-working-queue-195r379.zip",
   "graph_inventory": "s13-r473-all-graph-coverage.json",
   "total_observed_files": 1057,
-  "completed_files": 718,
+  "completed_files": 734,
   "records": [
     {
       "path": "src/mvdm-host/dbg/dbg.c",
@@ -1153,8 +1153,9 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r662-guard-line-audit.json"
+      "status": "completed-original-conditional-tree",
+      "partial_evidence": "s13-r662-guard-line-audit.json",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/mvdm-host/inc/wowshell.h",
@@ -1892,8 +1893,9 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
-      "partial_evidence": "s13-r656-guard-line-audit.json"
+      "status": "completed-original-conditional-tree",
+      "partial_evidence": "s13-r656-guard-line-audit.json",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.h",
@@ -2191,9 +2193,10 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
+      "status": "completed-original-conditional-tree",
       "pending_change": "r538 exclude optional relative-jump limit branch; other groups pending",
-      "partial_evidence": "s13-r621-real-mode-line-review.json"
+      "partial_evidence": "s13-r621-real-mode-line-review.json",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_xfer.h",
@@ -2237,9 +2240,10 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review",
+      "status": "completed-original-conditional-tree",
       "pending_change": "r537 exclude unselected optional call limit branches; full audit pending",
-      "partial_evidence": "s13-r621-real-mode-line-review.json"
+      "partial_evidence": "s13-r621-real-mode-line-review.json",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/call.h",
@@ -5082,7 +5086,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/debug/ega_dump.c",
@@ -5221,7 +5226,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/gfi_mpty.c",
@@ -5245,7 +5251,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/disks/gfi_test.c",
@@ -5721,7 +5728,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/host.h",
@@ -5880,7 +5888,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/mouse.h",
@@ -5914,7 +5923,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:deps",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:deps"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/mvdm-host/softpc.new/base/inc/printer.h",
@@ -7658,7 +7668,8 @@
         "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
         "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/mvdm-host/vdmredir/vrdebug.h",
@@ -8664,7 +8675,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmmstru1.c",
@@ -8674,7 +8686,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmmstru2.c",
@@ -8684,7 +8697,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmmstruc.c",
@@ -8694,7 +8708,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/mvdm-host/wow32/wmmstruc.h",
@@ -11170,7 +11185,8 @@
       "observed_in": [
         "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:source"
       ],
-      "status": "pending-per-file-review"
+      "status": "completed-original-conditional-tree",
+      "evidence": "s13-r667-tree-review.json"
     },
     {
       "path": "src/non-mvdm/windows/core/ntuser/client/clmsg.c",
