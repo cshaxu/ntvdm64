@@ -1,0 +1,10 @@
+{
+  "file": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+  "before": "a7cf66c775c8ef1406c7f31039df931533b6dea53474a021eb0f85b589f448dd",
+  "after": "bf7aca4d8a4e94ccb629f690e6ee2eaa8f01f3d01c3423baa75e5b6e15d740b5",
+  "original_if_line": 639,
+  "original_else_line": 647,
+  "original_next_line": 652,
+  "context": "19 x86 worker and 19 x64-reference consumer commands omit /DDBG and /DCDEBUG. Existing #if DBG errors are not hit by successful product build; source search found no CDEBUG definition.",
+  "limitations": "Other groups and unobserved contexts remain pending."
+}

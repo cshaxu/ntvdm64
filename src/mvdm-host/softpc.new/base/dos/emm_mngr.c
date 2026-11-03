@@ -110,6 +110,7 @@ typedef enum
 	STR_OP
 } MM_LIM_op_type;
 
+#line 109
 #ifdef NTVDM
 /*	Local Variables			*/
 static long
@@ -197,43 +198,10 @@ boolean lim_page_frame_init(PLIM_CONFIG_DATA lim_config_data)
     return TRUE;
 }
 #else
-
-
-/*	Local Variables			*/
-static long
-#ifdef	macintosh
-#error DIVERGENCE MVDM-HOST-DIV-520: macintosh platform branch is not selected; see mirror register.
-#else
-	handle[MAX_NO_HANDLES];		/* Array containing unique ID's	*/
-					/* for each handle, these are	*/
-					/* usually pointers, but this 	*/
-					/* is host dependant		*/
-#endif /* !macintosh */
-
-static short
-	total_pages = 0,		/* no. of EM pages available	*/
-	unallocated_pages = 0,		/* no. of unallocated EM pages	*/
-	total_handles,			/* no of handles available	*/
-	total_open_handles,		/* no. of allocated handles	*/
-	EM_page_mapped[MAX_NO_PAGES],	/* Expanded Memory pages	*/
-					/* currently mapped in		*/
-	page_offset,			/* offset in handle data at 	*/
-					/* which page numbers start	*/
-	map_size,			/* no of bytes rq'd to store map*/
-	no_phys_pages;			/* no. of phys. pages available	*/
-
-static unsigned int
-	EM_start,			/* start segment for EM mapping	*/
-	EM_end;			/* 1st segment past end of EM	*/
-
-static unsigned short
-	physical_page[MAX_NO_PAGES];	/* array containing segment	*/
-					/* addresses of physical pages	*/
-
-static char
-	name[NAME_LENGTH];		/* for storing handle name	*/
-
+#line 196
+#error Non-NTVDM BIOS or EMS provider is not supported
 #endif
+#line 233
 
 /*
 ===========================================================================

@@ -1,0 +1,93 @@
+{
+  "file": "src/non-mvdm/public/internal/ds/inc/remdef.h",
+  "original_sha256": "bf4341d5c9fea49d79a5fd074c19e7ceebd2b9b17e8ad2085fff5d3f4969c7ed",
+  "method": "Shadow only remdef.h with markers in each arm, prepend shadow include path to exact existing source command, use cl /EP without object output.",
+  "tags": {
+    "R520_ANSI_531": {
+      "if_line": 531,
+      "branch": "non-Unicode"
+    },
+    "R520_UNICODE_531": {
+      "if_line": 531,
+      "branch": "Unicode"
+    },
+    "R520_ANSI_539": {
+      "if_line": 539,
+      "branch": "non-Unicode"
+    },
+    "R520_UNICODE_539": {
+      "if_line": 539,
+      "branch": "Unicode"
+    },
+    "R520_ANSI_557": {
+      "if_line": 557,
+      "branch": "non-Unicode"
+    },
+    "R520_UNICODE_557": {
+      "if_line": 557,
+      "branch": "Unicode"
+    },
+    "R520_ANSI_605": {
+      "if_line": 605,
+      "branch": "non-Unicode"
+    },
+    "R520_UNICODE_605": {
+      "if_line": 605,
+      "branch": "Unicode"
+    },
+    "R520_ANSI_651": {
+      "if_line": 651,
+      "branch": "non-Unicode"
+    },
+    "R520_UNICODE_651": {
+      "if_line": 651,
+      "branch": "Unicode"
+    },
+    "R520_ANSI_659": {
+      "if_line": 659,
+      "branch": "non-Unicode"
+    },
+    "R520_UNICODE_659": {
+      "if_line": 659,
+      "branch": "Unicode"
+    },
+    "R520_ANSI_742": {
+      "if_line": 742,
+      "branch": "non-Unicode"
+    },
+    "R520_UNICODE_742": {
+      "if_line": 742,
+      "branch": "Unicode"
+    }
+  },
+  "rows": [
+    {
+      "object": "obj/opennt-netlib/svcinfo.obj",
+      "exit": 0,
+      "markers": [
+        "R520_ANSI_531",
+        "R520_ANSI_539",
+        "R520_ANSI_557",
+        "R520_ANSI_605",
+        "R520_ANSI_651",
+        "R520_ANSI_659",
+        "R520_ANSI_742"
+      ],
+      "stderr_tail": ""
+    },
+    {
+      "object": "obj/opennt-xactsrv/apimsg.obj",
+      "exit": 0,
+      "markers": [
+        "R520_UNICODE_531",
+        "R520_UNICODE_539",
+        "R520_UNICODE_557",
+        "R520_UNICODE_605",
+        "R520_UNICODE_651",
+        "R520_UNICODE_659",
+        "R520_UNICODE_742"
+      ],
+      "stderr_tail": ""
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "package": "build/t473-s13/r527-phase1-package",
+  "comparison": "artifacts/mvdm-audit/s13-r527-build-image-compare.json",
+  "prior_test_evidence": "artifacts/mvdm-audit/s13-r481-full-verification.json",
+  "test_reuse_reason": "Ten images identical or differ exclusively in parsed PE timestamps; no runtime retest.",
+  "backup": "build/t473-s13/r527-publish-backup",
+  "rows": [
+    {
+      "name": "run16.exe",
+      "sha256": "be39650e0dbec010ed10e7db3252cc58abfbc534ce4dbf752bb3ed107c0c138b",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "ntsrv.exe",
+      "sha256": "37c594c394caaa26711f5596db24b73b775e7da0d0aa8441488487b4a1b45bbd",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "ntcon.exe",
+      "sha256": "d91412c7708efc3e091ad7a9aacdef104702d728f693ff1d9bb3924a4b1b81d5",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "ntvdm.exe",
+      "sha256": "d16fcd45728f66dd8b2affee92576b981310284ec4c9e09264e11f8679553495",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "ntvwm.exe",
+      "sha256": "cac1f5c67b233be83ab63fb3c979800d5ae8e324e48b3381a8e952629e086378",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "ntmon.exe",
+      "sha256": "4df75031a7d19a6c853b680476d0c3fbd7a200fd60d85a1dce1e96f099f8c345",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "WOW32.DLL",
+      "sha256": "4a2ed7a7cf36126a30551cf707bd96ecabcf85bab7ef5fba2ce3d2d49ce45aa0",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "VDMREDIR.DLL",
+      "sha256": "aad1dcc53e85ab733c066fc0bcd6f1f481e5b8c9a42b0791fa892ab5a937e374",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "nthook32.dll",
+      "sha256": "76f1ee05f550972d4c699dc4c0b9e09e2404cae0ecf4d7f62b6aab90370075b4",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    },
+    {
+      "name": "nthook64.dll",
+      "sha256": "1b35e28c869be47cb4834efa256efc3676de8b82dcd13fc3ff6a16bae1408464",
+      "verified": {
+        "release": true,
+        "installed": true
+      }
+    }
+  ]
+}

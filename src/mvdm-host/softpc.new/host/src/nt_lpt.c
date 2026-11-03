@@ -93,6 +93,7 @@ boolean host_print_buffer(int adapter);
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*:::::::::::::::::: Macros ::::::::::::::::::::::::::::::::::::::::::::::::*/
 /*::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
+#line 95
 #ifdef MONITOR
 
 sys_addr lpt_status_addr;
@@ -103,11 +104,10 @@ sys_addr lpt_status_addr;
 			(sas_store_no_check(lpt_status_addr+(adap), (val)))
 
 #else /* MONITOR */
-
-#define get_lpt_status(adap)		(host_lpt[(adap)].port_status)
-#define set_lpt_status(adap,val)	(host_lpt[(adap)].port_status = (val))
-
+#line 105
+#error Non-MONITOR printer status provider is not supported
 #endif /* MONITOR */
+#line 110
 
 #define KBUFFER_SIZE 1024	// Buffering macros
 #define HIGH_WATER 1020

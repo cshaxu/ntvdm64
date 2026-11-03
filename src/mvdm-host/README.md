@@ -2556,3 +2556,32 @@ not apply to video.c, which is explicitly compiled with X86GFX.
 MVDM-HOST-DIV-536: in base/debug/yoda.c, restore original diagnostic
 line anchors around the existing excluded NONPROD_CPU arm. Both observed
 worker source commands use PROD and do not select NONPROD_CPU.
+
+MVDM-HOST-DIV-708: reject the DEBUG pointer-cleanup alternative in
+`wow32/wow32.h`; retain the original non-DEBUG macros and line positions.
+Observed WOW32 compiler commands do not define DEBUG.
+
+MVDM-HOST-DIV-709: exclude two native _X86_ WOW stack and memory macros
+in wow32/wow32.h; precomp.h explicitly undefines _X86_ before this header.
+Original emulated CPU alternatives and their diagnostic anchors remain.
+
+MVDM-HOST-DIV-710: exclude the non-MONITOR printer-status alternative
+in softpc.new/host/src/nt_lpt.c. Both observed worker source commands
+explicitly select MONITOR for this translation unit; its original selected
+body, conditional framework and diagnostic positions are retained.
+
+MVDM-HOST-DIV-711: exclude the non-MONITOR status arm in
+`softpc.new/base/comms/printer.c`; both observed worker source commands
+include MONITOR. The original selected alternative and diagnostic anchors
+are retained.
+
+MVDM-HOST-DIV-713: exclude non-NTVDM alternatives of the 13 original
+BRAZILIAN_ABNT_KBD keyboard-table guards in base/keymouse/keyba.c.
+The selected NTVDM source defines the profile itself and keeps the
+original active table entries; original condition and line anchors remain.
+
+MVDM-HOST-DIV-714: exclude the non-NTVDM alternatives around the BIOS
+BOP table and EMS mapping-register provider in base/bios/bios.c and
+base/dos/emm_mngr.c. Both observed worker source commands select NTVDM.
+The original selected code, conditional boundaries and line anchors remain.
+Nested earlier unsupported condition markers are subsumed by the outer arm.

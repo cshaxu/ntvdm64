@@ -1,0 +1,10 @@
+{
+  "file": "src/mvdm-host/wow32/wow32.h",
+  "before": "e7ccd8ed888e56112d5bf24412990f9e4bc53a841a19bb469748dd2c42907523",
+  "after": "f3566a19e128b38e063a44fd4d790438eef52e93e45f67cef2484591cfeac4cc",
+  "original_if_line": 598,
+  "original_else_line": 607,
+  "original_next_line": 617,
+  "context": "90 observed WOW32 header consumer commands omit DEBUG; original non-DEBUG arm retained.",
+  "status": "other conditional groups pending"
+}

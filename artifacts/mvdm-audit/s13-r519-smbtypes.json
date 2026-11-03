@@ -1,0 +1,37 @@
+{
+  "file": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+  "before": "f04a563368f33bb6d8ba50a50e68d68f081aecce94ecc37b6d787cc6f38ea622",
+  "after": "8e8d555ed6877abe8aeb6e5e41e0061420764996617d372812d083e8508ffd12",
+  "context": "Repository definitions supply the defaults; 29 observed consumer commands have no overrides. No other source definitions found except the original conditional defaults.",
+  "groups": [
+    {
+      "condition": "#if SMBDBG && SMBDBG1",
+      "original_if_line": 47,
+      "original_else_line": null,
+      "original_next_line": 51,
+      "excluded_arm": "first"
+    },
+    {
+      "condition": "#if SMB_NO_UNALIGNED",
+      "original_if_line": 74,
+      "original_else_line": 76,
+      "original_next_line": 79,
+      "excluded_arm": "first"
+    },
+    {
+      "condition": "#if SMB_USE_UNALIGNED",
+      "original_if_line": 89,
+      "original_else_line": 91,
+      "original_next_line": 94,
+      "excluded_arm": "else"
+    },
+    {
+      "condition": "#if SMBDBG1",
+      "original_if_line": 107,
+      "original_else_line": 112,
+      "original_next_line": 118,
+      "excluded_arm": "first"
+    }
+  ],
+  "limitation": "Potential unobserved supported contexts and NO_PACKING selection remain to be reviewed; full per-file classification and compile pending."
+}

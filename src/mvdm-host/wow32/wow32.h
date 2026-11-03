@@ -477,21 +477,26 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 
 /* Simulator wrapper macros
  */
+#line 504
 #ifndef _X86_  // emulated CPU
 #define VDMSTACK()      (((ULONG)getSS()<<16)|getSP())
 #define SETVDMSTACK(vp)     {setSS(HIW(vp)); setSP(LOW(vp));}
 #else          // X86
-#define VDMSTACK()      ((USHORT)pIntelRegisters->SegSs << 16 | (USHORT)pIntelRegisters->Esp)
-#define SETVDMSTACK(vp)      pIntelRegisters->SegSs = HIW(vp); pIntelRegisters->Esp = LOW(vp);
+#line 508
+#error Native x86 WOW stack profile is not supported
 #endif
+#line 511
 
 // Use FlatAddress array exported by ntvdm instead of Sim32GetVDMPointer.
 
+#line 514
 #ifndef _X86_
 #define INTEL_MEMORY_BASE ((DWORD)IntelMemoryBase)
 #else
-#define INTEL_MEMORY_BASE (0)
+#line 517
+#error Native x86 WOW stack profile is not supported
 #endif
+#line 519
 
 #define GetPModeVDMPointerMacro(Address, Count)                               \
     (                                                                         \
@@ -575,6 +580,7 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 #line 596
 #endif
 
+#line 598
 #ifndef DEBUG
 #define FREEARGPTR(p)
 #define FREEOPTPTR(p)
@@ -585,15 +591,10 @@ extern PUCHAR IntelMemoryBase;  // Start of emulated CPU's memory
 #define FREEVDMPTR(p)
 #define FREEOPTPTR(p)
 #else
-#define FREEARGPTR(p)       p=NULL
-#define FREEOPTPTR(p)       p=NULL
-#define FREESTRPTR(p)       p=NULL
-#define FREEPSZPTR(p)       p=NULL
-#define FREEPSZIDPTR(p)     p=NULL
-#define FREEMISCPTR(p)      p=NULL
-#define FREEVDMPTR(p)       p=NULL
-#define FREEOPTPTR(p)       p=NULL
+#line 608
+#error DEBUG WOW pointer cleanup profile is not supported
 #endif
+#line 617
 
 #define RETURN(ul)      return ul
 

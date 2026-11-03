@@ -277,6 +277,7 @@ void (*BIOS[])() = {
 			illegal_bop,	/* BOP 4D */
 			illegal_bop,	/* BOP 4E */
 			illegal_bop,	/* BOP 4F */
+#line 288
 #ifdef NTVDM
 /*
    Note that this precludes SMEG and NT existing together which seems
@@ -299,38 +300,10 @@ void (*BIOS[])() = {
 			MS_bop_E,	/* BOP 5E - MS reserved */
 			MS_bop_F,	/* BOP 5F - MS reserved */
 #else
-#line 286
-#ifdef SMEG
-			smeg_collect_data,/* BOP 50 */
-			smeg_freeze_data,	/* BOP 51 */
-#else
-			illegal_bop,	/* BOP 50 */
-			illegal_bop,	/* BOP 51 */
-#endif /* SMEG */
-#if defined(IRET_HOOKS) && defined(GISP_CPU)
-#error Excluded unsupported GISP_CPU configuration
-#else
-			illegal_bop,	/* BOP 52 */
-#endif /* IRET_HOOKS  && GISP_CPU */
-#ifdef GISP_SVGA
-#error DIVERGENCE MVDM-HOST-DIV-522: GISP_SVGA platform branch is not selected; see mirror register.
-#else
-			illegal_bop,	/* BOP 53 */
-#endif
-			illegal_bop,	/* BOP 54 */
-			illegal_bop,	/* BOP 55 */
-			illegal_bop,	/* BOP 56 */
-			illegal_bop,	/* BOP 57 */
-			illegal_bop,	/* BOP 58 */
-			illegal_bop,	/* BOP 59 */
-			illegal_bop,	/* BOP 5A */
-			illegal_bop,	/* BOP 5B */
-			illegal_bop,	/* BOP 5C */
-			illegal_bop,	/* BOP 5D */
-			illegal_bop,	/* BOP 5E */
-			illegal_bop,	/* BOP 5F */
+#line 310
+#error Non-NTVDM BIOS or EMS provider is not supported
 #endif /* NTVDM */
-#line 316
+#line 340
 			softpc_version,	/* BOP 60 */
 			illegal_bop,	/* BOP 61 */
 			illegal_bop,	/* BOP 62 */

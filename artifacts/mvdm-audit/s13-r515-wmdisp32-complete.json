@@ -1,0 +1,10 @@
+{
+  "file": "src/mvdm-host/wow32/wmdisp32.h",
+  "current_sha256": "33116c4aa3b24505d63bc55c6de35ea1eb7abecdcb43cd6ad6b447fb64ccf5d5",
+  "original_sha256": "4102d319dbaf7dc0ed6759efbdcec83e2882af708cd7f70c97cacc50cd0e0057",
+  "conditional_structure": "Original include guard preserved; sole nested DEBUG_OR_WOWPROFILE body excluded with #error and original #line 52/53/57; no further conditional directives.",
+  "contexts": "90 observed WOW32 object consumers lack DEBUG/WOWPROFILE/DEBUG_OR_WOWPROFILE flags; only direct include in repository is precomp.h. T335 fixture uses that header and flags without profiling.",
+  "existing_local_diffs": "MVDM-HOST-DIV-345 and DIV-349 are retained registered patches; outside conditional review.",
+  "limitation": "Full supported-build enumeration remains open; current evidence covers observed and cited fixture contexts.",
+  "product_verification": "r510 cached build and published ten-image comparison"
+}

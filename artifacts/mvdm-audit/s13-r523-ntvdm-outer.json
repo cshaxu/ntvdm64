@@ -1,0 +1,30 @@
+{
+  "context": "Both observed x86 worker and x64-reference source compile commands define NTVDM. Parent source groups selected, as evidenced by retained code and compiled product.",
+  "files": [
+    {
+      "path": "src/mvdm-host/softpc.new/base/bios/bios.c",
+      "before": "0caae2986bd5256ecdee046d9961c5176a3d5178426a198b5f42fb3eb0bef369",
+      "after": "b17c9e6c7adb3f6ba6026a6ffd597e49b77e2ad13e0f2ce2dddb461e03f5ede9",
+      "original_if_line": 288,
+      "original_else_line": 309,
+      "original_next_line": 340,
+      "removed_inner_lines": 30,
+      "nested_markers_subsumed": [
+        "MVDM-HOST-DIV-522"
+      ]
+    },
+    {
+      "path": "src/mvdm-host/softpc.new/base/dos/emm_mngr.c",
+      "before": "0ca682e5b5e5a11cf84b07683469f1faeeb87f63c6dd9db16d5bbe33a786eb69",
+      "after": "0715b9fc61830273e592b926d0b38a1aaa907c4b2048270508a44c94334848eb",
+      "original_if_line": 109,
+      "original_else_line": 195,
+      "original_next_line": 233,
+      "removed_inner_lines": 36,
+      "nested_markers_subsumed": [
+        "MVDM-HOST-DIV-520"
+      ]
+    }
+  ],
+  "limitation": "Other conditional groups and unobserved supported contexts remain to be reviewed."
+}

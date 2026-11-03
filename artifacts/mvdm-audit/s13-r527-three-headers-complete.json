@@ -1,0 +1,27 @@
+{
+  "files": [
+    {
+      "file": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+      "current_sha256": "4b22eca70addbdfb0472e71ed0adfcfccfe846891af8863d3bb151c476716736",
+      "original_sha256": "d2ab723bc1f95cb53ae6970f950f5ce50d4b0d177ba31c8b7d7c8d83a5262d75",
+      "directive_count": 124,
+      "context": "SMB profile preprocessor markers r521 and consumer inventory r516-r519"
+    },
+    {
+      "file": "src/non-mvdm/public/internal/base/inc/smbtypes.h",
+      "current_sha256": "8e8d555ed6877abe8aeb6e5e41e0061420764996617d372812d083e8508ffd12",
+      "original_sha256": "f04a563368f33bb6d8ba50a50e68d68f081aecce94ecc37b6d787cc6f38ea622",
+      "directive_count": 25,
+      "context": "SMB profile preprocessor markers r521 and consumer inventory r516-r519"
+    },
+    {
+      "file": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+      "current_sha256": "e75948dc2d8a6f94016c0aa3d2656f1a5eee774c97049ea7cee6466a8961e341",
+      "original_sha256": "ffc0d0378b56e4ef1a7b4356f7c00749f6cc4ef459df4a59af2d3bcf64728003",
+      "directive_count": 5,
+      "context": "DBG error guard, r527 product build and retained original nondebug body"
+    }
+  ],
+  "verification": "r527 x86/x64 product cached build passed; original conditional sequences match and selected/unselected profiles audited.",
+  "limitation": "Enumeration of all unobserved supported build contexts remains open."
+}

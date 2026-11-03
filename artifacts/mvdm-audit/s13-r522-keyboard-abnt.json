@@ -1,0 +1,87 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/keymouse/keyba.c",
+  "before": "cdce0931d71791b46e5577bb727c843a408eb2af5d423881d6ee41f5565b0d01",
+  "after": "fa8c007b05acbf50828a3f9ef54c9d75329892dc9606b63313bc9def9388ec1e",
+  "context": "x86 worker and x64-reference worker keyba.c commands both define NTVDM; inside that selected guard keyba.c unconditionally defines BRAZILIAN_ABNT_KBD. Product keyboard observer uses the same cc rule. No #undef or command override exists.",
+  "groups": [
+    {
+      "original_if_line": 407,
+      "original_else_line": 409,
+      "original_next_line": 412,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 416,
+      "original_else_line": 418,
+      "original_next_line": 421,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 499,
+      "original_else_line": 502,
+      "original_next_line": 506,
+      "removed_lines": 2
+    },
+    {
+      "original_if_line": 524,
+      "original_else_line": 526,
+      "original_next_line": 529,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 530,
+      "original_else_line": 532,
+      "original_next_line": 535,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 549,
+      "original_else_line": 551,
+      "original_next_line": 554,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 556,
+      "original_else_line": 558,
+      "original_next_line": 561,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 568,
+      "original_else_line": 570,
+      "original_next_line": 573,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 575,
+      "original_else_line": 577,
+      "original_next_line": 580,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 587,
+      "original_else_line": 589,
+      "original_next_line": 592,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 594,
+      "original_else_line": 596,
+      "original_next_line": 599,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 606,
+      "original_else_line": 608,
+      "original_next_line": 611,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 613,
+      "original_else_line": 615,
+      "original_next_line": 618,
+      "removed_lines": 1
+    }
+  ],
+  "limitation": "Other keyba.c branches and unobserved contexts remain to be reviewed."
+}

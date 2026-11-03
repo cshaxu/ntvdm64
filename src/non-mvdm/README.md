@@ -2355,3 +2355,39 @@ OPENNT-HOST-226: restore three original first-depth ANSI / Unicode
 paired frames after the retained ntcftxt.h subset; original C owners
 and selected ANSI arm bodies remain omitted and pending. Evidence:
 artifacts/mvdm-audit/s13-r463-header-frames.json.
+
+OPENNT-HOST-227: exclude SMBDBG get/put debug alternatives in
+public/internal/base/inc/smbgtpt.h; smbtypes.h supplies SMBDBG=0 and
+29 observed worker/redirection consumer commands do not override it.
+Original selected alternatives, guard structure and diagnostic lines remain.
+
+OPENNT-HOST-228: exclude ten SMBDBG1 field-name debug alternatives
+in public/internal/base/inc/smbgtpt.h. smbtypes.h defaults SMBDBG1 to 0;
+29 observed worker and redirection users do not override the macro.
+Selected macro bodies, nested alignment conditions and original line
+anchors remain intact.
+
+OPENNT-HOST-229: exclude the bytewise SMB alignment alternatives in
+public/internal/base/inc/smbgtpt.h. smbtypes.h defaults SMB_NO_UNALIGNED
+to 0 and SMB_USE_UNALIGNED to 1; 29 observed worker and redirection
+users do not override either. The selected macro bodies and original line
+anchors remain intact.
+
+OPENNT-HOST-230: exclude four unselected diagnostic/alignment arms in
+public/internal/base/inc/smbtypes.h. The 29 observed worker/redirection
+consumers use SMBDBG=0, SMBDBG1=0, SMB_NO_UNALIGNED=0 and the default
+SMB_USE_UNALIGNED=1; original guards and selected bodies remain.
+
+OPENNT-HOST-231: exclude the DBG/CDEBUG hexdump declaration alternative
+in public/internal/ds/inc/netdebug.h. The 38 observed worker consumers
+omit those debug flags; existing #if DBG guards and product compilation
+confirm DBG is false. The selected no-op macro and original line anchors remain.
+
+OPENNT-HOST-232: exclude the DBGSTATIC debug-visibility alternative
+in public/internal/ds/inc/netdebug.h. Successful product compilation
+and existing DBG guards establish DBG is false for observed consumers;
+the original selected static macro and line anchors remain.
+
+OPENNT-HOST-130: restore original debug guard diagnostic line positions
+in public/internal/ds/inc/rapdebug.h; the previously excluded DBG arm
+and original selected nondebug macros are unchanged.

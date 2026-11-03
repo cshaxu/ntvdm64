@@ -1,0 +1,81 @@
+{
+  "file": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+  "before": "2c99a444878f097baef732ee7703d3fed1d0f3d8732b37af1bcf7d589d0f185f",
+  "after": "4b22eca70addbdfb0472e71ed0adfcfccfe846891af8863d3bb151c476716736",
+  "context": "smbtypes.h defaults SMB_NO_UNALIGNED=0 and SMB_USE_UNALIGNED=1; no overrides in 29 dependent commands across three graphs and no other source definitions found.",
+  "groups": [
+    {
+      "original_if_line": 81,
+      "original_else_line": 83,
+      "original_next_line": 89,
+      "removed_lines": 4
+    },
+    {
+      "original_if_line": 175,
+      "original_else_line": 178,
+      "original_next_line": 184,
+      "removed_lines": 4
+    },
+    {
+      "original_if_line": 276,
+      "original_else_line": 279,
+      "original_next_line": 285,
+      "removed_lines": 4
+    },
+    {
+      "original_if_line": 327,
+      "original_else_line": 329,
+      "original_next_line": 337,
+      "removed_lines": 6
+    },
+    {
+      "original_if_line": 424,
+      "original_else_line": 426,
+      "original_next_line": 434,
+      "removed_lines": 6
+    },
+    {
+      "original_if_line": 528,
+      "original_else_line": 531,
+      "original_next_line": 539,
+      "removed_lines": 6
+    },
+    {
+      "original_if_line": 588,
+      "original_else_line": 590,
+      "original_next_line": 596,
+      "removed_lines": 4
+    },
+    {
+      "original_if_line": 641,
+      "original_else_line": 644,
+      "original_next_line": 650,
+      "removed_lines": 4
+    },
+    {
+      "original_if_line": 684,
+      "original_else_line": 686,
+      "original_next_line": 692,
+      "removed_lines": 4
+    },
+    {
+      "original_if_line": 766,
+      "original_else_line": 768,
+      "original_next_line": 774,
+      "removed_lines": 4
+    },
+    {
+      "original_if_line": 819,
+      "original_else_line": 822,
+      "original_next_line": 828,
+      "removed_lines": 4
+    },
+    {
+      "original_if_line": 862,
+      "original_else_line": 864,
+      "original_next_line": 870,
+      "removed_lines": 4
+    }
+  ],
+  "limitation": "Other conditions and unobserved contexts remain pending."
+}

@@ -1,0 +1,20 @@
+{
+  "file": "src/mvdm-host/wow32/wow32.h",
+  "before": "f3566a19e128b38e063a44fd4d790438eef52e93e45f67cef2484591cfeac4cc",
+  "after": "4205661b37f915cc24d791fb50d334770f64bedd47a98b422b836259116d8877",
+  "groups": [
+    {
+      "original_if_line": 504,
+      "original_else_line": 507,
+      "original_next_line": 511,
+      "removed_lines": 2
+    },
+    {
+      "original_if_line": 514,
+      "original_else_line": 516,
+      "original_next_line": 519,
+      "removed_lines": 1
+    }
+  ],
+  "context": "The only direct consumers use precomp.h, which undefines _X86_ immediately before wow32.h; source evidence includes T335 fixture and winsockp include order. Broader unobserved contexts remain pending."
+}

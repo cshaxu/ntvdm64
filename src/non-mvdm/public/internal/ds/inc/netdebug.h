@@ -127,11 +127,14 @@ Revision History:
 #endif // not DBG
 
 
+#line 136
 #if !DBG || defined(lint) || defined(_lint)
 #define DBGSTATIC static        // hidden function
 #else
-#define DBGSTATIC               // visible for use in debugger.
+#line 139
+#error Network debug visibility profile is not supported
 #endif
+#line 141
 
 
 //
@@ -288,19 +291,17 @@ extern "C" {
 // NetpDbgHexDump: do a hex dump of some number of bytes to the debug
 // terminal or whatever.  This is a no-op in a nondebug build.
 
+#line 639
 #if DBG || defined(CDEBUG)
-
-VOID
-NetpDbgHexDump(
-    IN LPBYTE StartAddr,
-    IN DWORD Length
-    );
-
+#line 640
+#error Network debug hexdump profile is not supported
 #else
+#line 648
 
 #define NetpDbgHexDump(StartAddr,Length)     // no output; ignore arguments
 
 #endif
+#line 652
 
 //
 // Define a number of bytes to dump for partial dumps.  Each line dumps

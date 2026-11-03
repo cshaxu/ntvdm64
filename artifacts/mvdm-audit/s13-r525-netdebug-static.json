@@ -1,0 +1,10 @@
+{
+  "file": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+  "before": "bf7aca4d8a4e94ccb629f690e6ee2eaa8f01f3d01c3423baa75e5b6e15d740b5",
+  "after": "1c6ef883460e56c511b730556fd9d34d4b66b74e45c79289268eedadf52fa27e",
+  "original_if_line": 136,
+  "original_else_line": 138,
+  "original_next_line": 141,
+  "context": "Observed consumers have DBG false; !DBG therefore selects the retained body irrespective of lint macros.",
+  "status": "remaining groups pending"
+}

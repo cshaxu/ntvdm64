@@ -443,11 +443,15 @@ static void printer_outb IFN2(io_addr,port, half_word,value)
 			    /* unable to open the lpt for direct access,
 			       mark the device busy */
 
+#line 459
 #if !defined(MONITOR)
-			set_low(status_reg[adapter], NOTBUSY);
+#line 460
+#error Non-MONITOR printer status is not supported
 #else /* NTVDM && !MONITOR */
+#line 462
 			set_status(adapter, 0x7F);
 #endif
+#line 464
 
 
 		    }

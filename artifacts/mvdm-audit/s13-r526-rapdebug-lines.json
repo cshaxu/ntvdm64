@@ -1,0 +1,9 @@
+{
+  "file": "src/non-mvdm/public/internal/ds/inc/rapdebug.h",
+  "before": "9d03e2dda35ef369162b4d90d584199d2542a6b69bdadcd2550704ef58cf27d7",
+  "after": "e75948dc2d8a6f94016c0aa3d2656f1a5eee774c97049ea7cee6466a8961e341",
+  "original_if_line": 52,
+  "original_else_line": 60,
+  "original_next_line": 67,
+  "context": "Existing DBG excluded arm retained; selected nondebug body byte-matches original. Restores original line positions without changing preprocessing selection."
+}

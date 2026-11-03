@@ -1,0 +1,29 @@
+{
+  "file": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+  "source_sha256": "4b22eca70addbdfb0472e71ed0adfcfccfe846891af8863d3bb151c476716736",
+  "method": "Shadow header with a marker immediately after its smbtypes.h include; use exact existing source flags and cl /EP without output object.",
+  "rows": [
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/opennt-xactsrv/apimsg.obj",
+      "exit": 0,
+      "marker": "expected",
+      "stderr_tail": ""
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-release/worker",
+      "object": "obj/redir/vrnetapi.obj",
+      "exit": 0,
+      "marker": "expected",
+      "stderr_tail": ""
+    },
+    {
+      "graph": "build/.ninja/msvc-x86-redir-contract",
+      "object": "obj/vrdisp.obj",
+      "exit": 0,
+      "marker": "expected",
+      "source": "live ninja -t commands obj/vrdisp.obj",
+      "stderr_tail": ""
+    }
+  ]
+}

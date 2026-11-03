@@ -49,14 +49,18 @@ Revision History:
 #define RAP_DEBUG_ALL      0xFFFFFFFF
 
 
+#line 52
 #if DBG
+#line 53
 #error DIVERGENCE OPENNT-HOST-130: DBG debug branch is not selected; see mirror register.
 #else
+#line 61
 
 #define DEBUG if (FALSE)
 
 #define IF_DEBUG(Function) if (FALSE)
 
 #endif // DBG
+#line 67
 
 #endif // _RAPDEBUG_

@@ -1,0 +1,10 @@
+{
+  "file": "src/mvdm-host/softpc.new/host/src/nt_lpt.c",
+  "before": "74240c9434afeaec899dcd079f52b14de8a7c4d4d91df1a0a4806a0d7252b967",
+  "after": "3529434888917478f978862c7b3429b36041a96f54bff8146844f41c1fd3c10d",
+  "original_if_line": 95,
+  "original_else_line": 104,
+  "original_next_line": 110,
+  "context": "x86 worker and x64-reference nt_lpt.c commands each add /DMONITOR explicitly; selected original group remains unchanged.",
+  "limitation": "Remaining file groups and other supported graphs require separate audit."
+}

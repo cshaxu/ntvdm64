@@ -1,0 +1,117 @@
+{
+  "file": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+  "before": "d2ab723bc1f95cb53ae6970f950f5ce50d4b0d177ba31c8b7d7c8d83a5262d75",
+  "after": "b7609eab54e0daa0b6b75329c648760f5d3ae54b996a23c7b287b053796ac9de",
+  "context": "smbgtpt.h directly includes smbtypes.h, which defaults SMBDBG to 0; no source redefinition or command override in 29 observed users across x86 worker, x64-reference worker and x86 redir contract graphs.",
+  "groups": [
+    {
+      "original_if_line": 78,
+      "original_else_line": 96,
+      "original_next_line": 104,
+      "removed_lines": 6
+    },
+    {
+      "original_if_line": 128,
+      "original_else_line": 136,
+      "original_next_line": 144,
+      "removed_lines": 6
+    },
+    {
+      "original_if_line": 172,
+      "original_else_line": 191,
+      "original_next_line": 200,
+      "removed_lines": 7
+    },
+    {
+      "original_if_line": 229,
+      "original_else_line": 237,
+      "original_next_line": 246,
+      "removed_lines": 7
+    },
+    {
+      "original_if_line": 273,
+      "original_else_line": 292,
+      "original_next_line": 301,
+      "removed_lines": 7
+    },
+    {
+      "original_if_line": 324,
+      "original_else_line": 346,
+      "original_next_line": 354,
+      "removed_lines": 6
+    },
+    {
+      "original_if_line": 378,
+      "original_else_line": 386,
+      "original_next_line": 394,
+      "removed_lines": 6
+    },
+    {
+      "original_if_line": 421,
+      "original_else_line": 443,
+      "original_next_line": 452,
+      "removed_lines": 7
+    },
+    {
+      "original_if_line": 481,
+      "original_else_line": 489,
+      "original_next_line": 498,
+      "removed_lines": 7
+    },
+    {
+      "original_if_line": 525,
+      "original_else_line": 548,
+      "original_next_line": 557,
+      "removed_lines": 7
+    },
+    {
+      "original_if_line": 586,
+      "original_else_line": 597,
+      "original_next_line": 606,
+      "removed_lines": 7
+    },
+    {
+      "original_if_line": 639,
+      "original_else_line": 651,
+      "original_next_line": 660,
+      "removed_lines": 7
+    },
+    {
+      "original_if_line": 682,
+      "original_else_line": 693,
+      "original_next_line": 701,
+      "removed_lines": 6
+    },
+    {
+      "original_if_line": 723,
+      "original_else_line": 727,
+      "original_next_line": 735,
+      "removed_lines": 6
+    },
+    {
+      "original_if_line": 764,
+      "original_else_line": 775,
+      "original_next_line": 784,
+      "removed_lines": 7
+    },
+    {
+      "original_if_line": 817,
+      "original_else_line": 829,
+      "original_next_line": 838,
+      "removed_lines": 7
+    },
+    {
+      "original_if_line": 860,
+      "original_else_line": 871,
+      "original_next_line": 879,
+      "removed_lines": 6
+    },
+    {
+      "original_if_line": 902,
+      "original_else_line": 906,
+      "original_next_line": 914,
+      "removed_lines": 6
+    }
+  ],
+  "limitation": "Other nested conditions and unobserved contexts remain pending."
+}

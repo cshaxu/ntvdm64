@@ -75,32 +75,30 @@ Revision History:
 //
 //--
 
+#line 78
 #if !SMBDBG
 
+#line 80
 #if !SMBDBG1
+#line 81
 #if SMB_USE_UNALIGNED
 #define SmbGetUshort(SrcAddress) *(PSMB_USHORT)(SrcAddress)
 #else
-#define SmbGetUshort(SrcAddress) (USHORT)(          \
-            ( ( (PUCHAR)(SrcAddress) )[0]       ) | \
-            ( ( (PUCHAR)(SrcAddress) )[1] <<  8 )   \
-            )
+#line 84
+#error SMB bytewise alignment profile is not supported
 #endif
+#line 89
 #else
-#define SmbGetUshort(SrcAddress) (USHORT)(                  \
-            ( ( (PUCHAR)(SrcAddress ## S) )[0]       ) |    \
-            ( ( (PUCHAR)(SrcAddress ## S) )[1] <<  8 )      \
-            )
+#line 90
+#error SMB debug field-name profile is not supported
 #endif
+#line 95
 
 #else
-
-USHORT
-SmbGetUshort (
-    IN PSMB_USHORT SrcAddress
-    );
-
+#line 97
+#error SMB debug get/put profile is not supported
 #endif
+#line 104
 
 //++
 //
@@ -125,22 +123,23 @@ SmbGetUshort (
 //
 //--
 
+#line 128
 #if !SMBDBG
 
+#line 130
 #if !SMBDBG1
 #define SmbGetAlignedUshort(SrcAddress) *(SrcAddress)
 #else
-#define SmbGetAlignedUshort(SrcAddress) *(SrcAddress ## S)
+#line 133
+#error SMB debug field-name profile is not supported
 #endif
+#line 135
 
 #else
-
-USHORT
-SmbGetAlignedUshort (
-    IN PUSHORT SrcAddress
-    );
-
+#line 137
+#error SMB debug get/put profile is not supported
 #endif
+#line 144
 
 //++
 //
@@ -169,34 +168,31 @@ SmbGetAlignedUshort (
 //
 //--
 
+#line 172
 #if !SMBDBG
 
+#line 174
 #if !SMBDBG1
+#line 175
 #if SMB_USE_UNALIGNED
 #define SmbPutUshort(SrcAddress, Value) \
                             *(PSMB_USHORT)(SrcAddress) = (Value)
 #else
-#define SmbPutUshort(DestAddress,Value) {                   \
-            ( (PUCHAR)(DestAddress) )[0] = BYTE_0(Value);   \
-            ( (PUCHAR)(DestAddress) )[1] = BYTE_1(Value);   \
-        }
+#line 179
+#error SMB bytewise alignment profile is not supported
 #endif
+#line 184
 #else
-#define SmbPutUshort(DestAddress,Value) {                       \
-            ( (PUCHAR)(DestAddress ## S) )[0] = BYTE_0(Value);  \
-            ( (PUCHAR)(DestAddress ## S) )[1] = BYTE_1(Value);  \
-        }
+#line 185
+#error SMB debug field-name profile is not supported
 #endif
+#line 190
 
 #else
-
-VOID
-SmbPutUshort (
-    OUT PSMB_USHORT DestAddress,
-    IN USHORT Value
-    );
-
+#line 192
+#error SMB debug get/put profile is not supported
 #endif
+#line 200
 
 //++
 //
@@ -226,23 +222,23 @@ SmbPutUshort (
 //
 //--
 
+#line 229
 #if !SMBDBG
 
+#line 231
 #if !SMBDBG1
 #define SmbPutAlignedUshort(DestAddress,Value) *(DestAddress) = (Value)
 #else
-#define SmbPutAlignedUshort(DestAddress,Value) *(DestAddress ## S) = (Value)
+#line 234
+#error SMB debug field-name profile is not supported
 #endif
+#line 236
 
 #else
-
-VOID
-SmbPutAlignedUshort (
-    OUT PUSHORT DestAddress,
-    IN USHORT Value
-    );
-
+#line 238
+#error SMB debug get/put profile is not supported
 #endif
+#line 246
 
 //++
 //
@@ -270,34 +266,31 @@ SmbPutAlignedUshort (
 //
 //--
 
+#line 273
 #if !SMBDBG
 
+#line 275
 #if !SMBDBG1
+#line 276
 #if SMB_USE_UNALIGNED
 #define SmbMoveUshort(DestAddress, SrcAddress) \
         *(PSMB_USHORT)(DestAddress) = *(PSMB_USHORT)(SrcAddress)
 #else
-#define SmbMoveUshort(DestAddress,SrcAddress) {                         \
-            ( (PUCHAR)(DestAddress) )[0] = ( (PUCHAR)(SrcAddress) )[0]; \
-            ( (PUCHAR)(DestAddress) )[1] = ( (PUCHAR)(SrcAddress) )[1]; \
-        }
+#line 280
+#error SMB bytewise alignment profile is not supported
 #endif
+#line 285
 #else
-#define SmbMoveUshort(DestAddress,SrcAddress) {                                     \
-            ( (PUCHAR)(DestAddress ## S) )[0] = ( (PUCHAR)(SrcAddress ## S) )[0];   \
-            ( (PUCHAR)(DestAddress ## S) )[1] = ( (PUCHAR)(SrcAddress ## S) )[1];   \
-        }
+#line 286
+#error SMB debug field-name profile is not supported
 #endif
+#line 291
 
 #else
-
-VOID
-SmbMoveUshort (
-    OUT PSMB_USHORT DestAddress,
-    IN PSMB_USHORT SrcAddress
-    );
-
+#line 293
+#error SMB debug get/put profile is not supported
 #endif
+#line 301
 
 //++
 //
@@ -321,36 +314,30 @@ SmbMoveUshort (
 //
 //--
 
+#line 324
 #if !SMBDBG
 
+#line 326
 #if !SMBDBG1
+#line 327
 #if SMB_USE_UNALIGNED
 #define SmbGetUlong(SrcAddress) *(PSMB_ULONG)(SrcAddress)
 #else
-#define SmbGetUlong(SrcAddress) (ULONG)(                \
-            ( ( (PUCHAR)(SrcAddress) )[0]       ) |     \
-            ( ( (PUCHAR)(SrcAddress) )[1] <<  8 ) |     \
-            ( ( (PUCHAR)(SrcAddress) )[2] << 16 ) |     \
-            ( ( (PUCHAR)(SrcAddress) )[3] << 24 )       \
-            )
+#line 330
+#error SMB bytewise alignment profile is not supported
 #endif
+#line 337
 #else
-#define SmbGetUlong(SrcAddress) (ULONG)(                    \
-            ( ( (PUCHAR)(SrcAddress ## L) )[0]       ) |    \
-            ( ( (PUCHAR)(SrcAddress ## L) )[1] <<  8 ) |    \
-            ( ( (PUCHAR)(SrcAddress ## L) )[2] << 16 ) |    \
-            ( ( (PUCHAR)(SrcAddress ## L) )[3] << 24 )      \
-            )
+#line 338
+#error SMB debug field-name profile is not supported
 #endif
+#line 345
 
 #else
-
-ULONG
-SmbGetUlong (
-    IN PSMB_ULONG SrcAddress
-    );
-
+#line 347
+#error SMB debug get/put profile is not supported
 #endif
+#line 354
 
 //++
 //
@@ -375,22 +362,23 @@ SmbGetUlong (
 //
 //--
 
+#line 378
 #if !SMBDBG
 
+#line 380
 #if !SMBDBG1
 #define SmbGetAlignedUlong(SrcAddress) *(SrcAddress)
 #else
-#define SmbGetAlignedUlong(SrcAddress) *(SrcAddress ## L)
+#line 383
+#error SMB debug field-name profile is not supported
 #endif
+#line 385
 
 #else
-
-ULONG
-SmbGetAlignedUlong (
-    IN PULONG SrcAddress
-    );
-
+#line 387
+#error SMB debug get/put profile is not supported
 #endif
+#line 394
 
 //++
 //
@@ -418,37 +406,30 @@ SmbGetAlignedUlong (
 //
 //--
 
+#line 421
 #if !SMBDBG
 
+#line 423
 #if !SMBDBG1
+#line 424
 #if SMB_USE_UNALIGNED
 #define SmbPutUlong(SrcAddress, Value) *(PSMB_ULONG)(SrcAddress) = Value
 #else
-#define SmbPutUlong(DestAddress,Value) {                    \
-            ( (PUCHAR)(DestAddress) )[0] = BYTE_0(Value);   \
-            ( (PUCHAR)(DestAddress) )[1] = BYTE_1(Value);   \
-            ( (PUCHAR)(DestAddress) )[2] = BYTE_2(Value);   \
-            ( (PUCHAR)(DestAddress) )[3] = BYTE_3(Value);   \
-        }
+#line 427
+#error SMB bytewise alignment profile is not supported
 #endif
+#line 434
 #else
-#define SmbPutUlong(DestAddress,Value) {                        \
-            ( (PUCHAR)(DestAddress ## L) )[0] = BYTE_0(Value);  \
-            ( (PUCHAR)(DestAddress ## L) )[1] = BYTE_1(Value);  \
-            ( (PUCHAR)(DestAddress ## L) )[2] = BYTE_2(Value);  \
-            ( (PUCHAR)(DestAddress ## L) )[3] = BYTE_3(Value);  \
-        }
+#line 435
+#error SMB debug field-name profile is not supported
 #endif
+#line 442
 
 #else
-
-VOID
-SmbPutUlong (
-    OUT PSMB_ULONG DestAddress,
-    IN ULONG Value
-    );
-
+#line 444
+#error SMB debug get/put profile is not supported
 #endif
+#line 452
 
 //++
 //
@@ -478,23 +459,23 @@ SmbPutUlong (
 //
 //--
 
+#line 481
 #if !SMBDBG
 
+#line 483
 #if !SMBDBG1
 #define SmbPutAlignedUlong(DestAddress,Value) *(DestAddress) = (Value)
 #else
-#define SmbPutAlignedUlong(DestAddress,Value) *(DestAddress ## L) = (Value)
+#line 486
+#error SMB debug field-name profile is not supported
 #endif
+#line 488
 
 #else
-
-VOID
-SmbPutAlignedUlong (
-    OUT PULONG DestAddress,
-    IN ULONG Value
-    );
-
+#line 490
+#error SMB debug get/put profile is not supported
 #endif
+#line 498
 
 //++
 //
@@ -522,38 +503,31 @@ SmbPutAlignedUlong (
 //
 //--
 
+#line 525
 #if !SMBDBG
 
+#line 527
 #if !SMBDBG1
+#line 528
 #if SMB_USE_UNALIGNED
 #define SmbMoveUlong(DestAddress,SrcAddress) \
         *(PSMB_ULONG)(DestAddress) = *(PSMB_ULONG)(SrcAddress)
 #else
-#define SmbMoveUlong(DestAddress,SrcAddress) {                          \
-            ( (PUCHAR)(DestAddress) )[0] = ( (PUCHAR)(SrcAddress) )[0]; \
-            ( (PUCHAR)(DestAddress) )[1] = ( (PUCHAR)(SrcAddress) )[1]; \
-            ( (PUCHAR)(DestAddress) )[2] = ( (PUCHAR)(SrcAddress) )[2]; \
-            ( (PUCHAR)(DestAddress) )[3] = ( (PUCHAR)(SrcAddress) )[3]; \
-        }
+#line 532
+#error SMB bytewise alignment profile is not supported
 #endif
+#line 539
 #else
-#define SmbMoveUlong(DestAddress,SrcAddress) {                                      \
-            ( (PUCHAR)(DestAddress ## L) )[0] = ( (PUCHAR)(SrcAddress ## L) )[0];   \
-            ( (PUCHAR)(DestAddress ## L) )[1] = ( (PUCHAR)(SrcAddress ## L) )[1];   \
-            ( (PUCHAR)(DestAddress ## L) )[2] = ( (PUCHAR)(SrcAddress ## L) )[2];   \
-            ( (PUCHAR)(DestAddress ## L) )[3] = ( (PUCHAR)(SrcAddress ## L) )[3];   \
-        }
+#line 540
+#error SMB debug field-name profile is not supported
 #endif
+#line 547
 
 #else
-
-VOID
-SmbMoveUlong (
-    OUT PSMB_ULONG DestAddress,
-    IN PSMB_ULONG SrcAddress
-    );
-
+#line 549
+#error SMB debug get/put profile is not supported
 #endif
+#line 557
 
 //++
 //
@@ -583,26 +557,23 @@ SmbMoveUlong (
 //
 //--
 
+#line 586
 #if !SMBDBG
 
+#line 588
 #if SMB_USE_UNALIGNED
 #define SmbPutDate(DestAddress,Value) (DestAddress)->Ushort = (Value).Ushort
 #else
-#define SmbPutDate(DestAddress,Value) {                                     \
-            ( (PUCHAR)&(DestAddress)->Ushort )[0] = BYTE_0((Value).Ushort); \
-            ( (PUCHAR)&(DestAddress)->Ushort )[1] = BYTE_1((Value).Ushort); \
-        }
+#line 591
+#error SMB bytewise alignment profile is not supported
 #endif
+#line 596
 
 #else
-
-VOID
-SmbPutDate (
-    OUT PSMB_DATE DestAddress,
-    IN SMB_DATE Value
-    );
-
+#line 598
+#error SMB debug get/put profile is not supported
 #endif
+#line 606
 
 //++
 //
@@ -636,27 +607,24 @@ SmbPutDate (
 //
 //--
 
+#line 639
 #if !SMBDBG
 
+#line 641
 #if SMB_USE_UNALIGNED
 #define SmbMoveDate(DestAddress,SrcAddress)     \
             (DestAddress)->Ushort = (SrcAddress)->Ushort
 #else
-#define SmbMoveDate(DestAddress,SrcAddress)                         \
-            (DestAddress)->Ushort =                                 \
-                ( ( (PUCHAR)&(SrcAddress)->Ushort )[0]       ) |    \
-                ( ( (PUCHAR)&(SrcAddress)->Ushort )[1] <<  8 )
+#line 645
+#error SMB bytewise alignment profile is not supported
 #endif
+#line 650
 
 #else
-
-VOID
-SmbMoveDate (
-    OUT PSMB_DATE DestAddress,
-    IN PSMB_DATE SrcAddress
-    );
-
+#line 652
+#error SMB debug get/put profile is not supported
 #endif
+#line 660
 
 //++
 //
@@ -679,25 +647,23 @@ SmbMoveDate (
 //
 //--
 
+#line 682
 #if !SMBDBG
 
+#line 684
 #if SMB_USE_UNALIGNED
 #define SmbZeroDate(Date) (Date)->Ushort = 0
 #else
-#define SmbZeroDate(Date) {                     \
-            ( (PUCHAR)&(Date)->Ushort )[0] = 0; \
-            ( (PUCHAR)&(Date)->Ushort )[1] = 0; \
-        }
+#line 687
+#error SMB bytewise alignment profile is not supported
 #endif
+#line 692
 
 #else
-
-VOID
-SmbZeroDate (
-    IN PSMB_DATE Date
-    );
-
+#line 694
+#error SMB debug get/put profile is not supported
 #endif
+#line 701
 
 //++
 //
@@ -720,18 +686,16 @@ SmbZeroDate (
 //
 //--
 
+#line 723
 #if !SMBDBG
 
 #define SmbIsDateZero(Date) ( (Date)->Ushort == 0 )
 
 #else
-
-BOOLEAN
-SmbIsDateZero (
-    IN PSMB_DATE Date
-    );
-
+#line 728
+#error SMB debug get/put profile is not supported
 #endif
+#line 735
 
 //++
 //
@@ -761,26 +725,23 @@ SmbIsDateZero (
 //
 //--
 
+#line 764
 #if !SMBDBG
 
+#line 766
 #if SMB_USE_UNALIGNED
 #define SmbPutTime(DestAddress,Value) (DestAddress)->Ushort = (Value).Ushort
 #else
-#define SmbPutTime(DestAddress,Value) {                                     \
-            ( (PUCHAR)&(DestAddress)->Ushort )[0] = BYTE_0((Value).Ushort); \
-            ( (PUCHAR)&(DestAddress)->Ushort )[1] = BYTE_1((Value).Ushort); \
-        }
+#line 769
+#error SMB bytewise alignment profile is not supported
 #endif
+#line 774
 
 #else
-
-VOID
-SmbPutTime (
-    OUT PSMB_TIME DestAddress,
-    IN SMB_TIME Value
-    );
-
+#line 776
+#error SMB debug get/put profile is not supported
 #endif
+#line 784
 
 //++
 //
@@ -814,27 +775,24 @@ SmbPutTime (
 //
 //--
 
+#line 817
 #if !SMBDBG
 
+#line 819
 #if SMB_USE_UNALIGNED
 #define SmbMoveTime(DestAddress,SrcAddress) \
                 (DestAddress)->Ushort = (SrcAddress)->Ushort
 #else
-#define SmbMoveTime(DestAddress,SrcAddress)                         \
-            (DestAddress)->Ushort =                                 \
-                ( ( (PUCHAR)&(SrcAddress)->Ushort )[0]       ) |    \
-                ( ( (PUCHAR)&(SrcAddress)->Ushort )[1] <<  8 )
+#line 823
+#error SMB bytewise alignment profile is not supported
 #endif
+#line 828
 
 #else
-
-VOID
-SmbMoveTime (
-    OUT PSMB_TIME DestAddress,
-    IN PSMB_TIME SrcAddress
-    );
-
+#line 830
+#error SMB debug get/put profile is not supported
 #endif
+#line 838
 
 //++
 //
@@ -857,25 +815,23 @@ SmbMoveTime (
 //
 //--
 
+#line 860
 #if !SMBDBG
 
+#line 862
 #if SMB_USE_UNALIGNED
 #define SmbZeroTime(Time) (Time)->Ushort = 0
 #else
-#define SmbZeroTime(Time) {                     \
-            ( (PUCHAR)&(Time)->Ushort )[0] = 0; \
-            ( (PUCHAR)&(Time)->Ushort )[1] = 0; \
-        }
+#line 865
+#error SMB bytewise alignment profile is not supported
 #endif
+#line 870
 
 #else
-
-VOID
-SmbZeroTime (
-    IN PSMB_TIME Time
-    );
-
+#line 872
+#error SMB debug get/put profile is not supported
 #endif
+#line 879
 
 //++
 //
@@ -899,17 +855,15 @@ SmbZeroTime (
 //
 //--
 
+#line 902
 #if !SMBDBG
 
 #define SmbIsTimeZero(Time) ( (Time)->Ushort == 0 )
 
 #else
-
-BOOLEAN
-SmbIsTimeZero (
-    IN PSMB_TIME Time
-    );
-
+#line 907
+#error SMB debug get/put profile is not supported
 #endif
+#line 914
 
 #endif // def _SMBGTPT_

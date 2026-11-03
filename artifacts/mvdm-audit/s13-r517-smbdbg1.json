@@ -1,0 +1,69 @@
+{
+  "file": "src/non-mvdm/public/internal/base/inc/smbgtpt.h",
+  "before": "b7609eab54e0daa0b6b75329c648760f5d3ae54b996a23c7b287b053796ac9de",
+  "after": "2c99a444878f097baef732ee7703d3fed1d0f3d8732b37af1bcf7d589d0f185f",
+  "context": "smbtypes.h defaults SMBDBG1 to 0; no override in 29 dependency users across three worker/redir graphs, and no source definition except default/reset.",
+  "groups": [
+    {
+      "original_if_line": 80,
+      "original_else_line": 89,
+      "original_next_line": 95,
+      "removed_lines": 4
+    },
+    {
+      "original_if_line": 130,
+      "original_else_line": 132,
+      "original_next_line": 135,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 174,
+      "original_else_line": 184,
+      "original_next_line": 190,
+      "removed_lines": 4
+    },
+    {
+      "original_if_line": 231,
+      "original_else_line": 233,
+      "original_next_line": 236,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 275,
+      "original_else_line": 285,
+      "original_next_line": 291,
+      "removed_lines": 4
+    },
+    {
+      "original_if_line": 326,
+      "original_else_line": 337,
+      "original_next_line": 345,
+      "removed_lines": 6
+    },
+    {
+      "original_if_line": 380,
+      "original_else_line": 382,
+      "original_next_line": 385,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 423,
+      "original_else_line": 434,
+      "original_next_line": 442,
+      "removed_lines": 6
+    },
+    {
+      "original_if_line": 483,
+      "original_else_line": 485,
+      "original_next_line": 488,
+      "removed_lines": 1
+    },
+    {
+      "original_if_line": 527,
+      "original_else_line": 539,
+      "original_next_line": 547,
+      "removed_lines": 6
+    }
+  ],
+  "limitation": "Other nested alignment conditions and unobserved contexts remain pending."
+}

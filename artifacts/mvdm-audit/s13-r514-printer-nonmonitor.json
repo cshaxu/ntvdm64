@@ -1,0 +1,9 @@
+{
+  "file": "src/mvdm-host/softpc.new/base/comms/printer.c",
+  "before": "8a14d36d3daa7002fd490a10213351bafa817128cb81a96b72a0aa72b6a69f29",
+  "after": "6355dc2b09e90574dbb55f5502b0834296d0b68d001700d7608995f3ae6bebee",
+  "original_if_line": 459,
+  "original_else_line": 461,
+  "original_next_line": 464,
+  "context": "Both observed printer.c worker source commands define NTVDM and MONITOR; original MONITOR alternative is unchanged. Other configurations remain to be enumerated."
+}
