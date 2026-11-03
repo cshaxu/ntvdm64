@@ -41,13 +41,10 @@
 #include "emm.h"
 
 #ifdef SEGMENTATION
+#line 45
 #error Excluded unsupported SEGMENTATION configuration
-
-
-
-
-
 #endif
+#line 52
 
 IMPORT VOID host_applClose IPT0();
 IMPORT VOID host_terminate IPT0();
@@ -125,9 +122,10 @@ void terminate()
 	 * Do any cpu-specific termination bits.
 	 */
 #ifdef CPU_30_STYLE
+#line 123
 #error Excluded original CPU_30_STYLE branch
 #endif
-#line 122
+#line 125
 
 #ifdef NOVELL
 #error DIVERGENCE MVDM-HOST-DIV-528: NOVELL platform branch is not selected; see mirror register.

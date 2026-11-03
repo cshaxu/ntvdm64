@@ -1146,7 +1146,7 @@
       "sha256": "8246b718d443d44c4651859a63ef31c9676e30303df54cc6e9eb7f2d3dbb076d",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
-      "review_status": "pending-per-file-review",
+      "review_status": "completed-original-cmos-excluded-profiles",
       "additional_evidence": null,
       "original_candidate": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cmos_bis.c",
       "original_candidate_sha256": "e3b6710db5887ef77c5a38c881ebb4eeff2575db65e86a3468258aaa9293e1bd"
@@ -1673,7 +1673,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_intr.c",
-      "sha256": "f3d6f2facffe6862c1f73b5dfd104ce6648a5bd3086477ccbcd8469140d055c0",
+      "sha256": "b8c881bda7de7c69580e2451e16eb85099abe2dee020e7fd9fbe8b7b14fb0d68",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -1713,7 +1713,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_mem.h",
-      "sha256": "fe5f2a69e3bf3076512dd1cc69559079e69f9485bc51ee2c6d4729aa91ed95e2",
+      "sha256": "37e70794f3b41595c8555060cec32aaf57dbc89fc48761a6f72b0bfb833ac6fa",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -1863,7 +1863,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_stack.h",
-      "sha256": "eea17e71dee29cf75da69918557f398570c10bea4f44c3569cfd45d4762fa6a0",
+      "sha256": "7c210c32a6ca46a4c9f3dbbfd19089d142c77f4b9a257b0361526ffdf7f75fe9",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -1893,7 +1893,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/ccpu386/c_tsksw.c",
-      "sha256": "de450400aa8f08e41ae623350bd75cccdabd3e0afbb69d55af94b94b608eddc6",
+      "sha256": "9336a63db3de4e18ef3a93227e4858beb6b14f5437df5be16bdbda20d7a3467e",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -5573,7 +5573,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/base/support/terminat.c",
-      "sha256": "8c836e71a9302356ca7c8123c68fe35cf10d4b52d274c066a6dae9c9e30e4c62",
+      "sha256": "bad2b204d0bfaa70bf8b2d5e0cd2ffbee00503ca494907e43000a195005cdd5c",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6163,7 +6163,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/inc/nt_graph.h",
-      "sha256": "3e1c06b0c78b72d278c46b0e372c43a9ad34b7bf0c6bb0286e794edbe8e76ad1",
+      "sha256": "65d785e730c06716283d696baa5c287202ce72be4cf13718deab454c9709e9d7",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6343,7 +6343,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_com.c",
-      "sha256": "26e43301105eabc5c21ce0084901c3bdde77631567d647495045e0d84c86137f",
+      "sha256": "9ee84ff5092f742f9c0538b1919dbf45663bd93bdb3993b9f9547ef7859781be",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6373,7 +6373,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_ega.c",
-      "sha256": "a67f73bd95a1fe81e2b878a63dd145ad9a486d701cc3a3f2c58841db080f48d3",
+      "sha256": "51b3d2aec88a8f69c14a1fef647eec2fcf9ea31d6b4f45d6053e8161f6f41a8d",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6503,7 +6503,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_mem.c",
-      "sha256": "878826d14e6bbc3de3ea5015a6212dd5c5aa24a5d2278600b978a7437288242f",
+      "sha256": "dd640e7d36382cb037957c7838db5f06c5cd3a7d80ad81a861dbe404bd38cbb0",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",
@@ -6633,7 +6633,7 @@
     },
     {
       "path": "src/mvdm-host/softpc.new/host/src/nt_thred.c",
-      "sha256": "aef52adeafbb76fd705a7d5c58a97c7390df22c30670d3688827950f7731ab78",
+      "sha256": "1209152c9bd74c9c42829f92cc1918c98b3a86643ecc5fa8e98852ae956313e4",
       "tracked": true,
       "observed_in_existing_graph_inventory": true,
       "review_status": "pending-per-file-review",

@@ -41,8 +41,10 @@
 #include "nt_egalt.h"
 
 #ifdef MONITOR
+#line 44
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
+#line 47
 
 /* Statics */
 
@@ -1631,5 +1633,7 @@ sub_note_trace5(EGA_HOST_VERBOSE,
 }
 
 #ifdef MONITOR
+#line 1667
 #error DIVERGENCE MVDM-HOST-DIV-507: MONITOR branch is not selected for this source; see mirror register.
 #endif /* MONITOR */
+#line 2145

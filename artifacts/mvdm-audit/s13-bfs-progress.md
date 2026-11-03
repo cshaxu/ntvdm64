@@ -4032,3 +4032,10 @@ controls passed; eight images are identical and two timestamp-only. Both
 destinations were published, with prior Full 17/17 reused. Census: 1058 C/H,
 157 identical reviewed, 450 differing reviewed, 451 pending; 578 net deleted.
 Evidence: s13-r640-delivery.md and s13-r640-counts.json.
+
+- r643 completes the CMOS conditional review and delivers original line
+mappings for 27 existing exclusions in ten files. Cached builds, 181 guard
+controls and 27 isolated line controls passed. Six images are identical and
+four timestamp-only; prior Full 17/17 is reused and both destinations verified.
+Census: 1058 existing C/H, 157 identical reviewed, 451 differing reviewed,
+450 pending; net deleted: 578. Evidence: s13-r643-delivery.md and counts.

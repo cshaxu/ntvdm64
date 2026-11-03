@@ -1379,10 +1379,13 @@ LOCAL void exclusiveAllocPages IFN6(IHPE, address,
  * Also insufficient anyway in general case
  */
 #ifdef PIG
+#line 1371
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
+#line 1373
     lastPage = currentAllocLastPage;
 #endif
+#line 1375
 
     /*
      * Now check to see if first or last pages of this allocation are already

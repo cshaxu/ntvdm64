@@ -286,8 +286,10 @@ IFN5(
 	 flags = flags & ~BIT14_MASK;   /* clear NT */
       spr_write_dword(next_addr, (IU32)flags);
 #ifdef PIG
+#line 287
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
+#line 290
       next_addr += 4;
 
       spr_write_dword(next_addr, GET_EAX());
@@ -337,8 +339,10 @@ IFN5(
 	 flags = flags & ~BIT14_MASK;   /* clear NT */
       spr_write_word(next_addr, (IU16)flags);
 #ifdef PIG
+#line 339
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
+#line 342
       next_addr += 2;
 
       spr_write_word(next_addr, GET_AX());

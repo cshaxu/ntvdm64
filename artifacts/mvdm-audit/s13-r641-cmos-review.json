@@ -1,0 +1,9 @@
+{
+  "path": "src/mvdm-host/softpc.new/base/bios/cmos_bis.c",
+  "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\softpc.new\\base\\bios\\cmos_bis.c",
+  "current_sha256": "8246b718d443d44c4651859a63ef31c9676e30303df54cc6e9eb7f2d3dbb076d",
+  "original_sha256": "e3b6710db5887ef77c5a38c881ebb4eeff2575db65e86a3468258aaa9293e1bd",
+  "scope": "Original SEGMENTATION and non-NTVDM arms are excluded, with original condition structures and line anchors.",
+  "evidence": "After projecting out only those excluded arms and #line, current and original selected lines match exactly; NTVDM product worker flags and previous r640 181 negative controls apply.",
+  "limits": "Conditional source audit and r640 build evidence; not runtime coverage of all CMOS behaviors."
+}

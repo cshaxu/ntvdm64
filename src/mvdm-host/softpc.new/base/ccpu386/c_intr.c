@@ -33,8 +33,10 @@ Interrupt Support.
 #include <fault.h>
 
 #ifdef PIG
+#line 36
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif
+#line 38
 
 /*
    Prototype our internal functions.
@@ -245,15 +247,20 @@ IFN4(
       if ( doing_fault )
       {
 #ifdef PIG
+#line 254
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
+#line 257
 	 flags |= BIT16_MASK;   /* SET RF bit */
 #endif
+#line 259
       }
 
 #ifdef PIG
+#line 262
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
+#line 266
          spush(flags);
 
       spush16((IU32)GET_CS_SELECTOR());
@@ -314,15 +321,20 @@ IFN4(
 	 if ( doing_fault )
          {
 #ifdef PIG
+#line 326
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
+#line 329
 	    flags |= BIT16_MASK;   /* SET RF bit */
 #endif
+#line 331
          }
 
 #ifdef PIG
+#line 334
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
+#line 338
 	    spush(flags);
 
 
@@ -386,10 +398,13 @@ IFN4(
 	 if ( doing_fault )
          {
 #ifdef PIG
+#line 401
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else
+#line 404
 	    flags |= BIT16_MASK;   /* SET RF bit */
 #endif
+#line 406
          }
 
 	 SET_CPL(dpl);
@@ -441,8 +456,10 @@ IFN4(
 
 	 /* push old flags */
 #ifdef PIG
+#line 457
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
+#line 461
 	    spush(flags);
 
 	 /* push return address */
@@ -470,18 +487,23 @@ IFN4(
       }
    EXT = INTERNAL;
 #ifdef	PIG
+#line 488
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #else /* !PIG */
+#line 499
 #ifdef SYNCH_TIMERS
 #error DIVERGENCE MVDM-HOST-DIV-525: SYNCH_TIMERS platform branch is not selected; see mirror register.
 #endif /* SYNCH_TIMERS */
 #endif /* PIG */
+#line 507
    /* mark successful end to interrupt */
    doing_fault = FALSE;
    doing_contributory = FALSE;
    doing_page_fault = FALSE;
    doing_double_fault = FALSE;
 #ifdef PIG
+#line 513
 #error DIVERGENCE MVDM-HOST-DIV-498: PIG comparison profile is not selected; see mirror register.
 #endif /* PIG */
+#line 515
    }

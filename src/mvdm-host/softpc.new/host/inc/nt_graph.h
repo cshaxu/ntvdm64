@@ -390,8 +390,10 @@ extern void nt_v7vga_mono_hi_graph_huge(int offset, int screen_x, int screen_y,
 #endif /* V7VGA */
 
 #ifdef MONITOR
+#line 393
 #error DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register.
 #endif /* MONITOR */
+#line 414
 
 void high_stretch3(unsigned char *buffer, int length);
 void high_stretch4(unsigned char *buffer, int length);
@@ -421,8 +423,10 @@ int get_screen_scale IFN0();
 void SetupConsoleMode(void);
 
 #ifdef MONITOR
+#line 443
 #error DIVERGENCE MVDM-HOST-DIV-509: MONITOR branch is not selected for these consumers; see mirror register.
 #endif /* MONITOR */
+#line 447
 
 void do_new_cursor(void);
 void textResize(void);

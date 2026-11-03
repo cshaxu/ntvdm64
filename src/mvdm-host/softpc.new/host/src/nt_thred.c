@@ -102,6 +102,7 @@ Return Value:
 #endif
 /****************************** STF ********************************/
 #ifdef MONITOR
+#line 99
 #error Excluded original conditional branch
 #endif
 #line 101
@@ -163,6 +164,7 @@ Return Value:
 #endif
 /****************************** STF ********************************/
 #ifdef MONITOR
+#line 159
 #error Excluded original conditional branch
 #endif
 #line 161

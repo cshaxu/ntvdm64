@@ -389,9 +389,10 @@ GLOBAL CPU int host_com_open(int adapter)
 
     /*::::::::::::::::::::::::::::::: Enable IRET hooks for comms interrupt */
 #ifdef MONITOR
+#line 389
 #error DIVERGENCE MVDM-HOST-DIV-579: hardware monitor IRET hooks are not selected
 #endif
-#line 390
+#line 391
 
 
     /*:::::::::::::::::::::: Create objects used to control comms activity */
@@ -714,9 +715,10 @@ GLOBAL CPU void host_com_close IFN1(int, adapter)
 
 	/*.......................... Disable IRET hooks for comms interrupt */
 #ifdef MONITOR
+#line 713
 #error DIVERGENCE MVDM-HOST-DIV-579: hardware monitor IRET hooks are not selected
 #endif
-#line 712
+#line 715
 
 
 	/*. This makes sure that the next access to the port will reopen it */

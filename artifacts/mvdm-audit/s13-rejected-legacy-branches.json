@@ -1545,7 +1545,9 @@
     "removed_body_sha256": "c102ef1c65d43a4603d28a53fd19f574dd3a4f66a8758f1da7ac2593c3cbffe1",
     "removed_body_lines": 6,
     "after_sha256": "21846776c2f3538e914cd255780d7e252e9381e2a82ed299709046752f320625",
-    "final_sha256": "cb6328db687f1156bd4bec1b69c6f4921ade18baeccd8237125d5d78b2cb336b"
+    "final_sha256": "cb6328db687f1156bd4bec1b69c6f4921ade18baeccd8237125d5d78b2cb336b",
+    "current_line": 43,
+    "current_line_evidence": "artifacts/mvdm-audit/s13-r642-guard-line-audit.json"
   },
   {
     "path": "src/mvdm-host/softpc.new/base/support/time_day.c",

@@ -2684,3 +2684,8 @@ Evidence: ../../artifacts/mvdm-audit/s13-r636-basic-guard-lines.json.
 MVDM-HOST-DIV-734: restore original error and continuation line anchors for
 previously excluded SCCSID and SEGMENTATION arms in ten device/BIOS sources.
 Evidence: ../../artifacts/mvdm-audit/s13-r639-basic-guard-lines.json.
+
+MVDM-HOST-DIV-735: align original line diagnostics and selected-arm continuations
+for existing PIG, hardware MONITOR, CPU30 and segmentation exclusions in ten
+sources. Other branches retain their prior audit status. Evidence:
+../../artifacts/mvdm-audit/s13-r642-guard-line-audit.json.
