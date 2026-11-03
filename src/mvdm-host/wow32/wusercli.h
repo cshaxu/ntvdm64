@@ -10,6 +10,7 @@ ULONG FASTCALL WU32GetKeyboardState(PVDMFRAME pFrame);
 
 
 #ifdef PMODE32
+#line 13
 #error Excluded unsupported PMODE32 host thunk profile
 #else
 #line 42
@@ -69,4 +70,5 @@ ULONG FASTCALL WU32IsZoomed(PVDMFRAME pFrame);
 ULONG FASTCALL WU32GetTickCount(PVDMFRAME pFrame);
 
 #endif
+#line 98
 

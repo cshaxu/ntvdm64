@@ -133,6 +133,7 @@ APIXLATFUNCTION ApiXlatTable[MAX_SUPPORTED_DOS_CALL] = {
     NoTranslation                  , // 61h - UNUSED
     GetPSP                         , // 62h - Get PSP Address
 #ifdef DBCS
+#line 136
 #error Unsupported excluded original configuration
 #else
 #line 138
@@ -1460,9 +1461,10 @@ Return Value:
 --*/
 {
 #ifdef NT_ALLOC_DOS_MEM
+#line 1454
 #error Unsupported excluded original configuration
 #endif
-#line 1474
+#line 1471
 }
 
 VOID
@@ -1486,9 +1488,10 @@ Return Value:
 --*/
 {
 #ifdef NT_ALLOC_DOS_MEM
+#line 1494
 #error Unsupported excluded original configuration
 #endif
-#line 1518
+#line 1515
 
 }
 
@@ -1513,9 +1516,10 @@ Return Value:
 --*/
 {
 #ifdef NT_ALLOC_DOS_MEM
+#line 1539
 #error Unsupported excluded original configuration
 #endif
-#line 1564
+#line 1561
 }
 
 VOID

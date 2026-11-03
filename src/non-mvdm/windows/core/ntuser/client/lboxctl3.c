@@ -500,8 +500,10 @@ BOOL xxxDlgDirListHelper(
                  * Post lpszPathSpecClient, the client side pointer.
                  */
 #ifdef WASWIN31
+#line 503
 #error DIVERGENCE OPENNT-HOST-132: WASWIN31 branch is not selected; see mirror register.
 #else
+#line 507
                 /*
                  * On NT, keep DDL_POSTMSGS in wParam because we need to know
                  * in the wndproc whether the pointer is clientside or server
@@ -511,6 +513,7 @@ BOOL xxxDlgDirListHelper(
                         attrib & ~(DDL_DIRECTORY | DDL_DRIVES),
                         (LONG)lpszPathSpecClient);
 #endif
+#line 516
 
             } else {
 
@@ -524,8 +527,10 @@ BOOL xxxDlgDirListHelper(
             }
 
 #ifdef WASWIN31
+#line 529
 #error DIVERGENCE OPENNT-HOST-132: WASWIN31 branch is not selected; see mirror register.
 #else
+#line 534
             //
             // B#1433
             // The old code stripped out read-only, hidden, system, and archive
@@ -546,6 +551,7 @@ BOOL xxxDlgDirListHelper(
             }
 //            attrib &= (DDL_DIRECTORY | DDL_DRIVES | DDL_POSTMSGS);
 #endif
+#line 554
         }
 
         //

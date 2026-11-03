@@ -1,0 +1,283 @@
+{
+  "scope": "Ten MVDM and non-MVDM sources with previously excluded original conditional alternatives.",
+  "method": "Original directive sequence compared; error arms contain no retained executable code. Original selected alternatives are preserved with restored diagnostic line mappings.",
+  "limits": "Other condition groups remain pending; cached build and targeted checks await this ten-file batch.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "before_sha256": "86f55a30c4f761c2323688f02a4ad21e407451310bed778b8371bf3b7715884b",
+      "after_sha256": "05fdf944320c75f98c0a2023568479c216128a031e8375cbd79d012d7117501a",
+      "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+      "guards": [
+        {
+          "macro": "DBCS",
+          "original_error_line": 136,
+          "original_selected_line": 138,
+          "original_following_line": 140
+        },
+        {
+          "macro": "NT_ALLOC_DOS_MEM",
+          "original_error_line": 1454,
+          "original_selected_line": null,
+          "original_following_line": 1471
+        },
+        {
+          "macro": "NT_ALLOC_DOS_MEM",
+          "original_error_line": 1494,
+          "original_selected_line": null,
+          "original_following_line": 1515
+        },
+        {
+          "macro": "NT_ALLOC_DOS_MEM",
+          "original_error_line": 1539,
+          "original_selected_line": null,
+          "original_following_line": 1561
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/inc/wowmmed.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\inc\\wowmmed.h",
+      "before_sha256": "e991fd5c0a50d5f167a1688e44385b5fd85966596e5eeef635b8ae86a0f77a5f",
+      "after_sha256": "cdbdd00ae2096fcc194072629312f105895e2b353ba999c9e276cc24991e095c",
+      "original_sha256": "8416869d9f2a35a41e10187f0f27fa35198b750e5474cc5e281d30ba9f2918b9",
+      "guards": [
+        {
+          "macro": "NULLSTRUCT",
+          "original_error_line": 775,
+          "original_selected_line": null,
+          "original_following_line": 779
+        },
+        {
+          "macro": "NULLSTRUCT",
+          "original_error_line": 812,
+          "original_selected_line": null,
+          "original_following_line": 816
+        },
+        {
+          "macro": "NULLSTRUCT",
+          "original_error_line": 867,
+          "original_selected_line": null,
+          "original_following_line": 871
+        },
+        {
+          "macro": "NULLSTRUCT",
+          "original_error_line": 975,
+          "original_selected_line": null,
+          "original_following_line": 979
+        },
+        {
+          "macro": "NULLSTRUCT",
+          "original_error_line": 1059,
+          "original_selected_line": null,
+          "original_following_line": 1063
+        },
+        {
+          "macro": "NULLSTRUCT",
+          "original_error_line": 1092,
+          "original_selected_line": null,
+          "original_following_line": 1096
+        },
+        {
+          "macro": "NULLSTRUCT",
+          "original_error_line": 1225,
+          "original_selected_line": null,
+          "original_following_line": 1229
+        },
+        {
+          "macro": "NULLSTRUCT",
+          "original_error_line": 1323,
+          "original_selected_line": null,
+          "original_following_line": 1327
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wuser31.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wuser31.c",
+      "before_sha256": "f5b998b72b349791fe6d55c5b6dd442bc3d483a329403e19ce04ce578ca865c9",
+      "after_sha256": "d2122bd762a7c8cd4a7aa08edf6f898fb41cbb14fcb40158ed256a83df139038",
+      "original_sha256": "260237f9fda0013f02bbbcbc94c29ea2069de545043b636f2828c554e55582a4",
+      "guards": [
+        {
+          "macro": "APRIL15",
+          "original_error_line": 739,
+          "original_selected_line": 745,
+          "original_following_line": 749
+        }
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wusercli.h",
+      "before_sha256": "afa3cb2879e9697ae1b6cf87996e3fc7799c2413a5214e59c8e4143882792209",
+      "after_sha256": "3fb024c93755563fb20cf94c0b4f10674970b5866a053ebd30591c68c92872f3",
+      "original_sha256": "2731955b6f6d24419575806304481b7d866c99b552ec8da756fc956b5dfa4b2e",
+      "guards": [
+        {
+          "macro": "PMODE32",
+          "original_error_line": 13,
+          "original_selected_line": 42,
+          "original_following_line": 98
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\rap\\convert.c",
+      "before_sha256": "c49b0669e6df00108ebc054f8c782a870e1c0b86dbf332a4de272be6565422c1",
+      "after_sha256": "686fd07ff9b29e16e5600f24166aeb5f4ced4e0081f1555557c52e57523e94b1",
+      "original_sha256": "3c6f6c878aefe962b0b93bf798569d9d8ed20e3f4112bd56e370989afdadf5d5",
+      "guards": [
+        {
+          "macro": "DBCS",
+          "original_error_line": 369,
+          "original_selected_line": 373,
+          "original_following_line": 377
+        },
+        {
+          "macro": "DBCS",
+          "original_error_line": 648,
+          "original_selected_line": 657,
+          "original_following_line": 659
+        },
+        {
+          "macro": "DBCS",
+          "original_error_line": 753,
+          "original_selected_line": 756,
+          "original_following_line": 759
+        },
+        {
+          "macro": "DBCS",
+          "original_error_line": 1091,
+          "original_selected_line": 1093,
+          "original_following_line": 1095
+        },
+        {
+          "macro": "DBCS",
+          "original_error_line": 1177,
+          "original_selected_line": 1180,
+          "original_following_line": 1183
+        },
+        {
+          "macro": "DBCS",
+          "original_error_line": 1270,
+          "original_selected_line": 1279,
+          "original_following_line": 1281
+        },
+        {
+          "macro": "DBCS",
+          "original_error_line": 1418,
+          "original_selected_line": 1421,
+          "original_following_line": 1438
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/private/inc/dlcio.h",
+      "original": "O:\\repos.external\\OpenNT-4.5\\nt\\private\\inc\\dlcio.h",
+      "before_sha256": "d93f0952df022e49da9545ad782aa40391be1e875ceff30db62a0fefb6786470",
+      "after_sha256": "b14a97c6c265598a24f96eb5fbde47853e3da7ad6ab22585cd1d657418347e00",
+      "original_sha256": "5059d127630e19906e973266e34ffe8b648181b0962900551964147e527602de",
+      "guards": [
+        {
+          "macro": "INCLUDE_IO_BUFFER_SIZE_TABLE",
+          "original_error_line": 662,
+          "original_selected_line": 735,
+          "original_following_line": 739
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netdebug.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\netdebug.h",
+      "before_sha256": "609b6c691b23ad3dda73adf11b1ea8422427bf359b4e2b64d22a6d93e4ef98c2",
+      "after_sha256": "ffbe52f3623231e071ca9a10cf5eaaeaaf5a4e7b8a71bf8691c48e1b97614b10",
+      "original_sha256": "6e6acf20d4dcf56f6a51f99152c6792e080ea21db74efc37b6c70f2f5e00ec72",
+      "guards": [
+        {
+          "macro": "CDEBUG",
+          "original_error_line": 122,
+          "original_selected_line": 128,
+          "original_following_line": 132
+        },
+        {
+          "macro": "CDEBUG",
+          "original_error_line": 193,
+          "original_selected_line": 198,
+          "original_following_line": 203
+        },
+        {
+          "macro": "CDEBUG",
+          "original_error_line": 228,
+          "original_selected_line": 233,
+          "original_following_line": 238
+        },
+        {
+          "macro": "CDEBUG",
+          "original_error_line": 618,
+          "original_selected_line": 626,
+          "original_following_line": 633
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/ds/inc/netlib.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\ds\\inc\\netlib.h",
+      "before_sha256": "ae2b6d34cbaed6c601e38ad2a1b5d5982de4729c8342a0662d4980880091d500",
+      "after_sha256": "cbcc9218ea64a3c5d3a9b8ab55c0a9a65feafe14eda90b43e7d74d35022d9261",
+      "original_sha256": "d160c2657ce8bd4cd006af505a5325b311fe27a7f80682518adb01771ab5b7c4",
+      "guards": [
+        {
+          "macro": "CDEBUG",
+          "original_error_line": 113,
+          "original_selected_line": null,
+          "original_following_line": 117
+        },
+        {
+          "macro": "CDEBUG",
+          "original_error_line": 203,
+          "original_selected_line": 214,
+          "original_following_line": 219
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/public/internal/windows/inc/pif.h",
+      "original": "O:\\repos.external\\OpenNT\\public\\internal\\windows\\inc\\pif.h",
+      "before_sha256": "f4bd937938b7c76ed17fabf55bef541ad9521250ebab8547f93609e4b20e15e8",
+      "after_sha256": "cba592699266517e0fe2b966d86517ef2a2c569887a740d7eb3d09df6c4c6cdd",
+      "original_sha256": "224f6bdf5cfa15a37d95f97e24c30d37d947d5f7f5199d50aeab65b39d150c55",
+      "guards": [
+        {
+          "macro": "PIF_PROPERTY_SHEETS",
+          "original_error_line": 985,
+          "original_selected_line": null,
+          "original_following_line": 994
+        }
+      ]
+    },
+    {
+      "path": "src/non-mvdm/windows/core/ntuser/client/lboxctl3.c",
+      "original": "O:\\repos.external\\OpenNT\\windows\\core\\ntuser\\client\\lboxctl3.c",
+      "before_sha256": "ca8633e0573bf598c9cdf8c454b7537d901c116c7cc263fe0caf4a2f8865fdcb",
+      "after_sha256": "895994e4fe38b63cdd1e734fd452f37ce93cc0d4da597cbe612d2951b2db1403",
+      "original_sha256": "c20aedad6b3ec2a596f7423ebceb0d130a56b2f978a3988c4de0e15b49bb8989",
+      "guards": [
+        {
+          "macro": "WASWIN31",
+          "original_error_line": 503,
+          "original_selected_line": 507,
+          "original_following_line": 516
+        },
+        {
+          "macro": "WASWIN31",
+          "original_error_line": 529,
+          "original_selected_line": 534,
+          "original_following_line": 554
+        }
+      ]
+    }
+  ]
+}

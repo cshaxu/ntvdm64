@@ -2719,3 +2719,7 @@ review. Evidence: ../../artifacts/mvdm-audit/s13-r660-guard-line-audit.json.
 MVDM-HOST-DIV-742: restore original diagnostic line mappings for existing
 excluded host, redirector and WOW32 arms in ten sources. Other groups remain
 under review. Evidence: ../../artifacts/mvdm-audit/s13-r661-guard-line-audit.json.
+
+MVDM-HOST-DIV-743: restore original diagnostic line mappings for existing
+excluded DPMI, multimedia and WOW32 arms. Other groups remain under review.
+Evidence: ../../artifacts/mvdm-audit/s13-r662-guard-line-audit.json.

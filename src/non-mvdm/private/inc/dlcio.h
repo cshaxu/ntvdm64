@@ -662,12 +662,15 @@ typedef struct _LLC_IOCTL_BUFFERS {
 //  together and this table must be defined only once.  
 //
 #ifdef INCLUDE_IO_BUFFER_SIZE_TABLE
+#line 662
 #error DIVERGENCE OPENNT-HOST-134: INCLUDE_IO_BUFFER_SIZE_TABLE branch is not selected; see mirror register.
 #else
+#line 735
 
 extern LLC_IOCTL_BUFFERS aDlcIoBuffers[];
 
 #endif
+#line 739
 
 //
 //  All NT DLC API parameters in one structure

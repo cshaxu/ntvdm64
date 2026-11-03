@@ -982,8 +982,10 @@ BOOL WINAPI PifPropGetPages(LPVOID lpv, LPFNADDPROPSHEETPAGE lpfnAddPage, LPARAM
 
 
 #ifdef  PIF_PROPERTY_SHEETS
+#line 985
 #error DIVERGENCE OPENNT-HOST-133: PIF_PROPERTY_SHEETS branch is not selected; see mirror register.
 #endif  /* PIF_PROPERTY_SHEETS */
+#line 994
 
 #endif	/* !NTVDM && WINAPI */
 

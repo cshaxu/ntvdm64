@@ -119,12 +119,15 @@ Revision History:
 #line 120
 
 #ifdef CDEBUG
+#line 122
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
 #else // ndef CDEBUG
+#line 128
 
 // Nondebug version.
 
 #endif // ndef CDEBUG
+#line 132
 
 #endif // not DBG
 #line 134
@@ -175,13 +178,16 @@ extern "C" {
 #line 191
 
 #ifdef CDEBUG
+#line 193
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
 #else // ndef CDEBUG
+#line 198
 
 // Nondebug version.
 #define NetpAssert(Predicate)   /* no output; ignore arguments */
 
 #endif // ndef CDEBUG
+#line 203
 
 #endif // not DBG
 #line 205
@@ -204,13 +210,16 @@ extern "C" {
 #line 226
 
 #ifdef CDEBUG
+#line 228
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
 #else // ndef CDEBUG
+#line 233
 
 // Nondebug version.
 #define NetpBreakPoint()          /* no effect. */
 
 #endif // ndef CDEBUG
+#line 238
 
 #endif // not DBG
 #line 240
@@ -290,8 +299,10 @@ extern "C" {
 #line 616
 
 #ifdef CDEBUG
+#line 618
 #error DIVERGENCE OPENNT-HOST-133: CDEBUG branch is not selected; see mirror register.
 #else // ndef CDEBUG
+#line 626
 
 //  Nondebug version.  Note that NetpKdPrint() eliminates all its
 //  arguments.
@@ -299,6 +310,7 @@ extern "C" {
 #define NetpKdPrint(_x_)
 
 #endif // ndef CDEBUG
+#line 633
 #endif // not DBG
 #line 634
 

@@ -742,9 +742,10 @@ ULONG FASTCALL WU32GetFreeSystemResources(PVDMFRAME pFrame)
 
 
 #ifdef APRIL15  // Win32 doesn't have GetFreeSystemResources
+#line 739
 #error Unsupported excluded original configuration
 #else
-#line 755
+#line 745
 
     ul = 90;
 

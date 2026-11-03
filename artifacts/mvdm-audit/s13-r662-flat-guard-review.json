@@ -1,0 +1,131 @@
+{
+  "scope": "Three product-observed files whose original condition groups are flat and all have existing excluded error-only first arms.",
+  "method": "Compare original selectors, group boundaries, else presence and retained else text. Check physical error, selected and following line mappings; conservatively screen comments and conditional continuations. Reject directive after continued physical line.",
+  "context": "Prior product release builds and 181 retained-guard controls; selector forced on reaches error, so builds using these files cannot silently select these arms.",
+  "limits": "Reviews conditional structure and alternatives, not unrelated adaptations; the complete inventory of all supported contexts remains open.",
+  "records": [
+    {
+      "path": "src/mvdm-host/dpmi32/int21map.c",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\dpmi32\\int21map.c",
+      "sha256": "05fdf944320c75f98c0a2023568479c216128a031e8375cbd79d012d7117501a",
+      "original_sha256": "b0a8632ddb1bb0ed609115bcb113c7a43a0b042930cd281d333540089589c7e1",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DBCS"
+        ],
+        [
+          "ifdef",
+          "Verbose"
+        ],
+        [
+          "if",
+          "DBG"
+        ],
+        [
+          "if",
+          "DBG"
+        ],
+        [
+          "ifdef",
+          "NT_ALLOC_DOS_MEM"
+        ],
+        [
+          "ifdef",
+          "NT_ALLOC_DOS_MEM"
+        ],
+        [
+          "ifdef",
+          "NT_ALLOC_DOS_MEM"
+        ],
+        [
+          "if",
+          "DBG"
+        ],
+        [
+          "if",
+          "DBG"
+        ],
+        [
+          "if",
+          "DBG"
+        ],
+        [
+          "if",
+          "DBG"
+        ],
+        [
+          "if",
+          "DBG"
+        ],
+        [
+          "if",
+          "DBG"
+        ],
+        [
+          "if",
+          "DBG"
+        ]
+      ]
+    },
+    {
+      "path": "src/mvdm-host/wow32/wusercli.h",
+      "original": "O:\\repos.external\\OpenNT\\base\\mvdm\\wow32\\wusercli.h",
+      "sha256": "3fb024c93755563fb20cf94c0b4f10674970b5866a053ebd30591c68c92872f3",
+      "original_sha256": "2731955b6f6d24419575806304481b7d866c99b552ec8da756fc956b5dfa4b2e",
+      "observed_in": [
+        "build\\.ninja\\msvc-x86-release\\wow32\\build.ninja:deps"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "PMODE32"
+        ]
+      ]
+    },
+    {
+      "path": "src/non-mvdm/ds/netapi/rap/convert.c",
+      "original": "O:\\repos.external\\OpenNT\\ds\\netapi\\rap\\convert.c",
+      "sha256": "686fd07ff9b29e16e5600f24166aeb5f4ced4e0081f1555557c52e57523e94b1",
+      "original_sha256": "3c6f6c878aefe962b0b93bf798569d9d8ed20e3f4112bd56e370989afdadf5d5",
+      "observed_in": [
+        "build\\.ninja\\msvc-x64-release\\worker-reference-x86\\build.ninja:source",
+        "build\\.ninja\\msvc-x86-release\\worker\\build.ninja:source"
+      ],
+      "selectors": [
+        [
+          "ifdef",
+          "DBCS // RapConvertSingleEntry()"
+        ],
+        [
+          "ifdef",
+          "DBCS // RapConvertSingleEntry()"
+        ],
+        [
+          "ifdef",
+          "DBCS // RapConvertSingleEntry()"
+        ],
+        [
+          "ifdef",
+          "DBCS // RapConvertSingleEntry()"
+        ],
+        [
+          "ifdef",
+          "DBCS // RapConvertSingleEntry()"
+        ],
+        [
+          "ifdef",
+          "DBCS // RapConvertSingleEntry ()"
+        ],
+        [
+          "ifdef",
+          "DBCS // RapConvertSingleEntry ()"
+        ]
+      ]
+    }
+  ]
+}

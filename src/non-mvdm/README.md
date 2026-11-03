@@ -2416,3 +2416,7 @@ Identity and context: ../../artifacts/mvdm-audit/s13-r631-unselected-legacy-sour
 OPENNT-HOST-238: restore original diagnostic and continuation line mappings
 for existing excluded DBG arms in Base and NetAPI headers. Evidence:
 ../../artifacts/mvdm-audit/s13-r648-mixed-debug-guards.json.
+
+OPENNT-HOST-239: restore original diagnostic line mappings for existing
+excluded NetAPI, DLC, PIF and USER arms; other groups remain under review.
+Evidence: ../../artifacts/mvdm-audit/s13-r662-guard-line-audit.json.
